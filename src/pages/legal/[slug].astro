@@ -1,0 +1,15 @@
+---
+import ContentPage from '../../layouts/ContentPage.astro';
+import { LEGAL_SLUGS } from '../../utils/seo_slugs';
+
+export function getStaticPaths() {
+  return LEGAL_SLUGS.map(({ slug, title }) => ({
+    params: { slug },
+    props: { title },
+  }));
+}
+
+const { title } = Astro.props;
+---
+
+<ContentPage title={title} subtitle="Legal and regulatory information for patients and providers." />

@@ -1,0 +1,385 @@
+[
+  {
+    "id": "mt-capitalcity-1",
+    "name": "Dr. Jennifer Kim Psychiatry",
+    "slug": "dr-jennifer-kim-psychiatry-capital-city",
+    "address": "2926 Cedar St, Ste 443",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "MT",
+    "zip": "99709",
+    "geo": {
+      "lat": 39.461751536870715,
+      "lng": -98.81125167156169
+    },
+    "phone": "(555) 181-5802",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture",
+      "BrainsWay"
+    ],
+    "specialties": [
+      "OCD",
+      "Depression",
+      "Anxiety",
+      "Bipolar"
+    ],
+    "insurances": [
+      "Medicare",
+      "Tricare",
+      "Cigna",
+      "Medicaid"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Jennifer+Kim+Psychiatry",
+    "rating": 4.0,
+    "review_count": 33,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Capital City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "mt-capitalcity-2",
+    "name": "Dr. David Garcia Psychiatry",
+    "slug": "dr-david-garcia-psychiatry-capital-city",
+    "address": "9865 Main St, Ste 327",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "MT",
+    "zip": "16448",
+    "geo": {
+      "lat": 31.143816361599388,
+      "lng": -99.61899301918771
+    },
+    "phone": "(555) 207-4229",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim"
+    ],
+    "specialties": [
+      "PTSD",
+      "Anxiety",
+      "Bipolar"
+    ],
+    "insurances": [
+      "Tricare",
+      "Aetna",
+      "BlueCross",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+David+Garcia+Psychiatry",
+    "rating": 4.9,
+    "review_count": 480,
+    "verified": false,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Capital City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "mt-capitalcity-3",
+    "name": "Capital City TMS & Wellness Center 3",
+    "slug": "capital-city-tms-&-wellness-center-3-capital-city",
+    "address": "200 Cedar St, Ste 315",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "MT",
+    "zip": "52646",
+    "geo": {
+      "lat": 31.298147733278398,
+      "lng": -90.81153576348571
+    },
+    "phone": "(555) 545-8441",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture",
+      "NeuroStar"
+    ],
+    "specialties": [
+      "OCD",
+      "PTSD",
+      "Bipolar",
+      "Chronic Pain",
+      "Depression"
+    ],
+    "insurances": [
+      "Medicare",
+      "Medicaid",
+      "Aetna",
+      "Cigna",
+      "BlueCross"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+3",
+    "rating": 4.2,
+    "review_count": 393,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "mt-capitalcity-4",
+    "name": "Capital City TMS & Wellness Center 4",
+    "slug": "capital-city-tms-&-wellness-center-4-capital-city",
+    "address": "7738 Oak St, Ste 320",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "MT",
+    "zip": "74403",
+    "geo": {
+      "lat": 32.79021331680757,
+      "lng": -93.21380443155311
+    },
+    "phone": "(555) 430-7302",
+    "website": "https://example.com",
+    "machines": [
+      "Nexstim"
+    ],
+    "specialties": [
+      "Chronic Pain",
+      "Bipolar",
+      "PTSD",
+      "Anxiety",
+      "OCD"
+    ],
+    "insurances": [
+      "Medicaid",
+      "BlueCross",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+4",
+    "rating": 4.5,
+    "review_count": 79,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "mt-metrocity-5",
+    "name": "Metro City TMS & Wellness Center 1",
+    "slug": "metro-city-tms-&-wellness-center-1-metro-city",
+    "address": "9115 Maple St, Ste 382",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "MT",
+    "zip": "36661",
+    "geo": {
+      "lat": 32.2284800433349,
+      "lng": -92.80562234730442
+    },
+    "phone": "(555) 426-5626",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim"
+    ],
+    "specialties": [
+      "OCD",
+      "Anxiety",
+      "PTSD",
+      "Depression",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "Aetna",
+      "Medicare",
+      "BlueCross"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+1",
+    "rating": 4.9,
+    "review_count": 77,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "mt-metrocity-6",
+    "name": "Dr. Michael Johnson Psychiatry",
+    "slug": "dr-michael-johnson-psychiatry-metro-city",
+    "address": "5509 Oak St, Ste 433",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "MT",
+    "zip": "28997",
+    "geo": {
+      "lat": 36.444228391747686,
+      "lng": -98.21148416971496
+    },
+    "phone": "(555) 156-2557",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture"
+    ],
+    "specialties": [
+      "Depression",
+      "Chronic Pain",
+      "OCD",
+      "PTSD"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "Medicare",
+      "BlueCross"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Michael+Johnson+Psychiatry",
+    "rating": 4.9,
+    "review_count": 31,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "mt-metrocity-7",
+    "name": "Metro City TMS & Wellness Center 3",
+    "slug": "metro-city-tms-&-wellness-center-3-metro-city",
+    "address": "2623 Cedar St, Ste 168",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "MT",
+    "zip": "76819",
+    "geo": {
+      "lat": 34.642477807808376,
+      "lng": -98.6417809487059
+    },
+    "phone": "(555) 241-9472",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim",
+      "Nexstim"
+    ],
+    "specialties": [
+      "Bipolar",
+      "Depression",
+      "Chronic Pain",
+      "PTSD"
+    ],
+    "insurances": [
+      "Cigna",
+      "Medicaid",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+3",
+    "rating": 4.3,
+    "review_count": 357,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "mt-metrocity-8",
+    "name": "Metro City TMS & Wellness Center 4",
+    "slug": "metro-city-tms-&-wellness-center-4-metro-city",
+    "address": "9235 Main St, Ste 119",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "MT",
+    "zip": "70171",
+    "geo": {
+      "lat": 30.244601763733804,
+      "lng": -93.38669219658915
+    },
+    "phone": "(555) 167-4350",
+    "website": "https://example.com",
+    "machines": [
+      "NeuroStar"
+    ],
+    "specialties": [
+      "Depression",
+      "Chronic Pain",
+      "Bipolar",
+      "OCD",
+      "Anxiety"
+    ],
+    "insurances": [
+      "Tricare",
+      "BlueCross",
+      "Medicaid",
+      "UnitedHealthcare",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+4",
+    "rating": 4.4,
+    "review_count": 177,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "mt-metrocity-9",
+    "name": "Metro City TMS & Wellness Center 5",
+    "slug": "metro-city-tms-&-wellness-center-5-metro-city",
+    "address": "9649 Maple St, Ste 250",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "MT",
+    "zip": "43400",
+    "geo": {
+      "lat": 39.1586322828627,
+      "lng": -93.0973267721081
+    },
+    "phone": "(555) 553-6087",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim",
+      "BrainsWay"
+    ],
+    "specialties": [
+      "PTSD",
+      "Chronic Pain",
+      "OCD",
+      "Bipolar",
+      "Depression"
+    ],
+    "insurances": [
+      "Aetna",
+      "BlueCross",
+      "Medicaid"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+5",
+    "rating": 4.6,
+    "review_count": 145,
+    "verified": false,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  }
+]

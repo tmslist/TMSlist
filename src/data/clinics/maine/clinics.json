@@ -1,0 +1,423 @@
+[
+  {
+    "id": "me-capitalcity-1",
+    "name": "Dr. Sarah Garcia Psychiatry",
+    "slug": "dr-sarah-garcia-psychiatry-capital-city",
+    "address": "3385 Cedar St, Ste 174",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "ME",
+    "zip": "53134",
+    "geo": {
+      "lat": 37.54638201289355,
+      "lng": -92.50578193795091
+    },
+    "phone": "(555) 799-5431",
+    "website": "https://example.com",
+    "machines": [
+      "CloudTMS",
+      "NeuroStar"
+    ],
+    "specialties": [
+      "Depression",
+      "OCD",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "Tricare",
+      "UnitedHealthcare",
+      "BlueCross",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Sarah+Garcia+Psychiatry",
+    "rating": 4.7,
+    "review_count": 472,
+    "verified": false,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Capital City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "me-capitalcity-2",
+    "name": "Capital City TMS & Wellness Center 2",
+    "slug": "capital-city-tms-&-wellness-center-2-capital-city",
+    "address": "1882 Cedar St, Ste 469",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "ME",
+    "zip": "81792",
+    "geo": {
+      "lat": 34.25345651421425,
+      "lng": -96.2974220626315
+    },
+    "phone": "(555) 105-4997",
+    "website": "https://example.com",
+    "machines": [
+      "CloudTMS",
+      "BrainsWay"
+    ],
+    "specialties": [
+      "PTSD",
+      "Depression",
+      "Anxiety"
+    ],
+    "insurances": [
+      "BlueCross",
+      "UnitedHealthcare",
+      "Medicaid",
+      "Tricare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+2",
+    "rating": 4.5,
+    "review_count": 122,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "me-capitalcity-3",
+    "name": "Capital City TMS & Wellness Center 3",
+    "slug": "capital-city-tms-&-wellness-center-3-capital-city",
+    "address": "5518 Maple St, Ste 466",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "ME",
+    "zip": "39094",
+    "geo": {
+      "lat": 32.9182901229502,
+      "lng": -94.66464732860122
+    },
+    "phone": "(555) 255-9364",
+    "website": "https://example.com",
+    "machines": [
+      "CloudTMS"
+    ],
+    "specialties": [
+      "Bipolar",
+      "OCD",
+      "PTSD"
+    ],
+    "insurances": [
+      "Tricare",
+      "BlueCross",
+      "Aetna",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+3",
+    "rating": 4.6,
+    "review_count": 86,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "me-capitalcity-4",
+    "name": "Capital City TMS & Wellness Center 4",
+    "slug": "capital-city-tms-&-wellness-center-4-capital-city",
+    "address": "5923 Cedar St, Ste 139",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "ME",
+    "zip": "26070",
+    "geo": {
+      "lat": 31.68579226537097,
+      "lng": -91.90176536485652
+    },
+    "phone": "(555) 632-6846",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim"
+    ],
+    "specialties": [
+      "Anxiety",
+      "Chronic Pain",
+      "Bipolar"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "Medicaid",
+      "Aetna",
+      "Tricare",
+      "BlueCross",
+      "Cigna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+4",
+    "rating": 4.8,
+    "review_count": 197,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "me-capitalcity-5",
+    "name": "Dr. Lisa Lee Psychiatry",
+    "slug": "dr-lisa-lee-psychiatry-capital-city",
+    "address": "3924 Main St, Ste 151",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "ME",
+    "zip": "48267",
+    "geo": {
+      "lat": 30.929283810455427,
+      "lng": -90.54075248386238
+    },
+    "phone": "(555) 344-9529",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay"
+    ],
+    "specialties": [
+      "Chronic Pain",
+      "PTSD",
+      "Anxiety",
+      "Depression"
+    ],
+    "insurances": [
+      "Medicaid",
+      "Tricare",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Lisa+Lee+Psychiatry",
+    "rating": 4.8,
+    "review_count": 91,
+    "verified": false,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Capital City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "me-capitalcity-6",
+    "name": "Capital City TMS & Wellness Center 6",
+    "slug": "capital-city-tms-&-wellness-center-6-capital-city",
+    "address": "3621 Main St, Ste 326",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "ME",
+    "zip": "26557",
+    "geo": {
+      "lat": 31.129254622795322,
+      "lng": -91.97782182232808
+    },
+    "phone": "(555) 119-4585",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim"
+    ],
+    "specialties": [
+      "Anxiety",
+      "OCD",
+      "Bipolar",
+      "Chronic Pain",
+      "Depression"
+    ],
+    "insurances": [
+      "Tricare",
+      "Medicare",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+6",
+    "rating": 4.5,
+    "review_count": 300,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "me-metrocity-7",
+    "name": "Dr. Alan Lee Psychiatry",
+    "slug": "dr-alan-lee-psychiatry-metro-city",
+    "address": "1936 Maple St, Ste 424",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "ME",
+    "zip": "38647",
+    "geo": {
+      "lat": 39.7034677132701,
+      "lng": -96.94571544818486
+    },
+    "phone": "(555) 930-5456",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture",
+      "NeuroStar"
+    ],
+    "specialties": [
+      "PTSD",
+      "Bipolar",
+      "Depression",
+      "OCD"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "Medicare",
+      "Medicaid",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Alan+Lee+Psychiatry",
+    "rating": 4.2,
+    "review_count": 96,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "me-metrocity-8",
+    "name": "Dr. Sarah Lee Psychiatry",
+    "slug": "dr-sarah-lee-psychiatry-metro-city",
+    "address": "5045 Cedar St, Ste 136",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "ME",
+    "zip": "50282",
+    "geo": {
+      "lat": 31.69545046309748,
+      "lng": -99.00516181569257
+    },
+    "phone": "(555) 810-4273",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim",
+      "Nexstim"
+    ],
+    "specialties": [
+      "Anxiety",
+      "Bipolar",
+      "OCD"
+    ],
+    "insurances": [
+      "Medicaid",
+      "Tricare",
+      "Medicare",
+      "UnitedHealthcare",
+      "Cigna",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Sarah+Lee+Psychiatry",
+    "rating": 4.8,
+    "review_count": 207,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "me-metrocity-9",
+    "name": "Metro City TMS & Wellness Center 3",
+    "slug": "metro-city-tms-&-wellness-center-3-metro-city",
+    "address": "7822 Maple St, Ste 485",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "ME",
+    "zip": "56575",
+    "geo": {
+      "lat": 38.78766990160605,
+      "lng": -93.40730130309882
+    },
+    "phone": "(555) 789-7143",
+    "website": "https://example.com",
+    "machines": [
+      "NeuroStar"
+    ],
+    "specialties": [
+      "Bipolar",
+      "Anxiety",
+      "Depression",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "Cigna",
+      "Medicaid",
+      "Aetna",
+      "Tricare",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+3",
+    "rating": 4.3,
+    "review_count": 86,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "me-metrocity-10",
+    "name": "Metro City TMS & Wellness Center 4",
+    "slug": "metro-city-tms-&-wellness-center-4-metro-city",
+    "address": "5708 Cedar St, Ste 135",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "ME",
+    "zip": "54576",
+    "geo": {
+      "lat": 37.73056148255779,
+      "lng": -93.8694474206091
+    },
+    "phone": "(555) 188-7142",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture"
+    ],
+    "specialties": [
+      "Bipolar",
+      "OCD",
+      "PTSD"
+    ],
+    "insurances": [
+      "Cigna",
+      "Medicaid",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+4",
+    "rating": 4.8,
+    "review_count": 470,
+    "verified": false,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  }
+]

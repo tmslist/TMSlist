@@ -1,0 +1,83 @@
+[
+    {
+        "name": "Greenbrook TMS",
+        "city": "Dallas",
+        "website": "https://greenbrooktms.com",
+        "machine_type": "NeuroStar",
+        "insurances": [
+            "BlueCross",
+            "UnitedHealthcare",
+            "Medicare",
+            "Aetna",
+            "Cigna"
+        ],
+        "reviews_summary": "4.5 stars. Patients report life-changing results for depression, though some cite administrative challenges. High effectiveness noted.",
+        "images_source": "https://placehold.co/600x400?text=Greenbrook+TMS",
+        "is_verified_data": true,
+        "unique_selling_point": "Nation's largest TMS provider with FDA-cleared NeuroStar technology."
+    },
+    {
+        "name": "Salience TMS Neuro Solutions",
+        "city": "Dallas",
+        "website": "https://salienceneuro.com",
+        "machine_type": "Unknown",
+        "insurances": [
+            "BlueCross",
+            "Cigna",
+            "UnitedHealthcare",
+            "Medicare"
+        ],
+        "reviews_summary": "4.9 stars. 94% patient reported improvement. Highly rated for professional care and detailed remission stats.",
+        "images_source": "https://placehold.co/600x400?text=Salience+TMS",
+        "is_verified_data": true,
+        "unique_selling_point": "High remission rates (59%) and extensive insurance coverage including Medicare."
+    },
+    {
+        "name": "Texas TMS Center",
+        "city": "Austin",
+        "website": "https://tmsofaustin.com",
+        "machine_type": "BrainsWay",
+        "insurances": [
+            "BlueCross",
+            "Aetna",
+            "Humana",
+            "Cigna"
+        ],
+        "reviews_summary": "4.8 stars. Specialized in Deep TMS with BrainsWay. Patients praise the targeted approach for OCD and Depression.",
+        "images_source": "https://placehold.co/600x400?text=Texas+TMS+Center",
+        "is_verified_data": true,
+        "unique_selling_point": "Specializes in BrainsWay Deep TMS for Depression and OCD."
+    },
+    {
+        "name": "Cedar Park TMS",
+        "city": "Cedar Park",
+        "website": "https://cedarparktms.com",
+        "machine_type": "MagVenture",
+        "insurances": [
+            "Tricare",
+            "BlueCross",
+            "Aetna",
+            "UnitedHealthcare"
+        ],
+        "reviews_summary": "5.0 stars. Offers 'Express TMS' (3-minute sessions) using MagVenture. Highly convenient for working professionals.",
+        "images_source": "https://placehold.co/600x400?text=Cedar+Park+TMS",
+        "is_verified_data": true,
+        "unique_selling_point": "Offers Express TMS (3-minute sessions) and takes Tricare."
+    },
+    {
+        "name": "Houston Mind & Brain",
+        "city": "Houston",
+        "website": "https://houstonmindandbrain.com",
+        "machine_type": "BrainsWay",
+        "insurances": [
+            "Aetna",
+            "BlueCross",
+            "UnitedHealthcare",
+            "Magellan"
+        ],
+        "reviews_summary": "4.7 stars. Dr. Raymond Cho praised for expertise. Offers Deep TMS and personalized psychiatric care.",
+        "images_source": "https://placehold.co/600x400?text=Houston+Mind+%26+Brain",
+        "is_verified_data": true,
+        "unique_selling_point": "Led by Dr. Raymond Cho, focuses on treatment-resistant cases."
+    }
+]

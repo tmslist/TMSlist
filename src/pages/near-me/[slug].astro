@@ -1,0 +1,15 @@
+---
+import ContentPage from '../../layouts/ContentPage.astro';
+import { NEAR_ME_SLUGS } from '../../utils/seo_slugs';
+
+export function getStaticPaths() {
+  return NEAR_ME_SLUGS.map(({ slug, title }) => ({
+    params: { slug },
+    props: { title },
+  }));
+}
+
+const { title } = Astro.props;
+---
+
+<ContentPage title={title} subtitle="Local directory search for specialized TMS availability." />

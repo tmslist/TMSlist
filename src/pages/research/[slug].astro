@@ -1,0 +1,15 @@
+---
+import ContentPage from '../../layouts/ContentPage.astro';
+import { RESEARCH_SLUGS } from '../../utils/seo_slugs';
+
+export function getStaticPaths() {
+  return RESEARCH_SLUGS.map(({ slug, title }) => ({
+    params: { slug },
+    props: { title },
+  }));
+}
+
+const { title } = Astro.props;
+---
+
+<ContentPage title={title} subtitle="Latest scientific data and clinical trials." />

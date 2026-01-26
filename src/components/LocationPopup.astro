@@ -1,0 +1,163 @@
+---
+// Location Popup Component for pincode/zip selection
+---
+
+<div id="location-popup" class="fixed inset-0 z-[100] hidden">
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="location-overlay"></div>
+    
+    <!-- Modal -->
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 relative animate-fade-in-up">
+            <!-- Close button -->
+            <button id="close-location-popup" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                ✕
+            </button>
+            
+            <!-- Icon -->
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center text-white text-3xl mx-auto mb-6">
+                📍
+            </div>
+            
+            <h2 class="text-2xl font-bold text-gray-900 text-center mb-2">Find TMS Near You</h2>
+            <p class="text-gray-500 text-center mb-6">Enter your ZIP code to find verified TMS clinics in your area</p>
+            
+            <form id="location-form" class="space-y-4">
+                <div>
+                    <label for="zip-input" class="block text-sm font-bold text-gray-700 mb-2">ZIP Code</label>
+                    <input 
+                        type="text" 
+                        id="zip-input" 
+                        name="zip"
+                        pattern="[0-9]{5}"
+                        maxlength="5"
+                        placeholder="e.g., 90210"
+                        class="w-full px-4 py-4 text-lg text-center rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all"
+                        required
+                    />
+                </div>
+                
+                <button 
+                    type="submit" 
+                    class="w-full py-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-bold rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all shadow-lg shadow-indigo-200"
+                >
+                    Find Clinics
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <button id="use-current-location" class="text-indigo-600 font-medium text-sm hover:text-indigo-700 flex items-center justify-center gap-2 mx-auto">
+                    <span>📍</span> Use my current location
+                </button>
+            </div>
+            
+            <p class="text-xs text-gray-400 text-center mt-6">
+                Currently serving United States. Canada & Australia coming in Phase 2.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popup = document.getElementById('location-popup');
+        const overlay = document.getElementById('location-overlay');
+        const closeBtn = document.getElementById('close-location-popup');
+        const form = document.getElementById('location-form');
+        const zipInput = document.getElementById('zip-input') as HTMLInputElement;
+        const useLocationBtn = document.getElementById('use-current-location');
+        
+        // ZIP to state mapping (simplified)
+        const zipToState: Record<string, { state: string; city: string }> = {
+            '90': { state: 'california', city: 'los-angeles' },
+            '91': { state: 'california', city: 'los-angeles' },
+            '92': { state: 'california', city: 'san-diego' },
+            '94': { state: 'california', city: 'san-francisco' },
+            '95': { state: 'california', city: 'san-jose' },
+            '85': { state: 'arizona', city: 'phoenix' },
+            '33': { state: 'florida', city: 'miami' },
+            '32': { state: 'florida', city: 'jacksonville' },
+            '60': { state: 'illinois', city: 'chicago' },
+            '10': { state: 'new-york', city: 'new-york' },
+            '11': { state: 'new-york', city: 'new-york' },
+            '77': { state: 'texas', city: 'houston' },
+            '75': { state: 'texas', city: 'dallas' },
+            '80': { state: 'colorado', city: 'denver' },
+            '30': { state: 'georgia', city: 'atlanta' },
+            '15': { state: 'pennsylvania', city: 'pittsburgh' },
+            '19': { state: 'pennsylvania', city: 'philadelphia' },
+            '44': { state: 'ohio', city: 'cleveland' },
+            '43': { state: 'ohio', city: 'columbus' },
+            '48': { state: 'michigan', city: 'detroit' },
+            '98': { state: 'washington', city: 'seattle' },
+        };
+        
+        // Show popup on page load if not seen before
+        const hasSeenPopup = localStorage.getItem('tms-location-popup-seen');
+        if (!hasSeenPopup) {
+            setTimeout(() => {
+                popup?.classList.remove('hidden');
+            }, 2000);
+        }
+        
+        // Close popup
+        function closePopup() {
+            popup?.classList.add('hidden');
+            localStorage.setItem('tms-location-popup-seen', 'true');
+        }
+        
+        overlay?.addEventListener('click', closePopup);
+        closeBtn?.addEventListener('click', closePopup);
+        
+        // Form submission
+        form?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const zip = zipInput?.value?.substring(0, 2);
+            const location = zipToState[zip];
+            
+            if (location) {
+                window.location.href = `/us/${location.state}/${location.city}/`;
+            } else {
+                // Default to US page
+                window.location.href = '/us/';
+            }
+        });
+        
+        // Geolocation
+        useLocationBtn?.addEventListener('click', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        // For demo, redirect to verified clinics
+                        window.location.href = '/verified-clinics/';
+                    },
+                    () => {
+                        alert('Unable to get location. Please enter your ZIP code.');
+                    }
+                );
+            }
+        });
+        
+        // Trigger popup manually
+        window.showLocationPopup = () => {
+            popup?.classList.remove('hidden');
+        };
+    });
+</script>
+
+<style>
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .animate-fade-in-up {
+        animation: fade-in-up 0.3s ease-out;
+    }
+</style>

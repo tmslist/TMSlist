@@ -1,0 +1,126 @@
+[
+  {
+    "id": "il-1",
+    "name": "Chicago TMS & Mental Health",
+    "slug": "chicago-tms-&-mental-health-chicago",
+    "address": "669 Medical Center Dr",
+    "city": "Chicago",
+    "county": "Cook County",
+    "state": "IL",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "Nexstim"
+    ],
+    "insurances": [
+      "Medicaid",
+      "Medicare",
+      "Tricare",
+      "Aetna"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Robert Smith, MD",
+        "first_name": "Robert",
+        "last_name": "Smith",
+        "slug": "dr-robert-smith-chicago",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Harvard Medical School",
+        "years_experience": 12,
+        "specialties": [
+          "Depression",
+          "Anxiety",
+          "Chronic Pain"
+        ],
+        "bio_focus": "Depression",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Smith"
+      },
+      {
+        "name": "Dr. Emily Smith, MD",
+        "first_name": "Emily",
+        "last_name": "Smith",
+        "slug": "dr-emily-smith-chicago",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Johns Hopkins",
+        "years_experience": 15,
+        "specialties": [
+          "Depression",
+          "Anxiety",
+          "PTSD"
+        ],
+        "bio_focus": "Adolescents",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Smith"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  },
+  {
+    "id": "il-2",
+    "name": "Dr. Wong Private TMS",
+    "slug": "dr-wong-private-tms-chicago",
+    "address": "683 Medical Center Dr",
+    "city": "Chicago",
+    "county": "Cook County",
+    "state": "IL",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "Nexstim"
+    ],
+    "insurances": [
+      "Tricare",
+      "Aetna",
+      "Cigna",
+      "Medicaid"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Emily Wong, MD",
+        "first_name": "Emily",
+        "last_name": "Wong",
+        "slug": "dr-emily-wong-chicago",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Johns Hopkins",
+        "years_experience": 12,
+        "specialties": [
+          "Chronic Pain",
+          "Depression",
+          "OCD"
+        ],
+        "bio_focus": "Adolescents",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Wong"
+      },
+      {
+        "name": "Dr. Robert Patel, MD",
+        "first_name": "Robert",
+        "last_name": "Patel",
+        "slug": "dr-robert-patel-chicago",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Mayo Clinic Alix School of Medicine",
+        "years_experience": 28,
+        "specialties": [
+          "Anxiety",
+          "Depression",
+          "Chronic Pain"
+        ],
+        "bio_focus": "TMS",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Patel"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  }
+]

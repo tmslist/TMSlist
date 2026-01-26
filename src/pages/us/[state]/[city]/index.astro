@@ -1,0 +1,127 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import ClinicCard from '../../../../components/ClinicCard.astro'; 
+import { getUniqueStates, getClinicsByState, getClinicsByCity, getStateSlug, STATE_NAMES } from '../../../../utils/dataHelpers';
+import { calculateClinicScore } from '../../../../utils/ranking';
+import { ClinicMachine, ClinicInsurance } from '../../../../types/clinic';
+
+export async function getStaticPaths() {
+  const paths = [];
+  const uniqueStates = getUniqueStates();
+
+  uniqueStates.forEach(stateCode => {
+      const stateClinics = getClinicsByState(stateCode);
+      const uniqueCities = [...new Set(stateClinics.map(c => c.city))];
+      const stateSlug = getStateSlug(stateCode);
+      const stateName = STATE_NAMES[stateCode] || stateCode;
+
+      uniqueCities.forEach(cityName => {
+          const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
+          // Using helper for consistency
+          const cityClinics = getClinicsByCity(stateCode, cityName);
+
+          paths.push({
+              params: { state: stateSlug, city: citySlug },
+              props: { stateName, cityName, cityClinics },
+          })
+      });
+  });
+
+  return paths;
+}
+
+const { stateName, cityName, cityClinics } = Astro.props;
+const { state } = Astro.params;
+
+// Apply Ranking Logic
+const sortedClinics = [...cityClinics].sort((a, b) => 
+  calculateClinicScore(b) - calculateClinicScore(a)
+);
+
+// Strict SEO: "TMS Therapy in [City], [State] - Top [Count] Providers"
+const title = `TMS Therapy in ${cityName}, ${stateName} - Top ${sortedClinics.length} Providers`;
+---
+
+<Layout title={title}>
+  <main class="container mx-auto px-4 py-8">
+     <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a href="/" class="hover:text-gray-900">Home</a>
+        </li>
+        <li class="inline-flex items-center">
+          <span class="mx-2">/</span>
+          <a href="/us/" class="hover:text-gray-900">United States</a>
+        </li>
+        <li class="inline-flex items-center">
+            <span class="mx-2">/</span>
+            <a href={`/us/${state}/`} class="hover:text-gray-900">{stateName}</a>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <span class="mx-2">/</span>
+            <span class="text-gray-800 font-medium">{cityName}</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Sidebar Filters -->
+        <aside class="w-full lg:w-1/4">
+            <div class="bg-white p-6 rounded-xl border border-gray-200 sticky top-8 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                     <h2 class="text-lg font-bold text-gray-900">Filters</h2>
+                     <button class="text-sm text-primary hover:text-primary-dark font-medium">Reset</button>
+                </div>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">TMS Technology</h3>
+                        <div class="space-y-2">
+                             {Object.values(ClinicMachine).slice(0, 4).map(m => (
+                                <label class="flex items-center space-x-3 cursor-pointer group">
+                                    <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"/>
+                                    <span class="text-sm text-gray-600 group-hover:text-gray-900">{m}</span>
+                                </label>
+                             ))}
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Insurance</h3>
+                        <div class="space-y-2">
+                             {Object.values(ClinicInsurance).slice(0, 4).map(i => (
+                                <label class="flex items-center space-x-3 cursor-pointer group">
+                                    <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"/>
+                                    <span class="text-sm text-gray-600 group-hover:text-gray-900">{i}</span>
+                                </label>
+                             ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Grid -->
+        <div class="w-full lg:w-3/4">
+             <h1 class="text-3xl font-bold text-gray-900 mb-6 flex items-baseline">
+                {cityName} TMS Clinics 
+                <span class="text-gray-500 font-medium text-lg ml-3">{cityClinics.length} Providers</span>
+            </h1>
+             
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {sortedClinics.map((clinic) => (
+                    <ClinicCard clinic={clinic} />
+                ))}
+            </div>
+            
+            <!-- Map Placeholder -->
+            <div class="mt-12 bg-gray-50 rounded-xl h-64 flex flex-col items-center justify-center border-2 border-dashed border-gray-200">
+                <svg class="w-12 h-12 text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0121 18.382V7.618a1 1 0 01-1.447-.894L15 7m0 13V7"></path></svg>
+                <p class="text-gray-500 font-medium">Map View Integration Placeholder</p>
+                <button class="mt-2 text-sm text-primary font-bold hover:underline">View on Map</button>
+            </div>
+        </div>
+    </div>
+  </main>
+</Layout>

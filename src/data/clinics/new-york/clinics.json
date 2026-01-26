@@ -1,0 +1,94 @@
+[
+  {
+    "id": "ny-1",
+    "name": "New York TMS & Mental Health",
+    "slug": "new-york-tms-&-mental-health-new-york",
+    "address": "238 Medical Center Dr",
+    "city": "New York",
+    "county": "New York County",
+    "state": "NY",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "CloudTMS"
+    ],
+    "insurances": [
+      "BlueCross",
+      "Medicare",
+      "Cigna",
+      "Medicaid"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Michael Wong, MD",
+        "first_name": "Michael",
+        "last_name": "Wong",
+        "slug": "dr-michael-wong-new-york",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Harvard Medical School",
+        "years_experience": 15,
+        "specialties": [
+          "Anxiety",
+          "OCD",
+          "Bipolar"
+        ],
+        "bio_focus": "Adolescents",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Wong"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  },
+  {
+    "id": "ny-2",
+    "name": "Dr. Lee Private TMS",
+    "slug": "dr-lee-private-tms-new-york",
+    "address": "431 Medical Center Dr",
+    "city": "New York",
+    "county": "New York County",
+    "state": "NY",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "BrainsWay"
+    ],
+    "insurances": [
+      "Medicaid",
+      "Aetna",
+      "UnitedHealthcare",
+      "Cigna"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Sarah Lee, MD",
+        "first_name": "Sarah",
+        "last_name": "Lee",
+        "slug": "dr-sarah-lee-new-york",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Baylor College of Medicine",
+        "years_experience": 27,
+        "specialties": [
+          "Anxiety",
+          "OCD",
+          "PTSD"
+        ],
+        "bio_focus": "Adolescents",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Lee"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  }
+]

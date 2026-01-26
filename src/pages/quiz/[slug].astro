@@ -1,0 +1,15 @@
+---
+import ContentPage from '../../layouts/ContentPage.astro';
+import { UTILITY_SLUGS } from '../../utils/seo_slugs';
+
+export function getStaticPaths() {
+  return UTILITY_SLUGS.map(({ slug, title }) => ({
+    params: { slug },
+    props: { title },
+  }));
+}
+
+const { title } = Astro.props;
+---
+
+<ContentPage title={title} subtitle="Interactive tools and assessments." />

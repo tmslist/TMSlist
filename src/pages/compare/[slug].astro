@@ -1,0 +1,15 @@
+---
+import ContentPage from '../../layouts/ContentPage.astro';
+import { COMPARE_SLUGS } from '../../utils/seo_slugs';
+
+export function getStaticPaths() {
+  return COMPARE_SLUGS.map(({ slug, title }) => ({
+    params: { slug },
+    props: { title },
+  }));
+}
+
+const { title } = Astro.props;
+---
+
+<ContentPage title={title} subtitle="Detailed side-by-side comparison of effectiveness, side effects, and costs." />

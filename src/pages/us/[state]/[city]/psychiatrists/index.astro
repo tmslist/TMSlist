@@ -1,0 +1,198 @@
+---
+import Layout from '../../../../../layouts/Layout.astro';
+import { getAllClinics, getStateSlug, STATE_NAMES } from '../../../../../utils/clinicData';
+
+
+export async function getStaticPaths() {
+    const clinics = getAllClinics();
+    
+    // Group by state -> city
+    const stateCity = new Map<string, Set<string>>();
+    clinics.forEach(c => {
+        if (!stateCity.has(c.state)) stateCity.set(c.state, new Set());
+        stateCity.get(c.state)!.add(c.city);
+    });
+    
+    const paths: any[] = [];
+    stateCity.forEach((cities, stateCode) => {
+        const stateSlug = getStateSlug(stateCode);
+        cities.forEach(city => {
+            const citySlug = city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '');
+            const cityClinics = clinics.filter(c => c.state === stateCode && c.city === city);
+            
+            // Collect all doctors from all clinics in this city
+            const doctors = cityClinics.flatMap(c => 
+                (c.doctors_data || []).map(d => ({ ...d, clinic: c }))
+            );
+            
+            if (doctors.length > 0) {
+                paths.push({
+                    params: { state: stateSlug, city: citySlug },
+                    props: { 
+                        stateCode, 
+                        stateName: STATE_NAMES[stateCode], 
+                        cityName: city, 
+                        doctors,
+                        clinicCount: cityClinics.length
+                    }
+                });
+            }
+        });
+    });
+    
+    return paths;
+}
+
+const { stateCode, stateName, cityName, doctors, clinicCount } = Astro.props;
+const title = `Best Psychiatrists in ${cityName}, ${stateName} | TMS Specialists Near You`;
+const description = `Find ${doctors.length} board-certified psychiatrists offering TMS therapy in ${cityName}, ${stateName}. Compare credentials, read reviews, and book consultations.`;
+---
+
+<Layout title={title}>
+    <main class="bg-gray-50 min-h-screen">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-indigo-900 via-blue-900 to-slate-900 py-20">
+            <div class="container mx-auto px-6">
+                <nav class="flex text-sm text-blue-200 mb-8" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-2">
+                        <li><a href="/" class="hover:text-white">Home</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li><a href="/us/" class="hover:text-white">US</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li><a href={`/us/${Astro.params.state}/`} class="hover:text-white">{stateName}</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li><a href={`/us/${Astro.params.state}/${Astro.params.city}/`} class="hover:text-white">{cityName}</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li class="text-white font-medium">Psychiatrists</li>
+                    </ol>
+                </nav>
+                
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
+                    Best <span class="text-cyan-400">Psychiatrists</span> in {cityName}
+                </h1>
+                <p class="text-xl text-blue-100 max-w-3xl mb-8">
+                    {doctors.length} board-certified psychiatrists specializing in TMS therapy across {clinicCount} clinics in {cityName}, {stateName}.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href={`/us/${Astro.params.state}/${Astro.params.city}/clinics/`} class="px-6 py-3 bg-white/10 backdrop-blur border border-white/20 rounded-xl text-white font-medium hover:bg-white/20 transition-all">
+                        View All Clinics →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <section class="bg-white border-b border-gray-100 py-6">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-indigo-600">{doctors.length}</div>
+                        <div class="text-sm text-gray-500 font-medium">Psychiatrists</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-indigo-600">{clinicCount}</div>
+                        <div class="text-sm text-gray-500 font-medium">TMS Clinics</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-indigo-600">4.8+</div>
+                        <div class="text-sm text-gray-500 font-medium">Avg Rating</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Psychiatrists Grid -->
+        <section class="py-16">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-gray-900 mb-10">All Psychiatrists in {cityName}</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {doctors.map((doctor: any) => (
+                        <article class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all group">
+                            <div class="p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <img 
+                                        src={doctor.image_url || `https://placehold.co/120x120/e2e8f0/1e293b?text=${doctor.first_name?.[0] || 'D'}${doctor.last_name?.[0] || 'R'}`} 
+                                        alt={doctor.name}
+                                        class="w-20 h-20 rounded-xl object-cover"
+                                    />
+                                    <div>
+                                        <h3 class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
+                                            <a href={`/specialist/${doctor.slug}`}>{doctor.name}</a>
+                                        </h3>
+                                        <p class="text-indigo-600 font-medium text-sm">{doctor.title}</p>
+                                        <p class="text-gray-500 text-sm">{doctor.school}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center gap-2 mb-4">
+                                    <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                                    <span class="text-sm text-gray-500">{doctor.years_experience}+ years experience</span>
+                                </div>
+                                
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    {(doctor.specialties || []).slice(0, 3).map((spec: string) => (
+                                        <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-medium">{spec}</span>
+                                    ))}
+                                </div>
+                                
+                                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                    <span class="text-sm text-gray-500">at {doctor.clinic?.name}</span>
+                                    <a href={`/specialist/${doctor.slug}`} class="text-indigo-600 font-bold text-sm hover:text-indigo-700">
+                                        View Profile →
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Content Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Finding the Right Psychiatrist in {cityName}</h2>
+                
+                <div class="prose prose-lg max-w-none text-gray-600">
+                    <p>
+                        When seeking a psychiatrist specializing in Transcranial Magnetic Stimulation (TMS) therapy in {cityName}, {stateName}, it's essential to consider several factors that can significantly impact your treatment outcome. 
+                        Our directory features {doctors.length} board-certified psychiatrists across {clinicCount} TMS clinics, each bringing unique expertise and treatment approaches.
+                    </p>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4">What to Look for in a TMS Psychiatrist</h3>
+                    <p>
+                        The ideal TMS psychiatrist should have specific training in neuromodulation techniques, a strong background in treatment-resistant depression, and experience with the particular TMS device used at their clinic.
+                        Many of our listed psychiatrists in {cityName} have completed fellowships in interventional psychiatry or neuromodulation at leading academic institutions.
+                    </p>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4">Treatment Approach</h3>
+                    <p>
+                        Each psychiatrist in our {cityName} directory takes a personalized approach to TMS therapy. This typically begins with a comprehensive psychiatric evaluation, followed by brain mapping to identify the optimal treatment location.
+                        The standard protocol involves 36 sessions over 6-9 weeks, though some clinics offer accelerated protocols like SAINT that compress treatment into just 5 days.
+                    </p>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4">Insurance and Cost Considerations</h3>
+                    <p>
+                        Most psychiatrists in {cityName} accept major insurance plans including Medicare, BlueCross BlueShield, Aetna, and UnitedHealthcare for TMS therapy.
+                        Out-of-pocket costs typically range from $250-$500 per session for those without coverage. Many clinics offer financing options to make treatment more accessible.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-gradient-to-r from-indigo-600 to-blue-600">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-white mb-6">Ready to Find Your Psychiatrist?</h2>
+                <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                    Compare {doctors.length} psychiatrists in {cityName} and find the right specialist for your TMS treatment journey.
+                </p>
+                <a href="/quiz/am-i-a-candidate/" class="inline-block px-8 py-4 bg-white text-indigo-600 font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-xl">
+                    Take Eligibility Quiz
+                </a>
+            </div>
+        </section>
+    </main>
+</Layout>

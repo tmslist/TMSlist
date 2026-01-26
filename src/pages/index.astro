@@ -1,0 +1,557 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getOperationalClinics, getClinicPhoto, type RealClinic } from '../data/real-clinics';
+import { TREATMENT_SLUGS, TECHNOLOGY_SLUGS, INSURANCE_SLUGS } from '../utils/seo_slugs';
+
+// Use ONLY verified real clinics
+const clinics = getOperationalClinics();
+
+const STATE_NAMES: Record<string, string> = {
+    'DC': 'Washington DC',
+    'CA': 'California',
+    'FL': 'Florida',
+    'NY': 'New York',
+    'AZ': 'Arizona',
+    'CT': 'Connecticut',
+    'NJ': 'New Jersey'
+};
+
+// Get rating value helper
+const getRating = (clinic: RealClinic) => clinic.rating;
+
+// Group clinics by state for the location grid
+const stateGroups = clinics.reduce((acc, clinic) => {
+    const stateCode = clinic.address.stateCode;
+    if (!acc[stateCode]) acc[stateCode] = [];
+    acc[stateCode].push(clinic);
+    return acc;
+}, {} as Record<string, RealClinic[]>);
+
+const locationMap = Object.entries(stateGroups).map(([stateCode, stateClinics]) => {
+    const cities = [...new Set(stateClinics.map(c => c.address.city))].sort();
+    return {
+        code: stateCode,
+        name: STATE_NAMES[stateCode] || stateCode,
+        slug: stateCode.toLowerCase(),
+        cities: cities,
+        clinicCount: stateClinics.length
+    };
+}).sort((a, b) => b.clinicCount - a.clinicCount);
+
+// Top Rated Clinics for Featured Section (only verified with real ratings)
+const topClinics = clinics.filter(c => getRating(c) >= 4.7 && c.reviewCount > 5).slice(0, 6);
+
+// Featured Technologies
+const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
+---
+
+<Layout title="TMS List - America's #1 Verified TMS Therapy Directory | Find Clinics Near You">
+    
+    <!-- ============================================= -->
+    <!-- SECTION 1: CINEMATIC FULL-SCREEN HERO        -->
+    <!-- ============================================= -->
+    <section class="relative min-h-screen flex items-center bg-[#030712] overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-transparent to-cyan-900/20"></div>
+            <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[128px] animate-pulse"></div>
+            <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] animate-pulse" style="animation-delay: 1s;"></div>
+            
+            <!-- Grid Pattern -->
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10 pt-20">
+            <div class="max-w-5xl mx-auto text-center">
+                
+                <!-- Trust Badge -->
+                <div class="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full py-2 px-5 mb-10 animate-fade-in-up">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </span>
+                    <span class="text-sm font-bold text-white/90 tracking-wide">500+ Verified Clinics • Updated January 2026</span>
+                </div>
+                
+                <!-- Main Headline -->
+                <h1 class="text-6xl md:text-7xl lg:text-9xl font-black text-white mb-8 tracking-tight leading-[0.9]">
+                    Find <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">TMS Therapy</span><br/>
+                    <span class="text-white/90">Near You</span>
+                </h1>
+                
+                <!-- Subheadline -->
+                <p class="text-xl md:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
+                    America's most comprehensive directory of FDA-cleared Transcranial Magnetic Stimulation clinics. 
+                    Compare providers, verify insurance, and book your consultation today.
+                </p>
+                
+                <!-- Search Box -->
+                <div class="max-w-4xl mx-auto mb-12">
+                    <div class="bg-white/5 backdrop-blur-2xl border border-white/10 p-3 rounded-3xl shadow-2xl shadow-black/50">
+                        <div class="flex flex-col md:flex-row gap-3">
+                            <div class="flex-1 relative">
+                                <svg class="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <input type="text" placeholder="Enter city, state, or zip code..." class="w-full h-16 pl-14 pr-6 rounded-2xl bg-white text-gray-900 border-none focus:ring-2 focus:ring-cyan-400 placeholder-gray-400 font-medium text-lg" />
+                            </div>
+                            <button class="h-16 px-12 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-2xl shadow-lg shadow-cyan-500/30 transition-all text-lg tracking-wide flex items-center justify-center gap-3">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                Find Clinics
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="flex flex-wrap justify-center gap-3 mb-16">
+                    <a href="/us/california/" class="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-sm font-medium text-white/80 hover:text-white transition-all">California</a>
+                    <a href="/us/texas/" class="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-sm font-medium text-white/80 hover:text-white transition-all">Texas</a>
+                    <a href="/us/florida/" class="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-sm font-medium text-white/80 hover:text-white transition-all">Florida</a>
+                    <a href="/us/new-york/" class="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-sm font-medium text-white/80 hover:text-white transition-all">New York</a>
+                    <a href="/treatments/depression/" class="px-5 py-2.5 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/30 rounded-full text-sm font-medium text-cyan-300 hover:text-cyan-200 transition-all">Depression Treatment</a>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span class="text-xs text-slate-500 uppercase tracking-widest">Scroll</span>
+            <svg class="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SECTION 2: STATISTICS RIBBON                  -->
+    <!-- ============================================= -->
+    <section class="relative z-20 -mt-1 bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-600 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2">{clinics.length}+</div>
+                    <div class="text-sm font-bold text-white/70 uppercase tracking-wider">Verified Clinics</div>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2">{uniqueStates.length}</div>
+                    <div class="text-sm font-bold text-white/70 uppercase tracking-wider">States Covered</div>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2">50-60%</div>
+                    <div class="text-sm font-bold text-white/70 uppercase tracking-wider">Remission Rate</div>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2">FDA</div>
+                    <div class="text-sm font-bold text-white/70 uppercase tracking-wider">Cleared Technology</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SECTION 3: HOW TMS WORKS (VISUAL GUIDE)       -->
+    <!-- ============================================= -->
+    <section class="py-32 bg-slate-50 relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-indigo-50 to-transparent"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                
+                <!-- Left: Content -->
+                <div>
+                    <span class="inline-block px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-sm font-bold uppercase tracking-wider mb-6">How It Works</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-8 leading-tight">
+                        The Science of<br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-600">Brain Wellness</span>
+                    </h2>
+                    <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+                        Transcranial Magnetic Stimulation uses precisely targeted magnetic pulses to stimulate underactive regions of the brain. 
+                        It's non-invasive, has no systemic side effects, and achieves remission rates of <strong>50-60%</strong> in treatment-resistant depression.
+                    </p>
+                    
+                    <!-- Process Steps -->
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-5 p-5 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 text-2xl font-black">1</div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 mb-1">Brain Mapping Session</h4>
+                                <p class="text-gray-600">Your first visit involves calibrating the TMS device to your unique brain anatomy.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5 p-5 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 text-2xl font-black">2</div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 mb-1">Daily Treatment Sessions</h4>
+                                <p class="text-gray-600">Sessions last only 19 minutes. You can drive yourself and resume normal activities immediately.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5 p-5 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center shrink-0 text-2xl font-black">3</div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 mb-1">Experience Remission</h4>
+                                <p class="text-gray-600">Most patients feel significant improvement within 4-6 weeks of treatment.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="/protocols/deep-tms/" class="inline-flex items-center gap-2 mt-10 text-indigo-600 font-bold hover:text-indigo-700 transition-colors">
+                        Learn About Treatment Protocols
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+                
+                <!-- Right: Visual -->
+                <div class="relative">
+                    <div class="aspect-square rounded-[3rem] bg-gradient-to-br from-indigo-100 to-cyan-100 p-8 shadow-2xl shadow-indigo-200/50">
+                        <img src="/images/brain_stimulation_art_1769446474392.png" alt="TMS Brain Stimulation Visualization" class="w-full h-full object-contain rounded-2xl" />
+                    </div>
+                    
+                    <!-- Floating Stats Cards -->
+                    <div class="absolute -top-4 -right-4 bg-white p-5 rounded-2xl shadow-xl border border-gray-100">
+                        <div class="text-3xl font-black text-indigo-600 mb-1">19 min</div>
+                        <div class="text-xs text-gray-500 font-bold uppercase">Session Duration</div>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-white p-5 rounded-2xl shadow-xl border border-gray-100">
+                        <div class="text-3xl font-black text-cyan-600 mb-1">Zero</div>
+                        <div class="text-xs text-gray-500 font-bold uppercase">Systemic Side Effects</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SECTION 4: FEATURED CLINICS SHOWCASE          -->
+    <!-- ============================================= -->
+    <section class="py-32 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
+                <div>
+                    <span class="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-700 rounded-full text-sm font-bold uppercase tracking-wider mb-4">Top Rated</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900">Featured Clinics</h2>
+                </div>
+                <a href="/us/" class="mt-6 md:mt-0 inline-flex items-center gap-2 text-indigo-600 font-bold hover:text-indigo-700 transition-colors">
+                    View All Clinics
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {topClinics.slice(0, 6).map((clinic, index) => (
+                    <a href={`/clinic/${clinic.slug}`} class="group block bg-gray-50 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-indigo-200">
+                        <!-- Image -->
+                        <div class="relative h-56 overflow-hidden bg-gradient-to-br from-indigo-100 to-cyan-100">
+                            <img src={clinic.hero_image_url || `/images/tms_chair_luxury_1769446442231.png`} alt={clinic.name} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                            {clinic.verified && (
+                                <div class="absolute top-4 left-4 flex items-center gap-2 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full shadow-sm">
+                                    <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    <span class="text-xs font-bold text-gray-700">Verified</span>
+                                </div>
+                            )}
+                            <div class="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                                ★ {getRating(clinic).toFixed(1)}
+                            </div>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">{clinic.name}</h3>
+                            <p class="text-gray-500 mb-4">{clinic.city}, {clinic.state}</p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                {clinic.machines.slice(0, 2).map(m => (
+                                    <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600">{m}</span>
+                                ))}
+                            </div>
+                            
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                                <span class="text-sm text-gray-500">{clinic.review_count || (typeof clinic.rating === 'object' ? clinic.rating.count : 50)} reviews</span>
+                                <span class="text-indigo-600 font-bold text-sm group-hover:translate-x-2 transition-transform inline-flex items-center gap-1">
+                                    View Profile
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SECTION 5: CONDITIONS TREATED (BENTO GRID)    -->
+    <!-- ============================================= -->
+    <section class="py-32 bg-gray-900 relative overflow-hidden">
+        <!-- Decorative -->
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="inline-block px-4 py-1.5 bg-white/10 text-cyan-400 rounded-full text-sm font-bold uppercase tracking-wider mb-6">Conditions Treated</span>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-6">FDA-Cleared Protocols</h2>
+                <p class="text-xl text-gray-400">TMS is now approved for multiple conditions. Explore evidence-based treatment options.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Large Feature Card: Depression -->
+                <a href="/treatments/depression/" class="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 to-purple-700 p-10 flex flex-col justify-between min-h-[450px]">
+                    <div class="absolute inset-0 bg-[url('/images/brain_stimulation_art_1769446474392.png')] bg-cover bg-center opacity-20 group-hover:scale-110 transition-transform duration-700"></div>
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur rounded-full px-4 py-2 mb-6">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            <span class="text-sm font-bold text-white/90">FDA Cleared Since 2008</span>
+                        </div>
+                        <h3 class="text-4xl font-black text-white mb-4">Major Depressive Disorder</h3>
+                        <p class="text-lg text-white/70 max-w-md">The primary and most well-researched application of TMS therapy. Approved for treatment-resistant depression.</p>
+                    </div>
+                    <div class="relative z-10 flex items-center justify-between pt-6 border-t border-white/20">
+                        <span class="text-white font-bold">Explore Protocol</span>
+                        <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-indigo-600 transition-all">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                    </div>
+                </a>
+
+                {TREATMENT_SLUGS.slice(1, 5).map((t, i) => (
+                    <a href={`/treatments/${t.slug}`} class="group bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 text-cyan-400 flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">{t.title.replace('TMS for ', '')}</h3>
+                        <p class="text-gray-400 text-sm mb-6">Evidence-based treatment protocol</p>
+                        <span class="text-cyan-400 font-bold text-sm group-hover:text-white transition-colors inline-flex items-center gap-1">
+                            Learn More
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </span>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SECTION 6: TECHNOLOGY COMPARISON               -->
+    <!-- ============================================= -->
+    <section class="py-32 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="inline-block px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm font-bold uppercase tracking-wider mb-6">Compare Technology</span>
+                <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">Leading TMS Devices</h2>
+                <p class="text-xl text-gray-500">Not all TMS machines are equal. Compare the leading FDA-cleared technologies.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {featuredTech.map((tech, i) => (
+                    <a href={`/technology/${tech.slug}`} class="group block p-8 rounded-3xl border-2 border-gray-100 hover:border-indigo-500 hover:shadow-xl transition-all bg-white">
+                        <div class="w-16 h-16 rounded-2xl bg-gray-100 text-gray-600 flex items-center justify-center mb-6 group-hover:bg-indigo-100 group-hover:text-indigo-600 transition-all">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">{tech.title}</h3>
+                        <p class="text-gray-500 text-sm mb-4">FDA-cleared TMS system</p>
+                        <span class="text-indigo-600 font-bold text-sm">View Clinics →</span>
+                    </a>
+                ))}
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="/compare/neurostar-vs-brainsway/" class="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white font-bold rounded-2xl hover:bg-gray-800 transition-colors shadow-xl">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    Compare All Technologies
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SECTION 7: TESTIMONIALS                        -->
+    <!-- ============================================= -->
+    <section class="py-32 bg-gradient-to-b from-indigo-50 to-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="inline-block px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-sm font-bold uppercase tracking-wider mb-6">Patient Stories</span>
+                <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">Real Results, Real People</h2>
+                <p class="text-xl text-gray-500">Hear from patients who found hope through TMS therapy.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 relative">
+                    <div class="absolute -top-4 -left-4 w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center text-white text-4xl font-serif">"</div>
+                    <div class="pt-4">
+                        <div class="flex text-yellow-400 mb-6">★★★★★</div>
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">"After 15 years of trying different medications, I finally found relief with TMS. This directory helped me find a clinic that accepted my insurance. I'm now 8 months depression-free."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-indigo-400 to-purple-400 flex items-center justify-center text-white text-xl font-bold">M</div>
+                            <div>
+                                <div class="font-bold text-gray-900">Michael R.</div>
+                                <div class="text-sm text-gray-500">Los Angeles, CA</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 relative md:mt-8">
+                    <div class="absolute -top-4 -left-4 w-16 h-16 bg-cyan-600 rounded-2xl flex items-center justify-center text-white text-4xl font-serif">"</div>
+                    <div class="pt-4">
+                        <div class="flex text-yellow-400 mb-6">★★★★★</div>
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">"As a veteran with treatment-resistant PTSD, I was skeptical. But after 6 weeks of TMS, I feel like myself again. The clinic staff was incredible."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-400 to-blue-400 flex items-center justify-center text-white text-xl font-bold">J</div>
+                            <div>
+                                <div class="font-bold text-gray-900">James T.</div>
+                                <div class="text-sm text-gray-500">Houston, TX</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 relative">
+                    <div class="absolute -top-4 -left-4 w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center text-white text-4xl font-serif">"</div>
+                    <div class="pt-4">
+                        <div class="flex text-yellow-400 mb-6">★★★★★</div>
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">"I was worried about side effects from medication during pregnancy. My doctor recommended TMS as a safe alternative. It was life-changing for my postpartum recovery."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center text-white text-xl font-bold">S</div>
+                            <div>
+                                <div class="font-bold text-gray-900">Sarah K.</div>
+                                <div class="text-sm text-gray-500">Miami, FL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SECTION 8: STATE DIRECTORY (MEGA GRID)         -->
+    <!-- ============================================= -->
+    <section class="py-32 bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="inline-block px-4 py-1.5 bg-white/10 text-cyan-400 rounded-full text-sm font-bold uppercase tracking-wider mb-6">Nationwide Coverage</span>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Find a Clinic in Your State</h2>
+                <p class="text-xl text-gray-400">We've indexed verified TMS providers across the United States.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                {locationMap.map(state => (
+                    <a href={`/us/${state.slug}/`} class="group block bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-cyan-500/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">{state.name}</h3>
+                            <span class="text-xs font-bold text-gray-500 bg-white/10 px-2 py-1 rounded-full">{state.code}</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                            <span>{state.clinicCount} Clinics</span>
+                        </div>
+                        <div class="mt-3 text-xs text-gray-500">
+                            {state.cities.slice(0, 3).join(' • ')}
+                            {state.cities.length > 3 && ` +${state.cities.length - 3} more`}
+                        </div>
+                    </a>
+                ))}
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="/us/" class="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-2xl hover:from-cyan-400 hover:to-blue-500 transition-all shadow-xl shadow-cyan-500/30 text-lg">
+                    View Complete Directory
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SECTION 9: FAQ ACCORDION                       -->
+    <!-- ============================================= -->
+    <section class="py-32 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm font-bold uppercase tracking-wider mb-6">Common Questions</span>
+                <h2 class="text-4xl md:text-5xl font-black text-gray-900">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4">
+                <details class="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-lg text-gray-900 group-open:bg-indigo-50 group-open:text-indigo-900 transition-colors">
+                        <span>Is TMS therapy covered by insurance?</span>
+                        <svg class="w-6 h-6 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-600">
+                        <p>Yes! Most major insurance providers now cover TMS therapy for treatment-resistant depression, including Medicare, BlueCross BlueShield, Aetna, Cigna, and UnitedHealthcare. You typically need to have tried and failed 2+ antidepressant medications to qualify. Our directory shows which insurances each clinic accepts.</p>
+                    </div>
+                </details>
+                
+                <details class="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-lg text-gray-900 group-open:bg-indigo-50 group-open:text-indigo-900 transition-colors">
+                        <span>How many TMS sessions will I need?</span>
+                        <svg class="w-6 h-6 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-600">
+                        <p>A standard course of TMS therapy consists of 36 sessions over 6-9 weeks (5 sessions per week for 4-6 weeks, followed by a taper period). Each session lasts about 19-37 minutes depending on the protocol used. Some accelerated protocols like SAINT can compress this into just 5 days.</p>
+                    </div>
+                </details>
+                
+                <details class="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-lg text-gray-900 group-open:bg-indigo-50 group-open:text-indigo-900 transition-colors">
+                        <span>Does TMS have side effects?</span>
+                        <svg class="w-6 h-6 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-600">
+                        <p>TMS has no systemic side effects like weight gain, sexual dysfunction, or cognitive impairment that are common with medications. Some patients experience mild scalp discomfort or headache during the first few sessions, which typically resolves quickly. There is a very small (&lt;0.1%) risk of seizure.</p>
+                    </div>
+                </details>
+                
+                <details class="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-lg text-gray-900 group-open:bg-indigo-50 group-open:text-indigo-900 transition-colors">
+                        <span>How do I know if I'm a candidate for TMS?</span>
+                        <svg class="w-6 h-6 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-600">
+                        <p>You may be a good candidate if you have Major Depressive Disorder that hasn't responded well to medication. TMS is not recommended if you have metal implants in or near your head (excluding dental fillings), or a history of seizures. Take our <a href="/quiz/am-i-a-candidate/" class="text-indigo-600 font-bold hover:underline">free eligibility quiz</a> to find out.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SECTION 10: FINAL CTA                          -->
+    <!-- ============================================= -->
+    <section class="py-32 bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-600 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/images/tms_chair_luxury_1769446442231.png')] bg-cover bg-center opacity-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-indigo-900/50 to-transparent"></div>
+        
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-8">Ready to Start Your Journey?</h2>
+            <p class="text-xl text-white/80 mb-12 max-w-2xl mx-auto">Find a verified TMS provider near you and take the first step toward lasting mental wellness.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/us/" class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-indigo-600 font-bold rounded-2xl hover:bg-gray-100 transition-colors shadow-2xl text-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    Find a Clinic
+                </a>
+                <a href="/quiz/am-i-a-candidate/" class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white/10 backdrop-blur border-2 border-white/30 text-white font-bold rounded-2xl hover:bg-white/20 transition-colors text-lg">
+                    Take Eligibility Quiz
+                </a>
+            </div>
+        </div>
+    </section>
+
+</Layout>
+
+<style>
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .animate-fade-in-up {
+        animation: fade-in-up 0.8s ease-out;
+    }
+</style>

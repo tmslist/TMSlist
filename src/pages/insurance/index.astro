@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { INSURANCE_SLUGS } from '../../utils/seo_slugs';
+
+const title = "TMS Insurance Coverage | Medicare, BlueCross, Aetna & More";
+const description = "Find out if your insurance covers TMS therapy. Comprehensive guides for Medicare, BlueCross BlueShield, Aetna, Cigna, UnitedHealthcare, and more.";
+---
+
+<Layout title={title} description={description}>
+    <main class="bg-gray-50 min-h-screen">
+        <!-- Hero -->
+        <section class="bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 py-20">
+            <div class="container mx-auto px-6">
+                <nav class="flex text-sm text-teal-200 mb-8">
+                    <a href="/" class="hover:text-white">Home</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-white">Insurance</span>
+                </nav>
+                
+                <h1 class="text-4xl md:text-6xl font-black text-white mb-6">
+                    TMS <span class="text-emerald-400">Insurance</span> Coverage
+                </h1>
+                <p class="text-xl text-teal-100 max-w-3xl">
+                    Most major insurance providers now cover TMS therapy. Find your provider below to learn about coverage requirements and authorization.
+                </p>
+            </div>
+        </section>
+
+        <!-- Grid -->
+        <section class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {INSURANCE_SLUGS.map(item => (
+                        <a href={`/insurance/${item.slug}/`} class="group bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all">
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-emerald-600 mb-3">{item.title.replace(' TMS Coverage', '')}</h3>
+                            <p class="text-gray-500 text-sm mb-4">TMS coverage, requirements, and authorization process</p>
+                            <span class="text-emerald-600 font-bold text-sm">View Coverage →</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

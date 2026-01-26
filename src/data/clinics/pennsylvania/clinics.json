@@ -1,0 +1,522 @@
+[
+  {
+    "id": "pa-capitalcity-1",
+    "name": "Capital City TMS & Wellness Center 1",
+    "slug": "capital-city-tms-&-wellness-center-1-capital-city",
+    "address": "6220 Oak St, Ste 231",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "PA",
+    "zip": "17431",
+    "geo": {
+      "lat": 39.30357853154757,
+      "lng": -90.08439263479104
+    },
+    "phone": "(555) 776-8705",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay",
+      "Nexstim"
+    ],
+    "specialties": [
+      "Bipolar",
+      "Depression",
+      "PTSD"
+    ],
+    "insurances": [
+      "Cigna",
+      "Aetna",
+      "Medicaid",
+      "Tricare",
+      "Medicare",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+1",
+    "rating": 4.2,
+    "review_count": 302,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "pa-capitalcity-2",
+    "name": "Capital City TMS & Wellness Center 2",
+    "slug": "capital-city-tms-&-wellness-center-2-capital-city",
+    "address": "9159 Main St, Ste 391",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "PA",
+    "zip": "65096",
+    "geo": {
+      "lat": 36.10601597599742,
+      "lng": -94.20528548959172
+    },
+    "phone": "(555) 603-7196",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim"
+    ],
+    "specialties": [
+      "Anxiety",
+      "Depression",
+      "PTSD"
+    ],
+    "insurances": [
+      "Medicare",
+      "Aetna",
+      "UnitedHealthcare",
+      "Cigna",
+      "Medicaid",
+      "BlueCross"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+2",
+    "rating": 4.0,
+    "review_count": 34,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "pa-capitalcity-3",
+    "name": "Capital City TMS & Wellness Center 3",
+    "slug": "capital-city-tms-&-wellness-center-3-capital-city",
+    "address": "3187 Oak St, Ste 267",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "PA",
+    "zip": "29668",
+    "geo": {
+      "lat": 39.31045664558792,
+      "lng": -94.37341335730098
+    },
+    "phone": "(555) 158-3300",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay",
+      "NeuroStar"
+    ],
+    "specialties": [
+      "OCD",
+      "Bipolar",
+      "Depression"
+    ],
+    "insurances": [
+      "Medicare",
+      "Aetna",
+      "Tricare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+3",
+    "rating": 4.6,
+    "review_count": 277,
+    "verified": false,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "pa-capitalcity-4",
+    "name": "Capital City TMS & Wellness Center 4",
+    "slug": "capital-city-tms-&-wellness-center-4-capital-city",
+    "address": "6625 Maple St, Ste 232",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "PA",
+    "zip": "59939",
+    "geo": {
+      "lat": 31.685378255446164,
+      "lng": -93.96150052518296
+    },
+    "phone": "(555) 830-9112",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture",
+      "NeuroStar"
+    ],
+    "specialties": [
+      "Chronic Pain",
+      "Anxiety",
+      "Depression",
+      "OCD"
+    ],
+    "insurances": [
+      "Tricare",
+      "Medicaid",
+      "Cigna",
+      "Medicare",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+4",
+    "rating": 5.0,
+    "review_count": 288,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "pa-capitalcity-5",
+    "name": "Capital City TMS & Wellness Center 5",
+    "slug": "capital-city-tms-&-wellness-center-5-capital-city",
+    "address": "4487 Maple St, Ste 335",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "PA",
+    "zip": "94055",
+    "geo": {
+      "lat": 30.126089828276477,
+      "lng": -91.8162558202368
+    },
+    "phone": "(555) 257-6349",
+    "website": "https://example.com",
+    "machines": [
+      "CloudTMS"
+    ],
+    "specialties": [
+      "Bipolar",
+      "OCD",
+      "PTSD",
+      "Depression",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "Tricare",
+      "Aetna",
+      "Medicaid"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+5",
+    "rating": 4.9,
+    "review_count": 30,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "pa-capitalcity-6",
+    "name": "Capital City TMS & Wellness Center 6",
+    "slug": "capital-city-tms-&-wellness-center-6-capital-city",
+    "address": "8601 Maple St, Ste 266",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "PA",
+    "zip": "75588",
+    "geo": {
+      "lat": 34.20420889334733,
+      "lng": -97.06458789759387
+    },
+    "phone": "(555) 400-3325",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim",
+      "Nexstim"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "Chronic Pain",
+      "Bipolar",
+      "PTSD"
+    ],
+    "insurances": [
+      "BlueCross",
+      "UnitedHealthcare",
+      "Medicaid",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+6",
+    "rating": 4.8,
+    "review_count": 345,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "pa-metrocity-7",
+    "name": "Dr. Jennifer Kim Psychiatry",
+    "slug": "dr-jennifer-kim-psychiatry-metro-city",
+    "address": "1602 Maple St, Ste 318",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "PA",
+    "zip": "17425",
+    "geo": {
+      "lat": 38.22200897014124,
+      "lng": -98.3703258805267
+    },
+    "phone": "(555) 150-1877",
+    "website": "https://example.com",
+    "machines": [
+      "Nexstim",
+      "CloudTMS"
+    ],
+    "specialties": [
+      "Bipolar",
+      "Chronic Pain",
+      "Anxiety",
+      "OCD"
+    ],
+    "insurances": [
+      "Cigna",
+      "Tricare",
+      "Medicaid",
+      "Aetna",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Jennifer+Kim+Psychiatry",
+    "rating": 4.8,
+    "review_count": 366,
+    "verified": false,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "pa-metrocity-8",
+    "name": "Metro City TMS & Wellness Center 2",
+    "slug": "metro-city-tms-&-wellness-center-2-metro-city",
+    "address": "7138 Main St, Ste 189",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "PA",
+    "zip": "53936",
+    "geo": {
+      "lat": 37.219966957439276,
+      "lng": -93.89695370211187
+    },
+    "phone": "(555) 721-6556",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay",
+      "CloudTMS"
+    ],
+    "specialties": [
+      "PTSD",
+      "OCD",
+      "Bipolar"
+    ],
+    "insurances": [
+      "Medicaid",
+      "Medicare",
+      "Aetna",
+      "UnitedHealthcare",
+      "BlueCross"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+2",
+    "rating": 4.6,
+    "review_count": 293,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "pa-metrocity-9",
+    "name": "Metro City TMS & Wellness Center 3",
+    "slug": "metro-city-tms-&-wellness-center-3-metro-city",
+    "address": "8510 Main St, Ste 305",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "PA",
+    "zip": "31095",
+    "geo": {
+      "lat": 33.8430394023363,
+      "lng": -90.64853471973692
+    },
+    "phone": "(555) 433-7345",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay"
+    ],
+    "specialties": [
+      "Depression",
+      "PTSD",
+      "Bipolar"
+    ],
+    "insurances": [
+      "Medicare",
+      "BlueCross",
+      "Tricare",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+3",
+    "rating": 4.3,
+    "review_count": 314,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "pa-metrocity-10",
+    "name": "Dr. David Kim Psychiatry",
+    "slug": "dr-david-kim-psychiatry-metro-city",
+    "address": "1452 Maple St, Ste 434",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "PA",
+    "zip": "79452",
+    "geo": {
+      "lat": 31.04940679195244,
+      "lng": -96.64856490598531
+    },
+    "phone": "(555) 131-8045",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay",
+      "Nexstim"
+    ],
+    "specialties": [
+      "Depression",
+      "PTSD",
+      "OCD",
+      "Bipolar"
+    ],
+    "insurances": [
+      "BlueCross",
+      "Cigna",
+      "Medicare",
+      "UnitedHealthcare",
+      "Medicaid",
+      "Tricare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+David+Kim+Psychiatry",
+    "rating": 4.8,
+    "review_count": 28,
+    "verified": false,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "pa-metrocity-11",
+    "name": "Dr. Sarah Patel Psychiatry",
+    "slug": "dr-sarah-patel-psychiatry-metro-city",
+    "address": "8196 Cedar St, Ste 471",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "PA",
+    "zip": "29739",
+    "geo": {
+      "lat": 35.5522746466137,
+      "lng": -98.99151462709766
+    },
+    "phone": "(555) 382-1960",
+    "website": "https://example.com",
+    "machines": [
+      "NeuroStar",
+      "CloudTMS"
+    ],
+    "specialties": [
+      "Anxiety",
+      "OCD",
+      "PTSD",
+      "Bipolar",
+      "Depression"
+    ],
+    "insurances": [
+      "Medicare",
+      "UnitedHealthcare",
+      "BlueCross",
+      "Medicaid",
+      "Cigna",
+      "Tricare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Sarah+Patel+Psychiatry",
+    "rating": 4.3,
+    "review_count": 188,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "pa-metrocity-12",
+    "name": "Metro City TMS & Wellness Center 6",
+    "slug": "metro-city-tms-&-wellness-center-6-metro-city",
+    "address": "8194 Maple St, Ste 436",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "PA",
+    "zip": "53488",
+    "geo": {
+      "lat": 30.795823231568022,
+      "lng": -96.83459843847128
+    },
+    "phone": "(555) 982-7874",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture"
+    ],
+    "specialties": [
+      "Bipolar",
+      "Anxiety",
+      "PTSD"
+    ],
+    "insurances": [
+      "Tricare",
+      "Medicaid",
+      "Medicare",
+      "UnitedHealthcare",
+      "Cigna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+6",
+    "rating": 4.7,
+    "review_count": 344,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  }
+]

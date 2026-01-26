@@ -1,0 +1,93 @@
+---
+import type { Clinic } from '../types/clinic';
+
+interface Props {
+	clinic: Clinic;
+}
+
+const { clinic } = Astro.props;
+const ratingValue = typeof clinic.rating === 'number' ? clinic.rating : clinic.rating.aggregate;
+
+---
+
+<article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col h-full group">
+    <!-- Image Header -->
+    <div class="h-48 relative overflow-hidden bg-gray-100">
+        <a href={`/clinic/${clinic.slug}`} tabindex="-1">
+            <img 
+                src={clinic.hero_image_url} 
+                alt={`Photo of ${clinic.name}`} 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+            />
+        </a>
+        
+        {clinic.verified && (
+            <div class="absolute top-3 left-3 flex items-center bg-white/95 backdrop-blur px-2 py-1 rounded-md shadow-sm border border-gray-100">
+                 <svg class="h-3.5 w-3.5 text-secondary mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                 <span class="text-[10px] font-bold text-gray-700 uppercase tracking-wide">Verified</span>
+            </div>
+        )}
+
+        {ratingValue >= 4.8 && (
+             <div class="absolute top-3 right-3 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                Top Rated
+            </div>
+        )}
+    </div>
+
+    <!-- Content Body -->
+    <div class="p-5 flex-1 flex flex-col">
+        <div class="mb-3">
+            <h3 class="text-lg font-bold text-gray-900 leading-tight mb-1">
+                <a href={`/clinic/${clinic.slug}`} class="hover:text-primary transition-colors line-clamp-1">
+                    {clinic.name}
+                </a>
+            </h3>
+            <p class="text-sm text-gray-500 font-medium">{clinic.city}, {clinic.state}</p>
+        </div>
+
+        <!-- Rating -->
+        <div class="flex items-center mb-4">
+             <div class="flex text-yellow-500 text-sm">
+                {'★'.repeat(Math.round(ratingValue))}
+                <span class="text-gray-200">{'★'.repeat(5 - Math.round(ratingValue))}</span>
+             </div>
+             <span class="ml-2 text-xs font-bold text-gray-700">{ratingValue.toFixed(1)}</span>
+             <span class="mx-1 text-gray-300">•</span>
+             <span class="text-xs text-gray-500">{clinic.review_count} reviews</span>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-1.5 mb-6 mt-auto">
+            {clinic.machines.slice(0, 2).map((machine) => (
+                <span class="inline-flex items-center px-2 py-1 rounded bg-surface-subtle border border-gray-200 text-[10px] font-medium text-gray-600">
+                    {machine}
+                </span>
+            ))}
+            {clinic.machines.length > 2 && (
+                 <span class="inline-flex items-center px-2 py-1 rounded bg-surface-subtle border border-gray-200 text-[10px] font-medium text-gray-500">
+                    +{clinic.machines.length - 2}
+                </span>
+            )}
+        </div>
+
+        <!-- Actions -->
+        <div class="grid grid-cols-2 gap-3 mt-auto">
+             <a 
+                href={`/clinic/${clinic.slug}`} 
+                class="flex items-center justify-center px-3 py-2 border border-gray-200 text-sm font-semibold text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                aria-label={`View profile for ${clinic.name}`}
+            >
+                View Profile
+            </a>
+            <a 
+                href={`tel:${clinic.phone}`} 
+                class="flex items-center justify-center px-3 py-2 bg-primary hover:bg-primary-light text-white text-sm font-semibold rounded-lg shadow-sm transition-colors transition-transform active:scale-95"
+                aria-label={`Call ${clinic.name}`}
+            >
+                Call Clinic
+            </a>
+        </div>
+    </div>
+</article>

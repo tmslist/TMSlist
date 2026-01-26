@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllClinics, getStateSlug, STATE_NAMES } from '../../utils/clinicData';
+
+const clinics = getAllClinics();
+// Get unique states (using Map to keep object with name and slug)
+const states = [...new Set(clinics.map(c => c.state))].map(stateCode => {
+    return {
+        name: STATE_NAMES[stateCode] || stateCode,
+        slug: getStateSlug(stateCode)
+    };
+}).sort((a,b) => a.name.localeCompare(b.name));
+
+const title = "United States - TMS Clinics";
+---
+
+<Layout title={title}>
+  <main class="container mx-auto px-4 py-8">
+    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a href="/" class="hover:text-gray-900">Home</a>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <span class="mx-2">/</span>
+            <span class="text-gray-800">United States</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="text-3xl font-bold mb-6">TMS Clinics in the United States</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {states.map((state) => (
+        <a href={`/us/${state.slug}/`} class="block p-4 bg-white rounded border hover:border-indigo-500 transition-colors">
+          <span class="text-lg font-medium text-gray-800">{state.name}</span>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>

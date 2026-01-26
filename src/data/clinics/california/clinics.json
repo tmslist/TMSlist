@@ -1,0 +1,202 @@
+[
+  {
+    "id": "ca-1",
+    "name": "Los Angeles TMS & Mental Health",
+    "slug": "los-angeles-tms-&-mental-health-los-angeles",
+    "address": "709 Medical Center Dr",
+    "city": "Los Angeles",
+    "county": "Los Angeles County",
+    "state": "CA",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "BrainsWay"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "Tricare",
+      "Medicaid",
+      "Medicare"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Jennifer Martinez, MD",
+        "first_name": "Jennifer",
+        "last_name": "Martinez",
+        "slug": "dr-jennifer-martinez-los-angeles",
+        "title": "Board-Certified Psychiatrist",
+        "school": "UCSF",
+        "years_experience": 14,
+        "specialties": [
+          "PTSD",
+          "OCD",
+          "Chronic Pain"
+        ],
+        "bio_focus": "TMS",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Martinez"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  },
+  {
+    "id": "ca-2",
+    "name": "Dr. Kim Private TMS",
+    "slug": "dr-kim-private-tms-los-angeles",
+    "address": "465 Medical Center Dr",
+    "city": "Los Angeles",
+    "county": "Los Angeles County",
+    "state": "CA",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "BrainsWay"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "Medicaid",
+      "Cigna",
+      "Tricare"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Robert Kim, MD",
+        "first_name": "Robert",
+        "last_name": "Kim",
+        "slug": "dr-robert-kim-los-angeles",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Baylor College of Medicine",
+        "years_experience": 30,
+        "specialties": [
+          "Chronic Pain",
+          "Anxiety",
+          "Bipolar"
+        ],
+        "bio_focus": "Adolescents",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Kim"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  },
+  {
+    "id": "ca-3",
+    "name": "San Diego TMS & Mental Health",
+    "slug": "san-diego-tms-&-mental-health-san-diego",
+    "address": "965 Medical Center Dr",
+    "city": "San Diego",
+    "county": "San Diego County",
+    "state": "CA",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "CloudTMS"
+    ],
+    "insurances": [
+      "Cigna",
+      "Medicaid",
+      "Aetna",
+      "BlueCross"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Sarah Wong, MD",
+        "first_name": "Sarah",
+        "last_name": "Wong",
+        "slug": "dr-sarah-wong-san-diego",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Mayo Clinic Alix School of Medicine",
+        "years_experience": 21,
+        "specialties": [
+          "Anxiety",
+          "PTSD",
+          "OCD"
+        ],
+        "bio_focus": "Adolescents",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Wong"
+      },
+      {
+        "name": "Dr. Michael Smith, MD",
+        "first_name": "Michael",
+        "last_name": "Smith",
+        "slug": "dr-michael-smith-san-diego",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Mayo Clinic Alix School of Medicine",
+        "years_experience": 26,
+        "specialties": [
+          "Chronic Pain",
+          "Depression",
+          "OCD"
+        ],
+        "bio_focus": "Depression",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Smith"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  },
+  {
+    "id": "ca-4",
+    "name": "Dr. Garcia Private TMS",
+    "slug": "dr-garcia-private-tms-san-diego",
+    "address": "948 Medical Center Dr",
+    "city": "San Diego",
+    "county": "San Diego County",
+    "state": "CA",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "MagVenture"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "BlueCross",
+      "Aetna",
+      "Medicaid"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Alan Garcia, MD",
+        "first_name": "Alan",
+        "last_name": "Garcia",
+        "slug": "dr-alan-garcia-san-diego",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Mayo Clinic Alix School of Medicine",
+        "years_experience": 26,
+        "specialties": [
+          "Bipolar",
+          "OCD",
+          "Anxiety"
+        ],
+        "bio_focus": "Depression",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Garcia"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  }
+]

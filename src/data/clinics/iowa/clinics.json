@@ -1,0 +1,266 @@
+[
+  {
+    "id": "ia-capitalcity-1",
+    "name": "Capital City TMS & Wellness Center 1",
+    "slug": "capital-city-tms-&-wellness-center-1-capital-city",
+    "address": "5187 Maple St, Ste 229",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "IA",
+    "zip": "18554",
+    "geo": {
+      "lat": 34.521923111151715,
+      "lng": -95.47958864675093
+    },
+    "phone": "(555) 448-3558",
+    "website": "https://example.com",
+    "machines": [
+      "CloudTMS"
+    ],
+    "specialties": [
+      "Depression",
+      "OCD",
+      "PTSD",
+      "Bipolar"
+    ],
+    "insurances": [
+      "Medicare",
+      "Aetna",
+      "Tricare",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+1",
+    "rating": 4.5,
+    "review_count": 86,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "ia-capitalcity-2",
+    "name": "Capital City TMS & Wellness Center 2",
+    "slug": "capital-city-tms-&-wellness-center-2-capital-city",
+    "address": "1578 Oak St, Ste 455",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "IA",
+    "zip": "89100",
+    "geo": {
+      "lat": 33.36568476032432,
+      "lng": -95.52984595206519
+    },
+    "phone": "(555) 299-9564",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay"
+    ],
+    "specialties": [
+      "Depression",
+      "Bipolar",
+      "OCD"
+    ],
+    "insurances": [
+      "Aetna",
+      "Tricare",
+      "Cigna",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+2",
+    "rating": 4.4,
+    "review_count": 193,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "ia-capitalcity-3",
+    "name": "Dr. Lisa Smith Psychiatry",
+    "slug": "dr-lisa-smith-psychiatry-capital-city",
+    "address": "1267 Main St, Ste 314",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "IA",
+    "zip": "76251",
+    "geo": {
+      "lat": 35.58918459542557,
+      "lng": -90.06158322558302
+    },
+    "phone": "(555) 466-8897",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim",
+      "Nexstim"
+    ],
+    "specialties": [
+      "Bipolar",
+      "PTSD",
+      "Anxiety",
+      "Depression",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "Cigna",
+      "Medicare",
+      "BlueCross",
+      "Aetna",
+      "UnitedHealthcare",
+      "Medicaid"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Lisa+Smith+Psychiatry",
+    "rating": 4.4,
+    "review_count": 263,
+    "verified": false,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Capital City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "ia-metrocity-4",
+    "name": "Metro City TMS & Wellness Center 1",
+    "slug": "metro-city-tms-&-wellness-center-1-metro-city",
+    "address": "5720 Maple St, Ste 324",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "IA",
+    "zip": "49074",
+    "geo": {
+      "lat": 33.732590394982815,
+      "lng": -93.56696454607776
+    },
+    "phone": "(555) 296-7002",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture",
+      "NeuroStar"
+    ],
+    "specialties": [
+      "Depression",
+      "PTSD",
+      "Bipolar"
+    ],
+    "insurances": [
+      "Aetna",
+      "UnitedHealthcare",
+      "BlueCross",
+      "Medicaid",
+      "Tricare",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+1",
+    "rating": 4.6,
+    "review_count": 209,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "ia-metrocity-5",
+    "name": "Dr. Jennifer Patel Psychiatry",
+    "slug": "dr-jennifer-patel-psychiatry-metro-city",
+    "address": "9057 Oak St, Ste 388",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "IA",
+    "zip": "47542",
+    "geo": {
+      "lat": 32.773322642634426,
+      "lng": -96.59892116137794
+    },
+    "phone": "(555) 877-2885",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture",
+      "BrainsWay"
+    ],
+    "specialties": [
+      "OCD",
+      "PTSD",
+      "Anxiety",
+      "Chronic Pain",
+      "Depression"
+    ],
+    "insurances": [
+      "Tricare",
+      "Medicare",
+      "BlueCross",
+      "Medicaid",
+      "Aetna",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Jennifer+Patel+Psychiatry",
+    "rating": 4.4,
+    "review_count": 397,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "ia-metrocity-6",
+    "name": "Dr. David Johnson Psychiatry",
+    "slug": "dr-david-johnson-psychiatry-metro-city",
+    "address": "5146 Oak St, Ste 203",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "IA",
+    "zip": "73202",
+    "geo": {
+      "lat": 38.28033916025707,
+      "lng": -91.08534561180808
+    },
+    "phone": "(555) 574-8111",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture"
+    ],
+    "specialties": [
+      "Chronic Pain",
+      "OCD",
+      "Anxiety",
+      "Bipolar",
+      "Depression"
+    ],
+    "insurances": [
+      "BlueCross",
+      "Medicaid",
+      "Medicare",
+      "UnitedHealthcare",
+      "Cigna",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+David+Johnson+Psychiatry",
+    "rating": 5.0,
+    "review_count": 57,
+    "verified": false,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  }
+]

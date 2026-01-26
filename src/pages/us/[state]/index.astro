@@ -1,0 +1,84 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import StateHero from '../../../components/StateHero.astro';
+import ClinicCard from '../../../components/ClinicCard.astro';
+import { getUniqueStates, getClinicsByState, STATE_NAMES, getStateSlug } from '../../../utils/dataHelpers';
+
+export async function getStaticPaths() {
+  const uniqueStates = getUniqueStates();
+  
+  return uniqueStates.map(stateCode => {
+    const stateClinics = getClinicsByState(stateCode);
+    const stateName = STATE_NAMES[stateCode] || stateCode;
+    const stateSlug = getStateSlug(stateCode);
+
+    const cities = [...new Set(stateClinics.map(c => JSON.stringify({ name: c.city, slug: c.city.toLowerCase().replace(/\s+/g, '-') })))].map(s => JSON.parse(s)).sort((a,b) => a.name.localeCompare(b.name));
+    
+    // Top 3 clinics by rating
+    const topClinics = [...stateClinics].sort((a, b) => b.rating - a.rating).slice(0, 3);
+    
+    return {
+      params: { state: stateSlug },
+      props: { stateName, cities, topClinics, clinicCount: stateClinics.length, stateCode },
+    };
+  });
+}
+
+const { stateName, cities, topClinics, clinicCount } = Astro.props;
+
+// strict SEO: "Best TMS Therapy Clinics in [State] | TMS List"
+const title = `Best TMS Therapy Clinics in ${stateName} | TMS List`;
+---
+
+<Layout title={title}>
+  <StateHero stateName={stateName} clinicCount={clinicCount} />
+
+  <main class="container mx-auto px-4 py-8">
+    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a href="/" class="hover:text-gray-900">Home</a>
+        </li>
+        <li class="inline-flex items-center">
+          <span class="mx-2">/</span>
+          <a href="/us/" class="hover:text-gray-900">United States</a>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <span class="mx-2">/</span>
+            <span class="text-gray-800 font-medium">{stateName}</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+     <!-- Top Rated Section -->
+    <section class="mb-16">
+        <div class="flex items-center mb-8">
+             <h2 class="text-2xl font-bold text-gray-900">
+                Top Rated Clinics in {stateName}
+            </h2>
+            <div class="ml-4 h-px flex-1 bg-gray-200"></div>
+        </div>
+       
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {topClinics.map(clinic => (
+                <ClinicCard clinic={clinic} />
+            ))}
+        </div>
+    </section>
+
+    <!-- City Directory -->
+    <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Browse by City</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {cities.map((city) => (
+                <a href={`/us/${Astro.params.state}/${city.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all text-center group">
+                    <span class="font-semibold text-gray-800 block mb-1 group-hover:text-primary transition-colors">{city.name}</span>
+                    <span class="text-xs text-primary font-bold">View Clinics &rarr;</span>
+                </a>
+            ))}
+        </div>
+    </section>
+  </main>
+</Layout>

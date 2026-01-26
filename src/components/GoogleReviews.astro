@@ -1,0 +1,174 @@
+---
+import ReviewForm from './ReviewForm.astro';
+
+interface Review {
+    author: string;
+    rating: number;
+    date: string;
+    text: string;
+    source?: string;
+}
+
+interface Props {
+    entityName: string;
+    entityType?: 'clinic' | 'specialist';
+    entitySlug?: string;
+}
+
+const { entityName, entityType = 'clinic', entitySlug = '' } = Astro.props;
+
+// Note: Reviews are loaded from localStorage on client-side
+// No fake/placeholder reviews - only real user-submitted reviews
+---
+
+<section class="py-12 bg-white rounded-2xl border border-gray-100 shadow-sm" id="reviews-section">
+    <div class="px-4 md:px-8">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Patient Reviews</h2>
+                <p class="text-gray-500">What patients are saying about {entityName}</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center gap-4" id="rating-summary">
+                <!-- Will be populated by JavaScript with real data -->
+                <div class="text-center">
+                    <div class="text-4xl font-black text-gray-900" id="avg-rating">--</div>
+                    <div class="flex text-yellow-400 text-lg justify-center" id="star-display">
+                        <span class="text-gray-200">★★★★★</span>
+                    </div>
+                    <div class="text-sm text-gray-500"><span id="review-count">0</span> reviews</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews List (populated by JS) -->
+        <div id="reviews-list" class="space-y-6 mb-8">
+            <div class="text-center py-8 text-gray-400">
+                <p>No reviews yet. Be the first to share your experience!</p>
+            </div>
+        </div>
+
+        <!-- Write a Review Button -->
+        <div class="mb-8">
+            <button 
+                id="toggle-review-form" 
+                class="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
+            >
+                <span>✏️</span>
+                Write a Review
+            </button>
+        </div>
+        
+        <!-- Review Form (hidden by default) -->
+        <div id="review-form-container" class="hidden">
+            <ReviewForm entityName={entityName} entityType={entityType} entitySlug={entitySlug} />
+        </div>
+    </div>
+</section>
+
+<script define:vars={{ entitySlug, entityName }}>
+    document.addEventListener('DOMContentLoaded', () => {
+        const reviewsList = document.getElementById('reviews-list');
+        const avgRatingEl = document.getElementById('avg-rating');
+        const starDisplayEl = document.getElementById('star-display');
+        const reviewCountEl = document.getElementById('review-count');
+        const toggleBtn = document.getElementById('toggle-review-form');
+        const formContainer = document.getElementById('review-form-container');
+        
+        // Load reviews from localStorage
+        function loadReviews() {
+            const allReviews = JSON.parse(localStorage.getItem('tms-reviews') || '[]');
+            const entityReviews = allReviews.filter(r => r.entitySlug === entitySlug);
+            
+            if (entityReviews.length === 0) {
+                reviewsList.innerHTML = `
+                    <div class="text-center py-8 text-gray-400">
+                        <p>No reviews yet. Be the first to share your experience!</p>
+                    </div>
+                `;
+                avgRatingEl.textContent = '--';
+                starDisplayEl.innerHTML = '<span class="text-gray-200">★★★★★</span>';
+                reviewCountEl.textContent = '0';
+                return;
+            }
+            
+            // Calculate average rating
+            const avgRating = entityReviews.reduce((sum, r) => sum + r.rating, 0) / entityReviews.length;
+            avgRatingEl.textContent = avgRating.toFixed(1);
+            reviewCountEl.textContent = entityReviews.length.toString();
+            
+            // Update stars
+            const fullStars = Math.round(avgRating);
+            starDisplayEl.innerHTML = `<span class="text-yellow-400">${'★'.repeat(fullStars)}</span><span class="text-gray-200">${'★'.repeat(5 - fullStars)}</span>`;
+            
+            // Render reviews
+            reviewsList.innerHTML = entityReviews.map(review => {
+                const date = new Date(review.date);
+                const timeAgo = getTimeAgo(date);
+                
+                return `
+                    <article class="p-4 md:p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg shrink-0">
+                                ${review.name.charAt(0)}
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-1">
+                                    <div>
+                                        <div class="font-bold text-gray-900">${review.name}</div>
+                                        <div class="text-sm text-gray-500">${timeAgo}</div>
+                                    </div>
+                                    <div class="flex text-yellow-400">
+                                        ${'★'.repeat(review.rating)}<span class="text-gray-200">${'★'.repeat(5 - review.rating)}</span>
+                                    </div>
+                                </div>
+                                ${review.treatmentType ? `<div class="text-xs text-indigo-600 font-medium mb-2">Treated for: ${review.treatmentType}</div>` : ''}
+                                <p class="text-gray-600 leading-relaxed">${review.review}</p>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+        
+        function getTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            const intervals = {
+                year: 31536000,
+                month: 2592000,
+                week: 604800,
+                day: 86400,
+                hour: 3600,
+                minute: 60
+            };
+            
+            for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+                const interval = Math.floor(seconds / secondsInUnit);
+                if (interval >= 1) {
+                    return `${interval} ${unit}${interval !== 1 ? 's' : ''} ago`;
+                }
+            }
+            return 'Just now';
+        }
+        
+        // Toggle form
+        toggleBtn?.addEventListener('click', () => {
+            formContainer?.classList.toggle('hidden');
+            if (formContainer?.classList.contains('hidden')) {
+                toggleBtn.innerHTML = '<span>✏️</span> Write a Review';
+            } else {
+                toggleBtn.innerHTML = '<span>✕</span> Cancel';
+                formContainer?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+        
+        // Load on page load
+        loadReviews();
+        
+        // Listen for new reviews
+        window.addEventListener('storage', loadReviews);
+        
+        // Custom event for same-page updates
+        window.addEventListener('review-submitted', loadReviews);
+    });
+</script>

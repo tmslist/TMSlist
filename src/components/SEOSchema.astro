@@ -1,0 +1,164 @@
+---
+interface LocalBusinessProps {
+    name: string;
+    description: string;
+    address: {
+        street: string;
+        city: string;
+        state: string;
+        zip: string;
+    };
+    phone?: string;
+    url?: string;
+    rating?: number;
+    reviewCount?: number;
+    priceRange?: string;
+    openingHours?: string[];
+    services?: string[];
+    image?: string;
+}
+
+interface PhysicianProps {
+    name: string;
+    title: string;
+    description: string;
+    image?: string;
+    medicalSpecialty: string[];
+    worksAt: {
+        name: string;
+        address: string;
+    };
+    alumniOf?: string;
+    yearsOfExperience?: number;
+}
+
+interface FAQProps {
+    questions: Array<{
+        question: string;
+        answer: string;
+    }>;
+}
+
+interface Props {
+    type: 'LocalBusiness' | 'Physician' | 'FAQ' | 'Breadcrumb' | 'MedicalClinic';
+    localBusiness?: LocalBusinessProps;
+    physician?: PhysicianProps;
+    faq?: FAQProps;
+    breadcrumbs?: Array<{ name: string; url: string }>;
+}
+
+const { type, localBusiness, physician, faq, breadcrumbs } = Astro.props;
+
+// Generate LocalBusiness Schema
+function getLocalBusinessSchema(data: LocalBusinessProps) {
+    return {
+        "@context": "https://schema.org",
+        "@type": "MedicalClinic",
+        "name": data.name,
+        "description": data.description,
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": data.address.street,
+            "addressLocality": data.address.city,
+            "addressRegion": data.address.state,
+            "postalCode": data.address.zip,
+            "addressCountry": "US"
+        },
+        "telephone": data.phone,
+        "url": data.url,
+        "priceRange": data.priceRange || "$$$",
+        "image": data.image,
+        "openingHoursSpecification": (data.openingHours || []).map(h => ({
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "17:00"
+        })),
+        "medicalSpecialty": "Psychiatry",
+        "availableService": (data.services || []).map(s => ({
+            "@type": "MedicalProcedure",
+            "name": s
+        })),
+        ...(data.rating && {
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": data.rating,
+                "reviewCount": data.reviewCount || 50,
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        })
+    };
+}
+
+// Generate Physician Schema
+function getPhysicianSchema(data: PhysicianProps) {
+    return {
+        "@context": "https://schema.org",
+        "@type": "Physician",
+        "name": data.name,
+        "description": data.description,
+        "image": data.image,
+        "jobTitle": data.title,
+        "medicalSpecialty": data.medicalSpecialty.map(s => ({
+            "@type": "MedicalSpecialty",
+            "name": s
+        })),
+        "worksFor": {
+            "@type": "MedicalClinic",
+            "name": data.worksAt.name,
+            "address": data.worksAt.address
+        },
+        "alumniOf": data.alumniOf ? {
+            "@type": "EducationalOrganization",
+            "name": data.alumniOf
+        } : undefined
+    };
+}
+
+// Generate FAQ Schema
+function getFAQSchema(data: FAQProps) {
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": data.questions.map(q => ({
+            "@type": "Question",
+            "name": q.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": q.answer
+            }
+        }))
+    };
+}
+
+// Generate Breadcrumb Schema
+function getBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": items.map((item, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "name": item.name,
+            "item": item.url
+        }))
+    };
+}
+
+let schema: any = null;
+
+if (type === 'LocalBusiness' && localBusiness) {
+    schema = getLocalBusinessSchema(localBusiness);
+} else if (type === 'Physician' && physician) {
+    schema = getPhysicianSchema(physician);
+} else if (type === 'FAQ' && faq) {
+    schema = getFAQSchema(faq);
+} else if (type === 'Breadcrumb' && breadcrumbs) {
+    schema = getBreadcrumbSchema(breadcrumbs);
+}
+---
+
+{schema && (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

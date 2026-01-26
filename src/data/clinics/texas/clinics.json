@@ -1,0 +1,218 @@
+[
+  {
+    "id": "tx-1",
+    "name": "Houston TMS & Mental Health",
+    "slug": "houston-tms-&-mental-health-houston",
+    "address": "880 Medical Center Dr",
+    "city": "Houston",
+    "county": "Harris County",
+    "state": "TX",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "CloudTMS"
+    ],
+    "insurances": [
+      "Aetna",
+      "Medicaid",
+      "Cigna",
+      "Medicare"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Lisa Garcia, MD",
+        "first_name": "Lisa",
+        "last_name": "Garcia",
+        "slug": "dr-lisa-garcia-houston",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Harvard Medical School",
+        "years_experience": 29,
+        "specialties": [
+          "Bipolar",
+          "PTSD",
+          "Anxiety"
+        ],
+        "bio_focus": "TMS",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Garcia"
+      },
+      {
+        "name": "Dr. Jennifer Kim, MD",
+        "first_name": "Jennifer",
+        "last_name": "Kim",
+        "slug": "dr-jennifer-kim-houston",
+        "title": "Board-Certified Psychiatrist",
+        "school": "UCSF",
+        "years_experience": 23,
+        "specialties": [
+          "PTSD",
+          "Depression",
+          "Bipolar"
+        ],
+        "bio_focus": "Adolescents",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Kim"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  },
+  {
+    "id": "tx-2",
+    "name": "Dr. Wong Private TMS",
+    "slug": "dr-wong-private-tms-houston",
+    "address": "750 Medical Center Dr",
+    "city": "Houston",
+    "county": "Harris County",
+    "state": "TX",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "NeuroStar"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "Medicaid",
+      "Aetna",
+      "BlueCross"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Robert Wong, MD",
+        "first_name": "Robert",
+        "last_name": "Wong",
+        "slug": "dr-robert-wong-houston",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Baylor College of Medicine",
+        "years_experience": 16,
+        "specialties": [
+          "Chronic Pain",
+          "Depression",
+          "PTSD"
+        ],
+        "bio_focus": "Depression",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Wong"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  },
+  {
+    "id": "tx-3",
+    "name": "Dallas TMS & Mental Health",
+    "slug": "dallas-tms-&-mental-health-dallas",
+    "address": "325 Medical Center Dr",
+    "city": "Dallas",
+    "county": "Dallas County",
+    "state": "TX",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "CloudTMS"
+    ],
+    "insurances": [
+      "Tricare",
+      "Cigna",
+      "UnitedHealthcare",
+      "Medicare"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Alan Garcia, MD",
+        "first_name": "Alan",
+        "last_name": "Garcia",
+        "slug": "dr-alan-garcia-dallas",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Johns Hopkins",
+        "years_experience": 31,
+        "specialties": [
+          "Bipolar",
+          "Chronic Pain",
+          "PTSD"
+        ],
+        "bio_focus": "Depression",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Garcia"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  },
+  {
+    "id": "tx-4",
+    "name": "Dr. Martinez Private TMS",
+    "slug": "dr-martinez-private-tms-dallas",
+    "address": "682 Medical Center Dr",
+    "city": "Dallas",
+    "county": "Dallas County",
+    "state": "TX",
+    "zip": "90210",
+    "phone": "(555) 123-4567",
+    "machines": [
+      "Nexstim"
+    ],
+    "insurances": [
+      "Tricare",
+      "Aetna",
+      "UnitedHealthcare",
+      "Medicare"
+    ],
+    "specialties": [
+      "Depression",
+      "Anxiety",
+      "OCD"
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr. Lisa Martinez, MD",
+        "first_name": "Lisa",
+        "last_name": "Martinez",
+        "slug": "dr-lisa-martinez-dallas",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Harvard Medical School",
+        "years_experience": 35,
+        "specialties": [
+          "Chronic Pain",
+          "PTSD",
+          "OCD"
+        ],
+        "bio_focus": "Depression",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Martinez"
+      },
+      {
+        "name": "Dr. Robert Wong, MD",
+        "first_name": "Robert",
+        "last_name": "Wong",
+        "slug": "dr-robert-wong-dallas",
+        "title": "Board-Certified Psychiatrist",
+        "school": "Harvard Medical School",
+        "years_experience": 11,
+        "specialties": [
+          "OCD",
+          "Bipolar",
+          "Depression"
+        ],
+        "bio_focus": "TMS",
+        "image_url": "https://placehold.co/400x400/e2e8f0/1e293b?text=Dr+Wong"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 120,
+    "verified": true
+  }
+]

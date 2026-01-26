@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { 
+    CORE_PAGES, 
+    TECHNOLOGY_SLUGS, 
+    INSURANCE_SLUGS, 
+    TREATMENT_SLUGS, 
+    COMPARE_SLUGS,
+    PROVIDER_SLUGS,
+    DEMOGRAPHIC_SLUGS,
+    NEAR_ME_SLUGS
+} from '../utils/seo_slugs';
+import { getUniqueStates, STATE_NAMES, getStateSlug } from '../utils/dataHelpers';
+
+const uniqueStates = getUniqueStates().sort();
+
+const sections = [
+    { title: "Core Pages", items: CORE_PAGES, base: "" },
+    { title: "Technology", items: TECHNOLOGY_SLUGS, base: "/technology" },
+    { title: "Insurance Guides", items: INSURANCE_SLUGS, base: "/insurance" },
+    { title: "Conditions Treated", items: TREATMENT_SLUGS, base: "/treatments" },
+    { title: "Comparative Guides", items: COMPARE_SLUGS, base: "/compare" },
+    { title: "Provider Types", items: PROVIDER_SLUGS, base: "/providers" },
+    { title: "Demographics", items: DEMOGRAPHIC_SLUGS, base: "/demographic" },
+    { title: "Local Search", items: NEAR_ME_SLUGS, base: "/near-me" },
+];
+---
+
+<Layout title="Sitemap | TMS List">
+    <main class="container mx-auto px-4 py-12">
+        <h1 class="text-4xl font-bold mb-8">Sitemap</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {sections.map(section => (
+                <div>
+                     <h2 class="text-xl font-bold text-gray-900 border-b border-gray-200 pb-2 mb-4">{section.title}</h2>
+                     <ul class="space-y-2">
+                        {section.items.map(item => (
+                            <li>
+                                <a href={`${section.base}/${item.slug}`} class="text-gray-600 hover:text-primary transition-colors">
+                                    {item.title}
+                                </a>
+                            </li>
+                        ))}
+                     </ul>
+                </div>
+            ))}
+
+            <!-- States Column -->
+            <div class="md:col-span-2 lg:col-span-3">
+                 <h2 class="text-xl font-bold text-gray-900 border-b border-gray-200 pb-2 mb-4">Locations by State</h2>
+                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2">
+                    {uniqueStates.map(stateCode => (
+                        <a href={`/us/${getStateSlug(stateCode)}/`} class="text-gray-600 hover:text-primary transition-colors">
+                            {STATE_NAMES[stateCode]}
+                        </a>
+                    ))}
+                 </div>
+            </div>
+        </div>
+    </main>
+</Layout>

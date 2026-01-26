@@ -1,0 +1,263 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllClinics, STATE_NAMES } from '../../utils/clinicData';
+
+const clinics = getAllClinics();
+
+// Collect all doctors from all clinics with their clinic info
+const allDoctors = clinics.flatMap(clinic => 
+    (clinic.doctors_data || []).map(doctor => ({
+        ...doctor,
+        clinic: clinic,
+        city: clinic.address_obj?.city || clinic.city,
+        state: clinic.address_obj?.state || clinic.state,
+        stateName: STATE_NAMES[clinic.address_obj?.state || clinic.state] || clinic.state,
+        machines: clinic.machines || [],
+        insurances: clinic.insurance_accepted || []
+    }))
+);
+
+// Get unique values for filters
+const allStates = [...new Set(allDoctors.map(d => d.state))].sort();
+const allSpecialties = [...new Set(allDoctors.flatMap(d => d.specialties || []))].sort();
+const allMachines = [...new Set(allDoctors.flatMap(d => d.machines))].sort();
+
+const title = "Find a TMS Specialist | Board-Certified Psychiatrists Near You";
+const description = `Browse ${allDoctors.length}+ board-certified psychiatrists specializing in TMS therapy across ${allStates.length} states. Filter by location, specialty, and experience.`;
+---
+
+<Layout title={title}>
+    <main class="bg-gray-50 min-h-screen">
+        <!-- Hero -->
+        <section class="bg-gradient-to-br from-indigo-900 via-blue-900 to-slate-900 py-20">
+            <div class="container mx-auto px-6">
+                <nav class="flex text-sm text-blue-200 mb-8">
+                    <ol class="inline-flex items-center space-x-2">
+                        <li><a href="/" class="hover:text-white">Home</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li class="text-white font-medium">Find a Specialist</li>
+                    </ol>
+                </nav>
+                
+                <h1 class="text-4xl md:text-6xl font-black text-white mb-6">
+                    Find a <span class="text-cyan-400">TMS Specialist</span>
+                </h1>
+                <p class="text-xl text-blue-100 max-w-3xl mb-8">
+                    Browse {allDoctors.length}+ board-certified psychiatrists specializing in Transcranial Magnetic Stimulation across the United States.
+                </p>
+                
+                <!-- Stats -->
+                <div class="flex flex-wrap gap-6">
+                    <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20">
+                        <div class="text-3xl font-black text-white">{allDoctors.length}</div>
+                        <div class="text-sm text-blue-200">Specialists</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20">
+                        <div class="text-3xl font-black text-white">{allStates.length}</div>
+                        <div class="text-sm text-blue-200">States</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20">
+                        <div class="text-3xl font-black text-white">{clinics.length}</div>
+                        <div class="text-sm text-blue-200">Clinics</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters & Results -->
+        <section class="py-12">
+            <div class="container mx-auto px-6">
+                
+                <!-- Filter Bar -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-10" id="filter-bar">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <!-- State Filter -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">State</label>
+                            <select id="filter-state" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                <option value="">All States</option>
+                                {allStates.map(state => (
+                                    <option value={state}>{STATE_NAMES[state] || state}</option>
+                                ))}
+                            </select>
+                        </div>
+                        
+                        <!-- Specialty Filter -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Specialty</label>
+                            <select id="filter-specialty" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                <option value="">All Specialties</option>
+                                {allSpecialties.map(spec => (
+                                    <option value={spec}>{spec}</option>
+                                ))}
+                            </select>
+                        </div>
+                        
+                        <!-- Machine Filter -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">TMS Machine</label>
+                            <select id="filter-machine" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                <option value="">All Machines</option>
+                                {allMachines.map(machine => (
+                                    <option value={machine}>{machine}</option>
+                                ))}
+                            </select>
+                        </div>
+                        
+                        <!-- Experience Filter -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Experience</label>
+                            <select id="filter-experience" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                <option value="">All Experience</option>
+                                <option value="10">10+ Years</option>
+                                <option value="15">15+ Years</option>
+                                <option value="20">20+ Years</option>
+                                <option value="25">25+ Years</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 flex items-center justify-between">
+                        <div class="text-sm text-gray-500">
+                            Showing <span id="result-count" class="font-bold text-indigo-600">{allDoctors.length}</span> specialists
+                        </div>
+                        <button id="reset-filters" class="text-sm text-indigo-600 font-medium hover:underline">Reset Filters</button>
+                    </div>
+                </div>
+
+                <!-- Results Grid -->
+                <div id="specialists-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {allDoctors.slice(0, 50).map((doctor) => (
+                        <article 
+                            class="specialist-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all"
+                            data-state={doctor.state}
+                            data-specialties={JSON.stringify(doctor.specialties || [])}
+                            data-machines={JSON.stringify(doctor.machines)}
+                            data-experience={doctor.years_experience}
+                        >
+                            <div class="p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <img 
+                                        src={doctor.image_url || `https://placehold.co/100x100/e2e8f0/1e293b?text=${(doctor.first_name?.[0] || 'D')}${(doctor.last_name?.[0] || 'R')}`}
+                                        alt={doctor.name}
+                                        class="w-16 h-16 rounded-xl object-cover"
+                                    />
+                                    <div class="flex-1">
+                                        <h3 class="text-lg font-bold text-gray-900 hover:text-indigo-600 transition-colors">
+                                            <a href={`/specialist/${doctor.slug}`}>{doctor.name}</a>
+                                        </h3>
+                                        <p class="text-indigo-600 text-sm font-medium">{doctor.title}</p>
+                                        <p class="text-gray-500 text-sm">{doctor.city}, {doctor.stateName}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center gap-2 mb-3">
+                                    <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                                    <span class="text-sm text-gray-500">{doctor.years_experience}+ years</span>
+                                </div>
+                                
+                                <div class="flex flex-wrap gap-1.5 mb-4">
+                                    {(doctor.specialties || []).slice(0, 2).map((spec: string) => (
+                                        <span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-full text-xs font-medium">{spec}</span>
+                                    ))}
+                                </div>
+                                
+                                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                    <span class="text-xs text-gray-400">{doctor.clinic?.name}</span>
+                                    <a href={`/specialist/${doctor.slug}`} class="text-indigo-600 font-bold text-sm hover:text-indigo-700">
+                                        View →
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+
+                <!-- Load More -->
+                <div class="mt-12 text-center">
+                    <p class="text-gray-500 mb-4">Showing 50 of {allDoctors.length} specialists</p>
+                    <a href="/us/" class="inline-block px-8 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors">
+                        Browse by State
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Content -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Finding the Right TMS Specialist</h2>
+                <div class="prose prose-lg max-w-none text-gray-600">
+                    <p>
+                        Choosing the right psychiatrist for your TMS therapy is one of the most important decisions in your treatment journey.
+                        Our directory features {allDoctors.length}+ board-certified specialists across {allStates.length} states, each with verified credentials and experience in neuromodulation.
+                    </p>
+                    <h3>What to Look for in a TMS Psychiatrist</h3>
+                    <p>
+                        The ideal TMS specialist should have specific training in neuromodulation, experience with treatment-resistant depression, and familiarity with the latest protocols like SAINT and theta-burst stimulation.
+                        Look for physicians who are members of the Clinical TMS Society and have completed advanced training in interventional psychiatry.
+                    </p>
+                    <h3>Questions to Ask During Your Consultation</h3>
+                    <ul>
+                        <li>How many TMS patients have you treated?</li>
+                        <li>What success rates do you typically see?</li>
+                        <li>Which TMS device do you use and why?</li>
+                        <li>What is your approach to maintenance therapy?</li>
+                        <li>How do you handle patients who don't respond to standard protocols?</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.specialist-card');
+            const stateFilter = document.getElementById('filter-state') as HTMLSelectElement;
+            const specialtyFilter = document.getElementById('filter-specialty') as HTMLSelectElement;
+            const machineFilter = document.getElementById('filter-machine') as HTMLSelectElement;
+            const experienceFilter = document.getElementById('filter-experience') as HTMLSelectElement;
+            const resultCount = document.getElementById('result-count');
+            const resetBtn = document.getElementById('reset-filters');
+
+            function filterCards() {
+                const state = stateFilter?.value || '';
+                const specialty = specialtyFilter?.value || '';
+                const machine = machineFilter?.value || '';
+                const experience = parseInt(experienceFilter?.value || '0');
+
+                let count = 0;
+                cards.forEach((card: any) => {
+                    const cardState = card.dataset.state;
+                    const cardSpecialties = JSON.parse(card.dataset.specialties || '[]');
+                    const cardMachines = JSON.parse(card.dataset.machines || '[]');
+                    const cardExperience = parseInt(card.dataset.experience || '0');
+
+                    let show = true;
+                    if (state && cardState !== state) show = false;
+                    if (specialty && !cardSpecialties.includes(specialty)) show = false;
+                    if (machine && !cardMachines.includes(machine)) show = false;
+                    if (experience && cardExperience < experience) show = false;
+
+                    card.style.display = show ? 'block' : 'none';
+                    if (show) count++;
+                });
+
+                if (resultCount) resultCount.textContent = count.toString();
+            }
+
+            stateFilter?.addEventListener('change', filterCards);
+            specialtyFilter?.addEventListener('change', filterCards);
+            machineFilter?.addEventListener('change', filterCards);
+            experienceFilter?.addEventListener('change', filterCards);
+
+            resetBtn?.addEventListener('click', () => {
+                if (stateFilter) stateFilter.value = '';
+                if (specialtyFilter) specialtyFilter.value = '';
+                if (machineFilter) machineFilter.value = '';
+                if (experienceFilter) experienceFilter.value = '';
+                filterCards();
+            });
+        });
+    </script>
+</Layout>

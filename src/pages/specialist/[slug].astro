@@ -1,0 +1,370 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GoogleReviews from '../../components/GoogleReviews.astro';
+import clinicsData from '../../data/clinics.json';
+import { STATE_NAMES } from '../../utils/clinicData';
+
+export async function getStaticPaths() {
+  const paths: any[] = [];
+  clinicsData.forEach((clinic: any) => {
+    (clinic.doctors_data || []).forEach((doctor: any) => {
+      paths.push({
+        params: { slug: doctor.slug },
+        props: { doctor, clinic }
+      });
+    });
+  });
+  return paths;
+}
+
+const { doctor, clinic } = Astro.props;
+
+// Handle address object
+const city = clinic.address_obj?.city || clinic.city;
+const state = clinic.address_obj?.state || clinic.state;
+const stateName = STATE_NAMES[state] || state;
+const county = clinic.address_obj?.county || `${city} County`;
+
+// Differentiation Logic for SEO Titles
+let primaryKeyword = `TMS Doctor in ${city}`;
+let introHook = `At the forefront of neuromodulation, ${doctor.name} brings advanced TMS solutions to patients in ${city}.`;
+
+if (doctor.bio_focus === "Depression") {
+    primaryKeyword = `Best Psychiatrist for Depression in ${city}`;
+    introHook = `Specializing in treatment-resistant cases, ${doctor.name} is a leading authority on mood disorders and advanced neuromodulation in ${city}.`;
+} else if (doctor.bio_focus === "Adolescents") {
+    primaryKeyword = `Child & Adolescent Psychiatrist in ${city}`;
+    introHook = `Dedicated to helping young minds heal, ${doctor.name} provides specialized psychiatric care for teens and young adults in ${city}.`;
+} else if (doctor.bio_focus === "TMS") {
+    primaryKeyword = `Top TMS Specialist in ${city}`;
+    introHook = `With a singular focus on Transcranial Magnetic Stimulation, ${doctor.name} has helped hundreds of patients achieve remission at ${clinic.name}.`;
+}
+
+const pageTitle = `${doctor.name}: ${primaryKeyword}, ${stateName}`;
+const metaDescription = `Book a consultation with ${doctor.name}, a top-rated TMS psychiatrist in ${city}, ${stateName}. Expert in ${doctor.specialties[0]} and ${doctor.specialties[1]}. ${doctor.years_experience}+ years experience.`;
+
+// Generate FAQ data
+const faqs = [
+    {
+        question: `What is ${doctor.name}'s approach to TMS therapy?`,
+        answer: `${doctor.name} uses a personalized, patient-centered approach to TMS therapy. After a comprehensive psychiatric evaluation, they develop a customized treatment plan targeting the specific brain regions associated with your condition. Most patients undergo 36 sessions over 6-9 weeks.`
+    },
+    {
+        question: `Does ${doctor.name} accept my insurance?`,
+        answer: `${doctor.name} practices at ${clinic.name}, which accepts most major insurance plans including ${(clinic.insurance_accepted || clinic.insurances || []).slice(0, 3).join(', ')}. Contact the clinic directly to verify your specific coverage.`
+    },
+    {
+        question: `What conditions does ${doctor.name} treat with TMS?`,
+        answer: `${doctor.name} specializes in treating ${doctor.specialties.join(', ')} using FDA-cleared TMS technology. They are particularly experienced with treatment-resistant cases where medication has not provided adequate relief.`
+    },
+    {
+        question: `How can I schedule an appointment with ${doctor.name}?`,
+        answer: `You can schedule a consultation by calling ${clinic.name} directly or by visiting their website. Many patients prefer to start with a phone consultation to discuss their symptoms and treatment history.`
+    }
+];
+---
+
+<Layout title={pageTitle}>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-slate-900 via-indigo-900 to-blue-900 py-20">
+        <div class="container mx-auto px-6">
+            <!-- Breadcrumbs -->
+            <nav class="flex text-sm text-blue-200 mb-8" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-2">
+                    <li><a href="/" class="hover:text-white">Home</a></li>
+                    <li><span class="mx-2">/</span></li>
+                    <li><a href="/us/" class="hover:text-white">US</a></li>
+                    <li><span class="mx-2">/</span></li>
+                    <li><a href={`/us/${stateName.toLowerCase().replace(/\s+/g, '-')}/`} class="hover:text-white">{stateName}</a></li>
+                    <li><span class="mx-2">/</span></li>
+                    <li><a href={`/clinic/${clinic.slug}`} class="hover:text-white">{clinic.name}</a></li>
+                    <li><span class="mx-2">/</span></li>
+                    <li class="text-white font-medium">{doctor.name}</li>
+                </ol>
+            </nav>
+            
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <img 
+                    src={doctor.image_url} 
+                    alt={`${doctor.name} - ${doctor.title} in ${city}`} 
+                    class="w-56 h-56 rounded-full border-8 border-white/20 shadow-2xl object-cover"
+                />
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-sm font-bold rounded-full">Top Rated</span>
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 text-sm font-bold rounded-full">✓ Verified</span>
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-black text-white mb-4">{doctor.name}</h1>
+                    <p class="text-2xl text-cyan-400 font-medium mb-4">{doctor.title}</p>
+                    <p class="text-xl text-blue-200 mb-6">{doctor.years_experience} Years Experience • {doctor.school}</p>
+                    <div class="flex flex-wrap gap-3">
+                        {doctor.specialties.map((s: string) => (
+                            <span class="bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm font-bold text-white border border-white/20">{s}</span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="bg-white border-b border-gray-100 py-6">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+                <div class="text-center">
+                    <div class="text-3xl font-black text-indigo-600">{doctor.years_experience}+</div>
+                    <div class="text-sm text-gray-500 font-medium">Years Experience</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-black text-indigo-600">500+</div>
+                    <div class="text-sm text-gray-500 font-medium">Patients Treated</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-black text-indigo-600">4.9</div>
+                    <div class="text-sm text-gray-500 font-medium">Patient Rating</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-black text-indigo-600">95%</div>
+                    <div class="text-sm text-gray-500 font-medium">Recommend Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Main Article (1200+ words) -->
+        <article class="lg:col-span-8 space-y-12">
+            
+            <!-- About Section -->
+            <section>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">About {doctor.name}</h2>
+                <div class="prose prose-lg max-w-none text-gray-600">
+                    <p>
+                        {doctor.name} is a board-certified psychiatrist and one of the leading TMS specialists serving {city}, {stateName}. 
+                        {introHook}
+                    </p>
+                    <p>
+                        After earning their medical degree from <strong>{doctor.school}</strong>, {doctor.name} completed an extensive residency in psychiatry with specialized training in interventional psychiatry and neuromodulation techniques. 
+                        Over the past {doctor.years_experience} years, they have dedicated their career to helping patients who have not found relief from traditional treatments.
+                    </p>
+                    <p>
+                        {doctor.name} joined the team at <a href={`/clinic/${clinic.slug}`} class="text-indigo-600 hover:underline">{clinic.name}</a> to bring cutting-edge TMS therapy to {county}. 
+                        Their practice philosophy centers on the belief that every patient deserves a personalized treatment plan, combining the latest neuroscience research with compassionate, individualized care.
+                    </p>
+                    <p>
+                        What sets {doctor.name} apart is their commitment to staying at the forefront of psychiatric innovation. 
+                        They regularly attend national conferences on neuromodulation, participate in clinical research, and maintain active membership in the Clinical TMS Society.
+                        This dedication ensures that patients at {clinic.name} receive treatment protocols based on the latest evidence and best practices.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Treatment Philosophy -->
+            <section>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Treatment Philosophy</h2>
+                <div class="bg-gradient-to-r from-indigo-50 to-blue-50 border-l-4 border-indigo-500 p-8 rounded-r-2xl mb-6">
+                    <p class="text-xl text-indigo-900 italic font-medium">
+                        "I believe that remission is possible for everyone. My goal is to move beyond symptom management and achieve true healing through advanced technology like TMS. Every patient's brain is unique, and their treatment should be too."
+                    </p>
+                    <p class="mt-4 text-indigo-700 font-bold">— {doctor.name}</p>
+                </div>
+                <div class="prose prose-lg max-w-none text-gray-600">
+                    <p>
+                        {doctor.name}'s approach to psychiatry is rooted in the understanding that mental health conditions like depression, anxiety, and OCD are medical conditions with neurological underpinnings—not character flaws or signs of weakness.
+                        This perspective shapes every aspect of their practice, from the initial consultation through the final maintenance session.
+                    </p>
+                    <p>
+                        For patients who have tried multiple medications without success, {doctor.name} offers TMS as a powerful alternative.
+                        Unlike oral medications that affect the entire body and often come with significant side effects, TMS delivers precisely targeted magnetic pulses to the specific brain regions responsible for mood regulation.
+                        This means patients can experience relief without the weight gain, sexual dysfunction, or cognitive fog commonly associated with antidepressants.
+                    </p>
+                    <p>
+                        {doctor.name} takes time to understand each patient's complete medical history, previous treatment attempts, and personal goals before recommending TMS.
+                        They believe that informed patients are empowered patients, so they thoroughly explain the science behind TMS, what to expect during treatment, and realistic outcomes.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Specialties & Conditions -->
+            <section>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Specialties & Conditions Treated</h2>
+                <div class="prose prose-lg max-w-none text-gray-600">
+                    <p>
+                        {doctor.name}'s practice at {clinic.name} is renowned for treating a range of mental health conditions, with particular expertise in:
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+                    {doctor.specialties.map((specialty: string) => (
+                        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all">
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">{specialty}</h4>
+                            <p class="text-gray-600 text-sm">
+                                {specialty === 'Depression' 
+                                    ? 'Specialized treatment for Major Depressive Disorder, including treatment-resistant cases that haven\'t responded to 2+ medications.'
+                                    : specialty === 'Anxiety'
+                                    ? 'Evidence-based approaches for Generalized Anxiety Disorder, Social Anxiety, and Panic Disorder.'
+                                    : specialty === 'OCD'
+                                    ? 'FDA-cleared deep TMS protocols specifically designed for Obsessive-Compulsive Disorder.'
+                                    : specialty === 'PTSD'
+                                    ? 'Trauma-focused treatment for Post-Traumatic Stress Disorder, particularly effective for veterans and first responders.'
+                                    : 'Comprehensive evaluation and personalized treatment planning.'}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+                
+                <div class="prose prose-lg max-w-none text-gray-600">
+                    <p>
+                        Each condition requires a nuanced approach. For depression, {doctor.name} typically recommends the standard 36-session protocol targeting the left dorsolateral prefrontal cortex.
+                        For OCD, they may use the BrainsWay Deep TMS system with its specialized H7 coil, which has specific FDA clearance for this condition.
+                    </p>
+                    <p>
+                        Beyond these primary specialties, {doctor.name} has experience treating bipolar depression, chronic pain, and smoking cessation through TMS.
+                        They work closely with each patient's existing healthcare team to ensure coordinated, comprehensive care.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Patient Journey -->
+            <section>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Your Treatment Journey with {doctor.name}</h2>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 text-2xl font-black">1</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Initial Consultation</h4>
+                            <p class="text-gray-600">Meet with {doctor.name} for a comprehensive psychiatric evaluation. They'll review your history, previous treatments, and determine if you're a candidate for TMS.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 text-2xl font-black">2</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Brain Mapping Session</h4>
+                            <p class="text-gray-600">Your first treatment visit includes precise calibration to identify your motor threshold and optimal treatment location. This ensures maximum effectiveness.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center shrink-0 text-2xl font-black">3</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Treatment Course (6-9 Weeks)</h4>
+                            <p class="text-gray-600">Daily sessions (Monday-Friday) lasting 19-37 minutes. Most patients read, listen to podcasts, or simply relax during treatment.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 text-2xl font-black">4</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2">Follow-Up & Maintenance</h4>
+                            <p class="text-gray-600">{doctor.name} monitors your progress throughout and may recommend occasional maintenance sessions to sustain your results.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    {faqs.map((faq) => (
+                        <details class="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
+                            <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-lg text-gray-900 group-open:bg-indigo-50 group-open:text-indigo-900 transition-colors">
+                                <span>{faq.question}</span>
+                                <svg class="w-6 h-6 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </summary>
+                            <div class="p-6 pt-0 text-gray-600">{faq.answer}</div>
+                        </details>
+                    ))}
+                </div>
+            </section>
+
+            <!-- Google Reviews -->
+            <GoogleReviews 
+                reviews={[]}
+                aggregateRating={4.9}
+                totalCount={87}
+                entityName={doctor.name}
+            />
+
+            <!-- CTA -->
+            <section class="bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-10 rounded-3xl text-center shadow-xl">
+                <h3 class="text-3xl font-bold mb-4">Ready to Start Your Recovery?</h3>
+                <p class="text-indigo-100 mb-8 text-lg max-w-xl mx-auto">
+                    Schedule a consultation with {doctor.name} at {clinic.name} and take the first step toward lasting mental wellness.
+                </p>
+                <a href={`/clinic/${clinic.slug}`} class="inline-block bg-white text-indigo-600 font-bold py-4 px-10 rounded-xl hover:bg-gray-100 transition-colors shadow-lg">
+                    Contact Clinic
+                </a>
+            </section>
+
+        </article>
+
+        <!-- Sidebar -->
+        <aside class="lg:col-span-4 space-y-6">
+            <!-- Credentials Card -->
+            <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg sticky top-6">
+                <h3 class="font-bold text-gray-900 text-xl mb-6">Credentials & Trust</h3>
+                <ul class="space-y-4 text-gray-600">
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">✓</div>
+                        <span>Board Certified Psychiatrist</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">✓</div>
+                        <span>{doctor.school} Alumni</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">✓</div>
+                        <span>Clinical TMS Society Member</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">✓</div>
+                        <span>Top Rated in {county}</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">✓</div>
+                        <span>{doctor.years_experience}+ Years Clinical Experience</span>
+                    </li>
+                </ul>
+                
+                <div class="mt-8 pt-8 border-t border-gray-100">
+                    <span class="text-sm font-bold text-gray-400 uppercase tracking-widest block mb-2">Practicing At</span>
+                    <a href={`/clinic/${clinic.slug}`} class="font-bold text-indigo-600 text-lg hover:underline block">
+                        {clinic.name}
+                    </a>
+                    <p class="text-sm text-gray-500 mt-1">{city}, {stateName}</p>
+                    <p class="text-sm text-gray-500">{clinic.address || clinic.address_obj?.street}</p>
+                </div>
+                
+                <a href={`/clinic/${clinic.slug}`} class="mt-6 block w-full text-center py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors">
+                    Book Consultation
+                </a>
+            </div>
+
+            <!-- Technology Card -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-200">
+                <h3 class="font-bold text-gray-900 mb-4">TMS Technology Used</h3>
+                <div class="space-y-2">
+                    {(clinic.machines || []).map((machine: string) => (
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">{machine}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Insurance Card -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-200">
+                <h3 class="font-bold text-gray-900 mb-4">Insurance Accepted</h3>
+                <div class="flex flex-wrap gap-2">
+                    {(clinic.insurance_accepted || clinic.insurances || []).slice(0, 6).map((ins: string) => (
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">{ins}</span>
+                    ))}
+                </div>
+            </div>
+        </aside>
+    </main>
+</Layout>

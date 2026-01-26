@@ -1,0 +1,15 @@
+---
+import ContentPage from '../../layouts/ContentPage.astro';
+import { INSURANCE_SLUGS } from '../../utils/seo_slugs';
+
+export function getStaticPaths() {
+  return INSURANCE_SLUGS.map(({ slug, title }) => ({
+    params: { slug },
+    props: { title },
+  }));
+}
+
+const { title } = Astro.props;
+---
+
+<ContentPage title={title} subtitle="Comprehensive guide to insurance coverage, costs, and policies for TMS Therapy." />

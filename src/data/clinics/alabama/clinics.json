@@ -1,0 +1,476 @@
+[
+  {
+    "id": "al-capitalcity-1",
+    "name": "Capital City TMS & Wellness Center 1",
+    "slug": "capital-city-tms-&-wellness-center-1-capital-city",
+    "address": "7821 Main St, Ste 413",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "AL",
+    "zip": "50164",
+    "geo": {
+      "lat": 37.76985291599527,
+      "lng": -90.59509306862667
+    },
+    "phone": "(555) 378-8551",
+    "website": "https://example.com",
+    "machines": [
+      "Nexstim"
+    ],
+    "specialties": [
+      "Anxiety",
+      "PTSD",
+      "Bipolar",
+      "Depression",
+      "OCD"
+    ],
+    "insurances": [
+      "BlueCross",
+      "Tricare",
+      "Medicaid",
+      "Cigna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+1",
+    "rating": 4.7,
+    "review_count": 117,
+    "verified": false,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "al-capitalcity-2",
+    "name": "Capital City TMS & Wellness Center 2",
+    "slug": "capital-city-tms-&-wellness-center-2-capital-city",
+    "address": "845 Maple St, Ste 432",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "AL",
+    "zip": "46506",
+    "geo": {
+      "lat": 38.348867158882506,
+      "lng": -92.73308330063844
+    },
+    "phone": "(555) 251-5460",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay"
+    ],
+    "specialties": [
+      "PTSD",
+      "Depression",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "Medicaid",
+      "Tricare",
+      "UnitedHealthcare",
+      "Medicare",
+      "BlueCross",
+      "Cigna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+2",
+    "rating": 4.9,
+    "review_count": 448,
+    "verified": false,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "al-capitalcity-3",
+    "name": "Capital City TMS & Wellness Center 3",
+    "slug": "capital-city-tms-&-wellness-center-3-capital-city",
+    "address": "9683 Oak St, Ste 210",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "AL",
+    "zip": "57987",
+    "geo": {
+      "lat": 36.082628828141026,
+      "lng": -92.0479504955958
+    },
+    "phone": "(555) 132-9048",
+    "website": "https://example.com",
+    "machines": [
+      "NeuroStar",
+      "Nexstim"
+    ],
+    "specialties": [
+      "Depression",
+      "Bipolar",
+      "Anxiety",
+      "Chronic Pain",
+      "OCD"
+    ],
+    "insurances": [
+      "Medicare",
+      "UnitedHealthcare",
+      "BlueCross"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+3",
+    "rating": 4.3,
+    "review_count": 438,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "al-capitalcity-4",
+    "name": "Dr. David Smith Psychiatry",
+    "slug": "dr-david-smith-psychiatry-capital-city",
+    "address": "6533 Oak St, Ste 309",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "AL",
+    "zip": "97094",
+    "geo": {
+      "lat": 36.79107185301069,
+      "lng": -99.6234849389638
+    },
+    "phone": "(555) 495-1044",
+    "website": "https://example.com",
+    "machines": [
+      "Nexstim"
+    ],
+    "specialties": [
+      "Depression",
+      "Bipolar",
+      "Anxiety"
+    ],
+    "insurances": [
+      "Cigna",
+      "Medicaid",
+      "UnitedHealthcare",
+      "Tricare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+David+Smith+Psychiatry",
+    "rating": 4.7,
+    "review_count": 416,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Capital City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "al-capitalcity-5",
+    "name": "Capital City TMS & Wellness Center 5",
+    "slug": "capital-city-tms-&-wellness-center-5-capital-city",
+    "address": "6458 Maple St, Ste 153",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "AL",
+    "zip": "66252",
+    "geo": {
+      "lat": 30.659017278456794,
+      "lng": -99.0080923773069
+    },
+    "phone": "(555) 794-4814",
+    "website": "https://example.com",
+    "machines": [
+      "NeuroStar",
+      "BrainsWay"
+    ],
+    "specialties": [
+      "Chronic Pain",
+      "Bipolar",
+      "Depression",
+      "PTSD",
+      "OCD"
+    ],
+    "insurances": [
+      "Medicaid",
+      "BlueCross",
+      "UnitedHealthcare",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+5",
+    "rating": 4.2,
+    "review_count": 259,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "al-metrocity-6",
+    "name": "Dr. Sarah Lee Psychiatry",
+    "slug": "dr-sarah-lee-psychiatry-metro-city",
+    "address": "7333 Cedar St, Ste 381",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "AL",
+    "zip": "71437",
+    "geo": {
+      "lat": 39.423261233775705,
+      "lng": -98.78470486432418
+    },
+    "phone": "(555) 459-7449",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture",
+      "Magstim"
+    ],
+    "specialties": [
+      "Chronic Pain",
+      "Depression",
+      "OCD"
+    ],
+    "insurances": [
+      "Tricare",
+      "Cigna",
+      "UnitedHealthcare",
+      "Medicaid",
+      "BlueCross"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Sarah+Lee+Psychiatry",
+    "rating": 4.1,
+    "review_count": 297,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "al-metrocity-7",
+    "name": "Dr. Alan Smith Psychiatry",
+    "slug": "dr-alan-smith-psychiatry-metro-city",
+    "address": "670 Cedar St, Ste 315",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "AL",
+    "zip": "56884",
+    "geo": {
+      "lat": 37.17078243618713,
+      "lng": -91.9404432851041
+    },
+    "phone": "(555) 872-7987",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim"
+    ],
+    "specialties": [
+      "Anxiety",
+      "OCD",
+      "Bipolar",
+      "PTSD",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "Cigna",
+      "Tricare",
+      "Medicaid"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Alan+Smith+Psychiatry",
+    "rating": 4.1,
+    "review_count": 475,
+    "verified": false,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "al-metrocity-8",
+    "name": "Dr. Sarah Smith Psychiatry",
+    "slug": "dr-sarah-smith-psychiatry-metro-city",
+    "address": "6359 Cedar St, Ste 349",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "AL",
+    "zip": "24130",
+    "geo": {
+      "lat": 39.32094434416857,
+      "lng": -97.72384368108553
+    },
+    "phone": "(555) 571-6758",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture"
+    ],
+    "specialties": [
+      "OCD",
+      "Bipolar",
+      "Chronic Pain",
+      "PTSD"
+    ],
+    "insurances": [
+      "BlueCross",
+      "Medicaid",
+      "Aetna",
+      "UnitedHealthcare",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Sarah+Smith+Psychiatry",
+    "rating": 4.2,
+    "review_count": 448,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "al-metrocity-9",
+    "name": "Metro City TMS & Wellness Center 4",
+    "slug": "metro-city-tms-&-wellness-center-4-metro-city",
+    "address": "2729 Maple St, Ste 206",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "AL",
+    "zip": "71004",
+    "geo": {
+      "lat": 34.16915745511732,
+      "lng": -91.28107331486065
+    },
+    "phone": "(555) 307-8545",
+    "website": "https://example.com",
+    "machines": [
+      "Nexstim"
+    ],
+    "specialties": [
+      "Bipolar",
+      "Depression",
+      "Anxiety",
+      "PTSD",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "Medicare",
+      "Cigna",
+      "Aetna",
+      "Medicaid",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+4",
+    "rating": 4.6,
+    "review_count": 101,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "al-metrocity-10",
+    "name": "Metro City TMS & Wellness Center 5",
+    "slug": "metro-city-tms-&-wellness-center-5-metro-city",
+    "address": "8348 Cedar St, Ste 406",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "AL",
+    "zip": "87605",
+    "geo": {
+      "lat": 34.049457157776516,
+      "lng": -94.04661037905241
+    },
+    "phone": "(555) 295-2676",
+    "website": "https://example.com",
+    "machines": [
+      "Nexstim"
+    ],
+    "specialties": [
+      "Chronic Pain",
+      "Anxiety",
+      "OCD",
+      "Depression"
+    ],
+    "insurances": [
+      "Aetna",
+      "BlueCross",
+      "Medicaid",
+      "UnitedHealthcare",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+5",
+    "rating": 4.5,
+    "review_count": 381,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "al-metrocity-11",
+    "name": "Metro City TMS & Wellness Center 6",
+    "slug": "metro-city-tms-&-wellness-center-6-metro-city",
+    "address": "5672 Maple St, Ste 453",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "AL",
+    "zip": "61448",
+    "geo": {
+      "lat": 35.2464772649003,
+      "lng": -99.66633051528217
+    },
+    "phone": "(555) 310-1804",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim"
+    ],
+    "specialties": [
+      "Bipolar",
+      "Anxiety",
+      "OCD",
+      "PTSD",
+      "Depression"
+    ],
+    "insurances": [
+      "Aetna",
+      "Cigna",
+      "UnitedHealthcare",
+      "Medicare",
+      "Tricare",
+      "Medicaid"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+6",
+    "rating": 4.8,
+    "review_count": 262,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  }
+]

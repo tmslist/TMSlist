@@ -1,0 +1,15 @@
+---
+import ContentPage from '../../layouts/ContentPage.astro';
+import { PROTOCOL_SLUGS } from '../../utils/seo_slugs';
+
+export function getStaticPaths() {
+  return PROTOCOL_SLUGS.map(({ slug, title }) => ({
+    params: { slug },
+    props: { title },
+  }));
+}
+
+const { title } = Astro.props;
+---
+
+<ContentPage title={title} subtitle="Deep dive into specific TMS treatment protocols and methodologies." />

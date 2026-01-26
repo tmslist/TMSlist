@@ -1,0 +1,393 @@
+[
+  {
+    "id": "in-capitalcity-1",
+    "name": "Dr. David Lee Psychiatry",
+    "slug": "dr-david-lee-psychiatry-capital-city",
+    "address": "6324 Maple St, Ste 191",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "IN",
+    "zip": "96337",
+    "geo": {
+      "lat": 36.55955215020076,
+      "lng": -98.6962806934039
+    },
+    "phone": "(555) 121-4517",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay",
+      "Nexstim"
+    ],
+    "specialties": [
+      "Chronic Pain",
+      "Anxiety",
+      "OCD",
+      "PTSD"
+    ],
+    "insurances": [
+      "Medicaid",
+      "Aetna",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+David+Lee+Psychiatry",
+    "rating": 4.6,
+    "review_count": 274,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Capital City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "in-capitalcity-2",
+    "name": "Capital City TMS & Wellness Center 2",
+    "slug": "capital-city-tms-&-wellness-center-2-capital-city",
+    "address": "4949 Maple St, Ste 435",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "IN",
+    "zip": "83808",
+    "geo": {
+      "lat": 30.492246571733766,
+      "lng": -97.64631172324809
+    },
+    "phone": "(555) 586-3146",
+    "website": "https://example.com",
+    "machines": [
+      "NeuroStar",
+      "Magstim"
+    ],
+    "specialties": [
+      "Chronic Pain",
+      "Anxiety",
+      "Depression",
+      "Bipolar"
+    ],
+    "insurances": [
+      "Tricare",
+      "Medicaid",
+      "BlueCross",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+2",
+    "rating": 4.2,
+    "review_count": 102,
+    "verified": false,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "in-capitalcity-3",
+    "name": "Dr. David Lee Psychiatry",
+    "slug": "dr-david-lee-psychiatry-capital-city",
+    "address": "8498 Oak St, Ste 220",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "IN",
+    "zip": "71845",
+    "geo": {
+      "lat": 37.71917841748005,
+      "lng": -92.11781958772217
+    },
+    "phone": "(555) 415-8107",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim"
+    ],
+    "specialties": [
+      "Bipolar",
+      "Anxiety",
+      "OCD"
+    ],
+    "insurances": [
+      "Aetna",
+      "Medicaid",
+      "UnitedHealthcare",
+      "Cigna",
+      "Medicare",
+      "Tricare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+David+Lee+Psychiatry",
+    "rating": 4.4,
+    "review_count": 206,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Capital City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "in-capitalcity-4",
+    "name": "Dr. Jennifer Martinez Psychiatry",
+    "slug": "dr-jennifer-martinez-psychiatry-capital-city",
+    "address": "7219 Main St, Ste 185",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "IN",
+    "zip": "34416",
+    "geo": {
+      "lat": 31.51032343204497,
+      "lng": -95.04310976323586
+    },
+    "phone": "(555) 799-2250",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim",
+      "BrainsWay"
+    ],
+    "specialties": [
+      "PTSD",
+      "Bipolar",
+      "Depression",
+      "Anxiety"
+    ],
+    "insurances": [
+      "Medicaid",
+      "Tricare",
+      "UnitedHealthcare",
+      "Medicare",
+      "Cigna",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Jennifer+Martinez+Psychiatry",
+    "rating": 4.4,
+    "review_count": 198,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Capital City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "in-metrocity-5",
+    "name": "Dr. Sarah Johnson Psychiatry",
+    "slug": "dr-sarah-johnson-psychiatry-metro-city",
+    "address": "1037 Oak St, Ste 336",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "IN",
+    "zip": "95182",
+    "geo": {
+      "lat": 38.1792855896426,
+      "lng": -95.97957148191114
+    },
+    "phone": "(555) 965-5799",
+    "website": "https://example.com",
+    "machines": [
+      "Nexstim",
+      "MagVenture"
+    ],
+    "specialties": [
+      "Anxiety",
+      "OCD",
+      "Bipolar"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "Cigna",
+      "Tricare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Sarah+Johnson+Psychiatry",
+    "rating": 4.3,
+    "review_count": 117,
+    "verified": false,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "in-metrocity-6",
+    "name": "Dr. Michael Patel Psychiatry",
+    "slug": "dr-michael-patel-psychiatry-metro-city",
+    "address": "7523 Oak St, Ste 369",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "IN",
+    "zip": "31838",
+    "geo": {
+      "lat": 36.84446619142557,
+      "lng": -98.60907926107897
+    },
+    "phone": "(555) 856-2905",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay"
+    ],
+    "specialties": [
+      "Chronic Pain",
+      "Depression",
+      "OCD",
+      "PTSD"
+    ],
+    "insurances": [
+      "Medicare",
+      "Aetna",
+      "UnitedHealthcare",
+      "Cigna",
+      "BlueCross",
+      "Tricare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Michael+Patel+Psychiatry",
+    "rating": 4.7,
+    "review_count": 489,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "in-metrocity-7",
+    "name": "Dr. Alan Garcia Psychiatry",
+    "slug": "dr-alan-garcia-psychiatry-metro-city",
+    "address": "7366 Maple St, Ste 465",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "IN",
+    "zip": "60005",
+    "geo": {
+      "lat": 30.190283464184855,
+      "lng": -94.95250074998458
+    },
+    "phone": "(555) 266-3172",
+    "website": "https://example.com",
+    "machines": [
+      "Nexstim",
+      "Magstim"
+    ],
+    "specialties": [
+      "Depression",
+      "Chronic Pain",
+      "Anxiety",
+      "PTSD"
+    ],
+    "insurances": [
+      "Medicare",
+      "Medicaid",
+      "Tricare",
+      "Cigna",
+      "BlueCross",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Alan+Garcia+Psychiatry",
+    "rating": 4.5,
+    "review_count": 76,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "in-metrocity-8",
+    "name": "Metro City TMS & Wellness Center 4",
+    "slug": "metro-city-tms-&-wellness-center-4-metro-city",
+    "address": "1606 Oak St, Ste 226",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "IN",
+    "zip": "50949",
+    "geo": {
+      "lat": 36.60126332168756,
+      "lng": -99.79210414678029
+    },
+    "phone": "(555) 866-9160",
+    "website": "https://example.com",
+    "machines": [
+      "Magstim",
+      "MagVenture"
+    ],
+    "specialties": [
+      "OCD",
+      "Depression",
+      "Anxiety",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "BlueCross",
+      "Medicare",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+4",
+    "rating": 4.7,
+    "review_count": 402,
+    "verified": false,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "in-metrocity-9",
+    "name": "Metro City TMS & Wellness Center 5",
+    "slug": "metro-city-tms-&-wellness-center-5-metro-city",
+    "address": "5367 Maple St, Ste 309",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "IN",
+    "zip": "87226",
+    "geo": {
+      "lat": 34.621609006648505,
+      "lng": -96.44825570402948
+    },
+    "phone": "(555) 338-8646",
+    "website": "https://example.com",
+    "machines": [
+      "NeuroStar",
+      "MagVenture"
+    ],
+    "specialties": [
+      "Depression",
+      "Chronic Pain",
+      "PTSD",
+      "Bipolar",
+      "OCD"
+    ],
+    "insurances": [
+      "Tricare",
+      "Medicaid",
+      "Aetna",
+      "Medicare",
+      "UnitedHealthcare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=M",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Metro+City+TMS+&+Wellness+Center+5",
+    "rating": 4.2,
+    "review_count": 209,
+    "verified": false,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Metro County offering FDA-cleared TMS therapy for depression and OCD."
+  }
+]

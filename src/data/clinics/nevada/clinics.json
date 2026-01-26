@@ -1,0 +1,304 @@
+[
+  {
+    "id": "nv-capitalcity-1",
+    "name": "Capital City TMS & Wellness Center 1",
+    "slug": "capital-city-tms-&-wellness-center-1-capital-city",
+    "address": "4439 Oak St, Ste 468",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "NV",
+    "zip": "11673",
+    "geo": {
+      "lat": 31.36941201526473,
+      "lng": -90.09600707573178
+    },
+    "phone": "(555) 755-2787",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture"
+    ],
+    "specialties": [
+      "Anxiety",
+      "Depression",
+      "OCD",
+      "Bipolar",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "BlueCross",
+      "Tricare",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+1",
+    "rating": 4.2,
+    "review_count": 226,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "nv-capitalcity-2",
+    "name": "Capital City TMS & Wellness Center 2",
+    "slug": "capital-city-tms-&-wellness-center-2-capital-city",
+    "address": "4487 Oak St, Ste 279",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "NV",
+    "zip": "86061",
+    "geo": {
+      "lat": 34.74068247443623,
+      "lng": -95.28045899139536
+    },
+    "phone": "(555) 732-6567",
+    "website": "https://example.com",
+    "machines": [
+      "NeuroStar",
+      "Magstim"
+    ],
+    "specialties": [
+      "Anxiety",
+      "PTSD",
+      "Chronic Pain",
+      "Depression"
+    ],
+    "insurances": [
+      "Medicare",
+      "Aetna",
+      "BlueCross",
+      "Medicaid"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+2",
+    "rating": 4.0,
+    "review_count": 66,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "nv-capitalcity-3",
+    "name": "Capital City TMS & Wellness Center 3",
+    "slug": "capital-city-tms-&-wellness-center-3-capital-city",
+    "address": "7891 Maple St, Ste 304",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "NV",
+    "zip": "40177",
+    "geo": {
+      "lat": 39.45912729494306,
+      "lng": -91.25076490470569
+    },
+    "phone": "(555) 967-1304",
+    "website": "https://example.com",
+    "machines": [
+      "MagVenture",
+      "BrainsWay"
+    ],
+    "specialties": [
+      "Depression",
+      "OCD",
+      "Anxiety",
+      "Bipolar",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "Cigna",
+      "Tricare",
+      "Medicaid",
+      "Aetna",
+      "BlueCross"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+3",
+    "rating": 4.9,
+    "review_count": 215,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "nv-capitalcity-4",
+    "name": "Capital City TMS & Wellness Center 4",
+    "slug": "capital-city-tms-&-wellness-center-4-capital-city",
+    "address": "326 Oak St, Ste 179",
+    "city": "Capital City",
+    "county": "Main County",
+    "state": "NV",
+    "zip": "14432",
+    "geo": {
+      "lat": 38.87531187021783,
+      "lng": -96.25338890621761
+    },
+    "phone": "(555) 863-5452",
+    "website": "https://example.com",
+    "machines": [
+      "BrainsWay"
+    ],
+    "specialties": [
+      "PTSD",
+      "Depression",
+      "Bipolar"
+    ],
+    "insurances": [
+      "Aetna",
+      "Medicare",
+      "Cigna",
+      "Tricare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=C",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Capital+City+TMS+&+Wellness+Center+4",
+    "rating": 4.7,
+    "review_count": 496,
+    "verified": true,
+    "type": "Medical Clinic",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "Leading mental health clinic in Main County offering FDA-cleared TMS therapy for depression and OCD."
+  },
+  {
+    "id": "nv-metrocity-5",
+    "name": "Dr. Sarah Patel Psychiatry",
+    "slug": "dr-sarah-patel-psychiatry-metro-city",
+    "address": "5897 Main St, Ste 391",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "NV",
+    "zip": "26009",
+    "geo": {
+      "lat": 33.75049175055756,
+      "lng": -96.61143439437627
+    },
+    "phone": "(555) 276-4783",
+    "website": "https://example.com",
+    "machines": [
+      "Nexstim"
+    ],
+    "specialties": [
+      "Depression",
+      "PTSD",
+      "OCD",
+      "Chronic Pain",
+      "Bipolar"
+    ],
+    "insurances": [
+      "Aetna",
+      "Medicaid",
+      "Tricare",
+      "Medicare"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Sarah+Patel+Psychiatry",
+    "rating": 4.7,
+    "review_count": 100,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. Jane Doe",
+      "Dr. Emily Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "nv-metrocity-6",
+    "name": "Dr. Jennifer Lee Psychiatry",
+    "slug": "dr-jennifer-lee-psychiatry-metro-city",
+    "address": "6850 Oak St, Ste 304",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "NV",
+    "zip": "24879",
+    "geo": {
+      "lat": 35.71126970833156,
+      "lng": -96.02437119389741
+    },
+    "phone": "(555) 840-7572",
+    "website": "https://example.com",
+    "machines": [
+      "NeuroStar",
+      "MagVenture"
+    ],
+    "specialties": [
+      "OCD",
+      "Depression",
+      "Anxiety",
+      "Bipolar",
+      "Chronic Pain"
+    ],
+    "insurances": [
+      "Tricare",
+      "Medicaid",
+      "BlueCross",
+      "UnitedHealthcare",
+      "Aetna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Jennifer+Lee+Psychiatry",
+    "rating": 4.3,
+    "review_count": 99,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  },
+  {
+    "id": "nv-metrocity-7",
+    "name": "Dr. Alan Kim Psychiatry",
+    "slug": "dr-alan-kim-psychiatry-metro-city",
+    "address": "5179 Main St, Ste 304",
+    "city": "Metro City",
+    "county": "Metro County",
+    "state": "NV",
+    "zip": "31018",
+    "geo": {
+      "lat": 32.2087123804525,
+      "lng": -98.48348593738996
+    },
+    "phone": "(555) 609-3870",
+    "website": "https://example.com",
+    "machines": [
+      "CloudTMS",
+      "NeuroStar"
+    ],
+    "specialties": [
+      "OCD",
+      "Chronic Pain",
+      "Anxiety",
+      "Bipolar"
+    ],
+    "insurances": [
+      "UnitedHealthcare",
+      "Tricare",
+      "Medicaid",
+      "Cigna"
+    ],
+    "logo_url": "https://placehold.co/200x200/png?text=D",
+    "hero_image_url": "https://placehold.co/1200x600/e2e8f0/475569?text=Dr.+Alan+Kim+Psychiatry",
+    "rating": 4.6,
+    "review_count": 470,
+    "verified": true,
+    "type": "Private Practice",
+    "doctors": [
+      "Dr. John Doe",
+      "Dr. Robert Smith"
+    ],
+    "description": "A private psychiatric practice in Metro City, specializing in advanced neuromodulation and personalized mental health care."
+  }
+]
