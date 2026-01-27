@@ -8,6 +8,15 @@ import {
     getClinicReviewCount,
 } from "../../utils/dataHelpers";
 import type { Clinic } from "../../types/clinic";
+import {
+    TMS_DEVICE_CATEGORIES,
+    INSURANCE_CATEGORIES,
+    CONDITION_CATEGORIES,
+    ACCESSIBILITY_FILTERS,
+    AVAILABILITY_FILTERS,
+    PRICE_RANGE_OPTIONS,
+    PRICING_FILTERS,
+} from "../../utils/filterOptions";
 
 const clinics = getOperationalClinics();
 
@@ -172,118 +181,563 @@ const avgRating =
             </div>
         </section>
 
-        <!-- Clinics By State -->
-        <section class="py-12 md:py-20">
+        <!-- Filter Bar for Mobile -->
+        <div class="lg:hidden bg-white border-b sticky top-0 z-30 py-3 px-4">
+            <button
+                id="mobileFilterBtn"
+                class="w-full flex items-center justify-center gap-2 py-3 px-6 bg-indigo-600 text-white font-bold rounded-xl"
+            >
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+                    ></path></svg
+                >
+                Filters
+            </button>
+        </div>
+
+        <!-- Main Content with Sidebar -->
+        <section class="py-8 md:py-12">
             <div class="container mx-auto px-4 md:px-6">
-                {
-                    sortedStates.map(([stateCode, stateClinics]) => (
-                        <div class="mb-16">
-                            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                                <span class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">
-                                    {stateCode}
-                                </span>
-                                {stateNames[stateCode] || stateCode}
-                                <span class="text-sm font-normal text-gray-400 ml-2">
-                                    ({stateClinics.length}{" "}
-                                    {stateClinics.length === 1
-                                        ? "clinic"
-                                        : "clinics"}
-                                    )
-                                </span>
-                            </h2>
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Filter Sidebar -->
+                    <aside
+                        id="filterSidebar"
+                        class="hidden lg:block lg:w-80 shrink-0"
+                    >
+                        <div
+                            class="bg-white rounded-2xl border border-gray-200 shadow-sm sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto"
+                        >
+                            <div class="p-6 border-b border-gray-100">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-lg font-bold text-gray-900">
+                                        Filters
+                                    </h3>
+                                    <button
+                                        id="clearFilters"
+                                        class="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+                                        >Clear All</button
+                                    >
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">
+                                    Showing <span id="filteredCount"
+                                        >{clinics.length}</span
+                                    > clinics
+                                </p>
+                            </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {stateClinics.map((clinic) => (
-                                    <article class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all">
-                                        <div class="h-40 overflow-hidden">
-                                            <img
-                                                src={getClinicPhoto(clinic)}
-                                                alt={clinic.name}
-                                                class="w-full h-full object-cover"
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                        <div class="p-6">
-                                            <div class="flex items-center gap-2 mb-3">
-                                                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full">
-                                                    ✓ Verified
-                                                </span>
-                                                {getClinicRating(clinic) >
-                                                    0 && (
-                                                    <span class="flex items-center gap-1 text-sm">
-                                                        <span class="text-yellow-500">
-                                                            ★
-                                                        </span>
-                                                        <span class="font-bold text-gray-900">
-                                                            {getClinicRating(
-                                                                clinic,
-                                                            )}
-                                                        </span>
-                                                        <span class="text-gray-400">
-                                                            (
-                                                            {getClinicReviewCount(
-                                                                clinic,
-                                                            )}
-                                                            )
-                                                        </span>
-                                                    </span>
-                                                )}
-                                            </div>
-
-                                            <h3 class="text-lg font-bold text-gray-900 mb-1 line-clamp-2">
-                                                {clinic.name}
-                                            </h3>
-                                            <p class="text-gray-500 text-sm mb-3">
-                                                {clinic.city}, {clinic.state}
-                                            </p>
-
-                                            {clinic.phone && (
-                                                <p class="text-sm text-gray-600 mb-2">
-                                                    <span class="text-gray-400">
-                                                        📞
-                                                    </span>{" "}
-                                                    {clinic.phone}
+                            <!-- Insurance Section -->
+                            <div class="border-b border-gray-100">
+                                <button
+                                    class="filter-toggle w-full p-4 flex items-center justify-between text-left"
+                                    data-section="insurance"
+                                >
+                                    <span class="font-bold text-gray-900"
+                                        >Insurance</span
+                                    >
+                                    <svg
+                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        ><path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path></svg
+                                    >
+                                </button>
+                                <div
+                                    id="section-insurance"
+                                    class="hidden px-4 pb-4 space-y-4"
+                                >
+                                    {
+                                        Object.entries(
+                                            INSURANCE_CATEGORIES,
+                                        ).map(([key, category]) => (
+                                            <div>
+                                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                                                    {category.label}
                                                 </p>
-                                            )}
-
-                                            <div class="flex flex-wrap gap-1.5 mb-4">
-                                                {clinic.machines &&
-                                                    clinic.machines
-                                                        .slice(0, 2)
-                                                        .map((machine) => (
-                                                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded">
-                                                                {machine}
-                                                            </span>
+                                                <div class="space-y-1.5">
+                                                    {category.options
+                                                        .slice(0, 5)
+                                                        .map((opt) => (
+                                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                                    data-filter="insurance"
+                                                                    data-value={
+                                                                        opt.value
+                                                                    }
+                                                                />
+                                                                <span class="text-sm text-gray-700">
+                                                                    {opt.label}
+                                                                </span>
+                                                            </label>
                                                         ))}
+                                                </div>
                                             </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
 
-                                            {/* Accessibility data not available in Clinic type currently, hiding or replacing with insurance info if needed */}
-
-                                            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                                                {clinic.website && (
-                                                    <a
-                                                        href={clinic.website}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        class="text-sm text-gray-400 hover:text-indigo-600"
-                                                    >
-                                                        Website ↗
-                                                    </a>
-                                                )}
-                                                <a
-                                                    href={`/clinic/${clinic.slug}/`}
-                                                    class="text-indigo-600 font-bold text-sm hover:text-indigo-700"
-                                                >
-                                                    View Details →
-                                                </a>
+                            <!-- TMS Devices Section -->
+                            <div class="border-b border-gray-100">
+                                <button
+                                    class="filter-toggle w-full p-4 flex items-center justify-between text-left"
+                                    data-section="devices"
+                                >
+                                    <span class="font-bold text-gray-900"
+                                        >TMS Devices</span
+                                    >
+                                    <svg
+                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        ><path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path></svg
+                                    >
+                                </button>
+                                <div
+                                    id="section-devices"
+                                    class="hidden px-4 pb-4 space-y-4"
+                                >
+                                    {
+                                        Object.entries(
+                                            TMS_DEVICE_CATEGORIES,
+                                        ).map(([key, category]) => (
+                                            <div>
+                                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                                                    {category.label}
+                                                </p>
+                                                <div class="space-y-1.5">
+                                                    {category.options.map(
+                                                        (opt) => (
+                                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                                    data-filter="device"
+                                                                    data-value={
+                                                                        opt.value
+                                                                    }
+                                                                />
+                                                                <span class="text-sm text-gray-700">
+                                                                    {opt.label}
+                                                                </span>
+                                                            </label>
+                                                        ),
+                                                    )}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </article>
-                                ))}
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Conditions Section -->
+                            <div class="border-b border-gray-100">
+                                <button
+                                    class="filter-toggle w-full p-4 flex items-center justify-between text-left"
+                                    data-section="conditions"
+                                >
+                                    <span class="font-bold text-gray-900"
+                                        >Conditions Treated</span
+                                    >
+                                    <svg
+                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        ><path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path></svg
+                                    >
+                                </button>
+                                <div
+                                    id="section-conditions"
+                                    class="hidden px-4 pb-4 space-y-4"
+                                >
+                                    {
+                                        Object.entries(
+                                            CONDITION_CATEGORIES,
+                                        ).map(([key, category]) => (
+                                            <div>
+                                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                                                    {category.label}
+                                                </p>
+                                                <div class="space-y-1.5">
+                                                    {category.options.map(
+                                                        (opt) => (
+                                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                                    data-filter="condition"
+                                                                    data-value={
+                                                                        opt.value
+                                                                    }
+                                                                />
+                                                                <span class="text-sm text-gray-700">
+                                                                    {opt.label}
+                                                                </span>
+                                                            </label>
+                                                        ),
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Accessibility & Inclusivity Section -->
+                            <div class="border-b border-gray-100">
+                                <button
+                                    class="filter-toggle w-full p-4 flex items-center justify-between text-left"
+                                    data-section="accessibility"
+                                >
+                                    <span class="font-bold text-gray-900"
+                                        >Accessibility & Inclusivity</span
+                                    >
+                                    <svg
+                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        ><path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path></svg
+                                    >
+                                </button>
+                                <div
+                                    id="section-accessibility"
+                                    class="hidden px-4 pb-4 space-y-1.5"
+                                >
+                                    {
+                                        ACCESSIBILITY_FILTERS.map((filter) => (
+                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                <input
+                                                    type="checkbox"
+                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                    data-filter="accessibility"
+                                                    data-value={filter.key}
+                                                />
+                                                <span class="text-lg">
+                                                    {filter.icon}
+                                                </span>
+                                                <span class="text-sm text-gray-700">
+                                                    {filter.label}
+                                                </span>
+                                            </label>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Availability Section -->
+                            <div class="border-b border-gray-100">
+                                <button
+                                    class="filter-toggle w-full p-4 flex items-center justify-between text-left"
+                                    data-section="availability"
+                                >
+                                    <span class="font-bold text-gray-900"
+                                        >Availability</span
+                                    >
+                                    <svg
+                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        ><path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path></svg
+                                    >
+                                </button>
+                                <div
+                                    id="section-availability"
+                                    class="hidden px-4 pb-4 space-y-1.5"
+                                >
+                                    {
+                                        AVAILABILITY_FILTERS.map((filter) => (
+                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                <input
+                                                    type="checkbox"
+                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                    data-filter="availability"
+                                                    data-value={filter.key}
+                                                />
+                                                <span class="text-lg">
+                                                    {filter.icon}
+                                                </span>
+                                                <span class="text-sm text-gray-700">
+                                                    {filter.label}
+                                                </span>
+                                            </label>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Price Range Section -->
+                            <div class="border-b border-gray-100">
+                                <button
+                                    class="filter-toggle w-full p-4 flex items-center justify-between text-left"
+                                    data-section="pricing"
+                                >
+                                    <span class="font-bold text-gray-900"
+                                        >Pricing</span
+                                    >
+                                    <svg
+                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        ><path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path></svg
+                                    >
+                                </button>
+                                <div
+                                    id="section-pricing"
+                                    class="hidden px-4 pb-4 space-y-3"
+                                >
+                                    <p
+                                        class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2"
+                                    >
+                                        Price Range
+                                    </p>
+                                    {
+                                        PRICE_RANGE_OPTIONS.map((opt) => (
+                                            <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg border border-gray-100">
+                                                <input
+                                                    type="radio"
+                                                    name="priceRange"
+                                                    class="text-indigo-600 focus:ring-indigo-500"
+                                                    data-filter="price"
+                                                    data-value={opt.value}
+                                                />
+                                                <div>
+                                                    <span class="text-sm font-medium text-gray-900">
+                                                        {opt.label}
+                                                    </span>
+                                                    <p class="text-xs text-gray-500">
+                                                        {opt.description}
+                                                    </p>
+                                                </div>
+                                            </label>
+                                        ))
+                                    }
+                                    <p
+                                        class="text-xs font-bold text-gray-400 uppercase tracking-wider mt-4 mb-2"
+                                    >
+                                        Payment Options
+                                    </p>
+                                    {
+                                        PRICING_FILTERS.map((filter) => (
+                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                <input
+                                                    type="checkbox"
+                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                    data-filter="pricing"
+                                                    data-value={filter.key}
+                                                />
+                                                <span class="text-lg">
+                                                    {filter.icon}
+                                                </span>
+                                                <span class="text-sm text-gray-700">
+                                                    {filter.label}
+                                                </span>
+                                            </label>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- State Filter -->
+                            <div class="p-4">
+                                <label
+                                    class="block text-sm font-bold text-gray-900 mb-2"
+                                    >Filter by State</label
+                                >
+                                <select
+                                    id="stateFilter"
+                                    class="w-full rounded-xl border-gray-200 text-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                >
+                                    <option value="">All States</option>
+                                    {
+                                        sortedStates.map(([code, list]) => (
+                                            <option value={code}>
+                                                {stateNames[code] || code} (
+                                                {list.length})
+                                            </option>
+                                        ))
+                                    }
+                                </select>
                             </div>
                         </div>
-                    ))
-                }
+                    </aside>
+
+                    <!-- Clinics Grid -->
+                    <div class="flex-1" id="clinicsContainer">
+                        {
+                            sortedStates.map(([stateCode, stateClinics]) => (
+                                <div
+                                    class="mb-16 state-section"
+                                    data-state={stateCode}
+                                >
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                                        <span class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">
+                                            {stateCode}
+                                        </span>
+                                        {stateNames[stateCode] || stateCode}
+                                        <span class="text-sm font-normal text-gray-400 ml-2">
+                                            ({stateClinics.length}{" "}
+                                            {stateClinics.length === 1
+                                                ? "clinic"
+                                                : "clinics"}
+                                            )
+                                        </span>
+                                    </h2>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                        {stateClinics.map((clinic) => (
+                                            <article
+                                                class="clinic-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all"
+                                                data-machines={JSON.stringify(
+                                                    clinic.machines || [],
+                                                )}
+                                                data-insurances={JSON.stringify(
+                                                    clinic.insurances || [],
+                                                )}
+                                                data-specialties={JSON.stringify(
+                                                    clinic.specialties || [],
+                                                )}
+                                                data-state={clinic.state}
+                                            >
+                                                <div class="h-40 overflow-hidden">
+                                                    <img
+                                                        src={getClinicPhoto(
+                                                            clinic,
+                                                        )}
+                                                        alt={clinic.name}
+                                                        class="w-full h-full object-cover"
+                                                        loading="lazy"
+                                                    />
+                                                </div>
+                                                <div class="p-6">
+                                                    <div class="flex items-center gap-2 mb-3">
+                                                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full">
+                                                            ✓ Verified
+                                                        </span>
+                                                        {getClinicRating(
+                                                            clinic,
+                                                        ) > 0 && (
+                                                            <span class="flex items-center gap-1 text-sm">
+                                                                <span class="text-yellow-500">
+                                                                    ★
+                                                                </span>
+                                                                <span class="font-bold text-gray-900">
+                                                                    {getClinicRating(
+                                                                        clinic,
+                                                                    )}
+                                                                </span>
+                                                                <span class="text-gray-400">
+                                                                    (
+                                                                    {getClinicReviewCount(
+                                                                        clinic,
+                                                                    )}
+                                                                    )
+                                                                </span>
+                                                            </span>
+                                                        )}
+                                                    </div>
+
+                                                    <h3 class="text-lg font-bold text-gray-900 mb-1 line-clamp-2">
+                                                        {clinic.name}
+                                                    </h3>
+                                                    <p class="text-gray-500 text-sm mb-3">
+                                                        {clinic.city},{" "}
+                                                        {clinic.state}
+                                                    </p>
+
+                                                    {clinic.phone && (
+                                                        <p class="text-sm text-gray-600 mb-2">
+                                                            <span class="text-gray-400">
+                                                                📞
+                                                            </span>{" "}
+                                                            {clinic.phone}
+                                                        </p>
+                                                    )}
+
+                                                    <div class="flex flex-wrap gap-1.5 mb-4">
+                                                        {clinic.machines &&
+                                                            clinic.machines
+                                                                .slice(0, 2)
+                                                                .map(
+                                                                    (
+                                                                        machine,
+                                                                    ) => (
+                                                                        <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded">
+                                                                            {
+                                                                                machine
+                                                                            }
+                                                                        </span>
+                                                                    ),
+                                                                )}
+                                                    </div>
+
+                                                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                                        {clinic.website && (
+                                                            <a
+                                                                href={
+                                                                    clinic.website
+                                                                }
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                class="text-sm text-gray-400 hover:text-indigo-600"
+                                                            >
+                                                                Website ↗
+                                                            </a>
+                                                        )}
+                                                        <a
+                                                            href={`/clinic/${clinic.slug}/`}
+                                                            class="text-indigo-600 font-bold text-sm hover:text-indigo-700"
+                                                        >
+                                                            View Details →
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -295,11 +749,108 @@ const avgRating =
                     for accuracy. Ratings and review counts are real and not
                     fabricated. If you're a clinic owner and want to update your
                     listing, please <a
-                        href="/providers/services/get-listed"
-                        class="text-indigo-600 font-medium">contact us</a
+                        href="/add-listing/"
+                        class="text-indigo-600 font-medium"
+                        >add or update your listing</a
                     >.
                 </p>
             </div>
         </section>
     </main>
+
+    <!-- Filter JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Toggle filter sections
+            document.querySelectorAll(".filter-toggle").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const section = btn.getAttribute("data-section");
+                    const content = document.getElementById(
+                        `section-${section}`,
+                    );
+                    const arrow = btn.querySelector("svg");
+                    if (content) {
+                        content.classList.toggle("hidden");
+                        arrow?.classList.toggle("rotate-180");
+                    }
+                });
+            });
+
+            // Mobile filter toggle
+            const mobileBtn = document.getElementById("mobileFilterBtn");
+            const sidebar = document.getElementById("filterSidebar");
+            if (mobileBtn && sidebar) {
+                mobileBtn.addEventListener("click", () => {
+                    sidebar.classList.toggle("hidden");
+                    sidebar.classList.toggle("fixed");
+                    sidebar.classList.toggle("inset-0");
+                    sidebar.classList.toggle("z-50");
+                    sidebar.classList.toggle("bg-white");
+                    sidebar.classList.toggle("overflow-y-auto");
+                    sidebar.classList.toggle("p-4");
+                });
+            }
+
+            // State filter
+            const stateFilter = document.getElementById(
+                "stateFilter",
+            ) as HTMLSelectElement;
+            if (stateFilter) {
+                stateFilter.addEventListener("change", () => {
+                    const value = stateFilter.value;
+                    document
+                        .querySelectorAll(".state-section")
+                        .forEach((section) => {
+                            const sectionEl = section as HTMLElement;
+                            if (
+                                !value ||
+                                sectionEl.getAttribute("data-state") === value
+                            ) {
+                                sectionEl.style.display = "";
+                            } else {
+                                sectionEl.style.display = "none";
+                            }
+                        });
+                    updateCount();
+                });
+            }
+
+            // Clear filters
+            const clearBtn = document.getElementById("clearFilters");
+            if (clearBtn) {
+                clearBtn.addEventListener("click", () => {
+                    document
+                        .querySelectorAll(".filter-checkbox")
+                        .forEach((cb) => {
+                            (cb as HTMLInputElement).checked = false;
+                        });
+                    document
+                        .querySelectorAll('input[name="priceRange"]')
+                        .forEach((r) => {
+                            (r as HTMLInputElement).checked = false;
+                        });
+                    if (stateFilter) stateFilter.value = "";
+                    document
+                        .querySelectorAll(".clinic-card")
+                        .forEach((card) => {
+                            (card as HTMLElement).style.display = "";
+                        });
+                    document
+                        .querySelectorAll(".state-section")
+                        .forEach((section) => {
+                            (section as HTMLElement).style.display = "";
+                        });
+                    updateCount();
+                });
+            }
+
+            function updateCount() {
+                const visible = document.querySelectorAll(
+                    '.clinic-card:not([style*="display: none"])',
+                ).length;
+                const countEl = document.getElementById("filteredCount");
+                if (countEl) countEl.textContent = String(visible);
+            }
+        });
+    </script>
 </Layout>
