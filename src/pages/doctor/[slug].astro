@@ -56,11 +56,31 @@ const specialties = doctor.specialties || [];
 const bioFocus = doctor.bio_focus || "TMS Therapy";
 const imageUrl =
     doctor.image_url || "/images/tms_doctor_consult_1769446457625.png";
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    name: fullName,
+    image: imageUrl.startsWith("/")
+        ? `https://tmslist.com${imageUrl}`
+        : imageUrl,
+    medicalSpecialty: specialties,
+    description: `Board-certified TMS Specialist ${fullName} at ${clinic?.name}.`,
+    address: {
+        "@type": "PostalAddress",
+        streetAddress: clinic?.address,
+        addressLocality: clinic?.city,
+        addressRegion: clinic?.state,
+        postalCode: clinic?.zip,
+        addressCountry: "US",
+    },
+    telephone: clinic?.contact?.phone || clinic?.phone,
+});
 ---
 
 <Layout
     title={`${fullName} - TMS Specialist | TMS List`}
     description={`${fullName} is a ${title} specializing in TMS therapy at ${clinic?.name || "TMS Clinic"}. Book a consultation today.`}
+    schema={schema}
 >
     <Header />
 

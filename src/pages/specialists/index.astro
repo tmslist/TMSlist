@@ -142,9 +142,33 @@ const stateNames: Record<string, string> = {
 
 const title = `Find TMS Specialists | ${doctors.length} Verified Providers`;
 const description = `Browse ${doctors.length} verified TMS therapy specialists across ${Object.keys(stateGroups).length} states. Find experienced doctors specializing in depression, anxiety, OCD, and more.`;
+
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "TMS Specialists Directory",
+    description:
+        "Find board-certified TMS psychiatrists and specialists near you.",
+    url: "https://tmslist.com/specialists/",
+    mainEntity: {
+        "@type": "ItemList",
+        itemListElement: doctors.slice(0, 20).map((doc, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+                "@type": "Physician",
+                name: doc.fullName,
+                image: doc.imageUrl.startsWith("/")
+                    ? `https://tmslist.com${doc.imageUrl}`
+                    : doc.imageUrl,
+                url: `https://tmslist.com/doctor/${doc.slug}/`,
+            },
+        })),
+    },
+});
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schema={schema}>
     <main class="bg-gray-50 min-h-screen">
         <!-- Hero -->
         <section
@@ -481,12 +505,32 @@ const description = `Browse ${doctors.length} verified TMS therapy specialists a
                                             >
                                                 <div class="p-6">
                                                     <div class="flex items-start gap-4 mb-4">
-                                                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-white text-xl font-bold shrink-0">
-                                                            {doctor.firstName.charAt(
-                                                                0,
-                                                            )}
-                                                            {doctor.lastName.charAt(
-                                                                0,
+                                                        <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border border-gray-100 bg-gray-50">
+                                                            {doctor.imageUrl &&
+                                                            !doctor.imageUrl.includes(
+                                                                "placeholder",
+                                                            ) ? (
+                                                                <img
+                                                                    src={
+                                                                        doctor.imageUrl
+                                                                    }
+                                                                    alt={
+                                                                        doctor.fullName
+                                                                    }
+                                                                    class="w-full h-full object-cover"
+                                                                    loading="lazy"
+                                                                    width="64"
+                                                                    height="64"
+                                                                />
+                                                            ) : (
+                                                                <div class="w-full h-full bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-white text-xl font-bold">
+                                                                    {doctor.firstName.charAt(
+                                                                        0,
+                                                                    )}
+                                                                    {doctor.lastName.charAt(
+                                                                        0,
+                                                                    )}
+                                                                </div>
                                                             )}
                                                         </div>
                                                         <div class="flex-1 min-w-0">
