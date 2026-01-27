@@ -49,6 +49,11 @@ export async function getStaticPaths() {
     return paths;
 }
 
+import {
+    generateBreadcrumbSchema,
+    generateMedicalClinicListSchema,
+} from "../../../../../utils/schema";
+
 const { stateName, cityName, cityClinics, treatmentTitle, treatmentSlug } =
     Astro.props;
 const { state, city, treatment } = Astro.params;
@@ -60,9 +65,29 @@ const sortedClinics = [...cityClinics].sort(
 
 const title = `${treatmentTitle} in ${cityName}, ${stateName} | Top Rated Clinics`;
 const description = `Find top-rated TMS providers for ${treatmentTitle} in ${cityName}, ${stateName}. Verified patient reviews, insurance acceptance, and availability for ${treatmentTitle}.`;
+
+// Schema Generation
+const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "https://tmslist.com" },
+    { name: "U.S.", item: "https://tmslist.com/us/" },
+    { name: stateName, item: `https://tmslist.com/us/${state}/` },
+    { name: cityName, item: `https://tmslist.com/us/${state}/${city}/` },
+    {
+        name: treatmentTitle,
+        item: `https://tmslist.com/us/${state}/${city}/${treatment}/`,
+    },
+]);
+
+const listingSchema = generateMedicalClinicListSchema(
+    sortedClinics,
+    `${treatmentTitle} Clinics in ${cityName}, ${stateName}`,
+    description,
+);
+
+const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schema={combinedSchema}>
     <main class="container mx-auto px-4 py-8">
         <!-- Breadcrumbs -->
         <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">

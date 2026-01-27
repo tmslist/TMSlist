@@ -46,6 +46,11 @@ export async function getStaticPaths() {
   return paths;
 }
 
+import {
+  generateBreadcrumbSchema,
+  generateMedicalClinicListSchema,
+} from "../../utils/schema";
+
 const { stateName, cityName, cityClinics, treatmentTitle } = Astro.props;
 
 // Sort clinics
@@ -55,9 +60,24 @@ const sortedClinics = [...cityClinics].sort(
 
 const title = `${treatmentTitle} Near ${cityName} | Find Top Providers`;
 const description = `Looking for ${treatmentTitle} near ${cityName}, ${stateName}? Compare top-rated clinics nearby. Verified reviews and photos.`;
+
+// Schema
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Home", item: "https://tmslist.com" },
+  { name: "Near Me", item: "https://tmslist.com/near-me/" },
+  { name: `${treatmentTitle} near ${cityName}`, item: Astro.url.href },
+]);
+
+const listingSchema = generateMedicalClinicListSchema(
+  sortedClinics,
+  `${treatmentTitle} near ${cityName}, ${stateName}`,
+  description,
+);
+
+const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schema={combinedSchema}>
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto mb-12 text-center">
       <span
