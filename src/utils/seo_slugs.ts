@@ -79,12 +79,30 @@ export const TREATMENT_SLUGS = [
 ];
 
 export const COMPARE_SLUGS = [
-    { slug: 'tms-vs-ect', title: 'TMS vs ECT' },
+    // TMS vs Other Treatments
+    { slug: 'tms-vs-ect', title: 'TMS vs ECT (Electroconvulsive Therapy)' },
     { slug: 'tms-vs-ketamine', title: 'TMS vs Ketamine/Spravato' },
     { slug: 'tms-vs-antidepressants', title: 'TMS vs Antidepressants' },
-    { slug: 'tms-vs-cbt', title: 'TMS vs CBT' },
+    { slug: 'tms-vs-cbt', title: 'TMS vs CBT (Cognitive Behavioral Therapy)' },
+    { slug: 'tms-vs-psychotherapy', title: 'TMS vs Psychotherapy' },
+    { slug: 'tms-vs-vns', title: 'TMS vs VNS (Vagus Nerve Stimulation)' },
+    { slug: 'tms-vs-dbs', title: 'TMS vs DBS (Deep Brain Stimulation)' },
+    { slug: 'tms-vs-esketamine', title: 'TMS vs Esketamine (Spravato)' },
+    { slug: 'tms-vs-psilocybin', title: 'TMS vs Psilocybin Therapy' },
+    { slug: 'tms-vs-lithium', title: 'TMS vs Lithium' },
+    // TMS Device Comparisons
     { slug: 'neurostar-vs-brainsway', title: 'NeuroStar vs BrainsWay' },
     { slug: 'magventure-vs-neurostar', title: 'MagVenture vs NeuroStar' },
+    { slug: 'magventure-vs-brainsway', title: 'MagVenture vs BrainsWay' },
+    { slug: 'neurostar-vs-cloudtms', title: 'NeuroStar vs CloudTMS' },
+    { slug: 'brainsway-vs-cloudtms', title: 'BrainsWay vs CloudTMS' },
+    { slug: 'neurostar-vs-magstim', title: 'NeuroStar vs Magstim' },
+    { slug: 'brainsway-vs-magstim', title: 'BrainsWay vs Magstim' },
+    { slug: 'magventure-vs-magstim', title: 'MagVenture vs Magstim' },
+    { slug: 'neurostar-vs-nexstim', title: 'NeuroStar vs Nexstim' },
+    { slug: 'brainsway-vs-nexstim', title: 'BrainsWay vs Nexstim' },
+    { slug: 'neurostar-vs-apollo', title: 'NeuroStar vs Apollo TMS' },
+    { slug: 'deep-tms-vs-rtms', title: 'Deep TMS (H-Coil) vs rTMS (Figure-8)' },
 ];
 
 export const PROVIDER_SLUGS = [

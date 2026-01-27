@@ -1,6 +1,4 @@
 ---
-import ReviewForm from "./ReviewForm.astro";
-
 interface Review {
     author: string;
     rating: number;
@@ -86,25 +84,14 @@ const {
             </div>
         </div>
 
-        <!-- Write a Review Button -->
-        <div class="mb-8">
-            <button
-                id="toggle-review-form"
-                class="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
-            >
-                <span>✏️</span>
-                Write a Review
-            </button>
+        <!-- Reviews List (populated by JS) -->
+        <div id="reviews-list" class="space-y-6 mb-8">
+            <div class="text-center py-8 text-gray-400">
+                <p>No reviews yet. Be the first to share your experience!</p>
+            </div>
         </div>
 
-        <!-- Review Form (hidden by default) -->
-        <div id="review-form-container" class="hidden">
-            <ReviewForm
-                entityName={entityName}
-                entityType={entityType}
-                entitySlug={entitySlug}
-            />
-        </div>
+        <!-- Review submission temporarily disabled during cleanup -->
     </div>
 </section>
 

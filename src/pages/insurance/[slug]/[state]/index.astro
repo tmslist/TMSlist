@@ -1,0 +1,134 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+import ClinicCard from "../../../../components/ClinicCard.astro";
+import {
+    getUniqueStates,
+    getClinicsByState,
+    getStateSlug,
+    STATE_NAMES,
+} from "../../../../utils/dataHelpers";
+import { INSURANCE_SLUGS } from "../../../../utils/seo_slugs";
+import { calculateClinicScore } from "../../../../utils/ranking";
+
+export async function getStaticPaths() {
+    const paths = [];
+    const uniqueStates = getUniqueStates();
+
+    uniqueStates.forEach((stateCode) => {
+        const stateSlug = getStateSlug(stateCode);
+        const stateName = STATE_NAMES[stateCode] || stateCode;
+        const stateClinics = getClinicsByState(stateCode);
+
+        INSURANCE_SLUGS.forEach((insurance) => {
+            // Filter clinics in this state that accept this insurance
+            const relevantClinics = stateClinics.filter((c) =>
+                (c.insurance_accepted || c.insurances || []).some(
+                    (i) =>
+                        i
+                            .toLowerCase()
+                            .includes(insurance.title.toLowerCase()) ||
+                        i
+                            .toLowerCase()
+                            .includes(insurance.slug.replace("-", " ")),
+                ),
+            );
+
+            if (relevantClinics.length > 0) {
+                paths.push({
+                    params: {
+                        slug: insurance.slug,
+                        state: stateSlug,
+                    },
+                    props: {
+                        insuranceTitle: insurance.title,
+                        stateName,
+                        clinics: relevantClinics,
+                    },
+                });
+            }
+        });
+    });
+
+    return paths;
+}
+
+const { insuranceTitle, stateName, clinics } = Astro.props;
+const { slug, state } = Astro.params;
+
+// Sort by score
+const sortedClinics = [...clinics].sort(
+    (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
+);
+
+const title = `${insuranceTitle} TMS Therapy in ${stateName} | Covered Clinics`;
+const description = `Find TMS therapy clinics in ${stateName} that accept ${insuranceTitle}. Verified list of providers accepting your insurance.`;
+---
+
+<Layout title={title} description={description}>
+    <main class="container mx-auto px-4 py-8">
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="hover:text-gray-900">Home</a>
+                </li>
+                <li class="inline-flex items-center">
+                    <span class="mx-2">/</span>
+                    <a href="/insurance/" class="hover:text-gray-900"
+                        >Insurance</a
+                    >
+                </li>
+                <li class="inline-flex items-center">
+                    <span class="mx-2">/</span>
+                    <span class="text-gray-800 font-medium"
+                        >{insuranceTitle}</span
+                    >
+                </li>
+            </ol>
+        </nav>
+
+        <div class="max-w-4xl mx-auto mb-12 text-center">
+            <h1 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+                {insuranceTitle} TMS Clinics in {stateName}
+            </h1>
+            <p class="text-lg text-gray-600">
+                There are {sortedClinics.length} verified TMS providers in {
+                    stateName
+                } that accept <strong>{insuranceTitle}</strong>.
+            </p>
+        </div>
+
+        <!-- Clinic Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+                sortedClinics.map((clinic) => (
+                    <div class="clinic-item">
+                        <ClinicCard clinic={clinic} />
+                    </div>
+                ))
+            }
+        </div>
+
+        <section class="mt-20 max-w-3xl mx-auto prose prose-lg prose-indigo">
+            <h2>Using {insuranceTitle} for TMS Therapy</h2>
+            <p>
+                Many insurance plans, including {insuranceTitle}, now cover
+                Transcranial Magnetic Stimulation (TMS) for Major Depressive
+                Disorder when other treatments have failed.
+            </p>
+            <h3>Typical Coverage Requirements</h3>
+            <ul>
+                <li>Diagnosis of Major Depressive Disorder (MDD)</li>
+                <li>
+                    History of resistance to antidepressant medications (usually
+                    2-4 attempts)
+                </li>
+                <li>History of psychotherapy</li>
+            </ul>
+            <p>
+                Always verify your specific coverage benefits with {
+                    insuranceTitle
+                } and the clinic's billing department before starting treatment.
+            </p>
+        </section>
+    </main>
+</Layout>

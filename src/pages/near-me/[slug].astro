@@ -1,15 +1,105 @@
 ---
-import ContentPage from '../../layouts/ContentPage.astro';
-import { NEAR_ME_SLUGS } from '../../utils/seo_slugs';
+import Layout from "../../layouts/Layout.astro";
+import ClinicCard from "../../components/ClinicCard.astro";
+import {
+  getUniqueStates,
+  getClinicsByState,
+  getClinicsByCity,
+  getStateSlug,
+  STATE_NAMES,
+} from "../../utils/dataHelpers";
+import { TREATMENT_SLUGS } from "../../utils/seo_slugs";
+import { calculateClinicScore } from "../../utils/ranking";
 
-export function getStaticPaths() {
-  return NEAR_ME_SLUGS.map(({ slug, title }) => ({
-    params: { slug },
-    props: { title },
-  }));
+export async function getStaticPaths() {
+  const paths = [];
+  const uniqueStates = getUniqueStates();
+
+  uniqueStates.forEach((stateCode) => {
+    const stateClinics = getClinicsByState(stateCode);
+    const uniqueCities = [
+      ...new Set(stateClinics.map((c) => c.city).filter(Boolean)),
+    ];
+
+    uniqueCities.forEach((cityName) => {
+      const citySlug = cityName.toLowerCase().replace(/\s+/g, "-");
+      const cityClinics = getClinicsByCity(stateCode, cityName);
+
+      TREATMENT_SLUGS.forEach((treatment) => {
+        // e.g. /near-me/depression-tms-near-san-diego/
+        const urlSlug = `${treatment.slug.replace("tms-for-", "")}-tms-near-${citySlug}`;
+
+        paths.push({
+          params: { slug: urlSlug },
+          props: {
+            stateName: STATE_NAMES[stateCode],
+            cityName,
+            cityClinics,
+            treatmentTitle: treatment.title,
+            treatmentSlug: treatment.slug,
+          },
+        });
+      });
+    });
+  });
+
+  return paths;
 }
 
-const { title } = Astro.props;
+const { stateName, cityName, cityClinics, treatmentTitle } = Astro.props;
+
+// Sort clinics
+const sortedClinics = [...cityClinics].sort(
+  (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
+);
+
+const title = `${treatmentTitle} Near ${cityName} | Find Top Providers`;
+const description = `Looking for ${treatmentTitle} near ${cityName}, ${stateName}? Compare top-rated clinics nearby. Verified reviews and photos.`;
 ---
 
-<ContentPage title={title} subtitle="Local directory search for specialized TMS availability." />
+<Layout title={title} description={description}>
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto mb-12 text-center">
+      <span
+        class="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-700 rounded-full text-sm font-bold uppercase tracking-wider mb-4"
+      >
+        Local Care
+      </span>
+      <h1 class="text-3xl md:text-5xl font-black text-gray-900 mb-6">
+        {treatmentTitle} near {cityName}
+      </h1>
+      <p class="text-xl text-gray-600">
+        We found {sortedClinics.length} verified TMS centers serving the <strong
+          >{cityName}</strong
+        > area.
+      </p>
+    </div>
+
+    <!-- Clinic Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        sortedClinics.map((clinic) => (
+          <div class="clinic-item">
+            <ClinicCard clinic={clinic} />
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      sortedClinics.length === 0 && (
+        <div class="text-center py-12 bg-gray-50 rounded-xl border border-gray-200 mt-8">
+          <p class="text-gray-500 mb-4">
+            No clinics found specifically using this location filter.
+          </p>
+          <a
+            href="/us/"
+            class="inline-block px-6 py-2 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors"
+          >
+            Browse National Directory
+          </a>
+        </div>
+      )
+    }
+  </main>
+</Layout>

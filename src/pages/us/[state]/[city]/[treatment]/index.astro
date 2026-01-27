@@ -1,0 +1,175 @@
+---
+import Layout from "../../../../../layouts/Layout.astro";
+import ClinicCard from "../../../../../components/ClinicCard.astro";
+import {
+    getUniqueStates,
+    getClinicsByState,
+    getClinicsByCity,
+    getStateSlug,
+    STATE_NAMES,
+} from "../../../../../utils/dataHelpers";
+import { TREATMENT_SLUGS } from "../../../../../utils/seo_slugs";
+import { calculateClinicScore } from "../../../../../utils/ranking";
+
+export async function getStaticPaths() {
+    const paths = [];
+    const uniqueStates = getUniqueStates();
+
+    uniqueStates.forEach((stateCode) => {
+        const stateClinics = getClinicsByState(stateCode);
+        const uniqueCities = [
+            ...new Set(stateClinics.map((c) => c.city).filter(Boolean)),
+        ];
+        const stateSlug = getStateSlug(stateCode);
+        const stateName = STATE_NAMES[stateCode] || stateCode;
+
+        uniqueCities.forEach((cityName) => {
+            const citySlug = cityName.toLowerCase().replace(/\s+/g, "-");
+            const cityClinics = getClinicsByCity(stateCode, cityName);
+
+            TREATMENT_SLUGS.forEach((treatment) => {
+                paths.push({
+                    params: {
+                        state: stateSlug,
+                        city: citySlug,
+                        treatment: treatment.slug,
+                    },
+                    props: {
+                        stateName,
+                        cityName,
+                        cityClinics,
+                        treatmentTitle: treatment.title,
+                        treatmentSlug: treatment.slug,
+                    },
+                });
+            });
+        });
+    });
+
+    return paths;
+}
+
+const { stateName, cityName, cityClinics, treatmentTitle, treatmentSlug } =
+    Astro.props;
+const { state, city, treatment } = Astro.params;
+
+// Sort clinics by score
+const sortedClinics = [...cityClinics].sort(
+    (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
+);
+
+const title = `${treatmentTitle} in ${cityName}, ${stateName} | Top Rated Clinics`;
+const description = `Find top-rated TMS providers for ${treatmentTitle} in ${cityName}, ${stateName}. Verified patient reviews, insurance acceptance, and availability for ${treatmentTitle}.`;
+---
+
+<Layout title={title} description={description}>
+    <main class="container mx-auto px-4 py-8">
+        <!-- Breadcrumbs -->
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="hover:text-gray-900">Home</a>
+                </li>
+                <li class="inline-flex items-center">
+                    <span class="mx-2">/</span>
+                    <a href="/us/" class="hover:text-gray-900">U.S.</a>
+                </li>
+                <li class="inline-flex items-center">
+                    <span class="mx-2">/</span>
+                    <a href={`/us/${state}/`} class="hover:text-gray-900"
+                        >{stateName}</a
+                    >
+                </li>
+                <li class="inline-flex items-center">
+                    <span class="mx-2">/</span>
+                    <a
+                        href={`/us/${state}/${city}/`}
+                        class="hover:text-gray-900">{cityName}</a
+                    >
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <span class="mx-2">/</span>
+                        <span class="text-gray-800 font-medium line-clamp-1"
+                            >{treatmentTitle}</span
+                        >
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <div class="max-w-4xl mx-auto mb-12 text-center">
+            <h1 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+                {treatmentTitle} in {cityName}, {stateName}
+            </h1>
+            <p class="text-lg text-gray-600">
+                Compare {sortedClinics.length} verified clinics offering Transcranial
+                Magnetic Stimulation (TMS) for {
+                    treatmentTitle.replace("TMS for ", "")
+                }.
+            </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Clinic Grid -->
+            <div class="w-full">
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                    {
+                        sortedClinics.map((clinic) => (
+                            <div class="clinic-item">
+                                <ClinicCard clinic={clinic} />
+                            </div>
+                        ))
+                    }
+                </div>
+
+                {
+                    sortedClinics.length === 0 && (
+                        <div class="text-center py-12 bg-gray-50 rounded-xl border border-gray-200">
+                            <p class="text-gray-500 mb-4">
+                                No clinics found specifically for this criteria
+                                in {cityName}.
+                            </p>
+                            <a
+                                href={`/us/${state}/`}
+                                class="inline-block px-6 py-2 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors"
+                            >
+                                View All {stateName} Clinics
+                            </a>
+                        </div>
+                    )
+                }
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <section class="mt-20 max-w-3xl mx-auto prose prose-lg prose-indigo">
+            <h2>About {treatmentTitle.replace("TMS for ", "")} Treatment</h2>
+            <p>
+                Transcranial Magnetic Stimulation (TMS) is an FDA-cleared,
+                non-invasive treatment for various mental health conditions,
+                including {treatmentTitle.replace("TMS for ", "")}. It is often
+                used when traditional medications have not provided relief.
+            </p>
+            <h3>Why Choose TMS?</h3>
+            <ul>
+                <li>Non-invasive outpatient procedure</li>
+                <li>
+                    No systemic side effects (like weight gain or sexual
+                    dysfunction)
+                </li>
+                <li>High efficacy rates for treatment-resistant cases</li>
+                <li>Covered by most major insurance providers</li>
+            </ul>
+            <p>
+                If you live in {cityName} and are struggling with {
+                    treatmentTitle.replace("TMS for ", "")
+                }, consult with one of the verified specialists listed above to
+                allow them to evaluate if TMS is right for you.
+            </p>
+        </section>
+    </main>
+</Layout>
