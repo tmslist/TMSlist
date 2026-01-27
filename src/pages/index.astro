@@ -7,6 +7,7 @@ import {
     getClinicRating,
     getClinicReviewCount,
     getTotalDoctorCount,
+    getStateSlug,
 } from "../utils/dataHelpers";
 import type { Clinic } from "../types/clinic";
 import {
@@ -53,7 +54,7 @@ const locationMap = Object.entries(stateGroups)
         return {
             code: stateCode,
             name: STATE_NAMES[stateCode] || stateCode,
-            slug: stateCode.toLowerCase(),
+            slug: getStateSlug(stateCode),
             cities: cities,
             clinicCount: stateClinics.length,
         };

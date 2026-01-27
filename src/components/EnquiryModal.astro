@@ -1,0 +1,242 @@
+---
+
+---
+
+<!-- Floating Request Button -->
+<button
+    id="floating-cta-btn"
+    class="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-6 py-4 bg-indigo-600 text-white font-bold rounded-full shadow-2xl hover:bg-indigo-700 hover:scale-105 transition-all animate-bounce-subtle"
+    aria-label="Get Help"
+>
+    <span class="text-xl">💬</span>
+    <span class="hidden sm:inline">Talk to a Specialist</span>
+</button>
+
+<!-- Modal Overlay -->
+<div
+    id="enquiry-modal"
+    class="fixed inset-0 z-[100] hidden"
+    aria-labelledby="modal-title"
+    role="dialog"
+    aria-modal="true"
+>
+    <!-- Backdrop -->
+    <div
+        class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity opacity-0"
+        id="modal-backdrop"
+    >
+    </div>
+
+    <!-- Modal Panel -->
+    <div
+        class="flex items-center justify-center min-h-screen p-4 text-center sm:p-0"
+    >
+        <div
+            class="relative bg-white rounded-2xl shadow-2xl text-left overflow-hidden transform transition-all sm:my-8 sm:max-w-lg w-full scale-95 opacity-0"
+            id="modal-panel"
+        >
+            <!-- Header -->
+            <div
+                class="bg-indigo-600 px-6 py-4 flex justify-between items-center"
+            >
+                <h3 class="text-lg font-bold text-white" id="modal-title">
+                    Get Free TMS Guidance
+                </h3>
+                <button
+                    type="button"
+                    class="text-indigo-200 hover:text-white transition-colors"
+                    id="close-modal-btn"
+                >
+                    <svg
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Form Content -->
+            <div class="px-6 py-6">
+                <p class="text-sm text-gray-500 mb-6">
+                    Tell us about your situation. We'll connect you with a
+                    verified TMS specialist near you or answer your questions.
+                </p>
+
+                <form
+                    class="space-y-4"
+                    onsubmit="event.preventDefault(); alert('Thank you! Your enquiry has been received. A specialist will contact you shortly.'); document.getElementById('close-modal-btn').click();"
+                >
+                    <div>
+                        <label
+                            for="name"
+                            class="block text-sm font-medium text-gray-700"
+                            >Full Name</label
+                        >
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            required
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 border"
+                            placeholder="John Doe"
+                        />
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label
+                                for="email"
+                                class="block text-sm font-medium text-gray-700"
+                                >Email</label
+                            >
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                required
+                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 border"
+                                placeholder="john@example.com"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                for="phone"
+                                class="block text-sm font-medium text-gray-700"
+                                >Phone</label
+                            >
+                            <input
+                                type="tel"
+                                name="phone"
+                                id="phone"
+                                required
+                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 border"
+                                placeholder="(555) 123-4567"
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label
+                            for="role"
+                            class="block text-sm font-medium text-gray-700"
+                            >I am a...</label
+                        >
+                        <select
+                            id="role"
+                            name="role"
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 border"
+                        >
+                            <option>Patient looking for treatment</option>
+                            <option>Caregiver / Family Member</option>
+                            <option>Referring Doctor</option>
+                            <option>Clinic Owner</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label
+                            for="message"
+                            class="block text-sm font-medium text-gray-700"
+                            >How can we help?</label
+                        >
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="3"
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 border"
+                            placeholder="I'm interested in TMS for depression..."
+                        ></textarea>
+                    </div>
+
+                    <div class="pt-2">
+                        <button
+                            type="submit"
+                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
+                        >
+                            Request Free Consultation
+                        </button>
+                        <p class="text-xs text-center text-gray-400 mt-3">
+                            Your information is secure and HIPAA compliant.
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Logic to handle modal open/close
+    const modal = document.getElementById("enquiry-modal");
+    const backdrop = document.getElementById("modal-backdrop");
+    const panel = document.getElementById("modal-panel");
+    const openBtn = document.getElementById("floating-cta-btn");
+    const closeBtn = document.getElementById("close-modal-btn");
+
+    // Function to open modal
+    function openModal() {
+        modal?.classList.remove("hidden");
+        // Small delay to allow display:block to apply before opacity transition
+        setTimeout(() => {
+            backdrop?.classList.remove("opacity-0");
+            panel?.classList.remove("opacity-0", "scale-95");
+            panel?.classList.add("opacity-100", "scale-100");
+        }, 10);
+        document.body.style.overflow = "hidden";
+    }
+
+    // Function to close modal
+    function closeModal() {
+        backdrop?.classList.add("opacity-0");
+        panel?.classList.remove("opacity-100", "scale-100");
+        panel?.classList.add("opacity-0", "scale-95");
+
+        setTimeout(() => {
+            modal?.classList.add("hidden");
+            document.body.style.overflow = "";
+        }, 300);
+    }
+
+    openBtn?.addEventListener("click", openModal);
+    closeBtn?.addEventListener("click", closeModal);
+
+    // Close on click outside
+    modal?.addEventListener("click", (e) => {
+        if (e.target === modal || e.target === backdrop) {
+            closeModal();
+        }
+    });
+
+    // Listen for global custom event 'open-enquiry-modal'
+    document.addEventListener("open-enquiry-modal", openModal);
+
+    // Auto-bind to any element with data-trigger-enquiry attribute
+    document.querySelectorAll("[data-trigger-enquiry]").forEach((el) => {
+        el.addEventListener("click", (e) => {
+            e.preventDefault();
+            openModal();
+        });
+    });
+</script>
+
+<style>
+    @keyframes bounce-subtle {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+    .animate-bounce-subtle {
+        animation: bounce-subtle 3s infinite;
+    }
+</style>
