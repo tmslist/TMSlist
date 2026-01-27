@@ -12,7 +12,16 @@ import { TREATMENT_SLUGS } from "../../utils/seo_slugs";
 import { calculateClinicScore } from "../../utils/ranking";
 
 export async function getStaticPaths() {
-  const paths = [];
+  const paths: {
+    params: { slug: string };
+    props: {
+      stateName: string;
+      cityName: string;
+      cityClinics: any[];
+      treatmentTitle: string;
+      treatmentSlug: string;
+    };
+  }[] = [];
   const uniqueStates = getUniqueStates();
 
   uniqueStates.forEach((stateCode) => {

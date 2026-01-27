@@ -1,0 +1,390 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import clinicsData from "../../data/clinics.json";
+
+// Generate paths for all doctors
+export function getStaticPaths() {
+    const paths: { params: { slug: string } }[] = [];
+    const seenSlugs = new Set<string>();
+
+    clinicsData.forEach((clinic: any) => {
+        if (
+            clinic.verified &&
+            clinic.doctors_data &&
+            Array.isArray(clinic.doctors_data)
+        ) {
+            clinic.doctors_data.forEach((doc: any) => {
+                if (doc.slug && !seenSlugs.has(doc.slug)) {
+                    seenSlugs.add(doc.slug);
+                    paths.push({ params: { slug: doc.slug } });
+                }
+            });
+        }
+    });
+
+    return paths;
+}
+
+const { slug } = Astro.params;
+
+// Find the doctor and their clinic
+let doctor: any = null;
+let clinic: any = null;
+
+for (const c of clinicsData) {
+    if (c.doctors_data && Array.isArray(c.doctors_data)) {
+        const found = c.doctors_data.find((d: any) => d.slug === slug);
+        if (found) {
+            doctor = found;
+            clinic = c;
+            break;
+        }
+    }
+}
+
+if (!doctor) {
+    return Astro.redirect("/specialists/");
+}
+
+const fullName = doctor.name || "Unknown Doctor";
+const title = doctor.title || "TMS Specialist";
+const school = doctor.school || "";
+const yearsExperience = doctor.years_experience || 0;
+const specialties = doctor.specialties || [];
+const bioFocus = doctor.bio_focus || "TMS Therapy";
+const imageUrl =
+    doctor.image_url || "/images/tms_doctor_consult_1769446457625.png";
+---
+
+<Layout
+    title={`${fullName} - TMS Specialist | TMS List`}
+    description={`${fullName} is a ${title} specializing in TMS therapy at ${clinic?.name || "TMS Clinic"}. Book a consultation today.`}
+>
+    <Header />
+
+    <!-- Hero Section -->
+    <section
+        class="relative bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 pt-32 pb-20 overflow-hidden"
+    >
+        <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+        <div
+            class="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-600/20 rounded-full blur-[150px]"
+        >
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-5xl mx-auto">
+                <div
+                    class="flex flex-col md:flex-row gap-10 items-center md:items-start"
+                >
+                    <!-- Doctor Image -->
+                    <div class="relative flex-shrink-0">
+                        <div
+                            class="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border-4 border-white/20 shadow-2xl"
+                        >
+                            <img
+                                src={imageUrl}
+                                alt={fullName}
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div
+                            class="absolute -bottom-3 -right-3 px-4 py-2 bg-indigo-600 text-white text-sm font-bold rounded-xl shadow-lg"
+                        >
+                            {yearsExperience}+ Years
+                        </div>
+                    </div>
+
+                    <!-- Doctor Info -->
+                    <div class="text-center md:text-left flex-1">
+                        <h1
+                            class="text-3xl md:text-5xl font-black text-white mb-3 tracking-tight"
+                        >
+                            {fullName}
+                        </h1>
+                        <p class="text-xl text-indigo-300 font-medium mb-4">
+                            {title}
+                        </p>
+
+                        {
+                            school && (
+                                <p class="text-slate-400 mb-4">
+                                    <span class="text-slate-500">🎓</span>{" "}
+                                    {school}
+                                </p>
+                            )
+                        }
+
+                        <div
+                            class="flex flex-wrap justify-center md:justify-start gap-2 mb-6"
+                        >
+                            {
+                                specialties.map((spec: string) => (
+                                    <span class="px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-white text-sm">
+                                        {spec}
+                                    </span>
+                                ))
+                            }
+                        </div>
+
+                        {
+                            clinic && (
+                                <div class="flex items-center justify-center md:justify-start gap-3 text-slate-300">
+                                    <span>🏥</span>
+                                    <a
+                                        href={`/clinic/${clinic.slug}/`}
+                                        class="hover:text-indigo-400 transition-colors underline underline-offset-2"
+                                    >
+                                        {clinic.name}
+                                    </a>
+                                    <span class="text-slate-500">•</span>
+                                    <span>
+                                        {clinic.city}, {clinic.state}
+                                    </span>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div
+                class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8"
+            >
+                <!-- Left Column - Details -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- About -->
+                    <div
+                        class="bg-white rounded-2xl p-8 shadow-lg border border-slate-100"
+                    >
+                        <h2 class="text-2xl font-bold text-slate-800 mb-4">
+                            About {doctor.first_name || fullName.split(" ")[0]}
+                        </h2>
+                        <p class="text-slate-600 leading-relaxed">
+                            {fullName} is an experienced {title} specializing in {
+                                bioFocus
+                            }. With over {yearsExperience} years of experience in
+                            the field,
+                            {doctor.first_name || "they"} provides compassionate care
+                            and cutting-edge TMS treatment for patients seeking relief
+                            from treatment-resistant conditions.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed mt-4">
+                            {school && `Having trained at ${school}, `}{
+                                doctor.first_name || "Dr."
+                            } brings extensive knowledge and expertise in transcranial
+                            magnetic stimulation therapy, helping patients find hope
+                            when other treatments have not been effective.
+                        </p>
+                    </div>
+
+                    <!-- Specialties -->
+                    <div
+                        class="bg-white rounded-2xl p-8 shadow-lg border border-slate-100"
+                    >
+                        <h2 class="text-2xl font-bold text-slate-800 mb-6">
+                            Areas of Expertise
+                        </h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {
+                                specialties.map((spec: string) => (
+                                    <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
+                                        <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+                                            <svg
+                                                class="w-5 h-5"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M5 13l4 4L19 7"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <span class="font-medium text-slate-700">
+                                            {spec}
+                                        </span>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Clinic Info -->
+                    {
+                        clinic && (
+                            <div class="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
+                                <h2 class="text-2xl font-bold text-slate-800 mb-6">
+                                    Practice Location
+                                </h2>
+                                <a
+                                    href={`/clinic/${clinic.slug}/`}
+                                    class="block group"
+                                >
+                                    <div class="flex items-start gap-4 p-6 bg-gradient-to-br from-indigo-50 to-cyan-50 rounded-xl border border-indigo-100 group-hover:shadow-md transition-all">
+                                        <div class="w-16 h-16 bg-indigo-600 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0">
+                                            🏥
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-bold text-slate-800 group-hover:text-indigo-600 transition-colors mb-1">
+                                                {clinic.name}
+                                            </h3>
+                                            <p class="text-slate-600 text-sm mb-2">
+                                                {clinic.address}, {clinic.city},{" "}
+                                                {clinic.state} {clinic.zip}
+                                            </p>
+                                            {clinic.contact?.phone && (
+                                                <p class="text-indigo-600 font-medium">
+                                                    {clinic.contact.phone}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        )
+                    }
+                </div>
+
+                <!-- Right Column - Contact Form -->
+                <div class="lg:col-span-1">
+                    <div
+                        class="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 sticky top-24"
+                    >
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">
+                            Request a Consultation
+                        </h3>
+                        <form id="contact-form" class="space-y-4">
+                            <input
+                                type="hidden"
+                                name="source"
+                                value={`doctor-${slug}`}
+                            />
+                            <input
+                                type="hidden"
+                                name="doctorName"
+                                value={fullName}
+                            />
+                            <input
+                                type="hidden"
+                                name="clinicName"
+                                value={clinic?.name || ""}
+                            />
+
+                            <div>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Your Name"
+                                    required
+                                    class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email Address"
+                                    required
+                                    class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    placeholder="Phone Number"
+                                    class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                                />
+                            </div>
+                            <div>
+                                <textarea
+                                    name="message"
+                                    placeholder="Tell us about your needs..."
+                                    rows="4"
+                                    class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 resize-none"
+                                ></textarea>
+                            </div>
+                            <button
+                                type="submit"
+                                class="w-full py-3 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold rounded-xl hover:from-indigo-500 hover:to-cyan-500 transition-all shadow-lg shadow-indigo-500/30"
+                            >
+                                Send Request
+                            </button>
+                        </form>
+                        <p class="text-xs text-slate-500 mt-4 text-center">
+                            By submitting, you agree to our privacy policy.
+                        </p>
+
+                        <!-- Success Message -->
+                        <div
+                            id="success-message"
+                            class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-center"
+                        >
+                            <p class="text-green-700 font-medium">
+                                ✓ Your request has been sent!
+                            </p>
+                            <p class="text-green-600 text-sm mt-1">
+                                We'll get back to you shortly.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</Layout>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("contact-form") as HTMLFormElement;
+        const successMsg = document.getElementById("success-message");
+
+        form?.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {
+                type: "doctor-inquiry",
+                source: formData.get("source"),
+                doctorName: formData.get("doctorName"),
+                clinicName: formData.get("clinicName"),
+                name: formData.get("name"),
+                email: formData.get("email"),
+                phone: formData.get("phone"),
+                message: formData.get("message"),
+                timestamp: new Date().toISOString(),
+            };
+
+            try {
+                const response = await fetch("/api/submissions", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    form.style.display = "none";
+                    successMsg?.classList.remove("hidden");
+                } else {
+                    alert("Something went wrong. Please try again.");
+                }
+            } catch (err) {
+                console.error("Error submitting form:", err);
+                alert("Something went wrong. Please try again.");
+            }
+        });
+    });
+</script>
