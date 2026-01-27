@@ -249,12 +249,26 @@ export interface ClinicMedia {
 }
 
 // ============================================
+// PROVIDER TYPE
+// ============================================
+export enum ClinicProviderType {
+    Psychiatrist = 'Psychiatrist (MD/DO)',
+    TMSCenter = 'Dedicated TMS Center',
+    Hospital = 'Hospital / Medical Center',
+    Neurologist = 'Neurologist',
+    MentalHealthClinic = 'Mental Health Clinic',
+    PrimaryCare = 'Primary Care / Family Practice',
+    NursePractitioner = 'Psychiatric Nurse Practitioner'
+}
+
+// ============================================
 // MAIN CLINIC INTERFACE
 // ============================================
 export interface Clinic {
     id: string;
     name: string;
     slug: string;
+    provider_type?: ClinicProviderType; // New field
 
     // Location
     address: string;

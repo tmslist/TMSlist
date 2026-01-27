@@ -53,10 +53,11 @@ export async function getStaticPaths() {
 const { stateName, cities, topClinics, clinicCount } = Astro.props;
 
 // strict SEO: "Best TMS Therapy Clinics in [State] | TMS List"
-const title = `Best TMS Therapy Clinics in ${stateName} | TMS List`;
+const title = `Best TMS Therapy Clinics in ${stateName} (Top Rated Psychiatrists)`;
+const description = `Find the best TMS therapy providers in ${stateName}. Compare top-rated clinics, read patient reviews, check insurance coverage, and find affordable treatment options near you.`;
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description}>
   <StateHero stateName={stateName} clinicCount={clinicCount} />
 
   <main class="container mx-auto px-4 py-8">

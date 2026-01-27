@@ -46,11 +46,12 @@ const sortedClinics = [...cityClinics].sort(
   (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
 );
 
-// Strict SEO: "TMS Therapy in [City], [State] - Top [Count] Providers"
-const title = `TMS Therapy in ${cityName}, ${stateName} - Top ${sortedClinics.length} Providers`;
+// Strict SEO: "10 Best TMS Therapy Clinics in [City], [State] (Top Rated Doctors) | TMS List"
+const title = `10 Best TMS Therapy Clinics in ${cityName}, ${stateName} (Top Rated Doctors) | TMS List`;
+const description = `Find top-rated TMS providers in ${cityName}, ${stateName}. Compare verified psychiatrist reviews, insurance coverage (Medicare, Aetna, Cigna), and treatment costs.`;
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description}>
   <main class="container mx-auto px-4 py-8">
     <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
       <ol class="inline-flex items-center space-x-1 md:space-x-3">
