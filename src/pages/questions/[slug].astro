@@ -10,9 +10,17 @@ export async function getStaticPaths() {
 }
 
 const { question } = Astro.props;
-const relatedQs = questionsData.filter((q) =>
-    question.relatedQuestions?.includes(q.id),
-);
+
+// Smart related questions: mix of same category and different categories
+const sameCategory = questionsData
+    .filter((q) => q.category === question.category && q.id !== question.id)
+    .slice(0, 3);
+
+const otherCategories = questionsData
+    .filter((q) => q.category !== question.category && q.id !== question.id)
+    .slice(0, 3);
+
+const relatedQs = [...sameCategory, ...otherCategories].slice(0, 6);
 
 const title = `${question.question} | TMS List Expert Answers`;
 const description = question.quickAnswer;
@@ -76,56 +84,109 @@ const description = question.quickAnswer;
             </ul>
         </article>
 
+        <!-- Enhanced CTAs Grid -->
+        <section class="my-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Find Clinics CTA -->
+            <div
+                class="bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-2xl p-6 text-white"
+            >
+                <div class="text-3xl mb-3">🏥</div>
+                <h3 class="text-xl font-bold mb-2">
+                    Find TMS Clinics Near You
+                </h3>
+                <p class="text-indigo-100 text-sm mb-4">
+                    Browse verified providers, compare prices & insurance
+                </p>
+                <div class="flex gap-2">
+                    <a
+                        href="/us/"
+                        class="px-4 py-2 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors text-sm"
+                    >
+                        Browse Clinics
+                    </a>
+                    <button
+                        onclick="document.dispatchEvent(new Event('open-enquiry-modal'))"
+                        class="px-4 py-2 bg-indigo-500 text-white font-semibold rounded-lg hover:bg-indigo-400 transition-colors border border-white/20 text-sm"
+                    >
+                        Talk to Specialist
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lead Magnet CTA -->
+            <div
+                class="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-6 text-white"
+            >
+                <div class="text-3xl mb-3">📥</div>
+                <h3 class="text-xl font-bold mb-2">Free TMS Guide</h3>
+                <p class="text-blue-100 text-sm mb-4">
+                    Download: "TMS vs Medication - Which is Right for You?"
+                </p>
+                <button
+                    onclick="document.dispatchEvent(new Event('open-lead-magnet'))"
+                    class="px-4 py-2 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors inline-flex items-center gap-2 text-sm"
+                >
+                    <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        ></path></svg
+                    >
+                    Download Free
+                </button>
+            </div>
+        </section>
+
         <!-- Related Questions -->
         {
             relatedQs.length > 0 && (
                 <section class="bg-gray-50 rounded-xl p-8 mb-12">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">
-                        Related Questions
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            People Also Ask
+                        </h2>
+                        <a
+                            href="/questions/"
+                            class="text-indigo-600 font-semibold hover:underline text-sm"
+                        >
+                            Browse All →
+                        </a>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {relatedQs.map((rq) => (
                             <a
                                 href={`/questions/${rq.slug}/`}
-                                class="group block p-4 bg-white rounded-lg border border-gray-200 hover:border-indigo-500 hover:shadow-md transition-all"
+                                class="group block p-4 bg-white rounded-lg border-2 border-gray-200 hover:border-indigo-500 hover:shadow-md transition-all"
                             >
-                                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors mb-1">
+                                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors mb-2 text-sm line-clamp-2">
                                     {rq.question}
                                 </h3>
-                                <p class="text-sm text-gray-600 line-clamp-2">
-                                    {rq.quickAnswer}
+                                <p class="text-xs text-gray-600 line-clamp-2 mb-2">
+                                    {rq.quickAnswer.slice(0, 80)}...
                                 </p>
+                                <span class="text-xs text-indigo-600 font-medium group-hover:underline">
+                                    Read Answer →
+                                </span>
                             </a>
                         ))}
+                    </div>
+                    <div class="mt-6 text-center">
+                        <a
+                            href={`/questions/category/${question.category}/`}
+                            class="inline-block px-5 py-2.5 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors border-2 border-indigo-200"
+                        >
+                            More {question.category} Questions →
+                        </a>
                     </div>
                 </section>
             )
         }
-
-        <!-- CTA Section -->
-        <section
-            class="bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl p-8 text-center text-white mb-12"
-        >
-            <h2 class="text-3xl font-bold mb-4">Find TMS Providers Near You</h2>
-            <p class="text-indigo-100 mb-6 max-w-2xl mx-auto">
-                Connect with verified TMS clinics in your area. Compare prices,
-                read reviews, and schedule free consultations.
-            </p>
-            <div class="flex gap-4 justify-center flex-wrap">
-                <a
-                    href="/us/"
-                    class="px-6 py-3 bg-white text-indigo-600 font-bold rounded-xl hover:bg-indigo-50 transition-colors"
-                >
-                    Browse by State
-                </a>
-                <a
-                    href="/near-me/"
-                    class="px-6 py-3 bg-indigo-700 text-white font-bold rounded-xl hover:bg-indigo-800 transition-colors border-2 border-white/20"
-                >
-                    Find Near Me
-                </a>
-            </div>
-        </section>
 
         <!-- Medical Disclaimer -->
         <div class="border-t border-gray-200 pt-8 text-sm text-gray-600">

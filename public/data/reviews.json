@@ -1,0 +1,15 @@
+[
+    {
+        "id": "1",
+        "clinicId": "sample-clinic-id",
+        "clinicName": "Sample TMS Clinic",
+        "doctorName": "Dr. Smith",
+        "rating": 5,
+        "reviewText": "Excellent experience with TMS therapy. Dr. Smith was very professional and the results exceeded my expectations.",
+        "patientName": "John D.",
+        "verified": true,
+        "treatmentType": "NeuroStar TMS",
+        "datePosted": "2024-01-15",
+        "helpful": 12
+    }
+]

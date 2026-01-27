@@ -10,6 +10,8 @@ import {
 } from "../../../../utils/dataHelpers";
 import { calculateClinicScore } from "../../../../utils/ranking";
 import { ClinicMachine, ClinicInsurance } from "../../../../types/clinic";
+import RelatedContent from "../../../../components/RelatedContent.astro";
+import questionsData from "../../../../data/questions-comprehensive.json";
 
 export async function getStaticPaths() {
   const paths = [];
@@ -49,6 +51,38 @@ const sortedClinics = [...cityClinics].sort(
 // Strict SEO: "10 Best TMS Therapy Clinics in [City], [State] (Top Rated Doctors) | TMS List"
 const title = `10 Best TMS Therapy Clinics in ${cityName}, ${stateName} (Top Rated Doctors) | TMS List`;
 const description = `Find top-rated TMS providers in ${cityName}, ${stateName}. Compare verified psychiatrist reviews, insurance coverage (Medicare, Aetna, Cigna), and treatment costs.`;
+
+// Related questions for this city
+const relatedQuestions = questionsData
+  .filter(
+    (q) =>
+      q.question.toLowerCase().includes(cityName.toLowerCase()) ||
+      q.question.toLowerCase().includes(stateName.toLowerCase()) ||
+      q.category === "location" ||
+      q.category === "cost",
+  )
+  .slice(0, 8);
+
+// Placeholder related blogs (can be populated from CMS later)
+const relatedBlogs = [
+  {
+    title: `TMS Therapy Guide for ${cityName} Residents`,
+    excerpt: `Complete guide to finding and affording TMS therapy in ${cityName}. Insurance coverage, costs, and top providers.`,
+    url: `/blog/tms-guide-${cityName.toLowerCase().replace(/\s+/g, "-")}/`,
+  },
+  {
+    title: "Understanding TMS vs Medication",
+    excerpt:
+      "Compare TMS therapy to antidepressants. Learn which treatment might be right for your depression.",
+    url: "/blog/tms-vs-medication/",
+  },
+  {
+    title: "Insurance Coverage for TMS in 2024",
+    excerpt:
+      "Which insurance plans cover TMS? How to get prior authorization and maximize your benefits.",
+    url: "/blog/insurance-coverage-tms/",
+  },
+];
 ---
 
 <Layout title={title} description={description}>
@@ -168,6 +202,15 @@ const description = `Find top-rated TMS providers in ${cityName}, ${stateName}. 
                   </label>
                 ))
               }
+            </div>
+
+            <!-- Related Questions & Blogs -->
+            <div class="mt-6">
+              <RelatedContent
+                relatedQuestions={relatedQuestions}
+                relatedBlogs={relatedBlogs}
+                currentPage={`${cityName}, ${stateName}`}
+              />
             </div>
           </div>
         </div>
