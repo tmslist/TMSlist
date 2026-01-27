@@ -1,0 +1,247 @@
+---
+// Review Form Component for Clinics and Doctors
+interface Props {
+    clinicId?: string;
+    clinicName?: string;
+    doctorName?: string;
+}
+
+const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
+---
+
+<div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+    <h3 class="text-xl font-bold text-gray-900 mb-4">✍️ Write a Review</h3>
+    <p class="text-sm text-gray-600 mb-6">
+        Share your experience to help others make informed decisions about their
+        TMS treatment
+    </p>
+
+    <form id="review-form" class="space-y-4">
+        <input type="hidden" name="clinicId" value={clinicId} />
+        <input type="hidden" name="clinicName" value={clinicName} />
+
+        <!-- Rating -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Rating *</label
+            >
+            <div class="flex gap-2">
+                {
+                    [1, 2, 3, 4, 5].map((star) => (
+                        <button
+                            type="button"
+                            class="star-btn text-3xl text-gray-300 hover:text-yellow-400 transition-colors"
+                            data-rating={star}
+                        >
+                            ★
+                        </button>
+                    ))
+                }
+            </div>
+            <input type="hidden" name="rating" id="rating-value" required />
+        </div>
+
+        <!-- Doctor Name -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Doctor/Provider Name</label
+            >
+            <input
+                type="text"
+                name="doctorName"
+                value={doctorName}
+                placeholder="Dr. Smith"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            />
+        </div>
+
+        <!-- Treatment Type -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Treatment Type</label
+            >
+            <select
+                name="treatmentType"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            >
+                <option value="NeuroStar TMS">NeuroStar TMS</option>
+                <option value="BrainsWay Deep TMS">BrainsWay Deep TMS</option>
+                <option value="MagVenture TMS">MagVenture TMS</option>
+                <option value="CloudTMS">CloudTMS</option>
+                <option value="Other TMS">Other TMS</option>
+                <option value="Ketamine">Ketamine</option>
+                <option value="Spravato">Spravato</option>
+            </select>
+        </div>
+
+        <!-- Review Text -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Your Review *</label
+            >
+            <textarea
+                name="reviewText"
+                required
+                rows="5"
+                placeholder="Share your experience with this clinic and provider..."
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            ></textarea>
+            <p class="text-xs text-gray-500 mt-1">Minimum 50 characters</p>
+        </div>
+
+        <!-- Patient Name -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Your Name *</label
+            >
+            <input
+                type="text"
+                name="patientName"
+                required
+                placeholder="John D. (First name + last initial)"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            />
+            <p class="text-xs text-gray-500 mt-1">
+                Only first name + last initial will be shown
+            </p>
+        </div>
+
+        <!-- Email (for verification) -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Email (for verification) *</label
+            >
+            <input
+                type="email"
+                name="email"
+                required
+                placeholder="your@email.com"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            />
+            <p class="text-xs text-gray-500 mt-1">
+                Won't be displayed publicly
+            </p>
+        </div>
+
+        <!-- Submit -->
+        <button
+            type="submit"
+            class="w-full py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg"
+        >
+            Submit Review
+        </button>
+
+        <p class="text-xs text-gray-500 text-center">
+            By submitting, you agree to our <a
+                href="/legal/review-policy/"
+                class="text-indigo-600 hover:underline">Review Policy</a
+            >
+        </p>
+    </form>
+
+    <!-- Success Message -->
+    <div
+        id="review-success"
+        class="hidden bg-green-50 border border-green-200 rounded-lg p-4 mt-4"
+    >
+        <div class="flex items-center gap-2 text-green-800">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
+            </svg>
+            <p class="font-semibold">
+                Thank you! Your review has been submitted and is pending
+                verification.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Star rating functionality
+    const starBtns = document.querySelectorAll(".star-btn");
+    const ratingInput = document.getElementById(
+        "rating-value",
+    ) as HTMLInputElement;
+    let selectedRating = 0;
+
+    starBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const rating = parseInt(btn.getAttribute("data-rating") || "0");
+            selectedRating = rating;
+            ratingInput.value = rating.toString();
+
+            // Update star colors
+            starBtns.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove("text-gray-300");
+                    star.classList.add("text-yellow-400");
+                } else {
+                    star.classList.remove("text-yellow-400");
+                    star.classList.add("text-gray-300");
+                }
+            });
+        });
+    });
+
+    // Form submission
+    const reviewForm = document.getElementById(
+        "review-form",
+    ) as HTMLFormElement;
+    const successMsg = document.getElementById("review-success");
+
+    reviewForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Validate rating
+        if (!selectedRating) {
+            alert("Please select a star rating");
+            return;
+        }
+
+        const formData = new FormData(reviewForm);
+        const reviewText = formData.get("reviewText") as string;
+
+        // Validate review length
+        if (reviewText.length < 50) {
+            alert("Please write at least 50 characters in your review");
+            return;
+        }
+
+        const reviewData = {
+            clinicId: formData.get("clinicId"),
+            clinicName: formData.get("clinicName"),
+            doctorName: formData.get("doctorName"),
+            treatmentType: formData.get("treatmentType"),
+            rating: selectedRating,
+            reviewText: reviewText,
+            patientName: formData.get("patientName"),
+            email: formData.get("email"),
+            datePosted: new Date().toISOString().split("T")[0],
+            verified: false,
+            helpful: 0,
+        };
+
+        try {
+            // In production, send to backend API
+            // For now, store in localStorage
+            const reviews = JSON.parse(
+                localStorage.getItem("tms-reviews") || "[]",
+            );
+            reviews.push({ ...reviewData, id: Date.now().toString() });
+            localStorage.setItem("tms-reviews", JSON.stringify(reviews));
+
+            // Show success message
+            reviewForm.classList.add("hidden");
+            successMsg?.classList.remove("hidden");
+
+            // Optional: Send to server
+            console.log("Review submitted:", reviewData);
+        } catch (error) {
+            alert("❌ Error submitting review. Please try again.");
+            console.error("Review error:", error);
+        }
+    });
+</script>

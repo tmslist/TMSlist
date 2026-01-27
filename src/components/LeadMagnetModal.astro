@@ -1,0 +1,275 @@
+---
+// Lead Magnet Modal Component for capturing emails in exchange for resources
+---
+
+<!-- Lead Magnet Modal -->
+<div
+    id="lead-magnet-modal"
+    class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+>
+    <div
+        class="bg-white rounded-2xl max-w-md w-full shadow-2xl animate-fade-in-up"
+    >
+        <!-- Header -->
+        <div
+            class="bg-gradient-to-r from-blue-600 to-cyan-600 p-6 rounded-t-2xl text-white"
+        >
+            <div class="flex items-start justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold mb-2">📥 Free TMS Guide</h2>
+                    <p class="text-blue-100 text-sm">
+                        Get instant access to our comprehensive guide
+                    </p>
+                </div>
+                <button
+                    id="close-lead-magnet"
+                    class="text-white/80 hover:text-white transition-colors"
+                >
+                    <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6">
+            <div class="mb-6">
+                <h3 class="font-bold text-gray-900 mb-3">
+                    Choose Your Free Resource:
+                </h3>
+                <div class="space-y-2">
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="tms-buyers-guide"
+                            checked
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                TMS Buyer's Guide
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Complete guide to choosing the right TMS
+                                provider
+                            </div>
+                        </div>
+                    </label>
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="tms-vs-medication"
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                TMS vs Medication Chart
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Side-by-side comparison to help you decide
+                            </div>
+                        </div>
+                    </label>
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="insurance-checklist"
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                Insurance Coverage Checklist
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Step-by-step guide to getting TMS covered
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form id="lead-magnet-form" class="space-y-4">
+                <div>
+                    <label
+                        class="block text-sm font-semibold text-gray-700 mb-2"
+                        >Full Name *</label
+                    >
+                    <input
+                        type="text"
+                        name="name"
+                        required
+                        placeholder="John Doe"
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                </div>
+                <div>
+                    <label
+                        class="block text-sm font-semibold text-gray-700 mb-2"
+                        >Email Address *</label
+                    >
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                        placeholder="john@example.com"
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                </div>
+                <div>
+                    <label class="flex items-start gap-2 text-xs text-gray-600">
+                        <input
+                            type="checkbox"
+                            name="subscribe"
+                            checked
+                            class="mt-0.5"
+                        />
+                        <span
+                            >I agree to receive helpful TMS information and
+                            resources via email</span
+                        >
+                    </label>
+                </div>
+                <button
+                    type="submit"
+                    class="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all shadow-lg"
+                >
+                    Download Free Guide →
+                </button>
+                <p class="text-xs text-gray-500 text-center">
+                    We respect your privacy. View our <a
+                        href="/legal/privacy-policy/"
+                        class="text-blue-600 hover:underline">Privacy Policy</a
+                    >
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Lead magnet modal functionality
+    const modal = document.getElementById("lead-magnet-modal");
+    const closeBtn = document.getElementById("close-lead-magnet");
+    const form = document.getElementById("lead-magnet-form") as HTMLFormElement;
+
+    // Open modal on event
+    document.addEventListener("open-lead-magnet", () => {
+        modal?.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+    });
+
+    // Close modal
+    function closeModal() {
+        modal?.classList.add("hidden");
+        document.body.style.overflow = "auto";
+    }
+
+    closeBtn?.addEventListener("click", closeModal);
+
+    // Close on outside click
+    modal?.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // Close on Escape
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !modal?.classList.contains("hidden")) {
+            closeModal();
+        }
+    });
+
+    // Handle form submission
+    form?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const selectedResource = (
+            document.querySelector(
+                'input[name="lead-magnet"]:checked',
+            ) as HTMLInputElement
+        )?.value;
+
+        const leadData = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            resource: selectedResource,
+            subscribe: formData.get("subscribe") === "on",
+            timestamp: new Date().toISOString(),
+            source: window.location.href,
+        };
+
+        // Store lead (in production, send to backend/CRM)
+        try {
+            // For now, store in localStorage (replace with API call)
+            const leads = JSON.parse(localStorage.getItem("tms-leads") || "[]");
+            leads.push(leadData);
+            localStorage.setItem("tms-leads", JSON.stringify(leads));
+
+            // Show success and trigger download
+            alert(
+                `✅ Success! Your ${getResourceName(selectedResource)} is downloading now. Check your email for more TMS resources!`,
+            );
+
+            // Simulate PDF download
+            const downloadUrl = `/downloads/${selectedResource}.pdf`;
+            const link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = `${selectedResource}.pdf`;
+            link.click();
+
+            closeModal();
+            form.reset();
+        } catch (error) {
+            alert(
+                "❌ Something went wrong. Please try again or contact support.",
+            );
+            console.error("Lead capture error:", error);
+        }
+    });
+
+    function getResourceName(value: string): string {
+        const names: Record<string, string> = {
+            "tms-buyers-guide": "TMS Buyer's Guide",
+            "tms-vs-medication": "TMS vs Medication Comparison",
+            "insurance-checklist": "Insurance Coverage Checklist",
+        };
+        return names[value] || "guide";
+    }
+</script>
+
+<style>
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 0.3s ease-out;
+    }
+</style>

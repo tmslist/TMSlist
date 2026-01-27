@@ -1,0 +1,139 @@
+[
+  {
+    "id": "what-is-tms",
+    "question": "What is TMS therapy?",
+    "category": "basics",
+    "slug": "what-is-tms-therapy",
+    "keywords": [
+      "TMS",
+      "transcranial magnetic stimulation",
+      "brain stimulation"
+    ],
+    "quickAnswer": "TMS (Transcranial Magnetic Stimulation) is a non-invasive brain stimulation technique that uses magnetic pulses to stimulate nerve cells in the brain, primarily used to treat depression and other mental health conditions.",
+    "fullAnswer": "Transcranial Magnetic Stimulation (TMS) is a revolutionary, non-invasive brain stimulation technique FDA-cleared in 2008 for treating major depressive disorder. Using focused magnetic pulses similar to MRI technology, TMS stimulates underactive brain regions associated with mood regulation.\n\nDuring treatment, an electromagnetic coil positioned against your scalp delivers brief magnetic pulses that pass through the skull and induce small electrical currents in targeted brain areas, particularly the dorsolateral prefrontal cortex (DLPFC). This repeated stimulation helps normalize brain activity patterns.\n\nClinical trials show 50-60% of patients experience significant improvement, with 30-40% achieving complete remission. Unlike medications, TMS has no systemic side effects like weight gain or sexual dysfunction. Unlike ECT, it requires no anesthesia and has no memory impact.\n\nSessions last 19-37 minutes and are performed in an outpatient setting. Patients can drive themselves and resume normal activities immediately after treatment.",
+    "imageUrl": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=500&fit=crop",
+    "relatedQuestions": [
+      "how-does-tms-work",
+      "is-tms-fda-approved",
+      "does-tms-hurt"
+    ],
+    "citations": [
+      {
+        "title": "FDA Clearance of TMS Devices",
+        "url": "https://www.fda.gov/medical-devices"
+      },
+      {
+        "title": "NIMH on Brain Stimulation Therapies",
+        "url": "https://www.nimh.nih.gov/health/topics/brain-stimulation-therapies"
+      }
+    ]
+  },
+  {
+    "id": "how-does-tms-work",
+    "question": "How does TMS work?",
+    "category": "basics",
+    "slug": "how-does-tms-work",
+    "keywords": [
+      "TMS mechanism",
+      "how TMS works",
+      "brain stimulation"
+    ],
+    "quickAnswer": "TMS works by using a magnetic coil placed on the scalp to deliver short magnetic pulses that stimulate nerve cells in specific areas of the brain, particularly regions involved in mood regulation and depression.",
+    "fullAnswer": "TMS operates on the principle of electromagnetic induction. An electromagnetic coil, positioned precisely over the scalp, generates rapidly changing magnetic fields that penetrate the skull without resistance. These magnetic fields induce small electrical currents in underlying brain tissue.\n\nThe target is typically the left dorsolateral prefrontal cortex (DLPFC), a region consistently showing reduced activity in depression. The magnetic pulses cause neurons to fire, essentially 'exercising' this underactive brain region.\n\nOver the course of 4-6 weeks of daily treatments, this repeated stimulation leads to neuroplastic changes - the brain's ability to reorganize and form new neural connections. These changes can restore normal activity patterns in mood-regulating circuits.\n\nThe treatment parameters are carefully calibrated: pulse frequency (typically 10 Hz), intensity (relative to your motor threshold), and duration (usually 3,000 pulses per session). These settings determine the therapeutic effect while maintaining safety.",
+    "imageUrl": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop",
+    "relatedQuestions": [
+      "what-is-tms",
+      "tms-side-effects",
+      "how-long-tms-session"
+    ],
+    "citations": [
+      {
+        "title": "Mechanisms of TMS",
+        "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3260293/"
+      },
+      {
+        "title": "Neuroplasticity and TMS",
+        "url": "https://pubmed.ncbi.nlm.nih.gov"
+      }
+    ]
+  },
+  {
+    "id": "is-tms-fda-approved",
+    "question": "Is TMS FDA approved?",
+    "category": "basics",
+    "slug": "is-tms-fda-approved",
+    "keywords": [
+      "FDA approval",
+      "TMS safety",
+      "regulatory"
+    ],
+    "quickAnswer": "Yes, TMS is FDA-approved. It was first approved in 2008 for treatment-resistant depression, and has since received additional approvals for OCD (2018) and other conditions.",
+    "fullAnswer": "TMS has received multiple FDA clearances, establishing it as a legitimate, evidence-based medical treatment:\n\n**Major Depressive Disorder (2008)**: The first FDA clearance was granted for treating adults with MDD who haven't responded to at least one antidepressant medication.\n\n**Obsessive-Compulsive Disorder (2018)**: BrainsWay's Deep TMS system received clearance for OCD treatment.\n\n**Migraine (2013)**: Single-pulse TMS devices were cleared for acute migraine with aura.\n\nFDA clearance requires rigorous clinical trials demonstrating both safety and efficacy. For depression, pivotal trials showed significant improvement rates without the systemic side effects of medications.\n\nMultiple TMS devices from different manufacturers have received clearance, including NeuroStar, BrainsWay, MagVenture, and CloudTMS. Each device undergoes independent review of safety data and clinical effectiveness.",
+    "imageUrl": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=800&h=500&fit=crop",
+    "relatedQuestions": [
+      "what-is-tms",
+      "tms-safety",
+      "tms-effectiveness"
+    ],
+    "citations": [
+      {
+        "title": "FDA Device Clearances",
+        "url": "https://www.fda.gov/medical-devices/device-approvals-denials-and-clearances"
+      },
+      {
+        "title": "Clinical Trials of TMS",
+        "url": "https://clinicaltrials.gov"
+      }
+    ]
+  },
+  {
+    "id": "does-tms-hurt",
+    "question": "Does TMS hurt?",
+    "category": "basics",
+    "slug": "does-tms-hurt",
+    "keywords": [
+      "TMS pain",
+      "TMS discomfort",
+      "what does TMS feel like"
+    ],
+    "quickAnswer": "TMS is generally not painful. Most patients describe feeling a tapping or clicking sensation on the scalp during treatment. Some may experience mild discomfort or headache, but this typically subsides after the first few sessions.",
+    "fullAnswer": "The vast majority of patients tolerate TMS very well. During treatment, you'll feel a tapping sensation on your scalp where the magnetic coil is positioned. This is caused by rapid muscle contractions in the scalp - not pain from the magnetic field itself.\n\nYou'll also hear a clicking sound with each pulse. Earplugs are provided to minimize noise exposure.\n\n**Common Sensations**:\n- Tapping or pecking feeling on the forehead\n- Tingling in facial muscles\n- Mild tension headache (10-20% of patients)\n\n**Managing Discomfort**:\nIf you experience discomfort during initial sessions, your technician can adjust the coil position or reduce intensity slightly. Most patients acclimate within 3-5 sessions, and any headaches typically resolve with over-the-counter pain relievers.\n\nUnlike ECT (electroconvulsive therapy), TMS requires no anesthesia precisely because it's not painful. You remain fully awake and alert throughout the 20-30 minute session.",
+    "imageUrl": "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop",
+    "relatedQuestions": [
+      "tms-side-effects",
+      "what-is-tms",
+      "tms-session-duration"
+    ],
+    "citations": [
+      {
+        "title": "Patient-Reported TMS Tolerability",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25599813/"
+      }
+    ]
+  },
+  {
+    "id": "how-much-does-tms-cost",
+    "question": "How much does TMS cost?",
+    "category": "cost",
+    "slug": "how-much-does-tms-cost",
+    "keywords": [
+      "TMS cost",
+      "TMS price",
+      "how expensive is TMS"
+    ],
+    "quickAnswer": "TMS therapy typically costs between $10,000 to $15,000 for a full course of treatment (36 sessions). However, most insurance plans now cover TMS for treatment-resistant depression, significantly reducing out-of-pocket costs.",
+    "fullAnswer": "The cost of TMS varies based on geographic location, provider, and insurance coverage:\n\n**Without Insurance**:\n- Cost per session: $300-$500\n- Full course (36 sessions): $10,800-$18,000\n- Maintenance sessions: $250-$400 each\n\n**With Insurance**:\nMost major insurers (Medicare, Blue Cross Blue Shield, Aetna, Cigna, UnitedHealthcare) now cover TMS for treatment-resistant depression. Your out-of-pocket cost typically depends on:\n- Deductible status\n- Co-insurance percentage\n- In-network vs out-of-network provider\n\nAverage patient responsibility with insurance: $500-$3,000 total\n\n**Geographic Variations**:\n- Major metro areas (NYC, LA, SF): $400-$500/session\n- Mid-size cities: $300-$400/session  \n- Rural areas: $250-$350/session\n\nMany clinics offer financing plans through CareCredit or Prosper Healthcare Lending, allowing you to spread payments over 12-24 months.",
+    "imageUrl": "https://images.unsplash.com/photo-1554224311-beee415c201f?w=800&h=500&fit=crop",
+    "relatedQuestions": [
+      "does-insurance-cover-tms",
+      "does-medicare-cover-tms",
+      "tms-payment-plans"
+    ],
+    "citations": [
+      {
+        "title": "TMS Coverage Database",
+        "url": "https://www.clinicaltmssociety.org/insurance"
+      }
+    ]
+  }
+]
