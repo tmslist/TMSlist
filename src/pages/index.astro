@@ -61,8 +61,42 @@ const locationMap = Object.entries(stateGroups)
     .sort((a, b) => b.clinicCount - a.clinicCount);
 
 const uniqueStates = Object.keys(stateGroups);
-const topClinics = clinics
-    .filter((c) => getClinicRating(c) >= 4.7 && getClinicReviewCount(c) > 5)
+
+// LOGIC: Get top rated VERIFIED clinics, ensuring geographic diversity (1 per city)
+// 1. Filter for Verified + High Rating
+const qualifiedClinics = clinics.filter(
+    (c) =>
+        (c.verified || getClinicRating(c) >= 4.9) &&
+        getClinicReviewCount(c) > 10 &&
+        c.city,
+);
+
+// 2. Group by City
+const cityGroups = qualifiedClinics.reduce(
+    (acc, clinic) => {
+        if (!acc[clinic.city]) acc[clinic.city] = [];
+        acc[clinic.city].push(clinic);
+        return acc;
+    },
+    {} as Record<string, Clinic[]>,
+);
+
+// 3. Pick best clinic from each city
+const bestInCity = Object.values(cityGroups).map((cityClinics) => {
+    return cityClinics.sort(
+        (a, b) => getClinicRating(b) - getClinicRating(a),
+    )[0];
+});
+
+// 4. Sort by overall rating/verified status and take top 6
+const topClinics = bestInCity
+    .sort((a, b) => {
+        // Prioritize verified
+        if (a.verified && !b.verified) return -1;
+        if (!a.verified && b.verified) return 1;
+        // Then rating
+        return getClinicRating(b) - getClinicRating(a);
+    })
     .slice(0, 6);
 const totalDoctors = getTotalDoctorCount();
 const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
