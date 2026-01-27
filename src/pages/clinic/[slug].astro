@@ -5,10 +5,12 @@ import clinicsData from "../../data/clinics.json";
 import { STATE_NAMES } from "../../utils/clinicData";
 
 export async function getStaticPaths() {
-    return clinicsData.map((clinic: any) => ({
-        params: { slug: clinic.slug },
-        props: { clinic },
-    }));
+    return clinicsData
+        .filter((clinic: any) => clinic.verified)
+        .map((clinic: any) => ({
+            params: { slug: clinic.slug },
+            props: { clinic },
+        }));
 }
 
 const { clinic } = Astro.props;

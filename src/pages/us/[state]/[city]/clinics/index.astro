@@ -1,10 +1,10 @@
 ---
 import Layout from '../../../../../layouts/Layout.astro';
-import { getAllClinics, getStateSlug, STATE_NAMES } from '../../../../../utils/clinicData';
+import { getOperationalClinics, getStateSlug, STATE_NAMES } from '../../../../../utils/dataHelpers';
 
 
 export async function getStaticPaths() {
-    const clinics = getAllClinics();
+    const clinics = getOperationalClinics();
     
     // Group by state -> city
     const stateCity = new Map<string, Set<string>>();

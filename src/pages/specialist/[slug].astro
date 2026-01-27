@@ -6,14 +6,16 @@ import { STATE_NAMES } from "../../utils/clinicData";
 
 export async function getStaticPaths() {
     const paths: any[] = [];
-    clinicsData.forEach((clinic: any) => {
-        (clinic.doctors_data || []).forEach((doctor: any) => {
-            paths.push({
-                params: { slug: doctor.slug },
-                props: { doctor, clinic },
+    clinicsData
+        .filter((clinic: any) => clinic.verified)
+        .forEach((clinic: any) => {
+            (clinic.doctors_data || []).forEach((doctor: any) => {
+                paths.push({
+                    params: { slug: doctor.slug },
+                    props: { doctor, clinic },
+                });
             });
         });
-    });
     return paths;
 }
 
