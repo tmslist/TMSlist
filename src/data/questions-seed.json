@@ -1,0 +1,172 @@
+[
+    {
+        "id": "what-is-tms",
+        "question": "What is TMS therapy?",
+        "category": "basics",
+        "slug": "what-is-tms-therapy",
+        "keywords": [
+            "TMS",
+            "transcranial magnetic stimulation",
+            "brain stimulation"
+        ],
+        "quickAnswer": "TMS (Transcranial Magnetic Stimulation) is a non-invasive brain stimulation technique that uses magnetic pulses to stimulate nerve cells in the brain, primarily used to treat depression and other mental health conditions.",
+        "relatedQuestions": [
+            "how-does-tms-work",
+            "is-tms-fda-approved",
+            "does-tms-hurt"
+        ]
+    },
+    {
+        "id": "how-does-tms-work",
+        "question": "How does TMS work?",
+        "category": "basics",
+        "slug": "how-does-tms-work",
+        "keywords": [
+            "TMS mechanism",
+            "how TMS works",
+            "brain stimulation"
+        ],
+        "quickAnswer": "TMS works by using a magnetic coil placed on the scalp to deliver short magnetic pulses that stimulate nerve cells in specific areas of the brain, particularly regions involved in mood regulation and depression.",
+        "relatedQuestions": [
+            "what-is-tms",
+            "tms-side-effects",
+            "how-long-tms-session"
+        ]
+    },
+    {
+        "id": "is-tms-fda-approved",
+        "question": "Is TMS FDA approved?",
+        "category": "basics",
+        "slug": "is-tms-fda-approved",
+        "keywords": [
+            "FDA approval",
+            "TMS safety",
+            "regulatory"
+        ],
+        "quickAnswer": "Yes, TMS is FDA-approved. It was first approved in 2008 for treatment-resistant depression, and has since received additional approvals for OCD (2018) and other conditions.",
+        "relatedQuestions": [
+            "what-is-tms",
+            "tms-safety",
+            "tms-effectiveness"
+        ]
+    },
+    {
+        "id": "does-tms-hurt",
+        "question": "Does TMS hurt?",
+        "category": "basics",
+        "slug": "does-tms-hurt",
+        "keywords": [
+            "TMS pain",
+            "TMS discomfort",
+            "what does TMS feel like"
+        ],
+        "quickAnswer": "TMS is generally not painful. Most patients describe feeling a tapping or clicking sensation on the scalp during treatment. Some may experience mild discomfort or headache, but this typically subsides after the first few sessions.",
+        "relatedQuestions": [
+            "tms-side-effects",
+            "what-is-tms",
+            "tms-session-duration"
+        ]
+    },
+    {
+        "id": "how-much-does-tms-cost",
+        "question": "How much does TMS cost?",
+        "category": "cost",
+        "slug": "how-much-does-tms-cost",
+        "keywords": [
+            "TMS cost",
+            "TMS price",
+            "how expensive is TMS"
+        ],
+        "quickAnswer": "TMS therapy typically costs between $10,000 to $15,000 for a full course of treatment (36 sessions). However, most insurance plans now cover TMS for treatment-resistant depression, significantly reducing out-of-pocket costs.",
+        "relatedQuestions": [
+            "does-insurance-cover-tms",
+            "does-medicare-cover-tms",
+            "tms-payment-plans"
+        ]
+    },
+    {
+        "id": "does-insurance-cover-tms",
+        "question": "Does insurance cover TMS?",
+        "category": "cost",
+        "slug": "does-insurance-cover-tms",
+        "keywords": [
+            "TMS insurance coverage",
+            "insurance for TMS",
+            "TMS coverage"
+        ],
+        "quickAnswer": "Yes, most major insurance plans cover TMS therapy for FDA-approved conditions like treatment-resistant depression. Coverage typically requires documentation that you've tried and failed at least 4 antidepressant medications.",
+        "relatedQuestions": [
+            "how-much-does-tms-cost",
+            "does-medicare-cover-tms",
+            "tms-prior-authorization"
+        ]
+    },
+    {
+        "id": "does-medicare-cover-tms",
+        "question": "Does Medicare cover TMS?",
+        "category": "cost",
+        "slug": "does-medicare-cover-tms",
+        "keywords": [
+            "Medicare TMS",
+            "Medicare coverage",
+            "TMS seniors"
+        ],
+        "quickAnswer": "Yes, Medicare Part B covers TMS therapy for treatment-resistant depression. Patients must meet specific criteria including failure of at least one antidepressant trial and evaluation by a psychiatrist.",
+        "relatedQuestions": [
+            "does-insurance-cover-tms",
+            "how-much-does-tms-cost",
+            "medicare-tms-requirements"
+        ]
+    },
+    {
+        "id": "tms-vs-ketamine",
+        "question": "TMS vs Ketamine: Which is better?",
+        "category": "comparisons",
+        "slug": "tms-vs-ketamine",
+        "keywords": [
+            "TMS ketamine comparison",
+            "ketamine vs TMS",
+            "alternative depression treatments"
+        ],
+        "quickAnswer": "TMS and Ketamine work differently. TMS uses magnetic pulses and requires daily sessions for 4-6 weeks, while Ketamine is administered via infusion and can provide rapid relief. Both are FDA-cleared for depression, and the choice depends on individual needs, timeline, and medical history.",
+        "relatedQuestions": [
+            "tms-vs-ect",
+            "what-is-ketamine-therapy",
+            "tms-effectiveness"
+        ]
+    },
+    {
+        "id": "tms-vs-ect",
+        "question": "TMS vs ECT: What's the difference?",
+        "category": "comparisons",
+        "slug": "tms-vs-ect",
+        "keywords": [
+            "TMS ECT comparison",
+            "electroconvulsive therapy",
+            "TMS vs shock therapy"
+        ],
+        "quickAnswer": "TMS is non-invasive and doesn't require anesthesia, while ECT (Electroconvulsive Therapy) requires general anesthesia and induces a brief seizure. TMS has fewer side effects and no memory loss, while ECT is more intensive but can be faster-acting for severe depression.",
+        "relatedQuestions": [
+            "tms-vs-ketamine",
+            "what-is-ect",
+            "tms-side-effects"
+        ]
+    },
+    {
+        "id": "tms-for-depression",
+        "question": "Does TMS work for depression?",
+        "category": "conditions",
+        "slug": "does-tms-work-for-depression",
+        "keywords": [
+            "TMS depression",
+            "TMS effectiveness",
+            "TMS success rate"
+        ],
+        "quickAnswer": "Yes, TMS is highly effective for depression. Clinical studies show that approximately 50-60% of patients with treatment-resistant depression experience significant improvement, and about 30-40% achieve complete remission of symptoms.",
+        "relatedQuestions": [
+            "tms-for-anxiety",
+            "treatment-resistant-depression",
+            "tms-success-rate"
+        ]
+    }
+]
