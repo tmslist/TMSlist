@@ -147,6 +147,7 @@ export const BLOG_SLUGS = [
 
 export const COMMERCIAL_SLUGS = [
     { slug: 'get-listed', title: 'Get Listed' },
+    { slug: 'advertising', title: 'Advertising with TMS List' },
     { slug: 'marketing-services', title: 'TMS Marketing Services' },
     { slug: 'seo-for-tms', title: 'SEO for TMS Clinics' },
     { slug: 'google-ads-for-tms', title: 'Google Ads for TMS' },
