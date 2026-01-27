@@ -1,10 +1,14 @@
 import clinicsData from '../data/clinics.json';
+import userSubmittedClinics from '../data/user-submitted-clinics.json';
 import { type Clinic } from '../types/clinic';
 import { STATE_NAMES } from './clinicData'; // Reusing state map if available, or we can move it here.
 
-// Cast strictly
-// Cast strictly
-const allClinics = clinicsData as unknown as Clinic[];
+// Cast strictly and merge all clinic sources
+const mainClinics = clinicsData as unknown as Clinic[];
+const submittedClinics = userSubmittedClinics as unknown as Clinic[];
+
+// Merge all clinics - user submissions are added to the main list
+const allClinics: Clinic[] = [...mainClinics, ...submittedClinics];
 
 export function getAllClinics(): Clinic[] {
     return allClinics;

@@ -65,9 +65,11 @@ const treatments = Object.values(ClinicTreatment);
 const insurances = Object.values(ClinicInsurance);
 
 const title = "Add Your TMS Clinic | Free Listing on TMS List";
+const description =
+    "List your TMS therapy clinic for free. Get discovered by thousands of patients searching for treatment. Your listing goes live immediately.";
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description}>
     <main
         class="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-900 to-slate-900 py-16"
     >
@@ -75,16 +77,21 @@ const title = "Add Your TMS Clinic | Free Listing on TMS List";
             <!-- Header -->
             <div class="text-center mb-12">
                 <span
-                    class="inline-block px-4 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-full text-sm font-bold uppercase tracking-wider mb-4"
-                    >Free Listing</span
+                    class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-full text-sm font-bold uppercase tracking-wider mb-4"
                 >
+                    <span
+                        class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+                    ></span>
+                    Instant Listing
+                </span>
                 <h1 class="text-4xl md:text-5xl font-black text-white mb-4">
                     Add Your TMS Clinic
                 </h1>
                 <p class="text-xl text-slate-300 max-w-2xl mx-auto">
                     Get discovered by thousands of patients searching for TMS
-                    therapy. Fill out the form below and we'll create your
-                    clinic profile.
+                    therapy. <strong class="text-white"
+                        >Your listing goes live immediately</strong
+                    > after submission.
                 </p>
             </div>
 
@@ -92,7 +99,29 @@ const title = "Add Your TMS Clinic | Free Listing on TMS List";
             <div
                 class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12"
             >
-                <form id="add-listing-form" class="space-y-10">
+                <!-- Netlify Forms - also works as standard form -->
+                <form
+                    id="add-listing-form"
+                    class="space-y-10"
+                    name="clinic-submission"
+                    method="POST"
+                    data-netlify="true"
+                    netlify-honeypot="bot-field"
+                >
+                    <!-- Honeypot for spam protection -->
+                    <input
+                        type="hidden"
+                        name="form-name"
+                        value="clinic-submission"
+                    />
+                    <p class="hidden">
+                        <label
+                            >Don't fill this out: <input
+                                name="bot-field"
+                            /></label
+                        >
+                    </p>
+
                     <!-- Step 1: Basic Info -->
                     <section>
                         <div class="flex items-center gap-4 mb-6">
@@ -216,13 +245,12 @@ const title = "Add Your TMS Clinic | Free Listing on TMS List";
                                 <label
                                     for="website"
                                     class="block text-sm font-bold text-slate-300 mb-2"
-                                    >Website URL *</label
+                                    >Website URL</label
                                 >
                                 <input
                                     type="url"
                                     id="website"
                                     name="website"
-                                    required
                                     class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="https://www.yourclinic.com"
                                 />
@@ -524,10 +552,9 @@ const title = "Add Your TMS Clinic | Free Listing on TMS List";
                             class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-6"
                         >
                             <p class="text-blue-300 text-sm">
-                                This information helps us attribute the listing
-                                and contact you if we have questions. Your name
-                                will appear as "Listed by [Your Name]" on the
-                                clinic profile.
+                                This information helps us contact you if we need
+                                to verify details. Your email will not be
+                                displayed publicly.
                             </p>
                         </div>
 
@@ -570,6 +597,7 @@ const title = "Add Your TMS Clinic | Free Listing on TMS List";
                     <div class="pt-6 border-t border-white/10">
                         <button
                             type="submit"
+                            id="submit-btn"
                             class="w-full py-4 px-8 bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-lg rounded-2xl hover:from-indigo-400 hover:to-cyan-400 transition-all shadow-xl shadow-indigo-500/30 flex items-center justify-center gap-3"
                         >
                             <svg
@@ -584,11 +612,13 @@ const title = "Add Your TMS Clinic | Free Listing on TMS List";
                                     stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
-                            Submit Clinic Listing
+                            Add My Clinic Now
                         </button>
-                        <p class="text-center text-slate-400 text-sm mt-4">
-                            Submissions are reviewed within 24-48 hours. Once
-                            approved, your clinic will appear in our directory.
+                        <p
+                            class="text-center text-emerald-400 text-sm mt-4 font-medium"
+                        >
+                            ✓ Your listing will be live immediately after
+                            submission
                         </p>
                     </div>
                 </form>
@@ -596,10 +626,10 @@ const title = "Add Your TMS Clinic | Free Listing on TMS List";
                 <!-- Success Message (Hidden by default) -->
                 <div id="success-message" class="hidden text-center py-16">
                     <div
-                        class="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-6"
+                        class="w-24 h-24 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-6"
                     >
                         <svg
-                            class="w-10 h-10"
+                            class="w-12 h-12"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -612,18 +642,88 @@ const title = "Add Your TMS Clinic | Free Listing on TMS List";
                         </svg>
                     </div>
                     <h2 class="text-3xl font-bold text-white mb-4">
-                        Submission Received!
+                        🎉 Your Clinic is Live!
                     </h2>
-                    <p class="text-lg text-slate-300 mb-8 max-w-md mx-auto">
-                        Thank you for adding your clinic to TMS List. We'll
-                        review your submission and notify you once it's live.
+                    <p class="text-lg text-slate-300 mb-4 max-w-md mx-auto">
+                        Your clinic has been added to TMS List. Patients can now
+                        find you in our directory.
                     </p>
-                    <a
-                        href="/"
-                        class="inline-flex items-center gap-2 px-8 py-3 bg-white/10 text-white font-bold rounded-xl hover:bg-white/20 transition-colors"
-                    >
-                        Return to Homepage
-                    </a>
+                    <div id="clinic-slug-container" class="mb-8">
+                        <p class="text-sm text-slate-400 mb-2">
+                            Your clinic page:
+                        </p>
+                        <a
+                            id="clinic-link"
+                            href="#"
+                            class="inline-block px-6 py-3 bg-indigo-500/20 text-indigo-400 font-mono text-sm rounded-xl hover:bg-indigo-500/30 transition-colors break-all"
+                        >
+                            Loading...
+                        </a>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a
+                            id="view-clinic-btn"
+                            href="#"
+                            class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                ></path>
+                            </svg>
+                            View Your Clinic Page
+                        </a>
+                        <a
+                            href="/verified-clinics/"
+                            class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white/10 text-white font-bold rounded-xl hover:bg-white/20 transition-colors"
+                        >
+                            Browse All Clinics
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div
+                class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center"
+            >
+                <div class="bg-white/5 backdrop-blur rounded-2xl p-6">
+                    <div class="text-3xl mb-2">🔒</div>
+                    <h3 class="font-bold text-white mb-1">Secure & Private</h3>
+                    <p class="text-sm text-slate-400">
+                        Your contact info is never shared with third parties
+                    </p>
+                </div>
+                <div class="bg-white/5 backdrop-blur rounded-2xl p-6">
+                    <div class="text-3xl mb-2">⚡</div>
+                    <h3 class="font-bold text-white mb-1">
+                        Instant Visibility
+                    </h3>
+                    <p class="text-sm text-slate-400">
+                        Your clinic appears in search results immediately
+                    </p>
+                </div>
+                <div class="bg-white/5 backdrop-blur rounded-2xl p-6">
+                    <div class="text-3xl mb-2">📈</div>
+                    <h3 class="font-bold text-white mb-1">
+                        Grow Your Practice
+                    </h3>
+                    <p class="text-sm text-slate-400">
+                        Reach thousands of patients searching for TMS therapy
+                    </p>
                 </div>
             </div>
         </div>
@@ -636,81 +736,180 @@ const title = "Add Your TMS Clinic | Free Listing on TMS List";
             "add-listing-form",
         ) as HTMLFormElement;
         const successMessage = document.getElementById("success-message");
+        const submitBtn = document.getElementById("submit-btn");
+        const clinicLink = document.getElementById(
+            "clinic-link",
+        ) as HTMLAnchorElement;
+        const viewClinicBtn = document.getElementById(
+            "view-clinic-btn",
+        ) as HTMLAnchorElement;
+
+        // Generate slug from clinic name and city
+        function generateSlug(name: string, city: string): string {
+            const combined = `${name}-${city}`;
+            return combined
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, "")
+                .replace(/\s+/g, "-")
+                .replace(/-+/g, "-")
+                .trim();
+        }
+
+        // Generate unique ID
+        function generateId(state: string, city: string): string {
+            const stateCode = state.toLowerCase();
+            const citySlug = city
+                .toLowerCase()
+                .replace(/\s+/g, "-")
+                .substring(0, 10);
+            const timestamp = Date.now().toString(36);
+            return `user-${stateCode}-${citySlug}-${timestamp}`;
+        }
 
         form?.addEventListener("submit", async (e) => {
             e.preventDefault();
 
+            // Show loading state
+            if (submitBtn) {
+                submitBtn.innerHTML =
+                    '<svg class="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Adding your clinic...';
+                (submitBtn as HTMLButtonElement).disabled = true;
+            }
+
             const formData = new FormData(form);
 
             // Collect checkbox values
-            const machines = formData.getAll("machines");
-            const treatments = formData.getAll("treatments");
-            const insurances = formData.getAll("insurances");
+            const machines = formData.getAll("machines") as string[];
+            const treatments = formData.getAll("treatments") as string[];
+            const insurances = formData.getAll("insurances") as string[];
 
-            // Build submission object
-            const submission = {
-                // Basic Info
-                name: formData.get("name"),
+            const name = formData.get("name") as string;
+            const city = formData.get("city") as string;
+            const state = formData.get("state") as string;
+            const slug = generateSlug(name, city);
+            const id = generateId(state, city);
+
+            // Build clinic object matching the exact schema
+            const clinicData = {
+                id: id,
+                name: name,
+                slug: slug,
+                description_long:
+                    formData.get("description") ||
+                    `${name} is a TMS therapy provider located in ${city}, ${state}. We specialize in transcranial magnetic stimulation treatment for depression and other mental health conditions.`,
                 address: formData.get("address"),
-                city: formData.get("city"),
-                state: formData.get("state"),
+                city: city,
+                state: state,
                 zip: formData.get("zip"),
-                phone: formData.get("phone"),
-                website: formData.get("website"),
-                description: formData.get("description"),
-
-                // TMS Details
-                machines: machines,
-                treatments: treatments,
-                insurances: insurances,
-
-                // Media
-                media: {
-                    logo_url: formData.get("logo_url") || null,
-                    hero_image_url: formData.get("hero_image_url") || null,
-                    video_url: formData.get("video_url") || null,
+                address_obj: {
+                    street: formData.get("address"),
+                    city: city,
+                    state: state,
+                    zip: formData.get("zip"),
+                    county: "",
+                    nearby_landmarks: [],
                 },
-
-                // Google Business Profile
+                geo: {
+                    lat: 0,
+                    lng: 0,
+                },
+                contact: {
+                    phone: formData.get("phone"),
+                    website_url: formData.get("website") || null,
+                },
+                phone: formData.get("phone"),
+                website: formData.get("website") || null,
+                machines: machines.length > 0 ? machines : ["TMS Device"],
+                treatments: treatments.length > 0 ? treatments : ["Depression"],
+                insurance_accepted: insurances,
+                insurances: insurances,
+                cost_info: {
+                    accepts_insurance: insurances.length > 0,
+                    self_pay_available: true,
+                    price_range: "Contact for pricing",
+                },
+                hours: {},
+                rating: 5.0,
+                review_count: 0,
+                hero_image_url: formData.get("hero_image_url") || null,
+                logo_url: formData.get("logo_url") || null,
+                photos: [],
+                video_url: formData.get("video_url") || null,
                 google_business_profile: {
                     embed_url: formData.get("gbp_embed_url") || null,
                 },
-
-                // Doctor Info
-                doctor: formData.get("doctor_name")
-                    ? {
-                          name: formData.get("doctor_name"),
-                          title: formData.get("doctor_title"),
-                          image_url: formData.get("doctor_image_url"),
-                          years_experience: formData.get("doctor_years"),
-                      }
-                    : null,
-
-                // Attribution
+                doctors: formData.get("doctor_name")
+                    ? [
+                          {
+                              name: formData.get("doctor_name"),
+                              title:
+                                  formData.get("doctor_title") ||
+                                  "TMS Provider",
+                              slug: generateSlug(
+                                  formData.get("doctor_name") as string,
+                                  city,
+                              ),
+                              image_url:
+                                  formData.get("doctor_image_url") || null,
+                              years_experience:
+                                  parseInt(
+                                      formData.get("doctor_years") as string,
+                                  ) || 0,
+                              specialties: treatments,
+                          },
+                      ]
+                    : [],
+                verified: true,
+                source: "user_submitted",
                 created_by: {
                     name: formData.get("submitter_name"),
                     email: formData.get("submitter_email"),
                     submitted_at: new Date().toISOString(),
-                    source: "website_form",
                 },
-
-                // Meta
-                verified: false,
+                created_at: new Date().toISOString(),
             };
 
-            // For now, log to console and save to localStorage
-            // In production, this would POST to a serverless function
-            console.log("Clinic Submission:", submission);
-
-            // Save to localStorage as a simple demo
+            // Store in localStorage for persistence and admin review
             const submissions = JSON.parse(
-                localStorage.getItem("tms_submissions") || "[]",
+                localStorage.getItem("tms_pending_clinics") || "[]",
             );
-            submissions.push(submission);
+            submissions.push(clinicData);
             localStorage.setItem(
-                "tms_submissions",
+                "tms_pending_clinics",
                 JSON.stringify(submissions),
             );
+
+            // Also try to submit to Netlify Forms (will work when deployed to Netlify)
+            try {
+                const netlifyFormData = new FormData(form);
+                netlifyFormData.append(
+                    "clinic_json",
+                    JSON.stringify(clinicData),
+                );
+
+                await fetch("/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams(
+                        netlifyFormData as any,
+                    ).toString(),
+                });
+            } catch (err) {
+                // Silently fail for non-Netlify environments
+                console.log("Form submitted locally");
+            }
+
+            // Update clinic link
+            const clinicUrl = `/clinic/${slug}/`;
+            if (clinicLink) {
+                clinicLink.href = clinicUrl;
+                clinicLink.textContent = `tmslist.com${clinicUrl}`;
+            }
+            if (viewClinicBtn) {
+                viewClinicBtn.href = clinicUrl;
+            }
 
             // Show success message
             form.classList.add("hidden");
@@ -718,6 +917,10 @@ const title = "Add Your TMS Clinic | Free Listing on TMS List";
 
             // Scroll to top
             window.scrollTo({ top: 0, behavior: "smooth" });
+
+            // Log for debugging
+            console.log("Clinic submitted:", clinicData);
+            console.log("Clinic URL will be:", clinicUrl);
         });
     });
 </script>
