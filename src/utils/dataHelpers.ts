@@ -50,5 +50,30 @@ export function getClinicsByCity(stateCode: string, cityName: string): Clinic[] 
     );
 }
 
+// Get total count of doctors across all verified clinics
+export function getTotalDoctorCount(): number {
+    return allClinics
+        .filter(c => c.verified)
+        .reduce((acc, clinic) => {
+            const doctors = (clinic as any).doctors_data || clinic.doctors || [];
+            return acc + doctors.length;
+        }, 0);
+}
+
+// Get all doctors from verified clinics
+export function getAllDoctors(): any[] {
+    const doctors: any[] = [];
+    allClinics
+        .filter(c => c.verified)
+        .forEach(clinic => {
+            const clinicDoctors = (clinic as any).doctors_data || clinic.doctors || [];
+            clinicDoctors.forEach((doc: any) => {
+                doctors.push({ ...doc, clinic });
+            });
+        });
+    return doctors;
+}
+
 // Keeping the existing helpers for slug compatibility while moving forward
 export { STATE_NAMES, getStateSlug, getStateCodeFromSlug } from './clinicData';
+

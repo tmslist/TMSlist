@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-import { getOperationalClinics, getClinicPhoto, getClinicRating, getClinicReviewCount } from '../utils/dataHelpers';
+import { getOperationalClinics, getClinicPhoto, getClinicRating, getClinicReviewCount, getTotalDoctorCount } from '../utils/dataHelpers';
 import type { Clinic } from '../types/clinic';
 import { TREATMENT_SLUGS, TECHNOLOGY_SLUGS, INSURANCE_SLUGS } from '../utils/seo_slugs';
 
@@ -52,6 +52,9 @@ const uniqueStates = Object.keys(stateGroups);
 // Top Rated Clinics for Featured Section (only verified with real ratings)
 // Use helpers for polymorphic properties
 const topClinics = clinics.filter(c => getClinicRating(c) >= 4.7 && getClinicReviewCount(c) > 5).slice(0, 6);
+
+// Get total doctor count dynamically
+const totalDoctors = getTotalDoctorCount();
 
 // Featured Technologies
 const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
@@ -151,8 +154,8 @@ const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
                     <div class="text-sm font-bold text-white/70 uppercase tracking-wider">Remission Rate</div>
                 </div>
                 <div>
-                    <div class="text-4xl md:text-5xl font-black text-white mb-2">FDA</div>
-                    <div class="text-sm font-bold text-white/70 uppercase tracking-wider">Cleared Technology</div>
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2">{totalDoctors}+</div>
+                    <div class="text-sm font-bold text-white/70 uppercase tracking-wider">TMS Specialists</div>
                 </div>
             </div>
         </div>
