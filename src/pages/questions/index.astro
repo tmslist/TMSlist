@@ -30,7 +30,9 @@ const categories = {
     },
 };
 
-const groupedQuestions = questionsData.reduce((acc, q) => {
+const groupedQuestions = questionsData.reduce<
+    Record<string, (typeof questionsData)[0][]>
+>((acc, q) => {
     if (!acc[q.category]) acc[q.category] = [];
     acc[q.category].push(q);
     return acc;
@@ -210,6 +212,21 @@ const featured = questionsData.slice(0, 6);
         import Fuse from "fuse.js";
         import questionsData from "../../data/questions-comprehensive.json";
 
+        // Define types
+        interface Question {
+            question: string;
+            quickAnswer: string;
+            slug: string;
+            category: string;
+            keywords: string[];
+        }
+
+        interface FuseResult {
+            item: Question;
+            score?: number;
+            matches?: readonly any[];
+        }
+
         // Initialize Fuse.js for fuzzy search
         const fuse = new Fuse(questionsData, {
             keys: ["question", "quickAnswer", "keywords"],
@@ -226,15 +243,18 @@ const featured = questionsData.slice(0, 6);
             "autocomplete-results",
         );
         let selectedIndex = -1;
-        let currentResults: any[] = [];
+        let currentResults: FuseResult[] = [];
 
         // Debounce function
-        function debounce(func: Function, wait: number) {
+        function debounce<T extends (...args: any[]) => void>(
+            func: T,
+            wait: number,
+        ) {
             let timeout: NodeJS.Timeout;
-            return function executedFunction(...args: any[]) {
+            return function (this: any, ...args: Parameters<T>) {
                 const later = () => {
                     clearTimeout(timeout);
-                    func(...args);
+                    func.apply(this, args);
                 };
                 clearTimeout(timeout);
                 timeout = setTimeout(later, wait);
@@ -252,7 +272,7 @@ const featured = questionsData.slice(0, 6);
         }
 
         // Display search results
-        function displayResults(results: any[]) {
+        function displayResults(results: FuseResult[]) {
             if (!resultsContainer) return;
 
             if (results.length === 0) {

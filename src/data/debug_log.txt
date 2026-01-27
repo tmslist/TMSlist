@@ -1,0 +1,15 @@
+[2026-01-27T18:55:42.641Z] REV POST Error: Unexpected end of JSON input
+SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at parseJSONFromBytes (node:internal/deps/undici/undici:5738:19)
+    at successSteps (node:internal/deps/undici/undici:5719:27)
+    at consumeBody (node:internal/deps/undici/undici:5725:9)
+    at _Request.json (node:internal/deps/undici/undici:5665:18)
+    at Module.POST (/Users/taps/Desktop/infinite-hawking/src/pages/api/reviews.ts:31:38)
+    at renderEndpoint (file:///Users/taps/Desktop/infinite-hawking/node_modules/astro/dist/runtime/server/endpoint.js:37:32)
+    at lastNext (file:///Users/taps/Desktop/infinite-hawking/node_modules/astro/dist/core/render-context.js:202:29)
+    at next (file:///Users/taps/Desktop/infinite-hawking/node_modules/astro/dist/core/middleware/callMiddleware.js:7:31)
+    at file:///Users/taps/Desktop/infinite-hawking/node_modules/astro/dist/core/middleware/sequence.js:65:18
+
+[2026-01-27T18:56:53.543Z] REV POST Raw: {"clinicId":"ca-la-001","userId":"test-user","userName":"Test","rating":5,"reviewText":"Testing API"}
+[2026-01-27T18:57:19.309Z] SUBMIT POST Raw: {"type":"quiz-lead","name":"Test Lead","email":"test@lead.com","phone":"555-0000"}

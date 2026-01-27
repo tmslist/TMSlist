@@ -202,6 +202,14 @@
     form?.addEventListener("submit", async (e) => {
         e.preventDefault();
 
+        // Get button to show loading state
+        const submitBtn = form.querySelector(
+            'button[type="submit"]',
+        ) as HTMLButtonElement;
+        const originalBtnText = submitBtn.innerText;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Processing...";
+
         const formData = new FormData(form);
         const selectedResource = (
             document.querySelector(
@@ -210,40 +218,64 @@
         )?.value;
 
         const leadData = {
+            type: "lead-magnet",
             name: formData.get("name"),
             email: formData.get("email"),
             resource: selectedResource,
             subscribe: formData.get("subscribe") === "on",
-            timestamp: new Date().toISOString(),
             source: window.location.href,
         };
 
-        // Store lead (in production, send to backend/CRM)
         try {
-            // For now, store in localStorage (replace with API call)
-            const leads = JSON.parse(localStorage.getItem("tms-leads") || "[]");
-            leads.push(leadData);
-            localStorage.setItem("tms-leads", JSON.stringify(leads));
+            const response = await fetch("/api/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(leadData),
+            });
 
-            // Show success and trigger download
-            alert(
-                `✅ Success! Your ${getResourceName(selectedResource)} is downloading now. Check your email for more TMS resources!`,
-            );
+            const result = await response.json();
 
-            // Simulate PDF download
-            const downloadUrl = `/downloads/${selectedResource}.pdf`;
-            const link = document.createElement("a");
-            link.href = downloadUrl;
-            link.download = `${selectedResource}.pdf`;
-            link.click();
+            if (result.success) {
+                // Show success and trigger download
+                const resourceName = getResourceName(selectedResource);
 
-            closeModal();
-            form.reset();
+                // Replace form with success message
+                form.innerHTML = `
+                    <div class="text-center py-8 animate-fade-in-up">
+                        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Success!</h3>
+                        <p class="text-gray-600 mb-6">Your <strong>${resourceName}</strong> is downloading now.</p>
+                        <p class="text-sm text-gray-500">Check your email for more helpful TMS resources.</p>
+                        <button onclick="closeModal()" class="mt-6 px-6 py-2 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors">
+                            Close Window
+                        </button>
+                    </div>
+                `;
+
+                // Trigger PDF download
+                const downloadUrl = `/downloads/${selectedResource}.pdf`;
+                const link = document.createElement("a");
+                link.href = downloadUrl;
+                link.download = `${selectedResource}.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                console.log(`Downloading ${selectedResource}.pdf...`);
+            } else {
+                throw new Error(result.message || "Submission failed");
+            }
         } catch (error) {
-            alert(
-                "❌ Something went wrong. Please try again or contact support.",
-            );
             console.error("Lead capture error:", error);
+            alert("Something went wrong. Please try again.");
+            submitBtn.disabled = false;
+            submitBtn.innerText = originalBtnText;
         }
     });
 

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "review-001",
+    "clinicId": "ca-la-001",
+    "userId": "google-user-001",
+    "userName": "Sarah M.",
+    "userEmail": "sarah.m@gmail.com",
+    "rating": 5,
+    "reviewText": "The staff here is incredible. They made me feel so comfortable during my treatments. I've seen a huge improvement in my mood.",
+    "createdAt": "2026-01-15T10:30:00Z",
+    "verified": true
+  },
+  {
+    "id": "review-002",
+    "clinicId": "ca-la-001",
+    "userId": "google-user-002",
+    "userName": "Michael R.",
+    "userEmail": "michael.r@gmail.com",
+    "rating": 4,
+    "reviewText": "Great facility and modern equipment. Parking can be a bit tricky, but the treatment itself is top-notch.",
+    "createdAt": "2026-01-20T14:15:00Z",
+    "verified": true
+  },
+  {
+    "id": "review-1769540213543",
+    "clinicId": "ca-la-001",
+    "userId": "test-user",
+    "userName": "Test",
+    "rating": 5,
+    "reviewText": "Testing API",
+    "createdAt": "2026-01-27T18:56:53.543Z",
+    "verified": false
+  }
+]
