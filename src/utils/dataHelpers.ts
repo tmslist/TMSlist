@@ -47,15 +47,45 @@ export function getClinicReviewCount(clinic: Clinic): number {
     return clinic.review_count || (typeof clinic.rating === 'object' ? clinic.rating.count : 0);
 }
 
+const CLINIC_IMAGE_POOL = [
+    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=500&fit=crop", // Modern waiting room
+    "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop", // Bright hospital corridor
+    "https://images.unsplash.com/photo-1516549655169-df83a092dd14?w=800&h=500&fit=crop", // Medical equipment
+    "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=800&h=500&fit=crop", // Abstract medical blue
+    "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=500&fit=crop", // Clean medical office
+    "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&h=500&fit=crop", // Modern clinic exterior
+    "https://images.unsplash.com/photo-1516574187841-693083f69382?w=800&h=500&fit=crop", // Doctor consultation
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop", // Research lab style
+    "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop", // Original default (Chair)
+    "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800&h=500&fit=crop", // White clean reception
+    "https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=800&h=500&fit=crop", // Blue medical texture
+    "https://images.unsplash.com/photo-1576091160550-217358c7e618?w=800&h=500&fit=crop", // Microscope/Tech
+    "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=800&h=500&fit=crop", // Relaxing therapy room
+    "https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?w=800&h=500&fit=crop", // Green plants in clinic
+    "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&h=500&fit=crop", // Neurologist office
+    "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop"  // Bright window view
+];
+
 /**
- * Returns the best available image for a clinic (Hero > Logo > Fallback).
+ * Returns the best available image for a clinic (Hero > Logo > Deterministic Pool).
+ * Uses a hash of the clinic ID or Name to consistently select the same random image
+ * from the pool for a given clinic, preventing the "same image everywhere" issue.
  * @param {Clinic} clinic - The clinic object.
  * @returns {string} URL string of the image.
  */
 export function getClinicPhoto(clinic: Clinic): string {
     if (clinic.hero_image_url) return clinic.hero_image_url;
-    if (clinic.logo_url) return clinic.logo_url;
-    return "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop";
+    
+    // Deterministic hash based on clinic ID or Name
+    const str = clinic.id || clinic.name || "default";
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    
+    // Positive modulo to get index
+    const index = Math.abs(hash) % CLINIC_IMAGE_POOL.length;
+    return CLINIC_IMAGE_POOL[index];
 }
 
 /**

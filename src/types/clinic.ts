@@ -39,6 +39,10 @@ export enum ClinicTreatment {
     OCD = 'OCD',
     AnxiousDepression = 'Anxious Depression',
 
+    // New Requests
+    Ketamine = 'Ketamine Infusion',
+    Spravato = 'Spravato (Esketamine)',
+
     // Off-Label / Research
     Anxiety = 'Anxiety',
     PTSD = 'PTSD',

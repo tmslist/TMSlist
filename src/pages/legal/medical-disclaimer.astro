@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Medical Disclaimer | TMS List";
+const description =
+    "Medical Disclaimer for TMS List. The information provided is for educational purposes only and not medical advice.";
+---
+
+<Layout title={title} description={description}>
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+            Medical Disclaimer
+        </h1>
+
+        <div
+            class="prose prose-indigo max-w-none border-l-4 border-yellow-400 pl-6 py-2 bg-yellow-50 my-8 rounded-r-lg"
+        >
+            <p class="text-lg font-medium text-yellow-800 m-0">
+                IF YOU ARE EXPERIENCING A MEDICAL EMERGENCY, CALL 911 OR GO TO
+                THE NEAREST EMERGENCY ROOM IMMEDIATELY. IF YOU ARE HAVING
+                SUICIDAL THOUGHTS, CALL OR TEXT THE 988 SUICIDE & CRISIS
+                LIFELINE.
+            </p>
+        </div>
+
+        <div class="prose prose-indigo max-w-none">
+            <h2>Not Medical Advice</h2>
+            <p>
+                The content content, including but not limited to text,
+                graphics, images, and other material contained on TMS List ("the
+                Site") is for **informational and educational purposes only**.
+                No material on this site is intended to be a substitute for
+                professional medical advice, diagnosis, or treatment.
+            </p>
+
+            <h2>Consult Your Doctor</h2>
+            <p>
+                Always seek the advice of your physician or other qualified
+                health care provider with any questions you may have regarding a
+                medical condition or treatment and before undertaking a new
+                health care regimen, and never disregard professional medical
+                advice or delay in seeking it because of something you have read
+                on this specific website.
+            </p>
+
+            <h2>No Doctor-Patient Relationship</h2>
+            <p>
+                Use of this Site does not establish a doctor-patient
+                relationship. Submitting a form or contacting a clinic listed on
+                this directory does not establish a doctor-patient relationship
+                until you have been formally accepted as a patient by that
+                specific provider.
+            </p>
+
+            <h2>Accuracy of Information</h2>
+            <p>
+                While we strive to provide accurate and up-to-date information,
+                medical knowledge is constantly evolving. Transcranial Magnetic
+                Stimulation (TMS) is an FDA-cleared treatment, but individual
+                results may vary. We do not guarantee the accuracy,
+                completeness, or usefulness of any information on the Site.
+            </p>
+        </div>
+    </main>
+</Layout>

@@ -1,0 +1,82 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Terms of Service | TMS List";
+const description =
+    "Terms of Service for using TMS List directory and services.";
+const lastUpdated = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+---
+
+<Layout title={title} description={description}>
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Terms of Service</h1>
+        <p class="text-gray-500 mb-8">Last Updated: {lastUpdated}</p>
+
+        <div class="prose prose-indigo max-w-none">
+            <h2>1. Acceptance of Terms</h2>
+            <p>
+                By accessing or using TMS List (the "Site"), you agree to be
+                bound by these Terms of Service. If you do not agree to these
+                terms, please do not use the Site.
+            </p>
+
+            <h2>2. Description of Service</h2>
+            <p>
+                TMS List provides a directory of Transcranial Magnetic
+                Stimulation (TMS) providers and educational content related to
+                mental health treatments. We do not provide medical advice,
+                diagnosis, or treatment. The content on this Site is for
+                informational purposes only.
+            </p>
+
+            <h2>3. No Medical Advice</h2>
+            <p>
+                THE SITE DOES NOT PROVIDE MEDICAL ADVICE. The contents of the
+                Site, such as text, graphics, images, and other material
+                contained on the Site ("Content") are for informational purposes
+                only. The Content is not intended to be a substitute for
+                professional medical advice, diagnosis, or treatment. Always
+                seek the advice of your physician or other qualified health
+                provider with any questions you may have regarding a medical
+                condition.
+            </p>
+
+            <h2>4. User Responsibilities</h2>
+            <p>
+                You agree to use the Site only for lawful purposes. You are
+                prohibited from violating or attempting to violate the security
+                of the Site, including, without limitation, accessing data not
+                intended for you or logging into a server or account which you
+                are not authorized to access.
+            </p>
+
+            <h2>5. Provider Listings</h2>
+            <p>
+                We make reasonable efforts to ensure the accuracy of provider
+                listings, but we do not warrant that any information is complete
+                or error-free. Inclusion of a provider in our directory does not
+                imply endorsement by TMS List.
+            </p>
+
+            <h2>6. Limitation of Liability</h2>
+            <p>
+                In no event shall TMS List, its affiliates, or their licensors,
+                service providers, employees, agents, officers, or directors be
+                liable for damages of any kind, under any legal theory, arising
+                out of or in connection with your use, or inability to use, the
+                Site.
+            </p>
+
+            <h2>7. Changes to Terms</h2>
+            <p>
+                We may revise and update these Terms of Service from time to
+                time in our sole discretion. All changes are effective
+                immediately when we post them.
+            </p>
+        </div>
+    </main>
+</Layout>

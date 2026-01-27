@@ -114,213 +114,283 @@ const description = `Find top-rated TMS providers in ${cityName}, ${stateName}. 
                 }
               </div>
             </div>
-            <div>
-              <h3
-                class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3"
-              >
-                Insurance
-              </h3>
-              <div
-                class="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
-              >
-                {
-                  Object.values(ClinicInsurance).map((i) => (
-                    <label class="flex items-center space-x-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary shrink-0"
-                      />
-                      <span class="text-sm text-gray-600 group-hover:text-gray-900">
-                        {i}
-                      </span>
-                    </label>
-                  ))
-                }
-              </div>
+          </div>
+          <div>
+            <h3
+              class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3"
+            >
+              Treatments
+            </h3>
+            <div
+              class="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"
+            >
+              {
+                [
+                  "Depression",
+                  "Anxiety",
+                  "OCD",
+                  "PTSD",
+                  "Ketamine Infusion",
+                  "Spravato (Esketamine)",
+                ].map((t) => (
+                  <label class="flex items-center space-x-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary shrink-0"
+                    />
+                    <span class="text-sm text-gray-600 group-hover:text-gray-900">
+                      {t}
+                    </span>
+                  </label>
+                ))
+              }
+            </div>
+          </div>
+          <div>
+            <h3
+              class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3"
+            >
+              Insurance
+            </h3>
+            <div
+              class="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
+            >
+              {
+                Object.values(ClinicInsurance).map((i) => (
+                  <label class="flex items-center space-x-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary shrink-0"
+                    />
+                    <span class="text-sm text-gray-600 group-hover:text-gray-900">
+                      {i}
+                    </span>
+                  </label>
+                ))
+              }
             </div>
           </div>
         </div>
       </aside>
+    </div>
 
-      <!-- Main Grid -->
-      <div class="w-full lg:w-3/4">
-        <h1 class="text-3xl font-bold text-gray-900 mb-6 flex items-baseline">
-          {cityName} TMS Clinics
-          <span class="text-gray-500 font-medium text-lg ml-3" id="clinic-count"
-            >{cityClinics.length} Providers</span
-          >
-        </h1>
+    <!-- Main Grid -->
+    <div class="w-full lg:w-3/4">
+      <h1 class="text-3xl font-bold text-gray-900 mb-6 flex items-baseline">
+        {cityName} TMS Clinics
+        <span class="text-gray-500 font-medium text-lg ml-3" id="clinic-count"
+          >{cityClinics.length} Providers</span
+        >
+      </h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="clinic-grid">
-          {
-            sortedClinics.map((clinic) => (
-              <div
-                class="clinic-item"
-                data-machines={(clinic.machines || []).join(",").toLowerCase()}
-                data-insurances={(
-                  clinic.insurance_accepted ||
-                  clinic.insurances ||
-                  []
-                )
-                  .join(",")
-                  .toLowerCase()}
-              >
-                <ClinicCard clinic={clinic} />
-              </div>
-            ))
-          }
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="clinic-grid">
+        {
+          sortedClinics.map((clinic) => (
+            <div
+              class="clinic-item"
+              data-machines={(clinic.machines || []).join(",").toLowerCase()}
+              data-treatments={(clinic.specialties || [])
+                .join(",")
+                .toLowerCase()}
+              data-insurances={(
+                clinic.insurance_accepted ||
+                clinic.insurances ||
+                []
+              )
+                .join(",")
+                .toLowerCase()}
+            >
+              <ClinicCard clinic={clinic} />
+            </div>
+          ))
+        }
+      </div>
 
-        <p id="no-results" class="hidden text-center text-gray-500 py-12">
-          No clinics match your selected filters. Try adjusting your criteria.
+      <p id="no-results" class="hidden text-center text-gray-500 py-12">
+        No clinics match your selected filters. Try adjusting your criteria.
+      </p>
+
+      <!-- SEO Content Section for LLM Ranking -->
+      <section
+        class="mt-16 pt-12 border-t border-gray-100 prose prose-indigo max-w-none"
+      >
+        <h2>Why Choose TMS Therapy in {cityName}?</h2>
+        <p>
+          Transcranial Magnetic Stimulation (TMS) is becoming a leading
+          alternative treatment for depression in {cityName}, {stateName}. With {
+            cityClinics.length
+          } verified providers in the area, patients have access to cutting-edge technology
+          including NeuroStar, BrainsWay Deep TMS, and MagVenture systems.
         </p>
+        <h3>How much does TMS cost in {cityName}?</h3>
+        <p>
+          The cost of TMS in {cityName} varies by clinic and insurance coverage. Most
+          major insurers in {stateName} (including Medicare, Blue Cross Blue Shield,
+          and Aetna) now cover TMS for Treatment-Resistant Depression. Without insurance,
+          sessions can range from $300 to $500 per session. Many clinics listed above
+          offer free consultations to verify your benefits.
+        </p>
+        <h3>Ketamine vs TMS: What's available in {stateName}?</h3>
+        <p>
+          Many clinics in {cityName} now offer both TMS and Spravato (Esketamine)
+          or Ketamine Infusion Therapy. While TMS uses magnetic pulses to stimulate
+          the brain, Ketamine works chemically on NMDA receptors. Both are FDA-cleared
+          or evidence-based options for patients who haven't responded to traditional
+          antidepressants. Use the filters above to find clinics specifically offering
+          "Ketamine Infusion" or "Spravato".
+        </p>
+      </section>
 
-        <script is:inline>
-          document.addEventListener("DOMContentLoaded", () => {
-            const checkboxes = document.querySelectorAll(
-              'input[type="checkbox"]',
-            );
-            const clinicItems = document.querySelectorAll(".clinic-item");
-            const clinicCount = document.getElementById("clinic-count");
-            const noResults = document.getElementById("no-results");
-            const resetBtn = document.querySelector("button");
+      <script is:inline>
+        document.addEventListener("DOMContentLoaded", () => {
+          const checkboxes = document.querySelectorAll(
+            'input[type="checkbox"]',
+          );
+          const clinicItems = document.querySelectorAll(".clinic-item");
+          const clinicCount = document.getElementById("clinic-count");
+          const noResults = document.getElementById("no-results");
+          const resetBtn = document.querySelector("button");
 
-            function filterClinics() {
-              const selectedMachines = [];
-              const selectedInsurances = [];
+          function filterClinics() {
+            const selectedMachines = [];
+            const selectedTreatments = [];
+            const selectedInsurances = [];
 
-              checkboxes.forEach((cb) => {
-                if (cb.checked) {
-                  const label = cb.parentElement
-                    .querySelector("span")
-                    .textContent.trim()
-                    .toLowerCase();
-                  // Determine if it's machine or insurance based on parent section
-                  const section = cb.closest('div[class="space-y-6"]');
-                  if (section) {
-                    const firstH3 = section.querySelector("h3");
-                    if (firstH3 && firstH3.textContent.includes("Technology")) {
-                      selectedMachines.push(label);
-                    } else if (
-                      firstH3 &&
-                      firstH3.textContent.includes("Insurance")
-                    ) {
-                      selectedInsurances.push(label);
-                    }
+            checkboxes.forEach((cb) => {
+              if (cb.checked) {
+                const label = cb.parentElement
+                  .querySelector("span")
+                  .textContent.trim()
+                  .toLowerCase();
+
+                const section = cb.closest('div[class="space-y-6"]');
+                if (section) {
+                  const firstH3 = section.querySelector("h3");
+                  const h3Text = firstH3 ? firstH3.textContent : "";
+
+                  if (h3Text.includes("Technology")) {
+                    selectedMachines.push(label);
+                  } else if (h3Text.includes("Treatments")) {
+                    selectedTreatments.push(label);
+                  } else if (h3Text.includes("Insurance")) {
+                    selectedInsurances.push(label);
                   }
                 }
-              });
+              }
+            });
 
-              let visibleCount = 0;
+            let visibleCount = 0;
 
-              clinicItems.forEach((item) => {
-                const machines = item.dataset.machines || "";
-                const insurances = item.dataset.insurances || "";
+            clinicItems.forEach((item) => {
+              const machines = item.dataset.machines || "";
+              const treatments = item.dataset.treatments || "";
+              const insurances = item.dataset.insurances || "";
 
-                let showByMachine =
-                  selectedMachines.length === 0 ||
-                  selectedMachines.some((m) => machines.includes(m));
-                let showByInsurance =
-                  selectedInsurances.length === 0 ||
-                  selectedInsurances.some((i) => insurances.includes(i));
+              let showByMachine =
+                selectedMachines.length === 0 ||
+                selectedMachines.some((m) => machines.includes(m));
 
-                if (showByMachine && showByInsurance) {
-                  item.style.display = "";
-                  visibleCount++;
-                } else {
-                  item.style.display = "none";
-                }
-              });
+              let showByTreatment =
+                selectedTreatments.length === 0 ||
+                selectedTreatments.some((t) => treatments.includes(t));
 
-              clinicCount.textContent = `${visibleCount} Provider${visibleCount !== 1 ? "s" : ""}`;
-              noResults.classList.toggle("hidden", visibleCount > 0);
-            }
+              let showByInsurance =
+                selectedInsurances.length === 0 ||
+                selectedInsurances.some((i) => insurances.includes(i));
 
-            checkboxes.forEach((cb) =>
-              cb.addEventListener("change", filterClinics),
+              if (showByMachine && showByTreatment && showByInsurance) {
+                item.style.display = "";
+                visibleCount++;
+              } else {
+                item.style.display = "none";
+              }
+            });
+
+            clinicCount.textContent = `${visibleCount} Provider${visibleCount !== 1 ? "s" : ""}`;
+            noResults.classList.toggle("hidden", visibleCount > 0);
+          }
+
+          checkboxes.forEach((cb) =>
+            cb.addEventListener("change", filterClinics),
+          );
+
+          resetBtn?.addEventListener("click", () => {
+            checkboxes.forEach((cb) => (cb.checked = false));
+            filterClinics();
+          });
+        });
+      </script>
+
+      <!-- Interactive Map -->
+      <div
+        id="clinic-map"
+        class="mt-12 rounded-xl h-80 shadow-lg border border-gray-200 overflow-hidden z-0"
+      >
+      </div>
+
+      <!-- Leaflet CSS -->
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+      />
+
+      <script
+        is:inline
+        define:vars={{
+          clinicsForMap: sortedClinics
+            .filter((c) => c.geo?.lat && c.geo?.lng)
+            .map((c) => ({
+              name: c.name,
+              lat: c.geo.lat,
+              lng: c.geo.lng,
+              slug: c.slug,
+            })),
+        }}
+      >
+        window.addEventListener("load", () => {
+          if (typeof L === "undefined") {
+            const script = document.createElement("script");
+            script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+            script.onload = initMap;
+            document.head.appendChild(script);
+          } else {
+            initMap();
+          }
+
+          function initMap() {
+            const mapEl = document.getElementById("clinic-map");
+            if (!mapEl || clinicsForMap.length === 0) return;
+
+            const firstClinic = clinicsForMap[0];
+            const map = L.map("clinic-map").setView(
+              [firstClinic.lat, firstClinic.lng],
+              11,
             );
 
-            resetBtn?.addEventListener("click", () => {
-              checkboxes.forEach((cb) => (cb.checked = false));
-              filterClinics();
-            });
-          });
-        </script>
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+              attribution: "&copy; OpenStreetMap contributors",
+            }).addTo(map);
 
-        <!-- Interactive Map -->
-        <div
-          id="clinic-map"
-          class="mt-12 rounded-xl h-80 shadow-lg border border-gray-200 overflow-hidden z-0"
-        >
-        </div>
-
-        <!-- Leaflet CSS -->
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin=""
-        />
-
-        <script
-          is:inline
-          define:vars={{
-            clinicsForMap: sortedClinics
-              .filter((c) => c.geo?.lat && c.geo?.lng)
-              .map((c) => ({
-                name: c.name,
-                lat: c.geo.lat,
-                lng: c.geo.lng,
-                slug: c.slug,
-              })),
-          }}
-        >
-          window.addEventListener("load", () => {
-            if (typeof L === "undefined") {
-              const script = document.createElement("script");
-              script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-              script.onload = initMap;
-              document.head.appendChild(script);
-            } else {
-              initMap();
-            }
-
-            function initMap() {
-              const mapEl = document.getElementById("clinic-map");
-              if (!mapEl || clinicsForMap.length === 0) return;
-
-              const firstClinic = clinicsForMap[0];
-              const map = L.map("clinic-map").setView(
-                [firstClinic.lat, firstClinic.lng],
-                11,
-              );
-
-              L.tileLayer(
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                {
-                  attribution: "&copy; OpenStreetMap contributors",
-                },
-              ).addTo(map);
-
-              clinicsForMap.forEach((clinic) => {
-                L.marker([clinic.lat, clinic.lng])
-                  .addTo(map)
-                  .bindPopup(
-                    `<strong>${clinic.name}</strong><br/><a href="/clinic/${clinic.slug}">View Clinic</a>`,
-                  );
-              });
-
-              // Fit bounds to all markers
-              if (clinicsForMap.length > 1) {
-                const bounds = L.latLngBounds(
-                  clinicsForMap.map((c) => [c.lat, c.lng]),
+            clinicsForMap.forEach((clinic) => {
+              L.marker([clinic.lat, clinic.lng])
+                .addTo(map)
+                .bindPopup(
+                  `<strong>${clinic.name}</strong><br/><a href="/clinic/${clinic.slug}">View Clinic</a>`,
                 );
-                map.fitBounds(bounds, { padding: [30, 30] });
-              }
+            });
+
+            // Fit bounds to all markers
+            if (clinicsForMap.length > 1) {
+              const bounds = L.latLngBounds(
+                clinicsForMap.map((c) => [c.lat, c.lng]),
+              );
+              map.fitBounds(bounds, { padding: [30, 30] });
             }
-          });
-        </script>
-      </div>
+          }
+        });
+      </script>
     </div>
   </main>
 </Layout>
