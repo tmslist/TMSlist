@@ -95,21 +95,21 @@ const title = `TMS Therapy in ${cityName}, ${stateName} - Top ${sortedClinics.le
               >
                 TMS Technology
               </h3>
-              <div class="space-y-2">
+              <div
+                class="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"
+              >
                 {
-                  Object.values(ClinicMachine)
-                    .slice(0, 4)
-                    .map((m) => (
-                      <label class="flex items-center space-x-3 cursor-pointer group">
-                        <input
-                          type="checkbox"
-                          class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                        />
-                        <span class="text-sm text-gray-600 group-hover:text-gray-900">
-                          {m}
-                        </span>
-                      </label>
-                    ))
+                  Object.values(ClinicMachine).map((m) => (
+                    <label class="flex items-center space-x-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary shrink-0"
+                      />
+                      <span class="text-sm text-gray-600 group-hover:text-gray-900">
+                        {m}
+                      </span>
+                    </label>
+                  ))
                 }
               </div>
             </div>
@@ -119,21 +119,21 @@ const title = `TMS Therapy in ${cityName}, ${stateName} - Top ${sortedClinics.le
               >
                 Insurance
               </h3>
-              <div class="space-y-2">
+              <div
+                class="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
+              >
                 {
-                  Object.values(ClinicInsurance)
-                    .slice(0, 4)
-                    .map((i) => (
-                      <label class="flex items-center space-x-3 cursor-pointer group">
-                        <input
-                          type="checkbox"
-                          class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                        />
-                        <span class="text-sm text-gray-600 group-hover:text-gray-900">
-                          {i}
-                        </span>
-                      </label>
-                    ))
+                  Object.values(ClinicInsurance).map((i) => (
+                    <label class="flex items-center space-x-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary shrink-0"
+                      />
+                      <span class="text-sm text-gray-600 group-hover:text-gray-900">
+                        {i}
+                      </span>
+                    </label>
+                  ))
                 }
               </div>
             </div>
