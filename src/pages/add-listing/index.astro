@@ -1,0 +1,730 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+    ClinicMachine,
+    ClinicTreatment,
+    ClinicInsurance,
+} from "../../types/clinic";
+
+const US_STATES = [
+    { code: "AL", name: "Alabama" },
+    { code: "AK", name: "Alaska" },
+    { code: "AZ", name: "Arizona" },
+    { code: "AR", name: "Arkansas" },
+    { code: "CA", name: "California" },
+    { code: "CO", name: "Colorado" },
+    { code: "CT", name: "Connecticut" },
+    { code: "DE", name: "Delaware" },
+    { code: "DC", name: "Washington DC" },
+    { code: "FL", name: "Florida" },
+    { code: "GA", name: "Georgia" },
+    { code: "HI", name: "Hawaii" },
+    { code: "ID", name: "Idaho" },
+    { code: "IL", name: "Illinois" },
+    { code: "IN", name: "Indiana" },
+    { code: "IA", name: "Iowa" },
+    { code: "KS", name: "Kansas" },
+    { code: "KY", name: "Kentucky" },
+    { code: "LA", name: "Louisiana" },
+    { code: "ME", name: "Maine" },
+    { code: "MD", name: "Maryland" },
+    { code: "MA", name: "Massachusetts" },
+    { code: "MI", name: "Michigan" },
+    { code: "MN", name: "Minnesota" },
+    { code: "MS", name: "Mississippi" },
+    { code: "MO", name: "Missouri" },
+    { code: "MT", name: "Montana" },
+    { code: "NE", name: "Nebraska" },
+    { code: "NV", name: "Nevada" },
+    { code: "NH", name: "New Hampshire" },
+    { code: "NJ", name: "New Jersey" },
+    { code: "NM", name: "New Mexico" },
+    { code: "NY", name: "New York" },
+    { code: "NC", name: "North Carolina" },
+    { code: "ND", name: "North Dakota" },
+    { code: "OH", name: "Ohio" },
+    { code: "OK", name: "Oklahoma" },
+    { code: "OR", name: "Oregon" },
+    { code: "PA", name: "Pennsylvania" },
+    { code: "RI", name: "Rhode Island" },
+    { code: "SC", name: "South Carolina" },
+    { code: "SD", name: "South Dakota" },
+    { code: "TN", name: "Tennessee" },
+    { code: "TX", name: "Texas" },
+    { code: "UT", name: "Utah" },
+    { code: "VT", name: "Vermont" },
+    { code: "VA", name: "Virginia" },
+    { code: "WA", name: "Washington" },
+    { code: "WV", name: "West Virginia" },
+    { code: "WI", name: "Wisconsin" },
+    { code: "WY", name: "Wyoming" },
+];
+
+const machines = Object.values(ClinicMachine);
+const treatments = Object.values(ClinicTreatment);
+const insurances = Object.values(ClinicInsurance);
+
+const title = "Add Your TMS Clinic | Free Listing on TMS List";
+---
+
+<Layout title={title}>
+    <main
+        class="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-900 to-slate-900 py-16"
+    >
+        <div class="container mx-auto px-6 max-w-4xl">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <span
+                    class="inline-block px-4 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-full text-sm font-bold uppercase tracking-wider mb-4"
+                    >Free Listing</span
+                >
+                <h1 class="text-4xl md:text-5xl font-black text-white mb-4">
+                    Add Your TMS Clinic
+                </h1>
+                <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+                    Get discovered by thousands of patients searching for TMS
+                    therapy. Fill out the form below and we'll create your
+                    clinic profile.
+                </p>
+            </div>
+
+            <!-- Form Container -->
+            <div
+                class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12"
+            >
+                <form id="add-listing-form" class="space-y-10">
+                    <!-- Step 1: Basic Info -->
+                    <section>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-lg"
+                            >
+                                1
+                            </div>
+                            <h2 class="text-2xl font-bold text-white">
+                                Clinic Information
+                            </h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="md:col-span-2">
+                                <label
+                                    for="name"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Clinic Name *</label
+                                >
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                    placeholder="e.g., Advanced TMS Wellness Center"
+                                />
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label
+                                    for="address"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Street Address *</label
+                                >
+                                <input
+                                    type="text"
+                                    id="address"
+                                    name="address"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="e.g., 123 Medical Center Drive, Suite 200"
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    for="city"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >City *</label
+                                >
+                                <input
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="e.g., Los Angeles"
+                                />
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label
+                                        for="state"
+                                        class="block text-sm font-bold text-slate-300 mb-2"
+                                        >State *</label
+                                    >
+                                    <select
+                                        id="state"
+                                        name="state"
+                                        required
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-indigo-500"
+                                    >
+                                        <option value="">Select State</option>
+                                        {
+                                            US_STATES.map((s) => (
+                                                <option value={s.code}>
+                                                    {s.name}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <div>
+                                    <label
+                                        for="zip"
+                                        class="block text-sm font-bold text-slate-300 mb-2"
+                                        >ZIP *</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="zip"
+                                        name="zip"
+                                        required
+                                        pattern="[0-9]{5}"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="90210"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label
+                                    for="phone"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Phone Number *</label
+                                >
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="(555) 123-4567"
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    for="website"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Website URL *</label
+                                >
+                                <input
+                                    type="url"
+                                    id="website"
+                                    name="website"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="https://www.yourclinic.com"
+                                />
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label
+                                    for="description"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Clinic Description</label
+                                >
+                                <textarea
+                                    id="description"
+                                    name="description"
+                                    rows="4"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="Tell patients about your clinic, your approach to TMS therapy, and what makes you unique..."
+                                ></textarea>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 2: TMS Details -->
+                    <section>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-10 h-10 rounded-full bg-cyan-500 text-white flex items-center justify-center font-bold text-lg"
+                            >
+                                2
+                            </div>
+                            <h2 class="text-2xl font-bold text-white">
+                                TMS Details
+                            </h2>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div>
+                                <label
+                                    class="block text-sm font-bold text-slate-300 mb-3"
+                                    >TMS Machines Used *</label
+                                >
+                                <div
+                                    class="grid grid-cols-2 md:grid-cols-4 gap-3"
+                                >
+                                    {
+                                        machines.map((m) => (
+                                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
+                                                <input
+                                                    type="checkbox"
+                                                    name="machines"
+                                                    value={m}
+                                                    class="w-5 h-5 rounded border-white/30 text-indigo-500 focus:ring-indigo-500 bg-white/10"
+                                                />
+                                                <span class="text-white text-sm font-medium">
+                                                    {m}
+                                                </span>
+                                            </label>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <div>
+                                <label
+                                    class="block text-sm font-bold text-slate-300 mb-3"
+                                    >Conditions Treated *</label
+                                >
+                                <div
+                                    class="grid grid-cols-2 md:grid-cols-3 gap-3"
+                                >
+                                    {
+                                        treatments.map((t) => (
+                                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
+                                                <input
+                                                    type="checkbox"
+                                                    name="treatments"
+                                                    value={t}
+                                                    class="w-5 h-5 rounded border-white/30 text-cyan-500 focus:ring-cyan-500 bg-white/10"
+                                                />
+                                                <span class="text-white text-sm font-medium">
+                                                    {t}
+                                                </span>
+                                            </label>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <div>
+                                <label
+                                    class="block text-sm font-bold text-slate-300 mb-3"
+                                    >Insurance Accepted</label
+                                >
+                                <div
+                                    class="grid grid-cols-2 md:grid-cols-4 gap-3"
+                                >
+                                    {
+                                        insurances.map((i) => (
+                                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
+                                                <input
+                                                    type="checkbox"
+                                                    name="insurances"
+                                                    value={i}
+                                                    class="w-5 h-5 rounded border-white/30 text-emerald-500 focus:ring-emerald-500 bg-white/10"
+                                                />
+                                                <span class="text-white text-sm font-medium">
+                                                    {i}
+                                                </span>
+                                            </label>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 3: Media & Embeds -->
+                    <section>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-lg"
+                            >
+                                3
+                            </div>
+                            <h2 class="text-2xl font-bold text-white">
+                                Media & Links
+                            </h2>
+                        </div>
+
+                        <div
+                            class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-6"
+                        >
+                            <p class="text-amber-300 text-sm">
+                                <strong>Note:</strong> All media must be hosted externally.
+                                Provide URLs to images/videos hosted on your website,
+                                Google Drive, YouTube, or image hosting services.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    for="logo_url"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Logo URL</label
+                                >
+                                <input
+                                    type="url"
+                                    id="logo_url"
+                                    name="logo_url"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="https://example.com/logo.png"
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    for="hero_image_url"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Main Photo URL</label
+                                >
+                                <input
+                                    type="url"
+                                    id="hero_image_url"
+                                    name="hero_image_url"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="https://example.com/clinic-photo.jpg"
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    for="video_url"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >YouTube Video URL</label
+                                >
+                                <input
+                                    type="url"
+                                    id="video_url"
+                                    name="video_url"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="https://www.youtube.com/watch?v=..."
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    for="gbp_embed_url"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Google Maps Embed URL</label
+                                >
+                                <input
+                                    type="url"
+                                    id="gbp_embed_url"
+                                    name="gbp_embed_url"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="https://www.google.com/maps/embed?pb=..."
+                                />
+                                <p class="text-xs text-slate-400 mt-2">
+                                    Find this in Google Maps → Share → Embed a
+                                    map → Copy the URL from the iframe src
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 4: Doctor Info (Optional) -->
+                    <section>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-lg"
+                            >
+                                4
+                            </div>
+                            <h2 class="text-2xl font-bold text-white">
+                                Lead Psychiatrist (Optional)
+                            </h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    for="doctor_name"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Doctor Name</label
+                                >
+                                <input
+                                    type="text"
+                                    id="doctor_name"
+                                    name="doctor_name"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="Dr. Jane Smith, MD"
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    for="doctor_title"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Title/Role</label
+                                >
+                                <input
+                                    type="text"
+                                    id="doctor_title"
+                                    name="doctor_title"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="Medical Director"
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    for="doctor_image_url"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Doctor Photo URL</label
+                                >
+                                <input
+                                    type="url"
+                                    id="doctor_image_url"
+                                    name="doctor_image_url"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="https://example.com/dr-smith.jpg"
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    for="doctor_years"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Years of Experience</label
+                                >
+                                <input
+                                    type="number"
+                                    id="doctor_years"
+                                    name="doctor_years"
+                                    min="0"
+                                    max="60"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="15"
+                                />
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 5: Your Info (Attribution) -->
+                    <section>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-10 h-10 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-lg"
+                            >
+                                5
+                            </div>
+                            <h2 class="text-2xl font-bold text-white">
+                                Your Information
+                            </h2>
+                        </div>
+
+                        <div
+                            class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-6"
+                        >
+                            <p class="text-blue-300 text-sm">
+                                This information helps us attribute the listing
+                                and contact you if we have questions. Your name
+                                will appear as "Listed by [Your Name]" on the
+                                clinic profile.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    for="submitter_name"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Your Name *</label
+                                >
+                                <input
+                                    type="text"
+                                    id="submitter_name"
+                                    name="submitter_name"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="John Smith"
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    for="submitter_email"
+                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    >Your Email *</label
+                                >
+                                <input
+                                    type="email"
+                                    id="submitter_email"
+                                    name="submitter_email"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="john@clinic.com"
+                                />
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Submit Button -->
+                    <div class="pt-6 border-t border-white/10">
+                        <button
+                            type="submit"
+                            class="w-full py-4 px-8 bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-lg rounded-2xl hover:from-indigo-400 hover:to-cyan-400 transition-all shadow-xl shadow-indigo-500/30 flex items-center justify-center gap-3"
+                        >
+                            <svg
+                                class="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            Submit Clinic Listing
+                        </button>
+                        <p class="text-center text-slate-400 text-sm mt-4">
+                            Submissions are reviewed within 24-48 hours. Once
+                            approved, your clinic will appear in our directory.
+                        </p>
+                    </div>
+                </form>
+
+                <!-- Success Message (Hidden by default) -->
+                <div id="success-message" class="hidden text-center py-16">
+                    <div
+                        class="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-6"
+                    >
+                        <svg
+                            class="w-10 h-10"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white mb-4">
+                        Submission Received!
+                    </h2>
+                    <p class="text-lg text-slate-300 mb-8 max-w-md mx-auto">
+                        Thank you for adding your clinic to TMS List. We'll
+                        review your submission and notify you once it's live.
+                    </p>
+                    <a
+                        href="/"
+                        class="inline-flex items-center gap-2 px-8 py-3 bg-white/10 text-white font-bold rounded-xl hover:bg-white/20 transition-colors"
+                    >
+                        Return to Homepage
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById(
+            "add-listing-form",
+        ) as HTMLFormElement;
+        const successMessage = document.getElementById("success-message");
+
+        form?.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            // Collect checkbox values
+            const machines = formData.getAll("machines");
+            const treatments = formData.getAll("treatments");
+            const insurances = formData.getAll("insurances");
+
+            // Build submission object
+            const submission = {
+                // Basic Info
+                name: formData.get("name"),
+                address: formData.get("address"),
+                city: formData.get("city"),
+                state: formData.get("state"),
+                zip: formData.get("zip"),
+                phone: formData.get("phone"),
+                website: formData.get("website"),
+                description: formData.get("description"),
+
+                // TMS Details
+                machines: machines,
+                treatments: treatments,
+                insurances: insurances,
+
+                // Media
+                media: {
+                    logo_url: formData.get("logo_url") || null,
+                    hero_image_url: formData.get("hero_image_url") || null,
+                    video_url: formData.get("video_url") || null,
+                },
+
+                // Google Business Profile
+                google_business_profile: {
+                    embed_url: formData.get("gbp_embed_url") || null,
+                },
+
+                // Doctor Info
+                doctor: formData.get("doctor_name")
+                    ? {
+                          name: formData.get("doctor_name"),
+                          title: formData.get("doctor_title"),
+                          image_url: formData.get("doctor_image_url"),
+                          years_experience: formData.get("doctor_years"),
+                      }
+                    : null,
+
+                // Attribution
+                created_by: {
+                    name: formData.get("submitter_name"),
+                    email: formData.get("submitter_email"),
+                    submitted_at: new Date().toISOString(),
+                    source: "website_form",
+                },
+
+                // Meta
+                verified: false,
+            };
+
+            // For now, log to console and save to localStorage
+            // In production, this would POST to a serverless function
+            console.log("Clinic Submission:", submission);
+
+            // Save to localStorage as a simple demo
+            const submissions = JSON.parse(
+                localStorage.getItem("tms_submissions") || "[]",
+            );
+            submissions.push(submission);
+            localStorage.setItem(
+                "tms_submissions",
+                JSON.stringify(submissions),
+            );
+
+            // Show success message
+            form.classList.add("hidden");
+            successMessage?.classList.remove("hidden");
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+</script>
+
+<style>
+    select option {
+        background: #1e293b;
+        color: white;
+    }
+</style>
