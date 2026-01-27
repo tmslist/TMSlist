@@ -106,374 +106,292 @@ const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
 <Layout
     title="TMS List - America's #1 Verified TMS Therapy Directory | Find Clinics Near You"
 >
-    <!-- HERO SECTION - Compact -->
-    <section class="relative bg-[#030712] overflow-hidden py-16 lg:py-20">
-        <!-- Animated Background -->
-        <div class="absolute inset-0">
-            <div
-                class="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-transparent to-cyan-900/30"
-            >
-            </div>
-            <div
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-indigo-500/20 rounded-full blur-[100px] animate-pulse"
-            >
-            </div>
+    <!-- HERO SECTION - Revamped -->
+    <section class="relative bg-[#2E073F] overflow-hidden  pb-8">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 z-0">
+            <!-- New Theme Purple Blob -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[#5F00C2]/20 rounded-full blur-[120px] animate-pulse"></div>
+            <!-- Cyan Contrast -->
+            <div class="absolute bottom-0 right-0 w-[800px] h-[600px] bg-cyan-600/10 rounded-full blur-[100px]"></div>
+            <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]"></div>
         </div>
 
         <div class="container mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
                 <!-- Left: Content -->
-                <div class="text-center lg:text-left">
+                <div class="text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+                    <!-- Trust Badge -->
                     <div
-                        class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/10 rounded-full py-1.5 px-4 mb-4"
+                        class="inline-flex items-center gap-2.5 bg-white/5 backdrop-blur-md border border-white/10 rounded-full py-2 px-5 mb-8 shadow-xl shadow-[#5F00C2]/10 hover:bg-white/10 transition-colors"
                     >
-                        <span class="relative flex h-2 w-2">
+                        <span class="relative flex h-2.5 w-2.5">
                             <span
                                 class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
                             ></span>
                             <span
-                                class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
+                                class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"
                             ></span>
                         </span>
-                        <span class="text-xs font-bold text-white/90"
-                            >{clinics.length}+ Verified Clinics</span
+                        <span class="text-sm font-bold text-white tracking-wide"
+                            >{clinics.length}+ Verified Clinics Added</span
                         >
                     </div>
 
                     <h1
-                        class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 tracking-tight leading-[1.1]"
+                        class="text-5xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-[1.1]"
                     >
                         Find <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400"
+                            class="text-violet-500"
                             >TMS Therapy</span
-                        ><br />Near You
+                        >
+                        <br />
+                        <span class="relative whitespace-nowrap">
+                            Near You
+                            <!-- Underline using new purple -->
+                            <svg class="absolute -bottom-2 left-0 w-full h-3 text-[#5F00C2]/50 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" />
+                            </svg>
+                        </span>
                     </h1>
 
                     <p
-                        class="text-base md:text-lg text-slate-400 mb-6 max-w-xl"
+                        class="text-lg md:text-xl text-slate-300 mb-2 leading-relaxed font-light"
                     >
-                        America's most comprehensive directory of FDA-cleared
-                        Transcranial Magnetic Stimulation clinics.
+                        America's most comprehensive directory of <strong class="text-white font-semibold">FDA-cleared</strong> Transcranial Magnetic Stimulation clinics. Verified patient reviews, insurance data, and expert providers.
                     </p>
 
                     <!-- Search Box -->
-                    <form id="hero-search-form" class="mb-4" action="/us/">
-                        <div class="flex flex-col sm:flex-row gap-2">
-                            <div class="flex-1 relative">
-                                <svg
-                                    class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    ><path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                    ></path><path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                    ></path></svg
+                    <form id="hero-search-form" class="relative max-w-lg mx-auto lg:mx-0 mb-4 z-20" action="/us/">
+                        <div class="relative group">
+                            <!-- Gradient Border using new purple -->
+                            <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-[#5F00C2] rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                            <div class="relative flex flex-col sm:flex-row bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-xl p-2 shadow-2xl ring-1 ring-white/10">
+                                <div class="flex-1 flex items-center px-4 h-14">
+                                    <svg
+                                        class="w-6 h-6 text-slate-400 mr-3"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                        ></path>
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                        ></path>
+                                    </svg>
+                                    <input
+                                        type="text"
+                                        name="q"
+                                        placeholder="City, state, or zip code..."
+                                        class="w-full bg-transparent text-white placeholder-slate-400 font-medium text-lg outline-none border-none focus:ring-0 p-0"
+                                    />
+                                </div>
+                                <button
+                                    type="submit"
+                                    class="h-14 px-6 bg-gradient-to-r from-[#5F00C2] to-[#7C3AED] hover:from-[#4C1D95] hover:to-[#5F00C2] text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-[#5F00C2]/25 flex items-center justify-center gap-2 whitespace-nowrap mt-2 sm:mt-0"
                                 >
-                                <input
-                                    type="text"
-                                    name="q"
-                                    placeholder="City, state, or zip code..."
-                                    class="w-full h-12 pl-12 pr-4 rounded-xl bg-white text-gray-900 border-none focus:ring-2 focus:ring-cyan-400 placeholder-gray-400 font-medium"
-                                />
+                                    <span>Search</span>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </button>
                             </div>
-                            <button
-                                type="submit"
-                                class="h-12 px-8 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-xl shadow-lg shadow-cyan-500/30 transition-all flex items-center justify-center gap-2"
-                            >
-                                <svg
-                                    class="w-5 h-5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    ><path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                    ></path></svg
-                                >
-                                Find Clinics
-                            </button>
                         </div>
                     </form>
 
                     <!-- Quick Links -->
                     <div
-                        class="flex flex-wrap gap-2 justify-center lg:justify-start"
+                        class="flex flex-wrap items-center justify-center lg:justify-start gap-3"
                     >
+                        <span class="text-sm font-semibold text-slate-400">Popular:</span>
                         <a
                             href="/us/california/"
-                            class="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs font-medium text-white/70 hover:text-white transition-all"
+                            class="px-4 py-1.5 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 rounded-full text-xs font-medium text-slate-300 hover:text-white transition-all"
                             >California</a
                         >
                         <a
                             href="/us/texas/"
-                            class="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs font-medium text-white/70 hover:text-white transition-all"
+                            class="px-4 py-1.5 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 rounded-full text-xs font-medium text-slate-300 hover:text-white transition-all"
                             >Texas</a
                         >
                         <a
-                            href="/us/florida/"
-                            class="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs font-medium text-white/70 hover:text-white transition-all"
-                            >Florida</a
-                        >
-                        <a
                             href="/us/new-york/"
-                            class="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs font-medium text-white/70 hover:text-white transition-all"
+                            class="px-4 py-1.5 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 rounded-full text-xs font-medium text-slate-300 hover:text-white transition-all"
                             >New York</a
                         >
                         <a
                             href="/treatments/depression/"
-                            class="px-3 py-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/30 rounded-full text-xs font-medium text-cyan-300 hover:text-cyan-200 transition-all"
-                            >Depression</a
+                            class="px-4 py-1.5 bg-[#5F00C2]/20 hover:bg-[#5F00C2]/30 border border-[#5F00C2]/30 hover:border-[#5F00C2]/50 rounded-full text-xs font-semibold text-white hover:text-white transition-all flex items-center gap-1.5"
                         >
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#7C3AED]"></span>
+                            Depression
+                        </a>
                     </div>
                 </div>
 
-                <!-- Right: TMS Animation -->
-                <div class="relative flex items-center justify-center">
-                    <div
-                        class="tms-brain-container relative w-64 h-64 md:w-80 md:h-80"
-                    >
-                        <!-- Brain silhouette -->
-                        <div
-                            class="absolute inset-0 flex items-center justify-center"
-                        >
-                            <svg
-                                class="w-48 h-48 md:w-56 md:h-56 text-indigo-400/30"
-                                viewBox="0 0 100 100"
-                                fill="currentColor"
-                            >
-                                <ellipse cx="50" cy="45" rx="35" ry="38"
-                                ></ellipse>
-                                <ellipse cx="50" cy="75" rx="12" ry="15"
-                                ></ellipse>
-                            </svg>
-                        </div>
-                        <!-- TMS coil -->
-                        <div
-                            class="tms-coil absolute top-0 left-1/2 -translate-x-1/2 w-20 h-8 bg-gradient-to-b from-slate-700 to-slate-800 rounded-full border-2 border-cyan-400/50 shadow-lg shadow-cyan-500/30"
-                        >
-                            <div
-                                class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-4 bg-cyan-400"
-                            >
-                            </div>
-                        </div>
-                        <!-- Magnetic pulse rings -->
-                        <div
-                            class="pulse-ring absolute top-12 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full border-2 border-cyan-400/60 animate-ping"
-                        >
-                        </div>
-                        <div
-                            class="pulse-ring absolute top-12 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full border-2 border-cyan-400/40 animate-ping"
-                            style="animation-delay: 0.3s;"
-                        >
-                        </div>
-                        <div
-                            class="pulse-ring absolute top-12 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full border-2 border-cyan-400/20 animate-ping"
-                            style="animation-delay: 0.6s;"
-                        >
-                        </div>
-                        <!-- Neural activity dots -->
-                        <div
-                            class="neuron-dot absolute top-24 left-1/3 w-2 h-2 bg-cyan-400 rounded-full animate-pulse"
-                        >
-                        </div>
-                        <div
-                            class="neuron-dot absolute top-28 left-1/2 w-2 h-2 bg-indigo-400 rounded-full animate-pulse"
-                            style="animation-delay: 0.2s;"
-                        >
-                        </div>
-                        <div
-                            class="neuron-dot absolute top-32 right-1/3 w-2 h-2 bg-cyan-400 rounded-full animate-pulse"
-                            style="animation-delay: 0.4s;"
-                        >
-                        </div>
-                        <div
-                            class="neuron-dot absolute top-36 left-1/4 w-1.5 h-1.5 bg-indigo-300 rounded-full animate-pulse"
-                            style="animation-delay: 0.6s;"
-                        >
-                        </div>
-                        <div
-                            class="neuron-dot absolute top-40 right-1/4 w-1.5 h-1.5 bg-cyan-300 rounded-full animate-pulse"
-                            style="animation-delay: 0.8s;"
-                        >
-                        </div>
+                <!-- Right: Visual -->
+                <div class="relative flex items-center justify-center lg:justify-end perspective-1000">
+                    <div class="relative w-full max-w-[600px] aspect-square">
+                        <!-- Glow Effect with New Purple -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/30 to-[#5F00C2]/30 blur-[80px] rounded-full animate-pulse-slow"></div>
+                        
+                        <!-- Main Image -->
+                        <img
+                            src="/images/brain.png"
+                            alt="TMS Brain Mapping Visualization"
+                            class="relative w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 animate-float scale-110"
+                        />
+
+                        <!-- Floating Cards are currently commented out in source, keeping them commented or removed to match view -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- STATS RIBBON - Compact -->
-    <section
-        class="bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-600 py-6"
-    >
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div>
-                    <div class="text-2xl md:text-3xl font-black text-white">
-                        {clinics.length}+
+    <!-- STATS RIBBON - Redesigned -->
+    <div class="relative -mt-16 z-30 container mx-auto px-4">
+        <div class="bg-white rounded-3xl shadow-2xl shadow-indigo-900/10 border border-slate-100 p-8 lg:p-10">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+                <div class="text-center px-4 pb-4 lg:pb-0">
+                    <div class="flex items-center justify-center gap-2 mb-2 text-indigo-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        <span class="text-3xl lg:text-4xl font-black tracking-tight">{clinics.length}+</span>
                     </div>
-                    <div
-                        class="text-xs font-bold text-white/70 uppercase tracking-wider"
-                    >
-                        Verified Clinics
-                    </div>
+                    <div class="text-sm font-bold text-slate-500 uppercase tracking-wide">Verified Clinics</div>
                 </div>
-                <div>
-                    <div class="text-2xl md:text-3xl font-black text-white">
-                        {uniqueStates.length}
+
+                <div class="text-center px-4 py-4 lg:py-0">
+                     <div class="flex items-center justify-center gap-2 mb-2 text-indigo-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-3xl lg:text-4xl font-black tracking-tight">{uniqueStates.length}</span>
                     </div>
-                    <div
-                        class="text-xs font-bold text-white/70 uppercase tracking-wider"
-                    >
-                        States Covered
-                    </div>
+                    <div class="text-sm font-bold text-slate-500 uppercase tracking-wide">States Covered</div>
                 </div>
-                <div>
-                    <div class="text-2xl md:text-3xl font-black text-white">
-                        50-60%
+
+                <div class="text-center px-4 py-4 lg:py-0">
+                     <div class="flex items-center justify-center gap-2 mb-2 text-indigo-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-3xl lg:text-4xl font-black tracking-tight">60%</span>
                     </div>
-                    <div
-                        class="text-xs font-bold text-white/70 uppercase tracking-wider"
-                    >
-                        Remission Rate
-                    </div>
+                    <div class="text-sm font-bold text-slate-500 uppercase tracking-wide">Remission Rate</div>
                 </div>
-                <div>
-                    <div class="text-2xl md:text-3xl font-black text-white">
-                        {totalDoctors}+
+
+                <div class="text-center px-4 pt-4 lg:pt-0">
+                    <div class="flex items-center justify-center gap-2 mb-2 text-indigo-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span class="text-3xl lg:text-4xl font-black tracking-tight">{totalDoctors}+</span>
                     </div>
-                    <div
-                        class="text-xs font-bold text-white/70 uppercase tracking-wider"
-                    >
-                        TMS Specialists
-                    </div>
+                    <div class="text-sm font-bold text-slate-500 uppercase tracking-wide">TMS Specialists</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- HOW TMS WORKS - Compact -->
-    <section class="py-12 bg-slate-50">
+    <!-- HOW TMS WORKS - Informational/Corporate -->
+    <section class="py-10 bg-slate-50 border-y border-slate-200">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Text Content -->
                 <div>
-                    <span
-                        class="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold uppercase tracking-wider mb-3"
-                        >How It Works</span
-                    >
-                    <h2
-                        class="text-2xl md:text-3xl font-black text-gray-900 mb-4"
-                    >
-                        The Science of Brain Wellness
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="w-10 h-[1px] bg-[#5F00C2]"></span>
+                        <span class="text-sm font-bold text-[#5F00C2] uppercase tracking-widest">Mechanism of Action</span>
+                    </div>
+                    
+                    <h2 class="text-3xl md:text-4xl font-serif text-slate-900 mb-6 leading-tight">
+                        Precision Medicine for <br/>
+                        <span class="italic text-slate-600">Neural Health</span>
                     </h2>
-                    <p class="text-gray-600 mb-6">
-                        TMS uses magnetic pulses to stimulate underactive brain
-                        regions. Non-invasive, no systemic side effects, 50-60%
-                        remission rate in treatment-resistant depression.
+
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed font-light">
+                        Transcranial Magnetic Stimulation (TMS) operates on the principle of electromagnetic induction. By delivering highly focused magnetic pulses to the prefrontal cortex—the area of the brain associated with mood regulation—TMS stimulates neurons that have become underactive due to depression or other conditions.
                     </p>
 
-                    <div class="space-y-3">
-                        <div
-                            class="flex items-start gap-3 p-3 bg-white rounded-xl border border-gray-100"
-                        >
-                            <div
-                                class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 text-lg font-black"
-                            >
-                                1
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center shrink-0 text-[#5F00C2]">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-900">
-                                    Brain Mapping
-                                </h4>
-                                <p class="text-sm text-gray-500">
-                                    Calibrate TMS to your unique brain anatomy
+                                <h4 class="text-lg font-bold text-slate-900 mb-2">Targeted Stimulation</h4>
+                                <p class="text-slate-500 text-sm leading-relaxed">
+                                    Unlike medications which circulate systemically, TMS targets specific neural circuits, minimizing systemic side effects.
                                 </p>
                             </div>
                         </div>
-                        <div
-                            class="flex items-start gap-3 p-3 bg-white rounded-xl border border-gray-100"
-                        >
-                            <div
-                                class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 text-lg font-black"
-                            >
-                                2
+
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center shrink-0 text-[#5F00C2]">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-900">
-                                    Daily Sessions (19 min)
-                                </h4>
-                                <p class="text-sm text-gray-500">
-                                    Resume normal activities immediately
+                                <h4 class="text-lg font-bold text-slate-900 mb-2">Neuroplasticity Support</h4>
+                                <p class="text-slate-500 text-sm leading-relaxed">
+                                    Repeated stimulation encourages neuroplasticity, strengthening synaptic connections and potentially restoring healthy brain function over time.
                                 </p>
                             </div>
                         </div>
-                        <div
-                            class="flex items-start gap-3 p-3 bg-white rounded-xl border border-gray-100"
-                        >
-                            <div
-                                class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center shrink-0 text-lg font-black"
-                            >
-                                3
+
+                         <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center shrink-0 text-[#5F00C2]">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-900">
-                                    Experience Remission
-                                </h4>
-                                <p class="text-sm text-gray-500">
-                                    Improvement in 4-6 weeks
+                                <h4 class="text-lg font-bold text-slate-900 mb-2">Evidence-Based Protocol</h4>
+                                <p class="text-slate-500 text-sm leading-relaxed">
+                                    Cleared by the FDA in 2008, TMS is backed by extensive clinical research demonstrating efficacy in treatment-resistant cases.
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <a
-                        href="/protocols/deep-tms/"
-                        class="inline-flex items-center gap-2 mt-6 text-indigo-600 font-bold hover:text-indigo-700 transition-colors text-sm"
-                    >
-                        Learn About Protocols →
-                    </a>
+                    <div class="mt-10 pt-8 border-t border-slate-200">
+                         <a href="/science/" class="text-[#5F00C2] font-semibold text-sm hover:text-[#4C1D95] transition-colors flex items-center gap-2">
+                            Explore the Clinical Research
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
                 </div>
 
+                <!-- Visual -->
                 <div class="relative">
-                    <div
-                        class="aspect-square max-w-sm mx-auto rounded-2xl bg-gradient-to-br from-indigo-100 to-cyan-100 p-6 shadow-xl"
-                    >
-                        <img
-                            src="/images/brain_stimulation_art_1769446474392.png"
-                            alt="TMS Brain Stimulation"
-                            class="w-full h-full object-contain rounded-xl"
-                        />
-                    </div>
-                    <div
-                        class="absolute -top-2 -right-2 bg-white p-3 rounded-xl shadow-lg border border-gray-100"
-                    >
-                        <div class="text-xl font-black text-indigo-600">
-                            19 min
+                    <div class="bg-white p-2 rounded-3xl shadow-2xl shadow-slate-200 border border-slate-100">
+                        <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50">
+                             <img
+                                src="/images/tms_diagram.png"
+                                alt="Scientific Diagram of TMS Mechanism"
+                                class="w-full h-full object-cover"
+                            />
                         </div>
-                        <div
-                            class="text-[10px] text-gray-500 font-bold uppercase"
-                        >
-                            Per Session
+                        <div class="p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Figure 1.1</div>
+                                    <div class="text-sm font-bold text-slate-800">Electromagnetic Induction Field</div>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-[#5F00C2]/10 flex items-center justify-center text-[#5F00C2]">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        class="absolute -bottom-2 -left-2 bg-white p-3 rounded-xl shadow-lg border border-gray-100"
-                    >
-                        <div class="text-xl font-black text-cyan-600">Zero</div>
-                        <div
-                            class="text-[10px] text-gray-500 font-bold uppercase"
-                        >
-                            Side Effects
+                    
+                    <!-- Context Card (Static, Professional) -->
+                    <div class="absolute -bottom-6 -left-6 bg-slate-800 text-white p-6 rounded-xl shadow-xl max-w-xs hidden md:block">
+                        <div class="flex items-start gap-4">
+                            <div class="text-3xl font-serif italic text-[#7C3AED]">"</div>
+                            <p class="text-sm text-slate-300 italic leading-relaxed">
+                                A targeted, non-invasive approach to mental health that bridges the gap between pharmacology and psychotherapy.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -481,179 +399,215 @@ const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
         </div>
     </section>
 
-    <!-- FEATURED CLINICS - Compact -->
-    <section class="py-12 bg-white">
+    <!-- FEATURED CLINICS - Revamped list style -->
+    <section class="py-8 bg-slate-50/50">
         <div class="container mx-auto px-4">
-            <div class="flex items-end justify-between mb-6">
+            <div class="flex items-end justify-between mb-8">
                 <div>
                     <span
-                        class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold uppercase tracking-wider mb-2"
+                        class="inline-block px-3 py-1 bg-[#5F00C2]/10 text-[#5F00C2] rounded-full text-xs font-bold uppercase tracking-wider mb-2"
                         >Top Rated</span
                     >
-                    <h2 class="text-2xl md:text-3xl font-black text-gray-900">
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-900">
                         Featured Clinics
                     </h2>
                 </div>
                 <a
                     href="/us/"
-                    class="text-indigo-600 font-bold text-sm hover:text-indigo-700"
-                    >View All →</a
+                    class="text-[#5F00C2] font-bold text-sm hover:text-[#4C1D95] flex items-center gap-1 group"
+                    >View All Clinics <span class="group-hover:translate-x-1 transition-transform">→</span></a
                 >
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
                 {
                     topClinics.slice(0, 6).map((clinic) => (
-                        <a
-                            href={`/clinic/${clinic.slug}`}
-                            class="group block bg-gray-50 rounded-2xl overflow-hidden hover:shadow-xl transition-all border border-gray-100 hover:border-indigo-200"
-                        >
-                            <div class="relative h-40 overflow-hidden bg-gradient-to-br from-indigo-100 to-cyan-100">
+                        <div class="group bg-white rounded-3xl p-4 shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-[#5F00C2]/20 flex flex-col sm:flex-row gap-5">
+                            <!-- Image Section -->
+                            <div class="relative w-full sm:w-48 h-56 sm:h-auto shrink-0 rounded-2xl overflow-hidden bg-slate-100">
                                 <img
                                     src={
                                         clinic.hero_image_url ||
                                         `/images/tms_chair_luxury_1769446442231.png`
                                     }
                                     alt={clinic.name}
-                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     loading="lazy"
                                 />
                                 {clinic.verified && (
-                                    <div class="absolute top-2 left-2 flex items-center gap-1.5 bg-white/95 backdrop-blur px-2 py-1 rounded-full shadow-sm">
-                                        <svg
-                                            class="w-3 h-3 text-emerald-500"
-                                            fill="currentColor"
-                                            viewBox="0 0 20 20"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                clip-rule="evenodd"
-                                            />
+                                    <div class="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-sm py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-sm">
+                                        <svg class="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                         </svg>
-                                        <span class="text-[10px] font-bold text-gray-700">
-                                            Verified
-                                        </span>
+                                        <span class="text-[10px] font-bold text-slate-700 uppercase tracking-wide">Verified</span>
                                     </div>
                                 )}
-                                <div class="absolute top-2 right-2 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                                    ★ {getClinicRating(clinic).toFixed(1)}
-                                </div>
                             </div>
 
-                            <div class="p-4">
-                                <h3 class="font-bold text-gray-900 mb-1 group-hover:text-indigo-600 transition-colors line-clamp-1">
-                                    {clinic.name}
-                                </h3>
-                                <p class="text-sm text-gray-500 mb-2">
-                                    {clinic.city}, {clinic.state}
-                                </p>
+                            <!-- Content Section -->
+                            <div class="flex-1 flex flex-col justify-between py-1">
+                                <div>
+                                    <div class="flex items-start justify-between gap-2 mb-2">
+                                        <h3 class="font-black text-lg text-slate-900 leading-tight group-hover:text-[#5F00C2] transition-colors">
+                                            {clinic.name}
+                                        </h3>
+                                        <button class="text-slate-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                                        </button>
+                                    </div>
 
-                                <div class="flex flex-wrap gap-1 mb-3">
-                                    {clinic.machines.slice(0, 2).map((m) => (
-                                        <span class="px-2 py-0.5 bg-white border border-gray-200 rounded-full text-[10px] font-medium text-gray-600">
-                                            {m}
+                                    <!-- Ratings Row -->
+                                    <div class="flex items-center flex-wrap gap-2 mb-3">
+                                        <span class="bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-md flex items-center gap-1">
+                                            {typeof clinic.rating === 'number' ? clinic.rating.toFixed(1) : clinic.rating?.aggregate.toFixed(1) || 'N/A'} <span class="text-emerald-100">★</span>
                                         </span>
-                                    ))}
+                                        <span class="text-xs font-semibold text-slate-500">
+                                            {getClinicReviewCount(clinic)} Ratings
+                                        </span>
+                                        <span class="hidden sm:inline-block w-1 h-1 rounded-full bg-slate-300"></span>
+                                        <span class="flex items-center gap-1 bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide">
+                                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                            Trusted
+                                        </span>
+                                    </div>
+
+                                    <!-- Address -->
+                                    <div class="flex items-start gap-1.5 text-sm text-slate-500 mb-3">
+                                        <svg class="w-4 h-4 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        <span class="line-clamp-1">{clinic.address || `${clinic.city}, ${clinic.state}`}</span>
+                                    </div>
+
+                                    <!-- Features/Tags -->
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        {clinic.machines.slice(0, 3).map((m) => (
+                                            <span class="px-2 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px] font-semibold text-slate-600">
+                                                {m}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
 
-                                <div class="flex items-center justify-between pt-2 border-t border-gray-100">
-                                    <span class="text-xs text-gray-500">
-                                        {getClinicReviewCount(clinic)} reviews
-                                    </span>
-                                    <span class="text-indigo-600 font-bold text-xs group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                                        View →
-                                    </span>
+                                <!-- Action Buttons -->
+                                <div class="grid grid-cols-2 sm:grid-cols-[auto_1fr_auto] gap-2 mt-auto">
+                                    <!-- Call Button -->
+                                    <a href={`tel:${clinic.phone}`} class="col-span-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-sm transition-colors shadow-lg shadow-emerald-500/20">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                        <span class="hidden sm:inline">Call</span>
+                                    </a>
+                                    
+                                    <!-- Book Button -->
+                                    <a href={`/clinic/${clinic.slug}`} class="col-span-1 sm:col-span-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-[#5F00C2] hover:bg-[#4C1D95] text-white rounded-lg font-bold text-sm transition-colors shadow-lg shadow-[#5F00C2]/20">
+                                        Book Appointment
+                                    </a>
+
+                                    <!-- WhatsApp/More (Desktop) -->
+                                    <button class="hidden sm:flex items-center justify-center w-10 h-10 border border-slate-200 rounded-lg text-slate-500 hover:text-emerald-500 hover:border-emerald-500 hover:bg-emerald-50 transition-all">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                    </button>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     ))
                 }
             </div>
         </div>
     </section>
 
-    <!-- CONDITIONS - Compact Bento -->
-    <section class="py-12 bg-gray-900">
-        <div class="container mx-auto px-4">
+    <!-- CONDITIONS - Aesthetic Bento Grid -->
+    <section class="py-10 container mx-auto px-4 bg-[#0f0518] rounded-3xl relative overflow-hidden">
+        <!-- Background Ambient Glow -->
+        <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#5F00C2]/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-8">
                 <span
-                    class="inline-block px-3 py-1 bg-white/10 text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider mb-2"
+                    class="inline-block px-3 py-1 bg-[#5F00C2]/20 text-[#7C3AED] border border-[#5F00C2]/30 rounded-full text-xs font-bold uppercase tracking-wider mb-2"
                     >Conditions Treated</span
                 >
-                <h2 class="text-2xl md:text-3xl font-black text-white">
-                    FDA-Cleared Protocols
+                <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+                    FDA-Cleared <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-cyan-400">Protocols</span>
                 </h2>
+                <p class="text-slate-400 mt-2 max-w-2xl mx-auto text-sm font-light">
+                    TMS is FDA-cleared for multiple mental health conditions, providing a non-invasive alternative when medication hasn't yielded results.
+                </p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <!-- Large Feature Card -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Large Feature Card: Depression -->
                 <a
                     href="/treatments/depression/"
-                    class="col-span-2 row-span-2 group relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-700 p-6 flex flex-col justify-between min-h-[240px]"
+                    class="col-span-1 md:col-span-2 row-span-2 group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#5F00C2] to-[#2E073F] p-8 flex flex-col justify-between min-h-[400px] border border-white/10 hover:border-white/20 transition-all shadow-2xl shadow-[#5F00C2]/20"
                 >
-                    <div
-                        class="absolute inset-0 bg-[url('/images/brain_stimulation_art_1769446474392.png')] bg-cover bg-center opacity-20 group-hover:scale-110 transition-transform duration-500"
-                    >
-                    </div>
+                    <!-- Background Art -->
+                    <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-20"></div>
+                    <div class="absolute right-0 bottom-0 w-64 h-64 bg-gradient-to-tl from-black/40 to-transparent rounded-tl-full z-0"></div>
+                    
                     <div class="relative z-10">
                         <div
-                            class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur rounded-full px-3 py-1 mb-3"
+                            class="inline-flex items-center gap-2 bg-black/30 backdrop-blur-md rounded-full px-3 py-1.5 mb-6 border border-white/10"
                         >
-                            <span
-                                class="w-1.5 h-1.5 rounded-full bg-emerald-400"
-                            ></span>
-                            <span class="text-xs font-bold text-white/90"
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            <span class="text-xs font-bold text-white tracking-wide"
                                 >FDA Cleared 2008</span
                             >
                         </div>
-                        <h3 class="text-2xl font-black text-white mb-2">
+                        <h3 class="text-3xl md:text-4xl font-serif text-white mb-3">
                             Major Depressive Disorder
                         </h3>
-                        <p class="text-sm text-white/70">
-                            Primary TMS application for treatment-resistant
-                            depression
+                        <p class="text-white/80 text-lg leading-relaxed max-w-md font-light">
+                            The primary application for TMS, offering hope for treatment-resistant depression with significant remission rates.
                         </p>
                     </div>
-                    <div
-                        class="relative z-10 flex items-center justify-between pt-3 border-t border-white/20"
-                    >
-                        <span class="text-white font-bold text-sm"
-                            >Explore →</span
-                        >
+
+                    <div class="relative z-10 flex items-center gap-3 mt-8">
+                        <span class="w-10 h-10 rounded-full bg-white text-[#5F00C2] flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">
+                            →
+                        </span>
+                        <span class="text-white font-semibold text-sm tracking-wide">Explore Protocol</span>
                     </div>
                 </a>
 
+                <!-- Standard Cards -->
                 {
-                    TREATMENT_SLUGS.slice(1, 5).map((t) => (
+                    TREATMENT_SLUGS.slice(1, 5).map((t, index) => (
                         <a
                             href={`/treatments/${t.slug}`}
-                            class="group bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all"
+                            class="group relative overflow-hidden bg-[#1a1025] hover:bg-[#251635] border border-white/5 hover:border-[#5F00C2]/30 rounded-3xl p-6 transition-all duration-300 flex flex-col justify-between h-full hover:-translate-y-1 hover:shadow-xl hover:shadow-[#5F00C2]/10"
                         >
-                            <div class="w-10 h-10 rounded-xl bg-cyan-400/20 text-cyan-400 flex items-center justify-center mb-3">
-                                <svg
-                                    class="w-5 h-5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                                    />
-                                </svg>
+                            <div>
+                                <div class="w-12 h-12 rounded-2xl bg-[#5F00C2]/10 text-[#7C3AED] flex items-center justify-center mb-4 group-hover:bg-[#5F00C2] group-hover:text-white transition-colors duration-300">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-2 font-serif">
+                                    {t.title.replace("TMS for ", "")}
+                                </h3>
+                                <p class="text-sm text-slate-400 leading-snug">
+                                    Targeted therapy options for {t.slug.replace("-", " ")}.
+                                </p>
                             </div>
-                            <h3 class="font-bold text-white mb-1 text-sm">
-                                {t.title.replace("TMS for ", "")}
-                            </h3>
-                            <span class="text-cyan-400 font-bold text-xs group-hover:text-white transition-colors">
-                                Learn More →
-                            </span>
+                            <div class="mt-4 flex items-center gap-2 text-[#7C3AED] text-sm font-bold group-hover:text-white transition-colors">
+                                Learn More <span class="transition-transform group-hover:translate-x-1">→</span>
+                            </div>
                         </a>
                     ))
                 }
+                
+                <!-- "View All" Card -->
+                 <!-- <a
+                    href="/treatments/"
+                    class="group relative overflow-hidden bg-white rounded-3xl p-6 transition-all duration-300 flex flex-col justify-center items-center text-center h-full hover:shadow-xl"
+                >
+                    <div class="w-14 h-14 rounded-full bg-slate-100 text-slate-900 flex items-center justify-center mb-3 group-hover:bg-[#5F00C2] group-hover:text-white transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </div>
+                    <span class="font-bold text-slate-900 group-hover:text-[#5F00C2] transition-colors">View All Conditions</span>
+                </a> -->
             </div>
         </div>
     </section>
@@ -671,37 +625,131 @@ const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
                 </h2>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {
-                    featuredTech.map((tech) => (
-                        <a
-                            href={`/technology/${tech.slug}`}
-                            class="group block p-4 rounded-2xl border-2 border-gray-100 hover:border-indigo-500 hover:shadow-lg transition-all bg-white"
-                        >
-                            <div class="w-12 h-12 rounded-xl bg-gray-100 text-gray-600 flex items-center justify-center mb-3 group-hover:bg-indigo-100 group-hover:text-indigo-600 transition-all">
-                                <svg
-                                    class="w-6 h-6"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
-                                    />
-                                </svg>
-                            </div>
-                            <h3 class="font-bold text-gray-900 mb-1 text-sm group-hover:text-indigo-600">
-                                {tech.title}
-                            </h3>
-                            <span class="text-indigo-600 font-bold text-xs">
-                                View Clinics →
-                            </span>
-                        </a>
-                    ))
-                }
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- NeuroStar -->
+                <a
+                    href="/technology/neurostar/"
+                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#5F00C2]/30 hover:shadow-xl hover:shadow-[#5F00C2]/10 transition-all duration-300"
+                >
+                    <div class="h-16 flex items-center justify-start mb-6">
+                        <img 
+                            src="https://neurostar.com/wp-content/themes/neurostar/assets/images/NeuroStar_Logo.svg" 
+                            alt="NeuroStar Advanced Therapy" 
+                            class="h-full w-auto object-contain max-w-[180px]"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <div class="text-xs font-bold text-[#5F00C2] uppercase tracking-wider mb-2">Best For: Establish Reputation</div>
+                        <h3 class="text-lg font-bold text-slate-900 leading-tight mb-2">The Market Leader</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            "The most widely recognized name in TMS. Patients frequently cite the confidence that comes with its long history of FDA clearance and widespread insurance coverage."
+                        </p>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
+                         <span class="text-slate-400 text-xs font-medium">3,000+ Systems</span>
+                         <span class="text-[#5F00C2] text-sm font-bold group-hover:translate-x-1 transition-transform">View Clinics →</span>
+                    </div>
+                </a>
+
+                <!-- BrainsWay -->
+                <a
+                    href="/technology/brainsway-deep-tms/"
+                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#5F00C2]/30 hover:shadow-xl hover:shadow-[#5F00C2]/10 transition-all duration-300"
+                >
+                    <div class="h-16 flex items-center justify-start mb-6">
+                        <img 
+                            src="https://www.brainsway.com/wp-content/uploads/2021/04/BrainsWay-2021-logo_full-color_black-name-1-e1619462194423.png" 
+                            alt="BrainsWay Deep TMS" 
+                            class="h-10 w-auto object-contain max-w-[180px]"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <div class="text-xs font-bold text-[#5F00C2] uppercase tracking-wider mb-2">Best For: OCD & Deep Structures</div>
+                        <h3 class="text-lg font-bold text-slate-900 leading-tight mb-2">Deep TMS (H-Coil)</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            "Reviews consistently highlight its efficacy for OCD. Patients appreciate the helmet design which ensures consistent coil positioning for deep brain penetration."
+                        </p>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
+                         <span class="text-slate-400 text-xs font-medium">H-Coil Technology</span>
+                         <span class="text-[#5F00C2] text-sm font-bold group-hover:translate-x-1 transition-transform">View Clinics →</span>
+                    </div>
+                </a>
+
+                <!-- MagVenture -->
+                <a
+                    href="/technology/magventure/"
+                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#5F00C2]/30 hover:shadow-xl hover:shadow-[#5F00C2]/10 transition-all duration-300"
+                >
+                    <div class="h-16 flex items-center justify-start mb-6">
+                         <img 
+                            src="https://neuronewsinternational.com/wp-content/uploads/sites/3/2024/05/MagVenture-logo-featured.jpg" 
+                            alt="MagVenture TMS" 
+                            class="h-14 w-auto object-contain max-w-[180px] mix-blend-multiply"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <div class="text-xs font-bold text-[#5F00C2] uppercase tracking-wider mb-2">Best For: Speed & Versatility</div>
+                        <h3 class="text-lg font-bold text-slate-900 leading-tight mb-2">Research Favorite</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            "Highly regarded for its 'Theta Burst' capability, allowing for 3-minute sessions. Patients love the time efficiency without compromising clinical outcomes."
+                        </p>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
+                         <span class="text-slate-400 text-xs font-medium">3-Min Sessions</span>
+                         <span class="text-[#5F00C2] text-sm font-bold group-hover:translate-x-1 transition-transform">View Clinics →</span>
+                    </div>
+                </a>
+
+                <!-- Apollo TMS -->
+                <a
+                    href="/technology/apollo-tms/"
+                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#5F00C2]/30 hover:shadow-xl hover:shadow-[#5F00C2]/10 transition-all duration-300"
+                >
+                    <div class="h-16 flex items-center justify-start mb-6">
+                         <img 
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS95RvWVC2pIymNtuccsRAMKtSuZmU_pAHsfQ&s" 
+                            alt="Apollo TMS" 
+                            class="h-12 w-auto object-contain max-w-[180px] mix-blend-multiply"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <div class="text-xs font-bold text-[#5F00C2] uppercase tracking-wider mb-2">Best For: Patient Comfort</div>
+                        <h3 class="text-lg font-bold text-slate-900 leading-tight mb-2">Ergonomic Design</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            "Users often praise the Apollo system for its adjustable 'HANS' positioning and comfortable chair, making the 20-minute daily sessions more relaxing."
+                        </p>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
+                         <span class="text-slate-400 text-xs font-medium">Patient Focused</span>
+                         <span class="text-[#5F00C2] text-sm font-bold group-hover:translate-x-1 transition-transform">View Clinics →</span>
+                    </div>
+                </a>
+
+                <!-- CloudTMS -->
+                <a
+                    href="/technology/cloudtms/"
+                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#5F00C2]/30 hover:shadow-xl hover:shadow-[#5F00C2]/10 transition-all duration-300"
+                >
+                    <div class="h-16 flex items-center justify-start mb-6">
+                         <img 
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCJmEAxcCP5r_c64O63lpys4QTJ5lm3Jvbdg&s" 
+                            alt="CloudTMS" 
+                            class="h-12 w-auto object-contain max-w-[180px] mix-blend-multiply"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <div class="text-xs font-bold text-[#5F00C2] uppercase tracking-wider mb-2">Best For: Open Design</div>
+                        <h3 class="text-lg font-bold text-slate-900 leading-tight mb-2">Modern & Airy</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            "The system's open-air coil design is a favorite among patients who might feel claustrophobic. It offers a sleek, modern treatment experience."
+                        </p>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
+                         <span class="text-slate-400 text-xs font-medium">Scalable Tech</span>
+                         <span class="text-[#5F00C2] text-sm font-bold group-hover:translate-x-1 transition-transform">View Clinics →</span>
+                    </div>
+                </a>
             </div>
 
             <div class="text-center mt-6">
