@@ -9,6 +9,7 @@ export async function getStaticPaths() {
     // Group by state -> city
     const stateCity = new Map<string, Set<string>>();
     clinics.forEach(c => {
+        if (!c.state || !c.city) return; // Skip invalid entries
         if (!stateCity.has(c.state)) stateCity.set(c.state, new Set());
         stateCity.get(c.state)!.add(c.city);
     });

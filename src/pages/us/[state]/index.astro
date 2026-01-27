@@ -1,25 +1,51 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import StateHero from '../../../components/StateHero.astro';
-import ClinicCard from '../../../components/ClinicCard.astro';
-import { getUniqueStates, getClinicsByState, STATE_NAMES, getStateSlug } from '../../../utils/dataHelpers';
+import Layout from "../../../layouts/Layout.astro";
+import StateHero from "../../../components/StateHero.astro";
+import ClinicCard from "../../../components/ClinicCard.astro";
+import {
+  getUniqueStates,
+  getClinicsByState,
+  STATE_NAMES,
+  getStateSlug,
+} from "../../../utils/dataHelpers";
 
 export async function getStaticPaths() {
-  const uniqueStates = getUniqueStates();
-  
-  return uniqueStates.map(stateCode => {
+  const uniqueStates = getUniqueStates().filter(Boolean);
+
+  return uniqueStates.map((stateCode) => {
     const stateClinics = getClinicsByState(stateCode);
     const stateName = STATE_NAMES[stateCode] || stateCode;
     const stateSlug = getStateSlug(stateCode);
 
-    const cities = [...new Set(stateClinics.map(c => JSON.stringify({ name: c.city, slug: c.city.toLowerCase().replace(/\s+/g, '-') })))].map(s => JSON.parse(s)).sort((a,b) => a.name.localeCompare(b.name));
-    
+    const cities = [
+      ...new Set(
+        stateClinics.map((c) =>
+          JSON.stringify({
+            name: c.city,
+            slug: c.city.toLowerCase().replace(/\s+/g, "-"),
+          }),
+        ),
+      ),
+    ]
+      .map((s) => JSON.parse(s))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
     // Top 3 clinics by rating
-    const topClinics = [...stateClinics].sort((a, b) => b.rating - a.rating).slice(0, 3);
-    
+    const getRatingVal = (c: any) =>
+      typeof c.rating === "number" ? c.rating : c.rating?.aggregate || 0;
+    const topClinics = [...stateClinics]
+      .sort((a, b) => getRatingVal(b) - getRatingVal(a))
+      .slice(0, 3);
+
     return {
       params: { state: stateSlug },
-      props: { stateName, cities, topClinics, clinicCount: stateClinics.length, stateCode },
+      props: {
+        stateName,
+        cities,
+        topClinics,
+        clinicCount: stateClinics.length,
+        stateCode,
+      },
     };
   });
 }
@@ -52,33 +78,42 @@ const title = `Best TMS Therapy Clinics in ${stateName} | TMS List`;
       </ol>
     </nav>
 
-     <!-- Top Rated Section -->
+    <!-- Top Rated Section -->
     <section class="mb-16">
-        <div class="flex items-center mb-8">
-             <h2 class="text-2xl font-bold text-gray-900">
-                Top Rated Clinics in {stateName}
-            </h2>
-            <div class="ml-4 h-px flex-1 bg-gray-200"></div>
-        </div>
-       
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {topClinics.map(clinic => (
-                <ClinicCard clinic={clinic} />
-            ))}
-        </div>
+      <div class="flex items-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-900">
+          Top Rated Clinics in {stateName}
+        </h2>
+        <div class="ml-4 h-px flex-1 bg-gray-200"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {topClinics.map((clinic) => <ClinicCard clinic={clinic} />)}
+      </div>
     </section>
 
     <!-- City Directory -->
     <section>
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">Browse by City</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {cities.map((city) => (
-                <a href={`/us/${Astro.params.state}/${city.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all text-center group">
-                    <span class="font-semibold text-gray-800 block mb-1 group-hover:text-primary transition-colors">{city.name}</span>
-                    <span class="text-xs text-primary font-bold">View Clinics &rarr;</span>
-                </a>
-            ))}
-        </div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Browse by City</h2>
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+      >
+        {
+          cities.map((city) => (
+            <a
+              href={`/us/${Astro.params.state}/${city.slug}/`}
+              class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all text-center group"
+            >
+              <span class="font-semibold text-gray-800 block mb-1 group-hover:text-primary transition-colors">
+                {city.name}
+              </span>
+              <span class="text-xs text-primary font-bold">
+                View Clinics &rarr;
+              </span>
+            </a>
+          ))
+        }
+      </div>
     </section>
   </main>
 </Layout>

@@ -1,18 +1,33 @@
 ---
-import ContentPage from '../layouts/ContentPage.astro';
+import ContentPage from "../layouts/ContentPage.astro";
 ---
 
-<ContentPage title="Contact Us" subtitle="We're here to help.">
+<ContentPage
+    title="Contact Us"
+    subtitle="We're here to help."
+    description="Get in touch with TMS List for support, provider partnerships, or to report a listing. We're here to help you find the right TMS therapy."
+>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 not-prose">
         <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
             <h3 class="text-xl font-bold mb-4">Support & Inquiries</h3>
-            <p class="text-gray-600 mb-4">For general questions about the directory or to report a listing.</p>
-            <a href="mailto:support@tmslist.com" class="text-primary font-semibold">support@tmslist.com</a>
+            <p class="text-gray-600 mb-4">
+                For general questions about the directory or to report a
+                listing.
+            </p>
+            <a
+                href="mailto:support@tmslist.com"
+                class="text-primary font-semibold">support@tmslist.com</a
+            >
         </div>
         <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
             <h3 class="text-xl font-bold mb-4">For Providers</h3>
-            <p class="text-gray-600 mb-4">To claim your profile or discuss partnership opportunities.</p>
-            <a href="mailto:partners@tmslist.com" class="text-primary font-semibold">partners@tmslist.com</a>
+            <p class="text-gray-600 mb-4">
+                To claim your profile or discuss partnership opportunities.
+            </p>
+            <a
+                href="mailto:partners@tmslist.com"
+                class="text-primary font-semibold">partners@tmslist.com</a
+            >
         </div>
     </div>
 </ContentPage>

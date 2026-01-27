@@ -1,0 +1,175 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { BLOG_SLUGS } from "../../utils/seo_slugs";
+
+const blogPosts = [
+    {
+        slug: "tms-success-rates-2026",
+        title: "TMS Success Rates in 2026: What the Latest Research Shows",
+        excerpt:
+            "A comprehensive look at the latest clinical data on TMS therapy outcomes for depression, OCD, and other conditions.",
+        category: "Research",
+        date: "January 2026",
+        readTime: "8 min read",
+        image: "/images/tms_chair_luxury_1769446442231.png",
+    },
+    {
+        slug: "tms-vs-medication",
+        title: "TMS vs Medication: A Complete Comparison Guide",
+        excerpt:
+            "How does TMS compare to antidepressants? We break down efficacy, side effects, and long-term outcomes.",
+        category: "Treatment",
+        date: "January 2026",
+        readTime: "10 min read",
+        image: "/images/brain_stimulation_art_1769446474392.png",
+    },
+    {
+        slug: "how-to-prepare-for-tms",
+        title: "How to Prepare for Your First TMS Session",
+        excerpt:
+            "Everything you need to know before starting TMS therapy, from what to wear to what to expect.",
+        category: "Patient Guide",
+        date: "January 2026",
+        readTime: "5 min read",
+        image: "/images/tms_chair_luxury_1769446442231.png",
+    },
+    {
+        slug: "does-tms-cause-memory-loss",
+        title: "Does TMS Cause Memory Loss? Separating Fact from Fiction",
+        excerpt:
+            "Addressing common concerns about cognitive side effects of transcranial magnetic stimulation.",
+        category: "FAQ",
+        date: "January 2026",
+        readTime: "6 min read",
+        image: "/images/brain_stimulation_art_1769446474392.png",
+    },
+    {
+        slug: "can-i-drive-after-tms",
+        title: "Can I Drive After TMS? Activity Guidelines Explained",
+        excerpt:
+            "Understanding what activities are safe immediately after a TMS session.",
+        category: "Patient Guide",
+        date: "January 2026",
+        readTime: "4 min read",
+        image: "/images/tms_chair_luxury_1769446442231.png",
+    },
+    {
+        slug: "how-long-does-tms-last",
+        title: "How Long Do TMS Results Last? Durability of Treatment",
+        excerpt:
+            "Exploring long-term outcomes and maintenance protocols for sustaining TMS benefits.",
+        category: "Research",
+        date: "January 2026",
+        readTime: "7 min read",
+        image: "/images/brain_stimulation_art_1769446474392.png",
+    },
+];
+
+const categories = [...new Set(blogPosts.map((p) => p.category))];
+---
+
+<Layout title="TMS Therapy Blog - Expert Guides & Research | TMS List">
+    <!-- Hero -->
+    <section
+        class="bg-gradient-to-br from-slate-900 via-indigo-900 to-blue-900 py-20"
+    >
+        <div class="container mx-auto px-6 text-center">
+            <span
+                class="inline-block px-4 py-1.5 bg-white/10 text-white/80 rounded-full text-sm font-bold uppercase tracking-wider mb-6"
+                >TMS List Blog</span
+            >
+            <h1 class="text-4xl md:text-6xl font-black text-white mb-6">
+                Expert Insights on TMS Therapy
+            </h1>
+            <p class="text-xl text-blue-100/80 max-w-2xl mx-auto">
+                Evidence-based articles, patient guides, and the latest research
+                on transcranial magnetic stimulation.
+            </p>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <section class="bg-white border-b border-gray-100 py-4 sticky top-20 z-40">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center gap-4 overflow-x-auto pb-2">
+                <span class="text-sm font-bold text-gray-500 shrink-0"
+                    >Filter:</span
+                >
+                <button
+                    class="px-4 py-2 bg-indigo-600 text-white text-sm font-bold rounded-full"
+                    >All</button
+                >
+                {
+                    categories.map((cat) => (
+                        <button class="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-bold rounded-full hover:bg-gray-200 transition-colors shrink-0">
+                            {cat}
+                        </button>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <main class="container mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                blogPosts.map((post) => (
+                    <a
+                        href={`/blog/${post.slug}/`}
+                        class="group block bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300"
+                    >
+                        <div class="relative h-48 bg-gradient-to-br from-indigo-100 to-cyan-100 overflow-hidden">
+                            <img
+                                src={post.image}
+                                alt={post.title}
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                loading="lazy"
+                            />
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur text-xs font-bold text-indigo-600 rounded-full">
+                                {post.category}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <h2 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors line-clamp-2">
+                                {post.title}
+                            </h2>
+                            <p class="text-gray-600 mb-4 line-clamp-2">
+                                {post.excerpt}
+                            </p>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>{post.date}</span>
+                                <span>{post.readTime}</span>
+                            </div>
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
+
+        <!-- Newsletter CTA -->
+        <div
+            class="mt-20 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-3xl p-10 text-center"
+        >
+            <h3 class="text-3xl font-bold text-white mb-4">
+                Stay Updated on TMS Research
+            </h3>
+            <p class="text-indigo-100 mb-8 max-w-xl mx-auto">
+                Get the latest articles, research updates, and patient resources
+                delivered to your inbox.
+            </p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    class="flex-1 px-5 py-4 rounded-xl text-gray-900 font-medium"
+                />
+                <button
+                    type="submit"
+                    class="px-8 py-4 bg-white text-indigo-600 font-bold rounded-xl hover:bg-gray-100 transition-colors"
+                    >Subscribe</button
+                >
+            </form>
+        </div>
+    </main>
+</Layout>

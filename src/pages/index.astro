@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getOperationalClinics, getClinicPhoto, type RealClinic } from '../data/real-clinics';
+
+import { getOperationalClinics, getClinicPhoto, getClinicRating, getClinicReviewCount } from '../utils/dataHelpers';
+import type { Clinic } from '../types/clinic';
 import { TREATMENT_SLUGS, TECHNOLOGY_SLUGS, INSURANCE_SLUGS } from '../utils/seo_slugs';
 
-// Use ONLY verified real clinics
+// Use ONLY verified real clinics from the main DB
 const clinics = getOperationalClinics();
 
 const STATE_NAMES: Record<string, string> = {
@@ -13,22 +15,28 @@ const STATE_NAMES: Record<string, string> = {
     'NY': 'New York',
     'AZ': 'Arizona',
     'CT': 'Connecticut',
-    'NJ': 'New Jersey'
+    'NJ': 'New Jersey',
+    'TX': 'Texas',
+    'IL': 'Illinois',
+    'PA': 'Pennsylvania',
+    'OH': 'Ohio',
+    'MI': 'Michigan',
+    'WA': 'Washington',
+    'CO': 'Colorado',
+    'GA': 'Georgia'
 };
-
-// Get rating value helper
-const getRating = (clinic: RealClinic) => clinic.rating;
 
 // Group clinics by state for the location grid
 const stateGroups = clinics.reduce((acc, clinic) => {
-    const stateCode = clinic.address.stateCode;
+    // Clinic interface uses 'state' directly (2-letter code)
+    const stateCode = clinic.state;
     if (!acc[stateCode]) acc[stateCode] = [];
     acc[stateCode].push(clinic);
     return acc;
-}, {} as Record<string, RealClinic[]>);
+}, {} as Record<string, Clinic[]>);
 
 const locationMap = Object.entries(stateGroups).map(([stateCode, stateClinics]) => {
-    const cities = [...new Set(stateClinics.map(c => c.address.city))].sort();
+    const cities = [...new Set(stateClinics.map(c => c.city))].sort();
     return {
         code: stateCode,
         name: STATE_NAMES[stateCode] || stateCode,
@@ -38,8 +46,12 @@ const locationMap = Object.entries(stateGroups).map(([stateCode, stateClinics]) 
     };
 }).sort((a, b) => b.clinicCount - a.clinicCount);
 
+// Calculate unique states count
+const uniqueStates = Object.keys(stateGroups);
+
 // Top Rated Clinics for Featured Section (only verified with real ratings)
-const topClinics = clinics.filter(c => getRating(c) >= 4.7 && c.reviewCount > 5).slice(0, 6);
+// Use helpers for polymorphic properties
+const topClinics = clinics.filter(c => getClinicRating(c) >= 4.7 && getClinicReviewCount(c) > 5).slice(0, 6);
 
 // Featured Technologies
 const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
@@ -70,7 +82,7 @@ const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                     </span>
-                    <span class="text-sm font-bold text-white/90 tracking-wide">500+ Verified Clinics • Updated January 2026</span>
+                    <span class="text-sm font-bold text-white/90 tracking-wide">{clinics.length}+ Verified Clinics • Updated {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
                 </div>
                 
                 <!-- Main Headline -->
@@ -86,20 +98,20 @@ const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
                 </p>
                 
                 <!-- Search Box -->
-                <div class="max-w-4xl mx-auto mb-12">
+                <form id="hero-search-form" class="max-w-4xl mx-auto mb-12" action="/us/">
                     <div class="bg-white/5 backdrop-blur-2xl border border-white/10 p-3 rounded-3xl shadow-2xl shadow-black/50">
                         <div class="flex flex-col md:flex-row gap-3">
                             <div class="flex-1 relative">
                                 <svg class="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <input type="text" placeholder="Enter city, state, or zip code..." class="w-full h-16 pl-14 pr-6 rounded-2xl bg-white text-gray-900 border-none focus:ring-2 focus:ring-cyan-400 placeholder-gray-400 font-medium text-lg" />
+                                <input type="text" id="hero-search-input" name="q" placeholder="Enter city, state, or zip code..." class="w-full h-16 pl-14 pr-6 rounded-2xl bg-white text-gray-900 border-none focus:ring-2 focus:ring-cyan-400 placeholder-gray-400 font-medium text-lg" />
                             </div>
-                            <button class="h-16 px-12 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-2xl shadow-lg shadow-cyan-500/30 transition-all text-lg tracking-wide flex items-center justify-center gap-3">
+                            <button type="submit" class="h-16 px-12 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-2xl shadow-lg shadow-cyan-500/30 transition-all text-lg tracking-wide flex items-center justify-center gap-3">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                                 Find Clinics
                             </button>
                         </div>
                     </div>
-                </div>
+                </form>
                 
                 <!-- Quick Links -->
                 <div class="flex flex-wrap justify-center gap-3 mb-16">
@@ -248,7 +260,7 @@ const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
                                 </div>
                             )}
                             <div class="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                                ★ {getRating(clinic).toFixed(1)}
+                                ★ {getClinicRating(clinic).toFixed(1)}
                             </div>
                         </div>
                         
@@ -264,7 +276,7 @@ const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
                             </div>
                             
                             <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                                <span class="text-sm text-gray-500">{clinic.review_count || (typeof clinic.rating === 'object' ? clinic.rating.count : 50)} reviews</span>
+                                <span class="text-sm text-gray-500">{getClinicReviewCount(clinic)} reviews</span>
                                 <span class="text-indigo-600 font-bold text-sm group-hover:translate-x-2 transition-transform inline-flex items-center gap-1">
                                     View Profile
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>

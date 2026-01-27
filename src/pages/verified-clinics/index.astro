@@ -1,87 +1,170 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { ALL_REAL_CLINICS, getOperationalClinics, getClinicPhoto } from '../../data/real-clinics';
+import Layout from "../../layouts/Layout.astro";
+
+import {
+    getOperationalClinics,
+    getClinicPhoto,
+    getClinicRating,
+    getClinicReviewCount,
+} from "../../utils/dataHelpers";
+import type { Clinic } from "../../types/clinic";
 
 const clinics = getOperationalClinics();
 
 // Group by state
-const stateGroups = clinics.reduce((acc, clinic) => {
-    const stateCode = clinic.address.stateCode;
-    if (!acc[stateCode]) acc[stateCode] = [];
-    acc[stateCode].push(clinic);
-    return acc;
-}, {} as Record<string, typeof clinics>);
+const stateGroups = clinics.reduce(
+    (acc, clinic) => {
+        const stateCode = clinic.state;
+        if (!acc[stateCode]) acc[stateCode] = [];
+        acc[stateCode].push(clinic);
+        return acc;
+    },
+    {} as Record<string, Clinic[]>,
+);
 
 // Sort states by clinic count
-const sortedStates = Object.entries(stateGroups).sort((a, b) => b[1].length - a[1].length);
+const sortedStates = Object.entries(stateGroups).sort(
+    (a, b) => b[1].length - a[1].length,
+);
 
 const stateNames: Record<string, string> = {
-    'DC': 'Washington DC',
-    'CA': 'California',
-    'FL': 'Florida',
-    'IL': 'Illinois',
-    'NY': 'New York',
-    'TX': 'Texas',
-    'WA': 'Washington',
-    'AZ': 'Arizona',
-    'CO': 'Colorado',
-    'GA': 'Georgia',
-    'PA': 'Pennsylvania',
-    'OH': 'Ohio',
-    'MI': 'Michigan',
-    'CT': 'Connecticut',
-    'NJ': 'New Jersey'
+    DC: "Washington DC",
+    CA: "California",
+    FL: "Florida",
+    IL: "Illinois",
+    NY: "New York",
+    TX: "Texas",
+    WA: "Washington",
+    AZ: "Arizona",
+    CO: "Colorado",
+    GA: "Georgia",
+    PA: "Pennsylvania",
+    OH: "Ohio",
+    MI: "Michigan",
+    CT: "Connecticut",
+    NJ: "New Jersey",
+    AL: "Alabama",
+    AK: "Alaska",
+    AR: "Arkansas",
+    DE: "Delaware",
+    HI: "Hawaii",
+    ID: "Idaho",
+    IN: "Indiana",
+    IA: "Iowa",
+    KS: "Kansas",
+    KY: "Kentucky",
+    LA: "Louisiana",
+    ME: "Maine",
+    MD: "Maryland",
+    MA: "Massachusetts",
+    MN: "Minnesota",
+    MS: "Mississippi",
+    MO: "Missouri",
+    MT: "Montana",
+    NE: "Nebraska",
+    NV: "Nevada",
+    NH: "New Hampshire",
+    NM: "New Mexico",
+    NC: "North Carolina",
+    ND: "North Dakota",
+    OK: "Oklahoma",
+    OR: "Oregon",
+    RI: "Rhode Island",
+    SC: "South Carolina",
+    SD: "South Dakota",
+    TN: "Tennessee",
+    UT: "Utah",
+    VT: "Vermont",
+    VA: "Virginia",
+    WV: "West Virginia",
+    WI: "Wisconsin",
+    WY: "Wyoming",
 };
 
-const title = "Verified TMS Clinics | Real Data from " + clinics.length + " Providers";
+const title =
+    "Verified TMS Clinics | Real Data from " + clinics.length + " Providers";
 const description = `Browse ${clinics.length} verified TMS therapy clinics across ${Object.keys(stateGroups).length} states. Real ratings, reviews, and contact info.`;
 
 // Calculate total reviews
-const totalReviews = clinics.reduce((sum, c) => sum + c.reviewCount, 0);
-const avgRating = clinics.filter(c => c.rating > 0).reduce((sum, c) => sum + c.rating, 0) / clinics.filter(c => c.rating > 0).length;
+const totalReviews = clinics.reduce(
+    (sum, c) => sum + getClinicReviewCount(c),
+    0,
+);
+const ratedClinics = clinics.filter((c) => getClinicRating(c) > 0);
+const avgRating =
+    ratedClinics.reduce((sum, c) => sum + getClinicRating(c), 0) /
+    (ratedClinics.length || 1);
 ---
 
 <Layout title={title} description={description}>
     <main class="bg-gray-50 min-h-screen">
         <!-- Hero -->
-        <section class="bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 py-16 md:py-24">
+        <section
+            class="bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 py-16 md:py-24"
+        >
             <div class="container mx-auto px-4 md:px-6">
                 <nav class="flex text-sm text-blue-200 mb-8">
                     <a href="/" class="hover:text-white">Home</a>
                     <span class="mx-2">/</span>
                     <span class="text-white">Verified Clinics</span>
                 </nav>
-                
-                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+
+                <div
+                    class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8"
+                >
                     <div class="max-w-2xl">
-                        <span class="inline-flex items-center gap-2 px-4 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-bold rounded-full mb-6">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span
+                            class="inline-flex items-center gap-2 px-4 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-bold rounded-full mb-6"
+                        >
+                            <span
+                                class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+                            ></span>
                             Real Data • No Fake Reviews
                         </span>
-                        <h1 class="text-3xl md:text-5xl font-black text-white mb-4">
+                        <h1
+                            class="text-3xl md:text-5xl font-black text-white mb-4"
+                        >
                             Verified TMS Clinics
                         </h1>
                         <p class="text-lg text-blue-100">
-                            {clinics.length} real TMS therapy providers across {Object.keys(stateGroups).length} states.
-                            All data sourced from Google Places with real ratings and reviews.
+                            {clinics.length} real TMS therapy providers across {
+                                Object.keys(stateGroups).length
+                            } states. All data sourced from Google Places with real
+                            ratings and reviews.
                         </p>
                     </div>
-                    
+
                     <div class="flex gap-4 flex-wrap">
-                        <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center">
-                            <div class="text-3xl font-black text-white">{clinics.length}</div>
+                        <div
+                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center"
+                        >
+                            <div class="text-3xl font-black text-white">
+                                {clinics.length}
+                            </div>
                             <div class="text-sm text-blue-200">Clinics</div>
                         </div>
-                        <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center">
-                            <div class="text-3xl font-black text-white">{Object.keys(stateGroups).length}</div>
+                        <div
+                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center"
+                        >
+                            <div class="text-3xl font-black text-white">
+                                {Object.keys(stateGroups).length}
+                            </div>
                             <div class="text-sm text-blue-200">States</div>
                         </div>
-                        <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center">
-                            <div class="text-3xl font-black text-yellow-400">{avgRating.toFixed(1)}★</div>
+                        <div
+                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center"
+                        >
+                            <div class="text-3xl font-black text-yellow-400">
+                                {avgRating.toFixed(1)}★
+                            </div>
                             <div class="text-sm text-blue-200">Avg Rating</div>
                         </div>
-                        <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center">
-                            <div class="text-3xl font-black text-white">{totalReviews}</div>
+                        <div
+                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center"
+                        >
+                            <div class="text-3xl font-black text-white">
+                                {totalReviews}
+                            </div>
                             <div class="text-sm text-blue-200">Reviews</div>
                         </div>
                     </div>
@@ -92,77 +175,115 @@ const avgRating = clinics.filter(c => c.rating > 0).reduce((sum, c) => sum + c.r
         <!-- Clinics By State -->
         <section class="py-12 md:py-20">
             <div class="container mx-auto px-4 md:px-6">
-                {sortedStates.map(([stateCode, stateClinics]) => (
-                    <div class="mb-16">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                            <span class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">{stateCode}</span>
-                            {stateNames[stateCode] || stateCode}
-                            <span class="text-sm font-normal text-gray-400 ml-2">({stateClinics.length} {stateClinics.length === 1 ? 'clinic' : 'clinics'})</span>
-                        </h2>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {stateClinics.map((clinic) => (
-                                <article class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all">
-                                    <div class="h-40 overflow-hidden">
-                                        <img src={getClinicPhoto(clinic)} alt={clinic.name} class="w-full h-full object-cover" loading="lazy" />
-                                    </div>
-                                    <div class="p-6">
-                                        <div class="flex items-center gap-2 mb-3">
-                                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full">✓ Verified</span>
-                                            {clinic.rating > 0 && (
-                                                <span class="flex items-center gap-1 text-sm">
-                                                    <span class="text-yellow-500">★</span>
-                                                    <span class="font-bold text-gray-900">{clinic.rating}</span>
-                                                    <span class="text-gray-400">({clinic.reviewCount})</span>
+                {
+                    sortedStates.map(([stateCode, stateClinics]) => (
+                        <div class="mb-16">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                                <span class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">
+                                    {stateCode}
+                                </span>
+                                {stateNames[stateCode] || stateCode}
+                                <span class="text-sm font-normal text-gray-400 ml-2">
+                                    ({stateClinics.length}{" "}
+                                    {stateClinics.length === 1
+                                        ? "clinic"
+                                        : "clinics"}
+                                    )
+                                </span>
+                            </h2>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {stateClinics.map((clinic) => (
+                                    <article class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all">
+                                        <div class="h-40 overflow-hidden">
+                                            <img
+                                                src={getClinicPhoto(clinic)}
+                                                alt={clinic.name}
+                                                class="w-full h-full object-cover"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <div class="p-6">
+                                            <div class="flex items-center gap-2 mb-3">
+                                                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full">
+                                                    ✓ Verified
                                                 </span>
-                                            )}
-                                        </div>
-                                        
-                                        <h3 class="text-lg font-bold text-gray-900 mb-1 line-clamp-2">{clinic.name}</h3>
-                                        <p class="text-gray-500 text-sm mb-3">{clinic.address.city}, {clinic.address.stateCode}</p>
-                                        
-                                        {clinic.phone && (
-                                            <p class="text-sm text-gray-600 mb-2">
-                                                <span class="text-gray-400">📞</span> {clinic.phone}
-                                            </p>
-                                        )}
-                                        
-                                        <div class="flex flex-wrap gap-1.5 mb-4">
-                                            {clinic.subtypes.slice(0, 2).map((subtype) => (
-                                                <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded">{subtype}</span>
-                                            ))}
-                                        </div>
-                                        
-                                        {clinic.accessibility && clinic.accessibility.length > 0 && (
-                                            <div class="flex flex-wrap gap-1 mb-4">
-                                                {clinic.accessibility.includes("Wheelchair accessible entrance") && (
-                                                    <span class="text-xs text-gray-400" title="Wheelchair accessible">♿</span>
-                                                )}
-                                                {clinic.accessibility.includes("LGBTQ+ friendly") && (
-                                                    <span class="text-xs text-gray-400" title="LGBTQ+ friendly">🏳️‍🌈</span>
-                                                )}
-                                                {clinic.accessibility.includes("Women-owned") && (
-                                                    <span class="text-xs text-gray-400" title="Women-owned">👩‍💼</span>
+                                                {getClinicRating(clinic) >
+                                                    0 && (
+                                                    <span class="flex items-center gap-1 text-sm">
+                                                        <span class="text-yellow-500">
+                                                            ★
+                                                        </span>
+                                                        <span class="font-bold text-gray-900">
+                                                            {getClinicRating(
+                                                                clinic,
+                                                            )}
+                                                        </span>
+                                                        <span class="text-gray-400">
+                                                            (
+                                                            {getClinicReviewCount(
+                                                                clinic,
+                                                            )}
+                                                            )
+                                                        </span>
+                                                    </span>
                                                 )}
                                             </div>
-                                        )}
-                                        
-                                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                                            {clinic.website && (
-                                                <a href={clinic.website} target="_blank" rel="noopener noreferrer" class="text-sm text-gray-400 hover:text-indigo-600">
-                                                    Website ↗
-                                                </a>
+
+                                            <h3 class="text-lg font-bold text-gray-900 mb-1 line-clamp-2">
+                                                {clinic.name}
+                                            </h3>
+                                            <p class="text-gray-500 text-sm mb-3">
+                                                {clinic.city}, {clinic.state}
+                                            </p>
+
+                                            {clinic.phone && (
+                                                <p class="text-sm text-gray-600 mb-2">
+                                                    <span class="text-gray-400">
+                                                        📞
+                                                    </span>{" "}
+                                                    {clinic.phone}
+                                                </p>
                                             )}
-                                            <a href={`/clinic/${clinic.slug}/`} class="text-indigo-600 font-bold text-sm hover:text-indigo-700">
-                                                View Details →
-                                            </a>
+
+                                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                                {clinic.machines &&
+                                                    clinic.machines
+                                                        .slice(0, 2)
+                                                        .map((machine) => (
+                                                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded">
+                                                                {machine}
+                                                            </span>
+                                                        ))}
+                                            </div>
+
+                                            {/* Accessibility data not available in Clinic type currently, hiding or replacing with insurance info if needed */}
+
+                                            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                                {clinic.website && (
+                                                    <a
+                                                        href={clinic.website}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="text-sm text-gray-400 hover:text-indigo-600"
+                                                    >
+                                                        Website ↗
+                                                    </a>
+                                                )}
+                                                <a
+                                                    href={`/clinic/${clinic.slug}/`}
+                                                    class="text-indigo-600 font-bold text-sm hover:text-indigo-700"
+                                                >
+                                                    View Details →
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </article>
-                            ))}
+                                    </article>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                }
             </div>
         </section>
 
@@ -170,8 +291,13 @@ const avgRating = clinics.filter(c => c.rating > 0).reduce((sum, c) => sum + c.r
         <section class="py-12 bg-white border-t border-gray-100">
             <div class="container mx-auto px-4 md:px-6 text-center">
                 <p class="text-gray-500 text-sm max-w-2xl mx-auto">
-                    All clinic data is sourced from Google Places and verified for accuracy. Ratings and review counts are real and not fabricated.
-                    If you're a clinic owner and want to update your listing, please <a href="/providers/services/get-listed" class="text-indigo-600 font-medium">contact us</a>.
+                    All clinic data is sourced from Google Places and verified
+                    for accuracy. Ratings and review counts are real and not
+                    fabricated. If you're a clinic owner and want to update your
+                    listing, please <a
+                        href="/providers/services/get-listed"
+                        class="text-indigo-600 font-medium">contact us</a
+                    >.
                 </p>
             </div>
         </section>

@@ -1,80 +1,140 @@
 ---
-import { 
-    TREATMENT_SLUGS, 
-    INSURANCE_SLUGS, 
+import {
+    TREATMENT_SLUGS,
+    INSURANCE_SLUGS,
     TECHNOLOGY_SLUGS,
     PROTOCOL_SLUGS,
     DEMOGRAPHIC_SLUGS,
     COMPARE_SLUGS,
-    PROVIDER_SLUGS
-} from '../utils/seo_slugs';
+    PROVIDER_SLUGS,
+} from "../utils/seo_slugs";
 
 // Menu structure
 const findCare = [
-    { href: '/us/', label: 'Find a Clinic', icon: '🏥' },
-    { href: '/specialists/', label: 'Find a Specialist', icon: '👨‍⚕️' },
-    { href: '/near-me/tms-near-me', label: 'TMS Near Me', icon: '📍' },
-    { href: '/quiz/am-i-a-candidate/', label: 'Am I a Candidate?', icon: '✅' },
+    { href: "/us/", label: "Find a Clinic", icon: "🏥" },
+    { href: "/specialists/", label: "Find a Specialist", icon: "👨‍⚕️" },
+    { href: "/near-me/tms-near-me", label: "TMS Near Me", icon: "📍" },
+    { href: "/quiz/am-i-a-candidate/", label: "Am I a Candidate?", icon: "✅" },
 ];
 
 const conditions = TREATMENT_SLUGS.slice(0, 8);
 const insurance = INSURANCE_SLUGS.slice(0, 8);
-const technology = [...TECHNOLOGY_SLUGS.slice(0, 6), { slug: 'exomind', title: 'Exomind Wellness' }];
+const technology = [
+    ...TECHNOLOGY_SLUGS.slice(0, 6),
+    { slug: "exomind", title: "Exomind Wellness" },
+];
 const protocols = PROTOCOL_SLUGS.slice(0, 5);
 const demographics = DEMOGRAPHIC_SLUGS;
 ---
 
-<header class="bg-white/95 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-50">
-    <div class="container mx-auto px-4 lg:px-6 h-20 flex items-center justify-between">
+<header
+    class="bg-white/95 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-50"
+>
+    <div
+        class="container mx-auto px-4 lg:px-6 h-20 flex items-center justify-between"
+    >
         <!-- Logo -->
         <a href="/" class="flex items-center gap-2.5 z-50">
-            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-blue-600 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-indigo-200">
+            <div
+                class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-blue-600 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-indigo-200"
+            >
                 T
             </div>
             <div class="flex flex-col">
-                <span class="text-lg font-black text-gray-900 tracking-tight leading-none">TMS List</span>
-                <span class="text-[9px] text-indigo-600 font-bold tracking-widest leading-none mt-0.5">VERIFIED DIRECTORY</span>
+                <span
+                    class="text-lg font-black text-gray-900 tracking-tight leading-none"
+                    >TMS List</span
+                >
+                <span
+                    class="text-[9px] text-indigo-600 font-bold tracking-widest leading-none mt-0.5"
+                    >VERIFIED DIRECTORY</span
+                >
             </div>
         </a>
 
         <!-- Desktop Nav -->
         <nav class="hidden lg:flex items-center gap-1">
-            
             <!-- Find Care Dropdown -->
             <div class="group relative">
-                <button class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-1.5 rounded-lg transition-colors">
+                <button
+                    class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-1.5 rounded-lg transition-colors"
+                >
                     Find Care
-                    <svg class="w-4 h-4 text-gray-400 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg
+                        class="w-4 h-4 text-gray-400 transition-transform group-hover:rotate-180"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"></path></svg
+                    >
                 </button>
-                <div class="absolute left-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-64">
-                    <div class="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 p-4 overflow-hidden">
-                        {findCare.map(item => (
-                            <a href={item.href} class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-colors">
-                                <span class="text-lg">{item.icon}</span>
-                                {item.label}
-                            </a>
-                        ))}
+                <div
+                    class="absolute left-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-64"
+                >
+                    <div
+                        class="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 p-4 overflow-hidden"
+                    >
+                        {
+                            findCare.map((item) => (
+                                <a
+                                    href={item.href}
+                                    class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-colors"
+                                >
+                                    <span class="text-lg">{item.icon}</span>
+                                    {item.label}
+                                </a>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
 
             <!-- Conditions Mega Menu -->
             <div class="group relative">
-                <a href="/treatments/" class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-1.5 rounded-lg transition-colors">
+                <a
+                    href="/treatments/"
+                    class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-1.5 rounded-lg transition-colors"
+                >
                     Conditions
-                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg
+                        class="w-4 h-4 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"></path></svg
+                    >
                 </a>
-                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-[500px]">
-                    <div class="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 p-6 overflow-hidden">
+                <div
+                    class="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-[500px]"
+                >
+                    <div
+                        class="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 p-6 overflow-hidden"
+                    >
                         <div class="grid grid-cols-2 gap-4">
-                            {conditions.map(item => (
-                                <a href={`/treatments/${item.slug}/`} class="px-3 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors truncate">
-                                    {item.title.replace('TMS for ', '')}
-                                </a>
-                            ))}
+                            {
+                                conditions.map((item) => (
+                                    <a
+                                        href={`/treatments/${item.slug}/`}
+                                        class="px-3 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors truncate"
+                                    >
+                                        {item.title.replace("TMS for ", "")}
+                                    </a>
+                                ))
+                            }
                         </div>
                         <div class="mt-4 pt-4 border-t border-gray-100">
-                            <a href="/treatments/" class="block text-center text-sm font-bold text-indigo-600 hover:text-indigo-700">
+                            <a
+                                href="/treatments/"
+                                class="block text-center text-sm font-bold text-indigo-600 hover:text-indigo-700"
+                            >
                                 View All Conditions →
                             </a>
                         </div>
@@ -84,21 +144,48 @@ const demographics = DEMOGRAPHIC_SLUGS;
 
             <!-- Insurance Mega Menu -->
             <div class="group relative">
-                <a href="/insurance/" class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-1.5 rounded-lg transition-colors">
+                <a
+                    href="/insurance/"
+                    class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-1.5 rounded-lg transition-colors"
+                >
                     Insurance
-                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg
+                        class="w-4 h-4 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"></path></svg
+                    >
                 </a>
-                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-[500px]">
-                    <div class="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 p-6 overflow-hidden">
+                <div
+                    class="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-[500px]"
+                >
+                    <div
+                        class="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 p-6 overflow-hidden"
+                    >
                         <div class="grid grid-cols-2 gap-4">
-                            {insurance.map(item => (
-                                <a href={`/insurance/${item.slug}/`} class="px-3 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors truncate">
-                                    {item.title.replace(' TMS Coverage', '').replace(' Coverage for TMS', '')}
-                                </a>
-                            ))}
+                            {
+                                insurance.map((item) => (
+                                    <a
+                                        href={`/insurance/${item.slug}/`}
+                                        class="px-3 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors truncate"
+                                    >
+                                        {item.title
+                                            .replace(" TMS Coverage", "")
+                                            .replace(" Coverage for TMS", "")}
+                                    </a>
+                                ))
+                            }
                         </div>
                         <div class="mt-4 pt-4 border-t border-gray-100">
-                            <a href="/insurance/" class="block text-center text-sm font-bold text-indigo-600 hover:text-indigo-700">
+                            <a
+                                href="/insurance/"
+                                class="block text-center text-sm font-bold text-indigo-600 hover:text-indigo-700"
+                            >
                                 View All Insurance →
                             </a>
                         </div>
@@ -108,36 +195,74 @@ const demographics = DEMOGRAPHIC_SLUGS;
 
             <!-- Technology Mega Menu -->
             <div class="group relative">
-                <a href="/technology/" class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-1.5 rounded-lg transition-colors">
+                <a
+                    href="/technology/"
+                    class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-1.5 rounded-lg transition-colors"
+                >
                     Technology
-                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg
+                        class="w-4 h-4 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"></path></svg
+                    >
                 </a>
-                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-[600px]">
-                    <div class="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 p-6 overflow-hidden">
+                <div
+                    class="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-[600px]"
+                >
+                    <div
+                        class="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 p-6 overflow-hidden"
+                    >
                         <div class="grid grid-cols-2 gap-8">
                             <div>
-                                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">TMS Devices</h4>
+                                <h4
+                                    class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3"
+                                >
+                                    TMS Devices
+                                </h4>
                                 <div class="space-y-2">
-                                    {technology.map(item => (
-                                        <a href={`/technology/${item.slug}/`} class="block px-3 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
-                                            {item.title}
-                                        </a>
-                                    ))}
+                                    {
+                                        technology.map((item) => (
+                                            <a
+                                                href={`/technology/${item.slug}/`}
+                                                class="block px-3 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                                            >
+                                                {item.title}
+                                            </a>
+                                        ))
+                                    }
                                 </div>
                             </div>
                             <div>
-                                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Protocols</h4>
+                                <h4
+                                    class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3"
+                                >
+                                    Protocols
+                                </h4>
                                 <div class="space-y-2">
-                                    {protocols.map(item => (
-                                        <a href={`/protocols/${item.slug}/`} class="block px-3 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
-                                            {item.title}
-                                        </a>
-                                    ))}
+                                    {
+                                        protocols.map((item) => (
+                                            <a
+                                                href={`/protocols/${item.slug}/`}
+                                                class="block px-3 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                                            >
+                                                {item.title}
+                                            </a>
+                                        ))
+                                    }
                                 </div>
                             </div>
                         </div>
                         <div class="mt-4 pt-4 border-t border-gray-100">
-                            <a href="/technology/" class="block text-center text-sm font-bold text-indigo-600 hover:text-indigo-700">
+                            <a
+                                href="/technology/"
+                                class="block text-center text-sm font-bold text-indigo-600 hover:text-indigo-700"
+                            >
                                 View All Technology →
                             </a>
                         </div>
@@ -147,35 +272,177 @@ const demographics = DEMOGRAPHIC_SLUGS;
 
             <!-- Patients Dropdown -->
             <div class="group relative">
-                <a href="/demographic/" class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-1.5 rounded-lg transition-colors">
+                <a
+                    href="/demographic/"
+                    class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-1.5 rounded-lg transition-colors"
+                >
                     Patients
-                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg
+                        class="w-4 h-4 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"></path></svg
+                    >
                 </a>
-                <div class="absolute right-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-72">
-                    <div class="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 p-4 overflow-hidden">
-                        {demographics.map(item => (
-                            <a href={`/demographic/${item.slug}/`} class="block px-4 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
-                                {item.title}
-                            </a>
-                        ))}
+                <div
+                    class="absolute right-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-72"
+                >
+                    <div
+                        class="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 p-4 overflow-hidden"
+                    >
+                        {
+                            demographics.map((item) => (
+                                <a
+                                    href={`/demographic/${item.slug}/`}
+                                    class="block px-4 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                                >
+                                    {item.title}
+                                </a>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
 
             <!-- For Providers -->
-            <a href="/providers/services/get-listed" class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 rounded-lg transition-colors">
+            <a
+                href="/providers/services/get-listed"
+                class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-indigo-600 rounded-lg transition-colors"
+            >
                 For Providers
             </a>
         </nav>
-        
+
         <!-- CTA -->
         <div class="flex items-center gap-3">
-            <a href="/providers/services/get-listed" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white text-sm font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all hover:-translate-y-0.5">
+            <a
+                href="/providers/services/get-listed"
+                class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white text-sm font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all hover:-translate-y-0.5"
+            >
                 List Your Clinic
             </a>
             <button class="lg:hidden p-2 text-gray-500" id="mobile-menu-btn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"></path></svg
+                >
             </button>
         </div>
     </div>
 </header>
+
+<!-- Mobile Menu Panel -->
+<div
+    id="mobile-menu"
+    class="fixed inset-0 z-[100] bg-black/50 opacity-0 invisible transition-opacity duration-300 lg:hidden"
+>
+    <div
+        id="mobile-menu-panel"
+        class="absolute right-0 top-0 h-full w-80 max-w-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300"
+    >
+        <div
+            class="flex items-center justify-between p-4 border-b border-gray-100"
+        >
+            <span class="text-lg font-bold text-gray-900">Menu</span>
+            <button
+                id="mobile-menu-close"
+                class="p-2 text-gray-500 hover:text-gray-900"
+            >
+                <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path></svg
+                >
+            </button>
+        </div>
+        <nav class="p-4 space-y-2">
+            <a
+                href="/us/"
+                class="block px-4 py-3 text-gray-700 font-medium hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+                >Find a Clinic</a
+            >
+            <a
+                href="/specialists/"
+                class="block px-4 py-3 text-gray-700 font-medium hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+                >Find a Specialist</a
+            >
+            <a
+                href="/treatments/"
+                class="block px-4 py-3 text-gray-700 font-medium hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+                >Conditions</a
+            >
+            <a
+                href="/insurance/"
+                class="block px-4 py-3 text-gray-700 font-medium hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+                >Insurance</a
+            >
+            <a
+                href="/technology/"
+                class="block px-4 py-3 text-gray-700 font-medium hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+                >Technology</a
+            >
+            <a
+                href="/demographic/"
+                class="block px-4 py-3 text-gray-700 font-medium hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+                >Patients</a
+            >
+            <a
+                href="/quiz/am-i-a-candidate/"
+                class="block px-4 py-3 text-gray-700 font-medium hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+                >Am I a Candidate?</a
+            >
+            <div class="pt-4 mt-4 border-t border-gray-100">
+                <a
+                    href="/providers/services/get-listed"
+                    class="block w-full text-center px-4 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors"
+                    >List Your Clinic</a
+                >
+            </div>
+        </nav>
+    </div>
+</div>
+
+<script>
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileMenuPanel = document.getElementById("mobile-menu-panel");
+    const mobileMenuClose = document.getElementById("mobile-menu-close");
+
+    function openMenu() {
+        mobileMenu?.classList.remove("opacity-0", "invisible");
+        mobileMenu?.classList.add("opacity-100", "visible");
+        mobileMenuPanel?.classList.remove("translate-x-full");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeMenu() {
+        mobileMenu?.classList.add("opacity-0", "invisible");
+        mobileMenu?.classList.remove("opacity-100", "visible");
+        mobileMenuPanel?.classList.add("translate-x-full");
+        document.body.style.overflow = "";
+    }
+
+    mobileMenuBtn?.addEventListener("click", openMenu);
+    mobileMenuClose?.addEventListener("click", closeMenu);
+    mobileMenu?.addEventListener("click", (e) => {
+        if (e.target === mobileMenu) closeMenu();
+    });
+</script>

@@ -1,62 +1,109 @@
 ---
-import Layout from './Layout.astro';
-import Hero from '../components/Hero.astro';
+import Layout from "./Layout.astro";
+import Hero from "../components/Hero.astro";
 
-const { title, subtitle } = Astro.props;
+interface Props {
+    title: string;
+    subtitle?: string;
+    description?: string;
+}
+
+const { title, subtitle, description } = Astro.props;
 ---
 
-<Layout title={`${title} | TMS List`}>
-    <Hero title={title} subtitle={subtitle || "Expert guides and verified information."} />
-    
-<!-- Smart Content Generator: Simulates deep content for SEO pages -->
+<Layout title={`${title} | TMS List`} description={description}>
+    <Hero
+        title={title}
+        subtitle={subtitle || "Expert guides and verified information."}
+    />
+
+    <!-- Smart Content Generator: Simulates deep content for SEO pages -->
     <main class="container mx-auto px-4 py-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
             <!-- Article Column -->
             <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none">
                 <p class="lead text-xl text-gray-600 mb-8">
-                    Comprehensive resources and verified information regarding <strong>{title}</strong>. 
-                    This guide is designed to help patients, families, and providers navigate the complexities of Transcranial Magnetic Stimulation therapy.
+                    Comprehensive resources and verified information regarding <strong
+                        >{title}</strong
+                    >. This guide is designed to help patients, families, and
+                    providers navigate the complexities of Transcranial Magnetic
+                    Stimulation therapy.
                 </p>
 
                 <slot>
                     <!-- Fallback 'Massive' Content for SEO Stubs -->
-                    <div class="bg-gray-50 border-l-4 border-primary p-6 mb-8 rounded-r-xl">
-                        <h3 class="text-primary font-bold mt-0">Updated for 2026</h3>
-                        <p class="mb-0">This guide follows the latest clinical protocols and FDA clearance guidelines for {title}.</p>
+                    <div
+                        class="bg-gray-50 border-l-4 border-primary p-6 mb-8 rounded-r-xl"
+                    >
+                        <h3 class="text-primary font-bold mt-0">
+                            Updated for 2026
+                        </h3>
+                        <p class="mb-0">
+                            This guide follows the latest clinical protocols and
+                            FDA clearance guidelines for {title}.
+                        </p>
                     </div>
 
                     <h2>Understanding {title}</h2>
                     <p>
-                        As mental health technology evolves, <strong>{title}</strong> has emerged as a critical topic for patients seeking alternatives to traditional medication. 
-                        Research indicates that personalized neuromodulation can offer significant benefits for treatment-resistant conditions.
+                        As mental health technology evolves, <strong
+                            >{title}</strong
+                        > has emerged as a critical topic for patients seeking alternatives
+                        to traditional medication. Research indicates that personalized
+                        neuromodulation can offer significant benefits for treatment-resistant
+                        conditions.
                     </p>
                     <p>
-                        Clinical studies published in major psychiatric journals demonstrate that outcomes are significantly improved when treatment is tailored to the individual's specific neural architecture.
+                        Clinical studies published in major psychiatric journals
+                        demonstrate that outcomes are significantly improved
+                        when treatment is tailored to the individual's specific
+                        neural architecture.
                     </p>
 
                     <h3>Key Benefits</h3>
                     <ul>
-                        <li><strong>Non-Invasive:</strong> No anesthesia or surgery required.</li>
-                        <li><strong>High Efficacy:</strong> 50-60% response rates in treatment-resistant cases.</li>
-                        <li><strong>Minimal Side Effects:</strong> Typically limited to mild scalp discomfort.</li>
-                        <li><strong>FDA Cleared:</strong> Safe and regulated technology.</li>
+                        <li>
+                            <strong>Non-Invasive:</strong> No anesthesia or surgery
+                            required.
+                        </li>
+                        <li>
+                            <strong>High Efficacy:</strong> 50-60% response rates
+                            in treatment-resistant cases.
+                        </li>
+                        <li>
+                            <strong>Minimal Side Effects:</strong> Typically limited
+                            to mild scalp discomfort.
+                        </li>
+                        <li>
+                            <strong>FDA Cleared:</strong> Safe and regulated technology.
+                        </li>
                     </ul>
 
                     <figure>
-                        <img src="https://placehold.co/800x400/e2e8f0/1e293b?text=Clinical+Environment" alt="Clinical setting" class="rounded-xl w-full shadow-lg" />
-                        <figcaption>Modern TMS treatment rooms are designed for patient comfort.</figcaption>
+                        <img
+                            src="https://placehold.co/800x400/e2e8f0/1e293b?text=Clinical+Environment"
+                            alt="Clinical setting"
+                            class="rounded-xl w-full shadow-lg"
+                        />
+                        <figcaption>
+                            Modern TMS treatment rooms are designed for patient
+                            comfort.
+                        </figcaption>
                     </figure>
 
                     <h2>How It Works</h2>
                     <p>
-                        The biological mechanism behind {title} involves the use of focused magnetic pulses to stimulate underactive regions of the brain. 
-                        For depression, this typically targets the dorsolateral prefrontal cortex (DLPFC).
+                        The biological mechanism behind {title} involves the use of
+                        focused magnetic pulses to stimulate underactive regions of
+                        the brain. For depression, this typically targets the dorsolateral
+                        prefrontal cortex (DLPFC).
                     </p>
 
                     <h2>Insurance and Coverage</h2>
                     <p>
-                        Navigating insurance for {title} can be complex. Most major carriers now provide coverage if specific criteria are met, typically including:
+                        Navigating insurance for {title} can be complex. Most major
+                        carriers now provide coverage if specific criteria are met,
+                        typically including:
                     </p>
                     <ul>
                         <li>Diagnosis of Major Depressive Disorder (MDD).</li>
@@ -66,14 +113,28 @@ const { title, subtitle } = Astro.props;
 
                     <h2>Finding a Provider</h2>
                     <p>
-                        It is crucial to select a provider who is not only certified but also verified for {title}. 
-                        Our directory filters clinics based on machine type, insurance acceptance, and patient reviews to ensure you find the highest quality care.
+                        It is crucial to select a provider who is not only
+                        certified but also verified for {title}. Our directory
+                        filters clinics based on machine type, insurance
+                        acceptance, and patient reviews to ensure you find the
+                        highest quality care.
                     </p>
 
-                    <div class="not-prose mt-12 p-8 bg-blue-900 rounded-2xl text-white text-center">
-                        <h3 class="text-2xl font-bold mb-4">Ready to take the next step?</h3>
-                        <p class="text-blue-100 mb-8">Find a verified clinic near you specializing in {title}.</p>
-                        <a href="/us/" class="inline-block bg-white text-blue-900 font-bold py-3 px-8 rounded-xl hover:bg-blue-50 transition-colors">
+                    <div
+                        class="not-prose mt-12 p-8 bg-blue-900 rounded-2xl text-white text-center"
+                    >
+                        <h3 class="text-2xl font-bold mb-4">
+                            Ready to take the next step?
+                        </h3>
+                        <p class="text-blue-100 mb-8">
+                            Find a verified clinic near you specializing in {
+                                title
+                            }.
+                        </p>
+                        <a
+                            href="/us/"
+                            class="inline-block bg-white text-blue-900 font-bold py-3 px-8 rounded-xl hover:bg-blue-50 transition-colors"
+                        >
                             Browse Directory
                         </a>
                     </div>
@@ -83,30 +144,60 @@ const { title, subtitle } = Astro.props;
             <!-- Sidebar -->
             <aside class="lg:col-span-4 space-y-8">
                 <!-- Author Box -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                    <h4 class="font-bold text-gray-900 mb-4 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm"
+                >
+                    <h4
+                        class="font-bold text-gray-900 mb-4 uppercase text-xs tracking-wider"
+                    >
+                        Medically Reviewed By
+                    </h4>
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold text-sm">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold text-sm"
+                        >
                             DR
                         </div>
                         <div>
-                            <div class="font-bold text-gray-900">Dr. Sarah Jenning</div>
-                            <div class="text-xs text-gray-500">Board Certified Psychiatrist</div>
+                            <div class="font-bold text-gray-900">
+                                Dr. Sarah Jenning
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                Board Certified Psychiatrist
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Related Links -->
                 <div class="bg-gray-50 p-6 rounded-2xl">
-                    <h4 class="font-bold text-gray-900 mb-4 uppercase text-xs tracking-wider">Related Topics</h4>
+                    <h4
+                        class="font-bold text-gray-900 mb-4 uppercase text-xs tracking-wider"
+                    >
+                        Related Topics
+                    </h4>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="/insurance/medicare" class="text-gray-600 hover:text-primary transition-colors">Medicare Guidelines</a></li>
-                        <li><a href="/technology/neurostar" class="text-gray-600 hover:text-primary transition-colors">NeuroStar Technology</a></li>
-                        <li><a href="/treatments/anxiety" class="text-gray-600 hover:text-primary transition-colors">Treatment for Anxiety</a></li>
+                        <li>
+                            <a
+                                href="/insurance/medicare/"
+                                class="text-gray-600 hover:text-primary transition-colors"
+                                >Medicare Guidelines</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/technology/neurostar/"
+                                class="text-gray-600 hover:text-primary transition-colors"
+                                >NeuroStar Technology</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/treatments/anxiety/"
+                                class="text-gray-600 hover:text-primary transition-colors"
+                                >Treatment for Anxiety</a>
+                        </li>
                     </ul>
                 </div>
             </aside>
-
         </div>
     </main>
 </Layout>

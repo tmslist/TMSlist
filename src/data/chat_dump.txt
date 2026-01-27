@@ -1,0 +1,132 @@
+query	name	name_for_emails	subtypes	category	type	phone	website	address	street	city	county	state	state_code	postal_code	country	country_code	latitude	longitude	h3	time_zone	plus_code	area_service	rating	reviews	reviews_link	reviews_tags	reviews_per_score	reviews_per_score_1	reviews_per_score_2	reviews_per_score_3	reviews_per_score_4	reviews_per_score_5	photos_count	photo	street_view	logo	located_in	located_google_id	business_status	working_hours	working_hours_csv_compatible	other_hours	popular_times	typical_time_spent	range	prices	reservation_links	booking_appointment_link	menu_link	order_links	about	description	posts	verified	owner_id	owner_title	owner_link	location_link	location_reviews_link	place_id	google_id	cid	kgmid	reviews_id
+TMS clinic, 40218, Louisville, KY, US
+Hagan Health Psychiatry & TMS Therapy
++1 502-326-3011
+https://www.haganhealth.com/
+4010 Dupont Cir #202, Louisville, KY 40207
+OPERATIONAL
+{"Monday": ["8AM-6PM"], "Tuesday": ["8AM-6PM"], "Wednesday": ["8AM-6PM"], "Thursday": ["8AM-6PM"], "Friday": ["8AM-12PM"], "Saturday": ["Closed"], "Sunday": ["Closed"]}
+38.233243
+-85.63014
+4.5
+414
+0x8869756161916a85:0xddf0137a0a43c311
+https://lh3.googleusercontent.com/p/AF1QipMcWSJ0HJWyuMbTFdl4TjFtxrbZPM8YKkik0sII=w800-h500-k-no
+
+TMS clinic, 52161, Ossian, IA, US
+Ossian
+Iowa 52161
+CLOSED_PERMANENTLY
+43.145809
+-91.76321
+0x87fb00ba1b4d38db:0xeab90e8963aab925
+
+TMS clinic, 60565, Naperville, IL, US
+Conventions TMS
++1 630-642-1801
+https://conventionstms.com/
+4300 Weaver Pkwy Suite 100-A, Warrenville, IL 60555
+OPERATIONAL
+{"Monday": ["9AM-5PM"], "Tuesday": ["9AM-5PM"], "Wednesday": ["9AM-5PM"], "Thursday": ["9AM-5PM"], "Friday": ["9AM-5PM"], "Saturday": ["Closed"], "Sunday": ["Closed"]}
+41.803292
+-88.16352
+0x880e57ad6c6a1c97:0x779e90db83e2eae0
+https://lh3.googleusercontent.com/p/AF1QipPM3_4lTCr6XTJ0x_O_tLtqnKXUERT-h25Ry6qh=w800-h500-k-no
+
+TMS clinic, 60565, Naperville, IL, US
+Hopemark Health Naperville
++1 630-448-8514
+https://hopemarkhealth.com/mental-health-clinic/naperville/
+1284 Rickert Dr #200, Naperville, IL 60540
+OPERATIONAL
+{"Monday": ["8:30AM-6PM"], "Tuesday": ["8:30AM-5PM"], "Wednesday": ["8:30AM-6PM"], "Thursday": ["8:30AM-5PM"], "Friday": ["8:30AM-5PM"], "Saturday": ["Closed"], "Sunday": ["Closed"]}
+41.749466
+-88.16783
+4.7
+91
+0x880e57d5517d2b8b:0xbd9a1e8ee300f0c7
+https://lh3.googleusercontent.com/p/AF1QipPZXuqdi_qRafs9jdagf_SFZ32J3FjG9wUrqqT1=w800-h500-k-no
+
+TMS clinic, 60565, Naperville, IL, US
+Dr. Anmol Tolani M.D.
++1 630-607-0387
+https://hopemarkhealth.com/
+1284 Rickert Dr #200, Naperville, IL 60540
+OPERATIONAL
+{"Monday": ["8:30AM-6PM"], "Tuesday": ["8:30AM-5PM"], "Wednesday": ["8:30AM-6PM"], "Thursday": ["8:30AM-5PM"], "Friday": ["8:30AM-5PM"], "Saturday": ["Closed"], "Sunday": ["Closed"]}
+41.749466
+-88.16783
+5
+1
+0x880e57e0620d90ad:0xd14f46c1a42d902
+https://lh3.googleusercontent.com/p/AF1QipO2gbu1XNrH5Blt56rFVkHBGDFwEPuKN0PPL2Za=w800-h500-k-no
+
+TMS clinic, 60565, Naperville, IL, US
+Transformative Growth Counseling
++1 630-423-6010
+http://www.transformativegrowth.org/
+24W500 Maple Ave suite 216A, Naperville, IL 60540
+OPERATIONAL
+{"Monday": ["9AM-9PM"], "Tuesday": ["9AM-9PM"], "Wednesday": ["9AM-9PM"], "Thursday": ["9AM-9PM"], "Friday": ["9AM-9PM"], "Saturday": ["9AM-9PM"], "Sunday": ["9AM-9PM"]}
+41.781338
+-88.10297
+4.2
+32
+0x880ef7571fea644b:0x7f4e5ff1c2ec5b98
+https://lh3.googleusercontent.com/p/AF1QipO8TNOEuIxLm3iWnUsKfBA3aIG0Je0WzhdvjgJl=w800-h500-k-no
+
+TMS clinic, 60565, Naperville, IL, US
+NeuroMod Health
++1 630-850-0604
+https://neuromodhealth.com/
+555 Plainfield Rd STE F Unit 1, Willowbrook, IL 60527
+OPERATIONAL
+{"Monday": ["9AM-5PM"], "Tuesday": ["9AM-5PM"], "Wednesday": ["9AM-5PM"], "Thursday": ["9AM-5PM"], "Friday": ["9AM-5PM"], "Saturday": ["Closed"], "Sunday": ["Closed"]}
+41.761822
+-87.93817
+4.9
+29
+0x880e4fac18aca2e7:0x74bb16bcbba4f101
+https://lh3.googleusercontent.com/p/AF1QipPxQi3whKgqaLqXECDRSbghTpjLdjImp-NEnOXG=w800-h500-k-no
+
+TMS clinic, 60565, Naperville, IL, US
+Suburban TMJ and Sleep Center
++1 630-305-7914
+https://www.suburbantmjcenter.com/
+1309 Macom Dr Suite 107, Naperville, IL 60564
+OPERATIONAL
+{"Monday": ["8AM-5PM"], "Tuesday": ["8AM-5PM"], "Wednesday": ["8AM-5PM"], "Thursday": ["7AM-4PM"], "Friday": ["Closed"], "Saturday": ["Closed"], "Sunday": ["Closed"]}
+41.73083
+-88.2081
+4.7
+226
+0x880e611000000001:0xfffd6deaf5ee2ccd
+https://lh3.googleusercontent.com/gps-cs-s/AHVAweptZRHyxUwdIfraxUOzuxUUGIzC42KiuFCluoFL8E6YyFegHYVzX3gJVRi-KWFIdSODppfBJD7NlsiAb1ABb1SUbh1u7tUknWsKluvpik40E_yxIYbiKQaTKdJMAw0b_MkYRH8=w800-h500-k-no
+
+TMS clinic, 60565, Naperville, IL, US
+Conventions Health - Warrenville (Psychiatry & Counseling)
++1 630-416-8289
+https://www.conventionspc.com/
+4300 Weaver Pkwy Suite 100-A, Warrenville, IL 60555
+OPERATIONAL
+{"Monday": ["8AM-6PM"], "Tuesday": ["8AM-6PM"], "Wednesday": ["8AM-6PM"], "Thursday": ["8AM-6PM"], "Friday": ["8AM-6PM"], "Saturday": ["Closed"], "Sunday": ["Closed"]}
+41.803149
+-88.16416
+4
+131
+0x880ef8d7836d679b:0xda2ba1a5fcb2161f
+https://lh3.googleusercontent.com/p/AF1QipO2ZQgpCcMEczxLHK2q7OlRX__WxzO_lRrCwrei=w800-h500-k-no
+
+TMS clinic, 60565, Naperville, IL, US
+Endeavor Health Linden Oaks Hospital
++1 847-432-5464
+https://www.endeavorhealth.org/services/behavioral-health
+852 S West St, Naperville, IL 60540
+OPERATIONAL
+{"Monday": ["7AM-10PM"], "Tuesday": ["7AM-10PM"], "Wednesday": ["7AM-10PM"], "Thursday": ["7AM-10PM"], "Friday": ["7AM-10PM"], "Saturday": ["7AM-10PM"], "Sunday": ["7AM-10PM"]}
+41.759111
+-88.15616
+2.5
+244
+0x880e57e94b8c566d:0x835c70c0215d5711
+https://lh3.googleusercontent.com/gps-cs-s/AHVAweqpiXOWs14tF9jFdQ8UH5vMjzXQaMJdWsYWBHPtYkxh2DbnrnaqtU9zy18YjbbA6ktoOuAIl9MIIQFTPYU5j_wGCm59sCT0djJ-PtKDxZApAkdmLqR3UCidxDpOqqkVb4H3AGrEjfsh7Z1P=w800-h500-k-no

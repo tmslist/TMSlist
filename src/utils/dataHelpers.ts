@@ -3,23 +3,48 @@ import { type Clinic } from '../types/clinic';
 import { STATE_NAMES } from './clinicData'; // Reusing state map if available, or we can move it here.
 
 // Cast strictly
+// Cast strictly
 const allClinics = clinicsData as unknown as Clinic[];
 
 export function getAllClinics(): Clinic[] {
     return allClinics;
 }
 
+// Emulate the 'operational' filter from RealClinic, but using the main 'verified' flag
+export function getOperationalClinics(): Clinic[] {
+    return allClinics.filter(c => c.verified);
+}
+
+// Helper to handle polymorphic specific rating structure
+export function getClinicRating(clinic: Clinic): number {
+    if (typeof clinic.rating === 'number') return clinic.rating;
+    return clinic.rating?.aggregate || 0;
+}
+
+// Helper to get review count safely
+export function getClinicReviewCount(clinic: Clinic): number {
+    return clinic.review_count || (typeof clinic.rating === 'object' ? clinic.rating.count : 0);
+}
+
+// Helper for photo access (fallback to placeholder if needed, though most have logos/heroes)
+export function getClinicPhoto(clinic: Clinic): string {
+    if (clinic.hero_image_url) return clinic.hero_image_url;
+    if (clinic.logo_url) return clinic.logo_url;
+    return "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop";
+}
+
 export function getUniqueStates(): string[] {
     // Returns array of unique state codes e.g. ['CA', 'TX']
-    return [...new Set(allClinics.map(c => c.state))];
+    return [...new Set(allClinics.filter(c => c.verified).map(c => c.state))];
 }
 
 export function getClinicsByState(stateCode: string): Clinic[] {
-    return allClinics.filter(c => c.state === stateCode.toUpperCase());
+    return allClinics.filter(c => c.verified && c.state === stateCode.toUpperCase());
 }
 
 export function getClinicsByCity(stateCode: string, cityName: string): Clinic[] {
     return allClinics.filter(c =>
+        c.verified &&
         c.state === stateCode.toUpperCase() &&
         c.city.toLowerCase() === cityName.toLowerCase()
     );
