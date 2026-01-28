@@ -522,10 +522,12 @@ const schema = JSON.stringify({
                 </section>
 
                 <!-- Google Reviews Section -->
+                <!-- Google Reviews Section -->
                 <GoogleReviews
                     aggregateRating={getRating()}
                     totalCount={getReviewCount()}
                     entityName={clinic.name}
+                    clinicId={clinic.id}
                 />
 
                 <!-- FAQ Section -->

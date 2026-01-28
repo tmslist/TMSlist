@@ -236,7 +236,7 @@ const description =
                     </h2>
                     <div class="space-y-3">
                         <button
-                            onclick="recordAnswer('insurance', true); showResults()"
+                            onclick="recordAnswer('insurance', true); showContactForm()"
                             class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-indigo-600 hover:bg-indigo-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
                         >
                             Yes, private insurance or Medicare
@@ -245,7 +245,7 @@ const description =
                             ></span>
                         </button>
                         <button
-                            onclick="recordAnswer('insurance', false); showResults()"
+                            onclick="recordAnswer('insurance', false); showContactForm()"
                             class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-indigo-600 hover:bg-indigo-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
                         >
                             No / Self-pay
@@ -254,6 +254,87 @@ const description =
                             ></span>
                         </button>
                     </div>
+                </div>
+
+                <!-- Contact Form Gate -->
+                <div
+                    id="slide-contact"
+                    class="quiz-slide hidden p-8 md:p-12 text-center"
+                >
+                    <span
+                        class="text-indigo-600 font-bold text-sm tracking-wider uppercase mb-2 block"
+                        >One Last Step</span
+                    >
+                    <h2 class="text-3xl font-black text-gray-900 mb-4">
+                        Unlock Your Results
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto">
+                        Enter your details below to see your eligibility
+                        analysis and receive a copy via email.
+                    </p>
+
+                    <form
+                        id="quiz-lead-form"
+                        class="max-w-md mx-auto space-y-4"
+                        onsubmit="event.preventDefault(); submitQuizAndShowResults();"
+                    >
+                        <div class="text-left">
+                            <label
+                                class="block text-sm font-bold text-gray-700 mb-1"
+                                >Full Name</label
+                            >
+                            <input
+                                type="text"
+                                id="lead-name"
+                                class="w-full rounded-xl border-gray-200 focus:ring-indigo-500 focus:border-indigo-500"
+                                required
+                                placeholder="John Doe"
+                            />
+                        </div>
+                        <div class="text-left">
+                            <label
+                                class="block text-sm font-bold text-gray-700 mb-1"
+                                >Email Address</label
+                            >
+                            <input
+                                type="email"
+                                id="lead-email"
+                                class="w-full rounded-xl border-gray-200 focus:ring-indigo-500 focus:border-indigo-500"
+                                required
+                                placeholder="john@example.com"
+                            />
+                        </div>
+                        <div class="text-left">
+                            <label
+                                class="block text-sm font-bold text-gray-700 mb-1"
+                                >Phone Number (Optional)</label
+                            >
+                            <input
+                                type="tel"
+                                id="lead-phone"
+                                class="w-full rounded-xl border-gray-200 focus:ring-indigo-500 focus:border-indigo-500"
+                                placeholder="(555) 123-4567"
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 flex items-center justify-center gap-2"
+                        >
+                            <span>See My Results</span>
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                ><path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg
+                            >
+                        </button>
+                    </form>
                 </div>
 
                 <!-- Result: High Candidate -->
@@ -390,8 +471,39 @@ const description =
         answers[key] = value;
     }
 
-    function showResults() {
+    function showContactForm() {
         document.getElementById("slide-q5").classList.add("hidden");
+        document.getElementById("slide-contact").classList.remove("hidden");
+        document.getElementById("progress-bar").style.width = "95%";
+        document.getElementById("progress-text").innerText = "Almost there...";
+    }
+
+    async function submitQuizAndShowResults() {
+        const btn = document.querySelector("#quiz-lead-form button");
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...`;
+
+        const leadData = {
+            type: "quiz-lead",
+            name: document.getElementById("lead-name").value,
+            email: document.getElementById("lead-email").value,
+            phone: document.getElementById("lead-phone").value,
+            quizAnswers: answers,
+        };
+
+        try {
+            await fetch("/api/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(leadData),
+            });
+        } catch (e) {
+            console.error("Submission error", e);
+        }
+
+        // Show Results regardless of API success (don't block user)
+        document.getElementById("slide-contact").classList.add("hidden");
         document.getElementById("progress-bar").style.width = "100%";
         document.getElementById("progress-text").innerText = "100%";
 

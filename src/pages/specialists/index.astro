@@ -1,80 +1,809 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import clinicsData from "../../data/clinics.json";
+import { getClinicPhoto } from "../../utils/dataHelpers";
 
-const title = "Find TMS Specialists by Type | TMS List";
-const description =
-    "Search for specific TMS provider types including Psychiatrists, Neurologists, and dedicated TMS Centers.";
+// Extract all doctors from verified clinics
+interface Doctor {
+    slug: string;
+    firstName: string;
+    lastName: string;
+    fullName: string;
+    title: string;
+    school: string;
+    yearsExperience: number;
+    specialties: string[];
+    bioFocus: string;
+    imageUrl: string;
+    clinicName: string;
+    clinicSlug: string;
+    clinicCity: string;
+    clinicState: string;
+    clinicPhone?: string;
+}
 
-const specialistTypes = [
-    {
-        title: "Psychiatrists (MD/DO)",
-        description:
-            "Medical doctors specializing in mental health who prescribe and manage TMS therapy.",
-        icon: "👨‍⚕️",
-        slug: "psychiatrist",
+const doctorMap = new Map<string, Doctor>();
+
+clinicsData.forEach((clinic: any) => {
+    if (
+        clinic.verified &&
+        clinic.doctors_data &&
+        Array.isArray(clinic.doctors_data)
+    ) {
+        clinic.doctors_data.forEach((doc: any) => {
+            if (doc.slug && !doctorMap.has(doc.slug)) {
+                doctorMap.set(doc.slug, {
+                    slug: doc.slug,
+                    firstName: doc.first_name || "",
+                    lastName: doc.last_name || "",
+                    fullName:
+                        `${doc.first_name || ""} ${doc.last_name || ""}`.trim(),
+                    title: doc.title || "TMS Provider",
+                    school: doc.school || "",
+                    yearsExperience: doc.years_experience || 0,
+                    specialties: doc.specialties || [],
+                    bioFocus: doc.bio_focus || "",
+                    imageUrl: doc.image_url || "/images/doctor-placeholder.jpg",
+                    clinicName: clinic.name,
+                    clinicSlug: clinic.slug,
+                    clinicCity: clinic.city,
+                    clinicState: clinic.state,
+                    clinicPhone: clinic.phone,
+                });
+            }
+        });
+    }
+});
+
+const doctors = Array.from(doctorMap.values());
+
+// Group by state
+const stateGroups = doctors.reduce(
+    (acc, doc) => {
+        const state = doc.clinicState;
+        if (!acc[state]) acc[state] = [];
+        acc[state].push(doc);
+        return acc;
     },
-    {
-        title: "TMS Centers",
-        description:
-            "Specialized clinics dedicated primarily to Transcranial Magnetic Stimulation.",
-        icon: "🏥",
-        slug: "tms-center",
-    },
-    {
-        title: "Neurologists",
-        description:
-            "Brain specialists who use TMS for neurological conditions and depression.",
-        icon: "🧠",
-        slug: "neurologist",
-    },
-    {
-        title: "Hospital Programs",
-        description:
-            "Academic and medical center based programs, often for complex cases.",
-        icon: "fz-hospital-alt", // Using emoji as fallback or icon class if available
-        slug: "hospital",
-    },
+    {} as Record<string, Doctor[]>,
+);
+
+// Sort states by doctor count
+const sortedStates = Object.entries(stateGroups).sort(
+    (a, b) => b[1].length - a[1].length,
+);
+
+// Get all unique specialties for filters
+const allSpecialties = [
+    ...new Set(doctors.flatMap((d) => d.specialties)),
+].sort();
+
+// Experience ranges
+const experienceRanges = [
+    { label: "5+ years", min: 5, max: 100 },
+    { label: "10+ years", min: 10, max: 100 },
+    { label: "15+ years", min: 15, max: 100 },
+    { label: "20+ years", min: 20, max: 100 },
 ];
+
+const stateNames: Record<string, string> = {
+    DC: "Washington DC",
+    CA: "California",
+    FL: "Florida",
+    IL: "Illinois",
+    NY: "New York",
+    TX: "Texas",
+    WA: "Washington",
+    AZ: "Arizona",
+    CO: "Colorado",
+    GA: "Georgia",
+    PA: "Pennsylvania",
+    OH: "Ohio",
+    MI: "Michigan",
+    CT: "Connecticut",
+    NJ: "New Jersey",
+    AL: "Alabama",
+    AK: "Alaska",
+    AR: "Arkansas",
+    DE: "Delaware",
+    HI: "Hawaii",
+    ID: "Idaho",
+    IN: "Indiana",
+    IA: "Iowa",
+    KS: "Kansas",
+    KY: "Kentucky",
+    LA: "Louisiana",
+    ME: "Maine",
+    MD: "Maryland",
+    MA: "Massachusetts",
+    MN: "Minnesota",
+    MS: "Mississippi",
+    MO: "Missouri",
+    MT: "Montana",
+    NE: "Nebraska",
+    NV: "Nevada",
+    NH: "New Hampshire",
+    NM: "New Mexico",
+    NC: "North Carolina",
+    ND: "North Dakota",
+    OK: "Oklahoma",
+    OR: "Oregon",
+    RI: "Rhode Island",
+    SC: "South Carolina",
+    SD: "South Dakota",
+    TN: "Tennessee",
+    UT: "Utah",
+    VT: "Vermont",
+    VA: "Virginia",
+    WV: "West Virginia",
+    WI: "Wisconsin",
+    WY: "Wyoming",
+};
+
+const title = `Find TMS Specialists | ${doctors.length} Verified Providers`;
+const description = `Browse ${doctors.length} verified TMS therapy specialists across ${Object.keys(stateGroups).length} states. Find experienced doctors specializing in depression, anxiety, OCD, and more.`;
+
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "TMS Specialists Directory",
+    description:
+        "Find board-certified TMS psychiatrists and specialists near you.",
+    url: "https://tmslist.com/specialists/",
+    mainEntity: {
+        "@type": "ItemList",
+        itemListElement: doctors.slice(0, 20).map((doc, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+                "@type": "Physician",
+                name: doc.fullName,
+                image: doc.imageUrl.startsWith("/")
+                    ? `https://tmslist.com${doc.imageUrl}`
+                    : doc.imageUrl,
+                url: `https://tmslist.com/doctor/${doc.slug}/`,
+            },
+        })),
+    },
+});
 ---
 
-<Layout title={title} description={description}>
-    <section class="bg-indigo-900 py-20 text-center text-white">
-        <div class="container mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-black mb-6">
-                Find a Specialist
-            </h1>
-            <p class="text-xl text-indigo-100 max-w-2xl mx-auto">
-                Choose the type of provider that best fits your needs, from
-                private psychiatrists to large academic medical centers.
-            </p>
-        </div>
-    </section>
+<Layout title={title} description={description} schema={schema}>
+    <main class="bg-gray-50 min-h-screen">
+        <!-- Hero -->
+        <section
+            class="bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 py-16 md:py-24"
+        >
+            <div class="container mx-auto px-4 md:px-6">
+                <nav class="flex text-sm text-cyan-200 mb-8">
+                    <a href="/" class="hover:text-white">Home</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-white">Find a Specialist</span>
+                </nav>
 
-    <section class="py-16 container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {
-                specialistTypes.map((type) => (
-                    <a
-                        href={`/us/?type=${type.slug}`}
-                        class="group bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:border-indigo-500 hover:shadow-2xl transition-all flex items-start gap-6"
-                    >
-                        <div class="text-4xl group-hover:scale-110 transition-transform duration-300 bg-indigo-50 w-20 h-20 flex items-center justify-center rounded-2xl group-hover:bg-indigo-600 group-hover:text-white">
-                            {type.icon === "fz-hospital-alt" ? "🏥" : type.icon}
+                <div
+                    class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8"
+                >
+                    <div class="max-w-2xl">
+                        <span
+                            class="inline-flex items-center gap-2 px-4 py-1 bg-cyan-500/20 text-cyan-400 text-sm font-bold rounded-full mb-6"
+                        >
+                            <span
+                                class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"
+                            ></span>
+                            Board Certified • Experienced Providers
+                        </span>
+                        <h1
+                            class="text-3xl md:text-5xl font-black text-white mb-4"
+                        >
+                            Find TMS Specialists
+                        </h1>
+                        <p class="text-lg text-cyan-100">
+                            {doctors.length} verified TMS therapy specialists across
+                            {Object.keys(stateGroups).length} states. Find experienced
+                            doctors specializing in depression, anxiety, OCD, and
+                            more.
+                        </p>
+                    </div>
+
+                    <div class="flex gap-4 flex-wrap">
+                        <div
+                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center"
+                        >
+                            <div class="text-3xl font-black text-white">
+                                {doctors.length}
+                            </div>
+                            <div class="text-sm text-cyan-200">Specialists</div>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
-                                {type.title}
-                            </h3>
-                            <p class="text-gray-600 leading-relaxed">
-                                {type.description}
-                            </p>
-                            <span class="inline-block mt-4 text-sm font-bold text-indigo-600 uppercase tracking-wide group-hover:underline">
-                                Browse Providers &rarr;
-                            </span>
+                        <div
+                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center"
+                        >
+                            <div class="text-3xl font-black text-white">
+                                {Object.keys(stateGroups).length}
+                            </div>
+                            <div class="text-sm text-cyan-200">States</div>
                         </div>
-                    </a>
-                ))
-            }
+                        <div
+                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-white/20 text-center"
+                        >
+                            <div class="text-3xl font-black text-cyan-400">
+                                {allSpecialties.length}+
+                            </div>
+                            <div class="text-sm text-cyan-200">Specialties</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Bar for Mobile -->
+        <div class="lg:hidden bg-white border-b sticky top-0 z-30 py-3 px-4">
+            <button
+                id="mobileFilterBtn"
+                class="w-full flex items-center justify-center gap-2 py-3 px-6 bg-cyan-600 text-white font-bold rounded-xl"
+            >
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+                    ></path>
+                </svg>
+                Filters
+            </button>
         </div>
-    </section>
+
+        <!-- Main Content with Sidebar -->
+        <section class="py-8 md:py-12">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Filter Sidebar -->
+                    <aside
+                        id="filterSidebar"
+                        class="hidden lg:block lg:w-80 shrink-0"
+                    >
+                        <div
+                            class="bg-white rounded-2xl border border-gray-200 shadow-sm sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto"
+                        >
+                            <div class="p-6 border-b border-gray-100">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-lg font-bold text-gray-900">
+                                        Filters
+                                    </h3>
+                                    <button
+                                        id="clearFilters"
+                                        class="text-sm text-cyan-600 hover:text-cyan-700 font-medium"
+                                        >Clear All</button
+                                    >
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">
+                                    Showing <span id="filteredCount"
+                                        >{doctors.length}</span
+                                    > specialists
+                                </p>
+                            </div>
+
+                            <!-- Search -->
+                            <div class="p-4 border-b border-gray-100">
+                                <label
+                                    class="block text-sm font-bold text-gray-900 mb-2"
+                                    >Search by Name</label
+                                >
+                                <input
+                                    type="text"
+                                    id="searchInput"
+                                    placeholder="Enter doctor name..."
+                                    class="w-full rounded-xl border-gray-200 text-sm focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2"
+                                />
+                            </div>
+
+                            <!-- State Filter -->
+                            <div class="p-4 border-b border-gray-100">
+                                <label
+                                    class="block text-sm font-bold text-gray-900 mb-2"
+                                    >Filter by State</label
+                                >
+                                <select
+                                    id="stateFilter"
+                                    class="w-full rounded-xl border-gray-200 text-sm focus:ring-cyan-500 focus:border-cyan-500"
+                                >
+                                    <option value="">All States</option>
+                                    {
+                                        sortedStates.map(([code, list]) => (
+                                            <option value={code}>
+                                                {stateNames[code] || code} (
+                                                {list.length})
+                                            </option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+
+                            <!-- Specialty Section -->
+                            <div class="border-b border-gray-100">
+                                <button
+                                    class="filter-toggle w-full p-4 flex items-center justify-between text-left"
+                                    data-section="specialty"
+                                >
+                                    <span class="font-bold text-gray-900"
+                                        >Specialty</span
+                                    >
+                                    <svg
+                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div
+                                    id="section-specialty"
+                                    class="hidden px-4 pb-4 space-y-1.5 max-h-60 overflow-y-auto"
+                                >
+                                    {
+                                        allSpecialties
+                                            .slice(0, 15)
+                                            .map((spec) => (
+                                                <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                    <input
+                                                        type="checkbox"
+                                                        class="filter-checkbox rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
+                                                        data-filter="specialty"
+                                                        data-value={spec.toLowerCase()}
+                                                    />
+                                                    <span class="text-sm text-gray-700">
+                                                        {spec}
+                                                    </span>
+                                                </label>
+                                            ))
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Experience Section -->
+                            <div class="border-b border-gray-100">
+                                <button
+                                    class="filter-toggle w-full p-4 flex items-center justify-between text-left"
+                                    data-section="experience"
+                                >
+                                    <span class="font-bold text-gray-900"
+                                        >Experience Level</span
+                                    >
+                                    <svg
+                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div
+                                    id="section-experience"
+                                    class="hidden px-4 pb-4 space-y-1.5"
+                                >
+                                    {
+                                        experienceRanges.map((range) => (
+                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                <input
+                                                    type="radio"
+                                                    name="experience"
+                                                    class="text-cyan-600 focus:ring-cyan-500"
+                                                    data-filter="experience"
+                                                    data-value={range.min}
+                                                />
+                                                <span class="text-sm text-gray-700">
+                                                    {range.label}
+                                                </span>
+                                            </label>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Title Filter -->
+                            <div class="p-4">
+                                <label
+                                    class="block text-sm font-bold text-gray-900 mb-2"
+                                    >Provider Type</label
+                                >
+                                <div class="space-y-1.5">
+                                    <label
+                                        class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            class="filter-checkbox rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
+                                            data-filter="title"
+                                            data-value="psychiatrist"
+                                        />
+                                        <span class="text-sm text-gray-700"
+                                            >Psychiatrist</span
+                                        >
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            class="filter-checkbox rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
+                                            data-filter="title"
+                                            data-value="neurologist"
+                                        />
+                                        <span class="text-sm text-gray-700"
+                                            >Neurologist</span
+                                        >
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            class="filter-checkbox rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
+                                            data-filter="title"
+                                            data-value="director"
+                                        />
+                                        <span class="text-sm text-gray-700"
+                                            >Medical Director</span
+                                        >
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Doctors Grid -->
+                    <div class="flex-1" id="doctorsContainer">
+                        {
+                            sortedStates.map(([stateCode, stateDoctors]) => (
+                                <div
+                                    class="mb-16 state-section"
+                                    data-state={stateCode}
+                                >
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                                        <span class="w-10 h-10 rounded-lg bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold text-sm">
+                                            {stateCode}
+                                        </span>
+                                        {stateNames[stateCode] || stateCode}
+                                        <span class="text-sm font-normal text-gray-400 ml-2">
+                                            ({stateDoctors.length}{" "}
+                                            {stateDoctors.length === 1
+                                                ? "specialist"
+                                                : "specialists"}
+                                            )
+                                        </span>
+                                    </h2>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                        {stateDoctors.map((doctor) => (
+                                            <article
+                                                class="doctor-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all"
+                                                data-name={doctor.fullName.toLowerCase()}
+                                                data-state={doctor.clinicState}
+                                                data-specialties={doctor.specialties
+                                                    .join(",")
+                                                    .toLowerCase()}
+                                                data-experience={
+                                                    doctor.yearsExperience
+                                                }
+                                                data-title={doctor.title.toLowerCase()}
+                                            >
+                                                <div class="p-6">
+                                                    <div class="flex items-start gap-4 mb-4">
+                                                        <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border border-gray-100 bg-gray-50">
+                                                            {doctor.imageUrl &&
+                                                            !doctor.imageUrl.includes(
+                                                                "placeholder",
+                                                            ) ? (
+                                                                <img
+                                                                    src={
+                                                                        doctor.imageUrl
+                                                                    }
+                                                                    alt={
+                                                                        doctor.fullName
+                                                                    }
+                                                                    class="w-full h-full object-cover"
+                                                                    loading="lazy"
+                                                                    width="64"
+                                                                    height="64"
+                                                                />
+                                                            ) : (
+                                                                <div class="w-full h-full bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-white text-xl font-bold">
+                                                                    {doctor.firstName.charAt(
+                                                                        0,
+                                                                    )}
+                                                                    {doctor.lastName.charAt(
+                                                                        0,
+                                                                    )}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                        <div class="flex-1 min-w-0">
+                                                            <h3 class="text-lg font-bold text-gray-900 truncate">
+                                                                {
+                                                                    doctor.fullName
+                                                                }
+                                                            </h3>
+                                                            <p class="text-cyan-600 text-sm font-medium">
+                                                                {doctor.title}
+                                                            </p>
+                                                            <p class="text-gray-500 text-sm">
+                                                                📍{" "}
+                                                                {
+                                                                    doctor.clinicCity
+                                                                }
+                                                                ,{" "}
+                                                                {
+                                                                    doctor.clinicState
+                                                                }
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex items-center gap-2 mb-3">
+                                                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 text-xs font-bold rounded-full">
+                                                            ✓ Verified
+                                                        </span>
+                                                        {doctor.yearsExperience >
+                                                            0 && (
+                                                            <span class="text-sm text-gray-500">
+                                                                {
+                                                                    doctor.yearsExperience
+                                                                }
+                                                                + years exp.
+                                                            </span>
+                                                        )}
+                                                    </div>
+
+                                                    {doctor.school && (
+                                                        <p class="text-gray-600 text-sm mb-3">
+                                                            🎓 {doctor.school}
+                                                        </p>
+                                                    )}
+
+                                                    <div class="flex flex-wrap gap-1.5 mb-4">
+                                                        {doctor.specialties
+                                                            .slice(0, 3)
+                                                            .map(
+                                                                (
+                                                                    spec: string,
+                                                                ) => (
+                                                                    <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded">
+                                                                        {spec}
+                                                                    </span>
+                                                                ),
+                                                            )}
+                                                        {doctor.specialties
+                                                            .length > 3 && (
+                                                            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded">
+                                                                +
+                                                                {doctor
+                                                                    .specialties
+                                                                    .length -
+                                                                    3}{" "}
+                                                                more
+                                                            </span>
+                                                        )}
+                                                    </div>
+
+                                                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                                        <a
+                                                            href={`/clinic/${doctor.clinicSlug}/`}
+                                                            class="text-sm text-gray-400 hover:text-cyan-600"
+                                                        >
+                                                            At{" "}
+                                                            {doctor.clinicName
+                                                                .length > 20
+                                                                ? doctor.clinicName.substring(
+                                                                      0,
+                                                                      20,
+                                                                  ) + "..."
+                                                                : doctor.clinicName}
+                                                        </a>
+                                                        <a
+                                                            href={`/doctor/${doctor.slug}/`}
+                                                            class="text-cyan-600 font-bold text-sm hover:text-cyan-700"
+                                                        >
+                                                            View Profile →
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-12 bg-white border-t border-gray-100">
+            <div class="container mx-auto px-4 md:px-6 text-center">
+                <p class="text-gray-500 text-sm max-w-2xl mx-auto">
+                    Are you a TMS specialist? <a
+                        href="/add-listing/"
+                        class="text-cyan-600 font-medium">Add your profile</a
+                    >
+                    to our directory and connect with patients seeking TMS therapy.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Filter JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const searchInput = document.getElementById(
+                "searchInput",
+            ) as HTMLInputElement;
+            const stateFilter = document.getElementById(
+                "stateFilter",
+            ) as HTMLSelectElement;
+            const checkboxes = document.querySelectorAll(".filter-checkbox");
+            const radioButtons = document.querySelectorAll(
+                'input[type="radio"][data-filter]',
+            );
+            const clearBtn = document.getElementById("clearFilters");
+            const filteredCount = document.getElementById("filteredCount");
+            const doctorCards = document.querySelectorAll(".doctor-card");
+            const stateSections = document.querySelectorAll(".state-section");
+
+            // Toggle filter sections
+            document.querySelectorAll(".filter-toggle").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const section = btn.getAttribute("data-section");
+                    const content = document.getElementById(
+                        `section-${section}`,
+                    );
+                    const arrow = btn.querySelector("svg");
+                    if (content) {
+                        content.classList.toggle("hidden");
+                        arrow?.classList.toggle("rotate-180");
+                    }
+                });
+            });
+
+            // Mobile filter toggle
+            const mobileBtn = document.getElementById("mobileFilterBtn");
+            const sidebar = document.getElementById("filterSidebar");
+            if (mobileBtn && sidebar) {
+                mobileBtn.addEventListener("click", () => {
+                    sidebar.classList.toggle("hidden");
+                    sidebar.classList.toggle("fixed");
+                    sidebar.classList.toggle("inset-0");
+                    sidebar.classList.toggle("z-50");
+                    sidebar.classList.toggle("bg-white");
+                    sidebar.classList.toggle("overflow-y-auto");
+                    sidebar.classList.toggle("p-4");
+                });
+            }
+
+            function applyFilters() {
+                const searchTerm = searchInput?.value.toLowerCase() || "";
+                const selectedState = stateFilter?.value || "";
+                const selectedSpecialties: string[] = [];
+                const selectedTitles: string[] = [];
+                let minExperience = 0;
+
+                checkboxes.forEach((cb) => {
+                    const checkbox = cb as HTMLInputElement;
+                    if (checkbox.checked) {
+                        const filter = checkbox.dataset.filter;
+                        const value = checkbox.dataset.value || "";
+                        if (filter === "specialty")
+                            selectedSpecialties.push(value);
+                        if (filter === "title") selectedTitles.push(value);
+                    }
+                });
+
+                radioButtons.forEach((rb) => {
+                    const radio = rb as HTMLInputElement;
+                    if (
+                        radio.checked &&
+                        radio.dataset.filter === "experience"
+                    ) {
+                        minExperience = parseInt(radio.dataset.value || "0");
+                    }
+                });
+
+                let visibleCount = 0;
+
+                doctorCards.forEach((card) => {
+                    const el = card as HTMLElement;
+                    const name = el.dataset.name || "";
+                    const state = el.dataset.state || "";
+                    const specialties = el.dataset.specialties || "";
+                    const experience = parseInt(el.dataset.experience || "0");
+                    const title = el.dataset.title || "";
+
+                    let visible = true;
+
+                    // Search filter
+                    if (searchTerm && !name.includes(searchTerm))
+                        visible = false;
+
+                    // State filter
+                    if (selectedState && state !== selectedState)
+                        visible = false;
+
+                    // Specialty filter
+                    if (selectedSpecialties.length > 0) {
+                        const hasSpecialty = selectedSpecialties.some((s) =>
+                            specialties.includes(s),
+                        );
+                        if (!hasSpecialty) visible = false;
+                    }
+
+                    // Title filter
+                    if (selectedTitles.length > 0) {
+                        const hasTitle = selectedTitles.some((t) =>
+                            title.includes(t),
+                        );
+                        if (!hasTitle) visible = false;
+                    }
+
+                    // Experience filter
+                    if (minExperience > 0 && experience < minExperience)
+                        visible = false;
+
+                    el.style.display = visible ? "" : "none";
+                    if (visible) visibleCount++;
+                });
+
+                // Hide empty state sections
+                stateSections.forEach((section) => {
+                    const sectionEl = section as HTMLElement;
+                    const visibleCards = sectionEl.querySelectorAll(
+                        '.doctor-card:not([style*="display: none"])',
+                    );
+                    sectionEl.style.display =
+                        visibleCards.length > 0 ? "" : "none";
+                });
+
+                if (filteredCount)
+                    filteredCount.textContent = visibleCount.toString();
+            }
+
+            // Event listeners
+            searchInput?.addEventListener("input", applyFilters);
+            stateFilter?.addEventListener("change", applyFilters);
+            checkboxes.forEach((cb) =>
+                cb.addEventListener("change", applyFilters),
+            );
+            radioButtons.forEach((rb) =>
+                rb.addEventListener("change", applyFilters),
+            );
+
+            // Clear filters
+            clearBtn?.addEventListener("click", () => {
+                if (searchInput) searchInput.value = "";
+                if (stateFilter) stateFilter.value = "";
+                checkboxes.forEach(
+                    (cb) => ((cb as HTMLInputElement).checked = false),
+                );
+                radioButtons.forEach(
+                    (rb) => ((rb as HTMLInputElement).checked = false),
+                );
+                applyFilters();
+            });
+        });
+    </script>
 </Layout>

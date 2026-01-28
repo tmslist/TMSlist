@@ -225,20 +225,33 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
         };
 
         try {
-            // In production, send to backend API
-            // For now, store in localStorage
-            const reviews = JSON.parse(
-                localStorage.getItem("tms-reviews") || "[]",
-            );
-            reviews.push({ ...reviewData, id: Date.now().toString() });
-            localStorage.setItem("tms-reviews", JSON.stringify(reviews));
+            // Send to backend API
+            const response = await fetch("/api/reviews", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(reviewData),
+            });
 
-            // Show success message
-            reviewForm.classList.add("hidden");
-            successMsg?.classList.remove("hidden");
+            const result = await response.json();
 
-            // Optional: Send to server
-            console.log("Review submitted:", reviewData);
+            if (result.success) {
+                // Show success message
+                reviewForm.classList.add("hidden");
+                successMsg?.classList.remove("hidden");
+
+                // Also store in localStorage for immediate feedback/offline support preference
+                const reviews = JSON.parse(
+                    localStorage.getItem("tms-reviews") || "[]",
+                );
+                reviews.push({ ...reviewData, id: Date.now().toString() });
+                localStorage.setItem("tms-reviews", JSON.stringify(reviews));
+
+                console.log("Review submitted successfully:", result);
+            } else {
+                throw new Error(result.message || "Failed to submit review");
+            }
         } catch (error) {
             alert("❌ Error submitting review. Please try again.");
             console.error("Review error:", error);

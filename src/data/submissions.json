@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "sub-1769540239312-59gcf8fiq",
+    "type": "quiz-lead",
+    "name": "Test Lead",
+    "email": "test@lead.com",
+    "phone": "555-0000",
+    "timestamp": "2026-01-27T18:57:19.312Z"
+  }
+]

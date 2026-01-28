@@ -1,10 +1,11 @@
 ---
 interface Review {
-    author: string;
+    id: string;
+    userName: string;
     rating: number;
-    date: string;
-    text: string;
-    source?: string;
+    createdAt: string;
+    reviewText: string;
+    clinicId: string;
 }
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
     entitySlug?: string;
     aggregateRating?: number;
     totalCount?: number;
+    clinicId?: string;
 }
 
 const {
@@ -21,11 +23,391 @@ const {
     entitySlug = "",
     aggregateRating = 0,
     totalCount = 0,
+    clinicId = "", // Use this for API lookups if provided
 } = Astro.props;
-
-// Note: Reviews are loaded from localStorage on client-side
-// No fake/placeholder reviews - only real user-submitted reviews
 ---
+
+<section
+    class="py-12 bg-white rounded-3xl border border-gray-100 shadow-xl overflow-hidden"
+    id="reviews-section"
+    data-clinic-id={clinicId || entitySlug}
+>
+    <!-- Header with Aggregate Stats -->
+    <div
+        class="px-6 md:px-10 pt-10 pb-8 bg-gradient-to-br from-indigo-50/50 to-white border-b border-gray-100"
+    >
+        <div
+            class="flex flex-col md:flex-row md:items-start md:justify-between gap-8"
+        >
+            <div>
+                <span
+                    class="inline-block px-3 py-1 bg-yellow-100/50 text-yellow-700 rounded-full text-xs font-bold uppercase tracking-wider mb-3"
+                    >Verified Experience</span
+                >
+                <h2 class="text-3xl font-black text-gray-900 mb-2">
+                    Patient Stories
+                </h2>
+                <p class="text-gray-500 max-w-xl text-lg">
+                    Real experiences from patients treated at {entityName}.
+                </p>
+            </div>
+
+            <div
+                class="flex items-center gap-6 bg-white p-4 rounded-2xl shadow-sm border border-gray-100"
+            >
+                <div class="text-center px-2">
+                    <div
+                        class="text-4xl font-black text-gray-900 leading-none mb-1"
+                        id="avg-rating"
+                    >
+                        {
+                            aggregateRating > 0
+                                ? aggregateRating.toFixed(1)
+                                : "--"
+                        }
+                    </div>
+                    <div
+                        class="flex text-yellow-400 text-sm justify-center mb-1"
+                        id="star-display"
+                    >
+                        <span
+                            class={aggregateRating > 0
+                                ? "text-yellow-400"
+                                : "text-gray-200"}>★★★★★</span
+                        >
+                    </div>
+                    <div
+                        class="text-xs font-bold text-gray-400 uppercase tracking-wide"
+                    >
+                        <span id="review-count">{totalCount}</span> Reviews
+                    </div>
+                </div>
+                <button
+                    id="write-review-btn"
+                    class="h-12 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-200 flex items-center gap-2 group whitespace-nowrap"
+                >
+                    <span>Write a Review</span>
+                    <svg
+                        class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                        ></path></svg
+                    >
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Form (Hidden by default) -->
+    <div
+        id="review-form-container"
+        class="hidden border-b border-gray-100 bg-gray-50/50"
+    >
+        <div class="px-6 md:px-10 py-8 max-w-3xl mx-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-900">
+                    Share Your Experience
+                </h3>
+                <button
+                    id="cancel-review-btn"
+                    class="text-gray-400 hover:text-gray-600"
+                >
+                    <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"></path></svg
+                    >
+                </button>
+            </div>
+
+            <!-- Auth Step (Mock) -->
+            <div id="auth-step" class="text-center py-8">
+                <p class="text-gray-600 mb-6">
+                    Please sign in to verify your review.
+                </p>
+                <button
+                    id="google-signin-btn"
+                    class="inline-flex items-center gap-3 px-6 py-3 bg-white border border-gray-200 rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition-all shadow-sm"
+                >
+                    <svg class="w-5 h-5" viewBox="0 0 24 24"
+                        ><path
+                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                            fill="#4285F4"></path><path
+                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                            fill="#34A853"></path><path
+                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.84z"
+                            fill="#FBBC05"></path><path
+                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                            fill="#EA4335"></path></svg
+                    >
+                    Sign in with Google
+                </button>
+            </div>
+
+            <!-- Form Step (Hidden until auth) -->
+            <form id="review-form" class="hidden space-y-6">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2"
+                        >Rating</label
+                    >
+                    <div class="flex gap-2" id="star-input">
+                        {
+                            [1, 2, 3, 4, 5].map((star) => (
+                                <button
+                                    type="button"
+                                    class="text-3xl text-gray-300 hover:text-yellow-400 transition-colors focus:outline-none star-btn"
+                                    data-rating={star}
+                                >
+                                    ★
+                                </button>
+                            ))
+                        }
+                    </div>
+                    <input
+                        type="hidden"
+                        name="rating"
+                        id="rating-value"
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2"
+                        >Your Review</label
+                    >
+                    <textarea
+                        name="reviewText"
+                        rows="4"
+                        class="w-full rounded-xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 bg-white"
+                        placeholder="Share your experience..."
+                        required></textarea>
+                </div>
+
+                <div class="bg-blue-50 p-4 rounded-xl flex items-start gap-3">
+                    <svg
+                        class="w-5 h-5 text-blue-600 mt-0.5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path></svg
+                    >
+                    <p class="text-sm text-blue-800">
+                        Posting publicly as <strong id="user-name-display"
+                            >Guest</strong
+                        >. Reviews are moderated to ensure authenticity.
+                    </p>
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    Submit Review
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reviews List -->
+    <div class="px-6 md:px-10 py-8">
+        <div id="reviews-list" class="space-y-6">
+            <!-- Loading State -->
+            <div class="animate-pulse space-y-6">
+                <div class="h-24 bg-gray-100 rounded-xl"></div>
+                <div class="h-24 bg-gray-100 rounded-xl"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script define:vars={{ clinicId, entitySlug }}>
+    const SECTION = document.getElementById("reviews-section");
+    const ID = clinicId || entitySlug; // Use passed ID or Slug
+    let currentUser = null;
+
+    // Fetch Reviews
+    async function fetchReviews() {
+        try {
+            const res = await fetch(`/api/reviews?clinicId=${ID}`);
+            const reviews = await res.json();
+            renderReviews(reviews);
+            updateStats(reviews);
+        } catch (err) {
+            console.error(err);
+            document.getElementById("reviews-list").innerHTML =
+                `<div class="text-center text-gray-500 py-8">Unable to load reviews.</div>`;
+        }
+    }
+
+    function renderReviews(reviews) {
+        const list = document.getElementById("reviews-list");
+        if (reviews.length === 0) {
+            list.innerHTML = `<div class="text-center py-12 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
+                <div class="text-4xl mb-3">💬</div>
+                <h3 class="font-bold text-gray-900">Be the first to review!</h3>
+                <p class="text-gray-500 text-sm">Share your experience to help others.</p>
+            </div>`;
+            return;
+        }
+
+        list.innerHTML = reviews
+            .map(
+                (r) => `
+            <article class="p-6 bg-gray-50 rounded-2xl border border-gray-100/50 hover:bg-white hover:shadow-md transition-all">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 text-white flex items-center justify-center font-bold text-sm shrink-0">
+                        ${r.userName.charAt(0)}
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-bold text-gray-900">${r.userName}</h4>
+                            <span class="text-xs text-gray-400">${new Date(r.createdAt).toLocaleDateString()}</span>
+                        </div>
+                        <div class="flex text-yellow-400 text-sm mb-2">
+                            ${"★".repeat(r.rating)}<span class="text-gray-200">${"★".repeat(5 - r.rating)}</span>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">${r.reviewText}</p>
+                    </div>
+                </div>
+            </article>
+        `,
+            )
+            .join("");
+    }
+
+    function updateStats(reviews) {
+        if (reviews.length === 0) return;
+        const avg =
+            reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length;
+        document.getElementById("avg-rating").textContent = avg.toFixed(1);
+        document.getElementById("review-count").textContent = reviews.length;
+
+        const fullStars = Math.round(avg);
+        document.getElementById("star-display").innerHTML =
+            `<span class="text-yellow-400">${"★".repeat(fullStars)}</span><span class="text-gray-200">${"★".repeat(5 - fullStars)}</span>`;
+    }
+
+    // Interactive Logic
+    document
+        .getElementById("write-review-btn")
+        .addEventListener("click", () => {
+            document
+                .getElementById("review-form-container")
+                .classList.remove("hidden");
+        });
+
+    document
+        .getElementById("cancel-review-btn")
+        .addEventListener("click", () => {
+            document
+                .getElementById("review-form-container")
+                .classList.add("hidden");
+        });
+
+    // Mock Auth
+    document
+        .getElementById("google-signin-btn")
+        .addEventListener("click", () => {
+            // Simulate Google Auth
+            currentUser = {
+                id: `user-${Date.now()}`,
+                name: "Demo User",
+                email: "demo@example.com",
+            };
+            document.getElementById("auth-step").classList.add("hidden");
+            document.getElementById("review-form").classList.remove("hidden");
+            document.getElementById("user-name-display").textContent =
+                currentUser.name;
+        });
+
+    // Star Rating
+    const starBtns = document.querySelectorAll(".star-btn");
+    starBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            const rating = parseInt(e.target.dataset.rating);
+            document.getElementById("rating-value").value = rating;
+
+            // Visual update
+            starBtns.forEach((b) => {
+                const val = parseInt(b.dataset.rating);
+                if (val <= rating) {
+                    b.classList.remove("text-gray-300");
+                    b.classList.add("text-yellow-400");
+                } else {
+                    b.classList.add("text-gray-300");
+                    b.classList.remove("text-yellow-400");
+                }
+            });
+        });
+    });
+
+    // Submit
+    document
+        .getElementById("review-form")
+        .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (!currentUser) return;
+
+            const formData = new FormData(e.target);
+            const data = {
+                clinicId: ID,
+                userId: currentUser.id,
+                userName: currentUser.name,
+                userEmail: currentUser.email,
+                rating: parseInt(formData.get("rating")),
+                reviewText: formData.get("reviewText"),
+            };
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = "Submitting...";
+
+            try {
+                const res = await fetch("/api/reviews", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+                const result = await res.json();
+
+                if (result.success) {
+                    // Success UI
+                    document
+                        .getElementById("review-form-container")
+                        .classList.add("hidden");
+                    e.target.reset();
+                    fetchReviews(); // Reload
+                    alert("Review submitted for moderation!");
+                }
+            } catch (err) {
+                alert("Error submitting review");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
+            }
+        });
+
+    // Init
+    fetchReviews();
+</script>
 
 <section
     class="py-12 bg-white rounded-2xl border border-gray-100 shadow-sm"
