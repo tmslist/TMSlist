@@ -1,0 +1,46 @@
+
+> infinite-hawking@0.0.1 build
+> astro build
+
+
+Auto-generating collections for folders in "src/content/" that are not defined as collections.
+This is deprecated, so you should define these collections yourself in "src/content.config.ts".
+The following collections have been auto-generated: reviews
+
+[2m14:13:57[22m [34m[content][39m Syncing content
+[2m14:13:57[22m [34m[content][39m Synced content
+[2m14:13:57[22m [34m[types][39m Generated [2m210ms[22m
+[2m14:13:57[22m [34m[build][39m output: [34m"static"[39m
+[2m14:13:57[22m [34m[build][39m mode: [34m"static"[39m
+[2m14:13:57[22m [34m[build][39m directory: [34mA:\Work\TMSlist\dist\[39m
+[2m14:13:57[22m [34m[build][39m Collecting build info...
+[2m14:13:57[22m [34m[build][39m [32mΓ£ô Completed in 682ms.[39m
+[2m14:13:58[22m [34m[build][39m Building static entrypoints...
+Found 1 warning while optimizing generated CSS:
+
+Γöé   }
+Γöé }
+Γöé @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+Γöå        ^-- @import rules must precede all rules aside from @charset and @layer statements
+Γöå
+Γöé html {
+Γöé   font-family: var(--font-sans);
+
+[33m[1m14:14:09[22m [WARN] [vite][39m 
+/grid.svg referenced in /grid.svg didn't resolve at build time, it will remain unchanged to be resolved at runtime
+[2m14:14:14[22m [34m[vite][39m [32mΓ£ô built in 15.29s[39m
+[2m14:14:14[22m [34m[build][39m [32mΓ£ô Completed in 15.95s.[39m
+
+[42m[30m building client (vite) [39m[49m
+[2m14:14:14[22m [34m[vite][39m transforming...
+[2m14:14:14[22m [34m[vite][39m [32mΓ£ô[39m 11 modules transformed.
+14:14:14 [ERROR] [vite] Γ£ù Build failed in 388ms
+[vite]: Rollup failed to resolve import "fuse.js" from "A:/Work/TMSlist/src/pages/questions/index.astro?astro&type=script&index=0&lang.ts".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rollupOptions.external`
+  Stack trace:
+    at viteLog (file:///A:/Work/TMSlist/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46374:15)
+    at onLog (file:///A:/Work/TMSlist/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46072:7)
+    at Object.logger [as onLog] (file:///A:/Work/TMSlist/node_modules/rollup/dist/es/shared/node-entry.js:22924:9)
+    at file:///A:/Work/TMSlist/node_modules/rollup/dist/es/shared/node-entry.js:21626:26

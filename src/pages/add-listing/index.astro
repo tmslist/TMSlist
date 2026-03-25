@@ -103,10 +103,9 @@ const description =
                 <form
                     id="add-listing-form"
                     class="space-y-10"
-                    name="clinic-submission"
-                    method="POST"
-                    data-netlify="true"
-                    netlify-honeypot="bot-field"
+                    accept-charset='UTF-8' 
+                    action='https://app.formester.com/forms/4EFB7iBT9/submissions' 
+                    method='POST'
                 >
                     <!-- Honeypot for spam protection -->
                     <input
@@ -902,162 +901,7 @@ const description =
             return `user-${stateCode}-${citySlug}-${timestamp}`;
         }
 
-        form?.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            // Show loading state
-            if (submitBtn) {
-                submitBtn.innerHTML =
-                    '<svg class="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Adding your clinic...';
-                (submitBtn as HTMLButtonElement).disabled = true;
-            }
-
-            const formData = new FormData(form);
-
-            // Collect checkbox values
-            const machines = formData.getAll("machines") as string[];
-            const treatments = formData.getAll("treatments") as string[];
-            const insurances = formData.getAll("insurances") as string[];
-
-            const name = formData.get("name") as string;
-            const city = formData.get("city") as string;
-            const state = formData.get("state") as string;
-            const slug = generateSlug(name, city);
-            const id = generateId(state, city);
-
-            // Build clinic object matching the exact schema
-            const clinicData = {
-                id: id,
-                name: name,
-                slug: slug,
-                description_long:
-                    formData.get("description") ||
-                    `${name} is a TMS therapy provider located in ${city}, ${state}. We specialize in transcranial magnetic stimulation treatment for depression and other mental health conditions.`,
-                address: formData.get("address"),
-                city: city,
-                state: state,
-                zip: formData.get("zip"),
-                address_obj: {
-                    street: formData.get("address"),
-                    city: city,
-                    state: state,
-                    zip: formData.get("zip"),
-                    county: "",
-                    nearby_landmarks: [],
-                },
-                geo: {
-                    lat: 0,
-                    lng: 0,
-                },
-                contact: {
-                    phone: formData.get("phone"),
-                    website_url: formData.get("website") || null,
-                },
-                phone: formData.get("phone"),
-                website: formData.get("website") || null,
-                machines: machines.length > 0 ? machines : ["TMS Device"],
-                treatments: treatments.length > 0 ? treatments : ["Depression"],
-                insurance_accepted: insurances,
-                insurances: insurances,
-                cost_info: {
-                    accepts_insurance: insurances.length > 0,
-                    self_pay_available: true,
-                    price_range: "Contact for pricing",
-                },
-                hours: {},
-                rating: 5.0,
-                review_count: 0,
-                hero_image_url: formData.get("hero_image_url") || null,
-                logo_url: formData.get("logo_url") || null,
-                photos: [],
-                video_url: formData.get("video_url") || null,
-                google_business_profile: {
-                    embed_url: formData.get("gbp_embed_url") || null,
-                },
-                doctors: formData.get("doctor_name")
-                    ? [
-                          {
-                              name: formData.get("doctor_name"),
-                              title:
-                                  formData.get("doctor_title") ||
-                                  "TMS Provider",
-                              slug: generateSlug(
-                                  formData.get("doctor_name") as string,
-                                  city,
-                              ),
-                              image_url:
-                                  formData.get("doctor_image_url") || null,
-                              years_experience:
-                                  parseInt(
-                                      formData.get("doctor_years") as string,
-                                  ) || 0,
-                              specialties: treatments,
-                          },
-                      ]
-                    : [],
-                verified: true,
-                source: "user_submitted",
-                created_by: {
-                    name: formData.get("submitter_name"),
-                    email: formData.get("submitter_email"),
-                    submitted_at: new Date().toISOString(),
-                },
-                created_at: new Date().toISOString(),
-            };
-
-            // Store in localStorage for persistence and admin review
-            const submissions = JSON.parse(
-                localStorage.getItem("tms_pending_clinics") || "[]",
-            );
-            submissions.push(clinicData);
-            localStorage.setItem(
-                "tms_pending_clinics",
-                JSON.stringify(submissions),
-            );
-
-            // Also try to submit to Netlify Forms (will work when deployed to Netlify)
-            try {
-                const netlifyFormData = new FormData(form);
-                netlifyFormData.append(
-                    "clinic_json",
-                    JSON.stringify(clinicData),
-                );
-
-                await fetch("/", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: new URLSearchParams(
-                        netlifyFormData as any,
-                    ).toString(),
-                });
-            } catch (err) {
-                // Silently fail for non-Netlify environments
-                console.log("Form submitted locally");
-            }
-
-            // Update clinic link
-            const clinicUrl = `/clinic/${slug}/`;
-            if (clinicLink) {
-                clinicLink.href = clinicUrl;
-                clinicLink.textContent = `tmslist.com${clinicUrl}`;
-            }
-            if (viewClinicBtn) {
-                viewClinicBtn.href = clinicUrl;
-            }
-
-            // Show success message
-            form.classList.add("hidden");
-            successMessage?.classList.remove("hidden");
-
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: "smooth" });
-
-            // Log for debugging
-            console.log("Clinic submitted:", clinicData);
-            console.log("Clinic URL will be:", clinicUrl);
-        });
+        // Form submission is handled by Formester now
     });
 </script>
 
