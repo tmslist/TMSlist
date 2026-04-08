@@ -245,8 +245,12 @@ const {
     // Fetch Reviews
     async function fetchReviews() {
         try {
-            const res = await fetch(`/api/reviews?clinicId=${ID}`);
-            const reviews = await res.json();
+            const res = await fetch(`/data/reviews.json`);
+            let reviews = await res.json();
+            if (ID) reviews = reviews.filter(r => r.clinicId === ID);
+            // Merge any locally stored reviews
+            const localReviews = JSON.parse(localStorage.getItem("tms-reviews") || "[]").filter(r => r.clinicId === ID);
+            reviews = [...reviews, ...localReviews];
             renderReviews(reviews);
             updateStats(reviews);
         } catch (err) {
@@ -381,12 +385,12 @@ const {
             btn.textContent = "Submitting...";
 
             try {
-                const res = await fetch("/api/reviews", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data),
-                });
-                const result = await res.json();
+                // Store review locally (static site - no server)
+                const localReviews = JSON.parse(localStorage.getItem("tms-reviews") || "[]");
+                const newReview = { ...data, id: `review-${Date.now()}`, createdAt: new Date().toISOString(), verified: false };
+                localReviews.push(newReview);
+                localStorage.setItem("tms-reviews", JSON.stringify(localReviews));
+                const result = { success: true };
 
                 if (result.success) {
                     // Success UI

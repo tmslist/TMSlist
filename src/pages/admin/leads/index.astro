@@ -364,8 +364,8 @@ import Layout from "../../../layouts/Layout.astro";
                 tbody.innerHTML =
                     '<tr><td colspan="5" class="px-6 py-8 text-center text-gray-500">Loading data...</td></tr>';
 
-                const response = await fetch("/api/submissions");
-                const data = await response.json();
+                // Read from localStorage (static site - no server API)
+                const data = JSON.parse(localStorage.getItem("tms-submissions") || "[]");
 
                 // Sort by date desc
                 allLeads = data.sort(

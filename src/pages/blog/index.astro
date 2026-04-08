@@ -273,15 +273,11 @@ const categories = [...new Set(blogPosts.map((p) => p.category))];
                 };
 
                 try {
-                    const response = await fetch("/api/submit", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(data),
-                    });
-
-                    const result = await response.json();
+                    // Store locally (static site - no server)
+                    const localSubs = JSON.parse(localStorage.getItem("tms-submissions") || "[]");
+                    localSubs.push({ ...data, id: `sub-${Date.now()}` });
+                    localStorage.setItem("tms-submissions", JSON.stringify(localSubs));
+                    const result = { success: true };
 
                     if (result.success) {
                         newsletterContent?.classList.add("hidden");

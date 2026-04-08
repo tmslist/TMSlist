@@ -493,11 +493,10 @@ const description =
         };
 
         try {
-            await fetch("/api/submit", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(leadData),
-            });
+            // Store locally (static site - no server)
+            const localSubs = JSON.parse(localStorage.getItem("tms-submissions") || "[]");
+            localSubs.push({ ...leadData, id: `sub-${Date.now()}`, timestamp: new Date().toISOString() });
+            localStorage.setItem("tms-submissions", JSON.stringify(localSubs));
         } catch (e) {
             console.error("Submission error", e);
         }

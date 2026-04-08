@@ -389,13 +389,12 @@ const schema = JSON.stringify({
             };
 
             try {
-                const response = await fetch("/api/submissions", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data),
-                });
+                // Store locally (static site - no server)
+                const localSubs = JSON.parse(localStorage.getItem("tms-submissions") || "[]");
+                localSubs.push({ ...data, id: `sub-${Date.now()}` });
+                localStorage.setItem("tms-submissions", JSON.stringify(localSubs));
 
-                if (response.ok) {
+                if (true) {
                     form.style.display = "none";
                     successMsg?.classList.remove("hidden");
                 } else {
