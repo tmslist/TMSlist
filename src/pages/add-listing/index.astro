@@ -910,7 +910,7 @@ const description =
                 submitBtn.innerHTML = "Submitting...";
 
                 const formData = new FormData(form);
-                const name = formData.get("clinic-name") as string || "";
+                const name = formData.get("name") as string || "";
                 const city = formData.get("city") as string || "";
                 const state = formData.get("state") as string || "";
 
@@ -929,10 +929,10 @@ const description =
                             email: formData.get("email") || "",
                             machines: Array.from(formData.getAll("machines")),
                             specialties: Array.from(formData.getAll("treatments")),
-                            insurances: Array.from(formData.getAll("insurance")),
+                            insurances: Array.from(formData.getAll("insurances")),
                             description: formData.get("description") || "",
-                            submitterName: formData.get("contact-name") || name,
-                            submitterEmail: formData.get("contact-email") || "",
+                            submitterName: formData.get("submitter_name") || name,
+                            submitterEmail: formData.get("submitter_email") || "",
                         }),
                     });
 
