@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
+import AnalyticsDashboard from './AnalyticsDashboard';
+import HealthScoreBadge from './HealthScoreBadge';
 
 interface ClinicData {
   id: string;
@@ -9,6 +11,7 @@ interface ClinicData {
   email: string | null;
   city: string;
   state: string;
+  country: string;
   description: string | null;
   descriptionLong: string | null;
   machines: string[] | null;
@@ -42,7 +45,7 @@ interface LeadStats {
   thisWeek: number;
 }
 
-type Tab = 'overview' | 'edit' | 'reviews';
+type Tab = 'overview' | 'analytics' | 'edit' | 'reviews';
 
 export default function OwnerDashboard() {
   const [clinic, setClinic] = useState<ClinicData | null>(null);
@@ -170,6 +173,7 @@ export default function OwnerDashboard() {
 
   const tabs: { id: Tab; label: string }[] = [
     { id: 'overview', label: 'Overview' },
+    { id: 'analytics', label: 'Analytics' },
     { id: 'edit', label: 'Edit Profile' },
     { id: 'reviews', label: `Reviews (${reviews.length})` },
   ];
@@ -274,6 +278,32 @@ export default function OwnerDashboard() {
               with <strong>{leadStats.thisMonth}</strong> in the last 30 days
               and <strong>{leadStats.thisWeek}</strong> in the last 7 days.
             </p>
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'analytics' && (
+        <div className="space-y-6">
+          <AnalyticsDashboard />
+          <HealthScoreBadge clinicId={clinic.id} size="lg" showBreakdown={true} />
+          <div className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
+            <h3 className="text-sm font-bold text-slate-900 mb-3">Quick Actions</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <a href="/owner/review-qr" className="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 transition-colors">
+                <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 text-sm">QR</div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">Review QR Code</p>
+                  <p className="text-xs text-slate-400">Print for your waiting room</p>
+                </div>
+              </a>
+              <a href="/pricing" className="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 transition-colors">
+                <div className="w-8 h-8 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600 text-sm font-bold">$</div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">Upgrade Plan</p>
+                  <p className="text-xs text-slate-400">Get more leads & features</p>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       )}

@@ -127,5 +127,15 @@ const canonicalUrl = canonical || Astro.url.href;
 		<Footer />
 		<LocationPopup />
 		<EnquiryModal client:idle />
+	<script is:inline>
+		window.showToast = function(msg, type) {
+			var t = document.createElement('div');
+			t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-[200] px-6 py-3 text-sm font-medium rounded-xl shadow-lg transition-all';
+			t.className += type === 'success' ? ' bg-emerald-600 text-white' : ' bg-slate-900 text-white';
+			t.textContent = msg;
+			document.body.appendChild(t);
+			setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 3500);
+		};
+	</script>
 	</body>
 </html>

@@ -12,6 +12,7 @@ export const GET: APIRoute = async ({ url }) => {
     if (params.machines) params.machines = params.machines.split(',') as any;
     if (params.insurances) params.insurances = params.insurances.split(',') as any;
     if (params.specialties) params.specialties = params.specialties.split(',') as any;
+    if (params.country) params.country = params.country.toUpperCase() as any;
 
     const parsed = clinicSearchSchema.safeParse(params);
     if (!parsed.success) {

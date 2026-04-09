@@ -269,7 +269,7 @@
             }
         } catch (error) {
             // Lead capture failed
-            alert("Something went wrong. Please try again.");
+            showToast("Something went wrong. Please try again.");
             submitBtn.disabled = false;
             submitBtn.innerText = originalBtnText;
         }

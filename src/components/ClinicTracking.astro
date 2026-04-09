@@ -1,0 +1,46 @@
+---
+/**
+ * Drop this component on clinic detail pages to auto-track:
+ * - Profile view (on page load)
+ * - Phone clicks
+ * - Website clicks
+ */
+interface Props {
+  clinicId: string;
+}
+
+const { clinicId } = Astro.props;
+---
+
+<script define:vars={{ clinicId }}>
+  // Track profile view
+  if (typeof window !== 'undefined') {
+    fetch('/api/analytics/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clinicId, event: 'profile_view' }),
+    }).catch(() => {});
+
+    // Track phone clicks
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+      link.addEventListener('click', () => {
+        fetch('/api/analytics/track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ clinicId, event: 'phone_click' }),
+        }).catch(() => {});
+      });
+    });
+
+    // Track website clicks (external links only)
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+      link.addEventListener('click', () => {
+        fetch('/api/analytics/track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ clinicId, event: 'website_click' }),
+        }).catch(() => {});
+      });
+    });
+  }
+</script>

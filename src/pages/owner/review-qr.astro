@@ -1,0 +1,88 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export const prerender = false;
+
+const pageTitle = "Review QR Code | TMS List";
+---
+
+<Layout title={pageTitle} description="Download a QR code for your clinic to collect patient reviews.">
+  <main class="bg-slate-50/50 min-h-screen py-12">
+    <div class="container mx-auto px-6 max-w-2xl">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-slate-900">Review Collection QR Code</h1>
+        <p class="text-slate-500 mt-2">Print this QR code and display it in your waiting room. Patients scan to leave a review.</p>
+      </div>
+
+      <div id="qr-container" class="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 text-center">
+        <div id="loading" class="py-8">
+          <div class="w-8 h-8 border-3 border-blue-300 border-t-blue-600 rounded-full animate-spin mx-auto"></div>
+          <p class="text-slate-400 mt-4 text-sm">Loading your clinic...</p>
+        </div>
+
+        <div id="qr-content" class="hidden">
+          <p class="text-sm text-slate-500 mb-2">QR Code for</p>
+          <h2 class="text-xl font-bold text-slate-900 mb-6" id="clinic-name"></h2>
+
+          <div class="inline-block bg-white p-4 rounded-2xl border border-slate-200 shadow-sm mb-6">
+            <img id="qr-image" alt="Review QR Code" class="w-64 h-64" />
+          </div>
+
+          <p class="text-sm text-slate-500 mb-6">Patients scan this code to leave a review on your TMS List profile.</p>
+
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a id="qr-download" download="review-qr-code.png" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-all">
+              Download QR Code
+            </a>
+            <button onclick="window.print()" class="px-6 py-3 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold rounded-xl text-sm transition-all">
+              Print This Page
+            </button>
+          </div>
+
+          <div class="mt-8 bg-blue-50 border border-blue-100 rounded-xl p-5 text-left">
+            <h3 class="text-sm font-bold text-blue-900 mb-2">Tips for more reviews:</h3>
+            <ul class="text-sm text-blue-700 space-y-1.5 list-disc pl-5">
+              <li>Place the QR code at your front desk and in treatment rooms</li>
+              <li>Ask patients after their final session</li>
+              <li>Include it in your post-treatment follow-up email</li>
+              <li>Frame it nicely — patients notice professional presentation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="error-state" class="hidden py-8">
+          <p class="text-red-600 font-medium mb-4">Could not load your clinic data.</p>
+          <a href="/admin/login?redirect=/owner/review-qr" class="text-sm text-blue-600 font-semibold">Log in to your account</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  async function loadQR() {
+    try {
+      const res = await fetch('/api/owner/clinic');
+      if (!res.ok) {
+        document.getElementById('loading')?.classList.add('hidden');
+        document.getElementById('error-state')?.classList.remove('hidden');
+        return;
+      }
+      const { clinic } = await res.json();
+      const slug = clinic.slug;
+      const reviewUrl = encodeURIComponent(`https://tmslist.com/clinic/${slug}#reviews`);
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=${reviewUrl}&format=png&margin=10`;
+
+      document.getElementById('clinic-name')!.textContent = clinic.name;
+      (document.getElementById('qr-image') as HTMLImageElement).src = qrUrl;
+      (document.getElementById('qr-download') as HTMLAnchorElement).href = qrUrl;
+
+      document.getElementById('loading')?.classList.add('hidden');
+      document.getElementById('qr-content')?.classList.remove('hidden');
+    } catch {
+      document.getElementById('loading')?.classList.add('hidden');
+      document.getElementById('error-state')?.classList.remove('hidden');
+    }
+  }
+  loadQR();
+</script>

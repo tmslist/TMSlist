@@ -269,41 +269,70 @@ const description =
                                 />
                             </div>
 
+                            <div>
+                                <label
+                                    for="country"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
+                                    >Country *</label
+                                >
+                                <select
+                                    id="country"
+                                    name="country"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 focus:ring-2 focus:ring-indigo-500"
+                                >
+                                    <option value="US" selected>United States</option>
+                                    <option value="GB">United Kingdom</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="DE">Germany</option>
+                                    <option value="IN">India</option>
+                                </select>
+                            </div>
+
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label
                                         for="state"
                                         class="block text-sm font-semibold text-slate-600 mb-2"
-                                        >State *</label
+                                        >State / Region *</label
                                     >
-                                    <select
-                                        id="state"
-                                        name="state"
-                                        required
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 focus:ring-2 focus:ring-indigo-500"
-                                    >
-                                        <option value="">Select State</option>
-                                        {
-                                            US_STATES.map((s) => (
-                                                <option value={s.code}>
-                                                    {s.name}
-                                                </option>
-                                            ))
-                                        }
-                                    </select>
+                                    <div id="state-select-wrapper">
+                                        <select
+                                            id="state"
+                                            name="state"
+                                            required
+                                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 focus:ring-2 focus:ring-indigo-500"
+                                        >
+                                            <option value="">Select State</option>
+                                            {
+                                                US_STATES.map((s) => (
+                                                    <option value={s.code}>
+                                                        {s.name}
+                                                    </option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        id="state-text"
+                                        name="state_text"
+                                        class="hidden w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="e.g., Greater London"
+                                    />
                                 </div>
                                 <div>
                                     <label
                                         for="zip"
                                         class="block text-sm font-semibold text-slate-600 mb-2"
-                                        >ZIP *</label
+                                        >Postal Code *</label
                                     >
                                     <input
                                         type="text"
                                         id="zip"
                                         name="zip"
                                         required
-                                        pattern="[0-9]{5}"
                                         class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                         placeholder="90210"
                                     />
@@ -900,6 +929,24 @@ const description =
             return `user-${stateCode}-${citySlug}-${timestamp}`;
         }
 
+        // Country selector: toggle between state dropdown (US) and text input (international)
+        const countrySelect = document.getElementById("country") as HTMLSelectElement;
+        const stateSelectWrapper = document.getElementById("state-select-wrapper");
+        const stateSelect = document.getElementById("state") as HTMLSelectElement;
+        const stateText = document.getElementById("state-text") as HTMLInputElement;
+
+        if (countrySelect) {
+            countrySelect.addEventListener("change", () => {
+                const isUS = countrySelect.value === "US";
+                if (stateSelectWrapper) stateSelectWrapper.classList.toggle("hidden", !isUS);
+                if (stateSelect) stateSelect.required = isUS;
+                if (stateText) {
+                    stateText.classList.toggle("hidden", isUS);
+                    stateText.required = !isUS;
+                }
+            });
+        }
+
         if (form) {
             form.addEventListener("submit", async (e) => {
                 e.preventDefault();
@@ -912,7 +959,10 @@ const description =
                 const formData = new FormData(form);
                 const name = formData.get("name") as string || "";
                 const city = formData.get("city") as string || "";
-                const state = formData.get("state") as string || "";
+                const country = formData.get("country") as string || "US";
+                const state = country === "US"
+                    ? (formData.get("state") as string || "")
+                    : (formData.get("state_text") as string || "");
 
                 try {
                     const res = await fetch("/api/clinics/submit", {
@@ -923,7 +973,8 @@ const description =
                             address: formData.get("address") || "",
                             city,
                             state,
-                            zip: formData.get("zip") || "00000",
+                            country,
+                            zip: formData.get("zip") || "",
                             phone: formData.get("phone") || "",
                             website: formData.get("website") || "",
                             email: formData.get("email") || "",
@@ -945,12 +996,12 @@ const description =
                         if (successMessage) successMessage.classList.remove("hidden");
                     } else {
                         const err = await res.json();
-                        alert(err.error || "Something went wrong. Please try again.");
+                        showToast(err.error || "Something went wrong. Please try again.");
                         submitBtn.removeAttribute("disabled");
                         submitBtn.innerHTML = originalText;
                     }
                 } catch {
-                    alert("Network error. Please check your connection and try again.");
+                    showToast("Network error. Please check your connection and try again.");
                     submitBtn.removeAttribute("disabled");
                     submitBtn.innerHTML = originalText;
                 }

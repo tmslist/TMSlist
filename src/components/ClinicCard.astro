@@ -5,6 +5,7 @@ import {
     getClinicReviewCount,
     getClinicPhoto,
     hasRealClinicImage,
+    COUNTRY_FLAGS,
 } from "../utils/dataHelpers";
 
 interface Props {
@@ -101,7 +102,7 @@ const isVerified = clinic.verified;
                         stroke-width="2"
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
                 >
-                {clinic.city}, {clinic.state}
+                {clinic.city}, {clinic.state}{clinic.country && clinic.country !== 'US' ? ` ${COUNTRY_FLAGS[clinic.country] || ''}` : ''}
             </p>
         </div>
     </div>
@@ -127,7 +128,7 @@ const isVerified = clinic.verified;
                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     ></path></svg
                 >
-                FDA Cleared
+                {(!clinic.country || clinic.country === 'US') ? 'FDA Cleared' : 'Approved'}
             </div>
             <div class="flex items-center gap-1.5 px-2 py-1">
                 <svg

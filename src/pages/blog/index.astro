@@ -294,7 +294,7 @@ const categories = [...new Set(blogPosts.map((p) => p.category))];
                         throw new Error("Submission failed");
                     }
                 } catch (error) {
-                    alert("Something went wrong. Please try again.");
+                    showToast("Something went wrong. Please try again.");
                     submitBtn.disabled = false;
                     submitBtn.innerText = originalText;
                 }

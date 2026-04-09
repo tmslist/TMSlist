@@ -58,6 +58,7 @@ export const clinics = pgTable('clinics', {
   city: text('city').notNull(),
   state: text('state').notNull(),
   zip: text('zip'),
+  country: text('country').default('US').notNull(),
   lat: decimal('lat', { precision: 10, scale: 7 }),
   lng: decimal('lng', { precision: 10, scale: 7 }),
 

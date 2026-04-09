@@ -2,12 +2,16 @@
 import Layout from "../../layouts/Layout.astro";
 import GoogleReviews from "../../components/GoogleReviews.astro";
 import BookingWidget from "../../components/react/BookingWidget";
+import HealthScoreBadge from "../../components/react/HealthScoreBadge";
+import ClinicTracking from "../../components/ClinicTracking.astro";
 import clinicsData from "../../data/clinics.json";
+import internationalClinicsData from "../../data/international-clinics.json";
 import { STATE_NAMES } from "../../utils/clinicData";
-import { getDoctorPhoto, hasRealClinicImage } from "../../utils/dataHelpers";
+import { getDoctorPhoto, hasRealClinicImage, COUNTRY_NAMES, COUNTRY_URL_PREFIXES } from "../../utils/dataHelpers";
 
 export async function getStaticPaths() {
-    return clinicsData
+    const allClinics = [...clinicsData, ...internationalClinicsData];
+    return allClinics
         .filter((clinic: any) => clinic.verified)
         .map((clinic: any) => ({
             params: { slug: clinic.slug },
@@ -20,8 +24,12 @@ const { clinic } = Astro.props;
 // Handle data access robustly
 const city = clinic.address_obj?.city || clinic.city;
 const state = clinic.address_obj?.state || clinic.state;
+const countryCode = clinic.country || 'US';
 const stateName = STATE_NAMES[state] || state;
-const county = clinic.address_obj?.county || `${city} County`;
+const countryName = COUNTRY_NAMES[countryCode] || countryCode;
+const countryUrlPrefix = COUNTRY_URL_PREFIXES[countryCode] || countryCode.toLowerCase();
+const isUS = countryCode === 'US';
+const county = clinic.address_obj?.county || (isUS ? `${city} County` : city);
 const street = clinic.address_obj?.street || clinic.address;
 const zip = clinic.address_obj?.zip || clinic.zip;
 const landmarks = clinic.address_obj?.nearby_landmarks || [`Downtown ${city}`];
@@ -68,7 +76,7 @@ const schema = JSON.stringify({
         addressLocality: city,
         addressRegion: stateName, 
         postalCode: zip,
-        addressCountry: "US",
+        addressCountry: countryCode,
     },
     geo: {
         "@type": "GeoCoordinates",
@@ -113,14 +121,14 @@ const displayHero = clinic.hero_image_url || clinicHeroImages[clinic.name.length
                 <ol class="inline-flex items-center space-x-2">
                     <li><a href="/" class="hover:text-blue-600 transition-colors">Home</a></li>
                     <li><span class="mx-2 text-slate-300">/</span></li>
-                    <li><a href="/us/" class="hover:text-blue-600 transition-colors">US</a></li>
+                    <li><a href={`/${countryUrlPrefix}/`} class="hover:text-blue-600 transition-colors">{isUS ? 'US' : countryName}</a></li>
                     <li><span class="mx-2 text-slate-300">/</span></li>
                     <li>
-                        <a href={`/us/${stateName.toLowerCase().replace(/\s+/g, "-")}/`} class="hover:text-blue-600 transition-colors">{stateName}</a>
+                        <a href={`/${countryUrlPrefix}/${stateName.toLowerCase().replace(/\s+/g, "-")}/`} class="hover:text-blue-600 transition-colors">{stateName}</a>
                     </li>
                     <li><span class="mx-2 text-slate-300">/</span></li>
                     <li>
-                        <a href={`/us/${stateName.toLowerCase().replace(/\s+/g, "-")}/${city.toLowerCase().replace(/\s+/g, "-").replace(/\./g, "")}/`} class="hover:text-blue-600 transition-colors">{city}</a>
+                        <a href={`/${countryUrlPrefix}/${stateName.toLowerCase().replace(/\s+/g, "-")}/${city.toLowerCase().replace(/\s+/g, "-").replace(/\./g, "")}/`} class="hover:text-blue-600 transition-colors">{city}</a>
                     </li>
                 </ol>
             </nav>
@@ -136,12 +144,16 @@ const displayHero = clinic.hero_image_url || clinicHeroImages[clinic.name.length
                         <span class="text-xs font-bold text-emerald-700 tracking-widest uppercase">Accepting New Patients</span>
                     </div>
 
+                    <div class="flex items-center gap-3 mb-4">
+                        <HealthScoreBadge client:idle clinicId={clinic.id} size="md" />
+                    </div>
+
                     <h1 class="text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-[1.05]">
                         {clinic.name}
                     </h1>
                     
                     <p class="text-xl text-slate-500 mb-10 leading-relaxed font-light">
-                        Specialized TMS Therapy and Neuromodulation right here in <strong class="font-semibold text-slate-800">{city}, {stateName}</strong>. FDA-cleared treatment for depression with proven clinical excellence.
+                        Specialized TMS Therapy and Neuromodulation right here in <strong class="font-semibold text-slate-800">{city}, {stateName}</strong>. {isUS ? 'FDA-cleared' : 'Clinically approved'} treatment for depression with proven clinical excellence.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4">
@@ -420,4 +432,5 @@ const displayHero = clinic.hero_image_url || clinicHeroImages[clinic.name.length
 
         </div>
     </main>
+    <ClinicTracking clinicId={clinic.id} />
 </Layout>

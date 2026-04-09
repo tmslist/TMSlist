@@ -428,10 +428,10 @@ const schema = JSON.stringify({
                     form.style.display = "none";
                     successMsg?.classList.remove("hidden");
                 } else {
-                    alert("Something went wrong. Please try again.");
+                    showToast("Something went wrong. Please try again.");
                 }
             } catch (err) {
-                alert("Something went wrong. Please try again.");
+                showToast("Something went wrong. Please try again.");
             }
         });
     });

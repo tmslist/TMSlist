@@ -26,6 +26,6 @@ export default defineConfig({
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto',
-    concurrency: 5,
+    concurrency: 1,
   },
 });

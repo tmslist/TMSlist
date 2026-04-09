@@ -197,7 +197,7 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
 
         // Validate rating
         if (!selectedRating) {
-            alert("Please select a star rating");
+            showToast("Please select a star rating");
             return;
         }
 
@@ -206,7 +206,7 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
 
         // Validate review length
         if (reviewText.length < 50) {
-            alert("Please write at least 50 characters in your review");
+            showToast("Please write at least 50 characters in your review");
             return;
         }
 
@@ -248,7 +248,7 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
                 throw new Error(result.message || "Failed to submit review");
             }
         } catch (error) {
-            alert("❌ Error submitting review. Please try again.");
+            showToast("Error submitting review. Please try again.");
             // Review submission failed
         }
     });

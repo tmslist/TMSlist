@@ -70,6 +70,7 @@ export async function searchClinics(opts: {
   query?: string;
   state?: string;
   city?: string;
+  country?: string;
   machines?: string[];
   insurances?: string[];
   specialties?: string[];
@@ -81,6 +82,9 @@ export async function searchClinics(opts: {
 
   if (opts.verified !== undefined) {
     conditions.push(eq(clinics.verified, opts.verified));
+  }
+  if (opts.country) {
+    conditions.push(eq(clinics.country, opts.country.toUpperCase()));
   }
   if (opts.state) {
     conditions.push(eq(clinics.state, opts.state.toUpperCase()));
