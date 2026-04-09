@@ -1,0 +1,141 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { LEAD_MAGNETS } from "../../utils/leadMagnets";
+
+const pageTitle = "Free Resources for TMS Clinics | Guides, Templates & Tools | TMS List";
+const metaDescription = "Download free guides, templates, and tools designed for TMS clinic owners. Billing cheat sheets, patient acquisition playbooks, and compliance guides.";
+
+const categories = [
+  { key: 'billing', label: 'Billing & Revenue', icon: '💰' },
+  { key: 'marketing', label: 'Marketing & Growth', icon: '📈' },
+  { key: 'operations', label: 'Operations', icon: '⚙️' },
+  { key: 'clinical', label: 'Clinical', icon: '🧠' },
+  { key: 'compliance', label: 'Compliance', icon: '📋' },
+  { key: 'growth', label: 'Business Growth', icon: '🚀' },
+];
+
+const categoryLabels: Record<string, string> = {
+  billing: 'Billing & Revenue',
+  marketing: 'Marketing & Growth',
+  operations: 'Operations',
+  clinical: 'Clinical',
+  compliance: 'Compliance',
+  growth: 'Business Growth',
+};
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+  <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white pt-20 pb-16">
+    <div class="container mx-auto px-6 lg:px-12 text-center max-w-4xl">
+      <span class="inline-block px-4 py-1.5 bg-white/10 text-blue-300 text-xs font-bold rounded-full uppercase tracking-wider mb-6">Free Resources</span>
+      <h1 class="text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+        Grow Your TMS Practice
+      </h1>
+      <p class="text-lg text-slate-300 font-light max-w-2xl mx-auto">
+        Free guides, templates, and tools designed specifically for mental health providers offering TMS therapy. No fluff — just actionable resources.
+      </p>
+    </div>
+  </section>
+
+  <main class="bg-slate-50/50 py-12">
+    <div class="container mx-auto px-6 lg:px-12 max-w-6xl">
+
+      <!-- Category filters -->
+      <div class="flex flex-wrap gap-2 mb-10 justify-center">
+        <button class="category-filter active px-4 py-2 rounded-full text-sm font-semibold bg-slate-900 text-white transition-all" data-category="all">
+          All Resources ({LEAD_MAGNETS.length})
+        </button>
+        {categories.filter(c => LEAD_MAGNETS.some(m => m.category === c.key)).map(cat => (
+          <button class="category-filter px-4 py-2 rounded-full text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:border-slate-300 transition-all" data-category={cat.key}>
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Lead Magnet Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="magnets-grid">
+        {LEAD_MAGNETS.map(magnet => (
+          <a href={`/resources/${magnet.slug}/`} class="magnet-card bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all block overflow-hidden" data-category={magnet.category}>
+            <!-- Accent bar -->
+            <div class="h-1.5" style={`background: ${magnet.accent};`}></div>
+
+            <div class="p-6">
+              <!-- Category + Format -->
+              <div class="flex items-center gap-2 mb-4">
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style={`background: ${magnet.accent}12; color: ${magnet.accent};`}>
+                  {categoryLabels[magnet.category]}
+                </span>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 text-slate-500">
+                  {magnet.format}
+                </span>
+              </div>
+
+              <h3 class="text-lg font-bold text-slate-900 mb-1 leading-tight">{magnet.title}</h3>
+              <p class="text-sm text-slate-500 mb-4">{magnet.subtitle}</p>
+
+              <p class="text-xs text-slate-400 line-clamp-2 mb-4">{magnet.description}</p>
+
+              <!-- Benefits preview -->
+              <div class="space-y-2 mb-5">
+                {magnet.benefits.slice(0, 3).map(b => (
+                  <div class="flex items-start gap-2">
+                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5" style={`color: ${magnet.accent};`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-xs text-slate-600 line-clamp-1">{b}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-slate-50">
+                <span class="text-xs text-slate-400">{magnet.pageCount}</span>
+                <span class="text-xs font-bold text-white px-3 py-1.5 rounded-lg" style={`background: ${magnet.accent};`}>
+                  Download Free
+                </span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-16 text-center bg-white rounded-3xl border border-slate-100 shadow-sm p-10">
+        <h2 class="text-2xl font-bold text-slate-900 mb-3">Want to list your clinic on TMS List?</h2>
+        <p class="text-slate-500 mb-6 max-w-lg mx-auto">Join 1,100+ TMS providers. Get verified, receive patient leads, and grow your practice.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="/for-clinics/" class="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm">
+            List Your Clinic (Free)
+          </a>
+          <a href="/pricing/" class="px-8 py-3.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold rounded-xl text-sm transition-all">
+            View Pricing Plans
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  document.querySelectorAll('.category-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Toggle active state
+      document.querySelectorAll('.category-filter').forEach(b => {
+        b.classList.remove('active', 'bg-slate-900', 'text-white');
+        b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+      });
+      btn.classList.add('active', 'bg-slate-900', 'text-white');
+      btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+
+      const category = (btn as HTMLElement).dataset.category;
+
+      document.querySelectorAll('.magnet-card').forEach(card => {
+        const el = card as HTMLElement;
+        if (category === 'all' || el.dataset.category === category) {
+          el.style.display = '';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

@@ -57,6 +57,25 @@ h1 {
     letter-spacing: -0.04em;
 }
 
+/* Dark background text override - prevents linter from forcing dark text on dark backgrounds */
+.dark-section,
+.dark-section h1,
+.dark-section h2,
+.dark-section h3,
+.dark-section h4,
+.dark-section p,
+.dark-section span,
+.dark-section button,
+.dark-section a {
+    color: #ffffff;
+}
+.dark-section .text-muted {
+    color: #c7d2fe;
+}
+.dark-section .text-subtle {
+    color: #a5b4fc;
+}
+
 /* Premium Link Styles */
 a {
     transition: color 0.15s ease, opacity 0.15s ease;

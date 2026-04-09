@@ -1,64 +1,28 @@
 ---
+export const prerender = false;
+
 import Layout from "../../../../../layouts/Layout.astro";
 import ClinicCard from "../../../../../components/ClinicCard.astro";
 import {
-    getUniqueStates,
-    getClinicsByState,
     getClinicsByCity,
-    getStateSlug,
+    getStateCodeFromSlug,
     STATE_NAMES,
 } from "../../../../../utils/dataHelpers";
 import { TREATMENT_SLUGS } from "../../../../../utils/seo_slugs";
 import { calculateClinicScore } from "../../../../../utils/ranking";
-
-export async function getStaticPaths() {
-    const paths = [];
-    const uniqueStates = getUniqueStates();
-
-    uniqueStates.forEach((stateCode) => {
-        const stateClinics = getClinicsByState(stateCode);
-        const uniqueCities = [
-            ...new Set(stateClinics.map((c) => c.city).filter(Boolean)),
-        ];
-        const stateSlug = getStateSlug(stateCode);
-        const stateName = STATE_NAMES[stateCode] || stateCode;
-
-        uniqueCities.forEach((cityName) => {
-            const citySlug = cityName.toLowerCase().replace(/\s+/g, "-");
-            const cityClinics = getClinicsByCity(stateCode, cityName);
-
-            TREATMENT_SLUGS.forEach((treatment) => {
-                paths.push({
-                    params: {
-                        state: stateSlug,
-                        city: citySlug,
-                        treatment: treatment.slug,
-                    },
-                    props: {
-                        stateName,
-                        cityName,
-                        cityClinics,
-                        treatmentTitle: treatment.title,
-                        treatmentSlug: treatment.slug,
-                    },
-                });
-            });
-        });
-    });
-
-    return paths;
-}
-
 import {
     generateBreadcrumbSchema,
     generateMedicalClinicListSchema,
 } from "../../../../../utils/schema";
 
-const { stateName, cityName, cityClinics, treatmentTitle, treatmentSlug } =
-    Astro.props;
 const { state, city, treatment } = Astro.params;
+const stateCode = getStateCodeFromSlug(state || '');
+const stateName = STATE_NAMES[stateCode] || stateCode;
+const cityName = (city || '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+const treatmentEntry = TREATMENT_SLUGS.find(t => t.slug === treatment);
+const treatmentTitle = treatmentEntry?.title || `TMS for ${(treatment || '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}`;
 
-// Sort clinics by score
+const cityClinics = getClinicsByCity(stateCode, cityName);
 const sortedClinics = [...cityClinics].sort(
     (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
 );

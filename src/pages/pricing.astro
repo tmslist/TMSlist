@@ -1,0 +1,115 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { PLANS } from "../utils/subscriptions";
+
+const pageTitle = "Pricing Plans for TMS Clinics | TMS List";
+const metaDescription = "Choose the right plan for your TMS clinic. From free listings to enterprise solutions with analytics, lead routing, and premium placement.";
+
+const planOrder = ['free', 'pro', 'premium', 'enterprise'] as const;
+const planColors: Record<string, { bg: string; border: string; badge: string; btn: string }> = {
+  free: { bg: 'bg-white', border: 'border-slate-200', badge: 'bg-slate-100 text-slate-700', btn: 'bg-slate-900 hover:bg-slate-800' },
+  pro: { bg: 'bg-white', border: 'border-blue-200', badge: 'bg-blue-100 text-blue-700', btn: 'bg-blue-600 hover:bg-blue-700' },
+  premium: { bg: 'bg-gradient-to-b from-blue-50 to-white', border: 'border-blue-300 ring-2 ring-blue-100', badge: 'bg-blue-600 text-white', btn: 'bg-blue-600 hover:bg-blue-700' },
+  enterprise: { bg: 'bg-white', border: 'border-slate-200', badge: 'bg-slate-900 text-white', btn: 'bg-slate-900 hover:bg-slate-800' },
+};
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+  <section class="bg-white pt-16 pb-10 border-b border-slate-100">
+    <div class="container mx-auto px-6 lg:px-12 text-center">
+      <span class="inline-block px-4 py-1.5 bg-blue-50 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider mb-6">Pricing</span>
+      <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4">
+        Grow Your TMS Practice
+      </h1>
+      <p class="text-lg text-slate-500 font-light leading-relaxed max-w-2xl mx-auto">
+        From free listings to enterprise solutions. Choose the plan that matches your growth goals.
+      </p>
+    </div>
+  </section>
+
+  <main class="bg-slate-50/50 py-12">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        {planOrder.map((planId) => {
+          const plan = PLANS[planId];
+          const colors = planColors[planId];
+          const isPopular = planId === 'premium';
+
+          return (
+            <div class={`relative ${colors.bg} rounded-3xl border ${colors.border} p-6 flex flex-col shadow-sm`}>
+              {isPopular && (
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span class="px-4 py-1 bg-blue-600 text-white text-xs font-bold rounded-full uppercase tracking-wider">Most Popular</span>
+                </div>
+              )}
+
+              <div class="mb-6">
+                <span class={`inline-block px-3 py-1 rounded-full text-xs font-bold ${colors.badge}`}>{plan.name}</span>
+                <div class="mt-4">
+                  <span class="text-4xl font-bold text-slate-900">${plan.price}</span>
+                  {plan.price > 0 && <span class="text-slate-400 text-sm font-medium">/month</span>}
+                </div>
+              </div>
+
+              <ul class="space-y-3 mb-8 flex-1">
+                {plan.features.map((feature) => (
+                  <li class="flex items-start gap-2.5 text-sm text-slate-600">
+                    <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              {plan.price === 0 ? (
+                <a href="/add-listing/" class={`w-full py-3.5 ${colors.btn} text-white font-bold rounded-xl text-sm text-center transition-all block`}>
+                  Get Started Free
+                </a>
+              ) : (
+                <a href={`/api/subscribe?plan=${planId}`} class={`w-full py-3.5 ${colors.btn} text-white font-bold rounded-xl text-sm text-center transition-all block shadow-sm`}>
+                  Start {plan.name} Plan
+                </a>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="max-w-3xl mx-auto mt-16">
+        <h2 class="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-3">
+          <details class="bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <summary class="p-5 cursor-pointer text-sm font-bold text-slate-900 list-none flex justify-between items-center">
+              Can I switch plans at any time?
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-slate-600">Yes, you can upgrade or downgrade at any time. When upgrading, you'll be prorated for the remainder of your billing cycle. Downgrades take effect at the end of the current period.</div>
+          </details>
+          <details class="bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <summary class="p-5 cursor-pointer text-sm font-bold text-slate-900 list-none flex justify-between items-center">
+              Do you offer annual pricing?
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-slate-600">Yes! Annual plans save you 20%. Contact us at clinics@tmslist.com for annual pricing.</div>
+          </details>
+          <details class="bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <summary class="p-5 cursor-pointer text-sm font-bold text-slate-900 list-none flex justify-between items-center">
+              What happens to my listing if I cancel?
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-slate-600">Your clinic listing stays on TMS List forever — it just reverts to the Free tier. You keep all your reviews and basic contact information.</div>
+          </details>
+          <details class="bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <summary class="p-5 cursor-pointer text-sm font-bold text-slate-900 list-none flex justify-between items-center">
+              How many locations can I manage on Enterprise?
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-slate-600">Enterprise supports unlimited locations under a single account. Each location gets its own analytics, lead tracking, and profile management.</div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,49 +1,19 @@
 ---
+export const prerender = false;
+
 import Layout from '../../../../../layouts/Layout.astro';
-import { getAllClinics, getStateSlug, STATE_NAMES } from '../../../../../utils/clinicData';
+import { getAllClinics, getStateCodeFromSlug, STATE_NAMES } from '../../../../../utils/clinicData';
+import { getDoctorPhoto } from '../../../../../utils/dataHelpers';
 
+const { state, city } = Astro.params;
+const stateCode = getStateCodeFromSlug(state || '');
+const stateName = STATE_NAMES[stateCode] || stateCode;
+const cityName = (city || '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
 
-export async function getStaticPaths() {
-    const clinics = getAllClinics();
-    
-    // Group by state -> city
-    const stateCity = new Map<string, Set<string>>();
-    clinics.forEach(c => {
-        if (!stateCity.has(c.state)) stateCity.set(c.state, new Set());
-        stateCity.get(c.state)!.add(c.city);
-    });
-    
-    const paths: any[] = [];
-    stateCity.forEach((cities, stateCode) => {
-        const stateSlug = getStateSlug(stateCode);
-        cities.forEach(city => {
-            const citySlug = city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '');
-            const cityClinics = clinics.filter(c => c.state === stateCode && c.city === city);
-            
-            // Collect all doctors from all clinics in this city
-            const doctors = cityClinics.flatMap(c => 
-                (c.doctors_data || []).map(d => ({ ...d, clinic: c }))
-            );
-            
-            if (doctors.length > 0) {
-                paths.push({
-                    params: { state: stateSlug, city: citySlug },
-                    props: { 
-                        stateCode, 
-                        stateName: STATE_NAMES[stateCode], 
-                        cityName: city, 
-                        doctors,
-                        clinicCount: cityClinics.length
-                    }
-                });
-            }
-        });
-    });
-    
-    return paths;
-}
-
-const { stateCode, stateName, cityName, doctors, clinicCount } = Astro.props;
+const clinics = getAllClinics();
+const cityClinics = clinics.filter(c => c.state === stateCode && c.city.toLowerCase() === cityName.toLowerCase());
+const doctors = cityClinics.flatMap(c => (c.doctors_data || []).map((d: any) => ({ ...d, clinic: c })));
+const clinicCount = cityClinics.length;
 const title = `Best Psychiatrists in ${cityName}, ${stateName} | TMS Specialists Near You`;
 const description = `Find ${doctors.length} board-certified psychiatrists offering TMS therapy in ${cityName}, ${stateName}. Compare credentials, read reviews, and book consultations.`;
 ---
@@ -139,8 +109,7 @@ const description = `Find ${doctors.length} board-certified psychiatrists offeri
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {doctors.map((doctor: any, idx: number) => {
                         const clinicImg = doctor.clinic?.hero_image_url;
-                        const hasRealImg = doctor.image_url && !doctor.image_url.includes('tms_doctor_consult');
-                        const avatarUrl = hasRealImg ? doctor.image_url : `https://ui-avatars.com/api/?name=${encodeURIComponent(doctor.name)}&background=4f46e5&color=fff&size=160&bold=true`;
+                        const avatarUrl = getDoctorPhoto(doctor);
                         const clinicRating = typeof doctor.clinic?.rating === 'object' ? doctor.clinic.rating?.aggregate : doctor.clinic?.rating || 4.5;
                         const reviewCount = typeof doctor.clinic?.rating === 'object' ? doctor.clinic.rating?.count : 50;
                         return (

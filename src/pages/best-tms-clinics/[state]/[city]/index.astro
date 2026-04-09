@@ -1,0 +1,289 @@
+---
+export const prerender = true;
+
+import Layout from "../../../../layouts/Layout.astro";
+import ClinicCard from "../../../../components/ClinicCard.astro";
+import {
+  getUniqueStates,
+  getClinicsByState,
+  getClinicsByCity,
+  getClinicRating,
+  getClinicReviewCount,
+  getClinicPhoto,
+} from "../../../../utils/dataHelpers";
+import { STATE_NAMES, getStateSlug } from "../../../../utils/clinicData";
+import { calculateClinicScore } from "../../../../utils/ranking";
+
+export async function getStaticPaths() {
+  const paths: any[] = [];
+  const states = getUniqueStates().filter(s => s && STATE_NAMES[s]);
+
+  states.forEach((stateCode) => {
+    const stateClinics = getClinicsByState(stateCode);
+    const stateName = STATE_NAMES[stateCode] || stateCode;
+    const stateSlug = getStateSlug(stateCode);
+
+    // Group by city, only cities with 2+ clinics get a listicle
+    const cityGroups: Record<string, typeof stateClinics> = {};
+    stateClinics.forEach((c) => {
+      if (!cityGroups[c.city]) cityGroups[c.city] = [];
+      cityGroups[c.city].push(c);
+    });
+
+    Object.entries(cityGroups)
+      .filter(([name, clinics]) => name && clinics.length >= 2)
+      .forEach(([cityName, clinics]) => {
+        const sorted = [...clinics].sort((a, b) => calculateClinicScore(b) - calculateClinicScore(a));
+        const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
+
+        paths.push({
+          params: { state: stateSlug, city: citySlug },
+          props: { stateCode, stateName, cityName, clinics: sorted },
+        });
+      });
+  });
+
+  return paths;
+}
+
+const { stateCode, stateName, cityName, clinics } = Astro.props;
+const { state, city } = Astro.params;
+const top10 = clinics.slice(0, 10);
+const year = new Date().getFullYear();
+const count = Math.min(clinics.length, 10);
+
+const title = `${count} Best TMS Therapy Clinics in ${cityName}, ${stateName} (${year}) | TMS List`;
+const description = `Find the top-rated TMS therapy providers in ${cityName}, ${stateName}. Compare ${clinics.length} verified clinics with patient reviews, insurance info, and costs.`;
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": `Best TMS Clinics in ${cityName}, ${stateName}`,
+  "description": description,
+  "numberOfItems": top10.length,
+  "itemListElement": top10.map((clinic, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "item": {
+      "@type": "MedicalClinic",
+      "name": clinic.name,
+      "url": `https://tmslist.com/clinic/${clinic.slug}`,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": cityName,
+        "addressRegion": stateCode,
+        "addressCountry": "US",
+      },
+      ...(typeof clinic.rating === 'object' ? {
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": clinic.rating.aggregate,
+          "reviewCount": clinic.rating.count,
+        }
+      } : {}),
+    },
+  })),
+});
+
+// Average rating for the city
+const avgRating = top10.reduce((sum, c) => sum + getClinicRating(c), 0) / top10.length;
+const totalReviews = top10.reduce((sum, c) => sum + getClinicReviewCount(c), 0);
+const allMachines = [...new Set(clinics.flatMap(c => c.machines || []))];
+const allInsurances = [...new Set(clinics.flatMap(c => c.insurances || []))];
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Best TMS Clinics", url: "/best-tms-clinics/" },
+  { name: stateName, url: `/best-tms-clinics/${state}/` },
+  { name: cityName, url: `/best-tms-clinics/${state}/${city}/` },
+]}>
+  <main class="bg-white">
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-indigo-50 to-white py-16 border-b border-gray-100">
+      <div class="container mx-auto px-4 max-w-5xl">
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+          <ol class="inline-flex items-center space-x-1 flex-wrap">
+            <li><a href="/" class="hover:text-gray-900">Home</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href="/best-tms-clinics/" class="hover:text-gray-900">Best TMS Clinics</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href={`/best-tms-clinics/${state}/`} class="hover:text-gray-900">{stateName}</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li class="text-gray-900 font-medium">{cityName}</li>
+          </ol>
+        </nav>
+
+        <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
+          {count} Best TMS Clinics in {cityName}, {stateName}
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mb-6">
+          Ranked by patient ratings, technology, and insurance coverage.
+          {clinics.length} verified TMS providers in the {cityName} area.
+        </p>
+
+        {/* Quick stats */}
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+            <div class="text-2xl font-bold text-gray-900">{clinics.length}</div>
+            <div class="text-xs text-gray-500 font-medium">Verified Clinics</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+            <div class="text-2xl font-bold text-amber-600">{avgRating.toFixed(1)}</div>
+            <div class="text-xs text-gray-500 font-medium">Avg. Rating</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+            <div class="text-2xl font-bold text-indigo-600">{allMachines.length}</div>
+            <div class="text-xs text-gray-500 font-medium">TMS Technologies</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+            <div class="text-2xl font-bold text-blue-600">{allInsurances.length}+</div>
+            <div class="text-xs text-gray-500 font-medium">Insurance Plans</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ranked List -->
+    <section class="container mx-auto px-4 max-w-5xl py-12">
+      <div class="space-y-8">
+        {top10.map((clinic, i) => {
+          const rating = getClinicRating(clinic);
+          const reviewCount = getClinicReviewCount(clinic);
+          const photo = getClinicPhoto(clinic);
+          const machines = clinic.machines || [];
+          const insurances = clinic.insurances || [];
+          const doctors = (clinic as any).doctors_data || [];
+
+          return (
+            <article class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden" id={`clinic-${i + 1}`}>
+              <div class="flex flex-col md:flex-row">
+                {/* Rank + Image */}
+                <div class="relative md:w-72 h-52 md:h-auto shrink-0">
+                  <img
+                    src={photo}
+                    alt={`${clinic.name} - TMS Clinic in ${cityName}, ${stateCode}`}
+                    width="400"
+                    height="300"
+                    loading={i < 3 ? "eager" : "lazy"}
+                    class="w-full h-full object-cover"
+                  />
+                  <div class="absolute top-4 left-4">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-indigo-600 text-white font-bold text-lg shadow-lg">
+                      {i + 1}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div class="flex-1 p-6">
+                  <div class="flex items-start justify-between gap-4 mb-2">
+                    <div>
+                      <div class="flex items-center gap-2 mb-1">
+                        <h2 class="text-xl font-bold text-gray-900">
+                          <a href={`/clinic/${clinic.slug}`} class="hover:text-indigo-600 transition-colors">
+                            {clinic.name}
+                          </a>
+                        </h2>
+                        {clinic.verified && (
+                          <svg class="w-5 h-5 text-blue-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                          </svg>
+                        )}
+                      </div>
+                      <p class="text-sm text-gray-500">{clinic.address} &middot; {cityName}, {stateCode}</p>
+                    </div>
+                    {rating > 0 && (
+                      <div class="flex items-center gap-1.5 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-100 shrink-0">
+                        <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <span class="font-bold text-gray-900">{rating.toFixed(1)}</span>
+                        <span class="text-gray-400 text-xs">({reviewCount})</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {clinic.description_long && (
+                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">{clinic.description_long}</p>
+                  )}
+
+                  {/* Tags */}
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {machines.map((m: string) => (
+                      <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded-md">{m}</span>
+                    ))}
+                    {insurances.slice(0, 4).map((ins: string) => (
+                      <span class="px-2.5 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-md">{ins}</span>
+                    ))}
+                    {insurances.length > 4 && (
+                      <span class="px-2.5 py-1 bg-gray-100 text-gray-500 text-xs rounded-md">+{insurances.length - 4} more</span>
+                    )}
+                  </div>
+
+                  {/* Doctors preview */}
+                  {doctors.length > 0 && (
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                      <span class="font-medium text-gray-700">Team:</span>
+                      {doctors.slice(0, 3).map((doc: any) => (
+                        <span>{doc.name}{doc.credential ? `, ${doc.credential}` : ''}</span>
+                      ))}
+                      {doctors.length > 3 && <span>+{doctors.length - 3} more</span>}
+                    </div>
+                  )}
+
+                  {/* CTAs */}
+                  <div class="flex gap-3">
+                    <a href={`/clinic/${clinic.slug}`} class="px-5 py-2.5 bg-indigo-600 text-white text-sm font-semibold rounded-xl hover:bg-indigo-700 transition-colors">
+                      View Full Profile
+                    </a>
+                    {clinic.phone && (
+                      <a href={`tel:${clinic.phone}`} class="px-5 py-2.5 bg-white text-gray-700 text-sm font-semibold rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        Call
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- SEO Content -->
+    <section class="bg-gray-50 border-t border-gray-200">
+      <div class="container mx-auto px-4 max-w-3xl py-16">
+        <div class="prose prose-lg max-w-none text-gray-600">
+          <h2>TMS Therapy in {cityName}, {stateName}</h2>
+          <p>
+            Transcranial Magnetic Stimulation (TMS) is an FDA-cleared treatment for depression,
+            OCD, and other conditions. {cityName} is home to {clinics.length} verified TMS providers
+            offering treatments with technologies including {allMachines.slice(0, 3).join(', ')}{allMachines.length > 3 ? ' and more' : ''}.
+          </p>
+
+          <h2>How Much Does TMS Cost in {cityName}?</h2>
+          <p>
+            A typical TMS session in {cityName} costs $300-$500 without insurance. A full treatment
+            course (36 sessions over 6-9 weeks) runs $10,800-$18,000. Most major insurance plans
+            cover TMS for treatment-resistant depression. The clinics listed here accept {allInsurances.length}+
+            insurance plans between them.
+          </p>
+
+          <h2>How We Ranked These Clinics</h2>
+          <p>
+            We evaluated each TMS provider in {cityName} based on: verification status,
+            patient ratings and reviews, TMS technology used, insurance plans accepted,
+            and completeness of their clinic profile. Rankings are updated as new data comes in.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to state -->
+    <section class="container mx-auto px-4 max-w-5xl py-8 border-t border-gray-200">
+      <a href={`/best-tms-clinics/${state}/`} class="text-indigo-600 font-medium hover:underline text-sm">
+        &larr; View all TMS clinics in {stateName}
+      </a>
+    </section>
+  </main>
+</Layout>

@@ -16,6 +16,15 @@ const additionalMachines = [
 
 const allTech = [...TECHNOLOGY_SLUGS, ...additionalMachines];
 
+const deviceMeta: Record<string, { color: string; bg: string; hoverBorder: string; icon: string; desc: string }> = {
+    'neurostar': { color: 'text-blue-600', bg: 'bg-blue-50', hoverBorder: 'hover:border-blue-200', icon: 'M13 10V3L4 14h7v7l9-11h-7z', desc: 'Most widely used TMS system in the US. Figure-8 coil design.' },
+    'brainsway': { color: 'text-emerald-600', bg: 'bg-emerald-50', hoverBorder: 'hover:border-emerald-200', icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z', desc: 'Deep TMS with H-coil. FDA-cleared for depression & OCD.' },
+    'magventure': { color: 'text-indigo-600', bg: 'bg-indigo-50', hoverBorder: 'hover:border-indigo-200', icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z', desc: 'Versatile TMS platform with multiple coil options.' },
+    'apollo-tms': { color: 'text-amber-600', bg: 'bg-amber-50', hoverBorder: 'hover:border-amber-200', icon: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z', desc: 'Advanced TMS system with precision targeting.' },
+    'exomind': { color: 'text-cyan-600', bg: 'bg-cyan-50', hoverBorder: 'hover:border-cyan-200', icon: 'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342', desc: 'Wellness-focused TMS technology.' },
+};
+const defaultDeviceMeta = { color: 'text-purple-600', bg: 'bg-purple-50', hoverBorder: 'hover:border-purple-200', icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z', desc: 'FDA-cleared TMS system.' };
+
 const techSchema = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -66,16 +75,18 @@ const techSchema = JSON.stringify({
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-semibold text-gray-900 mb-10">TMS Devices</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-                    {allTech.map(item => (
-                        <a href={`/technology/${item.slug}/`} class="group bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:border-purple-200 transition-all">
-                            <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                    {allTech.map(item => {
+                        const meta = deviceMeta[item.slug] || defaultDeviceMeta;
+                        return (
+                        <a href={`/technology/${item.slug}/`} class={`group bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] ${meta.hoverBorder} transition-all`}>
+                            <div class={`w-12 h-12 rounded-xl ${meta.bg} ${meta.color} flex items-center justify-center mb-5`}>
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={meta.icon}></path></svg>
                             </div>
-                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-purple-600 mb-3">{item.title}</h3>
-                            <p class="text-gray-500 text-sm mb-4">FDA-cleared TMS system</p>
-                            <span class="text-purple-600 font-semibold text-sm">Learn More →</span>
+                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-purple-600 mb-2">{item.title}</h3>
+                            <p class="text-gray-500 text-sm mb-4 leading-relaxed">{meta.desc}</p>
+                            <span class={`${meta.color} font-semibold text-sm`}>Learn More →</span>
                         </a>
-                    ))}
+                    )})}
                 </div>
 
                 <!-- Protocols -->

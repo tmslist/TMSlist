@@ -1,68 +1,36 @@
 ---
+export const prerender = false;
+
 import Layout from "../../layouts/Layout.astro";
 import ClinicCard from "../../components/ClinicCard.astro";
 import {
-  getUniqueStates,
-  getClinicsByState,
-  getClinicsByCity,
-  getStateSlug,
+  getAllClinics,
   STATE_NAMES,
 } from "../../utils/dataHelpers";
 import { TREATMENT_SLUGS } from "../../utils/seo_slugs";
 import { calculateClinicScore } from "../../utils/ranking";
-
-export async function getStaticPaths() {
-  const paths: {
-    params: { slug: string };
-    props: {
-      stateName: string;
-      cityName: string;
-      cityClinics: any[];
-      treatmentTitle: string;
-      treatmentSlug: string;
-    };
-  }[] = [];
-  const uniqueStates = getUniqueStates();
-
-  uniqueStates.forEach((stateCode) => {
-    const stateClinics = getClinicsByState(stateCode);
-    const uniqueCities = [
-      ...new Set(stateClinics.map((c) => c.city).filter(Boolean)),
-    ];
-
-    uniqueCities.forEach((cityName) => {
-      const citySlug = cityName.toLowerCase().replace(/\s+/g, "-");
-      const cityClinics = getClinicsByCity(stateCode, cityName);
-
-      TREATMENT_SLUGS.forEach((treatment) => {
-        // e.g. /near-me/depression-tms-near-san-diego/
-        const urlSlug = `${treatment.slug.replace("tms-for-", "")}-tms-near-${citySlug}`;
-
-        paths.push({
-          params: { slug: urlSlug },
-          props: {
-            stateName: STATE_NAMES[stateCode],
-            cityName,
-            cityClinics,
-            treatmentTitle: treatment.title,
-            treatmentSlug: treatment.slug,
-          },
-        });
-      });
-    });
-  });
-
-  return paths;
-}
-
 import {
   generateBreadcrumbSchema,
   generateMedicalClinicListSchema,
 } from "../../utils/schema";
 
-const { stateName, cityName, cityClinics, treatmentTitle } = Astro.props;
+const { slug } = Astro.params;
 
-// Sort clinics
+// Parse slug: "depression-tms-near-san-diego" -> treatment + city
+const nearMatch = (slug || '').match(/^(.+)-tms-near-(.+)$/);
+const treatmentSlugPart = nearMatch?.[1] || '';
+const citySlugPart = nearMatch?.[2] || '';
+
+const treatmentEntry = TREATMENT_SLUGS.find(t =>
+  t.slug === treatmentSlugPart || t.slug === `tms-for-${treatmentSlugPart}`
+);
+const treatmentTitle = treatmentEntry?.title || `TMS for ${treatmentSlugPart.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}`;
+const cityName = citySlugPart.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+
+const allClinics = getAllClinics().filter(c => c.verified);
+const cityClinics = allClinics.filter(c => c.city.toLowerCase() === cityName.toLowerCase());
+const stateName = cityClinics.length > 0 ? (STATE_NAMES[cityClinics[0].state] || cityClinics[0].state) : '';
+
 const sortedClinics = [...cityClinics].sort(
   (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
 );

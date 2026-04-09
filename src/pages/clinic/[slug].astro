@@ -1,8 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import GoogleReviews from "../../components/GoogleReviews.astro";
+import BookingWidget from "../../components/react/BookingWidget";
 import clinicsData from "../../data/clinics.json";
 import { STATE_NAMES } from "../../utils/clinicData";
+import { getDoctorPhoto, hasRealClinicImage } from "../../utils/dataHelpers";
 
 export async function getStaticPaths() {
     return clinicsData
@@ -158,7 +160,14 @@ const displayHero = clinic.hero_image_url || clinicHeroImages[clinic.name.length
                         src={displayHero}
                         alt={`Clinical environment at ${clinic.name}`}
                         class="w-full h-full object-cover"
+                        loading="eager"
                     />
+                    {clinic.hero_image_url && (
+                        <div class="absolute top-4 right-4 inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-emerald-700 border border-emerald-100 shadow-sm">
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/></svg>
+                            Verified Photo
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
@@ -261,9 +270,10 @@ const displayHero = clinic.hero_image_url || clinicHeroImages[clinic.name.length
                             {doctors.map((doctor: any) => (
                                 <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)] flex flex-col sm:flex-row items-start sm:items-center gap-6">
                                     <img
-                                        src={doctor.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(doctor.name)}&background=0D8ABC&color=fff`}
+                                        src={getDoctorPhoto(doctor)}
                                         alt={doctor.name}
-                                        class="w-20 h-20 rounded-full object-cover shadow-sm"
+                                        class="w-20 h-20 rounded-full object-cover shadow-sm border-2 border-slate-100"
+                                        loading="lazy"
                                     />
                                     <div class="flex-1">
                                         <a href={`/doctor/${doctor.slug}`} class="text-lg font-bold text-slate-900 hover:text-blue-600 transition-colors">
@@ -362,6 +372,7 @@ const displayHero = clinic.hero_image_url || clinicHeroImages[clinic.name.length
                             <a href={clinic.contact?.website_url || "#"} target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-sm font-bold transition-all">
                                 Visit Website
                             </a>
+                            <BookingWidget client:idle clinicId={clinic.id} clinicName={clinic.name} clinicPhone={clinic.contact?.phone || clinic.phone} />
                         </div>
                     </div>
 

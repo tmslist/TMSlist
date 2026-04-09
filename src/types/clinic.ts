@@ -279,6 +279,7 @@ export interface Clinic {
     city: string;
     state: string;
     zip: string;
+    country?: string; // ISO 2-letter code: US, GB, CA, AU, DE, IN
     geo: {
         lat: number;
         lng: number;

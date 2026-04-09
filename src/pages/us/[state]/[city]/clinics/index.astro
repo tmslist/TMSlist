@@ -1,44 +1,17 @@
 ---
+export const prerender = false;
+
 import Layout from '../../../../../layouts/Layout.astro';
-import { getOperationalClinics, getStateSlug, STATE_NAMES } from '../../../../../utils/dataHelpers';
+import { getOperationalClinics, getStateCodeFromSlug, STATE_NAMES, getClinicPhoto } from '../../../../../utils/dataHelpers';
 
+const { state, city } = Astro.params;
+const stateCode = getStateCodeFromSlug(state || '');
+const stateName = STATE_NAMES[stateCode] || stateCode;
+const cityName = (city || '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
 
-export async function getStaticPaths() {
-    const clinics = getOperationalClinics();
-    
-    // Group by state -> city
-    const stateCity = new Map<string, Set<string>>();
-    clinics.forEach(c => {
-        if (!c.state || !c.city) return; // Skip invalid entries
-        if (!stateCity.has(c.state)) stateCity.set(c.state, new Set());
-        stateCity.get(c.state)!.add(c.city);
-    });
-    
-    const paths: any[] = [];
-    stateCity.forEach((cities, stateCode) => {
-        const stateSlug = getStateSlug(stateCode);
-        cities.forEach(city => {
-            const citySlug = city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '');
-            const cityClinics = clinics.filter(c => c.state === stateCode && c.city === city);
-            
-            if (cityClinics.length > 0) {
-                paths.push({
-                    params: { state: stateSlug, city: citySlug },
-                    props: { 
-                        stateCode, 
-                        stateName: STATE_NAMES[stateCode], 
-                        cityName: city, 
-                        clinics: cityClinics
-                    }
-                });
-            }
-        });
-    });
-    
-    return paths;
-}
+const allClinics = getOperationalClinics();
+const cityClinics = allClinics.filter(c => c.state === stateCode && c.city.toLowerCase() === cityName.toLowerCase());
 
-const { stateCode, stateName, cityName, clinics: cityClinics } = Astro.props;
 const title = `TMS Clinics in ${cityName}, ${stateName} | Find Treatment Centers Near You`;
 const description = `Compare ${cityClinics.length} TMS therapy clinics in ${cityName}, ${stateName}. View ratings, insurance accepted, and treatment options.`;
 
@@ -141,7 +114,7 @@ const getRating = (clinic: any) => typeof clinic.rating === 'number' ? clinic.ra
                                     <!-- Clinic Image -->
                                     <div class="lg:w-64 lg:shrink-0">
                                         <img 
-                                            src={clinic.hero_image_url || `https://placehold.co/400x300/e2e8f0/1e293b?text=${clinic.name.split(' ')[0]}`}
+                                            src={getClinicPhoto(clinic)}
                                             alt={clinic.name}
                                             class="w-full h-48 lg:h-40 object-cover rounded-xl"
                                         />

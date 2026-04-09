@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
+import { COUNTRY_META } from '../../utils/countryData';
+
+const countryCode = 'AU';
+const countryName = COUNTRY_NAMES[countryCode];
+const meta = COUNTRY_META[countryCode];
+const clinics = getClinicsByCountry(countryCode);
+const totalClinics = clinics.length;
+
+// Group clinics by state/region
+const stateMap = new Map<string, number>();
+clinics.forEach(c => {
+    if (!c.state) return;
+    stateMap.set(c.state, (stateMap.get(c.state) || 0) + 1);
+});
+
+const states = [...stateMap.entries()]
+    .map(([name, count]) => ({
+        name,
+        slug: name.toLowerCase().replace(/\s+/g, '-'),
+        count,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+const title = `TMS Therapy Clinics in Australia | Medicare-Rebated Providers | TMS List`;
+const description = `Browse ${totalClinics}+ TMS therapy clinics across Australia. Compare Medicare-rebated providers in ${states.length} states and territories including NSW, Victoria, and Queensland.`;
+
+const collectionSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "TMS Therapy Clinics in Australia",
+    "description": description,
+    "url": "https://tmslist.com/au/",
+    "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": states.length,
+        "itemListElement": states.map((s, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": `TMS Clinics in ${s.name}`,
+            "url": `https://tmslist.com/au/${s.slug}/`
+        }))
+    }
+});
+---
+
+<Layout title={title} description={description} schema={collectionSchema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Australia", url: "/au/" },
+]}>
+    <main class="container mx-auto px-4 py-8">
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="hover:text-gray-900">Home</a>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <span class="mx-2">/</span>
+                        <span class="text-gray-800">Australia</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <h1 class="text-3xl font-semibold mb-2">TMS Therapy Clinics Across Australia</h1>
+        <p class="text-gray-600 mb-8 max-w-3xl">Browse {totalClinics}+ TGA-approved TMS providers across {states.length} states and territories. Australia offers Medicare rebates for TMS therapy, making it one of the most accessible countries for treatment.</p>
+
+        <!-- Key Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-white rounded-xl border border-gray-100 p-5 text-center">
+                <div class="text-3xl font-semibold tracking-tight text-indigo-600">{totalClinics}</div>
+                <div class="text-sm text-gray-500 font-medium mt-1">TMS Clinics</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 p-5 text-center">
+                <div class="text-3xl font-semibold tracking-tight text-indigo-600">{states.length}</div>
+                <div class="text-sm text-gray-500 font-medium mt-1">States & Territories</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 p-5 text-center">
+                <div class="text-2xl font-semibold tracking-tight text-indigo-600">Medicare</div>
+                <div class="text-sm text-gray-500 font-medium mt-1">Rebates Available</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 p-5 text-center">
+                <div class="text-2xl font-semibold tracking-tight text-indigo-600">{meta.sessionCostRange}</div>
+                <div class="text-sm text-gray-500 font-medium mt-1">Per Session (After Rebate)</div>
+            </div>
+        </div>
+
+        <!-- State Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {states.map((state) => (
+                <a href={`/au/${state.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-indigo-500 hover:shadow-md transition-all group">
+                    <span class="text-lg font-medium text-gray-800 group-hover:text-indigo-600">{state.name}</span>
+                    <span class="block text-sm text-gray-500 mt-1">{state.count} {state.count === 1 ? 'clinic' : 'clinics'}</span>
+                </a>
+            ))}
+        </div>
+
+        <!-- SEO Content -->
+        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+            <h2>About TMS Therapy in Australia</h2>
+            <p>{meta.aboutContent}</p>
+
+            <h3>Medicare Rebates for TMS</h3>
+            <p>{meta.insuranceNote}</p>
+
+            <h3>How to Access TMS Therapy in Australia</h3>
+            <p>To access Medicare-rebated TMS therapy in Australia, you need a referral from your GP to a psychiatrist who oversees TMS treatment. The psychiatrist must confirm that you have treatment-resistant depression, typically defined as inadequate response to at least two antidepressant medications. Once approved, MBS item numbers cover a standard course of TMS treatment.</p>
+
+            <h3>Finding the Right Clinic</h3>
+            <p>When choosing a TMS clinic in Australia, consider the <a href="/technology/">TMS technology</a> used (rTMS vs Deep TMS), the experience of the treating psychiatrist, proximity to your location, and session costs after Medicare rebate. Our directory helps you compare clinics across all Australian states and territories.</p>
+
+            <h3>Related Resources</h3>
+            <ul>
+                <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
+                <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
+                <li><a href="/insurance/">Insurance & Coverage for TMS</a> -- understanding your coverage options</li>
+                <li><a href="/specialists/">Find a TMS Specialist</a> -- board-certified psychiatrists</li>
+            </ul>
+        </section>
+    </main>
+</Layout>

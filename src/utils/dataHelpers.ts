@@ -1,14 +1,44 @@
 import clinicsData from '../data/clinics.json';
 import userSubmittedClinics from '../data/user-submitted-clinics.json';
+import internationalClinicsData from '../data/international-clinics.json';
 import { type Clinic } from '../types/clinic';
 import { STATE_NAMES } from './clinicData'; // Reusing state map if available, or we can move it here.
 
 // Cast strictly and merge all clinic sources
 const mainClinics = clinicsData as unknown as Clinic[];
 const submittedClinics = userSubmittedClinics as unknown as Clinic[];
+const internationalClinics = internationalClinicsData as unknown as Clinic[];
 
-// Merge all clinics - user submissions are added to the main list
-const allClinics: Clinic[] = [...mainClinics, ...submittedClinics];
+// Merge all clinics - user submissions and international clinics added to the main list
+const allClinics: Clinic[] = [...mainClinics, ...submittedClinics, ...internationalClinics];
+
+// Country metadata for international support
+export const COUNTRY_NAMES: Record<string, string> = {
+    US: 'United States',
+    GB: 'United Kingdom',
+    CA: 'Canada',
+    AU: 'Australia',
+    DE: 'Germany',
+    IN: 'India',
+};
+
+export const COUNTRY_FLAGS: Record<string, string> = {
+    US: '\u{1F1FA}\u{1F1F8}',
+    GB: '\u{1F1EC}\u{1F1E7}',
+    CA: '\u{1F1E8}\u{1F1E6}',
+    AU: '\u{1F1E6}\u{1F1FA}',
+    DE: '\u{1F1E9}\u{1F1EA}',
+    IN: '\u{1F1EE}\u{1F1F3}',
+};
+
+export const COUNTRY_URL_PREFIXES: Record<string, string> = {
+    US: 'us',
+    GB: 'uk',
+    CA: 'ca',
+    AU: 'au',
+    DE: 'de',
+    IN: 'in',
+};
 
 /**
  * Returns all clinics from both verified and user-submitted sources.
@@ -89,6 +119,26 @@ export function getClinicPhoto(clinic: Clinic): string {
 }
 
 /**
+ * Returns a photo URL for a doctor, with fallback to UI Avatars.
+ */
+export function getDoctorPhoto(doctor: { name?: string; image_url?: string; imageUrl?: string; slug?: string }): string {
+    const img = doctor.image_url || doctor.imageUrl;
+    if (img) return img;
+    const name = doctor.name || 'Doctor';
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0D8ABC&color=fff&size=200`;
+}
+
+/**
+ * Returns true if the clinic has a real uploaded image (not a stock photo).
+ */
+export function hasRealClinicImage(clinic: { hero_image_url?: string; media?: { hero_image_url?: string } }): boolean {
+    const url = clinic.hero_image_url || clinic.media?.hero_image_url;
+    if (!url) return false;
+    // Stock photos from unsplash are not "real" clinic images
+    return !url.includes('unsplash.com');
+}
+
+/**
  * Returns a list of unique state codes where verified clinics exist.
  * @returns {string[]} Array of state codes (e.g., ['CA', 'TX']).
  */
@@ -148,6 +198,76 @@ export function getAllDoctors(): any[] {
             });
         });
     return doctors;
+}
+
+/**
+ * Returns unique country codes that have verified clinics.
+ */
+export function getUniqueCountries(): string[] {
+    return [...new Set(allClinics.filter(c => c.verified).map(c => c.country || 'US'))];
+}
+
+/**
+ * Returns verified clinics for a specific country.
+ */
+export function getClinicsByCountry(countryCode: string): Clinic[] {
+    return allClinics.filter(c => c.verified && (c.country || 'US') === countryCode.toUpperCase());
+}
+
+/**
+ * Returns unique regions/states for a given country that have verified clinics.
+ */
+export function getRegionsByCountry(countryCode: string): string[] {
+    return [...new Set(
+        allClinics
+            .filter(c => c.verified && (c.country || 'US') === countryCode.toUpperCase())
+            .map(c => c.state)
+            .filter(Boolean)
+    )].sort();
+}
+
+/**
+ * Returns verified clinics for a specific region within a country.
+ */
+export function getClinicsByCountryAndRegion(countryCode: string, region: string): Clinic[] {
+    return allClinics.filter(c =>
+        c.verified &&
+        (c.country || 'US') === countryCode.toUpperCase() &&
+        c.state.toLowerCase() === region.toLowerCase()
+    );
+}
+
+/**
+ * Builds a full country → region → city map for the footer directory.
+ * Only includes countries/regions/cities that have at least one verified clinic.
+ */
+export function buildInternationalDirectory() {
+    const countries = getUniqueCountries().filter(c => c !== 'US').sort();
+    return countries.map(countryCode => {
+        const clinics = getClinicsByCountry(countryCode);
+        const regions = [...new Set(clinics.map(c => c.state).filter(Boolean))].sort();
+        return {
+            code: countryCode,
+            name: COUNTRY_NAMES[countryCode] || countryCode,
+            flag: COUNTRY_FLAGS[countryCode] || '',
+            urlPrefix: COUNTRY_URL_PREFIXES[countryCode] || countryCode.toLowerCase(),
+            clinicCount: clinics.length,
+            regions: regions.map(region => {
+                const regionClinics = clinics.filter(c => c.state === region);
+                const cities = [...new Set(regionClinics.map(c => c.city).filter(Boolean))].sort();
+                return {
+                    name: region,
+                    slug: region.toLowerCase().replace(/\s+/g, '-'),
+                    clinicCount: regionClinics.length,
+                    cities: cities.map(city => ({
+                        name: city,
+                        slug: city.toLowerCase().replace(/\s+/g, '-'),
+                        count: regionClinics.filter(c => c.city === city).length,
+                    })),
+                };
+            }),
+        };
+    });
 }
 
 // Keeping the existing helpers for slug compatibility while moving forward

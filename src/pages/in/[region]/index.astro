@@ -1,0 +1,145 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ClinicCard from '../../../components/ClinicCard.astro';
+import { getClinicsByCountry, getClinicsByCountryAndRegion } from '../../../utils/dataHelpers';
+import { COUNTRY_META } from '../../../utils/countryData';
+import { calculateClinicScore } from '../../../utils/ranking';
+
+export async function getStaticPaths() {
+  const clinics = getClinicsByCountry('IN');
+  const regions = [...new Set(clinics.map(c => c.state).filter(Boolean))];
+
+  return regions.map(region => {
+    const regionClinics = getClinicsByCountryAndRegion('IN', region);
+    const regionSlug = region.toLowerCase().replace(/\s+/g, '-');
+
+    const cities = [...new Set(
+      regionClinics.map(c => JSON.stringify({ name: c.city, slug: c.city.toLowerCase().replace(/\s+/g, '-') }))
+    )].map(s => JSON.parse(s)).sort((a: any, b: any) => a.name.localeCompare(b.name));
+
+    const topClinics = [...regionClinics]
+      .sort((a, b) => calculateClinicScore(b) - calculateClinicScore(a))
+      .slice(0, 3);
+
+    return {
+      params: { region: regionSlug },
+      props: {
+        regionName: region,
+        cities,
+        topClinics,
+        clinicCount: regionClinics.length,
+      },
+    };
+  });
+}
+
+const { regionName, cities, topClinics, clinicCount } = Astro.props;
+const meta = COUNTRY_META['IN'];
+const regionSlug = Astro.params.region;
+
+const title = `Best TMS Therapy Clinics in ${regionName}, India | TMS List`;
+const description = `Find ${clinicCount} TMS therapy providers in ${regionName}, India. Compare top-rated clinics across ${cities.length} cities, read reviews, and find affordable treatment starting at ${meta.sessionCostRange}.`;
+
+const regionSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": `TMS Therapy Clinics in ${regionName}, India`,
+  "description": description,
+  "url": `https://tmslist.com/in/${regionSlug}/`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": clinicCount,
+    "itemListElement": topClinics.slice(0, 3).map((c: any, i: number) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "MedicalClinic",
+        "name": c.name,
+        "url": `https://tmslist.com/clinic/${c.slug}`,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": c.city,
+          "addressRegion": regionName,
+          "addressCountry": "IN"
+        }
+      }
+    }))
+  }
+});
+---
+
+<Layout title={title} description={description} schema={regionSchema} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "India", url: "/in/" },
+  { name: regionName, url: `/in/${regionSlug}/` },
+]}>
+  <main class="container mx-auto px-4 py-8">
+    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a href="/" class="hover:text-gray-900">Home</a>
+        </li>
+        <li class="inline-flex items-center">
+          <span class="mx-2">/</span>
+          <a href="/in/" class="hover:text-gray-900">India</a>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <span class="mx-2">/</span>
+            <span class="text-gray-800 font-medium">{regionName}</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Top Rated Section -->
+    <section class="mb-16">
+      <div class="flex items-center mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900">
+          Top Rated Clinics in {regionName}
+        </h2>
+        <div class="ml-4 h-px flex-1 bg-gray-200"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {topClinics.map((clinic: any) => <ClinicCard clinic={clinic} />)}
+      </div>
+    </section>
+
+    <!-- City Directory -->
+    <section>
+      <div class="flex items-center mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900">
+          Browse by City in {regionName}
+        </h2>
+        <div class="ml-4 h-px flex-1 bg-gray-200"></div>
+        <span class="ml-4 text-sm font-medium text-gray-400">{cities.length} {cities.length === 1 ? 'city' : 'cities'}</span>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {cities.map((city: any) => (
+          <a
+            href={`/in/${regionSlug}/${city.slug}/`}
+            class="group relative bg-white p-5 rounded-2xl border border-gray-100 shadow-[0_2px_8px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.08)] hover:border-blue-200 transition-all overflow-hidden"
+          >
+            <div class="absolute inset-x-0 bottom-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                {city.name}
+              </span>
+              <svg class="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+            <span class="text-xs font-medium text-gray-400">View Clinics</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- SEO Content -->
+    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+      <h2>Affordable TMS Therapy in {regionName}, India</h2>
+      <p>{regionName} has {clinicCount} TMS therapy {clinicCount === 1 ? 'clinic' : 'clinics'} across {cities.length} {cities.length === 1 ? 'city' : 'cities'}. India offers some of the most affordable TMS treatment globally, with sessions typically costing {meta.sessionCostRange} -- a fraction of the US$300-$500 per session charged in Western countries.</p>
+      <p>{meta.insuranceNote}</p>
+      <p>Use our directory to compare clinics in {regionName} by technology, patient outcomes, and cost. Each listing includes verified information about the clinic's TMS equipment and treating psychiatrists.</p>
+    </section>
+  </main>
+</Layout>

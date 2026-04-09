@@ -1,0 +1,210 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const pageTitle = "TMS Therapy Cost Calculator | Estimate Your Out-of-Pocket Cost | TMS List";
+const metaDescription = "Calculate your estimated TMS therapy cost based on your insurance, location, and treatment plan. Get personalized pricing estimates from verified clinics.";
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "TMS Cost Calculator",
+  "description": metaDescription,
+  "url": "https://tmslist.com/tms-cost-calculator",
+  "applicationCategory": "HealthApplication",
+});
+---
+
+<Layout title={pageTitle} description={metaDescription} schema={schema}>
+  <section class="bg-white pt-12 pb-8 border-b border-slate-100">
+    <div class="container mx-auto px-6 lg:px-12 max-w-4xl">
+      <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 text-center">
+        TMS Therapy Cost Calculator
+      </h1>
+      <p class="text-lg text-slate-500 font-light leading-relaxed text-center max-w-2xl mx-auto">
+        Get an estimated cost for your TMS treatment based on your insurance, location, and treatment protocol.
+      </p>
+    </div>
+  </section>
+
+  <main class="bg-slate-50/50 py-10">
+    <div class="container mx-auto px-6 lg:px-12 max-w-3xl">
+      <div class="bg-white rounded-3xl border border-slate-100 shadow-sm p-8" id="calculator">
+        <div class="space-y-6">
+          <!-- Insurance -->
+          <div>
+            <label class="block text-sm font-bold text-slate-900 mb-2">Do you have insurance?</label>
+            <div class="grid grid-cols-2 gap-3" id="insurance-toggle">
+              <button data-value="yes" class="calc-toggle active py-3 px-4 rounded-xl border-2 border-blue-500 bg-blue-50 text-blue-700 font-semibold text-sm text-center transition-all">Yes, I have insurance</button>
+              <button data-value="no" class="calc-toggle py-3 px-4 rounded-xl border-2 border-slate-200 bg-white text-slate-600 font-semibold text-sm text-center transition-all hover:border-slate-300">No, self-pay</button>
+            </div>
+          </div>
+
+          <!-- Insurance Type -->
+          <div id="insurance-type-section">
+            <label class="block text-sm font-bold text-slate-900 mb-2">Insurance Provider</label>
+            <select id="insurance-type" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+              <option value="commercial">Commercial (BCBS, Aetna, Cigna, UHC)</option>
+              <option value="medicare">Medicare</option>
+              <option value="medicaid">Medicaid</option>
+              <option value="tricare">Tricare / VA</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <!-- Protocol -->
+          <div>
+            <label class="block text-sm font-bold text-slate-900 mb-2">Treatment Protocol</label>
+            <select id="protocol" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+              <option value="standard">Standard rTMS (36 sessions, 6-8 weeks)</option>
+              <option value="tbs">Theta Burst (TBS) — 36 sessions, 3-minute treatments</option>
+              <option value="accelerated">Accelerated/SAINT Protocol (5 days intensive)</option>
+              <option value="deep">Deep TMS (BrainsWay) — 20-30 sessions</option>
+            </select>
+          </div>
+
+          <!-- Deductible -->
+          <div id="deductible-section">
+            <label class="block text-sm font-bold text-slate-900 mb-2">Annual Deductible Status</label>
+            <select id="deductible" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+              <option value="met">Deductible already met</option>
+              <option value="partial">Partially met ($500-$1,500 remaining)</option>
+              <option value="unmet">Deductible not met ($1,500-$5,000 remaining)</option>
+            </select>
+          </div>
+
+          <!-- Calculate Button -->
+          <button id="calculate-btn" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm">
+            Calculate My Estimated Cost
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden mt-8 pt-8 border-t border-slate-100">
+          <h2 class="text-xl font-bold text-slate-900 mb-6">Your Estimated TMS Cost</h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 text-center">
+              <p class="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-1">Low Estimate</p>
+              <p class="text-2xl font-bold text-emerald-800" id="cost-low">$0</p>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5 text-center ring-2 ring-blue-200">
+              <p class="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">Likely Cost</p>
+              <p class="text-2xl font-bold text-blue-800" id="cost-mid">$0</p>
+            </div>
+            <div class="bg-amber-50 border border-amber-100 rounded-2xl p-5 text-center">
+              <p class="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-1">High Estimate</p>
+              <p class="text-2xl font-bold text-amber-800" id="cost-high">$0</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 rounded-xl p-5 mb-6">
+            <h3 class="text-sm font-bold text-slate-900 mb-2">Cost Breakdown</h3>
+            <p class="text-sm text-slate-600 leading-relaxed" id="cost-breakdown"></p>
+          </div>
+
+          <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 mb-6">
+            <h3 class="text-sm font-bold text-blue-900 mb-2">Ways to Reduce Your Cost</h3>
+            <ul class="text-sm text-blue-700 space-y-1 list-disc pl-5" id="cost-tips"></ul>
+          </div>
+
+          <a href="/map/" class="inline-flex items-center justify-center w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-all">
+            Find TMS Clinics Near You
+          </a>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-400 text-center mt-6 max-w-xl mx-auto leading-relaxed">
+        These are estimates only and not a guarantee of actual costs. Actual costs depend on your specific insurance plan, deductible, copay/coinsurance, and clinic pricing. Always verify with your insurance company and clinic before starting treatment.
+      </p>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const hasInsurance = { value: true };
+
+  document.querySelectorAll('#insurance-toggle .calc-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#insurance-toggle .calc-toggle').forEach(b => {
+        b.classList.remove('active', 'border-blue-500', 'bg-blue-50', 'text-blue-700');
+        b.classList.add('border-slate-200', 'bg-white', 'text-slate-600');
+      });
+      btn.classList.add('active', 'border-blue-500', 'bg-blue-50', 'text-blue-700');
+      btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-600');
+
+      hasInsurance.value = (btn as HTMLElement).dataset.value === 'yes';
+      const sections = ['insurance-type-section', 'deductible-section'];
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = hasInsurance.value ? 'block' : 'none';
+      });
+    });
+  });
+
+  document.getElementById('calculate-btn')?.addEventListener('click', () => {
+    const protocol = (document.getElementById('protocol') as HTMLSelectElement).value;
+    const insured = hasInsurance.value;
+    const insType = (document.getElementById('insurance-type') as HTMLSelectElement).value;
+    const deductible = (document.getElementById('deductible') as HTMLSelectElement).value;
+
+    // Base costs per session by protocol
+    const sessionCosts: Record<string, number> = { standard: 300, tbs: 275, accelerated: 400, deep: 350 };
+    const sessionCounts: Record<string, number> = { standard: 36, tbs: 36, accelerated: 50, deep: 25 };
+    const perSession = sessionCosts[protocol] || 300;
+    const sessions = sessionCounts[protocol] || 36;
+    const totalCash = perSession * sessions;
+
+    let low: number, mid: number, high: number, breakdown: string;
+    const tips: string[] = [];
+
+    if (!insured) {
+      low = Math.round(totalCash * 0.7);
+      mid = totalCash;
+      high = Math.round(totalCash * 1.2);
+      breakdown = `Self-pay for ${sessions} sessions at ~$${perSession}/session. Many clinics offer 15-30% cash discounts and payment plans.`;
+      tips.push('Ask about cash-pay discounts (15-30% off)');
+      tips.push('Inquire about payment plans or CareCredit financing');
+      tips.push('Some clinics offer sliding scale based on income');
+      tips.push('Request a superbill for possible out-of-network reimbursement');
+    } else {
+      const copay = insType === 'medicare' ? 40 : insType === 'medicaid' ? 0 : insType === 'tricare' ? 25 : 50;
+      const coinsurance = insType === 'medicare' ? 0.20 : insType === 'medicaid' ? 0 : insType === 'tricare' ? 0.15 : 0.20;
+
+      let deductibleCost = 0;
+      if (deductible === 'partial') deductibleCost = 1000;
+      else if (deductible === 'unmet') deductibleCost = 3000;
+
+      const coveredSessions = sessions;
+      const copayTotal = copay * coveredSessions;
+      const coinsuranceTotal = Math.round(totalCash * coinsurance);
+
+      if (insType === 'medicaid') {
+        low = 0; mid = 0; high = copayTotal;
+        breakdown = `Medicaid typically covers TMS with little to no out-of-pocket cost when medically necessary criteria are met.`;
+      } else {
+        low = Math.min(deductibleCost, copayTotal);
+        mid = deductibleCost + copayTotal;
+        high = deductibleCost + Math.max(copayTotal, coinsuranceTotal);
+        breakdown = `With ${insType === 'medicare' ? 'Medicare' : insType === 'tricare' ? 'Tricare' : 'commercial insurance'}: ~$${copay} copay x ${sessions} sessions = $${copayTotal}${deductibleCost > 0 ? ` + ~$${deductibleCost} remaining deductible` : ''}. Out-of-pocket max limits may apply.`;
+      }
+
+      tips.push('Verify TMS is covered under your specific plan');
+      tips.push('Get prior authorization before starting treatment');
+      tips.push('Ask about your out-of-pocket maximum — it may cap your costs');
+      if (deductible !== 'met') tips.push('Consider timing treatment after meeting your deductible');
+      tips.push('Ask the clinic if they handle insurance billing for you');
+    }
+
+    const fmt = (n: number) => '$' + n.toLocaleString();
+    document.getElementById('cost-low')!.textContent = fmt(low);
+    document.getElementById('cost-mid')!.textContent = fmt(mid);
+    document.getElementById('cost-high')!.textContent = fmt(high);
+    document.getElementById('cost-breakdown')!.textContent = breakdown;
+
+    const tipsList = document.getElementById('cost-tips')!;
+    tipsList.innerHTML = tips.map(t => `<li>${t}</li>`).join('');
+
+    document.getElementById('results')!.classList.remove('hidden');
+    document.getElementById('results')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>

@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getClinicsByCountry, getRegionsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
+import { COUNTRY_META } from '../../utils/countryData';
+
+const countryCode = 'IN';
+const meta = COUNTRY_META[countryCode];
+const clinics = getClinicsByCountry(countryCode);
+const regions = getRegionsByCountry(countryCode);
+
+const regionList = regions.map(region => {
+  const count = clinics.filter(c => c.state === region).length;
+  const slug = region.toLowerCase().replace(/\s+/g, '-');
+  return { name: region, slug, count };
+}).sort((a, b) => b.count - a.count);
+
+const totalClinics = clinics.length;
+const title = `TMS Therapy Clinics in India | ${totalClinics} Verified Providers`;
+const description = `Browse ${totalClinics} TMS therapy clinics across India. ${meta.seoDescription}`;
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "TMS Therapy Clinics in India",
+  "description": description,
+  "url": "https://tmslist.com/in/",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": regionList.length,
+    "itemListElement": regionList.map((r, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": `TMS Clinics in ${r.name}, India`,
+      "url": `https://tmslist.com/in/${r.slug}/`
+    }))
+  }
+});
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "India", url: "/in/" },
+]}>
+  <main class="container mx-auto px-4 py-8">
+    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a href="/" class="hover:text-gray-900">Home</a>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <span class="mx-2">/</span>
+            <span class="text-gray-800">India</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="text-3xl font-semibold mb-2">TMS Therapy Clinics in India</h1>
+    <p class="text-gray-600 mb-8 max-w-3xl">Browse {totalClinics} verified TMS providers across {regionList.length} states in India. India offers some of the most affordable TMS treatment globally, with sessions costing {meta.sessionCostRange}.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {regionList.map((region) => (
+        <a href={`/in/${region.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-indigo-500 hover:shadow-md transition-all group">
+          <span class="text-lg font-medium text-gray-800 group-hover:text-indigo-600">{region.name}</span>
+          <span class="block text-sm text-gray-500 mt-1">{region.count} {region.count === 1 ? 'clinic' : 'clinics'}</span>
+        </a>
+      ))}
+    </div>
+
+    <!-- SEO Content -->
+    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+      <h2>About TMS Therapy in India</h2>
+      <p>{meta.aboutContent}</p>
+      <h3>Affordable TMS Treatment in India</h3>
+      <p>India is one of the most affordable destinations for TMS therapy worldwide. {meta.insuranceNote} At {meta.sessionCostRange} per session, a full course of 20-30 treatments is accessible to a much wider population compared to Western countries where sessions can cost US$300-$500 or more.</p>
+      <h3>Leading TMS Institutions in India</h3>
+      <p>NIMHANS (National Institute of Mental Health and Neuro Sciences) in Bangalore is one of Asia's foremost mental health research institutions and a pioneer in TMS therapy in India. Other leading centres include AIIMS Delhi, private clinics such as Mindful TMS Neurocare, and growing networks in Mumbai, Chennai, and Hyderabad.</p>
+      <h3>Related Resources</h3>
+      <ul>
+        <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
+        <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
+        <li><a href="/research/">TMS Research</a> -- latest clinical studies and outcomes</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

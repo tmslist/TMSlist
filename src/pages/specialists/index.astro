@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import clinicsData from "../../data/clinics.json";
-import { getClinicPhoto } from "../../utils/dataHelpers";
+import { getClinicPhoto, getDoctorPhoto } from "../../utils/dataHelpers";
 
 // Extract all doctors from verified clinics
 interface Doctor {
@@ -505,27 +505,14 @@ const schema = JSON.stringify({
                                                 <div class={`p-6 ${doctor.clinicImage && !doctor.clinicImage.includes('tms_chair') ? '-mt-6 relative z-10' : ''}`}>
                                                     <div class="flex items-start gap-4 mb-4">
                                                         <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-md bg-gray-50">
-                                                            {doctor.imageUrl &&
-                                                            !doctor.imageUrl.includes("placeholder") &&
-                                                            !doctor.imageUrl.includes("tms_doctor") ? (
                                                                 <img
-                                                                    src={doctor.imageUrl}
+                                                                    src={getDoctorPhoto({ name: doctor.fullName, image_url: doctor.imageUrl, slug: doctor.slug })}
                                                                     alt={`${doctor.fullName} - TMS specialist in ${doctor.clinicCity}`}
                                                                     class="w-full h-full object-cover"
                                                                     loading="lazy"
                                                                     width="64"
                                                                     height="64"
                                                                 />
-                                                            ) : (
-                                                                <img
-                                                                    src={`https://ui-avatars.com/api/?name=${encodeURIComponent(doctor.fullName)}&background=0891b2&color=fff&size=128&bold=true`}
-                                                                    alt={`${doctor.fullName} - TMS specialist`}
-                                                                    class="w-full h-full object-cover"
-                                                                    loading="lazy"
-                                                                    width="64"
-                                                                    height="64"
-                                                                />
-                                                            )}
                                                         </div>
                                                         <div class="flex-1 min-w-0">
                                                             <h3 class="text-lg font-semibold text-gray-900 truncate">

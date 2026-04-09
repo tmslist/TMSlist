@@ -5,12 +5,16 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import react from '@astrojs/react';
 
-// https://astro.build/config
 export default defineConfig({
   site: 'https://tmslist.com',
   adapter: vercel(),
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      chunkSizeWarningLimit: 2000,
+      cssMinify: true,
+      minify: 'esbuild',
+    },
   },
   integrations: [
     sitemap(),
@@ -18,5 +22,10 @@ export default defineConfig({
   ],
   security: {
     checkOrigin: true,
+  },
+  compressHTML: true,
+  build: {
+    inlineStylesheets: 'auto',
+    concurrency: 5,
   },
 });

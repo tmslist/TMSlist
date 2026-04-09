@@ -7,9 +7,12 @@ interface Props {
     subtitle?: string;
     description?: string;
     schema?: string;
+    reviewerName?: string;
+    reviewerTitle?: string;
 }
 
-const { title, subtitle, description, schema } = Astro.props;
+const { title, subtitle, description, schema, reviewerName = "Dr. Karan Narwal", reviewerTitle = "Board Certified Psychiatrist" } = Astro.props;
+const reviewerInitials = reviewerName.split(' ').map(n => n[0]).join('');
 ---
 
 <Layout title={`${title} | TMS List`} description={description} schema={schema}>
@@ -134,14 +137,14 @@ const { title, subtitle, description, schema } = Astro.props;
                         <div
                             class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm"
                         >
-                            KN
+                            {reviewerInitials}
                         </div>
                         <div>
                             <div class="font-semibold text-gray-900">
-                                Dr. Karan Narwal
+                                {reviewerName}
                             </div>
                             <div class="text-xs text-gray-500">
-                                Board Certified Psychiatrist
+                                {reviewerTitle}
                             </div>
                         </div>
                     </div>

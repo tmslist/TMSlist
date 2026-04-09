@@ -1,0 +1,99 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
+import { COUNTRY_META } from '../../utils/countryData';
+
+const meta = COUNTRY_META.CA;
+const clinics = getClinicsByCountry('CA');
+const totalClinics = clinics.length;
+
+// Group clinics by province
+const provinceMap = new Map<string, number>();
+clinics.forEach(c => {
+    if (!c.state) return;
+    provinceMap.set(c.state, (provinceMap.get(c.state) || 0) + 1);
+});
+
+const provinces = [...provinceMap.entries()]
+    .map(([name, count]) => ({
+        name,
+        slug: name.toLowerCase().replace(/\s+/g, '-'),
+        count,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+const title = `TMS Therapy Clinics in Canada | Find ${totalClinics}+ Providers | TMS List`;
+const description = `Browse ${totalClinics}+ Health Canada approved TMS therapy clinics across ${provinces.length} provinces. Compare clinics by location, technology, and patient ratings.`;
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "TMS Therapy Clinics in Canada",
+  "description": description,
+  "url": "https://tmslist.com/ca/",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": provinces.length,
+    "itemListElement": provinces.map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": `TMS Clinics in ${p.name}`,
+      "url": `https://tmslist.com/ca/${p.slug}/`
+    }))
+  }
+});
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Canada", url: "/ca/" },
+]}>
+  <main class="container mx-auto px-4 py-8">
+    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a href="/" class="hover:text-gray-900">Home</a>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <span class="mx-2">/</span>
+            <span class="text-gray-800">Canada</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="text-3xl font-semibold mb-2">TMS Therapy Clinics Across Canada</h1>
+    <p class="text-gray-600 mb-8 max-w-3xl">Browse {totalClinics}+ Health Canada approved TMS providers across {provinces.length} provinces and territories. Find top-rated clinics near you for depression, anxiety, OCD, and more.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {provinces.map((province) => (
+        <a href={`/ca/${province.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-indigo-500 hover:shadow-md transition-all group">
+          <span class="text-lg font-medium text-gray-800 group-hover:text-indigo-600">{province.name}</span>
+          <span class="block text-sm text-gray-500 mt-1">{province.count} {province.count === 1 ? 'clinic' : 'clinics'}</span>
+        </a>
+      ))}
+    </div>
+
+    <!-- SEO Content -->
+    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+      <h2>About TMS Therapy in Canada</h2>
+      <p>{meta.aboutContent}</p>
+      <p>{meta.seoDescription}</p>
+
+      <h3>Cost of TMS Therapy in Canada</h3>
+      <p>TMS therapy sessions in Canada typically cost {meta.sessionCostRange} per session. {meta.insuranceNote}</p>
+
+      <h3>How to Find the Right TMS Clinic in Canada</h3>
+      <p>When choosing a TMS clinic, consider the <a href="/technology/">TMS technology</a> used, the experience of the treating psychiatrist, insurance or extended benefits acceptance, and patient reviews. Our directory helps you compare clinics across all Canadian provinces to find the best match for your needs.</p>
+
+      <h3>Related Resources</h3>
+      <ul>
+        <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
+        <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
+        <li><a href="/insurance/">Insurance Coverage for TMS</a> -- which plans cover treatment</li>
+        <li><a href="/specialists/">Find a TMS Specialist</a> -- board-certified psychiatrists</li>
+      </ul>
+    </section>
+  </main>
+</Layout>

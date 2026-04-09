@@ -1,0 +1,125 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import ClinicCard from '../../../../components/ClinicCard.astro';
+import { getClinicsByCountry } from '../../../../utils/dataHelpers';
+import { COUNTRY_META } from '../../../../utils/countryData';
+import { calculateClinicScore } from '../../../../utils/ranking';
+
+export async function getStaticPaths() {
+  const clinics = getClinicsByCountry('DE');
+  const cityMap = new Map<string, { region: string; regionSlug: string; cityName: string; citySlug: string; clinics: typeof clinics }>();
+
+  for (const clinic of clinics) {
+    const region = clinic.state;
+    const city = clinic.city;
+    if (!region || !city) continue;
+    const key = `${region}|${city}`;
+    const regionSlug = region.toLowerCase().replace(/\s+/g, '-');
+    const citySlug = city.toLowerCase().replace(/\s+/g, '-');
+
+    if (!cityMap.has(key)) {
+      cityMap.set(key, { region, regionSlug, cityName: city, citySlug, clinics: [] });
+    }
+    cityMap.get(key)!.clinics.push(clinic);
+  }
+
+  return [...cityMap.values()].map(entry => ({
+    params: { region: entry.regionSlug, city: entry.citySlug },
+    props: {
+      regionName: entry.region,
+      cityName: entry.cityName,
+      clinics: [...entry.clinics].sort((a, b) => calculateClinicScore(b) - calculateClinicScore(a)),
+    },
+  }));
+}
+
+const { regionName, cityName, clinics } = Astro.props;
+const meta = COUNTRY_META['DE'];
+const regionSlug = Astro.params.region;
+const citySlug = Astro.params.city;
+
+const title = `TMS Therapy Clinics in ${cityName}, ${regionName} | Germany | TMS List`;
+const description = `Find ${clinics.length} TMS therapy ${clinics.length === 1 ? 'clinic' : 'clinics'} in ${cityName}, ${regionName}. Compare providers, read patient reviews, and find affordable TMS treatment in Germany.`;
+
+const citySchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": `TMS Therapy Clinics in ${cityName}, Germany`,
+  "description": description,
+  "url": `https://tmslist.com/de/${regionSlug}/${citySlug}/`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": clinics.length,
+    "itemListElement": clinics.slice(0, 5).map((c: any, i: number) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "MedicalClinic",
+        "name": c.name,
+        "url": `https://tmslist.com/clinic/${c.slug}`,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": cityName,
+          "addressRegion": regionName,
+          "addressCountry": "DE"
+        }
+      }
+    }))
+  }
+});
+---
+
+<Layout title={title} description={description} schema={citySchema} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Germany", url: "/de/" },
+  { name: regionName, url: `/de/${regionSlug}/` },
+  { name: cityName, url: `/de/${regionSlug}/${citySlug}/` },
+]}>
+  <main class="container mx-auto px-4 py-8">
+    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a href="/" class="hover:text-gray-900">Home</a>
+        </li>
+        <li class="inline-flex items-center">
+          <span class="mx-2">/</span>
+          <a href="/de/" class="hover:text-gray-900">Germany</a>
+        </li>
+        <li class="inline-flex items-center">
+          <span class="mx-2">/</span>
+          <a href={`/de/${regionSlug}/`} class="hover:text-gray-900">{regionName}</a>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <span class="mx-2">/</span>
+            <span class="text-gray-800 font-medium">{cityName}</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="text-3xl font-semibold mb-2">TMS Therapy Clinics in {cityName}, Germany</h1>
+    <p class="text-gray-600 mb-8 max-w-3xl">
+      {clinics.length} verified TMS {clinics.length === 1 ? 'provider' : 'providers'} in {cityName}, {regionName}. Sessions typically cost {meta.sessionCostRange}. Compare clinics below to find the best fit for your treatment needs.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {clinics.map((clinic: any) => <ClinicCard clinic={clinic} />)}
+    </div>
+
+    <!-- SEO Content -->
+    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+      <h2>Finding TMS Therapy in {cityName}</h2>
+      <p>TMS (Transcranial Magnetic Stimulation) therapy in {cityName} is available through {clinics.length} verified {clinics.length === 1 ? 'provider' : 'providers'}. {meta.aboutContent}</p>
+      <h3>Cost and Insurance Coverage</h3>
+      <p>{meta.insuranceNote} Sessions in {cityName} typically range from {meta.sessionCostRange}, with a full treatment course of 20-30 sessions over 4-6 weeks.</p>
+      <h3>Explore More</h3>
+      <ul>
+        <li><a href={`/de/${regionSlug}/`}>All TMS Clinics in {regionName}</a></li>
+        <li><a href="/de/">All TMS Clinics in Germany</a></li>
+        <li><a href="/treatments/">Conditions Treated with TMS</a></li>
+        <li><a href="/technology/">TMS Technology Guide</a></li>
+      </ul>
+    </section>
+  </main>
+</Layout>

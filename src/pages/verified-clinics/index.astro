@@ -6,6 +6,7 @@ import {
     getClinicPhoto,
     getClinicRating,
     getClinicReviewCount,
+    STATE_NAMES,
 } from "../../utils/dataHelpers";
 import type { Clinic } from "../../types/clinic";
 import {
@@ -36,59 +37,7 @@ const sortedStates = Object.entries(stateGroups).sort(
     (a, b) => b[1].length - a[1].length,
 );
 
-const stateNames: Record<string, string> = {
-    DC: "Washington DC",
-    CA: "California",
-    FL: "Florida",
-    IL: "Illinois",
-    NY: "New York",
-    TX: "Texas",
-    WA: "Washington",
-    AZ: "Arizona",
-    CO: "Colorado",
-    GA: "Georgia",
-    PA: "Pennsylvania",
-    OH: "Ohio",
-    MI: "Michigan",
-    CT: "Connecticut",
-    NJ: "New Jersey",
-    AL: "Alabama",
-    AK: "Alaska",
-    AR: "Arkansas",
-    DE: "Delaware",
-    HI: "Hawaii",
-    ID: "Idaho",
-    IN: "Indiana",
-    IA: "Iowa",
-    KS: "Kansas",
-    KY: "Kentucky",
-    LA: "Louisiana",
-    ME: "Maine",
-    MD: "Maryland",
-    MA: "Massachusetts",
-    MN: "Minnesota",
-    MS: "Mississippi",
-    MO: "Missouri",
-    MT: "Montana",
-    NE: "Nebraska",
-    NV: "Nevada",
-    NH: "New Hampshire",
-    NM: "New Mexico",
-    NC: "North Carolina",
-    ND: "North Dakota",
-    OK: "Oklahoma",
-    OR: "Oregon",
-    RI: "Rhode Island",
-    SC: "South Carolina",
-    SD: "South Dakota",
-    TN: "Tennessee",
-    UT: "Utah",
-    VT: "Vermont",
-    VA: "Virginia",
-    WV: "West Virginia",
-    WI: "Wisconsin",
-    WY: "Wyoming",
-};
+const stateNames = STATE_NAMES;
 
 const title =
     "Verified TMS Clinics | Real Data from " + clinics.length + " Providers";

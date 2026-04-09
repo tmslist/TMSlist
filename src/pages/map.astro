@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ClinicMap from "../components/react/ClinicMap";
+
+const pageTitle = "Find TMS Clinics Near You | Interactive Map | TMS List";
+const metaDescription = "Use our interactive map to find TMS therapy clinics near you. Browse verified providers, compare ratings, and book a consultation today.";
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "TMS Clinic Map Search",
+  "description": metaDescription,
+  "url": "https://tmslist.com/map",
+});
+---
+
+<Layout title={pageTitle} description={metaDescription} schema={schema}>
+  <section class="bg-white pt-12 pb-6 border-b border-slate-100">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4">
+          Find TMS Clinics Near You
+        </h1>
+        <p class="text-lg text-slate-500 font-light leading-relaxed">
+          Explore our interactive map of verified TMS therapy providers across the United States.
+          Click "Find Near Me" to discover clinics in your area.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="bg-slate-50/50 py-10">
+    <div class="container mx-auto px-6 lg:px-12">
+      <ClinicMap client:load height="600px" />
+    </div>
+  </main>
+</Layout>

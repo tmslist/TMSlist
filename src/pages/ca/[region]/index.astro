@@ -1,0 +1,175 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ClinicCard from '../../../components/ClinicCard.astro';
+import { getClinicsByCountry, COUNTRY_NAMES } from '../../../utils/dataHelpers';
+import { COUNTRY_META } from '../../../utils/countryData';
+import { calculateClinicScore } from '../../../utils/ranking';
+
+export async function getStaticPaths() {
+    const clinics = getClinicsByCountry('CA');
+
+    // Group clinics by province
+    const provinceMap = new Map<string, typeof clinics>();
+    clinics.forEach(c => {
+        if (!c.state) return;
+        if (!provinceMap.has(c.state)) provinceMap.set(c.state, []);
+        provinceMap.get(c.state)!.push(c);
+    });
+
+    return [...provinceMap.entries()].map(([provinceName, provinceClinics]) => {
+        const regionSlug = provinceName.toLowerCase().replace(/\s+/g, '-');
+
+        // Get unique cities
+        const cities = [...new Set(
+            provinceClinics.map(c => JSON.stringify({
+                name: c.city,
+                slug: c.city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, ''),
+            }))
+        )]
+            .map(s => JSON.parse(s))
+            .sort((a: any, b: any) => a.name.localeCompare(b.name));
+
+        // Top 3 clinics by score
+        const topClinics = [...provinceClinics]
+            .sort((a, b) => calculateClinicScore(b) - calculateClinicScore(a))
+            .slice(0, 3);
+
+        return {
+            params: { region: regionSlug },
+            props: {
+                provinceName,
+                cities,
+                topClinics,
+                clinicCount: provinceClinics.length,
+                regionSlug,
+            },
+        };
+    });
+}
+
+const { provinceName, cities, topClinics, clinicCount, regionSlug } = Astro.props;
+const meta = COUNTRY_META.CA;
+
+const title = `Best TMS Therapy Clinics in ${provinceName}, Canada (Top Rated Providers)`;
+const description = `Find the best TMS therapy providers in ${provinceName}, Canada. Compare ${clinicCount} top-rated clinics across ${cities.length} cities, read patient reviews, and find affordable treatment options near you.`;
+
+const getRatingVal = (c: any) => typeof c.rating === 'number' ? c.rating : c.rating?.aggregate || 0;
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": `TMS Therapy Clinics in ${provinceName}, Canada`,
+  "description": description,
+  "url": `https://tmslist.com/ca/${regionSlug}/`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": clinicCount,
+    "itemListElement": topClinics.slice(0, 3).map((c: any, i: number) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "MedicalClinic",
+        "name": c.name,
+        "url": `https://tmslist.com/clinic/${c.slug}`,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": c.city,
+          "addressRegion": provinceName,
+          "addressCountry": "CA"
+        },
+        ...(getRatingVal(c) > 0 ? {
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": getRatingVal(c),
+            "reviewCount": typeof c.rating === 'object' ? c.rating?.count || 50 : 50
+          }
+        } : {})
+      }
+    }))
+  }
+});
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Canada", url: "/ca/" },
+  { name: provinceName, url: `/ca/${regionSlug}/` },
+]}>
+  <main class="container mx-auto px-4 py-8">
+    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a href="/" class="hover:text-gray-900">Home</a>
+        </li>
+        <li class="inline-flex items-center">
+          <span class="mx-2">/</span>
+          <a href="/ca/" class="hover:text-gray-900">Canada</a>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <span class="mx-2">/</span>
+            <span class="text-gray-800 font-medium">{provinceName}</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Top Rated Section -->
+    <section class="mb-16">
+      <div class="flex items-center mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900">
+          Top Rated Clinics in {provinceName}
+        </h2>
+        <div class="ml-4 h-px flex-1 bg-gray-200"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {topClinics.map((clinic: any) => <ClinicCard clinic={clinic} />)}
+      </div>
+    </section>
+
+    <!-- City Directory -->
+    <section>
+      <div class="flex items-center mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900">
+          Browse by City in {provinceName}
+        </h2>
+        <div class="ml-4 h-px flex-1 bg-gray-200"></div>
+        <span class="ml-4 text-sm font-medium text-gray-400">{cities.length} {cities.length === 1 ? 'city' : 'cities'}</span>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {cities.map((city: any) => (
+          <a
+            href={`/ca/${regionSlug}/${city.slug}/`}
+            class="group relative bg-white p-5 rounded-2xl border border-gray-100 shadow-[0_2px_8px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.08)] hover:border-blue-200 transition-all overflow-hidden"
+          >
+            <div class="absolute inset-x-0 bottom-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                {city.name}
+              </span>
+              <svg class="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+            <span class="text-xs font-medium text-gray-400">
+              View Clinics
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- SEO Content -->
+    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+      <h2>TMS Therapy in {provinceName}, Canada</h2>
+      <p>{provinceName} has {clinicCount} TMS therapy {clinicCount === 1 ? 'clinic' : 'clinics'} across {cities.length} {cities.length === 1 ? 'city' : 'cities'}. Whether you're in {cities.slice(0, 3).map((c: any) => c.name).join(', ')}{cities.length > 3 ? `, or elsewhere in ${provinceName}` : ''}, our directory helps you find Health Canada approved TMS providers with verified reviews and treatment information.</p>
+      <p>{meta.insuranceNote} Use our directory to compare clinics and find the right provider for your needs.</p>
+      <h3>Related Resources</h3>
+      <ul>
+        <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
+        <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
+        <li><a href="/insurance/">Insurance Coverage for TMS</a> -- which plans cover treatment</li>
+        <li><a href="/specialists/">Find a TMS Specialist</a> -- board-certified psychiatrists</li>
+      </ul>
+    </section>
+  </main>
+</Layout>
