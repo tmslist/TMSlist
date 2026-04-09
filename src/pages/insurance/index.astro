@@ -4,9 +4,29 @@ import { INSURANCE_SLUGS } from '../../utils/seo_slugs';
 
 const title = "TMS Insurance Coverage | Medicare, BlueCross, Aetna & More";
 const description = "Find out if your insurance covers TMS therapy. Comprehensive guides for Medicare, BlueCross BlueShield, Aetna, Cigna, UnitedHealthcare, and more.";
+const insuranceSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "TMS Therapy Insurance Coverage",
+    "description": description,
+    "url": "https://tmslist.com/insurance/",
+    "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": INSURANCE_SLUGS.length,
+        "itemListElement": INSURANCE_SLUGS.map((item: any, i: number) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": item.title,
+            "url": `https://tmslist.com/insurance/${item.slug}/`
+        }))
+    }
+});
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schema={insuranceSchema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Insurance", url: "/insurance/" },
+]}>
     <main class="bg-gray-50 min-h-screen">
         <!-- Hero -->
         <section class="bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 py-20">

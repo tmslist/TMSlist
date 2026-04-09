@@ -26,7 +26,9 @@ const isVerified = clinic.verified;
     <div class="relative h-56 overflow-hidden">
         <img
             src={mainImage}
-            alt={clinic.name}
+            alt={`${clinic.name} - TMS Clinic in ${clinic.city}, ${clinic.state}`}
+            width="800"
+            height="500"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
         />

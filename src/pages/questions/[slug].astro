@@ -54,34 +54,27 @@ const description = question.quickAnswer;
 
         <!-- Main Content -->
         <article class="prose prose-lg prose-indigo max-w-none mb-12">
-            <h2>Detailed Explanation</h2>
-            <p>
-                {question.question} This is a common question among patients considering
-                TMS therapy. Understanding the full context can help you make an informed
-                decision about your mental health treatment.
-            </p>
+            {question.fullAnswer ? (
+                <div set:html={question.fullAnswer} />
+            ) : (
+                <>
+                    <h2>What you need to know</h2>
+                    <p>{question.quickAnswer}</p>
+                </>
+            )}
 
-            <p
-                class="text-gray-600 italic text-sm border-l-2 border-gray-200 pl-4 py-2 my-6"
-            >
-                <strong>Note:</strong> This answer is based on FDA-cleared treatments
-                and peer-reviewed clinical research. Always consult with a qualified
-                healthcare provider for personalized medical advice.
-            </p>
-
-            <!-- Key Takeaways -->
-            <h2>Key Takeaways</h2>
-            <ul class="space-y-2">
-                <li>TMS is an FDA-cleared, evidence-based treatment</li>
-                <li>
-                    Most insurance plans cover TMS for treatment-resistant
-                    depression
-                </li>
-                <li>
-                    Results typically appear after 4-6 weeks of daily sessions
-                </li>
-                <li>Side effects are minimal compared to medication</li>
-            </ul>
+            {question.citations && question.citations.length > 0 && (
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Sources</h3>
+                    <ul class="text-sm space-y-1">
+                        {question.citations.map((cite: string) => (
+                            <li>
+                                <a href={cite} target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline break-all">{cite}</a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </article>
 
         <!-- Enhanced CTAs Grid -->
@@ -117,7 +110,7 @@ const description = question.quickAnswer;
             <div
                 class="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-6 text-slate-900"
             >
-                <div class="text-3xl mb-3">�</div>
+                <div class="w-10 h-10 mb-3 rounded-lg bg-blue-500/20 flex items-center justify-center"><svg class="w-5 h-5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
                 <h3 class="text-xl font-semibold mb-2">Free TMS Guide</h3>
                 <p class="text-blue-100 text-sm mb-4">
                     Download: "TMS vs Medication - Which is Right for You?"

@@ -4,9 +4,37 @@ import { TREATMENT_SLUGS } from '../../utils/seo_slugs';
 
 const title = "TMS Treatment Conditions | Depression, Anxiety, OCD & More";
 const description = "Explore FDA-cleared TMS therapy conditions including depression, anxiety, OCD, PTSD, and more. Learn about treatment protocols and success rates.";
+
+const treatmentSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Conditions Treated with TMS Therapy",
+    "description": description,
+    "url": "https://tmslist.com/treatments/",
+    "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": TREATMENT_SLUGS.length,
+        "itemListElement": TREATMENT_SLUGS.map((item, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "item": {
+                "@type": "MedicalCondition",
+                "name": item.title.replace('TMS for ', ''),
+                "url": `https://tmslist.com/treatments/${item.slug}/`,
+                "possibleTreatment": {
+                    "@type": "MedicalTherapy",
+                    "name": "Transcranial Magnetic Stimulation (TMS)"
+                }
+            }
+        }))
+    }
+});
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schema={treatmentSchema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Conditions Treated", url: "/treatments/" },
+]}>
     <main class="bg-gray-50 min-h-screen">
         <!-- Hero -->
         <section class="bg-gradient-to-br from-indigo-900 via-blue-900 to-slate-900 py-20">

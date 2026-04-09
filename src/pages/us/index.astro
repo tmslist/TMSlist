@@ -11,10 +11,33 @@ const states = [...new Set(clinics.map(c => c.state))].map(stateCode => {
     };
 }).sort((a,b) => a.name.localeCompare(b.name));
 
-const title = "United States - TMS Clinics";
+const totalClinics = clinics.length;
+const title = "Find TMS Therapy Clinics in Every US State | TMS List Directory";
+const description = `Browse ${totalClinics}+ TMS therapy clinics across all 50 states. Compare FDA-cleared providers by location, insurance, technology, and patient ratings.`;
+
+const stateListSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "TMS Therapy Clinics by State",
+  "description": description,
+  "url": "https://tmslist.com/us/",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": states.length,
+    "itemListElement": states.map((s, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": `TMS Clinics in ${s.name}`,
+      "url": `https://tmslist.com/us/${s.slug}/`
+    }))
+  }
+});
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description} schema={stateListSchema} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "United States", url: "/us/" },
+]}>
   <main class="container mx-auto px-4 py-8">
     <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
       <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -30,14 +53,28 @@ const title = "United States - TMS Clinics";
       </ol>
     </nav>
 
-    <h1 class="text-3xl font-semibold mb-6">TMS Clinics in the United States</h1>
+    <h1 class="text-3xl font-semibold mb-2">TMS Therapy Clinics Across the United States</h1>
+    <p class="text-gray-600 mb-8 max-w-3xl">Browse {totalClinics}+ FDA-cleared TMS providers in {states.length} states. Find top-rated clinics near you for depression, anxiety, OCD, and more.</p>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {states.map((state) => (
-        <a href={`/us/${state.slug}/`} class="block p-4 bg-white rounded border hover:border-indigo-500 transition-colors">
-          <span class="text-lg font-medium text-gray-800">{state.name}</span>
-        </a>
-      ))}
+      {states.map((state) => {
+        const stateCount = clinics.filter(c => (STATE_NAMES[c.state] || c.state) === state.name).length;
+        return (
+          <a href={`/us/${state.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-indigo-500 hover:shadow-md transition-all group">
+            <span class="text-lg font-medium text-gray-800 group-hover:text-indigo-600">{state.name}</span>
+            <span class="block text-sm text-gray-500 mt-1">{stateCount} clinics</span>
+          </a>
+        );
+      })}
     </div>
+
+    <!-- SEO Content -->
+    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+      <h2>About TMS Therapy in the United States</h2>
+      <p>Transcranial Magnetic Stimulation (TMS) therapy is available at over {totalClinics} clinics across the United States. TMS is FDA-cleared for treating Major Depressive Disorder, OCD, smoking cessation, and other conditions. Most major insurance providers including Medicare, BlueCross BlueShield, Aetna, Cigna, and UnitedHealthcare now cover TMS therapy.</p>
+      <p>Use our directory to compare clinics by state, view patient ratings, check insurance acceptance, and find the right TMS provider for your needs. Each listing includes verified information about the clinic's TMS technology, treating psychiatrists, and treatment specialties.</p>
+      <h3>How to Find the Right TMS Clinic</h3>
+      <p>When choosing a TMS clinic, consider the <a href="/technology/">TMS technology</a> used, the experience of the <a href="/specialists/">treating psychiatrist</a>, insurance acceptance, and patient reviews. Our <a href="/quiz/am-i-a-candidate/">candidate quiz</a> can help you determine if TMS therapy may be right for you.</p>
+    </section>
   </main>
 </Layout>

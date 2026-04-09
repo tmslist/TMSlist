@@ -45,7 +45,35 @@ const description = `Compare ${cityClinics.length} TMS therapy clinics in ${city
 const getRating = (clinic: any) => typeof clinic.rating === 'number' ? clinic.rating : clinic.rating?.aggregate || 4.5;
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description} schema={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": `TMS Clinics in ${cityName}, ${stateName}`,
+  "description": description,
+  "url": `https://tmslist.com/us/${Astro.params.state}/${Astro.params.city}/clinics/`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": cityClinics.length,
+    "itemListElement": cityClinics.slice(0, 10).map((c: any, i: number) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "MedicalClinic",
+        "name": c.name,
+        "url": `https://tmslist.com/clinic/${c.slug}`,
+        "address": { "@type": "PostalAddress", "streetAddress": c.address, "addressLocality": cityName, "addressRegion": stateName, "addressCountry": "US" },
+        "telephone": c.contact?.phone || c.phone,
+        ...(getRating(c) > 0 ? { "aggregateRating": { "@type": "AggregateRating", "ratingValue": getRating(c), "reviewCount": typeof c.rating === 'object' ? c.rating?.count || 50 : 50 } } : {})
+      }
+    }))
+  }
+})} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "United States", url: "/us/" },
+  { name: stateName, url: `/us/${Astro.params.state}/` },
+  { name: cityName, url: `/us/${Astro.params.state}/${Astro.params.city}/` },
+  { name: "Clinics", url: `/us/${Astro.params.state}/${Astro.params.city}/clinics/` },
+]}>
     <main class="bg-gray-50 min-h-screen">
         <!-- Hero Section -->
         <section class="bg-gradient-to-br from-slate-900 via-indigo-900 to-blue-900 py-20">

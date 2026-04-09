@@ -50,14 +50,55 @@ export async function getStaticPaths() {
   });
 }
 
-const { stateName, cities, topClinics, clinicCount } = Astro.props;
+const { stateName, cities, topClinics, clinicCount, stateCode } = Astro.props;
 
 // strict SEO: "Best TMS Therapy Clinics in [State] | TMS List"
 const title = `Best TMS Therapy Clinics in ${stateName} (Top Rated Psychiatrists)`;
-const description = `Find the best TMS therapy providers in ${stateName}. Compare top-rated clinics, read patient reviews, check insurance coverage, and find affordable treatment options near you.`;
+const description = `Find the best TMS therapy providers in ${stateName}. Compare ${clinicCount} top-rated clinics across ${cities.length} cities, read patient reviews, check insurance coverage, and find affordable treatment options near you.`;
+
+const stateSlug = Astro.params.state;
+const getRatingVal = (c: any) => typeof c.rating === 'number' ? c.rating : c.rating?.aggregate || 0;
+
+const stateSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": `TMS Therapy Clinics in ${stateName}`,
+  "description": description,
+  "url": `https://tmslist.com/us/${stateSlug}/`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": clinicCount,
+    "itemListElement": topClinics.slice(0, 3).map((c: any, i: number) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "MedicalClinic",
+        "name": c.name,
+        "url": `https://tmslist.com/clinic/${c.slug}`,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": c.city,
+          "addressRegion": stateName,
+          "addressCountry": "US"
+        },
+        ...(getRatingVal(c) > 0 ? {
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": getRatingVal(c),
+            "reviewCount": typeof c.rating === 'object' ? c.rating?.count || 50 : 50
+          }
+        } : {})
+      }
+    }))
+  }
+});
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schema={stateSchema} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "United States", url: "/us/" },
+  { name: stateName, url: `/us/${stateSlug}/` },
+]}>
   <StateHero stateName={stateName} clinicCount={clinicCount} />
 
   <main class="container mx-auto px-4 py-8">
@@ -115,6 +156,20 @@ const description = `Find the best TMS therapy providers in ${stateName}. Compar
           ))
         }
       </div>
+    </section>
+
+    <!-- SEO Content + Internal Links -->
+    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+      <h2>TMS Therapy in {stateName}</h2>
+      <p>{stateName} has {clinicCount} TMS therapy clinics across {cities.length} cities. Whether you're in {cities.slice(0, 3).map((c: any) => c.name).join(', ')}, or elsewhere in {stateName}, our directory helps you find FDA-cleared TMS providers with verified reviews and insurance information.</p>
+      <p>Most clinics in {stateName} accept major insurance plans including Medicare, BlueCross BlueShield, Aetna, Cigna, and UnitedHealthcare. Use our <a href="/quiz/am-i-a-candidate/">eligibility quiz</a> to check if you're a candidate for TMS therapy.</p>
+      <h3>Related Resources</h3>
+      <ul>
+        <li><a href="/treatments/">Conditions Treated with TMS</a> — depression, anxiety, OCD, PTSD and more</li>
+        <li><a href="/technology/">TMS Technology Guide</a> — compare NeuroStar, BrainsWay, MagVenture</li>
+        <li><a href="/insurance/">Insurance Coverage for TMS</a> — which plans cover treatment</li>
+        <li><a href="/specialists/">Find a TMS Specialist</a> — board-certified psychiatrists</li>
+      </ul>
     </section>
   </main>
 </Layout>

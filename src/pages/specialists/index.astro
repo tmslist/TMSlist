@@ -168,7 +168,10 @@ const schema = JSON.stringify({
 });
 ---
 
-<Layout title={title} description={description} schema={schema}>
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Specialists", url: "/specialists/" },
+]}>
     <main class="bg-gray-50 min-h-screen">
         <!-- Hero -->
         <section

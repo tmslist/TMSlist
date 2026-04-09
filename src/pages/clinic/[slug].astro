@@ -81,31 +81,61 @@ const schema = JSON.stringify({
         reviewCount: getReviewCount(),
     },
     priceRange: clinic.price_range || "$$",
-    openingHoursSpecification: (clinic.opening_hours || []).map((h: string) => {
-        // Very basic parsing attempt, or just pass raw string if schema allows (it prefers structured objects but strings are often tolerated or ignored if invalid)
-        // Ideally we parse "Mon-Fri 9am-5pm" into dayOfWeek and opens/closes.
-        // For now, simpler to just map the string to 'name' or similar if parsing is complex, or provide generic hours.
-        // Let's rely on the string format for now or skip if too complex to parse reliably without a library.
-        return {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], // Good guess for clinics
-            opens: "09:00",
-            closes: "17:00",
-        };
-    }),
+    openingHoursSpecification: (clinic.opening_hours || []).map((h: string) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "17:00",
+    })),
+    ...(doctors.length > 0 ? {
+        employee: doctors.map((d: any) => ({
+            "@type": "Physician",
+            name: d.name,
+            jobTitle: d.title || "Board-Certified Psychiatrist",
+            medicalSpecialty: "Psychiatry",
+            ...(d.school ? { alumniOf: { "@type": "EducationalOrganization", name: d.school } } : {}),
+            url: `https://tmslist.com/doctor/${d.slug}`,
+        }))
+    } : {}),
+    ...(machines.length > 0 ? {
+        availableService: machines.map((m: string) => ({
+            "@type": "MedicalTherapy",
+            name: `${m} TMS Therapy`,
+            therapyType: "Transcranial Magnetic Stimulation",
+        }))
+    } : {}),
 });
+
+// FAQ Schema for Google rich snippets
+const faqSchema = faqs.length > 0 ? JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq: any) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+    }))
+}) : null;
 ---
 
-<Layout title={pageTitle} description={metaDescription} schema={schema}>
+<Layout title={pageTitle} description={metaDescription} schema={schema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "United States", url: "/us/" },
+    { name: stateName, url: `/us/${stateName.toLowerCase().replace(/\s+/g, "-")}/` },
+    { name: city, url: `/us/${stateName.toLowerCase().replace(/\s+/g, "-")}/${city.toLowerCase().replace(/\s+/g, "-").replace(/\./g, "")}/` },
+    { name: clinic.name, url: `/clinic/${clinic.slug}` },
+]}>
+    {faqSchema && <script type="application/ld+json" set:html={faqSchema} />}
     <!-- Cinematic Hero -->
     <section
         class="relative min-h-[85vh] flex items-center bg-[#0B1120] overflow-hidden"
     >
         <div class="absolute inset-0">
             <img
-                src={clinic.hero_image_url ||
-                    "/images/tms_chair_luxury_1769446442231.png"}
-                alt={`Luxury TMS Treatment Room at ${clinic.name}`}
+                src={clinic.hero_image_url || clinic.media?.hero_image_url || "/images/tms_chair_luxury_1769446442231.png"}
+                alt={`TMS Treatment Room at ${clinic.name} in ${city}, ${stateName}`}
+                width="1920"
+                height="1080"
                 class="w-full h-full object-cover opacity-40 mix-blend-overlay scale-110"
             />
             <div
@@ -338,7 +368,10 @@ const schema = JSON.stringify({
                     >
                         <img
                             src="/images/brain_stimulation_art_1769446474392.png"
-                            alt="TMS Brain Stimulation"
+                            alt="TMS Brain Stimulation diagram showing magnetic pulse targeting the prefrontal cortex"
+                            width="600"
+                            height="400"
+                            loading="lazy"
                             class="w-full md:w-1/2 rounded-2xl shadow-lg"
                         />
                         <div class="space-y-4">
@@ -404,8 +437,11 @@ const schema = JSON.stringify({
                             doctors.map((doctor: any) => (
                                 <div class="flex items-center gap-6 p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all">
                                     <img
-                                        src={doctor.image_url}
-                                        alt={`${doctor.name} - TMS Specialist`}
+                                        src={doctor.image_url || "/images/tms_doctor_consult_1769446457625.png"}
+                                        alt={`${doctor.name} - TMS Specialist at ${clinic.name}`}
+                                        width="96"
+                                        height="96"
+                                        loading="lazy"
                                         class="w-24 h-24 rounded-xl object-cover"
                                     />
                                     <div class="flex-1">

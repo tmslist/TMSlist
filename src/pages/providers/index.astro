@@ -10,7 +10,7 @@ const benefits = [
         title: "Patients who are ready to book",
         description:
             "People on TMS List aren't browsing. They've already decided they want TMS — they're looking for the right clinic. That's the lead you want.",
-        icon: "�",
+        icon: "patients",
     },
     {
         title: "The verified badge matters",
@@ -33,7 +33,10 @@ const benefits = [
 ];
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "List Your Clinic", url: "/providers/" },
+]}>
     <!-- Hero Section -->
     <section class="relative bg-white py-20 overflow-hidden">
         <div

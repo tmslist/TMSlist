@@ -15,9 +15,33 @@ const additionalMachines = [
 ];
 
 const allTech = [...TECHNOLOGY_SLUGS, ...additionalMachines];
+
+const techSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "TMS Technology & Devices",
+    "description": description,
+    "url": "https://tmslist.com/technology/",
+    "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": allTech.length,
+        "itemListElement": allTech.map((item, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "item": {
+                "@type": "MedicalDevice",
+                "name": item.title,
+                "url": `https://tmslist.com/technology/${item.slug}/`
+            }
+        }))
+    }
+});
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schema={techSchema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Technology", url: "/technology/" },
+]}>
     <main class="bg-gray-50 min-h-screen">
         <!-- Hero -->
         <section class="bg-gradient-to-br from-purple-900 via-indigo-900 to-slate-900 py-20">

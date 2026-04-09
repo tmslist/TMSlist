@@ -66,7 +66,33 @@ const faqs = [
 ];
 ---
 
-<Layout title={pageTitle}>
+<Layout title={pageTitle} description={metaDescription} schema={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    "name": doctor.name,
+    "jobTitle": doctor.title || "Board-Certified Psychiatrist",
+    "medicalSpecialty": "Psychiatry",
+    "knowsAbout": doctor.specialties,
+    "description": metaDescription,
+    ...(doctor.school ? { "alumniOf": { "@type": "EducationalOrganization", "name": doctor.school } } : {}),
+    ...(doctor.years_experience ? { "yearsInPractice": doctor.years_experience } : {}),
+    "worksFor": { "@type": "MedicalClinic", "name": clinic.name, "url": `https://tmslist.com/clinic/${clinic.slug}` },
+    "address": { "@type": "PostalAddress", "addressLocality": city, "addressRegion": stateName, "addressCountry": "US" },
+    "url": `https://tmslist.com/specialist/${doctor.slug}`
+})} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Specialists", url: "/specialists/" },
+    { name: doctor.name, url: `/specialist/${doctor.slug}` },
+]}>
+    {faqs.length > 0 && <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map((faq: any) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+        }))
+    })} />}
     <!-- Cinematic Hero with Background Pattern -->
     <section
         class="relative min-h-[70vh] flex items-center bg-gradient-to-br from-slate-900 via-indigo-900 to-blue-900 overflow-hidden"

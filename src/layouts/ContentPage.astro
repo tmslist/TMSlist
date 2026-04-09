@@ -6,12 +6,13 @@ interface Props {
     title: string;
     subtitle?: string;
     description?: string;
+    schema?: string;
 }
 
-const { title, subtitle, description } = Astro.props;
+const { title, subtitle, description, schema } = Astro.props;
 ---
 
-<Layout title={`${title} | TMS List`} description={description}>
+<Layout title={`${title} | TMS List`} description={description} schema={schema}>
     <Hero
         title={title}
         subtitle={subtitle || "What you need to know, without the medical jargon."}

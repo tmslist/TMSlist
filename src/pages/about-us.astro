@@ -1,11 +1,31 @@
 ---
 import ContentPage from "../layouts/ContentPage.astro";
+
+const orgSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "TMS List",
+    "url": "https://tmslist.com",
+    "description": "The leading directory of TMS therapy providers in the United States. Helping patients find FDA-cleared clinics with verified reviews and insurance information.",
+    "foundingDate": "2024",
+    "sameAs": [],
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "url": "https://tmslist.com/contact"
+    },
+    "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+    }
+});
 ---
 
 <ContentPage
     title="About TMS List"
     subtitle="Finding a TMS provider shouldn't be this hard. We're fixing that."
     description="TMS List helps people find FDA-cleared TMS therapy clinics with real reviews, real insurance info, and no guesswork. Learn why we built this."
+    schema={orgSchema}
 >
     <p>
         If you're here, you've probably already tried a few things that didn't work. Maybe antidepressants that dulled more than they helped. Maybe therapy that got you halfway there. And somewhere along the way, someone mentioned TMS.

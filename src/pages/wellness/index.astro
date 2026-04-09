@@ -8,7 +8,11 @@ const title = "Wellness TMS | Exomind, Cognitive Enhancement & Brain Optimizatio
 const description = "Discover wellness TMS clinics offering Exomind therapy for cognitive enhancement, focus improvement, and mood optimization. An emerging category beyond clinical TMS.";
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Technology", url: "/technology/" },
+    { name: "Wellness TMS", url: "/wellness/" },
+]}>
     <main class="bg-gray-50 min-h-screen">
         <!-- Hero -->
         <section class="bg-gradient-to-br from-emerald-900 via-teal-800 to-cyan-900 py-16 md:py-24">
