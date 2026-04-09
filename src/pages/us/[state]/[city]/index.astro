@@ -85,7 +85,12 @@ const relatedBlogs = [
 ];
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "United States", url: "/us/" },
+  { name: stateName, url: `/us/${state}/` },
+  { name: cityName, url: `/us/${state}/${cityName.toLowerCase().replace(/\s+/g, '-')}/` },
+]}>
   <main class="container mx-auto px-4 py-8">
     <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
       <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -116,7 +121,7 @@ const relatedBlogs = [
           class="bg-white p-6 rounded-xl border border-gray-200 sticky top-8 shadow-sm"
         >
           <div class="flex items-center justify-between mb-4">
-            <h2 class="text-lg font-bold text-gray-900">Filters</h2>
+            <h2 class="text-lg font-semibold text-gray-900">Filters</h2>
             <button
               class="text-sm text-primary hover:text-primary-dark font-medium"
               >Reset</button
@@ -126,7 +131,7 @@ const relatedBlogs = [
           <div class="space-y-6">
             <div>
               <h3
-                class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3"
+                class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3"
               >
                 TMS Technology
               </h3>
@@ -151,7 +156,7 @@ const relatedBlogs = [
           </div>
           <div>
             <h3
-              class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3"
+              class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3"
             >
               Treatments
             </h3>
@@ -182,7 +187,7 @@ const relatedBlogs = [
           </div>
           <div>
             <h3
-              class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3"
+              class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3"
             >
               Insurance
             </h3>
@@ -219,7 +224,7 @@ const relatedBlogs = [
 
     <!-- Main Grid -->
     <div class="w-full lg:w-3/4">
-      <h1 class="text-3xl font-bold text-gray-900 mb-6 flex items-baseline">
+      <h1 class="text-3xl font-semibold text-gray-900 mb-6 flex items-baseline">
         {cityName} TMS Clinics
         <span class="text-gray-500 font-medium text-lg ml-3" id="clinic-count"
           >{cityClinics.length} Providers</span
@@ -253,34 +258,27 @@ const relatedBlogs = [
         No clinics match your selected filters. Try adjusting your criteria.
       </p>
 
-      <!-- SEO Content Section for LLM Ranking -->
+      <!-- SEO Content Section -->
       <section
         class="mt-16 pt-12 border-t border-gray-100 prose prose-indigo max-w-none"
       >
-        <h2>Why Choose TMS Therapy in {cityName}?</h2>
+        <h2>TMS therapy in {cityName} — what you should know</h2>
         <p>
-          Transcranial Magnetic Stimulation (TMS) is becoming a leading
-          alternative treatment for depression in {cityName}, {stateName}. With {
-            cityClinics.length
-          } verified providers in the area, patients have access to cutting-edge technology
-          including NeuroStar, BrainsWay Deep TMS, and MagVenture systems.
+          There are {cityClinics.length} verified TMS providers in the {cityName} area. Most use NeuroStar, BrainsWay Deep TMS, or MagVenture systems — each FDA-cleared and covered by the majority of insurance plans in {stateName}.
         </p>
-        <h3>How much does TMS cost in {cityName}?</h3>
         <p>
-          The cost of TMS in {cityName} varies by clinic and insurance coverage. Most
-          major insurers in {stateName} (including Medicare, Blue Cross Blue Shield,
-          and Aetna) now cover TMS for Treatment-Resistant Depression. Without insurance,
-          sessions can range from $300 to $500 per session. Many clinics listed above
-          offer free consultations to verify your benefits.
+          If you've tried antidepressants and they haven't worked well enough, TMS is worth looking into. It's non-invasive, sessions take about 20 minutes, and most people can drive themselves home afterward.
         </p>
-        <h3>Ketamine vs TMS: What's available in {stateName}?</h3>
+        <h3>What does TMS cost in {cityName}?</h3>
         <p>
-          Many clinics in {cityName} now offer both TMS and Spravato (Esketamine)
-          or Ketamine Infusion Therapy. While TMS uses magnetic pulses to stimulate
-          the brain, Ketamine works chemically on NMDA receptors. Both are FDA-cleared
-          or evidence-based options for patients who haven't responded to traditional
-          antidepressants. Use the filters above to find clinics specifically offering
-          "Ketamine Infusion" or "Spravato".
+          With insurance, your out-of-pocket cost depends on your plan and deductible. Without insurance, sessions typically run $300–$500 each, and a full course is 36 sessions over about 6 weeks.
+        </p>
+        <p>
+          Good news: Medicare, Blue Cross, Aetna, Cigna, and UnitedHealthcare all cover TMS in {stateName} — as long as you meet the criteria (usually a depression diagnosis and at least 2 failed medication trials). Most clinics listed above will check your benefits for free before you commit.
+        </p>
+        <h3>TMS vs. Ketamine: which clinics in {cityName} offer both?</h3>
+        <p>
+          Some clinics here offer both TMS and Spravato (esketamine) or IV ketamine. They work differently — TMS uses magnetic pulses, ketamine targets NMDA receptors — but both are options when standard antidepressants fall short. Use the filters above to find clinics offering "Ketamine Infusion" or "Spravato" alongside TMS.
         </p>
       </section>
 

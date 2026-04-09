@@ -10,22 +10,22 @@ const description =
 const categories = {
     basics: {
         name: "TMS Basics",
-        icon: "📚",
+        icon: "basics",
         description: "Understanding TMS therapy fundamentals",
     },
     cost: {
         name: "Cost & Insurance",
-        icon: "💰",
+        icon: "cost",
         description: "Pricing, coverage, and payment options",
     },
     conditions: {
         name: "Conditions Treated",
-        icon: "🧠",
+        icon: "conditions",
         description: "Effectiveness for different mental health conditions",
     },
     comparisons: {
         name: "Treatment Comparisons",
-        icon: "⚖️",
+        icon: "comparisons",
         description: "How TMS compares to other therapies",
     },
 };
@@ -46,7 +46,7 @@ const featured = questionsData.slice(0, 6);
     <main class="min-h-screen">
         <!-- Hero Section -->
         <section
-            class="bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 py-20 text-center text-white relative overflow-hidden"
+            class="bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 py-20 text-center text-slate-900 relative overflow-hidden"
         >
             <div class="absolute inset-0 opacity-20">
                 <div
@@ -60,7 +60,7 @@ const featured = questionsData.slice(0, 6);
             </div>
 
             <div class="container mx-auto px-4 relative z-10">
-                <h1 class="text-5xl md:text-6xl font-black mb-6">
+                <h1 class="text-5xl md:text-6xl font-semibold tracking-tight mb-6">
                     TMS Therapy <span
                         class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400"
                         >Questions & Answers</span
@@ -78,7 +78,7 @@ const featured = questionsData.slice(0, 6);
                             type="text"
                             id="question-search"
                             placeholder="Ask any question about TMS therapy..."
-                            class="w-full px-6 py-4 rounded-2xl text-gray-900 text-lg pr-12 shadow-xl focus:outline-none focus:ring-4 focus:ring-cyan-400"
+                            class="w-full px-6 py-4 rounded-2xl text-gray-900 text-lg pr-12 shadow-[0_4px_20px_rgb(0,0,0,0.03)] focus:outline-none focus:ring-4 focus:ring-cyan-400"
                             autocomplete="off"
                         />
                         <svg
@@ -98,13 +98,13 @@ const featured = questionsData.slice(0, 6);
                         {/* Autocomplete Dropdown */}
                         <div
                             id="autocomplete-results"
-                            class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 max-h-96 overflow-y-auto hidden z-50"
+                            class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-200 max-h-96 overflow-y-auto hidden z-50"
                         >
                             {/* Results populated by JS */}
                         </div>
                     </div>
                     <p class="text-indigo-200 text-sm mt-3 text-center">
-                        💡 Try: "How much does TMS cost?" or "Is TMS FDA
+                        Try: "How much does TMS cost?" or "Is TMS FDA
                         approved?"
                     </p>
                 </div>
@@ -114,7 +114,7 @@ const featured = questionsData.slice(0, 6);
         <div class="container mx-auto px-4 py-12">
             <!-- Featured Questions -->
             <section class="mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-8">
+                <h2 class="text-3xl font-semibold text-gray-900 mb-8">
                     Most Asked Questions
                 </h2>
                 <div
@@ -124,9 +124,9 @@ const featured = questionsData.slice(0, 6);
                         featured.map((q) => (
                             <a
                                 href={`/questions/${q.slug}/`}
-                                class="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-indigo-500 hover:shadow-xl transition-all"
+                                class="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-indigo-500 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
                             >
-                                <h3 class="font-bold text-lg text-gray-900 group-hover:text-indigo-600 transition-colors mb-3">
+                                <h3 class="font-semibold text-lg text-gray-900 group-hover:text-indigo-600 transition-colors mb-3">
                                     {q.question}
                                 </h3>
                                 <p class="text-gray-600 text-sm line-clamp-3 mb-4">
@@ -143,7 +143,7 @@ const featured = questionsData.slice(0, 6);
 
             <!-- Browse by Category -->
             <section>
-                <h2 class="text-3xl font-bold text-gray-900 mb-8">
+                <h2 class="text-3xl font-semibold text-gray-900 mb-8">
                     Browse by Topic
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -153,9 +153,11 @@ const featured = questionsData.slice(0, 6);
                             return (
                                 <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-shadow">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <span class="text-4xl">{cat.icon}</span>
+                                        <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                        </div>
                                         <div>
-                                            <h3 class="text-2xl font-bold text-gray-900">
+                                            <h3 class="text-2xl font-semibold text-gray-900">
                                                 {cat.name}
                                             </h3>
                                             <p class="text-gray-600 text-sm">
@@ -193,14 +195,14 @@ const featured = questionsData.slice(0, 6);
             <section
                 class="mt-16 bg-indigo-600 rounded-2xl p-12 text-center text-white"
             >
-                <h2 class="text-3xl font-bold mb-4">Can't find your answer?</h2>
+                <h2 class="text-3xl font-semibold mb-4">Can't find your answer?</h2>
                 <p class="text-indigo-100 mb-6 max-w-2xl mx-auto">
                     Talk to a TMS specialist for free. Our network of verified
                     providers can answer your specific questions.
                 </p>
                 <button
                     onclick="document.dispatchEvent(new Event('open-enquiry-modal'))"
-                    class="px-8 py-4 bg-white text-indigo-600 font-bold rounded-xl hover:bg-indigo-50 transition-colors shadow-lg"
+                    class="px-8 py-4 bg-white text-indigo-600 font-semibold rounded-xl hover:bg-indigo-50 transition-colors shadow-lg"
                 >
                     Talk to a Specialist
                 </button>

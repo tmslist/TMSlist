@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ComparisonTool from "../components/react/ComparisonTool";
+---
+
+<Layout
+  title="Compare TMS Clinics Side-by-Side | TMS List"
+  description="Compare TMS therapy clinics side by side. Compare ratings, devices, insurance coverage, costs, and more to find the best TMS provider for you."
+>
+  <main class="container mx-auto px-4 py-12">
+    <ComparisonTool client:load />
+  </main>
+</Layout>

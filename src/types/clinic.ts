@@ -323,7 +323,7 @@ export interface Clinic {
     description?: string;
     description_long?: string;
     doctors?: Doctor[];
-    doctors_data?: any[];
+    doctors_data?: Doctor[];
 
     // Attribution
     created_by?: CreatedBy;

@@ -29,7 +29,7 @@ const { stateName, clinicCount } = Astro.props;
     <div class="container mx-auto px-6 relative z-10 text-center">
         <!-- Pill Badge -->
         <div
-            class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full py-2 px-5 mb-8"
+            class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-slate-200 rounded-full py-2 px-5 mb-8"
         >
             <span class="relative flex h-2 w-2">
                 <span
@@ -39,13 +39,13 @@ const { stateName, clinicCount } = Astro.props;
                     class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
                 ></span>
             </span>
-            <span class="text-sm font-bold text-white/90 tracking-wide"
+            <span class="text-sm font-semibold text-slate-900/90 tracking-wide"
                 >{clinicCount} Verified Clinics</span
             >
         </div>
 
         <h1
-            class="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-tight"
+            class="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-slate-900 mb-6 tracking-tight leading-tight"
         >
             Top TMS Clinics in <br class="md:hidden" />
             <span
@@ -65,13 +65,13 @@ const { stateName, clinicCount } = Astro.props;
         <div class="flex flex-wrap justify-center gap-4">
             <a
                 href="#clinics"
-                class="px-8 py-4 bg-white text-indigo-600 font-bold rounded-2xl shadow-xl shadow-black/20 hover:-translate-y-0.5 transition-all"
+                class="px-8 py-4 bg-white text-indigo-600 font-semibold rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] shadow-black/20 hover:-translate-y-0.5 transition-all"
             >
                 View All Clinics
             </a>
             <a
                 href="/quiz/am-i-a-candidate/"
-                class="px-8 py-4 bg-white/10 backdrop-blur border border-white/20 text-white font-bold rounded-2xl hover:bg-white/20 transition-all"
+                class="px-8 py-4 bg-white/10 backdrop-blur border border-slate-200 text-slate-900 font-semibold rounded-2xl hover:bg-white/20 transition-all"
             >
                 Am I a Candidate?
             </a>

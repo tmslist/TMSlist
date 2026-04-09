@@ -77,19 +77,19 @@ const description =
             <!-- Header -->
             <div class="text-center mb-12">
                 <span
-                    class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-full text-sm font-bold uppercase tracking-wider mb-4"
+                    class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-full text-sm font-semibold uppercase tracking-wider mb-4"
                 >
                     <span
                         class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
                     ></span>
                     Instant Listing
                 </span>
-                <h1 class="text-4xl md:text-5xl font-black text-white mb-4">
+                <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-4">
                     Add Your TMS Clinic
                 </h1>
-                <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto">
                     Get discovered by thousands of patients searching for TMS
-                    therapy. <strong class="text-white"
+                    therapy. <strong class="text-slate-900"
                         >Your listing goes live immediately</strong
                     > after submission.
                 </p>
@@ -97,14 +97,13 @@ const description =
 
             <!-- Form Container -->
             <div
-                class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12"
+                class="bg-white/5 backdrop-blur-xl border border-slate-200 rounded-3xl p-8 md:p-12"
             >
                 <!-- Netlify Forms - also works as standard form -->
                 <form
                     id="add-listing-form"
                     class="space-y-10"
-                    accept-charset='UTF-8' 
-                    action='https://app.formester.com/forms/4EFB7iBT9/submissions' 
+                    accept-charset='UTF-8'
                     method='POST'
                 >
                     <!-- Honeypot for spam protection -->
@@ -125,11 +124,11 @@ const description =
                     <section id="listing-type-section">
                         <div class="flex items-center gap-4 mb-6">
                             <div
-                                class="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-white flex items-center justify-center font-bold text-lg"
+                                class="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-slate-900 flex items-center justify-center font-semibold text-lg"
                             >
                                 ★
                             </div>
-                            <h2 class="text-2xl font-bold text-white">
+                            <h2 class="text-2xl font-semibold text-slate-900">
                                 What would you like to list?
                             </h2>
                         </div>
@@ -146,15 +145,15 @@ const description =
                                     checked
                                 />
                                 <div
-                                    class="p-6 rounded-xl border-2 border-white/20 bg-white/5 hover:border-indigo-500 hover:bg-indigo-500/10 transition-all text-center selected-type"
+                                    class="p-6 rounded-xl border-2 border-slate-200 bg-white/5 hover:border-indigo-500 hover:bg-indigo-500/10 transition-all text-center selected-type"
                                 >
-                                    <div class="text-4xl mb-3">🏥</div>
+                                    <div class="w-12 h-12 mb-3 mx-auto rounded-xl bg-indigo-500/20 flex items-center justify-center"><svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
                                     <h3
-                                        class="text-lg font-bold text-white mb-1"
+                                        class="text-lg font-semibold text-slate-900 mb-1"
                                     >
                                         TMS Clinic
                                     </h3>
-                                    <p class="text-sm text-slate-400">
+                                    <p class="text-sm text-slate-500">
                                         List your clinic or treatment center
                                     </p>
                                 </div>
@@ -169,15 +168,15 @@ const description =
                                     class="hidden"
                                 />
                                 <div
-                                    class="p-6 rounded-xl border-2 border-white/20 bg-white/5 hover:border-cyan-500 hover:bg-cyan-500/10 transition-all text-center"
+                                    class="p-6 rounded-xl border-2 border-slate-200 bg-white/5 hover:border-cyan-500 hover:bg-cyan-500/10 transition-all text-center"
                                 >
-                                    <div class="text-4xl mb-3">👨‍⚕️</div>
+                                    <div class="w-12 h-12 mb-3 mx-auto rounded-xl bg-cyan-500/20 flex items-center justify-center"><svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div>
                                     <h3
-                                        class="text-lg font-bold text-white mb-1"
+                                        class="text-lg font-semibold text-slate-900 mb-1"
                                     >
                                         Doctor Profile
                                     </h3>
-                                    <p class="text-sm text-slate-400">
+                                    <p class="text-sm text-slate-500">
                                         List yourself as a TMS provider
                                     </p>
                                 </div>
@@ -192,15 +191,15 @@ const description =
                                     class="hidden"
                                 />
                                 <div
-                                    class="p-6 rounded-xl border-2 border-white/20 bg-white/5 hover:border-emerald-500 hover:bg-emerald-500/10 transition-all text-center"
+                                    class="p-6 rounded-xl border-2 border-slate-200 bg-white/5 hover:border-emerald-500 hover:bg-emerald-500/10 transition-all text-center"
                                 >
-                                    <div class="text-4xl mb-3">✨</div>
+                                    <div class="w-12 h-12 mb-3 mx-auto rounded-xl bg-emerald-500/20 flex items-center justify-center"><svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg></div>
                                     <h3
-                                        class="text-lg font-bold text-white mb-1"
+                                        class="text-lg font-semibold text-slate-900 mb-1"
                                     >
                                         Clinic + Doctor
                                     </h3>
-                                    <p class="text-sm text-slate-400">
+                                    <p class="text-sm text-slate-500">
                                         List both your clinic and profile
                                     </p>
                                 </div>
@@ -212,11 +211,11 @@ const description =
                     <section>
                         <div class="flex items-center gap-4 mb-6">
                             <div
-                                class="w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-lg"
+                                class="w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-semibold text-lg"
                             >
                                 1
                             </div>
-                            <h2 class="text-2xl font-bold text-white">
+                            <h2 class="text-2xl font-semibold text-slate-900">
                                 Clinic Information
                             </h2>
                         </div>
@@ -225,7 +224,7 @@ const description =
                             <div class="md:col-span-2">
                                 <label
                                     for="name"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Clinic Name *</label
                                 >
                                 <input
@@ -233,7 +232,7 @@ const description =
                                     id="name"
                                     name="name"
                                     required
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                                     placeholder="e.g., Advanced TMS Wellness Center"
                                 />
                             </div>
@@ -241,7 +240,7 @@ const description =
                             <div class="md:col-span-2">
                                 <label
                                     for="address"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Street Address *</label
                                 >
                                 <input
@@ -249,7 +248,7 @@ const description =
                                     id="address"
                                     name="address"
                                     required
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="e.g., 123 Medical Center Drive, Suite 200"
                                 />
                             </div>
@@ -257,7 +256,7 @@ const description =
                             <div>
                                 <label
                                     for="city"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >City *</label
                                 >
                                 <input
@@ -265,7 +264,7 @@ const description =
                                     id="city"
                                     name="city"
                                     required
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="e.g., Los Angeles"
                                 />
                             </div>
@@ -274,14 +273,14 @@ const description =
                                 <div>
                                     <label
                                         for="state"
-                                        class="block text-sm font-bold text-slate-300 mb-2"
+                                        class="block text-sm font-semibold text-slate-600 mb-2"
                                         >State *</label
                                     >
                                     <select
                                         id="state"
                                         name="state"
                                         required
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 focus:ring-2 focus:ring-indigo-500"
                                     >
                                         <option value="">Select State</option>
                                         {
@@ -296,7 +295,7 @@ const description =
                                 <div>
                                     <label
                                         for="zip"
-                                        class="block text-sm font-bold text-slate-300 mb-2"
+                                        class="block text-sm font-semibold text-slate-600 mb-2"
                                         >ZIP *</label
                                     >
                                     <input
@@ -305,7 +304,7 @@ const description =
                                         name="zip"
                                         required
                                         pattern="[0-9]{5}"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                         placeholder="90210"
                                     />
                                 </div>
@@ -314,7 +313,7 @@ const description =
                             <div>
                                 <label
                                     for="phone"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Phone Number *</label
                                 >
                                 <input
@@ -322,7 +321,7 @@ const description =
                                     id="phone"
                                     name="phone"
                                     required
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="(555) 123-4567"
                                 />
                             </div>
@@ -330,14 +329,14 @@ const description =
                             <div>
                                 <label
                                     for="website"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Website URL</label
                                 >
                                 <input
                                     type="url"
                                     id="website"
                                     name="website"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="https://www.yourclinic.com"
                                 />
                             </div>
@@ -345,14 +344,14 @@ const description =
                             <div class="md:col-span-2">
                                 <label
                                     for="description"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Clinic Description</label
                                 >
                                 <textarea
                                     id="description"
                                     name="description"
                                     rows="4"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="Tell patients about your clinic, your approach to TMS therapy, and what makes you unique..."
                                 ></textarea>
                             </div>
@@ -363,11 +362,11 @@ const description =
                     <section>
                         <div class="flex items-center gap-4 mb-6">
                             <div
-                                class="w-10 h-10 rounded-full bg-cyan-500 text-white flex items-center justify-center font-bold text-lg"
+                                class="w-10 h-10 rounded-full bg-cyan-500 text-slate-900 flex items-center justify-center font-semibold text-lg"
                             >
                                 2
                             </div>
-                            <h2 class="text-2xl font-bold text-white">
+                            <h2 class="text-2xl font-semibold text-slate-900">
                                 TMS Details
                             </h2>
                         </div>
@@ -375,7 +374,7 @@ const description =
                         <div class="space-y-6">
                             <div>
                                 <label
-                                    class="block text-sm font-bold text-slate-300 mb-3"
+                                    class="block text-sm font-semibold text-slate-600 mb-3"
                                     >TMS Machines Used *</label
                                 >
                                 <div
@@ -383,14 +382,14 @@ const description =
                                 >
                                     {
                                         machines.map((m) => (
-                                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
+                                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-slate-200 cursor-pointer hover:bg-white/10 transition-colors">
                                                 <input
                                                     type="checkbox"
                                                     name="machines"
                                                     value={m}
                                                     class="w-5 h-5 rounded border-white/30 text-indigo-500 focus:ring-indigo-500 bg-white/10"
                                                 />
-                                                <span class="text-white text-sm font-medium">
+                                                <span class="text-slate-900 text-sm font-medium">
                                                     {m}
                                                 </span>
                                             </label>
@@ -401,7 +400,7 @@ const description =
 
                             <div>
                                 <label
-                                    class="block text-sm font-bold text-slate-300 mb-3"
+                                    class="block text-sm font-semibold text-slate-600 mb-3"
                                     >Conditions Treated *</label
                                 >
                                 <div
@@ -409,14 +408,14 @@ const description =
                                 >
                                     {
                                         treatments.map((t) => (
-                                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
+                                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-slate-200 cursor-pointer hover:bg-white/10 transition-colors">
                                                 <input
                                                     type="checkbox"
                                                     name="treatments"
                                                     value={t}
                                                     class="w-5 h-5 rounded border-white/30 text-cyan-500 focus:ring-cyan-500 bg-white/10"
                                                 />
-                                                <span class="text-white text-sm font-medium">
+                                                <span class="text-slate-900 text-sm font-medium">
                                                     {t}
                                                 </span>
                                             </label>
@@ -427,7 +426,7 @@ const description =
 
                             <div>
                                 <label
-                                    class="block text-sm font-bold text-slate-300 mb-3"
+                                    class="block text-sm font-semibold text-slate-600 mb-3"
                                     >Insurance Accepted</label
                                 >
                                 <div
@@ -435,14 +434,14 @@ const description =
                                 >
                                     {
                                         insurances.map((i) => (
-                                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
+                                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-slate-200 cursor-pointer hover:bg-white/10 transition-colors">
                                                 <input
                                                     type="checkbox"
                                                     name="insurances"
                                                     value={i}
                                                     class="w-5 h-5 rounded border-white/30 text-emerald-500 focus:ring-emerald-500 bg-white/10"
                                                 />
-                                                <span class="text-white text-sm font-medium">
+                                                <span class="text-slate-900 text-sm font-medium">
                                                     {i}
                                                 </span>
                                             </label>
@@ -457,11 +456,11 @@ const description =
                     <section>
                         <div class="flex items-center gap-4 mb-6">
                             <div
-                                class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-lg"
+                                class="w-10 h-10 rounded-full bg-purple-500 text-slate-900 flex items-center justify-center font-semibold text-lg"
                             >
                                 3
                             </div>
-                            <h2 class="text-2xl font-bold text-white">
+                            <h2 class="text-2xl font-semibold text-slate-900">
                                 Media & Links
                             </h2>
                         </div>
@@ -480,14 +479,14 @@ const description =
                             <div>
                                 <label
                                     for="logo_url"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Logo URL</label
                                 >
                                 <input
                                     type="url"
                                     id="logo_url"
                                     name="logo_url"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="https://example.com/logo.png"
                                 />
                             </div>
@@ -495,14 +494,14 @@ const description =
                             <div>
                                 <label
                                     for="hero_image_url"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Main Photo URL</label
                                 >
                                 <input
                                     type="url"
                                     id="hero_image_url"
                                     name="hero_image_url"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="https://example.com/clinic-photo.jpg"
                                 />
                             </div>
@@ -510,14 +509,14 @@ const description =
                             <div>
                                 <label
                                     for="video_url"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >YouTube Video URL</label
                                 >
                                 <input
                                     type="url"
                                     id="video_url"
                                     name="video_url"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="https://www.youtube.com/watch?v=..."
                                 />
                             </div>
@@ -525,17 +524,17 @@ const description =
                             <div>
                                 <label
                                     for="gbp_embed_url"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Google Maps Embed URL</label
                                 >
                                 <input
                                     type="url"
                                     id="gbp_embed_url"
                                     name="gbp_embed_url"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="https://www.google.com/maps/embed?pb=..."
                                 />
-                                <p class="text-xs text-slate-400 mt-2">
+                                <p class="text-xs text-slate-500 mt-2">
                                     Find this in Google Maps → Share → Embed a
                                     map → Copy the URL from the iframe src
                                 </p>
@@ -547,11 +546,11 @@ const description =
                     <section>
                         <div class="flex items-center gap-4 mb-6">
                             <div
-                                class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-lg"
+                                class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-semibold text-lg"
                             >
                                 4
                             </div>
-                            <h2 class="text-2xl font-bold text-white">
+                            <h2 class="text-2xl font-semibold text-slate-900">
                                 Lead Psychiatrist (Optional)
                             </h2>
                         </div>
@@ -560,14 +559,14 @@ const description =
                             <div>
                                 <label
                                     for="doctor_name"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Doctor Name</label
                                 >
                                 <input
                                     type="text"
                                     id="doctor_name"
                                     name="doctor_name"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="Dr. Jane Smith, MD"
                                 />
                             </div>
@@ -575,14 +574,14 @@ const description =
                             <div>
                                 <label
                                     for="doctor_title"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Title/Role</label
                                 >
                                 <input
                                     type="text"
                                     id="doctor_title"
                                     name="doctor_title"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="Medical Director"
                                 />
                             </div>
@@ -590,14 +589,14 @@ const description =
                             <div>
                                 <label
                                     for="doctor_image_url"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Doctor Photo URL</label
                                 >
                                 <input
                                     type="url"
                                     id="doctor_image_url"
                                     name="doctor_image_url"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="https://example.com/dr-smith.jpg"
                                 />
                             </div>
@@ -605,7 +604,7 @@ const description =
                             <div>
                                 <label
                                     for="doctor_years"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Years of Experience</label
                                 >
                                 <input
@@ -614,7 +613,7 @@ const description =
                                     name="doctor_years"
                                     min="0"
                                     max="60"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="15"
                                 />
                             </div>
@@ -622,14 +621,14 @@ const description =
                             <div>
                                 <label
                                     for="doctor_registration"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Medical License / Registration Number</label
                                 >
                                 <input
                                     type="text"
                                     id="doctor_registration"
                                     name="doctor_registration"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="e.g., MD12345"
                                 />
                             </div>
@@ -637,17 +636,17 @@ const description =
                             <div>
                                 <label
                                     for="doctor_email"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Doctor Email (for lead notifications)</label
                                 >
                                 <input
                                     type="email"
                                     id="doctor_email"
                                     name="doctor_email"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="dr.smith@example.com"
                                 />
-                                <p class="text-xs text-slate-400 mt-1">
+                                <p class="text-xs text-slate-500 mt-1">
                                     Use your name as login and this email as
                                     password to view leads
                                 </p>
@@ -656,14 +655,14 @@ const description =
                             <div class="md:col-span-2">
                                 <label
                                     for="doctor_specialties"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Areas of Expertise</label
                                 >
                                 <input
                                     type="text"
                                     id="doctor_specialties"
                                     name="doctor_specialties"
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="e.g., Depression, OCD, PTSD (comma-separated)"
                                 />
                             </div>
@@ -674,11 +673,11 @@ const description =
                     <section>
                         <div class="flex items-center gap-4 mb-6">
                             <div
-                                class="w-10 h-10 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-lg"
+                                class="w-10 h-10 rounded-full bg-rose-500 text-slate-900 flex items-center justify-center font-semibold text-lg"
                             >
                                 5
                             </div>
-                            <h2 class="text-2xl font-bold text-white">
+                            <h2 class="text-2xl font-semibold text-slate-900">
                                 Your Information
                             </h2>
                         </div>
@@ -697,7 +696,7 @@ const description =
                             <div>
                                 <label
                                     for="submitter_name"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Your Name *</label
                                 >
                                 <input
@@ -705,7 +704,7 @@ const description =
                                     id="submitter_name"
                                     name="submitter_name"
                                     required
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="John Smith"
                                 />
                             </div>
@@ -713,7 +712,7 @@ const description =
                             <div>
                                 <label
                                     for="submitter_email"
-                                    class="block text-sm font-bold text-slate-300 mb-2"
+                                    class="block text-sm font-semibold text-slate-600 mb-2"
                                     >Your Email *</label
                                 >
                                 <input
@@ -721,7 +720,7 @@ const description =
                                     id="submitter_email"
                                     name="submitter_email"
                                     required
-                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-slate-200 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500"
                                     placeholder="john@clinic.com"
                                 />
                             </div>
@@ -729,11 +728,11 @@ const description =
                     </section>
 
                     <!-- Submit Button -->
-                    <div class="pt-6 border-t border-white/10">
+                    <div class="pt-6 border-t border-slate-200">
                         <button
                             type="submit"
                             id="submit-btn"
-                            class="w-full py-4 px-8 bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-lg rounded-2xl hover:from-indigo-400 hover:to-cyan-400 transition-all shadow-xl shadow-indigo-500/30 flex items-center justify-center gap-3"
+                            class="w-full py-4 px-8 bg-gradient-to-r from-indigo-500 to-cyan-500 text-slate-900 font-semibold text-lg rounded-2xl hover:from-indigo-400 hover:to-cyan-400 transition-all shadow-[0_4px_20px_rgb(0,0,0,0.03)] shadow-indigo-500/30 flex items-center justify-center gap-3"
                         >
                             <svg
                                 class="w-6 h-6"
@@ -776,15 +775,15 @@ const description =
                                 d="M5 13l4 4L19 7"></path>
                         </svg>
                     </div>
-                    <h2 class="text-3xl font-bold text-white mb-4">
-                        🎉 Your Clinic is Live!
+                    <h2 class="text-3xl font-semibold text-slate-900 mb-4">
+                        Your Clinic is Live!
                     </h2>
-                    <p class="text-lg text-slate-300 mb-4 max-w-md mx-auto">
+                    <p class="text-lg text-slate-600 mb-4 max-w-md mx-auto">
                         Your clinic has been added to TMS List. Patients can now
                         find you in our directory.
                     </p>
                     <div id="clinic-slug-container" class="mb-8">
-                        <p class="text-sm text-slate-400 mb-2">
+                        <p class="text-sm text-slate-500 mb-2">
                             Your clinic page:
                         </p>
                         <a
@@ -799,7 +798,7 @@ const description =
                         <a
                             id="view-clinic-btn"
                             href="#"
-                            class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors"
+                            class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-colors"
                         >
                             <svg
                                 class="w-5 h-5"
@@ -823,7 +822,7 @@ const description =
                         </a>
                         <a
                             href="/verified-clinics/"
-                            class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white/10 text-white font-bold rounded-xl hover:bg-white/20 transition-colors"
+                            class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white/10 text-slate-900 font-semibold rounded-xl hover:bg-white/20 transition-colors"
                         >
                             Browse All Clinics
                         </a>
@@ -836,27 +835,27 @@ const description =
                 class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center"
             >
                 <div class="bg-white/5 backdrop-blur rounded-2xl p-6">
-                    <div class="text-3xl mb-2">🔒</div>
-                    <h3 class="font-bold text-white mb-1">Secure & Private</h3>
-                    <p class="text-sm text-slate-400">
+                    <div class="w-10 h-10 mb-2 mx-auto rounded-lg bg-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
+                    <h3 class="font-semibold text-slate-900 mb-1">Secure & Private</h3>
+                    <p class="text-sm text-slate-500">
                         Your contact info is never shared with third parties
                     </p>
                 </div>
                 <div class="bg-white/5 backdrop-blur rounded-2xl p-6">
-                    <div class="text-3xl mb-2">⚡</div>
-                    <h3 class="font-bold text-white mb-1">
+                    <div class="w-10 h-10 mb-2 mx-auto rounded-lg bg-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+                    <h3 class="font-semibold text-slate-900 mb-1">
                         Instant Visibility
                     </h3>
-                    <p class="text-sm text-slate-400">
+                    <p class="text-sm text-slate-500">
                         Your clinic appears in search results immediately
                     </p>
                 </div>
                 <div class="bg-white/5 backdrop-blur rounded-2xl p-6">
-                    <div class="text-3xl mb-2">📈</div>
-                    <h3 class="font-bold text-white mb-1">
+                    <div class="w-10 h-10 mb-2 mx-auto rounded-lg bg-white/10 flex items-center justify-center"><svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
+                    <h3 class="font-semibold text-slate-900 mb-1">
                         Grow Your Practice
                     </h3>
-                    <p class="text-sm text-slate-400">
+                    <p class="text-sm text-slate-500">
                         Reach thousands of patients searching for TMS therapy
                     </p>
                 </div>
@@ -901,7 +900,62 @@ const description =
             return `user-${stateCode}-${citySlug}-${timestamp}`;
         }
 
-        // Form submission is handled by Formester now
+        if (form) {
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                if (!submitBtn) return;
+
+                const originalText = submitBtn.innerHTML;
+                submitBtn.setAttribute("disabled", "true");
+                submitBtn.innerHTML = "Submitting...";
+
+                const formData = new FormData(form);
+                const name = formData.get("clinic-name") as string || "";
+                const city = formData.get("city") as string || "";
+                const state = formData.get("state") as string || "";
+
+                try {
+                    const res = await fetch("/api/clinics/submit", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            name,
+                            address: formData.get("address") || "",
+                            city,
+                            state,
+                            zip: formData.get("zip") || "00000",
+                            phone: formData.get("phone") || "",
+                            website: formData.get("website") || "",
+                            email: formData.get("email") || "",
+                            machines: Array.from(formData.getAll("machines")),
+                            specialties: Array.from(formData.getAll("treatments")),
+                            insurances: Array.from(formData.getAll("insurance")),
+                            description: formData.get("description") || "",
+                            submitterName: formData.get("contact-name") || name,
+                            submitterEmail: formData.get("contact-email") || "",
+                        }),
+                    });
+
+                    if (res.ok) {
+                        const data = await res.json();
+                        const slug = data.clinic?.slug || generateSlug(name, city);
+                        if (clinicLink) clinicLink.href = `/clinic/${slug}`;
+                        if (viewClinicBtn) viewClinicBtn.href = `/clinic/${slug}`;
+                        form.classList.add("hidden");
+                        if (successMessage) successMessage.classList.remove("hidden");
+                    } else {
+                        const err = await res.json();
+                        alert(err.error || "Something went wrong. Please try again.");
+                        submitBtn.removeAttribute("disabled");
+                        submitBtn.innerHTML = originalText;
+                    }
+                } catch {
+                    alert("Network error. Please check your connection and try again.");
+                    submitBtn.removeAttribute("disabled");
+                    submitBtn.innerHTML = originalText;
+                }
+            });
+        }
     });
 </script>
 

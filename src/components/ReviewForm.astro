@@ -10,7 +10,7 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
 ---
 
 <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-    <h3 class="text-xl font-bold text-gray-900 mb-4">✍️ Write a Review</h3>
+    <h3 class="text-xl font-semibold text-gray-900 mb-4">Write a Review</h3>
     <p class="text-sm text-gray-600 mb-6">
         Share your experience to help others make informed decisions about their
         TMS treatment
@@ -126,7 +126,7 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
         <!-- Submit -->
         <button
             type="submit"
-            class="w-full py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg"
+            class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg"
         >
             Submit Review
         </button>
@@ -243,13 +243,13 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
                 reviews.push({ ...reviewData, id: Date.now().toString() });
                 localStorage.setItem("tms-reviews", JSON.stringify(reviews));
 
-                console.log("Review submitted successfully:", result);
+                // Review submitted successfully
             } else {
                 throw new Error(result.message || "Failed to submit review");
             }
         } catch (error) {
             alert("❌ Error submitting review. Please try again.");
-            console.error("Review error:", error);
+            // Review submission failed
         }
     });
 </script>

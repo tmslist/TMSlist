@@ -12,12 +12,12 @@ const description = "Find TMS treatment information tailored to your specific ne
         <section class="bg-gradient-to-br from-amber-800 via-orange-900 to-slate-900 py-20">
             <div class="container mx-auto px-6">
                 <nav class="flex text-sm text-orange-200 mb-8">
-                    <a href="/" class="hover:text-white">Home</a>
+                    <a href="/" class="hover:text-slate-900">Home</a>
                     <span class="mx-2">/</span>
-                    <span class="text-white">Patient Groups</span>
+                    <span class="text-slate-900">Patient Groups</span>
                 </nav>
                 
-                <h1 class="text-4xl md:text-6xl font-black text-white mb-6">
+                <h1 class="text-4xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-6">
                     TMS for <span class="text-amber-400">Different Patients</span>
                 </h1>
                 <p class="text-xl text-orange-100 max-w-3xl">
@@ -31,10 +31,10 @@ const description = "Find TMS treatment information tailored to your specific ne
             <div class="container mx-auto px-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {DEMOGRAPHIC_SLUGS.map(item => (
-                        <a href={`/demographic/${item.slug}/`} class="group bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:border-amber-200 transition-all">
-                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-amber-600 mb-3">{item.title}</h3>
+                        <a href={`/demographic/${item.slug}/`} class="group bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:border-amber-200 transition-all">
+                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-amber-600 mb-3">{item.title}</h3>
                             <p class="text-gray-500 text-sm mb-4">Specialized TMS information</p>
-                            <span class="text-amber-600 font-bold text-sm">Learn More →</span>
+                            <span class="text-amber-600 font-semibold text-sm">Learn More →</span>
                         </a>
                     ))}
                 </div>

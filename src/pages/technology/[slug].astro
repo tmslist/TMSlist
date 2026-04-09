@@ -47,7 +47,7 @@ const title = `${machineName} TMS Therapy Clinics - TMS List`;
     </nav>
 
     <div class="bg-indigo-50 rounded-xl p-8 mb-8 text-center">
-         <h1 class="text-3xl font-bold text-gray-900 mb-2">{machineName} Clinics</h1>
+         <h1 class="text-3xl font-semibold text-gray-900 mb-2">{machineName} Clinics</h1>
          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
             Browse all verified clinics using {machineName} technology for TMS therapy.
          </p>
@@ -60,12 +60,12 @@ const title = `${machineName} TMS Therapy Clinics - TMS List`;
                 <img src={clinic.hero_image_url} alt={clinic.name} class="w-full h-full object-cover" loading="lazy" />
             </div>
              <div class="p-6">
-                <h2 class="text-xl font-bold text-gray-900 mb-2">
+                <h2 class="text-xl font-semibold text-gray-900 mb-2">
                     <a href={`/clinic/${clinic.slug}`} class="hover:underline text-indigo-600">{clinic.name}</a>
                 </h2>
                 <div class="flex items-center mb-3">
                      <span class="text-yellow-500 mr-1">★</span>
-                     <span class="font-bold text-gray-900 mr-1">
+                     <span class="font-semibold text-gray-900 mr-1">
                         {(typeof clinic.rating === 'number' ? clinic.rating : clinic.rating.aggregate).toFixed(1)}
                      </span>
                      <span class="text-gray-500 text-sm">({clinic.review_count} reviews)</span>

@@ -12,7 +12,7 @@ const description =
             <!-- Progress Bar -->
             <div class="mb-8">
                 <div
-                    class="flex justify-between text-xs font-bold text-gray-500 mb-2 uppercase tracking-wide"
+                    class="flex justify-between text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide"
                 >
                     <span>Assessment Progress</span>
                     <span id="progress-text">0%</span>
@@ -29,7 +29,7 @@ const description =
 
             <!-- Quiz Card -->
             <div
-                class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+                class="bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 overflow-hidden"
             >
                 <!-- Intro Slide -->
                 <div
@@ -52,7 +52,7 @@ const description =
                             ></path></svg
                         >
                     </div>
-                    <h1 class="text-3xl font-black text-gray-900 mb-4">
+                    <h1 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">
                         Is TMS Right For You?
                     </h1>
                     <p class="text-lg text-gray-600 mb-8 leading-relaxed">
@@ -62,7 +62,7 @@ const description =
                     </p>
                     <button
                         onclick="nextSlide('intro', 'q1')"
-                        class="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all transform hover:-translate-y-1 shadow-lg shadow-indigo-200"
+                        class="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-all transform hover:-translate-y-1 shadow-lg shadow-indigo-200"
                     >
                         Start Assessment
                     </button>
@@ -74,10 +74,10 @@ const description =
                 <!-- Question 1: Diagnosis -->
                 <div id="slide-q1" class="quiz-slide hidden p-8 md:p-12">
                     <span
-                        class="text-indigo-600 font-bold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-indigo-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >Question 1 of 5</span
                     >
-                    <h2 class="text-2xl font-bold text-gray-900 mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-8">
                         Have you been diagnosed with Major Depressive Disorder
                         (MDD)?
                     </h2>
@@ -115,10 +115,10 @@ const description =
                 <!-- Question 2: Medication History -->
                 <div id="slide-q2" class="quiz-slide hidden p-8 md:p-12">
                     <span
-                        class="text-indigo-600 font-bold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-indigo-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >Question 2 of 5</span
                     >
-                    <h2 class="text-2xl font-bold text-gray-900 mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-8">
                         How many different antidepressants have you tried?
                     </h2>
                     <div class="space-y-3">
@@ -164,10 +164,10 @@ const description =
                 <!-- Question 3: Side Effects -->
                 <div id="slide-q3" class="quiz-slide hidden p-8 md:p-12">
                     <span
-                        class="text-indigo-600 font-bold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-indigo-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >Question 3 of 5</span
                     >
-                    <h2 class="text-2xl font-bold text-gray-900 mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-8">
                         Are you experiencing side effects from your current
                         medications?
                     </h2>
@@ -196,10 +196,10 @@ const description =
                 <!-- Question 4: Current Status -->
                 <div id="slide-q4" class="quiz-slide hidden p-8 md:p-12">
                     <span
-                        class="text-indigo-600 font-bold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-indigo-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >Question 4 of 5</span
                     >
-                    <h2 class="text-2xl font-bold text-gray-900 mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-8">
                         Do you feel your depression has adequately improved with
                         medication?
                     </h2>
@@ -228,10 +228,10 @@ const description =
                 <!-- Question 5: Insurance -->
                 <div id="slide-q5" class="quiz-slide hidden p-8 md:p-12">
                     <span
-                        class="text-indigo-600 font-bold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-indigo-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >Last Question</span
                     >
-                    <h2 class="text-2xl font-bold text-gray-900 mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-8">
                         Do you have health insurance?
                     </h2>
                     <div class="space-y-3">
@@ -262,10 +262,10 @@ const description =
                     class="quiz-slide hidden p-8 md:p-12 text-center"
                 >
                     <span
-                        class="text-indigo-600 font-bold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-indigo-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >One Last Step</span
                     >
-                    <h2 class="text-3xl font-black text-gray-900 mb-4">
+                    <h2 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">
                         Unlock Your Results
                     </h2>
                     <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto">
@@ -280,7 +280,7 @@ const description =
                     >
                         <div class="text-left">
                             <label
-                                class="block text-sm font-bold text-gray-700 mb-1"
+                                class="block text-sm font-semibold text-gray-700 mb-1"
                                 >Full Name</label
                             >
                             <input
@@ -293,7 +293,7 @@ const description =
                         </div>
                         <div class="text-left">
                             <label
-                                class="block text-sm font-bold text-gray-700 mb-1"
+                                class="block text-sm font-semibold text-gray-700 mb-1"
                                 >Email Address</label
                             >
                             <input
@@ -306,7 +306,7 @@ const description =
                         </div>
                         <div class="text-left">
                             <label
-                                class="block text-sm font-bold text-gray-700 mb-1"
+                                class="block text-sm font-semibold text-gray-700 mb-1"
                                 >Phone Number (Optional)</label
                             >
                             <input
@@ -319,7 +319,7 @@ const description =
 
                         <button
                             type="submit"
-                            class="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 flex items-center justify-center gap-2"
+                            class="w-full py-4 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 flex items-center justify-center gap-2"
                         >
                             <span>See My Results</span>
                             <svg
@@ -354,7 +354,7 @@ const description =
                                 d="M5 13l4 4L19 7"></path></svg
                         >
                     </div>
-                    <h2 class="text-3xl font-black text-gray-900 mb-4">
+                    <h2 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">
                         You Are a Strong Candidate
                     </h2>
                     <p class="text-lg text-gray-600 mb-8">
@@ -365,7 +365,7 @@ const description =
                     <div
                         class="bg-emerald-50 border border-emerald-100 rounded-xl p-4 mb-8 text-left"
                     >
-                        <h4 class="font-bold text-emerald-800 mb-2">
+                        <h4 class="font-semibold text-emerald-800 mb-2">
                             Good News:
                         </h4>
                         <ul
@@ -384,13 +384,13 @@ const description =
                     </div>
                     <a
                         href="/us/"
-                        class="block w-full px-8 py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 mb-4"
+                        class="block w-full px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 mb-4"
                     >
                         Find a Clinic Near You
                     </a>
                     <a
                         href="/insurance/"
-                        class="text-indigo-600 font-bold hover:underline"
+                        class="text-indigo-600 font-semibold hover:underline"
                         >Check Your Insurance Coverage</a
                     >
                 </div>
@@ -413,7 +413,7 @@ const description =
                             ></path></svg
                         >
                     </div>
-                    <h2 class="text-3xl font-black text-gray-900 mb-4">
+                    <h2 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">
                         You May Be a Candidate
                     </h2>
                     <p class="text-lg text-gray-600 mb-8">
@@ -429,13 +429,13 @@ const description =
                     </p>
                     <a
                         href="/specialists/"
-                        class="block w-full px-8 py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 mb-4"
+                        class="block w-full px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 mb-4"
                     >
                         Talk to a TMS Specialist
                     </a>
                     <a
                         href="/us/"
-                        class="text-gray-500 font-bold hover:text-gray-900 transition-colors"
+                        class="text-gray-500 font-semibold hover:text-gray-900 transition-colors"
                         >Browse Clinics Anyway</a
                     >
                 </div>
@@ -482,7 +482,7 @@ const description =
         const btn = document.querySelector("#quiz-lead-form button");
         const originalText = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...`;
+        btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-slate-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...`;
 
         const leadData = {
             type: "quiz-lead",
@@ -493,12 +493,20 @@ const description =
         };
 
         try {
-            // Store locally (static site - no server)
-            const localSubs = JSON.parse(localStorage.getItem("tms-submissions") || "[]");
-            localSubs.push({ ...leadData, id: `sub-${Date.now()}`, timestamp: new Date().toISOString() });
-            localStorage.setItem("tms-submissions", JSON.stringify(localSubs));
+            await fetch('/api/leads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: 'quiz_lead',
+                    name: leadData.name,
+                    email: leadData.email,
+                    phone: leadData.phone,
+                    metadata: { quizAnswers: leadData.quizAnswers },
+                    sourceUrl: window.location.href,
+                }),
+            });
         } catch (e) {
-            console.error("Submission error", e);
+            // Don't block results if API fails
         }
 
         // Show Results regardless of API success (don't block user)

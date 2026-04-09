@@ -5,26 +5,27 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#5F00C2", // User Requested Purple
-          light: "#7C3AED",
-          dark: "#4C1D95",
+          DEFAULT: "#0F172A", // Deep Navy
+          light: "#1E293B",
+          dark: "#020617",
+          accent: "#2563EB", // Clean Blue
         },
         secondary: {
-          DEFAULT: "#2a9d8f", // Calming Teal
-          light: "#3eccbc",
-          dark: "#1e756a",
+          DEFAULT: "#0891B2", // Clean Cyan
+          light: "#06B6D4",
+          dark: "#0E7490",
         },
         accent: {
-          DEFAULT: "#e76f51", // Alert Orange
-          hover: "#d65a3b",
+          DEFAULT: "#10B981", // Emerald Green
+          hover: "#059669",
         },
         surface: {
           DEFAULT: "#ffffff",
-          subtle: "#f8f9fa",
+          subtle: "#F8FAFC",
         },
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', "sans-serif"],
+        sans: ['"Inter"', "sans-serif"],
       },
     },
   },

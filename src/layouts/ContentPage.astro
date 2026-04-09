@@ -14,128 +14,105 @@ const { title, subtitle, description } = Astro.props;
 <Layout title={`${title} | TMS List`} description={description}>
     <Hero
         title={title}
-        subtitle={subtitle || "Expert guides and verified information."}
+        subtitle={subtitle || "What you need to know, without the medical jargon."}
     />
 
-    <!-- Smart Content Generator: Simulates deep content for SEO pages -->
     <main class="container mx-auto px-4 py-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <!-- Article Column -->
             <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none">
                 <p class="lead text-xl text-gray-600 mb-8">
-                    Comprehensive resources and verified information regarding <strong
-                        >{title}</strong
-                    >. This guide is designed to help patients, families, and
-                    providers navigate the complexities of Transcranial Magnetic
-                    Stimulation therapy.
+                    Everything you need to know about <strong>{title}</strong> — how it works, what it costs, and how to find a provider who actually knows what they're doing.
                 </p>
 
                 <slot>
-                    <!-- Fallback 'Massive' Content for SEO Stubs -->
+                    <!-- Fallback content for SEO pages without custom content -->
                     <div
                         class="bg-gray-50 border-l-4 border-primary p-6 mb-8 rounded-r-xl"
                     >
-                        <h3 class="text-primary font-bold mt-0">
-                            Updated for 2026
+                        <h3 class="text-primary font-semibold mt-0">
+                            Current as of 2026
                         </h3>
                         <p class="mb-0">
-                            This guide follows the latest clinical protocols and
-                            FDA clearance guidelines for {title}.
+                            This guide reflects the latest FDA clearances and clinical data for {title}.
                         </p>
                     </div>
 
-                    <h2>Understanding {title}</h2>
+                    <h2>What is {title}?</h2>
                     <p>
-                        As mental health technology evolves, <strong
-                            >{title}</strong
-                        > has emerged as a critical topic for patients seeking alternatives
-                        to traditional medication. Research indicates that personalized
-                        neuromodulation can offer significant benefits for treatment-resistant
-                        conditions.
+                        TMS uses magnetic pulses to wake up parts of the brain that aren't firing the way they should. For depression, that's usually the left dorsolateral prefrontal cortex — a region that tends to be underactive in people with treatment-resistant symptoms.
                     </p>
                     <p>
-                        Clinical studies published in major psychiatric journals
-                        demonstrate that outcomes are significantly improved
-                        when treatment is tailored to the individual's specific
-                        neural architecture.
+                        It's not experimental. The FDA cleared TMS for depression in 2008, for OCD in 2018, and for smoking cessation in 2020. Over a million treatments have been performed in the US alone.
                     </p>
 
-                    <h3>Key Benefits</h3>
+                    <h3>What to expect</h3>
                     <ul>
                         <li>
-                            <strong>Non-Invasive:</strong> No anesthesia or surgery
-                            required.
+                            <strong>No surgery, no sedation.</strong> You sit in a chair. A coil sits against your head. Sessions take 20-40 minutes.
                         </li>
                         <li>
-                            <strong>High Efficacy:</strong> 50-60% response rates
-                            in treatment-resistant cases.
+                            <strong>It works for a lot of people.</strong> About 50-60% of patients with treatment-resistant depression see meaningful improvement. Around a third achieve full remission.
                         </li>
                         <li>
-                            <strong>Minimal Side Effects:</strong> Typically limited
-                            to mild scalp discomfort.
+                            <strong>Side effects are mild.</strong> Most people report some scalp discomfort during the first few sessions. It usually fades.
                         </li>
                         <li>
-                            <strong>FDA Cleared:</strong> Safe and regulated technology.
+                            <strong>FDA-cleared and covered by most insurance.</strong> Medicare, Blue Cross, Aetna, Cigna, UnitedHealthcare — most major plans cover TMS if you meet the criteria.
                         </li>
                     </ul>
 
                     <figure>
                         <img
-                            src="https://placehold.co/800x400/e2e8f0/1e293b?text=Clinical+Environment"
-                            alt="Clinical setting"
+                            src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=400&fit=crop&auto=format"
+                            alt="A modern TMS treatment room with a patient chair and TMS device"
                             class="rounded-xl w-full shadow-lg"
+                            width="800"
+                            height="400"
+                            loading="lazy"
                         />
                         <figcaption>
-                            Modern TMS treatment rooms are designed for patient
-                            comfort.
+                            A typical TMS session — you sit in a reclining chair while the device does the work.
                         </figcaption>
                     </figure>
 
-                    <h2>How It Works</h2>
+                    <h2>Does insurance cover it?</h2>
                     <p>
-                        The biological mechanism behind {title} involves the use of
-                        focused magnetic pulses to stimulate underactive regions of
-                        the brain. For depression, this typically targets the dorsolateral
-                        prefrontal cortex (DLPFC).
-                    </p>
-
-                    <h2>Insurance and Coverage</h2>
-                    <p>
-                        Navigating insurance for {title} can be complex. Most major
-                        carriers now provide coverage if specific criteria are met,
-                        typically including:
+                        Short answer: probably, if you meet the criteria. Most plans require:
                     </p>
                     <ul>
-                        <li>Diagnosis of Major Depressive Disorder (MDD).</li>
-                        <li>Failure of 2-4 antidepressant medications.</li>
-                        <li>History of psychotherapy.</li>
+                        <li>A diagnosis of Major Depressive Disorder (MDD)</li>
+                        <li>You've tried 2-4 antidepressants that didn't work well enough</li>
+                        <li>Prior authorization from your insurance company</li>
                     </ul>
-
-                    <h2>Finding a Provider</h2>
                     <p>
-                        It is crucial to select a provider who is not only
-                        certified but also verified for {title}. Our directory
-                        filters clinics based on machine type, insurance
-                        acceptance, and patient reviews to ensure you find the
-                        highest quality care.
+                        The prior auth process can take a few days to a couple weeks. Many TMS clinics handle this for you — it's worth asking when you call.
                     </p>
+
+                    <h2>How to pick a provider</h2>
+                    <p>
+                        Not all TMS clinics are the same. Here's what matters:
+                    </p>
+                    <ul>
+                        <li><strong>The device they use.</strong> NeuroStar, BrainsWay, and MagVenture are the big three. Each has different strengths.</li>
+                        <li><strong>Who's supervising treatment.</strong> A board-certified psychiatrist should be involved in your care, not just a technician.</li>
+                        <li><strong>Patient reviews.</strong> What do other people say about the experience? That tells you more than any brochure.</li>
+                    </ul>
 
                     <div
                         class="not-prose mt-12 p-8 bg-blue-900 rounded-2xl text-white text-center"
                     >
-                        <h3 class="text-2xl font-bold mb-4">
-                            Ready to take the next step?
+                        <h3 class="text-2xl font-semibold mb-4">
+                            Ready to find a clinic?
                         </h3>
                         <p class="text-blue-100 mb-8">
-                            Find a verified clinic near you specializing in {
-                                title
-                            }.
+                            Browse verified TMS providers with real reviews and insurance info.
                         </p>
                         <a
                             href="/us/"
-                            class="inline-block bg-white text-blue-900 font-bold py-3 px-8 rounded-xl hover:bg-blue-50 transition-colors"
+                            class="inline-block bg-white text-blue-900 font-semibold py-3 px-8 rounded-xl hover:bg-blue-50 transition-colors"
                         >
-                            Browse Directory
+                            Find a Clinic Near You
                         </a>
                     </div>
                 </slot>
@@ -148,18 +125,18 @@ const { title, subtitle, description } = Astro.props;
                     class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm"
                 >
                     <h4
-                        class="font-bold text-gray-900 mb-4 uppercase text-xs tracking-wider"
+                        class="font-semibold text-gray-900 mb-4 uppercase text-xs tracking-wider"
                     >
                         Medically Reviewed By
                     </h4>
                     <div class="flex items-center gap-4">
                         <div
-                            class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold text-sm"
+                            class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm"
                         >
                             KN
                         </div>
                         <div>
-                            <div class="font-bold text-gray-900">
+                            <div class="font-semibold text-gray-900">
                                 Dr. Karan Narwal
                             </div>
                             <div class="text-xs text-gray-500">
@@ -172,7 +149,7 @@ const { title, subtitle, description } = Astro.props;
                 <!-- Related Links -->
                 <div class="bg-gray-50 p-6 rounded-2xl">
                     <h4
-                        class="font-bold text-gray-900 mb-4 uppercase text-xs tracking-wider"
+                        class="font-semibold text-gray-900 mb-4 uppercase text-xs tracking-wider"
                     >
                         Related Topics
                     </h4>
@@ -181,24 +158,47 @@ const { title, subtitle, description } = Astro.props;
                             <a
                                 href="/insurance/medicare/"
                                 class="text-gray-600 hover:text-primary transition-colors"
-                                >Medicare Guidelines</a
+                                >Does Medicare Cover TMS?</a
                             >
                         </li>
                         <li>
                             <a
                                 href="/technology/neurostar/"
                                 class="text-gray-600 hover:text-primary transition-colors"
-                                >NeuroStar Technology</a
+                                >How NeuroStar Works</a
                             >
                         </li>
                         <li>
                             <a
                                 href="/treatments/anxiety/"
                                 class="text-gray-600 hover:text-primary transition-colors"
-                                >Treatment for Anxiety</a
+                                >TMS for Anxiety</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/compare/tms-vs-medication/"
+                                class="text-gray-600 hover:text-primary transition-colors"
+                                >TMS vs. Medication</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/quiz/am-i-a-candidate/"
+                                class="text-gray-600 hover:text-primary transition-colors"
+                                >Am I a Candidate?</a
                             >
                         </li>
                     </ul>
+                </div>
+
+                <!-- Quick CTA -->
+                <div class="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">Not sure where to start?</h4>
+                    <p class="text-sm text-gray-600 mb-4">Take a 2-minute quiz to see if TMS might be right for you.</p>
+                    <a href="/quiz/am-i-a-candidate/" class="inline-block text-sm font-semibold text-primary hover:text-primary-dark transition-colors">
+                        Take the Quiz →
+                    </a>
                 </div>
             </aside>
         </div>

@@ -1,15 +1,39 @@
 ---
 import ContentPage from '../../layouts/ContentPage.astro';
+import { getCollection, render } from 'astro:content';
 import { BLOG_SLUGS } from '../../utils/seo_slugs';
 
-export function getStaticPaths() {
-  return BLOG_SLUGS.map(({ slug, title }) => ({
-    params: { slug },
-    props: { title },
+export async function getStaticPaths() {
+  const entries = await getCollection('blog');
+
+  const contentPaths = entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { title: entry.data.title, description: entry.data.description, hasContent: true, entry },
   }));
+
+  const contentSlugsSet = new Set(contentPaths.map(p => p.params.slug));
+  const fallbackPaths = BLOG_SLUGS
+    .filter(({ slug }) => !contentSlugsSet.has(slug))
+    .map(({ slug, title }) => ({
+      params: { slug },
+      props: { title, description: '', hasContent: false, entry: null },
+    }));
+
+  return [...contentPaths, ...fallbackPaths];
 }
 
-const { title } = Astro.props;
+const { title, description, hasContent, entry } = Astro.props;
+let Content: any = null;
+if (hasContent && entry) {
+  const rendered = await render(entry);
+  Content = rendered.Content;
+}
 ---
 
-<ContentPage title={title} subtitle="Expert insights and latest updates on TMS therapy." />
+<ContentPage
+  title={title}
+  subtitle={description || "Expert insights and evidence-based information on TMS therapy."}
+  description={description}
+>
+  {Content ? <Content /> : null}
+</ContentPage>

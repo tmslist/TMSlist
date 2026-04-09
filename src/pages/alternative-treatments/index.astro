@@ -12,13 +12,13 @@ const description = "Explore alternatives to TMS therapy including Spravato (esk
         <section class="bg-gradient-to-br from-purple-900 via-indigo-900 to-slate-900 py-16 md:py-24">
             <div class="container mx-auto px-4 md:px-6">
                 <nav class="flex text-sm text-purple-200 mb-8">
-                    <a href="/" class="hover:text-white">Home</a>
+                    <a href="/" class="hover:text-slate-900">Home</a>
                     <span class="mx-2">/</span>
-                    <span class="text-white">Alternative Treatments</span>
+                    <span class="text-slate-900">Alternative Treatments</span>
                 </nav>
                 
                 <div class="max-w-3xl">
-                    <h1 class="text-3xl md:text-5xl font-black text-white mb-6">
+                    <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
                         Alternative <span class="text-purple-400">Treatments</span>
                     </h1>
                     <p class="text-lg text-purple-100 leading-relaxed">
@@ -34,30 +34,30 @@ const description = "Explore alternatives to TMS therapy including Spravato (esk
             <div class="container mx-auto px-4 md:px-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {ALTERNATIVE_TREATMENTS.map((treatment) => (
-                        <article class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all">
+                        <article class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all">
                             <div class="p-6">
                                 <div class="flex items-center gap-2 mb-4">
                                     {treatment.fdaApproved ? (
-                                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full">FDA Approved</span>
+                                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">FDA Approved</span>
                                     ) : (
-                                        <span class="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">Off-Label / Emerging</span>
+                                        <span class="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Off-Label / Emerging</span>
                                     )}
                                 </div>
                                 
-                                <h2 class="text-2xl font-bold text-gray-900 mb-2">{treatment.name}</h2>
+                                <h2 class="text-2xl font-semibold text-gray-900 mb-2">{treatment.name}</h2>
                                 <p class="text-sm text-indigo-600 font-medium mb-4">{treatment.fullName}</p>
                                 <p class="text-gray-600 text-sm mb-6">{treatment.description}</p>
                                 
                                 <div class="space-y-3 mb-6">
                                     <div class="flex items-start gap-3">
-                                        <span class="text-gray-400 text-sm">⏱️</span>
+                                        <svg class="w-4 h-4 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                         <div>
                                             <div class="text-xs text-gray-400">Session Duration</div>
                                             <div class="text-sm text-gray-700">{treatment.sessionDuration}</div>
                                         </div>
                                     </div>
                                     <div class="flex items-start gap-3">
-                                        <span class="text-gray-400 text-sm">💳</span>
+                                        <svg class="w-4 h-4 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
                                         <div>
                                             <div class="text-xs text-gray-400">Insurance</div>
                                             <div class="text-sm text-gray-700">{treatment.insuranceCoverage}</div>
@@ -71,7 +71,7 @@ const description = "Explore alternatives to TMS therapy including Spravato (esk
                                     ))}
                                 </div>
                                 
-                                <a href={`/alternative-treatments/${treatment.slug}/`} class="block w-full text-center py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors">
+                                <a href={`/alternative-treatments/${treatment.slug}/`} class="block w-full text-center py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-colors">
                                     Learn More
                                 </a>
                             </div>
@@ -84,21 +84,21 @@ const description = "Explore alternatives to TMS therapy including Spravato (esk
         <!-- Comparison Table -->
         <section class="py-12 md:py-16 bg-white">
             <div class="container mx-auto px-4 md:px-6">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-10 text-center">TMS vs Alternative Treatments</h2>
+                <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-10 text-center">TMS vs Alternative Treatments</h2>
                 
                 <div class="overflow-x-auto">
                     <table class="w-full min-w-[600px]">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="text-left p-4 font-bold text-gray-900">Treatment</th>
-                                <th class="text-left p-4 font-bold text-gray-900">FDA Status</th>
-                                <th class="text-left p-4 font-bold text-gray-900">Session Time</th>
-                                <th class="text-left p-4 font-bold text-gray-900">Insurance</th>
+                                <th class="text-left p-4 font-semibold text-gray-900">Treatment</th>
+                                <th class="text-left p-4 font-semibold text-gray-900">FDA Status</th>
+                                <th class="text-left p-4 font-semibold text-gray-900">Session Time</th>
+                                <th class="text-left p-4 font-semibold text-gray-900">Insurance</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="border-b border-gray-100 bg-indigo-50">
-                                <td class="p-4 text-gray-900 font-bold">TMS Therapy</td>
+                                <td class="p-4 text-gray-900 font-semibold">TMS Therapy</td>
                                 <td class="p-4 text-emerald-600">✓ FDA Approved</td>
                                 <td class="p-4 text-gray-600">19-37 minutes</td>
                                 <td class="p-4 text-gray-600">Most insurances</td>

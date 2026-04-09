@@ -18,7 +18,7 @@ Greenbrook TMS offers a highly standardized, FDA-cleared treatment path ideal fo
 
 | Feature | Verdict at Greenbrook TMS Dallas |
 | :--- | :--- |
-| **Overall Rating** | ⭐⭐⭐⭐½ (4.5/5) |
+| **Overall Rating** | 4.5/5 |
 | **Machine Used** | **NeuroStar** (FDA-Cleared) |
 | **Insurance** | Excellent (Accepts Medicare, BCBS, UHC, Aetna, Cigna) |
 | **Best For** | Patients seeking established, protocol-driven care with maximum insurance coverage. |

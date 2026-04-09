@@ -102,7 +102,7 @@ const schema = JSON.stringify({
                     <!-- Doctor Image -->
                     <div class="relative flex-shrink-0">
                         <div
-                            class="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border-4 border-white/20 shadow-2xl"
+                            class="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border-4 border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
                         >
                             <img
                                 src={imageUrl}
@@ -111,7 +111,7 @@ const schema = JSON.stringify({
                             />
                         </div>
                         <div
-                            class="absolute -bottom-3 -right-3 px-4 py-2 bg-indigo-600 text-white text-sm font-bold rounded-xl shadow-lg"
+                            class="absolute -bottom-3 -right-3 px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-xl shadow-lg"
                         >
                             {yearsExperience}+ Years
                         </div>
@@ -120,7 +120,7 @@ const schema = JSON.stringify({
                     <!-- Doctor Info -->
                     <div class="text-center md:text-left flex-1">
                         <h1
-                            class="text-3xl md:text-5xl font-black text-white mb-3 tracking-tight"
+                            class="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-3 tracking-tight"
                         >
                             {fullName}
                         </h1>
@@ -130,8 +130,8 @@ const schema = JSON.stringify({
 
                         {
                             school && (
-                                <p class="text-slate-400 mb-4">
-                                    <span class="text-slate-500">🎓</span>{" "}
+                                <p class="text-slate-500 mb-4">
+                                    <span class="text-slate-500">Education:</span>{" "}
                                     {school}
                                 </p>
                             )
@@ -142,7 +142,7 @@ const schema = JSON.stringify({
                         >
                             {
                                 specialties.map((spec: string) => (
-                                    <span class="px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-white text-sm">
+                                    <span class="px-4 py-1.5 bg-white/10 border border-slate-200 rounded-full text-slate-900 text-sm">
                                         {spec}
                                     </span>
                                 ))
@@ -151,8 +151,8 @@ const schema = JSON.stringify({
 
                         {
                             clinic && (
-                                <div class="flex items-center justify-center md:justify-start gap-3 text-slate-300">
-                                    <span>🏥</span>
+                                <div class="flex items-center justify-center md:justify-start gap-3 text-slate-600">
+                                    <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                                     <a
                                         href={`/clinic/${clinic.slug}/`}
                                         class="hover:text-indigo-400 transition-colors underline underline-offset-2"
@@ -184,7 +184,7 @@ const schema = JSON.stringify({
                     <div
                         class="bg-white rounded-2xl p-8 shadow-lg border border-slate-100"
                     >
-                        <h2 class="text-2xl font-bold text-slate-800 mb-4">
+                        <h2 class="text-2xl font-semibold text-slate-800 mb-4">
                             About {doctor.first_name || fullName.split(" ")[0]}
                         </h2>
                         <p class="text-slate-600 leading-relaxed">
@@ -209,7 +209,7 @@ const schema = JSON.stringify({
                     <div
                         class="bg-white rounded-2xl p-8 shadow-lg border border-slate-100"
                     >
-                        <h2 class="text-2xl font-bold text-slate-800 mb-6">
+                        <h2 class="text-2xl font-semibold text-slate-800 mb-6">
                             Areas of Expertise
                         </h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -244,7 +244,7 @@ const schema = JSON.stringify({
                     {
                         clinic && (
                             <div class="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
-                                <h2 class="text-2xl font-bold text-slate-800 mb-6">
+                                <h2 class="text-2xl font-semibold text-slate-800 mb-6">
                                     Practice Location
                                 </h2>
                                 <a
@@ -252,11 +252,11 @@ const schema = JSON.stringify({
                                     class="block group"
                                 >
                                     <div class="flex items-start gap-4 p-6 bg-gradient-to-br from-indigo-50 to-cyan-50 rounded-xl border border-indigo-100 group-hover:shadow-md transition-all">
-                                        <div class="w-16 h-16 bg-indigo-600 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0">
-                                            🏥
+                                        <div class="w-16 h-16 bg-indigo-600 rounded-xl flex items-center justify-center text-white flex-shrink-0">
+                                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                                         </div>
                                         <div>
-                                            <h3 class="text-lg font-bold text-slate-800 group-hover:text-indigo-600 transition-colors mb-1">
+                                            <h3 class="text-lg font-semibold text-slate-800 group-hover:text-indigo-600 transition-colors mb-1">
                                                 {clinic.name}
                                             </h3>
                                             <p class="text-slate-600 text-sm mb-2">
@@ -281,7 +281,7 @@ const schema = JSON.stringify({
                     <div
                         class="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 sticky top-24"
                     >
-                        <h3 class="text-xl font-bold text-slate-800 mb-4">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4">
                             Request a Consultation
                         </h3>
                         <form id="contact-form" class="space-y-4">
@@ -337,7 +337,7 @@ const schema = JSON.stringify({
                             </div>
                             <button
                                 type="submit"
-                                class="w-full py-3 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold rounded-xl hover:from-indigo-500 hover:to-cyan-500 transition-all shadow-lg shadow-indigo-500/30"
+                                class="w-full py-3 bg-gradient-to-r from-indigo-600 to-cyan-600 text-slate-900 font-semibold rounded-xl hover:from-indigo-500 hover:to-cyan-500 transition-all shadow-lg shadow-indigo-500/30"
                             >
                                 Send Request
                             </button>
@@ -389,19 +389,28 @@ const schema = JSON.stringify({
             };
 
             try {
-                // Store locally (static site - no server)
-                const localSubs = JSON.parse(localStorage.getItem("tms-submissions") || "[]");
-                localSubs.push({ ...data, id: `sub-${Date.now()}` });
-                localStorage.setItem("tms-submissions", JSON.stringify(localSubs));
+                const res = await fetch('/api/leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type: 'specialist_enquiry',
+                        name: data.name,
+                        email: data.email,
+                        phone: data.phone,
+                        message: data.message,
+                        doctorName: data.doctorName,
+                        clinicName: data.clinicName,
+                        sourceUrl: window.location.href,
+                    }),
+                });
 
-                if (true) {
+                if (res.ok) {
                     form.style.display = "none";
                     successMsg?.classList.remove("hidden");
                 } else {
                     alert("Something went wrong. Please try again.");
                 }
             } catch (err) {
-                console.error("Error submitting form:", err);
                 alert("Something went wrong. Please try again.");
             }
         });

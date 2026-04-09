@@ -203,27 +203,27 @@ export const ALL_CONDITIONS = Object.values(CONDITION_CATEGORIES).flatMap(cat =>
 // ACCESSIBILITY & INCLUSIVITY FILTERS
 // ============================================
 export const ACCESSIBILITY_FILTERS = [
-    { key: 'lgbtq_friendly', label: 'LGBTQ+ Friendly', icon: '🏳️‍🌈' },
-    { key: 'lgbtq_owned', label: 'LGBTQ+ Owned', icon: '🏳️‍🌈' },
-    { key: 'bipoc_owned', label: 'BIPOC Owned', icon: '✊🏿' },
-    { key: 'veteran_friendly', label: 'Veteran Friendly', icon: '🎖️' },
-    { key: 'wheelchair_accessible', label: 'Wheelchair Accessible', icon: '♿' },
-    { key: 'spanish_speaking', label: 'Spanish Speaking', icon: '🇪🇸' },
-    { key: 'multilingual', label: 'Multilingual Staff', icon: '🌐' },
-    { key: 'sensory_friendly', label: 'Sensory Friendly', icon: '🧠' },
-    { key: 'trauma_informed', label: 'Trauma-Informed Care', icon: '💜' },
+    { key: 'lgbtq_friendly', label: 'LGBTQ+ Friendly', icon: '' },
+    { key: 'lgbtq_owned', label: 'LGBTQ+ Owned', icon: '' },
+    { key: 'bipoc_owned', label: 'BIPOC Owned', icon: '' },
+    { key: 'veteran_friendly', label: 'Veteran Friendly', icon: '' },
+    { key: 'wheelchair_accessible', label: 'Wheelchair Accessible', icon: '' },
+    { key: 'spanish_speaking', label: 'Spanish Speaking', icon: '' },
+    { key: 'multilingual', label: 'Multilingual Staff', icon: '' },
+    { key: 'sensory_friendly', label: 'Sensory Friendly', icon: '' },
+    { key: 'trauma_informed', label: 'Trauma-Informed Care', icon: '' },
 ];
 
 // ============================================
 // AVAILABILITY FILTERS
 // ============================================
 export const AVAILABILITY_FILTERS = [
-    { key: 'accepting_new_patients', label: 'Accepting New Patients', icon: '✅' },
-    { key: 'same_week_available', label: 'Same Week Availability', icon: '⚡' },
-    { key: 'evening_hours', label: 'Evening Hours', icon: '🌙' },
-    { key: 'weekend_hours', label: 'Weekend Hours', icon: '📅' },
-    { key: 'telehealth_consults', label: 'Telehealth Consults', icon: '💻' },
-    { key: 'virtual_followups', label: 'Virtual Follow-ups', icon: '📱' },
+    { key: 'accepting_new_patients', label: 'Accepting New Patients', icon: '' },
+    { key: 'same_week_available', label: 'Same Week Availability', icon: '' },
+    { key: 'evening_hours', label: 'Evening Hours', icon: '' },
+    { key: 'weekend_hours', label: 'Weekend Hours', icon: '' },
+    { key: 'telehealth_consults', label: 'Telehealth Consults', icon: '' },
+    { key: 'virtual_followups', label: 'Virtual Follow-ups', icon: '' },
 ];
 
 // ============================================
@@ -239,10 +239,10 @@ export const PRICE_RANGE_OPTIONS = [
 // PRICING FILTERS
 // ============================================
 export const PRICING_FILTERS = [
-    { key: 'free_consultation', label: 'Free Consultation', icon: '🆓' },
-    { key: 'payment_plans', label: 'Payment Plans', icon: '💳' },
-    { key: 'accepts_insurance', label: 'Accepts Insurance', icon: '🏥' },
-    { key: 'cash_discount', label: 'Cash Discount', icon: '💵' },
+    { key: 'free_consultation', label: 'Free Consultation', icon: '' },
+    { key: 'payment_plans', label: 'Payment Plans', icon: '' },
+    { key: 'accepts_insurance', label: 'Accepts Insurance', icon: '' },
+    { key: 'cash_discount', label: 'Cash Discount', icon: '' },
 ];
 
 // ============================================
