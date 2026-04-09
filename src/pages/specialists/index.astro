@@ -14,12 +14,14 @@ interface Doctor {
     yearsExperience: number;
     specialties: string[];
     bioFocus: string;
+    bio: string;
     imageUrl: string;
     clinicName: string;
     clinicSlug: string;
     clinicCity: string;
     clinicState: string;
     clinicPhone?: string;
+    clinicImage: string;
 }
 
 const doctorMap = new Map<string, Doctor>();
@@ -43,12 +45,14 @@ clinicsData.forEach((clinic: any) => {
                     yearsExperience: doc.years_experience || 0,
                     specialties: doc.specialties || [],
                     bioFocus: doc.bio_focus || "",
+                    bio: doc.bio || "",
                     imageUrl: doc.image_url || "/images/doctor-placeholder.jpg",
                     clinicName: clinic.name,
                     clinicSlug: clinic.slug,
                     clinicCity: clinic.city,
                     clinicState: clinic.state,
                     clinicPhone: clinic.phone,
+                    clinicImage: clinic.hero_image_url || "",
                 });
             }
         });
@@ -174,65 +178,50 @@ const schema = JSON.stringify({
 ]}>
     <main class="bg-gray-50 min-h-screen">
         <!-- Hero -->
-        <section
-            class="bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 py-16 md:py-24"
-        >
-            <div class="container mx-auto px-4 md:px-6">
-                <nav class="flex text-sm text-cyan-200 mb-8">
-                    <a href="/" class="hover:text-slate-900">Home</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-slate-900">Find a Specialist</span>
+        <section class="relative bg-white pt-16 pb-20 border-b border-slate-100 overflow-hidden">
+            <div class="absolute inset-x-0 top-0 h-[400px] bg-gradient-to-b from-blue-50/50 to-white/0 pointer-events-none"></div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <nav class="flex text-xs font-semibold tracking-widest uppercase text-slate-400 mb-10" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-2">
+                        <li><a href="/" class="hover:text-blue-600 transition-colors">Home</a></li>
+                        <li><span class="mx-2 text-slate-300">/</span></li>
+                        <li class="text-slate-600">Find a Specialist</li>
+                    </ol>
                 </nav>
 
-                <div
-                    class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8"
-                >
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-12">
                     <div class="max-w-2xl">
-                        <span
-                            class="inline-flex items-center gap-2 px-4 py-1 bg-cyan-500/20 text-cyan-400 text-sm font-semibold rounded-full mb-6"
-                        >
-                            <span
-                                class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"
-                            ></span>
-                            Board Certified • Experienced Providers
+                        <span class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-100 text-emerald-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            Board Certified Providers
                         </span>
-                        <h1
-                            class="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-4"
-                        >
-                            Find TMS Specialists
+                        
+                        <h1 class="text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
+                            Find TMS <span class="text-blue-600">Specialists</span>
                         </h1>
-                        <p class="text-lg text-cyan-100">
-                            {doctors.length} verified TMS therapy specialists across
+                        <p class="text-xl text-slate-500 font-light leading-relaxed">
+                            Browse {doctors.length} verified TMS therapy specialists across
                             {Object.keys(stateGroups).length} states. Find experienced
-                            doctors specializing in depression, anxiety, OCD, and
-                            more.
+                            doctors specializing in depression, anxiety, OCD, and more.
                         </p>
                     </div>
 
                     <div class="flex gap-4 flex-wrap">
-                        <div
-                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-slate-200 text-center"
-                        >
-                            <div class="text-3xl font-semibold tracking-tight text-slate-900">
-                                {doctors.length}
-                            </div>
-                            <div class="text-sm text-cyan-200">Specialists</div>
+                        <div class="bg-white rounded-3xl border border-slate-100 p-6 shadow-[0_4px_20px_rgb(0,0,0,0.02)] text-center min-w-[120px]">
+                            <div class="text-3xl font-bold tracking-tight text-slate-900">{doctors.length}</div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Specialists</div>
                         </div>
-                        <div
-                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-slate-200 text-center"
-                        >
-                            <div class="text-3xl font-semibold tracking-tight text-slate-900">
-                                {Object.keys(stateGroups).length}
-                            </div>
-                            <div class="text-sm text-cyan-200">States</div>
+                        <div class="bg-white rounded-3xl border border-slate-100 p-6 shadow-[0_4px_20px_rgb(0,0,0,0.02)] text-center min-w-[120px]">
+                            <div class="text-3xl font-bold tracking-tight text-slate-900">{Object.keys(stateGroups).length}</div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">States</div>
                         </div>
-                        <div
-                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-slate-200 text-center"
-                        >
-                            <div class="text-3xl font-semibold tracking-tight text-cyan-400">
-                                {allSpecialties.length}+
-                            </div>
-                            <div class="text-sm text-cyan-200">Specialties</div>
+                        <div class="bg-white rounded-3xl border border-slate-100 p-6 shadow-[0_4px_20px_rgb(0,0,0,0.02)] text-center min-w-[120px]">
+                            <div class="text-3xl font-bold tracking-tight text-blue-600">{allSpecialties.length}+</div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Conditions</div>
                         </div>
                     </div>
                 </div>
@@ -506,100 +495,83 @@ const schema = JSON.stringify({
                                                 }
                                                 data-title={doctor.title.toLowerCase()}
                                             >
-                                                <div class="p-6">
+                                                {/* Clinic banner image */}
+                                                {doctor.clinicImage && !doctor.clinicImage.includes('tms_chair') && (
+                                                    <div class="h-24 overflow-hidden relative">
+                                                        <img src={doctor.clinicImage} alt={`${doctor.clinicName}`} class="w-full h-full object-cover" loading="lazy" />
+                                                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white/90"></div>
+                                                    </div>
+                                                )}
+                                                <div class={`p-6 ${doctor.clinicImage && !doctor.clinicImage.includes('tms_chair') ? '-mt-6 relative z-10' : ''}`}>
                                                     <div class="flex items-start gap-4 mb-4">
-                                                        <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border border-gray-100 bg-gray-50">
+                                                        <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-md bg-gray-50">
                                                             {doctor.imageUrl &&
-                                                            !doctor.imageUrl.includes(
-                                                                "placeholder",
-                                                            ) ? (
+                                                            !doctor.imageUrl.includes("placeholder") &&
+                                                            !doctor.imageUrl.includes("tms_doctor") ? (
                                                                 <img
-                                                                    src={
-                                                                        doctor.imageUrl
-                                                                    }
-                                                                    alt={
-                                                                        doctor.fullName
-                                                                    }
+                                                                    src={doctor.imageUrl}
+                                                                    alt={`${doctor.fullName} - TMS specialist in ${doctor.clinicCity}`}
                                                                     class="w-full h-full object-cover"
                                                                     loading="lazy"
                                                                     width="64"
                                                                     height="64"
                                                                 />
                                                             ) : (
-                                                                <div class="w-full h-full bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-slate-900 text-xl font-semibold">
-                                                                    {doctor.firstName.charAt(
-                                                                        0,
-                                                                    )}
-                                                                    {doctor.lastName.charAt(
-                                                                        0,
-                                                                    )}
-                                                                </div>
+                                                                <img
+                                                                    src={`https://ui-avatars.com/api/?name=${encodeURIComponent(doctor.fullName)}&background=0891b2&color=fff&size=128&bold=true`}
+                                                                    alt={`${doctor.fullName} - TMS specialist`}
+                                                                    class="w-full h-full object-cover"
+                                                                    loading="lazy"
+                                                                    width="64"
+                                                                    height="64"
+                                                                />
                                                             )}
                                                         </div>
                                                         <div class="flex-1 min-w-0">
                                                             <h3 class="text-lg font-semibold text-gray-900 truncate">
-                                                                {
-                                                                    doctor.fullName
-                                                                }
+                                                                {doctor.fullName}
                                                             </h3>
                                                             <p class="text-cyan-600 text-sm font-medium">
                                                                 {doctor.title}
                                                             </p>
                                                             <p class="text-gray-500 text-sm">
-                                                                {" "}
-                                                                {
-                                                                    doctor.clinicCity
-                                                                }
-                                                                ,{" "}
-                                                                {
-                                                                    doctor.clinicState
-                                                                }
+                                                                {doctor.clinicCity}, {doctor.clinicState}
                                                             </p>
                                                         </div>
                                                     </div>
 
-                                                    <div class="flex items-center gap-2 mb-3">
-                                                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 text-xs font-semibold rounded-full">
-                                                            ✓ Verified
+                                                    <div class="flex flex-wrap items-center gap-2 mb-3">
+                                                        <span class="px-2.5 py-0.5 bg-cyan-100 text-cyan-700 text-xs font-semibold rounded-full">
+                                                            Verified
                                                         </span>
-                                                        {doctor.yearsExperience >
-                                                            0 && (
-                                                            <span class="text-sm text-gray-500">
-                                                                {
-                                                                    doctor.yearsExperience
-                                                                }
-                                                                + years exp.
+                                                        {doctor.yearsExperience > 0 && (
+                                                            <span class="text-xs text-gray-500">
+                                                                {doctor.yearsExperience}+ years
+                                                            </span>
+                                                        )}
+                                                        {doctor.school && (
+                                                            <span class="text-xs text-gray-500 truncate max-w-[140px]" title={doctor.school}>
+                                                                {doctor.school}
                                                             </span>
                                                         )}
                                                     </div>
 
-                                                    {doctor.school && (
-                                                        <p class="text-gray-600 text-sm mb-3">
-                                                            {doctor.school}
-                                                        </p>
+                                                    {/* Bio snippet */}
+                                                    {doctor.bio && (
+                                                        <p class="text-gray-500 text-sm mb-3 line-clamp-2">{doctor.bio}</p>
                                                     )}
 
                                                     <div class="flex flex-wrap gap-1.5 mb-4">
                                                         {doctor.specialties
                                                             .slice(0, 3)
-                                                            .map(
-                                                                (
-                                                                    spec: string,
-                                                                ) => (
-                                                                    <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded">
-                                                                        {spec}
-                                                                    </span>
-                                                                ),
-                                                            )}
-                                                        {doctor.specialties
-                                                            .length > 3 && (
+                                                            .map((spec: string) => (
+                                                                <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded">
+                                                                    {spec}
+                                                                </span>
+                                                            ))}
+                                                        {doctor.specialties.length > 3 && (
                                                             <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded">
-                                                                +
-                                                                {doctor
-                                                                    .specialties
-                                                                    .length -
-                                                                    3}{" "}
-                                                                more
+                                                                +{doctor.specialties.length - 3} more
                                                             </span>
                                                         )}
                                                     </div>
@@ -607,22 +579,15 @@ const schema = JSON.stringify({
                                                     <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
                                                         <a
                                                             href={`/clinic/${doctor.clinicSlug}/`}
-                                                            class="text-sm text-gray-400 hover:text-cyan-600"
+                                                            class="text-sm text-gray-400 hover:text-cyan-600 truncate max-w-[55%]"
                                                         >
-                                                            At{" "}
-                                                            {doctor.clinicName
-                                                                .length > 20
-                                                                ? doctor.clinicName.substring(
-                                                                      0,
-                                                                      20,
-                                                                  ) + "..."
-                                                                : doctor.clinicName}
+                                                            at {doctor.clinicName}
                                                         </a>
                                                         <a
                                                             href={`/doctor/${doctor.slug}/`}
-                                                            class="text-cyan-600 font-semibold text-sm hover:text-cyan-700"
+                                                            class="px-3 py-1.5 bg-cyan-600 text-white font-semibold text-sm rounded-lg hover:bg-cyan-700 transition-colors"
                                                         >
-                                                            View Profile →
+                                                            View Profile
                                                         </a>
                                                     </div>
                                                 </div>
@@ -637,8 +602,27 @@ const schema = JSON.stringify({
             </div>
         </section>
 
+        <!-- SEO Content Section -->
+        <section class="py-16 bg-white border-t border-gray-100">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl font-semibold text-gray-900 mb-8">Finding the Right TMS Specialist</h2>
+                <div class="prose prose-lg max-w-none text-gray-600">
+                    <p>Our directory features {doctors.length} board-certified TMS specialists across {Object.keys(stateGroups).length} states. Each provider has been verified and brings specialized expertise in Transcranial Magnetic Stimulation therapy for conditions including depression, anxiety, OCD, PTSD, and more.</p>
+                    <h3>What Makes a Great TMS Specialist?</h3>
+                    <p>The best TMS specialists combine psychiatric expertise with hands-on neuromodulation experience. Look for providers who have treated hundreds of patients, use FDA-cleared TMS technology, and take a personalized approach to treatment planning. Many of our listed specialists have completed advanced training at institutions like Stanford, UCLA, Johns Hopkins, and Columbia.</p>
+                    <h3>Explore More</h3>
+                    <ul>
+                        <li><a href="/treatments/">Conditions Treated with TMS</a> — depression, anxiety, OCD, PTSD and more</li>
+                        <li><a href="/technology/">Compare TMS Devices</a> — NeuroStar, BrainsWay, MagVenture</li>
+                        <li><a href="/insurance/">Insurance Coverage Guides</a> — plan-specific details</li>
+                        <li><a href="/quiz/am-i-a-candidate/">Am I a Candidate?</a> — take the 2-minute eligibility quiz</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <!-- CTA Section -->
-        <section class="py-12 bg-white border-t border-gray-100">
+        <section class="py-12 bg-gray-50 border-t border-gray-100">
             <div class="container mx-auto px-4 md:px-6 text-center">
                 <p class="text-gray-500 text-sm max-w-2xl mx-auto">
                     Are you a TMS specialist? <a

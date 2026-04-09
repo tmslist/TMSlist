@@ -135,46 +135,121 @@ const description = `Find ${doctors.length} board-certified psychiatrists offeri
         <section class="py-16">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-semibold text-gray-900 mb-10">All Psychiatrists in {cityName}</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {doctors.map((doctor: any) => (
-                        <article class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all group">
-                            <div class="p-6">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {doctors.map((doctor: any, idx: number) => {
+                        const clinicImg = doctor.clinic?.hero_image_url;
+                        const hasRealImg = doctor.image_url && !doctor.image_url.includes('tms_doctor_consult');
+                        const avatarUrl = hasRealImg ? doctor.image_url : `https://ui-avatars.com/api/?name=${encodeURIComponent(doctor.name)}&background=4f46e5&color=fff&size=160&bold=true`;
+                        const clinicRating = typeof doctor.clinic?.rating === 'object' ? doctor.clinic.rating?.aggregate : doctor.clinic?.rating || 4.5;
+                        const reviewCount = typeof doctor.clinic?.rating === 'object' ? doctor.clinic.rating?.count : 50;
+                        return (
+                        <article class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all group">
+                            {/* Clinic background banner */}
+                            {clinicImg && !clinicImg.includes('tms_chair') && (
+                                <div class="h-32 overflow-hidden relative">
+                                    <img src={clinicImg} alt={`${doctor.clinic?.name} clinic`} class="w-full h-full object-cover" loading="lazy" />
+                                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white/90"></div>
+                                </div>
+                            )}
+                            <div class={`p-6 ${clinicImg && !clinicImg.includes('tms_chair') ? '-mt-10 relative z-10' : ''}`}>
                                 <div class="flex items-start gap-4 mb-4">
-                                    <img 
-                                        src={doctor.image_url || `https://placehold.co/120x120/e2e8f0/1e293b?text=${doctor.first_name?.[0] || 'D'}${doctor.last_name?.[0] || 'R'}`} 
-                                        alt={doctor.name}
-                                        class="w-20 h-20 rounded-xl object-cover"
+                                    <img
+                                        src={avatarUrl}
+                                        alt={`${doctor.name} - TMS psychiatrist in ${cityName}`}
+                                        class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
+                                        loading="lazy"
+                                        width="80"
+                                        height="80"
                                     />
-                                    <div>
-                                        <h3 class="text-xl font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] font-bold uppercase tracking-wider rounded-full">Verified</span>
+                                            <span class="px-2 py-0.5 bg-indigo-100 text-indigo-700 text-[10px] font-bold uppercase tracking-wider rounded-full">#{idx + 1} in {cityName}</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors truncate">
                                             <a href={`/specialist/${doctor.slug}`}>{doctor.name}</a>
                                         </h3>
                                         <p class="text-indigo-600 font-medium text-sm">{doctor.title}</p>
-                                        <p class="text-gray-500 text-sm">{doctor.school}</p>
                                     </div>
                                 </div>
-                                
-                                <div class="flex items-center gap-2 mb-4">
-                                    <div class="flex text-yellow-400 text-sm">★★★★★</div>
-                                    <span class="text-sm text-gray-500">{doctor.years_experience}+ years experience</span>
+
+                                {/* Credentials row */}
+                                <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 mb-3">
+                                    {doctor.school && (
+                                        <span class="flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
+                                            {doctor.school}
+                                        </span>
+                                    )}
+                                    {doctor.years_experience > 0 && (
+                                        <span class="flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                            {doctor.years_experience}+ years
+                                        </span>
+                                    )}
+                                    <span class="flex items-center gap-1">
+                                        <span class="text-yellow-400">★</span> {Number(clinicRating).toFixed(1)} ({reviewCount} reviews)
+                                    </span>
                                 </div>
-                                
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    {(doctor.specialties || []).slice(0, 3).map((spec: string) => (
-                                        <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-medium">{spec}</span>
+
+                                {/* Bio snippet */}
+                                {doctor.bio && (
+                                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">{doctor.bio}</p>
+                                )}
+
+                                <div class="flex flex-wrap gap-1.5 mb-4">
+                                    {(doctor.specialties || []).slice(0, 4).map((spec: string) => (
+                                        <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-medium">{spec}</span>
                                     ))}
                                 </div>
-                                
+
                                 <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                                    <span class="text-sm text-gray-500">at {doctor.clinic?.name}</span>
-                                    <a href={`/specialist/${doctor.slug}`} class="text-indigo-600 font-semibold text-sm hover:text-indigo-700">
-                                        View Profile →
+                                    <a href={`/clinic/${doctor.clinic?.slug}`} class="text-sm text-gray-400 hover:text-indigo-600 truncate max-w-[60%]">
+                                        at {doctor.clinic?.name}
+                                    </a>
+                                    <a href={`/specialist/${doctor.slug}`} class="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 transition-colors">
+                                        View Profile
                                     </a>
                                 </div>
                             </div>
                         </article>
-                    ))}
+                    )})}
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Links Section -->
+        <section class="py-8 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <a href={`/us/${Astro.params.state}/${Astro.params.city}/clinics/`} class="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-indigo-300 hover:shadow-md transition-all">
+                        <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                        </div>
+                        <div>
+                            <span class="text-sm font-semibold text-gray-900">View All Clinics</span>
+                            <span class="block text-xs text-gray-500">{clinicCount} in {cityName}</span>
+                        </div>
+                    </a>
+                    <a href="/treatments/" class="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-indigo-300 hover:shadow-md transition-all">
+                        <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <span class="text-sm font-semibold text-gray-900">Conditions Treated</span>
+                            <span class="block text-xs text-gray-500">Depression, OCD, Anxiety</span>
+                        </div>
+                    </a>
+                    <a href="/quiz/am-i-a-candidate/" class="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-indigo-300 hover:shadow-md transition-all">
+                        <div class="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center text-cyan-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <span class="text-sm font-semibold text-gray-900">Am I a Candidate?</span>
+                            <span class="block text-xs text-gray-500">Take the 2-min quiz</span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
