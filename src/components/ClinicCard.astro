@@ -115,7 +115,7 @@ const isVerified = clinic.verified;
                         stroke-width="2"
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
                 >
-                {clinic.city}, {clinic.state}{clinic.country && clinic.country !== 'US' ? ` ${COUNTRY_FLAGS[clinic.country] || ''}` : ''}
+                {clinic.city}, {clinic.state}{clinic.country && clinic.country !== 'US' ? <span role="img" aria-label={clinic.country}>{` ${COUNTRY_FLAGS[clinic.country] || ''}`}</span> : ''}
             </p>
         </div>
     </div>
