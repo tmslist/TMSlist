@@ -468,7 +468,7 @@ const galleryImages = clinic.gallery_urls || [];
                             Hours of Operation
                         </h4>
                         <div class="space-y-3">
-                            {(clinic.opening_hours || ["Mon-Fri 09:00-17:00", "Sat-Sun Closed"]).map((hours: string) => (
+                            {(clinic.opening_hours || ["Hours not yet verified — please call to confirm"]).map((hours: string) => (
                                 <div class="flex justify-between items-center text-[13px] font-medium border-b border-slate-50 pb-2 last:border-0 last:pb-0">
                                     <span class="text-slate-500">{hours.split(' ')[0]}</span>
                                     <span class="text-slate-900 bg-slate-100 px-2 py-1 rounded">{hours.split(' ').slice(1).join(' ')}</span>
@@ -487,6 +487,37 @@ const galleryImages = clinic.gallery_urls || [];
             </div>
 
         </div>
+
+        <!-- Medical Disclaimer -->
+        <div class="container mx-auto px-6 lg:px-12 mt-12 mb-8">
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6">
+                <p class="text-sm text-amber-800 leading-relaxed">
+                    <strong>Medical Disclaimer:</strong> The information on this page is for informational purposes only and does not constitute medical advice.
+                    TMS therapy should only be administered under the supervision of a qualified healthcare provider. Always consult your doctor before starting any new treatment.
+                    <a href="/legal/medical-disclaimer/" class="underline hover:text-amber-900 font-medium">Read full disclaimer</a>.
+                </p>
+            </div>
+        </div>
+
+        <!-- Related Pages -->
+        <div class="container mx-auto px-6 lg:px-12 mb-16">
+            <h2 class="text-lg font-bold text-slate-900 mb-4">Explore More</h2>
+            <div class="flex flex-wrap gap-3">
+                <a href={`/${countryUrlPrefix}/${isUS ? state.toLowerCase() : ''}`} class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors">
+                    More clinics in {stateName} →
+                </a>
+                <a href="/treatments/" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors">
+                    Conditions treated →
+                </a>
+                <a href="/insurance/" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors">
+                    Insurance coverage →
+                </a>
+                <a href="/compare-clinics/" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors">
+                    Compare clinics →
+                </a>
+            </div>
+        </div>
+
     </main>
     <ClinicTracking clinicId={clinic.id} />
 </Layout>
