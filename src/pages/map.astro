@@ -22,7 +22,7 @@ const schema = JSON.stringify({
           Find TMS Clinics Near You
         </h1>
         <p class="text-lg text-slate-500 font-light leading-relaxed">
-          Explore our interactive map of verified TMS therapy providers across the United States.
+          Explore our interactive map of verified TMS therapy providers worldwide.
           Click "Find Near Me" to discover clinics in your area.
         </p>
       </div>
@@ -31,7 +31,7 @@ const schema = JSON.stringify({
 
   <main class="bg-slate-50/50 py-10">
     <div class="container mx-auto px-6 lg:px-12">
-      <ClinicMap client:load height="600px" />
+      <ClinicMap client:visible height="600px" />
     </div>
   </main>
 </Layout>

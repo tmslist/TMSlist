@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { getReviewsByClinic, createReview, updateClinicRating } from '../../../db/queries';
 import { reviewSubmitSchema } from '../../../db/validation';
 import { escapeHtml } from '../../../utils/sanitize';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
 
 export const prerender = false;
 
@@ -21,7 +22,7 @@ export const GET: APIRoute = async ({ url }) => {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'public, max-age=60',
+        'Cache-Control': 'public, max-age=300, s-maxage=3600, stale-while-revalidate=600',
       },
     });
   } catch (err) {
@@ -35,6 +36,11 @@ export const GET: APIRoute = async ({ url }) => {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Rate limit: 3 requests per IP per hour
+    const ip = getClientIp(request);
+    const rateLimited = await strictRateLimit(ip, 3, '1 h', 'reviews:submit');
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
     const parsed = reviewSubmitSchema.safeParse(body);
 

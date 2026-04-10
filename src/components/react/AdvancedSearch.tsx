@@ -70,7 +70,9 @@ export default function AdvancedSearch() {
         setResults(filtered);
         setTotal(data.count || filtered.length);
       }
-    } catch {} finally {
+    } catch (err) {
+      console.warn('[AdvancedSearch] Search failed:', err instanceof Error ? err.message : err);
+    } finally {
       setLoading(false);
     }
   }, [query, state, selectedMachines, selectedInsurances, selectedTreatments, verifiedOnly, minRating, sortBy, page]);
@@ -97,7 +99,8 @@ export default function AdvancedSearch() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && search()}
             placeholder="Search by name, city, or keyword..."
-            className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all"
+            aria-label="Search clinics by name, city, or keyword"
+            className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus-visible:outline-none transition-all"
           />
         </div>
         <select value={state} onChange={(e) => setState(e.target.value)} className="px-4 py-3.5 rounded-xl border border-slate-200 bg-white text-sm font-medium">
@@ -261,7 +264,7 @@ export default function AdvancedSearch() {
                   <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-50">
                     <span className="text-xs font-semibold text-blue-600">View Profile →</span>
                     {clinic.phone && (
-                      <span className="text-xs text-slate-400">{clinic.phone}</span>
+                      <span className="text-xs text-violet-500 font-semibold">Request Callback</span>
                     )}
                   </div>
                 </a>

@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import react from '@astrojs/react';
@@ -9,7 +8,6 @@ export default defineConfig({
   site: 'https://tmslist.com',
   adapter: vercel(),
   vite: {
-    plugins: [tailwindcss()],
     build: {
       chunkSizeWarningLimit: 2000,
       cssMinify: true,
@@ -26,6 +24,10 @@ export default defineConfig({
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto',
-    concurrency: 1,
+    concurrency: 4,
+  },
+  prefetch: {
+    prefetchAll: false,
+    defaultStrategy: 'viewport',
   },
 });

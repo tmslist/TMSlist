@@ -2,6 +2,7 @@
 export const prerender = false;
 
 import Layout from "../../layouts/Layout.astro";
+import AdminSidebar from "../../components/react/AdminSidebar";
 import AdminReviews from "../../components/react/AdminReviews";
 import { getSessionFromRequest, hasRole } from "../../utils/auth";
 
@@ -12,20 +13,16 @@ if (!hasRole(session, 'admin', 'editor')) {
 ---
 
 <Layout title="Moderate Reviews | TMS List Admin" noindex={true}>
-  <main class="bg-gray-50 min-h-screen py-8">
-    <div class="container mx-auto px-4 max-w-5xl">
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <nav class="text-sm text-gray-500 mb-1">
-            <a href="/admin/dashboard" class="hover:text-indigo-600">Dashboard</a>
-            <span class="mx-2">/</span>
-            <span class="text-gray-900">Reviews</span>
-          </nav>
+  <div class="flex min-h-screen bg-gray-50">
+    <AdminSidebar client:load currentPage="reviews" userEmail={session!.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-5xl">
+        <div class="mb-8">
           <h1 class="text-2xl font-semibold text-gray-900">Moderate Reviews</h1>
+          <p class="text-gray-500 mt-1">Approve or reject pending reviews</p>
         </div>
+        <AdminReviews client:idle />
       </div>
-
-      <AdminReviews client:load />
-    </div>
-  </main>
+    </main>
+  </div>
 </Layout>

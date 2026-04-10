@@ -2,6 +2,7 @@
 export const prerender = false;
 
 import Layout from "../../layouts/Layout.astro";
+import AdminSidebar from "../../components/react/AdminSidebar";
 import AdminClinics from "../../components/react/AdminClinics";
 import { getSessionFromRequest, hasRole } from "../../utils/auth";
 
@@ -12,26 +13,24 @@ if (!hasRole(session, 'admin', 'editor')) {
 ---
 
 <Layout title="Manage Clinics | TMS List Admin" noindex={true}>
-  <main class="bg-gray-50 min-h-screen py-8">
-    <div class="container mx-auto px-4 max-w-7xl">
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <nav class="text-sm text-gray-500 mb-1">
-            <a href="/admin/dashboard" class="hover:text-indigo-600">Dashboard</a>
-            <span class="mx-2">/</span>
-            <span class="text-gray-900">Clinics</span>
-          </nav>
-          <h1 class="text-2xl font-semibold text-gray-900">Manage Clinics</h1>
+  <div class="flex min-h-screen bg-gray-50">
+    <AdminSidebar client:load currentPage="clinics" userEmail={session!.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h1 class="text-2xl font-semibold text-gray-900">Manage Clinics</h1>
+            <p class="text-gray-500 mt-1">Verify, edit, and review clinic listings</p>
+          </div>
+          <a
+            href="/add-listing/"
+            class="px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors"
+          >
+            Add Clinic
+          </a>
         </div>
-        <a
-          href="/add-listing/"
-          class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
-        >
-          Add Clinic
-        </a>
+        <AdminClinics client:idle />
       </div>
-
-      <AdminClinics client:load />
-    </div>
-  </main>
+    </main>
+  </div>
 </Layout>

@@ -1,18 +1,54 @@
-import clinicsData from '../data/clinics.json';
-import userSubmittedClinics from '../data/user-submitted-clinics.json';
-import internationalClinicsData from '../data/international-clinics.json';
 import { type Clinic } from '../types/clinic';
-import { STATE_NAMES } from './clinicData'; // Reusing state map if available, or we can move it here.
+import type { Clinic as DbClinic } from '../db/schema';
+import * as queries from '../db/queries';
 
-// Cast strictly and merge all clinic sources
-const mainClinics = clinicsData as unknown as Clinic[];
-const submittedClinics = userSubmittedClinics as unknown as Clinic[];
-const internationalClinics = internationalClinicsData as unknown as Clinic[];
+// ── DB → TEMPLATE MAPPER ──────────────────────────────
+// Maps Drizzle DB rows to the legacy Clinic interface used in all templates.
+// This avoids touching 40+ .astro files during migration.
 
-// Merge all clinics - user submissions and international clinics added to the main list
-const allClinics: Clinic[] = [...mainClinics, ...submittedClinics, ...internationalClinics];
+export function mapDbClinic(row: DbClinic): Clinic {
+    return {
+        id: row.id,
+        name: row.name,
+        slug: row.slug,
+        provider_type: row.providerType as any,
+        address: row.address || '',
+        city: row.city,
+        state: row.state,
+        zip: row.zip || '',
+        country: row.country,
+        geo: {
+            lat: row.lat ? parseFloat(row.lat) : 0,
+            lng: row.lng ? parseFloat(row.lng) : 0,
+        },
+        phone: row.phone || '',
+        website: row.website || '',
+        email: row.email || undefined,
+        machines: row.machines || [],
+        specialties: row.specialties || [],
+        insurances: row.insurances || [],
+        accessibility: row.accessibility as any,
+        availability: row.availability as any,
+        pricing: row.pricing as any,
+        hero_image_url: (row.media as any)?.hero_image_url || undefined,
+        logo_url: (row.media as any)?.logo_url || undefined,
+        gallery_urls: (row.media as any)?.gallery_urls || undefined,
+        media: row.media as any,
+        rating: parseFloat(row.ratingAvg || '0'),
+        review_count: row.reviewCount,
+        verified: row.verified,
+        is_featured: row.isFeatured,
+        description: row.description || undefined,
+        description_long: row.descriptionLong || undefined,
+        google_business_profile: row.googleProfile as any,
+        faqs: row.faqs as any,
+        created_by: row.createdBy as any,
+        opening_hours: row.openingHours || undefined,
+    } as Clinic;
+}
 
-// Country metadata for international support
+// ── COUNTRY METADATA (static — fine to keep here) ──────
+
 export const COUNTRY_NAMES: Record<string, string> = {
     US: 'United States',
     GB: 'United Kingdom',
@@ -20,6 +56,21 @@ export const COUNTRY_NAMES: Record<string, string> = {
     AU: 'Australia',
     DE: 'Germany',
     IN: 'India',
+    FR: 'France',
+    JP: 'Japan',
+    KR: 'South Korea',
+    BR: 'Brazil',
+    ES: 'Spain',
+    IT: 'Italy',
+    NL: 'Netherlands',
+    SG: 'Singapore',
+    AE: 'United Arab Emirates',
+    NZ: 'New Zealand',
+    ZA: 'South Africa',
+    SE: 'Sweden',
+    IE: 'Ireland',
+    IL: 'Israel',
+    MX: 'Mexico',
 };
 
 export const COUNTRY_FLAGS: Record<string, string> = {
@@ -29,6 +80,21 @@ export const COUNTRY_FLAGS: Record<string, string> = {
     AU: '\u{1F1E6}\u{1F1FA}',
     DE: '\u{1F1E9}\u{1F1EA}',
     IN: '\u{1F1EE}\u{1F1F3}',
+    FR: '\u{1F1EB}\u{1F1F7}',
+    JP: '\u{1F1EF}\u{1F1F5}',
+    KR: '\u{1F1F0}\u{1F1F7}',
+    BR: '\u{1F1E7}\u{1F1F7}',
+    ES: '\u{1F1EA}\u{1F1F8}',
+    IT: '\u{1F1EE}\u{1F1F9}',
+    NL: '\u{1F1F3}\u{1F1F1}',
+    SG: '\u{1F1F8}\u{1F1EC}',
+    AE: '\u{1F1E6}\u{1F1EA}',
+    NZ: '\u{1F1F3}\u{1F1FF}',
+    ZA: '\u{1F1FF}\u{1F1E6}',
+    SE: '\u{1F1F8}\u{1F1EA}',
+    IE: '\u{1F1EE}\u{1F1EA}',
+    IL: '\u{1F1EE}\u{1F1F1}',
+    MX: '\u{1F1F2}\u{1F1FD}',
 };
 
 export const COUNTRY_URL_PREFIXES: Record<string, string> = {
@@ -38,222 +104,146 @@ export const COUNTRY_URL_PREFIXES: Record<string, string> = {
     AU: 'au',
     DE: 'de',
     IN: 'in',
+    FR: 'fr',
+    JP: 'jp',
+    KR: 'kr',
+    BR: 'br',
+    ES: 'es',
+    IT: 'it',
+    NL: 'nl',
+    SG: 'sg',
+    AE: 'ae',
+    NZ: 'nz',
+    ZA: 'za',
+    SE: 'se',
+    IE: 'ie',
+    IL: 'il',
+    MX: 'mx',
 };
 
-/**
- * Returns all clinics from both verified and user-submitted sources.
- * @returns {Clinic[]} Array of all clinic objects.
- */
-export function getAllClinics(): Clinic[] {
-    return allClinics;
+// ── STATE NAMES (static reference data) ──────
+
+export const STATE_NAMES: Record<string, string> = {
+    'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas',
+    'CA': 'California', 'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware',
+    'FL': 'Florida', 'GA': 'Georgia', 'HI': 'Hawaii', 'ID': 'Idaho',
+    'IL': 'Illinois', 'IN': 'Indiana', 'IA': 'Iowa', 'KS': 'Kansas',
+    'KY': 'Kentucky', 'LA': 'Louisiana', 'ME': 'Maine', 'MD': 'Maryland',
+    'MA': 'Massachusetts', 'MI': 'Michigan', 'MN': 'Minnesota', 'MS': 'Mississippi',
+    'MO': 'Missouri', 'MT': 'Montana', 'NE': 'Nebraska', 'NV': 'Nevada',
+    'NH': 'New Hampshire', 'NJ': 'New Jersey', 'NM': 'New Mexico', 'NY': 'New York',
+    'NC': 'North Carolina', 'ND': 'North Dakota', 'OH': 'Ohio', 'OK': 'Oklahoma',
+    'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
+    'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah',
+    'VT': 'Vermont', 'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia',
+    'WI': 'Wisconsin', 'WY': 'Wyoming', 'DC': 'District of Columbia',
+};
+
+export function getStateSlug(stateCode: string): string {
+    const name = STATE_NAMES[stateCode.toUpperCase()];
+    return name ? name.toLowerCase().replace(/\s+/g, '-') : stateCode.toLowerCase();
 }
 
-/**
- * Returns only verified operational clinics.
- * Using the 'verified' flag as the source of truth.
- * @returns {Clinic[]} Array of verified clinic objects.
- */
-export function getOperationalClinics(): Clinic[] {
-    return allClinics.filter(c => c.verified);
+export function getStateCodeFromSlug(slug: string): string | undefined {
+    return Object.keys(STATE_NAMES).find(code => getStateSlug(code) === slug);
 }
 
-/**
- * Safely extracts the rating number from a clinic object.
- * Handles both number and object rating structures.
- * @param {Clinic} clinic - The clinic object.
- * @returns {number} The aggregate rating or 0 if missing.
- */
-export function getClinicRating(clinic: Clinic): number {
-    if (typeof clinic.rating === 'number') return clinic.rating;
-    return clinic.rating?.aggregate || 0;
+// ── ASYNC DATA FUNCTIONS (DB-backed) ──────────────────
+
+export async function getAllClinics(): Promise<Clinic[]> {
+    const rows = await queries.getAllVerifiedClinics();
+    return rows.map(mapDbClinic);
 }
 
-/**
- * Safely extracts the review count from a clinic object.
- * @param {Clinic} clinic - The clinic object.
- * @returns {number} Total number of reviews.
- */
-export function getClinicReviewCount(clinic: Clinic): number {
-    return clinic.review_count || (typeof clinic.rating === 'object' ? clinic.rating.count : 0);
+export async function getOperationalClinics(): Promise<Clinic[]> {
+    const rows = await queries.getAllVerifiedClinics();
+    return rows.map(mapDbClinic);
 }
 
-const CLINIC_IMAGE_POOL = [
-    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=500&fit=crop", // Modern waiting room
-    "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop", // Bright hospital corridor
-    "https://images.unsplash.com/photo-1516549655169-df83a092dd14?w=800&h=500&fit=crop", // Medical equipment
-    "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=800&h=500&fit=crop", // Abstract medical blue
-    "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=500&fit=crop", // Clean medical office
-    "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&h=500&fit=crop", // Modern clinic exterior
-    "https://images.unsplash.com/photo-1516574187841-693083f69382?w=800&h=500&fit=crop", // Doctor consultation
-    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop", // Research lab style
-    "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop", // Original default (Chair)
-    "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800&h=500&fit=crop", // White clean reception
-    "https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=800&h=500&fit=crop", // Blue medical texture
-    "https://images.unsplash.com/photo-1576091160550-217358c7e618?w=800&h=500&fit=crop", // Microscope/Tech
-    "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=800&h=500&fit=crop", // Relaxing therapy room
-    "https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?w=800&h=500&fit=crop", // Green plants in clinic
-    "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&h=500&fit=crop", // Neurologist office
-    "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop"  // Bright window view
-];
-
-/**
- * Returns the best available image for a clinic (Hero > Logo > Deterministic Pool).
- * Uses a hash of the clinic ID or Name to consistently select the same random image
- * from the pool for a given clinic, preventing the "same image everywhere" issue.
- * @param {Clinic} clinic - The clinic object.
- * @returns {string} URL string of the image.
- */
-export function getClinicPhoto(clinic: Clinic): string {
-    if (clinic.hero_image_url) return clinic.hero_image_url;
-    
-    // Deterministic hash based on clinic ID or Name
-    const str = clinic.id || clinic.name || "default";
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    
-    // Positive modulo to get index
-    const index = Math.abs(hash) % CLINIC_IMAGE_POOL.length;
-    return CLINIC_IMAGE_POOL[index];
+export async function getClinicsByMachine(machine: string): Promise<Clinic[]> {
+    const rows = await queries.getClinicsByMachine(machine);
+    return rows.map(mapDbClinic);
 }
 
-/**
- * Returns a photo URL for a doctor, with fallback to UI Avatars.
- */
-export function getDoctorPhoto(doctor: { name?: string; image_url?: string; imageUrl?: string; slug?: string }): string {
-    const img = doctor.image_url || doctor.imageUrl;
-    if (img) return img;
-    const name = doctor.name || 'Doctor';
-    return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0D8ABC&color=fff&size=200`;
+export async function getClinicsByState(stateCode: string): Promise<Clinic[]> {
+    const rows = await queries.getClinicsByState(stateCode, { limit: 1000 });
+    return rows.map(mapDbClinic);
 }
 
-/**
- * Returns true if the clinic has a real uploaded image (not a stock photo).
- */
-export function hasRealClinicImage(clinic: { hero_image_url?: string; media?: { hero_image_url?: string } }): boolean {
-    const url = clinic.hero_image_url || clinic.media?.hero_image_url;
-    if (!url) return false;
-    // Stock photos from unsplash are not "real" clinic images
-    return !url.includes('unsplash.com');
+export async function getClinicsByCity(stateCode: string, cityName: string): Promise<Clinic[]> {
+    const rows = await queries.getClinicsByCity(stateCode, cityName);
+    return rows.map(mapDbClinic);
 }
 
-/**
- * Returns a list of unique state codes where verified clinics exist.
- * @returns {string[]} Array of state codes (e.g., ['CA', 'TX']).
- */
-export function getUniqueStates(): string[] {
-    // Returns array of unique state codes e.g. ['CA', 'TX']
-    return [...new Set(allClinics.filter(c => c.verified).map(c => c.state))];
+export async function getClinicBySlug(slug: string): Promise<Clinic | null> {
+    const row = await queries.getClinicBySlug(slug);
+    return row ? mapDbClinic(row) : null;
 }
 
-/**
- * Filters verified clinics by state code.
- * @param {string} stateCode - The 2-letter state code.
- * @returns {Clinic[]} Array of clinics in that state.
- */
-export function getClinicsByState(stateCode: string): Clinic[] {
-    return allClinics.filter(c => c.verified && c.state === stateCode.toUpperCase());
+export async function getUniqueStates(): Promise<string[]> {
+    return queries.getUniqueStates();
 }
 
-/**
- * Filters verified clinics by city within a specific state.
- * @param {string} stateCode - The 2-letter state code.
- * @param {string} cityName - The city name (case-insensitive).
- * @returns {Clinic[]} Array of clinics in that city.
- */
-export function getClinicsByCity(stateCode: string, cityName: string): Clinic[] {
-    return allClinics.filter(c =>
-        c.verified &&
-        c.state === stateCode.toUpperCase() &&
-        c.city.toLowerCase() === cityName.toLowerCase()
-    );
+export async function getClinicsByCountry(countryCode: string): Promise<Clinic[]> {
+    const rows = await queries.getClinicsByCountry(countryCode, { limit: 1000 });
+    return rows.map(mapDbClinic);
 }
 
-/**
- * Calculates the total number of doctors across all verified clinics.
- * @returns {number} Total count of doctors.
- */
-export function getTotalDoctorCount(): number {
-    return allClinics
-        .filter(c => c.verified)
-        .reduce((acc, clinic) => {
-            const doctors = (clinic as any).doctors_data || clinic.doctors || [];
-            return acc + doctors.length;
-        }, 0);
+export async function getClinicsByCountryAndRegion(countryCode: string, region: string): Promise<Clinic[]> {
+    const rows = await queries.getClinicsByCountryAndRegion(countryCode, region);
+    return rows.map(mapDbClinic);
 }
 
-/**
- * Retrieves a flattened list of all doctors from verified clinics.
- * @returns {any[]} Array of doctor objects with their associated clinic attached.
- */
-export function getAllDoctors(): any[] {
-    const doctors: any[] = [];
-    allClinics
-        .filter(c => c.verified)
-        .forEach(clinic => {
-            const clinicDoctors = (clinic as any).doctors_data || clinic.doctors || [];
-            clinicDoctors.forEach((doc: any) => {
-                doctors.push({ ...doc, clinic });
-            });
-        });
-    return doctors;
+export async function getClinicsByCountryRegionCity(countryCode: string, region: string, city: string): Promise<Clinic[]> {
+    const rows = await queries.getClinicsByCountryRegionCity(countryCode, region, city);
+    return rows.map(mapDbClinic);
 }
 
-/**
- * Returns unique country codes that have verified clinics.
- */
-export function getUniqueCountries(): string[] {
-    return [...new Set(allClinics.filter(c => c.verified).map(c => c.country || 'US'))];
+export async function getUniqueCountries(): Promise<string[]> {
+    return queries.getUniqueCountries();
 }
 
-/**
- * Returns verified clinics for a specific country.
- */
-export function getClinicsByCountry(countryCode: string): Clinic[] {
-    return allClinics.filter(c => c.verified && (c.country || 'US') === countryCode.toUpperCase());
+export async function getRegionsByCountry(countryCode: string): Promise<string[]> {
+    return queries.getRegionsForCountry(countryCode);
 }
 
-/**
- * Returns unique regions/states for a given country that have verified clinics.
- */
-export function getRegionsByCountry(countryCode: string): string[] {
-    return [...new Set(
-        allClinics
-            .filter(c => c.verified && (c.country || 'US') === countryCode.toUpperCase())
-            .map(c => c.state)
-            .filter(Boolean)
-    )].sort();
+export async function getCitiesByState(stateCode: string): Promise<string[]> {
+    return queries.getCitiesByState(stateCode);
 }
 
-/**
- * Returns verified clinics for a specific region within a country.
- */
-export function getClinicsByCountryAndRegion(countryCode: string, region: string): Clinic[] {
-    return allClinics.filter(c =>
-        c.verified &&
-        (c.country || 'US') === countryCode.toUpperCase() &&
-        c.state.toLowerCase() === region.toLowerCase()
-    );
+export async function getTotalDoctorCount(): Promise<number> {
+    return queries.getDoctorCount();
 }
 
-/**
- * Builds a full country → region → city map for the footer directory.
- * Only includes countries/regions/cities that have at least one verified clinic.
- */
-export function buildInternationalDirectory() {
-    const countries = getUniqueCountries().filter(c => c !== 'US').sort();
-    return countries.map(countryCode => {
-        const clinics = getClinicsByCountry(countryCode);
-        const regions = [...new Set(clinics.map(c => c.state).filter(Boolean))].sort();
-        return {
+export async function getAllDoctors(): Promise<any[]> {
+    const rows = await queries.getAllDoctors({ limit: 5000 });
+    return rows.map(r => ({
+        ...r.doctor,
+        clinic: {
+            name: r.clinicName,
+            slug: r.clinicSlug,
+            city: r.clinicCity,
+            state: r.clinicState,
+        },
+    }));
+}
+
+export async function buildInternationalDirectory() {
+    const countryCodes = await queries.getUniqueCountries();
+    const result = [];
+
+    for (const countryCode of countryCodes) {
+        const countryClinics = await queries.getClinicsByCountry(countryCode, { limit: 1000 });
+        const regionSet = [...new Set(countryClinics.map(c => c.state).filter(Boolean))].sort();
+
+        result.push({
             code: countryCode,
             name: COUNTRY_NAMES[countryCode] || countryCode,
             flag: COUNTRY_FLAGS[countryCode] || '',
             urlPrefix: COUNTRY_URL_PREFIXES[countryCode] || countryCode.toLowerCase(),
-            clinicCount: clinics.length,
-            regions: regions.map(region => {
-                const regionClinics = clinics.filter(c => c.state === region);
+            clinicCount: countryClinics.length,
+            regions: regionSet.map(region => {
+                const regionClinics = countryClinics.filter(c => c.state === region);
                 const cities = [...new Set(regionClinics.map(c => c.city).filter(Boolean))].sort();
                 return {
                     name: region,
@@ -266,10 +256,39 @@ export function buildInternationalDirectory() {
                     })),
                 };
             }),
-        };
-    });
+        });
+    }
+
+    return result;
 }
 
-// Keeping the existing helpers for slug compatibility while moving forward
-export { STATE_NAMES, getStateSlug, getStateCodeFromSlug } from './clinicData';
+// ── PURE HELPER FUNCTIONS (no data source needed) ──────
 
+import { getClinicImageUrl } from './images';
+
+export function getClinicRating(clinic: Clinic): number {
+    if (typeof clinic.rating === 'number') return clinic.rating;
+    return clinic.rating?.aggregate || 0;
+}
+
+export function getClinicReviewCount(clinic: Clinic): number {
+    return clinic.review_count || (typeof clinic.rating === 'object' ? clinic.rating.count : 0);
+}
+
+export function getClinicPhoto(clinic: Clinic): string {
+    if (clinic.hero_image_url) return clinic.hero_image_url;
+    return getClinicImageUrl({ id: clinic.id, name: clinic.name, media: clinic.media });
+}
+
+export function getDoctorPhoto(doctor: { name?: string; image_url?: string; imageUrl?: string; slug?: string }): string {
+    const img = doctor.image_url || doctor.imageUrl;
+    if (img) return img;
+    const name = doctor.name || 'Doctor';
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0D8ABC&color=fff&size=200`;
+}
+
+export function hasRealClinicImage(clinic: { hero_image_url?: string; media?: { hero_image_url?: string } }): boolean {
+    const url = clinic.hero_image_url || clinic.media?.hero_image_url;
+    if (!url) return false;
+    return !url.includes('unsplash.com');
+}

@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { db } from '../../../db';
 import { sql } from 'drizzle-orm';
 import { getCached, setCache } from '../../../utils/redis';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
 
 export const prerender = false;
 
@@ -13,6 +14,9 @@ export const prerender = false;
  */
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const ip = getClientIp(request);
+    const rateLimited = await strictRateLimit(ip, 60, '1 m', 'analytics:track');
+    if (rateLimited) return rateLimited;
     const { clinicId, event } = await request.json();
 
     if (!clinicId || !event) {

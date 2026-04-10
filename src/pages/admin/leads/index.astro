@@ -2,8 +2,9 @@
 export const prerender = false;
 
 import Layout from "../../../layouts/Layout.astro";
-import { getSessionFromRequest, hasRole } from "../../../utils/auth";
+import AdminSidebar from "../../../components/react/AdminSidebar";
 import LeadsDashboard from "../../../components/react/LeadsDashboard";
+import { getSessionFromRequest, hasRole } from "../../../utils/auth";
 
 const session = getSessionFromRequest(Astro.request);
 if (!hasRole(session, 'admin', 'editor')) {
@@ -12,5 +13,16 @@ if (!hasRole(session, 'admin', 'editor')) {
 ---
 
 <Layout title="Lead Management | TMS List Admin" noindex={true}>
-  <LeadsDashboard client:load userEmail={session!.email} />
+  <div class="flex min-h-screen bg-gray-50">
+    <AdminSidebar client:load currentPage="leads" userEmail={session!.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="mb-8">
+          <h1 class="text-2xl font-semibold text-gray-900">Lead Management</h1>
+          <p class="text-gray-500 mt-1">Browse and export lead submissions</p>
+        </div>
+        <LeadsDashboard client:idle userEmail={session!.email} />
+      </div>
+    </main>
+  </div>
 </Layout>

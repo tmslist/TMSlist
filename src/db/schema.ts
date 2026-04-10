@@ -140,11 +140,16 @@ export const clinics = pgTable('clinics', {
   // Timestamps
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  deletedAt: timestamp('deleted_at', { withTimezone: true }),
 }, (table) => [
   index('idx_clinics_state').on(table.state),
   index('idx_clinics_city').on(table.state, table.city),
   index('idx_clinics_verified').on(table.verified),
   uniqueIndex('idx_clinics_slug').on(table.slug),
+  index('idx_clinics_verified_rating').on(table.verified, table.ratingAvg),
+  index('idx_clinics_country_verified').on(table.country, table.verified),
+  index('idx_clinics_featured_rating').on(table.isFeatured, table.ratingAvg),
+  index('idx_clinics_country').on(table.country),
 ]);
 
 // ── DOCTORS ──────────────────────────────────────
@@ -166,6 +171,7 @@ export const doctors = pgTable('doctors', {
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [
   index('idx_doctors_clinic').on(table.clinicId),
+  index('idx_doctors_slug').on(table.slug),
 ]);
 
 // ── REVIEWS ──────────────────────────────────────
@@ -184,6 +190,7 @@ export const reviews = pgTable('reviews', {
 }, (table) => [
   index('idx_reviews_clinic').on(table.clinicId),
   index('idx_reviews_approved').on(table.approved),
+  index('idx_reviews_clinic_approved').on(table.clinicId, table.approved),
 ]);
 
 // ── LEADS ──────────────────────────────────────
@@ -204,6 +211,7 @@ export const leads = pgTable('leads', {
 }, (table) => [
   index('idx_leads_type').on(table.type),
   index('idx_leads_created').on(table.createdAt),
+  index('idx_leads_clinic').on(table.clinicId),
 ]);
 
 // ── QUESTIONS / FAQ ──────────────────────────────
@@ -217,7 +225,10 @@ export const questions = pgTable('questions', {
   relatedSlugs: text('related_slugs').array(),
   sortOrder: integer('sort_order').default(0),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-});
+}, (table) => [
+  index('idx_questions_category').on(table.category),
+  index('idx_questions_sort').on(table.sortOrder),
+]);
 
 // ── TREATMENTS ──────────────────────────────────
 
@@ -240,13 +251,31 @@ export const treatments = pgTable('treatments', {
 export const users = pgTable('users', {
   id: uuid('id').defaultRandom().primaryKey(),
   email: text('email').notNull().unique(),
-  passwordHash: text('password_hash').notNull(),
+  passwordHash: text('password_hash'),
   role: userRoleEnum('role').notNull().default('viewer'),
   name: text('name'),
   clinicId: uuid('clinic_id').references(() => clinics.id),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   lastLoginAt: timestamp('last_login_at', { withTimezone: true }),
-});
+  deletedAt: timestamp('deleted_at', { withTimezone: true }),
+}, (table) => [
+  index('idx_users_clinic').on(table.clinicId),
+  index('idx_users_role').on(table.role),
+]);
+
+// ── MAGIC LINK TOKENS ──────────────────────────────
+
+export const magicTokens = pgTable('magic_tokens', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  email: text('email').notNull(),
+  token: text('token').notNull().unique(),
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  usedAt: timestamp('used_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_magic_tokens_token').on(table.token),
+  index('idx_magic_tokens_email').on(table.email),
+]);
 
 // ── AUDIT LOG ──────────────────────────────────
 
@@ -297,7 +326,9 @@ export const savedClinics = pgTable('saved_clinics', {
   userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
   clinicId: uuid('clinic_id').notNull().references(() => clinics.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-});
+}, (table) => [
+  uniqueIndex('idx_saved_clinics_unique').on(table.userId, table.clinicId),
+]);
 
 // ── COUNTRIES & REGIONS (International) ──────────────
 
@@ -323,6 +354,76 @@ export const regions = pgTable('regions', {
   uniqueIndex('idx_regions_country_code').on(table.countryCode, table.code),
 ]);
 
+// ── SITE SETTINGS ──────────────────────────────────
+
+export const siteSettings = pgTable('site_settings', {
+  key: text('key').primaryKey(),
+  value: jsonb('value').$type<unknown>(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedBy: uuid('updated_by').references(() => users.id),
+});
+
+// ── BLOG POSTS ──────────────────────────────────
+
+export const blogPosts = pgTable('blog_posts', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  slug: text('slug').notNull().unique(),
+  title: text('title').notNull(),
+  excerpt: text('excerpt'),
+  content: text('content').notNull(),
+  coverImage: text('cover_image'),
+  author: text('author').notNull(),
+  category: text('category'),
+  tags: text('tags').array(),
+  status: text('status').notNull().default('draft'), // draft, published, scheduled
+  publishedAt: timestamp('published_at', { withTimezone: true }),
+  scheduledAt: timestamp('scheduled_at', { withTimezone: true }),
+  metaTitle: text('meta_title'),
+  metaDescription: text('meta_description'),
+  ogImage: text('og_image'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  createdBy: uuid('created_by').references(() => users.id),
+}, (table) => [
+  index('idx_blog_status').on(table.status),
+  index('idx_blog_published').on(table.publishedAt),
+  index('idx_blog_category').on(table.category),
+]);
+
+// ── SEO OVERRIDES ──────────────────────────────────
+
+export const seoOverrides = pgTable('seo_overrides', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  path: text('path').notNull().unique(), // e.g., '/us/california/los-angeles'
+  metaTitle: text('meta_title'),
+  metaDescription: text('meta_description'),
+  ogImage: text('og_image'),
+  canonicalUrl: text('canonical_url'),
+  noIndex: boolean('no_index').default(false),
+  structuredData: jsonb('structured_data').$type<Record<string, unknown>>(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedBy: uuid('updated_by').references(() => users.id),
+}, (table) => [
+  uniqueIndex('idx_seo_path').on(table.path),
+]);
+
+// ── NOTIFICATIONS ──────────────────────────────────
+
+export const notifications = pgTable('notifications', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').references(() => users.id, { onDelete: 'cascade' }),
+  type: text('type').notNull(), // new_lead, new_review, claim_approved, etc.
+  title: text('title').notNull(),
+  message: text('message'),
+  read: boolean('read').default(false).notNull(),
+  link: text('link'),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_notifications_user').on(table.userId),
+  index('idx_notifications_unread').on(table.userId, table.read),
+]);
+
 // ── TYPE EXPORTS ──────────────────────────────────
 
 export type Clinic = typeof clinics.$inferSelect;
@@ -335,3 +436,7 @@ export type Lead = typeof leads.$inferSelect;
 export type NewLead = typeof leads.$inferInsert;
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
+export type BlogPost = typeof blogPosts.$inferSelect;
+export type NewBlogPost = typeof blogPosts.$inferInsert;
+export type SeoOverride = typeof seoOverrides.$inferSelect;
+export type Notification = typeof notifications.$inferSelect;

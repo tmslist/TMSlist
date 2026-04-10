@@ -15,5 +15,10 @@ if (session) {
 <Layout title="Admin Login | TMS List" description="Admin login for TMS List management." noindex={true}>
   <main class="container mx-auto px-4 py-12">
     <LoginForm client:load />
+    <div class="text-center mt-6">
+      <a href="/portal/login" class="text-sm text-gray-500 hover:text-emerald-600 transition-colors">
+        Are you a clinic owner? Sign in to the Doctor Portal &rarr;
+      </a>
+    </div>
   </main>
 </Layout>

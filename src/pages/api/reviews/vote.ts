@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { db } from '../../../db';
 import { sql } from 'drizzle-orm';
 import { getCached, setCache } from '../../../utils/redis';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
 
 export const prerender = false;
 
@@ -10,6 +11,9 @@ export const prerender = false;
  */
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const ip = getClientIp(request);
+    const rateLimited = await strictRateLimit(ip, 30, '1 h', 'reviews:vote');
+    if (rateLimited) return rateLimited;
     const { reviewId, helpful } = await request.json();
 
     if (!reviewId || typeof helpful !== 'boolean') {
@@ -20,7 +24,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Use IP + reviewId to prevent duplicate votes
-    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
     const voteKey = `vote:${reviewId}:${ip}`;
 
     const existing = await getCached<boolean>(voteKey);

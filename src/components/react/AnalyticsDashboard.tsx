@@ -18,7 +18,7 @@ export default function AnalyticsDashboard() {
     fetch('/api/analytics/stats')
       .then(r => r.ok ? r.json() : null)
       .then(d => { if (d?.stats) setStats(d.stats); })
-      .catch(() => {})
+      .catch(() => { /* analytics unavailable */ })
       .finally(() => setLoading(false));
   }, []);
 

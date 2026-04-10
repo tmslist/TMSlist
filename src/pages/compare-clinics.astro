@@ -8,6 +8,8 @@ import ComparisonTool from "../components/react/ComparisonTool";
   description="Compare TMS therapy clinics side by side. Compare ratings, devices, insurance coverage, costs, and more to find the best TMS provider for you."
 >
   <main class="container mx-auto px-4 py-12">
-    <ComparisonTool client:load />
+    <h1 class="text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 mb-2">Compare TMS Clinics</h1>
+    <p class="text-slate-500 font-light mb-8">Add up to 3 clinics to compare ratings, devices, insurance, and more.</p>
+    <ComparisonTool client:idle />
   </main>
 </Layout>

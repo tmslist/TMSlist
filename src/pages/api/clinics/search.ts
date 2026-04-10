@@ -1,11 +1,15 @@
 import type { APIRoute } from 'astro';
 import { searchClinics } from '../../../db/queries';
 import { clinicSearchSchema } from '../../../db/validation';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ url }) => {
+export const GET: APIRoute = async ({ request, url }) => {
   try {
+    const ip = getClientIp(request);
+    const rateLimited = await strictRateLimit(ip, 30, '1 m', 'clinics:search');
+    if (rateLimited) return rateLimited;
     const params = Object.fromEntries(url.searchParams);
 
     // Parse array params
@@ -28,7 +32,7 @@ export const GET: APIRoute = async ({ url }) => {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'public, max-age=60, s-maxage=300',
+        'Cache-Control': 'public, max-age=300, s-maxage=3600, stale-while-revalidate=600',
       },
     });
   } catch (err) {

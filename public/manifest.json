@@ -3,10 +3,12 @@
   "short_name": "TMS List",
   "description": "Find FDA-cleared TMS therapy clinics with verified reviews and insurance info",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4f46e5",
   "orientation": "portrait-primary",
+  "categories": ["medical", "health"],
   "icons": [
     {
       "src": "/favicon.svg",
@@ -16,7 +18,14 @@
     {
       "src": "/favicon.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "180x180",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "maskable"
     }
   ]
 }

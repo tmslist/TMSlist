@@ -28,16 +28,19 @@ export default function ReviewVote({ reviewId, initialHelpful = 0, initialUnhelp
       } else if (res.status === 409) {
         setVoted(isHelpful ? 'helpful' : 'unhelpful');
       }
-    } catch {}
+    } catch {
+      /* network error — fail silently for vote */
+    }
   };
 
   return (
-    <div className="flex items-center gap-3 text-xs">
+    <div className="flex items-center gap-3 text-xs" role="group" aria-label="Rate this review's helpfulness">
       <span className="text-slate-400">Helpful?</span>
       <button
         onClick={() => vote(true)}
         disabled={voted !== null}
-        className={`flex items-center gap-1 px-2 py-1 rounded-md transition-all ${
+        aria-label={`Mark review as helpful${helpful > 0 ? ` (${helpful} votes)` : ''}`}
+        className={`flex items-center gap-1 px-2 py-1 rounded-md transition-all focus-visible:ring-2 focus-visible:ring-emerald-300 ${
           voted === 'helpful'
             ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
             : voted !== null
@@ -53,7 +56,8 @@ export default function ReviewVote({ reviewId, initialHelpful = 0, initialUnhelp
       <button
         onClick={() => vote(false)}
         disabled={voted !== null}
-        className={`flex items-center gap-1 px-2 py-1 rounded-md transition-all ${
+        aria-label={`Mark review as not helpful${unhelpful > 0 ? ` (${unhelpful} votes)` : ''}`}
+        className={`flex items-center gap-1 px-2 py-1 rounded-md transition-all focus-visible:ring-2 focus-visible:ring-red-300 ${
           voted === 'unhelpful'
             ? 'bg-red-50 text-red-500 border border-red-200'
             : voted !== null

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface ClinicCompare {
   id: string;
@@ -34,7 +34,7 @@ export default function ComparisonTool() {
     if (saved) {
       try {
         setClinicIds(JSON.parse(saved));
-      } catch {}
+      } catch { /* invalid stored JSON */ }
     }
   }, []);
 
@@ -47,12 +47,19 @@ export default function ComparisonTool() {
     }
   }, [clinicIds]);
 
-  async function handleSearch(q: string) {
+  const searchTimerRef = useRef<ReturnType<typeof setTimeout>>();
+
+  function handleSearch(q: string) {
     setSearchQuery(q);
     if (q.length < 2) {
       setSearchResults([]);
       return;
     }
+    clearTimeout(searchTimerRef.current);
+    searchTimerRef.current = setTimeout(() => doSearch(q), 300);
+  }
+
+  async function doSearch(q: string) {
     setSearching(true);
     try {
       const res = await fetch(`/api/clinics/search?query=${encodeURIComponent(q)}&verified=true&limit=5`);
@@ -60,7 +67,9 @@ export default function ComparisonTool() {
         const { data } = await res.json();
         setSearchResults(data.filter((c: ClinicCompare) => !clinicIds.includes(c.id)));
       }
-    } catch {}
+    } catch (err) {
+      console.warn('[Compare] Search failed:', err instanceof Error ? err.message : err);
+    }
     setSearching(false);
   }
 
@@ -102,10 +111,14 @@ export default function ComparisonTool() {
             value={searchQuery}
             onChange={(e) => handleSearch(e.target.value)}
             placeholder={`Add a clinic to compare (${clinicData.length}/${MAX_COMPARE})...`}
+            aria-label="Search for a clinic to compare"
+            role="combobox"
+            aria-expanded={searchResults.length > 0}
+            aria-autocomplete="list"
             className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
           />
           {searchResults.length > 0 && (
-            <ul className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+            <ul role="listbox" aria-label="Search results" className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
               {searchResults.map((clinic) => (
                 <li key={clinic.id}>
                   <button

@@ -87,6 +87,21 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // Validate topic length and strip HTML from all string inputs
+    const stringFields = ['city', 'state', 'insurance', 'condition', 'topic'] as const;
+    for (const field of stringFields) {
+      const val = parsed.data[field];
+      if (typeof val === 'string') {
+        if (val.length > 500) {
+          return new Response(JSON.stringify({ error: `${field} too long. Maximum 500 characters.` }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+        (parsed.data as any)[field] = val.replace(/<[^>]*>/g, '');
+      }
+    }
+
     let prompt = PROMPTS[parsed.data.type] || PROMPTS.city_roundup;
     prompt = prompt
       .replace(/\{city\}/g, parsed.data.city || '')
@@ -119,7 +134,7 @@ export const POST: APIRoute = async ({ request }) => {
           const data = await res.json();
           content = data.content?.[0]?.text || '';
         }
-      } catch {}
+      } catch { /* Anthropic unavailable — fall through to OpenRouter */ }
     }
 
     // Fallback to OpenRouter
@@ -145,7 +160,7 @@ export const POST: APIRoute = async ({ request }) => {
           const data = await res.json();
           content = data.choices?.[0]?.message?.content || '';
         }
-      } catch {}
+      } catch { /* OpenRouter unavailable */ }
     }
 
     if (!content) {

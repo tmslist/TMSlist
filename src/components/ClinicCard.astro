@@ -7,6 +7,7 @@ import {
     hasRealClinicImage,
     COUNTRY_FLAGS,
 } from "../utils/dataHelpers";
+import { getReviewSnippet, getSnippetSentiment } from "../utils/reviewSnippets";
 
 interface Props {
     clinic: Clinic;
@@ -16,6 +17,17 @@ const { clinic } = Astro.props;
 const rating = getClinicRating(clinic);
 const reviewCount = getClinicReviewCount(clinic);
 const mainImage = getClinicPhoto(clinic);
+const reviewSnippet = getReviewSnippet({
+    name: clinic.name,
+    rating,
+    reviewCount,
+    machines: clinic.machines,
+    insurances: clinic.insurances,
+    verified: clinic.verified,
+    city: clinic.city,
+    state: clinic.state,
+});
+const sentiment = getSnippetSentiment(rating);
 
 // Trust Signals (Mocked for Demo Purpose based on verified status)
 const isVerified = clinic.verified;
@@ -33,6 +45,7 @@ const isVerified = clinic.verified;
             height="500"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
+            onerror="this.src='/images/tms_hero.svg';this.onerror=null;"
         />
         <div
             class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"
@@ -51,7 +64,7 @@ const isVerified = clinic.verified;
             }
             {
                 isVerified && (
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur text-xs font-semibold text-indigo-700 shadow-sm border border-indigo-100">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur text-xs font-semibold text-violet-700 shadow-sm border border-violet-100">
                         <svg
                             class="w-3.5 h-3.5 text-blue-500"
                             fill="currentColor"
@@ -84,7 +97,7 @@ const isVerified = clinic.verified;
                 {clinic.name}
             </h3>
             <p
-                class="text-sm text-indigo-100 opacity-95 flex items-center gap-1.5 font-medium"
+                class="text-sm text-violet-100 opacity-95 flex items-center gap-1.5 font-medium"
             >
                 <svg
                     class="w-4 h-4 shrink-0"
@@ -150,10 +163,10 @@ const isVerified = clinic.verified;
         <div class="space-y-3 mb-6 flex-1">
             <div class="flex items-start gap-2.5">
                 <div
-                    class="w-5 h-5 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5"
+                    class="w-5 h-5 rounded-full bg-violet-50 flex items-center justify-center shrink-0 mt-0.5"
                 >
                     <svg
-                        class="w-3 h-3 text-indigo-600"
+                        class="w-3 h-3 text-violet-600"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -198,32 +211,37 @@ const isVerified = clinic.verified;
             </div>
         </div>
 
+        <!-- Review Snippet -->
+        {reviewSnippet && (
+            <div class={`flex items-start gap-2 px-3 py-2.5 rounded-xl mb-4 text-xs leading-relaxed ${
+                sentiment === 'excellent' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
+                sentiment === 'good' ? 'bg-blue-50 text-blue-700 border border-blue-100' :
+                'bg-gray-50 text-gray-600 border border-gray-100'
+            }`}>
+                <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 opacity-60" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd" />
+                </svg>
+                <p class="italic line-clamp-2">"{reviewSnippet}"</p>
+            </div>
+        )}
+
         <!-- CTA Actions -->
         <div class="mt-auto flex gap-3">
             <a
                 href={`/clinic/${clinic.slug}`}
-                class="flex-1 text-center py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-indigo-100 hover:shadow-indigo-200"
+                class="flex-1 text-center py-2.5 px-4 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-violet-100 hover:shadow-violet-200"
             >
                 View Profile
             </a>
-            <a
-                href={`tel:${clinic.phone}`}
-                class="px-3.5 py-2.5 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-xl transition-colors border border-gray-200"
-                aria-label="Call Clinic"
+            <button
+                data-request-callback
+                data-clinic-name={clinic.name}
+                data-clinic-id={clinic.slug}
+                class="px-3.5 py-2.5 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-xl transition-colors border border-gray-200 cursor-pointer"
+                aria-label="Request Callback"
             >
-                <svg
-                    class="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    ><path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                    ></path></svg
-                >
-            </a>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </button>
         </div>
     </div>
 </article>

@@ -35,7 +35,7 @@ export default function HealthScoreBadge({ clinicId, size = 'sm', showBreakdown 
     fetch(`/api/clinics/health-score?clinicId=${clinicId}`)
       .then(r => r.ok ? r.json() : null)
       .then(d => d && setScore(d))
-      .catch(() => {});
+      .catch((err) => console.warn('[HealthScore] Failed to load:', err?.message));
   }, [clinicId]);
 
   if (!score) return null;

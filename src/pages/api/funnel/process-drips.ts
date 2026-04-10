@@ -14,8 +14,10 @@ export const prerender = false;
  * Set CRON_SECRET in your environment and call:
  * GET /api/funnel/process-drips?secret=YOUR_CRON_SECRET
  */
-export const GET: APIRoute = async ({ url }) => {
-  const secret = url.searchParams.get('secret');
+export const GET: APIRoute = async ({ request, url }) => {
+  // Check Authorization header first, fall back to query param for backwards compat
+  const authHeader = request.headers.get('authorization');
+  const secret = authHeader?.replace('Bearer ', '') || url.searchParams.get('secret');
   const expectedSecret = import.meta.env.CRON_SECRET || process.env.CRON_SECRET;
 
   if (!expectedSecret || secret !== expectedSecret) {

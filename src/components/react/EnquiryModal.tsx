@@ -166,16 +166,16 @@ export default function EnquiryModal({ apiEndpoint = '/api/leads' }: EnquiryModa
                   </p>
 
                   <div>
-                    <label htmlFor="eq-name" className="block text-sm font-medium text-gray-700">Full Name</label>
-                    <input ref={firstInputRef} type="text" name="name" id="eq-name" required
-                      className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                    <label htmlFor="eq-name" className="block text-sm font-medium text-gray-700">Full Name <span className="text-red-400">*</span></label>
+                    <input ref={firstInputRef} type="text" name="name" id="eq-name" required aria-required="true"
+                      className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200" />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="eq-email" className="block text-sm font-medium text-gray-700">Email</label>
-                      <input type="email" name="email" id="eq-email" required
-                        className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                      <label htmlFor="eq-email" className="block text-sm font-medium text-gray-700">Email <span className="text-red-400">*</span></label>
+                      <input type="email" name="email" id="eq-email" required aria-required="true"
+                        className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200" />
                     </div>
                     <div>
                       <label htmlFor="eq-phone" className="block text-sm font-medium text-gray-700">Phone</label>
@@ -186,9 +186,9 @@ export default function EnquiryModal({ apiEndpoint = '/api/leads' }: EnquiryModa
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="eq-location" className="block text-sm font-medium text-gray-700">Location</label>
-                      <input type="text" name="location" id="eq-location" required placeholder="City, State or ZIP"
-                        className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                      <label htmlFor="eq-location" className="block text-sm font-medium text-gray-700">Location <span className="text-red-400">*</span></label>
+                      <input type="text" name="location" id="eq-location" required aria-required="true" placeholder="City, State or ZIP"
+                        className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200" />
                     </div>
                     <div>
                       <label htmlFor="eq-clinic" className="block text-sm font-medium text-gray-700">Clinic (optional)</label>
@@ -198,9 +198,9 @@ export default function EnquiryModal({ apiEndpoint = '/api/leads' }: EnquiryModa
                   </div>
 
                   <div>
-                    <label htmlFor="eq-role" className="block text-sm font-medium text-gray-700">I am a...</label>
-                    <select name="role" id="eq-role" required
-                      className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <label htmlFor="eq-role" className="block text-sm font-medium text-gray-700">I am a... <span className="text-red-400">*</span></label>
+                    <select name="role" id="eq-role" required aria-required="true"
+                      className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200">
                       <option value="">Select a role...</option>
                       <option>Patient looking for treatment</option>
                       <option>Caregiver / Family Member</option>

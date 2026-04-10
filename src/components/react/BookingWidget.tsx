@@ -94,7 +94,7 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
         </p>
         {clinicPhone && (
           <p className="text-xs text-emerald-600 mt-3">
-            Need to speak now? Call <a href={`tel:${clinicPhone}`} className="font-bold underline">{clinicPhone}</a>
+            Need to speak sooner? <button type="button" onClick={() => document.dispatchEvent(new CustomEvent('open-callback-modal', { detail: { clinicName, clinicId } }))} className="font-bold underline cursor-pointer">Request a callback</button>
           </p>
         )}
       </div>
@@ -112,14 +112,14 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
         <input type="text" required value={name} onChange={e => setName(e.target.value)} placeholder="Full Name *"
           className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200" />
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Email *"
             className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200" />
           <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Phone"
             className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200" />
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <input type="date" value={preferredDate} onChange={e => setPreferredDate(e.target.value)}
             min={new Date().toISOString().split('T')[0]}
             className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200" />
