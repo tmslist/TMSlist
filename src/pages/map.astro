@@ -30,8 +30,13 @@ const schema = JSON.stringify({
   </section>
 
   <main class="bg-slate-50/50 py-10">
-    <div class="container mx-auto px-6 lg:px-12">
+    <div class="container mx-auto px-6 lg:px-12" role="region" aria-label="Interactive clinic map">
       <ClinicMap client:visible height="600px" />
+      <noscript>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center mt-4">
+          <p class="text-amber-800">The interactive map requires JavaScript. <a href="/us/" class="underline font-medium">Browse clinics by state instead</a>.</p>
+        </div>
+      </noscript>
     </div>
   </main>
 </Layout>

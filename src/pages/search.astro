@@ -32,6 +32,11 @@ const metaDescription = `Search and filter ${clinicCount}+ TMS therapy clinics b
   <main class="bg-slate-50/50 py-8">
     <div class="container mx-auto px-6 lg:px-12">
       <AdvancedSearch client:idle />
+      <noscript>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center mt-4">
+          <p class="text-amber-800">Search requires JavaScript. <a href="/us/" class="underline font-medium">Browse clinics by state instead</a>.</p>
+        </div>
+      </noscript>
     </div>
   </main>
 </Layout>
