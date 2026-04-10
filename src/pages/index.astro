@@ -11,6 +11,7 @@ import {
     buildInternationalDirectory,
     COUNTRY_NAMES,
     COUNTRY_URL_PREFIXES,
+    STATE_NAMES,
 } from "../utils/dataHelpers";
 import type { Clinic } from "../types/clinic";
 import {
@@ -21,24 +22,6 @@ import {
 
 // Use ONLY verified real clinics from the main DB
 const clinics = await getOperationalClinics();
-
-const STATE_NAMES: Record<string, string> = {
-    DC: "Washington DC",
-    CA: "California",
-    FL: "Florida",
-    NY: "New York",
-    AZ: "Arizona",
-    CT: "Connecticut",
-    NJ: "New Jersey",
-    TX: "Texas",
-    IL: "Illinois",
-    PA: "Pennsylvania",
-    OH: "Ohio",
-    MI: "Michigan",
-    WA: "Washington",
-    CO: "Colorado",
-    GA: "Georgia",
-};
 
 // Group clinics by state for the location grid
 const stateGroups = clinics.reduce(
