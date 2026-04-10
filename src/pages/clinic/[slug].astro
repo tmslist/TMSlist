@@ -294,8 +294,8 @@ const galleryImages = clinic.gallery_urls || [];
                             </div>
                         ))}
                         {machines.length === 0 && (
-                            <div class="col-span-full bg-white p-6 rounded-2xl border border-slate-100 text-slate-500 font-light">
-                                Cutting-edge FDA-cleared TMS equipment is utilized at this location.
+                            <div class="col-span-full bg-slate-50 p-6 rounded-2xl border border-slate-100 text-slate-500 text-sm">
+                                TMS device information not yet verified for this clinic. Contact the clinic directly for details about their equipment.
                             </div>
                         )}
                     </div>
@@ -311,9 +311,9 @@ const galleryImages = clinic.gallery_urls || [];
                             </span>
                         ))}
                         {treatments.length === 0 && (
-                            <span class="px-5 py-2.5 bg-slate-100 text-slate-700 font-semibold text-sm rounded-full border border-slate-200">
-                                Major Depressive Disorder (MDD)
-                            </span>
+                            <p class="text-slate-500 text-sm">
+                                Specific treatment conditions not yet listed. TMS is FDA-cleared for depression, OCD, and smoking cessation. <a href="/treatments/" class="text-violet-600 font-medium hover:underline">View all treatable conditions</a>.
+                            </p>
                         )}
                     </div>
                 </section>
@@ -377,7 +377,7 @@ const galleryImages = clinic.gallery_urls || [];
                                 {ins}
                             </span>
                         ))}
-                        {insurances.length === 0 && <span class="text-slate-500 font-light text-sm">Please call to verify your specific plan.</span>}
+                        {insurances.length === 0 && <span class="text-slate-500 text-sm">Insurance information not yet listed. Most TMS clinics accept Medicare and major insurers — <a href="/insurance/" class="text-violet-600 font-medium hover:underline">check our coverage guide</a>.</span>}
                     </div>
                 </section>
 

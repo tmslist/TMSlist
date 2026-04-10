@@ -14,6 +14,11 @@ export default function ReviewVote({ reviewId, initialHelpful = 0, initialUnhelp
   const vote = async (isHelpful: boolean) => {
     if (voted) return;
 
+    // Optimistic update
+    setVoted(isHelpful ? 'helpful' : 'unhelpful');
+    if (isHelpful) setHelpful(h => h + 1);
+    else setUnhelpful(u => u + 1);
+
     try {
       const res = await fetch('/api/reviews/vote', {
         method: 'POST',
@@ -21,15 +26,17 @@ export default function ReviewVote({ reviewId, initialHelpful = 0, initialUnhelp
         body: JSON.stringify({ reviewId, helpful: isHelpful }),
       });
 
-      if (res.ok) {
-        setVoted(isHelpful ? 'helpful' : 'unhelpful');
-        if (isHelpful) setHelpful(h => h + 1);
-        else setUnhelpful(u => u + 1);
-      } else if (res.status === 409) {
-        setVoted(isHelpful ? 'helpful' : 'unhelpful');
+      if (!res.ok && res.status !== 409) {
+        // Revert optimistic update on unexpected error
+        setVoted(null);
+        if (isHelpful) setHelpful(h => h - 1);
+        else setUnhelpful(u => u - 1);
       }
     } catch {
-      /* network error — fail silently for vote */
+      // Revert on network error
+      setVoted(null);
+      if (isHelpful) setHelpful(h => h - 1);
+      else setUnhelpful(u => u - 1);
     }
   };
 
