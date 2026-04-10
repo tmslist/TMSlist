@@ -133,13 +133,17 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
         </div>
 
         <select value={condition} onChange={e => setCondition(e.target.value)}
-          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200">
+          aria-label="Primary condition"
+          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
           <option value="">Primary Condition (optional)</option>
-          <option value="Depression">Depression</option>
+          <option value="Depression">Depression (MDD)</option>
           <option value="OCD">OCD</option>
           <option value="Anxiety">Anxiety</option>
           <option value="PTSD">PTSD</option>
           <option value="Bipolar">Bipolar Depression</option>
+          <option value="Smoking">Smoking Cessation</option>
+          <option value="Chronic Pain">Chronic Pain / Fibromyalgia</option>
+          <option value="Tinnitus">Tinnitus</option>
           <option value="Other">Other</option>
         </select>
 

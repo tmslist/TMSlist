@@ -1,11 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import AdvancedSearch from "../components/react/AdvancedSearch";
+import { db } from "../db";
+import { clinics } from "../db/schema";
+import { eq, sql } from "drizzle-orm";
 
 export const prerender = false;
 
+let clinicCount = 1100;
+try {
+  const result = await db.select({ count: sql<number>`count(*)` }).from(clinics).where(eq(clinics.verified, true));
+  clinicCount = Number(result[0]?.count || 1100);
+} catch { /* fallback to approximate */ }
+
 const pageTitle = "Search TMS Clinics | Advanced Filters | TMS List";
-const metaDescription = "Search and filter TMS therapy clinics by insurance, condition, device, rating, and location. Find the perfect provider for your needs.";
+const metaDescription = `Search and filter ${clinicCount}+ TMS therapy clinics by insurance, condition, device, rating, and location.`;
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
@@ -15,7 +24,7 @@ const metaDescription = "Search and filter TMS therapy clinics by insurance, con
         Find Your TMS Clinic
       </h1>
       <p class="text-slate-500 font-light">
-        Search 1,100+ verified TMS providers with advanced filters.
+        Search {clinicCount.toLocaleString()}+ verified TMS providers with advanced filters.
       </p>
     </div>
   </section>
