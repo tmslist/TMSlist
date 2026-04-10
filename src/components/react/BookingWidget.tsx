@@ -60,6 +60,8 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
         setSubmitted(true);
       } else {
         setError('Something went wrong. Please try again or call the clinic directly.');
+        setLoading(false);
+        return;
       }
     } catch {
       setError('Network error. Please try again.');
