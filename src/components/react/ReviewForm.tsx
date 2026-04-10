@@ -122,10 +122,17 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
       </div>
 
       <div>
-        <label htmlFor="rv-body" className="block text-sm font-medium text-gray-700">Your Review</label>
+        <label htmlFor="rv-body" className="block text-sm font-medium text-gray-700">Your Review <span className="text-red-400">*</span></label>
         <textarea name="body" id="rv-body" rows={4} required minLength={10} maxLength={5000}
-          className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
-          placeholder="Share your experience with this clinic..." />
+          aria-required="true"
+          className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+          placeholder="Share your experience with this clinic..."
+          onInput={(e) => {
+            const counter = e.currentTarget.parentElement?.querySelector('.char-count');
+            if (counter) counter.textContent = `${e.currentTarget.value.length}/5000`;
+          }}
+        />
+        <span className="char-count text-xs text-gray-400 mt-1 block text-right">0/5000</span>
       </div>
 
       <button

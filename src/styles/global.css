@@ -125,6 +125,87 @@ html.dark .prose strong {
     color: #f1f5f9;
 }
 
+html.dark .bg-slate-50\/50 {
+    background-color: #0f172a !important;
+}
+
+html.dark .bg-gray-50 {
+    background-color: #0f172a !important;
+}
+
+html.dark .bg-slate-100 {
+    background-color: #1e293b !important;
+}
+
+html.dark .text-gray-400,
+html.dark .text-slate-400 {
+    color: #64748b !important;
+}
+
+html.dark .bg-amber-50 {
+    background-color: #451a03 !important;
+}
+
+html.dark .border-amber-200 {
+    border-color: #92400e !important;
+}
+
+html.dark .text-amber-800 {
+    color: #fbbf24 !important;
+}
+
+html.dark .bg-emerald-50 {
+    background-color: #064e3b !important;
+}
+
+html.dark .border-emerald-100,
+html.dark .border-emerald-200 {
+    border-color: #065f46 !important;
+}
+
+html.dark .bg-red-50 {
+    background-color: #450a0a !important;
+}
+
+html.dark .border-red-200 {
+    border-color: #991b1b !important;
+}
+
+html.dark .bg-violet-50 {
+    background-color: #2e1065 !important;
+}
+
+html.dark .bg-blue-50 {
+    background-color: #172554 !important;
+}
+
+html.dark .ring-blue-100,
+html.dark .ring-blue-200 {
+    --tw-ring-color: #1e3a5f !important;
+}
+
+html.dark .divide-slate-100 > * + * {
+    border-color: #334155 !important;
+}
+
+html.dark table th {
+    background-color: #1e293b;
+    color: #cbd5e1;
+}
+
+html.dark table td {
+    border-color: #334155;
+}
+
+html.dark .backdrop-blur-lg,
+html.dark .backdrop-blur-sm {
+    background-color: rgba(15, 23, 42, 0.85) !important;
+}
+
+html.dark ::placeholder {
+    color: #64748b !important;
+}
+
 /* Headings use DM Sans for premium look */
 h1,
 h2,
