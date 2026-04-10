@@ -105,14 +105,14 @@ const featuredDoctorsByCountry: Record<string, any[]> = {};
 for (const code of countryCodes) {
     const countryDocs = allDoctorsWithCountry
         .filter((d: any) => d.clinicCountry === code)
-        .sort(() => 0.5 - Math.random())
+        .sort((a, b) => { const ha = (a.name || '').charCodeAt(0); const hb = (b.name || '').charCodeAt(0); return ((ha * 9301 + 49297) % 233280) - ((hb * 9301 + 49297) % 233280); })
         .slice(0, 4);
     if (countryDocs.length > 0) {
         featuredDoctorsByCountry[code] = countryDocs;
     }
 }
 // Default fallback for template rendering
-const featuredDoctors = featuredDoctorsByCountry['US'] || allDoctorsWithCountry.sort(() => 0.5 - Math.random()).slice(0, 4);
+const featuredDoctors = featuredDoctorsByCountry['US'] || allDoctorsWithCountry.sort((a, b) => { const ha = (a.name || '').charCodeAt(0); const hb = (b.name || '').charCodeAt(0); return ((ha * 9301 + 49297) % 233280) - ((hb * 9301 + 49297) % 233280); }).slice(0, 4);
 
 const totalDoctors = await getTotalDoctorCount();
 const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);

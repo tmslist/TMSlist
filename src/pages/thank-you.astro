@@ -19,10 +19,23 @@ const description = "Thank you for your submission.";
             </p>
             <a
                 href="/"
-                class="inline-block bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
+                class="inline-block bg-violet-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-violet-700 transition"
             >
                 Return to Homepage
             </a>
         </div>
     </main>
+
+    <!-- Conversion tracking -->
+    <script is:inline>
+        if (typeof window !== 'undefined') {
+            try {
+                fetch('/api/analytics/track', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ clinicId: 'site', event: 'lead_submit' }),
+                }).catch(() => {});
+            } catch {}
+        }
+    </script>
 </Layout>
