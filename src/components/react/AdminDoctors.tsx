@@ -144,7 +144,7 @@ export default function AdminDoctors() {
       const res = await fetch('/api/admin/clinics?limit=500&offset=0');
       if (res.ok) {
         const json = await res.json();
-        setClinics((json.data || []).map((c: any) => ({ id: c.id, name: c.name })));
+        setClinics((json.data || []).map((c: { id: string; name: string }) => ({ id: c.id, name: c.name })));
       }
     } catch {
       // non-critical

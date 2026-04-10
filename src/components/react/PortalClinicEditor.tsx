@@ -95,7 +95,7 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
       }
 
       setSuccess('Clinic profile updated successfully');
-      setTimeout(() => setSuccess(''), 3000);
+      setTimeout(() => setSuccess(''), 6000);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to save changes');
     } finally {

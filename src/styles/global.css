@@ -254,6 +254,28 @@ button,
     font-weight: 600;
 }
 
+/* Card transitions for state changes */
+.transition-card {
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Table row hover for admin tables */
+table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+/* Skeleton loading pulse */
+.skeleton {
+    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+    background-size: 200% 100%;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
 /* Smooth Scrolling */
 @media (prefers-reduced-motion: no-preference) {
     html {
