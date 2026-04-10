@@ -32,7 +32,12 @@ export default function AIChatbot() {
   }, [messages]);
 
   useEffect(() => {
-    if (isOpen) inputRef.current?.focus();
+    if (isOpen) {
+      inputRef.current?.focus();
+      const handleEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') setIsOpen(false); };
+      document.addEventListener('keydown', handleEsc);
+      return () => document.removeEventListener('keydown', handleEsc);
+    }
   }, [isOpen]);
 
   const sendMessage = async (text: string) => {
@@ -92,7 +97,7 @@ export default function AIChatbot() {
                 <p className="text-blue-200 text-xs">AI-powered guidance</p>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-white/70 hover:text-white transition-colors p-1">
+            <button onClick={() => setIsOpen(false)} aria-label="Close chat" className="text-white/70 hover:text-white transition-colors p-1">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -163,7 +168,8 @@ export default function AIChatbot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about TMS therapy..."
-                className="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200 transition-all"
+                aria-label="Ask a question about TMS therapy"
+                className="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                 disabled={loading}
               />
               <button
