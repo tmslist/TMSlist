@@ -27,7 +27,7 @@ const treatmentEntry = TREATMENT_SLUGS.find(t =>
 const treatmentTitle = treatmentEntry?.title || `TMS for ${treatmentSlugPart.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}`;
 const cityName = citySlugPart.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
 
-const allClinics = getAllClinics().filter(c => c.verified);
+const allClinics = (await getAllClinics()).filter(c => c.verified);
 const cityClinics = allClinics.filter(c => c.city.toLowerCase() === cityName.toLowerCase());
 const stateName = cityClinics.length > 0 ? (STATE_NAMES[cityClinics[0].state] || cityClinics[0].state) : '';
 
@@ -55,22 +55,32 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
 ---
 
 <Layout title={title} description={description} schema={combinedSchema}>
-  <main class="container mx-auto px-4 py-8">
-    <div class="max-w-4xl mx-auto mb-12 text-center">
-      <span
-        class="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-700 rounded-full text-sm font-semibold uppercase tracking-wider mb-4"
-      >
-        Local Care
-      </span>
-      <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-gray-900 mb-6">
-        {treatmentTitle} near {cityName}
-      </h1>
-      <p class="text-xl text-gray-600">
-        We found {sortedClinics.length} verified TMS centers serving the <strong
-          >{cityName}</strong
-        > area.
-      </p>
-    </div>
+  <main>
+    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+      <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+      <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <span class="text-slate-700 font-medium">{treatmentTitle} near {cityName}</span>
+        </nav>
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-violet-50 border border-violet-100 rounded-full mb-6">
+            <span class="flex h-2 w-2 rounded-full bg-violet-500"></span>
+            <span class="text-xs font-semibold text-violet-700 tracking-wide">Local Care</span>
+          </div>
+          <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+            {treatmentTitle} near <span class="text-violet-600">{cityName}</span>
+          </h1>
+          <p class="text-lg text-slate-500 leading-relaxed">
+            We found {sortedClinics.length} verified TMS centers serving the <strong class="text-slate-700">{cityName}</strong> area.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="container mx-auto px-4 py-12">
 
     <!-- Clinic Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -90,13 +100,51 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
             No clinics found specifically using this location filter.
           </p>
           <a
+            id="near-me-fallback"
             href="/us/"
-            class="inline-block px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors"
+            class="inline-block px-6 py-2 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition-colors"
           >
-            Browse National Directory
+            Browse Clinic Directory
           </a>
         </div>
       )
     }
+
+    <!-- SEO Content Section -->
+    {sortedClinics.length > 0 && (
+    <section class="mt-16 border-t border-slate-200 pt-12">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Finding {treatmentTitle} near {cityName}</h2>
+        <div class="prose prose-slate max-w-none text-slate-600">
+          <p>
+            If you're looking for {treatmentTitle.toLowerCase()} providers near {cityName}, {stateName}, the clinics above have been verified and include real patient reviews,
+            insurance information, and treatment details. TMS therapy is FDA-cleared for treatment-resistant depression
+            and uses focused magnetic pulses to stimulate specific brain regions involved in mood regulation.
+          </p>
+          <h3 class="text-lg font-semibold text-slate-800 mt-6">What to consider when choosing a local TMS provider</h3>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Verify the clinic accepts your insurance — call ahead to confirm coverage for TMS</li>
+            <li>Check which TMS device the clinic uses (NeuroStar, BrainsWay, MagVenture) and session duration</li>
+            <li>Ask about the treating psychiatrist's experience with TMS specifically</li>
+            <li>Read patient reviews to understand the experience at each clinic</li>
+            <li>Consider location and parking — you'll visit daily for 6-9 weeks</li>
+          </ul>
+          <p class="mt-4">
+            Most patients begin noticing improvement after 2-4 weeks of treatment. Sessions are brief (3-37 minutes depending on protocol)
+            and require no anesthesia or downtime — you can drive yourself and return to normal activities immediately.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3 mt-6">
+          <a href="/treatments/" class="text-sm font-medium text-violet-600 hover:text-violet-700">Conditions Treated →</a>
+          <a href="/insurance/" class="text-sm font-medium text-violet-600 hover:text-violet-700">Insurance Coverage →</a>
+          <a href="/quiz/am-i-a-candidate/" class="text-sm font-medium text-violet-600 hover:text-violet-700">Am I a Candidate? →</a>
+        </div>
+      </div>
+    </section>
+    )}
+
+    </div>
   </main>
 </Layout>
+
+<!-- geo.js (loaded in Layout head) handles /us/ link updates automatically -->

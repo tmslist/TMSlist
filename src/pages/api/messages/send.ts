@@ -88,7 +88,7 @@ export const POST: APIRoute = async ({ request }) => {
         patientEmail: parsed.data.email,
         patientPhone: parsed.data.phone,
         message: structuredMessage,
-      }).catch(() => {});
+      }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
     }
 
     // Notify clinic via SMS
@@ -99,7 +99,7 @@ export const POST: APIRoute = async ({ request }) => {
         patientName: parsed.data.name,
         patientPhone: parsed.data.phone,
         condition: parsed.data.condition,
-      }).catch(() => {});
+      }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
     }
 
     // Track analytics
@@ -107,7 +107,7 @@ export const POST: APIRoute = async ({ request }) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ clinicId: parsed.data.clinicId, event: 'lead_submit' }),
-    }).catch(() => {});
+    }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
 
     return new Response(JSON.stringify({ success: true, id: result[0]?.id }), {
       status: 201,

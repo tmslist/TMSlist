@@ -63,7 +63,7 @@ export const GET: APIRoute = async ({ request, url, redirect }) => {
 
       // Send temp password to the clinic owner
       const { sendWelcomeEmail } = await import('../../../utils/email');
-      sendWelcomeEmail(claim[0].email, rawPassword).catch(() => {});
+      sendWelcomeEmail(claim[0].email, rawPassword).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
     }
 
     // Update claim with userId

@@ -87,7 +87,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const firstStep = DRIP_SEQUENCES[segment]?.[0];
     if (firstStep && firstStep.delayDays === 0) {
-      sendFunnelEmail(contact, firstStep).catch(() => {});
+      sendFunnelEmail(contact, firstStep).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
     }
 
     return new Response(JSON.stringify({

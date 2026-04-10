@@ -51,7 +51,7 @@ export const POST: APIRoute = async ({ request }) => {
       sendFunnelEmail(
         { email: parsed.data.email, name: parsed.data.name || 'there', segment: 'newsletter', metadata: { state: parsed.data.state || '' } },
         firstStep
-      ).catch(() => {});
+      ).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
     }
 
     return new Response(JSON.stringify({ success: true }), {

@@ -58,7 +58,7 @@ export const POST: APIRoute = async ({ request }) => {
       email: parsed.data.email,
       clinicName: clinic[0].name,
       verificationUrl: `${siteUrl}/api/clinics/verify?token=${token}`,
-    }).catch(() => {});
+    }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
 
     return new Response(JSON.stringify({ success: true, message: 'Verification email sent' }), {
       status: 201,

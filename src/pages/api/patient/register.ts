@@ -63,7 +63,7 @@ export const POST: APIRoute = async ({ request }) => {
         funnel_completed_steps: ['patient_welcome'],
         source: 'registration',
       },
-    }).catch(() => {});
+    }).catch((err) => console.error('[register] Failed to create funnel lead:', err?.message));
 
     // Send patient welcome drip email
     const firstStep = DRIP_SEQUENCES.patient[0];
@@ -71,7 +71,7 @@ export const POST: APIRoute = async ({ request }) => {
       sendFunnelEmail(
         { email: user.email, name: parsed.data.name, segment: 'patient' },
         firstStep
-      ).catch(() => {});
+      ).catch((err) => console.error('[register] Failed to send welcome email:', err?.message));
     }
 
     return new Response(JSON.stringify({ success: true, user: { id: user.id, name: user.name, email: user.email } }), {

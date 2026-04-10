@@ -41,7 +41,7 @@ export const POST: APIRoute = async ({ request }) => {
         patientPhone: data.phone,
         message: data.message || '',
         sourceUrl: data.sourceUrl,
-      }).catch(() => {});
+      }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
     }
 
     return new Response(JSON.stringify({ success: true, id: lead?.id }), {
