@@ -3,473 +3,214 @@ import Layout from "../../layouts/Layout.astro";
 import { BLOG_SLUGS } from "../../utils/seo_slugs";
 
 const blogPosts = [
-    // — April 2026 —
-    {
-        slug: "stanford-neuromodulation-therapy-snt-2026",
-        title: "Stanford Neuromodulation Therapy (SNT): The 5-Day TMS Protocol Changing Everything",
-        excerpt: "SNT delivers a full TMS course in just 5 days instead of 6 weeks. Here's how the accelerated Stanford protocol works, who qualifies, and which clinics offer it.",
-        category: "Research",
-        date: "April 2026",
-        readTime: "9 min read",
-        image: "/images/brain_stimulation_art_1769446474392.jpg",
-    },
-    {
-        slug: "tms-for-postpartum-depression",
-        title: "TMS for Postpartum Depression: A Safe, Medication-Free Option for New Mothers",
-        excerpt: "For mothers who can't or don't want to take antidepressants while breastfeeding, TMS offers a compelling alternative. What the latest studies show.",
-        category: "Treatment",
-        date: "April 2026",
-        readTime: "7 min read",
-        image: "/images/tms_chair_luxury_1769446442231.jpg",
-    },
-    {
-        slug: "ai-guided-tms-targeting-2026",
-        title: "AI-Guided TMS Targeting: How Machine Learning Is Improving Treatment Precision",
-        excerpt: "New AI systems can now identify the exact brain region to target for each patient. How this personalized approach is boosting response rates.",
-        category: "Research",
-        date: "April 2026",
-        readTime: "8 min read",
-        image: "/images/brain_stimulation_art_1769446474392.jpg",
-    },
-    {
-        slug: "tms-covered-by-medicare-2026-update",
-        title: "Medicare TMS Coverage in 2026: What Changed and What You Need to Know",
-        excerpt: "Medicare expanded TMS coverage criteria this year. Here's exactly what's covered, the new documentation requirements, and how to avoid claim denials.",
-        category: "Insurance",
-        date: "April 2026",
-        readTime: "6 min read",
-        image: "/images/tms_chair_luxury_1769446442231.jpg",
-    },
-    // — March 2026 —
-    {
-        slug: "tms-for-anxiety-fda-breakthrough",
-        title: "TMS for Anxiety: Why the FDA Breakthrough Therapy Designation Matters",
-        excerpt: "The FDA granted Breakthrough Therapy designation for TMS in generalized anxiety disorder. What this means for patients and the timeline for formal clearance.",
-        category: "Research",
-        date: "March 2026",
-        readTime: "7 min read",
-        image: "/images/brain_stimulation_art_1769446474392.jpg",
-    },
-    {
-        slug: "theta-burst-vs-standard-tms",
-        title: "Theta Burst vs Standard TMS: 3-Minute Sessions vs 20-Minute Sessions",
-        excerpt: "Theta burst stimulation (TBS) cuts session time from 20 minutes to 3 minutes. We compare outcomes, side effects, and availability across 1,100+ clinics.",
-        category: "Treatment",
-        date: "March 2026",
-        readTime: "8 min read",
-        image: "/images/tms_chair_luxury_1769446442231.jpg",
-    },
-    {
-        slug: "real-cost-of-tms-therapy-2026",
-        title: "The Real Cost of TMS Therapy in 2026: City-by-City Breakdown",
-        excerpt: "We surveyed 500+ clinics to get actual TMS pricing. Out-of-pocket costs range from $150 to $450 per session depending on where you live.",
-        category: "Insurance",
-        date: "March 2026",
-        readTime: "10 min read",
-        image: "/images/brain_stimulation_art_1769446474392.jpg",
-    },
-    {
-        slug: "tms-and-ketamine-together",
-        title: "TMS + Ketamine: Why Clinics Are Combining Both Treatments",
-        excerpt: "A growing number of clinics now offer TMS and ketamine together. The science behind combination therapy and whether it's worth the extra cost.",
-        category: "Treatment",
-        date: "March 2026",
-        readTime: "9 min read",
-        image: "/images/tms_chair_luxury_1769446442231.jpg",
-    },
-    {
-        slug: "tms-at-home-devices-2026",
-        title: "At-Home TMS Devices in 2026: Do They Actually Work?",
-        excerpt: "Consumer TMS devices are flooding the market. We separate FDA-cleared options from wellness gadgets and explain what the clinical evidence really says.",
-        category: "FAQ",
-        date: "March 2026",
-        readTime: "7 min read",
-        image: "/images/brain_stimulation_art_1769446474392.jpg",
-    },
-    // — February 2026 —
-    {
-        slug: "choosing-tms-clinic-red-flags",
-        title: "Red Flags When Choosing a TMS Clinic: What to Watch Out For",
-        excerpt: "Not all TMS clinics are equal. Board certification, machine type, protocol adherence, and 7 other things you should verify before committing.",
-        category: "Patient Guide",
-        date: "February 2026",
-        readTime: "8 min read",
-        image: "/images/tms_chair_luxury_1769446442231.jpg",
-    },
-    {
-        slug: "tms-for-ocd-deep-tms-results",
-        title: "Deep TMS for OCD: 2-Year Follow-Up Data Shows Lasting Results",
-        excerpt: "BrainsWay's deep TMS for OCD now has long-term data. 58% of responders maintained improvement at 2 years without additional treatment.",
-        category: "Research",
-        date: "February 2026",
-        readTime: "7 min read",
-        image: "/images/brain_stimulation_art_1769446474392.jpg",
-    },
-    {
-        slug: "what-tms-actually-feels-like",
-        title: "What TMS Actually Feels Like: 50 Patients Describe Their Experience",
-        excerpt: "We asked 50 real patients to describe their TMS sessions in their own words. The honest answers might surprise you.",
-        category: "Patient Guide",
-        date: "February 2026",
-        readTime: "6 min read",
-        image: "/images/tms_chair_luxury_1769446442231.jpg",
-    },
-    {
-        slug: "tms-for-veterans-va-coverage",
-        title: "TMS for Veterans: VA Coverage, Eligibility, and Where to Find Treatment",
-        excerpt: "The VA now covers TMS at over 100 facilities. Complete guide to eligibility requirements, referral process, and community care options.",
-        category: "Insurance",
-        date: "February 2026",
-        readTime: "8 min read",
-        image: "/images/brain_stimulation_art_1769446474392.jpg",
-    },
-    {
-        slug: "tms-during-pregnancy-safety-data",
-        title: "TMS During Pregnancy: Updated Safety Data and Clinical Guidelines",
-        excerpt: "New meta-analysis covering 400+ pregnant patients confirms TMS safety profile. Current guidelines from ACOG and the APA on when to consider it.",
-        category: "Research",
-        date: "February 2026",
-        readTime: "7 min read",
-        image: "/images/tms_chair_luxury_1769446442231.jpg",
-    },
-    // — January 2026 (existing) —
-    {
-        slug: "tms-success-rates-2026",
-        title: "TMS Success Rates in 2026: What the Latest Research Shows",
-        excerpt: "A comprehensive look at the latest clinical data on TMS therapy outcomes for depression, OCD, and other conditions.",
-        category: "Research",
-        date: "January 2026",
-        readTime: "8 min read",
-        image: "/images/tms_chair_luxury_1769446442231.jpg",
-    },
-    {
-        slug: "tms-vs-medication",
-        title: "TMS vs Medication: A Complete Comparison Guide",
-        excerpt: "How does TMS compare to antidepressants? We break down efficacy, side effects, and long-term outcomes.",
-        category: "Treatment",
-        date: "January 2026",
-        readTime: "10 min read",
-        image: "/images/brain_stimulation_art_1769446474392.jpg",
-    },
-    {
-        slug: "how-to-prepare-for-tms",
-        title: "How to Prepare for Your First TMS Session",
-        excerpt: "Everything you need to know before starting TMS therapy, from what to wear to what to expect.",
-        category: "Patient Guide",
-        date: "January 2026",
-        readTime: "5 min read",
-        image: "/images/tms_chair_luxury_1769446442231.jpg",
-    },
-    {
-        slug: "does-tms-cause-memory-loss",
-        title: "Does TMS Cause Memory Loss? Separating Fact from Fiction",
-        excerpt: "Addressing common concerns about cognitive side effects of transcranial magnetic stimulation.",
-        category: "FAQ",
-        date: "January 2026",
-        readTime: "6 min read",
-        image: "/images/brain_stimulation_art_1769446474392.jpg",
-    },
-    {
-        slug: "can-i-drive-after-tms",
-        title: "Can I Drive After TMS? Activity Guidelines Explained",
-        excerpt: "Understanding what activities are safe immediately after a TMS session.",
-        category: "Patient Guide",
-        date: "January 2026",
-        readTime: "4 min read",
-        image: "/images/tms_chair_luxury_1769446442231.jpg",
-    },
-    {
-        slug: "how-long-does-tms-last",
-        title: "How Long Do TMS Results Last? Durability of Treatment",
-        excerpt: "Exploring long-term outcomes and maintenance protocols for sustaining TMS benefits.",
-        category: "Research",
-        date: "January 2026",
-        readTime: "7 min read",
-        image: "/images/brain_stimulation_art_1769446474392.jpg",
-    },
+    { slug: "stanford-neuromodulation-therapy-snt-2026", title: "Stanford Neuromodulation Therapy (SNT): The 5-Day TMS Protocol Changing Everything", excerpt: "SNT delivers a full TMS course in just 5 days instead of 6 weeks. Here's how the accelerated Stanford protocol works, who qualifies, and which clinics offer it.", category: "Research", date: "April 2026", readTime: "9 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
+    { slug: "tms-for-postpartum-depression", title: "TMS for Postpartum Depression: A Safe, Medication-Free Option for New Mothers", excerpt: "For mothers who can't or don't want to take antidepressants while breastfeeding, TMS offers a compelling alternative.", category: "Treatment", date: "April 2026", readTime: "7 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
+    { slug: "ai-guided-tms-targeting-2026", title: "AI-Guided TMS Targeting: How Machine Learning Is Improving Treatment Precision", excerpt: "New AI systems can now identify the exact brain region to target for each patient, boosting response rates.", category: "Research", date: "April 2026", readTime: "8 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
+    { slug: "tms-covered-by-medicare-2026-update", title: "Medicare TMS Coverage in 2026: What Changed and What You Need to Know", excerpt: "Medicare expanded TMS coverage criteria this year. Here's exactly what's covered and the new documentation requirements.", category: "Insurance", date: "April 2026", readTime: "6 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
+    { slug: "tms-for-anxiety-fda-breakthrough", title: "TMS for Anxiety: Why the FDA Breakthrough Therapy Designation Matters", excerpt: "The FDA granted Breakthrough Therapy designation for TMS in generalized anxiety disorder.", category: "Research", date: "March 2026", readTime: "7 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
+    { slug: "theta-burst-vs-standard-tms", title: "Theta Burst vs Standard TMS: 3-Minute Sessions vs 20-Minute Sessions", excerpt: "Theta burst stimulation cuts session time from 20 minutes to 3 minutes. We compare outcomes and availability.", category: "Treatment", date: "March 2026", readTime: "8 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
+    { slug: "real-cost-of-tms-therapy-2026", title: "The Real Cost of TMS Therapy in 2026: City-by-City Breakdown", excerpt: "We surveyed 500+ clinics to get actual TMS pricing. Out-of-pocket costs range from $150 to $450 per session.", category: "Insurance", date: "March 2026", readTime: "10 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
+    { slug: "tms-and-ketamine-together", title: "TMS + Ketamine: Why Clinics Are Combining Both Treatments", excerpt: "A growing number of clinics now offer TMS and ketamine together. The science behind combination therapy.", category: "Treatment", date: "March 2026", readTime: "9 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
+    { slug: "tms-at-home-devices-2026", title: "At-Home TMS Devices in 2026: Do They Actually Work?", excerpt: "Consumer TMS devices are flooding the market. We separate FDA-cleared options from wellness gadgets.", category: "FAQ", date: "March 2026", readTime: "7 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
+    { slug: "choosing-tms-clinic-red-flags", title: "Red Flags When Choosing a TMS Clinic: What to Watch Out For", excerpt: "Not all TMS clinics are equal. 7 things you should verify before committing to treatment.", category: "Patient Guide", date: "February 2026", readTime: "8 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
+    { slug: "tms-for-ocd-deep-tms-results", title: "Deep TMS for OCD: 2-Year Follow-Up Data Shows Lasting Results", excerpt: "BrainsWay's deep TMS for OCD now has long-term data. 58% of responders maintained improvement at 2 years.", category: "Research", date: "February 2026", readTime: "7 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
+    { slug: "what-tms-actually-feels-like", title: "What TMS Actually Feels Like: 50 Patients Describe Their Experience", excerpt: "We asked 50 real patients to describe their TMS sessions in their own words.", category: "Patient Guide", date: "February 2026", readTime: "6 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
+    { slug: "tms-for-veterans-va-coverage", title: "TMS for Veterans: VA Coverage, Eligibility, and Where to Find Treatment", excerpt: "The VA now covers TMS at over 100 facilities. Complete guide to eligibility and community care.", category: "Insurance", date: "February 2026", readTime: "8 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
+    { slug: "tms-during-pregnancy-safety-data", title: "TMS During Pregnancy: Updated Safety Data and Clinical Guidelines", excerpt: "New meta-analysis covering 400+ pregnant patients confirms TMS safety profile.", category: "Research", date: "February 2026", readTime: "7 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
+    { slug: "tms-success-rates-2026", title: "TMS Success Rates in 2026: What the Latest Research Shows", excerpt: "A comprehensive look at the latest clinical data on TMS therapy outcomes.", category: "Research", date: "January 2026", readTime: "8 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
+    { slug: "tms-vs-medication", title: "TMS vs Medication: A Complete Comparison Guide", excerpt: "How does TMS compare to antidepressants? We break down efficacy, side effects, and long-term outcomes.", category: "Treatment", date: "January 2026", readTime: "10 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
+    { slug: "how-to-prepare-for-tms", title: "How to Prepare for Your First TMS Session", excerpt: "Everything you need to know before starting TMS therapy.", category: "Patient Guide", date: "January 2026", readTime: "5 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
+    { slug: "does-tms-cause-memory-loss", title: "Does TMS Cause Memory Loss? Separating Fact from Fiction", excerpt: "Addressing common concerns about cognitive side effects of TMS.", category: "FAQ", date: "January 2026", readTime: "6 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
+    { slug: "can-i-drive-after-tms", title: "Can I Drive After TMS? Activity Guidelines Explained", excerpt: "Understanding what activities are safe immediately after a TMS session.", category: "Patient Guide", date: "January 2026", readTime: "4 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
+    { slug: "how-long-does-tms-last", title: "How Long Do TMS Results Last? Durability of Treatment", excerpt: "Exploring long-term outcomes and maintenance protocols.", category: "Research", date: "January 2026", readTime: "7 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
 ];
 
-const categories = [...new Set(blogPosts.map((p) => p.category))];
+const categories = [...new Set(blogPosts.map(p => p.category))];
+const categoryColors: Record<string, { bg: string; text: string; dot: string }> = {
+    'Research': { bg: 'bg-blue-50', text: 'text-blue-600', dot: 'bg-blue-500' },
+    'Treatment': { bg: 'bg-emerald-50', text: 'text-emerald-600', dot: 'bg-emerald-500' },
+    'Insurance': { bg: 'bg-amber-50', text: 'text-amber-600', dot: 'bg-amber-500' },
+    'FAQ': { bg: 'bg-violet-50', text: 'text-violet-600', dot: 'bg-violet-500' },
+    'Patient Guide': { bg: 'bg-rose-50', text: 'text-rose-600', dot: 'bg-rose-500' },
+};
+const defaultColor = { bg: 'bg-slate-50', text: 'text-slate-600', dot: 'bg-slate-500' };
 ---
 
 <Layout title="TMS Therapy Blog - Expert Guides & Research | TMS List" description="Expert articles on TMS therapy, depression treatment, insurance coverage, and the latest research in brain stimulation.">
-    <!-- Hero -->
-    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-        <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-        <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 justify-center">
-                <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                <span class="text-slate-600 font-medium">Blog</span>
-            </nav>
-            <div class="text-center">
-                <span
-                    class="inline-block px-4 py-1.5 bg-violet-50 text-violet-700 rounded-full text-sm font-semibold uppercase tracking-wider mb-6"
-                    >TMS List Blog</span
-                >
-                <h1 class="text-4xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-6">
-                    Expert <span class="text-violet-600">Insights</span> on TMS Therapy
-                </h1>
-                <p class="text-xl text-slate-500 max-w-2xl mx-auto">
-                    Evidence-based articles, patient guides, and the latest research
-                    on transcranial magnetic stimulation.
-                </p>
-            </div>
-        </div>
-    </section>
+    <main>
+        <!-- Hero -->
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-violet-600/12 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
 
-    <!-- Category Filters -->
-    <section class="bg-white/95 backdrop-blur-sm border-b border-gray-100 py-4 sticky top-16 z-40 transition-shadow duration-300" id="filter-bar">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center gap-4 overflow-x-auto pb-2">
-                <span class="text-sm font-semibold text-gray-500 shrink-0"
-                    >Filter:</span
-                >
-                <button
-                    data-category="all"
-                    class="filter-btn px-4 py-2 bg-violet-600 text-white text-sm font-semibold rounded-full transition-colors"
-                    >All</button
-                >
-                {
-                    categories.map((cat) => (
-                        <button
-                            data-category={cat}
-                            class="filter-btn px-4 py-2 bg-gray-100 text-gray-600 text-sm font-semibold rounded-full hover:bg-gray-200 transition-colors shrink-0"
-                        >
-                            {cat}
-                        </button>
-                    ))
-                }
-            </div>
-        </div>
-    </section>
-
-    <main class="container mx-auto px-6 py-16">
-        <!-- Featured Post -->
-        {blogPosts.length > 0 && (
-            <a
-                href={`/blog/${blogPosts[0].slug}/`}
-                data-category={blogPosts[0].category}
-                class="blog-card group block bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden mb-14 hover:shadow-md transition-all duration-300"
-            >
-                <div class="flex flex-col lg:flex-row">
-                    <div class="lg:w-1/2 relative">
-                        <div class="aspect-[16/9] lg:aspect-auto lg:h-full bg-gradient-to-br from-violet-100 to-cyan-100 overflow-hidden">
-                            <img
-                                src={blogPosts[0].image}
-                                alt={blogPosts[0].title}
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                        </div>
+            <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-32 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">Blog</span>
+                </nav>
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
+                        <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                        <span class="text-xs font-semibold text-slate-300 tracking-wider uppercase">{blogPosts.length} Articles</span>
                     </div>
-                    <div class="lg:w-1/2 p-8 lg:p-10 flex flex-col justify-center">
-                        <span class="inline-block self-start px-3 py-1 bg-violet-50 text-violet-600 text-xs font-semibold rounded-full mb-4">
-                            {blogPosts[0].category}
-                        </span>
-                        <h2 class="text-2xl lg:text-3xl font-semibold text-gray-900 mb-4 group-hover:text-violet-600 transition-colors">
-                            {blogPosts[0].title}
-                        </h2>
-                        <p class="text-gray-600 mb-6 text-base leading-relaxed line-clamp-3">
-                            {blogPosts[0].excerpt}
-                        </p>
-                        <div class="flex items-center gap-4 text-sm text-gray-400 mb-6">
-                            <span>{blogPosts[0].date}</span>
-                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
-                            <span>{blogPosts[0].readTime}</span>
-                        </div>
-                        <span class="inline-flex items-center gap-2 text-violet-600 font-semibold text-sm group-hover:gap-3 transition-all">
-                            Read Article
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                        </span>
-                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
+                        The TMS<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">Journal</span>
+                    </h1>
+                    <p class="text-lg text-slate-400 leading-relaxed">
+                        Evidence-based articles, patient guides, and the latest research on transcranial magnetic stimulation.
+                    </p>
                 </div>
-            </a>
-        )}
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+        </section>
 
-        <!-- Remaining Posts Grid -->
-        <div
-            id="blog-grid"
-            class="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-            {
-                blogPosts.slice(1).map((post) => (
-                    <a
-                        href={`/blog/${post.slug}/`}
-                        data-category={post.category}
-                        class="blog-card group block bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300"
-                    >
-                        <div class="relative h-52 bg-gradient-to-br from-violet-100 to-cyan-100 overflow-hidden">
-                            <img
-                                src={post.image}
-                                alt={post.title}
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                loading="lazy"
-                            />
-                            <span class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur text-xs font-semibold text-violet-600 rounded-full">
-                                {post.category}
-                            </span>
-                        </div>
-                        <div class="p-7">
-                            <h2 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-violet-600 transition-colors line-clamp-2">
-                                {post.title}
-                            </h2>
-                            <p class="text-gray-600 mb-5 line-clamp-2 leading-relaxed">
-                                {post.excerpt}
-                            </p>
-                            <div class="border-t border-slate-100 pt-4 flex items-center justify-between text-sm text-gray-400">
-                                <span>{post.date}</span>
-                                <span>{post.readTime}</span>
+        <!-- Category Filters -->
+        <section class="bg-white border-b border-slate-100 py-4 sticky top-16 z-40" id="filter-bar">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
+                    <button data-category="all" class="filter-btn px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-full transition-all shrink-0">All</button>
+                    {categories.map(cat => {
+                        const c = categoryColors[cat] || defaultColor;
+                        return (
+                            <button data-category={cat} class={`filter-btn px-4 py-2 ${c.bg} ${c.text} text-sm font-semibold rounded-full hover:opacity-80 transition-all shrink-0`}>{cat}</button>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <section class="py-12 lg:py-16 bg-white">
+            <div class="container mx-auto px-4 max-w-6xl">
+
+                <!-- Featured Post -->
+                {blogPosts.length > 0 && (
+                    <a href={`/blog/${blogPosts[0].slug}/`} data-category={blogPosts[0].category}
+                       class="blog-card group block mb-14">
+                        <div class="grid lg:grid-cols-2 gap-0 bg-slate-950 rounded-3xl overflow-hidden">
+                            <div class="relative h-64 lg:h-auto overflow-hidden">
+                                <img src={blogPosts[0].image} alt={blogPosts[0].title}
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80" loading="eager" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent lg:bg-gradient-to-r"></div>
+                            </div>
+                            <div class="p-8 lg:p-12 flex flex-col justify-center">
+                                <div class="flex items-center gap-3 mb-5">
+                                    {(() => { const c = categoryColors[blogPosts[0].category] || defaultColor; return (
+                                        <span class={`px-3 py-1 ${c.bg} ${c.text} text-[11px] font-bold uppercase tracking-wider rounded-md`}>{blogPosts[0].category}</span>
+                                    )})()}
+                                    <span class="text-slate-500 text-sm">{blogPosts[0].date}</span>
+                                </div>
+                                <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-violet-300 transition-colors tracking-tight leading-tight">
+                                    {blogPosts[0].title}
+                                </h2>
+                                <p class="text-slate-400 leading-relaxed mb-6 line-clamp-3">{blogPosts[0].excerpt}</p>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-violet-400 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                                        Read Article <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                    </span>
+                                    <span class="text-slate-600 text-sm">{blogPosts[0].readTime}</span>
+                                </div>
                             </div>
                         </div>
                     </a>
-                ))
-            }
-        </div>
+                )}
 
-        <!-- Newsletter CTA -->
-        <div
-            class="mt-16 bg-gradient-to-r from-violet-600 to-blue-600 rounded-3xl p-10 text-center"
-        >
-            <div id="newsletter-content">
-                <h3 class="text-3xl font-semibold text-white mb-4">
-                    Stay Updated on TMS Research
-                </h3>
-                <p class="text-violet-100 mb-8 max-w-xl mx-auto">
-                    Get the latest articles, research updates, and patient
-                    resources delivered to your inbox.
-                </p>
-                <form
-                    id="newsletter-form"
-                    class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
-                >
-                    <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="Enter your email"
-                        class="flex-1 px-5 py-4 rounded-xl text-gray-900 font-medium"
-                    />
-                    <button
-                        type="submit"
-                        class="px-8 py-4 bg-white text-violet-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors"
-                        >Subscribe</button
-                    >
-                </form>
-            </div>
-            <div
-                id="newsletter-success"
-                class="hidden h-[232px] flex flex-col items-center justify-center"
-            >
-                <div
-                    class="w-16 h-16 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-4"
-                >
-                    <svg
-                        class="w-8 h-8 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M5 13l4 4L19 7"></path>
-                    </svg>
+                <!-- Posts Grid -->
+                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {blogPosts.slice(1).map((post) => {
+                        const c = categoryColors[post.category] || defaultColor;
+                        return (
+                        <a href={`/blog/${post.slug}/`} data-category={post.category}
+                           class="blog-card group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] hover:border-slate-200 transition-all duration-300">
+                            <div class="relative h-48 bg-slate-100 overflow-hidden">
+                                <img src={post.image} alt={post.title}
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                <span class={`absolute top-3 left-3 px-2.5 py-1 ${c.bg} ${c.text} text-[10px] font-bold uppercase tracking-wider rounded-md backdrop-blur-sm`}>{post.category}</span>
+                            </div>
+                            <div class="p-6">
+                                <h2 class="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-violet-600 transition-colors tracking-tight leading-snug line-clamp-2">{post.title}</h2>
+                                <p class="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
+                                <div class="flex items-center justify-between pt-4 border-t border-slate-50 text-xs text-slate-400">
+                                    <span>{post.date}</span>
+                                    <span class="font-medium">{post.readTime}</span>
+                                </div>
+                            </div>
+                        </a>
+                    )})}
                 </div>
-                <h3 class="text-2xl font-semibold text-white mb-2">
-                    You're Subscribed!
-                </h3>
-                <p class="text-violet-100">
-                    Thank you for joining our community.
-                </p>
+
+                <!-- Newsletter -->
+                <div class="mt-20 relative bg-slate-950 rounded-3xl p-10 lg:p-14 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+                    <div class="relative z-10" id="newsletter-content">
+                        <div class="text-center max-w-lg mx-auto">
+                            <p class="text-sm font-semibold text-violet-400 tracking-wider uppercase mb-3">Stay informed</p>
+                            <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">Get TMS research in your inbox</h3>
+                            <p class="text-slate-400 mb-8">New articles, clinical trial updates, and patient resources. No spam.</p>
+                            <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                                <input type="email" name="email" required placeholder="you@email.com" class="flex-1 px-5 py-3.5 rounded-xl bg-white/10 border border-white/10 text-white placeholder-slate-500 focus:ring-2 focus:ring-violet-500 focus:border-transparent" />
+                                <button type="submit" class="px-7 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="newsletter-success" class="hidden relative z-10 text-center py-8">
+                        <div class="w-14 h-14 bg-emerald-500/20 backdrop-blur rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">You're subscribed!</h3>
+                        <p class="text-slate-400">Check your inbox for a welcome email.</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 </Layout>
 
 <script>
     document.addEventListener("astro:page-load", () => {
-        // Filter Logic
         const buttons = document.querySelectorAll(".filter-btn");
         const cards = document.querySelectorAll(".blog-card");
 
-        buttons.forEach((btn) => {
+        buttons.forEach(btn => {
             btn.addEventListener("click", () => {
                 const category = btn.getAttribute("data-category");
-
-                // Update active state
-                buttons.forEach((b) => {
-                    b.classList.remove("bg-violet-600", "text-white");
-                    b.classList.add("bg-gray-100", "text-gray-600");
+                buttons.forEach(b => {
+                    b.classList.remove("bg-slate-900", "text-white", "!bg-slate-900", "!text-white");
+                    // Reset to original colors
+                    const origBg = b.className.match(/bg-\w+-\d+/)?.[0];
+                    if (origBg) b.classList.add(origBg);
                 });
-                btn.classList.remove("bg-gray-100", "text-gray-600");
-                btn.classList.add("bg-violet-600", "text-white");
+                btn.classList.add("!bg-slate-900", "!text-white");
 
-                // Filter cards
-                cards.forEach((card) => {
-                    const cardCategory = card.getAttribute("data-category");
-                    if (category === "all" || cardCategory === category) {
-                        (card as HTMLElement).style.display = "block";
-                    } else {
-                        (card as HTMLElement).style.display = "none";
-                    }
+                cards.forEach(card => {
+                    const cardCat = card.getAttribute("data-category");
+                    (card as HTMLElement).style.display = (category === "all" || cardCat === category) ? "" : "none";
                 });
             });
         });
 
-        // Newsletter Form Logic
-        const newsletterForm = document.getElementById(
-            "newsletter-form",
-        ) as HTMLFormElement;
-        const newsletterContent = document.getElementById("newsletter-content");
-        const newsletterSuccess = document.getElementById("newsletter-success");
+        const form = document.getElementById("newsletter-form") as HTMLFormElement;
+        const content = document.getElementById("newsletter-content");
+        const success = document.getElementById("newsletter-success");
 
-        if (newsletterForm) {
-            newsletterForm.addEventListener("submit", async (e) => {
+        if (form) {
+            form.addEventListener("submit", async (e) => {
                 e.preventDefault();
-
-                const submitBtn = newsletterForm.querySelector(
-                    'button[type="submit"]',
-                ) as HTMLButtonElement;
-                const originalText = submitBtn.innerText;
-                submitBtn.disabled = true;
-                submitBtn.innerText = "Joining...";
-
-                const formData = new FormData(newsletterForm);
-                const data = {
-                    type: "newsletter",
-                    email: formData.get("email"),
-                    source: window.location.href,
-                    timestamp: new Date().toISOString(),
-                };
-
+                const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+                btn.disabled = true; btn.textContent = "Joining...";
                 try {
                     const res = await fetch('/api/leads', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            type: 'newsletter',
-                            email: data.email,
-                            sourceUrl: data.source,
-                        }),
+                        body: JSON.stringify({ type: 'newsletter', email: new FormData(form).get('email'), sourceUrl: location.href }),
                     });
-
-                    if (res.ok) {
-                        newsletterContent?.classList.add("hidden");
-                        newsletterSuccess?.classList.remove("hidden");
-                        const input = newsletterForm.querySelector(
-                            'input[name="email"]',
-                        ) as HTMLInputElement;
-                        if (input) input.value = "";
-                    } else {
-                        throw new Error("Submission failed");
-                    }
-                } catch (error) {
-                    showToast("Something went wrong. Please try again.");
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = originalText;
-                }
+                    if (res.ok) { content?.classList.add("hidden"); success?.classList.remove("hidden"); }
+                    else throw new Error();
+                } catch { showToast("Something went wrong. Please try again."); btn.disabled = false; btn.textContent = "Subscribe"; }
             });
         }
     });

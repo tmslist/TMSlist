@@ -22,7 +22,7 @@ const cityName = (city || '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) =>
 const treatmentEntry = TREATMENT_SLUGS.find(t => t.slug === treatment);
 const treatmentTitle = treatmentEntry?.title || `TMS for ${(treatment || '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}`;
 
-const cityClinics = getClinicsByCity(stateCode, cityName);
+const cityClinics = await getClinicsByCity(stateCode, cityName);
 const sortedClinics = [...cityClinics].sort(
     (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
 );
@@ -54,37 +54,16 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
 <Layout title={title} description={description} schema={combinedSchema}>
     <main class="container mx-auto px-4 py-8">
         <!-- Breadcrumbs -->
-        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="/" class="hover:text-gray-900">Home</a>
-                </li>
-                <li class="inline-flex items-center">
-                    <span class="mx-2">/</span>
-                    <a href="/us/" class="hover:text-gray-900">U.S.</a>
-                </li>
-                <li class="inline-flex items-center">
-                    <span class="mx-2">/</span>
-                    <a href={`/us/${state}/`} class="hover:text-gray-900"
-                        >{stateName}</a
-                    >
-                </li>
-                <li class="inline-flex items-center">
-                    <span class="mx-2">/</span>
-                    <a
-                        href={`/us/${state}/${city}/`}
-                        class="hover:text-gray-900">{cityName}</a
-                    >
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <span class="mx-2">/</span>
-                        <span class="text-gray-800 font-medium line-clamp-1"
-                            >{treatmentTitle}</span
-                        >
-                    </div>
-                </li>
-            </ol>
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <a href="/us/" class="hover:text-violet-600 transition-colors">U.S.</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <a href={`/us/${state}/`} class="hover:text-violet-600 transition-colors">{stateName}</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <a href={`/us/${state}/${city}/`} class="hover:text-violet-600 transition-colors">{cityName}</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <span class="text-slate-700 font-medium">{treatmentTitle}</span>
         </nav>
 
         <div class="max-w-4xl mx-auto mb-12 text-center">
@@ -124,7 +103,7 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
                             </p>
                             <a
                                 href={`/us/${state}/`}
-                                class="inline-block px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors"
+                                class="inline-block px-6 py-2 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition-colors"
                             >
                                 View All {stateName} Clinics
                             </a>
@@ -135,7 +114,7 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
         </div>
 
         <!-- Educational Content -->
-        <section class="mt-20 max-w-3xl mx-auto prose prose-lg prose-indigo">
+        <section class="mt-20 max-w-3xl mx-auto prose prose-lg prose-violet">
             <h2>About {treatmentTitle.replace("TMS for ", "")} Treatment</h2>
             <p>
                 Transcranial Magnetic Stimulation (TMS) is an FDA-cleared,

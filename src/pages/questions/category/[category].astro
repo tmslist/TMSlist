@@ -1,8 +1,9 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
-import questionsData from "../../../data/questions-comprehensive.json";
+import { getAllQuestions } from "../../../db/queries";
 
 export async function getStaticPaths() {
+    const questionsData = await getAllQuestions();
     const categories = {
         basics: {
             name: "TMS Basics",
@@ -67,15 +68,15 @@ const description = `Expert answers to common questions about ${category.name.to
 ---
 
 <Layout title={title} description={description}>
-    <main class="min-h-screen bg-gray-50 py-12">
+    <main class="min-h-screen py-12">
         <div class="container mx-auto px-4">
             <!-- Breadcrumb -->
-            <nav class="text-sm text-gray-500 mb-8">
-                <a href="/" class="hover:text-gray-900">Home</a>
-                <span class="mx-2">/</span>
-                <a href="/questions/" class="hover:text-gray-900">Questions</a>
-                <span class="mx-2">/</span>
-                <span class="text-gray-900">{category.name}</span>
+            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <a href="/questions/" class="hover:text-violet-600 transition-colors">Questions</a>
+                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <span class="text-slate-700 font-medium">{category.name}</span>
             </nav>
 
             <!-- Header -->
@@ -95,15 +96,15 @@ const description = `Expert answers to common questions about ${category.name.to
                         {questions.map((q) => (
                             <a
                                 href={`/questions/${q.slug}/`}
-                                class="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-indigo-500 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
+                                class="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-violet-500 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
                             >
-                                <h2 class="font-semibold text-lg text-gray-900 group-hover:text-indigo-600 transition-colors mb-3">
+                                <h2 class="font-semibold text-lg text-gray-900 group-hover:text-violet-600 transition-colors mb-3">
                                     {q.question}
                                 </h2>
                                 <p class="text-gray-600 text-sm line-clamp-3 mb-4">
                                     {q.quickAnswer}
                                 </p>
-                                <span class="text-indigo-600 text-sm font-semibold group-hover:underline">
+                                <span class="text-violet-600 text-sm font-semibold group-hover:underline">
                                     Read Answer →
                                 </span>
                             </a>
@@ -116,7 +117,7 @@ const description = `Expert answers to common questions about ${category.name.to
                         </p>
                         <a
                             href="/questions/"
-                            class="inline-block mt-4 text-indigo-600 font-semibold hover:underline"
+                            class="inline-block mt-4 text-violet-600 font-semibold hover:underline"
                         >
                             Browse all questions →
                         </a>
@@ -144,7 +145,7 @@ const description = `Expert answers to common questions about ${category.name.to
                     </a>
                     <button
                         onclick="document.dispatchEvent(new Event('open-enquiry-modal'))"
-                        class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-md"
+                        class="px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition-colors shadow-md"
                     >
                         Talk to a Specialist
                     </button>

@@ -7,6 +7,9 @@ import {
     getClinicRating,
     getClinicReviewCount,
     STATE_NAMES,
+    COUNTRY_NAMES,
+    COUNTRY_FLAGS,
+    COUNTRY_URL_PREFIXES,
 } from "../../utils/dataHelpers";
 import type { Clinic } from "../../types/clinic";
 import {
@@ -19,10 +22,14 @@ import {
     PRICING_FILTERS,
 } from "../../utils/filterOptions";
 
-const clinics = getOperationalClinics();
+const clinics = await getOperationalClinics();
 
-// Group by state
-const stateGroups = clinics.reduce(
+// Separate US and international
+const usClinics = clinics.filter((c: any) => !c.country || c.country === 'US');
+const intlClinics = clinics.filter((c: any) => c.country && c.country !== 'US');
+
+// Group US by state
+const stateGroups = usClinics.reduce(
     (acc, clinic) => {
         const stateCode = clinic.state;
         if (!acc[stateCode]) acc[stateCode] = [];
@@ -37,11 +44,26 @@ const sortedStates = Object.entries(stateGroups).sort(
     (a, b) => b[1].length - a[1].length,
 );
 
+// Group international by country
+const countryGroups = intlClinics.reduce(
+    (acc, clinic: any) => {
+        const code = clinic.country;
+        if (!acc[code]) acc[code] = [];
+        acc[code].push(clinic);
+        return acc;
+    },
+    {} as Record<string, Clinic[]>,
+);
+const sortedCountries = Object.entries(countryGroups).sort(
+    (a, b) => b[1].length - a[1].length,
+);
+
 const stateNames = STATE_NAMES;
+const totalLocations = Object.keys(stateGroups).length + Object.keys(countryGroups).length;
 
 const title =
     "Verified TMS Clinics | Real Data from " + clinics.length + " Providers";
-const description = `Browse ${clinics.length} verified TMS therapy clinics across ${Object.keys(stateGroups).length} states. Real ratings, reviews, and contact info.`;
+const description = `Browse ${clinics.length} verified TMS therapy clinics across ${totalLocations} locations worldwide. Real ratings, reviews, and contact info.`;
 
 // Calculate total reviews
 const totalReviews = clinics.reduce(
@@ -55,75 +77,48 @@ const avgRating =
 ---
 
 <Layout title={title} description={description}>
-    <main class="bg-gray-50 min-h-screen">
+    <main class="min-h-screen">
         <!-- Hero -->
-        <section
-            class="bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 py-16 md:py-24"
-        >
-            <div class="container mx-auto px-4 md:px-6">
-                <nav class="flex text-sm text-blue-200 mb-8">
-                    <a href="/" class="hover:text-slate-900">Home</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-slate-900">Verified Clinics</span>
+        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    <span class="text-slate-700 font-medium">Verified Clinics</span>
                 </nav>
 
-                <div
-                    class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8"
-                >
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
                     <div class="max-w-2xl">
-                        <span
-                            class="inline-flex items-center gap-2 px-4 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full mb-6"
-                        >
-                            <span
-                                class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
-                            ></span>
-                            Real Data • No Fake Reviews
-                        </span>
-                        <h1
-                            class="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-4"
-                        >
-                            Verified TMS Clinics
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full mb-6">
+                            <span class="relative flex h-2 w-2"><span class="animate-ping absolute h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative rounded-full h-2 w-2 bg-emerald-500"></span></span>
+                            <span class="text-xs font-semibold text-emerald-700 tracking-wide">Real Data · No Fake Reviews</span>
+                        </div>
+                        <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+                            Verified TMS <span class="text-violet-600">Clinics</span>
                         </h1>
-                        <p class="text-lg text-blue-100">
-                            {clinics.length} real TMS therapy providers across {
-                                Object.keys(stateGroups).length
-                            } states. All data sourced from Google Places with real
-                            ratings and reviews.
+                        <p class="text-lg text-slate-500 leading-relaxed">
+                            {clinics.length} real TMS therapy providers across {totalLocations} locations in {Object.keys(countryGroups).length + 1} countries. All data verified with real ratings and reviews.
                         </p>
                     </div>
 
-                    <div class="flex gap-4 flex-wrap">
-                        <div
-                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-slate-200 text-center"
-                        >
-                            <div class="text-3xl font-semibold tracking-tight text-slate-900">
-                                {clinics.length}
-                            </div>
-                            <div class="text-sm text-blue-200">Clinics</div>
+                    <div class="flex gap-3 flex-wrap">
+                        <div class="bg-white px-5 py-3 rounded-xl border border-slate-100 shadow-sm text-center">
+                            <div class="text-2xl font-bold text-slate-900">{clinics.length}</div>
+                            <div class="text-xs text-slate-400 font-medium">Clinics</div>
                         </div>
-                        <div
-                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-slate-200 text-center"
-                        >
-                            <div class="text-3xl font-semibold tracking-tight text-slate-900">
-                                {Object.keys(stateGroups).length}
-                            </div>
-                            <div class="text-sm text-blue-200">States</div>
+                        <div class="bg-white px-5 py-3 rounded-xl border border-slate-100 shadow-sm text-center">
+                            <div class="text-2xl font-bold text-slate-900">{totalLocations}</div>
+                            <div class="text-xs text-slate-400 font-medium">Locations</div>
                         </div>
-                        <div
-                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-slate-200 text-center"
-                        >
-                            <div class="text-3xl font-semibold tracking-tight text-yellow-400">
-                                {avgRating.toFixed(1)}★
-                            </div>
-                            <div class="text-sm text-blue-200">Avg Rating</div>
+                        <div class="bg-white px-5 py-3 rounded-xl border border-slate-100 shadow-sm text-center">
+                            <div class="text-2xl font-bold text-amber-600">{avgRating.toFixed(1)}★</div>
+                            <div class="text-xs text-slate-400 font-medium">Avg Rating</div>
                         </div>
-                        <div
-                            class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl border border-slate-200 text-center"
-                        >
-                            <div class="text-3xl font-semibold tracking-tight text-slate-900">
-                                {totalReviews}
-                            </div>
-                            <div class="text-sm text-blue-200">Reviews</div>
+                        <div class="bg-white px-5 py-3 rounded-xl border border-slate-100 shadow-sm text-center">
+                            <div class="text-2xl font-bold text-slate-900">{totalReviews}</div>
+                            <div class="text-xs text-slate-400 font-medium">Reviews</div>
                         </div>
                     </div>
                 </div>
@@ -134,7 +129,7 @@ const avgRating =
         <div class="lg:hidden bg-white border-b sticky top-0 z-30 py-3 px-4">
             <button
                 id="mobileFilterBtn"
-                class="w-full flex items-center justify-center gap-2 py-3 px-6 bg-indigo-600 text-white font-semibold rounded-xl"
+                class="w-full flex items-center justify-center gap-2 py-3 px-6 bg-violet-600 text-white font-semibold rounded-xl"
             >
                 <svg
                     class="w-5 h-5"
@@ -171,7 +166,7 @@ const avgRating =
                                     </h3>
                                     <button
                                         id="clearFilters"
-                                        class="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+                                        class="text-sm text-violet-600 hover:text-violet-700 font-medium"
                                         >Clear All</button
                                     >
                                 </div>
@@ -222,7 +217,7 @@ const avgRating =
                                                             <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
                                                                 <input
                                                                     type="checkbox"
-                                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
                                                                     data-filter="insurance"
                                                                     data-value={
                                                                         opt.value
@@ -279,7 +274,7 @@ const avgRating =
                                                             <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
                                                                 <input
                                                                     type="checkbox"
-                                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
                                                                     data-filter="device"
                                                                     data-value={
                                                                         opt.value
@@ -337,7 +332,7 @@ const avgRating =
                                                             <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
                                                                 <input
                                                                     type="checkbox"
-                                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
                                                                     data-filter="condition"
                                                                     data-value={
                                                                         opt.value
@@ -386,7 +381,7 @@ const avgRating =
                                             <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
                                                 <input
                                                     type="checkbox"
-                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
                                                     data-filter="accessibility"
                                                     data-value={filter.key}
                                                 />
@@ -432,7 +427,7 @@ const avgRating =
                                             <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
                                                 <input
                                                     type="checkbox"
-                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
                                                     data-filter="availability"
                                                     data-value={filter.key}
                                                 />
@@ -484,7 +479,7 @@ const avgRating =
                                                 <input
                                                     type="radio"
                                                     name="priceRange"
-                                                    class="text-indigo-600 focus:ring-indigo-500"
+                                                    class="text-violet-600 focus:ring-violet-500"
                                                     data-filter="price"
                                                     data-value={opt.value}
                                                 />
@@ -509,7 +504,7 @@ const avgRating =
                                             <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
                                                 <input
                                                     type="checkbox"
-                                                    class="filter-checkbox rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
                                                     data-filter="pricing"
                                                     data-value={filter.key}
                                                 />
@@ -533,9 +528,10 @@ const avgRating =
                                 >
                                 <select
                                     id="stateFilter"
-                                    class="w-full rounded-xl border-gray-200 text-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                    class="w-full rounded-xl border-gray-200 text-sm focus:ring-violet-500 focus:border-violet-500"
                                 >
-                                    <option value="">All States</option>
+                                    <option value="">All Locations</option>
+                                    <optgroup label="United States">
                                     {
                                         sortedStates.map(([code, list]) => (
                                             <option value={code}>
@@ -544,6 +540,18 @@ const avgRating =
                                             </option>
                                         ))
                                     }
+                                    </optgroup>
+                                    {sortedCountries.length > 0 && (
+                                        <optgroup label="International">
+                                        {
+                                            sortedCountries.map(([code, list]) => (
+                                                <option value={code}>
+                                                    {COUNTRY_FLAGS[code] || ''} {COUNTRY_NAMES[code] || code} ({list.length})
+                                                </option>
+                                            ))
+                                        }
+                                        </optgroup>
+                                    )}
                                 </select>
                             </div>
                         </div>
@@ -558,7 +566,7 @@ const avgRating =
                                     data-state={stateCode}
                                 >
                                     <h2 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center gap-3">
-                                        <span class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-semibold text-sm">
+                                        <span class="w-10 h-10 rounded-lg bg-violet-100 text-violet-600 flex items-center justify-center font-semibold text-sm">
                                             {stateCode}
                                         </span>
                                         {stateNames[stateCode] || stateCode}
@@ -648,7 +656,7 @@ const avgRating =
                                                                     (
                                                                         machine,
                                                                     ) => (
-                                                                        <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded">
+                                                                        <span class="px-2 py-1 bg-violet-50 text-violet-700 text-xs font-medium rounded">
                                                                             {
                                                                                 machine
                                                                             }
@@ -665,14 +673,78 @@ const avgRating =
                                                                 }
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
-                                                                class="text-sm text-gray-400 hover:text-indigo-600"
+                                                                class="text-sm text-gray-400 hover:text-violet-600"
                                                             >
                                                                 Website ↗
                                                             </a>
                                                         )}
                                                         <a
                                                             href={`/clinic/${clinic.slug}/`}
-                                                            class="text-indigo-600 font-semibold text-sm hover:text-indigo-700"
+                                                            class="text-violet-600 font-semibold text-sm hover:text-violet-700"
+                                                        >
+                                                            View Details →
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))
+                        }
+                        {
+                            sortedCountries.map(([countryCode, countryClinics]) => (
+                                <div
+                                    class="mb-16 state-section"
+                                    data-state={countryCode}
+                                >
+                                    <h2 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center gap-3">
+                                        <span class="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-semibold text-lg">
+                                            {COUNTRY_FLAGS[countryCode] || '🌍'}
+                                        </span>
+                                        {COUNTRY_NAMES[countryCode] || countryCode}
+                                        <span class="text-sm font-normal text-gray-400 ml-2">
+                                            ({countryClinics.length}{" "}
+                                            {countryClinics.length === 1
+                                                ? "clinic"
+                                                : "clinics"}
+                                            )
+                                        </span>
+                                    </h2>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                        {countryClinics.map((clinic) => (
+                                            <article
+                                                class="clinic-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
+                                                data-state={countryCode}
+                                            >
+                                                <div class="h-40 overflow-hidden">
+                                                    <img
+                                                        src={getClinicPhoto(clinic)}
+                                                        alt={clinic.name}
+                                                        class="w-full h-full object-cover"
+                                                        loading="lazy"
+                                                    />
+                                                </div>
+                                                <div class="p-6">
+                                                    <div class="flex items-center gap-2 mb-3">
+                                                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">
+                                                            ✓ Verified
+                                                        </span>
+                                                        {getClinicRating(clinic) > 0 && (
+                                                            <span class="flex items-center gap-1 text-sm">
+                                                                <span class="text-yellow-500">★</span>
+                                                                <span class="font-semibold text-gray-900">{getClinicRating(clinic)}</span>
+                                                                <span class="text-gray-400">({getClinicReviewCount(clinic)})</span>
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                    <h3 class="text-lg font-semibold text-gray-900 mb-1 line-clamp-2">{clinic.name}</h3>
+                                                    <p class="text-gray-500 text-sm mb-3">{clinic.city}, {clinic.state}</p>
+                                                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                                        <a
+                                                            href={`/clinic/${clinic.slug}/`}
+                                                            class="text-violet-600 font-semibold text-sm hover:text-violet-700"
                                                         >
                                                             View Details →
                                                         </a>
@@ -698,7 +770,7 @@ const avgRating =
                     fabricated. If you're a clinic owner and want to update your
                     listing, please <a
                         href="/add-listing/"
-                        class="text-indigo-600 font-medium"
+                        class="text-violet-600 font-medium"
                         >add or update your listing</a
                     >.
                 </p>

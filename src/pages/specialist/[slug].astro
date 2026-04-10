@@ -1,13 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import GoogleReviews from "../../components/GoogleReviews.astro";
-import clinicsData from "../../data/clinics.json";
-import { STATE_NAMES } from "../../utils/clinicData";
+import { STATE_NAMES, getAllClinics } from "../../utils/clinicData";
 import { getDoctorPhoto } from "../../utils/dataHelpers";
 
 export async function getStaticPaths() {
+    const allClinics = await getAllClinics();
     const paths: any[] = [];
-    clinicsData
+    allClinics
         .filter((clinic: any) => clinic.verified)
         .forEach((clinic: any) => {
             (clinic.doctors_data || []).forEach((doctor: any) => {
@@ -78,7 +78,7 @@ const faqs = [
     ...(doctor.school ? { "alumniOf": { "@type": "EducationalOrganization", "name": doctor.school } } : {}),
     ...(doctor.years_experience ? { "yearsInPractice": doctor.years_experience } : {}),
     "worksFor": { "@type": "MedicalClinic", "name": clinic.name, "url": `https://tmslist.com/clinic/${clinic.slug}` },
-    "address": { "@type": "PostalAddress", "addressLocality": city, "addressRegion": stateName, "addressCountry": "US" },
+    "address": { "@type": "PostalAddress", "addressLocality": city, "addressRegion": stateName, "addressCountry": clinic.country || "US" },
     "url": `https://tmslist.com/specialist/${doctor.slug}`
 })} breadcrumbs={[
     { name: "Home", url: "/" },
@@ -94,64 +94,28 @@ const faqs = [
             "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
         }))
     })} />}
-    <!-- Cinematic Hero with Background Pattern -->
-    <section
-        class="relative min-h-[70vh] flex items-center bg-gradient-to-br from-slate-900 via-indigo-900 to-blue-900 overflow-hidden"
-    >
-        <!-- Animated Background Pattern -->
-        <div class="absolute inset-0 opacity-20">
-            <div
-                class="absolute inset-0"
-                style="background-image: radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.4) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(6, 182, 212, 0.3) 0%, transparent 50%);"
-            >
-            </div>
-        </div>
+    <!-- Hero Section -->
+    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-500/5 rounded-full blur-[120px]"></div>
 
-        <div class="container mx-auto px-6 relative z-10 py-20">
+        <div class="container mx-auto px-4 relative z-10 py-14 lg:py-18">
             <!-- Breadcrumbs -->
-            <nav
-                class="flex text-sm text-blue-200 mb-8"
-                aria-label="Breadcrumb"
-            >
-                <ol class="inline-flex items-center space-x-2">
-                    <li>
-                        <a href="/" class="hover:text-slate-900 transition-colors"
-                            >Home</a
-                        >
-                    </li>
-                    <li><span class="mx-2">/</span></li>
-                    <li>
-                        <a
-                            href="/us/"
-                            class="hover:text-slate-900 transition-colors">US</a
-                        >
-                    </li>
-                    <li><span class="mx-2">/</span></li>
-                    <li>
-                        <a
-                            href={`/us/${stateName.toLowerCase().replace(/\s+/g, "-")}/`}
-                            class="hover:text-slate-900 transition-colors"
-                            >{stateName}</a
-                        >
-                    </li>
-                    <li><span class="mx-2">/</span></li>
-                    <li>
-                        <a
-                            href={`/clinic/${clinic.slug}`}
-                            class="hover:text-slate-900 transition-colors"
-                            >{clinic.name}</a
-                        >
-                    </li>
-                    <li><span class="mx-2">/</span></li>
-                    <li class="text-slate-900 font-medium">{doctor.name}</li>
-                </ol>
+            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <a href="/specialists/" class="hover:text-violet-600 transition-colors">Specialists</a>
+                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <a href={`/clinic/${clinic.slug}`} class="hover:text-violet-600 transition-colors">{clinic.name}</a>
+                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <span class="text-slate-700 font-medium">{doctor.name}</span>
             </nav>
 
             <div class="flex flex-col lg:flex-row gap-12 items-center">
                 <!-- Doctor Photo with Glow Effect -->
                 <div class="relative group">
                     <div
-                        class="absolute -inset-4 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-full opacity-40 blur-2xl group-hover:opacity-60 transition-opacity duration-500"
+                        class="absolute -inset-4 bg-gradient-to-r from-violet-500 to-cyan-500 rounded-full opacity-40 blur-2xl group-hover:opacity-60 transition-opacity duration-500"
                     >
                     </div>
                     <img
@@ -182,19 +146,11 @@ const faqs = [
                     <div
                         class="flex flex-wrap justify-center lg:justify-start items-center gap-3 mb-4"
                     >
-                        <span
-                            class="px-4 py-1.5 bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 text-cyan-300 text-sm font-semibold rounded-full backdrop-blur-sm border border-cyan-500/30"
-                            >
+                        <span class="px-3 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-lg border border-amber-100">
                                 <svg class="w-3 h-3 mr-1 inline" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                 Top Rated</span>
-                        <span
-                            class="px-4 py-1.5 bg-gradient-to-r from-emerald-500/20 to-green-500/20 text-emerald-300 text-sm font-semibold rounded-full backdrop-blur-sm border border-emerald-500/30"
-                            >✓ Verified</span
-                        >
-                        <span
-                            class="px-4 py-1.5 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-sm font-semibold rounded-full backdrop-blur-sm border border-purple-500/30"
-                            >Board Certified</span
-                        >
+                        <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-lg border border-emerald-100">✓ Verified</span>
+                        <span class="px-3 py-1 bg-violet-50 text-violet-700 text-xs font-semibold rounded-lg border border-violet-100">Board Certified</span>
                     </div>
                     <h1
                         class="text-4xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-4 leading-tight"
@@ -202,11 +158,11 @@ const faqs = [
                         {doctor.name}
                     </h1>
                     <p
-                        class="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400 font-semibold mb-4"
+                        class="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-blue-600 font-semibold mb-4"
                     >
                         {doctor.title}
                     </p>
-                    <p class="text-xl text-blue-200 mb-6">
+                    <p class="text-xl text-slate-500 mb-6">
                         {doctor.years_experience} Years Experience • {
                             doctor.school
                         }
@@ -229,7 +185,7 @@ const faqs = [
                     >
                         <a
                             href={`/clinic/${clinic.slug}`}
-                            class="dark-section bg-gradient-to-r from-indigo-500 to-cyan-500 font-semibold py-4 px-8 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all"
+                            class="dark-section bg-gradient-to-r from-violet-500 to-cyan-500 font-semibold py-4 px-8 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] shadow-violet-500/30 hover:shadow-violet-500/50 transition-all"
                         >
                             Book Consultation
                         </a>
@@ -255,7 +211,7 @@ const faqs = [
                     class="text-center p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all"
                 >
                     <div
-                        class="text-4xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-600 mb-1"
+                        class="text-4xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-600 mb-1"
                     >
                         {doctor.years_experience}+
                     </div>
@@ -269,7 +225,7 @@ const faqs = [
                     class="text-center p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all"
                 >
                     <div
-                        class="text-4xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-600 mb-1"
+                        class="text-4xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-600 mb-1"
                     >
                         {doctor.specialties.length}
                     </div>
@@ -283,7 +239,7 @@ const faqs = [
                     class="text-center p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all"
                 >
                     <div
-                        class="text-4xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-600 mb-1"
+                        class="text-4xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-600 mb-1"
                     >
                         500+
                     </div>
@@ -311,7 +267,7 @@ const faqs = [
                     class="text-center p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all"
                 >
                     <div
-                        class="text-4xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-600 mb-1"
+                        class="text-4xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-600 mb-1"
                     >
                         {(clinic.machines || []).length}
                     </div>
@@ -355,7 +311,7 @@ const faqs = [
                     <p>
                         {doctor.name} joined the team at <a
                             href={`/clinic/${clinic.slug}`}
-                            class="text-indigo-600 hover:underline"
+                            class="text-violet-600 hover:underline"
                             >{clinic.name}</a
                         > to bring cutting-edge TMS therapy to {county}. Their
                         practice philosophy centers on the belief that every
@@ -381,16 +337,16 @@ const faqs = [
                     Treatment Philosophy
                 </h2>
                 <div
-                    class="bg-gradient-to-r from-indigo-50 to-blue-50 border-l-4 border-indigo-500 p-8 rounded-r-2xl mb-6"
+                    class="bg-gradient-to-r from-violet-50 to-blue-50 border-l-4 border-violet-500 p-8 rounded-r-2xl mb-6"
                 >
-                    <p class="text-xl text-indigo-900 italic font-medium">
+                    <p class="text-xl text-violet-900 italic font-medium">
                         "I believe that remission is possible for everyone. My
                         goal is to move beyond symptom management and achieve
                         true healing through advanced technology like TMS. Every
                         patient's brain is unique, and their treatment should be
                         too."
                     </p>
-                    <p class="mt-4 text-indigo-700 font-semibold">
+                    <p class="mt-4 text-violet-700 font-semibold">
                         — {doctor.name}
                     </p>
                 </div>
@@ -427,7 +383,7 @@ const faqs = [
 
             <!-- Why Choose Section (NEW) -->
             <section
-                class="bg-gradient-to-br from-indigo-50 via-white to-cyan-50 -mx-6 px-6 py-12 rounded-3xl border border-indigo-100"
+                class="bg-gradient-to-br from-violet-50 via-white to-cyan-50 -mx-6 px-6 py-12 rounded-3xl border border-violet-100"
             >
                 <h2 class="text-3xl font-semibold text-gray-900 mb-8 text-center">
                     Why Choose {doctor.name}?
@@ -437,7 +393,7 @@ const faqs = [
                         class="flex gap-4 p-5 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
                     >
                         <div
-                            class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shrink-0"
+                            class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-violet-600 flex items-center justify-center shrink-0"
                         >
                             <svg
                                 class="w-7 h-7 text-slate-900"
@@ -623,7 +579,7 @@ const faqs = [
                         class="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm border border-gray-100"
                     >
                         <div
-                            class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 text-2xl font-semibold tracking-tight"
+                            class="w-14 h-14 rounded-2xl bg-violet-100 text-violet-600 flex items-center justify-center shrink-0 text-2xl font-semibold tracking-tight"
                         >
                             1
                         </div>
@@ -709,7 +665,7 @@ const faqs = [
                     {
                         faqs.map((faq) => (
                             <details class="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
-                                <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-semibold text-lg text-gray-900 group-open:bg-indigo-50 group-open:text-indigo-900 transition-colors">
+                                <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-semibold text-lg text-gray-900 group-open:bg-violet-50 group-open:text-violet-900 transition-colors">
                                     <span>{faq.question}</span>
                                     <svg
                                         class="w-6 h-6 transition-transform group-open:rotate-180"
@@ -743,18 +699,18 @@ const faqs = [
 
             <!-- CTA -->
             <section
-                class="dark-section bg-gradient-to-r from-indigo-600 to-blue-600 p-10 rounded-3xl text-center shadow-[0_4px_20px_rgb(0,0,0,0.03)]"
+                class="dark-section bg-gradient-to-r from-violet-600 to-blue-600 p-10 rounded-3xl text-center shadow-[0_4px_20px_rgb(0,0,0,0.03)]"
             >
                 <h3 class="text-3xl font-semibold mb-4">
                     Ready to Start Your Recovery?
                 </h3>
-                <p class="text-indigo-100 mb-8 text-lg max-w-xl mx-auto">
+                <p class="text-violet-100 mb-8 text-lg max-w-xl mx-auto">
                     Schedule a consultation with {doctor.name} at {clinic.name} and
                     take the first step toward lasting mental wellness.
                 </p>
                 <a
                     href={`/clinic/${clinic.slug}`}
-                    class="inline-block bg-white text-indigo-600 font-semibold py-4 px-10 rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
+                    class="inline-block bg-white text-violet-600 font-semibold py-4 px-10 rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
                 >
                     Contact Clinic
                 </a>
@@ -823,7 +779,7 @@ const faqs = [
                     >
                     <a
                         href={`/clinic/${clinic.slug}`}
-                        class="font-semibold text-indigo-600 text-lg hover:underline block"
+                        class="font-semibold text-violet-600 text-lg hover:underline block"
                     >
                         {clinic.name}
                     </a>
@@ -837,7 +793,7 @@ const faqs = [
 
                 <a
                     href={`/clinic/${clinic.slug}`}
-                    class="mt-6 block w-full text-center py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-colors"
+                    class="mt-6 block w-full text-center py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-colors"
                 >
                     Book Consultation
                 </a>
@@ -852,7 +808,7 @@ const faqs = [
                     {
                         (clinic.machines || []).map((machine: string) => (
                             <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                                <div class="w-8 h-8 rounded-lg bg-violet-100 text-violet-600 flex items-center justify-center">
                                     <svg
                                         class="w-4 h-4"
                                         fill="none"

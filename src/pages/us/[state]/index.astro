@@ -10,10 +10,11 @@ import {
 } from "../../../utils/dataHelpers";
 
 export async function getStaticPaths() {
-  const uniqueStates = getUniqueStates().filter(Boolean);
+  const uniqueStates = (await getUniqueStates()).filter(Boolean);
 
-  return uniqueStates.map((stateCode) => {
-    const stateClinics = getClinicsByState(stateCode);
+  const paths = [];
+  for (const stateCode of uniqueStates) {
+    const stateClinics = await getClinicsByState(stateCode);
     const stateName = STATE_NAMES[stateCode] || stateCode;
     const stateSlug = getStateSlug(stateCode);
 
@@ -37,7 +38,7 @@ export async function getStaticPaths() {
       .sort((a, b) => getRatingVal(b) - getRatingVal(a))
       .slice(0, 3);
 
-    return {
+    paths.push({
       params: { state: stateSlug },
       props: {
         stateName,
@@ -46,8 +47,10 @@ export async function getStaticPaths() {
         clinicCount: stateClinics.length,
         stateCode,
       },
-    };
-  });
+    });
+  }
+
+  return paths;
 }
 
 const { stateName, cities, topClinics, clinicCount, stateCode } = Astro.props;
@@ -85,7 +88,7 @@ const stateSchema = JSON.stringify({
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": getRatingVal(c),
-            "reviewCount": typeof c.rating === 'object' ? c.rating?.count || 50 : 50
+            "reviewCount": typeof c.rating === 'object' ? c.rating?.count || 0 : 50
           }
         } : {})
       }
@@ -102,22 +105,12 @@ const stateSchema = JSON.stringify({
   <StateHero stateName={stateName} clinicCount={clinicCount} />
 
   <main class="container mx-auto px-4 py-8">
-    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-      <ol class="inline-flex items-center space-x-1 md:space-x-3">
-        <li class="inline-flex items-center">
-          <a href="/" class="hover:text-gray-900">Home</a>
-        </li>
-        <li class="inline-flex items-center">
-          <span class="mx-2">/</span>
-          <a href="/us/" class="hover:text-gray-900">United States</a>
-        </li>
-        <li aria-current="page">
-          <div class="flex items-center">
-            <span class="mx-2">/</span>
-            <span class="text-gray-800 font-medium">{stateName}</span>
-          </div>
-        </li>
-      </ol>
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+      <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      <a href="/us/" class="hover:text-violet-600 transition-colors">United States</a>
+      <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      <span class="text-slate-700 font-medium">{stateName}</span>
     </nav>
 
     <!-- Top Rated Section -->

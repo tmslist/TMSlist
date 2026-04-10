@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <defs>
+    <linearGradient id="cBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FAFBFF"/>
+      <stop offset="100%" stop-color="#F5F3FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="360" rx="24" fill="url(#cBg)"/>
+
+  <!-- Desk -->
+  <rect x="80" y="220" width="320" height="8" rx="4" fill="#E2E8F0"/>
+  <rect x="120" y="228" width="8" height="60" rx="2" fill="#CBD5E1"/>
+  <rect x="352" y="228" width="8" height="60" rx="2" fill="#CBD5E1"/>
+
+  <!-- Monitor on desk -->
+  <rect x="260" y="140" width="120" height="80" rx="8" fill="#1E293B"/>
+  <rect x="266" y="146" width="108" height="62" rx="4" fill="#0F172A"/>
+  <!-- Brain scan on screen -->
+  <ellipse cx="320" cy="172" rx="28" ry="22" fill="#7C3AED" opacity="0.2" stroke="#7C3AED" stroke-width="1.5"/>
+  <path d="M320 155v34" stroke="#A78BFA" stroke-width="1" opacity="0.5"/>
+  <path d="M305 165c8-3 15 2 22-1" stroke="#A78BFA" stroke-width="1" fill="none" opacity="0.5"/>
+  <path d="M305 178c8-2 15 3 22 0" stroke="#A78BFA" stroke-width="1" fill="none" opacity="0.5"/>
+  <!-- Small activity dots on scan -->
+  <circle cx="312" cy="168" r="2" fill="#7C3AED" opacity="0.8"/>
+  <circle cx="318" cy="175" r="1.5" fill="#8B5CF6" opacity="0.6"/>
+  <!-- Monitor stand -->
+  <rect x="310" y="220" width="20" height="4" rx="1" fill="#94A3B8"/>
+  <rect x="305" y="222" width="30" height="3" rx="1.5" fill="#CBD5E1"/>
+
+  <!-- Clipboard on desk -->
+  <rect x="170" y="195" width="50" height="30" rx="4" fill="white" stroke="#CBD5E1" stroke-width="1.5" transform="rotate(-5 195 210)"/>
+  <rect x="188" y="191" width="14" height="8" rx="3" fill="#7C3AED" opacity="0.3"/>
+  <line x1="180" y1="206" x2="210" y2="205" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+  <line x1="180" y1="212" x2="205" y2="211" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+  <line x1="180" y1="218" x2="198" y2="217" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Doctor (left) -->
+  <!-- Head -->
+  <circle cx="150" cy="120" r="28" fill="#FDE8D8"/>
+  <!-- Hair -->
+  <path d="M125 108c5-15 22-22 38-18 8 2 14 8 15 15" fill="#475569" stroke="none"/>
+  <!-- Eyes -->
+  <ellipse cx="141" cy="122" rx="3" ry="3.5" fill="#334155"/>
+  <ellipse cx="159" cy="122" rx="3" ry="3.5" fill="#334155"/>
+  <!-- Smile -->
+  <path d="M142 133c4 4 12 4 16 0" stroke="#94A3B8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Glasses -->
+  <rect x="133" y="117" width="14" height="12" rx="6" fill="none" stroke="#64748B" stroke-width="1.5"/>
+  <rect x="153" y="117" width="14" height="12" rx="6" fill="none" stroke="#64748B" stroke-width="1.5"/>
+  <line x1="147" y1="122" x2="153" y2="122" stroke="#64748B" stroke-width="1.5"/>
+  <!-- Body / white coat -->
+  <path d="M120 155c0-5 10-12 30-12s30 7 30 12v65h-60z" fill="white" stroke="#E2E8F0" stroke-width="1.5"/>
+  <!-- Stethoscope -->
+  <path d="M145 155c-5 10-8 25-5 35" stroke="#7C3AED" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="140" cy="192" r="5" fill="none" stroke="#7C3AED" stroke-width="2"/>
+  <circle cx="140" cy="192" r="2" fill="#7C3AED"/>
+  <!-- Coat lapels -->
+  <path d="M135 155l15 25" stroke="#E2E8F0" stroke-width="1"/>
+  <path d="M165 155l-15 25" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- Patient (right, seated) -->
+  <!-- Chair -->
+  <rect x="360" y="180" width="60" height="50" rx="8" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1.5"/>
+  <!-- Head -->
+  <circle cx="390" cy="135" r="24" fill="#F5D0B0"/>
+  <!-- Hair -->
+  <path d="M368 125c3-12 18-18 32-14 7 2 12 7 13 13" fill="#92400E"/>
+  <!-- Eyes -->
+  <ellipse cx="382" cy="137" rx="2.5" ry="3" fill="#334155"/>
+  <ellipse cx="398" cy="137" rx="2.5" ry="3" fill="#334155"/>
+  <!-- Slight smile -->
+  <path d="M384 146c3 3 9 3 12 0" stroke="#94A3B8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Body / casual clothing -->
+  <path d="M365 165c0-4 8-10 25-10s25 6 25 10v55h-50z" fill="#DDD6FE" stroke="#C4B5FD" stroke-width="1"/>
+
+  <!-- Speech / consultation bubbles -->
+  <g transform="translate(195, 75)">
+    <rect x="0" y="0" width="90" height="35" rx="12" fill="white" stroke="#E2E8F0" stroke-width="1.5"/>
+    <text x="14" y="16" font-family="Plus Jakarta Sans, sans-serif" font-size="8" font-weight="600" fill="#7C3AED">TMS could be</text>
+    <text x="14" y="27" font-family="Plus Jakarta Sans, sans-serif" font-size="8" font-weight="600" fill="#7C3AED">right for you</text>
+    <!-- Tail -->
+    <polygon points="25,35 15,45 35,35" fill="white" stroke="#E2E8F0" stroke-width="1.5"/>
+    <line x1="25" y1="34" x2="35" y2="34" stroke="white" stroke-width="3"/>
+  </g>
+
+  <!-- Checkmark badge -->
+  <g transform="translate(28, 28)">
+    <rect x="0" y="0" width="120" height="32" rx="16" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+    <circle cx="18" cy="16" r="8" fill="#10B981"/>
+    <path d="M14 16l3 3 5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="32" y="20" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="600" fill="#065F46">Initial Evaluation</text>
+  </g>
+</svg>

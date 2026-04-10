@@ -5,6 +5,33 @@ import { TREATMENT_SLUGS } from '../../utils/seo_slugs';
 const title = "TMS Treatment Conditions | Depression, Anxiety, OCD & More";
 const description = "Explore FDA-cleared TMS therapy conditions including depression, anxiety, OCD, PTSD, and more. Learn about treatment protocols and success rates.";
 
+const TREATMENT_META: Record<string, { description: string; fdaCleared: boolean; successRate: string; sessions: string; brainArea: string; year?: string }> = {
+    'depression': { description: 'The most studied TMS application. Targets the left dorsolateral prefrontal cortex to regulate mood circuits disrupted in major depressive disorder.', fdaCleared: true, successRate: '50-60%', sessions: '30-36', brainArea: 'Left DLPFC', year: '2008' },
+    'anxiety': { description: 'Emerging evidence supports TMS for generalized anxiety and social anxiety disorders, often treated alongside comorbid depression.', fdaCleared: false, successRate: '40-50%', sessions: '20-30', brainArea: 'Right DLPFC' },
+    'ocd': { description: 'FDA-cleared using BrainsWay Deep TMS with the H7 coil. Targets the anterior cingulate cortex and medial prefrontal cortex.', fdaCleared: true, successRate: '45-55%', sessions: '29-30', brainArea: 'mPFC / ACC', year: '2018' },
+    'ptsd': { description: 'Growing clinical evidence with multiple ongoing trials. Targets right DLPFC to modulate threat-processing and emotional regulation networks.', fdaCleared: false, successRate: '40-50%', sessions: '20-30', brainArea: 'Right DLPFC' },
+    'migraine': { description: 'Single-pulse TMS (sTMS) devices are FDA-cleared for acute and preventive migraine treatment via cortical spreading depression inhibition.', fdaCleared: true, successRate: '35-45%', sessions: 'As needed', brainArea: 'Occipital Cortex', year: '2013' },
+    'tinnitus': { description: 'Low-frequency rTMS to the temporoparietal cortex shows promise in reducing phantom sound perception in chronic tinnitus.', fdaCleared: false, successRate: '30-40%', sessions: '10-20', brainArea: 'Temporoparietal' },
+    'bipolar-depression': { description: 'TMS shows promise for bipolar depressive episodes. Careful low-frequency protocols help minimize manic switching risk.', fdaCleared: false, successRate: '35-45%', sessions: '20-30', brainArea: 'Right DLPFC' },
+    'adhd': { description: 'Preliminary research explores targeting the prefrontal cortex to enhance executive function and attentional control in ADHD.', fdaCleared: false, successRate: '25-35%', sessions: '15-20', brainArea: 'Right DLPFC' },
+    'smoking-cessation': { description: 'FDA-cleared using BrainsWay Deep TMS. Targets the bilateral insula and prefrontal cortex to reduce cravings.', fdaCleared: true, successRate: '30-40%', sessions: '18', brainArea: 'Bilateral Insula', year: '2020' },
+    'chronic-pain': { description: 'High-frequency rTMS to the primary motor cortex shows analgesic effects in fibromyalgia, neuropathic pain, and complex regional pain syndrome.', fdaCleared: false, successRate: '30-50%', sessions: '10-20', brainArea: 'Motor Cortex' },
+    'stroke-rehabilitation': { description: 'Inhibitory rTMS to the contralesional hemisphere helps rebalance interhemispheric competition and promote motor recovery after stroke.', fdaCleared: false, successRate: '25-40%', sessions: '10-20', brainArea: 'Motor Cortex' },
+    'substance-abuse': { description: 'Research explores TMS for reducing cravings in alcohol, cocaine, and opioid use disorders by modulating reward circuitry.', fdaCleared: false, successRate: '25-40%', sessions: '15-20', brainArea: 'DLPFC / Insula' },
+};
+
+const enrichedTreatments = TREATMENT_SLUGS.map(item => {
+    const slug = item.slug.replace('tms-for-', '').replace('tms-', '');
+    const meta = TREATMENT_META[slug] || {
+        description: `Learn about TMS therapy for ${item.title.replace('TMS for ', '').toLowerCase()}.`,
+        fdaCleared: false, successRate: 'Varies', sessions: 'Varies', brainArea: 'DLPFC'
+    };
+    return { ...item, ...meta, cleanTitle: item.title.replace('TMS for ', '') };
+});
+
+const fdaCleared = enrichedTreatments.filter(t => t.fdaCleared);
+const research = enrichedTreatments.filter(t => !t.fdaCleared);
+
 const treatmentSchema = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -21,10 +48,7 @@ const treatmentSchema = JSON.stringify({
                 "@type": "MedicalCondition",
                 "name": item.title.replace('TMS for ', ''),
                 "url": `https://tmslist.com/treatments/${item.slug}/`,
-                "possibleTreatment": {
-                    "@type": "MedicalTherapy",
-                    "name": "Transcranial Magnetic Stimulation (TMS)"
-                }
+                "possibleTreatment": { "@type": "MedicalTherapy", "name": "Transcranial Magnetic Stimulation (TMS)" }
             }
         }))
     }
@@ -35,36 +59,178 @@ const treatmentSchema = JSON.stringify({
     { name: "Home", url: "/" },
     { name: "Conditions Treated", url: "/treatments/" },
 ]}>
-    <main class="bg-gray-50 min-h-screen">
-        <!-- Hero -->
-        <section class="bg-gradient-to-br from-indigo-900 via-blue-900 to-slate-900 py-20">
-            <div class="container mx-auto px-6">
-                <nav class="flex text-sm text-blue-200 mb-8">
-                    <a href="/" class="hover:text-slate-900">Home</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-slate-900">Conditions Treated</span>
+    <main>
+        <!-- Hero — Editorial Magazine Style -->
+        <section class="relative bg-slate-950 overflow-hidden">
+            <!-- Ambient glow -->
+            <div class="absolute top-[-20%] left-[10%] w-[600px] h-[600px] bg-violet-600/15 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[-10%] right-[5%] w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[120px]"></div>
+            <!-- Grid pattern -->
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+            <div class="container mx-auto px-4 pt-12 pb-20 lg:pt-16 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">Conditions Treated</span>
                 </nav>
-                
-                <h1 class="text-4xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-6">
-                    Conditions <span class="text-cyan-400">Treated</span> with TMS
-                </h1>
-                <p class="text-xl text-blue-100 max-w-3xl">
-                    TMS therapy is FDA-cleared for multiple mental health conditions. Explore our comprehensive guides for each condition.
-                </p>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-end">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-8">
+                            <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                            <span class="text-xs font-semibold text-emerald-400 tracking-wider uppercase">{fdaCleared.length} FDA-Cleared Indications</span>
+                        </div>
+
+                        <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-6">
+                            What TMS<br/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-violet-300 to-cyan-400">Can Treat</span>
+                        </h1>
+
+                        <p class="text-lg text-slate-400 leading-relaxed max-w-xl">
+                            From FDA-cleared protocols for depression and OCD to emerging research in PTSD and chronic pain. Evidence-based guides for every condition.
+                        </p>
+                    </div>
+
+                    <!-- Quick stats ribbon -->
+                    <div class="flex flex-wrap gap-4 lg:justify-end">
+                        <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <div class="text-3xl font-bold text-white">{enrichedTreatments.length}</div>
+                            <div class="text-xs text-slate-400 font-medium mt-1">Conditions</div>
+                        </div>
+                        <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <div class="text-3xl font-bold text-emerald-400">{fdaCleared.length}</div>
+                            <div class="text-xs text-slate-400 font-medium mt-1">FDA-Cleared</div>
+                        </div>
+                        <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <div class="text-3xl font-bold text-violet-400">50-60%</div>
+                            <div class="text-xs text-slate-400 font-medium mt-1">Remission Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diagonal separator -->
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+        </section>
+
+        <!-- FDA-Cleared — Feature Cards -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex items-end justify-between mb-12">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
+                                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            </div>
+                            <h2 class="text-3xl font-bold text-slate-900 tracking-tight">FDA-Cleared</h2>
+                        </div>
+                        <p class="text-slate-500 max-w-lg">Conditions with regulatory approval for TMS treatment. Covered by most major insurance plans.</p>
+                    </div>
+                    <div class="hidden lg:block text-sm text-slate-400 font-medium">{fdaCleared.length} conditions</div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {fdaCleared.map((item, i) => (
+                        <a href={`/treatments/${item.slug}/`}
+                           class="group relative bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-100 p-8 hover:border-emerald-200 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden">
+                            <!-- Subtle corner accent -->
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-50 to-transparent rounded-bl-[80px] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-6">
+                                    <span class="px-3 py-1 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-md">FDA Cleared {item.year ? `\u2022 ${item.year}` : ''}</span>
+                                    <svg class="w-5 h-5 text-slate-300 group-hover:text-emerald-500 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                </div>
+
+                                <h3 class="text-2xl font-bold text-slate-900 group-hover:text-emerald-700 transition-colors mb-3 tracking-tight">{item.cleanTitle}</h3>
+                                <p class="text-slate-500 leading-relaxed mb-8 text-[15px]">{item.description}</p>
+
+                                <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100">
+                                    <div>
+                                        <div class="text-xs text-slate-400 font-medium mb-1">Success Rate</div>
+                                        <div class="text-lg font-bold text-emerald-600">{item.successRate}</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-slate-400 font-medium mb-1">Sessions</div>
+                                        <div class="text-lg font-bold text-slate-900">{item.sessions}</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-slate-400 font-medium mb-1">Brain Target</div>
+                                        <div class="text-sm font-bold text-violet-600">{item.brainArea}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    ))}
+                </div>
             </div>
         </section>
 
-        <!-- Grid -->
-        <section class="py-16">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {TREATMENT_SLUGS.map(item => (
-                        <a href={`/treatments/${item.slug}/`} class="group bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:border-indigo-200 transition-all">
-                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-indigo-600 mb-3">{item.title}</h3>
-                            <p class="text-gray-500 text-sm mb-4">Learn about TMS therapy for {item.title.replace('TMS for ', '').toLowerCase()}</p>
-                            <span class="text-indigo-600 font-semibold text-sm">Read Guide →</span>
+        <!-- Research & Emerging — Compact Table-Style -->
+        <section class="py-16 lg:py-24 bg-slate-50">
+            <div class="container mx-auto px-4">
+                <div class="flex items-end justify-between mb-12">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                            </div>
+                            <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Research & Emerging</h2>
+                        </div>
+                        <p class="text-slate-500 max-w-lg">Active clinical trials and off-label applications with growing evidence. Not yet FDA-cleared for TMS.</p>
+                    </div>
+                    <div class="hidden lg:block text-sm text-slate-400 font-medium">{research.length} conditions</div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {research.map((item) => (
+                        <a href={`/treatments/${item.slug}/`}
+                           class="group bg-white rounded-2xl border border-slate-100 p-6 hover:border-blue-200 hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.06)] transition-all duration-300">
+                            <div class="flex items-start justify-between mb-4">
+                                <span class="px-2 py-0.5 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider rounded-md">Research</span>
+                                <svg class="w-4 h-4 text-slate-300 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+
+                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 tracking-tight">{item.cleanTitle}</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-5 line-clamp-2">{item.description}</p>
+
+                            <div class="flex items-center gap-5 pt-4 border-t border-slate-50 text-xs">
+                                <div>
+                                    <span class="text-slate-400">Success </span>
+                                    <span class="font-bold text-slate-700">{item.successRate}</span>
+                                </div>
+                                <div>
+                                    <span class="text-slate-400">Sessions </span>
+                                    <span class="font-bold text-slate-700">{item.sessions}</span>
+                                </div>
+                                <div>
+                                    <span class="text-slate-400">Target </span>
+                                    <span class="font-bold text-violet-600">{item.brainArea}</span>
+                                </div>
+                            </div>
                         </a>
                     ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA — Dark dramatic -->
+        <section class="relative py-20 bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-emerald-600/10"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <p class="text-sm font-semibold text-violet-400 tracking-wider uppercase mb-4">Not sure where to start?</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">Find out if TMS is right for you</h2>
+                <p class="text-slate-400 max-w-lg mx-auto mb-10">Our quick assessment evaluates your symptoms and treatment history to determine if you may be a candidate.</p>
+                <div class="flex items-center justify-center gap-4 flex-wrap">
+                    <a href="/quiz/am-i-a-candidate/" class="px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25 hover:shadow-violet-500/30">
+                        Take the Assessment
+                    </a>
+                    <a href="/us/" class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">
+                        Find a Clinic Near You
+                    </a>
                 </div>
             </div>
         </section>

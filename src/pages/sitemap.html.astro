@@ -12,7 +12,7 @@ import {
 } from '../utils/seo_slugs';
 import { getUniqueStates, STATE_NAMES, getStateSlug } from '../utils/dataHelpers';
 
-const uniqueStates = getUniqueStates().sort();
+const uniqueStates = (await getUniqueStates()).sort();
 
 const sections = [
     { title: "Core Pages", items: CORE_PAGES, base: "" },

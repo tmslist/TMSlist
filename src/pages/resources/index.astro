@@ -2,162 +2,105 @@
 import Layout from "../../layouts/Layout.astro";
 
 const resources = [
-    {
-        title: "TMS Patient Guide",
-        description:
-            "Everything you need to know about TMS therapy in one comprehensive guide. From your first consultation to your final session.",
-        type: "PDF Guide",
-        icon: "guide",
-        cta: "Download Free Guide",
-        featured: true,
-    },
-    {
-        title: "Insurance Authorization Checklist",
-        description:
-            "Step-by-step checklist to help you navigate the insurance pre-authorization process for TMS therapy.",
-        type: "Checklist",
-        icon: "checklist",
-        cta: "Get Checklist",
-    },
-    {
-        title: "Questions to Ask Your Doctor",
-        description:
-            "25 essential questions to ask during your TMS consultation to ensure you find the right provider.",
-        type: "Printable",
-        icon: "questions",
-        cta: "Download Questions",
-    },
-    {
-        title: "TMS Session Tracker",
-        description:
-            "Track your mood, side effects, and progress throughout your TMS treatment course.",
-        type: "Tracker",
-        icon: "tracker",
-        cta: "Get Tracker",
-    },
-    {
-        title: "Cost Comparison Calculator",
-        description:
-            "Estimate your out-of-pocket costs for TMS therapy based on your insurance and location.",
-        type: "Tool",
-        icon: "calculator",
-        cta: "Calculate Costs",
-    },
-    {
-        title: "Provider Research Template",
-        description:
-            "Organize your research on different TMS clinics with this comparison spreadsheet.",
-        type: "Template",
-        icon: "template",
-        cta: "Download Template",
-    },
+    { title: "TMS Patient Guide", description: "Everything you need to know about TMS therapy — from your first consultation to your final session and beyond.", type: "PDF Guide", format: "42 pages", cta: "Download Free", featured: true, icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" },
+    { title: "Insurance Authorization Checklist", description: "Step-by-step checklist to navigate insurance pre-authorization for TMS therapy.", type: "Checklist", format: "8 pages", cta: "Get Checklist", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" },
+    { title: "Questions to Ask Your Doctor", description: "25 essential questions to ask during your TMS consultation.", type: "Printable", format: "4 pages", cta: "Download", icon: "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+    { title: "TMS Session Tracker", description: "Track your mood, side effects, and progress throughout treatment.", type: "Tracker", format: "12 pages", cta: "Get Tracker", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
+    { title: "Cost Comparison Calculator", description: "Estimate out-of-pocket costs based on your insurance and location.", type: "Tool", format: "Interactive", cta: "Calculate", icon: "M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" },
+    { title: "Provider Research Template", description: "Compare TMS clinics side-by-side with this structured research template.", type: "Template", format: "Spreadsheet", cta: "Download", icon: "M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" },
 ];
 
-const featuredResource = resources.find((r) => r.featured);
-const otherResources = resources.filter((r) => !r.featured);
+const featured = resources.find(r => r.featured);
+const others = resources.filter(r => !r.featured);
 ---
 
 <Layout title="Free TMS Resources & Guides | TMS List" description="TMS therapy resources, guides, and educational materials for patients and providers.">
-    <!-- Hero -->
-    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-        <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-        <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
-                <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                <span class="text-slate-700 font-medium">Resources</span>
-            </nav>
-            <div class="max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full mb-6">
-                    <span class="flex h-2 w-2 rounded-full bg-emerald-500"></span>
-                    <span class="text-xs font-semibold text-emerald-700 tracking-wide">Free Resources</span>
-                </div>
-                <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-                    Patient <span class="text-violet-600">Resources</span> & Tools
-                </h1>
-                <p class="text-lg text-slate-500 leading-relaxed max-w-2xl">
-                    Free guides, checklists, and tools to help you navigate your TMS therapy journey with confidence.
-                </p>
-            </div>
-        </div>
-    </section>
+    <main>
+        <!-- Hero -->
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[10%] right-[15%] w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-[120px]"></div>
 
-    <main class="container mx-auto px-6 py-16">
-        <!-- Featured Resource -->
-        {
-            featuredResource && (
-                <div class="dark-section bg-gradient-to-r from-violet-700 to-violet-500 rounded-3xl p-8 md:p-12 mb-16 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-1/2 h-full bg-[url('/images/brain_stimulation_art_1769446474392.jpg')] bg-cover bg-center opacity-20" />
-                    <div class="relative z-10 max-w-2xl">
-                        <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-sm font-semibold mb-4">
-                            Featured Resource
-                        </span>
-                        <h2 class="text-3xl md:text-4xl font-semibold mb-4">
-                            {featuredResource.title}
-                        </h2>
-                        <p class="text-violet-100 text-lg mb-8">
-                            {featuredResource.description}
-                        </p>
-                        <button class="px-8 py-4 bg-white text-violet-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
-                            {featuredResource.cta}
-                        </button>
+            <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">Resources</span>
+                </nav>
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-6">
+                        <div class="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
+                        <span class="text-xs font-semibold text-emerald-400 tracking-wider uppercase">100% Free</span>
                     </div>
+                    <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
+                        Patient<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Resources</span>
+                    </h1>
+                    <p class="text-lg text-slate-400 leading-relaxed">
+                        Free guides, checklists, trackers, and tools to help you navigate your TMS therapy journey with confidence.
+                    </p>
                 </div>
-            )
-        }
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+        </section>
 
-        <!-- Resource Grid -->
-        <h2 class="text-2xl font-semibold text-gray-900 mb-8">All Resources</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {
-                otherResources.map((resource) => (
-                    <div class="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 group">
-                        <div class="flex items-start gap-4 mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center text-violet-600 shrink-0">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-5xl">
+
+                <!-- Featured Resource -->
+                {featured && (
+                    <div class="relative bg-slate-950 rounded-3xl p-10 lg:p-14 mb-14 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-violet-600/15 via-transparent to-emerald-600/10"></div>
+                        <div class="absolute top-1/2 right-[10%] -translate-y-1/2 w-[300px] h-[300px] bg-violet-500/5 rounded-full blur-[80px]"></div>
+                        <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center gap-8">
+                            <div class="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={featured.icon}/></svg>
                             </div>
-                            <div>
-                                <span class="text-xs font-semibold text-violet-600 uppercase tracking-wider">
-                                    {resource.type}
-                                </span>
-                                <h3 class="text-xl font-semibold text-gray-900 group-hover:text-violet-600 transition-colors">
-                                    {resource.title}
-                                </h3>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="px-3 py-1 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-md">Featured</span>
+                                    <span class="text-slate-500 text-sm">{featured.format}</span>
+                                </div>
+                                <h2 class="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">{featured.title}</h2>
+                                <p class="text-slate-400 leading-relaxed mb-6">{featured.description}</p>
+                                <button class="px-8 py-3.5 bg-white text-slate-900 font-semibold rounded-xl hover:bg-slate-100 transition-colors shadow-lg">{featured.cta}</button>
                             </div>
                         </div>
-                        <p class="text-gray-600 mb-6">{resource.description}</p>
-                        <button class="w-full py-3 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-violet-600 hover:text-white transition-colors">
-                            {resource.cta}
-                        </button>
                     </div>
-                ))
-            }
-        </div>
+                )}
 
-        <!-- Lead Capture CTA -->
-        <div
-            class="mt-20 bg-gray-50 rounded-3xl p-10 text-center border border-gray-100"
-        >
-            <h3 class="text-3xl font-semibold text-gray-900 mb-4">
-                Need Personalized Help?
-            </h3>
-            <p class="text-gray-600 mb-8 max-w-xl mx-auto">
-                Take our eligibility quiz to find out if TMS is right for you,
-                or browse our directory to find verified clinics near you.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                    href="/quiz/am-i-a-candidate/"
-                    class="px-8 py-4 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-colors"
-                    >Take Eligibility Quiz</a
-                >
-                <a
-                    href="/us/"
-                    class="px-8 py-4 bg-white border-2 border-gray-200 text-gray-700 font-semibold rounded-xl hover:border-violet-600 hover:text-violet-600 transition-colors"
-                    >Find a Clinic</a
-                >
+                <!-- Resources Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {others.map(resource => (
+                        <div class="group bg-white rounded-2xl border border-slate-100 p-7 hover:border-violet-200 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-300">
+                            <div class="flex items-start justify-between mb-5">
+                                <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center text-violet-600">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={resource.icon}/></svg>
+                                </div>
+                                <span class="px-2 py-0.5 bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-wider rounded">{resource.format}</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-violet-600 uppercase tracking-wider">{resource.type}</span>
+                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-violet-600 transition-colors mt-1 mb-2 tracking-tight">{resource.title}</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-6">{resource.description}</p>
+                            <button class="w-full py-3 bg-slate-900 hover:bg-violet-600 text-white font-semibold text-sm rounded-xl transition-colors">{resource.cta}</button>
+                        </div>
+                    ))}
+                </div>
+
+                <!-- CTA -->
+                <div class="mt-20 relative bg-slate-950 rounded-3xl p-10 lg:p-14 overflow-hidden text-center">
+                    <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
+                    <div class="relative z-10">
+                        <p class="text-sm font-semibold text-violet-400 tracking-wider uppercase mb-3">Need more help?</p>
+                        <h3 class="text-2xl lg:text-3xl font-bold text-white mb-4 tracking-tight">Take the Eligibility Assessment</h3>
+                        <p class="text-slate-400 max-w-lg mx-auto mb-8">Find out if TMS therapy is right for you, or browse our directory to find verified clinics near you.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="/quiz/am-i-a-candidate/" class="px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">Take the Quiz</a>
+                            <a href="/us/" class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">Find a Clinic</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 </Layout>

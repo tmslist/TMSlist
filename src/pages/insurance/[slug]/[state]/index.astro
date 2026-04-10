@@ -12,12 +12,12 @@ import { calculateClinicScore } from "../../../../utils/ranking";
 
 export async function getStaticPaths() {
     const paths = [];
-    const uniqueStates = getUniqueStates();
+    const uniqueStates = await getUniqueStates();
 
-    uniqueStates.forEach((stateCode) => {
+    for (const stateCode of uniqueStates) {
         const stateSlug = getStateSlug(stateCode);
         const stateName = STATE_NAMES[stateCode] || stateCode;
-        const stateClinics = getClinicsByState(stateCode);
+        const stateClinics = await getClinicsByState(stateCode);
 
         INSURANCE_SLUGS.forEach((insurance) => {
             // Filter clinics in this state that accept this insurance
@@ -47,7 +47,7 @@ export async function getStaticPaths() {
                 });
             }
         });
-    });
+    }
 
     return paths;
 }
@@ -86,24 +86,12 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
 
 <Layout title={title} description={description} schema={combinedSchema}>
     <main class="container mx-auto px-4 py-8">
-        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="/" class="hover:text-gray-900">Home</a>
-                </li>
-                <li class="inline-flex items-center">
-                    <span class="mx-2">/</span>
-                    <a href="/insurance/" class="hover:text-gray-900"
-                        >Insurance</a
-                    >
-                </li>
-                <li class="inline-flex items-center">
-                    <span class="mx-2">/</span>
-                    <span class="text-gray-800 font-medium"
-                        >{insuranceTitle}</span
-                    >
-                </li>
-            </ol>
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <a href="/insurance/" class="hover:text-violet-600 transition-colors">Insurance</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <span class="text-slate-700 font-medium">{insuranceTitle}</span>
         </nav>
 
         <div class="max-w-4xl mx-auto mb-12 text-center">
@@ -128,7 +116,7 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
             }
         </div>
 
-        <section class="mt-20 max-w-3xl mx-auto prose prose-lg prose-indigo">
+        <section class="mt-20 max-w-3xl mx-auto prose prose-lg prose-violet">
             <h2>Using {insuranceTitle} for TMS Therapy</h2>
             <p>
                 Many insurance plans, including {insuranceTitle}, now cover

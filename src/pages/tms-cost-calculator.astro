@@ -28,6 +28,13 @@ const schema = JSON.stringify({
 
   <main class="bg-slate-50/50 py-10">
     <div class="container mx-auto px-6 lg:px-12 max-w-3xl">
+      <!-- International visitor notice (shown by geo.js) -->
+      <div id="intl-cost-notice" class="hidden mb-6 bg-blue-50 border border-blue-200 rounded-2xl p-6">
+        <h3 class="text-sm font-bold text-blue-900 mb-2" id="intl-cost-title">TMS Costs in Your Country</h3>
+        <p class="text-sm text-blue-700 leading-relaxed" id="intl-cost-body"></p>
+        <p class="text-xs text-blue-500 mt-3">The calculator below uses the US insurance model. For country-specific pricing, contact local clinics directly.</p>
+      </div>
+
       <div class="bg-white rounded-3xl border border-slate-100 shadow-sm p-8" id="calculator">
         <div class="space-y-6">
           <!-- Insurance -->
@@ -207,4 +214,27 @@ const schema = JSON.stringify({
     document.getElementById('results')!.classList.remove('hidden');
     document.getElementById('results')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+
+  // Show international cost notice for non-US visitors
+  const geo = (window as any).TMS_GEO;
+  if (geo && geo.country !== 'US') {
+    const INTL_COSTS: Record<string, { title: string; body: string }> = {
+      GB: { title: 'TMS Costs in the United Kingdom', body: 'NHS coverage is limited but growing. Private clinics typically charge \u00A33,000\u2013\u00A37,000 per course. Private insurers like Bupa and AXA PPP may cover TMS with pre-authorisation.' },
+      CA: { title: 'TMS Costs in Canada', body: 'Provincial health plans typically don\u2019t cover TMS. Private courses run CA$4,000\u2013CA$10,000. Some extended employer health plans may offer partial reimbursement.' },
+      AU: { title: 'TMS Costs in Australia', body: 'Medicare rebates have been available since November 2021, making TMS more accessible. Out-of-pocket costs after rebate: A$3,000\u2013A$6,000 per course.' },
+      DE: { title: 'TMS-Kosten in Deutschland', body: 'GKV may cover TMS at university hospitals. Private treatment courses cost \u20AC4,000\u2013\u20AC8,000. PKV coverage varies significantly by plan.' },
+      IN: { title: 'TMS Costs in India', body: 'TMS is among the most affordable globally at \u20B93,000\u2013\u20B95,000 per session (~$35\u2013$60 USD). Government hospitals offer subsidized rates.' },
+    };
+    const info = INTL_COSTS[geo.country];
+    if (info) {
+      const notice = document.getElementById('intl-cost-notice');
+      const title = document.getElementById('intl-cost-title');
+      const body = document.getElementById('intl-cost-body');
+      if (notice && title && body) {
+        title.textContent = info.title;
+        body.textContent = info.body;
+        notice.classList.remove('hidden');
+      }
+    }
+  }
 </script>

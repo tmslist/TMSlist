@@ -13,28 +13,31 @@ const description = "Discover wellness TMS clinics offering Exomind therapy for 
     { name: "Technology", url: "/technology/" },
     { name: "Wellness TMS", url: "/wellness/" },
 ]}>
-    <main class="bg-gray-50 min-h-screen">
+    <main class="min-h-screen">
         <!-- Hero -->
-        <section class="bg-gradient-to-br from-emerald-900 via-teal-800 to-cyan-900 py-16 md:py-24">
-            <div class="container mx-auto px-4 md:px-6">
-                <nav class="flex text-sm text-emerald-200 mb-8">
-                    <a href="/" class="hover:text-slate-900">Home</a>
-                    <span class="mx-2">/</span>
-                    <a href="/technology/" class="hover:text-slate-900">Technology</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-slate-900">Wellness TMS</span>
+        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    <a href="/technology/" class="hover:text-violet-600 transition-colors">Technology</a>
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    <span class="text-slate-700 font-medium">Wellness TMS</span>
                 </nav>
-                
+
                 <div class="max-w-3xl">
-                    <span class="inline-block px-4 py-1 bg-emerald-500/20 text-emerald-300 text-sm font-semibold rounded-full mb-6">
-                        Emerging Category
-                    </span>
-                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 mb-6">
-                        Wellness <span class="text-emerald-400">TMS</span>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                        <span class="text-xs font-semibold text-emerald-700 tracking-wide">Emerging Category</span>
+                    </div>
+                    <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+                        Wellness <span class="text-violet-600">TMS</span>
                     </h1>
-                    <p class="text-lg md:text-xl text-emerald-100 leading-relaxed">
-                        Beyond clinical treatment, wellness TMS uses technologies like Exomind for cognitive enhancement, 
-                        focus improvement, and mood optimization—without a medical diagnosis requirement.
+                    <p class="text-lg text-slate-500 leading-relaxed">
+                        Beyond clinical treatment, wellness TMS uses technologies like Exomind for cognitive enhancement,
+                        focus improvement, and mood optimization — without a medical diagnosis requirement.
                     </p>
                 </div>
             </div>
@@ -107,10 +110,10 @@ const description = "Discover wellness TMS clinics offering Exomind therapy for 
         <!-- Exomind Section -->
         <section class="py-12 md:py-20">
             <div class="container mx-auto px-4 md:px-6">
-                <div class="dark-section bg-gradient-to-br from-indigo-600 to-blue-700 rounded-3xl p-8 md:p-12">
+                <div class="dark-section bg-gradient-to-br from-violet-600 to-blue-700 rounded-3xl p-8 md:p-12">
                     <div class="max-w-3xl">
                         <h2 class="text-2xl md:text-3xl font-semibold mb-4">About Exomind</h2>
-                        <p class="text-indigo-100 text-lg mb-6">
+                        <p class="text-violet-100 text-lg mb-6">
                             Exomind is a leading wellness TMS technology designed for cognitive enhancement and brain optimization. 
                             Unlike clinical TMS devices, Exomind focuses on improving mental performance without treating a specific medical condition.
                         </p>

@@ -11,31 +11,31 @@ import {
 import { calculateClinicScore } from "../../../../utils/ranking";
 import { ClinicMachine, ClinicInsurance } from "../../../../types/clinic";
 import RelatedContent from "../../../../components/RelatedContent.astro";
-import questionsData from "../../../../data/questions-comprehensive.json";
+import { getAllQuestions } from "../../../../db/queries";
+import { getClinicRating, getClinicReviewCount } from "../../../../utils/dataHelpers";
 
 export async function getStaticPaths() {
   const paths = [];
-  const uniqueStates = getUniqueStates();
+  const uniqueStates = await getUniqueStates();
 
-  uniqueStates.forEach((stateCode) => {
-    const stateClinics = getClinicsByState(stateCode);
+  for (const stateCode of uniqueStates) {
+    const stateClinics = await getClinicsByState(stateCode);
     const uniqueCities = [
       ...new Set(stateClinics.map((c) => c.city).filter(Boolean)),
     ];
     const stateSlug = getStateSlug(stateCode);
     const stateName = STATE_NAMES[stateCode] || stateCode;
 
-    uniqueCities.forEach((cityName) => {
+    for (const cityName of uniqueCities) {
       const citySlug = cityName.toLowerCase().replace(/\s+/g, "-");
-      // Using helper for consistency
-      const cityClinics = getClinicsByCity(stateCode, cityName);
+      const cityClinics = await getClinicsByCity(stateCode, cityName);
 
       paths.push({
         params: { state: stateSlug, city: citySlug },
         props: { stateName, cityName, cityClinics },
       });
-    });
-  });
+    }
+  }
 
   return paths;
 }
@@ -43,16 +43,19 @@ export async function getStaticPaths() {
 const { stateName, cityName, cityClinics } = Astro.props;
 const { state } = Astro.params;
 
-// Apply Ranking Logic
 const sortedClinics = [...cityClinics].sort(
   (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
 );
 
-// Strict SEO: "10 Best TMS Therapy Clinics in [City], [State] (Top Rated Doctors) | TMS List"
+const avgRating = sortedClinics.reduce((sum, c) => sum + getClinicRating(c), 0) / (sortedClinics.length || 1);
+const totalReviews = sortedClinics.reduce((sum, c) => sum + getClinicReviewCount(c), 0);
+const totalDoctors = sortedClinics.reduce((sum, c) => sum + ((c as any).doctors_data?.length || 0), 0);
+const verifiedCount = sortedClinics.filter(c => c.verified).length;
+
 const title = `10 Best TMS Therapy Clinics in ${cityName}, ${stateName} (Top Rated Doctors) | TMS List`;
 const description = `Find top-rated TMS providers in ${cityName}, ${stateName}. Compare verified psychiatrist reviews, insurance coverage (Medicare, Aetna, Cigna), and treatment costs.`;
 
-// Related questions for this city
+const questionsData = await getAllQuestions();
 const relatedQuestions = questionsData
   .filter(
     (q) =>
@@ -63,7 +66,6 @@ const relatedQuestions = questionsData
   )
   .slice(0, 8);
 
-// Related content links using existing pages
 const relatedBlogs = [
   {
     title: `Best TMS Clinics in ${stateName}`,
@@ -72,17 +74,18 @@ const relatedBlogs = [
   },
   {
     title: "TMS for Depression — Clinical Guide",
-    excerpt:
-      "Understand the science, success rates, and what to expect from TMS treatment for depression.",
+    excerpt: "Understand the science, success rates, and what to expect from TMS treatment for depression.",
     url: "/treatments/depression/",
   },
   {
     title: "Insurance Coverage for TMS",
-    excerpt:
-      "Which insurance plans cover TMS? How to get prior authorization and maximize your benefits.",
+    excerpt: "Which insurance plans cover TMS? How to get prior authorization and maximize your benefits.",
     url: "/insurance/",
   },
 ];
+
+const machines = Object.values(ClinicMachine);
+const insurances = Object.values(ClinicInsurance);
 ---
 
 <Layout title={title} description={description} breadcrumbs={[
@@ -91,347 +94,269 @@ const relatedBlogs = [
   { name: stateName, url: `/us/${state}/` },
   { name: cityName, url: `/us/${state}/${cityName.toLowerCase().replace(/\s+/g, '-')}/` },
 ]}>
-  <main class="container mx-auto px-4 py-8">
-    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-      <ol class="inline-flex items-center space-x-1 md:space-x-3">
-        <li class="inline-flex items-center">
-          <a href="/" class="hover:text-gray-900">Home</a>
-        </li>
-        <li class="inline-flex items-center">
-          <span class="mx-2">/</span>
-          <a href="/us/" class="hover:text-gray-900">United States</a>
-        </li>
-        <li class="inline-flex items-center">
-          <span class="mx-2">/</span>
-          <a href={`/us/${state}/`} class="hover:text-gray-900">{stateName}</a>
-        </li>
-        <li aria-current="page">
-          <div class="flex items-center">
-            <span class="mx-2">/</span>
-            <span class="text-gray-800 font-medium">{cityName}</span>
-          </div>
-        </li>
-      </ol>
-    </nav>
+  <main>
+    <!-- City Hero -->
+    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+      <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-blue-500/5 rounded-full blur-[100px]"></div>
+      <div class="gemini-hero-bg absolute inset-0 opacity-10" data-city={cityName} data-state={stateName}></div>
 
-    <div class="flex flex-col lg:flex-row gap-8">
-      <!-- Sidebar Filters -->
-      <aside class="w-full lg:w-1/4">
-        <div
-          class="bg-white p-6 rounded-xl border border-gray-200 sticky top-8 shadow-sm"
-        >
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-lg font-semibold text-gray-900">Filters</h2>
-            <button
-              class="text-sm text-primary hover:text-primary-dark font-medium"
-              >Reset</button
-            >
+      <div class="container mx-auto px-4 py-12 lg:py-16 relative z-10">
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <a href="/us/" class="hover:text-violet-600 transition-colors">United States</a>
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <a href={`/us/${state}/`} class="hover:text-violet-600 transition-colors">{stateName}</a>
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <span class="text-slate-700 font-medium">{cityName}</span>
+        </nav>
+
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full mb-5">
+            <span class="relative flex h-2 w-2"><span class="animate-ping absolute h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative rounded-full h-2 w-2 bg-emerald-500"></span></span>
+            <span class="text-xs font-semibold text-emerald-700 tracking-wide">{verifiedCount} Verified Providers</span>
           </div>
 
-          <div class="space-y-6">
-            <div>
-              <h3
-                class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3"
-              >
-                TMS Technology
-              </h3>
-              <div
-                class="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"
-              >
-                {
-                  Object.values(ClinicMachine).map((m) => (
-                    <label class="flex items-center space-x-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary shrink-0"
-                      />
-                      <span class="text-sm text-gray-600 group-hover:text-gray-900">
-                        {m}
-                      </span>
-                    </label>
-                  ))
-                }
-              </div>
-            </div>
-          </div>
-          <div>
-            <h3
-              class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3"
-            >
-              Treatments
-            </h3>
-            <div
-              class="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"
-            >
-              {
-                [
-                  "Depression",
-                  "Anxiety",
-                  "OCD",
-                  "PTSD",
-                  "Ketamine Infusion",
-                  "Spravato (Esketamine)",
-                ].map((t) => (
-                  <label class="flex items-center space-x-3 cursor-pointer group">
-                    <input
-                      type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary shrink-0"
-                    />
-                    <span class="text-sm text-gray-600 group-hover:text-gray-900">
-                      {t}
-                    </span>
-                  </label>
-                ))
-              }
-            </div>
-          </div>
-          <div>
-            <h3
-              class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3"
-            >
-              Insurance
-            </h3>
-            <div
-              class="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
-            >
-              {
-                Object.values(ClinicInsurance).map((i) => (
-                  <label class="flex items-center space-x-3 cursor-pointer group">
-                    <input
-                      type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary shrink-0"
-                    />
-                    <span class="text-sm text-gray-600 group-hover:text-gray-900">
-                      {i}
-                    </span>
-                  </label>
-                ))
-              }
-            </div>
+          <h1 class="text-3xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+            TMS Therapy in <span class="text-violet-600">{cityName}</span>, {stateName}
+          </h1>
+          <p class="text-lg text-slate-500 leading-relaxed">
+            Compare {cityClinics.length} FDA-cleared TMS providers. Real patient ratings, insurance info, and treatment costs.
+          </p>
+        </div>
 
-            <!-- Related Questions & Blogs -->
-            <div class="mt-6">
-              <RelatedContent
-                relatedQuestions={relatedQuestions}
-                relatedBlogs={relatedBlogs}
-                currentPage={`${cityName}, ${stateName}`}
-              />
-            </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
+          <div class="bg-white/80 backdrop-blur rounded-xl border border-slate-100 p-4 text-center">
+            <div class="text-2xl font-bold text-slate-900">{cityClinics.length}</div>
+            <div class="text-xs text-slate-400 font-medium mt-0.5">Clinics</div>
+          </div>
+          <div class="bg-white/80 backdrop-blur rounded-xl border border-slate-100 p-4 text-center">
+            <div class="text-2xl font-bold text-slate-900 flex items-center justify-center gap-1">{avgRating.toFixed(1)} <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg></div>
+            <div class="text-xs text-slate-400 font-medium mt-0.5">Avg Rating</div>
+          </div>
+          <div class="bg-white/80 backdrop-blur rounded-xl border border-slate-100 p-4 text-center">
+            <div class="text-2xl font-bold text-slate-900">{totalDoctors}</div>
+            <div class="text-xs text-slate-400 font-medium mt-0.5">Specialists</div>
+          </div>
+          <div class="bg-white/80 backdrop-blur rounded-xl border border-slate-100 p-4 text-center">
+            <div class="text-2xl font-bold text-slate-900">{totalReviews}</div>
+            <div class="text-xs text-slate-400 font-medium mt-0.5">Reviews</div>
           </div>
         </div>
-      </aside>
+      </div>
+    </section>
 
-    <!-- Main Grid -->
-    <div class="w-full lg:w-3/4">
-      <h1 class="text-3xl font-semibold text-gray-900 mb-6 flex items-baseline">
-        {cityName} TMS Clinics
-        <span class="text-gray-500 font-medium text-lg ml-3" id="clinic-count"
-          >{cityClinics.length} Providers</span
-        >
-      </h1>
+    <!-- Main Content -->
+    <section class="py-8 lg:py-12">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- Sidebar -->
+          <aside class="w-full lg:w-72 shrink-0">
+            <button id="filter-toggle" class="lg:hidden w-full flex items-center justify-between px-4 py-3 bg-white rounded-xl border border-slate-200 mb-4 text-sm font-semibold text-slate-700">
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+                Filters
+              </span>
+              <svg class="w-4 h-4 transition-transform" id="filter-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="clinic-grid">
-        {
-          sortedClinics.map((clinic) => (
-            <div
-              class="clinic-item"
-              data-machines={(clinic.machines || []).join(",").toLowerCase()}
-              data-treatments={(clinic.specialties || [])
-                .join(",")
-                .toLowerCase()}
-              data-insurances={(
-                clinic.insurance_accepted ||
-                clinic.insurances ||
-                []
-              )
-                .join(",")
-                .toLowerCase()}
-            >
-              <ClinicCard clinic={clinic} />
+            <div id="filter-panel" class="hidden lg:block">
+              <div class="bg-white rounded-2xl border border-slate-100 shadow-sm sticky top-20 overflow-hidden">
+                <div class="flex items-center justify-between p-5 border-b border-slate-50">
+                  <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Filters</h2>
+                  <button id="reset-filters" class="text-xs text-violet-600 hover:text-violet-700 font-semibold">Reset All</button>
+                </div>
+                <div class="p-5 space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+                  <div>
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                      <svg class="w-3.5 h-3.5 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                      TMS Technology
+                    </h3>
+                    <div class="space-y-2">
+                      {machines.map((m) => (
+                        <label class="flex items-center gap-2.5 cursor-pointer group py-0.5">
+                          <input type="checkbox" data-filter="machine" value={m.toLowerCase()} class="filter-checkbox h-4 w-4 rounded border-slate-300 text-violet-600 focus:ring-violet-500" />
+                          <span class="text-sm text-slate-600 group-hover:text-slate-900 transition-colors">{m}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                      <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                      Treatments
+                    </h3>
+                    <div class="space-y-2">
+                      {["Depression", "Anxiety", "OCD", "PTSD", "Ketamine Infusion", "Spravato (Esketamine)"].map((t) => (
+                        <label class="flex items-center gap-2.5 cursor-pointer group py-0.5">
+                          <input type="checkbox" data-filter="treatment" value={t.toLowerCase()} class="filter-checkbox h-4 w-4 rounded border-slate-300 text-violet-600 focus:ring-violet-500" />
+                          <span class="text-sm text-slate-600 group-hover:text-slate-900 transition-colors">{t}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                      <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                      Insurance
+                    </h3>
+                    <div class="space-y-2 max-h-[280px] overflow-y-auto pr-1">
+                      {insurances.map((i) => (
+                        <label class="flex items-center gap-2.5 cursor-pointer group py-0.5">
+                          <input type="checkbox" data-filter="insurance" value={i.toLowerCase()} class="filter-checkbox h-4 w-4 rounded border-slate-300 text-violet-600 focus:ring-violet-500" />
+                          <span class="text-sm text-slate-600 group-hover:text-slate-900 transition-colors">{i}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6">
+                <RelatedContent relatedQuestions={relatedQuestions} relatedBlogs={relatedBlogs} currentPage={`${cityName}, ${stateName}`} />
+              </div>
             </div>
-          ))
-        }
-      </div>
+          </aside>
 
-      <p id="no-results" class="hidden text-center text-gray-500 py-12">
-        No clinics match your selected filters. Try adjusting your criteria.
-      </p>
+          <!-- Grid -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-bold text-slate-900">
+                {cityName} Clinics
+                <span class="text-slate-400 font-medium text-base ml-2" id="clinic-count">{cityClinics.length} Providers</span>
+              </h2>
+              <select id="sort-select" class="text-sm border border-slate-200 rounded-lg px-3 py-1.5 text-slate-700 focus:border-violet-400 focus:ring-1 focus:ring-violet-100 bg-white">
+                <option value="score">Best Match</option>
+                <option value="rating">Highest Rated</option>
+                <option value="reviews">Most Reviews</option>
+                <option value="name">Name A-Z</option>
+              </select>
+            </div>
 
-      <!-- SEO Content Section -->
-      <section
-        class="mt-16 pt-12 border-t border-gray-100 prose prose-indigo max-w-none"
-      >
-        <h2>TMS therapy in {cityName} — what you should know</h2>
-        <p>
-          There are {cityClinics.length} verified TMS providers in the {cityName} area. Most use NeuroStar, BrainsWay Deep TMS, or MagVenture systems — each FDA-cleared and covered by the majority of insurance plans in {stateName}.
-        </p>
-        <p>
-          If you've tried antidepressants and they haven't worked well enough, TMS is worth looking into. It's non-invasive, sessions take about 20 minutes, and most people can drive themselves home afterward.
-        </p>
-        <h3>What does TMS cost in {cityName}?</h3>
-        <p>
-          With insurance, your out-of-pocket cost depends on your plan and deductible. Without insurance, sessions typically run $300–$500 each, and a full course is 36 sessions over about 6 weeks.
-        </p>
-        <p>
-          Good news: Medicare, Blue Cross, Aetna, Cigna, and UnitedHealthcare all cover TMS in {stateName} — as long as you meet the criteria (usually a depression diagnosis and at least 2 failed medication trials). Most clinics listed above will check your benefits for free before you commit.
-        </p>
-        <h3>TMS vs. Ketamine: which clinics in {cityName} offer both?</h3>
-        <p>
-          Some clinics here offer both TMS and Spravato (esketamine) or IV ketamine. They work differently — TMS uses magnetic pulses, ketamine targets NMDA receptors — but both are options when standard antidepressants fall short. Use the filters above to find clinics offering "Ketamine Infusion" or "Spravato" alongside TMS.
-        </p>
-      </section>
+            <div id="active-filters" class="hidden flex-wrap gap-2 mb-4"></div>
 
-      <script is:inline>
-        document.addEventListener("DOMContentLoaded", () => {
-          const checkboxes = document.querySelectorAll(
-            'input[type="checkbox"]',
-          );
-          const clinicItems = document.querySelectorAll(".clinic-item");
-          const clinicCount = document.getElementById("clinic-count");
-          const noResults = document.getElementById("no-results");
-          const resetBtn = document.querySelector("button");
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="clinic-grid">
+              {sortedClinics.map((clinic) => (
+                <div class="clinic-item"
+                  data-machines={(clinic.machines || []).join(",").toLowerCase()}
+                  data-treatments={(clinic.specialties || []).join(",").toLowerCase()}
+                  data-insurances={(clinic.insurance_accepted || clinic.insurances || []).join(",").toLowerCase()}
+                  data-rating={getClinicRating(clinic)}
+                  data-reviews={getClinicReviewCount(clinic)}
+                  data-name={clinic.name}
+                >
+                  <ClinicCard clinic={clinic} />
+                </div>
+              ))}
+            </div>
 
-          function filterClinics() {
-            const selectedMachines = [];
-            const selectedTreatments = [];
-            const selectedInsurances = [];
+            <p id="no-results" class="hidden text-center py-16">
+              <svg class="w-12 h-12 text-slate-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <span class="text-slate-500 font-medium block">No clinics match your filters</span>
+              <span class="text-slate-400 text-sm mt-1 block">Try adjusting your criteria</span>
+            </p>
 
-            checkboxes.forEach((cb) => {
-              if (cb.checked) {
-                const label = cb.parentElement
-                  .querySelector("span")
-                  .textContent.trim()
-                  .toLowerCase();
+            <section class="mt-16 pt-12 border-t border-slate-100 prose prose-slate max-w-none">
+              <h2>TMS therapy in {cityName} — what you should know</h2>
+              <p>There are {cityClinics.length} verified TMS providers in the {cityName} area. Most use NeuroStar, BrainsWay Deep TMS, or MagVenture systems — each FDA-cleared and covered by the majority of insurance plans in {stateName}.</p>
+              <p>If you've tried antidepressants and they haven't worked well enough, TMS is worth looking into. It's non-invasive, sessions take about 20 minutes, and most people can drive themselves home afterward.</p>
+              <h3>What does TMS cost in {cityName}?</h3>
+              <p>With insurance, your out-of-pocket cost depends on your plan and deductible. Without insurance, sessions typically run $300-$500 each, and a full course is 36 sessions over about 6 weeks.</p>
+              <p>Good news: Medicare, Blue Cross, Aetna, Cigna, and UnitedHealthcare all cover TMS in {stateName} — as long as you meet the criteria (usually a depression diagnosis and at least 2 failed medication trials).</p>
+            </section>
 
-                const section = cb.closest('div[class="space-y-6"]');
-                if (section) {
-                  const firstH3 = section.querySelector("h3");
-                  const h3Text = firstH3 ? firstH3.textContent : "";
-
-                  if (h3Text.includes("Technology")) {
-                    selectedMachines.push(label);
-                  } else if (h3Text.includes("Treatments")) {
-                    selectedTreatments.push(label);
-                  } else if (h3Text.includes("Insurance")) {
-                    selectedInsurances.push(label);
-                  }
+            <div id="clinic-map" class="mt-12 rounded-2xl h-80 shadow-sm border border-slate-200 overflow-hidden z-0"></div>
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+            <script is:inline define:vars={{ clinicsForMap: sortedClinics.filter((c) => c.geo?.lat && c.geo?.lng).map((c) => ({ name: c.name, lat: c.geo.lat, lng: c.geo.lng, slug: c.slug })) }}>
+              window.addEventListener("load", () => {
+                if (typeof L === "undefined") { const s = document.createElement("script"); s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"; s.onload = initMap; document.head.appendChild(s); } else { initMap(); }
+                function initMap() {
+                  const mapEl = document.getElementById("clinic-map");
+                  if (!mapEl || clinicsForMap.length === 0) return;
+                  const map = L.map("clinic-map").setView([clinicsForMap[0].lat, clinicsForMap[0].lng], 11);
+                  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; OpenStreetMap contributors" }).addTo(map);
+                  clinicsForMap.forEach((c) => { L.marker([c.lat, c.lng]).addTo(map).bindPopup(`<strong>${c.name}</strong><br/><a href="/clinic/${c.slug}">View Clinic</a>`); });
+                  if (clinicsForMap.length > 1) { map.fitBounds(L.latLngBounds(clinicsForMap.map((c) => [c.lat, c.lng])), { padding: [30, 30] }); }
                 }
-              }
-            });
-
-            let visibleCount = 0;
-
-            clinicItems.forEach((item) => {
-              const machines = item.dataset.machines || "";
-              const treatments = item.dataset.treatments || "";
-              const insurances = item.dataset.insurances || "";
-
-              let showByMachine =
-                selectedMachines.length === 0 ||
-                selectedMachines.some((m) => machines.includes(m));
-
-              let showByTreatment =
-                selectedTreatments.length === 0 ||
-                selectedTreatments.some((t) => treatments.includes(t));
-
-              let showByInsurance =
-                selectedInsurances.length === 0 ||
-                selectedInsurances.some((i) => insurances.includes(i));
-
-              if (showByMachine && showByTreatment && showByInsurance) {
-                item.style.display = "";
-                visibleCount++;
-              } else {
-                item.style.display = "none";
-              }
-            });
-
-            clinicCount.textContent = `${visibleCount} Provider${visibleCount !== 1 ? "s" : ""}`;
-            noResults.classList.toggle("hidden", visibleCount > 0);
-          }
-
-          checkboxes.forEach((cb) =>
-            cb.addEventListener("change", filterClinics),
-          );
-
-          resetBtn?.addEventListener("click", () => {
-            checkboxes.forEach((cb) => (cb.checked = false));
-            filterClinics();
-          });
-        });
-      </script>
-
-      <!-- Interactive Map -->
-      <div
-        id="clinic-map"
-        class="mt-12 rounded-xl h-80 shadow-lg border border-gray-200 overflow-hidden z-0"
-      >
+              });
+            </script>
+          </div>
+        </div>
       </div>
-
-      <!-- Leaflet CSS -->
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin=""
-      />
-
-      <script
-        is:inline
-        define:vars={{
-          clinicsForMap: sortedClinics
-            .filter((c) => c.geo?.lat && c.geo?.lng)
-            .map((c) => ({
-              name: c.name,
-              lat: c.geo.lat,
-              lng: c.geo.lng,
-              slug: c.slug,
-            })),
-        }}
-      >
-        window.addEventListener("load", () => {
-          if (typeof L === "undefined") {
-            const script = document.createElement("script");
-            script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-            script.onload = initMap;
-            document.head.appendChild(script);
-          } else {
-            initMap();
-          }
-
-          function initMap() {
-            const mapEl = document.getElementById("clinic-map");
-            if (!mapEl || clinicsForMap.length === 0) return;
-
-            const firstClinic = clinicsForMap[0];
-            const map = L.map("clinic-map").setView(
-              [firstClinic.lat, firstClinic.lng],
-              11,
-            );
-
-            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-              attribution: "&copy; OpenStreetMap contributors",
-            }).addTo(map);
-
-            clinicsForMap.forEach((clinic) => {
-              L.marker([clinic.lat, clinic.lng])
-                .addTo(map)
-                .bindPopup(
-                  `<strong>${clinic.name}</strong><br/><a href="/clinic/${clinic.slug}">View Clinic</a>`,
-                );
-            });
-
-            // Fit bounds to all markers
-            if (clinicsForMap.length > 1) {
-              const bounds = L.latLngBounds(
-                clinicsForMap.map((c) => [c.lat, c.lng]),
-              );
-              map.fitBounds(bounds, { padding: [30, 30] });
-            }
-          }
-        });
-      </script>
-    </div>
-    </div> <!-- end flex container -->
+    </section>
   </main>
 </Layout>
+
+<script>
+  document.getElementById('filter-toggle')?.addEventListener('click', () => {
+    document.getElementById('filter-panel')?.classList.toggle('hidden');
+    document.getElementById('filter-chevron')?.classList.toggle('rotate-180');
+  });
+
+  const checkboxes = document.querySelectorAll('.filter-checkbox') as NodeListOf<HTMLInputElement>;
+  const clinicItems = document.querySelectorAll('.clinic-item') as NodeListOf<HTMLElement>;
+  const clinicCount = document.getElementById('clinic-count');
+  const noResults = document.getElementById('no-results');
+  const activeFiltersEl = document.getElementById('active-filters');
+
+  function filterClinics() {
+    const filters: Record<string, string[]> = { machine: [], treatment: [], insurance: [] };
+    checkboxes.forEach(cb => { if (cb.checked) { const t = cb.getAttribute('data-filter') || ''; if (filters[t]) filters[t].push(cb.value); } });
+
+    let visible = 0;
+    clinicItems.forEach(item => {
+      const m = item.dataset.machines || '', t = item.dataset.treatments || '', ins = item.dataset.insurances || '';
+      const show = (filters.machine.length === 0 || filters.machine.some(v => m.includes(v)))
+        && (filters.treatment.length === 0 || filters.treatment.some(v => t.includes(v)))
+        && (filters.insurance.length === 0 || filters.insurance.some(v => ins.includes(v)));
+      item.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    if (clinicCount) clinicCount.textContent = `${visible} Provider${visible !== 1 ? 's' : ''}`;
+    noResults?.classList.toggle('hidden', visible > 0);
+
+    const all = [...filters.machine, ...filters.treatment, ...filters.insurance];
+    if (activeFiltersEl) {
+      if (all.length === 0) { activeFiltersEl.classList.add('hidden'); activeFiltersEl.classList.remove('flex'); }
+      else {
+        activeFiltersEl.classList.remove('hidden'); activeFiltersEl.classList.add('flex');
+        activeFiltersEl.innerHTML = all.map(f => `<span class="inline-flex items-center gap-1 px-3 py-1 bg-violet-50 text-violet-700 rounded-full text-xs font-semibold"><span>${f}</span><button class="remove-filter hover:text-red-500" data-value="${f}">&times;</button></span>`).join('');
+        activeFiltersEl.querySelectorAll('.remove-filter').forEach(btn => {
+          btn.addEventListener('click', () => { const val = btn.getAttribute('data-value'); checkboxes.forEach(cb => { if (cb.value === val) cb.checked = false; }); filterClinics(); });
+        });
+      }
+    }
+  }
+
+  checkboxes.forEach(cb => cb.addEventListener('change', filterClinics));
+  document.getElementById('reset-filters')?.addEventListener('click', () => { checkboxes.forEach(cb => cb.checked = false); filterClinics(); });
+
+  const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
+  const clinicGrid = document.getElementById('clinic-grid');
+  sortSelect?.addEventListener('change', () => {
+    if (!clinicGrid) return;
+    const items = Array.from(clinicItems);
+    items.sort((a, b) => {
+      switch (sortSelect.value) {
+        case 'rating': return parseFloat(b.dataset.rating || '0') - parseFloat(a.dataset.rating || '0');
+        case 'reviews': return parseInt(b.dataset.reviews || '0') - parseInt(a.dataset.reviews || '0');
+        case 'name': return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+        default: return 0;
+      }
+    });
+    items.forEach(item => clinicGrid.appendChild(item));
+  });
+
+  // Gemini hero background
+  const heroBg = document.querySelector('.gemini-hero-bg') as HTMLElement;
+  if (heroBg) {
+    const city = heroBg.getAttribute('data-city'), st = heroBg.getAttribute('data-state');
+    if (city && st) {
+      fetch(`/api/ai/generate-image?type=city&subject=${encodeURIComponent(city)}&state=${encodeURIComponent(st)}`)
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { if (d?.image) { heroBg.style.backgroundImage = `url(${d.image})`; heroBg.style.backgroundSize = 'cover'; heroBg.style.backgroundPosition = 'center'; } })
+        .catch(() => {});
+    }
+  }
+</script>

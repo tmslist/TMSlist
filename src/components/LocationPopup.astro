@@ -1,163 +1,84 @@
 ---
-// Location Popup Component for pincode/zip selection
+// Geo-aware location banner — replaces the old blocking ZIP code popup
+// Detects country via cookie (set by middleware) or timezone fallback
+// Shows a slim, dismissible banner directing visitors to their local directory
+import { COUNTRY_NAMES, COUNTRY_FLAGS, COUNTRY_URL_PREFIXES } from "../utils/dataHelpers";
 ---
 
-<div id="location-popup" class="fixed inset-0 z-[100] hidden">
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="location-overlay"></div>
-    
-    <!-- Modal -->
-    <div class="absolute inset-0 flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] max-w-md w-full p-8 relative animate-fade-in-up">
-            <!-- Close button -->
-            <button id="close-location-popup" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                ✕
-            </button>
-            
-            <!-- Icon -->
-            <div class="dark-section w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center mx-auto mb-6">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+<!-- Geo Location Banner (non-intrusive, top of page) -->
+<div id="geo-banner" class="hidden fixed top-16 left-0 right-0 z-[90] transition-all duration-300 translate-y-[-100%] opacity-0">
+    <div class="bg-gradient-to-r from-violet-600 to-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3 min-w-0">
+                <span id="geo-flag" class="text-xl shrink-0"></span>
+                <p class="text-sm font-medium truncate">
+                    <span id="geo-message">Finding clinics in your area...</span>
+                </p>
             </div>
-            
-            <h2 class="text-2xl font-semibold text-gray-900 text-center mb-2">Find TMS Near You</h2>
-            <p class="text-gray-500 text-center mb-6">Enter your ZIP code to find verified TMS clinics in your area</p>
-            
-            <form id="location-form" class="space-y-4">
-                <div>
-                    <label for="zip-input" class="block text-sm font-semibold text-gray-700 mb-2">ZIP Code</label>
-                    <input 
-                        type="text" 
-                        id="zip-input" 
-                        name="zip"
-                        pattern="[0-9]{5}"
-                        maxlength="5"
-                        placeholder="e.g., 90210"
-                        class="w-full px-4 py-4 text-lg text-center rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all"
-                        required
-                    />
-                </div>
-                
-                <button 
-                    type="submit" 
-                    class="dark-section w-full py-4 bg-gradient-to-r from-indigo-600 to-blue-600 font-semibold rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all shadow-lg shadow-indigo-200"
-                >
-                    Find Clinics
-                </button>
-            </form>
-            
-            <div class="mt-6 text-center">
-                <button id="use-current-location" class="text-indigo-600 font-medium text-sm hover:text-indigo-700 flex items-center justify-center gap-2 mx-auto">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg> Use my current location
+            <div class="flex items-center gap-2 shrink-0">
+                <a id="geo-cta" href="/us/" class="px-4 py-1.5 bg-white text-violet-700 text-sm font-semibold rounded-lg hover:bg-violet-50 transition-colors whitespace-nowrap">
+                    Browse Clinics
+                </a>
+                <button id="geo-dismiss" class="p-1 text-white/70 hover:text-white transition-colors rounded" aria-label="Dismiss">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
             </div>
-            
-            <p class="text-xs text-gray-400 text-center mt-6">
-                Currently serving United States. Canada & Australia coming in Phase 2.
-            </p>
         </div>
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const popup = document.getElementById('location-popup');
-        const overlay = document.getElementById('location-overlay');
-        const closeBtn = document.getElementById('close-location-popup');
-        const form = document.getElementById('location-form');
-        const zipInput = document.getElementById('zip-input') as HTMLInputElement;
-        const useLocationBtn = document.getElementById('use-current-location');
-        
-        // ZIP to state mapping (simplified)
-        const zipToState: Record<string, { state: string; city: string }> = {
-            '90': { state: 'california', city: 'los-angeles' },
-            '91': { state: 'california', city: 'los-angeles' },
-            '92': { state: 'california', city: 'san-diego' },
-            '94': { state: 'california', city: 'san-francisco' },
-            '95': { state: 'california', city: 'san-jose' },
-            '85': { state: 'arizona', city: 'phoenix' },
-            '33': { state: 'florida', city: 'miami' },
-            '32': { state: 'florida', city: 'jacksonville' },
-            '60': { state: 'illinois', city: 'chicago' },
-            '10': { state: 'new-york', city: 'new-york' },
-            '11': { state: 'new-york', city: 'new-york' },
-            '77': { state: 'texas', city: 'houston' },
-            '75': { state: 'texas', city: 'dallas' },
-            '80': { state: 'colorado', city: 'denver' },
-            '30': { state: 'georgia', city: 'atlanta' },
-            '15': { state: 'pennsylvania', city: 'pittsburgh' },
-            '19': { state: 'pennsylvania', city: 'philadelphia' },
-            '44': { state: 'ohio', city: 'cleveland' },
-            '43': { state: 'ohio', city: 'columbus' },
-            '48': { state: 'michigan', city: 'detroit' },
-            '98': { state: 'washington', city: 'seattle' },
-        };
-        
-        // Show popup on page load if not seen before
-        const hasSeenPopup = localStorage.getItem('tms-location-popup-seen');
-        if (!hasSeenPopup) {
-            setTimeout(() => {
-                popup?.classList.remove('hidden');
-            }, 2000);
-        }
-        
-        // Close popup
-        function closePopup() {
-            popup?.classList.add('hidden');
-            localStorage.setItem('tms-location-popup-seen', 'true');
-        }
-        
-        overlay?.addEventListener('click', closePopup);
-        closeBtn?.addEventListener('click', closePopup);
-        
-        // Form submission
-        form?.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const zip = zipInput?.value?.substring(0, 2);
-            const location = zipToState[zip];
-            
-            if (location) {
-                window.location.href = `/us/${location.state}/${location.city}/`;
-            } else {
-                // Default to US page
-                window.location.href = '/us/';
-            }
-        });
-        
-        // Geolocation
-        useLocationBtn?.addEventListener('click', () => {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        // For demo, redirect to verified clinics
-                        window.location.href = '/verified-clinics/';
-                    },
-                    () => {
-                        showToast('Unable to get location. Please enter your ZIP code.');
-                    }
-                );
-            }
-        });
-        
-        // Trigger popup manually
-        window.showLocationPopup = () => {
-            popup?.classList.remove('hidden');
-        };
-    });
-</script>
+<script is:inline>
+(function() {
+    var CTA_LABELS = {
+        US: 'Browse US Clinics', GB: 'Browse UK Clinics', CA: 'Browse Canadian Clinics',
+        AU: 'Browse Australian Clinics', DE: 'Browse German Clinics', IN: 'Browse Indian Clinics'
+    };
 
-<style>
-    @keyframes fade-in-up {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    function showBanner() {
+        if (localStorage.getItem('tms-geo-banner-dismissed')) return;
+        if (localStorage.getItem('tms-location-popup-seen')) return;
+        var geo = window.TMS_GEO;
+        if (!geo) return;
+
+        var banner = document.getElementById('geo-banner');
+        var flag = document.getElementById('geo-flag');
+        var message = document.getElementById('geo-message');
+        var cta = document.getElementById('geo-cta');
+        if (!banner) return;
+
+        flag.textContent = geo.flag;
+        message.textContent = 'We found TMS clinics near you in ' + geo.name;
+        cta.textContent = CTA_LABELS[geo.country] || 'Browse Clinics';
+        cta.href = geo.url;
+
+        banner.classList.remove('hidden');
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                banner.classList.remove('translate-y-[-100%]', 'opacity-0');
+                banner.classList.add('translate-y-0', 'opacity-100');
+            });
+        });
+        setTimeout(dismissBanner, 8000);
     }
-    
-    .animate-fade-in-up {
-        animation: fade-in-up 0.3s ease-out;
+
+    function dismissBanner() {
+        var banner = document.getElementById('geo-banner');
+        if (!banner) return;
+        banner.classList.add('translate-y-[-100%]', 'opacity-0');
+        banner.classList.remove('translate-y-0', 'opacity-100');
+        setTimeout(function() { banner.classList.add('hidden'); }, 300);
+        localStorage.setItem('tms-geo-banner-dismissed', 'true');
     }
-</style>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var dismissBtn = document.getElementById('geo-dismiss');
+        if (dismissBtn) dismissBtn.addEventListener('click', dismissBanner);
+        setTimeout(showBanner, 1500);
+    });
+
+    window.showLocationPopup = function() {
+        localStorage.removeItem('tms-geo-banner-dismissed');
+        showBanner();
+    };
+})();
+</script>

@@ -140,7 +140,6 @@ export const clinics = pgTable('clinics', {
   // Timestamps
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
-  deletedAt: timestamp('deleted_at', { withTimezone: true }),
 }, (table) => [
   index('idx_clinics_state').on(table.state),
   index('idx_clinics_city').on(table.state, table.city),

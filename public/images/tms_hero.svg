@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <defs>
+    <!-- Gradient for brain glow -->
+    <radialGradient id="brainGlow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#7C3AED" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Magnetic field gradient -->
+    <radialGradient id="fieldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.6"/>
+      <stop offset="40%" stop-color="#7C3AED" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Coil gradient -->
+    <linearGradient id="coilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="50%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <!-- Neural pulse -->
+    <linearGradient id="pulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#A78BFA" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Subtle grid pattern -->
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#7C3AED" stroke-width="0.3" opacity="0.1"/>
+    </pattern>
+    <!-- Animated pulse rings -->
+    <style>
+      @keyframes pulse1 { 0% { r: 20; opacity: 0.5; } 100% { r: 60; opacity: 0; } }
+      @keyframes pulse2 { 0% { r: 15; opacity: 0.4; } 100% { r: 50; opacity: 0; } }
+      @keyframes pulse3 { 0% { r: 10; opacity: 0.3; } 100% { r: 40; opacity: 0; } }
+      @keyframes neuralFire { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+      .pulse-ring1 { animation: pulse1 2s ease-out infinite; }
+      .pulse-ring2 { animation: pulse2 2s ease-out infinite 0.6s; }
+      .pulse-ring3 { animation: pulse3 2s ease-out infinite 1.2s; }
+      .neural-fire { animation: neuralFire 1.5s ease-in-out infinite; }
+      .neural-fire-2 { animation: neuralFire 1.8s ease-in-out infinite 0.3s; }
+      .neural-fire-3 { animation: neuralFire 2s ease-in-out infinite 0.7s; }
+    </style>
+  </defs>
+
+  <!-- Background grid -->
+  <rect width="600" height="600" fill="url(#grid)" opacity="0.5"/>
+
+  <!-- Ambient glow -->
+  <ellipse cx="280" cy="280" rx="250" ry="250" fill="url(#brainGlow)"/>
+
+  <!-- HEAD — side profile, facing right -->
+  <!-- Skull outline -->
+  <path d="M310 120
+    C340 120 370 135 390 160
+    C415 190 425 230 420 270
+    C418 295 410 315 395 340
+    C385 358 380 370 382 390
+    L382 420
+    C382 435 375 445 360 450
+    L290 460
+    C275 462 265 455 262 440
+    L260 420
+    C258 400 250 385 235 370
+    C215 348 200 315 195 280
+    C188 235 195 190 220 155
+    C245 125 275 120 310 120Z"
+    fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2"/>
+
+  <!-- Brain region fill (translucent) -->
+  <path d="M310 140
+    C335 140 360 152 375 172
+    C395 198 402 230 400 265
+    C398 285 392 305 380 325
+    C370 342 365 355 366 375
+    L260 405
+    C255 388 247 373 236 358
+    C218 338 208 312 205 280
+    C200 242 206 200 225 170
+    C248 142 278 140 310 140Z"
+    fill="#EDE9FE" opacity="0.6"/>
+
+  <!-- Brain folds (sulci) -->
+  <g stroke="#C4B5FD" stroke-width="1.5" fill="none" opacity="0.7">
+    <path d="M240 200 C265 195 290 200 310 195 C330 190 350 195 370 205"/>
+    <path d="M230 235 C255 228 280 238 305 230 C325 224 345 230 380 240"/>
+    <path d="M225 270 C250 262 275 272 300 265 C320 260 345 265 390 275"/>
+    <path d="M235 305 C258 298 278 308 300 300 C320 294 345 300 375 310"/>
+    <path d="M250 340 C270 335 290 342 310 336"/>
+  </g>
+
+  <!-- Brain center fissure -->
+  <path d="M310 145 C308 180 312 220 308 260 C305 290 310 320 308 355"
+    stroke="#C4B5FD" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <!-- Left prefrontal cortex highlight (where TMS targets) -->
+  <ellipse cx="260" cy="200" rx="45" ry="55" fill="#7C3AED" opacity="0.12"/>
+
+  <!-- Neural activation dots in DLPFC region -->
+  <circle cx="245" cy="185" r="3" fill="#7C3AED" opacity="0.8" class="neural-fire"/>
+  <circle cx="260" cy="195" r="2.5" fill="#8B5CF6" opacity="0.7" class="neural-fire-2"/>
+  <circle cx="250" cy="210" r="3" fill="#7C3AED" opacity="0.8" class="neural-fire-3"/>
+  <circle cx="270" cy="180" r="2" fill="#A78BFA" opacity="0.6" class="neural-fire"/>
+  <circle cx="240" cy="200" r="2" fill="#8B5CF6" opacity="0.7" class="neural-fire-2"/>
+  <circle cx="255" cy="175" r="2.5" fill="#7C3AED" opacity="0.6" class="neural-fire-3"/>
+  <circle cx="265" cy="205" r="2" fill="#A78BFA" opacity="0.5" class="neural-fire"/>
+
+  <!-- Neural connection lines -->
+  <g stroke="#7C3AED" stroke-width="0.8" opacity="0.4">
+    <line x1="245" y1="185" x2="260" y2="195"/>
+    <line x1="260" y1="195" x2="250" y2="210"/>
+    <line x1="250" y1="210" x2="240" y2="200"/>
+    <line x1="270" y1="180" x2="255" y2="175"/>
+    <line x1="245" y1="185" x2="255" y2="175"/>
+    <line x1="265" y1="205" x2="260" y2="195"/>
+  </g>
+
+  <!-- EAR -->
+  <path d="M210 280 C200 275 192 285 195 300 C198 312 205 315 210 310"
+    stroke="#CBD5E1" stroke-width="2" fill="#F1F5F9"/>
+
+  <!-- EYE area -->
+  <path d="M370 265 C380 260 395 262 398 270" stroke="#94A3B8" stroke-width="1.5" fill="none"/>
+
+  <!-- FIGURE-8 TMS COIL — accurate medical device -->
+  <!-- Coil arm/handle -->
+  <rect x="100" y="130" width="22" height="100" rx="6" fill="url(#coilGrad)" stroke="#94A3B8" stroke-width="1.5" transform="rotate(-25 111 180)"/>
+
+  <!-- Cable from handle -->
+  <path d="M88 115 C70 95 50 100 35 120 C20 140 25 160 30 165" stroke="#94A3B8" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Figure-8 coil housing — two connected circular coils -->
+  <g transform="translate(175, 158) rotate(-25)">
+    <!-- Coil body background -->
+    <ellipse cx="-30" cy="0" rx="38" ry="28" fill="#F8FAFC" stroke="#94A3B8" stroke-width="2"/>
+    <ellipse cx="30" cy="0" rx="38" ry="28" fill="#F8FAFC" stroke="#94A3B8" stroke-width="2"/>
+
+    <!-- Center junction -->
+    <rect x="-12" y="-18" width="24" height="36" rx="4" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+
+    <!-- Coil windings visible through housing -->
+    <ellipse cx="-30" cy="0" rx="28" ry="18" fill="none" stroke="#7C3AED" stroke-width="1.5" opacity="0.3"/>
+    <ellipse cx="-30" cy="0" rx="22" ry="13" fill="none" stroke="#7C3AED" stroke-width="1" opacity="0.2"/>
+    <ellipse cx="30" cy="0" rx="28" ry="18" fill="none" stroke="#7C3AED" stroke-width="1.5" opacity="0.3"/>
+    <ellipse cx="30" cy="0" rx="22" ry="13" fill="none" stroke="#7C3AED" stroke-width="1" opacity="0.2"/>
+
+    <!-- Center indicator light -->
+    <circle cx="0" cy="0" r="4" fill="#7C3AED" opacity="0.8"/>
+    <circle cx="0" cy="0" r="2" fill="#A78BFA"/>
+  </g>
+
+  <!-- MAGNETIC FIELD VISUALIZATION -->
+  <!-- Field emanating from coil center into brain -->
+  <g transform="translate(218, 195)">
+    <!-- Concentric field rings -->
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#7C3AED" stroke-width="1.5" opacity="0.4" class="pulse-ring1"/>
+    <circle cx="0" cy="0" r="15" fill="none" stroke="#8B5CF6" stroke-width="1.2" opacity="0.3" class="pulse-ring2"/>
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#A78BFA" stroke-width="1" opacity="0.25" class="pulse-ring3"/>
+
+    <!-- Field glow -->
+    <ellipse cx="25" cy="5" rx="35" ry="45" fill="url(#fieldGlow)" opacity="0.4"/>
+  </g>
+
+  <!-- Magnetic field direction arrows (into brain) -->
+  <g stroke="#7C3AED" stroke-width="1.2" opacity="0.5" fill="none" stroke-dasharray="4 4">
+    <path d="M220 180 C235 185 245 190 255 195"/>
+    <path d="M218 195 C233 198 243 200 253 202"/>
+    <path d="M220 210 C235 210 245 208 255 205"/>
+  </g>
+  <!-- Arrow tips -->
+  <g fill="#7C3AED" opacity="0.5">
+    <polygon points="255,195 250,191 250,199"/>
+    <polygon points="253,202 248,198 248,206"/>
+    <polygon points="255,205 250,201 250,209"/>
+  </g>
+
+  <!-- LABELS -->
+  <!-- Figure-8 Coil label -->
+  <g transform="translate(60, 90)">
+    <rect x="0" y="0" width="130" height="28" rx="14" fill="#7C3AED" opacity="0.1"/>
+    <text x="65" y="19" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="600" fill="#6D28D9">Figure-8 TMS Coil</text>
+  </g>
+  <line x1="125" y1="118" x2="145" y2="140" stroke="#7C3AED" stroke-width="1" opacity="0.4" stroke-dasharray="3 3"/>
+
+  <!-- DLPFC label -->
+  <g transform="translate(130, 250)">
+    <rect x="0" y="0" width="155" height="28" rx="14" fill="#7C3AED" opacity="0.1"/>
+    <text x="78" y="19" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="600" fill="#6D28D9">Left Prefrontal Cortex</text>
+  </g>
+  <line x1="208" y1="250" x2="245" y2="220" stroke="#7C3AED" stroke-width="1" opacity="0.4" stroke-dasharray="3 3"/>
+
+  <!-- Magnetic Field label -->
+  <g transform="translate(340, 155)">
+    <rect x="0" y="0" width="125" height="28" rx="14" fill="#7C3AED" opacity="0.1"/>
+    <text x="63" y="19" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="600" fill="#6D28D9">Magnetic Pulses</text>
+  </g>
+  <line x1="340" y1="169" x2="275" y2="190" stroke="#7C3AED" stroke-width="1" opacity="0.4" stroke-dasharray="3 3"/>
+
+  <!-- Decorative data readouts (bottom right) -->
+  <g transform="translate(420, 400)" opacity="0.6">
+    <rect x="0" y="0" width="150" height="80" rx="12" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="15" y="22" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="600" fill="#94A3B8" letter-spacing="0.1em">PULSE FREQUENCY</text>
+    <text x="15" y="42" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="#0F172A">10 Hz</text>
+    <text x="15" y="58" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="600" fill="#94A3B8" letter-spacing="0.1em">INTENSITY</text>
+    <text x="15" y="72" font-family="Plus Jakarta Sans, sans-serif" font-size="14" font-weight="700" fill="#7C3AED">120% MT</text>
+  </g>
+
+  <!-- Non-invasive badge -->
+  <g transform="translate(420, 340)">
+    <rect x="0" y="0" width="140" height="40" rx="20" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+    <circle cx="22" cy="20" r="8" fill="#10B981"/>
+    <path d="M18 20l3 3 5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="40" y="25" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="600" fill="#065F46">Non-Invasive</text>
+  </g>
+
+  <!-- FDA badge -->
+  <g transform="translate(420, 500)">
+    <rect x="0" y="0" width="150" height="40" rx="20" fill="#EDE9FE" stroke="#DDD6FE" stroke-width="1"/>
+    <text x="20" y="26" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700" fill="#6D28D9">FDA-Cleared</text>
+    <text x="110" y="26" font-family="Plus Jakarta Sans, sans-serif" font-size="9" fill="#8B5CF6">Since 2008</text>
+  </g>
+</svg>

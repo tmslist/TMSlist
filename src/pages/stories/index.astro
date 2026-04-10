@@ -7,52 +7,84 @@ const description = "Read real stories from TMS therapy patients. Hear about the
 ---
 
 <Layout title={title} description={description}>
-    <main class="bg-gray-50 min-h-screen">
-        <section class="dark-section bg-gradient-to-br from-slate-900 via-indigo-900 to-blue-900 py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                <nav class="flex text-sm text-blue-200 mb-8">
-                    <a href="/" class="hover:text-white">Home</a>
-                    <span class="mx-2">/</span>
-                    <span>Patient Stories</span>
+    <main>
+        <!-- Hero -->
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] right-[20%] w-[500px] h-[500px] bg-rose-600/10 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[5%] left-[15%] w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-[120px]"></div>
+
+            <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">Patient Stories</span>
                 </nav>
-                <div class="max-w-3xl">
-                    <h1 class="text-3xl md:text-5xl font-semibold tracking-tight mb-4">
-                        Patient Stories
+                <div class="max-w-2xl">
+                    <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
+                        Real<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-violet-400">Stories</span>
                     </h1>
-                    <p class="text-lg text-blue-100 leading-relaxed">
-                        Real experiences from people who have undergone TMS therapy. These stories can help you understand what to expect and make informed decisions about your treatment.
+                    <p class="text-lg text-slate-400 leading-relaxed">
+                        Hear directly from patients who've been through TMS therapy. Their journeys, challenges, and outcomes — in their own words.
                     </p>
                 </div>
             </div>
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
         </section>
 
-        <section class="py-16">
-            <div class="container mx-auto px-6 max-w-4xl">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {STORIES_SLUGS.map(item => (
-                        <a href={`/stories/${item.slug}/`} class="group bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:border-indigo-200 transition-all">
-                            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-5">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <!-- Featured Story -->
+                {STORIES_SLUGS.length > 0 && (
+                    <a href={`/stories/${STORIES_SLUGS[0].slug}/`} class="group block mb-10">
+                        <div class="relative bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-100 p-10 lg:p-14 hover:border-violet-200 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden">
+                            <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-rose-50 to-transparent rounded-bl-[100px] opacity-60"></div>
+                            <div class="relative z-10 flex flex-col md:flex-row items-start gap-8">
+                                <div class="w-16 h-16 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center shrink-0">
+                                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                                </div>
+                                <div class="flex-1">
+                                    <span class="px-3 py-1 bg-rose-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-md mb-4 inline-block">Featured Story</span>
+                                    <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-3 tracking-tight">{STORIES_SLUGS[0].title}</h2>
+                                    <p class="text-slate-500 leading-relaxed mb-6">Hear directly from patients about their TMS therapy journey, what to expect, and the outcomes they experienced.</p>
+                                    <span class="text-violet-600 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                                        Read Full Story <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                    </span>
+                                </div>
                             </div>
-                            <h2 class="text-xl font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors mb-3">
-                                {item.title}
-                            </h2>
-                            <p class="text-gray-500 text-sm mb-4">
-                                Hear directly from patients about their TMS therapy journey.
-                            </p>
-                            <span class="text-indigo-600 font-semibold text-sm">Read Stories</span>
+                        </div>
+                    </a>
+                )}
+
+                <!-- Other Stories -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {STORIES_SLUGS.slice(1).map((item) => (
+                        <a href={`/stories/${item.slug}/`} class="group bg-white rounded-2xl border border-slate-100 p-8 hover:border-violet-200 hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.06)] transition-all duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-violet-50 text-violet-500 flex items-center justify-center mb-5">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                            </div>
+                            <h2 class="text-xl font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-3 tracking-tight">{item.title}</h2>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-5">Hear directly from patients about their TMS therapy journey.</p>
+                            <span class="text-violet-600 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                                Read Story <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            </span>
                         </a>
                     ))}
                 </div>
 
-                <div class="mt-16 bg-indigo-50 rounded-2xl p-8 text-center border border-indigo-100">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Share Your Story</h3>
-                    <p class="text-gray-600 mb-6 max-w-lg mx-auto">
-                        Have you undergone TMS therapy? Your experience could help someone else make an important decision about their mental health treatment.
-                    </p>
-                    <a href="/contact/" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors">
-                        Submit Your Story
-                    </a>
+                <!-- Share Your Story CTA -->
+                <div class="mt-20 relative bg-slate-950 rounded-3xl p-10 lg:p-14 overflow-hidden text-center">
+                    <div class="absolute inset-0 bg-gradient-to-r from-rose-600/10 via-transparent to-violet-600/10"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-white/10 text-white flex items-center justify-center mx-auto mb-5">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Share Your TMS Story</h3>
+                        <p class="text-slate-400 max-w-md mx-auto mb-8">Your experience could help someone else make an important decision about their mental health treatment.</p>
+                        <a href="/contact/" class="inline-flex items-center px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">
+                            Submit Your Story
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
