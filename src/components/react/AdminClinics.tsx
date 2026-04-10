@@ -48,8 +48,8 @@ export default function AdminClinics() {
       const json = await res.json();
       setClinics(json.data);
       setTotal(json.total);
-    } catch (err: any) {
-      setError(err.message || 'Failed to load clinics');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred" || 'Failed to load clinics');
     } finally {
       setLoading(false);
     }
@@ -141,7 +141,7 @@ export default function AdminClinics() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {loading ? (
-                <tr><td colSpan={6} className="px-4 py-8 text-center text-gray-500">Loading...</td></tr>
+                <tr><td colSpan={6} className="px-4 py-12 text-center text-gray-400"><div class="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2"></div><br/>Loading</td></tr>
               ) : clinics.length === 0 ? (
                 <tr><td colSpan={6} className="px-4 py-8 text-center text-gray-500">No clinics found.</td></tr>
               ) : clinics.map(clinic => (
@@ -188,6 +188,12 @@ export default function AdminClinics() {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex gap-2">
+                      <a
+                        href={`/admin/clinics/${clinic.id}`}
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-violet-50 text-violet-700 hover:bg-violet-100 transition-colors"
+                      >
+                        Edit
+                      </a>
                       <button
                         onClick={() => toggleField(clinic.id, 'verified', !clinic.verified)}
                         disabled={updating === clinic.id}

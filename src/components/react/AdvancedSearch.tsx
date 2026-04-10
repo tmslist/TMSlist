@@ -123,11 +123,11 @@ export default function AdvancedSearch() {
             <svg className={`w-4 h-4 transition-transform ${filtersOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </button>
 
-          <div className={`space-y-6 ${filtersOpen ? 'block' : 'hidden lg:block'}`}>
+          <div className={`space-y-6 ${filtersOpen ? 'block' : 'hidden lg:block'}`} role="region" aria-label="Search filters">
             {/* Sort */}
             <div className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
               <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Sort By</h3>
-              <select value={sortBy} onChange={(e) => { setSortBy(e.target.value as any); search(); }} className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm">
+              <select value={sortBy} onChange={(e) => { setSortBy(e.target.value); search(); }} aria-label="Sort clinics by" className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm">
                 <option value="rating">Highest Rated</option>
                 <option value="reviews">Most Reviews</option>
                 <option value="name">Name A-Z</option>

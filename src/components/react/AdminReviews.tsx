@@ -63,8 +63,8 @@ export default function AdminReviews() {
       setReviews(json.data);
       setTotal(json.total);
       setPendingCount(json.pendingCount);
-    } catch (err: any) {
-      setError(err.message || 'Failed to load reviews');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred" || 'Failed to load reviews');
     } finally {
       setLoading(false);
     }
@@ -160,7 +160,7 @@ export default function AdminReviews() {
       {/* Reviews List */}
       <div className="space-y-4">
         {loading ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-500">Loading...</div>
+          <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-500">⏳ Loading...</div>
         ) : reviews.length === 0 ? (
           <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-500">
             {filter === 'pending' ? 'No pending reviews.' : 'No reviews found.'}
