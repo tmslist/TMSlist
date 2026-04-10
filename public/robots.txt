@@ -2,6 +2,20 @@ User-agent: *
 Allow: /
 
 Disallow: /admin/
-Disallow: /api/
+Disallow: /portal/
+Disallow: /owner/
+Disallow: /account/
+Disallow: /api/auth/
+Disallow: /api/admin/
+Disallow: /api/portal/
+Disallow: /api/owner/
+Disallow: /api/upload
+Disallow: /api/webhooks/
+Disallow: /api/funnel/
+Disallow: /api/subscribe
+Allow: /api/clinics/
+Allow: /api/reviews/
+Allow: /api/clinics/search
+Allow: /api/clinics/nearby
 
 Sitemap: https://tmslist.com/sitemap-index.xml
