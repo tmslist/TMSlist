@@ -1,10 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
+import { t } from '../../utils/i18n';
 import { COUNTRY_META } from '../../utils/countryData';
 
 const countryCode = 'GB';
-const clinics = getClinicsByCountry(countryCode);
+const clinics = await getClinicsByCountry(countryCode);
 const meta = COUNTRY_META[countryCode];
 const totalClinics = clinics.length;
 
@@ -49,59 +50,34 @@ const schema = JSON.stringify({
     { name: "Home", url: "/" },
     { name: "United Kingdom", url: "/uk/" },
 ]}>
-    <main class="container mx-auto px-4 py-8">
-        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="/" class="hover:text-gray-900">Home</a>
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <span class="mx-2">/</span>
-                        <span class="text-gray-800">United Kingdom</span>
-                    </div>
-                </li>
-            </ol>
-        </nav>
-
-        <h1 class="text-3xl font-semibold mb-2">TMS Therapy Clinics Across the United Kingdom</h1>
-        <p class="text-gray-600 mb-8 max-w-3xl">Browse {totalClinics}+ {meta.tmsStatus} TMS providers across {regions.length} regions. Find top-rated clinics near you for depression, anxiety, OCD, and more.</p>
-
-        <!-- Key Facts -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
-                <div class="text-2xl font-semibold text-indigo-600">{totalClinics}</div>
-                <div class="text-sm text-gray-500 font-medium">UK Clinics</div>
+    <main>
+        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    <span class="text-slate-700 font-medium">United Kingdom</span>
+                </nav>
+                <div class="max-w-3xl">
+                    <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+                        TMS Therapy in <span class="text-violet-600">United Kingdom</span>
+                    </h1>
+                    <p class="text-lg text-slate-500 leading-relaxed">Browse {totalClinics}+ {meta.tmsStatus} TMS providers across {regions.length} regions. Find top-rated clinics near you for depression, anxiety, OCD, and more.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
-                <div class="text-2xl font-semibold text-indigo-600">{regions.length}</div>
-                <div class="text-sm text-gray-500 font-medium">Regions</div>
-            </div>
-            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
-                <div class="text-2xl font-semibold text-indigo-600">{meta.publicHealthSystem}</div>
-                <div class="text-sm text-gray-500 font-medium">Public Health</div>
-            </div>
-            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
-                <div class="text-2xl font-semibold text-indigo-600">{meta.sessionCostRange}</div>
-                <div class="text-sm text-gray-500 font-medium">Per Session</div>
-            </div>
-        </div>
-
-        <!-- Region Grid -->
-        <div class="flex items-center mb-8">
-            <h2 class="text-2xl font-semibold text-gray-900">Browse by Region</h2>
-            <div class="ml-4 h-px flex-1 bg-gray-200"></div>
-            <span class="ml-4 text-sm font-medium text-gray-400">{regions.length} regions</span>
-        </div>
-
+        </section>
+        <section class="py-12"><div class="container mx-auto px-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {regions.map((region) => (
-                <a href={`/uk/${region.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-indigo-500 hover:shadow-md transition-all group">
-                    <span class="text-lg font-medium text-gray-800 group-hover:text-indigo-600">{region.name}</span>
+                <a href={`/uk/${region.slug}/`} class="block bg-white rounded-2xl border border-slate-100 p-5 hover:border-violet-200 hover:shadow-[0_4px_20px_rgb(0,0,0,0.04)] transition-all group">
+                    <span class="text-lg font-medium text-gray-800 group-hover:text-violet-600">{region.name}</span>
                     <span class="block text-sm text-gray-500 mt-1">{region.count} {region.count === 1 ? 'clinic' : 'clinics'}</span>
                 </a>
             ))}
         </div>
+        </div></section>
 
         <!-- SEO Content -->
         <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">

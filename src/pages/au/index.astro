@@ -1,12 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
+import { t } from '../../utils/i18n';
 import { COUNTRY_META } from '../../utils/countryData';
 
 const countryCode = 'AU';
 const countryName = COUNTRY_NAMES[countryCode];
 const meta = COUNTRY_META[countryCode];
-const clinics = getClinicsByCountry(countryCode);
+const clinics = await getClinicsByCountry(countryCode);
 const totalClinics = clinics.length;
 
 // Group clinics by state/region
@@ -50,53 +51,34 @@ const collectionSchema = JSON.stringify({
     { name: "Home", url: "/" },
     { name: "Australia", url: "/au/" },
 ]}>
-    <main class="container mx-auto px-4 py-8">
-        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="/" class="hover:text-gray-900">Home</a>
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <span class="mx-2">/</span>
-                        <span class="text-gray-800">Australia</span>
-                    </div>
-                </li>
-            </ol>
-        </nav>
-
-        <h1 class="text-3xl font-semibold mb-2">TMS Therapy Clinics Across Australia</h1>
-        <p class="text-gray-600 mb-8 max-w-3xl">Browse {totalClinics}+ TGA-approved TMS providers across {states.length} states and territories. Australia offers Medicare rebates for TMS therapy, making it one of the most accessible countries for treatment.</p>
-
-        <!-- Key Stats -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            <div class="bg-white rounded-xl border border-gray-100 p-5 text-center">
-                <div class="text-3xl font-semibold tracking-tight text-indigo-600">{totalClinics}</div>
-                <div class="text-sm text-gray-500 font-medium mt-1">TMS Clinics</div>
+    <main>
+        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    <span class="text-slate-700 font-medium">Australia</span>
+                </nav>
+                <div class="max-w-3xl">
+                    <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+                        TMS Therapy in <span class="text-violet-600">Australia</span>
+                    </h1>
+                    <p class="text-lg text-slate-500 leading-relaxed">Browse {totalClinics}+ TGA-approved TMS providers across {states.length} states and territories. Australia offers Medicare rebates for TMS therapy, making it one of the most accessible countries for treatment.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl border border-gray-100 p-5 text-center">
-                <div class="text-3xl font-semibold tracking-tight text-indigo-600">{states.length}</div>
-                <div class="text-sm text-gray-500 font-medium mt-1">States & Territories</div>
-            </div>
-            <div class="bg-white rounded-xl border border-gray-100 p-5 text-center">
-                <div class="text-2xl font-semibold tracking-tight text-indigo-600">Medicare</div>
-                <div class="text-sm text-gray-500 font-medium mt-1">Rebates Available</div>
-            </div>
-            <div class="bg-white rounded-xl border border-gray-100 p-5 text-center">
-                <div class="text-2xl font-semibold tracking-tight text-indigo-600">{meta.sessionCostRange}</div>
-                <div class="text-sm text-gray-500 font-medium mt-1">Per Session (After Rebate)</div>
-            </div>
-        </div>
-
-        <!-- State Cards -->
+        </section>
+        <section class="py-12"><div class="container mx-auto px-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {states.map((state) => (
-                <a href={`/au/${state.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-indigo-500 hover:shadow-md transition-all group">
-                    <span class="text-lg font-medium text-gray-800 group-hover:text-indigo-600">{state.name}</span>
+                <a href={`/au/${state.slug}/`} class="block bg-white rounded-2xl border border-slate-100 p-5 hover:border-violet-200 hover:shadow-[0_4px_20px_rgb(0,0,0,0.04)] transition-all group">
+                    <span class="text-lg font-medium text-gray-800 group-hover:text-violet-600">{state.name}</span>
                     <span class="block text-sm text-gray-500 mt-1">{state.count} {state.count === 1 ? 'clinic' : 'clinics'}</span>
                 </a>
             ))}
         </div>
+        </div></section>
 
         <!-- SEO Content -->
         <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">

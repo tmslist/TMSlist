@@ -1,10 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
+import { t } from '../../utils/i18n';
 import { COUNTRY_META } from '../../utils/countryData';
 
 const meta = COUNTRY_META.CA;
-const clinics = getClinicsByCountry('CA');
+const clinics = await getClinicsByCountry('CA');
 const totalClinics = clinics.length;
 
 // Group clinics by province
@@ -48,32 +49,34 @@ const schema = JSON.stringify({
   { name: "Home", url: "/" },
   { name: "Canada", url: "/ca/" },
 ]}>
-  <main class="container mx-auto px-4 py-8">
-    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-      <ol class="inline-flex items-center space-x-1 md:space-x-3">
-        <li class="inline-flex items-center">
-          <a href="/" class="hover:text-gray-900">Home</a>
-        </li>
-        <li aria-current="page">
-          <div class="flex items-center">
-            <span class="mx-2">/</span>
-            <span class="text-gray-800">Canada</span>
-          </div>
-        </li>
-      </ol>
-    </nav>
-
-    <h1 class="text-3xl font-semibold mb-2">TMS Therapy Clinics Across Canada</h1>
-    <p class="text-gray-600 mb-8 max-w-3xl">Browse {totalClinics}+ Health Canada approved TMS providers across {provinces.length} provinces and territories. Find top-rated clinics near you for depression, anxiety, OCD, and more.</p>
-
+  <main>
+    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+        <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
+            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <span class="text-slate-700 font-medium">Canada</span>
+            </nav>
+            <div class="max-w-3xl">
+                <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+                    TMS Therapy in <span class="text-violet-600">Canada</span>
+                </h1>
+                <p class="text-lg text-slate-500 leading-relaxed">Browse {totalClinics}+ Health Canada approved TMS providers across {provinces.length} provinces and territories. Find top-rated clinics near you for depression, anxiety, OCD, and more.</p>
+            </div>
+        </div>
+    </section>
+    <section class="py-12"><div class="container mx-auto px-4">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {provinces.map((province) => (
-        <a href={`/ca/${province.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-indigo-500 hover:shadow-md transition-all group">
-          <span class="text-lg font-medium text-gray-800 group-hover:text-indigo-600">{province.name}</span>
+        <a href={`/ca/${province.slug}/`} class="block bg-white rounded-2xl border border-slate-100 p-5 hover:border-violet-200 hover:shadow-[0_4px_20px_rgb(0,0,0,0.04)] transition-all group">
+          <span class="text-lg font-medium text-gray-800 group-hover:text-violet-600">{province.name}</span>
           <span class="block text-sm text-gray-500 mt-1">{province.count} {province.count === 1 ? 'clinic' : 'clinics'}</span>
         </a>
       ))}
     </div>
+    </div></section>
 
     <!-- SEO Content -->
     <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">

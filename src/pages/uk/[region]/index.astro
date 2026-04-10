@@ -2,10 +2,11 @@
 import Layout from '../../../layouts/Layout.astro';
 import ClinicCard from '../../../components/ClinicCard.astro';
 import { getClinicsByCountry, getClinicRating } from '../../../utils/dataHelpers';
+import { t } from '../../utils/i18n';
 import { COUNTRY_META } from '../../../utils/countryData';
 
 export async function getStaticPaths() {
-    const clinics = getClinicsByCountry('GB');
+    const clinics = await getClinicsByCountry('GB');
     const meta = COUNTRY_META['GB'];
 
     // Group by region (state field)
@@ -77,7 +78,7 @@ const regionSchema = JSON.stringify({
                     "aggregateRating": {
                         "@type": "AggregateRating",
                         "ratingValue": getClinicRating(c),
-                        "reviewCount": typeof c.rating === 'object' ? c.rating?.count || 50 : c.review_count || 50
+                        "reviewCount": typeof c.rating === 'object' ? c.rating?.count || 0 : c.review_count || 0
                     }
                 } : {})
             }
@@ -92,22 +93,12 @@ const regionSchema = JSON.stringify({
     { name: regionName, url: `/uk/${regionSlug}/` },
 ]}>
     <main class="container mx-auto px-4 py-8">
-        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="/" class="hover:text-gray-900">Home</a>
-                </li>
-                <li class="inline-flex items-center">
-                    <span class="mx-2">/</span>
-                    <a href="/uk/" class="hover:text-gray-900">United Kingdom</a>
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <span class="mx-2">/</span>
-                        <span class="text-gray-800 font-medium">{regionName}</span>
-                    </div>
-                </li>
-            </ol>
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <a href="/uk/" class="hover:text-violet-600 transition-colors">United Kingdom</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <span class="text-slate-700 font-medium">{regionName}</span>
         </nav>
 
         <!-- Top Rated Section -->
