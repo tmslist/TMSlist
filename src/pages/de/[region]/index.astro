@@ -3,14 +3,16 @@ import Layout from '../../../layouts/Layout.astro';
 import ClinicCard from '../../../components/ClinicCard.astro';
 import { getClinicsByCountry, getClinicsByCountryAndRegion } from '../../../utils/dataHelpers';
 import { COUNTRY_META } from '../../../utils/countryData';
+import { t, getLocaleFromPath } from '../../../utils/i18n';
 import { calculateClinicScore } from '../../../utils/ranking';
 
 export async function getStaticPaths() {
-  const clinics = getClinicsByCountry('DE');
+  const clinics = await getClinicsByCountry('DE');
   const regions = [...new Set(clinics.map(c => c.state).filter(Boolean))];
 
-  return regions.map(region => {
-    const regionClinics = getClinicsByCountryAndRegion('DE', region);
+  const paths = [];
+  for (const region of regions) {
+    const regionClinics = await getClinicsByCountryAndRegion('DE', region);
     const regionSlug = region.toLowerCase().replace(/\s+/g, '-');
 
     const cities = [...new Set(
@@ -21,7 +23,7 @@ export async function getStaticPaths() {
       .sort((a, b) => calculateClinicScore(b) - calculateClinicScore(a))
       .slice(0, 3);
 
-    return {
+    paths.push({
       params: { region: regionSlug },
       props: {
         regionName: region,
@@ -29,8 +31,9 @@ export async function getStaticPaths() {
         topClinics,
         clinicCount: regionClinics.length,
       },
-    };
-  });
+    });
+  }
+  return paths;
 }
 
 const { regionName, cities, topClinics, clinicCount } = Astro.props;
@@ -74,22 +77,12 @@ const regionSchema = JSON.stringify({
   { name: regionName, url: `/de/${regionSlug}/` },
 ]}>
   <main class="container mx-auto px-4 py-8">
-    <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-      <ol class="inline-flex items-center space-x-1 md:space-x-3">
-        <li class="inline-flex items-center">
-          <a href="/" class="hover:text-gray-900">Home</a>
-        </li>
-        <li class="inline-flex items-center">
-          <span class="mx-2">/</span>
-          <a href="/de/" class="hover:text-gray-900">Germany</a>
-        </li>
-        <li aria-current="page">
-          <div class="flex items-center">
-            <span class="mx-2">/</span>
-            <span class="text-gray-800 font-medium">{regionName}</span>
-          </div>
-        </li>
-      </ol>
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <a href="/de/" class="hover:text-violet-600 transition-colors">Germany</a>
+        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-slate-700 font-medium">{regionName}</span>
     </nav>
 
     <!-- Top Rated Section -->

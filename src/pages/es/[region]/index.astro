@@ -1,0 +1,132 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ClinicCard from '../../../components/ClinicCard.astro';
+import { getClinicsByCountry, getClinicRating } from '../../../utils/dataHelpers';
+import { COUNTRY_META } from '../../../utils/countryData';
+import { t, getLocaleFromPath } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+    const clinics = await getClinicsByCountry('ES');
+    const regionMap = new Map<string, typeof clinics>();
+    clinics.forEach(c => {
+        if (!c.state) return;
+        if (!regionMap.has(c.state)) regionMap.set(c.state, []);
+        regionMap.get(c.state)!.push(c);
+    });
+
+    return [...regionMap.entries()].map(([regionName, regionClinics]) => {
+        const regionSlug = regionName.toLowerCase().replace(/\s+/g, '-');
+        const cities = [...new Set(regionClinics.map(c => c.city).filter(Boolean))]
+            .map(city => ({
+                name: city,
+                slug: city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, ''),
+                count: regionClinics.filter(c => c.city === city).length,
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+
+        const topClinics = [...regionClinics]
+            .sort((a, b) => getClinicRating(b) - getClinicRating(a))
+            .slice(0, 3);
+
+        return {
+            params: { region: regionSlug },
+            props: { regionName, regionSlug, cities, topClinics, clinicCount: regionClinics.length },
+        };
+    });
+}
+
+const { regionName, regionSlug, cities, topClinics, clinicCount } = Astro.props;
+const meta = COUNTRY_META['ES'];
+
+const title = `Best TMS Therapy Clinics in ${regionName}, Spain (Top Rated Providers)`;
+const description = `Find the best TMS therapy providers in ${regionName}, Spain. Compare ${clinicCount} clinics across ${cities.length} cities and find treatment near you.`;
+
+const regionSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `TMS Therapy Clinics in ${regionName}, Spain`,
+    "description": description,
+    "url": `https://tmslist.com/es/${regionSlug}/`,
+    "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": clinicCount,
+        "itemListElement": topClinics.slice(0, 3).map((c: any, i: number) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "item": {
+                "@type": "MedicalClinic",
+                "name": c.name,
+                "url": `https://tmslist.com/clinic/${c.slug}`,
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": c.city,
+                    "addressRegion": regionName,
+                    "addressCountry": "ES"
+                }
+            }
+        }))
+    }
+});
+---
+
+<Layout title={title} description={description} schema={regionSchema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Spain", url: "/es/" },
+    { name: regionName, url: `/es/${regionSlug}/` },
+]}>
+    <main class="container mx-auto px-4 py-8">
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <a href="/es/" class="hover:text-violet-600 transition-colors">Spain</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <span class="text-slate-700 font-medium">{regionName}</span>
+        </nav>
+
+        <section class="mb-16">
+            <div class="flex items-center mb-8">
+                <h1 class="text-3xl font-semibold text-gray-900">Top Rated TMS Clinics in {regionName}</h1>
+            </div>
+            <p class="text-gray-600 mb-8 max-w-3xl">Compare {clinicCount} TMS therapy clinics across {cities.length} cities in {regionName}. Find verified providers with patient reviews.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {topClinics.map((clinic: any) => <ClinicCard clinic={clinic} />)}
+            </div>
+        </section>
+
+        <section>
+            <div class="flex items-center mb-8">
+                <h2 class="text-2xl font-semibold text-gray-900">Browse by City in {regionName}</h2>
+                <div class="ml-4 h-px flex-1 bg-gray-200"></div>
+                <span class="ml-4 text-sm font-medium text-gray-400">{cities.length} cities</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {cities.map((city: any) => (
+                    <a
+                        href={`/es/${regionSlug}/${city.slug}/`}
+                        class="group relative bg-white p-5 rounded-2xl border border-gray-100 shadow-[0_2px_8px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.08)] hover:border-blue-200 transition-all overflow-hidden"
+                    >
+                        <div class="absolute inset-x-0 bottom-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{city.name}</span>
+                            <svg class="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </div>
+                        <span class="text-xs font-medium text-gray-400">{city.count} {city.count === 1 ? 'clinic' : 'clinics'}</span>
+                    </a>
+                ))}
+            </div>
+        </section>
+
+        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+            <h2>TMS Therapy in {regionName}, Spain</h2>
+            <p>{regionName} has {clinicCount} TMS therapy clinics across {cities.length} cities. Our directory helps you find verified TMS providers with treatment information and patient reviews.</p>
+            <p>{meta.insuranceNote} Sessions typically cost {meta.sessionCostRange}.</p>
+            <h3>Recursos relacionados</h3>
+            <ul>
+                <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
+                <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
+                <li><a href="/specialists/">Find a TMS Specialist</a> -- qualified psychiatrists</li>
+            </ul>
+        </section>
+    </main>
+</Layout>
