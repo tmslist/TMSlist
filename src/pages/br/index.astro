@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
+import { COUNTRY_META } from '../../utils/countryData';
+import { t } from '../../utils/i18n';
+const locale = 'pt-BR' as const;
+
+const countryCode = 'BR';
+const meta = COUNTRY_META[countryCode];
+const clinics = await getClinicsByCountry(countryCode);
+const totalClinics = clinics.length;
+
+const regionMap = new Map<string, number>();
+clinics.forEach(c => {
+    if (!c.state) return;
+    regionMap.set(c.state, (regionMap.get(c.state) || 0) + 1);
+});
+
+const regions = [...regionMap.entries()]
+    .map(([name, count]) => ({
+        name,
+        slug: name.toLowerCase().replace(/\s+/g, '-'),
+        count,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+const title = `TMS Therapy Clinics in Brazil | ${totalClinics} Verified Providers`;
+const description = `Browse ${totalClinics} TMS therapy clinics across ${regions.length} regions in Brazil. ${meta.seoDescription}`;
+
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "TMS Therapy Clinics in Brazil",
+    "description": description,
+    "url": "https://tmslist.com/br/",
+    "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": regions.length,
+        "itemListElement": regions.map((r, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": `TMS Clinics in ${r.name}, Brazil`,
+            "url": `https://tmslist.com/br/${r.slug}/`
+        }))
+    }
+});
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Brazil", url: "/br/" },
+]}>
+    <main class="container mx-auto px-4 py-8">
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <span class="text-slate-700 font-medium">Brazil</span>
+        </nav>
+
+        <h1 class="text-3xl font-semibold mb-2">TMS Therapy Clinics in Brazil</h1>
+        <p class="text-gray-600 mb-8 max-w-3xl">Browse {totalClinics} verified TMS providers across {regions.length} regions in Brazil. TMS is {meta.tmsStatus}, with sessions costing {meta.sessionCostRange} per session.</p>
+
+        <!-- Key Facts -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-violet-600">{totalClinics}</div>
+                <div class="text-sm text-gray-500 font-medium">Clinics</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-violet-600">{regions.length}</div>
+                <div class="text-sm text-gray-500 font-medium">Regions</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-violet-600">{meta.publicHealthSystem}</div>
+                <div class="text-sm text-gray-500 font-medium">Public Health</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-violet-600">{meta.sessionCostRange}</div>
+                <div class="text-sm text-gray-500 font-medium">Per Session</div>
+            </div>
+        </div>
+
+        <div class="flex items-center mb-8">
+            <h2 class="text-2xl font-semibold text-gray-900">Navegar por região</h2>
+            <div class="ml-4 h-px flex-1 bg-gray-200"></div>
+            <span class="ml-4 text-sm font-medium text-gray-400">{regions.length} regions</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {regions.map((region) => (
+                <a href={`/br/${region.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-violet-500 hover:shadow-md transition-all group">
+                    <span class="text-lg font-medium text-gray-800 group-hover:text-violet-600">{region.name}</span>
+                    <span class="block text-sm text-gray-500 mt-1">{region.count} {region.count === 1 ? 'clinic' : 'clinics'}</span>
+                </a>
+            ))}
+        </div>
+
+        <!-- SEO Content -->
+        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+            <h2>About TMS Therapy in Brazil</h2>
+            <p>{meta.aboutContent}</p>
+            <p>{meta.seoDescription}</p>
+            <h3>Insurance and Costs</h3>
+            <p>{meta.insuranceNote}</p>
+            <p>The typical cost of a TMS session in Brazil ranges from {meta.sessionCostRange}. Treatment courses usually involve 20-30 sessions over 4-6 weeks.</p>
+            <h3>How to Choose a TMS Clinic in Brazil</h3>
+            <p>When selecting a TMS provider in Brazil, consider the clinic's accreditation, the experience of the treating psychiatrist, the TMS technology used, and whether your insurance covers treatment. Our directory helps you compare clinics by region, view available technologies, and find the right provider.</p>
+            <h3>Recursos relacionados</h3>
+            <ul>
+                <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
+                <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
+                <li><a href="/research/">TMS Research</a> -- latest clinical studies and outcomes</li>
+            </ul>
+        </section>
+    </main>
+</Layout>

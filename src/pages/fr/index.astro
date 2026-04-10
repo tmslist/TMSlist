@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
+import { COUNTRY_META } from '../../utils/countryData';
+import { t } from '../../utils/i18n';
+const locale = 'fr' as const;
+
+const countryCode = 'FR';
+const meta = COUNTRY_META[countryCode];
+const clinics = await getClinicsByCountry(countryCode);
+const totalClinics = clinics.length;
+
+const regionMap = new Map<string, number>();
+clinics.forEach(c => {
+    if (!c.state) return;
+    regionMap.set(c.state, (regionMap.get(c.state) || 0) + 1);
+});
+
+const regions = [...regionMap.entries()]
+    .map(([name, count]) => ({
+        name,
+        slug: name.toLowerCase().replace(/\s+/g, '-'),
+        count,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+const title = `TMS Therapy Clinics in France | ${totalClinics} Verified Providers`;
+const description = `Browse ${totalClinics} TMS therapy clinics across ${regions.length} regions in France. ${meta.seoDescription}`;
+
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "TMS Therapy Clinics in France",
+    "description": description,
+    "url": "https://tmslist.com/fr/",
+    "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": regions.length,
+        "itemListElement": regions.map((r, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": `TMS Clinics in ${r.name}, France`,
+            "url": `https://tmslist.com/fr/${r.slug}/`
+        }))
+    }
+});
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "France", url: "/fr/" },
+]}>
+    <main class="container mx-auto px-4 py-8">
+        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <span class="text-slate-700 font-medium">France</span>
+        </nav>
+
+        <h1 class="text-3xl font-semibold mb-2">TMS Therapy Clinics in France</h1>
+        <p class="text-gray-600 mb-8 max-w-3xl">Browse {totalClinics} verified TMS providers across {regions.length} regions in France. TMS is {meta.tmsStatus}, with sessions costing {meta.sessionCostRange} per session.</p>
+
+        <!-- Key Facts -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-violet-600">{totalClinics}</div>
+                <div class="text-sm text-gray-500 font-medium">Clinics</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-violet-600">{regions.length}</div>
+                <div class="text-sm text-gray-500 font-medium">Regions</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-violet-600">{meta.publicHealthSystem}</div>
+                <div class="text-sm text-gray-500 font-medium">Public Health</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-violet-600">{meta.sessionCostRange}</div>
+                <div class="text-sm text-gray-500 font-medium">Per Session</div>
+            </div>
+        </div>
+
+        <div class="flex items-center mb-8">
+            <h2 class="text-2xl font-semibold text-gray-900">{t('browse_by_region', locale)}</h2>
+            <div class="ml-4 h-px flex-1 bg-gray-200"></div>
+            <span class="ml-4 text-sm font-medium text-gray-400">{regions.length} regions</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {regions.map((region) => (
+                <a href={`/fr/${region.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-violet-500 hover:shadow-md transition-all group">
+                    <span class="text-lg font-medium text-gray-800 group-hover:text-violet-600">{region.name}</span>
+                    <span class="block text-sm text-gray-500 mt-1">{region.count} {region.count === 1 ? 'clinic' : 'clinics'}</span>
+                </a>
+            ))}
+        </div>
+
+        <!-- SEO Content -->
+        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
+            <h2>La thérapie TMS en France</h2>
+            <p>{meta.aboutContent}</p>
+            <p>{meta.seoDescription}</p>
+            <h3>Assurance et coûts</h3>
+            <p>{meta.insuranceNote}</p>
+            <p>Le coût typique d'une séance de TMS en France varie de {meta.sessionCostRange}. Les cures comprennent généralement 20 à 30 séances sur 4 à 6 semaines.</p>
+            <h3>Comment choisir une clinique TMS en France</h3>
+            <p>Lors du choix d'un prestataire TMS en France, tenez compte de l'accréditation de la clinique, de l'expérience du psychiatre traitant, de la technologie TMS utilisée et de la couverture de votre assurance. Notre annuaire vous aide à comparer les cliniques par région et à trouver le bon prestataire.</p>
+            <h3>{t('related_resources', locale)}</h3>
+            <ul>
+                <li><a href="/treatments/">{t('conditions_treated', locale)}</a> — dépression, anxiété, TOC, TSPT et plus</li>
+                <li><a href="/technology/">Guide technologique TMS</a> — comparer NeuroStar, BrainsWay, MagVenture</li>
+                <li><a href="/research/">Recherche TMS</a> — dernières études cliniques et résultats</li>
+            </ul>
+        </section>
+    </main>
+</Layout>
