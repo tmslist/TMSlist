@@ -91,9 +91,12 @@ export default function AdminReviews() {
           setReviews(prev => prev.filter(r => r.id !== id));
         }
         setPendingCount(prev => approved ? Math.max(0, prev - 1) : prev + 1);
+        setError('');
+      } else {
+        setError('Failed to update review. Please try again.');
       }
     } catch {
-      // silent
+      setError('Network error. Please try again.');
     } finally {
       setUpdating(null);
     }

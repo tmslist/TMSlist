@@ -11,6 +11,6 @@ if (!hasRole(session, 'admin', 'editor')) {
 }
 ---
 
-<Layout title="Lead Management | TMS List Admin">
+<Layout title="Lead Management | TMS List Admin" noindex={true}>
   <LeadsDashboard client:load userEmail={session!.email} />
 </Layout>

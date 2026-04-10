@@ -94,7 +94,7 @@ export default function LeadsDashboard({ userEmail }: { userEmail: string }) {
       lead.phone || '',
       lead.doctorName || '',
       lead.clinicName || '',
-      (lead.message || '').replace(/"/g, '""'),
+      (lead.message || '').replace(/"/g, '""').replace(/[\n\r]+/g, ' '),
       lead.sourceUrl || '',
     ].map(v => `"${v}"`).join(','));
 

@@ -1,15 +1,42 @@
 ---
 import ContentPage from '../../layouts/ContentPage.astro';
+import { getCollection, render } from 'astro:content';
 import { INSURANCE_SLUGS } from '../../utils/seo_slugs';
 
-export function getStaticPaths() {
-  return INSURANCE_SLUGS.map(({ slug, title }) => ({
-    params: { slug },
-    props: { title },
+export async function getStaticPaths() {
+  let entries: any[] = [];
+  try {
+    entries = await getCollection('insurance');
+  } catch {}
+
+  const contentPaths = entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { title: entry.data.title, description: entry.data.description, hasContent: true, entry },
   }));
+
+  const contentSlugsSet = new Set(contentPaths.map(p => p.params.slug));
+  const fallbackPaths = INSURANCE_SLUGS
+    .filter(({ slug }) => !contentSlugsSet.has(slug))
+    .map(({ slug, title }) => ({
+      params: { slug },
+      props: { title, description: '', hasContent: false, entry: null },
+    }));
+
+  return [...contentPaths, ...fallbackPaths];
 }
 
-const { title } = Astro.props;
+const { title, description, hasContent, entry } = Astro.props;
+let Content: any = null;
+if (hasContent && entry) {
+  const rendered = await render(entry);
+  Content = rendered.Content;
+}
 ---
 
-<ContentPage title={title} subtitle="Comprehensive guide to insurance coverage, costs, and policies for TMS Therapy." />
+<ContentPage
+  title={title}
+  subtitle={description || "Insurance coverage details, authorization requirements, and what you'll pay."}
+  description={description}
+>
+  {Content ? <Content /> : null}
+</ContentPage>

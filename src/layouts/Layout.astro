@@ -11,6 +11,7 @@ interface Props {
 	canonical?: string;
 	schema?: string; // JSON-LD schema string
 	breadcrumbs?: BreadcrumbItem[];
+	noindex?: boolean;
 }
 
 import "../styles/global.css";
@@ -19,7 +20,7 @@ import Footer from "../components/Footer.astro";
 import EnquiryModal from "../components/react/EnquiryModal";
 import LocationPopup from "../components/LocationPopup.astro";
 
-const { title, description, image, canonical, schema, breadcrumbs } = Astro.props;
+const { title, description, image, canonical, schema, breadcrumbs, noindex } = Astro.props;
 
 const breadcrumbSchema = breadcrumbs?.length ? JSON.stringify({
 	"@context": "https://schema.org",
@@ -55,6 +56,7 @@ const canonicalUrl = canonical || Astro.url.href;
 		<!-- SEO Meta Tags -->
 		<title>{title}</title>
 		<meta name="description" content={metaDescription} />
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
 		<link rel="canonical" href={canonicalUrl} />
 
 		<!-- Open Graph / Facebook -->

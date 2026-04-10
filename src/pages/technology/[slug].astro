@@ -22,9 +22,30 @@ export async function getStaticPaths() {
 
 const { machineName, machineClinics } = Astro.props;
 const title = `${machineName} TMS Therapy Clinics - TMS List`;
+
+const techSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "MedicalDevice",
+  "name": machineName,
+  "description": `${machineName} is an FDA-cleared TMS therapy device used for treating depression and other mental health conditions.`,
+  "url": `https://tmslist.com/technology/${Astro.params.slug}/`,
+  "manufacturer": {
+    "@type": "Organization",
+    "name": machineName.split(' ')[0]
+  }
+});
 ---
 
-<Layout title={title}>
+<Layout
+  title={title}
+  description={`Learn about ${machineName} TMS technology. Compare FDA-cleared devices, find clinics using this system, and understand treatment protocols.`}
+  schema={techSchema}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Technology", url: "/technology/" },
+    { name: machineName, url: `/technology/${Astro.params.slug}/` },
+  ]}
+>
   <main class="container mx-auto px-4 py-8">
      <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
       <ol class="inline-flex items-center space-x-1 md:space-x-3">

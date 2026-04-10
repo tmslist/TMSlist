@@ -128,15 +128,25 @@ const internationalDirectory = buildInternationalDirectory();
                 </ul>
             </div>
 
-            <!-- Col 5: Locations -->
+            <!-- Col 5: Locations (geo-aware) -->
             <div>
                 <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mb-5">Locations</h4>
-                <ul class="space-y-2.5">
+                <!-- US locations (default, hidden for non-US) -->
+                <ul class="space-y-2.5 footer-locations-list" data-country="US">
                     {POPULAR_STATES.map((stateCode) => (
                         <li><a href={`/us/${getStateSlug(stateCode)}/`} class="text-[13px] hover:text-white transition-colors">{STATE_NAMES[stateCode]}</a></li>
                     ))}
-                    <li><a href="/us/" class="text-[13px] text-indigo-400 hover:text-white transition-colors">All Locations</a></li>
+                    <li><a href="/us/" class="text-[13px] text-indigo-400 hover:text-white transition-colors">All US Locations</a></li>
                 </ul>
+                <!-- International locations (hidden by default, shown per geo) -->
+                {internationalDirectory.map((country) => (
+                    <ul class="space-y-2.5 footer-locations-list hidden" data-country={country.code}>
+                        {country.regions.slice(0, 15).map((region) => (
+                            <li><a href={`/${country.urlPrefix}/${region.slug}/`} class="text-[13px] hover:text-white transition-colors">{region.name}</a></li>
+                        ))}
+                        <li><a href={`/${country.urlPrefix}/`} class="text-[13px] text-indigo-400 hover:text-white transition-colors">All {country.name} Locations</a></li>
+                    </ul>
+                ))}
             </div>
 
             <!-- Col 6: For Providers -->
@@ -161,8 +171,8 @@ const internationalDirectory = buildInternationalDirectory();
             </div>
         </div>
 
-        <!-- Collapsible US Locations Directory -->
-        <div class="border-t border-slate-800 pt-10 mb-10" id="footer-us-locations">
+        <!-- Collapsible US Locations Directory (geo-aware) -->
+        <div class="border-t border-slate-800 pt-10 mb-10 footer-directory-section" data-country="US" id="footer-us-locations">
             <div class="flex items-center justify-between mb-6">
                 <h4 class="text-slate-300 text-xs font-semibold uppercase tracking-[0.15em]">TMS Clinics in the United States</h4>
                 <a href="/us/" class="text-[11px] text-indigo-400 hover:text-indigo-300 transition-colors uppercase tracking-wider font-medium">View All</a>
@@ -329,11 +339,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Geo-detection: show the visitor's country section using Vercel's geo header
-    // On Vercel, we read from a cookie or fetch a lightweight endpoint.
-    // Fallback: use the timezone to infer country.
+    // Geo-detection: show the visitor's country locations throughout the footer
     function detectCountry() {
-        // Check for Vercel geo cookie (set by middleware/edge) if available
+        // Check for Vercel geo cookie (set by middleware/edge)
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var c = cookies[i].trim();
@@ -350,17 +358,39 @@ document.addEventListener('DOMContentLoaded', () => {
             if (tz.startsWith('Australia/')) return 'AU';
             if (tz.startsWith('Europe/Berlin') || tz.startsWith('Europe/Munich')) return 'DE';
             if (tz.startsWith('Asia/Kolkata') || tz.startsWith('Asia/Calcutta')) return 'IN';
+            if (tz.startsWith('Asia/Dubai') || tz.startsWith('Asia/Muscat')) return 'AE';
+            if (tz.startsWith('America/')) return 'US';
+            if (tz.startsWith('US/')) return 'US';
         } catch (e) {}
 
-        return null;
+        return 'US'; // Default to US
     }
 
     var country = detectCountry();
-    if (country && country !== 'US') {
-        var section = document.querySelector('.footer-country-section[data-country="' + country + '"]');
-        if (section) {
-            section.classList.remove('hidden');
+
+    // Col 5: Show only the matching country's location links
+    document.querySelectorAll('.footer-locations-list').forEach(function(el) {
+        if (el.getAttribute('data-country') === country) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
         }
-    }
+    });
+
+    // Directory sections: show matching country, hide others
+    document.querySelectorAll('.footer-directory-section').forEach(function(el) {
+        if (el.getAttribute('data-country') === country) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
+    });
+    document.querySelectorAll('.footer-country-section').forEach(function(el) {
+        if (el.getAttribute('data-country') === country) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
+    });
 });
 </script>
