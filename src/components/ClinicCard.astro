@@ -229,7 +229,8 @@ const isVerified = clinic.verified;
         <div class="mt-auto flex gap-3">
             <a
                 href={`/clinic/${clinic.slug}`}
-                class="flex-1 text-center py-2.5 px-4 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-violet-100 hover:shadow-violet-200"
+                class="flex-1 text-center py-2.5 px-4 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-violet-100 hover:shadow-violet-200 focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2"
+                aria-label={`View ${clinic.name} profile`}
             >
                 View Profile
             </a>
