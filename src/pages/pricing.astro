@@ -5,6 +5,17 @@ import { PLANS } from "../utils/subscriptions";
 const pageTitle = "Pricing Plans for TMS Clinics | TMS List";
 const metaDescription = "Choose the right plan for your TMS clinic. From free listings to enterprise solutions with analytics, lead routing, and premium placement.";
 
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Can I switch plans at any time?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, you can upgrade or downgrade at any time. When upgrading, you'll be prorated for the remainder of your billing cycle. Downgrades take effect at the end of the current period." }},
+    { "@type": "Question", "name": "Do you offer annual pricing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! Annual plans save you 20%. Contact us for annual pricing." }},
+    { "@type": "Question", "name": "What happens to my listing if I cancel?", "acceptedAnswer": { "@type": "Answer", "text": "Your clinic listing stays on TMS List forever — it just reverts to the Free tier. You keep all your reviews and basic contact information." }},
+    { "@type": "Question", "name": "How many locations can I manage on Enterprise?", "acceptedAnswer": { "@type": "Answer", "text": "Enterprise supports unlimited locations under a single account. Each location gets its own analytics, lead tracking, and profile management." }},
+  ]
+});
+
 const planOrder = ['free', 'pro', 'premium', 'enterprise'] as const;
 const planColors: Record<string, { bg: string; border: string; badge: string; btn: string }> = {
   free: { bg: 'bg-white', border: 'border-slate-200', badge: 'bg-slate-100 text-slate-700', btn: 'bg-slate-900 hover:bg-slate-800' },
@@ -14,7 +25,7 @@ const planColors: Record<string, { bg: string; border: string; badge: string; bt
 };
 ---
 
-<Layout title={pageTitle} description={metaDescription}>
+<Layout title={pageTitle} description={metaDescription} schema={faqSchema}>
   <section class="bg-white pt-16 pb-10 border-b border-slate-100">
     <div class="container mx-auto px-6 lg:px-12 text-center">
       <span class="inline-block px-4 py-1.5 bg-blue-50 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider mb-6">Pricing</span>
