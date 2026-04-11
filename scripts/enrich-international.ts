@@ -19,6 +19,24 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const CLINICS_PATH = path.join(__dirname, '..', 'src', 'data', 'international-clinics.json');
 
+const CLINIC_IMAGE_POOL = [
+  "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1516549655169-df83a092dd14?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1516574187841-693083f69382?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop"
+];
+
 // ─── Page Fetching ──────────────────────────────────────────────────────────
 
 const pageCache = new Map<string, string>();
@@ -144,7 +162,7 @@ async function findDoctorPhoto(
       const altText = altMatch ? altMatch[1].toLowerCase() : '';
 
       if ((lastNameLower.length > 3 && altText.includes(lastNameLower)) ||
-          (firstNameLower.length > 3 && altText.includes(firstNameLower) && altText.includes(lastNameLower))) {
+        (firstNameLower.length > 3 && altText.includes(firstNameLower) && altText.includes(lastNameLower))) {
         return makeAbsolute(imgSrc, baseUrl);
       }
 
@@ -198,6 +216,15 @@ async function findDoctorPhoto(
   return null;
 }
 
+function simpleHash(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash = hash & hash;
+  }
+  return Math.abs(hash);
+}
+
 // ─── Main Pipeline ──────────────────────────────────────────────────────────
 
 interface InternationalClinic {
@@ -230,6 +257,7 @@ async function main() {
 
   let heroImagesFound = 0;
   let doctorPhotosFound = 0;
+  let fallbacksAssigned = 0;
   let errors = 0;
 
   for (let i = 0; i < clinics.length; i++) {
@@ -245,7 +273,10 @@ async function main() {
           heroImagesFound++;
           console.log(`${progress} ${clinic.name} - HERO: ${heroUrl.substring(0, 80)}...`);
         } else {
-          console.log(`${progress} ${clinic.name} - No hero image found`);
+          const index = simpleHash(clinic.name) % CLINIC_IMAGE_POOL.length;
+          clinic.hero_image_url = CLINIC_IMAGE_POOL[index];
+          fallbacksAssigned++;
+          console.log(`${progress} ${clinic.name} - No hero image found, assigned fallback`);
         }
       } else if (!doctorsOnly) {
         console.log(`${progress} ${clinic.name} - Already has hero image`);
@@ -279,6 +310,7 @@ async function main() {
   console.log(`Clinics processed:     ${clinics.length}`);
   console.log(`Hero images found:     ${heroImagesFound}`);
   console.log(`Doctor photos found:   ${doctorPhotosFound}`);
+  console.log(`Fallbacks assigned:    ${fallbacksAssigned}`);
   console.log(`Errors:                ${errors}`);
 }
 

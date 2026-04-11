@@ -24,6 +24,26 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const CLINICS_PATH = path.join(__dirname, '..', 'src', 'data', 'clinics.json');
 
+// ─── Image Fallback Pool ────────────────────────────────────────────────────
+
+const CLINIC_IMAGE_POOL = [
+  "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1516549655169-df83a092dd14?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1516574187841-693083f69382?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&h=500&fit=crop",
+  "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop"
+];
+
 // ─── TMS Knowledge Base for Content Generation ─────────────────────────────
 
 const TMS_MACHINE_INFO: Record<string, { fullName: string; description: string; advantages: string; fda: string }> = {
@@ -565,6 +585,7 @@ async function main() {
 
   let enriched = 0;
   let imagesFound = 0;
+  let fallbacksAssigned = 0;
   let errors = 0;
 
   for (let i = 0; i < targetClinics.length; i++) {
@@ -606,10 +627,16 @@ async function main() {
           imagesFound++;
           console.log(`${progress} ${clinic.name} - Found image: ${imageUrl.substring(0, 80)}...`);
         } else {
-          console.log(`${progress} ${clinic.name} - No image found, keeping default`);
+          const index = simpleHash(clinic.name) % CLINIC_IMAGE_POOL.length;
+          clinic.hero_image_url = CLINIC_IMAGE_POOL[index];
+          fallbacksAssigned++;
+          console.log(`${progress} ${clinic.name} - No image found, assigning fallback`);
         }
       } else if (!contentOnly) {
-        console.log(`${progress} ${clinic.name} - No website URL`);
+        const index = simpleHash(clinic.name) % CLINIC_IMAGE_POOL.length;
+        clinic.hero_image_url = CLINIC_IMAGE_POOL[index];
+        fallbacksAssigned++;
+        console.log(`${progress} ${clinic.name} - No website URL, assigning fallback`);
       }
 
       if (imagesOnly) {
@@ -643,6 +670,7 @@ async function main() {
   console.log(`Clinics processed: ${targetClinics.length}`);
   console.log(`Content enriched:  ${enriched}`);
   console.log(`Images found:      ${imagesFound}`);
+  console.log(`Fallbacks assigned: ${fallbacksAssigned}`);
   console.log(`Errors:            ${errors}`);
 }
 

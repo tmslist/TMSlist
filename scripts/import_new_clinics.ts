@@ -63,6 +63,33 @@ interface Clinic {
 
 const TARGET_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'clinics.json');
 
+const CLINIC_IMAGE_POOL = [
+    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1516549655169-df83a092dd14?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1516574187841-693083f69382?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop"
+];
+
+function simpleHash(str: string): number {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        hash = hash & hash;
+    }
+    return Math.abs(hash);
+}
+
 function slugify(text: string): string {
     return text
         .toString()
@@ -181,7 +208,7 @@ async function main() {
             specialties: raw.subtypes ? raw.subtypes.split(',').map((s: string) => s.trim()) : [],
             insurances: [],
             logo_url: raw.logo || '',
-            hero_image_url: raw.photo || '',
+            hero_image_url: raw.photo || CLINIC_IMAGE_POOL[simpleHash(name) % CLINIC_IMAGE_POOL.length],
             gallery_urls: [],
             rating: {
                 aggregate: parseFloat(raw.rating || raw.Rating) || 0,

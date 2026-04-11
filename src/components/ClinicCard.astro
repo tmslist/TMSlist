@@ -35,6 +35,9 @@ const isVerified = clinic.verified;
 
 <article
     class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col h-full"
+    data-rating={rating.toFixed(2)}
+    data-name={clinic.name}
+    data-reviews={reviewCount}
 >
     <!-- Image Header -->
     <div class="relative h-56 overflow-hidden">

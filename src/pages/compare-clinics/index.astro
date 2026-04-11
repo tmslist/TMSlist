@@ -1,0 +1,76 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getAllClinics } from "../../utils/clinicData";
+import { getClinicRating, getClinicReviewCount } from "../../utils/dataHelpers";
+import ComparisonTool from "../../components/react/ComparisonTool";
+
+const allClinics = await getAllClinics();
+
+// Build a lightweight clinic list for client-side search (minimize payload)
+const clinicList = allClinics.map(c => ({
+  id: c.id,
+  slug: c.slug,
+  name: c.name,
+  city: c.city || '',
+  state: c.state || '',
+  country: c.country || 'US',
+  ratingAvg: String(getClinicRating(c) || '0'),
+  reviewCount: getClinicReviewCount(c),
+  machines: c.machines || [],
+  specialties: (c.specialties || []).slice(0, 8),
+  insurances: (c.insurances || []).slice(0, 10),
+  phone: c.phone || '',
+  website: c.website || '',
+  verified: c.verified || false,
+  isFeatured: c.is_featured || false,
+  pricing: c.pricing || null,
+  availability: c.availability || null,
+}));
+
+const title = "Compare TMS Clinics Side-by-Side | TMS List";
+const description = "Compare up to 3 TMS therapy clinics side-by-side. Evaluate technology, insurance coverage, ratings, specialties, and more to find your best match.";
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Compare TMS Clinics",
+  description,
+  url: "https://tmslist.com/compare-clinics/",
+  isPartOf: { "@type": "WebSite", name: "TMS List", url: "https://tmslist.com" },
+});
+
+const breadcrumbs = [
+  { name: "Home", url: "/" },
+  { name: "Compare Clinics", url: "/compare-clinics/" },
+];
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={breadcrumbs}>
+  <!-- Hero Section -->
+  <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-violet-50/40 via-slate-50/20 to-white pointer-events-none"></div>
+    <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+      <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-violet-600 to-fuchsia-500 opacity-15 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-16 lg:py-20 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur border border-violet-100 rounded-full py-1 px-3 mb-6 shadow-sm">
+        <span class="flex h-2 w-2 rounded-full bg-violet-500"></span>
+        <span class="text-xs font-semibold text-slate-600 tracking-wide uppercase">Side-by-Side Comparison</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 max-w-3xl mx-auto leading-tight">
+        Compare TMS Clinics
+      </h1>
+
+      <p class="text-lg text-slate-500 mb-2 max-w-2xl mx-auto leading-relaxed">
+        Search for clinics and compare up to 3 side-by-side. Evaluate technology, insurance, ratings, and more.
+      </p>
+    </div>
+  </section>
+
+  <!-- Comparison Tool -->
+  <section class="container mx-auto px-4 py-12">
+    <ComparisonTool client:load allClinics={clinicList} />
+  </section>
+</Layout>

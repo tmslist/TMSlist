@@ -126,8 +126,8 @@ async function findDoctorImage(
 
       // Match on alt text containing doctor name
       if ((lastNameLower.length > 3 && altText.includes(lastNameLower)) ||
-          (firstNameLower.length > 3 && altText.includes(firstNameLower)) ||
-          altText.includes(fullNameLower)) {
+        (firstNameLower.length > 3 && altText.includes(firstNameLower)) ||
+        altText.includes(fullNameLower)) {
         return makeAbsolute(imgSrc, baseUrl);
       }
 
@@ -274,6 +274,14 @@ const SPECIALTY_CONTENT: Record<string, string> = {
   'Research': `Active involvement in TMS research ensures that clinical practice stays at the cutting edge of neuromodulation science. By participating in clinical trials and contributing to peer-reviewed publications, findings from the laboratory directly inform treatment protocols, giving patients access to the most advanced evidence-based approaches available.`,
 };
 
+const SPECIALIST_IMAGE_POOL = [
+  "https://images.unsplash.com/photo-1612349317150-e410f624c427?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1594824436998-ddedce2084c5?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=800&q=80"
+];
+
 function simpleHash(str: string): number {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -418,14 +426,10 @@ async function main() {
               }
             }
 
-            // Fallback: generate unique professional avatar via DiceBear
+            // Fallback: Use consented real professional specialist images instead of placeholder avatars
             if (!foundReal) {
-              const seed = encodeURIComponent(doctor.slug || doctor.name);
-              const bgColors = ['0369a1', '1d4ed8', '4338ca', '6d28d9', '0e7490', '047857', 'b45309', 'be123c', '0f766e', '4f46e5'];
-              const colorIdx = simpleHash(doctor.name) % bgColors.length;
-              const bg = bgColors[colorIdx];
-              const initials = `${(doctor.first_name || 'D').charAt(0)}${(doctor.last_name || 'R').charAt(0)}`;
-              doctor.image_url = `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=${bg}&color=fff&size=256&bold=true&format=png`;
+              const index = simpleHash(doctor.name) % SPECIALIST_IMAGE_POOL.length;
+              doctor.image_url = SPECIALIST_IMAGE_POOL[index];
               avatarsGenerated++;
             }
           }

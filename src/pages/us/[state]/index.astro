@@ -158,6 +158,50 @@ const stateSchema = JSON.stringify({
       </div>
     </section>
 
+    <!-- All Clinics with Sort & Pagination -->
+    <section class="mb-16">
+      <div class="flex items-center flex-wrap gap-4 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900">
+          All Clinics in {stateName}
+        </h2>
+        <div class="ml-0 md:ml-4 h-px flex-1 bg-gray-200 hidden md:block"></div>
+        <span class="text-sm font-medium text-gray-400">{clinicCount} clinics</span>
+        <div class="relative">
+          <label for="clinic-sort" class="sr-only">Sort clinics</label>
+          <select
+            id="clinic-sort"
+            class="appearance-none bg-white border border-gray-200 rounded-xl px-4 py-2 pr-9 text-sm font-medium text-gray-700 shadow-sm hover:border-violet-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 focus:outline-none cursor-pointer transition-colors"
+          >
+            <option value="rating">Highest Rated</option>
+            <option value="name">Name A–Z</option>
+            <option value="reviews">Most Reviews</option>
+          </select>
+          <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+      </div>
+
+      <div id="all-clinics-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {stateClinics.map((clinic, i) => (
+          <div class:list={["clinic-card-wrapper", { "clinic-hidden": i >= 24 }]}>
+            <ClinicCard clinic={clinic} />
+          </div>
+        ))}
+      </div>
+
+      {clinicCount > 24 && (
+        <div id="show-more-wrap" class="flex justify-center mt-10">
+          <button
+            id="show-more-btn"
+            type="button"
+            class="inline-flex items-center gap-2 px-8 py-3 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 shadow-sm hover:border-violet-300 hover:text-violet-700 hover:shadow-md transition-all focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2 cursor-pointer"
+          >
+            <span id="show-more-label">Show More Clinics</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+        </div>
+      )}
+    </section>
+
     <!-- SEO Content + Internal Links -->
     <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
       <h2>TMS Therapy in {stateName}</h2>
@@ -173,6 +217,79 @@ const stateSchema = JSON.stringify({
     </section>
   </main>
 </Layout>
+
+<style>
+  .clinic-hidden { display: none; }
+</style>
+
+<script is:inline>
+  (function() {
+    const PAGE_SIZE = 24;
+    const grid = document.getElementById('all-clinics-grid');
+    const btn = document.getElementById('show-more-btn');
+    const btnWrap = document.getElementById('show-more-wrap');
+    const sortSelect = document.getElementById('clinic-sort');
+    if (!grid) return;
+
+    let visible = PAGE_SIZE;
+
+    function getCards() {
+      return Array.from(grid.querySelectorAll('.clinic-card-wrapper'));
+    }
+
+    function updateVisibility() {
+      var cards = getCards();
+      cards.forEach(function(card, i) {
+        if (i < visible) {
+          card.classList.remove('clinic-hidden');
+        } else {
+          card.classList.add('clinic-hidden');
+        }
+      });
+      if (btnWrap) {
+        btnWrap.style.display = visible >= cards.length ? 'none' : 'flex';
+      }
+    }
+
+    function sortCards(mode) {
+      var cards = getCards();
+      cards.sort(function(a, b) {
+        var articleA = a.querySelector('article');
+        var articleB = b.querySelector('article');
+        if (!articleA || !articleB) return 0;
+        if (mode === 'rating') {
+          return parseFloat(articleB.dataset.rating || '0') - parseFloat(articleA.dataset.rating || '0');
+        } else if (mode === 'name') {
+          return (articleA.dataset.name || '').localeCompare(articleB.dataset.name || '');
+        } else if (mode === 'reviews') {
+          return parseInt(articleB.dataset.reviews || '0', 10) - parseInt(articleA.dataset.reviews || '0', 10);
+        }
+        return 0;
+      });
+      // Re-append in sorted order
+      cards.forEach(function(card) { grid.appendChild(card); });
+      // Reset pagination on sort change
+      visible = PAGE_SIZE;
+      updateVisibility();
+    }
+
+    if (btn) {
+      btn.addEventListener('click', function() {
+        visible += PAGE_SIZE;
+        updateVisibility();
+      });
+    }
+
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function() {
+        sortCards(this.value);
+      });
+    }
+
+    // Initial sort by rating (default)
+    sortCards('rating');
+  })();
+</script>
 
 <script>
   document.querySelectorAll('.ai-hero-image').forEach(async (container) => {

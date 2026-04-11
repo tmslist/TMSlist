@@ -16,11 +16,28 @@ const schema = JSON.stringify({
 });
 ---
 
-<Layout title={title} description={description} schema={schema}>
-    <main class="container mx-auto px-4 py-12 max-w-4xl">
-        <h1 class="text-4xl font-semibold text-gray-900 mb-4">
-            Medical Disclaimer
-        </h1>
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Legal", url: "/legal/" },
+    { name: "Medical Disclaimer", url: "/legal/medical-disclaimer/" },
+]}>
+    <main class="min-h-screen">
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] left-[30%] w-[400px] h-[400px] bg-violet-600/10 rounded-full blur-[120px]"></div>
+            <div class="container mx-auto px-4 pt-12 pb-16 lg:pt-16 lg:pb-20 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-10" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <a href="/legal/" class="hover:text-violet-400 transition-colors">Legal</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">Medical Disclaimer</span>
+                </nav>
+                <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-white mb-3">Medical Disclaimer</h1>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-4 py-12 max-w-4xl">
 
         <div
             class="prose prose-violet max-w-none border-l-4 border-yellow-400 pl-6 py-2 bg-yellow-50 my-8 rounded-r-lg"
@@ -71,5 +88,6 @@ const schema = JSON.stringify({
                 completeness, or usefulness of any information on the Site.
             </p>
         </div>
+        </section>
     </main>
 </Layout>

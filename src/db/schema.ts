@@ -69,6 +69,12 @@ export const blogStatusEnum = pgEnum('blog_status', [
   'scheduled',
 ]);
 
+export const forumPostStatusEnum = pgEnum('forum_post_status', [
+  'published',
+  'pending',
+  'removed',
+]);
+
 // ── CLINICS ──────────────────────────────────────
 
 export const clinics = pgTable('clinics', {
@@ -459,6 +465,94 @@ export const notifications = pgTable('notifications', {
   index('idx_notifications_unread').on(table.userId, table.read),
 ]);
 
+// ── FORUM CATEGORIES ──────────────────────────────
+
+export const forumCategories = pgTable('forum_categories', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  slug: text('slug').notNull().unique(),
+  name: text('name').notNull(),
+  description: text('description'),
+  icon: text('icon'),
+  color: text('color'),
+  sortOrder: integer('sort_order').default(0).notNull(),
+  postCount: integer('post_count').default(0).notNull(),
+  lastActivityAt: timestamp('last_activity_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ── FORUM POSTS ──────────────────────────────────
+
+export const forumPosts = pgTable('forum_posts', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  categoryId: uuid('category_id').notNull().references(() => forumCategories.id),
+  authorId: uuid('author_id').notNull().references(() => users.id),
+  slug: text('slug').notNull().unique(),
+  title: text('title').notNull(),
+  body: text('body').notNull(),
+  status: forumPostStatusEnum('status').notNull().default('published'),
+  isPinned: boolean('is_pinned').default(false).notNull(),
+  isLocked: boolean('is_locked').default(false).notNull(),
+  voteScore: integer('vote_score').default(0).notNull(),
+  commentCount: integer('comment_count').default(0).notNull(),
+  lastActivityAt: timestamp('last_activity_at', { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+}, (table) => [
+  index('idx_forum_posts_category').on(table.categoryId),
+  index('idx_forum_posts_author').on(table.authorId),
+  index('idx_forum_posts_status').on(table.status),
+  index('idx_forum_posts_category_activity').on(table.categoryId, table.lastActivityAt),
+  index('idx_forum_posts_score').on(table.voteScore),
+  index('idx_forum_posts_slug').on(table.slug),
+]);
+
+// ── FORUM COMMENTS ──────────────────────────────
+
+export const forumComments = pgTable('forum_comments', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  postId: uuid('post_id').notNull().references(() => forumPosts.id, { onDelete: 'cascade' }),
+  parentId: uuid('parent_id'),
+  authorId: uuid('author_id').notNull().references(() => users.id),
+  body: text('body').notNull(),
+  status: forumPostStatusEnum('status').notNull().default('published'),
+  voteScore: integer('vote_score').default(0).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+}, (table) => [
+  index('idx_forum_comments_post').on(table.postId),
+  index('idx_forum_comments_parent').on(table.parentId),
+  index('idx_forum_comments_author').on(table.authorId),
+]);
+
+// ── FORUM VOTES ──────────────────────────────────
+
+export const forumVotes = pgTable('forum_votes', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  targetType: text('target_type').notNull(),
+  targetId: uuid('target_id').notNull(),
+  value: integer('value').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  uniqueIndex('idx_forum_votes_unique').on(table.userId, table.targetType, table.targetId),
+  index('idx_forum_votes_target').on(table.targetType, table.targetId),
+]);
+
+// ── FORUM REPORTS ──────────────────────────────────
+
+export const forumReports = pgTable('forum_reports', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  reporterId: uuid('reporter_id').notNull().references(() => users.id),
+  targetType: text('target_type').notNull(),
+  targetId: uuid('target_id').notNull(),
+  reason: text('reason').notNull(),
+  resolved: boolean('resolved').default(false).notNull(),
+  resolvedBy: uuid('resolved_by').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_forum_reports_unresolved').on(table.resolved),
+]);
+
 // ── TYPE EXPORTS ──────────────────────────────────
 
 export type Clinic = typeof clinics.$inferSelect;
@@ -475,3 +569,10 @@ export type BlogPost = typeof blogPosts.$inferSelect;
 export type NewBlogPost = typeof blogPosts.$inferInsert;
 export type SeoOverride = typeof seoOverrides.$inferSelect;
 export type Notification = typeof notifications.$inferSelect;
+export type ForumCategory = typeof forumCategories.$inferSelect;
+export type ForumPost = typeof forumPosts.$inferSelect;
+export type NewForumPost = typeof forumPosts.$inferInsert;
+export type ForumComment = typeof forumComments.$inferSelect;
+export type NewForumComment = typeof forumComments.$inferInsert;
+export type ForumVote = typeof forumVotes.$inferSelect;
+export type ForumReport = typeof forumReports.$inferSelect;

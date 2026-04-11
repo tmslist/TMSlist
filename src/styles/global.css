@@ -6,17 +6,24 @@
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-display: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
 
-    /* Brand Colors — unified violet to match brand logo */
-    --color-primary: #7C3AED;
-    --color-primary-dark: #6D28D9;
-    --color-primary-light: #A78BFA;
+    /* Brand Colors — indigo-to-fuchsia gradient identity */
+    --color-primary: #4F46E5;
+    --color-primary-dark: #4338CA;
+    --color-primary-light: #818CF8;
+    --color-accent: #D946EF;
+    --color-accent-light: #E879F9;
+
+    /* Brand Gradient */
+    --gradient-brand: linear-gradient(135deg, #4F46E5 0%, #D946EF 100%);
+    --gradient-brand-hover: linear-gradient(135deg, #4338CA 0%, #C026D3 100%);
+    --gradient-brand-subtle: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(217, 70, 239, 0.08) 100%);
 
     /* Surface Colors */
     --color-surface-subtle: #f8fafc;
     --color-surface-light: #f1f5f9;
 
     /* Shadows */
-    --shadow-glow: 0 0 40px -10px rgba(124, 58, 237, 0.3);
+    --shadow-glow: 0 0 40px -10px rgba(79, 70, 229, 0.3);
     --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
     --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
 
@@ -280,6 +287,26 @@ table tbody tr {
     html {
         scroll-behavior: smooth;
     }
+}
+
+/* Brand Gradient Utilities */
+.gradient-brand {
+    background: var(--gradient-brand);
+}
+.gradient-brand-hover:hover {
+    background: var(--gradient-brand-hover);
+}
+.gradient-brand-text {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.gradient-brand-subtle {
+    background: var(--gradient-brand-subtle);
+}
+.gradient-brand-border {
+    border-image: var(--gradient-brand) 1;
 }
 
 /* Focus States */

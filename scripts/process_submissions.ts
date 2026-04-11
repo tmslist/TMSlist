@@ -118,7 +118,6 @@ function submissionToClinic(submission: Submission, existingIds: Set<string>): C
         verified: false, // New submissions are unverified by default
         rating: { aggregate: 0, count: 0 },
         hero_image_url: submission.media?.hero_image_url,
-        media: submission.media,
         google_business_profile: submission.google_business_profile,
         created_by: submission.created_by,
         doctors_data: []
@@ -131,7 +130,7 @@ function submissionToClinic(submission: Submission, existingIds: Set<string>): C
             name: submission.doctor.name,
             slug: doctorSlug,
             title: submission.doctor.title || 'TMS Specialist',
-            image_url: submission.doctor.image_url || `https://placehold.co/400x400/e2e8f0/1e293b?text=${submission.doctor.name.split(' ')[0]}`,
+            image_url: submission.doctor.image_url,
             years_experience: submission.doctor.years_experience || 0,
             specialties: ['Depression', 'TMS Therapy']
         }];

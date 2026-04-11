@@ -97,6 +97,39 @@ export const contactFormSchema = z.object({
   state: z.string().max(50).optional(),
 });
 
+// ── FORUM VALIDATION ──────────────────────────────
+
+export const forumPostSchema = z.object({
+  categoryId: z.string().uuid(),
+  title: z.string().min(5).max(200),
+  body: z.string().min(10).max(10000),
+});
+
+export const forumCommentSchema = z.object({
+  postId: z.string().uuid(),
+  parentId: z.string().uuid().optional(),
+  body: z.string().min(1).max(5000),
+});
+
+export const forumVoteSchema = z.object({
+  targetType: z.enum(['post', 'comment']),
+  targetId: z.string().uuid(),
+  value: z.union([z.literal(1), z.literal(-1)]),
+});
+
+export const forumReportSchema = z.object({
+  targetType: z.enum(['post', 'comment']),
+  targetId: z.string().uuid(),
+  reason: z.string().min(5).max(500),
+});
+
+export const forumPostsQuerySchema = z.object({
+  categoryId: z.string().uuid().optional(),
+  sort: z.enum(['hot', 'new', 'top']).default('hot'),
+  limit: z.coerce.number().int().min(1).max(50).default(20),
+  offset: z.coerce.number().int().min(0).default(0),
+});
+
 // ── TYPE EXPORTS ──────────────────────────────
 
 export type ClinicSearchInput = z.infer<typeof clinicSearchSchema>;
@@ -105,3 +138,8 @@ export type ReviewSubmitInput = z.infer<typeof reviewSubmitSchema>;
 export type LeadSubmitInput = z.infer<typeof leadSubmitSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type ContactFormInput = z.infer<typeof contactFormSchema>;
+export type ForumPostInput = z.infer<typeof forumPostSchema>;
+export type ForumCommentInput = z.infer<typeof forumCommentSchema>;
+export type ForumVoteInput = z.infer<typeof forumVoteSchema>;
+export type ForumReportInput = z.infer<typeof forumReportSchema>;
+export type ForumPostsQueryInput = z.infer<typeof forumPostsQuerySchema>;

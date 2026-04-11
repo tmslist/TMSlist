@@ -48,7 +48,7 @@ const comparisons = COMPARE_SLUGS;
             <!-- Find Care Mega Menu -->
             <div class="relative px-2 py-4" data-mega="find-care">
                 <button
-                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-violet-600 transition-colors tracking-wide"
+                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors tracking-wide"
                     aria-expanded="false"
                     aria-controls="mega-find-care"
                 >
@@ -72,7 +72,7 @@ const comparisons = COMPARE_SLUGS;
             <div class="relative px-2 py-4" data-mega="conditions">
                 <a
                     href="/treatments/"
-                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-violet-600 transition-colors tracking-wide"
+                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors tracking-wide"
                     aria-expanded="false"
                     aria-controls="mega-conditions"
                 >
@@ -96,7 +96,7 @@ const comparisons = COMPARE_SLUGS;
             <div class="relative px-2 py-4" data-mega="insurance">
                 <a
                     href="/insurance/"
-                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-violet-600 transition-colors tracking-wide"
+                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors tracking-wide"
                     aria-expanded="false"
                     aria-controls="mega-insurance"
                 >
@@ -120,7 +120,7 @@ const comparisons = COMPARE_SLUGS;
             <div class="relative px-2 py-4" data-mega="technology">
                 <a
                     href="/technology/"
-                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-violet-600 transition-colors tracking-wide"
+                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors tracking-wide"
                     aria-expanded="false"
                     aria-controls="mega-technology"
                 >
@@ -143,7 +143,7 @@ const comparisons = COMPARE_SLUGS;
             <!-- Resources Mega Menu -->
             <div class="relative px-2 py-4" data-mega="resources">
                 <button
-                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-violet-600 transition-colors tracking-wide"
+                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors tracking-wide"
                     aria-expanded="false"
                     aria-controls="mega-resources"
                 >
@@ -163,10 +163,18 @@ const comparisons = COMPARE_SLUGS;
                 </button>
             </div>
 
+            <!-- Community Link -->
+            <a
+                href="/community/"
+                class="px-2 py-2 text-sm font-semibold text-slate-500 hover:text-violet-600 transition-colors tracking-wide"
+            >
+                Community
+            </a>
+
             <!-- Providers Link -->
             <a
                 href="/providers/"
-                class="px-2 py-2 text-sm font-semibold text-slate-500 hover:text-violet-600 transition-colors tracking-wide ml-1 border-l border-slate-200 pl-4"
+                class="px-2 py-2 text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors tracking-wide ml-1 border-l border-slate-200 pl-4"
             >
                 Providers
             </a>
@@ -178,7 +186,7 @@ const comparisons = COMPARE_SLUGS;
             <div class="relative group/country hidden lg:block">
                 <button
                     id="country-selector-btn"
-                    class="flex items-center gap-1 px-2.5 py-2 text-sm font-medium text-slate-600 hover:text-violet-600 rounded-lg hover:bg-slate-50 transition-colors"
+                    class="flex items-center gap-1 px-2.5 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 rounded-lg hover:bg-slate-50 transition-colors"
                     aria-label="Select country"
                 >
                     <span id="country-flag" class="text-lg leading-none"
@@ -382,7 +390,7 @@ const comparisons = COMPARE_SLUGS;
                 List Your Clinic
             </a>
             <button
-                class="lg:hidden p-2 text-slate-600 hover:text-violet-600 transition-colors"
+                class="lg:hidden p-2 text-slate-600 hover:text-indigo-600 transition-colors"
                 id="mobile-menu-btn"
                 aria-label="Open menu"
             >
@@ -727,17 +735,17 @@ const comparisons = COMPARE_SLUGS;
                         >
                             <a
                                 href="/compare/"
-                                class="text-xs font-semibold text-slate-600 hover:text-violet-600 px-3 py-2 rounded-lg hover:bg-slate-50 border border-slate-150 transition-colors"
+                                class="text-xs font-semibold text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-lg hover:bg-slate-50 border border-slate-150 transition-colors"
                                 >Compare Treatments</a
                             >
                             <a
                                 href="/alternative-treatments/"
-                                class="text-xs font-semibold text-slate-600 hover:text-violet-600 px-3 py-2 rounded-lg hover:bg-slate-50 border border-slate-150 transition-colors"
+                                class="text-xs font-semibold text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-lg hover:bg-slate-50 border border-slate-150 transition-colors"
                                 >Alternative Treatments</a
                             >
                             <a
                                 href="/demographic/"
-                                class="text-xs font-semibold text-slate-600 hover:text-violet-600 px-3 py-2 rounded-lg hover:bg-slate-50 border border-slate-150 transition-colors"
+                                class="text-xs font-semibold text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-lg hover:bg-slate-50 border border-slate-150 transition-colors"
                                 >Patient Demographics</a
                             >
                         </div>
@@ -1243,7 +1251,7 @@ const comparisons = COMPARE_SLUGS;
                                 comparisons.map((item) => (
                                     <a
                                         href={`/compare/${item.slug}/`}
-                                        class="block px-3 py-2.5 text-[13px] font-medium text-slate-600 hover:text-violet-600 hover:bg-violet-50 rounded-lg transition-colors"
+                                        class="block px-3 py-2.5 text-[13px] font-medium text-slate-600 hover:text-indigo-600 hover:bg-violet-50 rounded-lg transition-colors"
                                     >
                                         {item.title}
                                     </a>
@@ -1278,22 +1286,22 @@ const comparisons = COMPARE_SLUGS;
                         <div class="space-y-0.5 mb-5">
                             <a
                                 href="/about-us/"
-                                class="block px-3 py-2.5 text-[13px] font-medium text-slate-600 hover:text-violet-600 hover:bg-slate-50 rounded-lg transition-colors"
+                                class="block px-3 py-2.5 text-[13px] font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors"
                                 >About Us</a
                             >
                             <a
                                 href="/contact/"
-                                class="block px-3 py-2.5 text-[13px] font-medium text-slate-600 hover:text-violet-600 hover:bg-slate-50 rounded-lg transition-colors"
+                                class="block px-3 py-2.5 text-[13px] font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors"
                                 >Contact</a
                             >
                             <a
                                 href="/search/"
-                                class="block px-3 py-2.5 text-[13px] font-medium text-slate-600 hover:text-violet-600 hover:bg-slate-50 rounded-lg transition-colors"
+                                class="block px-3 py-2.5 text-[13px] font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors"
                                 >Advanced Search</a
                             >
                             <a
                                 href="/tms-cost-calculator/"
-                                class="block px-3 py-2.5 text-[13px] font-medium text-slate-600 hover:text-violet-600 hover:bg-slate-50 rounded-lg transition-colors"
+                                class="block px-3 py-2.5 text-[13px] font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors"
                                 >Cost Calculator</a
                             >
                         </div>
@@ -1435,27 +1443,27 @@ const comparisons = COMPARE_SLUGS;
                 </p>
                 <a
                     href="/us/"
-                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                     >Find a Clinic</a
                 >
                 <a
                     href="/verified-clinics/"
-                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                     >Verified Clinics</a
                 >
                 <a
                     href="/specialists/"
-                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                     >Find a Specialist</a
                 >
                 <a
                     href="/compare-clinics/"
-                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                     >Compare Clinics</a
                 >
                 <a
                     href="/map/"
-                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                     >Clinic Map</a
                 >
             </div>
@@ -1492,7 +1500,7 @@ const comparisons = COMPARE_SLUGS;
                         conditions.map((item) => (
                             <a
                                 href={`/treatments/${item.slug}/`}
-                                class="block px-3 py-2 text-sm text-slate-600 hover:text-violet-600 hover:bg-slate-50 rounded-lg transition-colors"
+                                class="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors"
                             >
                                 {item.title.replace("TMS for ", "")}
                             </a>
@@ -1533,7 +1541,7 @@ const comparisons = COMPARE_SLUGS;
                         insurance.map((item) => (
                             <a
                                 href={`/insurance/${item.slug}/`}
-                                class="block px-3 py-2 text-sm text-slate-600 hover:text-violet-600 hover:bg-slate-50 rounded-lg transition-colors"
+                                class="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors"
                             >
                                 {item.title
                                     .replace(" TMS Coverage", "")
@@ -1576,7 +1584,7 @@ const comparisons = COMPARE_SLUGS;
                         technology.map((item) => (
                             <a
                                 href={`/technology/${item.slug}/`}
-                                class="block px-3 py-2 text-sm text-slate-600 hover:text-violet-600 hover:bg-slate-50 rounded-lg transition-colors"
+                                class="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors"
                             >
                                 {item.title}
                             </a>
@@ -1591,7 +1599,7 @@ const comparisons = COMPARE_SLUGS;
                         protocols.map((item) => (
                             <a
                                 href={`/protocols/${item.slug}/`}
-                                class="block px-3 py-2 text-sm text-slate-600 hover:text-violet-600 hover:bg-slate-50 rounded-lg transition-colors"
+                                class="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors"
                             >
                                 {item.title}
                             </a>
@@ -1625,67 +1633,67 @@ const comparisons = COMPARE_SLUGS;
                 <div class="mobile-accordion-content hidden">
                     <a
                         href="/search/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >Advanced Search</a
                     >
                     <a
                         href="/tms-cost-calculator/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >Cost Calculator</a
                     >
                     <a
                         href="/account/saved/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >My Saved Clinics</a
                     >
                     <a
                         href="/blog/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >Blog</a
                     >
                     <a
                         href="/questions/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >FAQs</a
                     >
                     <a
                         href="/resources/for-providers/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >Free Clinic Guides</a
                     >
                     <a
                         href="/resources/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >eBooks and Guides</a
                     >
                     <a
                         href="/stories/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >Patient Stories</a
                     >
                     <a
                         href="/research/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >Research and Trials</a
                     >
                     <a
                         href="/wellness/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >Wellness TMS</a
                     >
                     <a
                         href="/best-tms-clinics/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >Best TMS Clinics</a
                     >
                     <a
                         href="/about-us/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >About Us</a
                     >
                     <a
                         href="/contact/"
-                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                        class="block px-3 py-2 text-sm text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                         >Contact</a
                     >
                 </div>
@@ -1718,7 +1726,7 @@ const comparisons = COMPARE_SLUGS;
                         comparisons.map((item) => (
                             <a
                                 href={`/compare/${item.slug}/`}
-                                class="block px-3 py-2 text-sm text-slate-600 hover:text-violet-600 hover:bg-slate-50 rounded-lg transition-colors"
+                                class="block px-3 py-2 text-sm text-slate-600 hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors"
                             >
                                 {item.title}
                             </a>
@@ -1848,11 +1856,16 @@ const comparisons = COMPARE_SLUGS;
                 </div>
             </div>
 
-            <!-- Provider CTAs -->
+            <!-- Community & Provider CTAs -->
             <div class="pt-2 space-y-2">
                 <a
-                    href="/providers/"
+                    href="/community/"
                     class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-violet-600 rounded-lg transition-colors"
+                    >Community Forum</a
+                >
+                <a
+                    href="/providers/"
+                    class="block px-3 py-2.5 text-slate-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                     >For Providers</a
                 >
                 <a
