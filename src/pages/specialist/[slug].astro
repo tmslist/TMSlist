@@ -4,23 +4,24 @@ import GoogleReviews from "../../components/GoogleReviews.astro";
 import { STATE_NAMES, getAllClinics } from "../../utils/clinicData";
 import { getDoctorPhoto } from "../../utils/dataHelpers";
 
-export async function getStaticPaths() {
-    const allClinics = await getAllClinics();
-    const paths: any[] = [];
-    allClinics
-        .filter((clinic: any) => clinic.verified)
-        .forEach((clinic: any) => {
-            (clinic.doctors_data || []).forEach((doctor: any) => {
-                paths.push({
-                    params: { slug: doctor.slug },
-                    props: { doctor, clinic },
-                });
-            });
-        });
-    return paths;
+const { slug } = Astro.params;
+
+const allClinicsData = await getAllClinics();
+let doctor: any = null;
+let clinic: any = null;
+
+for (const c of allClinicsData) {
+    if (c.doctors_data && Array.isArray(c.doctors_data)) {
+        const found = c.doctors_data.find((d: any) => d.slug === slug);
+        if (found) {
+            doctor = found;
+            clinic = c;
+            break;
+        }
+    }
 }
 
-const { doctor, clinic } = Astro.props;
+if (!doctor || !clinic) return Astro.redirect("/specialists/");
 
 // Handle address object
 const city = clinic.address_obj?.city || clinic.city;

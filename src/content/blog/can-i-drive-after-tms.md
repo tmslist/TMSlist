@@ -10,23 +10,23 @@ image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=400
 
 ## The short answer
 
-Yes, you can drive after TMS. You can drive yourself to the appointment, drive yourself home, and go straight to work or wherever else you need to be. There is no sedation, no anesthesia, and no mandatory recovery period.
+Yes, you can drive after TMS. You can drive yourself to the appointment, drive yourself home, and go straight to work or wherever else you need to be. No sedation, no anesthesia, no mandatory recovery period.
 
-This is one of the biggest practical advantages of TMS over other brain stimulation treatments, and it's worth understanding why.
+This is one of TMS's biggest practical advantages of TMS over other brain stimulation treatments, and it's worth understanding why.
 
 ## Why there's no impairment
 
-TMS uses magnetic pulses to stimulate specific areas of the brain. Unlike electroconvulsive therapy (ECT), which requires general anesthesia and causes temporary confusion and memory issues, TMS doesn't affect your overall consciousness. You're awake and alert the entire time. You could hold a conversation during treatment if you wanted to (though some people prefer to zone out or listen to music).
+TMS uses magnetic pulses to stimulate specific areas of the brain. Unlike electroconvulsive therapy (ECT), which requires general anesthesia and causes temporary confusion and memory issues, TMS doesn't touch your overall consciousness. You're awake and alert the entire time. You could hold a conversation during treatment if you wanted to (though some people prefer to zone out or listen to music).
 
-The magnetic pulses target a focused area -- about the size of a quarter -- and don't cause the widespread brain activation that leads to cognitive side effects. When your session ends, you stand up and walk out. There's no grogginess, no disorientation, no waiting room recovery period.
+The magnetic pulses target a focused area -- about the size of a quarter -- and don't cause the widespread brain activation that leads to cognitive side effects. When your session ends, you stand up and walk out. There's no grogginess, no disorientation, no waiting room recovery.
 
 ## What side effects might affect driving
 
-While TMS doesn't impair your ability to drive, a couple of common side effects are worth knowing about:
+TMS doesn't impair your ability to drive, but a couple of common side effects are worth knowing about:
 
-**Headache.** About 30-40% of patients get a mild headache during or after their first few sessions. It's similar to a tension headache and usually responds to ibuprofen or acetaminophen. For most people, it's not severe enough to affect driving, but if you're sensitive to headaches, you might want someone else to drive after your first session until you know how you respond.
+**Headache.** About 30-40% of people get a mild headache during or after their first few sessions. It's like a tension headache and usually responds to ibuprofen or acetaminophen. For most people, it's not severe enough to affect driving, but if you're sensitive to headaches, you might want someone else to drive after your first session until you know how you respond.
 
-**Scalp discomfort.** The tapping sensation from the coil can leave your scalp feeling tender. This is annoying but has zero effect on your ability to operate a vehicle.
+**Scalp discomfort.** The tapping sensation from the coil can leave your scalp feeling tender. Annoying, but it has zero effect on your ability to operate a vehicle.
 
 **Lightheadedness.** Rare, but some people feel briefly lightheaded after a session. If this happens to you, sit for a few minutes before heading to your car. It passes quickly.
 
@@ -48,14 +48,14 @@ This comparison isn't meant to knock ECT -- it's an effective treatment, especia
 
 ## What a typical TMS day looks like
 
-Here's what most patients report their treatment days look like:
+Here's what most people report their treatment days look like:
 
 1. Drive to the clinic
 2. Check in, sit down, session takes 20-40 minutes (or 3 minutes for theta burst)
 3. Walk out, get in your car
 4. Go to work, school, errands, or home
 
-No one needs to accompany you. No one needs to pick you up. You don't need to clear your schedule. Many patients fit sessions into their lunch break.
+No one needs to come with you. No one needs to pick you up. You don't need to clear your schedule. Many people fit sessions into their lunch break.
 
 ## One exception
 
@@ -63,4 +63,4 @@ If you experience a seizure during TMS -- which is extraordinarily rare, roughly
 
 ## Bottom line
 
-TMS was designed to be minimally disruptive to your daily routine. The fact that you can drive yourself to treatment, keep your job, maintain your schedule, and not rely on someone else for rides is a big part of why people choose it. If logistics are a concern for you, this is one less thing to worry about.
+TMS was designed to be minimally disruptive to your daily routine. The fact that you can drive yourself to treatment, keep your job, stay on schedule, and not depend on someone else for rides is a big part of why people choose it. If logistics are a concern for you, this is one less thing to worry about.

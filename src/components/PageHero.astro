@@ -1,0 +1,88 @@
+---
+interface BreadcrumbItem {
+    label: string;
+    href: string;
+}
+
+interface Props {
+    title: string;
+    titleAccent?: string;
+    subtitle?: string;
+    badge?: string;
+    badgeColor?: 'violet' | 'emerald' | 'blue' | 'amber';
+    breadcrumbs?: BreadcrumbItem[];
+    stats?: { value: string; label: string }[];
+}
+
+const { title, titleAccent, subtitle, badge, badgeColor = 'violet', breadcrumbs, stats } = Astro.props;
+
+const badgeColors = {
+    violet: 'bg-violet-50 border-violet-100 text-violet-700',
+    emerald: 'bg-emerald-50 border-emerald-100 text-emerald-700',
+    blue: 'bg-blue-50 border-blue-100 text-blue-700',
+    amber: 'bg-amber-50 border-amber-100 text-amber-700',
+};
+
+const dotColors = {
+    violet: 'bg-violet-500',
+    emerald: 'bg-emerald-500',
+    blue: 'bg-blue-500',
+    amber: 'bg-amber-500',
+};
+---
+
+<section class="relative bg-white border-b border-slate-100 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+
+    <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
+        {breadcrumbs && breadcrumbs.length > 0 && (
+            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+                {breadcrumbs.map((item, i) => (
+                    <>
+                        {i > 0 && (
+                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        )}
+                        {i < breadcrumbs.length - 1 ? (
+                            <a href={item.href} class="hover:text-violet-600 transition-colors">{item.label}</a>
+                        ) : (
+                            <span class="text-slate-700 font-medium">{item.label}</span>
+                        )}
+                    </>
+                ))}
+            </nav>
+        )}
+
+        <div class="max-w-3xl">
+            {badge && (
+                <div class={`inline-flex items-center gap-2 px-3 py-1.5 border rounded-full mb-6 ${badgeColors[badgeColor]}`}>
+                    <span class={`flex h-2 w-2 rounded-full ${dotColors[badgeColor]}`}></span>
+                    <span class="text-xs font-semibold tracking-wide">{badge}</span>
+                </div>
+            )}
+
+            <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+                {title}{titleAccent && <span class="text-violet-600"> {titleAccent}</span>}
+            </h1>
+
+            {subtitle && (
+                <p class="text-lg text-slate-500 leading-relaxed max-w-2xl">{subtitle}</p>
+            )}
+        </div>
+
+        {stats && stats.length > 0 && (
+            <div class="flex flex-wrap gap-4 mt-8">
+                {stats.map(stat => (
+                    <div class="flex items-center gap-3 px-5 py-3 bg-white rounded-xl border border-slate-100 shadow-sm">
+                        <div>
+                            <div class="text-xl font-bold text-slate-900">{stat.value}</div>
+                            <div class="text-xs text-slate-400 font-medium">{stat.label}</div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )}
+
+        <slot />
+    </div>
+</section>

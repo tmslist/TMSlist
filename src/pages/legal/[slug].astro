@@ -1,15 +1,50 @@
 ---
+export const prerender = true;
+
 import ContentPage from '../../layouts/ContentPage.astro';
+import { getCollection, render } from 'astro:content';
 import { LEGAL_SLUGS } from '../../utils/seo_slugs';
 
-export function getStaticPaths() {
-  return LEGAL_SLUGS.map(({ slug, title }) => ({
-    params: { slug },
-    props: { title },
+export async function getStaticPaths() {
+  let entries: any[] = [];
+  try {
+    entries = await getCollection('legal');
+  } catch {}
+
+  const contentPaths = entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { title: entry.data.title, description: entry.data.description, hasContent: true, entry },
   }));
+
+  const contentSlugsSet = new Set(contentPaths.map(p => p.params.slug));
+  const fallbackPaths = LEGAL_SLUGS
+    .filter(({ slug }) => !contentSlugsSet.has(slug))
+    .map(({ slug, title }) => ({
+      params: { slug },
+      props: { title, description: '', hasContent: false, entry: null },
+    }));
+
+  return [...contentPaths, ...fallbackPaths];
 }
 
-const { title } = Astro.props;
+const { title, description, hasContent, entry } = Astro.props;
+const slug = Astro.params.slug!;
+let Content: any = null;
+if (hasContent && entry) {
+  const rendered = await render(entry);
+  Content = rendered.Content;
+}
 ---
 
-<ContentPage title={title} subtitle="Legal and regulatory information for patients and providers." />
+<ContentPage
+  title={title}
+  subtitle={description || "Legal and regulatory information for patients and providers."}
+  description={description}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Legal", url: "/legal/" },
+    { name: title, url: `/legal/${slug}/` },
+  ]}
+>
+  {Content ? <Content /> : null}
+</ContentPage>

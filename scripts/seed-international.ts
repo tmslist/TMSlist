@@ -2,14 +2,14 @@
  * Seed countries and regions for international expansion.
  * Usage: DATABASE_URL=... npx tsx scripts/seed-international.ts
  */
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+import postgres from 'postgres';
+import { drizzle } from 'drizzle-orm/postgres-js';
 import { countries, regions } from '../src/db/schema';
 
 const DATABASE_URL = process.env.DATABASE_URL;
 if (!DATABASE_URL) { console.error('DATABASE_URL required'); process.exit(1); }
 
-const sql = neon(DATABASE_URL);
+const sql = postgres(DATABASE_URL);
 const db = drizzle(sql);
 
 const COUNTRIES = [
@@ -28,6 +28,12 @@ const COUNTRIES = [
   { code: 'KR', name: 'South Korea', currency: 'KRW', phonePrefix: '+82', locale: 'ko', enabled: false, sortOrder: 13 },
   { code: 'NL', name: 'Netherlands', currency: 'EUR', phonePrefix: '+31', locale: 'nl', enabled: false, sortOrder: 14 },
   { code: 'SE', name: 'Sweden', currency: 'SEK', phonePrefix: '+46', locale: 'sv', enabled: false, sortOrder: 15 },
+  { code: 'SG', name: 'Singapore', currency: 'SGD', phonePrefix: '+65', locale: 'en', enabled: false, sortOrder: 16 },
+  { code: 'AE', name: 'United Arab Emirates', currency: 'AED', phonePrefix: '+971', locale: 'en', enabled: false, sortOrder: 17 },
+  { code: 'NZ', name: 'New Zealand', currency: 'NZD', phonePrefix: '+64', locale: 'en', enabled: false, sortOrder: 18 },
+  { code: 'ZA', name: 'South Africa', currency: 'ZAR', phonePrefix: '+27', locale: 'en', enabled: false, sortOrder: 19 },
+  { code: 'IE', name: 'Ireland', currency: 'EUR', phonePrefix: '+353', locale: 'en', enabled: false, sortOrder: 20 },
+  { code: 'IL', name: 'Israel', currency: 'ILS', phonePrefix: '+972', locale: 'he', enabled: false, sortOrder: 21 },
 ];
 
 // US states as regions

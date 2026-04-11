@@ -45,6 +45,30 @@ export const submissionSourceEnum = pgEnum('submission_source', [
   'api',
 ]);
 
+export const claimStatusEnum = pgEnum('claim_status', [
+  'pending',
+  'verified',
+  'rejected',
+]);
+
+export const subscriptionPlanEnum = pgEnum('subscription_plan', [
+  'featured',
+  'premium',
+  'verified',
+]);
+
+export const subscriptionStatusEnum = pgEnum('subscription_status', [
+  'active',
+  'canceled',
+  'past_due',
+]);
+
+export const blogStatusEnum = pgEnum('blog_status', [
+  'draft',
+  'published',
+  'scheduled',
+]);
+
 // ── CLINICS ──────────────────────────────────────
 
 export const clinics = pgTable('clinics', {
@@ -139,12 +163,12 @@ export const clinics = pgTable('clinics', {
 
   // Timestamps
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+  deletedAt: timestamp('deleted_at', { withTimezone: true }),
 }, (table) => [
   index('idx_clinics_state').on(table.state),
   index('idx_clinics_city').on(table.state, table.city),
   index('idx_clinics_verified').on(table.verified),
-  uniqueIndex('idx_clinics_slug').on(table.slug),
   index('idx_clinics_verified_rating').on(table.verified, table.ratingAvg),
   index('idx_clinics_country_verified').on(table.country, table.verified),
   index('idx_clinics_featured_rating').on(table.isFeatured, table.ratingAvg),
@@ -168,6 +192,7 @@ export const doctors = pgTable('doctors', {
   bio: text('bio'),
   imageUrl: text('image_url'),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
 }, (table) => [
   index('idx_doctors_clinic').on(table.clinicId),
   index('idx_doctors_slug').on(table.slug),
@@ -186,6 +211,7 @@ export const reviews = pgTable('reviews', {
   verified: boolean('verified').default(false).notNull(),
   approved: boolean('approved').default(false).notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
 }, (table) => [
   index('idx_reviews_clinic').on(table.clinicId),
   index('idx_reviews_approved').on(table.approved),
@@ -198,7 +224,7 @@ export const leads = pgTable('leads', {
   id: uuid('id').defaultRandom().primaryKey(),
   type: leadTypeEnum('type').notNull(),
   name: text('name'),
-  email: text('email'),
+  email: text('email').notNull(),
   phone: text('phone'),
   message: text('message'),
   clinicId: uuid('clinic_id').references(() => clinics.id),
@@ -207,6 +233,7 @@ export const leads = pgTable('leads', {
   sourceUrl: text('source_url'),
   metadata: jsonb('metadata').$type<Record<string, unknown>>(),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
 }, (table) => [
   index('idx_leads_type').on(table.type),
   index('idx_leads_created').on(table.createdAt),
@@ -224,6 +251,7 @@ export const questions = pgTable('questions', {
   relatedSlugs: text('related_slugs').array(),
   sortOrder: integer('sort_order').default(0),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
 }, (table) => [
   index('idx_questions_category').on(table.category),
   index('idx_questions_sort').on(table.sortOrder),
@@ -243,6 +271,8 @@ export const treatments = pgTable('treatments', {
   sessionDuration: text('session_duration'),
   treatmentCourse: text('treatment_course'),
   insuranceCoverage: text('insurance_coverage'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
 });
 
 // ── USERS (AUTH) ──────────────────────────────────
@@ -256,6 +286,7 @@ export const users = pgTable('users', {
   clinicId: uuid('clinic_id').references(() => clinics.id),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   lastLoginAt: timestamp('last_login_at', { withTimezone: true }),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
 }, (table) => [
   index('idx_users_clinic').on(table.clinicId),
@@ -299,11 +330,15 @@ export const clinicClaims = pgTable('clinic_claims', {
   userId: uuid('user_id').references(() => users.id),
   email: text('email').notNull(),
   verificationToken: text('verification_token').notNull().unique(),
-  status: text('status').notNull().default('pending'), // pending, verified, rejected
+  status: claimStatusEnum('status').notNull().default('pending'),
   verifiedAt: timestamp('verified_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
-});
+}, (table) => [
+  index('idx_claims_clinic').on(table.clinicId),
+  index('idx_claims_status').on(table.status),
+  index('idx_claims_email').on(table.email),
+]);
 
 // ── SUBSCRIPTIONS (Stripe) ──────────────────────────
 
@@ -312,11 +347,14 @@ export const subscriptions = pgTable('subscriptions', {
   clinicId: uuid('clinic_id').notNull().references(() => clinics.id, { onDelete: 'cascade' }),
   stripeCustomerId: text('stripe_customer_id'),
   stripeSubscriptionId: text('stripe_subscription_id').unique(),
-  plan: text('plan').notNull(), // 'featured', 'premium', 'verified'
-  status: text('status').notNull().default('active'), // active, canceled, past_due
+  plan: subscriptionPlanEnum('plan').notNull(),
+  status: subscriptionStatusEnum('status').notNull().default('active'),
   currentPeriodEnd: timestamp('current_period_end', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-});
+}, (table) => [
+  index('idx_subscriptions_clinic').on(table.clinicId),
+  index('idx_subscriptions_status').on(table.status),
+]);
 
 // ── SAVED CLINICS (User Favorites) ──────────────────
 
@@ -358,7 +396,7 @@ export const regions = pgTable('regions', {
 export const siteSettings = pgTable('site_settings', {
   key: text('key').primaryKey(),
   value: jsonb('value').$type<unknown>(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
   updatedBy: uuid('updated_by').references(() => users.id),
 });
 
@@ -374,14 +412,14 @@ export const blogPosts = pgTable('blog_posts', {
   author: text('author').notNull(),
   category: text('category'),
   tags: text('tags').array(),
-  status: text('status').notNull().default('draft'), // draft, published, scheduled
+  status: blogStatusEnum('status').notNull().default('draft'),
   publishedAt: timestamp('published_at', { withTimezone: true }),
   scheduledAt: timestamp('scheduled_at', { withTimezone: true }),
   metaTitle: text('meta_title'),
   metaDescription: text('meta_description'),
   ogImage: text('og_image'),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
   createdBy: uuid('created_by').references(() => users.id),
 }, (table) => [
   index('idx_blog_status').on(table.status),
@@ -400,11 +438,9 @@ export const seoOverrides = pgTable('seo_overrides', {
   canonicalUrl: text('canonical_url'),
   noIndex: boolean('no_index').default(false),
   structuredData: jsonb('structured_data').$type<Record<string, unknown>>(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
   updatedBy: uuid('updated_by').references(() => users.id),
-}, (table) => [
-  uniqueIndex('idx_seo_path').on(table.path),
-]);
+});
 
 // ── NOTIFICATIONS ──────────────────────────────────
 

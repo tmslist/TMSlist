@@ -2,6 +2,11 @@
 import Layout from "./Layout.astro";
 import Hero from "../components/Hero.astro";
 
+interface BreadcrumbItem {
+    name: string;
+    url: string;
+}
+
 interface Props {
     title: string;
     subtitle?: string;
@@ -9,16 +14,22 @@ interface Props {
     schema?: string;
     reviewerName?: string;
     reviewerTitle?: string;
+    imageSubject?: string;
+    imageType?: 'treatment' | 'hero' | 'city';
+    breadcrumbs?: BreadcrumbItem[];
 }
 
-const { title, subtitle, description, schema, reviewerName = "Dr. Karan Narwal", reviewerTitle = "Board Certified Psychiatrist" } = Astro.props;
+const { title, subtitle, description, schema, reviewerName = "Dr. Karan Narwal", reviewerTitle = "Mental Health Specialist & Consultant", imageSubject, imageType = 'hero', breadcrumbs } = Astro.props;
+const reviewerImage = reviewerName === "Dr. Karan Narwal" ? "/images/dr-karan-narwal.jpg" : null;
 const reviewerInitials = reviewerName.split(' ').map(n => n[0]).join('');
 ---
 
-<Layout title={`${title} | TMS List`} description={description} schema={schema}>
+<Layout title={`${title} | TMS List`} description={description} schema={schema} breadcrumbs={breadcrumbs}>
     <Hero
         title={title}
         subtitle={subtitle || "What you need to know, without the medical jargon."}
+        imageSubject={imageSubject || title}
+        imageType={imageType}
     />
 
     <main class="container mx-auto px-4 py-12">
@@ -134,11 +145,13 @@ const reviewerInitials = reviewerName.split(' ').map(n => n[0]).join('');
                         Medically Reviewed By
                     </h4>
                     <div class="flex items-center gap-4">
-                        <div
-                            class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm"
-                        >
-                            {reviewerInitials}
-                        </div>
+                        {reviewerImage ? (
+                            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" />
+                        ) : (
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm">
+                                {reviewerInitials}
+                            </div>
+                        )}
                         <div>
                             <div class="font-semibold text-gray-900">
                                 {reviewerName}

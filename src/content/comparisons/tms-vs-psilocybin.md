@@ -6,13 +6,13 @@ image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fi
 
 ## Magnets vs mushrooms
 
-TMS and psilocybin-assisted therapy represent two of the most talked-about alternatives to traditional antidepressants. TMS is FDA-approved and widely available. Psilocybin therapy is still in clinical trials (as of 2026) and not yet FDA-approved for depression.
+TMS and psilocybin-assisted therapy are two of the most talked-about alternatives to traditional antidepressants right now. One major difference: TMS is FDA-approved and widely available. Psilocybin therapy is still in clinical trials (as of 2026) and not yet FDA-approved for depression.
 
 ### How they work
 
-**TMS:** Magnetic pulses target the left DLPFC to restore activity in mood-regulating brain circuits. Treatment is cumulative over 6-9 weeks with no altered states of consciousness.
+**TMS:** Magnetic pulses target the left DLPFC to restore activity in mood-regulating brain circuits. Treatment builds over 6-9 weeks. No altered states of consciousness. You're fully yourself the entire time.
 
-**Psilocybin therapy:** A psychedelic compound that binds to serotonin 2A receptors, temporarily disrupting the default mode network (DMN). This creates a window of enhanced neuroplasticity and psychological insight, combined with therapeutic support before, during, and after sessions.
+**Psilocybin therapy:** A psychedelic compound that binds to serotonin 2A receptors, temporarily disrupting the default mode network (DMN). This opens a window of enhanced neuroplasticity and psychological insight, paired with therapeutic support before, during, and after sessions.
 
 ### Efficacy
 
@@ -23,13 +23,15 @@ TMS and psilocybin-assisted therapy represent two of the most talked-about alter
 | Sessions needed | 36 over 6-9 weeks | 1-2 dosing sessions (+ prep/integration) |
 | Duration of effect | 6-12 months | Highly variable (weeks to years) |
 
-Psilocybin's trial data is impressive but comes from carefully controlled settings with extensive psychological support — real-world results may differ.
+Those psilocybin numbers are impressive. But a caveat: they come from carefully controlled settings with extensive psychological support. Real-world results may look different.
 
 ### The experience
 
-**TMS:** Sit in a chair, tapping sensation on forehead, 19-37 minutes. No altered consciousness. Drive yourself home. Repeat daily for 6-9 weeks.
+These could not be more different.
 
-**Psilocybin:** 1-2 supervised dosing sessions lasting 6-8 hours each. Profound altered states of consciousness — visual distortion, emotional processing, ego dissolution, mystical experiences. Requires trained therapists present throughout. Preparation sessions before and integration sessions after.
+**TMS:** Sit in a chair, tapping sensation on your forehead, 19-37 minutes. No altered consciousness. Drive yourself home. Repeat daily for 6-9 weeks. Honestly, some people call it boring.
+
+**Psilocybin:** 1-2 supervised sessions lasting 6-8 hours each. Profound altered states — visual distortion, deep emotional processing, ego dissolution, mystical experiences. Trained therapists stay with you the whole time. You'll do preparation sessions before and integration sessions after.
 
 ### Availability (as of 2026)
 
@@ -43,18 +45,18 @@ Psilocybin's trial data is impressive but comes from carefully controlled settin
 
 ### Safety
 
-**TMS:** Minimal risks. Scalp discomfort, mild headache. Seizure risk <0.01%. No psychological risks.
+**TMS:** Minimal risks. Scalp discomfort, mild headache. Seizure risk under 0.01%. No psychological risks.
 
-**Psilocybin:** Generally physically safe in supervised settings. Psychological risks include challenging experiences ("bad trips"), anxiety, paranoia, triggering latent psychosis in vulnerable individuals. Contraindicated in patients with psychotic disorders or family history of schizophrenia.
+**Psilocybin:** Physically safe in supervised settings. The psychological risks are real though — challenging experiences ("bad trips"), anxiety, paranoia, and the potential to trigger latent psychosis in vulnerable people. It's contraindicated if you have a psychotic disorder or family history of schizophrenia.
 
 ### Key differences
 
 - **Accessibility:** TMS is available now; psilocybin access is limited
-- **Insurance:** TMS covered; psilocybin is not
-- **Time commitment:** TMS requires 36 appointments; psilocybin requires fewer but longer sessions
+- **Insurance:** TMS is covered; psilocybin is not
+- **Time commitment:** TMS needs 36 appointments; psilocybin needs fewer but much longer sessions
 - **Experience:** TMS is mundane; psilocybin is psychologically intense
 - **Evidence base:** TMS has 15+ years of post-approval data; psilocybin has impressive but limited trial data
 
 ### Can you do both?
 
-In theory, yes — but there's no research on combining them. If considering both, discuss sequencing with a psychiatrist familiar with both modalities. Most patients would try the FDA-approved, widely available option (TMS) first.
+In theory, yes — but there's no research on combining them. If you're considering both, talk to a psychiatrist who knows both modalities about sequencing. Most people would start with the FDA-approved, widely available option (TMS) first.

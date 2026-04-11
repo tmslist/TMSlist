@@ -14,7 +14,7 @@ Let's get right to the numbers everyone wants to know.
 
 **Without insurance**: A full course of TMS therapy (typically 36 sessions over 6-9 weeks) runs between **$6,000 and $16,000** nationally. The average is around $8,000-$10,000, but it swings wildly depending on where you live and which clinic you choose.
 
-**With insurance**: If your plan covers TMS (and most major insurers now do for treatment-resistant depression), your out-of-pocket cost averages **$1,800** for a full course. That's after deductible, copays, and coinsurance. Some patients pay as little as $500 total; others hit $3,000-4,000 if they have a high-deductible plan.
+**With insurance**: If your plan covers TMS (and most major insurers now do for treatment-resistant depression), your out-of-pocket cost averages **$1,800** for a full course. That's after deductible, copays, and coinsurance. Some people pay as little as $500 total; others hit $3,000-4,000 if they have a high-deductible plan.
 
 These numbers reflect 2026 pricing. If you're reading older articles quoting $6,000-$12,000 as the insured cost, that information is outdated — coverage has expanded significantly in the past two years.
 
@@ -46,15 +46,15 @@ Find clinics and compare options in your area through our [US provider directory
 
 A $160 difference per session between New York and Houston adds up to nearly $6,000 over a full treatment course. What drives this gap?
 
-**Real estate costs.** A TMS clinic in Midtown Manhattan pays rent that would cover an entire clinic building in suburban Texas. That overhead gets passed to patients.
+**Real estate costs.** A TMS clinic in Midtown Manhattan pays rent that would cover an entire clinic building in suburban Texas. That overhead gets passed to you.
 
 **Labor costs.** The TMS technician administering your treatment earns considerably more in San Francisco than in Nashville. Psychiatrist supervision fees follow the same pattern.
 
 **Competition.** Cities with more TMS providers tend to have more competitive pricing. Houston and Dallas have seen an influx of clinics in recent years, and prices have dropped accordingly. Markets with fewer options — particularly smaller cities — sometimes charge more simply because they can.
 
-**Device costs and lease agreements.** Clinics using newer devices with shorter sessions (like theta burst capable systems) can see more patients per day, which can translate to lower per-session costs. Clinics locked into older equipment leases may charge more to cover their fixed costs.
+**Device costs and lease agreements.** Clinics using newer devices with shorter sessions (like theta burst capable systems) can see more people per day, which can translate to lower per-session costs. Clinics locked into older equipment leases may charge more to cover their fixed costs.
 
-**Insurance mix.** Clinics that primarily serve insured patients negotiate rates with insurance companies and may offer different cash-pay rates than clinics where self-pay is the dominant business model.
+**Insurance mix.** Clinics that primarily serve insured people negotiate rates with insurance companies and may offer different cash-pay rates than clinics where self-pay is the dominant business model.
 
 **Profit margin philosophy.** Some clinics are run by private equity groups optimizing for revenue. Others are academic medical centers, physician-owned practices, or community health organizations with different financial goals. This isn't a commodity with standardized pricing — each clinic sets its own rates.
 
@@ -85,7 +85,7 @@ Your TMS provider's office handles this, but expect it to take 1-3 weeks. They'l
 
 ## 5 ways to reduce your cost
 
-Whether you're paying cash or dealing with insurance, these strategies can meaningfully reduce what comes out of your pocket:
+Whether you're paying cash or dealing with insurance, these strategies can meaningfully cut what comes out of your pocket:
 
 ### 1. Get your insurance to cover it (even if they initially say no)
 
@@ -105,7 +105,7 @@ Most TMS clinics offer a discounted rate if you pay for the full course upfront.
 
 ### 4. Consider theta burst protocols
 
-Theta burst sessions take 3 minutes instead of 37 minutes. Some clinics charge less for theta burst because they can see more patients per hour. The clinical outcomes are equivalent (the THREE-D trial proved this), so if the shorter protocol costs less at your clinic, there's no medical reason not to choose it.
+Theta burst sessions take 3 minutes instead of 37 minutes. Some clinics charge less for theta burst because they can see more people per hour. The clinical outcomes are equivalent (the THREE-D trial proved this), so if the shorter protocol costs less at your clinic, there's no medical reason not to choose it.
 
 ### 5. Check for clinical trials
 
@@ -113,7 +113,7 @@ Active clinical trials for TMS provide treatment at no cost. You might be eligib
 
 ## Hidden costs to watch for
 
-A few expenses that can catch patients off guard:
+A few expenses that can catch you off guard:
 
 **Initial consultation**: $200-500 out of pocket if not covered by insurance. This is the psychiatrist visit where you're evaluated for TMS candidacy.
 
@@ -131,7 +131,7 @@ This is the question behind the question. When you're weighing $1,800-$10,000 ag
 
 A year of antidepressant medication plus quarterly psychiatrist visits runs $2,000-$5,000 annually with insurance. Over a decade of treatment-resistant depression, that's $20,000-$50,000 — often with inadequate relief.
 
-TMS offers a 50-60% chance of meaningful improvement and a 30-35% chance of remission from a single course of treatment. If it works, many patients can reduce or eliminate medications, see their psychiatrist less frequently, and regain productivity that depression stole.
+TMS offers a 50-60% chance of meaningful improvement and a 30-35% chance of remission from a single course of treatment. If it works, many people can reduce or eliminate medications, see their psychiatrist less frequently, and regain productivity that depression stole.
 
 No one can guarantee it will work for you. But the economics increasingly favor trying TMS earlier rather than later in the treatment-resistant journey.
 

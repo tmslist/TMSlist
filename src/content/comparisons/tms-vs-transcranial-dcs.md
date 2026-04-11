@@ -6,13 +6,15 @@ image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fi
 
 ## Magnetic pulses vs electrical current
 
-TMS and tDCS are both non-invasive brain stimulation techniques, but they differ fundamentally in strength, precision, evidence base, and accessibility. TMS uses focused magnetic pulses strong enough to directly activate neurons. tDCS uses weak electrical current (1-2mA) that modulates neural excitability without directly triggering firing.
+TMS and tDCS are both non-invasive brain stimulation. But that's about where the similarities end.
+
+TMS uses focused magnetic pulses strong enough to directly fire neurons. tDCS uses weak electrical current (1-2mA) that nudges neural excitability — it makes neurons slightly more or less likely to fire, but it doesn't actually make them fire. Think of TMS as flipping a light switch. tDCS is more like dimming it slightly.
 
 ### How they work
 
-**TMS:** A magnetic coil generates focused pulses that penetrate the skull and directly depolarize neurons in targeted cortical regions. This is a suprathreshold stimulus — it forces neurons to fire.
+**TMS:** A magnetic coil generates focused pulses that penetrate the skull and directly depolarize neurons in targeted cortical regions. This is suprathreshold — it forces neurons to fire.
 
-**tDCS:** Electrodes placed on the scalp deliver weak direct current. The anode (positive electrode) increases cortical excitability; the cathode decreases it. This is a subthreshold modulation — it makes neurons slightly more or less likely to fire but doesn't directly activate them.
+**tDCS:** Electrodes on the scalp deliver weak direct current. The anode (positive electrode) increases excitability; the cathode decreases it. This is subthreshold — it shifts the odds, not the outcome.
 
 ### Evidence for depression
 
@@ -25,47 +27,49 @@ TMS and tDCS are both non-invasive brain stimulation techniques, but they differ
 | Remission rate | 30-35% | 15-25% |
 | Clinical guidelines | Recommended | Not recommended as first-line |
 
-TMS has substantially stronger evidence. tDCS shows modest antidepressant effects in studies, but results are inconsistent and effect sizes are smaller.
+TMS has substantially stronger evidence. tDCS shows modest antidepressant effects in studies, but results are inconsistent and effect sizes are smaller. That's a meaningful gap.
 
 ### Practical comparison
 
 **TMS:**
-- Requires a clinic visit (certified TMS provider)
+- Requires clinic visits (certified TMS provider)
 - 19-37 minutes per session
 - 36 sessions over 6-9 weeks
-- $6,000-$12,000 (insurance covers)
+- $6,000-$12,000 (insurance covers it)
 - Prescription required
 
 **tDCS:**
-- Can be administered at home with consumer devices
+- Can be done at home with consumer devices
 - 20-30 minutes per session
-- 20-30+ sessions (no standard course)
-- $200-$500 for home device; $50-$100/session at clinics
-- No prescription required for consumer devices (not FDA-cleared)
+- 20-30+ sessions (no standard course established)
+- $200-$500 for a home device; $50-$100/session at clinics
+- No prescription needed for consumer devices (they're not FDA-cleared)
 
 ### The home device question
 
-Consumer tDCS devices are available online without prescription. This raises important issues:
+You can buy tDCS devices online without a prescription. That accessibility comes with real problems:
 
-- **No quality control:** Consumer devices vary widely in output quality
-- **No targeting guidance:** Without clinical expertise, electrode placement may be incorrect
-- **Safety concerns:** Burns, skin irritation, and incorrect stimulation of wrong brain regions
-- **Unproven protocols:** Consumer devices don't follow clinical trial protocols
+- **No quality control:** Consumer devices vary wildly in output quality
+- **No targeting guidance:** Without clinical expertise, you might put the electrodes in the wrong spot
+- **Safety concerns:** Burns, skin irritation, and stimulation of the wrong brain regions
+- **Unproven protocols:** Consumer devices don't follow the protocols used in clinical trials
+
+Just because you can buy it doesn't mean it's a good idea.
 
 ### Who should consider which
 
 **TMS if:**
-- You want FDA-approved, evidence-based treatment
-- Insurance coverage is important
-- You want maximum efficacy for treatment-resistant depression
+- You want FDA-cleared, evidence-based treatment
+- Insurance coverage matters to you
+- You want the strongest option for treatment-resistant depression
 - You prefer supervised professional treatment
 
-**tDCS may be explored if:**
+**tDCS might be worth exploring if:**
 - TMS and medications haven't worked
 - You're interested in emerging neuromodulation research
-- Cost is a major barrier (and you understand the limitations)
-- You want to participate in a clinical trial
+- Cost is a major barrier and you understand the limitations
+- You want to join a clinical trial
 
 ### The bottom line
 
-TMS is the clear choice for clinical depression treatment — it's FDA-approved, well-studied, and significantly more effective. tDCS is an interesting research area but lacks the evidence to recommend as a depression treatment. Consumer tDCS devices are unregulated and their use for depression is not supported by current evidence.
+For clinical depression treatment, TMS is the clear choice. FDA-cleared, well-studied, and significantly more effective. tDCS is an interesting research area, but it lacks the evidence to recommend as a standalone depression treatment right now. And consumer tDCS devices? Unregulated, unsupervised, and not supported by current evidence for treating depression.

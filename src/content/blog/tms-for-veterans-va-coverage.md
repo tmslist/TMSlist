@@ -12,7 +12,7 @@ image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fi
 
 The Department of Veterans Affairs has been offering TMS therapy at select medical centers since 2015, initially as part of research protocols and gradually expanding into routine clinical care. As of 2026, TMS is available at over 60 VA facilities nationwide — a significant increase from the handful of sites that existed five years ago, but still far from universal access.
 
-For veterans dealing with treatment-resistant depression, and increasingly PTSD, TMS represents an option that doesn't add another pill to an already long medication list. That matters in a population where polypharmacy is a genuine problem and where many veterans have already cycled through multiple antidepressants without adequate relief.
+For veterans dealing with treatment-resistant depression, and increasingly PTSD, TMS represents an option that doesn't add another pill to an already long medication list. That matters in a population where polypharmacy is a real problem and where many veterans have already cycled through multiple antidepressants without adequate relief.
 
 Here's what you need to know about getting TMS through the VA system.
 
@@ -26,7 +26,7 @@ Coverage includes the full standard protocol: motor threshold mapping, 36 treatm
 
 ### PTSD
 
-This is where it gets more complicated — and more promising. TMS for PTSD is not yet universally available across the VA system, but a growing number of VA medical centers are offering it, particularly those affiliated with research programs.
+This is where it gets more complicated — and more promising. TMS for PTSD is not yet universally available across the VA system, but a growing number of VA medical centers are offering it, particularly those tied to research programs.
 
 Several large VA-funded studies have demonstrated meaningful benefits of TMS for combat-related PTSD, with response rates in the 40-50% range. The VA's Office of Mental Health has been expanding access based on these findings, and many VA psychiatrists can now authorize TMS for PTSD at centers that offer it.
 
@@ -70,7 +70,7 @@ This evaluation typically takes 45-60 minutes and covers:
 
 After the evaluation, you'll be scheduled for your mapping session and then daily treatments. VA TMS programs generally follow standard protocols — daily sessions Monday through Friday for 6-9 weeks. The VA coordinates scheduling and there is no out-of-pocket cost for service-connected conditions.
 
-**Timeline expectation**: From initial conversation with your provider to first treatment session, expect 4-8 weeks in most cases. Some VA facilities have waitlists that can extend this to 3-4 months. If the wait is excessive, ask about Community Care (see below).
+**Timeline expectation**: From initial conversation with your provider to first treatment session, expect 4-8 weeks in most cases. Some VA facilities have waitlists that can extend this to 3-4 months. If the wait is too long, ask about Community Care (see below).
 
 ## Community Care: TMS outside the VA
 
@@ -83,7 +83,7 @@ Community Care referrals for TMS are authorized when:
 - **Drive time exceeds 60 minutes** to the nearest VA facility offering TMS
 - **Your VA provider determines it's in your best medical interest** to receive care outside the VA
 
-For rural veterans especially, Community Care can be transformative. Instead of driving 2-3 hours each way for daily TMS sessions — a logistical impossibility for most people — you can receive treatment at a local private TMS clinic with the VA covering the cost.
+For rural veterans especially, Community Care can be a lifeline. Instead of driving 2-3 hours each way for daily TMS sessions — a logistical impossibility for most people — you can receive treatment at a local private TMS clinic with the VA covering the cost.
 
 To pursue Community Care for TMS:
 1. Ask your VA provider to submit a Community Care referral
@@ -91,7 +91,7 @@ To pursue Community Care for TMS:
 3. The community provider coordinates with the VA on your treatment plan
 4. The VA pays the provider directly — you shouldn't receive a bill
 
-**Important**: Not all private TMS clinics accept VA Community Care. Before scheduling, confirm that the clinic is an approved VA community provider. You can search for TMS clinics in your area on our [clinic directory](/us/) and then verify VA acceptance directly with the clinic.
+**Worth noting**: Not all private TMS clinics accept VA Community Care. Before scheduling, confirm that the clinic is an approved VA community provider. You can search for TMS clinics in your area on our [clinic directory](/us/) and then verify VA acceptance directly with the clinic.
 
 ## TMS for combat-related PTSD: the evidence
 
@@ -104,7 +104,7 @@ Combat-related PTSD presents unique challenges that make TMS particularly releva
 
 Research from VA medical centers and Department of Defense studies has shown that TMS targeting the right dorsolateral prefrontal cortex (DLPFC) can reduce PTSD symptom severity, with particular improvement in hyperarousal symptoms — the hypervigilance, exaggerated startle response, and sleep disruption that many combat veterans describe as the most disabling aspects of PTSD.
 
-Multiple studies have found that TMS not only improves PTSD Checklist (PCL-5) scores but also reduces co-occurring depression symptoms simultaneously. For veterans carrying both diagnoses, this dual benefit is significant.
+Multiple studies have found that TMS not only improves PTSD Checklist (PCL-5) scores but also reduces co-occurring depression symptoms at the same time. For veterans carrying both diagnoses, this dual benefit is significant.
 
 A 2025 multi-site VA study of 180 veterans with combat-related PTSD reported:
 - **47% met criteria for clinically meaningful PTSD improvement** (10+ point PCL-5 reduction)
@@ -112,7 +112,7 @@ A 2025 multi-site VA study of 180 veterans with combat-related PTSD reported:
 - **Hyperarousal symptoms showed the largest improvement**, with average subscale reductions of 35%
 - Benefits were maintained at 3-month follow-up in 72% of responders
 
-Importantly, TMS was delivered alongside existing treatments — veterans continued their medications and therapy. TMS was additive, not a replacement.
+TMS was delivered alongside existing treatments — veterans continued their medications and therapy. TMS was additive, not a replacement.
 
 ## Practical considerations for veteran patients
 

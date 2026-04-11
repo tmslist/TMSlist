@@ -21,123 +21,287 @@ const stateName = STATE_NAMES[stateCode] || stateCode;
 const cityName = (city || '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
 const treatmentEntry = TREATMENT_SLUGS.find(t => t.slug === treatment);
 const treatmentTitle = treatmentEntry?.title || `TMS for ${(treatment || '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}`;
+const conditionName = treatmentTitle.replace('TMS for ', '');
 
 const cityClinics = await getClinicsByCity(stateCode, cityName);
 const sortedClinics = [...cityClinics].sort(
     (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
 );
 
-const title = `${treatmentTitle} in ${cityName}, ${stateName} | Top Rated Clinics`;
-const description = `Find top-rated TMS providers for ${treatmentTitle} in ${cityName}, ${stateName}. Verified patient reviews, insurance acceptance, and availability for ${treatmentTitle}.`;
+// Treatment-specific data for richer pSEO content
+const treatmentData: Record<string, { brainArea: string; protocol: string; sessions: string; successRate: string; fdaCleared: boolean; yearCleared?: string; howItWorks: string; whoQualifies: string; devices: string; costRange: string }> = {
+    'depression': { brainArea: 'left dorsolateral prefrontal cortex (DLPFC)', protocol: 'high-frequency (10-20 Hz) stimulation', sessions: '36 sessions over 6 weeks', successRate: '50-60% response, 30-35% remission', fdaCleared: true, yearCleared: '2008', howItWorks: 'Depression often involves underactivity in the left prefrontal cortex. TMS delivers focused magnetic pulses to this region, gradually restoring normal neural activity and mood regulation.', whoQualifies: 'Patients with Major Depressive Disorder who have not responded adequately to at least 2 antidepressant medications.', devices: 'NeuroStar, BrainsWay Deep TMS, MagVenture', costRange: '$200-$400 per session' },
+    'anxiety': { brainArea: 'right dorsolateral prefrontal cortex (DLPFC)', protocol: 'low-frequency (1 Hz) inhibitory stimulation', sessions: '20-30 sessions over 4-6 weeks', successRate: '40-50% response', fdaCleared: false, howItWorks: 'Anxiety disorders are associated with overactivity in the right prefrontal cortex and amygdala. Low-frequency TMS to the right DLPFC reduces this hyperactivity, helping regulate the fear and worry response.', whoQualifies: 'Patients with Generalized Anxiety Disorder or Social Anxiety who have not responded to medication and/or therapy.', devices: 'NeuroStar, MagVenture, BrainsWay', costRange: '$200-$400 per session' },
+    'ocd': { brainArea: 'medial prefrontal cortex (mPFC) and anterior cingulate cortex (ACC)', protocol: 'BrainsWay Deep TMS with H7 coil', sessions: '29 sessions over 6 weeks', successRate: '45-55% response', fdaCleared: true, yearCleared: '2018', howItWorks: 'OCD involves hyperactivity in the cortico-striatal-thalamic circuit. Deep TMS targets the medial prefrontal cortex to modulate this circuit, reducing the intensity of obsessive thoughts and compulsive behaviors.', whoQualifies: 'Patients with OCD who have not responded adequately to SSRI medication and/or CBT/ERP therapy.', devices: 'BrainsWay Deep TMS (H7 coil)', costRange: '$250-$500 per session' },
+    'ptsd': { brainArea: 'right dorsolateral prefrontal cortex (DLPFC)', protocol: 'high-frequency or theta burst stimulation', sessions: '20-30 sessions over 4-6 weeks', successRate: '40-50% response', fdaCleared: false, howItWorks: 'PTSD involves dysregulation of the fear processing network, particularly hyperactivity in the amygdala and underactivity in the prefrontal cortex. TMS helps rebalance these circuits, reducing hypervigilance and intrusive memories.', whoQualifies: 'Patients with PTSD who have not responded to trauma-focused therapy and/or medication.', devices: 'NeuroStar, BrainsWay, MagVenture', costRange: '$200-$400 per session' },
+    'smoking-cessation': { brainArea: 'bilateral insula and prefrontal cortex', protocol: 'BrainsWay Deep TMS with H4 coil', sessions: '18 sessions over 6 weeks', successRate: '30-40% quit rate', fdaCleared: true, yearCleared: '2020', howItWorks: 'The insula plays a key role in addiction cravings and interoceptive awareness. Deep TMS targeting the bilateral insula disrupts craving circuits, reducing the urge to smoke.', whoQualifies: 'Adult smokers who want to quit and have tried other cessation methods.', devices: 'BrainsWay Deep TMS (H4 coil)', costRange: '$250-$500 per session' },
+    'bipolar': { brainArea: 'right dorsolateral prefrontal cortex (DLPFC)', protocol: 'low-frequency (1 Hz) inhibitory stimulation', sessions: '20-30 sessions over 4-6 weeks', successRate: '35-45% response', fdaCleared: false, howItWorks: 'Bipolar depression involves mood circuit dysregulation. Low-frequency TMS to the right DLPFC is used to minimize manic switching risk while alleviating depressive symptoms.', whoQualifies: 'Patients in the depressive phase of bipolar disorder who have not responded to mood stabilizers.', devices: 'NeuroStar, MagVenture', costRange: '$200-$400 per session' },
+    'migraines': { brainArea: 'occipital cortex', protocol: 'single-pulse TMS (sTMS)', sessions: 'as needed (acute) or daily (preventive)', successRate: '35-45% reduction in frequency', fdaCleared: true, yearCleared: '2013', howItWorks: 'Single-pulse TMS disrupts cortical spreading depression — the electrical wave that triggers migraine aura and pain. It can abort acute attacks and reduce frequency when used preventively.', whoQualifies: 'Patients with migraine with or without aura who have not responded adequately to preventive medications.', devices: 'eNeura SpringTMS (portable, FDA-cleared for home use)', costRange: 'Device rental or purchase; $200-$300/month' },
+    'chronic-pain': { brainArea: 'primary motor cortex (M1)', protocol: 'high-frequency (10-20 Hz) stimulation', sessions: '10-20 sessions', successRate: '30-50% pain reduction', fdaCleared: false, howItWorks: 'Chronic pain involves central sensitization and maladaptive changes in pain processing circuits. High-frequency TMS to the motor cortex activates descending pain inhibition pathways, reducing pain perception.', whoQualifies: 'Patients with chronic neuropathic pain, fibromyalgia, or complex regional pain syndrome who have not responded to conventional pain management.', devices: 'MagVenture, Magstim, NeuroStar', costRange: '$200-$400 per session' },
+};
 
-// Schema Generation
+const defaultData = { brainArea: 'dorsolateral prefrontal cortex (DLPFC)', protocol: 'repetitive TMS (rTMS)', sessions: '20-36 sessions over 4-6 weeks', successRate: 'varies by condition', fdaCleared: false, howItWorks: `TMS uses focused magnetic pulses to stimulate specific brain regions involved in ${conditionName.toLowerCase()}. By modulating neural activity in these areas, TMS can help restore normal brain function and reduce symptoms.`, whoQualifies: `Patients with ${conditionName.toLowerCase()} who have not responded adequately to conventional treatments including medication and therapy.`, devices: 'NeuroStar, BrainsWay, MagVenture', costRange: '$200-$400 per session' };
+
+const td = treatmentData[treatment || ''] || defaultData;
+
+const title = `${conditionName} Treatment with TMS in ${cityName}, ${stateName} | Find Top Providers`;
+const description = `Find ${sortedClinics.length} verified TMS clinics treating ${conditionName.toLowerCase()} in ${cityName}, ${stateName}. Compare providers, check insurance coverage, and book consultations. ${td.fdaCleared ? 'FDA-cleared treatment.' : 'Emerging clinical evidence.'}`;
+
 const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", item: "https://tmslist.com" },
     { name: "U.S.", item: "https://tmslist.com/us/" },
     { name: stateName, item: `https://tmslist.com/us/${state}/` },
     { name: cityName, item: `https://tmslist.com/us/${state}/${city}/` },
-    {
-        name: treatmentTitle,
-        item: `https://tmslist.com/us/${state}/${city}/${treatment}/`,
-    },
+    { name: treatmentTitle, item: `https://tmslist.com/us/${state}/${city}/${treatment}/` },
 ]);
 
 const listingSchema = generateMedicalClinicListSchema(
     sortedClinics,
-    `${treatmentTitle} Clinics in ${cityName}, ${stateName}`,
+    `${conditionName} TMS Clinics in ${cityName}, ${stateName}`,
     description,
 );
 
-const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
+const faqSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        { "@type": "Question", "name": `How much does TMS for ${conditionName.toLowerCase()} cost in ${cityName}?`, "acceptedAnswer": { "@type": "Answer", "text": `TMS sessions in ${cityName} typically cost ${td.costRange}. A full treatment course of ${td.sessions} ranges from $6,000-$12,000. Most major insurance plans cover TMS for approved indications. Contact clinics listed above for specific pricing.` }},
+        { "@type": "Question", "name": `Is TMS for ${conditionName.toLowerCase()} FDA-cleared?`, "acceptedAnswer": { "@type": "Answer", "text": td.fdaCleared ? `Yes, TMS for ${conditionName.toLowerCase()} is FDA-cleared${td.yearCleared ? ` since ${td.yearCleared}` : ''}. Most insurance providers cover FDA-cleared TMS indications.` : `TMS for ${conditionName.toLowerCase()} is currently used off-label with growing clinical evidence. Insurance coverage may be limited; check with providers listed above.` }},
+        { "@type": "Question", "name": `How many TMS sessions are needed for ${conditionName.toLowerCase()}?`, "acceptedAnswer": { "@type": "Answer", "text": `A typical TMS course for ${conditionName.toLowerCase()} involves ${td.sessions}. Each session lasts 19-37 minutes depending on the protocol used. Improvement is usually noticed by weeks 2-3.` }},
+    ]
+});
+
+const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}, ${faqSchema}]`;
 ---
 
 <Layout title={title} description={description} schema={combinedSchema}>
-    <main class="container mx-auto px-4 py-8">
-        <!-- Breadcrumbs -->
-        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
-            <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            <a href="/us/" class="hover:text-violet-600 transition-colors">U.S.</a>
-            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            <a href={`/us/${state}/`} class="hover:text-violet-600 transition-colors">{stateName}</a>
-            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            <a href={`/us/${state}/${city}/`} class="hover:text-violet-600 transition-colors">{cityName}</a>
-            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            <span class="text-slate-700 font-medium">{treatmentTitle}</span>
-        </nav>
+    <main>
+        <!-- Hero -->
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] right-[15%] w-[500px] h-[500px] bg-violet-600/12 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[5%] left-[10%] w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
 
-        <div class="max-w-4xl mx-auto mb-12 text-center">
-            <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 mb-4">
-                {treatmentTitle} in {cityName}, {stateName}
-            </h1>
-            <p class="text-lg text-gray-600">
-                Compare {sortedClinics.length} verified clinics offering Transcranial
-                Magnetic Stimulation (TMS) for {
-                    treatmentTitle.replace("TMS for ", "")
-                }.
-            </p>
-        </div>
+            <div class="container mx-auto px-4 pt-10 pb-24 lg:pt-14 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-10 flex-wrap" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <a href="/us/" class="hover:text-violet-400 transition-colors">U.S.</a>
+                    <span class="text-slate-700">/</span>
+                    <a href={`/us/${state}/`} class="hover:text-violet-400 transition-colors">{stateName}</a>
+                    <span class="text-slate-700">/</span>
+                    <a href={`/us/${state}/${city}/`} class="hover:text-violet-400 transition-colors">{cityName}</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">{conditionName}</span>
+                </nav>
 
-        <!-- Main Content -->
-        <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Clinic Grid -->
-            <div class="w-full">
-                <div
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                >
-                    {
-                        sortedClinics.map((clinic) => (
-                            <div class="clinic-item">
-                                <ClinicCard clinic={clinic} />
-                            </div>
-                        ))
-                    }
-                </div>
-
-                {
-                    sortedClinics.length === 0 && (
-                        <div class="text-center py-12 bg-gray-50 rounded-xl border border-gray-200">
-                            <p class="text-gray-500 mb-4">
-                                No clinics found specifically for this criteria
-                                in {cityName}.
-                            </p>
-                            <a
-                                href={`/us/${state}/`}
-                                class="inline-block px-6 py-2 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition-colors"
-                            >
-                                View All {stateName} Clinics
-                            </a>
+                <div class="grid lg:grid-cols-2 gap-10 items-end">
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            {td.fdaCleared ? (
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
+                                    <span class="text-xs font-semibold text-emerald-400 tracking-wider uppercase">FDA-Cleared{td.yearCleared ? ` since ${td.yearCleared}` : ''}</span>
+                                </span>
+                            ) : (
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                                    <span class="text-xs font-semibold text-blue-400 tracking-wider uppercase">Emerging Evidence</span>
+                                </span>
+                            )}
                         </div>
-                    )
-                }
-            </div>
-        </div>
 
-        <!-- Educational Content -->
-        <section class="mt-20 max-w-3xl mx-auto prose prose-lg prose-violet">
-            <h2>About {treatmentTitle.replace("TMS for ", "")} Treatment</h2>
-            <p>
-                Transcranial Magnetic Stimulation (TMS) is an FDA-cleared,
-                non-invasive treatment for various mental health conditions,
-                including {treatmentTitle.replace("TMS for ", "")}. It is often
-                used when traditional medications have not provided relief.
-            </p>
-            <h3>Why Choose TMS?</h3>
-            <ul>
-                <li>Non-invasive outpatient procedure</li>
-                <li>
-                    No systemic side effects (like weight gain or sexual
-                    dysfunction)
-                </li>
-                <li>High efficacy rates for treatment-resistant cases</li>
-                <li>Covered by most major insurance providers</li>
-            </ul>
-            <p>
-                If you live in {cityName} and are struggling with {
-                    treatmentTitle.replace("TMS for ", "")
-                }, consult with one of the verified specialists listed above to
-                allow them to evaluate if TMS is right for you.
-            </p>
+                        <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight mb-5">
+                            {conditionName} Treatment<br/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">in {cityName}</span>
+                        </h1>
+                        <p class="text-lg text-slate-400 leading-relaxed">
+                            {sortedClinics.length > 0
+                                ? `Compare ${sortedClinics.length} verified TMS providers treating ${conditionName.toLowerCase()} in ${cityName}, ${stateName}. View ratings, insurance coverage, and specialist credentials.`
+                                : `Find TMS providers for ${conditionName.toLowerCase()} near ${cityName}, ${stateName}. Browse verified clinics across ${stateName}.`
+                            }
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 lg:justify-end">
+                        <div class="px-5 py-3 bg-white/5 backdrop-blur border border-white/10 rounded-2xl text-center">
+                            <div class="text-2xl font-bold text-white">{sortedClinics.length}</div>
+                            <div class="text-[11px] text-slate-400 font-medium mt-0.5">Clinics</div>
+                        </div>
+                        <div class="px-5 py-3 bg-white/5 backdrop-blur border border-white/10 rounded-2xl text-center">
+                            <div class="text-2xl font-bold text-emerald-400">{td.successRate.split(',')[0].split(' ')[0]}</div>
+                            <div class="text-[11px] text-slate-400 font-medium mt-0.5">Success Rate</div>
+                        </div>
+                        <div class="px-5 py-3 bg-white/5 backdrop-blur border border-white/10 rounded-2xl text-center">
+                            <div class="text-2xl font-bold text-violet-400">{td.sessions.split(' ')[0]}</div>
+                            <div class="text-[11px] text-slate-400 font-medium mt-0.5">Sessions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+        </section>
+
+        <!-- Clinics Grid -->
+        <section class="py-12 lg:py-16 bg-white">
+            <div class="container mx-auto px-4">
+                {sortedClinics.length > 0 ? (
+                    <>
+                        <div class="flex items-end justify-between mb-8">
+                            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Top {conditionName} TMS Providers in {cityName}</h2>
+                            <span class="text-sm text-slate-400 hidden md:block">{sortedClinics.length} clinics</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {sortedClinics.map(clinic => (
+                                <ClinicCard clinic={clinic} />
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    <div class="text-center py-16">
+                        <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </div>
+                        <h2 class="text-xl font-bold text-slate-900 mb-3">No clinics found in {cityName} for this treatment</h2>
+                        <p class="text-slate-500 mb-6 max-w-md mx-auto">Try browsing all clinics in {stateName} or searching for a nearby city.</p>
+                        <div class="flex gap-4 justify-center flex-wrap">
+                            <a href={`/us/${state}/`} class="px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-colors">All {stateName} Clinics</a>
+                            <a href={`/us/${state}/${city}/`} class="px-6 py-3 border border-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition-colors">All TMS in {cityName}</a>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </section>
+
+        <!-- Rich Educational Content (pSEO) -->
+        <section class="py-16 lg:py-20 bg-slate-50">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="prose prose-lg prose-slate max-w-none">
+                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Understanding {conditionName} Treatment with TMS in {cityName}</h2>
+
+                    <p>{td.howItWorks}</p>
+
+                    <p>
+                        {td.fdaCleared
+                            ? `TMS for ${conditionName.toLowerCase()} has been FDA-cleared${td.yearCleared ? ` since ${td.yearCleared}` : ''}, making it a well-established treatment option. In ${cityName}, ${stateName}, ${sortedClinics.length > 0 ? `${sortedClinics.length} verified clinics` : 'providers'} offer this treatment with insurance coverage available through most major plans.`
+                            : `While TMS for ${conditionName.toLowerCase()} is not yet FDA-cleared for this specific indication, growing clinical evidence supports its effectiveness. Some ${cityName} providers offer this treatment off-label. Insurance coverage may be limited — check with individual clinics for details.`
+                        }
+                    </p>
+
+                    <h3>How TMS Treats {conditionName} — The Science</h3>
+                    <p>
+                        TMS therapy targets the <strong>{td.brainArea}</strong> using {td.protocol}. During each session, a magnetic coil placed against your scalp delivers focused pulses that stimulate neurons in this region. Over the course of treatment, this repeated stimulation promotes neuroplasticity — the brain's ability to form new neural connections and restore healthy patterns of activity.
+                    </p>
+
+                    <h3>Treatment Protocol in {cityName}</h3>
+                    <p>A typical TMS course for {conditionName.toLowerCase()} in {cityName} involves:</p>
+                    <ul>
+                        <li><strong>Sessions:</strong> {td.sessions}</li>
+                        <li><strong>Duration:</strong> 19-37 minutes per session depending on protocol</li>
+                        <li><strong>Location:</strong> Outpatient — no anesthesia, no recovery time</li>
+                        <li><strong>Devices commonly used:</strong> {td.devices}</li>
+                        <li><strong>Success rate:</strong> {td.successRate}</li>
+                    </ul>
+
+                    <h3>Who Qualifies for TMS for {conditionName} in {stateName}?</h3>
+                    <p>{td.whoQualifies}</p>
+                    <p>
+                        Most insurance plans in {stateName} require documentation of prior treatment attempts before authorizing TMS. Your provider's office will typically handle the pre-authorization process. Medicare and most commercial insurers cover FDA-cleared TMS indications.
+                    </p>
+
+                    <h3>Cost of TMS for {conditionName} in {cityName}</h3>
+                    <p>
+                        TMS sessions in {cityName} typically cost <strong>{td.costRange}</strong> per session. A full course of {td.sessions} can range from <strong>$6,000 to $12,000</strong> before insurance. With insurance coverage, out-of-pocket costs may be significantly reduced.
+                    </p>
+                    <p>
+                        Many clinics in {cityName} offer free initial consultations, payment plans, and assistance with insurance pre-authorization. <a href="/tms-cost-guide/">View our complete TMS cost guide</a> for detailed pricing information.
+                    </p>
+
+                    <h3>What to Expect at Your First Visit</h3>
+                    <p>
+                        Your journey begins with a psychiatric evaluation where a {cityName}-area specialist will review your medical history, current symptoms, and prior treatments. If you're a candidate, the clinic will perform brain mapping to identify the optimal stimulation site for your treatment. Sessions are painless — most patients describe a tapping or clicking sensation on the scalp. You can drive yourself to and from appointments and return to normal activities immediately after each session.
+                    </p>
+
+                    <h3>Choosing the Right TMS Provider in {cityName}</h3>
+                    <p>When selecting a TMS clinic in {cityName}, consider:</p>
+                    <ul>
+                        <li><strong>Experience:</strong> How many patients has the clinic treated with TMS for {conditionName.toLowerCase()}?</li>
+                        <li><strong>Supervision:</strong> Is a board-certified psychiatrist overseeing your treatment?</li>
+                        <li><strong>Technology:</strong> Which TMS devices do they use? ({td.devices} are among the leading systems.)</li>
+                        <li><strong>Insurance:</strong> Do they handle pre-authorization for your insurance plan?</li>
+                        <li><strong>Reviews:</strong> What do verified patients say about their experience?</li>
+                    </ul>
+                    <p>
+                        All clinics listed above are verified by TMS List. <a href="/how-we-rank/">Learn how we rank clinics</a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Schema Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-8">Frequently Asked Questions: TMS for {conditionName} in {cityName}</h2>
+                <div class="space-y-4">
+                    <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors">
+                            How much does TMS for {conditionName.toLowerCase()} cost in {cityName}?
+                            <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </summary>
+                        <div class="px-6 pb-6 text-slate-600">Sessions typically cost {td.costRange}. A full course of {td.sessions} ranges from $6,000-$12,000 before insurance. Most major insurance plans cover TMS for FDA-cleared indications.</div>
+                    </details>
+                    <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors">
+                            Is TMS for {conditionName.toLowerCase()} FDA-cleared?
+                            <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </summary>
+                        <div class="px-6 pb-6 text-slate-600">{td.fdaCleared ? `Yes, TMS for ${conditionName.toLowerCase()} is FDA-cleared${td.yearCleared ? ` since ${td.yearCleared}` : ''}. This means most insurance providers cover the treatment.` : `TMS for ${conditionName.toLowerCase()} is currently an off-label application with growing clinical evidence. Insurance coverage may vary — check with providers for details.`}</div>
+                    </details>
+                    <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors">
+                            How many TMS sessions will I need for {conditionName.toLowerCase()}?
+                            <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </summary>
+                        <div class="px-6 pb-6 text-slate-600">A typical course involves {td.sessions}. Each session lasts 19-37 minutes. Most patients begin noticing improvement by weeks 2-3 of treatment.</div>
+                    </details>
+                    <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors">
+                            Does TMS have side effects?
+                            <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </summary>
+                        <div class="px-6 pb-6 text-slate-600">TMS has minimal side effects compared to medication. The most common are mild scalp discomfort at the treatment site and occasional headaches, both of which typically resolve within the first few sessions. Unlike antidepressants, TMS does not cause weight gain, sexual dysfunction, or emotional blunting.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Treatments in this City -->
+        <section class="py-12 bg-slate-50 border-t border-slate-100">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Other TMS Treatments in {cityName}</h2>
+                <div class="flex flex-wrap gap-2">
+                    {TREATMENT_SLUGS.filter(t => t.slug !== treatment).slice(0, 12).map(t => (
+                        <a href={`/us/${state}/${city}/${t.slug}/`}
+                           class="px-4 py-2 bg-white border border-slate-200 text-sm font-medium text-slate-700 rounded-xl hover:border-violet-300 hover:text-violet-600 transition-all">
+                            {t.title.replace('TMS for ', '')}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="relative py-16 bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4 tracking-tight">Ready to explore TMS for {conditionName.toLowerCase()}?</h2>
+                <p class="text-slate-400 max-w-lg mx-auto mb-8">Take our quick assessment to find out if you're a candidate, or contact a provider in {cityName} directly.</p>
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <a href="/quiz/am-i-a-candidate/" class="px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">Am I a Candidate?</a>
+                    <a href={`/us/${state}/${city}/`} class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">All {cityName} Clinics</a>
+                    <a href={`/treatments/${treatment}/`} class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">{conditionName} Treatment Guide</a>
+                </div>
+            </div>
         </section>
     </main>
 </Layout>

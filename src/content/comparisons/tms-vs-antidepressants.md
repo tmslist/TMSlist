@@ -6,19 +6,21 @@ image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&h=400
 
 ## When medication isn't enough
 
-Antidepressants are the first-line treatment for depression, and they work well for many people. But about one-third of patients don't respond adequately to their first medication, and each subsequent trial has diminishing returns. After 2-4 failed medication attempts, you're considered "treatment-resistant" — and that's where TMS enters the picture.
+Antidepressants are the first thing doctors try for depression. They work for a lot of people. But about one-third don't respond well to their first medication — and each next attempt has worse odds. After 2-4 failed tries, you're officially "treatment-resistant."
+
+That's where TMS comes in.
 
 ### How they work differently
 
-**Antidepressants** alter brain chemistry systemically. SSRIs, SNRIs, and other classes increase the availability of neurotransmitters like serotonin and norepinephrine throughout the entire brain and body.
+**Antidepressants** change brain chemistry everywhere at once. SSRIs, SNRIs, and other classes increase neurotransmitters like serotonin and norepinephrine throughout your entire brain and body.
 
-**TMS** targets a specific brain region (the left DLPFC) with magnetic pulses, gradually restoring normal activity patterns in mood-regulating circuits. It doesn't change brain chemistry system-wide.
+**TMS** targets one specific brain region (the left DLPFC) with magnetic pulses, gradually restoring normal activity in mood circuits. It doesn't flood your whole system with chemical changes.
 
 ### Efficacy
 
 **First-line antidepressants:**
-- Response rate: ~50% for first medication
-- Drops to ~30% for second trial, ~15% for third
+- Response rate: ~50% for the first medication
+- Drops to ~30% for the second trial, ~15% for the third
 - Full effect takes 4-8 weeks
 
 **TMS (after medication failure):**
@@ -26,7 +28,7 @@ Antidepressants are the first-line treatment for depression, and they work well 
 - Remission rate: 30-35%
 - Effects typically noticeable by week 2-4
 
-The key insight: TMS achieves a 50-60% response rate in patients who have already failed medications — a population where the next medication trial might only have a 15-25% chance of working.
+Here's the number that matters: TMS hits a 50-60% response rate in people who've already failed medications. The next pill might only give you a 15-25% shot. That's a big difference.
 
 ### Side effects comparison
 
@@ -42,32 +44,34 @@ The key insight: TMS achieves a 50-60% response rate in patients who have alread
 | Cognitive effects | Brain fog reported by some | None |
 | Withdrawal symptoms | Yes (discontinuation syndrome) | None |
 
+Look at that "None" column. TMS side effects are basically a tapping sensation on your head and maybe a headache. That's it.
+
 ### Practical considerations
 
 **Antidepressants:**
-- Take daily, indefinitely in many cases
+- Take daily, often indefinitely
 - Available at any pharmacy
 - Cost: $10-$50/month (generic) or $200-$500/month (brand name)
-- No office visits required beyond prescribing
+- No office visits beyond prescribing
 
 **TMS:**
 - 36 sessions over 6-9 weeks (daily weekday appointments)
 - Must go to a certified TMS clinic
-- Cost: $6,000-$12,000 for full course
+- Cost: $6,000-$12,000 for a full course
 - Insurance covers after documented medication failures
-- Effects last 6-12 months; some patients need maintenance
+- Effects last 6-12 months; some people need maintenance
 
 ### Cost over time
 
-This is where TMS can actually be more economical. A patient on branded antidepressants at $300/month spends $3,600/year indefinitely. A single TMS course at $8,000 with 12 months of response costs about the same — without daily pills or systemic side effects.
+This is where things get interesting. If you're on a branded antidepressant at $300/month, that's $3,600 a year — indefinitely. A single TMS course at $8,000 with 12 months of response costs about the same. Without the daily pills. Without the sexual side effects. Without the weight gain.
 
 ### When to consider switching to TMS
 
-- You've tried 2+ antidepressants without adequate response
-- Side effects (sexual dysfunction, weight gain, fatigue) significantly affect quality of life
-- You want to reduce or eliminate medication
-- You prefer a time-limited treatment over indefinite daily medication
+- You've tried 2+ antidepressants without a good response
+- Side effects — sexual dysfunction, weight gain, fatigue — are seriously affecting your life
+- You want to reduce or stop medication
+- You'd rather do a time-limited treatment than take a pill every day forever
 
 ### Can you do TMS while on medication?
 
-Yes. Most patients continue their current antidepressants during TMS treatment. Some studies suggest the combination may be more effective than either alone. After TMS, some patients are able to reduce their medication dose with their doctor's guidance.
+Yes. Most people keep taking their current antidepressants during TMS. Some studies suggest the combination works better than either alone. After TMS, some people are able to lower their medication dose with their doctor's guidance.

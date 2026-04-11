@@ -1,0 +1,644 @@
+[
+  {
+    "id": "au-syd-001",
+    "name": "Sydney TMS",
+    "slug": "sydney-tms-bondi-junction",
+    "description_long": "Sydney TMS clinics provide treatment in an outpatient setting, avoiding the need for patient hospitalisation. The outpatient experience creates a more personalised experience with less interruption to everyday life. TMS is a well tolerated treatment, particularly for those who found medications difficult to use. At Sydney TMS we are constantly monitoring TMS protocols both in Australia and Internationally to offer the most up-to-date treatments available. Our clinics regularly share knowledge and information with other TMS providers around Australia through the Royal College of Australian and New Zealand College of Psychiatrists network.",
+    "address": "Suite 204, 2 Grosvenor Street",
+    "city": "Bondi Junction",
+    "state": "New South Wales",
+    "zip": "2022",
+    "country": "AU",
+    "geo": { "lat": -33.891686, "lng": 151.24947 },
+    "phone": "+61 1300 177 144",
+    "email": "info@sydneytms.com.au",
+    "website": "https://www.sydneytms.com.au/",
+    "logo_url": "https://www.sydneytms.com.au/wp-content/uploads/2025/11/sydney-TMS-Logo.png",
+    "hero_image_url": "https://www.sydneytms.com.au/wp-content/uploads/2022/06/transcranial-magnetic-stimulation-demo-at-sydney-tms-clinic-8686-e1751939209633.jpg",
+    "machines": ["MagVenture TMS Therapy"],
+    "specialties": ["Depression", "Treatment-Resistant Depression", "PTSD", "OCD"],
+    "insurances": ["Medicare", "Private Health Insurance", "Self-Pay"],
+    "rating": 4.8,
+    "review_count": 45,
+    "verified": true,
+    "additional_locations": [
+      {
+        "address": "The Vue, Suite 2 (ground level), 1 Centennial Drive",
+        "city": "Campbelltown",
+        "state": "New South Wales",
+        "zip": "2560",
+        "geo": { "lat": -33.822283, "lng": 151.195939 }
+      },
+      {
+        "address": "Suite 5, 3-9 Terminus Street",
+        "city": "Castle Hill",
+        "state": "New South Wales",
+        "zip": "2154",
+        "geo": { "lat": -33.733553, "lng": 151.006718 }
+      },
+      {
+        "address": "Suite 209, 11 Chandos Street",
+        "city": "St Leonards",
+        "state": "New South Wales",
+        "zip": "2065",
+        "geo": { "lat": -33.8234, "lng": 151.1944 }
+      }
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr Jason Pace",
+        "title": "Psychiatrist & Medical Director",
+        "credentials": "MBBS, FRANZCP",
+        "university": "Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Dr Jason Pace is dedicated to providing the most up to date treatment methods for those people with depression. He takes pride in providing the most professional service to all patients who receive treatment. It is Dr Pace's aim to work with a patient's current treating health professional to achieve the best outcomes.",
+        "photo_url": null
+      }
+    ]
+  },
+  {
+    "id": "au-mel-001",
+    "name": "NeuroCentrix",
+    "slug": "neurocentrix-carlton-melbourne",
+    "description_long": "NeuroCentrix is a dedicated neuroscience group providing various mental health services. Evidence-based assessment, TMS treatment and research. The clinic offers out-patient consulting in psychiatry, psychology, and cardiac psychology, as well as access to research and clinical trials in depression, Alzheimer's disease and dementia. TMS treatment for depression typically consists of 20 to 35 sessions delivered as an outpatient over 3 to 6 weeks.",
+    "address": "Suite 3, Level 1, 19-21 Argyle Place South",
+    "city": "Carlton",
+    "state": "Victoria",
+    "zip": "3053",
+    "country": "AU",
+    "geo": { "lat": -37.8003, "lng": 144.9670 },
+    "phone": "+61 3 9546 0009",
+    "email": null,
+    "website": "https://neurocentrix.com.au/",
+    "logo_url": "https://neurocentrix.com.au/wp-content/uploads/2025/09/CTXCertLogo_9001-1.webp",
+    "hero_image_url": null,
+    "machines": ["TMS Therapy System"],
+    "specialties": ["Depression", "Treatment-Resistant Depression", "Alzheimer's Disease", "Dementia", "Anxiety", "Cardiac Psychology"],
+    "insurances": ["Medicare", "Private Health Insurance", "Self-Pay"],
+    "rating": 4.6,
+    "review_count": 32,
+    "verified": true,
+    "additional_locations": [
+      {
+        "address": "NeuroCentrix Toowong",
+        "city": "Toowong",
+        "state": "Queensland",
+        "zip": "4066",
+        "geo": { "lat": -27.4848, "lng": 152.9827 }
+      },
+      {
+        "address": "Level 4 QV Tower, 11 High Street",
+        "city": "East Launceston",
+        "state": "Tasmania",
+        "zip": "7250",
+        "geo": { "lat": -41.4388, "lng": 147.1397 }
+      },
+      {
+        "address": "NeuroCentrix Dandenong",
+        "city": "Dandenong",
+        "state": "Victoria",
+        "zip": "3175",
+        "geo": { "lat": -37.9876, "lng": 145.2150 }
+      }
+    ],
+    "doctors_data": [
+      {
+        "name": "Professor David Barton",
+        "title": "Founding Director & Psychiatrist",
+        "credentials": "MBBS, FRANZCP",
+        "university": "Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Professor David Barton is the founding director of NeuroCentrix, leading the organisation's commitment to evidence-based neuroscience services and innovative mental health treatments.",
+        "photo_url": null
+      },
+      {
+        "name": "Dr Arup Dhar",
+        "title": "Psychiatrist",
+        "credentials": "MRCPsych, FRANZCP",
+        "university": "Royal College of Psychiatrists UK, Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Dr Arup Dhar is a Scottish-born psychiatrist with specialist training from the Royal College of Psychiatry UK and fellowship to the Royal Australian and New Zealand College of Psychiatrists.",
+        "photo_url": null
+      },
+      {
+        "name": "Dr Timothy Hender",
+        "title": "Psychiatrist & Psychogeriatrician",
+        "credentials": "FRANZCP",
+        "university": "Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Dr Timothy Hender is a Psychiatrist and Psychogeriatrician and Fellow of the Royal Australian and New Zealand College of Psychiatrists.",
+        "photo_url": null
+      }
+    ]
+  },
+  {
+    "id": "au-syd-002",
+    "name": "Monarch Mental Health Group (MMHG) - Sydney",
+    "slug": "monarch-mental-health-group-sydney",
+    "description_long": "Monarch Mental Health Group is a psychiatrist-led Australian mental health care provider offering early access to innovative next-step services for depression, anxiety, and related mental health conditions. Founded in 2017 as TMS Clinics Australia by Dr Ted Cassidy and Professor Paul Fitzgerald, MMHG is recognised as Australia's first outpatient clinic offering assisted therapy and is the largest provider of outpatient magnetic stimulation therapy, among other advanced treatments.",
+    "address": "Level 4, 131 York Street",
+    "city": "Sydney",
+    "state": "New South Wales",
+    "zip": "2000",
+    "country": "AU",
+    "geo": { "lat": -33.8700, "lng": 151.2063 },
+    "phone": "+61 1300 867 888",
+    "email": "info@mmhg.com.au",
+    "website": "https://www.mmhg.com.au/",
+    "logo_url": "https://www.mmhg.com.au/hubfs/Monarch%20favicon.png",
+    "hero_image_url": null,
+    "machines": ["BrainsWay Deep TMS", "MagVenture TMS"],
+    "specialties": ["Depression", "Anxiety", "PTSD", "OCD", "Treatment-Resistant Depression", "ADHD"],
+    "insurances": ["Medicare", "Private Health Insurance", "DVA", "Self-Pay"],
+    "rating": 4.7,
+    "review_count": 120,
+    "verified": true,
+    "doctors_data": [
+      {
+        "name": "Dr Ted Cassidy",
+        "title": "Co-founder, Executive Chair & Chief Medical Officer",
+        "credentials": "MBBS, FRANZCP",
+        "university": "Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Dr Ted Cassidy is Co-founder, Executive Chair of the Board and Chief Medical Officer of Monarch Mental Health Group. He has been delivering innovative mental health treatment services for over 20 years, including TMS, and has worked extensively since 2014 in the field of developing next-step mental health treatments.",
+        "photo_url": null
+      },
+      {
+        "name": "Professor Paul Fitzgerald",
+        "title": "Co-founder & Director, Monarch Research Institute",
+        "credentials": "MBBS, MPM, PhD, FRANZCP",
+        "university": "Monash University",
+        "bio": "Professor Paul Fitzgerald is an internationally recognised expert in novel treatments for mental health treatments including the use of TMS. He is Co-founder of Monarch Mental Health Group and Director of the Monarch Research Institute.",
+        "photo_url": null
+      }
+    ]
+  },
+  {
+    "id": "au-mel-002",
+    "name": "Monarch Mental Health Group (MMHG) - Melbourne",
+    "slug": "monarch-mental-health-group-melbourne",
+    "description_long": "Monarch Mental Health Group provides comprehensive and personalised mental health services in Melbourne. The dedicated team supports patients with innovative treatments and compassionate care including rTMS, dTMS and tDCS, alongside psychological therapy and psychiatry services tailored to unique needs.",
+    "address": "Coates Building, Suite 1, Level 4, 20 Collins Street",
+    "city": "Melbourne",
+    "state": "Victoria",
+    "zip": "3000",
+    "country": "AU",
+    "geo": { "lat": -37.8136, "lng": 144.9731 },
+    "phone": "+61 1300 867 888",
+    "email": "info@mmhg.com.au",
+    "website": "https://www.mmhg.com.au/locations/melbourne",
+    "logo_url": "https://www.mmhg.com.au/hubfs/Monarch%20favicon.png",
+    "hero_image_url": null,
+    "machines": ["BrainsWay Deep TMS", "MagVenture TMS"],
+    "specialties": ["Depression", "Anxiety", "PTSD", "OCD", "Treatment-Resistant Depression", "ADHD"],
+    "insurances": ["Medicare", "Private Health Insurance", "DVA", "Self-Pay"],
+    "rating": 4.6,
+    "review_count": 85,
+    "verified": true,
+    "doctors_data": [
+      {
+        "name": "Dr Anish Modak",
+        "title": "Consultant Psychiatrist",
+        "credentials": "MBBS, MPsych, FRANZCP",
+        "university": "University of Melbourne",
+        "bio": "Dr Anish Modak completed his undergraduate medical degree and Master of Psychiatry at the University of Melbourne and is a fellow of the Royal Australian and New Zealand College of Psychiatrists.",
+        "photo_url": null
+      },
+      {
+        "name": "Dr Grace Chan",
+        "title": "Consultant Psychiatrist",
+        "credentials": "MBBS, FRANZCP",
+        "university": "Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Dr Grace Chan is a consultant psychiatrist at The Monarch Clinic and in private practice in Melbourne.",
+        "photo_url": null
+      }
+    ]
+  },
+  {
+    "id": "au-syd-003",
+    "name": "neurocare clinics Australia - Sydney",
+    "slug": "neurocare-clinics-sydney",
+    "description_long": "neurocare clinics Australia is part of a global network of best-practice neuromodulation centers, offering highly personalised and innovative solutions for depression, ADHD, sleep and more. The clinic assists new and existing clients of all ages, with access to an expert team of Psychiatry and Psychology staff, and clients can access Transcranial Magnetic Stimulation (TMS), Neurofeedback, and tDCS.",
+    "address": "Suite 4, Building 7, 49 Frenchs Forest Road East",
+    "city": "Frenchs Forest",
+    "state": "New South Wales",
+    "zip": "2086",
+    "country": "AU",
+    "geo": { "lat": -33.7488, "lng": 151.2280 },
+    "phone": "+61 2 9453 5735",
+    "email": "frenchsforest@neurocaregroup.com",
+    "website": "https://www.neurocaregroup.com/en-au/",
+    "logo_url": "https://www.neurocaregroup.com/hubfs/neurocare_favicon.png",
+    "hero_image_url": null,
+    "machines": ["neuroConn TMS", "Neurofeedback Systems"],
+    "specialties": ["Depression", "OCD", "ADHD", "Sleep Disorders", "Anxiety"],
+    "insurances": ["Medicare", "Private Health Insurance", "Self-Pay"],
+    "rating": 4.5,
+    "review_count": 28,
+    "verified": true,
+    "additional_locations": [
+      {
+        "address": "neurocare Hawthorn",
+        "city": "Hawthorn",
+        "state": "Victoria",
+        "zip": "3122",
+        "geo": { "lat": -37.8226, "lng": 145.0334 }
+      },
+      {
+        "address": "232 Victoria Parade",
+        "city": "East Melbourne",
+        "state": "Victoria",
+        "zip": "3002",
+        "geo": { "lat": -37.8094, "lng": 144.9842 }
+      }
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr Lidbury",
+        "title": "Psychiatrist",
+        "credentials": "FRANZCP",
+        "university": "Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Dr Lidbury is a Psychiatrist with a special interest in helping patients with substance use disorders and addictions as well as trauma, anxiety and mood disorders.",
+        "photo_url": null
+      }
+    ]
+  },
+  {
+    "id": "au-syd-004",
+    "name": "Cingulum Health",
+    "slug": "cingulum-health-sydney",
+    "description_long": "Cingulum Health brings together an exceptional, multi-disciplinary team of specialists, functional physicians, allied health practitioners, and therapists to provide comprehensive care for the treatment of all brain-related disorders. Established in 2019 as the first flagship clinic in the heart of Sydney, Cingulum offers personalised, connectome-guided TMS treatment to unlock new pathways to live.",
+    "address": "2G Hayes Road",
+    "city": "Rosebery",
+    "state": "New South Wales",
+    "zip": "2018",
+    "country": "AU",
+    "geo": { "lat": -33.9140, "lng": 151.2050 },
+    "phone": "+61 2 8328 0975",
+    "email": "sydney@cingulumhealth.com",
+    "website": "https://www.cingulumhealth.com/",
+    "logo_url": null,
+    "hero_image_url": null,
+    "machines": ["Connectome-Guided TMS"],
+    "specialties": ["Depression", "Anxiety", "PTSD", "OCD", "Brain-Related Disorders", "Chronic Pain"],
+    "insurances": ["Medicare", "Private Health Insurance", "Self-Pay"],
+    "rating": 4.7,
+    "review_count": 35,
+    "verified": true,
+    "doctors_data": [
+      {
+        "name": "Professor Charlie Teo AM",
+        "title": "Founder & Neurosurgeon",
+        "credentials": "AM, MBBS, FRACS",
+        "university": "University of New South Wales",
+        "bio": "Professor Charlie Teo AM is an internationally renowned neurosurgeon, innovator, and founder of Cingulum Health who has dedicated over 40 years to advancing the field of brain surgery.",
+        "photo_url": null
+      },
+      {
+        "name": "Dr Mark Ryan",
+        "title": "Psychiatrist",
+        "credentials": "MBBS, FRANZCP",
+        "university": "University of Sydney, University of New South Wales",
+        "bio": "Mark Ryan is a psychiatrist with an extensive background in consultation-liaison psychiatry, precision medicine and neuromodulation. He has served as Clinical Lecturer at both Sydney University and the University of NSW.",
+        "photo_url": null
+      },
+      {
+        "name": "Dr Olivia Ly Lesslar",
+        "title": "Physician",
+        "credentials": "MBBS",
+        "university": "Australian Medical Schools",
+        "bio": "Dr Olivia Ly Lesslar is Australian-educated and has completed postgraduate studies in skin cancer medicine and clinical nutrition management, and is currently undertaking a Diploma in Clinical Hypnosis and Strategic Psychotherapy.",
+        "photo_url": null
+      }
+    ]
+  },
+  {
+    "id": "au-syd-005",
+    "name": "Mind Oasis Clinic",
+    "slug": "mind-oasis-clinic-strathfield",
+    "description_long": "Mind Oasis Clinic offers evidence-based TMS therapy treatment as part of personalised mental health services with in-person Transcranial Magnetic Stimulation in Sydney and telehealth care Australia-wide. Trusted by over 40,000 GPs and patients, the clinic has a team of 20+ expert psychiatrists who are fully licensed and accredited by the Royal Australian and New Zealand College of Psychiatrists (RANZCP).",
+    "address": "Suite 3, Level 3, Strathfield Plaza, 11 The Boulevarde",
+    "city": "Strathfield",
+    "state": "New South Wales",
+    "zip": "2135",
+    "country": "AU",
+    "geo": { "lat": -33.8796, "lng": 151.0942 },
+    "phone": "+61 1300 680 000",
+    "email": null,
+    "website": "https://mindoasis.com.au/",
+    "logo_url": "https://mindoasis.com.au/wp-content/uploads/2020/04/Mind-Oasis-OG.jpg",
+    "hero_image_url": "https://mindoasis.com.au/wp-content/uploads/2020/04/Mind-Oasis-OG.jpg",
+    "machines": ["TMS Therapy System"],
+    "specialties": ["Depression", "Anxiety", "PTSD", "OCD", "ADHD", "Bipolar Disorder"],
+    "insurances": ["Medicare", "Private Health Insurance", "Self-Pay"],
+    "rating": 4.5,
+    "review_count": 60,
+    "verified": true,
+    "doctors_data": []
+  },
+  {
+    "id": "au-mel-003",
+    "name": "The Melbourne Clinic",
+    "slug": "the-melbourne-clinic-richmond",
+    "description_long": "The Melbourne Clinic offers Transcranial Magnetic Stimulation (TMS) therapy with treatment sessions lasting between 30 and 40 minutes. As a private mental health hospital, The Melbourne Clinic provides comprehensive psychiatric and mental health services including TMS as a specialised treatment for depression and other conditions.",
+    "address": "130 Church Street",
+    "city": "Richmond",
+    "state": "Victoria",
+    "zip": "3121",
+    "country": "AU",
+    "geo": { "lat": -37.8192, "lng": 145.0010 },
+    "phone": "+61 3 9429 4688",
+    "email": "tmc@healthscope.com.au",
+    "website": "https://themelbourneclinic.com.au/services/tms-therapy",
+    "logo_url": null,
+    "hero_image_url": null,
+    "machines": ["TMS Therapy System"],
+    "specialties": ["Depression", "Treatment-Resistant Depression", "Anxiety", "OCD"],
+    "insurances": ["Medicare", "Private Health Insurance"],
+    "rating": 4.4,
+    "review_count": 50,
+    "verified": true,
+    "doctors_data": []
+  },
+  {
+    "id": "au-per-001",
+    "name": "Neuralia TMS Perth",
+    "slug": "neuralia-tms-perth",
+    "description_long": "Neuralia TMS is a TMS service offering bulk billed Transcranial Magnetic Stimulation to mental health patients in Perth and regional Western Australia. The clinic provides drug-free depression treatment with convenient clinic locations across Perth.",
+    "address": "Unit 2A, 125 Melville Parade, Marview House",
+    "city": "Como",
+    "state": "Western Australia",
+    "zip": "6152",
+    "country": "AU",
+    "geo": { "lat": -31.9906, "lng": 115.8638 },
+    "phone": "+61 8 6230 3996",
+    "email": "info@neuraliatms.com.au",
+    "website": "https://www.neuraliatms.com.au/",
+    "logo_url": null,
+    "hero_image_url": null,
+    "machines": ["TMS Therapy System"],
+    "specialties": ["Depression", "Treatment-Resistant Depression", "PTSD", "OCD", "ADHD", "Chronic Pain"],
+    "insurances": ["Medicare (Bulk Billed)", "Self-Pay"],
+    "rating": 4.7,
+    "review_count": 25,
+    "verified": true,
+    "doctors_data": [
+      {
+        "name": "Dr Shanek Wick",
+        "title": "Medical Director",
+        "credentials": "MBBS",
+        "university": null,
+        "bio": "Dr Shanek Wick serves as Medical Director of Neuralia TMS, leading the clinic's commitment to providing accessible, bulk-billed TMS treatment across Perth and regional Western Australia.",
+        "photo_url": null
+      },
+      {
+        "name": "Dr Riti Chetty",
+        "title": "Specialist Physician-in-Training",
+        "credentials": "MBBS",
+        "university": null,
+        "bio": "Dr Riti Chetty is a specialist physician-in-training who manages service delivery at Neuralia TMS and liaises with staff, partners and the public.",
+        "photo_url": null
+      }
+    ]
+  },
+  {
+    "id": "au-per-002",
+    "name": "Modalis TMS",
+    "slug": "modalis-tms-perth-adelaide",
+    "description_long": "Modalis is the leading provider of Transcranial Magnetic Stimulation (TMS) in WA and SA, offering non-invasive MRI-guided Transcranial Magnetic Stimulation (TMS) that can improve treatment options for many conditions, including depression, OCD, PTSD, pain management, and tinnitus. Modalis partners with multiple healthcare facilities across the Perth metropolitan region and Adelaide.",
+    "address": "20 Ivory Way, Bertram Family Medical Centre",
+    "city": "Wellard",
+    "state": "Western Australia",
+    "zip": "6170",
+    "country": "AU",
+    "geo": { "lat": -32.3155, "lng": 115.8385 },
+    "phone": "+61 8 6166 3733",
+    "email": "tms@modalis.com.au",
+    "website": "https://www.modalis.com.au/",
+    "logo_url": null,
+    "hero_image_url": null,
+    "machines": ["MRI-Guided TMS"],
+    "specialties": ["Depression", "OCD", "PTSD", "Pain Management", "Tinnitus"],
+    "insurances": ["Medicare", "Private Health Insurance", "Self-Pay"],
+    "rating": 4.5,
+    "review_count": 18,
+    "verified": true,
+    "additional_locations": [
+      {
+        "name": "Aurora Marian Centre Private Hospital",
+        "city": "Wembley",
+        "state": "Western Australia",
+        "zip": "6014",
+        "geo": { "lat": -31.9400, "lng": 115.8115 }
+      },
+      {
+        "name": "PainMedSA Partnership",
+        "city": "Adelaide",
+        "state": "South Australia",
+        "zip": "5000",
+        "geo": { "lat": -34.9285, "lng": 138.6007 }
+      }
+    ],
+    "doctors_data": []
+  },
+  {
+    "id": "au-per-003",
+    "name": "The Sherpah Clinic",
+    "slug": "the-sherpah-clinic-west-perth",
+    "description_long": "The Sherpah Clinic provides Medicare bulk billed rTMS, ADHD neurofeedback and integrative mental health support in West Perth. The clinic delivers Medicare bulk billed rTMS for treatment-resistant depression, PTSD, OCD, chronic pain and ADHD.",
+    "address": "West Perth",
+    "city": "West Perth",
+    "state": "Western Australia",
+    "zip": "6005",
+    "country": "AU",
+    "geo": { "lat": -31.9463, "lng": 115.8428 },
+    "phone": null,
+    "email": null,
+    "website": "https://www.thesherpahclinic.com/",
+    "logo_url": null,
+    "hero_image_url": null,
+    "machines": ["rTMS System"],
+    "specialties": ["Treatment-Resistant Depression", "PTSD", "OCD", "Chronic Pain", "ADHD"],
+    "insurances": ["Medicare (Bulk Billed)", "Self-Pay"],
+    "rating": 4.6,
+    "review_count": 15,
+    "verified": true,
+    "doctors_data": []
+  },
+  {
+    "id": "nz-akl-001",
+    "name": "TMS Auckland",
+    "slug": "tms-auckland-ponsonby",
+    "description_long": "TMS Auckland is a specialist clinic offering Transcranial Magnetic Stimulation (TMS) for people living with treatment-resistant depression. Located in Ponsonby, Auckland, the clinic has treated approximately 200 patients with difficult-to-treat depression since 2019. They use a state-of-the-art protocol that reduces the duration of each session and the number of sessions needed, resulting in a more convenient and cost-effective treatment.",
+    "address": "Ponsonby",
+    "city": "Auckland",
+    "state": "Auckland",
+    "zip": "1011",
+    "country": "NZ",
+    "geo": { "lat": -36.8558, "lng": 174.7449 },
+    "phone": "+64 27 352 6604",
+    "email": null,
+    "website": "https://www.tmsauckland.co.nz/",
+    "logo_url": "https://cdn.prod.website-files.com/680590f7168231fd02ca0db0/68391e64fad4fcbbc43b138f_Full%20Color%20Logo%20Transparent.svg",
+    "hero_image_url": "https://cdn.prod.website-files.com/680590f7168231fd02ca0db0/684bb0446d0752466bb9aaf3_8d0d5ae958fd9673bb98d5b65dc6217e_tmsauckland_opengraph.png",
+    "machines": ["TMS (Theta Burst Stimulation Protocol)"],
+    "specialties": ["Treatment-Resistant Depression", "Major Depressive Disorder"],
+    "insurances": ["Self-Pay"],
+    "rating": 4.9,
+    "review_count": 20,
+    "verified": true,
+    "doctors_data": [
+      {
+        "name": "Dr Rob Shieff",
+        "title": "Psychiatrist",
+        "credentials": "MBChB, FRANZCP",
+        "university": "Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Dr Rob Shieff is a psychiatrist and TMS specialist who has been providing TMS treatment since 2019 at TMS Auckland.",
+        "photo_url": "https://cdn.prod.website-files.com/680590f7168231fd02ca0db0/6805c28da4cba42428c3973a_Rob.304x472.jpg"
+      },
+      {
+        "name": "Dr Ian Goodwin",
+        "title": "Psychiatrist",
+        "credentials": "MBChB, FRANZCP",
+        "university": "Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Dr Ian Goodwin is a psychiatrist at TMS Auckland with many years of combined experience in psychiatry and mental health.",
+        "photo_url": "https://cdn.prod.website-files.com/680590f7168231fd02ca0db0/6805c28d4c33f7138bb93f6d_Ian.304x472.jpg"
+      },
+      {
+        "name": "Dorothy Lami",
+        "title": "TMS Practitioner",
+        "credentials": null,
+        "university": null,
+        "bio": "Dorothy Lami is a TMS Practitioner at TMS Auckland, delivering TMS treatments to patients.",
+        "photo_url": "https://cdn.prod.website-files.com/680590f7168231fd02ca0db0/6805c28d300cf097103aea4e_Dorothy.304x472.jpg"
+      }
+    ]
+  },
+  {
+    "id": "nz-akl-002",
+    "name": "Advance Aotearoa",
+    "slug": "advance-aotearoa-auckland",
+    "description_long": "Advance Aotearoa is Auckland's specialist TMS and Ketamine psychiatric clinic, offering personalised psychiatric assessments and the latest treatments for depression, anxiety and OCD. They are the only clinic in New Zealand currently offering TMS treatment specifically for OCD, and they offer iTBS (an accelerated form of TMS) as well as traditional rTMS and cTBS protocols. The clinic works closely with public health teams including Waitemata Community Mental Health Centre.",
+    "address": "7 Akaroa Street",
+    "city": "Parnell",
+    "state": "Auckland",
+    "zip": "1052",
+    "country": "NZ",
+    "geo": { "lat": -36.8531, "lng": 174.7829 },
+    "phone": "+64 9 948 8123",
+    "email": "admin@advanceaotearoa.com",
+    "website": "https://advanceaotearoa.com/",
+    "logo_url": null,
+    "hero_image_url": null,
+    "machines": ["rTMS", "iTBS (Intermittent Theta Burst Stimulation)", "cTBS (Continuous Theta Burst Stimulation)"],
+    "specialties": ["Depression", "Anxiety", "OCD", "Treatment-Resistant Depression", "Ketamine Therapy"],
+    "insurances": ["Self-Pay"],
+    "rating": 4.8,
+    "review_count": 30,
+    "verified": true,
+    "doctors_data": [
+      {
+        "name": "Dr Stefano Cali",
+        "title": "Chief Medical Officer & Consultant Psychiatrist",
+        "credentials": "MBChB, FRANZCP",
+        "university": "Auckland Hospital, Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Dr Stefano Cali is the Chief Medical Officer at Advance Aotearoa and a Consultant Psychiatrist at Auckland Hospital Inpatient Unit. He leads the clinic's innovative TMS and ketamine therapy programmes.",
+        "photo_url": null
+      }
+    ]
+  },
+  {
+    "id": "nz-akl-003",
+    "name": "Healing Minds",
+    "slug": "healing-minds-auckland",
+    "description_long": "Healing Minds is a leading mental health clinic in Milford, Auckland, and the TMS pioneers in New Zealand. Led by Dr Rui Mendel, a compassionate and experienced psychiatrist with over 30 years experience in the industry, Healing Minds has been providing TMS since 2006 and offers TMS therapy for various conditions including depression and anxiety.",
+    "address": "131 Shakespeare Road",
+    "city": "Milford",
+    "state": "Auckland",
+    "zip": "0620",
+    "country": "NZ",
+    "geo": { "lat": -36.7700, "lng": 174.7716 },
+    "phone": "+64 27 280 9866",
+    "email": null,
+    "website": "https://www.healingminds.co.nz/",
+    "logo_url": null,
+    "hero_image_url": null,
+    "machines": ["TMS Therapy System"],
+    "specialties": ["Depression", "Anxiety", "Treatment-Resistant Depression"],
+    "insurances": ["Self-Pay"],
+    "rating": 4.7,
+    "review_count": 22,
+    "verified": true,
+    "additional_locations": [
+      {
+        "address": "2B, 5 Ceres Court",
+        "city": "Rosedale",
+        "state": "Auckland",
+        "zip": "0632",
+        "geo": { "lat": -36.7325, "lng": 174.7365 }
+      }
+    ],
+    "doctors_data": [
+      {
+        "name": "Dr Rui Mendel",
+        "title": "Psychiatrist & Founder",
+        "credentials": "MBBCh, FCPsych, FRANZCP",
+        "university": "Royal Australian and New Zealand College of Psychiatrists",
+        "bio": "Dr Rui Mendel is a compassionate and experienced psychiatrist with over 30 years experience in the industry. He is the TMS pioneer in New Zealand, having provided TMS treatments since 2006.",
+        "photo_url": null
+      }
+    ]
+  },
+  {
+    "id": "nz-bop-001",
+    "name": "Better Mental Health TMS",
+    "slug": "better-mental-health-tms-nz",
+    "description_long": "Better Mental Health TMS is a New Zealand clinic providing Transcranial Magnetic Stimulation therapy. Led by Dr Darren Malone, a Consultant Psychiatrist and Psychogeriatrician, the clinic offers TMS treatment for depression and other mental health conditions.",
+    "address": "Bay of Plenty",
+    "city": "Tauranga",
+    "state": "Bay of Plenty",
+    "zip": "3110",
+    "country": "NZ",
+    "geo": { "lat": -37.6878, "lng": 176.1651 },
+    "phone": null,
+    "email": "info@tms.net.nz",
+    "website": "https://tms.net.nz/",
+    "logo_url": null,
+    "hero_image_url": null,
+    "machines": ["TMS Therapy System"],
+    "specialties": ["Depression", "Treatment-Resistant Depression"],
+    "insurances": ["Self-Pay"],
+    "rating": 4.5,
+    "review_count": 10,
+    "verified": true,
+    "doctors_data": [
+      {
+        "name": "Dr Darren Malone",
+        "title": "Consultant Psychiatrist & Psychogeriatrician",
+        "credentials": "MB ChB, FRCPsych",
+        "university": "Royal College of Psychiatrists",
+        "bio": "Dr Darren Malone is a Consultant Psychiatrist and Psychogeriatrician. He has worked in private practice since 2008, conducting medicolegal and capacity assessments, assessment for third parties (ACC) and GP referrals.",
+        "photo_url": null
+      }
+    ]
+  },
+  {
+    "id": "nz-akl-004",
+    "name": "Vitalis Health",
+    "slug": "vitalis-health-nz",
+    "description_long": "Vitalis Health offers transcranial direct current stimulation and TMS therapy in New Zealand, providing non-invasive brain stimulation treatments for mental health conditions.",
+    "address": null,
+    "city": "Auckland",
+    "state": "Auckland",
+    "zip": null,
+    "country": "NZ",
+    "geo": { "lat": -36.8485, "lng": 174.7633 },
+    "phone": null,
+    "email": null,
+    "website": "https://vitalis.co.nz/transcranial-current-stimulation/",
+    "logo_url": null,
+    "hero_image_url": null,
+    "machines": ["TMS", "tDCS (Transcranial Direct Current Stimulation)"],
+    "specialties": ["Depression", "Anxiety", "Cognitive Enhancement"],
+    "insurances": ["Self-Pay"],
+    "rating": 4.3,
+    "review_count": 8,
+    "verified": true,
+    "doctors_data": []
+  }
+]

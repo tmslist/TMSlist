@@ -1,0 +1,141 @@
+---
+/**
+ * BlogCover — Full-width hero banner with AI-generated background + title overlay.
+ * Uses Gemini to create unique topical illustrations, with a gorgeous CSS fallback
+ * that's visible immediately while the AI image loads.
+ */
+interface Props {
+  title: string;
+  subtitle?: string;
+  category?: string;
+  readTime?: string;
+  date?: string;
+  slug: string;
+}
+
+const { title, subtitle, category, readTime, date, slug } = Astro.props;
+
+// Deterministic accent color from category
+const categoryAccents: Record<string, { from: string; to: string; badge: string; badgeText: string }> = {
+  'Research':      { from: 'from-blue-600', to: 'to-indigo-900', badge: 'bg-blue-500/30', badgeText: 'text-blue-200' },
+  'Treatment':     { from: 'from-emerald-600', to: 'to-teal-900', badge: 'bg-emerald-500/30', badgeText: 'text-emerald-200' },
+  'Insurance':     { from: 'from-amber-600', to: 'to-orange-900', badge: 'bg-amber-500/30', badgeText: 'text-amber-200' },
+  'FAQ':           { from: 'from-violet-600', to: 'to-purple-900', badge: 'bg-violet-500/30', badgeText: 'text-violet-200' },
+  'Patient Guide': { from: 'from-rose-600', to: 'to-pink-900', badge: 'bg-rose-500/30', badgeText: 'text-rose-200' },
+};
+const accent = categoryAccents[category || ''] || { from: 'from-violet-600', to: 'to-slate-900', badge: 'bg-violet-500/30', badgeText: 'text-violet-200' };
+const cacheKey = `ai-img:blog-cover:${slug}`;
+---
+
+<section class="relative overflow-hidden bg-slate-950" id={`blog-cover-${slug}`}>
+  <!-- Layer 1: Deterministic gradient fallback (visible immediately) -->
+  <div class={`absolute inset-0 bg-gradient-to-br ${accent.from} ${accent.to} opacity-90`}></div>
+
+  <!-- Layer 2: Decorative pattern -->
+  <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0); background-size: 28px 28px;"></div>
+
+  <!-- Layer 3: Organic blob shapes -->
+  <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-white/[0.04] rounded-full blur-[100px]"></div>
+  <div class="absolute bottom-[-30%] left-[-5%] w-[500px] h-[500px] bg-black/10 rounded-full blur-[80px]"></div>
+
+  <!-- Layer 4: AI-generated image (loads async, blends over gradient) -->
+  <div
+    class="blog-cover-ai absolute inset-0 opacity-0 transition-opacity duration-1000 ease-out"
+    data-slug={slug}
+    data-title={title}
+    data-category={category || ''}
+    data-cache-key={cacheKey}
+  >
+    <img class="blog-cover-img w-full h-full object-cover" alt={`Illustration for ${title}`} width="1200" height="630" loading="eager" />
+    <!-- Dark overlay to keep text readable over any AI image -->
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/40"></div>
+  </div>
+
+  <!-- Layer 5: Content overlay -->
+  <div class="relative z-10 container mx-auto px-4 pt-20 pb-16 lg:pt-28 lg:pb-20">
+    <nav class="flex items-center gap-2 text-sm text-white/40 mb-10" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-white/70 transition-colors">Home</a>
+      <span class="text-white/20">/</span>
+      <a href="/blog/" class="hover:text-white/70 transition-colors">Blog</a>
+      <span class="text-white/20">/</span>
+      <span class="text-white/60 truncate max-w-[200px]">{title}</span>
+    </nav>
+
+    <div class="max-w-3xl">
+      <!-- Category + meta row -->
+      <div class="flex flex-wrap items-center gap-3 mb-6">
+        {category && (
+          <span class={`inline-flex items-center gap-1.5 px-3 py-1.5 ${accent.badge} ${accent.badgeText} rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm border border-white/10`}>
+            {category}
+          </span>
+        )}
+        {date && <span class="text-sm text-white/40">{date}</span>}
+        {readTime && (
+          <span class="text-sm text-white/40 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            {readTime}
+          </span>
+        )}
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-5">
+        {title}
+      </h1>
+
+      {subtitle && (
+        <p class="text-lg lg:text-xl text-white/60 leading-relaxed max-w-2xl">
+          {subtitle}
+        </p>
+      )}
+    </div>
+  </div>
+
+  <!-- Bottom fade to white -->
+  <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent"></div>
+</section>
+
+<script>
+  document.querySelectorAll('.blog-cover-ai').forEach(async (container) => {
+    const el = container as HTMLElement;
+    const slug = el.dataset.slug;
+    const title = el.dataset.title;
+    const category = el.dataset.category;
+    const cacheKey = el.dataset.cacheKey!;
+    const img = el.querySelector('.blog-cover-img') as HTMLImageElement;
+
+    if (!slug || !title || !img) return;
+
+    // Build a prompt subject that combines title and category for uniqueness
+    const subject = `${title}${category ? ` - ${category}` : ''}`;
+
+    // Check localStorage cache
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      try {
+        const { image, ts } = JSON.parse(cached);
+        if (Date.now() - ts < 7 * 24 * 60 * 60 * 1000 && image) {
+          img.src = image;
+          // Fade in after image loads
+          img.onload = () => { el.style.opacity = '0.35'; };
+          // If cached data URL, onload fires synchronously sometimes
+          if (img.complete) el.style.opacity = '0.35';
+          return;
+        }
+      } catch { localStorage.removeItem(cacheKey); }
+    }
+
+    // Fetch from API
+    try {
+      const params = new URLSearchParams({ type: 'hero', subject });
+      const res = await fetch(`/api/ai/generate-image?${params}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data.image) return;
+
+      localStorage.setItem(cacheKey, JSON.stringify({ image: data.image, ts: Date.now() }));
+      img.src = data.image;
+      img.onload = () => { el.style.opacity = '0.35'; };
+    } catch {}
+  });
+</script>

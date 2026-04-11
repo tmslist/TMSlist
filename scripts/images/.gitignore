@@ -1,0 +1,21 @@
+# Don't commit staging images (they get uploaded to Cloudinary)
+doctors/*.jpg
+doctors/*.jpeg
+doctors/*.png
+doctors/*.webp
+doctors/*.avif
+clinics/*.jpg
+clinics/*.jpeg
+clinics/*.png
+clinics/*.webp
+clinics/*.avif
+logos/*.jpg
+logos/*.jpeg
+logos/*.png
+logos/*.webp
+logos/*.avif
+gallery/*.jpg
+gallery/*.jpeg
+gallery/*.png
+gallery/*.webp
+gallery/*.avif

@@ -66,4 +66,62 @@ const demographics = defineCollection({
   }),
 });
 
-export const collections = { blog, treatments, insurance, comparisons, protocols, demographics };
+const research = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/research' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    author: z.string().default('TMS List Editorial Team'),
+    publishDate: z.coerce.date(),
+    category: z.string(),
+    tags: z.array(z.string()).default([]),
+    image: z.string().optional(),
+  }),
+});
+
+const stories = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/stories' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    author: z.string().default('TMS List Editorial Team'),
+    publishDate: z.coerce.date(),
+    category: z.string(),
+    tags: z.array(z.string()).default([]),
+    image: z.string().optional(),
+  }),
+});
+
+const legal = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/legal' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
+const providers = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/providers' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
+const commercial = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/commercial' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
+const quiz = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/quiz' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
+export const collections = { blog, treatments, insurance, comparisons, protocols, demographics, research, stories, legal, providers, commercial, quiz };

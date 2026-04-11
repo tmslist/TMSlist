@@ -55,6 +55,24 @@ const COUNTRY_LANG: Record<string, string> = {
 };
 const pathSegment = Astro.url.pathname.split('/')[1];
 const pageLang = COUNTRY_LANG[pathSegment] || 'en';
+
+// Auto-generate hreflang for international country pages
+const COUNTRY_PREFIXES = ['us', 'uk', 'ca', 'au', 'de', 'in', 'fr', 'es', 'it', 'nl', 'br', 'mx', 'jp', 'kr', 'se', 'nz', 'za', 'ie', 'sg', 'ae', 'il'];
+const HREFLANG_MAP: Record<string, string> = {
+	'us': 'en-US', 'uk': 'en-GB', 'ca': 'en-CA', 'au': 'en-AU', 'de': 'de-DE', 'in': 'en-IN',
+	'fr': 'fr-FR', 'es': 'es-ES', 'it': 'it-IT', 'nl': 'nl-NL', 'br': 'pt-BR', 'mx': 'es-MX',
+	'jp': 'ja-JP', 'kr': 'ko-KR', 'se': 'sv-SE', 'nz': 'en-NZ', 'za': 'en-ZA', 'ie': 'en-IE',
+	'sg': 'en-SG', 'ae': 'en-AE', 'il': 'en-IL',
+};
+const isCountryPage = COUNTRY_PREFIXES.includes(pathSegment);
+// Get the path after the country prefix (e.g., /uk/london/clinics → /london/clinics)
+const subPath = isCountryPage ? Astro.url.pathname.replace(`/${pathSegment}`, '') : '';
+// Build hreflang entries for equivalent pages across countries
+const autoHreflang = isCountryPage ? COUNTRY_PREFIXES.map(prefix => ({
+	lang: HREFLANG_MAP[prefix],
+	url: `${siteUrl}/${prefix}${subPath}`,
+})) : [];
+const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? autoHreflang : undefined);
 ---
 
 <!doctype html>
@@ -73,10 +91,10 @@ const pageLang = COUNTRY_LANG[pathSegment] || 'en';
 		<meta name="description" content={metaDescription} />
 		{noindex && <meta name="robots" content="noindex, nofollow" />}
 		<link rel="canonical" href={canonicalUrl} />
-		{hreflang?.map(({ lang, url }) => (
+		{allHreflang?.map(({ lang, url }) => (
 			<link rel="alternate" hreflang={lang} href={url} />
 		))}
-		{hreflang?.length && <link rel="alternate" hreflang="x-default" href={canonicalUrl} />}
+		{allHreflang?.length && <link rel="alternate" hreflang="x-default" href={`${siteUrl}/us${subPath || '/'}`} />}
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
@@ -93,9 +111,11 @@ const pageLang = COUNTRY_LANG[pathSegment] || 'en';
 		<meta name="twitter:description" content={metaDescription} />
 		<meta name="twitter:image" content={ogImage} />
 
-		<!-- Fonts loaded via global.css @import (Plus Jakarta Sans + Bricolage Grotesque) -->
+		<!-- Fonts — preloaded for non-blocking render -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&display=swap" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&display=swap" media="print" onload="this.media='all'" />
 
 		<!-- Generator -->
 		<meta name="generator" content={Astro.generator} />

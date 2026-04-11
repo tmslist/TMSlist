@@ -1,7 +1,33 @@
 ---
-import ContentPage from '../../layouts/ContentPage.astro';
+
+import Layout from '../../layouts/Layout.astro';
+import BlogCover from '../../components/BlogCover.astro';
 import { getCollection, render } from 'astro:content';
 import { BLOG_SLUGS } from '../../utils/seo_slugs';
+
+// Blog metadata for cover rendering (category, date, readTime)
+const blogMeta: Record<string, { category?: string; date?: string; readTime?: string }> = {
+  'stanford-neuromodulation-therapy-snt-2026': { category: 'Research', date: 'April 2026', readTime: '9 min' },
+  'tms-for-postpartum-depression': { category: 'Treatment', date: 'April 2026', readTime: '7 min' },
+  'ai-guided-tms-targeting-2026': { category: 'Research', date: 'April 2026', readTime: '8 min' },
+  'tms-covered-by-medicare-2026-update': { category: 'Insurance', date: 'April 2026', readTime: '6 min' },
+  'tms-for-anxiety-fda-breakthrough': { category: 'Research', date: 'March 2026', readTime: '7 min' },
+  'theta-burst-vs-standard-tms': { category: 'Treatment', date: 'March 2026', readTime: '8 min' },
+  'real-cost-of-tms-therapy-2026': { category: 'Insurance', date: 'March 2026', readTime: '10 min' },
+  'tms-and-ketamine-together': { category: 'Treatment', date: 'March 2026', readTime: '9 min' },
+  'tms-at-home-devices-2026': { category: 'FAQ', date: 'March 2026', readTime: '7 min' },
+  'choosing-tms-clinic-red-flags': { category: 'Patient Guide', date: 'February 2026', readTime: '8 min' },
+  'tms-for-ocd-deep-tms-results': { category: 'Research', date: 'February 2026', readTime: '7 min' },
+  'what-tms-actually-feels-like': { category: 'Patient Guide', date: 'February 2026', readTime: '6 min' },
+  'tms-for-veterans-va-coverage': { category: 'Insurance', date: 'February 2026', readTime: '8 min' },
+  'tms-during-pregnancy-safety-data': { category: 'Research', date: 'February 2026', readTime: '7 min' },
+  'tms-success-rates-2026': { category: 'Research', date: 'January 2026', readTime: '8 min' },
+  'tms-vs-medication': { category: 'Treatment', date: 'January 2026', readTime: '10 min' },
+  'how-to-prepare-for-tms': { category: 'Patient Guide', date: 'January 2026', readTime: '5 min' },
+  'does-tms-cause-memory-loss': { category: 'FAQ', date: 'January 2026', readTime: '6 min' },
+  'can-i-drive-after-tms': { category: 'Patient Guide', date: 'January 2026', readTime: '4 min' },
+  'how-long-does-tms-last': { category: 'Research', date: 'January 2026', readTime: '7 min' },
+};
 
 export async function getStaticPaths() {
   const entries = await getCollection('blog');
@@ -23,17 +49,144 @@ export async function getStaticPaths() {
 }
 
 const { title, description, hasContent, entry } = Astro.props;
+const slug = Astro.params.slug!;
+const meta = blogMeta[slug] || {};
+
 let Content: any = null;
 if (hasContent && entry) {
   const rendered = await render(entry);
   Content = rendered.Content;
 }
+
+const reviewerName = "Dr. Karan Narwal";
+const reviewerTitle = "Mental Health Specialist & Consultant";
+const reviewerImage = "/images/dr-karan-narwal.jpg";
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const articleSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description || `Expert insights on ${title} — evidence-based information on TMS therapy.`,
+  "image": `${siteUrl}/images/blog/${slug}.webp`,
+  "author": {
+    "@type": "Organization",
+    "name": "TMS List Editorial Team",
+    "url": siteUrl,
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TMS List",
+    "url": siteUrl,
+    "logo": { "@type": "ImageObject", "url": `${siteUrl}/favicon.svg` },
+  },
+  "datePublished": meta.date ? new Date(`${meta.date} 1, 2026`).toISOString().split('T')[0] : undefined,
+  "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/blog/${slug}/` },
+  "reviewedBy": {
+    "@type": "Person",
+    "name": reviewerName,
+    "jobTitle": reviewerTitle,
+  },
+});
 ---
 
-<ContentPage
-  title={title}
-  subtitle={description || "Expert insights and evidence-based information on TMS therapy."}
-  description={description}
->
-  {Content ? <Content /> : null}
-</ContentPage>
+<Layout title={`${title} | TMS List`} description={description} schema={articleSchema} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Blog", url: "/blog/" },
+  { name: title, url: `/blog/${slug}/` },
+]}>
+  <BlogCover
+    title={title}
+    subtitle={description || "Expert insights and evidence-based information on TMS therapy."}
+    category={meta.category}
+    date={meta.date}
+    readTime={meta.readTime}
+    slug={slug}
+  />
+
+  <main class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <!-- Article Column -->
+      <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none">
+        <p class="lead text-xl text-gray-600 mb-8">
+          Everything you need to know about <strong>{title}</strong> — how it works, what it costs, and how to find a provider who actually knows what they're doing.
+        </p>
+
+        {Content ? <Content /> : (
+          <div>
+            <div class="bg-gray-50 border-l-4 border-primary p-6 mb-8 rounded-r-xl">
+              <h3 class="text-primary font-semibold mt-0">Current as of 2026</h3>
+              <p class="mb-0">This guide reflects the latest regulatory approvals and clinical data for {title}.</p>
+            </div>
+
+            <h2>What is {title}?</h2>
+            <p>TMS uses magnetic pulses to wake up parts of the brain that aren't firing the way they should. For depression, that's usually the left dorsolateral prefrontal cortex — a region that tends to be underactive in people with treatment-resistant symptoms.</p>
+            <p>It's not experimental. TMS was first cleared for depression in 2008, later for OCD and smoking cessation. It's now approved by regulatory bodies worldwide including the FDA (US), NICE (UK), TGA (Australia), and Health Canada. Over a million treatments have been performed globally.</p>
+
+            <h3>What to expect</h3>
+            <ul>
+              <li><strong>No surgery, no sedation.</strong> You sit in a chair. A coil sits against your head. Sessions take 20-40 minutes.</li>
+              <li><strong>It works for a lot of people.</strong> About 50-60% of patients with treatment-resistant depression see meaningful improvement. Around a third achieve full remission.</li>
+              <li><strong>Side effects are mild.</strong> Most people report some scalp discomfort during the first few sessions. It usually fades.</li>
+              <li><strong>Approved and increasingly covered by insurance.</strong> In the US, Medicare and most major plans cover TMS. In the UK, Australia, and other countries, public and private coverage is expanding.</li>
+            </ul>
+
+            <h2>Does insurance cover it?</h2>
+            <p>Short answer: probably, if you meet the criteria. Most plans require:</p>
+            <ul>
+              <li>A diagnosis of Major Depressive Disorder (MDD)</li>
+              <li>You've tried 2-4 antidepressants that didn't work well enough</li>
+              <li>Prior authorization from your insurance company</li>
+            </ul>
+            <p>The prior auth process can take a few days to a couple weeks. Many TMS clinics handle this for you — it's worth asking when you call.</p>
+
+            <h2>How to pick a provider</h2>
+            <p>Not all TMS clinics are the same. Here's what matters:</p>
+            <ul>
+              <li><strong>The device they use.</strong> NeuroStar, BrainsWay, and MagVenture are the big three. Each has different strengths.</li>
+              <li><strong>Who's supervising treatment.</strong> A board-certified psychiatrist should be involved in your care, not just a technician.</li>
+              <li><strong>Patient reviews.</strong> What do other people say about the experience? That tells you more than any brochure.</li>
+            </ul>
+
+            <div class="not-prose mt-12 p-8 bg-blue-900 rounded-2xl text-white text-center">
+              <h3 class="text-2xl font-semibold mb-4">Ready to find a clinic?</h3>
+              <p class="text-blue-100 mb-8">Browse verified TMS providers with real reviews and insurance info.</p>
+              <a href="/us/" class="inline-block bg-white text-blue-900 font-semibold py-3 px-8 rounded-xl hover:bg-blue-50 transition-colors">Find a Clinic Near You</a>
+            </div>
+          </div>
+        )}
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-4 space-y-8">
+        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+          <h4 class="font-semibold text-gray-900 mb-4 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
+          <div class="flex items-center gap-4">
+            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" />
+            <div>
+              <div class="font-semibold text-gray-900">{reviewerName}</div>
+              <div class="text-xs text-gray-500">{reviewerTitle}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-2xl">
+          <h4 class="font-semibold text-gray-900 mb-4 uppercase text-xs tracking-wider">Related Topics</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="/insurance/medicare/" class="text-gray-600 hover:text-primary transition-colors">Does Medicare Cover TMS?</a></li>
+            <li><a href="/technology/neurostar/" class="text-gray-600 hover:text-primary transition-colors">How NeuroStar Works</a></li>
+            <li><a href="/treatments/anxiety/" class="text-gray-600 hover:text-primary transition-colors">TMS for Anxiety</a></li>
+            <li><a href="/compare/tms-vs-medication/" class="text-gray-600 hover:text-primary transition-colors">TMS vs. Medication</a></li>
+            <li><a href="/quiz/am-i-a-candidate/" class="text-gray-600 hover:text-primary transition-colors">Am I a Candidate?</a></li>
+          </ul>
+        </div>
+
+        <div class="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+          <h4 class="font-semibold text-gray-900 mb-2 text-sm">Not sure where to start?</h4>
+          <p class="text-sm text-gray-600 mb-4">Take a 2-minute quiz to see if TMS might be right for you.</p>
+          <a href="/quiz/am-i-a-candidate/" class="inline-block text-sm font-semibold text-primary hover:text-primary-dark transition-colors">Take the Quiz</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+</Layout>

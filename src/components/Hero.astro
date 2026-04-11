@@ -1,10 +1,14 @@
 ---
+import AiHeroImage from './AiHeroImage.astro';
+
 interface Props {
   title: string;
   subtitle: string;
+  imageSubject?: string;
+  imageType?: 'treatment' | 'hero' | 'city';
 }
 
-const { title, subtitle } = Astro.props;
+const { title, subtitle, imageSubject, imageType = 'hero' } = Astro.props;
 ---
 
 <!-- Premium Hero: Subtle gradient background with pattern -->
@@ -25,14 +29,25 @@ const { title, subtitle } = Astro.props;
         <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-gray-900 tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
             {title}
         </h1>
-        
+
         <p class="text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
             {subtitle}
         </p>
 
+        <!-- AI-Generated Hero Image -->
+        {imageSubject && (
+            <div class="max-w-3xl mx-auto mb-10">
+                <AiHeroImage
+                    subject={imageSubject}
+                    type={imageType}
+                    alt={`Illustration for ${title}`}
+                />
+            </div>
+        )}
+
         <!-- Search Bar Container (Optional, if this hero is reused for search) -->
         <slot name="search" />
-        
+
         <!-- Trust Signals Row -->
         <div class="mt-12 pt-8 border-t border-gray-100/50 flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-semibold text-gray-400">
              <div class="flex items-center gap-2">

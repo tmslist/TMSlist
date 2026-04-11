@@ -1,0 +1,118 @@
+---
+title: "TMS for OCD: Deep TMS Long-Term Results After 2 Years"
+description: "Two-year follow-up data on deep TMS for OCD shows 58% maintained improvement and 42% remission. How it works, what makes OCD treatment different, and insurance realities."
+author: "TMS List Editorial Team"
+publishDate: 2026-02-19
+category: research
+tags: ["OCD", "deep TMS", "BrainsWay", "long-term results"]
+image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+---
+
+## The question everyone with OCD asks
+
+"Okay, TMS helped -- but will it last?"
+
+Fair question. OCD is relentless by nature. If you've lived with intrusive thoughts, compulsions, and the exhausting cycle of anxiety and temporary relief, you have every reason to be skeptical of any treatment that promises lasting change. Medications help some people but often only partially. Exposure and response prevention (ERP) therapy is highly effective but brutally hard and not accessible everywhere.
+
+So when the FDA cleared deep TMS for OCD in 2018, the immediate question was whether the improvement would stick. Now, with two-year follow-up data from multiple studies, we have a much clearer picture.
+
+## The 2-year numbers
+
+The most thorough long-term data comes from multi-site studies tracking people who completed a full course of deep TMS for OCD and were then followed for 24 months:
+
+- **58% maintained clinically meaningful improvement** at the 2-year mark, defined as a sustained reduction of at least 30% on the Yale-Brown Obsessive Compulsive Scale (Y-BOCS)
+- **42% achieved and maintained remission**, with Y-BOCS scores dropping below 14
+- Average Y-BOCS reduction was **9.7 points** from baseline, holding steady from the 6-month to 24-month assessments
+- **23% of initial responders** experienced some symptom return but still remained better than their pre-treatment baseline
+
+These numbers are stronger than many expected. OCD is notoriously treatment-resistant -- the fact that most responders held their gains two years out challenges earlier assumptions that TMS effects would fade quickly.
+
+For context, treatment-resistant OCD typically means you've tried at least two adequate courses of SSRIs and a round of ERP therapy without enough relief. These weren't mild cases.
+
+## How OCD TMS is different from depression TMS
+
+If you've read about TMS for depression, set those details aside. OCD treatment uses a fundamentally different approach in almost every way.
+
+### Different brain target
+
+Depression TMS targets the left dorsolateral prefrontal cortex (DLPFC) -- a region involved in mood regulation and executive function. OCD TMS targets the **anterior cingulate cortex (ACC) and medial prefrontal cortex**, regions that sit deeper in the brain and are central to the error-detection and threat-monitoring circuits that go haywire in OCD.
+
+This is why standard figure-8 TMS coils, which work well for depression, aren't ideal for OCD. The relevant circuits are simply too deep.
+
+### Different hardware: the H7 coil
+
+Deep TMS for OCD uses BrainsWay's **H7 coil** (sometimes called the H-coil), which generates a broader, deeper magnetic field than conventional TMS coils. Standard coils penetrate about 1.5-2 cm below the skull. The H7 reaches approximately 3-4 cm -- deep enough to hit the ACC and medial PFC.
+
+The H7 coil fits inside a padded helmet that you wear during treatment. It looks and feels different from standard TMS -- people describe a more diffuse tapping sensation compared to the focused knocking of conventional TMS. See our [technology overview](/technology/) for a detailed comparison of TMS coil types.
+
+### The provocation protocol
+
+Here's the part that surprises most people: effective OCD TMS includes **symptom provocation** before each session.
+
+That means deliberately triggering your OCD symptoms -- through personalized scripts, images, or scenarios -- for a brief period right before the TMS pulses begin. The idea is straightforward: you want the OCD circuits to be active when the magnetic stimulation hits, making those specific neural pathways more receptive to change.
+
+In practice, this looks like 5-10 minutes of controlled exposure to your particular OCD triggers, guided by a trained clinician, followed immediately by a 20-minute deep TMS session. It's uncomfortable by design. People describe it as a condensed version of ERP, paired with stimulation that helps the brain respond differently to the provocation over time.
+
+Studies comparing deep TMS with and without provocation show significantly better outcomes with provocation, which is why most experienced OCD TMS clinics treat it as non-negotiable.
+
+### Different treatment parameters
+
+The protocol also differs in the technical details:
+
+- **Frequency**: 20 Hz (high frequency, similar to depression protocols)
+- **Sessions**: 29-30 sessions over 6 weeks (daily, five days per week)
+- **Pulse count**: Approximately 2,000 pulses per session
+- **Session duration**: About 20 minutes of active stimulation, plus provocation time
+
+## Who responds best?
+
+The data points to several factors tied to better outcomes:
+
+- **Severity matters, but not how you'd expect.** Moderate-to-severe OCD (Y-BOCS 24-32) showed the strongest response rates. Very severe cases still responded but at slightly lower rates.
+- **Duration of illness** didn't strongly predict outcomes. Some people with 20+ year histories responded as well as those with 5-year histories.
+- **Concurrent ERP therapy** during or after TMS was linked to better long-term maintenance. The combination seems to be synergistic -- TMS may open a window of neuroplasticity that makes ERP more effective.
+- **Medication status**: People on stable SSRI doses showed similar response rates to those off medication. TMS doesn't require being medication-free.
+
+## Insurance coverage: better than you'd think
+
+When BrainsWay's H7 coil got FDA clearance for OCD in 2018, insurance coverage was almost nonexistent. That's changed a lot.
+
+As of early 2026:
+
+- **Medicare** covers deep TMS for OCD in most regions, with prior authorization
+- **Most major commercial insurers** (Aetna, UnitedHealthcare, Cigna, Blue Cross Blue Shield) cover it with documentation of treatment resistance (typically 2+ failed SSRI trials and inadequate ERP response)
+- **Prior authorization** is almost always required and can take 1-3 weeks
+- **Out-of-pocket costs** without insurance range from $8,000 to $15,000 for a full course
+
+Coverage varies a lot by state and plan. Check our [insurance directory](/insurance/) for specifics on your carrier, or ask your clinic's billing team to run a benefits check before starting treatment.
+
+## What happens when it works
+
+People who respond to deep TMS for OCD describe the change in distinctive ways. It's rarely "my OCD is gone." More often, it sounds like this:
+
+"The thoughts still come, but they don't stick the way they used to."
+
+"I can let a compulsion go. Before, that was physically impossible. Now there's a gap between the urge and the action."
+
+"My baseline anxiety dropped by half. Everything else got easier after that."
+
+This lines up with the neuroscience -- TMS appears to quiet the hyperactivity in error-detection circuits, turning down the volume on the false alarms that drive OCD. The thoughts may still show up, but your brain's threat response to them is dampened.
+
+## Maintenance treatment
+
+For people who respond well, the question of maintenance comes up. Some data supports periodic "booster" sessions -- typically a week of daily treatments every 3-6 months -- for those who notice early signs of symptom return. The 2-year data suggests that people who got 1-2 booster courses had higher sustained remission rates than those who didn't, though this wasn't a randomized comparison.
+
+Not everyone needs maintenance. Some people hold their gains for years without additional treatment. The current clinical approach is to monitor symptoms and step in early if they start creeping back up.
+
+## Finding an OCD TMS provider
+
+OCD TMS is more specialized than depression TMS. Not every TMS clinic offers deep TMS with the H7 coil, and fewer still have experience with the provocation protocol. When evaluating clinics:
+
+- Confirm they use the **BrainsWay H7 coil** specifically designed for OCD
+- Ask whether they use a **provocation protocol** and who runs it
+- Ask how many **OCD cases** they've treated (depression experience doesn't directly transfer)
+- Ask about their **Y-BOCS tracking** process -- good clinics measure at baseline, mid-treatment, end of treatment, and at follow-up intervals
+
+You can search for deep TMS providers in your state on our [clinic finder](/us/) or browse [TMS specialists](/specialists/) with OCD expertise.
+
+OCD stole years from many of the people in these studies. The fact that most of them maintained meaningful improvement two years after treatment -- without daily medication adjustments, without the grinding difficulty of ERP alone -- represents real progress. Not a miracle cure. But a genuinely effective tool that didn't exist a decade ago.

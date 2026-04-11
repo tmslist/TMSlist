@@ -3,25 +3,15 @@ import Layout from '../../layouts/Layout.astro';
 import { getAllClinics, getClinicsByMachine } from '../../utils/clinicData';
 import { ClinicMachine } from '../../types/clinic';
 
-export async function getStaticPaths() {
-  const clinics = await getAllClinics();
-  // Get all unique machines used across all clinics
-  const uniqueMachines = [...new Set(clinics.flatMap(c => c.machines))];
+const { slug } = Astro.params;
 
-  const paths = [];
-  for (const machine of uniqueMachines) {
-    const machineClinics = await getClinicsByMachine(machine);
-    const slug = machine.toLowerCase().replace(/\s+/g, '-');
-    
-    paths.push({
-      params: { slug },
-      props: { machineName: machine, machineClinics },
-    });
-  }
-  return paths;
-}
+// Find the machine name from slug
+const allClinics = await getAllClinics();
+const uniqueMachines = [...new Set(allClinics.flatMap(c => c.machines))];
+const machineName = uniqueMachines.find(m => m.toLowerCase().replace(/\s+/g, '-') === slug);
+if (!machineName) return Astro.redirect("/technology/");
 
-const { machineName, machineClinics } = Astro.props;
+const machineClinics = await getClinicsByMachine(machineName);
 const title = `${machineName} TMS Therapy Clinics - TMS List`;
 
 const techSchema = JSON.stringify({
@@ -58,9 +48,26 @@ const techSchema = JSON.stringify({
 
     <div class="bg-violet-50 rounded-xl p-8 mb-8 text-center">
          <h1 class="text-3xl font-semibold text-gray-900 mb-2">{machineName} Clinics</h1>
-         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+         <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
             Browse all verified clinics using {machineName} technology for TMS therapy.
          </p>
+         <div class="max-w-2xl mx-auto">
+           <div
+             class="ai-hero-image relative overflow-hidden rounded-2xl"
+             data-subject={`${machineName} TMS device`}
+             data-type="hero"
+             data-cache-key={`ai-img:hero:${machineName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-tms-device`}
+             data-alt={`AI illustration of ${machineName} TMS device`}
+           >
+             <div class="ai-img-placeholder aspect-[16/9] w-full bg-gradient-to-br from-violet-100/60 via-slate-50 to-blue-100/60 animate-pulse rounded-2xl">
+               <div class="absolute inset-0 flex items-center justify-center">
+                 <span class="text-xs font-medium text-slate-300 tracking-wide">Generating illustration...</span>
+               </div>
+             </div>
+             <img class="ai-img-result hidden w-full aspect-[16/9] object-cover rounded-2xl shadow-lg ring-1 ring-slate-200/50" alt="" loading="lazy" width="800" height="450" />
+             <div class="ai-img-fallback hidden"></div>
+           </div>
+         </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -6,13 +6,15 @@ image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&h=400
 
 ## Two different approaches to treatment-resistant depression
 
-TMS and ketamine both treat depression through mechanisms that don't involve traditional antidepressants, but they work in fundamentally different ways. TMS uses magnetic pulses to stimulate underactive brain regions. Ketamine modulates glutamate, the brain's primary excitatory neurotransmitter.
+TMS and ketamine both go after depression through pathways that have nothing to do with traditional antidepressants. But they get there very differently.
+
+TMS uses magnetic pulses to wake up underactive brain regions. Ketamine modulates glutamate — the brain's main excitatory neurotransmitter. Same goal, completely different mechanism.
 
 ### How they work
 
-**TMS (Transcranial Magnetic Stimulation)** targets the left dorsolateral prefrontal cortex with repetitive magnetic pulses. Over weeks of treatment, this gradually restores normal neural activity in mood-regulating circuits. The effects build cumulatively.
+**TMS (Transcranial Magnetic Stimulation)** targets the left dorsolateral prefrontal cortex with repetitive magnetic pulses. Over weeks of treatment, it gradually restores normal neural activity in your mood circuits. The effects build session by session.
 
-**Ketamine** (including Spravato/esketamine) blocks NMDA receptors and triggers a rapid cascade of neuroplastic changes. It can produce noticeable mood improvement within hours to days — much faster than TMS.
+**Ketamine** (including Spravato/esketamine) blocks NMDA receptors and kicks off a rapid cascade of neuroplastic changes. Here's what makes it interesting: it can produce noticeable mood improvement within hours to days. That's dramatically faster than TMS.
 
 ### Efficacy comparison
 
@@ -25,9 +27,9 @@ TMS and ketamine both treat depression through mechanisms that don't involve tra
 
 ### Side effects
 
-**TMS:** Scalp discomfort, mild headache. No systemic effects. Patients drive themselves to and from sessions.
+**TMS:** Scalp discomfort, mild headache. No systemic effects. You drive yourself to and from sessions.
 
-**Ketamine/Spravato:** Dissociation, dizziness, nausea, elevated blood pressure, sedation. Patients must be monitored for 2 hours after each session and cannot drive themselves home. There are also concerns about potential for abuse with IV ketamine.
+**Ketamine/Spravato:** Dissociation, dizziness, nausea, elevated blood pressure, sedation. You must be monitored for 2 hours after each session and can't drive yourself home. With IV ketamine, there are also concerns about abuse potential.
 
 ### Treatment schedule and cost
 
@@ -45,30 +47,30 @@ TMS and ketamine both treat depression through mechanisms that don't involve tra
 
 **Spravato (esketamine nasal spray):**
 - Twice weekly for 4 weeks, then weekly, then every 1-2 weeks
-- Must be administered at a certified clinic (REMS program)
+- Must be given at a certified clinic (REMS program)
 - $600-$900 per session before insurance
-- FDA-approved — better insurance coverage than IV ketamine
+- FDA-approved — so better insurance coverage than IV ketamine
 
 ### Insurance coverage
 
 - **TMS:** Widely covered by Medicare, most private insurers, and Tricare after documented medication failures
-- **Spravato:** FDA-approved, so covered by many plans with prior authorization
-- **IV Ketamine:** Rarely covered (off-label use)
+- **Spravato:** FDA-approved, covered by many plans with prior authorization
+- **IV Ketamine:** Rarely covered (off-label use) — expect to pay out of pocket
 
 ### Who should choose which?
 
 **TMS may be better if:**
 - You want lasting results without ongoing maintenance
-- You prefer a non-sedating treatment (continue working during treatment)
+- You prefer staying clear-headed during treatment (you can keep working)
 - You've failed 1-3 medications
-- Insurance coverage is a factor
+- Insurance coverage matters to you
 
 **Ketamine may be better if:**
-- You need rapid relief (crisis situations)
-- You've failed TMS or multiple other treatments
+- You need rapid relief — like, this week
+- You've already tried TMS or multiple other treatments
 - You can commit to ongoing maintenance sessions
-- You're comfortable with dissociative side effects
+- You're okay with dissociative side effects
 
 ### Can you do both?
 
-Yes. Some clinicians combine TMS and ketamine, using ketamine for rapid stabilization while TMS builds longer-term neural changes. This combination approach is being studied but isn't yet standard practice.
+Yes. Some clinicians combine TMS and ketamine — using ketamine for rapid stabilization while TMS builds the longer-term neural changes underneath. This combination is being studied but isn't standard practice yet.

@@ -2,66 +2,56 @@
 import Layout from "../../../layouts/Layout.astro";
 import { getAllQuestions } from "../../../db/queries";
 
-export async function getStaticPaths() {
-    const questionsData = await getAllQuestions();
-    const categories = {
-        basics: {
-            name: "TMS Basics",
-            description: "Understanding TMS therapy fundamentals",
-        },
-        cost: {
-            name: "Cost & Insurance",
-            description: "Pricing, coverage, and payment options",
-        },
-        conditions: {
-            name: "Conditions Treated",
-            description: "Effectiveness for different mental health conditions",
-        },
-        comparisons: {
-            name: "Treatment Comparisons",
-            description: "How TMS compares to other therapies",
-        },
-        location: {
-            name: "Locations & Providers",
-            description: "Finding and choosing TMS providers",
-        },
-        safety: {
-            name: "Safety & Side Effects",
-            description: "Understanding risks and safety protocols",
-        },
-        timeline: {
-            name: "Treatment Timeline",
-            description: "Duration, frequency, and what to expect",
-        },
-        experience: {
-            name: "Patient Experience",
-            description: "What it feels like and patient stories",
-        },
-        technology: {
-            name: "Technology & Devices",
-            description: "Different TMS machines and technologies",
-        },
-        procedure: {
-            name: "The Procedure",
-            description: "Step-by-step guide to TMS sessions",
-        },
-    };
+const categories: Record<string, { name: string; description: string }> = {
+    basics: {
+        name: "TMS Basics",
+        description: "Understanding TMS therapy fundamentals",
+    },
+    cost: {
+        name: "Cost & Insurance",
+        description: "Pricing, coverage, and payment options",
+    },
+    conditions: {
+        name: "Conditions Treated",
+        description: "Effectiveness for different mental health conditions",
+    },
+    comparisons: {
+        name: "Treatment Comparisons",
+        description: "How TMS compares to other therapies",
+    },
+    location: {
+        name: "Locations & Providers",
+        description: "Finding and choosing TMS providers",
+    },
+    safety: {
+        name: "Safety & Side Effects",
+        description: "Understanding risks and safety protocols",
+    },
+    timeline: {
+        name: "Treatment Timeline",
+        description: "Duration, frequency, and what to expect",
+    },
+    experience: {
+        name: "Patient Experience",
+        description: "What it feels like and patient stories",
+    },
+    technology: {
+        name: "Technology & Devices",
+        description: "Different TMS machines and technologies",
+    },
+    procedure: {
+        name: "The Procedure",
+        description: "Step-by-step guide to TMS sessions",
+    },
+};
 
-    return Object.keys(categories).map((key) => {
-        const categoryQuestions = questionsData.filter(
-            (q) => q.category === key,
-        );
-        return {
-            params: { category: key },
-            props: {
-                category: categories[key as keyof typeof categories],
-                questions: categoryQuestions,
-            },
-        };
-    });
-}
+const { category: categoryKey } = Astro.params;
 
-const { category, questions } = Astro.props;
+const category = categories[categoryKey!];
+if (!category) return Astro.redirect("/questions/");
+
+const questionsData = await getAllQuestions();
+const questions = questionsData.filter((q) => q.category === categoryKey);
 
 const title = `${category.name} Questions & Answers | TMS List`;
 const description = `Expert answers to common questions about ${category.name.toLowerCase()}. ${category.description}.`;

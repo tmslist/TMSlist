@@ -2,8 +2,8 @@
  * Seed questions and treatments (run after main seed).
  * Usage: DATABASE_URL=... npx tsx scripts/seed-extras.ts
  */
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+import postgres from 'postgres';
+import { drizzle } from 'drizzle-orm/postgres-js';
 import { questions, treatments } from '../src/db/schema';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
@@ -18,7 +18,7 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
-const sql = neon(DATABASE_URL);
+const sql = postgres(DATABASE_URL);
 const db = drizzle(sql);
 
 async function seedQuestions() {

@@ -4,9 +4,9 @@ description: "Comparing CloudTMS and NeuroStar TMS systems — technology, cloud
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
 ---
 
-## Cloud-connected TMS vs established market leader
+## Cloud-connected TMS vs the established market leader
 
-NeuroStar is the longest-established commercial TMS system in the US. CloudTMS is a newer entrant that differentiates through cloud connectivity, real-time data analytics, and flexible protocol options.
+NeuroStar has been around longest in the US commercial TMS space. CloudTMS is the newer player, and it's betting on cloud connectivity, real-time analytics, and flexibility to carve out its niche.
 
 ### Technology
 
@@ -18,42 +18,42 @@ NeuroStar is the longest-established commercial TMS system in the US. CloudTMS i
 - Most widely installed system in the US
 
 **CloudTMS:**
-- Figure-8 coil design with cloud-connected platform
-- Real-time treatment data streaming to cloud dashboard
+- Figure-8 coil design with a cloud-connected platform
+- Real-time treatment data streaming to a cloud dashboard
 - Multi-provider analytics and benchmarking
 - Supports multiple protocol types including theta burst
-- Designed for multi-site clinic operations
+- Built with multi-site clinic operations in mind
 
 ### Key differentiators
 
 **CloudTMS advantages:**
-- Cloud dashboard allows practice owners to monitor all locations remotely
+- Cloud dashboard lets practice owners monitor every location remotely
 - Real-time treatment analytics and outcome tracking
 - Standardized protocol delivery across multiple sites
-- Built for multi-location clinic management
+- Built for multi-location clinic management from the ground up
 - Potentially lower capital cost for smaller practices
 
 **NeuroStar advantages:**
 - Longest FDA clearance history (since 2008)
 - Largest clinical evidence base
-- Most recognizable brand to patients and insurers
+- Most recognizable brand — patients and insurers know the name
 - Express TMS protocol (19-minute theta burst)
 - Largest installed base and service network
 
 ### Clinical outcomes
 
-Both devices use similar figure-8 coil technology and can deliver equivalent protocols:
-- Response rates: 50-60% for both when using comparable parameters
+Both use similar figure-8 coil technology and can deliver equivalent protocols:
+- Response rates: 50-60% for both when parameters match
 - Remission rates: 30-35% for both
-- Session duration: Both offer standard (37 min) and theta burst (19-20 min) options
+- Both offer standard (37 min) and theta burst (19-20 min) sessions
 
-The clinical outcome differences between these devices are minimal — provider expertise matters more.
+The clinical differences between these devices? Minimal. Your provider's skill matters more.
 
 ### For clinics choosing a system
 
-- **NeuroStar** for brand recognition, longest track record, and patients who specifically request it
-- **CloudTMS** for multi-site operations, data-driven practice management, and potentially more flexible pricing models
+- **NeuroStar** for brand recognition, the longest track record, and patients who ask for it by name
+- **CloudTMS** for multi-site operations, data-driven practice management, and more flexible pricing models
 
-### For patients
+### For you as a patient
 
-Your outcomes depend on your provider's expertise, not which device they use. Both systems deliver equivalent treatment when protocols are matched. Focus on finding a qualified, experienced provider rather than a specific device brand.
+Your outcomes depend on your provider's expertise, not which device they own. Both systems deliver equivalent treatment when protocols are matched. Spend your energy finding a qualified, experienced provider — not comparison-shopping device brands.

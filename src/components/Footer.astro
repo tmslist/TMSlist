@@ -114,11 +114,13 @@ const internationalDirectory = await buildInternationalDirectory();
                 <ul class="space-y-2.5">
                     <li><a href="/blog/" class="text-[13px] hover:text-white transition-colors">Blog</a></li>
                     <li><a href="/questions/" class="text-[13px] hover:text-white transition-colors">FAQs</a></li>
-                    <li><a href="/resources/" class="text-[13px] hover:text-white transition-colors">eBooks and Guides</a></li>
+                    <li><a href="/resources/" class="text-[13px] hover:text-white transition-colors">Guides & Downloads</a></li>
                     <li><a href="/stories/" class="text-[13px] hover:text-white transition-colors">Patient Stories</a></li>
-                    <li><a href="/research/" class="text-[13px] hover:text-white transition-colors">Research and Trials</a></li>
+                    <li><a href="/research/" class="text-[13px] hover:text-white transition-colors">Research & Trials</a></li>
                     <li><a href="/compare/" class="text-[13px] hover:text-white transition-colors">Compare Treatments</a></li>
                     <li><a href="/alternative-treatments/" class="text-[13px] hover:text-white transition-colors">Alternative Treatments</a></li>
+                    <li><a href="/tms-cost-guide/" class="text-[13px] hover:text-white transition-colors">TMS Cost Guide 2026</a></li>
+                    <li><a href="/glossary/" class="text-[13px] hover:text-white transition-colors">TMS Glossary</a></li>
                 </ul>
 
                 <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mt-8 mb-5">Protocols</h4>
@@ -155,9 +157,12 @@ const internationalDirectory = await buildInternationalDirectory();
                 <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mb-5">For Providers</h4>
                 <ul class="space-y-2.5">
                     <li><a href="/add-listing/" class="text-[13px] text-violet-400 hover:text-white transition-colors font-medium">List Your Clinic</a></li>
-                    <li><a href="/add-listing/?type=doctor" class="text-[13px] hover:text-white transition-colors">List as Doctor</a></li>
+                    <li><a href="/claim-listing/" class="text-[13px] hover:text-white transition-colors">Claim Your Listing</a></li>
                     <li><a href="/providers/" class="text-[13px] hover:text-white transition-colors">Provider Directory</a></li>
-                    {COMMERCIAL_SLUGS.slice(0, 6).map((item) => (
+                    <li><a href="/advertise/" class="text-[13px] hover:text-white transition-colors">Advertise</a></li>
+                    <li><a href="/tms-cpt-codes/" class="text-[13px] hover:text-white transition-colors">TMS CPT Codes 2026</a></li>
+                    <li><a href="/starting-a-tms-clinic/" class="text-[13px] hover:text-white transition-colors">Starting a TMS Clinic</a></li>
+                    {COMMERCIAL_SLUGS.slice(0, 4).map((item) => (
                         <li><a href={`/providers/services/${item.slug}/`} class="text-[13px] hover:text-white transition-colors">{item.title}</a></li>
                     ))}
                     <li><a href="/admin/login/" class="text-[13px] text-emerald-400 hover:text-white transition-colors font-medium mt-2 block">Provider Login</a></li>
@@ -167,6 +172,10 @@ const internationalDirectory = await buildInternationalDirectory();
                 <ul class="space-y-2.5">
                     <li><a href="/about-us/" class="text-[13px] hover:text-white transition-colors">About Us</a></li>
                     <li><a href="/contact/" class="text-[13px] hover:text-white transition-colors">Contact</a></li>
+                    <li><a href="/careers/" class="text-[13px] hover:text-white transition-colors">Careers</a></li>
+                    <li><a href="/how-we-rank/" class="text-[13px] hover:text-white transition-colors">How We Rank</a></li>
+                    <li><a href="/editorial-policy/" class="text-[13px] hover:text-white transition-colors">Editorial Policy</a></li>
+                    <li><a href="/accessibility/" class="text-[13px] hover:text-white transition-colors">Accessibility</a></li>
                     <li><a href="/sitemap/" class="text-[13px] hover:text-white transition-colors">Sitemap</a></li>
                 </ul>
             </div>

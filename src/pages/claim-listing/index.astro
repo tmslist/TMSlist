@@ -1,0 +1,167 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "Claim Your TMS Clinic Listing | Manage Your Profile | TMS List";
+const description = "Claim your TMS clinic listing on TMS List. Manage your profile, respond to patient reviews, track leads, and get verified badge. Free for all providers.";
+
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Claim Your Clinic Listing",
+    "description": description,
+    "publisher": {
+        "@type": "Organization",
+        "name": "TMS List",
+        "url": "https://tmslist.com"
+    }
+});
+
+const benefits = [
+    { title: "Verified Badge", desc: "Stand out with a verified checkmark that tells patients your information is confirmed and up to date.", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", color: "emerald" },
+    { title: "Lead Notifications", desc: "Get real-time email and SMS alerts when patients request appointments or submit inquiries through your listing.", icon: "M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9", color: "violet" },
+    { title: "Performance Analytics", desc: "Track profile views, search impressions, inquiry volume, and how you compare to nearby competitors.", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", color: "blue" },
+    { title: "Edit Your Profile", desc: "Update contact info, services offered, insurance accepted, hours, photos, and doctor bios at any time.", icon: "M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z", color: "amber" },
+    { title: "Review Management", desc: "Respond to patient reviews publicly, flag inappropriate content, and showcase your commitment to patient care.", icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z", color: "cyan" },
+    { title: "Priority Placement", desc: "Verified clinics with complete profiles rank higher in search results, increasing your visibility to patients.", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", color: "rose" },
+];
+
+const colorMap: Record<string, { bg: string; text: string }> = {
+    emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600' },
+    violet: { bg: 'bg-violet-50', text: 'text-violet-600' },
+    blue: { bg: 'bg-blue-50', text: 'text-blue-600' },
+    amber: { bg: 'bg-amber-50', text: 'text-amber-600' },
+    cyan: { bg: 'bg-cyan-50', text: 'text-cyan-600' },
+    rose: { bg: 'bg-rose-50', text: 'text-rose-600' },
+};
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Claim Listing", url: "/claim-listing/" },
+]}>
+    <main>
+        <!-- Hero -->
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+            <div class="absolute top-[-10%] right-[20%] w-[500px] h-[500px] bg-emerald-600/12 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[5%] left-[10%] w-[350px] h-[350px] bg-violet-500/8 rounded-full blur-[100px]"></div>
+
+            <div class="container mx-auto px-4 pt-12 pb-20 lg:pt-16 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">Claim Listing</span>
+                </nav>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-end">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
+                            <span class="flex h-2 w-2 rounded-full bg-emerald-400"></span>
+                            <span class="text-xs font-semibold text-slate-300 tracking-wide">Free for Providers</span>
+                        </div>
+                        <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-6">
+                            Claim Your<br/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400">Clinic Listing</span>
+                        </h1>
+                        <p class="text-lg text-slate-400 leading-relaxed max-w-xl">
+                            Take control of your TMS List profile. Manage your information, respond to reviews, track patient inquiries, and grow your practice with verified status.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4 lg:justify-end">
+                        <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <div class="text-3xl font-bold text-white">1,500+</div>
+                            <div class="text-xs text-slate-400 font-medium mt-1">Clinics Listed</div>
+                        </div>
+                        <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <div class="text-3xl font-bold text-emerald-400">Free</div>
+                            <div class="text-xs text-slate-400 font-medium mt-1">To Claim</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+        </section>
+
+        <!-- 3-Step Process -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">Three Simple Steps</h2>
+                    <p class="text-slate-500 max-w-2xl mx-auto">Claiming your listing takes less than 5 minutes. Here is how it works.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="relative text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-violet-600 text-white flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </div>
+                        <div class="absolute top-8 left-[60%] right-[-40%] h-0.5 bg-gradient-to-r from-violet-200 to-transparent hidden md:block"></div>
+                        <span class="inline-block px-3 py-1 bg-violet-50 text-violet-600 text-xs font-bold rounded-full mb-3">Step 1</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Search</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">Find your clinic in our directory by name, address, or phone number. If your clinic is not listed, you can add it for free.</p>
+                    </div>
+
+                    <div class="relative text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-emerald-600 text-white flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <div class="absolute top-8 left-[60%] right-[-40%] h-0.5 bg-gradient-to-r from-emerald-200 to-transparent hidden md:block"></div>
+                        <span class="inline-block px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full mb-3">Step 2</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Verify</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">Confirm ownership via phone verification, email domain match, or documentation upload. Verification usually completes within 24 hours.</p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-blue-600 text-white flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <span class="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded-full mb-3">Step 3</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Manage</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">Access your dashboard to update your profile, respond to reviews, view analytics, and manage your listing at any time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Grid -->
+        <section class="py-16 lg:py-24 bg-slate-50">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-4">Why Claim Your Listing?</h2>
+                    <p class="text-slate-500 max-w-2xl mx-auto">Verified clinics see significantly more patient inquiries. Here is what you get when you claim your profile.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {benefits.map((b) => (
+                        <div class="bg-white rounded-2xl border border-slate-100 p-6 hover:shadow-md hover:border-slate-200 transition-all">
+                            <div class={`w-12 h-12 rounded-xl ${colorMap[b.color].bg} ${colorMap[b.color].text} flex items-center justify-center mb-4`}>
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={b.icon}/></svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">{b.title}</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed">{b.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="relative py-20 bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-emerald-600/10 via-transparent to-violet-600/10"></div>
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <p class="text-sm font-semibold text-emerald-400 tracking-wider uppercase mb-4">Ready to Get Started?</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">Claim your listing today</h2>
+                <p class="text-slate-400 max-w-lg mx-auto mb-10">Search for your clinic in our directory or add a new listing. It is free and takes less than 5 minutes.</p>
+                <div class="flex items-center justify-center gap-4 flex-wrap">
+                    <a href="/us/" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-emerald-600/25">
+                        Search for Your Clinic
+                    </a>
+                    <a href="/add-listing/" class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">
+                        Add New Listing
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

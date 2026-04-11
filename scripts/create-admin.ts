@@ -2,8 +2,8 @@
  * Create admin user in the database.
  * Usage: DATABASE_URL=... npx tsx scripts/create-admin.ts
  */
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+import postgres from 'postgres';
+import { drizzle } from 'drizzle-orm/postgres-js';
 import { users } from '../src/db/schema';
 import bcrypt from 'bcryptjs';
 
@@ -18,7 +18,7 @@ const password = process.argv[3] || 'TmsList2026!';
 const name = process.argv[4] || 'Admin';
 
 async function main() {
-  const sql = neon(DATABASE_URL!);
+  const sql = postgres(DATABASE_URL!);
   const db = drizzle(sql);
 
   const passwordHash = await bcrypt.hash(password, 12);

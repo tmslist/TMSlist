@@ -8,17 +8,11 @@ import { STATE_NAMES, getAllClinics } from "../../utils/clinicData";
 import { getDoctorPhoto, hasRealClinicImage, COUNTRY_NAMES, COUNTRY_URL_PREFIXES } from "../../utils/dataHelpers";
 import { getClinicLogoUrl } from "../../utils/images";
 
-export async function getStaticPaths() {
-    const allClinics = await getAllClinics();
-    return allClinics
-        .filter((clinic: any) => clinic.verified)
-        .map((clinic: any) => ({
-            params: { slug: clinic.slug },
-            props: { clinic },
-        }));
-}
+const { slug } = Astro.params;
 
-const { clinic } = Astro.props;
+const allClinics = await getAllClinics();
+const clinic = allClinics.find((c: any) => c.slug === slug);
+if (!clinic) return Astro.redirect("/us/");
 
 // Handle data access robustly
 const city = clinic.address_obj?.city || clinic.city;
@@ -159,8 +153,12 @@ const galleryImages = clinic.gallery_urls || [];
                         <img
                             src={logoUrl}
                             alt={`${clinic.name} logo`}
+                            width="64"
+                            height="64"
                             class="w-16 h-16 rounded-2xl object-cover border border-slate-100 shadow-sm shrink-0"
                             loading="eager"
+                            fetchpriority="high"
+                            decoding="async"
                         />
                         <h1 class="text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.05]">
                             {clinic.name}
@@ -192,6 +190,8 @@ const galleryImages = clinic.gallery_urls || [];
                         height="600"
                         class="w-full h-full object-cover"
                         loading="eager"
+                        fetchpriority="high"
+                        decoding="async"
                     />
                     {clinic.hero_image_url && (
                         <div class="absolute top-4 right-4 inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-emerald-700 border border-emerald-100 shadow-sm">
@@ -288,8 +288,8 @@ const galleryImages = clinic.gallery_urls || [];
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                                 </div>
                                 <div>
-                                    <h4 class="text-[15px] font-bold text-slate-900">{machine}</h4>
-                                    <p class="text-xs text-slate-500 mt-1">FDA-Cleared Technology</p>
+                                    <h3 class="text-[15px] font-bold text-slate-900">{machine}</h3>
+                                    <p class="text-xs text-slate-500 mt-1">Approved Technology</p>
                                 </div>
                             </div>
                         ))}
@@ -370,7 +370,7 @@ const galleryImages = clinic.gallery_urls || [];
                         </div>
                     </div>
 
-                    <h4 class="text-sm font-bold text-slate-900 mb-4">Recognized Networks</h4>
+                    <h3 class="text-sm font-bold text-slate-900 mb-4">Recognized Networks</h3>
                     <div class="flex flex-wrap gap-2">
                         {insurances.map((ins: string) => (
                             <span class="px-3 py-1.5 bg-slate-50 text-slate-600 rounded border border-slate-200 text-[13px] font-medium">
@@ -462,10 +462,10 @@ const galleryImages = clinic.gallery_urls || [];
 
                     <!-- Hours Card -->
                     <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-                        <h4 class="text-[15px] font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <h3 class="text-[15px] font-bold text-slate-900 mb-4 flex items-center gap-2">
                             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             Hours of Operation
-                        </h4>
+                        </h3>
                         <div class="space-y-3">
                             {(clinic.opening_hours || ["Hours not yet verified — please call to confirm"]).map((hours: string) => (
                                 <div class="flex justify-between items-center text-[13px] font-medium border-b border-slate-50 pb-2 last:border-0 last:pb-0">

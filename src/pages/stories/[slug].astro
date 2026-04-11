@@ -1,15 +1,49 @@
 ---
+export const prerender = true;
+
 import ContentPage from '../../layouts/ContentPage.astro';
+import { getCollection, render } from 'astro:content';
 import { STORIES_SLUGS } from '../../utils/seo_slugs';
 
-export function getStaticPaths() {
-  return STORIES_SLUGS.map(({ slug, title }) => ({
-    params: { slug },
-    props: { title },
-  }));
+export async function getStaticPaths() {
+  let contentPaths: any[] = [];
+  try {
+    const entries = await getCollection('stories');
+    contentPaths = entries.map((entry) => ({
+      params: { slug: entry.id },
+      props: { title: entry.data.title, description: entry.data.description || '', hasContent: true, entry },
+    }));
+  } catch { /* collection may not exist yet */ }
+
+  const contentSlugsSet = new Set(contentPaths.map(p => p.params.slug));
+  const fallbackPaths = STORIES_SLUGS
+    .filter(({ slug }) => !contentSlugsSet.has(slug))
+    .map(({ slug, title }) => ({
+      params: { slug },
+      props: { title, description: '', hasContent: false, entry: null },
+    }));
+
+  return [...contentPaths, ...fallbackPaths];
 }
 
-const { title } = Astro.props;
+const { title, description, hasContent, entry } = Astro.props;
+const slug = Astro.params.slug!;
+let Content: any = null;
+if (hasContent && entry) {
+  const rendered = await render(entry);
+  Content = rendered.Content;
+}
 ---
 
-<ContentPage title={title} subtitle="Real stories from real patients." />
+<ContentPage
+  title={title}
+  subtitle={description || "Real stories from TMS therapy patients."}
+  description={description}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Patient Stories", url: "/stories/" },
+    { name: title, url: `/stories/${slug}/` },
+  ]}
+>
+  {Content ? <Content /> : null}
+</ContentPage>

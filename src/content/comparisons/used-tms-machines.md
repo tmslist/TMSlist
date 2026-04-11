@@ -6,7 +6,9 @@ image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fi
 
 ## Should your clinic buy used TMS equipment?
 
-New TMS systems cost $70,000-$150,000+. Used or refurbished units can cost 40-60% less. For clinics starting a TMS program or expanding to additional locations, used equipment can make financial sense — but there are important risks to understand.
+New TMS systems run $70,000-$150,000+. Used or refurbished units can cost 40-60% less. If you're starting a TMS program or adding a second location, used equipment can make real financial sense.
+
+But there are traps. Let's walk through them.
 
 ### Potential savings
 
@@ -17,59 +19,59 @@ New TMS systems cost $70,000-$150,000+. Used or refurbished units can cost 40-60
 | BrainsWay | $90,000-$150,000 | $50,000-$90,000 | 35-45% |
 | Magstim | $50,000-$80,000 | $25,000-$45,000 | 40-50% |
 
-*Prices approximate and vary by condition, age, and included accessories.*
+*Prices are approximate and vary by condition, age, and what's included.*
 
 ### What to inspect
 
-**Coil condition (most important):**
-- TMS coils degrade with use — they have a finite lifespan measured in pulses
-- Ask for the pulse count on the coil (most systems track this)
-- A coil nearing end-of-life may need replacement ($5,000-$15,000)
-- Check for physical damage, cable wear, and connector integrity
+**Coil condition — this is the big one:**
+- TMS coils degrade with use. They have a finite lifespan measured in pulses.
+- Ask for the pulse count. Most systems track this.
+- A coil nearing end-of-life means a replacement bill of $5,000-$15,000 right after purchase. That eats your savings fast.
+- Check for physical damage, cable wear, and connector integrity.
 
 **System software:**
-- Verify the software version is current and updatable
-- Confirm the manufacturer still supports the software version
-- Check if protocol updates (e.g., theta burst) are included or require paid upgrades
+- Verify the software version is current and can be updated
+- Confirm the manufacturer still supports that version
+- Check if protocol updates (like theta burst) are included or require a paid upgrade
 
 **Calibration and safety:**
 - Request calibration records
 - Verify the system passes manufacturer diagnostic tests
-- Check safety interlocks and emergency stop function
+- Check safety interlocks and the emergency stop function
 
 ### Risks of used equipment
 
-1. **No manufacturer warranty** — used equipment typically sold "as is"
-2. **Coil replacement costs** — may need a new coil soon after purchase
-3. **Software lockout** — some manufacturers restrict software to authorized dealers
-4. **Service limitations** — manufacturer may not service equipment sold through third parties
-5. **Regulatory compliance** — ensure equipment meets current FDA requirements
-6. **Training** — manufacturer training may not be available for used equipment purchases
+1. **No manufacturer warranty** — used equipment is usually sold "as is"
+2. **Coil replacement costs** — you might need a new coil within months
+3. **Software lockout** — some manufacturers restrict software to authorized dealers only
+4. **Service limitations** — the manufacturer may refuse to service equipment sold through third parties
+5. **Regulatory compliance** — make sure the equipment meets current FDA requirements
+6. **Training gaps** — manufacturer training may not be available for secondhand purchases
 
 ### Where to buy
 
-- **Manufacturer refurbished programs:** NeuroStar and others offer certified refurbished units with limited warranty — the safest used option
-- **Medical equipment dealers:** Companies specializing in used psychiatric/neurological equipment
-- **Direct from clinics:** Clinics closing or upgrading may sell directly
-- **Auction sites:** Higher risk, lower prices, minimal recourse if problems arise
+- **Manufacturer refurbished programs:** NeuroStar and others offer certified refurbished units with limited warranties. This is the safest used option by far.
+- **Medical equipment dealers:** Companies specializing in used psychiatric and neurological equipment
+- **Direct from clinics:** Clinics that are closing or upgrading sometimes sell directly
+- **Auction sites:** Higher risk, lower prices, minimal recourse if something's wrong
 
 ### Recommendations
 
 **Do:**
-- Buy manufacturer-certified refurbished when possible
+- Buy manufacturer-certified refurbished when you can
 - Get an independent inspection before purchasing
-- Verify pulse count on coils
+- Verify the pulse count on coils
 - Confirm software is current and licensable
-- Budget for potential coil replacement within first year
-- Ensure manufacturer will provide service (even if out of warranty)
+- Budget for potential coil replacement within the first year
+- Make sure the manufacturer will provide service (even out of warranty)
 
 **Don't:**
 - Buy without knowing the coil pulse count
 - Assume software includes all protocols
-- Skip the service agreement discussion
-- Buy from unknown sellers without recourse
+- Skip the service agreement conversation
+- Buy from unknown sellers with no recourse
 - Forget to budget for installation, training, and ongoing maintenance
 
 ### The bottom line
 
-Used TMS equipment can save clinics $30,000-$70,000, but the savings evaporate if you need immediate coil replacement or can't get manufacturer support. Certified refurbished from the manufacturer is the safest path. For all other used purchases, thorough due diligence is essential.
+Used TMS equipment can save your clinic $30,000-$70,000. But those savings disappear if you need an immediate coil replacement or can't get manufacturer support. Certified refurbished from the manufacturer is the safest path. For everything else, do your homework. Thoroughly.

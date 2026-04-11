@@ -1,0 +1,136 @@
+---
+export const prerender = false;
+
+import Layout from "../../../../../layouts/Layout.astro";
+import ClinicCard from "../../../../../components/ClinicCard.astro";
+import { getClinicsByCountryRegionCity } from "../../../../../utils/dataHelpers";
+import { COUNTRY_META } from "../../../../../utils/countryData";
+import { TREATMENT_SLUGS } from "../../../../../utils/seo_slugs";
+import { calculateClinicScore } from "../../../../../utils/ranking";
+
+const { region, city, treatment } = Astro.params;
+const meta = COUNTRY_META['DE'];
+const regionName = (region || '').replace(/-/g, ' ').replace(/\b\w/g, (ch: string) => ch.toUpperCase());
+const cityName = (city || '').replace(/-/g, ' ').replace(/\b\w/g, (ch: string) => ch.toUpperCase());
+const treatmentEntry = TREATMENT_SLUGS.find(t => t.slug === treatment);
+const conditionName = treatmentEntry ? treatmentEntry.title.replace('TMS for ', '') : (treatment || '').replace(/-/g, ' ').replace(/\b\w/g, (ch: string) => ch.toUpperCase());
+
+const clinics = await getClinicsByCountryRegionCity('DE', regionName, cityName);
+const sorted = [...clinics].sort((a, b) => calculateClinicScore(b) - calculateClinicScore(a));
+
+const title = `${conditionName} Treatment with TMS in ${cityName}, Germany | TMS List`;
+const description = `Find TMS providers for ${conditionName.toLowerCase()} in ${cityName}, ${regionName}, Germany. Compare ${sorted.length} verified clinics, check costs (${meta?.sessionCostRange || 'varies'}), and book consultations.`;
+---
+
+<Layout title={title} description={description} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Germany", url: "/de/" },
+    { name: regionName, url: `/de/${region}/` },
+    { name: cityName, url: `/de/${region}/${city}/` },
+    { name: conditionName, url: `/de/${region}/${city}/${treatment}/` },
+]}>
+    <main>
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] right-[15%] w-[500px] h-[500px] bg-violet-600/12 rounded-full blur-[150px]"></div>
+
+            <div class="container mx-auto px-4 pt-10 pb-24 lg:pt-14 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-10 flex-wrap" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <a href="/de/" class="hover:text-violet-400 transition-colors">Germany</a>
+                    <span class="text-slate-700">/</span>
+                    <a href={`/de/${region}/`} class="hover:text-violet-400 transition-colors">{regionName}</a>
+                    <span class="text-slate-700">/</span>
+                    <a href={`/de/${region}/${city}/`} class="hover:text-violet-400 transition-colors">{cityName}</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">{conditionName}</span>
+                </nav>
+
+                <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight mb-5">
+                    {conditionName} Treatment<br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">in {cityName}</span>
+                </h1>
+                <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
+                    {sorted.length > 0
+                        ? `Compare ${sorted.length} verified TMS providers treating ${conditionName.toLowerCase()} in ${cityName}, Germany. Session costs: ${meta?.sessionCostRange || 'varies by clinic'}.`
+                        : `Find TMS providers for ${conditionName.toLowerCase()} near ${cityName}, Germany.`
+                    }
+                </p>
+                <div class="flex flex-wrap gap-3 mt-8">
+                    <div class="px-5 py-3 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                        <span class="text-2xl font-bold text-white">{sorted.length}</span>
+                        <span class="text-xs text-slate-400 ml-2">Clinics</span>
+                    </div>
+                    {meta && (
+                        <div class="px-5 py-3 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <span class="text-sm font-bold text-emerald-400">{meta.sessionCostRange}</span>
+                            <span class="text-xs text-slate-400 ml-2">per session</span>
+                        </div>
+                    )}
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+        </section>
+
+        <section class="py-12 lg:py-16 bg-white">
+            <div class="container mx-auto px-4">
+                {sorted.length > 0 ? (
+                    <>
+                        <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-8">{conditionName} TMS Providers in {cityName}</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {sorted.map(clinic => <ClinicCard clinic={clinic} />)}
+                        </div>
+                    </>
+                ) : (
+                    <div class="text-center py-16">
+                        <h2 class="text-xl font-bold text-slate-900 mb-3">No clinics found for this treatment in {cityName}</h2>
+                        <p class="text-slate-500 mb-6">Browse all clinics in the region instead.</p>
+                        <a href={`/de/${region}/`} class="px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-colors">All {regionName} Clinics</a>
+                    </div>
+                )}
+            </div>
+        </section>
+
+        <section class="py-16 bg-slate-50">
+            <div class="container mx-auto px-4 max-w-4xl prose prose-lg prose-slate">
+                <h2>About {conditionName} Treatment with TMS in {cityName}, Germany</h2>
+                <p>
+                    Transcranial Magnetic Stimulation (TMS) is a non-invasive brain stimulation therapy used to treat {conditionName.toLowerCase()} by targeting specific brain regions with focused magnetic pulses. In {cityName}, {sorted.length > 0 ? `${sorted.length} verified clinics` : 'providers'} offer this treatment.
+                </p>
+                <p>
+                    TMS is {meta?.tmsStatus || 'available'} in Germany. Sessions typically cost {meta?.sessionCostRange || 'varies'}, with treatment courses involving 20-36 sessions over 4-6 weeks. {meta?.insuranceNote || ''}
+                </p>
+                <h3>Choosing a TMS Provider in {cityName}</h3>
+                <p>When selecting a clinic in {cityName} for {conditionName.toLowerCase()} treatment, consider the treating psychiatrist's experience, TMS device used, insurance acceptance, and patient reviews. All clinics listed on TMS List are verified.</p>
+                <p><a href={`/treatments/${treatment}/`}>Read our complete guide to TMS for {conditionName.toLowerCase()}</a></p>
+            </div>
+        </section>
+
+        <section class="py-12 bg-white border-t border-slate-100">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Other TMS Treatments in {cityName}</h2>
+                <div class="flex flex-wrap gap-2">
+                    {TREATMENT_SLUGS.filter(t => t.slug !== treatment).slice(0, 10).map(t => (
+                        <a href={`/de/${region}/${city}/${t.slug}/`}
+                           class="px-4 py-2 bg-slate-50 border border-slate-200 text-sm font-medium text-slate-700 rounded-xl hover:border-violet-300 hover:text-violet-600 transition-all">
+                            {t.title.replace('TMS for ', '')}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <section class="relative py-16 bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <h2 class="text-2xl font-bold text-white mb-4">Find the right TMS provider for {conditionName.toLowerCase()}</h2>
+                <p class="text-slate-400 mb-8">Take our assessment or browse clinics in {cityName}.</p>
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <a href="/quiz/am-i-a-candidate/" class="px-8 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">Am I a Candidate?</a>
+                    <a href={`/de/${region}/${city}/`} class="px-8 py-3.5 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all">All {cityName} Clinics</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

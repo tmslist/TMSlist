@@ -2,63 +2,39 @@
 import Layout from "../../../../layouts/Layout.astro";
 import ClinicCard from "../../../../components/ClinicCard.astro";
 import {
-    getUniqueStates,
     getClinicsByState,
-    getStateSlug,
+    getStateCodeFromSlug,
     STATE_NAMES,
 } from "../../../../utils/dataHelpers";
 import { INSURANCE_SLUGS } from "../../../../utils/seo_slugs";
 import { calculateClinicScore } from "../../../../utils/ranking";
-
-export async function getStaticPaths() {
-    const paths = [];
-    const uniqueStates = await getUniqueStates();
-
-    for (const stateCode of uniqueStates) {
-        const stateSlug = getStateSlug(stateCode);
-        const stateName = STATE_NAMES[stateCode] || stateCode;
-        const stateClinics = await getClinicsByState(stateCode);
-
-        INSURANCE_SLUGS.forEach((insurance) => {
-            // Filter clinics in this state that accept this insurance
-            const relevantClinics = stateClinics.filter((c) =>
-                (c.insurance_accepted || c.insurances || []).some(
-                    (i) =>
-                        i
-                            .toLowerCase()
-                            .includes(insurance.title.toLowerCase()) ||
-                        i
-                            .toLowerCase()
-                            .includes(insurance.slug.replace("-", " ")),
-                ),
-            );
-
-            if (relevantClinics.length > 0) {
-                paths.push({
-                    params: {
-                        slug: insurance.slug,
-                        state: stateSlug,
-                    },
-                    props: {
-                        insuranceTitle: insurance.title,
-                        stateName,
-                        clinics: relevantClinics,
-                    },
-                });
-            }
-        });
-    }
-
-    return paths;
-}
-
 import {
     generateBreadcrumbSchema,
     generateMedicalClinicListSchema,
 } from "../../../../utils/schema";
 
-const { insuranceTitle, stateName, clinics } = Astro.props;
 const { slug, state } = Astro.params;
+
+// Find insurance by slug
+const insurance = INSURANCE_SLUGS.find((i) => i.slug === slug);
+if (!insurance) return Astro.redirect("/insurance/");
+
+const stateCode = getStateCodeFromSlug(state!);
+if (!stateCode) return Astro.redirect("/insurance/");
+
+const insuranceTitle = insurance.title;
+const stateName = STATE_NAMES[stateCode] || stateCode;
+
+const stateClinics = await getClinicsByState(stateCode);
+const clinics = stateClinics.filter((c) =>
+    (c.insurance_accepted || c.insurances || []).some(
+        (i) =>
+            i.toLowerCase().includes(insurance.title.toLowerCase()) ||
+            i.toLowerCase().includes(insurance.slug.replace("-", " ")),
+    ),
+);
+
+if (clinics.length === 0) return Astro.redirect("/insurance/");
 
 // Sort by score
 const sortedClinics = [...clinics].sort(

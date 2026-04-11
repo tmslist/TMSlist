@@ -47,6 +47,17 @@ const schema = JSON.stringify({
     <section class="relative bg-white border-b border-slate-100 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
         <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+        <div
+          class="ai-hero-image absolute inset-0 opacity-20"
+          data-subject="Germany"
+          data-type="city"
+          data-cache-key="ai-img:city:de"
+          data-alt="Illustration of Germany"
+        >
+          <div class="ai-img-placeholder absolute inset-0"></div>
+          <img class="ai-img-result hidden w-full h-full object-cover" alt="" loading="lazy" />
+          <div class="ai-img-fallback hidden"></div>
+        </div>
         <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
             <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
                 <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
@@ -91,3 +102,37 @@ const schema = JSON.stringify({
     </section>
   </main>
 </Layout>
+
+<script>
+  document.querySelectorAll('.ai-hero-image').forEach(async (container) => {
+    const el = container as HTMLElement;
+    const subject = el.dataset.subject;
+    const type = el.dataset.type;
+    const cacheKey = el.dataset.cacheKey!;
+    const img = el.querySelector('.ai-img-result') as HTMLImageElement;
+    if (!subject || !type || !img) return;
+
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      try {
+        const { image, ts } = JSON.parse(cached);
+        if (Date.now() - ts < 7 * 24 * 60 * 60 * 1000 && image) {
+          img.src = image;
+          img.classList.remove('hidden');
+          return;
+        }
+      } catch { localStorage.removeItem(cacheKey); }
+    }
+
+    try {
+      const params = new URLSearchParams({ type, subject });
+      const res = await fetch(`/api/ai/generate-image?${params}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data.image) return;
+      localStorage.setItem(cacheKey, JSON.stringify({ image: data.image, ts: Date.now() }));
+      img.src = data.image;
+      img.classList.remove('hidden');
+    } catch {}
+  });
+</script>

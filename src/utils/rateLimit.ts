@@ -1,4 +1,5 @@
-import { apiRateLimit, formRateLimit } from './redis';
+import { Ratelimit } from '@upstash/ratelimit';
+import { apiRateLimit, formRateLimit, redis } from './redis';
 
 /**
  * Check rate limit for a request. Returns null if allowed, or a Response if blocked.
@@ -33,4 +34,52 @@ export async function checkRateLimit(
   }
 
   return null;
+}
+
+/**
+ * Strict rate limit by a custom identifier (email, IP, etc.).
+ * Returns null if allowed, or a 429 Response if blocked.
+ */
+export async function strictRateLimit(
+  identifier: string,
+  maxRequests: number,
+  window: string,
+  prefix: string,
+): Promise<Response | null> {
+  const r = redis();
+  if (!r) return null; // Redis not configured, allow all
+
+  const limiter = new Ratelimit({
+    redis: r,
+    limiter: Ratelimit.slidingWindow(maxRequests, window as Parameters<typeof Ratelimit.slidingWindow>[1]),
+    analytics: true,
+    prefix: `ratelimit:${prefix}`,
+  });
+
+  const { success, limit, reset } = await limiter.limit(identifier);
+
+  if (!success) {
+    return new Response(JSON.stringify({
+      error: 'Too many requests. Please try again later.',
+      retryAfter: Math.ceil((reset - Date.now()) / 1000),
+    }), {
+      status: 429,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Limit': limit.toString(),
+        'X-RateLimit-Remaining': '0',
+        'X-RateLimit-Reset': reset.toString(),
+        'Retry-After': Math.ceil((reset - Date.now()) / 1000).toString(),
+      },
+    });
+  }
+
+  return null;
+}
+
+/** Extract client IP from request headers. */
+export function getClientIp(request: Request): string {
+  return request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+    || request.headers.get('x-real-ip')
+    || 'unknown';
 }

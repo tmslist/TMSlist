@@ -6,6 +6,7 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://tmslist.com',
+  output: 'server',
   adapter: vercel(),
   vite: {
     build: {
@@ -15,7 +16,15 @@ export default defineConfig({
     },
   },
   integrations: [
-    sitemap(),
+    sitemap({
+      filter: (page) =>
+        !page.includes('/admin/') &&
+        !page.includes('/portal/') &&
+        !page.includes('/owner/') &&
+        !page.includes('/account/') &&
+        !page.includes('/thank-you') &&
+        !page.includes('/unsubscribe'),
+    }),
     react(),
   ],
   security: {

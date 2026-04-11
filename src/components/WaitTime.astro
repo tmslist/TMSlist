@@ -1,0 +1,16 @@
+---
+interface Props { availability?: { wait_time_weeks?: number; same_week_available?: boolean; accepting_new_patients?: boolean }; }
+const { availability } = Astro.props;
+const weeks = availability?.wait_time_weeks;
+const sameWeek = availability?.same_week_available;
+const accepting = availability?.accepting_new_patients;
+
+let text = '';
+let color = '';
+if (!accepting) { text = 'Not accepting patients'; color = 'text-gray-500 bg-gray-100'; }
+else if (sameWeek) { text = 'Available this week'; color = 'text-emerald-700 bg-emerald-50'; }
+else if (weeks && weeks <= 2) { text = `~${weeks} week wait`; color = 'text-amber-700 bg-amber-50'; }
+else if (weeks && weeks > 2) { text = `${weeks}+ week wait`; color = 'text-red-700 bg-red-50'; }
+else { text = 'Accepting patients'; color = 'text-emerald-700 bg-emerald-50'; }
+---
+{text && <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${color}`}>{text}</span>}

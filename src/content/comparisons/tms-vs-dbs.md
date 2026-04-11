@@ -6,15 +6,15 @@ image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fi
 
 ## Non-invasive vs surgical neuromodulation
 
-TMS and DBS represent opposite ends of the neuromodulation spectrum. TMS is completely non-invasive and done in an outpatient clinic. DBS requires brain surgery to implant electrodes deep within the brain, connected to a battery pack in the chest.
+TMS and DBS sit at opposite ends of the neuromodulation spectrum. TMS is completely non-invasive — walk in, sit down, walk out. DBS requires brain surgery. Electrodes get implanted deep in the brain, connected to a battery pack in the chest.
 
-DBS for depression is **investigational** — it does not have FDA approval for this indication (though it is FDA-approved for Parkinson's disease, essential tremor, and dystonia).
+One more thing: DBS for depression is **investigational**. It does not have FDA approval for depression (though it is approved for Parkinson's disease, essential tremor, and dystonia).
 
 ### How they differ
 
 **TMS:**
 - Magnetic coil placed on the scalp
-- Stimulates cortical surface (~2-4cm depth)
+- Stimulates the cortical surface (~2-4cm deep)
 - Outpatient, no anesthesia
 - Temporary — effects last months, may need retreatment
 - FDA-approved for depression since 2008
@@ -38,22 +38,22 @@ DBS for depression is **investigational** — it does not have FDA approval for 
 
 ### Risk comparison
 
-**TMS risks:** Scalp discomfort, mild headache. Seizure risk <0.01%. No lasting side effects.
+**TMS risks:** Scalp discomfort, mild headache. Seizure risk under 0.01%. No lasting side effects.
 
-**DBS risks:** Brain hemorrhage (2-5%), infection (3-5%), hardware malfunction, cognitive changes, speech difficulties, mood instability during programming. These are the risks of any brain surgery.
+**DBS risks:** Brain hemorrhage (2-5%), infection (3-5%), hardware malfunction, cognitive changes, speech difficulties, mood instability during programming. These are the risks that come with any brain surgery.
 
 ### Who gets which
 
-The typical treatment escalation:
+The typical treatment escalation looks like this:
 1. Medications (2+ trials)
 2. Psychotherapy
-3. **TMS** ← most patients are here
+3. **TMS** — most people are here
 4. ECT
 5. VNS (implanted vagus nerve stimulator)
-6. **DBS** ← last resort, experimental
+6. **DBS** — last resort, experimental
 
-DBS for depression is only offered at a handful of research centers worldwide, typically for patients who have failed every other treatment including TMS, ECT, and VNS.
+DBS for depression is only offered at a handful of research centers worldwide. It's for people who have failed everything else — TMS, ECT, VNS, multiple medications. We're talking about the most treatment-resistant cases that exist.
 
 ### The bottom line
 
-TMS is a safe, accessible, FDA-approved option tried relatively early in treatment-resistant depression. DBS is an experimental, invasive last resort for the most severely treatment-resistant patients. Virtually all patients should try TMS (and likely ECT) before DBS would be considered.
+TMS is safe, accessible, and FDA-approved — it's tried relatively early when medications aren't working. DBS is experimental, invasive, and a genuine last resort. Almost everyone should try TMS (and likely ECT and VNS) long before DBS would even be on the table.

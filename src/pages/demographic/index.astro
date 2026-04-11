@@ -7,22 +7,26 @@ const description = "Find TMS treatment information tailored to your specific ne
 ---
 
 <Layout title={title} description={description}>
-    <main class="bg-gray-50 min-h-screen">
+    <main class="min-h-screen">
         <!-- Hero -->
-        <section class="bg-gradient-to-br from-amber-800 via-orange-900 to-slate-900 py-20">
-            <div class="container mx-auto px-6">
-                <nav class="flex text-sm text-orange-200 mb-8">
-                    <a href="/" class="hover:text-slate-900">Home</a>
-                    <span class="mx-2">/</span>
-                    <span class="text-slate-900">Patient Groups</span>
+        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    <span class="text-slate-700 font-medium">Patient Groups</span>
                 </nav>
-                
-                <h1 class="text-4xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-6">
-                    TMS for <span class="text-amber-400">Different Patients</span>
-                </h1>
-                <p class="text-xl text-orange-100 max-w-3xl">
-                    TMS therapy can be tailored for various patient groups. Find information specific to your needs.
-                </p>
+
+                <div class="max-w-3xl">
+                    <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+                        TMS for <span class="text-violet-600">Different Patients</span>
+                    </h1>
+                    <p class="text-lg text-slate-500 leading-relaxed">
+                        TMS therapy can be tailored for various patient groups. Find information specific to your needs.
+                    </p>
+                </div>
             </div>
         </section>
 

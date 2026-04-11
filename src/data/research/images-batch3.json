@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "cingulum-health",
+    "logo_url": "https://images.squarespace-cdn.com/content/v1/66d0380c1865d34e93592771/a4b7d88d-dcf2-4db7-944d-1019c095d4f6/Cingulum_Logo_W.png",
+    "hero_image_url": "https://images.squarespace-cdn.com/content/v1/66d0380c1865d34e93592771/5a943da6-8e2c-4d3d-b780-ea2f1c318d04/368d59b5-3451-43ab-80f3-eba3a43f8a9f.jpg"
+  },
+  {
+    "slug": "the-melbourne-clinic",
+    "logo_url": "https://themelbourneclinic.com.au/application/themes/hospitals_responsive/images/logo.svg",
+    "hero_image_url": "https://themelbourneclinic.com.au/application/files/cache/thumbnails/hs-business-as-usual-homepage-banner-1170x390-c-1-d4aa5a6a30f0542c434f61b93a2a90d1.png"
+  },
+  {
+    "slug": "neuralia-tms-perth",
+    "logo_url": "https://www.neuraliatms.com.au/wp-content/uploads/2023/02/neuralia-tms-colour-wide.svg",
+    "hero_image_url": null
+  },
+  {
+    "slug": "modalis-tms",
+    "logo_url": null,
+    "hero_image_url": null
+  },
+  {
+    "slug": "the-sherpah-clinic",
+    "logo_url": "https://sherpah.com.au/wp-content/themes/sherpah/assets/images/logo.png",
+    "hero_image_url": "https://www.thesherpahclinic.com/wp-content/themes/wp-theme-sherpah/assets/images/tms.webp"
+  },
+  {
+    "slug": "advance-aotearoa",
+    "logo_url": null,
+    "hero_image_url": "https://advanceaotearoa.com/wp-content/uploads/2024/12/image_0-6-768x320.webp"
+  },
+  {
+    "slug": "healing-minds",
+    "logo_url": "https://static.wixstatic.com/media/2f0dba_319b8e3282bf49018d789ad3f2f5d064~mv2.png/v1/fill/w_424,h_424,al_c/2f0dba_319b8e3282bf49018d789ad3f2f5d064~mv2.png",
+    "hero_image_url": null
+  },
+  {
+    "slug": "better-mental-health-tms",
+    "logo_url": "https://tms.net.nz/wp-content/uploads/cropped-equilibrium-logo-blue.png",
+    "hero_image_url": "https://tms.net.nz/wp-content/uploads/restoring-balance-tms.png"
+  },
+  {
+    "slug": "rtms-behandling",
+    "logo_url": "https://impro.usercontent.one/appid/oneComWsb/domain/rtmsbehandling.com/media/rtmsbehandling.com/onewebmedia/Lo3go.png?etag=%22194f-64c8fc39%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=100%2B76",
+    "hero_image_url": "https://impro.usercontent.one/appid/oneComWsb/domain/rtmsbehandling.com/media/rtmsbehandling.com/onewebmedia/IMG_0175-1kopia.jpg?etag=%2210869-64cb90c3%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=468%2B468&quality=85"
+  },
+  {
+    "slug": "seoul-psychiatry-gangnam",
+    "logo_url": "https://seoulpsychiatry.com/wp-content/uploads/2025/06/cropped-화면-캡처-2025-06-15-001735.png",
+    "hero_image_url": null
+  },
+  {
+    "slug": "brain-treatment-center-seoul",
+    "logo_url": "https://images.squarespace-cdn.com/content/v1/5d8a33d5362c255660b1b491/ea0fb837-713d-4459-afe7-a7c0297b06ab/BTC_LOGO-BLK.png",
+    "hero_image_url": "https://static1.squarespace.com/static/5d8a33d5362c255660b1b491/t/5dc1fab6067d3f6b17186fe2/1578084121082/hero-autism.jpg?format=1500w"
+  },
+  {
+    "slug": "ynk-clinic-gangnam",
+    "logo_url": null,
+    "hero_image_url": null
+  },
+  {
+    "slug": "rome-psiquiatria-integral",
+    "logo_url": "https://christians205.sg-host.com/wp-content/uploads/2023/04/rome-logo.webp",
+    "hero_image_url": "https://christians205.sg-host.com/wp-content/uploads/2025/04/business-concept-with-team-close-up-scaled.jpg"
+  },
+  {
+    "slug": "neurowave-mexico",
+    "logo_url": "https://neurowave.com.mx/wp-content/uploads/2021/05/Profile-Pic-neurowave_1.png",
+    "hero_image_url": "https://cdn-apjgo.nitrocdn.com/vsDqRpIYuyRiTlePFiwJtvWnwakYmcQo/assets/images/optimized/rev-cc9c9bf/neurowave.com.mx/wp-content/uploads/2022/05/carrusel.jpg"
+  },
+  {
+    "slug": "neurospa-clinic-ciudad-juarez",
+    "logo_url": null,
+    "hero_image_url": null
+  },
+  {
+    "slug": "brainstim-centers-cancun",
+    "logo_url": "https://brainstimcenters.com/wp-content/uploads/2025/01/logo-b.png",
+    "hero_image_url": null
+  }
+]

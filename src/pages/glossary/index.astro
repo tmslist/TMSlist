@@ -1,0 +1,198 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "TMS Glossary | 50+ Terms Explained | TMS List";
+const description = "Comprehensive A-Z glossary of TMS therapy terms. From rTMS and theta burst to DLPFC and motor threshold — understand every term used in transcranial magnetic stimulation.";
+
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "name": "TMS Therapy Glossary",
+    "description": description,
+    "url": "https://tmslist.com/glossary/",
+    "publisher": {
+        "@type": "Organization",
+        "name": "TMS List",
+        "url": "https://tmslist.com"
+    }
+});
+
+const glossary: { term: string; definition: string }[] = [
+    { term: "Accelerated TMS", definition: "A protocol that delivers multiple TMS sessions per day over a compressed timeframe (typically 1-5 days instead of 6 weeks), based on the Stanford SAINT protocol. Aims to achieve faster symptom relief." },
+    { term: "Active Motor Threshold", definition: "The minimum TMS intensity required to produce a motor evoked potential while the target muscle is under voluntary contraction. Used less commonly than resting motor threshold for calibration." },
+    { term: "Adjunctive Therapy", definition: "A treatment used alongside a primary treatment. TMS is often used as adjunctive therapy with antidepressant medications rather than as a standalone treatment." },
+    { term: "ARIA (Automated Robotic Image-guided Apparatus)", definition: "A robotic positioning system used with some TMS devices to automatically position the coil over the correct brain target using neuronavigation." },
+    { term: "Bilateral TMS", definition: "A protocol that stimulates both hemispheres of the brain in a single session — typically high-frequency to the left DLPFC followed by low-frequency to the right DLPFC." },
+    { term: "BrainsWay", definition: "An Israeli medical device company that manufactures the BrainsWay Deep TMS System using H-coil technology. FDA-cleared for major depressive disorder (2013), OCD (2018), and smoking cessation (2020)." },
+    { term: "Burst Stimulation", definition: "A pattern of TMS delivery where pulses are grouped into short bursts rather than delivered individually. Includes theta burst stimulation (TBS) as the most studied variant." },
+    { term: "CareCredit", definition: "A healthcare financing credit card commonly used by patients to pay for TMS therapy when insurance does not cover the full cost. Offers promotional interest-free periods." },
+    { term: "Coil", definition: "The handheld component of a TMS device that generates the magnetic field. Common types include figure-8 coils (focal stimulation) and H-coils (deeper stimulation)." },
+    { term: "Cortical Excitability", definition: "The readiness of neurons in the brain's cortex to fire in response to stimulation. TMS can increase or decrease cortical excitability depending on the frequency and protocol used." },
+    { term: "Deep TMS (dTMS)", definition: "A form of TMS using H-coil technology (developed by BrainsWay) that can stimulate deeper brain structures (up to 4cm) compared to standard figure-8 coils. FDA-cleared for depression, OCD, and smoking cessation." },
+    { term: "DLPFC (Dorsolateral Prefrontal Cortex)", definition: "The primary brain target for TMS depression treatment, located in the front of the brain. Underactivity in the left DLPFC is associated with depression. Most TMS protocols target this area." },
+    { term: "Double-Blind Study", definition: "A clinical trial design where neither the patient nor the administering clinician knows if active TMS or sham (placebo) stimulation is being delivered. The gold standard for TMS research." },
+    { term: "EEG (Electroencephalography)", definition: "A brain imaging technique that measures electrical activity via scalp electrodes. Sometimes used alongside TMS to monitor brain responses and optimize coil placement." },
+    { term: "Express TMS", definition: "Marketing term used by some clinics for theta burst stimulation (TBS) protocols that deliver a full treatment session in approximately 3 minutes rather than the standard 19-37 minutes." },
+    { term: "FDA Clearance", definition: "Regulatory approval from the US Food and Drug Administration allowing a TMS device to be marketed for specific medical conditions. Different from FDA approval — clearance (via 510(k)) demonstrates substantial equivalence to an existing device." },
+    { term: "Figure-8 Coil", definition: "The most common TMS coil design, shaped like a figure-8 (or butterfly). Creates a focused magnetic field at the intersection of the two loops, allowing precise targeting of specific brain regions." },
+    { term: "fMRI (Functional Magnetic Resonance Imaging)", definition: "A neuroimaging technique that measures brain activity by detecting changes in blood flow. Used in TMS research to identify optimal stimulation targets and verify treatment effects." },
+    { term: "H-Coil", definition: "A coil design developed by BrainsWay that uses a complex winding pattern inside a padded helmet. Stimulates deeper and broader brain regions than standard figure-8 coils." },
+    { term: "HSA/FSA", definition: "Health Savings Accounts and Flexible Spending Accounts — tax-advantaged accounts that can be used to pay for TMS therapy out-of-pocket costs, including copays and deductibles." },
+    { term: "Intermittent Theta Burst Stimulation (iTBS)", definition: "A specific TBS pattern where 2-second trains of theta burst pulses are delivered every 10 seconds. The excitatory (stimulating) form of theta burst stimulation, typically applied to the left DLPFC for depression." },
+    { term: "Long-Term Potentiation (LTP)", definition: "A lasting strengthening of neural connections that is believed to underlie the therapeutic effects of TMS. Repeated stimulation induces LTP-like changes in targeted brain circuits." },
+    { term: "Maintenance TMS", definition: "Periodic TMS sessions (weekly, biweekly, or monthly) given after completing an initial treatment course to prevent relapse of symptoms. Not standardized and varies by provider." },
+    { term: "MagVenture", definition: "A Danish manufacturer of TMS devices, including the MagPro and MagVita systems. Known for versatile coil options and research-grade systems." },
+    { term: "MBS Item Number", definition: "Medicare Benefits Schedule item number (used in Australia) that determines if a medical procedure is eligible for a Medicare rebate. TMS was added to the MBS in 2021 for treatment-resistant depression." },
+    { term: "Motor Evoked Potential (MEP)", definition: "A measurable muscle twitch (typically in the hand) produced when TMS is applied to the motor cortex at sufficient intensity. Used to determine motor threshold for treatment calibration." },
+    { term: "Motor Threshold (MT)", definition: "The minimum intensity of TMS required to produce a visible muscle twitch in at least 50% of attempts. Used as a baseline to personalize treatment intensity for each patient." },
+    { term: "Neuromodulation", definition: "The alteration of nerve activity through targeted delivery of a stimulus (electrical, magnetic, or chemical) to specific neurological sites. TMS is a form of non-invasive neuromodulation." },
+    { term: "Neuronavigation", definition: "A technology that uses brain imaging (MRI/CT) to guide precise TMS coil placement over the target brain region. Improves targeting accuracy compared to the standard 5cm rule." },
+    { term: "NeuroStar", definition: "A TMS system manufactured by Neuronetics, one of the first FDA-cleared TMS devices for depression (2008). Uses a figure-8 coil and offers the NeuroStar Advanced Therapy system with proprietary treatment protocols." },
+    { term: "Neuroplasticity", definition: "The brain's ability to form new neural connections and reorganize existing ones. TMS is believed to work by promoting neuroplasticity in underactive brain circuits associated with depression." },
+    { term: "NICE Approval", definition: "Guidance from the UK's National Institute for Health and Care Excellence recommending TMS as a treatment option. NICE has recommended rTMS for depression since 2015." },
+    { term: "OCD (Obsessive-Compulsive Disorder)", definition: "A mental health condition characterized by intrusive thoughts and repetitive behaviors. Deep TMS (BrainsWay) received FDA clearance for OCD in 2018, targeting the anterior cingulate cortex." },
+    { term: "Prior Authorization", definition: "A requirement from insurance companies that a provider obtain approval before delivering TMS treatment. Typically requires documentation of medication trials, diagnosis, and treatment plan." },
+    { term: "Pulse", definition: "A single magnetic field discharge from the TMS coil. Treatment protocols are defined by the number of pulses per session (typically 600-3,000) and pulses per second (frequency)." },
+    { term: "Remission", definition: "A clinical outcome where symptoms have been reduced to below diagnostic thresholds. In TMS depression studies, remission rates typically range from 30-35% after an initial course of treatment." },
+    { term: "Response Rate", definition: "The percentage of patients who experience a clinically significant improvement (usually 50% or greater reduction in symptom scores). TMS depression studies report response rates of 50-60%." },
+    { term: "rTMS (Repetitive Transcranial Magnetic Stimulation)", definition: "The most common form of TMS therapy, delivering repeated magnetic pulses to a specific brain target. Distinguished from single-pulse TMS used primarily in diagnostic and research settings." },
+    { term: "SAINT Protocol", definition: "Stanford Accelerated Intelligent Neuromodulation Therapy — a research protocol delivering 10 sessions per day over 5 days using fMRI-guided targeting. Showed 79% remission rate in the initial trial." },
+    { term: "Sham Stimulation", definition: "A placebo condition used in TMS clinical trials where the coil is positioned or shielded to mimic the sensation of real TMS without delivering therapeutic stimulation to the brain." },
+    { term: "Smoking Cessation", definition: "One of the FDA-cleared indications for Deep TMS (BrainsWay, 2020). Targets the bilateral insula and prefrontal cortex to reduce nicotine cravings." },
+    { term: "Theta Burst Stimulation (TBS)", definition: "An advanced TMS protocol that delivers triplets of pulses at 50Hz, repeated at 5Hz (theta rhythm). A full session can be delivered in approximately 3 minutes versus 19-37 minutes for standard rTMS." },
+    { term: "Treatment Course", definition: "A standard series of TMS sessions, typically 36 sessions delivered 5 days per week over approximately 6-9 weeks. Some protocols use fewer sessions with higher daily frequency." },
+    { term: "Treatment-Resistant Depression (TRD)", definition: "Depression that has not responded adequately to at least two different antidepressant medications at adequate doses and durations. TRD is the primary FDA-cleared indication for TMS therapy." },
+    { term: "Transcranial Magnetic Stimulation (TMS)", definition: "A non-invasive brain stimulation technique that uses magnetic fields to induce small electrical currents in targeted brain regions. Used therapeutically for depression, OCD, migraines, and smoking cessation." },
+    { term: "Treatment Protocol", definition: "The specific parameters of a TMS session including coil type, brain target, frequency, intensity (% of motor threshold), number of pulses, and session duration." },
+    { term: "V-coil", definition: "A newer coil design used in some TMS systems that provides a broader but still focal stimulation pattern, positioned between figure-8 and H-coil designs in terms of depth penetration." },
+];
+
+// Sort alphabetically
+const sortedGlossary = glossary.sort((a, b) => a.term.localeCompare(b.term));
+
+// Group by first letter
+const grouped: Record<string, typeof glossary> = {};
+sortedGlossary.forEach(item => {
+    const letter = item.term[0].toUpperCase();
+    if (!grouped[letter]) grouped[letter] = [];
+    grouped[letter].push(item);
+});
+
+const letters = Object.keys(grouped).sort();
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Glossary", url: "/glossary/" },
+]}>
+    <main>
+        <!-- Hero -->
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+            <div class="absolute top-[-10%] right-[20%] w-[500px] h-[500px] bg-cyan-600/12 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[5%] left-[10%] w-[350px] h-[350px] bg-violet-500/8 rounded-full blur-[100px]"></div>
+
+            <div class="container mx-auto px-4 pt-12 pb-20 lg:pt-16 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">Glossary</span>
+                </nav>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-end">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
+                            <span class="flex h-2 w-2 rounded-full bg-cyan-400"></span>
+                            <span class="text-xs font-semibold text-slate-300 tracking-wide">{sortedGlossary.length} Terms Defined</span>
+                        </div>
+                        <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-6">
+                            TMS<br/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-400">Glossary</span>
+                        </h1>
+                        <p class="text-lg text-slate-400 leading-relaxed max-w-xl">
+                            From rTMS and theta burst to DLPFC and motor threshold. Every term you will encounter in TMS therapy, explained in plain language.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4 lg:justify-end">
+                        <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <div class="text-3xl font-bold text-white">{sortedGlossary.length}</div>
+                            <div class="text-xs text-slate-400 font-medium mt-1">Terms</div>
+                        </div>
+                        <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <div class="text-3xl font-bold text-cyan-400">{letters.length}</div>
+                            <div class="text-xs text-slate-400 font-medium mt-1">Letters</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+        </section>
+
+        <!-- Sticky Alphabet Nav + Glossary Content -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <!-- Sticky Alphabet Navigation -->
+                <nav class="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-100 -mx-4 px-4 py-4 mb-12" aria-label="Alphabet navigation">
+                    <div class="flex flex-wrap justify-center gap-1.5">
+                        {alphabet.map((letter) => {
+                            const hasTerms = letters.includes(letter);
+                            return hasTerms ? (
+                                <a href={`#letter-${letter}`} class="w-9 h-9 rounded-lg bg-slate-100 hover:bg-violet-100 text-slate-700 hover:text-violet-600 font-bold text-sm flex items-center justify-center transition-colors">
+                                    {letter}
+                                </a>
+                            ) : (
+                                <span class="w-9 h-9 rounded-lg text-slate-300 font-bold text-sm flex items-center justify-center">
+                                    {letter}
+                                </span>
+                            );
+                        })}
+                    </div>
+                </nav>
+
+                <!-- Glossary Entries -->
+                <div class="space-y-12">
+                    {letters.map((letter) => (
+                        <div id={`letter-${letter}`} class="scroll-mt-24">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-blue-600 text-white flex items-center justify-center font-bold text-xl">
+                                    {letter}
+                                </div>
+                                <div class="flex-1 h-px bg-slate-200"></div>
+                                <span class="text-xs text-slate-400 font-medium">{grouped[letter].length} term{grouped[letter].length !== 1 ? 's' : ''}</span>
+                            </div>
+
+                            <div class="space-y-4">
+                                {grouped[letter].map((item) => (
+                                    <div class="bg-white rounded-xl border border-slate-100 p-6 hover:border-violet-200 hover:shadow-sm transition-all" id={item.term.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
+                                        <dt class="text-lg font-bold text-slate-900 mb-2">{item.term}</dt>
+                                        <dd class="text-slate-500 leading-relaxed">{item.definition}</dd>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="relative py-20 bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <p class="text-sm font-semibold text-violet-400 tracking-wider uppercase mb-4">Now That You Know the Terms</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">Ready to explore TMS therapy?</h2>
+                <p class="text-slate-400 max-w-lg mx-auto mb-10">Take our candidacy quiz or browse verified TMS clinics near you. Your knowledge is the first step.</p>
+                <div class="flex items-center justify-center gap-4 flex-wrap">
+                    <a href="/quiz/am-i-a-candidate/" class="px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">
+                        Am I a Candidate?
+                    </a>
+                    <a href="/us/" class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">
+                        Browse Clinics
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

@@ -1,0 +1,36 @@
+---
+export const prerender = false;
+
+import Layout from "../../../layouts/Layout.astro";
+import AdminSidebar from "../../../components/react/AdminSidebar";
+import AdminClinicEditor from "../../../components/react/AdminClinicEditor";
+import { getSessionFromRequest, hasRole } from "../../../utils/auth";
+
+const session = getSessionFromRequest(Astro.request);
+if (!hasRole(session, 'admin', 'editor')) {
+  return Astro.redirect("/admin/login");
+}
+
+const { id } = Astro.params;
+if (!id) {
+  return Astro.redirect("/admin/clinics");
+}
+---
+
+<Layout title="Edit Clinic | TMS List Admin" noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <AdminSidebar client:load currentPage="clinics" userEmail={session!.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <nav class="text-sm text-gray-500 mb-4">
+          <a href="/admin/dashboard" class="hover:text-violet-600">Dashboard</a>
+          <span class="mx-2">/</span>
+          <a href="/admin/clinics" class="hover:text-violet-600">Clinics</a>
+          <span class="mx-2">/</span>
+          <span class="text-gray-900">Edit</span>
+        </nav>
+        <AdminClinicEditor client:load clinicId={id} />
+      </div>
+    </main>
+  </div>
+</Layout>

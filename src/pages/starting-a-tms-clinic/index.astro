@@ -1,0 +1,304 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Starting a TMS Clinic: Complete Guide 2026 | TMS List";
+const description = "Everything you need to start a TMS clinic — equipment costs, staffing, insurance credentialing, regulatory requirements, ROI projections, and marketing strategies.";
+
+const practiceTypes = [
+    { type: "Solo Psychiatrist", investment: "$120K-$200K", timeline: "6-12 months", pros: ["Full control over operations", "Higher per-patient revenue", "Flexible scheduling"], cons: ["Higher personal financial risk", "Coverage challenges during time off", "Administrative burden"] },
+    { type: "Group Practice", investment: "$150K-$350K", timeline: "4-8 months", pros: ["Shared costs and risk", "Built-in referral network", "Coverage redundancy"], cons: ["Profit sharing", "Decision-making complexity", "Space requirements"] },
+    { type: "Hospital / Health System", investment: "$200K-$500K+", timeline: "8-18 months", pros: ["Institutional support", "Established patient pipeline", "Credentialing infrastructure"], cons: ["Bureaucratic approval process", "Lower physician autonomy", "Revenue sharing with system"] },
+];
+
+const equipmentOptions = [
+    { device: "NeuroStar TMS Therapy System", manufacturer: "Neuronetics", priceRange: "$70K-$100K", type: "Figure-8 coil", fdaCleared: "Depression, OCD, Anxious Depression, Smoking Cessation" },
+    { device: "BrainsWay Deep TMS", manufacturer: "BrainsWay", priceRange: "$80K-$120K", type: "H-coil (deep TMS)", fdaCleared: "Depression, OCD, Smoking Cessation" },
+    { device: "MagVenture MagPro", manufacturer: "MagVenture", priceRange: "$70K-$110K", type: "Various coil options", fdaCleared: "Depression, OCD" },
+    { device: "CloudTMS", manufacturer: "CloudTMS / Apollo TMS", priceRange: "$90K-$150K", type: "Figure-8 coil with neuronavigation", fdaCleared: "Depression" },
+];
+
+const staffing = [
+    { role: "Supervising Psychiatrist", requirement: "Required", salary: "$250K-$400K/yr (or existing owner)", notes: "Must be on-site or available for real-time consultation. Prescribes TMS, reviews treatment plans, and handles adverse events." },
+    { role: "TMS Technician", requirement: "Required", salary: "$45K-$65K/yr", notes: "Operates the device, monitors patients during sessions, documents treatment parameters. Certification through manufacturer training." },
+    { role: "Billing Specialist", requirement: "Highly Recommended", salary: "$40K-$55K/yr or outsourced", notes: "Handles prior authorizations, claims submission, denial management. TMS billing is complex — specialized experience saves revenue." },
+    { role: "Front Desk / Patient Coordinator", requirement: "Recommended", salary: "$35K-$45K/yr", notes: "Schedules 36+ session treatment courses, manages patient communications, handles intake paperwork." },
+    { role: "Marketing Coordinator", requirement: "Optional", salary: "$45K-$60K/yr or agency", notes: "Manages online presence, physician outreach, and patient education. Critical for patient acquisition in the first 12 months." },
+];
+
+const timeline = [
+    { phase: "Planning & Business Case", duration: "Month 1-2", tasks: ["Develop business plan and financial projections", "Evaluate device options and negotiate pricing", "Identify space requirements (200-400 sq ft dedicated)", "Consult healthcare attorney on regulatory requirements"] },
+    { phase: "Equipment & Setup", duration: "Month 2-4", tasks: ["Purchase or lease TMS device", "Renovate treatment space (shielding usually not required)", "Install equipment and complete manufacturer training", "Set up EMR integration and treatment documentation"] },
+    { phase: "Insurance Credentialing", duration: "Month 3-6", tasks: ["Apply for TMS-specific credentialing with payers", "Obtain prior authorization protocols for each insurer", "Set up billing codes and fee schedules", "Contract with Medicare and major commercial payers"] },
+    { phase: "Staff Hiring & Training", duration: "Month 3-5", tasks: ["Hire TMS technician and billing specialist", "Complete manufacturer device certification", "Develop clinical protocols and safety procedures", "Train staff on patient screening and monitoring"] },
+    { phase: "Marketing & Launch", duration: "Month 5-6", tasks: ["Build referral relationships with local psychiatrists and PCPs", "Launch website and online directory listings", "Begin accepting patient referrals", "Run initial patient information seminars"] },
+];
+
+const roiProjections = [
+    { metric: "Average reimbursement per session", value: "$150-$250" },
+    { metric: "Sessions per treatment course", value: "36 sessions" },
+    { metric: "Revenue per completed patient", value: "$5,400-$9,000" },
+    { metric: "Break-even patient volume", value: "4-6 patients/day" },
+    { metric: "Time to profitability", value: "6-12 months" },
+    { metric: "Annual revenue at capacity (8 pts/day)", value: "$500K-$800K" },
+];
+---
+
+<Layout title={title} description={description} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Starting a TMS Clinic", url: "/starting-a-tms-clinic/" }]}>
+    <main>
+        <!-- Hero -->
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[10%] right-[15%] w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-[120px]"></div>
+
+            <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">Starting a TMS Clinic</span>
+                </nav>
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-6">
+                        <div class="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
+                        <span class="text-xs font-semibold text-emerald-400 tracking-wider uppercase">Complete Guide</span>
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
+                        Starting a<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">TMS Clinic</span>
+                    </h1>
+                    <p class="text-lg text-slate-400 leading-relaxed max-w-xl">
+                        From equipment selection and staffing to insurance credentialing and patient acquisition. Everything you need to launch a successful TMS practice.
+                    </p>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+        </section>
+
+        <!-- Practice Types -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">Requirements by Practice Type</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {practiceTypes.map(p => (
+                        <div class="bg-white rounded-2xl border border-slate-200 p-7">
+                            <h3 class="text-xl font-bold text-slate-900 mb-4">{p.type}</h3>
+                            <div class="flex gap-4 mb-5">
+                                <div>
+                                    <div class="text-xs text-slate-500 font-medium mb-1">Investment</div>
+                                    <div class="text-sm font-bold text-violet-600">{p.investment}</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-500 font-medium mb-1">Timeline</div>
+                                    <div class="text-sm font-bold text-emerald-600">{p.timeline}</div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2">Advantages</div>
+                                <ul class="space-y-1.5">
+                                    {p.pros.map(pro => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-600">
+                                            <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                            {pro}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-red-500 uppercase tracking-wider mb-2">Considerations</div>
+                                <ul class="space-y-1.5">
+                                    {p.cons.map(con => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-600">
+                                            <svg class="w-4 h-4 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+                                            {con}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Equipment -->
+        <section class="py-16 lg:py-24 bg-slate-50 border-y border-slate-100">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">Equipment Options ($70K-$150K)</h2>
+                </div>
+
+                <div class="space-y-4">
+                    {equipmentOptions.map(e => (
+                        <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:border-blue-200 transition-colors">
+                            <div class="flex flex-col lg:flex-row lg:items-center gap-4">
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-bold text-slate-900 mb-1">{e.device}</h3>
+                                    <p class="text-sm text-slate-500">{e.manufacturer} &middot; {e.type}</p>
+                                </div>
+                                <div class="flex flex-wrap gap-3 items-center">
+                                    <span class="px-3 py-1.5 bg-blue-50 text-blue-700 text-sm font-semibold rounded-lg">{e.priceRange}</span>
+                                </div>
+                            </div>
+                            <div class="mt-3 pt-3 border-t border-slate-100">
+                                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">FDA Cleared: </span>
+                                <span class="text-sm text-slate-600">{e.fdaCleared}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Staffing -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">Staffing Needs</h2>
+                </div>
+
+                <div class="space-y-4">
+                    {staffing.map(s => (
+                        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+                            <div class="flex flex-col lg:flex-row lg:items-start gap-4">
+                                <div class="flex-1">
+                                    <div class="flex flex-wrap items-center gap-3 mb-2">
+                                        <h3 class="text-base font-bold text-slate-900">{s.role}</h3>
+                                        <span class={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded ${s.requirement === 'Required' ? 'bg-red-50 text-red-600' : s.requirement === 'Highly Recommended' ? 'bg-amber-50 text-amber-600' : 'bg-slate-100 text-slate-500'}`}>{s.requirement}</span>
+                                    </div>
+                                    <p class="text-sm text-slate-500 leading-relaxed">{s.notes}</p>
+                                </div>
+                                <div class="shrink-0">
+                                    <span class="text-sm font-semibold text-violet-600">{s.salary}</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="py-16 lg:py-24 bg-slate-50 border-y border-slate-100">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">Launch Timeline (6 Months)</h2>
+                </div>
+
+                <div class="space-y-6">
+                    {timeline.map((t, i) => (
+                        <div class="flex gap-5">
+                            <div class="flex flex-col items-center">
+                                <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 font-bold text-sm flex items-center justify-center shrink-0">{i + 1}</div>
+                                {i < timeline.length - 1 && <div class="w-0.5 flex-1 bg-emerald-200 mt-2"></div>}
+                            </div>
+                            <div class="bg-white rounded-2xl border border-slate-200 p-6 flex-1 mb-2">
+                                <div class="flex flex-wrap items-center gap-3 mb-3">
+                                    <h3 class="text-base font-bold text-slate-900">{t.phase}</h3>
+                                    <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-lg">{t.duration}</span>
+                                </div>
+                                <ul class="space-y-2">
+                                    {t.tasks.map(task => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-600">
+                                            <svg class="w-4 h-4 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                            {task}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI Projections -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">ROI Projections</h2>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                    {roiProjections.map((r, i) => (
+                        <div class={`flex items-center justify-between px-7 py-4 ${i < roiProjections.length - 1 ? 'border-b border-slate-100' : ''}`}>
+                            <span class="text-sm text-slate-600">{r.metric}</span>
+                            <span class="text-sm font-bold text-slate-900">{r.value}</span>
+                        </div>
+                    ))}
+                </div>
+
+                <div class="mt-6 p-5 bg-violet-50 border border-violet-100 rounded-2xl">
+                    <p class="text-sm text-violet-800 leading-relaxed"><strong>Key takeaway:</strong> Most TMS clinics break even at 4-6 patients per day. With a standard treatment course of 36 sessions, each new patient represents $5,400-$9,000 in revenue. Practices treating 6-8 patients daily can expect $500K-$800K in annual TMS revenue once fully ramped.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Regulatory -->
+        <section class="py-16 lg:py-24 bg-slate-50 border-y border-slate-100">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900">Regulatory Requirements</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="bg-white rounded-2xl border border-slate-200 p-7">
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">FDA Requirements</h3>
+                        <ul class="space-y-2.5">
+                            <li class="flex items-start gap-2 text-sm text-slate-600"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Use only FDA-cleared TMS devices</li>
+                            <li class="flex items-start gap-2 text-sm text-slate-600"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Treat only FDA-cleared indications (or document off-label use)</li>
+                            <li class="flex items-start gap-2 text-sm text-slate-600"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Follow manufacturer protocols for treatment delivery</li>
+                            <li class="flex items-start gap-2 text-sm text-slate-600"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Maintain device maintenance and calibration records</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-slate-200 p-7">
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">State Medical Board</h3>
+                        <ul class="space-y-2.5">
+                            <li class="flex items-start gap-2 text-sm text-slate-600"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Supervising physician must hold active state medical license</li>
+                            <li class="flex items-start gap-2 text-sm text-slate-600"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Check state-specific supervision requirements for technicians</li>
+                            <li class="flex items-start gap-2 text-sm text-slate-600"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Comply with informed consent documentation requirements</li>
+                            <li class="flex items-start gap-2 text-sm text-slate-600"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Maintain malpractice insurance covering TMS procedures</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="relative bg-slate-950 rounded-3xl p-10 lg:p-14 overflow-hidden text-center">
+                    <div class="absolute inset-0 bg-gradient-to-r from-emerald-600/10 via-transparent to-violet-600/10"></div>
+                    <div class="relative z-10">
+                        <p class="text-sm font-semibold text-emerald-400 tracking-wider uppercase mb-3">Ready to Launch?</p>
+                        <h3 class="text-2xl lg:text-3xl font-bold text-white mb-4 tracking-tight">List Your New Clinic on TMS List</h3>
+                        <p class="text-slate-400 max-w-lg mx-auto mb-8">Once your clinic is operational, add it to our directory to start receiving patient enquiries from day one.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="/add-listing/" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-emerald-500/25">Add Your Clinic</a>
+                            <a href="/tms-cpt-codes/" class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">View CPT Codes Guide</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

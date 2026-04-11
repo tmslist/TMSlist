@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import ContentPage from '../../layouts/ContentPage.astro';
 import { getCollection, render } from 'astro:content';
 import { DEMOGRAPHIC_SLUGS } from '../../utils/seo_slugs';
@@ -26,6 +28,7 @@ export async function getStaticPaths() {
 }
 
 const { title, description, hasContent, entry } = Astro.props;
+const slug = Astro.params.slug!;
 let Content: any = null;
 if (hasContent && entry) {
   const rendered = await render(entry);
@@ -37,6 +40,11 @@ if (hasContent && entry) {
   title={title}
   subtitle={description || "Specialized TMS considerations for specific patient groups."}
   description={description}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Demographics", url: "/demographic/" },
+    { name: title, url: `/demographic/${slug}/` },
+  ]}
 >
   {Content ? <Content /> : null}
 </ContentPage>

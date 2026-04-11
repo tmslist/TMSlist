@@ -20,15 +20,15 @@ You'll sit in a chair that looks like something from a dentist's office. The tec
 
 Here's what you'll notice:
 
-- **A clicking sound** with each pulse. It's loud -- similar to a woodpecker or a stapler. Most clinics give you earplugs.
+- **A clicking sound** with each pulse. It's loud — like a woodpecker or a stapler. Most clinics give you earplugs.
 - **A tapping sensation** on your scalp. People describe it as a finger flicking against your head. It's unusual but not painful for most people.
-- **Your thumb twitches**. This is the whole point. When the coil is in the right spot and at the right intensity, the magnetic pulse travels through your skull, activates the motor cortex, and your thumb involuntarily moves.
+- **Your thumb twitches**. This is the whole point. When the coil is in the right spot and at the right intensity, the magnetic pulse travels through your skull, activates the motor cortex, and your thumb moves on its own.
 
 The technician will move the coil around slightly, adjusting the position and intensity until they find the sweet spot where your thumb twitches about 50% of the time. That's your motor threshold.
 
 ## Why the thumb matters
 
-Your thumb doesn't have anything to do with depression. The motor cortex is just the easiest place to get a visible, measurable response from. When your thumb twitches, the technician knows exactly how much energy is penetrating your skull and reaching your brain tissue.
+Your thumb has nothing to do with depression. The motor cortex is just the easiest place to get a visible, measurable response from. When your thumb twitches, the technician knows exactly how much energy is penetrating your skull and reaching your brain tissue.
 
 From there, they calculate your treatment dose. For standard depression treatment, the intensity is typically set at 120% of your motor threshold. The coil then gets repositioned to target the left dorsolateral prefrontal cortex -- the brain region involved in mood regulation.
 
@@ -40,9 +40,9 @@ If you're getting theta burst stimulation (TBS), the mapping process is the same
 
 ## Does it hurt?
 
-Most people find mapping mildly uncomfortable but tolerable. The sensation is strange -- your thumb moving without you telling it to is a weird feeling. Some people get a mild headache afterward, which typically responds to over-the-counter painkillers.
+Most people find mapping mildly uncomfortable but tolerable. The sensation is strange -- your thumb moving without you telling it to is a weird feeling. Some people get a mild headache afterward, which typically goes away with over-the-counter painkillers.
 
-The good news: mapping is usually a one-time thing. Some clinics re-map periodically during your treatment course, but most don't unless something seems off with your response.
+The good news: mapping is usually a one-time thing. Some clinics re-map periodically during your treatment course, but most don't unless something seems off with how you're responding.
 
 ## What if they can't find your motor threshold?
 
@@ -50,4 +50,4 @@ It happens occasionally. Some people have a higher motor threshold, which means 
 
 ## The takeaway
 
-Mapping is the least interesting part of TMS, but it's arguably the most important. Getting the dose right matters. Too low and you won't get results. Too high and the side effects increase without added benefit. A good technician will take their time with this step, and that's a sign you're in the right clinic.
+Mapping is the least interesting part of TMS, but it's arguably the most important. Getting the dose right matters. Too low and you won't get results. Too high and the side effects increase without added benefit. A good technician will take their time with this step, — and that's actually a sign you're in the right clinic.

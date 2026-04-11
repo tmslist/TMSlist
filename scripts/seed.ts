@@ -1,12 +1,13 @@
 /**
- * Seed script: Migrates clinics.json + user-submitted-clinics.json into Neon Postgres
+ * Seed script: Migrates clinics.json + user-submitted-clinics.json into Postgres
  * Usage: DATABASE_URL=... npx tsx scripts/seed.ts
  */
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+import postgres from 'postgres';
+import { drizzle } from 'drizzle-orm/postgres-js';
 import { clinics, doctors, questions, treatments } from '../src/db/schema';
 import clinicsData from '../src/data/clinics.json';
 import userSubmittedClinics from '../src/data/user-submitted-clinics.json';
+import internationalClinics from '../src/data/international-clinics.json';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
@@ -16,7 +17,7 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
-const sql = neon(DATABASE_URL);
+const sql = postgres(DATABASE_URL);
 const db = drizzle(sql);
 
 // Normalize provider type to match enum
@@ -63,6 +64,7 @@ async function seedClinics() {
   const allRaw = [
     ...(clinicsData as Record<string, unknown>[]),
     ...(userSubmittedClinics as Record<string, unknown>[]),
+    ...(internationalClinics as Record<string, unknown>[]),
   ];
 
   console.log(`Processing ${allRaw.length} clinics...`);
@@ -90,35 +92,29 @@ async function seedClinics() {
 
     const clinicRows = batch.map((c: Record<string, unknown>) => {
       const geo = c.geo as { lat?: number; lng?: number } | undefined;
-      const addressObj = c.address_obj as Record<string, string> | undefined;
-      const contact = c.contact as Record<string, string> | undefined;
       const media = c.media as Record<string, unknown> | undefined;
-      const costInfo = c.cost_info as Record<string, unknown> | undefined;
 
       return {
         slug: c.slug as string,
         name: c.name as string,
         providerType: normalizeProviderType(c.provider_type as string) as any,
-        address: (c.address as string) || addressObj?.street || null,
-        city: (c.city as string) || addressObj?.city || 'Unknown',
-        state: (c.state as string) || addressObj?.state || 'XX',
-        zip: (c.zip as string) || addressObj?.zip || null,
+        country: (c.country as string) || 'US',
+        address: (c.address as string) || null,
+        city: (c.city as string) || 'Unknown',
+        state: (c.state as string) || 'XX',
+        zip: (c.zip as string) || null,
         lat: geo?.lat?.toString() || null,
         lng: geo?.lng?.toString() || null,
-        phone: (c.phone as string) || contact?.phone || null,
-        website: (c.website as string) || contact?.website_url || null,
+        phone: (c.phone as string) || null,
+        website: (c.website as string) || null,
         email: (c.email as string) || null,
         machines: (c.machines as string[]) || [],
-        specialties: (c.specialties as string[]) || (c.treatments as string[]) || [],
-        insurances: (c.insurances as string[]) || (c.insurance_accepted as string[]) || [],
+        specialties: (c.specialties as string[]) || [],
+        insurances: (c.insurances as string[]) || [],
         openingHours: (c.opening_hours as string[]) || [],
         accessibility: (c.accessibility as Record<string, unknown>) || null,
         availability: (c.availability as Record<string, unknown>) || null,
-        pricing: (c.pricing as Record<string, unknown>) || (costInfo ? {
-          accepts_insurance: costInfo.accepts_insurance,
-          session_price_min: costInfo.cash_price_per_session ? parseInt(costInfo.cash_price_per_session as string) : undefined,
-          payment_plans: costInfo.financing_available,
-        } : null),
+        pricing: (c.pricing as Record<string, unknown>) || null,
         media: media || (c.hero_image_url || c.logo_url ? {
           hero_image_url: c.hero_image_url as string,
           logo_url: c.logo_url as string,

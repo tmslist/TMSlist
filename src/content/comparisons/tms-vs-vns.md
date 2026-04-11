@@ -6,13 +6,15 @@ image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fi
 
 ## Non-invasive vs implanted neuromodulation
 
-TMS and VNS are both neuromodulation treatments for depression, but they differ dramatically in invasiveness. TMS is completely non-invasive — nothing enters the body. VNS requires surgical implantation of a device that wraps around the vagus nerve in the neck.
+TMS and VNS are both neuromodulation treatments for depression. The difference? TMS is completely non-invasive — nothing enters your body. VNS requires surgery to implant a device that wraps around the vagus nerve in your neck.
+
+That's a pretty big difference.
 
 ### How they work
 
-**TMS:** Magnetic coil placed against the scalp delivers focused pulses to the DLPFC. Sessions are outpatient, no anesthesia, 19-37 minutes. Completed in 6-9 weeks.
+**TMS:** A magnetic coil placed against your scalp delivers focused pulses to the DLPFC. Sessions are outpatient, no anesthesia, 19-37 minutes. The whole course takes 6-9 weeks.
 
-**VNS:** A pulse generator (like a pacemaker) is surgically implanted in the chest, with a wire threaded to the left vagus nerve. The device delivers continuous electrical stimulation 24/7. Requires surgery under general anesthesia.
+**VNS:** A pulse generator — think of it like a pacemaker — gets surgically implanted in your chest, with a wire threaded to the left vagus nerve. The device delivers continuous electrical stimulation, 24/7. Getting it in requires surgery under general anesthesia.
 
 ### Efficacy
 
@@ -23,13 +25,13 @@ TMS and VNS are both neuromodulation treatments for depression, but they differ 
 | Speed of response | 2-4 weeks | 6-12 months |
 | Duration | 6-12 months, then may need retreatment | Continuous (device stays implanted) |
 
-VNS has lower initial response rates but builds over time. TMS works faster but may require periodic retreatment.
+VNS is a slow burn. Lower response rates at first, but they build over time. TMS works faster but may need periodic retreatment.
 
 ### Side effects
 
-**TMS:** Scalp discomfort, mild headache. Resolves between sessions. No systemic effects.
+**TMS:** Scalp discomfort, mild headache. Gone between sessions. No systemic effects.
 
-**VNS:** Hoarseness/voice changes (most common), cough, neck pain, shortness of breath, swallowing difficulty. Surgical risks include infection, nerve damage. Side effects are ongoing while the device is active.
+**VNS:** Hoarseness and voice changes (the most common complaint), cough, neck pain, shortness of breath, trouble swallowing. Then there are the surgical risks — infection, nerve damage. And the side effects stick around as long as the device is on.
 
 ### Cost
 
@@ -38,18 +40,18 @@ VNS has lower initial response rates but builds over time. TMS works faster but 
 
 ### Who gets which
 
-**TMS is tried first** in the typical treatment pathway:
+**TMS comes first** in the typical treatment pathway:
 1. Medications (2+ trials)
 2. TMS
-3. VNS (if TMS insufficient)
+3. VNS (if TMS isn't enough)
 4. ECT (for severe/urgent cases)
 
-**VNS is considered when:**
-- TMS and multiple medications have failed
-- Patient needs continuous, long-term neuromodulation
-- Depression is chronic and recurrent
-- Patient can undergo surgery
+**VNS gets considered when:**
+- TMS and multiple medications haven't worked
+- You need continuous, long-term neuromodulation
+- Your depression is chronic and keeps coming back
+- You're able to undergo surgery
 
 ### The bottom line
 
-TMS is the less invasive, faster-acting option tried earlier in treatment. VNS is reserved for patients with highly treatment-resistant depression who need a long-term implanted solution. Most patients will try TMS before considering VNS.
+TMS is the less invasive, faster-acting option that doctors try earlier. VNS is reserved for people with highly treatment-resistant depression who need a long-term implanted solution. Almost everyone will try TMS before VNS even comes up in conversation.

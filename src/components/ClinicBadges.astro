@@ -1,0 +1,32 @@
+---
+import { calculateBadges } from '../utils/badges';
+
+interface Props {
+  clinic: any;
+}
+
+const { clinic } = Astro.props;
+const badges = calculateBadges(clinic);
+const maxVisible = 4;
+const visibleBadges = badges.slice(0, maxVisible);
+const extraCount = badges.length - maxVisible;
+---
+
+{badges.length > 0 && (
+  <div class="flex flex-wrap gap-1.5">
+    {visibleBadges.map((badge) => (
+      <span
+        class={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold ${badge.color}`}
+        title={badge.description}
+      >
+        <span class="text-xs leading-none">{badge.icon}</span>
+        {badge.label}
+      </span>
+    ))}
+    {extraCount > 0 && (
+      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
+        +{extraCount} more
+      </span>
+    )}
+  </div>
+)}

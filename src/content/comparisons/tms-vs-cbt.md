@@ -6,13 +6,13 @@ image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=400
 
 ## Brain stimulation vs talk therapy
 
-TMS and CBT take fundamentally different approaches to treating depression. TMS directly modulates brain activity with magnetic pulses. CBT changes thought patterns and behaviors through structured conversations with a therapist. Both are evidence-based, and they're not mutually exclusive.
+TMS and CBT attack depression from completely different angles. TMS directly changes brain activity with magnetic pulses. CBT changes your thought patterns and behaviors through structured work with a therapist. Both are evidence-based. And here's the good news — they're not an either/or choice.
 
 ### How they work
 
-**TMS** stimulates the left dorsolateral prefrontal cortex to restore normal neural activity in mood circuits. It addresses the biological component of depression — the brain regions that aren't firing correctly.
+**TMS** stimulates the left dorsolateral prefrontal cortex to restore normal neural activity in mood circuits. It goes after the biological side of depression — the brain regions that aren't firing the way they should.
 
-**CBT** teaches you to identify and restructure negative thought patterns (cognitive distortions) and develop healthier behavioral habits. It addresses the psychological component — the thinking and behavior patterns that maintain depression.
+**CBT** teaches you to spot and restructure negative thought patterns (cognitive distortions) and build healthier habits. It targets the psychological side — the thinking and behavior patterns that keep depression going.
 
 ### Efficacy
 
@@ -27,29 +27,29 @@ TMS and CBT take fundamentally different approaches to treating depression. TMS 
 ### Key differences
 
 **Time commitment:**
-- TMS: 36 sessions, 19-37 minutes each, over 6-9 weeks. Then done.
-- CBT: 12-20 weekly sessions, 45-60 minutes each, over 3-5 months. Some patients continue longer.
+- TMS: 36 sessions, 19-37 minutes each, over 6-9 weeks. Then you're done.
+- CBT: 12-20 weekly sessions, 45-60 minutes each, over 3-5 months. Some people continue longer.
 
 **Effort required:**
-- TMS: Passive — you sit in a chair while the device works. No homework.
-- CBT: Active — requires engagement, homework assignments, practicing skills between sessions.
+- TMS: Passive. You sit in a chair while the device does the work. No homework.
+- CBT: Active. You need to engage, do homework assignments, practice skills between sessions. You get out what you put in.
 
 **Access:**
-- TMS: Requires a certified TMS clinic. Limited availability in rural areas.
-- CBT: Available from many therapists. Can be done via telehealth.
+- TMS: Requires a certified TMS clinic. Limited options in rural areas.
+- CBT: Available from thousands of therapists. Works great over telehealth.
 
 **Cost:**
-- TMS: $6,000-$12,000 for full course. Insurance covers after medication failures.
-- CBT: $150-$250 per session ($1,800-$5,000 for full course). Most insurance covers.
+- TMS: $6,000-$12,000 for a full course. Insurance covers after medication failures.
+- CBT: $150-$250 per session ($1,800-$5,000 for a full course). Most insurance covers it.
 
 ### Can you combine TMS and CBT?
 
-Yes, and emerging evidence suggests the combination may be more effective than either alone. The theory: TMS restores the brain's capacity to learn new patterns, while CBT provides the new patterns to learn.
+Yes — and the emerging evidence says this might be the best move. The theory makes sense: TMS restores the brain's capacity to learn new patterns, while CBT gives you the new patterns to learn.
 
-Some clinics now offer integrated TMS + CBT programs where psychotherapy sessions are timed to coincide with TMS treatment for maximum neuroplastic benefit.
+Some clinics now run integrated TMS + CBT programs where therapy sessions happen right alongside TMS treatment, riding the wave of maximum neuroplasticity.
 
 ### Which should you try first?
 
-- **Try CBT first** if you haven't tried structured therapy before, your depression is mild-to-moderate, or you want skills that last a lifetime
-- **Try TMS** if CBT alone wasn't sufficient, you've failed medications, or your depression makes it hard to engage in therapy
-- **Combine both** if you want the best chance of lasting recovery
+- **Try CBT first** if you haven't done structured therapy before, your depression is mild-to-moderate, or you want skills that stick with you for life
+- **Try TMS** if CBT alone wasn't enough, you've failed medications, or your depression is so heavy it's hard to even engage in therapy
+- **Combine both** if you want the best shot at lasting recovery

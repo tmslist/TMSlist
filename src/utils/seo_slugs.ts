@@ -49,6 +49,12 @@ export const INSURANCE_SLUGS = [
     { slug: 'michigan-blue-care-network-tms', title: 'Michigan Blue Care Network TMS' },
     { slug: 'georgia-medicaid-tms', title: 'Georgia Medicaid TMS' },
     { slug: 'north-carolina-medicaid-tms', title: 'North Carolina Medicaid TMS' },
+    { slug: 'anthem-bcbs', title: 'Anthem / BCBS TMS Coverage' },
+    { slug: 'florida-bcbs', title: 'Florida Blue / BCBS Florida TMS Coverage' },
+    { slug: 'hsa-fsa-tms', title: 'Using HSA or FSA to Pay for TMS Therapy' },
+    { slug: 'medicare-advantage', title: 'Medicare Advantage TMS Coverage' },
+    { slug: 'texas-bcbs', title: 'Blue Cross Blue Shield of Texas TMS Coverage' },
+    { slug: 'workers-comp', title: "Workers' Compensation TMS Coverage" },
 ];
 
 export const TREATMENT_SLUGS = [
@@ -151,6 +157,24 @@ export const PROTOCOL_SLUGS = [
 ];
 
 export const BLOG_SLUGS = [
+    // April 2026
+    { slug: 'stanford-neuromodulation-therapy-snt-2026', title: 'Stanford Neuromodulation Therapy (SNT): The 5-Day Protocol' },
+    { slug: 'tms-for-postpartum-depression', title: 'TMS for Postpartum Depression' },
+    { slug: 'ai-guided-tms-targeting-2026', title: 'AI-Guided TMS Targeting in 2026' },
+    { slug: 'tms-covered-by-medicare-2026-update', title: 'Medicare TMS Coverage 2026 Update' },
+    // March 2026
+    { slug: 'tms-for-anxiety-fda-breakthrough', title: 'TMS for Anxiety: FDA Breakthrough Designation' },
+    { slug: 'theta-burst-vs-standard-tms', title: 'Theta Burst vs Standard TMS' },
+    { slug: 'real-cost-of-tms-therapy-2026', title: 'Real Cost of TMS Therapy in 2026' },
+    { slug: 'tms-and-ketamine-together', title: 'TMS + Ketamine Combined Therapy' },
+    { slug: 'tms-at-home-devices-2026', title: 'At-Home TMS Devices in 2026' },
+    // February 2026
+    { slug: 'choosing-tms-clinic-red-flags', title: 'Red Flags When Choosing a TMS Clinic' },
+    { slug: 'tms-for-ocd-deep-tms-results', title: 'Deep TMS for OCD: 2-Year Results' },
+    { slug: 'what-tms-actually-feels-like', title: 'What TMS Actually Feels Like' },
+    { slug: 'tms-for-veterans-va-coverage', title: 'TMS for Veterans: VA Coverage Guide' },
+    { slug: 'tms-during-pregnancy-safety-data', title: 'TMS During Pregnancy Safety Data' },
+    // January 2026
     { slug: 'tms-success-rates-2026', title: 'TMS Success Rates 2026' },
     { slug: 'tms-side-effects-headache', title: 'TMS Side Effects: Headaches' },
     { slug: 'does-tms-cause-memory-loss', title: 'Does TMS Cause Memory Loss?' },
@@ -188,11 +212,21 @@ export const LEGAL_SLUGS = [
 export const RESEARCH_SLUGS = [
     { slug: 'clinical-trials', title: 'Current Clinical Trials' },
     { slug: 'fda-clearance-history', title: 'FDA Clearance History' },
+    { slug: 'tms-depression-meta-analysis', title: 'TMS for Depression: Research Summary' },
+    { slug: 'neuroplasticity-and-tms', title: 'How TMS Changes the Brain' },
+    { slug: 'tms-vs-ect-evidence', title: 'TMS vs ECT: Comparative Research' },
+    { slug: 'accelerated-tms-protocols', title: 'Accelerated TMS Protocol Research' },
 ];
 
 export const STORIES_SLUGS = [
+    { slug: 'sarah-depression-recovery', title: 'How TMS Gave Me My Life Back After 10 Years of Depression' },
+    { slug: 'michael-treatment-resistant', title: 'I\'d Given Up on Feeling Better — Then I Tried TMS' },
+    { slug: 'jessica-ocd-deep-tms', title: 'Deep TMS for OCD: My Experience with the BrainsWay Protocol' },
+    { slug: 'david-veteran-ptsd', title: 'A Veteran\'s Path to Recovery Through TMS' },
+    { slug: 'maria-postpartum', title: 'TMS During Pregnancy: Why I Chose a Drug-Free Approach' },
+    { slug: 'james-executive-burnout', title: 'How a CEO Used TMS to Overcome Burnout and Depression' },
     { slug: 'patient-video-testimonials', title: 'Patient Video Testimonials' },
-    { slug: 'celebrities-who-used-tms', title: 'Celebrities Who Used TMS' },
+    { slug: 'celebrities-who-used-tms', title: 'Public Figures Who\'ve Talked About TMS Therapy' },
 ];
 
 export const UTILITY_SLUGS = [

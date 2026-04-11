@@ -3,25 +3,6 @@ import Layout from "../../layouts/Layout.astro";
 import { getAllClinics } from "../../utils/clinicData";
 import { getDoctorPhoto } from "../../utils/dataHelpers";
 
-export async function getStaticPaths() {
-    const allClinics = await getAllClinics();
-    const paths: { params: { slug: string } }[] = [];
-    const seenSlugs = new Set<string>();
-
-    allClinics.forEach((clinic: any) => {
-        if (clinic.verified && clinic.doctors_data && Array.isArray(clinic.doctors_data)) {
-            clinic.doctors_data.forEach((doc: any) => {
-                if (doc.slug && !seenSlugs.has(doc.slug)) {
-                    seenSlugs.add(doc.slug);
-                    paths.push({ params: { slug: doc.slug } });
-                }
-            });
-        }
-    });
-
-    return paths;
-}
-
 const { slug } = Astro.params;
 
 const allClinicsData = await getAllClinics();
@@ -83,10 +64,11 @@ const schema = JSON.stringify({
     title={`${fullName} - TMS Specialist | TMS List`}
     description={`${fullName} is a ${title} specializing in TMS therapy at ${clinic?.name || "TMS Clinic"}. Book a consultation today.`}
     schema={schema}
+    canonical={`https://tmslist.com/specialist/${slug}/`}
     breadcrumbs={[
         { name: "Home", url: "/" },
         { name: "Specialists", url: "/specialists/" },
-        { name: fullName, url: `/doctor/${slug}/` },
+        { name: fullName, url: `/specialist/${slug}/` },
     ]}
 >
     <!-- Hero Section — Light Theme -->

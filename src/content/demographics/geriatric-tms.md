@@ -5,43 +5,43 @@ description: "TMS therapy considerations for older adults — safety in seniors,
 
 ## Why TMS is well-suited for older adults
 
-Depression affects 15-20% of adults over 65, and treatment is complicated by medication sensitivity, drug interactions, and comorbid medical conditions. TMS offers significant advantages for the geriatric population:
+Depression affects 15-20% of adults over 65. And treating it gets complicated fast — medication sensitivity, drug interactions, a pile of other health conditions to work around. TMS sidesteps most of those problems:
 
-- **No systemic side effects** — unlike antidepressants, which cause more side effects in seniors (falls, cognitive dulling, hyponatremia, cardiac effects)
-- **No drug interactions** — critical for elderly patients on multiple medications
-- **No cognitive impairment** — some evidence TMS may actually improve cognitive function
-- **No sedation** — reduces fall risk compared to sedating medications
+- **No systemic side effects** — antidepressants hit seniors harder (falls, cognitive dulling, hyponatremia, cardiac effects). TMS doesn't.
+- **No drug interactions** — when you're already on five medications, adding a sixth is risky. TMS isn't a drug.
+- **No cognitive impairment** — some evidence suggests TMS may actually *improve* cognitive function
+- **No sedation** — fewer falls. That matters more than people realize.
 
 ## Safety in older adults
 
-TMS is safe and well-tolerated in elderly patients:
-- Multiple studies specifically in patients 60-85+ years show no increased risk
+TMS is safe and well-tolerated in elderly patients. This isn't a guess — it's backed by data:
+- Multiple studies in patients aged 60-85+ show no increased risk
 - The main side effect (scalp discomfort) is no different in older patients
-- Seizure risk is not elevated with age
-- Patients with controlled hypertension, diabetes, and other common geriatric conditions can safely receive TMS
+- Seizure risk doesn't go up with age
+- You can safely receive TMS with controlled hypertension, diabetes, and other common conditions
 
-**Contraindications specific to seniors:**
-- Metal implants near treatment site (some older surgical clips)
+**Things to check for seniors specifically:**
+- Metal implants near the treatment site (some older surgical clips)
 - Cochlear implants
-- Cardiac pacemakers (relative contraindication — evaluate case by case)
+- Cardiac pacemakers (evaluate case by case — not an automatic no)
 
 ## Efficacy in older adults
 
-- Response rates: 40-55% (slightly lower than younger adults, but still clinically significant)
+- Response rates: 40-55% (slightly lower than younger adults, but still clinically meaningful)
 - Some studies show comparable efficacy across age groups
-- May take longer to respond (consider extending beyond 36 sessions)
+- May take longer to respond — consider extending beyond 36 sessions if you're seeing partial improvement
 - Particularly effective for late-onset depression
 
 ## Cognitive benefits
 
-Unlike ECT (which causes memory issues) and some antidepressants (which cause cognitive dulling), TMS may enhance cognition:
-- Improvements in processing speed and executive function reported in studies
+This is where TMS really shines for older adults. Unlike ECT (which causes memory issues) and some antidepressants (which cause cognitive dulling), TMS may actually help cognition:
+- Studies report improvements in processing speed and executive function
 - No negative cognitive effects at any age
-- Potential benefit for early cognitive decline accompanying depression
+- Potential benefit for early cognitive decline that accompanies depression
 
 ## Practical considerations
 
-- **Transportation:** Elderly patients may need a driver for daily sessions (not required medically, but practical)
-- **Session tolerance:** Some older patients need breaks during longer standard sessions; theta burst (3 minutes) is ideal
-- **Comfort:** Neck positioning in the TMS chair — ensure the clinic can accommodate mobility limitations
-- **Communication:** Ensure the patient (and family/caregivers) understands the treatment schedule commitment
+- **Transportation:** You may want a driver for daily sessions — not medically required, but practical
+- **Session tolerance:** Some older patients prefer shorter sessions; theta burst at 3 minutes is ideal
+- **Comfort:** Neck positioning in the TMS chair matters — make sure the clinic can accommodate mobility limitations
+- **Family involvement:** It helps when family or caregivers understand the treatment schedule commitment too

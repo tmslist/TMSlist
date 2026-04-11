@@ -2,56 +2,39 @@
 import Layout from '../../../layouts/Layout.astro';
 import ClinicCard from '../../../components/ClinicCard.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../../utils/dataHelpers';
-import { t } from '../../utils/i18n';
 import { COUNTRY_META } from '../../../utils/countryData';
 import { calculateClinicScore } from '../../../utils/ranking';
 
-export async function getStaticPaths() {
-    const clinics = await getClinicsByCountry('CA');
+const { region } = Astro.params;
+const regionSlug = region!;
 
-    // Group clinics by province
-    const provinceMap = new Map<string, typeof clinics>();
-    clinics.forEach(c => {
-        if (!c.state) return;
-        if (!provinceMap.has(c.state)) provinceMap.set(c.state, []);
-        provinceMap.get(c.state)!.push(c);
-    });
+const allClinics = await getClinicsByCountry('CA');
 
-    return [...provinceMap.entries()].map(([provinceName, provinceClinics]) => {
-        const regionSlug = provinceName.toLowerCase().replace(/\s+/g, '-');
+// Find province name from slug
+const provinceMatch = allClinics.find(c => c.state && c.state.toLowerCase().replace(/\s+/g, '-') === regionSlug);
+if (!provinceMatch) return Astro.redirect("/ca/");
+const provinceName = provinceMatch.state;
 
-        // Get unique cities
-        const cities = [...new Set(
-            provinceClinics.map(c => JSON.stringify({
-                name: c.city,
-                slug: c.city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, ''),
-            }))
-        )]
-            .map(s => JSON.parse(s))
-            .sort((a: any, b: any) => a.name.localeCompare(b.name));
+const provinceClinics = allClinics.filter(c => c.state === provinceName);
+const clinicCount = provinceClinics.length;
 
-        // Top 3 clinics by score
-        const topClinics = [...provinceClinics]
-            .sort((a, b) => calculateClinicScore(b) - calculateClinicScore(a))
-            .slice(0, 3);
+// Get unique cities
+const cities = [...new Set(
+    provinceClinics.map(c => JSON.stringify({
+        name: c.city,
+        slug: c.city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, ''),
+    }))
+)]
+    .map(s => JSON.parse(s))
+    .sort((a: any, b: any) => a.name.localeCompare(b.name));
 
-        return {
-            params: { region: regionSlug },
-            props: {
-                provinceName,
-                cities,
-                topClinics,
-                clinicCount: provinceClinics.length,
-                regionSlug,
-            },
-        };
-    });
-}
-
-const { provinceName, cities, topClinics, clinicCount, regionSlug } = Astro.props;
+// Top 3 clinics by score
+const topClinics = [...provinceClinics]
+    .sort((a, b) => calculateClinicScore(b) - calculateClinicScore(a))
+    .slice(0, 3);
 const meta = COUNTRY_META.CA;
 
-const title = `Best TMS Therapy Clinics in ${provinceName}, Canada (Top Rated Providers)`;
+const title = `Best TMS Clinics in ${provinceName}, Canada | TMS List`;
 const description = `Find the best TMS therapy providers in ${provinceName}, Canada. Compare ${clinicCount} top-rated clinics across ${cities.length} cities, read patient reviews, and find affordable treatment options near you.`;
 
 const getRatingVal = (c: any) => typeof c.rating === 'number' ? c.rating : c.rating?.aggregate || 0;
@@ -96,23 +79,38 @@ const schema = JSON.stringify({
   { name: "Canada", url: "/ca/" },
   { name: provinceName, url: `/ca/${regionSlug}/` },
 ]}>
-  <main class="container mx-auto px-4 py-8">
-    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
+  <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+    <div
+      class="ai-hero-image absolute inset-0 opacity-20"
+      data-subject={provinceName}
+      data-type="city"
+      data-cache-key={`ai-img:city:${provinceName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+      data-alt={`Illustration of ${provinceName}`}
+    >
+      <div class="ai-img-placeholder absolute inset-0"></div>
+      <img class="ai-img-result hidden w-full h-full object-cover" alt="" loading="lazy" />
+      <div class="ai-img-fallback hidden"></div>
+    </div>
+    <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
+      <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap" aria-label="Breadcrumb">
         <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
         <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         <a href="/ca/" class="hover:text-violet-600 transition-colors">Canada</a>
         <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         <span class="text-slate-700 font-medium">{provinceName}</span>
-    </nav>
+      </nav>
+      <div class="max-w-3xl">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Top Rated TMS Clinics in <span class="text-violet-600">{provinceName}</span></h1>
+        <p class="text-lg text-gray-600">Compare {clinicCount} TMS therapy providers across {cities.length} cities in {provinceName}, Canada. Find Health Canada approved clinics with verified reviews.</p>
+      </div>
+    </div>
+  </section>
 
+  <div class="container mx-auto px-4 py-8">
     <!-- Top Rated Section -->
     <section class="mb-16">
-      <div class="flex items-center mb-8">
-        <h2 class="text-2xl font-semibold text-gray-900">
-          Top Rated Clinics in {provinceName}
-        </h2>
-        <div class="ml-4 h-px flex-1 bg-gray-200"></div>
-      </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {topClinics.map((clinic: any) => <ClinicCard clinic={clinic} />)}
@@ -162,5 +160,37 @@ const schema = JSON.stringify({
         <li><a href="/specialists/">Find a TMS Specialist</a> -- board-certified psychiatrists</li>
       </ul>
     </section>
-  </main>
+  </div>
 </Layout>
+
+<script>
+  document.querySelectorAll('.ai-hero-image').forEach(async (container) => {
+    const el = container as HTMLElement;
+    const subject = el.dataset.subject;
+    const type = el.dataset.type;
+    const cacheKey = el.dataset.cacheKey!;
+    const img = el.querySelector('.ai-img-result') as HTMLImageElement;
+    if (!subject || !type || !img) return;
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      try {
+        const { image, ts } = JSON.parse(cached);
+        if (Date.now() - ts < 7 * 24 * 60 * 60 * 1000 && image) {
+          img.src = image;
+          img.classList.remove('hidden');
+          return;
+        }
+      } catch { localStorage.removeItem(cacheKey); }
+    }
+    try {
+      const params = new URLSearchParams({ type, subject });
+      const res = await fetch(`/api/ai/generate-image?${params}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data.image) return;
+      localStorage.setItem(cacheKey, JSON.stringify({ image: data.image, ts: Date.now() }));
+      img.src = data.image;
+      img.classList.remove('hidden');
+    } catch {}
+  });
+</script>

@@ -1,0 +1,121 @@
+---
+/**
+ * AiHeroImage — Lazy-loads an AI-generated image from the Gemini API.
+ * Shows a shimmer placeholder while loading, gracefully hides on failure.
+ * Uses localStorage + CDN caching to avoid redundant generation.
+ */
+interface Props {
+  subject: string;
+  type?: 'treatment' | 'hero' | 'city';
+  alt?: string;
+  class?: string;
+}
+
+const { subject, type = 'hero', alt, class: className = '' } = Astro.props;
+const cacheKey = `ai-img:${type}:${subject.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+---
+
+<div
+  class:list={['ai-hero-image relative overflow-hidden rounded-2xl', className]}
+  data-subject={subject}
+  data-type={type}
+  data-cache-key={cacheKey}
+  data-alt={alt || `AI-generated illustration for ${subject}`}
+>
+  <!-- Shimmer placeholder -->
+  <div class="ai-img-placeholder aspect-[16/9] w-full bg-gradient-to-br from-violet-50 via-slate-50 to-blue-50 animate-pulse rounded-2xl">
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="flex flex-col items-center gap-2 text-slate-300">
+        <svg class="w-8 h-8 animate-spin-slow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+        <span class="text-xs font-medium tracking-wide">Generating illustration...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image slot (populated by JS) -->
+  <img
+    class="ai-img-result hidden w-full aspect-[16/9] object-cover rounded-2xl shadow-lg ring-1 ring-slate-200/50"
+    alt=""
+    loading="lazy"
+    width="800"
+    height="450"
+  />
+
+  <!-- Error state (hidden by default) -->
+  <div class="ai-img-fallback hidden aspect-[16/9] w-full bg-gradient-to-br from-violet-100/60 via-slate-50 to-blue-100/60 rounded-2xl flex items-center justify-center">
+    <div class="text-center">
+      <svg class="w-10 h-10 text-violet-300 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+      </svg>
+      <p class="text-xs text-slate-400 font-medium">Illustration unavailable</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 3s linear infinite;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.ai-hero-image').forEach(async (container) => {
+    const el = container as HTMLElement;
+    const subject = el.dataset.subject;
+    const type = el.dataset.type;
+    const cacheKey = el.dataset.cacheKey!;
+    const altText = el.dataset.alt || '';
+
+    const placeholder = el.querySelector('.ai-img-placeholder') as HTMLElement;
+    const img = el.querySelector('.ai-img-result') as HTMLImageElement;
+    const fallback = el.querySelector('.ai-img-fallback') as HTMLElement;
+
+    if (!subject || !type) return;
+
+    // Check localStorage cache first
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      try {
+        const { image, ts } = JSON.parse(cached);
+        // Cache valid for 7 days
+        if (Date.now() - ts < 7 * 24 * 60 * 60 * 1000 && image) {
+          img.src = image;
+          img.alt = altText;
+          img.classList.remove('hidden');
+          placeholder.classList.add('hidden');
+          return;
+        }
+      } catch {
+        localStorage.removeItem(cacheKey);
+      }
+    }
+
+    // Fetch from API
+    try {
+      const params = new URLSearchParams({ type, subject });
+      const res = await fetch(`/api/ai/generate-image?${params}`);
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const data = await res.json();
+      if (!data.image) throw new Error('No image in response');
+
+      // Cache in localStorage
+      localStorage.setItem(cacheKey, JSON.stringify({ image: data.image, ts: Date.now() }));
+
+      img.src = data.image;
+      img.alt = altText;
+      img.classList.remove('hidden');
+      placeholder.classList.add('hidden');
+    } catch (err) {
+      // Show gradient fallback — not a hard error, just no image
+      placeholder.classList.add('hidden');
+      fallback.classList.remove('hidden');
+    }
+  });
+</script>

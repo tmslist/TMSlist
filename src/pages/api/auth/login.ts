@@ -1,11 +1,17 @@
 import type { APIRoute } from 'astro';
 import { loginSchema } from '../../../db/validation';
 import { getUserByEmail, verifyPassword, createSessionCookie } from '../../../utils/auth';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Rate limit: 5 requests per IP per 15 minutes
+    const ip = getClientIp(request);
+    const rateLimited = await strictRateLimit(ip, 5, '15 m', 'auth:login');
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
     const parsed = loginSchema.safeParse(body);
 

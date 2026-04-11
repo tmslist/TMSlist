@@ -12,7 +12,7 @@ image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=400
 
 TMS side effects are mild and local. That's not marketing — it's what 15+ years of clinical data shows. The most common complaint is scalp discomfort at the treatment site during the first few sessions. It fades as you get used to it.
 
-Here's the full list, ranked by how often they actually occur:
+Here's the full list, ranked by how often they actually happen:
 
 ## What most people experience
 
@@ -20,11 +20,11 @@ Here's the full list, ranked by how often they actually occur:
 
 This is the big one. The magnetic coil tapping against your scalp feels strange at first — some describe it as a woodpecker, others as a rubber band snapping. It ranges from mildly annoying to genuinely uncomfortable during the first 3-5 sessions.
 
-The good news: your scalp adapts. By week two, most patients barely notice it. Your technician can also adjust the coil position and intensity to reduce discomfort.
+The good news: your scalp adapts. By week two, most people barely notice it. Your technician can also adjust the coil position and intensity to dial down the discomfort.
 
 **Headache after treatment (20-30%)**
 
-Typically mild, similar to a tension headache. It responds to over-the-counter pain relief — Tylenol or Advil, taken after your session. These usually stop occurring after the first week.
+Typically mild, similar to a tension headache. It responds to over-the-counter pain relief — Tylenol or Advil, taken after your session. These usually stop happening after the first week.
 
 **Lightheadedness (5-10%)**
 
@@ -38,11 +38,11 @@ This is the one that scares people, so let's be direct: the risk of seizure duri
 
 **Hearing changes**
 
-TMS devices are loud (the clicking sound). Clinics provide earplugs. Use them. There are no reports of permanent hearing damage when ear protection is used.
+TMS devices are loud (the clicking sound). Clinics provide earplugs. Use them. There are no reports of permanent hearing damage when ear protection is worn.
 
 ## What TMS does NOT cause
 
-This is where TMS really separates itself from medication:
+This is where TMS really stands apart from medication:
 
 - **No weight gain** (unlike SSRIs, SNRIs, mood stabilizers)
 - **No sexual dysfunction** (unlike nearly every antidepressant)
@@ -62,4 +62,4 @@ Contact your TMS clinic if you experience:
 
 ## Bottom line
 
-TMS has one of the cleanest side effect profiles in psychiatry. The worst most people deal with is a few days of scalp discomfort and a headache or two. Compare that to the list of side effects on your antidepressant bottle, and it's clear why so many patients prefer it.
+TMS has one of the cleanest side effect profiles in psychiatry. The worst most people deal with is a few days of scalp discomfort and a headache or two. Compare that to the list of side effects on your antidepressant bottle, and you'll see why so many people prefer it.

@@ -86,11 +86,18 @@ const topClinics = bestInCity
     });
 
 // 5. Get Featured Specialists grouped by country (4 per country)
+// Helper: check if a doctor has a real photo (not a placeholder)
+function hasRealDoctorPhoto(img: string | undefined): boolean {
+    if (!img) return false;
+    return !img.includes('ui-avatars.com') && !img.includes('dicebear') && !img.includes('data:image');
+}
+
 const allDoctorsWithCountry = clinics
     .flatMap((clinic) =>
         (clinic.doctors_data || []).map((doc: any) => ({
             ...doc,
             image: doc.image_url || doc.image,
+            hasRealPhoto: hasRealDoctorPhoto(doc.image_url || doc.image),
             clinicName: clinic.name,
             clinicCity: clinic.city,
             clinicState: clinic.state,
@@ -99,20 +106,34 @@ const allDoctorsWithCountry = clinics
     )
     .filter((d: any) => d.image && d.slug);
 
-// Group by country, pick 4 random from each
+// Group by country, prioritize doctors with real photos, then pick 4 from each
 const countryCodes = ['US', 'GB', 'CA', 'AU', 'DE', 'IN'];
 const featuredDoctorsByCountry: Record<string, any[]> = {};
 for (const code of countryCodes) {
     const countryDocs = allDoctorsWithCountry
         .filter((d: any) => d.clinicCountry === code)
-        .sort((a, b) => { const ha = (a.name || '').charCodeAt(0); const hb = (b.name || '').charCodeAt(0); return ((ha * 9301 + 49297) % 233280) - ((hb * 9301 + 49297) % 233280); })
+        .sort((a: any, b: any) => {
+            // Prioritize real photos over placeholders
+            if (a.hasRealPhoto && !b.hasRealPhoto) return -1;
+            if (!a.hasRealPhoto && b.hasRealPhoto) return 1;
+            // Then deterministic shuffle
+            const ha = (a.name || '').charCodeAt(0);
+            const hb = (b.name || '').charCodeAt(0);
+            return ((ha * 9301 + 49297) % 233280) - ((hb * 9301 + 49297) % 233280);
+        })
         .slice(0, 4);
     if (countryDocs.length > 0) {
         featuredDoctorsByCountry[code] = countryDocs;
     }
 }
 // Default fallback for template rendering
-const featuredDoctors = featuredDoctorsByCountry['US'] || allDoctorsWithCountry.sort((a, b) => { const ha = (a.name || '').charCodeAt(0); const hb = (b.name || '').charCodeAt(0); return ((ha * 9301 + 49297) % 233280) - ((hb * 9301 + 49297) % 233280); }).slice(0, 4);
+const featuredDoctors = featuredDoctorsByCountry['US'] || allDoctorsWithCountry
+    .sort((a: any, b: any) => {
+        if (a.hasRealPhoto && !b.hasRealPhoto) return -1;
+        if (!a.hasRealPhoto && b.hasRealPhoto) return 1;
+        return 0;
+    })
+    .slice(0, 4);
 
 const totalDoctors = await getTotalDoctorCount();
 const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
@@ -1000,15 +1021,7 @@ const schema = JSON.stringify({
             <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
                 {
                     topClinics.slice(0, 12).map((clinic, idx) => {
-                        const fallbackImages = [
-                            "/images/tms_chair_luxury_1769446442231.jpg",
-                            "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800",
-                            "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=800",
-                            "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800",
-                            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
-                            "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?auto=format&fit=crop&q=80&w=800"
-                        ];
-                        const img = clinic.hero_image_url || fallbackImages[(clinic.name.length + idx) % fallbackImages.length];
+                        const img = getClinicPhoto(clinic);
                         return (
                         <div class="group bg-white rounded-3xl p-4 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-slate-100 hover:border-[#7C3AED]/20 flex flex-col sm:flex-row gap-5">
                             <!-- Image Section -->

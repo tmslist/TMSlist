@@ -2,18 +2,11 @@
 import Layout from "../../layouts/Layout.astro";
 import { getAllQuestions } from "../../db/queries";
 
-export async function getStaticPaths() {
-    const questionsData = await getAllQuestions();
-    return questionsData.map((q) => ({
-        params: { slug: q.slug },
-        props: { question: q },
-    }));
-}
+const { slug } = Astro.params;
 
-const { question } = Astro.props;
-
-// Smart related questions: mix of same category and different categories
 const questionsData = await getAllQuestions();
+const question = questionsData.find((q) => q.slug === slug);
+if (!question) return Astro.redirect("/questions/");
 const sameCategory = questionsData
     .filter((q) => q.category === question.category && q.id !== question.id)
     .slice(0, 3);
@@ -163,7 +156,7 @@ const description = question.quickAnswer;
                                     {rq.question}
                                 </h3>
                                 <p class="text-xs text-gray-600 line-clamp-2 mb-2">
-                                    {rq.quickAnswer.slice(0, 80)}...
+                                    {(rq.quickAnswer || rq.answer || '').slice(0, 80)}...
                                 </p>
                                 <span class="text-xs text-violet-600 font-medium group-hover:underline">
                                     Read Answer →

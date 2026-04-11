@@ -1,0 +1,107 @@
+---
+interface Props {
+  currentPath: string;
+  state?: string;
+  city?: string;
+  condition?: string;
+}
+
+const { currentPath, state, city, condition } = Astro.props;
+
+interface LinkItem {
+  label: string;
+  href: string;
+  description: string;
+}
+
+const links: LinkItem[] = [];
+
+// Determine page type from path
+const isClinicPage = currentPath.includes('/clinics/') || /\/us\/[^/]+\/[^/]+\/[^/]+/.test(currentPath);
+const isCityPage = /\/us\/[^/]+\/[^/]+\/?$/.test(currentPath) && !isClinicPage;
+const isStatePage = /\/us\/[^/]+\/?$/.test(currentPath);
+const isTreatmentPage = currentPath.startsWith('/treatments/') || currentPath.startsWith('/technology/');
+
+// State-level links
+if (state) {
+  const stateSlug = state.toLowerCase().replace(/\s+/g, '-');
+
+  if (isClinicPage || isCityPage) {
+    links.push({
+      label: `All ${state} Clinics`,
+      href: `/us/${stateSlug}/`,
+      description: `Browse all TMS clinics in ${state}`,
+    });
+  }
+
+  if (isClinicPage && city) {
+    const citySlug = city.toLowerCase().replace(/\s+/g, '-');
+    links.push({
+      label: `${city} TMS Clinics`,
+      href: `/us/${stateSlug}/${citySlug}/clinics/`,
+      description: `Other TMS providers in ${city}`,
+    });
+  }
+}
+
+// Treatment links
+const treatmentLinks = [
+  { label: 'TMS for Depression', href: '/technology/tms-for-depression/', description: 'Learn about TMS therapy for depression' },
+  { label: 'TMS for Anxiety', href: '/technology/tms-for-anxiety/', description: 'TMS treatment options for anxiety disorders' },
+  { label: 'TMS for OCD', href: '/technology/tms-for-ocd/', description: 'How TMS helps with OCD treatment' },
+  { label: 'TMS for PTSD', href: '/technology/tms-for-ptsd/', description: 'TMS therapy for post-traumatic stress' },
+];
+
+if (!isTreatmentPage) {
+  links.push(...treatmentLinks.slice(0, 2));
+} else {
+  // On treatment pages, show other treatments
+  const otherTreatments = treatmentLinks.filter(t => !currentPath.startsWith(t.href.replace(/\/$/, '')));
+  links.push(...otherTreatments.slice(0, 3));
+}
+
+// General navigation links
+const generalLinks = [
+  { label: 'Find Clinics Near Me', href: '/us/', description: 'Search TMS clinics across all states' },
+  { label: 'Compare Clinics', href: '/compare/', description: 'Side-by-side clinic comparison tool' },
+  { label: 'Am I a Candidate?', href: '/quiz/am-i-a-candidate/', description: 'Take the TMS candidacy quiz' },
+  { label: 'Insurance Coverage', href: '/resources/', description: 'TMS insurance and payment information' },
+  { label: 'Patient Stories', href: '/stories/', description: 'Read TMS patient experiences' },
+  { label: 'Research & Studies', href: '/research/', description: 'Latest TMS research and clinical trials' },
+];
+
+for (const link of generalLinks) {
+  if (links.length >= 8) break;
+  if (!currentPath.startsWith(link.href.replace(/\/$/, ''))) {
+    links.push(link);
+  }
+}
+
+const displayLinks = links.slice(0, 8);
+---
+
+{displayLinks.length > 0 && (
+  <section class="mt-12 pt-8 border-t border-gray-200">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">Related Pages</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      {displayLinks.map(link => (
+        <a
+          href={link.href}
+          class="group flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:border-violet-300 hover:bg-violet-50/50 transition-all"
+        >
+          <div class="min-w-0">
+            <span class="text-sm font-medium text-gray-800 group-hover:text-violet-700 transition-colors block truncate">
+              {link.label}
+            </span>
+            <span class="text-xs text-gray-500 block truncate mt-0.5">
+              {link.description}
+            </span>
+          </div>
+          <svg class="w-4 h-4 text-gray-400 group-hover:text-violet-600 flex-shrink-0 ml-2 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

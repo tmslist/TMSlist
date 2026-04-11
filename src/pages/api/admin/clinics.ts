@@ -17,6 +17,22 @@ export const GET: APIRoute = async ({ request, url }) => {
   }
 
   try {
+    // Single clinic by ID
+    const singleId = url.searchParams.get('id');
+    if (singleId) {
+      const result = await db.select().from(clinics).where(eq(clinics.id, singleId)).limit(1);
+      if (result.length === 0) {
+        return new Response(JSON.stringify({ error: 'Clinic not found' }), {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+      return new Response(JSON.stringify({ data: result[0] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     const search = url.searchParams.get('search') || '';
     const verified = url.searchParams.get('verified');
     const limit = Math.min(parseInt(url.searchParams.get('limit') || '50'), 200);
@@ -79,6 +95,8 @@ export const PUT: APIRoute = async ({ request }) => {
       'verified', 'isFeatured', 'name', 'phone', 'website', 'email',
       'description', 'descriptionLong', 'machines', 'specialties', 'insurances',
       'accessibility', 'availability', 'pricing', 'openingHours',
+      'address', 'city', 'state', 'zip', 'country', 'lat', 'lng',
+      'providerType', 'media', 'googleProfile', 'faqs', 'slug',
     ] as const;
 
     const safeUpdates: Record<string, unknown> = { updatedAt: new Date() };
@@ -105,6 +123,47 @@ export const PUT: APIRoute = async ({ request }) => {
     });
   } catch (err) {
     console.error('Admin clinic update error:', err);
+    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+};
+
+// Delete a clinic
+export const DELETE: APIRoute = async ({ request, url }) => {
+  const session = getSessionFromRequest(request);
+  if (!hasRole(session, 'admin')) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  try {
+    const id = url.searchParams.get('id');
+    if (!id) {
+      return new Response(JSON.stringify({ error: 'Clinic ID required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    await db.delete(clinics).where(eq(clinics.id, id));
+
+    await db.insert(auditLog).values({
+      userId: session?.userId ?? null,
+      action: 'delete_clinic',
+      entityType: 'clinic',
+      entityId: id,
+    });
+
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (err) {
+    console.error('Admin clinic delete error:', err);
     return new Response(JSON.stringify({ error: 'Internal server error' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },

@@ -20,7 +20,7 @@ After reviewing hundreds of clinics across the country, we've identified pattern
 
 This is the biggest one. TMS is a psychiatric treatment for psychiatric conditions. A board-certified psychiatrist should be evaluating you before treatment, overseeing your protocol, and monitoring your progress.
 
-Some clinics delegate everything to nurse practitioners or physician assistants with minimal psychiatric training. Others are run entirely by non-psychiatric physicians who completed a weekend TMS course. There's nothing wrong with NPs and PAs in general — they're essential members of treatment teams — but someone with deep psychiatric expertise should be directing your care plan.
+Some clinics delegate everything to nurse practitioners or physician assistants with minimal psychiatric training. Others are run entirely by non-psychiatric physicians who completed a weekend TMS course. There's nothing wrong with NPs and PAs in general — they're a key part of treatment teams — but someone with deep psychiatric expertise should be directing your care plan.
 
 Ask directly: "Who is the psychiatrist overseeing my treatment, and will I meet with them?" If the answer is vague or they dodge the question, keep looking. You can search for board-certified TMS psychiatrists in your area on our [specialists directory](/specialists/).
 
@@ -30,7 +30,7 @@ Ask directly: "Who is the psychiatrist overseeing my treatment, and will I meet 
 
 No honest provider says these things. TMS has strong evidence behind it — response rates around 50-60% for treatment-resistant depression, with 30-35% achieving full remission. Those are genuinely good numbers for people who haven't responded to medication. But they're not 95%, and no one can guarantee you'll be in the responder group.
 
-Clinics that inflate success rates are either cherry-picking data, using non-standard definitions of "response," or simply lying. Reputable clinics will give you realistic expectations and explain the range of possible outcomes.
+Clinics that inflate success rates are either cherry-picking data, using non-standard definitions of "response," or simply lying. Good clinics will give you realistic expectations and explain the range of possible outcomes.
 
 ### 3. No clinical evaluation before starting treatment
 
@@ -68,11 +68,11 @@ The best clinics pair you with a psychiatrist who conducts your initial evaluati
 
 ### 2. Transparent about outcomes and limitations
 
-Quality providers will tell you upfront: "TMS doesn't work for everyone. Here's what the data shows for your condition, and here's what we've seen in our practice." They'll discuss what happens if your first course doesn't work, and what the options are at that point. Honesty about limitations is a hallmark of clinical confidence.
+Quality providers will tell you upfront: "TMS doesn't work for everyone. Here's what the data shows for your condition, and here's what we've seen in our practice." They'll discuss what happens if your first course doesn't work, and what the options are at that point. Honesty about limitations is a sign of clinical confidence.
 
 ### 3. Experienced TMS technicians
 
-The person operating the TMS device day-to-day matters enormously. Experienced technicians know how to position the coil consistently, adjust for comfort, and recognize when something seems off. Ask how long the technicians have been performing TMS and how many patients they've treated.
+The person operating the TMS device day-to-day matters enormously. Experienced technicians know how to position the coil consistently, adjust for comfort, and recognize when something seems off. Ask how long the technicians have been performing TMS and how many people they've treated.
 
 ### 4. They coordinate with your existing providers
 
@@ -94,7 +94,7 @@ Don't just take a clinic's word for it. Here's a quick verification checklist:
 
 **Read real patient reviews.** Google reviews, Healthgrades, and Zocdoc can all provide signal. Look for specifics about the treatment experience, not just star ratings. Be wary of clinics with suspiciously uniform five-star reviews.
 
-**Ask about their volume.** Clinics that treat more patients generally have more refined processes and more experienced staff. "How many TMS courses did you complete last year?" is a fair question.
+**Ask about their volume.** Clinics that treat more people generally have more refined processes and more experienced staff. "How many TMS courses did you complete last year?" is a fair question.
 
 **Verify insurance acceptance before your first visit.** Call your insurance company directly — don't rely only on what the clinic tells you. Get a pre-authorization if required.
 
@@ -104,4 +104,4 @@ Don't just take a clinic's word for it. Here's a quick verification checklist:
 
 We maintain a directory of TMS clinics across the United States with verified information about their equipment, providers, and insurance acceptance. You can [search clinics by location](/us/) or browse [verified clinics](/verified-clinics/) that meet our quality criteria.
 
-Choosing the right TMS clinic is one of the most consequential decisions in your treatment journey. The difference between a great clinic and a mediocre one isn't just about comfort — it can genuinely affect whether the treatment works. Take the time to evaluate your options, ask hard questions, and trust your instincts when something doesn't feel right.
+Choosing the right TMS clinic is one of the biggest decisions in your treatment. The difference between a great clinic and a mediocre one isn't just about comfort — it can genuinely affect whether the treatment works. Take the time to evaluate your options, ask hard questions, and trust your gut when something doesn't feel right.

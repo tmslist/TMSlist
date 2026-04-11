@@ -8,33 +8,39 @@ priorAuthRequired: true
 
 ## Cigna's coverage
 
-Cigna (now Cigna Evernorth) covers TMS for treatment-resistant major depressive disorder under their medical coverage policy. Prior authorization is required.
+Cigna (now Cigna Evernorth) covers TMS for treatment-resistant major depressive disorder. Prior authorization is required.
+
+Good news: Cigna's criteria are among the more reasonable out there.
 
 ## What Cigna requires
 
 - **Diagnosis**: Major Depressive Disorder, moderate to severe
-- **Failed medications**: At least **2 antidepressants** from different pharmacological classes, each at adequate dose for at least 8 weeks
-- **Current severity**: Documented with a standardized depression scale (PHQ-9, HAM-D, or BDI)
-- **Provider**: Must be an in-network TMS provider with appropriate credentials
+- **Failed medications**: At least **2 antidepressants** from different classes, each at adequate dose for at least 8 weeks
+- **Current severity**: Documented with a standardized scale — PHQ-9, HAM-D, or BDI
+- **Provider**: In-network TMS provider with appropriate credentials
 
-Cigna's criteria are among the more reasonable in the industry — 2 failed medications is the standard threshold.
+Two failed meds. That's the standard threshold, and Cigna sticks to it.
 
 ## Session limits
 
 Cigna typically authorizes:
+
 - **Acute phase**: Up to 36 sessions
-- **Maintenance**: May require separate authorization. Document symptom return with updated depression scores.
+- **Maintenance**: May need separate authorization. Your provider should document any symptom return with updated depression scores
 
 ## What you'll pay
 
-Varies by plan, but typical ranges:
+Depends on your plan:
+
 - **Cigna PPO (in-network)**: $500-$2,500 total after deductible
-- **Cigna HMO**: May require referral from PCP to psychiatrist to TMS. Lower cost but more hoops
-- **High-deductible / HSA plans**: Full cost until deductible met, then coinsurance. HSA/FSA funds can be used for TMS copays
+- **Cigna HMO**: Lower cost, but more hoops — you'll need a referral from your PCP to a psychiatrist to TMS
+- **High-deductible / HSA plans**: Full cost until your deductible is met, then coinsurance. You can use HSA/FSA funds for copays and coinsurance
 
 ## Tips for approval
 
-- Submit PHQ-9 scores at baseline — Cigna wants quantified severity
-- Include a letter of medical necessity from the prescribing psychiatrist
-- Document each failed medication with dates, doses, duration, and reason for discontinuation
-- If denied, appeal with additional documentation. Cigna's first-level appeal success rate for TMS is comparable to other major insurers (~40-50%)
+- Submit PHQ-9 scores at baseline. Cigna wants numbers, not just "patient is depressed"
+- Include a letter of medical necessity from your prescribing psychiatrist
+- Document each failed medication: dates, doses, how long you took it, and why it didn't work
+- If denied, appeal with more documentation. Cigna's first-level appeal success rate for TMS runs about 40-50% — same as other major insurers
+
+The theme here? Document everything. Cigna rewards thorough paperwork.

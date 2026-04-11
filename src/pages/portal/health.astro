@@ -1,0 +1,20 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import PortalSidebar from "../../components/react/PortalSidebar";
+import PortalHealthScore from "../../components/react/PortalHealthScore";
+import { getSessionFromRequest } from "../../utils/auth";
+const session = getSessionFromRequest(Astro.request);
+if (!session) return Astro.redirect("/portal/login");
+---
+<Layout title="Profile Health | Doctor Portal" noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <PortalSidebar client:load currentPage="health" userEmail={session.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <h1 class="text-2xl font-semibold text-gray-900 mb-6">Profile Health Score</h1>
+        <PortalHealthScore client:idle />
+      </div>
+    </main>
+  </div>
+</Layout>

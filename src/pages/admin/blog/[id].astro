@@ -1,0 +1,26 @@
+---
+export const prerender = false;
+
+import Layout from "../../../layouts/Layout.astro";
+import AdminSidebar from "../../../components/react/AdminSidebar";
+import AdminBlogEditor from "../../../components/react/AdminBlogEditor";
+import { getSessionFromRequest, hasRole } from "../../../utils/auth";
+
+const session = getSessionFromRequest(Astro.request);
+if (!hasRole(session, 'admin', 'editor')) {
+  return Astro.redirect("/admin/login");
+}
+
+const { id } = Astro.params;
+---
+
+<Layout title="Edit Post | TMS List Admin" noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <AdminSidebar client:load currentPage="blog" userEmail={session!.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-5xl">
+        <AdminBlogEditor client:load postId={id} />
+      </div>
+    </main>
+  </div>
+</Layout>

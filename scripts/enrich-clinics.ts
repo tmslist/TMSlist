@@ -418,6 +418,52 @@ function generateDoctorBio(doctor: DoctorData, clinic: Clinic): string {
   return parts.join(' ');
 }
 
+// ─── Description Long Generation ──────────────────────────────────────────────
+
+function generateDescriptionLong(clinic: Clinic): string {
+  const stateFull = STATE_FULL_NAMES[clinic.state] || clinic.state;
+  const machines = clinic.machines || [];
+  const treatments = clinic.treatments || [];
+  const doctors = clinic.doctors_data || [];
+  const insurances = clinic.insurance_accepted || [];
+  const hash = simpleHash(clinic.id || clinic.slug);
+
+  const parts: string[] = [];
+
+  // Opening sentence variants
+  const openers = [
+    `${clinic.name} provides advanced TMS (Transcranial Magnetic Stimulation) therapy in ${clinic.city}, ${stateFull}, offering FDA-cleared, non-invasive treatment for patients seeking alternatives to traditional antidepressant medications.`,
+    `Located in ${clinic.city}, ${stateFull}, ${clinic.name} specializes in Transcranial Magnetic Stimulation (TMS) therapy — a proven, non-invasive brain stimulation treatment for depression and other mental health conditions.`,
+    `${clinic.name} is a dedicated TMS therapy provider serving ${clinic.city}, ${stateFull}, and surrounding communities with cutting-edge neuromodulation treatments for treatment-resistant depression and related conditions.`,
+    `Serving patients throughout ${clinic.city}, ${stateFull}, ${clinic.name} offers state-of-the-art TMS therapy — an FDA-cleared treatment that uses targeted magnetic pulses to stimulate brain regions involved in mood regulation.`,
+    `${clinic.name} in ${clinic.city}, ${stateFull} delivers expert TMS therapy for patients who have not found relief through traditional medications, providing a safe, non-invasive path to mental health recovery.`,
+  ];
+  parts.push(openers[hash % openers.length]);
+
+  // Technology
+  if (machines.length > 0) {
+    parts.push(`The clinic uses ${machines.join(', ')} technology to deliver precise, targeted treatment.`);
+  }
+
+  // Conditions
+  if (treatments.length > 0) {
+    parts.push(`Conditions treated include ${treatments.slice(0, 4).join(', ')}${treatments.length > 4 ? ', and more' : ''}.`);
+  }
+
+  // Team
+  if (doctors.length > 0) {
+    const leadDoc = doctors[0];
+    parts.push(`The clinical team is led by ${leadDoc.name}${leadDoc.title ? `, ${leadDoc.title}` : ''}${doctors.length > 1 ? `, along with ${doctors.length - 1} additional specialist${doctors.length > 2 ? 's' : ''}` : ''}.`);
+  }
+
+  // Insurance
+  if (insurances.length > 0) {
+    parts.push(`${clinic.name} accepts most major insurance plans including ${insurances.slice(0, 3).join(', ')}${insurances.length > 3 ? ', and others' : ''}.`);
+  }
+
+  return parts.join(' ');
+}
+
 // ─── Image Fetching ─────────────────────────────────────────────────────────
 
 function makeAbsolute(imageUrl: string, baseUrl: string): string {
@@ -530,6 +576,11 @@ async function main() {
       if (!imagesOnly) {
         const article = generateSeoArticle(clinic);
         clinic.seo_article = article;
+
+        // Populate description_long if empty or too short
+        if (!clinic.description_long || clinic.description_long.trim().length < 100) {
+          clinic.description_long = generateDescriptionLong(clinic);
+        }
 
         // Generate enriched FAQs
         clinic.faqs = generateEnrichedFaqs(clinic);

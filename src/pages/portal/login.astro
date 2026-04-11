@@ -1,0 +1,17 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import PortalLoginForm from "../../components/react/PortalLoginForm";
+import { getSessionFromRequest } from "../../utils/auth";
+
+const session = getSessionFromRequest(Astro.request);
+if (session) {
+  return Astro.redirect("/portal/dashboard");
+}
+---
+
+<Layout title="Doctor Portal Login | TMS List" description="Sign in to manage your clinic listing on TMS List." noindex={true}>
+  <main class="container mx-auto px-4 py-12">
+    <PortalLoginForm client:load />
+  </main>
+</Layout>

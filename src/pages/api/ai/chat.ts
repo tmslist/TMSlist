@@ -41,6 +41,18 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // Validate and sanitize input: max 2000 chars per message, strip HTML tags
+    for (const msg of messages) {
+      if (typeof msg.content !== 'string') continue;
+      if (msg.content.length > 2000) {
+        return new Response(JSON.stringify({ error: 'Message too long. Maximum 2000 characters.' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+      msg.content = msg.content.replace(/<[^>]*>/g, '');
+    }
+
     // Limit conversation history to last 10 messages
     const recentMessages = messages.slice(-10);
 

@@ -34,6 +34,21 @@ const categoryColors: Record<string, { bg: string; text: string; dot: string }> 
     'Patient Guide': { bg: 'bg-rose-50', text: 'text-rose-600', dot: 'bg-rose-500' },
 };
 const defaultColor = { bg: 'bg-slate-50', text: 'text-slate-600', dot: 'bg-slate-500' };
+
+const categoryGradients: Record<string, string> = {
+    'Research': 'from-blue-600 to-indigo-900',
+    'Treatment': 'from-emerald-600 to-teal-900',
+    'Insurance': 'from-amber-600 to-orange-900',
+    'FAQ': 'from-violet-600 to-purple-900',
+    'Patient Guide': 'from-rose-600 to-pink-900',
+};
+const cardGradients: Record<string, string> = {
+    'Research': 'from-blue-500/80 to-indigo-800',
+    'Treatment': 'from-emerald-500/80 to-teal-800',
+    'Insurance': 'from-amber-500/80 to-orange-800',
+    'FAQ': 'from-violet-500/80 to-purple-800',
+    'Patient Guide': 'from-rose-500/80 to-pink-800',
+};
 ---
 
 <Layout title="TMS Therapy Blog - Expert Guides & Research | TMS List" description="Expert articles on TMS therapy, depression treatment, insurance coverage, and the latest research in brain stimulation.">
@@ -86,54 +101,84 @@ const defaultColor = { bg: 'bg-slate-50', text: 'text-slate-600', dot: 'bg-slate
             <div class="container mx-auto px-4 max-w-6xl">
 
                 <!-- Featured Post -->
-                {blogPosts.length > 0 && (
-                    <a href={`/blog/${blogPosts[0].slug}/`} data-category={blogPosts[0].category}
+                {blogPosts.length > 0 && (() => {
+                    const feat = blogPosts[0];
+                    const fc = categoryColors[feat.category] || defaultColor;
+                    const featGrad = categoryGradients[feat.category] || 'from-violet-600 to-slate-900';
+                    return (
+                    <a href={`/blog/${feat.slug}/`} data-category={feat.category}
                        class="blog-card group block mb-14">
                         <div class="grid lg:grid-cols-2 gap-0 bg-slate-950 rounded-3xl overflow-hidden">
                             <div class="relative h-64 lg:h-auto overflow-hidden">
-                                <img src={blogPosts[0].image} alt={blogPosts[0].title}
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80" loading="eager" />
+                                <!-- Gradient fallback -->
+                                <div class={`absolute inset-0 bg-gradient-to-br ${featGrad}`}></div>
+                                <div class="absolute inset-0 opacity-[0.06]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 24px 24px;"></div>
+                                <!-- AI image overlay -->
+                                <img
+                                    class="blog-card-ai absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:scale-105 transition-transform"
+                                    data-slug={feat.slug}
+                                    data-subject={feat.title}
+                                    alt={feat.title}
+                                    loading="eager"
+                                />
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent lg:bg-gradient-to-r"></div>
+                                <!-- Title on image -->
+                                <div class="absolute bottom-4 left-4 right-4 lg:hidden z-10">
+                                    <span class={`inline-block px-2.5 py-1 ${fc.bg} ${fc.text} text-[10px] font-bold uppercase tracking-wider rounded-md backdrop-blur-sm mb-2`}>{feat.category}</span>
+                                    <h2 class="text-xl font-bold text-white leading-tight line-clamp-2">{feat.title}</h2>
+                                </div>
                             </div>
                             <div class="p-8 lg:p-12 flex flex-col justify-center">
                                 <div class="flex items-center gap-3 mb-5">
-                                    {(() => { const c = categoryColors[blogPosts[0].category] || defaultColor; return (
-                                        <span class={`px-3 py-1 ${c.bg} ${c.text} text-[11px] font-bold uppercase tracking-wider rounded-md`}>{blogPosts[0].category}</span>
-                                    )})()}
-                                    <span class="text-slate-500 text-sm">{blogPosts[0].date}</span>
+                                    <span class={`px-3 py-1 ${fc.bg} ${fc.text} text-[11px] font-bold uppercase tracking-wider rounded-md`}>{feat.category}</span>
+                                    <span class="text-slate-500 text-sm">{feat.date}</span>
                                 </div>
-                                <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-violet-300 transition-colors tracking-tight leading-tight">
-                                    {blogPosts[0].title}
+                                <h2 class="hidden lg:block text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-violet-300 transition-colors tracking-tight leading-tight">
+                                    {feat.title}
                                 </h2>
-                                <p class="text-slate-400 leading-relaxed mb-6 line-clamp-3">{blogPosts[0].excerpt}</p>
+                                <p class="text-slate-400 leading-relaxed mb-6 line-clamp-3">{feat.excerpt}</p>
                                 <div class="flex items-center gap-4">
                                     <span class="text-violet-400 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
                                         Read Article <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                                     </span>
-                                    <span class="text-slate-600 text-sm">{blogPosts[0].readTime}</span>
+                                    <span class="text-slate-600 text-sm">{feat.readTime}</span>
                                 </div>
                             </div>
                         </div>
                     </a>
-                )}
+                )})()}
 
                 <!-- Posts Grid -->
                 <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {blogPosts.slice(1).map((post) => {
                         const c = categoryColors[post.category] || defaultColor;
+                        const cardGrad = cardGradients[post.category] || 'from-violet-500/80 to-slate-800';
                         return (
                         <a href={`/blog/${post.slug}/`} data-category={post.category}
                            class="blog-card group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] hover:border-slate-200 transition-all duration-300">
-                            <div class="relative h-48 bg-slate-100 overflow-hidden">
-                                <img src={post.image} alt={post.title}
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                                <span class={`absolute top-3 left-3 px-2.5 py-1 ${c.bg} ${c.text} text-[10px] font-bold uppercase tracking-wider rounded-md backdrop-blur-sm`}>{post.category}</span>
+                            <div class="relative h-48 overflow-hidden">
+                                <!-- Category-colored gradient fallback -->
+                                <div class={`absolute inset-0 bg-gradient-to-br ${cardGrad}`}></div>
+                                <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 20px 20px;"></div>
+                                <!-- AI image overlay -->
+                                <img
+                                    class="blog-card-ai absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:scale-105"
+                                    data-slug={post.slug}
+                                    data-subject={post.title}
+                                    alt={post.title}
+                                    loading="lazy"
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
+                                <!-- Category badge -->
+                                <span class={`absolute top-3 left-3 px-2.5 py-1 bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider rounded-md backdrop-blur-sm border border-white/10`}>{post.category}</span>
+                                <!-- Title on the card image -->
+                                <div class="absolute bottom-3 left-3 right-3 z-10">
+                                    <h2 class="text-[15px] font-bold text-white leading-snug line-clamp-2 drop-shadow-sm">{post.title}</h2>
+                                </div>
                             </div>
-                            <div class="p-6">
-                                <h2 class="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-violet-600 transition-colors tracking-tight leading-snug line-clamp-2">{post.title}</h2>
+                            <div class="p-5">
                                 <p class="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
-                                <div class="flex items-center justify-between pt-4 border-t border-slate-50 text-xs text-slate-400">
+                                <div class="flex items-center justify-between pt-3 border-t border-slate-50 text-xs text-slate-400">
                                     <span>{post.date}</span>
                                     <span class="font-medium">{post.readTime}</span>
                                 </div>
@@ -192,6 +237,51 @@ const defaultColor = { bg: 'bg-slate-50', text: 'text-slate-600', dot: 'bg-slate
                 });
             });
         });
+
+        // Lazy-load AI cover images for blog cards (staggered to respect rate limits)
+        const aiImages = document.querySelectorAll('.blog-card-ai') as NodeListOf<HTMLImageElement>;
+        let loadIndex = 0;
+
+        async function loadNextAiImage() {
+            if (loadIndex >= aiImages.length) return;
+            const img = aiImages[loadIndex];
+            loadIndex++;
+            const slug = img.dataset.slug;
+            const subject = img.dataset.subject;
+            if (!slug || !subject) { loadNextAiImage(); return; }
+
+            const cacheKey = `ai-img:blog-cover:${slug}`;
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                try {
+                    const { image, ts } = JSON.parse(cached);
+                    if (Date.now() - ts < 7 * 24 * 60 * 60 * 1000 && image) {
+                        img.src = image;
+                        img.onload = () => { img.style.opacity = '0.6'; };
+                        if (img.complete && img.src) img.style.opacity = '0.6';
+                        loadNextAiImage();
+                        return;
+                    }
+                } catch { localStorage.removeItem(cacheKey); }
+            }
+
+            try {
+                const params = new URLSearchParams({ type: 'hero', subject });
+                const res = await fetch(`/api/ai/generate-image?${params}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.image) {
+                        localStorage.setItem(cacheKey, JSON.stringify({ image: data.image, ts: Date.now() }));
+                        img.src = data.image;
+                        img.onload = () => { img.style.opacity = '0.6'; };
+                    }
+                }
+            } catch {}
+            // Stagger requests to avoid rate limit
+            setTimeout(loadNextAiImage, 800);
+        }
+
+        loadNextAiImage();
 
         const form = document.getElementById("newsletter-form") as HTMLFormElement;
         const content = document.getElementById("newsletter-content");

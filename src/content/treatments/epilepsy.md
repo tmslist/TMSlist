@@ -9,45 +9,49 @@ image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fi
 
 ## TMS and seizure disorders — a complex relationship
 
-The relationship between TMS and epilepsy is nuanced. High-frequency TMS can potentially trigger seizures (it's the primary safety risk of TMS treatment). But low-frequency TMS has the opposite effect — it reduces cortical excitability and may help prevent seizures.
+Here's the paradox. High-frequency TMS can potentially trigger seizures — it's the main safety risk of any TMS treatment. But low-frequency TMS does the opposite. It dials down cortical excitability. It may actually help prevent seizures.
 
-This paradox makes epilepsy both a **contraindication** for standard high-frequency TMS and a **potential therapeutic target** for low-frequency protocols.
+That makes epilepsy both a **contraindication** for standard high-frequency TMS and a **potential treatment target** for low-frequency protocols. Same technology, opposite effects, depending on how you use it.
 
 ## How low-frequency TMS may help
 
-**Low-frequency (0.5-1Hz) rTMS** reduces neural excitability in the stimulated region. For epilepsy, this means calming the seizure focus — the overexcitable brain area where seizures originate.
+**Low-frequency (0.5-1 Hz) rTMS** reduces neural excitability in the area being stimulated. For epilepsy, that means calming the seizure focus — the patch of overexcitable brain tissue where seizures start.
 
-The approach works best when:
-- The seizure focus is near the cortical surface (accessible to TMS)
-- The focus is well-localized (identified by EEG or MRI)
-- The patient has drug-resistant focal epilepsy
+It works best when:
+- The seizure focus sits near the cortical surface (where TMS can actually reach it)
+- The focus is well-localized (pinpointed by EEG or MRI)
+- The patient has drug-resistant focal epilepsy — meaning medications haven't been enough
 
 ## Evidence
 
-- A 2020 Cochrane review found low-frequency rTMS reduced seizure frequency in some patients with focal epilepsy, but evidence quality was low-moderate
-- Studies targeting the seizure focus directly (guided by EEG) show better results than unfocused protocols
-- Reductions of 20-40% in seizure frequency reported in responding patients
+The research is mixed, but there are signals worth paying attention to:
+
+- A 2020 Cochrane review found low-frequency rTMS reduced seizure frequency in some patients with focal epilepsy, though evidence quality was rated low-to-moderate
+- Studies that targeted the seizure focus directly (guided by EEG) showed better results than protocols without precise targeting
+- Responding patients saw 20-40% reductions in seizure frequency
 - Effects are often temporary, requiring repeated treatment courses
 
 ## Why this remains investigational
 
-- Results across studies are inconsistent — some show benefit, others don't
-- Optimal stimulation parameters (frequency, number of pulses, duration) not established
-- Difficulty reaching deep seizure foci with standard TMS coils
-- Patient selection criteria not yet standardized
+A few honest obstacles:
+
+- Results across studies are inconsistent — some show clear benefit, others don't
+- Nobody has locked down the optimal stimulation parameters (frequency, pulse count, treatment duration)
+- Standard TMS coils can't reach deep seizure foci — and many seizure foci are deep
+- Patient selection criteria haven't been standardized
 
 ## Safety considerations
 
-- **Low-frequency TMS** (1Hz) for epilepsy has a favorable safety profile
-- **High-frequency TMS** (10Hz+) is generally contraindicated in active epilepsy
+- **Low-frequency TMS** (1 Hz) for epilepsy has a favorable safety profile
+- **High-frequency TMS** (10 Hz+) is generally contraindicated in active epilepsy — the seizure trigger risk is real
 - Patients should be monitored during sessions with EEG if available
-- Anti-epileptic medications should be continued during TMS treatment
-- Close collaboration between neurologist and TMS provider is essential
+- Anti-epileptic medications should continue during TMS treatment
+- Close collaboration between your epileptologist and TMS provider is non-negotiable. This is not a situation for going it alone.
 
 ## Current status
 
-TMS for epilepsy is not part of standard clinical practice. If interested:
-- Discuss with your epileptologist (not just a general neurologist)
+TMS for epilepsy is not part of standard clinical practice. If you're interested:
+- Talk to your epileptologist (not just a general neurologist) — they'll understand the nuances
 - Look for clinical trials specifically for drug-resistant focal epilepsy
-- Do not undergo standard high-frequency TMS protocols if you have epilepsy — the risk of triggering seizures is real
-- Specialized low-frequency protocols should only be administered at centers with epilepsy expertise
+- Do not undergo standard high-frequency TMS protocols if you have epilepsy. The risk of triggering seizures is real and documented.
+- Specialized low-frequency protocols should only happen at centers with genuine epilepsy expertise

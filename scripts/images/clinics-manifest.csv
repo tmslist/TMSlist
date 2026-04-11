@@ -1,0 +1,1114 @@
+slug,name,city,state,current_hero
+ucla-health-tms-los-angeles,"UCLA Health TMS Center","Los Angeles",CA,placeholder
+silicon-valley-tms-san-jose,"Silicon Valley TMS","San Jose",CA,placeholder
+brain-health-solutions-costa-mesa,"Brain Health Solutions","Costa Mesa",CA,placeholder
+huntsville-tms-center-huntsville,"Huntsville TMS Center","Huntsville",AL,placeholder
+huntsville-mental-health-&-tms-huntsville,"Huntsville Mental Health & TMS","Huntsville",AL,placeholder
+huntsville-depression-treatment-center-huntsville,"Huntsville Depression Treatment Center","Huntsville",AL,placeholder
+birmingham-tms-center-birmingham,"Birmingham TMS Center","Birmingham",AL,placeholder
+birmingham-mental-health-&-tms-birmingham,"Birmingham Mental Health & TMS","Birmingham",AL,placeholder
+birmingham-depression-treatment-center-birmingham,"Birmingham Depression Treatment Center","Birmingham",AL,placeholder
+dr-garcia-private-practice-birmingham,"Dr. Garcia Private Practice","Birmingham",AL,placeholder
+montgomery-tms-center-montgomery,"Montgomery TMS Center","Montgomery",AL,placeholder
+montgomery-mental-health-&-tms-montgomery,"Montgomery Mental Health & TMS","Montgomery",AL,placeholder
+montgomery-depression-treatment-center-montgomery,"Montgomery Depression Treatment Center","Montgomery",AL,placeholder
+dr-jackson-private-practice-montgomery,"Dr. Jackson Private Practice","Montgomery",AL,placeholder
+mobile-tms-center-mobile,"Mobile TMS Center","Mobile",AL,placeholder
+mobile-mental-health-&-tms-mobile,"Mobile Mental Health & TMS","Mobile",AL,placeholder
+mobile-depression-treatment-center-mobile,"Mobile Depression Treatment Center","Mobile",AL,placeholder
+tuscaloosa-tms-center-tuscaloosa,"Tuscaloosa TMS Center","Tuscaloosa",AL,placeholder
+tuscaloosa-mental-health-&-tms-tuscaloosa,"Tuscaloosa Mental Health & TMS","Tuscaloosa",AL,placeholder
+anchorage-tms-center-anchorage,"Anchorage TMS Center","Anchorage",AK,placeholder
+anchorage-mental-health-&-tms-anchorage,"Anchorage Mental Health & TMS","Anchorage",AK,placeholder
+anchorage-depression-treatment-center-anchorage,"Anchorage Depression Treatment Center","Anchorage",AK,placeholder
+fairbanks-tms-center-fairbanks,"Fairbanks TMS Center","Fairbanks",AK,placeholder
+fairbanks-mental-health-&-tms-fairbanks,"Fairbanks Mental Health & TMS","Fairbanks",AK,placeholder
+fairbanks-depression-treatment-center-fairbanks,"Fairbanks Depression Treatment Center","Fairbanks",AK,placeholder
+juneau-tms-center-juneau,"Juneau TMS Center","Juneau",AK,placeholder
+juneau-mental-health-&-tms-juneau,"Juneau Mental Health & TMS","Juneau",AK,placeholder
+juneau-depression-treatment-center-juneau,"Juneau Depression Treatment Center","Juneau",AK,placeholder
+dr-wilson-private-practice-juneau,"Dr. Wilson Private Practice","Juneau",AK,placeholder
+wasilla-tms-center-wasilla,"Wasilla TMS Center","Wasilla",AK,placeholder
+wasilla-mental-health-&-tms-wasilla,"Wasilla Mental Health & TMS","Wasilla",AK,placeholder
+wasilla-depression-treatment-center-wasilla,"Wasilla Depression Treatment Center","Wasilla",AK,placeholder
+dr-brown-private-practice-wasilla,"Dr. Brown Private Practice","Wasilla",AK,placeholder
+sitka-tms-center-sitka,"Sitka TMS Center","Sitka",AK,placeholder
+sitka-mental-health-&-tms-sitka,"Sitka Mental Health & TMS","Sitka",AK,placeholder
+sitka-depression-treatment-center-sitka,"Sitka Depression Treatment Center","Sitka",AK,placeholder
+dr-johnson-private-practice-sitka,"Dr. Johnson Private Practice","Sitka",AK,placeholder
+phoenix-tms-center-phoenix,"Phoenix TMS Center","Phoenix",AZ,placeholder
+phoenix-mental-health-&-tms-phoenix,"Phoenix Mental Health & TMS","Phoenix",AZ,placeholder
+phoenix-depression-treatment-center-phoenix,"Phoenix Depression Treatment Center","Phoenix",AZ,placeholder
+tucson-tms-center-tucson,"Tucson TMS Center","Tucson",AZ,placeholder
+tucson-mental-health-&-tms-tucson,"Tucson Mental Health & TMS","Tucson",AZ,placeholder
+mesa-tms-center-mesa,"Mesa TMS Center","Mesa",AZ,placeholder
+mesa-mental-health-&-tms-mesa,"Mesa Mental Health & TMS","Mesa",AZ,placeholder
+mesa-depression-treatment-center-mesa,"Mesa Depression Treatment Center","Mesa",AZ,placeholder
+dr-wong-private-practice-mesa,"Dr. Wong Private Practice","Mesa",AZ,placeholder
+chandler-tms-center-chandler,"Chandler TMS Center","Chandler",AZ,placeholder
+chandler-mental-health-&-tms-chandler,"Chandler Mental Health & TMS","Chandler",AZ,placeholder
+gilbert-tms-center-gilbert,"Gilbert TMS Center","Gilbert",AZ,placeholder
+gilbert-mental-health-&-tms-gilbert,"Gilbert Mental Health & TMS","Gilbert",AZ,placeholder
+gilbert-depression-treatment-center-gilbert,"Gilbert Depression Treatment Center","Gilbert",AZ,placeholder
+little-rock-tms-center-little-rock,"Little Rock TMS Center","Little Rock",AR,placeholder
+little-rock-mental-health-&-tms-little-rock,"Little Rock Mental Health & TMS","Little Rock",AR,placeholder
+little-rock-depression-treatment-center-little-rock,"Little Rock Depression Treatment Center","Little Rock",AR,placeholder
+dr-garcia-private-practice-little-rock,"Dr. Garcia Private Practice","Little Rock",AR,placeholder
+fayetteville-tms-center-fayetteville,"Fayetteville TMS Center","Fayetteville",AR,placeholder
+fayetteville-mental-health-&-tms-fayetteville,"Fayetteville Mental Health & TMS","Fayetteville",AR,placeholder
+fayetteville-depression-treatment-center-fayetteville,"Fayetteville Depression Treatment Center","Fayetteville",AR,placeholder
+dr-jackson-private-practice-fayetteville,"Dr. Jackson Private Practice","Fayetteville",AR,placeholder
+fort-smith-tms-center-fort-smith,"Fort Smith TMS Center","Fort Smith",AR,placeholder
+fort-smith-mental-health-&-tms-fort-smith,"Fort Smith Mental Health & TMS","Fort Smith",AR,placeholder
+springdale-tms-center-springdale,"Springdale TMS Center","Springdale",AR,placeholder
+springdale-mental-health-&-tms-springdale,"Springdale Mental Health & TMS","Springdale",AR,placeholder
+springdale-depression-treatment-center-springdale,"Springdale Depression Treatment Center","Springdale",AR,placeholder
+jonesboro-tms-center-jonesboro,"Jonesboro TMS Center","Jonesboro",AR,placeholder
+jonesboro-mental-health-&-tms-jonesboro,"Jonesboro Mental Health & TMS","Jonesboro",AR,placeholder
+jonesboro-depression-treatment-center-jonesboro,"Jonesboro Depression Treatment Center","Jonesboro",AR,placeholder
+los-angeles-tms-center-los-angeles,"Los Angeles TMS Center","Los Angeles",CA,placeholder
+los-angeles-mental-health-&-tms-los-angeles,"Los Angeles Mental Health & TMS","Los Angeles",CA,placeholder
+los-angeles-depression-treatment-center-los-angeles,"Los Angeles Depression Treatment Center","Los Angeles",CA,placeholder
+san-diego-tms-center-san-diego,"San Diego TMS Center","San Diego",CA,placeholder
+san-diego-mental-health-&-tms-san-diego,"San Diego Mental Health & TMS","San Diego",CA,placeholder
+san-diego-depression-treatment-center-san-diego,"San Diego Depression Treatment Center","San Diego",CA,placeholder
+san-jose-tms-center-san-jose,"San Jose TMS Center","San Jose",CA,placeholder
+san-jose-mental-health-&-tms-san-jose,"San Jose Mental Health & TMS","San Jose",CA,placeholder
+san-jose-depression-treatment-center-san-jose,"San Jose Depression Treatment Center","San Jose",CA,placeholder
+san-francisco-tms-center-san-francisco,"San Francisco TMS Center","San Francisco",CA,placeholder
+san-francisco-mental-health-&-tms-san-francisco,"San Francisco Mental Health & TMS","San Francisco",CA,placeholder
+san-francisco-depression-treatment-center-san-francisco,"San Francisco Depression Treatment Center","San Francisco",CA,placeholder
+dr-garcia-private-practice-san-francisco,"Dr. Garcia Private Practice","San Francisco",CA,placeholder
+fresno-tms-center-fresno,"Fresno TMS Center","Fresno",CA,placeholder
+fresno-mental-health-&-tms-fresno,"Fresno Mental Health & TMS","Fresno",CA,placeholder
+fresno-depression-treatment-center-fresno,"Fresno Depression Treatment Center","Fresno",CA,placeholder
+dr-anderson-private-practice-fresno,"Dr. Anderson Private Practice","Fresno",CA,placeholder
+denver-tms-center-denver,"Denver TMS Center","Denver",CO,placeholder
+denver-mental-health-&-tms-denver,"Denver Mental Health & TMS","Denver",CO,placeholder
+denver-depression-treatment-center-denver,"Denver Depression Treatment Center","Denver",CO,placeholder
+colorado-springs-tms-center-colorado-springs,"Colorado Springs TMS Center","Colorado Springs",CO,placeholder
+colorado-springs-mental-health-&-tms-colorado-springs,"Colorado Springs Mental Health & TMS","Colorado Springs",CO,placeholder
+colorado-springs-depression-treatment-center-colorado-springs,"Colorado Springs Depression Treatment Center","Colorado Springs",CO,placeholder
+aurora-tms-center-aurora,"Aurora TMS Center","Aurora",CO,placeholder
+aurora-mental-health-&-tms-aurora,"Aurora Mental Health & TMS","Aurora",CO,placeholder
+aurora-depression-treatment-center-aurora,"Aurora Depression Treatment Center","Aurora",CO,placeholder
+fort-collins-tms-center-fort-collins,"Fort Collins TMS Center","Fort Collins",CO,placeholder
+fort-collins-mental-health-&-tms-fort-collins,"Fort Collins Mental Health & TMS","Fort Collins",CO,placeholder
+fort-collins-depression-treatment-center-fort-collins,"Fort Collins Depression Treatment Center","Fort Collins",CO,placeholder
+dr-kim-private-practice-fort-collins,"Dr. Kim Private Practice","Fort Collins",CO,placeholder
+lakewood-tms-center-lakewood,"Lakewood TMS Center","Lakewood",CO,placeholder
+lakewood-mental-health-&-tms-lakewood,"Lakewood Mental Health & TMS","Lakewood",CO,placeholder
+lakewood-depression-treatment-center-lakewood,"Lakewood Depression Treatment Center","Lakewood",CO,placeholder
+dr-wong-private-practice-lakewood,"Dr. Wong Private Practice","Lakewood",CO,placeholder
+bridgeport-tms-center-bridgeport,"Bridgeport TMS Center","Bridgeport",CT,placeholder
+bridgeport-mental-health-&-tms-bridgeport,"Bridgeport Mental Health & TMS","Bridgeport",CT,placeholder
+bridgeport-depression-treatment-center-bridgeport,"Bridgeport Depression Treatment Center","Bridgeport",CT,placeholder
+dr-wong-private-practice-bridgeport,"Dr. Wong Private Practice","Bridgeport",CT,placeholder
+stamford-tms-center-stamford,"Stamford TMS Center","Stamford",CT,placeholder
+stamford-mental-health-&-tms-stamford,"Stamford Mental Health & TMS","Stamford",CT,placeholder
+stamford-depression-treatment-center-stamford,"Stamford Depression Treatment Center","Stamford",CT,placeholder
+dr-moore-private-practice-stamford,"Dr. Moore Private Practice","Stamford",CT,placeholder
+new-haven-tms-center-new-haven,"New Haven TMS Center","New Haven",CT,placeholder
+new-haven-mental-health-&-tms-new-haven,"New Haven Mental Health & TMS","New Haven",CT,placeholder
+new-haven-depression-treatment-center-new-haven,"New Haven Depression Treatment Center","New Haven",CT,placeholder
+dr-lee-private-practice-new-haven,"Dr. Lee Private Practice","New Haven",CT,placeholder
+hartford-tms-center-hartford,"Hartford TMS Center","Hartford",CT,placeholder
+hartford-mental-health-&-tms-hartford,"Hartford Mental Health & TMS","Hartford",CT,placeholder
+hartford-depression-treatment-center-hartford,"Hartford Depression Treatment Center","Hartford",CT,placeholder
+waterbury-tms-center-waterbury,"Waterbury TMS Center","Waterbury",CT,placeholder
+waterbury-mental-health-&-tms-waterbury,"Waterbury Mental Health & TMS","Waterbury",CT,placeholder
+waterbury-depression-treatment-center-waterbury,"Waterbury Depression Treatment Center","Waterbury",CT,placeholder
+dr-jackson-private-practice-waterbury,"Dr. Jackson Private Practice","Waterbury",CT,placeholder
+wilmington-tms-center-wilmington,"Wilmington TMS Center","Wilmington",DE,placeholder
+wilmington-mental-health-&-tms-wilmington,"Wilmington Mental Health & TMS","Wilmington",DE,placeholder
+wilmington-depression-treatment-center-wilmington,"Wilmington Depression Treatment Center","Wilmington",DE,placeholder
+dover-tms-center-dover,"Dover TMS Center","Dover",DE,placeholder
+dover-mental-health-&-tms-dover,"Dover Mental Health & TMS","Dover",DE,placeholder
+dover-depression-treatment-center-dover,"Dover Depression Treatment Center","Dover",DE,placeholder
+dr-wilson-private-practice-dover,"Dr. Wilson Private Practice","Dover",DE,placeholder
+newark-tms-center-newark,"Newark TMS Center","Newark",DE,placeholder
+newark-mental-health-&-tms-newark,"Newark Mental Health & TMS","Newark",DE,placeholder
+newark-depression-treatment-center-newark,"Newark Depression Treatment Center","Newark",DE,placeholder
+middletown-tms-center-middletown,"Middletown TMS Center","Middletown",DE,placeholder
+middletown-mental-health-&-tms-middletown,"Middletown Mental Health & TMS","Middletown",DE,placeholder
+bear-tms-center-bear,"Bear TMS Center","Bear",DE,placeholder
+bear-mental-health-&-tms-bear,"Bear Mental Health & TMS","Bear",DE,placeholder
+bear-depression-treatment-center-bear,"Bear Depression Treatment Center","Bear",DE,placeholder
+dr-smith-private-practice-bear,"Dr. Smith Private Practice","Bear",DE,placeholder
+jacksonville-tms-center-jacksonville,"Jacksonville TMS Center","Jacksonville",FL,placeholder
+jacksonville-mental-health-&-tms-jacksonville,"Jacksonville Mental Health & TMS","Jacksonville",FL,placeholder
+jacksonville-depression-treatment-center-jacksonville,"Jacksonville Depression Treatment Center","Jacksonville",FL,placeholder
+dr-thomas-private-practice-jacksonville,"Dr. Thomas Private Practice","Jacksonville",FL,placeholder
+miami-tms-center-miami,"Miami TMS Center","Miami",FL,placeholder
+miami-mental-health-&-tms-miami,"Miami Mental Health & TMS","Miami",FL,placeholder
+miami-depression-treatment-center-miami,"Miami Depression Treatment Center","Miami",FL,placeholder
+dr-kim-private-practice-miami,"Dr. Kim Private Practice","Miami",FL,placeholder
+tampa-tms-center-tampa,"Tampa TMS Center","Tampa",FL,placeholder
+tampa-mental-health-&-tms-tampa,"Tampa Mental Health & TMS","Tampa",FL,placeholder
+tampa-depression-treatment-center-tampa,"Tampa Depression Treatment Center","Tampa",FL,placeholder
+orlando-tms-center-orlando,"Orlando TMS Center","Orlando",FL,placeholder
+orlando-mental-health-&-tms-orlando,"Orlando Mental Health & TMS","Orlando",FL,placeholder
+orlando-depression-treatment-center-orlando,"Orlando Depression Treatment Center","Orlando",FL,placeholder
+dr-garcia-private-practice-orlando,"Dr. Garcia Private Practice","Orlando",FL,placeholder
+st-petersburg-tms-center-st-petersburg,"St. Petersburg TMS Center","St. Petersburg",FL,placeholder
+st-petersburg-mental-health-&-tms-st-petersburg,"St. Petersburg Mental Health & TMS","St. Petersburg",FL,placeholder
+st-petersburg-depression-treatment-center-st-petersburg,"St. Petersburg Depression Treatment Center","St. Petersburg",FL,placeholder
+dr-wong-private-practice-st-petersburg,"Dr. Wong Private Practice","St. Petersburg",FL,placeholder
+atlanta-tms-center-atlanta,"Atlanta TMS Center","Atlanta",GA,placeholder
+atlanta-mental-health-&-tms-atlanta,"Atlanta Mental Health & TMS","Atlanta",GA,placeholder
+atlanta-depression-treatment-center-atlanta,"Atlanta Depression Treatment Center","Atlanta",GA,placeholder
+augusta-tms-center-augusta,"Augusta TMS Center","Augusta",GA,placeholder
+augusta-mental-health-&-tms-augusta,"Augusta Mental Health & TMS","Augusta",GA,placeholder
+augusta-depression-treatment-center-augusta,"Augusta Depression Treatment Center","Augusta",GA,placeholder
+dr-jackson-private-practice-augusta,"Dr. Jackson Private Practice","Augusta",GA,placeholder
+columbus-tms-center-columbus,"Columbus TMS Center","Columbus",GA,placeholder
+columbus-mental-health-&-tms-columbus,"Columbus Mental Health & TMS","Columbus",GA,placeholder
+columbus-depression-treatment-center-columbus,"Columbus Depression Treatment Center","Columbus",GA,placeholder
+dr-jackson-private-practice-columbus,"Dr. Jackson Private Practice","Columbus",GA,placeholder
+macon-tms-center-macon,"Macon TMS Center","Macon",GA,placeholder
+macon-mental-health-&-tms-macon,"Macon Mental Health & TMS","Macon",GA,placeholder
+macon-depression-treatment-center-macon,"Macon Depression Treatment Center","Macon",GA,placeholder
+dr-lee-private-practice-macon,"Dr. Lee Private Practice","Macon",GA,placeholder
+savannah-tms-center-savannah,"Savannah TMS Center","Savannah",GA,placeholder
+savannah-mental-health-&-tms-savannah,"Savannah Mental Health & TMS","Savannah",GA,placeholder
+savannah-depression-treatment-center-savannah,"Savannah Depression Treatment Center","Savannah",GA,placeholder
+honolulu-tms-center-honolulu,"Honolulu TMS Center","Honolulu",HI,placeholder
+honolulu-mental-health-&-tms-honolulu,"Honolulu Mental Health & TMS","Honolulu",HI,custom
+honolulu-depression-treatment-center-honolulu,"Honolulu Depression Treatment Center","Honolulu",HI,placeholder
+dr-taylor-private-practice-honolulu,"Dr. Taylor Private Practice","Honolulu",HI,placeholder
+east-honolulu-tms-center-east-honolulu,"East Honolulu TMS Center","East Honolulu",HI,placeholder
+east-honolulu-mental-health-&-tms-east-honolulu,"East Honolulu Mental Health & TMS","East Honolulu",HI,placeholder
+pearl-city-tms-center-pearl-city,"Pearl City TMS Center","Pearl City",HI,placeholder
+pearl-city-mental-health-&-tms-pearl-city,"Pearl City Mental Health & TMS","Pearl City",HI,placeholder
+pearl-city-depression-treatment-center-pearl-city,"Pearl City Depression Treatment Center","Pearl City",HI,placeholder
+dr-jackson-private-practice-pearl-city,"Dr. Jackson Private Practice","Pearl City",HI,placeholder
+hilo-tms-center-hilo,"Hilo TMS Center","Hilo",HI,placeholder
+hilo-mental-health-&-tms-hilo,"Hilo Mental Health & TMS","Hilo",HI,placeholder
+hilo-depression-treatment-center-hilo,"Hilo Depression Treatment Center","Hilo",HI,placeholder
+dr-jackson-private-practice-hilo,"Dr. Jackson Private Practice","Hilo",HI,placeholder
+waipahu-tms-center-waipahu,"Waipahu TMS Center","Waipahu",HI,placeholder
+waipahu-mental-health-&-tms-waipahu,"Waipahu Mental Health & TMS","Waipahu",HI,placeholder
+boise-tms-center-boise,"Boise TMS Center","Boise",ID,placeholder
+boise-mental-health-&-tms-boise,"Boise Mental Health & TMS","Boise",ID,placeholder
+meridian-tms-center-meridian,"Meridian TMS Center","Meridian",ID,placeholder
+meridian-mental-health-&-tms-meridian,"Meridian Mental Health & TMS","Meridian",ID,custom
+meridian-depression-treatment-center-meridian,"Meridian Depression Treatment Center","Meridian",ID,placeholder
+dr-thomas-private-practice-meridian,"Dr. Thomas Private Practice","Meridian",ID,placeholder
+nampa-tms-center-nampa,"Nampa TMS Center","Nampa",ID,placeholder
+nampa-mental-health-&-tms-nampa,"Nampa Mental Health & TMS","Nampa",ID,placeholder
+idaho-falls-tms-center-idaho-falls,"Idaho Falls TMS Center","Idaho Falls",ID,placeholder
+idaho-falls-mental-health-&-tms-idaho-falls,"Idaho Falls Mental Health & TMS","Idaho Falls",ID,placeholder
+idaho-falls-depression-treatment-center-idaho-falls,"Idaho Falls Depression Treatment Center","Idaho Falls",ID,placeholder
+dr-patel-private-practice-idaho-falls,"Dr. Patel Private Practice","Idaho Falls",ID,placeholder
+caldwell-tms-center-caldwell,"Caldwell TMS Center","Caldwell",ID,placeholder
+caldwell-mental-health-&-tms-caldwell,"Caldwell Mental Health & TMS","Caldwell",ID,custom
+caldwell-depression-treatment-center-caldwell,"Caldwell Depression Treatment Center","Caldwell",ID,placeholder
+dr-thomas-private-practice-caldwell,"Dr. Thomas Private Practice","Caldwell",ID,placeholder
+chicago-tms-center-chicago,"Chicago TMS Center","Chicago",IL,placeholder
+chicago-mental-health-&-tms-chicago,"Chicago Mental Health & TMS","Chicago",IL,placeholder
+chicago-depression-treatment-center-chicago,"Chicago Depression Treatment Center","Chicago",IL,placeholder
+aurora-tms-center-aurora-0,"Aurora TMS Center","Aurora",IL,placeholder
+aurora-mental-health-&-tms-aurora-1,"Aurora Mental Health & TMS","Aurora",IL,placeholder
+aurora-depression-treatment-center-aurora-2,"Aurora Depression Treatment Center","Aurora",IL,placeholder
+joliet-tms-center-joliet,"Joliet TMS Center","Joliet",IL,placeholder
+joliet-mental-health-&-tms-joliet,"Joliet Mental Health & TMS","Joliet",IL,placeholder
+joliet-depression-treatment-center-joliet,"Joliet Depression Treatment Center","Joliet",IL,placeholder
+dr-johnson-private-practice-joliet,"Dr. Johnson Private Practice","Joliet",IL,placeholder
+naperville-tms-center-naperville,"Naperville TMS Center","Naperville",IL,placeholder
+naperville-mental-health-&-tms-naperville,"Naperville Mental Health & TMS","Naperville",IL,placeholder
+naperville-depression-treatment-center-naperville,"Naperville Depression Treatment Center","Naperville",IL,placeholder
+rockford-tms-center-rockford,"Rockford TMS Center","Rockford",IL,placeholder
+rockford-mental-health-&-tms-rockford,"Rockford Mental Health & TMS","Rockford",IL,placeholder
+rockford-depression-treatment-center-rockford,"Rockford Depression Treatment Center","Rockford",IL,placeholder
+dr-davis-private-practice-rockford,"Dr. Davis Private Practice","Rockford",IL,placeholder
+indianapolis-tms-center-indianapolis,"Indianapolis TMS Center","Indianapolis",IN,placeholder
+indianapolis-mental-health-&-tms-indianapolis,"Indianapolis Mental Health & TMS","Indianapolis",IN,placeholder
+fort-wayne-tms-center-fort-wayne,"Fort Wayne TMS Center","Fort Wayne",IN,placeholder
+fort-wayne-mental-health-&-tms-fort-wayne,"Fort Wayne Mental Health & TMS","Fort Wayne",IN,placeholder
+evansville-tms-center-evansville,"Evansville TMS Center","Evansville",IN,placeholder
+evansville-mental-health-&-tms-evansville,"Evansville Mental Health & TMS","Evansville",IN,placeholder
+evansville-depression-treatment-center-evansville,"Evansville Depression Treatment Center","Evansville",IN,placeholder
+south-bend-tms-center-south-bend,"South Bend TMS Center","South Bend",IN,placeholder
+south-bend-mental-health-&-tms-south-bend,"South Bend Mental Health & TMS","South Bend",IN,placeholder
+south-bend-depression-treatment-center-south-bend,"South Bend Depression Treatment Center","South Bend",IN,placeholder
+carmel-tms-center-carmel,"Carmel TMS Center","Carmel",IN,placeholder
+carmel-mental-health-&-tms-carmel,"Carmel Mental Health & TMS","Carmel",IN,placeholder
+carmel-depression-treatment-center-carmel,"Carmel Depression Treatment Center","Carmel",IN,placeholder
+des-moines-tms-center-des-moines,"Des Moines TMS Center","Des Moines",IA,placeholder
+des-moines-mental-health-&-tms-des-moines,"Des Moines Mental Health & TMS","Des Moines",IA,placeholder
+cedar-rapids-tms-center-cedar-rapids,"Cedar Rapids TMS Center","Cedar Rapids",IA,placeholder
+cedar-rapids-mental-health-&-tms-cedar-rapids,"Cedar Rapids Mental Health & TMS","Cedar Rapids",IA,placeholder
+cedar-rapids-depression-treatment-center-cedar-rapids,"Cedar Rapids Depression Treatment Center","Cedar Rapids",IA,placeholder
+davenport-tms-center-davenport,"Davenport TMS Center","Davenport",IA,placeholder
+davenport-mental-health-&-tms-davenport,"Davenport Mental Health & TMS","Davenport",IA,placeholder
+davenport-depression-treatment-center-davenport,"Davenport Depression Treatment Center","Davenport",IA,placeholder
+dr-lee-private-practice-davenport,"Dr. Lee Private Practice","Davenport",IA,placeholder
+sioux-city-tms-center-sioux-city,"Sioux City TMS Center","Sioux City",IA,placeholder
+sioux-city-mental-health-&-tms-sioux-city,"Sioux City Mental Health & TMS","Sioux City",IA,placeholder
+iowa-city-tms-center-iowa-city,"Iowa City TMS Center","Iowa City",IA,placeholder
+iowa-city-mental-health-&-tms-iowa-city,"Iowa City Mental Health & TMS","Iowa City",IA,placeholder
+wichita-tms-center-wichita,"Wichita TMS Center","Wichita",KS,placeholder
+wichita-mental-health-&-tms-wichita,"Wichita Mental Health & TMS","Wichita",KS,placeholder
+overland-park-tms-center-overland-park,"Overland Park TMS Center","Overland Park",KS,placeholder
+overland-park-mental-health-&-tms-overland-park,"Overland Park Mental Health & TMS","Overland Park",KS,placeholder
+kansas-city-tms-center-kansas-city,"Kansas City TMS Center","Kansas City",KS,placeholder
+kansas-city-mental-health-&-tms-kansas-city,"Kansas City Mental Health & TMS","Kansas City",KS,placeholder
+olathe-tms-center-olathe,"Olathe TMS Center","Olathe",KS,placeholder
+olathe-mental-health-&-tms-olathe,"Olathe Mental Health & TMS","Olathe",KS,placeholder
+topeka-tms-center-topeka,"Topeka TMS Center","Topeka",KS,placeholder
+topeka-mental-health-&-tms-topeka,"Topeka Mental Health & TMS","Topeka",KS,placeholder
+topeka-depression-treatment-center-topeka,"Topeka Depression Treatment Center","Topeka",KS,placeholder
+louisville-tms-center-louisville,"Louisville TMS Center","Louisville",KY,placeholder
+louisville-mental-health-&-tms-louisville,"Louisville Mental Health & TMS","Louisville",KY,placeholder
+louisville-depression-treatment-center-louisville,"Louisville Depression Treatment Center","Louisville",KY,placeholder
+lexington-tms-center-lexington,"Lexington TMS Center","Lexington",KY,placeholder
+lexington-mental-health-&-tms-lexington,"Lexington Mental Health & TMS","Lexington",KY,placeholder
+lexington-depression-treatment-center-lexington,"Lexington Depression Treatment Center","Lexington",KY,placeholder
+bowling-green-tms-center-bowling-green,"Bowling Green TMS Center","Bowling Green",KY,placeholder
+bowling-green-mental-health-&-tms-bowling-green,"Bowling Green Mental Health & TMS","Bowling Green",KY,placeholder
+owensboro-tms-center-owensboro,"Owensboro TMS Center","Owensboro",KY,placeholder
+owensboro-mental-health-&-tms-owensboro,"Owensboro Mental Health & TMS","Owensboro",KY,placeholder
+covington-tms-center-covington,"Covington TMS Center","Covington",KY,placeholder
+covington-mental-health-&-tms-covington,"Covington Mental Health & TMS","Covington",KY,placeholder
+covington-depression-treatment-center-covington,"Covington Depression Treatment Center","Covington",KY,placeholder
+new-orleans-tms-center-new-orleans,"New Orleans TMS Center","New Orleans",LA,placeholder
+new-orleans-mental-health-&-tms-new-orleans,"New Orleans Mental Health & TMS","New Orleans",LA,placeholder
+baton-rouge-tms-center-baton-rouge,"Baton Rouge TMS Center","Baton Rouge",LA,placeholder
+baton-rouge-mental-health-&-tms-baton-rouge,"Baton Rouge Mental Health & TMS","Baton Rouge",LA,placeholder
+baton-rouge-depression-treatment-center-baton-rouge,"Baton Rouge Depression Treatment Center","Baton Rouge",LA,placeholder
+dr-thomas-private-practice-baton-rouge,"Dr. Thomas Private Practice","Baton Rouge",LA,placeholder
+shreveport-tms-center-shreveport,"Shreveport TMS Center","Shreveport",LA,placeholder
+shreveport-mental-health-&-tms-shreveport,"Shreveport Mental Health & TMS","Shreveport",LA,placeholder
+shreveport-depression-treatment-center-shreveport,"Shreveport Depression Treatment Center","Shreveport",LA,placeholder
+lafayette-tms-center-lafayette,"Lafayette TMS Center","Lafayette",LA,placeholder
+lafayette-mental-health-&-tms-lafayette,"Lafayette Mental Health & TMS","Lafayette",LA,placeholder
+lafayette-depression-treatment-center-lafayette,"Lafayette Depression Treatment Center","Lafayette",LA,placeholder
+lake-charles-tms-center-lake-charles,"Lake Charles TMS Center","Lake Charles",LA,placeholder
+lake-charles-mental-health-&-tms-lake-charles,"Lake Charles Mental Health & TMS","Lake Charles",LA,placeholder
+lake-charles-depression-treatment-center-lake-charles,"Lake Charles Depression Treatment Center","Lake Charles",LA,placeholder
+dr-thomas-private-practice-lake-charles,"Dr. Thomas Private Practice","Lake Charles",LA,placeholder
+portland-tms-center-portland,"Portland TMS Center","Portland",ME,placeholder
+portland-mental-health-&-tms-portland,"Portland Mental Health & TMS","Portland",ME,placeholder
+lewiston-tms-center-lewiston,"Lewiston TMS Center","Lewiston",ME,placeholder
+lewiston-mental-health-&-tms-lewiston,"Lewiston Mental Health & TMS","Lewiston",ME,placeholder
+bangor-tms-center-bangor,"Bangor TMS Center","Bangor",ME,placeholder
+bangor-mental-health-&-tms-bangor,"Bangor Mental Health & TMS","Bangor",ME,placeholder
+bangor-depression-treatment-center-bangor,"Bangor Depression Treatment Center","Bangor",ME,placeholder
+south-portland-tms-center-south-portland,"South Portland TMS Center","South Portland",ME,placeholder
+south-portland-mental-health-&-tms-south-portland,"South Portland Mental Health & TMS","South Portland",ME,placeholder
+auburn-tms-center-auburn,"Auburn TMS Center","Auburn",ME,placeholder
+auburn-mental-health-&-tms-auburn,"Auburn Mental Health & TMS","Auburn",ME,placeholder
+baltimore-tms-center-baltimore,"Baltimore TMS Center","Baltimore",MD,placeholder
+baltimore-mental-health-&-tms-baltimore,"Baltimore Mental Health & TMS","Baltimore",MD,placeholder
+baltimore-depression-treatment-center-baltimore,"Baltimore Depression Treatment Center","Baltimore",MD,placeholder
+columbia-tms-center-columbia,"Columbia TMS Center","Columbia",MD,placeholder
+columbia-mental-health-&-tms-columbia,"Columbia Mental Health & TMS","Columbia",MD,placeholder
+columbia-depression-treatment-center-columbia,"Columbia Depression Treatment Center","Columbia",MD,placeholder
+germantown-tms-center-germantown,"Germantown TMS Center","Germantown",MD,placeholder
+germantown-mental-health-&-tms-germantown,"Germantown Mental Health & TMS","Germantown",MD,placeholder
+waldorf-tms-center-waldorf,"Waldorf TMS Center","Waldorf",MD,placeholder
+waldorf-mental-health-&-tms-waldorf,"Waldorf Mental Health & TMS","Waldorf",MD,placeholder
+silver-spring-tms-center-silver-spring,"Silver Spring TMS Center","Silver Spring",MD,placeholder
+silver-spring-mental-health-&-tms-silver-spring,"Silver Spring Mental Health & TMS","Silver Spring",MD,placeholder
+silver-spring-depression-treatment-center-silver-spring,"Silver Spring Depression Treatment Center","Silver Spring",MD,placeholder
+boston-tms-center-boston,"Boston TMS Center","Boston",MA,placeholder
+boston-mental-health-&-tms-boston,"Boston Mental Health & TMS","Boston",MA,placeholder
+boston-depression-treatment-center-boston,"Boston Depression Treatment Center","Boston",MA,placeholder
+worcester-tms-center-worcester,"Worcester TMS Center","Worcester",MA,placeholder
+worcester-mental-health-&-tms-worcester,"Worcester Mental Health & TMS","Worcester",MA,placeholder
+springfield-tms-center-springfield,"Springfield TMS Center","Springfield",MA,placeholder
+springfield-mental-health-&-tms-springfield,"Springfield Mental Health & TMS","Springfield",MA,placeholder
+springfield-depression-treatment-center-springfield,"Springfield Depression Treatment Center","Springfield",MA,placeholder
+cambridge-tms-center-cambridge,"Cambridge TMS Center","Cambridge",MA,placeholder
+cambridge-mental-health-&-tms-cambridge,"Cambridge Mental Health & TMS","Cambridge",MA,placeholder
+cambridge-depression-treatment-center-cambridge,"Cambridge Depression Treatment Center","Cambridge",MA,placeholder
+dr-davis-private-practice-cambridge,"Dr. Davis Private Practice","Cambridge",MA,placeholder
+lowell-tms-center-lowell,"Lowell TMS Center","Lowell",MA,placeholder
+lowell-mental-health-&-tms-lowell,"Lowell Mental Health & TMS","Lowell",MA,placeholder
+lowell-depression-treatment-center-lowell,"Lowell Depression Treatment Center","Lowell",MA,placeholder
+dr-kim-private-practice-lowell,"Dr. Kim Private Practice","Lowell",MA,placeholder
+detroit-tms-center-detroit,"Detroit TMS Center","Detroit",MI,placeholder
+detroit-mental-health-&-tms-detroit,"Detroit Mental Health & TMS","Detroit",MI,placeholder
+grand-rapids-tms-center-grand-rapids,"Grand Rapids TMS Center","Grand Rapids",MI,placeholder
+grand-rapids-mental-health-&-tms-grand-rapids,"Grand Rapids Mental Health & TMS","Grand Rapids",MI,placeholder
+grand-rapids-depression-treatment-center-grand-rapids,"Grand Rapids Depression Treatment Center","Grand Rapids",MI,placeholder
+dr-garcia-private-practice-grand-rapids,"Dr. Garcia Private Practice","Grand Rapids",MI,placeholder
+warren-tms-center-warren,"Warren TMS Center","Warren",MI,placeholder
+warren-mental-health-&-tms-warren,"Warren Mental Health & TMS","Warren",MI,placeholder
+sterling-heights-tms-center-sterling-heights,"Sterling Heights TMS Center","Sterling Heights",MI,placeholder
+sterling-heights-mental-health-&-tms-sterling-heights,"Sterling Heights Mental Health & TMS","Sterling Heights",MI,placeholder
+sterling-heights-depression-treatment-center-sterling-heights,"Sterling Heights Depression Treatment Center","Sterling Heights",MI,placeholder
+dr-wong-private-practice-sterling-heights,"Dr. Wong Private Practice","Sterling Heights",MI,placeholder
+ann-arbor-tms-center-ann-arbor,"Ann Arbor TMS Center","Ann Arbor",MI,placeholder
+ann-arbor-mental-health-&-tms-ann-arbor,"Ann Arbor Mental Health & TMS","Ann Arbor",MI,placeholder
+minneapolis-tms-center-minneapolis,"Minneapolis TMS Center","Minneapolis",MN,placeholder
+minneapolis-mental-health-&-tms-minneapolis,"Minneapolis Mental Health & TMS","Minneapolis",MN,placeholder
+minneapolis-depression-treatment-center-minneapolis,"Minneapolis Depression Treatment Center","Minneapolis",MN,placeholder
+st-paul-tms-center-st-paul,"St. Paul TMS Center","St. Paul",MN,placeholder
+st-paul-mental-health-&-tms-st-paul,"St. Paul Mental Health & TMS","St. Paul",MN,placeholder
+rochester-tms-center-rochester,"Rochester TMS Center","Rochester",MN,placeholder
+rochester-mental-health-&-tms-rochester,"Rochester Mental Health & TMS","Rochester",MN,placeholder
+rochester-depression-treatment-center-rochester,"Rochester Depression Treatment Center","Rochester",MN,placeholder
+dr-thomas-private-practice-rochester,"Dr. Thomas Private Practice","Rochester",MN,placeholder
+bloomington-tms-center-bloomington,"Bloomington TMS Center","Bloomington",MN,placeholder
+bloomington-mental-health-&-tms-bloomington,"Bloomington Mental Health & TMS","Bloomington",MN,placeholder
+duluth-tms-center-duluth,"Duluth TMS Center","Duluth",MN,placeholder
+duluth-mental-health-&-tms-duluth,"Duluth Mental Health & TMS","Duluth",MN,placeholder
+duluth-depression-treatment-center-duluth,"Duluth Depression Treatment Center","Duluth",MN,placeholder
+dr-lee-private-practice-duluth,"Dr. Lee Private Practice","Duluth",MN,placeholder
+jackson-tms-center-jackson,"Jackson TMS Center","Jackson",MS,placeholder
+jackson-mental-health-&-tms-jackson,"Jackson Mental Health & TMS","Jackson",MS,placeholder
+jackson-depression-treatment-center-jackson,"Jackson Depression Treatment Center","Jackson",MS,placeholder
+gulfport-tms-center-gulfport,"Gulfport TMS Center","Gulfport",MS,placeholder
+gulfport-mental-health-&-tms-gulfport,"Gulfport Mental Health & TMS","Gulfport",MS,placeholder
+southaven-tms-center-southaven,"Southaven TMS Center","Southaven",MS,placeholder
+southaven-mental-health-&-tms-southaven,"Southaven Mental Health & TMS","Southaven",MS,placeholder
+southaven-depression-treatment-center-southaven,"Southaven Depression Treatment Center","Southaven",MS,placeholder
+dr-johnson-private-practice-southaven,"Dr. Johnson Private Practice","Southaven",MS,placeholder
+biloxi-tms-center-biloxi,"Biloxi TMS Center","Biloxi",MS,placeholder
+biloxi-mental-health-&-tms-biloxi,"Biloxi Mental Health & TMS","Biloxi",MS,placeholder
+hattiesburg-tms-center-hattiesburg,"Hattiesburg TMS Center","Hattiesburg",MS,placeholder
+hattiesburg-mental-health-&-tms-hattiesburg,"Hattiesburg Mental Health & TMS","Hattiesburg",MS,placeholder
+kansas-city-tms-center-kansas-city-0,"Kansas City TMS Center","Kansas City",MO,placeholder
+kansas-city-mental-health-&-tms-kansas-city-1,"Kansas City Mental Health & TMS","Kansas City",MO,placeholder
+kansas-city-depression-treatment-center-kansas-city,"Kansas City Depression Treatment Center","Kansas City",MO,placeholder
+dr-anderson-private-practice-kansas-city,"Dr. Anderson Private Practice","Kansas City",MO,placeholder
+st-louis-tms-center-st-louis,"St. Louis TMS Center","St. Louis",MO,placeholder
+st-louis-mental-health-&-tms-st-louis,"St. Louis Mental Health & TMS","St. Louis",MO,placeholder
+st-louis-depression-treatment-center-st-louis,"St. Louis Depression Treatment Center","St. Louis",MO,placeholder
+dr-lee-private-practice-st-louis,"Dr. Lee Private Practice","St. Louis",MO,placeholder
+springfield-tms-center-springfield-0,"Springfield TMS Center","Springfield",MO,placeholder
+springfield-mental-health-&-tms-springfield-1,"Springfield Mental Health & TMS","Springfield",MO,placeholder
+springfield-depression-treatment-center-springfield-2,"Springfield Depression Treatment Center","Springfield",MO,placeholder
+columbia-tms-center-columbia-0,"Columbia TMS Center","Columbia",MO,placeholder
+columbia-mental-health-&-tms-columbia-1,"Columbia Mental Health & TMS","Columbia",MO,placeholder
+independence-tms-center-independence,"Independence TMS Center","Independence",MO,placeholder
+independence-mental-health-&-tms-independence,"Independence Mental Health & TMS","Independence",MO,placeholder
+billings-tms-center-billings,"Billings TMS Center","Billings",MT,placeholder
+billings-mental-health-&-tms-billings,"Billings Mental Health & TMS","Billings",MT,placeholder
+billings-depression-treatment-center-billings,"Billings Depression Treatment Center","Billings",MT,placeholder
+missoula-tms-center-missoula,"Missoula TMS Center","Missoula",MT,placeholder
+missoula-mental-health-&-tms-missoula,"Missoula Mental Health & TMS","Missoula",MT,placeholder
+great-falls-tms-center-great-falls,"Great Falls TMS Center","Great Falls",MT,placeholder
+great-falls-mental-health-&-tms-great-falls,"Great Falls Mental Health & TMS","Great Falls",MT,placeholder
+great-falls-depression-treatment-center-great-falls,"Great Falls Depression Treatment Center","Great Falls",MT,placeholder
+dr-thomas-private-practice-great-falls,"Dr. Thomas Private Practice","Great Falls",MT,placeholder
+bozeman-tms-center-bozeman,"Bozeman TMS Center","Bozeman",MT,placeholder
+bozeman-mental-health-&-tms-bozeman,"Bozeman Mental Health & TMS","Bozeman",MT,placeholder
+bozeman-depression-treatment-center-bozeman,"Bozeman Depression Treatment Center","Bozeman",MT,placeholder
+dr-wilson-private-practice-bozeman,"Dr. Wilson Private Practice","Bozeman",MT,placeholder
+butte-tms-center-butte,"Butte TMS Center","Butte",MT,placeholder
+butte-mental-health-&-tms-butte,"Butte Mental Health & TMS","Butte",MT,placeholder
+butte-depression-treatment-center-butte,"Butte Depression Treatment Center","Butte",MT,placeholder
+omaha-tms-center-omaha,"Omaha TMS Center","Omaha",NE,placeholder
+omaha-mental-health-&-tms-omaha,"Omaha Mental Health & TMS","Omaha",NE,placeholder
+omaha-depression-treatment-center-omaha,"Omaha Depression Treatment Center","Omaha",NE,placeholder
+dr-thomas-private-practice-omaha,"Dr. Thomas Private Practice","Omaha",NE,placeholder
+lincoln-tms-center-lincoln,"Lincoln TMS Center","Lincoln",NE,placeholder
+lincoln-mental-health-&-tms-lincoln,"Lincoln Mental Health & TMS","Lincoln",NE,placeholder
+lincoln-depression-treatment-center-lincoln,"Lincoln Depression Treatment Center","Lincoln",NE,placeholder
+dr-kim-private-practice-lincoln,"Dr. Kim Private Practice","Lincoln",NE,placeholder
+bellevue-tms-center-bellevue,"Bellevue TMS Center","Bellevue",NE,placeholder
+bellevue-mental-health-&-tms-bellevue,"Bellevue Mental Health & TMS","Bellevue",NE,placeholder
+bellevue-depression-treatment-center-bellevue,"Bellevue Depression Treatment Center","Bellevue",NE,placeholder
+grand-island-tms-center-grand-island,"Grand Island TMS Center","Grand Island",NE,placeholder
+grand-island-mental-health-&-tms-grand-island,"Grand Island Mental Health & TMS","Grand Island",NE,placeholder
+grand-island-depression-treatment-center-grand-island,"Grand Island Depression Treatment Center","Grand Island",NE,placeholder
+kearney-tms-center-kearney,"Kearney TMS Center","Kearney",NE,placeholder
+kearney-mental-health-&-tms-kearney,"Kearney Mental Health & TMS","Kearney",NE,placeholder
+las-vegas-tms-center-las-vegas,"Las Vegas TMS Center","Las Vegas",NV,placeholder
+las-vegas-mental-health-&-tms-las-vegas,"Las Vegas Mental Health & TMS","Las Vegas",NV,placeholder
+las-vegas-depression-treatment-center-las-vegas,"Las Vegas Depression Treatment Center","Las Vegas",NV,placeholder
+henderson-tms-center-henderson,"Henderson TMS Center","Henderson",NV,placeholder
+henderson-mental-health-&-tms-henderson,"Henderson Mental Health & TMS","Henderson",NV,placeholder
+henderson-depression-treatment-center-henderson,"Henderson Depression Treatment Center","Henderson",NV,placeholder
+dr-jackson-private-practice-henderson,"Dr. Jackson Private Practice","Henderson",NV,placeholder
+north-las-vegas-tms-center-north-las-vegas,"North Las Vegas TMS Center","North Las Vegas",NV,placeholder
+north-las-vegas-mental-health-&-tms-north-las-vegas,"North Las Vegas Mental Health & TMS","North Las Vegas",NV,placeholder
+north-las-vegas-depression-treatment-center-north-las-vegas,"North Las Vegas Depression Treatment Center","North Las Vegas",NV,placeholder
+reno-tms-center-reno,"Reno TMS Center","Reno",NV,placeholder
+reno-mental-health-&-tms-reno,"Reno Mental Health & TMS","Reno",NV,placeholder
+enterprise-tms-center-enterprise,"Enterprise TMS Center","Enterprise",NV,placeholder
+enterprise-mental-health-&-tms-enterprise,"Enterprise Mental Health & TMS","Enterprise",NV,placeholder
+enterprise-depression-treatment-center-enterprise,"Enterprise Depression Treatment Center","Enterprise",NV,placeholder
+dr-taylor-private-practice-enterprise,"Dr. Taylor Private Practice","Enterprise",NV,placeholder
+manchester-tms-center-manchester,"Manchester TMS Center","Manchester",NH,placeholder
+manchester-mental-health-&-tms-manchester,"Manchester Mental Health & TMS","Manchester",NH,placeholder
+manchester-depression-treatment-center-manchester,"Manchester Depression Treatment Center","Manchester",NH,placeholder
+dr-lee-private-practice-manchester,"Dr. Lee Private Practice","Manchester",NH,placeholder
+nashua-tms-center-nashua,"Nashua TMS Center","Nashua",NH,placeholder
+nashua-mental-health-&-tms-nashua,"Nashua Mental Health & TMS","Nashua",NH,placeholder
+nashua-depression-treatment-center-nashua,"Nashua Depression Treatment Center","Nashua",NH,placeholder
+dr-smith-private-practice-nashua,"Dr. Smith Private Practice","Nashua",NH,placeholder
+concord-tms-center-concord,"Concord TMS Center","Concord",NH,placeholder
+concord-mental-health-&-tms-concord,"Concord Mental Health & TMS","Concord",NH,placeholder
+concord-depression-treatment-center-concord,"Concord Depression Treatment Center","Concord",NH,placeholder
+derry-tms-center-derry,"Derry TMS Center","Derry",NH,placeholder
+derry-mental-health-&-tms-derry,"Derry Mental Health & TMS","Derry",NH,placeholder
+derry-depression-treatment-center-derry,"Derry Depression Treatment Center","Derry",NH,placeholder
+dover-tms-center-dover-0,"Dover TMS Center","Dover",NH,placeholder
+dover-mental-health-&-tms-dover-1,"Dover Mental Health & TMS","Dover",NH,placeholder
+dover-depression-treatment-center-dover-2,"Dover Depression Treatment Center","Dover",NH,placeholder
+newark-tms-center-newark-0,"Newark TMS Center","Newark",NJ,placeholder
+newark-mental-health-&-tms-newark-1,"Newark Mental Health & TMS","Newark",NJ,placeholder
+jersey-city-tms-center-jersey-city,"Jersey City TMS Center","Jersey City",NJ,placeholder
+jersey-city-mental-health-&-tms-jersey-city,"Jersey City Mental Health & TMS","Jersey City",NJ,placeholder
+paterson-tms-center-paterson,"Paterson TMS Center","Paterson",NJ,placeholder
+paterson-mental-health-&-tms-paterson,"Paterson Mental Health & TMS","Paterson",NJ,placeholder
+paterson-depression-treatment-center-paterson,"Paterson Depression Treatment Center","Paterson",NJ,placeholder
+elizabeth-tms-center-elizabeth,"Elizabeth TMS Center","Elizabeth",NJ,placeholder
+elizabeth-mental-health-&-tms-elizabeth,"Elizabeth Mental Health & TMS","Elizabeth",NJ,placeholder
+lakewood-tms-center-lakewood-0,"Lakewood TMS Center","Lakewood",NJ,placeholder
+lakewood-mental-health-&-tms-lakewood-1,"Lakewood Mental Health & TMS","Lakewood",NJ,placeholder
+lakewood-depression-treatment-center-lakewood-2,"Lakewood Depression Treatment Center","Lakewood",NJ,placeholder
+dr-brown-private-practice-lakewood,"Dr. Brown Private Practice","Lakewood",NJ,placeholder
+albuquerque-tms-center-albuquerque,"Albuquerque TMS Center","Albuquerque",NM,placeholder
+albuquerque-mental-health-&-tms-albuquerque,"Albuquerque Mental Health & TMS","Albuquerque",NM,placeholder
+las-cruces-tms-center-las-cruces,"Las Cruces TMS Center","Las Cruces",NM,placeholder
+las-cruces-mental-health-&-tms-las-cruces,"Las Cruces Mental Health & TMS","Las Cruces",NM,placeholder
+rio-rancho-tms-center-rio-rancho,"Rio Rancho TMS Center","Rio Rancho",NM,placeholder
+rio-rancho-mental-health-&-tms-rio-rancho,"Rio Rancho Mental Health & TMS","Rio Rancho",NM,placeholder
+rio-rancho-depression-treatment-center-rio-rancho,"Rio Rancho Depression Treatment Center","Rio Rancho",NM,placeholder
+dr-martinez-private-practice-rio-rancho,"Dr. Martinez Private Practice","Rio Rancho",NM,placeholder
+santa-fe-tms-center-santa-fe,"Santa Fe TMS Center","Santa Fe",NM,placeholder
+santa-fe-mental-health-&-tms-santa-fe,"Santa Fe Mental Health & TMS","Santa Fe",NM,placeholder
+santa-fe-depression-treatment-center-santa-fe,"Santa Fe Depression Treatment Center","Santa Fe",NM,placeholder
+roswell-tms-center-roswell,"Roswell TMS Center","Roswell",NM,placeholder
+roswell-mental-health-&-tms-roswell,"Roswell Mental Health & TMS","Roswell",NM,placeholder
+roswell-depression-treatment-center-roswell,"Roswell Depression Treatment Center","Roswell",NM,placeholder
+new-york-tms-center-new-york,"New York TMS Center","New York",NY,placeholder
+new-york-mental-health-&-tms-new-york,"New York Mental Health & TMS","New York",NY,placeholder
+new-york-depression-treatment-center-new-york,"New York Depression Treatment Center","New York",NY,placeholder
+manhattan-tms-center-manhattan,"Manhattan TMS Center","Manhattan",NY,placeholder
+manhattan-mental-health-&-tms-manhattan,"Manhattan Mental Health & TMS","Manhattan",NY,placeholder
+manhattan-depression-treatment-center-manhattan,"Manhattan Depression Treatment Center","Manhattan",NY,placeholder
+dr-garcia-private-practice-manhattan,"Dr. Garcia Private Practice","Manhattan",NY,placeholder
+brooklyn-tms-center-brooklyn,"Brooklyn TMS Center","Brooklyn",NY,placeholder
+brooklyn-mental-health-&-tms-brooklyn,"Brooklyn Mental Health & TMS","Brooklyn",NY,custom
+bronx-tms-center-bronx,"Bronx TMS Center","Bronx",NY,placeholder
+bronx-mental-health-&-tms-bronx,"Bronx Mental Health & TMS","Bronx",NY,placeholder
+bronx-depression-treatment-center-bronx,"Bronx Depression Treatment Center","Bronx",NY,placeholder
+dr-lee-private-practice-bronx,"Dr. Lee Private Practice","Bronx",NY,placeholder
+staten-island-tms-center-staten-island,"Staten Island TMS Center","Staten Island",NY,placeholder
+staten-island-mental-health-&-tms-staten-island,"Staten Island Mental Health & TMS","Staten Island",NY,placeholder
+staten-island-depression-treatment-center-staten-island,"Staten Island Depression Treatment Center","Staten Island",NY,placeholder
+dr-thomas-private-practice-staten-island,"Dr. Thomas Private Practice","Staten Island",NY,placeholder
+queens-tms-center-queens,"Queens TMS Center","Queens",NY,placeholder
+queens-mental-health-&-tms-queens,"Queens Mental Health & TMS","Queens",NY,placeholder
+queens-depression-treatment-center-queens,"Queens Depression Treatment Center","Queens",NY,placeholder
+buffalo-tms-center-buffalo,"Buffalo TMS Center","Buffalo",NY,placeholder
+buffalo-mental-health-&-tms-buffalo,"Buffalo Mental Health & TMS","Buffalo",NY,placeholder
+buffalo-depression-treatment-center-buffalo,"Buffalo Depression Treatment Center","Buffalo",NY,placeholder
+yonkers-tms-center-yonkers,"Yonkers TMS Center","Yonkers",NY,placeholder
+yonkers-mental-health-&-tms-yonkers,"Yonkers Mental Health & TMS","Yonkers",NY,placeholder
+yonkers-depression-treatment-center-yonkers,"Yonkers Depression Treatment Center","Yonkers",NY,placeholder
+rochester-tms-center-rochester-0,"Rochester TMS Center","Rochester",NY,placeholder
+rochester-mental-health-&-tms-rochester-1,"Rochester Mental Health & TMS","Rochester",NY,placeholder
+syracuse-tms-center-syracuse,"Syracuse TMS Center","Syracuse",NY,placeholder
+syracuse-mental-health-&-tms-syracuse,"Syracuse Mental Health & TMS","Syracuse",NY,placeholder
+charlotte-tms-center-charlotte,"Charlotte TMS Center","Charlotte",NC,placeholder
+charlotte-mental-health-&-tms-charlotte,"Charlotte Mental Health & TMS","Charlotte",NC,placeholder
+charlotte-depression-treatment-center-charlotte,"Charlotte Depression Treatment Center","Charlotte",NC,placeholder
+dr-martinez-private-practice-charlotte,"Dr. Martinez Private Practice","Charlotte",NC,placeholder
+raleigh-tms-center-raleigh,"Raleigh TMS Center","Raleigh",NC,placeholder
+raleigh-mental-health-&-tms-raleigh,"Raleigh Mental Health & TMS","Raleigh",NC,placeholder
+raleigh-depression-treatment-center-raleigh,"Raleigh Depression Treatment Center","Raleigh",NC,placeholder
+durham-tms-center-durham,"Durham TMS Center","Durham",NC,placeholder
+durham-mental-health-&-tms-durham,"Durham Mental Health & TMS","Durham",NC,placeholder
+durham-depression-treatment-center-durham,"Durham Depression Treatment Center","Durham",NC,placeholder
+greensboro-tms-center-greensboro,"Greensboro TMS Center","Greensboro",NC,placeholder
+greensboro-mental-health-&-tms-greensboro,"Greensboro Mental Health & TMS","Greensboro",NC,placeholder
+greensboro-depression-treatment-center-greensboro,"Greensboro Depression Treatment Center","Greensboro",NC,placeholder
+winston-salem-tms-center-winston-salem,"Winston-Salem TMS Center","Winston-Salem",NC,placeholder
+winston-salem-mental-health-&-tms-winston-salem,"Winston-Salem Mental Health & TMS","Winston-Salem",NC,placeholder
+fargo-tms-center-fargo,"Fargo TMS Center","Fargo",ND,placeholder
+fargo-mental-health-&-tms-fargo,"Fargo Mental Health & TMS","Fargo",ND,placeholder
+fargo-depression-treatment-center-fargo,"Fargo Depression Treatment Center","Fargo",ND,placeholder
+dr-kim-private-practice-fargo,"Dr. Kim Private Practice","Fargo",ND,placeholder
+bismarck-tms-center-bismarck,"Bismarck TMS Center","Bismarck",ND,placeholder
+bismarck-mental-health-&-tms-bismarck,"Bismarck Mental Health & TMS","Bismarck",ND,placeholder
+bismarck-depression-treatment-center-bismarck,"Bismarck Depression Treatment Center","Bismarck",ND,placeholder
+grand-forks-tms-center-grand-forks,"Grand Forks TMS Center","Grand Forks",ND,placeholder
+grand-forks-mental-health-&-tms-grand-forks,"Grand Forks Mental Health & TMS","Grand Forks",ND,placeholder
+grand-forks-depression-treatment-center-grand-forks,"Grand Forks Depression Treatment Center","Grand Forks",ND,placeholder
+minot-tms-center-minot,"Minot TMS Center","Minot",ND,placeholder
+minot-mental-health-&-tms-minot,"Minot Mental Health & TMS","Minot",ND,placeholder
+minot-depression-treatment-center-minot,"Minot Depression Treatment Center","Minot",ND,placeholder
+dr-taylor-private-practice-minot,"Dr. Taylor Private Practice","Minot",ND,placeholder
+west-fargo-tms-center-west-fargo,"West Fargo TMS Center","West Fargo",ND,placeholder
+west-fargo-mental-health-&-tms-west-fargo,"West Fargo Mental Health & TMS","West Fargo",ND,placeholder
+west-fargo-depression-treatment-center-west-fargo,"West Fargo Depression Treatment Center","West Fargo",ND,placeholder
+columbus-tms-center-columbus-0,"Columbus TMS Center","Columbus",OH,placeholder
+columbus-mental-health-&-tms-columbus-1,"Columbus Mental Health & TMS","Columbus",OH,placeholder
+columbus-depression-treatment-center-columbus-2,"Columbus Depression Treatment Center","Columbus",OH,placeholder
+dr-jackson-private-practice-columbus-3,"Dr. Jackson Private Practice","Columbus",OH,placeholder
+cleveland-tms-center-cleveland,"Cleveland TMS Center","Cleveland",OH,placeholder
+cleveland-mental-health-&-tms-cleveland,"Cleveland Mental Health & TMS","Cleveland",OH,placeholder
+cleveland-depression-treatment-center-cleveland,"Cleveland Depression Treatment Center","Cleveland",OH,placeholder
+cincinnati-tms-center-cincinnati,"Cincinnati TMS Center","Cincinnati",OH,placeholder
+cincinnati-mental-health-&-tms-cincinnati,"Cincinnati Mental Health & TMS","Cincinnati",OH,placeholder
+cincinnati-depression-treatment-center-cincinnati,"Cincinnati Depression Treatment Center","Cincinnati",OH,placeholder
+dr-davis-private-practice-cincinnati,"Dr. Davis Private Practice","Cincinnati",OH,placeholder
+toledo-tms-center-toledo,"Toledo TMS Center","Toledo",OH,placeholder
+toledo-mental-health-&-tms-toledo,"Toledo Mental Health & TMS","Toledo",OH,placeholder
+toledo-depression-treatment-center-toledo,"Toledo Depression Treatment Center","Toledo",OH,placeholder
+dr-moore-private-practice-toledo,"Dr. Moore Private Practice","Toledo",OH,placeholder
+akron-tms-center-akron,"Akron TMS Center","Akron",OH,placeholder
+akron-mental-health-&-tms-akron,"Akron Mental Health & TMS","Akron",OH,placeholder
+oklahoma-city-tms-center-oklahoma-city,"Oklahoma City TMS Center","Oklahoma City",OK,placeholder
+oklahoma-city-mental-health-&-tms-oklahoma-city,"Oklahoma City Mental Health & TMS","Oklahoma City",OK,placeholder
+tulsa-tms-center-tulsa,"Tulsa TMS Center","Tulsa",OK,placeholder
+tulsa-mental-health-&-tms-tulsa,"Tulsa Mental Health & TMS","Tulsa",OK,placeholder
+tulsa-depression-treatment-center-tulsa,"Tulsa Depression Treatment Center","Tulsa",OK,placeholder
+norman-tms-center-norman,"Norman TMS Center","Norman",OK,placeholder
+norman-mental-health-&-tms-norman,"Norman Mental Health & TMS","Norman",OK,placeholder
+norman-depression-treatment-center-norman,"Norman Depression Treatment Center","Norman",OK,placeholder
+broken-arrow-tms-center-broken-arrow,"Broken Arrow TMS Center","Broken Arrow",OK,placeholder
+broken-arrow-mental-health-&-tms-broken-arrow,"Broken Arrow Mental Health & TMS","Broken Arrow",OK,placeholder
+broken-arrow-depression-treatment-center-broken-arrow,"Broken Arrow Depression Treatment Center","Broken Arrow",OK,placeholder
+edmond-tms-center-edmond,"Edmond TMS Center","Edmond",OK,placeholder
+edmond-mental-health-&-tms-edmond,"Edmond Mental Health & TMS","Edmond",OK,placeholder
+edmond-depression-treatment-center-edmond,"Edmond Depression Treatment Center","Edmond",OK,placeholder
+dr-davis-private-practice-edmond,"Dr. Davis Private Practice","Edmond",OK,placeholder
+portland-tms-center-portland-0,"Portland TMS Center","Portland",OR,placeholder
+portland-mental-health-&-tms-portland-1,"Portland Mental Health & TMS","Portland",OR,custom
+eugene-tms-center-eugene,"Eugene TMS Center","Eugene",OR,placeholder
+eugene-mental-health-&-tms-eugene,"Eugene Mental Health & TMS","Eugene",OR,placeholder
+salem-tms-center-salem,"Salem TMS Center","Salem",OR,placeholder
+salem-mental-health-&-tms-salem,"Salem Mental Health & TMS","Salem",OR,placeholder
+salem-depression-treatment-center-salem,"Salem Depression Treatment Center","Salem",OR,placeholder
+dr-jackson-private-practice-salem,"Dr. Jackson Private Practice","Salem",OR,placeholder
+gresham-tms-center-gresham,"Gresham TMS Center","Gresham",OR,placeholder
+gresham-mental-health-&-tms-gresham,"Gresham Mental Health & TMS","Gresham",OR,placeholder
+hillsboro-tms-center-hillsboro,"Hillsboro TMS Center","Hillsboro",OR,placeholder
+hillsboro-mental-health-&-tms-hillsboro,"Hillsboro Mental Health & TMS","Hillsboro",OR,placeholder
+philadelphia-tms-center-philadelphia,"Philadelphia TMS Center","Philadelphia",PA,placeholder
+philadelphia-mental-health-&-tms-philadelphia,"Philadelphia Mental Health & TMS","Philadelphia",PA,placeholder
+philadelphia-depression-treatment-center-philadelphia,"Philadelphia Depression Treatment Center","Philadelphia",PA,placeholder
+dr-taylor-private-practice-philadelphia,"Dr. Taylor Private Practice","Philadelphia",PA,placeholder
+pittsburgh-tms-center-pittsburgh,"Pittsburgh TMS Center","Pittsburgh",PA,placeholder
+pittsburgh-mental-health-&-tms-pittsburgh,"Pittsburgh Mental Health & TMS","Pittsburgh",PA,placeholder
+pittsburgh-depression-treatment-center-pittsburgh,"Pittsburgh Depression Treatment Center","Pittsburgh",PA,placeholder
+allentown-tms-center-allentown,"Allentown TMS Center","Allentown",PA,placeholder
+allentown-mental-health-&-tms-allentown,"Allentown Mental Health & TMS","Allentown",PA,placeholder
+allentown-depression-treatment-center-allentown,"Allentown Depression Treatment Center","Allentown",PA,placeholder
+dr-kim-private-practice-allentown,"Dr. Kim Private Practice","Allentown",PA,placeholder
+reading-tms-center-reading,"Reading TMS Center","Reading",PA,placeholder
+reading-mental-health-&-tms-reading,"Reading Mental Health & TMS","Reading",PA,placeholder
+reading-depression-treatment-center-reading,"Reading Depression Treatment Center","Reading",PA,placeholder
+erie-tms-center-erie,"Erie TMS Center","Erie",PA,placeholder
+erie-mental-health-&-tms-erie,"Erie Mental Health & TMS","Erie",PA,placeholder
+erie-depression-treatment-center-erie,"Erie Depression Treatment Center","Erie",PA,placeholder
+dr-anderson-private-practice-erie,"Dr. Anderson Private Practice","Erie",PA,placeholder
+providence-tms-center-providence,"Providence TMS Center","Providence",RI,placeholder
+providence-mental-health-&-tms-providence,"Providence Mental Health & TMS","Providence",RI,placeholder
+cranston-tms-center-cranston,"Cranston TMS Center","Cranston",RI,placeholder
+cranston-mental-health-&-tms-cranston,"Cranston Mental Health & TMS","Cranston",RI,placeholder
+cranston-depression-treatment-center-cranston,"Cranston Depression Treatment Center","Cranston",RI,placeholder
+warwick-tms-center-warwick,"Warwick TMS Center","Warwick",RI,placeholder
+warwick-mental-health-&-tms-warwick,"Warwick Mental Health & TMS","Warwick",RI,placeholder
+warwick-depression-treatment-center-warwick,"Warwick Depression Treatment Center","Warwick",RI,placeholder
+dr-wilson-private-practice-warwick,"Dr. Wilson Private Practice","Warwick",RI,placeholder
+pawtucket-tms-center-pawtucket,"Pawtucket TMS Center","Pawtucket",RI,placeholder
+pawtucket-mental-health-&-tms-pawtucket,"Pawtucket Mental Health & TMS","Pawtucket",RI,placeholder
+pawtucket-depression-treatment-center-pawtucket,"Pawtucket Depression Treatment Center","Pawtucket",RI,placeholder
+dr-wilson-private-practice-pawtucket,"Dr. Wilson Private Practice","Pawtucket",RI,placeholder
+east-providence-tms-center-east-providence,"East Providence TMS Center","East Providence",RI,placeholder
+east-providence-mental-health-&-tms-east-providence,"East Providence Mental Health & TMS","East Providence",RI,placeholder
+east-providence-depression-treatment-center-east-providence,"East Providence Depression Treatment Center","East Providence",RI,placeholder
+dr-moore-private-practice-east-providence,"Dr. Moore Private Practice","East Providence",RI,placeholder
+charleston-tms-center-charleston,"Charleston TMS Center","Charleston",SC,placeholder
+charleston-mental-health-&-tms-charleston,"Charleston Mental Health & TMS","Charleston",SC,placeholder
+columbia-depression-treatment-center-columbia-2,"Columbia Depression Treatment Center","Columbia",SC,placeholder
+dr-anderson-private-practice-columbia,"Dr. Anderson Private Practice","Columbia",SC,placeholder
+north-charleston-tms-center-north-charleston,"North Charleston TMS Center","North Charleston",SC,placeholder
+north-charleston-mental-health-&-tms-north-charleston,"North Charleston Mental Health & TMS","North Charleston",SC,placeholder
+north-charleston-depression-treatment-center-north-charleston,"North Charleston Depression Treatment Center","North Charleston",SC,placeholder
+mount-pleasant-tms-center-mount-pleasant,"Mount Pleasant TMS Center","Mount Pleasant",SC,placeholder
+mount-pleasant-mental-health-&-tms-mount-pleasant,"Mount Pleasant Mental Health & TMS","Mount Pleasant",SC,placeholder
+mount-pleasant-depression-treatment-center-mount-pleasant,"Mount Pleasant Depression Treatment Center","Mount Pleasant",SC,placeholder
+rock-hill-tms-center-rock-hill,"Rock Hill TMS Center","Rock Hill",SC,placeholder
+rock-hill-mental-health-&-tms-rock-hill,"Rock Hill Mental Health & TMS","Rock Hill",SC,placeholder
+rock-hill-depression-treatment-center-rock-hill,"Rock Hill Depression Treatment Center","Rock Hill",SC,placeholder
+dr-brown-private-practice-rock-hill,"Dr. Brown Private Practice","Rock Hill",SC,placeholder
+sioux-falls-tms-center-sioux-falls,"Sioux Falls TMS Center","Sioux Falls",SD,placeholder
+sioux-falls-mental-health-&-tms-sioux-falls,"Sioux Falls Mental Health & TMS","Sioux Falls",SD,placeholder
+sioux-falls-depression-treatment-center-sioux-falls,"Sioux Falls Depression Treatment Center","Sioux Falls",SD,placeholder
+dr-taylor-private-practice-sioux-falls,"Dr. Taylor Private Practice","Sioux Falls",SD,placeholder
+rapid-city-tms-center-rapid-city,"Rapid City TMS Center","Rapid City",SD,placeholder
+rapid-city-mental-health-&-tms-rapid-city,"Rapid City Mental Health & TMS","Rapid City",SD,placeholder
+aberdeen-tms-center-aberdeen,"Aberdeen TMS Center","Aberdeen",SD,placeholder
+aberdeen-mental-health-&-tms-aberdeen,"Aberdeen Mental Health & TMS","Aberdeen",SD,placeholder
+aberdeen-depression-treatment-center-aberdeen,"Aberdeen Depression Treatment Center","Aberdeen",SD,placeholder
+dr-garcia-private-practice-aberdeen,"Dr. Garcia Private Practice","Aberdeen",SD,placeholder
+brookings-tms-center-brookings,"Brookings TMS Center","Brookings",SD,placeholder
+brookings-mental-health-&-tms-brookings,"Brookings Mental Health & TMS","Brookings",SD,placeholder
+watertown-tms-center-watertown,"Watertown TMS Center","Watertown",SD,placeholder
+watertown-mental-health-&-tms-watertown,"Watertown Mental Health & TMS","Watertown",SD,placeholder
+watertown-depression-treatment-center-watertown,"Watertown Depression Treatment Center","Watertown",SD,placeholder
+dr-johnson-private-practice-watertown,"Dr. Johnson Private Practice","Watertown",SD,placeholder
+nashville-tms-center-nashville,"Nashville TMS Center","Nashville",TN,placeholder
+nashville-mental-health-&-tms-nashville,"Nashville Mental Health & TMS","Nashville",TN,placeholder
+nashville-depression-treatment-center-nashville,"Nashville Depression Treatment Center","Nashville",TN,placeholder
+dr-lee-private-practice-nashville,"Dr. Lee Private Practice","Nashville",TN,placeholder
+memphis-tms-center-memphis,"Memphis TMS Center","Memphis",TN,placeholder
+memphis-mental-health-&-tms-memphis,"Memphis Mental Health & TMS","Memphis",TN,placeholder
+memphis-depression-treatment-center-memphis,"Memphis Depression Treatment Center","Memphis",TN,placeholder
+dr-jackson-private-practice-memphis,"Dr. Jackson Private Practice","Memphis",TN,placeholder
+knoxville-tms-center-knoxville,"Knoxville TMS Center","Knoxville",TN,placeholder
+knoxville-mental-health-&-tms-knoxville,"Knoxville Mental Health & TMS","Knoxville",TN,placeholder
+knoxville-depression-treatment-center-knoxville,"Knoxville Depression Treatment Center","Knoxville",TN,placeholder
+dr-kim-private-practice-knoxville,"Dr. Kim Private Practice","Knoxville",TN,placeholder
+chattanooga-tms-center-chattanooga,"Chattanooga TMS Center","Chattanooga",TN,placeholder
+chattanooga-mental-health-&-tms-chattanooga,"Chattanooga Mental Health & TMS","Chattanooga",TN,placeholder
+clarksville-tms-center-clarksville,"Clarksville TMS Center","Clarksville",TN,placeholder
+clarksville-mental-health-&-tms-clarksville,"Clarksville Mental Health & TMS","Clarksville",TN,placeholder
+clarksville-depression-treatment-center-clarksville,"Clarksville Depression Treatment Center","Clarksville",TN,placeholder
+dr-taylor-private-practice-clarksville,"Dr. Taylor Private Practice","Clarksville",TN,placeholder
+houston-tms-center-houston,"Houston TMS Center","Houston",TX,placeholder
+houston-mental-health-&-tms-houston,"Houston Mental Health & TMS","Houston",TX,placeholder
+houston-depression-treatment-center-houston,"Houston Depression Treatment Center","Houston",TX,placeholder
+dr-wong-private-practice-houston,"Dr. Wong Private Practice","Houston",TX,placeholder
+san-antonio-tms-center-san-antonio,"San Antonio TMS Center","San Antonio",TX,placeholder
+san-antonio-mental-health-&-tms-san-antonio,"San Antonio Mental Health & TMS","San Antonio",TX,placeholder
+dallas-tms-center-dallas,"Dallas TMS Center","Dallas",TX,placeholder
+dallas-mental-health-&-tms-dallas,"Dallas Mental Health & TMS","Dallas",TX,placeholder
+dallas-depression-treatment-center-dallas,"Dallas Depression Treatment Center","Dallas",TX,placeholder
+austin-tms-center-austin,"Austin TMS Center","Austin",TX,placeholder
+austin-mental-health-&-tms-austin,"Austin Mental Health & TMS","Austin",TX,placeholder
+austin-depression-treatment-center-austin,"Austin Depression Treatment Center","Austin",TX,placeholder
+dr-taylor-private-practice-austin,"Dr. Taylor Private Practice","Austin",TX,placeholder
+fort-worth-tms-center-fort-worth,"Fort Worth TMS Center","Fort Worth",TX,placeholder
+fort-worth-mental-health-&-tms-fort-worth,"Fort Worth Mental Health & TMS","Fort Worth",TX,placeholder
+salt-lake-city-tms-center-salt-lake-city,"Salt Lake City TMS Center","Salt Lake City",UT,placeholder
+salt-lake-city-mental-health-&-tms-salt-lake-city,"Salt Lake City Mental Health & TMS","Salt Lake City",UT,placeholder
+west-valley-city-tms-center-west-valley-city,"West Valley City TMS Center","West Valley City",UT,placeholder
+west-valley-city-mental-health-&-tms-west-valley-city,"West Valley City Mental Health & TMS","West Valley City",UT,placeholder
+west-jordan-tms-center-west-jordan,"West Jordan TMS Center","West Jordan",UT,placeholder
+west-jordan-mental-health-&-tms-west-jordan,"West Jordan Mental Health & TMS","West Jordan",UT,placeholder
+west-jordan-depression-treatment-center-west-jordan,"West Jordan Depression Treatment Center","West Jordan",UT,placeholder
+dr-davis-private-practice-west-jordan,"Dr. Davis Private Practice","West Jordan",UT,placeholder
+provo-tms-center-provo,"Provo TMS Center","Provo",UT,placeholder
+provo-mental-health-&-tms-provo,"Provo Mental Health & TMS","Provo",UT,placeholder
+provo-depression-treatment-center-provo,"Provo Depression Treatment Center","Provo",UT,placeholder
+st-george-tms-center-st-george,"St. George TMS Center","St. George",UT,placeholder
+st-george-mental-health-&-tms-st-george,"St. George Mental Health & TMS","St. George",UT,placeholder
+burlington-tms-center-burlington,"Burlington TMS Center","Burlington",VT,placeholder
+burlington-mental-health-&-tms-burlington,"Burlington Mental Health & TMS","Burlington",VT,placeholder
+burlington-depression-treatment-center-burlington,"Burlington Depression Treatment Center","Burlington",VT,placeholder
+south-burlington-tms-center-south-burlington,"South Burlington TMS Center","South Burlington",VT,placeholder
+south-burlington-mental-health-&-tms-south-burlington,"South Burlington Mental Health & TMS","South Burlington",VT,placeholder
+rutland-tms-center-rutland,"Rutland TMS Center","Rutland",VT,placeholder
+rutland-mental-health-&-tms-rutland,"Rutland Mental Health & TMS","Rutland",VT,placeholder
+essex-junction-tms-center-essex-junction,"Essex Junction TMS Center","Essex Junction",VT,placeholder
+essex-junction-mental-health-&-tms-essex-junction,"Essex Junction Mental Health & TMS","Essex Junction",VT,placeholder
+essex-junction-depression-treatment-center-essex-junction,"Essex Junction Depression Treatment Center","Essex Junction",VT,placeholder
+dr-wilson-private-practice-essex-junction,"Dr. Wilson Private Practice","Essex Junction",VT,placeholder
+bennington-tms-center-bennington,"Bennington TMS Center","Bennington",VT,placeholder
+bennington-mental-health-&-tms-bennington,"Bennington Mental Health & TMS","Bennington",VT,placeholder
+bennington-depression-treatment-center-bennington,"Bennington Depression Treatment Center","Bennington",VT,placeholder
+dr-lee-private-practice-bennington,"Dr. Lee Private Practice","Bennington",VT,placeholder
+virginia-beach-tms-center-virginia-beach,"Virginia Beach TMS Center","Virginia Beach",VA,placeholder
+virginia-beach-mental-health-&-tms-virginia-beach,"Virginia Beach Mental Health & TMS","Virginia Beach",VA,placeholder
+virginia-beach-depression-treatment-center-virginia-beach,"Virginia Beach Depression Treatment Center","Virginia Beach",VA,placeholder
+dr-taylor-private-practice-virginia-beach,"Dr. Taylor Private Practice","Virginia Beach",VA,placeholder
+chesapeake-tms-center-chesapeake,"Chesapeake TMS Center","Chesapeake",VA,placeholder
+chesapeake-mental-health-&-tms-chesapeake,"Chesapeake Mental Health & TMS","Chesapeake",VA,placeholder
+chesapeake-depression-treatment-center-chesapeake,"Chesapeake Depression Treatment Center","Chesapeake",VA,placeholder
+norfolk-tms-center-norfolk,"Norfolk TMS Center","Norfolk",VA,placeholder
+norfolk-mental-health-&-tms-norfolk,"Norfolk Mental Health & TMS","Norfolk",VA,placeholder
+richmond-tms-center-richmond,"Richmond TMS Center","Richmond",VA,placeholder
+richmond-mental-health-&-tms-richmond,"Richmond Mental Health & TMS","Richmond",VA,placeholder
+richmond-depression-treatment-center-richmond,"Richmond Depression Treatment Center","Richmond",VA,placeholder
+newport-news-tms-center-newport-news,"Newport News TMS Center","Newport News",VA,placeholder
+newport-news-mental-health-&-tms-newport-news,"Newport News Mental Health & TMS","Newport News",VA,placeholder
+newport-news-depression-treatment-center-newport-news,"Newport News Depression Treatment Center","Newport News",VA,placeholder
+dr-anderson-private-practice-newport-news,"Dr. Anderson Private Practice","Newport News",VA,placeholder
+seattle-tms-center-seattle,"Seattle TMS Center","Seattle",WA,placeholder
+seattle-mental-health-&-tms-seattle,"Seattle Mental Health & TMS","Seattle",WA,placeholder
+spokane-tms-center-spokane,"Spokane TMS Center","Spokane",WA,placeholder
+spokane-mental-health-&-tms-spokane,"Spokane Mental Health & TMS","Spokane",WA,placeholder
+spokane-depression-treatment-center-spokane,"Spokane Depression Treatment Center","Spokane",WA,placeholder
+dr-jackson-private-practice-spokane,"Dr. Jackson Private Practice","Spokane",WA,placeholder
+tacoma-tms-center-tacoma,"Tacoma TMS Center","Tacoma",WA,placeholder
+tacoma-mental-health-&-tms-tacoma,"Tacoma Mental Health & TMS","Tacoma",WA,placeholder
+vancouver-tms-center-vancouver,"Vancouver TMS Center","Vancouver",WA,placeholder
+vancouver-mental-health-&-tms-vancouver,"Vancouver Mental Health & TMS","Vancouver",WA,placeholder
+bellevue-tms-center-bellevue-0,"Bellevue TMS Center","Bellevue",WA,placeholder
+bellevue-mental-health-&-tms-bellevue-1,"Bellevue Mental Health & TMS","Bellevue",WA,placeholder
+bellevue-depression-treatment-center-bellevue-2,"Bellevue Depression Treatment Center","Bellevue",WA,placeholder
+charleston-tms-center-charleston-0,"Charleston TMS Center","Charleston",WV,placeholder
+charleston-mental-health-&-tms-charleston-1,"Charleston Mental Health & TMS","Charleston",WV,placeholder
+huntington-tms-center-huntington,"Huntington TMS Center","Huntington",WV,placeholder
+huntington-mental-health-&-tms-huntington,"Huntington Mental Health & TMS","Huntington",WV,placeholder
+huntington-depression-treatment-center-huntington,"Huntington Depression Treatment Center","Huntington",WV,placeholder
+dr-wilson-private-practice-huntington,"Dr. Wilson Private Practice","Huntington",WV,placeholder
+morgantown-tms-center-morgantown,"Morgantown TMS Center","Morgantown",WV,placeholder
+morgantown-mental-health-&-tms-morgantown,"Morgantown Mental Health & TMS","Morgantown",WV,placeholder
+morgantown-depression-treatment-center-morgantown,"Morgantown Depression Treatment Center","Morgantown",WV,placeholder
+parkersburg-tms-center-parkersburg,"Parkersburg TMS Center","Parkersburg",WV,placeholder
+parkersburg-mental-health-&-tms-parkersburg,"Parkersburg Mental Health & TMS","Parkersburg",WV,placeholder
+parkersburg-depression-treatment-center-parkersburg,"Parkersburg Depression Treatment Center","Parkersburg",WV,placeholder
+dr-moore-private-practice-parkersburg,"Dr. Moore Private Practice","Parkersburg",WV,placeholder
+wheeling-tms-center-wheeling,"Wheeling TMS Center","Wheeling",WV,placeholder
+wheeling-mental-health-&-tms-wheeling,"Wheeling Mental Health & TMS","Wheeling",WV,placeholder
+milwaukee-tms-center-milwaukee,"Milwaukee TMS Center","Milwaukee",WI,placeholder
+milwaukee-mental-health-&-tms-milwaukee,"Milwaukee Mental Health & TMS","Milwaukee",WI,placeholder
+milwaukee-depression-treatment-center-milwaukee,"Milwaukee Depression Treatment Center","Milwaukee",WI,placeholder
+madison-tms-center-madison,"Madison TMS Center","Madison",WI,placeholder
+madison-mental-health-&-tms-madison,"Madison Mental Health & TMS","Madison",WI,placeholder
+green-bay-tms-center-green-bay,"Green Bay TMS Center","Green Bay",WI,placeholder
+green-bay-mental-health-&-tms-green-bay,"Green Bay Mental Health & TMS","Green Bay",WI,placeholder
+green-bay-depression-treatment-center-green-bay,"Green Bay Depression Treatment Center","Green Bay",WI,placeholder
+kenosha-tms-center-kenosha,"Kenosha TMS Center","Kenosha",WI,placeholder
+kenosha-mental-health-&-tms-kenosha,"Kenosha Mental Health & TMS","Kenosha",WI,placeholder
+kenosha-depression-treatment-center-kenosha,"Kenosha Depression Treatment Center","Kenosha",WI,placeholder
+racine-tms-center-racine,"Racine TMS Center","Racine",WI,placeholder
+racine-mental-health-&-tms-racine,"Racine Mental Health & TMS","Racine",WI,placeholder
+racine-depression-treatment-center-racine,"Racine Depression Treatment Center","Racine",WI,placeholder
+cheyenne-tms-center-cheyenne,"Cheyenne TMS Center","Cheyenne",WY,placeholder
+cheyenne-mental-health-&-tms-cheyenne,"Cheyenne Mental Health & TMS","Cheyenne",WY,placeholder
+cheyenne-depression-treatment-center-cheyenne,"Cheyenne Depression Treatment Center","Cheyenne",WY,placeholder
+casper-tms-center-casper,"Casper TMS Center","Casper",WY,placeholder
+casper-mental-health-&-tms-casper,"Casper Mental Health & TMS","Casper",WY,placeholder
+casper-depression-treatment-center-casper,"Casper Depression Treatment Center","Casper",WY,placeholder
+gillette-tms-center-gillette,"Gillette TMS Center","Gillette",WY,placeholder
+gillette-mental-health-&-tms-gillette,"Gillette Mental Health & TMS","Gillette",WY,placeholder
+laramie-tms-center-laramie,"Laramie TMS Center","Laramie",WY,placeholder
+laramie-mental-health-&-tms-laramie,"Laramie Mental Health & TMS","Laramie",WY,placeholder
+laramie-depression-treatment-center-laramie,"Laramie Depression Treatment Center","Laramie",WY,placeholder
+dr-smith-private-practice-laramie,"Dr. Smith Private Practice","Laramie",WY,placeholder
+rock-springs-tms-center-rock-springs,"Rock Springs TMS Center","Rock Springs",WY,placeholder
+rock-springs-mental-health-&-tms-rock-springs,"Rock Springs Mental Health & TMS","Rock Springs",WY,placeholder
+rock-springs-depression-treatment-center-rock-springs,"Rock Springs Depression Treatment Center","Rock Springs",WY,placeholder
+dr-smith-private-practice-rock-springs,"Dr. Smith Private Practice","Rock Springs",WY,placeholder
+hagan-health-psychiatry-tms-therapy-louisville,"Hagan Health Psychiatry & TMS Therapy","Louisville",KY,custom
+conventions-tms-naperville,"Conventions TMS","Naperville",IL,custom
+hopemark-health-naperville-naperville,"Hopemark Health Naperville","Naperville",IL,custom
+dr-anmol-tolani-md-naperville,"Dr. Anmol Tolani M.D.","Naperville",IL,custom
+transformative-growth-counseling-naperville,"Transformative Growth Counseling","Naperville",IL,custom
+neuromod-health-naperville,"NeuroMod Health","Naperville",IL,custom
+suburban-tmj-and-sleep-center-naperville,"Suburban TMJ and Sleep Center","Naperville",IL,custom
+conventions-health-warrenville-psychiatry-counseling-naperville,"Conventions Health - Warrenville (Psychiatry & Counseling)","Naperville",IL,custom
+endeavor-health-linden-oaks-hospital-naperville,"Endeavor Health Linden Oaks Hospital","Naperville",IL,custom
+health-wellness-synergy-tms-therapy-treatment-nj-fort-lee,"Health Wellness Synergy - TMS Therapy Treatment NJ","Fort Lee",NJ,custom
+york-tms-clinic-york,"York TMS Clinic","York",PA,custom
+tms-at-union-square-practice-new-york,"TMS at Union Square Practice","New York",NY,custom
+hope-tms-and-neuropsychiatric-center-new-york,"Hope TMS and Neuropsychiatric Center","New York",NY,custom
+tms-of-philadelphia-philadelphia,"TMS of Philadelphia","Philadelphia",PA,custom
+ttmd-med-ny-llc-new-york,"TTMD MED NY LLC","New York",NY,custom
+union-square-tms-center-new-york,"Union Square TMS Center","New York",NY,custom
+brandywine-valley-tms-wilmington,"Brandywine Valley TMS","Wilmington",DE,custom
+neurotherapeutix-medical-services-new-york,"Neurotherapeutix Medical Services","New York",NY,custom
+vital-tms-therapy-washington,"Vital TMS Therapy","Washington",DC,custom
+wip-psychiatry-ketaminetms-center-washington,"WIP Psychiatry & Ketamine/TMS Center","Washington",DC,custom
+tranquil-healthcare-integrated-mental-health-wellness-psychiatric-adult-nurse-practitioner-washington,"Tranquil Healthcare- Integrated Mental Health & Wellness /Psychiatric & Adult Nurse Practitioner","Washington",DC,custom
+harm-reduction-psychotherapy-inst-washington,"Harm Reduction Psychotherapy Inst.","Washington",DC,custom
+central-california-tms-center-fresno,"Central California TMS Center","Fresno",CA,custom
+clinical-depression-treatement-fresno,"Clinical Depression Treatement","Fresno",CA,custom
+clinical-tms-society-fresno,"Clinical TMS Society","Fresno",CA,custom
+central-ca-t-m-s-center-fresno,"Central Ca T M S Center","Fresno",CA,custom
+a-better-way-psychiatry-tms-fresno,"A Better Way Psychiatry & TMS","Fresno",CA,custom
+a-better-way-psychiatry-tms-woodland-hills,"A Better Way Psychiatry & TMS","Woodland Hills",CA,custom
+mi-student-clinic-fort-huachuca,"MI Student Clinic","Fort Huachuca",AZ,custom
+raymond-w-bliss-army-health-center-fort-huachuca,"Raymond W Bliss Army Health Center","Fort Huachuca",AZ,custom
+ait-tmc-fort-huachuca,"AIT TMC","Fort Huachuca",AZ,placeholder
+lewis-robert-w-fort-huachuca,"Lewis Robert W","Fort Huachuca",AZ,placeholder
+bella-vida-tms-gilbert,"Bella Vida TMS","Gilbert",AZ,custom
+scottsdale-tms-scottsdale,"Scottsdale TMS","Scottsdale",AZ,custom
+tms-institute-of-arizona-scottsdale,"TMS Institute of Arizona","Scottsdale",AZ,custom
+american-tms-clinics-scottsdale,"American TMS Clinics","Scottsdale",AZ,custom
+neurostim-tms-scottsdale-scottsdale,"NeuroStim TMS Scottsdale","Scottsdale",AZ,custom
+neurogenics-tms-and-psych-solutions-scottsdale,"NeuroGenics TMS and Psych Solutions","Scottsdale",AZ,custom
+tms-scottsdale,"TMS","Scottsdale",AZ,custom
+harbor-tms-clinic-newport-beach,"Harbor TMS Clinic","Newport Beach",CA,custom
+newport-psychiatry-tms-treatment-center-newport-beach,"Newport Psychiatry & TMS Treatment Center","Newport Beach",CA,custom
+lifequality-tms-brooklyn,"LifeQuality TMS","Brooklyn",NY,custom
+tms-by-revived-soul-medical-transcranial-magnetic-stimulation-brooklyn,"TMS by Revived Soul Medical | Transcranial Magnetic Stimulation","Brooklyn",NY,custom
+lenox-hill-mind-care-tms-therapy-ketamine-treatment-new-york,"Lenox Hill Mind Care | TMS Therapy & Ketamine Treatment","New York",NY,custom
+tms-therapy-at-contemporary-care-danbury,"TMS Therapy at Contemporary Care","Danbury",CT,custom
+medication-management-tms-new-york,"Medication Management | TMS","New York",NY,custom
+manhattan-center-tms-new-york,"Manhattan Center TMS","New York",NY,custom
+mid-city-tms-new-york,"Mid City TMS","New York",NY,custom
+connecticut-tms-llc-new-milford-new-milford,"Connecticut TMS LLC- New Milford","New Milford",CT,custom
+neuroscience-guided-tms-new-york,"Neuroscience Guided TMS","New York",NY,custom
+the-tms-center-of-new-york-new-york,"The TMS Center of New York","New York",NY,custom
+the-tms-center-of-new-jersey-tinton-falls,"The TMS Center of New Jersey","Tinton Falls",NJ,custom
+tms-neurohealth-nj-colts-neck,"TMS NEUROHEALTH NJ","Colts Neck",NJ,custom
+tms-health-center-englewood,"TMS Health Center","Englewood",NJ,custom
+tms-medical-associates-of-new-york-new-york,"TMS Medical Associates of New York","New York",NY,custom
+florida-tms-clinic-wesley-chapel,"FLORIDA TMS CLINIC","Wesley Chapel",FL,custom
+a-better-way-psychiatry-tms-ventura,"A Better Way Psychiatry & TMS","Ventura",CA,custom
+lee-d-mendiola-md-associates-tms-center-of-ventura-ventura,"Lee D. Mendiola, M.D. & Associates- TMS Center Of Ventura","Ventura",CA,custom
+tallahassee-tms-tallahassee,"Tallahassee TMS","Tallahassee",FL,custom
+hayden-and-associates-tms-huntsville-huntsville,"HAYDEN AND ASSOCIATES TMS Huntsville","Huntsville",AL,custom
+tms-of-north-alabama-madison,"TMS of North Alabama","Madison",AL,custom
+tms-wellness-institute-an-authorized-neurostar-provider-anniston,"TMS Wellness Institute, an authorized Neurostar provider","Anniston",AL,custom
+mindful-health-solutions-tms-spravato-treatment-stockton-stockton,"Mindful Health Solutions - TMS - Spravato Treatment - Stockton","Stockton",CA,custom
+neurohealth-treatment-centers-tms-therapy-ketamine-therapy-depression-treatment-fort-lauderdale,"Neurohealth Treatment Centers TMS Therapy | Ketamine Therapy | Depression Treatment","Fort Lauderdale",FL,custom
+my-tms-oakland-park,"My TMS","Oakland Park",FL,custom
+tms-provider-services-of-america-wilton-manors,"TMS Provider Services of America","Wilton Manors",FL,custom
+greenbrook-mental-wellness-centers-plantation,"Greenbrook Mental Wellness Centers","Plantation",FL,custom
+tms-of-miami-miami,"TMS of MIAMI","Miami",FL,custom
+lifeworkstms-vestavia-hills,"LifeWorksTMS","Vestavia Hills",AL,custom
+tms-wellness-institute-an-authorized-neurostar-provider-birmingham,"TMS Wellness Institute, an authorized Neurostar provider","Birmingham",AL,custom
+dothan-behavioral-medicine-clinic-troy-neurostar-tms-therapy-troy,"Dothan Behavioral Medicine Clinic- Troy & NeuroStar TMS Therapy","Troy",AL,custom
+wholistic-health-ketamine-therapy-mobile-al-theodore,"Wholistic Health - Ketamine Therapy Mobile, AL","Theodore",AL,custom
+arab-counseling-and-tms-arab,"Arab Counseling and TMS","Arab",AL,custom
+tms-wellness-richton-park,"TMS Wellness","Richton Park",IL,custom
+tms-at-the-brain-and-mind-institute-orlando,"TMS at The Brain and Mind Institute","Orlando",FL,custom
+southern-california-tms-center-glendale,"Southern California TMS Center","Glendale",CA,custom
+tms-telepsychiatry-neopsych-by-dr-thomas-hughes-glendale,"TMS & TelePsychiatry: NeoPsych by Dr. Thomas Hughes","Glendale",CA,custom
+premier-tms-centers-of-los-angeles-glendale,"Premier TMS Centers of Los Angeles","Glendale",CA,custom
+palo-alto-tms-menlo-park,"Palo Alto TMS","Menlo Park",CA,custom
+brainstim-centers-tms-therapy-valencia,"BrainStim Centers - TMS Therapy","Valencia",CA,custom
+bay-psychiatric-associates-tms-berkeley,"Bay Psychiatric Associates - TMS","Berkeley",CA,custom
+california-tms-clinics-santa-monica,"California TMS Clinics","Santa Monica",CA,custom
+southern-california-tms-center-rancho-cucamonga,"Southern California TMS Center","Rancho Cucamonga",CA,custom
+advanced-tms-center-general-psychiatry-ladera-ranch,"Advanced TMS Center - General Psychiatry","Ladera Ranch",CA,custom
+mindset-tms-greeley,"Mindset TMS","Greeley",CO,custom
+my-tms-orlando,"My TMS","Orlando",FL,custom
+nona-tms-orlando,"Nona TMS","Orlando",FL,custom
+boulder-center-for-tms-boulder,"Boulder Center For TMS","Boulder",CO,custom
+plus-by-apn-boulder-deep-tms-psychiatry-and-mental-health-iop-boulder,"Plus by APN - Boulder Deep TMS, Psychiatry, and Mental Health IOP","Boulder",CO,custom
+suddath-richard-md-boulder,"Suddath Richard MD","Boulder",CO,custom
+shugerman-earle-e-md-boulder,"Shugerman Earle E MD","Boulder",CO,custom
+the-untitled-mind-ketamine-integrative-psychiatry-boulder,"The Untitled Mind Ketamine & Integrative Psychiatry","Boulder",CO,custom
+tms-of-ct-stamford,"TMS OF CT","Stamford",CT,custom
+tms-treatment-stamford,"TMS Treatment","Stamford",CT,custom
+tms-greenwich-cos-cob,"TMS Greenwich","Cos Cob",CT,custom
+greenbrook-mental-wellness-centers-east-haven,"Greenbrook Mental Wellness Centers","East Haven",CT,custom
+bridges-counseling-and-wellness-moodus,"Bridges Counseling and Wellness","Moodus",CT,custom
+tms-of-westchester-mt-kisco,"TMS of Westchester","Mt Kisco",NY,custom
+greenbrook-mental-wellness-centers-jacksonville,"Greenbrook Mental Wellness Centers","Jacksonville",FL,custom
+beaches-tms-brain-health-jacksonvillesouthpoint-jacksonville,"Beaches TMS & Brain Health - Jacksonville/Southpoint","Jacksonville",FL,custom
+first-coast-tms-and-neurology-jacksonville,"First Coast TMS and Neurology","Jacksonville",FL,custom
+beaches-deep-tms-jacksonville-beach,"Beaches Deep TMS","Jacksonville Beach",FL,custom
+greenbrook-mental-wellness-centers-orange-park,"Greenbrook Mental Wellness Centers","Orange Park",FL,custom
+tms-wellness-center-jacksonville,"TMS Wellness Center","Jacksonville",FL,custom
+a-better-way-psychiatry-tms-cerritos,"A Better Way Psychiatry & TMS","Cerritos",CA,custom
+mindful-health-solutions-tms-spravato-treatment-oakland-oakland,"Mindful Health Solutions - TMS - Spravato Treatment - Oakland","Oakland",CA,custom
+a-better-way-psychiatry-tms-oakland,"A Better Way Psychiatry & TMS","Oakland",CA,custom
+mindful-health-solutions-ketamine-infusion-therapy-clinic-oakland-oakland,"Mindful Health Solutions Ketamine Infusion Therapy Clinic - Oakland","Oakland",CA,custom
+tms-health-solutions-oakland,"TMS Health Solutions","Oakland",CA,custom
+brainstim-centers-tms-therapy-lancaster,"BrainStim Centers - TMS Therapy","Lancaster",CA,custom
+tri-city-mental-health-center-pomona,"Tri-City Mental Health Center","Pomona",CA,custom
+greenbrook-mental-wellness-centers-upland,"Greenbrook Mental Wellness Centers","Upland",CA,custom
+a-better-way-psychiatry-tms-covina,"A Better Way Psychiatry & TMS","Covina",CA,custom
+miami-beach-tms-miami-beach,"Miami Beach TMS","Miami Beach",FL,custom
+uc-san-diego-health-tms-clinic-4s-ranch-san-diego,"UC San Diego Health TMS Clinic – 4S Ranch","San Diego",CA,custom
+tms-san-diego-san-diego,"TMS San Diego","San Diego",CA,custom
+mission-valley-tms-san-diego,"Mission Valley TMS","San Diego",CA,custom
+brain-therapy-tms-san-diego,"Brain Therapy TMS","San Diego",CA,custom
+greenbrook-mental-wellness-centers-san-diego,"Greenbrook Mental Wellness Centers","San Diego",CA,custom
+mhs-mental-health-wellness-and-recovery-new-castle,"MHS Mental Health Wellness and Recovery","New Castle",DE,custom
+tms-of-wilmington-wilmington,"TMS of Wilmington","Wilmington",DE,custom
+lifestance-therapists-psychiatrists-new-castle-new-castle,"LifeStance Therapists & Psychiatrists New Castle","New Castle",DE,custom
+a-better-way-psychiatry-tms-oxnard,"A Better Way Psychiatry & TMS","Oxnard",CA,custom
+neurostim-tms-gilbert-gilbert,"NeuroStim TMS Gilbert","Gilbert",AZ,custom
+integrity-mental-health-and-tms-services-gilbert,"Integrity Mental Health and TMS Services","Gilbert",AZ,custom
+theramind-center-of-santa-barbara-santa-barbara,"TheraMind Center of Santa Barbara","Santa Barbara",CA,custom
+a-better-way-psychiatry-tms-santa-barbara,"A Better Way Psychiatry & TMS","Santa Barbara",CA,custom
+gramercy-tms-new-york,"Gramercy TMS","New York",NY,custom
+the-tms-collaborative-exeter,"The TMS Collaborative","Exeter",NH,custom
+greenbrook-mental-wellness-centers-sarasota,"Greenbrook Mental Wellness Centers","Sarasota",FL,custom
+dr-tms-therapy-griffith-psychiatry-lakewood-ranch,"Dr. TMS Therapy Griffith Psychiatry","Lakewood Ranch",FL,custom
+greenbrook-mental-wellness-centers-bradenton,"Greenbrook Mental Wellness Centers","Bradenton",FL,custom
+mid-florida-tms-centers-plant-city,"MID FLORIDA TMS CENTERS","Plant City",FL,custom
+t-s-psychiatric-consultants-llc-north-port,"T & S Psychiatric Consultants, LLC","North Port",FL,custom
+tidewater-total-mind-care-sarasota,"Tidewater Total Mind Care","Sarasota",FL,custom
+center-of-revitalizing-psychiatry-sarasota,"Center of Revitalizing Psychiatry","Sarasota",FL,custom
+wellstead-mental-health-sarasota-sarasota,"Wellstead Mental Health - Sarasota","Sarasota",FL,custom
+advanced-tms-clinic-inc-oceanside,"Advanced TMS Clinic Inc","Oceanside",CA,custom
+tms-provider-services-of-america-vero-beach,"TMS Provider Services of America","Vero Beach",FL,custom
+brainwave-neuro-performance-center-mert-tms-therapy-tucson,"Brainwave Neuro Performance Center - MeRT TMS Therapy","Tucson",AZ,custom
+neurohealth-tms-center-of-tucson-oro-valley,"NeuroHealth TMS Center of Tucson","Oro Valley",AZ,custom
+my-tms-hollywood,"My TMS","Hollywood",FL,custom
+refresh-tms-weston,"Refresh TMS","Weston",FL,custom
+doctors-best-tms-psychiatry-weston,"Doctor's Best TMS & Psychiatry","Weston",FL,custom
+my-tms-miami,"My TMS","Miami",FL,custom
+my-tms-boca-raton,"My TMS","Boca Raton",FL,custom
+neuro-wellness-tms-centers-of-america-coral-springs,"Neuro Wellness TMS Centers Of America","Coral Springs",FL,custom
+tms-of-emerald-coast-fort-walton-beach,"TMS of Emerald Coast","Fort Walton Beach",FL,custom
+synergy-tms-advanced-mental-health-aventura,"Synergy TMS – Advanced Mental Health","Aventura",FL,custom
+fit-mind-therapeutics-advanced-behavioral-health-llc-jacksonville,"Fit Mind Therapeutics Advanced Behavioral Health LLC","Jacksonville",FL,custom
+florida-center-for-tms-st-augustine,"Florida Center for TMS","St. Augustine",FL,custom
+southern-california-tms-center-lake-forest,"Southern California TMS Center","Lake Forest",CA,custom
+montgomery-mens-health-powered-by-menspro-montgomery,"Montgomery Men's Health, Powered by Menspro™","Montgomery",AL,custom
+montgomery-area-psychiatric-services-montgomery,"Montgomery Area Psychiatric Services","Montgomery",AL,custom
+hughston-clinic-montgomery-pavilion-montgomery,"Hughston Clinic Montgomery (Pavilion)","Montgomery",AL,custom
+hughston-clinic-montgomery-montgomery,"Hughston Clinic Montgomery","Montgomery",AL,custom
+southeast-mental-health-authority-norwich,"Southeast Mental Health Authority","Norwich",CT,custom
+norwich-psychiatric-center-norwich,"Norwich Psychiatric Center","Norwich",CT,custom
+tms-upper-east-side-new-york,"TMS Upper East Side","New York",NY,custom
+tms-arkansas-little-rock-little-rock,"TMS Arkansas-Little Rock","Little Rock",AR,custom
+a-better-way-psychiatry-tms-carlsbad,"A Better Way Psychiatry & TMS","Carlsbad",CA,custom
+florida-tms-clinic-tampa-tms-therapy-center-tampa,"FLORIDA TMS CLINIC - Tampa TMS Therapy Center","Tampa",FL,custom
+the-neuropsychiatry-tms-group-tampa,"The Neuropsychiatry & TMS Group","Tampa",FL,custom
+south-coast-tms-and-ketamine-encinitas,"South Coast TMS and Ketamine","Encinitas",CA,custom
+kind-tms-encinitas,"Kind TMS","Encinitas",CA,custom
+accelerated-tms-encinitas,"Accelerated TMS","Encinitas",CA,custom
+memorial-regional-health-craig-specialty-clinic-craig,"Memorial Regional Health Craig Specialty Clinic","Craig",CO,custom
+shoreline-tms-guilford,"Shoreline TMS","Guilford",CT,custom
+tms-long-island-corp-westbury,"TMS Long Island Corp.","Westbury",NY,custom
+tms-center-at-southeastern-psychiatric-associates-randolph,"TMS Center at Southeastern Psychiatric Associates","Randolph",MA,custom
+greenbrook-mental-wellness-centers-fairfield,"Greenbrook Mental Wellness Centers","Fairfield",CT,custom
+greenbrook-mental-wellness-centers-west-hartford,"Greenbrook Mental Wellness Centers","West Hartford",CT,custom
+long-island-tms-therapy-islandia,"Long Island TMS Therapy","Islandia",NY,custom
+preferred-tms-white-plains,"Preferred TMS","White Plains",NY,custom
+neurostar-tms-dothan-by-dbmc-dothan,"NeuroStar TMS Dothan by DBMC","Dothan",AL,custom
+tms-center-of-colorado-denver,"TMS Center of Colorado","Denver",CO,custom
+newtown-tms-newtown,"Newtown TMS","Newtown",CT,custom
+totally-psyched-mental-health-clinic-winter-garden,"Totally Psyched! Mental Health Clinic","Winter Garden",FL,custom
+serenity-health-center-clermont,"Serenity Health Center","Clermont",FL,custom
+tms-arkansas-russellville-russellville,"TMS Arkansas- Russellville","Russellville",AR,custom
+advance-tms-of-stamfordchanging-minds-stamford,"Advance TMS Of Stamford(Changing Minds)","Stamford",CT,custom
+advantage-tms-clearwater,"Advantage TMS","Clearwater",FL,custom
+redemption-psychiatry-tms-phoenix,"Redemption Psychiatry TMS","Phoenix",AZ,custom
+fermata-brooklyn,"Fermata","Brooklyn",NY,custom
+mindful-health-solutions-tms-spravato-treatment-fairfield-fairfield,"Mindful Health Solutions - TMS - Spravato Treatment - Fairfield","Fairfield",CA,custom
+tms-center-of-wilton-wilton,"TMS Center of Wilton","Wilton",CT,custom
+lenox-hill-mind-care-tms-therapy-ketamine-treatment-scarsdale,"Lenox Hill Mind Care | TMS Therapy & Ketamine Treatment","Scarsdale",NY,custom
+tms-center-centennial-centennial,"TMS Center Centennial","Centennial",CO,custom
+colorado-tms-services-centennial,"Colorado TMS Services","Centennial",CO,custom
+southern-colorado-tms-center-of-colorado-springs-colorado-springs,"Southern Colorado TMS Center of Colorado Springs","Colorado Springs",CO,custom
+tms-institute-of-colorado-springs-colorado-springs,"TMS Institute of Colorado Springs","Colorado Springs",CO,custom
+colorado-psychiatry-solutions-colorado-springs,"Colorado Psychiatry Solutions","Colorado Springs",CO,custom
+colorado-psychiatry-solutions-colorado-springs-1,"Colorado Psychiatry Solutions","Colorado Springs",CO,custom
+tms-of-bergen-county-ridgewood,"TMS of Bergen County","Ridgewood",NJ,custom
+montclair-tms-montclair,"MONTCLAIR TMS","Montclair",NJ,custom
+a-better-way-psychiatry-tms-riverside,"A Better Way Psychiatry & TMS","Riverside",CA,custom
+southern-california-tms-center-encino,"Southern California TMS Center","Encino",CA,custom
+tms-arkansas-jonesboro-jonesboro,"TMS Arkansas-Jonesboro","Jonesboro",AR,custom
+dauntless-transcranial-magnetic-stimulation-tms-fayetteville,"Dauntless Transcranial Magnetic Stimulation (TMS)","Fayetteville",AR,custom
+neurospa-mental-health-wellness-st-petersburg-pinellas-park,"NeuroSpa Mental Health & Wellness - St. Petersburg","Pinellas Park",FL,custom
+the-neuropsychiatry-tms-group-stpetersburg-st-petersburg,"The Neuropsychiatry & TMS Group - St.Petersburg","St. Petersburg",FL,custom
+mindful-health-solutions-tms-spravato-treatment-mission-viejo-mission-viejo,"Mindful Health Solutions - TMS - Spravato Treatment - Mission Viejo","Mission Viejo",CA,custom
+a-better-way-psychiatry-tms-laguna-hills,"A Better Way Psychiatry & TMS","Laguna Hills",CA,custom
+a-better-way-psychiatry-tms-ladera-ranch,"A Better Way Psychiatry & TMS","Ladera Ranch",CA,custom
+americas-tms-center-irvine,"Americas TMS Center","Irvine",CA,custom
+pacific-mind-health-tms-spravato-psychiatry-orange-county-irvine,"Pacific Mind Health - TMS, Spravato & Psychiatry, Orange County","Irvine",CA,placeholder
+integrative-psychiatry-and-tms-laguna-niguel,"Integrative Psychiatry and TMS","Laguna Niguel",CA,custom
+kings-tms-therapy-clinic-los-angeles,"Kings TMS Therapy Clinic","Los Angeles",CA,custom
+greenbrook-mental-wellness-centers-boynton-beach,"Greenbrook Mental Wellness Centers","Boynton Beach",FL,custom
+a-better-way-psychiatry-tms-newark,"A Better Way Psychiatry & TMS","Newark",CA,custom
+southern-california-tms-center-west-los-angeles,"Southern California TMS Center","West Los Angeles",CA,custom
+ucla-health-westwood-tms-clinic-los-angeles,"UCLA Health Westwood TMS Clinic","Los Angeles",CA,placeholder
+los-angeles-tms-institute-los-angeles,"Los Angeles TMS Institute","Los Angeles",CA,custom
+pulse-tms-los-angeles,"Pulse TMS","Los Angeles",CA,custom
+westwood-minds-psychiatry-tms-los-angeles,"Westwood Minds Psychiatry & TMS","Los Angeles",CA,custom
+mindful-health-solutions-tms-spravato-treatment-santa-monica-los-angeles,"Mindful Health Solutions - TMS - Spravato Treatment - Santa Monica","Los Angeles",CA,custom
+pacific-mind-health-tms-spravato-psychiatry-los-angeles-los-angeles,"Pacific Mind Health - TMS, Spravato & Psychiatry, Los Angeles","Los Angeles",CA,custom
+tms-wellness-amherst-east-amherst,"TMS WELLNESS AMHERST","East Amherst",NY,custom
+southern-california-tms-center-long-beach-long-beach,"Southern California TMS Center | Long Beach","Long Beach",CA,custom
+roots-mental-health-treatment-center-of-long-beach-psychiatry-tms-ketamine-therapy-long-beach,"Roots Mental Health Treatment Center of Long Beach | Psychiatry, TMS, & Ketamine Therapy","Long Beach",CA,custom
+wellness-tms-long-beach,"Wellness TMS","Long Beach",CA,custom
+pacific-mind-health-tms-spravato-psychiatry-long-beach-long-beach,"Pacific Mind Health - TMS, Spravato & Psychiatry, Long Beach","Long Beach",CA,custom
+healing-tms-clinic-anaheim,"Healing TMS Clinic","Anaheim",CA,custom
+revv-functional-psychiatry-tms-wellness-center-fullerton,"Revîv Functional Psychiatry & TMS Wellness Center","Fullerton",CA,custom
+southern-california-tms-center-placentia,"Southern California TMS Center","Placentia",CA,custom
+tms-health-and-wellness-costa-mesa,"TMS Health and Wellness","Costa Mesa",CA,custom
+learning-to-achieve-wellness-tms-therapy-spravato-ocala,"Learning to Achieve Wellness - TMS Therapy & Spravato","Ocala",FL,custom
+tms-medical-inc,"TMS MEDICAL INC","",,custom
+activate-tms-westlake-village-westlake-village,"Activate TMS (Westlake Village)","Westlake Village",CA,custom
+tms-and-neurofeedback-of-reno-tahoe-reno,"TMS and Neurofeedback of Reno-Tahoe","Reno",NV,custom
+el-dorado-county-mental-health-south-lake-tahoe,"El Dorado County Mental Health","South Lake Tahoe",CA,custom
+lake-worth-psychiatry-greenacres,"Lake Worth Psychiatry","Greenacres",FL,custom
+greenbrook-mental-wellness-centers-palm-beach-gardens,"Greenbrook Mental Wellness Centers","Palm Beach Gardens",FL,custom
+fort-worth-tms-center-fort-worth-1,"Fort Worth TMS Center","Fort Worth",TX,custom
+psychiatric-specialty-center-llc-wellington,"Psychiatric Specialty Center, LLC","Wellington",FL,custom
+brainstim-health-tms-center-jupiter,"BrainStim Health & TMS Center","Jupiter",FL,custom
+sal-psychiatry-services-norwalk,"Sal Psychiatry Services","Norwalk",CA,custom
+sal-psychiatry-service-norwalk,"Sal Psychiatry service","Norwalk",CA,custom
+trucare-tms-lakewood,"TruCare TMS","Lakewood",CA,custom
+tms-birmingham-birmingham,"TMS Birmingham","Birmingham",AL,custom
+magnetic-hope-llc-vestavia-hills,"Magnetic Hope, LLC","Vestavia Hills",AL,custom
+caltms-santee,"CalTMS","Santee",CA,custom
+advanced-tms-clinic-inc-santee,"Advanced TMS Clinic Inc","Santee",CA,custom
+contemporary-care-centers-tms-therapy-greenwich,"Contemporary Care Centers | TMS Therapy","Greenwich",CT,custom
+telapsychiatry-pompano-beach,"Telapsychiatry","Pompano Beach",FL,custom
+ketamine-wellness-clinic-of-south-florida-pompano-beach,"Ketamine & Wellness Clinic of South Florida","Pompano Beach",FL,custom
+brainstorm-florida-delray-beach,"Brainstorm Florida","Delray Beach",FL,custom
+minds-over-matter-pompano-beach,"Minds Over Matter","Pompano Beach",FL,custom
+lighthouse-medical-center-pompano-beach,"Lighthouse Medical Center","Pompano Beach",FL,custom
+banyan-health-pompano-beach,"Banyan Health","Pompano Beach",FL,custom
+delray-center-for-brain-science-tms-therapy-delray-beach,"Delray Center for Brain Science & TMS Therapy","Delray Beach",FL,custom
+greenbrook-mental-wellness-centers-boca-raton,"Greenbrook Mental Wellness Centers","Boca Raton",FL,custom
+chrysalis-tms-institute-boca-raton,"Chrysalis TMS Institute","Boca Raton",FL,custom
+refreshmybrain-north-bergen,"RefreshMyBrain","North Bergen",NJ,custom
+bridgeport-community-health-center-bridgeport,"Bridgeport Community Health Center","Bridgeport",CT,custom
+optimus-health-care-bridgeport,"OPTIMUS Health Care","Bridgeport",CT,custom
+optimus-health-care-bridgeport-1,"OPTIMUS Health Care","Bridgeport",CT,custom
+waynik-group-fairfield,"Waynik Group","Fairfield",CT,custom
+optimus-health-care-bridgeport-2,"OPTIMUS Health Care","Bridgeport",CT,custom
+golden-state-tms-san-rafael,"Golden State TMS","San Rafael",CA,custom
+san-jose-integrative-wellness-center-tms-psychiatry-los-gatos,"San Jose Integrative Wellness Center | TMS & Psychiatry","Los Gatos",CA,custom
+southern-california-tms-center-in-pasadena-pasadena,"Southern California TMS Center in Pasadena","Pasadena",CA,custom
+advanced-tms-clinic-inc-national-city,"Advanced TMS Clinic Inc","National City",CA,custom
+tms-therapy-near-me,"TMS Therapy Near Me","",,custom
+a-better-way-psychiatry-tms-pasadena,"A Better Way Psychiatry & TMS","Pasadena",CA,custom
+mindful-health-solutions-tms-spravato-treatment-burlingame-burlingame,"Mindful Health Solutions - TMS - Spravato Treatment - Burlingame","Burlingame",CA,custom
+a-better-way-psychiatry-tms-brea,"A Better Way Psychiatry & TMS","Brea",CA,custom
+resiliency-mindbody-medicine-tms-therapy-san-juan-capistrano,"Resiliency Mind+Body Medicine & TMS Therapy","San Juan Capistrano",CA,custom
+a-better-way-psychiatry-tms-concord,"A Better Way Psychiatry & TMS","Concord",CA,custom
+a-better-way-psychiatry-tms-tustin,"A Better Way Psychiatry & TMS","Tustin",CA,custom
+a-better-way-psychiatry-tms-west-covina,"A Better Way Psychiatry & TMS","West Covina",CA,custom
+southern-california-tms-center-costa-mesa,"Southern California TMS Center","Costa Mesa",CA,custom
+california-neuromodulation-brain-health-tms-general-neurology-agoura-hills,"California Neuromodulation & Brain Health: TMS , General Neurology","Agoura Hills",CA,custom
+a-better-way-psychiatry-tms-long-beach,"A Better Way Psychiatry & TMS","Long Beach",CA,custom
+premier-tms-centers-of-los-angeles-long-beach,"Premier TMS Centers of Los Angeles","Long Beach",CA,custom
+anew-era-tms-psychiatry-long-beach-long-beach,"Anew Era TMS & Psychiatry - Long Beach","Long Beach",CA,custom
+neuro-wellness-spa-psychiatry-tms-dr-simon-faynboym-md-long-beach,"Neuro Wellness Spa Psychiatry & TMS - Dr. Simon Faynboym, M.D.","Long Beach",CA,custom
+tms-health-and-wellness-long-beach,"TMS Health and Wellness","Long Beach",CA,custom
+colorado-psychiatry-solutions-colorado-springs-2,"Colorado Psychiatry Solutions","Colorado Springs",CO,custom
+tms-of-cherry-creek-denver,"TMS Of Cherry Creek","Denver",CO,custom
+lifespan-behavioral-health-plantsville,"Lifespan Behavioral Health","Plantsville",CT,custom
+connecticut-behavioral-health-associates-pc-southington,"Connecticut Behavioral Health Associates, P.C.","Southington",CT,custom
+mindful-health-solutions-tms-spravato-treatment-sacramento-sacramento,"Mindful Health Solutions - TMS - Spravato Treatment - Sacramento","Sacramento",CA,custom
+a-better-way-psychiatry-tms-sacramento,"A Better Way Psychiatry & TMS","Sacramento",CA,custom
+empathy-mind-care-accelerated-tms-clinic-in-lake-tahoe-nevada-zephyr-cove,"Empathy Mind Care | Accelerated TMS Clinic in Lake Tahoe Nevada","Zephyr Cove",NV,custom
+michigan-advanced-psychiatry-lansing,"Michigan Advanced Psychiatry","Lansing",MI,custom
+southern-california-tms-center-torrance-torrance,"Southern California TMS Center | Torrance","Torrance",CA,custom
+tahoe-ketamine-wellness-infusion-center-south-lake-tahoe,"Tahoe Ketamine - Wellness & Infusion Center","South Lake Tahoe",CA,custom
+inland-empire-tms-murrieta,"Inland Empire TMS","Murrieta",CA,custom
+mindful-health-solutions-tms-spravato-treatment-el-dorado-hills-el-dorado-hills,"Mindful Health Solutions - TMS - Spravato Treatment - El Dorado Hills","El Dorado Hills",CA,custom
+beverly-hills-tms-beverly-hills,"Beverly Hills TMS","Beverly Hills",CA,custom
+mindful-health-solutions-el-dorado-hills,"Mindful Health Solutions","El Dorado Hills",CA,placeholder
+pt-revolution-south-lake-tahoe,"PT Revolution","South Lake Tahoe",CA,custom
+tillman-middle-school-phoenix,"Tillman Middle School","Phoenix",AZ,custom
+clinic-phoenix,"Clinic","Phoenix",AZ,custom
+florida-center-for-tms-ormond-beach,"Florida Center for TMS","Ormond Beach",FL,custom
+psychiatric-services-of-daytona-daytona-beach,"Psychiatric Services of Daytona","Daytona Beach",FL,custom
+coastal-mental-health-center-daytona-beach,"Coastal Mental Health Center","Daytona Beach",FL,unsplash
+evencare-psychiatry-wellness-daytona-beach,"Evencare Psychiatry & Wellness","Daytona Beach",FL,custom
+sma-outpatient-daytona-daytona-beach,"SMA Outpatient - Daytona","Daytona Beach",FL,custom
+level-up-psychiatry-daytona-beach,"Level Up Psychiatry","Daytona Beach",FL,custom
+peaceful-healing-solutions-llc-daytona-beach,"Peaceful Healing Solutions, LLC","Daytona Beach",FL,custom
+medical-psychiatric-institute-of-florida-south-daytona,"Medical & Psychiatric Institute of Florida","South Daytona",FL,custom
+sma-florida-assertive-community-treatment-fact-daytona-daytona-beach,"SMA Florida Assertive Community Treatment (FACT) - Daytona","Daytona Beach",FL,custom
+primary-care-facility-daytona-daytona-beach,"Primary Care Facility - Daytona","Daytona Beach",FL,custom
+stewart-marchman-act-behavioral-healthcare-daytona-beach,"Stewart-Marchman-Act Behavioral Healthcare","Daytona Beach",FL,custom
+riaz-rahman-daytona-beach,"Riaz Rahman","Daytona Beach",FL,custom
+mosaic-psychiatry-daytona-beach,"Mosaic Psychiatry","Daytona Beach",FL,custom
+chrysalis-health-daytona-beach,"Chrysalis Health","Daytona Beach",FL,custom
+thomas-center-for-physical-therapy-daytona-beach,"Thomas Center for Physical Therapy","Daytona Beach",FL,custom
+nefesh-psychiatry-llc-daytona-beach,"Nefesh Psychiatry LLC","Daytona Beach",FL,custom
+ivx-health-infusion-center-daytona-beach,"IVX Health Infusion Center","Daytona Beach",FL,custom
+gemini-tms-mt-airy,"Gemini TMS","Mt Airy",MD,custom
+atlas-tms-llc-vero-beach-florida-vero-beach,"Atlas TMS LLC Vero Beach Florida","Vero Beach",FL,custom
+brooklyn-psychiatry-tms-brooklyn,"Brooklyn Psychiatry & TMS","Brooklyn",NY,custom
+good-health-psychiatric-services-brooklyn,"Good Health Psychiatric Services","Brooklyn",NY,custom
+tms-of-new-tampa-tampa,"TMS of New Tampa","Tampa",FL,custom
+a-better-way-psychiatry-tms-torrance,"A Better Way Psychiatry & TMS","Torrance",CA,custom
+manuel-astruc-md-associates-saratoga-springs,"Manuel Astruc, M.D. & Associates","Saratoga Springs",NY,custom
+believe-and-trust-tcm-llc-miami,"BELIEVE AND TRUST TCM, LLC","Miami",FL,custom
+hidalgo-tms-psychiatric-services-miami,"Hidalgo TMS Psychiatric Services","Miami",FL,custom
+silicon-valley-tms-pc-san-jose,"Silicon Valley TMS, PC","San Jose",CA,custom
+brainpower-wellness-institute-tms-spravato-clinic-anaheim-hills-anaheim,"Brainpower Wellness Institute/ TMS & Spravato Clinic - Anaheim Hills","Anaheim",CA,custom
+greenbrook-mental-wellness-centers-chula-vista,"Greenbrook Mental Wellness Centers","Chula Vista",CA,custom
+gulf-coast-tms-port-charlotte,"Gulf Coast TMS","Port Charlotte",FL,custom
+a-better-way-psychiatry-tms-huntington-beach,"A Better Way Psychiatry & TMS","Huntington Beach",CA,custom
+connecticut-psychiatric-and-wellness-center-hamden,"Connecticut Psychiatric and Wellness Center","Hamden",CT,custom
+pool-of-bethesda-medication-management-surprise-arizona-surprise,"Pool of Bethesda Medication Management Surprise Arizona","Surprise",AZ,custom
+physical-and-mental-healthcare-clinic-surprise,"Physical and Mental Healthcare Clinic","Surprise",AZ,custom
+empathy-mindcare-accelerated-tms-clinic-in-walnut-creek-ca-walnut-creek,"Empathy MindCare | Accelerated TMS Clinic in Walnut Creek Ca","Walnut Creek",CA,custom

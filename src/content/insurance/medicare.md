@@ -8,39 +8,44 @@ priorAuthRequired: true
 
 ## Does Medicare cover TMS?
 
-**Yes.** Medicare Part B covers TMS for treatment-resistant depression. This has been the case since 2013 (initially on a case-by-case basis) and became a standard covered benefit in most Medicare Administrative Contractor (MAC) jurisdictions by 2018.
+**Yes.** Medicare Part B covers TMS for treatment-resistant depression. It's been this way since 2013 on a case-by-case basis, and by 2018 most Medicare Administrative Contractor (MAC) regions made it a standard benefit.
+
+Short version: if you have Medicare and depression that hasn't responded to medication, TMS is on the table.
 
 ## What Medicare requires
 
-To get TMS approved under Medicare, you typically need:
+To get approved, you'll typically need:
 
-1. **Diagnosis**: Major Depressive Disorder (MDD), confirmed by a psychiatrist
-2. **Failed medication trials**: At least 2-4 antidepressants from different classes, taken at adequate doses for adequate duration (usually 6-8 weeks each)
-3. **Prior authorization**: Your TMS clinic submits documentation to your MAC
-4. **Supervising physician**: Treatment must be ordered and supervised by a qualified physician
+1. **A diagnosis of Major Depressive Disorder (MDD)** confirmed by a psychiatrist
+2. **2-4 failed antidepressant trials** from different drug classes, each taken at a real dose for 6-8 weeks
+3. **Prior authorization** — your TMS clinic sends documentation to your MAC
+4. **A supervising physician** who orders and oversees your treatment
 
-The exact criteria vary slightly by MAC region. Your TMS clinic will know the specific requirements for your area.
+The exact criteria shift a little depending on your MAC region. Your TMS clinic will know what your area requires. That's literally their job.
 
 ## What you'll pay
 
 Under Original Medicare (Part B):
-- **Medicare pays 80%** of the approved amount
-- **You pay 20%** coinsurance after meeting your annual Part B deductible ($240 in 2026)
-- **For 36 sessions**: Your out-of-pocket is typically $1,200-$2,400 depending on the clinic's billed rate
 
-If you have a **Medigap supplement** (Plans F, G, or similar), it may cover some or all of the 20% coinsurance.
+- **Medicare covers 80%** of the approved amount
+- **You cover 20%** coinsurance after your annual Part B deductible ($240 in 2026)
+- **For a full 36-session course**, expect roughly $1,200-$2,400 out of pocket depending on what the clinic bills
 
-**Medicare Advantage plans** (Part C): Coverage varies by plan. Many cover TMS, but some require additional precertification or limit the number of sessions. Call your plan before starting.
+Got a **Medigap supplement** like Plan F or G? It may pick up some or all of that 20%.
+
+**Medicare Advantage (Part C)** is a different story. Many MA plans cover TMS, but some pile on extra precertification steps or cap your sessions. Call your plan before you schedule anything.
 
 ## How to get approved
 
-1. Your psychiatrist documents your diagnosis and failed medication trials
-2. The TMS clinic submits a prior authorization request with supporting documentation
-3. Medicare typically responds within 1-2 weeks
-4. Most well-documented requests are approved
+1. Your psychiatrist documents your diagnosis and every medication that didn't work
+2. The TMS clinic submits a prior authorization request with all the paperwork
+3. Medicare usually responds in 1-2 weeks
+4. Most solid, well-documented requests get approved
 
-**If denied**: You can appeal. Common denial reasons include insufficient documentation of failed medications or incomplete records. Your clinic can help with the appeal — it's a standard part of their workflow.
+**Denied?** You can appeal. The most common reasons are thin documentation of failed meds or incomplete records — fixable stuff. Your clinic can help with the appeal. They do this all the time.
 
 ## Finding Medicare-accepting TMS clinics
 
-Use our directory and filter by "Medicare" under insurance. Not all TMS clinics accept Medicare assignment — some charge more than Medicare's approved rate, leaving you with a larger out-of-pocket balance. Ask the clinic: "Do you accept Medicare assignment?" before scheduling.
+Use our directory and filter by "Medicare" under insurance. One thing to watch for: not every TMS clinic accepts Medicare assignment. Some charge above Medicare's approved rate, which means a bigger bill for you. Before you schedule, ask the clinic directly: "Do you accept Medicare assignment?"
+
+That one question can save you hundreds of dollars.

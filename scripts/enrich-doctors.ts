@@ -42,7 +42,7 @@ async function fetchPage(url: string): Promise<string | null> {
   if (pageCache.has(url)) return pageCache.get(url)!;
   try {
     const response = await fetch(url, {
-      signal: AbortSignal.timeout(12000),
+      signal: AbortSignal.timeout(5000),
       headers: {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
         'Accept': 'text/html',
@@ -421,8 +421,6 @@ async function main() {
             // Fallback: generate unique professional avatar via DiceBear
             if (!foundReal) {
               const seed = encodeURIComponent(doctor.slug || doctor.name);
-              // Use DiceBear "initials" style with professional colors seeded by doctor name
-              // Each doctor gets a unique, deterministic avatar
               const bgColors = ['0369a1', '1d4ed8', '4338ca', '6d28d9', '0e7490', '047857', 'b45309', 'be123c', '0f766e', '4f46e5'];
               const colorIdx = simpleHash(doctor.name) % bgColors.length;
               const bg = bgColors[colorIdx];
@@ -439,6 +437,9 @@ async function main() {
 
     if (contentOnly && i % 50 === 0) {
       console.log(`${progress} ${clinic.name} - ${clinic.doctors_data.length} doctors enriched`);
+    }
+    if (imagesOnly) {
+      console.log(`${progress} ${clinic.name} - ${clinic.doctors_data.length} doctors checked`);
     }
   }
 

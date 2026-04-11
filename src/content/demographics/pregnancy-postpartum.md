@@ -5,46 +5,45 @@ description: "TMS therapy during pregnancy and postpartum — safety data, why i
 
 ## TMS as a medication-free option
 
-Perinatal depression (during pregnancy and postpartum) affects 10-20% of women. Many mothers are reluctant to take antidepressants due to concerns about fetal exposure or breastfeeding. TMS offers a non-systemic alternative — no medication enters the bloodstream, crosses the placenta, or enters breast milk.
+Perinatal depression — during pregnancy and after delivery — affects 10-20% of women. Many mothers don't want to take antidepressants. The worry about fetal exposure or what gets into breast milk is real, and it's reasonable.
+
+TMS offers something different: no medication enters your bloodstream. Nothing crosses the placenta. Nothing enters breast milk. Because there is no medication.
 
 ## Safety during pregnancy
 
-- **No systemic effects:** TMS magnetic pulses are localized to the brain; they don't affect the uterus, placenta, or fetus
-- **Multiple studies:** Over 15 published studies of TMS during pregnancy with no adverse fetal outcomes
-- **No teratogenic risk:** Unlike some psychiatric medications, TMS has no known risk of birth defects
-- **Professional guidelines:** ACOG and perinatal psychiatry experts increasingly recognize TMS as an option during pregnancy
+- **No systemic effects:** TMS magnetic pulses stay localized to the brain. They don't reach the uterus, placenta, or fetus.
+- **Real data:** Over 15 published studies of TMS during pregnancy, with no adverse fetal outcomes
+- **No teratogenic risk:** Unlike some psychiatric medications, TMS carries no known risk of birth defects
+- **Growing acceptance:** ACOG and perinatal psychiatry experts increasingly recognize TMS as an option during pregnancy
 
 ## Safety while breastfeeding
 
-TMS is fully compatible with breastfeeding:
-- No drug enters breast milk (there is no drug)
-- No sedation affecting ability to care for infant
-- Sessions are brief enough to maintain feeding schedule
+TMS is fully compatible with breastfeeding. There's no drug to enter breast milk — because there's no drug. No sedation that affects your ability to care for your baby. Sessions are brief enough to work around feeding schedules.
 
 ## Efficacy for perinatal depression
 
-- Response rates: 60-70% in perinatal studies (potentially higher than general population)
+- Response rates: 60-70% in perinatal studies (potentially higher than the general population)
 - Remission rates: 30-40%
-- Onset of improvement: typically within 2-3 weeks
-- Well-tolerated with minimal side effects (scalp discomfort, mild headache)
+- Improvement typically starts within 2-3 weeks
+- Side effects are minimal — scalp discomfort and mild headache, same as anyone else
 
 ## Practical considerations for pregnant patients
 
-- **Timing:** TMS can be started at any trimester, though most studies involve 2nd and 3rd trimester
-- **Positioning:** As pregnancy progresses, the TMS chair may need adjustment for comfort; reclined positions available at most clinics
-- **Session schedule:** Daily sessions for 6-9 weeks means frequent clinic visits — plan transportation
-- **Monitoring:** OB/GYN should be informed and involved in treatment planning
+- **Timing:** TMS can start at any trimester, though most studies involve the 2nd and 3rd
+- **Positioning:** As pregnancy progresses, the TMS chair may need adjustment. Reclined positions are available at most clinics.
+- **Daily visits:** 6-9 weeks of sessions means frequent trips — plan transportation accordingly
+- **Coordination:** Your OB/GYN should know about and be involved in treatment planning
 
 ## For postpartum mothers
 
-- Can start immediately postpartum
-- Schedule around infant feeding times
-- Brief sessions (especially theta burst at 3 minutes) minimize time away from baby
-- Some clinics accommodate bringing the baby to appointments (with a support person)
-- Address both depression and anxiety — postpartum anxiety often co-occurs
+- You can start immediately after delivery
+- Schedule sessions around feeding times
+- Theta burst at 3 minutes means minimal time away from your baby
+- Some clinics let you bring the baby to appointments (with a support person)
+- Postpartum anxiety often shows up alongside depression — bring this up with your provider
 
 ## Insurance and access
 
 - Most insurers cover TMS for postpartum depression under the standard depression indication
-- Perinatal depression is increasingly recognized as a treatment-resistant indication (many women can't take or haven't responded to pregnancy-safe medications)
-- Some insurance companies require documentation that medication is contraindicated (pregnancy/breastfeeding concerns may qualify)
+- Perinatal depression is increasingly recognized as treatment-resistant by nature — many women can't take or haven't responded to pregnancy-safe medications
+- Some insurance companies want documentation that medication is contraindicated. Pregnancy and breastfeeding concerns may be enough to qualify.

@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
-import { generateCityImage, generateTreatmentImage, generateHeroImage } from '../../../utils/gemini';
+import { generateCityImage, generateTreatmentImage, generateHeroImage, generateImage } from '../../../utils/gemini';
+import { uploadAiImage, isCloudinaryConfigured } from '../../../utils/cloudinary';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
 
 export const prerender = false;
@@ -19,17 +20,22 @@ export const GET: APIRoute = async ({ request, url }) => {
     });
   }
 
-  let imageDataUrl: string | null = null;
+  // Build a cache key for Cloudinary deduplication
+  const slug = subject.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const cacheKey = `ai-img:${type}:${slug}`;
+
+  let imageResult: { base64: string; mimeType: string } | null = null;
+  let prompt = '';
 
   switch (type) {
     case 'city':
-      imageDataUrl = await generateCityImage(subject, state);
+      prompt = `Create a clean, modern, minimalist watercolor-style illustration of ${subject}${state ? `, ${state}` : ''} city skyline. Use soft violet and blue tones. No text. White background. Medical wellness aesthetic. Professional and calming. Wide landscape aspect ratio.`;
       break;
     case 'treatment':
-      imageDataUrl = await generateTreatmentImage(subject);
+      prompt = `Create a clean, modern, minimalist medical illustration representing ${subject} treatment with TMS therapy. Use soft violet, blue, and teal tones. Abstract brain or neural pathway imagery. No text. White background. Professional medical aesthetic. Square format.`;
       break;
     case 'hero':
-      imageDataUrl = await generateHeroImage(subject);
+      prompt = `Create a wide, abstract, modern gradient background image for a medical wellness website about ${subject}. Soft flowing shapes in violet, blue, cyan, and white tones. Subtle neural network or brain wave pattern. No text. Minimalist and premium feel. Landscape format 16:9.`;
       break;
     default:
       return new Response(JSON.stringify({ error: 'Invalid type. Use: city, treatment, hero' }), {
@@ -38,18 +44,41 @@ export const GET: APIRoute = async ({ request, url }) => {
       });
   }
 
-  if (!imageDataUrl) {
+  // Generate image via Gemini
+  imageResult = await generateImage(prompt);
+
+  if (!imageResult) {
     return new Response(JSON.stringify({ error: 'Image generation failed' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
-  return new Response(JSON.stringify({ image: imageDataUrl }), {
+  // Try uploading to Cloudinary for CDN delivery
+  if (isCloudinaryConfigured()) {
+    try {
+      const cdnUrl = await uploadAiImage(imageResult.base64, imageResult.mimeType, cacheKey);
+      if (cdnUrl) {
+        return new Response(JSON.stringify({ image: cdnUrl, source: 'cloudinary' }), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'public, max-age=86400, s-maxage=2592000', // 1 day client / 30 days CDN
+          },
+        });
+      }
+    } catch (err) {
+      console.error('Cloudinary upload failed, falling back to base64:', err);
+    }
+  }
+
+  // Fallback: return base64 data URL if Cloudinary is not configured or upload failed
+  const dataUrl = `data:${imageResult.mimeType};base64,${imageResult.base64}`;
+  return new Response(JSON.stringify({ image: dataUrl, source: 'base64' }), {
     status: 200,
     headers: {
       'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=86400, s-maxage=604800', // Cache for 1 day / 1 week on CDN
+      'Cache-Control': 'public, max-age=86400, s-maxage=604800',
     },
   });
 };

@@ -4,9 +4,9 @@ description: "Comparing Apollo TMS with NeuroStar — newer entrant vs establish
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
 ---
 
-## Emerging competitor vs market leader
+## The new kid vs the market leader
 
-Apollo TMS is a newer entrant to the clinical TMS market, while NeuroStar has been the dominant US system since receiving the first FDA clearance for TMS depression treatment in 2008.
+Apollo TMS is a newer name in clinical TMS. NeuroStar has been the dominant US system since it got the first-ever FDA clearance for TMS depression treatment back in 2008. That's a big head start.
 
 ### Technology overview
 
@@ -24,25 +24,27 @@ Apollo TMS is a newer entrant to the clinical TMS market, while NeuroStar has be
 
 ### Clinical outcomes
 
-Both systems deliver rTMS using figure-8 coil technology. When protocols are matched:
+Both deliver rTMS using figure-8 coil technology. When protocols are matched:
 - Response rates are expected to be comparable (50-60%)
 - Remission rates comparable (30-35%)
-- The stimulation physics are similar across figure-8 coil devices
+- The stimulation physics are similar across all figure-8 coil devices
+
+The physics don't change just because the logo does.
 
 ### Key considerations
 
-**Why choose Apollo:**
-- May offer lower capital costs for clinics starting a TMS program
+**Why a clinic might choose Apollo:**
+- Lower capital costs for practices launching a TMS program
 - Modern design and interface
 - Growing evidence base
 
-**Why choose NeuroStar:**
+**Why a clinic might choose NeuroStar:**
 - Longest track record (since 2008)
-- Largest real-world outcomes database (over 1 million treatments)
+- Largest real-world outcomes database (over 1 million treatments logged)
 - Express TMS protocol (19-minute sessions)
 - Most recognized brand among patients and insurers
 - Largest support and service network
 
-### For patients
+### What this means for you
 
-Insurance covers TMS regardless of device brand. Your treatment outcome depends on your provider's expertise, protocol selection, and targeting accuracy — not which specific system they use. Focus on finding an experienced provider with good outcomes data.
+Insurance covers TMS regardless of which device your clinic uses. Your treatment outcome comes down to your provider's expertise, protocol selection, and targeting accuracy — not the specific machine in the room. Put your energy into finding an experienced provider with strong outcomes data. That matters most.

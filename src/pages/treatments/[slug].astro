@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import ContentPage from '../../layouts/ContentPage.astro';
 import { getCollection, render } from 'astro:content';
 import { TREATMENT_SLUGS } from '../../utils/seo_slugs';
@@ -23,17 +25,51 @@ export async function getStaticPaths() {
 }
 
 const { title, description, hasContent, entry } = Astro.props;
+const slug = Astro.params.slug!;
 let Content: any = null;
 if (hasContent && entry) {
   const rendered = await render(entry);
   Content = rendered.Content;
 }
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const medicalSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": title,
+  "description": description || `How TMS therapy is used to treat ${title}.`,
+  "url": `${siteUrl}/treatments/${slug}/`,
+  "about": {
+    "@type": "MedicalTherapy",
+    "name": "Transcranial Magnetic Stimulation (TMS)",
+    "medicalSpecialty": "Psychiatry",
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/treatments/${slug}/` },
+  "reviewedBy": {
+    "@type": "Person",
+    "name": "Dr. Karan Narwal",
+    "jobTitle": "Mental Health Specialist & Consultant",
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TMS List",
+    "url": siteUrl,
+  },
+});
 ---
 
 <ContentPage
   title={title}
   subtitle={description || "How TMS therapy is used to treat this condition."}
   description={description}
+  schema={medicalSchema}
+  imageType="treatment"
+  imageSubject={title}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Treatments", url: "/treatments/" },
+    { name: title, url: `/treatments/${slug}/` },
+  ]}
 >
   {Content ? <Content /> : null}
 </ContentPage>

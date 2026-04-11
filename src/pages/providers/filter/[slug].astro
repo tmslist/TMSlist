@@ -1,0 +1,123 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ClinicCard from '../../../components/ClinicCard.astro';
+import { getOperationalClinics } from '../../../utils/dataHelpers';
+
+const PROVIDER_SLUGS = [
+    { slug: 'female-psychiatrists', title: 'Female Psychiatrists Offering TMS', filter: { field: 'accessibility', value: 'female_provider' }, description: 'Find female psychiatrists and TMS providers near you. Many patients prefer a female provider for their mental health treatment.' },
+    { slug: 'spanish-speaking-tms', title: 'Spanish Speaking TMS Providers', filter: { field: 'accessibility', value: 'spanish_speaking' }, description: 'Find TMS clinics with Spanish-speaking staff and providers. Bilingual care for the Hispanic community.' },
+    { slug: 'weekend-appointments', title: 'TMS Clinics Open on Weekends', filter: { field: 'availability', value: 'weekend_hours' }, description: 'Find TMS clinics that offer Saturday and Sunday appointments for working professionals.' },
+    { slug: 'evening-hours', title: 'TMS Clinics with Evening Hours', filter: { field: 'availability', value: 'evening_hours' }, description: 'Find TMS providers offering appointments after 5 PM for patients who work during the day.' },
+    { slug: 'telehealth-consults', title: 'TMS Clinics with Telehealth Consultations', filter: { field: 'availability', value: 'telehealth_consults' }, description: 'Get your initial TMS consultation via video call. Many clinics now offer telehealth for the first appointment.' },
+    { slug: 'accepting-new-patients', title: 'TMS Clinics Accepting New Patients', filter: { field: 'availability', value: 'accepting_new_patients' }, description: 'Clinics currently accepting new TMS patients with minimal wait times.' },
+    { slug: 'hospital-based', title: 'Hospital-Based TMS Programs', filter: { field: 'provider_type', value: 'hospital' }, description: 'Find TMS programs at hospitals and academic medical centers with research-backed protocols.' },
+    { slug: 'private-practice', title: 'Private Practice TMS Providers', filter: { field: 'provider_type', value: 'psychiatrist' }, description: 'Find independent psychiatrists offering TMS therapy in a private practice setting.' },
+];
+
+const { slug } = Astro.params;
+
+const providerItem = PROVIDER_SLUGS.find(item => item.slug === slug);
+if (!providerItem) return Astro.redirect("/providers/");
+
+const { title, description, filter: { field: filterField, value: filterValue } } = providerItem;
+const allClinics = await getOperationalClinics();
+
+// Filter clinics based on the filter criteria
+const filteredClinics = allClinics.filter(c => {
+    if (filterField === 'accessibility') {
+        const acc = c.accessibility as Record<string, boolean> | null;
+        return acc?.[filterValue];
+    }
+    if (filterField === 'availability') {
+        const avail = c.availability as Record<string, boolean> | null;
+        return avail?.[filterValue];
+    }
+    if (filterField === 'provider_type') {
+        return c.provider_type === filterValue;
+    }
+    return false;
+});
+
+const pageTitle = `${title} | TMS List`;
+---
+
+<Layout title={pageTitle} description={description}>
+    <main>
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] right-[15%] w-[500px] h-[500px] bg-violet-600/12 rounded-full blur-[150px]"></div>
+
+            <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <a href="/specialists/" class="hover:text-violet-400 transition-colors">Specialists</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">{title}</span>
+                </nav>
+                <div class="max-w-2xl">
+                    <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight mb-5">{title}</h1>
+                    <p class="text-lg text-slate-400 leading-relaxed">{description}</p>
+                    <div class="mt-8 flex items-center gap-4">
+                        <div class="px-5 py-3 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <span class="text-2xl font-bold text-white">{filteredClinics.length}</span>
+                            <span class="text-xs text-slate-400 ml-2">Clinics Found</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+        </section>
+
+        <section class="py-12 lg:py-16 bg-white">
+            <div class="container mx-auto px-4 max-w-6xl">
+                {filteredClinics.length > 0 ? (
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {filteredClinics.slice(0, 30).map(clinic => (
+                            <ClinicCard clinic={clinic} />
+                        ))}
+                    </div>
+                ) : (
+                    <div class="text-center py-20">
+                        <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </div>
+                        <h2 class="text-xl font-bold text-slate-900 mb-2">No clinics match this filter yet</h2>
+                        <p class="text-slate-500 mb-8">We're constantly adding new clinics. Try browsing our full directory instead.</p>
+                        <a href="/us/" class="px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-colors">Browse All Clinics</a>
+                    </div>
+                )}
+
+                {filteredClinics.length > 30 && (
+                    <div class="text-center mt-10">
+                        <a href="/us/" class="px-8 py-3 bg-slate-900 text-white font-semibold rounded-xl hover:bg-violet-600 transition-colors">View All {filteredClinics.length} Clinics</a>
+                    </div>
+                )}
+            </div>
+        </section>
+
+        <!-- Other Filters -->
+        <section class="py-12 bg-slate-50">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 tracking-tight">Other Ways to Filter</h2>
+                <div class="flex flex-wrap gap-3">
+                    {PROVIDER_SLUGS.filter(s => s.slug !== Astro.params.slug).map(item => (
+                        <a href={`/providers/filter/${item.slug}/`} class="px-4 py-2 bg-white border border-slate-200 text-sm font-medium text-slate-700 rounded-xl hover:border-violet-300 hover:text-violet-600 transition-all">{item.title}</a>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <section class="relative py-16 bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <h2 class="text-2xl font-bold text-white mb-4">Not finding what you need?</h2>
+                <p class="text-slate-400 mb-8">Take our assessment to find the best TMS provider for your specific needs.</p>
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <a href="/quiz/am-i-a-candidate/" class="px-8 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">Take Assessment</a>
+                    <a href="/us/" class="px-8 py-3.5 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all">Browse All Clinics</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

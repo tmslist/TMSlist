@@ -1,0 +1,26 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import PortalReviews from "../../components/react/PortalReviews";
+import PortalSidebar from "../../components/react/PortalSidebar";
+import { getSessionFromRequest, hasRole } from "../../utils/auth";
+
+const session = getSessionFromRequest(Astro.request);
+if (!session) {
+  return Astro.redirect("/portal/login");
+}
+if (!hasRole(session, 'admin', 'editor', 'clinic_owner')) {
+  return Astro.redirect("/portal/login");
+}
+---
+
+<Layout title="Reviews | Doctor Portal | TMS List" description="View reviews for your clinic." noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <PortalSidebar client:load currentPage="reviews" userEmail={session.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-5xl">
+        <PortalReviews client:load />
+      </div>
+    </main>
+  </div>
+</Layout>

@@ -2,11 +2,17 @@ import type { APIRoute } from 'astro';
 import { db } from '../../../db';
 import { clinics } from '../../../db/schema';
 import { clinicSubmitSchema } from '../../../db/validation';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Rate limit: 2 requests per IP per hour
+    const ip = getClientIp(request);
+    const rateLimited = await strictRateLimit(ip, 2, '1 h', 'clinics:submit');
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
     const parsed = clinicSubmitSchema.safeParse(body);
 

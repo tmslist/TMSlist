@@ -8,7 +8,7 @@ function getResend() {
   return new Resend(API_KEY);
 }
 
-const FROM = 'TMS List <notifications@tmslist.com>';
+const FROM = 'TMS List <notifications@mail.tmslist.com>';
 
 export async function sendLeadNotification(data: {
   clinicName: string;

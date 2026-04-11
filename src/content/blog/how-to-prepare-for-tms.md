@@ -16,7 +16,7 @@ Don't show up on an empty stomach. TMS doesn't require fasting — you're not be
 
 **2. Take your medications as usual**
 
-Unless your psychiatrist specifically tells you to stop or adjust something, keep taking your current medications. Most patients continue their antidepressants during TMS treatment.
+Unless your psychiatrist specifically tells you to stop or adjust something, keep taking your current medications. Most people continue their antidepressants during TMS treatment.
 
 **3. Skip the caffeine excess**
 
@@ -40,7 +40,7 @@ Your first visit takes longer — usually 45-60 minutes instead of the normal 20
 - From that reference point, they calculate exactly where to aim the coil for depression treatment
 - They'll also calibrate the intensity — the minimum power needed to make your thumb move (your "motor threshold")
 
-This process isn't painful, but it feels weird. The thumb twitching is involuntary and a little unsettling the first time. It's completely normal.
+This process isn't painful, but it feels weird. The thumb twitching is involuntary and a little unsettling the first time. Totally normal.
 
 ## What treatment actually feels like
 
@@ -52,11 +52,11 @@ Once mapping is done (first session only), treatment goes like this:
 4. Each burst lasts a few seconds, followed by a pause
 5. This repeats for 19-37 minutes depending on the protocol
 
-The tapping ranges from "mildly annoying" to "uncomfortable" for the first few sessions. It gets better. Most patients describe it as completely tolerable by session 5-6.
+The tapping ranges from "mildly annoying" to "uncomfortable" for the first few sessions. It gets better. Most people say it's completely tolerable by session 5-6.
 
 ## After your session
 
-- You can drive yourself home immediately
+- You can drive yourself home right away
 - Go back to work, exercise, eat — no restrictions
 - If you get a headache, take Tylenol or Advil
 - Some people feel slightly tired the first few times; this is normal
@@ -67,4 +67,4 @@ The tapping ranges from "mildly annoying" to "uncomfortable" for the first few s
 - **Accelerated protocols** (like SAINT): Multiple sessions per day over 1-2 weeks
 - **Each session**: 19-37 minutes
 
-Plan your calendar accordingly. The daily commitment is the biggest practical challenge — but sessions are short enough that many patients go during lunch breaks or before work.
+Plan your calendar accordingly. The daily commitment is the biggest practical challenge — but sessions are short enough that many people go during lunch breaks or before work.

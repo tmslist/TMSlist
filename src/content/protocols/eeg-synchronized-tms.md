@@ -5,30 +5,34 @@ description: "EEG-synchronized TMS times magnetic pulses to your brain's natural
 
 ## What is EEG-synchronized TMS?
 
-Standard TMS delivers pulses at fixed intervals regardless of what the brain is doing at that moment. EEG-synchronized TMS (also called closed-loop TMS) monitors brain rhythms in real-time and times each pulse to arrive at the optimal phase of neural oscillation.
+Standard TMS fires pulses at fixed intervals. It doesn't care what your brain is doing at that exact moment. EEG-synchronized TMS — also called closed-loop TMS — monitors your brain rhythms in real-time and times each pulse to land at the optimal moment in your neural oscillation cycle.
+
+Same pulses. Better timing.
 
 ## The concept
 
-Your brain produces rhythmic electrical activity (oscillations) at various frequencies. The alpha rhythm (8-12Hz) is particularly relevant — its phase affects cortical excitability:
-- **Peak phase:** Cortex is more excitable — TMS pulse has maximum effect
-- **Trough phase:** Cortex is less excitable — TMS pulse has less effect
+Your brain produces rhythmic electrical activity at various frequencies. The alpha rhythm (8-12Hz) is the one that matters here. Its phase affects how excitable the cortex is at any given instant:
+- **Peak phase:** Cortex is more excitable — a TMS pulse has maximum impact
+- **Trough phase:** Cortex is less excitable — same pulse, less effect
 
-By delivering pulses at the peak phase, each pulse theoretically has more impact, potentially improving outcomes or reducing the number of pulses needed.
+By firing pulses at the peak, each one theoretically does more. That could mean better outcomes, or it could mean needing fewer total pulses. Maybe both.
 
 ## How it works
 
-1. EEG electrodes continuously monitor brain oscillations during treatment
+1. EEG electrodes monitor your brain oscillations continuously during treatment
 2. A real-time processing system identifies the alpha rhythm phase
-3. The TMS device is triggered to fire at the optimal phase
-4. Each pulse is timed to the brain's natural rhythm — truly personalized stimulation
+3. The TMS device fires at the optimal moment
+4. Every single pulse is timed to your brain's rhythm — truly personalized at the millisecond level
 
 ## Current evidence
 
-This is an **early-stage research approach**:
-- Several proof-of-concept studies show EEG-synchronized TMS produces larger motor-evoked potentials (indicating stronger cortical activation)
+Here's where we need to be straight with you: **this is still a research approach.**
+- Proof-of-concept studies show EEG-synchronized TMS produces larger motor-evoked potentials (meaning stronger cortical activation per pulse)
 - A 2023 pilot study for depression showed promising results with fewer total pulses needed
-- The technology to do real-time EEG-triggered TMS is becoming more reliable
-- No large randomized trials completed yet for depression treatment
+- The technology for reliable real-time EEG-triggered TMS is getting better
+- No large randomized trials for depression treatment have been completed yet
+
+Promising? Yes. Ready for prime time? Not yet.
 
 ## Available systems
 
@@ -38,12 +42,12 @@ This is an **early-stage research approach**:
 
 ## When this may matter
 
-EEG-synchronized TMS is likely most valuable for:
-- Non-responders to standard TMS (optimizing pulse timing may push them over threshold)
-- Research into fundamental TMS mechanisms
-- Eventually reducing total treatment time by making each pulse more effective
-- Personalizing treatment beyond just spatial targeting
+EEG-synchronized TMS is likely most relevant for:
+- People who didn't respond to standard TMS (optimizing pulse timing might push them past the threshold)
+- Research into how TMS actually works at a fundamental level
+- Eventually reducing treatment time by making each pulse count more
+- Personalizing treatment beyond just *where* you stimulate to *when* you stimulate
 
 ## Current status
 
-This remains a research technique not available in clinical practice. If interested, look for clinical trials at universities with TMS neurophysiology labs. Standard TMS remains the proven, available option.
+This is a research technique. It's not available in regular clinical practice yet. If the concept interests you, look for clinical trials at universities with TMS neurophysiology labs. For now, standard TMS remains the proven, available option.

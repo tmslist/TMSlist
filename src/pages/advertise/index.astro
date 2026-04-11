@@ -1,0 +1,197 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Advertise on TMS List | Reach TMS Therapy Patients";
+const description = "Advertise your TMS clinic or product to 50K+ monthly visitors actively searching for TMS therapy. Featured listings, sponsored content, and banner ads.";
+
+const tiers = [
+    {
+        name: "Featured Listing",
+        price: "$99",
+        period: "/mo",
+        description: "Stand out in search results with a highlighted clinic profile, priority placement, and a verified badge.",
+        features: [
+            "Priority placement in city & state pages",
+            "Highlighted clinic card with gold border",
+            "Verified badge on your profile",
+            "Click-to-call and direct booking link",
+            "Monthly performance analytics",
+        ],
+        cta: "Get Featured",
+        popular: true,
+    },
+    {
+        name: "Sponsored Article",
+        price: "$299",
+        period: "/article",
+        description: "Publish expert content on our blog and research pages, reaching patients at every stage of their TMS journey.",
+        features: [
+            "1,500+ word SEO-optimized article",
+            "Permanent placement on blog",
+            "Author bio with link to your site",
+            "Social media promotion",
+            "Internal linking from related pages",
+        ],
+        cta: "Publish Content",
+        popular: false,
+    },
+    {
+        name: "Banner Ads",
+        price: "Custom",
+        period: " pricing",
+        description: "High-visibility placements across the site — homepage hero, sidebar, and clinic comparison pages.",
+        features: [
+            "Homepage and category page placements",
+            "Responsive display across devices",
+            "Impression and click tracking",
+            "A/B creative testing",
+            "Dedicated account manager",
+        ],
+        cta: "Request Quote",
+        popular: false,
+    },
+];
+
+const benefits = [
+    { title: "Targeted Audience", description: "Every visitor is actively researching TMS therapy — patients, caregivers, and referring physicians.", icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z" },
+    { title: "Verified Traffic", description: "Real, organic visitors from Google searches — no bots, no inflated numbers. We share analytics on request.", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" },
+    { title: "No Long-Term Contracts", description: "Month-to-month billing. Pause or cancel anytime — no lock-in periods, no cancellation fees.", icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" },
+    { title: "Measurable ROI", description: "Track impressions, clicks, and patient enquiries directly from your dashboard. Know exactly what you're getting.", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
+];
+---
+
+<Layout title={title} description={description} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Advertise", url: "/advertise/" }]}>
+    <main>
+        <!-- Hero -->
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-amber-600/10 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[10%] right-[15%] w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-[120px]"></div>
+
+            <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-700">/</span>
+                    <span class="text-slate-300">Advertise</span>
+                </nav>
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full mb-6">
+                        <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
+                        <span class="text-xs font-semibold text-amber-400 tracking-wider uppercase">Partner With Us</span>
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
+                        Reach Patients<br/>Actively Searching<br/>for <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">TMS</span>
+                    </h1>
+                    <p class="text-lg text-slate-400 leading-relaxed max-w-xl">
+                        Connect your clinic or brand with the largest TMS therapy directory audience. Targeted, measurable, and contract-free.
+                    </p>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+        </section>
+
+        <!-- Stats Bar -->
+        <section class="bg-white border-b border-slate-100 py-10">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap justify-center gap-10 md:gap-20 text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-violet-600">50K+</div>
+                        <div class="text-sm text-slate-500 font-medium mt-1">Monthly Visitors</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-amber-600">2,000+</div>
+                        <div class="text-sm text-slate-500 font-medium mt-1">Listed Clinics</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-emerald-600">20+</div>
+                        <div class="text-sm text-slate-500 font-medium mt-1">Countries</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-blue-600">85%</div>
+                        <div class="text-sm text-slate-500 font-medium mt-1">Organic Traffic</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Tiers -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-14">
+                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">Advertising Options</h2>
+                    <p class="text-slate-500 text-lg max-w-2xl mx-auto">Choose the format that fits your goals. All plans include performance reporting and dedicated support.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {tiers.map(tier => (
+                        <div class={`relative bg-white rounded-2xl border ${tier.popular ? 'border-violet-300 shadow-xl shadow-violet-600/10' : 'border-slate-200'} p-8 flex flex-col`}>
+                            {tier.popular && (
+                                <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                                    <span class="px-4 py-1 bg-violet-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Most Popular</span>
+                                </div>
+                            )}
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">{tier.name}</h3>
+                            <div class="flex items-baseline gap-1 mb-4">
+                                <span class="text-4xl font-bold text-slate-900">{tier.price}</span>
+                                <span class="text-slate-500">{tier.period}</span>
+                            </div>
+                            <p class="text-sm text-slate-500 leading-relaxed mb-6">{tier.description}</p>
+                            <ul class="space-y-3 mb-8 flex-1">
+                                {tier.features.map(f => (
+                                    <li class="flex items-start gap-3 text-sm text-slate-600">
+                                        <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                        {f}
+                                    </li>
+                                ))}
+                            </ul>
+                            <a href={`mailto:partnerships@tmslist.com?subject=${encodeURIComponent(tier.name + ' Enquiry')}`} class={`block text-center py-3.5 font-semibold rounded-xl transition-colors ${tier.popular ? 'bg-violet-600 hover:bg-violet-500 text-white shadow-lg shadow-violet-600/25' : 'bg-slate-900 hover:bg-slate-800 text-white'}`}>
+                                {tier.cta}
+                            </a>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits -->
+        <section class="py-16 lg:py-24 bg-slate-50 border-y border-slate-100">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="text-center mb-14">
+                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">Why Advertise With Us</h2>
+                    <p class="text-slate-500 text-lg max-w-xl mx-auto">Your audience is already here. We help you reach them at the moment they're making a decision.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {benefits.map(b => (
+                        <div class="bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center text-violet-600 mb-5">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={b.icon}/></svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">{b.title}</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed">{b.description}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="relative bg-slate-950 rounded-3xl p-10 lg:p-14 overflow-hidden text-center">
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-600/10 via-transparent to-violet-600/10"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+                    <div class="relative z-10">
+                        <p class="text-sm font-semibold text-amber-400 tracking-wider uppercase mb-3">Let's Talk</p>
+                        <h3 class="text-2xl lg:text-3xl font-bold text-white mb-4 tracking-tight">Ready to Grow Your Practice?</h3>
+                        <p class="text-slate-400 max-w-lg mx-auto mb-8">Get in touch with our partnerships team. We'll help you find the right format for your goals and budget.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="mailto:partnerships@tmslist.com" class="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-xl transition-colors shadow-lg shadow-amber-500/25">Email partnerships@tmslist.com</a>
+                            <a href="/add-listing/" class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">Add Free Listing First</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
