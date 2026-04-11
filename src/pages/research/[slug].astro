@@ -33,12 +33,26 @@ if (hasContent && entry) {
   const rendered = await render(entry);
   Content = rendered.Content;
 }
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const articleSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": title,
+  "description": description || `TMS research: ${title}.`,
+  "url": `${siteUrl}/research/${slug}/`,
+  "author": { "@type": "Organization", "name": "TMS List Editorial Team", "url": siteUrl },
+  "publisher": { "@type": "Organization", "name": "TMS List", "url": siteUrl, "logo": { "@type": "ImageObject", "url": `${siteUrl}/favicon.svg` } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/research/${slug}/` },
+  "reviewedBy": { "@type": "Person", "name": "Dr. Karan Narwal", "jobTitle": "Mental Health Specialist & Consultant" },
+});
 ---
 
 <ContentPage
   title={title}
   subtitle={description || "Latest scientific data and clinical trials on TMS therapy."}
   description={description}
+  schema={articleSchema}
   breadcrumbs={[
     { name: "Home", url: "/" },
     { name: "Research", url: "/research/" },

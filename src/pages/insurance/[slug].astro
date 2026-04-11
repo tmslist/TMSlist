@@ -1,6 +1,7 @@
 ---
+export const prerender = true;
 
-import ContentPage from '../../layouts/ContentPage.astro';
+import InsurancePage from '../../layouts/InsurancePage.astro';
 import { getCollection, render } from 'astro:content';
 import { INSURANCE_SLUGS } from '../../utils/seo_slugs';
 
@@ -12,7 +13,18 @@ export async function getStaticPaths() {
 
   const contentPaths = entries.map((entry) => ({
     params: { slug: entry.id },
-    props: { title: entry.data.title, description: entry.data.description, hasContent: true, entry },
+    props: {
+      title: entry.data.title,
+      description: entry.data.description,
+      insurer: entry.data.insurer,
+      provider: entry.data.provider,
+      coversTms: entry.data.coversTms,
+      priorAuthRequired: entry.data.priorAuthRequired,
+      typicalCost: entry.data.typicalCost,
+      faqs: entry.data.faqs || [],
+      hasContent: true,
+      entry,
+    },
   }));
 
   const contentSlugsSet = new Set(contentPaths.map(p => p.params.slug));
@@ -26,19 +38,39 @@ export async function getStaticPaths() {
   return [...contentPaths, ...fallbackPaths];
 }
 
-const { title, description, hasContent, entry } = Astro.props;
+const { title, description, insurer, provider, coversTms, priorAuthRequired, typicalCost, faqs, hasContent, entry } = Astro.props;
 const slug = Astro.params.slug!;
 let Content: any = null;
 if (hasContent && entry) {
   const rendered = await render(entry);
   Content = rendered.Content;
 }
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const articleSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description || `TMS insurance coverage guide: ${title}.`,
+  "url": `${siteUrl}/insurance/${slug}/`,
+  "author": { "@type": "Organization", "name": "TMS List Editorial Team", "url": siteUrl },
+  "publisher": { "@type": "Organization", "name": "TMS List", "url": siteUrl, "logo": { "@type": "ImageObject", "url": `${siteUrl}/favicon.svg` } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/insurance/${slug}/` },
+  "reviewedBy": { "@type": "Person", "name": "Dr. Karan Narwal", "jobTitle": "Mental Health Specialist & Consultant" },
+});
 ---
 
-<ContentPage
+<InsurancePage
   title={title}
-  subtitle={description || "Insurance coverage details, authorization requirements, and what you'll pay."}
+  insurer={insurer}
+  provider={provider}
   description={description}
+  coversTms={coversTms}
+  priorAuthRequired={priorAuthRequired}
+  typicalCost={typicalCost}
+  slug={slug}
+  faqs={faqs || []}
+  schema={articleSchema}
   breadcrumbs={[
     { name: "Home", url: "/" },
     { name: "Insurance", url: "/insurance/" },
@@ -46,4 +78,4 @@ if (hasContent && entry) {
   ]}
 >
   {Content ? <Content /> : null}
-</ContentPage>
+</InsurancePage>

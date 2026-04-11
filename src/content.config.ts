@@ -23,6 +23,10 @@ const treatments = defineCollection({
     fdaApproved: z.boolean().default(false),
     successRate: z.string().optional(),
     image: z.string().optional(),
+    sessionCount: z.string().optional(),
+    duration: z.string().optional(),
+    brainArea: z.string().optional(),
+    faqs: z.array(z.object({ question: z.string(), answer: z.string() })).default([]),
   }),
 });
 
@@ -36,6 +40,8 @@ const insurance = defineCollection({
     coversTms: z.boolean().default(true),
     priorAuthRequired: z.boolean().default(true),
     image: z.string().optional(),
+    typicalCost: z.string().optional(),
+    faqs: z.array(z.object({ question: z.string(), answer: z.string() })).default([]),
   }),
 });
 
@@ -47,6 +53,9 @@ const comparisons = defineCollection({
     treatmentA: z.string().optional(),
     treatmentB: z.string().optional(),
     image: z.string().optional(),
+    verdict: z.string().optional(),
+    verdictWinner: z.string().optional(),
+    faqs: z.array(z.object({ question: z.string(), answer: z.string() })).default([]),
   }),
 });
 

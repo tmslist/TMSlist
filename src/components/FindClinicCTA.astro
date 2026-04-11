@@ -1,0 +1,39 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  title = "Find a TMS Clinic Near You",
+  description = "Browse verified providers with real patient reviews, insurance details, and treatment information.",
+  primaryHref = "/us/",
+  primaryLabel = "Search Clinics",
+  secondaryHref = "/quiz/am-i-a-candidate/",
+  secondaryLabel = "Am I a Candidate?",
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-slate-900 mt-8">
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 24px 24px;"></div>
+  <div class="absolute top-[-50%] right-[-20%] w-[500px] h-[500px] bg-violet-500/10 rounded-full blur-[100px]"></div>
+
+  <div class="relative z-10 container mx-auto px-4 py-16 lg:py-20 text-center">
+    <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-4">{title}</h2>
+    <p class="text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed">{description}</p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href={primaryHref} class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-8 py-3.5 rounded-xl transition-colors shadow-lg shadow-violet-600/25">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        {primaryLabel}
+      </a>
+      <a href={secondaryHref} class="inline-flex items-center gap-2 text-white/70 hover:text-white font-medium px-6 py-3.5 rounded-xl border border-white/10 hover:border-white/20 transition-colors">
+        {secondaryLabel}
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>

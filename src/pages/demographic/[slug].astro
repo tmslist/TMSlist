@@ -34,12 +34,26 @@ if (hasContent && entry) {
   const rendered = await render(entry);
   Content = rendered.Content;
 }
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const articleSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": title,
+  "description": description || `TMS therapy considerations for ${title}.`,
+  "url": `${siteUrl}/demographic/${slug}/`,
+  "about": { "@type": "MedicalTherapy", "name": "Transcranial Magnetic Stimulation (TMS)", "medicalSpecialty": "Psychiatry" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/demographic/${slug}/` },
+  "reviewedBy": { "@type": "Person", "name": "Dr. Karan Narwal", "jobTitle": "Mental Health Specialist & Consultant" },
+  "publisher": { "@type": "Organization", "name": "TMS List", "url": siteUrl },
+});
 ---
 
 <ContentPage
   title={title}
   subtitle={description || "Specialized TMS considerations for specific patient groups."}
   description={description}
+  schema={articleSchema}
   breadcrumbs={[
     { name: "Home", url: "/" },
     { name: "Demographics", url: "/demographic/" },

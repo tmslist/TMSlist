@@ -1,0 +1,188 @@
+---
+import Layout from "./Layout.astro";
+import ContentHero from "../components/ContentHero.astro";
+import ContentFAQ from "../components/ContentFAQ.astro";
+import FindClinicCTA from "../components/FindClinicCTA.astro";
+import SectionLinks from "../components/SectionLinks.astro";
+
+interface BreadcrumbItem { name: string; url: string; }
+interface FAQItem { question: string; answer: string; }
+
+interface Props {
+  title: string;
+  description?: string;
+  treatmentA?: string;
+  treatmentB?: string;
+  verdict?: string;
+  verdictWinner?: string;
+  schema?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  slug: string;
+  faqs?: FAQItem[];
+}
+
+const {
+  title, description, treatmentA, treatmentB,
+  verdict, verdictWinner,
+  schema, breadcrumbs, slug, faqs = [],
+} = Astro.props;
+
+const reviewerName = "Dr. Karan Narwal";
+const reviewerTitle = "Mental Health Specialist & Consultant";
+const reviewerImage = "https://img1.wsimg.com/isteam/ip/f791d9b9-2f6c-4539-b9b3-61b4c8a8a446/Screenshot%202024-11-16%20at%204.26.32%E2%80%AFPM.png/:/cr=t:0%25,l:6.95%25,w:86.1%25,h:100%25/rs=w:600,h:600,cg:true";
+
+const displayFaqs = faqs.length > 0 ? faqs : [
+  { question: `Which is better: ${treatmentA || 'Treatment A'} or ${treatmentB || 'Treatment B'}?`, answer: `The best option depends on your specific situation — diagnosis, treatment history, insurance coverage, and personal preferences. ${verdict || 'Read the full comparison above to understand how they differ across key factors.'}` },
+  { question: 'Can I try both treatments?', answer: 'Yes, many patients try multiple approaches. Your psychiatrist can help you create a treatment plan that may include sequencing different options based on your response.' },
+  { question: 'Does insurance cover both options?', answer: 'Coverage varies by treatment and insurer. TMS is covered by most major insurance plans for depression. Other treatments may have different coverage requirements. Contact your insurer or a provider for a benefits check.' },
+  { question: 'How do I choose the right treatment?', answer: 'Start with a consultation with a psychiatrist who can evaluate your specific needs. Consider factors like effectiveness for your condition, side effect profile, time commitment, insurance coverage, and your personal preferences.' },
+];
+
+const relatedSections = [
+  {
+    heading: 'More Comparisons',
+    links: [
+      { title: 'TMS vs. Medication', href: '/compare/tms-vs-antidepressants/' },
+      { title: 'TMS vs. ECT', href: '/compare/tms-vs-ect/' },
+      { title: 'TMS vs. Ketamine', href: '/compare/tms-vs-ketamine/' },
+      { title: 'TMS vs. Psychotherapy', href: '/compare/tms-vs-psychotherapy/' },
+      { title: 'NeuroStar vs. BrainsWay', href: '/compare/neurostar-vs-brainsway/' },
+    ].filter(l => !l.href.includes(slug)).slice(0, 4),
+  },
+  {
+    heading: 'Treatment Guides',
+    links: [
+      { title: 'TMS for Depression', href: '/treatments/depression/' },
+      { title: 'TMS for Anxiety', href: '/treatments/anxiety/' },
+      { title: 'TMS for OCD', href: '/treatments/ocd/' },
+      { title: 'All Treatments', href: '/treatments/' },
+    ],
+  },
+  {
+    heading: 'Getting Started',
+    links: [
+      { title: 'Am I a Candidate?', href: '/quiz/am-i-a-candidate/' },
+      { title: 'Insurance Coverage', href: '/insurance/medicare/' },
+      { title: 'TMS Cost Guide', href: '/tms-cost-guide/' },
+      { title: 'Find a Clinic', href: '/us/' },
+    ],
+  },
+];
+---
+
+<Layout title={`${title} | TMS List`} description={description} schema={schema} breadcrumbs={breadcrumbs}>
+  <ContentHero
+    title={title}
+    subtitle={description || "Detailed side-by-side comparison of effectiveness, side effects, and costs."}
+    breadcrumbs={breadcrumbs}
+    badges={[{ text: 'Comparison', color: 'blue' }]}
+    accentFrom="from-blue-600"
+    accentTo="to-slate-900"
+  >
+    <Fragment slot="hero-content">
+      {treatmentA && treatmentB && (
+        <div class="flex items-center gap-4 mt-8">
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl px-5 py-3 text-center">
+            <div class="text-white font-bold font-display text-lg">{treatmentA}</div>
+          </div>
+          <div class="w-10 h-10 rounded-full bg-blue-500/30 border border-blue-400/30 flex items-center justify-center text-white font-bold text-sm shrink-0">
+            VS
+          </div>
+          <div class="bg-white/10 backdrop-blur border border-white/20 rounded-xl px-5 py-3 text-center">
+            <div class="text-white font-bold font-display text-lg">{treatmentB}</div>
+          </div>
+        </div>
+      )}
+    </Fragment>
+  </ContentHero>
+
+  <!-- Verdict Card -->
+  {verdict && (
+    <section class="container mx-auto px-4 -mt-6 relative z-20 mb-8">
+      <div class="bg-gradient-to-r from-blue-50 to-violet-50 border border-blue-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-slate-900 mb-1">
+              The Verdict{verdictWinner ? `: ${verdictWinner}` : ''}
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">{verdict}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <main class="container mx-auto px-4 pb-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-a:text-violet-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-900 prose-table:border prose-table:border-slate-200 prose-th:bg-slate-50 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-slate-200">
+        <slot>
+          <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8 rounded-r-xl">
+            <h3 class="text-blue-700 font-semibold mt-0">Evidence-Based Comparison</h3>
+            <p class="mb-0">This comparison reflects current clinical evidence, FDA indications, and real-world treatment data.</p>
+          </div>
+
+          <h2>Overview</h2>
+          <p>This guide compares {treatmentA || 'these treatments'} and {treatmentB || 'their alternatives'} across key factors: effectiveness, side effects, cost, time commitment, and insurance coverage.</p>
+
+          <h2>Effectiveness</h2>
+          <p>Both approaches have clinical evidence supporting their use. The best option depends on your specific diagnosis, treatment history, and response to previous interventions.</p>
+
+          <h2>Side Effects</h2>
+          <p>Side effect profiles differ between treatments. Discuss the specific risks and benefits with your psychiatrist before making a decision.</p>
+
+          <h2>Cost and Insurance</h2>
+          <p>Cost varies significantly based on your insurance plan and location. Most major carriers cover FDA-cleared TMS for depression. Coverage for other treatments varies.</p>
+
+          <div class="not-prose mt-12 p-8 bg-blue-900 rounded-2xl text-white text-center">
+            <h3 class="text-2xl font-semibold mb-4">Need help deciding?</h3>
+            <p class="text-blue-200 mb-8">Talk to a TMS specialist who can evaluate your specific situation.</p>
+            <a href="/us/" class="inline-block bg-white text-blue-900 font-semibold py-3 px-8 rounded-xl hover:bg-blue-50 transition-colors">Find a Specialist</a>
+          </div>
+        </slot>
+      </article>
+
+      <aside class="lg:col-span-4 space-y-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
+          <div class="flex items-center gap-4">
+            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" width="48" height="48" loading="lazy" />
+            <div>
+              <div class="font-semibold text-slate-900">{reviewerName}</div>
+              <div class="text-xs text-slate-500">{reviewerTitle}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">More Comparisons</h4>
+          <ul class="space-y-3 text-sm">
+            {[
+              { href: '/compare/tms-vs-ect/', label: 'TMS vs. ECT' },
+              { href: '/compare/tms-vs-antidepressants/', label: 'TMS vs. Medication' },
+              { href: '/compare/tms-vs-ketamine/', label: 'TMS vs. Ketamine' },
+              { href: '/compare/tms-vs-psychotherapy/', label: 'TMS vs. Therapy' },
+              { href: '/compare/neurostar-vs-brainsway/', label: 'NeuroStar vs. BrainsWay' },
+            ].filter(l => !l.href.includes(slug)).slice(0, 4).map(link => (
+              <li><a href={link.href} class="text-slate-600 hover:text-blue-700 transition-colors">{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="bg-gradient-to-br from-blue-600 to-blue-800 p-6 rounded-2xl text-white">
+          <h4 class="font-semibold mb-2 text-sm">Not sure which is right?</h4>
+          <p class="text-sm text-blue-200 mb-4">A TMS specialist can evaluate your options and recommend the best approach.</p>
+          <a href="/us/" class="inline-block text-sm font-semibold bg-white text-blue-700 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+            Find a Specialist
+          </a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <ContentFAQ faqs={displayFaqs} />
+  <SectionLinks sections={relatedSections} />
+  <FindClinicCTA />
+</Layout>

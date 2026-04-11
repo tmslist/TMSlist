@@ -60,7 +60,8 @@ if (hasContent && entry) {
 
 const reviewerName = "Dr. Karan Narwal";
 const reviewerTitle = "Mental Health Specialist & Consultant";
-const reviewerImage = "/images/dr-karan-narwal.jpg";
+const reviewerImage = "https://img1.wsimg.com/isteam/ip/f791d9b9-2f6c-4539-b9b3-61b4c8a8a446/Screenshot%202024-11-16%20at%204.26.32%E2%80%AFPM.png/:/cr=t:0%25,l:6.95%25,w:86.1%25,h:100%25/rs=w:600,h:600,cg:true";
+const reviewerBio = "Dr. Narwal is a mental health specialist with extensive experience in neuromodulation therapies. He reviews all clinical content on TMS List for medical accuracy and alignment with current treatment guidelines.";
 
 const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
 const articleSchema = JSON.stringify({
@@ -162,12 +163,13 @@ const articleSchema = JSON.stringify({
         <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
           <h4 class="font-semibold text-gray-900 mb-4 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
           <div class="flex items-center gap-4">
-            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" />
+            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" width="48" height="48" loading="lazy" />
             <div>
               <div class="font-semibold text-gray-900">{reviewerName}</div>
               <div class="text-xs text-gray-500">{reviewerTitle}</div>
             </div>
           </div>
+          <p class="text-xs text-gray-500 mt-3 leading-relaxed">{reviewerBio}</p>
         </div>
 
         <div class="bg-gray-50 p-6 rounded-2xl">

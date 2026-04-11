@@ -20,7 +20,8 @@ interface Props {
 }
 
 const { title, subtitle, description, schema, reviewerName = "Dr. Karan Narwal", reviewerTitle = "Mental Health Specialist & Consultant", imageSubject, imageType = 'hero', breadcrumbs } = Astro.props;
-const reviewerImage = reviewerName === "Dr. Karan Narwal" ? "/images/dr-karan-narwal.jpg" : null;
+const reviewerImage = reviewerName === "Dr. Karan Narwal" ? "https://img1.wsimg.com/isteam/ip/f791d9b9-2f6c-4539-b9b3-61b4c8a8a446/Screenshot%202024-11-16%20at%204.26.32%E2%80%AFPM.png/:/cr=t:0%25,l:6.95%25,w:86.1%25,h:100%25/rs=w:600,h:600,cg:true" : null;
+const reviewerBio = reviewerName === "Dr. Karan Narwal" ? "Dr. Narwal is a mental health specialist with extensive experience in neuromodulation therapies. He reviews all clinical content on TMS List for medical accuracy and alignment with current treatment guidelines." : null;
 const reviewerInitials = reviewerName.split(' ').map(n => n[0]).join('');
 ---
 
@@ -146,7 +147,7 @@ const reviewerInitials = reviewerName.split(' ').map(n => n[0]).join('');
                     </h4>
                     <div class="flex items-center gap-4">
                         {reviewerImage ? (
-                            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" />
+                            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" width="48" height="48" loading="lazy" />
                         ) : (
                             <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm">
                                 {reviewerInitials}
@@ -161,6 +162,9 @@ const reviewerInitials = reviewerName.split(' ').map(n => n[0]).join('');
                             </div>
                         </div>
                     </div>
+                    {reviewerBio && (
+                        <p class="text-xs text-gray-500 mt-3 leading-relaxed">{reviewerBio}</p>
+                    )}
                 </div>
 
                 <!-- Related Links -->

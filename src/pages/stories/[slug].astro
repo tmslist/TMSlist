@@ -33,12 +33,25 @@ if (hasContent && entry) {
   const rendered = await render(entry);
   Content = rendered.Content;
 }
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const articleSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description || `TMS patient story: ${title}.`,
+  "url": `${siteUrl}/stories/${slug}/`,
+  "author": { "@type": "Organization", "name": "TMS List Editorial Team", "url": siteUrl },
+  "publisher": { "@type": "Organization", "name": "TMS List", "url": siteUrl, "logo": { "@type": "ImageObject", "url": `${siteUrl}/favicon.svg` } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/stories/${slug}/` },
+});
 ---
 
 <ContentPage
   title={title}
   subtitle={description || "Real stories from TMS therapy patients."}
   description={description}
+  schema={articleSchema}
   breadcrumbs={[
     { name: "Home", url: "/" },
     { name: "Patient Stories", url: "/stories/" },

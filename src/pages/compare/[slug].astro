@@ -1,6 +1,7 @@
 ---
+export const prerender = true;
 
-import ContentPage from '../../layouts/ContentPage.astro';
+import ComparisonPage from '../../layouts/ComparisonPage.astro';
 import { getCollection, render } from 'astro:content';
 import { COMPARE_SLUGS } from '../../utils/seo_slugs';
 
@@ -8,11 +9,21 @@ export async function getStaticPaths() {
   let entries: any[] = [];
   try {
     entries = await getCollection('comparisons');
-  } catch { /* collection may not exist yet */ }
+  } catch {}
 
   const contentPaths = entries.map((entry) => ({
     params: { slug: entry.id },
-    props: { title: entry.data.title, description: entry.data.description, hasContent: true, entry },
+    props: {
+      title: entry.data.title,
+      description: entry.data.description,
+      treatmentA: entry.data.treatmentA,
+      treatmentB: entry.data.treatmentB,
+      verdict: entry.data.verdict,
+      verdictWinner: entry.data.verdictWinner,
+      faqs: entry.data.faqs || [],
+      hasContent: true,
+      entry,
+    },
   }));
 
   const contentSlugsSet = new Set(contentPaths.map(p => p.params.slug));
@@ -26,19 +37,38 @@ export async function getStaticPaths() {
   return [...contentPaths, ...fallbackPaths];
 }
 
-const { title, description, hasContent, entry } = Astro.props;
+const { title, description, treatmentA, treatmentB, verdict, verdictWinner, faqs, hasContent, entry } = Astro.props;
 const slug = Astro.params.slug!;
 let Content: any = null;
 if (hasContent && entry) {
   const rendered = await render(entry);
   Content = rendered.Content;
 }
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const articleSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description || `Detailed side-by-side comparison: ${title}.`,
+  "url": `${siteUrl}/compare/${slug}/`,
+  "author": { "@type": "Organization", "name": "TMS List Editorial Team", "url": siteUrl },
+  "publisher": { "@type": "Organization", "name": "TMS List", "url": siteUrl, "logo": { "@type": "ImageObject", "url": `${siteUrl}/favicon.svg` } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/compare/${slug}/` },
+  "reviewedBy": { "@type": "Person", "name": "Dr. Karan Narwal", "jobTitle": "Mental Health Specialist & Consultant" },
+});
 ---
 
-<ContentPage
+<ComparisonPage
   title={title}
-  subtitle={description || "Detailed side-by-side comparison of effectiveness, side effects, and costs."}
   description={description}
+  treatmentA={treatmentA}
+  treatmentB={treatmentB}
+  verdict={verdict}
+  verdictWinner={verdictWinner}
+  schema={articleSchema}
+  slug={slug}
+  faqs={faqs || []}
   breadcrumbs={[
     { name: "Home", url: "/" },
     { name: "Compare", url: "/compare/" },
@@ -46,4 +76,4 @@ if (hasContent && entry) {
   ]}
 >
   {Content ? <Content /> : null}
-</ContentPage>
+</ComparisonPage>

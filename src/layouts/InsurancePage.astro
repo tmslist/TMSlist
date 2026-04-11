@@ -1,0 +1,193 @@
+---
+import Layout from "./Layout.astro";
+import ContentHero from "../components/ContentHero.astro";
+import StatCards from "../components/StatCards.astro";
+import ContentFAQ from "../components/ContentFAQ.astro";
+import FindClinicCTA from "../components/FindClinicCTA.astro";
+import SectionLinks from "../components/SectionLinks.astro";
+
+interface BreadcrumbItem { name: string; url: string; }
+interface FAQItem { question: string; answer: string; }
+
+interface Props {
+  title: string;
+  insurer?: string;
+  provider?: string;
+  description?: string;
+  coversTms?: boolean;
+  priorAuthRequired?: boolean;
+  typicalCost?: string;
+  schema?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  slug: string;
+  faqs?: FAQItem[];
+}
+
+const {
+  title, insurer, provider, description,
+  coversTms = true, priorAuthRequired = true, typicalCost,
+  schema, breadcrumbs, slug, faqs = [],
+} = Astro.props;
+
+const displayName = insurer || provider || title;
+
+const reviewerName = "Dr. Karan Narwal";
+const reviewerTitle = "Mental Health Specialist & Consultant";
+const reviewerImage = "https://img1.wsimg.com/isteam/ip/f791d9b9-2f6c-4539-b9b3-61b4c8a8a446/Screenshot%202024-11-16%20at%204.26.32%E2%80%AFPM.png/:/cr=t:0%25,l:6.95%25,w:86.1%25,h:100%25/rs=w:600,h:600,cg:true";
+
+const badges: { text: string; color: 'emerald' | 'amber' | 'blue' }[] = [];
+if (coversTms) badges.push({ text: 'Covers TMS', color: 'emerald' });
+else badges.push({ text: 'Coverage Varies', color: 'amber' });
+if (priorAuthRequired) badges.push({ text: 'Prior Auth Required', color: 'amber' });
+
+const stats = [
+  { value: coversTms ? 'Yes' : 'Varies', label: 'TMS Coverage', color: coversTms ? 'emerald' : 'amber', icon: coversTms ? 'check' : 'shield' },
+  { value: priorAuthRequired ? 'Required' : 'Not Required', label: 'Prior Authorization', color: 'blue', icon: 'shield' },
+  { value: typicalCost || '$500–$3,000', label: 'Typical Patient Cost', color: 'amber', icon: 'dollar' },
+  { value: '36 Sessions', label: 'Standard Course', color: 'violet', icon: 'clock' },
+];
+
+const displayFaqs = faqs.length > 0 ? faqs : [
+  { question: `Does ${displayName} cover TMS therapy?`, answer: `${coversTms ? `Yes, ${displayName} covers TMS therapy for FDA-cleared indications, typically major depressive disorder. Prior authorization is ${priorAuthRequired ? 'required' : 'not always required'}.` : `Coverage with ${displayName} varies by plan. Contact your insurer or a TMS clinic for a benefits check.`}` },
+  { question: 'What documentation do I need for approval?', answer: 'Most carriers require: a diagnosis of major depressive disorder (MDD), documentation of 2-4 failed antidepressant trials at adequate dose and duration, and a treatment plan from a qualified psychiatrist.' },
+  { question: 'How long does prior authorization take?', answer: 'Typically 5-15 business days. Expedited reviews can happen in 24-72 hours for urgent cases. If denied, you have the right to appeal — TMS denial overturn rates are 60-70%.' },
+  { question: 'What will I pay out of pocket?', answer: `Your cost depends on your plan's deductible, copay, and coinsurance structure. ${typicalCost ? `Typical patient costs with ${displayName} range from ${typicalCost}.` : 'Many patients pay $500-$3,000 total with insurance. Your TMS clinic can provide a detailed cost estimate after verifying your benefits.'}` },
+];
+
+const relatedSections = [
+  {
+    heading: 'Other Insurance Guides',
+    links: [
+      { title: 'Medicare TMS Coverage', href: '/insurance/medicare/' },
+      { title: 'BlueCross BlueShield', href: '/insurance/bluecross-blueshield/' },
+      { title: 'Aetna Coverage', href: '/insurance/aetna/' },
+      { title: 'Cigna Coverage', href: '/insurance/cigna/' },
+      { title: 'Prior Authorization Guide', href: '/insurance/prior-authorization-guide/' },
+    ].filter(l => !l.href.includes(slug)).slice(0, 4),
+  },
+  {
+    heading: 'Treatments Covered',
+    links: [
+      { title: 'TMS for Depression', href: '/treatments/depression/' },
+      { title: 'TMS for OCD', href: '/treatments/ocd/' },
+      { title: 'TMS for Anxiety', href: '/treatments/anxiety/' },
+      { title: 'All Treatments', href: '/treatments/' },
+    ],
+  },
+  {
+    heading: 'Cost & Planning',
+    links: [
+      { title: 'TMS Cost Guide', href: '/tms-cost-guide/' },
+      { title: 'Self-Pay & Financing', href: '/insurance/self-pay-financing/' },
+      { title: 'HSA/FSA for TMS', href: '/insurance/hsa-fsa-tms/' },
+      { title: 'Am I a Candidate?', href: '/quiz/am-i-a-candidate/' },
+    ],
+  },
+];
+---
+
+<Layout title={`${title} | TMS List`} description={description} schema={schema} breadcrumbs={breadcrumbs}>
+  <ContentHero
+    title={title}
+    subtitle={description || `Insurance coverage details, authorization requirements, and what you'll pay.`}
+    breadcrumbs={breadcrumbs}
+    badges={badges}
+    accentFrom="from-amber-600"
+    accentTo="to-slate-900"
+    stats={[
+      { value: coversTms ? 'Yes' : 'Varies', label: 'TMS Coverage' },
+      { value: priorAuthRequired ? 'Yes' : 'No', label: 'Prior Auth' },
+      { value: typicalCost || '$500–$3K', label: 'Typical Cost' },
+    ]}
+  />
+
+  <StatCards stats={stats} />
+
+  <main class="container mx-auto px-4 pb-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-a:text-violet-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-900 prose-table:border prose-table:border-slate-200 prose-th:bg-slate-50 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-slate-200">
+        <slot>
+          <div class="bg-amber-50 border-l-4 border-amber-500 p-6 mb-8 rounded-r-xl">
+            <h3 class="text-amber-700 font-semibold mt-0">Updated for 2026</h3>
+            <p class="mb-0">This guide reflects current {displayName} coverage policies for TMS therapy.</p>
+          </div>
+
+          <h2>Does {displayName} Cover TMS?</h2>
+          <p>{coversTms ? `Yes. ${displayName} covers TMS therapy for FDA-cleared indications. Most patients with treatment-resistant depression who meet medical necessity criteria can get coverage.` : `Coverage varies by plan. Contact ${displayName} directly or ask your TMS clinic to verify your benefits.`}</p>
+
+          <h2>Prior Authorization</h2>
+          <p>{priorAuthRequired ? `${displayName} requires prior authorization before TMS treatment begins. Your TMS clinic typically handles this process, which takes 5-15 business days.` : `Prior authorization requirements vary by plan. Check with your TMS clinic to determine if pre-approval is needed.`}</p>
+
+          <h2>What You'll Pay</h2>
+          <p>Your out-of-pocket cost depends on your specific plan's deductible, copay, and coinsurance. {typicalCost ? `Typical costs with ${displayName} range from ${typicalCost}.` : 'Most insured patients pay between $500 and $3,000 for a full TMS course.'}</p>
+
+          <div class="not-prose mt-12 p-8 bg-amber-900 rounded-2xl text-white text-center">
+            <h3 class="text-2xl font-semibold mb-4">Verify Your Coverage</h3>
+            <p class="text-amber-200 mb-8">Find a TMS clinic that accepts {displayName} and get a free benefits check.</p>
+            <a href="/us/" class="inline-block bg-white text-amber-900 font-semibold py-3 px-8 rounded-xl hover:bg-amber-50 transition-colors">Find a Clinic</a>
+          </div>
+        </slot>
+      </article>
+
+      <aside class="lg:col-span-4 space-y-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
+          <div class="flex items-center gap-4">
+            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" width="48" height="48" loading="lazy" />
+            <div>
+              <div class="font-semibold text-slate-900">{reviewerName}</div>
+              <div class="text-xs text-slate-500">{reviewerTitle}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 p-6 rounded-2xl border border-amber-100">
+          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Coverage Summary</h4>
+          <dl class="space-y-3 text-sm">
+            <div class="flex justify-between">
+              <dt class="text-slate-600">TMS Covered</dt>
+              <dd class="font-semibold">{coversTms ? <span class="text-emerald-600">Yes</span> : <span class="text-amber-600">Varies</span>}</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-slate-600">Prior Auth</dt>
+              <dd class="font-semibold">{priorAuthRequired ? <span class="text-amber-600">Required</span> : <span class="text-emerald-600">Not Required</span>}</dd>
+            </div>
+            {typicalCost && (
+              <div class="flex justify-between">
+                <dt class="text-slate-600">Typical Cost</dt>
+                <dd class="font-semibold text-slate-900">{typicalCost}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-100">
+          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Other Insurance Guides</h4>
+          <ul class="space-y-3 text-sm">
+            {[
+              { href: '/insurance/medicare/', label: 'Medicare' },
+              { href: '/insurance/bluecross-blueshield/', label: 'BlueCross BlueShield' },
+              { href: '/insurance/aetna/', label: 'Aetna' },
+              { href: '/insurance/cigna/', label: 'Cigna' },
+              { href: '/insurance/united-healthcare/', label: 'UnitedHealthcare' },
+            ].filter(l => !l.href.includes(slug)).slice(0, 4).map(link => (
+              <li><a href={link.href} class="text-slate-600 hover:text-amber-700 transition-colors">{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="bg-gradient-to-br from-amber-600 to-amber-800 p-6 rounded-2xl text-white">
+          <h4 class="font-semibold mb-2 text-sm">Check Your Coverage</h4>
+          <p class="text-sm text-amber-200 mb-4">See if your plan covers TMS and estimate your out-of-pocket cost.</p>
+          <a href="/quiz/insurance-eligibility-checker/" class="inline-block text-sm font-semibold bg-white text-amber-700 px-4 py-2 rounded-lg hover:bg-amber-50 transition-colors">
+            Check Eligibility
+          </a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <ContentFAQ faqs={displayFaqs} />
+  <SectionLinks sections={relatedSections} />
+  <FindClinicCTA />
+</Layout>

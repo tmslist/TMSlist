@@ -1,0 +1,254 @@
+---
+import Layout from "./Layout.astro";
+import ContentHero from "../components/ContentHero.astro";
+import StatCards from "../components/StatCards.astro";
+import ContentFAQ from "../components/ContentFAQ.astro";
+import FindClinicCTA from "../components/FindClinicCTA.astro";
+import SectionLinks from "../components/SectionLinks.astro";
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title: string;
+  condition?: string;
+  description?: string;
+  fdaApproved?: boolean;
+  successRate?: string;
+  sessionCount?: string;
+  duration?: string;
+  brainArea?: string;
+  image?: string;
+  schema?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  slug: string;
+  faqs?: FAQItem[];
+}
+
+const {
+  title,
+  condition,
+  description,
+  fdaApproved = false,
+  successRate,
+  sessionCount,
+  duration,
+  brainArea,
+  schema,
+  breadcrumbs,
+  slug,
+  faqs = [],
+} = Astro.props;
+
+const reviewerName = "Dr. Karan Narwal";
+const reviewerTitle = "Mental Health Specialist & Consultant";
+const reviewerImage = "https://img1.wsimg.com/isteam/ip/f791d9b9-2f6c-4539-b9b3-61b4c8a8a446/Screenshot%202024-11-16%20at%204.26.32%E2%80%AFPM.png/:/cr=t:0%25,l:6.95%25,w:86.1%25,h:100%25/rs=w:600,h:600,cg:true";
+const reviewerBio = "Dr. Narwal is a mental health specialist with extensive experience in neuromodulation therapies. He reviews all clinical content on TMS List for medical accuracy.";
+
+// Build hero badges
+const badges: { text: string; color: 'emerald' | 'blue' | 'amber' }[] = [];
+if (fdaApproved) {
+  badges.push({ text: 'FDA Cleared', color: 'emerald' });
+} else {
+  badges.push({ text: 'Research Phase', color: 'blue' });
+}
+
+// Build stat cards
+const stats: { value: string; label: string; color?: string; icon?: string }[] = [];
+if (successRate) stats.push({ value: successRate, label: 'Response Rate', color: 'emerald', icon: 'chart' });
+stats.push({ value: sessionCount || '30–36', label: 'Sessions', color: 'violet', icon: 'clock' });
+stats.push({ value: duration || '6–9 weeks', label: 'Treatment Duration', color: 'blue', icon: 'clock' });
+stats.push({ value: 'Most Plans', label: 'Insurance Coverage', color: 'amber', icon: 'shield' });
+
+// Default FAQs if none provided
+const displayFaqs = faqs.length > 0 ? faqs : [
+  { question: `Is TMS effective for ${condition || title}?`, answer: `TMS has shown promising results for ${condition || title}. ${fdaApproved ? 'It is FDA-cleared for this indication.' : 'Research is ongoing, and many patients report meaningful improvement.'} ${successRate ? `Response rates are approximately ${successRate}.` : 'Speak with a TMS specialist to learn about expected outcomes for your specific situation.'}` },
+  { question: 'How many sessions will I need?', answer: `A standard TMS course for ${condition || title} typically involves ${sessionCount || '30–36'} sessions over ${duration || '6–9 weeks'}, with 5 sessions per week. Some clinics offer accelerated protocols like theta burst stimulation (TBS) with shorter session times.` },
+  { question: 'Does insurance cover TMS for this condition?', answer: `${fdaApproved ? 'Most major insurance carriers cover TMS for FDA-cleared indications, including Medicare, BlueCross BlueShield, Aetna, Cigna, and UnitedHealthcare. Prior authorization is typically required.' : 'Insurance coverage for off-label TMS use varies by carrier. Some plans cover it with proper documentation, while others may require appeals. Your clinic can help navigate the authorization process.'}` },
+  { question: 'What are the side effects?', answer: 'The most common side effect is mild scalp discomfort during the first few sessions, which typically fades. Headaches may occur but usually respond to over-the-counter pain relievers. Serious side effects are rare — the risk of seizure is less than 0.1%.' },
+];
+
+// Related content links
+const relatedSections = [
+  {
+    heading: 'Related Treatments',
+    links: [
+      { title: 'TMS for Depression', href: '/treatments/depression/' },
+      { title: 'TMS for Anxiety', href: '/treatments/anxiety/' },
+      { title: 'TMS for OCD', href: '/treatments/ocd/' },
+      { title: 'TMS for PTSD', href: '/treatments/ptsd/' },
+    ].filter(l => !l.href.includes(slug)),
+  },
+  {
+    heading: 'Insurance & Cost',
+    links: [
+      { title: 'Medicare TMS Coverage', href: '/insurance/medicare/' },
+      { title: 'BlueCross BlueShield', href: '/insurance/bluecross-blueshield/' },
+      { title: 'TMS Cost Guide', href: '/tms-cost-guide/' },
+      { title: 'Self-Pay & Financing', href: '/insurance/self-pay-financing/' },
+    ],
+  },
+  {
+    heading: 'Compare Options',
+    links: [
+      { title: 'TMS vs. Medication', href: '/compare/tms-vs-antidepressants/' },
+      { title: 'TMS vs. ECT', href: '/compare/tms-vs-ect/' },
+      { title: 'TMS vs. Ketamine', href: '/compare/tms-vs-ketamine/' },
+      { title: 'NeuroStar vs. BrainsWay', href: '/compare/neurostar-vs-brainsway/' },
+    ],
+  },
+];
+---
+
+<Layout title={`${title} | TMS List`} description={description} schema={schema} breadcrumbs={breadcrumbs}>
+  <ContentHero
+    title={title}
+    subtitle={description || `How TMS therapy is used to treat ${condition || 'this condition'}.`}
+    breadcrumbs={breadcrumbs}
+    badges={badges}
+    accentFrom="from-violet-600"
+    accentTo="to-slate-900"
+    stats={[
+      { value: successRate || '50–60%', label: 'Response Rate' },
+      { value: sessionCount || '30–36', label: 'Sessions' },
+      { value: duration || '6–9 weeks', label: 'Duration' },
+      { value: fdaApproved ? 'Yes' : 'Off-label', label: 'FDA Status' },
+    ]}
+  />
+
+  <StatCards stats={stats} />
+
+  <main class="container mx-auto px-4 pb-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <!-- Article Column -->
+      <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-a:text-violet-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-900 prose-table:border prose-table:border-slate-200 prose-th:bg-slate-50 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-slate-200 prose-img:rounded-xl prose-img:shadow-lg">
+        <slot>
+          <!-- Fallback content -->
+          <div class="bg-violet-50 border-l-4 border-violet-500 p-6 mb-8 rounded-r-xl">
+            <h3 class="text-violet-700 font-semibold mt-0">Current as of 2026</h3>
+            <p class="mb-0">This guide reflects the latest regulatory approvals and clinical data for {title}.</p>
+          </div>
+
+          <h2>What is {condition || title}?</h2>
+          <p>TMS (Transcranial Magnetic Stimulation) uses focused magnetic pulses to stimulate specific areas of the brain. {fdaApproved ? `TMS is FDA-cleared for treating ${condition || 'this condition'}.` : `While TMS is not yet FDA-cleared specifically for ${condition || 'this condition'}, growing clinical evidence supports its use.`}</p>
+
+          <h2>How TMS Helps</h2>
+          <p>TMS targets {brainArea || 'specific brain regions'} that are associated with {condition || 'this condition'}. By stimulating neural circuits that aren't functioning optimally, TMS can help restore healthier brain activity patterns.</p>
+          <ul>
+            <li><strong>Non-invasive.</strong> No surgery, no sedation. You sit in a chair while the device does the work.</li>
+            <li><strong>Well-tolerated.</strong> Most patients report only mild scalp discomfort during the first few sessions.</li>
+            <li><strong>Evidence-based.</strong> {successRate ? `Response rates of approximately ${successRate}.` : 'Clinical trials show meaningful improvement for many patients.'}</li>
+          </ul>
+
+          <h2>What to Expect</h2>
+          <p>A standard TMS course involves {sessionCount || '30–36'} sessions over {duration || '6–9 weeks'}, with 5 sessions per week. Each session lasts 19–37 minutes depending on the protocol used.</p>
+
+          <h2>Insurance Coverage</h2>
+          <p>{fdaApproved ? 'Most major insurance carriers cover TMS for this condition, including Medicare, BCBS, Aetna, Cigna, and UnitedHealthcare. Prior authorization is typically required.' : 'Insurance coverage for off-label TMS varies by carrier. Many clinics will help you navigate the authorization process.'}</p>
+
+          <div class="not-prose mt-12 p-8 bg-violet-900 rounded-2xl text-white text-center">
+            <h3 class="text-2xl font-semibold mb-4">Ready to find a clinic?</h3>
+            <p class="text-violet-200 mb-8">Browse verified TMS providers with real reviews and insurance info.</p>
+            <a href="/us/" class="inline-block bg-white text-violet-900 font-semibold py-3 px-8 rounded-xl hover:bg-violet-50 transition-colors">Find a Clinic Near You</a>
+          </div>
+        </slot>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-4 space-y-6">
+        <!-- Reviewer Box -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
+          <div class="flex items-center gap-4">
+            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" width="48" height="48" loading="lazy" />
+            <div>
+              <div class="font-semibold text-slate-900">{reviewerName}</div>
+              <div class="text-xs text-slate-500">{reviewerTitle}</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed">{reviewerBio}</p>
+        </div>
+
+        <!-- Key Facts -->
+        <div class="bg-violet-50 p-6 rounded-2xl border border-violet-100">
+          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Quick Facts</h4>
+          <dl class="space-y-3 text-sm">
+            <div class="flex justify-between">
+              <dt class="text-slate-600">FDA Status</dt>
+              <dd class="font-semibold">{fdaApproved ? <span class="text-emerald-600">Cleared</span> : <span class="text-blue-600">Off-label</span>}</dd>
+            </div>
+            {successRate && (
+              <div class="flex justify-between">
+                <dt class="text-slate-600">Response Rate</dt>
+                <dd class="font-semibold text-slate-900">{successRate}</dd>
+              </div>
+            )}
+            <div class="flex justify-between">
+              <dt class="text-slate-600">Sessions</dt>
+              <dd class="font-semibold text-slate-900">{sessionCount || '30–36'}</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-slate-600">Duration</dt>
+              <dd class="font-semibold text-slate-900">{duration || '6–9 weeks'}</dd>
+            </div>
+            {brainArea && (
+              <div class="flex justify-between">
+                <dt class="text-slate-600">Target Area</dt>
+                <dd class="font-semibold text-slate-900">{brainArea}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+
+        <!-- Related Treatments -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-100">
+          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Related Treatments</h4>
+          <ul class="space-y-3 text-sm">
+            {[
+              { href: '/treatments/depression/', label: 'TMS for Depression' },
+              { href: '/treatments/anxiety/', label: 'TMS for Anxiety' },
+              { href: '/treatments/ocd/', label: 'TMS for OCD' },
+              { href: '/treatments/ptsd/', label: 'TMS for PTSD' },
+              { href: '/treatments/smoking-cessation/', label: 'Smoking Cessation' },
+            ].filter(l => !l.href.includes(slug)).slice(0, 4).map(link => (
+              <li>
+                <a href={link.href} class="text-slate-600 hover:text-violet-600 transition-colors">{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Insurance Links -->
+        <div class="bg-amber-50 p-6 rounded-2xl border border-amber-100">
+          <h4 class="font-semibold text-slate-900 mb-3 text-sm">Insurance Coverage</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/insurance/medicare/" class="text-slate-600 hover:text-amber-700 transition-colors">Medicare Coverage</a></li>
+            <li><a href="/insurance/bluecross-blueshield/" class="text-slate-600 hover:text-amber-700 transition-colors">BlueCross BlueShield</a></li>
+            <li><a href="/insurance/aetna/" class="text-slate-600 hover:text-amber-700 transition-colors">Aetna Coverage</a></li>
+            <li><a href="/tms-cost-guide/" class="text-slate-600 hover:text-amber-700 transition-colors">Full Cost Guide</a></li>
+          </ul>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-br from-violet-600 to-violet-800 p-6 rounded-2xl text-white">
+          <h4 class="font-semibold mb-2 text-sm">Not sure where to start?</h4>
+          <p class="text-sm text-violet-200 mb-4">Take a 2-minute quiz to see if TMS might be right for you.</p>
+          <a href="/quiz/am-i-a-candidate/" class="inline-block text-sm font-semibold bg-white text-violet-700 px-4 py-2 rounded-lg hover:bg-violet-50 transition-colors">
+            Take the Quiz
+          </a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <ContentFAQ faqs={displayFaqs} />
+  <SectionLinks sections={relatedSections} />
+  <FindClinicCTA />
+</Layout>

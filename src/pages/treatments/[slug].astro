@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
 
-import ContentPage from '../../layouts/ContentPage.astro';
+import TreatmentPage from '../../layouts/TreatmentPage.astro';
 import { getCollection, render } from 'astro:content';
 import { TREATMENT_SLUGS } from '../../utils/seo_slugs';
 
@@ -10,7 +10,20 @@ export async function getStaticPaths() {
 
   const contentPaths = entries.map((entry) => ({
     params: { slug: entry.id },
-    props: { title: entry.data.title, description: entry.data.description, hasContent: true, entry },
+    props: {
+      title: entry.data.title,
+      description: entry.data.description,
+      condition: entry.data.condition,
+      fdaApproved: entry.data.fdaApproved,
+      successRate: entry.data.successRate,
+      sessionCount: entry.data.sessionCount,
+      duration: entry.data.duration,
+      brainArea: entry.data.brainArea,
+      image: entry.data.image,
+      faqs: entry.data.faqs || [],
+      hasContent: true,
+      entry,
+    },
   }));
 
   const contentSlugsSet = new Set(contentPaths.map(p => p.params.slug));
@@ -24,7 +37,7 @@ export async function getStaticPaths() {
   return [...contentPaths, ...fallbackPaths];
 }
 
-const { title, description, hasContent, entry } = Astro.props;
+const { title, description, condition, fdaApproved, successRate, sessionCount, duration, brainArea, image, faqs, hasContent, entry } = Astro.props;
 const slug = Astro.params.slug!;
 let Content: any = null;
 if (hasContent && entry) {
@@ -49,7 +62,9 @@ const medicalSchema = JSON.stringify({
     "@type": "Person",
     "name": "Dr. Karan Narwal",
     "jobTitle": "Mental Health Specialist & Consultant",
+    "image": "https://img1.wsimg.com/isteam/ip/f791d9b9-2f6c-4539-b9b3-61b4c8a8a446/Screenshot%202024-11-16%20at%204.26.32%E2%80%AFPM.png/:/cr=t:0%25,l:6.95%25,w:86.1%25,h:100%25/rs=w:600,h:600,cg:true",
   },
+  "lastReviewed": "2026-04-01",
   "publisher": {
     "@type": "Organization",
     "name": "TMS List",
@@ -58,13 +73,18 @@ const medicalSchema = JSON.stringify({
 });
 ---
 
-<ContentPage
+<TreatmentPage
   title={title}
-  subtitle={description || "How TMS therapy is used to treat this condition."}
+  condition={condition}
   description={description}
+  fdaApproved={fdaApproved}
+  successRate={successRate}
+  sessionCount={sessionCount}
+  duration={duration}
+  brainArea={brainArea}
   schema={medicalSchema}
-  imageType="treatment"
-  imageSubject={title}
+  slug={slug}
+  faqs={faqs || []}
   breadcrumbs={[
     { name: "Home", url: "/" },
     { name: "Treatments", url: "/treatments/" },
@@ -72,4 +92,4 @@ const medicalSchema = JSON.stringify({
   ]}
 >
   {Content ? <Content /> : null}
-</ContentPage>
+</TreatmentPage>

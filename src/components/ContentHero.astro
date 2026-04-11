@@ -1,0 +1,117 @@
+---
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface StatItem {
+  value: string;
+  label: string;
+}
+
+interface Badge {
+  text: string;
+  color: 'emerald' | 'blue' | 'amber' | 'violet' | 'rose' | 'cyan' | 'slate';
+}
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  badges?: Badge[];
+  accentFrom?: string;
+  accentTo?: string;
+  stats?: StatItem[];
+}
+
+const {
+  title,
+  subtitle,
+  breadcrumbs,
+  badges = [],
+  accentFrom = 'from-violet-600',
+  accentTo = 'to-slate-900',
+  stats = [],
+} = Astro.props;
+
+const badgeColors: Record<string, string> = {
+  emerald: 'bg-emerald-500/20 text-emerald-300 border-emerald-400/20',
+  blue: 'bg-blue-500/20 text-blue-300 border-blue-400/20',
+  amber: 'bg-amber-500/20 text-amber-300 border-amber-400/20',
+  violet: 'bg-violet-500/20 text-violet-300 border-violet-400/20',
+  rose: 'bg-rose-500/20 text-rose-300 border-rose-400/20',
+  cyan: 'bg-cyan-500/20 text-cyan-300 border-cyan-400/20',
+  slate: 'bg-slate-500/20 text-slate-300 border-slate-400/20',
+};
+---
+
+<section class="relative overflow-hidden bg-slate-950">
+  <!-- Layer 1: Gradient -->
+  <div class={`absolute inset-0 bg-gradient-to-br ${accentFrom} ${accentTo} opacity-90`}></div>
+
+  <!-- Layer 2: Dot pattern -->
+  <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0); background-size: 28px 28px;"></div>
+
+  <!-- Layer 3: Organic blobs -->
+  <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-white/[0.04] rounded-full blur-[100px]"></div>
+  <div class="absolute bottom-[-30%] left-[-5%] w-[500px] h-[500px] bg-black/10 rounded-full blur-[80px]"></div>
+
+  <!-- Layer 4: Content -->
+  <div class="relative z-10 container mx-auto px-4 pt-20 pb-16 lg:pt-28 lg:pb-20">
+    {breadcrumbs && breadcrumbs.length > 0 && (
+      <nav class="flex items-center gap-2 text-sm text-white/40 mb-8 flex-wrap" aria-label="Breadcrumb">
+        {breadcrumbs.map((item, i) => (
+          <>
+            {i > 0 && <span class="text-white/20">/</span>}
+            {i < breadcrumbs.length - 1 ? (
+              <a href={item.url} class="hover:text-white/70 transition-colors">{item.name}</a>
+            ) : (
+              <span class="text-white/60 truncate max-w-[250px]">{item.name}</span>
+            )}
+          </>
+        ))}
+      </nav>
+    )}
+
+    <div class="max-w-3xl">
+      {badges.length > 0 && (
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          {badges.map((badge) => (
+            <span class={`inline-flex items-center gap-1.5 px-3 py-1.5 ${badgeColors[badge.color]} rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm border`}>
+              {badge.color === 'emerald' && (
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              )}
+              {badge.text}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-5 font-display">
+        {title}
+      </h1>
+
+      {subtitle && (
+        <p class="text-lg lg:text-xl text-white/60 leading-relaxed max-w-2xl">
+          {subtitle}
+        </p>
+      )}
+
+      <slot name="hero-content" />
+    </div>
+
+    {stats.length > 0 && (
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 max-w-3xl">
+        {stats.map((stat) => (
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl px-4 py-3 text-center">
+            <div class="text-xl font-bold text-white font-display">{stat.value}</div>
+            <div class="text-xs text-white/50 mt-0.5">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <!-- Bottom fade -->
+  <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent"></div>
+</section>
