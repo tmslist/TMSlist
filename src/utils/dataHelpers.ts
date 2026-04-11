@@ -44,6 +44,7 @@ export function mapDbClinic(row: DbClinic): Clinic {
         faqs: row.faqs as any,
         created_by: row.createdBy as any,
         opening_hours: row.openingHours || undefined,
+        doctors_data: (row as any).doctors_data || [],
     } as Clinic;
 }
 

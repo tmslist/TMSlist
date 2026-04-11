@@ -182,10 +182,17 @@ function arrayContains(arr: string[] | null, values: string[]): boolean {
   return values.every(v => arr.some(a => a.toLowerCase().includes(v.toLowerCase())));
 }
 
+// ── Enrich rows with doctors_data for template compatibility ──
+
+function enrichWithDoctors(row: ClinicRow): ClinicRow & { doctors_data: Record<string, any>[] } {
+  const entry = getStore().clinicMap.get(row.slug);
+  return Object.assign({}, row, { doctors_data: entry?.rawDoctorsData ?? [] });
+}
+
 // ── CLINIC QUERIES (drop-in replacements for db/queries.ts) ──
 
 export async function getAllVerifiedClinics(): Promise<ClinicRow[]> {
-  return getStore().allRows.filter(c => c.verified).sort(sortByRating);
+  return getStore().allRows.filter(c => c.verified).sort(sortByRating).map(enrichWithDoctors);
 }
 
 export async function getAllClinics(opts?: { verified?: boolean; limit?: number; offset?: number }): Promise<ClinicRow[]> {
@@ -194,12 +201,12 @@ export async function getAllClinics(opts?: { verified?: boolean; limit?: number;
   rows = rows.sort(sortByRating);
   const offset = opts?.offset ?? 0;
   const limit = opts?.limit ?? 5000;
-  return rows.slice(offset, offset + limit);
+  return rows.slice(offset, offset + limit).map(enrichWithDoctors);
 }
 
 export async function getClinicBySlug(slug: string): Promise<ClinicRow | null> {
   const entry = getStore().clinicMap.get(slug);
-  return entry?.row ?? null;
+  return entry ? enrichWithDoctors(entry.row) : null;
 }
 
 export async function getClinicsByState(stateCode: string, opts?: { limit?: number; offset?: number }): Promise<ClinicRow[]> {
@@ -208,7 +215,7 @@ export async function getClinicsByState(stateCode: string, opts?: { limit?: numb
     .sort(sortByRating);
   const offset = opts?.offset ?? 0;
   const limit = opts?.limit ?? 1000;
-  return rows.slice(offset, offset + limit);
+  return rows.slice(offset, offset + limit).map(enrichWithDoctors);
 }
 
 export async function getClinicsByCity(stateCode: string, cityName: string): Promise<ClinicRow[]> {
@@ -218,11 +225,13 @@ export async function getClinicsByCity(stateCode: string, cityName: string): Pro
       ilike(c.city, cityName) &&
       c.verified
     )
-    .sort(sortByRating);
+    .sort(sortByRating)
+    .map(enrichWithDoctors);
 }
 
 export async function getClinicById(id: string): Promise<ClinicRow | null> {
-  return getStore().allRows.find(c => c.id === id) ?? null;
+  const row = getStore().allRows.find(c => c.id === id);
+  return row ? enrichWithDoctors(row) : null;
 }
 
 export async function getUniqueStates(): Promise<string[]> {
@@ -378,7 +387,7 @@ export async function getClinicsByCountry(countryCode: string, opts?: { limit?: 
     .sort(sortByRating);
   const offset = opts?.offset ?? 0;
   const limit = opts?.limit ?? 500;
-  return rows.slice(offset, offset + limit);
+  return rows.slice(offset, offset + limit).map(enrichWithDoctors);
 }
 
 export async function getClinicsByCountryAndRegion(countryCode: string, region: string): Promise<ClinicRow[]> {
@@ -388,7 +397,8 @@ export async function getClinicsByCountryAndRegion(countryCode: string, region: 
       ilike(c.state, region) &&
       c.verified
     )
-    .sort(sortByRating);
+    .sort(sortByRating)
+    .map(enrichWithDoctors);
 }
 
 export async function getClinicsByCountryRegionCity(countryCode: string, region: string, city: string): Promise<ClinicRow[]> {
@@ -399,7 +409,8 @@ export async function getClinicsByCountryRegionCity(countryCode: string, region:
       ilike(c.city, city) &&
       c.verified
     )
-    .sort(sortByRating);
+    .sort(sortByRating)
+    .map(enrichWithDoctors);
 }
 
 export async function getUniqueCountries(): Promise<string[]> {
@@ -439,19 +450,22 @@ export async function getCitiesForRegion(countryCode: string, region: string): P
 export async function getClinicsByMachine(machine: string): Promise<ClinicRow[]> {
   return getStore().allRows
     .filter(c => c.verified && arrayContains(c.machines, [machine]))
-    .sort(sortByRating);
+    .sort(sortByRating)
+    .map(enrichWithDoctors);
 }
 
 export async function getClinicsBySpecialty(specialty: string): Promise<ClinicRow[]> {
   return getStore().allRows
     .filter(c => c.verified && arrayContains(c.specialties, [specialty]))
-    .sort(sortByRating);
+    .sort(sortByRating)
+    .map(enrichWithDoctors);
 }
 
 export async function getClinicsByInsurance(insurance: string): Promise<ClinicRow[]> {
   return getStore().allRows
     .filter(c => c.verified && arrayContains(c.insurances, [insurance]))
-    .sort(sortByRating);
+    .sort(sortByRating)
+    .map(enrichWithDoctors);
 }
 
 // ── ADMIN QUERIES (read-only parts) ──────────────────────────────
