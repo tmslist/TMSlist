@@ -1,5 +1,4 @@
 import type { APIRoute } from 'astro';
-import { randomBytes } from 'crypto';
 
 export const prerender = false;
 
@@ -8,40 +7,27 @@ const SITE_URL = import.meta.env.SITE_URL || process.env.SITE_URL || 'https://tm
 
 export const GET: APIRoute = async ({ request }) => {
   if (!GOOGLE_CLIENT_ID) {
-    return new Response(JSON.stringify({ error: 'Google OAuth not configured' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return new Response('Google OAuth not configured. Set GOOGLE_CLIENT_ID in .env', { status: 500 });
   }
 
-  // Generate CSRF state token
-  const state = randomBytes(32).toString('hex');
+  // Detect if this is admin or portal login from referer
+  const referer = request.headers.get('referer') || '';
+  const isAdmin = referer.includes('/admin/');
+  const state = isAdmin ? 'admin' : 'portal';
 
-  // Store state in a short-lived cookie for verification in callback
-  const secure = process.env.NODE_ENV === 'production' ? '; Secure' : '';
-  const stateCookie = `oauth_state=${state}; Path=/; HttpOnly; SameSite=Lax; Max-Age=600${secure}`;
-
-  // Use request origin for dev, SITE_URL for production
-  const origin = import.meta.env.DEV ? new URL(request.url).origin : SITE_URL;
-  const redirectUri = `${origin}/api/auth/google/callback`;
-
+  const redirectUri = `${SITE_URL}/api/auth/google/callback`;
   const params = new URLSearchParams({
     client_id: GOOGLE_CLIENT_ID,
     redirect_uri: redirectUri,
     response_type: 'code',
     scope: 'openid email profile',
-    state,
     access_type: 'offline',
     prompt: 'select_account',
+    state,
   });
-
-  const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
 
   return new Response(null, {
     status: 302,
-    headers: {
-      Location: googleAuthUrl,
-      'Set-Cookie': stateCookie,
-    },
+    headers: { Location: `https://accounts.google.com/o/oauth2/v2/auth?${params}` },
   });
 };

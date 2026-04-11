@@ -5,7 +5,14 @@ const SUPPORTED_COUNTRIES = ['US', 'GB', 'CA', 'AU', 'DE', 'IN'];
 export const onRequest = defineMiddleware(async (context, next) => {
     const response = await next();
 
-    // Skip non-HTML responses
+    // Prevent caching on portal/admin pages to avoid stale auth state
+    const pathname = context.url.pathname;
+    if (pathname.startsWith('/portal/') || pathname.startsWith('/admin/')) {
+        response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+        response.headers.set('Pragma', 'no-cache');
+    }
+
+    // Skip non-HTML responses for geo cookie logic
     const contentType = response.headers.get('content-type') || '';
     if (!contentType.includes('text/html')) return response;
 

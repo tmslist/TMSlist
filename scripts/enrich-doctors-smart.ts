@@ -15,13 +15,21 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const CLINICS_PATH = path.join(__dirname, '..', 'src', 'data', 'clinics.json');
 
+// Atomic write to prevent file corruption if interrupted
+function safeWriteJson(filePath: string, data: any) {
+  const tempPath = `${filePath}.tmp`;
+  fs.writeFileSync(tempPath, JSON.stringify(data, null, 2), 'utf-8');
+  fs.renameSync(tempPath, filePath);
+}
+
 const pageCache = new Map<string, string>();
 
 async function fetchPage(url: string): Promise<string | null> {
-  if (pageCache.has(url)) return pageCache.get(url)!;
+  const cleanUrl = url.startsWith('http') ? url : `https://${url}`;
+  if (pageCache.has(cleanUrl)) return pageCache.get(cleanUrl)!;
   try {
-    const response = await fetch(url, {
-      signal: AbortSignal.timeout(5000),
+    const response = await fetch(cleanUrl, {
+      signal: AbortSignal.timeout(8000),
       headers: {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
         'Accept': 'text/html',
@@ -30,7 +38,7 @@ async function fetchPage(url: string): Promise<string | null> {
     });
     if (!response.ok) return null;
     const html = await response.text();
-    pageCache.set(url, html);
+    pageCache.set(cleanUrl, html);
     return html;
   } catch {
     return null;
@@ -58,15 +66,30 @@ function isSkippableImg(tag: string, src: string): boolean {
 }
 
 async function isReachable(url: string): Promise<boolean> {
+  if (!url) return false;
+  const cleanUrl = url.startsWith('http') ? url : `https://${url}`;
   try {
-    const response = await fetch(url, {
+    const response = await fetch(cleanUrl, {
       method: 'HEAD',
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(5000),
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+      },
       redirect: 'follow',
     });
-    return response.ok;
+    return response.ok || response.status === 405 || response.status === 403;
   } catch {
-    return false;
+    try {
+      const getRes = await fetch(cleanUrl, {
+        method: 'GET',
+        signal: AbortSignal.timeout(5000),
+        headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36' },
+        redirect: 'follow',
+      });
+      return getRes.ok || getRes.status === 403;
+    } catch {
+      return false;
+    }
   }
 }
 
@@ -77,8 +100,9 @@ async function findDoctorImage(
   clinicWebsite: string
 ): Promise<string | null> {
   let baseUrl: string;
+  const cleanWebsite = clinicWebsite.startsWith('http') ? clinicWebsite : `https://${clinicWebsite}`;
   try {
-    const u = new URL(clinicWebsite);
+    const u = new URL(cleanWebsite);
     baseUrl = `${u.protocol}//${u.host}`;
   } catch {
     return null;
@@ -89,7 +113,7 @@ async function findDoctorImage(
   const fullNameLower = doctorName.toLowerCase();
 
   const pagesToCheck = [
-    clinicWebsite,
+    cleanWebsite,
     `${baseUrl}/about`, `${baseUrl}/about-us`,
     `${baseUrl}/team`, `${baseUrl}/our-team`,
     `${baseUrl}/staff`, `${baseUrl}/providers`,
@@ -200,7 +224,7 @@ async function main() {
   // Phase 1: Find all clinics with websites and doctors that need images
   const candidates: ClinicData[] = [];
   for (const clinic of clinics) {
-    const websiteUrl = clinic.contact?.website_url;
+    const websiteUrl = clinic.contact?.website_url || clinic.website || clinic.contact?.website;
     if (!websiteUrl || websiteUrl === '#') continue;
     // Skip obviously invalid URLs
     if (websiteUrl.includes('&') || websiteUrl.includes(' ')) continue;
@@ -208,8 +232,11 @@ async function main() {
 
     const needsImages = clinic.doctors_data.some(d =>
       !d.image_url ||
-      d.image_url.includes('dicebear') ||
-      d.image_url.includes('ui-avatars')
+      d.image_url.includes('api.dicebear.com') ||
+      d.image_url.includes('ui-avatars.com') ||
+      d.image_url.includes('unsplash.com') ||
+      d.image_url.includes('placehold.co') ||
+      d.image_url.includes('tms_doctor_consult')
     );
     if (needsImages) candidates.push(clinic);
   }
@@ -225,7 +252,8 @@ async function main() {
     const batch = candidates.slice(i, i + batchSize);
     const results = await Promise.all(
       batch.map(async (clinic) => {
-        const ok = await isReachable(clinic.contact!.website_url!);
+        const websiteUrl = clinic.contact?.website_url || clinic.website || clinic.contact?.website;
+        const ok = await isReachable(websiteUrl);
         return { clinic, ok };
       })
     );
@@ -247,18 +275,22 @@ async function main() {
   for (let i = 0; i < reachable.length; i++) {
     const clinic = reachable[i];
     const progress = `[${i + 1}/${reachable.length}]`;
+    const websiteUrl = clinic.contact?.website_url || clinic.website || clinic.contact?.website;
 
     for (const doctor of clinic.doctors_data!) {
       const hasRealImage = doctor.image_url &&
-        !doctor.image_url.includes('dicebear') &&
-        !doctor.image_url.includes('ui-avatars');
+        !doctor.image_url.includes('api.dicebear.com') &&
+        !doctor.image_url.includes('ui-avatars.com') &&
+        !doctor.image_url.includes('unsplash.com') &&
+        !doctor.image_url.includes('placehold.co') &&
+        !doctor.image_url.includes('tms_doctor_consult');
 
       if (!hasRealImage) {
         const imageUrl = await findDoctorImage(
           doctor.name,
           doctor.first_name || '',
           doctor.last_name || '',
-          clinic.contact!.website_url!
+          websiteUrl
         );
 
         if (imageUrl) {
@@ -281,7 +313,7 @@ async function main() {
 
     // Save periodically so progress isn't lost and dev server updates
     if (i > 0 && i % 25 === 0) {
-      fs.writeFileSync(CLINICS_PATH, JSON.stringify(clinics, null, 2), 'utf-8');
+      safeWriteJson(CLINICS_PATH, clinics);
     }
   }
 
@@ -301,7 +333,7 @@ async function main() {
   }
 
   // Write back
-  fs.writeFileSync(CLINICS_PATH, JSON.stringify(clinics, null, 2), 'utf-8');
+  safeWriteJson(CLINICS_PATH, clinics);
   console.log(`\nWritten to ${CLINICS_PATH}`);
 
   console.log('\n=== Smart Doctor Enrichment Complete ===');

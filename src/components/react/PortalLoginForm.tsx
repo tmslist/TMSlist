@@ -167,7 +167,7 @@ export default function PortalLoginForm() {
 
         {/* Google OAuth button */}
         <a
-          href="/api/auth/google"
+          href="/api/auth/google/"
           className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl text-sm font-semibold text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition-all mb-4"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">

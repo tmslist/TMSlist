@@ -5,7 +5,7 @@ import PortalSidebar from "../../components/react/PortalSidebar";
 import PortalAnalytics from "../../components/react/PortalAnalytics";
 import { getSessionFromRequest } from "../../utils/auth";
 const session = getSessionFromRequest(Astro.request);
-if (!session) return Astro.redirect("/portal/login");
+if (!session) return Astro.redirect("/portal/login/");
 ---
 <Layout title="Analytics | Doctor Portal" noindex={true}>
   <div class="flex min-h-screen bg-gray-50">

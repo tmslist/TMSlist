@@ -97,18 +97,19 @@ async function getFallbackLogo(websiteUrl: string): Promise<string | null> {
 async function fetchClinicHeroImage(websiteUrl: string): Promise<string | null> {
   if (!websiteUrl || websiteUrl === '#') return null;
 
-  const html = await fetchPage(websiteUrl);
-  if (!html) return getFallbackLogo(websiteUrl);
+  const cleanUrl = websiteUrl.startsWith('http') ? websiteUrl : `https://${websiteUrl}`;
+  const html = await fetchPage(cleanUrl);
+  if (!html) return getFallbackLogo(cleanUrl);
 
   // 1. OG image
   const ogMatch = html.match(/<meta[^>]+(?:property|name)=["']og:image["'][^>]+content=["']([^"']+)["']/i)
     || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+(?:property|name)=["']og:image["']/i);
-  if (ogMatch?.[1] && !ogMatch[1].includes('favicon')) return makeAbsolute(ogMatch[1], websiteUrl);
+  if (ogMatch?.[1] && !ogMatch[1].includes('favicon')) return makeAbsolute(ogMatch[1], cleanUrl);
 
   // 2. Twitter card image
   const twitterMatch = html.match(/<meta[^>]+(?:property|name)=["']twitter:image["'][^>]+content=["']([^"']+)["']/i)
     || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+(?:property|name)=["']twitter:image["']/i);
-  if (twitterMatch?.[1] && !twitterMatch[1].includes('favicon')) return makeAbsolute(twitterMatch[1], websiteUrl);
+  if (twitterMatch?.[1] && !twitterMatch[1].includes('favicon')) return makeAbsolute(twitterMatch[1], cleanUrl);
 
   // 3. Hero/banner image
   const imgTags = [...html.matchAll(/<img[^>]+src=["']([^"']+)["'][^>]*/gi)];
@@ -117,9 +118,9 @@ async function fetchClinicHeroImage(websiteUrl: string): Promise<string | null> 
     return (tag.includes('hero') || tag.includes('banner') || tag.includes('header') || tag.includes('featured'))
       && !tag.includes('icon') && !tag.includes('pixel') && !tag.includes('1x1') && !tag.includes('logo');
   });
-  if (heroImg?.[1]) return makeAbsolute(heroImg[1], websiteUrl);
+  if (heroImg?.[1]) return makeAbsolute(heroImg[1], cleanUrl);
 
-  return getFallbackLogo(websiteUrl);
+  return getFallbackLogo(cleanUrl);
 }
 
 // ─── Doctor Photo Fetching ────────────────────────────────────────────────
@@ -138,9 +139,10 @@ async function findDoctorPhoto(
 ): Promise<string | null> {
   if (!clinicWebsite || clinicWebsite === '#') return null;
 
+  const cleanWebsite = clinicWebsite.startsWith('http') ? clinicWebsite : `https://${clinicWebsite}`;
   let baseUrl: string;
   try {
-    const u = new URL(clinicWebsite);
+    const u = new URL(cleanWebsite);
     baseUrl = `${u.protocol}//${u.host}`;
   } catch {
     return null;
@@ -154,7 +156,7 @@ async function findDoctorPhoto(
   const firstNameLower = firstName.toLowerCase();
 
   const pagesToCheck = [
-    clinicWebsite,
+    cleanWebsite,
     `${baseUrl}/about`, `${baseUrl}/about-us`, `${baseUrl}/about/`,
     `${baseUrl}/team`, `${baseUrl}/team/`, `${baseUrl}/our-team`, `${baseUrl}/our-team/`,
     `${baseUrl}/staff`, `${baseUrl}/staff/`, `${baseUrl}/providers`, `${baseUrl}/providers/`,

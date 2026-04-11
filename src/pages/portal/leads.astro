@@ -7,10 +7,10 @@ import { getSessionFromRequest, hasRole } from "../../utils/auth";
 
 const session = getSessionFromRequest(Astro.request);
 if (!session) {
-  return Astro.redirect("/portal/login");
+  return Astro.redirect("/portal/login/");
 }
 if (!hasRole(session, 'admin', 'editor', 'clinic_owner')) {
-  return Astro.redirect("/portal/login");
+  return Astro.redirect("/portal/login/");
 }
 ---
 

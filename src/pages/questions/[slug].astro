@@ -17,8 +17,9 @@ const otherCategories = questionsData
 
 const relatedQs = [...sameCategory, ...otherCategories].slice(0, 6);
 
+const answerText = question.answer || '';
 const title = `${question.question} | TMS List Expert Answers`;
-const description = question.quickAnswer;
+const description = answerText.substring(0, 155).replace(/<[^>]*>/g, '');
 ---
 
 <Layout title={title} description={description}>
@@ -44,18 +45,15 @@ const description = question.quickAnswer;
             class="bg-violet-50 border-l-4 border-violet-600 p-6 mb-8 rounded-r-lg"
         >
             <h2 class="text-lg font-semibold text-violet-900 mb-2">Quick Answer</h2>
-            <p class="text-gray-800 leading-relaxed">{question.quickAnswer}</p>
+            <p class="text-gray-800 leading-relaxed">{answerText.replace(/<[^>]*>/g, '').substring(0, 300)}</p>
         </div>
 
         <!-- Main Content -->
         <article class="prose prose-lg prose-violet max-w-none mb-12">
-            {question.fullAnswer ? (
-                <div set:html={question.fullAnswer} />
+            {answerText.includes('<') ? (
+                <div set:html={answerText} />
             ) : (
-                <>
-                    <h2>What you need to know</h2>
-                    <p>{question.quickAnswer}</p>
-                </>
+                <p>{answerText}</p>
             )}
 
             {question.citations && question.citations.length > 0 && (
@@ -209,7 +207,7 @@ const description = question.quickAnswer;
                     name: question.question,
                     acceptedAnswer: {
                         "@type": "Answer",
-                        text: question.quickAnswer,
+                        text: (question.quickAnswer || question.answer || '').replace(/<[^>]*>/g, ''),
                     },
                 },
             })}

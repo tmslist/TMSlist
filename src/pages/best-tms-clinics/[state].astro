@@ -1,0 +1,58 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ClinicCard from "../../components/ClinicCard.astro";
+import { getClinicsByState, getStateCodeFromSlug, STATE_NAMES, getStateSlug, getUniqueStates } from "../../utils/dataHelpers";
+import { calculateClinicScore } from "../../utils/ranking";
+
+export async function getStaticPaths() {
+    const states = await getUniqueStates();
+    return states.map(code => ({
+        params: { state: getStateSlug(code) },
+        props: { stateCode: code },
+    }));
+}
+
+const { stateCode } = Astro.props;
+const stateName = STATE_NAMES[stateCode] || stateCode;
+const stateClinics = await getClinicsByState(stateCode);
+const sorted = [...stateClinics].sort((a, b) => calculateClinicScore(b) - calculateClinicScore(a));
+
+const title = `Best TMS Clinics in ${stateName} | Top ${Math.min(sorted.length, 20)} Providers`;
+const description = `Compare the ${sorted.length} best TMS therapy clinics in ${stateName}. Ranked by patient reviews, verification status, and quality. Find top-rated providers near you.`;
+---
+
+<Layout title={title} description={description} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Best TMS Clinics", url: "/best-tms-clinics/" },
+    { name: stateName, url: `/best-tms-clinics/${getStateSlug(stateCode)}/` },
+]}>
+    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-cyan-50/30 pointer-events-none"></div>
+        <div class="container mx-auto px-4 py-12 lg:py-16 relative z-10">
+            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
+                <span class="text-slate-300">/</span>
+                <a href="/best-tms-clinics/" class="hover:text-violet-600 transition-colors">Best TMS Clinics</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-700 font-medium">{stateName}</span>
+            </nav>
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-3">Best TMS Clinics in {stateName}</h1>
+            <p class="text-lg text-slate-500">{sorted.length} providers ranked by patient reviews and verification status.</p>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-10">
+        <div class="space-y-4">
+            {sorted.map((clinic, i) => (
+                <ClinicCard clinic={clinic} />
+            ))}
+        </div>
+
+        {sorted.length === 0 && (
+            <div class="text-center py-16">
+                <p class="text-slate-500">No TMS clinics found in {stateName} yet.</p>
+                <a href="/best-tms-clinics/" class="text-violet-600 font-semibold mt-2 inline-block">Browse all states</a>
+            </div>
+        )}
+    </main>
+</Layout>

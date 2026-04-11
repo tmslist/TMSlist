@@ -92,7 +92,7 @@ const description = `Expert answers to common questions about ${category.name.to
                                     {q.question}
                                 </h2>
                                 <p class="text-gray-600 text-sm line-clamp-3 mb-4">
-                                    {q.quickAnswer}
+                                    {(q.quickAnswer || q.answer || '').replace(/<[^>]*>/g, '').substring(0, 150)}
                                 </p>
                                 <span class="text-violet-600 text-sm font-semibold group-hover:underline">
                                     Read Answer →

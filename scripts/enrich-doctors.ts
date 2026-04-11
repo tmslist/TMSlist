@@ -66,10 +66,12 @@ async function findDoctorImage(
 ): Promise<string | null> {
   if (!clinicWebsite || clinicWebsite === '#') return null;
 
+  const cleanWebsite = clinicWebsite.startsWith('http') ? clinicWebsite : `https://${clinicWebsite}`;
+
   // Normalize base URL
   let baseUrl: string;
   try {
-    const u = new URL(clinicWebsite);
+    const u = new URL(cleanWebsite);
     baseUrl = `${u.protocol}//${u.host}`;
   } catch {
     return null;
@@ -77,7 +79,7 @@ async function findDoctorImage(
 
   // Pages to check for doctor photos
   const pagesToCheck = [
-    clinicWebsite,                    // Main page
+    cleanWebsite,                    // Main page
     `${baseUrl}/about`,              // About page
     `${baseUrl}/about-us`,
     `${baseUrl}/about/`,
@@ -405,7 +407,9 @@ async function main() {
           const hasRealImage = doctor.image_url &&
             !doctor.image_url.includes('tms_doctor_consult') &&
             !doctor.image_url.includes('ui-avatars.com') &&
-            !doctor.image_url.includes('api.dicebear.com');
+            !doctor.image_url.includes('api.dicebear.com') &&
+            !doctor.image_url.includes('unsplash.com') &&
+            !doctor.image_url.includes('placehold.co');
 
           if (!hasRealImage) {
             // Try to find real photo from clinic website

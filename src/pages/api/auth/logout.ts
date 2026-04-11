@@ -9,6 +9,8 @@ export const POST: APIRoute = async () => {
     headers: {
       'Content-Type': 'application/json',
       'Set-Cookie': clearSessionCookie(),
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
     },
   });
 };

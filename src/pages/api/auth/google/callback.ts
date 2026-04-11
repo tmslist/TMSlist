@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getUserByEmail, createSessionCookie } from '../../../../utils/auth';
+import { getOrCreateUserByEmail, createSessionCookie, isAllowedEmail } from '../../../../utils/auth';
 import { db } from '../../../../db';
 import { users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -14,60 +14,34 @@ interface GoogleTokenResponse {
   access_token: string;
   id_token: string;
   token_type: string;
-  expires_in: number;
 }
 
 interface GoogleUserInfo {
-  sub: string;
   email: string;
-  email_verified: boolean;
   name: string;
-  picture?: string;
+  picture: string;
+  email_verified: boolean;
 }
 
 export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
-  const state = url.searchParams.get('state');
+  const state = url.searchParams.get('state') || 'portal';
   const error = url.searchParams.get('error');
 
-  if (error) {
-    console.error('Google OAuth error:', error);
+  const loginPath = state === 'admin' ? '/admin/login' : '/portal/login';
+
+  if (error || !code) {
     return new Response(null, {
       status: 302,
-      headers: { Location: '/portal/login?error=google-denied' },
-    });
-  }
-
-  if (!code || !state) {
-    return new Response(null, {
-      status: 302,
-      headers: { Location: '/portal/login?error=missing-token' },
-    });
-  }
-
-  // Verify CSRF state
-  const cookieHeader = request.headers.get('cookie') || '';
-  const cookies = Object.fromEntries(
-    cookieHeader.split(';').map(c => {
-      const [key, ...val] = c.trim().split('=');
-      return [key, val.join('=')];
-    })
-  );
-  const savedState = cookies['oauth_state'];
-
-  if (!savedState || savedState !== state) {
-    return new Response(null, {
-      status: 302,
-      headers: { Location: '/portal/login?error=invalid-or-expired' },
+      headers: { Location: `${loginPath}?error=google-auth-failed` },
     });
   }
 
   if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
-    console.error('[google/callback] Google OAuth credentials not configured');
     return new Response(null, {
       status: 302,
-      headers: { Location: '/portal/login?error=server-error' },
+      headers: { Location: `${loginPath}?error=google-not-configured` },
     });
   }
 
@@ -80,87 +54,97 @@ export const GET: APIRoute = async ({ request }) => {
         code,
         client_id: GOOGLE_CLIENT_ID,
         client_secret: GOOGLE_CLIENT_SECRET,
-        redirect_uri: `${import.meta.env.DEV ? new URL(request.url).origin : SITE_URL}/api/auth/google/callback`,
+        redirect_uri: `${SITE_URL}/api/auth/google/callback`,
         grant_type: 'authorization_code',
       }),
     });
 
     if (!tokenRes.ok) {
-      const errBody = await tokenRes.text();
-      console.error('Google token exchange failed:', errBody);
+      console.error('[google-auth] Token exchange failed:', await tokenRes.text());
       return new Response(null, {
         status: 302,
-        headers: { Location: '/portal/login?error=server-error' },
+        headers: { Location: `${loginPath}?error=google-token-failed` },
       });
     }
 
-    const tokens: GoogleTokenResponse = await tokenRes.json();
+    const tokenData: GoogleTokenResponse = await tokenRes.json();
 
-    // Get user info
-    const userInfoRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-      headers: { Authorization: `Bearer ${tokens.access_token}` },
+    // Get user info from Google
+    const userInfoRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+      headers: { Authorization: `Bearer ${tokenData.access_token}` },
     });
 
     if (!userInfoRes.ok) {
-      console.error('Google userinfo fetch failed:', await userInfoRes.text());
+      console.error('[google-auth] User info failed:', await userInfoRes.text());
       return new Response(null, {
         status: 302,
-        headers: { Location: '/portal/login?error=server-error' },
+        headers: { Location: `${loginPath}?error=google-userinfo-failed` },
       });
     }
 
     const googleUser: GoogleUserInfo = await userInfoRes.json();
 
-    if (!googleUser.email) {
+    if (!googleUser.email || !googleUser.email_verified) {
       return new Response(null, {
         status: 302,
-        headers: { Location: '/portal/login?error=server-error' },
+        headers: { Location: `${loginPath}?error=email-not-verified` },
       });
     }
 
     const normalizedEmail = googleUser.email.toLowerCase();
 
-    // Get or create user with clinic_owner role
-    let user = await getUserByEmail(normalizedEmail);
-
-    if (!user) {
-      const result = await db.insert(users).values({
-        email: normalizedEmail,
-        name: googleUser.name || normalizedEmail.split('@')[0],
-        role: 'clinic_owner' as const,
-      }).returning();
-      user = result[0];
+    // For admin login, check ADMIN_EMAILS allowlist
+    if (state === 'admin' && !isAllowedEmail(normalizedEmail)) {
+      return new Response(null, {
+        status: 302,
+        headers: { Location: `${loginPath}?error=not-authorized` },
+      });
     }
 
-    // Update last login
-    await db.update(users).set({ lastLoginAt: new Date() }).where(eq(users.id, user.id));
+    // Get or create user
+    let user = await getOrCreateUserByEmail(normalizedEmail);
 
+    // Update user name and last login
+    await db.update(users).set({
+      name: googleUser.name || user.name,
+      lastLoginAt: new Date(),
+    }).where(eq(users.id, user.id));
+
+    // For portal login, set role to clinic_owner if not already set
+    if (state === 'portal' && user.role === 'viewer') {
+      await db.update(users).set({ role: 'clinic_owner' }).where(eq(users.id, user.id));
+      user = { ...user, role: 'clinic_owner' };
+    }
+
+    // Create session
     const cookie = createSessionCookie({
       userId: user.id,
       email: user.email,
       role: user.role,
     });
 
-    // Clear the oauth_state cookie
-    const clearState = 'oauth_state=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0';
-
-    // Redirect based on whether user has a clinic
-    const redirectTo = user.clinicId ? '/portal/dashboard' : '/portal/claim';
-
-    const headers = new Headers();
-    headers.set('Location', redirectTo);
-    headers.append('Set-Cookie', cookie);
-    headers.append('Set-Cookie', clearState);
+    // Determine redirect
+    let redirectTo: string;
+    if (state === 'admin') {
+      redirectTo = '/admin/dashboard/';
+    } else if (user.clinicId) {
+      redirectTo = '/portal/dashboard/';
+    } else {
+      redirectTo = '/portal/claim/';
+    }
 
     return new Response(null, {
       status: 302,
-      headers,
+      headers: {
+        Location: redirectTo,
+        'Set-Cookie': cookie,
+      },
     });
   } catch (err) {
-    console.error('Google OAuth callback error:', err);
+    console.error('[google-auth] Error:', err);
     return new Response(null, {
       status: 302,
-      headers: { Location: '/portal/login?error=server-error' },
+      headers: { Location: `${loginPath}?error=server-error` },
     });
   }
 };

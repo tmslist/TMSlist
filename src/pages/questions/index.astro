@@ -129,7 +129,7 @@ const featured = questionsData.slice(0, 6);
                             </div>
                             <div class="flex-1">
                                 <h3 class="text-xl lg:text-2xl font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-3">{featured[0].question}</h3>
-                                <p class="text-slate-500 leading-relaxed mb-4 line-clamp-3">{featured[0].quickAnswer}</p>
+                                <p class="text-slate-500 leading-relaxed mb-4 line-clamp-3">{(featured[0].quickAnswer || featured[0].answer || '').replace(/<[^>]*>/g, '').substring(0, 200)}</p>
                                 <span class="text-violet-600 font-semibold text-sm inline-flex items-center gap-1">Read Full Answer <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
                             </div>
                         </div>
@@ -141,7 +141,7 @@ const featured = questionsData.slice(0, 6);
                     {featured.slice(1).map((q) => (
                         <a href={`/questions/${q.slug}/`} class="group block bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md hover:border-violet-200 transition-all hover:-translate-y-0.5">
                             <h3 class="font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-3 leading-snug">{q.question}</h3>
-                            <p class="text-slate-500 text-sm line-clamp-2 mb-4 leading-relaxed">{q.quickAnswer}</p>
+                            <p class="text-slate-500 text-sm line-clamp-2 mb-4 leading-relaxed">{(q.quickAnswer || q.answer || '').replace(/<[^>]*>/g, '').substring(0, 120)}</p>
                             <div class="flex items-center justify-between pt-3 border-t border-slate-50">
                                 <span class="text-violet-600 text-sm font-semibold">Read Answer</span>
                                 <svg class="w-4 h-4 text-slate-400 group-hover:text-violet-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>

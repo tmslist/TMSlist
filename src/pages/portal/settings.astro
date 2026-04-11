@@ -1,0 +1,26 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import PortalSidebar from "../../components/react/PortalSidebar";
+import PortalSettings from "../../components/react/PortalSettings";
+import { getSessionFromRequest, hasRole } from "../../utils/auth";
+
+const session = getSessionFromRequest(Astro.request);
+if (!session) {
+  return Astro.redirect("/portal/login/");
+}
+if (!hasRole(session, 'admin', 'editor', 'clinic_owner')) {
+  return Astro.redirect("/portal/login/");
+}
+---
+
+<Layout title="Settings | Doctor Portal | TMS List" description="Manage your account and notification settings." noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <PortalSidebar client:load currentPage="settings" userEmail={session.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <PortalSettings client:load userEmail={session.email} userId={session.userId} />
+      </div>
+    </main>
+  </div>
+</Layout>
