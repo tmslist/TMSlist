@@ -129,7 +129,7 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
     return (
       <div className="text-center py-12">
         <p className="text-gray-500">No clinic linked to your account.</p>
-        <a href="/portal/claim" className="text-emerald-600 hover:text-emerald-700 font-medium mt-2 inline-block">
+        <a href="/portal/claim/" className="text-emerald-600 hover:text-emerald-700 font-medium mt-2 inline-block">
           Claim your clinic
         </a>
       </div>
@@ -141,7 +141,7 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <a href="/portal/dashboard" className="text-sm text-emerald-600 hover:text-emerald-700 font-medium mb-2 inline-block">
+          <a href="/portal/dashboard/" className="text-sm text-emerald-600 hover:text-emerald-700 font-medium mb-2 inline-block">
             &larr; Back to Dashboard
           </a>
           <h1 className="text-2xl font-semibold text-gray-900">Edit Clinic Profile</h1>

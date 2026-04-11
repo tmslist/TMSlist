@@ -21,6 +21,7 @@ import Footer from "../components/Footer.astro";
 import EnquiryModal from "../components/react/EnquiryModal";
 import LocationPopup from "../components/LocationPopup.astro";
 import CallbackModal from "../components/CallbackModal.astro";
+import CookieConsent from "../components/CookieConsent.astro";
 
 const { title, description, image, canonical, schema, breadcrumbs, noindex, hreflang } = Astro.props;
 
@@ -31,14 +32,14 @@ const breadcrumbSchema = breadcrumbs?.length ? JSON.stringify({
 		"@type": "ListItem",
 		"position": i + 1,
 		"name": item.name,
-		"item": item.url.startsWith('http') ? item.url : `${(import.meta.env.SITE_URL || 'https://tmslist.com')}${item.url}`,
+		"item": item.url.startsWith('http') ? item.url : `${(import.meta.env.SITE_URL || 'https://tmslist.com')}${item.url || '/'}`,
 	})),
 }) : null;
 
 const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
 const defaultDescription =
 	"Find verified TMS therapy clinics near you. Compare providers across 6 countries, read reviews, and start your treatment journey.";
-const defaultImage = `${siteUrl}/images/tms_hero.svg`;
+const defaultImage = `${siteUrl}/images/tms_diagram.jpg`;
 
 const metaDescription = description || defaultDescription;
 const rawOgImage = image || defaultImage;
@@ -85,6 +86,10 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 		<link rel="apple-touch-icon" href="/favicon.png" />
 		<link rel="manifest" href="/manifest.json" />
 		<meta name="theme-color" content="#4f46e5" />
+
+		<!-- Search Console Verification -->
+		{import.meta.env.GOOGLE_SITE_VERIFICATION && <meta name="google-site-verification" content={import.meta.env.GOOGLE_SITE_VERIFICATION} />}
+		{import.meta.env.BING_SITE_VERIFICATION && <meta name="msvalidate.01" content={import.meta.env.BING_SITE_VERIFICATION} />}
 
 		<!-- SEO Meta Tags -->
 		<title>{title}</title>
@@ -154,13 +159,14 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 			Skip to main content
 		</a>
 		<Header />
-		<div id="main-content">
+		<div id="main-content" class="pb-20 lg:pb-0">
 		<slot />
 		</div>
 		<Footer />
 		<LocationPopup />
 		<EnquiryModal client:idle />
 		<CallbackModal />
+	<CookieConsent />
 	<!-- Mobile Bottom Tab Bar -->
 	<nav id="mobile-tab-bar" class="fixed bottom-0 left-0 right-0 z-[140] bg-white/95 backdrop-blur-lg border-t border-gray-200 shadow-[0_-4px_20px_rgb(0,0,0,0.06)] lg:hidden transition-transform duration-300 translate-y-0" aria-label="Mobile navigation">
 		<div class="flex items-center justify-around px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2">

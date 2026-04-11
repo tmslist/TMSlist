@@ -22,21 +22,25 @@ faqs:
 ---
 
 <div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-violet-700 font-display">2-3%</div>
-    <div class="text-xs text-violet-600 mt-1">Population affected</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-violet-50 to-fuchsia-50 border border-violet-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-violet-400/10 rounded-full blur-xl group-hover:bg-violet-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600 font-display">2-3%</div>
+    <div class="text-xs font-medium text-violet-700/80 mt-1">Population affected</div>
   </div>
-  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-emerald-700 font-display">35-45%</div>
-    <div class="text-xs text-emerald-600 mt-1">TMS response rate</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-emerald-400/10 rounded-full blur-xl group-hover:bg-emerald-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600 font-display">35-45%</div>
+    <div class="text-xs font-medium text-emerald-700/80 mt-1">TMS response rate</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">2018</div>
-    <div class="text-xs text-blue-600 mt-1">FDA cleared (Deep TMS)</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-blue-400/10 rounded-full blur-xl group-hover:bg-blue-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 font-display">2018</div>
+    <div class="text-xs font-medium text-blue-700/80 mt-1">FDA cleared</div>
   </div>
-  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-amber-700 font-display">H7 Coil</div>
-    <div class="text-xs text-amber-600 mt-1">Specialized OCD device</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-amber-400/10 rounded-full blur-xl group-hover:bg-amber-400/20 transition-all"></div>
+    <div class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500 font-display">H7 Coil</div>
+    <div class="text-xs font-medium text-amber-700/80 mt-1">Specialized device</div>
   </div>
 </div>
 
@@ -44,10 +48,14 @@ faqs:
 
 OCD traps people. Intrusive, unwanted thoughts (obsessions) trigger repetitive behaviors (compulsions) performed to relieve distress. About 2-3% of the population has it. At its worst, people spend hours daily locked in compulsive rituals — unable to work, maintain relationships, or leave home.
 
-<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">The brain circuit gone haywire</h4>
-  <p class="text-sm text-slate-600 leading-relaxed mb-3">The <strong>cortico-striato-thalamo-cortical (CSTC) loop</strong> — connecting prefrontal cortex, striatum, and thalamus — becomes hyperactive.</p>
-  <p class="text-sm text-slate-600 leading-relaxed mb-0">The <strong>orbitofrontal cortex (OFC)</strong> and <strong>anterior cingulate cortex (ACC)</strong> keep firing "something is wrong" signals. The medial prefrontal cortex (mPFC), which should dismiss irrelevant thoughts, can't shut them down. The brain's alarm system gets stuck on.</p>
+<div class="not-prose my-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60 rounded-3xl p-8 shadow-sm">
+  <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-500 to-teal-500"></div>
+  <h4 class="font-display font-bold text-slate-900 mb-3 text-lg flex items-center gap-2">
+    <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+    The brain circuit gone haywire
+  </h4>
+  <p class="text-sm text-slate-700 leading-relaxed mb-3">The <strong class="text-emerald-700">cortico-striato-thalamo-cortical (CSTC) loop</strong> — connecting prefrontal cortex, striatum, and thalamus — becomes hyperactive.</p>
+  <p class="text-sm text-slate-700 leading-relaxed mb-0">The <strong class="text-teal-600">orbitofrontal cortex (OFC)</strong> and <strong class="text-teal-600">anterior cingulate cortex (ACC)</strong> keep firing "something is wrong" signals. The medial prefrontal cortex (mPFC), which should dismiss irrelevant thoughts, can't shut them down. The brain's alarm system gets stuck on.</p>
 </div>
 
 First-line treatments (SRIs and ERP therapy) work for many. But **40-60% don't get adequate relief** from SRIs alone. TMS targets those specific malfunctioning circuits using deep TMS technology that reaches the ACC and mPFC — structures sitting centimeters below the brain's surface.

@@ -90,15 +90,15 @@ const schema = JSON.stringify({
       data-alt={`Illustration of ${provinceName}`}
     >
       <div class="ai-img-placeholder absolute inset-0"></div>
-      <img class="ai-img-result hidden w-full h-full object-cover" alt="" loading="lazy" />
+      <img class="ai-img-result hidden w-full h-full object-cover" alt="TMS clinic illustration" />
       <div class="ai-img-fallback hidden"></div>
     </div>
     <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
       <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap" aria-label="Breadcrumb">
         <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-slate-300">/</span>
         <a href="/ca/" class="hover:text-violet-600 transition-colors">Canada</a>
-        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-slate-300">/</span>
         <span class="text-slate-700 font-medium">{provinceName}</span>
       </nav>
       <div class="max-w-3xl">

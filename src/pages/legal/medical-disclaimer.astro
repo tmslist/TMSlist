@@ -4,9 +4,19 @@ import Layout from "../../layouts/Layout.astro";
 const title = "Medical Disclaimer | TMS List";
 const description =
     "Medical Disclaimer for TMS List. The information provided is for educational purposes only and not medical advice.";
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Medical Disclaimer",
+    "description": description,
+    "url": `${siteUrl}/legal/medical-disclaimer/`,
+    "isPartOf": { "@type": "WebSite", "name": "TMS List", "url": siteUrl },
+    "publisher": { "@type": "Organization", "name": "TMS List", "url": siteUrl },
+});
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schema={schema}>
     <main class="container mx-auto px-4 py-12 max-w-4xl">
         <h1 class="text-4xl font-semibold text-gray-900 mb-4">
             Medical Disclaimer

@@ -17,29 +17,43 @@ But numbers without context can mislead. Response rates, remission rates, and ef
 
 ### O'Reardon et al. (2007) — The pivotal trial
 
-The study that led to the [first FDA clearance](/research/fda-clearance-history/). It randomized 301 medication-free patients with treatment-resistant MDD to active 10 Hz left DLPFC stimulation or sham. Published in Biological Psychiatry.
+**Citation:** O'Reardon JP, Solvason HB, Janicak PG, et al. "Efficacy and Safety of Transcranial Magnetic Stimulation in the Acute Treatment of Major Depression: A Multisite Randomized Controlled Trial." *Biological Psychiatry*. 2007;62(11):1208-1216.
 
-Active TMS produced statistically significant improvement on the Montgomery-Asberg Depression Rating Scale (MADRS) compared to sham. Response rates in the intent-to-treat analysis: roughly 24% active versus 12% sham.
+The study that led to the [first FDA clearance](/research/fda-clearance-history/). A double-blind, multisite trial that randomized 301 medication-free patients with treatment-resistant MDD (n=155 active, n=146 sham) to 10 Hz left DLPFC stimulation at 120% motor threshold, 3,000 pulses per session, five days per week for 4-6 weeks.
 
-Modest? Yes. But context matters. The study required a complete medication washout — that's not how TMS is used in the real world. The treatment course was relatively conservative at 20-30 sessions. And the strict research setting excluded many people who would later benefit from TMS in actual clinical practice.
+Active TMS was significantly superior to sham on the MADRS at week 4, and on the HAMD17 and HAMD24 at weeks 4 and 6. Response rates were significantly higher with active TMS on all three depression scales. Remission rates were approximately twofold higher with active TMS at week 6, reaching significance on the MADRS and HAMD24. The dropout rate for adverse events was low (4.5%), limited to transient scalp discomfort.
+
+Modest by later standards? Yes. But context matters. The study required a complete medication washout — that's not how TMS is used in the real world. The treatment course was relatively conservative. And the strict research setting excluded many people who would later benefit from TMS in actual clinical practice.
 
 Despite the modest numbers, this trial put TMS on the map as a legitimate antidepressant treatment. Everything that followed built on this foundation.
 
-### George et al. (2010) — The optimization trial
+### George et al. (2010) — The OPT-TMS trial
 
-Published in Archives of General Psychiatry. Mark George and colleagues at MUSC randomized 190 treatment-resistant patients to active TMS or sham over three weeks, followed by a three-week open-label phase. They used more pulses per session (3,000 versus the 1,500-2,000 common in earlier protocols) and a longer treatment course.
+**Citation:** George MS, Lisanby SH, Avery D, et al. "Daily Left Prefrontal Transcranial Magnetic Stimulation Therapy for Major Depressive Disorder: A Sham-Controlled Randomized Trial." *Archives of General Psychiatry*. 2010;67(5):507-516.
 
-Remission rates during the blinded phase: 14.1% active versus 5.1% sham. Again, seemingly modest — but it hit the study's primary statistical endpoint. Here's the key finding: remission climbed to 30.5% after the open-label extension. Many people needed more than three weeks to fully respond.
+This NIMH-sponsored multisite trial (OPT-TMS) randomized 190 medication-free, treatment-resistant patients to active TMS or sham over three weeks, followed by a three-week open-label phase. They used 3,000 pulses per session — higher than the 1,500-2,000 common in earlier protocols.
+
+Remission rates during the blinded phase: 14.1% active versus 5.1% sham — a roughly fourfold difference that hit the study's primary statistical endpoint. Here's the key finding: remission climbed to 30.5% after the open-label extension. Many people needed more than three weeks to fully respond.
 
 The takeaway: TMS is a course of therapy, not a one-shot fix. More sessions generally mean better outcomes.
 
+### Levkovitz et al. (2015) — Deep TMS for depression
+
+**Citation:** Levkovitz Y, Isserles M, Padberg F, et al. "Efficacy and Safety of Deep Transcranial Magnetic Stimulation for Major Depression: A Prospective Multicenter Randomized Controlled Trial." *World Psychiatry*. 2015;14(1):64-73.
+
+The pivotal trial for BrainsWay's Deep TMS H1 coil. This international, double-blind, multicenter RCT randomized 212 patients with treatment-resistant MDD to active deep TMS or sham. The H1 coil reaches deeper brain structures (4-6 cm below the skull) compared to conventional figure-8 coils (1.5-2 cm).
+
+Response rates: 38.4% active versus 21.4% sham. Remission rates: 32.6% versus 14.6%. These were notably stronger effect sizes than the original NeuroStar trial, and the results demonstrated efficacy for patients with 1-4 failed medication trials. Benefits were sustained through 16 weeks of follow-up.
+
 ### Blumberger et al. (2018) — The THREE-D trial
 
-This one changed everything. Published in The Lancet, this Canadian trial compared three treatments head-to-head: standard 10 Hz rTMS, intermittent theta burst stimulation (iTBS), and sham. 414 patients.
+**Citation:** Blumberger DM, Vila-Rodriguez F, Thorpe KE, et al. "Effectiveness of Theta Burst Versus High-Frequency Repetitive Transcranial Magnetic Stimulation in Patients With Depression (THREE-D): A Randomised Non-Inferiority Trial." *The Lancet*. 2018;391(10131):1683-1692.
 
-The result: iTBS was non-inferior to standard rTMS for depression. Response rates of 49% and 47% respectively.
+This one changed everything. A landmark Canadian non-inferiority trial that enrolled 414 patients with treatment-resistant depression across multiple sites, randomized to standard 10 Hz rTMS or intermittent theta burst stimulation (iTBS) delivered to the left DLPFC, five days per week for 4-6 weeks.
 
-Why did this matter so much? iTBS delivers a full treatment in about 3 minutes. Standard 10 Hz takes 37 minutes. Same results, fraction of the time. That meant clinics could treat more people, you'd spend less time in the chair, and costs came down. The THREE-D trial accelerated the adoption of [theta burst protocols](/technology/) worldwide and fundamentally changed how TMS gets delivered.
+Both groups showed equivalent improvement on the HRSD-17, from baseline scores of ~23.5 to ~13.4. Response rates: 49% for iTBS versus 47% for 10 Hz rTMS. Remission rates: 32% for iTBS versus 27% for 10 Hz. iTBS was definitively non-inferior.
+
+Why did this matter so much? iTBS delivers a full treatment in about 3 minutes. Standard 10 Hz takes 37.5 minutes. Same results, fraction of the time. That meant clinics could treat more people, you'd spend less time in the chair, and costs came down. The THREE-D trial accelerated the adoption of [theta burst protocols](/technology/) worldwide and fundamentally changed how TMS gets delivered.
 
 ## What the meta-analyses show
 
@@ -53,7 +67,11 @@ Pool all the high-quality RCT data and the numbers converge:
 
 Why the gap between trials and real-world numbers? Same thing that happens with antidepressants. In practice, you keep your medications during TMS (most trials require washout). Real-world treatment courses run longer — 30-36 sessions versus 20-30 in trials. And clinical populations include people with less severe treatment resistance than the heavily resistant patients enrolled in FDA studies.
 
-A 2020 meta-analysis in the Journal of Clinical Psychiatry pooled 29 RCTs with over 2,000 patients. Active TMS was about twice as likely to produce response as sham (odds ratio ~2.0, 95% CI 1.6-2.4). A 2022 network meta-analysis comparing all neuromodulation techniques ranked TMS favorably, with deep TMS and iTBS showing particularly strong effect sizes.
+The largest real-world outcomes dataset comes from Sackeim et al. (2020), published in the *Journal of Affective Disorders* (277:65-74). This registry study collected data from 5,010 patients across 103 clinical practice sites — the largest outcomes registry for any depression treatment. Response rates ranged from 58% to 83% and remission rates from 28% to 62% depending on whether self-report or clinician-administered measures were used. These numbers far exceeded the earlier controlled trials.
+
+**Berlim et al. (2014)**, in a systematic review and meta-analysis of randomized, double-blind, sham-controlled trials published in *Psychological Medicine* (44(2):225-239), calculated a number needed to treat (NNT) of 6 for clinical response and 8 for remission — numbers that compare favorably with antidepressant medications.
+
+**Mutz et al. (2019)** published a comparative network meta-analysis in the *BMJ* (364:l1079) examining all non-surgical brain stimulation techniques for depression. High-frequency left DLPFC rTMS had the largest body of supporting evidence. Bilateral rTMS, deep TMS, and theta burst stimulation also showed significant efficacy over sham, though with more variable evidence.
 
 ### Comparison to antidepressant medication
 
@@ -71,11 +89,13 @@ The question everyone asks: how long does the benefit last?
 
 ### Six-month data
 
-Multiple follow-up studies show 50-70% of TMS responders maintain their response at six months without additional treatment. A large naturalistic study from the NeuroStar registry tracked 1,132 patients and found 62.5% of acute responders held steady at six months.
+**Dunner et al. (2014)**, published in the *Journal of Clinical Psychiatry* (75(12):1394-1401), followed 257 patients who completed acute TMS treatment across multiple sites over 52 weeks. Among 120 patients who met response or remission criteria at the end of acute treatment, 75 (62.5%) continued to meet response criteria throughout long-term follow-up. Only 10 of 99 patients (10.1%) met criteria for full relapse during the first 6 months. When symptom worsening did occur, 84.2% of those patients (32 of 38) re-achieved symptomatic benefit with TMS reintroduction.
+
+A meta-analysis of durability data found that among initial responders, 66.5% sustained response at 3 months, 52.9% at 6 months, and 46.3% at 12 months.
 
 ### Twelve-month data
 
-At one year, the picture gets more variable. Some people maintain their response indefinitely with no additional treatment. Others see gradual symptom return, typically between 6 and 12 months after the initial course. The 12-month sustained response rate: roughly 40-50% of initial responders.
+At one year, the picture gets more variable. Some people maintain their response indefinitely with no additional treatment. Others see gradual symptom return, typically between 6 and 12 months after the initial course. The Dunner et al. 12-month follow-up showed statistically significant reductions in depression scores were sustained throughout the full year compared to pre-TMS baseline (all P < .0001). Approximately 36% of patients received TMS reintroduction during follow-up, averaging 16.2 sessions.
 
 ### Maintenance and retreatment
 
@@ -87,13 +107,19 @@ Some clinics now offer maintenance TMS. Periodic sessions — weekly, biweekly, 
 
 Not everyone responds equally. Research has identified several factors tied to better outcomes:
 
+**Carpenter et al. (2012)**, published in *Depression and Anxiety* (29(7):587-596), conducted the first large naturalistic outcomes study of TMS in real-world clinical practice. Across 42 sites, 307 outpatients received an average of 28.3 TMS sessions. Clinician-assessed response rate was 58.0% and remission was 37.1%. Patient-reported response rates ranged from 41.5% to 56.4% depending on the measure used. These numbers confirmed that real-world TMS outcomes substantially exceeded the controlled trial results.
+
+## Who responds best
+
+Not everyone responds equally. Research has identified several factors tied to better outcomes:
+
 - **Fewer failed medication trials** — 1-2 failures respond better than 4+
 - **Shorter current episode** — Chronic, multi-year episodes are harder to treat
 - **Less comorbid anxiety** — TMS often improves anxiety too, but severe comorbid anxiety can reduce depression response rates
 - **Younger age** — TMS works across age ranges, but some data suggest modestly better outcomes in younger adults
 - **Concurrent therapy** — People in psychotherapy alongside TMS tend to do better
 
-Neuroimaging biomarkers are emerging as predictors too. Functional connectivity between the stimulation site and the subgenual anterior cingulate cortex (sgACC) appears to predict response. Several [research groups](/research/clinical-trials/) are developing tools to use this for personalized targeting.
+Neuroimaging biomarkers are emerging as predictors too. **Fox et al. (2012)**, in a study published in *Biological Psychiatry* (72(7):595-603), demonstrated that the functional connectivity between the DLPFC stimulation site and the subgenual anterior cingulate cortex (sgACC) predicts antidepressant response. DLPFC sites with stronger anticorrelation to the sgACC produced better clinical outcomes. This finding, replicated in subsequent prospective studies, drives the [neuroimaging-guided targeting approaches](/technology/) used in protocols like the [Stanford SAINT trial](/research/accelerated-tms-protocols/). Several [research groups](/research/clinical-trials/) are developing tools to use this for personalized targeting.
 
 ## The bottom line
 

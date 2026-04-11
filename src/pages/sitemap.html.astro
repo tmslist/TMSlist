@@ -1,14 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { 
-    CORE_PAGES, 
-    TECHNOLOGY_SLUGS, 
-    INSURANCE_SLUGS, 
-    TREATMENT_SLUGS, 
+import {
+    CORE_PAGES,
+    TECHNOLOGY_SLUGS,
+    INSURANCE_SLUGS,
+    TREATMENT_SLUGS,
     COMPARE_SLUGS,
     PROVIDER_SLUGS,
     DEMOGRAPHIC_SLUGS,
-    NEAR_ME_SLUGS
+    NEAR_ME_SLUGS,
+    PROTOCOL_SLUGS,
+    BLOG_SLUGS,
+    COMMERCIAL_SLUGS,
+    LEGAL_SLUGS,
+    RESEARCH_SLUGS,
+    STORIES_SLUGS,
+    UTILITY_SLUGS,
+    ALTERNATIVE_SLUGS,
 } from '../utils/seo_slugs';
 import { getUniqueStates, STATE_NAMES, getStateSlug } from '../utils/dataHelpers';
 
@@ -16,46 +24,86 @@ const uniqueStates = (await getUniqueStates()).sort();
 
 const sections = [
     { title: "Core Pages", items: CORE_PAGES, base: "" },
-    { title: "Technology", items: TECHNOLOGY_SLUGS, base: "/technology" },
-    { title: "Insurance Guides", items: INSURANCE_SLUGS, base: "/insurance" },
     { title: "Conditions Treated", items: TREATMENT_SLUGS, base: "/treatments" },
-    { title: "Comparative Guides", items: COMPARE_SLUGS, base: "/compare" },
+    { title: "Insurance Guides", items: INSURANCE_SLUGS, base: "/insurance" },
+    { title: "Treatment Comparisons", items: COMPARE_SLUGS, base: "/compare" },
+    { title: "TMS Protocols", items: PROTOCOL_SLUGS, base: "/protocols" },
+    { title: "Technology & Devices", items: TECHNOLOGY_SLUGS, base: "/technology" },
+    { title: "Alternative Treatments", items: ALTERNATIVE_SLUGS, base: "/alternatives" },
+    { title: "Patient Demographics", items: DEMOGRAPHIC_SLUGS, base: "/demographic" },
+    { title: "Patient Stories", items: STORIES_SLUGS, base: "/stories" },
+    { title: "Research", items: RESEARCH_SLUGS, base: "/research" },
+    { title: "Blog", items: BLOG_SLUGS, base: "/blog" },
     { title: "Provider Types", items: PROVIDER_SLUGS, base: "/providers" },
-    { title: "Demographics", items: DEMOGRAPHIC_SLUGS, base: "/demographic" },
+    { title: "For Clinic Owners", items: COMMERCIAL_SLUGS, base: "/providers/services" },
+    { title: "Legal & Regulatory", items: LEGAL_SLUGS, base: "/legal" },
+    { title: "Assessment Tools", items: UTILITY_SLUGS, base: "/quiz" },
     { title: "Local Search", items: NEAR_ME_SLUGS, base: "/near-me" },
 ];
 ---
 
-<Layout title="Sitemap | TMS List">
+<Layout title="Sitemap | TMS List" description="Browse all pages on TMS List — clinics by state, treatment guides, insurance coverage, comparisons, protocols, alternatives, and more.">
     <main class="container mx-auto px-4 py-12">
-        <h1 class="text-4xl font-semibold mb-8">Sitemap</h1>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <h1 class="text-4xl font-display font-bold mb-4">Sitemap</h1>
+        <p class="text-slate-500 mb-10">All pages on TMS List, organized by section.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {sections.map(section => (
                 <div>
-                     <h2 class="text-xl font-semibold text-gray-900 border-b border-gray-200 pb-2 mb-4">{section.title}</h2>
-                     <ul class="space-y-2">
+                    <h2 class="text-lg font-display font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">{section.title}</h2>
+                    {section.base && (
+                        <a href={`${section.base}/`} class="inline-block text-xs text-violet-600 font-semibold mb-3 hover:underline">View all →</a>
+                    )}
+                    <ul class="space-y-2">
                         {section.items.map(item => (
                             <li>
-                                <a href={`${section.base}/${item.slug}`} class="text-gray-600 hover:text-primary transition-colors">
+                                <a href={`${section.base}/${item.slug}/`} class="text-sm text-slate-600 hover:text-violet-600 transition-colors">
                                     {item.title}
                                 </a>
                             </li>
                         ))}
-                     </ul>
+                    </ul>
                 </div>
             ))}
 
             <!-- States Column -->
             <div class="md:col-span-2 lg:col-span-3">
-                 <h2 class="text-xl font-semibold text-gray-900 border-b border-gray-200 pb-2 mb-4">Locations by State</h2>
-                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2">
+                <h2 class="text-lg font-display font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">TMS Clinics by State</h2>
+                <a href="/us/" class="inline-block text-xs text-violet-600 font-semibold mb-3 hover:underline">View all US locations →</a>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2">
                     {uniqueStates.map(stateCode => (
-                        <a href={`/us/${getStateSlug(stateCode)}/`} class="text-gray-600 hover:text-primary transition-colors">
+                        <a href={`/us/${getStateSlug(stateCode)}/`} class="text-sm text-slate-600 hover:text-violet-600 transition-colors">
                             {STATE_NAMES[stateCode]}
                         </a>
                     ))}
-                 </div>
+                </div>
+            </div>
+
+            <!-- International -->
+            <div class="md:col-span-2 lg:col-span-3">
+                <h2 class="text-lg font-display font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">International Locations</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2">
+                    <a href="/uk/" class="text-sm text-slate-600 hover:text-violet-600">United Kingdom</a>
+                    <a href="/ca/" class="text-sm text-slate-600 hover:text-violet-600">Canada</a>
+                    <a href="/au/" class="text-sm text-slate-600 hover:text-violet-600">Australia</a>
+                    <a href="/de/" class="text-sm text-slate-600 hover:text-violet-600">Germany</a>
+                    <a href="/in/" class="text-sm text-slate-600 hover:text-violet-600">India</a>
+                    <a href="/fr/" class="text-sm text-slate-600 hover:text-violet-600">France</a>
+                    <a href="/es/" class="text-sm text-slate-600 hover:text-violet-600">Spain</a>
+                    <a href="/it/" class="text-sm text-slate-600 hover:text-violet-600">Italy</a>
+                    <a href="/nl/" class="text-sm text-slate-600 hover:text-violet-600">Netherlands</a>
+                    <a href="/br/" class="text-sm text-slate-600 hover:text-violet-600">Brazil</a>
+                    <a href="/mx/" class="text-sm text-slate-600 hover:text-violet-600">Mexico</a>
+                    <a href="/jp/" class="text-sm text-slate-600 hover:text-violet-600">Japan</a>
+                    <a href="/kr/" class="text-sm text-slate-600 hover:text-violet-600">South Korea</a>
+                    <a href="/se/" class="text-sm text-slate-600 hover:text-violet-600">Sweden</a>
+                    <a href="/nz/" class="text-sm text-slate-600 hover:text-violet-600">New Zealand</a>
+                    <a href="/za/" class="text-sm text-slate-600 hover:text-violet-600">South Africa</a>
+                    <a href="/ie/" class="text-sm text-slate-600 hover:text-violet-600">Ireland</a>
+                    <a href="/sg/" class="text-sm text-slate-600 hover:text-violet-600">Singapore</a>
+                    <a href="/ae/" class="text-sm text-slate-600 hover:text-violet-600">UAE</a>
+                    <a href="/il/" class="text-sm text-slate-600 hover:text-violet-600">Israel</a>
+                </div>
             </div>
         </div>
     </main>

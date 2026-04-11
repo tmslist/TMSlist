@@ -27,9 +27,9 @@ const street = clinic.address_obj?.street || clinic.address;
 const zip = clinic.address_obj?.zip || clinic.zip;
 const landmarks = clinic.address_obj?.nearby_landmarks || [];
 const machines = clinic.machines || [];
-const treatments = clinic.treatments || [];
+const treatments = clinic.specialties || clinic.treatments || [];
 const doctors = clinic.doctors_data || [];
-const insurances = clinic.insurance_accepted || [];
+const insurances = clinic.insurances || clinic.insurance_accepted || [];
 const faqs = clinic.faqs || [];
 
 // Rating handling

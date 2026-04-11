@@ -27,14 +27,14 @@ This fundamental difference in mechanism drives the differences in efficacy, sid
 
 A handful of randomized trials have directly compared TMS and ECT, though designing these studies is tricky — blinding is essentially impossible since you know whether you received anesthesia.
 
-The largest and most cited comparison is the 2017 trial by Berlim and colleagues, which randomized 74 patients with treatment-resistant depression to either right unilateral ECT or high-frequency left DLPFC rTMS. At the end of treatment:
+The largest and most cited direct comparison is the 2017 trial by Berlim and colleagues, which randomized 74 patients with treatment-resistant depression to either right unilateral ECT or high-frequency left DLPFC rTMS. At the end of treatment:
 
 - **ECT remission rate:** 52%
 - **TMS remission rate:** 33%
 
 ECT showed a statistically significant advantage here, consistent with the clinical consensus that ECT is more effective for severe, treatment-resistant depression.
 
-A 2019 meta-analysis pooling six RCTs with 392 patients confirmed this pattern. ECT produced higher response rates (odds ratio ~1.7 in favor of ECT) and higher remission rates. But the authors noted that many included studies used older TMS protocols with lower pulse counts, and that newer approaches like [theta burst stimulation](/technology/) and [accelerated protocols](/research/accelerated-tms-protocols/) might narrow the gap.
+A 2019 meta-analysis pooling six RCTs with 392 patients confirmed this pattern. ECT produced higher response rates (odds ratio ~1.7 in favor of ECT) and higher remission rates. But the authors noted that many included studies used older TMS protocols with lower pulse counts, and that newer approaches like [theta burst stimulation](/technology/) and [accelerated protocols](/research/accelerated-tms-protocols/) might narrow the gap. Notably, the Stanford SAINT/SNT protocol (Cole et al., *American Journal of Psychiatry*, 2022;179(2):132-141) achieved a 52.5% MADRS reduction with an effect size of d=1.65 — numbers that approach ECT efficacy without ECT's cognitive burden.
 
 ### Population-level data
 
@@ -56,7 +56,7 @@ ECT causes acute cognitive effects in virtually everyone who gets it: post-treat
 
 For most people, anterograde amnesia resolves within one to four weeks after the ECT course ends. Retrograde amnesia is more variable. Some people lose memories of events during and immediately surrounding the treatment period permanently. A smaller proportion report more extensive retrograde memory loss affecting months or even years of life.
 
-A 2007 landmark study by Sackeim and colleagues found that bilateral ECT caused significant retrograde amnesia at six months post-treatment. More modern techniques — particularly right unilateral ultra-brief pulse ECT — have reduced but not eliminated this risk. Even with optimized technique, a 2019 systematic review found that roughly 25-30% of ECT patients report subjective memory complaints at six months.
+A 2007 landmark study by Sackeim et al. (*Neuropsychopharmacology*, 2007;32(1):244-254) found that bilateral ECT caused significant retrograde amnesia at six months post-treatment. More modern techniques — particularly right unilateral ultra-brief pulse ECT — have reduced but not eliminated this risk. Even with optimized technique, a 2019 systematic review found that roughly 25-30% of ECT patients report subjective memory complaints at six months.
 
 ### TMS and cognition
 

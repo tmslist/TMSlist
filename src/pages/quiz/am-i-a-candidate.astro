@@ -4,9 +4,29 @@ import Layout from "../../layouts/Layout.astro";
 const title = "Am I A Candidate for TMS? | 2-Minute Eligibility Quiz";
 const description =
     "Take our free, confidential assessment to see if Transcranial Magnetic Stimulation (TMS) therapy might be right for your treatment-resistant depression.";
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const quizSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "TMS Therapy Eligibility Assessment",
+    "description": description,
+    "url": `${siteUrl}/quiz/am-i-a-candidate/`,
+    "educationalLevel": "patient",
+    "about": {
+        "@type": "MedicalTherapy",
+        "name": "Transcranial Magnetic Stimulation (TMS)",
+        "medicalSpecialty": "Psychiatry",
+    },
+    "provider": {
+        "@type": "Organization",
+        "name": "TMS List",
+        "url": siteUrl,
+    },
+});
 ---
 
-<Layout title={title} description={description} noindex={true}>
+<Layout title={title} description={description} noindex={true} schema={quizSchema}>
     <main class="min-h-screen bg-gradient-to-b from-slate-50 to-white py-12">
         <div class="container mx-auto px-4 max-w-2xl">
             <!-- Progress Bar -->
@@ -527,11 +547,14 @@ const description =
         }
     }
 
-    // Geo-route quiz CTA links — geo.js loaded in Layout handles /us/ links,
-    // but .quiz-geo-link class also needs updating for links that start as /us/
-    if (window.TMS_GEO) {
-        document.querySelectorAll('.quiz-geo-link').forEach(function(el) {
-            el.href = window.TMS_GEO.url;
-        });
+    // Geo-route quiz CTA links — update with detected country URL if available
+    try {
+        if (window.TMS_GEO && window.TMS_GEO.url) {
+            document.querySelectorAll('.quiz-geo-link').forEach(function(el) {
+                el.href = window.TMS_GEO.url;
+            });
+        }
+    } catch (e) {
+        // Fallback: links already default to /us/
     }
 </script>

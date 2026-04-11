@@ -9,9 +9,19 @@ const lastUpdated = new Date().toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
 });
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Terms of Service",
+    "description": description,
+    "url": `${siteUrl}/legal/terms-of-service/`,
+    "isPartOf": { "@type": "WebSite", "name": "TMS List", "url": siteUrl },
+    "publisher": { "@type": "Organization", "name": "TMS List", "url": siteUrl },
+});
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schema={schema}>
     <main class="container mx-auto px-4 py-12 max-w-4xl">
         <h1 class="text-4xl font-semibold text-gray-900 mb-4">Terms of Service</h1>
         <p class="text-gray-500 mb-8">Last Updated: {lastUpdated}</p>

@@ -5,6 +5,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        brand: {
+          gradientStart: "#4F46E5", // Indigo 600
+          gradientEnd: "#D946EF",   // Fuchsia 600
+        },
         primary: {
           DEFAULT: "#7C3AED", // Violet — matches brand logo
           light: "#A78BFA",

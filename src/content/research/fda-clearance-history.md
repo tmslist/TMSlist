@@ -23,9 +23,9 @@ October 8, 2008. The FDA cleared the first TMS device for clinical use in the Un
 
 The NeuroStar system, manufactured by Neuronetics, got the green light for treating MDD in adults who had failed at least one adequate antidepressant trial.
 
-The pivotal trial enrolled 301 medication-free patients across 23 sites. Active TMS versus sham stimulation over the left dorsolateral prefrontal cortex (DLPFC) for 4-6 weeks. The active group showed statistically significant improvement on standardized depression scales. Response rates: roughly 24% active versus 12% sham.
+The pivotal trial (O'Reardon et al., *Biological Psychiatry*, 2007;62(11):1208-1216) enrolled 301 medication-free patients across 23 sites — 155 randomized to active TMS and 146 to sham stimulation over the left dorsolateral prefrontal cortex (DLPFC) at 10 Hz, 120% motor threshold, 3,000 pulses per session, for 4-6 weeks. Active TMS was significantly superior to sham on the MADRS, HAMD17, and HAMD24 at weeks 4 and 6. Response rates were approximately twofold higher with active TMS, and the dropout rate for adverse events was just 4.5%.
 
-Those numbers look modest. They were enough to clear the regulatory bar — and here's the thing: real-world data later showed much higher response rates (50-60%) when TMS was part of actual clinical care rather than the restrictive conditions of a regulatory trial. In the real world, you keep your medications. You get longer treatment courses. Your clinician optimizes for outcomes, not controlled variables.
+Those numbers look modest by today's standards. They were enough to clear the regulatory bar — and here's the thing: real-world data later showed much higher response rates (58-83%) when TMS was part of actual clinical care rather than the restrictive conditions of a regulatory trial. The largest outcomes registry (Sackeim et al., 2020; 5,010 patients across 103 sites) confirmed this pattern. In the real world, you keep your medications. You get longer treatment courses. Your clinician optimizes for outcomes, not controlled variables.
 
 The NeuroStar clearance used a figure-8 coil delivering repetitive pulses at 10 Hz to the left DLPFC. That protocol became the standard for the next decade.
 
@@ -37,7 +37,7 @@ The NeuroStar clearance used a figure-8 coil delivering repetitive pulses at 10 
 
 January 2013. BrainsWay brought a fundamentally different approach to the table. Instead of the figure-8 coil, BrainsWay used a proprietary H-coil helmet that generates magnetic fields reaching deeper brain structures — roughly 4-6 cm below the skull surface compared to 1.5-2 cm for conventional coils.
 
-The pivotal trial randomized 212 MDD patients. Response rates: 38.4% active versus 21.4% sham. Remission rates: 32.6% versus 14.6%. Notably stronger effect sizes than the original NeuroStar trial, though direct comparisons between different trials are always imprecise.
+The pivotal trial (Levkovitz et al., *World Psychiatry*, 2015;14(1):64-73) was an international, double-blind, multicenter RCT that randomized 212 MDD patients to active deep TMS or sham. Response rates: 38.4% active versus 21.4% sham. Remission rates: 32.6% versus 14.6%. Benefits were sustained through 16 weeks of follow-up. Notably stronger effect sizes than the original NeuroStar trial, though direct comparisons between different trials are always imprecise.
 
 What this really meant: competition and [technological diversity](/technology/) in the TMS market. Clinicians had a choice. If you didn't respond to one approach, there was an alternative to try.
 
@@ -51,7 +51,7 @@ August 2018. A landmark moment. The first TMS clearance for anything other than 
 
 The H7 coil targets the anterior cingulate cortex (ACC) and medial prefrontal cortex — regions at the heart of the cortico-striato-thalamo-cortical (CSTC) circuit that drives OCD. Different coil geometry than the H1 depression coil, because the target structures are deeper and more medial.
 
-The pivotal trial enrolled 99 OCD patients and used a unique provocation-augmented protocol. Before each TMS session, you'd be briefly exposed to personalized OCD triggers to activate the relevant circuits, then immediately receive deep TMS. Response rates (30% or greater reduction in Y-BOCS scores): 38.1% active versus 11.1% sham. Clinically meaningful. Statistically significant.
+The pivotal trial (Carmi et al., *American Journal of Psychiatry*, 2019;176(11):931-938) enrolled 99 OCD patients and used a unique provocation-augmented protocol. Before each TMS session, you'd be briefly exposed to personalized OCD triggers to activate the relevant circuits, then immediately received 20 Hz deep TMS daily for six weeks. In the FDA-approved analysis set of 94 patients, Y-BOCS scores dropped by 6.0 points in the active group versus 3.3 points in the sham group (p=0.01, effect size d=0.69). Full response rates (30% or greater reduction in Y-BOCS scores): 38.1% active versus 11.1% sham (p=0.003). Partial response rates (20% or greater reduction): 54.8% active versus 26.7% sham (p=0.008). Benefits were maintained at one-month follow-up (effect size d=0.62). Clinically meaningful. Statistically significant.
 
 This opened the door for [TMS treatment](/treatments/) of conditions beyond depression. Real hope for the estimated 2-3% of the population living with OCD who don't get enough relief from SSRIs and cognitive-behavioral therapy.
 
@@ -65,7 +65,7 @@ August 2020. TMS became the first non-pharmacological brain stimulation treatmen
 
 The H4 coil targets the bilateral insula and prefrontal cortex — brain regions involved in craving, body awareness, and decision-making. The insula has emerged as a key hub for addiction. Lesion studies show that insular damage can lead to abrupt smoking cessation without withdrawal symptoms. That's a striking finding.
 
-The pivotal trial randomized 262 chronic smokers (10+ cigarettes per day) to active deep TMS or sham over three weeks. People who received real TMS were roughly 2.3 times more likely to achieve sustained abstinence.
+The pivotal trial (Zangen et al., *Biological Psychiatry*, 2021;89(3):260-268) randomized 262 chronic smokers (averaging 26+ years of smoking with multiple failed quit attempts) to active deep TMS or sham over three weeks. Treatment was delivered after a brief smoking provocation to induce cravings. Among participants who completed treatment, the continuous quit rate (four consecutive weeks of abstinence) was 28.0% in the active group compared to 11.7% in the sham group — roughly 2.4 times more likely to achieve sustained abstinence.
 
 This mattered beyond smoking. It proved that TMS could shift addiction-related neural circuits, fueling ongoing research into TMS for [alcohol dependence](/treatments/alcohol-dependence/), opioid use disorder, and other substance use conditions.
 

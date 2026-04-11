@@ -57,6 +57,15 @@ const articleSchema = JSON.stringify({
   "publisher": { "@type": "Organization", "name": "TMS List", "url": siteUrl, "logo": { "@type": "ImageObject", "url": `${siteUrl}/favicon.svg` } },
   "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/insurance/${slug}/` },
   "reviewedBy": { "@type": "Person", "name": "Dr. Karan Narwal", "jobTitle": "Mental Health Specialist & Consultant" },
+  ...(insurer || provider ? {
+    "about": {
+      "@type": "HealthInsurancePlan",
+      "name": insurer || provider || title,
+      ...(coversTms !== undefined ? { "coverageDescription": coversTms ? "Covers TMS therapy for treatment-resistant depression" : "TMS coverage varies by plan and state" } : {}),
+      ...(priorAuthRequired !== undefined ? { "additionalProperty": { "@type": "PropertyValue", "name": "Prior Authorization Required", "value": priorAuthRequired ? "Yes" : "No" } } : {}),
+      ...(typicalCost ? { "costPerUnit": typicalCost } : {}),
+    },
+  } : {}),
 });
 
 const faqSchema = faqs && faqs.length > 0 ? JSON.stringify({

@@ -22,21 +22,25 @@ faqs:
 ---
 
 <div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-  <div class="bg-rose-50 border border-rose-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-rose-700 font-display">6%</div>
-    <div class="text-xs text-rose-600 mt-1">US population affected</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-rose-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-rose-400/10 rounded-full blur-xl group-hover:bg-rose-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-600 font-display">6%</div>
+    <div class="text-xs font-medium text-rose-700/80 mt-1">US population affected</div>
   </div>
-  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-amber-700 font-display">11-20%</div>
-    <div class="text-xs text-amber-600 mt-1">Military veterans with PTSD</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-amber-400/10 rounded-full blur-xl group-hover:bg-amber-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500 font-display">11-20%</div>
+    <div class="text-xs font-medium text-amber-700/80 mt-1">Veterans with PTSD</div>
   </div>
-  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-emerald-700 font-display">45-65%</div>
-    <div class="text-xs text-emerald-600 mt-1">TMS response rate in trials</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-emerald-400/10 rounded-full blur-xl group-hover:bg-emerald-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600 font-display">45-65%</div>
+    <div class="text-xs font-medium text-emerald-700/80 mt-1">TMS response rate</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">VA-Led</div>
-    <div class="text-xs text-blue-600 mt-1">Largest research base</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-blue-400/10 rounded-full blur-xl group-hover:bg-blue-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 font-display">VA-Led</div>
+    <div class="text-xs font-medium text-blue-700/80 mt-1">Largest research base</div>
   </div>
 </div>
 
@@ -44,8 +48,12 @@ faqs:
 
 PTSD develops after trauma — flashbacks, nightmares, hypervigilance, exaggerated startle, avoidance. About 6% of the US population experiences it. Among military veterans, that jumps to 11-20%. Sexual assault survivors and first responders face similarly elevated rates.
 
-<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">Three things go wrong in the PTSD brain</h4>
+<div class="not-prose my-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60 rounded-3xl p-8 shadow-sm">
+  <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-500 to-pink-500"></div>
+  <h4 class="font-display font-bold text-slate-900 mb-3 text-lg flex items-center gap-2">
+    <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+    Three things go wrong in the PTSD brain
+  </h4>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
     <div class="bg-white rounded-xl p-4 border border-slate-100">
       <div class="font-semibold text-red-600 text-sm mb-1">vmPFC Goes Quiet</div>

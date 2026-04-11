@@ -122,7 +122,7 @@ export default function PortalHealthScore() {
             </p>
             {data.score < data.maxScore && (
               <a
-                href="/portal/clinic"
+                href="/portal/clinic/"
                 className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors"
               >
                 Edit Clinic Profile

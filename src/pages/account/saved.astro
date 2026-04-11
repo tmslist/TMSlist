@@ -90,7 +90,7 @@ const pageTitle = "My Saved Clinics | TMS List";
             <span class="text-amber-500 font-semibold">${rating} ★</span>
             ${c.verified ? '<span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-100">Verified</span>' : ''}
           </div>
-          <a href="/clinic/${c.slug}" class="inline-block text-sm font-semibold text-blue-600 hover:text-blue-700">View Profile →</a>
+          <a href="/clinic/${c.slug}/" class="inline-block text-sm font-semibold text-blue-600 hover:text-blue-700">View Profile →</a>
         </div>
       `;
     }).join('');

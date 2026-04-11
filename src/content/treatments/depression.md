@@ -22,21 +22,25 @@ faqs:
 ---
 
 <div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-emerald-700 font-display">21M+</div>
-    <div class="text-xs text-emerald-600 mt-1">US adults affected annually</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-emerald-400/10 rounded-full blur-xl group-hover:bg-emerald-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600 font-display">21M+</div>
+    <div class="text-xs font-medium text-emerald-700/80 mt-1">US adults affected</div>
   </div>
-  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-violet-700 font-display">50-60%</div>
-    <div class="text-xs text-violet-600 mt-1">TMS response rate</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-violet-50 to-fuchsia-50 border border-violet-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-violet-400/10 rounded-full blur-xl group-hover:bg-violet-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600 font-display">50-60%</div>
+    <div class="text-xs font-medium text-violet-700/80 mt-1">TMS response rate</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">30-35%</div>
-    <div class="text-xs text-blue-600 mt-1">Full remission rate</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-blue-400/10 rounded-full blur-xl group-hover:bg-blue-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 font-display">30-35%</div>
+    <div class="text-xs font-medium text-blue-700/80 mt-1">Full remission rate</div>
   </div>
-  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-amber-700 font-display">2008</div>
-    <div class="text-xs text-amber-600 mt-1">FDA cleared</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-amber-400/10 rounded-full blur-xl group-hover:bg-amber-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500 font-display">2008</div>
+    <div class="text-xs font-medium text-amber-700/80 mt-1">FDA cleared</div>
   </div>
 </div>
 
@@ -44,10 +48,14 @@ faqs:
 
 Major depressive disorder isn't just persistent sadness. It's a neurological condition that rewires how your brain handles mood, motivation, sleep, appetite, and thinking. About 21 million adults in the U.S. experience a major depressive episode every year — it's one of the leading causes of disability worldwide.
 
-<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">What's happening in the brain</h4>
-  <p class="text-sm text-slate-600 leading-relaxed mb-3">The <strong>left dorsolateral prefrontal cortex (DLPFC)</strong> — responsible for executive function, emotional regulation, and motivation — goes quiet. Neuroimaging consistently shows reduced blood flow and metabolism in this area.</p>
-  <p class="text-sm text-slate-600 leading-relaxed mb-0">Meanwhile, the <strong>amygdala</strong> (your brain's threat center) runs hot, creating a tug-of-war between rational thought and emotional reactivity. Depression tips the balance.</p>
+<div class="not-prose my-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60 rounded-3xl p-8 shadow-sm">
+  <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-violet-500 to-fuchsia-500"></div>
+  <h4 class="font-display font-bold text-slate-900 mb-3 text-lg flex items-center gap-2">
+    <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+    What's happening in the brain
+  </h4>
+  <p class="text-sm text-slate-700 leading-relaxed mb-3">The <strong class="text-violet-700">left dorsolateral prefrontal cortex (DLPFC)</strong> — responsible for executive function, emotional regulation, and motivation — goes quiet. Neuroimaging consistently shows reduced blood flow and metabolism in this area.</p>
+  <p class="text-sm text-slate-700 leading-relaxed mb-0">Meanwhile, the <strong class="text-rose-600">amygdala</strong> (your brain's threat center) runs hot, creating a tug-of-war between rational thought and emotional reactivity. Depression tips the balance.</p>
 </div>
 
 Antidepressants work for many people. But **roughly one-third of patients with MDD don't get adequate relief** after trying two or more medications. That's treatment-resistant depression (TRD).

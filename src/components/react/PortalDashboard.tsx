@@ -95,7 +95,7 @@ export default function PortalDashboard({ userEmail, userId }: { userEmail: stri
           <h2 className="text-xl font-semibold text-gray-900 mb-2">Claim Your Clinic</h2>
           <p className="text-gray-500 mb-6">You haven't linked a clinic to your account yet. Search for and claim your clinic to manage its listing.</p>
           <a
-            href="/portal/claim"
+            href="/portal/claim/"
             className="inline-flex items-center px-6 py-3 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-all"
           >
             Find Your Clinic
@@ -204,7 +204,7 @@ export default function PortalDashboard({ userEmail, userId }: { userEmail: stri
               )}
 
               <a
-                href="/portal/clinic"
+                href="/portal/clinic/"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-all shadow-sm"
               >
                 Complete Your Profile
@@ -238,7 +238,7 @@ export default function PortalDashboard({ userEmail, userId }: { userEmail: stri
 
       {/* Quick Links */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <a href="/portal/clinic" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow group">
+        <a href="/portal/clinic/" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow group">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
               <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -251,7 +251,7 @@ export default function PortalDashboard({ userEmail, userId }: { userEmail: stri
             </div>
           </div>
         </a>
-        <a href="/portal/reviews" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow group">
+        <a href="/portal/reviews/" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow group">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
               <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -264,7 +264,7 @@ export default function PortalDashboard({ userEmail, userId }: { userEmail: stri
             </div>
           </div>
         </a>
-        <a href="/portal/leads" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow group">
+        <a href="/portal/leads/" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow group">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
               <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">

@@ -58,7 +58,7 @@ A course of TMS gradually normalizes this. Specifically:
 - **Frontoparietal network connectivity increases** — Better executive function and cognitive control.
 - **DLPFC-subgenual ACC connectivity strengthens** — This specific connection has emerged as a key predictor and marker of antidepressant response.
 
-A landmark 2019 study by Fox and colleagues at Harvard showed that the more strongly your stimulation site connected to the subgenual anterior cingulate cortex (sgACC), the better your clinical outcome. This finding drives the [neuroimaging-guided targeting approaches](/technology/) that aim to optimize this connection for each individual.
+The foundational study by Fox et al. (*Biological Psychiatry*, 2012;72(7):595-603) demonstrated that DLPFC TMS sites with better clinical efficacy were more negatively correlated (anticorrelated) with the subgenual anterior cingulate cortex (sgACC). Optimal connectivity-based stimulation coordinates were identified in Brodmann area 46. Subsequent prospective validation studies confirmed that individual-level DLPFC-sgACC functional connectivity is a significant independent predictor of antidepressant response. This finding drives the [neuroimaging-guided targeting approaches](/technology/) used in protocols like the Stanford SAINT trial, which use each patient's resting-state fMRI to identify their personally optimal stimulation target.
 
 ### Changes take time — and that's normal
 

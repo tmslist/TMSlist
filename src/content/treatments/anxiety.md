@@ -22,17 +22,20 @@ faqs:
 ---
 
 <div class="not-prose mb-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">40M+</div>
-    <div class="text-xs text-blue-600 mt-1">US adults affected annually</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-blue-400/10 rounded-full blur-xl group-hover:bg-blue-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 font-display">40M+</div>
+    <div class="text-xs font-medium text-blue-700/80 mt-1">US adults affected</div>
   </div>
-  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-emerald-700 font-display">40-55%</div>
-    <div class="text-xs text-emerald-600 mt-1">TMS response rate in studies</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-emerald-400/10 rounded-full blur-xl group-hover:bg-emerald-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600 font-display">40-55%</div>
+    <div class="text-xs font-medium text-emerald-700/80 mt-1">TMS response rate</div>
   </div>
-  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-violet-700 font-display">60%</div>
-    <div class="text-xs text-violet-600 mt-1">Anxiety patients with co-occurring depression</div>
+  <div class="relative overflow-hidden bg-gradient-to-br from-violet-50 to-fuchsia-50 border border-violet-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300 hover:-translate-y-1 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-violet-400/10 rounded-full blur-xl group-hover:bg-violet-400/20 transition-all"></div>
+    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600 font-display">60%</div>
+    <div class="text-xs font-medium text-violet-700/80 mt-1">Anxiety patients with depression</div>
   </div>
 </div>
 
@@ -40,9 +43,13 @@ faqs:
 
 Anxiety disorders are the most common mental health conditions in the U.S. — about 40 million adults every year. Generalized anxiety disorder (GAD), social anxiety, panic disorder. They wreck sleep, strain relationships, and make work feel impossible.
 
-<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">What's happening in the brain</h4>
-  <p class="text-sm text-slate-600 leading-relaxed mb-0">The prefrontal cortex is supposed to act as a brake on the amygdala's fear responses — checking whether a threat is real, then sending calming signals. In anxiety disorders, that brake is weak. The amygdala fires excessively, and the prefrontal cortex can't rein it in. Your brain gets stuck in high alert even when nothing dangerous is happening.</p>
+<div class="not-prose my-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60 rounded-3xl p-8 shadow-sm">
+  <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-indigo-500 to-fuchsia-500"></div>
+  <h4 class="font-display font-bold text-slate-900 mb-3 text-lg flex items-center gap-2">
+    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+    What's happening in the brain
+  </h4>
+  <p class="text-sm text-slate-700 leading-relaxed mb-0">The <strong class="text-indigo-700">prefrontal cortex</strong> is supposed to act as a brake on the <strong class="text-rose-600">amygdala's</strong> fear responses — checking whether a threat is real, then sending calming signals. In anxiety disorders, that brake is weak. The amygdala fires excessively, and the prefrontal cortex can't rein it in. Your brain gets stuck in high alert even when nothing dangerous is happening.</p>
 </div>
 
 Standard treatments — SSRIs, SNRIs, benzodiazepines, buspirone, CBT — work for many people. But **30-40% don't get adequate relief**. Benzodiazepines carry dependence risks. SSRIs can cause sexual dysfunction, weight gain, and emotional flattening.
@@ -58,9 +65,10 @@ Here's where anxiety and depression protocols diverge:
 - **Depression TMS** targets the **left DLPFC** with excitatory high-frequency stimulation to boost underactive circuits.
 - **Anxiety TMS** flips the script: **low-frequency (1 Hz) stimulation on the right DLPFC**. This inhibitory effect dials down the neural overactivity driving anxious thoughts.
 
-<div class="not-prose my-8 bg-blue-50 border border-blue-100 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-blue-900 mb-2 text-base">Why bilateral protocols make sense</h4>
-  <p class="text-sm text-blue-700 leading-relaxed mb-0">Anxiety and depression co-occur in roughly 60% of patients. Bilateral protocols do both in one session: low-frequency on the right (for anxiety), then high-frequency on the left (for depression). Why treat one when you can address both?</p>
+<div class="not-prose my-8 relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100/60 rounded-3xl p-8 shadow-sm">
+  <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-500 to-indigo-500"></div>
+  <h4 class="font-display font-bold text-blue-900 mb-2 text-lg">Why bilateral protocols make sense</h4>
+  <p class="text-sm text-blue-800 leading-relaxed mb-0">Anxiety and depression co-occur in roughly 60% of patients. Bilateral protocols do both in one session: low-frequency on the right (for anxiety), then high-frequency on the left (for depression). Why treat one when you can address both?</p>
 </div>
 
 ### Depression vs. Anxiety Protocol Comparison

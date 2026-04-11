@@ -36,7 +36,7 @@ export default function PortalLeads() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-6">
-        <a href="/portal/dashboard" className="text-sm text-emerald-600 hover:text-emerald-700 font-medium mb-2 inline-block">
+        <a href="/portal/dashboard/" className="text-sm text-emerald-600 hover:text-emerald-700 font-medium mb-2 inline-block">
           &larr; Back to Dashboard
         </a>
         <h1 className="text-2xl font-semibold text-gray-900">Enquiries</h1>

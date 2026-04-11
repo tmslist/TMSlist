@@ -227,6 +227,12 @@ export const STORIES_SLUGS = [
     { slug: 'james-executive-burnout', title: 'How a CEO Used TMS to Overcome Burnout and Depression' },
     { slug: 'patient-video-testimonials', title: 'Patient Video Testimonials' },
     { slug: 'celebrities-who-used-tms', title: 'Public Figures Who\'ve Talked About TMS Therapy' },
+    { slug: 'elena-anxiety-graduate-student', title: 'TMS for Anxiety: How I Finished My PhD Without Falling Apart' },
+    { slug: 'marcus-bipolar-depression', title: 'TMS Helped My Bipolar Depression — But It Wasn\'t a Silver Bullet' },
+    { slug: 'priya-ocd-contamination', title: 'I Spent Four Hours a Day Washing My Hands — Then I Found TMS' },
+    { slug: 'robert-senior-late-life-depression', title: 'Starting TMS at 67: You\'re Never Too Old to Try Something New' },
+    { slug: 'ashley-nurse-compassion-fatigue', title: 'A Nurse\'s Story: TMS After Years of Compassion Fatigue and Depression' },
+    { slug: 'tom-college-athlete-depression', title: 'I Was the Star Quarterback Who Couldn\'t Get Out of Bed' },
 ];
 
 export const UTILITY_SLUGS = [

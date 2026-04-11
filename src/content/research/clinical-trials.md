@@ -25,7 +25,7 @@ Generalized anxiety and social anxiety are among the most studied non-approved T
 
 Early data: 40-50% response rates. Good enough that major research centers keep pouring money into bigger studies.
 
-Stanford and the Medical University of South Carolina (MUSC) are both running multi-site anxiety trials expected to report by late 2026. The interesting part: they use neuroimaging-guided targeting instead of the standard 5-cm rule. Better aim, potentially better results.
+Active trials include studies at UCLA examining accelerated rTMS at frequencies beyond the standard 10 Hz for inpatient MDD with comorbid anxiety (NCT enrolling 30 participants), and UC San Diego leading a 75-participant, three-site trial (with Weill Cornell Medicine and Australian National University) examining whether maintenance rTMS can sustain DLPFC-subgenual cingulate connectivity improvements. Stanford and MUSC are both running multi-site anxiety trials using neuroimaging-guided targeting instead of the standard 5-cm rule — better aim, potentially better results.
 
 ### PTSD
 
@@ -51,11 +51,19 @@ MUSC and Massachusetts General Hospital are leading this work. Their protocols i
 
 ### Chronic pain
 
-Chronic pain might be one of TMS's most promising frontiers. Trials at UCLA, Johns Hopkins, and several European centers are studying motor cortex stimulation for fibromyalgia, neuropathic pain, and chronic migraine prevention.
+Chronic pain might be one of TMS's most promising frontiers. UCSF is currently recruiting 20 patients for a randomized, single-blind, crossover pilot trial of TMS for chronic neuropathic pain (NCT05593237). UCLA, Johns Hopkins, and several European centers are also studying motor cortex stimulation for fibromyalgia, neuropathic pain, and chronic migraine prevention.
 
 The mechanism is different from depression treatment. Instead of targeting prefrontal circuits, these protocols stimulate the primary motor cortex (M1), which activates descending pain inhibition pathways.
 
 Early results: 30-40% reductions in pain scores. Some people get meaningful relief that persists for weeks after the stimulation course ends. If you've been living with chronic pain and have exhausted other options, those numbers are worth paying attention to.
+
+### Substance use disorders
+
+Beyond the FDA-cleared smoking cessation indication, TMS is being studied for methamphetamine use disorder, with an active Phase 1-2 trial testing whether theta burst stimulation affects cravings and brain activity in people who use methamphetamine. UCSF is also running a pilot study of TMS for adolescents with OCD who have had limited improvement with standard treatments.
+
+### Additional active studies
+
+UC Berkeley is recruiting 30 subjects with MDD for a study using multimodal imaging (fMRI and EEG) to identify biomarkers that predict TMS treatment response. UC San Diego is investigating the combined effectiveness of rTMS and telehealth-based therapy for managing mild traumatic brain injury (mTBI)-related headaches. Mass General (NCT03276793) continues to recruit for TMS studies across multiple indications.
 
 ## Major research institutions running TMS studies
 

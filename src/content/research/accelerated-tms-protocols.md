@@ -19,9 +19,11 @@ The research says you can. And the results may actually be better.
 
 ## The Stanford Neuromodulation Therapy (SNT) protocol
 
-### The SAINT trial
+### The SAINT trial (Cole et al., 2020)
 
-The study that changed the conversation about accelerated TMS was published in the American Journal of Psychiatry in 2020 by Nolan Williams and colleagues at Stanford University. The Stanford Accelerated Intelligent Neuromodulation Therapy (SAINT) trial — later renamed Stanford Neuromodulation Therapy (SNT) — tested an intensive protocol that was radically different from anything tried before.
+**Citation:** Cole EJ, Stimpson KH, Bentzley BS, et al. "Stanford Accelerated Intelligent Neuromodulation Therapy for Treatment-Resistant Depression." *American Journal of Psychiatry*. 2020;177(8):716-726.
+
+The study that changed the conversation about accelerated TMS. Nolan Williams and colleagues at Stanford University tested an intensive protocol that was radically different from anything tried before.
 
 The protocol delivered **10 sessions per day** of intermittent theta burst stimulation (iTBS), with 50-minute intervals between sessions, over **5 consecutive days** — a total of 50 sessions (1,800 pulses each) in one week. Each session lasted about 10 minutes including setup.
 
@@ -33,12 +35,16 @@ Two innovations made SAINT more than a "do more, faster" approach:
 
 ### The results
 
-The initial open-label SAINT data were remarkable: 90% response rate and 70% remission rate, with most people showing significant improvement by day three.
+The initial open-label SAINT data (22 participants) were remarkable: 90.5% response rate (defined as >50% reduction in depression scores) and 86.4% remission rate (19 of 22 participants). The mean time to treatment response was just 2.3 days — most people showed significant improvement by the third day, after approximately 23 sessions. At one-month follow-up, 70% of participants continued to show treatment response.
 
-The subsequent double-blind sham-controlled trial, published in 2022, confirmed the findings with more rigor. Among 29 participants with treatment-resistant depression randomized to active SNT or sham:
+### The double-blind confirmation (Cole et al., 2022)
 
-- **Active group remission rate:** 78.6%
-- **Sham group remission rate:** 15.4%
+**Citation:** Cole EJ, Phillips AL, Bentzley BS, et al. "Stanford Neuromodulation Therapy (SNT): A Double-Blind Randomized Controlled Trial." *American Journal of Psychiatry*. 2022;179(2):132-141.
+
+The subsequent double-blind sham-controlled trial confirmed the findings with more rigor. At the planned interim analysis, 32 participants had been enrolled; 29 who continued to meet inclusion criteria received either active (n=14) or sham (n=15) SNT.
+
+- **Active group:** 52.5% mean reduction in MADRS score at 4 weeks post-treatment
+- **Sham group:** 11.1% mean reduction in MADRS score
 
 These numbers are dramatically higher than any previous TMS trial. The effect size (Cohen's d = 1.65) was among the largest ever reported for any depression treatment.
 

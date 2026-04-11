@@ -78,7 +78,7 @@ export default function PortalClaimClinic({ userId, userEmail }: { userId: strin
           <h2 className="text-xl font-semibold text-gray-900 mb-2">Clinic Claimed!</h2>
           <p className="text-gray-500 mb-6">Your account has been linked to <strong>{selectedClinic?.name}</strong>. You can now manage your listing.</p>
           <a
-            href="/portal/dashboard"
+            href="/portal/dashboard/"
             className="inline-flex items-center px-6 py-3 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-all"
           >
             Go to Dashboard
@@ -100,7 +100,7 @@ export default function PortalClaimClinic({ userId, userEmail }: { userId: strin
           <h2 className="text-xl font-semibold text-gray-900 mb-2">Claim Submitted</h2>
           <p className="text-gray-500 mb-6">Your claim for <strong>{selectedClinic?.name}</strong> has been submitted for review. We'll verify your ownership and notify you by email.</p>
           <a
-            href="/portal/dashboard"
+            href="/portal/dashboard/"
             className="inline-flex items-center px-6 py-3 rounded-xl text-sm font-semibold text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition-all"
           >
             Back to Dashboard
@@ -113,7 +113,7 @@ export default function PortalClaimClinic({ userId, userEmail }: { userId: strin
   return (
     <div className="max-w-2xl mx-auto">
       <div className="mb-6">
-        <a href="/portal/dashboard" className="text-sm text-emerald-600 hover:text-emerald-700 font-medium mb-2 inline-block">
+        <a href="/portal/dashboard/" className="text-sm text-emerald-600 hover:text-emerald-700 font-medium mb-2 inline-block">
           &larr; Back to Dashboard
         </a>
         <h1 className="text-2xl font-semibold text-gray-900">Claim Your Clinic</h1>

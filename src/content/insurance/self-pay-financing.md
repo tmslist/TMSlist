@@ -2,6 +2,8 @@
 title: "Paying for TMS Without Insurance: Options and Financing"
 description: "No insurance coverage for TMS? Explore cash pricing, payment plans, medical credit cards, HSA/FSA options, and clinical trials to make TMS therapy affordable."
 image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop"
+coversTms: false
+priorAuthRequired: false
 typicalCost: "$6,000-$12,000"
 faqs:
   - question: "How much does TMS cost without insurance?"
