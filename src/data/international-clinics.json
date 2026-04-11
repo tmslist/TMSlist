@@ -195,7 +195,7 @@
     "email": "info@mmhg.com.au",
     "website": "https://www.mmhg.com.au/",
     "logo_url": "https://www.mmhg.com.au/hubfs/Monarch%20favicon.png",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=mmhg.com.au&sz=256",
     "machines": [
       "BrainsWay Deep TMS",
       "MagVenture TMS"
@@ -255,7 +255,7 @@
     "email": "info@mmhg.com.au",
     "website": "https://www.mmhg.com.au/locations/melbourne",
     "logo_url": "https://www.mmhg.com.au/hubfs/Monarch%20favicon.png",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=mmhg.com.au&sz=256",
     "machines": [
       "BrainsWay Deep TMS",
       "MagVenture TMS"
@@ -532,7 +532,7 @@
     "email": "info@neuraliatms.com.au",
     "website": "https://www.neuraliatms.com.au/",
     "logo_url": "https://www.neuraliatms.com.au/wp-content/uploads/2023/02/neuralia-tms-colour-wide.svg",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=neuraliatms.com.au&sz=256",
     "machines": [
       "TMS Therapy System"
     ],
@@ -589,7 +589,7 @@
     "email": "tms@modalis.com.au",
     "website": "https://www.modalis.com.au/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=modalis.com.au&sz=256",
     "machines": [
       "MRI-Guided TMS"
     ],
@@ -750,7 +750,7 @@
     "email": "admin@advanceaotearoa.com",
     "website": "https://advanceaotearoa.com/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=advanceaotearoa.com&sz=256",
     "machines": [
       "rTMS",
       "iTBS (Intermittent Theta Burst Stimulation)",
@@ -856,7 +856,7 @@
     "email": "info@tms.net.nz",
     "website": "https://tms.net.nz/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=tms.net.nz&sz=256",
     "machines": [
       "TMS Therapy System"
     ],
@@ -936,7 +936,7 @@
     "phone": "+55 11 3255-7537",
     "website": "https://tmsbrasil.com.br/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=tmsbrasil.com.br&sz=256",
     "machines": [
       "Repetitive TMS (rTMS)"
     ],
@@ -1192,7 +1192,7 @@
     "phone": null,
     "website": "https://clinicapacifico.com.br/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=clinicapacifico.com.br&sz=256",
     "machines": [
       "Repetitive TMS (rTMS)"
     ],
@@ -1330,7 +1330,7 @@
     "phone": "+55 11 2151-1233",
     "website": "https://www.einstein.br/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=einstein.br&sz=256",
     "machines": [
       "TMS (Transcranial Magnetic Stimulation)"
     ],
@@ -1376,7 +1376,7 @@
     "phone": "+52 55 4330 4343",
     "website": "https://romepsiquiatria.com/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=romepsiquiatria.com&sz=256",
     "machines": [
       "Repetitive TMS (rTMS)"
     ],
@@ -1649,7 +1649,7 @@
     "phone": null,
     "website": "https://bscenter.com.mx/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=bscenter.com.mx&sz=256",
     "machines": [
       "Low-Intensity rTMS (LI-rTMS)",
       "PEMF (Pulsed Electromagnetic Fields)"
@@ -1739,7 +1739,7 @@
     "phone": null,
     "website": "https://medisync.center/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=medisync.center&sz=256",
     "machines": [
       "Repetitive TMS (rTMS)"
     ],
@@ -1775,7 +1775,7 @@
     "phone": "+1 310 895 7122",
     "website": "https://brainstimcenters.com/location/mexico/",
     "logo_url": "https://brainstimcenters.com/wp-content/uploads/2025/01/logo-b.png",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=brainstimcenters.com&sz=256",
     "machines": [
       "MeRT (Magnetic e-Resonance Therapy)",
       "Nextstim Navigated TMS"
@@ -1860,7 +1860,7 @@
     "phone": "+1 416-535-8501 ext. 30201",
     "website": "https://www.camh.ca/en/science-and-research/institutes-and-centres/temerty-centre-for-therapeutic-brain-intervention",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=camh.ca&sz=256",
     "machines": [
       "MagVenture",
       "BrainsWay Deep TMS"
@@ -1957,7 +1957,7 @@
     "phone": "+1 604-416-0115",
     "website": "https://brainstim.ca",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=brainstim.ca&sz=256",
     "machines": [
       "Deep TMS"
     ],
@@ -2003,7 +2003,7 @@
     "phone": "+1 604-359-9661",
     "website": "https://fieldtriphealth.ca/rtms/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=fieldtriphealth.ca&sz=256",
     "machines": [
       "rTMS Device"
     ],
@@ -2203,7 +2203,7 @@
     "phone": "+1 902-466-2677",
     "website": "https://ansr.ca",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=ansr.ca&sz=256",
     "machines": [
       "rTMS Device"
     ],
@@ -2328,7 +2328,7 @@
     "phone": null,
     "website": "https://www.brainwaveclinic.ca",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=brainwaveclinic.ca&sz=256",
     "machines": [
       "rTMS Device"
     ],
@@ -2373,7 +2373,7 @@
     "phone": "+49 30 450517196",
     "website": "https://psychiatrie-psychotherapie.charite.de/behandlungsangebot/ambulanzen/zentrum_fuer_translationale_neuromodulation",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=psychiatrie-psychotherapie.charite.de&sz=256",
     "machines": [
       "rTMS Device",
       "Neurofeedback"
@@ -2510,7 +2510,7 @@
     "phone": "+49 89 4400-53358",
     "website": "https://www.lmu-klinikum.de/psychiatrie-und-psychotherapie/fur-patienten/ambulanzen/zentrum-fur-neurostimulation/1cd11fcfdff07bfd",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=lmu-klinikum.de&sz=256",
     "machines": [
       "TMS",
       "tDCS"
@@ -2641,7 +2641,7 @@
     "phone": "+49 6221 56 68 07",
     "website": "https://www.klinikum.uni-heidelberg.de/verfahren/transkranielle-magnetstimulation-tms-213950",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=klinikum.uni-heidelberg.de&sz=256",
     "machines": [
       "rTMS Device"
     ],
@@ -2751,7 +2751,7 @@
     "phone": "+49 40 7410 53210",
     "website": "https://www.uke.de/english/departments-institutes/departments/psychiatry-and-psychotherapy/index.html",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=uke.de&sz=256",
     "machines": [
       "TMS Device",
       "ECT"
@@ -2851,7 +2851,7 @@
     "phone": "+33 1 42 16 00 00",
     "website": "https://pitiesalpetriere.aphp.fr/psychiatrie-adulte/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=pitiesalpetriere.aphp.fr&sz=256",
     "machines": [
       "Repetitive TMS (rTMS)",
       "Deep Brain Stimulation evaluation"
@@ -2908,7 +2908,7 @@
     "phone": "+33 1 39 14 70 00",
     "website": "https://www.th-roussel.fr/les-soins/nos-pratiques-novatrices/stimulation-magnetique-transcranienne/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=th-roussel.fr&sz=256",
     "machines": [
       "Repetitive TMS (rTMS)"
     ],
@@ -2981,7 +2981,7 @@
     "phone": "+33 4 72 44 88 00",
     "website": "https://clinique-du-parc.ramsaysante.fr/vous-%C3%AAtes-patient-pourquoi-choisir-notre-%C3%A9tablissement/approche-cognitivo-comportementale-et-lien-20",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=clinique-du-parc.ramsaysante.fr&sz=256",
     "machines": [
       "Repetitive TMS (rTMS)"
     ],
@@ -3017,7 +3017,7 @@
     "phone": null,
     "website": "https://www.rtmsmarseille.com/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=rtmsmarseille.com&sz=256",
     "machines": [
       "Repetitive TMS (rTMS)"
     ],
@@ -3162,7 +3162,7 @@
     "phone": null,
     "website": "https://clinique-belle-allee.ramsaysante.fr/pr%C3%A9sentation-%C3%A9tablissement/la-stimulation-magn%C3%A9tique-transcr%C3%A2nienne-r-tms-dans-la-d%C3%A9pression",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=clinique-belle-allee.ramsaysante.fr&sz=256",
     "machines": [
       "Repetitive TMS (rTMS)"
     ],
@@ -3545,7 +3545,7 @@
     "phone": "+34 93 609 38 85",
     "website": "https://newline.com.es/",
     "logo_url": "https://newline.com.es/wp-content/uploads/2019/04/NEWLINE_LOGO_transp-1.png",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=newline.com.es&sz=256",
     "machines": [
       "Repetitive Transcranial Magnetic Stimulation (EMTr)"
     ],
@@ -3636,7 +3636,7 @@
     "phone": "+34 963 40 09 00",
     "website": "https://www.ascires.com/hospital/en/services/transcranial-magnetic-stimulation-tms-session/",
     "logo_url": "https://www.ascires.com/hospital/wp-content/uploads/2024/10/Ascires-logo.svg",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=ascires.com&sz=256",
     "machines": [
       "Transcranial Magnetic Stimulation (TMS)"
     ],
@@ -3973,7 +3973,7 @@
     "phone": "0345 222 5678",
     "website": "https://www.smarttms.co.uk/clinics/manchester/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=smarttms.co.uk&sz=256",
     "machines": [
       "MagVenture MagPro"
     ],
@@ -4036,7 +4036,7 @@
     "phone": "0345 222 5678",
     "website": "https://www.smarttms.co.uk/clinics/edinburgh/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=smarttms.co.uk&sz=256",
     "machines": [
       "MagVenture MagPro"
     ],
@@ -4098,7 +4098,7 @@
     "phone": "0345 222 5678",
     "website": "https://www.smarttms.co.uk/clinics/bristol/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=smarttms.co.uk&sz=256",
     "machines": [
       "MagVenture MagPro"
     ],
@@ -4160,7 +4160,7 @@
     "phone": "0345 222 5678",
     "website": "https://www.smarttms.co.uk/clinics/southampton/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=smarttms.co.uk&sz=256",
     "machines": [
       "MagVenture MagPro"
     ],
@@ -4301,7 +4301,7 @@
     "phone": "020 3887 6126",
     "website": "https://londontmscentre.com/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=londontmscentre.com&sz=256",
     "machines": [
       "TMS Device (high-performance clinical system)"
     ],
@@ -4384,7 +4384,7 @@
     "phone": "020 7079 0555",
     "website": "https://www.priorygroup.com/locations/priory-wellbeing-centre-harley-street",
     "logo_url": "https://www.priorygroup.com/media/cwbh25ff/priory-logo.webp",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=priorygroup.com&sz=256",
     "machines": [
       "rTMS System"
     ],
@@ -4468,7 +4468,7 @@
     "phone": "0161 716 3083",
     "website": "https://www.penninecaretms.co.uk/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=penninecaretms.co.uk&sz=256",
     "machines": [
       "TMS System"
     ],
@@ -4581,7 +4581,7 @@
     "phone": "0345 222 5678",
     "website": "https://www.smarttms.co.uk/clinics/northampton/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=smarttms.co.uk&sz=256",
     "machines": [
       "MagVenture MagPro"
     ],
@@ -4785,7 +4785,7 @@
     "phone": "+353 1 277 1400",
     "website": "https://www.stjohnofgodhospital.ie/services/outpatient-services/repetitive-transcranial-magnetic-stimulation",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=stjohnofgodhospital.ie&sz=256",
     "machines": [
       "rTMS System"
     ],
@@ -4892,7 +4892,7 @@
     "phone": "+972-3-6974444",
     "website": "https://www.tasmc.org.il/en/unit-index-page/psychiatry/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=tasmc.org.il&sz=256",
     "machines": [
       "BrainsWay Deep TMS System"
     ],
@@ -4933,7 +4933,7 @@
     "phone": "+972-9-7478555",
     "website": "https://www.shalvataptsd.com/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=shalvataptsd.com&sz=256",
     "machines": [
       "BrainsWay Deep TMS System",
       "TMS Electromagnetic Induction System"
@@ -4972,7 +4972,7 @@
     "phone": "+972-8-9258258",
     "website": "https://en.israel-clinics.guru/clinics/beer_yaakov_ness_ziona_mental_health_center/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=en.israel-clinics.guru&sz=256",
     "machines": [
       "BrainsWay Deep TMS H1-Coil System"
     ],
@@ -5054,7 +5054,7 @@
     "phone": "+972-50-6766048",
     "website": "https://en.israel-clinics.guru/clinics/geha_mental_health_center/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=en.israel-clinics.guru&sz=256",
     "machines": [
       "BrainsWay Deep TMS System"
     ],
@@ -5133,7 +5133,7 @@
     "phone": "+972-3-5465488",
     "website": "https://en.israel-clinics.guru/clinics/_matzpen_mental_health_center/",
     "logo_url": "https://matzpen.org/wp-content/uploads/2019/08/logo-Heb_light-512x512.jpg",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=en.israel-clinics.guru&sz=256",
     "machines": [
       "TMS System"
     ],
@@ -5175,7 +5175,7 @@
     "phone": "+972-3-5302222",
     "website": "https://eng.sheba.co.il/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=eng.sheba.co.il&sz=256",
     "machines": [
       "TMS System",
       "rTMS Equipment"
@@ -5216,7 +5216,7 @@
     "phone": "+972-2-6777111",
     "website": "https://www.hadassah.org.il/en/hadassahuniversityhospitaleinkerem/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=hadassah.org.il&sz=256",
     "machines": [
       "BrainsWay Deep TMS System"
     ],
@@ -5256,7 +5256,7 @@
     "phone": "+46-8-123-836-22",
     "website": "https://www.psykiatrisydvast.se/vard-hos-oss/oppenvard/enheten-for-hjarnstimulering/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=psykiatrisydvast.se&sz=256",
     "machines": [
       "rTMS System"
     ],
@@ -5291,7 +5291,7 @@
     "phone": "+46-8-123-484-00",
     "website": "https://www.norrastockholmspsykiatri.se/vard-hos-oss/mottagningar/mottagning-for-hjarnstimulering-stadshagen/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=norrastockholmspsykiatri.se&sz=256",
     "machines": [
       "rTMS System"
     ],
@@ -5326,7 +5326,7 @@
     "phone": null,
     "website": "https://www.psykiatrinordvast.se/vard-hos-oss/mottagningar/enheten-for-hjarnstimulering-psykiatri-nordvast/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=psykiatrinordvast.se&sz=256",
     "machines": [
       "rTMS System"
     ],
@@ -5605,7 +5605,7 @@
     "phone": "+27-21-794-1321",
     "website": "https://www.rewire.co.za/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=rewire.co.za&sz=256",
     "machines": [
       "TMS System (1Hz, 10Hz, Theta Burst / Modified SAINT protocols)"
     ],
@@ -5653,7 +5653,7 @@
     "phone": "+27-21-794-1321",
     "website": "https://www.rewire.co.za/find-a-clinic/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=rewire.co.za&sz=256",
     "machines": [
       "TMS System (1Hz, 10Hz, Theta Burst / Modified SAINT protocols)"
     ],
@@ -5701,7 +5701,7 @@
     "phone": null,
     "website": "https://www.rewire.co.za/find-a-clinic/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=rewire.co.za&sz=256",
     "machines": [
       "TMS System (1Hz, 10Hz, Theta Burst / Modified SAINT protocols)"
     ],
@@ -5930,7 +5930,7 @@
     "phone": null,
     "website": "https://mindfultms.in/clinicLocation/New-Delhi",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=mindfultms.in&sz=256",
     "machines": [
       "rTMS"
     ],
@@ -6013,7 +6013,7 @@
     "email": "sarkar.manish@gmail.com",
     "website": "https://www.drmanishsarkar.com/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://www.drmanishsarkar.com/wp-content/uploads/2021/11/dms1.jpg",
     "machines": [
       "rTMS"
     ],
@@ -6036,7 +6036,7 @@
         "qualifications": "MBBS, MD (Psychiatry) - NIMHANS",
         "bio": "Dr. Manish Sarkar is an elite alumnus of NIMHANS, Bangalore. With around 19 years of experience, he specializes in administering rTMS therapy and pharmacological management of all types of psychiatric disorders. He is an expert in substance dependence disorders, adult psychiatric disorders, and child and geriatric psychiatric care.",
         "university": "NIMHANS, Bangalore",
-        "photo_url": null
+        "photo_url": "https://www.drmanishsarkar.com/wp-content/uploads/2024/12/manish.webp"
       }
     ],
     "provider_type": "tms_center"
@@ -6122,7 +6122,7 @@
     "phone": null,
     "website": "https://www.transmagclinic.com/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=transmagclinic.com&sz=256",
     "machines": [
       "rTMS"
     ],
@@ -6167,7 +6167,7 @@
     "email": "ms@nimhans.ac.in",
     "website": "https://www.nimhans.ac.in/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=nimhans.ac.in&sz=256",
     "machines": [
       "rTMS"
     ],
@@ -6271,7 +6271,7 @@
     "phone": "+91 7059160507",
     "website": "https://www.rtmskolkata.in/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=rtmskolkata.in&sz=256",
     "machines": [
       "rTMS (US FDA Approved)"
     ],
@@ -6419,7 +6419,7 @@
     "email": "rTMS@ktph.com.sg",
     "website": "https://www.ktph.com.sg/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=ktph.com.sg&sz=256",
     "machines": [
       "rTMS"
     ],
@@ -6539,7 +6539,7 @@
     "phone": null,
     "website": "https://novenaspecialistcenter.com/clinics/private-space-medical/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=novenaspecialistcenter.com&sz=256",
     "machines": [
       "rTMS"
     ],
@@ -6684,7 +6684,7 @@
     "phone": null,
     "website": "https://www.americanwellnesscenter.ae/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=americanwellnesscenter.ae&sz=256",
     "machines": [
       "TMS"
     ],
@@ -6720,7 +6720,7 @@
     "phone": "800 444 444",
     "website": "https://emirateshospitals.ae/services/psychiatry/rtms-therapy/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=emirateshospitals.ae&sz=256",
     "machines": [
       "rTMS"
     ],
@@ -6824,7 +6824,7 @@
     "phone_tollfree": "800 1999",
     "website": "https://www.mediclinic.ae/en/deira/services/MDEI-TMS-Therapy.html",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=mediclinic.ae&sz=256",
     "machines": [
       "TMS"
     ],
@@ -7013,7 +7013,7 @@
     "phone": "+39 06 51501",
     "website": "https://www.hsantalucia.it/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=hsantalucia.it&sz=256",
     "machines": [
       "TMS systems",
       "tDCS stimulators",
@@ -7065,7 +7065,7 @@
     "phone": "+39 06 4547 3843",
     "website": "https://braininstitute.it/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=braininstitute.it&sz=256",
     "machines": [
       "TMS systems"
     ],
@@ -7110,7 +7110,7 @@
     "phone": "+39 334 296 8195",
     "website": "https://www.brainstimulation.it/",
     "logo_url": "https://www.brainstimulation.it/wp-content/uploads/2021/04/brainstimulation-167.jpg",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=brainstimulation.it&sz=256",
     "machines": [
       "rTMS systems",
       "tDCS stimulators",
@@ -7169,7 +7169,7 @@
     "phone": "+39 342 635 1530",
     "website": "https://www.brainstimulation.it/mood-center-brescia/",
     "logo_url": "https://www.brainstimulation.it/wp-content/uploads/2021/04/brainstimulation-167.jpg",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=brainstimulation.it&sz=256",
     "machines": [
       "rTMS systems",
       "tDCS stimulators",
@@ -7396,7 +7396,7 @@
     "phone": "+39 049 999 7511",
     "website": "https://www.parcotigli.it/tms",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=parcotigli.it&sz=256",
     "machines": [
       "TMS systems (CE-marked)"
     ],
@@ -7434,7 +7434,7 @@
     "phone": null,
     "website": "https://brainclinics.com/",
     "logo_url": "https://brainclinics.com/images/logo/logo-brainclinics.png",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=brainclinics.com&sz=256",
     "machines": [
       "rTMS systems",
       "EEG systems",
@@ -7483,7 +7483,7 @@
     "phone": "+31 20 421 0473",
     "website": "https://neurowave.nl/en/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=neurowave.nl&sz=256",
     "machines": [
       "rTMS systems"
     ],
@@ -7555,7 +7555,7 @@
     "phone": null,
     "website": "https://www.ggzingeest.nl/hoe-krijg-ik-hulp/soorten-hulp/neuromodulatie-rtms-ect/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=ggzingeest.nl&sz=256",
     "machines": [
       "rTMS systems",
       "ECT systems"
@@ -7635,7 +7635,7 @@
     "phone": "+31 6 2885 3668",
     "website": "https://www.tmscentereurope.com/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=tmscentereurope.com&sz=256",
     "machines": [
       "rTMS systems"
     ],
@@ -7672,7 +7672,7 @@
     "phone": "+31 70 222 8016",
     "website": "https://www.neurocaregroup.com/nl/amsterdam",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=neurocaregroup.com&sz=256",
     "machines": [
       "rTMS systems",
       "Neurofeedback systems",
@@ -7712,7 +7712,7 @@
     "phone": "+31 70 222 8016",
     "website": "https://www.neurocaregroup.com/nl/den-haag",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=neurocaregroup.com&sz=256",
     "machines": [
       "rTMS systems",
       "Neurofeedback systems",
@@ -7762,7 +7762,7 @@
     "phone": "+31 50 527 7550",
     "website": "https://www.neurocaregroup.com/nl/groningen",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=neurocaregroup.com&sz=256",
     "machines": [
       "rTMS systems",
       "Neurofeedback systems",
@@ -7801,7 +7801,7 @@
     "phone": "+31 50 361 8880",
     "website": "https://www.umcg.nl/-/rtms",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=umcg.nl&sz=256",
     "machines": [
       "rTMS systems"
     ],
@@ -7835,7 +7835,7 @@
     "phone": "+31 24 750 3507",
     "website": "https://www.neurocaregroup.com/nl/nijmegen",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=neurocaregroup.com&sz=256",
     "machines": [
       "rTMS systems",
       "Neurofeedback systems",
@@ -7876,7 +7876,7 @@
     "phone": "+81-44-322-9381",
     "website": "https://www.tokyo-yokohama-tms-cl.jp/minato-tokyo/",
     "logo_url": "https://www.tokyo-yokohama-tms-cl.jp/wp-content/themes/twentytwentyone-child/asset/img/logo.svg",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=tokyo-yokohama-tms-cl.jp&sz=256",
     "machines": [
       "NeuroStar TMS System"
     ],
@@ -8020,7 +8020,7 @@
     "phone": "+81-3-5295-7555",
     "website": "https://besli.jp/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=besli.jp&sz=256",
     "machines": [
       "TMS Treatment System"
     ],
@@ -8255,7 +8255,7 @@
     "phone": null,
     "website": "https://osaka.wako-psy-clinic.com/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=osaka.wako-psy-clinic.com&sz=256",
     "machines": [
       "MagPro TMS System"
     ],
@@ -8301,7 +8301,7 @@
     "phone": null,
     "website": "https://www.seoulpsychiatryclinic.com/",
     "logo_url": "https://seoulpsychiatry.com/wp-content/uploads/2025/06/cropped-화면-캡처-2025-06-15-001735.png",
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=seoulpsychiatryclinic.com&sz=256",
     "machines": [
       "BrainsWay Deep TMS System"
     ],
@@ -8349,7 +8349,7 @@
     "phone": "+82-2-2019-3600",
     "website": "https://gs.severance.healthcare/gs-en/department/department/psychiatry.do",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=gs.severance.healthcare&sz=256",
     "machines": [
       "rTMS System",
       "Neurofeedback System",
@@ -8502,7 +8502,7 @@
     "phone": "+82-2-2216-7330",
     "website": "https://braintreatmentcenter.com/location/korea/seoul-hoegi",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=braintreatmentcenter.com&sz=256",
     "machines": [
       "MeRT (Magnetic e-Resonance Therapy) System",
       "qEEG Brain Mapping System"
@@ -8552,7 +8552,7 @@
     "phone": "+82-31-787-2471",
     "website": "https://www.snubh.org/dh/main/index.do?DP_CD=NP&MENU_ID=008041",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://s2.googleusercontent.com/s2/favicons?domain=snubh.org&sz=256",
     "machines": [
       "rTMS System"
     ],
@@ -8600,7 +8600,7 @@
     "phone": "+82-2-3010-3114",
     "website": "https://eng.amc.seoul.kr/",
     "logo_url": null,
-    "hero_image_url": null,
+    "hero_image_url": "https://eng.amc.seoul.kr/gb/images/lang/common/linkImg.png",
     "machines": [
       "rTMS Rehabilitation System"
     ],

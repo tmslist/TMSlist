@@ -17,18 +17,9 @@ const args = process.argv.slice(2);
 const targetFile = args[0] || 'clinics.json';
 const CLINICS_PATH = path.join(process.cwd(), 'src', 'data', targetFile);
 const APIFY_API_TOKEN = process.env.APIFY_API_TOKEN;
-if (!APIFY_API_TOKEN) {
-    console.error('APIFY_API_TOKEN env var is required');
-    process.exit(1);
-}
 
 async function main() {
     console.log('=== Fetching Real Doctor Images via Apify ===\n');
-
-    if (!APIFY_API_TOKEN) {
-        console.error('ERROR: APIFY_API_TOKEN environment variable is required.');
-        process.exit(1);
-    }
 
     const rawData = fs.readFileSync(CLINICS_PATH, 'utf-8');
     const clinics = JSON.parse(rawData);

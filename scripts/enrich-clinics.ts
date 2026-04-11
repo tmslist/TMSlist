@@ -529,7 +529,7 @@ async function fetchClinicImage(clinic: Clinic): Promise<string | null> {
       redirect: 'follow',
     });
 
-    if (!response.ok) return getFallbackLogo(websiteUrl);
+    if (!response.ok) return null;
 
     const html = await response.text();
 
@@ -559,9 +559,9 @@ async function fetchClinicImage(clinic: Clinic): Promise<string | null> {
     });
     if (logoImg?.[1]) return makeAbsolute(logoImg[1], websiteUrl);
 
-    return getFallbackLogo(websiteUrl);
+    return null;
   } catch (e) {
-    return getFallbackLogo(websiteUrl);
+    return null;
   }
 }
 

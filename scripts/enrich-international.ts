@@ -99,7 +99,7 @@ async function fetchClinicHeroImage(websiteUrl: string): Promise<string | null> 
 
   const cleanUrl = websiteUrl.startsWith('http') ? websiteUrl : `https://${websiteUrl}`;
   const html = await fetchPage(cleanUrl);
-  if (!html) return getFallbackLogo(cleanUrl);
+  if (!html) return null;
 
   // 1. OG image
   const ogMatch = html.match(/<meta[^>]+(?:property|name)=["']og:image["'][^>]+content=["']([^"']+)["']/i)
@@ -120,7 +120,7 @@ async function fetchClinicHeroImage(websiteUrl: string): Promise<string | null> 
   });
   if (heroImg?.[1]) return makeAbsolute(heroImg[1], cleanUrl);
 
-  return getFallbackLogo(cleanUrl);
+  return null;
 }
 
 // ─── Doctor Photo Fetching ────────────────────────────────────────────────
