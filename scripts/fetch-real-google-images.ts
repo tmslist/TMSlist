@@ -13,11 +13,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ApifyClient } from 'apify-client';
 
-const CLINICS_PATH = path.join(process.cwd(), 'src', 'data', 'clinics.json');
+const args = process.argv.slice(2);
+const targetFile = args[0] || 'clinics.json';
+const CLINICS_PATH = path.join(process.cwd(), 'src', 'data', targetFile);
 const APIFY_API_TOKEN = process.env.APIFY_API_TOKEN;
 if (!APIFY_API_TOKEN) {
-  console.error('APIFY_API_TOKEN env var is required');
-  process.exit(1);
+    console.error('APIFY_API_TOKEN env var is required');
+    process.exit(1);
 }
 
 async function main() {
@@ -31,8 +33,8 @@ async function main() {
     const rawData = fs.readFileSync(CLINICS_PATH, 'utf-8');
     const clinics = JSON.parse(rawData);
 
-    // Phase 1: Collect all doctors that need images
-    const doctorsToUpdate: { clinicIdx: number; docIdx: number; query: string }[] = [];
+    // Phase 1: Collect all doctors that need images (handles both image_url and photo_url)
+    const doctorsToUpdate: { clinicIdx: number; docIdx: number; query: string; imageKey: string }[] = [];
     const uniqueQueries = new Set<string>();
 
     for (let i = 0; i < clinics.length; i++) {
@@ -41,15 +43,16 @@ async function main() {
 
         for (let j = 0; j < clinic.doctors_data.length; j++) {
             const doctor = clinic.doctors_data[j];
+            const imageKey = doctor.photo_url !== undefined ? 'photo_url' : 'image_url';
 
             // Strip fake placeholders so we can fetch the real ones
-            if (doctor.image_url && (doctor.image_url.includes('unsplash.com') || doctor.image_url.includes('ui-avatars.com') || doctor.image_url.includes('placehold.co') || doctor.image_url.includes('api.dicebear.com'))) {
-                doctor.image_url = null;
+            if (doctor[imageKey] && (doctor[imageKey].includes('unsplash.com') || doctor[imageKey].includes('ui-avatars.com') || doctor[imageKey].includes('placehold.co') || doctor[imageKey].includes('api.dicebear.com'))) {
+                doctor[imageKey] = null;
             }
 
-            if (!doctor.image_url) {
+            if (!doctor[imageKey]) {
                 const query = `"${doctor.name}" psychiatrist OR doctor "${clinic.name}"`;
-                doctorsToUpdate.push({ clinicIdx: i, docIdx: j, query });
+                doctorsToUpdate.push({ clinicIdx: i, docIdx: j, query, imageKey });
                 uniqueQueries.add(query);
             }
         }
@@ -95,7 +98,7 @@ async function main() {
     for (const target of doctorsToUpdate) {
         const realImageUrl = imageUrlMap.get(target.query);
         if (realImageUrl) {
-            clinics[target.clinicIdx].doctors_data[target.docIdx].image_url = realImageUrl;
+            clinics[target.clinicIdx].doctors_data[target.docIdx][target.imageKey] = realImageUrl;
             console.log(`✅ Found: ${target.query}`);
             updatedCount++;
         } else {
