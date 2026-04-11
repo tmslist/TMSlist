@@ -108,7 +108,7 @@ export const forumPostSchema = z.object({
 export const forumCommentSchema = z.object({
   postId: z.string().uuid(),
   parentId: z.string().uuid().optional(),
-  body: z.string().min(1).max(5000),
+  body: z.string().min(3).max(5000),
 });
 
 export const forumVoteSchema = z.object({
@@ -126,6 +126,8 @@ export const forumReportSchema = z.object({
 export const forumPostsQuerySchema = z.object({
   categoryId: z.string().uuid().optional(),
   sort: z.enum(['hot', 'new', 'top']).default('hot'),
+  topPeriod: z.enum(['week', 'month', 'all']).default('all'),
+  search: z.string().max(200).optional(),
   limit: z.coerce.number().int().min(1).max(50).default(20),
   offset: z.coerce.number().int().min(0).default(0),
 });

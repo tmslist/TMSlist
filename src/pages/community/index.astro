@@ -1,0 +1,120 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import CategoryIcon from "../../components/CategoryIcon.astro";
+import CommunityPostList from "../../components/react/CommunityPostList";
+import { getForumCategories, getForumPosts } from "../../db/forumQueries";
+import { getSessionFromRequest } from "../../utils/auth";
+
+const session = getSessionFromRequest(Astro.request);
+const categories = await getForumCategories();
+const posts = await getForumPosts({ sort: 'hot', limit: 20 });
+
+const CATEGORY_COLORS: Record<string, string> = {
+  violet: 'from-violet-500 to-violet-600',
+  emerald: 'from-emerald-500 to-emerald-600',
+  amber: 'from-amber-500 to-amber-600',
+  rose: 'from-rose-500 to-rose-600',
+  yellow: 'from-yellow-500 to-yellow-600',
+  blue: 'from-blue-500 to-blue-600',
+  teal: 'from-teal-500 to-teal-600',
+  indigo: 'from-indigo-500 to-indigo-600',
+};
+
+const CATEGORY_BG: Record<string, string> = {
+  violet: 'bg-violet-50 border-violet-200 hover:border-violet-300',
+  emerald: 'bg-emerald-50 border-emerald-200 hover:border-emerald-300',
+  amber: 'bg-amber-50 border-amber-200 hover:border-amber-300',
+  rose: 'bg-rose-50 border-rose-200 hover:border-rose-300',
+  yellow: 'bg-yellow-50 border-yellow-200 hover:border-yellow-300',
+  blue: 'bg-blue-50 border-blue-200 hover:border-blue-300',
+  teal: 'bg-teal-50 border-teal-200 hover:border-teal-300',
+  indigo: 'bg-indigo-50 border-indigo-200 hover:border-indigo-300',
+};
+---
+
+<Layout
+  title="TMS Community Forum | Share Experiences & Ask Specialists"
+  description="Join the TMS therapy community. Share treatment experiences, ask verified specialists, discuss insurance, and connect with others on their TMS journey."
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Community", url: "/community" },
+  ]}
+>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Hero -->
+    <div class="bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 text-white">
+      <div class="container mx-auto px-4 lg:px-8 py-12 lg:py-16">
+        <div class="max-w-3xl">
+          <h1 class="text-3xl lg:text-4xl font-bold mb-3">TMS Community</h1>
+          <p class="text-lg text-violet-100 mb-6">Share experiences, ask specialists, and connect with others on their TMS therapy journey.</p>
+          <div class="flex items-center gap-3">
+            {session ? (
+              <a
+                href="/community/new"
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-violet-700 font-semibold rounded-lg hover:bg-violet-50 transition-colors text-sm"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width={2} viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                New Post
+              </a>
+            ) : (
+              <a
+                href="/community/login"
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-violet-700 font-semibold rounded-lg hover:bg-violet-50 transition-colors text-sm"
+              >
+                Join the Community
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 lg:px-8 py-8">
+      <!-- Categories grid -->
+      <section class="mb-10">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">Browse Topics</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {categories.map((cat) => {
+            const bgClass = CATEGORY_BG[cat.color || 'violet'] || CATEGORY_BG.violet;
+            return (
+              <a
+                href={`/community/${cat.slug}`}
+                class={`block p-4 rounded-xl border transition-all ${bgClass}`}
+              >
+                <div class="mb-2"><CategoryIcon icon={cat.icon} color={cat.color} /></div>
+                <h3 class="text-sm font-bold text-gray-900 mb-0.5">{cat.name}</h3>
+                <p class="text-xs text-gray-500 line-clamp-2">{cat.description}</p>
+                <p class="text-[11px] text-gray-400 mt-2 font-medium">{cat.postCount} posts</p>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+
+      <!-- Posts feed -->
+      <section>
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-bold text-gray-900">Recent Discussions</h2>
+          {session && (
+            <a
+              href="/community/new"
+              class="text-sm text-violet-600 hover:text-violet-700 font-semibold transition-colors"
+            >
+              + New Post
+            </a>
+          )}
+        </div>
+
+        <CommunityPostList
+          client:load
+          initialPosts={posts}
+          isAuthenticated={!!session}
+          showCategory={true}
+        />
+      </section>
+    </div>
+  </div>
+</Layout>

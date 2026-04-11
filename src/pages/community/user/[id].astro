@@ -1,0 +1,135 @@
+---
+export const prerender = false;
+import Layout from "../../../layouts/Layout.astro";
+import CommunityAuthorBadge from "../../../components/react/CommunityAuthorBadge";
+import { getUserForumProfile, getUserForumPosts, getUserForumComments } from "../../../db/forumQueries";
+
+const { id } = Astro.params;
+if (!id) return Astro.redirect("/community");
+
+const profile = await getUserForumProfile(id);
+if (!profile) return Astro.redirect("/community");
+
+const posts = await getUserForumPosts(id, 20, 0);
+const comments = await getUserForumComments(id, 20, 0);
+
+const memberSince = new Date(profile.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+const ROLE_LABELS: Record<string, string> = {
+  clinic_owner: 'Verified Specialist',
+  admin: 'TMS List Staff',
+  editor: 'TMS List Staff',
+  viewer: 'Community Member',
+};
+---
+
+<Layout
+  title={`${profile.doctor?.name || profile.name || 'Member'} | TMS Community`}
+  description={`Community profile for ${profile.doctor?.name || profile.name}`}
+  noindex={true}
+>
+  <div class="min-h-screen bg-gray-50">
+    <div class="container mx-auto px-4 lg:px-8 py-8 max-w-3xl">
+      <a href="/community" class="text-sm text-gray-400 hover:text-violet-600 transition-colors">&larr; Back to Community</a>
+
+      <!-- Profile card -->
+      <div class="bg-white rounded-xl border border-gray-200 p-6 mt-4 mb-8">
+        <div class="flex items-start gap-4">
+          {profile.doctor?.imageUrl ? (
+            <img src={profile.doctor.imageUrl} alt={profile.doctor.name} class="w-16 h-16 rounded-full object-cover ring-2 ring-emerald-300" />
+          ) : (
+            <div class={`w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold ${profile.role === 'clinic_owner' ? 'bg-emerald-500' : profile.role === 'admin' || profile.role === 'editor' ? 'bg-violet-500' : 'bg-gray-400'}`}>
+              {(profile.doctor?.name || profile.name || '?').charAt(0).toUpperCase()}
+            </div>
+          )}
+          <div class="flex-1">
+            <h1 class="text-xl font-bold text-gray-900">
+              {profile.doctor?.name || profile.name || 'Anonymous'}
+              {profile.doctor?.credential && <span class="text-gray-500 font-normal">, {profile.doctor.credential}</span>}
+            </h1>
+            <p class={`text-sm font-medium mt-0.5 ${profile.role === 'clinic_owner' ? 'text-emerald-600' : profile.role === 'admin' ? 'text-violet-600' : 'text-gray-500'}`}>
+              {ROLE_LABELS[profile.role] || 'Member'}
+            </p>
+            {profile.doctor?.bio && (
+              <p class="text-sm text-gray-600 mt-2 line-clamp-3">{profile.doctor.bio}</p>
+            )}
+            {profile.doctor?.specialties && profile.doctor.specialties.length > 0 && (
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                {profile.doctor.specialties.map((s: string) => (
+                  <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-medium rounded-full">{s}</span>
+                ))}
+              </div>
+            )}
+            <div class="flex items-center gap-4 mt-3 text-xs text-gray-400">
+              <span>{profile.postCount} posts</span>
+              <span>{profile.commentCount} comments</span>
+              <span>Member since {memberSince}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-1 mb-6 bg-white rounded-lg border border-gray-200 p-1 w-fit">
+        <button class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium bg-violet-100 text-violet-700" data-tab="posts">
+          Posts ({profile.postCount})
+        </button>
+        <button class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50" data-tab="comments">
+          Comments ({profile.commentCount})
+        </button>
+      </div>
+
+      <!-- Posts tab -->
+      <div id="tab-posts" class="space-y-3">
+        {posts.length === 0 && <p class="text-sm text-gray-400 py-6 text-center">No posts yet.</p>}
+        {posts.map((post) => (
+          <a href={`/community/${post.categorySlug}/${post.slug}`} class="block bg-white rounded-xl border border-gray-200 p-4 hover:border-violet-200 hover:shadow-sm transition-all">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-xs font-semibold text-violet-600">{post.categoryName}</span>
+              <span class="text-[11px] text-gray-400">{new Date(post.createdAt).toLocaleDateString()}</span>
+            </div>
+            <h3 class="text-sm font-bold text-gray-900 mb-1">{post.title}</h3>
+            <p class="text-xs text-gray-500 line-clamp-2">{post.body.slice(0, 200)}</p>
+            <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+              <span>{post.voteScore} votes</span>
+              <span>{post.commentCount} comments</span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Comments tab -->
+      <div id="tab-comments" class="space-y-3 hidden">
+        {comments.length === 0 && <p class="text-sm text-gray-400 py-6 text-center">No comments yet.</p>}
+        {comments.map((comment) => (
+          <a href={`/community/${comment.categorySlug}/${comment.postSlug}`} class="block bg-white rounded-xl border border-gray-200 p-4 hover:border-violet-200 hover:shadow-sm transition-all">
+            <p class="text-xs text-gray-400 mb-1.5">
+              Replied to <span class="font-semibold text-gray-600">{comment.postTitle}</span>
+            </p>
+            <p class="text-sm text-gray-700 line-clamp-3">{comment.body}</p>
+            <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+              <span>{comment.voteScore} votes</span>
+              <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.getAttribute('data-tab');
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('bg-violet-100', 'text-violet-700');
+        b.classList.add('text-gray-500');
+      });
+      btn.classList.add('bg-violet-100', 'text-violet-700');
+      btn.classList.remove('text-gray-500');
+      document.getElementById('tab-posts')?.classList.toggle('hidden', tab !== 'posts');
+      document.getElementById('tab-comments')?.classList.toggle('hidden', tab !== 'comments');
+    });
+  });
+</script>

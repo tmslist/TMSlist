@@ -1,0 +1,81 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import CategoryIcon from "../../components/CategoryIcon.astro";
+import CommunityPostList from "../../components/react/CommunityPostList";
+import { getForumCategoryBySlug, getForumPosts } from "../../db/forumQueries";
+import { getSessionFromRequest } from "../../utils/auth";
+
+const { category: categorySlug } = Astro.params;
+if (!categorySlug) return Astro.redirect("/community");
+
+const category = await getForumCategoryBySlug(categorySlug);
+if (!category) return Astro.redirect("/community");
+
+const session = getSessionFromRequest(Astro.request);
+const posts = await getForumPosts({ categoryId: category.id, sort: 'hot', limit: 20 });
+
+const CATEGORY_COLORS: Record<string, string> = {
+  violet: 'from-violet-600 to-violet-700',
+  emerald: 'from-emerald-600 to-emerald-700',
+  amber: 'from-amber-600 to-amber-700',
+  rose: 'from-rose-600 to-rose-700',
+  yellow: 'from-yellow-600 to-yellow-700',
+  blue: 'from-blue-600 to-blue-700',
+  teal: 'from-teal-600 to-teal-700',
+  indigo: 'from-indigo-600 to-indigo-700',
+};
+
+const gradientClass = CATEGORY_COLORS[category.color || 'violet'] || CATEGORY_COLORS.violet;
+---
+
+<Layout
+  title={`${category.name} | TMS Community`}
+  description={category.description || `Discuss ${category.name} in the TMS therapy community.`}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Community", url: "/community" },
+    { name: category.name, url: `/community/${category.slug}` },
+  ]}
+>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Category header -->
+    <div class={`bg-gradient-to-r ${gradientClass} text-white`}>
+      <div class="container mx-auto px-4 lg:px-8 py-10">
+        <div class="flex items-start justify-between">
+          <div>
+            <a href="/community" class="text-sm text-white/70 hover:text-white mb-2 inline-block transition-colors">&larr; All Topics</a>
+            <div class="flex items-center gap-3 mb-2">
+              <CategoryIcon icon={category.icon} color={category.color} size="lg" />
+              <h1 class="text-2xl lg:text-3xl font-bold">{category.name}</h1>
+            </div>
+            <p class="text-white/80 text-sm">{category.description}</p>
+            <p class="text-white/60 text-xs mt-2">{category.postCount} posts</p>
+          </div>
+          {session ? (
+            <a
+              href={`/community/new?category=${category.id}`}
+              class="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg text-sm font-semibold transition-colors"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width={2} viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              New Post
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </div>
+
+    <!-- Posts -->
+    <div class="container mx-auto px-4 lg:px-8 py-8">
+      <CommunityPostList
+        client:load
+        initialPosts={posts}
+        categoryId={category.id}
+        isAuthenticated={!!session}
+        showCategory={false}
+      />
+    </div>
+  </div>
+</Layout>

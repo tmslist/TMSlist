@@ -445,6 +445,17 @@ async function main() {
     if (imagesOnly) {
       console.log(`${progress} ${clinic.name} - ${clinic.doctors_data.length} doctors checked`);
     }
+
+    // Save periodically to avoid data loss during long runs
+    if (!dryRun && i > 0 && i % 25 === 0) {
+      const clinicMap = new Map(targetClinics.map(c => [(c as any).id || c.slug, c]));
+      for (let j = 0; j < clinics.length; j++) {
+        const key = (clinics[j] as any).id || clinics[j].slug;
+        const updated = clinicMap.get(key);
+        if (updated) clinics[j] = updated;
+      }
+      fs.writeFileSync(CLINICS_PATH, JSON.stringify(clinics, null, 2), 'utf-8');
+    }
   }
 
   if (!dryRun) {

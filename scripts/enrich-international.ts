@@ -73,13 +73,32 @@ function makeAbsolute(imageUrl: string, baseUrl: string): string {
   return `${baseUrl.replace(/\/$/, '')}/${imageUrl}`;
 }
 
+async function getFallbackLogo(websiteUrl: string): Promise<string | null> {
+  try {
+    const urlObj = new URL(websiteUrl);
+    const domain = urlObj.hostname.replace(/^www\./, '');
+
+    // Try Clearbit first for high-quality enterprise logos
+    const clearbitUrl = `https://logo.clearbit.com/${domain}`;
+    try {
+      const cbRes = await fetch(clearbitUrl, { method: 'HEAD', signal: AbortSignal.timeout(3000) });
+      if (cbRes.ok) return clearbitUrl;
+    } catch { }
+
+    // Fallback to Google's Favicon API which safely extracts the logo directly from the site
+    return `https://s2.googleusercontent.com/s2/favicons?domain=${domain}&sz=256`;
+  } catch {
+    return null;
+  }
+}
+
 // ─── Clinic Hero Image ────────────────────────────────────────────────────
 
 async function fetchClinicHeroImage(websiteUrl: string): Promise<string | null> {
   if (!websiteUrl || websiteUrl === '#') return null;
 
   const html = await fetchPage(websiteUrl);
-  if (!html) return null;
+  if (!html) return getFallbackLogo(websiteUrl);
 
   // 1. OG image
   const ogMatch = html.match(/<meta[^>]+(?:property|name)=["']og:image["'][^>]+content=["']([^"']+)["']/i)
@@ -100,7 +119,7 @@ async function fetchClinicHeroImage(websiteUrl: string): Promise<string | null> 
   });
   if (heroImg?.[1]) return makeAbsolute(heroImg[1], websiteUrl);
 
-  return null;
+  return getFallbackLogo(websiteUrl);
 }
 
 // ─── Doctor Photo Fetching ────────────────────────────────────────────────

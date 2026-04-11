@@ -15,8 +15,8 @@ export const GET: APIRoute = async ({ request, url }) => {
 
   try {
     const type = url.searchParams.get('type') || undefined;
-    const limit = parseInt(url.searchParams.get('limit') || '50');
-    const offset = parseInt(url.searchParams.get('offset') || '0');
+    const limit = Math.max(1, Math.min(parseInt(url.searchParams.get('limit') || '50'), 200));
+    const offset = Math.max(0, parseInt(url.searchParams.get('offset') || '0'));
 
     const [leadsList, stats] = await Promise.all([
       getLeads({ type, limit, offset }),

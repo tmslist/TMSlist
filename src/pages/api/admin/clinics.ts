@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { eq, desc, ilike, and, sql } from 'drizzle-orm';
+import { eq, desc, ilike, and, or, sql } from 'drizzle-orm';
 import { db } from '../../../db';
 import { clinics, auditLog } from '../../../db/schema';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth';
@@ -35,16 +35,19 @@ export const GET: APIRoute = async ({ request, url }) => {
 
     const search = url.searchParams.get('search') || '';
     const verified = url.searchParams.get('verified');
-    const limit = Math.min(parseInt(url.searchParams.get('limit') || '50'), 200);
-    const offset = parseInt(url.searchParams.get('offset') || '0');
+    const limit = Math.max(1, Math.min(parseInt(url.searchParams.get('limit') || '50'), 200));
+    const offset = Math.max(0, parseInt(url.searchParams.get('offset') || '0'));
 
     const conditions = [];
     if (search) {
-      conditions.push(sql`(
-        ${clinics.name} ILIKE ${'%' + search + '%'} OR
-        ${clinics.city} ILIKE ${'%' + search + '%'} OR
-        ${clinics.email} ILIKE ${'%' + search + '%'}
-      )`);
+      const searchPattern = `%${search}%`;
+      conditions.push(
+        or(
+          ilike(clinics.name, searchPattern),
+          ilike(clinics.city, searchPattern),
+          ilike(clinics.email, searchPattern)
+        )
+      );
     }
     if (verified === 'true') conditions.push(eq(clinics.verified, true));
     if (verified === 'false') conditions.push(eq(clinics.verified, false));

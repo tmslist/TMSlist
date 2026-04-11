@@ -31,6 +31,11 @@ export const POST: APIRoute = async ({ request }) => {
     const token = await createMagicToken(email);
     const magicUrl = `${SITE_URL}/api/auth/portal-verify?token=${token}`;
 
+    // Log magic link in dev mode for easy testing without email
+    if (import.meta.env.DEV || process.env.NODE_ENV === 'development') {
+      console.log(`\n🔗 [DEV] Magic link for ${email}:\n   ${magicUrl}\n`);
+    }
+
     if (!RESEND_KEY) {
       console.error('[portal-login] RESEND_API_KEY not set');
       return new Response(JSON.stringify({ error: 'Email service not configured' }), {

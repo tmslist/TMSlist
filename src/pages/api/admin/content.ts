@@ -22,8 +22,8 @@ export const GET: APIRoute = async ({ request, url }) => {
   try {
     const type = url.searchParams.get('type');
     const search = url.searchParams.get('search') || '';
-    const limit = Math.min(parseInt(url.searchParams.get('limit') || '50'), 200);
-    const offset = parseInt(url.searchParams.get('offset') || '0');
+    const limit = Math.max(1, Math.min(parseInt(url.searchParams.get('limit') || '50'), 200));
+    const offset = Math.max(0, parseInt(url.searchParams.get('offset') || '0'));
 
     if (type === 'questions') {
       const conditions = [];

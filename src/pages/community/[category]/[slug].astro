@@ -1,0 +1,78 @@
+---
+export const prerender = false;
+import Layout from "../../../layouts/Layout.astro";
+import CommunityThread from "../../../components/react/CommunityThread";
+import { getForumPostBySlug, getForumComments, getForumAuthorInfo, getUserVotes, getRelatedPosts } from "../../../db/forumQueries";
+import { getSessionFromRequest } from "../../../utils/auth";
+
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect("/community");
+
+const post = await getForumPostBySlug(slug);
+if (!post) return Astro.redirect("/community");
+
+const session = getSessionFromRequest(Astro.request);
+const comments = await getForumComments(post.id, 100, 0);
+
+// Get author info for specialist badge on post
+const authorInfo = await getForumAuthorInfo(post.authorId);
+
+// Get user's votes if authenticated
+let postVote: number | undefined;
+let commentVotes: Record<string, number> = {};
+
+if (session) {
+  const postVotes = await getUserVotes(session.userId, 'post', [post.id]);
+  postVote = postVotes[post.id];
+
+  const commentIds = comments.map(c => c.id);
+  if (commentIds.length > 0) {
+    commentVotes = await getUserVotes(session.userId, 'comment', commentIds);
+  }
+}
+
+const postWithAuthorInfo = {
+  ...post,
+  authorName: authorInfo?.doctorName || authorInfo?.name || post.authorName,
+  credential: authorInfo?.credential,
+  imageUrl: authorInfo?.imageUrl,
+};
+
+const relatedPosts = await getRelatedPosts(post.id, post.categoryId, 5);
+const isPostAuthor = session?.userId === post.authorId;
+---
+
+<Layout
+  title={`${post.title} | TMS Community`}
+  description={post.body.slice(0, 160)}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Community", url: "/community" },
+    { name: post.categoryName, url: `/community/${post.categorySlug}` },
+    { name: post.title, url: `/community/${post.categorySlug}/${post.slug}` },
+  ]}
+>
+  <div class="min-h-screen bg-gray-50">
+    <div class="container mx-auto px-4 lg:px-8 py-8 max-w-3xl">
+      <!-- Breadcrumb nav -->
+      <div class="flex items-center gap-2 text-sm mb-6">
+        <a href="/community" class="text-gray-400 hover:text-violet-600 transition-colors">Community</a>
+        <span class="text-gray-300">/</span>
+        <a href={`/community/${post.categorySlug}`} class="text-gray-400 hover:text-violet-600 transition-colors">{post.categoryName}</a>
+      </div>
+
+      <CommunityThread
+        client:load
+        post={postWithAuthorInfo}
+        initialComments={comments}
+        relatedPosts={relatedPosts}
+        isAuthenticated={!!session}
+        currentUserId={session?.userId}
+        postVote={postVote}
+        commentVotes={commentVotes}
+        isPostAuthor={isPostAuthor}
+        categorySlug={post.categorySlug}
+      />
+    </div>
+  </div>
+</Layout>

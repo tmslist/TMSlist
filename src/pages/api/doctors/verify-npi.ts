@@ -5,7 +5,6 @@ import { db } from '../../../db';
 import { doctors } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
 import { getCached, setCache } from '../../../utils/redis';
-import { sql } from 'drizzle-orm';
 
 export const prerender = false;
 
@@ -50,14 +49,14 @@ export const POST: APIRoute = async ({ request }) => {
       // Update doctor record if doctorId provided
       if (doctorId) {
         try {
-          await db.execute(sql`
-            UPDATE doctors SET
-              npi_number = ${npiNumber},
-              npi_verified = true,
-              npi_verified_at = now(),
-              credential = COALESCE(${result.credential}, credential)
-            WHERE id = ${doctorId}::uuid
-          `);
+          await db.update(doctors)
+            .set({
+              npi_number: npiNumber,
+              npi_verified: true,
+              npi_verified_at: new Date(),
+              ...(result.credential ? { credential: result.credential } : {})
+            })
+            .where(eq(doctors.id, doctorId));
         } catch {
           // Columns may not exist yet
         }
@@ -82,13 +81,13 @@ export const POST: APIRoute = async ({ request }) => {
     // Update doctor record
     if (doctorId && result.verified && result.npiData) {
       try {
-        await db.execute(sql`
-          UPDATE doctors SET
-            npi_number = ${result.npiData.npi},
-            npi_verified = true,
-            npi_verified_at = now()
-          WHERE id = ${doctorId}::uuid
-        `);
+        await db.update(doctors)
+          .set({
+            npi_number: result.npiData.npi,
+            npi_verified: true,
+            npi_verified_at: new Date(),
+          })
+          .where(eq(doctors.id, doctorId));
       } catch {
         // Columns may not exist yet
       }

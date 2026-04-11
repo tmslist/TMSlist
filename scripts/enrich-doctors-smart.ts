@@ -113,7 +113,7 @@ async function findDoctorImage(
       const altText = altMatch ? altMatch[1].toLowerCase() : '';
 
       if ((lastNameLower.length > 3 && altText.includes(lastNameLower)) ||
-          altText.includes(fullNameLower)) {
+        altText.includes(fullNameLower)) {
         return makeAbsolute(imgSrc, baseUrl);
       }
       if (lastNameLower.length > 3 && imgSrc.toLowerCase().includes(lastNameLower)) {
@@ -278,6 +278,11 @@ async function main() {
     }
 
     console.log(`${progress} ${clinic.name} - ${clinic.doctors_data!.length} doctors processed`);
+
+    // Save periodically so progress isn't lost and dev server updates
+    if (i > 0 && i % 25 === 0) {
+      fs.writeFileSync(CLINICS_PATH, JSON.stringify(clinics, null, 2), 'utf-8');
+    }
   }
 
   // Also update non-reachable clinic doctors to use professional avatars

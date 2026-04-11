@@ -496,6 +496,25 @@ function makeAbsolute(imageUrl: string, baseUrl: string): string {
   return `${baseUrl.replace(/\/$/, '')}/${imageUrl}`;
 }
 
+async function getFallbackLogo(websiteUrl: string): Promise<string | null> {
+  try {
+    const urlObj = new URL(websiteUrl);
+    const domain = urlObj.hostname.replace(/^www\./, '');
+
+    // Try Clearbit first for high-quality enterprise logos
+    const clearbitUrl = `https://logo.clearbit.com/${domain}`;
+    try {
+      const cbRes = await fetch(clearbitUrl, { method: 'HEAD', signal: AbortSignal.timeout(3000) });
+      if (cbRes.ok) return clearbitUrl;
+    } catch { }
+
+    // Fallback to Google's Favicon API which safely extracts the logo directly from the site
+    return `https://s2.googleusercontent.com/s2/favicons?domain=${domain}&sz=256`;
+  } catch {
+    return null;
+  }
+}
+
 async function fetchClinicImage(clinic: Clinic): Promise<string | null> {
   const websiteUrl = clinic.contact?.website_url || (clinic as any).website || clinic.contact?.website;
   if (!websiteUrl || websiteUrl === '#') return null;
@@ -510,7 +529,7 @@ async function fetchClinicImage(clinic: Clinic): Promise<string | null> {
       redirect: 'follow',
     });
 
-    if (!response.ok) return null;
+    if (!response.ok) return getFallbackLogo(websiteUrl);
 
     const html = await response.text();
 
@@ -540,9 +559,9 @@ async function fetchClinicImage(clinic: Clinic): Promise<string | null> {
     });
     if (logoImg?.[1]) return makeAbsolute(logoImg[1], websiteUrl);
 
-    return null;
+    return getFallbackLogo(websiteUrl);
   } catch (e) {
-    return null;
+    return getFallbackLogo(websiteUrl);
   }
 }
 
@@ -648,6 +667,16 @@ async function main() {
     } catch (err) {
       errors++;
       console.error(`${progress} ERROR processing ${clinic.name}:`, err);
+    }
+
+    // Periodically save to avoid data loss and allow dev server to see updates
+    if (!dryRun && i > 0 && i % 25 === 0) {
+      const clinicMap = new Map(targetClinics.map(c => [c.id, c]));
+      for (let j = 0; j < clinics.length; j++) {
+        const updated = clinicMap.get(clinics[j].id);
+        if (updated) clinics[j] = updated;
+      }
+      fs.writeFileSync(CLINICS_PATH, JSON.stringify(clinics, null, 2), 'utf-8');
     }
   }
 

@@ -25,8 +25,8 @@ export const GET: APIRoute = async ({ request }) => {
     const entityType = url.searchParams.get('entityType');
     const from = url.searchParams.get('from');
     const to = url.searchParams.get('to');
-    const limit = Math.min(parseInt(url.searchParams.get('limit') || '50'), 200);
-    const offset = parseInt(url.searchParams.get('offset') || '0');
+    const limit = Math.max(1, Math.min(parseInt(url.searchParams.get('limit') || '50'), 200));
+    const offset = Math.max(0, parseInt(url.searchParams.get('offset') || '0'));
 
     const conditions: any[] = [];
 

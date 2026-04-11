@@ -118,3 +118,40 @@ export async function sendWelcomeEmail(email: string, name: string) {
     `,
   });
 }
+
+// ── COMMUNITY FORUM NOTIFICATIONS ──────────────────
+
+export async function sendForumReplyNotification(data: {
+  recipientEmail: string;
+  recipientName: string;
+  replierName: string;
+  postTitle: string;
+  replyPreview: string;
+  threadUrl: string;
+}) {
+  const resend = getResend();
+  if (!resend) return null;
+
+  return resend.emails.send({
+    from: FROM,
+    to: data.recipientEmail,
+    subject: `${data.replierName} replied to "${data.postTitle.slice(0, 50)}"`,
+    html: `
+      <div style="font-family: system-ui, -apple-system, sans-serif; max-width: 480px; margin: 0 auto; padding: 40px 20px;">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <h1 style="font-size: 20px; font-weight: 700; color: #111827; margin: 0;">TMS List Community</h1>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px;">
+          <p style="color: #374151; font-size: 14px; margin: 0 0 8px;">Hi ${data.recipientName},</p>
+          <p style="color: #374151; font-size: 14px; margin: 0 0 16px;"><strong>${data.replierName}</strong> replied to your discussion:</p>
+          <p style="color: #6b7280; font-size: 13px; font-style: italic; margin: 0 0 4px;">"${data.postTitle}"</p>
+          <div style="background: #f9fafb; border-radius: 8px; padding: 12px; margin: 16px 0;">
+            <p style="color: #4b5563; font-size: 13px; margin: 0; line-height: 1.5;">${data.replyPreview.slice(0, 300)}${data.replyPreview.length > 300 ? '...' : ''}</p>
+          </div>
+          <a href="${data.threadUrl}" style="display: inline-block; background: #7C3AED; color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">View Reply</a>
+        </div>
+        <p style="color: #9ca3af; font-size: 11px; text-align: center; margin-top: 20px;">You're receiving this because someone replied to your post on TMS List Community.</p>
+      </div>
+    `,
+  });
+}

@@ -515,6 +515,7 @@ export const forumComments = pgTable('forum_comments', {
   authorId: uuid('author_id').notNull().references(() => users.id),
   body: text('body').notNull(),
   status: forumPostStatusEnum('status').notNull().default('published'),
+  isAccepted: boolean('is_accepted').default(false).notNull(),
   voteScore: integer('vote_score').default(0).notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
@@ -522,6 +523,17 @@ export const forumComments = pgTable('forum_comments', {
   index('idx_forum_comments_post').on(table.postId),
   index('idx_forum_comments_parent').on(table.parentId),
   index('idx_forum_comments_author').on(table.authorId),
+]);
+
+// ── SAVED FORUM POSTS (Bookmarks) ──────────────────
+
+export const savedForumPosts = pgTable('saved_forum_posts', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  postId: uuid('post_id').notNull().references(() => forumPosts.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  uniqueIndex('idx_saved_forum_posts_unique').on(table.userId, table.postId),
 ]);
 
 // ── FORUM VOTES ──────────────────────────────────
@@ -576,3 +588,4 @@ export type ForumComment = typeof forumComments.$inferSelect;
 export type NewForumComment = typeof forumComments.$inferInsert;
 export type ForumVote = typeof forumVotes.$inferSelect;
 export type ForumReport = typeof forumReports.$inferSelect;
+export type SavedForumPost = typeof savedForumPosts.$inferSelect;
