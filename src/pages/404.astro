@@ -2,14 +2,24 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Page Not Found | TMS List" description="The page you're looking for doesn't exist or has been moved." noindex={true}>
+<Layout title="Page not found | TMS List" description="The page you're looking for doesn't exist or has been moved." noindex={true}>
   <main class="container mx-auto px-4 py-24 text-center min-h-[60vh] flex flex-col items-center justify-center">
     <div class="max-w-lg mx-auto">
+      <!-- Decorative icon -->
+      <div class="mb-6 flex justify-center">
+        <svg class="w-24 h-24 text-violet-200" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="48" cy="48" r="48" fill="currentColor"/>
+          <!-- Magnifying glass with question mark -->
+          <circle cx="42" cy="42" r="18" stroke="#7C3AED" stroke-width="4" fill="none"/>
+          <path d="M54 54l16 16" stroke="#7C3AED" stroke-width="5" stroke-linecap="round"/>
+          <path d="M38 38c0-2.2 1.8-4 4-4" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="42" cy="50" r="1.5" fill="#7C3AED"/>
+        </svg>
+      </div>
       <p class="text-7xl font-semibold tracking-tight text-violet-600 mb-4">404</p>
       <h1 class="text-3xl font-semibold text-gray-900 mb-4">Page not found</h1>
       <p class="text-lg text-gray-600 mb-8">
-        The page you're looking for doesn't exist or has been moved.
-        If you were looking for a TMS clinic, try searching below.
+        The page you're looking for doesn't exist or may have been moved. Let's get you back on track.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a

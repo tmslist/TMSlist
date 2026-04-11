@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Something went wrong | TMS List" description="We encountered an unexpected error. Please try again." noindex={true}>
+  <main class="container mx-auto px-4 py-24 text-center min-h-[60vh] flex flex-col items-center justify-center">
+    <div class="max-w-lg mx-auto">
+      <!-- Error illustration -->
+      <div class="mb-6 flex justify-center">
+        <svg class="w-24 h-24 text-violet-200" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="48" cy="48" r="48" fill="currentColor"/>
+          <path d="M48 24C34.8 24 24 34.8 24 48s10.8 24 24 24 24-10.8 24-24-10.8-24-24-24zm-2 38V48h4v14h-4zm2-22a3 3 0 110 6 3 3 0 010-6z" fill="#7C3AED"/>
+        </svg>
+      </div>
+      <p class="text-7xl font-semibold tracking-tight text-violet-600 mb-4">500</p>
+      <h1 class="text-3xl font-semibold text-gray-900 mb-4">Something went wrong</h1>
+      <p class="text-lg text-gray-600 mb-8">
+        We're sorry — something unexpected happened on our end. Our team has been notified and is looking into it.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-colors"
+        >
+          Go to Homepage
+        </a>
+        <button
+          onclick="history.back()"
+          class="px-6 py-3 bg-white text-gray-700 font-semibold border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors"
+        >
+          Go Back
+        </button>
+      </div>
+    </div>
+  </main>
+</Layout>
