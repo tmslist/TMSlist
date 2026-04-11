@@ -5,7 +5,35 @@ description: "TMS therapy for attention-deficit/hyperactivity disorder — early
 fdaApproved: false
 successRate: "Variable — limited controlled data available"
 image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=400&fit=crop"
+sessionCount: "20-30"
+duration: "4-6 weeks"
+brainArea: "Right DLPFC"
+faqs:
+  - question: "Is TMS FDA-approved for ADHD?"
+    answer: "No. TMS for ADHD is entirely off-label. Research is in early stages but shows promise for improving attention and executive function."
+  - question: "Can TMS replace stimulant medications?"
+    answer: "Not currently. TMS is being studied as an add-on treatment, not a replacement for stimulants. It may help patients who can't tolerate or don't respond well to medication."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">8.4M</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with ADHD</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Variable — limited controlled data available</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">20-30</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is ADHD and How TMS Helps
 

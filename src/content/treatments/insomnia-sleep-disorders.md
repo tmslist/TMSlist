@@ -5,7 +5,35 @@ description: "TMS therapy for insomnia and sleep disturbances — targeting pref
 fdaApproved: false
 successRate: "Improved sleep quality in 40-60% of study participants"
 image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&h=400&fit=crop"
+sessionCount: "10-20"
+duration: "2-4 weeks"
+brainArea: "Right DLPFC"
+faqs:
+  - question: "How does TMS improve sleep?"
+    answer: "TMS targeting the right DLPFC with low-frequency stimulation can reduce hyperarousal — the physiological over-activation that keeps you awake. Many depression TMS patients report sleep improvement as one of the first benefits."
+  - question: "Is it better than sleeping pills?"
+    answer: "TMS doesn't carry the dependence risk, cognitive impairment, or next-day drowsiness of sleep medications. However, it requires daily visits for weeks, unlike a nightly pill."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">50-70M</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with sleep disorders</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Improved sleep quality in 40-60% of study participants</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">10-20</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## The connection between TMS and sleep
 
@@ -68,3 +96,40 @@ Pursuing TMS for insomnia alone, without a depression diagnosis? Expect to pay o
 TMS for insomnia has real science behind it, even without FDA clearance yet. The case is strongest when insomnia coexists with depression — one treatment, two problems addressed. For standalone insomnia, the evidence is promising but still developing, and you should try CBT-I first.
 
 If sleep problems are part of your bigger picture, bring them up with your TMS provider. The protocol can be adjusted to target sleep as part of a broader treatment plan. And based on the patterns clinicians keep seeing, it may be one of the first things to improve.
+
+
+---
+
+<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Find TMS Providers</h4>
+  <div class="grid grid-cols-2 gap-2">
+    <a href="/us/" class="text-sm text-violet-700 hover:underline">Find a Clinic</a>
+    <a href="/providers/hospital-based/" class="text-sm text-violet-700 hover:underline">Hospital-Based TMS</a>
+    <a href="/providers/private-practice/" class="text-sm text-violet-700 hover:underline">Private Practice TMS</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-sm text-violet-700 hover:underline">Am I a Candidate?</a>
+  </div>
+</div>
+
+<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+  <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
+  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
+  </div>
+</div>
+
+
+
+---
+
+<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Find TMS Providers</h4>
+  <div class="grid grid-cols-2 gap-2">
+    <a href="/us/" class="text-sm text-violet-700 hover:underline">Find a Clinic</a>
+    <a href="/providers/hospital-based/" class="text-sm text-violet-700 hover:underline">Hospital-Based TMS</a>
+    <a href="/providers/private-practice/" class="text-sm text-violet-700 hover:underline">Private Practice TMS</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-sm text-violet-700 hover:underline">Am I a Candidate?</a>
+  </div>
+</div>
+

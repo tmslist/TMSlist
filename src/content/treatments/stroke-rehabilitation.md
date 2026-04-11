@@ -5,7 +5,35 @@ description: "Research on TMS to accelerate stroke recovery — improving motor 
 fdaApproved: false
 successRate: "Research phase — promising improvements in motor recovery and aphasia"
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+sessionCount: "10-20"
+duration: "2-4 weeks"
+brainArea: "Contralesional motor cortex"
+faqs:
+  - question: "When should TMS start after a stroke?"
+    answer: "Most research involves TMS in the subacute phase (1-6 months post-stroke), though it's also been studied in chronic stroke patients (6+ months). Earlier may be better for motor recovery."
+  - question: "What type of stroke recovery does TMS help?"
+    answer: "Best evidence for motor function recovery (hand/arm), speech/language recovery (aphasia), and swallowing difficulties (dysphagia). Also studied for post-stroke depression."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">795K</div>
+    <div class="text-xs text-violet-600 mt-1">US strokes annually</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Research phase — promising improvements in motor recovery and aphasia</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">10-20</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Stroke and How TMS Helps
 

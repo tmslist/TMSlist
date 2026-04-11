@@ -1,0 +1,90 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { PROTOCOL_SLUGS } from '../../utils/seo_slugs';
+
+const title = "TMS Protocols & Techniques | SAINT, Theta Burst, Deep TMS & More";
+const description = "Compare TMS therapy protocols — standard rTMS, theta burst stimulation, SAINT protocol, deep TMS, and more. Learn which approach fits your treatment needs.";
+
+const PROTOCOL_META: Record<string, { description: string; duration: string; sessions: string; highlight?: string }> = {
+  'saint-protocol': { description: 'Stanford Accelerated Intelligent Neuromodulation Therapy. Full treatment course in just 5 days using imaging-guided theta burst.', duration: '5 days', sessions: '50 (10/day)', highlight: '79% remission rate' },
+  'theta-burst-stimulation': { description: 'Condensed stimulation pattern mimicking natural brain rhythms. Same efficacy as standard TMS in 3-9 minutes per session.', duration: '6-9 weeks', sessions: '30-36', highlight: '3-minute sessions' },
+  'deep-tms': { description: 'BrainsWay H-coil technology reaching deeper brain structures. Only device FDA-cleared for OCD and smoking cessation.', duration: '6 weeks', sessions: '29-36', highlight: 'Reaches deep structures' },
+  'accelerated-tms': { description: 'Multiple sessions per day to compress treatment timeline. Promising for patients who need rapid improvement.', duration: '1-2 weeks', sessions: '20-50', highlight: 'Faster results' },
+  'neuronavigation': { description: 'MRI-guided precision targeting for optimal coil placement. May improve outcomes by ensuring accurate stimulation sites.', duration: '6-9 weeks', sessions: '30-36', highlight: 'Precision targeting' },
+  'maintenance-tms': { description: 'Periodic sessions after initial treatment to sustain benefits. Prevents relapse in responders.', duration: 'Ongoing', sessions: '1-4/month', highlight: 'Sustain gains' },
+  'fmri-guided-tms': { description: 'Functional MRI mapping identifies personalized brain targets based on individual connectivity patterns.', duration: '6-9 weeks', sessions: '30-36', highlight: 'Personalized targets' },
+  'eeg-synchronized-tms': { description: 'Stimulation timed to individual brain wave patterns for enhanced neural engagement and plasticity.', duration: '4-6 weeks', sessions: '20-30', highlight: 'Brain-wave synced' },
+  'off-label-tms': { description: 'TMS applications beyond FDA-cleared indications — anxiety, PTSD, chronic pain, addiction, and more.', duration: 'Varies', sessions: 'Varies', highlight: 'Expanding applications' },
+};
+
+const enrichedProtocols = PROTOCOL_SLUGS.map(item => ({
+  ...item,
+  ...(PROTOCOL_META[item.slug] || { description: 'Learn about this TMS protocol.', duration: 'Varies', sessions: 'Varies' }),
+}));
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "TMS Treatment Protocols",
+  "description": description,
+  "url": "https://tmslist.com/protocols/",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": PROTOCOL_SLUGS.length,
+    "itemListElement": PROTOCOL_SLUGS.map((item, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": item.title,
+      "url": `https://tmslist.com/protocols/${item.slug}/`
+    }))
+  }
+});
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Protocols", url: "/protocols/" },
+]}>
+  <section class="relative bg-slate-950 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cyan-600 to-slate-900 opacity-90"></div>
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0); background-size: 28px 28px;"></div>
+    <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-white/[0.04] rounded-full blur-[100px]"></div>
+    <div class="relative z-10 container mx-auto px-4 pt-20 pb-16 lg:pt-28 lg:pb-20">
+      <nav class="flex items-center gap-2 text-sm text-white/40 mb-8" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-white/70 transition-colors">Home</a>
+        <span class="text-white/20">/</span>
+        <span class="text-white/60">Protocols</span>
+      </nav>
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-cyan-500/20 text-cyan-300 border border-cyan-400/20 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+          {PROTOCOL_SLUGS.length} Protocols
+        </span>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-5 font-display">
+          TMS Treatment Protocols
+        </h1>
+        <p class="text-lg text-white/60 leading-relaxed max-w-2xl">
+          From standard 37-minute sessions to 3-minute theta burst and 5-day accelerated courses. Compare protocols to find the right approach.
+        </p>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent"></div>
+  </section>
+
+  <main class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {enrichedProtocols.map((protocol) => (
+        <a href={`/protocols/${protocol.slug}/`} class="group bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-violet-200 transition-all">
+          {protocol.highlight && (
+            <span class="inline-block px-2.5 py-1 bg-cyan-50 text-cyan-700 text-xs font-semibold rounded-lg mb-3">{protocol.highlight}</span>
+          )}
+          <h2 class="text-lg font-display font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-2">{protocol.title}</h2>
+          <p class="text-sm text-slate-600 leading-relaxed mb-4">{protocol.description}</p>
+          <div class="flex gap-4 text-xs text-slate-500">
+            <div><span class="font-semibold text-slate-700">{protocol.duration}</span> duration</div>
+            <div><span class="font-semibold text-slate-700">{protocol.sessions}</span> sessions</div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>

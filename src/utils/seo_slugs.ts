@@ -234,3 +234,14 @@ export const UTILITY_SLUGS = [
     { slug: 'depression-severity-test', title: 'Depression Severity Test (PHQ-9)' },
     { slug: 'insurance-eligibility-checker', title: 'Insurance Eligibility Checker' },
 ];
+
+export const ALTERNATIVE_SLUGS = [
+    { slug: 'spravato-esketamine', title: 'Spravato (Esketamine) Nasal Spray' },
+    { slug: 'ketamine-infusion-therapy', title: 'Ketamine Infusion Therapy' },
+    { slug: 'electroconvulsive-therapy-ect', title: 'Electroconvulsive Therapy (ECT)' },
+    { slug: 'vagus-nerve-stimulation', title: 'Vagus Nerve Stimulation (VNS)' },
+    { slug: 'neurofeedback', title: 'Neurofeedback Therapy' },
+    { slug: 'psilocybin-assisted-therapy', title: 'Psilocybin-Assisted Therapy' },
+    { slug: 'deep-brain-stimulation', title: 'Deep Brain Stimulation (DBS)' },
+    { slug: 'stellate-ganglion-block', title: 'Stellate Ganglion Block (SGB)' },
+];

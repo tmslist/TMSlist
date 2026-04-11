@@ -5,7 +5,35 @@ description: "Research on TMS for alcohol cravings and dependence — how brain 
 fdaApproved: false
 successRate: "Research phase — studies show 30-50% reduction in cravings"
 image: "https://images.unsplash.com/photo-1569937756447-1d44f657dc69?w=800&h=400&fit=crop"
+sessionCount: "10-20"
+duration: "2-4 weeks"
+brainArea: "DLPFC (bilateral)"
+faqs:
+  - question: "Can TMS reduce alcohol cravings?"
+    answer: "Yes. Multiple studies show TMS targeting the DLPFC significantly reduces craving intensity, though it's not FDA-cleared for this use."
+  - question: "Should I be sober before starting TMS?"
+    answer: "Most protocols require sobriety or stable, reduced consumption. Active withdrawal is a contraindication. Discuss your situation with the treating psychiatrist."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">29M+</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with AUD</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Research phase — studies show 30-50% reduction in cravings</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">10-20</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Alcohol Dependence and How TMS Helps
 

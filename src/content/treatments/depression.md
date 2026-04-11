@@ -3,159 +3,388 @@ title: "TMS for Depression"
 condition: "Depression"
 description: "TMS therapy for major depressive disorder — FDA-cleared since 2008, with 50-60% response rates in treatment-resistant cases."
 fdaApproved: true
-successRate: "50-60% response, 30-35% remission"
+successRate: "50-60% response"
+sessionCount: "36"
+duration: "6-9 weeks"
+brainArea: "Left DLPFC"
 image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop"
+faqs:
+  - question: "Does TMS work permanently, or will my depression come back?"
+    answer: "TMS produces durable results for many people, lasting 6-12 months. About 30-50% of responders eventually need maintenance sessions. If symptoms return, a shorter re-treatment course (6-12 sessions) can often restore the benefit."
+  - question: "Can I take my antidepressant medications during TMS?"
+    answer: "Yes. Most people continue their current medications during TMS. The combination may actually be more effective than either approach alone."
+  - question: "Is TMS painful?"
+    answer: "Most people describe it as uncomfortable rather than painful, especially during the first few sessions. Intensity is increased gradually for comfort. By week two, most people report minimal discomfort."
+  - question: "How soon will I feel better?"
+    answer: "Most people start noticing improvements during weeks 2-3 — better sleep first, then more energy, clearer thinking, and finally the mood lifts. Some respond earlier, others not until weeks 4-5."
+  - question: "What if TMS doesn't work for me?"
+    answer: "About 40-50% don't achieve a strong response to a first course. Options include trying a different protocol, adjusting the treatment target using neuronavigation, or exploring esketamine, ketamine infusions, or ECT."
 ---
 
-## What is Depression and How TMS Helps
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">21M+</div>
+    <div class="text-xs text-emerald-600 mt-1">US adults affected annually</div>
+  </div>
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">50-60%</div>
+    <div class="text-xs text-violet-600 mt-1">TMS response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">30-35%</div>
+    <div class="text-xs text-blue-600 mt-1">Full remission rate</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">2008</div>
+    <div class="text-xs text-amber-600 mt-1">FDA cleared</div>
+  </div>
+</div>
 
-Major depressive disorder isn't just persistent sadness. It's a neurological condition that rewires how your brain handles mood, motivation, sleep, appetite, and thinking. About 21 million adults in the U.S. experience a major depressive episode every year. It's one of the leading causes of disability worldwide.
+## What Is Depression and How TMS Helps
 
-Here's what's happening in the brain. The left dorsolateral prefrontal cortex (DLPFC) — the part responsible for executive function, emotional regulation, and motivation — goes quiet. Neuroimaging consistently shows reduced blood flow and metabolism in this area. Meanwhile, the amygdala (your brain's threat and emotion center) runs hot, creating a tug-of-war between rational thought and emotional reactivity. Depression tips the balance.
+Major depressive disorder isn't just persistent sadness. It's a neurological condition that rewires how your brain handles mood, motivation, sleep, appetite, and thinking. About 21 million adults in the U.S. experience a major depressive episode every year — it's one of the leading causes of disability worldwide.
 
-Antidepressants and therapy work for a lot of people. But roughly one-third of patients with MDD don't get adequate relief after trying two or more medications. That's treatment-resistant depression (TRD), and it's a real problem. Medications work systemically — they flood the entire brain and body with neurochemical changes, which is why they come with side effects like weight gain, sexual dysfunction, and emotional blunting.
+<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">What's happening in the brain</h4>
+  <p class="text-sm text-slate-600 leading-relaxed mb-3">The <strong>left dorsolateral prefrontal cortex (DLPFC)</strong> — responsible for executive function, emotional regulation, and motivation — goes quiet. Neuroimaging consistently shows reduced blood flow and metabolism in this area.</p>
+  <p class="text-sm text-slate-600 leading-relaxed mb-0">Meanwhile, the <strong>amygdala</strong> (your brain's threat center) runs hot, creating a tug-of-war between rational thought and emotional reactivity. Depression tips the balance.</p>
+</div>
 
-TMS takes a completely different approach. Instead of changing brain chemistry everywhere, it uses focused magnetic pulses to directly stimulate that underactive left DLPFC. Over the course of treatment, this repeated stimulation gradually restores normal neural firing patterns, strengthens connectivity between the prefrontal cortex and limbic system, and helps rebalance the mood circuitry that depression disrupts. No pills. No systemic side effects.
+Antidepressants work for many people. But **roughly one-third of patients with MDD don't get adequate relief** after trying two or more medications. That's treatment-resistant depression (TRD).
+
+TMS takes a completely different approach. Instead of changing brain chemistry everywhere, it uses focused magnetic pulses to directly stimulate the underactive left DLPFC. Over treatment, this repeated stimulation restores normal neural firing patterns and rebalances mood circuitry. No pills. No systemic side effects.
+
+---
 
 ## How TMS Works for Depression
 
-During a session, an electromagnetic coil is placed against the left side of your head, right over the DLPFC. It generates brief magnetic pulses — about the same strength as an MRI — that pass through the skull and create small electrical currents in the targeted brain tissue. These currents activate neurons, and over repeated sessions, that stimulation drives lasting changes through long-term potentiation.
+During a session, an electromagnetic coil is placed against the left side of your head, over the DLPFC. It generates brief magnetic pulses that pass through the skull and activate neurons in the targeted region.
 
-The standard protocol uses high-frequency repetitive TMS (rTMS) at 10 Hz — 10 pulses per second delivered in short bursts called trains, with pauses between them. This excitatory frequency increases neural activity in the target region. Your motor threshold (the minimum intensity to make your thumb twitch when stimulating the motor cortex) gets measured at the start to calibrate the dose to your brain. Treatment runs at 120% of that threshold.
+<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5">
+    <h4 class="font-display font-bold text-violet-900 text-sm mb-2">Standard rTMS (10 Hz)</h4>
+    <p class="text-xs text-violet-700 mb-2">High-frequency pulses delivered in short bursts called trains. Sessions last <strong>19-37 minutes</strong>.</p>
+    <div class="text-xs text-violet-600">The original FDA-cleared protocol. Well-established evidence base.</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
+    <h4 class="font-display font-bold text-blue-900 text-sm mb-2">Theta Burst (iTBS)</h4>
+    <p class="text-xs text-blue-700 mb-2">Triplet bursts at 50 Hz mimicking the brain's natural theta rhythm. Sessions last only <strong>3-9 minutes</strong>.</p>
+    <div class="text-xs text-blue-600">The Lancet (2018) showed iTBS was equally effective as standard rTMS.</div>
+  </div>
+</div>
 
-There's a newer option: intermittent theta burst stimulation (iTBS). Same therapeutic benefit, fraction of the time. Instead of 37-minute sessions, iTBS condenses treatment into roughly 3 minutes of active stimulation using triplet bursts at 50 Hz, grouped into patterns that mimic the brain's natural theta rhythm. The THREE-D trial in The Lancet (2018) showed iTBS was just as effective as standard 10 Hz rTMS. Most clinics now offer it.
+Treatment runs at 120% of your motor threshold (calibrated to your individual brain). Coil placement uses either the 5-cm rule or neuronavigation with MRI data — more precise targeting means better outcomes.
 
-Coil placement uses either the 5-cm rule (measuring 5 cm forward from the motor cortex) or neuronavigation systems that map your individual brain anatomy with MRI data. More precise targeting means better outcomes.
+---
 
 ## Clinical Evidence and Success Rates
 
-TMS has one of the strongest evidence bases of any non-drug treatment in psychiatry. The FDA first cleared it for treatment-resistant depression in October 2008 based on NeuroStar's pivotal trial.
+TMS has one of the strongest evidence bases of any non-drug treatment in psychiatry. The FDA first cleared it in October 2008.
 
-The evidence has gotten stronger since then:
+<div class="not-prose my-8 space-y-4">
+  <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-5">
+    <div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Response Rates: 50-60%</div>
+      <p class="text-sm text-slate-600 mt-1 mb-0">In real-world practice. Some studies report rates as high as 70% when treatment is optimized.</p>
+    </div>
+  </div>
+  <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-5">
+    <div class="w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Remission Rates: 30-35%</div>
+      <p class="text-sm text-slate-600 mt-1 mb-0">Symptoms essentially gone. Compare to ~25-30% response rates for switching antidepressants after initial failure.</p>
+    </div>
+  </div>
+  <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-5">
+    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">2019 Meta-Analysis — Journal of Clinical Psychiatry</div>
+      <p class="text-sm text-slate-600 mt-1 mb-0">Pooling data from <strong>over 6,000 patients</strong>, confirmed both standard rTMS and iTBS produce real improvements in treatment-resistant depression.</p>
+    </div>
+  </div>
+  <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-5">
+    <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Stanford SAINT Protocol — 79% Remission</div>
+      <p class="text-sm text-slate-600 mt-1 mb-0">Accelerated, imaging-guided iTBS delivered over 5 days. Published in the American Journal of Psychiatry (2022). The most intensive TMS protocol studied to date.</p>
+    </div>
+  </div>
+</div>
 
-- **Response rates** (50% or greater reduction in depression scores) hit 50-60% in real-world practice. Some studies report rates as high as 70% when treatment is optimized.
-- **Remission rates** (symptoms essentially gone) fall between 30-35% in most large studies. The 2010 George et al. trial in Archives of General Psychiatry found 14.1% remission with active TMS vs. 5.1% with sham in a tightly controlled design.
-- A 2019 meta-analysis in the Journal of Clinical Psychiatry, pooling data from over 6,000 patients, confirmed that both standard rTMS and iTBS produce real improvements in treatment-resistant depression.
-- The Stanford Neuromodulation Therapy (SNT/SAINT) protocol hit a 79% remission rate using accelerated, imaging-guided iTBS delivered over 5 days. Published in the American Journal of Psychiatry in 2022, it's the most intensive TMS protocol studied to date.
+An unusual finding: real-world effectiveness data shows TMS works **as well or better in everyday practice** as it does in controlled trials. Most treatments perform worse outside research settings. TMS doesn't.
 
-Here's something unusual: real-world effectiveness data from large clinical databases shows TMS works as well or better in everyday practice as it does in controlled trials. Most treatments perform worse outside research settings. TMS doesn't.
+---
 
-Compare that to switching antidepressants — roughly 25-30% response rates for each successive medication trial. If you've already failed multiple medications, TMS offers meaningfully better odds.
+## Who Qualifies for TMS
 
-## Who Qualifies for TMS Treatment
+<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
+    <h4 class="font-display font-bold text-emerald-900 text-sm mb-3">Insurance Requirements</h4>
+    <ul class="text-xs text-emerald-700 space-y-2 mb-0 list-none pl-0">
+      <li class="flex gap-2"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Confirmed MDD diagnosis (moderate to severe)</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> 2+ failed antidepressant trials from different classes</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Each tried at adequate dose for 6-8 weeks</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Some insurers require documented therapy participation</li>
+    </ul>
+  </div>
+  <div class="bg-red-50 border border-red-100 rounded-xl p-5">
+    <h4 class="font-display font-bold text-red-900 text-sm mb-3">Contraindications</h4>
+    <ul class="text-xs text-red-700 space-y-2 mb-0 list-none pl-0">
+      <li class="flex gap-2"><svg class="w-4 h-4 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> Metallic implants in/near the head (not dental)</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> History of seizures or epilepsy</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> Implanted stimulation devices (VNS, DBS)</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> Cardiac pacemakers or defibrillators</li>
+    </ul>
+  </div>
+</div>
 
-Most insurance companies cover TMS for depression when you meet these criteria:
+No strict age cutoff — most data and insurance applies to adults 18+. TMS has been studied in adolescents (12-17) with promising results.
 
-- **Diagnosis**: Confirmed Major Depressive Disorder (MDD), typically moderate to severe
-- **Medication failures**: At least 2 antidepressant trials from different classes (like an SSRI and an SNRI), each taken at adequate dose for 6-8 weeks minimum
-- **Not attributable to another condition**: The depression isn't primarily caused by substance use, a medical condition, or medication side effects
-- **Psychotherapy history**: Some insurers also require documented participation in therapy
-
-Contraindications:
-
-- **Metallic implants** in or near the head (dental fillings and braces are fine), such as cochlear implants, aneurysm clips, or metallic plates
-- **History of seizures** or epilepsy — this is a relative contraindication. Some patients can still be treated with careful evaluation.
-- **Implanted stimulation devices** like vagus nerve stimulators, deep brain stimulators, or cardiac pacemakers/defibrillators
-
-No strict age cutoff, though most data and insurance coverage applies to adults 18+. TMS has been studied in adolescents (12-17) with promising results, and some providers treat this group off-label.
+---
 
 ## What to Expect During Treatment
 
-A standard course: 36 sessions over about 6 weeks, five days a week (Monday through Friday). Each session runs 19-37 minutes for standard rTMS or as little as 3-9 minutes for theta burst.
+<div class="not-prose my-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+  <div class="bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-xl font-bold text-violet-600 font-display">36</div>
+    <div class="text-xs text-slate-500 mt-1">Sessions</div>
+  </div>
+  <div class="bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-xl font-bold text-violet-600 font-display">5x/week</div>
+    <div class="text-xs text-slate-500 mt-1">Mon-Fri</div>
+  </div>
+  <div class="bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-xl font-bold text-violet-600 font-display">~6 wks</div>
+    <div class="text-xs text-slate-500 mt-1">Duration</div>
+  </div>
+  <div class="bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-xl font-bold text-violet-600 font-display">3-37 min</div>
+    <div class="text-xs text-slate-500 mt-1">Per Session</div>
+  </div>
+</div>
 
-Here's what actually happens:
+<div class="not-prose my-8 space-y-3">
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">1</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Arrive & Sit Down</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Check in and sit in a comfortable treatment chair. No gowns, no IVs, no anesthesia.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">2</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Coil Positioning</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Technician places the coil on the left side of your head using pre-marked coordinates.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">3</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Treatment</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">You hear clicking and feel tapping on your scalp. You're fully awake — watch TV, listen to podcasts, or relax.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 font-bold text-xs shrink-0">4</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Walk Out & Resume Your Day</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">No recovery period. No cognitive fog. No driving restrictions. Most people go straight to work.</p>
+    </div>
+  </div>
+</div>
 
-1. **Arrival**: You check in and sit in a comfortable treatment chair. No gowns. No IVs. No anesthesia.
-2. **Positioning**: The technician places the coil against the left side of your head using pre-marked coordinates for consistent targeting.
-3. **Treatment**: You hear clicking sounds and feel a tapping or knocking on your scalp. It's unusual at first, but most people adjust within the first few sessions.
-4. **During treatment**: You're fully awake. Many people watch TV, listen to podcasts, or just relax.
-5. **After treatment**: You stand up and leave. No recovery period. No cognitive fog. No driving restrictions. Most people go straight to work or home.
+**Improvement timeline**: Most people notice changes during weeks 2-3 — better sleep first, then energy, then clearer thinking, then mood lifts. Be patient — the neural changes build cumulatively.
 
-Improvement is gradual. Most people start noticing changes during weeks 2-3 — better sleep first, then more energy, then clearer thinking, and finally the mood itself lifts. Some people respond earlier. Others don't notice much until weeks 4-5 or even after finishing the full course. Be patient with the process. The neural changes build cumulatively.
-
-After the initial 36 sessions, your provider may recommend a taper of 6-12 additional sessions at decreasing frequency to lock in gains.
+---
 
 ## Side Effects and Safety
 
-TMS has a remarkably clean safety profile compared to antidepressants:
+<div class="not-prose my-8">
+<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+  <thead>
+    <tr class="bg-slate-800 text-white">
+      <th class="px-4 py-3 text-left font-semibold">Side Effect</th>
+      <th class="px-4 py-3 text-center font-semibold">TMS</th>
+      <th class="px-4 py-3 text-center font-semibold">Antidepressants</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-slate-200">
+    <tr class="bg-white">
+      <td class="px-4 py-3 font-medium text-slate-900">Weight Gain</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Common</span></td>
+    </tr>
+    <tr class="bg-slate-50">
+      <td class="px-4 py-3 font-medium text-slate-900">Sexual Dysfunction</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Common</span></td>
+    </tr>
+    <tr class="bg-white">
+      <td class="px-4 py-3 font-medium text-slate-900">Emotional Blunting</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Common</span></td>
+    </tr>
+    <tr class="bg-slate-50">
+      <td class="px-4 py-3 font-medium text-slate-900">Withdrawal Risk</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Yes</span></td>
+    </tr>
+    <tr class="bg-white">
+      <td class="px-4 py-3 font-medium text-slate-900">Scalp Discomfort</td>
+      <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">First week</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">N/A</span></td>
+    </tr>
+    <tr class="bg-slate-50">
+      <td class="px-4 py-3 font-medium text-slate-900">Seizure Risk</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">&lt;0.1%</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Similar</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-- **Scalp discomfort or pain** at the treatment site is the most common side effect — roughly 50% of patients in the first week. It almost always fades as treatment progresses. Over-the-counter pain relievers handle it.
-- **Mild headache** after treatment, about 30% of patients. Usually responds to acetaminophen or ibuprofen and decreases over the course of treatment.
-- **Lightheadedness** happens occasionally. Brief.
-- **Seizure risk** is extremely low — less than 0.1% (about 1 in 10,000 sessions). That's comparable to or lower than the seizure risk from many antidepressants.
+TMS is also safe alongside your current medications. Most patients continue antidepressants during treatment.
 
-What TMS doesn't cause: weight gain, sexual dysfunction, emotional blunting, GI problems, or sedation. No withdrawal when treatment ends. No dependence. No addiction. These are the exact side effects that make so many people quit their antidepressants.
-
-TMS is also safe alongside your current medications. Most patients keep taking their antidepressants during treatment.
+---
 
 ## TMS Devices Used for Depression
 
-All major FDA-cleared TMS systems are approved for depression:
+<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="bg-white border border-slate-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+    <h4 class="font-display font-bold text-slate-900 mb-2 text-base">NeuroStar</h4>
+    <p class="text-sm text-slate-600 mb-3">First FDA-cleared TMS system. Most widely installed in the US. Standard figure-8 coil. Supports standard rTMS and iTBS.</p>
+    <a href="/compare/neurostar-vs-brainsway/" class="text-xs text-violet-600 font-semibold hover:underline">Compare devices →</a>
+  </div>
+  <div class="bg-white border border-slate-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+    <h4 class="font-display font-bold text-slate-900 mb-2 text-base">BrainsWay Deep TMS</h4>
+    <p class="text-sm text-slate-600 mb-3">H1 coil in helmet-like apparatus. Stimulates broader and deeper brain regions. Also FDA-cleared for OCD and smoking cessation.</p>
+    <a href="/compare/deep-tms-vs-rtms/" class="text-xs text-violet-600 font-semibold hover:underline">Deep vs standard →</a>
+  </div>
+  <div class="bg-white border border-slate-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+    <h4 class="font-display font-bold text-slate-900 mb-2 text-base">MagVenture</h4>
+    <p class="text-sm text-slate-600 mb-3">Versatile system popular in clinical and research settings. Multiple coil types and protocols supported.</p>
+    <a href="/compare/magventure-vs-neurostar/" class="text-xs text-violet-600 font-semibold hover:underline">Compare options →</a>
+  </div>
+  <div class="bg-white border border-slate-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+    <h4 class="font-display font-bold text-slate-900 mb-2 text-base">CloudTMS / Nexstim</h4>
+    <p class="text-sm text-slate-600 mb-3">Newer entrants with cloud-based monitoring and neuronavigation-guided targeting for precision.</p>
+    <a href="/compare/cloudtms-vs-neurostar/" class="text-xs text-violet-600 font-semibold hover:underline">Learn more →</a>
+  </div>
+</div>
 
-- **NeuroStar (Neuronetics)** — First TMS system cleared by the FDA and the most widely installed in the U.S. Standard figure-8 coil targeting the DLPFC. Offers both standard rTMS and iTBS.
-- **BrainsWay Deep TMS** — Uses a patented H1 coil inside a helmet-like apparatus that stimulates broader and deeper brain regions. Also FDA-cleared for OCD and smoking cessation.
-- **MagVenture (MagPro)** — Versatile system popular in both clinical and research settings. Supports multiple coil types and protocols.
-- **CloudTMS (Apollo TMS/Nexstim)** — Newer entrants offering cloud-based treatment monitoring and neuronavigation-guided targeting.
+The evidence doesn't clearly favor one device over another. What matters most: the clinician's experience, proper coil placement, and sticking to evidence-based protocols.
 
-The evidence doesn't clearly favor one device over another for depression outcomes. What matters most: the clinician's experience, proper coil placement, and sticking to evidence-based protocols. A well-trained technician using any FDA-cleared system delivers comparable results.
-
-The main distinction for you to understand is standard rTMS (37-minute sessions) vs. theta burst (3-9-minute sessions). Both have strong evidence. The choice usually comes down to your schedule and preference.
+---
 
 ## Cost and Insurance Coverage
 
-Costs vary by location, provider, and protocol:
+<div class="not-prose my-8">
+<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+  <thead>
+    <tr class="bg-slate-800 text-white">
+      <th class="px-4 py-3 text-left font-semibold">Item</th>
+      <th class="px-4 py-3 text-left font-semibold">Cost Range</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-slate-200">
+    <tr class="bg-white">
+      <td class="px-4 py-3 font-medium text-slate-900">Per Session</td>
+      <td class="px-4 py-3 text-slate-600">$200-$400</td>
+    </tr>
+    <tr class="bg-slate-50">
+      <td class="px-4 py-3 font-medium text-slate-900">Full Course (36 sessions)</td>
+      <td class="px-4 py-3 text-slate-600">$6,000-$12,000 without insurance</td>
+    </tr>
+    <tr class="bg-white">
+      <td class="px-4 py-3 font-medium text-slate-900">Accelerated Protocols (SAINT)</td>
+      <td class="px-4 py-3 text-slate-600">$15,000-$25,000</td>
+    </tr>
+    <tr class="bg-slate-50">
+      <td class="px-4 py-3 font-medium text-slate-900">With Insurance (typical copay)</td>
+      <td class="px-4 py-3 text-slate-600">$500-$3,000 total</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-- **Per session**: $200-$400 for standard protocols
-- **Full course** (36 sessions): $6,000-$12,000 without insurance
-- **Accelerated protocols** (like SAINT): $15,000-$25,000 — often not yet covered by insurance
+<div class="not-prose my-8 bg-emerald-50 border border-emerald-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-emerald-900 mb-3 text-base">Insurance Coverage (2026)</h4>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="flex items-center gap-2 text-sm text-emerald-700">
+      <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      BCBS, Aetna, Cigna, UHC
+    </div>
+    <div class="flex items-center gap-2 text-sm text-emerald-700">
+      <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      Medicare (nationwide)
+    </div>
+    <div class="flex items-center gap-2 text-sm text-emerald-700">
+      <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      TRICARE (military/veterans)
+    </div>
+    <div class="flex items-center gap-2 text-sm text-amber-600">
+      <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+      Medicaid (varies by state)
+    </div>
+  </div>
+</div>
 
-Insurance coverage has expanded significantly since FDA clearance. As of 2025:
+**Tips for approval**: Document every prior medication trial thoroughly. Get a letter of medical necessity. Work with a clinic that has a dedicated insurance authorization team. If denied, appeal — many initial denials get overturned.
 
-- **Most major commercial insurers** (BCBS, Aetna, Cigna, UnitedHealthcare) cover TMS for treatment-resistant depression with prior authorization
-- **Medicare** covers TMS for depression nationally, with specific documentation requirements
-- **Medicaid** coverage varies by state
-- **TRICARE** covers TMS for active-duty military and veterans meeting clinical criteria
+---
 
-Tips for getting approved:
+## Finding a TMS Provider
 
-- Document every prior medication trial thoroughly — drug name, dose, duration, reason for stopping
-- Get a letter of medical necessity from your psychiatrist
-- Work with a TMS clinic that has a dedicated insurance authorization team. Experienced clinics have high approval rates.
-- If denied, appeal. Many initial denials get overturned with additional documentation.
+<div class="not-prose my-8 space-y-3">
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">1</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Volume and Experience</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Look for clinics with 100-200+ patients treated. Higher volume = better outcomes and smoother process.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">2</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Physician Oversight</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">A board-certified psychiatrist should be involved in evaluation, planning, and monitoring — not just a technician.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">3</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Outcome Tracking</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Good clinics measure depression with validated scales (PHQ-9, MADRS, or HAM-D) and can share their own response rates.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">4</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Protocol Options</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Clinics offering both standard rTMS and theta burst give you more flexibility.</p>
+    </div>
+  </div>
+</div>
 
-## Finding a TMS Provider for Depression
-
-The right provider matters. Here's what to look for:
-
-- **Volume and experience**: Clinics that have treated at least 100-200 patients. Higher volume tends to mean better outcomes and smoother processes.
-- **Physician oversight**: A board-certified psychiatrist should be involved in your evaluation, treatment planning, and ongoing monitoring — not just a technician running a machine.
-- **Outcome tracking**: Good clinics measure your depression with validated scales (PHQ-9, MADRS, or HAM-D) at regular intervals and can tell you their own response and remission rates.
-- **Insurance expertise**: Clinics that handle prior authorizations regularly will make the approval process easier.
-- **Protocol options**: Clinics offering both standard rTMS and theta burst give you more flexibility.
-
-Red flags:
-
-- Claims of 90%+ success rates (unrealistic — likely cherry-picked numbers)
-- No psychiatrist involved in care
-- Can't provide outcome data from their own patients
-- Pressure to pay cash when insurance coverage is available
-- No standardized symptom tracking during treatment
+<div class="not-prose my-8 bg-red-50 border border-red-200 rounded-xl p-5">
+  <h4 class="font-semibold text-red-800 text-sm mb-2">Red Flags</h4>
+  <ul class="text-sm text-red-700 space-y-1 mb-0 list-disc pl-4">
+    <li>Claims of 90%+ success rates (unrealistic — likely cherry-picked)</li>
+    <li>No psychiatrist involved in care</li>
+    <li>Can't provide their own outcome data</li>
+    <li>Pressure to pay cash when insurance is available</li>
+    <li>No standardized symptom tracking during treatment</li>
+  </ul>
+</div>
 
 Use our [TMS clinic directory](/us/) to find experienced providers in your area, read verified patient reviews, and compare clinics.
-
-## Frequently Asked Questions
-
-**Does TMS work permanently, or will my depression come back?**
-TMS produces durable results for many people, with benefits typically lasting 6-12 months. Roughly 30-50% of responders eventually need maintenance sessions or a repeat course. Some stay well for years. If symptoms start creeping back, early re-treatment with a shorter course (often 6-12 sessions) can restore the benefit.
-
-**Can I take my antidepressant medications during TMS treatment?**
-Yes. Most people continue their current medications during TMS. The combination may actually be more effective than either approach alone. Your psychiatrist will guide any medication adjustments.
-
-**Is TMS painful?**
-Most people describe it as uncomfortable rather than painful, especially during the first few sessions. The scalp tapping takes some getting used to, but intensity can be increased gradually to improve comfort. By week two, most people report minimal discomfort.
-
-**How soon will I feel better?**
-Most people start noticing improvements during weeks 2-3. Early signs: better sleep, more energy, improved concentration. Mood usually lifts shortly after. Some people don't experience significant improvement until after the full course is done.
-
-**What if TMS doesn't work for me?**
-About 40-50% of patients don't achieve a strong response to a first course of TMS. Options from there include trying a different protocol (switching from standard rTMS to theta burst or vice versa), adjusting the treatment target using neuronavigation, or exploring other treatments like esketamine (Spravato), ketamine infusions, or electroconvulsive therapy (ECT).

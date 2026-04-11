@@ -5,7 +5,35 @@ description: "Research on low-frequency TMS for epilepsy — reducing seizure fr
 fdaApproved: false
 successRate: "Research phase — some reduction in seizure frequency in drug-resistant cases"
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+sessionCount: "5-10"
+duration: "1-2 weeks"
+brainArea: "Seizure focus"
+faqs:
+  - question: "Isn't seizure a risk of TMS? How can it treat epilepsy?"
+    answer: "Low-frequency (1 Hz or less) TMS has an inhibitory effect that can actually reduce seizure frequency. This is different from high-frequency TMS, which does carry seizure risk. The protocol must be carefully designed."
+  - question: "Is this standard treatment?"
+    answer: "No. TMS for epilepsy is investigational. It's primarily studied for drug-resistant focal epilepsy where surgery isn't an option."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">3.4M</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with epilepsy</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Research phase — some reduction in seizure frequency in drug-resistant cases</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">5-10</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## TMS and seizure disorders — a complex relationship
 
@@ -55,3 +83,40 @@ TMS for epilepsy is not part of standard clinical practice. If you're interested
 - Look for clinical trials specifically for drug-resistant focal epilepsy
 - Do not undergo standard high-frequency TMS protocols if you have epilepsy. The risk of triggering seizures is real and documented.
 - Specialized low-frequency protocols should only happen at centers with genuine epilepsy expertise
+
+
+---
+
+<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Find TMS Providers</h4>
+  <div class="grid grid-cols-2 gap-2">
+    <a href="/us/" class="text-sm text-violet-700 hover:underline">Find a Clinic</a>
+    <a href="/providers/hospital-based/" class="text-sm text-violet-700 hover:underline">Hospital-Based TMS</a>
+    <a href="/providers/private-practice/" class="text-sm text-violet-700 hover:underline">Private Practice TMS</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-sm text-violet-700 hover:underline">Am I a Candidate?</a>
+  </div>
+</div>
+
+<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+  <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
+  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
+  </div>
+</div>
+
+
+
+---
+
+<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Find TMS Providers</h4>
+  <div class="grid grid-cols-2 gap-2">
+    <a href="/us/" class="text-sm text-violet-700 hover:underline">Find a Clinic</a>
+    <a href="/providers/hospital-based/" class="text-sm text-violet-700 hover:underline">Hospital-Based TMS</a>
+    <a href="/providers/private-practice/" class="text-sm text-violet-700 hover:underline">Private Practice TMS</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-sm text-violet-700 hover:underline">Am I a Candidate?</a>
+  </div>
+</div>
+

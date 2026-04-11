@@ -2,7 +2,21 @@
 import Layout from '../../layouts/Layout.astro';
 import { getAllTreatments } from '../../db/queries';
 
-const ALTERNATIVE_TREATMENTS = await getAllTreatments();
+let ALTERNATIVE_TREATMENTS = await getAllTreatments();
+
+// Fallback if DB treatments table is empty
+if (ALTERNATIVE_TREATMENTS.length === 0) {
+  ALTERNATIVE_TREATMENTS = [
+    { id: '1', slug: 'spravato', name: 'Spravato (Esketamine)', description: 'FDA-approved nasal spray for treatment-resistant depression, used alongside an oral antidepressant.', fdaApproved: true, category: 'medication', createdAt: new Date(), updatedAt: new Date() },
+    { id: '2', slug: 'ketamine-infusion', name: 'IV Ketamine Infusion', description: 'Off-label IV infusions of ketamine used for rapid-acting relief of severe depression and suicidal ideation.', fdaApproved: false, category: 'medication', createdAt: new Date(), updatedAt: new Date() },
+    { id: '3', slug: 'ect', name: 'ECT (Electroconvulsive Therapy)', description: 'Controlled electrical stimulation under anesthesia for severe, treatment-resistant depression.', fdaApproved: true, category: 'procedure', createdAt: new Date(), updatedAt: new Date() },
+    { id: '4', slug: 'at-home-ketamine', name: 'At-Home Ketamine', description: 'Sublingual or nasal ketamine prescribed for home use via telehealth platforms.', fdaApproved: false, category: 'medication', createdAt: new Date(), updatedAt: new Date() },
+    { id: '5', slug: 'vns', name: 'VNS (Vagus Nerve Stimulation)', description: 'Implanted device that sends electrical impulses to the brain via the vagus nerve.', fdaApproved: true, category: 'device', createdAt: new Date(), updatedAt: new Date() },
+    { id: '6', slug: 'psilocybin', name: 'Psilocybin Therapy', description: 'Guided psychedelic-assisted therapy using psilocybin, currently in clinical trials for depression.', fdaApproved: false, category: 'experimental', createdAt: new Date(), updatedAt: new Date() },
+    { id: '7', slug: 'neurofeedback', name: 'Neurofeedback', description: 'Real-time brain wave monitoring and training to improve mental health symptoms.', fdaApproved: false, category: 'therapy', createdAt: new Date(), updatedAt: new Date() },
+    { id: '8', slug: 'dbs', name: 'DBS (Deep Brain Stimulation)', description: 'Surgically implanted electrodes that deliver targeted stimulation to specific brain regions.', fdaApproved: false, category: 'procedure', createdAt: new Date(), updatedAt: new Date() },
+  ] as any;
+}
 
 const title = "Alternative Treatments | Spravato, Ketamine, ECT & More";
 const description = "Explore alternatives to TMS therapy including Spravato (esketamine), IV Ketamine, ECT, and more. Compare effectiveness, costs, and insurance coverage.";

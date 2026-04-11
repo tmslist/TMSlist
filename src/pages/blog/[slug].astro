@@ -2,6 +2,8 @@
 
 import Layout from '../../layouts/Layout.astro';
 import BlogCover from '../../components/BlogCover.astro';
+import FindClinicCTA from '../../components/FindClinicCTA.astro';
+import SectionLinks from '../../components/SectionLinks.astro';
 import { getCollection, render } from 'astro:content';
 import { BLOG_SLUGS } from '../../utils/seo_slugs';
 
@@ -42,7 +44,7 @@ export async function getStaticPaths() {
     .filter(({ slug }) => !contentSlugsSet.has(slug))
     .map(({ slug, title }) => ({
       params: { slug },
-      props: { title, description: '', hasContent: false, entry: null },
+      props: { title, description: `Expert insights on ${title} — evidence-based information on TMS therapy from the TMS List editorial team.`, hasContent: false, entry: null },
     }));
 
   return [...contentPaths, ...fallbackPaths];
@@ -91,7 +93,7 @@ const articleSchema = JSON.stringify({
 });
 ---
 
-<Layout title={`${title} | TMS List`} description={description} schema={articleSchema} breadcrumbs={[
+<Layout title={`${title} | TMS List`} description={description} schema={articleSchema} image={`${siteUrl}/images/blog/${slug}.webp`} breadcrumbs={[
   { name: "Home", url: "/" },
   { name: "Blog", url: "/blog/" },
   { name: title, url: `/blog/${slug}/` },
@@ -108,7 +110,7 @@ const articleSchema = JSON.stringify({
   <main class="container mx-auto px-4 py-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <!-- Article Column -->
-      <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none">
+      <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-a:text-violet-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-900 prose-table:border prose-table:border-slate-200 prose-th:bg-slate-50 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-slate-200 prose-img:rounded-xl prose-img:shadow-lg">
         <p class="lead text-xl text-gray-600 mb-8">
           Everything you need to know about <strong>{title}</strong> — how it works, what it costs, and how to find a provider who actually knows what they're doing.
         </p>
@@ -183,12 +185,32 @@ const articleSchema = JSON.stringify({
           </ul>
         </div>
 
-        <div class="bg-primary/5 p-6 rounded-2xl border border-primary/10">
-          <h4 class="font-semibold text-gray-900 mb-2 text-sm">Not sure where to start?</h4>
-          <p class="text-sm text-gray-600 mb-4">Take a 2-minute quiz to see if TMS might be right for you.</p>
-          <a href="/quiz/am-i-a-candidate/" class="inline-block text-sm font-semibold text-primary hover:text-primary-dark transition-colors">Take the Quiz</a>
+        <div class="bg-gradient-to-br from-violet-600 to-violet-800 p-6 rounded-2xl text-white">
+          <h4 class="font-semibold mb-2 text-sm">Not sure where to start?</h4>
+          <p class="text-sm text-violet-200 mb-4">Take a 2-minute quiz to see if TMS might be right for you.</p>
+          <a href="/quiz/am-i-a-candidate/" class="inline-block text-sm font-semibold bg-white text-violet-700 px-4 py-2 rounded-lg hover:bg-violet-50 transition-colors">Take the Quiz</a>
         </div>
       </aside>
     </div>
   </main>
+
+  <SectionLinks sections={[
+    { heading: 'Treatments', links: [
+      { title: 'TMS for Depression', href: '/treatments/depression/' },
+      { title: 'TMS for Anxiety', href: '/treatments/anxiety/' },
+      { title: 'TMS for OCD', href: '/treatments/ocd/' },
+      { title: 'All Treatments', href: '/treatments/' },
+    ]},
+    { heading: 'Insurance & Cost', links: [
+      { title: 'Medicare Coverage', href: '/insurance/medicare/' },
+      { title: 'TMS Cost Guide', href: '/tms-cost-guide/' },
+      { title: 'Insurance Eligibility', href: '/quiz/insurance-eligibility-checker/' },
+    ]},
+    { heading: 'Compare Options', links: [
+      { title: 'TMS vs. Medication', href: '/compare/tms-vs-antidepressants/' },
+      { title: 'TMS vs. ECT', href: '/compare/tms-vs-ect/' },
+      { title: 'TMS vs. Ketamine', href: '/compare/tms-vs-ketamine/' },
+    ]},
+  ]} />
+  <FindClinicCTA />
 </Layout>

@@ -5,7 +5,35 @@ description: "Research on TMS for cognitive decline in Alzheimer's disease — t
 fdaApproved: false
 successRate: "Research phase — some improvement in cognition and daily function in mild-moderate AD"
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+sessionCount: "20-30"
+duration: "4-6 weeks"
+brainArea: "Left DLPFC"
+faqs:
+  - question: "Can TMS improve memory in Alzheimer's?"
+    answer: "Small studies show modest improvements in cognitive function, particularly language and memory. TMS is not a cure but may slow decline or improve daily functioning."
+  - question: "At what stage of dementia is TMS most helpful?"
+    answer: "Most research involves mild to moderate Alzheimer's. Benefits appear greatest when significant neural connectivity remains. Severe dementia is unlikely to benefit."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">6.7M</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with Alzheimer's</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Research phase — some improvement in cognition and daily function in mild-moderate AD</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">20-30</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Alzheimer's Disease and How TMS Helps
 

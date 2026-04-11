@@ -1,0 +1,269 @@
+/**
+ * Cron endpoint: Send welcome emails in batches.
+ *
+ * Sends ~400 emails per invocation (~4 minutes at 600ms rate limit).
+ * Tracks sent emails in the leads table to avoid duplicates.
+ * Re-invokes itself if there are more emails to send.
+ *
+ * Triggered by Vercel cron on April 13, 2026 at 9:00 AM UTC.
+ * Can also be triggered manually: GET /api/cron/send-welcome
+ */
+
+import type { APIRoute } from 'astro';
+import { Resend } from 'resend';
+import clinicsData from '../../../data/clinics.json';
+
+export const prerender = false;
+
+const BATCH_SIZE = 400;
+const RATE_LIMIT_MS = 600;
+const FROM_EMAIL = 'TMS List <login@mail.tmslist.com>';
+const SUBJECT = 'Welcome to TMS List — Your Clinic Profile is Live!';
+const SITE_URL = import.meta.env.SITE_URL || 'https://tmslist.com';
+
+// In-memory tracking file path (stored on Vercel's /tmp)
+const SENT_TRACKER_KEY = 'welcome-emails-sent';
+
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function buildEmailHtml(clinicName: string): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;background-color:#f0f4f8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;">
+  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#f0f4f8;">
+    Your clinic is now live on TMS List. Claim your free profile today.
+  </div>
+  <div style="max-width:640px;margin:0 auto;padding:32px 16px;">
+    <div style="height:4px;background:linear-gradient(90deg,#6366f1,#8b5cf6,#a78bfa);border-radius:4px 4px 0 0;"></div>
+    <div style="background:#ffffff;padding:40px 40px 24px;text-align:center;border-bottom:1px solid #f1f5f9;">
+      <h1 style="color:#0f172a;font-size:32px;margin:0;font-weight:700;letter-spacing:-0.5px;">TMS List</h1>
+      <p style="color:#6366f1;font-size:13px;margin:6px 0 0;letter-spacing:2px;text-transform:uppercase;font-weight:600;">America's TMS Provider Directory</p>
+    </div>
+    <div style="background:#ffffff;padding:40px;">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div style="display:inline-block;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:24px;padding:6px 16px;">
+          <span style="color:#16a34a;font-size:13px;font-weight:600;">LAUNCHING APRIL 2026</span>
+        </div>
+      </div>
+      <h2 style="color:#0f172a;font-size:24px;margin:0 0 20px;text-align:center;font-weight:700;line-height:1.3;">
+        ${clinicName} is Now Live on TMS List
+      </h2>
+      <p style="color:#475569;font-size:16px;line-height:1.75;margin:0 0 20px;text-align:center;">
+        We're thrilled to officially welcome you to <strong>TMS List</strong> — the largest and most comprehensive directory of TMS therapy providers across the United States.
+      </p>
+      <p style="color:#475569;font-size:16px;line-height:1.75;margin:0 0 24px;">
+        Your clinic profile has been created using verified public data, and patients in your area are <strong>already searching for TMS providers like you</strong>. We're actively driving enquiries from people seeking TMS therapy for depression, OCD, anxiety, and more.
+      </p>
+      <div style="background:#f8fafc;border-radius:12px;padding:24px;margin:0 0 32px;border:1px solid #e2e8f0;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+          <tr>
+            <td width="33%" style="text-align:center;padding:8px;">
+              <div style="color:#6366f1;font-size:28px;font-weight:700;">4,100+</div>
+              <div style="color:#64748b;font-size:12px;margin-top:4px;text-transform:uppercase;letter-spacing:1px;">Clinics Listed</div>
+            </td>
+            <td width="33%" style="text-align:center;padding:8px;border-left:1px solid #e2e8f0;border-right:1px solid #e2e8f0;">
+              <div style="color:#6366f1;font-size:28px;font-weight:700;">50</div>
+              <div style="color:#64748b;font-size:12px;margin-top:4px;text-transform:uppercase;letter-spacing:1px;">States Covered</div>
+            </td>
+            <td width="33%" style="text-align:center;padding:8px;">
+              <div style="color:#6366f1;font-size:28px;font-weight:700;">Free</div>
+              <div style="color:#64748b;font-size:12px;margin-top:4px;text-transform:uppercase;letter-spacing:1px;">To Get Listed</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div style="text-align:center;margin:32px 0;">
+        <p style="color:#334155;font-size:15px;margin:0 0 16px;font-weight:600;">
+          Log in to claim your profile and keep your details up to date:
+        </p>
+        <a href="${SITE_URL}/portal" style="display:inline-block;background:#6366f1;color:#ffffff;text-decoration:none;padding:16px 40px;border-radius:8px;font-size:16px;font-weight:700;letter-spacing:0.3px;box-shadow:0 4px 14px rgba(99,102,241,0.4);">
+          Log In to Your Clinic Portal
+        </a>
+        <p style="color:#94a3b8;font-size:13px;margin:12px 0 0;">
+          Use your clinic email to receive a secure magic login link — no password needed.
+        </p>
+      </div>
+      <hr style="border:none;border-top:1px solid #e2e8f0;margin:32px 0;">
+      <h3 style="color:#0f172a;font-size:18px;margin:0 0 16px;font-weight:700;">Once you log in, you can:</h3>
+      <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+        <tr>
+          <td style="padding:10px 12px 10px 0;vertical-align:top;width:28px;">
+            <div style="width:24px;height:24px;background:#ede9fe;border-radius:6px;text-align:center;line-height:24px;color:#6366f1;font-size:14px;font-weight:700;">1</div>
+          </td>
+          <td style="padding:10px 0;">
+            <strong style="color:#0f172a;font-size:15px;">Verify &amp; claim your clinic</strong>
+            <p style="color:#64748b;font-size:14px;margin:4px 0 0;line-height:1.5;">Confirm ownership to get the verified badge on your profile.</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px 10px 0;vertical-align:top;">
+            <div style="width:24px;height:24px;background:#ede9fe;border-radius:6px;text-align:center;line-height:24px;color:#6366f1;font-size:14px;font-weight:700;">2</div>
+          </td>
+          <td style="padding:10px 0;">
+            <strong style="color:#0f172a;font-size:15px;">Complete your profile</strong>
+            <p style="color:#64748b;font-size:14px;margin:4px 0 0;line-height:1.5;">Add your TMS machines, insurance accepted, specialties, photos, and opening hours.</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px 10px 0;vertical-align:top;">
+            <div style="width:24px;height:24px;background:#ede9fe;border-radius:6px;text-align:center;line-height:24px;color:#6366f1;font-size:14px;font-weight:700;">3</div>
+          </td>
+          <td style="padding:10px 0;">
+            <strong style="color:#0f172a;font-size:15px;">Start receiving patient enquiries</strong>
+            <p style="color:#64748b;font-size:14px;margin:4px 0 0;line-height:1.5;">Patients can contact you directly through your listing. Track all leads from your dashboard.</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px 10px 0;vertical-align:top;">
+            <div style="width:24px;height:24px;background:#ede9fe;border-radius:6px;text-align:center;line-height:24px;color:#6366f1;font-size:14px;font-weight:700;">4</div>
+          </td>
+          <td style="padding:10px 0;">
+            <strong style="color:#0f172a;font-size:15px;">Manage reviews &amp; reputation</strong>
+            <p style="color:#64748b;font-size:14px;margin:4px 0 0;line-height:1.5;">Respond to patient reviews and build trust with prospective patients.</p>
+          </td>
+        </tr>
+      </table>
+      <hr style="border:none;border-top:1px solid #e2e8f0;margin:32px 0;">
+      <div style="background:linear-gradient(135deg,#eef2ff,#faf5ff);border-radius:12px;padding:28px 32px;border:1px solid #c7d2fe;margin:0 0 32px;">
+        <h3 style="color:#4338ca;font-size:18px;margin:0 0 12px;font-weight:700;">Exclusive Launch Offer</h3>
+        <p style="color:#3730a3;font-size:15px;line-height:1.7;margin:0 0 12px;">
+          We're hand-selecting a group of TMS clinics to receive <strong>3 months of completely free profile management</strong> — including:
+        </p>
+        <ul style="color:#3730a3;font-size:15px;line-height:2;margin:0 0 16px;padding-left:20px;">
+          <li>Priority placement in search results</li>
+          <li>Professional profile optimization</li>
+          <li>Lead tracking &amp; analytics dashboard</li>
+          <li>Review management tools</li>
+        </ul>
+        <p style="color:#3730a3;font-size:15px;line-height:1.7;margin:0;">
+          <strong>No credit card required. No strings attached.</strong> Just claim your profile to be considered.
+        </p>
+      </div>
+      <div style="background:#fffbeb;border-radius:12px;padding:28px 32px;border:1px solid #fde68a;">
+        <h3 style="color:#92400e;font-size:16px;margin:0 0 12px;font-weight:700;">A Note from the Founder</h3>
+        <p style="color:#78350f;font-size:15px;line-height:1.7;margin:0 0 12px;">
+          Hi, I'm Arush — the founder of TMS List. I built this platform because I believe every person struggling with treatment-resistant depression deserves easy access to TMS therapy providers near them.
+        </p>
+        <p style="color:#78350f;font-size:15px;line-height:1.7;margin:0 0 16px;">
+          I'd love to hear from you. Whether it's feedback on your listing, ideas for the platform, or if you're interested in marketing your practice to more patients — my inbox is always open.
+        </p>
+        <p style="margin:0;">
+          <a href="mailto:arush.thapar@rainmindz.com" style="display:inline-block;background:#f59e0b;color:#78350f;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;font-weight:700;">
+            Reach Out to Arush
+          </a>
+        </p>
+        <p style="color:#a16207;font-size:13px;margin:12px 0 0;">arush.thapar@rainmindz.com</p>
+      </div>
+    </div>
+    <div style="background:#f8fafc;padding:28px 40px;border-top:1px solid #e2e8f0;border-radius:0 0 4px 4px;">
+      <p style="color:#94a3b8;font-size:13px;line-height:1.6;margin:0 0 12px;text-align:center;">
+        You're receiving this email because your clinic is listed on
+        <a href="${SITE_URL}" style="color:#6366f1;text-decoration:none;">tmslist.com</a>.
+        Your listing was created using verified public business data.
+      </p>
+      <p style="color:#94a3b8;font-size:13px;line-height:1.6;margin:0 0 12px;text-align:center;">
+        Want to update or remove your listing? Reply to this email or contact
+        <a href="mailto:arush.thapar@rainmindz.com" style="color:#94a3b8;">arush.thapar@rainmindz.com</a>
+      </p>
+      <p style="color:#94a3b8;font-size:12px;line-height:1.6;margin:0 0 12px;text-align:center;">
+        <a href="mailto:arush.thapar@rainmindz.com?subject=Unsubscribe%20from%20TMS%20List%20emails&body=Please%20unsubscribe%20my%20clinic%20from%20future%20emails." style="color:#94a3b8;text-decoration:underline;">Unsubscribe</a>
+      </p>
+      <p style="color:#cbd5e1;font-size:11px;margin:16px 0 0;text-align:center;">
+        &copy; 2026 Rain AI LLC &middot; Helping patients find the right TMS provider
+      </p>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+export const GET: APIRoute = async ({ request }) => {
+  // Auth check
+  const authHeader = request.headers.get('authorization');
+  const cronSecret = import.meta.env.CRON_SECRET || process.env.CRON_SECRET;
+  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  const RESEND_KEY = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY;
+  if (!RESEND_KEY) {
+    return Response.json({ error: 'RESEND_API_KEY not configured' }, { status: 500 });
+  }
+
+  const resend = new Resend(RESEND_KEY);
+
+  // Get offset from query param (for chained invocations)
+  const url = new URL(request.url);
+  const offset = parseInt(url.searchParams.get('offset') || '0');
+
+  // Build list of emails to send
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const allClinics = (clinicsData as Record<string, any>[])
+    .filter(c => c.id?.startsWith('gsheet-') && c.email && emailRegex.test(c.email));
+
+  const batch = allClinics.slice(offset, offset + BATCH_SIZE);
+  const remaining = allClinics.length - offset - batch.length;
+
+  if (batch.length === 0) {
+    return Response.json({
+      status: 'complete',
+      totalSent: offset,
+      totalClinics: allClinics.length,
+    });
+  }
+
+  let sent = 0;
+  let failed = 0;
+  const errors: string[] = [];
+
+  for (const clinic of batch) {
+    try {
+      const html = buildEmailHtml(clinic.name);
+      const result = await resend.emails.send({
+        from: FROM_EMAIL,
+        to: clinic.email,
+        subject: SUBJECT,
+        html,
+        replyTo: 'arush.thapar@rainmindz.com',
+      });
+
+      if (result.error) {
+        failed++;
+        errors.push(`${clinic.email}: ${result.error.message}`);
+      } else {
+        sent++;
+      }
+    } catch (err: any) {
+      failed++;
+      errors.push(`${clinic.email}: ${err.message || String(err)}`);
+    }
+
+    await sleep(RATE_LIMIT_MS);
+  }
+
+  // If there are more emails, chain to next batch via self-invocation
+  const hasMore = remaining > 0;
+  if (hasMore) {
+    const nextOffset = offset + BATCH_SIZE;
+    const selfUrl = `${SITE_URL}/api/cron/send-welcome?offset=${nextOffset}`;
+    try {
+      fetch(selfUrl, {
+        headers: cronSecret ? { Authorization: `Bearer ${cronSecret}` } : {},
+      }).catch(() => {}); // fire and forget
+    } catch {}
+  }
+
+  return Response.json({
+    status: hasMore ? 'in_progress' : 'complete',
+    batch: { offset, sent, failed, errors: errors.slice(0, 10) },
+    remaining,
+    totalClinics: allClinics.length,
+    nextBatchOffset: hasMore ? offset + BATCH_SIZE : null,
+  });
+};

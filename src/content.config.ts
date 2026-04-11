@@ -133,4 +133,18 @@ const quiz = defineCollection({
   }),
 });
 
-export const collections = { blog, treatments, insurance, comparisons, protocols, demographics, research, stories, legal, providers, commercial, quiz };
+const alternatives = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/alternatives' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    fdaApproved: z.boolean().default(false),
+    approvedFor: z.string().optional(),
+    mechanism: z.string().optional(),
+    typicalCost: z.string().optional(),
+    sessionDuration: z.string().optional(),
+    faqs: z.array(z.object({ question: z.string(), answer: z.string() })).default([]),
+  }),
+});
+
+export const collections = { blog, treatments, insurance, comparisons, protocols, demographics, research, stories, legal, providers, commercial, quiz, alternatives };

@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
 
+interface MissingField {
+  key: string;
+  label: string;
+  priority: 'high' | 'medium';
+}
+
 interface DashboardData {
   needsClaim?: boolean;
   clinic?: {
@@ -13,6 +19,10 @@ interface DashboardData {
     reviewCount: number;
     avgRating: number;
     leadCount: number;
+  };
+  profileCompletion?: {
+    percentage: number;
+    missingFields: MissingField[];
   };
   recentReviews?: Array<{
     id: string;
@@ -37,6 +47,7 @@ export default function PortalDashboard({ userEmail, userId }: { userEmail: stri
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [profilePromptDismissed, setProfilePromptDismissed] = useState(false);
 
   useEffect(() => {
     fetch('/api/portal/dashboard')
@@ -126,6 +137,85 @@ export default function PortalDashboard({ userEmail, userId }: { userEmail: stri
           Sign Out
         </button>
       </div>
+
+      {/* Profile Completion Prompt */}
+      {data?.profileCompletion && data.profileCompletion.percentage < 100 && !profilePromptDismissed && (
+        <div className="mb-8 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl border border-emerald-200 p-6 shadow-sm relative">
+          <button
+            onClick={() => setProfilePromptDismissed(true)}
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            aria-label="Dismiss"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-lg font-semibold text-gray-900 mb-1">Complete Your Profile</h3>
+              <p className="text-sm text-gray-600 mb-3">
+                Your profile is <strong>{data.profileCompletion.percentage}%</strong> complete. Clinics with full profiles get up to 3x more patient enquiries.
+              </p>
+
+              {/* Progress bar */}
+              <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                <div
+                  className="bg-emerald-500 h-2.5 rounded-full transition-all duration-500"
+                  style={{ width: `${data.profileCompletion.percentage}%` }}
+                />
+              </div>
+
+              {/* Missing fields grouped by priority */}
+              {data.profileCompletion.missingFields.filter(f => f.priority === 'high').length > 0 && (
+                <div className="mb-3">
+                  <p className="text-xs font-semibold text-red-600 uppercase tracking-wide mb-1.5">Required</p>
+                  <div className="flex flex-wrap gap-2">
+                    {data.profileCompletion.missingFields.filter(f => f.priority === 'high').map(f => (
+                      <span key={f.key} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-red-50 text-red-700 border border-red-200">
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        {f.label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {data.profileCompletion.missingFields.filter(f => f.priority === 'medium').length > 0 && (
+                <div className="mb-4">
+                  <p className="text-xs font-semibold text-amber-600 uppercase tracking-wide mb-1.5">Recommended</p>
+                  <div className="flex flex-wrap gap-2">
+                    {data.profileCompletion.missingFields.filter(f => f.priority === 'medium').map(f => (
+                      <span key={f.key} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        {f.label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <a
+                href="/portal/clinic"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-all shadow-sm"
+              >
+                Complete Your Profile
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

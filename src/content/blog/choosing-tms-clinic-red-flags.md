@@ -105,3 +105,25 @@ Don't just take a clinic's word for it. Here's a quick verification checklist:
 We maintain a directory of TMS clinics across the United States with verified information about their equipment, providers, and insurance acceptance. You can [search clinics by location](/us/) or browse [verified clinics](/verified-clinics/) that meet our quality criteria.
 
 Choosing the right TMS clinic is one of the biggest decisions in your treatment. The difference between a great clinic and a mediocre one isn't just about comfort — it can genuinely affect whether the treatment works. Take the time to evaluate your options, ask hard questions, and trust your gut when something doesn't feel right.
+
+
+---
+
+<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Find TMS Providers</h4>
+  <div class="grid grid-cols-2 gap-2">
+    <a href="/us/" class="text-sm text-violet-700 hover:underline">Find a Clinic</a>
+    <a href="/providers/hospital-based/" class="text-sm text-violet-700 hover:underline">Hospital-Based TMS</a>
+    <a href="/providers/private-practice/" class="text-sm text-violet-700 hover:underline">Private Practice TMS</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-sm text-violet-700 hover:underline">Am I a Candidate?</a>
+  </div>
+</div>
+
+<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+  <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
+  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
+  </div>
+</div>

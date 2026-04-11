@@ -17,26 +17,38 @@ import {
 const { slug } = Astro.params;
 
 // Parse slug: "depression-tms-near-san-diego" -> treatment + city
-const nearMatch = (slug || '').match(/^(.+)-tms-near-(.+)$/);
+// Also handle generic "tms-near-me" slug
+const isGenericNearMe = slug === 'tms-near-me';
+const nearMatch = !isGenericNearMe ? (slug || '').match(/^(.+)-tms-near-(.+)$/) : null;
 const treatmentSlugPart = nearMatch?.[1] || '';
 const citySlugPart = nearMatch?.[2] || '';
 
 const treatmentEntry = TREATMENT_SLUGS.find(t =>
   t.slug === treatmentSlugPart || t.slug === `tms-for-${treatmentSlugPart}`
 );
-const treatmentTitle = treatmentEntry?.title || `TMS for ${treatmentSlugPart.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}`;
-const cityName = citySlugPart.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+const treatmentTitle = isGenericNearMe
+  ? 'TMS Therapy'
+  : (treatmentEntry?.title || `TMS for ${treatmentSlugPart.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}`);
+const cityName = isGenericNearMe
+  ? 'You'
+  : citySlugPart.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
 
 const allClinics = (await getAllClinics()).filter(c => c.verified);
-const cityClinics = allClinics.filter(c => c.city.toLowerCase() === cityName.toLowerCase());
+const cityClinics = isGenericNearMe
+  ? allClinics.slice(0, 50)
+  : allClinics.filter(c => c.city.toLowerCase() === cityName.toLowerCase());
 const stateName = cityClinics.length > 0 ? (STATE_NAMES[cityClinics[0].state] || cityClinics[0].state) : '';
 
 const sortedClinics = [...cityClinics].sort(
   (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
 );
 
-const title = `${treatmentTitle} Near ${cityName} | Find Top Providers`;
-const description = `Looking for ${treatmentTitle} near ${cityName}, ${stateName}? Compare top-rated clinics nearby. Verified reviews and photos.`;
+const title = isGenericNearMe
+  ? 'Find TMS Therapy Near You | Top Verified Clinics'
+  : `${treatmentTitle} Near ${cityName} | Find Top Providers`;
+const description = isGenericNearMe
+  ? `Find verified TMS therapy clinics near you. Compare ${allClinics.length}+ providers by ratings, insurance, and technology.`
+  : `Looking for ${treatmentTitle} near ${cityName}, ${stateName}? Compare top-rated clinics nearby. Verified reviews and photos.`;
 
 // Schema
 const breadcrumbSchema = generateBreadcrumbSchema([

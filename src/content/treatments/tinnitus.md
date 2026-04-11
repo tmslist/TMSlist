@@ -4,7 +4,35 @@ condition: "Tinnitus"
 description: "TMS for tinnitus (ringing in the ears) — off-label treatment targeting the auditory cortex to reduce perceived sound."
 fdaApproved: false
 successRate: "30-40% report meaningful reduction"
+sessionCount: "10-20"
+duration: "2-4 weeks"
+brainArea: "Left temporoparietal cortex"
+faqs:
+  - question: "Does TMS cure tinnitus?"
+    answer: "TMS doesn't cure tinnitus but can significantly reduce loudness and distress. About 40-50% of patients report meaningful improvement."
+  - question: "Which brain area is targeted for tinnitus?"
+    answer: "Low-frequency (1 Hz) stimulation of the left temporoparietal cortex — this differs from the DLPFC target used for depression."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">25M+</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with tinnitus</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">30-40% report meaningful reduction</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">10-20</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Tinnitus and How TMS Helps
 

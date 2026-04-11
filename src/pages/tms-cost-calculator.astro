@@ -145,10 +145,18 @@ const schema = JSON.stringify({
         const el = document.getElementById(id);
         if (el) el.style.display = hasInsurance.value ? 'block' : 'none';
       });
+      calculate();
     });
   });
 
-  document.getElementById('calculate-btn')?.addEventListener('click', () => {
+  // Auto-calculate on any input change
+  ['protocol', 'insurance-type', 'deductible'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', () => calculate());
+  });
+
+  document.getElementById('calculate-btn')?.addEventListener('click', () => calculate());
+
+  function calculate() {
     const protocol = (document.getElementById('protocol') as HTMLSelectElement).value;
     const insured = hasInsurance.value;
     const insType = (document.getElementById('insurance-type') as HTMLSelectElement).value;

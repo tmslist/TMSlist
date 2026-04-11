@@ -5,7 +5,35 @@ description: "Emerging TMS research for anorexia nervosa and bulimia — targeti
 fdaApproved: false
 successRate: "Research phase — early trials show 40-50% improvement"
 image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=400&fit=crop"
+sessionCount: "20-30"
+duration: "4-6 weeks"
+brainArea: "Left DLPFC"
+faqs:
+  - question: "Which eating disorders respond to TMS?"
+    answer: "Most research focuses on bulimia nervosa and binge eating disorder. Evidence for anorexia nervosa is more limited but growing."
+  - question: "How does TMS help with eating disorders?"
+    answer: "TMS targets the prefrontal cortex to improve impulse control and reduce food-related cravings. It also addresses the depression and anxiety that frequently co-occur."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">28M</div>
+    <div class="text-xs text-violet-600 mt-1">US adults affected in lifetime</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Research phase — early trials show 40-50% improvement</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">20-30</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What Are Eating Disorders and How TMS Helps
 

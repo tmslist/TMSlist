@@ -3,179 +3,295 @@ title: "TMS for PTSD"
 condition: "PTSD"
 description: "TMS therapy for post-traumatic stress disorder — promising clinical trial results, especially from VA research, though not yet FDA-cleared for this indication."
 fdaApproved: false
-successRate: "45-65% response in clinical trials"
+successRate: "45-65% response"
+sessionCount: "20-36"
+duration: "4-6 weeks"
+brainArea: "DLPFC (bilateral)"
 image: "https://images.unsplash.com/photo-1509475826633-fed577a2c71b?w=800&h=400&fit=crop"
+faqs:
+  - question: "Is TMS FDA-approved for PTSD?"
+    answer: "No. As of 2026, TMS isn't FDA-cleared for PTSD. It's used off-label based on substantial research, particularly from VA studies. Many clinicians expect eventual FDA clearance."
+  - question: "Can TMS help with combat-related PTSD?"
+    answer: "Yes. Most PTSD TMS research has been conducted with military veterans. Response rates of 45-65% have been reported in studies primarily involving combat-related PTSD."
+  - question: "Will TMS make my nightmares worse?"
+    answer: "Some people experience a temporary increase in intrusive symptoms during weeks 1-2. This typically resolves and is followed by improvement. Your treatment team should monitor for this."
+  - question: "Can I do TMS and trauma therapy at the same time?"
+    answer: "Yes — emerging evidence suggests the combination works better than either alone. TMS may enhance the brain's capacity for fear extinction, making therapy sessions more productive."
+  - question: "How long do the benefits last?"
+    answer: "Benefits typically last 3-6 months, with some maintaining improvement for a year or longer. Maintenance sessions or combination with ongoing therapy improves durability."
 ---
 
-## What is PTSD and How TMS Helps
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-rose-50 border border-rose-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-rose-700 font-display">6%</div>
+    <div class="text-xs text-rose-600 mt-1">US population affected</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">11-20%</div>
+    <div class="text-xs text-amber-600 mt-1">Military veterans with PTSD</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">45-65%</div>
+    <div class="text-xs text-emerald-600 mt-1">TMS response rate in trials</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">VA-Led</div>
+    <div class="text-xs text-blue-600 mt-1">Largest research base</div>
+  </div>
+</div>
 
-PTSD develops after trauma. Flashbacks. Nightmares. Hypervigilance. Exaggerated startle. Avoidance of anything that reminds you of what happened. Negative shifts in mood and thinking that won't lift. About 6% of the U.S. population will experience PTSD at some point. Among military veterans, that number jumps to 11-20%. Sexual assault survivors and first responders face similarly elevated rates.
+## What Is PTSD and How TMS Helps
 
-The brain in PTSD has a distinctive pattern of circuit dysfunction. Three things go wrong at once. The ventromedial prefrontal cortex (vmPFC) goes underactive — this is the region responsible for fear extinction, the process by which your brain learns that a previously threatening stimulus is no longer dangerous. When it's not working, the brain can't turn off fear responses even when the threat has passed. At the same time, the amygdala runs chronically hot, generating exaggerated fear and stress reactions. And the hippocampus, which helps place memories in proper context and time, often shrinks in volume and function — contributing to the fragmented, intrusive nature of traumatic memories.
+PTSD develops after trauma — flashbacks, nightmares, hypervigilance, exaggerated startle, avoidance. About 6% of the US population experiences it. Among military veterans, that jumps to 11-20%. Sexual assault survivors and first responders face similarly elevated rates.
 
-Prefrontal underactivity. Amygdala overdrive. Hippocampal dysfunction. A brain stuck in survival mode.
+<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">Three things go wrong in the PTSD brain</h4>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+    <div class="bg-white rounded-xl p-4 border border-slate-100">
+      <div class="font-semibold text-red-600 text-sm mb-1">vmPFC Goes Quiet</div>
+      <p class="text-xs text-slate-600 mb-0">The region responsible for fear extinction can't turn off fear responses even when the threat has passed.</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-slate-100">
+      <div class="font-semibold text-amber-600 text-sm mb-1">Amygdala Runs Hot</div>
+      <p class="text-xs text-slate-600 mb-0">Generates exaggerated fear and stress reactions chronically. The brain's alarm never turns off.</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-slate-100">
+      <div class="font-semibold text-blue-600 text-sm mb-1">Hippocampus Shrinks</div>
+      <p class="text-xs text-slate-600 mb-0">Can't properly contextualize memories, contributing to fragmented, intrusive traumatic recall.</p>
+    </div>
+  </div>
+</div>
 
-Traditional treatments include trauma-focused therapies (Prolonged Exposure, Cognitive Processing Therapy, EMDR) and medications (mainly SSRIs and SNRIs — sertraline and paroxetine are the only FDA-approved medications for PTSD). These help many people. But 30-50% of PTSD patients don't get adequate relief, and the medication options are limited in both number and effectiveness.
+Traditional treatments (Prolonged Exposure, CPT, EMDR, SSRIs) help many — but **30-50% don't get adequate relief**. TMS can directly modulate the dysfunctional circuits, strengthening prefrontal control over fear responses.
 
-TMS can directly modulate the dysfunctional circuits underlying PTSD. By strengthening prefrontal cortex activity, it enhances the brain's natural ability to regulate fear, process traumatic memories, and restore the top-down control that PTSD disrupts. It addresses the neurological root of the problem, not just the symptoms.
+---
 
 ## How TMS Works for PTSD
 
-PTSD protocols are more varied than depression protocols — researchers have tested several brain targets and stimulation approaches:
+PTSD protocols are more varied than depression protocols — researchers have tested several targets:
 
-**High-frequency left DLPFC stimulation**: Similar to the standard depression protocol. Excitatory stimulation (10 Hz) boosts activity in the left dorsolateral prefrontal cortex, strengthening top-down regulation of the amygdala and supporting fear extinction. Sessions run 30-37 minutes at 120% of motor threshold.
+<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5">
+    <h4 class="font-display font-bold text-violet-900 text-sm mb-2">High-Frequency Left DLPFC</h4>
+    <p class="text-xs text-violet-700 mb-0">Excitatory 10 Hz stimulation boosts prefrontal activity, strengthening top-down regulation of the amygdala. Similar to depression protocol. 30-37 min sessions.</p>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
+    <h4 class="font-display font-bold text-blue-900 text-sm mb-2">Low-Frequency Right DLPFC</h4>
+    <p class="text-xs text-blue-700 mb-0">Inhibitory 1 Hz stimulation reduces hyperactivity in right-hemisphere threat processing — targeting hyperarousal and hypervigilance. 20-30 min sessions.</p>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
+    <h4 class="font-display font-bold text-emerald-900 text-sm mb-2">Bilateral Stimulation</h4>
+    <p class="text-xs text-emerald-700 mb-0">Both approaches in one session — low-frequency right, then high-frequency left. Targets both underactivity and overactivity. 40-50 min total.</p>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5">
+    <h4 class="font-display font-bold text-amber-900 text-sm mb-2">Deep TMS (mPFC Target)</h4>
+    <p class="text-xs text-amber-700 mb-0">BrainsWay H-coils reaching deeper midline structures — the vmPFC and ACC — directly involved in fear extinction. Promising preliminary data.</p>
+  </div>
+</div>
 
-**Low-frequency right DLPFC stimulation**: The opposite approach. Inhibitory stimulation (1 Hz) aims to reduce hyperactivity in right-hemisphere threat processing circuits — the ones tied to hyperarousal and hypervigilance. Sessions typically last 20-30 minutes.
+Some protocols pair TMS with **trauma-related exposure or imagery** — activating PTSD circuits while they're being stimulated. Early evidence suggests this combined approach boosts outcomes, similar to the provocation step in OCD treatment.
 
-**Bilateral stimulation**: Both approaches in one session — low-frequency right, then high-frequency left, totaling 40-50 minutes. This targets both the underactivity and overactivity patterns in PTSD simultaneously.
+---
 
-**Deep TMS targeting medial prefrontal cortex**: Using BrainsWay H-coils to reach deeper midline structures — the vmPFC and ACC — directly involved in fear extinction and emotional regulation. Newer, but the preliminary data is promising.
+## Clinical Evidence
 
-**Accelerated protocols**: Inspired by the Stanford SAINT protocol for depression, some researchers are testing compressed schedules with multiple daily sessions over 5-10 days instead of the usual 6-week course.
+<div class="not-prose my-8 space-y-4">
+  <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-5">
+    <div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">VA Multicenter RCT (2019) — 61% response</div>
+      <p class="text-sm text-slate-600 mt-1 mb-0">Active TMS vs 38% sham. One of the largest and most rigorous PTSD TMS trials to date.</p>
+    </div>
+  </div>
+  <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-5">
+    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">2020 Meta-Analysis — Journal of Clinical Psychiatry</div>
+      <p class="text-sm text-slate-600 mt-1 mb-0">12 RCTs, 500+ participants. Significant overall effect, moderate effect size (Hedges' g = 0.51).</p>
+    </div>
+  </div>
+  <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-5">
+    <div class="w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">2021 Biological Psychiatry — Hyperarousal Focus</div>
+      <p class="text-sm text-slate-600 mt-1 mb-0">1 Hz right DLPFC stimulation significantly reduced hyperarousal symptoms specifically, with effects holding at 3-month follow-up.</p>
+    </div>
+  </div>
+</div>
 
-One addition that's unique to some PTSD protocols: pairing TMS with trauma-related exposure or imagery. The idea is to activate PTSD circuits while they're being stimulated — similar to the provocation approach used in OCD treatment. Early evidence suggests this combined approach may boost outcomes.
+**The best results** come from protocols combining TMS with trauma-focused psychotherapy — TMS primes the brain for more effective therapeutic processing.
 
-## Clinical Evidence and Success Rates
+---
 
-TMS for PTSD has been studied extensively, especially within the VA system, though it doesn't yet have FDA clearance.
+## Who Qualifies
 
-Key findings:
+<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
+    <div class="flex items-center gap-2 mb-2">
+      <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      <h4 class="font-semibold text-emerald-900 text-sm m-0">Confirmed PTSD</h4>
+    </div>
+    <p class="text-xs text-emerald-700 mb-0">Assessed with CAPS-5 or PCL-5. Stable baseline, not in active crisis.</p>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
+    <div class="flex items-center gap-2 mb-2">
+      <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      <h4 class="font-semibold text-blue-900 text-sm m-0">Treatment-Resistant</h4>
+    </div>
+    <p class="text-xs text-blue-700 mb-0">Failed at least one SSRI/SNRI trial and/or evidence-based therapy (PE, CPT, EMDR).</p>
+  </div>
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5">
+    <div class="flex items-center gap-2 mb-2">
+      <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      <h4 class="font-semibold text-violet-900 text-sm m-0">Veterans</h4>
+    </div>
+    <p class="text-xs text-violet-700 mb-0">Many VA medical centers offer TMS for PTSD. Ask your mental health provider about availability.</p>
+  </div>
+</div>
 
-- A 2019 multicenter randomized controlled trial across VA medical centers found active TMS produced a **response rate of about 61%** vs. 38% with sham — a significant difference. This was one of the largest and most rigorous PTSD TMS trials to date.
-- A 2020 meta-analysis in the Journal of Clinical Psychiatry pooled data from 12 randomized controlled trials with over 500 participants and found a significant overall effect, with a moderate effect size (Hedges' g = 0.51).
-- A 2021 study in Biological Psychiatry showed that 1 Hz right DLPFC stimulation significantly reduced hyperarousal symptoms specifically, with effects holding at 3-month follow-up.
-- The VA Cooperative Studies Program has funded several large trials. Results have been encouraging enough that many VA medical centers now offer TMS for PTSD through clinical programs.
-- Across studies, response rates generally range from **45-65%**. The best results come from protocols combining TMS with trauma-focused psychotherapy.
-- **Durability**: Benefits last 3-6 months in most responders, with some studies showing sustained improvement at 6 and 12 months.
+---
 
-How does that compare? SSRIs/SNRIs produce response rates of about 40-60% for PTSD, often with incomplete symptom resolution. TMS offers a comparable or potentially complementary path. The most exciting direction: combining TMS with established therapies like Prolonged Exposure or CPT, with the idea that TMS primes the brain for more effective therapeutic processing.
+## What to Expect
 
-## Who Qualifies for TMS Treatment
+<div class="not-prose my-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+  <div class="bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-xl font-bold text-violet-600 font-display">20-36</div>
+    <div class="text-xs text-slate-500 mt-1">Sessions</div>
+  </div>
+  <div class="bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-xl font-bold text-violet-600 font-display">5x/week</div>
+    <div class="text-xs text-slate-500 mt-1">Frequency</div>
+  </div>
+  <div class="bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-xl font-bold text-violet-600 font-display">4-6 wks</div>
+    <div class="text-xs text-slate-500 mt-1">Duration</div>
+  </div>
+  <div class="bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-xl font-bold text-violet-600 font-display">20-40 min</div>
+    <div class="text-xs text-slate-500 mt-1">Per Session</div>
+  </div>
+</div>
 
-Since TMS isn't FDA-cleared for PTSD, qualification criteria are less standardized. Generally, candidates include:
+**Improvement timeline**: Sleep improves first — fewer nightmares, less startle. Avoidance behaviors and intrusive re-experiencing improve by weeks 3-5. Full effects keep building after treatment ends.
 
-- **Confirmed PTSD diagnosis**: Assessed with the Clinician-Administered PTSD Scale (CAPS-5) or PTSD Checklist (PCL-5)
-- **Treatment resistance**: Inadequate response to at least one adequate trial of an SSRI or SNRI (typically sertraline or paroxetine) and/or evidence-based psychotherapy (Prolonged Exposure, CPT, or EMDR)
-- **Stable baseline**: Not in active crisis, not actively suicidal, no acute psychosis
-- **Willingness to engage**: Some protocols include exposure components, so you need to be prepared for controlled contact with trauma-related stimuli
+---
 
-Contraindications — the same as for any TMS indication:
+## Side Effects
 
-- Metallic implants in or near the head
-- Active seizure disorder or epilepsy
-- Implanted neurostimulation devices
-- Cardiac pacemakers or defibrillators
+<div class="not-prose my-8">
+<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+  <thead>
+    <tr class="bg-slate-800 text-white">
+      <th class="px-4 py-3 text-left font-semibold">Factor</th>
+      <th class="px-4 py-3 text-center font-semibold">TMS</th>
+      <th class="px-4 py-3 text-center font-semibold">SSRIs</th>
+      <th class="px-4 py-3 text-center font-semibold">Benzos</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-slate-200">
+    <tr class="bg-white">
+      <td class="px-4 py-3 font-medium text-slate-900">Sexual Dysfunction</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Common</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Rare</span></td>
+    </tr>
+    <tr class="bg-slate-50">
+      <td class="px-4 py-3 font-medium text-slate-900">Dependence Risk</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">High</span></td>
+    </tr>
+    <tr class="bg-white">
+      <td class="px-4 py-3 font-medium text-slate-900">Emotional Numbing</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Common</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Common</span></td>
+    </tr>
+    <tr class="bg-slate-50">
+      <td class="px-4 py-3 font-medium text-slate-900">Scalp Discomfort</td>
+      <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">First week</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">N/A</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">N/A</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-Clinicians should also screen for dissociative symptoms before and during treatment. Dissociative episodes during TMS are uncommon, but PTSD patients with a strong dissociative component may need extra monitoring.
+<div class="not-prose my-6 bg-amber-50 border border-amber-200 rounded-xl p-5">
+  <h4 class="font-semibold text-amber-800 text-sm mb-2">PTSD-Specific Considerations</h4>
+  <ul class="text-sm text-amber-700 space-y-1 mb-0 list-disc pl-4">
+    <li><strong>Dissociation</strong>: TMS can occasionally trigger dissociative episodes. Clinicians should screen before and during treatment.</li>
+    <li><strong>Emotional releases</strong>: Some people experience tears, anger, or grief as the brain reprocesses trauma material. Generally therapeutic but needs clinical support.</li>
+    <li><strong>Temporary symptom increase</strong>: Weeks 1-2 may see brief worsening before improvement kicks in.</li>
+  </ul>
+</div>
 
-**Veterans**: If you get care through the VA, ask your mental health provider about TMS. Many VA medical centers offer it for PTSD through clinical programs or research studies.
+---
 
-## What to Expect During Treatment
+## Cost and Insurance
 
-A typical course:
+<div class="not-prose my-8 bg-amber-50 border border-amber-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-amber-900 mb-3 text-base">Getting TMS Covered for PTSD</h4>
+  <p class="text-sm text-amber-800 leading-relaxed mb-4">No FDA clearance means insurance generally won't cover PTSD-only TMS. But there are paths:</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="bg-white rounded-xl p-4 border border-amber-100">
+      <div class="font-semibold text-sm text-slate-900 mb-1">Comorbid Depression (50-75%)</div>
+      <p class="text-xs text-slate-600 mb-0">Most PTSD patients also have MDD. Get TMS approved through the depression pathway.</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-amber-100">
+      <div class="font-semibold text-sm text-slate-900 mb-1">VA Healthcare</div>
+      <p class="text-xs text-slate-600 mb-0">The VA is the largest TMS-for-PTSD provider. Many centers offer it through clinical programs or research.</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-amber-100">
+      <div class="font-semibold text-sm text-slate-900 mb-1">Clinical Trials</div>
+      <p class="text-xs text-slate-600 mb-0">Active studies provide TMS at no cost. Search ClinicalTrials.gov for "TMS PTSD."</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-amber-100">
+      <div class="font-semibold text-sm text-slate-900 mb-1">Self-Pay</div>
+      <p class="text-xs text-slate-600 mb-0">$6,000-$12,000 for a full course. Ask about veteran discounts and financing options.</p>
+    </div>
+  </div>
+</div>
 
-- **Pre-treatment evaluation**: Full PTSD assessment, symptom severity rating (CAPS-5 or PCL-5), identification of primary symptom clusters, screening for co-occurring conditions (depression, substance use, TBI)
-- **Sessions**: 20-36 treatments depending on protocol. Most use 30 sessions over 6 weeks.
-- **Frequency**: 5 days a week
-- **Session length**: 20-40 minutes depending on protocol
+---
 
-Each session:
+## Finding a Provider
 
-1. **Check-in**: Brief symptom assessment and safety screening
-2. **Optional provocation/exposure** (in protocols that include it): Brief, controlled exposure to trauma-related imagery or narrative to activate PTSD circuits
-3. **TMS stimulation**: Coil positioned over the target area. You'll feel tapping or clicking on your scalp.
-4. **Post-session check-in**: Assessment of immediate effects, including dissociation screening
+<div class="not-prose my-8 space-y-3">
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">1</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">PTSD-specific experience</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Ask whether they've treated PTSD patients specifically — not just depression. PTSD requires dissociation monitoring and trauma expertise.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">2</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Psychotherapy integration</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Best outcomes come from combining TMS with trauma-focused therapy. Ask if they coordinate with trauma therapists.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">3</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Veteran cultural competency</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">If you're a veteran, look for providers with military cultural competency and combat-related PTSD experience.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">4</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">PTSD outcome tracking</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Provider should measure PTSD with validated instruments (PCL-5 or CAPS-5), not just depression scales.</p>
+    </div>
+  </div>
+</div>
 
-Most people start noticing changes during weeks 2-3. Sleep improves first — sleeping longer, fewer nightmares, less startle. Avoidance behaviors and intrusive re-experiencing tend to improve later, typically by weeks 3-5. Full effects keep building after treatment ends.
-
-You can return to normal activities immediately after each session. No sedation, no cognitive impairment, no driving restrictions.
-
-## Side Effects and Safety
-
-Standard TMS side effect profile:
-
-- **Scalp discomfort** — most common during the first week, fades with subsequent sessions
-- **Mild headache** — about 20-30% of patients. Over-the-counter pain relievers work.
-- **Lightheadedness** — occasional, brief
-- **Seizure risk** — less than 0.1%, consistent across all TMS applications
-- **Temporary worsening of PTSD symptoms** — some people report increased nightmares or intrusive thoughts during the first 1-2 weeks. This typically resolves and gives way to improvement.
-
-**PTSD-specific safety considerations**:
-
-- **Dissociation**: TMS can occasionally trigger dissociative episodes, particularly in patients with a significant dissociative subtype. Clinicians should screen for this before and during treatment.
-- **Emotional processing**: Some people experience emotional releases — tears, anger, grief — during or after sessions as the brain begins reprocessing trauma material. This is generally considered therapeutic, but it needs support from a qualified clinician.
-- **Interaction with trauma therapy**: If you're also doing Prolonged Exposure or CPT, coordinate with both your TMS provider and therapist. The combination can be powerful, but it benefits from coordinated timing.
-
-Compared to PTSD medications, TMS skips the sexual dysfunction, weight gain, and emotional numbing of SSRIs, plus the sedation and dependence risk of benzodiazepines often prescribed alongside them. No withdrawal when TMS ends.
-
-## TMS Devices Used for PTSD
-
-No FDA clearance specifically for PTSD, so multiple device types are used:
-
-- **NeuroStar** — Standard figure-8 coil targeting DLPFC. The most commonly available system and used in many PTSD studies. Offers standard rTMS and theta burst.
-- **BrainsWay Deep TMS** — H-coil systems reaching deeper brain structures (vmPFC, ACC). Potentially better for PTSD because the relevant circuits sit deeper than what figure-8 coils can optimally reach.
-- **MagVenture** — Versatile system used extensively in VA research. Supports theta burst protocols.
-- **Nexstim** — Neuronavigation-guided targeting that may improve precision for PTSD-specific brain targets.
-
-Protocol options:
-
-- **Standard 10 Hz rTMS** (left DLPFC): 37-minute sessions, most widely studied
-- **1 Hz rTMS** (right DLPFC): 20-30 minutes, targets hyperarousal specifically
-- **Intermittent theta burst (iTBS)**: 3-9 minutes, emerging evidence for PTSD
-- **Bilateral sequential**: Both hemispheres in one session, 40-50 minutes
-- **Deep TMS**: H-coils for deeper medial prefrontal targets
-
-The optimal device and protocol for PTSD haven't been definitively established yet. Active research is comparing different approaches.
-
-## Cost and Insurance Coverage
-
-The cost and insurance picture for PTSD TMS is challenging:
-
-- **Per session**: $200-$400
-- **Full course** (30 sessions): $6,000-$12,000 without insurance
-- **Insurance coverage**: Generally not available for PTSD alone since there's no FDA clearance
-
-Practical strategies for getting TMS for PTSD:
-
-- **Comorbid depression**: About 50-75% of PTSD patients also meet criteria for MDD. If you qualify for TMS for depression, treatment can be approved through that pathway, and PTSD symptoms frequently improve alongside the depression.
-- **VA healthcare**: The VA is the largest provider of TMS for PTSD. Many VA medical centers offer it through clinical programs or research protocols. If you're a veteran, ask your mental health provider about availability.
-- **Clinical trials**: Research studies provide TMS at no cost. Search ClinicalTrials.gov for "TMS PTSD" to find studies recruiting near you.
-- **TRICARE**: Coverage policies are evolving. Some TRICARE plans have covered TMS for PTSD under individual case review.
-- **Out-of-pocket**: Ask about package pricing and financing. Some clinics offer reduced rates for veterans.
-
-## Finding a TMS Provider for PTSD
-
-Finding a qualified provider takes some specific homework:
-
-- **PTSD treatment experience**: Ask whether the clinic has treated PTSD patients specifically — not just depression. PTSD involves unique considerations (dissociation monitoring, trauma-related emotional responses) that require appropriate expertise.
-- **Protocol selection**: A knowledgeable provider should discuss different target options (left DLPFC, right DLPFC, bilateral, deep) and explain why they'd recommend a particular approach for your symptom profile.
-- **Psychotherapy integration**: The best PTSD TMS outcomes come from protocols combining TMS with trauma-focused therapy. Ask if the clinic coordinates with trauma therapists or offers integrated treatment.
-- **Veteran experience**: If you're a veteran, look for providers with military cultural competency and combat-related PTSD experience.
-- **Outcome tracking**: The provider should measure PTSD symptoms with validated instruments (PCL-5 or CAPS-5) throughout treatment, not just depression scales.
-
-Questions to ask:
-
-1. How many PTSD patients have you treated with TMS?
-2. Which protocol do you recommend for my symptoms, and why?
-3. Do you integrate TMS with psychotherapy?
-4. Do you screen for dissociation during treatment?
-5. What are your outcome data for PTSD patients specifically?
-
-Use our [provider directory](/us/) to find TMS clinics in your area. When contacting clinics, ask about PTSD experience upfront.
-
-## Frequently Asked Questions
-
-**Is TMS FDA-approved for PTSD?**
-No. As of 2025, TMS isn't FDA-cleared for PTSD. It's used off-label based on a substantial body of research, particularly from VA studies. Many clinicians expect eventual FDA clearance as larger trials are completed.
-
-**Can TMS help with combat-related PTSD?**
-Yes. The majority of PTSD TMS research has been done with military veteran populations. Response rates of 45-65% have been reported in studies primarily involving combat-related PTSD. The VA is one of the largest providers of TMS for this population.
-
-**Will TMS make my nightmares and flashbacks worse?**
-Some people experience a temporary increase in intrusive symptoms during the first 1-2 weeks. This is similar to the temporary worsening that can happen at the start of trauma-focused therapy. It typically resolves and is followed by improvement. Your treatment team should monitor for this and adjust if needed.
-
-**Can I do TMS and trauma therapy at the same time?**
-Yes — and emerging evidence suggests the combination may work better than either alone. TMS may enhance the brain's capacity for fear extinction and emotional processing, making therapy sessions more productive. Coordinate scheduling with both your TMS provider and therapist.
-
-**How long do the benefits of TMS for PTSD last?**
-Benefits typically last 3-6 months, with some people maintaining improvement for a year or longer. If symptoms start returning, a shorter retreatment course can often restore the benefit. Maintenance sessions (weekly or biweekly) may help sustain gains. Combining TMS with ongoing psychotherapy appears to improve durability.
+Use our [provider directory](/us/) to find TMS clinics and ask about PTSD experience upfront. For veterans, also check with your local [VA medical center](/insurance/va-coverage/).

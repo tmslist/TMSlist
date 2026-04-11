@@ -5,7 +5,37 @@ description: "TMS therapy for smoking addiction — FDA-cleared using BrainsWay 
 fdaApproved: true
 successRate: "28-33% quit rates at 18 weeks (vs 11-16% sham)"
 image: "https://images.unsplash.com/photo-1555441293-6c6fb1eb0e46?w=800&h=400&fit=crop"
+sessionCount: "18"
+duration: "6 weeks"
+brainArea: "Bilateral PFC & insula"
+faqs:
+  - question: "Which TMS device is FDA-cleared for smoking?"
+    answer: "Only BrainsWay Deep TMS with bilateral stimulation targeting the prefrontal cortex and insula. Standard figure-8 coils are not cleared for this indication."
+  - question: "Do I need to be ready to quit before starting?"
+    answer: "The FDA protocol includes a quit date set during the treatment course. You don't need to have already quit, but you should be motivated to stop."
+  - question: "What are the quit rates?"
+    answer: "The pivotal trial showed 28% continuous abstinence at 18 weeks with deep TMS vs 11.7% with sham — a significant difference. Real-world rates may vary."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">28M+</div>
+    <div class="text-xs text-violet-600 mt-1">US smokers</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">28-33% quit rates at 18 weeks (vs 11-16% sham)</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">18</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">FDA Cleared</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Smoking Cessation and How TMS Helps
 

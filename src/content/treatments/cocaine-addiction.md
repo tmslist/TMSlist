@@ -5,7 +5,35 @@ description: "Research on TMS for cocaine cravings and addiction — targeting t
 fdaApproved: false
 successRate: "Research phase — 25-40% reduction in cocaine use in studies"
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+sessionCount: "10-20"
+duration: "2-4 weeks"
+brainArea: "Left DLPFC"
+faqs:
+  - question: "Is TMS effective for cocaine addiction?"
+    answer: "Early research is promising. Multiple studies show reduced craving and cocaine use after TMS, but larger trials are needed."
+  - question: "How does TMS target addiction?"
+    answer: "TMS stimulates the prefrontal cortex to strengthen impulse control circuits that are weakened by chronic cocaine use."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">1.4M</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with cocaine use disorder</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Research phase — 25-40% reduction in cocaine use in studies</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">10-20</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Cocaine Addiction and How TMS Helps
 

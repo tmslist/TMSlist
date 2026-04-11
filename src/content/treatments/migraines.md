@@ -5,7 +5,35 @@ description: "TMS therapy for migraines — FDA-cleared single-pulse devices for
 fdaApproved: true
 successRate: "39% pain-free at 2 hours (acute), reduced frequency for prevention"
 image: "https://images.unsplash.com/photo-1616012480717-fd5bd4945c37?w=800&h=400&fit=crop"
+sessionCount: "8-16"
+duration: "2-4 weeks"
+brainArea: "Motor cortex or occipital cortex"
+faqs:
+  - question: "Is TMS FDA-cleared for migraines?"
+    answer: "Single-pulse TMS (sTMS) devices like SpringTMS/eNeura are FDA-cleared for migraine with aura. Repetitive TMS (rTMS) for migraine prevention is off-label."
+  - question: "How is migraine TMS different from depression TMS?"
+    answer: "Migraine TMS uses single pulses or low-frequency stimulation targeting the occipital cortex, not the repetitive high-frequency DLPFC stimulation used for depression."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">39M</div>
+    <div class="text-xs text-violet-600 mt-1">US migraine sufferers</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">39% pain-free at 2 hours (acute), reduced frequency for prevention</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">8-16</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">FDA Cleared</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Migraine and How TMS Helps
 

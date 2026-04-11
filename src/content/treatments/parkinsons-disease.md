@@ -5,7 +5,35 @@ description: "Research on TMS therapy for Parkinson's disease — targeting moto
 fdaApproved: false
 successRate: "Research phase — modest improvements in motor and mood symptoms"
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+sessionCount: "10-20"
+duration: "2-4 weeks"
+brainArea: "Motor cortex & DLPFC"
+faqs:
+  - question: "What does TMS help with in Parkinson's?"
+    answer: "TMS may improve motor symptoms (bradykinesia, gait), depression (very common in PD), and cognitive function. It's not a replacement for dopaminergic medication."
+  - question: "Is TMS safe with deep brain stimulators?"
+    answer: "No — DBS implants are a contraindication for TMS. The magnetic field can interfere with the implanted device."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">1M+</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with Parkinson's</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Research phase — modest improvements in motor and mood symptoms</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">10-20</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Parkinson's Disease and How TMS Helps
 

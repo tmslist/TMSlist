@@ -3,7 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import { getAllClinics, getStateSlug, STATE_NAMES } from '../../utils/clinicData';
 import { getClinicRating, getClinicReviewCount, getTotalDoctorCount } from '../../utils/dataHelpers';
 
-const clinics = await getAllClinics();
+const allClinics = await getAllClinics();
+const clinics = allClinics.filter(c => !c.country || c.country === 'US');
 const totalDoctors = await getTotalDoctorCount();
 
 const states = [...new Set(clinics.map(c => c.state))].map(stateCode => {

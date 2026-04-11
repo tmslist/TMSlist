@@ -4,7 +4,7 @@ import GoogleReviews from "../../components/GoogleReviews.astro";
 import BookingWidget from "../../components/react/BookingWidget";
 import HealthScoreBadge from "../../components/react/HealthScoreBadge";
 import ClinicTracking from "../../components/ClinicTracking.astro";
-import { STATE_NAMES, getAllClinics } from "../../utils/clinicData";
+import { STATE_NAMES, getAllClinics, getStateSlug } from "../../utils/clinicData";
 import { getDoctorPhoto, hasRealClinicImage, COUNTRY_NAMES, COUNTRY_URL_PREFIXES } from "../../utils/dataHelpers";
 import { getClinicLogoUrl } from "../../utils/images";
 
@@ -112,7 +112,7 @@ const logoUrl = getClinicLogoUrl(clinic);
 const galleryImages = clinic.gallery_urls || [];
 ---
 
-<Layout title={pageTitle} description={metaDescription} schema={schema}>
+<Layout title={pageTitle} description={metaDescription} schema={schema} image={clinic.hero_image_url || clinic.logo_url || clinic.media?.logo_url || clinic.media?.hero_image_url || undefined}>
     <!-- Clean Premium Light Hero -->
     <section class="relative bg-white pt-16 pb-24 border-b border-slate-100 overflow-hidden">
         <div class="absolute inset-x-0 top-0 h-[600px] bg-gradient-to-b from-blue-50/50 to-white/0 pointer-events-none"></div>
@@ -436,9 +436,11 @@ const galleryImages = clinic.gallery_urls || [];
                                     Enquire to reveal phone number
                                 </button>
                             </div>
-                            <a href={clinic.contact?.website_url || "#"} target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-sm font-bold transition-all">
+                            {(clinic.contact?.website_url || clinic.website) && (
+                            <a href={clinic.contact?.website_url || clinic.website} target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-sm font-bold transition-all">
                                 Visit Website
                             </a>
+                            )}
                             <BookingWidget client:idle clinicId={clinic.id} clinicName={clinic.name} clinicPhone={clinic.contact?.phone || clinic.phone} />
                         </div>
                     </div>
@@ -502,7 +504,7 @@ const galleryImages = clinic.gallery_urls || [];
         <div class="container mx-auto px-6 lg:px-12 mb-16">
             <h2 class="text-lg font-bold text-slate-900 mb-4">Explore More</h2>
             <div class="flex flex-wrap gap-3">
-                <a href={`/${countryUrlPrefix}/${isUS ? state.toLowerCase() : ''}`} class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors">
+                <a href={`/${countryUrlPrefix}/${isUS ? getStateSlug(state) : ''}`} class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors">
                     More clinics in {stateName} →
                 </a>
                 <a href="/treatments/" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors">
@@ -534,3 +536,13 @@ const galleryImages = clinic.gallery_urls || [];
     </main>
     <ClinicTracking clinicId={clinic.id} />
 </Layout>
+
+<script>
+  // Wire up enquiry/callback buttons to open the modal
+  document.querySelectorAll('[data-trigger-enquiry], [data-request-callback]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.dispatchEvent(new CustomEvent('open-enquiry-modal'));
+    });
+  });
+</script>

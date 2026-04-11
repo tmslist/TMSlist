@@ -5,7 +5,37 @@ description: "TMS therapy for chronic pain conditions — targeting the motor co
 fdaApproved: false
 successRate: "30-50% pain reduction in responders"
 image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=400&fit=crop"
+sessionCount: "10-20"
+duration: "2-4 weeks"
+brainArea: "Motor cortex (M1)"
+faqs:
+  - question: "Which pain conditions respond to TMS?"
+    answer: "Best evidence exists for neuropathic pain, fibromyalgia, and complex regional pain syndrome (CRPS). Emerging data for chronic low back pain and migraines."
+  - question: "Is TMS FDA-cleared for pain?"
+    answer: "No. All TMS for chronic pain is off-label. Research is growing but large confirmatory trials are still needed."
+  - question: "How does TMS target pain?"
+    answer: "High-frequency stimulation of the primary motor cortex (M1) modulates descending pain inhibition pathways. This is a different target than depression TMS."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">50M+</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with chronic pain</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">30-50% pain reduction in responders</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">10-20</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Chronic Pain and How TMS Helps
 

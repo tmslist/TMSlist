@@ -32,7 +32,7 @@ export async function getStaticPaths() {
     .filter(({ slug }) => !contentSlugsSet.has(slug))
     .map(({ slug, title }) => ({
       params: { slug },
-      props: { title, description: '', hasContent: false, entry: null },
+      props: { title, description: `Does ${title} cover TMS therapy? Learn about coverage policies, prior authorization, typical costs, and how to get approved.`, hasContent: false, entry: null },
     }));
 
   return [...contentPaths, ...fallbackPaths];
@@ -58,6 +58,16 @@ const articleSchema = JSON.stringify({
   "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/insurance/${slug}/` },
   "reviewedBy": { "@type": "Person", "name": "Dr. Karan Narwal", "jobTitle": "Mental Health Specialist & Consultant" },
 });
+
+const faqSchema = faqs && faqs.length > 0 ? JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq: { question: string; answer: string }) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": { "@type": "Answer", "text": faq.answer },
+  })),
+}) : null;
 ---
 
 <InsurancePage
@@ -79,3 +89,7 @@ const articleSchema = JSON.stringify({
 >
   {Content ? <Content /> : null}
 </InsurancePage>
+
+{faqSchema && (
+  <script type="application/ld+json" set:html={faqSchema} />
+)}

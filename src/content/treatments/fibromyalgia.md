@@ -5,7 +5,35 @@ description: "Research on TMS therapy for fibromyalgia pain — targeting the mo
 fdaApproved: false
 successRate: "Research phase — 30-50% pain reduction in studies"
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+sessionCount: "10-20"
+duration: "2-4 weeks"
+brainArea: "Motor cortex (M1) or DLPFC"
+faqs:
+  - question: "Does TMS help fibromyalgia pain?"
+    answer: "Yes. Multiple studies show significant pain reduction with motor cortex stimulation. A 2016 meta-analysis confirmed moderate effect sizes for pain reduction."
+  - question: "Which protocol works best for fibromyalgia?"
+    answer: "High-frequency (10 Hz) stimulation of the primary motor cortex (M1) has the strongest evidence. DLPFC stimulation may also help, especially when depression co-occurs."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">4M+</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with fibromyalgia</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Research phase — 30-50% pain reduction in studies</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">10-20</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Fibromyalgia and How TMS Helps
 

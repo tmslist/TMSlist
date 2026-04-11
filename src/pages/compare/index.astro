@@ -19,9 +19,30 @@ const deviceComparisons = COMPARE_SLUGS.filter(
         s.slug.includes("magventure") ||
         s.slug.includes("brainsway"),
 );
+
+const compareSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "TMS Treatment & Device Comparisons",
+    "description": description,
+    "url": "https://tmslist.com/compare/",
+    "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": COMPARE_SLUGS.length,
+        "itemListElement": COMPARE_SLUGS.map((item, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": item.title,
+            "url": `https://tmslist.com/compare/${item.slug}/`
+        }))
+    }
+});
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schema={compareSchema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Compare", url: "/compare/" },
+]}>
     <main
         class="min-h-screen bg-slate-50"
     >
@@ -32,7 +53,7 @@ const deviceComparisons = COMPARE_SLUGS.filter(
             <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
                 <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 justify-center">
                     <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    <span class="text-slate-300">/</span>
                     <span class="text-slate-600 font-medium">Compare</span>
                 </nav>
                 <div class="text-center">

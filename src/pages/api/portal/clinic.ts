@@ -37,6 +37,7 @@ export const GET: APIRoute = async ({ request }) => {
       openingHours: clinics.openingHours,
       availability: clinics.availability,
       pricing: clinics.pricing,
+      media: clinics.media,
     }).from(clinics).where(eq(clinics.id, clinicId)).limit(1);
 
     if (!rows[0]) {
@@ -55,7 +56,7 @@ const ALLOWED_FIELDS = [
   'name', 'description', 'descriptionLong',
   'phone', 'website', 'email',
   'machines', 'specialties', 'insurances', 'openingHours',
-  'availability', 'pricing',
+  'availability', 'pricing', 'media',
 ] as const;
 
 export const PUT: APIRoute = async ({ request }) => {

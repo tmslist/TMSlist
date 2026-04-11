@@ -5,7 +5,37 @@ description: "TMS therapy for the depressive phase of bipolar disorder — a pot
 fdaApproved: false
 successRate: "40-50% response in clinical studies"
 image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=400&fit=crop"
+sessionCount: "20-36"
+duration: "4-6 weeks"
+brainArea: "Left DLPFC"
+faqs:
+  - question: "Can TMS trigger a manic episode?"
+    answer: "The risk is lower than with antidepressants. Studies show mania/hypomania rates of 0-3% during TMS for bipolar depression, compared to 10-25% with antidepressants. Mood monitoring throughout treatment is essential."
+  - question: "Is TMS FDA-approved for bipolar depression?"
+    answer: "No. TMS is FDA-cleared for unipolar depression but used off-label for bipolar depression. Research is promising, with response rates of 40-50%."
+  - question: "Can I stay on my mood stabilizer during TMS?"
+    answer: "Yes — and you should. Most clinicians require patients to remain on a mood stabilizer during TMS to minimize mania risk."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">4.4%</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with bipolar</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">40-50% response in clinical studies</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">20-36</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Bipolar Depression and How TMS Helps
 

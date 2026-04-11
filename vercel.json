@@ -37,5 +37,8 @@
       ]
     }
   ],
-  "crons": [{ "path": "/api/cron/cleanup", "schedule": "0 3 * * *" }]
+  "crons": [
+    { "path": "/api/cron/cleanup", "schedule": "0 3 * * *" },
+    { "path": "/api/cron/email-campaigns", "schedule": "0 9 * * *" }
+  ]
 }

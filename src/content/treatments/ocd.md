@@ -3,159 +3,294 @@ title: "TMS for OCD"
 condition: "OCD"
 description: "Deep TMS is FDA-cleared for OCD since 2018. How it works, who qualifies, and what to expect from treatment."
 fdaApproved: true
-successRate: "35-45% response, 20-25% remission"
+successRate: "35-45% response"
+sessionCount: "29"
+duration: "6 weeks"
+brainArea: "ACC & mPFC (Deep TMS)"
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+faqs:
+  - question: "Is regular TMS the same as deep TMS for OCD?"
+    answer: "No. Standard TMS (figure-8 coils) and deep TMS (H-coils) are different technologies. Only deep TMS with the BrainsWay H7 coil is FDA-cleared for OCD. The distinction matters because OCD involves deep brain structures that standard coils can't effectively reach."
+  - question: "Do I have to do the provocation exposure every session?"
+    answer: "The FDA-cleared protocol includes it, and the evidence supports it. But intensity is calibrated to be manageable — moderate discomfort, not extreme distress. Treatment can proceed without it, though results are stronger when included."
+  - question: "Can TMS cure OCD?"
+    answer: "TMS doesn't cure OCD. It can significantly reduce symptom severity. 35-45% of patients experience meaningful improvement. Many still have some symptoms but find them much more manageable. Maintenance sessions are often needed."
+  - question: "How long does the improvement last?"
+    answer: "Benefits typically last 3-6 months. Many need periodic maintenance sessions (every 2-4 weeks) to sustain gains. If symptoms return, a shorter retreatment course can often restore the benefit."
+  - question: "Should I continue my SSRI during TMS?"
+    answer: "Most clinicians recommend staying on your SRI during TMS. The combination appears safe and may work better than either treatment alone."
 ---
 
-## What is OCD and How TMS Helps
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">2-3%</div>
+    <div class="text-xs text-violet-600 mt-1">Population affected</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">35-45%</div>
+    <div class="text-xs text-emerald-600 mt-1">TMS response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">2018</div>
+    <div class="text-xs text-blue-600 mt-1">FDA cleared (Deep TMS)</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">H7 Coil</div>
+    <div class="text-xs text-amber-600 mt-1">Specialized OCD device</div>
+  </div>
+</div>
 
-OCD traps people. Intrusive, unwanted thoughts (obsessions) trigger repetitive behaviors or mental acts (compulsions) performed to relieve the distress. About 2-3% of the population has it. At its worst, people spend hours each day locked in compulsive rituals — unable to work, maintain relationships, or leave their homes.
+## What Is OCD and How TMS Helps
 
-The neuroscience points to a specific circuit gone haywire. The cortico-striato-thalamo-cortical (CSTC) loop — connecting the prefrontal cortex, striatum, and thalamus — becomes hyperactive. The orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC) keep firing "something is wrong" signals. The medial prefrontal cortex (mPFC), which should be dismissing irrelevant thoughts, can't shut them down. The brain's alarm system gets stuck on, driving the obsessive thoughts and compulsive responses.
+OCD traps people. Intrusive, unwanted thoughts (obsessions) trigger repetitive behaviors (compulsions) performed to relieve distress. About 2-3% of the population has it. At its worst, people spend hours daily locked in compulsive rituals — unable to work, maintain relationships, or leave home.
 
-First-line treatments: serotonin reuptake inhibitors (SRIs) like fluoxetine, fluvoxamine, and clomipramine, plus Exposure and Response Prevention (ERP), a specialized form of CBT. They work for many people. But 40-60% don't get adequate relief from SRIs alone, and ERP — while highly effective — requires sustained effort that not everyone can tolerate or access.
+<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">The brain circuit gone haywire</h4>
+  <p class="text-sm text-slate-600 leading-relaxed mb-3">The <strong>cortico-striato-thalamo-cortical (CSTC) loop</strong> — connecting prefrontal cortex, striatum, and thalamus — becomes hyperactive.</p>
+  <p class="text-sm text-slate-600 leading-relaxed mb-0">The <strong>orbitofrontal cortex (OFC)</strong> and <strong>anterior cingulate cortex (ACC)</strong> keep firing "something is wrong" signals. The medial prefrontal cortex (mPFC), which should dismiss irrelevant thoughts, can't shut them down. The brain's alarm system gets stuck on.</p>
+</div>
 
-TMS for OCD targets those specific malfunctioning circuits. Unlike standard TMS for depression (which uses a surface-level figure-8 coil), OCD treatment needs deep TMS technology that can reach the ACC and mPFC — structures sitting several centimeters below the brain's surface. By modulating activity in these deeper structures, TMS helps normalize the hyperactive circuits driving OCD symptoms.
+First-line treatments (SRIs and ERP therapy) work for many. But **40-60% don't get adequate relief** from SRIs alone. TMS targets those specific malfunctioning circuits using deep TMS technology that reaches the ACC and mPFC — structures sitting centimeters below the brain's surface.
 
-## How TMS Works for OCD
+---
 
-The FDA-cleared protocol uses BrainsWay's Deep TMS system with a specialized H7 coil. This is fundamentally different from the figure-8 coils used for depression. It's housed inside a helmet-like apparatus and generates a magnetic field penetrating 3-4 cm below the cortical surface, reaching the anterior cingulate cortex and medial prefrontal cortex that standard coils simply can't touch.
+## How Deep TMS Works for OCD
 
-The protocol delivers high-frequency stimulation (20 Hz) in short trains to the mPFC and ACC. Treatment runs at 100% of motor threshold, with about 2,000 pulses over roughly 20 minutes of active stimulation.
+<div class="not-prose my-8 bg-blue-50 border border-blue-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-blue-900 mb-3 text-base">Critical difference: Deep TMS vs standard TMS</h4>
+  <p class="text-sm text-blue-700 leading-relaxed mb-3">The FDA-cleared OCD protocol uses BrainsWay's <strong>H7 coil</strong> — fundamentally different from figure-8 coils used for depression. It generates a magnetic field penetrating <strong>3-4 cm below the cortical surface</strong>, reaching the ACC and mPFC that standard coils can't touch.</p>
+  <p class="text-sm text-blue-700 leading-relaxed mb-0"><strong>Not all TMS devices work for OCD.</strong> If a clinic offers OCD treatment with a standard figure-8 coil, it's off-label and not backed by the same evidence.</p>
+</div>
 
-Here's what makes OCD TMS different from every other indication: the provocation step. Before each stimulation session, you undergo a brief, personalized exposure to an OCD trigger — a scenario, image, or thought designed to activate the obsessive-compulsive circuit at moderate intensity (targeting about 5-6 out of 10 on a distress scale). Not overwhelming. Just enough to "wake up" the OCD circuit so TMS can modulate it while it's active.
+### The Provocation Step — Unique to OCD
 
-Why? TMS is most effective when targeting active neural circuits. If the OCD circuit is quiet during stimulation, the pulses have less to work with. Deliberately activating it first ensures the magnetic pulses engage the right pathways. Think of it as borrowing a page from ERP therapy — confronting the feared stimulus — but adding brain stimulation on top.
+Before each stimulation session, you undergo a brief, personalized exposure to an OCD trigger — targeting about 5-6/10 on the distress scale. Not overwhelming. Just enough to "wake up" the OCD circuit so TMS can modulate it while it's active.
 
-A standard course: 29 sessions over 6 weeks (5 per week for the first 4 weeks, then tapering). Each session runs about 30 minutes total, including provocation and 20 minutes of active stimulation.
+<div class="not-prose my-8">
+<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+  <thead>
+    <tr class="bg-slate-800 text-white">
+      <th class="px-4 py-3 text-left font-semibold">Parameter</th>
+      <th class="px-4 py-3 text-left font-semibold">OCD Protocol</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-slate-200">
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Device</td><td class="px-4 py-3 text-slate-600">BrainsWay H7 coil (deep TMS)</td></tr>
+    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Target</td><td class="px-4 py-3 text-slate-600">ACC & medial PFC</td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Frequency</td><td class="px-4 py-3 text-slate-600">20 Hz (high-frequency)</td></tr>
+    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Intensity</td><td class="px-4 py-3 text-slate-600">100% motor threshold</td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Pulses</td><td class="px-4 py-3 text-slate-600">~2,000 per session</td></tr>
+    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Sessions</td><td class="px-4 py-3 text-slate-600">29 over 6 weeks</td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Session length</td><td class="px-4 py-3 text-slate-600">~30 min (including provocation)</td></tr>
+  </tbody>
+</table>
+</div>
+
+---
 
 ## Clinical Evidence and Success Rates
 
-The FDA cleared BrainsWay Deep TMS for OCD in August 2018, based on a multi-center, sham-controlled trial in the American Journal of Psychiatry. This remains the only FDA-cleared TMS indication for OCD.
+The FDA cleared BrainsWay Deep TMS for OCD in August 2018, based on a multi-center sham-controlled trial in the American Journal of Psychiatry.
 
-The evidence:
+<div class="not-prose my-8 space-y-4">
+  <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-5">
+    <div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Pivotal Trial — 38% response vs 11% sham</div>
+      <p class="text-sm text-slate-600 mt-1 mb-0">30%+ reduction in Y-BOCS scores. A massive gap between active treatment and placebo.</p>
+    </div>
+  </div>
+  <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-5">
+    <div class="w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">2020 Real-World Study — 45% response</div>
+      <p class="text-sm text-slate-600 mt-1 mb-0">Journal of Psychiatric Research. Clinical practice actually <strong>outperformed</strong> the controlled trial.</p>
+    </div>
+  </div>
+  <div class="flex gap-4 items-start bg-white border border-slate-200 rounded-xl p-5">
+    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">2022 Meta-Analysis — Molecular Psychiatry</div>
+      <p class="text-sm text-slate-600 mt-1 mb-0">Confirmed significant effect with moderate effect size (Cohen's d ~0.5-0.7). TMS + ERP combination shows response rates above 50%.</p>
+    </div>
+  </div>
+</div>
 
-- The pivotal trial showed a **response rate of about 38%** (30%+ reduction in Y-BOCS scores) with active deep TMS vs. 11% with sham. That's a big gap.
-- **Remission rates** ranged from 20-25% in the active treatment group.
-- A 2020 real-world study in the Journal of Psychiatric Research reported 45% response rates in clinical practice — actually better than the controlled trial results.
-- A 2022 meta-analysis in Molecular Psychiatry confirmed a significant overall effect for OCD, with a moderate effect size (Cohen's d roughly 0.5-0.7).
-- Benefits last an average of 3-6 months, with many patients needing maintenance sessions to sustain improvement.
+**Context**: OCD is one of the most treatment-resistant conditions in psychiatry. By the time someone tries TMS, they've usually failed multiple medications and extensive therapy. In that population, 38-45% response is a real breakthrough.
 
-Those response rates might seem modest compared to TMS for depression. Context matters here. OCD is one of the most treatment-resistant conditions in psychiatry. By the time someone tries TMS, they've usually failed multiple medications and extensive therapy. In that population, 38-45% response is a real breakthrough.
+---
 
-Research is ongoing into combining deep TMS with intensive ERP therapy. Preliminary data suggests the combination outperforms either treatment alone, with some studies reporting response rates above 50%.
+## Who Qualifies
 
-## Who Qualifies for TMS Treatment
+<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
+    <h4 class="font-display font-bold text-emerald-900 text-sm mb-3">Requirements</h4>
+    <ul class="text-xs text-emerald-700 space-y-2 mb-0 list-none pl-0">
+      <li class="flex gap-2"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Y-BOCS score 20+ (moderate to severe)</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Failed at least 1 adequate SRI trial (8-12 weeks)</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> ERP therapy attempted or considered</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Willing to engage in provocation protocol</li>
+    </ul>
+  </div>
+  <div class="bg-red-50 border border-red-100 rounded-xl p-5">
+    <h4 class="font-display font-bold text-red-900 text-sm mb-3">Contraindications</h4>
+    <ul class="text-xs text-red-700 space-y-2 mb-0 list-none pl-0">
+      <li class="flex gap-2"><svg class="w-4 h-4 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> Metallic implants in/near the head</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> History of seizures</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> Implanted neurostimulation devices</li>
+      <li class="flex gap-2"><svg class="w-4 h-4 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg> Cardiac pacemakers/defibrillators</li>
+    </ul>
+  </div>
+</div>
 
-Qualification criteria:
-
-- **Confirmed OCD diagnosis**: Assessed with the Y-BOCS, minimum score of 20 (moderate to severe)
-- **Treatment resistance**: Inadequate response to at least one adequate SRI trial (fluoxetine, fluvoxamine, sertraline, paroxetine, or clomipramine) at maximum tolerated dose for 8-12 weeks minimum
-- **ERP history**: Many insurers and clinicians expect you to have attempted or at least considered ERP therapy, though this varies
-- **Age**: Primarily adults 18+; adolescent use is being studied
-
-Contraindications:
-
-- Metallic implants in or near the head (dental work excepted)
-- History of seizures or epilepsy
-- Implanted neurostimulation devices (deep brain stimulators, vagus nerve stimulators)
-- Cardiac pacemakers or defibrillators
-
-One thing to know upfront: the provocation component means you need to be willing to tolerate brief, controlled exposure to your OCD triggers during each session. Your treatment team will work with you to identify a trigger that produces moderate — not overwhelming — distress. If you can't engage with provocation, treatment can still proceed, but the evidence is strongest when it's included.
+---
 
 ## What to Expect During Treatment
 
-A standard OCD TMS course:
+<div class="not-prose my-8 space-y-3">
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">1</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Pre-Treatment Evaluation</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Full OCD assessment, identification of primary obsessions/compulsions, and development of a personalized provocation hierarchy.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">2</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Provocation Exposure (2-5 min)</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Brief, personalized exposure to your OCD trigger to activate the circuit. Calibrated for moderate, manageable distress.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">3</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Deep TMS Stimulation (~20 min)</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">H7 coil helmet goes on. You'll feel deep tapping or pressure across the front of your head as stimulation targets the ACC and mPFC.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 font-bold text-xs shrink-0">4</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Post-Session Check-In</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Assessment of immediate effects. Most people notice change during weeks 2-4 — compulsions become easier to resist, obsessive thoughts feel less "sticky."</p>
+    </div>
+  </div>
+</div>
 
-- **Pre-treatment evaluation**: Thorough OCD assessment, identification of your primary obsessions and compulsions, and development of a personalized provocation hierarchy (a ranked list of triggers from mildly to strongly distressing).
-- **Sessions**: 29 treatments — 5 per week for the first 4 weeks, then tapering over the remaining 2 weeks.
-- **Each session runs about 30 minutes**:
-  1. Brief check-in and symptom rating
-  2. Provocation exposure (2-5 minutes): Your personalized trigger to activate the OCD circuit
-  3. Deep TMS stimulation (about 20 minutes): The H7 coil helmet goes on and stimulation begins. You'll feel deep tapping or pressure across the front of your head.
-  4. Brief post-session check-in
-
-The provocation feels uncomfortable. That's the point. But your clinician calibrates it to be manageable — controlled discomfort, not distress.
-
-Improvement typically starts during weeks 2-4. What you'll notice first: compulsions become easier to resist. The urge is still there but less intense. Obsessive thoughts may come less often or feel less "sticky." Full effects keep building through the course. Some people don't see significant improvement until the final weeks or shortly after finishing.
+---
 
 ## Side Effects and Safety
 
-Deep TMS for OCD has a favorable safety profile:
+<div class="not-prose my-8">
+<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+  <thead>
+    <tr class="bg-slate-800 text-white">
+      <th class="px-4 py-3 text-left font-semibold">Side Effect</th>
+      <th class="px-4 py-3 text-center font-semibold">Deep TMS for OCD</th>
+      <th class="px-4 py-3 text-center font-semibold">High-Dose SRIs</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-slate-200">
+    <tr class="bg-white">
+      <td class="px-4 py-3 font-medium text-slate-900">Sexual Dysfunction</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Very Common</span></td>
+    </tr>
+    <tr class="bg-slate-50">
+      <td class="px-4 py-3 font-medium text-slate-900">Weight Gain</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Common</span></td>
+    </tr>
+    <tr class="bg-white">
+      <td class="px-4 py-3 font-medium text-slate-900">GI Side Effects</td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Common</span></td>
+    </tr>
+    <tr class="bg-slate-50">
+      <td class="px-4 py-3 font-medium text-slate-900">Scalp Discomfort</td>
+      <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">First week</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">N/A</span></td>
+    </tr>
+    <tr class="bg-white">
+      <td class="px-4 py-3 font-medium text-slate-900">Jaw Twitching</td>
+      <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Occasional</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">N/A</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-- **Scalp discomfort or headache** during and after treatment — most common, usually decreasing after the first week. The deep TMS coil stimulates a broader area than figure-8 coils, so the sensation feels more diffuse.
-- **Jaw twitching or facial muscle activation** — occasionally reported due to the H7 coil's proximity to motor pathways. Typically mild, not painful.
-- **Brief anxiety increase** during provocation — expected and controlled. Resolves within minutes.
-- **Seizure risk** — less than 0.1%, consistent with all TMS.
-- **Temporary OCD symptom increase** — some people experience brief worsening in the first 1-2 weeks before improvement kicks in. Similar to what can happen at the start of ERP therapy.
+Unlike neurosurgical options for severe OCD (deep brain stimulation, cingulotomy), TMS is **non-invasive and fully reversible**.
 
-Compared to high-dose SRI medications, deep TMS avoids sexual dysfunction, weight gain, GI side effects, and emotional blunting — the exact things that make many OCD patients quit their medications. And unlike neurosurgical options for severe OCD (deep brain stimulation, cingulotomy), TMS is non-invasive and fully reversible.
+---
 
-## TMS Devices Used for OCD
+## Cost and Insurance
 
-This is a distinction you need to understand: **not all TMS devices work for OCD.**
+<div class="not-prose my-8">
+<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+  <thead>
+    <tr class="bg-slate-800 text-white">
+      <th class="px-4 py-3 text-left font-semibold">Item</th>
+      <th class="px-4 py-3 text-left font-semibold">Cost</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-slate-200">
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Per Session</td><td class="px-4 py-3 text-slate-600">$250-$400</td></tr>
+    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Full Course (29 sessions)</td><td class="px-4 py-3 text-slate-600">$7,000-$12,000 without insurance</td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Maintenance Sessions</td><td class="px-4 py-3 text-slate-600">$250-$400 each, as needed</td></tr>
+  </tbody>
+</table>
+</div>
 
-- **BrainsWay Deep TMS with H7 coil** — The only FDA-cleared TMS system for OCD. The H7 coil specifically reaches the anterior cingulate cortex and medial prefrontal cortex. This is what you need.
-- **Standard figure-8 coils** (NeuroStar, MagVenture, etc.) — NOT FDA-cleared for OCD. They target surface-level cortical regions and don't reach the deeper structures involved in OCD. Some clinicians use them off-label, but the evidence is much weaker.
-- **BrainsWay H1 coil** — That's the depression coil, not the OCD coil. Different targets. Make sure your clinic has the H7 specifically.
+<div class="not-prose my-8 bg-amber-50 border border-amber-200 rounded-2xl p-6">
+  <h4 class="font-display font-bold text-amber-900 mb-3 text-base">Insurance Coverage for OCD TMS</h4>
+  <p class="text-sm text-amber-800 leading-relaxed mb-3">Expanding but not as universal as depression coverage. Some BCBS, Aetna, and UHC plans now cover it. Medicare varies by region.</p>
+  <p class="text-sm text-amber-800 leading-relaxed mb-0"><strong>Key tip</strong>: Document all prior SRI trials, provide Y-BOCS scores (20+), include a letter referencing the FDA clearance, and work with an OCD-experienced clinic. If denied, appeal — coverage decisions for OCD TMS are evolving fast.</p>
+</div>
 
-If a clinic says they can treat your OCD with a standard figure-8 coil, know that it's off-label, not backed by the same evidence, and unlikely to be covered by insurance.
+---
 
-Research is exploring other coil configurations and targets, including the orbitofrontal cortex and supplementary motor area. But as of 2025, the H7 deep TMS protocol is the only FDA-cleared approach.
+## Finding a Provider for OCD
 
-## Cost and Insurance Coverage
+<div class="not-prose my-8 space-y-3">
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">1</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Verify they have the H7 coil</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Confirm the clinic has BrainsWay Deep TMS with the H7 coil specifically — not the H1 depression coil.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">2</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">OCD expertise required</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">The provocation protocol requires real skill. The overseeing clinician should have specific OCD experience.</p>
+    </div>
+  </div>
+  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">3</span>
+    <div>
+      <div class="font-semibold text-slate-900 text-sm">Combined treatment = best outcomes</div>
+      <p class="text-xs text-slate-500 mt-1 mb-0">Look for clinics integrating TMS with ERP therapy or coordinating with OCD-specialized therapists.</p>
+    </div>
+  </div>
+</div>
 
-- **Per session**: $250-$400 for deep TMS OCD treatment
-- **Full course** (29 sessions): $7,000-$12,000 without insurance
-- **Maintenance sessions**: $250-$400 per session as needed
-
-Insurance coverage is expanding but isn't as universal as depression coverage:
-
-- **Some major commercial insurers** now cover deep TMS for OCD, including certain BCBS, Aetna, and UnitedHealthcare plans. Coverage varies by state and plan.
-- **Medicare** coverage varies — some Medicare Administrative Contractors cover it, others consider it investigational.
-- **Prior authorization** is almost always required, demanding documentation of failed SRI trials and OCD severity scores.
-
-Tips for getting covered:
-
-- Document all prior treatments — SRI names, doses, durations, and outcomes
-- Provide Y-BOCS scores showing moderate to severe OCD (20+)
-- Include a detailed letter of medical necessity referencing the FDA clearance
-- Work with a clinic experienced in OCD TMS authorization — the process is newer and more complex than depression
-- If denied, appeal. Coverage decisions for OCD TMS are evolving fast, and many denials get overturned
-
-For out-of-pocket patients, some clinics offer financing plans or reduced cash rates.
-
-## Finding a TMS Provider for OCD
-
-Finding the right OCD TMS provider takes more diligence than for depression:
-
-- **Device verification**: Confirm the clinic has BrainsWay Deep TMS with the H7 coil. Call and ask specifically — don't assume a clinic that treats depression can also treat OCD.
-- **OCD expertise**: The clinician overseeing your treatment should have OCD experience. The provocation protocol requires real skill in identifying and calibrating appropriate triggers.
-- **Combined treatment**: The best outcomes come from clinics that integrate TMS with ERP therapy or coordinate closely with an OCD-specialized therapist.
-- **Volume**: Ask how many OCD patients they've treated. This is a newer indication, so even experienced clinics may have smaller numbers, but you want at least 10-20 OCD patients treated.
-
-Red flags:
-
-- Offering OCD treatment with a figure-8 coil (not FDA-cleared for OCD)
-- No provocation protocol included
-- No OCD-specific outcome measurement (Y-BOCS scoring)
-- No psychiatrist with OCD expertise involved
+<div class="not-prose my-8 bg-red-50 border border-red-200 rounded-xl p-5">
+  <h4 class="font-semibold text-red-800 text-sm mb-2">Red Flags</h4>
+  <ul class="text-sm text-red-700 space-y-1 mb-0 list-disc pl-4">
+    <li>Offering OCD treatment with a figure-8 coil (not FDA-cleared for OCD)</li>
+    <li>No provocation protocol included</li>
+    <li>No OCD-specific outcome measurement (Y-BOCS)</li>
+    <li>No psychiatrist with OCD expertise involved</li>
+  </ul>
+</div>
 
 Use our [clinic directory](/us/) to find providers who offer BrainsWay Deep TMS for OCD in your area.
-
-## Frequently Asked Questions
-
-**Is regular TMS the same as deep TMS for OCD?**
-No. Standard TMS (figure-8 coils) and deep TMS (H-coils) are different technologies. Only deep TMS with the BrainsWay H7 coil is FDA-cleared for OCD. The distinction matters because OCD involves deep brain structures that standard coils can't effectively reach.
-
-**Do I have to do the provocation exposure every session?**
-The FDA-cleared protocol includes it, and the evidence supports it. But the intensity is calibrated to be manageable — moderate discomfort, not extreme distress. Your clinician will work with you to find the right level. If provocation is truly intolerable, treatment can go forward without it, though the evidence is stronger when it's included.
-
-**Can TMS cure OCD?**
-TMS doesn't cure OCD. It can significantly reduce symptom severity. Response rates of 35-45% mean roughly a third to nearly half of patients experience meaningful improvement. Many responders still have some OCD symptoms but find them much more manageable. Maintenance sessions are often needed to sustain the gains.
-
-**Should I continue my SSRI during TMS treatment?**
-Most clinicians recommend staying on your SRI during TMS. The combination appears safe and may work better than either treatment alone. Talk to your prescribing psychiatrist about any medication adjustments.
-
-**How long does the improvement last?**
-Benefits typically last 3-6 months, though some people maintain improvement longer. Many need periodic maintenance sessions (one every 2-4 weeks) to hold their gains. If symptoms start returning, a shorter retreatment course can often restore the benefit.

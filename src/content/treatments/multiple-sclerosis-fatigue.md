@@ -5,7 +5,35 @@ description: "Research on TMS for the debilitating fatigue of multiple sclerosis
 fdaApproved: false
 successRate: "Research phase — moderate improvements in fatigue severity reported"
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+sessionCount: "10-20"
+duration: "2-4 weeks"
+brainArea: "Left DLPFC"
+faqs:
+  - question: "How does TMS help MS fatigue?"
+    answer: "TMS targets prefrontal circuits involved in cognitive fatigue and motivation. Small studies show improvements in fatigue severity, cognitive function, and mood."
+  - question: "Is it safe with MS?"
+    answer: "Generally yes, though patients with seizure history (more common in MS) need careful evaluation. The magnetic field does not affect MS lesions."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">1M+</div>
+    <div class="text-xs text-violet-600 mt-1">US adults with MS</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">Research phase — moderate improvements in fatigue severity reported</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">10-20</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Multiple Sclerosis Fatigue and How TMS Helps
 

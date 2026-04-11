@@ -1,0 +1,70 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { COMMERCIAL_SLUGS } from '../../../utils/seo_slugs';
+
+const title = "TMS Services for Clinics | Marketing, Credentialing, Billing & More";
+const description = "Business solutions for TMS clinic operators — marketing, SEO, Google Ads, billing, insurance credentialing, technician training, and consulting.";
+
+const SERVICE_META: Record<string, { description: string; category: string }> = {
+  'get-listed': { description: 'Add your TMS clinic to the largest directory of TMS providers worldwide.', category: 'Directory' },
+  'advertising': { description: 'Reach patients actively searching for TMS therapy with targeted advertising.', category: 'Marketing' },
+  'marketing-services': { description: 'Specialized marketing strategy for TMS practices — referral networks, patient education, digital.', category: 'Marketing' },
+  'seo-for-tms': { description: 'Rank your TMS clinic in Google — local SEO, keyword targeting, content strategy.', category: 'Marketing' },
+  'google-ads-for-tms': { description: 'Run effective Google Ads campaigns with high ROI — keyword strategy, landing pages, budgets.', category: 'Marketing' },
+  'website-design': { description: 'Convert visitors into patients — design principles, must-have pages, conversion optimization.', category: 'Marketing' },
+  'reputation-management': { description: 'Build and protect your online reputation — reviews, responses, monitoring.', category: 'Growth' },
+  'insurance-credentialing': { description: 'Get credentialed with insurance carriers — timeline, requirements, and negotiation tips.', category: 'Operations' },
+  'billing-services': { description: 'Specialized TMS billing — CPT codes, prior auth, claims, denial management.', category: 'Operations' },
+  'technician-training': { description: 'How to become a TMS technician — training programs, certification, salary, career path.', category: 'Training' },
+  'tms-consulting': { description: 'Expert consulting for practices adding TMS — business planning, device selection, protocol optimization.', category: 'Strategy' },
+};
+
+const enrichedServices = COMMERCIAL_SLUGS.map(item => ({
+  ...item,
+  ...(SERVICE_META[item.slug] || { description: 'Business solutions for TMS clinics.', category: 'General' }),
+}));
+
+const categories = [...new Set(enrichedServices.map(s => s.category))];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org", "@type": "CollectionPage",
+  "name": "TMS Clinic Services", "description": description, "url": "https://tmslist.com/providers/services/",
+  "mainEntity": { "@type": "ItemList", "numberOfItems": COMMERCIAL_SLUGS.length,
+    "itemListElement": COMMERCIAL_SLUGS.map((item, i) => ({ "@type": "ListItem", "position": i + 1, "name": item.title, "url": `https://tmslist.com/providers/services/${item.slug}/` }))
+  }
+});
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "For Providers", url: "/providers/services/" }]}>
+  <section class="relative bg-slate-950 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-amber-600 to-slate-900 opacity-90"></div>
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0); background-size: 28px 28px;"></div>
+    <div class="relative z-10 container mx-auto px-4 pt-20 pb-16 lg:pt-28 lg:pb-20">
+      <nav class="flex items-center gap-2 text-sm text-white/40 mb-8" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-white/70 transition-colors">Home</a><span class="text-white/20">/</span><span class="text-white/60">For Providers</span>
+      </nav>
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/20 text-amber-300 border border-amber-400/20 rounded-full text-xs font-bold uppercase tracking-wider mb-6">For Clinic Owners</span>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-5 font-display">Grow Your TMS Practice</h1>
+        <p class="text-lg text-white/60 leading-relaxed max-w-2xl">Marketing, operations, billing, and consulting services designed specifically for TMS clinics.</p>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent"></div>
+  </section>
+
+  <main class="container mx-auto px-4 py-12">
+    {categories.map(cat => (
+      <div class="mb-12">
+        <h2 class="text-lg font-display font-bold text-slate-900 mb-6 uppercase tracking-wider text-sm">{cat}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {enrichedServices.filter(s => s.category === cat).map(service => (
+            <a href={`/providers/services/${service.slug}/`} class="group bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-amber-200 transition-all">
+              <h3 class="text-base font-display font-bold text-slate-900 group-hover:text-amber-600 transition-colors mb-2">{service.title}</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">{service.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+  </main>
+</Layout>

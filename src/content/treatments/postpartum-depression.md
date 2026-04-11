@@ -4,7 +4,37 @@ condition: "Postpartum Depression"
 description: "TMS for postpartum depression — a medication-free option that's safe for breastfeeding mothers."
 fdaApproved: false
 successRate: "50-60% response (comparable to MDD data)"
+sessionCount: "20-36"
+duration: "4-6 weeks"
+brainArea: "Left DLPFC"
+faqs:
+  - question: "Is TMS safe while breastfeeding?"
+    answer: "Yes. TMS does not enter the bloodstream or breast milk. It's considered one of the safest treatment options for breastfeeding mothers with depression."
+  - question: "Will I need to arrange childcare during treatment?"
+    answer: "You'll need 20-40 minutes per session, 5 days a week. Many clinics allow babies in the waiting area, but check with your specific provider."
+  - question: "How does TMS compare to postpartum medication?"
+    answer: "TMS avoids the systemic side effects of SSRIs (which can transfer to breast milk) and brexanolone (which requires a 60-hour IV infusion). Response rates are comparable at 50-60%."
 ---
+
+
+<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-violet-700 font-display">1 in 7</div>
+    <div class="text-xs text-violet-600 mt-1">New mothers affected</div>
+  </div>
+  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-emerald-700 font-display">50-60% response (comparable to MDD data)</div>
+    <div class="text-xs text-emerald-600 mt-1">Response rate</div>
+  </div>
+  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-blue-700 font-display">20-36</div>
+    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  </div>
+  <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-amber-700 font-display">Off-label</div>
+    <div class="text-xs text-amber-600 mt-1">Regulatory status</div>
+  </div>
+</div>
 
 ## What is Postpartum Depression and How TMS Helps
 

@@ -32,6 +32,12 @@ interface ClinicData {
     accepts_insurance?: boolean;
     cash_discount?: boolean;
   } | null;
+  media: {
+    hero_image_url?: string;
+    logo_url?: string;
+    gallery_urls?: string[];
+    video_url?: string;
+  } | null;
 }
 
 export default function PortalClinicEditor({ userId }: { userId: string }) {
@@ -69,6 +75,14 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
     setClinic({
       ...clinic,
       pricing: { ...clinic.pricing, [field]: value },
+    });
+  }
+
+  function updateMedia(field: string, value: unknown) {
+    if (!clinic) return;
+    setClinic({
+      ...clinic,
+      media: { ...clinic.media, [field]: value },
     });
   }
 
@@ -178,6 +192,91 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
                 onChange={(e) => updateField('descriptionLong', e.target.value)}
                 rows={6}
                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Branding & Media */}
+        <section className="bg-white rounded-xl border border-emerald-200 p-6 shadow-sm ring-1 ring-emerald-100">
+          <div className="flex items-center gap-3 mb-1">
+            <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center">
+              <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+              </svg>
+            </div>
+            <h2 className="text-lg font-semibold text-gray-900">Branding & Media</h2>
+          </div>
+          <p className="text-sm text-gray-500 mb-4 ml-11">Your logo and clinic photos are shown on your public listing. Complete this section to build trust with patients.</p>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Brand Logo URL <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="url"
+                value={clinic.media?.logo_url || ''}
+                onChange={(e) => updateMedia('logo_url', e.target.value || undefined)}
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                placeholder="https://example.com/your-logo.png"
+              />
+              {clinic.media?.logo_url && (
+                <div className="mt-2 flex items-center gap-3">
+                  <img src={clinic.media.logo_url} alt="Logo preview" className="w-12 h-12 rounded-lg object-contain border border-gray-200 bg-white" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                  <span className="text-xs text-emerald-600 font-medium">Preview loaded</span>
+                </div>
+              )}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Hero / Cover Image URL <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="url"
+                value={clinic.media?.hero_image_url || ''}
+                onChange={(e) => updateMedia('hero_image_url', e.target.value || undefined)}
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                placeholder="https://example.com/clinic-front.jpg"
+              />
+              {clinic.media?.hero_image_url && (
+                <div className="mt-2">
+                  <img src={clinic.media.hero_image_url} alt="Hero preview" className="w-full max-w-xs h-32 rounded-lg object-cover border border-gray-200" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                </div>
+              )}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Clinic Gallery Photos <span className="text-red-500">*</span>
+              </label>
+              <p className="text-xs text-gray-500 mb-1.5">Add image URLs, one per line. Show your treatment rooms, waiting area, and team.</p>
+              <textarea
+                value={(clinic.media?.gallery_urls || []).join('\n')}
+                onChange={(e) => updateMedia('gallery_urls', e.target.value.split('\n').map(s => s.trim()).filter(Boolean))}
+                rows={4}
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500 font-mono"
+                placeholder={"https://example.com/room-1.jpg\nhttps://example.com/waiting-area.jpg\nhttps://example.com/team-photo.jpg"}
+              />
+              {clinic.media?.gallery_urls && clinic.media.gallery_urls.length > 0 && (
+                <div className="mt-2 flex gap-2 flex-wrap">
+                  {clinic.media.gallery_urls.slice(0, 6).map((url, i) => (
+                    <img key={i} src={url} alt={`Gallery ${i + 1}`} className="w-16 h-16 rounded-lg object-cover border border-gray-200" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                  ))}
+                  {clinic.media.gallery_urls.length > 6 && (
+                    <div className="w-16 h-16 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-xs text-gray-500 font-medium">
+                      +{clinic.media.gallery_urls.length - 6}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Video URL</label>
+              <input
+                type="url"
+                value={clinic.media?.video_url || ''}
+                onChange={(e) => updateMedia('video_url', e.target.value || undefined)}
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                placeholder="https://youtube.com/watch?v=... or https://vimeo.com/..."
               />
             </div>
           </div>

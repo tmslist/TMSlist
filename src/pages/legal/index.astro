@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { LEGAL_SLUGS } from '../../utils/seo_slugs';
+
+const title = "TMS Legal & Regulatory Guides | CPT Codes, Licensing, Compliance";
+const description = "Legal and regulatory guides for TMS practitioners — CPT billing codes, malpractice insurance, state licensing, supervision requirements, and single case agreements.";
+
+const LEGAL_META: Record<string, { description: string; audience: string }> = {
+  'tms-cpt-codes-guide-2026': { description: 'Complete 2026 CPT billing codes, reimbursement rates, modifiers, and common billing mistakes.', audience: 'Billing & Revenue' },
+  'tms-malpractice-insurance-guide': { description: 'Policy types, premium ranges, key carriers, and risk mitigation for TMS practices.', audience: 'Risk Management' },
+  'starting-a-tms-clinic-requirements-by-state': { description: 'State-by-state licensing, facility requirements, equipment costs, and credentialing timelines.', audience: 'New Clinics' },
+  'who-can-administer-tms-by-state': { description: 'Supervision requirements, technician rules, NP prescribing authority by state.', audience: 'Compliance' },
+  'single-case-agreements-tms': { description: 'How to negotiate SCAs when patients lack in-network TMS providers.', audience: 'Insurance' },
+};
+
+const enrichedLegal = LEGAL_SLUGS.map(item => ({
+  ...item,
+  ...(LEGAL_META[item.slug] || { description: 'Legal and regulatory guide for TMS practitioners.', audience: 'General' }),
+}));
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org", "@type": "CollectionPage",
+  "name": "TMS Legal & Regulatory Guides", "description": description, "url": "https://tmslist.com/legal/",
+  "mainEntity": { "@type": "ItemList", "numberOfItems": LEGAL_SLUGS.length,
+    "itemListElement": LEGAL_SLUGS.map((item, i) => ({ "@type": "ListItem", "position": i + 1, "name": item.title, "url": `https://tmslist.com/legal/${item.slug}/` }))
+  }
+});
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Legal", url: "/legal/" }]}>
+  <section class="relative bg-slate-950 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-600 to-slate-900 opacity-90"></div>
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0); background-size: 28px 28px;"></div>
+    <div class="relative z-10 container mx-auto px-4 pt-20 pb-16 lg:pt-28 lg:pb-20">
+      <nav class="flex items-center gap-2 text-sm text-white/40 mb-8" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-white/70 transition-colors">Home</a><span class="text-white/20">/</span><span class="text-white/60">Legal</span>
+      </nav>
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-500/20 text-slate-300 border border-slate-400/20 rounded-full text-xs font-bold uppercase tracking-wider mb-6">For Providers</span>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-5 font-display">Legal & Regulatory Guides</h1>
+        <p class="text-lg text-white/60 leading-relaxed max-w-2xl">CPT codes, licensing requirements, malpractice coverage, and compliance — everything TMS clinic operators need to know.</p>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent"></div>
+  </section>
+
+  <main class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {enrichedLegal.map((item) => (
+        <a href={`/legal/${item.slug}/`} class="group bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-slate-300 transition-all">
+          <span class="inline-block px-2.5 py-1 bg-slate-100 text-slate-600 text-xs font-semibold rounded-lg mb-3">{item.audience}</span>
+          <h2 class="text-lg font-display font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-2">{item.title}</h2>
+          <p class="text-sm text-slate-600 leading-relaxed">{item.description}</p>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>
