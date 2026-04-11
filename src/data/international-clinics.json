@@ -76,7 +76,8 @@
         "bio": "Dr Jason Pace is dedicated to providing the most up to date treatment methods for those people with depression. He takes pride in providing the most professional service to all patients who receive treatment. It is Dr Pace's aim to work with a patient's current treating health professional to achieve the best outcomes.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "au-mel-001",
@@ -173,7 +174,8 @@
         "bio": "Dr Timothy Hender is a Psychiatrist and Psychogeriatrician and Fellow of the Royal Australian and New Zealand College of Psychiatrists.",
         "photo_url": "https://neurocentrix.com.au/wp-content/uploads/2026/01/Dr-Tim-Hender-headshot.webp"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "au-syd-002",
@@ -232,7 +234,8 @@
         "bio": "Professor Paul Fitzgerald is an internationally recognised expert in novel treatments for mental health treatments including the use of TMS. He is Co-founder of Monarch Mental Health Group and Director of the Monarch Research Institute.",
         "photo_url": "https://www.mmhg.com.au/hubfs/raw_assets/public/Monarch%20Website/prof_paul_fitzgerald_profile_pic.png"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "au-mel-002",
@@ -291,7 +294,8 @@
         "bio": "Dr Grace Chan is a consultant psychiatrist at The Monarch Clinic and in private practice in Melbourne.",
         "photo_url": "https://www.mmhg.com.au/hs-fs/hubfs/Grace%20Chan-NJH00350-cropped.jpg?height=2000&amp;name=Grace%20Chan-NJH00350-cropped.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "au-syd-003",
@@ -362,7 +366,8 @@
         "bio": "Dr Lidbury is a Psychiatrist with a special interest in helping patients with substance use disorders and addictions as well as trauma, anxiety and mood disorders.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "au-syd-004",
@@ -427,7 +432,8 @@
         "bio": "Dr Olivia Ly Lesslar is Australian-educated and has completed postgraduate studies in skin cancer medicine and clinical nutrition management, and is currently undertaking a Diploma in Clinical Hypnosis and Strategic Psychotherapy.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "au-syd-005",
@@ -467,7 +473,8 @@
     "rating": 4.5,
     "review_count": 60,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "au-mel-003",
@@ -504,7 +511,8 @@
     "rating": 4.4,
     "review_count": 50,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "au-per-001",
@@ -560,7 +568,8 @@
         "bio": "Dr Riti Chetty is a specialist physician-in-training who manages service delivery at Neuralia TMS and liaises with staff, partners and the public.",
         "photo_url": "https://www.neuraliatms.com.au/wp-content/uploads/2022/05/dr-chetty-2.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "au-per-002",
@@ -621,7 +630,8 @@
         }
       }
     ],
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "au-per-003",
@@ -659,7 +669,8 @@
     "rating": 4.6,
     "review_count": 15,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "nz-akl-001",
@@ -718,7 +729,8 @@
         "bio": "Dorothy Lami is a TMS Practitioner at TMS Auckland, delivering TMS treatments to patients.",
         "photo_url": "https://cdn.prod.website-files.com/680590f7168231fd02ca0db0/6805c28d300cf097103aea4e_Dorothy.304x472.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "nz-akl-002",
@@ -766,7 +778,8 @@
         "bio": "Dr Stefano Cali is the Chief Medical Officer at Advance Aotearoa and a Consultant Psychiatrist at Auckland Hospital Inpatient Unit. He leads the clinic's innovative TMS and ketamine therapy programmes.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "nz-akl-003",
@@ -822,7 +835,8 @@
         "bio": "Dr Rui Mendel is a compassionate and experienced psychiatrist with over 30 years experience in the industry. He is the TMS pioneer in New Zealand, having provided TMS treatments since 2006.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "nz-bop-001",
@@ -865,7 +879,8 @@
         "bio": "Dr Darren Malone is a Consultant Psychiatrist and Psychogeriatrician. He has worked in private practice since 2008, conducting medicolegal and capacity assessments, assessment for third parties (ACC) and GP referrals.",
         "photo_url": "https://tms.net.nz/wp-content/uploads/dr-malone.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "nz-akl-004",
@@ -901,7 +916,8 @@
     "rating": 4.3,
     "review_count": 8,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "br-sao-001",
@@ -949,7 +965,8 @@
         "bio": "Pioneer in clinical TMS in Brazil. Founded CBrEMT in 2000 as the first TMS center in the country. Specialist in neuromodulation and psychiatric treatment.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "br-sao-002",
@@ -996,7 +1013,8 @@
         "bio": "Neurologist and founder of Clinica Regenerati, specializing in neurological disorders and neuromodulation therapies including transcranial magnetic stimulation.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "br-sao-003",
@@ -1040,7 +1058,8 @@
         "bio": "Neurologist with a Master's degree in Neurology focusing on Vascular Neurology and Neurointensivism from UNIFESP. Specializes in TMS for motor recovery after stroke and neuropathic pain management.",
         "photo_url": "https://neurologiaintegrada.com.br/wp-content/uploads/2021/04/bruno-medico.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "br-sao-004",
@@ -1089,7 +1108,8 @@
         "bio": "Specialist in neuromodulation with techniques including TMS, tDCS, and DBS. Expert in movement disorders, Parkinson's disease, and neurological rehabilitation.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "br-bsb-001",
@@ -1152,7 +1172,8 @@
         "bio": "Psychiatrist at INCB providing specialized mental health treatment and transcranial magnetic stimulation therapy.",
         "photo_url": "https://incb.com.br/wp-content/uploads/2024/09/Dra.-Cristina-Ferreira-Pessoa-Psiquiatra-Brasilia-DF.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "br-bsb-002",
@@ -1196,7 +1217,8 @@
         "bio": "Psychiatrist with TMS training at Harvard Medical School in Massachusetts, USA, and at Hospital das Clinicas da Faculdade de Medicina da USP in Sao Paulo. Specialist in transcranial magnetic stimulation and advanced psychiatric treatments including ketamine therapy.",
         "photo_url": "https://clinicapacifico.com.br/wp-content/uploads/2020/04/drrobertoqueridonamecardoso.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "br-poa-001",
@@ -1253,7 +1275,8 @@
         "bio": "Dental Surgeon with Master's and Doctorate from UFRGS. Researcher in the Neuroscience Studies group at the Faculty of Dentistry - UFRGS. Specializes in TMJ treatment and orofacial pain. CRO 13.526.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "br-poa-002",
@@ -1287,7 +1310,8 @@
     "rating": 4.9,
     "review_count": 18,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "br-sao-005",
@@ -1332,7 +1356,8 @@
         "bio": "Medical Manager of Rehabilitation and Sports Medicine at Hospital Einstein, overseeing TMS integration into the rehabilitation center's neuromodulation services.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "mx-cdmx-001",
@@ -1394,7 +1419,8 @@
         "bio": "Psychiatrist at ROME Psiquiatria Integral with expertise in transcranial magnetic stimulation and mental health treatment. Highly recommended by patients for professional care.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "mx-cdmx-002",
@@ -1431,7 +1457,8 @@
     "rating": 4.6,
     "review_count": 35,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "mx-cdmx-003",
@@ -1472,7 +1499,8 @@
     "rating": 4.5,
     "review_count": 28,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "mx-cdmx-004",
@@ -1523,7 +1551,8 @@
         "bio": "Leading psychiatrist and medical director of Grupo Medico Carracci, certified by the Mexican Council of Psychiatry. Expert in neuromodulation and TMS treatment for psychiatric conditions.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "mx-cdmx-005",
@@ -1560,7 +1589,8 @@
     "rating": 4.8,
     "review_count": 95,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "mx-mty-001",
@@ -1599,7 +1629,8 @@
     "rating": 4.6,
     "review_count": 40,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "mx-mty-002",
@@ -1636,7 +1667,8 @@
     "rating": 4.5,
     "review_count": 22,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "mx-jrz-001",
@@ -1687,7 +1719,8 @@
         "bio": "Clinical neuropsychologist at the doctoral level leading NeuroSpa Clinic. Pioneer in EEG-guided TMS in Ciudad Juarez with extensive experience in neuropsychological evaluation, clinical neuroscience, and psychotherapy. Published researcher in cognition, psychological wellbeing, and neuroscience.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "mx-tij-001",
@@ -1722,7 +1755,8 @@
     "rating": 4.4,
     "review_count": 19,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "mx-can-001",
@@ -1760,7 +1794,8 @@
     "rating": 4.7,
     "review_count": 15,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-tor-001",
@@ -1805,7 +1840,8 @@
         "bio": "Dr. Leo Steiner is a registered psychologist specializing in Neuropsychology and Rehabilitation Psychology with over 20 years of experience treating patients with depression. He founded TMS Clinics of Canada to bring Deep TMS technology to the Greater Toronto Area.",
         "photo_url": "https://tmsofcanada.com/wp-content/uploads/2020/05/DocSteiner1-1.png"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-tor-002",
@@ -1854,7 +1890,8 @@
         "bio": "Dr. Daniel Blumberger is a professor in the Department of Psychiatry at the University of Toronto and holds the Temerty Chair in Therapeutic Brain Intervention. He is a subspecialist in geriatric psychiatry and a leading researcher in brain stimulation therapies for refractory psychiatric disorders, with clinical trials spanning ECT, rTMS, MST, ketamine, and psilocybin.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-tor-003",
@@ -1900,7 +1937,8 @@
         "bio": "Dr. Chowdhury is a board-certified psychiatrist and the Chief Psychiatrist at Feel Light rTMS Clinic. He completed his medical degree from the University of Calgary, psychiatry residency at the University of British Columbia, and a geriatric psychiatry fellowship at the University of Alberta.",
         "photo_url": "https://feellightrtms.ca/wp-content/uploads/2022/05/dr-shaheen-chowdhury-774x1024.png"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-van-001",
@@ -1945,7 +1983,8 @@
         "bio": "Dr. Venu Karapareddy is the Founder and Medical Director of BrainStim Healthcare Associates. He is a Clinical Assistant Professor at the University of British Columbia and the founding director of the Concurrent Disorder Fellowship in Vancouver, with extensive expertise in mental health and addiction medicine.",
         "photo_url": "https://brainstim.ca/wp-content/uploads/2025/06/our_mission_image.webp"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-van-002",
@@ -1990,7 +2029,8 @@
         "bio": "Gurvir Grewal is a board-certified Family Nurse Practitioner with a Master of Nursing degree from the University of British Columbia and over eight years of frontline healthcare experience.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-ott-001",
@@ -2035,7 +2075,8 @@
         "bio": "Dr. Chris Taplin is the founder and chief psychiatrist of TMS Life, specializing in Transcranial Magnetic Stimulation for treatment-resistant depression, OCD, PTSD and other mental health conditions. He is recognized by the International OCD Foundation as a TMS provider.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-edm-001",
@@ -2088,7 +2129,8 @@
         "bio": "Dr. Krista Leicht is a Canadian-trained and Alberta-licensed Medical Doctor and Psychiatrist with over twenty years of clinical experience. She has completed training for rTMS and MeRT with the Brain Treatment Center.",
         "photo_url": "https://static.wixstatic.com/media/cfc9fa_d0c6d464991643ce8e1649041fb8fd6e~mv2.png/v1/fill/w_54,h_54,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/cfc9fa_d0c6d464991643ce8e1649041fb8fd6e~mv2.png"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-cal-001",
@@ -2141,7 +2183,8 @@
         "bio": "Dr. Shakeel Qazi brings experience from his previous role as Chief Operational Officer of Feel Light rTMS Clinic. He is part of the clinical team at Bloom rTMS providing rTMS treatment.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-hal-001",
@@ -2177,7 +2220,8 @@
     "rating": 4.5,
     "review_count": 18,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-mtl-001",
@@ -2221,7 +2265,8 @@
         "bio": "Dr. Marcelo Berlim is an associate professor at the Department of Psychiatry at McGill University and director of the Neuromodulation Research Clinic at the Douglas Institute. He is also a psychiatrist at the Depressive Disorders Program and investigates the clinical utility of alternative neuromodulation protocols for treating mood disorders.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-mtl-002",
@@ -2263,7 +2308,8 @@
     "rating": 4.5,
     "review_count": 22,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "ca-wpg-001",
@@ -2307,7 +2353,8 @@
         "bio": "Dr. Mandana Modirrousta is an Associate Professor of Psychiatry at the University of Manitoba and a pioneer of repetitive Transcranial Magnetic Stimulation (rTMS) therapy in Manitoba. She founded BrainWave Clinic to provide integrative neuropsychiatry care including rTMS and memory assessment.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "de-ber-001",
@@ -2352,7 +2399,8 @@
         "bio": "Prof. Dr. Surjo Soekadar is the Medical Director of the Zentrum für Translationale Neuromodulation at Charité Berlin. He leads both the clinical and research programs in non-invasive brain stimulation and neurofeedback at one of Europe's largest university hospitals.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "de-ber-002",
@@ -2390,7 +2438,8 @@
     "rating": 4.3,
     "review_count": 25,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "de-ber-003",
@@ -2441,7 +2490,8 @@
         "bio": "Dr. Scheib is the founder of Privatpraxis Dr. Scheib and a pioneer in combining ketamine-assisted therapy with rTMS and neurofeedback for treatment-resistant psychiatric conditions. The practice operates locations in Berlin, Munich, and internationally.",
         "photo_url": "https://ketaminplus.com/wp-content/uploads/2023/02/IMG_1280-300x245.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "de-muc-001",
@@ -2486,7 +2536,8 @@
         "bio": "Prof. Dr. med. Frank Padberg is the director of the Zentrum für Neurostimulation at LMU Klinikum München. He has led the centre's pioneering work in non-invasive brain stimulation for depressive disorders since 1998, contributing to both clinical practice and international research guidelines.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "de-muc-002",
@@ -2534,7 +2585,8 @@
         "bio": "Tom Mechtersheimer founded neurocare in 2015, bringing together leading neuroscience, technology manufacturers, processes and education for mental health clinics. Under his leadership, neurocare has expanded operations across Australia, the United States, and Europe.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "de-muc-003",
@@ -2569,7 +2621,8 @@
     "rating": 4.2,
     "review_count": 15,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "de-hei-001",
@@ -2614,7 +2667,8 @@
         "bio": "Prof. Dr. med. Sabine C. Herpertz has been the chair holder for General Psychiatry at Universitätsklinikum Heidelberg and the medical director of the Klinik für Allgemeine Psychiatrie since 2009. She holds specialist qualifications in Neurology, Psychotherapeutic Medicine, and Psychiatry.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "de-nss-001",
@@ -2677,7 +2731,8 @@
         "bio": "Dr. Marcel Goertz holds a medical leadership role at the Neurostimulationszentrum at Alexius/Josef Krankenhaus.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "de-ham-001",
@@ -2722,7 +2777,8 @@
         "bio": "Dr. med. Niklas Schade is the senior physician responsible for ambulatory services, electroconvulsive therapy, and transcranial magnetic stimulation at the UKE Department of Psychiatry and Psychotherapy in Hamburg.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "fr-par-001",
@@ -2775,7 +2831,8 @@
         "image_url": null,
         "bio": "The neuro-imaging department at Hôpital des Quinze-Vingts provides transcranial magnetic stimulation services for clinical and research purposes."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "fr-par-002",
@@ -2831,7 +2888,8 @@
         "image_url": null,
         "bio": "The STOCAD unit within the Adult Psychiatry Department has 15 inpatient beds with 7 dedicated to brain stimulation techniques including non-invasive TMS. The unit leads the TRD*TMS multicentre research study across 20 French centers."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "fr-par-003",
@@ -2866,7 +2924,8 @@
     "rating": 4,
     "review_count": 25,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "fr-str-001",
@@ -2902,7 +2961,8 @@
     "rating": 4.4,
     "review_count": 31,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "fr-lyo-001",
@@ -2937,7 +2997,8 @@
     "rating": 4.1,
     "review_count": 38,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "fr-mrs-001",
@@ -3046,7 +3107,8 @@
         "image_url": null,
         "bio": "Professor Richieri is part of the rTMS team at Psychiatrie Pullman Prado conducting rTMS sessions for treatment-resistant conditions."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "fr-mos-001",
@@ -3080,7 +3142,8 @@
     "rating": 4.2,
     "review_count": 92,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "fr-orl-001",
@@ -3148,7 +3211,8 @@
         "image_url": null,
         "bio": "Dr. David Jacon is a psychiatrist at Clinique Belle Allée specializing in rTMS treatment for depression."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-mad-001",
@@ -3252,7 +3316,8 @@
         "image_url": null,
         "bio": "Dr. Antonio Luengo Dos Santos is a specialist in Neurology at Hospital Universitario La Princesa since 2009 and head of Neurology Service at Hospital Universitario Alcalá de Henares. He is an expert in Stroke Pathology accredited by the Spanish Society of Neurology and member of the Madrid and Spanish Associations of Neurology."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-mad-002",
@@ -3309,7 +3374,8 @@
         "bio": "Dr. Jaime Adán Manes directs the Transcranial Magnetic Stimulation Unit at Veram. He was trained in the TMS technique at Duke University (USA) and is a member of the Clinical TMS Society. He also works at Hospital Ruber Internacional (Quirónsalud).",
         "photo_url": "https://veram.es/wp-content/uploads/2022/05/jaime-adan.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-mad-003",
@@ -3365,7 +3431,8 @@
         "bio": "Dr. Javier Conejo Galindo leads the team of psychiatrists at Alcalamente. He was named best psychiatrist in Madrid in 2021 and 2022. He specializes in diagnosis and treatment of psychiatric disorders using Transcranial Magnetic Stimulation.",
         "photo_url": "https://www.alcalamente.es/wp-content/uploads/2025/05/2025-05-23-TMS-Course-Acreditation-The-Academy-of-Brain-Stimulation.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-bcn-001",
@@ -3401,7 +3468,8 @@
     "rating": 4.6,
     "review_count": 85,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-bcn-002",
@@ -3457,7 +3525,8 @@
         "image_url": null,
         "bio": "Dr. Mª Ángeles Idiazábal is an expert in Non-Invasive Brain Stimulation, neuromodulation, and treatment with Transcranial Magnetic Stimulation (TMS). She won the National Prize for Medicine in Clinical Neurophysiology in 2018 and leads the INCIA institute."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-bcn-003",
@@ -3510,7 +3579,8 @@
         "image_url": null,
         "bio": "Dr. Antoni Gual is a doctor in medicine and surgery, specialist in psychiatry. He is a senior consultant and head of the Psychiatry Service Unit at Hospital Clínico de Barcelona. Author of more than 150 articles published in indexed journals, he is a professor of several master's programs and director of several doctoral theses. He leads a multidisciplinary team at Newline Center for TMS treatment."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-bcn-004",
@@ -3546,7 +3616,8 @@
     "rating": 4.3,
     "review_count": 55,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-val-001",
@@ -3581,7 +3652,8 @@
     "rating": 4.4,
     "review_count": 35,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-sev-001",
@@ -3651,7 +3723,8 @@
         "image_url": null,
         "bio": "Dr. Miguel Moleón Camacho is part of the multidisciplinary team at the IASC TMS Unit in Seville."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-bil-001",
@@ -3688,7 +3761,8 @@
     "rating": 4.5,
     "review_count": 33,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "es-mad-004",
@@ -3725,7 +3799,8 @@
     "rating": 4.3,
     "review_count": 18,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-lon-001",
@@ -3811,7 +3886,8 @@
         "image_url": null,
         "bio": "Professor Alex O'Neill-Kerr is a consultant psychiatrist with clinical interests in depression and bipolar disorder. He was made Visiting Professor in Neuromodulation at the University of Northampton in 2017. He served as Medical Director at Northamptonshire Healthcare NHS Foundation Trust since 2005 and heads The Centre for Neuromodulation delivering treatments including rTMS, TBS, tDCS, and ketamine infusion. He has been working with TMS since 2015 and is one of the leading experts in TMS treatment in the UK."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-bhm-002",
@@ -3877,7 +3953,8 @@
         "image_url": null,
         "bio": "Dr Leigh A. Neal MD FRCPsych serves as Medical Director of Smart TMS across all locations. A Consultant Psychiatrist for over 25 years, he oversees the clinical standards and training of clinicians at the Birmingham clinic. He is a member of the advisory committee to the Royal College of Psychiatrists for TMS and the International Neuromodulation Society."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-man-003",
@@ -3939,7 +4016,8 @@
         "image_url": null,
         "bio": "Dr Leigh A. Neal MD FRCPsych oversees clinical standards at the Manchester clinic as Medical Director of Smart TMS. A Consultant Psychiatrist for over 25 years, he trains and supervises clinicians across all Smart TMS locations."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-edi-004",
@@ -4000,7 +4078,8 @@
         "image_url": null,
         "bio": "Dr Leigh A. Neal MD FRCPsych is the Medical Director of Smart TMS, overseeing clinical governance and training across all locations including Edinburgh."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-brs-005",
@@ -4061,7 +4140,8 @@
         "image_url": null,
         "bio": "Dr Leigh A. Neal MD FRCPsych oversees clinical standards at the Bristol clinic as Medical Director of Smart TMS."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-sot-006",
@@ -4122,7 +4202,8 @@
         "image_url": null,
         "bio": "Dr Leigh A. Neal MD FRCPsych oversees clinical standards at the Southampton clinic as Medical Director of Smart TMS."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-lon-007",
@@ -4200,7 +4281,8 @@
         "image_url": null,
         "bio": "Dr Christos Kouimtsidis is a Consultant Psychiatrist and one of the foremost authorities on substance misuse in the UK. He has been a Consultant in Mental Health and Addiction Psychiatry since 2002 at the NHS and has worked at the London Psychiatry Centre since 2012. He completed his specialist training at South London and St George's Mental Health Trust and as a Clinical Lecturer at St George's University of London. He was elected Fellow of the Royal College of Psychiatrists in 2016 and is an Honorary Clinical Senior Lecturer at Imperial College London. He has published more than 80 peer-reviewed papers."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-lon-008",
@@ -4282,7 +4364,8 @@
         "image_url": null,
         "bio": "Dr Farhana Mann is a Consultant Psychiatrist and clinical academic with many years of experience working in a wide range of mental health settings. She is part of the specialist team at London TMS Centre."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-lon-009",
@@ -4365,7 +4448,8 @@
         "image_url": null,
         "bio": "Dr Geoff Lawrence-Smith is a consultant psychiatrist with over 10 years' experience working full-time for the NHS in general adult community, consultation-liaison, and perinatal psychiatry. He trained at the North London rotation and completed higher training at the Maudsley Rotational training scheme. He became a member of the Royal College of Psychiatrists in 2006 and has developed expertise in supporting people with treatment-resistant mood disorders, offering rTMS treatment for depression at Priory. He contributed to research published in the American Journal of Psychiatry."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-old-010",
@@ -4421,7 +4505,8 @@
         "image_url": null,
         "bio": "Dr Micheal Kurkar is a distinguished Consultant Psychiatrist who leads the Pennine Care TMS Service, which he established as the first NHS TMS service in the Northwest of England. He has served as Clinical Director for Mental Health Services in Oldham, Clinical Lead for the Strategic Clinical Network for Perinatal Psychiatry in Greater Manchester, and Lead for the Community Mental Health Transformation Programme at Pennine Care. He specialises in Adult Psychiatry with expertise in depression, treatment-resistant depression, bipolar affective disorder, ADHD, anxiety, and psychosis."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-lon-011",
@@ -4476,7 +4561,8 @@
         "image_url": null,
         "bio": "Dr Stephanie Kaye-Barrett is a consultant rheumatologist with over 20 years of consultant-grade experience. She qualified from Liverpool University School of Medicine, winning the final year clinical medical prize, and completed her MD at the Royal Free Hospital. She underwent extensive TMS training from the University of Maastricht and is a certified specialist TMS provider. Former President of the Rheumatology Section of the Royal Society of Medicine, former Lead Rheumatologist at Chelsea and Westminster Hospital, and former Senior Lecturer in Rheumatology at Imperial College, she founded rTMS London as the first rheumatology clinic in the UK to offer rTMS for fibromyalgia and chronic pain."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "gb-npt-012",
@@ -4540,7 +4626,8 @@
         "image_url": null,
         "bio": "Professor Alex O'Neill-Kerr is a consultant psychiatrist and Visiting Professor in Neuromodulation at the University of Northampton since 2017. He serves as Medical Director at Northamptonshire Healthcare NHS Foundation Trust and heads The Centre for Neuromodulation. He is one of the leading experts in TMS treatment in the UK and has been working with TMS since 2015."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ie-dub-001",
@@ -4597,7 +4684,8 @@
         "image_url": null,
         "bio": "Dr Leigh A. Neal MD FRCPsych serves as Medical Director of Smart TMS across all locations including Dublin. A Consultant Psychiatrist for over 25 years, he oversees clinical standards and trains clinicians at the Dublin clinic."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ie-dub-002",
@@ -4677,7 +4765,8 @@
         "image_url": null,
         "bio": "Dr Jennifer Keane graduated in medicine from the University of Galway in 2013 and gained membership with both the College of Psychiatrists of Ireland and The Royal College of Psychiatrists in 2016. She has over a decade of experience in diverse psychiatric settings. Since 2018, she has specialised in child and adolescent psychiatry, working in both inpatient and outpatient CAMHS. She has worked with ADMiRE, Ireland's first ADHD-specific service for CAMHS, and is a guest lecturer for postgraduate programmes at the University of Galway."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ie-dub-003",
@@ -4734,7 +4823,8 @@
         "image_url": null,
         "bio": "Dr Simon Mitchell is a Consultant Psychiatrist at St John of God University Hospital specialising in mood disorders. He is the lead clinician for the hospital's ECT and Neuromodulation service and head of neuromodulation services. He completed his undergraduate degree in Philosophy and Psychology at Trinity College Dublin, studied Medicine at the Royal College of Surgeons in Ireland, and was awarded membership of the Royal College of Psychiatrists in 2011. He is a member of the Clinical TMS Society and has received several Clinical Excellence awards."
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "il-jer-001",
@@ -4782,7 +4872,8 @@
         "bio": "Co-inventor of the Deep TMS H-coil technology while working at the NIH in the late 1990s. Professor of Neuroscience at Ben-Gurion University, with decades of research in brain stimulation and neuromodulation.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "il-tlv-001",
@@ -4822,7 +4913,8 @@
     "rating": 4.6,
     "review_count": 52,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "il-hod-001",
@@ -4860,7 +4952,8 @@
     "rating": 4.3,
     "review_count": 34,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "il-bya-001",
@@ -4900,7 +4993,8 @@
     "rating": 4.1,
     "review_count": 28,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "il-bat-001",
@@ -4940,7 +5034,8 @@
     "rating": 4,
     "review_count": 22,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "il-ptk-001",
@@ -4976,7 +5071,8 @@
     "rating": 4.2,
     "review_count": 30,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "il-net-001",
@@ -5017,7 +5113,8 @@
     "rating": 4.2,
     "review_count": 26,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "il-tlv-002",
@@ -5058,7 +5155,8 @@
     "rating": 4.7,
     "review_count": 41,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "il-thm-001",
@@ -5098,7 +5196,8 @@
     "rating": 4.7,
     "review_count": 65,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "il-jer-002",
@@ -5137,7 +5236,8 @@
     "rating": 4.6,
     "review_count": 48,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "se-sto-001",
@@ -5171,7 +5271,8 @@
     "rating": 4.3,
     "review_count": 18,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "se-sto-002",
@@ -5205,7 +5306,8 @@
     "rating": 4.2,
     "review_count": 15,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "se-sto-003",
@@ -5239,7 +5341,8 @@
     "rating": 4.1,
     "review_count": 12,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "se-upp-001",
@@ -5275,7 +5378,8 @@
     "rating": 4.4,
     "review_count": 20,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "se-got-001",
@@ -5310,7 +5414,8 @@
     "rating": 4.3,
     "review_count": 22,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "se-sto-004",
@@ -5343,7 +5448,8 @@
     "rating": 4.2,
     "review_count": 10,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "se-hel-001",
@@ -5376,7 +5482,8 @@
     "rating": 4.1,
     "review_count": 8,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "za-jhb-001",
@@ -5427,7 +5534,8 @@
         "bio": "Dr. Christos Profyris completed pre-clinical medical studies at the University of Cambridge with a Double First Class and his medical degree with Distinction at the University of Oxford. He completed neurosurgical training at the University of Witwatersrand, holds a Fellowship from the Colleges of Medicine of South Africa and a Master of Medicine in Neurosurgery from Wits. He completed the Charles Teo Minimally Invasive Neurosurgery Fellowship in Sydney, Australia, and has published over 20 peer-reviewed publications with an active research interest in connectome-based TMS treatment.",
         "photo_url": "https://www.connectomix.com/wp-content/uploads/2023/05/dr-christos-profyris.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "za-pta-001",
@@ -5477,7 +5585,8 @@
         "bio": "Dr. Anrie Carstens has partnered with Connectomix founder Dr. Christos Profyris to bring TMS services to patients in the Gauteng region. She provides psychiatric consultation and TMS treatment oversight at the Pretoria location.",
         "photo_url": "https://www.connectomix.com/wp-content/uploads/2023/07/Dr-Anrie-Carstens.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "za-cpt-001",
@@ -5524,7 +5633,8 @@
         "bio": "Dr. Marcelle Stastny is a psychiatrist with over twenty years of experience who founded Rewire TMS Clinics in 2021. She holds an MBChB from the University of Pretoria and previously worked as a psychiatrist for the NHS in Exeter, UK. She has established Rewire branches across South Africa to improve access to TMS therapy.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "za-cpt-002",
@@ -5571,7 +5681,8 @@
         "bio": "Dr. Marcelle Stastny oversees the Rewire TMS network including this N1 City location. She holds an MBChB from the University of Pretoria and has over twenty years of psychiatric experience.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "za-jhb-002",
@@ -5610,7 +5721,8 @@
     "rating": 4.4,
     "review_count": 18,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "za-cpt-003",
@@ -5656,7 +5768,8 @@
         "bio": "Dr. Kobus van der Walt is a qualified specialist psychiatrist based in Somerset West with a particular interest in interventional psychiatry. Since 2019 in full-time private practice, he offers personalised, evidence-informed psychiatric care to adults and adolescents, with a focus on individuals navigating persistent, complex, or treatment-resistant mental health difficulties. His practice offers TMS, IV Ketamine, tDCS, tVNS, and home-based sleep studies.",
         "photo_url": "https://mlmlv2ux634j.i.optimole.com/cb:MUsr.2f8/w:1920/h:941/q:mauto/f:best/https://drkobusvanderwalt.co.za/wp-content/uploads/2025/05/Dr-Kobus-van-der-Walt-Emblem@3x-scaled.webp"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "za-kim-001",
@@ -5701,7 +5814,8 @@
         "bio": "Dr. Netsa Kirimi provides psychiatric services at Careline Clinic in Kimberley, including oversight of the TMS treatment program for depression and anxiety disorders.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "za-cpt-004",
@@ -5745,7 +5859,8 @@
         "bio": "Dr. Christos Profyris oversees the TMS Safari program, bringing his expertise in connectome-based TMS treatment to international patients visiting South Africa.",
         "photo_url": "https://www.connectomix.com/wp-content/uploads/2023/06/DrChristosProfyrisConnectomix-1.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "in-blr-001",
@@ -5795,7 +5910,8 @@
         "university": null,
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "in-del-001",
@@ -5828,7 +5944,8 @@
     "rating": 4.9,
     "review_count": 681,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "in-del-002",
@@ -5873,7 +5990,8 @@
         "university": "University of Mumbai / Brookdale University Hospital, New York",
         "photo_url": "https://mindbraintms.com/wp-content/uploads/2019/03/DSC00554-scaled-1-5.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "in-del-003",
@@ -5920,7 +6038,8 @@
         "university": "NIMHANS, Bangalore",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "in-hyd-001",
@@ -5983,7 +6102,8 @@
         "university": null,
         "photo_url": "https://anmc.ashahospital.org/wp-content/uploads/2024/11/dr-ms-reddy.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "in-mum-001",
@@ -6025,7 +6145,8 @@
         "university": "Bombay University / Harvard Medical School",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "in-blr-002",
@@ -6072,7 +6193,8 @@
         "university": "NIMHANS, Bangalore",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "in-blr-003",
@@ -6129,7 +6251,8 @@
         "university": null,
         "photo_url": "https://www.cadabamshospitals.com/wp-content/uploads/2020/03/20-scaled-265x300.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "in-kol-001",
@@ -6173,7 +6296,8 @@
         "university": null,
         "photo_url": "https://static.wixstatic.com/media/e65669_e8c901dee8134704b75cb50bacb22ccd~mv2.jpg/v1/crop/x_0,y_0,w_712,h_960/fill/w_311,h_287,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/best%20psychiatrist%20dr%20sourav%20das%20kolkata2.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "sg-001",
@@ -6219,7 +6343,8 @@
         "university": "NUS / Black Dog Institute (Sydney) / Toronto Western Hospital",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "sg-002",
@@ -6273,7 +6398,8 @@
         "university": "National University of Singapore / Royal College of Psychiatrists, UK",
         "photo_url": "https://promises.com.sg/wp-content/uploads/2024/11/sean-david-vanniasingham.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "sg-003",
@@ -6310,7 +6436,8 @@
     "rating": 4.2,
     "review_count": 150,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "sg-004",
@@ -6347,7 +6474,8 @@
     "rating": 4.3,
     "review_count": 200,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "sg-005",
@@ -6391,7 +6519,8 @@
         "university": null,
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "sg-006",
@@ -6424,7 +6553,8 @@
     "rating": 4.4,
     "review_count": 30,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "ae-dxb-001",
@@ -6486,7 +6616,8 @@
         "university": "University of Ulster / University of East London",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ae-dxb-002",
@@ -6533,7 +6664,8 @@
         "university": null,
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ae-dxb-003",
@@ -6568,7 +6700,8 @@
     "rating": 4.5,
     "review_count": 60,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "ae-dxb-004",
@@ -6622,7 +6755,8 @@
         "university": null,
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ae-dxb-005",
@@ -6669,7 +6803,8 @@
         "university": null,
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ae-dxb-006",
@@ -6713,7 +6848,8 @@
         "university": null,
         "photo_url": "https://mediclinic.scene7.com/is/image/mediclinic/1211-abdulrazek-saiyed-dr?_ck=1616197728274"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ae-dxb-007",
@@ -6759,7 +6895,8 @@
         "university": null,
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "ae-auh-001",
@@ -6806,7 +6943,8 @@
         "university": "University of Aleppo, Syria",
         "photo_url": "https://bmmc.ae/wp-content/uploads/2024/11/team_1713787271_662651875e927-png.webp"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "it-mil-001",
@@ -6855,7 +6993,8 @@
         "bio": "Associate Professor of Neurology at Vita-Salute San Raffaele University and Director of the Neurorehabilitation Unit and the MAGICS Center at IRCCS San Raffaele Hospital. After obtaining her MD in Milan and PhD in Human Physiology, she specialized in Neurology and was a Visiting Research Fellow at the National Institutes of Health in Bethesda, Maryland. Her research focuses on non-invasive neurostimulation including TMS and tDCS for central nervous system diseases.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "it-rom-001",
@@ -6906,7 +7045,8 @@
         "bio": "Neurologist and Research Director at Fondazione Santa Lucia IRCCS since 2006, and Professor of Physiology at the University of Ferrara since 2020. Among the top 10 international experts in transcranial magnetic stimulation. His research focuses on clinical neurophysiology of the motor system and cognitive functions, with over 469 publications and 21,691 citations. Led the landmark study showing 52% slowing of Alzheimer's progression with TMS treatment.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "it-rom-002",
@@ -6950,7 +7090,8 @@
         "bio": "World-renowned expert in TMS and non-invasive brain stimulation, also affiliated with Fondazione Santa Lucia IRCCS. His leadership at the Healthy Brain Institute bridges advanced neuroscience research with clinical TMS practice in Rome.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "it-mil-002",
@@ -7008,7 +7149,8 @@
         "bio": "Coordinates the multidisciplinary team of psychiatrists, psychologists, and technicians at the Milan Mood Center, overseeing patient care and treatment protocols for brain stimulation therapies.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "it-bre-001",
@@ -7057,7 +7199,8 @@
         "bio": "Psychiatrist with 40 years of experience and Scientific Director of Brain Stimulation Italia. Leads clinical operations and treatment protocols at the Brescia Mood Center.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "it-mil-003",
@@ -7105,7 +7248,8 @@
         "bio": "World authority in the treatment of addiction disorders and one of the leading experts in the TMS field. Scientific Director of Brain&Care, leading an international team of medical professionals, psychologists, and technicians with consolidated experience in neuroscience and mental health.",
         "photo_url": "https://www.brainandcare.com/wp-content/uploads/Antonello-Bonci.jpg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "it-tor-001",
@@ -7144,7 +7288,8 @@
     "rating": 4.3,
     "review_count": 28,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "it-rim-001",
@@ -7182,7 +7327,8 @@
     "rating": 4.3,
     "review_count": 22,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "it-mil-004",
@@ -7230,7 +7376,8 @@
         "bio": "Physiotherapist and Director of the Department of Neurorehabilitative Sciences at Istituto Auxologico Italiano, overseeing the rTMS and tDCS treatment programs for motor and cognitive rehabilitation.",
         "photo_url": "https://www.auxologico.it/sites/default/files/styles/volto_small/public/2023-02/luigi_tesio-small.jpg?h=bf3816d5&amp;itok=P4WV8qdj"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "it-teo-001",
@@ -7267,7 +7414,8 @@
     "rating": 4.2,
     "review_count": 40,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-nij-001",
@@ -7315,7 +7463,8 @@
         "bio": "Biological-psychologist and entrepreneur who founded Brainclinics in 2001. Received his PhD at Utrecht University on EEG-based personalized medicine for ADHD and depression. Specialized in neurobiological aspects of ADHD and depression, stratified psychiatry, biomarkers, and neuromodulation techniques such as TMS. Over 190 scientific publications and four patents. Currently a visiting scholar at Stanford University's Brain Stimulation Lab.",
         "photo_url": "https://brainclinics.com/templates/yootheme/cache/3e/Martijn_2025-3e2b1e5b.jpeg"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-ams-001",
@@ -7350,7 +7499,8 @@
     "rating": 4.6,
     "review_count": 58,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-ams-002",
@@ -7385,7 +7535,8 @@
     "rating": 4.4,
     "review_count": 75,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-ams-003",
@@ -7428,7 +7579,8 @@
         "bio": "Psychiatrist with expertise in neuromodulation and rTMS for treatment-resistant depression. Lead investigator for the T-Bide study on rTMS effectiveness for depressive symptoms in bipolar disorder at GGZ inGeest.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-rot-001",
@@ -7463,7 +7615,8 @@
     "rating": 4.5,
     "review_count": 52,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-rot-002",
@@ -7499,7 +7652,8 @@
     "rating": 4.4,
     "review_count": 38,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-ams-004",
@@ -7538,7 +7692,8 @@
     "rating": 4.5,
     "review_count": 42,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-hag-001",
@@ -7587,7 +7742,8 @@
         "bio": "Klinisch psycholoog and psychotherapeut at neurocare Clinics Den Haag, specializing in combined rTMS and psychotherapy treatment for depression and OCD.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-gro-001",
@@ -7625,7 +7781,8 @@
     "rating": 4.4,
     "review_count": 30,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-gro-002",
@@ -7658,7 +7815,8 @@
     "rating": 4.3,
     "review_count": 55,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "nl-nij-002",
@@ -7697,7 +7855,8 @@
     "rating": 4.5,
     "review_count": 40,
     "verified": true,
-    "doctors_data": []
+    "doctors_data": [],
+    "provider_type": "tms_center"
   },
   {
     "id": "jp-tok-001",
@@ -7742,7 +7901,8 @@
         "bio": "Leads the Tokyo Yokohama TMS Clinic network with extensive clinical experience in rTMS therapy. Oversees one of Japan's largest TMS treatment databases, contributing to national TMS research consortiums including TReC-J.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "jp-tok-002",
@@ -7793,7 +7953,8 @@
         "bio": "Founder of Brain Clinic, specializing in neuroscience-based diagnostic and treatment approaches. Pioneered the combination of QEEG brain mapping with personalized TMS treatment protocols in Japan.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "jp-tok-003",
@@ -7838,7 +7999,8 @@
         "bio": "Leads the Tokyo TMS Mindfulness Clinic, providing specialized TMS treatment with physician aftercare follow-up for depression, insomnia, and ADHD.",
         "photo_url": "https://ttmc.jp/wp-content/uploads/doctor.png"
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "jp-tok-004",
@@ -7886,7 +8048,8 @@
         "bio": "Psychiatrist at Besli Clinic with occupational health experience. Provides TMS treatment combined with Kampo medicine and counseling for working professionals experiencing depression and burnout.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "jp-tok-005",
@@ -7931,7 +8094,8 @@
         "bio": "Provides TMS treatment and herbal medicine in Shimokitazawa with English-language support for international patients. Part of a psychiatric network collaborating on brain disease treatment.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "jp-tok-006",
@@ -7979,7 +8143,8 @@
         "bio": "The Department of Psychiatry at NCNP provides evidence-based diagnoses and treatment plans using biological, psychological, and environmental assessments. Active research in TMS-EEG and neural oscillation modulation.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "jp-tok-007",
@@ -8024,7 +8189,8 @@
         "bio": "Director of Ginza Psychosomatic Medicine Clinic, providing TMS treatment with the NeuroStar system in central Ginza. Offers comprehensive mental health care in a convenient location for working professionals.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "jp-osa-001",
@@ -8068,7 +8234,8 @@
         "bio": "Specialist in brain stimulation therapy and mood disorders. Serves as a member of the Japanese Society of Psychiatry and Neurology's rTMS Appropriate Use Guidelines Working Group, the Japanese Society of Mood Disorders' Neuromodulation Committee, and co-representative of the Kansai TMS Network. Also serves as Special Deputy Director of Asakayama Hospital's Clinical Research Training Center.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "jp-osa-002",
@@ -8113,7 +8280,8 @@
         "bio": "Director of A&O Mental Clinic in Osaka, providing TMS treatment and child/adolescent psychiatric care in the Umeda area. Offers magnetic stimulation therapy as a non-invasive alternative to medication for depression.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "kr-sel-001",
@@ -8160,7 +8328,8 @@
         "bio": "Board-certified psychiatrist with over 10 years of clinical experience. Earned Master of Public Health from Johns Hopkins University and trained at the University of Maryland's Mood and Anxiety Disorders Program. Certified Teacher at SIYLI (Search Inside Yourself Leadership Institute, developed at Google). Treats 200+ international patients annually with refined rTMS protocols specifically for English-speaking patients.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "kr-sel-002",
@@ -8213,7 +8382,8 @@
         "bio": "The Psychiatry Department of Gangnam Severance Hospital is affiliated with Yonsei University College of Medicine. Has conducted clinical trials on accelerated, conventional, and sham rTMS for treating major depressive disorder, with published research in international journals.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "kr-sel-003",
@@ -8261,7 +8431,8 @@
         "bio": "Pioneered rTMS introduction in Korean psychiatry. Conducted clinical research on miniaturized rTMS efficacy (54 patients with unipolar MDD, 2015-2016) and low-frequency rTMS for PTSD treatment. The department integrates brain stimulation with CBT, meditation, and pharmacotherapy.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "kr-sel-004",
@@ -8310,7 +8481,8 @@
         "bio": "The Psychiatry Department at Samsung Medical Center provides comprehensive mental health care through evidence-based approaches including neuromodulation, pharmacotherapy, digital therapeutics, and transdiagnostic psychosocial interventions.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "kr-sel-005",
@@ -8359,7 +8531,8 @@
         "bio": "The Brain Treatment Center Seoul team provides personalized MeRT therapy using qEEG brain mapping to create individualized TMS protocols. Part of the global Brain Treatment Center network with locations in the US and Asia.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "kr-sel-006",
@@ -8406,7 +8579,8 @@
         "bio": "The Neuropsychiatry Department at Bundang Seoul National University Hospital operates the Brain Function Regulation Lab providing TMS therapy. Offers bio-feedback, light treatment, and cognitive rehabilitation alongside brain stimulation therapies.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "kr-sel-007",
@@ -8454,7 +8628,8 @@
         "bio": "The Department of Rehabilitation Medicine at Asan Medical Center has published multiple studies on rTMS for post-stroke recovery. Clinical research since 2013 demonstrates expertise in using TMS for dysphagia, dysarthria, and motor recovery in brain injury patients.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   },
   {
     "id": "kr-sel-008",
@@ -8503,6 +8678,7 @@
         "bio": "Director of YNK Clinic specializing in TMS therapy and cognitive behavioral therapy for depression, social anxiety, panic disorder, and adolescent mental health issues in the Gangnam area of Seoul.",
         "photo_url": null
       }
-    ]
+    ],
+    "provider_type": "tms_center"
   }
 ]
