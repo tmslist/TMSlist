@@ -1,9 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getAllClinics } from "../../utils/clinicData";
-import { getClinicPhoto, getDoctorPhoto } from "../../utils/dataHelpers";
+import { getDoctorPhoto } from "../../utils/dataHelpers";
+import { getAllDoctors } from "../../db/queries";
 
-// Extract all doctors from verified clinics
+// Load all doctors from the data store (JSON-backed)
 interface Doctor {
     slug: string;
     firstName: string;
@@ -24,38 +24,28 @@ interface Doctor {
     clinicImage: string;
 }
 
-const allClinicsData = await getAllClinics();
+const allDoctorData = await getAllDoctors();
 const doctorMap = new Map<string, Doctor>();
 
-allClinicsData.forEach((clinic: any) => {
-    if (
-        clinic.verified &&
-        clinic.doctors_data &&
-        Array.isArray(clinic.doctors_data)
-    ) {
-        clinic.doctors_data.forEach((doc: any) => {
-            if (doc.slug && !doctorMap.has(doc.slug)) {
-                doctorMap.set(doc.slug, {
-                    slug: doc.slug,
-                    firstName: doc.first_name || "",
-                    lastName: doc.last_name || "",
-                    fullName:
-                        `${doc.first_name || ""} ${doc.last_name || ""}`.trim(),
-                    title: doc.title || "TMS Provider",
-                    school: doc.school || "",
-                    yearsExperience: doc.years_experience || 0,
-                    specialties: doc.specialties || [],
-                    bioFocus: doc.bio_focus || "",
-                    bio: doc.bio || "",
-                    imageUrl: doc.image_url || "/images/doctor-placeholder.jpg",
-                    clinicName: clinic.name,
-                    clinicSlug: clinic.slug,
-                    clinicCity: clinic.city,
-                    clinicState: clinic.state,
-                    clinicPhone: clinic.phone,
-                    clinicImage: clinic.hero_image_url || "",
-                });
-            }
+allDoctorData.forEach(({ doctor: doc, clinicName, clinicSlug, clinicCity, clinicState }) => {
+    if (doc.slug && !doctorMap.has(doc.slug)) {
+        doctorMap.set(doc.slug, {
+            slug: doc.slug,
+            firstName: doc.firstName || "",
+            lastName: doc.lastName || "",
+            fullName: doc.name || `${doc.firstName || ""} ${doc.lastName || ""}`.trim(),
+            title: doc.title || "TMS Provider",
+            school: doc.school || "",
+            yearsExperience: doc.yearsExperience || 0,
+            specialties: doc.specialties || [],
+            bioFocus: "",
+            bio: doc.bio || "",
+            imageUrl: doc.imageUrl || "/images/doctor-placeholder.jpg",
+            clinicName,
+            clinicSlug,
+            clinicCity,
+            clinicState,
+            clinicImage: "",
         });
     }
 });
