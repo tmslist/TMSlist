@@ -4,7 +4,7 @@
  *   WRITE operations → Postgres (reviews, leads, admin)
  */
 
-import { eq, and, desc, sql } from 'drizzle-orm';
+import { eq, and, desc, asc, sql } from 'drizzle-orm';
 import { db } from './index';
 import { clinics, reviews, leads, questions, treatments, countries, regions, doctors } from './schema';
 import type { NewReview, NewLead } from './schema';
@@ -124,19 +124,19 @@ export async function getQuestionBySlug(slug: string) {
 export async function getQuestionsByCategory(category: string) {
   return db.select().from(questions)
     .where(eq(questions.category, category))
-    .orderBy(sql`sort_order ASC`);
+    .orderBy(asc(questions.sortOrder));
 }
 
 export async function getQuestionCategories() {
   const result = await db.selectDistinct({ category: questions.category })
     .from(questions)
-    .orderBy(sql`category ASC`);
+    .orderBy(asc(questions.category));
   return result.map(r => r.category);
 }
 
 export async function getAllQuestions(opts?: { limit?: number; offset?: number }) {
   return db.select().from(questions)
-    .orderBy(sql`sort_order ASC`)
+    .orderBy(asc(questions.sortOrder))
     .limit(opts?.limit ?? 500)
     .offset(opts?.offset ?? 0);
 }
@@ -155,13 +155,13 @@ export async function getTreatmentBySlug(slug: string) {
 export async function getEnabledCountries() {
   return db.select().from(countries)
     .where(eq(countries.enabled, true))
-    .orderBy(sql`sort_order ASC`);
+    .orderBy(asc(countries.sortOrder));
 }
 
 export async function getRegionsByCountry(countryCode: string) {
   return db.select().from(regions)
     .where(eq(regions.countryCode, countryCode.toUpperCase()))
-    .orderBy(sql`name ASC`);
+    .orderBy(asc(regions.name));
 }
 
 // Admin
