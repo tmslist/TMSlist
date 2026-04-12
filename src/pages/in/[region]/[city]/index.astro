@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
 import ClinicCard from '../../../../components/ClinicCard.astro';
+import LocationSEOContent from '../../../../components/LocationSEOContent.astro';
 import { getClinicsByCountry } from '../../../../utils/dataHelpers';
 import { COUNTRY_META } from '../../../../utils/countryData';
 import { calculateClinicScore } from '../../../../utils/ranking';
@@ -103,19 +104,7 @@ const citySchema = JSON.stringify({
     </div>
 
     <!-- SEO Content -->
-    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-      <h2>Affordable TMS Treatment in {cityName}</h2>
-      <p>TMS (Transcranial Magnetic Stimulation) therapy in {cityName} is available through {clinics.length} verified {clinics.length === 1 ? 'provider' : 'providers'}. At {meta.sessionCostRange} per session, TMS treatment in India costs a fraction of what patients pay in the US (US$300-$500) or Europe ({COUNTRY_META['DE'].sessionCostRange}), making it an accessible option for treatment-resistant depression and other conditions.</p>
-      <h3>What to Expect</h3>
-      <p>A typical TMS treatment course involves 20-30 sessions over 4-6 weeks. {meta.insuranceNote} Many clinics in {cityName} offer flexible payment plans and consultation packages.</p>
-      <h3>Explore More</h3>
-      <ul>
-        <li><a href={`/in/${regionSlug}/`}>All TMS Clinics in {regionName}</a></li>
-        <li><a href="/in/">All TMS Clinics in India</a></li>
-        <li><a href="/treatments/">Conditions Treated with TMS</a></li>
-        <li><a href="/technology/">TMS Technology Guide</a></li>
-      </ul>
-    </section>
+    <LocationSEOContent type="city" locationName={cityName} stateName={regionName} clinicCount={clinics.length} countryCode="IN" />
     </div>
   </main>
 </Layout>

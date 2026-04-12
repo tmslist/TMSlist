@@ -36,7 +36,7 @@ const pageTitle = "My Saved Clinics | TMS List";
 
       <div id="login-prompt" class="hidden text-center py-16">
         <p class="text-lg font-medium text-slate-500 mb-4">Log in to see your saved clinics</p>
-        <a href="/admin/login?redirect=/account/saved" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700 transition-colors">
+        <a href="/portal/login/?redirect=/account/saved" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700 transition-colors">
           Log In
         </a>
         <a href="/account/register?redirect=/account/saved" class="inline-flex items-center px-6 py-3 ml-3 bg-white text-slate-700 border border-slate-200 rounded-xl font-semibold text-sm hover:bg-slate-50 transition-colors">
@@ -55,6 +55,7 @@ const pageTitle = "My Saved Clinics | TMS List";
 
     // Check auth
     const meRes = await fetch('/api/patient/me');
+    if (!meRes.ok) { list.classList.add('hidden'); loginPrompt.classList.remove('hidden'); return; }
     const { user } = await meRes.json();
 
     if (!user) {
@@ -64,6 +65,7 @@ const pageTitle = "My Saved Clinics | TMS List";
     }
 
     const res = await fetch('/api/patient/saved-clinics');
+    if (!res.ok) { alert("Failed to load saved clinics."); return; }
     const { data } = await res.json();
 
     if (!data || data.length === 0) {
@@ -79,7 +81,7 @@ const pageTitle = "My Saved Clinics | TMS List";
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:shadow-md transition-all">
           <div class="flex items-start justify-between mb-3">
             <div>
-              <h3 class="font-semibold text-slate-900">${c.name}</h3>
+              <h3 class="font-semibold text-slate-900">${c.name.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</h3>
               <p class="text-sm text-slate-500">${c.city}, ${c.state}</p>
             </div>
             <button onclick="unsave('${c.id}', this)" class="text-red-400 hover:text-red-600 transition-colors p-1" title="Remove">
@@ -111,5 +113,5 @@ const pageTitle = "My Saved Clinics | TMS List";
     }
   };
 
-  loadSaved();
+  document.addEventListener('DOMContentLoaded', loadSaved);
 </script>

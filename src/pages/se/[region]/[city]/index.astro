@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../../layouts/Layout.astro';
 import ClinicCard from '../../../../components/ClinicCard.astro';
+import LocationSEOContent from '../../../../components/LocationSEOContent.astro';
 import { getClinicsByCountry } from '../../../../utils/dataHelpers';
 import { COUNTRY_META } from '../../../../utils/countryData';
 import { t, getLocaleFromPath } from '../../../../utils/i18n';
@@ -152,22 +153,7 @@ const citySchema = JSON.stringify({
             </div>
         </section>
 
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-6 max-w-4xl">
-                <h2 class="text-3xl font-semibold text-gray-900 mb-8">TMS Therapy in {cityName}, {regionName}</h2>
-                <div class="prose prose-lg max-w-none text-gray-600">
-                    <p>
-                        {cityName}, {regionName} is home to {cityClinics.length} TMS (Transcranial Magnetic Stimulation) therapy {cityClinics.length === 1 ? 'clinic' : 'clinics'}, offering advanced treatment for depression, anxiety, OCD, and other mental health conditions.
-                    </p>
-                    <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Costs and Insurance in Sweden</h3>
-                    <p>{meta.insuranceNote} Sessions typically cost {meta.sessionCostRange}.</p>
-                    <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">What to Expect</h3>
-                    <p>
-                        Your TMS journey begins with a psychiatric consultation to evaluate suitability. A standard course involves 20-30 sessions over 4-6 weeks, with each session lasting 20-40 minutes depending on the protocol.
-                    </p>
-                </div>
-            </div>
-        </section>
+        <LocationSEOContent type="city" locationName={cityName} stateName={regionName} clinicCount={cityClinics.length} countryCode="SE" />
 
         <section class="py-16 bg-gradient-to-r from-violet-600 to-blue-600">
             <div class="container mx-auto px-6 text-center">

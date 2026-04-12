@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { COUNTRY_META } from '../../utils/countryData';
 import { t } from '../../utils/i18n';
@@ -118,23 +119,7 @@ const schema = JSON.stringify({
         </div>
 
         <!-- SEO Content -->
-        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-            <h2>日本におけるTMS療法</h2>
-            <p>日本では2019年6月にうつ病に対するrTMSが承認され、アジアで初めて国民健康保険の適用対象となった国の一つです。慶應義塾大学病院や国立精神・神経医療研究センターが主要な提供施設です。保険適用にはNeuroStarシステムが主に使用されています。</p>
-            <p>TMS療法は2019年に厚生労働省により承認されました。東京、大阪、京都の主要大学病院が保険適用のTMS治療を提供しています。</p>
-            <h3>保険と費用</h3>
-            <p>国民健康保険（NHI）は、認定医療機関における治療抵抗性うつ病に対するTMSをカバーしています。患者は標準の3割負担を支払います。すべての病院がNHI適用のTMSに認定されているわけではありません。保険適用外の民間クリニックでは1回あたり{meta.sessionCostRange}の費用がかかります。</p>
-            <p>日本でのTMSセッションの一般的な費用は{meta.sessionCostRange}です。治療コースは通常4〜6週間にわたり20〜30回のセッションで構成されます。</p>
-            <h3>日本でのTMSクリニックの選び方</h3>
-            <p>日本でTMS提供者を選ぶ際は、クリニックの認定状況、治療する精神科医の経験、使用されるTMS技術、保険が治療をカバーするかどうかを考慮してください。当ディレクトリでは地域別にクリニックを比較し、適切な提供者を見つけることができます。</p>
-            <h3>関連リソース</h3>
-            <ul>
-                <li><a href="/treatments/">TMSで治療できる疾患</a> — うつ病、不安障害、強迫性障害、PTSDなど</li>
-                <li><a href="/technology/">TMS技術ガイド</a> — NeuroStar、BrainsWay、MagVentureの比較</li>
-                <li><a href="/research/">TMS研究</a> — 最新の臨床研究と成果</li>
-            </ul>
-        </section>
-        </div>
+        <LocationSEOContent type="country" locationName="Japan" clinicCount={totalClinics} countryCode="JP" />
     </main>
 </Layout>
 

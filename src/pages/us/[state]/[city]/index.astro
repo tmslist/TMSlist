@@ -12,6 +12,7 @@ import { ClinicMachine, ClinicInsurance } from "../../../../types/clinic";
 import RelatedContent from "../../../../components/RelatedContent.astro";
 import { getAllQuestions } from "../../../../db/queries";
 import { getClinicRating, getClinicReviewCount } from "../../../../utils/dataHelpers";
+import LocationSEOContent from "../../../../components/LocationSEOContent.astro";
 
 const { state, city } = Astro.params;
 
@@ -223,7 +224,8 @@ const insurances = Object.values(ClinicInsurance);
                 {cityName} Clinics
                 <span class="text-slate-400 font-medium text-base ml-2" id="clinic-count">{cityClinics.length} Providers</span>
               </h2>
-              <select id="sort-select" class="text-sm border border-slate-200 rounded-lg px-3 py-1.5 text-slate-700 focus:border-violet-400 focus:ring-1 focus:ring-violet-100 bg-white">
+              <label for="sort-select" class="sr-only">Sort clinics</label>
+              <select id="sort-select" aria-label="Sort clinics" class="text-sm border border-slate-200 rounded-lg px-3 py-1.5 text-slate-700 focus:border-violet-400 focus:ring-1 focus:ring-violet-100 bg-white">
                 <option value="score">Best Match</option>
                 <option value="rating">Highest Rated</option>
                 <option value="reviews">Most Reviews</option>
@@ -254,14 +256,12 @@ const insurances = Object.values(ClinicInsurance);
               <span class="text-slate-400 text-sm mt-1 block">Try adjusting your criteria</span>
             </p>
 
-            <section class="mt-16 pt-12 border-t border-slate-100 prose prose-slate max-w-none">
-              <h2>TMS therapy in {cityName} — what you should know</h2>
-              <p>There are {cityClinics.length} verified TMS providers in the {cityName} area. Most use NeuroStar, BrainsWay Deep TMS, or MagVenture systems — each FDA-cleared and covered by the majority of insurance plans in {stateName}.</p>
-              <p>If you've tried antidepressants and they haven't worked well enough, TMS is worth looking into. It's non-invasive, sessions take about 20 minutes, and most people can drive themselves home afterward.</p>
-              <h3>What does TMS cost in {cityName}?</h3>
-              <p>With insurance, your out-of-pocket cost depends on your plan and deductible. Without insurance, sessions typically run $300-$500 each, and a full course is 36 sessions over about 6 weeks.</p>
-              <p>Good news: Medicare, Blue Cross, Aetna, Cigna, and UnitedHealthcare all cover TMS in {stateName} — as long as you meet the criteria (usually a depression diagnosis and at least 2 failed medication trials).</p>
-            </section>
+            <LocationSEOContent
+              type="city"
+              locationName={cityName}
+              stateName={stateName}
+              clinicCount={cityClinics.length}
+            />
 
             <div id="clinic-map" class="mt-12 rounded-2xl h-80 shadow-sm border border-slate-200 overflow-hidden z-0"></div>
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />

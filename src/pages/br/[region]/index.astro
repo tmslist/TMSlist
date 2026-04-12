@@ -4,6 +4,7 @@ import ClinicCard from '../../../components/ClinicCard.astro';
 import { getClinicsByCountry, getClinicRating } from '../../../utils/dataHelpers';
 import { COUNTRY_META } from '../../../utils/countryData';
 import { t, getLocaleFromPath } from '../../../utils/i18n';
+import LocationSEOContent from '../../../components/LocationSEOContent.astro';
 
 export async function getStaticPaths() {
     const clinics = await getClinicsByCountry('BR');
@@ -135,17 +136,7 @@ const regionSchema = JSON.stringify({
             </div>
         </section>
 
-        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-            <h2>TMS Therapy in {regionName}, Brazil</h2>
-            <p>{regionName} has {clinicCount} TMS therapy clinics across {cities.length} cities. Our directory helps you find verified TMS providers with treatment information and patient reviews.</p>
-            <p>{meta.insuranceNote} Sessions typically cost {meta.sessionCostRange}.</p>
-            <h3>Recursos relacionados</h3>
-            <ul>
-                <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
-                <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
-                <li><a href="/specialists/">Find a TMS Specialist</a> -- qualified psychiatrists</li>
-            </ul>
-        </section>
+<LocationSEOContent type="region" locationName={regionName} clinicCount={clinicCount} countryCode="BR" />
     </div>
 </Layout>
 

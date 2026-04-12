@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { t } from '../../utils/i18n';
 import { COUNTRY_META } from '../../utils/countryData';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 
 const meta = COUNTRY_META.CA;
 const clinics = await getClinicsByCountry('CA');
@@ -89,26 +90,12 @@ const schema = JSON.stringify({
     </div>
     </div></section>
 
-    <!-- SEO Content -->
-    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-      <h2>About TMS Therapy in Canada</h2>
-      <p>{meta.aboutContent}</p>
-      <p>{meta.seoDescription}</p>
-
-      <h3>Cost of TMS Therapy in Canada</h3>
-      <p>TMS therapy sessions in Canada typically cost {meta.sessionCostRange} per session. {meta.insuranceNote}</p>
-
-      <h3>How to Find the Right TMS Clinic in Canada</h3>
-      <p>When choosing a TMS clinic, consider the <a href="/technology/">TMS technology</a> used, the experience of the treating psychiatrist, insurance or extended benefits acceptance, and patient reviews. Our directory helps you compare clinics across all Canadian provinces to find the best match for your needs.</p>
-
-      <h3>Related Resources</h3>
-      <ul>
-        <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
-        <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
-        <li><a href="/insurance/">Insurance Coverage for TMS</a> -- which plans cover treatment</li>
-        <li><a href="/specialists/">Find a TMS Specialist</a> -- board-certified psychiatrists</li>
-      </ul>
-    </section>
+    <LocationSEOContent
+      type="country"
+      locationName="Canada"
+      clinicCount={totalClinics}
+      countryCode="CA"
+    />
   </main>
 </Layout>
 

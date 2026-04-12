@@ -5,7 +5,7 @@ import BookingWidget from "../../components/react/BookingWidget";
 import HealthScoreBadge from "../../components/react/HealthScoreBadge";
 import ClinicTracking from "../../components/ClinicTracking.astro";
 import { STATE_NAMES, getAllClinics, getStateSlug } from "../../utils/clinicData";
-import { getDoctorPhoto, hasRealClinicImage, COUNTRY_NAMES, COUNTRY_URL_PREFIXES } from "../../utils/dataHelpers";
+import { getDoctorPhoto, COUNTRY_NAMES, COUNTRY_URL_PREFIXES } from "../../utils/dataHelpers";
 import { getClinicLogoUrl } from "../../utils/images";
 
 const { slug } = Astro.params;
@@ -228,7 +228,7 @@ const galleryImages = clinic.gallery_urls || [];
                     </div>
                     {getRating() && (
                     <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)]">
-                        <div class="text-3xl font-bold tracking-tight text-slate-900 mb-1">{getRating().toFixed(1)}</div>
+                        <div class="text-3xl font-bold tracking-tight text-slate-900 mb-1">{getRating()?.toFixed(1) ?? '—'}</div>
                         <div class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Patient Rating</div>
                     </div>
                     )}
@@ -247,7 +247,7 @@ const galleryImages = clinic.gallery_urls || [];
                                 <p>{clinic.description_long}</p>
                                 <p>
                                     Located in {city}, {stateName}, our clinic serves
-                                    patients throughout {county} and the surrounding areas.
+                                    patients throughout {county ?? city} and the surrounding areas.
                                     We understand that mental health treatment is deeply personal,
                                     which is why we take a patient-centered approach to every
                                     consultation.

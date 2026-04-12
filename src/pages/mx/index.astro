@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { COUNTRY_META } from '../../utils/countryData';
 import { t } from '../../utils/i18n';
@@ -118,22 +119,7 @@ const schema = JSON.stringify({
         </div>
 
         <!-- SEO Content -->
-        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-            <h2>Terapia TMS en México</h2>
-            <p>{meta.aboutContent}</p>
-            <p>{meta.seoDescription}</p>
-            <h3>Seguros y costos</h3>
-            <p>{meta.insuranceNote}</p>
-            <p>El costo típico de una sesión de TMS en México varía de {meta.sessionCostRange}. Los tratamientos generalmente incluyen 20-30 sesiones durante 4-6 semanas.</p>
-            <h3>Cómo elegir una clínica TMS en México</h3>
-            <p>Al seleccionar un proveedor de TMS en México, considere la acreditación de la clínica, la experiencia del psiquiatra tratante, la tecnología TMS utilizada y si su seguro cubre el tratamiento. Nuestro directorio le ayuda a comparar clínicas por región y encontrar el proveedor adecuado.</p>
-            <h3>Recursos relacionados</h3>
-            <ul>
-                <li><a href="/treatments/">Condiciones tratadas con TMS</a> — depresión, ansiedad, TOC, TEPT y más</li>
-                <li><a href="/technology/">Guía de tecnología TMS</a> — comparar NeuroStar, BrainsWay, MagVenture</li>
-                <li><a href="/research/">Investigación TMS</a> — últimos estudios clínicos y resultados</li>
-            </ul>
-        </section>
+        <LocationSEOContent type="country" locationName="Mexico" clinicCount={totalClinics} countryCode="MX" />
         </div>
     </main>
 </Layout>

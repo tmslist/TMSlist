@@ -1,0 +1,82 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "id": "fuzzy-mantaray",
+  "prevId": "wonderful-moondragon",
+  "tables": {
+    "jobs": {
+      "name": "jobs",
+      "columns": {
+        "id": { "name": "id", "type": "uuid", "primaryKey": true, "default": "gen_random_uuid()", "notNull": true },
+        "clinic_id": { "name": "clinic_id", "type": "uuid", "notNull": true },
+        "created_by": { "name": "created_by", "type": "uuid", "notNull": true },
+        "title": { "name": "title", "type": "text", "notNull": true },
+        "role_category": { "name": "role_category", "type": "job_role_category", "notNull": true },
+        "employment_type": { "name": "employment_type", "type": "job_employment_type", "notNull": true, "default": "'full_time'" },
+        "location": { "name": "location", "type": "text", "notNull": true },
+        "remote": { "name": "remote", "type": "boolean", "notNull": true, "default": false },
+        "salary_min": { "name": "salary_min", "type": "integer" },
+        "salary_max": { "name": "salary_max", "type": "integer" },
+        "salary_display": { "name": "salary_display", "type": "text" },
+        "description": { "name": "description", "type": "text", "notNull": true },
+        "requirements": { "name": "requirements", "type": "text" },
+        "responsibilities": { "name": "responsibilities", "type": "text" },
+        "benefits": { "name": "benefits", "type": "text" },
+        "application_email": { "name": "application_email", "type": "text" },
+        "application_url": { "name": "application_url", "type": "text" },
+        "status": { "name": "status", "type": "job_status", "notNull": true, "default": "'active'" },
+        "view_count": { "name": "view_count", "type": "integer", "notNull": true, "default": 0 },
+        "application_count": { "name": "application_count", "type": "integer", "notNull": true, "default": 0 },
+        "expires_at": { "name": "expires_at", "type": "timestamp with time zone" },
+        "created_at": { "name": "created_at", "type": "timestamp with time zone", "notNull": true, "default": "now()" },
+        "updated_at": { "name": "updated_at", "type": "timestamp with time zone", "notNull": true, "default": "now()" }
+      },
+      "indexes": {
+        "idx_jobs_clinic": { "columns": ["clinic_id"], "isUnique": false },
+        "idx_jobs_created_by": { "columns": ["created_by"], "isUnique": false },
+        "idx_jobs_status": { "columns": ["status"], "isUnique": false },
+        "idx_jobs_role_category": { "columns": ["role_category"], "isUnique": false },
+        "idx_jobs_location": { "columns": ["location"], "isUnique": false },
+        "idx_jobs_created": { "columns": ["created_at"], "isUnique": false }
+      },
+      "foreignKeys": {
+        "jobs_clinic_id_clinics_id_fk": { "name": "jobs_clinic_id_clinics_id_fk", "tableFrom": "jobs", "tableTo": "clinics", "columnsFrom": ["clinic_id"], "columnsTo": ["id"], "onDelete": "cascade" },
+        "jobs_created_by_users_id_fk": { "name": "jobs_created_by_users_id_fk", "tableFrom": "jobs", "tableTo": "users", "columnsFrom": ["created_by"], "columnsTo": ["id"], "onDelete": "no action" }
+      }
+    },
+    "job_applications": {
+      "name": "job_applications",
+      "columns": {
+        "id": { "name": "id", "type": "uuid", "primaryKey": true, "default": "gen_random_uuid()", "notNull": true },
+        "job_id": { "name": "job_id", "type": "uuid", "notNull": true },
+        "clinic_id": { "name": "clinic_id", "type": "uuid", "notNull": true },
+        "applicant_name": { "name": "applicant_name", "type": "text", "notNull": true },
+        "applicant_email": { "name": "applicant_email", "type": "text", "notNull": true },
+        "applicant_phone": { "name": "applicant_phone", "type": "text" },
+        "resume_url": { "name": "resume_url", "type": "text" },
+        "cover_letter": { "name": "cover_letter", "type": "text" },
+        "linkedin_url": { "name": "linkedin_url", "type": "text" },
+        "clinic_owner_email": { "name": "clinic_owner_email", "type": "text" },
+        "status": { "name": "status", "type": "job_application_status", "notNull": true, "default": "'new'" },
+        "notes": { "name": "notes", "type": "text" },
+        "created_at": { "name": "created_at", "type": "timestamp with time zone", "notNull": true, "default": "now()" }
+      },
+      "indexes": {
+        "idx_job_applications_job": { "columns": ["job_id"], "isUnique": false },
+        "idx_job_applications_clinic": { "columns": ["clinic_id"], "isUnique": false },
+        "idx_job_applications_status": { "columns": ["status"], "isUnique": false },
+        "idx_job_applications_created": { "columns": ["created_at"], "isUnique": false }
+      },
+      "foreignKeys": {
+        "job_applications_job_id_jobs_id_fk": { "name": "job_applications_job_id_jobs_id_fk", "tableFrom": "job_applications", "tableTo": "jobs", "columnsFrom": ["job_id"], "columnsTo": ["id"], "onDelete": "cascade" },
+        "job_applications_clinic_id_clinics_id_fk": { "name": "job_applications_clinic_id_clinics_id_fk", "tableFrom": "job_applications", "tableTo": "clinics", "columnsFrom": ["clinic_id"], "columnsTo": ["id"], "onDelete": "no action" }
+      }
+    }
+  },
+  "enums": {
+    "job_status": { "name": "job_status", "values": ["active", "paused", "filled", "closed"] },
+    "job_role_category": { "name": "job_role_category", "values": ["tms_technician", "tms_physician", "nurse_tms", "psychologist", "front_desk", "office_manager", "billing", "marketing_coordinator", "community_outreach", "social_media", "data_researcher", "it_support", "other"] },
+    "job_employment_type": { "name": "job_employment_type", "values": ["full_time", "part_time", "contract", "internship"] },
+    "job_application_status": { "name": "job_application_status", "values": ["new", "viewed", "contacted", "rejected", "hired"] }
+  }
+}

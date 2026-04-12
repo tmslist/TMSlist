@@ -17,9 +17,30 @@ const otherCategories = questionsData
 
 const relatedQs = [...sameCategory, ...otherCategories].slice(0, 6);
 
-const answerText = question.answer || '';
+const rawAnswer = question.answer || '';
+// Split: first paragraph is the quick intro, rest is the detailed body
+const parts = rawAnswer.split('\n\n');
+const quickIntro = parts[0] || '';
+const bodyParagraphs = parts.slice(1);
+
+// Detect bullet points (lines starting with - or *)
+const formattedBody = bodyParagraphs.map(para => {
+    const trimmed = para.trim();
+    if (/^[-*•]\s/.test(trimmed)) {
+        return { type: 'bullet', text: trimmed };
+    }
+    if (/^\d+[\.\)]\s/.test(trimmed)) {
+        return { type: 'numbered', text: trimmed };
+    }
+    // Detect if it's a key stat or highlight
+    if (/^\d+[-–]\d+|percent|rate|%/i.test(trimmed)) {
+        return { type: 'stat', text: trimmed };
+    }
+    return { type: 'paragraph', text: trimmed };
+});
+
 const title = `${question.question} | TMS List Expert Answers`;
-const description = answerText.substring(0, 155).replace(/<[^>]*>/g, '');
+const description = quickIntro.substring(0, 155);
 ---
 
 <Layout title={title} description={description}>
@@ -40,35 +61,79 @@ const description = answerText.substring(0, 155).replace(/<[^>]*>/g, '');
             {question.question}
         </h1>
 
-        <!-- Quick Answer Box -->
-        <div
-            class="bg-violet-50 border-l-4 border-violet-600 p-6 mb-8 rounded-r-lg"
-        >
-            <h2 class="text-lg font-semibold text-violet-900 mb-2">Quick Answer</h2>
-            <p class="text-gray-800 leading-relaxed">{answerText.replace(/<[^>]*>/g, '').substring(0, 300)}</p>
-        </div>
-
-        <!-- Main Content -->
-        <article class="prose prose-lg prose-violet max-w-none mb-12">
-            {answerText.includes('<') ? (
-                <div set:html={answerText} />
-            ) : (
-                <p>{answerText}</p>
-            )}
-
-            {question.citations && question.citations.length > 0 && (
-                <div class="mt-8 pt-6 border-t border-gray-200">
-                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Sources</h3>
-                    <ul class="text-sm space-y-1">
-                        {question.citations.map((cite: string) => (
-                            <li>
-                                <a href={cite} target="_blank" rel="noopener noreferrer" class="text-violet-600 hover:underline break-all">{cite}</a>
-                            </li>
-                        ))}
-                    </ul>
+        <!-- Answer Layout: Quick intro + formatted body -->
+        <div class="space-y-6 mb-12">
+            <!-- Quick Answer Highlight -->
+            <div class="bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-100 rounded-2xl p-6 md:p-8">
+                <div class="flex items-start gap-4">
+                    <div class="shrink-0 w-10 h-10 bg-violet-100 rounded-xl flex items-center justify-center mt-0.5">
+                        <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-violet-600 uppercase tracking-wider mb-2">Quick Answer</p>
+                        <p class="text-gray-800 text-lg leading-relaxed font-medium">{quickIntro}</p>
+                    </div>
                 </div>
-            )}
-        </article>
+            </div>
+
+            <!-- Detailed Answer Body -->
+            <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                <!-- Body Header -->
+                <div class="bg-gray-50 border-b border-gray-200 px-6 py-4 flex items-center gap-3">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    <span class="text-sm font-semibold text-gray-700">Detailed Answer</span>
+                </div>
+
+                <!-- Body Content -->
+                <div class="p-6 md:p-8 space-y-5">
+                    {formattedBody.length > 0 ? (
+                        formattedBody.map((block) => {
+                            if (block.type === 'bullet') {
+                                const text = block.text.replace(/^[-*•]\s/, '');
+                                return (
+                                    <div class="flex gap-3">
+                                        <div class="shrink-0 w-1.5 h-1.5 rounded-full bg-violet-400 mt-2.5"></div>
+                                        <p class="text-gray-700 leading-relaxed">{text}</p>
+                                    </div>
+                                );
+                            }
+                            if (block.type === 'numbered') {
+                                return (
+                                    <div class="flex gap-3">
+                                        <div class="shrink-0 w-6 h-6 rounded-full bg-violet-100 text-violet-700 text-xs font-bold flex items-center justify-center mt-0.5">#</div>
+                                        <p class="text-gray-700 leading-relaxed">{block.text.replace(/^\d+[\.\)]\s/, '')}</p>
+                                    </div>
+                                );
+                            }
+                            return (
+                                <p class="text-gray-700 leading-relaxed">{block.text}</p>
+                            );
+                        })
+                    ) : (
+                        <p class="text-gray-700 leading-relaxed">{quickIntro}</p>
+                    )}
+                </div>
+
+                <!-- Share & Save -->
+                <div class="border-t border-gray-100 px-6 py-4 flex items-center justify-between">
+                    <span class="text-xs text-gray-400">Was this answer helpful?</span>
+                    <div class="flex items-center gap-3">
+                        <button class="flex items-center gap-1.5 text-xs text-gray-500 hover:text-violet-600 transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/></svg>
+                            Helpful
+                        </button>
+                        <button class="flex items-center gap-1.5 text-xs text-gray-500 hover:text-violet-600 transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Enhanced CTAs Grid -->
         <section class="my-12 grid grid-cols-1 md:grid-cols-2 gap-6">

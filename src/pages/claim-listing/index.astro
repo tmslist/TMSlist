@@ -32,6 +32,7 @@ const colorMap: Record<string, { bg: string; text: string }> = {
     amber: { bg: 'bg-amber-50', text: 'text-amber-600' },
     cyan: { bg: 'bg-cyan-50', text: 'text-cyan-600' },
     rose: { bg: 'bg-rose-50', text: 'text-rose-600' },
+    default: { bg: 'bg-slate-50', text: 'text-slate-600' },
 };
 ---
 
@@ -135,7 +136,7 @@ const colorMap: Record<string, { bg: string; text: string }> = {
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {benefits.map((b) => (
                         <div class="bg-white rounded-2xl border border-slate-100 p-6 hover:shadow-md hover:border-slate-200 transition-all">
-                            <div class={`w-12 h-12 rounded-xl ${colorMap[b.color].bg} ${colorMap[b.color].text} flex items-center justify-center mb-4`}>
+                            <div class={`w-12 h-12 rounded-xl ${(colorMap[b.color] ?? colorMap.default).bg} ${(colorMap[b.color] ?? colorMap.default).text} flex items-center justify-center mb-4`}>
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={b.icon}/></svg>
                             </div>
                             <h3 class="text-lg font-bold text-slate-900 mb-2">{b.title}</h3>

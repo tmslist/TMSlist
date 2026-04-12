@@ -145,3 +145,54 @@ export type ForumCommentInput = z.infer<typeof forumCommentSchema>;
 export type ForumVoteInput = z.infer<typeof forumVoteSchema>;
 export type ForumReportInput = z.infer<typeof forumReportSchema>;
 export type ForumPostsQueryInput = z.infer<typeof forumPostsQuerySchema>;
+
+// ── JOB VALIDATION ──────────────────────────────
+
+export const jobQuerySchema = z.object({
+  search: z.string().max(200).optional(),
+  state: z.string().max(50).optional(),
+  city: z.string().max(100).optional(),
+  roleCategory: z.string().optional(),
+  employmentType: z.string().optional(),
+  remote: z.coerce.boolean().optional(),
+  status: z.string().optional(),
+  sort: z.enum(['newest', 'oldest']).default('newest'),
+  limit: z.coerce.number().int().min(1).max(100).default(20),
+  offset: z.coerce.number().int().min(0).default(0),
+});
+
+export const jobSubmitSchema = z.object({
+  title: z.string().min(3).max(200),
+  roleCategory: z.enum([
+    'tms_technician', 'tms_physician', 'nurse_tms', 'psychologist',
+    'front_desk', 'office_manager', 'billing',
+    'marketing_coordinator', 'community_outreach', 'social_media',
+    'data_researcher', 'it_support', 'other',
+  ]),
+  employmentType: z.enum(['full_time', 'part_time', 'contract', 'internship']).default('full_time'),
+  location: z.string().min(2).max(200),
+  remote: z.boolean().default(false),
+  salaryMin: z.coerce.number().int().min(0).optional(),
+  salaryMax: z.coerce.number().int().min(0).optional(),
+  salaryDisplay: z.string().max(100).optional(),
+  description: z.string().min(50).max(10000),
+  requirements: z.string().max(5000).optional(),
+  responsibilities: z.string().max(5000).optional(),
+  benefits: z.string().max(5000).optional(),
+  applicationEmail: z.string().email().optional(),
+  applicationUrl: z.string().url().optional().or(z.literal('')),
+  expiresAt: z.string().datetime().optional(),
+});
+
+export const jobApplicationSubmitSchema = z.object({
+  applicantName: z.string().min(2).max(100),
+  applicantEmail: z.string().email(),
+  applicantPhone: z.string().max(20).optional(),
+  resumeUrl: z.string().url().optional().or(z.literal('')),
+  coverLetter: z.string().max(5000).optional(),
+  linkedInUrl: z.string().url().optional().or(z.literal('')),
+});
+
+export type JobQueryInput = z.infer<typeof jobQuerySchema>;
+export type JobSubmitInput = z.infer<typeof jobSubmitSchema>;
+export type JobApplicationSubmitInput = z.infer<typeof jobApplicationSubmitSchema>;

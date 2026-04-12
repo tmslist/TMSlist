@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { t } from '../../utils/i18n';
 import { COUNTRY_META } from '../../utils/countryData';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 
 const countryCode = 'AE';
 const meta = COUNTRY_META[countryCode];
@@ -116,23 +117,7 @@ const schema = JSON.stringify({
             ))}
         </div>
 
-        <!-- SEO Content -->
-        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-            <h2>About TMS Therapy in United Arab Emirates</h2>
-            <p>{meta.aboutContent}</p>
-            <p>{meta.seoDescription}</p>
-            <h3>Insurance and Costs</h3>
-            <p>{meta.insuranceNote}</p>
-            <p>The typical cost of a TMS session in United Arab Emirates ranges from {meta.sessionCostRange}. Treatment courses usually involve 20-30 sessions over 4-6 weeks.</p>
-            <h3>How to Choose a TMS Clinic in United Arab Emirates</h3>
-            <p>When selecting a TMS provider in United Arab Emirates, consider the clinic's accreditation, the experience of the treating psychiatrist, the TMS technology used, and whether your insurance covers treatment. Our directory helps you compare clinics by region, view available technologies, and find the right provider.</p>
-            <h3>Related Resources</h3>
-            <ul>
-                <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
-                <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
-                <li><a href="/research/">TMS Research</a> -- latest clinical studies and outcomes</li>
-            </ul>
-        </section>
+        <LocationSEOContent type="country" locationName="United Arab Emirates" clinicCount={totalClinics} countryCode="AE" />
         </div>
     </main>
 </Layout>

@@ -4,7 +4,7 @@ description: "A comprehensive guide to active TMS clinical trials for anxiety, P
 author: "TMS List Editorial Team"
 publishDate: 2026-03-01
 category: research
-tags: ["clinical trials", "research", "PTSD", "anxiety", "bipolar", "chronic pain", "autism"]
+tags: ["clinical trials", "research", "PTSD", "anxiety", "bipolar", "chronic pain", "autism", "TMS research"]
 ---
 
 ## TMS research is expanding fast

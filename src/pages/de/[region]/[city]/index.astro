@@ -4,6 +4,7 @@ import ClinicCard from '../../../../components/ClinicCard.astro';
 import { getClinicsByCountry } from '../../../../utils/dataHelpers';
 import { COUNTRY_META } from '../../../../utils/countryData';
 import { calculateClinicScore } from '../../../../utils/ranking';
+import LocationSEOContent from '../../../../components/LocationSEOContent.astro';
 
 const { region, city } = Astro.params;
 
@@ -102,20 +103,7 @@ const citySchema = JSON.stringify({
       {clinics.map((clinic: any) => <ClinicCard clinic={clinic} />)}
     </div>
 
-    <!-- SEO Content -->
-    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-      <h2>Finding TMS Therapy in {cityName}</h2>
-      <p>TMS (Transcranial Magnetic Stimulation) therapy in {cityName} is available through {clinics.length} verified {clinics.length === 1 ? 'provider' : 'providers'}. {meta.aboutContent}</p>
-      <h3>Cost and Insurance Coverage</h3>
-      <p>{meta.insuranceNote} Sessions in {cityName} typically range from {meta.sessionCostRange}, with a full treatment course of 20-30 sessions over 4-6 weeks.</p>
-      <h3>Explore More</h3>
-      <ul>
-        <li><a href={`/de/${regionSlug}/`}>All TMS Clinics in {regionName}</a></li>
-        <li><a href="/de/">All TMS Clinics in Germany</a></li>
-        <li><a href="/treatments/">Conditions Treated with TMS</a></li>
-        <li><a href="/technology/">TMS Technology Guide</a></li>
-      </ul>
-    </section>
+<LocationSEOContent type="city" locationName={cityName} stateName={regionName} clinicCount={clinics.length} countryCode="DE" />
     </div>
   </main>
 </Layout>

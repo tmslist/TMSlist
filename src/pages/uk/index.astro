@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { t } from '../../utils/i18n';
 import { COUNTRY_META } from '../../utils/countryData';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 
 const countryCode = 'GB';
 const clinics = await getClinicsByCountry(countryCode);
@@ -90,26 +91,12 @@ const schema = JSON.stringify({
         </div>
         </div></section>
 
-        <!-- SEO Content -->
-        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-            <h2>About TMS Therapy in the United Kingdom</h2>
-            <p>{meta.aboutContent}</p>
-            <p>{meta.seoDescription}</p>
-
-            <h3>NHS and Private TMS Treatment</h3>
-            <p>{meta.insuranceNote}</p>
-
-            <h3>How to Find the Right TMS Clinic in the UK</h3>
-            <p>When choosing a UK TMS clinic, consider whether the clinic uses NICE-approved protocols, the experience of the treating psychiatrist, the TMS technology available (rTMS vs Deep TMS), and patient reviews. Our directory includes verified information about each clinic's technology, specialists, and treatment specialities.</p>
-
-            <h3>Related Resources</h3>
-            <ul>
-                <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
-                <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
-                <li><a href="/insurance/">Insurance Coverage for TMS</a> -- which plans cover treatment</li>
-                <li><a href="/specialists/">Find a TMS Specialist</a> -- board-certified psychiatrists</li>
-            </ul>
-        </section>
+        <LocationSEOContent
+          type="country"
+          locationName="United Kingdom"
+          clinicCount={totalClinics}
+          countryCode="GB"
+        />
     </main>
 </Layout>
 

@@ -78,10 +78,10 @@ import ContentPage from "../layouts/ContentPage.astro";
                 Send Message
             </button>
 
-            <div id="contact-success" class="hidden mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-center">
+            <div id="contact-success" class="hidden mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-center" role="status" aria-live="polite">
                 <p class="text-emerald-700 font-medium text-sm">Message sent! We'll get back to you soon.</p>
             </div>
-            <div id="contact-error" class="hidden mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-center">
+            <div id="contact-error" class="hidden mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-center" role="alert" aria-live="assertive">
                 <p class="text-red-700 font-medium text-sm">Something went wrong. Please email us directly.</p>
             </div>
         </form>

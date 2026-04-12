@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import ClinicCard from '../../../components/ClinicCard.astro';
+import LocationSEOContent from '../../../components/LocationSEOContent.astro';
 import { getClinicsByCountry, getClinicsByCountryAndRegion } from '../../../utils/dataHelpers';
 import { COUNTRY_META } from '../../../utils/countryData';
 import { calculateClinicScore } from '../../../utils/ranking';
@@ -131,12 +132,7 @@ const regionSchema = JSON.stringify({
     </section>
 
     <!-- SEO Content -->
-    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-      <h2>Affordable TMS Therapy in {regionName}, India</h2>
-      <p>{regionName} has {clinicCount} TMS therapy {clinicCount === 1 ? 'clinic' : 'clinics'} across {cities.length} {cities.length === 1 ? 'city' : 'cities'}. India offers some of the most affordable TMS treatment globally, with sessions typically costing {meta.sessionCostRange} -- a fraction of the US$300-$500 per session charged in Western countries.</p>
-      <p>{meta.insuranceNote}</p>
-      <p>Use our directory to compare clinics in {regionName} by technology, patient outcomes, and cost. Each listing includes verified information about the clinic's TMS equipment and treating psychiatrists.</p>
-    </section>
+    <LocationSEOContent type="region" locationName={regionName} clinicCount={clinicCount} countryCode="IN" />
   </div>
 </Layout>
 

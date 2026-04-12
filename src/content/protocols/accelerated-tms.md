@@ -1,6 +1,10 @@
 ---
 title: "Accelerated TMS Protocols"
 description: "Accelerated TMS compresses weeks of treatment into days. Overview of compressed schedules, multiple daily sessions, and outcomes vs standard pacing."
+author: "TMS List Editorial Team"
+publishDate: 2026-01-25
+category: protocols
+tags: ["accelerated TMS", "aTMS", "SAINT protocol", "multiple daily sessions", "compressed TMS", "rapid TMS"]
 ---
 
 ## What is accelerated TMS?

@@ -1,6 +1,10 @@
 ---
 title: "Starting a TMS Clinic: Requirements by State"
 description: "State-by-state breakdown of licensing, supervision, facility, and insurance requirements for opening a TMS therapy practice."
+author: "TMS List Editorial Team"
+publishDate: 2026-02-01
+category: legal
+tags: ["TMS clinic", "starting a clinic", "state requirements", "licensing", "medical director", "facility requirements"]
 ---
 
 ## Overview: What You Need to Open a TMS Clinic
@@ -125,20 +129,19 @@ Start credentialing as early as you can. Many clinics begin 6 months before thei
 
 For questions about specific legal or regulatory requirements in your state, consult with a healthcare attorney familiar with neuromodulation practices. The legal landscape for TMS is evolving rapidly as the technology becomes more mainstream.
 
----
+## Frequently Asked Questions
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Find TMS Providers</h4>
-  <div class="grid grid-cols-2 gap-2">
-    <a href="/us/" class="text-sm text-violet-700 hover:underline">Find a Clinic</a>
-    <a href="/providers/hospital-based/" class="text-sm text-violet-700 hover:underline">Hospital-Based TMS</a>
-    <a href="/providers/private-practice/" class="text-sm text-violet-700 hover:underline">Private Practice TMS</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-sm text-violet-700 hover:underline">Am I a Candidate?</a>
-  </div>
-</div>
+### What type of physician is required to supervise TMS treatment?
+A licensed psychiatrist must serve as medical director and oversee all TMS treatments in most states. Some states allow MDs with specific training to supervise without a psychiatrist as medical director, but most insurers and the FDA require psychiatrist involvement for reimbursement and compliance.
 
+### How long does it take to open a TMS clinic?
+The timeline from planning to first patient is typically 12–18 months. This includes: physician recruitment (2–4 months), device procurement (2–3 months), facility build-out (2–4 months), insurance credentialing (3–6 months), and marketing setup (1–2 months). The credentialing process is often the longest bottleneck.
 
-## Additional Resources
+### What TMS devices are FDA-cleared?
+Currently FDA-cleared devices include NeuroStar, BrainsWay Deep TMS System, MagVenture TMS Therapy System, CloudTMS, and Nexstim SmartFocus. Using any other device for clinical TMS treatment would not meet FDA requirements.
+
+### Do TMS clinics need a separate facility license?
+In most states, no. A standard medical office license covers TMS treatment. However, some states (e.g., New York) have Office-Based Surgery regulations that may apply depending on your setup. Always verify with your state medical board before opening.
 
 <div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
   <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
@@ -161,4 +164,4 @@ For questions about specific legal or regulatory requirements in your state, con
   </div>
 </div>
 
-For questions about specific legal or regulatory requirements in your state, consult with a healthcare attorney familiar with neuromodulation practices. The legal landscape for TMS is evolving rapidly as the technology becomes more mainstream.
+For questions about specific legal or regulatory requirements in your state, consult with a healthcare attorney familiar with neuromodulation practices.

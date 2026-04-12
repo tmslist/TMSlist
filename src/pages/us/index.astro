@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getAllClinics, getStateSlug, STATE_NAMES } from '../../utils/clinicData';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 import { getClinicRating, getClinicReviewCount, getTotalDoctorCount } from '../../utils/dataHelpers';
 
 const allClinics = await getAllClinics();
@@ -220,17 +221,11 @@ const stateListSchema = JSON.stringify({
       </div>
     </section>
 
-    <!-- SEO Content -->
-    <section class="py-16 border-t border-slate-100">
-      <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto prose prose-lg prose-slate">
-          <h2>About TMS Therapy in the United States</h2>
-          <p>Transcranial Magnetic Stimulation (TMS) therapy is available at over {totalClinics} clinics across the United States. TMS is FDA-cleared for treating Major Depressive Disorder, OCD, smoking cessation, and other conditions. Most major insurance providers including Medicare, BlueCross BlueShield, Aetna, Cigna, and UnitedHealthcare now cover TMS therapy.</p>
-          <p>Use our directory to compare clinics by state, view patient ratings, check insurance acceptance, and find the right TMS provider for your needs. Each listing includes verified information about the clinic's TMS technology, treating psychiatrists, and treatment specialties.</p>
-          <h3>How to Find the Right TMS Clinic</h3>
-          <p>When choosing a TMS clinic, consider the <a href="/technology/">TMS technology</a> used, the experience of the <a href="/specialists/">treating psychiatrist</a>, insurance acceptance, and patient reviews. Our <a href="/quiz/am-i-a-candidate/">candidate quiz</a> can help you determine if TMS therapy may be right for you.</p>
-        </div>
-      </div>
+    <LocationSEOContent
+      type="country"
+      locationName="United States"
+      clinicCount={totalClinics}
+    />
     </section>
   </main>
 </Layout>

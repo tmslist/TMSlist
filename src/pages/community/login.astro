@@ -113,7 +113,7 @@ const ERROR_MESSAGES: Record<string, string> = {
         throw new Error(data.error || 'Failed to send login link');
       }
     } catch (err) {
-      errorText.textContent = err.message || 'Something went wrong. Please try again.';
+      if (errorText) errorText.textContent = err.message || 'Something went wrong. Please try again.';
       errorMsg?.classList.remove('hidden');
       submitBtn.disabled = false;
       submitBtn.textContent = 'Send Magic Link';

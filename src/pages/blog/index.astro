@@ -300,7 +300,7 @@ const cardGradients: Record<string, string> = {
                     });
                     if (res.ok) { content?.classList.add("hidden"); success?.classList.remove("hidden"); }
                     else throw new Error();
-                } catch { showToast("Something went wrong. Please try again."); btn.disabled = false; btn.textContent = "Subscribe"; }
+                } catch { btn.disabled = false; btn.textContent = "Subscribe"; alert("Something went wrong. Please try again."); }
             });
         }
     });

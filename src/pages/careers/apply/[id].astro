@@ -1,0 +1,79 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import JobApplyForm from "../../../components/react/JobApplyForm";
+
+export const prerender = false;
+
+const { id } = Astro.params;
+
+let job: any = null;
+let error: string | null = null;
+
+try {
+  const res = await fetch(`${Astro.url.origin}/api/jobs/${id}`);
+  if (res.ok) {
+    const data = await res.json();
+    job = data.data;
+  } else if (res.status === 404) {
+    error = "Job not found";
+  } else if (res.status === 410) {
+    error = "This job is no longer accepting applications";
+  } else {
+    error = "Failed to load job";
+  }
+} catch {
+  error = "Failed to load job";
+}
+
+if (error || !job) {
+  return Astro.redirect("/careers/");
+}
+
+const title = `Apply: ${job.title} at ${job.clinicName} | TMS List`;
+const description = `Apply for ${job.title} at ${job.clinicName} in ${job.location}`;
+---
+
+<Layout title={title} description={description} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Careers", url: "/careers/" },
+  { name: job.title, url: `/careers/${id}/` },
+  { name: "Apply", url: `/careers/apply/${id}/` },
+]}>
+  <main>
+    <section class="min-h-screen bg-slate-50 py-12 lg:py-20">
+      <div class="container mx-auto px-4 max-w-2xl">
+        <!-- Back link -->
+        <a href={`/careers/${id}/`} class="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 transition-colors mb-8">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          Back to job listing
+        </a>
+
+        <!-- Job context card -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 mb-6">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-100 to-cyan-100 flex items-center justify-center text-violet-700 font-bold text-xl shrink-0">
+              {job.clinicName?.charAt(0)}
+            </div>
+            <div>
+              <h1 class="text-xl font-bold text-slate-900">{job.title}</h1>
+              <p class="text-sm text-slate-500">{job.clinicName} · {job.location}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apply form -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 lg:p-8">
+          <h2 class="text-xl font-bold text-slate-900 mb-1">Submit Your Application</h2>
+          <p class="text-sm text-slate-500 mb-6">Your information will be sent directly to {job.clinicName}.</p>
+          <JobApplyForm
+            client:load
+            jobId={job.id}
+            jobTitle={job.title}
+            clinicName={job.clinicName}
+            applicationUrl={job.applicationUrl}
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

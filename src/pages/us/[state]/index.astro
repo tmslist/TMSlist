@@ -6,6 +6,7 @@ import {
   getStateCodeFromSlug,
   STATE_NAMES,
 } from "../../../utils/dataHelpers";
+import LocationSEOContent from "../../../components/LocationSEOContent.astro";
 
 const stateSlug = Astro.params.state!;
 const stateCode = getStateCodeFromSlug(stateSlug);
@@ -202,19 +203,12 @@ const stateSchema = JSON.stringify({
       )}
     </section>
 
-    <!-- SEO Content + Internal Links -->
-    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-      <h2>TMS Therapy in {stateName}</h2>
-      <p>{stateName} has {clinicCount} TMS therapy clinics across {cities.length} cities. Whether you're in {cities.slice(0, 3).map((c: any) => c.name).join(', ')}, or elsewhere in {stateName}, our directory helps you find FDA-cleared TMS providers with verified reviews and insurance information.</p>
-      <p>Most clinics in {stateName} accept major insurance plans including Medicare, BlueCross BlueShield, Aetna, Cigna, and UnitedHealthcare. Use our <a href="/quiz/am-i-a-candidate/">eligibility quiz</a> to check if you're a candidate for TMS therapy.</p>
-      <h3>Related Resources</h3>
-      <ul>
-        <li><a href="/treatments/">Conditions Treated with TMS</a> — depression, anxiety, OCD, PTSD and more</li>
-        <li><a href="/technology/">TMS Technology Guide</a> — compare NeuroStar, BrainsWay, MagVenture</li>
-        <li><a href="/insurance/">Insurance Coverage for TMS</a> — which plans cover treatment</li>
-        <li><a href="/specialists/">Find a TMS Specialist</a> — board-certified psychiatrists</li>
-      </ul>
-    </section>
+    <LocationSEOContent
+      type="state"
+      locationName={stateName}
+      clinicCount={clinicCount}
+      topCities={cities.slice(0, 3).map((c: any) => c.name)}
+    />
   </main>
 </Layout>
 

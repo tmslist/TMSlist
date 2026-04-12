@@ -1,6 +1,10 @@
 ---
 title: "Neuronavigation (MRI-Guided TMS)"
 description: "How MRI-guided neuronavigation improves TMS targeting precision — the technology, evidence for better outcomes, and where to find navigated TMS."
+author: "TMS List Editorial Team"
+publishDate: 2026-01-20
+category: protocols
+tags: ["neuronavigation", "MRI-guided TMS", "fMRI", "targeting", "precision TMS", "navigation"]
 ---
 
 ## What is neuronavigated TMS?

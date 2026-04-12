@@ -84,7 +84,7 @@ const articleSchema = JSON.stringify({
     "url": siteUrl,
     "logo": { "@type": "ImageObject", "url": `${siteUrl}/favicon.svg` },
   },
-  "datePublished": meta.date ? new Date(`${meta.date} 1, 2026`).toISOString().split('T')[0] : undefined,
+  "datePublished": meta.date ? new Date(`${meta.date} 1, ${new Date().getFullYear()}`).toISOString().split('T')[0] : undefined,
   "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/blog/${slug}/` },
   "reviewedBy": {
     "@type": "Person",
@@ -205,7 +205,7 @@ const articleSchema = JSON.stringify({
     { heading: 'Insurance & Cost', links: [
       { title: 'Medicare Coverage', href: '/insurance/medicare/' },
       { title: 'TMS Cost Guide', href: '/tms-cost-guide/' },
-      { title: 'Insurance Eligibility', href: '/quiz/insurance-eligibility-checker/' },
+      { title: 'Insurance Eligibility', href: '/quiz/am-i-a-candidate/' },
     ]},
     { heading: 'Compare Options', links: [
       { title: 'TMS vs. Medication', href: '/compare/tms-vs-antidepressants/' },

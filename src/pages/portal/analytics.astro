@@ -9,11 +9,11 @@ if (!session) return Astro.redirect("/portal/login/");
 ---
 <Layout title="Analytics | Doctor Portal" noindex={true}>
   <div class="flex min-h-screen bg-gray-50">
-    <PortalSidebar client:load currentPage="analytics" userEmail={session.email} />
+    <PortalSidebar client:load currentPage="analytics" userEmail={session.email} userId={session.userId} />
     <main class="flex-1 lg:ml-64 py-8">
       <div class="container mx-auto px-4 max-w-5xl">
         <h1 class="text-2xl font-semibold text-gray-900 mb-6">Analytics</h1>
-        <PortalAnalytics client:idle userId={session.userId} />
+        <PortalAnalytics client:idle userId={session.userId} userEmail={session.email} />
       </div>
     </main>
   </div>

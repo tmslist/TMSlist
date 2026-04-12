@@ -2,178 +2,423 @@
 import Layout from '../../layouts/Layout.astro';
 import { TECHNOLOGY_SLUGS, PROTOCOL_SLUGS } from '../../utils/seo_slugs';
 
-const title = "TMS Technology & Machines | NeuroStar, BrainsWay, Apollo, Exomind";
-const description = "Compare FDA-cleared TMS devices including NeuroStar, BrainsWay Deep TMS, MagVenture, Apollo TMS, Exomind, and more. Learn about different protocols.";
+const title = "TMS Technology & Machines | NeuroStar, BrainsWay, MagVenture, Magstim & More";
+const description = "Compare FDA-cleared TMS devices — NeuroStar, BrainsWay Deep TMS, MagVenture, Magstim, CloudTMS, Nexstim, Apollo TMS. Learn about coil types, protocols, and clinical evidence.";
+
+const siteUrl = import.meta.env.SITE_URL || 'https://tmslist.com';
 
 const additionalMachines = [
-    { slug: 'apollo-tms', title: 'Apollo TMS' },
-    { slug: 'exomind', title: 'Exomind Wellness TMS' },
-    { slug: 'nexstim', title: 'Nexstim TMS' },
-    { slug: 'mag-and-more', title: 'MAG & More' },
-    { slug: 'deymed', title: 'Deymed TMS' },
+  { slug: 'apollo-tms', title: 'Apollo TMS' },
+  { slug: 'exomind', title: 'Exomind Wellness TMS' },
+  { slug: 'nexstim', title: 'Nexstim TMS' },
+  { slug: 'mag-and-more', title: 'MAG & More' },
+  { slug: 'deymed', title: 'Deymed TMS' },
 ];
 
 const allTech = [...TECHNOLOGY_SLUGS, ...additionalMachines];
 
-interface DeviceMeta {
-    accent: string;
-    accentBg: string;
-    accentBorder: string;
-    desc: string;
-    coilType: string;
-    fdaCleared: boolean;
-    highlight?: string;
-}
+const techSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'TMS Technology & Devices',
+  description,
+  url: `${siteUrl}/technology/`,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: allTech.length,
+    itemListElement: allTech.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: { '@type': 'MedicalDevice', name: item.title, url: `${siteUrl}/technology/${item.slug}/` },
+    })),
+  },
+});
 
-const deviceMeta: Record<string, DeviceMeta> = {
-    'neurostar': { accent: 'text-blue-600', accentBg: 'bg-blue-500', accentBorder: 'border-blue-200', desc: 'Most widely deployed TMS system in the US with the patented SenStar touchscreen treatment system and figure-8 coil design.', coilType: 'Figure-8', fdaCleared: true, highlight: 'Most Used in US' },
-    'brainsway': { accent: 'text-emerald-600', accentBg: 'bg-emerald-500', accentBorder: 'border-emerald-200', desc: 'Deep TMS with proprietary H-coil technology. The only system FDA-cleared for both depression and OCD.', coilType: 'H-Coil (Deep)', fdaCleared: true, highlight: 'Deep TMS Pioneer' },
-    'magventure': { accent: 'text-violet-600', accentBg: 'bg-violet-500', accentBorder: 'border-violet-200', desc: 'Versatile platform supporting multiple coil configurations. Used in both clinical treatment and research settings worldwide.', coilType: 'Multiple Options', fdaCleared: true, highlight: 'Research Standard' },
-    'magstim': { accent: 'text-rose-600', accentBg: 'bg-rose-500', accentBorder: 'border-rose-200', desc: 'UK-manufactured TMS system with over 30 years of heritage. Strong research pedigree with rapid stimulation capabilities.', coilType: 'Figure-8 / Double Cone', fdaCleared: true, highlight: '30+ Year Heritage' },
-    'cloudtms': { accent: 'text-sky-600', accentBg: 'bg-sky-500', accentBorder: 'border-sky-200', desc: 'Cloud-connected TMS platform with real-time treatment monitoring and analytics dashboard for clinicians.', coilType: 'Figure-8', fdaCleared: true, highlight: 'Cloud Analytics' },
-    'apollo-tms': { accent: 'text-amber-600', accentBg: 'bg-amber-500', accentBorder: 'border-amber-200', desc: 'Advanced TMS system with precision targeting and ergonomic patient positioning for improved comfort.', coilType: 'Figure-8', fdaCleared: true, highlight: 'Precision Targeting' },
-    'exomind': { accent: 'text-cyan-600', accentBg: 'bg-cyan-500', accentBorder: 'border-cyan-200', desc: 'Wellness-focused TMS technology with a streamlined treatment workflow designed for high-volume practices.', coilType: 'Proprietary', fdaCleared: false, highlight: 'Wellness Focus' },
-    'nexstim': { accent: 'text-indigo-600', accentBg: 'bg-indigo-500', accentBorder: 'border-indigo-200', desc: 'Navigated TMS with real-time MRI-guided targeting for precise cortical stimulation mapping.', coilType: 'Navigated', fdaCleared: true, highlight: 'MRI-Guided' },
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the difference between figure-8 and H-coil (deep TMS)?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Figure-8 coils (NeuroStar, MagVenture, Magstim) deliver focused stimulation to a specific point on the prefrontal cortex — approximately 2–3 cm deep. H-coils (BrainsWay) use a proprietary design that creates a broader electric field reaching deeper brain structures — approximately 3–6 cm. H-coils are required for the OCD protocol and can target regions inaccessible to figure-8 coils.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does neuronavigation work in TMS?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Neuronavigation uses MRI or CT scans to create a 3D map of the patient\'s brain, allowing the TMS coil to be positioned with millimeter precision at the optimal target location. This improves targeting accuracy compared to standard "landmark" methods (measuring from the ear). MRI-guided TMS is available through systems like Nexstim and as an option on most platforms.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which TMS device is the most widely used in the US?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'NeuroStar has the largest installed base in the US, with over 4,000 systems deployed. BrainsWay is the second most common and dominates the deep TMS market. MagVenture and Magstim are more prevalent in academic medical centers and research institutions. Clinic device availability varies by region.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does the TMS device matter for treatment outcomes?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'All FDA-cleared TMS devices have clinical evidence supporting their efficacy for depression. Head-to-head device comparison studies are limited, so it is difficult to say definitively that one device is superior. That said, device choice does affect available protocols: only BrainsWay is FDA-cleared for OCD via deep TMS, and only NeuroStar is cleared for anxious depression. Your treating psychiatrist will recommend the most appropriate device for your condition.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is theta burst stimulation?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Theta burst stimulation (iTBS / theta burst) is an accelerated TMS protocol using bursts of 3 pulses at 50 Hz repeated at 5 Hz (mimicking the brain\'s theta rhythm). It delivers the equivalent of a standard 19-minute session in approximately 3 minutes of active stimulation. Supported by NeuroStar, MagVenture, and Magstim systems. FDA-cleared for major depressive disorder.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I choose which TMS device my clinic uses?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You generally cannot choose the device itself — your clinic purchases and maintains specific systems. However, you can search for clinics that use your preferred device. NeuroStar is the most widely available. If you specifically need deep TMS for OCD, look for clinics with BrainsWay. If MRI-guided neuronavigation is important to you, search for Nexstim-equipped clinics.',
+      },
+    },
+  ],
+});
+
+const deviceMeta: Record<string, { accent: string; accentBg: string; accentBorder: string; desc: string; coilType: string; fdaCleared: boolean; highlight: string; fdaYear: string; manufacturer: string; conditions: string[]; video: string }> = {
+  'neurostar': { accent: 'text-blue-600', accentBg: 'bg-blue-500', accentBorder: 'border-blue-200', desc: 'Most widely deployed TMS system in the US with the patented SenStar touchscreen treatment system and figure-8 coil design. Features real-time motor threshold measurement and automated dose adjustment.', coilType: 'Figure-8', fdaCleared: true, highlight: 'Most Used in US', fdaYear: '2008', manufacturer: 'Neuronetics', conditions: ['MDD', 'Anxious Depression'], video: 'PLACEHOLDER_VIDEO_ID' },
+  'brainsway': { accent: 'text-emerald-600', accentBg: 'bg-emerald-500', accentBorder: 'border-emerald-200', desc: 'Deep TMS with proprietary H-coil technology. The only system FDA-cleared for both depression and OCD (2018). Targets deeper brain regions inaccessible to figure-8 coils.', coilType: 'H-Coil (Deep)', fdaCleared: true, highlight: 'Deep TMS Pioneer', fdaYear: '2013 (MDD) / 2018 (OCD)', manufacturer: 'BrainsWay', conditions: ['MDD', 'OCD'], video: 'PLACEHOLDER_VIDEO_ID' },
+  'magventure': { accent: 'text-violet-600', accentBg: 'bg-violet-500', accentBorder: 'border-violet-200', desc: 'Versatile platform from Denmark supporting multiple coil configurations. Widely used in clinical research and academic medical centers. Compatible with neuronavigation and theta burst protocols.', coilType: 'Multiple Options', fdaCleared: true, highlight: 'Research Standard', fdaYear: '2015', manufacturer: 'MagVenture A/S', conditions: ['MDD', 'Anxiety'], video: 'PLACEHOLDER_VIDEO_ID' },
+  'magstim': { accent: 'text-rose-600', accentBg: 'bg-rose-500', accentBorder: 'border-rose-200', desc: 'UK-manufactured TMS system with over 35 years of heritage. Strong research pedigree with rapid stimulation capabilities. The Rapid2 system is one of the most cited in TMS literature.', coilType: 'Figure-8 / Double Cone', fdaCleared: true, highlight: '35+ Year Heritage', fdaYear: '2008', manufacturer: 'Magstim Ltd.', conditions: ['MDD'], video: 'PLACEHOLDER_VIDEO_ID' },
+  'cloudtms': { accent: 'text-sky-600', accentBg: 'bg-sky-500', accentBorder: 'border-sky-200', desc: 'Cloud-connected TMS platform with real-time treatment monitoring and analytics dashboard for clinicians. Designed for high-volume practice efficiency with automated session tracking.', coilType: 'Figure-8', fdaCleared: true, highlight: 'Cloud Analytics', fdaYear: '2019', manufacturer: 'CloudTMS', conditions: ['MDD'], video: 'PLACEHOLDER_VIDEO_ID' },
+  'apollo-tms': { accent: 'text-amber-600', accentBg: 'bg-amber-500', accentBorder: 'border-amber-200', desc: 'Advanced TMS system with precision targeting and ergonomic patient positioning. Features an intuitive interface designed for streamlined clinical workflows and patient comfort.', coilType: 'Figure-8', fdaCleared: true, highlight: 'Precision Targeting', fdaYear: '2020', manufacturer: 'APECS / TMS Solutions', conditions: ['MDD'], video: 'PLACEHOLDER_VIDEO_ID' },
+  'exomind': { accent: 'text-cyan-600', accentBg: 'bg-cyan-500', accentBorder: 'border-cyan-200', desc: 'Wellness-focused TMS technology with a streamlined treatment workflow designed for high-volume practices. Less clinical evidence base than established platforms.', coilType: 'Proprietary', fdaCleared: false, highlight: 'Wellness Focus', fdaYear: '—', manufacturer: 'Exomind', conditions: ['Wellness Use'], video: 'PLACEHOLDER_VIDEO_ID' },
+  'nexstim': { accent: 'text-indigo-600', accentBg: 'bg-indigo-500', accentBorder: 'border-indigo-200', desc: 'Navigated TMS with real-time MRI-guided targeting for precise cortical stimulation mapping. Used primarily in academic and research settings for individualized targeting.', coilType: 'Navigated', fdaCleared: true, highlight: 'MRI-Guided', fdaYear: '2018', manufacturer: 'Nexstim', conditions: ['MDD', 'Stroke Rehab', 'Pre-Surgical Mapping'], video: 'PLACEHOLDER_VIDEO_ID' },
 };
 
-const defaultMeta: DeviceMeta = { accent: 'text-purple-600', accentBg: 'bg-purple-500', accentBorder: 'border-purple-200', desc: 'FDA-cleared TMS system for clinical depression treatment.', coilType: 'Standard', fdaCleared: false };
-
-const techSchema = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "TMS Technology & Devices",
-    "description": description,
-    "url": "https://tmslist.com/technology/",
-    "mainEntity": {
-        "@type": "ItemList",
-        "numberOfItems": allTech.length,
-        "itemListElement": allTech.map((item, i) => ({
-            "@type": "ListItem",
-            "position": i + 1,
-            "item": { "@type": "MedicalDevice", "name": item.title, "url": `https://tmslist.com/technology/${item.slug}/` }
-        }))
-    }
-});
+const defaultMeta = { accent: 'text-purple-600', accentBg: 'bg-purple-500', accentBorder: 'border-purple-200', desc: 'FDA-cleared TMS system for clinical depression treatment.', coilType: 'Standard', fdaCleared: false, highlight: '', fdaYear: '', manufacturer: 'Unknown', conditions: ['MDD'], video: 'PLACEHOLDER_VIDEO_ID' };
 ---
 
-<Layout title={title} description={description} schema={techSchema} breadcrumbs={[
-    { name: "Home", url: "/" },
-    { name: "Technology", url: "/technology/" },
-]}>
-    <main>
-        <!-- Hero — Dark Technical -->
-        <section class="relative bg-slate-950 overflow-hidden">
-            <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
-            <div class="absolute top-[10%] right-[15%] w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[150px]"></div>
-            <div class="absolute bottom-[10%] left-[10%] w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
+<Layout title={title} description={description} schema={techSchema}>
+  <main>
+    <!-- Hero -->
+    <section class="relative bg-slate-950 overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+      <div class="absolute top-[10%] right-[15%] w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-[10%] left-[10%] w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
 
-            <div class="container mx-auto px-4 pt-12 pb-20 lg:pt-16 lg:pb-28 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
-                    <span class="text-slate-700">/</span>
-                    <span class="text-slate-300">Technology</span>
-                </nav>
+      <div class="container mx-auto px-4 pt-12 pb-20 lg:pt-16 lg:pb-28 relative z-10">
+        <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+          <span class="text-slate-700">/</span>
+          <span class="text-slate-300">Technology</span>
+        </nav>
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
+            <div class="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse"></div>
+            <span class="text-xs font-semibold text-slate-300 tracking-wider uppercase">{allTech.length} TMS Devices</span>
+          </div>
+          <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
+            TMS<br/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">Technology</span>
+          </h1>
+          <p class="text-lg text-slate-400 leading-relaxed max-w-xl">
+            The magnetic stimulation systems shaping modern psychiatry. From FDA-cleared clinical devices to cutting-edge research platforms — understand the technology behind your treatment.
+          </p>
+        </div>
 
-                <div class="max-w-3xl">
-                    <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-6">
-                        TMS<br/>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">Technology</span>
-                    </h1>
-                    <p class="text-lg text-slate-400 leading-relaxed max-w-xl">
-                        Compare the magnetic stimulation systems shaping modern psychiatry. From FDA-cleared clinical devices to cutting-edge research platforms.
-                    </p>
-                </div>
+        <!-- Stats -->
+        <div class="flex flex-wrap gap-4 mt-12">
+          <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+            <div class="text-3xl font-bold text-white">{allTech.length}+</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">TMS Devices</div>
+          </div>
+          <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+            <div class="text-3xl font-bold text-emerald-400">6</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">FDA Cleared</div>
+          </div>
+          <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+            <div class="text-3xl font-bold text-violet-400">{PROTOCOL_SLUGS.length}</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">Protocols</div>
+          </div>
+          <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+            <div class="text-3xl font-bold text-cyan-400">3–6cm</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">Stimulation Depth</div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+    </section>
 
-                <!-- Stats -->
-                <div class="flex flex-wrap gap-4 mt-12">
-                    <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
-                        <div class="text-3xl font-bold text-white">{allTech.length}+</div>
-                        <div class="text-xs text-slate-400 font-medium mt-1">TMS Devices</div>
-                    </div>
-                    <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
-                        <div class="text-3xl font-bold text-emerald-400">6</div>
-                        <div class="text-xs text-slate-400 font-medium mt-1">FDA Cleared</div>
-                    </div>
-                    <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
-                        <div class="text-3xl font-bold text-violet-400">{PROTOCOL_SLUGS.length}</div>
-                        <div class="text-xs text-slate-400 font-medium mt-1">Protocols</div>
-                    </div>
-                </div>
+    <!-- How TMS Works: Explainer Video -->
+    <section class="py-12 bg-white border-b border-slate-100">
+      <div class="container mx-auto px-4 max-w-5xl">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-2">How Does TMS Work? (Video)</h2>
+          <p class="text-slate-500">Visual explanation of transcranial magnetic stimulation — the science behind the technology.</p>
+        </div>
+        <div class="relative rounded-2xl overflow-hidden shadow-xl border border-slate-100 max-w-3xl mx-auto aspect-video">
+          <iframe
+            class="w-full h-full"
+            src="https://www.youtube.com/embed/WGqTDxMjtN0"
+            title="How TMS Works — Transcranial Magnetic Stimulation Explained"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Devices Grid -->
+    <section class="py-16 lg:py-24 bg-white">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="flex items-end justify-between mb-12">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-5 h-5 rounded bg-violet-100 text-violet-600 flex items-center justify-center text-[10px] font-bold">1</div>
+              <span class="text-xs font-semibold text-violet-600 uppercase tracking-wider">FDA-Cleared Devices</span>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
-        </section>
+            <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">TMS Devices</h2>
+            <p class="text-slate-500">FDA clearance, coil types, clinical evidence, and approved conditions for each platform.</p>
+          </div>
+        </div>
 
-        <!-- Devices Grid -->
-        <section class="py-16 lg:py-24 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="flex items-end justify-between mb-12">
-                    <div>
-                        <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">TMS Devices</h2>
-                        <p class="text-slate-500">Compare coil types, clearances, and clinical capabilities.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {allTech.map(item => {
+            const meta = deviceMeta[item.slug] || defaultMeta;
+            return (
+              <a href={`/technology/${item.slug}/`}
+                 class={`group bg-white rounded-2xl border ${meta.accentBorder} hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden`}>
+                <!-- Header strip with device color -->
+                <div class={`h-1.5 bg-gradient-to-r from-current to-current opacity-80`} style={`background: linear-gradient(to right, ${meta.accent.includes('blue') ? '#2563eb' : meta.accent.includes('emerald') ? '#059669' : meta.accent.includes('violet') ? '#7c3aed' : meta.accent.includes('rose') ? '#e11d48' : meta.accent.includes('sky') ? '#0284c7' : meta.accent.includes('amber') ? '#d97706' : meta.accent.includes('cyan') ? '#0891b2' : meta.accent.includes('indigo') ? '#4f46e5' : '#9333ea'}, transparent);`}></div>
+                <div class="p-7">
+                  <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                      <div class={`w-3 h-3 rounded-full ${meta.accentBg}`}></div>
+                      <h3 class="text-xl font-bold text-slate-900 group-hover:text-violet-600 transition-colors tracking-tight">{item.title}</h3>
                     </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                      {meta.fdaCleared && (
+                        <span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 text-[10px] font-bold uppercase tracking-wider rounded-md border border-emerald-100">FDA {meta.fdaYear}</span>
+                      )}
+                      {!meta.fdaCleared && (
+                        <span class="px-2.5 py-1 bg-amber-50 text-amber-700 text-[10px] font-bold uppercase tracking-wider rounded-md border border-amber-100">Research Only</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <p class="text-sm text-slate-500 leading-relaxed mb-5">{meta.desc}</p>
+
+                  <!-- Key specs grid -->
+                  <div class="grid grid-cols-2 gap-3 mb-5">
+                    <div class="bg-slate-50 rounded-xl p-3">
+                      <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Coil Type</div>
+                      <div class="text-sm font-semibold text-slate-700">{meta.coilType}</div>
+                    </div>
+                    <div class="bg-slate-50 rounded-xl p-3">
+                      <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Manufacturer</div>
+                      <div class="text-sm font-semibold text-slate-700">{meta.manufacturer}</div>
+                    </div>
+                    <div class="bg-slate-50 rounded-xl p-3 col-span-2">
+                      <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">FDA-Cleared For</div>
+                      <div class="flex flex-wrap gap-1.5 mt-1">
+                        {meta.conditions.map(cond => (
+                          <span class="text-xs px-2 py-0.5 bg-violet-50 text-violet-700 rounded-full">{cond}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                    <span class="text-xs text-slate-400 font-medium">{meta.highlight}</span>
+                    <span class="text-violet-600 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                      View Device
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </span>
+                  </div>
                 </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {allTech.map(item => {
-                        const meta = deviceMeta[item.slug] || defaultMeta;
-                        return (
-                        <a href={`/technology/${item.slug}/`}
-                           class={`group relative bg-white rounded-2xl border border-slate-100 hover:${meta.accentBorder} hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden`}>
-                            <div class="p-7">
-                                <div class="flex items-start justify-between mb-5">
-                                    <div class="flex items-center gap-3">
-                                        <div class={`w-3 h-3 rounded-full ${meta.accentBg}`}></div>
-                                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-violet-600 transition-colors tracking-tight">{item.title}</h3>
-                                    </div>
-                                    {meta.fdaCleared && (
-                                        <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider rounded-md shrink-0">FDA</span>
-                                    )}
-                                </div>
+    <!-- Coil Types Explained -->
+    <section class="py-16 lg:py-20 bg-slate-50 border-t border-slate-100">
+      <div class="container mx-auto px-4 max-w-5xl">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight mb-3">Understanding TMS Coil Types</h2>
+          <p class="text-slate-500 max-w-xl mx-auto">The coil design determines stimulation depth, focality, and which brain regions can be targeted. Each has distinct clinical applications.</p>
+        </div>
 
-                                <p class="text-sm text-slate-500 leading-relaxed mb-6">{meta.desc}</p>
-
-                                <div class="flex items-center gap-6 pt-5 border-t border-slate-50">
-                                    <div class="flex items-center gap-2">
-                                        <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
-                                        <span class="text-xs font-medium text-slate-500">{meta.coilType} Coil</span>
-                                    </div>
-                                    {meta.highlight && (
-                                        <span class={`text-xs font-semibold ${meta.accent}`}>{meta.highlight}</span>
-                                    )}
-                                    <svg class="w-4 h-4 text-slate-300 group-hover:text-violet-500 group-hover:translate-x-1 transition-all ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                                </div>
-                            </div>
-                        </a>
-                    )})}
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+          <div class="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
             </div>
-        </section>
-
-        <!-- Treatment Protocols -->
-        <section class="py-16 lg:py-24 bg-slate-50">
-            <div class="container mx-auto px-4">
-                <div class="mb-12">
-                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">Treatment Protocols</h2>
-                    <p class="text-slate-500">Different stimulation patterns and targeting methods for specific conditions.</p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {PROTOCOL_SLUGS.map((item, i) => (
-                        <a href={`/technology/${item.slug}/`}
-                           class="group bg-white rounded-2xl border border-slate-100 p-6 hover:border-violet-200 hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.06)] transition-all duration-300">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center text-violet-600 text-sm font-bold">{String(i + 1).padStart(2, '0')}</div>
-                                <h3 class="text-base font-bold text-slate-900 group-hover:text-violet-600 transition-colors">{item.title}</h3>
-                            </div>
-                            <p class="text-sm text-slate-500 leading-relaxed mb-4">Learn about session structure, targeting method, and clinical outcomes for this protocol.</p>
-                            <div class="flex items-center justify-between pt-3 border-t border-slate-50">
-                                <span class="text-violet-600 font-semibold text-sm">Read Guide</span>
-                                <svg class="w-4 h-4 text-slate-300 group-hover:text-violet-500 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                            </div>
-                        </a>
-                    ))}
-                </div>
+            <h3 class="font-bold text-slate-900 mb-2">Figure-8 Coil</h3>
+            <p class="text-sm text-slate-500 leading-relaxed mb-3">Delivers focused, superficial stimulation. Used by NeuroStar, MagVenture, Magstim, and CloudTMS. Targets approximately 2–3 cm into the cortex.</p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[10px] px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full">NeuroStar</span>
+              <span class="text-[10px] px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full">MagVenture</span>
+              <span class="text-[10px] px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full">Magstim</span>
             </div>
-        </section>
-    </main>
+          </div>
+          <div class="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.871 4A17.926 17.926 0 003 12.498c0 2.61.943 5.19 2.594 7.308m7.211-5.19A17.926 17.926 0 0121 12.498c0-2.61-.943-5.19-2.594-7.308M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+            <h3 class="font-bold text-slate-900 mb-2">H-Coil (Deep TMS)</h3>
+            <p class="text-sm text-slate-500 leading-relaxed mb-3">Proprietary BrainsWay design that creates a broader electric field reaching 3–6 cm deep. Can target deeper brain structures including the ACC, insula, and medial temporal regions.</p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[10px] px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full">BrainsWay</span>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm">
+            <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+            </div>
+            <h3 class="font-bold text-slate-900 mb-2">Double Cone Coil</h3>
+            <p class="text-sm text-slate-500 leading-relaxed mb-3">Used primarily in research and for specific motor cortex applications. Creates a more diffuse field that can reach deeper into sulcal cortex. Common in Magstim systems.</p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[10px] px-2 py-0.5 bg-violet-100 text-violet-700 rounded-full">Magstim</span>
+              <span class="text-[10px] px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full">Research</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Target Brain Regions Diagram (described) -->
+        <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
+          <div class="p-6 border-b border-slate-100 bg-slate-50">
+            <h3 class="font-bold text-slate-900">Brain Regions Targeted by TMS</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50">
+                <tr>
+                  <th class="text-left px-6 py-3 font-semibold text-slate-700">Brain Region</th>
+                  <th class="text-left px-6 py-3 font-semibold text-slate-700">Function</th>
+                  <th class="text-left px-6 py-3 font-semibold text-slate-700">Coil Type</th>
+                  <th class="text-left px-6 py-3 font-semibold text-slate-700">Clinical Application</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-50">
+                <tr>
+                  <td class="px-6 py-3 font-medium text-slate-700">Left DLPFC (BA46)</td>
+                  <td class="px-6 py-3 text-slate-600">Mood regulation, emotional processing</td>
+                  <td class="px-6 py-3 text-slate-600">Figure-8 / H-coil</td>
+                  <td class="px-6 py-3 text-slate-600">Depression (most common target)</td>
+                </tr>
+                <tr class="bg-slate-30/40">
+                  <td class="px-6 py-3 font-medium text-slate-700">Right DLPFC (BA46)</td>
+                  <td class="px-6 py-3 text-slate-600">Anxiety, emotional inhibition</td>
+                  <td class="px-6 py-3 text-slate-600">Figure-8 / H-coil</td>
+                  <td class="px-6 py-3 text-slate-600">Anxiety, PTSD, OCD</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-3 font-medium text-slate-700">ACC (BA24/BA32)</td>
+                  <td class="px-6 py-3 text-slate-600">Error monitoring, emotional regulation</td>
+                  <td class="px-6 py-3 text-slate-600">H-coil (deep)</td>
+                  <td class="px-6 py-3 text-slate-600">OCD (BrainsWay protocol)</td>
+                </tr>
+                <tr class="bg-slate-30/40">
+                  <td class="px-6 py-3 font-medium text-slate-700">Motor Cortex (M1)</td>
+                  <td class="px-6 py-3 text-slate-600">Motor control, pain perception</td>
+                  <td class="px-6 py-3 text-slate-600">Figure-8 / Double Cone</td>
+                  <td class="px-6 py-3 text-slate-600">Stroke rehab, pain disorders</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-3 font-medium text-slate-700">DMPFC / Pre-SMA</td>
+                  <td class="px-6 py-3 text-slate-600">Cognitive control, decision making</td>
+                  <td class="px-6 py-3 text-slate-600">H-coil / Navigated</td>
+                  <td class="px-6 py-3 text-slate-600">SAINT protocol, addiction</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Treatment Protocols -->
+    <section class="py-16 lg:py-24 bg-white border-t border-slate-100">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="flex items-end justify-between mb-10">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-5 h-5 rounded bg-cyan-100 text-cyan-600 flex items-center justify-center text-[10px] font-bold">2</div>
+              <span class="text-xs font-semibold text-cyan-600 uppercase tracking-wider">Treatment Protocols</span>
+            </div>
+            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight">Stimulation Protocols</h2>
+            <p class="text-slate-500 mt-1">Different stimulation patterns and targeting methods — standard rTMS, theta burst, accelerated protocols, and neuronavigation.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {PROTOCOL_SLUGS.map((item, i) => (
+            <a href={`/protocols/${item.slug}/`}
+               class="group bg-white rounded-2xl border border-slate-100 p-6 hover:border-violet-200 hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.06)] transition-all duration-300">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center text-violet-600 text-sm font-bold">{String(i + 1).padStart(2, '0')}</div>
+                <h3 class="text-base font-bold text-slate-900 group-hover:text-violet-600 transition-colors leading-snug">{item.title}</h3>
+              </div>
+              <p class="text-sm text-slate-500 leading-relaxed mb-4">Learn about session structure, targeting method, and clinical outcomes for this protocol.</p>
+              <div class="flex items-center justify-between pt-3 border-t border-slate-50">
+                <span class="text-violet-600 font-semibold text-sm">Read Protocol Guide</span>
+                <svg class="w-4 h-4 text-slate-300 group-hover:text-violet-500 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Find Clinic by Device -->
+    <section class="py-16 bg-slate-50 border-t border-slate-100">
+      <div class="container mx-auto px-4 max-w-5xl">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-3">Find a Clinic by Device</h2>
+          <p class="text-slate-500 max-w-xl mx-auto">Filter verified clinics by the TMS device they use. Find a provider with your preferred technology.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          {Object.entries(deviceMeta).filter(([slug]) => slug !== 'exomind').map(([slug, meta]) => (
+            <a href={`/technology/${slug}/`}
+               class="group bg-white rounded-xl p-4 border border-slate-100 hover:border-violet-200 hover:shadow-sm transition-all text-center">
+              <div class={`w-8 h-8 rounded-lg mx-auto mb-2 flex items-center justify-center text-xs font-bold ${meta.accentBg} text-white`}>{meta.accentBg.split('-')[1]?.charAt(0)}</div>
+              <h3 class="text-sm font-semibold text-slate-700 group-hover:text-violet-600 transition-colors">{item => item.title}</h3>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Find a Clinic CTA -->
+    <section class="py-16 bg-slate-950 border-t border-slate-800">
+      <div class="container mx-auto px-4 max-w-3xl text-center">
+        <div class="w-14 h-14 rounded-2xl bg-violet-600/30 text-violet-400 flex items-center justify-center mx-auto mb-6">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">Find a TMS Clinic Near You</h2>
+        <p class="text-slate-400 mb-8 max-w-lg mx-auto">Search verified TMS providers with real clinic photos, ratings, machine information, and accepted insurance plans.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/us/" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">
+            Find a Clinic
+          </a>
+          <a href="/compare/" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl transition-colors border border-white/10">
+            Compare Treatment Options
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json" set:html={faqSchema}></script>
+  </main>
 </Layout>

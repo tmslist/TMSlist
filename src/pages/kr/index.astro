@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { COUNTRY_META } from '../../utils/countryData';
 import { t } from '../../utils/i18n';
@@ -118,22 +119,7 @@ const schema = JSON.stringify({
         </div>
 
         <!-- SEO Content -->
-        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-            <h2>한국의 TMS 치료</h2>
-            <p>한국은 서울대학교병원, 삼성서울병원, 아산병원을 중심으로 TMS 치료 분야가 성장하고 있습니다. 한국 정신과 의사들은 우울증과 인지 향상을 위한 TMS에 관한 연구를 활발히 발표하고 있습니다. 강남과 기타 지역의 개인 신경정신과 클리닉에서도 TMS를 제공합니다.</p>
-            <p>TMS 치료는 한국의 주요 대학병원과 개인 정신과 클리닉에서 이용할 수 있습니다. 서울, 부산, 대구에서 우울증 및 기타 질환을 위한 고급 rTMS 프로토콜을 제공합니다.</p>
-            <h3>보험 및 비용</h3>
-            <p>국민건강보험(NHIS)의 TMS 보험 적용은 제한적이며 병원 및 적응증에 따라 다릅니다. 대부분의 개인 클리닉 환자는 본인 부담으로 지불합니다. 세션당 비용은 약 {meta.sessionCostRange}입니다.</p>
-            <p>한국에서의 TMS 세션 일반 비용은 {meta.sessionCostRange}입니다. 치료 과정은 보통 4-6주에 걸쳐 20-30회 세션으로 구성됩니다.</p>
-            <h3>한국에서 TMS 클리닉 선택 방법</h3>
-            <p>한국에서 TMS 제공자를 선택할 때 클리닉의 인증, 치료 정신과 의사의 경험, 사용되는 TMS 기술, 보험 적용 여부를 고려하세요. 저희 디렉토리에서 지역별로 클리닉을 비교하고 적합한 제공자를 찾을 수 있습니다.</p>
-            <h3>관련 자료</h3>
-            <ul>
-                <li><a href="/treatments/">TMS로 치료 가능한 질환</a> — 우울증, 불안장애, 강박장애, PTSD 등</li>
-                <li><a href="/technology/">TMS 기술 가이드</a> — NeuroStar, BrainsWay, MagVenture 비교</li>
-                <li><a href="/research/">TMS 연구</a> — 최신 임상 연구 및 결과</li>
-            </ul>
-        </section>
+        <LocationSEOContent type="country" locationName="South Korea" clinicCount={totalClinics} countryCode="KR" />
         </div>
     </main>
 </Layout>

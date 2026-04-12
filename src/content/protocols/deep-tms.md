@@ -1,6 +1,10 @@
 ---
 title: "Deep TMS (H-Coil) Protocol"
 description: "Deep TMS uses BrainsWay's H-coil to stimulate broader, deeper brain regions. FDA clearances for depression, OCD, and smoking cessation."
+author: "TMS List Editorial Team"
+publishDate: 2026-01-05
+category: protocols
+tags: ["deep TMS", "BrainsWay", "H-coil", "deep brain stimulation", "TMS device", "OCD TMS"]
 ---
 
 ## What is deep TMS?

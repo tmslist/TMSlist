@@ -1,6 +1,10 @@
 ---
 title: "Theta Burst Stimulation (iTBS)"
 description: "Theta burst stimulation delivers TMS treatment in 3 minutes instead of 37. How iTBS works, the THREE-D trial, and why shorter doesn't mean less effective."
+author: "TMS List Editorial Team"
+publishDate: 2026-01-15
+category: protocols
+tags: ["theta burst", "iTBS", "accelerated TMS", "TMS protocol", "THREE-D trial", "3-minute TMS"]
 ---
 
 ## What is theta burst stimulation?
@@ -107,32 +111,19 @@ Ask your TMS clinic if they offer theta burst. Many have already transitioned fr
 </table>
 </div>
 
-## Finding a Provider
+## Frequently Asked Questions
 
-Not every TMS clinic offers every protocol. When searching, ask specifically which protocols they support and which devices they use. Our [clinic directory](/us/) helps you find experienced providers in your area. For protocol-specific questions, the treating psychiatrist should be able to explain why they recommend one approach over another for your situation.
+### Is theta burst stimulation as effective as standard TMS?
+Yes — per the 2018 THREE-D trial in The Lancet, iTBS was statistically non-inferior to standard 10Hz rTMS. Response rates were 49% (iTBS) vs 47% (standard), with remission rates of 32% vs 28%. The key advantage is time: iTBS takes 3 minutes per session instead of 37.
 
+### What TMS devices offer theta burst?
+NeuroStar Express TMS, MagVenture MagOption, and several other platforms offer FDA-cleared iTBS protocols. Not every clinic uses these newer systems — ask specifically whether the clinic's device supports theta burst when booking.
 
-## How This Protocol Compares
+### Is theta burst covered by insurance?
+In most cases, yes — since iTBS is FDA-cleared and the three CPT codes (90867, 90868, 90869) apply regardless of frequency, insurers typically reimburse iTBS sessions the same as standard rTMS. Coverage still requires meeting the same medical necessity criteria (treatment-resistant depression, PHQ-9 score, prior medication trials).
 
-<div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
-  <thead>
-    <tr class="bg-slate-800 text-white">
-      <th class="px-4 py-3 text-left font-semibold">Protocol</th>
-      <th class="px-4 py-3 text-center font-semibold">Session Time</th>
-      <th class="px-4 py-3 text-center font-semibold">Total Course</th>
-      <th class="px-4 py-3 text-center font-semibold">Best For</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
-  </tbody>
-</table>
-</div>
+### Can theta burst be combined with accelerated protocols?
+Yes. Theta burst's short duration makes it ideal for accelerated TMS protocols like SAINT, where multiple sessions are delivered daily. iTBS at 3 minutes per session makes twice-daily treatment practical, which is central to Stanford's SAINT protocol.
 
-## Finding a Provider
-
-Not every TMS clinic offers every protocol. When searching, ask specifically which protocols they support and which devices they use. Our [clinic directory](/us/) helps you find experienced providers in your area. For protocol-specific questions, the treating psychiatrist should be able to explain why they recommend one approach over another for your situation.
+### Does theta burst work for conditions other than depression?
+Research is active. Current trials are studying theta burst for anxiety, OCD, PTSD, and smoking cessation. The science suggests the same DLPFC targeting that works for depression may transfer, but FDA clearance beyond MDD remains limited for iTBS specifically.

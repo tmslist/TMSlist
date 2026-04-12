@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getClinicsByCountry, getRegionsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { COUNTRY_META } from '../../utils/countryData';
 import { t } from '../../utils/i18n';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 const locale = 'de' as const;
 
 const countryCode = 'DE';
@@ -84,22 +85,7 @@ const schema = JSON.stringify({
 
     </div></section>
 
-    <!-- SEO Content -->
-    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600 container mx-auto px-4">
-      <h2>TMS-Therapie in Deutschland</h2>
-      <p>Deutschland verfügt über ein wachsendes Netzwerk von TMS-Anbietern, angeführt von Universitätskliniken wie der Charité Berlin und spezialisierten Privatpraxen. Die neurocare group mit Hauptsitz in München ist ein führender TMS-Gerätehersteller und klinischer Anbieter. Die Kostenübernahme durch die gesetzliche Krankenversicherung variiert je nach Anbieter und klinischem Setting.</p>
-      <h3>Versicherung und Kosten</h3>
-      <p>Die gesetzliche Krankenversicherung (GKV) kann rTMS bei Depressionen in universitären Krankenhauseinrichtungen übernehmen. Die private Krankenversicherung (PKV) variiert je nach Tarif. Viele Privatpraxen erfordern Selbstzahlung.</p>
-      <p>Die typischen Kosten einer TMS-Sitzung in Deutschland liegen zwischen {meta.sessionCostRange}. Behandlungskurse umfassen in der Regel 20-30 Sitzungen über 4-6 Wochen.</p>
-      <h3>So wählen Sie eine TMS-Klinik in Deutschland</h3>
-      <p>Bei der Auswahl eines TMS-Anbieters in Deutschland sollten Sie berücksichtigen, ob die Klinik einem Universitätsklinikum angeschlossen ist, die Erfahrung des behandelnden Psychiaters, die verwendete TMS-Technologie und ob Ihre Versicherung die Behandlung übernimmt. Unser Verzeichnis hilft Ihnen, Kliniken nach Region zu vergleichen und den richtigen Anbieter zu finden.</p>
-      <h3>{t('related_resources', locale)}</h3>
-      <ul>
-        <li><a href="/treatments/">{t('conditions_treated', locale)}</a> — Depression, Angst, Zwangsstörungen, PTBS und mehr</li>
-        <li><a href="/technology/">TMS-Technologie-Leitfaden</a> — NeuroStar, BrainsWay, MagVenture vergleichen</li>
-        <li><a href="/research/">TMS-Forschung</a> — Aktuelle klinische Studien und Ergebnisse</li>
-      </ul>
-    </section>
+<LocationSEOContent type="country" locationName="Germany" clinicCount={totalClinics} countryCode="DE" />
   </main>
 </Layout>
 

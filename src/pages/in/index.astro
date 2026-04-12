@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 import { getClinicsByCountry, getRegionsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { t } from '../../utils/i18n';
 import { COUNTRY_META } from '../../utils/countryData';
@@ -84,20 +85,7 @@ const schema = JSON.stringify({
     </div></section>
 
     <!-- SEO Content -->
-    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600 container mx-auto px-4">
-      <h2>About TMS Therapy in India</h2>
-      <p>{meta.aboutContent}</p>
-      <h3>Affordable TMS Treatment in India</h3>
-      <p>India is one of the most affordable destinations for TMS therapy worldwide. {meta.insuranceNote} At {meta.sessionCostRange} per session, a full course of 20-30 treatments is accessible to a much wider population compared to Western countries where sessions can cost US$300-$500 or more.</p>
-      <h3>Leading TMS Institutions in India</h3>
-      <p>NIMHANS (National Institute of Mental Health and Neuro Sciences) in Bangalore is one of Asia's foremost mental health research institutions and a pioneer in TMS therapy in India. Other leading centres include AIIMS Delhi, private clinics such as Mindful TMS Neurocare, and growing networks in Mumbai, Chennai, and Hyderabad.</p>
-      <h3>Related Resources</h3>
-      <ul>
-        <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
-        <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
-        <li><a href="/research/">TMS Research</a> -- latest clinical studies and outcomes</li>
-      </ul>
-    </section>
+    <LocationSEOContent type="country" locationName="India" clinicCount={totalClinics} countryCode="IN" />
   </main>
 </Layout>
 

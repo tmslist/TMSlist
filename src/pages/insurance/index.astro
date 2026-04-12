@@ -2,213 +2,411 @@
 import Layout from '../../layouts/Layout.astro';
 import { INSURANCE_SLUGS } from '../../utils/seo_slugs';
 
-const title = "TMS Insurance Coverage | Medicare, BlueCross, Aetna & More";
-const description = "Find out if your insurance covers TMS therapy. Comprehensive guides for Medicare, BlueCross BlueShield, Aetna, Cigna, UnitedHealthcare, and more.";
+const title = "TMS Insurance Coverage Guide | Medicare, BCBS, Aetna, Cigna & More";
+const description = "Find out if your insurance covers TMS therapy. Detailed guides for Medicare, BlueCross BlueShield, Aetna, Cigna, UnitedHealthcare, Humana, Optum, VA, Tricare and 20+ more providers.";
+
+const siteUrl = import.meta.env.SITE_URL || 'https://tmslist.com';
+
 const insuranceSchema = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "TMS Therapy Insurance Coverage",
-    "description": description,
-    "url": "https://tmslist.com/insurance/",
-    "mainEntity": {
-        "@type": "ItemList",
-        "numberOfItems": INSURANCE_SLUGS.length,
-        "itemListElement": INSURANCE_SLUGS.map((item: any, i: number) => ({
-            "@type": "ListItem",
-            "position": i + 1,
-            "name": item.title,
-            "url": `https://tmslist.com/insurance/${item.slug}/`
-        }))
-    }
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'TMS Therapy Insurance Coverage',
+  description,
+  url: `${siteUrl}/insurance/`,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: INSURANCE_SLUGS.length,
+    itemListElement: INSURANCE_SLUGS.map((item: any, i: number) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.title,
+      url: `${siteUrl}/insurance/${item.slug}/`,
+    })),
+  },
 });
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does Medicare cover TMS therapy?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Medicare Part B covers TMS for treatment-resistant major depressive disorder. Coverage requires a diagnosis of MDD and documentation of at least 4 antidepressant trials (or 2 per 2024 expanded criteria). No referral is needed for Part B beneficiaries.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What does "treatment-resistant depression" mean for insurance?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most insurers define treatment-resistant depression as failure to respond to at least 2 antidepressant medications at adequate dose and duration during the current episode. Some insurers require 4 trials, especially for initial coverage. Documentation of each trial including medication name, dose, and duration is required.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I get prior authorization for TMS?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Your TMS clinic typically handles the prior authorization process. They submit clinical documentation including your diagnosis, medication history, and treatment plan. The insurer reviews and approves or denies within 5-15 business days. Most clinics have dedicated insurance coordinators.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What if my insurance denies TMS coverage?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You have the right to appeal. Common reasons for denial include incomplete medication documentation or failure to meet trial requirements. A first-level appeal with additional medical records is often successful. If denied again, request an external review by an independent medical reviewer. Many clinics offer free appeals assistance.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does Medicaid cover TMS?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Medicaid coverage for TMS varies significantly by state. Some state Medicaid programs cover TMS for treatment-resistant depression, while others do not yet include it in covered benefits. Check your state-specific Medicaid policy or contact your managed care organization.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How many TMS sessions does insurance typically approve?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most insurers approve 30-36 TMS sessions for an initial treatment course. Sessions are typically delivered 5 days per week over 6-7 weeks. Maintenance TMS (typically 6 booster sessions) may also be covered if symptoms recur after initial treatment.',
+      },
+    },
+  ],
+});
+
+const majorProviders = [
+  { slug: 'medicare', title: 'Medicare', icon: 'M', color: 'emerald', desc: 'Federal program covering Part B beneficiaries. No referral needed. Typically approves 36 sessions.', badge: 'Most Common' },
+  { slug: 'bluecross-blueshield', title: 'Blue Cross Blue Shield', icon: 'BCBS', color: 'blue', desc: 'State affiliates vary. Most cover TMS with prior auth. 30-36 sessions standard.', badge: 'Largest Network' },
+  { slug: 'aetna', title: 'Aetna', icon: 'A', color: 'violet', desc: 'Covers rTMS for MDD after 2+ failed medication trials. Prior authorization required.', badge: '' },
+  { slug: 'cigna', title: 'Cigna', icon: 'C', color: 'amber', desc: 'Covers rTMS for major depression with documented medication failures in current episode.', badge: '' },
+  { slug: 'united-healthcare', title: 'UnitedHealthcare', icon: 'U', color: 'sky', desc: 'UHC covers TMS for treatment-resistant MDD. Clinical documentation and prior auth required.', badge: '' },
+  { slug: 'humana', title: 'Humana', icon: 'H', color: 'orange', desc: 'Medicare Advantage plans often cover TMS. Prior authorization and medication history needed.', badge: '' },
+  { slug: 'optum-uhc', title: 'Optum / UHC Medicaid', icon: 'O', color: 'teal', desc: 'Managed Medicaid plans vary by state. Many now include TMS coverage.', badge: '' },
+  { slug: 'tricare', title: 'Tricare', icon: 'T', color: 'rose', desc: 'Covers active duty, retirees, and dependents. PCM referral required. Both rTMS and deep TMS covered.', badge: '' },
+];
+
+const colorMap: Record<string, { bg: string; border: string; text: string; icon: string; badge: string }> = {
+  emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200 hover:border-emerald-400', text: 'text-emerald-600', icon: 'bg-emerald-100 text-emerald-600', badge: 'bg-emerald-100 text-emerald-700' },
+  blue: { bg: 'bg-blue-50', border: 'border-blue-200 hover:border-blue-400', text: 'text-blue-600', icon: 'bg-blue-100 text-blue-600', badge: 'bg-blue-100 text-blue-700' },
+  violet: { bg: 'bg-violet-50', border: 'border-violet-200 hover:border-violet-400', text: 'text-violet-600', icon: 'bg-violet-100 text-violet-600', badge: 'bg-violet-100 text-violet-700' },
+  amber: { bg: 'bg-amber-50', border: 'border-amber-200 hover:border-amber-400', text: 'text-amber-600', icon: 'bg-amber-100 text-amber-600', badge: 'bg-amber-100 text-amber-700' },
+  sky: { bg: 'bg-sky-50', border: 'border-sky-200 hover:border-sky-400', text: 'text-sky-600', icon: 'bg-sky-100 text-sky-600', badge: 'bg-sky-100 text-sky-700' },
+  orange: { bg: 'bg-orange-50', border: 'border-orange-200 hover:border-orange-400', text: 'text-orange-600', icon: 'bg-orange-100 text-orange-600', badge: 'bg-orange-100 text-orange-700' },
+  teal: { bg: 'bg-teal-50', border: 'border-teal-200 hover:border-teal-400', text: 'text-teal-600', icon: 'bg-teal-100 text-teal-600', badge: 'bg-teal-100 text-teal-700' },
+  rose: { bg: 'bg-rose-50', border: 'border-rose-200 hover:border-rose-400', text: 'text-rose-600', icon: 'bg-rose-100 text-rose-600', badge: 'bg-rose-100 text-rose-700' },
+};
 ---
 
-<Layout title={title} description={description} schema={insuranceSchema} breadcrumbs={[
-    { name: "Home", url: "/" },
-    { name: "Insurance", url: "/insurance/" },
-]}>
-    <main class="min-h-screen">
-        <!-- Hero -->
-        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                    <span class="text-slate-300">/</span>
-                    <span class="text-slate-700 font-medium">Insurance</span>
-                </nav>
+<Layout title={title} description={description} schema={insuranceSchema}>
+  <main>
+    <!-- Hero -->
+    <section class="relative bg-slate-950 overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0); background-size: 28px 28px;"></div>
+      <div class="absolute top-[-20%] right-[10%] w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[180px]"></div>
+      <div class="absolute bottom-[-10%] left-[15%] w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[140px]"></div>
 
-                <h1 class="text-4xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-6">
-                    TMS <span class="text-violet-600">Insurance</span> Coverage
-                </h1>
-                <p class="text-xl text-slate-500 max-w-3xl">
-                    Most major insurance providers now cover TMS therapy. Find your provider below to learn about coverage requirements and authorization.
-                </p>
+      <div class="container mx-auto px-4 pt-12 pb-20 lg:pt-16 lg:pb-28 relative z-10">
+        <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+          <span class="text-slate-700">/</span>
+          <span class="text-slate-300">Insurance</span>
+        </nav>
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
+            <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+            <span class="text-xs font-semibold text-slate-300 tracking-wider uppercase">{INSURANCE_SLUGS.length} Coverage Guides</span>
+          </div>
+          <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
+            TMS <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-violet-400">Insurance</span><br/>Coverage
+          </h1>
+          <p class="text-lg text-slate-400 leading-relaxed mb-8 max-w-xl">
+            Most major insurance providers cover TMS therapy for treatment-resistant depression. Find your plan and learn what's required for approval.
+          </p>
+          <!-- Stats -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl">
+            <div class="text-center sm:text-left">
+              <div class="text-2xl font-bold text-white">80%</div>
+              <div class="text-xs text-slate-500 mt-1">of plans cover TMS</div>
             </div>
-        </section>
-
-        <!-- Quick Info Cards -->
-        <section class="py-14 border-b border-slate-100 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm flex gap-5 items-start">
-                        <div class="shrink-0 w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-slate-900 mb-1">Most Plans Cover TMS</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Medicare, BCBS, Aetna, Cigna, and UnitedHealthcare all cover TMS when criteria are met.</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm flex gap-5 items-start">
-                        <div class="shrink-0 w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-slate-900 mb-1">Pre-Authorization Required</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Most insurers require prior authorization. Your clinic can typically handle this process for you.</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm flex gap-5 items-start">
-                        <div class="shrink-0 w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-slate-900 mb-1">2+ Failed Medications</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Coverage usually requires documentation of at least 2 failed antidepressant trials.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="text-center sm:text-left">
+              <div class="text-2xl font-bold text-white">30–36</div>
+              <div class="text-xs text-slate-500 mt-1">Sessions Covered</div>
             </div>
-        </section>
-
-        <!-- Major Providers -->
-        <section class="py-16">
-            <div class="container mx-auto px-4">
-                <div class="mb-10">
-                    <h2 class="text-2xl md:text-3xl font-semibold text-slate-900 mb-2">Major Providers</h2>
-                    <p class="text-slate-500">Detailed coverage guides for the largest insurance carriers.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <a href="/insurance/medicare/" class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500 rounded-l-2xl"></div>
-                        <div class="pl-4">
-                            <h3 class="text-xl font-semibold text-slate-900 group-hover:text-emerald-600 transition-colors mb-2">Medicare</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed mb-4">Covers TMS for treatment-resistant depression nationwide. No referral needed for Part B beneficiaries. Typically 36 sessions approved.</p>
-                            <span class="text-emerald-600 font-medium text-sm inline-flex items-center gap-1">View Coverage Guide <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-                        </div>
-                    </a>
-                    <a href="/insurance/bluecross-blueshield/" class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-200 transition-all relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-1.5 h-full bg-blue-500 rounded-l-2xl"></div>
-                        <div class="pl-4">
-                            <h3 class="text-xl font-semibold text-slate-900 group-hover:text-blue-600 transition-colors mb-2">Blue Cross Blue Shield</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed mb-4">Most BCBS plans cover TMS for MDD with prior authorization. Policies vary by state affiliate. 30-36 sessions typically approved.</p>
-                            <span class="text-blue-600 font-medium text-sm inline-flex items-center gap-1">View Coverage Guide <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-                        </div>
-                    </a>
-                    <a href="/insurance/aetna/" class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-sm hover:shadow-md hover:border-violet-200 transition-all relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-1.5 h-full bg-violet-500 rounded-l-2xl"></div>
-                        <div class="pl-4">
-                            <h3 class="text-xl font-semibold text-slate-900 group-hover:text-violet-600 transition-colors mb-2">Aetna</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed mb-4">Covers TMS as medically necessary for MDD after 2+ failed medication trials. Prior authorization required. Up to 36 sessions.</p>
-                            <span class="text-violet-600 font-medium text-sm inline-flex items-center gap-1">View Coverage Guide <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-                        </div>
-                    </a>
-                    <a href="/insurance/cigna/" class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-sm hover:shadow-md hover:border-amber-200 transition-all relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-1.5 h-full bg-amber-500 rounded-l-2xl"></div>
-                        <div class="pl-4">
-                            <h3 class="text-xl font-semibold text-slate-900 group-hover:text-amber-600 transition-colors mb-2">Cigna</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed mb-4">Covers rTMS for major depression with prior auth. Requires documented failure of 2+ antidepressants in the current episode.</p>
-                            <span class="text-amber-600 font-medium text-sm inline-flex items-center gap-1">View Coverage Guide <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-                        </div>
-                    </a>
-                    <a href="/insurance/united-healthcare/" class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-sm hover:shadow-md hover:border-sky-200 transition-all relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-1.5 h-full bg-sky-500 rounded-l-2xl"></div>
-                        <div class="pl-4">
-                            <h3 class="text-xl font-semibold text-slate-900 group-hover:text-sky-600 transition-colors mb-2">UnitedHealthcare</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed mb-4">UHC covers TMS for treatment-resistant MDD. Prior authorization and clinical documentation required. 30-36 sessions standard.</p>
-                            <span class="text-sky-600 font-medium text-sm inline-flex items-center gap-1">View Coverage Guide <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-                        </div>
-                    </a>
-                    <a href="/insurance/tricare/" class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-sm hover:shadow-md hover:border-rose-200 transition-all relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-1.5 h-full bg-rose-500 rounded-l-2xl"></div>
-                        <div class="pl-4">
-                            <h3 class="text-xl font-semibold text-slate-900 group-hover:text-rose-600 transition-colors mb-2">Tricare</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed mb-4">Covers TMS for active duty, retirees, and dependents. Referral from PCM required. Both standard and deep TMS protocols covered.</p>
-                            <span class="text-rose-600 font-medium text-sm inline-flex items-center gap-1">View Coverage Guide <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-                        </div>
-                    </a>
-                </div>
+            <div class="text-center sm:text-left">
+              <div class="text-2xl font-bold text-white">$3–5K</div>
+              <div class="text-xs text-slate-500 mt-1">Typical Patient Copay</div>
             </div>
-        </section>
-
-        <!-- All Providers Grid -->
-        <section class="py-16 bg-white border-t border-slate-100">
-            <div class="container mx-auto px-4">
-                <div class="mb-10">
-                    <h2 class="text-2xl md:text-3xl font-semibold text-slate-900 mb-2">All Coverage Guides</h2>
-                    <p class="text-slate-500">State-specific policies, regional carriers, and government programs.</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    {INSURANCE_SLUGS.filter(item => !['medicare', 'bluecross-blueshield', 'aetna', 'cigna', 'united-healthcare', 'tricare'].includes(item.slug)).map(item => (
-                        <a href={`/insurance/${item.slug}/`} class="group bg-slate-50 hover:bg-white rounded-xl p-5 border border-slate-100 hover:border-violet-200 hover:shadow-sm transition-all flex items-center justify-between gap-3">
-                            <div>
-                                <h3 class="text-sm font-semibold text-slate-800 group-hover:text-violet-600 transition-colors">{item.title.replace(' TMS Coverage', '').replace(' TMS Rules', '').replace(' TMS Policy', '').replace(' TMS', '').replace(' Coverage for TMS', '')}</h3>
-                            </div>
-                            <svg class="w-4 h-4 text-slate-300 group-hover:text-violet-400 shrink-0 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-                        </a>
-                    ))}
-                </div>
+            <div class="text-center sm:text-left">
+              <div class="text-2xl font-bold text-white">6–9</div>
+              <div class="text-xs text-slate-500 mt-1">Weeks of Treatment</div>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+    </section>
 
-        <!-- CTA Section -->
-        <section class="py-16">
-            <div class="container mx-auto px-4">
-                <div class="bg-gradient-to-br from-violet-600 to-indigo-700 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iLjA1Ij48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnYtNGg0djRoMnY0aC0ydjRoLTR6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30"></div>
-                    <div class="relative z-10">
-                        <h2 class="text-2xl md:text-3xl font-semibold text-white mb-4">Not sure if you're covered?</h2>
-                        <p class="text-violet-100 text-lg max-w-2xl mx-auto mb-8">Take our quick eligibility quiz to find out if you might qualify for insurance-covered TMS therapy, or search for a clinic near you that offers free insurance verification.</p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="/quiz/am-i-a-candidate/" class="inline-flex items-center justify-center gap-2 bg-white text-violet-700 font-semibold px-8 py-3.5 rounded-xl hover:bg-violet-50 transition-colors shadow-lg shadow-violet-900/20">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg>
-                                Take the Eligibility Quiz
-                            </a>
-                            <a href="/near-me/tms-therapy/" class="inline-flex items-center justify-center gap-2 bg-violet-500/20 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-violet-500/30 transition-colors border border-white/20">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
-                                Find a Clinic Near You
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <!-- Key Info Cards -->
+    <section class="py-12 bg-white border-b border-slate-100">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm flex gap-5 items-start">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
-        </section>
-
-        <!-- SEO Content -->
-        <section class="py-16 bg-white border-t border-slate-100">
-            <div class="container mx-auto px-4 max-w-4xl">
-                <h2 class="text-2xl md:text-3xl font-semibold text-slate-900 mb-6">Understanding Insurance Coverage for TMS Therapy</h2>
-                <div class="prose prose-slate prose-lg max-w-none">
-                    <p class="text-slate-600 leading-relaxed mb-6">Transcranial Magnetic Stimulation (TMS) has been FDA-cleared since 2008 for treating major depressive disorder, and insurance coverage has expanded significantly since then. Today, most major commercial insurers and government programs — including Medicare and many state Medicaid plans — provide coverage for TMS when specific clinical criteria are met.</p>
-
-                    <h3 class="text-xl font-semibold text-slate-800 mt-10 mb-4">What Are the Typical Requirements for Coverage?</h3>
-                    <p class="text-slate-600 leading-relaxed mb-4">While policies vary by insurer and plan, most require the following before approving TMS therapy:</p>
-                    <ul class="text-slate-600 space-y-2 mb-6 list-disc pl-5">
-                        <li>A confirmed diagnosis of major depressive disorder (MDD)</li>
-                        <li>Documentation of at least 2 failed antidepressant trials at adequate dose and duration during the current episode</li>
-                        <li>Prior authorization from the insurance carrier</li>
-                        <li>Treatment administered by a qualified provider using an FDA-cleared device</li>
-                    </ul>
-
-                    <h3 class="text-xl font-semibold text-slate-800 mt-10 mb-4">How Many Sessions Are Covered?</h3>
-                    <p class="text-slate-600 leading-relaxed mb-6">A standard course of TMS consists of 36 sessions delivered over approximately 7-9 weeks. Most insurers approve 30-36 initial sessions. Some plans also cover maintenance sessions if the patient responds well to the initial course but experiences symptom recurrence.</p>
-
-                    <h3 class="text-xl font-semibold text-slate-800 mt-10 mb-4">What If My Insurance Denies Coverage?</h3>
-                    <p class="text-slate-600 leading-relaxed mb-6">If your initial request is denied, you have the right to appeal. Many TMS clinics have dedicated insurance coordinators who can assist with the appeals process. Common reasons for denial include incomplete documentation or not meeting the medication failure requirement. A well-documented appeal with supporting medical records often results in approval.</p>
-                </div>
+            <div>
+              <h3 class="font-bold text-slate-900 mb-1">Most Plans Cover TMS</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Medicare, BCBS, Aetna, Cigna, UnitedHealthcare, Humana, Optum, Tricare, VA, Kaiser, and most state Medicaid programs cover TMS when criteria are met.</p>
             </div>
-        </section>
-    </main>
+          </div>
+          <div class="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm flex gap-5 items-start">
+            <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 mb-1">Pre-Authorization Required</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Your clinic submits documentation of your diagnosis and medication history. Most insurers respond within 5-15 business days.</p>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm flex gap-5 items-start">
+            <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 mb-1">Medication Trial Documentation</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Most insurers require proof of 2–4 failed antidepressant trials. Your clinic needs the name, dose, and duration of each medication.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Major Providers -->
+    <section class="py-16">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="flex items-end justify-between mb-10">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-5 h-5 rounded bg-emerald-100 text-emerald-600 flex items-center justify-center text-[10px] font-bold">1</div>
+              <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wider">Coverage by Plan</span>
+            </div>
+            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight">Major Insurance Providers</h2>
+            <p class="text-slate-500 mt-1">Click your provider to see full coverage details, prior auth requirements, and approved protocols.</p>
+          </div>
+          <span class="hidden sm:block text-sm text-slate-400 font-medium">{majorProviders.length} Major Carriers</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {majorProviders.map(p => {
+            const c = colorMap[p.color];
+            return (
+              <a href={`/insurance/${p.slug}/`}
+                 class={`group bg-white rounded-2xl border ${c.border} p-7 hover:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.10)] transition-all duration-300 relative overflow-hidden`}>
+                {p.badge && (
+                  <span class={`absolute top-4 right-4 px-2.5 py-0.5 ${c.badge} text-[10px] font-bold uppercase tracking-wider rounded-full`}>{p.badge}</span>
+                )}
+                <div class="flex items-start gap-4">
+                  <div class={`w-12 h-12 rounded-xl ${c.icon} flex items-center justify-center text-sm font-bold shrink-0`}>{p.icon}</div>
+                  <div>
+                    <h3 class={`text-xl font-bold text-slate-900 ${c.text} group-hover:underline transition-all mb-2`}>{p.title}</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-4">{p.desc}</p>
+                    <span class={`inline-flex items-center gap-1.5 text-sm font-semibold ${c.text} group-hover:gap-2.5 transition-all`}>
+                      View Full Guide
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- All Providers -->
+    <section class="py-14 bg-slate-50 border-t border-slate-100">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="flex items-end justify-between mb-8">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-5 h-5 rounded bg-violet-100 text-violet-600 flex items-center justify-center text-[10px] font-bold">2</div>
+              <span class="text-xs font-semibold text-violet-600 uppercase tracking-wider">All Plans</span>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">All Coverage Guides</h2>
+            <p class="text-slate-500 mt-1">State-specific policies, government programs, HSA/FSA, and denied coverage appeals.</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+          {INSURANCE_SLUGS.filter(item => !majorProviders.find(m => m.slug === item.slug)).map(item => (
+            <a href={`/insurance/${item.slug}/`}
+               class="group bg-white rounded-xl p-4 border border-slate-100 hover:border-violet-300 hover:shadow-sm transition-all flex items-center justify-between gap-2">
+              <h3 class="text-sm font-semibold text-slate-700 group-hover:text-violet-600 transition-colors leading-snug">{item.title}</h3>
+              <svg class="w-3.5 h-3.5 text-slate-300 group-hover:text-violet-400 shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- What Gets Covered: Requirements Table -->
+    <section class="py-16 bg-white border-t border-slate-100">
+      <div class="container mx-auto px-4 max-w-5xl">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight mb-3">What's Required for TMS Coverage</h2>
+          <p class="text-slate-500 max-w-xl mx-auto">Most insurers follow similar criteria. Here's what documentation you'll need and typical approval timelines.</p>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm mb-10">
+          <table class="w-full text-sm">
+            <thead class="bg-slate-50">
+              <tr>
+                <th class="text-left px-6 py-4 font-bold text-slate-700">Requirement</th>
+                <th class="text-left px-6 py-4 font-bold text-slate-700">Medicare</th>
+                <th class="text-left px-6 py-4 font-bold text-slate-700">BCBS / Aetna</th>
+                <th class="text-left px-6 py-4 font-bold text-slate-700">Cigna / UHC</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-50">
+              <tr>
+                <td class="px-6 py-4 font-medium text-slate-800">Medication trials required</td>
+                <td class="px-6 py-4 text-slate-600">2–4 (varies by plan year)</td>
+                <td class="px-6 py-4 text-slate-600">2 failed trials</td>
+                <td class="px-6 py-4 text-slate-600">2 failed trials in current episode</td>
+              </tr>
+              <tr class="bg-slate-30/40">
+                <td class="px-6 py-4 font-medium text-slate-800">Prior authorization</td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full font-medium">Required</span></td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full font-medium">Required</span></td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full font-medium">Required</span></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-medium text-slate-800">Sessions approved</td>
+                <td class="px-6 py-4 text-slate-600">Up to 36</td>
+                <td class="px-6 py-4 text-slate-600">30–36 sessions</td>
+                <td class="px-6 py-4 text-slate-600">30–36 sessions</td>
+              </tr>
+              <tr class="bg-slate-30/40">
+                <td class="px-6 py-4 font-medium text-slate-800">FDA-cleared device required</td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Yes</span></td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Yes</span></td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Yes</span></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-medium text-slate-800">Deep TMS for OCD covered</td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-slate-100 text-slate-500 text-xs rounded-full font-medium">Case by case</span></td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Yes (BrainsWay)</span></td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Yes (BrainsWay)</span></td>
+              </tr>
+              <tr class="bg-slate-30/40">
+                <td class="px-6 py-4 font-medium text-slate-800">Maintenance sessions covered</td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Yes</span></td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Yes</span></td>
+                <td class="px-6 py-4 text-slate-600"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Yes</span></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-medium text-slate-800">Typical approval time</td>
+                <td class="px-6 py-4 text-slate-600">7–10 business days</td>
+                <td class="px-6 py-4 text-slate-600">5–15 business days</td>
+                <td class="px-6 py-4 text-slate-600">5–15 business days</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Appeals Guide -->
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 rounded-2xl p-8">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0 4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-bold text-slate-900 mb-2">What to Do If Coverage Is Denied</h3>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">If your insurer denies TMS coverage, you have the right to appeal. Most denials happen because of incomplete medication history documentation or failure to meet the medication trial requirement.</p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-white/80 rounded-xl p-4">
+                  <div class="text-sm font-bold text-slate-800 mb-1">Step 1: First Appeal</div>
+                  <p class="text-xs text-slate-500">Submit additional documentation. Most clinics handle this. ~40% succeed at this level.</p>
+                </div>
+                <div class="bg-white/80 rounded-xl p-4">
+                  <div class="text-sm font-bold text-slate-800 mb-1">Step 2: Independent Review</div>
+                  <p class="text-xs text-slate-500">Request an external review by an independent physician. ~25% more approvals at this level.</p>
+                </div>
+                <div class="bg-white/80 rounded-xl p-4">
+                  <div class="text-sm font-bold text-slate-800 mb-1">Step 3: State Insurance Dept</div>
+                  <p class="text-xs text-slate-500">File a complaint with your state's insurance commissioner. Effective for bad-faith denials.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HSA / FSA Section -->
+    <section class="py-14 bg-slate-50 border-t border-slate-100">
+      <div class="container mx-auto px-4 max-w-5xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-3">Pay with HSA or FSA</h2>
+            <p class="text-slate-500 leading-relaxed mb-5">If insurance doesn't cover your TMS, or if you have a high deductible, you can use pre-tax HSA or FSA funds. TMS is an eligible medical expense under IRS guidelines.</p>
+            <a href="/insurance/hsa-fsa-tms/" class="inline-flex items-center gap-2 px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-500 transition-colors">
+              Learn About HSA/FSA Coverage
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+            <div class="bg-emerald-50 p-5 border-b border-emerald-100">
+              <h3 class="font-bold text-slate-900">Estimated Out-of-Pocket Cost (Without Insurance)</h3>
+            </div>
+            <div class="p-5 space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-slate-600">Per session (figure-8 coil)</span>
+                <span class="text-sm font-semibold text-slate-800">$150 – $350</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-slate-600">Per session (deep TMS / H-coil)</span>
+                <span class="text-sm font-semibold text-slate-800">$200 – $450</span>
+              </div>
+              <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                <span class="text-sm font-medium text-slate-700">Full course (36 sessions)</span>
+                <span class="text-sm font-bold text-emerald-600">$5,400 – $12,600</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm font-medium text-slate-700">Theta burst course (36 sessions)</span>
+                <span class="text-sm font-bold text-emerald-600">$3,600 – $9,000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Find a TMS Clinic CTA -->
+    <section class="py-16 bg-slate-950 border-t border-slate-800">
+      <div class="container mx-auto px-4 max-w-3xl text-center">
+        <div class="w-14 h-14 rounded-2xl bg-emerald-600/30 text-emerald-400 flex items-center justify-center mx-auto mb-6">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">Find a Clinic That Handles Your Insurance</h2>
+        <p class="text-slate-400 mb-8 max-w-lg mx-auto">Many TMS clinics offer free insurance verification before your first appointment. Search for providers by location and accepted plans.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/us/" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-emerald-600/25">
+            Find a Clinic
+          </a>
+          <a href="/quiz/am-i-a-candidate/" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl transition-colors border border-white/10">
+            Take the Eligibility Quiz
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json" set:html={faqSchema}></script>
+  </main>
 </Layout>

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { COUNTRY_META } from '../../utils/countryData';
 import { t } from '../../utils/i18n';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 const locale = 'it' as const;
 
 const countryCode = 'IT';
@@ -117,23 +118,7 @@ const schema = JSON.stringify({
             ))}
         </div>
 
-        <!-- SEO Content -->
-        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-            <h2>La terapia TMS in Italia</h2>
-            <p>L'Italia ha una forte tradizione nella ricerca sulla TMS, con contributi di istituzioni come l'Università Vita-Salute San Raffaele di Milano e la Fondazione Santa Lucia di Roma. I neuroscienziati italiani sono stati all'avanguardia nella metodologia di ricerca sulla TMS. La TMS clinica è disponibile negli ospedali universitari nella maggior parte delle grandi città, con un numero crescente di cliniche private.</p>
-            <p>La terapia TMS è offerta presso i principali ospedali universitari e cliniche private italiane. Milano, Roma, Bologna e Padova sono centri chiave per il trattamento rTMS della depressione e delle condizioni neurologiche.</p>
-            <h3>Assicurazione e costi</h3>
-            <p>Il SSN (Servizio Sanitario Nazionale) può coprire la TMS presso gli ospedali universitari attraverso percorsi clinici specifici. Il trattamento privato costa {meta.sessionCostRange} per sessione. Alcune assicurazioni private coprono parzialmente i costi con la prescrizione di uno psichiatra.</p>
-            <p>Il costo tipico di una sessione TMS in Italia varia da {meta.sessionCostRange}. I cicli di trattamento comprendono generalmente 20-30 sessioni nell'arco di 4-6 settimane.</p>
-            <h3>Come scegliere una clinica TMS in Italia</h3>
-            <p>Nella scelta di un fornitore TMS in Italia, considerate l'accreditamento della clinica, l'esperienza dello psichiatra curante, la tecnologia TMS utilizzata e se la vostra assicurazione copre il trattamento. Il nostro elenco vi aiuta a confrontare le cliniche per regione e a trovare il fornitore giusto.</p>
-            <h3>Risorse correlate</h3>
-            <ul>
-                <li><a href="/treatments/">Condizioni trattate con TMS</a> — depressione, ansia, DOC, PTSD e altro</li>
-                <li><a href="/technology/">Guida tecnologica TMS</a> — confrontare NeuroStar, BrainsWay, MagVenture</li>
-                <li><a href="/research/">Ricerca TMS</a> — ultimi studi clinici e risultati</li>
-            </ul>
-        </section>
+        <LocationSEOContent type="country" locationName="Italy" clinicCount={totalClinics} countryCode="IT" />
         </div>
     </main>
 </Layout>

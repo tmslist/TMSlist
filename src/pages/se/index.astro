@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { COUNTRY_META } from '../../utils/countryData';
 import { t } from '../../utils/i18n';
@@ -118,22 +119,7 @@ const schema = JSON.stringify({
         </div>
 
         <!-- SEO Content -->
-        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-            <h2>TMS-terapi i Sverige</h2>
-            <p>{meta.aboutContent}</p>
-            <p>{meta.seoDescription}</p>
-            <h3>Försäkring och kostnader</h3>
-            <p>{meta.insuranceNote}</p>
-            <p>Den typiska kostnaden för en TMS-session i Sverige varierar från {meta.sessionCostRange}. Behandlingskurer omfattar vanligtvis 20-30 sessioner under 4-6 veckor.</p>
-            <h3>Så väljer du en TMS-klinik i Sverige</h3>
-            <p>När du väljer en TMS-leverantör i Sverige, överväg klinikens ackreditering, den behandlande psykiaterns erfarenhet, vilken TMS-teknik som används och om din försäkring täcker behandlingen. Vår katalog hjälper dig att jämföra kliniker per region och hitta rätt leverantör.</p>
-            <h3>Relaterade resurser</h3>
-            <ul>
-                <li><a href="/treatments/">Tillstånd som behandlas med TMS</a> — depression, ångest, OCD, PTSD och mer</li>
-                <li><a href="/technology/">TMS-teknikguide</a> — jämför NeuroStar, BrainsWay, MagVenture</li>
-                <li><a href="/research/">TMS-forskning</a> — senaste kliniska studier och resultat</li>
-            </ul>
-        </section>
+        <LocationSEOContent type="country" locationName="Sweden" clinicCount={totalClinics} countryCode="SE" />
         </div>
     </main>
 </Layout>

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { t } from '../../utils/i18n';
 import { COUNTRY_META } from '../../utils/countryData';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 
 const countryCode = 'AU';
 const countryName = COUNTRY_NAMES[countryCode];
@@ -91,28 +92,12 @@ const collectionSchema = JSON.stringify({
         </div>
         </div></section>
 
-        <!-- SEO Content -->
-        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-            <h2>About TMS Therapy in Australia</h2>
-            <p>{meta.aboutContent}</p>
-
-            <h3>Medicare Rebates for TMS</h3>
-            <p>{meta.insuranceNote}</p>
-
-            <h3>How to Access TMS Therapy in Australia</h3>
-            <p>To access Medicare-rebated TMS therapy in Australia, you need a referral from your GP to a psychiatrist who oversees TMS treatment. The psychiatrist must confirm that you have treatment-resistant depression, typically defined as inadequate response to at least two antidepressant medications. Once approved, MBS item numbers cover a standard course of TMS treatment.</p>
-
-            <h3>Finding the Right Clinic</h3>
-            <p>When choosing a TMS clinic in Australia, consider the <a href="/technology/">TMS technology</a> used (rTMS vs Deep TMS), the experience of the treating psychiatrist, proximity to your location, and session costs after Medicare rebate. Our directory helps you compare clinics across all Australian states and territories.</p>
-
-            <h3>Related Resources</h3>
-            <ul>
-                <li><a href="/treatments/">Conditions Treated with TMS</a> -- depression, anxiety, OCD, PTSD and more</li>
-                <li><a href="/technology/">TMS Technology Guide</a> -- compare NeuroStar, BrainsWay, MagVenture</li>
-                <li><a href="/insurance/">Insurance & Coverage for TMS</a> -- understanding your coverage options</li>
-                <li><a href="/specialists/">Find a TMS Specialist</a> -- board-certified psychiatrists</li>
-            </ul>
-        </section>
+        <LocationSEOContent
+          type="country"
+          locationName="Australia"
+          clinicCount={totalClinics}
+          countryCode="AU"
+        />
     </main>
 </Layout>
 

@@ -75,6 +75,46 @@ export const forumPostStatusEnum = pgEnum('forum_post_status', [
   'removed',
 ]);
 
+// ── JOB ENUMS ──────────────────────────────────────
+
+export const jobStatusEnum = pgEnum('job_status', [
+  'active',
+  'paused',
+  'filled',
+  'closed',
+]);
+
+export const jobRoleCategoryEnum = pgEnum('job_role_category', [
+  'tms_technician',
+  'tms_physician',
+  'nurse_tms',
+  'psychologist',
+  'front_desk',
+  'office_manager',
+  'billing',
+  'marketing_coordinator',
+  'community_outreach',
+  'social_media',
+  'data_researcher',
+  'it_support',
+  'other',
+]);
+
+export const jobEmploymentTypeEnum = pgEnum('job_employment_type', [
+  'full_time',
+  'part_time',
+  'contract',
+  'internship',
+]);
+
+export const jobApplicationStatusEnum = pgEnum('job_application_status', [
+  'new',
+  'viewed',
+  'contacted',
+  'rejected',
+  'hired',
+]);
+
 // ── CLINICS ──────────────────────────────────────
 
 export const clinics = pgTable('clinics', {
@@ -565,6 +605,64 @@ export const forumReports = pgTable('forum_reports', {
   index('idx_forum_reports_unresolved').on(table.resolved),
 ]);
 
+// ── JOBS ──────────────────────────────────────
+
+export const jobs = pgTable('jobs', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  clinicId: uuid('clinic_id').notNull().references(() => clinics.id, { onDelete: 'cascade' }),
+  createdBy: uuid('created_by').notNull().references(() => users.id),
+  title: text('title').notNull(),
+  roleCategory: jobRoleCategoryEnum('role_category').notNull(),
+  employmentType: jobEmploymentTypeEnum('employment_type').notNull().default('full_time'),
+  location: text('location').notNull(),
+  remote: boolean('remote').default(false).notNull(),
+  salaryMin: integer('salary_min'),
+  salaryMax: integer('salary_max'),
+  salaryDisplay: text('salary_display'),
+  description: text('description').notNull(),
+  requirements: text('requirements'),
+  responsibilities: text('responsibilities'),
+  benefits: text('benefits'),
+  applicationEmail: text('application_email'),
+  applicationUrl: text('application_url'),
+  status: jobStatusEnum('status').notNull().default('active'),
+  viewCount: integer('view_count').default(0).notNull(),
+  applicationCount: integer('application_count').default(0).notNull(),
+  expiresAt: timestamp('expires_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+}, (table) => [
+  index('idx_jobs_clinic').on(table.clinicId),
+  index('idx_jobs_created_by').on(table.createdBy),
+  index('idx_jobs_status').on(table.status),
+  index('idx_jobs_role_category').on(table.roleCategory),
+  index('idx_jobs_location').on(table.location),
+  index('idx_jobs_created').on(table.createdAt),
+]);
+
+// ── JOB APPLICATIONS ──────────────────────────────────
+
+export const jobApplications = pgTable('job_applications', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  jobId: uuid('job_id').notNull().references(() => jobs.id, { onDelete: 'cascade' }),
+  clinicId: uuid('clinic_id').notNull().references(() => clinics.id),
+  applicantName: text('applicant_name').notNull(),
+  applicantEmail: text('applicant_email').notNull(),
+  applicantPhone: text('applicant_phone'),
+  resumeUrl: text('resume_url'),
+  coverLetter: text('cover_letter'),
+  linkedInUrl: text('linkedin_url'),
+  clinicOwnerEmail: text('clinic_owner_email'),
+  status: jobApplicationStatusEnum('status').notNull().default('new'),
+  notes: text('notes'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_job_applications_job').on(table.jobId),
+  index('idx_job_applications_clinic').on(table.clinicId),
+  index('idx_job_applications_status').on(table.status),
+  index('idx_job_applications_created').on(table.createdAt),
+]);
+
 // ── TYPE EXPORTS ──────────────────────────────────
 
 export type Clinic = typeof clinics.$inferSelect;
@@ -589,3 +687,7 @@ export type NewForumComment = typeof forumComments.$inferInsert;
 export type ForumVote = typeof forumVotes.$inferSelect;
 export type ForumReport = typeof forumReports.$inferSelect;
 export type SavedForumPost = typeof savedForumPosts.$inferSelect;
+export type Job = typeof jobs.$inferSelect;
+export type NewJob = typeof jobs.$inferInsert;
+export type JobApplication = typeof jobApplications.$inferSelect;
+export type NewJobApplication = typeof jobApplications.$inferInsert;

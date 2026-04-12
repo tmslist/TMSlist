@@ -5,10 +5,10 @@ import Layout from "../../layouts/Layout.astro";
 import LoginForm from "../../components/react/LoginForm";
 import { getSessionFromRequest } from "../../utils/auth";
 
-// Redirect if already logged in
+// Clear any existing session so portal users aren't stuck in a redirect loop
 const session = getSessionFromRequest(Astro.request);
 if (session) {
-  return Astro.redirect("/admin/dashboard");
+  return Astro.redirect("/api/auth/logout?redirect=/admin/login");
 }
 ---
 

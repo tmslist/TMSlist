@@ -1,17 +1,23 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import OwnerDashboard from "../../components/react/OwnerDashboard";
+import { getSessionFromRequest } from "../../utils/auth";
 
 export const prerender = false;
 
 const pageTitle = "Clinic Owner Dashboard | TMS List";
 const metaDescription = "Manage your TMS clinic listing, view leads, and respond to reviews.";
+
+const session = getSessionFromRequest(Astro.request);
+if (!session) {
+  return Astro.redirect("/portal/login/?redirect=/owner/dashboard");
+}
 ---
 
 <Layout title={pageTitle} description={metaDescription} noindex={true}>
   <main class="bg-slate-50/50 min-h-screen py-10">
     <div class="container mx-auto px-6 lg:px-12 max-w-5xl">
-      <OwnerDashboard client:idle />
+      <OwnerDashboard client:idle userId={session.userId} userEmail={session.email} />
     </div>
   </main>
 </Layout>

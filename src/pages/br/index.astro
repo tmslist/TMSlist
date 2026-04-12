@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { COUNTRY_META } from '../../utils/countryData';
 import { t } from '../../utils/i18n';
+import LocationSEOContent from '../../components/LocationSEOContent.astro';
 const locale = 'pt-BR' as const;
 
 const countryCode = 'BR';
@@ -118,22 +119,7 @@ const schema = JSON.stringify({
         </div>
 
         <!-- SEO Content -->
-        <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-            <h2>Terapia TMS no Brasil</h2>
-            <p>O Brasil é reconhecido internacionalmente pela pesquisa em TMS, com a Universidade de São Paulo (USP) e o Instituto de Psiquiatria liderando ensaios clínicos globais. O Conselho Federal de Medicina (CFM) aprovou a rTMS como procedimento terapêutico em 2012. São Paulo tem a maior concentração de provedores de TMS na América Latina. Pesquisadores brasileiros contribuíram significativamente para os protocolos de estimulação theta burst.</p>
-            <p>O Brasil é líder global em pesquisa de TMS, com tratamento aprovado pela ANVISA disponível em hospitais universitários e clínicas privadas em São Paulo, Rio de Janeiro e outras grandes cidades.</p>
-            <h3>Seguro e custos</h3>
-            <p>O SUS (Sistema Único de Saúde) não cobre rotineiramente a TMS, embora alguns hospitais universitários a ofereçam através de programas de pesquisa. A cobertura dos planos de saúde privados varia — a ANS tem avaliado a inclusão. A maioria dos pacientes paga particular, com sessões custando {meta.sessionCostRange}.</p>
-            <p>O custo típico de uma sessão de TMS no Brasil varia de {meta.sessionCostRange}. Os cursos de tratamento geralmente envolvem 20-30 sessões ao longo de 4-6 semanas.</p>
-            <h3>Como escolher uma clínica TMS no Brasil</h3>
-            <p>Ao selecionar um provedor de TMS no Brasil, considere a acreditação da clínica, a experiência do psiquiatra, a tecnologia TMS utilizada e se seu plano de saúde cobre o tratamento. Nosso diretório ajuda você a comparar clínicas por região e encontrar o provedor adequado.</p>
-            <h3>Recursos relacionados</h3>
-            <ul>
-                <li><a href="/treatments/">Condições tratadas com TMS</a> — depressão, ansiedade, TOC, TEPT e mais</li>
-                <li><a href="/technology/">Guia de tecnologia TMS</a> — comparar NeuroStar, BrainsWay, MagVenture</li>
-                <li><a href="/research/">Pesquisa TMS</a> — últimos estudos clínicos e resultados</li>
-            </ul>
-        </section>
+<LocationSEOContent type="country" locationName="Brazil" clinicCount={totalClinics} countryCode="BR" />
         </div>
     </main>
 </Layout>

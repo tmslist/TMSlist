@@ -4,6 +4,7 @@ import ClinicCard from '../../../components/ClinicCard.astro';
 import { getClinicsByCountry, getClinicsByCountryAndRegion } from '../../../utils/dataHelpers';
 import { COUNTRY_META } from '../../../utils/countryData';
 import { calculateClinicScore } from '../../../utils/ranking';
+import LocationSEOContent from '../../../components/LocationSEOContent.astro';
 
 const { region } = Astro.params;
 
@@ -130,12 +131,7 @@ const regionSchema = JSON.stringify({
       </div>
     </section>
 
-    <!-- SEO Content -->
-    <section class="mt-16 pt-12 border-t border-gray-100 prose prose-lg max-w-none text-gray-600">
-      <h2>TMS Therapy in {regionName}, Germany</h2>
-      <p>{regionName} has {clinicCount} TMS therapy {clinicCount === 1 ? 'clinic' : 'clinics'} across {cities.length} {cities.length === 1 ? 'city' : 'cities'}. TMS sessions in Germany typically cost {meta.sessionCostRange}, and {meta.insuranceNote.toLowerCase()}</p>
-      <p>Use our directory to compare clinics in {regionName} by technology, patient ratings, and insurance acceptance. Each listing includes verified information about the clinic's TMS equipment and treating physicians.</p>
-    </section>
+<LocationSEOContent type="region" locationName={regionName} clinicCount={clinicCount} countryCode="DE" />
   </div>
 </Layout>
 
