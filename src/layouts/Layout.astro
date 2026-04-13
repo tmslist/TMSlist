@@ -25,6 +25,8 @@ import CookieConsent from "../components/CookieConsent.astro";
 
 const { title, description, image, canonical, schema, breadcrumbs, noindex, hreflang } = Astro.props;
 
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+
 const breadcrumbSchema = breadcrumbs?.length ? JSON.stringify({
 	"@context": "https://schema.org",
 	"@type": "BreadcrumbList",
