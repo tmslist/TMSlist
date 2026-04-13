@@ -60,7 +60,7 @@ export default function AdminBlog() {
       params.set('limit', String(limit));
       params.set('offset', String(page * limit));
 
-      const res = await fetch(`/api/admin/blog?${params}`);
+      const res = await fetch(`/api/admin/blog-content?${params}`);
       const json = await res.json();
       if (res.ok) {
         setPosts(json.data || []);

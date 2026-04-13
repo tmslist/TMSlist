@@ -1,6 +1,8 @@
 ---
 export const prerender = false;
 
+import Layout from "../layouts/Layout.astro";
+
 // Map common error codes to friendly messages
 const ERROR_MESSAGES: Record<string, { title: string; description: string }> = {
   '401': {

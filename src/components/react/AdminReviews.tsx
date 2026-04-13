@@ -10,7 +10,6 @@ interface Review {
   body: string;
   source: string | null;
   helpful: number | null;
-  approved: boolean;
   verified: boolean;
   createdAt: string;
   clinicName: string | null;
@@ -82,7 +81,7 @@ export default function AdminReviews() {
       });
       if (res.ok) {
         setReviews(prev => prev.map(r =>
-          r.id === id ? { ...r, approved } : r
+          r.id === id ? { ...r, verified: approved } : r
         ));
         if (!approved && filter === 'approved') {
           setReviews(prev => prev.filter(r => r.id !== id));
@@ -167,7 +166,7 @@ export default function AdminReviews() {
           </div>
         ) : reviews.map(review => (
           <div key={review.id} className={`bg-white rounded-xl border p-5 transition-colors ${
-            review.approved ? 'border-gray-200' : 'border-amber-200 bg-amber-50/30'
+            review.verified ? 'border-gray-200' : 'border-amber-200 bg-amber-50/30'
           }`}>
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1 min-w-0">
@@ -180,9 +179,9 @@ export default function AdminReviews() {
                     </span>
                   )}
                   <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
-                    review.approved ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
+                    review.verified ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
                   }`}>
-                    {review.approved ? 'Approved' : 'Pending'}
+                    {review.verified ? 'Approved' : 'Pending'}
                   </span>
                   <span className="text-xs text-gray-400">
                     {new Date(review.createdAt).toLocaleDateString()}
@@ -209,7 +208,7 @@ export default function AdminReviews() {
               </div>
 
               <div className="flex gap-2 shrink-0">
-                {!review.approved && (
+                {!review.verified && (
                   <button
                     onClick={() => handleAction(review.id, true)}
                     disabled={updating === review.id}
@@ -218,7 +217,7 @@ export default function AdminReviews() {
                     Approve
                   </button>
                 )}
-                {review.approved && (
+                {review.verified && (
                   <button
                     onClick={() => handleAction(review.id, false)}
                     disabled={updating === review.id}

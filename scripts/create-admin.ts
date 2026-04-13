@@ -3,8 +3,6 @@
  * Usage: DATABASE_URL=... npx tsx scripts/create-admin.ts
  */
 import postgres from 'postgres';
-import { drizzle } from 'drizzle-orm/postgres-js';
-import { users } from '../src/db/schema';
 import bcrypt from 'bcryptjs';
 
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -19,28 +17,40 @@ const name = process.argv[4] || 'Admin';
 
 async function main() {
   const sql = postgres(DATABASE_URL!);
-  const db = drizzle(sql);
 
   const passwordHash = await bcrypt.hash(password, 12);
 
   try {
-    const result = await db.insert(users).values({
-      email,
-      passwordHash,
-      name,
-      role: 'admin',
-    }).returning({ id: users.id, email: users.email });
+    // Upsert: creates admin, or updates existing user's password + role to admin
+    const result = await sql`
+      INSERT INTO users (id, email, name, role, password_hash, created_at, updated_at)
+      VALUES (
+        gen_random_uuid(),
+        ${email},
+        ${name},
+        'admin',
+        ${passwordHash},
+        NOW(),
+        NOW()
+      )
+      ON CONFLICT (email) DO UPDATE SET
+        role = 'admin',
+        password_hash = ${passwordHash},
+        updated_at = NOW()
+      RETURNING id, email, role
+    `;
 
-    console.log(`✅ Admin user created:`);
+    console.log(`✅ Admin user created/updated:`);
     console.log(`   Email: ${email}`);
-    console.log(`   ID: ${result[0]?.id}`);
-    console.log(`\n⚠️  Change the default password after first login!`);
+    console.log(`   Password: ${password}`);
+    console.log(`   Role: ${result[0].role}`);
+    console.log(`\n🔑 Log in at /admin/login with:`);
+    console.log(`   Email: ${email}`);
+    console.log(`   Password: ${password}`);
   } catch (err: any) {
-    if (err.message?.includes('unique')) {
-      console.log(`ℹ️  User ${email} already exists.`);
-    } else {
-      console.error('Error:', err.message);
-    }
+    console.error('Error:', err.message);
+  } finally {
+    sql.end();
   }
 }
 

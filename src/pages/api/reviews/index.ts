@@ -3,6 +3,7 @@ import { getReviewsByClinic, createReview, updateClinicRating } from '../../../d
 import { reviewSubmitSchema } from '../../../db/validation';
 import { escapeHtml } from '../../../utils/sanitize';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+import { getSessionFromRequest } from '../../../utils/auth';
 
 export const prerender = false;
 
@@ -44,6 +45,23 @@ export const GET: APIRoute = async ({ url }) => {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Require authenticated session
+    const session = getSessionFromRequest(request);
+    if (!session) {
+      return new Response(JSON.stringify({ error: 'You must be signed in to leave a review.' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Only patient, viewer, or clinic_owner roles can submit reviews
+    if (!['patient', 'viewer', 'clinic_owner'].includes(session.role)) {
+      return new Response(JSON.stringify({ error: 'Insufficient permissions.' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     // Rate limit: 3 requests per IP per hour
     const ip = getClientIp(request);
     const rateLimited = await strictRateLimit(ip, 3, '1 h', 'reviews:submit');
@@ -67,7 +85,13 @@ export const POST: APIRoute = async ({ request }) => {
       body: escapeHtml(parsed.data.body),
     };
 
-    const review = await createReview(sanitized);
+    // Auto-verify reviews from authenticated users with verified Google email
+    const isVerifiedEmail = sanitized.userEmail?.toLowerCase() === session.email.toLowerCase();
+    const review = await createReview({
+      ...sanitized,
+      verified: isVerifiedEmail,
+      approved: false, // still requires moderation
+    });
 
     // Update denormalized rating (approved reviews only affect this)
     await updateClinicRating(parsed.data.clinicId);

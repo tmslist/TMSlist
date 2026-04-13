@@ -5,6 +5,8 @@ import Layout from "../../layouts/Layout.astro";
 import AdminSidebar from "../../components/react/AdminSidebar";
 import { getSessionFromRequest, hasRole } from "../../utils/auth";
 import { getDashboardStats, getLeadStats } from "../../db/queries";
+import { db } from "../../db";
+import { sql } from "drizzle-orm";
 
 const session = getSessionFromRequest(Astro.request);
 if (!hasRole(session, 'admin', 'editor')) {
@@ -13,14 +15,32 @@ if (!hasRole(session, 'admin', 'editor')) {
 
 let stats = { clinics: 0, doctors: 0, reviews: 0, leads: 0 };
 let leadStats: Record<string, number> = { total: 0 };
+let pendingReviews = 0;
 
 try {
-  [stats, leadStats] = await Promise.all([
-    getDashboardStats(),
-    getLeadStats(),
+  const [clinicCount, doctorCount] = await Promise.all([
+    getDashboardStats().then(s => s.clinics).catch(() => 0),
+    getDashboardStats().then(s => s.doctors).catch(() => 0),
   ]);
+  stats.clinics = clinicCount;
+  stats.doctors = doctorCount;
+
+  const [leadStatsResult, pendingResult] = await Promise.all([
+    getLeadStats().catch(() => ({ total: 0 })),
+    db.execute(sql`SELECT count(*) as count FROM reviews WHERE approved = false`).catch(() => [{ count: 0 }]),
+  ]);
+  leadStats = leadStatsResult;
+
+  const [reviewCount, leadCount] = await Promise.all([
+    db.execute(sql`SELECT count(*) as count FROM reviews`).catch(() => [{ count: 0 }]),
+    db.execute(sql`SELECT count(*) as count FROM leads`).catch(() => [{ count: 0 }]),
+  ]);
+  stats.reviews = Number(reviewCount[0]?.count ?? 0);
+  stats.leads = Number(leadCount[0]?.count ?? 0);
+
+  pendingReviews = Number(pendingResult[0]?.count ?? 0);
 } catch {
-  // DB not connected yet
+  // DB not connected yet — stats stay at 0
 }
 ---
 
@@ -34,23 +54,41 @@ try {
           <p class="text-gray-500 mt-1">Welcome back{session?.email ? `, ${session.email.split('@')[0]}` : ''}</p>
         </div>
 
+        <!-- Pending Reviews Alert -->
+        {pendingReviews > 0 && (
+          <a href="/admin/reviews/" class="block mb-6 bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 flex items-center gap-4 hover:bg-amber-100 transition-colors">
+            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-amber-800">{pendingReviews} review{pendingReviews !== 1 ? 's' : ''} pending moderation</p>
+              <p class="text-xs text-amber-600">Click to review and approve or reject</p>
+            </div>
+            <svg class="w-5 h-5 text-amber-400 ml-auto shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        )}
+
         <!-- Stats Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
             <p class="text-sm font-medium text-gray-500">Total Clinics</p>
-            <p class="text-3xl font-semibold text-gray-900 mt-2">{stats.clinics}</p>
+            <p class="text-3xl font-semibold text-gray-900 mt-2">{stats.clinics.toLocaleString()}</p>
           </div>
           <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
             <p class="text-sm font-medium text-gray-500">Doctors</p>
-            <p class="text-3xl font-semibold text-gray-900 mt-2">{stats.doctors}</p>
+            <p class="text-3xl font-semibold text-gray-900 mt-2">{stats.doctors.toLocaleString()}</p>
           </div>
           <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
             <p class="text-sm font-medium text-gray-500">Reviews</p>
-            <p class="text-3xl font-semibold text-amber-600 mt-2">{stats.reviews}</p>
+            <p class="text-3xl font-semibold text-amber-600 mt-2">{stats.reviews.toLocaleString()}</p>
           </div>
           <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
             <p class="text-sm font-medium text-gray-500">Total Leads</p>
-            <p class="text-3xl font-semibold text-violet-600 mt-2">{stats.leads}</p>
+            <p class="text-3xl font-semibold text-violet-600 mt-2">{stats.leads.toLocaleString()}</p>
           </div>
         </div>
 
