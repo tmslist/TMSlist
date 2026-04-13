@@ -60,11 +60,13 @@ export default function AdminBlog() {
       params.set('limit', String(limit));
       params.set('offset', String(page * limit));
 
-      const res = await fetch(`/api/admin/blog-content?${params}`);
+      const res = await fetch(`/api/admin/blog?${params}`);
       const json = await res.json();
       if (res.ok) {
         setPosts(json.data || []);
         setTotal(json.total || 0);
+      } else {
+        console.error('Blog fetch error:', json.error);
       }
     } catch (err) {
       console.error('Failed to fetch posts:', err);

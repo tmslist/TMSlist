@@ -82,3 +82,68 @@ export async function cancelSubscription(subscriptionId: string) {
   if (!stripe) throw new Error('Stripe not configured');
   return stripe.subscriptions.cancel(subscriptionId);
 }
+
+function getPriceId(envKey: string): string | undefined {
+  const val = import.meta.env[envKey] || process.env[envKey];
+  return val || undefined;
+}
+
+/**
+ * Pro plan checkout — $18/mo recurring
+ */
+export async function createProCheckout(opts: {
+  clinicId: string;
+  clinicName: string;
+  clinicEmail: string;
+  successUrl: string;
+  cancelUrl: string;
+}) {
+  const stripe = getStripe();
+  if (!stripe) return null;
+
+  const priceId = getPriceId('STRIPE_PRICE_PRO');
+  if (!priceId) throw new Error('STRIPE_PRICE_PRO not set');
+
+  return stripe.checkout.sessions.create({
+    mode: 'subscription',
+    customer_email: opts.clinicEmail,
+    line_items: [{ price: priceId, quantity: 1 }],
+    success_url: opts.successUrl,
+    cancel_url: opts.cancelUrl,
+    metadata: {
+      clinicId: opts.clinicId,
+      clinicName: opts.clinicName,
+      type: 'pro_subscription',
+    },
+  });
+}
+
+/**
+ * Enterprise plan checkout — $60/mo recurring
+ */
+export async function createEnterpriseCheckout(opts: {
+  clinicId: string;
+  clinicName: string;
+  clinicEmail: string;
+  successUrl: string;
+  cancelUrl: string;
+}) {
+  const stripe = getStripe();
+  if (!stripe) return null;
+
+  const priceId = getPriceId('STRIPE_PRICE_ENTERPRISE');
+  if (!priceId) throw new Error('STRIPE_PRICE_ENTERPRISE not set');
+
+  return stripe.checkout.sessions.create({
+    mode: 'subscription',
+    customer_email: opts.clinicEmail,
+    line_items: [{ price: priceId, quantity: 1 }],
+    success_url: opts.successUrl,
+    cancel_url: opts.cancelUrl,
+    metadata: {
+      clinicId: opts.clinicId,
+      clinicName: opts.clinicName,
+      type: 'enterprise_subscription',
+    },
+  });
+}

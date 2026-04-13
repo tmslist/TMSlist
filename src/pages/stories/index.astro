@@ -4,85 +4,459 @@ import { STORIES_SLUGS } from '../../utils/seo_slugs';
 
 const title = "Patient Stories | Real TMS Therapy Experiences";
 const description = "Read real stories from TMS therapy patients. Hear about their journeys, treatment experiences, and outcomes in their own words.";
+
+const siteUrl = import.meta.env.SITE_URL || 'https://tmslist.com';
+
+const storiesSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'TMS Therapy Patient Stories',
+  description,
+  url: `${siteUrl}/stories/`,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: STORIES_SLUGS.length,
+    itemListElement: STORIES_SLUGS.map((item: any, i: number) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.title,
+      url: `${siteUrl}/stories/${item.slug}/`,
+    })),
+  },
+});
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is TMS therapy like?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'TMS (transcranial magnetic stimulation) is a non-invasive procedure where a magnetic coil is placed against your scalp to stimulate specific areas of your brain. Sessions typically last 20-40 minutes, during which you sit in a chair while the device delivers magnetic pulses. Most patients describe a tapping or clicking sensation on their scalp. No anesthesia is needed, and you can drive home afterward.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does it take to see results from TMS?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most patients begin noticing improvement between weeks 2 and 4 of treatment. TMS works cumulatively — each session builds on the last. A full treatment course typically runs 4-6 weeks (20-30 sessions). Some patients continue improving for several weeks after treatment ends.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does TMS actually work for depression?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Multiple large clinical trials and real-world studies show TMS is effective for treatment-resistant depression. Approximately 50-60% of patients experience meaningful improvement, and 30-40% achieve full remission. TMS is FDA-cleared for major depressive disorder and has received FDA breakthrough device designation for OCD and smoking cessation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is TMS covered by insurance?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most major insurance plans cover TMS for treatment-resistant depression, including Medicare, BlueCross BlueShield, Aetna, Cigna, and UnitedHealthcare. Coverage typically requires documented failure of at least 2-4 antidepressant medications. Our insurance guide has detailed information for each provider.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are TMS patient stories medically accurate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'All patient stories on TMS List are reviewed by licensed medical professionals for accuracy. Individual testimonials represent personal experiences and outcomes vary. Stories marked as "composite" are based on aggregated real patient experiences and do not represent a single individual. We clearly distinguish between documented clinical outcomes and personal testimonials.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I share my own TMS experience?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. We welcome patient submissions. Share your story with us through our contact form and it may be featured (with your permission) to help others considering TMS. All submissions are reviewed by our editorial team.',
+      },
+    },
+  ],
+});
 ---
 
 <Layout title={title} description={description}>
+    <script type="application/ld+json" set:html={storiesSchema} />
+    <script type="application/ld+json" set:html={faqSchema} />
+
     <main>
-        <!-- Hero -->
-        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
+        <!-- Dark Hero -->
+        <section class="relative bg-slate-900 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-violet-900/40 via-slate-900 to-cyan-900/20 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-[600px] h-[500px] bg-violet-600/10 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-0 left-0 w-[400px] h-[300px] bg-cyan-600/10 rounded-full blur-[100px]"></div>
+            <div class="container mx-auto px-4 py-16 lg:py-20 relative z-10">
                 <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                    <span class="text-slate-300">/</span>
-                    <span class="text-slate-700 font-medium">Patient Stories</span>
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span>/</span>
+                    <span class="text-white font-medium">Patient Stories</span>
                 </nav>
                 <div class="max-w-3xl">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-violet-50 border border-violet-100 rounded-full mb-6">
-                        <span class="flex h-2 w-2 rounded-full bg-violet-500"></span>
-                        <span class="text-xs font-semibold text-violet-700 tracking-wide">{STORIES_SLUGS.length} Patient Stories</span>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-violet-500/10 border border-violet-500/20 rounded-full mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-violet-400"></span>
+                        <span class="text-xs font-semibold text-violet-300 tracking-wide">{STORIES_SLUGS.length} Real Patient Stories</span>
                     </div>
-                    <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-                        Real Patient <span class="text-violet-600">Stories</span>
+                    <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4 leading-tight">
+                        Real Patient <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">Stories</span>
                     </h1>
-                    <p class="text-lg text-slate-500 leading-relaxed">
-                        Hear directly from patients who've been through TMS therapy. Their journeys, challenges, and outcomes — in their own words.
+                    <p class="text-lg text-slate-300 leading-relaxed max-w-2xl">
+                        Hear directly from patients who've been through TMS therapy. Their journeys, challenges, and outcomes — in their own words. Honest stories, real results.
                     </p>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="mt-10 flex flex-wrap gap-6">
+                    <div>
+                        <div class="text-2xl font-bold text-white">{STORIES_SLUGS.length}</div>
+                        <div class="text-xs text-slate-400 font-medium uppercase tracking-wide">Stories</div>
+                    </div>
+                    <div class="w-px bg-slate-700"></div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">4+</div>
+                        <div class="text-xs text-slate-400 font-medium uppercase tracking-wide">Conditions</div>
+                    </div>
+                    <div class="w-px bg-slate-700"></div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">50-60%</div>
+                        <div class="text-xs text-slate-400 font-medium uppercase tracking-wide">Response Rate</div>
+                    </div>
+                    <div class="w-px bg-slate-700"></div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">30-40%</div>
+                        <div class="text-xs text-slate-400 font-medium uppercase tracking-wide">Remission Rate</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-16 lg:py-24 bg-white">
+        <!-- Condition Filter Bar -->
+        <section class="bg-white border-b border-slate-100 sticky top-[64px] z-30">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center gap-2 py-3 overflow-x-auto scrollbar-none">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wide shrink-0 mr-2">Filter by:</span>
+                    <a href="#all" class="shrink-0 px-3 py-1.5 text-xs font-semibold bg-violet-600 text-white rounded-full transition-colors">All Stories</a>
+                    <a href="#depression" class="shrink-0 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-violet-50 hover:text-violet-700 rounded-full transition-colors">Depression</a>
+                    <a href="#ocd" class="shrink-0 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-violet-50 hover:text-violet-700 rounded-full transition-colors">OCD</a>
+                    <a href="#ptsd" class="shrink-0 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-violet-50 hover:text-violet-700 rounded-full transition-colors">PTSD</a>
+                    <a href="#anxiety" class="shrink-0 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-violet-50 hover:text-violet-700 rounded-full transition-colors">Anxiety</a>
+                    <a href="#postpartum" class="shrink-0 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-violet-50 hover:text-violet-700 rounded-full transition-colors">Postpartum</a>
+                    <a href="#burnout" class="shrink-0 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-violet-50 hover:text-violet-700 rounded-full transition-colors">Burnout</a>
+                    <span class="shrink-0 mx-1 text-slate-200">|</span>
+                    <a href="/compare/" class="shrink-0 px-3 py-1.5 text-xs font-semibold text-cyan-700 bg-cyan-50 hover:bg-cyan-100 rounded-full transition-colors">Compare Treatments</a>
+                    <a href="/insurance/" class="shrink-0 px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-full transition-colors">Insurance Guide</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 lg:py-20 bg-white">
             <div class="container mx-auto px-4 max-w-5xl">
                 <!-- Featured Story -->
                 {STORIES_SLUGS.length > 0 && (
-                    <a href={`/stories/${STORIES_SLUGS[0].slug}/`} class="group block mb-10">
-                        <div class="relative bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-100 p-10 lg:p-14 hover:border-violet-200 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden">
-                            <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-rose-50 to-transparent rounded-bl-[100px] opacity-60"></div>
+                    <a href={`/stories/${STORIES_SLUGS[0].slug}/`} class="group block mb-12">
+                        <div class="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-10 lg:p-14 overflow-hidden group-hover:shadow-[0_30px_80px_-15px_rgba(0,0,0,0.2)] transition-all duration-500">
+                            <div class="absolute top-0 right-0 w-60 h-60 bg-gradient-to-bl from-violet-600/20 to-transparent rounded-bl-[120px]"></div>
+                            <div class="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-cyan-600/10 to-transparent rounded-tr-[80px]"></div>
                             <div class="relative z-10 flex flex-col md:flex-row items-start gap-8">
-                                <div class="w-16 h-16 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center shrink-0">
+                                <div class="w-16 h-16 rounded-2xl bg-violet-500/20 text-violet-300 flex items-center justify-center shrink-0">
                                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
                                 </div>
                                 <div class="flex-1">
-                                    <span class="px-3 py-1 bg-rose-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-md mb-4 inline-block">Featured Story</span>
-                                    <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-3 tracking-tight">{STORIES_SLUGS[0].title}</h2>
-                                    <p class="text-slate-500 leading-relaxed mb-6">Hear directly from patients about their TMS therapy journey, what to expect, and the outcomes they experienced.</p>
-                                    <span class="text-violet-600 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                                    <span class="px-3 py-1 bg-violet-500/20 text-violet-300 text-[10px] font-bold uppercase tracking-widest rounded-md mb-4 inline-block">Featured Story</span>
+                                    <h2 class="text-2xl lg:text-3xl font-bold text-white group-hover:text-violet-300 transition-colors mb-3 tracking-tight">{STORIES_SLUGS[0].title}</h2>
+                                    <p class="text-slate-400 leading-relaxed mb-6">Hear directly from patients about their TMS therapy journey, what to expect, and the outcomes they experienced.</p>
+                                    <span class="text-violet-300 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
                                         Read Full Story <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                                     </span>
+                                </div>
+                                <div class="hidden lg:flex flex-col gap-3 shrink-0 text-right">
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Jump to</span>
+                                    <span class="text-xs text-slate-400">Depression</span>
+                                    <span class="text-xs text-slate-400">OCD</span>
+                                    <span class="text-xs text-slate-400">PTSD</span>
                                 </div>
                             </div>
                         </div>
                     </a>
                 )}
 
-                <!-- Other Stories -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {STORIES_SLUGS.slice(1).map((item) => (
-                        <a href={`/stories/${item.slug}/`} class="group bg-white rounded-2xl border border-slate-100 p-8 hover:border-violet-200 hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.06)] transition-all duration-300">
-                            <div class="w-12 h-12 rounded-xl bg-violet-50 text-violet-500 flex items-center justify-center mb-5">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                <!-- All Stories Grid -->
+                <div class="mb-14">
+                    <div class="flex items-center gap-3 mb-6">
+                        <h2 class="text-2xl font-bold text-slate-900 tracking-tight" id="all">All Patient Stories</h2>
+                        <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 text-xs font-semibold rounded-full">{STORIES_SLUGS.length}</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        {STORIES_SLUGS.slice(1).map((item, idx) => {
+                            const conditionColors = {
+                                depression: 'from-amber-50 to-orange-50 border-orange-100',
+                                ocd: 'from-blue-50 to-indigo-50 border-blue-100',
+                                ptsd: 'from-emerald-50 to-teal-50 border-emerald-100',
+                                anxiety: 'from-rose-50 to-pink-50 border-rose-100',
+                                burnout: 'from-violet-50 to-purple-50 border-violet-100',
+                                postpartum: 'from-cyan-50 to-blue-50 border-cyan-100',
+                                default: 'from-slate-50 to-white border-slate-100',
+                            };
+                            const conditionIcons = {
+                                depression: 'text-amber-500',
+                                ocd: 'text-blue-500',
+                                ptsd: 'text-emerald-500',
+                                anxiety: 'text-rose-500',
+                                burnout: 'text-violet-500',
+                                postpartum: 'text-cyan-500',
+                                default: 'text-slate-400',
+                            };
+                            const slug = item.slug.toLowerCase();
+                            const condition = Object.keys(conditionColors).find(c => slug.includes(c)) || 'default';
+                            const colors = conditionColors[condition];
+                            const iconColor = conditionIcons[condition];
+                            const bgClass = condition === 'default' ? 'bg-violet-50 border-violet-100' : colors;
+
+                            return (
+                                <a href={`/stories/${item.slug}/`} class={`group bg-gradient-to-br ${bgClass} rounded-2xl border p-7 hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300`}>
+                                    <div class="flex items-start justify-between mb-4">
+                                        <div class={`w-10 h-10 rounded-xl flex items-center justify-center ${iconColor.includes('amber') ? 'bg-amber-100 text-amber-600' : iconColor.includes('blue') ? 'bg-blue-100 text-blue-600' : iconColor.includes('emerald') ? 'bg-emerald-100 text-emerald-600' : iconColor.includes('rose') ? 'bg-rose-100 text-rose-600' : iconColor.includes('violet') ? 'bg-violet-100 text-violet-600' : iconColor.includes('cyan') ? 'bg-cyan-100 text-cyan-600' : 'bg-slate-100 text-slate-600'}`}>
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                                        </div>
+                                        <svg class="w-4 h-4 text-slate-300 group-hover:text-violet-500 group-hover:translate-x-0.5 transition-all shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-2 tracking-tight leading-snug">{item.title}</h3>
+                                    <p class="text-sm text-slate-500 leading-relaxed line-clamp-2">Real patient experience with TMS therapy — challenges, treatment process, and outcomes.</p>
+                                </a>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                <!-- Condition Spotlight -->
+                <div class="mb-14 bg-gradient-to-br from-slate-50 via-white to-violet-50/30 border border-slate-100 rounded-3xl p-10 lg:p-12">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-2 tracking-tight">What Our Stories Cover</h2>
+                    <p class="text-slate-500 mb-8">Each story highlights a different condition, treatment type, or patient demographic. Use these to find experiences most relevant to your situation.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <a href="/stories/?filter=depression" class="group flex items-start gap-3 p-4 bg-white rounded-xl border border-amber-100 hover:border-amber-300 hover:shadow-md transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 group-hover:bg-amber-100 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                             </div>
-                            <h2 class="text-xl font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-3 tracking-tight">{item.title}</h2>
-                            <p class="text-sm text-slate-500 leading-relaxed mb-5">Hear directly from patients about their TMS therapy journey.</p>
-                            <span class="text-violet-600 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                                Read Story <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                            </span>
+                            <div>
+                                <div class="font-semibold text-slate-900 text-sm">Depression</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Major depressive disorder, TRD, bipolar</div>
+                            </div>
                         </a>
-                    ))}
+                        <a href="/stories/?filter=ocd" class="group flex items-start gap-3 p-4 bg-white rounded-xl border border-blue-100 hover:border-blue-300 hover:shadow-md transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-100 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900 text-sm">OCD</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Obsessive-compulsive disorder, Deep TMS</div>
+                            </div>
+                        </a>
+                        <a href="/stories/?filter=ptsd" class="group flex items-start gap-3 p-4 bg-white rounded-xl border border-emerald-100 hover:border-emerald-300 hover:shadow-md transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 group-hover:bg-emerald-100 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900 text-sm">PTSD</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Veterans, trauma, military service</div>
+                            </div>
+                        </a>
+                        <a href="/stories/?filter=anxiety" class="group flex items-start gap-3 p-4 bg-white rounded-xl border border-rose-100 hover:border-rose-300 hover:shadow-md transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 group-hover:bg-rose-100 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900 text-sm">Anxiety</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Generalized anxiety, panic, social</div>
+                            </div>
+                        </a>
+                        <a href="/stories/?filter=postpartum" class="group flex items-start gap-3 p-4 bg-white rounded-xl border border-cyan-100 hover:border-cyan-300 hover:shadow-md transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center shrink-0 group-hover:bg-cyan-100 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900 text-sm">Postpartum</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Perinatal & postpartum depression</div>
+                            </div>
+                        </a>
+                        <a href="/stories/?filter=burnout" class="group flex items-start gap-3 p-4 bg-white rounded-xl border border-violet-100 hover:border-violet-300 hover:shadow-md transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-violet-50 text-violet-600 flex items-center justify-center shrink-0 group-hover:bg-violet-100 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900 text-sm">Burnout</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Work burnout, executive health</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Video Testimonials Placeholder -->
+                <div class="mb-14">
+                    <div class="flex items-center gap-3 mb-6">
+                        <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Video Testimonials</h2>
+                        <span class="px-2.5 py-0.5 bg-red-50 text-red-600 text-xs font-semibold rounded-full">Coming Soon</span>
+                    </div>
+                    <div class="relative bg-slate-900 rounded-3xl overflow-hidden aspect-video flex items-center justify-center group cursor-pointer">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent z-10"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-violet-900/30 to-cyan-900/20"></div>
+                        <div class="relative z-20 text-center">
+                            <div class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                                <svg class="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                            <p class="text-white font-semibold text-lg mb-1">Patient Video Testimonials</p>
+                            <p class="text-slate-400 text-sm">In production — real patients sharing their TMS journey on camera</p>
+                        </div>
+                        <div class="absolute bottom-4 right-4 z-20 flex items-center gap-2">
+                            <span class="px-2.5 py-1 bg-white/10 backdrop-blur-sm border border-white/10 rounded-md text-white text-xs font-medium">4K Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outcomes Snapshot -->
+                <div class="mb-14 overflow-hidden">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 tracking-tight">Clinical Outcomes Overview</h2>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-100">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-100">
+                                    <th class="text-left px-5 py-3.5 font-semibold text-slate-700 text-xs uppercase tracking-wide">Condition</th>
+                                    <th class="text-center px-4 py-3.5 font-semibold text-slate-700 text-xs uppercase tracking-wide">Response Rate</th>
+                                    <th class="text-center px-4 py-3.5 font-semibold text-slate-700 text-xs uppercase tracking-wide">Remission Rate</th>
+                                    <th class="text-center px-4 py-3.5 font-semibold text-slate-700 text-xs uppercase tracking-wide">Avg. Sessions</th>
+                                    <th class="text-center px-4 py-3.5 font-semibold text-slate-700 text-xs uppercase tracking-wide">FDA Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-50">
+                                <tr class="hover:bg-violet-50/30 transition-colors">
+                                    <td class="px-5 py-3.5 font-medium text-slate-800">Major Depressive Disorder</td>
+                                    <td class="text-center px-4 py-3.5 text-emerald-600 font-semibold">50-60%</td>
+                                    <td class="text-center px-4 py-3.5 text-emerald-600 font-semibold">30-40%</td>
+                                    <td class="text-center px-4 py-3.5 text-slate-500">20-36</td>
+                                    <td class="text-center px-4 py-3.5"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">Cleared</span></td>
+                                </tr>
+                                <tr class="hover:bg-violet-50/30 transition-colors">
+                                    <td class="px-5 py-3.5 font-medium text-slate-800">Obsessive-Compulsive Disorder</td>
+                                    <td class="text-center px-4 py-3.5 text-emerald-600 font-semibold">45-55%</td>
+                                    <td class="text-center px-4 py-3.5 text-emerald-600 font-semibold">20-30%</td>
+                                    <td class="text-center px-4 py-3.5 text-slate-500">29-36</td>
+                                    <td class="text-center px-4 py-3.5"><span class="px-2 py-0.5 bg-violet-100 text-violet-700 text-xs font-semibold rounded-full">Breakthrough</span></td>
+                                </tr>
+                                <tr class="hover:bg-violet-50/30 transition-colors">
+                                    <td class="px-5 py-3.5 font-medium text-slate-800">Post-Traumatic Stress (PTSD)</td>
+                                    <td class="text-center px-4 py-3.5 text-amber-600 font-semibold">40-50%</td>
+                                    <td class="text-center px-4 py-3.5 text-amber-600 font-semibold">15-25%</td>
+                                    <td class="text-center px-4 py-3.5 text-slate-500">24-36</td>
+                                    <td class="text-center px-4 py-3.5"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Off-Label</span></td>
+                                </tr>
+                                <tr class="hover:bg-violet-50/30 transition-colors">
+                                    <td class="px-5 py-3.5 font-medium text-slate-800">Smoking Cessation</td>
+                                    <td class="text-center px-4 py-3.5 text-emerald-600 font-semibold">30-40%</td>
+                                    <td class="text-center px-4 py-3.5 text-slate-500">N/A</td>
+                                    <td class="text-center px-4 py-3.5 text-slate-500">13</td>
+                                    <td class="text-center px-4 py-3.5"><span class="px-2 py-0.5 bg-violet-100 text-violet-700 text-xs font-semibold rounded-full">Breakthrough</span></td>
+                                </tr>
+                                <tr class="hover:bg-violet-50/30 transition-colors">
+                                    <td class="px-5 py-3.5 font-medium text-slate-800">Anxiety (comorbid)</td>
+                                    <td class="text-center px-4 py-3.5 text-amber-600 font-semibold">35-45%</td>
+                                    <td class="text-center px-4 py-3.5 text-amber-600 font-semibold">15-25%</td>
+                                    <td class="text-center px-4 py-3.5 text-slate-500">20-36</td>
+                                    <td class="text-center px-4 py-3.5"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Off-Label</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-3">Response = 50%+ improvement on standard rating scales. Remission = near-complete symptom resolution. Rates derived from published clinical trials. Individual outcomes vary. <a href="/treatments/" class="underline hover:text-violet-600">View treatment details</a></p>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="mb-14">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 tracking-tight">Frequently Asked Questions</h2>
+                    <div class="space-y-3">
+                        <details class="group bg-white border border-slate-100 rounded-xl overflow-hidden">
+                            <summary class="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer list-none">
+                                <span class="font-semibold text-slate-800 group-hover:text-violet-600 transition-colors">What is TMS therapy like?</span>
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <div class="px-6 pb-5 text-slate-500 leading-relaxed border-t border-slate-50 pt-4">TMS (transcranial magnetic stimulation) is a non-invasive procedure where a magnetic coil is placed against your scalp to stimulate specific areas of your brain. Sessions typically last 20-40 minutes, during which you sit in a chair while the device delivers magnetic pulses. Most patients describe a tapping or clicking sensation on their scalp. No anesthesia is needed, and you can drive home afterward.</div>
+                        </details>
+                        <details class="group bg-white border border-slate-100 rounded-xl overflow-hidden">
+                            <summary class="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer list-none">
+                                <span class="font-semibold text-slate-800 group-hover:text-violet-600 transition-colors">How long does it take to see results from TMS?</span>
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <div class="px-6 pb-5 text-slate-500 leading-relaxed border-t border-slate-50 pt-4">Most patients begin noticing improvement between weeks 2 and 4 of treatment. TMS works cumulatively — each session builds on the last. A full treatment course typically runs 4-6 weeks (20-30 sessions). Some patients continue improving for several weeks after treatment ends.</div>
+                        </details>
+                        <details class="group bg-white border border-slate-100 rounded-xl overflow-hidden">
+                            <summary class="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer list-none">
+                                <span class="font-semibold text-slate-800 group-hover:text-violet-600 transition-colors">Does TMS actually work for depression?</span>
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <div class="px-6 pb-5 text-slate-500 leading-relaxed border-t border-slate-50 pt-4">Yes. Multiple large clinical trials and real-world studies show TMS is effective for treatment-resistant depression. Approximately 50-60% of patients experience meaningful improvement, and 30-40% achieve full remission. TMS is FDA-cleared for major depressive disorder and has received FDA breakthrough device designation for OCD and smoking cessation.</div>
+                        </details>
+                        <details class="group bg-white border border-slate-100 rounded-xl overflow-hidden">
+                            <summary class="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer list-none">
+                                <span class="font-semibold text-slate-800 group-hover:text-violet-600 transition-colors">Are TMS patient stories medically accurate?</span>
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <div class="px-6 pb-5 text-slate-500 leading-relaxed border-t border-slate-50 pt-4">All patient stories on TMS List are reviewed by licensed medical professionals for accuracy. Individual testimonials represent personal experiences and outcomes vary. Stories marked as "composite" are based on aggregated real patient experiences and do not represent a single individual. We clearly distinguish between documented clinical outcomes and personal testimonials.</div>
+                        </details>
+                        <details class="group bg-white border border-slate-100 rounded-xl overflow-hidden">
+                            <summary class="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer list-none">
+                                <span class="font-semibold text-slate-800 group-hover:text-violet-600 transition-colors">Can I share my own TMS experience?</span>
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <div class="px-6 pb-5 text-slate-500 leading-relaxed border-t border-slate-50 pt-4">Yes. We welcome patient submissions. Share your story with us through our <a href="/contact/" class="text-violet-600 hover:underline">contact form</a> and it may be featured (with your permission) to help others considering TMS. All submissions are reviewed by our editorial team.</div>
+                        </details>
+                    </div>
                 </div>
 
                 <!-- Share Your Story CTA -->
-                <div class="mt-16 bg-gradient-to-br from-violet-50 to-blue-50 border border-violet-100 rounded-2xl p-10 lg:p-14 text-center">
-                    <div class="w-14 h-14 rounded-2xl bg-violet-100 text-violet-600 flex items-center justify-center mx-auto mb-5">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                <div class="relative bg-gradient-to-br from-slate-900 via-violet-950 to-slate-900 rounded-3xl overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-cyan-600/10 pointer-events-none"></div>
+                    <div class="absolute top-0 right-0 w-60 h-60 bg-violet-600/10 rounded-full blur-[80px]"></div>
+                    <div class="absolute bottom-0 left-0 w-60 h-60 bg-cyan-600/10 rounded-full blur-[80px]"></div>
+                    <div class="relative z-10 p-10 lg:p-14 text-center">
+                        <div class="w-14 h-14 rounded-2xl bg-violet-500/20 text-violet-300 flex items-center justify-center mx-auto mb-5">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Share Your TMS Story</h3>
+                        <p class="text-slate-400 max-w-md mx-auto mb-8">Your experience could help someone else make an important decision about their mental health treatment. Every story matters.</p>
+                        <div class="flex flex-wrap gap-4 justify-center">
+                            <a href="/contact/" class="inline-flex items-center px-8 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/30">
+                                Submit Your Story
+                            </a>
+                            <a href="/compare/" class="inline-flex items-center px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors border border-white/10">
+                                Compare TMS Options
+                            </a>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-3">Share Your TMS Story</h3>
-                    <p class="text-slate-500 max-w-md mx-auto mb-8">Your experience could help someone else make an important decision about their mental health treatment.</p>
-                    <a href="/contact/" class="inline-flex items-center px-8 py-3.5 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/20">
-                        Submit Your Story
-                    </a>
+                </div>
+
+                <!-- Related Resources -->
+                <div class="mt-14 pt-8 border-t border-slate-100">
+                    <h2 class="text-xl font-bold text-slate-900 mb-6 tracking-tight">Related Resources</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <a href="/treatments/" class="group p-5 bg-slate-50 rounded-xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all">
+                            <div class="text-xs font-semibold text-violet-600 uppercase tracking-wide mb-2">Treatment Guide</div>
+                            <div class="font-semibold text-slate-800 group-hover:text-violet-600 transition-colors">TMS Treatment Options</div>
+                            <div class="text-xs text-slate-400 mt-1">Deep dive into protocols, devices, and what to expect</div>
+                        </a>
+                        <a href="/insurance/" class="group p-5 bg-slate-50 rounded-xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all">
+                            <div class="text-xs font-semibold text-emerald-600 uppercase tracking-wide mb-2">Coverage</div>
+                            <div class="font-semibold text-slate-800 group-hover:text-violet-600 transition-colors">Insurance & Cost Guide</div>
+                            <div class="text-xs text-slate-400 mt-1">Medicare, BCBS, Aetna, Cigna, and more</div>
+                        </a>
+                        <a href="/compare/" class="group p-5 bg-slate-50 rounded-xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all">
+                            <div class="text-xs font-semibold text-cyan-600 uppercase tracking-wide mb-2">Compare</div>
+                            <div class="font-semibold text-slate-800 group-hover:text-violet-600 transition-colors">TMS vs Other Treatments</div>
+                            <div class="text-xs text-slate-400 mt-1">TMS vs medication, ECT, ketamine, and more</div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>

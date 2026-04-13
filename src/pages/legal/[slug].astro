@@ -8,7 +8,7 @@ import { LEGAL_SLUGS } from '../../utils/seo_slugs';
 export async function getStaticPaths() {
   let entries: any[] = [];
   try {
-    entries = await getCollection('legal');
+    const _debug = await getCollection("legal"); console.log("DEBUG legal entries:", _debug.length, _debug.map(e=>e.id)); entries = _debug('legal');
   } catch {}
 
   const contentPaths = entries.map((entry) => ({

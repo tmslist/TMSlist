@@ -1,11 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <!-- Background circle -->
-  <rect width="128" height="128" rx="28" fill="#7C3AED"/>
-  <!-- Head silhouette with brain spiral -->
-  <path d="M72 20C50 20 32 38 32 58c0 12 5.2 22.8 13.2 30L40 112h48l-5.2-24C90.8 80.8 96 70 96 58c0-20-18-38-24-38z" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="5" stroke-linejoin="round"/>
-  <!-- Brain spiral — TMS coil motif -->
-  <path d="M64 38c-8.8 0-16 6-16 14s7.2 14 16 14 16-6 16-14" stroke="white" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-  <path d="M64 46c-4 0-8 2.8-8 6s4 6 8 6 8-2.8 8-6" stroke="white" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-  <!-- TMS pulse waves -->
-  <path d="M20 46l-8-3.2M20 58H12M20 70l-8 3.2" stroke="white" stroke-width="4.5" stroke-linecap="round" opacity="0.6"/>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#D946EF"/>
+    </linearGradient>
+  </defs>
+  <!-- Background rounded square -->
+  <rect width="128" height="128" rx="24" fill="url(#g)"/>
+  <!-- Magnetic wave arcs -->
+  <path d="M64 24 C 40 24, 22 46, 22 70 C 22 94, 40 104, 64 104" stroke="white" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <path d="M80 34 C 56 34, 42 50, 42 70 C 42 90, 56 96, 80 96" stroke="white" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.7"/>
+  <path d="M96 44 C 78 44, 66 56, 66 70 C 66 84, 78 86, 96 86" stroke="white" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.4"/>
 </svg>

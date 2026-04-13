@@ -227,15 +227,15 @@ export const PUT: APIRoute = async ({ request }) => {
 };
 
 // Delete a question or treatment
-export const DELETE: APIRoute = async ({ request, url }) => {
+export const DELETE: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
   if (!hasRole(session, 'admin')) {
     return json({ error: 'Unauthorized' }, 401);
   }
 
   try {
-    const type = url.searchParams.get('type');
-    const id = url.searchParams.get('id');
+    const body = await request.json();
+    const { id, type } = body;
 
     if (!id) {
       return json({ error: 'ID required' }, 400);

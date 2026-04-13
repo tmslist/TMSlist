@@ -35,6 +35,7 @@ export const GET: APIRoute = async ({ request, url }) => {
 
     const search = url.searchParams.get('search') || '';
     const verified = url.searchParams.get('verified');
+    const filter = url.searchParams.get('filter');
     const limit = Math.max(1, Math.min(parseInt(url.searchParams.get('limit') || '50'), 200));
     const offset = Math.max(0, parseInt(url.searchParams.get('offset') || '0'));
 
@@ -51,6 +52,15 @@ export const GET: APIRoute = async ({ request, url }) => {
     }
     if (verified === 'true') conditions.push(eq(clinics.verified, true));
     if (verified === 'false') conditions.push(eq(clinics.verified, false));
+
+    // Data quality filter shortcuts
+    if (filter === 'no-phone') conditions.push(sql`${clinics.phone} IS NULL`);
+    if (filter === 'no-email') conditions.push(sql`${clinics.email} IS NULL`);
+    if (filter === 'no-description') conditions.push(sql`${clinics.description} IS NULL`);
+    if (filter === 'no-hours') conditions.push(sql`${clinics.openingHours} IS NULL OR array_length(${clinics.openingHours}, 1) IS NULL`);
+    if (filter === 'no-machines') conditions.push(sql`${clinics.machines} IS NULL OR array_length(${clinics.machines}, 1) IS NULL`);
+    if (filter === 'stale') conditions.push(sql`${clinics.updatedAt} < NOW() - INTERVAL '6 months'`);
+    if (filter === 'unverified') conditions.push(eq(clinics.verified, false));
 
     const query = db.select().from(clinics);
     const filtered = conditions.length > 0 ? query.where(and(...conditions)) : query;

@@ -89,53 +89,25 @@ The evidence says yes:
 </div>
 
 
-## How This Protocol Compares
-
-<div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
-  <thead>
-    <tr class="bg-slate-800 text-white">
-      <th class="px-4 py-3 text-left font-semibold">Protocol</th>
-      <th class="px-4 py-3 text-center font-semibold">Session Time</th>
-      <th class="px-4 py-3 text-center font-semibold">Total Course</th>
-      <th class="px-4 py-3 text-center font-semibold">Best For</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
-  </tbody>
-</table>
-</div>
-
 ## Finding a Provider
 
 Not every TMS clinic offers every protocol. When searching, ask specifically which protocols they support and which devices they use. Our [clinic directory](/us/) helps you find experienced providers in your area. For protocol-specific questions, the treating psychiatrist should be able to explain why they recommend one approach over another for your situation.
 
+## Frequently Asked Questions
 
-## How This Protocol Compares
+### How does accelerated TMS compare to standard once-daily treatment in effectiveness?
+Research consistently shows accelerated protocols are non-inferior to standard pacing. The THREE-D trial demonstrated theta burst (3 min) produces the same antidepressant outcomes as standard 37-minute sessions. SAINT's intensive 5-day protocol showed 79% remission rates — significantly higher than the 30-35% remission rate from standard TMS. The compressed protocols leverage the same neuroplasticity mechanisms, just delivered faster.
 
-<div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
-  <thead>
-    <tr class="bg-slate-800 text-white">
-      <th class="px-4 py-3 text-left font-semibold">Protocol</th>
-      <th class="px-4 py-3 text-center font-semibold">Session Time</th>
-      <th class="px-4 py-3 text-center font-semibold">Total Course</th>
-      <th class="px-4 py-3 text-center font-semibold">Best For</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
-  </tbody>
-</table>
-</div>
+### What is the difference between accelerated TMS and the SAINT protocol?
+Accelerated TMS is the umbrella term for any schedule faster than once-daily — including twice-daily sessions over 3-4 weeks or multiple theta burst sessions per day over 2-3 weeks. SAINT is a specific protocol developed at Stanford: 10 iTBS sessions per day for 5 consecutive days, using fMRI-guided neuronavigation for precise targeting. SAINT is the most intensive accelerated approach with the strongest clinical evidence.
 
-## Finding a Provider
+### Is accelerated TMS covered by insurance the same as standard TMS?
+In most cases, yes. Most insurers authorize a specific number of TMS sessions (typically 30-36) and don't dictate the schedule. As long as you're receiving the authorized number of sessions, the compressed timeline doesn't affect coverage. However, verify with your clinic's billing department — some insurers have specific rules about session spacing.
 
-Not every TMS clinic offers every protocol. When searching, ask specifically which protocols they support and which devices they use. Our [clinic directory](/us/) helps you find experienced providers in your area. For protocol-specific questions, the treating psychiatrist should be able to explain why they recommend one approach over another for your situation.
+### Does compressing treatment into a shorter window cause more side effects?
+Multiple daily sessions can increase temporary scalp discomfort and headache compared to single daily sessions, but these side effects are manageable and typically resolve within hours. The clinical benefit of completing treatment faster typically outweighs the temporary increase in minor side effects. Most patients who complete accelerated protocols report the trade-off is worth it.
+
+### Who is the best candidate for accelerated TMS?
+Accelerated protocols are ideal for people with scheduling constraints (work, childcare, school), those traveling from out of town who want to minimize clinic visits, anyone needing rapid symptom relief, and people who struggled to complete standard-length TMS courses in the past. SAINT is particularly suited for severe, treatment-resistant cases where faster intervention is clinically important.
+
+---

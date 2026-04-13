@@ -124,6 +124,22 @@ Participating in a trial doesn't just get you access to treatment. It adds to ev
 
 If you're considering TMS for any condition, check whether there's an active trial in your area. Browse our [treatment guides](/treatments/) for the latest evidence on specific conditions, or find a [TMS provider near you](/us/) who can talk to you about whether a clinical trial makes sense for your situation.
 
+## Frequently Asked Questions
+
+### How do I find active TMS clinical trials near me?
+The best starting point is [ClinicalTrials.gov](https://clinicaltrials.gov) — search for "transcranial magnetic stimulation" plus your condition and filter by recruiting status and location. You can also contact research centers directly (Stanford, Columbia, MUSC, UCLA, Mass General all run TMS trials regularly) and ask their coordinators about upcoming studies. Our [provider directory](/us/) includes academic medical centers that frequently participate in TMS research.
+
+### Are TMS clinical trials free to participate in?
+Most trials cover all treatment costs — that's one of the main incentives for participation. Many also pay for travel and time (typically $25–75 per visit). However, you typically need to cover your own diagnostic evaluations if they exceed the study's screening requirements, and participation doesn't guarantee you'll receive active treatment (sham-controlled trials mean some participants get inactive treatment).
+
+### What is a sham TMS control and why do trials use it?
+Sham TMS mimics the treatment experience without delivering actual magnetic stimulation — a sham coil looks and sounds like the real thing but produces no measurable effect on brain activity. Trials use sham controls because TMS has a strong placebo response; without a sham group, it's impossible to know whether improvements came from the stimulation itself or just from believing you received treatment. In most trials, 50–75% of participants receive real TMS.
+
+### Can I drop out of a clinical trial if it's not working for me?
+Yes — trial participation is always voluntary and you can withdraw at any time without penalty to your ongoing medical care. That said, most trials ask that you commit to the full schedule before enrolling, and missing sessions can disqualify you from the study and compromise the research integrity. Discuss your expectations with the research coordinator before signing up.
+
+### Do TMS clinical trials help advance the field even if the treatment doesn't work for me?
+Absolutely. Every trial participant adds to the evidence base — even negative results tell researchers what doesn't work and why. Your participation contributes to the data that will eventually lead to new FDA clearances, insurance coverage expansion, and better protocols for conditions that currently have limited treatment options.
 
 ---
 

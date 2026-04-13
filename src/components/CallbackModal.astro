@@ -237,15 +237,21 @@
                 body: JSON.stringify({
                     type: 'callback_request',
                     name: formData.get('name'),
+                    email: formData.get('email') || 'noemail@provided.com',
                     phone: formData.get('phone'),
-                    email: formData.get('email') || '',
                     message: `Callback requested. Preferred time: ${formData.get('preferredTime')}. ${formData.get('message') || ''}`,
                     clinicName: formData.get('clinicName'),
                     clinicId: formData.get('clinicId'),
                     sourceUrl: window.location.href,
+                    metadata: {
+                        preferred_time: formData.get('preferredTime'),
+                    },
                 }),
             });
-            if (!res.ok) throw new Error('Failed');
+            if (!res.ok) {
+                const errData = await res.json().catch(() => ({}));
+                throw new Error(errData.error || `Request failed (${res.status})`);
+            }
             cbForm.classList.add('hidden');
             cbSuccess?.classList.remove('hidden');
         } catch {
@@ -329,20 +335,25 @@
 
         try {
             // Save lead first
-            await fetch('/api/leads', {
+            const saveRes = await fetch('/api/leads', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     type: 'whatsapp_inquiry',
                     name: userName,
                     phone: formData.get('phone'),
-                    email: formData.get('email') || '',
+                    email: formData.get('email') || 'noemail@provided.com',
                     message: `WhatsApp inquiry: ${reason}`,
                     clinicName: formData.get('clinicName'),
                     clinicId: formData.get('clinicId'),
                     sourceUrl: window.location.href,
+                    metadata: { reason },
                 }),
             });
+            if (!saveRes.ok) {
+                const errData = await saveRes.json().catch(() => ({}));
+                throw new Error(errData.error || `Request failed (${saveRes.status})`);
+            }
 
             // Open WhatsApp with pre-filled message
             const cleanPhone = clinicPhone.replace(/\D/g, '');

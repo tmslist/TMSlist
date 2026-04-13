@@ -92,53 +92,25 @@ BrainsWay systems are available at hundreds of clinics across the US. When searc
 </div>
 
 
-## How This Protocol Compares
-
-<div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
-  <thead>
-    <tr class="bg-slate-800 text-white">
-      <th class="px-4 py-3 text-left font-semibold">Protocol</th>
-      <th class="px-4 py-3 text-center font-semibold">Session Time</th>
-      <th class="px-4 py-3 text-center font-semibold">Total Course</th>
-      <th class="px-4 py-3 text-center font-semibold">Best For</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
-  </tbody>
-</table>
-</div>
-
 ## Finding a Provider
 
 Not every TMS clinic offers every protocol. When searching, ask specifically which protocols they support and which devices they use. Our [clinic directory](/us/) helps you find experienced providers in your area. For protocol-specific questions, the treating psychiatrist should be able to explain why they recommend one approach over another for your situation.
 
+## Frequently Asked Questions
 
-## How This Protocol Compares
+### What makes deep TMS different from standard rTMS?
+Deep TMS uses an H-shaped coil (BrainsWay) that penetrates deeper and covers a broader brain volume than standard figure-8 coils. Standard rTMS reaches about 2cm deep; H-coils reach approximately 4cm, activating deeper structures like the medial PFC and anterior cingulate. This broader stimulation pattern is what enables deep TMS to hold exclusive FDA clearances for OCD and smoking cessation.
 
-<div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
-  <thead>
-    <tr class="bg-slate-800 text-white">
-      <th class="px-4 py-3 text-left font-semibold">Protocol</th>
-      <th class="px-4 py-3 text-center font-semibold">Session Time</th>
-      <th class="px-4 py-3 text-center font-semibold">Total Course</th>
-      <th class="px-4 py-3 text-center font-semibold">Best For</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
-  </tbody>
-</table>
-</div>
+### Is deep TMS more effective than standard TMS for depression?
+Both achieve comparable response rates for depression (50-60%). Deep TMS may offer an advantage for people who didn't respond to standard rTMS — the deeper reaching stimulation may activate targets that the figure-8 coil misses. For OCD and smoking cessation, deep TMS is the only FDA-cleared TMS option, making it the clear choice for those specific indications.
 
-## Finding a Provider
+### Does deep TMS cost more than standard TMS?
+Not usually. Deep TMS billing codes are the same as standard TMS (90867, 90868, 90869), and most insurers cover it equivalently. The H-coil helmet procedure is similar in duration to standard TMS sessions (18-20 minutes). Some clinics may charge slightly more for the device itself, but insurance coverage generally applies the same way.
 
-Not every TMS clinic offers every protocol. When searching, ask specifically which protocols they support and which devices they use. Our [clinic directory](/us/) helps you find experienced providers in your area. For protocol-specific questions, the treating psychiatrist should be able to explain why they recommend one approach over another for your situation.
+### What does the deep TMS treatment experience feel like?
+The H-coil helmet produces a broader, more diffuse tapping sensation than a standard figure-8 coil — you'll feel it over a wider area of your scalp. Some people find the helmet less familiar initially compared to a handheld coil, but most adjust comfortably within a few sessions. The treatment itself is still well-tolerated, and no anesthesia or sedation is needed.
+
+### Does deep TMS require special training for the provider?
+Yes. BrainsWay systems require specific training and certification, and not every TMS clinic has a BrainsWay device. When searching for a provider, ask specifically whether they offer deep TMS or BrainsWay treatments. The [clinic directory](/us/) includes provider device information where available.
+
+---

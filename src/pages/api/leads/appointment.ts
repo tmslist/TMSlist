@@ -20,7 +20,7 @@ const appointmentSchema = z.object({
   condition: z.string().max(100).optional(),
   insurance: z.string().max(200).optional(),
   message: z.string().max(2000).optional(),
-  consent: z.literal(true),
+  consent: z.boolean(),
 });
 
 export const POST: APIRoute = async ({ request }) => {
@@ -34,7 +34,15 @@ export const POST: APIRoute = async ({ request }) => {
     const parsed = appointmentSchema.safeParse(body);
 
     if (!parsed.success) {
-      return new Response(JSON.stringify({ error: 'Validation failed', details: parsed.error.flatten() }), {
+      const issues = parsed.error.issues.map(i => i.message).join(', ');
+      return new Response(JSON.stringify({ error: 'Validation failed: ' + issues }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (!data.consent) {
+      return new Response(JSON.stringify({ error: 'Consent is required' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -62,8 +70,8 @@ export const POST: APIRoute = async ({ request }) => {
       },
     }).returning();
 
-    // Send notification email to clinic if they have an email
-    const notifyEmail = data.clinicEmail || 'leads@tmslist.com';
+    // Send notification email to clinic and admin
+    const notifyEmail = data.clinicEmail || undefined;
     sendLeadNotification({
       clinicName: data.clinicName,
       clinicEmail: notifyEmail,
@@ -78,6 +86,13 @@ export const POST: APIRoute = async ({ request }) => {
         data.message || '',
       ].filter(Boolean).join('\n'),
       sourceUrl: request.headers.get('referer') || undefined,
+      leadType: 'appointment_request',
+      metadata: {
+        preferred_date: data.preferredDate,
+        preferred_time: data.preferredTime,
+        condition: data.condition,
+        insurance_provider: data.insurance,
+      },
     }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
 
     return new Response(JSON.stringify({ success: true, id: lead[0]?.id }), {

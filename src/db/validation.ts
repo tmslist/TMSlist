@@ -54,7 +54,7 @@ export const reviewSubmitSchema = z.object({
 // ── LEAD VALIDATION ──────────────────────────────
 
 export const leadSubmitSchema = z.object({
-  type: z.enum(['specialist_enquiry', 'lead_magnet', 'newsletter', 'quiz_lead']),
+  type: z.enum(['specialist_enquiry', 'lead_magnet', 'newsletter', 'quiz_lead', 'callback_request', 'whatsapp_inquiry', 'appointment_request', 'contact']).default('specialist_enquiry'),
   name: z.string().min(1).max(100).optional(),
   email: z.string().email(),
   phone: z.string().max(20).optional(),

@@ -78,53 +78,25 @@ Neuronavigation is heading toward becoming the default. The SAINT protocol's rem
 </div>
 
 
-## How This Protocol Compares
-
-<div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
-  <thead>
-    <tr class="bg-slate-800 text-white">
-      <th class="px-4 py-3 text-left font-semibold">Protocol</th>
-      <th class="px-4 py-3 text-center font-semibold">Session Time</th>
-      <th class="px-4 py-3 text-center font-semibold">Total Course</th>
-      <th class="px-4 py-3 text-center font-semibold">Best For</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
-  </tbody>
-</table>
-</div>
-
 ## Finding a Provider
 
 Not every TMS clinic offers every protocol. When searching, ask specifically which protocols they support and which devices they use. Our [clinic directory](/us/) helps you find experienced providers in your area. For protocol-specific questions, the treating psychiatrist should be able to explain why they recommend one approach over another for your situation.
 
+## Frequently Asked Questions
 
-## How This Protocol Compares
+### How much more precise is neuronavigated TMS compared to the standard 5cm rule?
+The 5cm rule places the coil based on population averages — but individual brain anatomy varies significantly. Studies show the actual DLPFC target can be 1–3cm away from where the 5cm rule positions the coil. Neuronavigation using your own MRI eliminates this guesswork and can meaningfully improve targeting precision for each individual patient.
 
-<div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
-  <thead>
-    <tr class="bg-slate-800 text-white">
-      <th class="px-4 py-3 text-left font-semibold">Protocol</th>
-      <th class="px-4 py-3 text-center font-semibold">Session Time</th>
-      <th class="px-4 py-3 text-center font-semibold">Total Course</th>
-      <th class="px-4 py-3 text-center font-semibold">Best For</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
-  </tbody>
-</table>
-</div>
+### What does the MRI process involve for neuronavigated TMS?
+The pre-treatment MRI is a standard structural brain scan — no contrast or special preparation needed. Most imaging centers complete it in 20–30 minutes. The scan is used to build a 3D model of your brain and identify the optimal stimulation target based on your individual anatomy rather than population averages.
 
-## Finding a Provider
+### Does insurance cover neuronavigated TMS?
+The MRI required for neuronavigation may be covered by insurance separately from the TMS procedure. However, the neuronavigation setup fee itself — which can add $1,000–$3,000 to total treatment cost — is typically not covered. Most insurance plans cover the TMS treatment but consider the navigation premium an out-of-pocket enhancement.
 
-Not every TMS clinic offers every protocol. When searching, ask specifically which protocols they support and which devices they use. Our [clinic directory](/us/) helps you find experienced providers in your area. For protocol-specific questions, the treating psychiatrist should be able to explain why they recommend one approach over another for your situation.
+### Is neuronavigated TMS available at most TMS clinics?
+No — neuronavigation is still primarily available at academic medical centers and specialized TMS practices. It requires a TMS device compatible with navigation systems (Nexstim, Localite, BrainSight, or ANT Neuro) plus the MRI infrastructure. Most community-based TMS clinics use the 5cm rule. Ask when booking if neuronavigation is available.
+
+### Can neuronavigation be combined with accelerated or theta burst protocols?
+Yes. Precision targeting and session scheduling are independent decisions. Many providers offering accelerated protocols (SAINT, twice-daily iTBS) use neuronavigation to maximize the benefit of each session. The combination of precision targeting with compressed scheduling represents the leading edge of TMS practice.
+
+---

@@ -14,7 +14,6 @@ interface SiteStats {
 
 interface SettingsData {
   stats: SiteStats;
-  adminEmails: string[];
   settings: Record<string, unknown>;
 }
 
@@ -240,18 +239,6 @@ export default function AdminSettings() {
             <p className="text-xl font-semibold text-gray-900">{data?.stats.users ?? 0}</p>
           </div>
         </div>
-        {data?.adminEmails && data.adminEmails.length > 0 && (
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <p className="text-xs font-medium text-gray-500 mb-1">Admin Emails</p>
-            <div className="flex flex-wrap gap-2">
-              {data.adminEmails.map((email) => (
-                <span key={email} className="px-2 py-1 bg-violet-50 text-violet-700 rounded-md text-xs font-medium">
-                  {email}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
       </Section>
 
       {/* Maintenance Mode */}

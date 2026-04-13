@@ -117,10 +117,22 @@ If insurance doesn't cover TMS, or you'd rather not use it:
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
     <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
-  </div>
-</div>
+## Frequently Asked Questions
 
+### Does Medicare cover TMS therapy?
+Yes. Medicare Part B covers TMS for major depressive disorder nationally, having established coverage in 2014. Medicare Advantage plans typically follow Medicare guidelines but may have additional requirements. The coverage requires a confirmed MDD diagnosis, documented failure of at least 4 prior medication trials at adequate dose and duration, and a PHQ-9 score of 10 or higher at evaluation.
 
+### What does prior authorization for TMS involve?
+Prior authorization is required by nearly all insurance carriers before TMS treatment begins. Your TMS clinic's billing department submits your clinical history — including diagnosis, medication trial documentation, and symptom severity scores — to the insurance company for review. The process typically takes 5–15 business days, though expedited review (24–72 hours) is available for clinically urgent cases. If the authorization is denied, TMS denial overturn rates on formal appeal run 60–70%.
+
+### How do I know if I've had "enough" medication trials for TMS coverage?
+Insurance carriers typically require documentation of 2–4 failed medication trials at therapeutic dose and duration (at least 6–8 weeks per medication). What counts as a "failed" trial: less than 50% improvement in symptoms, or side effects severe enough to prevent adequate dosing. Your prescriber's records documenting each trial — including medication name, dose, duration, and outcome — are what the insurance company needs. If your records are incomplete, contact your prescriber to reconstruct the history.
+
+### Can I use TMS without insurance coverage?
+Yes — many patients pay out of pocket. Self-pay TMS typically costs $200–$400 per session, with a full course (30–36 sessions) running $6,000–$12,000 depending on the clinic and device used. Many clinics offer payment plans, and TMS is HSA/FSA eligible. If insurance coverage is uncertain, scheduling TMS later in the calendar year after other medical expenses have met your deductible can significantly reduce your out-of-pocket cost.
+
+### What if my insurance denies TMS and I can't afford to appeal or self-pay?
+If your insurance denies TMS and appeal isn't feasible, explore clinical trials (which cover treatment costs), community health centers with TMS programs, or advocacy organizations that help patients access neuromodulation treatments. Some clinic networks offer income-based sliding scale programs, and the SSA's vocational rehabilitation programs may help in certain cases.
 
 ---
 

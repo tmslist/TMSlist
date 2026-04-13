@@ -9,37 +9,56 @@ function getResend() {
 }
 
 const FROM = 'TMS List <notifications@mail.tmslist.com>';
+const ADMIN_EMAIL = 'brandingpioneers@gmail.com';
 
 export async function sendLeadNotification(data: {
   clinicName: string;
-  clinicEmail: string;
+  clinicEmail?: string;
   patientName: string;
   patientEmail: string;
   patientPhone?: string;
   message: string;
   sourceUrl?: string;
+  leadType?: string;
+  metadata?: Record<string, unknown>;
 }) {
   const resend = getResend();
   if (!resend) return null;
 
+  const recipients = [ADMIN_EMAIL, ...(data.clinicEmail ? [data.clinicEmail] : [])];
+  const typeLabel = data.leadType ? data.leadType.replace(/_/g, ' ') : 'New enquiry';
+
   return resend.emails.send({
     from: FROM,
-    to: data.clinicEmail,
-    subject: `New Patient Enquiry from ${data.patientName}`,
+    to: recipients,
+    subject: `[TMSList] ${typeLabel} from ${data.patientName}`,
     html: `
       <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
-        <div style="background: #4f46e5; color: white; padding: 24px; border-radius: 12px 12px 0 0;">
-          <h2 style="margin: 0;">New Lead from TMS List</h2>
+        <div style="background: linear-gradient(135deg, #7c3aed, #4f46e5); color: white; padding: 24px; border-radius: 12px 12px 0 0;">
+          <h2 style="margin: 0; font-size: 20px;">New Lead — ${typeLabel}</h2>
+          <p style="margin: 4px 0 0; opacity: 0.8; font-size: 13px;">Received on TMS List</p>
         </div>
         <div style="padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-top: 0; border-radius: 0 0 12px 12px;">
-          <p><strong>Clinic:</strong> ${data.clinicName}</p>
-          <p><strong>Patient:</strong> ${data.patientName}</p>
+          ${data.clinicName && data.clinicName !== 'Unknown Clinic' ? `<p><strong>Clinic:</strong> ${data.clinicName}</p>` : ''}
+          <p><strong>Name:</strong> ${data.patientName}</p>
           <p><strong>Email:</strong> <a href="mailto:${data.patientEmail}">${data.patientEmail}</a></p>
-          ${data.patientPhone ? `<p><strong>Phone:</strong> ${data.patientPhone}</p>` : ''}
-          <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin: 16px 0;">
-            <p style="margin: 0; color: #334155;">${data.message}</p>
+          ${data.patientPhone ? `<p><strong>Phone:</strong> <a href="tel:${data.patientPhone}">${data.patientPhone}</a></p>` : ''}
+          ${data.metadata && Object.keys(data.metadata).length > 0 ? `
+            <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin: 16px 0;">
+              <p style="margin: 0 0 8px; font-weight: 600; color: #334155; font-size: 13px;">Additional Details:</p>
+              ${Object.entries(data.metadata).map(([k, v]) => `<p style="margin: 4px 0; color: #64748b; font-size: 13px;"><strong>${k.replace(/_/g, ' ')}:</strong> ${String(v)}</p>`).join('')}
+            </div>
+          ` : ''}
+          ${data.message ? `
+            <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin: 16px 0;">
+              <p style="margin: 0 0 8px; font-weight: 600; color: #334155; font-size: 13px;">Message:</p>
+              <p style="margin: 0; color: #334155; font-size: 14px; line-height: 1.6;">${data.message.replace(/\n/g, '<br>')}</p>
+            </div>
+          ` : ''}
+          ${data.sourceUrl ? `<p style="color: #94a3b8; font-size: 12px; margin-top: 16px;"><strong>Source:</strong> <a href="${data.sourceUrl}" style="color: #7c3aed;">${data.sourceUrl}</a></p>` : ''}
+          <div style="margin-top: 20px;">
+            <a href="${SITE_URL}/portal/leads" style="display: inline-block; background: #7c3aed; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">View in Admin Panel</a>
           </div>
-          <a href="${SITE_URL}/admin/dashboard" style="display: inline-block; background: #4f46e5; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">View in Dashboard</a>
         </div>
       </div>
     `,

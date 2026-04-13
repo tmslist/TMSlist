@@ -10,7 +10,7 @@ interface User {
   createdAt: string;
 }
 
-const ROLES = ['admin', 'editor', 'owner', 'viewer'];
+const ROLES = ['admin', 'editor', 'clinic_owner', 'viewer'];
 
 const EMPTY_USER = {
   email: '',

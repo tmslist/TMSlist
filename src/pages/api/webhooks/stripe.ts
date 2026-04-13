@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { verifyWebhookSignature } from '../../../utils/stripe';
 import { eq } from 'drizzle-orm';
 import { db } from '../../../db';
-import { clinics, auditLog } from '../../../db/schema';
+import { clinics, subscriptions, auditLog } from '../../../db/schema';
 
 export const prerender = false;
 
@@ -61,12 +61,36 @@ export const POST: APIRoute = async ({ request }) => {
 
       case 'customer.subscription.deleted': {
         const subscription = event.data.object as any;
-        // Find clinic by subscription metadata and remove featured status
         const clinicId = subscription.metadata?.clinicId;
         if (clinicId) {
           await db.update(clinics)
             .set({ isFeatured: false, updatedAt: new Date() })
             .where(eq(clinics.id, clinicId));
+        }
+        // Also cancel the subscription record in our DB
+        if (subscription.id) {
+          await db.update(subscriptions)
+            .set({ status: 'canceled' })
+            .where(eq(subscriptions.stripeSubscriptionId, subscription.id));
+        }
+        break;
+      }
+
+      case 'customer.subscription.updated': {
+        const subscription = event.data.object as any;
+        // Handle plan changes and status updates
+        if (subscription.id) {
+          const newStatus = subscription.status === 'active' ? 'active'
+            : subscription.status === 'past_due' ? 'past_due'
+            : subscription.status === 'canceled' ? 'canceled' : 'active';
+          await db.update(subscriptions)
+            .set({
+              status: newStatus,
+              currentPeriodEnd: subscription.current_period_end
+                ? new Date(subscription.current_period_end * 1000)
+                : undefined,
+            })
+            .where(eq(subscriptions.stripeSubscriptionId, subscription.id));
         }
         break;
       }

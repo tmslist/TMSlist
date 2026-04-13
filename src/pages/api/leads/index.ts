@@ -31,18 +31,18 @@ export const POST: APIRoute = async ({ request }) => {
 
     const lead = await createLead(data);
 
-    // Send email notification (fire-and-forget)
-    if (data.clinicName && data.email) {
-      sendLeadNotification({
-        clinicName: data.clinicName || 'Unknown Clinic',
-        clinicEmail: 'leads@tmslist.com',
-        patientName: data.name || 'Anonymous',
-        patientEmail: data.email,
-        patientPhone: data.phone,
-        message: data.message || '',
-        sourceUrl: data.sourceUrl,
-      }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
-    }
+    // Send email notification to admin (fire-and-forget)
+    sendLeadNotification({
+      clinicName: data.clinicName || 'Unknown Clinic',
+      clinicEmail: undefined,
+      patientName: data.name || 'Anonymous',
+      patientEmail: data.email,
+      patientPhone: data.phone,
+      message: data.message || '',
+      sourceUrl: data.sourceUrl,
+      leadType: data.type,
+      metadata: data.metadata,
+    }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
 
     return new Response(JSON.stringify({ success: true, id: lead?.id }), {
       status: 201,

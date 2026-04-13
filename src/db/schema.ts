@@ -29,6 +29,10 @@ export const leadTypeEnum = pgEnum('lead_type', [
   'lead_magnet',
   'newsletter',
   'quiz_lead',
+  'callback_request',
+  'whatsapp_inquiry',
+  'appointment_request',
+  'contact',
 ]);
 
 export const userRoleEnum = pgEnum('user_role', [
@@ -36,6 +40,7 @@ export const userRoleEnum = pgEnum('user_role', [
   'editor',
   'viewer',
   'clinic_owner',
+  'patient',
 ]);
 
 export const submissionSourceEnum = pgEnum('submission_source', [
@@ -55,6 +60,8 @@ export const subscriptionPlanEnum = pgEnum('subscription_plan', [
   'featured',
   'premium',
   'verified',
+  'pro',
+  'enterprise',
 ]);
 
 export const subscriptionStatusEnum = pgEnum('subscription_status', [
@@ -395,6 +402,9 @@ export const subscriptions = pgTable('subscriptions', {
   stripeSubscriptionId: text('stripe_subscription_id').unique(),
   plan: subscriptionPlanEnum('plan').notNull(),
   status: subscriptionStatusEnum('status').notNull().default('active'),
+  billingCurrency: text('billing_currency').default('usd'),
+  razorpayCustomerId: text('razorpay_customer_id'),
+  razorpaySubscriptionId: text('razorpay_subscription_id'),
   currentPeriodEnd: timestamp('current_period_end', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [

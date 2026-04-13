@@ -124,9 +124,14 @@ import ContentPage from "../layouts/ContentPage.astro";
                     success?.classList.remove('hidden');
                     form.reset();
                 } else {
+                    const errData = await res.json().catch(() => ({}));
+                    if (error) {
+                        error.textContent = errData.error || `Something went wrong (${res.status}). Please try again or email us directly at support@tmslist.com.`;
+                    }
                     error?.classList.remove('hidden');
                 }
             } catch {
+                if (error) error.textContent = 'Network error. Please check your connection and try again.';
                 error?.classList.remove('hidden');
             } finally {
                 btn.disabled = false;

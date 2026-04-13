@@ -48,13 +48,21 @@ export default function AppointmentRequest({ clinicId, clinicName, clinicEmail }
           clinicId,
           clinicName,
           clinicEmail,
-          ...form,
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          preferredDate: form.preferredDate,
+          preferredTime: form.preferredTime,
+          condition: form.condition,
+          insurance: form.insurance,
+          message: form.message,
+          consent: form.consent,
         }),
       });
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || 'Something went wrong');
+        throw new Error(data.error || `Request failed (${res.status})`);
       }
 
       setStatus('success');

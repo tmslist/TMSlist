@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { db } from '../../../db';
 import { siteSettings } from '../../../db/schema';
 import { like } from 'drizzle-orm';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth';
 
 export const prerender = false;
 
@@ -20,6 +21,13 @@ interface CampaignData {
 }
 
 export const GET: APIRoute = async ({ request }) => {
+  const session = getSessionFromRequest(request);
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
   try {
     const rows = await db
       .select()
@@ -44,6 +52,13 @@ export const GET: APIRoute = async ({ request }) => {
 };
 
 export const POST: APIRoute = async ({ request }) => {
+  const session = getSessionFromRequest(request);
+  if (!hasRole(session, 'admin')) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
   try {
     const body = await request.json();
     const { name, slug, headline, description, targetState, targetCondition, ctaText, active } = body;

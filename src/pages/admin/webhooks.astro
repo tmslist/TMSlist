@@ -1,0 +1,115 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import AdminSidebar from "../../components/react/AdminSidebar";
+import { getSessionFromRequest, hasRole } from "../../utils/auth";
+
+const session = getSessionFromRequest(Astro.request);
+if (!session || !hasRole(session, 'admin', 'editor')) {
+  return Astro.redirect("/admin/login");
+}
+---
+
+<Layout title="Webhook Setup Guide">
+  <div class="min-h-screen bg-slate-50">
+    <div class="flex">
+      <AdminSidebar client:load userEmail={session.email} activePage="webhooks" />
+      <main class="flex-1 p-8 max-w-3xl">
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-gray-900 mb-1">Webhook Setup Guide</h1>
+          <p class="text-gray-500">Configure payment provider webhooks to automate subscription billing.</p>
+        </div>
+
+        <!-- Razorpay -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+              <span class="text-blue-600 font-bold text-sm">Rp</span>
+            </div>
+            <div>
+              <h2 class="font-semibold text-gray-900">Razorpay (Indian Market)</h2>
+              <p class="text-xs text-gray-500">Handles ₹1,499/mo Pro and ₹4,999/mo Enterprise subscriptions</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-900 text-white font-mono text-sm rounded-lg p-4 mb-4 overflow-x-auto">
+            <p class="text-slate-400 mb-1">Webhook URL to configure:</p>
+            <p class="text-emerald-400">https://tmslist.com/api/payments/razorpay-webhook</p>
+          </div>
+
+          <div class="space-y-3">
+            <p class="text-sm font-medium text-gray-700">Setup steps in Razorpay Dashboard:</p>
+            <ol class="text-sm text-gray-600 space-y-1 list-decimal list-inside">
+              <li>Go to <strong>Settings → Webhooks</strong></li>
+              <li>Click <strong>Add Webhook</strong></li>
+              <li>Paste the webhook URL above</li>
+              <li>In <strong>Active Events</strong>, select these events:</li>
+            </ol>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 mt-2">
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Required events:</p>
+              <div class="flex flex-wrap gap-2">
+                {['subscription.activated', 'subscription.charged', 'subscription.cancelled', 'subscription.paused'].map(e => (
+                  <span class="px-2 py-1 bg-violet-100 text-violet-700 rounded text-xs font-mono">{e}</span>
+                ))}
+              </div>
+            </div>
+            <ol start={5} class="text-sm text-gray-600 space-y-1 list-decimal list-inside">
+              <li>In <strong>Webhook Secret</strong>, generate and copy the secret</li>
+              <li>Add it to your environment as <code class="bg-slate-100 px-1 rounded text-xs">RAZORPAY_WEBHOOK_SECRET</code></li>
+              <li>Create plans in Razorpay Dashboard and add their IDs to <code class="bg-slate-100 px-1 rounded text-xs">RAZORPAY_PLAN_PRO</code> and <code class="bg-slate-100 px-1 rounded text-xs">RAZORPAY_PLAN_ENTERPRISE</code></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Stripe -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+              <span class="text-purple-600 font-bold text-xs">St</span>
+            </div>
+            <div>
+              <h2 class="font-semibold text-gray-900">Stripe (International)</h2>
+              <p class="text-xs text-gray-500">Handles USD subscriptions for non-Indian providers</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-900 text-white font-mono text-sm rounded-lg p-4 mb-4 overflow-x-auto">
+            <p class="text-slate-400 mb-1">Webhook URL to configure:</p>
+            <p class="text-emerald-400">https://tmslist.com/api/webhooks/stripe</p>
+          </div>
+
+          <div class="space-y-3">
+            <p class="text-sm font-medium text-gray-700">Setup steps in Stripe Dashboard:</p>
+            <ol class="text-sm text-gray-600 space-y-1 list-decimal list-inside">
+              <li>Go to <strong>Developers → Webhooks</strong></li>
+              <li>Add endpoint with the URL above</li>
+              <li>Select these events:</li>
+            </ol>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 mt-2">
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Required events:</p>
+              <div class="flex flex-wrap gap-2">
+                {['checkout.session.completed', 'customer.subscription.updated', 'customer.subscription.deleted'].map(e => (
+                  <span class="px-2 py-1 bg-violet-100 text-violet-700 rounded text-xs font-mono">{e}</span>
+                ))}
+              </div>
+            </div>
+            <ol start={4} class="text-sm text-gray-600 space-y-1 list-decimal list-inside">
+              <li>Copy the <strong>Signing Secret (whsec_...)</strong> to <code class="bg-slate-100 px-1 rounded text-xs">STRIPE_WEBHOOK_SECRET</code></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Test mode notice -->
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-amber-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <div>
+              <p class="font-semibold text-amber-800 text-sm">Use test mode during development</p>
+              <p class="text-amber-700 text-xs mt-1">Both Razorpay and Stripe have test/live modes. Configure with test credentials first, then switch to live once verified. Test webhook payloads can be sent manually from each dashboard.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</Layout>

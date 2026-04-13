@@ -15,6 +15,11 @@ export const prerender = false;
 
 const isDev = import.meta.env.DEV;
 
+const ADMIN_EMAILS = (import.meta.env.ADMIN_EMAILS || process.env.ADMIN_EMAILS || '')
+  .split(',')
+  .map((e: string) => e.trim().toLowerCase())
+  .filter(Boolean);
+
 async function devLogin(email: string) {
   if (!isDev) {
     return new Response(JSON.stringify({ error: 'Dev login is only available in development' }), {
@@ -32,6 +37,10 @@ async function devLogin(email: string) {
 
   const normalizedEmail = email.toLowerCase().trim();
 
+  // Determine role: admin if in ADMIN_EMAILS, else clinic_owner
+  const isAdmin = ADMIN_EMAILS.includes(normalizedEmail);
+  const role = isAdmin ? 'admin' as const : 'clinic_owner' as const;
+
   // Look up or create user
   let user = await getUserByEmail(normalizedEmail);
 
@@ -39,10 +48,16 @@ async function devLogin(email: string) {
     const created = await db.insert(users).values({
       email: normalizedEmail,
       name: normalizedEmail.split('@')[0],
-      role: 'clinic_owner' as const,
+      role,
     }).returning();
     user = created[0];
-    console.log(`[dev-login] Created new user: ${normalizedEmail} (${user.id})`);
+    console.log(`[dev-login] Created new user: ${normalizedEmail} (${user.id}, role: ${role})`);
+  } else {
+    // Ensure existing user has correct admin role if they should be an admin
+    if (isAdmin && user.role !== 'admin') {
+      await db.update(users).set({ role: 'admin' }).where(eq(users.id, user.id));
+      console.log(`[dev-login] Promoted user ${normalizedEmail} to admin role`);
+    }
   }
 
   // Update last login
@@ -54,8 +69,10 @@ async function devLogin(email: string) {
     role: user.role,
   });
 
-  // Redirect to appropriate page
-  const redirectTo = user.clinicId ? '/portal/dashboard' : '/portal/claim';
+  // Redirect to appropriate page based on role
+  const redirectTo = isAdmin
+    ? '/admin/dashboard'
+    : (user.clinicId ? '/portal/dashboard' : '/portal/claim');
 
   return new Response(null, {
     status: 302,

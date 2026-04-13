@@ -227,48 +227,61 @@
         };
 
         try {
-            // Store lead locally (static site - no server)
+            // Send lead to API (fire-and-forget) AND store locally as backup
+            const apiPromise = fetch('/api/leads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: 'lead_magnet',
+                    name: leadData.name,
+                    email: leadData.email,
+                    sourceUrl: leadData.source,
+                    metadata: {
+                        resource: leadData.resource,
+                        subscribed: leadData.subscribe,
+                    },
+                }),
+            }).catch(err => {
+                console.warn('[LeadMagnet] API failed, storing locally:', err);
+            });
+
+            // Also keep localStorage backup
             const localLeads = JSON.parse(localStorage.getItem("tms-leads") || "[]");
             localLeads.push({ ...leadData, id: `lead-${Date.now()}`, timestamp: new Date().toISOString() });
             localStorage.setItem("tms-leads", JSON.stringify(localLeads));
-            const result = { success: true };
 
-            if (result.success) {
-                // Show success and trigger download
-                const resourceName = getResourceName(selectedResource);
+            // Don't wait for API — proceed immediately for UX
+            void apiPromise;
 
-                // Replace form with success message
-                form.innerHTML = `
-                    <div class="text-center py-8 animate-fade-in-up">
-                        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Success!</h3>
-                        <p class="text-gray-600 mb-6">Your <strong>${resourceName}</strong> is downloading now.</p>
-                        <p class="text-sm text-gray-500">Check your email for more helpful TMS resources.</p>
-                        <button onclick="closeModal()" class="mt-6 px-6 py-2 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors">
-                            Close Window
-                        </button>
+            // Show success and trigger download
+            const resourceName = getResourceName(selectedResource);
+
+            // Replace form with success message
+            form.innerHTML = `
+                <div class="text-center py-8 animate-fade-in-up">
+                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
                     </div>
-                `;
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Success!</h3>
+                    <p class="text-gray-600 mb-6">Your <strong>${resourceName}</strong> is downloading now.</p>
+                    <p class="text-sm text-gray-500">Check your email for more helpful TMS resources.</p>
+                    <button onclick="closeModal()" class="mt-6 px-6 py-2 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors">
+                        Close Window
+                    </button>
+                </div>
+            `;
 
-                // Trigger PDF download
-                const downloadUrl = `/downloads/${selectedResource}.pdf`;
-                const link = document.createElement("a");
-                link.href = downloadUrl;
-                link.download = `${selectedResource}.pdf`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-
-                // Download initiated
-            } else {
-                throw new Error(result.message || "Submission failed");
-            }
-        } catch (error) {
-            // Lead capture failed
+            // Trigger PDF download
+            const downloadUrl = `/downloads/${selectedResource}.pdf`;
+            const link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = `${selectedResource}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch {
             showToast("Something went wrong. Please try again.");
             submitBtn.disabled = false;
             submitBtn.innerText = originalBtnText;
