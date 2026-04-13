@@ -267,6 +267,8 @@ export const reviews = pgTable('reviews', {
   helpfulCount: integer('helpful_count').default(0).notNull(),
   unhelpfulCount: integer('unhelpful_count').default(0).notNull(),
   source: text('source').default('tmslist'),
+  ownerResponse: text('owner_response'),
+  ownerResponseAt: timestamp('owner_response_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
 }, (table) => [

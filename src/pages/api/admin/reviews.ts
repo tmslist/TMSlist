@@ -34,7 +34,8 @@ export const GET: APIRoute = async ({ request }) => {
 
     const rowsResult = await db.execute(sql`
       SELECT id, clinic_id, user_id, user_name, user_email, rating, title, body,
-             source, verified, approved, helpful_count, unhelpful_count, created_at, clinic_name, clinic_slug
+             source, verified, approved, helpful_count, unhelpful_count, created_at,
+             clinic_name, clinic_slug, owner_response, owner_response_at
       FROM reviews ${sql.raw(where)} ${sql.raw(orderBy)} ${sql.raw(limitOffset)}
     `);
 
@@ -55,6 +56,8 @@ export const GET: APIRoute = async ({ request }) => {
       createdAt: r.created_at,
       clinicName: r.clinic_name,
       clinicSlug: r.clinic_slug,
+      ownerResponse: r.owner_response ?? null,
+      ownerResponseAt: r.owner_response_at ?? null,
     })) ?? [];
 
     const pendingRows = await db.execute(sql`SELECT count(*) as count FROM reviews WHERE approved = false`);

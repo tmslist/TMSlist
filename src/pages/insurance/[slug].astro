@@ -96,7 +96,7 @@ const faqSchema = faqs && faqs.length > 0 ? JSON.stringify({
     { name: title, url: `/insurance/${slug}/` },
   ]}
 >
-  {Content ? <Content /> : null}
+  {Content && <Content />}
 </InsurancePage>
 
 {faqSchema && (
