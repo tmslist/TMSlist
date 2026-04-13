@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { searchClinics } from '../../../db/queries';
 import { clinicSearchSchema } from '../../../db/validation';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+import { getCached, setCache } from '../../../utils/redis';
 
 export const prerender = false;
 
@@ -26,7 +27,22 @@ export const GET: APIRoute = async ({ request, url }) => {
       });
     }
 
+    // Cache by normalized params string
+    const cacheKey = `search:${JSON.stringify(parsed.data)}`;
+    const cached = await getCached<{ data: unknown[]; count: number }>(cacheKey);
+    if (cached) {
+      return new Response(JSON.stringify(cached), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Cache': 'HIT',
+          'Cache-Control': 'public, max-age=300, s-maxage=3600, stale-while-revalidate=600',
+        },
+      });
+    }
+
     const results = await searchClinics(parsed.data);
+    await setCache(cacheKey, { data: results, count: results.length }, 300);
 
     return new Response(JSON.stringify({ data: results, count: results.length }), {
       status: 200,

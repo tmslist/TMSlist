@@ -8,6 +8,7 @@ import {
     COUNTRY_FLAGS,
 } from "../utils/dataHelpers";
 import { getReviewSnippet, getSnippetSentiment } from "../utils/reviewSnippets";
+import SaveClinicButton from "./react/SaveClinicButton";
 
 interface Props {
     clinic: Clinic;
@@ -31,6 +32,32 @@ const sentiment = getSnippetSentiment(rating);
 
 // Trust Signals (Mocked for Demo Purpose based on verified status)
 const isVerified = clinic.verified;
+
+// Availability badges derived from clinic data
+const availability = clinic.availability || {};
+const isNewlyVerified = isVerified && (() => {
+    const created = new Date(clinic.createdAt);
+    const twoWeeksAgo = new Date();
+    twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+    return created > twoWeeksAgo;
+})();
+const isAvailableThisWeek = availability.same_week_available || availability.accepting_new_patients;
+const isAcceptingNew = availability.accepting_new_patients !== false;
+const waitTime = availability.wait_time_weeks;
+
+// Compute trust badges
+const trustBadges: { label: string; class: string; icon: string }[] = [];
+if (isAcceptingNew && isAvailableThisWeek) {
+    trustBadges.push({ label: 'Available This Week', class: 'bg-emerald-50 text-emerald-700 border-emerald-100', icon: 'check-circle' });
+}
+if (isNewlyVerified) {
+    trustBadges.push({ label: 'Newly Verified', class: 'bg-violet-50 text-violet-700 border-violet-100', icon: 'sparkles' });
+}
+if (isAcceptingNew && !isAvailableThisWeek && waitTime) {
+    trustBadges.push({ label: `Wait: ${waitTime}wk`, class: 'bg-amber-50 text-amber-700 border-amber-100', icon: 'clock' });
+} else if (isAcceptingNew && !isAvailableThisWeek) {
+    trustBadges.push({ label: 'Accepting New Patients', class: 'bg-blue-50 text-blue-700 border-blue-100', icon: 'user-plus' });
+}
 ---
 
 <article
@@ -91,6 +118,28 @@ const isVerified = clinic.verified;
                     </span>
                 )
             }
+            {trustBadges.map(badge => (
+                <span class={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur text-[10px] font-semibold shadow-sm border ${badge.class}`}>
+                    {badge.icon === 'check-circle' && (
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    )}
+                    {badge.icon === 'sparkles' && (
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"/></svg>
+                    )}
+                    {badge.icon === 'clock' && (
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    )}
+                    {badge.icon === 'user-plus' && (
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+                    )}
+                    {badge.label}
+                </span>
+            ))}
+        </div>
+
+        <!-- Save Button (top-right) -->
+        <div class="absolute top-4 right-4">
+            <SaveClinicButton clinicId={clinic.id} clinicName={clinic.name} client:idle />
         </div>
 
         <!-- Rating Overlay & Location -->
