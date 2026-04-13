@@ -22,6 +22,9 @@ const technology = [
 ];
 const protocols = PROTOCOL_SLUGS;
 const comparisons = COMPARE_SLUGS;
+const deviceComparisons = comparisons.filter(
+  s => s.slug.includes('neurostar') || s.slug.includes('brainsway') || s.slug.includes('magventure') || s.slug.includes('magstim') || s.slug.includes('cloudtms') || s.slug.includes('nexstim') || s.slug.includes('apollo') || s.slug.includes('deep-tms'),
+);
 ---
 
 <header
@@ -1021,6 +1024,12 @@ const comparisons = COMPARE_SLUGS;
                                     class="block text-xs font-semibold text-sky-700 hover:text-sky-800 transition-colors"
                                     >NeuroStar vs BrainsWay</a
                                 >
+                                {deviceComparisons.slice(0, 4).filter(d => d.slug !== 'neurostar-vs-brainsway').map(d => (
+                                    <a
+                                        href={`/compare/${d.slug}/`}
+                                        class="block text-xs text-sky-600 hover:text-sky-800 transition-colors"
+                                    >{d.title}</a>
+                                ))}
                                 <a
                                     href="/compare/"
                                     class="block text-xs font-semibold text-sky-700 hover:text-sky-800 transition-colors"
