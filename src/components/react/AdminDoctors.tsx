@@ -108,6 +108,9 @@ export default function AdminDoctors() {
   const [newDoctor, setNewDoctor] = useState<Omit<Doctor, 'id'>>(EMPTY_DOCTOR);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [bulkDeleting, setBulkDeleting] = useState(false);
+  const [showBulkDeleteModal, setShowBulkDeleteModal] = useState(false);
   const limit = 25;
 
   const showToast = useCallback((type: 'success' | 'error', message: string) => {
@@ -153,6 +156,11 @@ export default function AdminDoctors() {
 
   useEffect(() => { fetchDoctors(); }, [fetchDoctors]);
   useEffect(() => { fetchClinics(); }, [fetchClinics]);
+
+  // Clear selection on page/filter change
+  useEffect(() => {
+    setSelected(new Set());
+  }, [page, search, clinicFilter]);
 
   function handleExpand(id: string) {
     if (expandedId === id) {
@@ -222,13 +230,87 @@ export default function AdminDoctors() {
       showToast('success', 'Doctor deleted');
       setDeleteConfirm(null);
       setExpandedId(null);
+      setSelected(prev => { const n = new Set(prev); n.delete(id); return n; });
       fetchDoctors();
     } catch (err) {
       showToast('error', err instanceof Error ? err.message : "An error occurred");
     }
   }
 
+  // ---- Bulk selection ----
+  function toggleAll() {
+    if (selected.size === doctors.length) {
+      setSelected(new Set());
+    } else {
+      setSelected(new Set(doctors.map(d => d.id)));
+    }
+  }
+
+  function toggleOne(id: string) {
+    setSelected(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  // ---- Bulk delete ----
+  async function bulkDelete() {
+    const ids = Array.from(selected);
+    setBulkDeleting(true);
+    let deleted = 0;
+    let failed = 0;
+    for (const id of ids) {
+      try {
+        const res = await fetch('/api/admin/doctors', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id }),
+        });
+        if (res.ok) deleted++;
+        else failed++;
+      } catch {
+        failed++;
+      }
+    }
+    setSelected(new Set());
+    setShowBulkDeleteModal(false);
+    setBulkDeleting(false);
+    if (failed === 0) {
+      showToast('success', `${deleted} doctor${deleted !== 1 ? 's' : ''} deleted`);
+      fetchDoctors();
+    } else {
+      showToast('error', `${deleted} deleted, ${failed} failed.`);
+    }
+  }
+
+  // ---- CSV export ----
+  function exportCSV() {
+    const rows = selected.size > 0
+      ? doctors.filter(d => selected.has(d.id))
+      : doctors;
+    const header = ['Name', 'Credential', 'Clinic', 'Specialties', 'Bio Status'];
+    const lines = rows.map(d => [
+      `"${(d.name || '').replace(/"/g, '""')}"`,
+      `"${(d.credential || '').replace(/"/g, '""')}"`,
+      `"${(d.clinicName || '').replace(/"/g, '""')}"`,
+      `"${(d.specialties || []).join('; ').replace(/"/g, '""')}"`,
+      d.bio ? 'Has bio' : 'No bio',
+    ].join(','));
+    const csv = [header.join(','), ...lines].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `doctors-export-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
   const totalPages = Math.ceil(total / limit);
+  const allSelected = doctors.length > 0 && selected.size === doctors.length;
+  const someSelected = selected.size > 0 && !allSelected;
 
   function renderDoctorForm(
     data: Partial<Doctor> | Omit<Doctor, 'id'>,
@@ -412,13 +494,16 @@ export default function AdminDoctors() {
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-800">
+        <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-800 flex items-center justify-between">
           {error}
           <button onClick={() => setError('')} className="ml-3 text-red-500 hover:text-red-700 text-xs font-medium">Dismiss</button>
         </div>
       )}
 
-      <div className="text-sm text-gray-500">{total} doctor{total !== 1 ? 's' : ''} found</div>
+      <div className="text-sm text-gray-500">
+        {total} doctor{total !== 1 ? 's' : ''} found
+        {selected.size > 0 && <span className="ml-2 font-medium text-violet-600">{selected.size} selected</span>}
+      </div>
 
       {/* Table */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -426,6 +511,15 @@ export default function AdminDoctors() {
           <table className="w-full text-left">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">
+                <th className="px-4 py-3 text-left">
+                  <input
+                    type="checkbox"
+                    checked={allSelected}
+                    ref={el => { if (el) el.indeterminate = someSelected; }}
+                    onChange={toggleAll}
+                    className="w-4 h-4 rounded border-gray-300 text-violet-600 focus:ring-violet-500 cursor-pointer"
+                  />
+                </th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Name</th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Credential</th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Clinic</th>
@@ -435,15 +529,23 @@ export default function AdminDoctors() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {loading ? (
-                <tr><td colSpan={5} className="px-4 py-12 text-center text-gray-400"><div class="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2"></div><br/>Loading</td></tr>
+                <tr><td colSpan={6} className="px-4 py-12 text-center text-gray-400"><div className="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2"></div><br/>Loading</td></tr>
               ) : doctors.length === 0 ? (
-                <tr><td colSpan={5} className="px-4 py-8 text-center text-gray-500">No doctors found.</td></tr>
+                <tr><td colSpan={6} className="px-4 py-8 text-center text-gray-500">No doctors found.</td></tr>
               ) : doctors.map((doc) => (
                 <React.Fragment key={doc.id}>
                   <tr
-                    className={`hover:bg-gray-50 transition-colors cursor-pointer ${expandedId === doc.id ? 'bg-violet-50/50' : ''}`}
+                    className={`hover:bg-gray-50 transition-colors cursor-pointer ${selected.has(doc.id) ? 'bg-violet-50/40' : ''} ${expandedId === doc.id ? 'bg-violet-50/50' : ''}`}
                     onClick={() => handleExpand(doc.id)}
                   >
+                    <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                      <input
+                        type="checkbox"
+                        checked={selected.has(doc.id)}
+                        onChange={() => toggleOne(doc.id)}
+                        className="w-4 h-4 rounded border-gray-300 text-violet-600 focus:ring-violet-500 cursor-pointer"
+                      />
+                    </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
                         {doc.imageUrl ? (
@@ -468,8 +570,8 @@ export default function AdminDoctors() {
                         )}
                       </div>
                     </td>
-                    <td className="px-4 py-3">
-                      <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+                    <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                      <div className="flex gap-2">
                         <button
                           onClick={() => handleExpand(doc.id)}
                           className="px-3 py-1.5 bg-violet-50 text-violet-700 text-xs font-medium rounded-lg hover:bg-violet-100 transition-colors"
@@ -504,7 +606,7 @@ export default function AdminDoctors() {
                   </tr>
                   {expandedId === doc.id && (
                     <tr>
-                      <td colSpan={5} className="bg-gray-50 border-t border-gray-200">
+                      <td colSpan={6} className="bg-gray-50 border-t border-gray-200">
                         {renderDoctorForm(
                           editData,
                           (updates) => setEditData((prev) => ({ ...prev, ...updates })),
@@ -543,6 +645,85 @@ export default function AdminDoctors() {
           </div>
         )}
       </div>
+
+      {/* Bulk Action Bar */}
+      {selected.size > 0 && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-4 bg-gray-900 text-white px-6 py-3 rounded-2xl shadow-2xl">
+          <span className="text-sm font-medium">
+            {selected.size} selected
+          </span>
+          <div className="w-px h-5 bg-gray-600" />
+          <button
+            onClick={exportCSV}
+            className="flex items-center gap-1.5 text-sm text-gray-200 hover:text-white transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Export CSV
+          </button>
+          <button
+            onClick={() => setShowBulkDeleteModal(true)}
+            className="flex items-center gap-1.5 text-sm text-red-400 hover:text-red-300 transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            Delete Selected
+          </button>
+          <div className="w-px h-5 bg-gray-600" />
+          <button
+            onClick={() => setSelected(new Set())}
+            className="text-sm text-gray-400 hover:text-white transition-colors"
+            aria-label="Clear selection"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Bulk Delete Confirmation Modal */}
+      {showBulkDeleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40" onClick={() => !bulkDeleting && setShowBulkDeleteModal(false)} />
+          <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+                <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">Delete {selected.size} {selected.size === 1 ? 'doctor' : 'doctors'}?</h3>
+                <p className="text-sm text-gray-500 mt-0.5">This cannot be undone.</p>
+              </div>
+            </div>
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={() => setShowBulkDeleteModal(false)}
+                disabled={bulkDeleting}
+                className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={bulkDelete}
+                disabled={bulkDeleting}
+                className="flex-1 px-4 py-2.5 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                {bulkDeleting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Deleting...
+                  </>
+                ) : 'Delete'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Add Doctor Modal */}
       {showAddModal && (

@@ -707,6 +707,24 @@ export const jobApplications = pgTable('job_applications', {
   index('idx_job_applications_created').on(table.createdAt),
 ]);
 
+// ── PAGE CONTENT (CMS) ──────────────────────────────────────────────────────
+
+export const pageContent = pgTable('page_content', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  page: text('page').notNull(),       // e.g. 'homepage', 'about', 'faq', 'contact'
+  section: text('section').notNull(), // e.g. 'hero', 'features', 'cta', 'pricing_section'
+  title: text('title'),
+  content: text('content'),           // markdown or HTML
+  imageUrl: text('image_url'),
+  order: integer('order').default(0).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+}, (table) => [
+  uniqueIndex('idx_page_content_unique').on(table.page, table.section),
+  index('idx_page_content_page').on(table.page),
+  index('idx_page_content_order').on(table.page, table.order),
+]);
+
 // ── TYPE EXPORTS ──────────────────────────────────
 
 export type Clinic = typeof clinics.$inferSelect;
