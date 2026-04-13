@@ -39,7 +39,7 @@ export const GET: APIRoute = async ({ request }) => {
       db.select({ count: sql<number>`count(*)` }).from(treatments),
       db.select({ count: sql<number>`count(*)` }).from(users),
       db.select({ count: sql<number>`count(*)` }).from(clinics).where(sql`${clinics.verified} = true`),
-      db.select({ count: sql<number>`count(*)` }).from(reviews).where(sql`${reviews.approved} = false`),
+      db.select({ count: sql<number>`count(*)` }).from(reviews).where(sql`${reviews.verified} = false`),
     ]);
 
     // Fetch all site settings

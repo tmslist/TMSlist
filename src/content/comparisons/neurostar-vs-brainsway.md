@@ -1,178 +1,115 @@
 ---
-title: "NeuroStar vs BrainsWay Deep TMS"
-description: "Comparing the two most popular TMS devices — NeuroStar's figure-8 coil vs BrainsWay's H-coil. Session time, efficacy, FDA clearances, and which clinics use which."
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+title: "NeuroStar vs BrainsWay Deep TMS: Complete Comparison"
+description: "How does NeuroStar's figure-8 coil TMS compare to BrainsWay's H-coil deep TMS? Session length, FDA clearances, OCD treatment, efficacy, and which clinics use which."
+author: "TMS List Editorial Team"
+publishDate: 2026-03-15
 treatmentA: "NeuroStar"
 treatmentB: "BrainsWay"
-verdict: "Both are FDA-cleared and effective. NeuroStar uses a focused figure-8 coil (precise targeting), while BrainsWay uses an H-coil (broader, deeper stimulation). NeuroStar is more widely available; BrainsWay is the only option cleared for OCD."
+image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+verdict: "Both are FDA-cleared and effective for depression. NeuroStar uses a focused figure-8 coil; BrainsWay uses an H-coil with deeper penetration. NeuroStar is more widely available and holds anxious depression clearance. BrainsWay is the only TMS device with OCD clearance."
+verdictWinner: "neurostar"
 faqs:
-  - question: "Which device has better outcomes?"
-    answer: "Head-to-head studies show comparable depression outcomes. The choice often depends on what conditions you're treating (BrainsWay for OCD) and clinic availability."
-  - question: "Does BrainsWay hurt more?"
+  - question: "Which device has better outcomes for depression?"
+    answer: "Head-to-head studies are limited, but meta-analyses suggest comparable efficacy for depression. The choice often depends on what conditions you're treating and clinic availability."
+  - question: "Does BrainsWay hurt more than NeuroStar?"
     answer: "Some patients report the H-coil sensation is more diffuse than the focused figure-8 coil. Neither is considered painful by most patients after the first few sessions."
+  - question: "Which should I choose for OCD?"
+    answer: "BrainsWay. It is the only TMS device with dedicated FDA clearance for OCD, making insurance coverage and clinical protocols more straightforward."
+  - question: "Does insurance cover BrainsWay and NeuroStar?"
+    answer: "Yes. Most major insurers cover TMS regardless of the device. Coverage is based on diagnosis and medication history, not the specific brand."
 ---
 
-## The two biggest names in TMS
+NeuroStar and BrainsWay are the two most widely encountered TMS systems in the US market. They use fundamentally different coil designs — NeuroStar's figure-8 coil is precise and focused; BrainsWay's H-coil reaches deeper structures. Comparing them means understanding what you're treating, what your insurance covers, and what's available near you.
 
-If you're looking into TMS, you'll run into these two names fast. NeuroStar and BrainsWay own the US market, but they work in very different ways.
+## What You'll Learn
 
-NeuroStar uses a focused figure-8 coil — think of it like a spotlight aimed at one specific brain area. BrainsWay uses a patented H-coil that reaches wider and deeper, more like a floodlight. Same goal, different approach.
+- How figure-8 coil (NeuroStar) and H-coil (BrainsWay) designs differ
+- FDA clearances for each system
+- Efficacy for depression and OCD
+- Session experience and scheduling
+- Cost and insurance considerations
 
-### Technology
+## The Core Difference: Coil Design
 
-**NeuroStar Advanced Therapy:**
-- Figure-8 coil design — focuses magnetic pulses on a small, precise area (~2cm depth)
-- Targets the left DLPFC specifically
-- Standard protocol: 19 minutes per session (with theta burst)
-- Most widely installed TMS system in the US
+**NeuroStar** uses a proprietary iron-core figure-8 coil that focuses magnetic pulses on a precise, shallow area of the prefrontal cortex (~2cm depth). Think of it like a spotlight — highly targeted, efficient stimulation of a specific region.
 
-**BrainsWay Deep TMS:**
-- H-coil design — stimulates wider and deeper brain regions (~4cm depth)
-- Can target multiple areas at once
-- Standard protocol: 20 minutes per session
-- Helmet-based design (the coil is built right into a padded helmet)
+**BrainsWay** uses a patented H-coil design built into a helmet that stimulates wider and deeper brain regions (~4cm depth). Think of it like a floodlight — broader stimulation that reaches subcortical structures more easily.
 
-### FDA clearances
+The depth advantage is most relevant for OCD, where the anterior cingulate cortex — a deeper structure — is a primary treatment target.
 
-| Condition | NeuroStar | BrainsWay |
+## FDA Clearances
+
+| Indication | NeuroStar | BrainsWay |
 |-----------|-----------|-----------|
-| Depression (MDD) | 2008 | 2013 |
-| OCD | No | 2018 |
-| Smoking cessation | No | 2020 |
-| Anxious depression | 2021 | No |
+| MDD Depression | 2008 (first ever) | 2013 |
+| OCD | No (off-label) | 2018 (only device) |
+| Smoking Cessation | Yes | 2020 |
+| Anxious Depression | 2021 | No |
 
-BrainsWay has more FDA clearances across conditions. NeuroStar has the longest track record for depression — it was the first TMS device cleared, period.
+BrainsWay leads in OCD clearance — it's the only device with that specific indication. NeuroStar has a unique anxious depression clearance and first-to-market advantage for depression.
 
-### Efficacy for depression
+## Efficacy for Depression
 
-Both devices have strong clinical data behind them:
+Both devices have strong clinical data:
 
-- **NeuroStar:** 83% of patients showed improvement in their real-world outcomes registry; 62% achieved response
-- **BrainsWay:** 75% response rate in their pivotal trial; deeper stimulation may engage reward circuits more effectively
+- **NeuroStar:** 83% of patients showed improvement in real-world outcomes registry; 62% achieved response
+- **BrainsWay:** 75% response rate in pivotal trials; H-coil may engage reward circuits more effectively
 
-Here's the honest truth: head-to-head studies are limited. Meta-analyses suggest comparable efficacy for depression. The choice often comes down to what you're treating and what your provider prefers.
+Head-to-head comparisons are limited. Meta-analyses suggest comparable efficacy for standard depression treatment. For OCD, BrainsWay's specific indication and trial data give it a clear edge.
 
-### Session experience
+## Session Experience
 
 **NeuroStar:**
-- Sit in a reclining chair
-- Small coil positioned against your left forehead
-- Tapping sensation at the treatment site
-- 19 minutes with TBS protocol, 37 minutes standard
-- You can watch TV or listen to music
+- 19 minutes with theta burst (Express TMS) protocol
+- 37 minutes with standard protocol
+- Small coil positioned against left forehead
+- You can watch TV or listen to music during treatment
+- Drive yourself home afterward
 
 **BrainsWay:**
-- Sit in a chair with a padded helmet on
-- Broader sensation across your forehead area
-- 20 minutes per session
-- Some people find the helmet a bit awkward at first — you get used to it
+- 20 minutes per session (deep TMS protocol)
+- Helmet-based coil system
+- Broader, more diffuse sensation
+- Some patients find the helmet initially awkward
 
-### Cost
+## Which Should You Choose?
 
-Both cost roughly the same:
-- $200-$400 per session
-- $6,000-$12,000 for a full treatment course
-- Insurance doesn't care which device you use — coverage is for "TMS" regardless of brand
-
-### Which should you choose?
-
-**Consider NeuroStar if:**
+**Choose NeuroStar if:**
 - Your primary diagnosis is depression
-- You want the shortest session time (19 min with TBS)
-- You prefer the most widely available option (easier to find a provider near you)
+- You want the shortest session time (19 min theta burst)
+- You want the most widely available option with easiest insurance coverage
+- You have anxious depression
 
-**Consider BrainsWay if:**
-- You have OCD (it's the only FDA-cleared deep TMS device for OCD)
+**Choose BrainsWay if:**
+- You have OCD — it's the only FDA-cleared TMS option for OCD
 - You want to quit smoking (FDA-cleared for cessation)
+- You've already tried standard rTMS without adequate response
 - Your psychiatrist recommends deeper stimulation
-- You've already tried standard rTMS and it didn't work well enough
 
-### The bottom line
+## The Bottom Line
 
-Both are effective, FDA-cleared options. And honestly? Your choice of device matters less than finding an experienced provider who can dial in the treatment parameters for your specific situation. Ask your TMS clinic which device they use and why. A good provider should be able to explain their reasoning without sounding like a sales pitch.
+Both are effective, FDA-cleared, and insurance-covered. Your provider's expertise matters more than which machine they own. For OCD specifically, BrainsWay is the clear choice. For depression without OCD, NeuroStar's wider availability and Express TMS protocol make it the practical first option for most patients.
 
+Search for [TMS providers](/us/) or explore other [device comparisons](/compare/).
 
 ---
 
-<div class="not-prose my-8 bg-blue-50 border border-blue-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-blue-900 mb-3 text-base">Related Comparisons</h4>
-  <div class="grid grid-cols-2 gap-2">
-    <a href="/compare/tms-vs-ect/" class="text-sm text-blue-700 hover:underline">TMS vs. ECT</a>
-    <a href="/compare/tms-vs-antidepressants/" class="text-sm text-blue-700 hover:underline">TMS vs. Medication</a>
-    <a href="/compare/tms-vs-ketamine/" class="text-sm text-blue-700 hover:underline">TMS vs. Ketamine</a>
-    <a href="/compare/neurostar-vs-brainsway/" class="text-sm text-blue-700 hover:underline">NeuroStar vs. BrainsWay</a>
-  </div>
+<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
+  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-violet-800">
+    <li>BrainsWay is the only TMS device with FDA clearance for OCD</li>
+    <li>NeuroStar Express TMS offers 19-minute theta burst sessions</li>
+    <li>Head-to-head depression efficacy is comparable</li>
+    <li>NeuroStar has wider US availability and easier insurance coverage</li>
+    <li>Choose based on your diagnosis (OCD vs depression) and availability</li>
+  </ul>
 </div>
 
 <div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
-  <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic</h3>
+  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers by device, location, and insurance coverage.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>
-
-
-## Making Your Decision
-
-Choosing between treatments is personal. The right option depends on your specific diagnosis, treatment history, insurance coverage, schedule, and preferences. Here's a framework:
-
-<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
-    <h4 class="font-semibold text-emerald-900 text-sm mb-2">When TMS May Be Better</h4>
-    <ul class="text-xs text-emerald-700 space-y-1 mb-0 list-disc pl-4">
-      <li>You want an FDA-cleared, insurance-covered treatment</li>
-      <li>No sedation, no cognitive effects, drive yourself home</li>
-      <li>Looking for durable results after a defined treatment course</li>
-      <li>You prefer non-pharmacological approaches</li>
-    </ul>
-  </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
-    <h4 class="font-semibold text-blue-900 text-sm mb-2">Questions to Ask Your Provider</h4>
-    <ul class="text-xs text-blue-700 space-y-1 mb-0 list-disc pl-4">
-      <li>Which treatment do you recommend for my specific situation?</li>
-      <li>What are the realistic outcomes I can expect?</li>
-      <li>What does my insurance cover?</li>
-      <li>Can these treatments be combined?</li>
-    </ul>
-  </div>
-</div>
-
-### The Bottom Line
-
-No single treatment works for everyone. The goal is finding the right match for your brain, your symptoms, and your life. If one option doesn't work, others may. Many of these treatments can be combined or sequenced for better results.
-
-Start with a thorough evaluation from a psychiatrist who understands multiple treatment modalities — not just the one they happen to offer. Use our [clinic finder](/us/) to find experienced providers, or take our [candidacy quiz](/quiz/am-i-a-candidate/) to start the process.
-
-
-## Making Your Decision
-
-Choosing between treatments is personal. The right option depends on your specific diagnosis, treatment history, insurance coverage, schedule, and preferences. Here's a framework:
-
-<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
-    <h4 class="font-semibold text-emerald-900 text-sm mb-2">When TMS May Be Better</h4>
-    <ul class="text-xs text-emerald-700 space-y-1 mb-0 list-disc pl-4">
-      <li>You want an FDA-cleared, insurance-covered treatment</li>
-      <li>No sedation, no cognitive effects, drive yourself home</li>
-      <li>Looking for durable results after a defined treatment course</li>
-      <li>You prefer non-pharmacological approaches</li>
-    </ul>
-  </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
-    <h4 class="font-semibold text-blue-900 text-sm mb-2">Questions to Ask Your Provider</h4>
-    <ul class="text-xs text-blue-700 space-y-1 mb-0 list-disc pl-4">
-      <li>Which treatment do you recommend for my specific situation?</li>
-      <li>What are the realistic outcomes I can expect?</li>
-      <li>What does my insurance cover?</li>
-      <li>Can these treatments be combined?</li>
-    </ul>
-  </div>
-</div>
-
-### The Bottom Line
-
-No single treatment works for everyone. The goal is finding the right match for your brain, your symptoms, and your life. If one option doesn't work, others may. Many of these treatments can be combined or sequenced for better results.
-
-Start with a thorough evaluation from a psychiatrist who understands multiple treatment modalities — not just the one they happen to offer. Use our [clinic finder](/us/) to find experienced providers, or take our [candidacy quiz](/quiz/am-i-a-candidate/) to start the process.

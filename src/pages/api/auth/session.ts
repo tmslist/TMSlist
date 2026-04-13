@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ request }) => {
     });
   }
 
-  return new Response(JSON.stringify({ user: session }), {
+  return new Response(JSON.stringify({ user: { ...session, clinicId: (session as any)?.clinicId } }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
   });

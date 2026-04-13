@@ -176,9 +176,14 @@ export default function AdminAnalytics() {
     setLoading(true);
     try {
       const res = await fetch(`/api/admin/analytics?days=${days}`);
-      if (res.ok) {
-        setData(await res.json());
+      if (res.status === 401) {
+        window.location.href = '/admin/login';
+        return;
       }
+      if (!res.ok) throw new Error('Failed to load analytics');
+      const json = await res.json();
+      if (json.error) throw new Error(json.error);
+      setData(json);
     } catch (err) {
       console.error('Failed to fetch analytics:', err);
     } finally {

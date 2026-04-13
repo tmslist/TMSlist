@@ -17,6 +17,7 @@ export interface JWTPayload {
   userId: string;
   email: string;
   role: string;
+  clinicId?: string;
 }
 
 export async function hashPassword(password: string): Promise<string> {

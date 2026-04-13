@@ -1,135 +1,78 @@
 ---
-title: "Magstim vs NeuroStar TMS"
-description: "Comparing Magstim and NeuroStar TMS systems — research heritage vs commercial dominance, features, and clinical applications."
+title: "Magstim vs NeuroStar: Research Heritage vs Commercial Dominance"
+description: "Comparing Magstim and NeuroStar TMS systems — research heritage vs commercial dominance, features, coil options, and clinical applications."
+author: "TMS List Editorial Team"
+publishDate: 2026-02-10
+treatmentA: "Magstim"
+treatmentB: "NeuroStar"
 image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+verdict: "Magstim is the research workhorse used in thousands of studies globally. NeuroStar is the US commercial leader with the most clinical experience. For standard depression, both are clinically equivalent. Availability and insurance favor NeuroStar."
+verdictWinner: "neurostar"
+faqs: []
 ---
 
-## The research workhorse vs the commercial leader
+Magstim and NeuroStar come from different TMS traditions. Magstim built its reputation in research labs worldwide — it's the system you'll find in thousands of published studies. NeuroStar built its reputation in clinical practice — it's the system you'll find in US psychiatry offices. Comparing them means deciding what matters most for your situation.
 
-Magstim has been building TMS devices since the 1990s. It's the system you'll find in research labs worldwide. NeuroStar dominates the US clinical market. They come from different worlds, and their strengths reflect that.
+## What You'll Learn
 
-### Company background
+- Technical differences in coil design and configurability
+- Protocol support on each platform
+- Research vs clinical pedigree
+- US availability and insurance implications
 
-**Magstim (UK-based):**
-- Pioneered commercial TMS equipment
-- Used in thousands of research studies globally
-- Strong presence in academic and research settings
-- Also FDA-cleared for clinical depression treatment
+## The Core Difference: Research vs Clinical
 
-**NeuroStar (Neuronetics, US-based):**
-- Purpose-built for clinical depression treatment
-- Largest commercial TMS install base in the US
-- Strong brand recognition among patients and insurers
-- Focused on clinical workflow and patient experience
+**Magstim** is UK-based, founded in the 1990s, and has been the de facto standard for TMS research globally. The Rapid² platform is highly configurable with multiple coil options (figure-8, circular, double cone) and precise parameter control. It's the system that generated most of the foundational TMS research data.
 
-### Clinical outcomes
+**NeuroStar** is US-based (Neuronetics), built specifically for clinical use, and holds the largest commercial TMS install base in the US. It prioritizes streamlined clinical workflow, patient comfort, and practice management over configurability.
 
-When using equivalent protocols, outcomes are comparable:
-- Both hit 50-60% response rates for depression
-- Both achieve 30-35% remission rates
-- Protocol parameters — frequency, pulses, targeting — matter more than the brand name on the machine
+## Coil Design and Configuration
 
-### Key differences
+Magstim's Rapid² supports a range of coil geometries that can be swapped out for different clinical and research applications. This flexibility is valuable for academic centers treating multiple conditions or running investigator-initiated studies.
 
-**Magstim strengths:**
-- Multiple coil options (figure-8, circular, double cone)
-- Highly configurable for different protocols and research applications
-- Lower capital cost for some models
-- Great for clinics that also do research or treat conditions beyond depression
+NeuroStar uses a proprietary iron-core figure-8 coil with built-in contact sensing that automatically verifies consistent coil placement session-to-session. The system is less configurable but more automated for routine clinical use.
 
-**NeuroStar strengths:**
-- Streamlined clinical workflow optimized for depression
-- Express TMS (19-minute theta burst) protocol
-- Built-in contact sensing and patient comfort features
-- Most extensive commercial support network in the US
-- Stronger brand for patient-facing marketing
+## FDA Clearances
 
-### For you as a patient
+| Indication | NeuroStar | Magstim |
+|-----------|-----------|--------|
+| MDD Depression | 2008 (first) | Cleared |
+| Anxious Depression | 2021 | No specific clearance |
+| OCD | No | No |
+| Smoking Cessation | Yes | No |
 
-Both are FDA-cleared, evidence-based TMS systems. Your provider's expertise and the specific protocol they use will affect your outcome far more than which company built the machine. Choose your provider, not your device.
+NeuroStar leads in labeled indications. Magstim's clinical evidence base comes largely from research protocols rather than industry-sponsored trials.
 
+## US Availability
+
+NeuroStar dominates the US commercial market with 1,000+ installed locations. Magstim is common in academic medical centers and TMS research centers but has a smaller commercial footprint. Most private practice TMS clinics use NeuroStar.
+
+## For Patients
+
+Both deliver FDA-cleared, evidence-based TMS for depression. When protocols are matched, outcomes are equivalent. Your provider's expertise and the specific protocol they use will affect your outcome far more than which company built the machine.
+
+For most patients, NeuroStar is more accessible: easier to find a provider, more established insurance relationships, and more streamlined clinical workflow. Magstim is a strong option at academic or research-oriented clinics.
+
+Search [TMS providers](/us/) or explore [device comparisons](/compare/).
 
 ---
 
-<div class="not-prose my-8 bg-blue-50 border border-blue-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-blue-900 mb-3 text-base">Related Comparisons</h4>
-  <div class="grid grid-cols-2 gap-2">
-    <a href="/compare/tms-vs-ect/" class="text-sm text-blue-700 hover:underline">TMS vs. ECT</a>
-    <a href="/compare/tms-vs-antidepressants/" class="text-sm text-blue-700 hover:underline">TMS vs. Medication</a>
-    <a href="/compare/tms-vs-ketamine/" class="text-sm text-blue-700 hover:underline">TMS vs. Ketamine</a>
-    <a href="/compare/neurostar-vs-brainsway/" class="text-sm text-blue-700 hover:underline">NeuroStar vs. BrainsWay</a>
-  </div>
+<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
+  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-violet-800">
+    <li>Magstim is the global research standard for TMS</li>
+    <li>NeuroStar dominates the US clinical/commercial market</li>
+    <li>Both deliver equivalent outcomes for standard depression treatment</li>
+    <li>NeuroStar has more labeled FDA indications</li>
+    <li>Magstim offers greater coil configuration flexibility</li>
+  </ul>
 </div>
 
 <div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
-  <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic</h3>
+  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Search verified providers by device, location, and insurance coverage.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>
-
-
-## Making Your Decision
-
-Choosing between treatments is personal. The right option depends on your specific diagnosis, treatment history, insurance coverage, schedule, and preferences. Here's a framework:
-
-<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
-    <h4 class="font-semibold text-emerald-900 text-sm mb-2">When TMS May Be Better</h4>
-    <ul class="text-xs text-emerald-700 space-y-1 mb-0 list-disc pl-4">
-      <li>You want an FDA-cleared, insurance-covered treatment</li>
-      <li>No sedation, no cognitive effects, drive yourself home</li>
-      <li>Looking for durable results after a defined treatment course</li>
-      <li>You prefer non-pharmacological approaches</li>
-    </ul>
-  </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
-    <h4 class="font-semibold text-blue-900 text-sm mb-2">Questions to Ask Your Provider</h4>
-    <ul class="text-xs text-blue-700 space-y-1 mb-0 list-disc pl-4">
-      <li>Which treatment do you recommend for my specific situation?</li>
-      <li>What are the realistic outcomes I can expect?</li>
-      <li>What does my insurance cover?</li>
-      <li>Can these treatments be combined?</li>
-    </ul>
-  </div>
-</div>
-
-### The Bottom Line
-
-No single treatment works for everyone. The goal is finding the right match for your brain, your symptoms, and your life. If one option doesn't work, others may. Many of these treatments can be combined or sequenced for better results.
-
-Start with a thorough evaluation from a psychiatrist who understands multiple treatment modalities — not just the one they happen to offer. Use our [clinic finder](/us/) to find experienced providers, or take our [candidacy quiz](/quiz/am-i-a-candidate/) to start the process.
-
-
-## Making Your Decision
-
-Choosing between treatments is personal. The right option depends on your specific diagnosis, treatment history, insurance coverage, schedule, and preferences. Here's a framework:
-
-<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
-    <h4 class="font-semibold text-emerald-900 text-sm mb-2">When TMS May Be Better</h4>
-    <ul class="text-xs text-emerald-700 space-y-1 mb-0 list-disc pl-4">
-      <li>You want an FDA-cleared, insurance-covered treatment</li>
-      <li>No sedation, no cognitive effects, drive yourself home</li>
-      <li>Looking for durable results after a defined treatment course</li>
-      <li>You prefer non-pharmacological approaches</li>
-    </ul>
-  </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
-    <h4 class="font-semibold text-blue-900 text-sm mb-2">Questions to Ask Your Provider</h4>
-    <ul class="text-xs text-blue-700 space-y-1 mb-0 list-disc pl-4">
-      <li>Which treatment do you recommend for my specific situation?</li>
-      <li>What are the realistic outcomes I can expect?</li>
-      <li>What does my insurance cover?</li>
-      <li>Can these treatments be combined?</li>
-    </ul>
-  </div>
-</div>
-
-### The Bottom Line
-
-No single treatment works for everyone. The goal is finding the right match for your brain, your symptoms, and your life. If one option doesn't work, others may. Many of these treatments can be combined or sequenced for better results.
-
-Start with a thorough evaluation from a psychiatrist who understands multiple treatment modalities — not just the one they happen to offer. Use our [clinic finder](/us/) to find experienced providers, or take our [candidacy quiz](/quiz/am-i-a-candidate/) to start the process.

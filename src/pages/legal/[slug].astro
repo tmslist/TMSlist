@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+export const prerender = true;
 
 import ContentPage from '../../layouts/ContentPage.astro';
 import { getCollection, render } from 'astro:content';
@@ -8,7 +8,7 @@ import { LEGAL_SLUGS } from '../../utils/seo_slugs';
 export async function getStaticPaths() {
   let entries: any[] = [];
   try {
-    const _debug = await getCollection("legal"); console.log("DEBUG legal entries:", _debug.length, _debug.map(e=>e.id)); entries = _debug('legal');
+    entries = await getCollection('legal');
   } catch {}
 
   const contentPaths = entries.map((entry) => ({

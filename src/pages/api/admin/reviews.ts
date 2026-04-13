@@ -24,8 +24,8 @@ export const GET: APIRoute = async ({ request }) => {
     const offset = Math.max(0, parseInt(url.searchParams.get('offset') || '0'));
 
     const whereMap: Record<string, string> = {
-      pending: 'WHERE verified = false',
-      approved: 'WHERE verified = true',
+      pending: 'WHERE approved = false',
+      approved: 'WHERE approved = true',
       all: '',
     };
     const where = whereMap[status || 'all'] || whereMap.all;
@@ -33,28 +33,31 @@ export const GET: APIRoute = async ({ request }) => {
     const limitOffset = `LIMIT ${limit} OFFSET ${offset}`;
 
     const rowsResult = await db.execute(sql`
-      SELECT id, clinic_id, user_name, user_email, rating, title, body,
-             source, helpful, verified, created_at, clinic_name, clinic_slug
+      SELECT id, clinic_id, user_id, user_name, user_email, rating, title, body,
+             source, verified, approved, helpful_count, unhelpful_count, created_at, clinic_name, clinic_slug
       FROM reviews ${sql.raw(where)} ${sql.raw(orderBy)} ${sql.raw(limitOffset)}
     `);
 
     const results = (rowsResult as any).rows?.map((r: any) => ({
       id: r.id,
       clinicId: r.clinic_id,
+      userId: r.user_id,
       userName: r.user_name,
       userEmail: r.user_email,
       rating: r.rating,
       title: r.title,
       body: r.body,
       source: r.source,
-      helpful: r.helpful,
       verified: r.verified,
+      approved: r.approved,
+      helpfulCount: r.helpful_count ?? 0,
+      unhelpfulCount: r.unhelpful_count ?? 0,
       createdAt: r.created_at,
       clinicName: r.clinic_name,
       clinicSlug: r.clinic_slug,
     })) ?? [];
 
-    const pendingRows = await db.execute(sql`SELECT count(*) as count FROM reviews WHERE verified = false`);
+    const pendingRows = await db.execute(sql`SELECT count(*) as count FROM reviews WHERE approved = false`);
     const totalRows = await db.execute(sql`SELECT count(*) as count FROM reviews`);
     const pendingCount = Number((pendingRows as any).rows?.[0]?.count ?? 0);
     const total = Number((totalRows as any).rows?.[0]?.count ?? 0);
@@ -97,10 +100,8 @@ export const PUT: APIRoute = async ({ request }) => {
       });
     }
 
-    const verified = approved;
-
     const result = await db.update(reviews)
-      .set({ verified })
+      .set({ approved })
       .where(eq(reviews.id, id))
       .returning({ clinicId: reviews.clinicId });
 
@@ -110,7 +111,7 @@ export const PUT: APIRoute = async ({ request }) => {
 
     await db.insert(auditLog).values({
       userId: session?.userId ?? null,
-      action: verified ? 'approve_review' : 'reject_review',
+      action: approved ? 'approve_review' : 'reject_review',
       entityType: 'review',
       entityId: id,
     });

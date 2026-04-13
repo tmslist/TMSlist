@@ -108,6 +108,7 @@ export const GET: APIRoute = async ({ request }) => {
       userId: user.id,
       email: user.email,
       role: user.role,
+      clinicId: user.clinicId ?? undefined,
     });
 
     // Sanitize redirect to prevent open redirect

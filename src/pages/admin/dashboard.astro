@@ -27,7 +27,7 @@ try {
 
   const [leadStatsResult, pendingResult] = await Promise.all([
     getLeadStats().catch(() => ({ total: 0 })),
-    db.execute(sql`SELECT count(*) as count FROM reviews WHERE approved = false`).catch(() => [{ count: 0 }]),
+    db.execute(sql`SELECT count(*) as count FROM reviews WHERE verified = false`).catch(() => [{ count: 0 }]),
   ]);
   leadStats = leadStatsResult;
 

@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ request }) => {
   try {
     const [total, verified, noPhone, noEmail, noDesc, noHours, noMachines] = await Promise.all([
       db.select({ c: sql<number>`count(*)` }).from(clinics),
-      db.select({ c: sql<number>`count(*)` }).from(clinics).where(eq(clinics.verified, true)),
+      db.select({ c: sql<number>`count(*)` }).from(clinics).where(sql`${clinics.verified} = true`),
       db.select({ c: sql<number>`count(*)` }).from(clinics).where(isNull(clinics.phone)),
       db.select({ c: sql<number>`count(*)` }).from(clinics).where(isNull(clinics.email)),
       db.select({ c: sql<number>`count(*)` }).from(clinics).where(isNull(clinics.description)),
@@ -23,7 +23,7 @@ export const GET: APIRoute = async ({ request }) => {
 
     const [noDoctors, noReviews, doctorsNoBio, doctorsNoImage, stale] = await Promise.all([
       db.select({ c: sql<number>`count(*)` }).from(clinics).where(sql`${clinics.id} NOT IN (SELECT DISTINCT ${doctors.clinicId} FROM doctors)`),
-      db.select({ c: sql<number>`count(*)` }).from(clinics).where(eq(clinics.reviewCount, 0)),
+      db.select({ c: sql<number>`count(*)` }).from(clinics).where(sql`${clinics.reviewCount} = 0`),
       db.select({ c: sql<number>`count(*)` }).from(doctors).where(isNull(doctors.bio)),
       db.select({ c: sql<number>`count(*)` }).from(doctors).where(isNull(doctors.imageUrl)),
       db.select({ c: sql<number>`count(*)` }).from(clinics).where(sql`${clinics.updatedAt} < NOW() - INTERVAL '6 months'`),

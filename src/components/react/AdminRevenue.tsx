@@ -56,10 +56,11 @@ export default function AdminRevenue() {
   useEffect(() => {
     fetch('/api/admin/revenue')
       .then(r => {
+        if (r.status === 401) { window.location.href = '/admin/login'; return null; }
         if (!r.ok) throw new Error('Failed to load');
         return r.json();
       })
-      .then(setData)
+      .then(d => { if (d) setData(d); })
       .catch(e => setError(e.message))
       .finally(() => setLoading(false));
   }, []);

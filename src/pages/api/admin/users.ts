@@ -3,6 +3,7 @@ import { eq, desc, sql, and } from 'drizzle-orm';
 import { db } from '../../../db';
 import { users, auditLog } from '../../../db/schema';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { hashPassword } from '../../../utils/auth';
 
 export const prerender = false;
 
@@ -11,6 +12,67 @@ const json = (data: unknown, status = 200) =>
     status,
     headers: { 'Content-Type': 'application/json' },
   });
+
+// Reset password for a user (admin only)
+export const PATCH: APIRoute = async ({ request }) => {
+  const session = getSessionFromRequest(request);
+  if (!hasRole(session, 'admin')) {
+    return json({ error: 'Unauthorized' }, 401);
+  }
+
+  try {
+    const body = await request.json();
+    const { id, password } = body;
+
+    if (!id) {
+      return json({ error: 'User ID required' }, 400);
+    }
+
+    // Require password to be set via PATCH
+    if (password && typeof password === 'string' && password.length >= 8) {
+      const hash = await hashPassword(password);
+      await db.update(users).set({ passwordHash: hash, updatedAt: new Date() }).where(eq(users.id, id));
+      await db.insert(auditLog).values({
+        userId: session?.userId ?? null,
+        action: 'reset_user_password',
+        entityType: 'user',
+        entityId: id,
+      });
+      return json({ success: true });
+    }
+
+    // Role/name update (fallthrough from PUT logic)
+    const validRoles = ['admin', 'editor', 'viewer', 'clinic_owner'] as const;
+    const allowedFields = ['role', 'name', 'clinicId'] as const;
+    const safeUpdates: Record<string, unknown> = {};
+    for (const key of allowedFields) {
+      if (key in body && body[key] !== undefined) {
+        if (key === 'role' && !validRoles.includes(body[key])) {
+          return json({ error: `Invalid role. Must be one of: ${validRoles.join(', ')}` }, 400);
+        }
+        safeUpdates[key] = body[key];
+      }
+    }
+
+    if (Object.keys(safeUpdates).length === 0) {
+      return json({ error: 'No valid fields to update' }, 400);
+    }
+
+    await db.update(users).set(safeUpdates).where(eq(users.id, id));
+    await db.insert(auditLog).values({
+      userId: session?.userId ?? null,
+      action: 'update_user',
+      entityType: 'user',
+      entityId: id,
+      details: { fields: Object.keys(safeUpdates) },
+    });
+
+    return json({ success: true });
+  } catch (err) {
+    console.error('Admin user PATCH error:', err);
+    return json({ error: 'Internal server error' }, 500);
+  }
+};
 
 // List users with pagination and search
 export const GET: APIRoute = async ({ request, url }) => {

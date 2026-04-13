@@ -2,9 +2,15 @@
 interface Review {
     id: string;
     userName: string;
+    userEmail?: string | null;
     rating: number;
+    title?: string | null;
+    body: string;
+    verified: boolean;
+    approved: boolean;
+    helpfulCount?: number;
+    unhelpfulCount?: number;
     createdAt: string;
-    reviewText: string;
     clinicId: string;
 }
 
@@ -23,7 +29,7 @@ const {
     entitySlug = "",
     aggregateRating = 0,
     totalCount = 0,
-    clinicId = "", // Use this for API lookups if provided
+    clinicId = "",
 } = Astro.props;
 ---
 
@@ -239,18 +245,39 @@ const {
 
 <script define:vars={{ clinicId, entitySlug }}>
     const SECTION = document.getElementById("reviews-section");
-    const ID = clinicId || entitySlug; // Use passed ID or Slug
+    const ID = clinicId || entitySlug;
     let currentUser = null;
 
-    // Fetch Reviews
+    // Check session on load
+    async function checkSession() {
+        try {
+            const res = await fetch('/api/auth/session');
+            if (res.ok) {
+                const data = await res.json();
+                if (data.user && (data.user.role === 'patient' || data.user.role === 'viewer')) {
+                    currentUser = data.user;
+                    // User is signed in — show the form directly
+                    document.getElementById('auth-step').classList.add('hidden');
+                    document.getElementById('review-form').classList.remove('hidden');
+                    document.getElementById('user-name-display').textContent = currentUser.email.split('@')[0];
+                    return true;
+                }
+            }
+        } catch (_) {}
+        return false;
+    }
+
+    // Fetch Reviews from API
     async function fetchReviews() {
         try {
-            const res = await fetch(`/data/reviews.json`);
-            let reviews = await res.json();
-            if (ID) reviews = reviews.filter(r => r.clinicId === ID);
-            // Merge any locally stored reviews
-            const localReviews = JSON.parse(localStorage.getItem("tms-reviews") || "[]").filter(r => r.clinicId === ID);
-            reviews = [...reviews, ...localReviews];
+            let reviews = [];
+            if (ID) {
+                const res = await fetch(`/api/reviews?clinicId=${ID}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    reviews = data.data || [];
+                }
+            }
             renderReviews(reviews);
             updateStats(reviews);
         } catch (err) {
@@ -258,6 +285,13 @@ const {
             document.getElementById("reviews-list").innerHTML =
                 `<div class="text-center text-gray-500 py-8">Unable to load reviews.</div>`;
         }
+    }
+
+    function esc(str) {
+        if (!str) return '';
+        const d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
     }
 
     function renderReviews(reviews) {
@@ -271,82 +305,67 @@ const {
             return;
         }
 
-        // Sanitize user content to prevent XSS
-        function esc(str) {
-            const d = document.createElement('div');
-            d.textContent = str;
-            return d.innerHTML;
-        }
-
         list.innerHTML = reviews
-            .map(
-                (r) => `
+            .map((r) => `
             <article class="p-6 bg-gray-50 rounded-2xl border border-gray-100/50 hover:bg-white hover:shadow-md transition-all">
                 <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full dark-section bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center font-semibold text-sm shrink-0">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center font-semibold text-sm text-white shrink-0">
                         ${esc(r.userName.charAt(0))}
                     </div>
                     <div class="flex-1">
-                        <div class="flex items-center justify-between mb-2">
-                            <h4 class="font-semibold text-gray-900">${esc(r.userName)}</h4>
+                        <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h4 class="font-semibold text-gray-900">${esc(r.userName)}</h4>
+                                ${r.verified ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full border border-emerald-200">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    Verified
+                                </span>` : ''}
+                            </div>
                             <span class="text-xs text-gray-400">${esc(new Date(r.createdAt).toLocaleDateString())}</span>
                         </div>
                         <div class="flex text-yellow-400 text-sm mb-2">
                             ${"★".repeat(Math.min(Math.max(r.rating || 0, 0), 5))}<span class="text-gray-200">${"★".repeat(5 - Math.min(Math.max(r.rating || 0, 0), 5))}</span>
                         </div>
-                        <p class="text-gray-600 text-sm leading-relaxed">${esc(r.reviewText)}</p>
+                        ${r.title ? `<p class="font-medium text-gray-800 text-sm mb-1">${esc(r.title)}</p>` : ''}
+                        <p class="text-gray-600 text-sm leading-relaxed">${esc(r.body)}</p>
                     </div>
                 </div>
             </article>
-        `,
-            )
-            .join("");
+        `).join("");
     }
 
     function updateStats(reviews) {
         if (reviews.length === 0) return;
-        const avg =
-            reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length;
+        const avg = reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length;
         document.getElementById("avg-rating").textContent = avg.toFixed(1);
         document.getElementById("review-count").textContent = reviews.length;
-
         const fullStars = Math.round(avg);
         document.getElementById("star-display").innerHTML =
             `<span class="text-yellow-400">${"★".repeat(fullStars)}</span><span class="text-gray-200">${"★".repeat(5 - fullStars)}</span>`;
     }
 
-    // Interactive Logic
-    document
-        .getElementById("write-review-btn")
-        .addEventListener("click", () => {
-            document
-                .getElementById("review-form-container")
-                .classList.remove("hidden");
-        });
+    // Write review button
+    document.getElementById("write-review-btn").addEventListener("click", async () => {
+        // Check if already signed in
+        if (!currentUser) {
+            const signedIn = await checkSession();
+            if (!signedIn) {
+                // Redirect to login, come back after
+                window.location.href = `/login?redirect=${encodeURIComponent(window.location.pathname)}`;
+                return;
+            }
+        }
+        document.getElementById("review-form-container").classList.remove("hidden");
+    });
 
-    document
-        .getElementById("cancel-review-btn")
-        .addEventListener("click", () => {
-            document
-                .getElementById("review-form-container")
-                .classList.add("hidden");
-        });
+    document.getElementById("cancel-review-btn").addEventListener("click", () => {
+        document.getElementById("review-form-container").classList.add("hidden");
+    });
 
-    // Mock Auth
-    document
-        .getElementById("google-signin-btn")
-        .addEventListener("click", () => {
-            // Simulate Google Auth
-            currentUser = {
-                id: `user-${Date.now()}`,
-                name: "Demo User",
-                email: "demo@example.com",
-            };
-            document.getElementById("auth-step").classList.add("hidden");
-            document.getElementById("review-form").classList.remove("hidden");
-            document.getElementById("user-name-display").textContent =
-                currentUser.name;
-        });
+    // Real Google sign-in
+    document.getElementById("google-signin-btn").addEventListener("click", () => {
+        window.location.href = `/api/auth/google/patient-callback?state=${encodeURIComponent(window.location.pathname)}`;
+    });
 
     // Star Rating
     const starBtns = document.querySelectorAll(".star-btn");
@@ -354,8 +373,6 @@ const {
         btn.addEventListener("click", (e) => {
             const rating = parseInt(e.target.dataset.rating);
             document.getElementById("rating-value").value = rating;
-
-            // Visual update
             starBtns.forEach((b) => {
                 const val = parseInt(b.dataset.rating);
                 if (val <= rating) {
@@ -369,55 +386,64 @@ const {
         });
     });
 
-    // Submit
-    document
-        .getElementById("review-form")
-        .addEventListener("submit", async (e) => {
-            e.preventDefault();
-            if (!currentUser) return;
+    // Submit to real API
+    document.getElementById("review-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!currentUser) return;
 
-            const formData = new FormData(e.target);
-            const data = {
-                clinicId: ID,
-                userId: currentUser.id,
-                userName: currentUser.name,
-                userEmail: currentUser.email,
-                rating: parseInt(formData.get("rating")),
-                reviewText: formData.get("reviewText"),
-            };
+        const formData = new FormData(e.target);
+        const rating = parseInt(formData.get("rating"));
+        if (!rating || rating < 1 || rating > 5) {
+            alert('Please select a star rating');
+            return;
+        }
 
-            const btn = e.target.querySelector('button[type="submit"]');
-            const originalText = btn.textContent;
-            btn.disabled = true;
-            btn.textContent = "Submitting...";
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = "Submitting...";
 
-            try {
-                // Store review locally (static site - no server)
-                const localReviews = JSON.parse(localStorage.getItem("tms-reviews") || "[]");
-                const newReview = { ...data, id: `review-${Date.now()}`, createdAt: new Date().toISOString(), verified: false };
-                localReviews.push(newReview);
-                localStorage.setItem("tms-reviews", JSON.stringify(localReviews));
-                const result = { success: true };
+        try {
+            const res = await fetch('/api/reviews', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    clinicId: ID,
+                    userName: currentUser.email.split('@')[0],
+                    userEmail: currentUser.email,
+                    rating,
+                    body: formData.get("body") || formData.get("reviewText"),
+                }),
+            });
 
-                if (result.success) {
-                    // Success UI
-                    document
-                        .getElementById("review-form-container")
-                        .classList.add("hidden");
-                    e.target.reset();
-                    fetchReviews(); // Reload
-                    showToast("Review submitted for moderation!", "success");
-                }
-            } catch (err) {
-                showToast("Error submitting review. Please try again.");
-            } finally {
-                btn.disabled = false;
-                btn.textContent = originalText;
+            const data = await res.json();
+
+            if (res.ok && data.success) {
+                document.getElementById("review-form-container").classList.add("hidden");
+                e.target.reset();
+                starBtns.forEach((b) => {
+                    b.classList.remove("text-yellow-400");
+                    b.classList.add("text-gray-300");
+                });
+                fetchReviews();
+                // Show success message
+                const msg = data.status === 'published'
+                    ? 'Review published! Thank you.'
+                    : 'Review submitted for moderation. Thank you!';
+                showToast(msg, 'success');
+            } else {
+                showToast(data.error || 'Failed to submit review.', 'error');
             }
-        });
+        } catch (err) {
+            showToast("Network error. Please try again.", 'error');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = originalText;
+        }
+    });
 
     // Init
-    fetchReviews();
+    checkSession().then(() => fetchReviews());
 </script>
 
 <!-- Dead duplicate section removed -->

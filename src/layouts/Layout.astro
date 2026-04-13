@@ -32,7 +32,7 @@ const breadcrumbSchema = breadcrumbs?.length ? JSON.stringify({
 		"@type": "ListItem",
 		"position": i + 1,
 		"name": item.name,
-		"item": item.url.startsWith('http') ? item.url : `${(import.meta.env.SITE_URL || 'https://tmslist.com')}${item.url || '/'}`,
+		"item": item.url.startsWith('http') ? item.url : `${siteUrl}${item.url || '/'}`,
 	})),
 }) : null;
 

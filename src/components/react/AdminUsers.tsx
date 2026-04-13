@@ -29,6 +29,8 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
   const [newUser, setNewUser] = useState(EMPTY_USER);
   const [editingRole, setEditingRole] = useState<{ id: string; role: string } | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
+  const [resetPw, setResetPw] = useState<{ id: string; email: string } | null>(null);
+  const [newPassword, setNewPassword] = useState('');
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [page, setPage] = useState(0);
   const limit = 25;
@@ -98,7 +100,7 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
     setSaving(true);
     try {
       const res = await fetch('/api/admin/users', {
-        method: 'PUT',
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, role }),
       });
@@ -107,6 +109,30 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
       setUsers((prev) => prev.map((u) => (u.id === id ? { ...u, role } : u)));
       setEditingRole(null);
       showToast('success', 'Role updated');
+    } catch (err) {
+      showToast('error', err instanceof Error ? err.message : "An error occurred");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function handlePasswordReset() {
+    if (!resetPw || newPassword.length < 8) {
+      showToast('error', 'Password must be at least 8 characters');
+      return;
+    }
+    setSaving(true);
+    try {
+      const res = await fetch('/api/admin/users', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: resetPw.id, password: newPassword }),
+      });
+      if (res.status === 401) { window.location.href = '/admin/login'; return; }
+      if (!res.ok) throw new Error('Failed to reset password');
+      showToast('success', 'Password updated');
+      setResetPw(null);
+      setNewPassword('');
     } catch (err) {
       showToast('error', err instanceof Error ? err.message : "An error occurred");
     } finally {
@@ -154,6 +180,34 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
           toast.type === 'success' ? 'bg-emerald-600 text-white' : 'bg-red-600 text-white'
         }`}>
           {toast.message}
+        </div>
+      )}
+
+      {/* Reset Password Modal */}
+      {resetPw && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm mx-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-1">Reset Password</h3>
+            <p className="text-sm text-gray-500 mb-4">for {resetPw.email}</p>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="New password (min 8 chars)"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm mb-4 focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              minLength={8}
+            />
+            <div className="flex gap-3 justify-end">
+              <button onClick={() => { setResetPw(null); setNewPassword(''); }}
+                className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200">
+                Cancel
+              </button>
+              <button onClick={handlePasswordReset} disabled={saving}
+                className="px-4 py-2 bg-amber-600 text-white text-sm font-semibold rounded-lg hover:bg-amber-700 disabled:opacity-50">
+                {saving ? 'Saving...' : 'Reset Password'}
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
@@ -342,12 +396,21 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
                           </button>
                         </div>
                       ) : (
-                        <button
-                          onClick={() => setDeleteConfirm(user.id)}
-                          className="px-3 py-1.5 bg-red-50 text-red-700 text-xs font-medium rounded-lg hover:bg-red-100 transition-colors"
-                        >
-                          Delete
-                        </button>
+                        <div className="flex gap-1">
+                          <button
+                            onClick={() => setResetPw({ id: user.id, email: user.email })}
+                            className="px-2 py-1 bg-amber-50 text-amber-700 text-xs font-medium rounded-lg hover:bg-amber-100 transition-colors"
+                            title="Reset password"
+                          >
+                            Reset PW
+                          </button>
+                          <button
+                            onClick={() => setDeleteConfirm(user.id)}
+                            className="px-3 py-1.5 bg-red-50 text-red-700 text-xs font-medium rounded-lg hover:bg-red-100 transition-colors"
+                          >
+                            Delete
+                          </button>
+                        </div>
                       )}
                     </td>
                   </tr>

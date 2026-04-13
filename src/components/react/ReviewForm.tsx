@@ -9,6 +9,7 @@ interface Session {
   userId: string;
   email: string;
   role: string;
+  clinicId?: string;
 }
 
 export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
@@ -19,7 +20,6 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
   const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
-    // Check if user has a patient session by calling the session API
     fetch('/api/auth/session')
       .then((r) => r.ok ? r.json() : null)
       .then((data) => {

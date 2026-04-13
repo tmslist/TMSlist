@@ -3,14 +3,17 @@ import { useState, useEffect, useCallback } from 'react';
 interface Review {
   id: string;
   clinicId: string;
+  userId: string | null;
   userName: string;
   userEmail: string | null;
   rating: number;
   title: string | null;
   body: string;
   source: string | null;
-  helpful: number | null;
   verified: boolean;
+  approved: boolean;
+  helpfulCount: number;
+  unhelpfulCount: number;
   createdAt: string;
   clinicName: string | null;
   clinicSlug: string | null;
@@ -81,7 +84,7 @@ export default function AdminReviews() {
       });
       if (res.ok) {
         setReviews(prev => prev.map(r =>
-          r.id === id ? { ...r, verified: approved } : r
+          r.id === id ? { ...r, approved } : r
         ));
         if (!approved && filter === 'approved') {
           setReviews(prev => prev.filter(r => r.id !== id));
@@ -166,7 +169,7 @@ export default function AdminReviews() {
           </div>
         ) : reviews.map(review => (
           <div key={review.id} className={`bg-white rounded-xl border p-5 transition-colors ${
-            review.verified ? 'border-gray-200' : 'border-amber-200 bg-amber-50/30'
+            review.approved ? 'border-gray-200' : 'border-amber-200 bg-amber-50/30'
           }`}>
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1 min-w-0">
@@ -178,14 +181,26 @@ export default function AdminReviews() {
                       {SOURCE_LABELS[review.source] || review.source}
                     </span>
                   )}
+                  {review.verified && (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-xs font-semibold border border-emerald-200">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                      Verified Email
+                    </span>
+                  )}
                   <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
-                    review.verified ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
+                    review.approved ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700'
                   }`}>
-                    {review.verified ? 'Approved' : 'Pending'}
+                    {review.approved ? 'Published' : 'Pending'}
                   </span>
                   <span className="text-xs text-gray-400">
                     {new Date(review.createdAt).toLocaleDateString()}
                   </span>
+                  {(review.helpfulCount > 0 || review.unhelpfulCount > 0) && (
+                    <span className="text-xs text-gray-400 ml-1">
+                      {review.helpfulCount > 0 && `↑${review.helpfulCount}`}
+                      {review.unhelpfulCount > 0 && ` ↓${review.unhelpfulCount}`}
+                    </span>
+                  )}
                 </div>
 
                 {review.title && (
@@ -208,7 +223,7 @@ export default function AdminReviews() {
               </div>
 
               <div className="flex gap-2 shrink-0">
-                {!review.verified && (
+                {!review.approved && (
                   <button
                     onClick={() => handleAction(review.id, true)}
                     disabled={updating === review.id}
@@ -217,7 +232,7 @@ export default function AdminReviews() {
                     Approve
                   </button>
                 )}
-                {review.verified && (
+                {review.approved && (
                   <button
                     onClick={() => handleAction(review.id, false)}
                     disabled={updating === review.id}

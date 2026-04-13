@@ -256,6 +256,7 @@ export const doctors = pgTable('doctors', {
 export const reviews = pgTable('reviews', {
   id: uuid('id').defaultRandom().primaryKey(),
   clinicId: uuid('clinic_id').notNull().references(() => clinics.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').references(() => users.id, { onDelete: 'set null' }),
   userName: text('user_name').notNull(),
   userEmail: text('user_email'),
   rating: integer('rating').notNull(),
@@ -263,12 +264,16 @@ export const reviews = pgTable('reviews', {
   body: text('body').notNull(),
   verified: boolean('verified').default(false).notNull(),
   approved: boolean('approved').default(false).notNull(),
+  helpfulCount: integer('helpful_count').default(0).notNull(),
+  unhelpfulCount: integer('unhelpful_count').default(0).notNull(),
+  source: text('source').default('tmslist'),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
 }, (table) => [
   index('idx_reviews_clinic').on(table.clinicId),
   index('idx_reviews_approved').on(table.approved),
   index('idx_reviews_clinic_approved').on(table.clinicId, table.approved),
+  index('idx_reviews_user').on(table.userId),
 ]);
 
 // ── LEADS ──────────────────────────────────────

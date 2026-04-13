@@ -4,6 +4,9 @@ import { reviewSubmitSchema } from '../../../db/validation';
 import { escapeHtml } from '../../../utils/sanitize';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
 import { getSessionFromRequest } from '../../../utils/auth';
+import { db } from '../../../db';
+import { reviews } from '../../../db/schema';
+import { eq, and } from 'drizzle-orm';
 
 export const prerender = false;
 
@@ -77,6 +80,34 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    const isVerifiedEmail = parsed.data.userEmail?.toLowerCase() === session.email.toLowerCase();
+
+    // Block clinic owners from reviewing their own clinic
+    if (session.clinicId && session.clinicId === parsed.data.clinicId) {
+      return new Response(JSON.stringify({ error: 'You cannot review your own clinic.' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Check for duplicate verified review from the same user for the same clinic
+    if (session.userId) {
+      const existing = await db.select({ id: reviews.id })
+        .from(reviews)
+        .where(and(
+          eq(reviews.userId, session.userId),
+          eq(reviews.clinicId, parsed.data.clinicId),
+        ))
+        .limit(1);
+
+      if (existing.length > 0) {
+        return new Response(JSON.stringify({ error: 'You have already reviewed this clinic.' }), {
+          status: 409,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+    }
+
     // Sanitize user-provided text
     const sanitized = {
       ...parsed.data,
@@ -85,18 +116,23 @@ export const POST: APIRoute = async ({ request }) => {
       body: escapeHtml(parsed.data.body),
     };
 
-    // Auto-verify reviews from authenticated users with verified Google email
-    const isVerifiedEmail = sanitized.userEmail?.toLowerCase() === session.email.toLowerCase();
+    // Auto-approve verified reviews; others need moderation
+    const approved = isVerifiedEmail;
     const review = await createReview({
       ...sanitized,
       verified: isVerifiedEmail,
-      approved: false, // still requires moderation
+      approved,
+      userId: session.userId,
     });
 
     // Update denormalized rating (approved reviews only affect this)
     await updateClinicRating(parsed.data.clinicId);
 
-    return new Response(JSON.stringify({ success: true, review }), {
+    return new Response(JSON.stringify({
+      success: true,
+      review,
+      status: approved ? 'published' : 'pending',
+    }), {
       status: 201,
       headers: { 'Content-Type': 'application/json' },
     });
