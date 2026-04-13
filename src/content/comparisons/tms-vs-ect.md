@@ -13,13 +13,17 @@ faqs:
     answer: "No. TMS does not cause memory loss. ECT can cause temporary (and occasionally longer-lasting) memory difficulties, which is one of the main reasons patients prefer TMS."
 ---
 
-## How TMS and ECT compare
+Both TMS and ECT treat depression by stimulating the brain. That's about where the similarities end. ECT uses electrical currents under general anesthesia to trigger brief, controlled seizures. TMS uses focused magnetic pulses on a specific brain region — no anesthesia, no seizures, no recovery room. You're awake the whole time.
 
-Both TMS and ECT treat depression by stimulating the brain. That's about where the similarities end.
+## What You'll Learn
 
-ECT uses electrical currents under general anesthesia to trigger brief, controlled seizures. TMS uses focused magnetic pulses on a specific brain region — no anesthesia, no seizures, no recovery room. You're awake the whole time.
+- How the two treatments differ in mechanism and experience
+- Efficacy comparison for depression
+- Side effects profile
+- Treatment schedule and cost
+- When to choose which treatment
 
-### Efficacy
+## Efficacy
 
 - **ECT response rate:** 70-90% — the single most effective treatment for severe, treatment-resistant depression
 - **TMS response rate:** 50-60% — strong for moderate treatment-resistant cases
@@ -28,7 +32,7 @@ ECT uses electrical currents under general anesthesia to trigger brief, controll
 
 ECT wins on raw numbers, especially for severe cases — depression with psychotic features, acute suicidality, situations where speed matters. TMS is better suited if you've failed 1-3 medications but don't need that level of intensity.
 
-### Side effects
+## Side Effects
 
 **TMS side effects** are mild and stay local:
 - Scalp discomfort at the treatment site (most common — fades over sessions)
@@ -43,7 +47,7 @@ ECT wins on raw numbers, especially for severe cases — depression with psychot
 - General anesthesia every single session
 - Cognitive effects usually resolve within weeks, but some people report longer-lasting memory gaps
 
-### Treatment schedule
+## Treatment Schedule
 
 | Factor | TMS | ECT |
 |--------|-----|-----|
@@ -53,12 +57,12 @@ ECT wins on raw numbers, especially for severe cases — depression with psychot
 | Drive after? | Yes | No (need someone to drive you) |
 | Work impact | Minimal — most people keep working | Significant — recovery time needed |
 
-### Cost
+## Cost
 
 - **TMS:** $6,000-$12,000 for a full course (often covered by insurance after medication failures)
 - **ECT:** $10,000-$25,000+ for a full course (usually covered when medically necessary)
 
-### Who should choose which?
+## Who Should Choose Which?
 
 **Consider TMS if:**
 - You've failed 1-3 antidepressants
@@ -72,92 +76,30 @@ ECT wins on raw numbers, especially for severe cases — depression with psychot
 - You need the fastest possible response (acute suicidality)
 - You're willing to accept temporary cognitive side effects for higher efficacy
 
-### The bottom line
+## The Bottom Line
 
 TMS and ECT aren't competing. They serve different points on the severity spectrum. Most people try TMS first — the side-effect profile is so much milder. If TMS doesn't get you where you need to be, ECT is still there. Talk to your psychiatrist about which approach fits your situation.
 
+Search for [TMS providers](/us/) or explore other [device comparisons](/compare/).
 
 ---
 
-<div class="not-prose my-8 bg-blue-50 border border-blue-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-blue-900 mb-3 text-base">Related Comparisons</h4>
-  <div class="grid grid-cols-2 gap-2">
-    <a href="/compare/tms-vs-ect/" class="text-sm text-blue-700 hover:underline">TMS vs. ECT</a>
-    <a href="/compare/tms-vs-antidepressants/" class="text-sm text-blue-700 hover:underline">TMS vs. Medication</a>
-    <a href="/compare/tms-vs-ketamine/" class="text-sm text-blue-700 hover:underline">TMS vs. Ketamine</a>
-    <a href="/compare/neurostar-vs-brainsway/" class="text-sm text-blue-700 hover:underline">NeuroStar vs. BrainsWay</a>
-  </div>
+<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
+  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-violet-800">
+    <li>ECT has higher remission rates (50-70%) than TMS (30-35%)</li>
+    <li>TMS has no memory loss or cognitive side effects; ECT causes temporary memory gaps</li>
+    <li>TMS requires no anesthesia; ECT requires general anesthesia each session</li>
+    <li>ECT is reserved for severe, life-threatening, or treatment-refractory cases</li>
+    <li>TMS is the practical first choice after medication failure</li>
+  </ul>
 </div>
 
 <div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
-  <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
+  <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic</h3>
   <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>
-
-
-## Making Your Decision
-
-Choosing between treatments is personal. The right option depends on your specific diagnosis, treatment history, insurance coverage, schedule, and preferences. Here's a framework:
-
-<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
-    <h4 class="font-semibold text-emerald-900 text-sm mb-2">When TMS May Be Better</h4>
-    <ul class="text-xs text-emerald-700 space-y-1 mb-0 list-disc pl-4">
-      <li>You want an FDA-cleared, insurance-covered treatment</li>
-      <li>No sedation, no cognitive effects, drive yourself home</li>
-      <li>Looking for durable results after a defined treatment course</li>
-      <li>You prefer non-pharmacological approaches</li>
-    </ul>
-  </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
-    <h4 class="font-semibold text-blue-900 text-sm mb-2">Questions to Ask Your Provider</h4>
-    <ul class="text-xs text-blue-700 space-y-1 mb-0 list-disc pl-4">
-      <li>Which treatment do you recommend for my specific situation?</li>
-      <li>What are the realistic outcomes I can expect?</li>
-      <li>What does my insurance cover?</li>
-      <li>Can these treatments be combined?</li>
-    </ul>
-  </div>
-</div>
-
-### The Bottom Line
-
-No single treatment works for everyone. The goal is finding the right match for your brain, your symptoms, and your life. If one option doesn't work, others may. Many of these treatments can be combined or sequenced for better results.
-
-Start with a thorough evaluation from a psychiatrist who understands multiple treatment modalities — not just the one they happen to offer. Use our [clinic finder](/us/) to find experienced providers, or take our [candidacy quiz](/quiz/am-i-a-candidate/) to start the process.
-
-
-## Making Your Decision
-
-Choosing between treatments is personal. The right option depends on your specific diagnosis, treatment history, insurance coverage, schedule, and preferences. Here's a framework:
-
-<div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5">
-    <h4 class="font-semibold text-emerald-900 text-sm mb-2">When TMS May Be Better</h4>
-    <ul class="text-xs text-emerald-700 space-y-1 mb-0 list-disc pl-4">
-      <li>You want an FDA-cleared, insurance-covered treatment</li>
-      <li>No sedation, no cognitive effects, drive yourself home</li>
-      <li>Looking for durable results after a defined treatment course</li>
-      <li>You prefer non-pharmacological approaches</li>
-    </ul>
-  </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
-    <h4 class="font-semibold text-blue-900 text-sm mb-2">Questions to Ask Your Provider</h4>
-    <ul class="text-xs text-blue-700 space-y-1 mb-0 list-disc pl-4">
-      <li>Which treatment do you recommend for my specific situation?</li>
-      <li>What are the realistic outcomes I can expect?</li>
-      <li>What does my insurance cover?</li>
-      <li>Can these treatments be combined?</li>
-    </ul>
-  </div>
-</div>
-
-### The Bottom Line
-
-No single treatment works for everyone. The goal is finding the right match for your brain, your symptoms, and your life. If one option doesn't work, others may. Many of these treatments can be combined or sequenced for better results.
-
-Start with a thorough evaluation from a psychiatrist who understands multiple treatment modalities — not just the one they happen to offer. Use our [clinic finder](/us/) to find experienced providers, or take our [candidacy quiz](/quiz/am-i-a-candidate/) to start the process.
