@@ -3,6 +3,7 @@ import { db } from '../../../db';
 import { leads } from '../../../db/schema';
 import { checkRateLimit } from '../../../utils/rateLimit';
 import { sendFunnelEmail, DRIP_SEQUENCES } from '../../../utils/nurtureFunnel';
+import { sendPatientConfirmation } from '../../../utils/email';
 import { z } from 'zod';
 
 export const prerender = false;
@@ -53,6 +54,13 @@ export const POST: APIRoute = async ({ request }) => {
         firstStep
       ).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
     }
+
+    // Send instant confirmation email (fire-and-forget)
+    sendPatientConfirmation({
+      to: parsed.data.email,
+      name: parsed.data.name || '',
+      leadType: 'newsletter',
+    }).catch((err) => console.error("[bg-task] Newsletter confirmation failed:", err?.message));
 
     return new Response(JSON.stringify({ success: true }), {
       status: 201,
