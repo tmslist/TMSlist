@@ -149,18 +149,24 @@ const galleryImages = clinic.gallery_urls || [];
                         <HealthScoreBadge client:idle clinicId={clinic.id} size="md" />
                     </div>
 
-                    <div class="flex items-center gap-4 mb-6">
-                        <img
-                            src={logoUrl}
-                            alt={`${clinic.name} logo`}
-                            width="64"
-                            height="64"
-                            class="w-16 h-16 rounded-2xl object-cover border border-slate-100 shadow-sm shrink-0"
-                            loading="eager"
-                            fetchpriority="high"
-                            decoding="async"
-                        />
-                        <h1 class="text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.05]">
+                    <div class="flex items-start gap-4 mb-6">
+                        {clinic.logo_url || clinic.media?.logo_url ? (
+                            <img
+                                src={logoUrl}
+                                alt={`${clinic.name} logo`}
+                                width="64"
+                                height="64"
+                                class="w-16 h-16 rounded-2xl object-cover border border-slate-100 shadow-sm shrink-0 mt-1"
+                                loading="eager"
+                                fetchpriority="high"
+                                decoding="async"
+                            />
+                        ) : (
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shrink-0 text-white text-2xl font-extrabold">
+                                {clinic.name.charAt(0).toUpperCase()}
+                            </div>
+                        )}
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.05]">
                             {clinic.name}
                         </h1>
                     </div>

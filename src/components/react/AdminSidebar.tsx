@@ -16,6 +16,15 @@ interface Notification {
 interface AdminSidebarProps {
   currentPage: string;
   userEmail: string;
+  isAdmin?: boolean;
+}
+
+interface SearchResult {
+  id: string;
+  type: 'clinic' | 'user' | 'blog';
+  title: string;
+  subtitle: string;
+  href: string;
 }
 
 // ── Sample notification data (swap for DB fetch later) ──────────────────────────
@@ -241,19 +250,183 @@ function getBadgeLabel(count: number): string {
   return String(count);
 }
 
+// ── Search helpers ──────────────────────────────────────────────────────────────
+
+const RESULT_TYPE_ICONS: Record<string, string> = {
+  clinic: '⬤',
+  user: '👤',
+  blog: '📝',
+};
+
+const RESULT_TYPE_LABELS: Record<string, string> = {
+  clinic: 'Clinics',
+  user: 'Users',
+  blog: 'Blog Posts',
+};
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
-export default function AdminSidebar({ currentPage, userEmail }: AdminSidebarProps) {
+export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }: AdminSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>(INITIAL_NOTIFICATIONS);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Search state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchDropdownRef = useRef<HTMLDivElement>(null);
+  const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const unreadCount = getUnreadCount(notifications);
   const hasUnread = unreadCount > 0;
   const badgeLabel = getBadgeLabel(unreadCount);
 
-  // Close dropdown on outside click
+  // Group results by type
+  const groupedResults = searchResults.reduce<Record<string, SearchResult[]>>((acc, result) => {
+    if (!acc[result.type]) acc[result.type] = [];
+    acc[result.type].push(result);
+    return acc;
+  }, {});
+
+  const hasResults = Object.keys(groupedResults).length > 0;
+
+  // Search function
+  const performSearch = useCallback(async (query: string) => {
+    if (!query.trim()) {
+      setSearchResults([]);
+      setIsSearching(false);
+      return;
+    }
+
+    setIsSearching(true);
+    const results: SearchResult[] = [];
+
+    try {
+      // Search clinics
+      const clinicsRes = await fetch(`/api/admin/clinics?search=${encodeURIComponent(query)}&limit=3`);
+      if (clinicsRes.ok) {
+        const clinicsData = await clinicsRes.json();
+        if (clinicsData.clinics && Array.isArray(clinicsData.clinics)) {
+          clinicsData.clinics.forEach((clinic: { id: string; name?: string; title?: string; city?: string; state?: string; location?: string }) => {
+            results.push({
+              id: clinic.id,
+              type: 'clinic',
+              title: clinic.name || clinic.title || 'Unnamed Clinic',
+              subtitle: [clinic.city, clinic.state].filter(Boolean).join(', ') || clinic.location || 'Unknown location',
+              href: `/admin/clinics/${clinic.id}`,
+            });
+          });
+        }
+      }
+
+      // Search blog posts (try /api/admin/blog first)
+      const blogRes = await fetch(`/api/admin/blog?search=${encodeURIComponent(query)}&limit=3`);
+      if (blogRes.ok) {
+        const blogData = await blogRes.json();
+        const posts = blogData.posts || blogData.blog || blogData.data || (Array.isArray(blogData) ? blogData : []);
+        if (Array.isArray(posts)) {
+          posts.slice(0, 3).forEach((post: { id: string; title?: string; name?: string; slug?: string }) => {
+            results.push({
+              id: post.id || post.slug || '',
+              type: 'blog',
+              title: post.title || post.name || 'Untitled Post',
+              subtitle: 'Blog Post',
+              href: `/admin/blog/${post.id || post.slug}`,
+            });
+          });
+        }
+      }
+
+      // Search users (admin only)
+      if (isAdmin) {
+        const usersRes = await fetch(`/api/admin/users?search=${encodeURIComponent(query)}&limit=3`);
+        if (usersRes.ok) {
+          const usersData = await usersRes.json();
+          const users = usersData.users || usersData.data || (Array.isArray(usersData) ? usersData : []);
+          if (Array.isArray(users)) {
+            users.slice(0, 3).forEach((user: { id: string; email?: string; name?: string; role?: string }) => {
+              results.push({
+                id: user.id,
+                type: 'user',
+                title: user.email || user.name || 'Unknown User',
+                subtitle: user.role ? `(${user.role})` : 'User',
+                href: '/admin/users',
+              });
+            });
+          }
+        }
+      }
+    } catch {
+      // Silently fail on search errors
+    }
+
+    setSearchResults(results);
+    setIsSearching(false);
+  }, [isAdmin]);
+
+  // Debounced search on query change
+  useEffect(() => {
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    if (!searchQuery.trim()) {
+      setSearchResults([]);
+      setIsSearching(false);
+      setSearchOpen(false);
+      return;
+    }
+
+    setIsSearching(true);
+    setSearchOpen(true);
+
+    searchTimeoutRef.current = setTimeout(() => {
+      performSearch(searchQuery);
+    }, 300);
+
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, [searchQuery, performSearch]);
+
+  // Close search dropdown on outside click
+  useEffect(() => {
+    if (!searchOpen) return;
+    function handleClickOutside(e: MouseEvent) {
+      const input = searchInputRef.current;
+      const dropdown = searchDropdownRef.current;
+      if (
+        input && dropdown &&
+        !input.contains(e.target as Node) &&
+        !dropdown.contains(e.target as Node)
+      ) {
+        setSearchOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [searchOpen]);
+
+  // Keyboard: Escape to close search
+  useEffect(() => {
+    if (!searchOpen) return;
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setSearchOpen(false);
+        searchInputRef.current?.blur();
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [searchOpen]);
+
+  // Close notification dropdown on outside click
   useEffect(() => {
     if (!notificationOpen) return;
     function handleClickOutside(e: MouseEvent) {
@@ -282,6 +455,25 @@ export default function AdminSidebar({ currentPage, userEmail }: AdminSidebarPro
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
   }, []);
 
+  const handleSearchFocus = useCallback(() => {
+    if (searchQuery.trim()) {
+      setSearchOpen(true);
+    }
+  }, [searchQuery]);
+
+  const handleResultClick = useCallback(() => {
+    setSearchOpen(false);
+    setSearchQuery('');
+    setSearchResults([]);
+  }, []);
+
+  const handleSearchKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      setSearchOpen(false);
+      searchInputRef.current?.blur();
+    }
+  }, []);
+
   const sortedNotifications = [...notifications].sort((a, b) => {
     if (a.read === b.read) return 0;
     return a.read ? 1 : -1;
@@ -290,7 +482,7 @@ export default function AdminSidebar({ currentPage, userEmail }: AdminSidebarPro
   const sidebarContent = (
     <div className="flex flex-col h-full">
       {/* Logo + Notification Bell */}
-      <div className="px-5 py-6 border-b border-gray-100">
+      <div className="px-5 py-5 border-b border-gray-100">
         <div className="flex items-center justify-between">
           <a href="/admin/dashboard" className="flex items-center gap-3">
             <div className="w-9 h-9 bg-violet-600 rounded-xl flex items-center justify-center">
@@ -304,95 +496,227 @@ export default function AdminSidebar({ currentPage, userEmail }: AdminSidebarPro
             </div>
           </a>
 
-          {/* Notification Bell */}
-          <div className="relative" ref={dropdownRef}>
+          {/* Search focus button + Notification Bell */}
+          <div className="flex items-center gap-1">
+            {/* Search toggle button */}
             <button
-              onClick={() => setNotificationOpen((prev) => !prev)}
-              className={`relative p-2 rounded-lg transition-colors ${
-                hasUnread
-                  ? 'text-violet-600 hover:bg-violet-50'
-                  : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
-              }`}
-              aria-label={`Notifications${hasUnread ? `, ${unreadCount} unread` : ''}`}
+              onClick={() => searchInputRef.current?.focus()}
+              className="p-2 rounded-lg text-gray-400 hover:bg-gray-50 hover:text-gray-600 transition-colors"
+              aria-label="Search"
+              title="Search (Cmd+K)"
             >
-              {/* Bell icon */}
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-
-              {/* Unread badge */}
-              {badgeLabel && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center text-[10px] font-bold text-white bg-red-500 rounded-full px-1 leading-none">
-                  {badgeLabel}
-                </span>
-              )}
             </button>
 
-            {/* Notification Dropdown */}
-            {notificationOpen && (
-              <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 z-50">
-                {/* Dropdown header */}
-                <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
-                  <span className="text-sm font-semibold text-gray-900">Notifications</span>
-                  {hasUnread && (
-                    <button
-                      onClick={handleMarkAllRead}
-                      className="text-xs text-violet-600 hover:text-violet-700 font-medium transition-colors"
-                    >
-                      Mark all read
-                    </button>
-                  )}
-                </div>
+            {/* Notification Bell */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setNotificationOpen((prev) => !prev)}
+                className={`relative p-2 rounded-lg transition-colors ${
+                  hasUnread
+                    ? 'text-violet-600 hover:bg-violet-50'
+                    : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
+                }`}
+                aria-label={`Notifications${hasUnread ? `, ${unreadCount} unread` : ''}`}
+              >
+                {/* Bell icon */}
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                  />
+                </svg>
 
-                {/* Notification list */}
-                <div className="max-h-80 overflow-y-auto">
-                  {sortedNotifications.map((notification) => (
-                    <button
-                      key={notification.id}
-                      onClick={() => handleNotificationClick(notification)}
-                      className={`w-full flex items-start gap-3 px-4 py-3 text-left transition-colors border-b border-gray-50 last:border-0 hover:bg-gray-50 ${
-                        !notification.read ? 'bg-violet-50/40' : ''
-                      }`}
-                    >
-                      {/* Icon */}
-                      <span className="mt-0.5 text-lg shrink-0">{notification.icon}</span>
+                {/* Unread badge */}
+                {badgeLabel && (
+                  <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center text-[10px] font-bold text-white bg-red-500 rounded-full px-1 leading-none">
+                    {badgeLabel}
+                  </span>
+                )}
+              </button>
 
-                      {/* Content */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium text-gray-900">{notification.title}</span>
-                          {!notification.read && (
-                            <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
-                          )}
+              {/* Notification Dropdown */}
+              {notificationOpen && (
+                <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 z-50">
+                  {/* Dropdown header */}
+                  <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+                    <span className="text-sm font-semibold text-gray-900">Notifications</span>
+                    {hasUnread && (
+                      <button
+                        onClick={handleMarkAllRead}
+                        className="text-xs text-violet-600 hover:text-violet-700 font-medium transition-colors"
+                      >
+                        Mark all read
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Notification list */}
+                  <div className="max-h-80 overflow-y-auto">
+                    {sortedNotifications.map((notification) => (
+                      <button
+                        key={notification.id}
+                        onClick={() => handleNotificationClick(notification)}
+                        className={`w-full flex items-start gap-3 px-4 py-3 text-left transition-colors border-b border-gray-50 last:border-0 hover:bg-gray-50 ${
+                          !notification.read ? 'bg-violet-50/40' : ''
+                        }`}
+                      >
+                        {/* Icon */}
+                        <span className="mt-0.5 text-lg shrink-0">{notification.icon}</span>
+
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium text-gray-900">{notification.title}</span>
+                            {!notification.read && (
+                              <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                            )}
+                          </div>
+                          <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{notification.description}</p>
+                          <span className="text-[11px] text-gray-400 mt-1 block">{notification.timeAgo}</span>
                         </div>
-                        <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{notification.description}</p>
-                        <span className="text-[11px] text-gray-400 mt-1 block">{notification.timeAgo}</span>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+                      </button>
+                    ))}
+                  </div>
 
-                {/* Dropdown footer */}
-                <div className="px-4 py-3 border-t border-gray-100">
-                  <a
-                    href="/admin/notifications"
-                    onClick={() => setNotificationOpen(false)}
-                    className="flex items-center justify-center text-sm text-violet-600 hover:text-violet-700 font-medium transition-colors"
-                  >
-                    View all notifications
-                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
+                  {/* Dropdown footer */}
+                  <div className="px-4 py-3 border-t border-gray-100">
+                    <a
+                      href="/admin/notifications"
+                      onClick={() => setNotificationOpen(false)}
+                      className="flex items-center justify-center text-sm text-violet-600 hover:text-violet-700 font-medium transition-colors"
+                    >
+                      View all notifications
+                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Search bar */}
+        <div className="relative mt-4">
+          <div className="relative">
+            <svg
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={handleSearchFocus}
+              onKeyDown={handleSearchKeyDown}
+              placeholder="Search clinics, doctors, users, blog posts, leads..."
+              className="w-full pl-9 pr-8 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-lg placeholder-gray-400 focus:outline-none focus:bg-white focus:border-violet-300 focus:ring-2 focus:ring-violet-100 transition-colors"
+              autoComplete="off"
+              spellCheck={false}
+            />
+            {/* Loading spinner */}
+            {isSearching && (
+              <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                <svg className="w-4 h-4 text-violet-500 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
               </div>
             )}
+            {/* Cmd+K hint */}
+            {!searchQuery && (
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-gray-400 font-medium bg-gray-100 px-1.5 py-0.5 rounded">
+                ⌘K
+              </span>
+            )}
           </div>
+
+          {/* Search dropdown */}
+          {searchOpen && (
+            <div
+              ref={searchDropdownRef}
+              className="absolute left-0 right-0 top-full mt-2 bg-white rounded-xl shadow-xl border border-gray-100 z-50 overflow-hidden"
+            >
+              {isSearching && !hasResults ? (
+                /* Loading state (no results yet) */
+                <div className="px-4 py-6 text-center text-sm text-gray-500">
+                  <svg className="w-5 h-5 mx-auto mb-2 animate-spin text-violet-400" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  Searching...
+                </div>
+              ) : !isSearching && !hasResults && searchQuery.trim() ? (
+                /* Empty state */
+                <div className="px-4 py-6 text-center text-sm text-gray-500">
+                  <svg className="w-8 h-8 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  No results found
+                  <p className="text-xs text-gray-400 mt-1">Try different keywords</p>
+                </div>
+              ) : hasResults ? (
+                /* Results list */
+                <div className="max-h-80 overflow-y-auto">
+                  {Object.entries(groupedResults).map(([type, results]) => (
+                    <div key={type}>
+                      {/* Section header */}
+                      <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
+                        <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">
+                          {RESULT_TYPE_LABELS[type] || type}
+                        </span>
+                      </div>
+                      {/* Result rows */}
+                      {results.map((result) => (
+                        <a
+                          key={`${result.type}-${result.id}`}
+                          href={result.href}
+                          onClick={handleResultClick}
+                          className="flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0"
+                        >
+                          {/* Type icon */}
+                          <span className="text-base shrink-0 w-6 text-center">
+                            {RESULT_TYPE_ICONS[result.type] || '•'}
+                          </span>
+                          {/* Content */}
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-medium text-gray-900 truncate">
+                              {result.title}
+                            </div>
+                            {result.subtitle && (
+                              <div className="text-xs text-gray-500 truncate">
+                                {result.subtitle}
+                              </div>
+                            )}
+                          </div>
+                          {/* Arrow */}
+                          <svg
+                            className="w-4 h-4 text-gray-300 shrink-0"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </a>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          )}
         </div>
       </div>
 
