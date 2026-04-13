@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { verifyMagicToken, getOrCreateUserByEmail, createSessionCookie } from '../../../utils/auth';
+import { verifyMagicToken, getOrCreateUserByEmail, createSession, getClientIpFromRequest } from '../../../utils/auth';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -17,7 +17,8 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   try {
-    const result = await verifyMagicToken(token);
+    // Accept portal-magic tokens for admin login too (shared token type)
+    const result = await verifyMagicToken(token, 'portal-magic');
     if (!result) {
       return new Response(null, { status: 302, headers: { Location: '/admin/login?error=invalid-or-expired' } });
     }
@@ -27,11 +28,14 @@ export const GET: APIRoute = async ({ request }) => {
     // Update last login
     await db.update(users).set({ lastLoginAt: new Date() }).where(eq(users.id, user.id));
 
-    const cookie = createSessionCookie({
-      userId: user.id,
-      email: user.email,
-      role: user.role,
-    });
+    // Create session with tracking
+    const { cookie } = await createSession(
+      { userId: user.id, email: user.email, role: user.role },
+      {
+        userAgent: request.headers.get('user-agent') || undefined,
+        ipAddress: getClientIpFromRequest(request),
+      }
+    );
 
     return new Response(null, {
       status: 302,

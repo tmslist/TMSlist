@@ -99,6 +99,18 @@ export async function getLeads(opts?: { type?: string; limit?: number; offset?: 
     .offset(opts?.offset ?? 0);
 }
 
+export async function updateLeadStatus(id: string, status: string) {
+  const result = await db.update(leads)
+    .set({ metadata: sql`COALESCE(metadata, '{}'::jsonb) || jsonb_build_object('status', ${status})` })
+    .where(eq(leads.id, id))
+    .returning();
+  return result[0];
+}
+
+export async function deleteLeads(ids: string[]) {
+  return db.delete(leads).where(sql`${leads.id} = ANY(${ids})`);
+}
+
 export async function getLeadStats() {
   const result = await db.select({
     type: leads.type,

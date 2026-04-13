@@ -1,9 +1,89 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
+
+// ── Types ──────────────────────────────────────────────────────────────────────
+
+interface Notification {
+  id: string;
+  type: 'lead' | 'review' | 'clinic' | 'blog' | 'user' | 'security';
+  icon: string;
+  title: string;
+  description: string;
+  timeAgo: string;
+  link: string;
+  read: boolean;
+}
 
 interface AdminSidebarProps {
   currentPage: string;
   userEmail: string;
 }
+
+// ── Sample notification data (swap for DB fetch later) ──────────────────────────
+
+const INITIAL_NOTIFICATIONS: Notification[] = [
+  {
+    id: '1',
+    type: 'lead',
+    icon: '🎯',
+    title: 'New Lead',
+    description: 'John D. submitted a specialist enquiry',
+    timeAgo: '2m ago',
+    link: '/admin/leads',
+    read: false,
+  },
+  {
+    id: '2',
+    type: 'review',
+    icon: '⭐',
+    title: 'Review Pending',
+    description: '1 review awaiting moderation',
+    timeAgo: '15m ago',
+    link: '/admin/reviews',
+    read: false,
+  },
+  {
+    id: '3',
+    type: 'clinic',
+    icon: '🏥',
+    title: 'Clinic Claimed',
+    description: 'New clinic claim pending review',
+    timeAgo: '1h ago',
+    link: '/admin/clinics',
+    read: false,
+  },
+  {
+    id: '4',
+    type: 'blog',
+    icon: '📝',
+    title: 'Blog Draft',
+    description: 'Draft post needs review',
+    timeAgo: '3h ago',
+    link: '/admin/blog',
+    read: true,
+  },
+  {
+    id: '5',
+    type: 'user',
+    icon: '👤',
+    title: 'New User',
+    description: 'New user signed up: jane@example.com',
+    timeAgo: '5h ago',
+    link: '/admin/users',
+    read: true,
+  },
+  {
+    id: '6',
+    type: 'security',
+    icon: '🔒',
+    title: 'Security',
+    description: 'Failed login attempt detected',
+    timeAgo: '1d ago',
+    link: '/admin/audit',
+    read: true,
+  },
+];
+
+// ── Nav items ────────────────────────────────────────────────────────────────────
 
 const NAV_ITEMS = [
   {
@@ -149,33 +229,171 @@ const NAV_ITEMS = [
   },
 ];
 
+// ── Helpers ────────────────────────────────────────────────────────────────────
+
+function getUnreadCount(notifications: Notification[]): number {
+  return notifications.filter((n) => !n.read).length;
+}
+
+function getBadgeLabel(count: number): string {
+  if (count === 0) return '';
+  if (count > 9) return '9+';
+  return String(count);
+}
+
+// ── Component ─────────────────────────────────────────────────────────────────
+
 export default function AdminSidebar({ currentPage, userEmail }: AdminSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>(INITIAL_NOTIFICATIONS);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleLogout = useCallback(async () => {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-    } catch {
-      // proceed regardless
+  const unreadCount = getUnreadCount(notifications);
+  const hasUnread = unreadCount > 0;
+  const badgeLabel = getBadgeLabel(unreadCount);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    if (!notificationOpen) return;
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setNotificationOpen(false);
+      }
     }
-    window.location.href = '/admin/login';
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [notificationOpen]);
+
+  const handleNotificationClick = useCallback(
+    (notification: Notification) => {
+      if (!notification.read) {
+        setNotifications((prev) =>
+          prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n))
+        );
+      }
+      setNotificationOpen(false);
+      window.location.href = notification.link;
+    },
+    []
+  );
+
+  const handleMarkAllRead = useCallback(() => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
   }, []);
+
+  const sortedNotifications = [...notifications].sort((a, b) => {
+    if (a.read === b.read) return 0;
+    return a.read ? 1 : -1;
+  });
 
   const sidebarContent = (
     <div className="flex flex-col h-full">
-      {/* Logo */}
+      {/* Logo + Notification Bell */}
       <div className="px-5 py-6 border-b border-gray-100">
-        <a href="/admin/dashboard" className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-violet-600 rounded-xl flex items-center justify-center">
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+        <div className="flex items-center justify-between">
+          <a href="/admin/dashboard" className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-violet-600 rounded-xl flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div>
+              <span className="text-lg font-bold text-gray-900">TMS List</span>
+              <span className="block text-[10px] font-semibold text-violet-600 uppercase tracking-wider -mt-0.5">Admin</span>
+            </div>
+          </a>
+
+          {/* Notification Bell */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setNotificationOpen((prev) => !prev)}
+              className={`relative p-2 rounded-lg transition-colors ${
+                hasUnread
+                  ? 'text-violet-600 hover:bg-violet-50'
+                  : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
+              }`}
+              aria-label={`Notifications${hasUnread ? `, ${unreadCount} unread` : ''}`}
+            >
+              {/* Bell icon */}
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                />
+              </svg>
+
+              {/* Unread badge */}
+              {badgeLabel && (
+                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center text-[10px] font-bold text-white bg-red-500 rounded-full px-1 leading-none">
+                  {badgeLabel}
+                </span>
+              )}
+            </button>
+
+            {/* Notification Dropdown */}
+            {notificationOpen && (
+              <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 z-50">
+                {/* Dropdown header */}
+                <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+                  <span className="text-sm font-semibold text-gray-900">Notifications</span>
+                  {hasUnread && (
+                    <button
+                      onClick={handleMarkAllRead}
+                      className="text-xs text-violet-600 hover:text-violet-700 font-medium transition-colors"
+                    >
+                      Mark all read
+                    </button>
+                  )}
+                </div>
+
+                {/* Notification list */}
+                <div className="max-h-80 overflow-y-auto">
+                  {sortedNotifications.map((notification) => (
+                    <button
+                      key={notification.id}
+                      onClick={() => handleNotificationClick(notification)}
+                      className={`w-full flex items-start gap-3 px-4 py-3 text-left transition-colors border-b border-gray-50 last:border-0 hover:bg-gray-50 ${
+                        !notification.read ? 'bg-violet-50/40' : ''
+                      }`}
+                    >
+                      {/* Icon */}
+                      <span className="mt-0.5 text-lg shrink-0">{notification.icon}</span>
+
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-gray-900">{notification.title}</span>
+                          {!notification.read && (
+                            <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                          )}
+                        </div>
+                        <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{notification.description}</p>
+                        <span className="text-[11px] text-gray-400 mt-1 block">{notification.timeAgo}</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Dropdown footer */}
+                <div className="px-4 py-3 border-t border-gray-100">
+                  <a
+                    href="/admin/notifications"
+                    onClick={() => setNotificationOpen(false)}
+                    className="flex items-center justify-center text-sm text-violet-600 hover:text-violet-700 font-medium transition-colors"
+                  >
+                    View all notifications
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
-          <div>
-            <span className="text-lg font-bold text-gray-900">TMS List</span>
-            <span className="block text-[10px] font-semibold text-violet-600 uppercase tracking-wider -mt-0.5">Admin</span>
-          </div>
-        </a>
+        </div>
       </div>
 
       {/* Navigation */}
@@ -206,7 +424,10 @@ export default function AdminSidebar({ currentPage, userEmail }: AdminSidebarPro
           <div className="text-sm font-medium text-gray-700 truncate" title={userEmail}>{userEmail}</div>
         </div>
         <button
-          onClick={handleLogout}
+          onClick={() => {
+            // TODO: call /api/auth/logout then redirect
+            window.location.href = '/admin/login';
+          }}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-700 transition-colors"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

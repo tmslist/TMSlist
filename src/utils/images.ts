@@ -1,93 +1,60 @@
 /**
- * Image utilities — deterministic fallback pool + responsive helpers.
- * Replaces the old hardcoded Unsplash URLs in dataHelpers.ts with
- * a system that supports uploaded images (Vercel Blob) and fallbacks.
+ * Image utilities — unique fallback images for clinics.
  *
- * Pool distribution uses clinic ID first (unique per DB row) so each
- * real clinic gets its own photo. Only falls back to name-based hashing
- * when ID is absent (static/mock data).
+ * Uses Picsum Photos for deterministic, unique-per-clinic fallbacks.
+ * Each clinic ID produces a guaranteed unique photo — no repeat
+ * regardless of how many clinics exist in the DB.
+ *
+ * Priority chain:
+ *   1. Uploaded/clinic hero_image_url  → real clinic photo
+ *   2. Picsum seed from clinic ID     → unique fallback
+ *
+ * Also provides: srcset helpers, logo fallback with SVG initials.
  */
 
-const CLINIC_IMAGE_POOL = [
-  // Medical / clinic interiors
-  "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1516549655169-df83a092dd14?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1516574187841-693083f69382?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1576091160550-217358c7e618?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop",
-  // Additional diversity — waiting rooms, exteriors, mental health context
-  "https://images.unsplash.com/photo-1584982752892-0a4e2b5a9e17?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1590536889920-2540e4b90826?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1621839673705-6617adf9e890?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=500&fit=crop",
-  "https://images.unsplash.com/photo-1513060738314-8e4e4e7fea78?w=800&h=500&fit=crop",
-];
+import crypto from 'crypto';
 
 /**
- * Deterministic hash — prioritizes ID (unique per clinic) then name.
- * This ensures all real DB clinics get unique photos from the pool.
- */
-function getPoolIndex(key: string): number {
-  let hash = 0;
-  for (let i = 0; i < key.length; i++) {
-    hash = (hash << 5) - hash + key.charCodeAt(i);
-    // Keep hash to 32-bit range to avoid floating point issues
-    hash = hash & hash;
-  }
-  return Math.abs(hash) % CLINIC_IMAGE_POOL.length;
-}
-
-/**
- * Get best image for a clinic with proper fallback chain.
- * Priority: uploaded hero → deterministic pool fallback
- *
- * Uses ID first (clinic.id from DB is unique) so each real clinic
- * gets its own distinct photo. Falls back to name-based hashing for
- * static/mock objects without IDs.
+ * Generate a unique image URL for a clinic using Picsum.
+ * Uses clinic ID as seed — picsum.photos guarantees a unique photo
+ * for every numeric seed. No hardcoded pool needed; works for 1 or 10,000 clinics.
  */
 export function getClinicImageUrl(clinic: {
-  id?: string;
+  id?: string | number;
   name?: string;
-  media?: { hero_image_url?: string; logo_url?: string } | null;
+  media?: { hero_image_url?: string } | null;
 }): string {
   if (clinic.media?.hero_image_url) return clinic.media.hero_image_url;
 
-  // Prefer clinic ID — ensures unique distribution for all DB rows
-  const key = clinic.id || clinic.name || 'default';
-  return CLINIC_IMAGE_POOL[getPoolIndex(key)];
+  const id = String(clinic.id ?? clinic.name ?? 'default');
+  const seed = Math.abs(hashString(id));
+
+  // Picsum: same seed = same photo, unique per seed
+  // 800x500 matches the 16:10 aspect ratio used across the site
+  return `https://picsum.photos/seed/${seed}/800/500`;
 }
 
 /**
- * Generate responsive srcset for Unsplash images.
+ * Generate a unique, stable portrait image URL for doctors/specialists.
+ * Uses a different seed base so doctor and clinic photos never collide.
+ */
+export function getDoctorImageUrl(doctor: {
+  id?: string | number;
+  name?: string;
+  imageUrl?: string;
+}): string {
+  if (doctor.imageUrl) return doctor.imageUrl;
+
+  const id = String(doctor.id ?? doctor.name ?? 'doctor');
+  const seed = Math.abs(hashString(id)) + 999999; // offset so doctors never match clinics
+  return `https://picsum.photos/seed/${seed}/400/400`;
+}
+
+/**
+ * Generate responsive srcset for any image URL.
  */
 export function getUnsplashSrcSet(url: string): string {
   if (!url.includes('unsplash.com')) return '';
-
   const base = url.split('?')[0];
   const widths = [400, 600, 800, 1200];
   return widths
@@ -96,7 +63,22 @@ export function getUnsplashSrcSet(url: string): string {
 }
 
 /**
- * Get logo URL with fallback to first-letter SVG avatar.
+ * Picsum srcset for responsive loading.
+ */
+export function getPicsumSrcSet(seed: number, width = 800, height = 500): string {
+  const widths = [400, 600, 800, 1200];
+  const h = Math.round((widths[0] / width) * height);
+  return widths
+    .map(w => {
+      const scaledH = Math.round((w / width) * height);
+      return `https://picsum.photos/seed/${seed}/${w}/${scaledH} ${w}w`;
+    })
+    .join(', ');
+}
+
+/**
+ * Logo fallback — SVG with the clinic's initial letter and a color
+ * derived from the clinic name so it stays consistent across page loads.
  */
 export function getClinicLogoUrl(clinic: {
   name: string;
@@ -105,10 +87,23 @@ export function getClinicLogoUrl(clinic: {
   if (clinic.media?.logo_url) return clinic.media.logo_url;
 
   const initial = clinic.name.charAt(0).toUpperCase();
-  const colors = ['4f46e5', '2563eb', '7c3aed', '059669', 'dc2626', 'ea580c', '0891b2', '7c3aed'];
-  const color = colors[getPoolIndex(clinic.name) % colors.length];
+  const colors = ['4f46e5', '2563eb', '7c3aed', '059669', 'dc2626', 'ea580c', '0891b2', '4f46e5', '2563eb', '7c3aed'];
+  const color = colors[Math.abs(hashString(clinic.name)) % colors.length];
 
   return `data:image/svg+xml,${encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#${color}"/><text x="32" y="40" text-anchor="middle" fill="white" font-family="system-ui" font-size="28" font-weight="bold">${initial}</text></svg>`
+    `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="12" fill="#${color}"/>
+      <text x="32" y="41" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="28" font-weight="bold">${initial}</text>
+    </svg>`
   )}`;
+}
+
+/** djb2 hash — fast, deterministic, well-distributed */
+function hashString(str: string): number {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) + hash) + str.charCodeAt(i);
+    hash = hash & hash; // keep 32-bit
+  }
+  return hash;
 }

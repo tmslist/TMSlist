@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { loginSchema } from '../../../db/validation';
-import { getUserByEmail, verifyPassword, createSessionCookie } from '../../../utils/auth';
-import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+import { getUserByEmail, verifyPassword, createSession, getClientIpFromRequest } from '../../../utils/auth';
+import { strictRateLimit } from '../../../utils/rateLimit';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -11,7 +11,7 @@ export const prerender = false;
 export const POST: APIRoute = async ({ request }) => {
   try {
     // Rate limit: 5 requests per IP per 15 minutes
-    const ip = getClientIp(request);
+    const ip = getClientIpFromRequest(request);
     const rateLimited = await strictRateLimit(ip, 5, '15 m', 'auth:portal-password');
     if (rateLimited) return rateLimited;
 
@@ -53,11 +53,14 @@ export const POST: APIRoute = async ({ request }) => {
     // Update last login
     await db.update(users).set({ lastLoginAt: new Date() }).where(eq(users.id, user.id));
 
-    const cookie = createSessionCookie({
-      userId: user.id,
-      email: user.email,
-      role: user.role,
-    });
+    // Create session with tracking
+    const { cookie } = await createSession(
+      { userId: user.id, email: user.email, role: user.role },
+      {
+        userAgent: request.headers.get('user-agent') || undefined,
+        ipAddress: ip,
+      }
+    );
 
     // Determine redirect based on whether user has a clinic
     const redirectTo = user.clinicId ? '/portal/dashboard' : '/portal/claim';

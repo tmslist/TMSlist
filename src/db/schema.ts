@@ -333,6 +333,22 @@ export const treatments = pgTable('treatments', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
 });
 
+// ── SESSIONS ──────────────────────────────────────
+
+export const sessions = pgTable('sessions', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  tokenHash: text('token_hash').notNull().unique(),
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  lastUsedAt: timestamp('last_used_at', { withTimezone: true }).defaultNow(),
+  userAgent: text('user_agent'),
+  ipAddress: text('ip_address'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_sessions_user').on(table.userId),
+  index('idx_sessions_token').on(table.tokenHash),
+]);
+
 // ── USERS (AUTH) ──────────────────────────────────
 
 export const users = pgTable('users', {
@@ -342,6 +358,10 @@ export const users = pgTable('users', {
   role: userRoleEnum('role').notNull().default('viewer'),
   name: text('name'),
   clinicId: uuid('clinic_id').references(() => clinics.id),
+  emailVerified: boolean('email_verified').notNull().default(false),
+  emailVerifiedAt: timestamp('email_verified_at', { withTimezone: true }),
+  npiNumber: text('npi_number'),
+  termsAcceptedAt: timestamp('terms_accepted_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   lastLoginAt: timestamp('last_login_at', { withTimezone: true }),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
@@ -353,16 +373,25 @@ export const users = pgTable('users', {
 
 // ── MAGIC LINK TOKENS ──────────────────────────────
 
+export const magicTokenPurposeEnum = pgEnum('magic_token_purpose', [
+  'portal-magic',
+  'community-magic',
+  'password-reset',
+  'email-verification',
+]);
+
 export const magicTokens = pgTable('magic_tokens', {
   id: uuid('id').defaultRandom().primaryKey(),
   email: text('email').notNull(),
   token: text('token').notNull().unique(),
+  purpose: magicTokenPurposeEnum('purpose').notNull(),
   expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
   usedAt: timestamp('used_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [
   index('idx_magic_tokens_token').on(table.token),
   index('idx_magic_tokens_email').on(table.email),
+  index('idx_magic_tokens_purpose').on(table.purpose),
 ]);
 
 // ── AUDIT LOG ──────────────────────────────────

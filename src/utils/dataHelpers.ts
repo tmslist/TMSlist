@@ -276,16 +276,36 @@ export function getClinicReviewCount(clinic: Clinic): number {
     return clinic.review_count || (typeof clinic.rating === 'object' ? clinic.rating.count : 0);
 }
 
+/** Returns true if the URL looks like a generic hardcoded stock fallback (Unsplash or Picsum). */
+function isStockFallback(url: string): boolean {
+    return url.includes('images.unsplash.com') || url.includes('picsum.photos');
+}
+
 export function getClinicPhoto(clinic: Clinic): string {
-    if (clinic.hero_image_url) return clinic.hero_image_url;
+    const { hero_image_url } = clinic;
+    // Only use stored image if it's a real upload (not a stock fallback)
+    if (hero_image_url && !isStockFallback(hero_image_url)) {
+        return hero_image_url;
+    }
     return getClinicImageUrl({ id: clinic.id, name: clinic.name, media: clinic.media });
 }
 
 export function getDoctorPhoto(doctor: { name?: string; image_url?: string; imageUrl?: string; slug?: string }): string {
-    const img = doctor.image_url || doctor.imageUrl;
-    if (img) return img;
-    const name = doctor.name || 'Doctor';
-    return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0D8ABC&color=fff&size=200`;
+    return doctor.image_url || doctor.imageUrl
+        || (() => {
+            const name = doctor.name || 'Doctor';
+            const seed = Math.abs(
+                ((hashStr: string) => {
+                    let h = 5381;
+                    for (let i = 0; i < hashStr.length; i++) {
+                        h = ((h << 5) + h) + hashStr.charCodeAt(i);
+                        h = h & h;
+                    }
+                    return h;
+                })(name)
+            );
+            return `https://picsum.photos/seed/${seed + 999999}/200/200`;
+        })();
 }
 
 export function hasRealClinicImage(clinic: { hero_image_url?: string; media?: { hero_image_url?: string } }): boolean {

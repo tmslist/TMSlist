@@ -108,7 +108,7 @@ import ContentPage from "../layouts/ContentPage.astro";
 
             try {
                 const data = Object.fromEntries(new FormData(form));
-                const res = await fetch('/api/leads/index', {
+                const res = await fetch('/api/leads', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { verifyMagicToken, getUserByEmail, createSessionCookie } from '../../../utils/auth';
+import { verifyMagicToken, getUserByEmail, createSession, getClientIpFromRequest } from '../../../utils/auth';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -15,7 +15,8 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   try {
-    const result = await verifyMagicToken(token);
+    // Only accept portal-magic tokens (scope enforcement)
+    const result = await verifyMagicToken(token, 'portal-magic');
     if (!result) {
       return new Response(null, { status: 302, headers: { Location: '/portal/login?error=invalid-or-expired' } });
     }
@@ -37,11 +38,14 @@ export const GET: APIRoute = async ({ request }) => {
     // Update last login
     await db.update(users).set({ lastLoginAt: new Date() }).where(eq(users.id, user.id));
 
-    const cookie = createSessionCookie({
-      userId: user.id,
-      email: user.email,
-      role: user.role,
-    });
+    // Create session with session tracking
+    const { cookie } = await createSession(
+      { userId: user.id, email: user.email, role: user.role },
+      {
+        userAgent: request.headers.get('user-agent') || undefined,
+        ipAddress: getClientIpFromRequest(request),
+      }
+    );
 
     // If user doesn't have a clinicId, redirect to claim flow
     if (!user.clinicId) {

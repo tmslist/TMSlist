@@ -73,10 +73,19 @@ export const GET: APIRoute = async ({ request }) => {
         .where(whereClause),
     ]);
 
-    // Get distinct actions and entity types for filter dropdowns
-    const [actions, entityTypes] = await Promise.all([
+    // Get distinct actions, entity types, and users for filter dropdowns
+    const [actions, entityTypes, distinctUsers] = await Promise.all([
       db.selectDistinct({ action: auditLog.action }).from(auditLog),
       db.selectDistinct({ entityType: auditLog.entityType }).from(auditLog),
+      db
+        .selectDistinct({
+          userId: auditLog.userId,
+          userEmail: users.email,
+          userName: users.name,
+        })
+        .from(auditLog)
+        .leftJoin(users, eq(auditLog.userId, users.id))
+        .where(sql`${auditLog.userId} IS NOT NULL`),
     ]);
 
     return json({
@@ -85,8 +94,12 @@ export const GET: APIRoute = async ({ request }) => {
       limit,
       offset,
       filters: {
-        actions: actions.map((a) => a.action),
-        entityTypes: entityTypes.map((e) => e.entityType),
+        actions: actions.map((a) => a.action).sort(),
+        entityTypes: entityTypes.map((e) => e.entityType).sort(),
+        users: distinctUsers
+          .filter((u) => u.userEmail)
+          .map((u) => ({ userId: u.userId, email: u.userEmail!, name: u.userName ?? null }))
+          .sort((a, b) => a.email.localeCompare(b.email)),
       },
     });
   } catch (err) {

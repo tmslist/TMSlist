@@ -81,7 +81,18 @@ export const registerSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8).max(128),
   name: z.string().min(2).max(100),
+  npiNumber: z.string().regex(/^\d{10}$/, 'NPI must be exactly 10 digits').optional(),
+  termsAccepted: z.literal(true, { errorMap: () => ({ message: 'You must accept the terms and privacy policy' }) }),
   role: z.enum(['admin', 'editor', 'viewer', 'clinic_owner']).default('viewer'),
+});
+
+export const forgotPasswordSchema = z.object({
+  email: z.string().email(),
+});
+
+export const resetPasswordSchema = z.object({
+  token: z.string().min(1),
+  password: z.string().min(8).max(128),
 });
 
 // ── CONTACT FORM VALIDATION ──────────────────────────────

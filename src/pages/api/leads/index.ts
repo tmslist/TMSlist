@@ -3,7 +3,7 @@ import { createLead } from '../../../db/queries';
 import { leadSubmitSchema } from '../../../db/validation';
 import { escapeHtml } from '../../../utils/sanitize';
 import { checkRateLimit } from '../../../utils/rateLimit';
-import { sendLeadNotification } from '../../../utils/email';
+import { sendLeadNotification, sendPatientConfirmation } from '../../../utils/email';
 
 export const prerender = false;
 
@@ -43,6 +43,17 @@ export const POST: APIRoute = async ({ request }) => {
       leadType: data.type,
       metadata: data.metadata,
     }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
+
+    // Send patient confirmation / autoresponder (fire-and-forget)
+    if (data.email && data.name) {
+      sendPatientConfirmation({
+        to: data.email,
+        name: data.name,
+        leadType: data.type,
+        clinicName: data.clinicName,
+        sourceUrl: data.sourceUrl,
+      }).catch((err) => console.error("[bg-task] Autoresponder failed:", err?.message));
+    }
 
     return new Response(JSON.stringify({ success: true, id: lead?.id }), {
       status: 201,

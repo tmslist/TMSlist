@@ -3,7 +3,7 @@ import { db } from '../../../db';
 import { leads } from '../../../db/schema';
 import { escapeHtml } from '../../../utils/sanitize';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
-import { sendLeadNotification } from '../../../utils/email';
+import { sendLeadNotification, sendPatientConfirmation } from '../../../utils/email';
 import { z } from 'zod';
 
 export const prerender = false;
@@ -41,14 +41,14 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    const data = parsed.data;
+
     if (!data.consent) {
       return new Response(JSON.stringify({ error: 'Consent is required' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
     }
-
-    const data = parsed.data;
 
     // Store as lead with metadata
     const lead = await db.insert(leads).values({
@@ -94,6 +94,14 @@ export const POST: APIRoute = async ({ request }) => {
         insurance_provider: data.insurance,
       },
     }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
+
+    // Send patient confirmation (fire-and-forget)
+    sendPatientConfirmation({
+      to: data.email,
+      name: data.name,
+      leadType: 'appointment_request',
+      clinicName: data.clinicName,
+    }).catch((err) => console.error("[bg-task] Appointment confirmation failed:", err?.message));
 
     return new Response(JSON.stringify({ success: true, id: lead[0]?.id }), {
       status: 201,

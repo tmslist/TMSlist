@@ -69,7 +69,7 @@
                     verified TMS specialist near you or answer your questions.
                 </p>
 
-                <form class="space-y-4" id="enquiry-form" accept-charset='UTF-8' action='https://app.formester.com/forms/2KdlKoEgb/submissions' method='POST'>
+                <form class="space-y-4" id="enquiry-form" accept-charset='UTF-8' novalidate>
                     <input type="hidden" name="visitor_country" id="enquiry-country" value="US" />
                     <div
                         id="form-success-message"
@@ -300,6 +300,52 @@
             e.preventDefault();
             openModal();
         });
+    });
+
+    // Handle form submission via internal API
+    const enquiryForm = document.getElementById("enquiry-form") as HTMLFormElement;
+    const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
+    const successMsg = document.getElementById("form-success-message");
+    const errorMsg = document.getElementById("form-error-message");
+
+    enquiryForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting...";
+        successMsg?.classList.add("hidden");
+        errorMsg?.classList.add("hidden");
+
+        const formData = new FormData(enquiryForm);
+        try {
+            const res = await fetch("/api/leads", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    type: "enquiry",
+                    name: formData.get("name"),
+                    email: formData.get("email"),
+                    phone: formData.get("phone"),
+                    location: formData.get("location"),
+                    clinicName: formData.get("clinic") || undefined,
+                    message: formData.get("message"),
+                    role: formData.get("role"),
+                    sourceUrl: window.location.href,
+                    metadata: { country: (document.getElementById("enquiry-country") as HTMLInputElement)?.value || "US" },
+                }),
+            });
+
+            if (res.ok) {
+                successMsg?.classList.remove("hidden");
+                enquiryForm.reset();
+            } else {
+                errorMsg?.classList.remove("hidden");
+            }
+        } catch {
+            errorMsg?.classList.remove("hidden");
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Request Free Consultation";
+        }
     });
 
     // Set visitor country from geo.js
