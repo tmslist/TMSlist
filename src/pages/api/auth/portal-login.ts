@@ -72,9 +72,9 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (err) {
     console.error('Portal login error:', err);
-    // Still return success to prevent enumeration
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
+    // Return generic error to prevent email enumeration, but log the actual error
+    return new Response(JSON.stringify({ error: 'Failed to process login request' }), {
+      status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
   }

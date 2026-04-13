@@ -47,7 +47,9 @@ export const POST: APIRoute = async ({ request }) => {
     if (blobToken) {
       // Dynamic import to avoid build errors when token is not set
       const { put } = await import('@vercel/blob');
-      const blob = await put(file.name, file, {
+      // Sanitize filename to prevent path traversal and injection attacks
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_').substring(0, 200);
+      const blob = await put(safeName, file, {
         access: 'public',
         token: blobToken,
       });

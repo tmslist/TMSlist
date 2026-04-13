@@ -3,6 +3,7 @@ import { db } from '../../../db';
 import { sql } from 'drizzle-orm';
 import { getCached, setCache } from '../../../utils/redis';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+import { getSessionFromRequest } from '../../../utils/auth';
 
 export const prerender = false;
 
@@ -10,6 +11,14 @@ export const prerender = false;
  * Vote on review helpfulness. Tracks via Redis to prevent duplicate votes.
  */
 export const POST: APIRoute = async ({ request }) => {
+  const session = getSessionFromRequest(request);
+  if (!session) {
+    return new Response(JSON.stringify({ error: 'Authentication required to vote' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
   try {
     const ip = getClientIp(request);
     const rateLimited = await strictRateLimit(ip, 30, '1 h', 'reviews:vote');
@@ -43,12 +52,13 @@ export const POST: APIRoute = async ({ request }) => {
     const current = (await getCached<number>(countKey)) || 0;
     await setCache(countKey, current + 1, 86400 * 365);
 
-    // Also try to update DB
+    // Also try to update DB — use separate queries to avoid unsafe column interpolation
     try {
-      const column = helpful ? 'helpful_count' : 'unhelpful_count';
-      await db.execute(sql`
-        UPDATE reviews SET ${sql.raw(column)} = COALESCE(${sql.raw(column)}, 0) + 1 WHERE id = ${reviewId}::uuid
-      `);
+      if (helpful) {
+        await db.execute(sql`UPDATE reviews SET helpful_count = COALESCE(helpful_count, 0) + 1 WHERE id = ${reviewId}::uuid`);
+      } else {
+        await db.execute(sql`UPDATE reviews SET unhelpful_count = COALESCE(unhelpful_count, 0) + 1 WHERE id = ${reviewId}::uuid`);
+      }
     } catch {
       // Column may not exist yet — vote still counted in Redis
     }

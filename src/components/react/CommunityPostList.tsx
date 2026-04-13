@@ -86,7 +86,7 @@ export default function CommunityPostList({
     } finally {
       setLoading(false);
     }
-  }, [categoryId]);
+  }, [categoryId, sort, topPeriod, activeSearch]);
 
   const handleSortChange = useCallback((newSort: SortOption) => {
     setSort(newSort);

@@ -1,0 +1,347 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Depression Severity Self-Assessment | PHQ-9 Quiz";
+const description = "Take the free PHQ-9 questionnaire to measure your depression severity and find out what treatment options — including TMS — may be right for you.";
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const quizSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "PHQ-9 Depression Severity Assessment",
+    "description": description,
+    "url": `${siteUrl}/quiz/depression-severity-test/`,
+    "educationalLevel": "patient",
+    "about": {
+        "@type": "MedicalCondition",
+        "name": "Major Depressive Disorder",
+        "code": { "@type": "MedicalCode", "code": "F33.1", "codingSystem": "ICD-10" }
+    },
+    "provider": {
+        "@type": "Organization",
+        "name": "TMS List",
+        "url": siteUrl,
+    },
+});
+
+const questions = [
+    { id: 1, question: "Little interest or pleasure in doing things" },
+    { id: 2, question: "Feeling down, depressed, or hopeless" },
+    { id: 3, question: "Trouble falling or staying asleep, or sleeping too much" },
+    { id: 4, question: "Feeling tired or having little energy" },
+    { id: 5, question: "Poor appetite or overeating" },
+    { id: 6, question: "Feeling bad about yourself — or that you are a failure or have let yourself or your family down" },
+    { id: 7, question: "Trouble concentrating on things, such as reading the newspaper or watching television" },
+    { id: 8, question: "Moving or speaking so slowly that other people could have noticed — or the opposite, being so fidgety or restless that you have been moving around a lot more than usual" },
+    { id: 9, question: "Thoughts that you would be better off dead, or of hurting yourself in some way" },
+];
+---
+
+<Layout title={title} description={description} noindex={true} schema={quizSchema}>
+    <main class="min-h-screen bg-gradient-to-b from-slate-50 to-white py-12">
+        <div class="container mx-auto px-4 max-w-2xl">
+
+            <div class="mb-6 flex items-center justify-center">
+                <div class="flex items-center gap-2 text-sm text-slate-500">
+                    <svg class="w-4 h-4 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Over the last 2 weeks
+                    <span class="text-slate-300">•</span>
+                    9 questions
+                    <span class="text-slate-300">•</span>
+                    ~3 minutes
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="flex justify-between text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">
+                    <span>Your Progress</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-violet-600 transition-all duration-500 ease-out" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 overflow-hidden">
+
+                <!-- Intro Slide -->
+                <div id="slide-intro" class="quiz-slide p-8 md:p-12 text-center">
+                    <div class="w-16 h-16 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                    <h1 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">Depression Severity Assessment</h1>
+                    <p class="text-lg text-gray-600 mb-4 leading-relaxed">
+                        The PHQ-9 is the standard screening tool for depression severity, used by psychiatrists, primary care doctors, and TMS clinics worldwide.
+                    </p>
+                    <p class="text-base text-gray-500 mb-8 leading-relaxed">
+                        Rate how often each problem has bothered you over the <strong>past 2 weeks</strong>. Your score helps identify severity and appropriate next steps — including whether TMS might be an option.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+                        <button id="btn-start" class="w-full sm:w-auto px-8 py-4 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-all transform hover:-translate-y-1 shadow-lg shadow-violet-200">
+                            Start Assessment
+                        </button>
+                        <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto px-8 py-4 text-gray-500 font-medium rounded-xl border border-gray-200 hover:border-gray-300 hover:text-gray-700 transition-all text-center">
+                            Am I a Candidate Quiz
+                        </a>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-100 rounded-xl p-4 text-left">
+                        <p class="text-amber-700 text-sm">
+                            If you are in crisis: call or text <strong>988</strong> to reach the Suicide &amp; Crisis Lifeline, available 24/7.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Question Slides (hardcoded to avoid JSX template complexity) -->
+                <div id="slide-q1" class="quiz-slide hidden p-8 md:p-12">
+                    <span class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block">Question 1 of 9</span>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">Little interest or pleasure in doing things</h2>
+                    <p class="text-gray-400 text-sm mb-6">Score each: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day</p>
+                    <div class="space-y-3">
+                        <button onclick="phqAnswer(1,0)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Not at all</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 0</span></button>
+                        <button onclick="phqAnswer(1,1)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Several days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 1</span></button>
+                        <button onclick="phqAnswer(1,2)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>More than half the days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 2</span></button>
+                        <button onclick="phqAnswer(1,3)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Nearly every day</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 3</span></button>
+                    </div>
+                </div>
+
+                <div id="slide-q2" class="quiz-slide hidden p-8 md:p-12">
+                    <span class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block">Question 2 of 9</span>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">Feeling down, depressed, or hopeless</h2>
+                    <p class="text-gray-400 text-sm mb-6">Score each: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day</p>
+                    <div class="space-y-3">
+                        <button onclick="phqAnswer(2,0)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Not at all</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 0</span></button>
+                        <button onclick="phqAnswer(2,1)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Several days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 1</span></button>
+                        <button onclick="phqAnswer(2,2)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>More than half the days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 2</span></button>
+                        <button onclick="phqAnswer(2,3)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Nearly every day</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 3</span></button>
+                    </div>
+                </div>
+
+                <div id="slide-q3" class="quiz-slide hidden p-8 md:p-12">
+                    <span class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block">Question 3 of 9</span>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">Trouble falling or staying asleep, or sleeping too much</h2>
+                    <p class="text-gray-400 text-sm mb-6">Score each: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day</p>
+                    <div class="space-y-3">
+                        <button onclick="phqAnswer(3,0)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Not at all</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 0</span></button>
+                        <button onclick="phqAnswer(3,1)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Several days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 1</span></button>
+                        <button onclick="phqAnswer(3,2)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>More than half the days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 2</span></button>
+                        <button onclick="phqAnswer(3,3)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Nearly every day</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 3</span></button>
+                    </div>
+                </div>
+
+                <div id="slide-q4" class="quiz-slide hidden p-8 md:p-12">
+                    <span class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block">Question 4 of 9</span>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">Feeling tired or having little energy</h2>
+                    <p class="text-gray-400 text-sm mb-6">Score each: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day</p>
+                    <div class="space-y-3">
+                        <button onclick="phqAnswer(4,0)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Not at all</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 0</span></button>
+                        <button onclick="phqAnswer(4,1)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Several days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 1</span></button>
+                        <button onclick="phqAnswer(4,2)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>More than half the days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 2</span></button>
+                        <button onclick="phqAnswer(4,3)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Nearly every day</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 3</span></button>
+                    </div>
+                </div>
+
+                <div id="slide-q5" class="quiz-slide hidden p-8 md:p-12">
+                    <span class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block">Question 5 of 9</span>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">Poor appetite or overeating</h2>
+                    <p class="text-gray-400 text-sm mb-6">Score each: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day</p>
+                    <div class="space-y-3">
+                        <button onclick="phqAnswer(5,0)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Not at all</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 0</span></button>
+                        <button onclick="phqAnswer(5,1)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Several days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 1</span></button>
+                        <button onclick="phqAnswer(5,2)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>More than half the days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 2</span></button>
+                        <button onclick="phqAnswer(5,3)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Nearly every day</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 3</span></button>
+                    </div>
+                </div>
+
+                <div id="slide-q6" class="quiz-slide hidden p-8 md:p-12">
+                    <span class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block">Question 6 of 9</span>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">Feeling bad about yourself — or that you are a failure or have let yourself or your family down</h2>
+                    <p class="text-gray-400 text-sm mb-6">Score each: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day</p>
+                    <div class="space-y-3">
+                        <button onclick="phqAnswer(6,0)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Not at all</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 0</span></button>
+                        <button onclick="phqAnswer(6,1)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Several days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 1</span></button>
+                        <button onclick="phqAnswer(6,2)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>More than half the days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 2</span></button>
+                        <button onclick="phqAnswer(6,3)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Nearly every day</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 3</span></button>
+                    </div>
+                </div>
+
+                <div id="slide-q7" class="quiz-slide hidden p-8 md:p-12">
+                    <span class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block">Question 7 of 9</span>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">Trouble concentrating on things, such as reading the newspaper or watching television</h2>
+                    <p class="text-gray-400 text-sm mb-6">Score each: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day</p>
+                    <div class="space-y-3">
+                        <button onclick="phqAnswer(7,0)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Not at all</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 0</span></button>
+                        <button onclick="phqAnswer(7,1)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Several days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 1</span></button>
+                        <button onclick="phqAnswer(7,2)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>More than half the days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 2</span></button>
+                        <button onclick="phqAnswer(7,3)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Nearly every day</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 3</span></button>
+                    </div>
+                </div>
+
+                <div id="slide-q8" class="quiz-slide hidden p-8 md:p-12">
+                    <span class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block">Question 8 of 9</span>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">Moving or speaking so slowly that other people could have noticed — or the opposite, being so fidgety or restless that you have been moving around a lot more than usual</h2>
+                    <p class="text-gray-400 text-sm mb-6">Score each: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day</p>
+                    <div class="space-y-3">
+                        <button onclick="phqAnswer(8,0)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Not at all</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 0</span></button>
+                        <button onclick="phqAnswer(8,1)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Several days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 1</span></button>
+                        <button onclick="phqAnswer(8,2)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>More than half the days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 2</span></button>
+                        <button onclick="phqAnswer(8,3)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Nearly every day</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 3</span></button>
+                    </div>
+                </div>
+
+                <div id="slide-q9" class="quiz-slide hidden p-8 md:p-12">
+                    <span class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block">Question 9 of 9</span>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">Thoughts that you would be better off dead, or of hurting yourself in some way</h2>
+                    <p class="text-gray-400 text-sm mb-6">Score each: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day</p>
+                    <div class="space-y-3">
+                        <button onclick="phqAnswer(9,0)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Not at all</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 0</span></button>
+                        <button onclick="phqAnswer(9,1)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Several days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 1</span></button>
+                        <button onclick="phqAnswer(9,2)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>More than half the days</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 2</span></button>
+                        <button onclick="phqAnswer(9,3)" class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"><span>Nearly every day</span><span class="text-xs font-bold text-gray-400 group-hover:text-violet-600">Score: 3</span></button>
+                    </div>
+                </div>
+
+                <!-- Results Slide -->
+                <div id="slide-results" class="quiz-slide hidden p-8 md:p-12">
+                    <div class="text-center mb-8">
+                        <span class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block">Your PHQ-9 Score</span>
+                        <div class="inline-flex items-baseline gap-1 mb-3">
+                            <span id="score-number" class="text-6xl font-extrabold text-gray-900">0</span>
+                            <span class="text-2xl text-gray-400">/27</span>
+                        </div>
+                        <div id="severity-badge" class="inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4">—</div>
+                        <p id="severity-label" class="text-gray-500 text-sm"></p>
+                    </div>
+
+                    <div class="mb-8">
+                        <div class="flex justify-between text-xs text-gray-400 mb-2">
+                            <span>Minimal</span><span>Mild</span><span>Moderate</span><span>Moderately Severe</span><span>Severe</span>
+                        </div>
+                        <div class="h-3 rounded-full bg-gradient-to-r from-green-200 via-yellow-200 via-orange-300 to-red-400 relative">
+                            <div id="score-marker" class="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white border-2 border-violet-600 rounded-full shadow transition-all duration-700" style="left: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div id="score-card" class="bg-slate-50 border border-slate-200 rounded-xl p-6 mb-8 text-left">
+                        <h3 class="font-semibold text-slate-800 mb-3">What Your Score Means</h3>
+                        <p id="score-interpretation" class="text-sm text-slate-600 leading-relaxed"></p>
+                    </div>
+
+                    <div id="treatment-card" class="bg-violet-50 border border-violet-100 rounded-xl p-6 mb-8 text-left">
+                        <h3 class="font-semibold text-violet-800 mb-2">Recommended Next Steps</h3>
+                        <p id="treatment-text" class="text-sm text-violet-700 leading-relaxed"></p>
+                    </div>
+
+                    <div id="self-harm-alert" class="hidden bg-red-50 border border-red-200 rounded-xl p-5 mb-8 text-left">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-red-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                            <div>
+                                <p class="text-red-700 font-semibold text-sm mb-1">You indicated thoughts of self-harm</p>
+                                <p class="text-red-600 text-sm leading-relaxed">If you are in crisis or need immediate support, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline, available 24/7). You can also text HOME to <strong>741741</strong> to reach the Crisis Text Line.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <a href="/us/" class="quiz-geo-link w-full sm:w-auto text-center px-8 py-4 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-all shadow-lg shadow-violet-200">Find a Clinic Near You</a>
+                        <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto text-center px-8 py-4 text-gray-500 font-medium rounded-xl border border-gray-200 hover:border-gray-300 hover:text-gray-700 transition-all">Am I a Candidate for TMS?</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="text-center text-xs text-gray-400 mt-6">
+                This is a screening tool, not a diagnosis. Only a licensed clinician can evaluate and diagnose depression.
+                Scores are not stored and this assessment does not constitute medical advice.
+            </p>
+        </div>
+    </main>
+</Layout>
+
+<script is:inline>
+    document.getElementById('btn-start').addEventListener('click', function() {
+        nextSlide('intro', 'q1');
+    });
+
+    var phqAnswers = {};
+    var currentQuestion = 1;
+
+    function phqAnswer(qNum, val) {
+        phqAnswers[qNum] = val;
+        var nextId = qNum >= 9 ? 'results' : 'q' + (qNum + 1);
+        nextSlide('q' + qNum, nextId);
+    }
+
+    function nextSlide(currentId, nextId) {
+        var cur = document.getElementById('slide-' + currentId);
+        var nxt = document.getElementById('slide-' + nextId);
+        if (cur) cur.classList.add('hidden');
+        if (nxt) nxt.classList.remove('hidden');
+
+        var answered = Object.keys(phqAnswers).length;
+        var progress = Math.min((answered / 9) * 100, 100);
+        var bar = document.getElementById('progress-bar');
+        var text = document.getElementById('progress-text');
+        if (bar) bar.style.width = progress + '%';
+        if (text) text.innerText = Math.round(progress) + '%';
+
+        if (nextId === 'results') showResults();
+    }
+
+    function getSeverity(score) {
+        if (score <= 4) return { label: "Minimal or None", color: "bg-green-100 text-green-700", interpretation: "Your score suggests minimal or no depression symptoms. Lifestyle changes, regular exercise, and maintaining social connections can support continued well-being.", treatment: "At this level, treatment is typically not needed. Consider monitoring your mood and seeking support if symptoms worsen." };
+        if (score <= 9) return { label: "Mild", color: "bg-yellow-100 text-yellow-700", interpretation: "Your score suggests mild depression. This may respond well to lifestyle interventions, therapy (CBT or similar), or a trial of antidepressant medication.", treatment: "Consider talking to a primary care doctor or therapist. Many people improve significantly with a combination of therapy and exercise. Watch for changes and re-assess in 2-4 weeks." };
+        if (score <= 14) return { label: "Moderate", color: "bg-orange-100 text-orange-700", interpretation: "Your score suggests moderate depression. A combination of psychotherapy and medication is typically the first-line treatment approach. TMS may be an option if medications haven't helped.", treatment: "Schedule an appointment with a psychiatrist or your primary care doctor to discuss treatment options. Document your medication history — insurance often requires records of failed medication trials." };
+        if (score <= 19) return { label: "Moderately Severe", color: "bg-amber-100 text-amber-700", interpretation: "Your score suggests moderately severe depression. This level typically warrants active treatment — either medication, therapy, or both. TMS is often a strong option if you've tried medications without adequate relief.", treatment: "You're likely a good candidate for TMS evaluation. Most insurance requires PHQ-9 of 10 or higher and documented medication failures. Consider scheduling a TMS consultation and gathering your medication history." };
+        return { label: "Severe", color: "bg-red-100 text-red-700", interpretation: "Your score suggests severe depression. This level requires prompt evaluation by a mental health professional. TMS is often appropriate for treatment-resistant cases at this severity level, especially with documented medication history.", treatment: "Please seek evaluation from a psychiatrist or TMS clinic as soon as possible. With your severity score, you may be a strong candidate for TMS. Contact a provider and bring any documentation of past treatments." };
+    }
+
+    function showResults() {
+        var score = 0;
+        for (var i = 1; i <= 9; i++) {
+            score += (phqAnswers[i] || 0);
+        }
+
+        var severity = getSeverity(score);
+
+        var numEl = document.getElementById('score-number');
+        if (numEl) numEl.innerText = score;
+
+        var badge = document.getElementById('severity-badge');
+        if (badge) {
+            badge.innerText = severity.label;
+            badge.className = 'inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4 ' + severity.color;
+        }
+
+        var labelEl = document.getElementById('severity-label');
+        if (labelEl) labelEl.innerText = severity.label + ' Depression';
+
+        var pct = Math.min((score / 27) * 100, 100);
+        var marker = document.getElementById('score-marker');
+        if (marker) marker.style.left = 'calc(' + pct + '% - 10px)';
+
+        var interp = document.getElementById('score-interpretation');
+        if (interp) interp.innerText = severity.interpretation;
+
+        var treat = document.getElementById('treatment-text');
+        if (treat) treat.innerText = severity.treatment;
+
+        if ((phqAnswers[9] || 0) > 0) {
+            var alert = document.getElementById('self-harm-alert');
+            if (alert) alert.classList.remove('hidden');
+        }
+
+        var text = document.getElementById('progress-text');
+        if (text) text.innerText = '100%';
+        var bar = document.getElementById('progress-bar');
+        if (bar) bar.style.width = '100%';
+    }
+
+    // Geo-route CTA links
+    try {
+        if (window.TMS_GEO && window.TMS_GEO.url) {
+            document.querySelectorAll('.quiz-geo-link').forEach(function(el) {
+                el.href = window.TMS_GEO.url;
+            });
+        }
+    } catch (e) {}
+</script>

@@ -80,7 +80,7 @@ export function getSessionFromRequest(request: Request): JWTPayload | null {
  */
 export function createSessionCookie(payload: JWTPayload): string {
   const token = createToken(payload);
-  const secure = typeof process !== 'undefined' && process.env.NODE_ENV === 'production'
+  const secure = (process.env.NODE_ENV === 'production' || process.env.VERCEL === '1')
     ? '; Secure'
     : '';
   return `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${7 * 24 * 60 * 60}${secure}`;

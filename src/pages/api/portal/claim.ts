@@ -22,6 +22,9 @@ export const GET: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ clinics: [] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
 
+    // Strip LIKE wildcards to prevent injection
+    const safeQuery = query.replace(/[%_]/g, '');
+
     const results = await db.select({
       id: clinics.id,
       name: clinics.name,
@@ -30,7 +33,7 @@ export const GET: APIRoute = async ({ request }) => {
       address: clinics.address,
     })
       .from(clinics)
-      .where(ilike(clinics.name, `%${query}%`))
+      .where(ilike(clinics.name, `%${safeQuery}%`))
       .limit(20);
 
     return new Response(JSON.stringify({ clinics: results }), {

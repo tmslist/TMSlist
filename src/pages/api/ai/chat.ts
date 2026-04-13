@@ -69,7 +69,7 @@ export const POST: APIRoute = async ({ request }) => {
           model: 'claude-haiku-4-5-20251001',
           max_tokens: 1024,
           system: TMS_SYSTEM_PROMPT,
-          messages: recentMessages.map((m: any) => ({
+          messages: recentMessages.map((m: { role: string; content: string }) => ({
             role: m.role === 'user' ? 'user' : 'assistant',
             content: m.content,
           })),

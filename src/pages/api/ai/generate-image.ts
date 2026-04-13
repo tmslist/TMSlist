@@ -2,10 +2,19 @@ import type { APIRoute } from 'astro';
 import { generateCityImage, generateTreatmentImage, generateHeroImage, generateImage } from '../../../utils/gemini';
 import { uploadAiImage, isCloudinaryConfigured } from '../../../utils/cloudinary';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth';
 
 export const prerender = false;
 
 export const GET: APIRoute = async ({ request, url }) => {
+  const session = getSessionFromRequest(request);
+  if (!hasRole(session, 'admin', 'editor', 'clinic_owner')) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
   const ip = getClientIp(request);
   const rateLimited = await strictRateLimit(ip, 10, '1 h', 'ai:generate-image');
   if (rateLimited) return rateLimited;

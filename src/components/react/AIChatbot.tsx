@@ -114,7 +114,7 @@ export default function AIChatbot() {
                     : 'bg-slate-100 text-slate-700 rounded-bl-md'
                 }`}>
                   {msg.content.split('\n').map((line, j) => (
-                    <p key={j} className={j > 0 ? 'mt-2' : ''}>{line}</p>
+                    <p key={j} className={j > 0 ? 'mt-2' : ''}>{line.replace(/<[^>]*>/g, '')}</p>
                   ))}
                 </div>
               </div>
