@@ -45,6 +45,7 @@ export default function AdminBlog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [page, setPage] = useState(0);
@@ -61,15 +62,16 @@ export default function AdminBlog() {
       params.set('offset', String(page * limit));
 
       const res = await fetch(`/api/admin/blog?${params}`);
+      if (res.status === 401) { window.location.href = '/admin/login'; return; }
       const json = await res.json();
       if (res.ok) {
         setPosts(json.data || []);
         setTotal(json.total || 0);
       } else {
-        console.error('Blog fetch error:', json.error);
+        setError(json.error || 'Failed to load posts');
       }
     } catch (err) {
-      console.error('Failed to fetch posts:', err);
+      setError(err instanceof Error ? err.message : 'Failed to load posts');
     } finally {
       setLoading(false);
     }
@@ -156,6 +158,16 @@ export default function AdminBlog() {
         {loading ? (
           <div className="flex items-center justify-center py-16">
             <div className="w-6 h-6 border-2 border-violet-600 border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : error ? (
+          <div className="text-center py-16">
+            <svg className="w-12 h-12 text-red-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <p className="text-red-600 font-medium">{error}</p>
+            <button onClick={fetchPosts} className="text-violet-600 hover:text-violet-700 text-sm font-medium mt-2 inline-block">
+              Try again
+            </button>
           </div>
         ) : posts.length === 0 ? (
           <div className="text-center py-16">

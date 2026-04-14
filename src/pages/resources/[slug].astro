@@ -139,7 +139,7 @@ const schema = JSON.stringify({
             <p class="text-sm text-slate-500 mb-4">
               Your <strong>{magnet.title}</strong> is on its way to your inbox.
             </p>
-            <p class="text-xs text-slate-400">Didn't receive it? Check your spam folder or <a href="mailto:support@tmslist.com" class="text-blue-600">contact us</a>.</p>
+            <p class="text-xs text-slate-400">Didn't receive it? Check your spam folder or <a href="mailto:tmslistofficial@gmail.com?subject=Magnet Download Issue" class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg transition-colors">Contact Us</a>.</p>
           </div>
         </div>
       </div>
@@ -219,6 +219,15 @@ const schema = JSON.stringify({
 
         form.classList.add('hidden');
         document.getElementById('form-success').classList.remove('hidden');
+
+        // Trigger direct PDF download
+        const downloadUrl = `/downloads/${magnetSlug}.pdf`;
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = `${magnetTitle}.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       } else {
         errorEl.textContent = 'Something went wrong. Please try again.';
         errorEl.classList.remove('hidden');

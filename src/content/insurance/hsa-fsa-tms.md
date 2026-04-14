@@ -180,3 +180,16 @@ That last point is worth repeating. **Your insurer denies TMS, but your doctor p
 </div>
 
 For more details, see our [Prior Authorization Guide](/insurance/prior-authorization-guide/) and [Denied Coverage Appeals](/insurance/denied-coverage-appeals/) guide.
+
+<div class="not-prose my-6">
+  <div class="aspect-video rounded-xl overflow-hidden shadow-lg">
+    <iframe
+      class="w-full h-full"
+      src="https://www.youtube.com/embed/CMTiNPFgOMY"
+      title="HSA vs FSA Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>

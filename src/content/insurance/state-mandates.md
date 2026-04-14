@@ -220,3 +220,16 @@ The system is moving toward more coverage, not less. If you're fighting for appr
 </div>
 
 For more details, see our [Prior Authorization Guide](/insurance/prior-authorization-guide/) and [Denied Coverage Appeals](/insurance/denied-coverage-appeals/) guide.
+
+<div class="not-prose my-6">
+  <div class="aspect-video rounded-xl overflow-hidden shadow-lg">
+    <iframe
+      class="w-full h-full"
+      src="https://www.youtube.com/embed/a_8bOCNjJpY"
+      title="Mayo Clinic: TMS Therapy for Depression"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>

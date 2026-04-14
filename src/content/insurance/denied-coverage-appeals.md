@@ -184,3 +184,16 @@ The data tells a different story: people who appeal have a significantly better 
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>
+
+<div class="not-prose my-6">
+  <div class="aspect-video rounded-xl overflow-hidden shadow-lg">
+    <iframe
+      class="w-full h-full"
+      src="https://www.youtube.com/embed/PfKKHZdLfdE"
+      title="What to Do When Your Insurance Claim is Denied"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>

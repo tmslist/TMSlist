@@ -30,6 +30,39 @@ export const POST: APIRoute = async ({ request }) => {
         const session = event.data.object as any;
         const clinicId = session.metadata?.clinicId;
         const type = session.metadata?.type;
+        const plan = session.metadata?.plan;
+
+        // Handle subscription plans (pro/premium/enterprise)
+        if (clinicId && plan && ['pro', 'premium', 'enterprise'].includes(plan)) {
+          const planEnum = plan as 'pro' | 'premium' | 'enterprise';
+
+          // Upsert subscription record
+          await db.insert(subscriptions).values({
+            clinicId,
+            stripeCustomerId: session.customer,
+            stripeSubscriptionId: session.subscription,
+            plan: planEnum,
+            status: 'active',
+            billingCurrency: 'usd',
+            currentPeriodEnd: session.subscription_details?.billing_cycle_anchor
+              ? new Date(session.subscription_details.billing_cycle_anchor * 1000)
+              : undefined,
+          }).onConflictDoUpdate({
+            target: subscriptions.stripeSubscriptionId,
+            set: {
+              status: 'active',
+              plan: planEnum,
+              clinicId,
+            },
+          });
+
+          await db.insert(auditLog).values({
+            action: 'subscription_activated',
+            entityType: 'clinic',
+            entityId: clinicId,
+            details: { stripeSessionId: session.id, subscriptionId: session.subscription, plan },
+          });
+        }
 
         if (clinicId && type === 'featured_listing') {
           await db.update(clinics)

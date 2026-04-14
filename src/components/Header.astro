@@ -1,5 +1,6 @@
 ---
 import Logo from "./Logo.astro";
+import UserMenu from "./react/UserMenu";
 import {
     TREATMENT_SLUGS,
     INSURANCE_SLUGS,
@@ -166,14 +167,6 @@ const deviceComparisons = comparisons.filter(
                 </button>
             </div>
 
-            <!-- Community Link -->
-            <a
-                href="/community/"
-                class="px-2 py-2 text-sm font-semibold text-gray-500 hover:text-violet-600 transition-colors tracking-wide"
-            >
-                Community
-            </a>
-
             <!-- Providers Mega Menu -->
             <div class="relative px-2 py-4" data-mega="providers">
                 <button
@@ -197,21 +190,6 @@ const deviceComparisons = comparisons.filter(
                 </button>
             </div>
 
-            <!-- Pricing Link -->
-            <a
-                href="/pricing/"
-                class="px-2 py-2 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors tracking-wide"
-            >
-                Pricing
-            </a>
-
-            <!-- Careers Link -->
-            <a
-                href="/careers/"
-                class="px-2 py-2 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors tracking-wide"
-            >
-                Careers
-            </a>
         </nav>
 
         <!-- CTA + Country Selector + Mobile Toggle -->
@@ -416,6 +394,10 @@ const deviceComparisons = comparisons.filter(
                         </a>
                     </div>
                 </div>
+            </div>
+            <!-- User Menu -->
+            <div class="hidden lg:block">
+              <UserMenu client:load />
             </div>
             <a
                 href="/add-listing/"
@@ -2005,6 +1987,7 @@ const deviceComparisons = comparisons.filter(
                     href="/pricing/"
                     class="block px-3 py-2.5 text-gray-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
                     >Pricing</a
+                >
                 <a
                     href="/careers/"
                     class="block px-3 py-2.5 text-gray-700 font-medium hover:bg-violet-50 hover:text-indigo-600 rounded-lg transition-colors"
@@ -2026,6 +2009,11 @@ const deviceComparisons = comparisons.filter(
                 >
                     Provider Login
                 </a>
+            </div>
+
+            <!-- Mobile User Menu (React) -->
+            <div class="mt-4 pt-4 border-t border-slate-100">
+                <div id="mobile-user-menu"></div>
             </div>
         </nav>
     </div>

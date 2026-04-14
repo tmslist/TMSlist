@@ -18,9 +18,11 @@ import ContentPage from "../layouts/ContentPage.astro";
                 Questions about TMS, help finding a clinic, or something that looks off on a listing.
             </p>
             <a
-                href="mailto:support@tmslist.com"
-                class="text-primary font-semibold hover:underline">support@tmslist.com</a
-            >
+                href="mailto:tmslistofficial@gmail.com"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-lg transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                Email Us
+            </a>
         </div>
         <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
             <h2 class="text-xl font-semibold mb-3">Clinic Owners</h2>
@@ -28,9 +30,11 @@ import ContentPage from "../layouts/ContentPage.astro";
                 Claim your profile, update your info, or ask about featured listings.
             </p>
             <a
-                href="mailto:partners@tmslist.com"
-                class="text-primary font-semibold hover:underline">partners@tmslist.com</a
-            >
+                href="mailto:tmslistofficial@gmail.com"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-lg transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                Email Us
+            </a>
         </div>
     </div>
 
@@ -126,7 +130,7 @@ import ContentPage from "../layouts/ContentPage.astro";
                 } else {
                     const errData = await res.json().catch(() => ({}));
                     if (error) {
-                        error.textContent = errData.error || `Something went wrong (${res.status}). Please try again or email us directly at support@tmslist.com.`;
+                        error.textContent = errData.error || `Something went wrong (${res.status}). Please try again or email us directly.`;
                     }
                     error?.classList.remove('hidden');
                 }

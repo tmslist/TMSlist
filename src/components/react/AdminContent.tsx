@@ -808,6 +808,11 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
         <div className="divide-y divide-gray-100">
           {loading ? (
             <div className="px-4 py-12 text-center text-gray-400"><div class="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2"></div><br/>Loading</div>
+          ) : error ? (
+            <div className="px-4 py-8 text-center">
+              <p className="text-red-600 font-medium mb-2">{error}</p>
+              <button onClick={fetchTreatments} className="text-violet-600 hover:text-violet-700 text-sm font-medium">Try again</button>
+            </div>
           ) : treatments.length === 0 ? (
             <div className="px-4 py-8 text-center text-gray-500">No treatments found.</div>
           ) : treatments.map((t) => (

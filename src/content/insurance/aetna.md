@@ -137,51 +137,32 @@ One bright spot: **Aetna Medicare Advantage** follows standard Medicare TMS cove
 
 For more details, see our [Prior Authorization Guide](/insurance/prior-authorization-guide/) and [Denied Coverage Appeals](/insurance/denied-coverage-appeals/) guide.
 
+## TMS for conditions beyond depression
 
-## How to Get TMS Approved
+Aetna's CPB 0612 covers TMS primarily for treatment-resistant MDD. However, coverage is evaluated for:
+- **OCD**: Aetna may cover BrainsWay Deep TMS (FDA-cleared for OCD) with strong documentation
+- **Anxiety with depression**: Case-by-case basis
+- **Bipolar depression**: Generally not covered — TMS for bipolar carries additional risk considerations
 
-<div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">1</span>
-    <div>
-      <div class="font-semibold text-slate-900 text-sm">Verify Benefits</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Call the number on the back of your insurance card and ask specifically about TMS therapy coverage. Get a reference number.</p>
-    </div>
-  </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">2</span>
-    <div>
-      <div class="font-semibold text-slate-900 text-sm">Get Your Documentation Ready</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Gather records of your MDD diagnosis, all medication trials (names, doses, durations, outcomes), current PHQ-9 score, and therapy history.</p>
-    </div>
-  </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">3</span>
-    <div>
-      <div class="font-semibold text-slate-900 text-sm">Choose a TMS Clinic</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Find an in-network TMS provider using our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a>. In-network clinics handle prior auth and know your insurer's requirements.</p>
-    </div>
-  </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">4</span>
-    <div>
-      <div class="font-semibold text-slate-900 text-sm">Prior Authorization</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Your TMS clinic submits the prior auth request. Typical approval takes 5-15 business days. If denied, appeal — overturn rates are 60-70%.</p>
-    </div>
+## Deep TMS (BrainsWay H-coil)
+
+Aetna covers deep TMS (BrainsWay) for OCD under FDA clearance. Your TMS clinic will need to submit documentation specifically referencing BrainsWay's OCD indication.
+
+## Aetna vs other insurers
+
+Aetna's 4-medication requirement is stricter than most. If you've been through comprehensive medication trials under Aetna's pharmacy management, you're in a better position for approval. If you switched from another insurer, make sure your psychiatrist includes records from prior treatments — those count toward the 4-trial requirement even if they were with a different plan.
+
+## TMS and Aetna: What You Need to Know
+
+<div class="not-prose my-6">
+  <div class="aspect-video rounded-xl overflow-hidden shadow-lg">
+    <iframe
+      class="w-full h-full"
+      src="https://www.youtube.com/embed/a_8bOCNjJpY"
+      title="Mayo Clinic: TMS Therapy for Depression"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
   </div>
 </div>
-
-## What If You're Denied?
-
-<div class="not-prose my-8 bg-red-50 border border-red-200 rounded-xl p-5">
-  <h4 class="font-semibold text-red-800 text-sm mb-2">Don't give up after a denial</h4>
-  <p class="text-sm text-red-700 mb-3">TMS denial overturn rates are <strong>60-70%</strong> on appeal. Steps to take:</p>
-  <ul class="text-sm text-red-700 space-y-1 mb-0 list-disc pl-4">
-    <li><strong>Request a peer-to-peer review</strong> — your psychiatrist talks directly to the insurer's medical director</li>
-    <li><strong>Submit additional documentation</strong> addressing the specific denial reason</li>
-    <li><strong>File a formal appeal</strong> with your state insurance department if internal appeals fail</li>
-    <li><strong>External review</strong> — most states allow independent external review of coverage denials</li>
-  </ul>
-</div>
-
-For more details, see our [Prior Authorization Guide](/insurance/prior-authorization-guide/) and [Denied Coverage Appeals](/insurance/denied-coverage-appeals/) guide.

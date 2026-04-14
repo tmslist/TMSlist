@@ -510,7 +510,12 @@ export default function AdminReviews() {
 
       {/* Reviews List */}
       <div className="space-y-3 pb-20">
-        {loading ? (
+        {error ? (
+          <div className="bg-white rounded-xl border border-red-200 p-8 text-center">
+            <p className="text-red-600 font-medium mb-2">{error}</p>
+            <button onClick={fetchReviews} className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">Try again</button>
+          </div>
+        ) : loading ? (
           <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-500">
             <div className="inline-flex items-center gap-2">
               <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">

@@ -142,12 +142,12 @@ const stateListSchema = JSON.stringify({
           )}
 
           {query ? (
-            <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-              TMS Clinics <br/><span class="text-violet-600">matching "{rawQuery}"</span>
+            <h1 class="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-snug">
+              TMS Clinics <span class="text-violet-600">matching "{rawQuery}"</span>
             </h1>
           ) : (
-            <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-              TMS Therapy Clinics <br/><span class="text-violet-600">Across the United States</span>
+            <h1 class="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-snug">
+              TMS Therapy Clinics <span class="text-violet-600">Across the United States</span>
             </h1>
           )}
 
@@ -318,7 +318,7 @@ const stateListSchema = JSON.stringify({
           <p class="text-slate-500 max-w-xl mx-auto">These states have the highest concentration of verified TMS providers</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {states.slice(0, 5).map(state => (
             <a href={`/us/${state.slug}/`} class="group relative overflow-hidden rounded-2xl aspect-[3/4] bg-gradient-to-br from-violet-100 to-blue-100">
               <div class="gemini-city-img absolute inset-0 bg-gradient-to-br from-violet-200/50 to-blue-200/50 transition-transform duration-700 group-hover:scale-110" data-city={state.topCities[0] || state.name} data-state={state.name}></div>

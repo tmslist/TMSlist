@@ -85,30 +85,30 @@ export default function SocialProofToast() {
 
   return (
     <div
-      className={`fixed bottom-20 left-4 z-[180] max-w-xs transition-all duration-500 ease-out ${
+      className={`fixed bottom-20 left-4 z-[180] max-w-[260px] transition-all duration-500 ease-out ${
         visible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
       }`}
     >
-      <div className="bg-white rounded-xl shadow-lg border border-gray-100 px-4 py-3 flex items-start gap-3">
-        <div className="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center shrink-0 mt-0.5">
-          <svg className="w-4 h-4 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+      <div className="bg-amber-50 rounded-lg border border-amber-100 px-3 py-2.5 flex items-center gap-2.5 shadow-sm">
+        <div className="w-7 h-7 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+          <svg className="w-3.5 h-3.5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm text-gray-900 font-medium leading-snug">
+          <p className="text-xs text-gray-700 font-medium leading-snug">
             {current.name} from {current.city}
           </p>
-          <p className="text-xs text-gray-500 mt-0.5">
-            enquired about TMS {current.timeAgo}
+          <p className="text-[11px] text-gray-400 mt-0.5">
+            viewed a TMS clinic {current.timeAgo}
           </p>
         </div>
         <button
           onClick={() => setVisible(false)}
-          className="text-gray-400 hover:text-gray-600 shrink-0 -mt-1 -mr-1"
+          className="text-gray-300 hover:text-gray-500 shrink-0"
           aria-label="Dismiss"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>

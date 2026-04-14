@@ -147,50 +147,18 @@ It takes some phone calls. But the coverage is there if you can find a provider.
 For more details, see our [Prior Authorization Guide](/insurance/prior-authorization-guide/) and [Denied Coverage Appeals](/insurance/denied-coverage-appeals/) guide.
 
 
-## How to Get TMS Approved
 
-<div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">1</span>
-    <div>
-      <div class="font-semibold text-slate-900 text-sm">Verify Benefits</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Call the number on the back of your insurance card and ask specifically about TMS therapy coverage. Get a reference number.</p>
-    </div>
-  </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">2</span>
-    <div>
-      <div class="font-semibold text-slate-900 text-sm">Get Your Documentation Ready</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Gather records of your MDD diagnosis, all medication trials (names, doses, durations, outcomes), current PHQ-9 score, and therapy history.</p>
-    </div>
-  </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">3</span>
-    <div>
-      <div class="font-semibold text-slate-900 text-sm">Choose a TMS Clinic</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Find an in-network TMS provider using our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a>. In-network clinics handle prior auth and know your insurer's requirements.</p>
-    </div>
-  </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">4</span>
-    <div>
-      <div class="font-semibold text-slate-900 text-sm">Prior Authorization</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Your TMS clinic submits the prior auth request. Typical approval takes 5-15 business days. If denied, appeal — overturn rates are 60-70%.</p>
-    </div>
+## California Medi-Cal: What You Need to Know
+
+<div class="not-prose my-6">
+  <div class="aspect-video rounded-xl overflow-hidden shadow-lg">
+    <iframe
+      class="w-full h-full"
+      src="https://www.youtube.com/embed/2OgXNqs4BtM"
+      title="What Is Medicaid? — Medicaid Overview"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
   </div>
 </div>
-
-## What If You're Denied?
-
-<div class="not-prose my-8 bg-red-50 border border-red-200 rounded-xl p-5">
-  <h4 class="font-semibold text-red-800 text-sm mb-2">Don't give up after a denial</h4>
-  <p class="text-sm text-red-700 mb-3">TMS denial overturn rates are <strong>60-70%</strong> on appeal. Steps to take:</p>
-  <ul class="text-sm text-red-700 space-y-1 mb-0 list-disc pl-4">
-    <li><strong>Request a peer-to-peer review</strong> — your psychiatrist talks directly to the insurer's medical director</li>
-    <li><strong>Submit additional documentation</strong> addressing the specific denial reason</li>
-    <li><strong>File a formal appeal</strong> with your state insurance department if internal appeals fail</li>
-    <li><strong>External review</strong> — most states allow independent external review of coverage denials</li>
-  </ul>
-</div>
-
-For more details, see our [Prior Authorization Guide](/insurance/prior-authorization-guide/) and [Denied Coverage Appeals](/insurance/denied-coverage-appeals/) guide.

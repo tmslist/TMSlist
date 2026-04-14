@@ -47,7 +47,7 @@ export const GET: APIRoute = async () => {
       .filter((l) => l.name) // must have a name
       .map((l) => {
         const firstName = (l.name || '').split(' ')[0];
-        const city = l.clinicId ? clinicMap[l.clinicId] || 'a nearby city' : 'a nearby city';
+        const city = l.clinicId ? clinicMap[l.clinicId] || 'your area' : 'your area';
         return {
           name: firstName,
           city,

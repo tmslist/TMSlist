@@ -1,307 +1,295 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { BLOG_SLUGS } from "../../utils/seo_slugs";
+import { getCollection } from "astro:content";
 
-const blogPosts = [
-    { slug: "stanford-neuromodulation-therapy-snt-2026", title: "Stanford Neuromodulation Therapy (SNT): The 5-Day TMS Protocol Changing Everything", excerpt: "SNT delivers a full TMS course in just 5 days instead of 6 weeks. Here's how the accelerated Stanford protocol works, who qualifies, and which clinics offer it.", category: "Research", date: "April 2026", readTime: "9 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
-    { slug: "tms-for-postpartum-depression", title: "TMS for Postpartum Depression: A Safe, Medication-Free Option for New Mothers", excerpt: "For mothers who can't or don't want to take antidepressants while breastfeeding, TMS offers a compelling alternative.", category: "Treatment", date: "April 2026", readTime: "7 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
-    { slug: "ai-guided-tms-targeting-2026", title: "AI-Guided TMS Targeting: How Machine Learning Is Improving Treatment Precision", excerpt: "New AI systems can now identify the exact brain region to target for each patient, boosting response rates.", category: "Research", date: "April 2026", readTime: "8 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
-    { slug: "tms-covered-by-medicare-2026-update", title: "Medicare TMS Coverage in 2026: What Changed and What You Need to Know", excerpt: "Medicare expanded TMS coverage criteria this year. Here's exactly what's covered and the new documentation requirements.", category: "Insurance", date: "April 2026", readTime: "6 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
-    { slug: "tms-for-anxiety-fda-breakthrough", title: "TMS for Anxiety: Why the FDA Breakthrough Therapy Designation Matters", excerpt: "The FDA granted Breakthrough Therapy designation for TMS in generalized anxiety disorder.", category: "Research", date: "March 2026", readTime: "7 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
-    { slug: "theta-burst-vs-standard-tms", title: "Theta Burst vs Standard TMS: 3-Minute Sessions vs 20-Minute Sessions", excerpt: "Theta burst stimulation cuts session time from 20 minutes to 3 minutes. We compare outcomes and availability.", category: "Treatment", date: "March 2026", readTime: "8 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
-    { slug: "real-cost-of-tms-therapy-2026", title: "The Real Cost of TMS Therapy in 2026: City-by-City Breakdown", excerpt: "We surveyed 500+ clinics to get actual TMS pricing. Out-of-pocket costs range from $150 to $450 per session.", category: "Insurance", date: "March 2026", readTime: "10 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
-    { slug: "tms-and-ketamine-together", title: "TMS + Ketamine: Why Clinics Are Combining Both Treatments", excerpt: "A growing number of clinics now offer TMS and ketamine together. The science behind combination therapy.", category: "Treatment", date: "March 2026", readTime: "9 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
-    { slug: "tms-at-home-devices-2026", title: "At-Home TMS Devices in 2026: Do They Actually Work?", excerpt: "Consumer TMS devices are flooding the market. We separate FDA-cleared options from wellness gadgets.", category: "FAQ", date: "March 2026", readTime: "7 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
-    { slug: "choosing-tms-clinic-red-flags", title: "Red Flags When Choosing a TMS Clinic: What to Watch Out For", excerpt: "Not all TMS clinics are equal. 7 things you should verify before committing to treatment.", category: "Patient Guide", date: "February 2026", readTime: "8 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
-    { slug: "tms-for-ocd-deep-tms-results", title: "Deep TMS for OCD: 2-Year Follow-Up Data Shows Lasting Results", excerpt: "BrainsWay's deep TMS for OCD now has long-term data. 58% of responders maintained improvement at 2 years.", category: "Research", date: "February 2026", readTime: "7 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
-    { slug: "what-tms-actually-feels-like", title: "What TMS Actually Feels Like: 50 Patients Describe Their Experience", excerpt: "We asked 50 real patients to describe their TMS sessions in their own words.", category: "Patient Guide", date: "February 2026", readTime: "6 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
-    { slug: "tms-for-veterans-va-coverage", title: "TMS for Veterans: VA Coverage, Eligibility, and Where to Find Treatment", excerpt: "The VA now covers TMS at over 100 facilities. Complete guide to eligibility and community care.", category: "Insurance", date: "February 2026", readTime: "8 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
-    { slug: "tms-during-pregnancy-safety-data", title: "TMS During Pregnancy: Updated Safety Data and Clinical Guidelines", excerpt: "New meta-analysis covering 400+ pregnant patients confirms TMS safety profile.", category: "Research", date: "February 2026", readTime: "7 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
-    { slug: "tms-success-rates-2026", title: "TMS Success Rates in 2026: What the Latest Research Shows", excerpt: "A comprehensive look at the latest clinical data on TMS therapy outcomes.", category: "Research", date: "January 2026", readTime: "8 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
-    { slug: "tms-vs-medication", title: "TMS vs Medication: A Complete Comparison Guide", excerpt: "How does TMS compare to antidepressants? We break down efficacy, side effects, and long-term outcomes.", category: "Treatment", date: "January 2026", readTime: "10 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
-    { slug: "how-to-prepare-for-tms", title: "How to Prepare for Your First TMS Session", excerpt: "Everything you need to know before starting TMS therapy.", category: "Patient Guide", date: "January 2026", readTime: "5 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
-    { slug: "does-tms-cause-memory-loss", title: "Does TMS Cause Memory Loss? Separating Fact from Fiction", excerpt: "Addressing common concerns about cognitive side effects of TMS.", category: "FAQ", date: "January 2026", readTime: "6 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
-    { slug: "can-i-drive-after-tms", title: "Can I Drive After TMS? Activity Guidelines Explained", excerpt: "Understanding what activities are safe immediately after a TMS session.", category: "Patient Guide", date: "January 2026", readTime: "4 min", image: "/images/tms_chair_luxury_1769446442231.jpg" },
-    { slug: "how-long-does-tms-last", title: "How Long Do TMS Results Last? Durability of Treatment", excerpt: "Exploring long-term outcomes and maintenance protocols.", category: "Research", date: "January 2026", readTime: "7 min", image: "/images/brain_stimulation_art_1769446474392.jpg" },
-];
+// Build posts from content collection
+const entries = await getCollection("blog");
+const blogPosts = entries
+  .map((entry) => {
+    const publishDate = entry.data.publishDate;
+    const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const d = publishDate ? publishDate : new Date();
+    const dateStr = `${monthNames[d.getMonth()]} ${d.getFullYear()}`;
+    // Estimate read time from content length
+    const wordCount = (entry.body || "").split(/\s+/).length;
+    const readTime = `${Math.max(1, Math.round(wordCount / 200))} min`;
+    return {
+      slug: entry.slug,
+      title: entry.data.title,
+      excerpt: entry.data.description || "",
+      category: entry.data.category || "Research",
+      date: dateStr,
+      readTime,
+      image: entry.data.image || `/images/brain_stimulation_art_1769446474392.jpg`,
+    };
+  })
+  .sort((a, b) => {
+    const da = new Date(a.date + " 1, " + new Date().getFullYear());
+    const db = new Date(b.date + " 1, " + new Date().getFullYear());
+    return db.getTime() - da.getTime();
+  });
 
-const categories = [...new Set(blogPosts.map(p => p.category))];
+const categories = [...new Set(blogPosts.map((p) => p.category))];
 const categoryColors: Record<string, { bg: string; text: string; dot: string }> = {
-    'Research': { bg: 'bg-blue-50', text: 'text-blue-600', dot: 'bg-blue-500' },
-    'Treatment': { bg: 'bg-emerald-50', text: 'text-emerald-600', dot: 'bg-emerald-500' },
-    'Insurance': { bg: 'bg-amber-50', text: 'text-amber-600', dot: 'bg-amber-500' },
-    'FAQ': { bg: 'bg-violet-50', text: 'text-violet-600', dot: 'bg-violet-500' },
-    'Patient Guide': { bg: 'bg-rose-50', text: 'text-rose-600', dot: 'bg-rose-500' },
+  Research: { bg: "bg-blue-50", text: "text-blue-600", dot: "bg-blue-500" },
+  Treatment: { bg: "bg-emerald-50", text: "text-emerald-600", dot: "bg-emerald-500" },
+  Insurance: { bg: "bg-amber-50", text: "text-amber-600", dot: "bg-amber-500" },
+  FAQ: { bg: "bg-violet-50", text: "text-violet-600", dot: "bg-violet-500" },
+  "Patient Guide": { bg: "bg-rose-50", text: "text-rose-600", dot: "bg-rose-500" },
 };
-const defaultColor = { bg: 'bg-slate-50', text: 'text-slate-600', dot: 'bg-slate-500' };
-
-const categoryGradients: Record<string, string> = {
-    'Research': 'from-blue-600 to-indigo-900',
-    'Treatment': 'from-emerald-600 to-teal-900',
-    'Insurance': 'from-amber-600 to-orange-900',
-    'FAQ': 'from-violet-600 to-purple-900',
-    'Patient Guide': 'from-rose-600 to-pink-900',
-};
-const cardGradients: Record<string, string> = {
-    'Research': 'from-blue-500/80 to-indigo-800',
-    'Treatment': 'from-emerald-500/80 to-teal-800',
-    'Insurance': 'from-amber-500/80 to-orange-800',
-    'FAQ': 'from-violet-500/80 to-purple-800',
-    'Patient Guide': 'from-rose-500/80 to-pink-800',
-};
+const defaultColor = { bg: "bg-slate-50", text: "text-slate-600", dot: "bg-slate-500" };
 ---
 
-<Layout title="TMS Therapy Blog - Expert Guides & Research | TMS List" description="Expert articles on TMS therapy, depression treatment, insurance coverage, and the latest research in brain stimulation.">
-    <main>
-        <!-- Hero -->
-        <section class="relative bg-slate-950 overflow-hidden">
-            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
-            <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-violet-600/12 rounded-full blur-[150px]"></div>
-            <div class="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
+<Layout
+  title="TMS Therapy Blog - Expert Guides & Research | TMS List"
+  description="Expert articles on TMS therapy, depression treatment, insurance coverage, and the latest research in brain stimulation."
+>
+  <main>
+    <!-- Hero -->
+    <section class="relative bg-slate-950 overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+      <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-violet-600/12 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
+      <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-32 relative z-10">
+        <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+          <span class="text-slate-700">/</span>
+          <span class="text-slate-300">Blog</span>
+        </nav>
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
+            <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+            <span class="text-xs font-semibold text-slate-300 tracking-wider uppercase">{blogPosts.length} Articles</span>
+          </div>
+          <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
+            The TMS<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">Journal</span>
+          </h1>
+          <p class="text-lg text-slate-400 leading-relaxed">
+            Evidence-based articles, patient guides, and the latest research on transcranial magnetic stimulation.
+          </p>
+        </div>
+      </div>
+      <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+    </section>
 
-            <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-32 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
-                    <span class="text-slate-700">/</span>
-                    <span class="text-slate-300">Blog</span>
-                </nav>
-                <div class="max-w-2xl">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
-                        <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                        <span class="text-xs font-semibold text-slate-300 tracking-wider uppercase">{blogPosts.length} Articles</span>
-                    </div>
-                    <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
-                        The TMS<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">Journal</span>
-                    </h1>
-                    <p class="text-lg text-slate-400 leading-relaxed">
-                        Evidence-based articles, patient guides, and the latest research on transcranial magnetic stimulation.
-                    </p>
+    <!-- Category Filters -->
+    <section class="bg-white border-b border-slate-100 py-4 sticky top-16 z-40" id="filter-bar">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
+          <button data-category="all" class="filter-btn px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-full transition-all shrink-0" aria-label="Show all blog posts">All</button>
+          {categories.map((cat) => {
+            const c = categoryColors[cat] || defaultColor;
+            return (
+              <button data-category={cat} class={`filter-btn px-4 py-2 ${c.bg} ${c.text} text-sm font-semibold rounded-full hover:opacity-80 transition-all shrink-0`} aria-label={`Filter by ${cat}`}>{cat}</button>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-12 lg:py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-6xl">
+
+        <!-- Featured Post -->
+        {blogPosts.length > 0 && (() => {
+          const feat = blogPosts[0];
+          const fc = categoryColors[feat.category] || defaultColor;
+          const featGrad = {
+            Research: "from-blue-600 to-indigo-900",
+            Treatment: "from-emerald-600 to-teal-900",
+            Insurance: "from-amber-600 to-orange-900",
+            FAQ: "from-violet-600 to-purple-900",
+            "Patient Guide": "from-rose-600 to-pink-900",
+          }[feat.category] || "from-violet-600 to-slate-900";
+          return (
+          <a href={`/blog/${feat.slug}/`} data-category={feat.category}
+             class="blog-card group block mb-14">
+            <div class="grid lg:grid-cols-2 gap-0 bg-slate-950 rounded-3xl overflow-hidden">
+              <div class="relative h-64 lg:h-auto overflow-hidden">
+                <div class={`absolute inset-0 bg-gradient-to-br ${featGrad}`}></div>
+                <div class="absolute inset-0 opacity-[0.06]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 24px 24px;"></div>
+                <img
+                  class="blog-card-ai absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:scale-105 transition-transform"
+                  data-slug={feat.slug}
+                  data-subject={feat.title}
+                  alt={feat.title}
+                  loading="eager"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent lg:bg-gradient-to-r"></div>
+                <div class="absolute bottom-4 left-4 right-4 lg:hidden z-10">
+                  <span class={`inline-block px-2.5 py-1 ${fc.bg} ${fc.text} text-[10px] font-bold uppercase tracking-wider rounded-md backdrop-blur-sm mb-2`}>{feat.category}</span>
+                  <h2 class="text-xl font-bold text-white leading-tight line-clamp-2">{feat.title}</h2>
                 </div>
+              </div>
+              <div class="p-8 lg:p-12 flex flex-col justify-center">
+                <div class="flex items-center gap-3 mb-5">
+                  <span class={`px-3 py-1 ${fc.bg} ${fc.text} text-[11px] font-bold uppercase tracking-wider rounded-md`}>{feat.category}</span>
+                  <span class="text-slate-500 text-sm">{feat.date}</span>
+                </div>
+                <h2 class="hidden lg:block text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-violet-300 transition-colors tracking-tight leading-tight">
+                  {feat.title}
+                </h2>
+                <p class="text-slate-400 leading-relaxed mb-6 line-clamp-3">{feat.excerpt}</p>
+                <div class="flex items-center gap-4">
+                  <span class="text-violet-400 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Read Article <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  </span>
+                  <span class="text-slate-600 text-sm">{feat.readTime}</span>
+                </div>
+              </div>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
-        </section>
+          </a>
+        )})()}
 
-        <!-- Category Filters -->
-        <section class="bg-white border-b border-slate-100 py-4 sticky top-16 z-40" id="filter-bar">
-            <div class="container mx-auto px-4">
-                <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
-                    <button data-category="all" class="filter-btn px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-full transition-all shrink-0" aria-label="Show all blog posts">All</button>
-                    {categories.map(cat => {
-                        const c = categoryColors[cat] || defaultColor;
-                        return (
-                            <button data-category={cat} class={`filter-btn px-4 py-2 ${c.bg} ${c.text} text-sm font-semibold rounded-full hover:opacity-80 transition-all shrink-0`} aria-label={`Filter by ${cat}`}>{cat}</button>
-                        );
-                    })}
+        <!-- Posts Grid -->
+        <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blogPosts.slice(1).map((post) => {
+            const c = categoryColors[post.category] || defaultColor;
+            const cardGrad = {
+              Research: "from-blue-500/80 to-indigo-800",
+              Treatment: "from-emerald-500/80 to-teal-800",
+              Insurance: "from-amber-500/80 to-orange-800",
+              FAQ: "from-violet-500/80 to-purple-800",
+              "Patient Guide": "from-rose-500/80 to-pink-800",
+            }[post.category] || "from-violet-500/80 to-slate-800";
+            return (
+            <a href={`/blog/${post.slug}/`} data-category={post.category}
+               class="blog-card group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] hover:border-slate-200 transition-all duration-300">
+              <div class="relative h-48 overflow-hidden">
+                <div class={`absolute inset-0 bg-gradient-to-br ${cardGrad}`}></div>
+                <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 20px 20px;"></div>
+                <img
+                  class="blog-card-ai absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:scale-105"
+                  data-slug={post.slug}
+                  data-subject={post.title}
+                  alt={post.title}
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
+                <span class={`absolute top-3 left-3 px-2.5 py-1 bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider rounded-md backdrop-blur-sm border border-white/10`}>{post.category}</span>
+                <div class="absolute bottom-3 left-3 right-3 z-10">
+                  <h2 class="text-[15px] font-bold text-white leading-snug line-clamp-2 drop-shadow-sm">{post.title}</h2>
                 </div>
+              </div>
+              <div class="p-5">
+                <p class="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
+                <div class="flex items-center justify-between pt-3 border-t border-slate-50 text-xs text-slate-400">
+                  <span>{post.date}</span>
+                  <span class="font-medium">{post.readTime}</span>
+                </div>
+              </div>
+            </a>
+          )})}
+        </div>
+
+        <!-- Newsletter -->
+        <div class="mt-20 relative bg-slate-950 rounded-3xl p-10 lg:p-14 overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+          <div class="relative z-10" id="newsletter-content">
+            <div class="text-center max-w-lg mx-auto">
+              <p class="text-sm font-semibold text-violet-400 tracking-wider uppercase mb-3">Stay informed</p>
+              <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">Get TMS research in your inbox</h3>
+              <p class="text-slate-400 mb-8">New articles, clinical trial updates, and patient resources. No spam.</p>
+              <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="email" name="email" required placeholder="you@email.com" class="flex-1 px-5 py-3.5 rounded-xl bg-white/10 border border-white/10 text-white placeholder-slate-500 focus:ring-2 focus:ring-violet-500 focus:border-transparent" />
+                <button type="submit" class="px-7 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">Subscribe</button>
+              </form>
             </div>
-        </section>
-
-        <!-- Content -->
-        <section class="py-12 lg:py-16 bg-white">
-            <div class="container mx-auto px-4 max-w-6xl">
-
-                <!-- Featured Post -->
-                {blogPosts.length > 0 && (() => {
-                    const feat = blogPosts[0];
-                    const fc = categoryColors[feat.category] || defaultColor;
-                    const featGrad = categoryGradients[feat.category] || 'from-violet-600 to-slate-900';
-                    return (
-                    <a href={`/blog/${feat.slug}/`} data-category={feat.category}
-                       class="blog-card group block mb-14">
-                        <div class="grid lg:grid-cols-2 gap-0 bg-slate-950 rounded-3xl overflow-hidden">
-                            <div class="relative h-64 lg:h-auto overflow-hidden">
-                                <!-- Gradient fallback -->
-                                <div class={`absolute inset-0 bg-gradient-to-br ${featGrad}`}></div>
-                                <div class="absolute inset-0 opacity-[0.06]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 24px 24px;"></div>
-                                <!-- AI image overlay -->
-                                <img
-                                    class="blog-card-ai absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:scale-105 transition-transform"
-                                    data-slug={feat.slug}
-                                    data-subject={feat.title}
-                                    alt={feat.title}
-                                    loading="eager"
-                                />
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent lg:bg-gradient-to-r"></div>
-                                <!-- Title on image -->
-                                <div class="absolute bottom-4 left-4 right-4 lg:hidden z-10">
-                                    <span class={`inline-block px-2.5 py-1 ${fc.bg} ${fc.text} text-[10px] font-bold uppercase tracking-wider rounded-md backdrop-blur-sm mb-2`}>{feat.category}</span>
-                                    <h2 class="text-xl font-bold text-white leading-tight line-clamp-2">{feat.title}</h2>
-                                </div>
-                            </div>
-                            <div class="p-8 lg:p-12 flex flex-col justify-center">
-                                <div class="flex items-center gap-3 mb-5">
-                                    <span class={`px-3 py-1 ${fc.bg} ${fc.text} text-[11px] font-bold uppercase tracking-wider rounded-md`}>{feat.category}</span>
-                                    <span class="text-slate-500 text-sm">{feat.date}</span>
-                                </div>
-                                <h2 class="hidden lg:block text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-violet-300 transition-colors tracking-tight leading-tight">
-                                    {feat.title}
-                                </h2>
-                                <p class="text-slate-400 leading-relaxed mb-6 line-clamp-3">{feat.excerpt}</p>
-                                <div class="flex items-center gap-4">
-                                    <span class="text-violet-400 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                                        Read Article <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                                    </span>
-                                    <span class="text-slate-600 text-sm">{feat.readTime}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                )})()}
-
-                <!-- Posts Grid -->
-                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {blogPosts.slice(1).map((post) => {
-                        const c = categoryColors[post.category] || defaultColor;
-                        const cardGrad = cardGradients[post.category] || 'from-violet-500/80 to-slate-800';
-                        return (
-                        <a href={`/blog/${post.slug}/`} data-category={post.category}
-                           class="blog-card group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] hover:border-slate-200 transition-all duration-300">
-                            <div class="relative h-48 overflow-hidden">
-                                <!-- Category-colored gradient fallback -->
-                                <div class={`absolute inset-0 bg-gradient-to-br ${cardGrad}`}></div>
-                                <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 20px 20px;"></div>
-                                <!-- AI image overlay -->
-                                <img
-                                    class="blog-card-ai absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:scale-105"
-                                    data-slug={post.slug}
-                                    data-subject={post.title}
-                                    alt={post.title}
-                                    loading="lazy"
-                                />
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                                <!-- Category badge -->
-                                <span class={`absolute top-3 left-3 px-2.5 py-1 bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider rounded-md backdrop-blur-sm border border-white/10`}>{post.category}</span>
-                                <!-- Title on the card image -->
-                                <div class="absolute bottom-3 left-3 right-3 z-10">
-                                    <h2 class="text-[15px] font-bold text-white leading-snug line-clamp-2 drop-shadow-sm">{post.title}</h2>
-                                </div>
-                            </div>
-                            <div class="p-5">
-                                <p class="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
-                                <div class="flex items-center justify-between pt-3 border-t border-slate-50 text-xs text-slate-400">
-                                    <span>{post.date}</span>
-                                    <span class="font-medium">{post.readTime}</span>
-                                </div>
-                            </div>
-                        </a>
-                    )})}
-                </div>
-
-                <!-- Newsletter -->
-                <div class="mt-20 relative bg-slate-950 rounded-3xl p-10 lg:p-14 overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-                    <div class="relative z-10" id="newsletter-content">
-                        <div class="text-center max-w-lg mx-auto">
-                            <p class="text-sm font-semibold text-violet-400 tracking-wider uppercase mb-3">Stay informed</p>
-                            <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">Get TMS research in your inbox</h3>
-                            <p class="text-slate-400 mb-8">New articles, clinical trial updates, and patient resources. No spam.</p>
-                            <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                                <input type="email" name="email" required placeholder="you@email.com" class="flex-1 px-5 py-3.5 rounded-xl bg-white/10 border border-white/10 text-white placeholder-slate-500 focus:ring-2 focus:ring-violet-500 focus:border-transparent" />
-                                <button type="submit" class="px-7 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div id="newsletter-success" class="hidden relative z-10 text-center py-8">
-                        <div class="w-14 h-14 bg-emerald-500/20 backdrop-blur rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">You're subscribed!</h3>
-                        <p class="text-slate-400">Check your inbox for a welcome email.</p>
-                    </div>
-                </div>
+          </div>
+          <div id="newsletter-success" class="hidden relative z-10 text-center py-8">
+            <div class="w-14 h-14 bg-emerald-500/20 backdrop-blur rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
             </div>
-        </section>
-    </main>
+            <h3 class="text-xl font-bold text-white mb-2">You're subscribed!</h3>
+            <p class="text-slate-400">Check your inbox for a welcome email.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
 
 <script>
-    document.addEventListener("astro:page-load", () => {
-        const buttons = document.querySelectorAll(".filter-btn");
-        const cards = document.querySelectorAll(".blog-card");
+  document.addEventListener("astro:page-load", () => {
+    const buttons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".blog-card");
 
-        buttons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                const category = btn.getAttribute("data-category");
-                buttons.forEach(b => {
-                    b.classList.remove("bg-slate-900", "text-white", "!bg-slate-900", "!text-white");
-                    // Reset to original colors
-                    const origBg = b.className.match(/bg-\w+-\d+/)?.[0];
-                    if (origBg) b.classList.add(origBg);
-                });
-                btn.classList.add("!bg-slate-900", "!text-white");
-
-                cards.forEach(card => {
-                    const cardCat = card.getAttribute("data-category");
-                    (card as HTMLElement).style.display = (category === "all" || cardCat === category) ? "" : "none";
-                });
-            });
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const category = btn.getAttribute("data-category");
+        buttons.forEach((b) => {
+          b.classList.remove("bg-slate-900", "text-white", "!bg-slate-900", "!text-white");
+          const origBg = b.className.match(/bg-\w+-\d+/)?.[0];
+          if (origBg) b.classList.add(origBg);
         });
-
-        // Lazy-load AI cover images for blog cards (staggered to respect rate limits)
-        const aiImages = document.querySelectorAll('.blog-card-ai') as NodeListOf<HTMLImageElement>;
-        let loadIndex = 0;
-
-        async function loadNextAiImage() {
-            if (loadIndex >= aiImages.length) return;
-            const img = aiImages[loadIndex];
-            loadIndex++;
-            const slug = img.dataset.slug;
-            const subject = img.dataset.subject;
-            if (!slug || !subject) { loadNextAiImage(); return; }
-
-            const cacheKey = `ai-img:blog-cover:${slug}`;
-            const cached = localStorage.getItem(cacheKey);
-            if (cached) {
-                try {
-                    const { image, ts } = JSON.parse(cached);
-                    if (Date.now() - ts < 7 * 24 * 60 * 60 * 1000 && image) {
-                        img.src = image;
-                        img.onload = () => { img.style.opacity = '0.6'; };
-                        if (img.complete && img.src) img.style.opacity = '0.6';
-                        loadNextAiImage();
-                        return;
-                    }
-                } catch { localStorage.removeItem(cacheKey); }
-            }
-
-            try {
-                const params = new URLSearchParams({ type: 'hero', subject });
-                const res = await fetch(`/api/ai/generate-image?${params}`);
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data.image) {
-                        localStorage.setItem(cacheKey, JSON.stringify({ image: data.image, ts: Date.now() }));
-                        img.src = data.image;
-                        img.onload = () => { img.style.opacity = '0.6'; };
-                    }
-                }
-            } catch {}
-            // Stagger requests to avoid rate limit
-            setTimeout(loadNextAiImage, 800);
-        }
-
-        loadNextAiImage();
-
-        const form = document.getElementById("newsletter-form") as HTMLFormElement;
-        const content = document.getElementById("newsletter-content");
-        const success = document.getElementById("newsletter-success");
-
-        if (form) {
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
-                const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-                btn.disabled = true; btn.textContent = "Joining...";
-                try {
-                    const res = await fetch('/api/leads', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ type: 'newsletter', email: new FormData(form).get('email'), sourceUrl: location.href }),
-                    });
-                    if (res.ok) { content?.classList.add("hidden"); success?.classList.remove("hidden"); }
-                    else throw new Error();
-                } catch { btn.disabled = false; btn.textContent = "Subscribe"; alert("Something went wrong. Please try again."); }
-            });
-        }
+        btn.classList.add("!bg-slate-900", "!text-white");
+        cards.forEach((card) => {
+          const cardCat = card.getAttribute("data-category");
+          (card as HTMLElement).style.display = (category === "all" || cardCat === category) ? "" : "none";
+        });
+      });
     });
+
+    const aiImages = document.querySelectorAll(".blog-card-ai") as NodeListOf<HTMLImageElement>;
+    let loadIndex = 0;
+
+    async function loadNextAiImage() {
+      if (loadIndex >= aiImages.length) return;
+      const img = aiImages[loadIndex];
+      loadIndex++;
+      const slug = img.dataset.slug;
+      const subject = img.dataset.subject;
+      if (!slug || !subject) { loadNextAiImage(); return; }
+      const cacheKey = `ai-img:blog-cover:${slug}`;
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        try {
+          const { image, ts } = JSON.parse(cached);
+          if (Date.now() - ts < 7 * 24 * 60 * 60 * 1000 && image) {
+            img.src = image;
+            img.onload = () => { img.style.opacity = "0.6"; };
+            loadNextAiImage();
+            return;
+          }
+        } catch { localStorage.removeItem(cacheKey); }
+      }
+      try {
+        const params = new URLSearchParams({ type: "hero", subject });
+        const res = await fetch(`/api/ai/generate-image?${params}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.image) {
+            localStorage.setItem(cacheKey, JSON.stringify({ image: data.image, ts: Date.now() }));
+            img.src = data.image;
+            img.onload = () => { img.style.opacity = "0.6"; };
+          }
+        }
+      } catch {}
+      setTimeout(loadNextAiImage, 800);
+    }
+    loadNextAiImage();
+
+    const form = document.getElementById("newsletter-form") as HTMLFormElement;
+    const content = document.getElementById("newsletter-content");
+    const success = document.getElementById("newsletter-success");
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+        btn.disabled = true;
+        btn.textContent = "Joining...";
+        try {
+          const res = await fetch("/api/leads", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ type: "newsletter", email: new FormData(form).get("email"), sourceUrl: location.href }),
+          });
+          if (res.ok) { content?.classList.add("hidden"); success?.classList.remove("hidden"); }
+          else throw new Error();
+        } catch { btn.disabled = false; btn.textContent = "Subscribe"; alert("Something went wrong. Please try again."); }
+      });
+    }
+  });
 </script>

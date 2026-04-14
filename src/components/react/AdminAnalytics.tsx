@@ -170,10 +170,12 @@ function TypeBreakdown({ data }: { data: TypeData[] }) {
 export default function AdminAnalytics() {
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [days, setDays] = useState(30);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
+    setError('');
     try {
       const res = await fetch(`/api/admin/analytics?days=${days}`);
       if (res.status === 401) {
@@ -185,7 +187,7 @@ export default function AdminAnalytics() {
       if (json.error) throw new Error(json.error);
       setData(json);
     } catch (err) {
-      console.error('Failed to fetch analytics:', err);
+      setError(err instanceof Error ? err.message : 'Failed to load analytics');
     } finally {
       setLoading(false);
     }
@@ -208,8 +210,15 @@ export default function AdminAnalytics() {
 
   if (!data) {
     return (
-      <div className="text-center py-20 text-gray-400">
-        <p>Failed to load analytics data.</p>
+      <div className="text-center py-20">
+        {error ? (
+          <>
+            <p className="text-red-600 font-medium mb-2">{error}</p>
+            <button onClick={fetchData} className="text-violet-600 hover:text-violet-700 text-sm font-medium">Try again</button>
+          </>
+        ) : (
+          <p className="text-gray-400">Failed to load analytics data.</p>
+        )}
       </div>
     );
   }

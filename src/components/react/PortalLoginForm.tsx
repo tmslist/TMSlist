@@ -151,7 +151,9 @@ export default function PortalLoginForm() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        window.location.href = data.redirectTo || '/portal/dashboard';
+        const params = new URLSearchParams(window.location.search);
+        const redirect = params.get('redirect');
+        window.location.href = redirect || data.redirectTo || '/portal/dashboard';
       } else {
         setErrorMsg(data.error || 'Login failed');
         setStatus('error');

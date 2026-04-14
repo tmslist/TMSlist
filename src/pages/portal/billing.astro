@@ -2,18 +2,23 @@
 import Layout from '../../layouts/Layout.astro';
 import { getSessionFromRequest, hasRole } from '../../utils/auth';
 import { getClinicPlan, getClinicSubscription, PLANS } from '../../db/subscriptions';
+import { db } from '../../db';
+import { users } from '../../db/schema';
+import { eq } from 'drizzle-orm';
 
 const session = getSessionFromRequest(Astro.request);
 if (!session || !hasRole(session, 'clinic_owner', 'admin')) {
   return Astro.redirect('/portal/login');
 }
 
-const clinicId = (session as any).clinicId as string;
-const success = Astro.url.searchParams.get('success') === 'true';
+// Get clinicId from user record
+const [user] = await db.select().from(users).where(eq(users.id, session.userId)).limit(1);
+const clinicId = user?.clinicId || (session as any).clinicId || null;
+const success = Astro.url.searchParams.get('subscribed') === 'pro' || Astro.url.searchParams.get('subscribed') === 'premium' || Astro.url.searchParams.get('subscribed') === 'enterprise' || Astro.url.searchParams.get('success') === 'true';
 const canceled = Astro.url.searchParams.get('canceled') === 'true';
 
 let subscription = null;
-let plan: 'free' | 'pro' | 'enterprise' = 'free';
+let plan: 'free' | 'pro' | 'premium' | 'enterprise' = 'free';
 let features = PLANS.free.features;
 
 if (clinicId) {
@@ -23,15 +28,18 @@ if (clinicId) {
 }
 
 const featuresList = [
-  { key: 'listing', label: 'Full Listing Visibility', free: 'Basic', pro: 'Full', enterprise: 'Priority Placement' },
-  { key: 'photos', label: 'Clinic Photos', free: '1 photo', pro: '5 photos', enterprise: 'Unlimited' },
-  { key: 'devices', label: 'TMS Devices & Protocols', free: false, pro: true, enterprise: true },
-  { key: 'insurance', label: 'Accepted Insurance Carriers', free: false, pro: true, enterprise: true },
-  { key: 'doctors', label: 'Doctor Profiles', free: false, pro: true, enterprise: true },
-  { key: 'leadCapture', label: 'Lead Capture', free: 'Contact form only', pro: 'Instant email + phone', enterprise: 'Instant + phone' },
-  { key: 'leadDashboard', label: 'Lead Management Dashboard', free: false, pro: false, enterprise: true },
-  { key: 'analytics', label: 'Analytics & Insights', free: false, pro: false, enterprise: true },
-  { key: 'chatbot', label: 'AI Chatbot Widget', free: false, pro: false, enterprise: true },
+  { key: 'listing', label: 'Listing Visibility', free: 'Basic', pro: 'Full', premium: 'Featured', enterprise: 'Priority' },
+  { key: 'photos', label: 'Clinic Photos', free: '1 photo', pro: '5 photos', premium: '20 photos', enterprise: 'Unlimited' },
+  { key: 'devices', label: 'TMS Devices & Protocols', free: false, pro: true, premium: true, enterprise: true },
+  { key: 'insurance', label: 'Insurance Carriers', free: false, pro: true, premium: true, enterprise: true },
+  { key: 'doctors', label: 'Doctor Profiles', free: false, pro: true, premium: true, enterprise: true },
+  { key: 'leadCapture', label: 'Lead Capture', free: 'Form only', pro: 'Instant', premium: 'AI routing', enterprise: 'AI + phone' },
+  { key: 'leadDashboard', label: 'Lead Dashboard', free: false, pro: false, premium: true, enterprise: true },
+  { key: 'analytics', label: 'Analytics', free: false, pro: false, premium: true, enterprise: true },
+  { key: 'chatbot', label: 'AI Chatbot', free: false, pro: false, premium: false, enterprise: true },
+  { key: 'multiLocation', label: 'Multi-Location', free: false, pro: false, premium: false, enterprise: true },
+  { key: 'apiAccess', label: 'API Access', free: false, pro: false, premium: false, enterprise: true },
+  { key: 'support', label: 'Support', free: false, pro: 'Email', premium: 'Priority', enterprise: 'Dedicated' },
 ];
 ---
 
@@ -66,8 +74,9 @@ const featuresList = [
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-semibold text-gray-900">Current Plan</h2>
       <span class={`inline-flex items-center px-3 py-1 rounded-full text-sm font-bold ${
-        plan === 'enterprise' ? 'bg-violet-100 text-violet-700' :
-        plan === 'pro' ? 'bg-emerald-100 text-emerald-700' :
+        plan === 'enterprise' ? 'bg-slate-900 text-white' :
+        plan === 'premium' ? 'bg-violet-100 text-violet-700' :
+        plan === 'pro' ? 'bg-blue-100 text-blue-700' :
         'bg-gray-100 text-gray-600'
       }`}>
         {PLANS[plan].name}
@@ -96,9 +105,10 @@ const featuresList = [
         <thead>
           <tr class="border-b border-gray-100">
             <th class="text-left py-3 pr-4 font-medium text-gray-500">Feature</th>
-            <th class="text-center py-3 px-3 font-medium text-gray-700">Free</th>
-            <th class="text-center py-3 px-3 font-medium text-emerald-700">Pro<br><span class="text-xs font-normal text-gray-400">$18/mo</span></th>
-            <th class="text-center py-3 px-3 font-medium text-violet-700">Enterprise<br><span class="text-xs font-normal text-gray-400">$60/mo</span></th>
+            <th class="text-center py-3 px-3 font-medium text-gray-700">Free<br><span class="text-xs font-normal text-gray-400">$0</span></th>
+            <th class="text-center py-3 px-3 font-medium text-blue-700">Pro<br><span class="text-xs font-normal text-gray-400">$18/mo</span></th>
+            <th class="text-center py-3 px-3 font-medium text-violet-700">Premium<br><span class="text-xs font-normal text-gray-400">$30/mo</span></th>
+            <th class="text-center py-3 px-3 font-medium text-slate-700">Enterprise<br><span class="text-xs font-normal text-gray-400">$60/mo</span></th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-50">
@@ -106,7 +116,8 @@ const featuresList = [
             <tr>
               <td class="py-3 pr-4 text-gray-700">{row.label}</td>
               <td class="py-3 px-3 text-center text-gray-500">{typeof row.free === 'boolean' ? (row.free ? '✓' : '—') : row.free}</td>
-              <td class={`py-3 px-3 text-center font-medium ${plan === 'pro' ? 'text-emerald-600' : 'text-gray-700'}`}>{typeof row.pro === 'boolean' ? (row.pro ? '✓' : '—') : row.pro}</td>
+              <td class={`py-3 px-3 text-center font-medium ${plan === 'pro' ? 'text-blue-600' : 'text-gray-700'}`}>{typeof row.pro === 'boolean' ? (row.pro ? '✓' : '—') : row.pro}</td>
+              <td class={`py-3 px-3 text-center font-medium ${plan === 'premium' ? 'text-violet-600' : 'text-gray-700'}`}>{typeof row.premium === 'boolean' ? (row.premium ? '✓' : '—') : row.premium}</td>
               <td class={`py-3 px-3 text-center font-medium ${plan === 'enterprise' ? 'text-violet-600' : 'text-gray-700'}`}>{typeof row.enterprise === 'boolean' ? (row.enterprise ? '✓' : '—') : row.enterprise}</td>
             </tr>
           ))}
@@ -121,26 +132,25 @@ const featuresList = [
       <div class="flex items-start justify-between gap-6">
         <div>
           <h2 class="text-white font-semibold text-lg mb-1">
-            {plan === 'free' ? 'Upgrade to Pro' : 'Upgrade to Enterprise'}
+            {plan === 'free' ? 'Upgrade to Pro' : plan === 'pro' ? 'Upgrade to Premium' : 'Upgrade to Enterprise'}
           </h2>
           <p class="text-slate-400 text-sm">
-            {plan === 'free'
-              ? 'Show your devices, insurance carriers, and doctor profiles to attract more patients.'
-              : 'Unlock the lead dashboard, analytics, and AI chatbot to grow your practice.'}
+            {plan === 'free' ? 'Show devices, insurance carriers, and doctor profiles to attract more patients.'
+              : plan === 'pro' ? 'Get featured placement, AI lead routing, and advanced analytics.'
+              : 'Unlock multi-location management, API access, and dedicated support.'}
           </p>
         </div>
         <div class="text-right shrink-0">
           <div class="text-white font-bold text-2xl">
-            {plan === 'free' ? '$18' : '$60'}<span class="text-slate-400 text-sm font-normal">/mo</span>
+            {plan === 'free' ? '$18' : plan === 'pro' ? '$30' : '$60'}<span class="text-slate-400 text-sm font-normal">/mo</span>
           </div>
-          <a
-            href="#"
+          <button
             id="upgrade-btn"
-            data-plan={plan === 'free' ? 'pro' : 'enterprise'}
-            class="mt-3 inline-block w-full text-center bg-violet-600 hover:bg-violet-500 text-white font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+            data-plan={plan === 'free' ? 'pro' : plan === 'pro' ? 'premium' : 'enterprise'}
+            class="mt-3 inline-block w-full text-center bg-violet-600 hover:bg-violet-500 text-white font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm cursor-pointer"
           >
-            {plan === 'free' ? 'Upgrade to Pro' : 'Upgrade to Enterprise'} →
-          </a>
+            {plan === 'free' ? 'Upgrade to Pro' : plan === 'pro' ? 'Upgrade to Premium' : 'Upgrade to Enterprise'} →
+          </button>
         </div>
       </div>
     </div>
@@ -214,12 +224,12 @@ const featuresList = [
           window.location.href = data.checkoutUrl;
         } else {
           alert('Could not create checkout. Please try again.');
-          upgradeBtn.textContent = plan === 'pro' ? 'Upgrade to Pro →' : 'Upgrade to Enterprise →';
+          upgradeBtn.textContent = plan === 'pro' ? 'Upgrade to Pro →' : plan === 'premium' ? 'Upgrade to Premium →' : 'Upgrade to Enterprise →';
           upgradeBtn.classList.remove('opacity-50', 'pointer-events-none');
         }
       } catch {
         alert('Network error. Please try again.');
-        upgradeBtn.textContent = plan === 'pro' ? 'Upgrade to Pro →' : 'Upgrade to Enterprise →';
+        upgradeBtn.textContent = plan === 'pro' ? 'Upgrade to Pro →' : plan === 'premium' ? 'Upgrade to Premium →' : 'Upgrade to Enterprise →';
         upgradeBtn.classList.remove('opacity-50', 'pointer-events-none');
       }
     });

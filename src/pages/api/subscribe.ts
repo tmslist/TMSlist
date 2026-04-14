@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getSessionFromRequest, hasRole } from '../../utils/auth';
-import { createSubscriptionCheckout, type PlanId, PLANS } from '../../utils/subscriptions';
+import { createSubscriptionCheckout, PLANS } from '../../db/subscriptions';
+import type { PlanId } from '../../db/subscriptions';
 import { eq } from 'drizzle-orm';
 import { db } from '../../db';
 import { users, clinics } from '../../db/schema';
@@ -10,11 +11,10 @@ export const prerender = false;
 export const GET: APIRoute = async ({ request, url }) => {
   const session = getSessionFromRequest(request);
   if (!session || !hasRole(session, 'clinic_owner', 'admin')) {
-    // Redirect to login
     const planParam = url.searchParams.get('plan') || 'pro';
     return new Response(null, {
       status: 302,
-      headers: { Location: `/admin/login?redirect=/api/subscribe?plan=${planParam}` },
+      headers: { Location: `/portal/login/?redirect=/api/subscribe?plan=${planParam}` },
     });
   }
 
@@ -56,7 +56,7 @@ export const GET: APIRoute = async ({ request, url }) => {
       clinicId,
       clinicName: clinic.name,
       clinicEmail: clinic.email || session.email,
-      successUrl: `${siteUrl}/owner/dashboard?subscribed=${planId}`,
+      successUrl: `${siteUrl}/portal/dashboard/?subscribed=${planId}`,
       cancelUrl: `${siteUrl}/pricing`,
     });
 

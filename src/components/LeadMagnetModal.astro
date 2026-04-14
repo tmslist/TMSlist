@@ -104,6 +104,150 @@
                             </div>
                         </div>
                     </label>
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="tms-billing-cpt-codes-2026"
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                TMS Billing & CPT Codes 2026
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Complete billing guide with CPT codes & reimbursement strategies
+                            </div>
+                        </div>
+                    </label>
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="tms-patient-acquisition-playbook"
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                Patient Acquisition Playbook
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Proven strategies to fill your TMS schedule
+                            </div>
+                        </div>
+                    </label>
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="tms-prior-authorization-template-kit"
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                Prior Authorization Template Kit
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Ready-to-use templates to streamline insurance approvals
+                            </div>
+                        </div>
+                    </label>
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="starting-a-tms-clinic-business-plan"
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                TMS Clinic Business Plan
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Complete guide to starting a profitable TMS practice
+                            </div>
+                        </div>
+                    </label>
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="tms-patient-outcome-tracking-system"
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                Patient Outcome Tracking System
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Measure and demonstrate TMS treatment results
+                            </div>
+                        </div>
+                    </label>
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="tms-technician-training-checklist"
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                TMS Technician Training Checklist
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Comprehensive training guide for TMS technicians
+                            </div>
+                        </div>
+                    </label>
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="tms-state-regulations-guide-2026"
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                State Regulations Guide 2026
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Navigating TMS regulations across all 50 states
+                            </div>
+                        </div>
+                    </label>
+                    <label
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                    >
+                        <input
+                            type="radio"
+                            name="lead-magnet"
+                            value="building-tms-referral-network"
+                            class="mt-1"
+                        />
+                        <div>
+                            <div class="font-semibold text-gray-900">
+                                Building a TMS Referral Network
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                Strategies to build sustainable referral channels
+                            </div>
+                        </div>
+                    </label>
                 </div>
             </div>
 
@@ -238,7 +382,19 @@
                     sourceUrl: leadData.source,
                     metadata: {
                         resource: leadData.resource,
-                        guide_type: leadData.resource === 'tms-buyers-guide' ? 'buyers-guide' : leadData.resource === 'tms-vs-medication' ? 'vs-medication' : 'insurance-checklist',
+                        guide_type: ({
+                            'tms-buyers-guide': 'buyers-guide',
+                            'tms-vs-medication': 'vs-medication',
+                            'insurance-checklist': 'insurance-checklist',
+                            'tms-billing-cpt-codes-2026': 'billing-cpt',
+                            'tms-patient-acquisition-playbook': 'patient-acquisition',
+                            'tms-prior-authorization-template-kit': 'prior-auth',
+                            'starting-a-tms-clinic-business-plan': 'business-plan',
+                            'tms-patient-outcome-tracking-system': 'outcome-tracking',
+                            'tms-technician-training-checklist': 'technician-training',
+                            'tms-state-regulations-guide-2026': 'state-regulations',
+                            'building-tms-referral-network': 'referral-network',
+                        }[leadData.resource] || 'other'),
                         guide_title: getResourceName(leadData.resource),
                         subscribed: leadData.subscribe,
                     },
@@ -295,6 +451,14 @@
             "tms-buyers-guide": "TMS Buyer's Guide",
             "tms-vs-medication": "TMS vs Medication Comparison",
             "insurance-checklist": "Insurance Coverage Checklist",
+            "tms-billing-cpt-codes-2026": "TMS Billing & CPT Codes 2026",
+            "tms-patient-acquisition-playbook": "Patient Acquisition Playbook",
+            "tms-prior-authorization-template-kit": "Prior Authorization Template Kit",
+            "starting-a-tms-clinic-business-plan": "TMS Clinic Business Plan",
+            "tms-patient-outcome-tracking-system": "Patient Outcome Tracking System",
+            "tms-technician-training-checklist": "Technician Training Checklist",
+            "tms-state-regulations-guide-2026": "State Regulations Guide 2026",
+            "building-tms-referral-network": "Building a TMS Referral Network",
         };
         return names[value] || "guide";
     }

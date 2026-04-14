@@ -3,10 +3,9 @@ import { db } from '../../../db';
 import { subscriptions } from '../../../db/schema';
 import { sql, eq, desc } from 'drizzle-orm';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { PLAN_PRICE_USD } from '../../../db/subscriptions';
 
 export const prerender = false;
-
-const PLAN_PRICES: Record<string, number> = { verified: 49, featured: 149, premium: 299 };
 
 export const GET: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
@@ -20,7 +19,7 @@ export const GET: APIRoute = async ({ request }) => {
     ]);
 
     let mrr = 0;
-    for (const p of byPlan) { mrr += Number(p.count) * (PLAN_PRICES[p.plan] || 0); }
+    for (const p of byPlan) { mrr += Number(p.count) * (PLAN_PRICE_USD[p.plan] || 0); }
 
     return new Response(JSON.stringify({ mrr, byPlan, byStatus, recent }), { headers: { 'Content-Type': 'application/json' } });
   } catch (err) {

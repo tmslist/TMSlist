@@ -1,6 +1,10 @@
 ---
+export const prerender = false;
 import Layout from "../layouts/Layout.astro";
-import { PLANS } from "../utils/subscriptions";
+import { PLANS } from "../db/subscriptions";
+import { getSessionFromRequest } from "../utils/auth";
+
+const session = getSessionFromRequest(Astro.request);
 
 const pageTitle = "Pricing Plans for TMS Clinics | TMS List";
 const metaDescription = "Choose the right plan for your TMS clinic. From free listings to enterprise solutions with analytics, lead routing, and premium placement.";
@@ -17,16 +21,43 @@ const faqSchema = JSON.stringify({
 });
 
 const planOrder = ['free', 'pro', 'premium', 'enterprise'] as const;
-const planColors: Record<string, { bg: string; border: string; badge: string; btn: string }> = {
-  free: { bg: 'bg-white', border: 'border-slate-200', badge: 'bg-slate-100 text-slate-700', btn: 'bg-slate-900 hover:bg-slate-800' },
-  pro: { bg: 'bg-white', border: 'border-blue-200', badge: 'bg-blue-100 text-blue-700', btn: 'bg-blue-600 hover:bg-blue-700' },
-  premium: { bg: 'bg-gradient-to-b from-blue-50 to-white', border: 'border-blue-300 ring-2 ring-blue-100', badge: 'bg-blue-600 text-white', btn: 'bg-blue-600 hover:bg-blue-700' },
-  enterprise: { bg: 'bg-white', border: 'border-slate-200', badge: 'bg-slate-900 text-white', btn: 'bg-slate-900 hover:bg-slate-800' },
+const planColors: Record<string, { bg: string; border: string; badge: string; btn: string; popular: boolean }> = {
+  free: { bg: 'bg-white', border: 'border-slate-200', badge: 'bg-slate-100 text-slate-700', btn: 'bg-slate-900 hover:bg-slate-800', popular: false },
+  pro: { bg: 'bg-white', border: 'border-blue-200', badge: 'bg-blue-100 text-blue-700', btn: 'bg-blue-600 hover:bg-blue-700', popular: false },
+  premium: { bg: 'bg-gradient-to-b from-blue-50 to-white', border: 'border-blue-300 ring-2 ring-blue-100', badge: 'bg-blue-600 text-white', btn: 'bg-blue-600 hover:bg-blue-700', popular: true },
+  enterprise: { bg: 'bg-white', border: 'border-slate-200', badge: 'bg-slate-900 text-white', btn: 'bg-slate-900 hover:bg-slate-800', popular: false },
 };
+
+const planPrices: Record<string, { usd: number; inr: number }> = {
+  free: { usd: 0, inr: 0 },
+  pro: { usd: 18, inr: 1499 },
+  premium: { usd: 30, inr: 2499 },
+  enterprise: { usd: 60, inr: 4999 },
+};
+
+// April promo countdown — ends April 30, 2026
+const promoEnd = new Date('2026-04-30T23:59:59Z');
+const now = new Date();
+const promoActive = now <= promoEnd;
 ---
 
 <Layout title={pageTitle} description={metaDescription} schema={faqSchema}>
-  <section class="bg-white pt-16 pb-10 border-b border-slate-100">
+  <!-- Promo Banner -->
+  {promoActive && (
+    <div class="bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-600 text-white text-center py-3 px-4" id="promo-banner">
+      <div class="container mx-auto flex items-center justify-center gap-3">
+        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M5 2a2 2 0 00-2 2v14l3.5-2 3.5 2 3.5-2 3.5 2V4a2 2 0 00-2-2H5zm2.5 3a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45 4a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0zm2.55 4a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0zM10 8a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" clip-rule="evenodd"/>
+        </svg>
+        <span class="text-sm font-medium">
+          <strong>April Launch Offer:</strong> Get 3 months FREE on any paid plan — no credit card required!
+          <span id="countdown" class="ml-2 font-mono bg-white/20 px-2 py-0.5 rounded text-xs font-bold" data-end={promoEnd.toISOString()}></span>
+        </span>
+      </div>
+    </div>
+  )}
+
+  <section class="bg-white pt-12 pb-10 border-b border-slate-100">
     <div class="container mx-auto px-6 lg:px-12 text-center">
       <span class="inline-block px-4 py-1.5 bg-blue-50 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider mb-6">Pricing</span>
       <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4">
@@ -35,6 +66,11 @@ const planColors: Record<string, { bg: string; border: string; badge: string; bt
       <p class="text-lg text-slate-500 font-light leading-relaxed max-w-2xl mx-auto">
         From free listings to enterprise solutions. Choose the plan that matches your growth goals.
       </p>
+      {promoActive && (
+        <div class="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-200 rounded-full">
+          <span class="text-amber-700 text-sm font-medium">Limited time: 3 months free + no card required for the trial period</span>
+        </div>
+      )}
     </div>
   </section>
 
@@ -44,7 +80,9 @@ const planColors: Record<string, { bg: string; border: string; badge: string; bt
         {planOrder.map((planId) => {
           const plan = PLANS[planId];
           const colors = planColors[planId];
-          const isPopular = planId === 'premium';
+          const prices = planPrices[planId];
+          const isPopular = colors.popular;
+          const isLoggedIn = !!session;
 
           return (
             <div class={`relative ${colors.bg} rounded-3xl border ${colors.border} p-6 flex flex-col shadow-sm`}>
@@ -54,16 +92,28 @@ const planColors: Record<string, { bg: string; border: string; badge: string; bt
                 </div>
               )}
 
-              <div class="mb-6">
-                <span class={`inline-block px-3 py-1 rounded-full text-xs font-bold ${colors.badge}`}>{plan.name}</span>
-                <div class="mt-4">
-                  <span class="text-4xl font-bold text-slate-900">${plan.price}</span>
-                  {plan.price > 0 && <span class="text-slate-400 text-sm font-medium">/month</span>}
+              {promoActive && planId !== 'free' && (
+                <div class="absolute top-3 right-3">
+                  <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-[10px] font-bold rounded-full uppercase">3 Months FREE</span>
                 </div>
+              )}
+
+              <div class="mb-4">
+                <span class={`inline-block px-3 py-1 rounded-full text-xs font-bold ${colors.badge}`}>{plan.name}</span>
+                <div class="mt-4 flex items-baseline gap-2">
+                  <span class="text-4xl font-bold text-slate-900">${prices.usd}</span>
+                  {prices.usd > 0 && <span class="text-slate-400 text-sm font-medium">/month</span>}
+                  {promoActive && prices.usd > 0 && (
+                    <span class="text-xs text-emerald-600 font-medium">(3mo free trial)</span>
+                  )}
+                </div>
+                {prices.inr > 0 && (
+                  <p class="text-xs text-slate-400 mt-1">₹{prices.inr}/mo in India</p>
+                )}
               </div>
 
-              <ul class="space-y-3 mb-8 flex-1">
-                {plan.features.map((feature) => (
+              <ul class="space-y-2.5 mb-6 flex-1">
+                {plan.marketingFeatures.map((feature) => (
                   <li class="flex items-start gap-2.5 text-sm text-slate-600">
                     <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -73,19 +123,45 @@ const planColors: Record<string, { bg: string; border: string; badge: string; bt
                 ))}
               </ul>
 
-              {plan.price === 0 ? (
-                <a href="/add-listing/" class={`w-full py-3.5 ${colors.btn} text-white font-bold rounded-xl text-sm text-center transition-all block`}>
-                  Get Started Free
+              {planId === 'free' ? (
+                <a href="/add-listing/" class="w-full py-3.5 text-center font-semibold rounded-xl text-sm transition-all block border-2 border-slate-200 text-slate-700 hover:border-violet-300 hover:text-violet-700">
+                  Start Free Forever
                 </a>
               ) : (
-                <a href={`/api/subscribe?plan=${planId}`} class={`w-full py-3.5 ${colors.btn} text-white font-bold rounded-xl text-sm text-center transition-all block shadow-sm`}>
-                  Start {plan.name} Plan
+                <a
+                  href={isLoggedIn ? `/api/subscribe?plan=${planId}` : `/portal/login/?plan=${planId}&redirect=/api/subscribe?plan=${planId}`}
+                  class={`w-full py-3.5 text-center font-bold rounded-xl text-sm transition-all block ${colors.btn} text-white shadow-sm`}
+                >
+                  {isLoggedIn ? `Start ${plan.name} Plan` : 'Get Started'}
                 </a>
+              )}
+
+              {planId === 'free' && (
+                <p class="text-xs text-center text-slate-400 mt-2">No credit card needed</p>
               )}
             </div>
           );
         })}
       </div>
+
+      <!-- Trial explanation -->
+      {promoActive && (
+        <div class="max-w-2xl mx-auto mt-8 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-5">
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 mb-1">3-Month Free Trial — No Card Required</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Sign up during April and your paid plan starts completely free for 3 months. After the trial ends on July 31, 2026, you'll be charged — only if you choose to continue. Cancel anytime before July 31 and pay nothing. <span id="trial-countdown" class="font-mono font-bold text-amber-700"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <!-- FAQ Section -->
       <div class="max-w-3xl mx-auto mt-16">
@@ -103,7 +179,7 @@ const planColors: Record<string, { bg: string; border: string; badge: string; bt
               Do you offer annual pricing?
               <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </summary>
-            <div class="px-5 pb-5 text-sm text-slate-600">Yes! Annual plans save you 20%. Contact us at clinics@tmslist.com for annual pricing.</div>
+            <div class="px-5 pb-5 text-sm text-slate-600">Yes! Annual plans save you 20%. <a href="mailto:tmslistofficial@gmail.com?subject=Annual Pricing Inquiry" class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg transition-colors">Contact Us</a> for annual pricing.</div>
           </details>
           <details class="bg-white rounded-2xl border border-slate-100 shadow-sm">
             <summary class="p-5 cursor-pointer text-sm font-bold text-slate-900 list-none flex justify-between items-center">
@@ -124,3 +200,31 @@ const planColors: Record<string, { bg: string; border: string; badge: string; bt
     </div>
   </main>
 </Layout>
+
+<script define:vars={{ promoEnd: promoEnd.toISOString(), now: now.toISOString() }}>
+  // Countdown timer
+  function updateCountdown() {
+    const end = new Date(promoEnd).getTime();
+    const nowMs = Date.now();
+    const diff = end - nowMs;
+
+    if (diff <= 0) {
+      document.getElementById('countdown')?.remove();
+      document.getElementById('trial-countdown')?.remove();
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+    const el = document.getElementById('countdown');
+    if (el) el.textContent = `${days}d ${hours}h ${mins}m remaining`;
+
+    const trialEl = document.getElementById('trial-countdown');
+    if (trialEl) trialEl.textContent = `${days}d ${hours}h ${mins}m left to claim free trial`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+</script>

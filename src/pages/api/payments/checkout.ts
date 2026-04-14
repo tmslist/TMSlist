@@ -1,6 +1,10 @@
 import type { APIRoute } from 'astro';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth';
-import { createProCheckout, createEnterpriseCheckout } from '../../../utils/stripe';
+import { createSubscriptionCheckout, PLANS } from '../../../db/subscriptions';
+import type { PlanId } from '../../../db/subscriptions';
+import { db } from '../../../db';
+import { users } from '../../../db/schema';
+import { eq } from 'drizzle-orm';
 
 export const prerender = false;
 
@@ -18,41 +22,31 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const { plan } = body;
-  if (!['pro', 'enterprise'].includes(plan)) {
+  if (!['pro', 'premium', 'enterprise'].includes(plan)) {
     return new Response(JSON.stringify({ error: 'Invalid plan' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
   }
 
   const SITE_URL = import.meta.env.SITE_URL || 'https://tmslist.com';
-  const successUrl = `${SITE_URL}/portal/billing?success=true`;
-  const cancelUrl = `${SITE_URL}/portal/billing?canceled=true`;
 
-  const clinicId = (session as any).clinicId as string;
-  const clinicName = (session as any).clinicName as string || session.email;
+  // Get clinicId from user record
+  const [user] = await db.select().from(users).where(eq(users.id, session.userId)).limit(1);
+  const clinicId = user?.clinicId || (session as any).clinicId;
+
+  if (!clinicId) {
+    return new Response(JSON.stringify({ error: 'No clinic linked to your account. Please claim your clinic first.' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  const clinicName = user?.name || session.email;
 
   try {
-    let checkoutSession;
-
-    if (plan === 'pro') {
-      checkoutSession = await createProCheckout({
-        clinicId: clinicId || '',
-        clinicName,
-        clinicEmail: session.email,
-        successUrl,
-        cancelUrl,
-      });
-    } else if (plan === 'enterprise') {
-      checkoutSession = await createEnterpriseCheckout({
-        clinicId: clinicId || '',
-        clinicName,
-        clinicEmail: session.email,
-        successUrl,
-        cancelUrl,
-      });
-    }
-
-    if (!checkoutSession) {
-      return new Response(JSON.stringify({ error: 'Stripe not configured' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
-    }
+    const checkoutSession = await createSubscriptionCheckout({
+      planId: plan as PlanId,
+      clinicId,
+      clinicName,
+      clinicEmail: session.email,
+      successUrl: `${SITE_URL}/portal/billing/?subscribed=${plan}`,
+      cancelUrl: `${SITE_URL}/portal/billing/?canceled=true`,
+    });
 
     return new Response(JSON.stringify({
       checkoutUrl: checkoutSession.url,

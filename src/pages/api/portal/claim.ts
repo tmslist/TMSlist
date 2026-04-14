@@ -1,13 +1,12 @@
 import type { APIRoute } from 'astro';
 import { getSessionFromRequest } from '../../../utils/auth';
-import { db } from '../../../db';
-import { clinics, users, clinicClaims } from '../../../db/schema';
-import { eq, ilike } from 'drizzle-orm';
-import { randomBytes } from 'crypto';
+import { db, sql } from '../../../db';
+import { users, clinicClaims } from '../../../db/schema';
+import { eq } from 'drizzle-orm';
+import { randomBytes } from 'node:crypto';
 
 export const prerender = false;
 
-// GET: Search clinics by name
 export const GET: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
   if (!session) {
@@ -22,19 +21,13 @@ export const GET: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ clinics: [] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
 
-    // Strip LIKE wildcards to prevent injection
-    const safeQuery = query.replace(/[%_]/g, '');
-
-    const results = await db.select({
-      id: clinics.id,
-      name: clinics.name,
-      city: clinics.city,
-      state: clinics.state,
-      address: clinics.address,
-    })
-      .from(clinics)
-      .where(ilike(clinics.name, `%${safeQuery}%`))
-      .limit(20);
+    const safe = query.replace(/[%_]/g, '').slice(0, 100);
+    const results = await sql`
+      SELECT id, slug, name, city, state, address
+      FROM clinics
+      WHERE name ILIKE ${'%' + safe + '%'}
+      LIMIT 20
+    `;
 
     return new Response(JSON.stringify({ clinics: results }), {
       status: 200,
@@ -46,7 +39,6 @@ export const GET: APIRoute = async ({ request }) => {
   }
 };
 
-// POST: Claim a clinic
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
   if (!session) {
@@ -55,20 +47,17 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     const body = await request.json();
-    const { clinicId } = body;
+    const { clinicId, slug } = body;
+    const lookupValue = clinicId || slug;
 
-    if (!clinicId) {
-      return new Response(JSON.stringify({ error: 'Clinic ID is required' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+    if (!lookupValue) {
+      return new Response(JSON.stringify({ error: 'Clinic ID or slug is required' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
 
-    // Check clinic exists
-    const clinicRows = await db.select({
-      id: clinics.id,
-      name: clinics.name,
-      email: clinics.email,
-    }).from(clinics).where(eq(clinics.id, clinicId)).limit(1);
+    // Get clinic using raw SQL (avoids Drizzle type coercion on UUID columns with slug values)
+    const clinicRows = await sql`SELECT id, slug, name, email FROM clinics WHERE slug = ${lookupValue} LIMIT 1`;
+    const clinic = clinicRows[0] as any;
 
-    const clinic = clinicRows[0];
     if (!clinic) {
       return new Response(JSON.stringify({ error: 'Clinic not found' }), { status: 404, headers: { 'Content-Type': 'application/json' } });
     }
@@ -79,7 +68,6 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'You already have a clinic linked to your account' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
 
-    // Direct claim if email matches clinic email
     const userEmail = session.email.toLowerCase();
     const clinicEmail = clinic.email?.toLowerCase();
 
@@ -90,15 +78,15 @@ export const POST: APIRoute = async ({ request }) => {
         role: 'clinic_owner' as const,
       }).where(eq(users.id, session.userId));
 
-      return new Response(JSON.stringify({ success: true, directClaim: true }), {
+      return new Response(JSON.stringify({ success: true, directClaim: true, clinicSlug: clinic.slug }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    // Otherwise create a pending claim
+    // Create a pending claim
     const verificationToken = randomBytes(32).toString('hex');
-    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
     await db.insert(clinicClaims).values({
       clinicId: clinic.id,
@@ -109,12 +97,15 @@ export const POST: APIRoute = async ({ request }) => {
       expiresAt,
     });
 
-    return new Response(JSON.stringify({ success: true, directClaim: false }), {
+    return new Response(JSON.stringify({ success: true, directClaim: false, pendingVerification: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (err) {
     console.error('Portal claim error:', err);
+    if (err instanceof Error) {
+      return new Response(JSON.stringify({ error: 'Failed to claim clinic', detail: err.message }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    }
     return new Response(JSON.stringify({ error: 'Failed to claim clinic' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
   }
 };
