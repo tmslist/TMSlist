@@ -13,7 +13,36 @@ interface Clinic {
   specialties: string[] | null;
   insurances: string[] | null;
   phone: string | null;
+  latitude: number | null;
+  longitude: number | null;
   availability: { accepting_new_patients?: boolean; evening_hours?: boolean; weekend_hours?: boolean; telehealth_consults?: boolean } | null;
+}
+
+// Rough US city lat/lng lookup for radius filtering
+const CITY_COORDS: Record<string, [number, number]> = {
+  'new york': [40.7128, -74.006], 'los angeles': [34.0522, -118.2437],
+  'chicago': [41.8781, -87.6298], 'houston': [29.7604, -95.3698],
+  'phoenix': [33.4484, -112.074], 'philadelphia': [39.9526, -75.1652],
+  'san antonio': [29.4241, -98.4936], 'san diego': [32.7157, -117.1611],
+  'dallas': [32.7767, -96.797], 'san jose': [37.3382, -121.8863],
+  'austin': [30.2672, -97.7431], 'jacksonville': [30.3322, -81.6557],
+  'fort worth': [32.7555, -97.3308], 'columbus': [39.9612, -82.9988],
+  'charlotte': [35.2271, -80.8431], 'indianapolis': [39.7684, -86.1581],
+  'seattle': [47.6062, -122.3321], 'denver': [39.7392, -104.9903],
+  'boston': [42.3601, -71.0589], 'nashville': [36.1627, -86.7816],
+  'baltimore': [39.2904, -76.6122], 'oklahoma city': [35.4676, -97.5164],
+  'las vegas': [36.1699, -115.1398], 'portland': [45.5051, -122.675],
+  'miami': [25.7617, -80.1918], 'atlanta': [33.749, -84.388],
+  'minneapolis': [44.9778, -93.265], 'tampa': [27.9506, -82.4572],
+  'san francisco': [37.7749, -122.4194], 'pittsburgh': [40.4406, -79.9959],
+};
+
+function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 3959; // miles
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
 const TREATMENTS = ['Depression', 'OCD', 'Anxiety', 'PTSD', 'Bipolar Depression', 'Smoking Cessation', 'Chronic Pain', 'Migraine', 'ADHD', 'Tinnitus'];
@@ -29,6 +58,7 @@ export default function AdvancedSearch() {
   const [selectedInsurances, setSelectedInsurances] = useState<string[]>([]);
   const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [minRating, setMinRating] = useState(0);
+  const [radius, setRadius] = useState(50); // miles
   const [sortBy, setSortBy] = useState<'rating' | 'reviews' | 'name'>('rating');
   const [results, setResults] = useState<Clinic[]>([]);
   const [loading, setLoading] = useState(false);
@@ -62,6 +92,19 @@ export default function AdvancedSearch() {
           filtered = filtered.filter((c: Clinic) => Number(c.ratingAvg) >= minRating);
         }
 
+        // Client-side radius filtering (when city coords are known)
+        if (radius < 200) {
+          const cityKey = query.toLowerCase().trim();
+          const userCoords = CITY_COORDS[cityKey];
+          if (userCoords) {
+            filtered = filtered.filter((c: Clinic) => {
+              if (c.latitude == null || c.longitude == null) return true; // include clinics without coords
+              const dist = haversineDistance(userCoords[0], userCoords[1], c.latitude, c.longitude);
+              return dist <= radius;
+            });
+          }
+        }
+
         // Client-side sorting
         if (sortBy === 'rating') filtered.sort((a: Clinic, b: Clinic) => Number(b.ratingAvg) - Number(a.ratingAvg));
         else if (sortBy === 'reviews') filtered.sort((a: Clinic, b: Clinic) => b.reviewCount - a.reviewCount);
@@ -75,7 +118,7 @@ export default function AdvancedSearch() {
     } finally {
       setLoading(false);
     }
-  }, [query, state, selectedMachines, selectedInsurances, selectedTreatments, verifiedOnly, minRating, sortBy, page]);
+  }, [query, state, selectedMachines, selectedInsurances, selectedTreatments, verifiedOnly, minRating, radius, sortBy, page]);
 
   useEffect(() => { search(); }, []);
 
@@ -110,6 +153,24 @@ export default function AdvancedSearch() {
         <button onClick={() => search()} className="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm">
           Search
         </button>
+      </div>
+
+      {/* Radius slider */}
+      <div className="flex items-center gap-4 mb-4 px-1">
+        <label className="text-xs font-semibold text-slate-500 whitespace-nowrap">Within radius:</label>
+        <input
+          type="range"
+          min={5}
+          max={200}
+          step={5}
+          value={radius}
+          onChange={(e) => setRadius(Number(e.target.value))}
+          onMouseUp={() => search()}
+          onTouchEnd={() => search()}
+          aria-label="Search radius in miles"
+          className="flex-1 h-1.5 bg-slate-200 rounded-full appearance-none cursor-pointer accent-blue-600"
+        />
+        <span className="text-xs font-bold text-blue-600 min-w-[48px] text-right">{radius === 200 ? 'Any' : `${radius} mi`}</span>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">

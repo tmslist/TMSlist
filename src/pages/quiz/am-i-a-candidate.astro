@@ -359,6 +359,10 @@ const quizSchema = JSON.stringify({
 
                 <!-- Result: High Candidate -->
                 <div id="result-high" class="hidden p-8 md:p-12 text-center">
+                    <!-- Error message -->
+                    <div id="quiz-error" class="hidden p-4 bg-red-50 border border-red-200 rounded-xl mb-6 text-left">
+                        <p class="text-red-700 text-sm" id="quiz-error-text">Something went wrong. Please try again.</p>
+                    </div>
                     <div
                         class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6"
                     >
@@ -512,8 +516,9 @@ const quizSchema = JSON.stringify({
             quizAnswers: answers,
         };
 
+        let apiFailed = false;
         try {
-            await fetch('/api/leads', {
+            const res = await fetch('/api/leads', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -525,14 +530,25 @@ const quizSchema = JSON.stringify({
                     sourceUrl: window.location.href,
                 }),
             });
+            if (!res.ok) apiFailed = true;
         } catch (e) {
-            // Don't block results if API fails
+            apiFailed = true;
         }
 
         // Show Results regardless of API success (don't block user)
         document.getElementById("slide-contact").classList.add("hidden");
         document.getElementById("progress-bar").style.width = "100%";
         document.getElementById("progress-text").innerText = "100%";
+
+        // Show API error banner if submission failed, but still show results
+        if (apiFailed) {
+            const errorEl = document.getElementById("quiz-error");
+            const errorText = document.getElementById("quiz-error-text");
+            if (errorEl && errorText) {
+                errorText.textContent = "We couldn't save your details, but your results are ready below.";
+                errorEl.classList.remove("hidden");
+            }
+        }
 
         // Logic: Strong Candidate if Diagnosis=Yes AND Meds>=2 AND Improvement=No
         const isStrongCandidate =

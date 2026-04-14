@@ -267,6 +267,8 @@ export const reviews = pgTable('reviews', {
   helpfulCount: integer('helpful_count').default(0).notNull(),
   unhelpfulCount: integer('unhelpful_count').default(0).notNull(),
   source: text('source').default('tmslist'),
+  ownerResponse: text('owner_response'),
+  ownerResponseAt: timestamp('owner_response_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
 }, (table) => [
@@ -705,6 +707,24 @@ export const jobApplications = pgTable('job_applications', {
   index('idx_job_applications_clinic').on(table.clinicId),
   index('idx_job_applications_status').on(table.status),
   index('idx_job_applications_created').on(table.createdAt),
+]);
+
+// ── PAGE CONTENT (CMS) ──────────────────────────────────────────────────────
+
+export const pageContent = pgTable('page_content', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  page: text('page').notNull(),       // e.g. 'homepage', 'about', 'faq', 'contact'
+  section: text('section').notNull(), // e.g. 'hero', 'features', 'cta', 'pricing_section'
+  title: text('title'),
+  content: text('content'),           // markdown or HTML
+  imageUrl: text('image_url'),
+  order: integer('order').default(0).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+}, (table) => [
+  uniqueIndex('idx_page_content_unique').on(table.page, table.section),
+  index('idx_page_content_page').on(table.page),
+  index('idx_page_content_order').on(table.page, table.order),
 ]);
 
 // ── TYPE EXPORTS ──────────────────────────────────
