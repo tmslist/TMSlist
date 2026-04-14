@@ -1,13 +1,13 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
+import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel';
 import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://tmslist.com',
   output: 'server',
-  adapter: vercel(),
+  adapter: node({
+mode:'standalone',}),
   vite: {
     build: {
       chunkSizeWarningLimit: 2000,
