@@ -238,6 +238,8 @@
                     sourceUrl: leadData.source,
                     metadata: {
                         resource: leadData.resource,
+                        guide_type: leadData.resource === 'tms-buyers-guide' ? 'buyers-guide' : leadData.resource === 'tms-vs-medication' ? 'vs-medication' : 'insurance-checklist',
+                        guide_title: getResourceName(leadData.resource),
                         subscribed: leadData.subscribe,
                     },
                 }),

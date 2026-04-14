@@ -22,6 +22,9 @@ import EnquiryModal from "../components/react/EnquiryModal";
 import LocationPopup from "../components/LocationPopup.astro";
 import CallbackModal from "../components/CallbackModal.astro";
 import CookieConsent from "../components/CookieConsent.astro";
+import SocialProofToast from "../components/react/SocialProofToast";
+import ExitIntent from "../components/react/ExitIntent";
+import UTMCapture from "../components/react/UTMCapture";
 
 const { title, description, image, canonical, schema, breadcrumbs, noindex, hreflang } = Astro.props;
 
@@ -101,7 +104,7 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 			<link rel="alternate" hreflang={lang} href={url} />
 		))}
 		{allHreflang?.length && <link rel="alternate" hreflang="x-default" href={`${siteUrl}/us${subPath || '/'}`} />}
-
+<meta name="google-site-verification" content="qeagmPIKArLizrkNipilA-09Wznqwx0l9uxZWOXd-fs" />
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalUrl} />
@@ -124,6 +127,10 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&display=swap" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&display=swap" media="print" onload="this.media='all'" />
+
+		<!-- External CDNs -->
+		<link rel="preconnect" href="https://res.cloudinary.com" />
+		<link rel="dns-prefetch" href="https://res.cloudinary.com" />
 
 		<!-- Organization Schema -->
 		<script type="application/ld+json">
@@ -163,8 +170,11 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 		<Footer />
 		<LocationPopup />
 		<EnquiryModal client:idle />
+		<UTMCapture client:load />
 		<CallbackModal />
-	<CookieConsent />
+		<SocialProofToast client:idle />
+		<ExitIntent client:idle />
+		<CookieConsent />
 	<!-- Mobile Bottom Tab Bar -->
 	<nav id="mobile-tab-bar" class="fixed bottom-0 left-0 right-0 z-[140] bg-white/95 backdrop-blur-lg border-t border-gray-200 shadow-[0_-4px_20px_rgb(0,0,0,0.06)] lg:hidden transition-transform duration-300 translate-y-0" aria-label="Mobile navigation">
 		<div class="flex items-center justify-around px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2">

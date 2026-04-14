@@ -42,6 +42,7 @@ interface CampaignState {
   welcomeSentCount?: number;
   monthlySent: Record<string, boolean>; // "2026-05": true
   sentEmails: Record<string, string[]>; // "welcome": ["email1", "email2"]
+  welcomePausedUntil?: string; // ISO date string — if set and in the future, skip welcome campaign
 }
 
 async function getCampaignState(): Promise<CampaignState> {
@@ -223,9 +224,12 @@ export const GET: APIRoute = async ({ request }) => {
 
   let campaignType: 'welcome' | 'monthly' | 'none' = 'none';
 
+  // ── Pause guard ──────────────────────────────────────
+  const paused = state.welcomePausedUntil && new Date(state.welcomePausedUntil) > now;
+
   if (forceType === 'welcome' || forceType === 'monthly') {
     campaignType = forceType;
-  } else if (!state.welcomeSent) {
+  } else if (!state.welcomeSent && !paused) {
     campaignType = 'welcome';
   } else if (!state.monthlySent[monthKey] && currentMonth !== 4 && MONTHLY_EMAILS[currentMonth]) {
     // Send monthly on days 1-3 of the month (buffer for cron timing)
@@ -239,6 +243,8 @@ export const GET: APIRoute = async ({ request }) => {
       status: 'idle',
       message: 'No campaigns to send right now',
       welcomeSent: state.welcomeSent,
+      welcomePaused: paused,
+      welcomePausedUntil: state.welcomePausedUntil,
       monthlySentThisMonth: state.monthlySent[monthKey] || false,
       currentMonth,
     });
@@ -312,4 +318,54 @@ export const GET: APIRoute = async ({ request }) => {
     totalClinics: allClinics.length,
     totalSentSoFar: (state.sentEmails[campaignType]?.length || 0),
   });
+};
+
+// ── Pause / Unpause ──────────────────────────────────
+
+export const POST: APIRoute = async ({ request }) => {
+  const authHeader = request.headers.get('authorization');
+  const cronSecret = import.meta.env.CRON_SECRET || process.env.CRON_SECRET;
+  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  let body: { action: 'pause' | 'unpause' | 'pause-until'; until?: string };
+  try {
+    body = await request.json();
+  } catch {
+    return Response.json({ error: 'Invalid JSON body' }, { status: 400 });
+  }
+
+  const state = await getCampaignState();
+  const now = new Date();
+
+  if (body.action === 'pause') {
+    // Pause until end of tomorrow UTC
+    const tomorrow = new Date(now);
+    tomorrow.setUTCDate(tomorrow.getUTCDate() + 2);
+    tomorrow.setUTCHours(0, 0, 0, 0);
+    state.welcomePausedUntil = tomorrow.toISOString();
+    await saveCampaignState(state);
+    return Response.json({
+      action: 'pause',
+      welcomePausedUntil: state.welcomePausedUntil,
+      message: `Welcome campaign paused until ${state.welcomePausedUntil} — next cron will be skipped.`,
+    });
+  } else if (body.action === 'pause-until' && body.until) {
+    state.welcomePausedUntil = body.until;
+    await saveCampaignState(state);
+    return Response.json({
+      action: 'pause-until',
+      welcomePausedUntil: state.welcomePausedUntil,
+    });
+  } else if (body.action === 'unpause') {
+    state.welcomePausedUntil = undefined;
+    await saveCampaignState(state);
+    return Response.json({
+      action: 'unpause',
+      message: 'Welcome campaign unpaused.',
+    });
+  }
+
+  return Response.json({ error: 'Unknown action. Use: pause | unpause | pause-until (with until ISO string)' }, { status: 400 });
 };

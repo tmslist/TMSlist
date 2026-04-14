@@ -4,7 +4,6 @@ import { reviews, users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth';
 import { escapeHtml } from '../../../utils/sanitize';
-import { sql } from 'drizzle-orm';
 
 export const prerender = false;
 
@@ -55,18 +54,9 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const sanitized = escapeHtml(response);
-    try {
-      await db.execute(sql`
-        UPDATE reviews
-        SET owner_response = ${sanitized}, owner_response_at = now()
-        WHERE id = ${reviewId}::uuid
-      `);
-    } catch {
-      return new Response(JSON.stringify({ error: 'Response feature not yet enabled. Please contact support.' }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
+    await db.update(reviews)
+      .set({ ownerResponse: sanitized, ownerResponseAt: new Date() })
+      .where(eq(reviews.id, reviewId));
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

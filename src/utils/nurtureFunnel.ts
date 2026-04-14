@@ -170,20 +170,111 @@ export const DRIP_SEQUENCES: Record<FunnelSegment, DripStep[]> = {
     {
       stepId: 'leadmag_delivery',
       delayDays: 0,
-      subject: 'Your TMS guide is ready to download',
-      buildHtml: (c) => emailWrapper(`
-        <h2 style="color: #1e293b; margin: 0 0 16px;">Here's your guide, ${c.name}</h2>
-        <p style="color: #64748b; line-height: 1.7;">Thank you for your interest in TMS therapy. Your guide is attached below.</p>
-        <div style="background: #f1f5f9; border-radius: 10px; padding: 20px; margin: 20px 0; text-align: center;">
-          <p style="font-size: 14px; color: #334155; font-weight: 600; margin: 0 0 12px;">${c.metadata?.guide_title || 'Your TMS Therapy Guide'}</p>
-          ${btn('Download Guide', `${SITE_URL}/resources/`)}
-        </div>
-        <p style="color: #64748b; line-height: 1.7;">While you're reading, you might also want to:</p>
-        <ul style="color: #64748b; line-height: 2;">
-          <li><a href="${SITE_URL}/quiz/am-i-a-candidate/" style="color: #4f46e5;">Check if you're a TMS candidate</a></li>
-          <li><a href="${SITE_URL}/tms-cost-calculator/" style="color: #4f46e5;">Estimate your treatment cost</a></li>
-        </ul>
-      `),
+      subject: 'Your TMS guide is ready — read it right here',
+      buildHtml: (c) => {
+        const guideType = c.metadata?.guide_type || 'buyers-guide';
+        const contentMap: Record<string, string> = {
+          'buyers-guide': `
+            <h2 style="color: #1e293b; margin: 0 0 8px;">Your Complete TMS Buyer's Guide</h2>
+            <p style="color: #64748b; margin: 0 0 24px;">Hi ${c.name}, here's everything you need to know about choosing the right TMS provider.</p>
+            <div style="border-left: 4px solid #4f46e5; padding-left: 16px; margin-bottom: 24px;">
+              <h3 style="color: #1e293b; margin: 0 0 8px; font-size: 15px;">What is TMS?</h3>
+              <p style="color: #64748b; margin: 0; font-size: 14px; line-height: 1.7;">Transcranial Magnetic Stimulation (TMS) is an FDA-cleared, non-invasive treatment for major depressive disorder that hasn't responded to medication. It uses magnetic pulses to stimulate underactive areas of the brain.</p>
+            </div>
+            <div style="border-left: 4px solid #7c3aed; padding-left: 16px; margin-bottom: 24px;">
+              <h3 style="color: #1e293b; margin: 0 0 8px; font-size: 15px;">How to Choose a TMS Provider</h3>
+              <p style="color: #64748b; margin: 0 0 12px; font-size: 14px; line-height: 1.7;">Look for these when comparing clinics:</p>
+              <ul style="color: #64748b; margin: 0; padding-left: 18px; font-size: 14px; line-height: 2;">
+                <li><strong>FDA-cleared devices</strong> — NeuroStar, BrainsWay, MagVenture, or Nexstim</li>
+                <li><strong>Board-certified psychiatrists</strong> performing or supervising treatment</li>
+                <li><strong>Insurance accepted</strong> — Medicare, Medicaid, BCBS, Aetna, Cigna, United</li>
+                <li><strong>Protocol offered</strong> — High-frequency (standard) or Deep TMS (BrainsWay)</li>
+                <li><strong>Patient reviews</strong> — Verified ratings and testimonials</li>
+              </ul>
+            </div>
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 16px; margin-bottom: 24px;">
+              <h3 style="color: #166534; margin: 0 0 8px; font-size: 15px;">Insurance Coverage Tip</h3>
+              <p style="color: #15803d; margin: 0; font-size: 14px; line-height: 1.7;">Most insurers cover TMS if you've tried 1–4 antidepressants without adequate relief. Ask your clinic about prior authorization support — many handle this for you.</p>
+            </div>
+            <div style="border-left: 4px solid #0284c7; padding-left: 16px; margin-bottom: 24px;">
+              <h3 style="color: #1e293b; margin: 0 0 8px; font-size: 15px;">What to Expect at Your First Appointment</h3>
+              <ul style="color: #64748b; margin: 0; padding-left: 18px; font-size: 14px; line-height: 2;">
+                <li>Consultation — 45–60 min with a psychiatrist to confirm you're a candidate</li>
+                <li>Mapping session — TMS coil is positioned; motor threshold is measured (~30 min)</li>
+                <li>Treatment sessions — ~20 min each, 5 days/week for 4–6 weeks</li>
+                <li>Follow-up — your psychiatrist checks progress at week 2 and week 6</li>
+              </ul>
+            </div>
+          `,
+          'vs-medication': `
+            <h2 style="color: #1e293b; margin: 0 0 8px;">TMS vs. Medication: What You Need to Know</h2>
+            <p style="color: #64748b; margin: 0 0 24px;">Hi ${c.name}, here's a side-by-side look at how TMS compares to antidepressant medication.</p>
+            <div style="overflow-x: auto; margin-bottom: 24px;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <thead>
+                  <tr style="background: #f1f5f9;">
+                    <th style="padding: 10px 12px; text-align: left; border-bottom: 2px solid #e2e8f0; color: #334155; font-weight: 600;">Factor</th>
+                    <th style="padding: 10px 12px; text-align: left; border-bottom: 2px solid #e2e8f0; color: #334155; font-weight: 600;">TMS Therapy</th>
+                    <th style="padding: 10px 12px; text-align: left; border-bottom: 2px solid #e2e8f0; color: #334155; font-weight: 600;">Antidepressants</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #475569;"><strong>Invasiveness</strong></td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #64748b;">Non-invasive, no surgery or anesthesia</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #64748b;">Oral medication, non-invasive</td></tr>
+                  <tr><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #475569;"><strong>Side Effects</strong></td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #64748b;">Mild scalp discomfort at stimulation site; no systemic effects</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #64748b;">Nausea, weight gain, sexual dysfunction, insomnia, fatigue</td></tr>
+                  <tr><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #475569;"><strong>Time to Effect</strong></td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #64748b;">4–6 weeks of daily sessions</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #64748b;">4–8 weeks for full effect</td></tr>
+                  <tr><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #475569;"><strong>Session Duration</strong></td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #64748b;">~20 min per session, 5x/week for 4–6 weeks</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #64748b;">Daily pill, no clinic visits required</td></tr>
+                  <tr><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #475569;"><strong>Insurance Coverage</strong></td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #64748b;">Covered by most insurers for treatment-resistant depression</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #64748b;">Covered by most insurance plans</td></tr>
+                  <tr><td style="padding: 10px 12px; color: #475569;"><strong>Cognitive Effects</strong></td><td style="padding: 10px 12px; color: #64748b;">No cognitive impairment; may improve cognition</td><td style="padding: 10px 12px; color: #64748b;">Some medications can cause "brain fog"</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="color: #64748b; font-size: 14px; line-height: 1.7;">TMS is typically considered when medication hasn't worked or caused intolerable side effects. Many patients use both treatments together under a psychiatrist's care.</p>
+          `,
+          'insurance-checklist': `
+            <h2 style="color: #1e293b; margin: 0 0 8px;">Your Insurance Coverage Checklist for TMS</h2>
+            <p style="color: #64748b; margin: 0 0 24px;">Hi ${c.name}, use this checklist to navigate insurance coverage for TMS therapy.</p>
+            <div style="margin-bottom: 24px;">
+              <p style="color: #1e293b; margin: 0 0 12px; font-weight: 700; font-size: 14px;">Step 1 — Check Your Insurance Plan</p>
+              <ul style="color: #64748b; margin: 0; padding-left: 18px; font-size: 14px; line-height: 2;">
+                <li>Does your plan cover mental health treatments?</li>
+                <li>Does it specifically mention TMS or "transcranial magnetic stimulation"?</li>
+                <li>Is prior authorization required before starting treatment?</li>
+                <li>What's your deductible — and how much of it have you met this year?</li>
+              </ul>
+            </div>
+            <div style="margin-bottom: 24px;">
+              <p style="color: #1e293b; margin: 0 0 12px; font-weight: 700; font-size: 14px;">Step 2 — Confirm Medical Necessity</p>
+              <p style="color: #64748b; margin: 0 0 8px; font-size: 14px; line-height: 1.7;">Most insurers require documentation of treatment-resistant depression, which typically means:</p>
+              <ul style="color: #64748b; margin: 0; padding-left: 18px; font-size: 14px; line-height: 2;">
+                <li>Diagnosis of Major Depressive Disorder (MDD)</li>
+                <li>Failure to respond to 1–4 antidepressant medications (adequate dose, adequate duration)</li>
+                <li>Psychiatrist referral and clinical documentation</li>
+              </ul>
+            </div>
+            <div style="margin-bottom: 24px;">
+              <p style="color: #1e293b; margin: 0 0 12px; font-weight: 700; font-size: 14px;">Step 3 — What to Ask Your Clinic</p>
+              <ul style="color: #64748b; margin: 0; padding-left: 18px; font-size: 14px; line-height: 2;">
+                <li>Do you handle prior authorization for TMS?</li>
+                <li>What FDA-cleared TMS devices do you use?</li>
+                <li>What will my out-of-pocket cost be after insurance?</li>
+                <li>Do you offer payment plans if insurance denies coverage?</li>
+              </ul>
+            </div>
+            <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 16px;">
+              <p style="color: #1e40af; margin: 0; font-size: 14px; line-height: 1.7;"><strong>Medicare & Medicaid:</strong> Both cover TMS for treatment-resistant depression under FDA-cleared protocols when standard criteria are met. Check with your clinic's billing team to verify.</p>
+            </div>
+          `,
+        };
+        const content = contentMap[guideType] || contentMap['buyers-guide'];
+        return emailWrapper(`
+          ${content}
+          <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 24px 0;" />
+          <p style="color: #64748b; line-height: 1.7; margin-bottom: 20px;">Want personalized guidance? Take our 2-minute quiz to see if TMS might work for you.</p>
+          <div style="text-align: center; margin: 0;">
+            ${btn('Take the Candidacy Quiz', `${SITE_URL}/quiz/am-i-a-candidate/`, '#4f46e5')}
+          </div>
+        `);
+      },
     },
     {
       stepId: 'leadmag_day2_candidacy',

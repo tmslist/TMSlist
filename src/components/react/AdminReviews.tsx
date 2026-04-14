@@ -18,6 +18,8 @@ interface Review {
   clinicName: string | null;
   clinicSlug: string | null;
   reply?: string | null;
+  ownerResponse?: string | null;
+  ownerResponseAt?: string | null;
 }
 
 const SOURCE_COLORS: Record<string, string> = {
@@ -277,13 +279,27 @@ export default function AdminReviews() {
     }
   }
 
-  function handleReplySubmit(reviewId: string, reply: string) {
+  async function handleReplySubmit(reviewId: string, reply: string) {
     setReplies(prev => ({ ...prev, [reviewId]: reply }));
     setReviews(prev => prev.map(r =>
       r.id === reviewId ? { ...r, reply } : r
     ));
     setReplyReview(null);
-    showToast('Reply saved', 'success');
+    try {
+      const res = await fetch('/api/portal/review-response', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reviewId, response: reply }),
+      });
+      if (!res.ok) {
+        const json = await res.json();
+        showToast(json.error || 'Failed to save reply', 'error');
+      } else {
+        showToast('Reply saved', 'success');
+      }
+    } catch {
+      showToast('Failed to save reply', 'error');
+    }
   }
 
   function exportToCsv() {
