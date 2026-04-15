@@ -339,6 +339,13 @@ export async function sendPatientConfirmation(data: {
       ctaText: 'Browse Clinics',
       ctaUrl: `${SITE_URL}/us/`,
     },
+    specialist_enquiry: {
+      label: 'Specialist Request Received',
+      accent: '#6366f1',
+      body: "We've received your specialist enquiry. A qualified TMS psychiatrist or specialist will reach out to you within 1–2 business days to discuss your treatment options.",
+      ctaText: 'Find a TMS Specialist',
+      ctaUrl: `${SITE_URL}/us/`,
+    },
   };
 
   const config = typeConfig[data.leadType || ''] || typeConfig['contact'];
@@ -375,6 +382,51 @@ export async function sendPatientConfirmation(data: {
 }
 
 // ── COMMUNITY FORUM NOTIFICATIONS ──────────────────
+
+export async function sendSuspiciousLoginAlert(data: {
+  to: string;
+  userAgent: string;
+  ipAddress: string;
+  loginUrl: string;
+}) {
+  const resend = getResend();
+  if (!resend) return null;
+
+  const ua = data.userAgent || '';
+  const deviceType = ua.includes('Mobile') || ua.includes('Android') || ua.includes('iPhone')
+    ? 'Mobile device'
+    : ua.includes('Tablet') || ua.includes('iPad')
+    ? 'Tablet'
+    : 'Desktop computer';
+
+  return resend.emails.send({
+    from: LOGIN_FROM,
+    to: data.to,
+    subject: 'New login detected — TMS List',
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+<div style="max-width:480px;margin:0 auto;padding:40px 20px;">
+  <div style="text-align:center;margin-bottom:32px;">
+    <h1 style="font-size:24px;font-weight:700;color:#111827;margin:0;">TMS List</h1>
+    <p style="color:#dc2626;margin:8px 0 0;font-weight:600;">New login detected</p>
+  </div>
+  <div style="background:#ffffff;border:1px solid #fee2e2;border-radius:12px;padding:32px;">
+    <p style="color:#374151;font-size:16px;margin:0 0 16px;">We noticed a sign-in to your account from a new device or location.</p>
+    <div style="background:#fef2f2;border-radius:8px;padding:16px;margin-bottom:16px;">
+      <p style="margin:0;color:#991b1b;font-size:14px;"><strong>Device:</strong> ${deviceType}</p>
+      <p style="margin:4px 0 0;color:#991b1b;font-size:14px;"><strong>IP Address:</strong> ${data.ipAddress || 'Unknown'}</p>
+    </div>
+    <p style="color:#374151;font-size:14px;margin:0 0 24px;">If this was you, you can safely ignore this email. If you do not recognize this login, we recommend changing your password immediately.</p>
+    <a href="${data.loginUrl}" style="display:inline-block;background:#4f46e5;color:#ffffff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">Review Account</a>
+  </div>
+  <p style="color:#9ca3af;font-size:11px;text-align:center;margin-top:24px;">You received this because a new login was detected on your account.</p>
+</div>
+</body></html>`,
+  });
+}
 
 export async function sendForumReplyNotification(data: {
   recipientEmail: string;
