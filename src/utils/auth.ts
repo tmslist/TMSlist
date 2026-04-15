@@ -174,11 +174,12 @@ const MAGIC_LINK_EXPIRY_MINUTES = 15;
 
 export async function createMagicToken(email: string, purpose: MagicTokenPurpose = 'portal-magic'): Promise<string> {
   const token = randomBytes(32).toString('hex');
+  const tokenHash = createHash('sha256').update(token).digest('hex');
   const expiresAt = new Date(Date.now() + MAGIC_LINK_EXPIRY_MINUTES * 60 * 1000);
 
   await db.insert(magicTokens).values({
     email: email.toLowerCase(),
-    token,
+    token: tokenHash,
     purpose,
     expiresAt,
   });
@@ -189,9 +190,11 @@ export async function verifyMagicToken(
   token: string,
   purpose?: MagicTokenPurpose
 ): Promise<{ email: string; purpose: MagicTokenPurpose } | null> {
+  const tokenHash = createHash('sha256').update(token).digest('hex');
+
   // Build where conditions
   const conditions = [
-    eq(magicTokens.token, token),
+    eq(magicTokens.token, tokenHash),
     isNull(magicTokens.usedAt),
     gt(magicTokens.expiresAt, new Date()),
   ];
