@@ -211,7 +211,7 @@ export const clinics = pgTable('clinics', {
   isFeatured: boolean('is_featured').default(false).notNull(),
 
   // Denormalized ratings for fast queries
-  ratingAvg: decimal('rating_avg', { precision: 3, scale: 2 }).default('0'),
+  ratingAvg: decimal('rating_avg', { precision: 3, scale: 2 }).default('0').notNull(),
   reviewCount: integer('review_count').default(0).notNull(),
 
   // Timestamps
@@ -271,11 +271,14 @@ export const reviews = pgTable('reviews', {
   ownerResponseAt: timestamp('owner_response_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+  deletedAt: timestamp('deleted_at', { withTimezone: true }),
 }, (table) => [
   index('idx_reviews_clinic').on(table.clinicId),
   index('idx_reviews_approved').on(table.approved),
   index('idx_reviews_clinic_approved').on(table.clinicId, table.approved),
   index('idx_reviews_user').on(table.userId),
+  index('idx_reviews_created').on(table.createdAt),
+  index('idx_reviews_clinic_approved_created').on(table.clinicId, table.approved, table.createdAt),
 ]);
 
 // ── LEADS ──────────────────────────────────────
@@ -294,10 +297,12 @@ export const leads = pgTable('leads', {
   metadata: jsonb('metadata').$type<Record<string, unknown>>(),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+  deletedAt: timestamp('deleted_at', { withTimezone: true }),
 }, (table) => [
   index('idx_leads_type').on(table.type),
   index('idx_leads_created').on(table.createdAt),
   index('idx_leads_clinic').on(table.clinicId),
+  index('idx_leads_email').on(table.email),
 ]);
 
 // ── QUESTIONS / FAQ ──────────────────────────────
@@ -411,6 +416,22 @@ export const auditLog = pgTable('audit_log', {
   index('idx_audit_created').on(table.createdAt),
 ]);
 
+// ── AUTH EVENTS ──────────────────────────────────
+
+export const authEvents = pgTable('auth_events', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').references(() => users.id).notNull(),
+  action: text('action').notNull(),
+  ipAddress: text('ip_address'),
+  userAgent: text('user_agent'),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_auth_events_user').on(table.userId),
+  index('idx_auth_events_action').on(table.action),
+  index('idx_auth_events_created').on(table.createdAt),
+]);
+
 // ── CLINIC CLAIMS ──────────────────────────────────
 
 export const clinicClaims = pgTable('clinic_claims', {
@@ -517,6 +538,7 @@ export const blogPosts = pgTable('blog_posts', {
   index('idx_blog_status').on(table.status),
   index('idx_blog_published').on(table.publishedAt),
   index('idx_blog_category').on(table.category),
+  index('idx_blog_status_published').on(table.status, table.publishedAt),
 ]);
 
 // ── SEO OVERRIDES ──────────────────────────────────
@@ -755,3 +777,4 @@ export type Job = typeof jobs.$inferSelect;
 export type NewJob = typeof jobs.$inferInsert;
 export type JobApplication = typeof jobApplications.$inferSelect;
 export type NewJobApplication = typeof jobApplications.$inferInsert;
+export type AuthEvent = typeof authEvents.$inferSelect;

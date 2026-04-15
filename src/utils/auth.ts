@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { createHash, randomBytes } from 'crypto';
 import { eq, and, isNull, gt } from 'drizzle-orm';
 import { db } from '../db';
-import { users, magicTokens, sessions } from '../db/schema';
+import { users, magicTokens, sessions, authEvents } from '../db/schema';
 import type { User } from '../db/schema';
 import type { InferSelectModel } from 'drizzle-orm';
 
@@ -237,6 +237,30 @@ export function isAllowedEmail(email: string): boolean {
     return ADMIN_EMAILS.includes(email.toLowerCase());
   }
   return true;
+}
+
+/**
+ * Log an authentication event to the auth_events table.
+ * Non-blocking — failures are logged but do not interrupt the auth flow.
+ */
+export async function logAuthEvent(params: {
+  userId: string;
+  action: string;
+  ipAddress?: string;
+  userAgent?: string;
+  metadata?: Record<string, unknown>;
+}) {
+  try {
+    await db.insert(authEvents).values({
+      userId: params.userId,
+      action: params.action,
+      ipAddress: params.ipAddress,
+      userAgent: params.userAgent,
+      metadata: params.metadata,
+    });
+  } catch (err) {
+    console.error('[auth] Failed to log auth event:', err);
+  }
 }
 
 // ── PASSWORD STRENGTH ──────────────────────────────
