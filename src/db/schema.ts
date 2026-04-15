@@ -371,6 +371,16 @@ export const users = pgTable('users', {
   termsAcceptedAt: timestamp('terms_accepted_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   lastLoginAt: timestamp('last_login_at', { withTimezone: true }),
+  failedLoginAttempts: integer('failed_login_attempts').default(0).notNull(),
+  lockedUntil: timestamp('locked_until', { withTimezone: true }),
+  knownDevices: jsonb('known_devices').$type<Array<{
+    deviceHash: string;
+    ipAddress: string;
+    userAgent: string;
+    deviceType: string;
+    firstSeenAt: string;
+    lastSeenAt: string;
+  }>>(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
 }, (table) => [
@@ -430,6 +440,22 @@ export const authEvents = pgTable('auth_events', {
   index('idx_auth_events_user').on(table.userId),
   index('idx_auth_events_action').on(table.action),
   index('idx_auth_events_created').on(table.createdAt),
+]);
+
+// ── LOGIN HISTORY ──────────────────────────────────
+
+export const loginHistory = pgTable('login_history', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  ipAddress: text('ip_address').notNull(),
+  userAgent: text('user_agent'),
+  deviceType: text('device_type'),
+  success: boolean('success').notNull(),
+  attemptedAt: timestamp('attempted_at', { withTimezone: true }).defaultNow().notNull(),
+  failureReason: text('failure_reason'),
+}, (table) => [
+  index('idx_login_history_user').on(table.userId),
+  index('idx_login_history_user_recent').on(table.userId, table.attemptedAt),
 ]);
 
 // ── CLINIC CLAIMS ──────────────────────────────────
@@ -778,3 +804,4 @@ export type NewJob = typeof jobs.$inferInsert;
 export type JobApplication = typeof jobApplications.$inferSelect;
 export type NewJobApplication = typeof jobApplications.$inferInsert;
 export type AuthEvent = typeof authEvents.$inferSelect;
+export type LoginHistory = typeof loginHistory.$inferSelect;
