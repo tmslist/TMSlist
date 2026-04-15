@@ -8,8 +8,8 @@ import type { User } from '../db/schema';
 import type { InferSelectModel } from 'drizzle-orm';
 
 const JWT_SECRET = import.meta.env.JWT_SECRET || process.env.JWT_SECRET;
-if (!JWT_SECRET && typeof window === 'undefined') {
-  console.warn('[auth] JWT_SECRET is not set — authentication will not work');
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
 }
 const TOKEN_EXPIRY = '7d';
 const COOKIE_NAME = 'tms_session';
