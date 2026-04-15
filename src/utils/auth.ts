@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { createHash, randomBytes } from 'crypto';
 import { eq, and, isNull, gt } from 'drizzle-orm';
 import { db } from '../db';
-import { users, magicTokens, sessions, authEvents } from '../db/schema';
+import { users, magicTokens, sessions, authEvents, loginHistory } from '../db/schema';
 import type { User } from '../db/schema';
 import type { InferSelectModel } from 'drizzle-orm';
 
@@ -161,6 +161,144 @@ export function clearSessionCookie(): string {
 export function hasRole(session: JWTPayload | null, ...roles: string[]): boolean {
   if (!session) return false;
   return roles.includes(session.role);
+}
+
+// ── BRUTE-FORCE LOCKOUT ──────────────────────────────
+
+const LOCK_THRESHOLD = 5;
+const LOCK_DURATION_MS = 15 * 60 * 1000; // 15 minutes
+
+/**
+ * Check if an account is currently locked due to brute-force attempts.
+ * Automatically clears expired locks.
+ */
+export async function isAccountLocked(userId: string): Promise<{ locked: boolean; lockedUntil?: Date; retryAfterSeconds?: number }> {
+  const results = await db.select({ lockedUntil: users.lockedUntil })
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  if (!results[0]) return { locked: false };
+
+  const lockedUntil = results[0].lockedUntil;
+  if (!lockedUntil) return { locked: false };
+
+  if (new Date() >= lockedUntil) {
+    // Lock has expired — clear it
+    await db.update(users).set({ lockedUntil: null, failedLoginAttempts: 0 }).where(eq(users.id, userId));
+    return { locked: false };
+  }
+
+  const retryAfterSeconds = Math.ceil((lockedUntil.getTime() - Date.now()) / 1000);
+  return { locked: true, lockedUntil, retryAfterSeconds };
+}
+
+/**
+ * Record a failed login attempt and lock account if threshold reached.
+ * Returns the current failed attempt count and lock status.
+ */
+export async function recordFailedLoginAttempt(userId: string): Promise<{ attempts: number; locked: boolean; retryAfterSeconds?: number }> {
+  const results = await db.select({ failedLoginAttempts: users.failedLoginAttempts })
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  const currentAttempts = (results[0]?.failedLoginAttempts ?? 0) + 1;
+
+  if (currentAttempts >= LOCK_THRESHOLD) {
+    const lockedUntil = new Date(Date.now() + LOCK_DURATION_MS);
+    await db.update(users).set({ failedLoginAttempts: currentAttempts, lockedUntil }).where(eq(users.id, userId));
+    return { attempts: currentAttempts, locked: true, retryAfterSeconds: Math.ceil(LOCK_DURATION_MS / 1000) };
+  } else {
+    await db.update(users).set({ failedLoginAttempts: currentAttempts }).where(eq(users.id, userId));
+    return { attempts: currentAttempts, locked: false };
+  }
+}
+
+/**
+ * Clear failed login attempts on successful login.
+ */
+export async function clearFailedLoginAttempts(userId: string): Promise<void> {
+  await db.update(users).set({
+    failedLoginAttempts: 0,
+    lockedUntil: null,
+  }).where(eq(users.id, userId));
+}
+
+// ── DEVICE TYPE PARSING ──────────────────────────────
+
+/**
+ * Parse device type from user agent string (lightweight, no external deps).
+ */
+export function parseDeviceType(userAgent: string): string {
+  const ua = userAgent.toLowerCase();
+  if (ua.includes('mobile') || ua.includes('android') || ua.includes('iphone')) return 'mobile';
+  if (ua.includes('tablet') || ua.includes('ipad')) return 'tablet';
+  if (ua.includes('bot') || ua.includes('crawler') || ua.includes('spider')) return 'bot';
+  return 'desktop';
+}
+
+// ── LOGIN ACTIVITY TRACKING ──────────────────────────────
+
+/**
+ * Log a login attempt (success or failure) to the login_history table.
+ * Also calls logAuthEvent for audit trail and updates knownDevices on success.
+ */
+export async function logLoginActivity(params: {
+  userId: string;
+  email: string;
+  success: boolean;
+  ipAddress: string;
+  userAgent: string;
+  failureReason?: string;
+}) {
+  const deviceType = parseDeviceType(params.userAgent);
+  const deviceHash = createHash('sha256').update(`${params.ipAddress}:${params.userAgent}`).digest('hex');
+
+  try {
+    // Record in login_history
+    await db.insert(loginHistory).values({
+      userId: params.userId,
+      ipAddress: params.ipAddress,
+      userAgent: params.userAgent,
+      deviceType,
+      success: params.success,
+      failureReason: params.failureReason,
+    });
+
+    // Also log to auth_events table
+    await logAuthEvent({
+      userId: params.userId,
+      action: params.success ? 'login_success' : 'login_failed',
+      ipAddress: params.ipAddress,
+      userAgent: params.userAgent,
+      metadata: { failureReason: params.failureReason, deviceType },
+    });
+
+    // Update knownDevices if successful login
+    if (params.success) {
+      const userResults = await db.select({ knownDevices: users.knownDevices, lastLoginAt: users.lastLoginAt })
+        .from(users)
+        .where(eq(users.id, params.userId))
+        .limit(1);
+
+      const knownDevices: Array<{ deviceHash: string; ipAddress: string; userAgent: string; deviceType: string; firstSeenAt: string; lastSeenAt: string }> = userResults[0]?.knownDevices ?? [];
+
+      const existingDeviceIndex = knownDevices.findIndex(d => d.deviceHash === deviceHash);
+      const now = new Date().toISOString();
+
+      if (existingDeviceIndex >= 0) {
+        knownDevices[existingDeviceIndex].lastSeenAt = now;
+        knownDevices[existingDeviceIndex].ipAddress = params.ipAddress;
+      } else {
+        knownDevices.push({ deviceHash, ipAddress: params.ipAddress, userAgent: params.userAgent, deviceType, firstSeenAt: now, lastSeenAt: now });
+      }
+
+      await db.update(users).set({ knownDevices, lastLoginAt: new Date() }).where(eq(users.id, params.userId));
+    }
+  } catch (err) {
+    console.error('[auth] Failed to log login activity:', err);
+  }
 }
 
 // ── MAGIC LINK AUTH ──────────────────────────────
