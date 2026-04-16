@@ -163,6 +163,89 @@ export function hasRole(session: JWTPayload | null, ...roles: string[]): boolean
   return roles.includes(session.role);
 }
 
+/**
+ * Parse session expiry string to milliseconds.
+ * Options: '1h', '8h', '24h', '30d'
+ */
+export function parseSessionExpiry(expiry: string | null | undefined): number {
+  switch (expiry) {
+    case '1h': return 1 * 60 * 60 * 1000;
+    case '8h': return 8 * 60 * 60 * 1000;
+    case '24h': return 24 * 60 * 60 * 1000;
+    case '30d': return 30 * 24 * 60 * 60 * 1000;
+    default: return 8 * 60 * 60 * 1000; // default to 8h
+  }
+}
+
+/**
+ * Create a session with configurable expiry (for remember-me flows).
+ */
+export async function createSessionWithExpiry(
+  payload: JWTPayload,
+  opts?: {
+    userAgent?: string;
+    ipAddress?: string;
+    rememberMe?: boolean;
+    sessionExpiryDays?: string;
+  }
+): Promise<{ cookie: string; sessionId: string }> {
+  let expiryMs: number;
+  if (opts?.rememberMe) {
+    expiryMs = parseSessionExpiry('30d');
+  } else if (opts?.sessionExpiryDays) {
+    expiryMs = parseSessionExpiry(opts.sessionExpiryDays);
+  } else {
+    expiryMs = parseSessionExpiry('8h');
+  }
+
+  const token = createToken(payload);
+  const sessionId = randomBytes(16).toString('hex');
+  const tokenHash = createHash('sha256').update(token).digest('hex');
+  const expiresAt = new Date(Date.now() + expiryMs);
+
+  await db.insert(sessions).values({
+    userId: payload.userId,
+    tokenHash,
+    expiresAt,
+    lastUsedAt: new Date(),
+    userAgent: opts?.userAgent,
+    ipAddress: opts?.ipAddress,
+  });
+
+  const secure = (process.env.NODE_ENV === 'production' || process.env.VERCEL === '1')
+    ? '; Secure'
+    : '';
+
+  const maxAge = opts?.rememberMe
+    ? 30 * 24 * 60 * 60
+    : Math.floor(expiryMs / 1000);
+
+  const cookie = `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secure}`;
+  return { cookie, sessionId };
+}
+
+// ── PERMISSIONS ──────────────────────────────
+
+export type UserPermissions = {
+  can_edit: boolean;
+  can_delete: boolean;
+  can_export: boolean;
+  can_manage_users: boolean;
+  can_billing: boolean;
+};
+
+/**
+ * Check if user has a specific granular permission.
+ * Falls back to admin role check — admins with role='admin' get all permissions.
+ */
+export function hasPermission(session: JWTPayload | null, permission: keyof UserPermissions): boolean {
+  if (!session) return false;
+  // Admins with role='admin' have all permissions by default
+  if (session.role === 'admin') return true;
+  // Non-admin roles must have permissions explicitly set (checked in API routes from DB)
+  return false;
+}
+
 // ── BRUTE-FORCE LOCKOUT ──────────────────────────────
 
 const LOCK_THRESHOLD = 5;
