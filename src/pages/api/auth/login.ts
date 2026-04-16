@@ -132,7 +132,19 @@ export const POST: APIRoute = async ({ request }) => {
     // Password correct — clear failed attempts
     await clearFailedLoginAttempts(user.id);
 
-    // Create session
+    // Check if TOTP 2FA is enabled
+    if (user.totpEnabled) {
+      // 2FA required — return partial success, client must submit TOTP code
+      return new Response(JSON.stringify({
+        requires2FA: true,
+        userId: user.id,
+      }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // No 2FA — complete login normally
     const { cookie } = await createSession(
       { userId: user.id, email: user.email, role: user.role },
       { userAgent, ipAddress: ip }
