@@ -8,7 +8,7 @@
 
 | Phase | Name | Requirements | Success Criteria |
 |-------|------|-------------|-------------------|
-| 1 | Auth & Security Hardening | AUTH-01–10 (10) | 10 |
+| 1 | 4/4 | Complete    | 2026-04-16 |
 | 2 | Admin Dashboard & Analytics | DASH-01–10 (10) | 10 |
 | 3 | Admin Clinic Management | CLIN-01–15 (15) | 10 |
 | 4 | Admin Reviews & Leads | RVWS-01–07, LEAD-01–09 (16) | 10 |

@@ -11,16 +11,16 @@
 
 ### Phase 1: Authentication & Security
 
-- [ ] **AUTH-01**: Admin accounts can enable TOTP-based 2FA (Google Authenticator compatible)
-- [ ] **AUTH-02**: Admin accounts support passkey/WebAuthn as 2FA alternative
-- [ ] **AUTH-03**: Role-based granular permissions — separate `can_edit`, `can_delete`, `can_export` flags per user, not just broad roles
-- [ ] **AUTH-04**: Session expiry controls — configurable session length (1h, 8h, 24h, 30d) and "remember me" persistent sessions
-- [ ] **AUTH-05**: Login activity audit — last 10 logins shown per admin account with IP, device, timestamp
-- [ ] **AUTH-06**: Suspicious login alerts — email notification to admin when login from new IP/device detected
-- [ ] **AUTH-07**: Magic tokens hashed before storage in database (fix CR-02 from code review)
-- [ ] **AUTH-08**: JWT_SECRET throws error instead of warning when missing (fix CR-01 from code review)
-- [ ] **AUTH-09**: Account lockout after 5 failed login attempts, with 15-minute cooldown
-- [ ] **AUTH-10**: Audit log captures all auth events — failed logins, password resets, permission changes
+- [x] **AUTH-01**: Admin accounts can enable TOTP-based 2FA (Google Authenticator compatible)
+- [x] **AUTH-02**: Admin accounts support passkey/WebAuthn as 2FA alternative
+- [x] **AUTH-03**: Role-based granular permissions — separate `can_edit`, `can_delete`, `can_export` flags per user, not just broad roles
+- [x] **AUTH-04**: Session expiry controls — configurable session length (1h, 8h, 24h, 30d) and "remember me" persistent sessions
+- [x] **AUTH-05**: Login activity audit — last 10 logins shown per admin account with IP, device, timestamp
+- [x] **AUTH-06**: Suspicious login alerts — email notification to admin when login from new IP/device detected
+- [x] **AUTH-07**: Magic tokens hashed before storage in database (fix CR-02 from code review)
+- [x] **AUTH-08**: JWT_SECRET throws error instead of warning when missing (fix CR-01 from code review)
+- [x] **AUTH-09**: Account lockout after 5 failed login attempts, with 15-minute cooldown
+- [x] **AUTH-10**: Audit log captures all auth events — failed logins, password resets, permission changes
 
 ---
 
