@@ -389,6 +389,21 @@ export const users = pgTable('users', {
     can_billing: boolean;
   }>(),
   sessionExpiry: text('session_expiry').default('8h'),
+
+  // TOTP 2FA
+  totpSecret: text('totp_secret'),
+  totpEnabled: boolean('totp_enabled').default(false).notNull(),
+  totpVerifiedAt: timestamp('totp_verified_at', { withTimezone: true }),
+
+  // Passkeys (WebAuthn)
+  passkeys: jsonb('passkeys').$type<Array<{
+    credentialID: string;
+    credentialPublicKey: string;
+    counter: number;
+    deviceType: string;
+    nickname?: string;
+    createdAt: string;
+  }>>(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
 }, (table) => [
@@ -819,4 +834,19 @@ export type UserPermissions = {
   can_export: boolean;
   can_manage_users: boolean;
   can_billing: boolean;
+};
+
+export type TotpCredentials = {
+  totpSecret: string;
+  totpEnabled: boolean;
+  totpVerifiedAt: Date | null;
+};
+
+export type PasskeyCredential = {
+  credentialID: string;
+  credentialPublicKey: string;
+  counter: number;
+  deviceType: string;
+  nickname?: string;
+  createdAt: string;
 };
