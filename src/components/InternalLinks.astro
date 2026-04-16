@@ -17,12 +17,19 @@ interface LinkItem {
 const links: LinkItem[] = [];
 
 // Determine page type from path
-const isClinicPage = currentPath.includes('/clinics/') || /\/us\/[^/]+\/[^/]+\/[^/]+/.test(currentPath);
+const isClinicPage = currentPath.includes('/clinic/') || /\/clinic\/[^/]+/.test(currentPath);
 const isCityPage = /\/us\/[^/]+\/[^/]+\/?$/.test(currentPath) && !isClinicPage;
-const isStatePage = /\/us\/[^/]+\/?$/.test(currentPath);
+const isStatePage = /\/us\/[^/]+\/?$/.test(currentPath) && !currentPath.includes('/us/[state]');
 const isTreatmentPage = currentPath.startsWith('/treatments/') || currentPath.startsWith('/technology/');
+const isInsurancePage = currentPath.startsWith('/insurance/');
+const isBlogPage = currentPath.startsWith('/blog/');
+const isResourcesPage = currentPath.startsWith('/resources/') || currentPath.startsWith('/faq/');
+const isQuizPage = currentPath.startsWith('/quiz/');
+const isComparePage = currentPath.includes('/compare/');
+const isAboutPage = currentPath.startsWith('/about');
+const isPricingPage = currentPath.startsWith('/pricing');
 
-// State-level links
+// ── State-level links ─────────────────────────────────────────
 if (state) {
   const stateSlug = state.toLowerCase().replace(/\s+/g, '-');
 
@@ -38,66 +45,147 @@ if (state) {
     const citySlug = city.toLowerCase().replace(/\s+/g, '-');
     links.push({
       label: `${city} TMS Clinics`,
-      href: `/us/${stateSlug}/${citySlug}/clinics/`,
+      href: `/us/${stateSlug}/${citySlug}/`,
       description: `Other TMS providers in ${city}`,
+    });
+    links.push({
+      label: `${city} Psychiatrists`,
+      href: `/us/${stateSlug}/${citySlug}/psychiatrists/`,
+      description: `TMS psychiatrists in ${city}`,
+    });
+  }
+
+  if (isStatePage) {
+    links.push({
+      label: `${state} Psychiatrists`,
+      href: `/us/${stateSlug}/psychiatrists/`,
+      description: `TMS psychiatrists in ${state}`,
+    });
+    links.push({
+      label: `${state} TMS Costs`,
+      href: `/insurance/`,
+      description: `Insurance coverage info for ${state}`,
     });
   }
 }
 
-// Treatment links
+// ── Treatment links (contextual) ──────────────────────────────
 const treatmentLinks = [
   { label: 'TMS for Depression', href: '/technology/tms-for-depression/', description: 'Learn about TMS therapy for depression' },
   { label: 'TMS for Anxiety', href: '/technology/tms-for-anxiety/', description: 'TMS treatment options for anxiety disorders' },
   { label: 'TMS for OCD', href: '/technology/tms-for-ocd/', description: 'How TMS helps with OCD treatment' },
   { label: 'TMS for PTSD', href: '/technology/tms-for-ptsd/', description: 'TMS therapy for post-traumatic stress' },
+  { label: 'TMS for Bipolar', href: '/technology/tms-for-bipolar-disorder/', description: 'TMS therapy for bipolar depression' },
+  { label: 'Deep TMS', href: '/technology/brainsway-deep-tms/', description: 'Deep TMS (dTMS) with H-coils' },
 ];
 
 if (!isTreatmentPage) {
-  links.push(...treatmentLinks.slice(0, 2));
+  links.push(...treatmentLinks.slice(0, 3));
 } else {
-  // On treatment pages, show other treatments
   const otherTreatments = treatmentLinks.filter(t => !currentPath.startsWith(t.href.replace(/\/$/, '')));
-  links.push(...otherTreatments.slice(0, 3));
+  links.push(...otherTreatments.slice(0, 4));
 }
 
-// General navigation links
+// ── General navigation links (universal) ─────────────────────
 const generalLinks = [
-  { label: 'Find Clinics Near Me', href: '/us/', description: 'Search TMS clinics across all states' },
+  { label: 'Find Clinics Near Me', href: '/us/', description: 'Search TMS clinics across all 50 states' },
   { label: 'Compare Clinics', href: '/compare/', description: 'Side-by-side clinic comparison tool' },
-  { label: 'Am I a Candidate?', href: '/quiz/am-i-a-candidate/', description: 'Take the TMS candidacy quiz' },
-  { label: 'Insurance Coverage', href: '/resources/', description: 'TMS insurance and payment information' },
-  { label: 'Patient Stories', href: '/stories/', description: 'Read TMS patient experiences' },
-  { label: 'Research & Studies', href: '/research/', description: 'Latest TMS research and clinical trials' },
+  { label: 'Am I a Candidate?', href: '/quiz/am-i-a-candidate/', description: 'Take the free TMS candidacy quiz' },
+  { label: 'Insurance Coverage', href: '/insurance/', description: 'TMS insurance and payment information' },
+  { label: 'TMS Costs & Pricing', href: '/pricing/', description: 'Treatment costs and clinic pricing' },
+  { label: 'Patient Stories', href: '/stories/', description: 'Read real TMS patient experiences' },
+  { label: 'Research & Studies', href: '/research/', description: 'Latest TMS clinical trials and evidence' },
+  { label: 'TMS Devices Guide', href: '/technology/', description: 'Compare TMS machines and manufacturers' },
+  { label: 'Resources & FAQ', href: '/resources/', description: 'Guides, FAQs, and patient resources' },
+  { label: 'Blog', href: '/blog/', description: 'Latest TMS therapy news and guides' },
+  { label: 'Get Listed', href: '/add-listing/', description: 'Add your clinic to TMS List' },
 ];
 
 for (const link of generalLinks) {
-  if (links.length >= 8) break;
+  if (links.length >= 15) break;
+  // Avoid self-links
   if (!currentPath.startsWith(link.href.replace(/\/$/, ''))) {
     links.push(link);
   }
 }
 
-const displayLinks = links.slice(0, 8);
+// ── Page-specific additional links ────────────────────────────
+if (isInsurancePage) {
+  links.push(
+    { label: 'Find In-Network Clinics', href: '/us/', description: 'Search clinics by insurance accepted' },
+    { label: 'Prior Authorization Guide', href: '/resources/', description: 'How to get insurance approval for TMS' },
+  );
+}
+
+if (isBlogPage) {
+  links.push(
+    { label: 'All Treatment Guides', href: '/treatments/', description: 'Browse all TMS treatment guides' },
+    { label: 'Find a Clinic', href: '/us/', description: 'Search clinics in your area' },
+  );
+}
+
+if (isResourcesPage) {
+  links.push(
+    { label: 'Insurance Coverage', href: '/insurance/', description: 'Does your insurance cover TMS?' },
+    { label: 'Compare TMS Devices', href: '/technology/', description: 'NeuroStar, MagVenture, BrainsWay & more' },
+  );
+}
+
+if (isQuizPage) {
+  links.push(
+    { label: 'Browse Clinics', href: '/us/', description: 'Find verified TMS providers near you' },
+    { label: 'TMS for Depression', href: '/technology/tms-for-depression/', description: 'Learn about the #1 use for TMS' },
+  );
+}
+
+if (isComparePage) {
+  links.push(
+    { label: 'Browse All Clinics', href: '/us/', description: 'Search the full TMS clinic directory' },
+    { label: 'Insurance Coverage', href: '/insurance/', description: 'Check if clinics accept your insurance' },
+  );
+}
+
+if (isAboutPage) {
+  links.push(
+    { label: 'Contact Us', href: '/contact/', description: 'Get in touch with our team' },
+    { label: 'Advertise', href: '/advertise/', description: 'Partner with TMS List' },
+  );
+}
+
+if (isPricingPage) {
+  links.push(
+    { label: 'Get Listed Free', href: '/add-listing/', description: 'Add your clinic — free forever' },
+    { label: 'Advertising Options', href: '/advertise/', description: 'Sponsored listings and banner ads' },
+  );
+}
+
+// Trim to max 15
+const displayLinks = links.slice(0, 15);
 ---
 
 {displayLinks.length > 0 && (
-  <section class="mt-12 pt-8 border-t border-gray-200">
-    <h3 class="text-lg font-semibold text-gray-900 mb-4">Related Pages</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+  <section class="mt-16 pt-10 border-t border-gray-200">
+    <div class="flex items-center gap-2 mb-6">
+      <div class="h-px flex-1 bg-gray-100"></div>
+      <span class="text-xs font-semibold text-gray-400 uppercase tracking-widest px-3">Explore More</span>
+      <div class="h-px flex-1 bg-gray-100"></div>
+    </div>
+    <h3 class="text-xl font-bold text-gray-900 mb-6 text-center">Related Pages</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
       {displayLinks.map(link => (
         <a
           href={link.href}
-          class="group flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:border-violet-300 hover:bg-violet-50/50 transition-all"
+          class="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-violet-200 hover:bg-violet-50/50 transition-all duration-200"
         >
-          <div class="min-w-0">
-            <span class="text-sm font-medium text-gray-800 group-hover:text-violet-700 transition-colors block truncate">
+          <div class="min-w-0 flex-1">
+            <span class="text-sm font-semibold text-gray-800 group-hover:text-violet-700 transition-colors block truncate">
               {link.label}
             </span>
-            <span class="text-xs text-gray-500 block truncate mt-0.5">
+            <span class="text-xs text-gray-400 block truncate mt-0.5">
               {link.description}
             </span>
           </div>
-          <svg class="w-4 h-4 text-gray-400 group-hover:text-violet-600 flex-shrink-0 ml-2 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg class="w-4 h-4 text-gray-300 group-hover:text-violet-500 flex-shrink-0 ml-3 transition-all group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </a>
