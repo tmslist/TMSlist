@@ -553,3 +553,96 @@ export function validateNPI(npi: string): boolean {
 // ── SESSION TYPES ──────────────────────────────
 
 export type SessionRow = InferSelectModel<typeof sessions>;
+
+// ── WEBAUTHN / PASSKEYS ──────────────────────────────
+
+import {
+  generateRegistrationOptions as simpleWebauthnGenerateRegistrationOptions,
+  verifyRegistrationResponse as simpleWebauthnVerifyRegistration,
+  generateAuthenticationOptions as simpleWebauthnGenerateAuthOptions,
+  verifyAuthenticationResponse as simpleWebauthnVerifyAuth,
+  type RegistrationResponseJSON,
+  type AuthenticationResponseJSON,
+} from '@simplewebauthn/server';
+
+/**
+ * Generate WebAuthn registration options for passkey registration.
+ */
+export async function generateRegistrationOptions(opts: {
+  rpName: string;
+  rpId: string;
+  userName: string;
+  userId: string;
+  attestationType: 'none' | 'indirect' | 'direct';
+  excludeCredentials?: { id: string; type: 'public-key' }[];
+  authenticatorSelection?: {
+    authenticatorAttachment?: 'platform' | 'cross-platform';
+    userVerification?: 'required' | 'preferred' | 'discouraged';
+    requireResidentKey?: boolean;
+  };
+}) {
+  return simpleWebauthnGenerateRegistrationOptions({
+    rpName: opts.rpName,
+    rpID: opts.rpId,
+    userID: opts.userId,
+    userName: opts.userName,
+    attestationType: opts.attestationType,
+    excludeCredentials: opts.excludeCredentials ?? [],
+    authenticatorSelection: opts.authenticatorSelection ?? {},
+  });
+}
+
+/**
+ * Verify a WebAuthn registration response after passkey creation.
+ */
+export async function verifyRegistrationResponse(opts: {
+  response: RegistrationResponseJSON;
+  expectedChallenge: string;
+  expectedOrigin: string;
+  expectedRPID: string;
+}) {
+  return simpleWebauthnVerifyRegistration({
+    response: opts.response,
+    expectedChallenge: opts.expectedChallenge,
+    expectedOrigin: opts.expectedOrigin,
+    expectedRPID: opts.expectedRPID,
+  });
+}
+
+/**
+ * Generate WebAuthn authentication options for passkey login.
+ */
+export async function generateAuthenticationOptions(opts: {
+  rpId: string;
+  allowCredentials: { id: string; type: 'public-key' }[];
+  userVerification?: 'required' | 'preferred' | 'discouraged';
+}) {
+  return simpleWebauthnGenerateAuthOptions({
+    rpID: opts.rpId,
+    allowCredentials: opts.allowCredentials,
+    userVerification: opts.userVerification ?? 'preferred',
+  });
+}
+
+/**
+ * Verify a WebAuthn authentication response (assertion).
+ */
+export async function verifyAuthenticationResponse(opts: {
+  response: AuthenticationResponseJSON;
+  expectedChallenge: string;
+  expectedOrigin: string;
+  expectedRPID: string;
+  authenticator: {
+    credentialID: string;
+    credentialPublicKey: Buffer;
+    counter: number;
+  };
+}) {
+  return simpleWebauthnVerifyAuth({
+    response: opts.response,
+    expectedChallenge: opts.expectedChallenge,
+    expectedOrigin: opts.expectedOrigin,
+    expectedRPID: opts.expectedRPID,
+    authenticator: opts.authenticator,
+  });
+}
