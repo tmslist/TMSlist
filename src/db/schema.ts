@@ -381,6 +381,14 @@ export const users = pgTable('users', {
     firstSeenAt: string;
     lastSeenAt: string;
   }>>(),
+  permissions: jsonb('permissions').$type<{
+    can_edit: boolean;
+    can_delete: boolean;
+    can_export: boolean;
+    can_manage_users: boolean;
+    can_billing: boolean;
+  }>(),
+  sessionExpiry: text('session_expiry').default('8h'),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
 }, (table) => [
@@ -805,3 +813,10 @@ export type JobApplication = typeof jobApplications.$inferSelect;
 export type NewJobApplication = typeof jobApplications.$inferInsert;
 export type AuthEvent = typeof authEvents.$inferSelect;
 export type LoginHistory = typeof loginHistory.$inferSelect;
+export type UserPermissions = {
+  can_edit: boolean;
+  can_delete: boolean;
+  can_export: boolean;
+  can_manage_users: boolean;
+  can_billing: boolean;
+};
