@@ -17,9 +17,15 @@ const ALLOWED_TYPES = [
 
 export const GET: APIRoute = async ({ request, url }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin', 'editor')) {
+  if (!session) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
       headers: { 'Content-Type': 'application/json' },
     });
   }
@@ -49,9 +55,15 @@ export const GET: APIRoute = async ({ request, url }) => {
 
 export const PATCH: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin', 'editor')) {
+  if (!session) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
       headers: { 'Content-Type': 'application/json' },
     });
   }
@@ -90,9 +102,15 @@ export const PATCH: APIRoute = async ({ request }) => {
 
 export const DELETE: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin', 'editor')) {
+  if (!session) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
       headers: { 'Content-Type': 'application/json' },
     });
   }

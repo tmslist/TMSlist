@@ -10,9 +10,15 @@ export const prerender = false;
 // GET: List reviews with optional status filter
 export const GET: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin', 'editor')) {
+  if (!session) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
       headers: { 'Content-Type': 'application/json' },
     });
   }
@@ -85,9 +91,15 @@ export const GET: APIRoute = async ({ request }) => {
 // Approve or reject a review
 export const PUT: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin', 'editor')) {
+  if (!session) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
       headers: { 'Content-Type': 'application/json' },
     });
   }

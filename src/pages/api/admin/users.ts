@@ -16,8 +16,11 @@ const json = (data: unknown, status = 200) =>
 // Reset password for a user (admin only)
 export const PATCH: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin')) {
+  if (!session) {
     return json({ error: 'Unauthorized' }, 401);
+  }
+  if (!hasRole(session, 'admin')) {
+    return json({ error: 'Forbidden' }, 403);
   }
 
   try {
@@ -77,8 +80,11 @@ export const PATCH: APIRoute = async ({ request }) => {
 // List users with pagination and search
 export const GET: APIRoute = async ({ request, url }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin')) {
+  if (!session) {
     return json({ error: 'Unauthorized' }, 401);
+  }
+  if (!hasRole(session, 'admin')) {
+    return json({ error: 'Forbidden' }, 403);
   }
 
   try {
@@ -124,8 +130,11 @@ export const GET: APIRoute = async ({ request, url }) => {
 // Create a user
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin')) {
+  if (!session) {
     return json({ error: 'Unauthorized' }, 401);
+  }
+  if (!hasRole(session, 'admin')) {
+    return json({ error: 'Forbidden' }, 403);
   }
 
   try {
@@ -179,8 +188,11 @@ export const POST: APIRoute = async ({ request }) => {
 // Update a user (role, name, clinicId)
 export const PUT: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin')) {
+  if (!session) {
     return json({ error: 'Unauthorized' }, 401);
+  }
+  if (!hasRole(session, 'admin')) {
+    return json({ error: 'Forbidden' }, 403);
   }
 
   try {
@@ -228,8 +240,11 @@ export const PUT: APIRoute = async ({ request }) => {
 // Delete a user (prevent self-deletion)
 export const DELETE: APIRoute = async ({ request, url }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin')) {
+  if (!session) {
     return json({ error: 'Unauthorized' }, 401);
+  }
+  if (!hasRole(session, 'admin')) {
+    return json({ error: 'Forbidden' }, 403);
   }
 
   try {

@@ -30,8 +30,11 @@ async function logAction(
 
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin')) {
+  if (!session) {
     return json({ error: 'Unauthorized' }, 401);
+  }
+  if (!hasRole(session, 'admin')) {
+    return json({ error: 'Forbidden' }, 403);
   }
 
   try {

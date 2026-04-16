@@ -9,9 +9,15 @@ export const prerender = false;
 // List clinics for admin
 export const GET: APIRoute = async ({ request, url }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin', 'editor')) {
+  if (!session) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
       headers: { 'Content-Type': 'application/json' },
     });
   }
@@ -86,9 +92,15 @@ export const GET: APIRoute = async ({ request, url }) => {
 // Verify or update a clinic
 export const PUT: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin', 'editor')) {
+  if (!session) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
       headers: { 'Content-Type': 'application/json' },
     });
   }
@@ -146,9 +158,15 @@ export const PUT: APIRoute = async ({ request }) => {
 // Delete a clinic
 export const DELETE: APIRoute = async ({ request, url }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin')) {
+  if (!session) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (!hasRole(session, 'admin')) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
       headers: { 'Content-Type': 'application/json' },
     });
   }
