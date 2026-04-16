@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest, logAuthEvent, getClientIpFromRequest } from '../../../utils/auth';
-import { db } from '../../../db';
-import { users } from '../../../db/schema';
+import { getSessionFromRequest, logAuthEvent, getClientIpFromRequest } from '../../../../utils/auth';
+import { db } from '../../../../db';
+import { users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
 import { authenticator } from 'otplib';
 
