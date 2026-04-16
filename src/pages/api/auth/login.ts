@@ -164,13 +164,11 @@ export const POST: APIRoute = async ({ request }) => {
       console.error('[auth] Suspicious login check failed:', err)
     );
 
-    return new Response(JSON.stringify({
-      success: true,
-      user: { id: user.id, email: user.email, name: user.name, role: user.role },
-    }), {
-      status: 200,
+    // Return 302 redirect — browser sets the HttpOnly cookie when following
+    return new Response(null, {
+      status: 302,
       headers: {
-        'Content-Type': 'application/json',
+        Location: '/admin/dashboard',
         'Set-Cookie': cookie,
       },
     });

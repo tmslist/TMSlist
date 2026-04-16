@@ -342,6 +342,35 @@ const {
         const fullStars = Math.round(avg);
         document.getElementById("star-display").innerHTML =
             `<span class="text-yellow-400">${"★".repeat(fullStars)}</span><span class="text-gray-200">${"★".repeat(5 - fullStars)}</span>`;
+        injectReviewSchema(reviews, entityName);
+    }
+
+    function injectReviewSchema(reviews, name) {
+        document.querySelectorAll('[data-review-schema]').forEach(el => el.remove());
+        const container = document.getElementById('review-schema-container') || (() => {
+            const div = document.createElement('div');
+            div.id = 'review-schema-container';
+            div.style.display = 'none';
+            document.body.appendChild(div);
+            return div;
+        })();
+        container.innerHTML = '';
+        reviews.forEach(r => {
+            const s = {
+                "@context": "https://schema.org",
+                "@type": "Review",
+                "itemReviewed": { "@type": "MedicalClinic", "name": name },
+                "reviewRating": { "@type": "Rating", "ratingValue": r.rating, "bestRating": 5, "worstRating": 1 },
+                "author": { "@type": "Person", "name": r.userName },
+                "reviewBody": r.body,
+                "datePublished": r.createdAt,
+            };
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.setAttribute('data-review-schema', '');
+            script.textContent = JSON.stringify(s);
+            container.appendChild(script);
+        });
     }
 
     // Write review button

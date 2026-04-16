@@ -373,6 +373,10 @@ table tbody tr {
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
     .animate-fade-in-up,
+    .animate-pulse,
+    .animate-ping,
+    .animate-pulse-slow,
+    .animate-float,
     .glass {
         animation: none !important;
         transition: none !important;

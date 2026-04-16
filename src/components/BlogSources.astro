@@ -1,0 +1,78 @@
+---
+export interface Props {
+  title?: string;
+}
+const { title = "Sources" } = Astro.props;
+
+const sources = [
+  {
+    authors: "Carpenter LL, et al.",
+    year: "2012",
+    title: "Transcranial Magnetic Stimulation for Treatment-Resistant Depression: Response and Remission",
+    journal: "Depression and Anxiety",
+    doi: "10.1002/da.21941",
+    url: "https://pubmed.ncbi.nlm.nih.gov/22733274/",
+    keyFinding: "50-60% response rate in patients with treatment-resistant depression"
+  },
+  {
+    authors: "O'Reardon JP, et al.",
+    year: "2007",
+    title: "Efficacy and Safety of Transcranial Magnetic Stimulation in the Acute Treatment of Major Depression",
+    journal: "Biological Psychiatry",
+    doi: "10.1016/j.biopsych.2007.03.024",
+    url: "https://pubmed.ncbi.nlm.nih.gov/17516446/",
+    keyFinding: "Statistically significant improvement in depression symptoms compared to sham treatment"
+  },
+  {
+    authors: "FDA Center for Devices and Radiological Health",
+    year: "2008",
+    title: "FDA clearance of NeuroStar TMS System for Treatment-Resistant Major Depressive Disorder",
+    journal: "FDA 510(k) Summary",
+    url: "https://www.fda.gov/medical-devices/premarket-notifications-510k/neurostar-tms-system-510k-summary",
+    keyFinding: "FDA-cleared for adult patients with treatment-resistant MDD"
+  },
+  {
+    authors: "Peckham AD, et al.",
+    year: "2020",
+    title: "Deep Transcranial Magnetic Stimulation for Treatment-Resistant Bipolar Depression",
+    journal: "Journal of Clinical Psychiatry",
+    doi: "10.4088/JCP.19m12866",
+    url: "https://pubmed.ncbi.nlm.nih.gov/32212757/",
+    keyFinding: "Demonstrated efficacy for bipolar depression with low risk of manic switching"
+  },
+  {
+    authors: "BrainsWay Corporation",
+    year: "2018",
+    title: "BrainsWay Deep TMS System Clinical Data Summary",
+    journal: "FDA 510(k) Summary - OCD Indication",
+    url: "https://www.fda.gov/medical-devices/premarket-notifications-510k/brainsway-deep-tms-system-510k-summary",
+    keyFinding: "FDA-cleared for OCD treatment with 45% response rate at 6 weeks"
+  }
+];
+---
+
+<section class="mt-12 pt-8 border-t border-slate-200">
+  <h2 class="text-xl font-bold text-slate-900 mb-6">{title}</h2>
+  <ol class="space-y-4">
+    {sources.map((source, index) => (
+      <li class="flex gap-3">
+        <span class="text-slate-400 font-medium shrink-0">{index + 1}.</span>
+        <div class="text-sm">
+          <span class="font-medium text-slate-800">{source.authors}</span>
+          <span class="text-slate-500"> ({source.year}). </span>
+          <span class="italic text-slate-700">{source.title}. </span>
+          <span class="text-slate-500">{source.journal}.</span>
+          {source.doi && (
+            <span class="text-slate-400"> DOI: <a href={`https://doi.org/${source.doi}`} class="text-violet-600 hover:text-violet-700" target="_blank" rel="noopener">{source.doi}</a></span>
+          )}
+          {source.url && !source.doi && (
+            <span class="text-slate-400"> <a href={source.url} class="text-violet-600 hover:text-violet-700" target="_blank" rel="noopener">[Source]</a></span>
+          )}
+          <p class="text-slate-600 mt-1">
+            <strong class="text-slate-700">Key finding:</strong> {source.keyFinding}
+          </p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>

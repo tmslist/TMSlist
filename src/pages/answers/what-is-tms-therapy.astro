@@ -1,0 +1,86 @@
+---
+export const prerender = false;
+const title = "What Is TMS Therapy? | TMS List";
+const description = "Learn what Transcranial Magnetic Stimulation (TMS) is, how it works, and what conditions it treats. Evidence-based overview from TMS List.";
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is TMS therapy?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Transcranial Magnetic Stimulation (TMS) is a non-invasive procedure that uses focused magnetic pulses to stimulate specific regions of the brain. It is FDA-cleared for treating major depressive disorder and other conditions, offering an alternative for patients who have not responded to medication."
+    }
+  }]
+});
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href="https://tmslist.com/answers/what-is-tms-therapy/">
+  <script type="application/ld+json" set:html={faqSchema}></script>
+</head>
+<body class="bg-slate-50 min-h-screen">
+  <header class="bg-white border-b border-slate-200">
+    <div class="container mx-auto px-4 py-4">
+      <a href="/" class="text-xl font-bold text-violet-600">TMS List</a>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-12 max-w-3xl">
+    <article itemscope itemtype="https://schema.org/Article">
+      <header class="mb-8">
+        <h1 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4" itemprop="headline">
+          What Is TMS Therapy?
+        </h1>
+        <div class="flex items-center gap-4 text-sm text-slate-500">
+          <span> TMS List Editorial Team</span>
+          <span>|</span>
+          <time datetime="2026-04-15">April 15, 2026</time>
+        </div>
+      </header>
+
+      <div class="prose prose-lg prose-slate max-w-none" itemprop="articleBody">
+        <p class="text-xl text-slate-700 leading-relaxed font-medium">
+          Transcranial Magnetic Stimulation (TMS) is a non-invasive procedure that uses focused magnetic pulses to stimulate specific regions of the brain involved in mood regulation.
+        </p>
+
+        <p>
+          During a TMS session, a small electromagnetic coil is placed against your scalp near your forehead. The coil delivers painless magnetic pulses that activate nerve cells in the targeted brain region. For depression, TMS typically targets the left dorsolateral prefrontal cortex, an area often underactive in people with major depressive disorder.
+        </p>
+
+        <p>
+          TMS is FDA-cleared for treatment-resistant major depressive disorder and has shown significant efficacy in clinical trials. Unlike electroconvulsive therapy (ECT), TMS does not require anesthesia and allows patients to resume normal activities immediately after treatment.
+        </p>
+
+        <p>
+          A standard TMS course involves 20-36 sessions over 4-6 weeks, with each session lasting approximately 19-37 minutes. Common FDA-cleared TMS devices include NeuroStar, BrainsWay Deep TMS, and MagVenture.
+        </p>
+
+        <div class="bg-violet-50 border border-violet-100 rounded-2xl p-6 my-8">
+          <h2 class="text-lg font-semibold text-violet-900 mb-2">Learn More About TMS</h2>
+          <p class="text-violet-700 mb-4">
+            Discover how TMS therapy works, what conditions it treats, and find providers near you.
+          </p>
+          <a href="/treatments/depression/" class="inline-flex items-center gap-2 px-5 py-2.5 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-colors">
+            Explore TMS Treatment
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 mt-16">
+    <div class="container mx-auto px-4 py-8 text-center text-sm text-slate-500">
+      <p>&copy; 2026 TMS List. All rights reserved. | <a href="/about-us/" class="hover:text-violet-600">About Us</a> | <a href="/contact/" class="hover:text-violet-600">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

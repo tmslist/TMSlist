@@ -1,0 +1,18 @@
+# robots.txt for TMS List AI Plugin
+
+User-agent: GPTBot
+Disallow: /api/
+
+User-agent: ChatGPT-Plugin
+Disallow:
+
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /account/
+
+Allow: /us/
+Allow: /treatments/
+Allow: /blog/
+Allow: /answers/
+Allow: /best-tms-clinics/

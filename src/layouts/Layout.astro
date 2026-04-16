@@ -111,8 +111,8 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={metaDescription} />
 		<meta property="og:image" content={ogImage} />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
+		<meta property="og:image:width" content={ogImage?.includes('800/400') || ogImage?.includes('w=800') ? "800" : "1200"} />
+		<meta property="og:image:height" content={ogImage?.includes('800/400') || ogImage?.includes('w=800') ? "400" : "630"} />
 		<meta property="og:site_name" content="TMS List" />
 
 		<!-- Twitter -->
@@ -131,6 +131,8 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 		<!-- External CDNs -->
 		<link rel="preconnect" href="https://res.cloudinary.com" />
 		<link rel="dns-prefetch" href="https://res.cloudinary.com" />
+		<link rel="preconnect" href="https://images.unsplash.com" />
+		<link rel="dns-prefetch" href="https://images.unsplash.com" />
 
 		<!-- Organization Schema -->
 		<script type="application/ld+json">
@@ -142,7 +144,7 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 				"description": "The leading directory of TMS therapy providers worldwide",
 				"potentialAction": {
 					"@type": "SearchAction",
-					"target": "https://tmslist.com/search?q={search_term_string}",
+					"target": "https://tmslist.com/us/?q={search_term_string}",
 					"query-input": "required name=search_term_string"
 				}
 			}
@@ -217,7 +219,7 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 	<!-- Dark Mode Toggle -->
 	<button
 		id="theme-toggle"
-		class="fixed top-4 right-4 z-[150] w-10 h-10 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur border border-gray-200 dark:border-slate-600 shadow-sm flex items-center justify-center hover:scale-110 transition-all"
+		class="fixed top-4 left-4 sm:left-auto sm:right-16 z-[150] w-10 h-10 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur border border-gray-200 dark:border-slate-600 shadow-sm flex items-center justify-center hover:scale-110 transition-all"
 		aria-label="Toggle dark mode"
 	>
 		<svg id="sun-icon" class="w-5 h-5 text-amber-500 hidden" fill="currentColor" viewBox="0 0 20 20">
@@ -274,8 +276,10 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 				var isActive = (href === '/' && path === '/') || (href !== '/' && path.startsWith(href));
 				if (isActive) {
 					tab.classList.add('text-violet-600');
+					tab.classList.remove('text-gray-400');
 				} else {
 					tab.classList.add('text-gray-400');
+					tab.classList.remove('text-violet-600');
 				}
 			});
 
@@ -304,6 +308,43 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 			document.body.appendChild(t);
 			setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 3500);
 		};
+
+		// Scroll-to-top button
+		(function() {
+			var btn = document.createElement('button');
+			btn.id = 'scroll-top-btn';
+			btn.setAttribute('aria-label', 'Scroll to top');
+			btn.className = 'fixed bottom-24 right-6 z-[150] w-10 h-10 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center text-gray-500 hover:text-violet-600 hover:border-violet-200 hover:shadow-lg transition-all duration-300 opacity-0 invisible translate-y-2 pointer-events-none cursor-pointer focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2';
+			btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>';
+			btn.style.cssText = 'bottom: 6rem; right: 1.5rem;';
+			document.body.appendChild(btn);
+
+			var scrollTimer = null;
+			function updateBtn() {
+				if (window.scrollY > 400) {
+					btn.style.opacity = '1';
+					btn.style.visibility = 'visible';
+					btn.style.transform = 'translateY(0)';
+					btn.classList.remove('pointer-events-none', 'opacity-0', 'invisible', 'translate-y-2');
+				} else {
+					btn.style.opacity = '0';
+					btn.style.visibility = 'hidden';
+					btn.style.transform = 'translateY(0.5rem)';
+					btn.classList.add('pointer-events-none', 'opacity-0', 'invisible', 'translate-y-2');
+				}
+			}
+
+			window.addEventListener('scroll', function() {
+				if (scrollTimer) clearTimeout(scrollTimer);
+				scrollTimer = setTimeout(updateBtn, 50);
+			}, { passive: true });
+
+			btn.addEventListener('click', function() {
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+
+			updateBtn();
+		})();
 	</script>
 	</body>
 </html>

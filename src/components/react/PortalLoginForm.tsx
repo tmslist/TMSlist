@@ -149,15 +149,15 @@ export default function PortalLoginForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        const params = new URLSearchParams(window.location.search);
-        const redirect = params.get('redirect');
-        window.location.href = redirect || data.redirectTo || '/portal/dashboard';
-      } else {
-        setErrorMsg(data.error || 'Login failed');
-        setStatus('error');
+      if (res.redirected) {
+        // 302 redirect from login API — cookie was set, follow the redirect
+        window.location.href = res.url;
+        return;
       }
+
+      const data = await res.json();
+      setErrorMsg(data.error || 'Login failed');
+      setStatus('error');
     } catch {
       setErrorMsg('Network error. Please try again.');
       setStatus('error');

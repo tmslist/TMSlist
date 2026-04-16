@@ -44,7 +44,10 @@ const groupedQuestions = questionsData.reduce<
 const featured = questionsData.slice(0, 6);
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} canonical="https://tmslist.com/questions/">
+    {questionsData.length > 0 && (
+        <FAQSchema faqs={questionsData.slice(0, 10).map(q => ({ question: q.question, answer: (q.quickAnswer || q.answer || '').replace(/<[^>]*>/g, '') }))} />
+    )}
     <main class="min-h-screen">
         <!-- Hero Section -->
         <section class="relative bg-white border-b border-slate-100 overflow-hidden">

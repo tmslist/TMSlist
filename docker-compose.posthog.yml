@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  posthog:
+    image: posthog/posthog:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8000"
+    environment:
+      - POSTHOG_SITE_URL=https://your-domain.com  # replace with your domain or IP
+      - SECRET_KEY=change-me-to-a-random-64-char-string
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/posthog
+      - REDIS_URL=redis://cache:6379
+      - CLICKHOUSE_HOST=localhost
+      - CLICKHOUSE_DATABASE=posthog
+    depends_on:
+      - db
+      - cache
+    volumes:
+      - posthog_data:/var/lib/postgresql/data
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=posthog
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  cache:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+
+volumes:
+  posthog_data:
+  pg_data:
+  redis_data:

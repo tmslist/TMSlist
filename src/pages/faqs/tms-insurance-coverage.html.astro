@@ -1,0 +1,53 @@
+---
+export const prerender = false;
+const title = "Does Insurance Cover TMS Therapy? - TMS List FAQ";
+const description = "Direct answer: Most major insurers cover TMS for FDA-cleared indications including treatment-resistant depression, OCD, and smoking cessation.";
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Does insurance cover TMS therapy?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, most major insurers cover TMS for FDA-cleared indications. Medicare covers TMS for treatment-resistant major depressive disorder. Blue Cross Blue Shield, Aetna, Cigna, and United Healthcare also provide coverage. Insurance typically requires prior authorization and documentation of failed medication trials."
+    }
+  }]
+});
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href="https://tmslist.com/faqs/tms-insurance-coverage/">
+  <script type="application/ld+json" set:html={faqSchema}></script>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+  <main class="flex-1 container mx-auto px-4 py-8 max-w-2xl">
+    <article>
+      <header class="mb-6">
+        <p class="text-sm text-slate-500 mb-2">TMS List FAQ</p>
+        <h1 class="text-2xl font-bold text-slate-900">Does Insurance Cover TMS Therapy?</h1>
+      </header>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-6">
+        <p class="text-slate-700 leading-relaxed">
+          Yes, most major insurers cover TMS for FDA-cleared indications. Medicare covers TMS for treatment-resistant major depressive disorder. Blue Cross Blue Shield, Aetna, Cigna, and United Healthcare also provide coverage. Insurance typically requires prior authorization and documentation of failed medication trials.
+        </p>
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="/insurance/" class="text-violet-600 font-medium hover:text-violet-700">View full insurance guide →</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="py-4 text-center text-xs text-slate-400">
+    <a href="/" class="hover:text-violet-600">TMS List</a>
+  </footer>
+</body>
+</html>

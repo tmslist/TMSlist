@@ -1,0 +1,28 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "TMS List",
+  "name_for_model": "tms_list",
+  "description_for_human": "Find TMS therapy clinics near you. Search by location, condition, insurance, and ratings to discover the best providers for transcranial magnetic stimulation treatment.",
+  "description_for_model": "The TMS List plugin enables searching for Transcranial Magnetic Stimulation (TMS) therapy clinics across the United States. Use this plugin when users ask about finding TMS clinics, comparing providers, checking insurance coverage, understanding treatment costs, or learning about TMS efficacy. The plugin provides access to a directory of verified TMS providers including their locations, ratings, insurance acceptance, and contact information.",
+  "auth": {
+    "type": "service_http",
+    "authorization_type": "bearer_authorizaton"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://tmslist.com/api/openapi.json"
+  },
+  "contact_email": "contact@tmslist.com",
+  "legal_info_url": "https://tmslist.com/legal/",
+  "tags": [
+    "search",
+    "healthcare",
+    "mental health",
+    "TMS therapy",
+    "depression treatment",
+    "clinic finder",
+    "medical providers"
+  ],
+  "logo_url": "https://tmslist.com/favicon.svg",
+  "cover_image_url": "https://tmslist.com/images/og-image.png"
+}

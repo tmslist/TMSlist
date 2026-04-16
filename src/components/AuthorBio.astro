@@ -1,0 +1,80 @@
+---
+interface Props {
+    name?: string;
+    title?: string;
+    bio?: string;
+    image?: string;
+    credentials?: string[];
+    profileUrl?: string;
+    variant?: 'inline' | 'card';
+}
+
+const {
+    name = "Dr. Karan Narwal",
+    title = "Mental Health Specialist & Consultant",
+    bio = "Dr. Narwal is a board-certified psychiatrist and mental health specialist with extensive experience in neuromodulation therapies. He reviews all clinical content on TMS List for medical accuracy and alignment with current treatment guidelines.",
+    image = "/images/dr-karan-narwal.jpg",
+    credentials = [],
+    profileUrl = "/specialist/dr-karan-narwal/",
+    variant = "card",
+} = Astro.props;
+---
+
+{variant === 'inline' ? (
+    <div class="flex items-center gap-4 not-prose">
+        <img
+            src={image}
+            alt={name}
+            class="w-14 h-14 rounded-full object-cover border-2 border-violet-200 shadow-sm"
+            width="56"
+            height="56"
+            loading="lazy"
+        />
+        <div>
+            <div class="font-semibold text-slate-900">{name}</div>
+            <div class="text-xs text-slate-500">{title}</div>
+            {credentials.length > 0 && (
+                <div class="flex items-center gap-1.5 mt-1">
+                    {credentials.slice(0, 3).map((cred) => (
+                        <span class="text-[10px] font-medium px-1.5 py-0.5 bg-violet-50 text-violet-600 rounded border border-violet-100">{cred}</span>
+                    ))}
+                </div>
+            )}
+        </div>
+    </div>
+) : (
+    <div class="bg-gradient-to-br from-violet-50 to-white border border-violet-100 rounded-2xl p-6 not-prose">
+        <div class="flex items-start gap-5">
+            <img
+                src={image}
+                alt={name}
+                class="w-20 h-20 rounded-2xl object-cover border-2 border-violet-200 shadow-sm shrink-0"
+                width="80"
+                height="80"
+                loading="lazy"
+            />
+            <div class="flex-1 min-w-0">
+                <div class="text-xs font-bold uppercase tracking-widest text-violet-500 mb-1">Medically Reviewed By</div>
+                <h3 class="text-lg font-bold text-slate-900 leading-tight">{name}</h3>
+                <p class="text-sm font-medium text-violet-600 mb-3">{title}</p>
+                {credentials.length > 0 && (
+                    <div class="flex flex-wrap gap-1.5 mb-3">
+                        {credentials.map((cred) => (
+                            <span class="text-[11px] font-medium px-2 py-0.5 bg-violet-50 text-violet-700 rounded-full border border-violet-100">{cred}</span>
+                        ))}
+                    </div>
+                )}
+                <p class="text-sm text-slate-600 leading-relaxed">{bio}</p>
+                {profileUrl && (
+                    <a
+                        href={profileUrl}
+                        class="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-violet-600 hover:text-violet-800 hover:underline transition-colors"
+                    >
+                        View Specialist Profile
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </a>
+                )}
+            </div>
+        </div>
+    </div>
+)}

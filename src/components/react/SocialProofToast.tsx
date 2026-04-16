@@ -85,7 +85,7 @@ export default function SocialProofToast() {
 
   return (
     <div
-      className={`fixed bottom-20 left-4 z-[180] max-w-[260px] transition-all duration-500 ease-out ${
+      className={`fixed bottom-24 left-4 z-[130] max-w-[260px] transition-all duration-500 ease-out ${
         visible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
       }`}
     >

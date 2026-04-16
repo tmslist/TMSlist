@@ -1,0 +1,101 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "DMCA Notice | TMS List";
+const description = "Digital Millennium Copyright Act (DMCA) notice and agent information for Rain AI LLC / TMS List.";
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "DMCA Notice",
+    "description": description,
+    "url": `${siteUrl}/legal/dmca/`,
+    "isPartOf": { "@type": "WebSite", "name": "TMS List", "url": siteUrl },
+    "publisher": { "@type": "Organization", "name": "TMS List", "url": siteUrl },
+});
+---
+
+<Layout title={title} description={description} schema={schema} breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Legal", url: "/legal/" },
+    { name: "DMCA Notice", url: "/legal/dmca/" },
+]}>
+    <main class="min-h-screen">
+        <section class="relative bg-slate-950 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] left-[30%] w-[400px] h-[400px] bg-violet-600/10 rounded-full blur-[120px]"></div>
+            <div class="container mx-auto px-4 pt-12 pb-16 lg:pt-16 lg:pb-20 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-10" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
+                    <span class="text-slate-600">/</span>
+                    <a href="/legal/" class="hover:text-violet-400 transition-colors">Legal</a>
+                    <span class="text-slate-600">/</span>
+                    <span class="text-white">DMCA Notice</span>
+                </nav>
+                <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">DMCA Notice</h1>
+                <p class="text-slate-400 text-lg max-w-2xl">Digital Millennium Copyright Act compliance and agent information.</p>
+            </div>
+        </section>
+
+        <section class="py-16 lg:py-20 bg-white">
+            <div class="container mx-auto px-4 max-w-3xl">
+                <div class="prose prose-slate max-w-none">
+
+                    <h2>Copyright Notification</h2>
+                    <p>
+                        Rain AI LLC ("Company," "we," or "TMS List") respects the intellectual property rights of others and expects users of our service to do the same. We will respond promptly to notices of alleged copyright infringement that comply with the Digital Millennium Copyright Act ("DMCA").
+                    </p>
+
+                    <h2>Designated Agent</h2>
+                    <p>Our designated agent to receive notifications of alleged copyright infringement is:</p>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 not-prose mb-6">
+                        <p class="font-semibold text-slate-900 mb-1">Copyright Agent</p>
+                        <p class="text-sm text-slate-700">
+                            Rain AI LLC<br/>
+                            30 N Gould St, Suite 400<br/>
+                            Sheridan, WY 82801<br/>
+                            <a href="mailto:legal@tmslist.com" class="text-violet-600 hover:underline">legal@tmslist.com</a>
+                        </p>
+                    </div>
+
+                    <h2>How to Submit a DMCA Takedown Notice</h2>
+                    <p>If you believe that content on TMS List infringes your copyright, please provide a written communication that includes:</p>
+                    <ol>
+                        <li>A physical or electronic signature of the person authorized to act on behalf of the owner of the copyright interest.</li>
+                        <li>Identification of the copyrighted work claimed to have been infringed, or, if multiple works, a representative list of such works.</li>
+                        <li>Identification of the material that is claimed to be infringing and its location on our site.</li>
+                        <li>Your contact information, including address, telephone number, and email address.</li>
+                        <li>A statement that you have a good-faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law.</li>
+                        <li>A statement, under penalty of perjury, that the information in your notice is accurate and that you are authorized to act on behalf of the copyright owner.</li>
+                    </ol>
+
+                    <h2>Counter-Notification</h2>
+                    <p>
+                        If you believe your content was removed by mistake or misidentification, you may submit a counter-notification that includes:
+                    </p>
+                    <ol>
+                        <li>Your physical or electronic signature.</li>
+                        <li>Identification of the material removed and its location before removal.</li>
+                        <li>A statement under penalty of perjury that you have a good-faith belief the material was removed due to mistake or misidentification.</li>
+                        <li>Your name, address, and telephone number, and a statement you consent to the jurisdiction of the Federal District Court for the judicial district in which your address is located, or if outside the US, any judicial district in which the Company may be found.</li>
+                    </ol>
+
+                    <h2>Repeat Infringers</h2>
+                    <p>
+                        We will terminate the accounts of users who are determined to be repeat infringers in appropriate circumstances, in accordance with the DMCA and our Terms of Service.
+                    </p>
+
+                    <h2>Contact</h2>
+                    <p>
+                        For any questions regarding this DMCA notice, please contact us at <a href="mailto:legal@tmslist.com">legal@tmslist.com</a>.
+                    </p>
+
+                    <p class="text-sm text-slate-500 mt-8">
+                        <strong>Company:</strong> Rain AI LLC, 30 N Gould St, Suite 400, Sheridan, WY 82801<br/>
+                        <strong>Website:</strong> TMS List (tmslist.com)
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

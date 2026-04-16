@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>TMS List</ShortName>
+  <Description>Find TMS therapy clinics near you. Compare providers, read reviews, and start your treatment journey.</Description>
+  <Url type="text/html" template="https://tmslist.com/search?q={searchTerms}" />
+  <Url type="application/x-suggestions+json" template="https://tmslist.com/api/suggest?q={searchTerms}" />
+  <Contact>support@tmslist.com</Contact>
+  <Tags>tms therapy mental health depression treatment clinics</Tags>
+  <LongName>TMS List - Transcranial Magnetic Stimulation Clinic Directory</LongName>
+  <Image height="16" width="16" type="image/x-icon">https://tmslist.com/favicon.ico</Image>
+  <Developer>TMS List Team</Developer>
+  <Attribution>Data from TMS List clinic directory</Attribution>
+  <SyndicationRight>open</SyndicationRight>
+  <AdultContent>false</AdultContent>
+  <Language>en-us</Language>
+</OpenSearchDescription>

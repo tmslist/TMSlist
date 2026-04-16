@@ -101,11 +101,11 @@ const badgeColors: Record<string, string> = {
     </div>
 
     {stats.length > 0 && (
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 max-w-3xl">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10 max-w-3xl">
         {stats.map((stat) => (
-          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl px-4 py-3 text-center">
-            <div class="text-xl font-bold text-white font-display">{stat.value}</div>
-            <div class="text-xs text-white/50 mt-0.5">{stat.label}</div>
+          <div class="bg-white/[0.06] backdrop-blur-md border border-white/[0.10] rounded-2xl px-4 py-4 text-center">
+            <div class="text-xl lg:text-2xl font-bold text-white font-display leading-tight">{stat.value}</div>
+            <div class="text-[11px] text-white/40 mt-1 font-medium tracking-wide uppercase">{stat.label}</div>
           </div>
         ))}
       </div>

@@ -19,6 +19,11 @@ import {
     TECHNOLOGY_SLUGS,
     INSURANCE_SLUGS,
 } from "../utils/seo_slugs";
+import FeaturedClinics from "../components/FeaturedClinics.astro";
+import QuizTeaser from "../components/QuizTeaser.astro";
+import SpecialistsSection from "../components/SpecialistsSection.astro";
+import TrustSignals from "../components/TrustSignals.astro";
+import TechnologySection from "../components/TechnologySection.astro";
 
 // Use ONLY verified real clinics from the main DB
 const clinics = await getOperationalClinics();
@@ -308,6 +313,11 @@ const schema = JSON.stringify({
                                         name="q"
                                         id="hero-search-input"
                                         autocomplete="off"
+                                        role="combobox"
+                                        aria-expanded="false"
+                                        aria-controls="search-suggestions"
+                                        aria-autocomplete="list"
+                                        aria-haspopup="listbox"
                                         placeholder="City, state, or zip code..."
                                         class="w-full bg-transparent text-slate-900 placeholder-slate-400 font-medium text-lg outline-none border-none focus:ring-0 p-0"
                                     />
@@ -739,7 +749,7 @@ const schema = JSON.stringify({
             </div>
 
             <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-x-auto">
                     <div class="grid grid-cols-5 gap-0 bg-slate-50 border-b border-slate-200">
                         <div class="p-4 text-sm font-semibold text-slate-500"></div>
                         <div class="p-4 text-center border-l border-slate-200"><div class="text-sm font-bold text-slate-900">Medication</div></div>
@@ -1009,323 +1019,13 @@ const schema = JSON.stringify({
         </div>
     </section>
 
-    <!-- FEATURED CLINICS - Revamped list style -->
-    <section class="py-8 bg-slate-50/50">
-        <div class="container mx-auto px-4">
-            <div class="flex items-end justify-between mb-8">
-                <div>
-                    <span
-                        class="inline-block px-3 py-1 bg-[#7C3AED]/10 text-[#7C3AED] rounded-full text-xs font-semibold uppercase tracking-wider mb-2"
-                        >Top Rated</span
-                    >
-                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
-                        Featured Clinics
-                    </h2>
-                </div>
-                <a
-                    href="/us/"
-                    class="text-[#7C3AED] font-semibold text-sm hover:text-[#6D28D9] flex items-center gap-1 group"
-                    >View All Clinics <span class="group-hover:translate-x-1 transition-transform">→</span></a
-                >
-            </div>
+    <FeaturedClinics topClinics={topClinics} />
 
-            <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                {
-                    topClinics.slice(0, 12).map((clinic, idx) => {
-                        const img = getClinicPhoto(clinic);
-                        return (
-                        <div class="group bg-white rounded-3xl p-4 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-slate-100 hover:border-[#7C3AED]/20 flex flex-col sm:flex-row gap-5">
-                            <!-- Image Section -->
-                            <div class="relative w-full sm:w-48 h-56 sm:h-auto shrink-0 rounded-2xl overflow-hidden bg-slate-100">
-                                <img
-                                    src={img}
-                                    alt={clinic.name}
-                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                    loading="lazy"
-                                />
-                                {clinic.verified && (
-                                    <div class="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-sm py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-sm">
-                                        <svg class="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="text-[10px] font-semibold text-slate-700 uppercase tracking-wide">Verified</span>
-                                    </div>
-                                )}
-                            </div>
+    <QuizTeaser />
 
-                            <!-- Content Section -->
-                            <div class="flex-1 flex flex-col justify-between py-1">
-                                <div>
-                                    <div class="flex items-start justify-between gap-2 mb-2">
-                                        <h3 class="font-semibold tracking-tight text-lg text-slate-900 leading-tight group-hover:text-[#7C3AED] transition-colors">
-                                            {clinic.name}
-                                        </h3>
-                                        <button class="text-slate-600 hover:text-red-500 transition-colors">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                                        </button>
-                                    </div>
+    <SpecialistsSection featuredDoctorsByCountry={featuredDoctorsByCountry} />
 
-                                    <!-- Ratings Row -->
-                                    <div class="flex items-center flex-wrap gap-2 mb-3">
-                                        <span class="bg-emerald-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md flex items-center gap-1">
-                                            {typeof clinic.rating === 'number' ? clinic.rating.toFixed(1) : clinic.rating?.aggregate.toFixed(1) || 'N/A'} <span class="text-emerald-100">★</span>
-                                        </span>
-                                        <span class="text-xs font-semibold text-slate-500">
-                                            {getClinicReviewCount(clinic)} Ratings
-                                        </span>
-                                        <span class="hidden sm:inline-block w-1 h-1 rounded-full bg-slate-300"></span>
-                                        <span class="flex items-center gap-1 bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide">
-                                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                            Trusted
-                                        </span>
-                                    </div>
-
-                                    <!-- Address -->
-                                    <div class="flex items-start gap-1.5 text-sm text-slate-500 mb-3">
-                                        <svg class="w-4 h-4 text-slate-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                        <span class="line-clamp-1">{clinic.address || `${clinic.city}, ${clinic.state}`}</span>
-                                    </div>
-
-                                    <!-- Features/Tags -->
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        {clinic.machines.slice(0, 3).map((m) => (
-                                            <span class="px-2 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px] font-semibold text-slate-600">
-                                                {m}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <!-- Action Buttons -->
-                                <div class="grid grid-cols-2 sm:grid-cols-[auto_1fr_auto] gap-2 mt-auto">
-                                    <!-- Request Callback Button -->
-                                    <button data-request-callback data-clinic-name={clinic.name} data-clinic-id={clinic.slug}
-                                        class="col-span-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition-colors shadow-lg shadow-emerald-500/20 cursor-pointer">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                                        <span class="hidden sm:inline">Callback</span>
-                                    </button>
-
-                                    <!-- Book Button -->
-                                    <a href={`/clinic/${clinic.slug}`} class="col-span-1 sm:col-span-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-[#7C3AED] hover:bg-[#6D28D9] text-white rounded-lg font-semibold text-sm transition-colors shadow-lg shadow-[#7C3AED]/20">
-                                        Book Appointment
-                                    </a>
-
-                                    <!-- WhatsApp (gated) -->
-                                    <button data-whatsapp-gate data-clinic-name={clinic.name} data-clinic-id={clinic.slug} data-clinic-phone={clinic.phone}
-                                        class="hidden sm:flex items-center justify-center w-10 h-10 border border-slate-200 rounded-lg text-slate-500 hover:text-emerald-500 hover:border-emerald-500 hover:bg-emerald-50 transition-all cursor-pointer">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.616l4.527-1.472A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.318-.728-6.002-1.962l-.42-.318-2.69.874.896-2.632-.348-.553A9.96 9.96 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        );
-                    })
-                }
-            </div>
-        </div>
-    </section>
-
-    <!-- IS TMS RIGHT FOR ME? — Quiz Teaser -->
-    <section class="py-16 bg-white relative overflow-hidden">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto bg-gradient-to-br from-violet-600 via-violet-700 to-purple-800 rounded-3xl p-10 md:p-14 relative overflow-hidden">
-                <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.05]"></div>
-                <div class="absolute top-0 right-0 w-[300px] h-[300px] bg-white/5 rounded-full blur-[80px]"></div>
-                <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                    <div class="dark-section">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full mb-6">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                            <span class="text-xs font-semibold text-white/80 uppercase tracking-widest">2-Minute Assessment</span>
-                        </div>
-                        <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">Is TMS Right<br/>For You?</h2>
-                        <p class="text-violet-200 leading-relaxed mb-8">Answer a few quick questions about your condition, treatment history, and goals. We'll tell you if you're likely a good candidate.</p>
-                        <a href="/quiz/am-i-a-candidate/" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-violet-700 font-bold rounded-xl hover:bg-violet-50 transition-colors shadow-lg">
-                            Take the Free Quiz
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                        </a>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10">
-                            <div class="text-xs font-semibold text-white/60 uppercase tracking-wider mb-3">Question 1 of 5</div>
-                            <div class="text-white font-semibold mb-4">Have you tried antidepressant medication?</div>
-                            <div class="space-y-2">
-                                <div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 border border-white/10"><div class="w-4 h-4 rounded-full border-2 border-white/40"></div><span class="text-sm text-white/80">Yes, multiple medications</span></div>
-                                <div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 border border-white/10"><div class="w-4 h-4 rounded-full border-2 border-white/40"></div><span class="text-sm text-white/80">Yes, one or two</span></div>
-                                <div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 border border-white/10"><div class="w-4 h-4 rounded-full border-2 border-white/40"></div><span class="text-sm text-white/80">No, not yet</span></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-center gap-2">
-                            <div class="w-8 h-1.5 rounded-full bg-white/60"></div>
-                            <div class="w-2 h-1.5 rounded-full bg-white/20"></div>
-                            <div class="w-2 h-1.5 rounded-full bg-white/20"></div>
-                            <div class="w-2 h-1.5 rounded-full bg-white/20"></div>
-                            <div class="w-2 h-1.5 rounded-full bg-white/20"></div>
-                            <div class="w-2 h-1.5 rounded-full bg-white/20"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MEET SPECIALISTS - New Section -->
-    <section class="py-16 bg-white relative overflow-hidden">
-        <!-- Decoration -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-50 rounded-bl-full opacity-50 pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-40 h-40 bg-purple-50 rounded-tr-full opacity-50 pointer-events-none"></div>
-
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                <div>
-                     <span class="inline-block px-3 py-1 bg-cyan-50 text-cyan-700 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
-                        Expert Care
-                    </span>
-                    <h2 class="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
-                        Meet Leading <br/>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-[#7C3AED]">TMS Specialists</span>
-                    </h2>
-                </div>
-                <div class="flex items-center gap-4">
-                     <p class="hidden md:block text-slate-500 max-w-xs text-sm text-right leading-relaxed">
-                        Connect with board-certified psychiatrists specializing in interventional mental health.
-                    </p>
-                    <a
-                        href="/specialists/"
-                        class="px-6 py-3 bg-white hover:bg-[#7C3AED] text-white rounded-xl font-semibold transition-colors shadow-lg hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] flex items-center gap-2 whitespace-nowrap"
-                    >
-                        Find a Specialist
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                    </a>
-                </div>
-            </div>
-
-            {Object.entries(featuredDoctorsByCountry).map(([countryCode, doctors]) => (
-                <div class={`specialist-country-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ${countryCode !== 'US' ? 'hidden' : ''}`} data-country={countryCode}>
-                    {doctors.map((doctor: any) => (
-                        <a href={`/doctor/${doctor.slug}/`} class="group relative bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-[#7C3AED]/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[#7C3AED]/10 transition-all duration-300 flex flex-col h-full">
-                            <!-- Image -->
-                            <div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
-                                 <img
-                                    src={doctor.image}
-                                    alt={doctor.name}
-                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                                    loading="lazy"
-                                    width="400"
-                                    height="300"
-                                />
-                                <div class="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent opacity-60"></div>
-                                <div class="absolute bottom-0 left-0 right-0 p-4">
-                                    <h3 class="text-slate-900 text-lg font-semibold leading-tight">{doctor.name}</h3>
-                                    <p class="text-slate-600 text-xs font-medium">{doctor.title}</p>
-                                </div>
-                            </div>
-
-                            <!-- Content -->
-                            <div class="p-5 flex flex-col flex-1">
-                                 <div class="flex items-start gap-2 mb-3 text-xs text-slate-500">
-                                    <svg class="w-4 h-4 shrink-0 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                    <span class="line-clamp-2">{doctor.clinicName}, {doctor.clinicCity}, {doctor.clinicState}</span>
-                                </div>
-
-                                <div class="mt-auto">
-                                    <div class="flex flex-wrap gap-1.5 mb-4">
-                                         {doctor.specialties?.slice(0, 2).map((s: string) => (
-                                            <span class="px-2 py-0.5 bg-slate-50 text-slate-600 rounded text-[10px] font-semibold border border-slate-100">
-                                                {s}
-                                            </span>
-                                         ))}
-                                         {(doctor.specialties?.length || 0) > 2 && (
-                                            <span class="px-2 py-0.5 bg-slate-50 text-slate-500 rounded text-[10px] font-semibold border border-slate-100">
-                                                +{doctor.specialties.length - 2}
-                                            </span>
-                                         )}
-                                    </div>
-
-                                    <span class="block w-full text-center py-2.5 rounded-lg border border-slate-200 text-slate-600 text-sm font-semibold group-hover:bg-[#7C3AED] group-hover:border-[#7C3AED] group-hover:text-white transition-all">
-                                        View Profile
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                    ))}
-                </div>
-            ))}
-        </div>
-    </section>
-
-    <!-- PROVIDER TRUST SIGNALS -->
-    <section class="py-14 bg-white border-y border-slate-100">
-        <div class="container mx-auto px-4">
-            <div class="max-w-5xl mx-auto">
-                <div class="text-center mb-10">
-                    <h2 class="text-2xl md:text-3xl font-display font-bold tracking-tight text-slate-900 mb-2">Trusted by Patients Nationwide</h2>
-                    <p class="text-slate-500">Every clinic on TMSList is verified for quality, credentials, and patient satisfaction.</p>
-                </div>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <!-- Verified Clinics -->
-                    <div class="text-center p-6 bg-slate-50 rounded-2xl">
-                        <div class="w-14 h-14 mx-auto rounded-2xl bg-violet-100 flex items-center justify-center mb-4">
-                            <svg class="w-7 h-7 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                        </div>
-                        <div class="text-3xl font-display font-bold text-slate-900 mb-1">{clinics.length}+</div>
-                        <div class="text-sm font-semibold text-slate-500">Verified Clinics</div>
-                        <div class="text-xs text-slate-400 mt-1">Credentials checked</div>
-                    </div>
-
-                    <!-- Patient Reviews -->
-                    <div class="text-center p-6 bg-slate-50 rounded-2xl">
-                        <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-100 flex items-center justify-center mb-4">
-                            <svg class="w-7 h-7 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-                        </div>
-                        <div class="text-3xl font-display font-bold text-slate-900 mb-1">12K+</div>
-                        <div class="text-sm font-semibold text-slate-500">Patient Reviews</div>
-                        <div class="text-xs text-slate-400 mt-1">4.6 avg rating</div>
-                    </div>
-
-                    <!-- TMS Specialists -->
-                    <div class="text-center p-6 bg-slate-50 rounded-2xl">
-                        <div class="w-14 h-14 mx-auto rounded-2xl bg-cyan-100 flex items-center justify-center mb-4">
-                            <svg class="w-7 h-7 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                        </div>
-                        <div class="text-3xl font-display font-bold text-slate-900 mb-1">720+</div>
-                        <div class="text-sm font-semibold text-slate-500">TMS Specialists</div>
-                        <div class="text-xs text-slate-400 mt-1">Board-certified</div>
-                    </div>
-
-                    <!-- States Covered -->
-                    <div class="text-center p-6 bg-slate-50 rounded-2xl">
-                        <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-100 flex items-center justify-center mb-4">
-                            <svg class="w-7 h-7 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        </div>
-                        <div class="text-3xl font-display font-bold text-slate-900 mb-1">20+</div>
-                        <div class="text-sm font-semibold text-slate-500">Countries</div>
-                        <div class="text-xs text-slate-400 mt-1">50 US States + Global</div>
-                    </div>
-                </div>
-
-                <!-- Trust badges row -->
-                <div class="flex flex-wrap items-center justify-center gap-6 mt-10 pt-8 border-t border-slate-100">
-                    <div class="flex items-center gap-2 text-sm text-slate-500">
-                        <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                        <span>FDA-Cleared Treatments Only</span>
-                    </div>
-                    <div class="flex items-center gap-2 text-sm text-slate-500">
-                        <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                        <span>HIPAA Compliant</span>
-                    </div>
-                    <div class="flex items-center gap-2 text-sm text-slate-500">
-                        <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                        <span>No Paid Rankings</span>
-                    </div>
-                    <div class="flex items-center gap-2 text-sm text-slate-500">
-                        <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                        <span>Updated Weekly</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <TrustSignals clinicCount={clinics.length} />
 
     <!-- CONDITIONS - Aesthetic Bento Grid -->
     <section class="py-10 container mx-auto px-4 bg-slate-50 rounded-3xl relative overflow-hidden">
@@ -1413,7 +1113,7 @@ const schema = JSON.stringify({
                 }
                 
                 <!-- "View All" Card -->
-                 <!-- <a
+                <a
                     href="/treatments/"
                     class="group relative overflow-hidden bg-white rounded-3xl p-6 transition-all duration-300 flex flex-col justify-center items-center text-center h-full hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)]"
                 >
@@ -1421,7 +1121,7 @@ const schema = JSON.stringify({
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </div>
                     <span class="font-semibold text-slate-900 group-hover:text-[#7C3AED] transition-colors">View All Conditions</span>
-                </a> -->
+                </a>
             </div>
         </div>
     </section>
@@ -1514,220 +1214,8 @@ const schema = JSON.stringify({
     </section>
 
     <!-- TECHNOLOGY - Compact -->
-    <section class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8">
-                <span
-                    class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold uppercase tracking-wider mb-2"
-                    >Compare Technology</span
-                >
-                <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-gray-900">
-                    Leading TMS Devices
-                </h2>
-            </div>
+    <TechnologySection />
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- BrainsWay -->
-                <a
-                    href="/technology/brainsway-deep-tms/"
-                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#7C3AED]/30 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[#7C3AED]/10 transition-all duration-300"
-                >
-                    <div class="h-16 flex items-center justify-start mb-6">
-                        <img
-                            src="https://www.brainsway.com/wp-content/uploads/2021/04/BrainsWay-2021-logo_full-color_black-name-1-e1619462194423.png"
-                            alt="BrainsWay Deep TMS"
-                            class="h-10 w-auto object-contain max-w-[180px]"
-                        />
-                    </div>
-                    <div class="mb-4">
-                        <div class="text-xs font-semibold text-[#7C3AED] uppercase tracking-wider mb-2">Best For: OCD & Deep Structures</div>
-                        <h3 class="text-lg font-semibold text-slate-900 leading-tight mb-2">Deep TMS (H-Coil)</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">
-                            "Reviews consistently highlight its efficacy for OCD. Patients appreciate the helmet design which ensures consistent coil positioning for deep brain penetration."
-                        </p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-                         <span class="text-slate-500 text-xs font-medium">H-Coil Technology</span>
-                         <span class="text-[#7C3AED] text-sm font-semibold group-hover:translate-x-1 transition-transform">View Clinics →</span>
-                    </div>
-                </a>
-
-                <!-- MagVenture -->
-                <a
-                    href="/technology/magventure/"
-                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#7C3AED]/30 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[#7C3AED]/10 transition-all duration-300"
-                >
-                    <div class="h-16 flex items-center justify-start mb-6">
-                         <img
-                            src="https://neuronewsinternational.com/wp-content/uploads/sites/3/2024/05/MagVenture-logo-featured.jpg"
-                            alt="MagVenture TMS"
-                            class="h-14 w-auto object-contain max-w-[180px] mix-blend-multiply"
-                        />
-                    </div>
-                    <div class="mb-4">
-                        <div class="text-xs font-semibold text-[#7C3AED] uppercase tracking-wider mb-2">Best For: Speed & Versatility</div>
-                        <h3 class="text-lg font-semibold text-slate-900 leading-tight mb-2">Research Favorite</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">
-                            "Highly regarded for its Theta Burst capability, allowing for 3-minute sessions. Patients love the time efficiency without compromising clinical outcomes."
-                        </p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-                         <span class="text-slate-500 text-xs font-medium">3-Min Sessions</span>
-                         <span class="text-[#7C3AED] text-sm font-semibold group-hover:translate-x-1 transition-transform">View Clinics →</span>
-                    </div>
-                </a>
-
-                <!-- Magstim -->
-                <a
-                    href="/technology/magstim/"
-                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#7C3AED]/30 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[#7C3AED]/10 transition-all duration-300"
-                >
-                    <div class="h-16 flex items-center justify-start mb-6">
-                         <span class="text-2xl font-bold text-slate-800 tracking-tight">Magstim</span>
-                    </div>
-                    <div class="mb-4">
-                        <div class="text-xs font-semibold text-[#7C3AED] uppercase tracking-wider mb-2">Best For: Clinical Precision</div>
-                        <h3 class="text-lg font-semibold text-slate-900 leading-tight mb-2">UK-Engineered Quality</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">
-                            "Trusted by research institutions worldwide. The Magstim Horizon system offers precise pulse delivery with advanced neuronavigation for targeted treatment."
-                        </p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-                         <span class="text-slate-500 text-xs font-medium">Horizon System</span>
-                         <span class="text-[#7C3AED] text-sm font-semibold group-hover:translate-x-1 transition-transform">View Clinics →</span>
-                    </div>
-                </a>
-
-                <!-- Apollo TMS -->
-                <a
-                    href="/technology/apollo-tms/"
-                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#7C3AED]/30 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[#7C3AED]/10 transition-all duration-300"
-                >
-                    <div class="h-16 flex items-center justify-start mb-6">
-                         <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS95RvWVC2pIymNtuccsRAMKtSuZmU_pAHsfQ&s"
-                            alt="Apollo TMS"
-                            class="h-12 w-auto object-contain max-w-[180px] mix-blend-multiply"
-                        />
-                    </div>
-                    <div class="mb-4">
-                        <div class="text-xs font-semibold text-[#7C3AED] uppercase tracking-wider mb-2">Best For: Patient Comfort</div>
-                        <h3 class="text-lg font-semibold text-slate-900 leading-tight mb-2">Ergonomic Design</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">
-                            "Users often praise the Apollo system for its adjustable positioning and comfortable chair, making the 20-minute daily sessions more relaxing."
-                        </p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-                         <span class="text-slate-500 text-xs font-medium">Patient Focused</span>
-                         <span class="text-[#7C3AED] text-sm font-semibold group-hover:translate-x-1 transition-transform">View Clinics →</span>
-                    </div>
-                </a>
-
-                <!-- Nexstim -->
-                <a
-                    href="/technology/nexstim/"
-                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#7C3AED]/30 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[#7C3AED]/10 transition-all duration-300"
-                >
-                    <div class="h-16 flex items-center justify-start mb-6">
-                         <span class="text-2xl font-bold text-slate-800 tracking-tight">Nexstim</span>
-                    </div>
-                    <div class="mb-4">
-                        <div class="text-xs font-semibold text-[#7C3AED] uppercase tracking-wider mb-2">Best For: Navigated Precision</div>
-                        <h3 class="text-lg font-semibold text-slate-900 leading-tight mb-2">MRI-Guided TMS</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">
-                            "The NBT system uses real-time MRI-based navigation to target the exact brain region. Ideal for patients who want the most precise coil placement possible."
-                        </p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-                         <span class="text-slate-500 text-xs font-medium">SmartFocus Tech</span>
-                         <span class="text-[#7C3AED] text-sm font-semibold group-hover:translate-x-1 transition-transform">View Clinics →</span>
-                    </div>
-                </a>
-
-                <!-- CloudTMS -->
-                <a
-                    href="/technology/cloudtms/"
-                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#7C3AED]/30 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[#7C3AED]/10 transition-all duration-300"
-                >
-                    <div class="h-16 flex items-center justify-start mb-6">
-                         <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCJmEAxcCP5r_c64O63lpys4QTJ5lm3Jvbdg&s"
-                            alt="CloudTMS"
-                            class="h-12 w-auto object-contain max-w-[180px] mix-blend-multiply"
-                        />
-                    </div>
-                    <div class="mb-4">
-                        <div class="text-xs font-semibold text-[#7C3AED] uppercase tracking-wider mb-2">Best For: Open Design</div>
-                        <h3 class="text-lg font-semibold text-slate-900 leading-tight mb-2">Modern & Airy</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">
-                            "The system's open-air coil design is a favorite among patients who might feel claustrophobic. It offers a sleek, modern treatment experience."
-                        </p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-                         <span class="text-slate-500 text-xs font-medium">Scalable Tech</span>
-                         <span class="text-[#7C3AED] text-sm font-semibold group-hover:translate-x-1 transition-transform">View Clinics →</span>
-                    </div>
-                </a>
-
-                <!-- Neurosoft -->
-                <a
-                    href="/technology/neurosoft/"
-                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#7C3AED]/30 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[#7C3AED]/10 transition-all duration-300"
-                >
-                    <div class="h-16 flex items-center justify-start mb-6">
-                         <span class="text-2xl font-bold text-slate-800 tracking-tight">Neurosoft</span>
-                    </div>
-                    <div class="mb-4">
-                        <div class="text-xs font-semibold text-[#7C3AED] uppercase tracking-wider mb-2">Best For: Affordable Access</div>
-                        <h3 class="text-lg font-semibold text-slate-900 leading-tight mb-2">Cost-Effective TMS</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">
-                            "Popular in international markets for its reliable performance at a lower price point. The NEURO-MS/D system delivers effective stimulation with proven protocols."
-                        </p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-                         <span class="text-slate-500 text-xs font-medium">Global Reach</span>
-                         <span class="text-[#7C3AED] text-sm font-semibold group-hover:translate-x-1 transition-transform">View Clinics →</span>
-                    </div>
-                </a>
-
-                <!-- NeuroStar (moved to end) -->
-                <a
-                    href="/technology/neurostar/"
-                    class="group flex flex-col bg-white rounded-3xl p-6 border border-slate-100 hover:border-[#7C3AED]/30 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[#7C3AED]/10 transition-all duration-300"
-                >
-                    <div class="h-16 flex items-center justify-start mb-6">
-                        <img
-                            src="https://neurostar.com/wp-content/themes/neurostar/assets/images/NeuroStar_Logo.svg"
-                            alt="NeuroStar Advanced Therapy"
-                            class="h-full w-auto object-contain max-w-[180px]"
-                        />
-                    </div>
-                    <div class="mb-4">
-                        <div class="text-xs font-semibold text-[#7C3AED] uppercase tracking-wider mb-2">Best For: Proven & Widely Available</div>
-                        <h3 class="text-lg font-semibold text-slate-900 leading-tight mb-2">The Market Leader</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">
-                            "The most widely recognized name in TMS. Patients frequently cite the confidence that comes with its long history of FDA clearance and widespread insurance coverage."
-                        </p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-                         <span class="text-slate-500 text-xs font-medium">3,000+ Systems</span>
-                         <span class="text-[#7C3AED] text-sm font-semibold group-hover:translate-x-1 transition-transform">View Clinics →</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="text-center mt-6">
-                <a
-                    href="/technology/"
-                    class="dark-section inline-flex items-center gap-2 px-6 py-3 bg-gray-900 font-semibold rounded-xl hover:bg-gray-800 transition-colors text-sm"
-                >
-                    Compare All Technologies
-                </a>
-            </div>
-        </div>
-    </section>
-
-  
     <!-- RESEARCH & CLINICAL EVIDENCE -->
     <section class="py-16 bg-slate-50">
         <div class="container mx-auto px-4">
@@ -1821,15 +1309,6 @@ const schema = JSON.stringify({
     <section class="py-16 bg-[#0a0512] relative overflow-hidden" id="locations">
         <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02]"></div>
         <div class="container mx-auto px-4 relative z-10">
-            <div class="flex flex-col md:flex-row items-end justify-between mb-10 gap-6">
-                <div>
-                    <span class="inline-block px-3 py-1 bg-[#7C3AED]/10 text-[#7C3AED] border border-[#7C3AED]/20 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">National Network</span>
-                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white leading-tight">Find Care <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Near You</span></h2>
-                </div>
-                <a href="#" id="location-view-all" class="hidden md:flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors font-semibold text-sm group">View Full Directory <span class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-[#7C3AED] transition-colors"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></span></a>
-            </div>
-            <div id="geo-us-locations" class="geo-locations grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        <div class="container mx-auto px-4 relative z-10 ">
             <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
                 <div>
                      <span class="inline-block px-3 py-1 bg-[#7C3AED]/10 text-[#7C3AED] border border-[#7C3AED]/20 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
@@ -2069,6 +1548,7 @@ const schema = JSON.stringify({
 
             if (query.length < 2) {
                 suggestionsBox.classList.add("hidden");
+                searchInput.setAttribute("aria-expanded", "false");
                 return;
             }
 
@@ -2103,8 +1583,11 @@ const schema = JSON.stringify({
                     )
                     .join("");
                 suggestionsBox.classList.remove("hidden");
+                searchInput.setAttribute("aria-expanded", "true");
             } else {
-                suggestionsBox.classList.add("hidden");
+                suggestionsBox.innerHTML = `<div class="px-4 py-6 text-center"><p class="text-sm font-medium text-slate-700">No results for "${query}"</p><p class="text-xs text-slate-400 mt-1">Try a city name, state, or zip code</p></div>`;
+                suggestionsBox.classList.remove("hidden");
+                searchInput.setAttribute("aria-expanded", "true");
             }
         });
 
@@ -2127,6 +1610,7 @@ const schema = JSON.stringify({
                 }
             } else if (e.key === "Escape") {
                 suggestionsBox.classList.add("hidden");
+                searchInput.setAttribute("aria-expanded", "false");
             }
         });
 
@@ -2145,6 +1629,7 @@ const schema = JSON.stringify({
                 !suggestionsBox.contains(e.target)
             ) {
                 suggestionsBox.classList.add("hidden");
+                searchInput.setAttribute("aria-expanded", "false");
             }
         });
     }
@@ -2164,6 +1649,12 @@ const schema = JSON.stringify({
             return `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
         if (type === "city")
             return `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>`;
+        if (type === "zip")
+            return `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`;
+        if (type === "country")
+            return `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+        if (type === "region")
+            return `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>`;
         return `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>`;
     }
 

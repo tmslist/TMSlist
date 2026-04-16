@@ -1,0 +1,53 @@
+---
+export const prerender = false;
+const title = "How Many TMS Sessions Are Needed? - TMS List FAQ";
+const description = "Direct answer: A standard TMS course involves 20-36 sessions delivered over 4-6 weeks, with each session lasting 19-37 minutes.";
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How many TMS sessions are needed?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "A standard TMS course involves 20-36 sessions delivered over 4-6 weeks. Sessions are typically administered 5 days per week. Each session lasts 19-37 minutes depending on the protocol. Most patients begin noticing improvement by weeks 2-3 of treatment."
+    }
+  }]
+});
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href="https://tmslist.com/faqs/tms-sessions-needed/">
+  <script type="application/ld+json" set:html={faqSchema}></script>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+  <main class="flex-1 container mx-auto px-4 py-8 max-w-2xl">
+    <article>
+      <header class="mb-6">
+        <p class="text-sm text-slate-500 mb-2">TMS List FAQ</p>
+        <h1 class="text-2xl font-bold text-slate-900">How Many TMS Sessions Are Needed?</h1>
+      </header>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-6">
+        <p class="text-slate-700 leading-relaxed">
+          A standard TMS course involves <strong>20-36 sessions</strong> delivered over <strong>4-6 weeks</strong>. Sessions are typically administered 5 days per week. Each session lasts <strong>19-37 minutes</strong> depending on the protocol. Most patients begin noticing improvement by weeks 2-3 of treatment.
+        </p>
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="/treatments/depression/" class="text-violet-600 font-medium hover:text-violet-700">Learn more about TMS treatment →</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="py-4 text-center text-xs text-slate-400">
+    <a href="/" class="hover:text-violet-600">TMS List</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,28 @@
+---
+export const prerender = false;
+
+import Layout from "../../layouts/Layout.astro";
+import AdminSidebar from "../../components/react/AdminSidebar";
+import AdminJobApplications from "../../components/react/AdminJobApplications";
+import { getSessionFromRequest, hasRole } from "../../utils/auth";
+
+const session = getSessionFromRequest(Astro.request);
+if (!hasRole(session, 'admin', 'editor')) {
+  return Astro.redirect("/admin/login");
+}
+---
+
+<Layout title="Job Applications | TMS List Admin" noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <AdminSidebar client:load currentPage="jobs" userEmail={session!.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="mb-8">
+          <h1 class="text-2xl font-semibold text-gray-900">Job Applications</h1>
+          <p class="text-gray-500 mt-1">View and manage applications for TMS clinic job postings</p>
+        </div>
+        <AdminJobApplications client:load />
+      </div>
+    </main>
+  </div>
+</Layout>

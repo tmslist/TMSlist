@@ -6,6 +6,7 @@ export interface Props {
   clinicCount: number;
   topCities?: string[];
   countryCode?: string;
+  faqPageSchema?: string;
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   clinicCount,
   topCities = [],
   countryCode = 'US',
+  faqPageSchema,
 } = Astro.props;
 
 const isUS = countryCode === 'US';
@@ -78,6 +80,16 @@ const faqs = [
     a: `You may be a good candidate for TMS if you have been diagnosed with treatment-resistant depression (meaning you have tried two or more antidepressants without adequate relief), if you experience intolerable side effects from medication, or if you prefer a non-medication treatment approach. TMS is not recommended for patients with epilepsy, metal implants near the head, or active substance use disorders. Take our 2-minute eligibility quiz to see if you might qualify.`,
   },
 ];
+
+const defaultFaqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq: {q: string, a: string}) => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": { "@type": "Answer", "text": faq.a },
+  })),
+});
 ---
 
 <!-- SEO Content Section -->
@@ -223,6 +235,10 @@ const faqs = [
         <a href="/technology/" class="text-violet-600 hover:underline font-medium">Compare TMS devices in detail →</a>
       </div>
     </div>
+
+    <!-- FAQPage JSON-LD for search engines and answer engines -->
+    {faqPageSchema && <script type="application/ld+json" set:html={faqPageSchema} />}
+    {!faqPageSchema && <script type="application/ld+json" set:html={defaultFaqSchema} />}
 
     <!-- FAQ Section -->
     <div class="bg-gradient-to-br from-slate-50 to-violet-50/30 rounded-2xl border border-slate-100 p-8 mb-8">

@@ -60,7 +60,7 @@ const listingSchema = generateMedicalClinicListSchema(
 const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
 ---
 
-<Layout title={title} description={description} schema={combinedSchema}>
+<Layout title={title} description={description} schema={combinedSchema} canonical={`https://tmslist.com/insurance/${slug}/${state}/`}>
     <main class="container mx-auto px-4 py-8">
         <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
             <a href="/" class="hover:text-violet-600 transition-colors">Home</a>

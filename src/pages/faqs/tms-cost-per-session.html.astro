@@ -1,0 +1,53 @@
+---
+export const prerender = false;
+const title = "How Much Does TMS Cost Per Session? - TMS List FAQ";
+const description = "Direct answer: TMS sessions typically cost $200-$400 per session. A full course of 20-36 sessions ranges from $6,000-$12,000 before insurance.";
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How much does TMS cost per session?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "TMS sessions typically cost $200-$400 per session. A full treatment course of 20-36 sessions can range from $6,000 to $12,000 before insurance. Most major insurance plans cover TMS for FDA-cleared indications, which can significantly reduce your out-of-pocket costs. Many clinics also offer payment plans and financing options."
+    }
+  }]
+});
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href="https://tmslist.com/faqs/tms-cost-per-session/">
+  <script type="application/ld+json" set:html={faqSchema}></script>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+  <main class="flex-1 container mx-auto px-4 py-8 max-w-2xl">
+    <article>
+      <header class="mb-6">
+        <p class="text-sm text-slate-500 mb-2">TMS List FAQ</p>
+        <h1 class="text-2xl font-bold text-slate-900">How Much Does TMS Cost Per Session?</h1>
+      </header>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-6">
+        <p class="text-slate-700 leading-relaxed">
+          TMS sessions typically cost <strong>$200-$400 per session</strong>. A full treatment course of 20-36 sessions can range from <strong>$6,000 to $12,000</strong> before insurance. Most major insurance plans cover TMS for FDA-cleared indications, which can significantly reduce your out-of-pocket costs. Many clinics also offer payment plans and financing options.
+        </p>
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="/pricing/" class="text-violet-600 font-medium hover:text-violet-700">View full TMS cost guide →</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="py-4 text-center text-xs text-slate-400">
+    <a href="/" class="hover:text-violet-600">TMS List</a>
+  </footer>
+</body>
+</html>

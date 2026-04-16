@@ -1,5 +1,17 @@
 import type { APIRoute } from 'astro';
-import { clearSessionCookie, invalidateSession, getSessionFromRequest } from '../../../utils/auth';
+import { clearSessionCookie, invalidateSession } from '../../../utils/auth';
+
+const COOKIE_NAME = 'tms_session';
+
+function getCookies(request: Request): Record<string, string> {
+  const cookieHeader = request.headers.get('cookie') || '';
+  return Object.fromEntries(
+    cookieHeader.split(';').map(c => {
+      const [key, ...val] = c.trim().split('=');
+      return [key, val.join('=')];
+    })
+  );
+}
 
 export const prerender = false;
 
@@ -16,20 +28,19 @@ const clearAndRedirect = (redirectTo?: string) =>
 
 export const GET: APIRoute = ({ request, url }) => {
   const redirectTo = url.searchParams.get('redirect') || '/';
-  // Invalidate the session from DB on logout
-  const session = getSessionFromRequest(request);
-  if (session) {
-    // Fire-and-forget: don't block the redirect on DB delete
-    invalidateSession(session.userId).catch(() => {});
+  const cookies = getCookies(request);
+  const token = cookies[COOKIE_NAME];
+  if (token) {
+    invalidateSession(token).catch(() => {});
   }
   return clearAndRedirect(redirectTo);
 };
 
 export const POST: APIRoute = async ({ request }) => {
-  // Invalidate the session from DB on logout
-  const session = getSessionFromRequest(request);
-  if (session) {
-    await invalidateSession(session.userId).catch(() => {});
+  const cookies = getCookies(request);
+  const token = cookies[COOKIE_NAME];
+  if (token) {
+    await invalidateSession(token).catch(() => {});
   }
   return new Response(JSON.stringify({ success: true }), {
     status: 200,

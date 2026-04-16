@@ -130,7 +130,7 @@ export function month2_firstMonthReport(clinic: ClinicData): EmailOutput {
       ${statRow([
         { value: '4,100+', label: 'Clinics Listed' },
         { value: '50K+', label: 'Monthly Searches' },
-        { value: '51', label: 'States' },
+        { value: '50', label: 'States' },
       ])}
       ${para(`Patients are filtering by insurance, location, and TMS machine type. Clinics with complete profiles are getting significantly more visibility.`)}
       ${highlightBox('Quick Wins to Boost Your Profile', `

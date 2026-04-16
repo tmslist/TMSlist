@@ -2,19 +2,24 @@
 import Layout from '../../layouts/Layout.astro';
 import { getAllTreatments } from '../../db/queries';
 
-let ALTERNATIVE_TREATMENTS = await getAllTreatments();
+let ALTERNATIVE_TREATMENTS: any[] = [];
+try {
+  ALTERNATIVE_TREATMENTS = await getAllTreatments();
+} catch (e) {
+  console.error('[alternative-treatments] DB error, using fallback data:', e.message);
+}
 
 // Fallback if DB treatments table is empty
 if (ALTERNATIVE_TREATMENTS.length === 0) {
   ALTERNATIVE_TREATMENTS = [
-    { id: '1', slug: 'spravato', name: 'Spravato (Esketamine)', description: 'FDA-approved nasal spray for treatment-resistant depression, used alongside an oral antidepressant.', fdaApproved: true, category: 'medication', createdAt: new Date(), updatedAt: new Date() },
-    { id: '2', slug: 'ketamine-infusion', name: 'IV Ketamine Infusion', description: 'Off-label IV infusions of ketamine used for rapid-acting relief of severe depression and suicidal ideation.', fdaApproved: false, category: 'medication', createdAt: new Date(), updatedAt: new Date() },
-    { id: '3', slug: 'ect', name: 'ECT (Electroconvulsive Therapy)', description: 'Controlled electrical stimulation under anesthesia for severe, treatment-resistant depression.', fdaApproved: true, category: 'procedure', createdAt: new Date(), updatedAt: new Date() },
-    { id: '4', slug: 'at-home-ketamine', name: 'At-Home Ketamine', description: 'Sublingual or nasal ketamine prescribed for home use via telehealth platforms.', fdaApproved: false, category: 'medication', createdAt: new Date(), updatedAt: new Date() },
-    { id: '5', slug: 'vns', name: 'VNS (Vagus Nerve Stimulation)', description: 'Implanted device that sends electrical impulses to the brain via the vagus nerve.', fdaApproved: true, category: 'device', createdAt: new Date(), updatedAt: new Date() },
-    { id: '6', slug: 'psilocybin', name: 'Psilocybin Therapy', description: 'Guided psychedelic-assisted therapy using psilocybin, currently in clinical trials for depression.', fdaApproved: false, category: 'experimental', createdAt: new Date(), updatedAt: new Date() },
-    { id: '7', slug: 'neurofeedback', name: 'Neurofeedback', description: 'Real-time brain wave monitoring and training to improve mental health symptoms.', fdaApproved: false, category: 'therapy', createdAt: new Date(), updatedAt: new Date() },
-    { id: '8', slug: 'dbs', name: 'DBS (Deep Brain Stimulation)', description: 'Surgically implanted electrodes that deliver targeted stimulation to specific brain regions.', fdaApproved: false, category: 'procedure', createdAt: new Date(), updatedAt: new Date() },
+    { id: '1', slug: 'spravato', name: 'Spravato (Esketamine)', description: 'FDA-approved nasal spray for treatment-resistant depression, used alongside an oral antidepressant.', fdaApproved: true, conditions: ['Treatment-Resistant Depression', 'Suicidal Ideation'], sessionDuration: '~40 min', treatmentCourse: 'Twice weekly (4 wks)', insuranceCoverage: 'Most insurers' },
+    { id: '2', slug: 'ketamine-infusion', name: 'IV Ketamine Infusion', description: 'Off-label IV infusions of ketamine used for rapid-acting relief of severe depression and suicidal ideation.', fdaApproved: false, conditions: ['Severe Depression', 'Bipolar Depression', 'Suicidal Ideation'], sessionDuration: '40–60 min', treatmentCourse: '6+ infusions', insuranceCoverage: 'Rarely covered' },
+    { id: '3', slug: 'ect', name: 'ECT (Electroconvulsive Therapy)', description: 'Controlled electrical stimulation under anesthesia for severe, treatment-resistant depression.', fdaApproved: true, conditions: ['Treatment-Resistant Depression', 'Catatonia', 'Bipolar Depression'], sessionDuration: '20–30 min', treatmentCourse: '3× per week (2–4 wks)', insuranceCoverage: 'Most insurers' },
+    { id: '4', slug: 'at-home-ketamine', name: 'At-Home Ketamine', description: 'Sublingual or nasal ketamine prescribed for home use via telehealth platforms.', fdaApproved: false, conditions: ['Depression', 'Anxiety', 'PTSD'], sessionDuration: '60–90 min', treatmentCourse: 'Ongoing', insuranceCoverage: 'Not covered' },
+    { id: '5', slug: 'vns', name: 'VNS (Vagus Nerve Stimulation)', description: 'Implanted device that sends electrical impulses to the brain via the vagus nerve.', fdaApproved: true, conditions: ['Treatment-Resistant Depression', 'Epilepsy'], sessionDuration: 'Surgical', treatmentCourse: 'Implant + ongoing', insuranceCoverage: 'Medicare / some insurers' },
+    { id: '6', slug: 'psilocybin', name: 'Psilocybin Therapy', description: 'Guided psychedelic-assisted therapy using psilocybin, currently in clinical trials for depression.', fdaApproved: false, conditions: ['Treatment-Resistant Depression', 'End-of-Life Anxiety', 'PTSD'], sessionDuration: '6–8 hours', treatmentCourse: '2–3 sessions', insuranceCoverage: 'Not covered' },
+    { id: '7', slug: 'neurofeedback', name: 'Neurofeedback', description: 'Real-time brain wave monitoring and training to improve mental health symptoms.', fdaApproved: false, conditions: ['ADHD', 'Anxiety', 'Insomnia'], sessionDuration: '30–60 min', treatmentCourse: '20–40 sessions', insuranceCoverage: 'Rarely covered' },
+    { id: '8', slug: 'dbs', name: 'DBS (Deep Brain Stimulation)', description: 'Surgically implanted electrodes that deliver targeted stimulation to specific brain regions.', fdaApproved: false, conditions: ['Treatment-Resistant Depression', "Parkinson's Disease"], sessionDuration: 'Surgical', treatmentCourse: 'Implant + ongoing', insuranceCoverage: 'Case-by-case' },
   ] as any;
 }
 

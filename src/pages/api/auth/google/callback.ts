@@ -126,11 +126,11 @@ export const GET: APIRoute = async ({ request }) => {
     // Determine redirect
     let redirectTo: string;
     if (state === 'admin') {
-      redirectTo = '/admin/dashboard/';
+      redirectTo = '/admin/dashboard';
     } else if (user.clinicId) {
-      redirectTo = '/portal/dashboard/';
+      redirectTo = '/portal/dashboard';
     } else {
-      redirectTo = '/portal/claim/';
+      redirectTo = '/portal/claim';
     }
 
     return new Response(null, {

@@ -4,6 +4,20 @@ import Layout from '../../layouts/Layout.astro';
 const title = "TMS Glossary | 50+ Terms Explained | TMS List";
 const description = "Comprehensive A-Z glossary of TMS therapy terms. From rTMS and theta burst to DLPFC and motor threshold — understand every term used in transcranial magnetic stimulation.";
 
+// Course schema — educational program signal for AEO
+const courseSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": ["Course", "DefinedTermSet"],
+    "name": "TMS Therapy Glossary & Educational Guide",
+    "description": description,
+    "url": "https://tmslist.com/glossary/",
+    "provider": { "@type": "Organization", "name": "TMS List", "url": "https://tmslist.com" },
+    "educationalLevel": "Professional",
+    "occupationalCredentialAwarded": "TMS Therapy Educational Resource",
+    "timeRequired": "PT30M",
+    "publisher": { "@type": "Organization", "name": "TMS List", "url": "https://tmslist.com" },
+});
+
 const schema = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
@@ -82,7 +96,7 @@ const letters = Object.keys(grouped).sort();
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 ---
 
-<Layout title={title} description={description} schema={schema} breadcrumbs={[
+<Layout title={title} description={description} schema={schema} extraSchemas={[courseSchema]} breadcrumbs={[
     { name: "Home", url: "/" },
     { name: "Glossary", url: "/glossary/" },
 ]}>

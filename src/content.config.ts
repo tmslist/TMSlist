@@ -10,7 +10,7 @@ const blog = defineCollection({
     description: z.string(),
     author: z.string().default('TMS List Editorial Team'),
     publishDate: z.coerce.date(),
-    category: z.enum(['research', 'treatment', 'patient-guide', 'faq']),
+    category: z.enum(['research', 'treatment', 'patient-guide', 'faq']).or(z.enum(['Research', 'Treatment', 'Patient Guide', 'FAQ'])).optional(),
     image: z.string().default(DEFAULT_OG_IMAGE),
     tags: z.array(z.string()).default([]),
   }),

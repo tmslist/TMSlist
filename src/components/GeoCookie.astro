@@ -1,0 +1,32 @@
+---
+// No server-side code needed — this component runs entirely on the client
+---
+
+<script>
+(function() {
+    const SUPPORTED_COUNTRIES = ['US', 'GB', 'CA', 'AU', 'DE', 'IN'];
+
+    // Skip if cookie already set
+    if (document.cookie.includes('x-country=')) return;
+
+    function detectCountry(): string {
+        // These headers are injected by the CDN/hosting provider
+        const headers: Record<string, string> = {};
+        // Read from document.cookie as fallback (if server set something)
+        const cookies: Record<string, string> = {};
+        document.cookie.split(';').forEach(c => {
+            const [k, v] = c.trim().split('=');
+            if (k) cookies[k] = v;
+        });
+        if (cookies['x-country'] && SUPPORTED_COUNTRIES.includes(cookies['x-country'])) {
+            return cookies['x-country'];
+        }
+        return 'US';
+    }
+
+    const country = detectCountry();
+    if (country) {
+        document.cookie = `x-country=${country};path=/;max-age=${60*60*24*365};SameSite=Lax`;
+    }
+})();
+</script>

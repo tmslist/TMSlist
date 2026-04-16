@@ -2,9 +2,6 @@ import type { APIRoute } from 'astro';
 import { loginSchema } from '../../../db/validation';
 import { getUserByEmail, verifyPassword, createSession, getClientIpFromRequest } from '../../../utils/auth';
 import { strictRateLimit } from '../../../utils/rateLimit';
-import { db } from '../../../db';
-import { users } from '../../../db/schema';
-import { eq } from 'drizzle-orm';
 
 export const prerender = false;
 
@@ -50,9 +47,6 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Update last login
-    await db.update(users).set({ lastLoginAt: new Date() }).where(eq(users.id, user.id));
-
     // Create session with tracking
     const { cookie } = await createSession(
       { userId: user.id, email: user.email, role: user.role },
@@ -63,15 +57,13 @@ export const POST: APIRoute = async ({ request }) => {
     );
 
     // Determine redirect based on whether user has a clinic
-    const redirectTo = user.clinicId ? '/portal/dashboard' : '/portal/claim';
+    const finalRedirect = user.clinicId ? '/portal/dashboard' : '/portal/claim';
 
-    return new Response(JSON.stringify({
-      success: true,
-      redirectTo,
-    }), {
-      status: 200,
+    // Return 302 redirect — browser sets the HttpOnly cookie when following
+    return new Response(null, {
+      status: 302,
       headers: {
-        'Content-Type': 'application/json',
+        Location: finalRedirect,
         'Set-Cookie': cookie,
       },
     });

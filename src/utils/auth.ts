@@ -29,8 +29,13 @@ export async function hashPassword(password: string): Promise<string> {
   return bcrypt.hash(password, 12);
 }
 
-export async function verifyPassword(password: string, hash: string): Promise<boolean> {
-  return bcrypt.compare(password, hash);
+export async function verifyPassword(password: string, hash: string | null | undefined): Promise<boolean> {
+  if (!hash) return false;
+  try {
+    return await bcrypt.compare(password, hash);
+  } catch {
+    return false;
+  }
 }
 
 export function createToken(payload: JWTPayload): string {
@@ -107,13 +112,18 @@ export async function createSession(
   const tokenHash = createHash('sha256').update(token).digest('hex');
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
-  await db.insert(sessions).values({
-    userId: payload.userId,
-    tokenHash,
-    expiresAt,
-    userAgent: opts?.userAgent,
-    ipAddress: opts?.ipAddress,
-  });
+  // Graceful fallback if sessions table doesn't exist yet
+  try {
+    await db.insert(sessions).values({
+      userId: payload.userId,
+      tokenHash,
+      expiresAt,
+      userAgent: opts?.userAgent,
+      ipAddress: opts?.ipAddress,
+    });
+  } catch (err) {
+    console.error('[auth] sessions table insert failed:', err);
+  }
 
   const secure = (process.env.NODE_ENV === 'production' || process.env.VERCEL === '1')
     ? '; Secure'
@@ -203,14 +213,19 @@ export async function createSessionWithExpiry(
   const tokenHash = createHash('sha256').update(token).digest('hex');
   const expiresAt = new Date(Date.now() + expiryMs);
 
-  await db.insert(sessions).values({
-    userId: payload.userId,
-    tokenHash,
-    expiresAt,
-    lastUsedAt: new Date(),
-    userAgent: opts?.userAgent,
-    ipAddress: opts?.ipAddress,
-  });
+  // Graceful fallback if sessions table doesn't exist yet
+  try {
+    await db.insert(sessions).values({
+      userId: payload.userId,
+      tokenHash,
+      expiresAt,
+      lastUsedAt: new Date(),
+      userAgent: opts?.userAgent,
+      ipAddress: opts?.ipAddress,
+    });
+  } catch (err) {
+    console.error('[auth] sessions table insert failed:', err);
+  }
 
   const secure = (process.env.NODE_ENV === 'production' || process.env.VERCEL === '1')
     ? '; Secure'

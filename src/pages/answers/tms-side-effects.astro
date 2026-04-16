@@ -1,0 +1,82 @@
+---
+export const prerender = false;
+const title = "TMS Side Effects: What to Expect | TMS List";
+const description = "The most common TMS side effects are mild and include scalp discomfort and headaches. Unlike medications, TMS has minimal systemic side effects.";
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What are the side effects of TMS?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The most common side effects of TMS are mild and include scalp discomfort at the treatment site, headaches, and occasional facial twitching during treatment. Unlike medications, TMS does not cause weight gain, sexual dysfunction, sedation, or emotional blunting."
+    }
+  }]
+});
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href="https://tmslist.com/answers/tms-side-effects/">
+  <script type="application/ld+json" set:html={faqSchema}></script>
+</head>
+<body class="bg-slate-50 min-h-screen">
+  <header class="bg-white border-b border-slate-200">
+    <div class="container mx-auto px-4 py-4">
+      <a href="/" class="text-xl font-bold text-violet-600">TMS List</a>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-12 max-w-3xl">
+    <article itemscope itemtype="https://schema.org/Article">
+      <header class="mb-8">
+        <h1 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4" itemprop="headline">
+          TMS Side Effects: What to Expect
+        </h1>
+        <div class="flex items-center gap-4 text-sm text-slate-500">
+          <span>Reviewed by Dr. Karan Narwal, Mental Health Specialist</span>
+          <span>|</span>
+          <time datetime="2026-04-15">April 15, 2026</time>
+        </div>
+      </header>
+
+      <div class="prose prose-lg prose-slate max-w-none" itemprop="articleBody">
+        <p class="text-xl text-slate-700 leading-relaxed font-medium">
+          The most common side effects of TMS are mild and include scalp discomfort at the treatment site and occasional headaches that typically resolve within the first few sessions.
+        </p>
+
+        <p>
+          Unlike antidepressant medications, TMS does not cause systemic side effects such as weight gain, sexual dysfunction, nausea, insomnia, dry mouth, or emotional blunting. This makes it an attractive option for patients concerned about medication-related side effects.
+        </p>
+
+        <p>
+          Rare but serious risks include seizures, which occur in approximately 0.001% of treatments. TMS providers screen patients carefully to identify contraindications such as epilepsy, brain tumors, or metallic implants near the head. Treatment is always administered under physician supervision.
+        </p>
+
+        <div class="bg-violet-50 border border-violet-100 rounded-2xl p-6 my-8">
+          <h2 class="text-lg font-semibold text-violet-900 mb-2">Learn More About TMS Safety</h2>
+          <p class="text-violet-700 mb-4">
+            Find certified TMS providers and learn about safety protocols and screening criteria.
+          </p>
+          <a href="/us/" class="inline-flex items-center gap-2 px-5 py-2.5 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-colors">
+            Find TMS Clinics
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 mt-16">
+    <div class="container mx-auto px-4 py-8 text-center text-sm text-slate-500">
+      <p>&copy; 2026 TMS List. All rights reserved. | <a href="/about-us/" class="hover:text-violet-600">About Us</a> | <a href="/contact/" class="hover:text-violet-600">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

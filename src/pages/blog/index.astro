@@ -14,7 +14,7 @@ const blogPosts = entries
     const wordCount = (entry.body || "").split(/\s+/).length;
     const readTime = `${Math.max(1, Math.round(wordCount / 200))} min`;
     return {
-      slug: entry.slug,
+      slug: entry.id,
       title: entry.data.title,
       excerpt: entry.data.description || "",
       category: entry.data.category || "Research",
@@ -43,6 +43,7 @@ const defaultColor = { bg: "bg-slate-50", text: "text-slate-600", dot: "bg-slate
 <Layout
   title="TMS Therapy Blog - Expert Guides & Research | TMS List"
   description="Expert articles on TMS therapy, depression treatment, insurance coverage, and the latest research in brain stimulation."
+  canonical="https://tmslist.com/blog/"
 >
   <main>
     <!-- Hero -->

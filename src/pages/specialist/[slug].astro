@@ -81,7 +81,7 @@ const faqs = [
     "worksFor": { "@type": "MedicalClinic", "name": clinic.name, "url": `https://tmslist.com/clinic/${clinic.slug}` },
     "address": { "@type": "PostalAddress", "addressLocality": city, "addressRegion": stateName, "addressCountry": clinic.country || "US" },
     "url": `https://tmslist.com/specialist/${doctor.slug}`
-})} breadcrumbs={[
+})} canonical={`https://tmslist.com/specialist/${doctor.slug}/`} breadcrumbs={[
     { name: "Home", url: "/" },
     { name: "Specialists", url: "/specialists/" },
     { name: doctor.name, url: `/specialist/${doctor.slug}` },

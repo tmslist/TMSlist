@@ -1,0 +1,155 @@
+---
+interface Props {
+    variant?: 'sidebar' | 'full';
+    showLongTail?: boolean;
+}
+
+const { variant = 'sidebar', showLongTail = true } = Astro.props;
+
+// Popular searches data
+const topConditions = [
+    { label: 'TMS for Depression', href: '/treatments/depression/', count: 12500 },
+    { label: 'TMS for Anxiety', href: '/treatments/anxiety/', count: 8900 },
+    { label: 'TMS for OCD', href: '/treatments/ocd/', count: 6200 },
+    { label: 'TMS for PTSD', href: '/treatments/ptsd/', count: 4100 },
+];
+
+const topCities = [
+    { label: 'TMS in New York', href: '/us/new-york/', city: 'New York', count: 3200 },
+    { label: 'TMS in Los Angeles', href: '/us/los-angeles/', city: 'Los Angeles', count: 2800 },
+    { label: 'TMS in Chicago', href: '/us/chicago/', city: 'Chicago', count: 2100 },
+    { label: 'TMS in Houston', href: '/us/houston/', city: 'Houston', count: 1800 },
+];
+
+const longTailQueries = [
+    { query: 'TMS clinics near me accepting insurance', href: '/insurance/' },
+    { query: 'FDA-cleared TMS treatment near me', href: '/treatments/' },
+    { query: 'TMS for depression with Medicare coverage', href: '/insurance/medicare/' },
+    { query: 'TMS cost with insurance in 2026', href: '/tms-cost-guide/' },
+];
+
+// Format count helper
+function formatCount(n: number): string {
+    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+    return n.toString();
+}
+---
+
+<div class:list={["bg-white rounded-2xl border border-slate-200 p-6", variant === 'full' && 'max-w-4xl mx-auto']}>
+    <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+        </div>
+        <div>
+            <h3 class="font-bold text-slate-900">Popular TMS Searches</h3>
+            <p class="text-xs text-slate-500">Frequently searched topics</p>
+        </div>
+    </div>
+
+    {variant === 'full' ? (
+        <!-- Full-width layout with tabs -->
+        <div class="space-y-6">
+            <!-- Top Conditions -->
+            <div>
+                <h4 class="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-3">Top Conditions</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {topConditions.map((item) => (
+                        <a href={item.href} class="group flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-violet-50 border border-slate-100 hover:border-violet-200 transition-all">
+                            <span class="text-sm font-medium text-slate-700 group-hover:text-violet-700">{item.label}</span>
+                            <span class="text-xs text-slate-400">{formatCount(item.count)}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Top Cities -->
+            <div>
+                <h4 class="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-3">Top Cities</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {topCities.map((item) => (
+                        <a href={item.href} class="group flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-emerald-50 border border-slate-100 hover:border-emerald-200 transition-all">
+                            <span class="text-sm font-medium text-slate-700 group-hover:text-emerald-700">{item.label}</span>
+                            <span class="text-xs text-slate-400">{formatCount(item.count)}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Long-tail queries -->
+            {showLongTail && (
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-3">Common Questions</h4>
+                    <div class="space-y-2">
+                        {longTailQueries.map((item) => (
+                            <a href={item.href} class="group flex items-start gap-3 p-3 bg-slate-50 rounded-xl hover:bg-blue-50 border border-slate-100 hover:border-blue-200 transition-all">
+                                <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="text-sm font-medium text-slate-600 group-hover:text-blue-700 leading-tight">{item.query}</span>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    ) : (
+        <!-- Compact sidebar layout -->
+        <div class="space-y-5">
+            <!-- Top Conditions -->
+            <div>
+                <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Conditions</h4>
+                <ul class="space-y-2">
+                    {topConditions.slice(0, 3).map((item) => (
+                        <li>
+                            <a href={item.href} class="flex items-center gap-2 text-sm text-slate-600 hover:text-violet-600 transition-colors">
+                                <svg class="w-4 h-4 text-violet-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                {item.label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <!-- Top Cities -->
+            <div>
+                <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Locations</h4>
+                <ul class="space-y-2">
+                    {topCities.slice(0, 3).map((item) => (
+                        <li>
+                            <a href={item.href} class="flex items-center gap-2 text-sm text-slate-600 hover:text-emerald-600 transition-colors">
+                                <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                {item.label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <!-- Long-tail -->
+            {showLongTail && (
+                <div>
+                    <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Common Questions</h4>
+                    <ul class="space-y-2">
+                        {longTailQueries.slice(0, 2).map((item) => (
+                            <li>
+                                <a href={item.href} class="flex items-start gap-2 text-xs text-slate-500 hover:text-blue-600 transition-colors">
+                                    <svg class="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span class="leading-snug">{item.query}</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+        </div>
+    )}
+</div>

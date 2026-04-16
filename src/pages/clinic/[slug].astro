@@ -74,6 +74,14 @@ const schema = JSON.stringify({
         latitude: clinic.geo?.lat,
         longitude: clinic.geo?.lng,
     },
+    ...(clinic.service_area || clinic.serviceArea || clinic.area_served ? {
+        areaServed: clinic.service_area || clinic.serviceArea || clinic.area_served,
+    } : {
+        areaServed: `${city}, ${stateName}`,
+    }),
+    ...(clinic.accepting_new_patients !== undefined ? {
+        acceptsNewPatients: clinic.accepting_new_patients,
+    } : {}),
     ...(getRating() ? {
         aggregateRating: {
             "@type": "AggregateRating",
@@ -99,6 +107,20 @@ const schema = JSON.stringify({
     } : {}),
 });
 
+// FAQPage schema for clinic-specific FAQs
+const faqSchema = faqs.length > 0 ? JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq: any) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer,
+        },
+    })),
+}) : null;
+
 // Clinic Hero Selection
 const clinicHeroImages = [
     "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1200",
@@ -112,7 +134,7 @@ const logoUrl = getClinicLogoUrl(clinic);
 const galleryImages = clinic.gallery_urls || [];
 ---
 
-<Layout title={pageTitle} description={metaDescription} schema={schema} image={clinic.hero_image_url || clinic.logo_url || clinic.media?.logo_url || clinic.media?.hero_image_url || undefined}>
+<Layout title={pageTitle} description={metaDescription} schema={schema} canonical={`https://tmslist.com/clinic/${clinic.slug}/`} image={clinic.hero_image_url || clinic.logo_url || clinic.media?.logo_url || clinic.media?.hero_image_url || undefined}>
     <!-- Clean Premium Light Hero -->
     <section class="relative bg-white pt-16 pb-24 border-b border-slate-100 overflow-hidden">
         <div class="absolute inset-x-0 top-0 h-[600px] bg-gradient-to-b from-blue-50/50 to-white/0 pointer-events-none"></div>
@@ -393,6 +415,8 @@ const galleryImages = clinic.gallery_urls || [];
                     entityName={clinic.name}
                     clinicId={clinic.id}
                 />
+
+                {faqSchema && <script type="application/ld+json" set:html={faqSchema} />}
 
                 {faqs.length > 0 && (
                     <section>

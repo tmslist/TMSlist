@@ -1,0 +1,82 @@
+---
+export const prerender = false;
+const title = "TMS vs Medication: Which Is Right for You? | TMS List";
+const description = "Compare TMS therapy vs antidepressant medications. TMS has fewer systemic side effects and targets specific brain regions directly.";
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How does TMS compare to medication?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Unlike medications, TMS has fewer systemic side effects since it directly targets specific brain regions without affecting the entire body. TMS does not cause weight gain, sexual dysfunction, or emotional blunting commonly associated with antidepressants."
+    }
+  }]
+});
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href="https://tmslist.com/answers/tms-vs-medication/">
+  <script type="application/ld+json" set:html={faqSchema}></script>
+</head>
+<body class="bg-slate-50 min-h-screen">
+  <header class="bg-white border-b border-slate-200">
+    <div class="container mx-auto px-4 py-4">
+      <a href="/" class="text-xl font-bold text-violet-600">TMS List</a>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-12 max-w-3xl">
+    <article itemscope itemtype="https://schema.org/Article">
+      <header class="mb-8">
+        <h1 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4" itemprop="headline">
+          TMS vs Medication: Which Is Right for You?
+        </h1>
+        <div class="flex items-center gap-4 text-sm text-slate-500">
+          <span>TMS List Editorial Team</span>
+          <span>|</span>
+          <time datetime="2026-04-15">April 15, 2026</time>
+        </div>
+      </header>
+
+      <div class="prose prose-lg prose-slate max-w-none" itemprop="articleBody">
+        <p class="text-xl text-slate-700 leading-relaxed font-medium">
+          Unlike medications, TMS has fewer systemic side effects since it directly targets specific brain regions without circulating through your entire body.
+        </p>
+
+        <p>
+          Antidepressant medications work by altering neurotransmitter levels throughout the brain and body. While effective for many, they often cause side effects including weight gain, sexual dysfunction, nausea, insomnia, and emotional blunting. TMS avoids these systemic effects by delivering magnetic pulses precisely to the target brain region.
+        </p>
+
+        <p>
+          TMS may be preferable for patients who cannot tolerate medication side effects, have not responded adequately to multiple antidepressants, or want to avoid long-term medication use. However, TMS requires daily clinic visits for several weeks, whereas medications are taken daily at home.
+        </p>
+
+        <div class="bg-violet-50 border border-violet-100 rounded-2xl p-6 my-8">
+          <h2 class="text-lg font-semibold text-violet-900 mb-2">Compare Your Treatment Options</h2>
+          <p class="text-violet-700 mb-4">
+            Learn more about TMS therapy and find the treatment approach that fits your needs.
+          </p>
+          <a href="/treatments/depression/" class="inline-flex items-center gap-2 px-5 py-2.5 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-colors">
+            Explore Treatment Options
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 mt-16">
+    <div class="container mx-auto px-4 py-8 text-center text-sm text-slate-500">
+      <p>&copy; 2026 TMS List. All rights reserved. | <a href="/about-us/" class="hover:text-violet-600">About Us</a> | <a href="/contact/" class="hover:text-violet-600">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

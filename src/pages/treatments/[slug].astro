@@ -37,7 +37,7 @@ export async function getStaticPaths() {
   return [...contentPaths, ...fallbackPaths];
 }
 
-const { title, description, condition, fdaApproved, successRate, sessionCount, duration, brainArea, image, faqs, hasContent, entry } = Astro.props;
+const { title, description, condition, fdaApproved, successRate, sessionCount, duration, brainArea, faqs, hasContent, entry } = Astro.props;
 const slug = Astro.params.slug!;
 let Content: any = null;
 if (hasContent && entry) {

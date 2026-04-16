@@ -64,14 +64,10 @@ export default function LoginForm() {
         body: JSON.stringify({ email, password }),
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        if (data.success) {
-          // The cookie is set by the API — redirect to admin dashboard
-          setStatus('success');
-          window.location.href = '/admin/dashboard';
-          return;
-        }
+      if (res.redirected) {
+        // 302 redirect from login API — cookie was set, follow the redirect
+        window.location.href = res.url;
+        return;
       }
 
       const data = await res.json();

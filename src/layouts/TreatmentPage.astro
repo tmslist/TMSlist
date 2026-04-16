@@ -1,7 +1,6 @@
 ---
 import Layout from "./Layout.astro";
 import ContentHero from "../components/ContentHero.astro";
-import StatCards from "../components/StatCards.astro";
 import ContentFAQ from "../components/ContentFAQ.astro";
 import FindClinicCTA from "../components/FindClinicCTA.astro";
 import SectionLinks from "../components/SectionLinks.astro";
@@ -60,13 +59,6 @@ if (fdaApproved) {
   badges.push({ text: 'Research Phase', color: 'blue' });
 }
 
-// Build stat cards
-const stats: { value: string; label: string; color?: string; icon?: string }[] = [];
-if (successRate) stats.push({ value: successRate, label: 'Response Rate', color: 'emerald', icon: 'chart' });
-stats.push({ value: sessionCount || '30–36', label: 'Sessions', color: 'violet', icon: 'clock' });
-stats.push({ value: duration || '6–9 weeks', label: 'Treatment Duration', color: 'blue', icon: 'clock' });
-stats.push({ value: 'Most Plans', label: 'Insurance Coverage', color: 'amber', icon: 'shield' });
-
 // Default FAQs if none provided
 const displayFaqs = faqs.length > 0 ? faqs : [
   { question: `Is TMS effective for ${condition || title}?`, answer: `TMS has shown promising results for ${condition || title}. ${fdaApproved ? 'It is FDA-cleared for this indication.' : 'Research is ongoing, and many patients report meaningful improvement.'} ${successRate ? `Response rates are approximately ${successRate}.` : 'Speak with a TMS specialist to learn about expected outcomes for your specific situation.'}` },
@@ -122,8 +114,6 @@ const relatedSections = [
       { value: fdaApproved ? 'Yes' : 'Off-label', label: 'FDA Status' },
     ]}
   />
-
-  <StatCards stats={stats} />
 
   <main class="container mx-auto px-4 pb-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">

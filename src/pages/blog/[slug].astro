@@ -67,9 +67,31 @@ const reviewerImage = "https://img1.wsimg.com/isteam/ip/f791d9b9-2f6c-4539-b9b3-
 const reviewerBio = "Dr. Narwal is a mental health specialist with extensive experience in neuromodulation therapies. He reviews all clinical content on TMS List for medical accuracy and alignment with current treatment guidelines.";
 
 const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const blogTags = hasContent && entry ? (entry.data.tags || []) : [];
+const aboutSchema = blogTags.length > 0 ? {
+    "about": blogTags.map(tag => ({ "@type": "Thing", "name": tag }))
+} : {};
+
+// HowTo schema for preparation guide
+const howToSchema = slug === 'how-to-prepare-for-tms' ? JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": title,
+    "description": description || "A step-by-step guide to preparing for transcranial magnetic stimulation (TMS) therapy.",
+    "image": `${siteUrl}/images/blog/${slug}.webp`,
+    "totalTime": "P45D",
+    "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Consult your doctor", "text": "Discuss whether TMS is appropriate for your condition. TMS is typically recommended for treatment-resistant depression, OCD, or other conditions where medications haven't provided sufficient relief." },
+        { "@type": "HowToStep", "position": 2, "name": "Verify insurance coverage", "text": "Contact your insurance provider to confirm TMS coverage, understand your copay obligations, and begin the prior authorization process if required." },
+        { "@type": "HowToStep", "position": 3, "name": "Complete intake assessment", "text": "Your TMS provider will conduct a psychological evaluation, determine your motor threshold, and review your medical history to personalize the treatment plan." },
+        { "@type": "HowToStep", "position": 4, "name": "Attend TMS sessions (20–36 sessions)", "text": "Complete the full treatment course — typically 5 sessions per week over 6–9 weeks. Each session lasts 19–37 minutes for standard rTMS, or about 3 minutes for theta burst stimulation (iTBS)." },
+        { "@type": "HowToStep", "position": 5, "name": "Track your progress", "text": "Monitor symptom changes using standardized scales like PHQ-9 for depression. Discuss any side effects with your provider. Maintenance sessions may be recommended to sustain results." },
+    ],
+}) : null;
+
 const articleSchema = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": ["Article", "BlogPosting"],
   "headline": title,
   "description": description || `Expert insights on ${title} — evidence-based information on TMS therapy.`,
   "image": `${siteUrl}/images/blog/${slug}.webp`,
@@ -78,6 +100,7 @@ const articleSchema = JSON.stringify({
     "name": "TMS List Editorial Team",
     "url": siteUrl,
   },
+  "dateModified": new Date().toISOString().split('T')[0],
   "publisher": {
     "@type": "Organization",
     "name": "TMS List",
@@ -91,10 +114,11 @@ const articleSchema = JSON.stringify({
     "name": reviewerName,
     "jobTitle": reviewerTitle,
   },
+  ...aboutSchema,
 });
 ---
 
-<Layout title={`${title} | TMS List`} description={description} schema={articleSchema} image={`${siteUrl}/images/blog/${slug}.webp`} breadcrumbs={[
+<Layout title={`${title} | TMS List`} description={description} schema={articleSchema} extraSchemas={howToSchema ? [howToSchema] : []} contentType="blog" canonical={`${siteUrl}/blog/${slug}/`} image={`${siteUrl}/images/blog/${slug}.webp`} breadcrumbs={[
   { name: "Home", url: "/" },
   { name: "Blog", url: "/blog/" },
   { name: title, url: `/blog/${slug}/` },
