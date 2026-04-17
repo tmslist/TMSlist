@@ -6,7 +6,11 @@ import {
   createSession,
   getClientIpFromRequest,
   logLoginActivity,
+  logAuthEvent,
+  storePasskeyAuthChallenge,
+  verifyPasskeyAuth,
 } from '../../../../utils/auth';
+import { strictRateLimit } from '../../../../utils/rateLimit';
 import { db } from '../../../../db';
 import { users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -18,13 +22,22 @@ const RP_ID = (import.meta.env.SITE_URL || process.env.SITE_URL || 'https://tmsl
   .split(':')[0]
   .split('/')[0];
 
+const PASSKEY_LOCK_THRESHOLD = 10;
+const PASSKEY_LOCK_DURATION_MS = 15 * 60 * 1000; // 15 minutes
+
 /**
  * POST /api/auth/passkey/authenticate
  * Authenticate using a passkey. Two-step flow:
- *   Step 1: { email } -> returns auth options
+ *   Step 1: { email } -> returns auth options with server-generated challenge
  *   Step 2: { userId, assertion, challenge } -> verifies and creates session
  */
 export const POST: APIRoute = async ({ request }) => {
+  const ip = getClientIpFromRequest(request);
+
+  // Rate limit the entire endpoint: 20 attempts per IP per 15 minutes
+  const rateLimited = await strictRateLimit(ip, 20, '15 m', 'auth:passkey');
+  if (rateLimited) return rateLimited;
+
   try {
     const body = await request.json();
 
@@ -34,6 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
         id: users.id,
         email: users.email,
         passkeys: users.passkeys,
+        lockedUntil: users.lockedUntil,
       })
         .from(users)
         .where(eq(users.email, body.email.toLowerCase()))
@@ -47,6 +61,21 @@ export const POST: APIRoute = async ({ request }) => {
         });
       }
 
+      // Check if account is locked
+      if (user.lockedUntil && new Date() < user.lockedUntil) {
+        const retryAfterSeconds = Math.ceil((user.lockedUntil.getTime() - Date.now()) / 1000);
+        return new Response(JSON.stringify({
+          error: 'Account temporarily locked due to too many failed attempts.',
+          retryAfter: retryAfterSeconds,
+        }), {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'Retry-After': String(retryAfterSeconds),
+          },
+        });
+      }
+
       const options = await generateAuthenticationOptions({
         rpId: RP_ID,
         allowCredentials: user.passkeys.map(cred => ({
@@ -55,6 +84,9 @@ export const POST: APIRoute = async ({ request }) => {
         })),
         userVerification: 'preferred',
       });
+
+      // CRITICAL: Store the challenge in the DB so POST can verify it.
+      await storePasskeyAuthChallenge(user.id, options.challenge);
 
       return new Response(JSON.stringify({
         options,
@@ -78,6 +110,7 @@ export const POST: APIRoute = async ({ request }) => {
       email: users.email,
       role: users.role,
       passkeys: users.passkeys,
+      lockedUntil: users.lockedUntil,
     })
       .from(users)
       .where(eq(users.id, body.userId))
@@ -91,9 +124,24 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // Check if account is locked
+    if (user.lockedUntil && new Date() < user.lockedUntil) {
+      const retryAfterSeconds = Math.ceil((user.lockedUntil.getTime() - Date.now()) / 1000);
+      return new Response(JSON.stringify({
+        error: 'Account temporarily locked.',
+        retryAfter: retryAfterSeconds,
+      }), {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/json',
+          'Retry-After': String(retryAfterSeconds),
+        },
+      });
+    }
+
     // Find the credential that was used
     const assertionRawId = typeof body.assertion.rawId === 'string' ? body.assertion.rawId : '';
-    const credential = user.passkeys.find(c => c.credentialID === assertionRawId);
+    const credential = user.passkeys.find((c: { credentialID: string }) => c.credentialID === assertionRawId);
     if (!credential) {
       return new Response(JSON.stringify({ error: 'Credential not found' }), {
         status: 400,
@@ -101,9 +149,49 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // CRITICAL: Verify the challenge from the client matches the one we stored in DB.
+    // This prevents replay attacks and ensures the assertion was generated for this session.
+    // Also check the authenticator counter to detect cloned passkeys.
+    const clientChallenge = (() => {
+      try {
+        const clientDataObj = JSON.parse(atob(body.assertion.response.clientDataJSON));
+        return clientDataObj.challenge;
+      } catch {
+        return null;
+      }
+    })();
+
+    // Extract counter from authenticator data (bytes 53-57, big-endian u32)
+    let clientCounter = 0;
+    try {
+      const authData = body.assertion.response.authenticatorData;
+      if (authData && typeof authData === 'string') {
+        const rawBytes = Buffer.from(authData, 'base64');
+        if (rawBytes.length >= 57) {
+          clientCounter = rawBytes.readUInt32BE(53);
+        }
+      }
+    } catch {
+      // Use 0 if extraction fails
+    }
+
+    const challengeResult = await verifyPasskeyAuth(
+      user.id,
+      clientChallenge,
+      credential.credentialID,
+      clientCounter
+    );
+
+    if (!challengeResult.valid) {
+      return new Response(JSON.stringify({ error: challengeResult.reason }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     const verification = await verifyAuthenticationResponse({
       response: body.assertion,
-      expectedChallenge: body.challenge,
+      expectedChallenge: clientChallenge,
       expectedOrigin: import.meta.env.SITE_URL || process.env.SITE_URL || 'https://tmslist.com',
       expectedRPID: RP_ID,
       authenticator: {
@@ -113,17 +201,16 @@ export const POST: APIRoute = async ({ request }) => {
       },
     });
 
-    // Update counter in DB
+    // Update counter in DB (counter is already validated above; this persists the new value)
     const newCounter = verification.authenticatorInfo?.credentialCounter ?? credential.counter;
     const updatedPasskeys = user.passkeys.map(c =>
       c.credentialID === credential.credentialID
         ? { ...c, counter: newCounter }
         : c
     );
-    await db.update(users).set({ passkeys: updatedPasskeys }).where(eq(users.id, user.id));
+    await db.update(users).set({ passkeys: updatedPasskeys, lockedUntil: null }).where(eq(users.id, user.id));
 
     // Create session
-    const ip = getClientIpFromRequest(request);
     const userAgent = request.headers.get('user-agent') || '';
     const { cookie } = await createSession(
       { userId: user.id, email: user.email, role: user.role },
@@ -150,6 +237,29 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (err) {
     console.error('[passkey/authenticate]', err);
+
+    // On verification failure, try to increment lockout counter if userId was provided
+    try {
+      if (request.headers.get('content-type')?.includes('application/json')) {
+        const bodyText = await request.text();
+        const body = JSON.parse(bodyText);
+        if (body.userId) {
+          const userResults = await db.select({ lockedUntil: users.lockedUntil })
+            .from(users).where(eq(users.id, body.userId)).limit(1);
+          const current = userResults[0]?.lockedUntil;
+          if (current && new Date() < current) {
+            // Already locked, no need to update
+          } else {
+            await db.update(users).set({
+              lockedUntil: new Date(Date.now() + PASSKEY_LOCK_DURATION_MS),
+            }).where(eq(users.id, body.userId));
+          }
+        }
+      }
+    } catch {
+      // Non-fatal — lockout tracking failed
+    }
+
     return new Response(JSON.stringify({ error: 'Passkey authentication failed' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },

@@ -3,10 +3,15 @@ import {
   getSessionFromRequest,
   generateRegistrationOptions,
   verifyRegistrationResponse,
+  createSession,
+  getClientIpFromRequest,
+  storePasskeyChallenge,
+  consumePasskeyChallenge,
 } from '../../../../utils/auth';
 import { db } from '../../../../db';
 import { users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
+import { randomBytes } from 'crypto';
 
 export const prerender = false;
 
@@ -16,9 +21,12 @@ const RP_ID = (import.meta.env.SITE_URL || process.env.SITE_URL || 'https://tmsl
   .split(':')[0]
   .split('/')[0];  // Extract host from URL
 
+const MAX_PASSKEYS = 5;
+
 /**
  * GET /api/auth/passkey/register
  * Get registration options (challenge) for registering a passkey.
+ * Generates a cryptographically random challenge stored in the session (in DB).
  */
 export const GET: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
@@ -36,7 +44,17 @@ export const GET: APIRoute = async ({ request }) => {
       .where(eq(users.id, session.userId))
       .limit(1);
 
-    const existingCredentials = results[0]?.passkeys ?? [];
+    const existingPasskeys: Array<{ credentialID: string }> = results[0]?.passkeys ?? [];
+
+    // Enforce maximum passkeys per account
+    if (existingPasskeys.length >= MAX_PASSKEYS) {
+      return new Response(JSON.stringify({
+        error: `Maximum of ${MAX_PASSKEYS} passkeys allowed. Remove one first.`,
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     const options = await generateRegistrationOptions({
       rpName: RP_NAME,
@@ -44,7 +62,7 @@ export const GET: APIRoute = async ({ request }) => {
       userName: session.email,
       userId: session.userId,
       attestationType: 'none',
-      excludeCredentials: existingCredentials.map(cred => ({
+      excludeCredentials: existingPasskeys.map(cred => ({
         id: cred.credentialID,
         type: 'public-key' as const,
       })),
@@ -54,6 +72,10 @@ export const GET: APIRoute = async ({ request }) => {
         requireResidentKey: false,
       },
     });
+
+    // CRITICAL: Store the challenge in the DB so POST can verify it.
+    // simplewebauthn generates a cryptographically random challenge internally.
+    await storePasskeyChallenge(session.userId, options.challenge);
 
     return new Response(JSON.stringify(options), {
       headers: { 'Content-Type': 'application/json' },
@@ -83,9 +105,28 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     const body = await request.json();
+
+    // CRITICAL: Verify the challenge from the client matches the one we stored in DB.
+    // This prevents any user from registering a passkey for another account.
+    let clientChallenge: string | null = null;
+    try {
+      const clientDataObj = JSON.parse(atob(body.response.clientDataJSON));
+      clientChallenge = clientDataObj.challenge;
+    } catch {
+      // Fall through to error below
+    }
+
+    const validChallenge = await consumePasskeyChallenge(session.userId, clientChallenge);
+    if (!validChallenge) {
+      return new Response(JSON.stringify({ error: 'Invalid or expired challenge. Please start registration again.' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     const credential = await verifyRegistrationResponse({
       response: body,
-      expectedChallenge: session.userId,  // Use userId as challenge (stored in session)
+      expectedChallenge: validChallenge,
       expectedOrigin: import.meta.env.SITE_URL || process.env.SITE_URL || 'https://tmslist.com',
       expectedRPID: RP_ID,
     });
@@ -106,6 +147,17 @@ export const POST: APIRoute = async ({ request }) => {
       .limit(1);
 
     const existingPasskeys: Array<typeof newCredential> = results[0]?.passkeys ?? [];
+
+    // Enforce maximum passkeys on registration too
+    if (existingPasskeys.length >= MAX_PASSKEYS) {
+      return new Response(JSON.stringify({
+        error: `Maximum of ${MAX_PASSKEYS} passkeys allowed.`,
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     const updatedPasskeys = [...existingPasskeys, newCredential];
 
     await db.update(users).set({ passkeys: updatedPasskeys }).where(eq(users.id, session.userId));

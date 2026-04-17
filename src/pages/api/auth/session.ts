@@ -8,12 +8,19 @@ export const GET: APIRoute = async ({ request }) => {
 
   if (!session) {
     return new Response(JSON.stringify({ user: null }), {
-      status: 200,
+      status: 401,
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
-  return new Response(JSON.stringify({ user: { ...session, clinicId: (session as any)?.clinicId } }), {
+  // Only expose the minimum needed by the client — never expose the full JWT
+  return new Response(JSON.stringify({
+    user: {
+      id: session.userId,
+      email: session.email,
+      role: session.role,
+    },
+  }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
   });

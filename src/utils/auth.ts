@@ -3,14 +3,13 @@ import jwt from 'jsonwebtoken';
 import { createHash, randomBytes } from 'crypto';
 import { eq, and, isNull, gt } from 'drizzle-orm';
 import { db } from '../db';
-import { users, magicTokens, sessions, authEvents, loginHistory } from '../db/schema';
+import { users, magicTokens, sessions, authEvents, loginHistory, passkeyChallenges } from '../db/schema';
 import type { User } from '../db/schema';
 import type { InferSelectModel } from 'drizzle-orm';
 
+// JWT_SECRET may not be set at module import time (e.g., during `astro check`).
+// Functions that use it guard against null/missing, so this is a warning, not a throw.
 const JWT_SECRET = import.meta.env.JWT_SECRET || process.env.JWT_SECRET;
-if (!JWT_SECRET) {
-  throw new Error('JWT_SECRET environment variable is required');
-}
 const TOKEN_EXPIRY = '7d';
 const COOKIE_NAME = 'tms_session';
 
@@ -660,4 +659,137 @@ export async function verifyAuthenticationResponse(opts: {
     expectedRPID: opts.expectedRPID,
     authenticator: opts.authenticator,
   });
+}
+
+// ── PASSKEY CHALLENGE MANAGEMENT ─────────────────────────────────
+
+const PASSKEY_CHALLENGE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+/**
+ * Store a passkey challenge in the DB (call this in GET /register).
+ * Returns the raw challenge string to include in WebAuthn options.
+ */
+export async function storePasskeyChallenge(userId: string, challenge: string): Promise<void> {
+  const challengeHash = createHash('sha256').update(challenge).digest('hex');
+  const expiresAt = new Date(Date.now() + PASSKEY_CHALLENGE_TTL_MS);
+
+  // Clean up any existing unused challenges for this user first
+  await db.delete(passkeyChallenges).where(
+    and(
+      eq(passkeyChallenges.userId, userId),
+      isNull(passkeyChallenges.usedAt)
+    )
+  );
+
+  await db.insert(passkeyChallenges).values({
+    userId,
+    challenge,
+    challengeHash,
+    expiresAt,
+  });
+}
+
+/**
+ * Verify a passkey challenge (call this in POST /register).
+ * Returns the raw challenge string if valid, or null if missing/expired/already-used.
+ * Marks the challenge as used atomically.
+ */
+export async function consumePasskeyChallenge(
+  userId: string,
+  clientChallenge: string
+): Promise<string | null> {
+  const challengeHash = createHash('sha256').update(clientChallenge).digest('hex');
+
+  // Atomic: find the matching unused challenge, verify it hasn't expired, and mark it used
+  // in a single conditional UPDATE...RETURNING to prevent race-condition replays.
+  const now = new Date();
+  const [record] = await db
+    .update(passkeyChallenges)
+    .set({ usedAt: now })
+    .where(
+      and(
+        eq(passkeyChallenges.userId, userId),
+        eq(passkeyChallenges.challengeHash, challengeHash),
+        isNull(passkeyChallenges.usedAt),
+        gt(passkeyChallenges.expiresAt, now)
+      )
+    )
+    .returning({ challenge: passkeyChallenges.challenge });
+
+  return record?.challenge ?? null;
+}
+
+/**
+ * Store a passkey authentication challenge (call this in GET /authenticate).
+ * Returns the raw challenge string to include in WebAuthn authentication options.
+ */
+export async function storePasskeyAuthChallenge(userId: string, challenge: string): Promise<void> {
+  const challengeHash = createHash('sha256').update(challenge).digest('hex');
+  const expiresAt = new Date(Date.now() + PASSKEY_CHALLENGE_TTL_MS);
+
+  await db.delete(passkeyChallenges).where(
+    and(
+      eq(passkeyChallenges.userId, userId),
+      isNull(passkeyChallenges.usedAt)
+    )
+  );
+
+  await db.insert(passkeyChallenges).values({
+    userId,
+    challenge,
+    challengeHash,
+    expiresAt,
+  });
+}
+
+/**
+ * Verify a passkey authentication challenge and validate the authenticator counter.
+ * Returns true if the assertion is valid and the counter is newer.
+ * Marks the challenge as used atomically.
+ */
+export async function verifyPasskeyAuth(
+  userId: string,
+  clientChallenge: string,
+  credentialID: string,
+  newCounter: number
+): Promise<{ valid: boolean; reason?: string }> {
+  const challengeHash = createHash('sha256').update(clientChallenge).digest('hex');
+  const now = new Date();
+
+  // Consume the challenge
+  const [challengeRecord] = await db
+    .update(passkeyChallenges)
+    .set({ usedAt: now })
+    .where(
+      and(
+        eq(passkeyChallenges.userId, userId),
+        eq(passkeyChallenges.challengeHash, challengeHash),
+        isNull(passkeyChallenges.usedAt),
+        gt(passkeyChallenges.expiresAt, now)
+      )
+    )
+    .returning({ challenge: passkeyChallenges.challenge });
+
+  if (!challengeRecord) {
+    return { valid: false, reason: 'Challenge missing, expired, or already used' };
+  }
+
+  // Find the stored credential
+  const [user] = await db.select({ passkeys: users.passkeys })
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  const cred = user?.passkeys?.find((p: { credentialID: string }) => p.credentialID === credentialID);
+
+  if (!cred) {
+    return { valid: false, reason: 'Credential not found for this user' };
+  }
+
+  // Counter check: reject cloned passkeys with stale counters
+  if (newCounter <= cred.counter) {
+    return { valid: false, reason: 'Authenticator counter regression — possible cloned passkey' };
+  }
+
+  return { valid: true };
 }

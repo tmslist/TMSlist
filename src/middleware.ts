@@ -18,14 +18,24 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
     // Check if cookie already set
     const existingCookie = context.cookies.get('x-country');
-    if (existingCookie?.value) return response;
+    if (existingCookie?.value && SUPPORTED_COUNTRIES.includes(existingCookie.value)) {
+        return response;
+    }
 
-    // Detect country from Vercel's geo header (automatically provided on Vercel)
-    let country = context.request.headers.get('x-vercel-ip-country')?.toUpperCase() || 'US';
+    // Detect country — priority: (1) ?country= query param (for local dev testing),
+    // (2) x-vercel-ip-country header (on Vercel), (3) 'US' fallback
+    let country = 'US';
 
-    // Normalize: if not a supported country, default to US
-    if (!SUPPORTED_COUNTRIES.includes(country)) {
-        country = 'US';
+    // Dev override: ?country=IN on any URL
+    const urlCountry = context.url.searchParams.get('country')?.toUpperCase();
+    if (urlCountry && SUPPORTED_COUNTRIES.includes(urlCountry)) {
+        country = urlCountry;
+    } else {
+        // On Vercel: auto-injected geo header
+        const vercelCountry = context.request.headers.get('x-vercel-ip-country')?.toUpperCase();
+        if (vercelCountry && SUPPORTED_COUNTRIES.includes(vercelCountry)) {
+            country = vercelCountry;
+        }
     }
 
     // Set cookie for client-side geo detection (1 year, accessible from JS)
@@ -33,7 +43,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         path: '/',
         maxAge: 60 * 60 * 24 * 365,
         httpOnly: false,
-        secure: true,
+        secure: process.env.NODE_ENV === 'production' || process.env.VERCEL === '1',
         sameSite: 'lax',
     });
 

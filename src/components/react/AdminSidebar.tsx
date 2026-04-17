@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -559,64 +560,70 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
                 )}
               </button>
 
-              {/* Notification Dropdown */}
-              {notificationOpen && (
-                <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 z-50">
-                  {/* Dropdown header */}
-                  <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
-                    <span className="text-sm font-semibold text-gray-900">Notifications</span>
-                    {hasUnread && (
-                      <button
-                        onClick={handleMarkAllRead}
-                        className="text-xs text-violet-600 hover:text-violet-700 font-medium transition-colors"
-                      >
-                        Mark all read
-                      </button>
-                    )}
-                  </div>
+              {/* Notification Dropdown - Portaled to body to avoid overflow clipping */}
+              {notificationOpen && createPortal(
+                <div className="fixed inset-0 z-[9999] pointer-events-none">
+                  <div
+                    className="absolute right-4 top-20 w-80 bg-white rounded-xl shadow-xl border border-gray-100 pointer-events-auto max-h-[calc(100vh-6rem)] flex flex-col"
+                    style={{ maxHeight: 'calc(100vh - 6rem)' }}
+                  >
+                    {/* Dropdown header */}
+                    <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0">
+                      <span className="text-sm font-semibold text-gray-900">Notifications</span>
+                      {hasUnread && (
+                        <button
+                          onClick={handleMarkAllRead}
+                          className="text-xs text-violet-600 hover:text-violet-700 font-medium transition-colors"
+                        >
+                          Mark all read
+                        </button>
+                      )}
+                    </div>
 
-                  {/* Notification list */}
-                  <div className="max-h-80 overflow-y-auto">
-                    {sortedNotifications.map((notification) => (
-                      <button
-                        key={notification.id}
-                        onClick={() => handleNotificationClick(notification)}
-                        className={`w-full flex items-start gap-3 px-4 py-3 text-left transition-colors border-b border-gray-50 last:border-0 hover:bg-gray-50 ${
-                          !notification.read ? 'bg-violet-50/40' : ''
-                        }`}
-                      >
-                        {/* Icon */}
-                        <span className="mt-0.5 text-lg shrink-0">{notification.icon}</span>
+                    {/* Notification list */}
+                    <div className="flex-1 overflow-y-auto min-h-0">
+                      {sortedNotifications.map((notification) => (
+                        <button
+                          key={notification.id}
+                          onClick={() => handleNotificationClick(notification)}
+                          className={`w-full flex items-start gap-3 px-4 py-3 text-left transition-colors border-b border-gray-50 last:border-0 hover:bg-gray-50 ${
+                            !notification.read ? 'bg-violet-50/40' : ''
+                          }`}
+                        >
+                          {/* Icon */}
+                          <span className="mt-0.5 text-lg shrink-0">{notification.icon}</span>
 
-                        {/* Content */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium text-gray-900">{notification.title}</span>
-                            {!notification.read && (
-                              <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
-                            )}
+                          {/* Content */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-medium text-gray-900">{notification.title}</span>
+                              {!notification.read && (
+                                <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                              )}
+                            </div>
+                            <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{notification.description}</p>
+                            <span className="text-[11px] text-gray-400 mt-1 block">{notification.timeAgo}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{notification.description}</p>
-                          <span className="text-[11px] text-gray-400 mt-1 block">{notification.timeAgo}</span>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
+                        </button>
+                      ))}
+                    </div>
 
-                  {/* Dropdown footer */}
-                  <div className="px-4 py-3 border-t border-gray-100">
-                    <a
-                      href="/admin/notifications"
-                      onClick={() => setNotificationOpen(false)}
-                      className="flex items-center justify-center text-sm text-violet-600 hover:text-violet-700 font-medium transition-colors"
-                    >
-                      View all notifications
-                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </a>
+                    {/* Dropdown footer */}
+                    <div className="px-4 py-3 border-t border-gray-100 shrink-0">
+                      <a
+                        href="/admin/notifications"
+                        onClick={() => setNotificationOpen(false)}
+                        className="flex items-center justify-center text-sm text-violet-600 hover:text-violet-700 font-medium transition-colors"
+                      >
+                        View all notifications
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
-                </div>
+                </div>,
+                document.body
               )}
             </div>
           </div>
@@ -768,8 +775,12 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
           <div className="text-sm font-medium text-gray-700 truncate" title={userEmail}>{userEmail}</div>
         </div>
         <button
-          onClick={() => {
-            // TODO: call /api/auth/logout then redirect
+          onClick={async () => {
+            try {
+              await fetch('/api/auth/logout', { method: 'POST' });
+            } catch {
+              // Ignore — redirect regardless
+            }
             window.location.href = '/admin/login';
           }}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-700 transition-colors"

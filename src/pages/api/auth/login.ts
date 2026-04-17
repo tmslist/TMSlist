@@ -8,6 +8,7 @@ import {
   recordFailedLoginAttempt,
   clearFailedLoginAttempts,
   logLoginActivity,
+  hasRole,
 } from '../../../utils/auth';
 import { sendSuspiciousLoginAlert } from '../../../utils/email';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
@@ -168,7 +169,9 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: '/admin/dashboard',
+        Location: hasRole({ userId: user.id, email: user.email, role: user.role }, 'admin', 'editor')
+        ? '/admin/dashboard'
+        : '/portal/dashboard',
         'Set-Cookie': cookie,
       },
     });

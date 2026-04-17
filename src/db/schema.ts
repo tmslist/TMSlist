@@ -434,6 +434,22 @@ export const magicTokens = pgTable('magic_tokens', {
   index('idx_magic_tokens_purpose').on(table.purpose),
 ]);
 
+// ── PASSKEY CHALLENGES (temporary, short-lived) ──────────────
+
+export const passkeyChallenges = pgTable('passkey_challenges', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  challenge: text('challenge').notNull(),        // raw base64url challenge string
+  challengeHash: text('challenge_hash').notNull(), // SHA-256 hash for verification
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  usedAt: timestamp('used_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_passkey_challenges_user').on(table.userId),
+  index('idx_passkey_challenges_hash').on(table.challengeHash),
+  index('idx_passkey_challenges_expires').on(table.expiresAt),
+]);
+
 // ── AUDIT LOG ──────────────────────────────────
 
 export const auditLog = pgTable('audit_log', {

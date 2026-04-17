@@ -1,5 +1,12 @@
 import type { APIRoute } from 'astro';
-import { getUserByEmail, verifyPassword, createSessionCookie } from '../../../utils/auth';
+import {
+  getUserByEmail,
+  verifyPassword,
+  createSessionCookie,
+  isAccountLocked,
+  recordFailedLoginAttempt,
+  clearFailedLoginAttempts,
+} from '../../../utils/auth';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
 
 export const prerender = false;
@@ -28,13 +35,32 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // CRITICAL: Check brute-force lockout BEFORE verifying password (same as login.ts)
+    const lockStatus = await isAccountLocked(user.id);
+    if (lockStatus.locked) {
+      return new Response(JSON.stringify({
+        error: `Account locked due to too many failed attempts. Try again in ${lockStatus.retryAfterSeconds} seconds.`,
+        retryAfter: lockStatus.retryAfterSeconds,
+      }), {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/json',
+          'Retry-After': String(lockStatus.retryAfterSeconds),
+        },
+      });
+    }
+
     const valid = await verifyPassword(password, user.passwordHash);
     if (!valid) {
+      await recordFailedLoginAttempt(user.id);
       return new Response(JSON.stringify({ error: 'Invalid email or password' }), {
         status: 401,
         headers: { 'Content-Type': 'application/json' },
       });
     }
+
+    // Password correct — clear failed attempts
+    await clearFailedLoginAttempts(user.id);
 
     const cookie = createSessionCookie({
       userId: user.id,
@@ -42,10 +68,7 @@ export const POST: APIRoute = async ({ request }) => {
       role: user.role,
     });
 
-    return new Response(JSON.stringify({
-      success: true,
-      user: { id: user.id, email: user.email, name: user.name, role: user.role },
-    }), {
+    return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
