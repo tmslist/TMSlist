@@ -1,0 +1,2649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TMS Patient Outcome Tracking System — TMS List</title>
+  <style>
+    /* ===================================================
+       RESET & BASE
+    =================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cyan:       #0891b2;
+      --cyan-dark:  #0e7490;
+      --cyan-light: #22d3ee;
+      --teal-900:   #083344;
+      --teal-800:   #0f4663;
+      --teal-700:   #164e63;
+      --slate-100:  #f1f5f9;
+      --slate-200:  #e2e8f0;
+      --slate-300:  #cbd5e1;
+      --slate-400:  #94a3b8;
+      --slate-500:  #64748b;
+      --slate-600:  #475569;
+      --slate-700:  #334155;
+      --slate-800:  #1e293b;
+      --slate-900:  #0f172a;
+      --amber:      #d97706;
+      --emerald:    #059669;
+      --rose:       #e11d48;
+      --purple:     #7c3aed;
+      --white:      #ffffff;
+    }
+
+    html {
+      font-size: 10pt;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-size: 10pt;
+      line-height: 1.65;
+      color: var(--slate-800);
+      background: var(--white);
+    }
+
+    /* ===================================================
+       PAGE LAYOUT
+    =================================================== */
+    @page {
+      size: letter;
+      margin: 0.6in;
+    }
+
+    @page :first {
+      margin: 0;
+    }
+
+    .page {
+      width: 7.2in;
+      min-height: 9.5in;
+      margin: 0 auto;
+      padding: 0.6in;
+      page-break-after: always;
+      page-break-inside: avoid;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    /* ===================================================
+       PRINT PAGE FOOTER
+    =================================================== */
+    @page {
+      @bottom-left {
+        content: "TMS List — Patient Outcome Tracking System";
+        font-size: 7.5pt;
+        color: #94a3b8;
+      }
+      @bottom-right {
+        content: "Page " counter(page) " of " counter(pages);
+        font-size: 7.5pt;
+        color: #64748b;
+      }
+    }
+
+    /* ===================================================
+       TYPOGRAPHY
+    =================================================== */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--slate-900);
+    }
+
+    h1 { font-size: 22pt; }
+    h2 { font-size: 15pt; margin-top: 18pt; margin-bottom: 8pt; }
+    h3 { font-size: 12pt; margin-top: 14pt; margin-bottom: 6pt; }
+    h4 { font-size: 10.5pt; margin-top: 10pt; margin-bottom: 4pt; }
+
+    p { margin-bottom: 8pt; }
+
+    .section-label {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 4pt;
+    }
+
+    .subhead {
+      font-size: 11pt;
+      color: var(--slate-500);
+      font-style: italic;
+      margin-bottom: 6pt;
+    }
+
+    strong { color: var(--slate-900); }
+    em     { color: var(--slate-600); }
+
+    ul, ol {
+      padding-left: 18pt;
+      margin-bottom: 8pt;
+    }
+    li {
+      margin-bottom: 3pt;
+    }
+
+    /* ===================================================
+       COVER PAGE
+    =================================================== */
+    .cover {
+      width: 7.2in;
+      min-height: 9.7in;
+      background: linear-gradient(145deg, #083344 0%, #164e63 55%, #0891b2 100%);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 1in 0.9in;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      margin: 0;
+    }
+
+    .cover::before {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: rgba(8, 145, 178, 0.18);
+      pointer-events: none;
+    }
+
+    .cover::after {
+      content: "";
+      position: absolute;
+      bottom: -60px;
+      left: -30px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: rgba(8, 145, 178, 0.1);
+      pointer-events: none;
+    }
+
+    .cover-logo {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 8.5pt;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan-light);
+      margin-bottom: 36pt;
+      opacity: 0.9;
+    }
+
+    .cover-eyebrow {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan-light);
+      margin-bottom: 12pt;
+      opacity: 0.85;
+    }
+
+    .cover h1 {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 28pt;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 16pt;
+      max-width: 5.8in;
+    }
+
+    .cover-subtitle {
+      font-size: 12pt;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.78);
+      max-width: 5.4in;
+      margin-bottom: 40pt;
+      font-style: italic;
+    }
+
+    .cover-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--cyan-light);
+      margin-bottom: 32pt;
+      opacity: 0.7;
+    }
+
+    .cover-meta {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+    }
+
+    .cover-meta strong {
+      color: rgba(255,255,255,0.75);
+    }
+
+    .cover-badge {
+      position: absolute;
+      top: 36pt;
+      right: 36pt;
+      background: rgba(8, 145, 178, 0.3);
+      border: 1px solid rgba(34, 211, 238, 0.4);
+      border-radius: 6px;
+      padding: 8pt 12pt;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cyan-light);
+    }
+
+    /* ===================================================
+       SECTION DIVIDER
+    =================================================== */
+    .section-divider {
+      border: none;
+      border-top: 1.5px solid var(--slate-200);
+      margin: 20pt 0 16pt 0;
+    }
+
+    /* ===================================================
+       INFO CARDS
+    =================================================== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10pt;
+      margin-bottom: 12pt;
+      page-break-inside: avoid;
+    }
+
+    .card {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 7px;
+      padding: 10pt 12pt;
+      page-break-inside: avoid;
+    }
+
+    .card-accent {
+      border-left: 3px solid var(--cyan);
+    }
+
+    .card h4 {
+      font-size: 10pt;
+      margin-top: 0;
+      margin-bottom: 4pt;
+      color: var(--teal-700);
+    }
+
+    .card p, .card li {
+      font-size: 9pt;
+      margin-bottom: 2pt;
+      color: var(--slate-700);
+    }
+
+    .card-icon {
+      font-size: 14pt;
+      margin-bottom: 4pt;
+      display: block;
+    }
+
+    /* ===================================================
+       TABLES
+    =================================================== */
+    .table-wrap {
+      overflow-x: auto;
+      margin-bottom: 12pt;
+      page-break-inside: avoid;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5pt;
+    }
+
+    thead tr {
+      background: var(--teal-900);
+      color: var(--white);
+    }
+
+    thead th {
+      padding: 6pt 7pt;
+      text-align: left;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--slate-50);
+    }
+
+    tbody tr:hover {
+      background: rgba(8, 145, 178, 0.05);
+    }
+
+    td {
+      padding: 5pt 7pt;
+      border-bottom: 1px solid var(--slate-200);
+      vertical-align: top;
+      color: var(--slate-700);
+      page-break-inside: avoid;
+    }
+
+    td.col-label {
+      font-weight: 700;
+      color: var(--slate-800);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      background: var(--slate-100);
+      white-space: nowrap;
+    }
+
+    .tbl-bright-header thead tr {
+      background: var(--cyan);
+    }
+
+    .tbl-teal thead tr {
+      background: var(--teal-700);
+    }
+
+    .tbl-compact td,
+    .tbl-compact th {
+      padding: 3.5pt 6pt;
+      font-size: 8pt;
+    }
+
+    .tbl-striped tbody tr:nth-child(odd) {
+      background: rgba(8, 145, 178, 0.04);
+    }
+
+    /* ===================================================
+       CALLOUT / CALENDAR TABLE
+    =================================================== */
+    .callout {
+      background: rgba(8, 145, 178, 0.06);
+      border: 1px solid rgba(8, 145, 178, 0.25);
+      border-left: 4px solid var(--cyan);
+      border-radius: 5px;
+      padding: 9pt 12pt;
+      margin-bottom: 12pt;
+      page-break-inside: avoid;
+    }
+
+    .callout p {
+      margin-bottom: 0;
+      font-size: 9pt;
+      color: var(--slate-700);
+    }
+
+    .callout strong {
+      color: var(--teal-700);
+    }
+
+    /* ===================================================
+       BADGE / TAG
+    =================================================== */
+    .badge {
+      display: inline-block;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 6.5pt;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 1.5pt 5pt;
+      border-radius: 3px;
+      vertical-align: middle;
+    }
+
+    .badge-cyan {
+      background: rgba(8, 145, 178, 0.12);
+      color: var(--cyan-dark);
+    }
+
+    .badge-green {
+      background: rgba(5, 150, 105, 0.12);
+      color: var(--emerald);
+    }
+
+    .badge-amber {
+      background: rgba(217, 119, 6, 0.12);
+      color: var(--amber);
+    }
+
+    .badge-purple {
+      background: rgba(124, 58, 237, 0.12);
+      color: var(--purple);
+    }
+
+    .badge-rose {
+      background: rgba(225, 29, 72, 0.1);
+      color: var(--rose);
+    }
+
+    /* ===================================================
+       TWO-COLUMN LAYOUT
+    =================================================== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16pt;
+      margin-bottom: 12pt;
+    }
+
+    .two-col-wide-left {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr;
+      gap: 14pt;
+      margin-bottom: 12pt;
+    }
+
+    /* ===================================================
+       TESTIMONIAL
+    =================================================== */
+    .testimonial {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      padding: 14pt 16pt;
+      margin-bottom: 12pt;
+      page-break-inside: avoid;
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: "\201C";
+      font-size: 42pt;
+      color: var(--cyan);
+      opacity: 0.25;
+      position: absolute;
+      top: 4pt;
+      left: 12pt;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .testimonial blockquote {
+      font-size: 10pt;
+      font-style: italic;
+      color: var(--slate-700);
+      margin-bottom: 10pt;
+      padding-left: 24pt;
+      line-height: 1.65;
+    }
+
+    .testimonial-author {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      font-weight: 700;
+      color: var(--slate-600);
+      padding-left: 24pt;
+    }
+
+    .testimonial-role {
+      font-size: 8pt;
+      color: var(--slate-400);
+      font-weight: 400;
+    }
+
+    /* ===================================================
+       GLOSSARY
+    =================================================== */
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6pt 20pt;
+      margin-bottom: 12pt;
+      page-break-inside: avoid;
+    }
+
+    .glossary-item {
+      padding: 5pt 0;
+      border-bottom: 1px solid var(--slate-200);
+      page-break-inside: avoid;
+    }
+
+    .glossary-term {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--teal-700);
+      display: inline;
+    }
+
+    .glossary-def {
+      font-size: 8.5pt;
+      color: var(--slate-600);
+      display: inline;
+    }
+
+    /* ===================================================
+       QR SECTION
+    =================================================== */
+    .qr-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16pt;
+      margin-bottom: 12pt;
+    }
+
+    .qr-card {
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      padding: 14pt;
+      text-align: center;
+      page-break-inside: avoid;
+      background: var(--white);
+    }
+
+    .qr-card img {
+      width: 72px;
+      height: 72px;
+      border-radius: 6px;
+      margin: 0 auto 8pt;
+      display: block;
+    }
+
+    .qr-card-label {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--slate-800);
+      margin-bottom: 3pt;
+    }
+
+    .qr-card-url {
+      font-size: 8pt;
+      color: var(--cyan);
+      word-break: break-all;
+    }
+
+    .qr-card-desc {
+      font-size: 8pt;
+      color: var(--slate-500);
+      margin-top: 5pt;
+      line-height: 1.5;
+    }
+
+    /* ===================================================
+       TEAR-OUT CARD PAGE
+    =================================================== */
+    .tear-out-header {
+      text-align: center;
+      border-bottom: 3px solid var(--teal-700);
+      padding-bottom: 8pt;
+      margin-bottom: 14pt;
+      page-break-after: avoid;
+    }
+
+    .tear-out-header h2 {
+      margin: 0;
+      color: var(--teal-700);
+      font-size: 14pt;
+    }
+
+    .tear-out-header p {
+      font-size: 9pt;
+      color: var(--slate-500);
+      margin: 0;
+    }
+
+    .timeline-visual {
+      position: relative;
+      margin-bottom: 16pt;
+      page-break-inside: avoid;
+    }
+
+    .timeline-bar {
+      background: linear-gradient(90deg, var(--teal-900) 0%, var(--cyan) 100%);
+      border-radius: 4px;
+      height: 8px;
+      width: 100%;
+      margin-bottom: 6pt;
+    }
+
+    .timeline-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 7pt;
+      color: var(--slate-500);
+    }
+
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 110px repeat(8, 1fr);
+      gap: 2px;
+      margin-bottom: 3px;
+      align-items: center;
+      page-break-inside: avoid;
+    }
+
+    .timeline-row-header {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: var(--slate-700);
+      white-space: nowrap;
+      padding-right: 6px;
+    }
+
+    .timeline-cell {
+      background: var(--slate-100);
+      border: 1px solid var(--slate-200);
+      border-radius: 3px;
+      padding: 2.5pt 3pt;
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 7pt;
+      color: var(--slate-600);
+      line-height: 1.3;
+      page-break-inside: avoid;
+      min-height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-cell.header-cell {
+      background: transparent;
+      border: none;
+      font-size: 7pt;
+      color: var(--slate-400);
+      font-weight: 600;
+    }
+
+    .timeline-cell.check {
+      background: rgba(8, 145, 178, 0.12);
+      border-color: rgba(8, 145, 178, 0.35);
+      color: var(--cyan-dark);
+      font-weight: 700;
+    }
+
+    .timeline-cell.partial {
+      background: rgba(217, 119, 6, 0.08);
+      border-color: rgba(217, 119, 6, 0.3);
+      color: var(--amber);
+      font-weight: 700;
+    }
+
+    /* ===================================================
+       TOC
+    =================================================== */
+    .toc {
+      margin-bottom: 16pt;
+    }
+
+    .toc-item {
+      display: flex;
+      align-items: baseline;
+      padding: 5pt 0;
+      border-bottom: 1px solid var(--slate-200);
+      page-break-inside: avoid;
+    }
+
+    .toc-num {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--cyan);
+      min-width: 24px;
+    }
+
+    .toc-title {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: var(--slate-800);
+      flex: 1;
+    }
+
+    .toc-page {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      color: var(--slate-400);
+      margin-left: 8px;
+    }
+
+    .toc-section {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: var(--teal-700);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 10pt;
+      margin-bottom: 4pt;
+    }
+
+    /* ===================================================
+       QI WORKFLOW BOXES
+    =================================================== */
+    .workflow-steps {
+      counter-reset: step;
+      margin-bottom: 12pt;
+      page-break-inside: avoid;
+    }
+
+    .workflow-step {
+      display: flex;
+      gap: 10pt;
+      margin-bottom: 8pt;
+      page-break-inside: avoid;
+    }
+
+    .step-num {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 10pt;
+      font-weight: 800;
+      color: var(--white);
+      background: var(--cyan);
+      width: 20pt;
+      height: 20pt;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      page-break-inside: avoid;
+    }
+
+    .step-content h4 {
+      margin: 0 0 2pt 0;
+      font-size: 9.5pt;
+    }
+
+    .step-content p {
+      margin: 0;
+      font-size: 8.5pt;
+      color: var(--slate-600);
+    }
+
+    /* ===================================================
+       AGGREGATE REPORT TEMPLATE
+    =================================================== */
+    .report-block {
+      border: 1px solid var(--slate-200);
+      border-radius: 6px;
+      padding: 10pt 12pt;
+      margin-bottom: 10pt;
+      page-break-inside: avoid;
+    }
+
+    .report-block h4 {
+      font-size: 9.5pt;
+      color: var(--teal-700);
+      margin-top: 0;
+      margin-bottom: 6pt;
+      border-bottom: 1px solid var(--slate-200);
+      padding-bottom: 4pt;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 3pt 0;
+      border-bottom: 1px dotted var(--slate-200);
+      page-break-inside: avoid;
+    }
+
+    .metric-row:last-child {
+      border-bottom: none;
+    }
+
+    .metric-label {
+      font-size: 8.5pt;
+      color: var(--slate-600);
+    }
+
+    .metric-value {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: var(--slate-800);
+    }
+
+    /* ===================================================
+       ADVERSE EVENTS
+    =================================================== */
+    .ae-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8pt;
+      margin-bottom: 10pt;
+      page-break-inside: avoid;
+    }
+
+    .ae-card {
+      border: 1px solid var(--slate-200);
+      border-radius: 6px;
+      padding: 8pt 10pt;
+      page-break-inside: avoid;
+    }
+
+    .ae-card h5 {
+      font-size: 9pt;
+      color: var(--teal-700);
+      margin-bottom: 4pt;
+    }
+
+    .ae-card p {
+      font-size: 8pt;
+      color: var(--slate-600);
+      margin: 0;
+    }
+
+    .severity-bar {
+      height: 4px;
+      border-radius: 2px;
+      margin-top: 5pt;
+    }
+
+    .sev-mild   { background: #86efac; }
+    .sev-mod    { background: #fcd34d; }
+    .sev-severe { background: #fca5a5; }
+
+    /* ===================================================
+       MEASURE DETAIL CARDS
+    =================================================== */
+    .measure-card {
+      border: 1px solid var(--slate-200);
+      border-left: 4px solid var(--cyan);
+      border-radius: 0 6px 6px 0;
+      padding: 8pt 12pt;
+      margin-bottom: 8pt;
+      page-break-inside: avoid;
+    }
+
+    .measure-card h4 {
+      font-size: 10pt;
+      color: var(--teal-700);
+      margin: 0 0 3pt 0;
+    }
+
+    .measure-card .badge {
+      margin-left: 6pt;
+    }
+
+    .measure-meta {
+      display: flex;
+      gap: 12pt;
+      flex-wrap: wrap;
+      margin-bottom: 4pt;
+    }
+
+    .measure-meta span {
+      font-size: 8pt;
+      color: var(--slate-500);
+    }
+
+    .measure-meta strong {
+      color: var(--slate-700);
+    }
+
+    /* ===================================================
+       SPREADSHEET LAYOUT
+    =================================================== */
+    .spreadsheet-tabs {
+      display: flex;
+      gap: 4pt;
+      margin-bottom: 8pt;
+      page-break-inside: avoid;
+      flex-wrap: wrap;
+    }
+
+    .spreadsheet-tab {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      padding: 3pt 8pt;
+      background: var(--slate-100);
+      border: 1px solid var(--slate-300);
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      color: var(--slate-500);
+    }
+
+    .spreadsheet-tab.active {
+      background: var(--cyan);
+      color: var(--white);
+      border-color: var(--cyan-dark);
+    }
+
+    /* ===================================================
+       PAGE HEADER
+    =================================================== */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8pt;
+      border-bottom: 2px solid var(--teal-700);
+      margin-bottom: 14pt;
+      page-break-after: avoid;
+    }
+
+    .page-header h2 {
+      margin: 0;
+      font-size: 13pt;
+    }
+
+    .page-header-right {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 7.5pt;
+      color: var(--slate-400);
+    }
+
+    /* ===================================================
+       MISC
+    =================================================== */
+    .col-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8pt;
+      margin-bottom: 12pt;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 10pt 8pt;
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 6px;
+      page-break-inside: avoid;
+    }
+
+    .stat-box .num {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 18pt;
+      font-weight: 800;
+      color: var(--cyan);
+      line-height: 1;
+    }
+
+    .stat-box .label {
+      font-size: 7.5pt;
+      color: var(--slate-500);
+      margin-top: 3pt;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    .intro-text {
+      font-size: 10pt;
+      color: var(--slate-700);
+      margin-bottom: 14pt;
+      line-height: 1.7;
+    }
+
+    .col-right-note {
+      background: rgba(8, 145, 178, 0.06);
+      border-radius: 6px;
+      padding: 10pt 12pt;
+      page-break-inside: avoid;
+    }
+
+    .col-right-note h4 {
+      font-size: 9pt;
+      color: var(--teal-700);
+      margin-top: 0;
+      margin-bottom: 6pt;
+    }
+
+    .col-right-note ul {
+      margin: 0;
+      padding-left: 14pt;
+    }
+
+    .col-right-note li {
+      font-size: 8.5pt;
+      margin-bottom: 4pt;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--slate-200);
+      margin: 10pt 0;
+    }
+
+    /* ===================================================
+       PRINT UTILITIES
+    =================================================== */
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .page {
+        page-break-after: always;
+        page-break-inside: avoid;
+      }
+
+      .no-break {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     COVER PAGE
+============================================================ -->
+<div class="cover">
+  <div class="cover-logo">TMS List</div>
+  <div class="cover-badge">Clinical Framework</div>
+  <div class="cover-eyebrow">For Clinical Directors &amp; Quality Managers</div>
+  <h1>The TMS Patient Outcome Tracking System</h1>
+  <div class="cover-divider"></div>
+  <p class="cover-subtitle">
+    A clinical framework for measuring, reporting, and improving
+    Transcranial Magnetic Stimulation treatment outcomes — from baseline
+    assessment through 6-month follow-up.
+  </p>
+  <div class="cover-meta">
+    <strong>What this guide covers:</strong><br />
+    Standardized outcome measures &amp; validated instruments<br />
+    Assessment schedules, tracking spreadsheets &amp; tabs<br />
+    Response and remission criteria definitions<br />
+    Adverse event classification and documentation<br />
+    Quality improvement protocols and aggregate reporting
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 2: TABLE OF CONTENTS
+============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <h2>Table of Contents</h2>
+    <div class="page-header-right">TMS Patient Outcome Tracking System</div>
+  </div>
+
+  <div class="toc">
+    <div class="toc-section">Overview</div>
+    <div class="toc-item">
+      <span class="toc-num">01</span>
+      <span class="toc-title">Why Track Outcomes?</span>
+      <span class="toc-page">3</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">02</span>
+      <span class="toc-title">Core Outcome Measures</span>
+      <span class="toc-page">3</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">03</span>
+      <span class="toc-title">Assessment Schedule</span>
+      <span class="toc-page">4</span>
+    </div>
+
+    <div class="toc-section">Implementation</div>
+    <div class="toc-item">
+      <span class="toc-num">04</span>
+      <span class="toc-title">Patient Tracking Spreadsheet Layout</span>
+      <span class="toc-page">5</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">05</span>
+      <span class="toc-title">Response &amp; Remission Definitions</span>
+      <span class="toc-page">7</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">06</span>
+      <span class="toc-title">Adverse Event Tracking</span>
+      <span class="toc-page">7</span>
+    </div>
+
+    <div class="toc-section">Reporting</div>
+    <div class="toc-item">
+      <span class="toc-num">07</span>
+      <span class="toc-title">Aggregate Reporting Template</span>
+      <span class="toc-page">8</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">08</span>
+      <span class="toc-title">Quality Improvement Workflow</span>
+      <span class="toc-page">9</span>
+    </div>
+
+    <div class="toc-section">Reference</div>
+    <div class="toc-item">
+      <span class="toc-num">09</span>
+      <span class="toc-title">Glossary of Terms</span>
+      <span class="toc-page">10</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">10</span>
+      <span class="toc-title">QR Resources &amp; Tear-Out Card</span>
+      <span class="toc-page">11</span>
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <div class="testimonial">
+    <blockquote>
+      Implementing standardized outcome tracking transformed how we communicate with payers and referring physicians. We can now demonstrate remission rates in peer-to-peer reviews — which has meaningfully improved authorization approvals.
+    </blockquote>
+    <div class="testimonial-author">
+      Clinical Director — Multi-Site TMS Practice, Northeast US
+      <span class="testimonial-role"> | 9 years TMS experience</span>
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <blockquote>
+      The PHQ-9 trajectory data alone gave us the evidence to adjust our protocols for partial responders. Our response rates improved by 18% within two quarters of adopting this framework.
+    </blockquote>
+    <div class="testimonial-author">
+      Quality Manager — Academic Medical Center TMS Program, Midwest
+      <span class="testimonial-role"> | 4 years TMS experience</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 3: WHY TRACK + CORE MEASURES
+============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <h2>Why Track Outcomes?</h2>
+    <div class="page-header-right">TMS Patient Outcome Tracking System</div>
+  </div>
+
+  <div class="intro-text">
+    Systematic outcome measurement is the cornerstone of high-quality TMS practice. Beyond clinical necessity, outcome data increasingly drives payer relations, regulatory compliance, and the advancement of the TMS evidence base.
+  </div>
+
+  <div class="card-grid">
+    <div class="card card-accent">
+      <span class="card-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </span>
+      <h4>Clinical Excellence</h4>
+      <p>Identify non-responders at Week 4 and adjust stimulation parameters before the authorized course is complete. Early identification of partial response enables timely protocol modifications — changing coil placement, increasing intensity, or adjusting pulse frequency.</p>
+    </div>
+
+    <div class="card card-accent">
+      <span class="card-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      </span>
+      <h4>Insurance &amp; Payer Relations</h4>
+      <p>Aggregate outcome data supports continued treatment authorization and simplifies peer-to-peer reviews. A documented response trajectory gives medical directors clear clinical justification for ongoing care — reducing administrative friction and denials.</p>
+    </div>
+
+    <div class="card card-accent">
+      <span class="card-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </span>
+      <h4>Referring Physician Marketing</h4>
+      <p>Shareable outcome summaries (de-identified aggregate data) demonstrate practice quality to referring psychiatrists, primary care physicians, and pain specialists. This builds referral volume and strengthens professional network relationships.</p>
+    </div>
+
+    <div class="card card-accent">
+      <span class="card-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </span>
+      <h4>Research &amp; Publications</h4>
+      <p>Consistent data collection across patients positions your practice to contribute to the TMS evidence base. Multi-site collaborations and journal submissions require standardized outcome measures — the data must be collected systematically to be usable.</p>
+    </div>
+
+    <div class="card card-accent" style="grid-column: 1 / -1;">
+      <span class="card-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </span>
+      <h4>Regulatory &amp; FDA Post-Market Surveillance</h4>
+      <p>FDA clearance for TMS devices carries post-market surveillance obligations. Documented adverse events and outcome measures support compliance reporting requirements and demonstrate ongoing device safety monitoring as part of your quality management system.</p>
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+  <h2>Core Outcome Measures</h2>
+
+  <div class="measure-card">
+    <h4>PHQ-9 <span class="badge badge-cyan">Primary Measure</span> <span class="badge badge-green">Depression</span></h4>
+    <div class="measure-meta">
+      <span><strong>Items:</strong> 9</span>
+      <span><strong>Score range:</strong> 0 – 27</span>
+      <span><strong>Clinically significant improvement:</strong> 5+ point decrease from baseline</span>
+      <span><strong>Remission threshold:</strong> Score &lt; 5</span>
+    </div>
+    <p>Validated self-report tool for depression severity. Administered at baseline, Week 4, Week 6, post-treatment, and all follow-up points. Change score (baseline minus follow-up) is the primary efficacy endpoint for most TMS clinical protocols.</p>
+  </div>
+
+  <div class="measure-card">
+    <h4>GAD-7 <span class="badge badge-purple">Anxiety</span></h4>
+    <div class="measure-meta">
+      <span><strong>Items:</strong> 7</span>
+      <span><strong>Score range:</strong> 0 – 21</span>
+      <span><strong>Clinically significant improvement:</strong> 4+ point decrease from baseline</span>
+      <span><strong>Remission threshold:</strong> Score &lt; 5</span>
+    </div>
+    <p>Generalized Anxiety Disorder 7-item scale. Often comorbid with depression in TMS patients. Capturing GAD-7 data alongside PHQ-9 provides a fuller clinical picture and supports treatment of anxiety-spectrum presentations.</p>
+  </div>
+
+  <div class="measure-card">
+    <h4>CGI-S <span class="badge badge-amber">Clinician-Rated</span> <span class="badge badge-cyan">Baseline Only</span></h4>
+    <div class="measure-meta">
+      <span><strong>Scale:</strong> 1 – 7</span>
+      <span><strong>Baseline:</strong> Required at Week 0 (pre-treatment)</span>
+      <span><strong>Post-treatment:</strong> Required at post-treatment assessment</span>
+      <span><strong>Follow-up:</strong> Required at 1mo, 3mo, 6mo</span>
+    </div>
+    <p>Clinical Global Impression – Severity. Clinician-rated global assessment of illness severity. Score of 1 = normal, 4 = moderately ill, 7 = among the most extremely ill patients. Provides an independent anchor for self-reported PHQ-9 and GAD-7 scores.</p>
+  </div>
+
+  <div class="measure-card">
+    <h4>CGI-I <span class="badge badge-amber">Clinician-Rated</span></h4>
+    <div class="measure-meta">
+      <span><strong>Scale:</strong> 1 – 7</span>
+      <span><strong>Timing:</strong> Week 2, Week 4, Week 6, post-treatment</span>
+      <span><strong>Interpretation:</strong> 1 = very much improved; 2 = much improved; 3 = minimally improved; 4 = no change; 5 = minimally worse; 6 = much worse; 7 = very much worse</span>
+    </div>
+    <p>Clinical Global Impression – Improvement. Clinician-rated global assessment of change from baseline. A CGI-I score of 1 or 2 (much or very much improved) combined with PHQ-9 improvement defines clinical response.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="measure-card" style="margin-bottom:0">
+      <h4>EQ-5D-5L</h4>
+      <div class="measure-meta" style="margin-bottom:4pt">
+        <span><strong>Dimensions:</strong> 5</span>
+        <span><strong>Timing:</strong> Baseline and post-treatment</span>
+      </div>
+      <p>EuroQol quality-of-life instrument measuring mobility, self-care, usual activities, pain/discomfort, and anxiety/depression. Generates a health utility index used in health economics analyses and payer negotiations.</p>
+    </div>
+    <div class="measure-card" style="margin-bottom:0">
+      <h4>Patient Satisfaction Survey</h4>
+      <div class="measure-meta" style="margin-bottom:4pt">
+        <span><strong>Items:</strong> 10-item Likert scale</span>
+        <span><strong>Timing:</strong> Baseline (expectations) and post-treatment</span>
+      </div>
+      <p>Custom clinic-developed instrument capturing treatment experience, provider communication, scheduling convenience, perceived benefit, and likelihood to recommend. Compares pre- and post-treatment expectations vs. experience.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 4: ASSESSMENT SCHEDULE
+============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <h2>Assessment Schedule</h2>
+    <div class="page-header-right">TMS Patient Outcome Tracking System</div>
+  </div>
+
+  <div class="intro-text">
+    The following schedule represents a clinically validated assessment timeline for standard TMS depression protocols. All measures should be administered at the scheduled timepoint regardless of interim clinical impressions — objective data collection must be consistent to be meaningful.
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Timepoint</th>
+          <th>PHQ-9</th>
+          <th>GAD-7</th>
+          <th>CGI-S</th>
+          <th>CGI-I</th>
+          <th>EQ-5D-5L</th>
+          <th>Satisfaction</th>
+          <th>Clinical Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-label">Baseline (Week 0)</td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td>Establish baseline; complete intake assessment; document authorization</td>
+        </tr>
+        <tr>
+          <td class="col-label">Week 2</td>
+          <td><span class="badge badge-amber">Optional</span></td>
+          <td><span class="badge badge-amber">Optional</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td>First efficacy checkpoint; clinician global impression only</td>
+        </tr>
+        <tr>
+          <td class="col-label">Week 4</td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td>Critical non-response checkpoint — evaluate protocol adjustment</td>
+        </tr>
+        <tr>
+          <td class="col-label">Week 6</td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td>Mid-course trajectory check; assess continued response</td>
+        </tr>
+        <tr>
+          <td class="col-label">Post-Tx (Wk 7–9)</td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td>End-of-treatment primary endpoint; complete all measures</td>
+        </tr>
+        <tr>
+          <td class="col-label">1-Month Follow-Up</td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-amber">Optional</span></td>
+          <td>Early durability check; schedule next follow-up at this visit</td>
+        </tr>
+        <tr>
+          <td class="col-label">3-Month Follow-Up</td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-amber">Optional</span></td>
+          <td>Medium-term outcome; identify relapse risk patients</td>
+        </tr>
+        <tr>
+          <td class="col-label">6-Month Follow-Up</td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-green">Required</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-rose">N/A</span></td>
+          <td><span class="badge badge-amber">Optional</span></td>
+          <td>Long-term durability endpoint; complete study follow-up period</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <p><strong>Note on scheduling flexibility:</strong> The post-treatment window of Week 7–9 accommodates scheduling variations. Record the actual assessment date in the tracking spreadsheet — do not shift other timepoints to compensate. The 1-, 3-, and 6-month follow-up windows are measured from the <em>last treatment session</em>, not the post-treatment assessment date.</p>
+  </div>
+
+  <div class="callout" style="border-left-color: var(--amber); background: rgba(217,119,6,0.06); border-color: rgba(217,119,6,0.25);">
+    <p><strong>Week 4 is the critical decision point.</strong> If a patient shows less than 25% PHQ-9 improvement at Week 4, initiate the Non-Response Protocol (see Section 08). Document the clinical decision and rationale in the patient record and Session Log.</p>
+  </div>
+
+  <div class="qr-section" style="margin-top: 14pt;">
+    <div class="qr-card">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" style="width:64px;height:64px;border-radius:6px;" alt="TMS Clinic Locator QR Code" />
+      <div class="qr-card-label">Find a TMS Clinic</div>
+      <div class="qr-card-url">tmslist.com/map</div>
+      <div class="qr-card-desc">Directory of TMS providers across the United States</div>
+    </div>
+    <div class="qr-card">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" style="width:64px;height:64px;border-radius:6px;" alt="TMS Assessment Quiz QR Code" />
+      <div class="qr-card-label">Patient Self-Assessment</div>
+      <div class="qr-card-url">tmslist.com/quiz</div>
+      <div class="qr-card-desc">Online PHQ-9 &amp; GAD-7 screener for prospective patients</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 5: PATIENT TRACKING SPREADSHEET LAYOUT
+============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <h2>Patient Tracking Spreadsheet Layout</h2>
+    <div class="page-header-right">TMS Patient Outcome Tracking System</div>
+  </div>
+
+  <p class="intro-text">
+    The following tab structure provides a complete data architecture for TMS outcome tracking. Implement in Excel, Google Sheets, or your EMR's spreadsheet module. All tabs should be linked by MRN to enable cross-tab reporting and the Aggregate Dashboard.
+  </p>
+
+  <!-- Tab Navigation -->
+  <div class="spreadsheet-tabs">
+    <div class="spreadsheet-tab active">1. Patient Roster</div>
+    <div class="spreadsheet-tab">2. Session Log</div>
+    <div class="spreadsheet-tab">3. Outcome Measures</div>
+    <div class="spreadsheet-tab">4. Follow-Up Tracker</div>
+    <div class="spreadsheet-tab">5. Aggregate Dashboard</div>
+  </div>
+
+  <h3>Tab 1 — Patient Roster</h3>
+  <div class="table-wrap">
+    <table class="tbl-striped">
+      <thead>
+        <tr>
+          <th>MRN</th>
+          <th>Name</th>
+          <th>DOB</th>
+          <th>Diagnosis</th>
+          <th>Insurance</th>
+          <th>Auth #</th>
+          <th>Auth Start</th>
+          <th>Auth End</th>
+          <th>Sessions Auth</th>
+          <th>Sessions Comp</th>
+          <th>Sessions Rem</th>
+          <th>Current PHQ-9</th>
+          <th>PHQ-9 Change</th>
+          <th>Clinical Status</th>
+          <th>Next Appt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>100421</td>
+          <td>Martinez, R.</td>
+          <td>03/14/1978</td>
+          <td>MDD, Recurrent, Mod</td>
+          <td>Blue Cross</td>
+          <td>BC-77432</td>
+          <td>01/06/2026</td>
+          <td>04/06/2026</td>
+          <td>36</td>
+          <td>24</td>
+          <td>12</td>
+          <td>8</td>
+          <td style="color:#059669;font-weight:700;">-11</td>
+          <td><span class="badge badge-green">Responder</span></td>
+          <td>01/27/2026</td>
+        </tr>
+        <tr>
+          <td>100422</td>
+          <td>Nguyen, T.</td>
+          <td>11/22/1985</td>
+          <td>MDD, Recurrent, Sev</td>
+          <td>United</td>
+          <td>UH-99124</td>
+          <td>01/13/2026</td>
+          <td>04/13/2026</td>
+          <td>36</td>
+          <td>24</td>
+          <td>12</td>
+          <td>14</td>
+          <td style="color:#d97706;font-weight:700;">-5</td>
+          <td><span class="badge badge-amber">Partial</span></td>
+          <td>01/27/2026</td>
+        </tr>
+        <tr>
+          <td>100423</td>
+          <td>Patel, A.</td>
+          <td>07/09/1962</td>
+          <td>MDD, Single Episode</td>
+          <td>Medicare</td>
+          <td>MC-55109</td>
+          <td>12/02/2025</td>
+          <td>03/02/2026</td>
+          <td>30</td>
+          <td>30</td>
+          <td>0</td>
+          <td>4</td>
+          <td style="color:#059669;font-weight:700;">-16</td>
+          <td><span class="badge badge-green">Remitted</span></td>
+          <td>F/U 02/03/2026</td>
+        </tr>
+        <tr>
+          <td>100424</td>
+          <td>Johnson, L.</td>
+          <td>02/28/1990</td>
+          <td>MDD, Recurrent, Mod</td>
+          <td>Aetna</td>
+          <td>AE-33881</td>
+          <td>12/16/2025</td>
+          <td>03/16/2026</td>
+          <td>30</td>
+          <td>18</td>
+          <td>12</td>
+          <td>16</td>
+          <td style="color:#e11d48;font-weight:700;">-3</td>
+          <td><span class="badge badge-rose">Non-Responder</span></td>
+          <td>01/28/2026</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-right-note" style="margin-top: 8pt; margin-bottom: 12pt;">
+    <h4>Roster Status Logic (computed columns)</h4>
+    <ul>
+      <li><strong>PHQ-9 Change</strong> = Baseline PHQ-9 minus Current PHQ-9 (positive = improvement)</li>
+      <li><strong>Clinical Status</strong> = Auto-populated from outcome definitions (Section 05)</li>
+      <li><strong>Sessions Remaining</strong> = Sessions Authorized minus Sessions Completed</li>
+      <li><strong>Auth End</strong> = Authorization expiration date — flag in red if &le; 14 days</li>
+    </ul>
+  </div>
+
+  <h3>Tab 2 — Session Log</h3>
+  <div class="table-wrap">
+    <table class="tbl-striped tbl-compact">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>MRN</th>
+          <th>Treatment Protocol</th>
+          <th>Coil Placement</th>
+          <th>Intensity (% MT)</th>
+          <th>Pulses</th>
+          <th>Duration (min)</th>
+          <th>Technician</th>
+          <th>Notes</th>
+          <th>Adverse Events</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01/06/2026</td>
+          <td>100421</td>
+          <td>High-Freq Left DLPFC</td>
+          <td>Left DLPFC (5.5cm)</td>
+          <td>120%</td>
+          <td>3,000</td>
+          <td>37</td>
+          <td>J. Rivera</td>
+          <td>Tolerated well</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>01/08/2026</td>
+          <td>100421</td>
+          <td>High-Freq Left DLPFC</td>
+          <td>Left DLPFC (5.5cm)</td>
+          <td>120%</td>
+          <td>3,000</td>
+          <td>37</td>
+          <td>J. Rivera</td>
+          <td>Mild headache post; resolved with OTC</td>
+          <td>Headache (Mild)</td>
+        </tr>
+        <tr>
+          <td>01/13/2026</td>
+          <td>100422</td>
+          <td>High-Freq Left DLPFC</td>
+          <td>Left DLPFC (5.5cm)</td>
+          <td>115%</td>
+          <td>3,000</td>
+          <td>37</td>
+          <td>K. Lee</td>
+          <td>Anxiety at start; settled after 5 min</td>
+          <td>Anxiety (Mild)</td>
+        </tr>
+        <tr>
+          <td>01/15/2026</td>
+          <td>100421</td>
+          <td>High-Freq Left DLPFC</td>
+          <td>Left DLPFC (5.5cm)</td>
+          <td>120%</td>
+          <td>3,000</td>
+          <td>37</td>
+          <td>J. Rivera</td>
+          <td>Good tolerance throughout</td>
+          <td>None</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 6: OUTCOME MEASURES TAB + FOLLOW-UP TRACKER
+============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <h2>Outcome Measures &amp; Follow-Up Tracker Tabs</h2>
+    <div class="page-header-right">TMS Patient Outcome Tracking System</div>
+  </div>
+
+  <!-- Tab 3: Outcome Measures -->
+  <h3>Tab 3 — Outcome Measures</h3>
+  <div class="table-wrap">
+    <table class="tbl-striped tbl-compact">
+      <thead>
+        <tr>
+          <th>MRN</th>
+          <th>Measure</th>
+          <th>Wk 0</th>
+          <th>Wk 2</th>
+          <th>Wk 4</th>
+          <th>Wk 6</th>
+          <th>Post-Tx</th>
+          <th>1mo F/U</th>
+          <th>3mo F/U</th>
+          <th>6mo F/U</th>
+          <th>Response</th>
+          <th>Remission</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>100421</td>
+          <td>PHQ-9</td>
+          <td style="font-weight:700;">19</td>
+          <td>—</td>
+          <td>11</td>
+          <td>9</td>
+          <td>8</td>
+          <td>6</td>
+          <td>5</td>
+          <td>—</td>
+          <td><span class="badge badge-green">Yes</span></td>
+          <td><span class="badge badge-purple">Pending</span></td>
+        </tr>
+        <tr>
+          <td>100421</td>
+          <td>GAD-7</td>
+          <td style="font-weight:700;">14</td>
+          <td>—</td>
+          <td>9</td>
+          <td>7</td>
+          <td>6</td>
+          <td>5</td>
+          <td>4</td>
+          <td>—</td>
+          <td colspan="2" style="background:transparent;border:none;"></td>
+        </tr>
+        <tr>
+          <td>100422</td>
+          <td>PHQ-9</td>
+          <td style="font-weight:700;">19</td>
+          <td>—</td>
+          <td>17</td>
+          <td>16</td>
+          <td>14</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-amber">Partial</span></td>
+          <td><span class="badge badge-rose">No</span></td>
+        </tr>
+        <tr>
+          <td>100422</td>
+          <td>GAD-7</td>
+          <td style="font-weight:700;">12</td>
+          <td>—</td>
+          <td>11</td>
+          <td>10</td>
+          <td>9</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td colspan="2" style="background:transparent;border:none;"></td>
+        </tr>
+        <tr>
+          <td>100423</td>
+          <td>PHQ-9</td>
+          <td style="font-weight:700;">20</td>
+          <td>—</td>
+          <td>10</td>
+          <td>6</td>
+          <td>4</td>
+          <td>3</td>
+          <td>2</td>
+          <td>—</td>
+          <td><span class="badge badge-green">Yes</span></td>
+          <td><span class="badge badge-green">Yes</span></td>
+        </tr>
+        <tr>
+          <td>100423</td>
+          <td>GAD-7</td>
+          <td style="font-weight:700;">13</td>
+          <td>—</td>
+          <td>7</td>
+          <td>4</td>
+          <td>3</td>
+          <td>2</td>
+          <td>2</td>
+          <td>—</td>
+          <td colspan="2" style="background:transparent;border:none;"></td>
+        </tr>
+        <tr>
+          <td>100424</td>
+          <td>PHQ-9</td>
+          <td style="font-weight:700;">19</td>
+          <td>—</td>
+          <td>17</td>
+          <td>18</td>
+          <td>16</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-rose">No</span></td>
+          <td><span class="badge badge-rose">No</span></td>
+        </tr>
+        <tr>
+          <td>100424</td>
+          <td>GAD-7</td>
+          <td style="font-weight:700;">11</td>
+          <td>—</td>
+          <td>10</td>
+          <td>11</td>
+          <td>10</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td colspan="2" style="background:transparent;border:none;"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <p><strong>Response and Remission status</strong> are computed at the Post-Treatment timepoint (Week 7–9). Enter the status once per patient (not per measure row). Response: &ge;50% PHQ-9 improvement from baseline. Remission: PHQ-9 &lt; 5 at post-treatment. See Section 05 for full definitions.</p>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- Tab 4: Follow-Up Tracker -->
+  <h3>Tab 4 — Follow-Up Tracker</h3>
+  <div class="table-wrap">
+    <table class="tbl-striped tbl-compact">
+      <thead>
+        <tr>
+          <th>MRN</th>
+          <th>Name</th>
+          <th>Last Contact</th>
+          <th>1mo Due</th>
+          <th>3mo Due</th>
+          <th>6mo Due</th>
+          <th>PHQ-9 Due</th>
+          <th>Contacted?</th>
+          <th>Appt Booked?</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>100421</td>
+          <td>Martinez, R.</td>
+          <td>01/20/2026</td>
+          <td>02/10/2026</td>
+          <td>04/10/2026</td>
+          <td>07/10/2026</td>
+          <td>02/10/2026</td>
+          <td><span class="badge badge-green">Yes</span></td>
+          <td><span class="badge badge-green">Yes</span></td>
+          <td>Confirmed; coming in 02/10</td>
+        </tr>
+        <tr>
+          <td>100422</td>
+          <td>Nguyen, T.</td>
+          <td>01/15/2026</td>
+          <td>02/12/2026</td>
+          <td>04/12/2026</td>
+          <td>07/12/2026</td>
+          <td>02/12/2026</td>
+          <td><span class="badge badge-amber">Pending</span></td>
+          <td><span class="badge badge-rose">No</span></td>
+          <td>Left VM 01/15; second call 01/22</td>
+        </tr>
+        <tr>
+          <td>100423</td>
+          <td>Patel, A.</td>
+          <td>01/18/2026</td>
+          <td>02/15/2026</td>
+          <td>04/15/2026</td>
+          <td>07/15/2026</td>
+          <td>02/15/2026</td>
+          <td><span class="badge badge-green">Yes</span></td>
+          <td><span class="badge badge-green">Yes</span></td>
+          <td>In remission; following standard schedule</td>
+        </tr>
+        <tr>
+          <td>100424</td>
+          <td>Johnson, L.</td>
+          <td>01/10/2026</td>
+          <td>02/07/2026</td>
+          <td>04/07/2026</td>
+          <td>07/07/2026</td>
+          <td>02/07/2026</td>
+          <td><span class="badge badge-rose">No — UTL</span></td>
+          <td><span class="badge badge-rose">No</span></td>
+          <td>Unable to locate; sent letter + portal msg</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-right-note" style="margin-top: 8pt; margin-bottom: 12pt;">
+    <h4>Follow-Up Status Codes</h4>
+    <ul>
+      <li><strong>Contacted?</strong> — Confirmed verbal or electronic contact with patient</li>
+      <li><strong>Appt Booked?</strong> — Follow-up appointment confirmed in scheduling system</li>
+      <li><strong>UTL (Unable to Locate)</strong> — 3+ contact attempts without success; initiate provider letter protocol</li>
+      <li><strong>PHQ-9 Due</strong> — Patient-reminded or mailed self-report form; enter score when returned</li>
+      <li><strong>Due dates</strong> — Calculated from last treatment session date; update automatically via formula</li>
+    </ul>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- Tab 5: Aggregate Dashboard -->
+  <h3>Tab 5 — Aggregate Dashboard (read-only summary)</h3>
+  <div class="col-3">
+    <div class="stat-box">
+      <div class="num">24</div>
+      <div class="label">Patients Treated (Q1 2026)</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">18</div>
+      <div class="label">Completed Full Course</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">67%</div>
+      <div class="label">Response Rate</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">44%</div>
+      <div class="label">Remission Rate</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">-10.3</div>
+      <div class="label">Avg PHQ-9 Change (responders)</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">2</div>
+      <div class="label">Reported Adverse Events</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 7: RESPONSE/REMISSION + ADVERSE EVENTS
+============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <h2>Response &amp; Remission Definitions</h2>
+    <div class="page-header-right">TMS Patient Outcome Tracking System</div>
+  </div>
+
+  <div class="intro-text">
+    Standardized outcome definitions enable meaningful comparison across patients, sites, and published literature. The following thresholds are consistent with FDA clinical trial endpoints and consensus guidelines from the Clinical TMS Society.
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Definition</th>
+          <th>PHQ-9 Criteria</th>
+          <th>CGI-I Criteria</th>
+          <th>Clinical Implication</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-label" style="background: rgba(225,29,72,0.08); color: var(--rose);">No Response</td>
+          <td>&lt; 25% PHQ-9 improvement from baseline</td>
+          <td>&lt; 25% decrease</td>
+          <td>CGI-I &ge; 4</td>
+          <td>Initiate Non-Response Protocol at Week 4. Consider protocol modification, switching to bilateral or right-sided DLPFC, or discontinuing TMS.</td>
+        </tr>
+        <tr>
+          <td class="col-label" style="background: rgba(217,119,6,0.08); color: var(--amber);">Partial Response</td>
+          <td>25 – 49% PHQ-9 improvement from baseline</td>
+          <td>25–49% decrease</td>
+          <td>CGI-I 3</td>
+          <td>Continue current protocol. Assess at Week 6. Consider augmentation (e.g., pharmacotherapy adjustment). Document decision rationale.</td>
+        </tr>
+        <tr>
+          <td class="col-label" style="background: rgba(8,145,178,0.08); color: var(--cyan-dark);">Response</td>
+          <td>&ge; 50% PHQ-9 improvement from baseline</td>
+          <td>&ge; 50% decrease</td>
+          <td>CGI-I &le; 2</td>
+          <td>Continue full course. Plan taper and follow-up schedule. Discuss maintenance TMS if clinically indicated.</td>
+        </tr>
+        <tr>
+          <td class="col-label" style="background: rgba(124,58,237,0.08); color: var(--purple);">Remission</td>
+          <td>PHQ-9 score &lt; 5 at post-treatment</td>
+          <td>Score &lt; 5</td>
+          <td>CGI-I &le; 2 (typical)</td>
+          <td>Optimal outcome. Establish relapse prevention plan. 6-month follow-up schedule. Consider maintenance TMS.</td>
+        </tr>
+        <tr>
+          <td class="col-label" style="background: rgba(5,150,105,0.08); color: var(--emerald);">Clinical Response</td>
+          <td>Both CGI-I &le; 2 AND &ge;50% PHQ-9 improvement (strictest standard)</td>
+          <td>&ge; 50% decrease</td>
+          <td>CGI-I &le; 2</td>
+          <td>Gold-standard endpoint for clinical trials and peer-to-peer payer reviews. Most defensible criterion for insurance authorization.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="section-divider" />
+
+  <h2>Adverse Event Tracking</h2>
+  <p class="intro-text">All adverse events — regardless of perceived severity — must be documented in the Session Log and the patient record. Serious adverse events (SAEs) require immediate physician notification and FDA MedWatch reporting within 15 days.</p>
+
+  <div class="ae-grid">
+    <div class="ae-card">
+      <h5>Seizure</h5>
+      <p>Involuntary convulsive activity during or within minutes of stimulation. Requires immediate protocol halt.</p>
+      <div class="severity-bar sev-severe"></div>
+      <p style="font-size:7pt;color:var(--slate-400);margin-top:3pt;">Always — <strong>SAE, reportable</strong></p>
+    </div>
+    <div class="ae-card">
+      <h5>Syncope</h5>
+      <p>Loss of consciousness, with or without hypotension. May accompany seizure or occur independently.</p>
+      <div class="severity-bar sev-severe"></div>
+      <p style="font-size:7pt;color:var(--slate-400);margin-top:3pt;">Usually — <strong>SAE, reportable</strong></p>
+    </div>
+    <div class="ae-card">
+      <h5>Headache</h5>
+      <p>Most common AE. Usually mild, transient, resolves with OTC analgesics. Escalation to moderate/severe requires intervention and documentation.</p>
+      <div class="severity-bar sev-mod"></div>
+      <p style="font-size:7pt;color:var(--slate-400);margin-top:3pt;">Mild–Moderate — intervention as needed</p>
+    </div>
+    <div class="ae-card">
+      <h5>Pain at Stimulation Site</h5>
+      <p>Scalp discomfort localized to coil position. Often relates to coil positioning, intensity above 110% MT, or pulse frequency.</p>
+      <div class="severity-bar sev-mod"></div>
+      <p style="font-size:7pt;color:var(--slate-400);margin-top:3pt;">Mild–Moderate — adjust parameters</p>
+    </div>
+    <div class="ae-card">
+      <h5>Anxiety / Nervousness</h5>
+      <p>Pre-session anticipatory anxiety; may also occur during stimulation. Usually self-limited. Persistent anxiety may indicate need for pretreatment anxiolytic.</p>
+      <div class="severity-bar sev-mild"></div>
+      <p style="font-size:7pt;color:var(--slate-400);margin-top:3pt;">Mild — reassess, monitor</p>
+    </div>
+    <div class="ae-card">
+      <h5>Hearing Change / Tinnitus</h5>
+      <p>Rare. Associated with acoustic artifact from coil discharge. Should not occur with proper earplug use (hearing protection mandatory).</p>
+      <div class="severity-bar sev-mod"></div>
+      <p style="font-size:7pt;color:var(--slate-400);margin-top:3pt;">Moderate — <strong>investigate hearing protection</strong></p>
+    </div>
+  </div>
+
+  <h3>Required Adverse Event Documentation Fields</h3>
+  <div class="table-wrap">
+    <table class="tbl-compact">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Description</th>
+          <th>Required For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-label">Date &amp; Time</td>
+          <td>Exact timestamp of event occurrence</td>
+          <td>All AEs</td>
+        </tr>
+        <tr>
+          <td class="col-label">Event Description</td>
+          <td>Narrative description of what occurred, duration, patient-reported symptoms</td>
+          <td>All AEs</td>
+        </tr>
+        <tr>
+          <td class="col-label">Treatment Provided</td>
+          <td>Immediate clinical response — observation, medication, transport, protocol modification</td>
+          <td>Moderate + Severe</td>
+        </tr>
+        <tr>
+          <td class="col-label">Outcome</td>
+          <td>Resolution status — resolved, ongoing, escalated to higher level of care</td>
+          <td>All AEs</td>
+        </tr>
+        <tr>
+          <td class="col-label">FDA Reported?</td>
+          <td>MedWatch submission confirmation number or "not applicable — not SAE"</td>
+          <td>Severe (SAE) only</td>
+        </tr>
+        <tr>
+          <td class="col-label">Physician Notified</td>
+          <td>Name of supervising physician and time of notification</td>
+          <td>Moderate + Severe</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 8: AGGREGATE REPORTING
+============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <h2>Aggregate Reporting Template</h2>
+    <div class="page-header-right">TMS Patient Outcome Tracking System</div>
+  </div>
+
+  <div class="intro-text">
+    Aggregate outcome reports serve dual purposes: internal quality monitoring and external stakeholder communication. Produce monthly reports for internal QI review and quarterly reports for referring physicians, payers, and regulatory bodies.
+  </div>
+
+  <div class="two-col-wide-left">
+    <div>
+      <div class="report-block">
+        <h4>Monthly Outcomes Summary — [Clinic Name] — [Month/Year]</h4>
+
+        <div class="metric-row">
+          <span class="metric-label">Total patients who began TMS treatment this month</span>
+          <span class="metric-value">____</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Patients who completed full authorized course</span>
+          <span class="metric-value">____</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Patients discontinued early (with reason)</span>
+          <span class="metric-value">____</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Response rate (% patients meeting Response criteria)</span>
+          <span class="metric-value">____ %</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Remission rate (% patients meeting Remission criteria)</span>
+          <span class="metric-value">____ %</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Average PHQ-9 change among responders (baseline → post-tx)</span>
+          <span class="metric-value">____ points</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Non-response rate (triggering Non-Response Protocol)</span>
+          <span class="metric-value">____ %</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Number of adverse events (by severity)</span>
+          <span class="metric-value">Mild: ___ Mod: ___ Severe: ___</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Adverse event rate (AEs per 100 sessions)</span>
+          <span class="metric-value">____</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Mean treatment sessions completed</span>
+          <span class="metric-value">____ / authorized</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">1-month follow-up completion rate</span>
+          <span class="metric-value">____ %</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">3-month follow-up completion rate</span>
+          <span class="metric-value">____ %</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">6-month follow-up completion rate</span>
+          <span class="metric-value">____ %</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="report-block">
+        <h4>Quarterly Report — Additional Sections</h4>
+
+        <div class="metric-row" style="flex-direction:column; gap:3pt;">
+          <span class="metric-label" style="font-weight:700;color:var(--teal-700);">Referral Source Breakdown</span>
+          <span class="metric-label">Psychiatry (internal) ____%</span>
+          <span class="metric-label">Psychiatry (external) ____%</span>
+          <span class="metric-label">Primary Care ____%</span>
+          <span class="metric-label">Patient / Self-Referral ____%</span>
+          <span class="metric-label">Other ____%</span>
+        </div>
+        <div class="metric-row" style="flex-direction:column; gap:3pt; margin-top:8pt;">
+          <span class="metric-label" style="font-weight:700;color:var(--teal-700);">Payer / Insurance Breakdown</span>
+          <span class="metric-label">Medicare ____%</span>
+          <span class="metric-label">Medicaid ____%</span>
+          <span class="metric-label">Commercial ____%</span>
+          <span class="metric-label">Self-Pay ____%</span>
+        </div>
+        <div class="metric-row" style="flex-direction:column; gap:3pt; margin-top:8pt;">
+          <span class="metric-label" style="font-weight:700;color:var(--teal-700);">Adverse Events Summary</span>
+          <span class="metric-label">Total AEs this quarter: ____</span>
+          <span class="metric-label">SAEs (MedWatch submitted): ____</span>
+          <span class="metric-label">AEs by category: ____</span>
+        </div>
+        <div class="metric-row" style="flex-direction:column; gap:3pt; margin-top:8pt;">
+          <span class="metric-label" style="font-weight:700;color:var(--teal-700);">Equipment Utilization</span>
+          <span class="metric-label">Total available session slots: ____</span>
+          <span class="metric-label">Slots utilized: ____ (____%)</span>
+          <span class="metric-label">Equipment downtime (hours): ____</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Using aggregate data for referring physicians:</strong> Summarize de-identified outcomes quarterly. A one-page referral report can include: total patients treated, response rate, remission rate, and average PHQ-9 improvement. This builds referrer confidence and drives referral volume. Ensure no individual patient can be identified from the shared data.</p>
+  </div>
+
+  <div class="callout" style="border-left-color: var(--amber); background: rgba(217,119,6,0.06); border-color: rgba(217,119,6,0.25);">
+    <p><strong>For payer reports:</strong> When submitting outcome data to insurance medical directors, include: authorization period, sessions completed, PHQ-9 at baseline and each assessment point, clinical response status, and CGI-I scores. Frame remission as "PHQ-9 below clinical threshold (&lt;5)" for clarity. Attach peer-reviewed literature citations supporting TMS efficacy if needed.</p>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 9: QI WORKFLOW
+============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <h2>Quality Improvement Workflow</h2>
+    <div class="page-header-right">TMS Patient Outcome Tracking System</div>
+  </div>
+
+  <div class="intro-text">
+    A structured QI workflow ensures consistent clinical standards, enables early identification of protocol deviations, and creates a documented framework for continuous improvement. All QI activities should be reviewed at monthly staff meetings and summarized in quarterly aggregate reports.
+  </div>
+
+  <h3>Monthly Chart Audit Checklist</h3>
+  <div class="card-grid" style="margin-bottom: 14pt; page-break-inside: avoid;">
+    <div class="card card-accent" style="grid-column:1/-1;">
+      <h4>Per-Chart Review Items (audit 10% of active charts monthly)</h4>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:4pt 20pt;">
+        <p>&#9633; Baseline PHQ-9, GAD-7, CGI-S, EQ-5D-5L all documented in chart</p>
+        <p>&#9633; Week 4 PHQ-9 and CGI-I completed and reviewed</p>
+        <p>&#9633; Non-response protocol initiated if &lt;25% PHQ-9 improvement at Week 4</p>
+        <p>&#9633; Adverse events logged in Session Log with severity classification</p>
+        <p>&#9633; Authorization number and expiration date in patient record</p>
+        <p>&#9633; Clinical status updated in Patient Roster tab</p>
+        <p>&#9633; Follow-up appointments scheduled before treatment course completion</p>
+        <p>&#9633; Informed consent for TMS updated within past 12 months</p>
+        <p>&#9633; Motor threshold documented and re-verified if &gt;10 days between sessions</p>
+        <p>&#9633; Treatment intensity (% MT) within authorized range</p>
+        <p>&#9633; Coil placement documented for each session</p>
+        <p>&#9633; Post-treatment assessment completed within Week 7-9 window</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <h3>Non-Response Protocol — Week 4 Decision Tree</h3>
+  <p style="font-size:9pt; color:var(--slate-600); margin-bottom: 10pt;">Initiate when Week 4 PHQ-9 shows &lt;25% improvement from baseline OR CGI-I &ge; 4.</p>
+
+  <div class="workflow-steps">
+    <div class="workflow-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Review Assessment Data Accuracy</h4>
+        <p>Confirm PHQ-9 was completed correctly, patient understood items, and score was entered accurately. Rule out measurement error before changing treatment.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>Review Treatment Delivery</h4>
+        <p>Audit Session Log: verify motor threshold accuracy, coil placement, pulse count, intensity (% MT), and duration. Check for missed sessions or prolonged gaps.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>Clinical Re-Evaluation</h4>
+        <p>Prescriber reviews diagnosis, comorbidities, current medications, and psychosocial factors. Consider whether patient is taking TMS-compatible medications (no contraindications). Document evaluation in chart note.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>Protocol Adjustment (choose one or combine)</h4>
+        <p>
+          <strong>A) Increase intensity:</strong> Raise to 125-130% MT if tolerated (max per device guidelines)<br />
+          <strong>B) Increase pulses per session:</strong> Increase to 4,000-6,000 pulses if duration allows<br />
+          <strong>C) Change target:</strong> Consider switching to right-sided DLPFC (for anxious patients) or bilateral stimulation<br />
+          <strong>D) Extend course:</strong> Request additional authorized sessions from payer with clinical justification
+        </p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>Reassess at Week 6</h4>
+        <p>Administer PHQ-9, GAD-7, and CGI-I at Week 6. Document trajectory. If still non-responsive, escalate to clinical director for case conference and consider discontinuation or referral for alternative treatment (ECT, ketamine, medication adjustment).</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <h3>Protocol Adjustment Reference</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Parameter</th>
+          <th>Standard Value</th>
+          <th>Adjustment Range</th>
+          <th>Clinical Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-label">Stimulation Intensity</td>
+          <td>100–120% Motor Threshold</td>
+          <td>Up to 130% MT (with justification)</td>
+          <td>Higher intensity increases cortical activation; most evidence-based adjustment for partial responders</td>
+        </tr>
+        <tr>
+          <td class="col-label">Pulses per Session</td>
+          <td>3,000 pulses (left DLPFC)</td>
+          <td>Up to 6,000 pulses (accelerated protocols)</td>
+          <td>Higher pulse count may increase efficacy; monitor for increased AEs (headache, pain)</td>
+        </tr>
+        <tr>
+          <td class="col-label">Treatment Frequency</td>
+          <td>5 sessions/week (standard)</td>
+          <td>5 sessions/week (do not reduce); consider accelerated 2x/day with 45+ min gap</td>
+          <td>Reducing below 5x/week reduces efficacy. Accelerated protocols are emerging evidence</td>
+        </tr>
+        <tr>
+          <td class="col-label">Coil Placement</td>
+          <td>Left DLPFC (5.5cm rule)</td>
+          <td>Switch to right DLPFC (for anxious patients) or bilateral</td>
+          <td>Right-sided DLPFC may better address anxiety; bilateral may improve efficacy in severe cases</td>
+        </tr>
+        <tr>
+          <td class="col-label">Pulse Width</td>
+          <td>Standard (4-6ms biphasic)</td>
+          <td>iTBS protocol (3-pulse bursts at 50Hz)</td>
+          <td>iTBS allows shorter session duration with comparable outcomes in some studies</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 10: GLOSSARY
+============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <h2>Glossary of Terms</h2>
+    <div class="page-header-right">TMS Patient Outcome Tracking System</div>
+  </div>
+
+  <div class="glossary-grid">
+    <div class="glossary-item">
+      <span class="glossary-term">CGI-I</span>
+      <span class="glossary-def"> — Clinical Global Impression – Improvement. A 7-point clinician-rated scale measuring change from baseline illness severity.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">CGI-S</span>
+      <span class="glossary-def"> — Clinical Global Impression – Severity. A 7-point clinician-rated scale measuring absolute illness severity at a single timepoint.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Clinical Significance</span>
+      <span class="glossary-def"> — A change large enough to have practical importance for the patient or clinician, beyond statistical significance alone.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">DLPFC</span>
+      <span class="glossary-def"> — Dorsolateral Prefrontal Cortex. The primary TMS target for major depression; located above and lateral to the orbit.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">DSM-5</span>
+      <span class="glossary-def"> — Diagnostic and Statistical Manual of Mental Disorders, 5th Edition. The standard diagnostic classification system used in the United States.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">EQ-5D-5L</span>
+      <span class="glossary-def"> — EuroQol 5-Dimension 5-Level questionnaire. A standardized quality-of-life instrument measuring mobility, self-care, activities, pain, and anxiety.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">GAD-7</span>
+      <span class="glossary-def"> — Generalized Anxiety Disorder 7-item scale. A validated self-report tool for screening and measuring severity of anxiety.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">iTBS</span>
+      <span class="glossary-def"> — Intermittent Theta Burst Stimulation. An accelerated TMS protocol using 3-pulse bursts at 50Hz, delivered in 2-second trains with 8-second intervals.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">MADRS</span>
+      <span class="glossary-def"> — Montgomery-Asberg Depression Rating Scale. A 10-item clinician-rated scale for assessing depression severity; more sensitive to change than PHQ-9.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">MDD</span>
+      <span class="glossary-def"> — Major Depressive Disorder. The primary diagnosis for most TMS-treated patients; defined by DSM-5 criteria.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Motor Threshold (MT)</span>
+      <span class="glossary-def"> — The minimum stimulus intensity required to produce a motor evoked potential (usually in the hand muscle). Used to calibrate TMS dosing.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">NIMH</span>
+      <span class="glossary-def"> — National Institute of Mental Health. The U.S. federal agency funding psychiatric research; its clinical trial methodology informs TMS outcome standards.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">PHQ-9</span>
+      <span class="glossary-def"> — Patient Health Questionnaire-9. A 9-item validated self-report instrument for screening, diagnosing, and monitoring depression severity.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Psychometric</span>
+      <span class="glossary-def"> — Relating to the measurement of psychological variables. Psychometric properties include reliability (consistency) and validity (accuracy).</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Remission</span>
+      <span class="glossary-def"> — The absence of clinically significant depressive symptoms; in this framework, defined as PHQ-9 &lt; 5 post-treatment.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Response</span>
+      <span class="glossary-def"> — Clinically meaningful improvement; in this framework, defined as &ge;50% decrease in PHQ-9 from baseline AND CGI-I &le; 2.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">ROC Curve</span>
+      <span class="glossary-def"> — Receiver Operating Characteristic curve. A plot of sensitivity against specificity used to evaluate the diagnostic accuracy of a measure at different thresholds.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">SAE</span>
+      <span class="glossary-def"> — Serious Adverse Event. Any adverse event that results in death, life-threatening injury, hospitalization, or persistent disability; requires FDA MedWatch reporting.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Sensitivity</span>
+      <span class="glossary-def"> — The ability of a test to correctly identify those with a condition (true positive rate). High sensitivity minimizes false negatives.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Specificity</span>
+      <span class="glossary-def"> — The ability of a test to correctly identify those without a condition (true negative rate). High specificity minimizes false positives.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Statistical Significance</span>
+      <span class="glossary-def"> — A result unlikely to have occurred by chance alone, conventionally at p &lt; 0.05. Does not necessarily imply clinical importance.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">TMS Protocol</span>
+      <span class="glossary-def"> — A defined set of TMS stimulation parameters (frequency, intensity, site, pulses, sessions) used to treat a specific condition.</span>
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <div class="qr-section">
+    <div class="qr-card">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" style="width:64px;height:64px;border-radius:6px;" alt="TMS Clinic Locator QR Code" />
+      <div class="qr-card-label">Find a TMS Clinic</div>
+      <div class="qr-card-url">tmslist.com/map</div>
+      <div class="qr-card-desc">Browse our national directory of TMS providers</div>
+    </div>
+    <div class="qr-card">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" style="width:64px;height:64px;border-radius:6px;" alt="TMS Assessment Quiz QR Code" />
+      <div class="qr-card-label">Patient Self-Assessment</div>
+      <div class="qr-card-url">tmslist.com/quiz</div>
+      <div class="qr-card-desc">Online PHQ-9 and GAD-7 screener for patients</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 11: TEAR-OUT CARD — CLINICAL OUTCOME TRACKING SCHEDULE
+============================================================ -->
+<div class="page" style="page-break-before: right;">
+  <div class="page-header">
+    <h2>Clinical Outcome Tracking Schedule — Tear-Out Reference Card</h2>
+    <div class="page-header-right">TMS Patient Outcome Tracking System</div>
+  </div>
+
+  <div class="intro-text" style="margin-bottom: 12pt;">
+    This page is formatted as a tear-out clinical reference card. Print on cardstock and post in the treatment room or include in patient intake packets.
+  </div>
+
+  <div class="tear-out-header">
+    <h2>Clinical Outcome Tracking Schedule</h2>
+    <p>TMS Treatment Timeline — Required Assessment Timepoints</p>
+  </div>
+
+  <!-- Timeline Bar -->
+  <div class="timeline-visual">
+    <div class="timeline-bar"></div>
+    <div class="timeline-labels">
+      <span>Wk 0</span>
+      <span>Wk 2</span>
+      <span>Wk 4</span>
+      <span>Wk 6</span>
+      <span>Wk 7–9</span>
+      <span>1mo</span>
+      <span>3mo</span>
+      <span>6mo</span>
+    </div>
+  </div>
+
+  <!-- Timeline Grid -->
+  <div class="timeline-row">
+    <div class="timeline-row-header">PHQ-9</div>
+    <div class="timeline-cell header-cell">Wk 0</div>
+    <div class="timeline-cell header-cell">Wk 2</div>
+    <div class="timeline-cell header-cell">Wk 4</div>
+    <div class="timeline-cell header-cell">Wk 6</div>
+    <div class="timeline-cell header-cell">Wk 7–9</div>
+    <div class="timeline-cell header-cell">1mo</div>
+    <div class="timeline-cell header-cell">3mo</div>
+    <div class="timeline-cell header-cell">6mo</div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-row-header"></div>
+    <div class="timeline-cell check">Baseline</div>
+    <div class="timeline-cell">—</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+  </div>
+
+  <div class="timeline-row" style="margin-top: 6pt;">
+    <div class="timeline-row-header">GAD-7</div>
+    <div class="timeline-cell header-cell">Wk 0</div>
+    <div class="timeline-cell header-cell">Wk 2</div>
+    <div class="timeline-cell header-cell">Wk 4</div>
+    <div class="timeline-cell header-cell">Wk 6</div>
+    <div class="timeline-cell header-cell">Wk 7–9</div>
+    <div class="timeline-cell header-cell">1mo</div>
+    <div class="timeline-cell header-cell">3mo</div>
+    <div class="timeline-cell header-cell">6mo</div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-row-header"></div>
+    <div class="timeline-cell check">Baseline</div>
+    <div class="timeline-cell">—</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+  </div>
+
+  <div class="timeline-row" style="margin-top: 6pt;">
+    <div class="timeline-row-header">CGI-S</div>
+    <div class="timeline-cell header-cell">Wk 0</div>
+    <div class="timeline-cell header-cell">Wk 2</div>
+    <div class="timeline-cell header-cell">Wk 4</div>
+    <div class="timeline-cell header-cell">Wk 6</div>
+    <div class="timeline-cell header-cell">Wk 7–9</div>
+    <div class="timeline-cell header-cell">1mo</div>
+    <div class="timeline-cell header-cell">3mo</div>
+    <div class="timeline-cell header-cell">6mo</div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-row-header"></div>
+    <div class="timeline-cell check">Baseline</div>
+    <div class="timeline-cell">N/A</div>
+    <div class="timeline-cell">N/A</div>
+    <div class="timeline-cell">N/A</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+  </div>
+
+  <div class="timeline-row" style="margin-top: 6pt;">
+    <div class="timeline-row-header">CGI-I</div>
+    <div class="timeline-cell header-cell">Wk 0</div>
+    <div class="timeline-cell header-cell">Wk 2</div>
+    <div class="timeline-cell header-cell">Wk 4</div>
+    <div class="timeline-cell header-cell">Wk 6</div>
+    <div class="timeline-cell header-cell">Wk 7–9</div>
+    <div class="timeline-cell header-cell">1mo</div>
+    <div class="timeline-cell header-cell">3mo</div>
+    <div class="timeline-cell header-cell">6mo</div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-row-header"></div>
+    <div class="timeline-cell">N/A</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell">N/A</div>
+    <div class="timeline-cell">N/A</div>
+    <div class="timeline-cell">N/A</div>
+  </div>
+
+  <div class="timeline-row" style="margin-top: 6pt;">
+    <div class="timeline-row-header">EQ-5D-5L</div>
+    <div class="timeline-cell header-cell">Wk 0</div>
+    <div class="timeline-cell header-cell">Wk 2</div>
+    <div class="timeline-cell header-cell">Wk 4</div>
+    <div class="timeline-cell header-cell">Wk 6</div>
+    <div class="timeline-cell header-cell">Wk 7–9</div>
+    <div class="timeline-cell header-cell">1mo</div>
+    <div class="timeline-cell header-cell">3mo</div>
+    <div class="timeline-cell header-cell">6mo</div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-row-header"></div>
+    <div class="timeline-cell check">Baseline</div>
+    <div class="timeline-cell">—</div>
+    <div class="timeline-cell">—</div>
+    <div class="timeline-cell">—</div>
+    <div class="timeline-cell check">Required</div>
+    <div class="timeline-cell">—</div>
+    <div class="timeline-cell">—</div>
+    <div class="timeline-cell">—</div>
+  </div>
+
+  <div class="timeline-row" style="margin-top: 6pt;">
+    <div class="timeline-row-header">Satisfaction</div>
+    <div class="timeline-cell header-cell">Wk 0</div>
+    <div class="timeline-cell header-cell">Wk 2</div>
+    <div class="timeline-cell header-cell">Wk 4</div>
+    <div class="timeline-cell header-cell">Wk 6</div>
+    <div class="timeline-cell header-cell">Wk 7–9</div>
+    <div class="timeline-cell header-cell">1mo</div>
+    <div class="timeline-cell header-cell">3mo</div>
+    <div class="timeline-cell header-cell">6mo</div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-row-header"></div>
+    <div class="timeline-cell check">Expectations</div>
+    <div class="timeline-cell">—</div>
+    <div class="timeline-cell">—</div>
+    <div class="timeline-cell">—</div>
+    <div class="timeline-cell check">Experience</div>
+    <div class="timeline-cell">Optional</div>
+    <div class="timeline-cell">Optional</div>
+    <div class="timeline-cell">Optional</div>
+  </div>
+
+  <!-- Legend -->
+  <div style="display: flex; gap: 14pt; margin-top: 14pt; align-items: center; page-break-inside: avoid; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center; gap: 5pt;">
+      <div style="width:12px;height:12px;background:rgba(8,145,178,0.15);border:1px solid rgba(8,145,178,0.35);border-radius:2px;"></div>
+      <span style="font-size:8pt;color:var(--slate-600);">Check = Administer this measure</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 5pt;">
+      <div style="width:12px;height:12px;background:var(--slate-100);border:1px solid var(--slate-200);border-radius:2px;"></div>
+      <span style="font-size:8pt;color:var(--slate-600);">Blank = Not scheduled</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 5pt;">
+      <div style="width:12px;height:12px;background:transparent;border:1px solid var(--slate-300);border-radius:2px;"></div>
+      <span style="font-size:8pt;color:var(--slate-600);">N/A = Not applicable at this timepoint</span>
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- Key Thresholds Box -->
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10pt; page-break-inside: avoid;">
+    <div class="card card-accent">
+      <h4>Response Thresholds at a Glance</h4>
+      <ul style="margin:0;padding-left:14pt;">
+        <li style="font-size:8.5pt;"><strong>PHQ-9 clinical improvement:</strong> &ge;5 point decrease</li>
+        <li style="font-size:8.5pt;"><strong>Response:</strong> &ge;50% PHQ-9 decrease + CGI-I &le;2</li>
+        <li style="font-size:8.5pt;"><strong>Remission:</strong> PHQ-9 &lt;5 at post-treatment</li>
+        <li style="font-size:8.5pt;"><strong>Non-response:</strong> &lt;25% PHQ-9 improvement at Week 4</li>
+        <li style="font-size:8.5pt;"><strong>GAD-7 clinical improvement:</strong> &ge;4 point decrease</li>
+      </ul>
+    </div>
+    <div class="card card-accent">
+      <h4>Critical Decision Points</h4>
+      <ul style="margin:0;padding-left:14pt;">
+        <li style="font-size:8.5pt;"><strong>Week 2:</strong> First efficacy check — CGI-I only</li>
+        <li style="font-size:8.5pt;"><strong>Week 4:</strong> Non-response checkpoint — initiate QI protocol if &lt;25% PHQ-9 improvement</li>
+        <li style="font-size:8.5pt;"><strong>Week 6:</strong> Post-adjustment reassessment</li>
+        <li style="font-size:8.5pt;"><strong>Post-Tx (Wk 7–9):</strong> Primary efficacy endpoint — all measures</li>
+        <li style="font-size:8.5pt;"><strong>At discharge:</strong> Schedule all 3 follow-up appointments before patient leaves</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qr-section" style="margin-top: 14pt; page-break-inside: avoid;">
+    <div class="qr-card">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" style="width:56px;height:56px;border-radius:6px;" alt="TMS Clinic Locator QR Code" />
+      <div class="qr-card-label">TMS Clinic Locator</div>
+      <div class="qr-card-url">tmslist.com/map</div>
+    </div>
+    <div class="qr-card">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" style="width:56px;height:56px;border-radius:6px;" alt="TMS Assessment Quiz QR Code" />
+      <div class="qr-card-label">Patient Self-Assessment</div>
+      <div class="qr-card-url">tmslist.com/quiz</div>
+    </div>
+  </div>
+
+  <p style="font-size:7.5pt;color:var(--slate-400);text-align:center;margin-top:10pt;margin-bottom:0;">
+    TMS List &mdash; tmslist.com &mdash; The national directory for TMS providers and patient resources<br />
+    This reference card is intended for clinical use. Always apply clinical judgment to individual patient care decisions.
+  </p>
+</div>
+
+</body>
+</html>

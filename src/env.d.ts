@@ -5,3 +5,7 @@ declare namespace App {
         geoCountry: string;
     }
 }
+
+interface Window {
+    posthog?: import('posthog-js').PostHog;
+}

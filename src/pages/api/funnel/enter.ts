@@ -4,6 +4,7 @@ import { leads } from '../../../db/schema';
 import { checkRateLimit } from '../../../utils/rateLimit';
 import { sendFunnelEmail, DRIP_SEQUENCES, type FunnelSegment, type FunnelContact } from '../../../utils/nurtureFunnel';
 import { z } from 'zod';
+import { getPostHogServer } from '../../../lib/posthog-server';
 
 export const prerender = false;
 
@@ -89,6 +90,20 @@ export const POST: APIRoute = async ({ request }) => {
     if (firstStep && firstStep.delayDays === 0) {
       sendFunnelEmail(contact, firstStep).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
     }
+
+    const sessionId = request.headers.get('X-PostHog-Session-Id');
+    getPostHogServer().capture({
+      distinctId: email,
+      event: 'funnel_entered',
+      properties: {
+        $session_id: sessionId || undefined,
+        segment,
+        source: meta.source || 'website',
+        condition: meta.condition,
+        state: meta.state,
+        city: meta.city,
+      },
+    });
 
     return new Response(JSON.stringify({
       success: true,

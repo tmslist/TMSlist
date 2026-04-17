@@ -102,6 +102,7 @@ export default function SearchBox() {
         const { data } = await res.json();
         setResults(data);
         setActiveIndex(-1);
+        window.posthog?.capture('clinic_searched', { query: q, result_count: data.length });
       }
     } catch (err) {
       if ((err as Error).name !== 'AbortError') {
@@ -167,6 +168,7 @@ export default function SearchBox() {
         e.preventDefault();
         const item = allItems[activeIndex];
         saveRecentSearch(item.label, item.url);
+        window.posthog?.capture('search_result_clicked', { label: item.label, url: item.url, result_type: item.type, query });
         window.location.href = item.url;
       }
     } else if (e.key === 'Escape') {
@@ -175,8 +177,9 @@ export default function SearchBox() {
     }
   }
 
-  function navigateTo(label: string, url: string) {
+  function navigateTo(label: string, url: string, type?: string) {
     saveRecentSearch(label, url);
+    window.posthog?.capture('search_result_clicked', { label, url, result_type: type || 'unknown', query });
     window.location.href = url;
   }
 
@@ -260,7 +263,7 @@ export default function SearchBox() {
                         id={`search-item-${idx}`}
                         role="option"
                         aria-selected={idx === activeIndex}
-                        onClick={() => navigateTo(r.query, r.url)}
+                        onClick={() => navigateTo(r.query, r.url, 'recent')}
                         className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
                           idx === activeIndex ? 'bg-violet-50' : 'hover:bg-gray-50'
                         }`}
@@ -287,7 +290,7 @@ export default function SearchBox() {
                       id={`search-item-${idx}`}
                       role="option"
                       aria-selected={idx === activeIndex}
-                      onClick={() => navigateTo(c.label, c.value)}
+                      onClick={() => navigateTo(c.label, c.value, 'condition')}
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
                         idx === activeIndex ? 'bg-violet-50' : 'hover:bg-gray-50'
                       }`}
@@ -324,7 +327,7 @@ export default function SearchBox() {
                         id={`search-item-${idx}`}
                         role="option"
                         aria-selected={idx === activeIndex}
-                        onClick={() => navigateTo(c.label, c.value)}
+                        onClick={() => navigateTo(c.label, c.value, 'condition')}
                         className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
                           idx === activeIndex ? 'bg-violet-50' : 'hover:bg-gray-50'
                         }`}
@@ -354,7 +357,7 @@ export default function SearchBox() {
                         id={`search-item-${idx}`}
                         role="option"
                         aria-selected={idx === activeIndex}
-                        onClick={() => navigateTo(clinic.name, `/clinic/${clinic.slug}`)}
+                        onClick={() => navigateTo(clinic.name, `/clinic/${clinic.slug}`, 'clinic')}
                         className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
                           idx === activeIndex ? 'bg-violet-50' : 'hover:bg-gray-50'
                         }`}

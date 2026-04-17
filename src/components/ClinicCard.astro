@@ -168,7 +168,7 @@ if (isAcceptingNew && !isAvailableThisWeek && waitTime) {
                         stroke-width="2"
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
                 >
-                {clinic.city}, {clinic.state}{clinic.country && clinic.country !== 'US' ? <span role="img" aria-label={clinic.country}>{` ${COUNTRY_FLAGS[clinic.country] || ''}`}</span> : ''}
+                {clinic.city}, {clinic.state}{clinic.country && clinic.country !== 'US' ? <span role="img" aria-label={clinic.country} set:html={COUNTRY_FLAGS[clinic.country] || ''} /> : ''}
             </p>
         </div>
     </div>

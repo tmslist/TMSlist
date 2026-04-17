@@ -1,6 +1,6 @@
 import { defineMiddleware } from 'astro:middleware';
 
-const SUPPORTED_COUNTRIES = ['US', 'GB', 'CA', 'AU', 'DE', 'IN'];
+const SUPPORTED_COUNTRIES = ['US', 'GB', 'CA', 'AU', 'DE', 'IN', 'FR', 'JP', 'KR', 'BR', 'ES', 'IT', 'NL', 'SG', 'AE', 'NZ', 'ZA', 'SE', 'IE', 'IL', 'MX'];
 
 export const onRequest = defineMiddleware(async (context, next) => {
     const response = await next();

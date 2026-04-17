@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { db } from '../../../db';
 import { leads } from '../../../db/schema';
+import { getPostHogServer } from '../../../lib/posthog-server';
 
 export const prerender = false;
 
@@ -30,6 +31,19 @@ export const POST: APIRoute = async ({ request }) => {
         },
       })
       .returning({ id: leads.id });
+
+    const sessionId = request.headers.get('X-PostHog-Session-Id');
+    getPostHogServer().capture({
+      distinctId: referralCode,
+      event: 'referral_tracked',
+      properties: {
+        $session_id: sessionId || undefined,
+        clinic_id: clinicId,
+        referral_code: referralCode,
+        source: source || 'direct',
+        tracking_id: lead.id,
+      },
+    });
 
     return new Response(
       JSON.stringify({ success: true, trackingId: lead.id }),

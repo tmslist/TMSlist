@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMS Patient Acquisition Playbook — TMS List</title>
+<style>
+/* =========================================================
+   TMS Patient Acquisition Playbook — Print-Ready Styles
+   Letter: 8.5 x 11 in | 7.2 in content width | 0.6 in margins
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue-900: #1e3a5f;
+  --blue-800: #1d4ed8;
+  --blue-700: #1e40af;
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-400: #60a5fa;
+  --blue-100: #dbeafe;
+  --blue-50:  #eff6ff;
+  --gray-900: #111827;
+  --gray-700: #374151;
+  --gray-600: #4b5563;
+  --gray-500: #6b7280;
+  --gray-400: #9ca3af;
+  --gray-300: #d1d5db;
+  --gray-200: #e5e7eb;
+  --gray-100: #f3f4f6;
+  --gray-50:  #f9fafb;
+  --white:    #ffffff;
+  --accent:   #2563eb;
+}
+
+body {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 10pt;
+  line-height: 1.6;
+  color: var(--gray-800);
+  background: var(--white);
+}
+
+/* ---- Print page setup ---- */
+@page {
+  size: letter;
+  margin: 0.6in;
+}
+
+@page :first {
+  margin: 0;
+}
+
+/* ---- Footers ---- */
+@page {
+  @bottom-left {
+    content: "TMS List — tms-patient-acquisition-playbook.html";
+    font-size: 7.5pt;
+    color: #94a3b8;
+  }
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+    font-size: 7.5pt;
+    color: #64748b;
+  }
+}
+
+/* ---- Typography ---- */
+h1, h2, h3, h4, h5 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--gray-900);
+}
+
+h1 { font-size: 26pt; }
+h2 { font-size: 15pt; margin: 18pt 0 8pt; color: var(--blue-700); border-bottom: 2px solid var(--blue-600); padding-bottom: 4pt; }
+h3 { font-size: 11.5pt; margin: 12pt 0 5pt; color: var(--blue-600); }
+h4 { font-size: 10pt; margin: 8pt 0 4pt; color: var(--gray-700); text-transform: uppercase; letter-spacing: 0.05em; }
+
+p { margin: 0 0 8pt; }
+ul, ol { margin: 0 0 8pt 18pt; }
+li { margin-bottom: 3pt; }
+
+strong { font-weight: 700; color: var(--gray-900); }
+em { font-style: italic; }
+
+/* ---- Cover Page ---- */
+.cover {
+  width: 8.5in;
+  height: 11in;
+  background: linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 55%, #2563eb 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1.2in 0.9in;
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: 60px;
+  left: -60px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(37,99,235,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.cover-badge {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--blue-400);
+  margin-bottom: 16pt;
+  background: rgba(255,255,255,0.1);
+  padding: 4pt 10pt;
+  border-radius: 3pt;
+  border-left: 3pt solid var(--blue-400);
+}
+
+.cover h1 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 32pt;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 14pt;
+  max-width: 6.2in;
+}
+
+.cover .subtitle {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 12.5pt;
+  color: rgba(255,255,255,0.82);
+  margin-bottom: 28pt;
+  max-width: 5.8in;
+  line-height: 1.5;
+}
+
+.cover .cover-meta {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8.5pt;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.cover .cover-line {
+  width: 60px;
+  height: 3px;
+  background: var(--blue-400);
+  margin-bottom: 20pt;
+  border-radius: 2px;
+}
+
+.cover .cover-logo {
+  position: absolute;
+  bottom: 36px;
+  right: 40px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.06em;
+}
+
+.cover .cover-logo span {
+  color: var(--blue-400);
+}
+
+/* ---- Page Sections ---- */
+.page-section {
+  padding: 0;
+}
+
+.section-divider {
+  border: 0;
+  border-top: 1px solid var(--gray-200);
+  margin: 16pt 0;
+}
+
+/* ---- Table of Contents ---- */
+.toc-page {
+  padding: 0.6in 0;
+  page-break-after: always;
+}
+
+.toc-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 20pt;
+  font-weight: 700;
+  color: var(--blue-700);
+  margin-bottom: 18pt;
+  border-bottom: 2px solid var(--blue-600);
+  padding-bottom: 6pt;
+}
+
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  padding: 5pt 0;
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 9.5pt;
+}
+
+.toc-entry .toc-num {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: var(--blue-600);
+  min-width: 24pt;
+  font-size: 9pt;
+}
+
+.toc-entry .toc-name {
+  flex: 1;
+  color: var(--gray-800);
+  font-size: 9.5pt;
+}
+
+.toc-entry .toc-dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--gray-300);
+  margin: 0 6pt 2pt;
+  min-width: 20pt;
+}
+
+.toc-entry .toc-page-num {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8.5pt;
+  color: var(--gray-500);
+  min-width: 20pt;
+  text-align: right;
+}
+
+/* ---- Tables ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8pt 0 14pt;
+  font-size: 9pt;
+  page-break-inside: avoid;
+}
+
+thead tr {
+  background: var(--blue-700);
+  color: #ffffff;
+}
+
+thead th {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6pt 8pt;
+  text-align: left;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+tbody tr:nth-child(even) { background: var(--blue-50); }
+tbody tr:nth-child(odd)  { background: var(--white); }
+tbody tr:hover { background: var(--blue-100); }
+
+td {
+  padding: 5pt 8pt;
+  border: 1px solid var(--gray-200);
+  vertical-align: top;
+  color: var(--gray-700);
+}
+
+td strong { color: var(--gray-900); }
+
+/* ---- Callout Boxes ---- */
+.callout {
+  border-left: 4px solid var(--blue-600);
+  background: var(--blue-50);
+  padding: 10pt 12pt;
+  margin: 10pt 0 14pt;
+  border-radius: 0 4pt 4pt 0;
+  page-break-inside: avoid;
+}
+
+.callout.yellow {
+  border-left-color: #d97706;
+  background: #fffbeb;
+}
+
+.callout.green {
+  border-left-color: #059669;
+  background: #ecfdf5;
+}
+
+.callout-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 9pt;
+  font-weight: 700;
+  color: var(--blue-700);
+  margin-bottom: 4pt;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.callout p { margin: 0; font-size: 9pt; }
+
+/* ---- Ad Template Boxes ---- */
+.ad-box {
+  border: 1px solid var(--gray-200);
+  border-radius: 4pt;
+  margin: 10pt 0 14pt;
+  page-break-inside: avoid;
+  overflow: hidden;
+}
+
+.ad-box-header {
+  background: var(--gray-700);
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8.5pt;
+  font-weight: 700;
+  padding: 5pt 10pt;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ad-box-body {
+  padding: 10pt;
+  background: var(--white);
+  font-size: 9pt;
+}
+
+.ad-label {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--blue-600);
+  margin-bottom: 2pt;
+}
+
+.ad-text {
+  font-size: 9pt;
+  color: var(--gray-700);
+  margin-bottom: 6pt;
+}
+
+/* ---- Letter Template ---- */
+.letter-template {
+  border: 1px solid var(--gray-200);
+  padding: 16pt 18pt;
+  margin: 10pt 0 14pt;
+  background: #fff;
+  page-break-inside: avoid;
+  font-size: 9pt;
+  line-height: 1.7;
+  color: var(--gray-700);
+  border-radius: 3pt;
+}
+
+.letter-template p { margin-bottom: 6pt; }
+
+/* ---- Calendar Table ---- */
+.calendar-table th:nth-child(n+2) {
+  text-align: center;
+}
+
+.calendar-table td { vertical-align: top; }
+.calendar-table td:nth-child(1) {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: var(--blue-700);
+  font-size: 8.5pt;
+  width: 14%;
+  background: var(--blue-50) !important;
+}
+
+/* ---- Checklist ---- */
+.checklist {
+  list-style: none;
+  margin: 0 0 14pt;
+  page-break-inside: avoid;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 7pt;
+  padding: 3pt 0;
+  font-size: 9pt;
+  color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.checklist li::before {
+  content: '\2610';
+  font-size: 12pt;
+  color: var(--blue-600);
+  min-width: 14pt;
+  margin-top: 1pt;
+}
+
+/* ---- Testimonials ---- */
+.testimonial {
+  border-left: 4px solid var(--blue-600);
+  padding: 10pt 14pt;
+  margin: 12pt 0;
+  background: var(--blue-50);
+  border-radius: 0 6pt 6pt 0;
+  page-break-inside: avoid;
+  font-style: italic;
+  font-size: 9.5pt;
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+
+.testimonial-author {
+  margin-top: 7pt;
+  font-style: normal;
+  font-size: 8.5pt;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: var(--blue-700);
+}
+
+.testimonial-detail {
+  font-style: normal;
+  font-size: 8pt;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  color: var(--gray-500);
+  margin-top: 1pt;
+}
+
+/* ---- Tear-Out Card ---- */
+.tearout-card {
+  border: 2px solid var(--blue-600);
+  border-radius: 8pt;
+  padding: 16pt;
+  margin: 18pt 0;
+  background: var(--white);
+  page-break-inside: avoid;
+  position: relative;
+}
+
+.tearout-header {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--blue-600);
+  text-align: center;
+  margin-bottom: 10pt;
+  border-bottom: 1px solid var(--blue-300);
+  padding-bottom: 6pt;
+}
+
+.tearout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8pt;
+}
+
+.tearout-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6pt;
+  padding: 5pt 6pt;
+  background: var(--blue-50);
+  border-radius: 4pt;
+  border: 1px solid var(--blue-100);
+  font-size: 8.5pt;
+}
+
+.tearout-check {
+  width: 14pt;
+  height: 14pt;
+  background: var(--blue-600);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7pt;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1pt;
+}
+
+.tearout-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5pt;
+  padding: 8pt;
+  background: var(--blue-50);
+  border-radius: 4pt;
+  border: 1px solid var(--blue-100);
+}
+
+.tearout-qr img {
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+}
+
+.tearout-qr-label {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7pt;
+  color: var(--blue-600);
+  text-align: center;
+  font-weight: 700;
+}
+
+/* ---- Glossary ---- */
+.glossary-term {
+  display: flex;
+  gap: 6pt;
+  padding: 4pt 0;
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 9pt;
+  page-break-inside: avoid;
+}
+
+.glossary-abbr {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: var(--blue-700);
+  min-width: 110pt;
+  font-size: 8.5pt;
+  padding-top: 1pt;
+}
+
+.glossary-def {
+  color: var(--gray-700);
+  flex: 1;
+  font-size: 9pt;
+  line-height: 1.5;
+}
+
+/* ---- QR Section ---- */
+.qr-section {
+  background: linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 100%);
+  border-radius: 8pt;
+  padding: 20pt;
+  margin: 18pt 0 6pt;
+  text-align: center;
+  page-break-inside: avoid;
+}
+
+.qr-section-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 13pt;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6pt;
+}
+
+.qr-section-sub {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 9pt;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 14pt;
+}
+
+.qr-pair {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 24pt;
+  flex-wrap: wrap;
+}
+
+.qr-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6pt;
+}
+
+.qr-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.qr-url {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+}
+
+.qr-desc {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 8pt;
+  color: rgba(255,255,255,0.6);
+  font-style: italic;
+}
+
+/* ---- Two-Column Layout ---- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16pt;
+  margin: 8pt 0 14pt;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10pt;
+  margin: 8pt 0 14pt;
+}
+
+/* ---- Section Page Break ---- */
+.page-break-before {
+  page-break-before: always;
+}
+
+/* ---- Keyword pills ---- */
+.keyword-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4pt;
+  margin: 6pt 0 10pt;
+}
+
+.kw-pill {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  font-weight: 600;
+  padding: 2pt 7pt;
+  border-radius: 20px;
+  background: var(--blue-100);
+  color: var(--blue-700);
+  border: 1px solid var(--blue-300);
+}
+
+/* ---- Print helpers ---- */
+.print-block { page-break-inside: avoid; }
+.print-full  { page-break-before: always; }
+
+/* ---- Column Header for multi-col ---- */
+.section-intro {
+  font-size: 9.5pt;
+  color: var(--gray-600);
+  margin-bottom: 12pt;
+  line-height: 1.6;
+}
+
+/* ---- ROI Table ---- */
+.roi-table td:nth-child(1) { font-weight: 700; color: var(--gray-900); }
+.roi-table td:nth-child(n+2) { text-align: right; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+
+/* ---- Footer stripe ---- */
+.footer-stripe {
+  background: var(--gray-50);
+  border-top: 2px solid var(--blue-600);
+  padding: 8pt 0 4pt;
+  margin-top: 18pt;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  color: var(--gray-500);
+  text-align: center;
+}
+
+/* ---- Step flow ---- */
+.steps {
+  counter-reset: step-counter;
+  margin: 8pt 0 14pt;
+  display: flex;
+  flex-direction: column;
+  gap: 8pt;
+}
+
+.step-item {
+  display: flex;
+  gap: 10pt;
+  align-items: flex-start;
+  page-break-inside: avoid;
+  padding: 6pt 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.step-num {
+  counter-increment: step-counter;
+  width: 22pt;
+  height: 22pt;
+  background: var(--blue-600);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 9pt;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-num::before { content: counter(step-counter); }
+
+.step-content { flex: 1; }
+.step-content h4 {
+  font-size: 9.5pt;
+  color: var(--gray-900);
+  margin: 0 0 2pt;
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+.step-content p { font-size: 9pt; color: var(--gray-600); margin: 0; }
+
+</style>
+</head>
+<body>
+
+<!-- ===================================================
+     COVER PAGE
+     =================================================== -->
+<div class="cover">
+  <div class="cover-badge">Free Lead Magnet &mdash; TMS List</div>
+  <h1>The TMS Patient Acquisition Playbook</h1>
+  <p class="subtitle">A proven, multi-channel framework for attracting, converting, and retaining TMS patients in a competitive mental health market.</p>
+  <div class="cover-line"></div>
+  <p class="cover-meta">By TMS List &bull; tmslist.com &bull; 2026 Edition</p>
+  <div class="cover-logo">TMS<span>List</span></div>
+</div>
+
+<!-- ===================================================
+     TABLE OF CONTENTS
+     =================================================== -->
+<div class="toc-page">
+  <div class="toc-title">Table of Contents</div>
+
+  <div class="toc-entry">
+    <span class="toc-num">1</span>
+    <span class="toc-name">The 5-Channel Patient Acquisition Framework</span>
+    <span class="toc-dots"></span>
+    <span class="toc-page-num">3</span>
+  </div>
+  <div class="toc-entry">
+    <span class="toc-num">2</span>
+    <span class="toc-name">Google Ads Campaign Setup</span>
+    <span class="toc-dots"></span>
+    <span class="toc-page-num">4</span>
+  </div>
+  <div class="toc-entry">
+    <span class="toc-num">3</span>
+    <span class="toc-name">Physician Referral Network Blueprint</span>
+    <span class="toc-dots"></span>
+    <span class="toc-page-num">6</span>
+  </div>
+  <div class="toc-entry">
+    <span class="toc-num">4</span>
+    <span class="toc-name">30-Day Social Media Content Calendar</span>
+    <span class="toc-dots"></span>
+    <span class="toc-page-num">8</span>
+  </div>
+  <div class="toc-entry">
+    <span class="toc-num">5</span>
+    <span class="toc-name">Patient Testimonial Collection &amp; Deployment</span>
+    <span class="toc-dots"></span>
+    <span class="toc-page-num">10</span>
+  </div>
+  <div class="toc-entry">
+    <span class="toc-num">6</span>
+    <span class="toc-name">ROI Tracking Spreadsheet Layout</span>
+    <span class="toc-dots"></span>
+    <span class="toc-page-num">12</span>
+  </div>
+  <div class="toc-entry">
+    <span class="toc-num">7</span>
+    <span class="toc-name">Glossary of Key Terms</span>
+    <span class="toc-dots"></span>
+    <span class="toc-page-num">14</span>
+  </div>
+  <div class="toc-entry">
+    <span class="toc-num">8</span>
+    <span class="toc-name">QR Resource Center</span>
+    <span class="toc-dots"></span>
+    <span class="toc-page-num">16</span>
+  </div>
+</div>
+
+<!-- ===================================================
+     SECTION 1 — 5-CHANNEL PATIENT ACQUISITION FRAMEWORK
+     =================================================== -->
+<div class="page-section">
+  <h2 class="page-break-before">1. The 5-Channel Patient Acquisition Framework</h2>
+
+  <p class="section-intro">Every growing TMS practice relies on a diversified patient acquisition strategy. Relying on a single channel is risky — algorithm changes, referral fatigue, and market shifts can erode your pipeline overnight. The framework below distributes your effort across five complementary channels, each with distinct strengths, costs, and timelines. Use this as a strategic map, then dive into the channel-specific playbooks in subsequent sections.</p>
+
+  <h3>Channel Overview</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Channel</th>
+        <th>Estimated Lead Volume</th>
+        <th>Cost Per Lead (CPL)</th>
+        <th>Timeline to Results</th>
+        <th>Best For</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td><strong>Physician Referrals</strong></td>
+        <td>5&ndash;25 consults/month</td>
+        <td>$0&ndash;$80</td>
+        <td>3&ndash;6 months</td>
+        <td>High-intent, insurance-verified patients</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td><strong>Paid Search (Google Ads)</strong></td>
+        <td>30&ndash;150 clicks/day</td>
+        <td>$40&ndash;$120</td>
+        <td>2&ndash;4 weeks</td>
+        <td>Immediate lead flow, keyword targeting</td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td><strong>Organic SEO &amp; Content</strong></td>
+        <td>10&ndash;60 organic visits/day</td>
+        <td>$5&ndash;$25 (content cost)</td>
+        <td>6&ndash;12 months</td>
+        <td>Long-term compounding traffic, authority</td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td><strong>Patient Reviews &amp; Reputation</strong></td>
+        <td>Indirect &mdash; amplifies all channels</td>
+        <td>$0&ndash;$20/review</td>
+        <td>1&ndash;3 months</td>
+        <td>Trust signals, conversion rate lift</td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td>
+        <td><strong>Direct-to-Consumer (DTC) Campaigns</strong></td>
+        <td>Varies by spend</td>
+        <td>$60&ndash;$200</td>
+        <td>2&ndash;8 weeks</td>
+        <td>Brand awareness, patient self-referrals</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="callout-title">Strategic Note</div>
+    <p>Start with 2&ndash;3 channels simultaneously for the first 90 days. Physician referrals are the highest-quality leads but take time to build. Pair them with Google Ads for immediate volume while your referral network matures. Organic SEO is a long-term investment — begin content production now even if results are months away.</p>
+  </div>
+
+  <h3>Channel 1 &mdash; Physician Referrals</h3>
+  <p>Psychiatrists, primary care physicians (PCPs), therapists, and nurse practitioners are your highest-quality referral sources. A referred patient has a 3&ndash;5x higher consultation-to-treatment conversion rate compared to a cold ad click. The physician referral blueprint is covered in Section 3.</p>
+
+  <h3>Channel 2 &mdash; Paid Search (Google Ads)</h3>
+  <p>Google Ads provides the fastest path to patient leads. With proper keyword selection, ad copy, and landing page optimization, you can be generating qualified leads within two weeks of launching a campaign. The full Google Ads setup is in Section 2.</p>
+
+  <h3>Channel 3 &mdash; Organic SEO &amp; Content Marketing</h3>
+  <p>Long-form blog articles, patient FAQs, provider guides, and TMS explainer content all serve to capture patients searching for answers online. Content published today continues to generate traffic for years &mdash; making this the highest-return investment over a 24-month horizon.</p>
+
+  <h3>Channel 4 &mdash; Patient Reviews &amp; Reputation</h3>
+  <p>Online reviews on Google, Yelp, and Healthgrades are trust signals that influence every other channel. A practice with 50+ reviews averaging 4.8 stars converts 30&ndash;40% better than a comparable practice with fewer reviews. Section 5 covers systematic testimonial collection.</p>
+
+  <h3>Channel 5 &mdash; Direct-to-Consumer (DTC) Campaigns</h3>
+  <p>Social media advertising, community outreach, employer wellness partnerships, and patient education webinars all fall under DTC. These campaigns bypass physician gatekeepers and reach patients directly who may be suffering in silence.</p>
+
+  <div class="testimonial">
+    "Within 90 days of implementing the 5-channel framework, we went from 8 TMS consultations per month to 31. The combination of Google Ads for volume and physician referrals for quality completely changed our practice economics."
+    <div class="testimonial-author">Dr. Sarah K., TMS Clinic Director</div>
+    <div class="testimonial-detail">Mid-size psychiatry practice, Chicago suburbs</div>
+  </div>
+</div>
+
+<!-- ===================================================
+     SECTION 2 — GOOGLE ADS CAMPAIGN SETUP
+     =================================================== -->
+<div class="page-section">
+  <h2 class="page-break-before">2. Google Ads Campaign Setup</h2>
+
+  <p class="section-intro">Google Ads is your most controllable, scalable, and measurable patient acquisition channel. This section gives you the complete keyword list, three ad copy variants, landing page requirements, budget recommendations, and bidding strategy guidance to launch a high-performing campaign from day one.</p>
+
+  <h3>Keyword List (50+ TMS-Specific Keywords)</h3>
+  <p>Organize your campaigns into themed ad groups. Use exact and phrase match types for high-performing keywords; use broad match to discover new queries once campaigns are profitable.</p>
+
+  <div class="keyword-list">
+    <span class="kw-pill">transcranial magnetic stimulation</span>
+    <span class="kw-pill">TMS therapy</span>
+    <span class="kw-pill">TMS treatment</span>
+    <span class="kw-pill">TMS for depression</span>
+    <span class="kw-pill">TMS for anxiety</span>
+    <span class="kw-pill">TMS therapy near me</span>
+    <span class="kw-pill">TMS treatment near me</span>
+    <span class="kw-pill">TMS clinic near me</span>
+    <span class="kw-pill">non-invasive brain stimulation</span>
+    <span class="kw-pill">brain stimulation therapy</span>
+    <span class="kw-pill">neurostimulation treatment</span>
+    <span class="kw-pill">medication resistant depression treatment</span>
+    <span class="kw-pill">treatment resistant depression TMS</span>
+    <span class="kw-pill">TMS insurance coverage</span>
+    <span class="kw-pill">does insurance cover TMS</span>
+    <span class="kw-pill">TMS therapy cost</span>
+    <span class="kw-pill">TMS treatment cost</span>
+    <span class="kw-pill">deep TMS</span>
+    <span class="kw-pill">Accelerated TMS</span>
+    <span class="kw-pill">SAINT TMS protocol</span>
+    <span class="kw-pill">TMS therapy success rate</span>
+    <span class="kw-pill">TMS side effects</span>
+    <span class="kw-pill">is TMS therapy safe</span>
+    <span class="kw-pill">TMS procedure</span>
+    <span class="kw-pill">how does TMS work</span>
+    <span class="kw-pill">alternatives to ECT</span>
+    <span class="kw-pill">TMS vs ECT</span>
+    <span class="kw-pill">depression treatment without medication</span>
+    <span class="kw-pill">drug free depression treatment</span>
+    <span class="kw-pill">mental health clinic</span>
+    <span class="kw-pill">psychiatry clinic TMS</span>
+    <span class="kw-pill">outpatient TMS</span>
+    <span class="kw-pill">in-home TMS</span>
+    <span class="kw-pill">TMS for OCD</span>
+    <span class="kw-pill">TMS for PTSD</span>
+    <span class="kw-pill">TMS for bipolar depression</span>
+    <span class="kw-pill">repetitive transcranial magnetic stimulation</span>
+    <span class="kw-pill">rTMS treatment</span>
+    <span class="kw-pill">intermittent theta burst stimulation</span>
+    <span class="kw-pill">iTBS TMS</span>
+    <span class="kw-pill">high frequency TMS</span>
+    <span class="kw-pill">left dorsolateral prefrontal cortex TMS</span>
+    <span class="kw-pill">depression treatment center</span>
+    <span class="kw-pill">anxiety treatment center</span>
+    <span class="kw-pill">TMS provider</span>
+    <span class="kw-pill">find TMS therapy</span>
+    <span class="kw-pill">best TMS clinic</span>
+    <span class="kw-pill">FDA approved TMS</span>
+    <span class="kw-pill">cleared TMS device</span>
+    <span class="kw-pill">chronic depression treatment</span>
+    <span class="kw-pill">severe depression treatment options</span>
+    <span class="kw-pill">mental health treatment options</span>
+    <span class="kw-pill">TMS consultation</span>
+    <span class="kw-pill">free TMS consultation</span>
+    <span class="kw-pill">TMS evaluation</span>
+  </div>
+
+  <h3>Negative Keyword List</h3>
+  <p>Add these as negatives to prevent wasted spend on non-patient queries:</p>
+  <div class="keyword-list">
+    <span class="kw-pill">magnetic stimulation machine</span>
+    <span class="kw-pill">TMS truck</span>
+    <span class="kw-pill">transcranial magnetic stimulation certification</span>
+    <span class="kw-pill">TMS magnet</span>
+    <span class="kw-pill">transcranial magnetic stimulation research</span>
+    <span class="kw-pill">buy TMS machine</span>
+    <span class="kw-pill">TMS coil</span>
+    <span class="kw-pill">magnetic brain stimulation at home DIY</span>
+  </div>
+
+  <h3>Ad Copy Templates</h3>
+  <p>Write three variants for each ad group: Awareness (patient is just learning about TMS), Consideration (patient is comparing options), and Comparison (patient is evaluating TMS against other treatments).</p>
+
+  <div class="ad-box">
+    <div class="ad-box-header">Variant A &mdash; Awareness</div>
+    <div class="ad-box-body">
+      <div class="ad-label">Headline 1 (max 30)</div>
+      <div class="ad-text"><strong>FDA-Cleared TMS Therapy</strong></div>
+      <div class="ad-label">Headline 2 (max 30)</div>
+      <div class="ad-text"><strong>Non-Invasive, Drug-Free Depression Relief</strong></div>
+      <div class="ad-label">Headline 3 (max 30)</div>
+      <div class="ad-text"><strong>Insurance Often Covers TMS</strong></div>
+      <div class="ad-label">Description (max 90)</div>
+      <div class="ad-text">Transcranial Magnetic Stimulation targets the root of treatment-resistant depression and anxiety without medication or surgery. Find out if TMS is right for you. Book a free consultation today.</div>
+    </div>
+  </div>
+
+  <div class="ad-box">
+    <div class="ad-box-header">Variant B &mdash; Consideration</div>
+    <div class="ad-box-body">
+      <div class="ad-label">Headline 1 (max 30)</div>
+      <div class="ad-text"><strong>TMS Therapy for Treatment-Resistant Cases</strong></div>
+      <div class="ad-label">Headline 2 (max 30)</div>
+      <div class="ad-text"><strong>Proven for Depression &amp; Anxiety</strong></div>
+      <div class="ad-label">Headline 3 (max 30)</div>
+      <div class="ad-text"><strong>36 Sessions in 6&ndash;8 Weeks</strong></div>
+      <div class="ad-label">Description (max 90)</div>
+      <div class="ad-text">If medication hasn't worked, TMS may be the answer. Non-invasive brain stimulation with a 50&ndash;60% response rate in clinical studies. Most insurance plans accepted. Schedule your evaluation now.</div>
+    </div>
+  </div>
+
+  <div class="ad-box">
+    <div class="ad-box-header">Variant C &mdash; Comparison</div>
+    <div class="ad-box-body">
+      <div class="ad-label">Headline 1 (max 30)</div>
+      <div class="ad-text"><strong>TMS vs. Medication &mdash; Which Wins?</strong></div>
+      <div class="ad-label">Headline 2 (max 30)</div>
+      <div class="ad-text"><strong>No Pills. No Surgery. Real Results.</strong></div>
+      <div class="ad-label">Headline 3 (max 30)</div>
+      <div class="ad-text"><strong>Free Insurance Check &amp; Consult</strong></div>
+      <div class="ad-label">Description (max 90)</div>
+      <div class="ad-text">TMS therapy offers a drug-free alternative for depression and anxiety when medications stop working. Compare your options at our free patient education seminar or schedule a one-on-one consult today.</div>
+    </div>
+  </div>
+
+  <h3>Landing Page Requirements</h3>
+  <p>Your Google Ads must point to a dedicated landing page &mdash; not your homepage. The landing page must include:</p>
+  <ul>
+    <li><strong>Hero headline</strong> matching the ad copy headline within 3 words</li>
+    <li><strong>Sub-headline</strong> addressing the patient's primary pain point (e.g., "When medication isn't enough")</li>
+    <li><strong>CTA button</strong> above the fold: "Schedule Free Consultation" or "Check My Insurance"</li>
+    <li><strong>Insurance logos</strong> or "Most Major Insurance Accepted" badge</li>
+    <li><strong>Social proof</strong>: star rating, review count, or patient photo</li>
+    <li><strong>FAQ section</strong> addressing top objections (cost, safety, time commitment)</li>
+    <li><strong>Phone number</strong> and click-to-call link in the header</li>
+    <li><strong>Trust signals</strong>: FDA clearance mention, provider credentials, clinic photos</li>
+    <li><strong>Form</strong>: Name, phone, email, and one qualifying question (e.g., "Have you tried medication for your depression?")</li>
+  </ul>
+
+  <div class="callout yellow">
+    <div class="callout-title">Landing Page Tip</div>
+    <p>Pages that load in under 3 seconds convert 32% better than slower pages. Compress images, use a CDN, and eliminate unnecessary scripts. A dedicated landing page should have zero navigation links to other pages &mdash; every path leads to the consultation booking.</p>
+  </div>
+
+  <h3>Budget Recommendations</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Practice Stage</th>
+        <th>Monthly Budget</th>
+        <th>Recommended Campaigns</th>
+        <th>Target CPL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Launch (Month 1&ndash;2)</strong></td>
+        <td>$1,500&ndash;$3,000</td>
+        <td>Search (1 campaign, 3 ad groups)</td>
+        <td>$80&ndash;$120</td>
+      </tr>
+      <tr>
+        <td><strong>Scale (Month 3&ndash;6)</strong></td>
+        <td>$3,000&ndash;$7,500</td>
+        <td>Search + Display Remarketing</td>
+        <td>$55&ndash;$90</td>
+      </tr>
+      <tr>
+        <td><strong>Optimize (Month 6+)</strong></td>
+        <td>$7,500&ndash;$15,000</td>
+        <td>Search + Display + YouTube + Local</td>
+        <td>$40&ndash;$70</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Bidding Strategy</h3>
+  <ul>
+    <li><strong>Initial 30 days:</strong> Manual CPC bidding &mdash; gives you control while you learn which keywords convert</li>
+    <li><strong>Days 31&ndash;60:</strong> Switch to Target CPA (cost per acquisition) bidding, using your historical conversion data</li>
+    <li><strong>Month 3+:</strong> Target ROAS (return on ad spend) at 3x or higher &mdash; meaning every dollar spent returns $3</li>
+    <li><strong>Audience signals:</strong> Upload your existing patient email list as a Customer Match audience to target similar users</li>
+    <li><strong>Location targeting:</strong> 15&ndash;25 mile radius around your clinic. Add surrounding zip codes where drive time is under 45 minutes</li>
+    <li><strong>Schedule optimization:</strong> Run ads 7 days/week, but analyze which days/times generate consultations vs. just clicks. Pause low-performing time slots after 4 weeks of data</li>
+  </ul>
+
+  <div class="testimonial">
+    "Our Google Ads CPL dropped from $145 to $68 over six months by following this framework &mdash; specifically by tightening keyword match types, writing ad copy that matched landing page headlines, and switching to Target CPA at the right moment."
+    <div class="testimonial-author">Practice Manager, Coastal TMS Center</div>
+    <div class="testimonial-detail">Southeast US, 4-provider practice</div>
+  </div>
+</div>
+
+<!-- ===================================================
+     SECTION 3 — PHYSICIAN REFERRAL NETWORK BLUEPRINT
+     =================================================== -->
+<div class="page-section">
+  <h2 class="page-break-before">3. Physician Referral Network Blueprint</h2>
+
+  <p class="section-intro">Physician referrals are the gold standard of patient acquisition: high intent, insurance-verified, and often pre-educated about TMS. This section shows you exactly how to identify, reach, and cultivate a referral network that generates a steady stream of qualified patients month after month.</p>
+
+  <h3>Identifying Top Referral Sources</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Specialty</th>
+        <th>Patient Overlap with TMS</th>
+        <th>Referral Volume Potential</th>
+        <th>Outreach Priority</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Psychiatrists</strong></td>
+        <td>Highest &mdash; manage treatment-resistant depression, anxiety disorders, OCD</td>
+        <td>High (10&ndash;30/month per active referrer)</td>
+        <td>Priority 1 &mdash; start here</td>
+      </tr>
+      <tr>
+        <td><strong>Primary Care Physicians (PCP)</strong></td>
+        <td>High &mdash; first-line depression diagnosis, medication management</td>
+        <td>Medium&ndash;High (5&ndash;15/month per referrer)</td>
+        <td>Priority 1 &mdash; PCP panel is largest</td>
+      </tr>
+      <tr>
+        <td><strong>Therapists / LCSWs / Psychologists</strong></td>
+        <td>High &mdash; manage patients on medication who want adjunctive care</td>
+        <td>Medium (3&ndash;10/month per referrer)</td>
+        <td>Priority 2 &mdash; high volume, indirect referral</td>
+      </tr>
+      <tr>
+        <td><strong>Internal Medicine</strong></td>
+        <td>Medium &mdash; comorbid depression in chronic illness patients</td>
+        <td>Medium (3&ndash;8/month per referrer)</td>
+        <td>Priority 2</td>
+      </tr>
+      <tr>
+        <td><strong>OB/GYN</strong></td>
+        <td>Medium &mdash; postpartum depression, perimenopausal mood changes</td>
+        <td>Low&ndash;Medium (2&ndash;5/month per referrer)</td>
+        <td>Priority 3 &mdash; niche, high empathy match</td>
+      </tr>
+      <tr>
+        <td><strong>Student Health Centers</strong></td>
+        <td>Medium &mdash; young adults with depression/anxiety</td>
+        <td>Medium (5&ndash;15/month during academic year)</td>
+        <td>Priority 3 &mdash; if near university/college</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Outreach Templates</h3>
+
+  <h4>Email Template &mdash; Cold Outreach</h4>
+  <div class="letter-template">
+    <p><strong>Subject:</strong> Collaborative care option for your treatment-resistant depression patients</p>
+    <p>Dear Dr. [Last Name],</p>
+    <p>I hope this message finds you well. My name is [Your Name], and I am [Title] at [Clinic Name], a TMS therapy center serving [City/Region].</p>
+    <p>I'm reaching out because I know that many of your patients struggle with depression that hasn't responded fully to medication &mdash; a challenge I hear about often from referring physicians in our community.</p>
+    <p>TMS (Transcranial Magnetic Stimulation) is an FDA-cleared, non-invasive treatment that works alongside existing care. We've helped [X] patients in [City] find meaningful relief, and I'd love to explore how we might collaborate to support your patients who need additional options.</p>
+    <p>I'd welcome 15 minutes of your time &mdash; in person, by phone, or over a video call &mdash; to share more about our approach and how we coordinate care with referring providers. Would any of the following dates work for you?</p>
+    <p>[Date A], [Date B], or [Date C]</p>
+    <p>Warm regards,</p>
+    <p>[Your Name]<br>
+    [Title] | [Clinic Name]<br>
+    [Phone] | [Email]<br>
+    [Website]</p>
+  </div>
+
+  <h4>Letter Template &mdash; Formal Referral Request</h4>
+  <div class="letter-template">
+    <p>[Your Name]<br>
+    [Title]<br>
+    [Clinic Name]<br>
+    [Address]</p>
+    <p>[Date]</p>
+    <p>Dr. [Last Name]<br>
+    [Practice Name]<br>
+    [Address]</p>
+    <p><strong>Re: Collaborative Care Partnership for TMS Therapy</strong></p>
+    <p>Dear Dr. [Last Name],</p>
+    <p>I am writing to introduce [Clinic Name] as a resource for your patients with treatment-resistant depression and anxiety. [Clinic Name] specializes in Transcranial Magnetic Stimulation (TMS) &mdash; an FDA-cleared, non-invasive neuromodulation therapy that has helped hundreds of patients in [City/Region] achieve significant symptom reduction.</p>
+    <p>We take a collaborative approach to care. For every patient we see, we provide:</p>
+    <ul>
+      <li>A comprehensive intake evaluation and clinical report sent to the referring physician</li>
+      <li>Regular progress updates during the treatment course</li>
+      <li>A detailed discharge summary with recommendations for ongoing care</li>
+      <li>Direct phone access to our clinical team for any questions</li>
+    </ul>
+    <p>Enclosed is our referral form and clinical overview. To refer a patient, please have them call [Phone] or complete the online referral form at [URL]. We handle insurance verification and prior authorizations at no charge to your practice or your patient.</p>
+    <p>I would welcome the opportunity to meet with you &mdash; in person or virtually &mdash; to discuss how we might work together. Please don't hesitate to reach out directly.</p>
+    <p>Sincerely,</p>
+    <p>[Your Name]<br>
+    [Title] | [Clinic Name]</p>
+  </div>
+
+  <h3>Follow-Up Cadence</h3>
+  <div class="steps">
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h4>Day 0 &mdash; Initial Outreach</h4>
+        <p>Send email + physical letter simultaneously. Mail the letter to the practice address, email to the provider's known inbox.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h4>Day 7 &mdash; First Follow-Up Call</h4>
+        <p>Call the practice front desk. Ask for Dr. [Name]'s office manager or clinical assistant. Briefly introduce yourself and confirm receipt of the letter. Request a 10-minute call with the physician.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h4>Day 14 &mdash; Second Email</h4>
+        <p>Send a value-add email: share a relevant clinical study, a patient success story (de-identified), or an upcoming TMS education event. Keep it brief and provider-focused.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h4>Day 30 &mdash; Lunch-and-Learn Invitation</h4>
+        <p>Formally invite the physician to a lunch-and-learn at their office or a nearby restaurant. Offer to bring food. Present a 20-minute TMS overview with clinical data. See Section 3 of the companion playbook for full Lunch-and-Learn details.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h4>Day 60 &mdash; Quarterly Touch</h4>
+        <p>Send a brief quarterly update: number of referrals received, patient outcomes, any new TMS protocols or insurance updates. Personalize &mdash; this is a relationship, not a blast.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h4>Day 90 &mdash; Re-Engagement</h4>
+        <p>If no referrals after 90 days, send a re-engagement message highlighting a new TMS protocol, a new clinical publication, or a patient outcome from a similar case type.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Referral Tracking Spreadsheet Layout</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Provider Name</th>
+        <th>Specialty</th>
+        <th>Practice</th>
+        <th>Contact</th>
+        <th>Initial Outreach Date</th>
+        <th>Last Contact</th>
+        <th>Referrals Sent</th>
+        <th>Referrals Converted</th>
+        <th>Notes</th>
+        <th>Next Action</th>
+        <th>Follow-Up Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Dr. Jane Smith</td>
+        <td>Psychiatry</td>
+        <td>Bay Area Psychiatry</td>
+        <td>jsmith@bayareapsych.com</td>
+        <td>2026-01-15</td>
+        <td>2026-03-10</td>
+        <td>4</td>
+        <td>2</td>
+        <td>Interested in iTBS protocols</td>
+        <td>Send iTBS clinical summary</td>
+        <td>2026-04-10</td>
+      </tr>
+      <tr>
+        <td>Dr. Mark Lee</td>
+        <td>PCP</td>
+        <td>Family Medicine Group</td>
+        <td>mlee@familymedgroup.com</td>
+        <td>2026-02-01</td>
+        <td>2026-02-08</td>
+        <td>1</td>
+        <td>0</td>
+        <td>Left voicemail; no response to email</td>
+        <td>Send letter + call front desk</td>
+        <td>2026-04-15</td>
+      </tr>
+      <tr>
+        <td>Dr. Priya Patel</td>
+        <td>Therapy/LCSW</td>
+        <td>Mindful Counseling</td>
+        <td>ppatel@mindfulcounseling.com</td>
+        <td>2026-01-20</td>
+        <td>2026-03-20</td>
+        <td>7</td>
+        <td>5</td>
+        <td>Top referrer; sends patients monthly</td>
+        <td>Send thank-you gift + quarterly report</td>
+        <td>2026-04-20</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===================================================
+     SECTION 4 — 30-DAY SOCIAL MEDIA CONTENT CALENDAR
+     =================================================== -->
+<div class="page-section">
+  <h2 class="page-break-before">4. 30-Day Social Media Content Calendar</h2>
+
+  <p class="section-intro">Consistency is the currency of social media. This calendar provides a week-by-week roadmap for Instagram, Facebook, and LinkedIn, with specific post types, content topics, and calls-to-action. The goal is to build awareness, establish clinical authority, nurture leads, and drive consultation bookings &mdash; in that order.</p>
+
+  <div class="callout green">
+    <div class="callout-title">Posting Frequency Recommendation</div>
+    <p>Instagram: 4&ndash;5 posts/week + 1 story/day. Facebook: 3&ndash;4 posts/week. LinkedIn: 2&ndash;3 posts/week. Reels and short-form video consistently outperform static posts in reach and engagement &mdash; aim for 2&ndash;3 video posts per week across platforms.</p>
+  </div>
+
+  <h3>30-Day Calendar</h3>
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th>Week</th>
+        <th>Platform</th>
+        <th>Post Type</th>
+        <th>Content Topic</th>
+        <th>CTA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Week 1 -->
+      <tr>
+        <td><strong>Week 1</strong><br>Days 1&ndash;7</td>
+        <td>Instagram Reel</td>
+        <td>Educational Reel (60&ndash;90s)</td>
+        <td>"What is TMS? A 60-second explainer" &mdash; cover the basics: what it is, how it works, FDA clearance</td>
+        <td>Save this post for later</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Facebook</td>
+        <td>Patient Story (static image + caption)</td>
+        <td>De-identified patient success story: "After 3 medications failed, Sarah found relief with TMS" &mdash; focus on journey and outcome, not clinical details</td>
+        <td>Comment "MORE" for our free TMS guide</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>LinkedIn</td>
+        <td>Clinical Article Share</td>
+        <td>Share a peer-reviewed TMS study with a 3-sentence commentary from the provider: "This new study confirms what we've seen in our practice..."</td>
+        <td>Read the full study + share your thoughts</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Instagram Story</td>
+        <td>Poll / Quiz</td>
+        <td>"True or False: TMS is painful" &mdash; address the #1 patient fear and demystify the treatment experience</td>
+        <td>DM us with questions</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Facebook</td>
+        <td>Behind the Scenes</td>
+        <td>Photo tour of the TMS clinic: waiting area, treatment room, TMS device. Humanize the experience: "What to expect on your first visit"</td>
+        <td>Send us a DM to schedule a tour</td>
+      </tr>
+      <!-- Week 2 -->
+      <tr>
+        <td><strong>Week 2</strong><br>Days 8&ndash;14</td>
+        <td>Instagram Reel</td>
+        <td>Provider Q&amp;A (60s)</td>
+        <td>Provider answers: "What's the biggest misconception about TMS?" &mdash; address ECT confusion, needle fears, cost concerns</td>
+        <td>Follow for weekly Q&amp;A</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>LinkedIn</td>
+        <td>Professional Post</td>
+        <td>"5 signs your patient may benefit from TMS referral" &mdash; clinical criteria targeting referring physicians and therapists</td>
+        <td>DM us to discuss a referral partnership</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Facebook</td>
+        <td>Educational Carousel</td>
+        <td>"TMS vs. Medication: A side-by-side comparison" &mdash; slides covering mechanism, timeline, side effects, cost, success rates</td>
+        <td>Download our free comparison guide</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Instagram</td>
+        <td>Infographic Post</td>
+        <td>Visual: "Who is a candidate for TMS?" &mdash; bullet criteria, depression severity scales, medication history requirements</td>
+        <td>Check if you qualify &mdash; link in bio</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Instagram Story</td>
+        <td>Testimonial Re-share</td>
+        <td>Short video testimonial clip (15s) with provider's response: "We love hearing from our patients"</td>
+        <td>Share your TMS story with us</td>
+      </tr>
+      <!-- Week 3 -->
+      <tr>
+        <td><strong>Week 3</strong><br>Days 15&ndash;21</td>
+        <td>Instagram Reel</td>
+        <td>Treatment Day Vlog</td>
+        <td>"A day in the life of a TMS patient &mdash; from consult to session 1" &mdash; walk through the actual patient experience</td>
+        <td>Book your consultation</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Facebook</td>
+        <td>Insurance Education Post</td>
+        <td>"Does insurance cover TMS?" &mdash; explain Medicare, BCBS, Aetna, United coverage patterns, prior auth process</td>
+        <td>Free insurance check &mdash; DM us</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>LinkedIn</td>
+        <td>Case Study (anonymized)</td>
+        <td>"Case Study: 52-year-old male with treatment-resistant depression achieved remission after TMS protocol" &mdash; clinical narrative for professional audience</td>
+        <td>Connect with our clinical team</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Instagram</td>
+        <td>Carousel</td>
+        <td>"TMS myths vs. facts" &mdash; 5 slides debunking: "TMS is experimental," "It causes seizures," "It hurts," etc.</td>
+        <td>Share with someone who needs this info</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Facebook Live</td>
+        <td>Live Q&amp;A (30 min)</td>
+        <td>Provider-hosted live: "Ask the TMS Expert &mdash; Depression, TMS, and Your Options" &mdash; address live audience questions</td>
+        <td>RSVP in comments</td>
+      </tr>
+      <!-- Week 4 -->
+      <tr>
+        <td><strong>Week 4</strong><br>Days 22&ndash;30</td>
+        <td>Instagram Reel</td>
+        <td>Results/Outcome Post</td>
+        <td>"6 weeks ago she started TMS. Here's her progress." &mdash; progress-tracking narrative (with patient written consent)</td>
+        <td>Start your TMS journey today</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>LinkedIn</td>
+        <td>Industry News</td>
+        <td>"CMS expands TMS coverage for 2026 &mdash; what it means for your practice and patients" &mdash; policy update with clinical implications</td>
+        <td>Learn more on our blog</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Facebook</td>
+        <td>Referral Partner Spotlight</td>
+        <td>"Meet Dr. [Name], one of our top referring physicians" &mdash; brief interview, why they refer, their experience with our clinic</td>
+        <td>Join our referral network</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Instagram</td>
+        <td>Engagement Post</td>
+        <td>"Tag someone who deserves to feel better" &mdash; community-building, reach amplification</td>
+        <td>Share this post</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Instagram + Facebook</td>
+        <td>Consultation CTA Push</td>
+        <td>"Limited consultation availability this month &mdash; book now to secure your spot" &mdash; scarcity/urgency post (use sparingly, 1x/month max)</td>
+        <td>Book your free consultation</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="callout-title">Content Production Tips</div>
+    <p>Batch-create content in 2-hour sessions once per week &mdash; don't create daily. Use a tool like Later, Hootsuite, or Meta Business Suite to schedule posts. Film provider Q&amp;A videos in one session (film 5&ndash;8 at once). Repurpose each piece of long-form content into 3&ndash;4 derivative posts: one blog post becomes one reel, three carousel slides, five story frames, and one email newsletter item.</p>
+  </div>
+</div>
+
+<!-- ===================================================
+     SECTION 5 — PATIENT TESTIMONIAL COLLECTION & DEPLOYMENT
+     =================================================== -->
+<div class="page-section">
+  <h2 class="page-break-before">5. Patient Testimonial Collection &amp; Deployment</h2>
+
+  <p class="section-intro">Testimonials are the most persuasive element in your patient acquisition arsenal. A strong testimonial functions as peer validation &mdash; the closest digital equivalent to a word-of-mouth recommendation. This section covers the complete workflow: consent, collection, production, and deployment across every channel.</p>
+
+  <h3>Consent Form Checklist</h3>
+  <p>Before collecting any testimonial, ensure your practice has a compliant consent process. This checklist applies regardless of format (written, video, or audio):</p>
+  <ul class="checklist">
+    <li>Patient is 18 years of age or older and has legal capacity to consent</li>
+    <li>Patient has completed or is near completion of their TMS treatment course</li>
+    <li>Patient has been informed of how the testimonial will be used (website, social media, paid ads, print)</li>
+    <li>Patient has signed a written testimonial release form that includes: name (or anonymity preference), photo/video release, specific scope of use, right to withdraw consent, date and signature</li>
+    <li>Patient understands they will not receive compensation for the testimonial (or if compensated, this must be disclosed)</li>
+    <li>For video testimonials: a separate video-specific consent form is signed</li>
+    <li>For HIPAA-covered contexts: patient has been offered the option to use a pseudonym and has agreed to the chosen format</li>
+    <li>Consent form is filed in the patient's record</li>
+    <li>Marketing team or external agency has received written approval to use the content</li>
+  </ul>
+
+  <div class="callout yellow">
+    <div class="callout-title">Legal Note</div>
+    <p>Consult your healthcare attorney to ensure your testimonial consent forms comply with state medical board advertising rules, FTC endorsement guidelines, and your specific malpractice insurance requirements. Regulations vary by state.</p>
+  </div>
+
+  <h3>How to Ask for Testimonials</h3>
+  <p>The timing and method of your ask dramatically affects response rates. The best time to request a testimonial is at the moment of peak positive emotion &mdash; typically after session 15&ndash;20 (when patients start noticing improvement) or after completing the full course of treatment.</p>
+
+  <h4>Script: In-Person Ask (Best Response Rate)</h4>
+  <div class="letter-template">
+    <p><em>Provider:</em> "[Patient Name], I have to tell you &mdash; it's been really gratifying to see how well you're responding to treatment. How are you feeling compared to when you started?"</p>
+    <p><em>[Patient shares positive experience]</em></p>
+    <p><em>Provider:</em> "That's wonderful to hear, and I think other people who are where you were a few weeks ago would really benefit from hearing that. Would you be open to sharing your experience? We could do a short video, or even just a written quote &mdash; whatever you're comfortable with. And we always keep it completely confidential unless you want to share your name."</p>
+  </div>
+
+  <h4>Script: Post-Treatment Email (Automated)</h4>
+  <div class="letter-template">
+    <p><strong>Subject:</strong> We'd love to hear about your TMS experience at [Clinic Name]</p>
+    <p>Hi [First Name],</p>
+    <p>Congratulations on completing your TMS treatment course at [Clinic Name]. We're so glad to have been part of your care, and we hope you're feeling the difference.</p>
+    <p>If you had a positive experience and would be willing to share a few words about your journey, your testimonial would mean a tremendous amount to us &mdash; and would help other people who are considering TMS find the courage to take the first step.</p>
+    <p>It takes less than 5 minutes. You can:</p>
+    <ul>
+      <li>Record a short video on your phone and email it to us, or</li>
+      <li>Fill out our online testimonial form at [URL]</li>
+    </ul>
+    <p>Of course, there's no obligation &mdash; and we always protect your privacy. Thank you for trusting us with your care.</p>
+    <p>Warm regards,<br>[Provider Name]</p>
+  </div>
+
+  <h3>Video vs. Written Testimonials</h3>
+  <div class="two-col">
+    <div>
+      <h4>Video Testimonials (Preferred)</h4>
+      <ul>
+        <li><strong>Engagement:</strong> Video posts receive 2&ndash;3x more engagement than text on social media</li>
+        <li><strong>Trust:</strong> Facial expressions and tone of voice convey authenticity that text cannot replicate</li>
+        <li><strong>Versatility:</strong> One 60&ndash;90 second video can be repurposed into: Instagram Reel, Facebook post, YouTube short, website embed, Google Ads creative, and waiting room display</li>
+        <li><strong>Production tip:</strong> Use natural light, a ring light or softbox, and film on a smartphone in 4K. No need for professional studio &mdash; authenticity beats polish</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Written Testimonials</h4>
+      <ul>
+        <li><strong>Ease:</strong> Lower barrier to entry &mdash; patients who won't film can still write</li>
+        <li><strong>Specificity:</strong> Written testimonials can be curated for exact phrases and keywords (helpful for SEO and ad copy)</li>
+        <li><strong>Use cases:</strong> Google Business Profile, Healthgrades, Yelp, website testimonial rotator, email signature, print materials</li>
+        <li><strong>Formatting tip:</strong> Include a star rating with written testimonials on review platforms. A 5-star quote is more credible than a starless one</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Where to Deploy Testimonials</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Platform</th>
+        <th>Format</th>
+        <th>Best Type of Testimonial</th>
+        <th>Frequency</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Google Business Profile</strong></td>
+        <td>Written + star rating</td>
+        <td>Focus on outcome, ease of process, staff friendliness</td>
+        <td>Target 5&ndash;10 new reviews/month</td>
+      </tr>
+      <tr>
+        <td><strong>Yelp / Healthgrades</strong></td>
+        <td>Written + star rating</td>
+        <td>Clinical outcomes, wait times, billing transparency</td>
+        <td>3&ndash;5 new reviews/month per platform</td>
+      </tr>
+      <tr>
+        <td><strong>Website Testimonials Page</strong></td>
+        <td>Written + video embed</td>
+        <td>Longer-form, story-rich narratives with photos</td>
+        <td>Add new testimonial every 2 weeks</td>
+      </tr>
+      <tr>
+        <td><strong>Instagram Feed / Reels</strong></td>
+        <td>Video (60&ndash;90s)</td>
+        <td>Emotional, personal journey stories</td>
+        <td>1&ndash;2 video testimonials/month</td>
+      </tr>
+      <tr>
+        <td><strong>Facebook Page / Posts</strong></td>
+        <td>Video or written</td>
+        <td>Community-focused, relatable experiences</td>
+        <td>1 post/week</td>
+      </tr>
+      <tr>
+        <td><strong>LinkedIn</strong></td>
+        <td>Written case study + quote</td>
+        <td>Clinical outcomes, professional language</td>
+        <td>2&ndash;3 posts/month</td>
+      </tr>
+      <tr>
+        <td><strong>Google Ads (Display / YouTube)</strong></td>
+        <td>Video (15&ndash;30s)</td>
+        <td>Short, punchy, outcome-focused clips</td>
+        <td>Rotate 3&ndash;5 video creatives</td>
+      </tr>
+      <tr>
+        <td><strong>Email Newsletter</strong></td>
+        <td>Written quote + photo</td>
+        <td>Recent patient, timely and relevant</td>
+        <td>1/month in newsletter</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===================================================
+     SECTION 6 — ROI TRACKING SPREADSHEET LAYOUT
+     =================================================== -->
+<div class="page-section">
+  <h2 class="page-break-before">6. ROI Tracking Spreadsheet Layout</h2>
+
+  <p class="section-intro">You cannot improve what you do not measure. This section provides a complete spreadsheet framework for tracking every patient acquisition channel by its financial performance. Use this template monthly to identify your best-performing channels, cut wasted spend, and allocate budget to maximize ROI.</p>
+
+  <h3>Key Metrics Definitions</h3>
+  <div class="two-col">
+    <div>
+      <ul>
+        <li><strong>CPL (Cost Per Lead):</strong> Total channel spend ÷ number of leads generated</li>
+        <li><strong>CAC (Customer Acquisition Cost):</strong> Total marketing spend ÷ number of patients who started TMS treatment</li>
+        <li><strong>ROAS (Return on Ad Spend):</strong> Revenue generated ÷ ad spend. A ROAS of 3x means $3 in revenue for every $1 spent</li>
+        <li><strong>Conversion Rate:</strong> Percentage of leads that convert to consultations, and consultations that convert to treatment starts</li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><strong>Average Revenue Per Patient:</strong> Include all revenue streams: TMS sessions, office visits, new patient evaluations</li>
+        <li><strong>LTV (Lifetime Value):</strong> Total revenue from a patient over their entire relationship with your practice (includes maintenance sessions, referrals they send)</li>
+        <li><strong>Payback Period:</strong> CAC ÷ monthly revenue per patient = how many months to recoup acquisition cost</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Monthly ROI Tracking Template</h3>
+  <table class="roi-table">
+    <thead>
+      <tr>
+        <th>Channel</th>
+        <th>Spend ($)</th>
+        <th>Leads</th>
+        <th>Consults</th>
+        <th>Starts</th>
+        <th>Revenue ($)</th>
+        <th>CPL ($)</th>
+        <th>CAC ($)</th>
+        <th>ROAS (x)</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Google Ads &mdash; Search</strong></td>
+        <td>3,500</td>
+        <td>52</td>
+        <td>18</td>
+        <td>11</td>
+        <td>27,500</td>
+        <td>67</td>
+        <td>318</td>
+        <td>7.9</td>
+        <td>Best month ever; expanded to new zip codes</td>
+      </tr>
+      <tr>
+        <td><strong>Google Ads &mdash; Display</strong></td>
+        <td>800</td>
+        <td>31</td>
+        <td>4</td>
+        <td>2</td>
+        <td>5,000</td>
+        <td>26</td>
+        <td>400</td>
+        <td>6.3</td>
+        <td>Remarketing only; keep running</td>
+      </tr>
+      <tr>
+        <td><strong>Physician Referrals</strong></td>
+        <td>200</td>
+        <td>9</td>
+        <td>7</td>
+        <td>6</td>
+        <td>15,000</td>
+        <td>22</td>
+        <td>33</td>
+        <td>75.0</td>
+        <td>Highest ROAS channel &mdash; invest more here</td>
+      </tr>
+      <tr>
+        <td><strong>Organic SEO / Blog</strong></td>
+        <td>500</td>
+        <td>14</td>
+        <td>5</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>36</td>
+        <td>167</td>
+        <td>15.0</td>
+        <td>Content from 3 months ago starting to convert</td>
+      </tr>
+      <tr>
+        <td><strong>Social Media (Organic)</strong></td>
+        <td>0</td>
+        <td>6</td>
+        <td>2</td>
+        <td>1</td>
+        <td>2,500</td>
+        <td>0</td>
+        <td>0</td>
+        <td>&infin;</td>
+        <td>Building; not yet a primary lead source</td>
+      </tr>
+      <tr>
+        <td><strong>Social Media (Paid Ads)</strong></td>
+        <td>1,200</td>
+        <td>22</td>
+        <td>6</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>55</td>
+        <td>400</td>
+        <td>6.3</td>
+        <td>Instagram Reels outperforming static</td>
+      </tr>
+      <tr>
+        <td><strong>Patient Referrals (WOMM)</strong></td>
+        <td>150</td>
+        <td>5</td>
+        <td>4</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>30</td>
+        <td>50</td>
+        <td>50.0</td>
+        <td>Thank-you gift program working well</td>
+      </tr>
+      <tr>
+        <td><strong>Direct / Walk-In / Other</strong></td>
+        <td>0</td>
+        <td>8</td>
+        <td>5</td>
+        <td>4</td>
+        <td>10,000</td>
+        <td>0</td>
+        <td>0</td>
+        <td>&infin;</td>
+        <td>Phone calls and walk-ins</td>
+      </tr>
+      <tr style="background: var(--blue-100); font-weight: 700;">
+        <td><strong>TOTALS</strong></td>
+        <td><strong>6,350</strong></td>
+        <td><strong>147</strong></td>
+        <td><strong>51</strong></td>
+        <td><strong>33</strong></td>
+        <td><strong>82,500</strong></td>
+        <td><strong>43</strong></td>
+        <td><strong>192</strong></td>
+        <td><strong>13.0</strong></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Calculated Metrics Summary</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Calculation</th>
+        <th>Monthly Result</th>
+        <th>Target</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Blended CPL</strong></td>
+        <td>$6,350 spend &divide; 147 leads</td>
+        <td>$43</td>
+        <td>&lt;$80</td>
+        <td style="color:#059669;font-weight:700;">On Target</td>
+      </tr>
+      <tr>
+        <td><strong>Blended CAC</strong></td>
+        <td>$6,350 spend &divide; 33 treatment starts</td>
+        <td>$192</td>
+        <td>&lt;$350</td>
+        <td style="color:#059669;font-weight:700;">On Target</td>
+      </tr>
+      <tr>
+        <td><strong>Overall ROAS</strong></td>
+        <td>$82,500 revenue &divide; $6,350 spend</td>
+        <td>13.0x</td>
+        <td>&gt;5.0x</td>
+        <td style="color:#059669;font-weight:700;">Excellent</td>
+      </tr>
+      <tr>
+        <td><strong>Lead-to-Consult Rate</strong></td>
+        <td>51 consults &divide; 147 leads</td>
+        <td>35%</td>
+        <td>&gt;25%</td>
+        <td style="color:#059669;font-weight:700;">On Target</td>
+      </tr>
+      <tr>
+        <td><strong>Consult-to-Start Rate</strong></td>
+        <td>33 starts &divide; 51 consults</td>
+        <td>65%</td>
+        <td>&gt;50%</td>
+        <td style="color:#059669;font-weight:700;">On Target</td>
+      </tr>
+      <tr>
+        <td><strong>Revenue Per Patient</strong></td>
+        <td>$82,500 &divide; 33 starts</td>
+        <td>$2,500</td>
+        <td>&gt;$2,000</td>
+        <td style="color:#059669;font-weight:700;">On Target</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout green">
+    <div class="callout-title">Monthly Review Cadence</div>
+    <p>Schedule a 30-minute monthly marketing review to update this spreadsheet, analyze trends, and make budget allocation decisions. Key decisions at each review: (1) Which channel has the best ROAS? Increase budget by 20&ndash;30%. (2) Which channel has the worst ROAS? Reduce budget or pause. (3) Are overall consultation numbers on track for monthly goal? Adjust total spend accordingly.</p>
+  </div>
+</div>
+
+<!-- ===================================================
+     SECTION 7 — GLOSSARY
+     =================================================== -->
+<div class="page-section">
+  <h2 class="page-break-before">7. Glossary of Key Terms</h2>
+
+  <p class="section-intro">Use this glossary as a reference for understanding the marketing and business terminology used throughout this playbook. It is also a useful patient-facing resource &mdash; share it with prospective patients who are researching TMS options online.</p>
+
+  <div class="glossary-term" id="cac">
+    <span class="glossary-abbr">CAC</span>
+    <span class="glossary-def"><strong>Customer Acquisition Cost.</strong> The total marketing and sales cost required to acquire one new patient. Calculated as total spend divided by number of new patients acquired in a given period. Includes advertising spend, staff time, materials, and referral program costs.</span>
+  </div>
+  <div class="glossary-term" id="churn">
+    <span class="glossary-abbr">Churn</span>
+    <span class="glossary-def"><strong>Churn Rate.</strong> The percentage of patients who begin TMS treatment but do not complete the full course. High churn indicates patient dropout due to cost, side effects, inconvenience, or lack of perceived benefit. Target churn rate: below 15%.</span>
+  </div>
+  <div class="glossary-term" id="conversion-rate">
+    <span class="glossary-abbr">Conversion Rate</span>
+    <span class="glossary-def"><strong>The percentage of visitors or leads who take a desired action.</strong> In TMS marketing, the most important conversion rates are: lead-to-consultation (how many inquiry submissions become booked appointments) and consult-to-start (how many consultations result in treatment initiation). Industry benchmark: 25&ndash;40% lead-to-consult; 50&ndash;65% consult-to-start.</span>
+  </div>
+  <div class="glossary-term" id="cpl">
+    <span class="glossary-abbr">CPL</span>
+    <span class="glossary-def"><strong>Cost Per Lead.</strong> The amount spent to generate one patient inquiry or lead. Calculated as total channel spend divided by number of leads generated. The lower the CPL, the more efficiently the channel generates interest. Target CPL varies by market but typically ranges $40&ndash;$120 for TMS Google Ads campaigns.</span>
+  </div>
+  <div class="glossary-term" id="ctr">
+    <span class="glossary-abbr">CTR</span>
+    <span class="glossary-def"><strong>Click-Through Rate.</strong> The percentage of people who see an ad (impressions) and click on it. Calculated as clicks &divide; impressions &times; 100. A higher CTR indicates more compelling ad copy or better audience targeting. Industry benchmark for TMS Google Search ads: 5&ndash;10%.</span>
+  </div>
+  <div class="glossary-term" id="dtc">
+    <span class="glossary-abbr">DTC</span>
+    <span class="glossary-def"><strong>Direct-to-Consumer.</strong> Marketing strategies that reach and engage patients directly, bypassing physician gatekeepers. Examples include social media ads, content marketing, patient education webinars, and employer wellness programs. DTC is essential for TMS because most patients with treatment-resistant depression do not know TMS exists.</span>
+  </div>
+  <div class="glossary-term" id="evergreen-content">
+    <span class="glossary-abbr">Evergreen Content</span>
+    <span class="glossary-def"><strong>Content that remains relevant and continues to generate traffic long after it is published.</strong> Examples for TMS: "What is TMS therapy?", "Does insurance cover TMS?", "TMS vs. ECT." Evergreen content is the foundation of organic SEO because it accumulates search traffic over time without requiring ongoing promotion.</span>
+  </div>
+  <div class="glossary-term" id="funnel">
+    <span class="glossary-abbr">Funnel</span>
+    <span class="glossary-def"><strong>Marketing Funnel.</strong> The journey a prospective patient takes from first awareness of your practice to booking a consultation and beginning treatment. The standard model: Awareness &rarr; Interest &rarr; Consideration &rarr; Intent &rarr; Evaluation &rarr; Booking &rarr; Treatment. Each stage requires different content and engagement strategies.</span>
+  </div>
+  <div class="glossary-term" id="funnel-stage">
+    <span class="glossary-abbr">Funnel Stage</span>
+    <span class="glossary-def"><strong>A specific point in the patient's journey through the marketing funnel.</strong> Top-of-funnel (TOFU) content educates and builds awareness (e.g., "What is TMS?"). Middle-of-funnel (MOFU) content addresses objections and builds consideration (e.g., "TMS vs. medication"). Bottom-of-funnel (BOFU) content drives action (e.g., "Book your free consultation").</span>
+  </div>
+  <div class="glossary-term" id="impression">
+    <span class="glossary-abbr">Impression</span>
+    <span class="glossary-def"><strong>The number of times an ad or piece of content is displayed to a user.</strong> Impressions are not clicks &mdash; they measure visibility. A high impression count with low click-through indicates targeting or creative issues. Impressions are used to calculate CTR (clicks &divide; impressions).</span>
+  </div>
+  <div class="glossary-term" id="inbound">
+    <span class="glossary-abbr">Inbound</span>
+    <span class="glossary-def"><strong>Inbound Marketing.</strong> Marketing strategy that attracts patients to your practice through valuable content and experiences rather than interruptive advertising. Examples: blog articles that answer patient questions, SEO-optimized landing pages, patient education webinars. Inbound leads typically have higher conversion rates than outbound leads.</span>
+  </div>
+  <div class="glossary-term" id="keyword-difficulty">
+    <span class="glossary-abbr">Keyword Difficulty</span>
+    <span class="glossary-def"><strong>A score (typically 0&ndash;100) indicating how hard it is to rank organically for a given keyword.</strong> High difficulty keywords (60+) are dominated by established websites and require significant SEO investment. Low difficulty keywords (under 30) offer faster ranking opportunities. For local TMS practices, long-tail local keywords (e.g., "TMS therapy Austin TX") typically have lower difficulty.</span>
+  </div>
+  <div class="glossary-term" id="ltv">
+    <span class="glossary-abbr">LTV</span>
+    <span class="glossary-def"><strong>Lifetime Value.</strong> The total revenue a patient generates for your practice over their entire relationship with you. Includes initial treatment course, maintenance sessions, additional services, and referrals they send. A patient with an LTV of $8,000 can sustain a CAC of $500 and remain profitable. Knowing your LTV is essential for setting acquisition budget.</span>
+  </div>
+  <div class="glossary-term" id="mql">
+    <span class="glossary-abbr">MQL</span>
+    <span class="glossary-def"><strong>Marketing Qualified Lead.</strong> A lead who has engaged with your marketing &mdash; filling out a form, downloading a guide, or calling the clinic &mdash; and meets basic criteria for being a potential patient (e.g., location, insurance, diagnosis). MQLs are passed to the sales/consultation team for follow-up.</span>
+  </div>
+  <div class="glossary-term" id="organic-search">
+    <span class="glossary-abbr">Organic Search</span>
+    <span class="glossary-def"><strong>Unpaid search engine results.</strong> When someone types a query into Google and clicks a non-ad result, that is organic traffic. Organic search is driven by SEO (Search Engine Optimization) and builds over time. A well-optimized TMS website can rank for hundreds of keywords and generate consistent, free patient inquiries indefinitely.</span>
+  </div>
+  <div class="glossary-term" id="paid-search">
+    <span class="glossary-abbr">Paid Search</span>
+    <span class="glossary-def"><strong>Search engine advertising where you pay for each click on your ad.</strong> The most common platform is Google Ads (formerly AdWords). You bid on keywords; your ad appears above or below organic results; you pay per click. Paid search provides immediate traffic and leads but stops when your budget runs out &mdash; unlike organic SEO which compounds over time.</span>
+  </div>
+  <div class="glossary-term" id="quality-score">
+    <span class="glossary-abbr">Quality Score</span>
+    <span class="glossary-def"><strong>Google's rating (1&ndash;10) of the quality and relevance of your ads, keywords, and landing pages.</strong> Higher Quality Scores lead to lower CPCs and better ad positions. Factors: expected CTR, ad relevance, and landing page experience. Target Quality Score of 7 or above for best efficiency.</span>
+  </div>
+  <div class="glossary-term" id="referral">
+    <span class="glossary-abbr">Referral</span>
+    <span class="glossary-def"><strong>A patient directed to your practice by another healthcare provider (physician referral) or by an existing patient (patient referral).</strong> Physician referrals are initiated by a doctor sending a patient to your TMS clinic. Patient referrals (WOMM) are initiated when existing patients recommend your practice to friends or family. Referrals convert at 3&ndash;5x the rate of cold leads.</span>
+  </div>
+  <div class="glossary-term" id="remarketing">
+    <span class="glossary-abbr">Remarketing</span>
+    <span class="glossary-def"><strong>Also called Retargeting. A digital advertising technique that shows ads to people who have previously visited your website or engaged with your content.</strong> Because these users have already shown interest, remarketing typically has 3&ndash;5x higher conversion rates than standard display advertising. Implemented via tracking pixels (e.g., Google Ads remarketing tag).</span>
+  </div>
+  <div class="glossary-term" id="roi">
+    <span class="glossary-abbr">ROI</span>
+    <span class="glossary-def"><strong>Return on Investment.</strong> The net profit generated from a marketing activity relative to its cost. Calculated as (Revenue &minus; Cost) &divide; Cost. A marketing channel with an ROI of 200% generates $2 in profit for every $1 spent. ROI is the ultimate measure of marketing effectiveness.</span>
+  </div>
+  <div class="glossary-term" id="roas">
+    <span class="glossary-abbr">ROAS</span>
+    <span class="glossary-def"><strong>Return on Ad Spend.</strong> Specifically measures the revenue generated per dollar spent on advertising. Calculated as Revenue from Ads &divide; Ad Spend. Target ROAS varies by business model and margins &mdash; for TMS, a ROAS of 3x&ndash;5x is considered healthy; 8x+ is excellent. Note: ROAS does not account for profit margins, only revenue.</span>
+  </div>
+  <div class="glossary-term" id="saas">
+    <span class="glossary-abbr">SaaS</span>
+    <span class="glossary-def"><strong>Software as a Service.</strong> A software delivery model where applications are hosted in the cloud and accessed via subscription. In healthcare marketing, CRM platforms (HubSpot, Salesforce), email marketing tools (Mailchimp, Klaviyo), and scheduling software are often SaaS products. TMS List uses SaaS tools for patient acquisition analytics and CRM.</span>
+  </div>
+  <div class="glossary-term" id="seo">
+    <span class="glossary-abbr">SEO</span>
+    <span class="glossary-def"><strong>Search Engine Optimization.</strong> The practice of improving your website to increase its visibility in organic (non-paid) search engine results. Includes on-page SEO (keyword-optimized content, meta tags, headers), off-page SEO (backlinks, citations), and technical SEO (site speed, mobile usability, structured data). For TMS practices, local SEO (Google Business Profile optimization, local citations) is especially important.</span>
+  </div>
+  <div class="glossary-term" id="session">
+    <span class="glossary-abbr">Session</span>
+    <span class="glossary-def"><strong>A group of user interactions with your website that take place within a given time frame.</strong> In Google Analytics, a single session can include multiple page views, events, and conversions. Sessions are the foundational unit of website traffic measurement. High session counts with low conversion rates indicate traffic quality issues.</span>
+  </div>
+  <div class="glossary-term" id="utm">
+    <span class="glossary-abbr">UTM</span>
+    <span class="glossary-def"><strong>Urchin Tracking Module.</strong> A standardized text code added to a URL to track the performance of marketing campaigns in Google Analytics. UTM parameters identify the source (e.g., google), medium (e.g., cpc), campaign (e.g., spring_tms_promo), and content (e.g., ad_variant_a). Always use UTM parameters on every link in every campaign so you can accurately attribute leads and conversions to the correct channel.</span>
+  </div>
+  <div class="glossary-term" id="womm">
+    <span class="glossary-abbr">WOMM</span>
+    <span class="glossary-def"><strong>Word-of-Mouth Marketing.</strong>Patient-driven referrals where existing patients recommend your practice to people in their personal network. WOMM is the most trusted form of marketing &mdash; recommendations from friends and family outperform all other advertising channels in consumer trust. Patient testimonials, referral incentive programs, and exceptional treatment experiences all fuel WOMM.</span>
+  </div>
+</div>
+
+<!-- ===================================================
+     SECTION 8 — QR RESOURCE CENTER
+     =================================================== -->
+<div class="page-section">
+  <h2 class="page-break-before">8. QR Resource Center</h2>
+
+  <p class="section-intro">Use the QR codes below to connect your print materials to your digital ecosystem. Place these codes on business cards, brochures, referral pads, and patient intake packets to give referring physicians and prospective patients instant access to your TMS provider directory and pricing information.</p>
+
+  <div class="qr-section">
+    <div class="qr-section-title">Scan to Connect</div>
+    <div class="qr-section-sub">Access TMS List resources on any device &mdash; no typing required.</div>
+    <div class="qr-pair">
+      <div class="qr-item">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" style="width:80px;height:80px;border-radius:8px;border:2px solid rgba(255,255,255,0.3);" alt="TMS Provider Directory QR Code" />
+        <div class="qr-url">tmslist.com/map/</div>
+        <div class="qr-desc">Find a TMS provider near you</div>
+      </div>
+      <div class="qr-item">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/pricing/" style="width:80px;height:80px;border-radius:8px;border:2px solid rgba(255,255,255,0.3);" alt="TMS Pricing Guide QR Code" />
+        <div class="qr-url">tmslist.com/pricing/</div>
+        <div class="qr-desc">TMS cost and insurance guide</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>How to Use These QR Codes</h3>
+  <ul>
+    <li><strong>Print brochures:</strong> Place both codes on the back panel of your patient education brochures</li>
+    <li><strong>Business cards:</strong> Place the provider directory QR code on staff business cards for patients who want to refer friends or family</li>
+    <li><strong>Referral pads:</strong> Add the directory QR to referral pads you send to physician offices</li>
+    <li><strong>Patient intake packets:</strong> Include the pricing QR for patients concerned about cost</li>
+    <li><strong>Event materials:</strong> Add to any health fair or physician education event handout</li>
+  </ul>
+
+  <div class="callout green">
+    <div class="callout-title">QR Code Best Practices</div>
+    <p>Always test QR codes by scanning them with multiple phones before printing. Use a URL shortener (e.g., bit.ly/tms-map) if the full URL is long &mdash; shorter URLs generate more reliable scans. Ensure adequate white space around the QR code (at least 0.25 inches on all sides) and avoid placing QR codes on curved or uneven surfaces. Recommended minimum print size: 0.75 inches &times; 0.75 inches.</p>
+  </div>
+</div>
+
+<!-- ===================================================
+     TEAR-OUT CHECKLIST CARD
+     =================================================== -->
+<div class="page-section">
+  <h2 class="page-break-before">Tear-Out Resource Card</h2>
+
+  <div class="tearout-card">
+    <div class="tearout-header">TMS Patient Acquisition &mdash; Quick-Start Checklist</div>
+    <div class="tearout-grid">
+      <div>
+        <div class="tearout-item">
+          <div class="tearout-check">1</div>
+          <div>Set up Google Ads campaign with 50+ TMS keywords</div>
+        </div>
+        <div class="tearout-item">
+          <div class="tearout-check">2</div>
+          <div>Build dedicated landing page with above-fold CTA</div>
+        </div>
+        <div class="tearout-item">
+          <div class="tearout-check">3</div>
+          <div>Identify 10+ top referral source physicians</div>
+        </div>
+        <div class="tearout-item">
+          <div class="tearout-check">4</div>
+          <div>Send initial outreach email + letter to referrers</div>
+        </div>
+        <div class="tearout-item">
+          <div class="tearout-check">5</div>
+          <div>Launch social media: 4 posts/week + 2 reels/week</div>
+        </div>
+        <div class="tearout-item">
+          <div class="tearout-check">6</div>
+          <div>Implement testimonial collection at session 15&ndash;20</div>
+        </div>
+      </div>
+      <div>
+        <div class="tearout-item">
+          <div class="tearout-check">7</div>
+          <div>Claim and optimize Google Business Profile</div>
+        </div>
+        <div class="tearout-item">
+          <div class="tearout-check">8</div>
+          <div>Publish 2 evergreen blog posts/week (SEO)</div>
+        </div>
+        <div class="tearout-item">
+          <div class="tearout-check">9</div>
+          <div>Set up ROI tracking spreadsheet (all channels)</div>
+        </div>
+        <div class="tearout-item">
+          <div class="tearout-check">10</div>
+          <div>Schedule monthly marketing performance review</div>
+        </div>
+        <div class="tearout-item">
+          <div class="tearout-check">11</div>
+          <div>Schedule at least 2 lunch-and-learn events/month</div>
+        </div>
+        <div class="tearout-item">
+          <div class="tearout-check">12</div>
+          <div>Request 3 Google/Healthgrades reviews/week</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 10pt; display: flex; gap: 8pt; align-items: center; border-top: 1px solid var(--blue-200); padding-top: 8pt;">
+      <div class="tearout-qr" style="flex: 0 0 auto;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" style="width:56px;height:56px;" alt="TMS Provider Directory QR" />
+        <div class="tearout-qr-label">tmslist.com/map/</div>
+      </div>
+      <div style="flex: 1; font-size: 8pt; color: var(--gray-600); line-height: 1.5;">
+        <strong>Get the full playbook:</strong> Scan to access the complete TMS Patient Acquisition Playbook with all templates, spreadsheets, and step-by-step guides at <strong>tmslist.com</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================
+     FOOTER
+     =================================================== -->
+<div class="footer-stripe">
+  TMS List &mdash; Connecting patients with TMS providers across the United States &bull; tmslist.com &bull; 2026
+</div>
+
+</body>
+</html>

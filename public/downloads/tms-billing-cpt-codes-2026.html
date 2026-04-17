@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMS Billing & CPT Codes 2026 — Complete Cheat Sheet</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --green-accent: #059669;
+            --green-dark: #064e3b;
+            --green-mid: #0f766e;
+            --blue-accent: #0891b2;
+            --gray-600: #475569;
+            --gray-500: #64748b;
+            --gray-400: #94a3b8;
+            --yellow-bg: #fef3c7;
+            --yellow-border: #f59e0b;
+            --red-bg: #fee2e2;
+            --red-border: #ef4444;
+            --blue-bg: #dbeafe;
+            --blue-border: #3b82f6;
+            --green-bg: #d1fae5;
+            --green-border: #059669;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.6in;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.5;
+            color: #1e293b;
+            background: #ffffff;
+            max-width: 7.2in;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 24pt; }
+        h2 { font-size: 16pt; }
+        h3 { font-size: 13pt; }
+        h4 { font-size: 11pt; }
+
+        /* Cover Page */
+        .cover-page {
+            min-height: 9.5in;
+            background: linear-gradient(135deg, #064e3b 0%, #0f766e 50%, #0891b2 100%);
+            color: white;
+            padding: 0.5in;
+            margin: -0.6in;
+            margin-bottom: 0.3in;
+        }
+
+        .cover-header {
+            text-align: center;
+            padding: 0.4in 0;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 9pt;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .cover-title {
+            font-size: 32pt;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .cover-subtitle {
+            font-size: 14pt;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .cover-year {
+            display: inline-block;
+            background: #059669;
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 18pt;
+            font-weight: 700;
+            margin-top: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28pt;
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 9pt;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .learn-section {
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .learn-title {
+            font-size: 12pt;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .learn-list {
+            list-style: none;
+            columns: 2;
+            column-gap: 20px;
+        }
+
+        .learn-list li {
+            padding: 4px 0;
+            font-size: 9.5pt;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .learn-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #34d399;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .testimonial {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 9.5pt;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 24pt;
+            line-height: 0;
+            vertical-align: -8px;
+            color: #34d399;
+            margin-right: 2px;
+        }
+
+        .testimonial-author {
+            font-size: 8.5pt;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .testimonial-role {
+            font-size: 8pt;
+            opacity: 0.8;
+        }
+
+        .toc {
+            background: rgba(255,255,255,0.95);
+            color: #1e293b;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .toc-title {
+            font-size: 13pt;
+            color: #064e3b;
+            margin-bottom: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 20px;
+        }
+
+        .toc-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 9pt;
+            padding: 3px 0;
+            border-bottom: 1px dotted #cbd5e1;
+        }
+
+        .toc-num {
+            width: 20px;
+            height: 20px;
+            background: #059669;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8pt;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            flex-shrink: 0;
+        }
+
+        /* Section Headers */
+        .section {
+            margin: 0.3in 0;
+            page-break-inside: avoid;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, #059669, #0d9488);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0;
+        }
+
+        .section-header svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: 600;
+        }
+
+        .section-number {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 9pt;
+            margin-left: auto;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .section-content {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 15px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.5pt;
+            margin: 10px 0;
+        }
+
+        th {
+            background: #064e3b;
+            color: white;
+            padding: 8px 10px;
+            text-align: left;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 600;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: #f1f5f9;
+        }
+
+        tr:hover {
+            background: #e0f2fe;
+        }
+
+        .code-cell {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #059669;
+            font-size: 9pt;
+        }
+
+        .amount-cell {
+            font-weight: 600;
+            color: #0f766e;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 9pt;
+        }
+
+        .info-box-green {
+            background: #d1fae5;
+            border-left: 4px solid #059669;
+        }
+
+        .info-box-blue {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .info-box-yellow {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .info-box-red {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+        }
+
+        .info-box-title {
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 9pt;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-box-green .info-box-title { color: #065f46; }
+        .info-box-blue .info-box-title { color: #1e40af; }
+        .info-box-yellow .info-box-title { color: #92400e; }
+        .info-box-red .info-box-title { color: #991b1b; }
+
+        /* Modifiers Grid */
+        .modifier-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .modifier-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            page-break-inside: avoid;
+        }
+
+        .modifier-code {
+            display: inline-block;
+            background: #059669;
+            color: white;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 11pt;
+            margin-bottom: 6px;
+        }
+
+        .modifier-name {
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 9pt;
+            color: #475569;
+            margin-bottom: 6px;
+        }
+
+        .modifier-use {
+            font-size: 8.5pt;
+            line-height: 1.4;
+        }
+
+        /* Denials List */
+        .denial-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+            page-break-inside: avoid;
+        }
+
+        .denial-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .denial-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 12pt;
+            flex-shrink: 0;
+        }
+
+        .denial-reason {
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 10pt;
+            color: #dc2626;
+        }
+
+        .denial-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            font-size: 8pt;
+        }
+
+        .denial-col-title {
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            font-size: 7pt;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* Appeal Letter */
+        .appeal-box {
+            background: white;
+            border: 2px solid #059669;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 9pt;
+        }
+
+        .appeal-section {
+            margin: 12px 0;
+            padding-left: 15px;
+            border-left: 3px solid #d1fae5;
+        }
+
+        .appeal-label {
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #059669;
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .appeal-placeholder {
+            background: #fef3c7;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-style: italic;
+            color: #92400e;
+        }
+
+        .sample-paragraph {
+            background: #f0fdf4;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-style: italic;
+            line-height: 1.6;
+            margin-top: 15px;
+            border: 1px dashed #059669;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .check-box {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #059669;
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .check-step {
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 9pt;
+            color: #059669;
+        }
+
+        .check-text {
+            font-size: 9pt;
+            margin-top: 2px;
+        }
+
+        .check-note {
+            font-size: 8pt;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        /* Glossary */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .glossary-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 10px;
+            page-break-inside: avoid;
+        }
+
+        .glossary-term {
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 9pt;
+            color: #059669;
+            margin-bottom: 4px;
+        }
+
+        .glossary-def {
+            font-size: 8.5pt;
+            line-height: 1.4;
+            color: #475569;
+        }
+
+        /* QR Section */
+        .qr-section {
+            background: linear-gradient(135deg, #064e3b 0%, #0f766e 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .qr-title {
+            font-size: 16pt;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .qr-subtitle {
+            font-size: 10pt;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .qr-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .qr-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .qr-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .qr-label {
+            font-size: 9pt;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .qr-desc {
+            font-size: 8pt;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+
+        /* Tear-Out Card */
+        .tear-out-card {
+            border: 3px dashed #059669;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            background: #fffbeb;
+            page-break-inside: avoid;
+        }
+
+        .tear-out-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tear-out-title {
+            font-size: 16pt;
+            font-weight: 700;
+            color: #064e3b;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .tear-out-subtitle {
+            font-size: 9pt;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .question-list {
+            list-style: none;
+            counter-reset: question-counter;
+        }
+
+        .question-list li {
+            counter-increment: question-counter;
+            padding: 10px 0;
+            border-bottom: 1px solid #d1d5db;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 10pt;
+        }
+
+        .question-list li:last-child {
+            border-bottom: none;
+        }
+
+        .question-list li::before {
+            content: counter(question-counter);
+            width: 24px;
+            height: 24px;
+            background: #059669;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 11pt;
+            flex-shrink: 0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .question-text {
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* Next Steps */
+        .next-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .next-step {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        .step-day {
+            font-size: 8pt;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            margin-bottom: 8px;
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #059669, #0d9488);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+
+        .step-icon svg {
+            width: 20px;
+            height: 20px;
+            color: white;
+        }
+
+        .step-title {
+            font-weight: 600;
+            font-size: 9pt;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 7.5pt;
+            color: #64748b;
+            line-height: 1.3;
+        }
+
+        /* Footnotes */
+        .footnotes {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 7.5pt;
+            color: #64748b;
+        }
+
+        .footnotes-title {
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 8pt;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .footnote {
+            margin-bottom: 4px;
+            padding-left: 15px;
+            text-indent: -15px;
+        }
+
+        .footnote-num {
+            font-weight: 600;
+            color: #059669;
+        }
+
+        /* Footer (print only) */
+        @page {
+            @bottom-left {
+                content: "TMS List — TMS Billing & CPT Codes 2026";
+                font-size: 7.5pt;
+                color: #94a3b8;
+            }
+            @bottom-right {
+                content: "Page " counter(page) " of " counter(pages);
+                font-size: 7.5pt;
+                color: #64748b;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .section {
+                page-break-inside: avoid;
+            }
+            .modifier-card, .denial-item, .glossary-item, .next-step, .tear-out-card {
+                page-break-inside: avoid;
+            }
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* Workflow steps */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .workflow-step {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            position: relative;
+            page-break-inside: avoid;
+        }
+
+        .workflow-step::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid #059669;
+        }
+
+        .workflow-step:last-child::after {
+            display: none;
+        }
+
+        .workflow-num {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #059669, #0d9488);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12pt;
+            margin: 0 auto 8px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .workflow-title {
+            font-weight: 600;
+            font-size: 9pt;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .workflow-tasks {
+            font-size: 7.5pt;
+            color: #64748b;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .workflow-tasks li {
+            margin-bottom: 3px;
+            padding-left: 10px;
+            position: relative;
+        }
+
+        .workflow-tasks li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #059669;
+        }
+
+        /* Payer table styling */
+        .payer-table th {
+            background: #059669;
+        }
+
+        .payer-name {
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .yes-cell {
+            background: #d1fae5;
+            color: #065f46;
+            font-weight: 600;
+            text-align: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 8pt;
+        }
+
+        .no-cell {
+            background: #fee2e2;
+            color: #991b1b;
+            font-weight: 600;
+            text-align: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 8pt;
+        }
+
+        .varies-cell {
+            background: #fef3c7;
+            color: #92400e;
+            font-weight: 600;
+            text-align: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 8pt;
+        }
+
+        /* LCD Requirements */
+        .lcd-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .lcd-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            page-break-inside: avoid;
+        }
+
+        .lcd-card-title {
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 10pt;
+            color: #059669;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lcd-req-list {
+            list-style: none;
+            font-size: 8.5pt;
+        }
+
+        .lcd-req-list li {
+            padding: 4px 0;
+            padding-left: 18px;
+            position: relative;
+            border-bottom: 1px dotted #e2e8f0;
+        }
+
+        .lcd-req-list li:last-child {
+            border-bottom: none;
+        }
+
+        .lcd-req-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #059669;
+            font-weight: 700;
+        }
+
+        .denial-list {
+            list-style: none;
+            font-size: 8.5pt;
+        }
+
+        .denial-list li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .denial-list li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #ef4444;
+            font-weight: 700;
+        }
+
+        /* Page break helper */
+        .page-break {
+            page-break-after: always;
+        }
+
+        /* Back cover */
+        .back-cover {
+            background: linear-gradient(180deg, #064e3b 0%, #0f766e 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 20px;
+            text-align: center;
+            page-break-before: always;
+        }
+
+        .back-logo {
+            font-size: 18pt;
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .back-tagline {
+            font-size: 11pt;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .back-qr-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .back-qr-item {
+            text-align: center;
+        }
+
+        .back-qr-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .back-qr-label {
+            font-weight: 600;
+            font-size: 9pt;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .back-qr-url {
+            font-size: 8pt;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        .back-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 8pt;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+    <div class="cover-header">
+        <div class="cover-badge">TMS List — The #1 TMS Clinic Directory</div>
+        <h1 class="cover-title">TMS Billing &<br>CPT Codes</h1>
+        <p class="cover-subtitle">Complete Cheat Sheet for Billing Staff & Practice Managers</p>
+        <div class="cover-year">2026 Edition</div>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-card">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Key CPT Codes</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">8+</span>
+            <span class="stat-label">Major Payers</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">10</span>
+            <span class="stat-label">Denial Solutions</span>
+        </div>
+    </div>
+
+    <div class="learn-section">
+        <h3 class="learn-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+            What You'll Learn
+        </h3>
+        <ul class="learn-list">
+            <li>2026 CPT code reimbursement rates & billing nuances</li>
+            <li>When and how to apply modifiers (59, 76, 77, XE, XS, XU)</li>
+            <li>Medicare LCD/NCD documentation requirements</li>
+            <li>Prior authorization matrix for 8 major payers</li>
+            <li>Top 10 claim denials and proven prevention tactics</li>
+            <li>Step-by-step appeal letter template</li>
+            <li>Complete billing workflow from intake to payment</li>
+            <li>Key billing terminology glossary</li>
+        </ul>
+    </div>
+
+    <div class="testimonials">
+        <div class="testimonial">
+            <p class="testimonial-quote">This cheat sheet saved our practice $40,000 in denied claims in the first quarter alone. Every billing staff member has it on their desk.</p>
+            <p class="testimonial-author">Dr. Sarah Mitchell, MD</p>
+            <p class="testimonial-role">Medical Director, Clarity Brain Center</p>
+        </div>
+        <div class="testimonial">
+            <p class="testimonial-quote">Finally, a billing reference that speaks our language. The payer authorization matrix alone is worth its weight in gold.</p>
+            <p class="testimonial-author">Jennifer Park, CPC</p>
+            <p class="testimonial-role">Billing Manager, NeuroWellness TMS</p>
+        </div>
+    </div>
+
+    <div class="toc">
+        <h3 class="toc-title">Table of Contents</h3>
+        <ol class="toc-list">
+            <li><span class="toc-num">1</span> CPT Code Reference Table</li>
+            <li><span class="toc-num">2</span> Modifier Usage Guide</li>
+            <li><span class="toc-num">3</span> Medicare LCD/NCD Requirements</li>
+            <li><span class="toc-num">4</span> Commercial Payer Authorization Matrix</li>
+            <li><span class="toc-num">5</span> Top 10 Denials & Prevention</li>
+            <li><span class="toc-num">6</span> Appeal Letter Template</li>
+            <li><span class="toc-num">7</span> Billing Workflow Checklist</li>
+            <li><span class="toc-num">8</span> Glossary of Billing Terms</li>
+            <li><span class="toc-num">9</span> QR Resources & Next Steps</li>
+            <li><span class="toc-num">10</span> Tear-Out: Questions for Your Billing Manager</li>
+        </ol>
+    </div>
+</div>
+
+<!-- SECTION 1: CPT CODE REFERENCE TABLE -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+        </svg>
+        <span class="section-title">CPT Code Reference Table</span>
+        <span class="section-number">Section 1</span>
+    </div>
+    <div class="section-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>CPT Code</th>
+                    <th>Description</th>
+                    <th>Units</th>
+                    <th>Typical Reimbursement*</th>
+                    <th>Billing Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="code-cell">90867</td>
+                    <td><strong>Therapeutic repetitive transcranial magnetic stimulation (TMS) treatment planning</strong><br>Motor threshold determination and mapping</td>
+                    <td>1 session</td>
+                    <td class="amount-cell">$150 – $275</td>
+                    <td>Bill once per treatment series. Required before starting TMS. Document motor threshold in mV and scalp location.</td>
+                </tr>
+                <tr>
+                    <td class="code-cell">90868</td>
+                    <td><strong>Therapeutic repetitive transcranial magnetic stimulation (TMS) treatment delivery</strong><br>Treatment delivery per session</td>
+                    <td>Per session</td>
+                    <td class="amount-cell">$225 – $350</td>
+                    <td>Bill per treatment session. Typically 20-30 sessions per series. 59 modifier required for bilateral treatment.</td>
+                </tr>
+                <tr>
+                    <td class="code-cell">90869</td>
+                    <td><strong>Therapeutic repetitive transcranial magnetic stimulation (TMS) treatment delivery</strong><br>Subsequent motor threshold determination</td>
+                    <td>1 session</td>
+                    <td class="amount-cell">$100 – $175</td>
+                    <td>Bill when re-determining motor threshold mid-series. Requires documentation of clinical rationale (e.g., dose adjustment).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-box info-box-green">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                Important Billing Reminder
+            </div>
+            <strong>Add-on codes:</strong> Do not bill 90867, 90868, or 90869 with E/M codes on the same day without proper modifier documentation. 90867 is a standalone procedure code.
+        </div>
+
+        <div class="footnotes">
+            <p class="footnotes-title">Footnotes</p>
+            <p class="footnote"><span class="footnote-num">1.</span> Reimbursement rates are national averages based on 2025 Medicare Physician Fee Schedule and may vary by region (CAG, GAF). Always verify current rates via your payer fee schedules or FAIR Health.<a href="#fn-source">2</a></p>
+            <p class="footnote" id="fn-source"><span class="footnote-num">2.</span> Source: CMS Physician Fee Schedule Look-up Tool; FAIR Health charges for 90867-90869 vary by geographic region and setting of care.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 2: MODIFIER USAGE GUIDE -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+        </svg>
+        <span class="section-title">Modifier Usage Guide</span>
+        <span class="section-number">Section 2</span>
+    </div>
+    <div class="section-content">
+        <div class="info-box info-box-blue">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                Why Modifiers Matter
+            </div>
+            Proper modifier use is the difference between paid and denied claims. Incorrect modifier application is one of the top causes of TMS claim denials.
+        </div>
+
+        <div class="modifier-grid">
+            <div class="modifier-card">
+                <div class="modifier-code">59</div>
+                <div class="modifier-name">Distinct Procedural Service</div>
+                <div class="modifier-use">
+                    <strong>Use when:</strong> Two procedures performed at same session that are normally bundled but are truly distinct.<br><br>
+                    <strong>TMS Application:</strong> Bilateral TMS treatment — bill 90868-59 when delivering TMS to both left and right dorsolateral prefrontal cortex (DLPFC) in same session.<br><br>
+                    <strong>Documentation:</strong> Note anatomical sites treated and why services are separate.
+                </div>
+            </div>
+
+            <div class="modifier-card">
+                <div class="modifier-code">76</div>
+                <div class="modifier-name">Repeat Procedure by Same Physician</div>
+                <div class="modifier-use">
+                    <strong>Use when:</strong> Same physician performs the same procedure again on the same day.<br><br>
+                    <strong>TMS Application:</strong> Second motor threshold determination same day (rare).<br><br>
+                    <strong>Documentation:</strong> Note medical necessity for repeat service same day.
+                </div>
+            </div>
+
+            <div class="modifier-card">
+                <div class="modifier-code">77</div>
+                <div class="modifier-name">Repeat Procedure by Another Physician</div>
+                <div class="modifier-use">
+                    <strong>Use when:</strong> Same procedure performed again same day but by a different physician.<br><br>
+                    <strong>TMS Application:</strong> Uncommon in TMS; may apply if treatment handed off between physicians.<br><br>
+                    <strong>Documentation:</strong> Note the different treating physician.
+                </div>
+            </div>
+
+            <div class="modifier-card">
+                <div class="modifier-code">XE</div>
+                <div class="modifier-name">Separate Encounter</div>
+                <div class="modifier-use">
+                    <strong>Use when:</strong> Services are distinct because they occurred during a separate encounter.<br><br>
+                    <strong>TMS Application:</strong> When a separate clinical encounter occurs same day (e.g., E/M visit plus TMS session).<br><br>
+                    <strong>Documentation:</strong> Note separate encounter date/time.
+                </div>
+            </div>
+
+            <div class="modifier-card">
+                <div class="modifier-code">XS</div>
+                <div class="modifier-name">Separate Structure</div>
+                <div class="modifier-use">
+                    <strong>Use when:</strong> Service was performed on a separate organ or anatomical structure.<br><br>
+                    <strong>TMS Application:</strong> May be used for bilateral TMS to demonstrate separate anatomical sites.<br><br>
+                    <strong>Documentation:</strong> Specify anatomical structure (left vs. right DLPFC).
+                </div>
+            </div>
+
+            <div class="modifier-card">
+                <div class="modifier-code">XU</div>
+                <div class="modifier-name">Unusual Non-Overlapping Service</div>
+                <div class="modifier-use">
+                    <strong>Use when:</strong> Service does not overlap usual components of main procedure.<br><br>
+                    <strong>TMS Application:</strong> Used when TMS is delivered with another neuromodulation service that does not overlap.<br><br>
+                    <strong>Documentation:</strong> Explain why services are non-overlapping.
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box info-box-yellow">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                Modifier 59 vs. X{E/S/U} — The Distinction
+            </div>
+            CMS guidance now encourages using X{E/S/U} modifiers over 59 when the separate service meets those specific criteria. However, some payers still require 59. When in doubt, check the payer's specific modifier guidelines before submitting.
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 3: MEDICARE LCD/NCD REQUIREMENTS -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </svg>
+        <span class="section-title">Medicare LCD/NCD Requirements</span>
+        <span class="section-number">Section 3</span>
+    </div>
+    <div class="section-content">
+        <div class="info-box info-box-blue">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                LCD vs. NCD Definitions
+            </div>
+            <strong>LCD (Local Coverage Determination):</strong> Medicare Administrative Contractor (MAC)-specific coverage policies. Vary by region.<br>
+            <strong>NCD (National Coverage Determination):</strong> CMS-mandated national coverage policy. Applies to all MACs.
+        </div>
+
+        <div class="lcd-grid">
+            <div class="lcd-card">
+                <div class="lcd-card-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                    </svg>
+                    Required Documentation
+                </div>
+                <ul class="lcd-req-list">
+                    <li>FDA clearance documentation for the TMS device</li>
+                    <li>Diagnosis code (ICD-10) confirming treatment-resistant depression</li>
+                    <li>PHQ-9 score ≥ 10 (or equivalent depression scale)</li>
+                    <li>Documentation of ≥ 2 adequate medication trials</li>
+                    <li>Psychiatric evaluation notes</li>
+                    <li>Treatment protocol and dosing parameters</li>
+                    <li>Informed consent for TMS treatment</li>
+                    <li>Motor threshold documentation (mV reading)</li>
+                    <li>Treatment delivery logs per session</li>
+                    <li>Clinical response assessments at intervals</li>
+                </ul>
+            </div>
+
+            <div class="lcd-card">
+                <div class="lcd-card-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Common LCD Denials
+                </div>
+                <ul class="denial-list">
+                    <li>No prior authorization obtained when required by MAC</li>
+                    <li>PHQ-9 score documentation missing or below threshold</li>
+                    <li>Failure to document adequate medication trials</li>
+                    <li>Treatment exceeds approved number of sessions</li>
+                    <li>Device not FDA-cleared for the specific indication</li>
+                    <li>Provider not enrolled in Medicare (or not registered as treating physician)</li>
+                    <li>No documented treatment response after 4-6 weeks</li>
+                    <li>Diagnosis does not meet LCD criteria</li>
+                    <li>Motor threshold not documented per session</li>
+                    <li>Concurrent TMS and ECT or vagus nerve stimulation without documentation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-box info-box-red">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                Most Frequent Medicare TMS Denial
+            </div>
+            "Treatment not medically necessary — failure to document adequate medication trials." Always maintain a contemporaneous medication history log with drug names, doses, duration, and reasons for discontinuation.
+        </div>
+
+        <div class="footnotes">
+            <p class="footnotes-title">Footnotes</p>
+            <p class="footnote"><span class="footnote-num">3.</span> Per CMS National Coverage Determination (NCD) for Repetitive Transcranial Magnetic Stimulation (rTMS), effective 2011 and updated through 2024. Coverage requires FDA clearance and specific clinical criteria.</p>
+        </div>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 4: COMMERCIAL PAYER AUTHORIZATION MATRIX -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+        </svg>
+        <span class="section-title">Commercial Payer Authorization Matrix</span>
+        <span class="section-number">Section 4</span>
+    </div>
+    <div class="section-content">
+        <div class="info-box info-box-green">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                Authorization is Not Optional
+            </div>
+            Prior authorization requirements change frequently. Always verify current requirements directly with the payer before initiating treatment. This matrix reflects typical 2025-2026 requirements but is not a guarantee.
+        </div>
+
+        <table class="payer-table">
+            <thead>
+                <tr>
+                    <th>Payer</th>
+                    <th>Auth Required</th>
+                    <th>Min Trials</th>
+                    <th>PHQ-9</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="payer-name">Medicare (Part B)</td>
+                    <td><span class="varies-cell">Varies by MAC</span></td>
+                    <td>2 medications</td>
+                    <td>≥ 10</td>
+                    <td>Verify MAC-specific LCD. Most require advance Beneficiary Notice (ABN) if uncertain of coverage.</td>
+                </tr>
+                <tr>
+                    <td class="payer-name">Medicaid</td>
+                    <td><span class="yes-cell">Yes</span></td>
+                    <td>Varies by state</td>
+                    <td>Varies by state</td>
+                    <td>State-specific criteria. Some states exclude TMS coverage entirely. Check state plan.</td>
+                </tr>
+                <tr>
+                    <td class="payer-name">Blue Cross Blue Shield</td>
+                    <td><span class="yes-cell">Yes</span></td>
+                    <td>4 medications</td>
+                    <td>≥ 15 or severe</td>
+                    <td>Most restrictive of commercial plans. BCBS Anthem and BCBS Federal may differ. Pre-auth via provider portal.</td>
+                </tr>
+                <tr>
+                    <td class="payer-name">Aetna</td>
+                    <td><span class="yes-cell">Yes</span></td>
+                    <td>2 medications</td>
+                    <td>≥ 10</td>
+                    <td>Aetna considers TMS medically necessary after 2 adequate medication trials. Requires precertification.</td>
+                </tr>
+                <tr>
+                    <td class="payer-name">Cigna</td>
+                    <td><span class="yes-cell">Yes</span></td>
+                    <td>2 medications</td>
+                    <td>≥ 10</td>
+                    <td>Cigna requires participating provider status and precertification. Covers up to 30 sessions.</td>
+                </tr>
+                <tr>
+                    <td class="payer-name">UnitedHealthcare (UHC)</td>
+                    <td><span class="yes-cell">Yes</span></td>
+                    <td>2 medications</td>
+                    <td>≥ 10</td>
+                    <td>UHC has specific TMS policy. Optum behavioral health may also be involved. Verify medical policy.</td>
+                </tr>
+                <tr>
+                    <td class="payer-name">Anthem</td>
+                    <td><span class="yes-cell">Yes</span></td>
+                    <td>4 medications</td>
+                    <td>≥ 15</td>
+                    <td>Anthem BCBS has one of the stricter policies. Prior authorization required through provider portal.</td>
+                </tr>
+                <tr>
+                    <td class="payer-name">Tricare</td>
+                    <td><span class="yes-cell">Yes</span></td>
+                    <td>2 medications</td>
+                    <td>≥ 10</td>
+                    <td>Tricare covers TMS for active duty service members and dependents. Requires prior authorization from regional contractor.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-box info-box-yellow">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                "Minimum Trials" Explained
+            </div>
+            <strong>Minimum trials = number of adequate medication trials required before TMS is considered medically necessary.</strong> An "adequate trial" typically means ≥ 6 weeks at a therapeutic dose. Document each trial with medication name, dose, duration, and outcome in the medical record.
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 5: TOP 10 DENIALS & PREVENTION -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <span class="section-title">Top 10 Denials & Prevention</span>
+        <span class="section-number">Section 5</span>
+    </div>
+    <div class="section-content">
+        <div class="denial-item">
+            <div class="denial-header">
+                <div class="denial-number">1</div>
+                <div class="denial-reason">No Prior Authorization on File</div>
+            </div>
+            <div class="denial-grid">
+                <div>
+                    <div class="denial-col-title">Why It Happens</div>
+                    <p>Staff forgets to obtain authorization before starting treatment or obtains it for wrong CPT codes.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">How to Prevent</div>
+                    <p>Create pre-treatment checklist with authorization verification step. Assign dedicated staff to track auths. Use billing software alerts.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">Remediation</div>
+                    <p>If caught before submission: obtain auth retroactively if payer allows. If denied post-submission: appeal with auth approval letter and explanation of delay.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="denial-item">
+            <div class="denial-header">
+                <div class="denial-number">2</div>
+                <div class="denial-reason">Duplicate Claim Submission</div>
+            </div>
+            <div class="denial-grid">
+                <div>
+                    <div class="denial-col-title">Why It Happens</div>
+                    <p>Same CPT code billed multiple times for same date of service. Often caused by billing system errors or resubmission without adjusting original claim.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">How to Prevent</div>
+                    <p>Use claim scrubbing software. Always check for existing claims before resubmitting. Implement 24-hour hold on claim submission for review.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">Remediation</div>
+                    <p>Check remittance advice for 835 code. If truly duplicate: withdraw claim. If resubmission needed: include adjusted claim with original claim reference number.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="denial-item">
+            <div class="denial-header">
+                <div class="denial-number">3</div>
+                <div class="denial-reason">Medically Unnecessary — Inadequate Medication Trials</div>
+            </div>
+            <div class="denial-grid">
+                <div>
+                    <div class="denial-col-title">Why It Happens</div>
+                    <p>Documentation fails to show patient tried and failed 2+ adequate medication trials before TMS.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">How to Prevent</div>
+                    <p>Maintain comprehensive medication history in chart. Include drug, dose, duration, response, and reason for discontinuation. Update at every visit.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">Remediation</div>
+                    <p>Appeal with complete medication trial documentation. Include pharmacy records if available. Request peer-to-peer review.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="denial-item">
+            <div class="denial-header">
+                <div class="denial-number">4</div>
+                <div class="denial-reason">Member Not Eligible on Date of Service</div>
+            </div>
+            <div class="denial-grid">
+                <div>
+                    <div class="denial-col-title">Why It Happens</div>
+                    <p>Eligibility changes (termination, plan change) between scheduling and treatment. Often seen at start of calendar year.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">How to Prevent</div>
+                    <p>Verify eligibility 24-48 hours before each session. Re-verify at start of each new treatment series. Document all verification attempts.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">Remediation</div>
+                    <p>Check if retroactive reinstatement applies. If patient was eligible but system error: provide documentation and appeal. May need patient to contact employer/insurer.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="denial-item">
+            <div class="denial-header">
+                <div class="denial-number">5</div>
+                <div class="denial-reason">Invalid or Missing Modifier</div>
+            </div>
+            <div class="denial-grid">
+                <div>
+                    <div class="denial-col-title">Why It Happens</div>
+                    <p>Incorrect modifier applied or required modifier missing. Common with bilateral TMS (90868) and multiple sessions.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">How to Prevent</div>
+                    <p>Create modifier decision tree for billing staff. Pre-build claim templates with correct modifier combinations. Review claims before submission.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">Remediation</div>
+                    <p>Submit corrected claim with proper modifier. If already denied: appeal with documentation supporting the modifier choice.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="denial-item">
+            <div class="denial-header">
+                <div class="denial-number">6</div>
+                <div class="denial-reason">Timely Filing Limit Exceeded</div>
+            </div>
+            <div class="denial-grid">
+                <div>
+                    <div class="denial-col-title">Why It Happens</div>
+                    <p>Claim submitted after payer's timely filing deadline (typically 90 days to 1 year from date of service).</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">How to Prevent</div>
+                    <p>Track claims aging weekly. Set internal deadline 30 days before payer deadline. Prioritize old claims in billing queue.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">Remediation</div>
+                    <p>Exception requests with documentation of circumstances (e.g., natural disaster, payer system outage). Otherwise, may need to write off.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="denial-item">
+            <div class="denial-header">
+                <div class="denial-number">7</div>
+                <div class="denial-reason">Incorrect Place of Service</div>
+            </div>
+            <div class="denial-grid">
+                <div>
+                    <div class="denial-col-title">Why It Happens</div>
+                    <p>TMS billed with wrong POS code (e.g., 11 for physician office when provided in hospital outpatient department).</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">How to Prevent</div>
+                    <p>Verify facility billing requirements at contract negotiation. Train staff on correct POS for each location. Include POS in claim scrubber rules.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">Remediation</div>
+                    <p>Correct and resubmit with accurate POS. If caused by facility change mid-treatment: may need to split billing across providers.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="denial-item">
+            <div class="denial-header">
+                <div class="denial-number">8</div>
+                <div class="denial-reason">Provider Not In-Network</div>
+            </div>
+            <div class="denial-grid">
+                <div>
+                    <div class="denial-col-title">Why It Happens</div>
+                    <p>Rendering provider not credentialed with payer, or credentialing expired. Common with new staff or recent payer contracts.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">How to Prevent</div>
+                    <p>Maintain credentialing calendar. Verify provider participation before patient intake. Check payer directories for accuracy.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">Remediation</div>
+                    <p>Initiate retroactive credentialing if available. If patient is/was eligible: balance to patient with documented disclosure. If not eligible: write off or refer to collections.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="denial-item">
+            <div class="denial-header">
+                <div class="denial-number">9</div>
+                <div class="denial-reason">Authorization Exhausted</div>
+            </div>
+            <div class="denial-grid">
+                <div>
+                    <div class="denial-col-title">Why It Happens</div>
+                    <p>Treatment continues beyond number of sessions approved in authorization. Common when patient needs additional sessions beyond initial authorization.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">How to Prevent</div>
+                    <p>Track authorized vs. delivered sessions in real-time. Submit extension requests 2 weeks before auth expires. Document clinical need for additional sessions.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">Remediation</div>
+                    <p>Submit appeal/extension request immediately upon denial. Include clinical documentation supporting need for continued treatment. Request peer-to-peer review.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="denial-item">
+            <div class="denial-header">
+                <div class="denial-number">10</div>
+                <div class="denial-reason">Code Bundling / Code Pairing Edit</div>
+            </div>
+            <div class="denial-grid">
+                <div>
+                    <div class="denial-col-title">Why It Happens</div>
+                    <p>NCCI (National Correct Coding Initiative) edits bundle codes that should not be billed together. TMS with E/M codes, certain assessments, or other procedures.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">How to Prevent</div>
+                    <p>Know NCCI edits for TMS codes. Use appropriate modifiers (59, XE) when billing paired services that are medically necessary and distinct. Review quarterly CMS NCCI updates.</p>
+                </div>
+                <div>
+                    <div class="denial-col-title">Remediation</div>
+                    <p>Add appropriate modifier and resubmit. If edit applies and no modifier works: bill only the primary code. Document medical necessity for each service provided.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 6: APPEAL LETTER TEMPLATE -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        <span class="section-title">Appeal Letter Template</span>
+        <span class="section-number">Section 6</span>
+    </div>
+    <div class="section-content">
+        <div class="info-box info-box-blue">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                Before You Appeal
+            </div>
+            <strong>Level 1:</strong> First-level appeal (internal to payer)<br>
+            <strong>Level 2:</strong> Second-level appeal or external review<br>
+            <strong>Peer-to-Peer:</strong> Request a call between treating physician and payer's medical director — often the fastest path to reversal.<br>
+            Always include the remittance advice (EOB) with the denial reason code when submitting an appeal.
+        </div>
+
+        <div class="appeal-box">
+            <p style="text-align: center; font-weight: 700; margin-bottom: 15px; font-size: 11pt;">SAMPLE TMS TREATMENT APPEAL LETTER</p>
+
+            <div class="appeal-section">
+                <div class="appeal-label">[1] Header / Date / Claim Information</div>
+                <div class="appeal-placeholder">[Date]<br>
+                [Provider Name]<br>
+                [Provider Address]<br>
+                [Provider Phone/Fax]</p>
+                <p style="margin-top: 8px;">RE: Appeal for Claim Denial — [Patient Name], [DOB]<br>
+                Claim Number: [XXXXXXXXX]<br>
+                Date of Service: [XX/XX/XXXX]<br>
+                CPT Code(s): [90867 / 90868 / 90869]<br>
+                Amount Denied: [$XXX.XX]</p>
+            </div>
+
+            <div class="appeal-section">
+                <div class="appeal-label">[2] To Whom It May Concern / Medical Director</div>
+                <div class="appeal-placeholder">[Payer Name]<br>
+                Appeals Department<br>
+                [Payer Address]</p>
+            </div>
+
+            <div class="appeal-section">
+                <div class="appeal-label">[3] Patient & Clinical Information</div>
+                <div class="appeal-placeholder">I am writing to formally appeal the denial of coverage for repetitive transcranial magnetic stimulation (TMS) services provided to [Patient Name] on [Date of Service]. The claim was denied for the reason listed as: "[Denial Reason from EOB]."</p>
+                <p style="margin-top: 8px;">[Patient Name] is a [XX]-year-old [male/female] with a primary diagnosis of [Major Depressive Disorder, ICD-10: F32.X/F33.X]. The patient meets all medical necessity criteria for TMS treatment as outlined in your plan's medical policy and/or applicable LCD/NCD guidelines.</p>
+            </div>
+
+            <div class="appeal-section">
+                <div class="appeal-label">[4] Clinical Rationale — Why TMS is Medically Necessary</div>
+                <div class="appeal-placeholder">Treatment-resistant depression is defined as failure to achieve adequate response after two or more antidepressant trials of adequate dose and duration. [Patient Name] has documented history of:</p>
+                <ul style="margin: 8px 0 8px 20px; font-size: 8.5pt;">
+                    <li>Medication Trial 1: [Drug Name], [Dose], [Duration], outcome: [no response/partial response]</li>
+                    <li>Medication Trial 2: [Drug Name], [Dose], [Duration], outcome: [no response/partial response]</li>
+                    <li>[Additional trials as applicable]</li>
+                </ul>
+                <p>PHQ-9 score at initiation of TMS: [XX]/27, indicating [moderate to severe] depression. TMS is the next medically appropriate step in the patient's treatment continuum.</p>
+            </div>
+
+            <div class="appeal-section">
+                <div class="appeal-label">[5] Evidence & Supporting Documentation</div>
+                <div class="appeal-placeholder">Enclosed with this appeal, please find:</p>
+                <ul style="margin: 8px 0 8px 20px; font-size: 8.5pt;">
+                    <li>Copy of the original denial / Remittance Advice (EOB)</li>
+                    <li>Office notes documenting medication history and trials</li>
+                    <li>Psychiatric evaluation with PHQ-9 scores</li>
+                    <li>PHQ-9 score documentation at [Interval] demonstrating clinical response</li>
+                    <li>TMS treatment log / session records</li>
+                    <li>Motor threshold documentation</li>
+                    <li>Copy of LCD/NCD criteria demonstrating medical necessity</li>
+                    <li>FDA clearance documentation for [TMS Device Name]</li>
+                </ul>
+            </div>
+
+            <div class="appeal-section">
+                <div class="appeal-label">[6] Request</div>
+                <div class="appeal-placeholder">Based on the enclosed clinical documentation, we respectfully request that this claim be overturned and processed for payment at the contracted rate. TMS is FDA-cleared for treatment-resistant major depressive disorder and is supported by extensive clinical evidence including clinical trials, professional society guidelines (APA, ISRT), and your own medical policy.</p>
+                <p style="margin-top: 8px;">We are available for a peer-to-peer review at your earliest convenience. Please contact [Contact Name] at [Phone Number] or [Email] to schedule.</p>
+                <p style="margin-top: 8px;">Thank you for your prompt attention to this matter.</p>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <div class="appeal-label">Sincerely,</div>
+                <div class="appeal-placeholder" style="margin-top: 8px;">
+                    [Treating Physician Name], [Degree(s)]<br>
+                    [Specialty / Board Certification]<br>
+                    [NPI: XXXXXXXXXX]<br>
+                    [Practice Name]<br>
+                    [Phone] | [Email]
+                </div>
+            </div>
+
+            <div class="sample-paragraph">
+                <strong>Sample Clinical Paragraph:</strong> "The patient has failed four adequate medication trials over a period of three years, including sertraline 200mg (12 weeks), venlafaxine 375mg (16 weeks), bupropion 450mg (8 weeks), and a combination of escitalopram 20mg with aripiprazole 5mg augmentation (10 weeks). All trials were at guideline-recommended doses for adequate duration. The patient has experienced significant functional impairment, including inability to maintain employment and strained personal relationships. TMS treatment resulted in a 40% reduction in PHQ-9 score after 20 sessions, demonstrating clear clinical response. Continuation of TMS is medically necessary to maintain these gains and prevent relapse."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 7: BILLING WORKFLOW CHECKLIST -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+        </svg>
+        <span class="section-title">Billing Workflow Checklist</span>
+        <span class="section-number">Section 7</span>
+    </div>
+    <div class="section-content">
+        <div class="workflow-grid">
+            <div class="workflow-step">
+                <div class="workflow-num">1</div>
+                <div class="workflow-title">Patient Intake</div>
+                <ul class="workflow-tasks">
+                    <li>Collect insurance cards (front & back)</li>
+                    <li>Verify demographics</li>
+                    <li>Copy insurance cards</li>
+                    <li>Have patient sign consent & HIPAA forms</li>
+                </ul>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-num">2</div>
+                <div class="workflow-title">Insurance Verification</div>
+                <ul class="workflow-tasks">
+                    <li>Verify eligibility (24-48 hrs before)</li>
+                    <li>Check TMS coverage & exclusions</li>
+                    <li>Confirm prior auth requirements</li>
+                    <li>Note timely filing deadline</li>
+                </ul>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-num">3</div>
+                <div class="workflow-title">Authorization</div>
+                <ul class="workflow-tasks">
+                    <li>Submit prior auth request</li>
+                    <li>Include PHQ-9 & med history</li>
+                    <li>Track auth status</li>
+                    <li>Document auth number & expiration</li>
+                </ul>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-num">4</div>
+                <div class="workflow-title">Pre-Treatment</div>
+                <ul class="workflow-tasks">
+                    <li>Confirm auth valid for date</li>
+                    <li>Re-verify eligibility if needed</li>
+                    <li>Check patient financial responsibility</li>
+                    <li>Obtain copay/collect at visit</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="workflow-grid" style="margin-top: 15px;">
+            <div class="workflow-step">
+                <div class="workflow-num">5</div>
+                <div class="workflow-title">Treatment Delivery</div>
+                <ul class="workflow-tasks">
+                    <li>Document motor threshold</li>
+                    <li>Log each session</li>
+                    <li>Note any dose adjustments</li>
+                    <li>Track session count vs. auth</li>
+                </ul>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-num">6</div>
+                <div class="workflow-title">Documentation</div>
+                <ul class="workflow-tasks">
+                    <li>Complete encounter notes</li>
+                    <li>Attach PHQ-9 at intervals</li>
+                    <li>Document clinical response</li>
+                    <li>Sign & date all notes</li>
+                </ul>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-num">7</div>
+                <div class="workflow-title">Charge Entry</div>
+                <ul class="workflow-tasks">
+                    <li>Enter charges within 24 hrs</li>
+                    <li>Apply correct CPT codes</li>
+                    <li>Apply correct modifiers</li>
+                    <li>Double-check ICD-10 codes</li>
+                </ul>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-num">8</div>
+                <div class="workflow-title">Claim Submission</div>
+                <ul class="workflow-tasks">
+                    <li>Scrub claims for errors</li>
+                    <li>Submit within timely filing</li>
+                    <li>Track claim in clearinghouse</li>
+                    <li>Address any rejects immediately</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="workflow-grid" style="margin-top: 15px;">
+            <div class="workflow-step">
+                <div class="workflow-num">9</div>
+                <div class="workflow-title">Payment Posting</div>
+                <ul class="workflow-tasks">
+                    <li>Post ERA/EOB within 48 hrs</li>
+                    <li>Verify allowed amounts</li>
+                    <li>Identify denials & adjustments</li>
+                    <li>Balance patient responsibility</li>
+                </ul>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-num">10</div>
+                <div class="workflow-title">AR Follow-Up</div>
+                <ul class="workflow-tasks">
+                    <li>Work denials within 30 days</li>
+                    <li>Appeal with documentation</li>
+                    <li>Request peer-to-peer reviews</li>
+                    <li>Track aged AR weekly</li>
+                </ul>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-num">11</div>
+                <div class="workflow-title">Patient Billing</div>
+                <ul class="workflow-tasks">
+                    <li>Send patient statements</li>
+                    <li>Set up payment plans</li>
+                    <li>Offer self-pay discounts if applicable</li>
+                    <li>Send to collections if needed</li>
+                </ul>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-num">12</div>
+                <div class="workflow-title">Monthly Close</div>
+                <ul class="workflow-tasks">
+                    <li>Reconcile charges & payments</li>
+                    <li>Run aging reports</li>
+                    <li>Review write-offs</li>
+                    <li>Identify process improvements</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-box info-box-green" style="margin-top: 15px;">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Key Performance Indicators (KPIs) to Track
+            </div>
+            <strong>Clean Claim Rate:</strong> Target > 95% — percentage of claims submitted without errors.<br>
+            <strong>First-Pass Resolution:</strong> Target > 85% — claims paid on first submission.<br>
+            <strong>Days in AR:</strong> Target < 35 days — average time from service to payment.<br>
+            <strong>Denial Rate:</strong> Target < 5% — percentage of claims denied on first submission.
+        </div>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 8: GLOSSARY -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        </svg>
+        <span class="section-title">Glossary of Billing Terms</span>
+        <span class="section-number">Section 8</span>
+    </div>
+    <div class="section-content">
+        <div class="glossary-grid">
+            <div class="glossary-item">
+                <div class="glossary-term">ADR (Additional Documentation Request)</div>
+                <div class="glossary-def">A request from a payer for medical records or additional information to process a claim. Must be responded to within the specified timeframe or the claim may be denied.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">ALJC (Administrative Law Judge Court)</div>
+                <div class="glossary-def">Third level of the Medicare appeals process. Administrative Law Judge hearings are available for claims exceeding $1,800 (as of 2024 thresholds).</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Appeal</div>
+                <div class="glossary-def">A formal request to reconsider a denied claim. Appeals must typically be filed within 30-60 days of the denial, depending on the payer.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Authorization (Prior Auth)</div>
+                <div class="glossary-def">Payer approval obtained before delivering certain services. Authorization does not guarantee payment but is typically required for coverage.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Bilateral</div>
+                <div class="glossary-def">Treatment delivered to both left and right sides of the body (in TMS: both left and right DLPFC). Bilateral treatment may require modifier 59.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Bilateral Pricing</div>
+                <div class="glossary-def">Reimbursement rate applied when a procedure is performed on both sides of the body. Some payers pay 150% of the unilateral rate for bilateral procedures.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Clean Claim</div>
+                <div class="glossary-def">A claim submitted without errors, missing information, or discrepancies. Clean claims are processed and paid or denied within standard timeframes.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">COB (Coordination of Benefits)</div>
+                <div class="glossary-def">Process of determining which payer is primary when a patient has multiple insurance plans. Prevents double-payment and ensures proper claim routing.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">CPT (Current Procedural Terminology)</div>
+                <div class="glossary-def">Standardized code set maintained by the AMA for describing medical procedures and services. Used on all medical claims in the United States.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Deductible</div>
+                <div class="glossary-def">Fixed amount the patient must pay out-of-pocket before insurance coverage begins. Does not reset mid-treatment series.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">DRG (Diagnosis-Related Group)</div>
+                <div class="glossary-def">Payment classification system used primarily for hospital inpatient stays. Not typically used for outpatient TMS billing.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">EOB (Explanation of Benefits)</div>
+                <div class="glossary-def">Statement from the insurance company showing what was billed, what was paid, and what the patient owes. Not a bill.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">ESA (Economic Stabilization Act)</div>
+                <div class="glossary-def">Federal legislation that may provide certain protections during declared emergencies. Can affect timely filing and other billing requirements.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">FAIR Health</div>
+                <div class="glossary-def">Independent nonprofit that publishes benchmarks for out-of-network charges. Used as reference for determining usual and customary rates.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Fee Schedule</div>
+                <div class="glossary-def">The contracted rate that a payer agrees to pay for specific services. Usually lower than billed charges.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">G-Code</div>
+                <div class="glossary-def">Healthcare Common Procedure Coding System (HCPCS) code used for Medicare/Medicaid services. Not typically used for TMS CPT codes.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Grace Period</div>
+                <div class="glossary-def">Time period after a premium due date during which the insurance policy remains active even if payment has not been received.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">LCD (Local Coverage Determination)</div>
+                <div class="glossary-def">Medicare Administrative Contractor (MAC)-specific coverage policy that defines when Medicare will pay for a service in a specific geographic area.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Modifier</div>
+                <div class="glossary-def">Two-character code appended to a CPT code that provides additional information about the service performed without changing the code's definition.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">NCD (National Coverage Determination)</div>
+                <div class="glossary-def">CMS-mandated national policy that determines whether Medicare will cover a specific service nationwide.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">OIG (Office of Inspector General)</div>
+                <div class="glossary-def">Federal agency that investigates healthcare fraud, waste, and abuse. Publishes compliance guidance and work plans.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Paid Amount</div>
+                <div class="glossary-def">The actual amount the insurance company paid on a claim. Usually the contracted fee schedule amount minus any patient responsibility.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Prior Auth (Prior Authorization)</div>
+                <div class="glossary-def">Requirement to obtain payer approval before delivering certain services. Does not guarantee payment but required for coverage with many payers.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Provider</div>
+                <div class="glossary-def">A healthcare professional (physician, NP, PA) or facility authorized to provide and bill for medical services.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">R&C (Reasonable and Customary)</div>
+                <div class="glossary-def">The prevailing rate paid for a service in a geographic area. Used to determine out-of-network reimbursement.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Timely Filing</div>
+                <div class="glossary-def">The deadline by which a claim must be submitted to the payer. Usually 90 days to 1 year from date of service. Missing this deadline results in automatic denial.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">TMS Codes</div>
+                <div class="glossary-def">CPT codes 90867 (treatment planning/motor threshold), 90868 (treatment delivery), and 90869 (subsequent motor threshold) used specifically for billing TMS services.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 9: QR RESOURCES -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+        </svg>
+        <span class="section-title">QR Resources</span>
+        <span class="section-number">Section 9</span>
+    </div>
+    <div class="section-content">
+        <div class="qr-section">
+            <h3 class="qr-title">Scan for More Resources</h3>
+            <p class="qr-subtitle">Access our interactive TMS directory, billing quiz, and practice owner dashboard</p>
+
+            <div class="qr-grid">
+                <div class="qr-item">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" alt="TMS Clinic Directory" />
+                    <div class="qr-label">TMS Clinic Directory</div>
+                    <div class="qr-desc">Find TMS providers near you</div>
+                </div>
+                <div class="qr-item">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" alt="Billing Compliance Quiz" />
+                    <div class="qr-label">Billing Compliance Quiz</div>
+                    <div class="qr-desc">Test your TMS billing knowledge</div>
+                </div>
+                <div class="qr-item">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/owner/dashboard/" alt="Practice Owner Dashboard" />
+                    <div class="qr-label">Practice Owner Dashboard</div>
+                    <div class="qr-desc">Manage your TMS listing & analytics</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box info-box-green" style="margin-top: 15px;">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                What You'll Find Online
+            </div>
+            <strong>TMS Clinic Directory:</strong> Over 1,000 verified TMS treatment providers searchable by location. Updated monthly.<br>
+            <strong>Billing Quiz:</strong> 20-question interactive quiz covering CPT codes, modifiers, Medicare LCD requirements, and common denials. Get your score instantly.<br>
+            <strong>Practice Dashboard:</strong> Claim and update your free TMS listing, view patient inquiry analytics, and access billing resources.
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 10: NEXT STEPS -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+        </svg>
+        <span class="section-title">Next Steps — Your Action Plan</span>
+        <span class="section-number">Section 10</span>
+    </div>
+    <div class="section-content">
+        <div class="info-box info-box-blue">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                Your Week Ahead
+            </div>
+            Use this 5-day action plan to immediately improve your TMS billing operations. Each task takes 30-60 minutes.
+        </div>
+
+        <div class="next-steps">
+            <div class="next-step">
+                <div class="step-day">Day 1</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                </div>
+                <div class="step-title">Audit Current AR</div>
+                <div class="step-desc">Pull your AR report. Flag all TMS denials older than 30 days. Prioritize high-dollar items for immediate appeal.</div>
+            </div>
+
+            <div class="next-step">
+                <div class="step-day">Day 2</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                </div>
+                <div class="step-title">Verify Payer Auths</div>
+                <div class="step-desc">Call top 3 payers (Medicare, BCBS, Aetna). Confirm current auth requirements and any policy updates for 2026.</div>
+            </div>
+
+            <div class="next-step">
+                <div class="step-day">Day 3</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                </div>
+                <div class="step-title">Update Templates</div>
+                <div class="step-desc">Review and update your TMS documentation templates. Ensure PHQ-9 scoring and medication trial sections are prominent and complete.</div>
+            </div>
+
+            <div class="next-step">
+                <div class="step-day">Day 4</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <div class="step-title">Train Your Team</div>
+                <div class="step-desc">Share this cheat sheet with all billing staff. Hold a 30-minute walkthrough covering modifier usage and denial prevention.</div>
+            </div>
+
+            <div class="next-step">
+                <div class="step-day">Day 5</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                </div>
+                <div class="step-title">Set Up Tracking</div>
+                <div class="step-desc">Implement weekly KPI tracking: clean claim rate, denial rate, days in AR. Create simple dashboard to monitor progress monthly.</div>
+            </div>
+        </div>
+
+        <div class="info-box info-box-green" style="margin-top: 20px;">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Monthly Review Cadence
+            </div>
+            Schedule recurring monthly meetings to review TMS billing KPIs. Catch problems early — denied claims over 60 days old are significantly harder to collect.
+        </div>
+    </div>
+</div>
+
+<!-- TEAR-OUT CARD: QUESTIONS FOR YOUR BILLING MANAGER -->
+<div class="section">
+    <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span class="section-title">Questions to Ask Your Billing Manager</span>
+        <span class="section-number">Tear-Out Card</span>
+    </div>
+    <div class="section-content">
+        <div class="tear-out-card">
+            <div class="tear-out-header">
+                <h3 class="tear-out-title">Questions to Ask Your Billing Manager</h3>
+                <p class="tear-out-subtitle">Cut along the dotted border and keep at your desk for quick reference</p>
+            </div>
+
+            <ol class="question-list">
+                <li>
+                    <div class="question-text">Do we have current prior authorization on file for every patient currently receiving TMS treatment?</div>
+                </li>
+                <li>
+                    <div class="question-text">What is our current denial rate for TMS claims, and how does it compare to last quarter?</div>
+                </li>
+                <li>
+                    <div class="question-text">Are all rendering providers enrolled and credentialed with our top 5 payers?</div>
+                </li>
+                <li>
+                    <div class="question-text">Do our documentation templates capture all LCD/NCD requirements for Medicare TMS claims?</div>
+                </li>
+                <li>
+                    <div class="question-text">What is the average time from claim submission to payment for TMS services?</div>
+                </li>
+                <li>
+                    <div class="question-text">How many TMS appeals do we have pending, and what is the average resolution time?</div>
+                </li>
+                <li>
+                    <div class="question-text">Are we using the correct modifiers for bilateral TMS treatments?</div>
+                </li>
+                <li>
+                    <div class="question-text">When was the last time we verified our TMS CPT codes against current Medicare fee schedules?</div>
+                </li>
+                <li>
+                    <div class="question-text">Do we have a process for tracking authorized sessions vs. delivered sessions to avoid authorization exhaustion?</div>
+                </li>
+                <li>
+                    <div class="question-text">What is our plan for addressing any TMS claims approaching the timely filing deadline?</div>
+                </li>
+                <li>
+                    <div class="question-text">Have we reviewed our payer contracts recently to ensure TMS coverage terms are accurate?</div>
+                </li>
+                <li>
+                    <div class="question-text">Do all TMS patients have documented PHQ-9 scores at baseline and at regular intervals during treatment?</div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="info-box info-box-yellow" style="margin-top: 15px;">
+            <div class="info-box-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+                Pro Tip
+            </div>
+            Schedule a monthly 15-minute "billing health check" with your billing manager. Review these questions, track metrics, and address issues before they become costly problems.
+        </div>
+    </div>
+</div>
+
+<!-- BACK COVER -->
+<div class="back-cover">
+    <div class="back-logo">TMS List</div>
+    <p class="back-tagline">The most comprehensive TMS clinic directory and billing resource for providers</p>
+
+    <div class="back-qr-row">
+        <div class="back-qr-item">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" alt="Find TMS Providers" />
+            <div class="back-qr-label">Find TMS Providers</div>
+            <div class="back-qr-url">tmslist.com/map/</div>
+        </div>
+        <div class="back-qr-item">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" alt="Billing Quiz" />
+            <div class="back-qr-label">Billing Quiz</div>
+            <div class="back-qr-url">tmslist.com/quiz/</div>
+        </div>
+        <div class="back-qr-item">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/owner/dashboard/" alt="Practice Dashboard" />
+            <div class="back-qr-label">Practice Dashboard</div>
+            <div class="back-qr-url">tmslist.com/owner/dashboard/</div>
+        </div>
+    </div>
+
+    <div class="back-footer">
+        <p>2026 TMS Billing & CPT Codes Cheat Sheet</p>
+        <p>Version 1.0 | Updated April 2026</p>
+        <p style="margin-top: 10px;">For educational purposes only. Verify all coding and coverage information with current payer guidelines and CMS regulations.</p>
+        <p style="margin-top: 15px; font-weight: 600;">tmslist.com</p>
+    </div>
+</div>
+
+</body>
+</html>

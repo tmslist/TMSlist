@@ -12,6 +12,8 @@ import {
     COUNTRY_NAMES,
     COUNTRY_URL_PREFIXES,
     STATE_NAMES,
+    getClinicsByCountry,
+    getRegionsByCountry,
 } from "../utils/dataHelpers";
 import type { Clinic } from "../types/clinic";
 import {
@@ -25,11 +27,64 @@ import SpecialistsSection from "../components/SpecialistsSection.astro";
 import TrustSignals from "../components/TrustSignals.astro";
 import TechnologySection from "../components/TechnologySection.astro";
 
-// Use ONLY verified real clinics from the main DB
-const clinics = await getOperationalClinics();
+// Read country from x-country cookie (set by middleware via Vercel geo headers)
+// Falls back to 'US' if no cookie present
+const geoCookie = Astro.cookies.get('x-country')?.value as string | undefined;
+const VISITOR_COUNTRY = geoCookie && ['US','GB','CA','AU','DE','IN','FR','JP','KR','BR','ES','IT','NL','SG','AE','NZ','ZA','SE','IE','IL','MX'].includes(geoCookie)
+    ? geoCookie
+    : 'US';
 
-// Group clinics by state for the location grid
-const stateGroups = clinics.reduce(
+// Fetch all clinics (global) then filter by visitor's country for geo-personalized sections
+const allClinics = await getOperationalClinics();
+
+// Country-specific clinic data for personalized sections
+const countryClinics = VISITOR_COUNTRY === 'US' ? allClinics : allClinics.filter(c => (c as any).country === VISITOR_COUNTRY);
+
+// Build location map based on visitor's country
+let locationMap: { code: string; name: string; slug: string; cities: string[]; clinicCount: number }[] = [];
+
+if (VISITOR_COUNTRY === 'US') {
+    const stateGroups = allClinics.reduce(
+        (acc, clinic) => {
+            const stateCode = clinic.state;
+            if (!acc[stateCode]) acc[stateCode] = [];
+            acc[stateCode].push(clinic);
+            return acc;
+        },
+        {} as Record<string, Clinic[]>,
+    );
+    locationMap = Object.entries(stateGroups)
+        .map(([stateCode, stateClinics]) => {
+            const cities = [...new Set(stateClinics.map((c) => c.city))].sort();
+            return {
+                code: stateCode,
+                name: STATE_NAMES[stateCode] || stateCode,
+                slug: getStateSlug(stateCode),
+                cities: cities,
+                clinicCount: stateClinics.length,
+            };
+        })
+        .sort((a, b) => b.clinicCount - a.clinicCount);
+} else {
+    // International: group by region/state for the detected country
+    const intlDir = await buildInternationalDirectory();
+    const countryData = intlDir.find(c => c.code === VISITOR_COUNTRY);
+    if (countryData) {
+        locationMap = countryData.regions.map(r => ({
+            code: r.slug,
+            name: r.name,
+            slug: r.slug,
+            cities: r.cities.map(c => c.name),
+            clinicCount: r.clinicCount,
+        }));
+    }
+}
+
+// For US homepage (default) use all clinics; for others use country-specific
+const clinics = VISITOR_COUNTRY === 'US' ? allClinics : countryClinics;
+
+// Build US state groups only when in US mode (used for search autocomplete and stats)
+const usStateGroups = allClinics.reduce(
     (acc, clinic) => {
         const stateCode = clinic.state;
         if (!acc[stateCode]) acc[stateCode] = [];
@@ -38,21 +93,7 @@ const stateGroups = clinics.reduce(
     },
     {} as Record<string, Clinic[]>,
 );
-
-const locationMap = Object.entries(stateGroups)
-    .map(([stateCode, stateClinics]) => {
-        const cities = [...new Set(stateClinics.map((c) => c.city))].sort();
-        return {
-            code: stateCode,
-            name: STATE_NAMES[stateCode] || stateCode,
-            slug: getStateSlug(stateCode),
-            cities: cities,
-            clinicCount: stateClinics.length,
-        };
-    })
-    .sort((a, b) => b.clinicCount - a.clinicCount);
-
-const uniqueStates = Object.keys(stateGroups);
+const uniqueStates = Object.keys(usStateGroups);
 
 // LOGIC: Get top rated VERIFIED clinics, ensuring geographic diversity (1 per city)
 // 1. Filter for Verified + High Rating
@@ -140,13 +181,29 @@ const featuredDoctors = featuredDoctorsByCountry['US'] || allDoctorsWithCountry
     })
     .slice(0, 4);
 
+// Visitor's country display label
+const COUNTRY_DISPLAY_LABELS: Record<string, string> = {
+    US: 'United States', GB: 'United Kingdom', CA: 'Canada', AU: 'Australia',
+    DE: 'Germany', IN: 'India', FR: 'France', JP: 'Japan', KR: 'South Korea',
+    BR: 'Brazil', ES: 'Spain', IT: 'Italy', NL: 'Netherlands', SG: 'Singapore',
+    AE: 'United Arab Emirates', NZ: 'New Zealand', ZA: 'South Africa',
+    SE: 'Sweden', IE: 'Ireland', IL: 'Israel', MX: 'Mexico',
+};
+const locationSectionLabel = VISITOR_COUNTRY === 'US'
+    ? 'National Network'
+    : `${COUNTRY_DISPLAY_LABELS[VISITOR_COUNTRY] || 'International'} Network`;
+const locationSectionTitle = VISITOR_COUNTRY === 'US'
+    ? 'Find Care <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Near You</span>'
+    : `TMS Clinics in <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">${COUNTRY_DISPLAY_LABELS[VISITOR_COUNTRY] || 'Your Country'}</span>`;
+const viewAllUrl = VISITOR_COUNTRY === 'US' ? '/us/' : `/${COUNTRY_URL_PREFIXES[VISITOR_COUNTRY] || 'us'}/`;
+
 const totalDoctors = await getTotalDoctorCount();
 const featuredTech = TECHNOLOGY_SLUGS.slice(0, 4);
 
 // Prepare search data for autocomplete
 const searchData = [
     // States
-    ...Object.entries(stateGroups).map(([code, _]) => ({
+    ...Object.entries(usStateGroups).map(([code, _]) => ({
         label: STATE_NAMES[code] || code,
         subLabel: "State",
         value: `/us/${getStateSlug(code)}/`,
@@ -283,7 +340,7 @@ const schema = JSON.stringify({
                     </p>
 
                     <!-- Search Box -->
-                    <form id="hero-search-form" class="relative max-w-lg mx-auto lg:mx-0 mb-4 z-20" action="/us/">
+                    <form id="hero-search-form" class="relative max-w-lg mx-auto lg:mx-0 mb-4 z-20" action={viewAllUrl}>
                         <div class="relative group">
                             <!-- Gradient Border using new purple -->
                             <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-[#7C3AED] rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
@@ -1312,14 +1369,14 @@ const schema = JSON.stringify({
             <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
                 <div>
                      <span class="inline-block px-3 py-1 bg-[#7C3AED]/10 text-[#7C3AED] border border-[#7C3AED]/20 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
-                        National Network
+                        {locationSectionLabel}
                     </span>
                     <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 leading-tight">
-                        Find Care <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Near You</span>
+                        <Fragment set:html={locationSectionTitle} />
                     </h2>
                 </div>
-                
-                <a href="/us/" class="hidden md:flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors font-semibold text-sm group">
+
+                <a href={viewAllUrl} class="hidden md:flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors font-semibold text-sm group">
                     View Full Directory
                     <span class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-[#7C3AED] transition-colors">
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -1329,9 +1386,13 @@ const schema = JSON.stringify({
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {
-                    locationMap.slice(0, 24).map((state) => (
+                    locationMap.slice(0, 24).map((state) => {
+                        const href = VISITOR_COUNTRY === 'US'
+                            ? `/us/${state.slug}/`
+                            : `/${COUNTRY_URL_PREFIXES[VISITOR_COUNTRY] || 'us'}/${state.slug}/`;
+                        return (
                         <a
-                            href={`/us/${state.slug}/`}
+                            href={href}
                             class="group flex items-center justify-between p-4 bg-white/[0.03] border border-slate-200 rounded-2xl hover:bg-[#7C3AED] hover:border-[#7C3AED] hover:shadow-[0_0_20px_rgba(95,0,194,0.3)] transition-all duration-300"
                         >
                             <div class="flex items-center gap-3">
@@ -1340,19 +1401,20 @@ const schema = JSON.stringify({
                                     {state.name}
                                 </span>
                             </div>
-                            
+
                             <div class="flex items-center gap-2">
                                 <span class="text-xs font-medium text-slate-500 group-hover:text-slate-900/80 bg-white/5 group-hover:bg-white/20 px-2 py-1 rounded-md transition-colors">
                                     {state.clinicCount}
                                 </span>
                             </div>
                         </a>
-                    ))
+                        );
+                    })
                 }
             </div>
 
             <div class="mt-10 text-center md:hidden">
-                 <a href="/us/" class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-xl hover:bg-[#7C3AED] transition-colors text-sm w-full justify-center">
+                 <a href={viewAllUrl} class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-xl hover:bg-[#7C3AED] transition-colors text-sm w-full justify-center">
                     View Complete Directory
                 </a>
             </div>

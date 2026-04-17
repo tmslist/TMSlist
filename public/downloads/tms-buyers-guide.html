@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Complete TMS Buyer's Guide | TMS List</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 10pt; color: #1a1a2e; background: #fff; line-height: 1.6; }
+  @page { size: letter; margin: 0.6in 0.65in 0.55in 0.65in; @top-left { content: "The Complete TMS Buyer's Guide"; font-size: 7.5pt; color: #94a3b8; } @top-right { content: "TMS List — tmslist.com"; font-size: 7.5pt; color: #94a3b8; } }
+  @page :first { margin: 0; }
+  @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+
+  h1, h2, h3, h4 { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+
+  .page { max-width: 7.2in; margin: 0 auto; }
+  .pb { page-break-before: always; }
+  .no-break { page-break-inside: avoid; break-inside: avoid; }
+
+  /* ─── COVER ─────────────────────────────── */
+  .cover { background: linear-gradient(160deg, #1e1b4b 0%, #312e81 40%, #4f46e5 70%, #0ea5e9 100%); color: white; min-height: 9in; position: relative; overflow: hidden; }
+  .cover::before { content: ''; position: absolute; top: -120px; right: -80px; width: 420px; height: 420px; background: rgba(255,255,255,0.05); border-radius: 50%; }
+  .cover::after { content: ''; position: absolute; bottom: -100px; left: 5%; width: 350px; height: 350px; background: rgba(255,255,255,0.04); border-radius: 50%; }
+  .cover-top-bar { height: 6px; background: linear-gradient(90deg, #4f46e5, #0ea5e9, #22c55e, #eab308); }
+  .cover-content { padding: 0.6in 0.65in; }
+  .cover-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 0.35in; }
+  .cover-logo { width: 40px; height: 40px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .cover-logo-inner { width: 30px; height: 30px; background: linear-gradient(135deg, #4f46e5, #0ea5e9); border-radius: 7px; }
+  .cover-brand-text { font-size: 13pt; font-weight: 700; color: rgba(255,255,255,0.9); }
+  .cover-eyebrow { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); padding: 4px 12px; border-radius: 50px; font-size: 8pt; font-weight: 600; margin-bottom: 0.2in; text-transform: uppercase; letter-spacing: 1px; }
+  .cover-title { font-size: 34pt; font-weight: 900; line-height: 1.05; margin-bottom: 0.12in; color: white; }
+  .cover-subtitle { font-size: 11.5pt; color: rgba(255,255,255,0.75); margin-bottom: 0.25in; font-style: italic; }
+  .cover-divider { width: 60px; height: 4px; background: linear-gradient(90deg, #4f46e5, #0ea5e9); border-radius: 2px; margin-bottom: 0.25in; }
+  .cover-stats { display: flex; gap: 10px; margin-bottom: 0.3in; flex-wrap: wrap; }
+  .cover-stat { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 10px 12px; flex: 1; min-width: 90px; text-align: center; }
+  .cover-stat-num { font-size: 18pt; font-weight: 900; color: #c7d2fe; line-height: 1; }
+  .cover-stat-label { font-size: 7pt; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; }
+  .cover-learn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px; margin-bottom: 0.25in; }
+  .cover-learn h4 { font-size: 9pt; font-weight: 700; color: #a5b4fc; margin-bottom: 6px; }
+  .cover-learn ul { list-style: none; }
+  .cover-learn li { font-size: 8.5pt; color: rgba(255,255,255,0.8); padding: 2px 0; padding-left: 16px; position: relative; }
+  .cover-learn li::before { content: '→'; position: absolute; left: 0; color: #818cf8; }
+  .cover-toc { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 12px 14px; margin-bottom: 0.25in; }
+  .cover-toc h4 { font-size: 9pt; font-weight: 700; color: #a5b4fc; margin-bottom: 6px; }
+  .cover-toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 16px; }
+  .cover-toc-item { font-size: 8pt; color: rgba(255,255,255,0.75); padding: 2px 0; }
+  .cover-toc-item span { color: #818cf8; font-weight: 700; margin-right: 4px; }
+  .cover-testimonial { background: rgba(255,255,255,0.08); border-left: 3px solid #4f46e5; border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 0.15in; }
+  .cover-testimonial p { font-size: 8.5pt; color: rgba(255,255,255,0.85); font-style: italic; margin-bottom: 4px; }
+  .cover-testimonial cite { font-size: 8pt; color: rgba(255,255,255,0.55); font-style: normal; }
+  .cover-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 0.65in; background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+  .cover-footer-text { font-size: 8pt; color: rgba(255,255,255,0.45); }
+  .cover-footer-url { font-size: 9pt; font-weight: 700; color: rgba(255,255,255,0.75); }
+
+  /* ─── FOOTER ───────────────────────────── */
+  @page { @bottom-left { content: "TMS List — The Complete TMS Buyer's Guide"; font-size: 7.5pt; color: #94a3b8; } @bottom-right { content: "Page " counter(page) " of " counter(pages); font-size: 7.5pt; color: #64748b; } }
+
+  /* ─── SECTION ────────────────────────────── */
+  .section { margin-bottom: 0.2in; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.1in; padding-bottom: 6px; border-bottom: 2px solid #e2e8f0; }
+  .section-num { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12pt; color: white; flex-shrink: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .section h2 { font-size: 12.5pt; font-weight: 800; color: #1e293b; letter-spacing: -0.2px; }
+  .section p { font-size: 8.5pt; color: #64748b; margin-bottom: 0.08in; }
+
+  /* ─── CALLOUT ────────────────────────────── */
+  .callout { border-radius: 8px; padding: 10px 12px; margin-bottom: 0.1in; break-inside: avoid; }
+  .callout.green { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .callout.blue { background: #eff6ff; border: 1px solid #bfdbfe; }
+  .callout.yellow { background: #fefce8; border: 1px solid #fef08a; }
+  .callout.purple { background: #faf5ff; border: 1px solid #e9d5ff; }
+  .callout.slate { background: #f8fafc; border: 1px solid #e2e8f0; }
+  .callout.indigo { background: #eef2ff; border: 1px solid #c7d2fe; }
+  .callout h3 { font-size: 9pt; font-weight: 700; margin-bottom: 3px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .callout.green h3 { color: #15803d; }
+  .callout.blue h3 { color: #1d4ed8; }
+  .callout.yellow h3 { color: #a16207; }
+  .callout.purple h3 { color: #7e22ce; }
+  .callout.slate h3 { color: #1e293b; }
+  .callout.indigo h3 { color: #4338ca; }
+  .callout p, .callout li { font-size: 8.5pt; color: #475569; }
+  .callout ul { padding-left: 14px; margin-top: 3px; }
+  .callout li { padding: 1px 0; }
+
+  /* ─── TABLE ────────────────────────────── */
+  .data-table { width: 100%; border-collapse: collapse; margin-bottom: 0.1in; font-size: 7.5pt; break-inside: avoid; }
+  .data-table th { background: #1e293b; color: white; padding: 6px 9px; text-align: left; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size: 7.5pt; }
+  .data-table td { padding: 5px 9px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  .data-table tr:nth-child(even) td { background: #f8fafc; }
+  .data-table .highlight-row td { background: #eef2ff !important; font-weight: 600; }
+  .tms-cell { color: #4338ca; font-weight: 600; }
+  .med-cell { color: #7c3aed; font-weight: 600; }
+
+  /* ─── STATS ────────────────────────────── */
+  .stats-row { display: flex; gap: 8px; margin-bottom: 0.1in; }
+  .stat-card { flex: 1; background: linear-gradient(135deg, #1e1b4b, #4f46e5); color: white; border-radius: 8px; padding: 8px 10px; text-align: center; break-inside: avoid; }
+  .stat-card.teal { background: linear-gradient(135deg, #0f766e, #14b8a6); }
+  .stat-card.green { background: linear-gradient(135deg, #15803d, #22c55e); }
+  .stat-card.red { background: linear-gradient(135deg, #b91c1c, #ef4444); }
+  .stat-num { font-size: 15pt; font-weight: 900; line-height: 1; }
+  .stat-label { font-size: 7pt; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* ─── TIMELINE ─────────────────────────── */
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before { content: ''; position: absolute; left: 7px; top: 4px; bottom: 4px; width: 2px; background: linear-gradient(to bottom, #4f46e5, #0ea5e9, #22c55e); border-radius: 1px; }
+  .timeline-item { position: relative; margin-bottom: 10px; break-inside: avoid; }
+  .timeline-item::before { content: ''; position: absolute; left: -20px; top: 5px; width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid #4f46e5; background: white; }
+  .timeline-item h4 { font-size: 9pt; font-weight: 700; color: #1e293b; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .timeline-item p { font-size: 8pt; color: #64748b; }
+
+  /* ─── STEPS / GRID ──────────────────────── */
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 0.1in; }
+  .step { background: white; border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 9px; break-inside: avoid; }
+  .step-num { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, #4f46e5, #0ea5e9); color: white; font-weight: 800; font-size: 10pt; display: flex; align-items: center; justify-content: center; margin-bottom: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .step.green { border-color: #bbf7d0; background: #f0fdf4; }
+  .step.green .step-num { background: linear-gradient(135deg, #15803d, #22c55e); }
+  .step.blue { border-color: #bfdbfe; background: #eff6ff; }
+  .step.blue .step-num { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+  .step.red { border-color: #fecaca; background: #fef2f2; }
+  .step.red .step-num { background: linear-gradient(135deg, #b91c1c, #ef4444); }
+  .step h4 { font-size: 8.5pt; font-weight: 700; color: #1e293b; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .step p { font-size: 7.5pt; color: #64748b; }
+
+  /* ─── TWO COL ──────────────────────────── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.1in; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
+  /* ─── FAQ ───────────────────────────────── */
+  .faq-item { border-bottom: 1px solid #f1f5f9; padding: 5px 0; break-inside: avoid; }
+  .faq-q { font-size: 8.5pt; font-weight: 700; color: #1e293b; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .faq-a { font-size: 8pt; color: #475569; }
+
+  /* ─── TESTIMONIAL ───────────────────────── */
+  .testimonial { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin-bottom: 0.1in; break-inside: avoid; }
+  .testimonial::before { content: '\201C'; position: absolute; top: 4px; left: 10px; font-size: 28pt; color: #cbd5e1; font-family: Georgia, serif; line-height: 1; }
+  .testimonial p { font-size: 8.5pt; color: #475569; font-style: italic; padding-left: 18px; }
+  .testimonial cite { display: block; font-size: 7.5pt; color: #94a3b8; font-style: normal; margin-top: 4px; padding-left: 18px; font-weight: 600; }
+  .testimonial-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* ─── PROS / CONS ──────────────────────── */
+  .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pros, .cons { border-radius: 8px; padding: 9px 11px; }
+  .pros { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .cons { background: #fef2f2; border: 1px solid #fecaca; }
+  .pros h4 { font-size: 9pt; font-weight: 700; color: #15803d; margin-bottom: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .cons h4 { font-size: 9pt; font-weight: 700; color: #b91c1c; margin-bottom: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .pros li, .cons li { font-size: 8pt; color: #475569; padding: 1px 0; }
+
+  /* ─── RED / GREEN FLAGS ────────────────── */
+  .flags { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .flag { border-radius: 8px; padding: 9px 11px; }
+  .flag.red { background: #fef2f2; border: 1px solid #fecaca; }
+  .flag.green { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .flag h4 { font-size: 8.5pt; font-weight: 700; margin-bottom: 5px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .flag.red h4 { color: #b91c1c; }
+  .flag.green h4 { color: #15803d; }
+  .flag ul { list-style: none; padding: 0; margin: 0; }
+  .flag li { font-size: 7.5pt; color: #475569; padding: 2px 0; padding-left: 12px; position: relative; }
+  .flag.red li::before { content: '✗'; position: absolute; left: 0; color: #ef4444; font-size: 8pt; }
+  .flag.green li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; font-size: 8pt; }
+
+  /* ─── QR ───────────────────────────────── */
+  .qr-section { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 0.1in; break-inside: avoid; }
+  .qr-row { display: flex; gap: 10px; align-items: center; }
+  .qr-placeholder { width: 56px; height: 56px; background: #1e293b; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .qr-placeholder svg { width: 40px; height: 40px; }
+  .qr-info h4 { font-size: 8.5pt; font-weight: 700; color: #1e293b; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .qr-info p { font-size: 7.5pt; color: #64748b; }
+  .qr-url { font-size: 8pt; font-weight: 700; color: #4f46e5; margin-top: 2px; font-family: monospace; }
+  .qr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* ─── PRO TIP ─────────────────────────── */
+  .pro-tip { background: #fef9c3; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 12px; margin-bottom: 0.08in; break-inside: avoid; }
+  .pro-tip h4 { font-size: 8.5pt; font-weight: 700; color: #92400e; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .pro-tip p { font-size: 8pt; color: #78350f; }
+
+  /* ─── CHECKLIST ───────────────────────── */
+  .checklist { list-style: none; }
+  .checklist li { display: flex; align-items: flex-start; gap: 8px; padding: 4px 0; border-bottom: 1px solid #f1f5f9; font-size: 8.5pt; }
+  .checklist li:last-child { border-bottom: none; }
+  .check-dot { width: 8px; height: 8px; border-radius: 50%; background: #4f46e5; flex-shrink: 0; margin-top: 4px; }
+
+  hr { border: none; border-top: 1px solid #e2e8f0; margin: 0.08in 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 1: COVER                          -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" style="padding: 0;">
+  <div class="cover" style="min-height: 9in; position: relative; break-after: page;">
+    <div class="cover-top-bar"></div>
+    <div class="cover-content">
+      <div class="cover-brand">
+        <div class="cover-logo"><div class="cover-logo-inner"></div></div>
+        <span class="cover-brand-text">TMS List — Trusted TMS Provider Directory</span>
+      </div>
+      <div class="cover-eyebrow">The Definitive Patient Resource — 2026 Edition</div>
+      <h1 class="cover-title">The Complete TMS Buyer's Guide</h1>
+      <p class="cover-subtitle">Everything you need to know to choose the right TMS provider, understand your treatment options, and navigate TMS therapy with clarity and confidence.</p>
+      <div class="cover-divider"></div>
+
+      <div class="cover-stats">
+        <div class="cover-stat">
+          <div class="cover-stat-num">50–60%</div>
+          <div class="cover-stat-label">TMS Response Rate</div>
+        </div>
+        <div class="cover-stat">
+          <div class="cover-stat-num">~30%</div>
+          <div class="cover-stat-label">Full Remission</div>
+        </div>
+        <div class="cover-stat">
+          <div class="cover-stat-num">36</div>
+          <div class="cover-stat-label">Avg. Sessions</div>
+        </div>
+        <div class="cover-stat">
+          <div class="cover-stat-num">1,100+</div>
+          <div class="cover-stat-label">Verified Clinics</div>
+        </div>
+      </div>
+
+      <div class="cover-learn">
+        <h4>What You'll Learn in This Guide</h4>
+        <ul>
+          <li>What TMS therapy actually is and how it works in plain language</li>
+          <li>The 5 types of TMS and which one might be best for your situation</li>
+          <li>How to evaluate and choose a quality TMS clinic</li>
+          <li>Real patient outcomes — what the research says vs. real-world results</li>
+          <li>What to expect at every step: consultation, mapping, and all 36 sessions</li>
+          <li>Insurance coverage — what to ask your insurer before starting</li>
+          <li>The questions to ask at every consultation (25 must-ask questions)</li>
+          <li>Red flags vs. green flags: how to spot a quality TMS provider</li>
+        </ul>
+      </div>
+
+      <div class="cover-toc">
+        <h4>Table of Contents</h4>
+        <div class="cover-toc-grid">
+          <div class="cover-toc-item"><span>01</span> What Is TMS Therapy?</div>
+          <div class="cover-toc-item"><span>02</span> How Well Does It Work?</div>
+          <div class="cover-toc-item"><span>03</span> Types of TMS &amp; Devices</div>
+          <div class="cover-toc-item"><span>04</span> Choosing a Provider</div>
+          <div class="cover-toc-item"><span>05</span> Your Treatment Journey</div>
+          <div class="cover-toc-item"><span>06</span> Insurance &amp; Costs</div>
+          <div class="cover-toc-item"><span>07</span> 25 Questions to Ask</div>
+          <div class="cover-toc-item"><span>08</span> Patient Stories</div>
+        </div>
+      </div>
+
+      <div class="cover-testimonial">
+        <p>"Before TMS, I'd tried 5 medications over 6 years. Nothing worked for more than a few months. TMS wasn't a magic cure, but it gave me enough relief to rebuild my life. I'm now 14 months in and I've tapered off 2 medications with my psychiatrist's guidance."</p>
+        <cite>— Rachel K., Seattle, WA (NeuroStar TMS, 2024)</cite>
+      </div>
+      <div class="cover-testimonial">
+        <p>"The guide helped me know what questions to ask. I ended up choosing a clinic 45 minutes away instead of the one closest to me — because they used neuronavigation and had a psychiatrist present for every session."</p>
+        <cite>— David M., Austin, TX (MagVenture TMS, 2025)</cite>
+      </div>
+    </div>
+    <div class="cover-footer">
+      <span class="cover-footer-text">© 2026 TMS List — tmslist.com</span>
+      <span class="cover-footer-url">tmslist.com</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 2: WHAT IS TMS                    -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #4f46e5, #0ea5e9);">1</div>
+      <div>
+        <h2>What Is TMS Therapy?</h2>
+        <p>Transcranial Magnetic Stimulation in plain language — and why it's different from everything else you've tried.</p>
+      </div>
+    </div>
+
+    <p style="font-size: 9pt; color: #475569; margin-bottom: 0.1in; line-height: 1.7;">
+      <strong>TMS (Transcranial Magnetic Stimulation)</strong> is an FDA-cleared, non-invasive treatment for major depressive disorder (MDD) that hasn't responded adequately to antidepressant medications. It uses precisely targeted <strong>magnetic pulses</strong> — similar in strength to an MRI — to stimulate underactive areas of the brain associated with depression.
+    </p>
+
+    <div class="callout blue" style="margin-bottom: 0.1in;">
+      <h3>How TMS Works (Step by Step)</h3>
+      <ul>
+        <li>A magnetic coil is placed gently against your scalp, over the left prefrontal cortex</li>
+        <li>The coil generates painless magnetic pulses that penetrate ~2–3 cm into the brain tissue</li>
+        <li>These pulses activate neurons in the dorsolateral prefrontal cortex (DLPFC) — the brain region that tends to be underactive in depression</li>
+        <li>Repeated daily sessions (over 4–6 weeks) strengthen neural connections and reduce depressive symptoms</li>
+        <li>You remain fully awake throughout — no sedation, no anesthesia, no recovery time</li>
+        <li>Each session: 3–37 minutes depending on the protocol (see Types of TMS)</li>
+      </ul>
+    </div>
+
+    <div class="two-col" style="margin-bottom: 0.1in;">
+      <div class="callout green">
+        <h3>✓ Who TMS Is For</h3>
+        <ul>
+          <li>Adults (18+) with major depressive disorder (MDD)</li>
+          <li>Those who've tried 2+ antidepressants without adequate relief</li>
+          <li>People who can't tolerate medication side effects (sexual dysfunction, weight gain, emotional blunting)</li>
+          <li>Those seeking a non-medication, non-invasive option</li>
+          <li>Patients who want to avoid ECT or sedation-based treatments</li>
+          <li>People in good physical health — no seizure history, no ferromagnetic implants in the head</li>
+        </ul>
+      </div>
+      <div class="callout yellow">
+        <h3>⚠️ Important Contraindications</h3>
+        <ul>
+          <li>History of seizures or epilepsy (relative contraindication — some protocols still possible)</li>
+          <li>Ferromagnetic metal implants in or near the head (cochlear implants, aneurysm clips, etc.)</li>
+          <li>Active substance abuse disorders (must be stable first)</li>
+          <li>Pregnancy (limited data — discuss with your psychiatrist)</li>
+          <li>Severe neurological conditions (stroke, brain tumor, MS near active lesions)</li>
+          <li>Psychotic features or active suicidality requiring more intensive intervention</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout indigo" style="margin-bottom: 0.1in;">
+      <h3>How Is TMS Different from ECT?</h3>
+      <p><strong>ECT (Electroconvulsive Therapy)</strong> induces a controlled seizure under general anesthesia in a hospital setting. It requires significant pre- and post-procedure care, anesthesia risks, and potential memory side effects. ECT is generally reserved for <strong>severe, treatment-resistant cases or acute suicidality</strong> where rapid response is critical.<br><br>
+      <strong>TMS</strong> is non-invasive, requires no anesthesia, no hospital visit, and no recovery time. Sessions are outpatient. TMS is considered the <strong>first-line non-medication treatment</strong> for treatment-resistant depression — not a last resort.</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num">50–60%</div><div class="stat-label">Response Rate</div></div>
+      <div class="stat-card teal"><div class="stat-num">~30%</div><div class="stat-label">Full Remission</div></div>
+      <div class="stat-card green"><div class="stat-num">4–6</div><div class="stat-label">Weeks to Complete</div></div>
+      <div class="stat-card"><div class="stat-num">&lt;0.1%</div><div class="stat-label">Seizure Risk</div></div>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top: 0.15in;">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #15803d, #22c55e);">2</div>
+      <div>
+        <h2>The Evidence: How Well Does TMS Work?</h2>
+        <p>What the clinical trials show — and what real-world data tells us.</p>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 25%;">Study / Source</th>
+          <th style="width: 22%;">Population</th>
+          <th style="width: 12%;">Response</th>
+          <th style="width: 12%;">Remission</th>
+          <th style="width: 29%;">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td><strong>NeuroStar FDA Trials</strong></td>
+          <td>MDD, medication-free</td>
+          <td class="tms-cell">58%</td>
+          <td class="tms-cell">28%</td>
+          <td>4-week acute phase, daily treatment</td>
+        </tr>
+        <tr>
+          <td><strong>Stanford SAINT Protocol</strong></td>
+          <td>Treatment-resistant MDD</td>
+          <td class="tms-cell">86%</td>
+          <td class="tms-cell">79%</td>
+          <td>Accelerated: 10 sessions/day × 5 days = 50 total sessions. Not yet FDA-cleared.</td>
+        </tr>
+        <tr>
+          <td><strong>BrainsWay Deep TMS</strong></td>
+          <td>MDD, failed medications</td>
+          <td class="tms-cell">64%</td>
+          <td class="tms-cell">33%</td>
+          <td>FDA-cleared for MDD and OCD. Targets deeper brain regions via H-coil.</td>
+        </tr>
+        <tr>
+          <td><strong>Clinical TMS Society</strong></td>
+          <td>Real-world patients</td>
+          <td class="tms-cell">50–60%</td>
+          <td class="tms-cell">30–35%</td>
+          <td>Real-world effectiveness data across diverse clinics and patient populations.</td>
+        </tr>
+        <tr>
+          <td><strong>Long-Term Follow-Up</strong></td>
+          <td>TMS responders (12 months)</td>
+          <td class="tms-cell">68%</td>
+          <td class="tms-cell">~45%</td>
+          <td>Maintained response at 12 months with optional maintenance sessions.</td>
+        </tr>
+        <tr>
+          <td><strong>iTBS Clinical Trials</strong></td>
+          <td>MDD, medication-resistant</td>
+          <td class="tms-cell">~55%</td>
+          <td class="tms-cell">~30%</td>
+          <td>Intermittent Theta Burst — 3 min/session vs 20 min for equivalent outcomes.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout purple" style="margin-top: 0.1in;">
+      <h3>What "Response" vs "Remission" Means</h3>
+      <p><strong>Response</strong> = At least 50% improvement in depression symptoms (measured by PHQ-9 or HAM-D scales). You feel meaningfully better.<br><br><strong>Remission</strong> = Symptoms return to near-normal levels. You're not just improved — you're recovering. Remission is the goal, and about 30% of TMS patients achieve it after a single course.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 3: TYPES OF TMS + DEVICES        -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #4338ca, #6366f1);">3</div>
+      <div>
+        <h2>Types of TMS — Know Your Options</h2>
+        <p>Not all TMS is the same. The protocol your clinic uses affects session length, comfort, and outcome.</p>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Protocol</th>
+          <th style="width: 12%;">Session Time</th>
+          <th style="width: 12%;">Sessions/Week</th>
+          <th style="width: 12%;">Total Sessions</th>
+          <th style="width: 17%;">FDA Status</th>
+          <th style="width: 25%;">Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td><strong>Standard rTMS (High-Frequency)</strong></td>
+          <td>20–37 min</td>
+          <td>5 days</td>
+          <td>36–42</td>
+          <td>FDA-cleared</td>
+          <td>Standard TRD treatment</td>
+        </tr>
+        <tr>
+          <td><strong>Theta Burst (iTBS)</strong> ★ Recommended</td>
+          <td>3–9 min</td>
+          <td>5 days</td>
+          <td>36–42</td>
+          <td>FDA-cleared</td>
+          <td>Time-constrained patients. Equivalent efficacy to standard. Same outcomes in 1/5th the time.</td>
+        </tr>
+        <tr>
+          <td><strong>Deep TMS (BrainsWay H-Coil)</strong></td>
+          <td>20 min</td>
+          <td>5 days</td>
+          <td>36–42</td>
+          <td>FDA-cleared MDD + OCD</td>
+          <td>Deeper brain targets. OCD patients. Those wanting BrainsWay specifically.</td>
+        </tr>
+        <tr>
+          <td><strong>SAINT Protocol (Stanford)</strong></td>
+          <td>10 min × 10 sessions/day</td>
+          <td>10 sessions/day × 5 days</td>
+          <td>50</td>
+          <td>Research protocol (not FDA-cleared)</td>
+          <td>Severe TRD, need fast results. Available at select Stanford-affiliated or trained clinics.</td>
+        </tr>
+        <tr>
+          <td><strong>Low-Frequency (LFC)</strong></td>
+          <td>30–45 min</td>
+          <td>5 days</td>
+          <td>20–36</td>
+          <td>FDA-cleared</td>
+          <td>Patients with seizure risk concerns or tolerability issues with high-frequency.</td>
+        </tr>
+        <tr>
+          <td><strong>Navigated TMS (Nexstim)</strong></td>
+          <td>20–30 min</td>
+          <td>5 days</td>
+          <td>30–36</td>
+          <td>FDA-cleared</td>
+          <td>MRI-guided personalized targeting. Premium clinics, research settings.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pro-tip" style="margin-top: 0.08in;">
+      <h4>iTBS: The Best-Kept Secret in TMS</h4>
+      <p>Intermittent Theta Burst Stimulation (iTBS) was FDA-cleared in 2018 based on trials showing equivalent outcomes to standard high-frequency TMS — in roughly 1/5th the time (3 minutes vs. 20 minutes per session). Many clinics now default to iTBS because it's more convenient and equally effective. Ask your provider: "Do you offer iTBS?" If they say no, ask why.</p>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top: 0.12in;">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #0f766e, #14b8a6);">4</div>
+      <div>
+        <h2>FDA-Cleared TMS Devices — What to Ask About</h2>
+        <p>The device your clinic uses matters. These are the major FDA-cleared systems.</p>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 18%;">Device</th>
+          <th style="width: 16%;">Type</th>
+          <th style="width: 15%;">Clearances</th>
+          <th style="width: 25%;">Key Features</th>
+          <th style="width: 26%;">Best Suited For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td><strong>NeuroStar</strong></td>
+          <td>Standard rTMS / iTBS</td>
+          <td>MDD, OCD</td>
+          <td>Largest provider network. Touch TMS navigation. Widest insurance coverage.</td>
+          <td>Broad insurance acceptance. Most widely available. Largest outcomes database.</td>
+        </tr>
+        <tr>
+          <td><strong>BrainsWay</strong></td>
+          <td>Deep TMS (H-coil)</td>
+          <td>MDD, OCD, Smoking</td>
+          <td>Targets deeper brain regions (6cm vs 3cm depth). No precise scalp positioning needed.</td>
+          <td>OCD patients. Those preferring deep TMS. Treatment-resistant cases.</td>
+        </tr>
+        <tr>
+          <td><strong>MagVenture MagPro</strong></td>
+          <td>Standard rTMS / iTBS</td>
+          <td>MDD</td>
+          <td>SmartCoil technology. Fractionated dosing option. European clinical base.</td>
+          <td>Flexible protocols. Clinics preferring European-manufactured equipment.</td>
+        </tr>
+        <tr>
+          <td><strong>Nexstim Smart TMS</strong></td>
+          <td>Navigated / nTMS</td>
+          <td>MDD</td>
+          <td>MRI-guided neuronavigation. Personalized brain-targeting based on each patient's brain anatomy.</td>
+          <td>Maximum precision. Research settings. Patients seeking the most individualized treatment.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 4: CHOOSING A PROVIDER            -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #b45309, #f59e0b);">5</div>
+      <div>
+        <h2>How to Choose a TMS Provider</h2>
+        <p>Your checklist for evaluating any TMS clinic — from credentials to technology to track record.</p>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-bottom: 0.1in;">
+      <div class="callout blue">
+        <h3>Experience & Credentials</h3>
+        <ul>
+          <li><strong>Board-certified psychiatrist</strong> supervising or performing treatment</li>
+          <li>TMS technicians are trained and certified on the specific device</li>
+          <li>Minimum 2+ years of TMS experience</li>
+          <li>100+ patients treated is a good minimum benchmark</li>
+          <li>Treatment completion rate should be 80%+ (not many dropouts)</li>
+          <li>Ask: "Who performs the treatment, and what's the supervision model?"</li>
+          <li>Ask: "What happens if I miss a session?"</li>
+        </ul>
+      </div>
+      <div class="callout purple">
+        <h3>Technology & Protocols</h3>
+        <ul>
+          <li><strong>FDA-cleared device</strong> (NeuroStar, BrainsWay, MagVenture, Nexstim)</li>
+          <li>Neuronavigation available (MRI-guided targeting) — preferred but not required</li>
+          <li><strong>iTBS offered</strong> — faster treatment, equivalent efficacy</li>
+          <li>Multiple protocol options for personalized treatment plans</li>
+          <li>Motor threshold measured at each session vs. baseline only</li>
+          <li>Ask: "Which TMS devices do you use, and why did you choose them?"</li>
+          <li>Ask: "Do you offer both standard rTMS and iTBS?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flags">
+      <div class="flag red">
+        <h4>🚩 Red Flags to Watch For</h4>
+        <ul>
+          <li>Guarantees specific outcomes or cure rates</li>
+          <li>No psychiatrist involvement — only technicians</li>
+          <li>Pressure to start immediately without evaluation</li>
+          <li>Not in-network with any major insurers</li>
+          <li>No reviews or suspiciously perfect ratings</li>
+          <li>Unwilling to explain which TMS device they use</li>
+          <li>No outcomes data, or vague claims about success rates</li>
+          <li>High staff turnover — ask about the team stability</li>
+        </ul>
+      </div>
+      <div class="flag green">
+        <h4>✓ Green Flags — Quality Indicators</h4>
+        <ul>
+          <li>Board-certified psychiatrist evaluates every patient</li>
+          <li>Clear explanation of device, protocol, and expected outcomes</li>
+          <li>Thorough intake — they say no to patients who aren't good candidates</li>
+          <li>In-network with major insurers, transparent self-pay pricing</li>
+          <li>Ask for outcomes data and share it honestly</li>
+          <li>Offer multiple TMS protocols (rTMS, iTBS, Deep TMS)</li>
+          <li>Experienced team (2+ years, 100+ patients treated)</li>
+          <li>Positive, verified reviews from real patients</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top: 0.12in;">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #4338ca, #818cf8);">6</div>
+      <div>
+        <h2>Your TMS Treatment Journey</h2>
+        <p>What to expect from first consultation to long-term follow-up.</p>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>Step 1 — Initial Consultation (Week 0)</h4>
+        <p>45–60 minutes with a psychiatrist. They review your history, confirm your diagnosis, check TMS eligibility, and explain the process. You complete PHQ-9 and other rating scales. Bring your medication history and any relevant psychiatric records.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Step 2 — Insurance Authorization (Week 0–2)</h4>
+        <p>Your clinic submits prior authorization. This takes 5–14 days typically. Once approved, you schedule your mapping session. Some clinics run auth as part of intake — ask.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Step 3 — Mapping Session / Motor Threshold (Day 1)</h4>
+        <p>20–45 minutes. The coil is positioned, and the technician finds your "motor threshold" — the exact magnetic intensity needed for your brain. You'll feel a tapping sensation on your scalp. This determines your treatment dose for all future sessions.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Step 4 — Daily Treatment Sessions (Weeks 1–4)</h4>
+        <p>5 days per week, every weekday, for 4–6 weeks. Each session is 3–37 minutes depending on protocol (iTBS vs standard). You drive to the clinic, receive treatment, and drive home. No sedation, no downtime.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Step 5 — Mid-Treatment Evaluation (Week 2–3)</h4>
+        <p>Your psychiatrist checks your progress, typically at session 10–15. If you're responding, you continue the planned course. If not, they may adjust the treatment target, intensity, or protocol.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Step 6 — Completion & Outcome Assessment (Week 4–6)</h4>
+        <p>After your final session, your psychiatrist measures your response. Patients who achieve remission or significant response often enter a maintenance protocol — fewer sessions over several months to sustain the benefit.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Step 7 — Long-Term Follow-Up</h4>
+        <p>TMS is not a cure — depression can recur. Maintenance sessions (monthly or as needed) are common. Work with your psychiatrist to determine your maintenance plan. Many patients do well for 6–12+ months after a full acute course.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 5: INSURANCE + FAQ                -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #0f766e, #22c55e);">7</div>
+      <div>
+        <h2>Understanding TMS Costs & Insurance</h2>
+        <p>What to ask your insurer before starting — and what you'll actually pay.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card green"><div class="stat-num">$0–$500</div><div class="stat-label">Typical with Insurance</div></div>
+      <div class="stat-card"><div class="stat-num">$2K–$5K</div><div class="stat-label">Deductible + Coinsurance</div></div>
+      <div class="stat-card red"><div class="stat-num">$6K–$12K</div><div class="stat-label">Full Course Self-Pay</div></div>
+    </div>
+
+    <div class="two-col" style="margin-top: 0.1in;">
+      <div class="callout green">
+        <h3>What Affects Your Out-of-Pocket Cost?</h3>
+        <ul>
+          <li><strong>In-network vs out-of-network:</strong> In-network providers are dramatically cheaper. Always ask if the clinic is in-network with your specific plan — not just "we accept most insurance."</li>
+          <li><strong>Deductible status:</strong> If you haven't met your deductible, you'll pay the full negotiated rate until you do.</li>
+          <li><strong>Copay vs coinsurance:</strong> A flat copay (e.g., $30/session) is better than percentage coinsurance (e.g., 20% of $400/session).</li>
+          <li><strong>Prior authorization status:</strong> Starting without authorization means you may be liable for the full cost.</li>
+          <li><strong>Number of sessions:</strong> A full course is typically 36 sessions, but some patients need more or fewer.</li>
+          <li><strong>Maintenance sessions:</strong> Ask about costs for post-acute maintenance — these may need separate authorization.</li>
+        </ul>
+      </div>
+      <div class="callout blue">
+        <h3>Medicare & Medicaid Coverage</h3>
+        <p><strong>Medicare Part B:</strong> Covers TMS for treatment-resistant MDD when provided by a Medicare-enrolled provider using an FDA-cleared device. Requires documentation of 4 prior medication trials and a PHQ-9 score ≥10. Approvals are generally reliable when criteria are met.</p>
+        <p style="margin-top: 6px;"><strong>Medicaid:</strong> Coverage varies significantly by state. California, New York, Massachusetts, and Illinois have the strongest Medicaid TMS coverage. Verify with your specific state's Medicaid plan and confirm the clinic accepts Medicaid.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top: 0.12in;">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">8</div>
+      <div>
+        <h2>25 Questions to Ask at Every TMS Consultation</h2>
+        <p>Use these questions to evaluate any TMS provider. A quality clinic will welcome them.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="pro-tip"><h4>Provider & Credentials</h4><p>1. Are you board-certified in psychiatry?<br>2. How long have you been performing TMS?<br>3. How many TMS patients have you treated?<br>4. Who performs the treatment sessions?<br>5. What is the supervision model during treatment?</p></div>
+        <div class="pro-tip" style="background: #eef2ff; border-color: #c7d2fe;"><h4 style="color: #4338ca;">Device & Technology</h4><p>6. Which FDA-cleared TMS device do you use?<br>7. Do you offer iTBS (3-minute sessions)?<br>8. Do you use neuronavigation (MRI-guided targeting)?<br>9. How do you determine my treatment dose?<br>10. Is motor threshold re-measured at each session?</p></div>
+        <div class="pro-tip" style="background: #f0fdf4; border-color: #bbf7d0;"><h4 style="color: #15803d;">Insurance & Costs</h4><p>11. Are you in-network with my specific insurance?<br>12. Do you handle prior authorization for TMS?<br>13. What will my exact out-of-pocket cost be?<br>14. What's included in the quoted price?<br>15. What happens to my cost if treatment extends beyond 36 sessions?</p></div>
+      </div>
+      <div>
+        <div class="pro-tip" style="background: #faf5ff; border-color: #e9d5ff;"><h4 style="color: #7e22ce;">Treatment & Outcomes</h4><p>16. What's your treatment completion rate?<br>17. What percentage of your patients respond to TMS?<br>18. How do you measure treatment response?<br>19. What if I'm not responding by session 15?<br>20. What's your policy if insurance denies mid-treatment?</p></div>
+        <div class="pro-tip" style="background: #fefce8; border-color: #fde68a;"><h4 style="color: #a16207;">Safety & Comfort</h4><p>21. What are the most common side effects?<br>22. What do I do if I have a headache after a session?<br>23. Can I drive myself to and from sessions?<br>24. What is your seizure management protocol?</p></div>
+        <div class="pro-tip" style="background: #fef2f2; border-color: #fecaca;"><h4 style="color: #b91c1c;">Maintenance & Long-Term</h4><p>25. What does your maintenance protocol look like? How many maintenance sessions do most patients need, and how often?</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- BACK PAGE: FAQ + NEXT STEPS            -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page">
+  <div class="section">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.12in; padding-bottom: 8px; border-bottom: 2px solid #1e293b;">
+      <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #4f46e5, #0ea5e9); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14pt;">❓</div>
+      <h2 style="font-size: 14pt; font-weight: 900; color: #1e293b; line-height: 1;">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-item"><div class="faq-q">Q: Is TMS safe? What are the actual side effects?</div><div class="faq-a">A: TMS is FDA-cleared and considered very safe. The most common side effects are mild: scalp discomfort at the coil site (~50% of patients, resolves within the first week) and headache (~30%, responds to ibuprofen/acetaminophen). Serious side effects are rare — the seizure risk is less than 0.1%, lower than most antidepressant medications.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: How long do TMS results last?</div><div class="faq-a">A: Studies show 60–70% of TMS responders maintain their benefit at 12 months. Many patients eventually undergo maintenance sessions — monthly or as needed — to sustain the benefit. Your psychiatrist will help you determine if and when maintenance is needed.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: Can I continue taking my antidepressants during TMS?</div><div class="faq-a">A: Yes — and most patients do. Many TMS clinical trials allowed patients to remain on their current medication. TMS does not interact with medications. Some patients taper off medications after achieving remission; this should always be done under a psychiatrist's supervision.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: Does TMS affect memory or cognition?</div><div class="faq-a">A: Unlike ECT, TMS does not impair memory or cognitive function. Some patients actually report improved cognitive function ("brain fog" lifting) after TMS treatment, particularly if depression-related cognitive symptoms were present.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: What if TMS doesn't work for me?</div><div class="faq-a">A: TMS works for about half of patients. If a full course doesn't work, discuss alternatives: different TMS protocols (switching to Deep TMS or neuronavigated TMS), ECT, ketamine/esketamine therapy, VNS, or DBS. TMS is actually one of the less invasive options — if it doesn't work, there are more options ahead.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: Is TMS covered by the VA?</div><div class="faq-a">A: The VA has expanded TMS coverage significantly, particularly for veterans with TRD. VA medical centers in many cities now offer TMS. Military Tricare coverage varies by plan — check with your specific Tricare region. Active-duty service members need a physician referral.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: What if I miss a session?</div><div class="faq-a">A: Missing an occasional session is generally fine — it may slightly extend your overall timeline. However, consistent missed sessions reduce efficacy. Studies show patients who maintain a 5-day-per-week schedule have the best outcomes. Some clinics offer make-up sessions on weekends.</div></div>
+  </div>
+
+  <div class="section" style="margin-top: 0.1in;">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.12in; padding-bottom: 8px; border-bottom: 2px solid #1e293b;">
+      <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #0f766e, #14b8a6); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14pt;">💬</div>
+      <h2 style="font-size: 14pt; font-weight: 900; color: #1e293b; line-height: 1;">What Patients Say</h2>
+    </div>
+    <div class="testimonial-cols" style="margin-bottom: 0.1in;">
+      <div class="testimonial"><p>"TMS wasn't a quick fix. It took until session 18 before I noticed a real shift. But once it kicked in, it was like someone turned the volume down on the depression. I'm now 8 months post-treatment and still feeling the benefit."</p><cite>— Tom W., Portland, OR (BrainsWay Deep TMS, 2024)</cite></div>
+      <div class="testimonial"><p>"I was terrified of the needles and side effects from medications. TMS was completely different — just sitting in a chair for 20 minutes with a coil on my head. The first few sessions gave me a mild headache but nothing serious."</p><cite>— Nicole B., Nashville, TN (NeuroStar, 2025)</cite></div>
+    </div>
+    <div class="testimonial-cols">
+      <div class="testimonial"><p>"What surprised me most was how normal I felt during treatment. I drove myself to every session, worked in the afternoon, and had no downtime. It fit into my life in a way that hospitalization or ECT never could have."</p><cite>— Marcus D., Chicago, IL (iTBS, 2024)</cite></div>
+      <div class="testimonial"><p>"My insurance initially denied it. I appealed with the help of my psychiatrist — a 15-minute peer-to-peer call changed everything. They approved it within 48 hours of the appeal. Don't take no for an answer on the first try."</p><cite>— Sarah M., Boston, MA (BCBS, 2025)</cite></div>
+    </div>
+  </div>
+
+  <div class="qr-grid" style="margin-top: 0.1in;">
+    <div class="qr-section">
+      <h4 style="font-size: 9pt; font-weight: 700; color: #1e293b; margin-bottom: 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">Find a Verified TMS Clinic</h4>
+      <div class="qr-row">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=44x44&data=https://tmslist.com/map/&bgcolor=0f172a&color=ffffff" width="44" height="44" style="border-radius:6px;flex-shrink:0;" alt="QR to TMS directory" />
+        <div class="qr-info">
+          <p>1,100+ verified TMS clinics in our directory. Filter by insurance, device, and location.</p>
+          <div class="qr-url">tmslist.com/map/</div>
+        </div>
+      </div>
+    </div>
+    <div class="qr-section">
+      <h4 style="font-size: 9pt; font-weight: 700; color: #1e293b; margin-bottom: 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">Take the Candidacy Quiz</h4>
+      <div class="qr-row">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=44x44&data=https://tmslist.com/quiz/&bgcolor=0f766e&color=ffffff" width="44" height="44" style="border-radius:6px;flex-shrink:0;" alt="QR to TMS quiz" />
+        <div class="qr-info">
+          <p>2-minute quiz based on the same criteria psychiatrists use to evaluate TMS eligibility.</p>
+          <div class="qr-url">tmslist.com/quiz/</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- GLOSSARY PAGE                            -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.12in; padding-bottom: 8px; border-bottom: 2px solid #1e293b;">
+      <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #312e81, #4f46e5); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <h2 style="font-size: 16pt; font-weight: 900; color: #1e293b; line-height: 1;">Glossary of TMS Terms</h2>
+    </div>
+    <p style="font-size: 8.5pt; color: #64748b; margin-bottom: 0.1in;">Everything you need to understand when reading about TMS — from consultation to maintenance.</p>
+
+    <div class="two-col">
+      <div>
+        <div style="background: #eef2ff; border-radius: 6px; padding: 7px 10px; margin-bottom: 6px;">
+          <strong style="font-size: 8pt; color: #3730a3;">Treatment &amp; Devices</strong>
+        </div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">TMS</strong><span style="font-size: 7.5pt; color: #475569;"> — Transcranial Magnetic Stimulation. A non-invasive procedure using magnetic fields to stimulate nerve cells in the brain to improve mood.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">rTMS</strong><span style="font-size: 7.5pt; color: #475569;"> — Repetitive TMS. The standard form of TMS using repeated magnetic pulses. FDA-cleared for MDD and OCD.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">iTBS (Theta Burst)</strong><span style="font-size: 7.5pt; color: #475569;"> — Intermittent Theta Burst Stimulation. A faster protocol (3 min/session) with equivalent efficacy to standard rTMS. FDA-cleared 2018.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">Deep TMS</strong><span style="font-size: 7.5pt; color: #475569;"> — TMS using specialized H-coils (BrainsWay) that penetrate deeper brain structures. FDA-cleared for MDD and OCD.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">Motor Threshold (MT)</strong><span style="font-size: 7.5pt; color: #475569;"> — The minimum magnetic intensity needed to produce a motor response (finger twitch). Used to calibrate treatment dose for each patient.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">DLPFC</strong><span style="font-size: 7.5pt; color: #475569;"> — Dorsolateral Prefrontal Cortex. The brain target for standard TMS depression treatment. Located above and to the side of the forehead.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">Neuroplasticity</strong><span style="font-size: 7.5pt; color: #475569;"> — The brain's ability to form new neural connections. TMS is believed to work by promoting neuroplasticity in mood-regulating brain circuits.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">nTMS / Navigated TMS</strong><span style="font-size: 7.5pt; color: #475569;"> — MRI-guided TMS using each patient's brain anatomy for precise coil positioning. Used by Nexstim Smart TMS.</span></div>
+      </div>
+      <div>
+        <div style="background: #f0fdf4; border-radius: 6px; padding: 7px 10px; margin-bottom: 6px;">
+          <strong style="font-size: 8pt; color: #15803d;">Clinical &amp; Assessment Terms</strong>
+        </div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">TRD</strong><span style="font-size: 7.5pt; color: #475569;"> — Treatment-Resistant Depression. Typically defined as failure to respond to 2+ antidepressant medications. The standard criterion for TMS coverage.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">PHQ-9</strong><span style="font-size: 7.5pt; color: #475569;"> — Patient Health Questionnaire-9. A 9-question depression severity scale (0–27). Insurers typically require a score of 10 or higher for TMS authorization.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">GAD-7</strong><span style="font-size: 7.5pt; color: #475569;"> — Generalized Anxiety Disorder 7-item scale. Used to measure anxiety severity. Often completed alongside PHQ-9 at intake.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">Response</strong><span style="font-size: 7.5pt; color: #475569;"> — Defined as a 50%+ reduction in PHQ-9 score. The clinical standard for "meaningful improvement" from TMS.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">Remission</strong><span style="font-size: 7.5pt; color: #475569;"> — PHQ-9 score below 5, or a CGI-I score of 1 ("very much improved"). The goal of TMS treatment.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">CGI-S / CGI-I</strong><span style="font-size: 7.5pt; color: #475569;"> — Clinical Global Impression — Severity / Improvement. Physician-rated scales measuring overall illness severity and change.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">CPT Code</strong><span style="font-size: 7.5pt; color: #475569;"> — Current Procedural Terminology. Billing codes: 90867 (mapping), 90868 (treatment), 90869 (subsequent MT).</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #4f46e5;">ECT</strong><span style="font-size: 7.5pt; color: #475569;"> — Electroconvulsive Therapy. A more invasive procedure for severe depression, often considered when TMS fails. Requires anesthesia.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TEAR-OUT CARD: What to Ask Your Doctor  -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div style="border: 3px solid #4f46e5; border-radius: 12px; padding: 0.18in; break-inside: avoid;">
+    <div style="background: linear-gradient(135deg, #1e1b4b, #4f46e5); color: white; border-radius: 8px 8px 0 0; padding: 10px 14px; margin: -0.18in -0.18in 0.12in -0.18in; border-bottom: 3px solid #818cf8;">
+      <p style="font-size: 6.5pt; opacity: 0.7; margin: 0 0 2px 0; text-transform: uppercase; letter-spacing: 1px; font-family: -apple-system, sans-serif;">Free Printable — Cut Along the Edge</p>
+      <h2 style="font-size: 13pt; font-weight: 900; margin: 0; color: white;">Questions to Ask Before Starting TMS</h2>
+      <p style="font-size: 7.5pt; opacity: 0.8; margin: 3px 0 0 0;">Write down your answers at your consultation. Share with your doctor.</p>
+    </div>
+    <div class="two-col" style="gap: 0.1in;">
+      <div>
+        <div style="background: #eef2ff; border-radius: 6px; padding: 8px; margin-bottom: 6px;">
+          <strong style="font-size: 8pt; color: #3730a3; display: block; margin-bottom: 4px;">Your Diagnosis &amp; Eligibility</strong>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #6366f1; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">My PHQ-9 score: ________</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #6366f1; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Medications I've tried: ________</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #6366f1; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Duration of current episode: ________</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #6366f1; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Prior therapy (CBT, etc.): ________</span>
+          </div>
+        </div>
+        <div style="background: #f0fdf4; border-radius: 6px; padding: 8px;">
+          <strong style="font-size: 8pt; color: #15803d; display: block; margin-bottom: 4px;">Insurance &amp; Logistics</strong>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #22c55e; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Estimated out-of-pocket cost: ________</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #22c55e; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Session schedule: ________</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #22c55e; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Clinic address &amp; parking: ________</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #22c55e; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Emergency contact info: ________</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="background: #faf5ff; border-radius: 6px; padding: 8px; margin-bottom: 6px;">
+          <strong style="font-size: 8pt; color: #7e22ce; display: block; margin-bottom: 4px;">Treatment Plan &amp; Expectations</strong>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #a855f7; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Device &amp; protocol: ________</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #a855f7; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">When to expect improvement: ________</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #a855f7; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Maintenance plan: ________</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #a855f7; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">What if TMS doesn't work? ________</span>
+          </div>
+        </div>
+        <div style="background: #fef3c7; border-radius: 6px; padding: 8px;">
+          <strong style="font-size: 8pt; color: #92400e; display: block; margin-bottom: 4px;">My Notes</strong>
+          <div style="height: 50px; border-bottom: 1px dashed #d97706; margin-bottom: 4px;"></div>
+          <div style="height: 50px; border-bottom: 1px dashed #d97706;"></div>
+        </div>
+        <div style="margin-top: 6px; padding: 6px; background: #1e293b; border-radius: 6px; text-align: center;">
+          <p style="font-size: 7pt; color: #94a3b8; margin: 0;">Free TMS guide — more at</p>
+          <p style="font-size: 10pt; font-weight: 900; color: #818cf8; margin: 2px 0 0 0;">tmslist.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

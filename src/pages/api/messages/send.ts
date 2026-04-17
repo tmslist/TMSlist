@@ -6,6 +6,7 @@ import { checkRateLimit } from '../../../utils/rateLimit';
 import { sendLeadNotification } from '../../../utils/email';
 import { sendLeadSms } from '../../../utils/sms';
 import { z } from 'zod';
+import { getPostHogServer } from '../../../lib/posthog-server';
 
 export const prerender = false;
 
@@ -108,6 +109,21 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ clinicId: parsed.data.clinicId, event: 'lead_submit' }),
     }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
+
+    const sessionId = request.headers.get('X-PostHog-Session-Id');
+    getPostHogServer().capture({
+      distinctId: parsed.data.email,
+      event: 'lead_message_sent',
+      properties: {
+        $session_id: sessionId || undefined,
+        clinic_id: parsed.data.clinicId,
+        clinic_name: clinic.name,
+        condition: parsed.data.condition,
+        urgency: parsed.data.urgency,
+        has_insurance: !!parsed.data.insurance,
+        lead_id: result[0]?.id,
+      },
+    });
 
     return new Response(JSON.stringify({ success: true, id: result[0]?.id }), {
       status: 201,

@@ -17,25 +17,46 @@ export default function ExitIntent() {
         setShow(true);
         localStorage.setItem('exit_intent_shown', String(Date.now()));
         document.removeEventListener('mouseleave', handler);
+        window.posthog?.capture('exit_intent_shown', { path: window.location.pathname });
       }
     };
     document.addEventListener('mouseleave', handler);
     return () => document.removeEventListener('mouseleave', handler);
   }, []);
 
+  // Patient guides are downloadable PDFs; provider magnets go to the resource page
+  const PATIENT_GUIDES = ['insurance-checklist', 'tms-buyers-guide', 'tms-vs-medication'];
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await fetch('/api/leads', {
+    const guideTypeMap: Record<string, string> = {
+      'insurance-checklist': 'insurance-checklist',
+      'tms-buyers-guide': 'buyers-guide',
+      'tms-vs-medication': 'vs-medication',
+    };
+    await fetch('/api/funnel/enter', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'lead_magnet', name, email, sourceUrl: window.location.href, metadata: { resource, subscribed: true } }),
+      body: JSON.stringify({
+        segment: 'lead_magnet',
+        name, email,
+        guide_type: guideTypeMap[resource] || resource,
+        source: 'exit-intent-popup',
+      }),
     });
-    // Trigger PDF download
-    const link = document.createElement('a');
-    link.href = `/downloads/${resource}.pdf`;
-    link.download = `${resource}.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    window.posthog?.capture('lead_magnet_downloaded', { resource, guide_type: guideTypeMap[resource] || resource, email });
+
+    if (PATIENT_GUIDES.includes(resource)) {
+      // Download the rich PDF
+      const link = document.createElement('a');
+      link.href = `/downloads/${resource}.pdf`;
+      link.download = `${resource}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      // Redirect to the full resource page with download form
+      window.location.href = `/resources/${resource}/`;
+    }
     setSubmitted(true);
   }
 

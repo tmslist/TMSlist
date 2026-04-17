@@ -1,0 +1,2577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starting a TMS Clinic: The Complete Business Plan | TMS List</title>
+  <style>
+    /* ========================================
+       BASE STYLES & PRINT CONFIGURATION
+    ======================================== */
+    :root {
+      --emerald-900: #022c22;
+      --emerald-800: #064e3b;
+      --emerald-600: #059669;
+      --emerald-500: #10b981;
+      --emerald-400: #34d399;
+      --emerald-100: #d1fae5;
+      --slate-900: #0f172a;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: var(--slate-700);
+      background: var(--white);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      color: var(--slate-900);
+      line-height: 1.3;
+    }
+
+    /* ========================================
+       PAGE LAYOUT & PRINT RULES
+    ======================================== */
+    @page {
+      size: letter;
+      margin: 0.6in;
+    }
+
+    @page :first {
+      margin: 0;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .no-break {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .avoid-break {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* ========================================
+       COVER PAGE
+    ======================================== */
+    .cover-page {
+      width: 7.2in;
+      height: 9.4in;
+      background: linear-gradient(145deg, var(--emerald-900) 0%, var(--emerald-800) 50%, var(--emerald-600) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1in;
+      position: relative;
+      margin: -0.6in -0.6in 0 -0.6in;
+      width: calc(100% + 1.2in);
+    }
+
+    .cover-badge {
+      position: absolute;
+      top: 0.6in;
+      right: 0.8in;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 0.25rem 0.75rem;
+      border-radius: 2rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 9pt;
+      color: var(--emerald-100);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .cover-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .cover-icon svg {
+      width: 40px;
+      height: 40px;
+      stroke: var(--emerald-400);
+    }
+
+    .cover-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 42pt;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .cover-subtitle {
+      font-size: 14pt;
+      color: var(--emerald-100);
+      margin-bottom: 2rem;
+      font-style: italic;
+      max-width: 5.5in;
+    }
+
+    .cover-divider {
+      width: 120px;
+      height: 3px;
+      background: var(--emerald-400);
+      margin: 1.5rem 0;
+      border-radius: 2px;
+    }
+
+    .cover-tagline {
+      font-size: 11pt;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2rem;
+    }
+
+    .cover-meta {
+      position: absolute;
+      bottom: 0.6in;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0.8in;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 9pt;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .cover-qr-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .cover-qr-section img {
+      width: 64px;
+      height: 64px;
+      border-radius: 6px;
+    }
+
+    .cover-qr-text {
+      text-align: left;
+    }
+
+    .cover-qr-text p {
+      color: var(--emerald-100);
+      font-size: 10pt;
+      margin: 0;
+    }
+
+    .cover-qr-text small {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 8pt;
+    }
+
+    /* ========================================
+       TABLE OF CONTENTS
+    ======================================== */
+    .toc-page {
+      padding-top: 0;
+    }
+
+    .toc-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--emerald-600);
+    }
+
+    .toc-header-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--emerald-100);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .toc-header-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--emerald-600);
+    }
+
+    .toc-header h1 {
+      font-size: 18pt;
+      color: var(--slate-900);
+    }
+
+    .toc-columns {
+      columns: 2;
+      column-gap: 1.5rem;
+    }
+
+    .toc-section {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      margin-bottom: 1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .toc-section-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--slate-900);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toc-section-number {
+      width: 24px;
+      height: 24px;
+      background: var(--emerald-600);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10pt;
+      font-weight: 600;
+    }
+
+    .toc-subsections {
+      margin-left: 2rem;
+      margin-top: 0.25rem;
+    }
+
+    .toc-subsection {
+      font-size: 9pt;
+      color: var(--slate-500);
+      padding: 0.15rem 0;
+    }
+
+    /* ========================================
+       SECTION STYLES
+    ======================================== */
+    .section {
+      padding: 0.5rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--emerald-600);
+    }
+
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--emerald-100);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--emerald-600);
+    }
+
+    .section-header h2 {
+      font-size: 16pt;
+      font-weight: 600;
+    }
+
+    .section-intro {
+      font-size: 11pt;
+      color: var(--slate-600);
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      background: var(--slate-100);
+      border-left: 3px solid var(--emerald-600);
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* ========================================
+       SUBSECTION STYLES
+    ======================================== */
+    .subsection {
+      margin-bottom: 1.25rem;
+    }
+
+    .subsection h3 {
+      font-size: 12pt;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--slate-800);
+    }
+
+    .subsection p {
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, var(--emerald-100) 0%, rgba(16, 185, 129, 0.1) 100%);
+      border: 1px solid var(--emerald-300);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .highlight-box h4 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--emerald-800);
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-box ul {
+      margin-left: 1.25rem;
+      color: var(--slate-700);
+    }
+
+    .highlight-box li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* ========================================
+       TABLE STYLES
+    ======================================== */
+    .table-container {
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5pt;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    thead {
+      background: linear-gradient(135deg, var(--emerald-800) 0%, var(--emerald-600) 100%);
+    }
+
+    thead th {
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 600;
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    thead th:first-child {
+      border-radius: 6px 0 0 0;
+    }
+
+    thead th:last-child {
+      border-radius: 0 6px 0 0;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--slate-100);
+    }
+
+    tbody tr:hover {
+      background: var(--emerald-100);
+    }
+
+    td {
+      padding: 0.5rem 0.75rem;
+      vertical-align: top;
+    }
+
+    .table-caption {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 9pt;
+      color: var(--slate-500);
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    /* ========================================
+       CARD GRID STYLES
+    ======================================== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .card-grid.three-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .stat-card .value {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 24pt;
+      font-weight: 700;
+      color: var(--emerald-600);
+      line-height: 1.2;
+    }
+
+    .stat-card .label {
+      font-size: 9pt;
+      color: var(--slate-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 0.25rem;
+    }
+
+    .info-card {
+      background: white;
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      padding: 1rem;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .info-card h4 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--slate-900);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card h4 svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--emerald-600);
+    }
+
+    .info-card ul {
+      margin-left: 1rem;
+      font-size: 9.5pt;
+    }
+
+    .info-card li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* ========================================
+       TIMELINE STYLES
+    ======================================== */
+    .timeline {
+      position: relative;
+      margin: 1.5rem 0;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--emerald-600), var(--emerald-300));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.5rem;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.25rem;
+      width: 16px;
+      height: 16px;
+      background: var(--emerald-600);
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--emerald-600);
+    }
+
+    .timeline-phase {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 10pt;
+      font-weight: 600;
+      color: var(--emerald-600);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--slate-900);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-tasks {
+      font-size: 9.5pt;
+      color: var(--slate-600);
+    }
+
+    /* ========================================
+       CHECKLIST STYLES
+    ======================================== */
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .checklist li::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--emerald-500);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .checklist-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .checklist-group h4 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--emerald-700);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--emerald-200);
+    }
+
+    /* ========================================
+       TESTIMONIAL STYLES
+    ======================================== */
+    .testimonial {
+      background: linear-gradient(135deg, var(--slate-100) 0%, white 100%);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      position: relative;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .testimonial::before {
+      content: '"';
+      font-family: Georgia, serif;
+      font-size: 72pt;
+      color: var(--emerald-200);
+      position: absolute;
+      top: -10px;
+      left: 15px;
+      line-height: 1;
+    }
+
+    .testimonial-text {
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--slate-700);
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--emerald-400) 0%, var(--emerald-600) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 600;
+      font-size: 16pt;
+    }
+
+    .testimonial-info h5 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--slate-900);
+    }
+
+    .testimonial-info p {
+      font-size: 9pt;
+      color: var(--slate-500);
+    }
+
+    /* ========================================
+       QR SECTION STYLES
+    ======================================== */
+    .qr-section {
+      background: linear-gradient(135deg, var(--emerald-900) 0%, var(--emerald-800) 100%);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .qr-section h3 {
+      color: white;
+      font-size: 14pt;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .qr-item {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .qr-item img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+    }
+
+    .qr-item h4 {
+      color: white;
+      font-size: 11pt;
+      margin-bottom: 0.25rem;
+    }
+
+    .qr-item p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 9pt;
+    }
+
+    .qr-item a {
+      color: var(--emerald-300);
+      text-decoration: none;
+      font-size: 9pt;
+    }
+
+    /* ========================================
+       GLOSSARY STYLES
+    ======================================== */
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .glossary-item {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      padding: 0.5rem;
+      background: var(--slate-100);
+      border-radius: 6px;
+      border-left: 3px solid var(--emerald-500);
+    }
+
+    .glossary-term {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 600;
+      font-size: 10pt;
+      color: var(--emerald-700);
+      margin-bottom: 0.15rem;
+    }
+
+    .glossary-def {
+      font-size: 9pt;
+      color: var(--slate-600);
+    }
+
+    /* ========================================
+       TEAR-OUT CARD PAGE
+    ======================================== */
+    .tearout-header {
+      background: linear-gradient(135deg, var(--emerald-800) 0%, var(--emerald-600) 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px 12px 0 0;
+      margin: -0.5rem -0.5rem 0 -0.5rem;
+      text-align: center;
+    }
+
+    .tearout-header h2 {
+      color: white;
+      font-size: 18pt;
+      margin-bottom: 0.25rem;
+    }
+
+    .tearout-header p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 10pt;
+    }
+
+    .tearout-card {
+      border: 3px dashed var(--emerald-400);
+      border-radius: 12px;
+      padding: 1rem;
+      background: white;
+    }
+
+    .cut-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--slate-400);
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 1rem 0;
+    }
+
+    .cut-line::before,
+    .cut-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--slate-300);
+    }
+
+    /* ========================================
+       PAGE FOOTER
+    ======================================== */
+    @page {
+      @bottom-left {
+        content: "TMS List — Starting a TMS Clinic Business Plan";
+        font-size: 7.5pt;
+        color: #94a3b8;
+      }
+      @bottom-right {
+        content: "Page " counter(page) " of " counter(pages);
+        font-size: 7.5pt;
+        color: #64748b;
+      }
+    }
+
+    /* ========================================
+       PRINT UTILITIES
+    ======================================== */
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .page-break {
+        page-break-before: always;
+      }
+
+      .no-break {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .avoid-break {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+
+    /* ========================================
+       MISC UTILITIES
+    ======================================== */
+    .text-emerald {
+      color: var(--emerald-600);
+    }
+
+    .text-muted {
+      color: var(--slate-500);
+    }
+
+    .font-sans {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .mb-1 {
+      margin-bottom: 0.5rem;
+    }
+
+    .mb-2 {
+      margin-bottom: 1rem;
+    }
+
+    .mt-1 {
+      margin-top: 0.5rem;
+    }
+
+    .mt-2 {
+      margin-top: 1rem;
+    }
+
+    .two-columns {
+      columns: 2;
+      column-gap: 1rem;
+    }
+
+    .two-columns p {
+      break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================
+       COVER PAGE
+  ======================================== -->
+  <div class="cover-page">
+    <div class="cover-badge">Free Resource 2026</div>
+
+    <div class="cover-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+    </div>
+
+    <h1 class="cover-title">Starting a TMS Clinic</h1>
+    <p class="cover-subtitle">The Complete Business Plan</p>
+
+    <div class="cover-divider"></div>
+
+    <p class="cover-tagline">From concept to first patient — a step-by-step roadmap for 2026</p>
+
+    <div class="cover-qr-section">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" style="width:64px;height:64px;border-radius:6px;" alt="TMS Clinic Map QR Code" />
+      <div class="cover-qr-text">
+        <p>Find TMS providers near you</p>
+        <small>tmslist.com/map</small>
+      </div>
+    </div>
+
+    <div class="cover-meta">
+      <span>TMS List</span>
+      <span>tmslist.com</span>
+    </div>
+  </div>
+
+  <!-- ========================================
+       TABLE OF CONTENTS
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section toc-page">
+    <div class="toc-header">
+      <div class="toc-header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
+        </svg>
+      </div>
+      <h1>Table of Contents</h1>
+    </div>
+
+    <div class="toc-columns">
+      <div class="toc-section">
+        <div class="toc-section-title">
+          <span class="toc-section-number">1</span>
+          Executive Summary
+        </div>
+        <div class="toc-subsections">
+          <div class="toc-subsection">Market Opportunity</div>
+          <div class="toc-subsection">Target Audience</div>
+          <div class="toc-subsection">Revenue Model</div>
+          <div class="toc-subsection">Key Success Factors</div>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-section-title">
+          <span class="toc-section-number">2</span>
+          Financial Projections
+        </div>
+        <div class="toc-subsections">
+          <div class="toc-subsection">Startup Costs</div>
+          <div class="toc-subsection">Operating Costs</div>
+          <div class="toc-subsection">Revenue Projections</div>
+          <div class="toc-subsection">Break-Even Analysis</div>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-section-title">
+          <span class="toc-section-number">3</span>
+          Equipment & Technology
+        </div>
+        <div class="toc-subsections">
+          <div class="toc-subsection">Device Comparison</div>
+          <div class="toc-subsection">EMR Requirements</div>
+          <div class="toc-subsection">Scheduling Software</div>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-section-title">
+          <span class="toc-section-number">4</span>
+          Staffing Model
+        </div>
+        <div class="toc-subsections">
+          <div class="toc-subsection">Core Team Roles</div>
+          <div class="toc-subsection">Optional Positions</div>
+          <div class="toc-subsection">Training & Certification</div>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-section-title">
+          <span class="toc-section-number">5</span>
+          Payer Contracting
+        </div>
+        <div class="toc-subsections">
+          <div class="toc-subsection">Medicare Coverage</div>
+          <div class="toc-subsection">Commercial Payers</div>
+          <div class="toc-subsection">Cash-Pay Pricing</div>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-section-title">
+          <span class="toc-section-number">6</span>
+          Location & Operations
+        </div>
+        <div class="toc-subsections">
+          <div class="toc-subsection">Space Requirements</div>
+          <div class="toc-subsection">Compliance</div>
+          <div class="toc-subsection">Patient Flow</div>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-section-title">
+          <span class="toc-section-number">7</span>
+          Compliance & Legal
+        </div>
+        <div class="toc-subsections">
+          <div class="toc-subsection">HIPAA Requirements</div>
+          <div class="toc-subsection">State Licensing</div>
+          <div class="toc-subsection">Insurance</div>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-section-title">
+          <span class="toc-section-number">8</span>
+          Marketing Strategy
+        </div>
+        <div class="toc-subsections">
+          <div class="toc-subsection">Referral Networks</div>
+          <div class="toc-subsection">Digital Presence</div>
+          <div class="toc-subsection">Community Outreach</div>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-section-title">
+          <span class="toc-section-number">9</span>
+          Timeline & Milestones
+        </div>
+        <div class="toc-subsections">
+          <div class="toc-subsection">Phase 1: Planning</div>
+          <div class="toc-subsection">Phase 2: Setup</div>
+          <div class="toc-subsection">Phase 3: Implementation</div>
+          <div class="toc-subsection">Phase 4: Launch</div>
+        </div>
+      </div>
+
+      <div class="toc-section">
+        <div class="toc-section-title">
+          <span class="toc-section-number"></span>
+          Resources & Glossary
+        </div>
+        <div class="toc-subsections">
+          <div class="toc-subsection">QR Codes</div>
+          <div class="toc-subsection">Glossary</div>
+          <div class="toc-subsection">Tear-Out Checklist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       SECTION 1: EXECUTIVE SUMMARY
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+        </svg>
+      </div>
+      <h2>Executive Summary</h2>
+    </div>
+
+    <p class="section-intro">
+      Transcranial Magnetic Stimulation (TMS) represents one of the most promising opportunities in behavioral health entrepreneurship. With FDA clearance for treatment-resistant depression and a rapidly growing body of evidence supporting expanded applications, TMS clinics offer healthcare providers a pathway to differentiated, high-margin revenue.
+    </p>
+
+    <div class="subsection">
+      <h3>Market Opportunity</h3>
+      <div class="card-grid three-col no-break">
+        <div class="stat-card">
+          <div class="value">$2.5B+</div>
+          <div class="label">Global Market Size</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">15%</div>
+          <div class="label">Annual Growth</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">30%</div>
+          <div class="label">Treatment Response Rate</div>
+        </div>
+      </div>
+
+      <div class="highlight-box mt-2">
+        <h4>Why TMS Now?</h4>
+        <ul>
+          <li>FDA-cleared for major depressive disorder (MDD) and obsessive-compulsive disorder (OCD)</li>
+          <li>Insurance coverage expanding across Medicare and commercial payers</li>
+          <li>Growing demand for non-pharmacological mental health treatments</li>
+          <li>Patent expiration on key technologies opening equipment market</li>
+          <li>Increasing acceptance among psychiatrists and referring providers</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Target Market</h3>
+      <div class="two-columns">
+        <p><strong>Primary Targets:</strong> Outpatient psychiatry practices looking to add procedural services, solo psychiatrists seeking additional revenue streams, pain clinics expanding into behavioral health, and neurology groups differentiating their practice offerings.</p>
+        <p><strong>Patient Demographics:</strong> Adults aged 25-65 with treatment-resistant depression (failed 1-2 medication trials), patients seeking alternatives to medication, those with intolerable side effects, and individuals preferring non-invasive treatment options.</p>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Revenue Model</h3>
+      <p>TMS generates revenue through per-session billing using CPT codes 90867 (initiation), 90868 (delivery), and 90869 (subsequent sessions). A typical course of treatment consists of 36 sessions over 6-9 weeks.</p>
+
+      <div class="table-container no-break">
+        <p class="table-caption">Typical Revenue Per Chair (Monthly)</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Low</th>
+              <th>Mid</th>
+              <th>High</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sessions per Month</td>
+              <td>15</td>
+              <td>20</td>
+              <td>25</td>
+            </tr>
+            <tr>
+              <td>Revenue per Session</td>
+              <td>$300</td>
+              <td>$450</td>
+              <td>$600</td>
+            </tr>
+            <tr>
+              <td><strong>Monthly Revenue</strong></td>
+              <td><strong>$4,500</strong></td>
+              <td><strong>$9,000</strong></td>
+              <td><strong>$15,000</strong></td>
+            </tr>
+            <tr>
+              <td>Annual Revenue (6 chairs)</td>
+              <td>$324,000</td>
+              <td>$648,000</td>
+              <td>$1,080,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Key Success Factors</h3>
+      <div class="card-grid no-break">
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
+            Insurance Contracting
+          </h4>
+          <ul>
+            <li>Credential with major payers before launch</li>
+            <li>Understand LCD/NCD requirements</li>
+            <li>Build authorization workflows</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>
+            Referral Network
+          </h4>
+          <ul>
+            <li>Establish relationships with psychiatrists</li>
+            <li>Connect with PCPs and NPs</li>
+            <li>Develop patient education materials</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>
+            Staff Training
+          </h4>
+          <ul>
+            <li>Comprehensive device training</li>
+            <li>HIPAA and compliance certification</li>
+            <li>Patient interaction excellence</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+            Operational Efficiency
+          </h4>
+          <ul>
+            <li>Optimized scheduling systems</li>
+            <li>Streamlined intake processes</li>
+            <li>Effective patient throughput</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonial">
+      <p class="testimonial-text">We opened our TMS practice three years ago with a single chair and have grown to six treatment rooms. The ROI has exceeded our expectations, and more importantly, we're helping patients who have tried everything else. This business plan framework gave us the structure we needed to launch with confidence.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">DR</div>
+        <div class="testimonial-info">
+          <h5>Dr. Rebecca Morrison, MD</h5>
+          <p>Founder, Clarity TMS Center, Denver, CO</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       SECTION 2: FINANCIAL PROJECTIONS
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <h2>Financial Projections</h2>
+    </div>
+
+    <p class="section-intro">
+      Understanding the financial requirements and projections is critical for securing funding and managing cash flow. This section provides detailed breakdowns of startup costs, operating expenses, and revenue expectations.
+    </p>
+
+    <div class="subsection">
+      <h3>Startup Costs</h3>
+      <div class="table-container no-break">
+        <p class="table-caption">Estimated Initial Investment (6-Chair Clinic)</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Low Estimate</th>
+              <th>Mid Estimate</th>
+              <th>High Estimate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Equipment Lease/Purchase</strong></td>
+              <td>$75,000</td>
+              <td>$120,000</td>
+              <td>$250,000</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 1.5rem;">NeuroStar System (per chair)</td>
+              <td>$65-75K lease</td>
+              <td>$75-85K lease</td>
+              <td>$85-100K</td>
+            </tr>
+            <tr>
+              <td style="padding-left: 1.5rem;">BrainsWay Deep TMS</td>
+              <td>$75-85K lease</td>
+              <td>$85-95K lease</td>
+              <td>$95-120K</td>
+            </tr>
+            <tr>
+              <td><strong>Space Renovation</strong></td>
+              <td>$15,000</td>
+              <td>$30,000</td>
+              <td>$50,000</td>
+            </tr>
+            <tr>
+              <td><strong>Staffing (Pre-Launch)</strong></td>
+              <td>$20,000</td>
+              <td>$35,000</td>
+              <td>$50,000</td>
+            </tr>
+            <tr>
+              <td><strong>Licensing & Legal</strong></td>
+              <td>$5,000</td>
+              <td>$10,000</td>
+              <td>$20,000</td>
+            </tr>
+            <tr>
+              <td><strong>Marketing & Branding</strong></td>
+              <td>$10,000</td>
+              <td>$20,000</td>
+              <td>$35,000</td>
+            </tr>
+            <tr>
+              <td><strong>Working Capital</strong></td>
+              <td>$25,000</td>
+              <td>$50,000</td>
+              <td>$75,000</td>
+            </tr>
+            <tr style="background: var(--emerald-100);">
+              <td><strong>TOTAL STARTUP</strong></td>
+              <td><strong>$150,000</strong></td>
+              <td><strong>$265,000</strong></td>
+              <td><strong>$480,000</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Monthly Operating Costs</h3>
+      <div class="table-container no-break">
+        <p class="table-caption">Ongoing Monthly Expenses (6-Chair Clinic)</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Expense Category</th>
+              <th>Low</th>
+              <th>Mid</th>
+              <th>High</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rent (1,200-2,000 sq ft)</td>
+              <td>$2,400</td>
+              <td>$4,000</td>
+              <td>$6,000</td>
+            </tr>
+            <tr>
+              <td>Staff Salaries (3-5 FTE)</td>
+              <td>$15,000</td>
+              <td>$22,000</td>
+              <td>$35,000</td>
+            </tr>
+            <tr>
+              <td>Equipment Lease (6 chairs)</td>
+              <td>$8,000</td>
+              <td>$12,000</td>
+              <td>$18,000</td>
+            </tr>
+            <tr>
+              <td>Marketing & Advertising</td>
+              <td>$2,000</td>
+              <td>$4,000</td>
+              <td>$7,500</td>
+            </tr>
+            <tr>
+              <td>Supplies & Medical Waste</td>
+              <td>$500</td>
+              <td>$1,000</td>
+              <td>$1,500</td>
+            </tr>
+            <tr>
+              <td>Insurance (Liability, Malpractice)</td>
+              <td>$1,500</td>
+              <td>$2,500</td>
+              <td>$4,000</td>
+            </tr>
+            <tr>
+              <td>EMR & Software Subscriptions</td>
+              <td>$300</td>
+              <td>$500</td>
+              <td>$800</td>
+            </tr>
+            <tr>
+              <td>Utilities & Miscellaneous</td>
+              <td>$500</td>
+              <td>$750</td>
+              <td>$1,200</td>
+            </tr>
+            <tr style="background: var(--slate-200);">
+              <td><strong>Total Monthly</strong></td>
+              <td><strong>$30,200</strong></td>
+              <td><strong>$46,750</strong></td>
+              <td><strong>$74,000</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Revenue Projections</h3>
+      <div class="table-container no-break">
+        <p class="table-caption">Three-Year Revenue Forecast (6-Chair Clinic)</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Period</th>
+              <th>Patients/Chair/Month</th>
+              <th>Monthly Sessions</th>
+              <th>Monthly Revenue</th>
+              <th>Annual Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="5" style="background: var(--emerald-100); font-weight: 600;">Year 1</td>
+            </tr>
+            <tr>
+              <td>Q1 (Ramp-Up)</td>
+              <td>3-5</td>
+              <td>108-180</td>
+              <td>$32,400-$81,000</td>
+              <td rowspan="4">$350,000-$700,000</td>
+            </tr>
+            <tr>
+              <td>Q2 (Growth)</td>
+              <td>8-12</td>
+              <td>288-432</td>
+              <td>$86,400-$194,400</td>
+            </tr>
+            <tr>
+              <td>Q3 (Maturation)</td>
+              <td>15-18</td>
+              <td>540-648</td>
+              <td>$162,000-$291,600</td>
+            </tr>
+            <tr>
+              <td>Q4 (Optimization)</td>
+              <td>18-22</td>
+              <td>648-792</td>
+              <td>$194,400-$356,400</td>
+            </tr>
+            <tr>
+              <td colspan="5" style="background: var(--slate-200); font-weight: 600;">Year 2</td>
+            </tr>
+            <tr>
+              <td>Full Year Average</td>
+              <td>25</td>
+              <td>900</td>
+              <td>$270,000-$405,000</td>
+              <td>$650,000-$1,000,000</td>
+            </tr>
+            <tr>
+              <td colspan="5" style="background: var(--emerald-100); font-weight: 600;">Year 3</td>
+            </tr>
+            <tr>
+              <td>Full Year Average</td>
+              <td>30</td>
+              <td>1,080</td>
+              <td>$324,000-$540,000</td>
+              <td>$800,000-$1,300,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight-box mt-2">
+        <h4>Break-Even Analysis</h4>
+        <p>With a typical startup investment of $265,000 (mid-range) and monthly operating costs of $46,750, most TMS clinics achieve break-even within <strong>8-14 months</strong> post-launch. Clinics that prioritize payer contracting and referral network development in the pre-launch phase typically reach profitability faster.</p>
+      </div>
+    </div>
+
+    <!-- Second Testimonial -->
+    <div class="testimonial">
+      <p class="testimonial-text">The financial projections in this plan are realistic. We used conservative estimates for our lender presentation and still showed healthy returns. The break-even timeline was spot-on — we reached profitability in month 10.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">MJ</div>
+        <div class="testimonial-info">
+          <h5>Michael Jensen, MBA</h5>
+          <p>Administrator, Pacific TMS Institute, Seattle, WA</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       SECTION 3: EQUIPMENT & TECHNOLOGY
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+        </svg>
+      </div>
+      <h2>Equipment & Technology</h2>
+    </div>
+
+    <p class="section-intro">
+      Selecting the right TMS equipment is one of the most critical decisions in clinic planning. Each platform offers distinct advantages depending on your practice focus, patient volume, and budget.
+    </p>
+
+    <div class="subsection">
+      <h3>Device Comparison</h3>
+      <div class="table-container no-break">
+        <p class="table-caption">FDA-Cleared TMS Devices (2026)</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Device</th>
+              <th>Type</th>
+              <th>Lease Cost</th>
+              <th>Treatment Time</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>NeuroStar</strong></td>
+              <td>Table-mounted, figure-8 coil</td>
+              <td>$65-85K/year</td>
+              <td>19-37 min</td>
+              <td>Standard rTMS, established protocols</td>
+            </tr>
+            <tr>
+              <td><strong>BrainsWay Deep TMS</strong></td>
+              <td>Helmet-based, H-coil</td>
+              <td>$75-95K/year</td>
+              <td>20 min</td>
+              <td>Deep brain stimulation, OCD, smoking cessation</td>
+            </tr>
+            <tr>
+              <td><strong>MagVenture</strong></td>
+              <td>Cart-based, figure-8 coil</td>
+              <td>$70-90K/year</td>
+              <td>17-37 min</td>
+              <td>Flexible positioning, multiple coil options</td>
+            </tr>
+            <tr>
+              <td><strong>Nexstim</strong></td>
+              <td>Neuronavigated, SmartFocus</td>
+              <td>$120-150K/year</td>
+              <td>90-110 min</td>
+              <td>Precision targeting, research applications</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Key Selection Criteria</h3>
+      <div class="card-grid no-break">
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            Insurance Acceptance
+          </h4>
+          <ul>
+            <li>Verify payer coverage for specific devices</li>
+            <li>NeuroStar and BrainsWay have broadest coverage</li>
+            <li>Document medical necessity properly</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+            Treatment Throughput
+          </h4>
+          <ul>
+            <li>Consider sessions per day per chair</li>
+            <li>Faster treatment = more patients</li>
+            <li>Balance speed with patient comfort</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>
+            Training & Support
+          </h4>
+          <ul>
+            <li>On-site installation and training included</li>
+            <li>Technical support availability</li>
+            <li>Clinical protocol development assistance</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+            Total Cost of Ownership
+          </h4>
+          <ul>
+            <li>Compare lease vs. purchase options</li>
+            <li>Factor in consumables and maintenance</li>
+            <li>Consider upgrade pathways</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>EMR & Software Requirements</h3>
+      <div class="highlight-box">
+        <h4>HIPAA-Compliant EMR Integration</h4>
+        <ul>
+          <li><strong>Scheduling System:</strong> Integration with existing practice management or dedicated TMS scheduling software (e.g., GreenLight Health, TMS Cloud)</li>
+          <li><strong>Documentation:</strong> Templates for TMS evaluation, consent, treatment notes, and outcomes tracking</li>
+          <li><strong>Billing Integration:</strong> Direct link to clearinghouse for clean claim submission</li>
+          <li><strong>Patient Portal:</strong> Secure messaging, appointment scheduling, educational resources</li>
+          <li><strong>Reporting:</strong> Outcomes data, session completion rates, payer-specific metrics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       SECTION 4: STAFFING MODEL
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+        </svg>
+      </div>
+      <h2>Staffing Model</h2>
+    </div>
+
+    <p class="section-intro">
+      Building the right team is essential for clinical excellence and operational efficiency. TMS clinics require a blend of medical oversight, technical expertise, and administrative support.
+    </p>
+
+    <div class="subsection">
+      <h3>Core Team Roles</h3>
+      <div class="table-container no-break">
+        <p class="table-caption">Minimum Viable Team (6-Chair Clinic)</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>FTE</th>
+              <th>Salary Range</th>
+              <th>Key Responsibilities</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Medical Director</strong><br><small>(MD/DO)</small></td>
+              <td>0.2-0.5</td>
+              <td>$150-300K<br><small>(part-time)</small></td>
+              <td>Patient evaluation, prescription authorization, quality oversight, final treatment decisions</td>
+            </tr>
+            <tr>
+              <td><strong>TMS Technician</strong></td>
+              <td>1.5-2</td>
+              <td>$45-65K</td>
+              <td>Device operation, coil positioning, patient monitoring during treatment, data collection</td>
+            </tr>
+            <tr>
+              <td><strong>Office Manager / Billing</strong></td>
+              <td>1</td>
+              <td>$50-70K</td>
+              <td>Scheduling, insurance authorization, billing/coding, patient intake, collections</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Optional Positions (Scale with Volume)</h3>
+      <div class="card-grid no-break">
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
+            Referral Coordinator
+          </h4>
+          <ul>
+            <li>Build referring provider relationships</li>
+            <li>Manage referral pipeline</li>
+            <li>Coordinate intake from external practices</li>
+            <li>Salary: $45-60K</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.593-1.28c-.155-.416-.155-1.071 0-1.686.318-.37.918-.706 1.605-.786a48.22 48.22 0 012.09-.11m-9.87 5.098a48.22 48.22 0 012.09-.11 18.03 18.03 0 00.593 1.28c.155.616.155 1.271 0 1.686-.318.37-.918.706-1.605.786a48.22 48.22 0 01-2.09.11" /></svg>
+            Marketing Manager
+          </h4>
+          <ul>
+            <li>Digital marketing campaigns</li>
+            <li>Community education events</li>
+            <li>Social media management</li>
+            <li>Salary: $55-75K</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+            Patient Navigator
+          </h4>
+          <ul>
+            <li>Guide patients through process</li>
+            <li>Handle concerns and questions</li>
+            <li>Coordinate with external providers</li>
+            <li>Salary: $40-55K</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>
+            Clinical Supervisor
+          </h4>
+          <ul>
+            <li>Quality assurance oversight</li>
+            <li>Staff training coordination</li>
+            <li>Protocol development</li>
+            <li>Salary: $70-90K</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Training & Certification Requirements</h3>
+      <div class="highlight-box">
+        <h4>Required Training</h4>
+        <ul>
+          <li><strong>Device-Specific Certification:</strong> All equipment manufacturers provide comprehensive training programs (typically 8-16 hours)</li>
+          <li><strong>HIPAA Compliance Training:</strong> Required for all staff handling patient information</li>
+          <li><strong>BLS/CPR Certification:</strong> Recommended for TMS technicians</li>
+          <li><strong>Clinical Protocol Training:</strong> Understanding of TMS mechanisms, patient selection, and outcome monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       SECTION 5: PAYER CONTRACTING
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+        </svg>
+      </div>
+      <h2>Payer Contracting</h2>
+    </div>
+
+    <p class="section-intro">
+      Insurance reimbursement is the primary revenue driver for most TMS clinics. Understanding payer requirements and securing contracts before launch is critical to financial sustainability.
+    </p>
+
+    <div class="subsection">
+      <h3>Medicare Coverage</h3>
+      <div class="table-container no-break">
+        <p class="table-caption">Medicare Requirements for TMS Coverage</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Requirement Type</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>LCD (Local Coverage Determination)</strong></td>
+              <td>Covers rTMS for treatment-resistant MDD meeting specific criteria</td>
+            </tr>
+            <tr>
+              <td><strong>NCD (National Coverage Determination)</strong></td>
+              <td>Federal coverage policy for TMS services</td>
+            </tr>
+            <tr>
+              <td><strong>Provider Enrollment</strong></td>
+              <td>Must be enrolled in Medicare Provider-Supplier Database</td>
+            </tr>
+            <tr>
+              <td><strong>Patient Criteria</strong></td>
+              <td>Failed at least one antidepressant medication, meet DSM-5 criteria</td>
+            </tr>
+            <tr>
+              <td><strong>Documentation</strong></td>
+              <td>PHQ-9 scores, medication history, psychiatric evaluation</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Commercial Payer Strategy</h3>
+      <div class="card-grid three-col no-break">
+        <div class="stat-card">
+          <div class="value">1-2</div>
+          <div class="label">Month Contract Timeline</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">85%</div>
+          <div class="label">Of Patients Covered</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">A/R &lt; 45</div>
+          <div class="label">Days Target</div>
+        </div>
+      </div>
+
+      <div class="highlight-box mt-2">
+        <h4>Top Payers by Volume (Verify Locally)</h4>
+        <ul>
+          <li>Aetna, Anthem, Cigna, Humana, UnitedHealthcare</li>
+          <li>Blue Cross Blue Shield (state-specific plans)</li>
+          <li>Medicare Advantage plans</li>
+          <li>State Medicaid programs (varies by state)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Cash-Pay Pricing</h3>
+      <div class="table-container no-break">
+        <p class="table-caption">Self-Pay Rate Structure</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>CPT Code</th>
+              <th>Typical Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TMS Initialization (first session)</td>
+              <td>90867</td>
+              <td>$400-700</td>
+            </tr>
+            <tr>
+              <td>TMS Delivery (subsequent sessions)</td>
+              <td>90868</td>
+              <td>$300-600</td>
+            </tr>
+            <tr>
+              <td>Deep TMS Delivery</td>
+              <td>90869</td>
+              <td>$400-700</td>
+            </tr>
+            <tr>
+              <td><strong>Full Course (36 sessions)</strong></td>
+              <td></td>
+              <td><strong>$6,000-15,000</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Authorization Requirements</h3>
+      <div class="two-columns">
+        <p>Most commercial payers require prior authorization for TMS treatment. Build a robust authorization workflow that includes:</p>
+        <ul>
+          <li>Insurance verification at intake</li>
+          <li>Benefits investigation for TMS coverage</li>
+          <li>Prior authorization submission with clinical documentation</li>
+          <li>Appeal processes for denials</li>
+          <li>Superbill generation for out-of-network claims</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       SECTION 6: LOCATION & OPERATIONS
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+        </svg>
+      </div>
+      <h2>Location & Operations</h2>
+    </div>
+
+    <p class="section-intro">
+      Strategic location selection and efficient operational design are essential for maximizing patient access, staff productivity, and regulatory compliance.
+    </p>
+
+    <div class="subsection">
+      <h3>Space Requirements</h3>
+      <div class="table-container no-break">
+        <p class="table-caption">Recommended Layout (6-Chair Clinic)</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Area</th>
+              <th>Square Footage</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TMS Treatment Rooms</td>
+              <td>900-1,200 sq ft</td>
+              <td>150-200 sq ft per chair (including clearance)</td>
+            </tr>
+            <tr>
+              <td>Reception & Waiting</td>
+              <td>200-300 sq ft</td>
+              <td>Comfortable seating for 10-15 patients</td>
+            </tr>
+            <tr>
+              <td>Consultation Room</td>
+              <td>120-150 sq ft</td>
+              <td>Private evaluations and follow-ups</td>
+            </tr>
+            <tr>
+              <td>Staff/Admin Area</td>
+              <td>150-200 sq ft</td>
+              <td>Desks, EMR workstations, storage</td>
+            </tr>
+            <tr>
+              <td>Restrooms (patient/staff)</td>
+              <td>100-150 sq ft</td>
+              <td>ADA-compliant, separate facilities</td>
+            </tr>
+            <tr>
+              <td><strong>Total Range</strong></td>
+              <td><strong>1,200-2,000 sq ft</strong></td>
+              <td>Depends on layout and growth plans</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Compliance Requirements</h3>
+      <div class="card-grid no-break">
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+            ADA Compliance
+          </h4>
+          <ul>
+            <li>Wheelchair accessibility</li>
+            <li>Accessible restrooms</li>
+            <li>Clear signage</li>
+            <li>Treatment chair accessibility</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg>
+            State Licensing
+          </h4>
+          <ul>
+            <li>Medical facility license</li>
+            <li>X-ray/fluroscopy license (if applicable)</li>
+            <li>Pharmacy license (if dispensing)</li>
+            <li>Business operating license</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            Infection Control
+          </h4>
+          <ul>
+            <li>Surface disinfection protocols</li>
+            <li>Medical waste disposal</li>
+            <li>Air quality considerations</li>
+            <li>Cleaning schedules</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Patient Flow Diagram</h3>
+      <div class="highlight-box">
+        <h4>Standard TMS Patient Journey</h4>
+        <pre style="font-family: monospace; font-size: 9pt; line-height: 1.8; white-space: pre-wrap;">
+┌─────────────────┐
+│   REFERRAL      │
+│  (Psychiatrist, │
+│   PCP, Self)    │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  INTAKE CALL    │  Verify insurance, schedule consultation
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ CONSULTATION    │  Medical evaluation, PHQ-9, consent
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ AUTHORIZATION   │  Submit to insurance, obtain approval
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ TREATMENT       │  36 sessions (5x/week for 6-9 weeks)
+│   SESSIONS      │  - Session 1: Mapping, calibration
+│                 │  - Sessions 2-36: 20-40 min each
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ OUTCOMES        │  PHQ-9 reassessment, patient feedback
+│   ASSESSMENT    │  Tapering or maintenance protocol
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ DISCHARGE /     │  Follow-up referrals, maintenance
+│   MAINTENANCE   │  Long-term outcomes tracking
+└─────────────────┘</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       SECTION 7: COMPLIANCE & LEGAL
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
+        </svg>
+      </div>
+      <h2>Compliance & Legal</h2>
+    </div>
+
+    <p class="section-intro">
+      TMS clinics must navigate a complex regulatory environment. Establishing robust compliance programs from the outset protects your patients, your practice, and your license.
+    </p>
+
+    <div class="subsection">
+      <h3>HIPAA Requirements</h3>
+      <div class="table-container no-break">
+        <p class="table-caption">HIPAA Compliance Checklist</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Requirement</th>
+              <th>Action Items</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Privacy Rule</strong></td>
+              <td>Patient authorization forms, Notice of Privacy Practices, minimum necessary standard</td>
+            </tr>
+            <tr>
+              <td><strong>Security Rule</strong></td>
+              <td>Technical safeguards (encryption, access controls), physical safeguards, administrative safeguards</td>
+            </tr>
+            <tr>
+              <td><strong>Business Associate Agreements</strong></td>
+              <td>Execute BAAs with: EMR vendor, billing service, clearinghouse, equipment vendor, IT support</td>
+            </tr>
+            <tr>
+              <td><strong>Breach Notification</strong></td>
+              <td>Incident response plan, notification procedures, documentation requirements</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>State Medical Board Requirements</h3>
+      <div class="highlight-box">
+        <h4>Key Considerations by State</h4>
+        <ul>
+          <li><strong>Physician Supervision:</strong> Determine if a physician must be on-site during all TMS sessions</li>
+          <li><strong>Scope of Practice:</strong> Define what tasks can be delegated to TMS technicians</li>
+          <li><strong>Collaborative Agreement:</strong> Some states require formal collaborative practice agreements</li>
+          <li><strong>Continuing Education:</strong> Track CME requirements for supervising physicians</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>FDA Reporting & Insurance</h3>
+      <div class="card-grid no-break">
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
+            FDA Adverse Event Reporting
+          </h4>
+          <ul>
+            <li>Report serious adverse events to FDA MedWatch</li>
+            <li>Document all device malfunctions</li>
+            <li>Maintain internal adverse event log</li>
+            <li>Follow manufacturer safety communications</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+            Malpractice Insurance
+          </h4>
+          <ul>
+            <li>Medical malpractice coverage ($1-3M per occurrence)</li>
+            <li>General liability insurance</li>
+            <li>Professional liability for each provider</li>
+            <li>Coverage for TMS-specific procedures</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       SECTION 8: MARKETING & PATIENT ACQUISITION
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.593-1.28c-.155-.416-.155-1.071 0-1.686.318-.37.918-.706 1.605-.786a48.22 48.22 0 012.09-.11m-9.87 5.098a48.22 48.22 0 012.09-.11 18.03 18.03 0 00.593 1.28c.155.616.155 1.271 0 1.686-.318.37-.918.706-1.605.786a48.22 48.22 0 01-2.09.11" />
+        </svg>
+      </div>
+      <h2>Marketing & Patient Acquisition</h2>
+    </div>
+
+    <p class="section-intro">
+      A strategic marketing approach focused on provider referrals and patient education will drive sustainable patient volume. Unlike many healthcare services, TMS relies heavily on physician referrals rather than direct-to-consumer advertising.
+    </p>
+
+    <div class="subsection">
+      <h3>Referral Network Strategy</h3>
+      <div class="card-grid three-col no-break">
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
+            Psychiatrists
+          </h4>
+          <ul>
+            <li>Target those with large MDD patient panels</li>
+            <li>Offer lunch-and-learn presentations</li>
+            <li>Provide seamless referral workflow</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg>
+            Primary Care
+          </h4>
+          <ul>
+            <li>PCPs often manage initial depression treatment</li>
+            <li>Build relationships with family medicine</li>
+            <li>Provide clear clinical criteria</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+            Nurse Practitioners
+          </h4>
+          <ul>
+            <li>Growing role in mental health</li>
+            <li>Often have prescriptive authority</li>
+            <li>Can be referral sources and employees</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Digital Presence</h3>
+      <div class="table-container no-break">
+        <p class="table-caption">Essential Digital Marketing Elements</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Channel</th>
+              <th>Priority</th>
+              <th>Key Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Google Business Profile</strong></td>
+              <td>Critical</td>
+              <td>Complete profile, patient reviews, photos, posts</td>
+            </tr>
+            <tr>
+              <td><strong>Website</strong></td>
+              <td>Critical</td>
+              <td>Patient education, provider profiles, contact forms</td>
+            </tr>
+            <tr>
+              <td><strong>Provider Directories</strong></td>
+              <td>High</td>
+              <td>TMS List, Psychology Today, Zocdoc</td>
+            </tr>
+            <tr>
+              <td><strong>Social Media</strong></td>
+              <td>Medium</td>
+              <td>LinkedIn (providers), Facebook (awareness)</td>
+            </tr>
+            <tr>
+              <td><strong>SEO</strong></td>
+              <td>High</td>
+              <td>Local keywords, content marketing, backlinks</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Community Outreach</h3>
+      <div class="highlight-box">
+        <h4>Offline Marketing Activities</h4>
+        <ul>
+          <li><strong>Continuing Education:</strong> Host CME events for referring providers on treatment-resistant depression</li>
+          <li><strong>Support Groups:</strong> Sponsor or present at depression/anxiety support groups</li>
+          <li><strong>Community Events:</strong> Mental health fairs, community talks, employer wellness programs</li>
+          <li><strong>Press Coverage:</strong> Local news stories on new TMS technology, interviews with medical director</li>
+          <li><strong>Patient Testimonials:</strong> With permission, share success stories with referring providers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       SECTION 9: TIMELINE & MILESTONES
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+        </svg>
+      </div>
+      <h2>Timeline & Milestones</h2>
+    </div>
+
+    <p class="section-intro">
+      A realistic timeline helps manage expectations and ensures all critical path items are completed before seeing patients. Most clinics require 10-12 months from planning to first patient.
+    </p>
+
+    <div class="timeline no-break">
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 1 — Months 1-3</div>
+        <div class="timeline-title">Business Planning & Financing</div>
+        <div class="timeline-tasks">
+          <ul style="margin-left: 1rem; margin-top: 0.25rem;">
+            <li>Develop comprehensive business plan</li>
+            <li>Secure financing (SBA loan, investors, personal capital)</li>
+            <li>Select TMS device and begin vendor negotiations</li>
+            <li>Research payer landscape and contracting requirements</li>
+            <li>Identify target market and referral strategies</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 2 — Months 4-6</div>
+        <div class="timeline-title">Space Build-Out & Staffing</div>
+        <div class="timeline-tasks">
+          <ul style="margin-left: 1rem; margin-top: 0.25rem;">
+            <li>Lease negotiation and space selection</li>
+            <li>Architectural design and permitting</li>
+            <li>Construction and renovation</li>
+            <li>Hire core staff (Medical Director, Office Manager)</li>
+            <li>Begin state licensing and DEA registration</li>
+            <li>Select and implement EMR system</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 3 — Months 7-9</div>
+        <div class="timeline-title">Implementation & Training</div>
+        <div class="timeline-tasks">
+          <ul style="margin-left: 1rem; margin-top: 0.25rem;">
+            <li>Equipment delivery and installation</li>
+            <li>Device calibration and quality assurance</li>
+            <li>Staff training and certification</li>
+            <li>HIPAA and compliance training completion</li>
+            <li>Begin payer credentialing applications</li>
+            <li>Develop clinical protocols and documentation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 4 — Months 10-12</div>
+        <div class="timeline-title">Soft Launch & Growth</div>
+        <div class="timeline-tasks">
+          <ul style="margin-left: 1rem; margin-top: 0.25rem;">
+            <li>Begin seeing first patients (soft launch)</li>
+            <li>Marketing ramp-up (referral network activation)</li>
+            <li>Collect first patient outcomes data</li>
+            <li>Refine operational processes</li>
+            <li>Complete payer contracting</li>
+            <li>Plan for expansion (additional chairs, providers)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-grid three-col mt-2 no-break">
+      <div class="stat-card">
+        <div class="value">10-12</div>
+        <div class="label">Months to First Patient</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">8-14</div>
+        <div class="label">Months to Break-Even</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">18-24</div>
+        <div class="label">Months to Profitability</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       QR CODES SECTION
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75h-.75v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM19.5 19.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75z" />
+        </svg>
+      </div>
+      <h2>Resources & QR Codes</h2>
+    </div>
+
+    <p class="section-intro">
+      Scan these codes to access additional TMS List resources for clinic operators and patients.
+    </p>
+
+    <div class="qr-section">
+      <h3>Continue Your TMS Journey</h3>
+      <div class="qr-grid">
+        <div class="qr-item">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" style="width:80px;height:80px;border-radius:8px;" alt="TMS Provider Map" />
+          <h4>Find TMS Providers</h4>
+          <p>Locate certified TMS clinics across the United States</p>
+          <a href="https://tmslist.com/map/">tmslist.com/map</a>
+        </div>
+        <div class="qr-item">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/pricing/" style="width:80px;height:80px;border-radius:8px;" alt="TMS Pricing Guide" />
+          <h4>TMS Pricing Guide</h4>
+          <p>Understand costs and insurance coverage for TMS treatment</p>
+          <a href="https://tmslist.com/pricing/">tmslist.com/pricing</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box mt-2">
+      <h4>Additional Resources</h4>
+      <ul>
+        <li><strong>TMS Clinic Directory:</strong> List your clinic on TMS List to reach patients actively seeking treatment</li>
+        <li><strong>Clinical Guidelines:</strong> Stay updated on CMS coverage policies and clinical best practices</li>
+        <li><strong>Industry News:</strong> Track developments in TMS technology, reimbursement, and research</li>
+        <li><strong>Peer Network:</strong> Connect with other TMS clinic operators for benchmarking and best practices</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========================================
+       GLOSSARY
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+        </svg>
+      </div>
+      <h2>Glossary of Key Terms</h2>
+    </div>
+
+    <div class="glossary-grid">
+      <div class="glossary-item">
+        <div class="glossary-term">ADA</div>
+        <div class="glossary-def">Americans with Disabilities Act — Federal law requiring accessibility accommodations</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">BAA</div>
+        <div class="glossary-def">Business Associate Agreement — Contract required under HIPAA for vendors handling PHI</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Break-Even</div>
+        <div class="glossary-def">Point at which total revenue equals total costs; no profit or loss</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Capital Expenditure</div>
+        <div class="glossary-def">Major investment in long-term assets (equipment, property) vs. operating expenses</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">CPT Code</div>
+        <div class="glossary-def">Current Procedural Terminology — Standardized codes for medical services billing</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">EBITDA</div>
+        <div class="glossary-def">Earnings Before Interest, Taxes, Depreciation, and Amortization</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">FFS</div>
+        <div class="glossary-def">Fee-For-Service — Payment model based on individual services rendered</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">FQHC</div>
+        <div class="glossary-def">Federally Qualified Health Center — Community-based healthcare provider</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">GPU</div>
+        <div class="glossary-def">Graphics Processing Unit — Sometimes referenced in TMS neuronavigation systems</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">LCD</div>
+        <div class="glossary-def">Local Coverage Determination — Medicare policy defining covered services by region</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Margin</div>
+        <div class="glossary-def">Profit expressed as percentage of revenue (Gross Margin, Net Margin)</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">NCD</div>
+        <div class="glossary-def">National Coverage Determination — Medicare national policy for covered services</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Operating Expenses</div>
+        <div class="glossary-def">Day-to-day costs of running a business (rent, salaries, supplies)</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Payer Mix</div>
+        <div class="glossary-def">Composition of revenue by payer type (Medicare, Commercial, Self-Pay)</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Revenue Cycle</div>
+        <div class="glossary-def">End-to-end billing process from patient registration to payment collection</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">ROI</div>
+        <div class="glossary-def">Return on Investment — Measure of profitability relative to investment cost</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Superbill</div>
+        <div class="glossary-def">Itemized form used to submit claims to insurance; includes diagnoses and procedures</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Working Capital</div>
+        <div class="glossary-def">Funds available for day-to-day operations; current assets minus current liabilities</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       TEAR-OUT CHECKLIST PAGE
+  ======================================== -->
+  <div class="page-break"></div>
+  <div class="tearout-header">
+    <h2>TMS Clinic Launch Checklist</h2>
+    <p>Tear out and use this checklist to track your progress from concept to first patient</p>
+  </div>
+
+  <div class="tearout-card">
+    <div class="cut-line">Cut Along This Line</div>
+
+    <div class="checklist-group">
+      <h4>Planning Phase</h4>
+      <ul class="checklist">
+        <li>Define your target market and service area</li>
+        <li>Develop comprehensive business plan with financial projections</li>
+        <li>Secure startup financing or investment</li>
+        <li>Research and select TMS device manufacturer</li>
+        <li>Begin payer landscape analysis</li>
+        <li>Identify potential referral partners</li>
+      </ul>
+    </div>
+
+    <div class="checklist-group">
+      <h4>Setup Phase</h4>
+      <ul class="checklist">
+        <li>Execute lease agreement for clinical space</li>
+        <li>Complete architectural design and obtain permits</li>
+        <li>Hire Medical Director and key staff</li>
+        <li>Apply for state medical facility license</li>
+        <li>Complete DEA registration (if applicable)</li>
+        <li>Select and implement EMR system</li>
+        <li>Execute Business Associate Agreements</li>
+        <li>Obtain malpractice and liability insurance</li>
+      </ul>
+    </div>
+
+    <div class="checklist-group">
+      <h4>Launch Phase</h4>
+      <ul class="checklist">
+        <li>Complete equipment installation and calibration</li>
+        <li>Complete staff device training and certification</li>
+        <li>Finish HIPAA compliance training</li>
+        <li>Complete payer credentialing applications</li>
+        <li>Develop and document clinical protocols</li>
+        <li>Build referral network relationships</li>
+        <li>Launch digital presence (website, Google Business)</li>
+        <li>Conduct soft launch with first patients</li>
+      </ul>
+    </div>
+
+    <div class="checklist-group">
+      <h4>Grow Phase</h4>
+      <ul class="checklist">
+        <li>Monitor and optimize revenue cycle</li>
+        <li>Track patient outcomes and satisfaction</li>
+        <li>Expand referral network</li>
+        <li>Evaluate staffing needs as volume grows</li>
+        <li>Plan for additional TMS chairs or locations</li>
+        <li>Review and optimize payer contracts</li>
+      </ul>
+    </div>
+
+    <div class="cut-line mt-2">Keep This Page for Reference</div>
+  </div>
+
+  <!-- Final Section: Back Cover -->
+  <div class="page-break"></div>
+  <div style="text-align: center; padding: 2rem 0;">
+    <div style="width: 60px; height: 60px; background: var(--emerald-100); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--emerald-600)" style="width: 30px; height: 30px;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+    </div>
+
+    <h2 style="font-size: 18pt; margin-bottom: 0.5rem;">Your TMS Clinic Journey Starts Here</h2>
+    <p style="color: var(--slate-600); margin-bottom: 1.5rem;">This business plan is your roadmap. Execute with discipline, adapt as needed, and stay focused on patient outcomes.</p>
+
+    <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+      <div style="text-align: center;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" style="width:80px;height:80px;border-radius:8px;" alt="TMS Map" />
+        <p style="font-size: 9pt; color: var(--slate-500); margin-top: 0.5rem;">Find TMS Providers<br><a href="https://tmslist.com/map/" style="color: var(--emerald-600);">tmslist.com/map</a></p>
+      </div>
+      <div style="text-align: center;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/pricing/" style="width:80px;height:80px;border-radius:8px;" alt="TMS Pricing" />
+        <p style="font-size: 9pt; color: var(--slate-500); margin-top: 0.5rem;">TMS Pricing Guide<br><a href="https://tmslist.com/pricing/" style="color: var(--emerald-600);">tmslist.com/pricing</a></p>
+      </div>
+    </div>
+
+    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--slate-200);">
+      <p style="font-size: 9pt; color: var(--slate-400);">
+        TMS List — Connecting patients with TMS providers nationwide<br>
+        <a href="https://tmslist.com" style="color: var(--emerald-600);">tmslist.com</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -78,7 +78,11 @@ export default function CostEstimator({ clinicPricing }: Props) {
             min={1}
             max={36}
             value={sessions}
-            onChange={(e) => setSessions(Number(e.target.value))}
+            onChange={(e) => {
+              const s = Number(e.target.value);
+              setSessions(s);
+              window.posthog?.capture('cost_estimate_calculated', { sessions: s, has_insurance: hasInsurance, accepts_insurance: acceptsInsurance });
+            }}
             className="w-full h-2 bg-slate-100 rounded-full appearance-none cursor-pointer accent-emerald-600"
           />
           <div className="flex justify-between text-[10px] text-slate-400 mt-1">
@@ -99,7 +103,11 @@ export default function CostEstimator({ clinicPricing }: Props) {
             type="button"
             role="switch"
             aria-checked={hasInsurance}
-            onClick={() => setHasInsurance(!hasInsurance)}
+            onClick={() => {
+              const next = !hasInsurance;
+              setHasInsurance(next);
+              window.posthog?.capture('cost_estimate_calculated', { sessions, has_insurance: next, accepts_insurance: acceptsInsurance });
+            }}
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
               hasInsurance ? 'bg-emerald-500' : 'bg-slate-200'
             }`}

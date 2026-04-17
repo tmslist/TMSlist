@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TMS vs Medication Comparison Chart | TMS List</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 10pt; color: #1a1a2e; background: #fff; line-height: 1.6; }
+  @page { size: letter; margin: 0.6in 0.65in 0.55in 0.65in; @top-left { content: "TMS vs Medication Comparison Chart"; font-size: 7.5pt; color: #94a3b8; } @top-right { content: "TMS List — tmslist.com"; font-size: 7.5pt; color: #94a3b8; } }
+  @page :first { margin: 0; }
+  @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  h1,h2,h3,h4 { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .page { max-width: 7.2in; margin: 0 auto; }
+  .pb { page-break-before: always; }
+  .no-break { page-break-inside: avoid; break-inside: avoid; }
+
+  /* ─── COVER ─────────────────────────────── */
+  .cover { background: linear-gradient(160deg, #0f172a 0%, #1e3a5f 45%, #0891b2 75%, #0ea5e9 100%); color: white; min-height: 9in; position: relative; overflow: hidden; }
+  .cover::before { content: ''; position: absolute; top: -100px; right: -80px; width: 400px; height: 400px; background: rgba(255,255,255,0.04); border-radius: 50%; }
+  .cover::after { content: ''; position: absolute; bottom: -80px; left: 5%; width: 300px; height: 300px; background: rgba(255,255,255,0.03); border-radius: 50%; }
+  .cover-top-bar { height: 6px; background: linear-gradient(90deg, #0891b2, #0ea5e9, #6366f1, #a855f7); }
+  .cover-content { padding: 0.6in 0.65in; }
+  .cover-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 0.3in; }
+  .cover-logo { width: 40px; height: 40px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .cover-logo-inner { width: 30px; height: 30px; background: linear-gradient(135deg, #0891b2, #0ea5e9); border-radius: 7px; }
+  .cover-brand-text { font-size: 13pt; font-weight: 700; color: rgba(255,255,255,0.9); }
+  .cover-eyebrow { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); padding: 4px 12px; border-radius: 50px; font-size: 8pt; font-weight: 600; margin-bottom: 0.2in; text-transform: uppercase; letter-spacing: 1px; }
+  .cover-title { font-size: 32pt; font-weight: 900; line-height: 1.05; margin-bottom: 0.1in; color: white; }
+  .cover-subtitle { font-size: 11pt; color: rgba(255,255,255,0.75); margin-bottom: 0.2in; font-style: italic; }
+  .cover-divider { width: 60px; height: 4px; background: linear-gradient(90deg, #0891b2, #0ea5e9); border-radius: 2px; margin-bottom: 0.2in; }
+  .cover-vs { display: flex; align-items: center; gap: 12px; margin-bottom: 0.2in; }
+  .cover-card { flex: 1; border-radius: 10px; padding: 12px; }
+  .cover-card.tms { background: rgba(8,145,178,0.2); border: 1px solid rgba(8,145,178,0.4); }
+  .cover-card.med { background: rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); }
+  .cover-card h4 { font-size: 11pt; font-weight: 800; margin-bottom: 4px; }
+  .cover-card.tms h4 { color: #67e8f9; }
+  .cover-card.med h4 { color: #d8b4fe; }
+  .cover-card p { font-size: 8pt; color: rgba(255,255,255,0.75); }
+  .cover-vs-label { font-size: 14pt; font-weight: 900; color: rgba(255,255,255,0.4); }
+  .cover-learn { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 12px; margin-bottom: 0.2in; }
+  .cover-learn h4 { font-size: 9pt; font-weight: 700; color: #67e8f9; margin-bottom: 5px; }
+  .cover-learn ul { list-style: none; }
+  .cover-learn li { font-size: 8.5pt; color: rgba(255,255,255,0.8); padding: 2px 0; padding-left: 14px; position: relative; }
+  .cover-learn li::before { content: '→'; position: absolute; left: 0; color: #67e8f9; }
+  .cover-testimonial { background: rgba(255,255,255,0.07); border-left: 3px solid #0891b2; border-radius: 0 8px 8px 0; padding: 10px 12px; margin-bottom: 0.12in; }
+  .cover-testimonial p { font-size: 8.5pt; color: rgba(255,255,255,0.85); font-style: italic; margin-bottom: 3px; }
+  .cover-testimonial cite { font-size: 7.5pt; color: rgba(255,255,255,0.5); font-style: normal; }
+  .cover-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 0.65in; background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; }
+  .cover-footer-text { font-size: 8pt; color: rgba(255,255,255,0.4); }
+  .cover-footer-url { font-size: 9pt; font-weight: 700; color: rgba(255,255,255,0.7); }
+
+  /* ─── FOOTER ───────────────────────────── */
+  @page { @bottom-left { content: "TMS List — TMS vs Medication Comparison"; font-size: 7.5pt; color: #94a3b8; } @bottom-right { content: "Page " counter(page) " of " counter(pages); font-size: 7.5pt; color: #64748b; } }
+
+  /* ─── SECTION ────────────────────────────── */
+  .section { margin-bottom: 0.2in; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.1in; padding-bottom: 6px; border-bottom: 2px solid #e2e8f0; }
+  .section-num { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12pt; color: white; flex-shrink: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .section h2 { font-size: 12.5pt; font-weight: 800; color: #1e293b; letter-spacing: -0.2px; }
+
+  /* ─── MAIN TABLE ─────────────────────────── */
+  .comp-table { width: 100%; border-collapse: collapse; margin-bottom: 0.1in; font-size: 8pt; break-inside: avoid; }
+  .comp-table thead th { color: white; padding: 7px 9px; text-align: center; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size: 8.5pt; }
+  .comp-table thead th:first-child { text-align: left; background: #0f172a; }
+  .comp-table thead th.tms-header { background: linear-gradient(135deg, #0891b2, #0ea5e9); }
+  .comp-table thead th.med-header { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+  .comp-table tbody td { padding: 6px 9px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  .comp-table tbody td:first-child { font-weight: 600; color: #334155; background: #f8fafc; }
+  .comp-table tbody tr:nth-child(even) td:not(:first-child) { background: #f8fafc; }
+  .tms-val { text-align: center; color: #0891b2; font-weight: 600; }
+  .med-val { text-align: center; color: #7c3aed; font-weight: 600; }
+  .winner-badge { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: 7pt; font-weight: 700; margin-left: 4px; }
+  .winner-badge.tms { background: #cffafe; color: #0891b2; }
+  .winner-badge.med { background: #f3e8ff; color: #7c3aed; }
+
+  /* ─── STATS ROW ────────────────────────── */
+  .stats-row { display: flex; gap: 8px; margin-bottom: 0.1in; }
+  .stat-card { flex: 1; border-radius: 8px; padding: 8px 10px; text-align: center; break-inside: avoid; }
+  .stat-card.tms { background: linear-gradient(135deg, #083344, #0891b2); color: white; }
+  .stat-card.med { background: linear-gradient(135deg, #3b0764, #7c3aed); color: white; }
+  .stat-card.neutral { background: linear-gradient(135deg, #1e293b, #475569); color: white; }
+  .stat-num { font-size: 16pt; font-weight: 900; line-height: 1; }
+  .stat-label { font-size: 7pt; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* ─── SIDE EFFECT ROWS ────────────────────── */
+  .se-row { display: flex; align-items: stretch; gap: 0; margin-bottom: 6px; break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+  .se-label { background: #f8fafc; padding: 8px 10px; font-size: 8.5pt; font-weight: 700; color: #334155; display: flex; align-items: center; min-width: 110px; border-right: 1px solid #e2e8f0; }
+  .se-tms { flex: 1; background: #ecfeff; padding: 8px 10px; border-right: 1px solid #a5f3fc; }
+  .se-med { flex: 1; background: #faf5ff; padding: 8px 10px; }
+  .se-tms strong, .se-med strong { display: block; font-size: 8.5pt; font-weight: 700; margin-bottom: 2px; }
+  .se-tms strong { color: #0891b2; }
+  .se-med strong { color: #7c3aed; }
+  .se-tms p, .se-med p { font-size: 7.5pt; color: #475569; }
+
+  /* ─── DECISION TREE ─────────────────────── */
+  .decision-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 0.1in; break-inside: avoid; }
+  .decision-title { font-size: 9pt; font-weight: 700; color: #1e293b; margin-bottom: 8px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .decision-flow { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; }
+  .d-step { background: white; border: 1.5px solid #e2e8f0; border-radius: 6px; padding: 5px 9px; font-size: 7.5pt; font-weight: 600; color: #334155; text-align: center; }
+  .d-step.highlight-tms { border-color: #0891b2; background: #ecfeff; color: #0891b2; }
+  .d-step.highlight-med { border-color: #a855f7; background: #faf5ff; color: #7c3aed; }
+  .d-step.highlight-both { border-color: #f59e0b; background: #fef9c3; color: #92400e; }
+  .d-arrow { font-size: 12pt; color: #cbd5e1; }
+
+  /* ─── INFO BOX ──────────────────────────── */
+  .info-box { border-radius: 8px; padding: 10px 12px; margin-bottom: 0.08in; break-inside: avoid; }
+  .info-box.green { background: #f0fdf4; border-left: 4px solid #22c55e; }
+  .info-box.blue { background: #eff6ff; border-left: 4px solid #3b82f6; }
+  .info-box.yellow { background: #fefce8; border-left: 4px solid #eab308; }
+  .info-box.purple { background: #faf5ff; border-left: 4px solid #a855f7; }
+  .info-box.teal { background: #f0fdfa; border-left: 4px solid #14b8a6; }
+  .info-box h3 { font-size: 9pt; font-weight: 700; margin-bottom: 3px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .info-box.green h3 { color: #15803d; }
+  .info-box.blue h3 { color: #1d4ed8; }
+  .info-box.yellow h3 { color: #a16207; }
+  .info-box.purple h3 { color: #7e22ce; }
+  .info-box.teal h3 { color: #0f766e; }
+  .info-box p, .info-box li { font-size: 8.5pt; color: #475569; }
+  .info-box ul { padding-left: 14px; margin-top: 3px; }
+  .info-box li { padding: 1px 0; }
+
+  /* ─── FAQ ───────────────────────────────── */
+  .faq-item { border-bottom: 1px solid #f1f5f9; padding: 5px 0; break-inside: avoid; }
+  .faq-q { font-size: 8.5pt; font-weight: 700; color: #1e293b; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .faq-a { font-size: 8pt; color: #475569; }
+
+  /* ─── MED CLASSES ────────────────────────── */
+  .med-classes { display: flex; flex-wrap: wrap; gap: 6px; }
+  .med-tag { background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 5px; padding: 3px 8px; font-size: 7.5pt; font-weight: 700; color: #7c3aed; }
+  .med-tag.ssri { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+  .med-tag.snri { background: #faf5ff; border-color: #e9d5ff; color: #7c3aed; }
+  .med-tag.atyp { background: #fefce8; border-color: #fde68a; color: #a16207; }
+  .med-tag.tca { background: #fef2f2; border-color: #fecaca; color: #b91c1c; }
+
+  /* ─── PROS / CONS ────────────────────────── */
+  .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pros, .cons { border-radius: 8px; padding: 9px 11px; }
+  .pros { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .cons { background: #fef2f2; border: 1px solid #fecaca; }
+  .pros h4 { font-size: 9pt; font-weight: 700; color: #15803d; margin-bottom: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .cons h4 { font-size: 9pt; font-weight: 700; color: #b91c1c; margin-bottom: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .pros li, .cons li { font-size: 8pt; color: #475569; padding: 1px 0; padding-left: 12px; position: relative; }
+  .pros li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; }
+  .cons li::before { content: '✗'; position: absolute; left: 0; color: #ef4444; }
+
+  /* ─── QR ────────────────────────────────── */
+  .qr-section { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; margin-bottom: 0.08in; break-inside: avoid; }
+  .qr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .qr-row { display: flex; gap: 8px; align-items: center; }
+  .qr-placeholder { width: 44px; height: 44px; background: #0f172a; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .qr-placeholder svg { width: 32px; height: 32px; }
+  .qr-info h4 { font-size: 8pt; font-weight: 700; color: #1e293b; margin-bottom: 1px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .qr-info p { font-size: 7pt; color: #64748b; }
+  .qr-url { font-size: 7.5pt; font-weight: 700; color: #0891b2; font-family: monospace; }
+
+  hr { border: none; border-top: 1px solid #e2e8f0; margin: 0.08in 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 1: COVER                          -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" style="padding: 0;">
+  <div class="cover" style="min-height: 9in; position: relative; break-after: page;">
+    <div class="cover-top-bar"></div>
+    <div class="cover-content">
+      <div class="cover-brand">
+        <div class="cover-logo"><div class="cover-logo-inner"></div></div>
+        <span class="cover-brand-text">TMS List — Trusted TMS Provider Directory</span>
+      </div>
+      <div class="cover-eyebrow">Free Resource — Updated 2026 Edition</div>
+      <h1 class="cover-title">TMS vs. Medication:<br>Complete Comparison</h1>
+      <p class="cover-subtitle">A side-by-side guide to help you understand the differences between Transcranial Magnetic Stimulation and antidepressant medications — so you can make an informed decision with your doctor.</p>
+      <div class="cover-divider"></div>
+
+      <div class="cover-vs">
+        <div class="cover-card tms">
+          <h4>TMS Therapy</h4>
+          <p>Non-invasive brain stimulation. FDA-cleared for MDD & OCD. No medications, no anesthesia.</p>
+        </div>
+        <div class="cover-vs-label">vs</div>
+        <div class="cover-card med">
+          <h4>Antidepressants</h4>
+          <p>Oral medications. First-line treatment for depression. 50+ FDA-approved options available.</p>
+        </div>
+      </div>
+
+      <div class="cover-learn">
+        <h4>What This Guide Covers</h4>
+        <ul>
+          <li>Side-by-side comparison of effectiveness, side effects, and costs</li>
+          <li>Detailed breakdown of side effects — from mild to serious</li>
+          <li>Which treatment to choose based on your specific situation</li>
+          <li>How TMS and medication can work together</li>
+          <li>What happens when one treatment doesn't work</li>
+          <li>Real patient experiences with both approaches</li>
+        </ul>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card tms"><div class="stat-num">50–60%</div><div class="stat-label">TMS Response Rate (TRD)</div></div>
+        <div class="stat-card med"><div class="stat-num">40–55%</div><div class="stat-label">Medication Response</div></div>
+        <div class="stat-card neutral"><div class="stat-num">70%+</div><div class="stat-label">Experience Side Effects (Meds)</div></div>
+        <div class="stat-card neutral"><div class="stat-num">0%</div><div class="stat-label">Systemic Side Effects (TMS)</div></div>
+      </div>
+
+      <div class="cover-testimonial">
+        <p>"I was on an SSRI for 2 years that worked okay but killed my sex drive and made me gain 20 pounds. When I tried TMS, I was nervous it wouldn't work without medication. It did — and I got my life back in ways the medication never gave me."</p>
+        <cite>— Lisa R., Denver, CO (TMS patient, 2024)</cite>
+      </div>
+      <div class="cover-testimonial">
+        <p>"TMS didn't work for me — I tried it twice and got no response either time. Medication is what actually helped. This guide would have helped me understand that TMS isn't guaranteed to work for everyone, and that's okay."</p>
+        <cite>— Kevin P., Minneapolis, MN (medication patient, 2025)</cite>
+      </div>
+    </div>
+    <div class="cover-footer">
+      <span class="cover-footer-text">© 2026 TMS List — tmslist.com</span>
+      <span class="cover-footer-url">tmslist.com</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 2: MAIN COMPARISON TABLE         -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #0891b2, #0ea5e9);">1</div>
+      <h2>Head-to-Head Comparison</h2>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th class="tms-header">TMS Therapy</th>
+          <th class="med-header">Antidepressants</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Primary Indication</td>
+          <td class="tms-val">Treatment-resistant MDD (failed meds)<span class="winner-badge tms">Primary Use</span></td>
+          <td class="med-val">All depression severity levels<span class="winner-badge med">First-Line</span></td>
+        </tr>
+        <tr>
+          <td>FDA Status</td>
+          <td class="tms-val">FDA-cleared for MDD, OCD, smoking cessation</td>
+          <td class="med-val">FDA-approved for MDD + many other conditions</td>
+        </tr>
+        <tr>
+          <td>Treatment Duration</td>
+          <td class="tms-val">4–6 weeks (daily sessions), then treatment course ends</td>
+          <td class="med-val">Ongoing — months to years, often indefinitely</td>
+        </tr>
+        <tr>
+          <td>Session Time</td>
+          <td class="tms-val">3–37 minutes per session (iTBS to standard)<span class="winner-badge tms">Fastest option</span></td>
+          <td class="med-val">Zero — daily pill, under 5 seconds</td>
+        </tr>
+        <tr>
+          <td>Response Rate (TRD)</td>
+          <td class="tms-val">50–60%<span class="winner-badge tms">Higher for TRD</span></td>
+          <td class="med-val">~30–40% on first med for TRD</td>
+        </tr>
+        <tr>
+          <td>Remission Rate</td>
+          <td class="tms-val">~30–35% full remission</td>
+          <td class="med-val">~20–25% on monotherapy</td>
+        </tr>
+        <tr>
+          <td>Systemic Side Effects</td>
+          <td class="tms-val">None — localized to brain only<span class="winner-badge tms">Major Advantage</span></td>
+          <td class="med-val">Common: nausea, weight gain, sexual dysfunction, insomnia, fatigue</td>
+        </tr>
+        <tr>
+          <td>Cognitive Effects</td>
+          <td class="tms-val">No impairment; may improve cognition<span class="winner-badge tms">Cognitive Benefit</span></td>
+          <td class="med-val">Some SSRIs/SNRIs cause "brain fog" or emotional blunting</td>
+        </tr>
+        <tr>
+          <td>Drug Interactions</td>
+          <td class="tms-val">None — no systemic absorption<span class="winner-badge tms">No Interactions</span></td>
+          <td class="med-val">Many interactions: MAOIs + SSRIs (dangerous), SSRIs + blood thinners</td>
+        </tr>
+        <tr>
+          <td>Withdrawal / Discontinuation</td>
+          <td class="tms-val">No withdrawal — stop anytime<span class="winner-badge tms">No Taper</span></td>
+          <td class="med-val">Withdrawal possible (paroxetine, venlafaxine) — requires gradual taper</td>
+        </tr>
+        <tr>
+          <td>Daily Compliance Required</td>
+          <td class="tms-val">No — clinic-administered</td>
+          <td class="med-val">Yes — depends entirely on patient taking the pill every day</td>
+        </tr>
+        <tr>
+          <td>Anesthesia Required</td>
+          <td class="tms-val">No — fully awake treatment<span class="winner-badge tms">No Anesthesia</span></td>
+          <td class="med-val">N/A — oral medication</td>
+        </tr>
+        <tr>
+          <td>Insurance Coverage</td>
+          <td class="tms-val">Covered for TRD; prior auth typically required</td>
+          <td class="med-val">Widely covered; generic medications often $0 copay</td>
+        </tr>
+        <tr>
+          <td>Out-of-Pocket Cost</td>
+          <td class="tms-val">$6K–$12K self-pay (often $0–$500 with insurance)</td>
+          <td class="med-val">$10–$50/month generics; $200–$500/month brand names</td>
+        </tr>
+        <tr>
+          <td>Can Be Combined?</td>
+          <td class="tms-val" colspan="2"><strong style="color: #7c3aed;">Yes — TMS + medication is a valid strategy.</strong> TMS does not interfere with medications. Some patients use both simultaneously under psychiatrist supervision.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box teal">
+      <h3>The Bottom Line on Effectiveness</h3>
+      <p>For patients with treatment-resistant depression (2+ medication failures), TMS has a <strong>higher response rate than switching to another medication</strong> (50–60% vs 30–40%). For patients who haven't tried medication yet, antidepressants remain the appropriate first step. The two treatments work through different mechanisms — some patients respond to one but not the other, and some benefit from both together.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 3: SIDE EFFECTS + DECISION       -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #b91c1c, #ef4444);">2</div>
+      <div>
+        <h2>Side Effects: Detailed Comparison</h2>
+        <p>How each treatment affects your body, mind, and daily life.</p>
+      </div>
+    </div>
+
+    <div class="se-row"><div class="se-label">Scalp Discomfort</div><div class="se-tms"><strong>~50% of patients</strong><p>Mild pain or tingling at coil site during treatment. Resolves within the first week for most patients. Respond well to ibuprofen or acetaminophen.</p></div><div class="se-med"><strong>N/A</strong><p>No physical sensation from the head with oral medication.</p></div></div>
+    <div class="se-row"><div class="se-label">Headache</div><div class="se-tms"><strong>~30% of patients</strong><p>Mild headache after session, fades within 30–60 minutes. Transient — improves with continued treatment.</p></div><div class="se-med"><strong>~15–25%</strong><p>Common during medication initiation (weeks 1–2). Usually transient over 1–2 weeks.</p></div></div>
+    <div class="se-row"><div class="se-label">Nausea</div><div class="se-tms"><strong>None</strong><p>TMS has no effect on the digestive system. No nausea reported.</p></div><div class="se-med"><strong>~25–30%</strong><p>Common with SSRIs and SNRIs during first 2–4 weeks. Usually improves with food or time.</p></div></div>
+    <div class="se-row"><div class="se-label">Weight Changes</div><div class="se-tms"><strong>None</strong><p>TMS has no direct effect on weight, metabolism, or appetite.</p></div><div class="se-med"><strong>Common</strong><p>SSRIs (especially paroxetine): weight gain. Bupropion: weight neutral or loss. TCAs: significant weight gain.</p></div></div>
+    <div class="se-row"><div class="se-label">Sexual Dysfunction</div><div class="se-tms"><strong>None</strong><p>TMS does not affect sexual function. May improve sexual desire if depression resolves.</p></div><div class="se-med"><strong>~30–70%</strong><p>SSRI/SNRIs cause decreased libido, anorgasmia, delayed ejaculation. Leading cause of medication discontinuation.</p></div></div>
+    <div class="se-row"><div class="se-label">Emotional Blunting</div><div class="se-tms"><strong>None</strong><p>TMS does not cause emotional blunting or flat affect.</p></div><div class="se-med"><strong>~20–40%</strong><p>SSRI-induced emotional blunting ("feeling like a zombie") — common and a leading reason patients stop taking medication.</p></div></div>
+    <div class="se-row"><div class="se-label">Sleep Changes</div><div class="se-tms"><strong>Minimal</strong><p>No direct effect on sleep. May improve sleep as depression improves.</p></div><div class="se-med"><strong>Variable</strong><p>SSRIs can cause insomnia (fluoxetine) or sedation (paroxetine, trazodone). Can go either way.</p></div></div>
+    <div class="se-row"><div class="se-label">Long-Term Brain</div><div class="se-tms"><strong>Positive neuroplasticity</strong><p>Repeated sessions may strengthen neural circuits involved in mood regulation.</p></div><div class="se-med"><strong>Receptor adaptation</strong><p>Long-term use leads to receptor downregulation. Brain adjusts to chronic presence of medication.</p></div></div>
+  </div>
+
+  <div class="section" style="margin-top: 0.1in;">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">3</div>
+      <div>
+        <h2>Which Should You Choose? Decision Framework</h2>
+        <p>Use this framework to understand which option may be most appropriate for your situation.</p>
+      </div>
+    </div>
+
+    <div class="decision-box" style="margin-bottom: 0.1in;">
+      <div class="decision-title">Depression Treatment Decision Path</div>
+      <div class="decision-flow">
+        <div class="d-step">New Depression Diagnosis</div>
+        <div class="d-arrow">→</div>
+        <div class="d-step highlight-med">Try First Antidepressant (SSRI/SNRI)</div>
+        <div class="d-arrow">→</div>
+        <div class="d-step">6–8 weeks at adequate dose</div>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e2e8f0;">
+        <div style="display: flex; align-items: center; gap: 4px; font-size: 7.5pt; color: #15803d; font-weight: 600;">✓ Responds → Continue medication + therapy</div>
+        <div style="display: flex; align-items: center; gap: 4px; font-size: 7.5pt; color: #b91c1c; font-weight: 600;">✗ Partial/None → Switch or augment</div>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 4px; margin-top: 6px; font-size: 7.5pt; color: #64748b;">
+        <span>Failed 2+ medications →</span>
+        <div class="d-step highlight-tms" style="font-size: 7.5pt;">Consider TMS Therapy</div>
+      </div>
+    </div>
+
+    <div class="two-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.08in;">
+      <div class="info-box green">
+        <h3>Choose TMS When:</h3>
+        <ul>
+          <li>You've tried 2+ antidepressants without adequate relief (treatment-resistant)</li>
+          <li>You can't tolerate medication side effects (sexual dysfunction, weight gain, emotional blunting)</li>
+          <li>You want a non-systemic, non-medication approach</li>
+          <li>You've had positive response to TMS in the past</li>
+          <li>You're preparing for or recovering from ECT and want to avoid it next time</li>
+          <li>You want to avoid long-term medication dependence</li>
+          <li>You're pregnant or planning pregnancy (medications carry different risks)</li>
+        </ul>
+      </div>
+      <div class="info-box purple">
+        <h3>Choose Medication When:</h3>
+        <ul>
+          <li>This is your first or second antidepressant trial</li>
+          <li>You have mild-to-moderate depression without medication failures</li>
+          <li>You prefer the convenience of a daily pill</li>
+          <li>Cost is a major factor (generics are often $0 with insurance)</li>
+          <li>You're pregnant or breastfeeding (some SSRIs are considered relatively safe)</li>
+          <li>You need a treatment you can take independently without clinic visits</li>
+          <li>You have comorbid conditions that medication specifically addresses (e.g., anxiety, OCD)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- BACK PAGE: FAQ + MED CLASSES           -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #0f766e, #22c55e);">4</div>
+      <div>
+        <h2>Medication Classes — What You're Taking</h2>
+        <p>Understanding the main classes of antidepressants helps you have better conversations with your doctor.</p>
+      </div>
+    </div>
+
+    <div class="info-box blue" style="margin-bottom: 0.1in;">
+      <h3>Common Antidepressant Classes</h3>
+      <div class="med-classes" style="margin-top: 6px;">
+        <div class="med-tag ssri"><strong>SSRIs</strong><br><span style="font-weight:400;font-size:7pt;">Escitalopram, Sertraline, Fluoxetine, Paroxetine, Citalopram</span></div>
+        <div class="med-tag snri"><strong>SNRIs</strong><br><span style="font-weight:400;font-size:7pt;">Venlafaxine, Duloxetine, Desvenlafaxine</span></div>
+        <div class="med-tag atyp"><strong>Atypical</strong><br><span style="font-weight:400;font-size:7pt;">Bupropion, Mirtazapine, Trazodone</span></div>
+        <div class="med-tag tca"><strong>TCAs</strong><br><span style="font-weight:400;font-size:7pt;">Amitriptyline, Nortriptyline, Imipramine</span></div>
+      </div>
+    </div>
+
+    <div class="info-box yellow" style="margin-bottom: 0.1in;">
+      <h3>Bupropion + TMS: A Special Case</h3>
+      <p><strong>Bupropion (Wellbutrin) + TMS is safe and may be synergistic.</strong> Bupropion works on dopamine and norepinephrine — a different mechanism than SSRIs/SNRIs. Some evidence suggests it may enhance TMS efficacy. Unlike SSRIs, bupropion does not lower seizure threshold in a way that conflicts with TMS. If one treatment failed you, the combination may be worth discussing with your psychiatrist.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: #64748b;">?</div>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-item"><div class="faq-q">Q: Does choosing TMS mean I'm "giving up" on medication?</div><div class="faq-a">A: No. TMS is considered when medications haven't worked adequately — it's a next step, not a last resort. Many patients use both: TMS to achieve remission, then medication (or no medication) for maintenance. Think of it as expanding your toolkit, not replacing one treatment with another.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: Can I switch from medication to TMS immediately?</div><div class="faq-a">A: You don't need to stop medication to start TMS. In fact, most TMS clinical trials allowed patients to stay on their current medications. If you want to discontinue, work with your psychiatrist on a tapering plan — stopping certain medications (especially paroxetine, venlafaxine) suddenly can cause withdrawal symptoms.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: I've tried many medications. Is TMS my last option?</div><div class="faq-a">A: No — there are several options beyond TMS: ECT, ketamine/esketamine infusions, vagus nerve stimulation (VNS), and deep brain stimulation (DBS) for severe cases. TMS is actually one of the less invasive options. If TMS doesn't work, it doesn't mean you're out of options.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: Does TMS work better than medication for everyone?</div><div class="faq-a">A: No. TMS works for roughly half of patients. For some patients, medication remains more effective. The two treatments work through different mechanisms — some respond to one but not the other. The goal is to find the right treatment for you, which may take trying multiple approaches.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: How do I know if my medication side effects are "bad enough" to try TMS?</div><div class="faq-a">A: If side effects are affecting your quality of life, relationships, or ability to function — they're bad enough. Sexual dysfunction, emotional blunting, and severe weight gain are particularly cited reasons patients seek TMS. Have an honest conversation with your psychiatrist about what's tolerable vs. what's unsustainable.</div></div>
+  </div>
+
+  <div class="qr-grid">
+    <div class="qr-section">
+      <div class="qr-row">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=56x56&data=https://tmslist.com/map/&bgcolor=1e293b&color=ffffff" width="56" height="56" style="border-radius:7px;flex-shrink:0;" alt="QR to TMS directory" />
+        <div class="qr-info"><h4>Find a TMS Clinic</h4><p>1,100+ verified clinics with insurance info.</p><div class="qr-url">tmslist.com/map/</div></div>
+      </div>
+    </div>
+    <div class="qr-section">
+      <div class="qr-row">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=56x56&data=https://tmslist.com/quiz/&bgcolor=0f766e&color=ffffff" width="56" height="56" style="border-radius:7px;flex-shrink:0;" alt="QR to TMS quiz" />
+        <div class="qr-info"><h4>Take the Candidacy Quiz</h4><p>2-minute assessment for TMS eligibility.</p><div class="qr-url">tmslist.com/quiz/</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- GLOSSARY PAGE                            -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.12in; padding-bottom: 8px; border-bottom: 2px solid #1e293b;">
+      <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #0e7490, #06b6d4); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <h2 style="font-size: 16pt; font-weight: 900; color: #1e293b; line-height: 1;">Glossary of Medication &amp; TMS Terms</h2>
+    </div>
+    <p style="font-size: 8.5pt; color: #64748b; margin-bottom: 0.1in;">Key terms to understand when comparing TMS therapy to antidepressant medications.</p>
+
+    <div class="two-col">
+      <div>
+        <div style="background: #f0fdf4; border-radius: 6px; padding: 7px 10px; margin-bottom: 6px;">
+          <strong style="font-size: 8pt; color: #15803d;">TMS-Specific Terms</strong>
+        </div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">TMS</strong><span style="font-size: 7.5pt; color: #475569;"> — Transcranial Magnetic Stimulation. Non-invasive brain stimulation using magnetic pulses to improve mood.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">rTMS</strong><span style="font-size: 7.5pt; color: #475569;"> — Repetitive TMS. Standard protocol using repeated pulses at 10Hz (high-frequency) or 1Hz (low-frequency).</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">iTBS</strong><span style="font-size: 7.5pt; color: #475569;"> — Intermittent Theta Burst Stimulation. FDA-cleared 2018. 3-minute sessions equivalent to 20-minute standard TMS.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">Motor Threshold</strong><span style="font-size: 7.5pt; color: #475569;"> — The magnetic dose calibration point. Measured once at the start of treatment to personalize intensity.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">DLPFC</strong><span style="font-size: 7.5pt; color: #475569;"> — Dorsolateral Prefrontal Cortex. The brain target for TMS depression treatment, located above the left eyebrow.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">Neuroplasticity</strong><span style="font-size: 7.5pt; color: #475569;"> — The brain's ability to form new neural pathways. TMS promotes neuroplasticity in mood-regulation circuits.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">Deep TMS</strong><span style="font-size: 7.5pt; color: #475569;"> — TMS using H-coils (BrainsWay) that reach deeper brain structures. FDA-cleared for MDD and OCD.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">CPT 90868</strong><span style="font-size: 7.5pt; color: #475569;"> — The billing code for TMS treatment delivery. Medicare reimbursement: ~$100–$140/session.</span></div>
+      </div>
+      <div>
+        <div style="background: #eef2ff; border-radius: 6px; padding: 7px 10px; margin-bottom: 6px;">
+          <strong style="font-size: 8pt; color: #3730a3;">Medication &amp; Clinical Terms</strong>
+        </div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">SSRI</strong><span style="font-size: 7.5pt; color: #475569;"> — Selective Serotonin Reuptake Inhibitor. First-line antidepressants (Prozac/Zoloft/Lexapro/Celexa). Work by increasing serotonin levels.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">SNRI</strong><span style="font-size: 7.5pt; color: #475569;"> — Serotonin-Norepinephrine Reuptake Inhibitor. Second-line (Effexor/Pristiq/Cymbalta). Affect both serotonin and norepinephrine.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">Atypical</strong><span style="font-size: 7.5pt; color: #475569;"> — Antidepressants that don't fit other categories (Wellbutrin/Augmentor/Remeron). Different neurotransmitter targets.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">Augmentation</strong><span style="font-size: 7.5pt; color: #475569;"> — Adding a second medication to boost the effect of an antidepressant. Common: adding Abilify or Wellbutrin to an SSRI.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">TRD</strong><span style="font-size: 7.5pt; color: #475569;"> — Treatment-Resistant Depression. Failure to respond to 2+ adequate medication trials. The gateway criterion for TMS insurance.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">PHQ-9</strong><span style="font-size: 7.5pt; color: #475569;"> — Patient Health Questionnaire-9. Standardized depression scale (0–27). Most insurers require score ≥10 for TMS.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">GAD-7</strong><span style="font-size: 7.5pt; color: #475569;"> — Generalized Anxiety Disorder 7-item scale. Used alongside PHQ-9 to assess comorbid anxiety.</span></div>
+        <div style="margin-bottom: 5px; break-inside: avoid;"><strong style="font-size: 8pt; color: #0e7490;">Half-life</strong><span style="font-size: 7.5pt; color: #475569;"> — Time for a drug's blood concentration to halve. Affects withdrawal risk when stopping (paroxetine/ Effexor: short half-life = worse withdrawal).</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TEAR-OUT CARD: Decision Making Guide    -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div style="border: 3px solid #0e7490; border-radius: 12px; padding: 0.18in; break-inside: avoid;">
+    <div style="background: linear-gradient(135deg, #0f172a, #0e7490); color: white; border-radius: 8px 8px 0 0; padding: 10px 14px; margin: -0.18in -0.18in 0.12in -0.18in; border-bottom: 3px solid #22d3ee;">
+      <p style="font-size: 6.5pt; opacity: 0.7; margin: 0 0 2px 0; text-transform: uppercase; letter-spacing: 1px; font-family: -apple-system, sans-serif;">Free Printable — Keep This With You</p>
+      <h2 style="font-size: 13pt; font-weight: 900; margin: 0; color: white;">Which Treatment Is Right For Me?</h2>
+      <p style="font-size: 7.5pt; opacity: 0.8; margin: 3px 0 0 0;">Use this decision guide to have a focused conversation with your psychiatrist.</p>
+    </div>
+    <div class="two-col" style="gap: 0.1in;">
+      <div>
+        <div style="background: #e0f2fe; border-radius: 6px; padding: 8px; margin-bottom: 6px;">
+          <strong style="font-size: 8pt; color: #0c4a6e; display: block; margin-bottom: 4px;">TMS May Be Right For You If...</strong>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #0891b2; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">You've tried 2+ antidepressants without adequate relief</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #0891b2; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Medication side effects are unbearable (sexual, weight, fatigue)</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #0891b2; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">You want to avoid systemic medication effects</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #0891b2; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">You prefer a non-drug, targeted treatment approach</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #0891b2; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">You're able to attend daily clinic sessions for 4–6 weeks</span>
+          </div>
+        </div>
+        <div style="background: #fef9c3; border-radius: 6px; padding: 8px;">
+          <strong style="font-size: 8pt; color: #854d0e; display: block; margin-bottom: 4px;">Key Questions to Ask Your Doctor</strong>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #ca8a04; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">"Based on my history, do I meet TMS criteria?"</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #ca8a04; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">"What's the realistic response rate for someone like me?"</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #ca8a04; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">"Should I continue medication during TMS?"</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #ca8a04; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">"What's your recommendation and why?"</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="background: #f0fdf4; border-radius: 6px; padding: 8px; margin-bottom: 6px;">
+          <strong style="font-size: 8pt; color: #15803d; display: block; margin-bottom: 4px;">Medication May Be Right If...</strong>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #22c55e; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">You prefer a daily pill vs. daily clinic visits</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #22c55e; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">You respond well to your current medication</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #22c55e; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">You want to avoid daily travel to a clinic</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #22c55e; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Your insurance has limited TMS coverage</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #22c55e; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">You're comfortable with ongoing medication use</span>
+          </div>
+        </div>
+        <div style="background: #faf5ff; border-radius: 6px; padding: 8px;">
+          <strong style="font-size: 8pt; color: #7e22ce; display: block; margin-bottom: 4px;">My Treatment Decision</strong>
+          <div style="height: 40px; border-bottom: 1px dashed #a855f7; margin-bottom: 5px;"></div>
+          <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #a855f7; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">TMS — next step: call __________</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: flex-start;">
+            <div style="width: 12px; height: 12px; border: 1.5px solid #a855f7; border-radius: 2px; flex-shrink: 0; margin-top: 1px;"></div>
+            <span style="font-size: 7.5pt; color: #1e293b;">Medication adjustment — next step: __________</span>
+          </div>
+        </div>
+        <div style="margin-top: 6px; padding: 6px; background: #0f172a; border-radius: 6px; text-align: center;">
+          <p style="font-size: 7pt; color: #94a3b8; margin: 0;">TMS vs Medication Guide — more at</p>
+          <p style="font-size: 10pt; font-weight: 900; color: #22d3ee; margin: 2px 0 0 0;">tmslist.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

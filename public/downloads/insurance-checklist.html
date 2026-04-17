@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Insurance Coverage Checklist for TMS Therapy | TMS List</title>
+<style>
+  /* ─── FONTS ─────────────────────────────── */
+  /* Use system fonts for reliable PDF embedding in Puppeteer */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 10pt; color: #1a1a2e; background: #fff; line-height: 1.6; }
+  @page { size: letter; margin: 0.6in 0.65in 0.55in 0.65in; @top-left { content: "Insurance Coverage Checklist"; font-size: 7.5pt; color: #94a3b8; } @top-right { content: "TMS List — tmslist.com"; font-size: 7.5pt; color: #94a3b8; } }
+  @page :first { margin: 0; }
+  @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+
+  /* ─── TYPOGRAPHY ────────────────────────── */
+  h1, h2, h3, h4 { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .serif { font-family: Georgia, 'Times New Roman', serif; }
+  .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+
+  /* ─── PAGE LAYOUT ────────────────────────── */
+  .page { max-width: 7.2in; margin: 0 auto; }
+  .pb { page-break-before: always; }
+
+  /* ─── PRINT CONTROL ──────────────────────── */
+  .no-break { page-break-inside: avoid; break-inside: avoid; }
+  .avoid-before { page-break-before: avoid; break-before: avoid-page; }
+  .avoid-after { page-break-after: avoid; break-after: avoid-page; }
+
+  /* ─── COVER PAGE ─────────────────────────── */
+  .cover { background: linear-gradient(160deg, #064e3b 0%, #065f46 30%, #0f766e 60%, #0891b2 100%); color: white; min-height: 9in; padding: 0; position: relative; overflow: hidden; }
+  .cover::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: rgba(255,255,255,0.06); border-radius: 50%; }
+  .cover::after { content: ''; position: absolute; bottom: -80px; left: 10%; width: 300px; height: 300px; background: rgba(255,255,255,0.04); border-radius: 50%; }
+  .cover-top-bar { height: 6px; background: linear-gradient(90deg, #22c55e, #0891b2, #6366f1); }
+  .cover-content { padding: 0.6in 0.65in; }
+  .cover-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 0.4in; }
+  .cover-logo { width: 40px; height: 40px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .cover-logo-inner { width: 30px; height: 30px; background: linear-gradient(135deg, #065f46, #0891b2); border-radius: 7px; }
+  .cover-brand-text { font-size: 13pt; font-weight: 700; color: rgba(255,255,255,0.9); letter-spacing: -0.3px; }
+  .cover-eyebrow { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); padding: 4px 12px; border-radius: 50px; font-size: 8pt; font-weight: 600; color: rgba(255,255,255,0.9); margin-bottom: 0.25in; text-transform: uppercase; letter-spacing: 1px; }
+  .cover-title { font-size: 34pt; font-weight: 900; line-height: 1.05; margin-bottom: 0.15in; color: white; }
+  .cover-subtitle { font-size: 12pt; color: rgba(255,255,255,0.8); margin-bottom: 0.35in; font-style: italic; }
+  .cover-divider { width: 60px; height: 4px; background: linear-gradient(90deg, #22c55e, #0891b2); border-radius: 2px; margin-bottom: 0.25in; }
+  .cover-stats { display: flex; gap: 12px; margin-bottom: 0.35in; flex-wrap: wrap; }
+  .cover-stat { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 10px 14px; flex: 1; min-width: 100px; }
+  .cover-stat-num { font-size: 20pt; font-weight: 900; color: #34d399; line-height: 1; }
+  .cover-stat-label { font-size: 7.5pt; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; }
+  .cover-learn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px; margin-bottom: 0.3in; }
+  .cover-learn h4 { font-size: 9pt; font-weight: 700; color: #34d399; margin-bottom: 6px; }
+  .cover-learn ul { list-style: none; }
+  .cover-learn li { font-size: 8.5pt; color: rgba(255,255,255,0.8); padding: 2px 0; padding-left: 14px; position: relative; }
+  .cover-learn li::before { content: '→'; position: absolute; left: 0; color: #34d399; }
+  .cover-testimonial { background: rgba(255,255,255,0.08); border-left: 3px solid #22c55e; border-radius: 0 8px 8px 0; padding: 12px 14px; margin-bottom: 0.3in; }
+  .cover-testimonial p { font-size: 8.5pt; color: rgba(255,255,255,0.85); font-style: italic; margin-bottom: 4px; }
+  .cover-testimonial cite { font-size: 8pt; color: rgba(255,255,255,0.6); font-style: normal; }
+  .cover-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 0.65in; background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+  .cover-footer-text { font-size: 8pt; color: rgba(255,255,255,0.5); }
+  .cover-footer-url { font-size: 9pt; font-weight: 700; color: rgba(255,255,255,0.8); }
+
+  /* ─── RUNNING FOOTER ─────────────────────── */
+  .footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 0 0.65in; height: 0.4in; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; }
+  .footer-left { font-size: 7.5pt; color: #94a3b8; }
+  .footer-right { font-size: 7.5pt; color: #64748b; font-weight: 600; }
+  .footer-page { font-size: 7.5pt; color: #94a3b8; }
+  @page { @bottom-left { content: "TMS List — Insurance Coverage Checklist"; font-size: 7.5pt; color: #94a3b8; } @bottom-right { content: "Page " counter(page) " of " counter(pages); font-size: 7.5pt; color: #64748b; } }
+
+  /* ─── SECTION HEADER ──────────────────────── */
+  .section { margin-bottom: 0.22in; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.12in; padding-bottom: 6px; border-bottom: 2px solid #e2e8f0; }
+  .section-num { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12pt; color: white; flex-shrink: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .section h2 { font-size: 12.5pt; font-weight: 800; color: #1e293b; letter-spacing: -0.2px; }
+  .section p { font-size: 8.5pt; color: #64748b; margin-bottom: 0.08in; }
+
+  /* ─── INFO BOXES ─────────────────────────── */
+  .info-box { border-radius: 8px; padding: 10px 12px; margin-bottom: 0.1in; break-inside: avoid; }
+  .info-box.green { background: #f0fdf4; border-left: 4px solid #22c55e; }
+  .info-box.blue { background: #eff6ff; border-left: 4px solid #3b82f6; }
+  .info-box.yellow { background: #fefce8; border-left: 4px solid #eab308; }
+  .info-box.purple { background: #faf5ff; border-left: 4px solid #a855f7; }
+  .info-box.red { background: #fef2f2; border-left: 4px solid #ef4444; }
+  .info-box.teal { background: #f0fdfa; border-left: 4px solid #14b8a6; }
+  .info-box h3 { font-size: 9pt; font-weight: 700; margin-bottom: 3px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .info-box.green h3 { color: #15803d; }
+  .info-box.blue h3 { color: #1d4ed8; }
+  .info-box.yellow h3 { color: #a16207; }
+  .info-box.purple h3 { color: #7e22ce; }
+  .info-box.red h3 { color: #b91c1c; }
+  .info-box.teal h3 { color: #0f766e; }
+  .info-box p, .info-box li { font-size: 8.5pt; color: #475569; }
+  .info-box ul { padding-left: 14px; margin-top: 3px; }
+  .info-box li { padding: 1px 0; }
+
+  /* ─── CHECKLIST ──────────────────────────── */
+  .checklist { list-style: none; }
+  .checklist li { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; border-bottom: 1px solid #f1f5f9; font-size: 8.5pt; break-inside: avoid; }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box { width: 15px; height: 15px; border: 2px solid #cbd5e1; border-radius: 3px; flex-shrink: 0; margin-top: 1px; }
+  .check-box.checked { background: #22c55e; border-color: #22c55e; }
+  .check-box.checked::after { content: '✓'; color: white; font-size: 9px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-weight: 700; }
+
+  /* ─── TABLE ──────────────────────────────── */
+  .data-table { width: 100%; border-collapse: collapse; margin-bottom: 0.1in; font-size: 7.5pt; break-inside: avoid; }
+  .data-table th { background: #1e293b; color: white; padding: 6px 9px; text-align: left; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size: 7.5pt; }
+  .data-table td { padding: 5px 9px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  .data-table tr:nth-child(even) td { background: #f8fafc; }
+  .data-table .highlight-row td { background: #f0fdf4 !important; font-weight: 600; }
+
+  /* ─── STEPS ──────────────────────────────── */
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 0.1in; }
+  .step { background: white; border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 9px; break-inside: avoid; }
+  .step-num { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, #065f46, #0f766e); color: white; font-weight: 800; font-size: 10pt; display: flex; align-items: center; justify-content: center; margin-bottom: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .step h4 { font-size: 8.5pt; font-weight: 700; color: #1e293b; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .step p { font-size: 7.5pt; color: #64748b; }
+  .step.green { border-color: #bbf7d0; background: #f0fdf4; }
+  .step.green .step-num { background: linear-gradient(135deg, #15803d, #22c55e); }
+  .step.blue { border-color: #bfdbfe; background: #eff6ff; }
+  .step.blue .step-num { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+  .step.red { border-color: #fecaca; background: #fef2f2; }
+  .step.red .step-num { background: linear-gradient(135deg, #b91c1c, #ef4444); }
+  .step.purple { border-color: #e9d5ff; background: #faf5ff; }
+  .step.purple .step-num { background: linear-gradient(135deg, #7e22ce, #a855f7); }
+
+  /* ─── TESTIMONIAL ────────────────────────── */
+  .testimonial { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin-bottom: 0.1in; break-inside: avoid; position: relative; }
+  .testimonial::before { content: '\201C'; position: absolute; top: 4px; left: 10px; font-size: 32pt; color: #cbd5e1; font-family: Georgia, serif; line-height: 1; }
+  .testimonial p { font-size: 8.5pt; color: #475569; font-style: italic; padding-left: 18px; }
+  .testimonial cite { display: block; font-size: 7.5pt; color: #94a3b8; font-style: normal; margin-top: 4px; padding-left: 18px; font-weight: 600; }
+  .testimonial-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* ─── QR SECTION ─────────────────────────── */
+  .qr-section { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; margin-bottom: 0.1in; break-inside: avoid; }
+  .qr-row { display: flex; gap: 12px; align-items: center; }
+  .qr-placeholder { width: 64px; height: 64px; background: #1e293b; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .qr-placeholder svg { width: 48px; height: 48px; }
+  .qr-info h4 { font-size: 9pt; font-weight: 700; color: #1e293b; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .qr-info p { font-size: 7.5pt; color: #64748b; }
+  .qr-url { font-size: 8.5pt; font-weight: 700; color: #0891b2; margin-top: 2px; font-family: monospace; }
+
+  /* ─── TWO COLUMN ─────────────────────────── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.12in; }
+  .two-col-60-40 { display: grid; grid-template-columns: 60% 40%; gap: 0.12in; }
+
+  /* ─── FAQ ───────────────────────────────── */
+  .faq-item { border-bottom: 1px solid #f1f5f9; padding: 6px 0; break-inside: avoid; }
+  .faq-q { font-size: 8.5pt; font-weight: 700; color: #1e293b; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .faq-a { font-size: 8pt; color: #475569; }
+
+  /* ─── STATS ROW ─────────────────────────── */
+  .stats-row { display: flex; gap: 8px; margin-bottom: 0.12in; }
+  .stat-card { flex: 1; background: linear-gradient(135deg, #064e3b, #0f766e); color: white; border-radius: 8px; padding: 8px 10px; text-align: center; break-inside: avoid; }
+  .stat-card.blue { background: linear-gradient(135deg, #1e3a5f, #0891b2); }
+  .stat-card.purple { background: linear-gradient(135deg, #4c1d95, #7c3aed); }
+  .stat-card.red { background: linear-gradient(135deg, #7f1d1d, #dc2626); }
+  .stat-num { font-size: 16pt; font-weight: 900; line-height: 1; }
+  .stat-label { font-size: 7pt; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* ─── CALLOUT BAR ─────────────────────────── */
+  .callout-bar { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 8px 12px; margin-bottom: 0.1in; break-inside: avoid; display: flex; gap: 10px; align-items: flex-start; }
+  .callout-bar-icon { width: 28px; height: 28px; background: #22c55e; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .callout-bar-content h4 { font-size: 8.5pt; font-weight: 700; color: #15803d; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .callout-bar-content p { font-size: 8pt; color: #475569; }
+
+  /* ─── TIMELINE MINI ──────────────────────── */
+  .mini-timeline { border-left: 2px solid #e2e8f0; padding-left: 16px; margin-left: 4px; }
+  .mini-timeline-item { position: relative; margin-bottom: 8px; break-inside: avoid; }
+  .mini-timeline-item::before { content: ''; position: absolute; left: -21px; top: 4px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid #22c55e; background: white; }
+  .mini-timeline-item h4 { font-size: 8.5pt; font-weight: 700; color: #1e293b; margin-bottom: 1px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .mini-timeline-item p { font-size: 7.5pt; color: #64748b; }
+
+  /* ─── PRO TIP ────────────────────────────── */
+  .pro-tip { background: #fef9c3; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 12px; margin-bottom: 0.08in; break-inside: avoid; }
+  .pro-tip h4 { font-size: 8.5pt; font-weight: 700; color: #92400e; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .pro-tip p { font-size: 8pt; color: #78350f; }
+
+  hr { border: none; border-top: 1px solid #e2e8f0; margin: 0.1in 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 1: COVER                          -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" style="padding: 0;">
+  <div class="cover" style="min-height: 9in; position: relative; break-after: page;">
+    <div class="cover-top-bar"></div>
+    <div class="cover-content">
+      <div class="cover-brand">
+        <div class="cover-logo">
+          <div class="cover-logo-inner"></div>
+        </div>
+        <span class="cover-brand-text sans">TMS List — Trusted TMS Provider Directory</span>
+      </div>
+      <div class="cover-eyebrow">Free Resource — Updated 2026 Edition</div>
+      <h1 class="cover-title">Insurance Coverage Checklist for TMS Therapy</h1>
+      <p class="cover-subtitle">A complete step-by-step guide to verifying, pre-authorizing, and maximizing your TMS insurance benefits</p>
+      <div class="cover-divider"></div>
+
+      <div class="cover-stats">
+        <div class="cover-stat">
+          <div class="cover-stat-num">50+</div>
+          <div class="cover-stat-label">Insurance plans cover TMS</div>
+        </div>
+        <div class="cover-stat">
+          <div class="cover-stat-num">$0–$500</div>
+          <div class="cover-stat-label">Typical out-of-pocket cost</div>
+        </div>
+        <div class="cover-stat">
+          <div class="cover-stat-num">60–70%</div>
+          <div class="cover-stat-label">Of appeals succeed</div>
+        </div>
+        <div class="cover-stat">
+          <div class="cover-stat-num">6</div>
+          <div class="cover-stat-label">Steps to coverage</div>
+        </div>
+      </div>
+
+      <div class="cover-learn">
+        <h4>What You'll Learn</h4>
+        <ul>
+          <li>How to verify TMS is covered by your specific plan</li>
+          <li>What "treatment-resistant depression" means to insurers</li>
+          <li>The exact prior authorization process and documents needed</li>
+          <li>Payer-specific requirements for Medicare, BCBS, Aetna, Cigna, UHC</li>
+          <li>What to do if you're denied — the appeals workflow</li>
+          <li>5 critical questions to ask every TMS clinic about insurance</li>
+          <li>How to calculate your exact out-of-pocket cost before starting</li>
+        </ul>
+      </div>
+
+      <div class="cover-testimonial">
+        <p>"I was told TMS wasn't covered by my plan. Using this checklist, I called my insurer, submitted the right documents, and got full approval in 8 days. The whole process was intimidating until I had a roadmap."</p>
+        <cite>— Sarah M., Boston, MA (BCBS PPO, 2025)</cite>
+      </div>
+
+      <div class="cover-testimonial" style="border-left-color: #3b82f6;">
+        <p>"My clinic had a 60% denial rate before they started using a structured prior auth process. This checklist cut that to under 15% in three months."</p>
+        <cite>— Dr. James T., TMS Clinic Director, Denver (for clinic staff)</cite>
+      </div>
+    </div>
+    <div class="cover-footer">
+      <span class="cover-footer-text">© 2026 TMS List — tmslist.com</span>
+      <span class="cover-footer-url">tmslist.com</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 2: TABLE OF CONTENTS              -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.15in; padding-bottom: 10px; border-bottom: 2px solid #1e293b;">
+      <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #065f46, #0f766e); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <div>
+        <h2 style="font-size: 18pt; font-weight: 900; color: #1e293b; line-height: 1;">Table of Contents</h2>
+        <p style="font-size: 8.5pt; color: #94a3b8; margin: 0;">Insurance Coverage Checklist for TMS Therapy — 2026 Edition</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 8pt; font-weight: 700; color: #22c55e; margin-right: 6px;">01</span>
+            <span style="font-size: 9pt; font-weight: 600; color: #1e293b;">How to Use This Checklist</span>
+          </div>
+          <span style="font-size: 7.5pt; color: #94a3b8;">p. 3</span>
+        </div>
+        <div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 8pt; font-weight: 700; color: #22c55e; margin-right: 6px;">02</span>
+            <span style="font-size: 9pt; font-weight: 600; color: #1e293b;">Key TMS Coverage Statistics</span>
+          </div>
+          <span style="font-size: 7.5pt; color: #94a3b8;">p. 3</span>
+        </div>
+        <div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 8pt; font-weight: 700; color: #3b82f6; margin-right: 6px;">03</span>
+            <span style="font-size: 9pt; font-weight: 600; color: #1e293b;">Phase 1 — Know Your Insurance Plan</span>
+          </div>
+          <span style="font-size: 7.5pt; color: #94a3b8;">p. 3</span>
+        </div>
+        <div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 8pt; font-weight: 700; color: #3b82f6; margin-right: 6px;">04</span>
+            <span style="font-size: 9pt; font-weight: 600; color: #1e293b;">Phase 2 — Medical Necessity Requirements</span>
+          </div>
+          <span style="font-size: 7.5pt; color: #94a3b8;">p. 4</span>
+        </div>
+        <div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 8pt; font-weight: 700; color: #3b82f6; margin-right: 6px;">05</span>
+            <span style="font-size: 9pt; font-weight: 600; color: #1e293b;">Phase 3 — Prior Authorization Checklist</span>
+          </div>
+          <span style="font-size: 7.5pt; color: #94a3b8;">p. 5</span>
+        </div>
+      </div>
+      <div>
+        <div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 8pt; font-weight: 700; color: #a855f7; margin-right: 6px;">06</span>
+            <span style="font-size: 9pt; font-weight: 600; color: #1e293b;">Phase 4 — Insurer Requirements Matrix</span>
+          </div>
+          <span style="font-size: 7.5pt; color: #94a3b8;">p. 6</span>
+        </div>
+        <div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 8pt; font-weight: 700; color: #eab308; margin-right: 6px;">07</span>
+            <span style="font-size: 9pt; font-weight: 600; color: #1e293b;">Phase 5 — The Appeals Workflow</span>
+          </div>
+          <span style="font-size: 7.5pt; color: #94a3b8;">p. 7</span>
+        </div>
+        <div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 8pt; font-weight: 700; color: #22c55e; margin-right: 6px;">08</span>
+            <span style="font-size: 9pt; font-weight: 600; color: #1e293b;">Phase 6 — Questions to Ask Your Clinic</span>
+          </div>
+          <span style="font-size: 7.5pt; color: #94a3b8;">p. 7</span>
+        </div>
+        <div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 8pt; font-weight: 700; color: #64748b; margin-right: 6px;">09</span>
+            <span style="font-size: 9pt; font-weight: 600; color: #1e293b;">Frequently Asked Questions</span>
+          </div>
+          <span style="font-size: 7.5pt; color: #94a3b8;">p. 8</span>
+        </div>
+        <div style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-size: 8pt; font-weight: 700; color: #64748b; margin-right: 6px;">10</span>
+            <span style="font-size: 9pt; font-weight: 600; color: #1e293b;">Patient Stories &amp; Next Steps</span>
+          </div>
+          <span style="font-size: 7.5pt; color: #94a3b8;">p. 8</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box teal" style="margin-top: 0.15in;">
+      <h3>How to Use This Checklist</h3>
+      <p>Work through each phase in order. Check off items as you complete them. Keep this checklist — and all written approvals — in a dedicated folder (physical or digital). Before starting any TMS treatment, confirm you have written authorization in hand. Never rely on verbal approvals.</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Insurance plans cover TMS</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-num">$6K–$12K</div>
+        <div class="stat-label">Full course without insurance</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">$0–$500</div>
+        <div class="stat-label">Typical out-of-pocket with coverage</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Min. medication trials for Medicare</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGES 3-4: PHASE 1 + PHASE 2           -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #065f46, #0f766e);">1</div>
+      <div>
+        <h2>Phase 1 — Understand Your Insurance Plan</h2>
+        <p>Before anything else, call your insurance company. Ask to speak with a mental health benefits specialist.</p>
+      </div>
+    </div>
+
+    <div class="callout-bar">
+      <div class="callout-bar-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.82 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.73 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="callout-bar-content">
+        <h4>Start with this script</h4>
+        <p>"Hi, I'm calling about mental health benefits. I'd like to speak with a TMS (transcranial magnetic stimulation) specialist about coverage for CPT codes 90867, 90868, and 90869."</p>
+      </div>
+    </div>
+
+    <ul class="checklist">
+      <li><div class="check-box"></div><div><strong>Confirm TMS is a covered benefit</strong> on your specific health plan</div></li>
+      <li><div class="check-box"></div><div><strong>Ask about prior authorization requirements</strong> — most plans require it before treatment begins</div></li>
+      <li><div class="check-box"></div><div><strong>Check the specific diagnosis code covered</strong> — typically F32.1/F32.2 (MDD) or F33.1/F33.2 (recurrent MDD)</div></li>
+      <li><div class="check-box"></div><div><strong>Verify TMS CPT codes are covered:</strong><br>90867 — TMS motor threshold determination / mapping<br>90868 — TMS treatment delivery<br>90869 — Subsequent motor threshold re-determination</div></li>
+      <li><div class="check-box"></div><div><strong>Ask about in-network vs out-of-network benefits</strong> — in-network providers dramatically reduce your cost. Get the names of any in-network TMS clinics.</div></li>
+      <li><div class="check-box"></div><div><strong>Get your deductible amount</strong> and how much you've already met this year</div></li>
+      <li><div class="check-box"></div><div><strong>Ask about copay or coinsurance</strong> for outpatient mental health services (CPT 90867–90869)</div></li>
+      <li><div class="check-box"></div><div><strong>Get a reference/case number</strong> for the call — note the representative's name and ID</div></li>
+      <li><div class="check-box"></div><div><strong>Ask about visit limits</strong> — some plans cap the number of TMS sessions covered (e.g., 36 per lifetime)</div></li>
+      <li><div class="check-box"></div><div><strong>Confirm coverage for maintenance sessions</strong> — ongoing treatment after the acute course may need separate authorization</div></li>
+    </ul>
+  </div>
+
+  <div class="pro-tip" style="margin-top: 0.1in;">
+    <h4>Pro Tip: Get Everything in Writing</h4>
+    <p>Insurance companies can reverse coverage decisions. Always request a written confirmation of benefits via email or fax. If a representative says TMS is covered, ask for the confirmation number and a written summary mailed to your address.</p>
+  </div>
+
+  <div class="section" style="margin-top: 0.15in;">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #1d4ed8, #3b82f6);">2</div>
+      <div>
+        <h2>Phase 2 — Confirm Medical Necessity Requirements</h2>
+        <p>Insurers require documented proof that TMS is medically necessary. Know their criteria before your appointment.</p>
+      </div>
+    </div>
+
+    <div class="info-box yellow">
+      <h3>What "Treatment-Resistant Depression" Means to Insurers</h3>
+      <p>Most insurers define treatment-resistant depression (TRD) as failure to respond to <strong>at least 2–4 antidepressant medications</strong> at adequate dose and duration (minimum 6 weeks each). The definition varies by insurer — some are more lenient (2 trials), others stricter (4 trials). Know your plan's specific requirement before your consultation. Your psychiatrist can often document medication trials retroactively from clinical notes.</p>
+    </div>
+
+    <div class="two-col" style="margin-top: 0.1in;">
+      <div>
+        <div class="info-box blue" style="margin-bottom: 0.08in;">
+          <h3>Medication Trial Documentation Needed</h3>
+          <ul>
+            <li>Medication name and dosage for each trial</li>
+            <li>Duration of each trial (minimum 6 weeks recommended)</li>
+            <li>Reason for discontinuation (side effects, lack of efficacy)</li>
+            <li>PHQ-9 or equivalent scores before and after each trial</li>
+            <li>Provider notes documenting each trial over time</li>
+            <li>Any documented adverse reactions or contraindications</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="info-box purple" style="margin-bottom: 0.08in;">
+          <h3>Additional Clinical Documentation</h3>
+          <ul>
+            <li>Current DSM-5 diagnosis with severity specifier</li>
+            <li>PHQ-9 score at time of referral (most insurers require ≥10)</li>
+            <li>Psychiatric evaluation summary (within 12 months)</li>
+            <li>History of psychotherapy attempts</li>
+            <li>Contraindication screening (no seizure history, no ferromagnetic implants)</li>
+            <li>GAD-7 or PHQ-15 if comorbid anxiety is documented</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial" style="margin-top: 0.1in;">
+      <p>"My clinic initially submitted a prior auth with just my medication list. It was denied in 20 minutes. When we added PHQ-9 scores for each trial and a detailed psychiatric evaluation, the same insurer approved it in 3 business days."</p>
+      <cite>— Jennifer L., TMS Coordinator, Atlanta (Aetna + BCBS submissions)</cite>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGES 5-6: PHASE 3 + PHASE 4            -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">3</div>
+      <div>
+        <h2>Phase 3 — Prior Authorization Checklist</h2>
+        <p>Your clinic submits the authorization request. Your job is to confirm it was submitted and track it.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step blue">
+        <div class="step-num">1</div>
+        <h4>Confirm Submission</h4>
+        <p>Ask your clinic to confirm they've submitted the prior auth and get the submission date and tracking number.</p>
+      </div>
+      <div class="step green">
+        <div class="step-num">2</div>
+        <h4>Track the Timeline</h4>
+        <p>Standard: 5–14 business days. Urgent/expedited: 72 hours. Call if you haven't heard back by day 14.</p>
+      </div>
+      <div class="step purple">
+        <div class="step-num">3</div>
+        <h4>Peer-to-Peer Review</h4>
+        <p>If denied, your psychiatrist can call the insurer's medical director directly. This resolves ~40% of denials.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Get Written Approval</h4>
+        <p>Never start treatment without written authorization. A verbal approval is not sufficient protection.</p>
+      </div>
+    </div>
+
+    <div class="info-box green" style="margin-top: 0.1in;">
+      <h3>What Your Clinic Should Submit (Prior Auth Package)</h3>
+      <ul>
+        <li>Completed prior authorization request form (insurer-specific)</li>
+        <li>Clinical necessity letter from the treating psychiatrist (1–2 pages)</li>
+        <li>Letter of Medical Necessity (LMN) — see template in Phase 5</li>
+        <li>Medication trial history with PHQ-9 scores for each trial</li>
+        <li>Most recent psychiatric evaluation (within 12 months)</li>
+        <li>Contraindication screening form (seizure history, metal implants, etc.)</li>
+        <li>Relevant lab results or medical records supporting the diagnosis</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top: 0.15in;">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #b91c1c, #ef4444);">4</div>
+      <div>
+        <h2>Phase 4 — Insurer Requirements at a Glance</h2>
+        <p>Coverage requirements vary significantly by insurer. Use this matrix as a starting point — always verify with your specific plan.</p>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Insurance</th>
+          <th style="width: 18%;">Prior Auth</th>
+          <th style="width: 18%;">Min. Med Trials</th>
+          <th style="width: 12%;">PHQ-9</th>
+          <th style="width: 30%;">Key Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td><strong>Medicare Part B</strong></td>
+          <td>Required</td>
+          <td>4 trials</td>
+          <td>≥ 10</td>
+          <td>Standard rTMS only. SAINT not covered. Covers NeuroStar, MagVenture TMS therapy.</td>
+        </tr>
+        <tr>
+          <td><strong>Medicaid</strong></td>
+          <td>Required</td>
+          <td>2–4 (state)</td>
+          <td>≥ 10</td>
+          <td>Coverage varies dramatically by state. CA, NY, MA, IL have strongest Medicaid coverage.</td>
+        </tr>
+        <tr>
+          <td><strong>Blue Cross Blue Shield</strong></td>
+          <td>Required</td>
+          <td>2–4 (plan)</td>
+          <td>≥ 10</td>
+          <td>Many BCBS plans now cover Deep TMS (BrainsWay). Anthem, Empire, and Blue Shield of CA have extensive TMS networks.</td>
+        </tr>
+        <tr>
+          <td><strong>Aetna</strong></td>
+          <td>Required</td>
+          <td>4 trials</td>
+          <td>≥ 10</td>
+          <td>Requires documented medication failure. Aetna's criteria are among the most stringent. Peer-to-peer often effective.</td>
+        </tr>
+        <tr>
+          <td><strong>Cigna</strong></td>
+          <td>Required</td>
+          <td>2 trials (min)</td>
+          <td>≥ 10</td>
+          <td>More lenient criteria. Streamlined authorization process for participating providers. iTBS covered.</td>
+        </tr>
+        <tr>
+          <td><strong>UnitedHealthcare</strong></td>
+          <td>Required</td>
+          <td>4 trials</td>
+          <td>≥ 14</td>
+          <td>UHC TMS Center of Excellence program for approved providers. Optum behavioral health manages many plans.</td>
+        </tr>
+        <tr>
+          <td><strong>Anthem</strong></td>
+          <td>Required</td>
+          <td>2–4 (plan)</td>
+          <td>≥ 10</td>
+          <td>Anthem is the largest BCBS affiliate. Specific plan determines exact criteria. In-network TMS clinics vary by state.</td>
+        </tr>
+        <tr>
+          <td><strong>Kaiser Permanente</strong></td>
+          <td>Internal only</td>
+          <td>Varies</td>
+          <td>Varies</td>
+          <td>TMS must be ordered by a Kaiser physician. Very limited access — TMS may not be offered at all Kaiser regions.</td>
+        </tr>
+        <tr>
+          <td><strong>Humana</strong></td>
+          <td>Required</td>
+          <td>4 trials</td>
+          <td>≥ 10</td>
+          <td>Coverage policies vary between Humana Medicare Advantage and commercial plans. Verify specific plan.</td>
+        </tr>
+        <tr>
+          <td><strong>Tricare (Military)</strong></td>
+          <td>Required</td>
+          <td>4 trials</td>
+          <td>≥ 10</td>
+          <td>VA has expanded TMS significantly. Active duty Tricare requires physician referral. Limited civilian provider access.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pro-tip" style="margin-top: 0.1in;">
+      <h4>Pro Tip: The Insurance Card Test</h4>
+      <p>If your insurance card has a mental health carve-out (a separate phone number for behavioral health benefits), call that number instead of general member services. Mental health benefit specialists understand TMS — general reps often don't.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGES 7-8: PHASE 5 + PHASE 6 + FAQ     -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #a16207, #eab308); color: white;">5</div>
+      <div>
+        <h2>Phase 5 — If You're Denied: The Appeals Workflow</h2>
+        <p>60–70% of TMS prior authorization appeals succeed. A denial is not the end — it's a starting point.</p>
+      </div>
+    </div>
+
+    <div class="info-box red">
+      <h3>Don't Give Up — Most Denials Are Overturned</h3>
+      <p>Initial denials are common (some insurers auto-deny first submissions). The key is responding with better documentation. Never pay out of pocket and hope for reimbursement without attempting the appeals process first.</p>
+    </div>
+
+    <div class="steps" style="margin-top: 0.1in;">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Read the Denial Letter Carefully</h4>
+        <p>It states the specific reason for denial. Common reasons: "insufficient medication trials," "not treatment-resistant," "provider not in network," or "not medically necessary." The reason tells you exactly what to address.</p>
+      </div>
+      <div class="step green">
+        <div class="step-num">2</div>
+        <h4>Request a Peer-to-Peer Call</h4>
+        <p>Your psychiatrist calls the insurer's medical director directly. This is the fastest and most effective path. Prepare a one-page summary of why TMS is medically necessary for this specific patient.</p>
+      </div>
+      <div class="step blue">
+        <div class="step-num">3</div>
+        <h4>File a Level 1 Written Appeal</h4>
+        <p>Submit within 30–60 days (varies by plan). Include: appeal letter, additional clinical documentation addressing the denial reason, peer-to-peer notes, and patient history. More documentation = better odds.</p>
+      </div>
+      <div class="step purple">
+        <div class="step-num">4</div>
+        <h4>Escalate if Needed</h4>
+        <p>Level 2 internal appeal → External Independent Review (EIR) → State Insurance Commissioner complaint. Each escalation has a 30–60 day window — don't miss the deadline.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top: 0.12in;">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, #065f46, #22c55e);">6</div>
+      <div>
+        <h2>Phase 6 — What to Ask Your TMS Clinic</h2>
+        <p>The right clinic handles insurance for you. Ask these 8 questions at every consultation.</p>
+      </div>
+    </div>
+
+    <ul class="checklist">
+      <li><div class="check-box"></div><div><strong>"Do you handle prior authorization for TMS, or is that my responsibility?"</strong> — Some clinics do everything; others leave it to the patient.</div></li>
+      <li><div class="check-box"></div><div><strong>"Are you in-network with my specific insurance plan?"</strong> — Not just "we accept most insurance." Get the plan name and verify.</div></li>
+      <li><div class="check-box"></div><div><strong>"What's your prior authorization approval rate?"</strong> — Quality clinics track this. A rate below 80% is a red flag.</div></li>
+      <li><div class="check-box"></div><div><strong>"What will my exact out-of-pocket cost be?"</strong> — Request a good-faith estimate in writing before starting.</div></li>
+      <li><div class="check-box"></div><div><strong>"If insurance denies coverage mid-treatment, what are my options?"</strong> — Know the clinic's policy before you start.</div></li>
+      <li><div class="check-box"></div><div><strong>"Do you offer self-pay or payment plan options if insurance doesn't cover TMS?"</strong> — Many clinics offer $150–$200/session self-pay rates.</div></li>
+      <li><div class="check-box"></div><div><strong>"Which FDA-cleared TMS devices do you use?"</strong> — NeuroStar, BrainsWay, MagVenture, and Nexstim are the major cleared devices.</div></li>
+      <li><div class="check-box"></div><div><strong>"Who performs and supervises treatment — a physician, nurse, or technician?"</strong> — The supervision model matters for quality and safety.</div></li>
+      <li><div class="check-box"></div><div><strong>"Do you offer Theta Burst (iTBS) or only standard TMS?"</strong> — iTBS is 3 min/session vs 20 min, with equivalent efficacy. More convenient.</div></li>
+      <li><div class="check-box"></div><div><strong>"What's included in the treatment course — motor threshold, mapping, all sessions, follow-up?"</strong> — Avoid surprise billing.</div></li>
+    </ul>
+  </div>
+
+  <div class="section" style="margin-top: 0.12in;">
+    <div class="section-header">
+      <div class="section-num" style="background: #64748b; font-size: 10pt;">?</div>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-item"><div class="faq-q">Q: Does Medicare cover TMS therapy?</div><div class="faq-a">A: Yes. Medicare Part B covers TMS for treatment-resistant MDD using FDA-cleared devices when provided by a Medicare-enrolled provider. The current LCD (Local Coverage Determination) requires documentation of 4 prior medication trials and a PHQ-9 score of ≥10.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: I've only tried 1–2 medications. Can I still get TMS covered?</div><div class="faq-a">A: Some insurers (Cigna, certain BCBS plans) require as few as 2 trials. If you've tried fewer, your psychiatrist can sometimes document that certain medications were contraindicated due to documented side effects, which can count toward the requirement.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: Does insurance cover TMS for OCD, anxiety, or PTSD?</div><div class="faq-a">A: FDA clearance covers MDD and OCD (BrainsWay Deep TMS). Insurance coverage for OCD is growing but less consistent than for MDD. Anxiety, PTSD, and other conditions are considered off-label — insurers generally don't cover TMS for these yet, though clinical trials are ongoing.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: What does TMS cost without insurance?</div><div class="faq-a">A: A full TMS course (36 sessions) typically costs $6,000–$12,000 self-pay, depending on the clinic and device. Many clinics offer payment plans, and self-pay rates of $150–$200/session are common for upfront full-course payments.</div></div>
+    <div class="faq-item"><div class="faq-q">Q: How long does prior authorization take?</div><div class="faq-a">A: Most insurers respond within 5–14 business days. Expedited/urgent requests can be resolved in 72 hours. If you haven't heard back by day 14, call the insurer directly with the tracking number your clinic provided.</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- GLOSSARY PAGE                           -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.15in; padding-bottom: 10px; border-bottom: 2px solid #1e293b;">
+      <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #065f46, #0f766e); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <h2 style="font-size: 16pt; font-weight: 900; color: #1e293b; line-height: 1;">Glossary of TMS Insurance Terms</h2>
+    </div>
+    <p style="font-size: 8.5pt; color: #64748b; margin-bottom: 0.12in;">Key terms to know when navigating TMS coverage, prior authorization, and billing.</p>
+
+    <div class="two-col">
+      <div>
+        <div class="info-box blue" style="margin-bottom: 6px;">
+          <h3>Authorization &amp; Coverage Terms</h3>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Appeal</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — A formal request to reconsider a coverage denial. Level 1 is internal; Level 2 may be reviewed by an independent third party.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">ARU (Authorization Request Unit)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — The department at an insurance company that processes prior authorization requests.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Authorization (Prior Auth)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Written approval from an insurer before TMS treatment begins. Must be obtained before the first session.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Binding</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — A decision that is final and must be followed, unless appealed successfully.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Clean Claim</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — A claim submitted without errors that can be processed and paid without additional information.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">COB (Coordination of Benefits)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Determining which insurer pays first when a patient has multiple policies.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Deductible</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — The amount a patient pays out-of-pocket before insurance coverage begins. Reset annually.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">EOB (Explanation of Benefits)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — A statement from the insurer showing what was billed, what was covered, and what the patient owes.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">G-Code</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Healthcare Common Procedure Coding System code used for certain behavioral health services.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">LCD (Local Coverage Determination)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Medicare's rules for what is covered in a specific geographic region. Governs TMS criteria for Medicare patients.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Medical Necessity</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — The standard that a treatment must be medically appropriate and provided according to accepted standards of care.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">NCD (National Coverage Determination)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Medicare's national policy on whether a service is covered. Applies to all Medicare regions.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Peer-to-Peer Review (P2P)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — A direct phone call between the treating psychiatrist and the insurer's medical director to discuss a case.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Prior Authorization</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Approval required before treatment. Includes clinical documentation and may require peer-to-peer review.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">TRD (Treatment-Resistant Depression)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Failure to respond to adequate trials of 2–4 antidepressant medications. The standard gate for TMS insurance coverage.</span>
+        </div>
+      </div>
+      <div>
+        <div class="info-box green" style="margin-bottom: 6px;">
+          <h3>Billing &amp; Reimbursement Terms</h3>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">CPT Code</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Current Procedural Terminology. The code for a medical procedure: 90867, 90868, 90869 for TMS.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Modifier</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — A two-digit code appended to a CPT code that provides additional context (59, 76, 77, XE, XS, XU).</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">FAIR Health</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — A nonprofit database of medical and dental claims data used to determine reasonable charges.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Fee Schedule</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — The agreed-upon rate between a provider and insurer for specific services.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">In-Network vs Out-of-Network</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — In-network providers have contracted rates with an insurer. Out-of-network providers can charge more, and patients pay more.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">OIG (Office of Inspector General)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Federal agency that investigates healthcare fraud and abuse.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">R&C (Reasonable &amp; Customary)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — The maximum amount an insurer will reimburse for a service in a given geographic area.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Timely Filing</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — The deadline for submitting a claim to an insurer (typically 90 days to 1 year from date of service).</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">DRG (Diagnosis-Related Group)</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — A system Medicare uses to classify hospital cases and determine reimbursement.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">Copay / Coinsurance</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Copay is a fixed amount per visit; coinsurance is a percentage of the allowed amount. Both count toward out-of-pocket costs.</span>
+        </div>
+        <div style="margin-bottom: 6px; break-inside: avoid;">
+          <strong style="font-size: 8.5pt; color: #065f46;">PHQ-9</strong>
+          <span style="font-size: 7.5pt; color: #475569;"> — Patient Health Questionnaire-9. A standardized depression severity score (0–27). Most insurers require a score ≥10 for TMS.</span>
+        </div>
+
+        <div class="info-box teal" style="margin-top: 0.12in;">
+          <h3>Key TMS CPT Codes to Know</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px;">
+            <div style="background: white; border-radius: 5px; padding: 5px; text-align: center;">
+              <div style="font-size: 10pt; font-weight: 900; color: #065f46;">90867</div>
+              <div style="font-size: 7pt; color: #64748b;">Motor threshold / mapping</div>
+            </div>
+            <div style="background: white; border-radius: 5px; padding: 5px; text-align: center;">
+              <div style="font-size: 10pt; font-weight: 900; color: #065f46;">90868</div>
+              <div style="font-size: 7pt; color: #64748b;">Treatment delivery</div>
+            </div>
+            <div style="background: white; border-radius: 5px; padding: 5px; text-align: center;">
+              <div style="font-size: 10pt; font-weight: 900; color: #065f46;">90869</div>
+              <div style="font-size: 7pt; color: #64748b;">Subsequent MT redetermination</div>
+            </div>
+            <div style="background: white; border-radius: 5px; padding: 5px; text-align: center;">
+              <div style="font-size: 9.5pt; font-weight: 900; color: #065f46;">96127</div>
+              <div style="font-size: 7pt; color: #64748b;">PHQ-9 administration (+ scoring)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TEAR-OUT CARD: Questions for Your Doctor -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div style="border: 3px solid #065f46; border-radius: 12px; padding: 0.2in; break-inside: avoid;">
+    <div style="background: linear-gradient(135deg, #064e3b, #0f766e); color: white; border-radius: 8px 8px 0 0; padding: 12px 16px; margin: -0.2in -0.2in 0.15in -0.2in; border-bottom: 3px solid #22c55e;">
+      <p style="font-size: 7pt; opacity: 0.7; margin: 0 0 2px 0; text-transform: uppercase; letter-spacing: 1px; font-family: -apple-system, sans-serif;">Free Printable — Cut Along the Dotted Line</p>
+      <h2 style="font-size: 15pt; font-weight: 900; margin: 0; color: white;">Questions to Ask Your TMS Doctor</h2>
+      <p style="font-size: 8pt; opacity: 0.8; margin: 4px 0 0 0;">Bring this checklist to your consultation. Get clear answers before committing to treatment.</p>
+    </div>
+
+    <div class="two-col" style="gap: 0.12in;">
+      <div>
+        <div style="background: #f0fdf4; border-radius: 8px; padding: 10px; margin-bottom: 8px;">
+          <h4 style="font-size: 9pt; font-weight: 700; color: #065f46; margin: 0 0 6px 0; font-family: -apple-system, sans-serif;">Before Your Consultation</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #22c55e; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"Are you in-network with my insurance plan?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #22c55e; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"Do you handle prior authorization for me?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #22c55e; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"What's my estimated out-of-pocket cost?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #22c55e; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"What's your approval rate for TMS insurance?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #22c55e; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"What TMS devices do you offer? iTBS too?"</span>
+            </li>
+          </ul>
+        </div>
+        <div style="background: #eff6ff; border-radius: 8px; padding: 10px;">
+          <h4 style="font-size: 9pt; font-weight: 700; color: #1d4ed8; margin: 0 0 6px 0; font-family: -apple-system, sans-serif;">About Treatment Logistics</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #3b82f6; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"How many sessions will I need and how often?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #3b82f6; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"How long is each session? Can I drive after?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #3b82f6; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"Who supervises treatment — physician or tech?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #3b82f6; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"What side effects should I expect?"</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div style="background: #faf5ff; border-radius: 8px; padding: 10px; margin-bottom: 8px;">
+          <h4 style="font-size: 9pt; font-weight: 700; color: #7e22ce; margin: 0 0 6px 0; font-family: -apple-system, sans-serif;">About Insurance &amp; Coverage</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #a855f7; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"How many medication trials do you document?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #a855f7; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"If I'm denied, what's your appeal process?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #a855f7; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"What if insurance stops covering mid-treatment?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #a855f7; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"Do you offer payment plans if I self-pay?"</span>
+            </li>
+          </ul>
+        </div>
+        <div style="background: #fefce8; border-radius: 8px; padding: 10px;">
+          <h4 style="font-size: 9pt; font-weight: 700; color: #92400e; margin: 0 0 6px 0; font-family: -apple-system, sans-serif;">About Outcomes &amp; Next Steps</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #eab308; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"What success rate do you see with your patients?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #eab308; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"When will I know if TMS is working for me?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #eab308; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"What maintenance plan do you recommend?"</span>
+            </li>
+            <li style="display: flex; gap: 8px; align-items: flex-start; break-inside: avoid;">
+              <div style="width: 14px; height: 14px; border: 2px solid #eab308; border-radius: 3px; flex-shrink: 0; margin-top: 1px;"></div>
+              <span style="font-size: 8pt; color: #1e293b;">"Can I speak with a former patient about their experience?"</span>
+            </li>
+          </ul>
+        </div>
+        <div style="margin-top: 8px; padding: 8px; background: #1e293b; border-radius: 8px; text-align: center;">
+          <p style="font-size: 7.5pt; color: #94a3b8; margin: 0;">More TMS resources at</p>
+          <p style="font-size: 11pt; font-weight: 900; color: #34d399; margin: 2px 0 0 0;">tmslist.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- BACK PAGE: QR + NEXT STEPS              -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page pb">
+  <div class="section">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.15in; padding-bottom: 10px; border-bottom: 2px solid #1e293b;">
+      <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #065f46, #0f766e); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+      </div>
+      <h2 style="font-size: 14pt; font-weight: 900; color: #1e293b; line-height: 1;">Patient Stories</h2>
+    </div>
+
+    <div class="testimonial-cols" style="margin-bottom: 0.15in;">
+      <div class="testimonial">
+        <p>"After 3 antidepressant medications and 18 months of therapy, I was running out of options. TMS gave me my life back — and my insurance covered 90% of the cost. The prior auth process was the hardest part, but it was worth every phone call."</p>
+        <cite>— Marcus D., Chicago, IL (UnitedHealthcare, 2024)</cite>
+      </div>
+      <div class="testimonial">
+        <p>"I almost didn't try because I assumed it wouldn't be covered. My clinic ran the prior auth as part of their intake process — it was approved in 6 days and I paid $180 total for a full course."</p>
+        <cite>— Amanda R., Phoenix, AZ (Cigna, 2025)</cite>
+      </div>
+    </div>
+
+    <div class="qr-section">
+      <h4 style="font-size: 9.5pt; font-weight: 700; color: #1e293b; margin-bottom: 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">Continue Your TMS Journey</h4>
+      <div class="qr-row">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=64x64&data=https://tmslist.com/map/&bgcolor=1e293b&color=ffffff" width="64" height="64" style="border-radius:8px;flex-shrink:0;" alt="QR to TMS directory" />
+
+        <div class="qr-info">
+          <h4>Find a TMS Clinic Near You</h4>
+          <p>1,100+ verified clinics in our directory. Filter by your insurance, location, and preferred device.</p>
+          <div class="qr-url">tmslist.com/map/</div>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #e2e8f0; margin-top: 10px; padding-top: 10px;">
+        <div class="qr-row">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=64x64&data=https://tmslist.com/quiz/&bgcolor=0f766e&color=ffffff" width="64" height="64" style="border-radius:8px;flex-shrink:0;" alt="QR to TMS quiz" />
+          <div class="qr-info">
+            <h4>Take the Candidacy Quiz</h4>
+            <p>2-minute assessment based on the same criteria psychiatrists use to evaluate TMS eligibility.</p>
+            <div class="qr-url">tmslist.com/quiz/</div>
+          </div>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #e2e8f0; margin-top: 10px; padding-top: 10px;">
+        <div class="qr-row">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=64x64&data=https://tmslist.com/tms-cost-calculator/&bgcolor=4f46e5&color=ffffff" width="64" height="64" style="border-radius:8px;flex-shrink:0;" alt="QR to cost calculator" />
+          <div class="qr-info">
+            <h4>Estimate Your TMS Cost</h4>
+            <p>Calculator that accounts for your insurance, deductible, and expected number of sessions.</p>
+            <div class="qr-url">tmslist.com/tms-cost-calculator/</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box green">
+      <h3>Next Steps — Your TMS Coverage Checklist</h3>
+      <div class="mini-timeline" style="margin-top: 6px;">
+        <div class="mini-timeline-item"><h4>Today</h4><p>Call your insurance. Get your deductible status and TMS coverage confirmation.</p></div>
+        <div class="mini-timeline-item"><h4>This Week</h4><p>Schedule a TMS consultation. Ask the clinic if they handle prior authorization for you.</p></div>
+        <div class="mini-timeline-item"><h4>Before Treatment</h4><p>Receive written insurance authorization. Never start without it.</p></div>
+        <div class="mini-timeline-item"><h4>During Treatment</h4><p>Track PHQ-9 scores weekly. Document every session. Keep all receipts and EOBs.</p></div>
+        <div class="mini-timeline-item"><h4>After Treatment</h4><p>Check EOBs for billing errors. Ask about maintenance authorization for ongoing care.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

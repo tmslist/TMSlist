@@ -3,6 +3,7 @@ import { db } from '../../../db';
 import { clinics } from '../../../db/schema';
 import { clinicSubmitSchema } from '../../../db/validation';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+import { getPostHogServer } from '../../../lib/posthog-server';
 
 export const prerender = false;
 
@@ -40,6 +41,19 @@ export const POST: APIRoute = async ({ request }) => {
         source: 'website_form' as const,
       },
     }).returning({ id: clinics.id, slug: clinics.slug });
+
+    const sessionId = request.headers.get('X-PostHog-Session-Id');
+    getPostHogServer().capture({
+      distinctId: submitterEmail,
+      event: 'clinic_submitted',
+      properties: {
+        $session_id: sessionId || undefined,
+        clinic_name: clinicData.name,
+        clinic_city: clinicData.city,
+        clinic_id: result[0]?.id,
+        submitter_email: submitterEmail,
+      },
+    });
 
     return new Response(JSON.stringify({ success: true, clinic: result[0] }), {
       status: 201,

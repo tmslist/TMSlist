@@ -5,6 +5,7 @@ import { checkRateLimit } from '../../../utils/rateLimit';
 import { db } from '../../../db';
 import { leads } from '../../../db/schema';
 import { z } from 'zod';
+import { getPostHogServer } from '../../../lib/posthog-server';
 
 export const prerender = false;
 
@@ -73,6 +74,23 @@ export const POST: APIRoute = async ({ request }) => {
         firstStep
       ).catch((err) => console.error('[register] Failed to send welcome email:', err?.message));
     }
+
+    // Track registration and identify user in PostHog
+    const sessionId = request.headers.get('X-PostHog-Session-Id');
+    const posthog = getPostHogServer();
+    posthog.identify({
+      distinctId: user.id,
+      properties: { email: user.email, name: user.name, role: user.role },
+    });
+    posthog.capture({
+      distinctId: user.id,
+      event: 'patient_registered',
+      properties: {
+        $session_id: sessionId || undefined,
+        email: user.email,
+        name: user.name,
+      },
+    });
 
     return new Response(JSON.stringify({ success: true, user: { id: user.id, name: user.name, email: user.email } }), {
       status: 201,

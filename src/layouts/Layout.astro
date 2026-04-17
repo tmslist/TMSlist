@@ -16,6 +16,7 @@ interface Props {
 }
 
 import "../styles/global.css";
+import PostHog from "../components/posthog.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import EnquiryModal from "../components/react/EnquiryModal";
@@ -158,6 +159,9 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 
 		<!-- Geo Detection (loads before body to avoid FOUC) -->
 		<script is:inline src="/js/geo.js"></script>
+
+		<!-- PostHog Analytics -->
+		<PostHog />
 	</head>
 	<body
 		class="bg-surface-subtle min-h-screen text-slate-900 font-sans antialiased flex flex-col overflow-x-hidden"

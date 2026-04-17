@@ -6,6 +6,7 @@ import { checkRateLimit } from '../../../utils/rateLimit';
 import { sendVerificationEmail } from '../../../utils/email';
 import { z } from 'zod';
 import crypto from 'crypto';
+import { getPostHogServer } from '../../../lib/posthog-server';
 
 export const prerender = false;
 
@@ -59,6 +60,18 @@ export const POST: APIRoute = async ({ request }) => {
       clinicName: clinic[0].name,
       verificationUrl: `${siteUrl}/api/clinics/verify?token=${token}`,
     }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
+
+    const sessionId = request.headers.get('X-PostHog-Session-Id');
+    getPostHogServer().capture({
+      distinctId: parsed.data.email,
+      event: 'clinic_claim_initiated',
+      properties: {
+        $session_id: sessionId || undefined,
+        clinic_id: parsed.data.clinicId,
+        clinic_name: clinic[0].name,
+        claimant_name: parsed.data.name,
+      },
+    });
 
     return new Response(JSON.stringify({ success: true, message: 'Verification email sent' }), {
       status: 201,

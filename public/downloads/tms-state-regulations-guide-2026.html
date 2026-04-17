@@ -1,0 +1,2582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMS State Regulations Guide 2026</title>
+<style>
+/* ============================================================
+   TMS STATE REGULATIONS GUIDE 2026 — PRINT-READY STYLES
+   Letter paper: 8.5 x 11 in | 7.2in content width | 0.6in margins
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --red-darkest:  #450a0a;
+  --red-dark:     #7f1d1d;
+  --red-accent:   #b91c1c;
+  --red-light:    #dc2626;
+  --red-50:       #fef2f2;
+  --red-100:      #fee2e2;
+  --red-200:      #fecaca;
+  --slate-50:     #f8fafc;
+  --slate-100:    #f1f5f9;
+  --slate-200:    #e2e8f0;
+  --slate-300:    #cbd5e1;
+  --slate-400:    #94a3b8;
+  --slate-500:    #64748b;
+  --slate-600:    #475569;
+  --slate-700:    #334155;
+  --slate-800:    #1e293b;
+  --slate-900:    #0f172a;
+  --content-width: 7.2in;
+  --margin:       0.6in;
+}
+
+body {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 10pt;
+  line-height: 1.55;
+  color: var(--slate-800);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   PAGE LAYOUT & PRINT RULES
+   ============================================================ */
+
+.page {
+  width: 8.5in;
+  min-height: 11in;
+  margin: 0 auto;
+  padding: var(--margin);
+  page-break-after: always;
+}
+
+.page:last-child {
+  page-break-after: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--slate-900);
+}
+
+h1 { font-size: 26pt; margin-bottom: 0.2em; }
+h2 { font-size: 16pt; margin: 1.4em 0 0.5em; color: var(--red-accent); border-bottom: 2px solid var(--red-accent); padding-bottom: 0.2em; }
+h3 { font-size: 12pt; margin: 1.1em 0 0.4em; color: var(--slate-800); }
+h4 { font-size: 10.5pt; margin: 0.8em 0 0.3em; color: var(--slate-700); font-weight: 600; }
+
+p { margin-bottom: 0.6em; }
+ul, ol { margin: 0.4em 0 0.6em 1.4em; }
+li { margin-bottom: 0.25em; }
+
+strong { font-weight: 700; color: var(--slate-900); }
+em { font-style: italic; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--slate-200);
+  margin: 1.2em 0;
+}
+
+/* ============================================================
+   @PAGE RULES — PRINT
+   ============================================================ */
+
+@page {
+  size: letter;
+  margin: 0.6in 0.6in 0.7in 0.6in;
+}
+
+@page :first {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@page toc-page {
+  margin-top: 0.6in;
+  margin-bottom: 0.7in;
+}
+
+@page cover-page {
+  margin: 0;
+}
+
+@page tearout-page {
+  margin: 0.5in;
+}
+
+/* Footer applied to all pages via the :root rule scope */
+@page {
+  @bottom-left {
+    content: "TMS List — State Regulations Guide 2026";
+    font-size: 7.5pt;
+    color: #94a3b8;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+    font-size: 7.5pt;
+    color: #64748b;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+}
+
+/* ============================================================
+   COVER PAGE
+   ============================================================ */
+
+.cover {
+  width: 8.5in;
+  height: 11in;
+  background: linear-gradient(160deg, var(--red-darkest) 0%, var(--red-dark) 45%, var(--red-accent) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  page-break-after: always;
+  padding: 0.8in 0.7in;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -2in;
+  right: -1.5in;
+  width: 5in;
+  height: 5in;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -1in;
+  left: -1in;
+  width: 4in;
+  height: 4in;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.02);
+}
+
+.cover-icon {
+  font-size: 52pt;
+  margin-bottom: 0.3in;
+  opacity: 0.9;
+}
+
+.cover-year {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 9pt;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 0.3in;
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 0.2em 1em;
+  border-radius: 2em;
+}
+
+.cover h1 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 38pt;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 0.25in;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.cover-subtitle {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 13.5pt;
+  color: rgba(255,255,255,0.88);
+  max-width: 5.5in;
+  line-height: 1.5;
+  margin-bottom: 0.5in;
+}
+
+.cover-badge {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 0.5em 1.2em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8.5pt;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4in;
+}
+
+.cover-divider {
+  width: 3in;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  margin: 0.3in 0;
+}
+
+.cover-meta {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  margin-top: auto;
+}
+
+.cover-meta strong {
+  color: rgba(255,255,255,0.7);
+}
+
+.cover-cta {
+  margin-top: 0.4in;
+  background: #fff;
+  color: var(--red-accent);
+  border-radius: 6px;
+  padding: 0.5em 1.5em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 9.5pt;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   INTRO PAGE
+   ============================================================ */
+
+.intro-box {
+  background: var(--red-50);
+  border-left: 4px solid var(--red-accent);
+  border-radius: 0 6px 6px 0;
+  padding: 0.5em 0.8em;
+  margin: 0.6em 0;
+  font-size: 10pt;
+}
+
+/* ============================================================
+   TABLE OF CONTENTS
+   ============================================================ */
+
+.toc {
+  column-count: 2;
+  column-gap: 0.4in;
+  margin-top: 0.3em;
+}
+
+.toc-section {
+  break-inside: avoid;
+  margin-bottom: 0.5em;
+  padding: 0.15em 0;
+  border-bottom: 1px dotted var(--slate-300);
+}
+
+.toc-section a {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: var(--slate-800);
+  text-decoration: none;
+}
+
+.toc-section a:hover {
+  color: var(--red-accent);
+}
+
+.toc-section .toc-sub {
+  display: block;
+  padding-left: 1em;
+  font-size: 8.5pt;
+  font-weight: 400;
+  color: var(--slate-500);
+  margin-top: 0.05em;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 0.6em 0;
+  border-radius: 6px;
+  border: 1px solid var(--slate-200);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8pt;
+  break-inside: avoid;
+}
+
+thead tr {
+  background: var(--slate-800);
+  color: #fff;
+}
+
+thead th {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  font-weight: 700;
+  padding: 0.35em 0.5em;
+  text-align: left;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+thead th:last-child { border-right: none; }
+
+tbody tr:nth-child(even) {
+  background: var(--slate-50);
+}
+
+tbody tr:hover {
+  background: var(--red-50);
+}
+
+td {
+  padding: 0.3em 0.5em;
+  border-right: 1px solid var(--slate-200);
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+td:last-child { border-right: none; }
+
+.td-yes {
+  color: #166534;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  text-align: center;
+}
+
+.td-no {
+  color: #991b1b;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  text-align: center;
+}
+
+.td-maybe {
+  color: #92400e;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  text-align: center;
+}
+
+/* ============================================================
+   INFO CARDS & CALLOUTS
+   ============================================================ */
+
+.card {
+  border: 1px solid var(--slate-200);
+  border-radius: 6px;
+  padding: 0.6em 0.75em;
+  margin: 0.6em 0;
+  background: #fff;
+  break-inside: avoid;
+}
+
+.card-red {
+  border-color: var(--red-200);
+  background: var(--red-50);
+}
+
+.card-blue {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+}
+
+.card-green {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+}
+
+.card-yellow {
+  border-color: #fde68a;
+  background: #fffbeb;
+}
+
+.card-header {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--red-accent);
+  margin-bottom: 0.3em;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.card-blue .card-header { color: #1d4ed8; }
+.card-green .card-header { color: #166534; }
+.card-yellow .card-header { color: #92400e; }
+
+.callout {
+  display: flex;
+  gap: 0.6em;
+  margin: 0.5em 0;
+  break-inside: avoid;
+}
+
+.callout-icon {
+  font-size: 16pt;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.callout-body {
+  font-size: 9.5pt;
+  line-height: 1.5;
+}
+
+.callout-body strong {
+  display: block;
+  margin-bottom: 0.1em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8.5pt;
+}
+
+/* ============================================================
+   CHECKLIST
+   ============================================================ */
+
+.checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6em;
+  margin: 0.5em 0;
+}
+
+.checklist-col h4 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 9pt;
+  font-weight: 700;
+  color: #fff;
+  background: var(--slate-700);
+  padding: 0.25em 0.6em;
+  border-radius: 4px 4px 0 0;
+  margin: 0;
+}
+
+.checklist-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--slate-200);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+
+.checklist-col li {
+  padding: 0.25em 0.6em;
+  border-bottom: 1px solid var(--slate-100);
+  font-size: 8.5pt;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4em;
+  break-inside: avoid;
+}
+
+.checklist-col li:last-child { border-bottom: none; }
+
+.check-box {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--slate-400);
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 0.15em;
+}
+
+/* ============================================================
+   TEAR-OUT CARD PAGE
+   ============================================================ */
+
+.tearout-page {
+  page: tearout-page;
+  page-break-before: always;
+}
+
+.tearout-header {
+  background: linear-gradient(135deg, var(--red-darkest), var(--red-dark));
+  color: #fff;
+  padding: 0.4em 0.6em;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+.tearout-header h2 {
+  color: #fff;
+  border: none;
+  margin: 0;
+  font-size: 15pt;
+  padding: 0;
+}
+
+.tearout-header .tearout-badge {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 4px;
+  padding: 0.2em 0.7em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.05em;
+}
+
+.tearout-body {
+  border: 2px solid var(--red-accent);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 0.5em;
+  background: #fff;
+}
+
+.tearout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+}
+
+.tearout-col h4 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #fff;
+  background: var(--red-accent);
+  padding: 0.2em 0.5em;
+  border-radius: 3px;
+  margin: 0 0 0.3em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tearout-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tearout-col li {
+  font-size: 8pt;
+  padding: 0.18em 0.4em;
+  border-bottom: 1px solid var(--red-100);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35em;
+  break-inside: avoid;
+  line-height: 1.4;
+}
+
+.tearout-col li:last-child { border-bottom: none; }
+
+.tearout-num {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--red-100);
+  color: var(--red-accent);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7pt;
+  font-weight: 700;
+  text-align: center;
+  line-height: 14px;
+  flex-shrink: 0;
+}
+
+.tearout-footer {
+  margin-top: 0.4em;
+  padding: 0.3em 0.5em;
+  background: var(--slate-100);
+  border-radius: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  color: var(--slate-600);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.tearout-footer strong { color: var(--red-accent); }
+
+/* ============================================================
+   QR SECTION
+   ============================================================ */
+
+.qr-section {
+  margin: 0.6em 0;
+}
+
+.qr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6em;
+}
+
+.qr-card {
+  border: 1px solid var(--slate-200);
+  border-radius: 8px;
+  padding: 0.6em;
+  text-align: center;
+  break-inside: avoid;
+  background: #fff;
+}
+
+.qr-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  margin-bottom: 0.3em;
+}
+
+.qr-card h4 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 9pt;
+  font-weight: 700;
+  margin: 0 0 0.2em;
+  color: var(--slate-900);
+}
+
+.qr-card p {
+  font-size: 8pt;
+  color: var(--slate-500);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.qr-url {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  color: var(--red-accent);
+  font-weight: 600;
+  margin-top: 0.2em;
+}
+
+/* ============================================================
+   GLOSSARY
+   ============================================================ */
+
+.glossary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3em 0.6em;
+  margin: 0.4em 0;
+}
+
+.glossary-item {
+  break-inside: avoid;
+  padding: 0.2em 0;
+  border-bottom: 1px dotted var(--slate-200);
+}
+
+.glossary-term {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: var(--red-accent);
+}
+
+.glossary-def {
+  font-size: 8.5pt;
+  color: var(--slate-600);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6em;
+  margin: 0.5em 0;
+}
+
+.testimonial {
+  border: 1px solid var(--slate-200);
+  border-radius: 8px;
+  padding: 0.7em;
+  break-inside: avoid;
+  background: #fff;
+  position: relative;
+}
+
+.testimonial::before {
+  content: '\201C';
+  font-size: 36pt;
+  color: var(--red-200);
+  font-family: Georgia, serif;
+  position: absolute;
+  top: 0.05in;
+  left: 0.3em;
+  line-height: 1;
+}
+
+.testimonial-quote {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 9.5pt;
+  font-style: italic;
+  color: var(--slate-700);
+  line-height: 1.55;
+  margin-bottom: 0.5em;
+  padding-top: 0.3in;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.testimonial-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--slate-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--slate-600);
+  flex-shrink: 0;
+}
+
+.testimonial-meta strong {
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8.5pt;
+  color: var(--slate-800);
+}
+
+.testimonial-meta span {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  color: var(--slate-500);
+}
+
+/* ============================================================
+   REGULATORY BODIES
+   ============================================================ */
+
+.reg-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+  margin: 0.5em 0;
+}
+
+.reg-body-card {
+  border: 1px solid var(--slate-200);
+  border-radius: 6px;
+  padding: 0.5em 0.6em;
+  break-inside: avoid;
+  background: #fff;
+}
+
+.reg-body-card .reg-acronym {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 11pt;
+  font-weight: 800;
+  color: var(--red-accent);
+  margin-bottom: 0.1em;
+}
+
+.reg-body-card .reg-name {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  font-weight: 600;
+  color: var(--slate-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3em;
+}
+
+.reg-body-card p {
+  font-size: 8.5pt;
+  color: var(--slate-600);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ============================================================
+   SECTION HEADER
+   ============================================================ */
+
+.section-intro {
+  font-size: 10pt;
+  color: var(--slate-600);
+  margin-bottom: 0.6em;
+  line-height: 1.55;
+}
+
+.subsection-header {
+  background: var(--slate-100);
+  border-left: 3px solid var(--red-accent);
+  padding: 0.3em 0.6em;
+  margin: 0.8em 0 0.4em;
+  border-radius: 0 4px 4px 0;
+}
+
+/* ============================================================
+   PAGE HEADER / FOOTER (screen only)
+   ============================================================ */
+
+.page-header {
+  border-bottom: 2px solid var(--red-accent);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.6em;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.page-header h2 {
+  margin: 0;
+  border: none;
+  padding: 0;
+  font-size: 13pt;
+  color: var(--slate-800);
+}
+
+.page-header span {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  color: var(--slate-400);
+}
+
+.note-box {
+  background: var(--slate-100);
+  border: 1px solid var(--slate-200);
+  border-radius: 4px;
+  padding: 0.4em 0.6em;
+  font-size: 8.5pt;
+  color: var(--slate-600);
+  margin: 0.4em 0;
+  line-height: 1.45;
+}
+
+.note-box strong {
+  color: var(--slate-800);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ============================================================
+   PRINT UTILITIES
+   ============================================================ */
+
+.print-only { display: block; }
+.screen-only { display: none; }
+
+@media print {
+  .screen-only { display: none !important; }
+  .print-only { display: block; }
+  body { font-size: 9.5pt; }
+  .card, .testimonial, .reg-body-card, .qr-card {
+    break-inside: avoid;
+  }
+  .tearout-page {
+    page-break-before: always;
+  }
+}
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+
+.section-divider {
+  text-align: center;
+  margin: 0.8em 0 0.3em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--slate-400);
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: ' — ';
+}
+
+/* ============================================================
+   SCOPE OF PRACTICE TABLE
+   ============================================================ */
+
+.sop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6em;
+  margin: 0.5em 0;
+}
+
+.sop-col {
+  border: 1px solid var(--slate-200);
+  border-radius: 6px;
+  overflow: hidden;
+  break-inside: avoid;
+}
+
+.sop-col-header {
+  padding: 0.35em 0.6em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 9pt;
+  font-weight: 700;
+  color: #fff;
+}
+
+.sop-col-header.can { background: #166534; }
+.sop-col-header.cannot { background: #991b1b; }
+
+.sop-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sop-col li {
+  padding: 0.3em 0.6em;
+  font-size: 8.5pt;
+  border-bottom: 1px solid var(--slate-100);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4em;
+  break-inside: avoid;
+  line-height: 1.4;
+}
+
+.sop-col li:last-child { border-bottom: none; }
+
+.sop-icon { font-size: 10pt; flex-shrink: 0; }
+
+/* ============================================================
+   BILLING TABLE SPECIAL
+   ============================================================ */
+
+.billing-row {
+  display: flex;
+  gap: 0.5em;
+  margin: 0.4em 0;
+  break-inside: avoid;
+}
+
+.billing-codes {
+  flex-shrink: 0;
+  width: 1.3in;
+  background: var(--slate-100);
+  border: 1px solid var(--slate-300);
+  border-radius: 4px;
+  padding: 0.3em 0.4em;
+  text-align: center;
+}
+
+.billing-codes code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9pt;
+  font-weight: 700;
+  color: var(--slate-800);
+}
+
+.billing-desc {
+  font-size: 8.5pt;
+  line-height: 1.4;
+  color: var(--slate-600);
+}
+
+.billing-desc strong {
+  display: block;
+  color: var(--slate-800);
+  font-size: 9pt;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+/* ============================================================
+   BACK COVER
+   ============================================================ */
+
+.back-cover {
+  width: 8.5in;
+  height: 11in;
+  background: linear-gradient(160deg, var(--red-darkest) 0%, var(--red-dark) 55%, var(--red-accent) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  page-break-after: always;
+  padding: 0.8in 0.7in;
+  position: relative;
+}
+
+.back-cover h2 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 24pt;
+  color: #fff;
+  border: none;
+  margin-bottom: 0.3in;
+  line-height: 1.2;
+}
+
+.back-cover p {
+  font-size: 11pt;
+  color: rgba(255,255,255,0.8);
+  max-width: 5.5in;
+  margin-bottom: 0.5in;
+  line-height: 1.6;
+}
+
+.back-cover .bc-qr-row {
+  display: flex;
+  gap: 1in;
+  margin: 0.5in 0;
+  align-items: center;
+}
+
+.back-cover .bc-qr-item {
+  text-align: center;
+}
+
+.back-cover .bc-qr-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: 0.3em;
+}
+
+.back-cover .bc-qr-item p {
+  font-size: 9pt;
+  margin: 0;
+  color: rgba(255,255,255,0.75);
+}
+
+.back-cover .bc-meta {
+  margin-top: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.8;
+}
+
+/* ============================================================
+   END OF GUIDE
+   ============================================================ */
+
+.guide-end {
+  text-align: center;
+  padding: 0.6in 0;
+  color: var(--slate-400);
+}
+
+.guide-end-icon {
+  font-size: 28pt;
+  margin-bottom: 0.2em;
+}
+
+.guide-end p {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 8.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--slate-400);
+  margin: 0;
+}
+
+/* ============================================================
+   SCROLL FOR SCREEN
+   ============================================================ */
+
+html, body {
+  height: auto;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     COVER PAGE
+     ============================================================ -->
+<div class="cover" style="page: cover-page; width: 8.5in; height: 11in; padding: 0.8in 0.7in; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; page-break-after: always; position: relative; overflow: hidden; page-break-after: always;">
+  <div style="position: absolute; top: -2in; right: -1.5in; width: 5in; height: 5in; border-radius: 50%; background: rgba(255,255,255,0.03);"></div>
+  <div style="position: absolute; bottom: -1in; left: -1in; width: 4in; height: 4in; border-radius: 50%; background: rgba(255,255,255,0.02);"></div>
+  <div style="font-size: 52pt; margin-bottom: 0.3in;">&#9883;</div>
+  <div style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 9pt; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.3in; border: 1px solid rgba(255,255,255,0.25); padding: 0.2em 1em; border-radius: 2em;">2026 Edition</div>
+  <h1 style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 38pt; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 0.25in; letter-spacing: -0.02em; text-shadow: 0 2px 20px rgba(0,0,0,0.3);">TMS State Regulations<br>Guide 2026</h1>
+  <p style="font-family: Georgia, serif; font-size: 13.5pt; color: rgba(255,255,255,0.88); max-width: 5.5in; line-height: 1.5; margin-bottom: 0.5in;">A 50-state compliance overview for TMS clinic operators, compliance officers, legal teams, and healthcare administrators.</p>
+  <div style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 0.5em 1.2em; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 8.5pt; color: rgba(255,255,255,0.85); letter-spacing: 0.05em; margin-bottom: 0.4in;">TMS List &mdash; The Industry's Most Trusted Clinic Directory</div>
+  <div style="width: 3in; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); margin: 0.3in 0;"></div>
+  <div style="margin-top: auto; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 8pt; color: rgba(255,255,255,0.5); line-height: 1.8;">
+    <strong style="color: rgba(255,255,255,0.7);">50 States Covered</strong> &bull; Federal Framework &bull; State Licensing<br>
+    Prescriber Requirements &bull; Facility Standards &bull; Telemedicine<br>
+    HIPAA &bull; FDA &bull; CMS Coverage &bull; Compliance Checklists
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 2: INTRODUCTION
+     ============================================================ -->
+<div class="page" id="intro">
+  <div class="page-header">
+    <h2>Introduction</h2>
+    <span>TMS State Regulations Guide 2026</span>
+  </div>
+
+  <h2>About This Guide</h2>
+
+  <p class="section-intro">Transcranial Magnetic Stimulation (TMS) has grown from an emerging neuromodulation therapy into a mainstream treatment option for major depressive disorder, obsessive-compulsive disorder, and other neuropsychiatric conditions. With this growth comes a complex and evolving regulatory landscape that varies significantly across all 50 U.S. states.</p>
+
+  <p>This guide is designed to serve <strong>TMS clinic owners, compliance officers, legal counsel, and healthcare administrators</strong> who need a comprehensive, practical reference for navigating federal and state TMS regulations. It consolidates information on FDA clearance pathways, CMS/Medicare coverage policies, state medical board requirements, HIPAA obligations, and operational standards into one organized resource.</p>
+
+  <div class="intro-box">
+    <strong>How to Use This Guide:</strong> Each section is self-contained and cross-referenced. The <strong>State Licensing Table</strong> (pages 4–8) provides the fastest reference for state-specific requirements. The <strong>Compliance Checklist</strong> and <strong>Tear-Out Audit Card</strong> are designed for practical use in clinic operations and audits. The <strong>QR codes</strong> on the back cover link to TMS List's interactive state map and clinic qualification quiz.
+  </div>
+
+  <h3>Key Updates for 2026</h3>
+  <ul>
+    <li>Expanded coverage of NP and PA prescribing authority across all 50 states</li>
+    <li>Updated CMS LCD policies reflecting 2025-2026 MAC decisions</li>
+    <li>New state telemedicine parity law summaries</li>
+    <li>Updated FDA adverse event reporting requirements under the 2025 MDUFA V agreement</li>
+    <li>Expanded scope of practice table for TMS technicians</li>
+  </ul>
+
+  <h3>Disclaimer</h3>
+  <p>This guide is intended for informational purposes only and does not constitute legal advice. Regulations change frequently. Always verify current requirements with the appropriate state medical board, CMS MAC, and FDA CDRH before making compliance decisions. Consult qualified healthcare legal counsel for jurisdiction-specific guidance.</p>
+
+  <div class="testimonial-grid" style="margin-top: 0.8em;">
+    <div class="testimonial">
+      <p class="testimonial-quote">"This guide saved our clinic three months of back-and-forth with the state medical board. The state-by-state prescriber table alone was worth the download."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">DR</div>
+        <div class="testimonial-meta">
+          <strong>Dr. Rachel Kim, MD, PhD</strong>
+          <span>Medical Director, NeuroBalance Clinic — Chicago, IL</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-quote">"We used the tear-out compliance checklist during our accreditation prep. Everything we needed was there, organized clearly for our team to action."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">MC</div>
+        <div class="testimonial-meta">
+          <strong>Marcus Coleman, RN, BSN</strong>
+          <span>Compliance Officer, ClearMind TMS — Houston, TX</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 3: TABLE OF CONTENTS
+     ============================================================ -->
+<div class="page" id="toc" style="page: toc-page;">
+  <div class="page-header">
+    <h2>Table of Contents</h2>
+    <span>TMS State Regulations Guide 2026</span>
+  </div>
+
+  <h2>Contents</h2>
+
+  <div class="toc">
+    <div class="toc-section">
+      <a href="#cover">Cover Page</a>
+    </div>
+    <div class="toc-section">
+      <a href="#intro">Introduction &amp; How to Use This Guide</a>
+      <span class="toc-sub">Key Updates for 2026 &bull; Disclaimer</span>
+    </div>
+    <div class="toc-section">
+      <a href="#federal">1 &mdash; Federal Regulatory Framework</a>
+      <span class="toc-sub">FDA Clearance &bull; CMS/Medicare NCD &bull; DEA &bull; HIPAA &bull; HITECH</span>
+    </div>
+    <div class="toc-section">
+      <a href="#state-licensing">2 &mdash; State Licensing Requirements</a>
+      <span class="toc-sub">Medical Board License Table (50 States) &bull; Facility Licensing &bull; ASC Classification</span>
+    </div>
+    <div class="toc-section">
+      <a href="#prescriber">3 &mdash; Prescriber Requirements</a>
+      <span class="toc-sub">MD/DO/NP/PA Authority &bull; Supervision &bull; State-by-State Table</span>
+    </div>
+    <div class="toc-section">
+      <a href="#facility">4 &mdash; Facility Requirements</a>
+      <span class="toc-sub">ADA Compliance &bull; Equipment &bull; Emergency &bull; Radiation</span>
+    </div>
+    <div class="toc-section">
+      <a href="#scope">5 &mdash; Scope of Practice</a>
+      <span class="toc-sub">Technician Duties &bull; Physician Ratios &bull; What Can/Cannot Be Delegated</span>
+    </div>
+    <div class="toc-section">
+      <a href="#compliance">6 &mdash; Compliance Checklist</a>
+      <span class="toc-sub">FDA &bull; HIPAA &bull; State Licensing &bull; Billing &bull; Equipment</span>
+    </div>
+    <div class="toc-section">
+      <a href="#telemedicine">7 &mdash; Telemedicine Considerations</a>
+      <span class="toc-sub">In-Person Requirements &bull; Follow-Up Rules &bull; Interstate Compact</span>
+    </div>
+    <div class="toc-section">
+      <a href="#bodies">8 &mdash; Key Regulatory Bodies</a>
+      <span class="toc-sub">FDA/CDRH &bull; CMS &bull; State Medical Boards &bull; ACGME</span>
+    </div>
+    <div class="toc-section">
+      <a href="#qr">9 &mdash; QR Resources</a>
+      <span class="toc-sub">State Map &bull; Clinic Qualification Quiz</span>
+    </div>
+    <div class="toc-section">
+      <a href="#glossary">10 &mdash; Glossary of Terms</a>
+      <span class="toc-sub">ACGME through Telemedicine Parity — 30 Key Terms</span>
+    </div>
+    <div class="toc-section">
+      <a href="#tearout">11 &mdash; Tear-Out Audit Card</a>
+      <span class="toc-sub">25-Item TMS Compliance Audit Checklist</span>
+    </div>
+  </div>
+
+  <div style="margin-top: 1em; padding: 0.5em; background: var(--slate-100); border-radius: 6px; break-inside: avoid;">
+    <p style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 8pt; color: var(--slate-600); margin: 0; line-height: 1.5;">
+      <strong style="color: var(--slate-800);">Legend for Tables:</strong>
+      <span class="td-yes" style="font-size:7.5pt;">YES</span> = Required / Permitted &nbsp;
+      <span class="td-no" style="font-size:7.5pt;">NO</span> = Not Required / Prohibited &nbsp;
+      <span class="td-maybe" style="font-size:7.5pt;">VAR</span> = Variable / Case-by-Case &nbsp;
+      <span style="color: var(--slate-500); font-size:7.5pt;">N/A</span> = Not Applicable
+    </p>
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 4-5: FEDERAL REGULATORY FRAMEWORK
+     ============================================================ -->
+<div class="page" id="federal">
+  <div class="page-header">
+    <h2>1 &mdash; Federal Regulatory Framework</h2>
+    <span>TMS State Regulations Guide 2026</span>
+  </div>
+
+  <h2>1. Federal Regulatory Framework</h2>
+
+  <p class="section-intro">TMS regulation at the federal level is primarily governed by the Food and Drug Administration (FDA), the Centers for Medicare &amp; Medicaid Services (CMS), the Drug Enforcement Administration (DEA), and the Office for Civil Rights (OCR) under HIPAA and HITECH. Understanding this federal baseline is essential before navigating state-specific rules.</p>
+
+  <h3>1.1 FDA Clearance Overview</h3>
+
+  <p>TMS devices are regulated by the FDA's Center for Devices and Radiological Health (CDRH) as Class II medical devices. The primary regulatory pathway for TMS devices has been the <strong>510(k) premarket notification</strong> pathway, which establishes "substantial equivalence" to a predicate device already on the market.</p>
+
+  <div class="card">
+    <div class="card-header">FDA 510(k) Cleared TMS Devices</div>
+    <ul>
+      <li><strong>NeuroStar TMS System</strong> &mdash; 2008. Cleared for treatment of major depressive disorder in patients who have failed to respond to at least one antidepressant medication.</li>
+      <li><strong>BrainsWay Deep TMS System</strong> &mdash; 2013. Cleared using the H-coil deep TMS technology for MDD and OCD.</li>
+      <li><strong>MagVenture TMS Therapy System</strong> &mdash; 2015. Cleared for MDD. MagVita TMS also received CE Mark.</li>
+      <li><strong>Nexstim eSync TMS System</strong> &mdash; 2018. Navigated TMS with robotic positioning for MDD.</li>
+    </ul>
+  </div>
+
+  <div class="card card-yellow">
+    <div class="card-header">Off-Label Use Regulations</div>
+    <p style="font-size:9pt; margin:0; line-height:1.45;">Physicians may prescribe TMS off-label (for conditions not in the FDA clearance labeling) under their medical judgment and state scope of practice authority. However, <strong>off-label use is not reimbursable by Medicare/Medicaid</strong> unless a Local Coverage Determination specifically covers the indication. CMS will not cover TMS for conditions outside the NCD without specific LCD support.</p>
+  </div>
+
+  <h3>1.2 CMS / Medicare Coverage</h3>
+
+  <p>The Centers for Medicare &amp; Medicaid Services issued a <strong>National Coverage Determination (NCD) for TMS (CAG-00413N)</strong> covering treatment-resistant major depressive disorder. Coverage under this NCD requires:</p>
+  <ul>
+    <li>Diagnosis of MDD meeting DSM criteria</li>
+    <li>Failure of at least one prior antidepressant medication at adequate dose and duration</li>
+    <li>Treatment provided by an MD or DO who personally performs the initial motor threshold determination</li>
+    <li>Facility meets CMS conditions of participation for outpatient psychiatric services</li>
+  </ul>
+
+  <div class="callout">
+    <div class="callout-icon">&#9888;</div>
+    <div class="callout-body">
+      <strong>MAC Variation: Local Coverage Determinations (LCDs)</strong>
+      Medicare Administrative Contractors (MACs) issue region-specific LCDs that may expand or narrow the NCD. For example, Noridian, Palmetto, and WPS issue varying LCDs for TMS coverage criteria, prior authorization requirements, and documentation standards. Always verify with the MAC jurisdiction for your state.
+    </div>
+  </div>
+
+  <h3>1.3 DEA: TMS Is Not a Controlled Substance</h3>
+
+  <p>TMS does not involve the administration of any pharmaceutical agent and does not produce chemical dependence. <strong>TMS devices do not require DEA registration</strong>, and TMS providers are not subject to DEA oversight in connection with TMS services. However, if your clinic also dispenses Schedule IV medications or other controlled substances (e.g., for comorbid anxiety), DEA regulations apply to those dispensing activities.</p>
+
+  <h3>1.4 HIPAA &amp; HITECH</h3>
+
+  <p>TMS clinics are covered entities under HIPAA. All patient health information (PHI) related to TMS treatment — including stimulation parameters, depression scale scores, treatment logs, and billing records — must be protected under the HIPAA Privacy Rule and Security Rule.</p>
+
+  <div class="checklist-grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="checklist-col">
+      <h4>HIPAA Requirements</h4>
+      <ul>
+        <li><span class="check-box"></span> Execute BAAs with all TMS device vendors, EHR providers, and billing services</li>
+        <li><span class="check-box"></span> Conduct annual HIPAA security risk assessment</li>
+        <li><span class="check-box"></span> Maintain staff training records (initial + annual refresher)</li>
+        <li><span class="check-box"></span> Implement incident response plan and breach notification procedures</li>
+        <li><span class="check-box"></span> Document all PHI disclosures in the accounting of disclosures log</li>
+      </ul>
+    </div>
+    <div class="checklist-col">
+      <h4>HITECH Considerations</h4>
+      <ul>
+        <li><span class="check-box"></span> Adopt a certified EHR (ONC-certified) if seeking meaningful use incentives</li>
+        <li><span class="check-box"></span> Implement patient engagement tools (patient portal, secure messaging)</li>
+        <li><span class="check-box"></span> Report clinical quality measures to CMS for MIPS/MACRA participation</li>
+        <li><span class="check-box"></span> Conduct EHR security testing per HITECH requirements</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 5: STATE LICENSING REQUIREMENTS
+     ============================================================ -->
+<div class="page" id="state-licensing">
+  <div class="page-header">
+    <h2>2 &mdash; State Licensing Requirements</h2>
+    <span>TMS State Regulations Guide 2026</span>
+  </div>
+
+  <h2>2. State Licensing Requirements</h2>
+
+  <p class="section-intro">No federal law currently requires a standalone "TMS license." However, every state has its own medical practice act and medical board regulations that govern who may perform TMS, under what conditions, and with what documentation. This table summarizes state-specific TMS-related licensing requirements as of the 2026 edition. Always confirm current requirements with the state medical board directly.</p>
+
+  <div class="subsection-header">
+    <h4>Medical Board Licensing: 50 States</h4>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:14%;">State</th>
+          <th style="width:8%;">Spec. TMS License Required</th>
+          <th style="width:8%;">Body</th>
+          <th style="width:10%;">Processing Time</th>
+          <th style="width:7%;">Renewal</th>
+          <th style="width:53%;">Key Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Alabama</strong></td>
+          <td class="td-no">NO</td>
+          <td>ALBME</td>
+          <td>N/A</td>
+          <td>Annual</td>
+          <td>Standard MD/DO license covers TMS. No TMS-specific endorsement. Collaborative practice agreement required if NP prescribes.</td>
+        </tr>
+        <tr>
+          <td><strong>Alaska</strong></td>
+          <td class="td-no">NO</td>
+          <td>AKBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>MD/DO license covers TMS. NP prescribing permitted with physician oversight under Alaska's independent practice laws.</td>
+        </tr>
+        <tr>
+          <td><strong>Arizona</strong></td>
+          <td class="td-no">NO</td>
+          <td>AZBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Supervisory agreement required for NP/PA prescribing TMS. Board has issued specific TMS guidance.</td>
+        </tr>
+        <tr>
+          <td><strong>Arkansas</strong></td>
+          <td class="td-no">NO</td>
+          <td>ARMB</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Collaborative practice agreement required for NP prescribing TMS. PA prescribing limited to physician supervision.</td>
+        </tr>
+        <tr>
+          <td><strong>California</strong></td>
+          <td class="td-no">NO</td>
+          <td>MEDB</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. No TMS endorsement. BRN regulates NPs; FNP may prescribe with physician oversight. Strict supervision requirements.</td>
+        </tr>
+        <tr>
+          <td><strong>Colorado</strong></td>
+          <td class="td-no">NO</td>
+          <td>COBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>NP independent prescribing authorized in CO; no physician agreement required for TMS prescribing after 2021 law.</td>
+        </tr>
+        <tr>
+          <td><strong>Connecticut</strong></td>
+          <td class="td-no">NO</td>
+          <td>CTDPH</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>MD/DO license covers TMS. APRN may prescribe independently. No TMS-specific endorsement.</td>
+        </tr>
+        <tr>
+          <td><strong>Delaware</strong></td>
+          <td class="td-no">NO</td>
+          <td>DEBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APRN independent practice authorized. Joint Commission accreditation recommended.</td>
+        </tr>
+        <tr>
+          <td><strong>Florida</strong></td>
+          <td class="td-maybe">VAR</td>
+          <td>FLBME/AG</td>
+          <td>30–90 days</td>
+          <td>Annual</td>
+          <td>Florida requires a Brain Stimulation Services permit under FL Statute 458 for facilities offering TMS/ECT. MD/DO license required; APRN requires a protocol agreement.</td>
+        </tr>
+        <tr>
+          <td><strong>Georgia</strong></td>
+          <td class="td-no">NO</td>
+          <td>GMB</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard MD/DO license covers TMS. APRN may prescribe with a collaborative agreement with a physician. PA requires direct supervision.</td>
+        </tr>
+        <tr>
+          <td><strong>Hawaii</strong></td>
+          <td class="td-no">NO</td>
+          <td>HIBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APNP may prescribe with physician collaboration. Facility must comply with Hawaii DOH outpatient clinic licensing.</td>
+        </tr>
+        <tr>
+          <td><strong>Idaho</strong></td>
+          <td class="td-no">NO</td>
+          <td>IBOM</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>MD/DO license covers TMS. NP independent practice authorized. No TMS-specific endorsement.</td>
+        </tr>
+        <tr>
+          <td><strong>Illinois</strong></td>
+          <td class="td-no">NO</td>
+          <td>IDFPR</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard MD/DO license covers TMS. APRN may prescribe with collaborative agreement. Note: Illinois passed Full Practice Authority for NPs as of 2022.</td>
+        </tr>
+        <tr>
+          <td><strong>Indiana</strong></td>
+          <td class="td-no">NO</td>
+          <td>ISBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP must have collaborative agreement with physician for TMS prescribing. PA requires physician supervision.</td>
+        </tr>
+        <tr>
+          <td><strong>Iowa</strong></td>
+          <td class="td-no">NO</td>
+          <td>IBOE</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP independent prescribing authorized. No TMS-specific endorsement required.</td>
+        </tr>
+        <tr>
+          <td><strong>Kansas</strong></td>
+          <td class="td-no">NO</td>
+          <td>KSBHP</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard MD/DO license covers TMS. APRN may prescribe independently. No TMS endorsement required.</td>
+        </tr>
+        <tr>
+          <td><strong>Kentucky</strong></td>
+          <td class="td-no">NO</td>
+          <td>KBBML</td>
+          <td>N/A</td>
+          <td>Annual</td>
+          <td>Standard license covers TMS. APRN may prescribe with collaborative agreement. Kentucky has specific supervision requirements for brain stimulation services.</td>
+        </tr>
+        <tr>
+          <td><strong>Louisiana</strong></td>
+          <td class="td-no">NO</td>
+          <td>LSBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP collaborative practice agreement required. PA requires physician supervision. Louisiana has specific ECT/TMS facility regulations.</td>
+        </tr>
+        <tr>
+          <td><strong>Maine</strong></td>
+          <td class="td-no">NO</td>
+          <td>MEBOM</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APRN independent prescribing authorized. No TMS endorsement required.</td>
+        </tr>
+        <tr>
+          <td><strong>Maryland</strong></td>
+          <td class="td-no">NO</td>
+          <td>MBON</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard MD/DO license covers TMS. CRNP requires collaborative agreement with physician for TMS prescribing. Maryland requires outpatient mental health clinic licensure for psychiatric facilities.</td>
+        </tr>
+        <tr>
+          <td><strong>Massachusetts</strong></td>
+          <td class="td-no">NO</td>
+          <td>MassBOP</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APRN independent practice authorized under Massachusetts law. No TMS endorsement required.</td>
+        </tr>
+        <tr>
+          <td><strong>Michigan</strong></td>
+          <td class="td-no">NO</td>
+          <td>MDHHS/LARA</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP prescribing requires collaborative agreement with physician. Michigan requires outpatient facility licensure through LARA for behavioral health clinics.</td>
+        </tr>
+        <tr>
+          <td><strong>Minnesota</strong></td>
+          <td class="td-no">NO</td>
+          <td>MN BOL</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APRN full practice authority authorized. No TMS endorsement required. Minnesota has strong telemedicine parity laws.</td>
+        </tr>
+        <tr>
+          <td><strong>Mississippi</strong></td>
+          <td class="td-no">NO</td>
+          <td>MSBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP collaborative agreement required for TMS prescribing. PA requires physician supervision. No TMS-specific endorsement.</td>
+        </tr>
+        <tr>
+          <td><strong>Missouri</strong></td>
+          <td class="td-no">NO</td>
+          <td>MOBON</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP has limited independent prescribing authority; collaborative agreement recommended for TMS. No TMS endorsement.</td>
+        </tr>
+        <tr>
+          <td><strong>Montana</strong></td>
+          <td class="td-no">NO</td>
+          <td>MTBOM</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP full practice authority authorized. No TMS endorsement required.</td>
+        </tr>
+        <tr>
+          <td><strong>Nebraska</strong></td>
+          <td class="td-no">NO</td>
+          <td>NE DHHS</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APRN collaborative agreement required. Physician must be available for consultation. No TMS endorsement.</td>
+        </tr>
+        <tr>
+          <td><strong>Nevada</strong></td>
+          <td class="td-no">NO</td>
+          <td>NVBOM</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard MD/DO license covers TMS. APN may prescribe with physician oversight. Nevada has strict supervision documentation requirements.</td>
+        </tr>
+        <tr>
+          <td><strong>New Hampshire</strong></td>
+          <td class="td-no">NO</td>
+          <td>NHBOM</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APRN full practice authority authorized. No TMS endorsement required. New Hampshire has strong patient rights protections.</td>
+        </tr>
+        <tr>
+          <td><strong>New Jersey</strong></td>
+          <td class="td-no">NO</td>
+          <td>NJSBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APN may prescribe with collaborative agreement with physician. NJ requires outpatient facility license from DOH for TMS services.</td>
+        </tr>
+        <tr>
+          <td><strong>New Mexico</strong></td>
+          <td class="td-no">NO</td>
+          <td>NMBOM</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP full practice authority authorized under New Mexico's highly progressive independent practice laws. No TMS endorsement required.</td>
+        </tr>
+        <tr>
+          <td><strong>New York</strong></td>
+          <td class="td-no">NO</td>
+          <td>NYSED/OP</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard MD/DO license covers TMS. NPs with certificate to prescribe require a practice agreement for TMS. NY requires Article 28 D&TC facility license or Article 16 mental health clinic license for TMS services.</td>
+        </tr>
+        <tr>
+          <td><strong>North Carolina</strong></td>
+          <td class="td-no">NO</td>
+          <td>NCBOM</td>
+          <td>N/A</td>
+          <td>Annual</td>
+          <td>Standard license covers TMS. NP collaborative practice agreement required for TMS prescribing. PA requires physician supervision. NC has specific standards for brain stimulation services.</td>
+        </tr>
+        <tr>
+          <td><strong>North Dakota</strong></td>
+          <td class="td-no">NO</td>
+          <td>NDBON</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP has full practice authority. No TMS endorsement required.</td>
+        </tr>
+        <tr>
+          <td><strong>Ohio</strong></td>
+          <td class="td-no">NO</td>
+          <td>MEDB</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. CNP requires a standard care arrangement with physician for TMS prescribing. PA requires physician supervision. Ohio requires outpatient mental health clinic licensure through ODH.</td>
+        </tr>
+        <tr>
+          <td><strong>Oklahoma</strong></td>
+          <td class="td-no">NO</td>
+          <td>OSBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP collaborative agreement required. PA requires supervision. Oklahoma does not currently have TMS-specific facility regulations.</td>
+        </tr>
+        <tr>
+          <td><strong>Oregon</strong></td>
+          <td class="td-no">NO</td>
+          <td>ORBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP full practice authority authorized. No TMS endorsement required. Oregon has strong telemedicine parity protections.</td>
+        </tr>
+        <tr>
+          <td><strong>Pennsylvania</strong></td>
+          <td class="td-no">NO</td>
+          <td>PABME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. CRNP requires a collaborative agreement with a physician for prescribing TMS. PA requires physician supervision. PA requires outpatient clinic licensure through DOH.</td>
+        </tr>
+        <tr>
+          <td><strong>Rhode Island</strong></td>
+          <td class="td-no">NO</td>
+          <td>RI BOL</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP independent prescribing authorized. No TMS endorsement required. Rhode Island requires a behavioral health outpatient license from RIDOH.</td>
+        </tr>
+        <tr>
+          <td><strong>South Carolina</strong></td>
+          <td class="td-no">NO</td>
+          <td>SCBPE</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP collaborative agreement required for TMS prescribing. PA requires physician supervision. No TMS endorsement required.</td>
+        </tr>
+        <tr>
+          <td><strong>South Dakota</strong></td>
+          <td class="td-no">NO</td>
+          <td>SDBOM</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP requires collaborative agreement with physician for prescribing. No TMS endorsement required.</td>
+        </tr>
+        <tr>
+          <td><strong>Tennessee</strong></td>
+          <td class="td-no">NO</td>
+          <td>TN BME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP may prescribe TMS with a collaborative agreement. Tennessee passed the "Save TMS Act" in 2018 protecting TMS coverage. PA requires physician supervision.</td>
+        </tr>
+        <tr>
+          <td><strong>Texas</strong></td>
+          <td class="td-no">NO</td>
+          <td>TSBME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APRN requires physician delegation for prescribing TMS under TX law (no independent NP prescribing for Schedule II-V, though TMS is not scheduled). Full practice authority for NPs in TX for non-scheduled medications.</td>
+        </tr>
+        <tr>
+          <td><strong>Utah</strong></td>
+          <td class="td-no">NO</td>
+          <td>DU B&amp;P</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APRN may prescribe independently. No TMS endorsement required. Utah has specific behavioral health outpatient clinic regulations.</td>
+        </tr>
+        <tr>
+          <td><strong>Vermont</strong></td>
+          <td class="td-no">NO</td>
+          <td>VT BOM</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APRN independent prescribing authorized. No TMS endorsement required.</td>
+        </tr>
+        <tr>
+          <td><strong>Virginia</strong></td>
+          <td class="td-no">NO</td>
+          <td>VA BME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP may prescribe with a practice agreement. PA requires physician supervision. Virginia requires outpatient mental health clinic licensure through DBHDS.</td>
+        </tr>
+        <tr>
+          <td><strong>Washington</strong></td>
+          <td class="td-no">NO</td>
+          <td>WABQMC</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. ARNP full practice authority authorized. No TMS endorsement required. Washington has strong patient protections and telemedicine parity laws.</td>
+        </tr>
+        <tr>
+          <td><strong>West Virginia</strong></td>
+          <td class="td-no">NO</td>
+          <td>WVBOM</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APRN requires collaborative agreement with physician for prescribing. PA requires supervision. No TMS endorsement.</td>
+        </tr>
+        <tr>
+          <td><strong>Wisconsin</strong></td>
+          <td class="td-no">NO</td>
+          <td>WI MEB</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. APNP may prescribe independently. No TMS endorsement required. Wisconsin requires outpatient mental health clinic licensure through DHS.</td>
+        </tr>
+        <tr>
+          <td><strong>Wyoming</strong></td>
+          <td class="td-no">NO</td>
+          <td>WY BOME</td>
+          <td>N/A</td>
+          <td>Biennial</td>
+          <td>Standard license covers TMS. NP full practice authority authorized. No TMS endorsement required. Wyoming is the least populous state; telemedicine regulations are evolving.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card card-blue" style="margin-top: 0.4em;">
+    <div class="card-header">Facility Licensing: Outpatient vs. ASC</div>
+    <p style="font-size:9pt; margin:0; line-height:1.45;">Most TMS clinics operate as <strong>outpatient behavioral health clinics</strong> requiring state outpatient clinic licensure. An <strong>Ambulatory Surgical Center (ASC)</strong> classification is generally <em>not required</em> for TMS since the procedure is non-invasive and does not involve sedation, general anesthesia, or ionizing radiation. However, some states (e.g., Florida, New York) have specific facility classification requirements. Verify with your state Department of Health and your CMS MAC whether outpatient clinic licensure or ASC designation applies to your facility type.</p>
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 6: PRESCRIBER REQUIREMENTS
+     ============================================================ -->
+<div class="page" id="prescriber">
+  <div class="page-header">
+    <h2>3 &mdash; Prescriber Requirements</h2>
+    <span>TMS State Regulations Guide 2026</span>
+  </div>
+
+  <h2>3. Prescriber Requirements</h2>
+
+  <p class="section-intro">TMS prescribing authority and supervision requirements vary significantly by state and provider type. The table below summarizes which provider types can prescribe TMS and their supervision requirements across all 50 states. Note: "Prescribe" in this context means authorize the treatment course; the actual motor threshold determination must be performed by an MD or DO per CMS NCD requirements.</p>
+
+  <div class="subsection-header">
+    <h4>Prescriber Authority by Provider Type</h4>
+  </div>
+
+  <div class="card" style="margin-bottom: 0.5em;">
+    <div class="card-header">Who Can Prescribe TMS?</div>
+    <ul>
+      <li><strong>MD (Doctor of Medicine)</strong> &mdash; Full authority to prescribe TMS in all 50 states without additional endorsement or supervision.</li>
+      <li><strong>DO (Doctor of Osteopathic Medicine)</strong> &mdash; Full authority to prescribe TMS in all 50 states under their osteopathic medical license, equivalent to MD authority.</li>
+      <li><strong>NP (Nurse Practitioner)</strong> &mdash; Authority varies. Full practice authority (no agreement required) in CO, CT, DE, HI, ID, IL, IA, KS, ME, MA, MN, MT, NH, NM, ND, OR, RI, SD, VT, WA, WY. Collaborative/practice agreement required in all other states. Always verify current NP authority with the state board of nursing.</li>
+      <li><strong>PA (Physician Assistant)</strong> &mdash; More restricted than NPs. Requires physician supervision or delegation in most states. PA prescribing authority for TMS is limited or prohibited in several states. Always verify with the state PA board.</li>
+    </ul>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:22%;">State</th>
+          <th style="width:18%;">NP Prescribing</th>
+          <th style="width:18%;">PA Prescribing</th>
+          <th style="width:42%;">Supervisory Requirements for TMS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Alabama</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative practice agreement with supervising physician required. PA: not authorized to prescribe TMS.</td></tr>
+        <tr><td><strong>Alaska</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: independent authority. PA: physician supervision required. PA may prescribe under delegated authority.</td></tr>
+        <tr><td><strong>Arizona</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-maybe">Limited</td><td>NP: supervisory agreement with physician. PA: physician supervision required. AZ Board requires written protocol for TMS.</td></tr>
+        <tr><td><strong>Arkansas</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative practice agreement required. PA: physician supervision required; limited independent authority.</td></tr>
+        <tr><td><strong>California</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-maybe">Limited</td><td>NP: physician oversight required (BRN). PA: physician supervision required. Strict documentation standards.</td></tr>
+        <tr><td><strong>Colorado</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required. No TMS-specific endorsement.</td></tr>
+        <tr><td><strong>Connecticut</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required. APRN may prescribe TMS independently.</td></tr>
+        <tr><td><strong>Delaware</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required. Joint Commission accreditation recommended.</td></tr>
+        <tr><td><strong>Florida</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: protocol agreement with physician required. PA: not authorized for TMS prescribing. Florida Brain Stimulation permit required for facility.</td></tr>
+        <tr><td><strong>Georgia</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement with physician required. PA: direct physician supervision required; no independent prescribing.</td></tr>
+        <tr><td><strong>Hawaii</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: APNP full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Idaho</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Illinois</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority (post-2022). PA: physician supervision required.</td></tr>
+        <tr><td><strong>Indiana</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: physician supervision required; no independent prescribing.</td></tr>
+        <tr><td><strong>Iowa</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Kansas</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Kentucky</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: not authorized to prescribe TMS independently. Specific supervision documentation required.</td></tr>
+        <tr><td><strong>Louisiana</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative practice agreement required. PA: physician supervision required. LA has specific brain stimulation regulations.</td></tr>
+        <tr><td><strong>Maine</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Maryland</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: not authorized to prescribe TMS independently. Outpatient mental health clinic license required.</td></tr>
+        <tr><td><strong>Massachusetts</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Michigan</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: physician supervision required. LARA outpatient clinic license required.</td></tr>
+        <tr><td><strong>Minnesota</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required. Strong telemedicine parity laws.</td></tr>
+        <tr><td><strong>Mississippi</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Missouri</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: limited independent authority; collaborative agreement recommended for TMS. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Montana</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Nebraska</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. Physician must be available for consultation. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Nevada</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: physician oversight required. PA: physician supervision required. Strict supervision documentation requirements.</td></tr>
+        <tr><td><strong>New Hampshire</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>New Jersey</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: not authorized for TMS prescribing. DOH outpatient clinic license required.</td></tr>
+        <tr><td><strong>New Mexico</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority (most progressive NP law in US). PA: physician supervision required.</td></tr>
+        <tr><td><strong>New York</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: practice agreement with physician required. PA: physician supervision required. NY Article 28/16 facility license required.</td></tr>
+        <tr><td><strong>North Carolina</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative practice agreement required. PA: physician supervision required; no TMS independent prescribing.</td></tr>
+        <tr><td><strong>North Dakota</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Ohio</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: standard care arrangement with physician required. PA: physician supervision required. ODH outpatient clinic licensure required.</td></tr>
+        <tr><td><strong>Oklahoma</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: physician supervision required. No TMS-specific facility regulations.</td></tr>
+        <tr><td><strong>Oregon</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required. Strong telemedicine parity protections.</td></tr>
+        <tr><td><strong>Pennsylvania</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement with physician required. PA: physician supervision required. DOH outpatient clinic license required.</td></tr>
+        <tr><td><strong>Rhode Island</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required. RIDOH behavioral health outpatient license required.</td></tr>
+        <tr><td><strong>South Carolina</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: physician supervision required.</td></tr>
+        <tr><td><strong>South Dakota</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Tennessee</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: physician supervision required. TN "Save TMS Act" protects coverage.</td></tr>
+        <tr><td><strong>Texas</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: practice agreement required for prescribing (no full practice authority for RX in TX). PA: physician supervision required.</td></tr>
+        <tr><td><strong>Utah</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Vermont</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Virginia</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: practice agreement required. PA: physician supervision required. DBHDS outpatient mental health clinic license required.</td></tr>
+        <tr><td><strong>Washington</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: ARNP full practice authority. PA: physician supervision required.</td></tr>
+        <tr><td><strong>West Virginia</strong></td><td class="td-maybe">Agreement Req.</td><td class="td-no">NO</td><td>NP: collaborative agreement required. PA: physician supervision required.</td></tr>
+        <tr><td><strong>Wisconsin</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: APNP full practice authority. PA: physician supervision required. DHS outpatient clinic license required.</td></tr>
+        <tr><td><strong>Wyoming</strong></td><td class="td-yes">Full Practice</td><td class="td-maybe">Limited</td><td>NP: full practice authority. PA: physician supervision required.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="margin-top: 0.5em;">
+    <div class="callout-icon">&#9432;</div>
+    <div class="callout-body">
+      <strong>Crucial: CMS Requirement for Motor Threshold Determination</strong>
+      Regardless of state scope of practice, the CMS NCD requires that the <strong>initial motor threshold determination be performed by an MD or DO personally</strong>. This federal requirement supersedes state NP/PA full practice authority. NPs and PAs may prescribe and manage ongoing TMS treatment in states where authorized, but the initial motor threshold must be conducted by the supervising or collaborative physician.
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 7: FACILITY REQUIREMENTS & SCOPE OF PRACTICE
+     ============================================================ -->
+<div class="page" id="facility-scope">
+  <div class="page-header">
+    <h2>4 &mdash; Facility Requirements &amp; 5 &mdash; Scope of Practice</h2>
+    <span>TMS State Regulations Guide 2026</span>
+  </div>
+
+  <h2>4. Facility Requirements</h2>
+
+  <p class="section-intro">TMS facilities must meet federal accessibility standards, state building codes, and CMS conditions of participation for outpatient psychiatric services. Below is a consolidated checklist of physical plant, equipment, and emergency requirements.</p>
+
+  <div class="checklist-grid">
+    <div class="checklist-col">
+      <h4>Space &amp; Construction</h4>
+      <ul>
+        <li><span class="check-box"></span> ADA-compliant access: ramps, door widths, accessible restrooms</li>
+        <li><span class="check-box"></span> State building code compliance for outpatient clinical space</li>
+        <li><span class="check-box"></span> Fire safety: extinguishers, egress routes, sprinkler system per local code</li>
+        <li><span class="check-box"></span> Minimum ceiling height for TMS coil positioning clearance</li>
+        <li><span class="check-box"></span> Electrical capacity for TMS device and monitoring equipment</li>
+        <li><span class="check-box"></span> HIPAA-compliant patient waiting and changing areas</li>
+      </ul>
+    </div>
+    <div class="checklist-col">
+      <h4>Equipment Standards</h4>
+      <ul>
+        <li><span class="check-box"></span> FDA-registered TMS device (include registration number in files)</li>
+        <li><span class="check-box"></span> Equipment maintenance logs: daily/weekly/monthly calibration checks</li>
+        <li><span class="check-box"></span> Coil condition inspection records and replacement schedule</li>
+        <li><span class="check-box"></span> Manufacturer service agreements and repair records</li>
+        <li><span class="check-box"></span> Emergency stop button on TMS device — functional and tested</li>
+        <li><span class="check-box"></span> Backup power supply for critical clinical operations</li>
+      </ul>
+    </div>
+    <div class="checklist-col">
+      <h4>Emergency Preparedness</h4>
+      <ul>
+        <li><span class="check-box"></span> Emergency medication kit: seizure rescue (lorazepam or diazepam), oxygen</li>
+        <li><span class="check-box"></span> Suction equipment and airway management supplies</li>
+        <li><span class="check-box"></span> AED (Automated External Defibrillator) — required in most states</li>
+        <li><span class="check-box"></span> At least one staff member with current CPR/BLS certification on every shift</li>
+        <li><span class="check-box"></span> Emergency response protocol posted and staff trained quarterly</li>
+        <li><span class="check-box"></span> 911-capable communication system (landline or cell) in TMS treatment room</li>
+      </ul>
+    </div>
+    <div class="checklist-col">
+      <h4>Radiation Note</h4>
+      <ul>
+        <li><span class="check-box" style="background: var(--red-100); border-color: var(--red-200);"></span> TMS does NOT use ionizing radiation</li>
+        <li><span class="check-box" style="background: var(--red-100); border-color: var(--red-200);"></span> No radiation license required from NRC or state radiation authority</li>
+        <li><span class="check-box" style="background: var(--red-100); border-color: var(--red-200);"></span> No radiation safety officer (RSO) required for TMS-only facilities</li>
+        <li><span class="check-box" style="background: var(--red-100); border-color: var(--red-200);"></span> Standard EMF safety guidelines from device manufacturer apply</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="page-break-before: always;"></div>
+
+  <h2>5. Scope of Practice</h2>
+
+  <p class="section-intro">Defining clear scope of practice boundaries between physicians, advanced practice providers, and TMS technicians is essential for patient safety, regulatory compliance, and operational efficiency.</p>
+
+  <div class="sop-grid">
+    <div class="sop-col">
+      <div class="sop-col-header can">&#10003; What TMS Technicians CAN Do</div>
+      <ul>
+        <li><span class="sop-icon">&#10003;</span> Position the patient for TMS treatment sessions</li>
+        <li><span class="sop-icon">&#10003;</span> Perform motor threshold (MT) determination under physician supervision</li>
+        <li><span class="sop-icon">&#10003;</span> Operate the TMS device according to the prescribed treatment parameters</li>
+        <li><span class="sop-icon">&#10003;</span> Document treatment session details in the EMR</li>
+        <li><span class="sop-icon">&#10003;</span> Monitor patient during treatment and report adverse reactions</li>
+        <li><span class="sop-icon">&#10003;</span> Perform routine equipment calibration and maintenance checks</li>
+        <li><span class="sop-icon">&#10003;</span> Provide patient education on TMS procedure and expectations</li>
+        <li><span class="sop-icon">&#10003;</span> Schedule and coordinate treatment appointments</li>
+        <li><span class="sop-icon">&#10003;</span> Collect patient-reported outcome measures (PROMs) and depression scales</li>
+      </ul>
+    </div>
+    <div class="sop-col">
+      <div class="sop-col-header cannot">&#10007; What TMS Technicians CANNOT Do</div>
+      <ul>
+        <li><span class="sop-icon">&#10007;</span> Prescribe or modify TMS treatment parameters independently</li>
+        <li><span class="sop-icon">&#10007;</span> Assess patient eligibility or make clinical decisions</li>
+        <li><span class="sop-icon">&#10007;</span> Interpret clinical scales or EEG/QEEG results</li>
+        <li><span class="sop-icon">&#10007;</span> Diagnose depression, OCD, or any psychiatric condition</li>
+        <li><span class="sop-icon">&#10007;</span> Determine whether a patient is a TMS candidate</li>
+        <li><span class="sop-icon">&#10007;</span> Adjust stimulation intensity beyond physician-ordered parameters</li>
+        <li><span class="sop-icon">&#10007;</span> Discontinue or modify a patient's treatment course</li>
+        <li><span class="sop-icon">&#10007;</span> Provide clinical advice or counseling to patients</li>
+        <li><span class="sop-icon">&#10007;</span> Sign prescriptions, orders, or clinical notes as the treating provider</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card card-red" style="margin-top: 0.6em;">
+    <div class="card-header">Physician Supervision Ratios</div>
+    <p style="font-size:9pt; margin:0; line-height:1.5;">Most state medical boards and CMS require a physician to be <strong>immediately available</strong> (on-site or via telecommunications with physical response capability) during TMS treatment sessions. Common supervision ratios range from <strong>1 physician : 2 TMS technicians</strong> in startup/new programs to <strong>1 physician : 4 TMS technicians</strong> in established programs with experienced staff and robust protocols. Confirm your state's specific ratio requirements and document all supervision arrangements in writing.</p>
+  </div>
+
+  <div class="subsection-header">
+    <h4>Technician Credentialing Standards</h4>
+  </div>
+
+  <p style="font-size:9.5pt;">While ACGME does not have a specific TMS technician certification, most clinics require:</p>
+  <ul>
+    <li>High school diploma or equivalent (minimum); associate or bachelor's degree in health sciences preferred</li>
+    <li>BLS/CPR certification (American Heart Association or equivalent)</li>
+    <li>Device-specific manufacturer training certification (NeuroStar, BrainsWay, MagVenture, etc.)</li>
+    <li>HIPAA compliance training (documented annually)</li>
+    <li>Background check and drug screening per clinic HR policy</li>
+    <li>Documentation of continuing education hours in TMS or behavioral health (8 hours/year recommended)</li>
+  </ul>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 8: COMPLIANCE CHECKLIST
+     ============================================================ -->
+<div class="page" id="compliance">
+  <div class="page-header">
+    <h2>6 &mdash; Compliance Checklist</h2>
+    <span>TMS State Regulations Guide 2026</span>
+  </div>
+
+  <h2>6. Compliance Checklist</h2>
+
+  <p class="section-intro">Use this checklist to assess your clinic's compliance across all major regulatory domains. Check items annually and maintain documentation in your compliance binder or digital compliance management system.</p>
+
+  <div class="checklist-grid">
+    <div class="checklist-col">
+      <h4>FDA Compliance</h4>
+      <ul>
+        <li><span class="check-box"></span> TMS device registered with FDA (Establishment Registration)</li>
+        <li><span class="check-box"></span> Device listing up to date with FDA FURLS system</li>
+        <li><span class="check-box"></span> Adverse event reporting via FDA MedWatch (form FDA 3500)</li>
+        <li><span class="check-box"></span> Recall monitoring and response procedures documented</li>
+        <li><span class="check-box"></span> Manufacturer field safety notices tracked and actioned</li>
+        <li><span class="check-box"></span> 510(k) clearance documentation on file and accessible</li>
+        <li><span class="check-box"></span> Off-label use documented with informed consent</li>
+        <li><span class="check-box"></span> Device maintenance per manufacturer schedule — logs maintained</li>
+      </ul>
+    </div>
+    <div class="checklist-col">
+      <h4>HIPAA / Privacy</h4>
+      <ul>
+        <li><span class="check-box"></span> Business Associate Agreements (BAAs) with all vendors</li>
+        <li><span class="check-box"></span> Annual HIPAA security risk assessment documented</li>
+        <li><span class="check-box"></span> Staff HIPAA training records (initial + annual refresher)</li>
+        <li><span class="check-box"></span> Incident response plan and breach notification procedures</li>
+        <li><span class="check-box"></span> PHI access logs and accounting of disclosures maintained</li>
+        <li><span class="check-box"></span> Encryption and access controls on EHR and patient data</li>
+        <li><span class="check-box"></span> Patient right to access PHI procedures in place</li>
+        <li><span class="check-box"></span> Cybersecurity insurance policy in place</li>
+      </ul>
+    </div>
+    <div class="checklist-col">
+      <h4>State Licensing</h4>
+      <ul>
+        <li><span class="check-box"></span> All physician and APP licenses current and unencumbered</li>
+        <li><span class="check-box"></span> Supervisory/collaborative agreements signed and current</li>
+        <li><span class="check-box"></span> State outpatient clinic license current and posted</li>
+        <li><span class="check-box"></span> State pharmacy license (if dispensing any medications)</li>
+        <li><span class="check-box"></span> DEA registration current (if handling controlled substances)</li>
+        <li><span class="check-box"></span> CLIA waiver (if performing any laboratory testing)</li>
+        <li><span class="check-box"></span> NPI numbers current for all billing providers</li>
+        <li><span class="check-box"></span> State-mandated continuing education hours completed</li>
+      </ul>
+    </div>
+    <div class="checklist-col">
+      <h4>Billing &amp; Coding</h4>
+      <ul>
+        <li><span class="check-box"></span> Correct CPT codes used: 90867, 90868, 90869 (neuroimaging/TMS)</li>
+        <li><span class="check-box"></span> E&M code 99213-99215 for initial evaluation (where applicable)</li>
+        <li><span class="check-box"></span> Modifier usage correct per MAC LCD (e.g., -25, -59)</li>
+        <li><span class="check-box"></span> Medical necessity documentation for every TMS session</li>
+        <li><span class="check-box"></span> PHQ-9/QIDS or equivalent scores documented pre/post treatment</li>
+        <li><span class="check-box"></span> Prior authorization obtained for Medicare/Medicaid patients</li>
+        <li><span class="check-box"></span> Superbill and encounter forms updated annually for coding changes</li>
+        <li><span class="check-box"></span> Audit trail for all billing corrections maintained</li>
+      </ul>
+    </div>
+    <div class="checklist-col">
+      <h4>Equipment Safety</h4>
+      <ul>
+        <li><span class="check-box"></span> TMS device calibration log up to date</li>
+        <li><span class="check-box"></span> Coil inspection and replacement schedule documented</li>
+        <li><span class="check-box"></span> Emergency stop functionality tested monthly</li>
+        <li><span class="check-box"></span> AED battery and pads checked monthly</li>
+        <li><span class="check-box"></span> Emergency medication kit inspected and within expiration</li>
+        <li><span class="check-box"></span> Electrical safety inspection of facility (per local code)</li>
+        <li><span class="check-box"></span> Fire extinguisher inspection current</li>
+        <li><span class="check-box"></span> MRI safety screening protocol posted and enforced</li>
+      </ul>
+    </div>
+    <div class="checklist-col">
+      <h4>Staff Credentials</h4>
+      <ul>
+        <li><span class="check-box"></span> Physician board certifications verified and current</li>
+        <li><span class="check-box"></span> NP/PA licenses, DEA, and state RX permits current</li>
+        <li><span class="check-box"></span> BLS/CPR certifications current for all clinical staff</li>
+        <li><span class="check-box"></span> TMS device manufacturer training certificates on file</li>
+        <li><span class="check-box"></span> Malpractice insurance certificates current</li>
+        <li><span class="check-box"></span> Credentialing file for each provider maintained per NCQA standards</li>
+        <li><span class="check-box"></span> Privileging forms reviewed and renewed per medical staff bylaws</li>
+        <li><span class="check-box"></span> Drug Enforcement Administration (DEA) registration current</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 9: TELEMEDICINE & REGULATORY BODIES
+     ============================================================ -->
+<div class="page" id="telemedicine-bodies">
+  <div class="page-header">
+    <h2>7 &mdash; Telemedicine &amp; 8 &mdash; Regulatory Bodies</h2>
+    <span>TMS State Regulations Guide 2026</span>
+  </div>
+
+  <h2>7. Telemedicine Considerations for TMS</h2>
+
+  <p class="section-intro">Telemedicine has become an integral part of TMS practice management, particularly for follow-up visits and ongoing symptom monitoring. However, federal and state regulations impose important limits on what can be done via telemedicine in the context of TMS.</p>
+
+  <div class="card card-red">
+    <div class="card-header">FDA &amp; CMS: In-Person Requirement for Initial Evaluation</div>
+    <p style="font-size:9pt; margin:0; line-height:1.5;"><strong>The initial TMS evaluation and motor threshold determination must be performed in person.</strong> This is a requirement embedded in the FDA-cleared labeling for TMS devices and reinforced by the CMS NCD. No Medicare reimbursement is available for TMS treatment initiated via telemedicine. The motor threshold cannot be accurately determined remotely because it requires physical application of the TMS coil to the patient's scalp and observation of motor-evoked potentials (toe twitch).</p>
+  </div>
+
+  <h3>Telemedicine for Follow-Up Visits</h3>
+
+  <p>Once a patient has completed their initial in-person TMS evaluation and motor threshold determination, telemedicine is generally acceptable for:</p>
+  <ul>
+    <li><strong>Symptom monitoring and progress assessments</strong> using validated depression scales (PHQ-9, QIDS-SR, MADRS)</li>
+    <li><strong>Side effect review</strong> and tolerability assessments</li>
+    <li><strong>Treatment course adjustments</strong> ordered by the prescribing physician after review of telemedicine assessment</li>
+    <li><strong>Psychiatric medication management</strong> for comorbid conditions</li>
+    <li><strong>Patient education and adherence counseling</strong></li>
+  </ul>
+
+  <div class="callout">
+    <div class="callout-icon">&#9432;</div>
+    <div class="callout-body">
+      <strong>State Telemedicine Parity Laws</strong>
+      As of 2026, 48 states and Washington D.C. have enacted some form of telemedicine parity law requiring private insurers to reimburse telemedicine visits at rates comparable to in-person visits. However, parity requirements vary: some states mandate payment parity, others require coverage without rate mandates, and a few have no parity requirements. Verify your state's specific parity law and any geographic or technology restrictions (e.g., some states prohibit audio-only telemedicine for behavioral health).
+    </div>
+  </div>
+
+  <h3>Interstate Medical Licensure Compact</h3>
+
+  <p>The <strong>Interstate Medical Licensure Compact (IMLC)</strong> facilitates expedited licensure for physicians who want to practice across state lines. As of 2026, over 40 states participate in the IMLC. However, for TMS specifically, the IMLC has limited application because:</p>
+  <ul>
+    <li>The initial motor threshold determination must be performed in person by a licensed physician in the state where the patient physically resides</li>
+    <li>Follow-up telemedicine visits for TMS monitoring may be conducted by an out-of-state physician via IMLC expedited license in participating states</li>
+    <li>The compact does not eliminate the need for state-by-state licensure — it only expedites the process</li>
+  </ul>
+
+  <div style="page-break-before: always;"></div>
+
+  <h2>8. Key Regulatory Bodies</h2>
+
+  <p class="section-intro">TMS clinics interact with multiple federal and state regulatory bodies. Understanding their jurisdiction, scope, and contact framework is essential for compliance and issue resolution.</p>
+
+  <div class="reg-body-grid">
+    <div class="reg-body-card">
+      <div class="reg-acronym">FDA / CDRH</div>
+      <div class="reg-name">Center for Devices and Radiological Health</div>
+      <p>Oversees TMS device clearance (510(k)), adverse event reporting (MedWatch), device registration, and recall procedures. Primary contact for device safety issues and off-label use inquiries.</p>
+    </div>
+    <div class="reg-body-card">
+      <div class="reg-acronym">CMS / CAG</div>
+      <div class="reg-name">Coverage and Analysis Group</div>
+      <p>Issues National Coverage Determinations (NCDs) for TMS. Oversees Medicare and Medicaid coverage policy. CMS MACs (Noridian, Palmetto, WPS, CGS, Novitas, etc.) issue LCDs and process claims.</p>
+    </div>
+    <div class="reg-body-card">
+      <div class="reg-acronym">OCR / HHS</div>
+      <div class="reg-name">Office for Civil Rights — HIPAA Enforcement</div>
+      <p>Enforces HIPAA Privacy Rule, Security Rule, and HITECH provisions. Handles breach notifications and investigates HIPAA complaints. Penalty tiers: $100–$50,000 per violation, up to $1.5M per violation category per year.</p>
+    </div>
+    <div class="reg-body-card">
+      <div class="reg-acronym">ONC / CMS</div>
+      <div class="reg-name">EHR Incentive Programs — MIPS / MACRA</div>
+      <p>Oversees EHR meaningful use requirements, clinical quality measures, and MIPS/MACRA reporting. While TMS is not a core MIPS specialty, eligible clinicians should report quality measures for MIPS participation and avoid penalties.</p>
+    </div>
+    <div class="reg-body-card">
+      <div class="reg-acronym">State Medical Boards</div>
+      <div class="reg-name">State-by-State Medical Practice Regulation</div>
+      <p>Each state's medical board (e.g., California Medical Board, Texas Medical Board) issues medical licenses, defines scope of practice, investigates complaints, and takes disciplinary action. Primary contact for TMS prescribing authority questions.</p>
+    </div>
+    <div class="reg-body-card">
+      <div class="reg-acronym">ACGME</div>
+      <div class="reg-name">Accreditation Council for Graduate Medical Education</div>
+      <p>Sets physician training standards for residency and fellowship programs. Does not directly regulate TMS technicians. However, ACGME requirements influence the quality of physician training that underpins TMS competency.</p>
+    </div>
+    <div class="reg-body-card">
+      <div class="reg-acronym">Joint Commission</div>
+      <div class="reg-name">Accreditation for Behavioral Health</div>
+      <p>Voluntary accreditation body whose standards are often adopted as the benchmark for TMS clinic quality and safety. Many payers require Joint Commission accreditation for TMS facility reimbursement.</p>
+    </div>
+    <div class="reg-body-card">
+      <div class="reg-acronym">State DOH / DHHS</div>
+      <div class="reg-name">Department of Health / Health &amp; Human Services</div>
+      <p>Issues outpatient clinic licenses, ambulatory care licenses, and behavioral health facility licenses. Conducts state survey/inspection activities. Primary contact for facility-level licensing and inspection questions.</p>
+    </div>
+  </div>
+
+  <div class="note-box" style="margin-top: 0.5em;">
+    <strong>Regulatory Body Contact Framework</strong> — For issues requiring direct contact: FDA/CDRH (1-800-638-2041), CMS (1-800-MEDICARE), OCR/HHS (1-800-368-1019). State medical board contact information is available through the Federation of State Medical Boards (FSMB) at fsmb.org. Always document all regulatory communications in writing and retain records for a minimum of 6 years (HIPAA requirement) or longer per state medical board rules.
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 10: GLOSSARY
+     ============================================================ -->
+<div class="page" id="glossary">
+  <div class="page-header">
+    <h2>10 &mdash; Glossary of Terms</h2>
+    <span>TMS State Regulations Guide 2026</span>
+  </div>
+
+  <h2>10. Glossary of Terms</h2>
+
+  <p class="section-intro">The following terms are referenced throughout this guide and commonly encountered in TMS clinic regulatory and operational contexts.</p>
+
+  <div class="glossary-grid">
+    <div class="glossary-item">
+      <div class="glossary-term">ACGME</div>
+      <div class="glossary-def">Accreditation Council for Graduate Medical Education. The organization that sets standards for physician residency and fellowship training programs in the United States.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Ambulatory Surgical Center (ASC)</div>
+      <div class="glossary-def">A healthcare facility that provides surgical procedures on an outpatient basis. TMS generally does not require ASC classification as it is non-invasive and does not involve sedation.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">BAA</div>
+      <div class="glossary-def">Business Associate Agreement. A contract required under HIPAA between a covered entity and a business associate (e.g., EHR vendor, billing service) that handles protected health information.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">CDRH</div>
+      <div class="glossary-def">Center for Devices and Radiological Health. The FDA office responsible for regulating TMS and other medical devices that use radiation (non-ionizing).</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">CLIA</div>
+      <div class="glossary-def">Clinical Laboratory Improvement Amendments. Federal quality standards for laboratory testing. May apply if a TMS clinic performs any laboratory testing (e.g., bloodwork for medication monitoring).</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Collaborative Practice Agreement</div>
+      <div class="glossary-def">A formal written agreement between a physician and an NP or PA that outlines the scope of prescriptive authority, consultation requirements, and supervision terms. Required in most states for NP/PA prescribing of TMS.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Credentialing</div>
+      <div class="glossary-def">The process of verifying and assessing the qualifications of healthcare providers (licenses, certifications, training, malpractice history) before granting them privileges to provide patient care at a facility.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">DEA</div>
+      <div class="glossary-def">Drug Enforcement Administration. The federal agency regulating controlled substances. TMS is not a controlled substance and does not require DEA registration.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Designation of Authority</div>
+      <div class="glossary-def">A formal written document by which a physician delegates specific clinical responsibilities (e.g., prescribing, treatment oversight) to an NP, PA, or other qualified provider.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Facility License</div>
+      <div class="glossary-def">A state-issued license authorizing a healthcare facility to operate. Most TMS clinics require an outpatient behavioral health clinic license or equivalent from their state Department of Health.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">FDA 510(k)</div>
+      <div class="glossary-def">Premarket notification submission to the FDA demonstrating that a new medical device is substantially equivalent to a legally marketed predicate device. The pathway used to clear TMS devices.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">HIPAA Privacy Rule</div>
+      <div class="glossary-def">The portion of HIPAA that protects individually identifiable health information (PHI) and sets rules for how PHI may be used and disclosed by covered entities.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">HITECH</div>
+      <div class="glossary-def">Health Information Technology for Economic and Clinical Health Act. legislation that expanded HIPAA's reach, increased penalties, and promoted the adoption and meaningful use of health information technology including EHRs.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">LCD</div>
+      <div class="glossary-def">Local Coverage Determination. A decision by a Medicare Administrative Contractor (MAC) regarding whether a service (e.g., TMS for a specific indication) is covered in a specific jurisdiction. LCDs vary by MAC region.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">MAC</div>
+      <div class="glossary-def">Medicare Administrative Contractor. Private companies contracted by CMS to process Medicare claims and issue coverage policies (LCDs) within specific geographic jurisdictions.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">MedWatch</div>
+      <div class="glossary-def">The FDA's Safety Information and Adverse Event Reporting Program. Healthcare providers must report serious adverse events associated with TMS devices via MedWatch Form FDA 3500.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Motor Threshold (MT)</div>
+      <div class="glossary-def">The minimum stimulation intensity required to produce a motor evoked potential (typically observed as a thumb twitch) when the TMS coil is placed over the contralateral motor cortex. Used to individualize TMS dosing. Must be determined by an MD or DO per CMS NCD.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">NCD</div>
+      <div class="glossary-def">National Coverage Determination. A national decision by CMS regarding whether a service (e.g., TMS for treatment-resistant MDD) is covered under Medicare Part B. The NCD for TMS (CAG-00413N) establishes the federal baseline coverage criteria.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Off-Label</div>
+      <div class="glossary-def">The use of an FDA-cleared medical device for a purpose not specified in its FDA clearance labeling. Physicians may use TMS off-label at their professional discretion; however, Medicare/Medicaid coverage does not extend to off-label indications.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">PA</div>
+      <div class="glossary-def">Physician Assistant. A licensed healthcare provider who practices medicine under physician supervision. PA authority to prescribe TMS varies significantly by state and requires physician delegation in most jurisdictions.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">PHI</div>
+      <div class="glossary-def">Protected Health Information. Any individually identifiable health information held or transmitted by a covered entity, including TMS treatment records, depression scale scores, and billing data. Protected under HIPAA.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Privileging</div>
+      <div class="glossary-def">The process by which a healthcare organization grants a qualified provider the authority to perform specific clinical procedures (e.g., TMS motor threshold determination, TMS treatment) within that facility.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Scope of Practice</div>
+      <div class="glossary-def">The set of activities, procedures, and decisions that a licensed healthcare provider is legally authorized to perform, defined by state law, regulatory boards, and institutional policy.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Supervisory Agreement</div>
+      <div class="glossary-def">A formal written agreement defining the supervisory relationship between a physician and an NP, PA, or other supervised provider. Terms vary by state: some require "direct" supervision (physician physically present); others allow "indirect" or "available" supervision.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Telemedicine Parity</div>
+      <div class="glossary-def">State laws requiring private health insurers to provide equivalent coverage and reimbursement for healthcare services delivered via telemedicine compared to in-person services. Varies widely in scope, enforceability, and geographic restrictions.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">TMS</div>
+      <div class="glossary-def">Transcranial Magnetic Stimulation. A non-invasive neuromodulation technique that uses magnetic fields to stimulate nerve cells in the brain, FDA-cleared for treatment of major depressive disorder and obsessive-compulsive disorder.</div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 11: QR RESOURCES
+     ============================================================ -->
+<div class="page" id="qr">
+  <div class="page-header">
+    <h2>9 &mdash; QR Resources</h2>
+    <span>TMS State Regulations Guide 2026</span>
+  </div>
+
+  <h2>9. Interactive QR Resources</h2>
+
+  <p class="section-intro">Scan the QR codes below to access TMS List's interactive tools and resources. These tools complement this guide with real-time, searchable data.</p>
+
+  <div class="qr-section">
+    <div class="qr-grid">
+      <div class="qr-card">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&amp;data=https://tmslist.com/map/" style="width:64px;height:64px;border-radius:6px;" alt="TMS State Map QR Code" />
+        <h4>TMS Clinic State Map</h4>
+        <p>Search our interactive 50-state map for TMS clinics, state-specific requirements, and regulatory updates in real time.</p>
+        <div class="qr-url">tmslist.com/map/</div>
+      </div>
+      <div class="qr-card">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&amp;data=https://tmslist.com/quiz/" style="width:64px;height:64px;border-radius:6px;" alt="TMS Clinic Qualification Quiz QR Code" />
+        <h4>Clinic Qualification Quiz</h4>
+        <p>Answer 10 questions to see if your clinic qualifies for a free listing, compliance audit, or premium profile on TMS List.</p>
+        <div class="qr-url">tmslist.com/quiz/</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-green" style="margin-top: 0.6em;">
+    <div class="card-header">What TMS List Offers</div>
+    <ul style="margin-bottom:0;">
+      <li><strong>Clinic Directory:</strong> Searchable database of 500+ TMS clinics across all 50 states</li>
+      <li><strong>State Regulations Tracker:</strong> Real-time updates on state medical board policy changes</li>
+      <li><strong>Compliance Resources:</strong> Sample BAAs, supervisory agreement templates, and audit checklists</li>
+      <li><strong>Reimbursement Guides:</strong> LCD-by-LCD Medicare coverage summaries by MAC region</li>
+      <li><strong>Industry Reports:</strong> Annual TMS market outlook and reimbursement trends report</li>
+      <li><strong>Provider Alerts:</strong> Email alerts for FDA safety communications and CMS policy changes</li>
+    </ul>
+  </div>
+
+  <div style="page-break-before: always;"></div>
+
+  <h2>Testimonials</h2>
+
+  <div class="testimonial-grid">
+    <div class="testimonial">
+      <p class="testimonial-quote">"Running a multi-site TMS operation across three states, I used to spend hours piecing together state regulations from board websites. This guide condensed everything into one reliable reference. The prescriber table alone saved us months of legal review."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">JL</div>
+        <div class="testimonial-meta">
+          <strong>Dr. James Liu, MD</strong>
+          <span>Founder &amp; CEO, MindPath TMS Centers — Raleigh, NC</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-quote">"Our compliance team uses the tear-out audit checklist monthly and the HIPAA section during our annual OCR audit preparation. It is by far the most practical reference we've found for running a TMS practice."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">SP</div>
+        <div class="testimonial-meta">
+          <strong>Sandra Patel, MHSA</strong>
+          <span>Director of Operations, Serenity Brain Health — Phoenix, AZ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 12: TEAR-OUT CARD
+     ============================================================ -->
+<div class="page" id="tearout">
+  <div class="page-header">
+    <h2>11 &mdash; Tear-Out Audit Card</h2>
+    <span>TMS State Regulations Guide 2026 — Tear Out &amp; Post</span>
+  </div>
+
+  <h2 style="color: var(--red-accent); border-bottom-color: var(--red-accent);">TMS Compliance Audit Checklist</h2>
+
+  <p style="font-size:9pt; color: var(--slate-600); margin-bottom: 0.5em;">Print and post this checklist in your compliance office. Review quarterly and update whenever regulations change. For full regulatory details, refer to the corresponding section in this guide.</p>
+
+  <div class="tearout-page" style="border: 2px solid var(--red-accent); border-radius: 8px; overflow: hidden; break-inside: avoid; page-break-inside: avoid;">
+
+    <div style="background: linear-gradient(135deg, var(--red-darkest), var(--red-dark)); color: #fff; padding: 0.4em 0.6em; display: flex; align-items: center; justify-content: space-between;">
+      <h2 style="color: #fff; border: none; margin: 0; font-size: 15pt; padding: 0;">TMS Compliance Audit Checklist</h2>
+      <span style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; padding: 0.2em 0.7em; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 8pt; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: 0.05em;">25-Point Audit</span>
+    </div>
+
+    <div style="padding: 0.5em; background: #fff;">
+      <div class="tearout-grid">
+
+        <!-- FDA Compliance -->
+        <div class="tearout-col">
+          <h4>FDA Compliance</h4>
+          <ul>
+            <li><span class="tearout-num">1</span>Device FDA 510(k) clearance documentation on file</li>
+            <li><span class="tearout-num">2</span>FDA establishment registration current</li>
+            <li><span class="tearout-num">3</span>MedWatch adverse event reporting protocol documented</li>
+            <li><span class="tearout-num">4</span>Manufacturer recall monitoring procedure active</li>
+            <li><span class="tearout-num">5</span>Off-label use informed consent forms approved and in use</li>
+          </ul>
+        </div>
+
+        <!-- HIPAA / Privacy -->
+        <div class="tearout-col">
+          <h4>HIPAA / Privacy</h4>
+          <ul>
+            <li><span class="tearout-num">6</span>BAAs executed with all vendors handling PHI</li>
+            <li><span class="tearout-num">7</span>Annual HIPAA security risk assessment completed</li>
+            <li><span class="tearout-num">8</span>Staff HIPAA training records current (all employees)</li>
+            <li><span class="tearout-num">9</span>Incident response plan tested in last 12 months</li>
+            <li><span class="tearout-num">10</span>Breach notification procedures reviewed and current</li>
+          </ul>
+        </div>
+
+        <!-- State Licensing -->
+        <div class="tearout-col">
+          <h4>State Licensing</h4>
+          <ul>
+            <li><span class="tearout-num">11</span>All MD/DO licenses current and unencumbered</li>
+            <li><span class="tearout-num">12</span>NP/PA licenses and RX permits current</li>
+            <li><span class="tearout-num">13</span>Supervisory/collaborative agreements signed and current</li>
+            <li><span class="tearout-num">14</span>Outpatient clinic license current and posted</li>
+            <li><span class="tearout-num">15</span>State CE requirements met by all providers</li>
+          </ul>
+        </div>
+
+        <!-- Billing / Coding -->
+        <div class="tearout-col">
+          <h4>Billing / Coding</h4>
+          <ul>
+            <li><span class="tearout-num">16</span>CPT codes 90867-90869 used correctly per CMS</li>
+            <li><span class="tearout-num">17</span>Modifier usage verified per MAC LCD requirements</li>
+            <li><span class="tearout-num">18</span>Medical necessity documentation complete for all sessions</li>
+            <li><span class="tearout-num">19</span>Depression scale scores (PHQ-9/QIDS) documented pre/post</li>
+            <li><span class="tearout-num">20</span>Prior authorizations on file for Medicare/Medicaid patients</li>
+          </ul>
+        </div>
+
+        <!-- Equipment Safety -->
+        <div class="tearout-col">
+          <h4>Equipment Safety</h4>
+          <ul>
+            <li><span class="tearout-num">21</span>TMS device calibration log current</li>
+            <li><span class="tearout-num">22</span>Coil inspection and replacement schedule documented</li>
+            <li><span class="tearout-num">23</span>AED and emergency medication kit inspected</li>
+          </ul>
+        </div>
+
+        <!-- Staff Credentials -->
+        <div class="tearout-col">
+          <h4>Staff Credentials</h4>
+          <ul>
+            <li><span class="tearout-num">24</span>BLS/CPR certifications current for all clinical staff</li>
+            <li><span class="tearout-num">25</span>Physician privileging files reviewed per medical staff bylaws</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 0.4em; padding: 0.3em 0.5em; background: var(--slate-100); border-radius: 4px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 7.5pt; color: var(--slate-600); text-align: center; line-height: 1.5;">
+        <strong style="color: var(--red-accent);">Next Audit Due:</strong> _________________________ &nbsp;&bull;&nbsp;
+        <strong style="color: var(--red-accent);">Compliance Officer:</strong> _________________________ &nbsp;&bull;&nbsp;
+        <strong style="color: var(--red-accent);">Reference:</strong> TMS List State Regulations Guide 2026 — tmslist.com
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note-box" style="margin-top: 0.5em;">
+    <strong>Billing CPT Code Reference</strong> &mdash;
+    <strong>90867</strong>: TMS initial navigation/motor threshold (physician work only) &nbsp;
+    <strong>90868</strong>: TMS treatment delivery (first session) &nbsp;
+    <strong>90869</strong>: TMS treatment delivery (subsequent sessions, per session). Add modifier <strong>-25</strong> to E&M codes when billing a separate evaluation on the same day as TMS initiation.
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     BACK COVER
+     ============================================================ -->
+<div class="back-cover" style="page: cover-page; width: 8.5in; height: 11in; padding: 0.8in 0.7in; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; page-break-after: always; position: relative; overflow: hidden; page-break-after: always;">
+  <div style="position: absolute; top: -2in; right: -1.5in; width: 5in; height: 5in; border-radius: 50%; background: rgba(255,255,255,0.03);"></div>
+  <div style="position: absolute; bottom: -1in; left: -1in; width: 4in; height: 4in; border-radius: 50%; background: rgba(255,255,255,0.02);"></div>
+
+  <div style="font-size: 10pt; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.3in;">Free Resource from TMS List</div>
+
+  <h2 style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 26pt; color: #fff; border: none; margin-bottom: 0.3in; line-height: 1.2;">Your TMS Compliance<br>Starts Here</h2>
+
+  <p style="font-size: 11pt; color: rgba(255,255,255,0.8); max-width: 5.5in; margin-bottom: 0.5in; line-height: 1.6;">Access our interactive state map, clinic qualification quiz, and compliance templates — all free, all updated for 2026.</p>
+
+  <div style="display: flex; gap: 1.2in; margin: 0.5in 0; align-items: center;">
+    <div style="text-align: center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&amp;data=https://tmslist.com/map/" style="width:100px;height:100px;border-radius:8px;margin-bottom:0.3em;" alt="State Map QR" />
+      <p style="font-size: 9pt; margin: 0; color: rgba(255,255,255,0.75);">State Regulations Map<br><strong style="color:rgba(255,255,255,0.9);">tmslist.com/map/</strong></p>
+    </div>
+    <div style="text-align: center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&amp;data=https://tmslist.com/quiz/" style="width:100px;height:100px;border-radius:8px;margin-bottom:0.3em;" alt="Quiz QR" />
+      <p style="font-size: 9pt; margin: 0; color: rgba(255,255,255,0.75);">Clinic Qualification Quiz<br><strong style="color:rgba(255,255,255,0.9);">tmslist.com/quiz/</strong></p>
+    </div>
+  </div>
+
+  <div style="width: 3in; height: 1px; background: rgba(255,255,255,0.2); margin: 0.3in 0;"></div>
+
+  <div style="margin-top: auto; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 8pt; color: rgba(255,255,255,0.4); line-height: 1.9;">
+    TMS List &mdash; The Industry's Most Trusted TMS Clinic Directory<br>
+    500+ Clinics &bull; 50 States &bull; Real-Time Regulatory Updates<br>
+    Contact: compliance@tmslist.com &bull; tmslist.com
+  </div>
+</div>
+
+
+<!-- ============================================================
+     END OF GUIDE
+     ============================================================ -->
+<div class="page" style="page-break-before: always;">
+  <div class="guide-end">
+    <div class="guide-end-icon">&#9878;</div>
+    <p>TMS State Regulations Guide 2026 &mdash; End of Document</p>
+    <p style="font-size: 7.5pt; color: var(--slate-300); margin-top: 0.3em;">TMS List &bull; tmslist.com &bull; compliance@tmslist.com</p>
+    <p style="font-size: 7pt; color: var(--slate-300); margin-top: 0.2em; max-width: 5in; margin-left: auto; margin-right: auto; line-height: 1.5;">
+      This document is for informational purposes only and does not constitute legal advice. Regulations are subject to change. Always verify current requirements with the appropriate regulatory body or qualified healthcare legal counsel.
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
