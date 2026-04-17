@@ -50,7 +50,7 @@ async function generatePDFs() {
     await page.goto(fileUrl, { waitUntil: 'networkidle0' });
 
     // Give fonts time to load
-    await page.waitForTimeout;
+    await new Promise(r => setTimeout(r, 500));
 
     await page.pdf({
       path:           pdfPath,

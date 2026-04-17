@@ -241,6 +241,13 @@ export const UTILITY_SLUGS = [
     { slug: 'insurance-eligibility-checker', title: 'Insurance Eligibility Checker' },
 ];
 
+export const TOOL_SLUGS = [
+    { slug: 'cost-calculator', title: 'TMS Cost Calculator' },
+    { slug: 'protocol-explorer', title: 'Protocol Explorer' },
+    { slug: 'side-effects-tracker', title: 'Side Effects Tracker' },
+    { slug: 'device-comparison', title: 'Device Comparison' },
+];
+
 export const ALTERNATIVE_SLUGS = [
     { slug: 'spravato-esketamine', title: 'Spravato (Esketamine) Nasal Spray' },
     { slug: 'ketamine-infusion-therapy', title: 'Ketamine Infusion Therapy' },

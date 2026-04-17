@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Your TMS Referral Network — TMS List</title>
+<style>
+  :root {
+    --indigo-900: #1e1b4b;
+    --indigo-800: #312e81;
+    --indigo-700: #3730a3;
+    --indigo-600: #4f46e5;
+    --indigo-500: #6366f1;
+    --indigo-400: #818cf8;
+    --indigo-200: #c7d2fe;
+    --indigo-100: #e0e7ff;
+    --indigo-50:  #eef2ff;
+    --white: #ffffff;
+    --gray-900: #111827;
+    --gray-700: #374151;
+    --gray-600: #4b5563;
+    --gray-400: #9ca3af;
+    --gray-200: #e5e7eb;
+    --gray-100: #f9fafb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 10pt;
+    line-height: 1.55;
+    color: var(--gray-900);
+    background: var(--white);
+  }
+
+  @page {
+    size: letter;
+    margin: 0.6in;
+    @bottom-left {
+      content: "TMS List — Building Your TMS Referral Network";
+      font-size: 7.5pt;
+      color: #94a3b8;
+    }
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 7.5pt;
+      color: #64748b;
+    }
+  }
+
+  .cover-page {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4f46e5 100%);
+    color: var(--white);
+    min-height: 9in;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.2in 0.8in;
+    margin: -0.6in -0.6in 0.6in -0.6in;
+    width: 8.5in;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: -1in;
+    right: -1in;
+    width: 4in;
+    height: 4in;
+    border-radius: 50%;
+    background: rgba(99,102,241,0.25);
+  }
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -0.5in;
+    left: 3in;
+    width: 3in;
+    height: 3in;
+    border-radius: 50%;
+    background: rgba(129,140,248,0.15);
+  }
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 99px;
+    padding: 4pt 12pt;
+    font-size: 8pt;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--indigo-200);
+    margin-bottom: 18pt;
+    width: fit-content;
+  }
+  .cover-title {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 30pt;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 14pt;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-subtitle {
+    font-size: 13pt;
+    color: var(--indigo-200);
+    margin-bottom: 28pt;
+    max-width: 5.5in;
+    line-height: 1.5;
+  }
+  .cover-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8pt;
+    margin-bottom: 30pt;
+  }
+  .cover-bullets li {
+    display: flex;
+    align-items: center;
+    gap: 8pt;
+    font-size: 9.5pt;
+    color: var(--indigo-100);
+  }
+  .cover-bullets li::before {
+    content: '✓';
+    width: 16pt;
+    height: 16pt;
+    border-radius: 50%;
+    background: var(--indigo-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8pt;
+    flex-shrink: 0;
+    color: white;
+  }
+  .cover-author {
+    font-size: 8.5pt;
+    color: rgba(255,255,255,0.6);
+    font-family: -apple-system, system-ui, sans-serif;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 12pt;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-qr-row {
+    display: flex;
+    gap: 10pt;
+    margin-top: 16pt;
+    align-items: center;
+  }
+  .cover-qr-row img { width: 52pt; height: 52pt; border-radius: 4pt; }
+  .cover-qr-row span { font-size: 7.5pt; color: var(--indigo-200); }
+
+  .toc-page { padding-top: 0.2in; }
+  .page-section { padding-top: 0.1in; }
+  .pb { page-break-before: always; }
+
+  h1 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--indigo-800);
+    margin-bottom: 8pt;
+    border-bottom: 2pt solid var(--indigo-500);
+    padding-bottom: 5pt;
+  }
+  h2 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--indigo-700);
+    margin-top: 16pt;
+    margin-bottom: 6pt;
+  }
+  h3 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-top: 10pt;
+    margin-bottom: 4pt;
+  }
+  h4 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--indigo-600);
+    margin-top: 8pt;
+    margin-bottom: 3pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  p { margin-bottom: 7pt; }
+  ul { margin-left: 14pt; margin-bottom: 7pt; }
+  li { margin-bottom: 3pt; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8pt 0;
+    font-size: 8.5pt;
+  }
+  th {
+    background: var(--indigo-700);
+    color: white;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 8pt;
+    font-weight: 700;
+    padding: 5pt 6pt;
+    text-align: left;
+  }
+  td {
+    padding: 4pt 6pt;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--indigo-50); }
+  .bia { break-inside: avoid; }
+
+  .template-box {
+    border: 1.5pt solid var(--indigo-300);
+    border-radius: 6pt;
+    padding: 10pt;
+    background: var(--indigo-50);
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  .template-label {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 7.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--indigo-600);
+    margin-bottom: 6pt;
+    display: flex;
+    align-items: center;
+    gap: 6pt;
+  }
+  .template-label::before {
+    content: '';
+    width: 6pt;
+    height: 6pt;
+    border-radius: 50%;
+    background: var(--indigo-500);
+    flex-shrink: 0;
+  }
+  .template-text {
+    font-size: 9pt;
+    color: var(--gray-700);
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+  .placeholder {
+    background: rgba(79,70,229,0.1);
+    border: 1px dashed var(--indigo-400);
+    border-radius: 3pt;
+    padding: 0 3pt;
+    font-style: italic;
+    color: var(--indigo-600);
+  }
+  .section-intro {
+    font-size: 9.5pt;
+    color: var(--gray-700);
+    margin-bottom: 10pt;
+    line-height: 1.6;
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8pt;
+    margin: 10pt 0;
+  }
+  .stat-card {
+    background: var(--indigo-50);
+    border: 1pt solid var(--indigo-200);
+    border-radius: 6pt;
+    padding: 8pt;
+    text-align: center;
+    break-inside: avoid;
+  }
+  .stat-num {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 18pt;
+    font-weight: 800;
+    color: var(--indigo-600);
+    display: block;
+  }
+  .stat-label {
+    font-size: 7.5pt;
+    color: var(--gray-600);
+    display: block;
+    margin-top: 2pt;
+  }
+
+  .callout {
+    border-left: 3pt solid var(--indigo-500);
+    padding: 8pt 10pt;
+    margin: 8pt 0;
+    font-size: 9pt;
+    break-inside: avoid;
+  }
+  .callout.blue { background: var(--indigo-50); border-color: var(--indigo-400); }
+  .callout-title {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-weight: 700;
+    color: var(--indigo-700);
+    font-size: 8.5pt;
+    margin-bottom: 4pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .step-list {
+    list-style: none;
+    margin-left: 0;
+    counter-reset: step;
+  }
+  .step-list li {
+    display: flex;
+    gap: 8pt;
+    margin-bottom: 5pt;
+    align-items: flex-start;
+  }
+  .step-list li::before {
+    counter-increment: step;
+    content: counter(step);
+    min-width: 18pt;
+    height: 18pt;
+    border-radius: 50%;
+    background: var(--indigo-600);
+    color: white;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 8pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1pt;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; margin: 8pt 0; }
+
+  .testimonial {
+    background: var(--white);
+    border: 1pt solid var(--gray-200);
+    border-radius: 8pt;
+    padding: 10pt 12pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+    position: relative;
+  }
+  .testimonial::before {
+    content: '"';
+    font-size: 36pt;
+    color: var(--indigo-200);
+    font-family: Georgia, serif;
+    position: absolute;
+    top: 2pt;
+    left: 8pt;
+    line-height: 1;
+  }
+  .testimonial-text {
+    font-size: 9pt;
+    font-style: italic;
+    color: var(--gray-700);
+    padding-left: 18pt;
+    margin-bottom: 6pt;
+    line-height: 1.5;
+  }
+  .testimonial-author {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--indigo-600);
+    padding-left: 18pt;
+  }
+  .testimonial-role {
+    font-size: 7.5pt;
+    color: var(--gray-400);
+    padding-left: 18pt;
+  }
+
+  .qr-section {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    border-radius: 8pt;
+    padding: 14pt;
+    text-align: center;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  .qr-section-title {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 11pt;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 3pt;
+  }
+  .qr-section-sub { font-size: 8.5pt; color: var(--indigo-200); margin-bottom: 12pt; }
+  .qr-pair { display: flex; justify-content: center; gap: 20pt; }
+  .qr-item { display: flex; flex-direction: column; align-items: center; gap: 5pt; }
+  .qr-item img { width: 72pt; height: 72pt; border-radius: 6pt; }
+  .qr-url { font-family: -apple-system, system-ui, sans-serif; font-size: 8.5pt; font-weight: 700; color: white; }
+  .qr-desc { font-size: 7.5pt; color: var(--indigo-200); }
+
+  .tearout-card {
+    border: 2pt solid var(--indigo-600);
+    border-radius: 8pt;
+    overflow: hidden;
+    break-inside: avoid;
+    margin: 8pt 0;
+  }
+  .tearout-header {
+    background: var(--indigo-600);
+    color: white;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 10.5pt;
+    font-weight: 800;
+    padding: 8pt 12pt;
+    text-align: center;
+  }
+  .tearout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 10pt 12pt; }
+  .tearout-item { display: flex; gap: 7pt; align-items: flex-start; margin-bottom: 6pt; }
+  .tearout-check {
+    width: 18pt;
+    height: 18pt;
+    border: 1.5pt solid var(--indigo-500);
+    border-radius: 3pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--indigo-600);
+    flex-shrink: 0;
+    background: white;
+  }
+  .tearout-item div:last-child { font-size: 8.5pt; color: var(--gray-700); line-height: 1.4; }
+  .tearout-footer {
+    background: var(--indigo-50);
+    border-top: 1pt solid var(--indigo-200);
+    padding: 7pt 12pt;
+    display: flex;
+    gap: 8pt;
+    align-items: center;
+    font-size: 7.5pt;
+    color: var(--gray-600);
+  }
+  .tearout-footer img { width: 40pt; height: 40pt; flex-shrink: 0; }
+
+  .glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6pt 16pt; margin: 8pt 0; }
+  .glossary-term { margin-bottom: 5pt; break-inside: avoid; }
+  .glossary-abbr {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: var(--indigo-600);
+    margin-right: 4pt;
+  }
+  .glossary-def { font-size: 8.5pt; color: var(--gray-700); line-height: 1.4; }
+
+  .priority-tag {
+    display: inline-block;
+    font-size: 7pt;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-weight: 700;
+    padding: 1pt 5pt;
+    border-radius: 3pt;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .priority-tag.high { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+  .priority-tag.med { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+  .priority-tag.low { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+
+  .footer-stripe {
+    background: var(--indigo-800);
+    color: rgba(255,255,255,0.6);
+    font-size: 7.5pt;
+    text-align: center;
+    padding: 6pt;
+    margin-top: 20pt;
+    font-family: -apple-system, system-ui, sans-serif;
+  }
+
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4pt 24pt; margin-top: 10pt; }
+  .toc-item { display: flex; gap: 6pt; align-items: baseline; }
+  .toc-num {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 9pt;
+    font-weight: 800;
+    color: var(--indigo-600);
+    min-width: 16pt;
+  }
+  .toc-title { font-size: 9pt; color: var(--gray-900); }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+  <div class="cover-badge">TMS List — tmslist.com</div>
+  <div class="cover-title">Building Your<br>TMS Referral Network</div>
+  <div class="cover-subtitle">Turn Colleagues Into Your Best Lead Source — A Practical Guide to Physician Referral Development for TMS Clinics</div>
+  <ul class="cover-bullets">
+    <li>Identify and prioritize referral targets across 6 specialty categories</li>
+    <li>5-touch outreach campaign with email, letter, and LinkedIn templates</li>
+    <li>Lunch-and-learn playbook with presentation outline and talking points</li>
+    <li>Referral tracking spreadsheet and KPI framework</li>
+    <li>Co-management agreement and quarterly report templates</li>
+  </ul>
+  <div class="cover-author">
+    <span>TMS List — tmslist.com &bull; 2026 Edition</span>
+  </div>
+  <div class="cover-qr-row">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" alt="TMS Provider Map" />
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" alt="TMS Quiz" />
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc-page pb">
+  <h1>Table of Contents</h1>
+  <div class="toc-grid">
+    <div class="toc-item"><span class="toc-num">1</span><span class="toc-title">Mapping Your Referral Landscape</span></div>
+    <div class="toc-item"><span class="toc-num">2</span><span class="toc-title">The Outreach Campaign</span></div>
+    <div class="toc-item"><span class="toc-num">3</span><span class="toc-title">Lunch-and-Learn Playbook</span></div>
+    <div class="toc-item"><span class="toc-num">4</span><span class="toc-title">Referral Tracking Spreadsheet</span></div>
+    <div class="toc-item"><span class="toc-num">5</span><span class="toc-title">Co-Management Agreement Template</span></div>
+    <div class="toc-item"><span class="toc-num">6</span><span class="toc-title">Quarterly Referral Report</span></div>
+    <div class="toc-item"><span class="toc-num">7</span><span class="toc-title">Scaling Your Network</span></div>
+    <div class="toc-item"><span class="toc-num">8</span><span class="toc-title">Glossary of Key Terms</span></div>
+  </div>
+
+  <h2 style="margin-top: 20pt;">Why Referral Networks Matter for TMS</h2>
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">3–5×</span><span class="stat-label">higher conversion vs. cold leads</span></div>
+    <div class="stat-card"><span class="stat-num">$38</span><span class="stat-label">avg cost per referral patient</span></div>
+    <div class="stat-card"><span class="stat-num">68%</span><span class="stat-label">of TMS patients seek physician guidance first</span></div>
+    <div class="stat-card"><span class="stat-num">12mo</span><span class="stat-label">typical physician referral cycle</span></div>
+  </div>
+
+  <div class="testimonial">
+    <div class="testimonial-text">Our referral network now accounts for 60% of new patient volume. The lunch-and-learn program was the single highest-ROI investment we made in our first year — $400 in catering generated $180,000 in billed sessions.</div>
+    <div class="testimonial-author">Dr. Rachel Mendez, MD</div>
+    <div class="testimonial-role">Founder, Clarity TMS Center, Phoenix, AZ</div>
+  </div>
+  <div class="testimonial">
+    <div class="testimonial-text">We built a spreadsheet to track every referral source, and within 6 months we could clearly see which specialties sent patients who actually completed treatment. We doubled down on psychiatrists and drastically cut our outreach to neurologists who were referring but whose patients never scheduled.</div>
+    <div class="testimonial-author">Kenji Watanabe</div>
+    <div class="testimonial-role">Practice Manager, Pacific TMS Institute, Seattle, WA</div>
+  </div>
+</div>
+
+<!-- SECTION 1: MAPPING YOUR REFERRAL LANDSCAPE -->
+<div class="page-section pb">
+  <h1>1. Mapping Your Referral Landscape</h1>
+  <p class="section-intro">Before you can build a referral network, you need to know who to build it with. Not all referral sources are equal — the best partners are physicians whose patient populations overlap meaningfully with TMS candidates: treatment-resistant depression, anxiety disorders, OCD, and comorbid conditions.</p>
+
+  <h2>Target Specialty Categories</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Specialty</th>
+        <th>Typical Patient Overlap</th>
+        <th>Referral Volume Potential</th>
+        <th>Outreach Priority</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Adult Psychiatrists</strong></td>
+        <td>Highest — manage TRD patients directly, often have already tried multiple medications</td>
+        <td>High (8–15 referrals/practice/year)</td>
+        <td><span class="priority-tag high">Highest</span></td>
+      </tr>
+      <tr>
+        <td><strong>Primary Care / Internal Medicine</strong></td>
+        <td>High — first point of contact for depression, can screen for TMS eligibility</td>
+        <td>Medium–High (5–10/practice/year)</td>
+        <td><span class="priority-tag high">Highest</span></td>
+      </tr>
+      <tr>
+        <td><strong>Psychiatric NPs / PAs</strong></td>
+        <td>High — prescribe and manage TMS under supervision, frequent patient contact</td>
+        <td>Medium (4–8/practice/year)</td>
+        <td><span class="priority-tag med">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>Psychologists / Therapists</strong></td>
+        <td>Medium — see patients who are already in treatment, can identify medication failures</td>
+        <td>Medium (3–6/practice/year)</td>
+        <td><span class="priority-tag med">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>Neurologists</strong></td>
+        <td>Medium — some overlap (depression with neurological comorbidities)</td>
+        <td>Low–Medium (2–4/practice/year)</td>
+        <td><span class="priority-tag med">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>Pain Specialists / Physiatrists</strong></td>
+        <td>Low — limited depression overlap, but may refer for comorbid conditions</td>
+        <td>Low (1–3/practice/year)</td>
+        <td><span class="priority-tag low">Moderate</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Finding Referral Targets in Your Area</h2>
+  <div class="two-col">
+    <div>
+      <h4>Digital Research</h4>
+      <ul>
+        <li>Search "psychiatrist near me accepting new patients" — note which practices appear</li>
+        <li>Check hospital medical staff directories — lists all affiliated physicians by specialty</li>
+        <li>Review your own patient intake forms — ask "who referred you?" to identify existing referral patterns</li>
+        <li>Google "TMS therapy [city]" — see which clinics come up and who they cite</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Network Intelligence</h4>
+      <ul>
+        <li>Ask your medical director to reach out to their residency/fellowship contacts</li>
+        <li>Attend your local medical society meetings (typically monthly)</li>
+        <li>Connect with referring physicians on LinkedIn — see which groups they belong to</li>
+        <li>Ask hospital discharge planners for psychiatry contact lists</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <div class="callout-title">Golden Rule of Referral Mapping</div>
+    <p>Start with your top 10 referral targets — the ones who could realistically send you 5+ patients per year. A focused network of 20 engaged referring physicians will outperform a superficial list of 200 barely-contacted names. Quality of relationship matters more than quantity of contacts.</p>
+  </div>
+</div>
+
+<!-- SECTION 2: THE OUTREACH CAMPAIGN -->
+<div class="page-section pb">
+  <h1>2. The Outreach Campaign</h1>
+  <p class="section-intro">Cold outreach to physicians requires persistence and professionalism. The research on physician outreach shows that 80% of referrals come after the 3rd+ contact. This section provides the templates and cadence for a structured 5-touch campaign.</p>
+
+  <h2>5-Touch Outreach Sequence</h2>
+  <div class="step-list">
+    <li><div><strong>Touch 1 — Email (Week 1):</strong> Personalized cold email introducing your clinic, TMS, and what makes your practice unique. Keep to 5 sentences. Attach a one-page TMS overview PDF.</div></li>
+    <li><div><strong>Touch 2 — Phone Call (Week 2):</strong> Call their office, ask to speak with the physician or their medical assistant. Leave a voicemail if needed. Reference your email by name. Script: "I'm reaching out following an email I sent about TMS therapy at [Clinic]. I'd love 5 minutes to discuss whether your practice has patients who might benefit."</div></li>
+    <li><div><strong>Touch 3 — Formal Letter (Week 3):</strong> A printed letter on clinic letterhead sent via USPS to the physician's office address. More likely to reach the physician directly than email. Include a stamped self-addressed reply card.</div></li>
+    <li><div><strong>Touch 4 — LinkedIn Connection (Week 5):</strong> Send a personalized LinkedIn connection request referencing your letter or call. Once connected, send a brief message. LinkedIn is effective because physicians check it regularly and it feels less "sales-y" than cold email.</div></li>
+    <li><div><strong>Touch 5 — Second Call (Week 7):</strong> Final call attempt. If they answer, offer to schedule a 10-minute call at their convenience. If they decline, ask to be added to their newsletter or to receive referrals if the right patient comes up.</div></li>
+  </div>
+
+  <h2>Cold Outreach Email Template</h2>
+  <div class="template-box">
+    <div class="template-label">Email Template — Cold Outreach</div>
+    <div class="template-text">Subject: TMS for Treatment-Resistant Depression — Partnership Inquiry
+
+Dear Dr. [<span class="placeholder">LAST NAME</span>]:
+
+I hope this finds you well. I'm [<span class="placeholder">YOUR NAME</span>], [<span class="placeholder">CLINIC TITLE</span>] at [<span class="placeholder">CLINIC NAME</span>] in [<span class="placeholder">CITY</span>].
+
+We specialize in Transcranial Magnetic Stimulation (TMS) — an FDA-cleared, non-invasive treatment for treatment-resistant depression that's proving transformative for patients who have not responded to multiple medication trials.
+
+I'd love to explore whether we might be a helpful resource for your patients. Specifically:
+
+• Patients with major depressive disorder who have tried 2+ medications without adequate response
+• Patients experiencing medication side effects that limit treatment options
+• Patients who prefer non-pharmacological treatment options
+
+I've attached a brief one-pager on TMS and our practice. Would you be open to a brief call — even 10 minutes — to discuss whether a referral relationship makes sense?
+
+Warm regards,
+
+[<span class="placeholder">YOUR NAME</span>]
+[<span class="placeholder">CLINIC NAME</span>]
+[<span class="placeholder">PHONE</span>] | [<span class="placeholder">EMAIL</span>]
+[<span class="placeholder">CLINIC WEBSITE</span>]</div>
+  </div>
+
+  <h2>Formal Letter Template</h2>
+  <div class="template-box">
+    <div class="template-label">USPS Letter Template</div>
+    <div class="template-text">[<span class="placeholder">CLINIC LETTERHEAD</span>]
+
+<span class="placeholder">DATE</span>
+
+Dr. [<span class="placeholder">NAME</span>]
+[<span class="placeholder">PRACTICE NAME</span>]
+[<span class="placeholder">STREET ADDRESS</span>]
+[<span class="placeholder">CITY, STATE ZIP</span>]
+
+Dear Dr. [<span class="placeholder">LAST NAME</span>]:
+
+I'm writing to introduce you to [<span class="placeholder">CLINIC NAME</span>], a TMS therapy center serving patients in the [<span class="placeholder">REGION</span>] area.
+
+Transcranial Magnetic Stimulation is FDA-cleared for treatment-resistant major depression and has helped thousands of patients who have not found relief through medication alone. For the right patients — those who have tried 2 or more antidepressants without adequate response — TMS can be life-changing.
+
+We believe the best patient care happens through physician collaboration. We would be honored to serve as a resource for your practice.
+
+Enclosed is a brief overview of our clinic and our approach. Please use the reply card to let us know if you'd like to be added to our referral list, or feel free to call or email directly.
+
+Warm regards,
+
+[<span class="placeholder">SIGNATURE</span>]
+[<span class="placeholder">NAME, CREDENTIALS</span>]
+
+Enclosure: TMS Clinic Overview (1 page)
+Stamped Self-Addressed Reply Card</div>
+  </div>
+
+  <h2>LinkedIn Connection Template</h2>
+  <div class="template-box">
+    <div class="template-label">LinkedIn Connection Request Message</div>
+    <div class="template-text">Hi Dr. [<span class="placeholder">LAST NAME</span>],
+
+I recently sent you information about our TMS clinic in [<span class="placeholder">CITY</span>] and wanted to connect here as well.
+
+TMS (transcranial magnetic stimulation) is an FDA-cleared treatment for treatment-resistant depression — something I know comes up in psychiatric practice regularly.
+
+If you ever have a patient who might be a good fit, I'd welcome the chance to be a trusted referral partner.
+
+Best,
+[<span class="placeholder">YOUR NAME</span>]
+[<span class="placeholder">CLINIC</span>]</div>
+  </div>
+</div>
+
+<!-- SECTION 3: LUNCH-AND-LEARN PLAYBOOK -->
+<div class="page-section pb">
+  <h1>3. Lunch-and-Learn Playbook</h1>
+  <p class="section-intro">The lunch-and-learn (also called a "lunch-and-learn" or "dine-and-discuss") is one of the most effective physician outreach tactics because it removes the biggest barrier — time. You bring the food; the physician gives you 45 minutes of attention. Done well, a single lunch-and-learn can generate 3–8 referrals within 3 months.</p>
+
+  <h2>Planning Checklist</h2>
+  <table>
+    <thead><tr><th>Task</th><th>Details</th><th>Done</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Set date &amp; time</strong></td><td>Mid-week, 12:00–1:00 PM works best. Confirm with physician's MA 2 weeks in advance.</td><td>☐</td></tr>
+      <tr><td><strong>Secure venue</strong></td><td>Physician's office conference room, your clinic, or a nearby private dining room. Avoid loud restaurants.</td><td>☐</td></tr>
+      <tr><td><strong>Order catering</strong></td><td>$150–$250 budget. Order from a well-regarded local restaurant. Avoid pizza. Send order confirmation to physician's office 1 week prior.</td><td>☐</td></tr>
+      <tr><td><strong>Prepare materials</strong></td><td>One-page TMS overview, referral form with your fax/email, your business card, patient education brochures (3–5 copies)</td><td>☐</td></tr>
+      <tr><td><strong>Prepare presentation</strong></td><td>10–12 slides. See outline below. Practice delivering in under 30 minutes — leave 15 min for Q&amp;A.</td><td>☐</td></tr>
+      <tr><td><strong>Send reminder</strong></td><td>Email physician 2 days before confirming time, location, and parking instructions.</td><td>☐</td></tr>
+      <tr><td><strong>Follow-up</strong></td><td>Email thank-you within 24 hours with PDF of presentation, referral fax form, and your contact info.</td><td>☐</td></tr>
+    </tbody>
+  </table>
+
+  <h2>20-Slide Presentation Outline</h2>
+  <div class="two-col">
+    <div>
+      <h4>Slides 1–5: Introduction</h4>
+      <ul>
+        <li>Title slide: Your clinic name, your name/title</li>
+        <li>Who we are: clinic overview, locations, years in operation</li>
+        <li>What is TMS: 2-slide technical overview with mechanism of action (non-invasive, magnetic pulses, prefrontal cortex target)</li>
+        <li>FDA clearance: 2008 for NeuroStar, insurance coverage overview</li>
+      </ul>
+      <h4>Slides 6–10: Clinical Evidence</h4>
+      <ul>
+        <li>Clinical trial data: 50+ RCTs, remission rates 28–32%</li>
+        <li>Comparison with medications: side effect profile advantage</li>
+        <li>Who is a candidate: TRD criteria, PHQ-9 thresholds</li>
+        <li>Who is NOT a candidate: contraindications</li>
+        <li>Outcomes at our clinic: aggregate response/remission data</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Slides 11–15: The Referral Process</h4>
+      <ul>
+        <li>How to refer: fax, email, phone — show the referral form</li>
+        <li>What happens after referral: insurance verification, consultation scheduling</li>
+        <li>Communication loop: how and when we update referring physician</li>
+        <li>Timeline: from referral to first treatment session</li>
+        <li>Ongoing care: maintenance sessions, discharge summary</li>
+      </ul>
+      <h4>Slides 16–18: Q&amp;A Prep</h4>
+      <ul>
+        <li>Anticipated objections and responses table</li>
+        <li>Case study: 1–2 de-identified patient success stories</li>
+        <li>Resources: referral form, contact card, patient brochures</li>
+      </ul>
+      <h4>Slides 19–20: Close</h4>
+      <ul>
+        <li>"Who should you send?" — reminder of ideal candidate criteria</li>
+        <li>Contact information — make this slide memorable, high contrast</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Anticipated Questions &amp; Responses</h2>
+  <table>
+    <thead><tr><th>Question</th><th>Suggested Response</th></tr></thead>
+    <tbody>
+      <tr><td>"Is TMS covered by insurance?"</td><td>Yes — Medicare covers TMS under NCD, and most commercial payers (BCBS, Aetna, Cigna, UHC) cover it with prior authorization. We handle all authorizations.</td></tr>
+      <tr><td>"How long does treatment take?"</td><td>36 sessions over 6–9 weeks (5 sessions/week). Each session is 18–37 minutes. Patients can return to normal activities immediately.</td></tr>
+      <tr><td>"What if my patient relapses?"</td><td>We monitor for relapse and offer maintenance sessions. Most patients who respond to initial TMS also respond to retreatment if needed.</td></tr>
+      <tr><td>"Do you require a referral form or can patients self-refer?"</td><td>We accept both physician referrals and self-referrals, but physician referrals help with insurance authorization and clinical handoff.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 4: REFERRAL TRACKING SPREADSHEET -->
+<div class="page-section pb">
+  <h1>4. Referral Tracking Spreadsheet Layout</h1>
+  <p class="section-intro">You cannot manage what you do not measure. Build a referral tracking system from day one — even a simple spreadsheet beats nothing. This section provides the exact column structure for a Google Sheets or Excel tracker.</p>
+
+  <h2>Tab 1: Referral Source Master List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Provider Name</th>
+        <th>Specialty</th>
+        <th>Practice</th>
+        <th>Contact</th>
+        <th>Initial Outreach</th>
+        <th>Last Contact</th>
+        <th>Referrals Sent</th>
+        <th>Referrals Converted</th>
+        <th>Notes</th>
+        <th>Next Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Dr. Sarah Chen</td>
+        <td>Psychiatry</td>
+        <td>Bay Area Psychiatry</td>
+        <td>schen@bap.com | (415) 555-0102</td>
+        <td>Jan 15, 2025</td>
+        <td>Mar 3, 2026</td>
+        <td>11</td>
+        <td>8</td>
+        <td>Lunch-and-learn Jan 2025. Excellent relationship. Refers patients with comorbid anxiety well.</td>
+        <td>Send quarterly report Mar 2026</td>
+      </tr>
+      <tr>
+        <td>Dr. Michael Torres</td>
+        <td>Internal Medicine</td>
+        <td>Memorial Health PCP</td>
+        <td>mtorres@mhpcp.org | (312) 555-0174</td>
+        <td>Apr 2, 2025</td>
+        <td>Feb 18, 2026</td>
+        <td>4</td>
+        <td>3</td>
+        <td>Very responsive to faxed materials. Prefers fax referral to email.</td>
+        <td>Call to schedule lunch Q2 2026</td>
+      </tr>
+      <tr>
+        <td>Jennifer Park, NP</td>
+        <td>Psychiatric NP</td>
+        <td>Compass Mental Health</td>
+        <td>jpnp@compassmh.com | (206) 555-0198</td>
+        <td>Jun 10, 2025</td>
+        <td>Jan 5, 2026</td>
+        <td>2</td>
+        <td>1</td>
+        <td>Sent initial email and brochure. No response to follow-up. Consider LinkedIn outreach.</td>
+        <td>LinkedIn connection + follow-up email</td>
+      </tr>
+      <tr>
+        <td>Dr. Amanda Singh</td>
+        <td>Psychiatry</td>
+        <td>Singh Psychiatry Group</td>
+        <td>asingh@spgroup.med | (713) 555-0141</td>
+        <td>Sep 22, 2025</td>
+        <td>Nov 30, 2025</td>
+        <td>0</td>
+        <td>0</td>
+        <td>Met at Houston Medical Society mixer. Sent letter + email. No response yet.</td>
+        <td>Second letter + call Week 3</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Tab 2: Monthly Referral Log</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Patient Name (Last, First)</th>
+        <th>Referral Source</th>
+        <th>Referral Method</th>
+        <th>Diagnosis</th>
+        <th>Initial PHQ-9</th>
+        <th>Consult Scheduled?</th>
+        <th>Treatment Started?</th>
+        <th>Completion Status</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Jan 8, 2026</td><td>Williams, David</td><td>Dr. Sarah Chen</td><td>Fax</td><td>MDD, TRD</td><td>22</td><td>Jan 15</td><td>Jan 22</td><td>Completed (36 sessions)</td><td>Remission achieved, PHQ-9 at 4</td></tr>
+      <tr><td>Jan 14, 2026</td><td>Patel, Ananya</td><td>Dr. Michael Torres</td><td>Phone</td><td>MDD, GAD</td><td>18</td><td>Jan 22</td><td>Feb 3</td><td>In progress (Session 22)</td><td>Concurrent GAD responding well</td></tr>
+      <tr><td>Feb 2, 2026</td><td>Okafor, James</td><td>Self-referral (web)</td><td>Website form</td><td>MDD, TRD</td><td>25</td><td>Feb 8</td><td>—</td><td>No-show, consult rescheduled</td><td>Insurance verified, auth pending</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout blue">
+    <div class="callout-title">KPI Targets for Referral Program</div>
+    <p>Track these monthly: (1) Referrals sent per active referring physician — target ≥1/month/physician. (2) Referral-to-consult conversion — target ≥70%. (3) Consult-to-start conversion — target ≥55%. (4) Revenue per referral — target ≥$5,000. Any referring physician who hasn't sent a patient in 6 months should get a re-engagement touch.</p>
+  </div>
+</div>
+
+<!-- SECTION 5: CO-MANAGEMENT AGREEMENT -->
+<div class="page-section pb">
+  <h1>5. Co-Management Agreement Template</h1>
+  <p class="section-intro">A formal co-management agreement clarifies roles, responsibilities, and communication expectations between your TMS clinic and referring physicians. While not required for every referral, agreements are especially valuable for high-volume referral relationships and institutional partnerships.</p>
+
+  <div class="template-box">
+    <div class="template-label">Co-Management Agreement — Template</div>
+    <div class="template-text" style="font-size:8.5pt;"><strong>AGREEMENT FOR CO-MANAGEMENT OF TRANSCRANIAL MAGNETIC STIMULATION (TMS) THERAPY</strong>
+
+This Agreement is entered into as of [<span class="placeholder">DATE</span>], by and between:
+
+<span class="placeholder">PARTY A:</span> [<span class="placeholder">TMS CLINIC NAME</span>], located at [<span class="placeholder">ADDRESS</span>] ("TMS Provider")
+
+<span class="placeholder">PARTY B:</span> [<span class="placeholder">REFERRING PRACTICE NAME</span>], located at [<span class="placeholder">ADDRESS</span>] ("Referring Physician")
+
+<strong>1. PURPOSE.</strong> This Agreement outlines the terms under which the Referring Physician will refer patients to the TMS Provider for evaluation and treatment with Transcranial Magnetic Stimulation (TMS) therapy.
+
+<strong>2. SCOPE OF CARE — TMS PROVIDER RESPONSIBILITIES.</strong>
+  a. Conduct clinical evaluation and determine TMS candidacy.
+  b. Obtain prior authorization from payer.
+  c. Administer TMS treatment per FDA-approved protocols.
+  d. Monitor patient progress using validated outcome measures (PHQ-9, GAD-7).
+  e. Communicate treatment outcomes to Referring Physician at baseline, midpoint (Session 18), and completion.
+  f. Report any adverse events per FDA requirements.
+  g. Coordinate with Referring Physician regarding concurrent medications.
+
+<strong>3. SCOPE OF CARE — REFERRING PHYSICIAN RESPONSIBILITIES.</strong>
+  a. Provide relevant clinical history, including medication trials and psychiatric evaluations.
+  b. Maintain primary responsibility for psychotropic medication management during TMS course.
+  c. Be available for consultation if clinical concerns arise during treatment.
+  d. Respond to communication from TMS Provider within [<span class="placeholder">2 BUSINESS DAYS</span>].
+
+<strong>4. COMMUNICATION PROTOCOL.</strong>
+  a. Referring Physician will send referrals via: [<span class="placeholder">FAX / SECURE EMAIL / PORTAL</span>].
+  b. TMS Provider will send outcome reports within [<span class="placeholder">5 BUSINESS DAYS</span>] of each milestone.
+  c. Interim reports will be provided upon clinical concern or patient request.
+
+<strong>5. TREATMENT RESPONSIBILITY MATRIX.</strong>
+  | Decision              | TMS Provider | Referring Physician |
+  | TMS candidacy         | PRIMARY      | Consulted           |
+  | Medication changes    | Advised      | PRIMARY             |
+  | TMS protocol adjust.  | PRIMARY      | Informed            |
+  | Adverse event mgmt.   | PRIMARY      | Immediate notify    |
+  | Discharge planning    | PRIMARY      | Coordinated         |
+
+<strong>6. LIABILITY.</strong> Each party shall maintain professional liability insurance covering their respective scope of practice. Neither party shall be liable for the other's clinical decisions outside their defined scope.
+
+<strong>7. TERM &amp; TERMINATION.</strong> This Agreement is effective as of [<span class="placeholder">DATE</span>] and shall remain in effect for [<span class="placeholder">1 YEAR</span>] unless terminated by either party with [<span class="placeholder">30 DAYS</span>] written notice.
+
+<span class="placeholder">TMS PROVIDER SIGNATURE:</span> _________________________ Date: ________
+<span class="placeholder">REFERRING PHYSICIAN SIGNATURE:</span> _________________________ Date: ________</div>
+  </div>
+</div>
+
+<!-- SECTION 6: QUARTERLY REFERRAL REPORT -->
+<div class="page-section pb">
+  <h1>6. Quarterly Referral Report Template</h1>
+  <p class="section-intro">Sending referring physicians a quarterly update is a high-value touchpoint that keeps your clinic top of mind and demonstrates professionalism. It takes 15 minutes to prepare and can reignite a dormant referral relationship.</p>
+
+  <div class="template-box">
+    <div class="template-label">Quarterly Referral Report — Template</div>
+    <div class="template-text" style="font-size:8.5pt;">SUBJECT: Your TMS Referral Report — Q[<span class="placeholder">1/2/3/4</span>] [<span class="placeholder">YEAR</span>]
+
+Dear Dr. [<span class="placeholder">LAST NAME</span>]:
+
+Thank you for trusting [<span class="placeholder">CLINIC NAME</span>] with your patients this quarter. Below is a summary of the referrals we received from your practice and their outcomes.
+
+<strong>REFERRALS FROM YOUR PRACTICE — Q[<span class="placeholder">NUMBER</span>]</strong>
+  • Total referrals received: [<span class="placeholder">NUMBER</span>]
+  • Consultations scheduled: [<span class="placeholder">NUMBER</span>]
+  • Treatment courses initiated: [<span class="placeholder">NUMBER</span>]
+  • Patients currently in treatment: [<span class="placeholder">NUMBER</span>]
+
+<strong>PATIENT OUTCOMES (Aggregate)</strong>
+  • Average baseline PHQ-9: [<span class="placeholder">SCORE</span>]
+  • Average end-of-treatment PHQ-9: [<span class="placeholder">SCORE</span>]
+  • Response rate (≥50% improvement): [<span class="placeholder">X%</span>]
+  • Remission rate (PHQ-9 &lt;5): [<span class="placeholder">X%</span>]
+
+<strong>PRACTICE UPDATES</strong>
+  • [<span class="placeholder">NEW PROTOCOL, NEW DEVICE, NEW PROVIDER, NEW LOCATION, ETC.</span>]
+
+<strong>HOW TO MAKE A REFERRAL</strong>
+  Fax: [<span class="placeholder">FAX NUMBER</span>]
+  Secure Email: [<span class="placeholder">EMAIL</span>]
+  Online Portal: [<span class="placeholder">URL</span>]
+  Phone: [<span class="placeholder">PHONE</span>]
+
+Thank you again for your partnership in caring for patients with treatment-resistant depression.
+
+[<span class="placeholder">SIGNATURE</span>]
+[<span class="placeholder">NAME, CREDENTIALS</span>]</div>
+  </div>
+
+  <h2>Quarterly Outreach Cadence</h2>
+  <table>
+    <thead><tr><th>Referring Physician Status</th><th>Q1 (Jan–Mar)</th><th>Q2 (Apr–Jun)</th><th>Q3 (Jul–Sep)</th><th>Q4 (Oct–Dec)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Champion</strong> (5+ referrals/year)</td><td>Quarterly report + holiday card</td><td>Quarterly report</td><td>Quarterly report</td><td>Quarterly report + lunch</td></tr>
+      <tr><td><strong>Active</strong> (1–4 referrals/year)</td><td>Quarterly report</td><td>Lunch-and-learn offer</td><td>Quarterly report</td><td>Year-end summary</td></tr>
+      <tr><td><strong>Dormant</strong> (0 referrals, 6+ mo)</td><td>Re-engagement email</td><td>Letter + call</td><td>LinkedIn touch</td><td>Quarterly report</td></tr>
+      <tr><td><strong>New Contact</strong> (not yet referred)</td><td>Initial outreach sequence</td><td>Check-in call</td><td>Lunch offer</td><td>Intro letter</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 7: SCALING YOUR NETWORK -->
+<div class="page-section pb">
+  <h1>7. Scaling Your Referral Network</h1>
+  <p class="section-intro">Once you have a core group of referring physicians, it's time to systematize and scale. This section outlines the pipeline stages, KPIs, and expansion strategies for growing from 5 to 50+ active referral sources.</p>
+
+  <h2>Referral Pipeline Stages</h2>
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">1</span><span class="stat-label">Identifying — finding targets in your market</span></div>
+    <div class="stat-card"><span class="stat-num">2</span><span class="stat-label">Outreach — 5-touch campaign in progress</span></div>
+    <div class="stat-card"><span class="stat-num">3</span><span class="stat-label">Engaged — responded, met, or expressed interest</span></div>
+    <div class="stat-card"><span class="stat-num">4</span><span class="stat-label">Active — sent at least 1 referral</span></div>
+  </div>
+
+  <h2>Network KPI Dashboard</h2>
+  <table>
+    <thead><tr><th>KPI</th><th>Target</th><th>Current</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Total referring physicians in network</td><td>30 by EOY</td><td>—</td><td></td></tr>
+      <tr><td>Active referrers (sent ≥1 in 90 days)</td><td>≥50% of network</td><td></td><td></td></tr>
+      <tr><td>Referrals per active referrer per quarter</td><td>≥1.0</td><td></td><td></td></tr>
+      <tr><td>Referral-to-consult conversion rate</td><td>≥70%</td><td></td><td></td></tr>
+      <tr><td>Consult-to-start conversion rate</td><td>≥55%</td><td></td><td></td></tr>
+      <tr><td>Revenue per referral</td><td>≥$5,000</td><td></td><td></td></tr>
+      <tr><td>Average time from referral to first treatment</td><td>≤14 days</td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Expansion Strategies</h2>
+  <ul>
+    <li><strong>Hospital grand rounds:</strong> Offer to give a 30-minute grand rounds presentation on TMS at local hospitals. This reaches 20–40 physicians in a single session and establishes clinical credibility.</li>
+    <li><strong>State psychiatric association membership:</strong> Join your state psychiatric association and attend annual meetings. These are goldmines for referral relationships.</li>
+    <li><strong>Residency/fellowship partnerships:</strong> Partner with psychiatry residency programs to give TMS didactics. Residents become future referring physicians.</li>
+    <li><strong>Community mental health centers:</strong> FQHCs and community mental health centers serve patients who are often uninsured or underinsured. Build relationships with their psychiatric NPs and psychiatrists.</li>
+    <li><strong>Corporate EAP partnerships:</strong> Employee Assistance Programs can refer employees with depression for TMS as an alternative to medication.</li>
+  </ul>
+
+  <div class="callout blue">
+    <div class="callout-title">The Referral Champion Strategy</div>
+    <p>Identify your top 3 referral sources and invest disproportionately in those relationships. Champions are physicians who refer consistently, respond to your communications, and will advocate for you to their colleagues. Give Champions: priority scheduling for their patients, direct phone access to your medical director, quarterly face-to-face meetings, and public acknowledgment (e.g., a "Referral Partner of the Year" certificate).</p>
+  </div>
+</div>
+
+<!-- SECTION 8: GLOSSARY -->
+<div class="page-section pb">
+  <h1>8. Glossary of Key Terms</h1>
+  <div class="glossary-grid">
+    <div class="glossary-term">
+      <span class="glossary-abbr">Co-management</span>
+      <span class="glossary-def">A formal or informal arrangement between two physicians to share care responsibilities for a patient. In TMS, typically between the referring psychiatrist and the TMS clinic physician.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Continuum of Care</span>
+      <span class="glossary-def">The delivery of healthcare across multiple settings and providers over time. TMS fits within a continuum that includes primary care, psychiatry, psychotherapy, and maintenance care.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Coordination of Care</span>
+      <span class="glossary-def">The deliberate organization of patient care activities between two or more participants involved in a patient's care to facilitate the appropriate delivery of healthcare services.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">EMR / EHR</span>
+      <span class="glossary-def">Electronic Medical Record / Electronic Health Record. Digital version of a patient's medical history. HIPAA requires BAAs with all EMR vendors.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">FQHC</span>
+      <span class="glossary-def">Federally Qualified Health Center. A federally-funded community health center that provides primary care regardless of ability to pay. Often serves uninsured and Medicaid patients.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Gatekeeper Model</span>
+      <span class="glossary-def">A healthcare delivery model in which a primary care physician controls access to specialist services. In TMS, the referring physician or PCP often acts as the gatekeeper.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">HIPAA</span>
+      <span class="glossary-def">Health Insurance Portability and Accountability Act. Federal law protecting patient health information. Applies to all communications between TMS clinics and referring physicians.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Referral Conversion Rate</span>
+      <span class="glossary-def">The percentage of referrals received that convert to scheduled consultations. Industry benchmark: 60–80%. Low conversion indicates referral friction or patient motivation issues.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Referral Pipeline</span>
+      <span class="glossary-def">The stages a referral source moves through from first contact to active referring. Stages: identifying → outreach → engaged → active → champion.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Scope of Care</span>
+      <span class="glossary-def">The set of services, treatments, and procedures that a healthcare provider is qualified and authorized to perform. Defines what each party can do in a co-management arrangement.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">SOAP Note</span>
+      <span class="glossary-def">Subjective, Objective, Assessment, Plan. Standard medical documentation format. Used in referral communications to convey patient clinical status.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Super-Biller</span>
+      <span class="glossary-def">A medical billing specialist with expertise in maximizing reimbursement through correct code selection, modifier usage, and payer-specific rules. TMS clinics benefit from super-billers on staff.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Transfer of Care</span>
+      <span class="glossary-def">The formal process of shifting primary responsibility for a patient's care from one physician to another. Distinct from co-management, which shares responsibility.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Value-Based Care</span>
+      <span class="glossary-def">A healthcare payment model where providers are reimbursed based on patient outcomes rather than volume of services. TMS outcomes data supports value-based contracting with payers.</span>
+    </div>
+  </div>
+
+  <!-- QR RESOURCE SECTION -->
+  <h2 style="margin-top: 16pt;">QR Resource Center</h2>
+  <div class="qr-section">
+    <div class="qr-section-title">Scan to Connect</div>
+    <div class="qr-section-sub">Access TMS List resources on any device — no typing required.</div>
+    <div class="qr-pair">
+      <div class="qr-item">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" alt="TMS Provider Directory QR" />
+        <div class="qr-url">tmslist.com/map/</div>
+        <div class="qr-desc">Find a TMS provider near you</div>
+      </div>
+      <div class="qr-item">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" alt="TMS Quiz QR" />
+        <div class="qr-url">tmslist.com/quiz/</div>
+        <div class="qr-desc">Take the TMS eligibility quiz</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAR-OUT CARD -->
+  <h2>Tear-Out Card: Referral Network Launch Checklist</h2>
+  <div class="tearout-card">
+    <div class="tearout-header">TMS Referral Network — Quick-Start Checklist</div>
+    <div class="tearout-grid">
+      <div>
+        <div class="tearout-item"><div class="tearout-check">1</div><div>Identify top 10 referral targets by specialty and geography</div></div>
+        <div class="tearout-item"><div class="tearout-check">2</div><div>Research each target: practice name, address, contact info</div></div>
+        <div class="tearout-item"><div class="tearout-check">3</div><div>Build referral tracking spreadsheet with all 10 targets</div></div>
+        <div class="tearout-item"><div class="tearout-check">4</div><div>Customize email template for each physician</div></div>
+        <div class="tearout-item"><div class="tearout-check">5</div><div>Send Touch 1 emails to all 10 targets</div></div>
+        <div class="tearout-item"><div class="tearout-check">6</div><div>Follow up with Touch 2 phone calls 1 week later</div></div>
+        <div class="tearout-item"><div class="tearout-check">7</div><div>Send Touch 3 formal letters via USPS</div></div>
+        <div class="tearout-item"><div class="tearout-check">8</div><div>Connect on LinkedIn (Touch 4) for responders</div></div>
+        <div class="tearout-item"><div class="tearout-check">9</div><div>Schedule first lunch-and-learn with interested physician</div></div>
+      </div>
+      <div>
+        <div class="tearout-item"><div class="tearout-check">10</div><div>Create referral form and fax cover sheet</div></div>
+        <div class="tearout-item"><div class="tearout-check">11</div><div>Prepare TMS one-pager PDF for outreach packets</div></div>
+        <div class="tearout-item"><div class="tearout-check">12</div><div>Log all outreach in referral tracking spreadsheet</div></div>
+        <div class="tearout-item"><div class="tearout-check">13</div><div>Confirm lunch-and-learn catering 1 week prior</div></div>
+        <div class="tearout-item"><div class="tearout-check">14</div><div>Deliver lunch-and-learn presentation</div></div>
+        <div class="tearout-item"><div class="tearout-check">15</div><div>Send thank-you email with presentation PDF within 24 hours</div></div>
+        <div class="tearout-item"><div class="tearout-check">16</div><div>Track first referrals received and conversion</div></div>
+        <div class="tearout-item"><div class="tearout-check">17</div><div>Send first quarterly referral report</div></div>
+        <div class="tearout-item"><div class="tearout-check">18</div><div>Identify and nurture top referral champion</div></div>
+      </div>
+    </div>
+    <div class="tearout-footer">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" />
+      <span>Get the full playbook at <strong>tmslist.com</strong> — Scan to find a TMS provider near you</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer-stripe">
+  TMS List — Connecting patients with TMS providers across the United States &bull; tmslist.com &bull; 2026
+</div>
+
+</body>
+</html>

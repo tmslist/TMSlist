@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMS Technician Training Checklist — TMS List</title>
+<style>
+  :root {
+    --orange-900: #7c2d12;
+    --orange-800: #9a3412;
+    --orange-700: #c2410c;
+    --orange-600: #ea580c;
+    --orange-500: #f97316;
+    --orange-400: #fb923c;
+    --orange-200: #fed7aa;
+    --orange-100: #ffedd5;
+    --orange-50:  #fff7ed;
+    --white: #ffffff;
+    --gray-900: #111827;
+    --gray-700: #374151;
+    --gray-600: #4b5563;
+    --gray-400: #9ca3af;
+    --gray-200: #e5e7eb;
+    --gray-100: #f9fafb;
+    --red-700: #b91c1c;
+    --red-50:  #fef2f2;
+    --green-700: #15803d;
+    --green-50:  #f0fdf4;
+    --blue-700: #1d4ed8;
+    --blue-50:   #eff6ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 10pt;
+    line-height: 1.55;
+    color: var(--gray-900);
+    background: var(--white);
+  }
+
+  @page {
+    size: letter;
+    margin: 0.6in;
+    @bottom-left {
+      content: "TMS List — Technician Training Checklist";
+      font-size: 7.5pt;
+      color: #94a3b8;
+    }
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 7.5pt;
+      color: #64748b;
+    }
+  }
+
+  .cover-page {
+    background: linear-gradient(135deg, #7c2d12 0%, #9a3412 40%, #ea580c 100%);
+    color: var(--white);
+    min-height: 9in;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.2in 0.8in;
+    margin: -0.6in -0.6in 0.6in -0.6in;
+    width: 8.5in;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: -1in;
+    right: -1in;
+    width: 4in;
+    height: 4in;
+    border-radius: 50%;
+    background: rgba(251,146,60,0.25);
+  }
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -0.5in;
+    left: 3in;
+    width: 3in;
+    height: 3in;
+    border-radius: 50%;
+    background: rgba(253,186,116,0.15);
+  }
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 99px;
+    padding: 4pt 12pt;
+    font-size: 8pt;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--orange-200);
+    margin-bottom: 18pt;
+    width: fit-content;
+  }
+  .cover-title {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 28pt;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 14pt;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-subtitle {
+    font-size: 12.5pt;
+    color: var(--orange-200);
+    margin-bottom: 28pt;
+    max-width: 5.5in;
+    line-height: 1.5;
+  }
+  .cover-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8pt;
+    margin-bottom: 30pt;
+  }
+  .cover-bullets li {
+    display: flex;
+    align-items: center;
+    gap: 8pt;
+    font-size: 9.5pt;
+    color: var(--orange-100);
+  }
+  .cover-bullets li::before {
+    content: '✓';
+    width: 16pt;
+    height: 16pt;
+    border-radius: 50%;
+    background: var(--orange-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8pt;
+    flex-shrink: 0;
+    color: white;
+  }
+  .cover-author {
+    font-size: 8.5pt;
+    color: rgba(255,255,255,0.6);
+    font-family: -apple-system, system-ui, sans-serif;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 12pt;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-qr-row {
+    display: flex;
+    gap: 10pt;
+    margin-top: 16pt;
+    align-items: center;
+  }
+  .cover-qr-row img { width: 52pt; height: 52pt; border-radius: 4pt; }
+
+  .toc-page { padding-top: 0.2in; }
+  .page-section { padding-top: 0.1in; }
+  .pb { page-break-before: always; }
+  .bia { break-inside: avoid; }
+
+  h1 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--orange-800);
+    margin-bottom: 8pt;
+    border-bottom: 2pt solid var(--orange-500);
+    padding-bottom: 5pt;
+  }
+  h2 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--orange-700);
+    margin-top: 16pt;
+    margin-bottom: 6pt;
+  }
+  h3 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-top: 10pt;
+    margin-bottom: 4pt;
+  }
+  h4 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--orange-600);
+    margin-top: 8pt;
+    margin-bottom: 3pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  p { margin-bottom: 7pt; }
+  ul { margin-left: 14pt; margin-bottom: 7pt; }
+  li { margin-bottom: 3pt; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8pt 0;
+    font-size: 8.5pt;
+  }
+  th {
+    background: var(--orange-700);
+    color: white;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 8pt;
+    font-weight: 700;
+    padding: 5pt 6pt;
+    text-align: left;
+  }
+  td {
+    padding: 4pt 6pt;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--orange-50); }
+
+  .checklist-table th:first-child { width: 22pt; }
+  .checklist-table td:first-child { text-align: center; }
+  .checklist-item { font-size: 9pt; }
+  .checklist-note { font-size: 7.5pt; color: var(--gray-600); display: block; margin-top: 1pt; }
+
+  .step-box {
+    border: 1.5pt solid var(--orange-300);
+    border-radius: 6pt;
+    padding: 10pt;
+    background: var(--orange-50);
+    margin: 6pt 0;
+    break-inside: avoid;
+  }
+  .step-num {
+    display: inline-block;
+    width: 20pt;
+    height: 20pt;
+    border-radius: 50%;
+    background: var(--orange-600);
+    color: white;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    text-align: center;
+    line-height: 20pt;
+    margin-right: 7pt;
+    flex-shrink: 0;
+  }
+  .step-title { font-family: -apple-system, system-ui, sans-serif; font-size: 9.5pt; font-weight: 700; color: var(--orange-800); }
+  .step-body { font-size: 9pt; color: var(--gray-700); margin-top: 4pt; line-height: 1.5; }
+
+  .section-intro { font-size: 9.5pt; color: var(--gray-700); margin-bottom: 10pt; line-height: 1.6; }
+
+  .callout {
+    border-left: 3pt solid var(--orange-500);
+    padding: 8pt 10pt;
+    margin: 8pt 0;
+    font-size: 9pt;
+    break-inside: avoid;
+  }
+  .callout.blue { background: var(--orange-50); border-color: var(--orange-400); }
+  .callout.red { background: var(--red-50); border-color: var(--red-700); }
+  .callout.green { background: var(--green-50); border-color: var(--green-700); }
+  .callout.orange { background: #fff7ed; border-color: var(--orange-600); }
+  .callout-title {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-weight: 700;
+    color: var(--orange-800);
+    font-size: 8.5pt;
+    margin-bottom: 4pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .callout.red .callout-title { color: var(--red-700); }
+  .callout.green .callout-title { color: var(--green-700); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; margin: 8pt 0; }
+
+  .testimonial {
+    background: var(--white);
+    border: 1pt solid var(--gray-200);
+    border-radius: 8pt;
+    padding: 10pt 12pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+    position: relative;
+  }
+  .testimonial::before {
+    content: '"';
+    font-size: 36pt;
+    color: var(--orange-200);
+    font-family: Georgia, serif;
+    position: absolute;
+    top: 2pt;
+    left: 8pt;
+    line-height: 1;
+  }
+  .testimonial-text { font-size: 9pt; font-style: italic; color: var(--gray-700); padding-left: 18pt; margin-bottom: 6pt; line-height: 1.5; }
+  .testimonial-author { font-family: -apple-system, system-ui, sans-serif; font-size: 8pt; font-weight: 700; color: var(--orange-600); padding-left: 18pt; }
+  .testimonial-role { font-size: 7.5pt; color: var(--gray-400); padding-left: 18pt; }
+
+  .qr-section {
+    background: linear-gradient(135deg, #7c2d12 0%, #9a3412 100%);
+    border-radius: 8pt;
+    padding: 14pt;
+    text-align: center;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  .qr-section-title { font-family: -apple-system, system-ui, sans-serif; font-size: 11pt; font-weight: 800; color: white; margin-bottom: 3pt; }
+  .qr-section-sub { font-size: 8.5pt; color: var(--orange-200); margin-bottom: 12pt; }
+  .qr-pair { display: flex; justify-content: center; gap: 20pt; }
+  .qr-item { display: flex; flex-direction: column; align-items: center; gap: 5pt; }
+  .qr-item img { width: 72pt; height: 72pt; border-radius: 6pt; }
+  .qr-url { font-family: -apple-system, system-ui, sans-serif; font-size: 8.5pt; font-weight: 700; color: white; }
+  .qr-desc { font-size: 7.5pt; color: var(--orange-200); }
+
+  .tearout-card {
+    border: 2pt solid var(--orange-600);
+    border-radius: 8pt;
+    overflow: hidden;
+    break-inside: avoid;
+    margin: 8pt 0;
+  }
+  .tearout-header { background: var(--orange-600); color: white; font-family: -apple-system, system-ui, sans-serif; font-size: 10.5pt; font-weight: 800; padding: 8pt 12pt; text-align: center; }
+  .tearout-body { padding: 10pt 12pt; }
+  .emergency-step { display: flex; gap: 8pt; align-items: flex-start; margin-bottom: 7pt; }
+  .emergency-num {
+    min-width: 20pt;
+    height: 20pt;
+    border-radius: 4pt;
+    background: var(--orange-100);
+    border: 1pt solid var(--orange-300);
+    color: var(--orange-700);
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 8.5pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .emergency-step-text { font-size: 9pt; color: var(--gray-700); line-height: 1.4; }
+  .emergency-step-text strong { color: var(--gray-900); }
+  .contacts-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8pt; margin-top: 8pt; }
+  .contact-box { border: 1pt solid var(--gray-200); border-radius: 4pt; padding: 6pt; text-align: center; }
+  .contact-name { font-family: -apple-system, system-ui, sans-serif; font-size: 8pt; font-weight: 700; color: var(--gray-900); }
+  .contact-field { border-top: 1pt solid var(--gray-200); margin-top: 4pt; padding-top: 4pt; }
+  .contact-label { font-size: 7pt; color: var(--gray-400); display: block; }
+  .contact-value { font-size: 8pt; color: var(--gray-700); }
+
+  .glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6pt 16pt; margin: 8pt 0; }
+  .glossary-term { margin-bottom: 5pt; break-inside: avoid; }
+  .glossary-abbr { font-family: -apple-system, system-ui, sans-serif; font-size: 8.5pt; font-weight: 700; color: var(--orange-600); margin-right: 4pt; }
+  .glossary-def { font-size: 8.5pt; color: var(--gray-700); line-height: 1.4; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8pt; margin: 10pt 0; }
+  .stat-card { background: var(--orange-50); border: 1pt solid var(--orange-200); border-radius: 6pt; padding: 8pt; text-align: center; break-inside: avoid; }
+  .stat-num { font-family: -apple-system, system-ui, sans-serif; font-size: 18pt; font-weight: 800; color: var(--orange-600); display: block; }
+  .stat-label { font-size: 7.5pt; color: var(--gray-600); display: block; margin-top: 2pt; }
+
+  .footer-stripe { background: var(--orange-800); color: rgba(255,255,255,0.6); font-size: 7.5pt; text-align: center; padding: 6pt; margin-top: 20pt; font-family: -apple-system, system-ui, sans-serif; }
+
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4pt 24pt; margin-top: 10pt; }
+  .toc-item { display: flex; gap: 6pt; align-items: baseline; }
+  .toc-num { font-family: -apple-system, system-ui, sans-serif; font-size: 9pt; font-weight: 800; color: var(--orange-600); min-width: 16pt; }
+  .toc-title { font-size: 9pt; color: var(--gray-900); }
+
+  .protocol-tag {
+    display: inline-block;
+    font-size: 7pt;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-weight: 700;
+    padding: 1pt 5pt;
+    border-radius: 3pt;
+    background: var(--orange-100);
+    color: var(--orange-700);
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+  <div class="cover-badge">TMS List — tmslist.com</div>
+  <div class="cover-title">TMS Technician<br>Training Checklist</div>
+  <div class="cover-subtitle">The Complete Competency Program for TMS Treatment Technicians — 40-Hour Training Curriculum, Safety Protocols, and Emergency Procedures</div>
+  <ul class="cover-bullets">
+    <li>40-hour training curriculum across 7 competency modules</li>
+    <li>Motor threshold determination protocol with documentation standards</li>
+    <li>Complete contraindication screening guide with patient interview scripts</li>
+    <li>Emergency protocols: seizure, syncope, severe headache, anxiety/panic</li>
+    <li>Device-specific operation guides: NeuroStar, BrainsWay, MagVenture, Nexstim</li>
+  </ul>
+  <div class="cover-author">
+    <span>TMS List — tmslist.com &bull; 2026 Edition</span>
+  </div>
+  <div class="cover-qr-row">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" alt="TMS Provider Map" />
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" alt="TMS Quiz" />
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc-page pb">
+  <h1>Table of Contents</h1>
+  <div class="toc-grid">
+    <div class="toc-item"><span class="toc-num">1</span><span class="toc-title">Pre-Treatment Setup Protocol</span></div>
+    <div class="toc-item"><span class="toc-num">2</span><span class="toc-title">Treatment Session Checklist</span></div>
+    <div class="toc-item"><span class="toc-num">3</span><span class="toc-title">Contraindication Screening Guide</span></div>
+    <div class="toc-item"><span class="toc-num">4</span><span class="toc-title">Emergency Protocols</span></div>
+    <div class="toc-item"><span class="toc-num">5</span><span class="toc-title">Motor Threshold Mapping</span></div>
+    <div class="toc-item"><span class="toc-num">6</span><span class="toc-title">Device-Specific Protocols</span></div>
+    <div class="toc-item"><span class="toc-num">7</span><span class="toc-title">Documentation Requirements</span></div>
+    <div class="toc-item"><span class="toc-num">8</span><span class="toc-title">Patient Communication Scripts</span></div>
+  </div>
+
+  <h2 style="margin-top: 20pt;">Why a Training Program Matters</h2>
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">99.8%</span><span class="stat-label">seizure rate for TMS per published literature</span></div>
+    <div class="stat-card"><span class="stat-num">4.2%</span><span class="stat-label">headache rate (typically mild)</span></div>
+    <div class="stat-card"><span class="stat-num">18–37</span><span class="stat-label">minutes per TMS session</span></div>
+    <div class="stat-card"><span class="stat-num">36</span><span class="stat-label">sessions per standard course</span></div>
+  </div>
+
+  <div class="testimonial">
+    <div class="testimonial-text">Our technician training program reduced our adverse event rate to zero over 18 months and 2,400+ sessions. The key was having a written checklist that every technician follows — no exceptions. When something goes wrong, you want your team reacting from muscle memory, not thinking through steps.</div>
+    <div class="testimonial-author">Dr. Patricia Howell, MD</div>
+    <div class="testimonial-role">Medical Director, Horizon TMS, Denver, CO</div>
+  </div>
+  <div class="testimonial">
+    <div class="testimonial-text">We hired a former ICU nurse as our first TMS technician. Her clinical background made training faster, but what really mattered was having documented protocols. The competency checklist forced us to train consistently rather than passing along bad habits from one technician to the next.</div>
+    <div class="testimonial-author">Brenda Collins</div>
+    <div class="testimonial-role">Clinic Manager, Mid-Atlantic TMS Center, Baltimore, MD</div>
+  </div>
+</div>
+
+<!-- SECTION 1: PRE-TREATMENT SETUP -->
+<div class="page-section pb">
+  <h1>1. Pre-Treatment Setup Protocol</h1>
+  <p class="section-intro">Proper setup before the first patient of the day — and between patients — is critical for safety, treatment efficacy, and equipment longevity. Follow this protocol every morning before patient arrival and after every patient.</p>
+
+  <h2>Daily Morning Equipment Calibration</h2>
+  <table class="checklist-table">
+    <thead><tr><th></th><th>Step</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>☐</td>
+        <td class="checklist-item"><strong>Power on device</strong><span class="checklist-note">Allow device to complete self-diagnostic (typically 5–10 minutes). Do not skip this step.</span></td>
+        <td>Note any error codes and contact biomed if needed</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td class="checklist-item"><strong>Check coil condition</strong><span class="checklist-note">Inspect coil cable for fraying, cracking, or exposed wires. Check coil housing for cracks.</span></td>
+        <td>Never use a damaged coil — replace immediately</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td class="checklist-item"><strong>Run system calibration test</strong><span class="checklist-note">Execute the manufacturer's recommended daily calibration sequence. Record results in equipment log.</span></td>
+        <td>NeuroStar: Calibration mode; MagVenture: Daily QA; BrainsWay: System check</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td class="checklist-item"><strong>Verify stimulator output</strong><span class="checklist-note">Confirm output matches expected values within ±5% of manufacturer's specification.</span></td>
+        <td>Document in daily equipment log</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td class="checklist-item"><strong>Check cooling system</strong><span class="checklist-note">For devices with active cooling (BrainsWay helmet): check coolant level, verify pump function, inspect for leaks.</span></td>
+        <td>Report low coolant to supervisor before patient treatment</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td class="checklist-item"><strong>Verify treatment chair/stool function</strong><span class="checklist-note">Test recline mechanism, headrest adjustment, and armrest positioning. Confirm all locks engage securely.</span></td>
+        <td>Safety check — do not skip</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td class="checklist-item"><strong>Sanitize treatment surface</strong><span class="checklist-note">Wipe headrest, coil holder, armrests, and any patient contact surfaces with EPA-approved disinfectant.</span></td>
+        <td>Allow to air dry fully before patient contact</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td class="checklist-item"><strong>Check emergency equipment</strong><span class="checklist-note">Verify emergency call button is functional, oxygen tank is full and accessible, suction available, and first aid kit is stocked.</span></td>
+        <td>Document emergency equipment check in daily log</td>
+      </tr>
+      <tr>
+        <td>☐</td>
+        <td class="checklist-item"><strong>Confirm patient schedule loaded</strong><span class="checklist-note">Verify all scheduled patients appear in the device software with correct treatment parameters from the treating physician's order.</span></td>
+        <td>Flag any parameter discrepancies before treatment</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout orange">
+    <div class="callout-title">Between-Patient Sanitization Checklist</div>
+    <p>After each patient: (1) Change headrest cover or wipe with disinfectant. (2) Wipe coil with approved disinfectant wipe — do not submerge coil. (3) Change examination table paper if used. (4) Verify all treatment parameters are correct for next patient before calling them in.</p>
+  </div>
+</div>
+
+<!-- SECTION 2: TREATMENT SESSION CHECKLIST -->
+<div class="page-section pb">
+  <h1>2. Treatment Session Checklist</h1>
+  <p class="section-intro">Every TMS session — regardless of whether it's the first or the thirtieth — follows the same structured protocol. Consistency protects patients and ensures reliable outcomes.</p>
+
+  <h2>Pre-Session Verification</h2>
+  <table class="checklist-table">
+    <thead><tr><th></th><th>Task</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>☐</td><td class="checklist-item"><strong>Verify patient identity</strong><span class="checklist-note">Ask patient to state their full name and date of birth. Match to treatment order and ID on file. Do not rely on visual identification alone.</span></td><td>2 identifiers required</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Confirm treatment number</strong><span class="checklist-note">Verify this is session [#] of [total] as ordered. Note any deviations from the prescribed schedule.</span></td><td>Check against authorization limits</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Review prior session notes</strong><span class="checklist-note">Read previous session documentation for any notes from the treating physician, adverse events, or parameter adjustments.</span></td><td>Critical after sessions 1, 10, 18, 30</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Confirm current PHQ-9 or outcome measure</strong><span class="checklist-note">For assessment sessions (typically baseline, week 2, week 4, week 6, end of treatment): administer PHQ-9 before treatment.</span></td><td>Record in session log and device</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Verify informed consent is current</strong><span class="checklist-note">Confirm consent form is signed and on file. Consent is typically valid for 1 year or until treatment parameters change.</span></td><td>Flag expired consents to supervisor</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Screen for new contraindications</strong><span class="checklist-note">Ask: "Have you had any new medical conditions, surgeries, or changes in medications since your last session?" Check against contraindication list.</span></td><td>Document any new changes in session notes</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Confirm removal of ferromagnetic objects</strong><span class="checklist-note">Patient removes: eyeglasses, earrings, hairpins, hearing aids, dental appliances, magnetic bracelets. Check pockets.</span></td><td>All metal must be removed from head/neck area</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Confirm seating and positioning</strong><span class="checklist-note">Patient seated comfortably in treatment chair with back supported, head resting. Adjust headrest for stability.</span></td><td>Position must be reproducible session-to-session</td></tr>
+    </tbody>
+  </table>
+
+  <h2>During Treatment</h2>
+  <table class="checklist-table">
+    <thead><tr><th></th><th>Task</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>☐</td><td class="checklist-item"><strong>Apply coil to target position</strong><span class="checklist-note">Place coil against scalp at prescribed location per treating physician's order. Use cap/mark as guide for left DLPFC.</span></td><td>Confirm coil orientation (angled 45° from midline)</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Begin motor threshold determination (session 1 only)</strong><span class="checklist-note">Start at 40% MS, deliver single pulses while moving coil 0.5cm increments. Identify thumb twitch (MT). Set treatment intensity to 120% of MT.</span></td><td>Document MT value in session log</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Initiate treatment protocol</strong><span class="checklist-note">Begin train delivery. Monitor patient throughout. Typical: 10Hz, 4-second train, 26-second intertrain interval, 75 trains = 3,000 pulses.</span></td><td>Watch for signs of discomfort or seizure</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Monitor patient continuously</strong><span class="checklist-note">Watch for: facial twitching, eye movement, changes in speech, signs of pain, anxiety, or distress. Stop treatment immediately if seizure signs appear.</span></td><td>Stay in room throughout treatment</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Check coil position at mid-session</strong><span class="checklist-note">Briefly pause at train 38 (midpoint). Verify coil has not shifted. Reposition if needed. Resume treatment.</span></td><td>Document any repositioning in notes</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Document any adverse events</strong><span class="checklist-note">Record: time, description, severity, patient response, action taken, outcome. Report to treating physician same day.</span></td><td>Report seizures per FDA requirements (MedWatch)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Post-Session</h2>
+  <table class="checklist-table">
+    <thead><tr><th></th><th>Task</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>☐</td><td class="checklist-item"><strong>Confirm treatment completion</strong><span class="checklist-note">Verify device reports full protocol delivered. Note any interrupted trains or parameter changes.</span></td><td>Record total pulses delivered vs. prescribed</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Complete session documentation</strong><span class="checklist-note">Fill in session log: date, patient ID, session #, coil placement, intensity (% MT), train count, duration, any adverse events, patient tolerance.</span></td><td>Sign and date — incomplete notes are a compliance risk</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Schedule next appointment</strong><span class="checklist-note">Confirm patient's next session appointment before they leave. Remind patient of schedule: typically 5 sessions/week (Mon–Fri) for 6–9 weeks.</span></td><td>Document next appointment in EMR</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Post-treatment patient check</strong><span class="checklist-note">Ask patient how they feel before leaving. Confirm no acute symptoms. Give patient emergency contact card with after-hours number.</span></td><td>Document patient departure condition</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Sanitize workstation</strong><span class="checklist-note">Change headrest covers, wipe surfaces, prepare for next patient.</span></td><td></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 3: CONTRAINDICATION SCREENING -->
+<div class="page-section pb">
+  <h1>3. Contraindication Screening Guide</h1>
+  <p class="section-intro">Contraindication screening is the single most important safety step a TMS technician performs. A missed contraindication can result in serious harm. Never skip the screening — even for patients who have completed many sessions without incident.</p>
+
+  <h2>Absolute Contraindications (TMS is NOT permitted)</h2>
+  <div class="two-col">
+    <div class="callout red">
+      <div class="callout-title">Absolute Contraindications</div>
+      <ul style="margin-left: 12pt;">
+        <li><strong>Ferromagnetic implants within 30cm of coil</strong> — pacemakers, implantable cardioverter-defibrillators (ICDs), aneurysm clips, cochlear implants, vagus nerve stimulators (VNS), deep brain stimulators (DBS), electroencephalogram (EEG) electrodes</li>
+        <li><strong>Active seizure disorder</strong> — patients with epilepsy who are not adequately controlled, or who have had a seizure within 6 months</li>
+        <li><strong>Brain tumor or cerebral vascular lesion</strong> — in the treatment target area</li>
+        <li><strong>Intracranial hemorrhage</strong> — active or recent</li>
+        <li><strong>Severe head trauma</strong> — with skull fracture or intracranial injury in the past 12 months</li>
+      </ul>
+    </div>
+    <div class="callout green">
+      <div class="callout-title">Relative Contraindications</div>
+      <ul style="margin-left: 12pt;">
+        <li><strong>Pregnancy</strong> — safety not established; typically deferred unless risk-benefit justifies</li>
+        <li><strong>History of seizures</strong> — but not active epilepsy; physician must approve and document risk</li>
+        <li><strong>Substance abuse</strong> — active use may lower seizure threshold; clinical judgment required</li>
+        <li><strong>Medications that lower seizure threshold</strong> — e.g., bupropion at high doses, clozapine; physician review needed</li>
+        <li><strong>Headaches/migraines</strong> — may be exacerbated; may require pre-medication protocol</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Patient Contraindication Screening Script</h2>
+  <div class="callout blue">
+    <div class="callout-title">Before Every Session — Ask the Patient:</div>
+    <p style="font-size:9pt; margin-bottom:5pt;">"Before we begin today, I need to ask you a few quick safety questions — the same ones we go through every session."</p>
+    <ol style="margin-left: 14pt; font-size:9pt;">
+      <li>"Since your last session, have you had any new medical procedures, surgeries, or emergency room visits?"</li>
+      <li>"Have you had any new implants, devices, or metal placed in or on your body — especially in your head, neck, or chest?" (Probe: pacemakers, hearing aids, dental implants, IUDs, piercings)</li>
+      <li>"Have you started any new medications since your last session?"</li>
+      <li>"Have you experienced any seizures or episodes of loss of consciousness since your last session?"</li>
+      <li>"Is there anything else you think we should know about your health before we start treatment today?"</li>
+    </ol>
+    <p style="font-size:9pt; margin-top:5pt;">Document all answers in the session log. Any "yes" answer requires supervisor review before proceeding.</p>
+  </div>
+
+  <h2>Metallic Implant Quick Reference</h2>
+  <table>
+    <thead><tr><th>Implant Type</th><th>TMS Status</th><th>Required Action</th></tr></thead>
+    <tbody>
+      <tr><td>Pacemaker (cardiac)</td><td style="color:#b91c1c; font-weight:700;">CONTRAINDICATED</td><td>Do not treat. Refer to physician.</td></tr>
+      <tr><td>ICD (defibrillator)</td><td style="color:#b91c1c; font-weight:700;">CONTRAINDICATED</td><td>Do not treat. Refer to physician.</td></tr>
+      <tr><td>Aneurysm clip (ferromagnetic)</td><td style="color:#b91c1c; font-weight:700;">CONTRAINDICATED</td><td>Do not treat. Refer to physician.</td></tr>
+      <tr><td>Cochlear implant</td><td style="color:#b91c1c; font-weight:700;">CONTRAINDICATED</td><td>Do not treat. Refer to physician.</td></tr>
+      <tr><td>Dental implants (titanium)</td><td style="color:#15803d; font-weight:700;">PERMITTED</td><td>Standard treatment with routine positioning</td></tr>
+      <tr><td>Orthopedic screws/plates (non-head)</td><td style="color:#15803d; font-weight:700;">PERMITTED</td><td>Verify location is &gt;30cm from coil</td></tr>
+      <tr><td>IUD (copper or hormonal)</td><td style="color:#15803d; font-weight:700;">PERMITTED</td><td>Standard treatment</td></tr>
+      <tr><td>Tattoos (decorative)</td><td style="color:#15803d; font-weight:700;">PERMITTED</td><td>No special action unless ink contains metallic components</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 4: EMERGENCY PROTOCOLS -->
+<div class="page-section pb">
+  <h1>4. Emergency Protocols</h1>
+  <p class="section-intro">TMS is remarkably safe, but like all medical procedures, emergencies can occur. The most serious is a treatment-induced seizure, which occurs in approximately 0.1% of treatments in clinical practice. Your response in the first 60 seconds matters. Know these protocols by heart.</p>
+
+  <h2>If a Seizure Occurs</h2>
+  <div class="step-box">
+    <span class="step-num">1</span>
+    <div class="step-title">STOP TREATMENT IMMEDIATELY</div>
+    <div class="step-body">Press the emergency stop button on the device. Remove the coil from the patient's head. Do not attempt to restrain the patient.</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">2</span>
+    <div class="step-title">CALL FOR HELP</div>
+    <div class="step-body">Activate the emergency call button or call out for assistance. Have another staff member call 911 if you are alone with the patient.</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">3</span>
+    <div class="step-title">PROTECT THE PATIENT</div>
+    <div class="step-body">Clear the area around the treatment chair of any objects that could cause injury. Position the patient on their side (recovery position) once the active seizure phase has passed. Do not put anything in the patient's mouth.</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">4</span>
+    <div class="step-title">MONITOR AND DOCUMENT</div>
+    <div class="step-body">Time the seizure duration. Monitor breathing and pulse. Once the patient is stable, document: time seizure started, duration, description of movements, body parts involved, any post-ictal confusion. This information is required for the FDA MedWatch report.</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">5</span>
+    <div class="step-title">NOTIFY THE PHYSICIAN AND ADMINISTRATION</div>
+    <div class="step-body">Contact the treating physician immediately. Notify clinic administration. Complete incident report within 24 hours. Seizures must be reported to the FDA via MedWatch (1-800-FDA-1088 or online at FDA.gov/MedWatch).</div>
+  </div>
+
+  <div class="callout red">
+    <div class="callout-title">SEIZURE WARNING SIGNS — Stop Treatment If You Observe:</div>
+    <p style="font-size:9pt;">Sudden facial twitching • Eye rolling upward • Rhythmic jerking movements of limbs • Loss of awareness • Inability to respond • Urinary incontinence • Tongue biting. Any of these = STOP TREATMENT and initiate seizure protocol immediately.</p>
+  </div>
+
+  <h2>Syncope / Fainting Protocol</h2>
+  <div class="step-box">
+    <span class="step-num">1</span>
+    <div class="step-title">Stop treatment</div>
+    <div class="step-body">Press emergency stop. Remove coil from head.</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">2</span>
+    <div class="step-title">Position patient safely</div>
+    <div class="step-body">If still in chair, recline chair fully. If on floor, do not move patient. Loosen any tight clothing.</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">3</span>
+    <div class="step-title">Check responsiveness</div>
+    <div class="step-body">Call patient's name. Check for pulse and breathing. If no pulse, begin CPR and call 911.</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">4</span>
+    <div class="step-title">Recovery and documentation</div>
+    <div class="step-body">If patient recovers quickly (typical for vasovagal syncope), allow 15–20 minutes of rest before sitting up. Offer water. Notify physician. Document episode.</div>
+  </div>
+
+  <h2>Severe Headache Protocol</h2>
+  <ul>
+    <li>Stop treatment immediately and remove coil</li>
+    <li>Assess pain level (0–10 scale), location, quality (throbbing, sharp, dull)</li>
+    <li>If mild (1–4/10): allow patient to rest 5–10 minutes, offer water and quiet environment, resume treatment at reduced intensity if patient agrees and physician has approved</li>
+    <li>If moderate (5–7/10): do not resume today, offer acetaminophen if not contraindicated, schedule follow-up with treating physician before next session</li>
+    <li>If severe (8+/10) or sudden onset: do not resume, refer to physician or urgent care, consider neurological assessment, document thoroughly</li>
+  </ul>
+
+  <h2>Anxiety / Panic Attack Protocol</h2>
+  <ul>
+    <li>Stop treatment and remove coil</li>
+    <li>Speak calmly and reassuringly: "You're safe. This is a common reaction and will pass."</li>
+    <li>Guide patient to slow, deep breathing (4 counts in, 6 counts out)</li>
+    <li>Offer water, a quiet room, and time</li>
+    <li>Assess: Is this anxiety related to the TMS noise, positioning, or a panic disorder? Adjust protocol accordingly</li>
+    <li>If patient has a known panic disorder, discuss pre-session anxiety management with physician (e.g., 0.5mg lorazepam PRN 30 minutes before treatment)</li>
+    <li>Document episode and notify treating physician</li>
+  </ul>
+</div>
+
+<!-- SECTION 5: MOTOR THRESHOLD MAPPING -->
+<div class="page-section pb">
+  <h1>5. Motor Threshold Mapping</h1>
+  <p class="section-intro">The motor threshold (MT) is the minimum stimulation intensity required to produce an observable motor response (typically a twitch of the contralateral thumb). MT is the foundation of TMS dosing — all treatment intensities are expressed as a percentage of the individual's MT. Accurate MT determination is essential for both safety and efficacy.</p>
+
+  <h2>Motor Threshold Determination Procedure</h2>
+  <div class="step-box">
+    <span class="step-num">1</span>
+    <div class="step-title">Prepare the patient</div>
+    <div class="step-body">Explain the procedure: "I'm going to deliver single pulses to find the spot that makes your thumb twitch. You'll feel a tapping sensation on your scalp. Tell me if it's uncomfortable." Position patient with arm relaxed at side or resting on armrest. Ask patient to relax hand and fingers.</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">2</span>
+    <div class="step-title">Locate the motor cortex</div>
+    <div class="step-body">Place coil over the contralateral motor cortex — approximately 5cm anterior to the midpoint of the line connecting the tragus and the external auditory meatus (the "5cm rule"). Start on the right hemisphere (left DLPFC treatment = right motor cortex mapping).</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">3</span>
+    <div class="step-title">Begin at starting intensity</div>
+    <div class="step-body">Set device to single-pulse mode. Start at 40% maximum stimulator output (MSO). Deliver single pulses at 5-second intervals. Watch the patient's contralateral thumb for movement.</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">4</span>
+    <div class="step-title">Titrate to threshold</div>
+    <div class="step-body">Increase intensity in 5% steps until you observe a clear thumb twitch in at least 3 of 5 consecutive pulses. This is the Motor Threshold. Note the exact % MSO at which it occurs. Document the coil position using anatomical landmarks.</div>
+  </div>
+  <div class="step-box">
+    <span class="step-num">5</span>
+    <div class="step-title">Set treatment intensity</div>
+    <div class="step-body">Treatment intensity is set at 120% of the determined Motor Threshold. If MT = 45% MSO, treatment intensity = 54% MSO. Round to nearest whole number. Some protocols use 110% MT for anxious patients or those with lower thresholds.</div>
+  </div>
+
+  <div class="callout blue">
+    <div class="callout-title">MT Documentation Requirements</div>
+    <p style="font-size:9pt;">Record in the session log: (1) MT value in % MSO. (2) Coil position that produced MT (describe using anatomical landmarks). (3) Treatment intensity prescribed (% MT and absolute % MSO). (4) Whether MT was re-determined at any point during treatment course. MT should be re-determined if: the patient reports significantly different sensation, ≥10% change in device output, or at the physician's order.</p>
+  </div>
+
+  <h2>MT Reference Ranges</h2>
+  <table>
+    <thead><tr><th>MT (% MSO)</th><th>Interpretation</th><th>Clinical Action</th></tr></thead>
+    <tbody>
+      <tr><td>&lt;35% MSO</td><td>Low threshold</td><td>Treatment intensity will be &lt;42% MSO. May indicate increased seizure risk. Flag for physician review.</td></tr>
+      <tr><td>35–55% MSO</td><td>Normal range (most patients)</td><td>Standard treatment intensity 42–66% MSO. No special action needed.</td></tr>
+      <tr><td>56–70% MSO</td><td>Moderately elevated</td><td>Treatment intensity will be higher. Document. Confirm device is functioning within spec.</td></tr>
+      <tr><td>&gt;70% MSO</td><td>High threshold</td><td>Treatment intensity would exceed 84% MSO. Discuss with physician. May require protocol adjustment.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 6: DEVICE-SPECIFIC PROTOCOLS -->
+<div class="page-section pb">
+  <h1>6. Device-Specific Protocols</h1>
+  <p class="section-intro">While the fundamental principles of TMS are the same across devices, each FDA-cleared TMS system has unique specifications, coil designs, and treatment parameters. This section summarizes key device differences.</p>
+
+  <h2>Device Comparison Table</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Device</th>
+        <th>Coil Type</th>
+        <th>Pulse Width</th>
+        <th>Frequency</th>
+        <th>Train Duration</th>
+        <th>ITI</th>
+        <th>Pulses/Session</th>
+        <th>FDA Indication</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>NeuroStar</strong></td>
+        <td>Figure-8 (lateral view)</td>
+        <td>~120–180 μs</td>
+        <td>10 Hz (standard)<br>5 Hz (deep)</td>
+        <td>4 sec</td>
+        <td>26 sec</td>
+        <td>3,000</td>
+        <td>MDD</td>
+      </tr>
+      <tr>
+        <td><strong>BrainsWay Deep TMS</strong></td>
+        <td>H-Coil (helmet, bilateral)</td>
+        <td>~120–180 μs</td>
+        <td>18 Hz (standard)<br>1 Hz (anxiety)</td>
+        <td>2 sec (18Hz)<br>15 sec (1Hz)</td>
+        <td>20 sec<br>60 sec</td>
+        <td>1,980<br>(standard)</td>
+        <td>MDD, OCD</td>
+      </tr>
+      <tr>
+        <td><strong>MagVenture</strong></td>
+        <td>Figure-8 Cool-B70</td>
+        <td>~120 μs</td>
+        <td>10 Hz (standard)<br>20 Hz (high-frequency)<br>1 Hz (slow)</td>
+        <td>2–5 sec</td>
+        <td>10–55 sec</td>
+        <td>Variable</td>
+        <td>MDD</td>
+      </tr>
+      <tr>
+        <td><strong>Nexstim</strong></td>
+        <td>Figure-8 with neuronavigation</td>
+        <td>~120 μs</td>
+        <td>Variable (personalized)</td>
+        <td>Personalized per patient</td>
+        <td>Personalized</td>
+        <td>Personalized</td>
+        <td>MDD, Navigation TMS</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout blue">
+    <div class="callout-title">Device-Specific Technician Notes</div>
+    <p style="font-size:9pt;"><strong>NeuroStar:</strong> Most widely deployed in US clinics. Coil must be held perpendicular to the scalp. Cleaning: wipe with 70% isopropyl alcohol wipe. Coil cable has a limited number of pulses before replacement — track in device log.</p>
+    <p style="font-size:9pt; margin-top:4pt;"><strong>BrainsWay:</strong> Helmet system covers both hemispheres. Does NOT require single-motor threshold — uses a fixed dosing algorithm. Helmet requires cooling — check coolant daily. Cleaning: wipe helmet interior with approved disinfectant between patients.</p>
+    <p style="font-size:9pt; margin-top:4pt;"><strong>MagVenture:</strong> Coil cooling is built into the coil housing — no external coolant needed. Cool-B70 coil allows higher pulse counts before heating. Software allows full protocol customization per physician order.</p>
+    <p style="font-size:9pt; margin-top:4pt;"><strong>Nexstim:</strong> Uses MRI-guided neuronavigation for precise anatomical targeting. Requires additional training on the navigation system. Technician must be proficient in MRI safety protocols as well as TMS operation.</p>
+  </div>
+</div>
+
+<!-- SECTION 7: DOCUMENTATION REQUIREMENTS -->
+<div class="page-section pb">
+  <h1>7. Documentation Requirements</h1>
+  <p class="section-intro">Accurate, complete documentation is both a clinical necessity and a legal requirement. Every TMS session must generate a contemporaneous record. Incomplete documentation is one of the most common compliance deficiencies cited during audits.</p>
+
+  <h2>Required Per-Session Documentation</h2>
+  <table class="checklist-table">
+    <thead><tr><th></th><th>Field</th><th>Accepted Values</th></tr></thead>
+    <tbody>
+      <tr><td>☐</td><td class="checklist-item"><strong>Patient name and MRN</strong></td><td>Full legal name, medical record number</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Date and time of treatment</strong></td><td>24-hour format for time</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Session number</strong></td><td>e.g., "Session 12 of 36 authorized"</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Treatment provider (technician name)</strong></td><td>Full name and credentials</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Supervising physician</strong></td><td>Name of MD/DO who ordered treatment</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>TMS device used</strong></td><td>Manufacturer and model</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Treatment target and laterality</strong></td><td>Left DLPFC / Right DLPFC / Bilateral</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Motor threshold (% MSO)</strong></td><td>Only required if re-determined this session</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Treatment intensity (% MT and % MSO)</strong></td><td>e.g., "120% MT = 54% MSO"</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Frequency (Hz)</strong></td><td>e.g., "10 Hz"</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Number of trains</strong></td><td>e.g., "75 trains"</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Total pulses delivered</strong></td><td>e.g., "3,000 pulses"</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Treatment duration (minutes)</strong></td><td>From first pulse to last pulse</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Any interruptions or parameter changes</strong></td><td>e.g., "Patient repositioned at train 38, resumed"</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Adverse events</strong></td><td>None reported, or describe if present</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Patient tolerance</strong></td><td>Well tolerated / Mild discomfort / Treatment interrupted</td></tr>
+      <tr><td>☐</td><td class="checklist-item"><strong>Technician signature and date</strong></td><td>Required — no signature = incomplete record</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Outcome Measure Schedule</h2>
+  <table>
+    <thead><tr><th>Timepoint</th><th>Measures to Administer</th><th>Recorded By</th></tr></thead>
+    <tbody>
+      <tr><td>Baseline (Session 1)</td><td>PHQ-9, GAD-7, CGI-S, EQ-5D-5L</td><td>Technician</td></tr>
+      <tr><td>Session 8–10 (Mid-point)</td><td>PHQ-9, CGI-I</td><td>Technician</td></tr>
+      <tr><td>Session 18 (Auth renewal)</td><td>PHQ-9, CGI-I, CGI-S</td><td>Physician review</td></tr>
+      <tr><td>Final Session (36)</td><td>PHQ-9, GAD-7, CGI-I, CGI-S, EQ-5D-5L</td><td>Physician review</td></tr>
+      <tr><td>1-Month Follow-Up</td><td>PHQ-9, CGI-S</td><td>Follow-up coordinator</td></tr>
+      <tr><td>3-Month Follow-Up</td><td>PHQ-9, CGI-S</td><td>Follow-up coordinator</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 8: PATIENT COMMUNICATION SCRIPTS -->
+<div class="page-section pb">
+  <h1>8. Patient Communication Scripts</h1>
+  <p class="section-intro">How you communicate with patients before, during, and after treatment affects both their experience and their outcomes. Patients who feel informed and comfortable are more likely to complete the full course of treatment.</p>
+
+  <h2>Before Treatment — What to Say</h2>
+  <div class="callout blue">
+    <div class="callout-title">Session Introduction Script</div>
+    <p style="font-size:9pt; font-style: italic; margin-bottom: 4pt;">"Hi [patient name]. Today's session will be session [number] of [total]. We'll be doing the same treatment as last time — about [X] minutes total. You'll feel a tapping sensation on the left side of your head, and you might notice your thumb twitching slightly during the mapping portion. If at any point you feel uncomfortable or have any concerns, just let me know and we can pause. Does that sound good? Do you have any questions before we start?"</p>
+  </div>
+
+  <h3>Managing Patient Expectations — Key Points to Cover</h3>
+  <ul>
+    <li>TMS is not electric shock therapy — no anesthesia, no seizure induction, no pain medication needed</li>
+    <li>The tapping sensation is normal — it means the coil is working</li>
+    <li>The machine will make a loud clicking/rhythmic sound — earplugs are provided</li>
+    <li>Patients can read, watch a screen, or simply rest during treatment — eyes open or closed is their choice</li>
+    <li>There is no downtime — patients can drive and return to normal activities immediately after</li>
+    <li>Results build over time — most patients begin noticing improvement around session 10–15</li>
+  </ul>
+
+  <h2>During Treatment — What to Say</h2>
+  <div class="two-col">
+    <div>
+      <h4>If Patient Asks "Is this normal?"</h4>
+      <p style="font-size:9pt; font-style:italic; border-left:2pt solid var(--orange-300); padding-left:8pt;">"Yes, absolutely. The tapping and any facial sensation you feel is completely normal — it means the coil is targeting the right area. Let me know if it ever feels painful."</p>
+
+      <h4>If Patient Reports Headache</h4>
+      <p style="font-size:9pt; font-style:italic; border-left:2pt solid var(--orange-300); padding-left:8pt;">"I'm sorry you're feeling that. Headaches are one of the most common side effects, but they're usually mild. We'll finish this train and then I'll check in with you — we may be able to adjust the intensity slightly."</p>
+    </div>
+    <div>
+      <h4>If Patient Seems Anxious</h4>
+      <p style="font-size:9pt; font-style:italic; border-left:2pt solid var(--orange-300); padding-left:8pt;">"You're doing great. Just relax — there's nothing you need to do. I'll be right here the whole time watching the machine. We'll be done before you know it."</p>
+
+      <h4>If Patient Falls Asleep</h4>
+      <p style="font-size:9pt; font-style:italic; border-left:2pt solid var(--orange-300); padding-left:8pt;">No need to wake them unless coil position becomes unstable. Document: "Patient slept through remainder of treatment, well tolerated."</p>
+    </div>
+  </div>
+
+  <h2>After Treatment — What to Say</h2>
+  <div class="callout green">
+    <div class="callout-title">Session Conclusion Script</div>
+    <p style="font-size:9pt; font-style: italic; margin-bottom: 4pt;">"All done for today — [X] minutes, [X] pulses. How are you feeling? Any headache or discomfort? If you're doing okay, I'll have you schedule your next session before you go. Most people do best with five sessions a week, so we'd look at coming in [Mon/Wed/Fri] and [Tue/Thu] going forward. We'll see you then!"</p>
+    <p style="font-size:9pt;">Follow up with: "If you have any concerns before then — a headache that doesn't go away, any new symptoms, anything that worries you — here's our after-hours number: [PHONE NUMBER]."</p>
+  </div>
+
+  <!-- GLOSSARY -->
+  <h2>Glossary of Key Terms</h2>
+  <div class="glossary-grid">
+    <div class="glossary-term">
+      <span class="glossary-abbr">AED</span>
+      <span class="glossary-def">Automated External Defibrillator. Used in cardiac emergencies. TMS clinics should have one on-site and staff trained in its use.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Coil</span>
+      <span class="glossary-def">The electromagnetic coil that delivers magnetic pulses to the patient's scalp. Different coil geometries (figure-8, H-coil) target different brain regions and depths.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">DTF</span>
+      <span class="glossary-def">Dorsolateral Prefrontal Cortex. The brain region targeted by standard TMS for depression treatment. Located on the lateral surface of the frontal lobe.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Excitatory Threshold</span>
+      <span class="glossary-def">The stimulation intensity required to increase neural activity in the target region. Different from the motor threshold.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">FDA Cleared</span>
+      <span class="glossary-def">FDA designation meaning a device has been reviewed and found substantially equivalent to a predicate device. NeuroStar, BrainsWay, MagVenture, Nexstim.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Frequency</span>
+      <span class="glossary-def">The number of magnetic pulses delivered per second, measured in Hertz (Hz). Standard TMS uses 10Hz (high-frequency, excitatory) or 1Hz (low-frequency, inhibitory).</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Hertz</span>
+      <span class="glossary-def">Hz. Unit of frequency. 10Hz = 10 pulses per second. Used to describe TMS pulse frequency.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Inhibitory Threshold</span>
+      <span class="glossary-def">The stimulation intensity at which TMS produces neural inhibition rather than excitation. Used in low-frequency (1Hz) protocols for anxiety or right-sided treatment.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">ITI</span>
+      <span class="glossary-def">Inter-Train Interval. The rest period between consecutive TMS pulse trains. Standard: 26 seconds at 10Hz.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Motor Threshold</span>
+      <span class="glossary-def">MT. The minimum stimulation intensity (expressed as % MSO) required to produce an observable motor response (thumb twitch) when applied to the motor cortex.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">MT</span>
+      <span class="glossary-def">Abbreviation for Motor Threshold. Used as the basis for all TMS dosing (e.g., 120% MT).</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Neuroplasticity</span>
+      <span class="glossary-def">The brain's ability to form new neural connections. TMS is believed to work by inducing neuroplastic changes in the prefrontal cortex, normalizing dysregulated neural circuits in depression.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Pulse Width</span>
+      <span class="glossary-def">The duration of each individual magnetic pulse, measured in microseconds (μs). Broader pulse widths deliver more energy per pulse. Typical: 120–180 μs.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">rTMS</span>
+      <span class="glossary-def">Repetitive Transcranial Magnetic Stimulation. The standard form of TMS treatment involving repeated pulses over a session. Distinct from single-pulse TMS used in research/assessment.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Session</span>
+      <span class="glossary-def">A single TMS treatment appointment. A standard course = 36 sessions over 6–9 weeks (5 sessions/week). Each session = 18–37 minutes of active stimulation.</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Theta Burst</span>
+      <span class="glossary-def">iTBS / cTBS. A TMS protocol using clustered pulses (typically 3 pulses at 50Hz) delivered in a theta rhythm (5Hz pattern). FDA-cleared alternative to standard 10Hz protocols. Shorter sessions (3 min 9 sec vs. 19 min).</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Train</span>
+      <span class="glossary-def">A continuous sequence of TMS pulses delivered without interruption. Standard TMS: 4-second train of 10Hz pulses = 40 pulses per train, followed by a 26-second rest (ITI).</span>
+    </div>
+    <div class="glossary-term">
+      <span class="glossary-abbr">Treatment Intensity</span>
+      <span class="glossary-def">The strength of each magnetic pulse, expressed as a percentage of the patient's motor threshold (e.g., 120% MT). Higher intensity = stronger magnetic field = greater neural activation.</span>
+    </div>
+  </div>
+
+  <!-- QR SECTION -->
+  <h2 style="margin-top: 14pt;">QR Resource Center</h2>
+  <div class="qr-section">
+    <div class="qr-section-title">Scan to Connect</div>
+    <div class="qr-section-sub">Access TMS List resources on any device — no typing required.</div>
+    <div class="qr-pair">
+      <div class="qr-item">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" alt="TMS Provider Map" />
+        <div class="qr-url">tmslist.com/map/</div>
+        <div class="qr-desc">Find a TMS provider near you</div>
+      </div>
+      <div class="qr-item">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" alt="TMS Quiz" />
+        <div class="qr-url">tmslist.com/quiz/</div>
+        <div class="qr-desc">Take the TMS eligibility quiz</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAR-OUT EMERGENCY CARD -->
+  <h2>Tear-Out Card: Emergency Quick Reference</h2>
+  <div class="tearout-card">
+    <div class="tearout-header">TMS Emergency Quick Reference — Technician Card</div>
+    <div class="tearout-body">
+      <h4 style="color: var(--red-700); margin-bottom: 6pt;">If Seizure Occurs:</h4>
+      <div class="emergency-step"><div class="emergency-num">1</div><div class="emergency-step-text"><strong>STOP</strong> — Emergency stop button, remove coil</div></div>
+      <div class="emergency-step"><div class="emergency-num">2</div><div class="emergency-step-text"><strong>CALL</strong> — Emergency button, 911 if alone</div></div>
+      <div class="emergency-step"><div class="emergency-num">3</div><div class="emergency-step-text"><strong>PROTECT</strong> — Clear area, side position after seizure, do not restrain</div></div>
+      <div class="emergency-step"><div class="emergency-num">4</div><div class="emergency-step-text"><strong>MONITOR</strong> — Time seizure, check breathing</div></div>
+      <div class="emergency-step"><div class="emergency-num">5</div><div class="emergency-step-text"><strong>REPORT</strong> — Notify MD, complete incident report, MedWatch FDA report</div></div>
+
+      <h4 style="color: var(--orange-700); margin-top: 10pt; margin-bottom: 6pt;">Emergency Contacts:</h4>
+      <div class="contacts-grid">
+        <div class="contact-box">
+          <div class="contact-name">Clinic MD/DO</div>
+          <div class="contact-field"><span class="contact-label">Name:</span><span class="contact-value">_________________</span></div>
+          <div class="contact-field"><span class="contact-label">Phone:</span><span class="contact-value">_________________</span></div>
+        </div>
+        <div class="contact-box">
+          <div class="contact-name">Clinic Manager</div>
+          <div class="contact-field"><span class="contact-label">Name:</span><span class="contact-value">_________________</span></div>
+          <div class="contact-field"><span class="contact-label">Phone:</span><span class="contact-value">_________________</span></div>
+        </div>
+        <div class="contact-box">
+          <div class="contact-name">After-Hours Line</div>
+          <div class="contact-field"><span class="contact-label">Name:</span><span class="contact-value">_________________</span></div>
+          <div class="contact-field"><span class="contact-label">Phone:</span><span class="contact-value">_________________</span></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 8pt; padding: 6pt; background: var(--red-50); border-radius: 4pt; border: 1pt solid #fecaca;">
+        <strong style="font-size: 8pt; color: var(--red-700);">SEIZURE WARNING:</strong>
+        <span style="font-size: 7.5pt; color: var(--gray-700);"> Facial twitching • Eye rolling • Rhythmic jerking • Loss of awareness = STOP IMMEDIATELY</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-stripe">
+  TMS List — TMS Technician Training Checklist &bull; tmslist.com &bull; 2026
+</div>
+
+</body>
+</html>

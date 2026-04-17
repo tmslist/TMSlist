@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMS Prior Authorization Template Kit — TMS List</title>
+<style>
+  :root {
+    --purple-900: #3b0764;
+    --purple-800: #581c87;
+    --purple-700: #6d28d9;
+    --purple-600: #7c3aed;
+    --purple-500: #8b5cf6;
+    --purple-400: #a78bfa;
+    --purple-200: #c4b5fd;
+    --purple-100: #ede9fe;
+    --purple-50:  #f5f3ff;
+    --white: #ffffff;
+    --gray-900: #111827;
+    --gray-700: #374151;
+    --gray-600: #4b5563;
+    --gray-400: #9ca3af;
+    --gray-200: #e5e7eb;
+    --gray-100: #f9fafb;
+    --red-700: #b91c1c;
+    --red-50:  #fef2f2;
+    --green-700: #15803d;
+    --green-50:  #f0fdf4;
+    --blue-50:   #eff6ff;
+    --yellow-50: #fefce8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 10pt;
+    line-height: 1.55;
+    color: var(--gray-900);
+    background: var(--white);
+  }
+
+  @page {
+    size: letter;
+    margin: 0.6in;
+    @bottom-left {
+      content: "TMS List — Prior Auth Template Kit";
+      font-size: 7.5pt;
+      color: #94a3b8;
+    }
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 7.5pt;
+      color: #64748b;
+    }
+  }
+
+  .cover-page {
+    background: linear-gradient(135deg, #3b0764 0%, #581c87 40%, #7c3aed 100%);
+    color: var(--white);
+    min-height: 9in;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.2in 0.8in;
+    margin: -0.6in -0.6in 0.6in -0.6in;
+    width: 8.5in;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: -1in;
+    right: -1in;
+    width: 4in;
+    height: 4in;
+    border-radius: 50%;
+    background: rgba(139,92,246,0.25);
+  }
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -0.5in;
+    left: 3in;
+    width: 3in;
+    height: 3in;
+    border-radius: 50%;
+    background: rgba(167,139,250,0.15);
+  }
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 99px;
+    padding: 4pt 12pt;
+    font-size: 8pt;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--purple-200);
+    margin-bottom: 18pt;
+    width: fit-content;
+  }
+  .cover-title {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 30pt;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 14pt;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-subtitle {
+    font-size: 12.5pt;
+    color: var(--purple-200);
+    margin-bottom: 28pt;
+    max-width: 5.5in;
+    line-height: 1.5;
+  }
+  .cover-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8pt;
+    margin-bottom: 30pt;
+  }
+  .cover-bullets li {
+    display: flex;
+    align-items: center;
+    gap: 8pt;
+    font-size: 9.5pt;
+    color: var(--purple-100);
+  }
+  .cover-bullets li::before {
+    content: '✓';
+    width: 16pt;
+    height: 16pt;
+    border-radius: 50%;
+    background: var(--purple-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8pt;
+    flex-shrink: 0;
+    color: white;
+  }
+  .cover-author {
+    font-size: 8.5pt;
+    color: rgba(255,255,255,0.6);
+    font-family: -apple-system, system-ui, sans-serif;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 12pt;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-qr-row {
+    display: flex;
+    gap: 10pt;
+    margin-top: 16pt;
+    align-items: center;
+  }
+  .cover-qr-row img { width: 52pt; height: 52pt; border-radius: 4pt; }
+
+  .toc-page { padding-top: 0.2in; }
+  .page-section { padding-top: 0.1in; }
+  .pb { page-break-before: always; }
+  .bia { break-inside: avoid; }
+
+  h1 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--purple-800);
+    margin-bottom: 8pt;
+    border-bottom: 2pt solid var(--purple-500);
+    padding-bottom: 5pt;
+  }
+  h2 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--purple-700);
+    margin-top: 16pt;
+    margin-bottom: 6pt;
+  }
+  h3 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-top: 10pt;
+    margin-bottom: 4pt;
+  }
+  h4 {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--purple-600);
+    margin-top: 8pt;
+    margin-bottom: 3pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  p { margin-bottom: 7pt; }
+  ul { margin-left: 14pt; margin-bottom: 7pt; }
+  li { margin-bottom: 3pt; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8pt 0;
+    font-size: 8.5pt;
+  }
+  th {
+    background: var(--purple-700);
+    color: white;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 8pt;
+    font-weight: 700;
+    padding: 5pt 6pt;
+    text-align: left;
+  }
+  td {
+    padding: 4pt 6pt;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--purple-50); }
+
+  .template-box {
+    border: 1.5pt solid var(--purple-300);
+    border-radius: 6pt;
+    padding: 10pt;
+    background: var(--purple-50);
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  .template-label {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 7.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--purple-600);
+    margin-bottom: 6pt;
+    display: flex;
+    align-items: center;
+    gap: 6pt;
+  }
+  .template-label::before {
+    content: '';
+    width: 6pt;
+    height: 6pt;
+    border-radius: 50%;
+    background: var(--purple-500);
+    flex-shrink: 0;
+  }
+  .template-text {
+    font-size: 8.5pt;
+    color: var(--gray-700);
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+  .placeholder {
+    background: rgba(124,58,237,0.1);
+    border: 1px dashed var(--purple-400);
+    border-radius: 3pt;
+    padding: 0 3pt;
+    font-style: italic;
+    color: var(--purple-600);
+  }
+  .section-intro { font-size: 9.5pt; color: var(--gray-700); margin-bottom: 10pt; line-height: 1.6; }
+
+  .callout {
+    border-left: 3pt solid var(--purple-500);
+    padding: 8pt 10pt;
+    margin: 8pt 0;
+    font-size: 9pt;
+    break-inside: avoid;
+  }
+  .callout.purple { background: var(--purple-50); border-color: var(--purple-400); }
+  .callout.red { background: var(--red-50); border-color: var(--red-700); }
+  .callout.green { background: var(--green-50); border-color: var(--green-700); }
+  .callout.yellow { background: var(--yellow-50); border-color: #a16207; }
+  .callout.blue { background: var(--blue-50); border-color: var(--purple-500); }
+  .callout-title {
+    font-family: -apple-system, system-ui, sans-serif;
+    font-weight: 700;
+    color: var(--purple-700);
+    font-size: 8.5pt;
+    margin-bottom: 4pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .callout.red .callout-title { color: var(--red-700); }
+  .callout.green .callout-title { color: var(--green-700); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; margin: 8pt 0; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10pt; margin: 8pt 0; }
+
+  .testimonial {
+    background: var(--white);
+    border: 1pt solid var(--gray-200);
+    border-radius: 8pt;
+    padding: 10pt 12pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+    position: relative;
+  }
+  .testimonial::before {
+    content: '"';
+    font-size: 36pt;
+    color: var(--purple-200);
+    font-family: Georgia, serif;
+    position: absolute;
+    top: 2pt;
+    left: 8pt;
+    line-height: 1;
+  }
+  .testimonial-text { font-size: 9pt; font-style: italic; color: var(--gray-700); padding-left: 18pt; margin-bottom: 6pt; line-height: 1.5; }
+  .testimonial-author { font-family: -apple-system, system-ui, sans-serif; font-size: 8pt; font-weight: 700; color: var(--purple-600); padding-left: 18pt; }
+  .testimonial-role { font-size: 7.5pt; color: var(--gray-400); padding-left: 18pt; }
+
+  .qr-section {
+    background: linear-gradient(135deg, #3b0764 0%, #581c87 100%);
+    border-radius: 8pt;
+    padding: 14pt;
+    text-align: center;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  .qr-section-title { font-family: -apple-system, system-ui, sans-serif; font-size: 11pt; font-weight: 800; color: white; margin-bottom: 3pt; }
+  .qr-section-sub { font-size: 8.5pt; color: var(--purple-200); margin-bottom: 12pt; }
+  .qr-pair { display: flex; justify-content: center; gap: 20pt; }
+  .qr-item { display: flex; flex-direction: column; align-items: center; gap: 5pt; }
+  .qr-item img { width: 72pt; height: 72pt; border-radius: 6pt; }
+  .qr-url { font-family: -apple-system, system-ui, sans-serif; font-size: 8.5pt; font-weight: 700; color: white; }
+  .qr-desc { font-size: 7.5pt; color: var(--purple-200); }
+
+  .tearout-card {
+    border: 2pt solid var(--purple-600);
+    border-radius: 8pt;
+    overflow: hidden;
+    break-inside: avoid;
+    margin: 8pt 0;
+  }
+  .tearout-header { background: var(--purple-600); color: white; font-family: -apple-system, system-ui, sans-serif; font-size: 10.5pt; font-weight: 800; padding: 8pt 12pt; text-align: center; }
+  .tearout-body { padding: 10pt 12pt; }
+  .tearout-checklist { list-style: none; margin: 0; padding: 0; }
+  .tearout-checklist li {
+    display: flex;
+    gap: 8pt;
+    align-items: flex-start;
+    margin-bottom: 5pt;
+    font-size: 9pt;
+    color: var(--gray-700);
+  }
+  .tearout-checkbox {
+    width: 14pt;
+    height: 14pt;
+    border: 1.5pt solid var(--purple-400);
+    border-radius: 2pt;
+    flex-shrink: 0;
+    margin-top: 1pt;
+  }
+  .tearout-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .tearout-divider { border-top: 1pt solid var(--purple-200); margin-top: 4pt; padding-top: 4pt; }
+  .tearout-footer {
+    background: var(--purple-50);
+    border-top: 1pt solid var(--purple-200);
+    padding: 7pt 12pt;
+    display: flex;
+    gap: 8pt;
+    align-items: center;
+    font-size: 7.5pt;
+    color: var(--gray-600);
+  }
+  .tearout-footer img { width: 40pt; height: 40pt; flex-shrink: 0; }
+
+  .glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6pt 16pt; margin: 8pt 0; }
+  .glossary-term { margin-bottom: 5pt; break-inside: avoid; }
+  .glossary-abbr { font-family: -apple-system, system-ui, sans-serif; font-size: 8.5pt; font-weight: 700; color: var(--purple-600); margin-right: 4pt; }
+  .glossary-def { font-size: 8.5pt; color: var(--gray-700); line-height: 1.4; }
+
+  .footer-stripe { background: var(--purple-800); color: rgba(255,255,255,0.6); font-size: 7.5pt; text-align: center; padding: 6pt; margin-top: 20pt; font-family: -apple-system, system-ui, sans-serif; }
+
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4pt 24pt; margin-top: 10pt; }
+  .toc-item { display: flex; gap: 6pt; align-items: baseline; }
+  .toc-num { font-family: -apple-system, system-ui, sans-serif; font-size: 9pt; font-weight: 800; color: var(--purple-600); min-width: 16pt; }
+  .toc-title { font-size: 9pt; color: var(--gray-900); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8pt; margin: 10pt 0; }
+  .stat-card { background: var(--purple-50); border: 1pt solid var(--purple-200); border-radius: 6pt; padding: 8pt; text-align: center; break-inside: avoid; }
+  .stat-num { font-family: -apple-system, system-ui, sans-serif; font-size: 18pt; font-weight: 800; color: var(--purple-600); display: block; }
+  .stat-label { font-size: 7.5pt; color: var(--gray-600); display: block; margin-top: 2pt; }
+
+  .checklist { list-style: none; margin-left: 0; }
+  .checklist li {
+    display: flex;
+    gap: 6pt;
+    align-items: flex-start;
+    margin-bottom: 4pt;
+    font-size: 9pt;
+    color: var(--gray-700);
+  }
+  .checklist li::before {
+    content: '☐';
+    font-size: 10pt;
+    flex-shrink: 0;
+    margin-top: 0;
+    color: var(--purple-500);
+  }
+
+  .workflow-step {
+    display: flex;
+    gap: 10pt;
+    margin-bottom: 8pt;
+    align-items: flex-start;
+  }
+  .workflow-num {
+    min-width: 22pt;
+    height: 22pt;
+    border-radius: 50%;
+    background: var(--purple-600);
+    color: white;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .workflow-body { flex: 1; }
+  .workflow-title { font-family: -apple-system, system-ui, sans-serif; font-size: 9pt; font-weight: 700; color: var(--purple-800); }
+  .workflow-desc { font-size: 8.5pt; color: var(--gray-700); margin-top: 1pt; }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+  <div class="cover-badge">TMS List — tmslist.com</div>
+  <div class="cover-title">TMS Prior Authorization<br>Template Kit</div>
+  <div class="cover-subtitle">Pre-Built Templates &amp; Scripts for Faster Insurance Approvals — 8 Payer Templates, Peer-to-Peer Scripts, and Denial Appeal Workflows</div>
+  <ul class="cover-bullets">
+    <li>Letter of Medical Necessity (LMN) — complete template with all required sections</li>
+    <li>Prior Auth cover letter, medication trial form, and appeal letter templates</li>
+    <li>Peer-to-peer review call script with objection responses</li>
+    <li>Insurance-specific requirements matrix for 10 major payers</li>
+    <li>PHQ-9/GAD-7 documentation best practices and appeal workflow</li>
+  </ul>
+  <div class="cover-author">
+    <span>TMS List — tmslist.com &bull; 2026 Edition</span>
+  </div>
+  <div class="cover-qr-row">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" alt="TMS Provider Map" />
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" alt="TMS Quiz" />
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/owner/dashboard/" alt="TMS Owner Dashboard" />
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc-page pb">
+  <h1>Table of Contents</h1>
+  <div class="toc-grid">
+    <div class="toc-item"><span class="toc-num">1</span><span class="toc-title">Letter of Medical Necessity (LMN)</span></div>
+    <div class="toc-item"><span class="toc-num">2</span><span class="toc-title">Prior Auth Cover Letter</span></div>
+    <div class="toc-item"><span class="toc-num">3</span><span class="toc-title">Medication Trial Documentation Form</span></div>
+    <div class="toc-item"><span class="toc-num">4</span><span class="toc-title">Peer-to-Peer Review Script</span></div>
+    <div class="toc-item"><span class="toc-num">5</span><span class="toc-title">Denial Appeal Letter Template</span></div>
+    <div class="toc-item"><span class="toc-num">6</span><span class="toc-title">Insurance Requirements Matrix</span></div>
+    <div class="toc-item"><span class="toc-num">7</span><span class="toc-title">PHQ-9 &amp; GAD-7 Documentation</span></div>
+    <div class="toc-item"><span class="toc-num">8</span><span class="toc-title">Appeal Workflow</span></div>
+  </div>
+
+  <h2 style="margin-top: 20pt;">Why Prior Authorization Matters</h2>
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">70%</span><span class="stat-label">of TMS auth requests require peer review</span></div>
+    <div class="stat-card"><span class="stat-num">5–14</span><span class="stat-label">days avg prior auth turnaround time</span></div>
+    <div class="stat-card"><span class="stat-num">$1,500+</span><span class="stat-label">avg revenue at risk per denied auth</span></div>
+    <div class="stat-card"><span class="stat-num">80%</span><span class="stat-label">of denials overturned on first appeal</span></div>
+  </div>
+
+  <div class="testimonial">
+    <div class="testimonial-text">Our authorization approval rate went from 62% to 91% in six months after we standardized our LMN templates and trained our billing coordinator on the peer-to-peer call script. The difference was having a template that covered every clinical requirement — reviewers stopped asking for "one more thing" because it was already in the document.</div>
+    <div class="testimonial-author">Sandra Liu</div>
+    <div class="testimonial-role">Billing Manager, MindCare TMS, Chicago, IL</div>
+  </div>
+  <div class="testimonial">
+    <div class="testimonial-text">I used to dread peer-to-peer calls. Now I have a script with all the talking points and objection responses prepared before I dial. The insurance medical director's questions are predictable — once you know them, you can prepare compelling answers every time. Our average peer-to-peer approval rate is now 85%.</div>
+    <div class="testimonial-author">Dr. Robert Klein, MD</div>
+    <div class="testimonial-role">Medical Director, BrightWay TMS, Atlanta, GA</div>
+  </div>
+</div>
+
+<!-- SECTION 1: LETTER OF MEDICAL NECESSITY -->
+<div class="page-section pb">
+  <h1>1. Letter of Medical Necessity (LMN)</h1>
+  <p class="section-intro">The Letter of Medical Necessity is the cornerstone of every TMS authorization request. It tells the insurance company's medical director why this patient needs TMS — specifically, why they've failed other treatments and why TMS is the next appropriate step. A strong LMN is comprehensive, well-organized, and cites the clinical evidence.</p>
+
+  <div class="template-box">
+    <div class="template-label">Letter of Medical Necessity — Full Template</div>
+    <div class="template-text"><span class="placeholder">[CLINIC LETTERHEAD — Clinic Name | Address | Phone | Fax | Tax ID]</span>
+
+<span class="placeholder">[DATE]</span>
+
+Medical Director Review Department
+<span class="placeholder">[INSURANCE COMPANY NAME]</span>
+<span class="placeholder">[INSURANCE ADDRESS]</span>
+
+RE: Prior Authorization Request — Transcranial Magnetic Stimulation (TMS)
+Patient: <span class="placeholder">[PATIENT FIRST NAME] [LAST NAME]</span>
+Date of Birth: <span class="placeholder">[MM/DD/YYYY]</span>
+Member ID: <span class="placeholder">[MEMBER ID NUMBER]</span>
+Group Number: <span class="placeholder">[GROUP NUMBER]</span>
+Provider: <span class="placeholder">[PROVIDER NAME, MD/DO]</span>, NPI: <span class="placeholder">[NPI NUMBER]</span>
+
+Dear Medical Director:
+
+I am writing to request prior authorization for a course of Transcranial Magnetic Stimulation (TMS) for the above-named patient. I am the treating psychiatrist and have evaluated this patient in my clinical practice. Based on my clinical assessment and the patient's treatment history, I believe TMS is medically necessary and appropriate.
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION A: PATIENT AND DIAGNOSIS — Briefly describe the patient, their diagnosis, duration of illness, and current symptom severity. Include most recent PHQ-9 score and date.]</span>
+
+Primary Diagnosis:
+ICD-10: <span class="placeholder">[CODE]</span> — Major Depressive Disorder, Single Episode, Severe / Recurrent (circle one)
+
+Most Recent PHQ-9 Score: <span class="placeholder">[SCORE]</span>/27, dated <span class="placeholder">[DATE]</span>
+GAD-7 Score: <span class="placeholder">[SCORE]</span>/21, dated <span class="placeholder">[DATE]</span>
+Current Symptoms: <span class="placeholder">[Brief description: e.g., Anhedonia, depressed mood, insomnia, poor concentration, low energy, suicidal ideation (active/passive/absent)]</span>
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION B: TREATMENT HISTORY — Document all prior treatments with dates, doses, and outcomes. The table below must be completed in full.]</span>
+
+MEDICATION TRIAL HISTORY:
+| Medication | Dose | Start Date | End Date | Indication | PHQ-9 Before | PHQ-9 After | Outcome |
+|------------|------|-----------|---------|------------|-------------|------------|--------|
+| <span class="placeholder">[Drug Name]</span> | <span class="placeholder">[Dose]</span> | <span class="placeholder">[MM/YY]</span> | <span class="placeholder">[MM/YY or Ongoing]</span> | Depression | <span class="placeholder">[#]</span> | <span class="placeholder">[#]</span> | <span class="placeholder">[Partial/None/Works but discontinued due to side effects]</span> |
+| <span class="placeholder">[Drug Name]</span> | <span class="placeholder">[Dose]</span> | <span class="placeholder">[MM/YY]</span> | <span class="placeholder">[MM/YY or Ongoing]</span> | Depression | <span class="placeholder">[#]</span> | <span class="placeholder">[#]</span> | <span class="placeholder">[Partial/None/Works but discontinued due to side effects]</span> |
+| <span class="placeholder">[Drug Name]</span> | <span class="placeholder">[Dose]</span> | <span class="placeholder">[MM/YY]</span> | <span class="placeholder">[MM/YY or Ongoing]</span> | Depression | <span class="placeholder">[#]</span> | <span class="placeholder">[#]</span> | <span class="placeholder">[Partial/None/Works but discontinued due to side effects]</span> |
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION C: PSYCHOTHERAPY HISTORY — Document all psychotherapy trials with dates, modalities, and outcomes.]</span>
+| Modality | Provider | Start Date | End Date | Sessions | Outcome |
+|----------|---------|-----------|---------|---------|---------|
+| <span class="placeholder">[CBT/DBT/IPT/etc.]</span> | <span class="placeholder">[Provider Name]</span> | <span class="placeholder">[MM/YY]</span> | <span class="placeholder">[MM/YY]</span> | <span class="placeholder">[#]</span> | <span class="placeholder">[Response/No response/Discontinued due to...]</span> |
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION D: CLINICAL RATIONALE FOR TMS — Explain why TMS is appropriate for this patient. Cite specific reasons: inadequate response to X medications at adequate doses and duration, intolerable side effects, patient preference for non-pharmacological treatment, functional impairment despite current treatment, etc.]</span>
+
+<span class="placeholder">[Write 3–5 paragraphs explaining the clinical rationale. Reference any published guidelines or clinical evidence supporting TMS for this patient's condition.]</span>
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION E: PROPOSED TREATMENT PLAN — Describe the TMS protocol ordered.]</span>
+
+Treatment Protocol Ordered:
+  • TMS Device: <span class="placeholder">[NeuroStar / BrainsWay / MagVenture / Nexstim]</span>
+  • Target: <span class="placeholder">[Left DLPFC / Right DLPFC / Bilateral]</span>
+  • Frequency: <span class="placeholder">[10 Hz / 1 Hz / iTBS]</span>
+  • Sessions Requested: <span class="placeholder">[36] sessions</span>
+  • Treatment Duration: <span class="placeholder">[6–9 weeks at 5 sessions/week]</span>
+  • Expected Completion: <span class="placeholder">[DATE]</span>
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION F: REQUEST] — State the specific CPT codes being requested.]</span>
+
+CPT Codes Requested:
+  • 90867 — Therapeutic repetitive transcranial magnetic stimulation (TMS); initial, including cortical mapping, motor threshold determination, and trajectory calculation
+  • 90868 — ...subsequent delivery and management
+  • 90869 — ...subsequent motor threshold re-determination
+
+I am available for a peer-to-peer review with your medical director at your convenience. Please contact my office at <span class="placeholder">[PHONE]</span> or <span class="placeholder">[EMAIL]</span> to schedule.
+
+Thank you for your prompt review.
+
+Sincerely,
+
+<span class="placeholder">[PROVIDER SIGNATURE]</span>
+<span class="placeholder">[PROVIDER NAME, MD/DO]</span>
+<span class="placeholder">[CLINIC NAME]</span>
+NPI: <span class="placeholder">[NPI NUMBER]</span>
+Phone: <span class="placeholder">[PHONE]</span> | Fax: <span class="placeholder">[FAX]</span></div>
+  </div>
+
+  <div class="callout purple">
+    <div class="callout-title">LMN Checklist — Submit Only When All Items Are Present:</div>
+    <ul class="checklist" style="margin-top: 4pt;">
+      <li>Patient demographics, insurance info, member ID, group #</li>
+      <li>Primary diagnosis with ICD-10 code</li>
+      <li>PHQ-9 score with date (within 30 days of submission)</li>
+      <li>At least 4 medication trials documented with drug, dose, duration, and outcome</li>
+      <li>Adequate dose documentation (must meet payer-specific minimums)</li>
+      <li>Psychotherapy history documented</li>
+      <li>Clear clinical rationale paragraph for why TMS is necessary</li>
+      <li>Specific treatment protocol described (device, target, frequency, sessions)</li>
+      <li>CPT codes clearly listed</li>
+      <li>Peer-to-peer availability stated</li>
+      <li>Provider signature, NPI, contact information</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 2: PRIOR AUTH COVER LETTER -->
+<div class="page-section pb">
+  <h1>2. Prior Auth Request Cover Letter</h1>
+  <p class="section-intro">A brief, professional cover letter accompanying the authorization request packet helps the reviewer's desk staff route the request correctly and ensures the medical director has context before reading the clinical documentation.</p>
+
+  <div class="template-box">
+    <div class="template-label">Prior Authorization Cover Letter Template</div>
+    <div class="template-text"><span class="placeholder">[CLINIC LETTERHEAD]</span>
+
+<span class="placeholder">[DATE]</span>
+
+<span class="placeholder">[INSURANCE COMPANY]</span>
+Prior Authorization / Medical Review Department
+<span class="placeholder">[ADDRESS]</span>
+
+RE: Prior Authorization — Transcranial Magnetic Stimulation (TMS)
+Member: <span class="placeholder">[PATIENT NAME]</span>
+Member ID: <span class="placeholder">[MEMBER ID]</span>
+Group: <span class="placeholder">[GROUP NUMBER]</span>
+Provider: <span class="placeholder">[PROVIDER NAME, MD/DO]</span>, NPI: <span class="placeholder">[NPI]</span>
+
+Dear Medical Review Team:
+
+Please find enclosed a prior authorization request for Transcranial Magnetic Stimulation (TMS) for the above-named patient.
+
+<span class="placeholder">[PATIENT NAME]</span> has been diagnosed with Major Depressive Disorder (ICD-10: <span class="placeholder">[CODE]</span>) and has failed multiple adequate trials of antidepressant medications. TMS is clinically indicated as the next appropriate step in treatment.
+
+Enclosed with this cover letter:
+  ☐ Letter of Medical Necessity (LOMN)
+  ☐ Medication Trial Documentation Form
+  ☐ Most recent clinical progress note
+  ☐ PHQ-9 scores (baseline and most recent)
+  ☐ Psychotherapy records (if applicable)
+
+Requested Authorization: <span class="placeholder">[36]</span> sessions of TMS (CPT 90867, 90868, 90869)
+
+I am available for an expedited peer-to-peer review at <span class="placeholder">[PHONE]</span> or <span class="placeholder">[EMAIL]</span>.
+
+Please fax your determination to <span class="placeholder">[FAX]</span> within the timeframe required by the member's plan.
+
+Thank you for your prompt attention to this request.
+
+<span class="placeholder">[SIGNATURE]</span>
+<span class="placeholder">[PROVIDER NAME, CREDENTIALS]</span>
+<span class="placeholder">[CLINIC NAME]</span></div>
+  </div>
+</div>
+
+<!-- SECTION 3: MEDICATION TRIAL DOCUMENTATION FORM -->
+<div class="page-section pb">
+  <h1>3. Medication Trial Documentation Form</h1>
+  <p class="section-intro">This form must accompany every LMN submission. Each medication trial must be documented with sufficient detail to demonstrate an adequate trial per the payer's criteria. Most payers require: (1) at least 4 antidepressant medications, (2) adequate dose for at least 6 weeks, (3) documentation of failure or intolerance.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Medication Name</th>
+        <th>Generic Name</th>
+        <th>Dose</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Indication</th>
+        <th>PHQ-9 Before</th>
+        <th>PHQ-9 After</th>
+        <th>Outcome</th>
+        <th>Prescriber</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="placeholder">Prozac</span></td>
+        <td><span class="placeholder">Fluoxetine</span></td>
+        <td><span class="placeholder">40mg/day</span></td>
+        <td><span class="placeholder">01/2024</span></td>
+        <td><span class="placeholder">06/2024</span></td>
+        <td><span class="placeholder">MDD</span></td>
+        <td><span class="placeholder">22</span></td>
+        <td><span class="placeholder">16</span></td>
+        <td><span class="placeholder">Partial response; discontinued due to sexual dysfunction</span></td>
+        <td><span class="placeholder">Dr. Chen</span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="placeholder">Zoloft</span></td>
+        <td><span class="placeholder">Sertraline</span></td>
+        <td><span class="placeholder">150mg/day</span></td>
+        <td><span class="placeholder">07/2024</span></td>
+        <td><span class="placeholder">12/2024</span></td>
+        <td><span class="placeholder">MDD</span></td>
+        <td><span class="placeholder">18</span></td>
+        <td><span class="placeholder">14</span></td>
+        <td><span class="placeholder">Partial response; discontinued due to GI side effects</span></td>
+        <td><span class="placeholder">Dr. Klein</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="placeholder">Effexor XR</span></td>
+        <td><span class="placeholder">Venlafaxine ER</span></td>
+        <td><span class="placeholder">225mg/day</span></td>
+        <td><span class="placeholder">01/2025</span></td>
+        <td><span class="placeholder">06/2025</span></td>
+        <td><span class="placeholder">MDD</span></td>
+        <td><span class="placeholder">16</span></td>
+        <td><span class="placeholder">15</span></td>
+        <td><span class="placeholder">No significant response at max dose × 8 weeks</span></td>
+        <td><span class="placeholder">Dr. Klein</span></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><span class="placeholder">Pristiq</span></td>
+        <td><span class="placeholder">Desvenlafaxine</span></td>
+        <td><span class="placeholder">100mg/day</span></td>
+        <td><span class="placeholder">07/2025</span></td>
+        <td><span class="placeholder">12/2025</span></td>
+        <td><span class="placeholder">MDD</span></td>
+        <td><span class="placeholder">18</span></td>
+        <td><span class="placeholder">17</span></td>
+        <td><span class="placeholder">No significant response</span></td>
+        <td><span class="placeholder">Dr. Chen</span></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><span class="placeholder">Lexapro</span></td>
+        <td><span class="placeholder">Escitalopram</span></td>
+        <td><span class="placeholder">20mg/day</span></td>
+        <td><span class="placeholder">[DATE]</span></td>
+        <td><span class="placeholder">[DATE]</span></td>
+        <td><span class="placeholder">MDD</span></td>
+        <td><span class="placeholder">[#]</span></td>
+        <td><span class="placeholder">[#]</span></td>
+        <td><span class="placeholder">[Response/Partial/None]</span></td>
+        <td><span class="placeholder">[Name]</span></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><span class="placeholder">[Augmentation Agent]</span></td>
+        <td><span class="placeholder">[Generic]</span></td>
+        <td><span class="placeholder">[Dose]</span></td>
+        <td><span class="placeholder">[DATE]</span></td>
+        <td><span class="placeholder">[DATE]</span></td>
+        <td><span class="placeholder">Augmentation</span></td>
+        <td><span class="placeholder">[#]</span></td>
+        <td><span class="placeholder">[#]</span></td>
+        <td><span class="placeholder">[Response/Partial/None]</span></td>
+        <td><span class="placeholder">[Name]</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout yellow">
+    <div class="callout-title" style="color:#92400e;">Adequate Trial Definition</div>
+    <p style="font-size:9pt;">An adequate medication trial requires: (1) Sufficient dose — typically at least the minimum FDA-approved dose for depression. (2) Sufficient duration — at least 6 weeks at therapeutic dose. (3) Adequate compliance — patient took medication as prescribed. Note any compliance issues in the outcome column. If a medication was discontinued early due to intolerable side effects (even at low doses), document this as a "failure due to intolerance" which counts toward the required number of trials.</p>
+  </div>
+</div>
+
+<!-- SECTION 4: PEER-TO-PEER REVIEW SCRIPT -->
+<div class="page-section pb">
+  <h1>4. Peer-to-Peer Review Call Script</h1>
+  <p class="section-intro">The peer-to-peer (P2P) review is your opportunity to speak directly with the insurance company's medical director and make the clinical case for TMS. Most denials are overturned after a successful P2P. Preparation is everything.</p>
+
+  <h2>Pre-Call Preparation Checklist</h2>
+  <ul class="checklist">
+    <li>Confirm the patient's chart is open and medication trial table is readily accessible</li>
+    <li>Know the patient's most recent PHQ-9 score and date</li>
+    <li>Know exactly how many medication trials failed and the specific reasons for failure</li>
+    <li>Have the LMN and any clinical notes available for reference</li>
+    <li>Have a pen and paper ready to note the reviewer's name, reference number, and questions</li>
+    <li>Confirm payer-specific LCD/NCD requirements for this particular payer</li>
+    <li>Test the phone number — call during business hours (9am–4pm local time works best)</li>
+  </ul>
+
+  <h2>Opening Script</h2>
+  <div class="callout purple">
+    <div class="callout-title">The Opening</div>
+    <p style="font-size:9pt; font-style: italic;">"Hi, this is Dr. <span class="placeholder">[YOUR NAME]</span>, a board-certified psychiatrist at <span class="placeholder">[CLINIC NAME]</span>. I'm calling to do a peer-to-peer review for a patient of mine, <span class="placeholder">[PATIENT NAME]</span>, who's been approved for transcranial magnetic stimulation. My reference number for this case is <span class="placeholder">[AUTH/CLAIM NUMBER]</span>. Who am I speaking with, and are you the medical director who'll be reviewing this case?"</p>
+    <p style="font-size:9pt; font-style: italic; margin-top:4pt;">[If transferred:] "Thank you. Dr. <span class="placeholder">[NAME]</span>, I appreciate you taking the time. Can I confirm this peer-to-peer is being conducted under the member's plan, and that this review satisfies the requirement for a medical director consultation before a final determination is made?"</p>
+  </div>
+
+  <h2>Key Talking Points — Have These Ready</h2>
+  <div class="two-col">
+    <div>
+      <h4>Talking Point 1: Diagnosis and Severity</h4>
+      <p style="font-size:9pt;">"The patient has a confirmed diagnosis of Major Depressive Disorder, recurrent, severe. Their most recent PHQ-9 was <span class="placeholder">[SCORE]</span> — well above the threshold for severe depression. They have significant functional impairment across multiple domains."</p>
+
+      <h4>Talking Point 2: Treatment History</h4>
+      <p style="font-size:9pt;">"This patient has failed <span class="placeholder">[NUMBER]</span> adequate antidepressant medication trials at therapeutic doses for at least 6 weeks each. They've also completed a course of psychotherapy without adequate response. They meet the standard criteria for treatment-resistant depression."</p>
+
+      <h4>Talking Point 3: Why TMS Specifically</h4>
+      <p style="font-size:9pt;">"TMS is the appropriate next step because the patient has failed both pharmacotherapy and psychotherapy. They cannot tolerate higher or additional medications, and ECT is not indicated or is not acceptable to the patient. TMS is FDA-cleared for this indication and has strong clinical evidence supporting its efficacy."</p>
+    </div>
+    <div>
+      <h4>Talking Point 4: Safety Profile</h4>
+      <p style="font-size:9pt;">"TMS has an excellent safety profile. The most common side effect is mild headache, which resolves. Seizures occur in fewer than 0.1% of treatments. There are no systemic side effects, no drug interactions, and no sedation — unlike many antidepressants."</p>
+
+      <h4>Talking Point 5: Evidence Base</h4>
+      <p style="font-size:9pt;">"TMS is supported by over 50 randomized controlled trials and multiple meta-analyses. It has FDA clearance for treatment-resistant depression and is covered by Medicare and virtually all commercial payers. Clinical guidelines from the American Psychiatric Association support TMS as a standard of care option for TRD."</p>
+
+      <h4>Talking Point 6: Proposed Treatment Plan</h4>
+      <p style="font-size:9pt;">"I'm requesting 36 sessions over 6–9 weeks using a standard 10Hz protocol targeting the left dorsolateral prefrontal cortex. This is the evidence-based dosing for major depression. I'll be monitoring with PHQ-9 at baseline, midpoint, and completion."</p>
+    </div>
+  </div>
+
+  <h2>Common Objections and Responses</h2>
+  <table>
+    <thead><tr><th>Objection</th><th>Suggested Response</th></tr></thead>
+    <tbody>
+      <tr><td>"The patient hasn't tried enough medications."</td><td>"Which medications would you like to see documented that aren't already in the record? I'd be happy to provide additional records. Can you tell me specifically what's missing?"</td></tr>
+      <tr><td>"The trials weren't at adequate dose or duration."</td><td>"Let me address each trial individually: [go through each medication]. For [specific drug], the patient was at [dose] for [duration]. If that doesn't meet your threshold, what would be required?"</td></tr>
+      <tr><td>"TMS is experimental."</td><td>"TMS received FDA clearance for treatment-resistant depression in 2008 and has been Medicare-covered since 2012. There are now over 50 RCTs and multiple APA guidelines supporting its use."</td></tr>
+      <tr><td>"The patient should try ECT first."</td><td>"ECT is an appropriate treatment for some patients, but it requires anesthesia, has significant cognitive side effects, and typically requires hospitalization. The patient has declined ECT and TMS is the next clinically appropriate step."</td></tr>
+      <tr><td>"The patient hasn't had adequate psychotherapy."</td><td>"The patient has completed [X] sessions of [type] therapy. Their therapist's notes document [findings]. They continue in maintenance therapy. Is there additional therapy you'd like documented?"</td></tr>
+      <tr><td>"We need more recent PHQ-9 scores."</td><td>"I can provide updated scores. Can I fax those to you today and have the review completed by [date]?"</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout green">
+    <div class="callout-title">The Close</div>
+    <p style="font-size:9pt; font-style:italic;">"Dr. [NAME], I appreciate you taking the time to review this case. Based on what we've discussed, do you have enough information to approve TMS for this patient? If there are any remaining items I can address, I'm happy to do so. If this is approved, can I confirm the authorization number will be sent to our office via fax at [FAX]? And can I get your name for my records — you've been very helpful."</p>
+    <p style="font-size:9pt; margin-top:4pt;"><strong>Always document:</strong> Reviewer's name, reference number, date and time of call, summary of discussion, and outcome (approved/denied/pending additional info).</p>
+  </div>
+</div>
+
+<!-- SECTION 5: DENIAL APPEAL LETTER -->
+<div class="page-section pb">
+  <h1>5. Denial Appeal Letter Template</h1>
+  <p class="section-intro">When a prior authorization is denied or when a claim is denied post-treatment, the appeal letter is your chance to overturn the decision. Always appeal — 80% of first-level appeals are successful. The key is to directly address the stated reason for denial and provide the missing information or correct the cited deficiency.</p>
+
+  <div class="template-box">
+    <div class="template-label">Level 1 Appeal Letter Template</div>
+    <div class="template-text"><span class="placeholder">[CLINIC LETTERHEAD]</span>
+
+<span class="placeholder">[DATE]</span>
+
+Appeals and Grievances Department
+<span class="placeholder">[INSURANCE COMPANY NAME]</span>
+<span class="placeholder">[ADDRESS]</span>
+
+RE: Appeal of Prior Authorization Denial — Transcranial Magnetic Stimulation (TMS)
+Member: <span class="placeholder">[PATIENT NAME]</span>
+Member ID: <span class="placeholder">[MEMBER ID]</span>
+Group: <span class="placeholder">[GROUP NUMBER]</span>
+Original Denial Date: <span class="placeholder">[DATE]</span>
+Original Denial Reason: <span class="placeholder">[REASON STATED ON DENIAL LETTER]</span>
+Our Reference: <span class="placeholder">[AUTH/CLAIM NUMBER]</span>
+
+Dear Appeals and Grievances Department:
+
+I am writing to formally appeal the denial of prior authorization for Transcranial Magnetic Stimulation (TMS) for the above-named patient.
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION 1: SUMMARY OF THE DECISION BEING APPEALED] — Briefly describe the denial and state your disagreement clearly.</span>
+
+<span class="placeholder">[Example: On [DATE], your plan issued a denial for TMS for [PATIENT NAME], citing insufficient documentation of adequate medication trials. I respectfully disagree with this determination and am submitting additional documentation to address this concern.]</span>
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION 2: GROUNDS FOR APPEAL — State the specific grounds for your appeal. Choose the one that applies:]</span>
+☐ The denial was based on incomplete information — additional records are enclosed
+☐ The denial contradicts the plan's own LCD/NCD criteria — see attached
+☐ The patient meets all plan criteria for TMS as documented in the enclosed LMN
+☐ The denial violates state mental health parity laws
+☐ Other: <span class="placeholder">[SPECIFY]</span>
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION 3: ADDITIONAL CLINICAL INFORMATION] — Address the specific reason for denial directly. If the denial cited insufficient medication trials, explain each trial in detail here. If the denial cited lack of adequate PHQ-9 scores, provide updated scores.]</span>
+
+<span class="placeholder">[Write 2–4 paragraphs directly addressing the denial reason with additional clinical detail, attached records, or clarification.]</span>
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION 4: PEER-TO-PEER OUTCOME — If a peer-to-peer review was conducted, summarize the outcome here.]</span>
+
+<span class="placeholder">[Example: A peer-to-peer review was conducted on [DATE] with Dr. [NAME] of your medical staff. During that review, I addressed concerns about medication trial documentation and provided additional details about [specific trials]. No resolution was reached, and this formal appeal is submitted for Level 1 review.]</span>
+
+<span class="placeholder" style="background:rgba(124,58,237,0.15);">[SECTION 5: REQUEST] — State clearly what you are requesting.</span>
+
+I respectfully request that the denial be overturned and authorization for TMS be approved. The patient meets medical necessity criteria for TMS therapy based on their diagnosis, treatment history, and current clinical status. The clinical documentation supporting this request is enclosed.
+
+Please process this appeal within the timeframes required by state and federal law. I am available for a peer-to-peer review to discuss this case at <span class="placeholder">[PHONE]</span>.
+
+<span class="placeholder">[SIGNATURE]</span>
+<span class="placeholder">[PROVIDER NAME, MD/DO]</span>
+NPI: <span class="placeholder">[NPI]</span>
+
+Enclosures:
+☐ Letter of Medical Necessity (updated)
+☐ Medication Trial Documentation Form
+☐ PHQ-9 scores (most recent)
+☐ Clinical progress notes
+☐ Peer-to-peer call notes (if applicable)</div>
+  </div>
+</div>
+
+<!-- SECTION 6: INSURANCE REQUIREMENTS MATRIX -->
+<div class="page-section pb">
+  <h1>6. Insurance-Specific Requirements Matrix</h1>
+  <p class="section-intro">Each payer has specific requirements for TMS authorization. This matrix provides an overview of the most common requirements. Always verify current requirements directly with the payer — policies change frequently.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Payer</th>
+        <th>Auth Form Required</th>
+        <th>Clinical Notes Needed</th>
+        <th>Submission Method</th>
+        <th>Turnaround</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Medicare (Part B)</strong></td>
+        <td>Standard CMS 1500 with NCD/LCD criteria met</td>
+        <td>PHQ-9 (recent), med trials, psychotherapy history, consent</td>
+        <td>CMS portal / Availity</td>
+        <td>10–14 days</td>
+        <td>NCD 160.24 applies. Must be office-based. MD/DO only.</td>
+      </tr>
+      <tr>
+        <td><strong>Medicaid</strong></td>
+        <td>State-specific auth form</td>
+        <td>Varies by state — check state Medicaid LCD</td>
+        <td>State portal / fax</td>
+        <td>3–14 days</td>
+        <td>Many states limit TMS to specific indications. Verify coverage before scheduling.</td>
+      </tr>
+      <tr>
+        <td><strong>BCBS (Anthem/Empire)</strong></td>
+        <td>BCBS auth form + LMN</td>
+        <td>PHQ-9 (≤30 days), 4 med trials, therapy history, contraindication screening</td>
+        <td>Availity / provider portal</td>
+        <td>5–10 days</td>
+        <td>Requires failure of 4+ meds at therapeutic dose × 6+ weeks. Peer-to-peer strongly recommended.</td>
+      </tr>
+      <tr>
+        <td><strong>BCBS Federal</strong></td>
+        <td>BCBS auth form + LMN</td>
+        <td>Similar to BCBS commercial</td>
+        <td>Availity / provider portal</td>
+        <td>5–10 days</td>
+        <td>Coverage based on NCD 160.24. Same as Medicare for clinical criteria.</td>
+      </tr>
+      <tr>
+        <td><strong>Aetna</strong></td>
+        <td>Aetna TMS auth request form</td>
+        <td>PHQ-9 (≤30 days), 4+ med trials, ECT history if applicable</td>
+        <td>Navinet / provider portal</td>
+        <td>5–7 days</td>
+        <td>Requires failure of at least 3 antidepressants from 2 different classes. Peer-to-peer available.</td>
+      </tr>
+      <tr>
+        <td><strong>Cigna</strong></td>
+        <td>Cigna auth form + LMN</td>
+        <td>PHQ-9, 4+ med trials, psychotherapy, contraindication screen</td>
+        <td>CignaforHCP portal / fax</td>
+        <td>7–14 days</td>
+        <td>Cigna requires documentation of adequate dose and duration for each trial. Watch for step therapy requirements.</td>
+      </tr>
+      <tr>
+        <td><strong>UHC / Oxford</strong></td>
+        <td>UHC auth form + LMN</td>
+        <td>PHQ-9, 4+ med trials, ECT history, consent</td>
+        <td>UnitedHealthcare provider portal</td>
+        <td>5–10 days</td>
+        <td>UnitedHealthcare uses EviCore for TMS authorizations in many states. Verify which UM vendor applies.</td>
+      </tr>
+      <tr>
+        <td><strong>Humana</strong></td>
+        <td>Humana auth form + LMN</td>
+        <td>PHQ-9, 4+ med trials, therapy history</td>
+        <td>Availity / provider portal</td>
+        <td>5–10 days</td>
+        <td>Humana requires peer-to-peer if denial is issued. Always request P2P before filing formal appeal.</td>
+      </tr>
+      <tr>
+        <td><strong>Tricare</strong></td>
+        <td>Tricare auth request</td>
+        <td>PHQ-9, med trials, PCM referral note</td>
+        <td>Humana Military (for East) / TriWest (for West)</td>
+        <td>7–14 days</td>
+        <td>Requires PCM referral. TMS must be rendered by TRICARE-authorized provider. Check regional contractor.</td>
+      </tr>
+      <tr>
+        <td><strong>Optum / UHC Behavioral</strong></td>
+        <td>Optum auth form + LMN</td>
+        <td>PHQ-9 (≤30 days), 4+ med trials, therapy history</td>
+        <td>Optum provider portal</td>
+        <td>5–10 days</td>
+        <td>Optum often delegates to Magellan for behavioral health TMS auths. Know which UM vendor handles your region.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 7: PHQ-9 & GAD-7 DOCUMENTATION -->
+<div class="page-section pb">
+  <h1>7. PHQ-9 &amp; GAD-7 Documentation Best Practices</h1>
+  <p class="section-intro">Standardized outcome measures are the backbone of TMS clinical documentation. Payers require PHQ-9 scores to justify both initial authorization and reauthorization mid-treatment. Poor documentation of these measures is one of the top reasons for authorization denials and audit recoupments.</p>
+
+  <h2>PHQ-9 Scoring Reference</h2>
+  <table>
+    <thead><tr><th>Score Range</th><th>Severity</th><th>Interpretation</th><th>Clinical Action</th></tr></thead>
+    <tbody>
+      <tr><td>0–4</td><td>None / Remission</td><td>Minimal or no depression</td><td>None needed; maintain current treatment</td></tr>
+      <tr><td>5–9</td><td>Mild</td><td>Minimal depression symptoms</td><td>Watchful waiting; follow up in 2 weeks</td></tr>
+      <tr><td>10–14</td><td>Moderate</td><td>Moderate depression</td><td>Treatment plan; consider med change or augmentation</td></tr>
+      <tr><td>15–19</td><td>Moderately Severe</td><td>Moderately severe depression</td><td>Active treatment warranted; TMS is appropriate here</td></tr>
+      <tr><td>20–27</td><td>Severe</td><td>Severe depression</td><td>Intensive treatment; urgent intervention</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout purple">
+    <div class="callout-title">Documentation Requirements for Each PHQ-9</div>
+    <ul style="margin-left:12pt; font-size:9pt;">
+      <li>Date administered (must be within the authorization request, typically ≤30 days)</li>
+      <li>Score (total and severity level)</li>
+      <li>Who administered (patient self-report vs. clinician-administered — note which)</li>
+      <li>Method (paper, electronic, verbal administration)</li>
+      <li>Any items the patient declined to answer — note which items</li>
+      <li>Item 9 (suicidal ideation) score — must always be documented, even if zero</li>
+    </ul>
+  </div>
+
+  <h2>When to Administer PHQ-9 and GAD-7</h2>
+  <div class="three-col">
+    <div>
+      <h4>Required for Initial Auth</h4>
+      <ul style="font-size:9pt;">
+        <li>PHQ-9 within 30 days of submission</li>
+        <li>GAD-7 if comorbid anxiety suspected</li>
+        <li>Scores must show moderate-to-severe range</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Required for Reauthorization (Session 18–20)</h4>
+      <ul style="font-size:9pt;">
+        <li>PHQ-9 mid-treatment to demonstrate response</li>
+        <li>Expect ≥25% improvement from baseline</li>
+        <li>If not meeting threshold, document protocol adjustment</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Required at Treatment Completion</h4>
+      <ul style="font-size:9pt;">
+        <li>Final PHQ-9 and GAD-7</li>
+        <li>Compare to baseline</li>
+        <li>Document response/remission status</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8: APPEAL WORKFLOW -->
+<div class="page-section pb">
+  <h1>8. Denial Appeal Workflow</h1>
+  <p class="section-intro">A systematic approach to handling denials ensures nothing falls through the cracks and maximizes your appeal success rate. Every denial should be logged, tracked, and followed through to resolution.</p>
+
+  <div class="workflow-step">
+    <div class="workflow-num">1</div>
+    <div class="workflow-body">
+      <div class="workflow-title">Receive and Log the Denial</div>
+      <div class="workflow-desc">Log immediately in your denial tracking spreadsheet: date received, date of service, patient name/MRN, payer, claim number, authorization number, reason code, amount billed, amount denied, deadline to appeal. Assign to a team member responsible for follow-up.</div>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-num">2</div>
+    <div class="workflow-body">
+      <div class="workflow-title">Read the Denial Letter Carefully</div>
+      <div class="workflow-desc">Identify the exact reason for denial. Common reasons: insufficient medication trials, missing PHQ-9 scores, wrong form used, not medically necessary, experimental/investigational. The reason determines the fix — don't guess.</div>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-num">3</div>
+    <div class="workflow-body">
+      <div class="workflow-title">Pull and Review the Clinical Documentation</div>
+      <div class="workflow-desc">Read the complete chart. Determine if the denial is valid (documentation genuinely missing or insufficient) or invalid (documentation exists but wasn't submitted, or denial contradicts LCD/NCD criteria). If invalid — proceed to step 5.</div>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-num">4</div>
+    <div class="workflow-body">
+      <div class="workflow-title">Obtain Missing Documentation (If Valid Denial)</div>
+      <div class="workflow-desc">If the denial is valid — information is genuinely missing — obtain the missing records. For medication trials: contact pharmacies, prior prescribers, or use pharmacy records. For PHQ-9 scores: pull from EMR. Gather everything before calling the payer.</div>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-num">5</div>
+    <div class="workflow-body">
+      <div class="workflow-title">Call Member Services — Get the Representative's Name and Reference Number</div>
+      <div class="workflow-desc">Before filing an appeal, call the member services number on the back of the insurance card. Ask: "I'd like to understand the reason for this denial and what additional information would be needed to approve." Document the rep's name, ID number, date/time of call, and summary of the conversation. This call often resolves simple errors.</div>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-num">6</div>
+    <div class="workflow-body">
+      <div class="workflow-title">Request a Peer-to-Peer Review</div>
+      <div class="workflow-desc">Call the UM/medical review department and request a peer-to-peer review with the medical director. Have the treating physician (not the billing staff) conduct the call. Use the script in Section 4. Most denials are resolved at this stage. Get the reviewer's name and reference number.</div>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-num">7</div>
+    <div class="workflow-body">
+      <div class="workflow-title">File the Level 1 Appeal</div>
+      <div class="workflow-desc">Submit the formal appeal letter within the payer's appeal deadline (typically 30–60 days from denial date, but check the denial letter for the exact deadline — it's often printed there). Include: appeal letter, updated LMN, all supporting clinical documentation, peer-to-peer notes. Fax and confirm receipt. Track the appeal reference number.</div>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-num">8</div>
+    <div class="workflow-body">
+      <div class="workflow-title">Wait for Level 1 Response, Then Escalate If Needed</div>
+      <div class="workflow-desc">Level 1 appeals must be decided within 30 days (urgent/expedited: 72 hours). If denied again, proceed to Level 2 (external review by an independent review organization, or IRO) and/or contact your state insurance commissioner's office for assistance. For Medicare: request a redetermination, then reconsideration, then ALJ hearing.</div>
+    </div>
+  </div>
+
+  <!-- GLOSSARY -->
+  <h2>Glossary of Key Terms</h2>
+  <div class="glossary-grid">
+    <div class="glossary-term"><span class="glossary-abbr">Appeal</span><span class="glossary-def">A formal request to overturn a denial or adverse benefit determination. Filed by the provider or patient with the insurance company.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">ARU</span><span class="glossary-def">Audio Response Unit. Automated phone system used by payers. Common pathway to reach medical review departments.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Authorization</span><span class="glossary-def">Approval from an insurer before a service is rendered. Required for most TMS treatments. Also called prior authorization, precertification, or prior approval.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Binding</span><span class="glossary-def">A decision by an independent review organization (IRO) that is legally binding on the insurance company. Available at external review stage.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Clean Claim</span><span class="glossary-def">A claim submitted with all required information that can be processed without additional information or correction. Reduces denials and delays.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">COB</span><span class="glossary-def">Coordination of Benefits. Determines which payer is primary when a patient has multiple insurance plans. Always verify COB before submitting a claim.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Concurrent Review</span><span class="glossary-def">Utilization review conducted during an ongoing course of treatment to determine if continued treatment is medically necessary. Common for TMS reauthorizations at session 18.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Denial</span><span class="glossary-def">An insurer's refusal to pay for a service. Can be pre-service (prior auth denial) or post-service (claim denial). Each type requires a different appeal process.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">DME</span><span class="glossary-def">Durable Medical Equipment. TMS devices are sometimes classified as DME by certain payers. Most commonly, TMS is billed under CPT codes as an physician service.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">External Review</span><span class="glossary-def">Level 2 appeal reviewed by an independent third party (IRO) not affiliated with the insurance company. Available after exhausting internal appeals. Often successful for legitimate medical necessity denials.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Grievance</span><span class="glossary-def">A formal complaint about the quality of care, customer service, or administrative processes. Different from an appeal — grievances challenge the process, not the medical decision.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">LCD</span><span class="glossary-def">Local Coverage Determination. A decision by a Medicare Administrative Contractor (MAC) about whether a service is covered in a specific geographic area. TMS LCDs specify coverage criteria.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Medical Necessity</span><span class="glossary-def">The standard that a service must be medically appropriate and necessary for the diagnosis or treatment of the patient's condition. Defined by payer-specific criteria, LCDs/NCDs, and clinical guidelines.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">NCD</span><span class="glossary-def">National Coverage Determination. A CMS decision about whether a service is covered nationwide under Medicare. TMS has an NCD (160.24).</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Peer Review</span><span class="glossary-def">A review of a medical decision by a peer — another physician or medical professional. Peer-to-peer (P2P) reviews involve direct discussion between the treating physician and the payer's medical director.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Prior Auth</span><span class="glossary-def">Prior Authorization. The process of obtaining approval from a payer before rendering a service. Required by most payers for TMS. Submit LMN, medication history, PHQ-9, and payer-specific forms.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Quantity Limit</span><span class="glossary-def">A restriction on the number of units, sessions, or doses covered within a time period. For TMS: most payers cover 36 sessions (1 course) with reauthorization for additional courses.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Retrospective Review</span><span class="glossary-def">Utilization review conducted after a service has already been provided. Claim denials require retrospective review to overturn.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Step Therapy</span><span class="glossary-def">A requirement that a patient try a preferred or less expensive treatment before a more costly one is approved. For TMS, some payers may require failure of ECT or specific medications first.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">Timely Filing</span><span class="glossary-def">The deadline by which a claim or appeal must be submitted to the payer. Typically 90 days to 1 year from date of service. Miss the timely filing deadline and the payer can deny on that basis alone.</span></div>
+    <div class="glossary-term"><span class="glossary-abbr">UM</span><span class="glossary-def">Utilization Management. The payer's process for reviewing the appropriateness and necessity of care. Includes prior authorization, concurrent review, and retrospective review.</span></div>
+  </div>
+
+  <!-- QR SECTION -->
+  <h2 style="margin-top: 14pt;">QR Resource Center</h2>
+  <div class="qr-section">
+    <div class="qr-section-title">Scan to Connect</div>
+    <div class="qr-section-sub">Access TMS List resources on any device.</div>
+    <div class="qr-pair">
+      <div class="qr-item">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" alt="TMS Provider Map" />
+        <div class="qr-url">tmslist.com/map/</div>
+        <div class="qr-desc">Find a TMS provider</div>
+      </div>
+      <div class="qr-item">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/quiz/" alt="TMS Quiz" />
+        <div class="qr-url">tmslist.com/quiz/</div>
+        <div class="qr-desc">TMS eligibility quiz</div>
+      </div>
+      <div class="qr-item">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/owner/dashboard/" alt="TMS Owner Dashboard" />
+        <div class="qr-url">tmslist.com/owner/</div>
+        <div class="qr-desc">Clinic owner dashboard</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAR-OUT CARD -->
+  <h2>Tear-Out Card: Authorization Request Checklist</h2>
+  <div class="tearout-card">
+    <div class="tearout-header">Prior Authorization Request Checklist — Use This Every Time</div>
+    <div class="tearout-body">
+      <div class="tearout-two-col">
+        <div>
+          <ul class="tearout-checklist">
+            <li><div class="tearout-checkbox"></div> Pull patient's most recent chart notes</li>
+            <li><div class="tearout-checkbox"></div> Verify insurance eligibility and benefits</li>
+            <li><div class="tearout-checkbox"></div> Check payer-specific LCD/requirements</li>
+            <li><div class="tearout-checkbox"></div> Administer PHQ-9 (within 30 days)</li>
+            <li><div class="tearout-checkbox"></div> Complete Medication Trial Documentation Form</li>
+            <li><div class="tearout-checkbox"></div> Pull pharmacy records if needed</li>
+            <li><div class="tearout-checkbox"></div> Write/updated Letter of Medical Necessity</li>
+            <li><div class="tearout-checkbox"></div> Verify all [BRACKETS] are filled in</li>
+          </ul>
+        </div>
+        <div class="tearout-divider">
+          <ul class="tearout-checklist">
+            <li><div class="tearout-checkbox"></div> Include most recent clinical progress note</li>
+            <li><div class="tearout-checkbox"></div> Attach PHQ-9 and GAD-7 scores with dates</li>
+            <li><div class="tearout-checkbox"></div> Verify CPT codes (90867/90868/90869)</li>
+            <li><div class="tearout-checkbox"></div> Include provider NPI and tax ID</li>
+            <li><div class="tearout-checkbox"></div> Complete Prior Auth Cover Letter</li>
+            <li><div class="tearout-checkbox"></div> Submit via correct portal/method</li>
+            <li><div class="tearout-checkbox"></div> Log in tracking system with deadline</li>
+            <li><div class="tearout-checkbox"></div> Follow up at day 5 if no response</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="tearout-footer">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://tmslist.com/map/" />
+      <span>TMS List — tmslist.com — Get help finding a TMS provider or verifying insurance coverage</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer-stripe">
+  TMS List — Prior Authorization Template Kit &bull; tmslist.com &bull; 2026
+</div>
+
+</body>
+</html>

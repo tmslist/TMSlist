@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TMSViewer from '../components/react/TMSViewer';
+---
+
+<Layout title="TMS Simulation | Interactive Brain Stimulation Visualizer" description="Explore an interactive 3D visualization of transcranial magnetic stimulation (TMS). See how electromagnetic fields target specific brain regions for depression, anxiety, and more.">
+
+    <!-- Hero -->
+    <section class="relative bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 overflow-hidden min-h-[60vh] flex items-center">
+        <!-- Ambient glows -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-violet-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute inset-0 opacity-[0.015]" style="background-image: radial-gradient(circle at center, #fff 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+        <div class="container mx-auto px-6 pt-28 pb-16 relative z-10 max-w-5xl text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-violet-500/10 border border-violet-500/20 rounded-full mb-6">
+                <div class="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse"></div>
+                <span class="text-[11px] font-bold text-violet-300 tracking-widest uppercase">Interactive Simulation</span>
+            </div>
+            <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.05]">
+                See How <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400">TMS</span><br class="hidden sm:block" />
+                Targets the Brain
+            </h1>
+            <p class="text-lg lg:text-xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+                Transcranial magnetic stimulation uses focused electromagnetic fields to stimulate specific cortical regions. Explore the science below.
+            </p>
+        </div>
+    </section>
+
+    <!-- Simulation Main -->
+    <section class="bg-slate-900 pb-24">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="bg-slate-800/50 border border-slate-700/50 rounded-3xl overflow-hidden shadow-2xl shadow-black/30">
+                <TMSViewer client:only="react" />
+            </div>
+        </div>
+    </section>
+
+    <!-- How TMS Works -->
+    <section class="bg-white py-20">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">How TMS Works</h2>
+                <p class="text-slate-500 max-w-xl mx-auto">A step-by-step explanation of what happens during a TMS session.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-14 h-14 mx-auto bg-violet-100 rounded-2xl flex items-center justify-center text-violet-600 mb-5">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <div class="text-xs font-bold text-violet-600 uppercase tracking-wider mb-2">Step 1</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Targeting</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">A figure-8 coil is positioned over the target brain region — typically the left dorsolateral prefrontal cortex (DLPFC) for depression.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-14 h-14 mx-auto bg-cyan-100 rounded-2xl flex items-center justify-center text-cyan-600 mb-5">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <div class="text-xs font-bold text-cyan-600 uppercase tracking-wider mb-2">Step 2</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Magnetic Pulse</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Rapidly alternating current in the coil produces a magnetic field (1.5–3 Tesla) that painlessly penetrates the skull and scalp.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-14 h-14 mx-auto bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-600 mb-5">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2">Step 3</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Neuron Activation</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">The changing magnetic field induces an electric current in cortical neurons, causing depolarization and downstream neurotransmitter effects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Treatment Targets by Condition -->
+    <section class="py-20 bg-slate-50 border-t border-slate-100">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Treatment Targets by Condition</h2>
+                <p class="text-slate-500 max-w-xl mx-auto">Different TMS protocols target different brain regions depending on the condition being treated.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {[
+                    { condition: 'Major Depressive Disorder', target: 'Left DLPFC', frequency: '10 Hz (high-frequency)', sessions: '36 sessions over 9 weeks', badge: 'FDA-cleared 2008', color: 'violet' },
+                    { condition: 'Anxiety & Depression', target: 'Right DLPFC', frequency: '1 Hz (low-frequency)', sessions: '30–36 sessions', badge: 'Off-label', color: 'blue' },
+                    { condition: 'OCD', target: 'mPFC / ACC', frequency: '20 Hz intermittent theta burst', sessions: '29 sessions over 6 weeks', badge: 'FDA-cleared 2018', color: 'amber' },
+                    { condition: 'Smoking Cessation', target: 'Left DLPFC / Insula', frequency: '10 Hz', sessions: '13 sessions over 3 weeks', badge: 'FDA-cleared 2020', color: 'emerald' },
+                    { condition: 'Migraine', target: 'Motor Cortex', frequency: 'Single-pulse (MagStim)', sessions: 'Variable protocol', badge: 'FDA-cleared', color: 'rose' },
+                    { condition: 'PTSD', target: 'Right DLPFC / mPFC', frequency: '1 Hz low-frequency', sessions: '36 sessions', badge: 'Off-label (research)', color: 'indigo' },
+                ].map((item) => (
+                    <div class="bg-white rounded-2xl border border-slate-100 p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                        <div class="flex items-start justify-between mb-4">
+                            <h3 class="text-base font-bold text-slate-900 leading-tight pr-2">{item.condition}</h3>
+                            <span class={`shrink-0 text-[10px] font-bold px-2 py-1 rounded-full bg-${item.color}-50 text-${item.color}-600`}>{item.badge}</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <span class="text-xs text-slate-500">Target: <span class="text-slate-700 font-medium">{item.target}</span></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                <span class="text-xs text-slate-500">{item.frequency}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                <span class="text-xs text-slate-500">{item.sessions}</span>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- E-Field Science -->
+    <section class="py-20 bg-white border-t border-slate-100">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">The E-Field: Where the Magic Happens</h2>
+                    <p class="text-slate-500 leading-relaxed mb-6">
+                        The electric field (E-field) induced by TMS is what actually stimulates neurons. Its strength and spatial distribution depend on coil geometry, stimulation intensity (expressed as % of motor threshold), and the conductivity of overlying tissue.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 shrink-0 rounded-xl bg-violet-100 flex items-center justify-center text-violet-600 font-bold text-sm">1</div>
+                            <div>
+                                <div class="font-semibold text-slate-800 text-sm">Peak intensity near the coil</div>
+                                <div class="text-xs text-slate-500 mt-0.5">E-field strength decays rapidly with distance — typically 50–80% reduction 1–2 cm from the cortex.</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 shrink-0 rounded-xl bg-cyan-100 flex items-center justify-center text-cyan-600 font-bold text-sm">2</div>
+                            <div>
+                                <div class="font-semibold text-slate-800 text-sm">Focality vs. depth tradeoff</div>
+                                <div class="text-xs text-slate-500 mt-0.5">Figure-8 coils are most focal. H-coils (BrainsWay) reach deeper regions but with less focality.</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 shrink-0 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-sm">3</div>
+                            <div>
+                                <div class="font-semibold text-slate-800 text-sm">Individual anatomy matters</div>
+                                <div class="text-xs text-slate-500 mt-0.5">Skull thickness, CSF depth, and cortical folding all affect field distribution — SimNIBS head models account for this.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 rounded-2xl border border-slate-100 p-8">
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">E-Field Quick Facts</div>
+                    <div class="space-y-4">
+                        {[
+                            { label: 'Typical TMS intensity', value: '100–120% Motor Threshold' },
+                            { label: 'Peak E-field at cortex', value: '40–80 V/m' },
+                            { label: 'Pulse duration', value: '~200 microseconds' },
+                            { label: 'Spatial resolution', value: '~0.5–1 cm² cortical area' },
+                            { label: 'Peak magnetic field', value: '1.5–3 Tesla' },
+                            { label: 'Pulse frequency range', value: '1–50 Hz' },
+                        ].map((f) => (
+                            <div class="flex items-center justify-between py-2 border-b border-slate-100 last:border-0">
+                                <span class="text-sm text-slate-500">{f.label}</span>
+                                <span class="text-sm font-semibold text-slate-700">{f.value}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="py-10 bg-slate-50 border-t border-slate-100">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="flex items-start gap-4 p-5 bg-white rounded-xl border border-slate-100">
+                <div class="w-8 h-8 shrink-0 rounded-lg bg-amber-50 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                </div>
+                <div>
+                    <div class="text-sm font-semibold text-slate-700 mb-0.5">Medical Disclaimer</div>
+                    <p class="text-xs text-slate-500 leading-relaxed">This is an educational visualization only — it does not represent real patient data or real-time simulation results. For actual TMS treatment planning, tools like SimNIBS are used to compute subject-specific E-fields. Always consult a qualified TMS provider for treatment decisions. <a href="/specialists/" class="text-blue-600 hover:underline">Find a TMS specialist →</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
