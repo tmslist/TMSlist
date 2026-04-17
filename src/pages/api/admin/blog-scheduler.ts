@@ -19,8 +19,8 @@ const BLOG_DIR = join(process.cwd(), 'src/content/blog');
 // Dynamically import the manifest so we get fresh reads on each call
 async function getManifest() {
   try {
-    const mod = await import('../../../scripts/blog-scheduler-manifest.js')
-      .catch(() => import('../../../scripts/blog-scheduler-manifest.ts'));
+    const mod = await import('../../../../scripts/blog-scheduler-manifest.js')
+      .catch(() => import('../../../../scripts/blog-scheduler-manifest.ts'));
     return mod.SCHEDULED_POSTS as any[];
   } catch {
     return [];

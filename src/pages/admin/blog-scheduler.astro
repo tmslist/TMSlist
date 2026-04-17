@@ -1,10 +1,10 @@
 ---
 export const prerender = false;
 
-import Layout from "../../../layouts/Layout.astro";
-import AdminSidebar from "../../../components/react/AdminSidebar";
-import AdminBlogScheduler from "../../../components/react/AdminBlogScheduler";
-import { getSessionFromRequest, hasRole } from "../../../utils/auth";
+import Layout from "../../layouts/Layout.astro";
+import AdminSidebar from "../../components/react/AdminSidebar";
+import AdminBlogScheduler from "../../components/react/AdminBlogScheduler";
+import { getSessionFromRequest, hasRole } from "../../utils/auth";
 
 const session = getSessionFromRequest(Astro.request);
 if (!hasRole(session, "admin", "editor")) {
