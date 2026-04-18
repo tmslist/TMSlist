@@ -15,6 +15,12 @@ interface Clinic {
   reviewCount: number;
   machines: string[] | null;
   createdAt: string;
+  description: string | null;
+  faqs: { question: string; answer: string }[] | null;
+  doctorCount: number;
+  ownerUserId: string | null;
+  ownerEmail: string | null;
+  ownerName: string | null;
 }
 
 type SortOption = 'newest' | 'rating' | 'review_count' | 'name';
@@ -32,6 +38,7 @@ export default function AdminClinics() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [bulkDeleting, setBulkDeleting] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [impersonate, setImpersonate] = useState<{ id: string; email: string; name: string; userId: string } | null>(null);
   const limit = 25;
 
   const fetchClinics = useCallback(async () => {
@@ -245,15 +252,18 @@ export default function AdminClinics() {
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Location</th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Rating</th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Devices</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Doctors</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">FAQs</th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Status</th>
+                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Owner</th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {loading ? (
-                <tr><td colSpan={7} className="px-4 py-12 text-center text-gray-400"><div className="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2"></div><br/>Loading</td></tr>
+                <tr><td colSpan={10} className="px-4 py-12 text-center text-gray-400"><div className="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2"></div><br/>Loading</td></tr>
               ) : clinics.length === 0 ? (
-                <tr><td colSpan={7} className="px-4 py-8 text-center text-gray-500">No clinics found.</td></tr>
+                <tr><td colSpan={10} className="px-4 py-8 text-center text-gray-500">No clinics found.</td></tr>
               ) : clinics.map(clinic => (
                 <tr key={clinic.id} className={`hover:bg-gray-50 transition-colors ${selected.has(clinic.id) ? 'bg-indigo-50/40' : ''}`}>
                   <td className="px-4 py-3">
@@ -291,6 +301,24 @@ export default function AdminClinics() {
                     </div>
                   </td>
                   <td className="px-4 py-3">
+                    {clinic.doctorCount > 0 ? (
+                      <span className="inline-flex items-center px-2.5 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">
+                        {clinic.doctorCount} {clinic.doctorCount === 1 ? 'Doctor' : 'Doctors'}
+                      </span>
+                    ) : (
+                      <span className="text-xs text-gray-400 italic">No doctors</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
+                    {clinic.faqs && clinic.faqs.length > 0 ? (
+                      <span className="inline-flex items-center px-2.5 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">
+                        {clinic.faqs.length} {clinic.faqs.length === 1 ? 'FAQ' : 'FAQs'}
+                      </span>
+                    ) : (
+                      <span className="text-xs text-gray-400 italic">No FAQs</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
                     <div className="flex flex-col gap-1">
                       <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${
                         clinic.verified ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
@@ -303,6 +331,24 @@ export default function AdminClinics() {
                         </span>
                       )}
                     </div>
+                  </td>
+                  <td className="px-4 py-3">
+                    {clinic.ownerUserId ? (
+                      <div className="flex flex-col gap-1">
+                        <span className="text-xs font-medium text-gray-700 truncate max-w-[120px]" title={clinic.ownerEmail || ''}>
+                          {clinic.ownerName || clinic.ownerEmail}
+                        </span>
+                        <button
+                          onClick={() => setImpersonate({ id: clinic.id, email: clinic.ownerEmail || '', name: clinic.ownerName || '', userId: clinic.ownerUserId })}
+                          className="w-fit px-2 py-0.5 bg-violet-50 text-violet-700 text-[10px] font-medium rounded hover:bg-violet-100 transition-colors"
+                          title="Login as this clinic owner"
+                        >
+                          Login As
+                        </button>
+                      </div>
+                    ) : (
+                      <span className="text-xs text-gray-400 italic">No owner</span>
+                    )}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex gap-2">
@@ -403,6 +449,44 @@ export default function AdminClinics() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
+        </div>
+      )}
+
+      {/* Login As Confirmation Modal */}
+      {impersonate && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm mx-4">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center shrink-0">
+                <svg className="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">Login As</h3>
+                <p className="text-sm text-gray-500">{impersonate.email}</p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">You are about to switch into this clinic owner's account.</p>
+            <div className="bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-4">
+              <p className="text-xs text-amber-700">This action will be logged in the audit trail.</p>
+            </div>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setImpersonate(null)}
+                className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200">
+                Cancel
+              </button>
+              <form method="POST" action="/api/admin/impersonate">
+                <input type="hidden" name="userId" value={impersonate.userId} />
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-violet-600 text-white text-sm font-semibold rounded-lg hover:bg-violet-700">
+                  Confirm & Switch
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       )}
 

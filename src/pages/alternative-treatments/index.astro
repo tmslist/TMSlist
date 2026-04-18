@@ -49,62 +49,75 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
             <div class="absolute top-[-10%] right-[20%] w-[500px] h-[500px] bg-violet-600/12 rounded-full blur-[150px]"></div>
             <div class="absolute bottom-[5%] left-[10%] w-[350px] h-[350px] bg-cyan-500/8 rounded-full blur-[100px]"></div>
 
-            <div class="container mx-auto px-4 pt-12 pb-20 lg:pt-16 lg:pb-28 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
+            <div class="container mx-auto px-4 pt-10 pb-16 lg:pt-16 lg:pb-28 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-8 lg:mb-12" aria-label="Breadcrumb">
                     <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
                     <span class="text-slate-700">/</span>
                     <span class="text-slate-300">Alternative Treatments</span>
                 </nav>
 
-                <div class="grid lg:grid-cols-2 gap-12 items-end">
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-end">
                     <div>
-                        <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-6">
+                        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.0] lg:leading-[0.95] mb-4 lg:mb-6">
                             Beyond<br/>
                             <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-cyan-400 to-emerald-400">TMS</span>
                         </h1>
-                        <p class="text-lg text-slate-400 leading-relaxed max-w-xl">
+                        <p class="text-base lg:text-lg text-slate-400 leading-relaxed max-w-xl mb-6">
                             TMS isn't the only option. Compare innovative treatments for depression and mental health — from FDA-approved medications to breakthrough therapies in clinical trials.
                         </p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="/quiz/am-i-a-candidate/" class="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">
+                                Take the Eligibility Quiz
+                            </a>
+                            <a href="/us/" class="px-5 py-2.5 bg-white/5 border border-white/10 hover:border-white/25 text-white text-sm font-semibold rounded-xl transition-all backdrop-blur">
+                                Find a TMS Clinic
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="flex flex-wrap gap-4 lg:justify-end">
-                        <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
-                            <div class="text-3xl font-bold text-white">{ALTERNATIVE_TREATMENTS.length}</div>
-                            <div class="text-xs text-slate-400 font-medium mt-1">Treatments</div>
+                    <div class="flex flex-wrap gap-3 lg:gap-4 lg:justify-end">
+                        <div class="px-4 lg:px-6 py-3 lg:py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <div class="text-2xl lg:text-3xl font-bold text-white">{ALTERNATIVE_TREATMENTS.length}</div>
+                            <div class="text-[10px] lg:text-xs text-slate-400 font-medium mt-0.5">Treatments</div>
                         </div>
-                        <div class="px-6 py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
-                            <div class="text-3xl font-bold text-emerald-400">{ALTERNATIVE_TREATMENTS.filter(t => t.fdaApproved).length}</div>
-                            <div class="text-xs text-slate-400 font-medium mt-1">FDA Approved</div>
+                        <div class="px-4 lg:px-6 py-3 lg:py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
+                            <div class="text-2xl lg:text-3xl font-bold text-emerald-400">{ALTERNATIVE_TREATMENTS.filter(t => t.fdaApproved).length}</div>
+                            <div class="text-[10px] lg:text-xs text-slate-400 font-medium mt-0.5">FDA Approved</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-12 lg:h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
         </section>
 
         <!-- Treatment Cards — Stacked Editorial -->
-        <section class="py-16 lg:py-24 bg-white">
+        <section class="py-12 lg:py-24 bg-white">
             <div class="container mx-auto px-4 max-w-5xl">
-                <div class="space-y-6">
+                <div class="space-y-4 lg:space-y-6">
                     {ALTERNATIVE_TREATMENTS.map((treatment) => {
                         const accent = treatmentAccents[treatment.slug] || defaultAccent;
                         return (
-                        <article class="group relative bg-white rounded-3xl border border-slate-100 overflow-hidden hover:border-slate-200 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.07)] transition-all duration-300">
+                        <article class="group relative bg-white rounded-2xl lg:rounded-3xl border border-slate-100 overflow-hidden hover:border-slate-200 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.07)] transition-all duration-300">
                             <!-- Top accent gradient -->
                             <div class={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${accent.gradient.replace('/10', '')} opacity-0 group-hover:opacity-100 transition-opacity`}></div>
 
-                            <div class="p-8 md:p-10">
-                                <div class="flex flex-col lg:flex-row lg:items-start gap-8">
+                            <div class="p-5 lg:p-8 md:p-8">
+                                <div class="flex flex-col md:flex-row md:items-start gap-5 lg:gap-8">
                                     <!-- Left: Icon + Badge -->
-                                    <div class="lg:w-20 shrink-0">
-                                        <div class={`w-14 h-14 rounded-2xl bg-gradient-to-br ${accent.gradient} flex items-center justify-center`}>
-                                            <svg class="w-6 h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={accent.icon}/></svg>
+                                    <div class="flex items-start gap-4 md:gap-0 md:block">
+                                        <div class={`w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br ${accent.gradient} flex items-center justify-center shrink-0`}>
+                                            <svg class="w-5 h-5 md:w-6 md:h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={accent.icon}/></svg>
                                         </div>
+                                        {treatment.fdaApproved ? (
+                                            <span class="md:hidden ml-2 px-2.5 py-1 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-md shrink-0">FDA Approved</span>
+                                        ) : (
+                                            <span class="md:hidden ml-2 px-2.5 py-1 bg-amber-100 text-amber-700 text-[10px] font-bold uppercase tracking-widest rounded-md shrink-0">Emerging</span>
+                                        )}
                                     </div>
 
                                     <!-- Center: Content -->
                                     <div class="flex-1 min-w-0">
-                                        <div class="flex items-center gap-3 mb-4">
+                                        <div class="hidden md:flex items-center gap-3 mb-3 lg:mb-4">
                                             {treatment.fdaApproved ? (
                                                 <span class="px-3 py-1 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-md">FDA Approved</span>
                                             ) : (
@@ -112,26 +125,25 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
                                             )}
                                         </div>
 
-                                        <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-1 group-hover:text-violet-600 transition-colors">{treatment.name}</h2>
-                                        {treatment.fullName && <p class="text-sm text-violet-600 font-medium mb-4">{treatment.fullName}</p>}
-                                        <p class="text-slate-500 leading-relaxed mb-6">{treatment.description}</p>
+                                        <h2 class="text-lg lg:text-2xl font-bold text-slate-900 tracking-tight mb-1 group-hover:text-violet-600 transition-colors">{treatment.name}</h2>
+                                        <p class="text-slate-500 leading-relaxed mb-4 text-sm lg:text-base">{treatment.description}</p>
 
                                         <!-- Key metrics row -->
-                                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-slate-100">
+                                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 pt-4 lg:pt-5 border-t border-slate-100">
                                             <div>
-                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-1">Session</div>
+                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Session</div>
                                                 <div class="text-sm font-bold text-slate-900">{treatment.sessionDuration || 'Varies'}</div>
                                             </div>
                                             <div>
-                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-1">Course</div>
+                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Course</div>
                                                 <div class="text-sm font-bold text-slate-900">{treatment.treatmentCourse || 'Varies'}</div>
                                             </div>
                                             <div>
-                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-1">Insurance</div>
+                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Insurance</div>
                                                 <div class="text-sm font-bold text-slate-900">{treatment.insuranceCoverage || 'Check plan'}</div>
                                             </div>
                                             <div>
-                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-1">Conditions</div>
+                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Conditions</div>
                                                 <div class="flex flex-wrap gap-1">
                                                     {treatment.conditions.slice(0, 2).map((c: string) => (
                                                         <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-[11px] font-medium rounded">{c}</span>
@@ -145,9 +157,9 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
                                     </div>
 
                                     <!-- Right: CTA -->
-                                    <div class="lg:w-36 shrink-0 flex lg:flex-col items-center gap-3">
+                                    <div class="md:w-28 lg:w-36 shrink-0 flex md:flex-col items-center gap-2 lg:gap-3">
                                         <a href={`/alternative-treatments/${treatment.slug}/`}
-                                           class="w-full px-5 py-3 bg-slate-900 hover:bg-violet-600 text-white font-semibold text-sm rounded-xl transition-colors text-center">
+                                           class="w-full px-4 lg:px-5 py-2.5 lg:py-3 bg-slate-900 hover:bg-violet-600 text-white font-semibold text-sm rounded-xl transition-colors text-center">
                                             Learn More
                                         </a>
                                     </div>
@@ -160,7 +172,7 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
         </section>
 
         <!-- Comparison Table -->
-        <section class="py-16 lg:py-24 bg-slate-50">
+        <section class="py-12 lg:py-24 bg-slate-50">
             <div class="container mx-auto px-4 max-w-5xl">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-3">How They Compare</h2>
@@ -222,21 +234,34 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
         </section>
 
         <!-- CTA -->
-        <section class="relative py-20 bg-slate-950 overflow-hidden">
+        <section class="relative py-16 lg:py-20 bg-slate-950 overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
             <div class="container mx-auto px-4 text-center relative z-10">
-                <p class="text-sm font-semibold text-violet-400 tracking-wider uppercase mb-4">Considering your options?</p>
-                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">TMS might be the right fit</h2>
-                <p class="text-slate-400 max-w-lg mx-auto mb-10">Non-invasive, FDA-cleared, and covered by most insurance. Take our quick assessment to find out.</p>
-                <div class="flex items-center justify-center gap-4 flex-wrap">
-                    <a href="/quiz/am-i-a-candidate/" class="px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">
+                <p class="text-xs lg:text-sm font-semibold text-violet-400 tracking-wider uppercase mb-3 lg:mb-4">Considering your options?</p>
+                <h2 class="text-2xl lg:text-4xl font-bold text-white mb-3 lg:mb-4 tracking-tight">TMS might be the right fit</h2>
+                <p class="text-slate-400 max-w-lg mx-auto mb-8 lg:mb-10 text-sm lg:text-base">Non-invasive, FDA-cleared, and covered by most insurance. Take our quick assessment to find out.</p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 lg:gap-4">
+                    <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto px-6 lg:px-8 py-3.5 lg:py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25 text-sm lg:text-base">
                         Am I a Candidate?
                     </a>
-                    <a href="/treatments/" class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">
-                        View TMS Conditions
+                    <a href="/us/" class="w-full sm:w-auto px-6 lg:px-8 py-3.5 lg:py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur text-sm lg:text-base">
+                        Find a TMS Clinic
                     </a>
                 </div>
+                <p class="text-xs text-slate-500 mt-4">Also: <a href="/resources/buyers-guide/" class="text-violet-400 hover:underline font-medium">download the free TMS Buyer's Guide</a> to compare all your treatment options.</p>
             </div>
         </section>
+
+        <!-- Sticky Mobile CTA Bar -->
+        <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+            <div class="flex items-center gap-2 px-3 py-3">
+                <a href="/quiz/am-i-a-candidate/" class="flex-1 text-center bg-violet-600 text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-violet-500 transition-colors shadow-md">
+                    Take the Quiz
+                </a>
+                <a href="/us/" class="flex-1 text-center bg-slate-900 text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-slate-800 transition-colors shadow-md">
+                    Find a TMS Clinic
+                </a>
+            </div>
+        </div>
     </main>
 </Layout>

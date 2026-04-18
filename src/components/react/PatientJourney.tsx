@@ -1,3 +1,5 @@
+import { CheckIcon } from './Icons';
+
 const steps = [
   { title: 'Enquiry Submitted', desc: 'Your request has been sent to the clinic.', icon: '✓' },
   { title: 'Clinic Reviews Request', desc: 'The clinic will review your information and reach out.', icon: '2' },

@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
+import { StarIcon } from './Icons';
 
 interface Clinic {
   id: string;

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { DollarIcon, BuildingIcon, InstitutionIcon, HospitalIcon } from './Icons';
 
 type InsuranceStatus = 'none' | 'medicare' | 'medicaid' | 'private' | 'out-of-pocket';
 type InsurancePlan = 'bcbs' | 'aetna' | 'cigna' | 'united' | 'kaiser' | 'humana' | 'other';

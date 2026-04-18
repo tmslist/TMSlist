@@ -31,6 +31,7 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [resetPw, setResetPw] = useState<{ id: string; email: string } | null>(null);
   const [newPassword, setNewPassword] = useState('');
+  const [impersonate, setImpersonate] = useState<{ id: string; email: string; name: string; role: string } | null>(null);
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [page, setPage] = useState(0);
   const limit = 25;
@@ -206,6 +207,51 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
                 className="px-4 py-2 bg-amber-600 text-white text-sm font-semibold rounded-lg hover:bg-amber-700 disabled:opacity-50">
                 {saving ? 'Saving...' : 'Reset Password'}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Login As Confirmation Modal */}
+      {impersonate && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm mx-4">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center">
+                <svg className="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">Login As</h3>
+                <p className="text-sm text-gray-500">{impersonate.email}</p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">
+              You are about to switch into this account.
+            </p>
+            {impersonate.role === 'clinic_owner' && (
+              <p className="text-xs text-gray-400 mb-4">This will redirect to the Clinic Portal.</p>
+            )}
+            <div className="bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-4">
+              <p className="text-xs text-amber-700">
+                This action will be logged in the audit trail.
+              </p>
+            </div>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setImpersonate(null)}
+                className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200">
+                Cancel
+              </button>
+              <form method="POST" action="/api/admin/impersonate">
+                <input type="hidden" name="userId" value={impersonate.id} />
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-violet-600 text-white text-sm font-semibold rounded-lg hover:bg-violet-700">
+                  Confirm & Switch
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -396,7 +442,14 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
                           </button>
                         </div>
                       ) : (
-                        <div className="flex gap-1">
+                        <div className="flex gap-1 flex-wrap">
+                          <button
+                            onClick={() => setImpersonate({ id: user.id, email: user.email, name: user.name, role: user.role })}
+                            className="px-2 py-1 bg-violet-50 text-violet-700 text-xs font-medium rounded-lg hover:bg-violet-100 transition-colors"
+                            title="Switch into this account"
+                          >
+                            Login As
+                          </button>
                           <button
                             onClick={() => setResetPw({ id: user.id, email: user.email })}
                             className="px-2 py-1 bg-amber-50 text-amber-700 text-xs font-medium rounded-lg hover:bg-amber-100 transition-colors"

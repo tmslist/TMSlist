@@ -14,8 +14,6 @@ if (!session || !hasRole(session, 'clinic_owner', 'admin')) {
 // Get clinicId from user record
 const [user] = await db.select().from(users).where(eq(users.id, session.userId)).limit(1);
 const clinicId = user?.clinicId || (session as any).clinicId || null;
-const success = Astro.url.searchParams.get('subscribed') === 'pro' || Astro.url.searchParams.get('subscribed') === 'premium' || Astro.url.searchParams.get('subscribed') === 'enterprise' || Astro.url.searchParams.get('success') === 'true';
-const canceled = Astro.url.searchParams.get('canceled') === 'true';
 
 let subscription = null;
 let plan: 'free' | 'pro' | 'premium' | 'enterprise' = 'free';
@@ -26,6 +24,17 @@ if (clinicId) {
   plan = await getClinicPlan(clinicId);
   features = PLANS[plan].features;
 }
+
+// Validate success state from actual subscription, not just URL params
+// A user navigating to /?subscribed=enterprise should NOT see the banner unless DB reflects it
+const subscribedParam = Astro.url.searchParams.get('subscribed');
+const successParam = Astro.url.searchParams.get('success') === 'true';
+const canceled = Astro.url.searchParams.get('canceled') === 'true';
+const success = !!(
+  clinicId &&
+  subscription?.status === 'active' &&
+  (subscribedParam === plan || successParam)
+);
 
 const featuresList = [
   { key: 'listing', label: 'Listing Visibility', free: 'Basic', pro: 'Full', premium: 'Featured', enterprise: 'Priority' },
@@ -43,7 +52,7 @@ const featuresList = [
 ];
 ---
 
-<Layout title="Billing & Plan" session={session}>
+<Layout title="Billing & Plan">
   <div class="mb-8">
     <h1 class="text-2xl font-bold text-gray-900">Billing & Plan</h1>
     <p class="text-gray-500 mt-1">Manage your subscription and billing settings</p>

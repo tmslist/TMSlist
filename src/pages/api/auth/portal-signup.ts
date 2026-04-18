@@ -53,8 +53,9 @@ export const POST: APIRoute = async ({ request }) => {
     // Check if user already exists
     const existing = await getUserByEmail(normalizedEmail);
     if (existing) {
+      // Return 400 (not 409) to prevent email enumeration
       return new Response(JSON.stringify({ error: 'Account already exists. Please log in.' }), {
-        status: 409,
+        status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
     }
@@ -78,7 +79,7 @@ export const POST: APIRoute = async ({ request }) => {
     const verificationUrl = `${SITE_URL}/api/auth/verify-email?token=${token}`;
 
     if (import.meta.env.DEV || process.env.NODE_ENV === 'development') {
-      console.log(`\n📧 [DEV] Email verification for ${normalizedEmail}:\n   ${verificationUrl}\n`);
+      console.log(`\n[DEV] Email verification for ${normalizedEmail}:\n   ${verificationUrl}\n`);
     }
 
     await sendEmailVerificationEmail({

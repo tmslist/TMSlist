@@ -15,6 +15,6 @@ export const GET: APIRoute = async () => {
     status: allOk ? 'healthy' : 'degraded',
     timestamp: new Date().toISOString(),
     checks,
-    version: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) || 'dev',
+    version: process.env.GIT_COMMIT_SHA?.slice(0, 7) || process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) || 'dev',
   }), { status: allOk ? 200 : 503, headers: { 'Content-Type': 'application/json' } });
 };

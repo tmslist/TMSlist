@@ -23,5 +23,6 @@ dist.zip
 
 # jetbrains setting folder
 .idea/
-.vercel
+.vercel/
+.next/
 .env*.local

@@ -34,14 +34,26 @@ export const POST: APIRoute = async ({ request }) => {
       case 'subscription.activated': {
         const razorpaySubId = entity.id as string;
         const clinicId = entity.metadata?.clinic_id as string;
-        const plan = entity.plan_id as string;
+        const razorpayPlanId = entity.plan_id as string;
 
         if (!clinicId) break;
+
+        // Map Razorpay plan IDs to local plan names
+        // These should match the plan IDs configured in your Razorpay dashboard
+        const planMap: Record<string, string> = {
+          'pro': 'pro',
+          'premium': 'premium',
+          'enterprise': 'enterprise',
+          // Fallback: derive from plan_id string if it contains a known tier
+        };
+        const plan = razorpayPlanId
+          ? (planMap[razorpayPlanId] ?? (razorpayPlanId.toLowerCase().includes('premium') ? 'premium' : razorpayPlanId.toLowerCase().includes('enterprise') ? 'enterprise' : 'pro'))
+          : 'pro';
 
         await db.insert(subscriptions).values({
           clinicId,
           razorpaySubscriptionId: razorpaySubId,
-          plan: 'pro',
+          plan: plan as 'pro' | 'premium' | 'enterprise',
           status: 'active',
           billingCurrency: 'inr',
           currentPeriodEnd: new Date(entity.current_end * 1000),
@@ -49,7 +61,7 @@ export const POST: APIRoute = async ({ request }) => {
           target: subscriptions.razorpaySubscriptionId,
           set: {
             status: 'active',
-            plan: 'pro',
+            plan: plan as 'pro' | 'premium' | 'enterprise',
             currentPeriodEnd: new Date(entity.current_end * 1000),
           },
         });

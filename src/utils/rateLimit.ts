@@ -47,7 +47,23 @@ export async function strictRateLimit(
   prefix: string,
 ): Promise<Response | null> {
   const r = redis();
-  if (!r) return null; // Redis not configured, allow all
+  if (!r) {
+    // Fail-closed: if Redis is down, block the request and log a critical error.
+    // An attacker who DoSes Redis should NOT be able to bypass rate limits.
+    console.error('[rateLimit] CRITICAL: Redis unavailable — blocking request. Investigate Redis connectivity immediately.');
+    return new Response(JSON.stringify({
+      error: 'Too many requests. Please try again later.',
+      retryAfter: 60,
+    }), {
+      status: 429,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Limit': String(maxRequests),
+        'X-RateLimit-Remaining': '0',
+        'Retry-After': '60',
+      },
+    });
+  }
 
   const limiter = new Ratelimit({
     redis: r,

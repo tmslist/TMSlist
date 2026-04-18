@@ -111,7 +111,7 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}, ${faqSchema}]`;
                             )}
                         </div>
 
-                        <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight mb-5">
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight mb-4 lg:mb-5">
                             {conditionName} Treatment<br/>
                             <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">in {cityName}</span>
                         </h1>
@@ -174,10 +174,10 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}, ${faqSchema}]`;
         </section>
 
         <!-- Rich Educational Content (pSEO) -->
-        <section class="py-16 lg:py-20 bg-slate-50">
+        <section class="py-12 lg:py-20 bg-slate-50">
             <div class="container mx-auto px-4 max-w-4xl">
-                <div class="prose prose-lg prose-slate max-w-none">
-                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Understanding {conditionName} Treatment with TMS in {cityName}</h2>
+                <div class="prose prose-slate max-w-none prose-headings:tracking-tight prose-headings:font-bold">
+                    <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight">Understanding {conditionName} Treatment with TMS in {cityName}</h2>
 
                     <p>{td.howItWorks}</p>
 
@@ -239,46 +239,46 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}, ${faqSchema}]`;
         </section>
 
         <!-- FAQ Schema Section -->
-        <section class="py-16 bg-white">
+        <section class="py-12 lg:py-16 bg-white">
             <div class="container mx-auto px-4 max-w-4xl">
-                <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-8">Frequently Asked Questions: TMS for {conditionName} in {cityName}</h2>
-                <div class="space-y-4">
+                <h2 class="text-xl lg:text-2xl font-bold text-slate-900 tracking-tight mb-6 lg:mb-8">Frequently Asked Questions: TMS for {conditionName} in {cityName}</h2>
+                <div class="space-y-3 lg:space-y-4">
                     <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
-                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors">
-                            How much does TMS for {conditionName.toLowerCase()} cost in {cityName}?
+                        <summary class="flex items-center justify-between gap-3 p-5 lg:p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors text-sm lg:text-base">
+                            <span class="flex-1">How much does TMS for {conditionName.toLowerCase()} cost in {cityName}?</span>
                             <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </summary>
-                        <div class="px-6 pb-6 text-slate-600">Sessions typically cost {td.costRange}. A full course of {td.sessions} ranges from $6,000-$12,000 before insurance. Most major insurance plans cover TMS for FDA-cleared indications.</div>
+                        <div class="px-5 lg:px-6 pb-5 lg:pb-6 text-slate-600 text-sm">Sessions typically cost {td.costRange}. A full course of {td.sessions} ranges from $6,000-$12,000 before insurance. Most major insurance plans cover TMS for FDA-cleared indications.</div>
                     </details>
                     <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
-                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors">
-                            Is TMS for {conditionName.toLowerCase()} FDA-cleared?
+                        <summary class="flex items-center justify-between gap-3 p-5 lg:p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors text-sm lg:text-base">
+                            <span class="flex-1">Is TMS for {conditionName.toLowerCase()} FDA-cleared?</span>
                             <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </summary>
-                        <div class="px-6 pb-6 text-slate-600">{td.fdaCleared ? `Yes, TMS for ${conditionName.toLowerCase()} is FDA-cleared${td.yearCleared ? ` since ${td.yearCleared}` : ''}. This means most insurance providers cover the treatment.` : `TMS for ${conditionName.toLowerCase()} is currently an off-label application with growing clinical evidence. Insurance coverage may vary — check with providers for details.`}</div>
+                        <div class="px-5 lg:px-6 pb-5 lg:pb-6 text-slate-600 text-sm">{td.fdaCleared ? `Yes, TMS for ${conditionName.toLowerCase()} is FDA-cleared${td.yearCleared ? ` since ${td.yearCleared}` : ''}. This means most insurance providers cover the treatment.` : `TMS for ${conditionName.toLowerCase()} is currently an off-label application with growing clinical evidence. Insurance coverage may vary — check with providers for details.`}</div>
                     </details>
                     <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
-                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors">
-                            How many TMS sessions will I need for {conditionName.toLowerCase()}?
+                        <summary class="flex items-center justify-between gap-3 p-5 lg:p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors text-sm lg:text-base">
+                            <span class="flex-1">How many TMS sessions will I need for {conditionName.toLowerCase()}?</span>
                             <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </summary>
-                        <div class="px-6 pb-6 text-slate-600">A typical course involves {td.sessions}. Each session lasts 19-37 minutes. Most patients begin noticing improvement by weeks 2-3 of treatment.</div>
+                        <div class="px-5 lg:px-6 pb-5 lg:pb-6 text-slate-600 text-sm">A typical course involves {td.sessions}. Each session lasts 19-37 minutes. Most patients begin noticing improvement by weeks 2-3 of treatment.</div>
                     </details>
                     <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
-                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors">
-                            Does TMS have side effects?
+                        <summary class="flex items-center justify-between gap-3 p-5 lg:p-6 cursor-pointer font-semibold text-slate-900 hover:text-violet-600 transition-colors text-sm lg:text-base">
+                            <span class="flex-1">Does TMS have side effects?</span>
                             <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </summary>
-                        <div class="px-6 pb-6 text-slate-600">TMS has minimal side effects compared to medication. The most common are mild scalp discomfort at the treatment site and occasional headaches, both of which typically resolve within the first few sessions. Unlike antidepressants, TMS does not cause weight gain, sexual dysfunction, or emotional blunting.</div>
+                        <div class="px-5 lg:px-6 pb-5 lg:pb-6 text-slate-600 text-sm">TMS has minimal side effects compared to medication. The most common are mild scalp discomfort at the treatment site and occasional headaches, both of which typically resolve within the first few sessions. Unlike antidepressants, TMS does not cause weight gain, sexual dysfunction, or emotional blunting.</div>
                     </details>
                 </div>
             </div>
         </section>
 
         <!-- Related Treatments in this City -->
-        <section class="py-12 bg-slate-50 border-t border-slate-100">
+        <section class="py-8 lg:py-12 bg-slate-50 border-t border-slate-100">
             <div class="container mx-auto px-4 max-w-5xl">
-                <h2 class="text-xl font-bold text-slate-900 mb-6">Other TMS Treatments in {cityName}</h2>
+                <h2 class="text-lg lg:text-xl font-bold text-slate-900 mb-4 lg:mb-6">Other TMS Treatments in {cityName}</h2>
                 <div class="flex flex-wrap gap-2">
                     {TREATMENT_SLUGS.filter(t => t.slug !== treatment).slice(0, 12).map(t => (
                         <a href={`/us/${state}/${city}/${t.slug}/`}
@@ -291,17 +291,28 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}, ${faqSchema}]`;
         </section>
 
         <!-- CTA -->
-        <section class="relative py-16 bg-slate-950 overflow-hidden">
+        <section class="relative py-14 lg:py-16 bg-slate-950 overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
             <div class="container mx-auto px-4 text-center relative z-10">
-                <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4 tracking-tight">Ready to explore TMS for {conditionName.toLowerCase()}?</h2>
-                <p class="text-slate-400 max-w-lg mx-auto mb-8">Take our quick assessment to find out if you're a candidate, or contact a provider in {cityName} directly.</p>
-                <div class="flex gap-4 justify-center flex-wrap">
-                    <a href="/quiz/am-i-a-candidate/" class="px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">Am I a Candidate?</a>
-                    <a href={`/us/${state}/${city}/`} class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">All {cityName} Clinics</a>
-                    <a href={`/treatments/${treatment}/`} class="px-8 py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur">{conditionName} Treatment Guide</a>
+                <h2 class="text-xl lg:text-3xl font-bold text-white mb-3 lg:mb-4 tracking-tight">Ready to explore TMS for {conditionName.toLowerCase()}?</h2>
+                <p class="text-slate-400 max-w-lg mx-auto mb-6 lg:mb-8 text-sm lg:text-base">Take our quick assessment to find out if you're a candidate, or contact a provider in {cityName} directly.</p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
+                    <a href="/quiz/am-i-a-candidate/" class="px-6 lg:px-8 py-3.5 lg:py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25 text-sm lg:text-base">Am I a Candidate?</a>
+                    <a href={`/us/${state}/${city}/`} class="px-6 lg:px-8 py-3.5 lg:py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur text-sm lg:text-base">All {cityName} Clinics</a>
                 </div>
             </div>
         </section>
+
+        <!-- Sticky Mobile CTA Bar -->
+        <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+            <div class="flex items-center gap-2 px-3 py-3">
+                <a href="/quiz/am-i-a-candidate/" class="flex-1 text-center bg-violet-600 text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-violet-500 transition-colors shadow-md">
+                    Take the Quiz
+                </a>
+                <a href={`/us/${state}/${city}/`} class="flex-1 text-center bg-slate-900 text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-slate-800 transition-colors shadow-md">
+                    View Clinics
+                </a>
+            </div>
+        </div>
     </main>
 </Layout>

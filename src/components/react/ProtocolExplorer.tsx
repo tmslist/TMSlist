@@ -1,143 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-
-interface Protocol {
-  name: string;
-  fullName: string;
-  type: 'rTMS' | 'dTMS' | 'iTBS' | 'cTBS' | 'Accelerated' | 'SNT';
-  frequency: string;
-  intensity: string;
-  pulses: string;
-  duration: string;
-  sessionsTotal: number;
-  sessionsPerDay: number;
-  fdaCleared: string;
-  evidence: 'Strong' | 'Moderate' | 'Emerging';
-  indication: string;
-  pros: string[];
-  cons: string[];
-  badge?: string;
-}
-
-const protocols: Protocol[] = [
-  {
-    name: 'Standard rTMS',
-    fullName: 'High-Frequency rTMS (10Hz)',
-    type: 'rTMS',
-    frequency: '10 Hz',
-    intensity: '120% MT',
-    pulses: '3,000 per session',
-    duration: '37 min/session',
-    sessionsTotal: 36,
-    sessionsPerDay: 1,
-    fdaCleared: '2008 (MDD)',
-    evidence: 'Strong',
-    indication: 'Major Depression',
-    pros: ['Most studied protocol', 'Wide insurance coverage', 'Well-understood safety profile'],
-    cons: ['Daily visits for 6+ weeks', 'Moderate dropout rate (~20%)'],
-  },
-  {
-    name: 'Theta Burst (iTBS)',
-    fullName: 'Intermittent Theta Burst Stimulation',
-    type: 'iTBS',
-    frequency: '50 Hz bursts',
-    intensity: '80% MT',
-    pulses: '600 pulses',
-    duration: '3 min/session',
-    sessionsTotal: 30,
-    sessionsPerDay: 1,
-    fdaCleared: '2018 (MDD)',
-    evidence: 'Strong',
-    indication: 'MDD (treatment-resistant)',
-    pros: ['3-minute sessions', 'Non-inferior to 10Hz in clinical trials', 'FDA-cleared equivalent efficacy'],
-    cons: ['80% MT threshold must be precisely set', 'Still requires daily visits'],
-    badge: 'Popular',
-  },
-  {
-    name: 'Deep TMS (BrainsWay)',
-    fullName: 'High-Frequency Deep TMS (H1 Coil)',
-    type: 'dTMS',
-    frequency: '10 Hz',
-    intensity: '120% MT',
-    pulses: '1,980 pulses',
-    duration: '20 min/session',
-    sessionsTotal: 36,
-    sessionsPerDay: 1,
-    fdaCleared: '2013 (MDD), 2020 (OCD)',
-    evidence: 'Strong',
-    indication: 'MDD, OCD',
-    pros: ['Reaches deeper brain structures (DLPFC)', 'Broader network activation', 'FDA-cleared for OCD'],
-    cons: ['Higher cost per session', 'Requires specialized H1 coil device'],
-  },
-  {
-    name: 'SNT (Stanford Protocol)',
-    fullName: 'Stanford Accelerated Intelligent Neuromodulation Therapy (SAINT)',
-    type: 'Accelerated',
-    frequency: '10 Hz',
-    intensity: '90% MT',
-    pulses: '1,800 per session',
-    duration: '10 min/session',
-    sessionsTotal: 50,
-    sessionsPerDay: '10 (5 days/week)',
-    fdaCleared: 'Not yet cleared',
-    evidence: 'Emerging',
-    indication: 'Treatment-resistant MDD',
-    pros: ['~90% remission rate in SAINT trials', 'Completed in ~2 weeks', 'Works on patients who failed 5+ meds'],
-    cons: ['Not FDA-cleared (off-label)', 'Intensive: 10 sessions/day', 'Limited availability', 'Insurance typically does not cover'],
-    badge: 'High Efficacy',
-  },
-  {
-    name: 'Low-Frequency (1Hz)',
-    fullName: 'Low-Frequency rTMS Right DLPFC',
-    type: 'rTMS',
-    frequency: '1 Hz',
-    intensity: '100% MT',
-    pulses: '1,200 pulses',
-    duration: '20 min/session',
-    sessionsTotal: 30,
-    sessionsPerDay: 1,
-    fdaCleared: '2012 (MDD)',
-    evidence: 'Moderate',
-    indication: 'MDD (especially with anxiety)',
-    pros: ['Right-sided (avoidsomania risk)', 'May be safer for bipolar patients', 'Good for anxious depression'],
-    cons: ['Less robust efficacy data than 10Hz', 'Longer session than iTBS'],
-  },
-  {
-    name: 'cTBS (Ldtn)',
-    fullName: 'Continuous Theta Burst / Left DLPFC',
-    type: 'cTBS',
-    frequency: '50 Hz bursts',
-    intensity: '100% MT',
-    pulses: '600 pulses',
-    duration: '3.5 min/session',
-    sessionsTotal: 30,
-    sessionsPerDay: 1,
-    fdaCleared: 'Research only',
-    evidence: 'Emerging',
-    indication: 'MDD (investigational)',
-    pros: ['Fast application', 'Right-sided inhibitory approach', 'Emerging evidence for working memory'],
-    cons: ['Not FDA-cleared', 'Less clinical data than iTBS', 'Variable response rates'],
-  },
-];
-
-const evidenceColors: Record<string, string> = {
-  'Strong': 'bg-emerald-50 text-emerald-700',
-  'Moderate': 'bg-amber-50 text-amber-700',
-  'Emerging': 'bg-blue-50 text-blue-700',
-};
-
-const typeColors: Record<string, string> = {
-  'rTMS': 'bg-violet-50 text-violet-700',
-  'dTMS': 'bg-cyan-50 text-cyan-700',
-  'iTBS': 'bg-emerald-50 text-emerald-700',
-  'cTBS': 'bg-amber-50 text-amber-700',
-  'Accelerated': 'bg-fuchsia-50 text-fuchsia-700',
-  'SNT': 'bg-rose-50 text-rose-700',
-};
+import { protocols, protocolTypeColors, evidenceColors, type TMSProtocol } from '../../data/tmsProtocols';
+import { BoltIcon, CheckIcon } from './Icons';
 
 export default function ProtocolExplorer() {
-  const [selected, setSelected] = useState<Protocol | null>(protocols[0]);
+  const [selected, setSelected] = useState<TMSProtocol | null>(protocols[0]);
   const [filter, setFilter] = useState<string>('All');
 
   const types = ['All', ...Array.from(new Set(protocols.map(p => p.type)))];
@@ -182,7 +50,7 @@ export default function ProtocolExplorer() {
                 )}
               </div>
               <div className="flex items-center gap-2 mt-2">
-                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${typeColors[protocol.type]}`}>{protocol.type}</span>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${protocolTypeColors[protocol.type]}`}>{protocol.type}</span>
                 <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${evidenceColors[protocol.evidence]}`}>{protocol.evidence} Evidence</span>
               </div>
               <div className="text-xs text-slate-400 mt-2">{protocol.sessionsTotal} sessions · {protocol.fdaCleared}</div>
@@ -201,7 +69,7 @@ export default function ProtocolExplorer() {
                 <div>
                   <h3 className="text-xl font-bold text-slate-900">{selected.fullName}</h3>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${typeColors[selected.type]}`}>{selected.type}</span>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${protocolTypeColors[selected.type]}`}>{selected.type}</span>
                     <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${evidenceColors[selected.evidence]}`}>{selected.evidence} Evidence</span>
                     <span className="text-xs text-slate-500">· FDA: {selected.fdaCleared}</span>
                   </div>
@@ -211,9 +79,9 @@ export default function ProtocolExplorer() {
               {/* Parameters Grid */}
               <div className="grid grid-cols-2 gap-3 mb-6">
                 {[
-                  { label: 'Frequency', value: selected.frequency },
-                  { label: 'Intensity', value: selected.intensity },
-                  { label: 'Pulses', value: selected.pulses },
+                  { label: 'Frequency', value: selected.frequencyDisplay },
+                  { label: 'Intensity', value: selected.intensityDisplay },
+                  { label: 'Pulses', value: selected.pulsesDisplay },
                   { label: 'Duration', value: selected.duration },
                 ].map(param => (
                   <div key={param.label} className="bg-slate-50 rounded-xl p-3">

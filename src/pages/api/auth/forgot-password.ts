@@ -35,7 +35,7 @@ export const POST: APIRoute = async ({ request }) => {
       const resetUrl = `${SITE_URL}/portal/reset-password?token=${token}`;
 
       if (import.meta.env.DEV || process.env.NODE_ENV === 'development') {
-        console.log(`\n🔑 [DEV] Password reset for ${email}:\n   ${resetUrl}\n`);
+        console.log(`\n[DEV] Password reset for ${email}:\n   ${resetUrl}\n`);
       }
 
       await sendPasswordResetEmail({

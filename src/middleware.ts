@@ -16,36 +16,32 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const contentType = response.headers.get('content-type') || '';
     if (!contentType.includes('text/html')) return response;
 
-    // Check if cookie already set
-    const existingCookie = context.cookies.get('x-country');
-    if (existingCookie?.value && SUPPORTED_COUNTRIES.includes(existingCookie.value)) {
+    // Read ?country= param for local dev override (e.g. ?country=IN)
+    // geo.js handles all timezone-based detection client-side
+    const urlCountry = context.url.searchParams.get('country')?.toUpperCase();
+    if (urlCountry && SUPPORTED_COUNTRIES.includes(urlCountry)) {
+        context.cookies.set('x-country', urlCountry, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 365,
+            httpOnly: false,
+            secure: false, // localhost
+            sameSite: 'lax',
+        });
         return response;
     }
 
-    // Detect country — priority: (1) ?country= query param (for local dev testing),
-    // (2) x-vercel-ip-country header (on Vercel), (3) 'US' fallback
-    let country = 'US';
-
-    // Dev override: ?country=IN on any URL
-    const urlCountry = context.url.searchParams.get('country')?.toUpperCase();
-    if (urlCountry && SUPPORTED_COUNTRIES.includes(urlCountry)) {
-        country = urlCountry;
-    } else {
-        // On Vercel: auto-injected geo header
-        const vercelCountry = context.request.headers.get('x-vercel-ip-country')?.toUpperCase();
-        if (vercelCountry && SUPPORTED_COUNTRIES.includes(vercelCountry)) {
-            country = vercelCountry;
-        }
+    // geo.js sets the cookie client-side via timezone detection
+    // On Vercel, x-vercel-ip-country header would also be used if available
+    const vercelCountry = context.request.headers.get('x-vercel-ip-country')?.toUpperCase();
+    if (vercelCountry && SUPPORTED_COUNTRIES.includes(vercelCountry)) {
+        context.cookies.set('x-country', vercelCountry, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 365,
+            httpOnly: false,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+        });
     }
-
-    // Set cookie for client-side geo detection (1 year, accessible from JS)
-    context.cookies.set('x-country', country, {
-        path: '/',
-        maxAge: 60 * 60 * 24 * 365,
-        httpOnly: false,
-        secure: process.env.NODE_ENV === 'production' || process.env.VERCEL === '1',
-        sameSite: 'lax',
-    });
 
     return response;
 });

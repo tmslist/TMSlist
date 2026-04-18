@@ -42,7 +42,7 @@ export const PUT: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
   }
 
-  const clinicId = (session as any).clinicId as string;
+  const clinicId = session.clinicId;
   if (!clinicId) {
     return new Response(JSON.stringify({ error: 'Clinic not associated with user' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
   }
@@ -60,11 +60,42 @@ export const PUT: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'No active subscription' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
 
+    // Cancel at provider(s) and track each result
+    const results: { razorpay?: string; stripe?: string } = {};
+    let overallSuccess = true;
+
     if (sub.razorpaySubscriptionId) {
-      await cancelRazorpaySubscription(sub.razorpaySubscriptionId);
+      try {
+        await cancelRazorpaySubscription(sub.razorpaySubscriptionId);
+        results.razorpay = 'canceled';
+      } catch (err) {
+        console.error('[payments] Razorpay cancel failed:', err);
+        results.razorpay = 'failed';
+        overallSuccess = false;
+      }
     }
+
     if (sub.stripeSubscriptionId) {
-      await cancelSubscription(sub.stripeSubscriptionId);
+      try {
+        await cancelSubscription(sub.stripeSubscriptionId);
+        results.stripe = 'canceled';
+      } catch (err) {
+        console.error('[payments] Stripe cancel failed:', err);
+        results.stripe = 'failed';
+        overallSuccess = false;
+      }
+    }
+
+    // Always update local DB regardless of provider results
+    await db.update(subscriptions)
+      .set({ status: overallSuccess ? 'canceled' : sub.status })
+      .where(eq(subscriptions.clinicId, clinicId));
+
+    if (!overallSuccess) {
+      return new Response(JSON.stringify({
+        error: 'One or more cancellations failed. Please contact support.',
+        details: results,
+      }), { status: 502, headers: { 'Content-Type': 'application/json' } });
     }
 
     return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });

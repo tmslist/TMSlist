@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 import node from '@astrojs/node';
-import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 
 export default defineConfig({
@@ -16,15 +15,6 @@ mode:'standalone',}),
     },
   },
   integrations: [
-    sitemap({
-      filter: (page) =>
-        !page.includes('/admin/') &&
-        !page.includes('/portal/') &&
-        !page.includes('/owner/') &&
-        !page.includes('/account/') &&
-        !page.includes('/thank-you') &&
-        !page.includes('/unsubscribe'),
-    }),
     react(),
   ],
   security: {

@@ -40,6 +40,7 @@ export async function getStaticPaths() {
 
 const { title, description, insurer, provider, coversTms, priorAuthRequired, typicalCost, faqs, hasContent, entry } = Astro.props;
 const slug = Astro.params.slug!;
+const displayName = insurer || provider || title;
 let Content: any = null;
 if (hasContent && entry) {
   const rendered = await render(entry);
@@ -96,7 +97,29 @@ const faqSchema = faqs && faqs.length > 0 ? JSON.stringify({
     { name: title, url: `/insurance/${slug}/` },
   ]}
 >
-  {Content && <Content />}
+  {Content ? <Content /> : (
+    <>
+      <div class="bg-amber-50 border-l-4 border-amber-500 p-6 mb-8 rounded-r-xl">
+        <h3 class="text-amber-700 font-semibold mt-0">Updated for 2026</h3>
+        <p class="mb-0">This guide reflects current {displayName} coverage policies for TMS therapy.</p>
+      </div>
+
+      <h2>Does {displayName} Cover TMS?</h2>
+      <p>{coversTms ? `Yes. ${displayName} covers TMS therapy for FDA-cleared indications. Most patients with treatment-resistant depression who meet medical necessity criteria can get coverage.` : `Coverage varies by plan. Contact ${displayName} directly or ask your TMS clinic to verify your benefits.`}</p>
+
+      <h2>Prior Authorization</h2>
+      <p>{priorAuthRequired ? `${displayName} requires prior authorization before TMS treatment begins. Your TMS clinic typically handles this process, which takes 5-15 business days.` : `Prior authorization requirements vary by plan. Check with your TMS clinic to determine if pre-approval is needed.`}</p>
+
+      <h2>What You'll Pay</h2>
+      <p>Your out-of-pocket cost depends on your specific plan's deductible, copay, and coinsurance. {typicalCost ? `Typical costs with ${displayName} range from ${typicalCost}.` : 'Most insured patients pay between $500 and $3,000 for a full TMS course.'}</p>
+
+      <div class="not-prose mt-12 p-8 bg-amber-900 rounded-2xl text-white text-center">
+        <h3 class="text-2xl font-semibold mb-4">Verify Your Coverage</h3>
+        <p class="text-amber-200 mb-8">Find a TMS clinic that accepts {displayName} and get a free benefits check.</p>
+        <a href="/us/" class="inline-block bg-white text-amber-900 font-semibold py-3 px-8 rounded-xl hover:bg-amber-50 transition-colors">Find a Clinic</a>
+      </div>
+    </>
+  )}
 </InsurancePage>
 
 {faqSchema && (

@@ -398,12 +398,23 @@ const deviceComparisons = comparisons.filter(
 </header>
 
 <!-- Secondary nav: full-width bar below sticky header -->
-<nav class="hidden lg:flex items-center justify-center gap-8 py-2 bg-white border-b border-slate-100 text-[11px] font-medium text-gray-500" aria-label="Secondary navigation">
-    <a href="/research/" class="hover:text-indigo-600 transition-colors">Research</a>
-    <a href="/education/" class="hover:text-indigo-600 transition-colors">Education</a>
-    <a href="/resources/" class="hover:text-indigo-600 transition-colors">Resources</a>
-    <a href="/about/" class="hover:text-indigo-600 transition-colors">About</a>
-    <a href="/contact/" class="hover:text-indigo-600 transition-colors">Contact</a>
+<nav class="hidden lg:flex items-center justify-center gap-6 py-2 bg-white border-b border-slate-100 text-[11px] font-semibold text-gray-500" aria-label="Quick tools">
+    <a href="/quiz/am-i-a-candidate/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-violet-50 text-violet-700 hover:bg-violet-100 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        Am I a Candidate?
+    </a>
+    <a href="/quiz/depression-severity-test/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        PHQ-9 Depression Test
+    </a>
+    <a href="/quiz/insurance-eligibility-checker/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        Insurance Eligibility
+    </a>
+    <a href="/tms-cost-guide/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        TMS Cost Guide
+    </a>
 </nav>
 
 <!-- ========== MEGA MENU PANELS (full-width, positioned below header) ========== -->

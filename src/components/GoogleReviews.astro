@@ -31,12 +31,17 @@ const {
     totalCount = 0,
     clinicId = "",
 } = Astro.props;
+
+// entityName is read from a data attribute in the script to avoid XSS and
+// escaping issues when clinic names contain double quotes or backslashes.
+const safeEntityName = JSON.stringify(String(entityName)).slice(1, -1);
 ---
 
 <section
     class="py-12 bg-white rounded-3xl border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] overflow-hidden"
     id="reviews-section"
     data-clinic-id={clinicId || entitySlug}
+    data-entity-name={safeEntityName}
 >
     <!-- Header with Aggregate Stats -->
     <div
@@ -245,6 +250,7 @@ const {
 
 <script define:vars={{ clinicId, entitySlug }}>
     const SECTION = document.getElementById("reviews-section");
+    const ENTITY_NAME = SECTION.dataset.entityName || '';
     const ID = clinicId || entitySlug;
     let currentUser = null;
 
@@ -342,18 +348,18 @@ const {
         const fullStars = Math.round(avg);
         document.getElementById("star-display").innerHTML =
             `<span class="text-yellow-400">${"★".repeat(fullStars)}</span><span class="text-gray-200">${"★".repeat(5 - fullStars)}</span>`;
-        injectReviewSchema(reviews, entityName);
+        injectReviewSchema(reviews, ENTITY_NAME);
     }
 
     function injectReviewSchema(reviews, name) {
         document.querySelectorAll('[data-review-schema]').forEach(el => el.remove());
-        const container = document.getElementById('review-schema-container') || (() => {
-            const div = document.createElement('div');
-            div.id = 'review-schema-container';
-            div.style.display = 'none';
-            document.body.appendChild(div);
-            return div;
-        })();
+        let container = document.getElementById('review-schema-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'review-schema-container';
+            container.style.display = 'none';
+            document.body.appendChild(container);
+        }
         container.innerHTML = '';
         reviews.forEach(r => {
             const s = {

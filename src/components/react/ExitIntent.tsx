@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CloseIcon } from './Icons';
 
 export default function ExitIntent() {
   const [show, setShow] = useState(false);

@@ -115,8 +115,8 @@ const relatedSections = [
     ]}
   />
 
-  <main class="container mx-auto px-4 pb-12">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+  <main class="container mx-auto px-4 pb-28 lg:pb-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
       <!-- Article Column -->
       <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-a:text-violet-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-900 prose-table:border prose-table:border-slate-200 prose-th:bg-slate-50 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-slate-200 prose-img:rounded-xl prose-img:shadow-lg">
         <slot>
@@ -143,31 +143,38 @@ const relatedSections = [
           <h2>Insurance Coverage</h2>
           <p>{fdaApproved ? 'Most major insurance carriers cover TMS for this condition, including Medicare, BCBS, Aetna, Cigna, and UnitedHealthcare. Prior authorization is typically required.' : 'Insurance coverage for off-label TMS varies by carrier. Many clinics will help you navigate the authorization process.'}</p>
 
-          <div class="not-prose mt-12 p-8 bg-violet-900 rounded-2xl text-white text-center">
-            <h3 class="text-2xl font-semibold mb-4">Ready to find a clinic?</h3>
-            <p class="text-violet-200 mb-8">Browse verified TMS providers with real reviews and insurance info.</p>
-            <a href="/us/" class="inline-block bg-white text-violet-900 font-semibold py-3 px-8 rounded-xl hover:bg-violet-50 transition-colors">Find a Clinic Near You</a>
+          <div class="not-prose mt-12 p-6 sm:p-8 bg-violet-900 rounded-2xl text-white text-center">
+            <h3 class="text-xl sm:text-2xl font-semibold mb-3">Ready to find a clinic?</h3>
+            <p class="text-violet-200 mb-6 sm:mb-8 text-sm sm:text-base">Browse verified TMS providers with real reviews and insurance info.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a href="/us/" class="w-full sm:w-auto inline-block bg-white text-violet-900 font-semibold py-3 px-6 rounded-xl hover:bg-violet-50 transition-colors text-sm sm:text-base">Find a Clinic Near You</a>
+              <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto inline-block bg-violet-700 text-white font-semibold py-3 px-6 rounded-xl hover:bg-violet-600 transition-colors text-sm sm:text-base">Take the Quiz</a>
+            </div>
           </div>
         </slot>
       </article>
 
       <!-- Sidebar -->
-      <aside class="lg:col-span-4 space-y-6">
-        <!-- Reviewer Box -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
-          <div class="flex items-center gap-4">
-            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" width="48" height="48" loading="lazy" />
-            <div>
-              <div class="font-semibold text-slate-900">{reviewerName}</div>
-              <div class="text-xs text-slate-500">{reviewerTitle}</div>
-            </div>
+      <aside class="lg:col-span-4 space-y-4 lg:space-y-6">
+        <!-- Prominent CTA Box (sticky on desktop) -->
+        <div class="bg-gradient-to-br from-violet-600 to-indigo-700 p-5 rounded-2xl text-white sticky top-20 z-10 shadow-xl shadow-violet-600/20">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+            <span class="text-[10px] font-semibold text-violet-200 uppercase tracking-wider">Free Eligibility Check</span>
           </div>
-          <p class="text-xs text-slate-500 mt-3 leading-relaxed">{reviewerBio}</p>
+          <h4 class="font-bold text-lg leading-snug mb-1.5">Is TMS right for you?</h4>
+          <p class="text-sm text-violet-200 mb-4 leading-relaxed">2-min quiz checks symptoms & insurance to match you with providers.</p>
+          <a href="/quiz/am-i-a-candidate/" class="block text-center bg-white text-violet-700 font-bold text-sm py-3 px-5 rounded-xl hover:bg-violet-50 transition-colors shadow-lg mb-2">
+            Take the Free Quiz
+          </a>
+          <a href="/us/" class="flex items-center justify-center gap-1.5 text-xs text-violet-200 hover:text-white transition-colors py-1">
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Find a clinic near you
+          </a>
         </div>
 
         <!-- Key Facts -->
-        <div class="bg-violet-50 p-6 rounded-2xl border border-violet-100">
+        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
           <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Quick Facts</h4>
           <dl class="space-y-3 text-sm">
             <div class="flex justify-between">
@@ -191,52 +198,68 @@ const relatedSections = [
             {brainArea && (
               <div class="flex justify-between">
                 <dt class="text-slate-600">Target Area</dt>
-                <dd class="font-semibold text-slate-900">{brainArea}</dd>
+                <dd class="font-semibold text-slate-900 truncate ml-2" title={brainArea}>{brainArea}</dd>
               </div>
             )}
           </dl>
         </div>
 
         <!-- Related Treatments -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-100">
-          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Related Treatments</h4>
-          <ul class="space-y-3 text-sm">
+        <div class="bg-white p-5 rounded-2xl border border-slate-100">
+          <h4 class="font-semibold text-slate-900 mb-3 uppercase text-xs tracking-wider">Related Treatments</h4>
+          <ul class="space-y-2 text-sm">
             {[
               { href: '/treatments/depression/', label: 'TMS for Depression' },
               { href: '/treatments/anxiety/', label: 'TMS for Anxiety' },
               { href: '/treatments/ocd/', label: 'TMS for OCD' },
               { href: '/treatments/ptsd/', label: 'TMS for PTSD' },
-              { href: '/treatments/smoking-cessation/', label: 'Smoking Cessation' },
             ].filter(l => !l.href.includes(slug)).slice(0, 4).map(link => (
               <li>
-                <a href={link.href} class="text-slate-600 hover:text-violet-600 transition-colors">{link.label}</a>
+                <a href={link.href} class="flex items-center gap-1.5 text-slate-600 hover:text-violet-600 transition-colors">
+                  <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  {link.label}
+                </a>
               </li>
             ))}
           </ul>
         </div>
 
         <!-- Insurance Links -->
-        <div class="bg-amber-50 p-6 rounded-2xl border border-amber-100">
+        <div class="bg-amber-50 p-5 rounded-2xl border border-amber-100">
           <h4 class="font-semibold text-slate-900 mb-3 text-sm">Insurance Coverage</h4>
           <ul class="space-y-2 text-sm">
             <li><a href="/insurance/medicare/" class="text-slate-600 hover:text-amber-700 transition-colors">Medicare Coverage</a></li>
             <li><a href="/insurance/bluecross-blueshield/" class="text-slate-600 hover:text-amber-700 transition-colors">BlueCross BlueShield</a></li>
-            <li><a href="/insurance/aetna/" class="text-slate-600 hover:text-amber-700 transition-colors">Aetna Coverage</a></li>
-            <li><a href="/tms-cost-guide/" class="text-slate-600 hover:text-amber-700 transition-colors">Full Cost Guide</a></li>
+            <li><a href="/tms-cost-guide/" class="text-slate-600 hover:text-amber-700 transition-colors">TMS Cost Guide</a></li>
           </ul>
         </div>
 
-        <!-- CTA -->
-        <div class="bg-gradient-to-br from-violet-600 to-violet-800 p-6 rounded-2xl text-white">
-          <h4 class="font-semibold mb-2 text-sm">Not sure where to start?</h4>
-          <p class="text-sm text-violet-200 mb-4">Take a 2-minute quiz to see if TMS might be right for you.</p>
-          <a href="/quiz/am-i-a-candidate/" class="inline-block text-sm font-semibold bg-white text-violet-700 px-4 py-2 rounded-lg hover:bg-violet-50 transition-colors">
-            Take the Quiz
-          </a>
+        <!-- Reviewer Box -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+          <h4 class="font-semibold text-slate-900 mb-3 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
+          <div class="flex items-center gap-3">
+            <img src={reviewerImage} alt={reviewerName} class="w-10 h-10 rounded-full object-cover border-2 border-violet-100 shrink-0" width="40" height="40" loading="lazy" />
+            <div>
+              <div class="font-semibold text-slate-900 text-sm">{reviewerName}</div>
+              <div class="text-xs text-slate-500">{reviewerTitle}</div>
+            </div>
+          </div>
         </div>
       </aside>
     </div>
   </main>
+
+  <!-- Sticky Mobile CTA Bar -->
+  <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+    <div class="flex items-center gap-2 px-3 py-3">
+      <a href="/quiz/am-i-a-candidate/" class="flex-1 text-center bg-violet-600 text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-violet-500 transition-colors shadow-md">
+        Take the Quiz
+      </a>
+      <a href="/us/" class="flex-1 text-center bg-slate-900 text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-slate-800 transition-colors shadow-md">
+        Find a Clinic
+      </a>
+    </div>
+  </div>
 
   <ContentFAQ faqs={displayFaqs} />
   <SectionLinks sections={relatedSections} />

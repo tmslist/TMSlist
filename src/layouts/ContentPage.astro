@@ -110,6 +110,59 @@ const sectionLinks: Record<string, { heading: string; links: { title: string; hr
             { title: 'Find a Clinic', href: '/us/' },
         ]},
     ],
+demographic: [
+        { heading: 'Patient Groups', links: [
+            { title: 'TMS for Seniors', href: '/demographic/seniors-tms/' },
+            { title: 'TMS for Veterans', href: '/demographic/veterans-tms/' },
+            { title: 'TMS for Teens', href: '/demographic/teens-adolescents/' },
+            { title: 'All Patient Groups', href: '/demographic/' },
+        ]},
+        { heading: 'Treatments', links: [
+            { title: 'TMS for Depression', href: '/treatments/depression/' },
+            { title: 'TMS for Anxiety', href: '/treatments/anxiety/' },
+            { title: 'All Treatments', href: '/treatments/' },
+        ]},
+        { heading: 'Getting Started', links: [
+            { title: 'Am I a Candidate?', href: '/quiz/am-i-a-candidate/' },
+            { title: 'Find a Clinic', href: '/us/' },
+            { title: 'Insurance Coverage', href: '/insurance/medicare/' },
+        ]},
+    ],
+    technology: [
+        { heading: 'Devices', links: [
+            { title: 'NeuroStar', href: '/technology/neurostar/' },
+            { title: 'MagVenture', href: '/technology/magventure/' },
+            { title: 'Deep TMS (BrainsWay)', href: '/technology/brainsway-deep-tms/' },
+            { title: 'All Devices', href: '/technology/' },
+        ]},
+        { heading: 'Treatments', links: [
+            { title: 'TMS for Depression', href: '/treatments/depression/' },
+            { title: 'TMS for OCD', href: '/treatments/ocd/' },
+            { title: 'All Treatments', href: '/treatments/' },
+        ]},
+        { heading: 'Getting Started', links: [
+            { title: 'Am I a Candidate?', href: '/quiz/am-i-a-candidate/' },
+            { title: 'Find a Clinic', href: '/us/' },
+        ]},
+    ],
+    "best-tms-clinics": [
+        { heading: 'City Rankings', links: [
+            { title: 'New York', href: '/best-tms-clinics/by-city/new-york/' },
+            { title: 'Los Angeles', href: '/best-tms-clinics/by-city/los-angeles/' },
+            { title: 'Chicago', href: '/best-tms-clinics/by-city/chicago/' },
+            { title: 'All Cities', href: '/best-tms-clinics/' },
+        ]},
+        { heading: 'Resources', links: [
+            { title: 'TMS Cost Guide', href: '/tms-cost-guide/' },
+            { title: 'Insurance Coverage', href: '/insurance/' },
+            { title: 'Am I a Candidate?', href: '/quiz/am-i-a-candidate/' },
+        ]},
+        { heading: 'Find Care', links: [
+            { title: 'Browse All Clinics', href: '/us/' },
+            { title: 'Compare Clinics', href: '/compare-clinics/' },
+            { title: 'Patient Stories', href: '/stories/' },
+        ]},
+    ],
 };
 const relatedSections = sectionLinks[pathSegment] || [
     { heading: 'Popular Topics', links: [
@@ -209,6 +262,7 @@ const relatedSections = sectionLinks[pathSegment] || [
                     <a href="/quiz/am-i-a-candidate/" class="inline-block text-sm font-semibold bg-white text-violet-700 px-4 py-2 rounded-lg hover:bg-violet-50 transition-colors">
                         Take the Quiz
                     </a>
+                    <p class="text-xs text-violet-300 mt-3">Or <a href="/resources/buyers-guide/" class="underline hover:text-white">download the free Buyer's Guide</a></p>
                 </div>
             </aside>
         </div>

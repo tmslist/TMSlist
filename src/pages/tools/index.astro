@@ -4,9 +4,20 @@ import CostCalculator from '../../components/react/CostCalculator';
 import ProtocolExplorer from '../../components/react/ProtocolExplorer';
 import SideEffectsTracker from '../../components/react/SideEffectsTracker';
 import DeviceComparison from '../../components/react/DeviceComparison';
+import TreatmentResponseTracker from '../../components/react/tools/TreatmentResponseTracker';
+import PulseCounterSimulator from '../../components/react/tools/PulseCounterSimulator';
+import SideEffectsLogger from '../../components/react/tools/SideEffectsLogger';
+import SessionReadinessChecklist from '../../components/react/tools/SessionReadinessChecklist';
+import MotorThresholdDoseCalculator from '../../components/react/tools/MotorThresholdDoseCalculator';
+import ContraindicationChecker from '../../components/react/tools/ContraindicationChecker';
+import WhatIfSimulator from '../../components/react/tools/WhatIfSimulator';
+import AdverseEventTracker from '../../components/react/tools/AdverseEventTracker';
+import InsurancePayerReference from '../../components/react/tools/InsurancePayerReference';
+import MTFindingLab from '../../components/react/tools/MTFindingLab';
+import TMSECTComparator from '../../components/react/tools/TMSECTComparator';
 
-const title = "TMS Tools Hub | Cost Calculator, Protocol Explorer & Side Effects Tracker";
-const description = "Free TMS therapy tools — estimate your treatment cost, explore protocols, track side effects, and compare devices. Built for patients and providers.";
+const title = "TMS Tools Hub | Cost Calculator, Protocol Explorer & All Clinical Tools";
+const description = "Free TMS therapy tools — estimate cost, explore protocols, track side effects, motor threshold calculator, what-if simulator, and insurance reference.";
 
 const tools = [
   {
@@ -19,44 +30,168 @@ const tools = [
     border: 'border-violet-100',
     badge: 'Most Popular',
     badgeColor: '#4f46e5',
+    category: 'patient',
   },
   {
     slug: 'protocol-explorer',
     title: 'Protocol Explorer',
-    description: 'Compare TMS treatment protocols — standard rTMS, theta burst, deep TMS, and accelerated schedules. Side-by-side parameters.',
+    description: 'Compare TMS treatment protocols — standard rTMS, theta burst, deep TMS, and accelerated schedules.',
     icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
     color: '#059669',
     bg: 'bg-emerald-50',
     border: 'border-emerald-100',
     badge: 'Clinical',
     badgeColor: '#059669',
+    category: 'provider',
   },
   {
     slug: 'side-effects-tracker',
     title: 'Side Effects Tracker',
-    description: 'Track common TMS side effects session by session — headache, scalp discomfort, facial twitching, fatigue. Print-friendly for your provider.',
+    description: 'Track common TMS side effects session by session — headache, scalp discomfort, facial twitching, fatigue.',
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
     color: '#dc2626',
     bg: 'bg-red-50',
     border: 'border-red-100',
     badge: 'Free',
     badgeColor: '#dc2626',
+    category: 'patient',
   },
   {
     slug: 'device-comparison',
     title: 'Device Comparison',
-    description: 'Compare FDA-cleared TMS devices — NeuroStar, BrainsWay, MagVenture, and more. Parameters, indications, pricing, and coverage.',
+    description: 'Compare FDA-cleared TMS devices — NeuroStar, BrainsWay, MagVenture, and more.',
     icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
     color: '#0891b2',
     bg: 'bg-cyan-50',
     border: 'border-cyan-100',
     badge: null,
     badgeColor: null,
+    category: 'patient',
+  },
+  {
+    slug: 'treatment-response',
+    title: 'Response Tracker',
+    description: 'Log PHQ-9, HAM-D, and GAD-7 scores week-by-week and compare against clinical benchmarks.',
+    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+    color: '#7c3aed',
+    bg: 'bg-violet-50',
+    border: 'border-violet-100',
+    badge: 'New',
+    badgeColor: '#7c3aed',
+    category: 'patient',
+  },
+  {
+    slug: 'pulse-counter',
+    title: 'Pulse Counter Simulator',
+    description: 'Watch iTBS vs rTMS vs Deep TMS deliver pulses in real time. See how session duration changes.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    color: '#06b6d4',
+    bg: 'bg-cyan-50',
+    border: 'border-cyan-100',
+    badge: 'New',
+    badgeColor: '#06b6d4',
+    category: 'patient',
+  },
+  {
+    slug: 'readiness-checklist',
+    title: 'Session Readiness Checklist',
+    description: 'Pre-session checklist for patients — sleep, caffeine, medications, hydration, and mental readiness.',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
+    color: '#f59e0b',
+    bg: 'bg-amber-50',
+    border: 'border-amber-100',
+    badge: null,
+    badgeColor: null,
+    category: 'patient',
+  },
+  {
+    slug: 'motor-threshold-calculator',
+    title: 'Motor Threshold Calculator',
+    description: 'Input motor threshold and coil type to get recommended intensity, pulse count, and session time.',
+    icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+    color: '#0ea5e9',
+    bg: 'bg-sky-50',
+    border: 'border-sky-100',
+    badge: 'Provider',
+    badgeColor: '#0ea5e9',
+    category: 'provider',
+  },
+  {
+    slug: 'contraindication-checker',
+    title: 'Contraindication Checker',
+    description: 'Step-by-step safety checklist — metal implants, medications, seizure history, and protocol recommendations.',
+    icon: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z',
+    color: '#ef4444',
+    bg: 'bg-red-50',
+    border: 'border-red-100',
+    badge: 'Safety',
+    badgeColor: '#ef4444',
+    category: 'provider',
+  },
+  {
+    slug: 'what-if-simulator',
+    title: 'What-If Simulator',
+    description: 'Adjust frequency, intensity, pulses, and sessions to see how each parameter changes expected outcomes.',
+    icon: 'M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+    color: '#a855f7',
+    bg: 'bg-fuchsia-50',
+    border: 'border-fuchsia-100',
+    badge: 'New',
+    badgeColor: '#a855f7',
+    category: 'both',
+  },
+  {
+    slug: 'adverse-event-tracker',
+    title: 'Adverse Event Tracker',
+    description: 'Log and track adverse events during TMS — seizure, syncope, device issues. FDA reporting prompts.',
+    icon: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z',
+    color: '#dc2626',
+    bg: 'bg-rose-50',
+    border: 'border-rose-100',
+    badge: 'Provider',
+    badgeColor: '#dc2626',
+    category: 'provider',
+  },
+  {
+    slug: 'insurance-reference',
+    title: 'Insurance & Payer Reference',
+    description: 'CPT codes, payer coverage criteria for Aetna, UHC, BCBS, Medicare, and prior auth templates.',
+    icon: 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z',
+    color: '#059669',
+    bg: 'bg-emerald-50',
+    border: 'border-emerald-100',
+    badge: 'Provider',
+    badgeColor: '#059669',
+    category: 'provider',
+  },
+  {
+    slug: 'mt-finding-lab',
+    title: 'Motor Threshold Finding Lab',
+    description: 'Interactive simulator teaching how clinicians find motor threshold — coil positioning, EMG waveform, and RMT determination.',
+    icon: 'M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18',
+    color: '#6366f1',
+    bg: 'bg-indigo-50',
+    border: 'border-indigo-100',
+    badge: 'New',
+    badgeColor: '#6366f1',
+    category: 'provider',
+  },
+  {
+    slug: 'tms-vs-ect',
+    title: 'TMS vs ECT vs Medication',
+    description: 'Compare efficacy, speed, side effects, cost, and cognitive impact of TMS vs ECT vs antidepressants — with decision framework.',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+    color: '#f59e0b',
+    bg: 'bg-amber-50',
+    border: 'border-amber-100',
+    badge: 'New',
+    badgeColor: '#f59e0b',
+    category: 'patient',
   },
 ];
 
 const stats = [
-  { value: '5', label: 'Interactive Tools', color: 'text-violet-600' },
+  { value: '14', label: 'Interactive Tools', color: 'text-violet-600' },
   { value: '50+', label: 'Protocols Covered', color: 'text-emerald-600' },
   { value: '100%', label: 'Free to Use', color: 'text-cyan-600' },
   { value: '0', label: 'Account Required', color: 'text-amber-600' },
@@ -166,26 +301,88 @@ const schema = JSON.stringify({
           <p class="text-slate-500">Jump straight into any tool without leaving this page.</p>
         </div>
 
-        <!-- Tab Interface for Embedded Tools -->
-        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-          <div class="flex border-b border-slate-100 overflow-x-auto">
-            <button onclick="switchTab('cost')" id="tab-cost" class="tab-btn px-6 py-4 text-sm font-semibold text-violet-600 border-b-2 border-violet-600 whitespace-nowrap">Cost Calculator</button>
-            <button onclick="switchTab('protocol')" id="tab-protocol" class="tab-btn px-6 py-4 text-sm font-semibold text-slate-500 hover:text-slate-700 whitespace-nowrap border-b-2 border-transparent">Protocol Explorer</button>
-            <button onclick="switchTab('sideeffects')" id="tab-sideeffects" class="tab-btn px-6 py-4 text-sm font-semibold text-slate-500 hover:text-slate-700 whitespace-nowrap border-b-2 border-transparent">Side Effects</button>
-            <button onclick="switchTab('device')" id="tab-device" class="tab-btn px-6 py-4 text-sm font-semibold text-slate-500 hover:text-slate-700 whitespace-nowrap border-b-2 border-transparent">Device Compare</button>
+        <!-- Category filter -->
+        <div class="flex items-center gap-2 mb-6 justify-center">
+          <button onclick="switchCategory('patient')" id="cat-patient" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-violet-600 text-white">Patient Tools</button>
+          <button onclick="switchCategory('provider')" id="cat-provider" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-500 hover:bg-slate-200">Provider Tools</button>
+        </div>
+
+        <!-- Patient Tools -->
+        <div id="tools-patient" class="tools-category">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+            {[
+              { id: 'cost', label: 'Cost Calculator', comp: 'CostCalculator' },
+              { id: 'pulse', label: 'Pulse Counter', comp: 'PulseCounterSimulator' },
+              { id: 'response', label: 'Response Tracker', comp: 'TreatmentResponseTracker' },
+              { id: 'sideeffects2', label: 'Side Effects Logger', comp: 'SideEffectsLogger' },
+              { id: 'checklist', label: 'Readiness Checklist', comp: 'SessionReadinessChecklist' },
+              { id: 'whatif', label: 'What-If Simulator', comp: 'WhatIfSimulator' },
+              { id: 'tmsvsect', label: 'TMS vs ECT', comp: 'TMSECTComparator' },
+            ].map(item => (
+              <button onclick={`switchTab('${item.id}')`} id={`ttab-${item.id}`} class={`ttab-btn px-4 py-3 rounded-xl text-sm font-semibold transition-all ${item.id === 'cost' ? 'bg-violet-600 text-white' : 'bg-white text-slate-500 hover:bg-slate-100 border border-slate-100'}`}>
+                {item.label}
+              </button>
+            ))}
           </div>
-          <div class="p-6 lg:p-8">
-            <div id="panel-cost" class="tab-panel">
+          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 lg:p-8">
+            <div id="tpanel-cost" class="tab-panel">
               <CostCalculator client:load />
             </div>
-            <div id="panel-protocol" class="tab-panel hidden">
+            <div id="tpanel-pulse" class="tab-panel hidden">
+              <PulseCounterSimulator client:load />
+            </div>
+            <div id="tpanel-response" class="tab-panel hidden">
+              <TreatmentResponseTracker client:load />
+            </div>
+            <div id="tpanel-sideeffects2" class="tab-panel hidden">
+              <SideEffectsLogger client:load />
+            </div>
+            <div id="tpanel-checklist" class="tab-panel hidden">
+              <SessionReadinessChecklist client:load />
+            </div>
+            <div id="tpanel-whatif" class="tab-panel hidden">
+              <WhatIfSimulator client:load />
+            </div>
+            <div id="tpanel-tmsvsect" class="tab-panel hidden">
+              <TMSECTComparator client:load />
+            </div>
+          </div>
+        </div>
+
+        <!-- Provider Tools -->
+        <div id="tools-provider" class="tools-category hidden">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+            {[
+              { id: 'protocol', label: 'Protocol Explorer', comp: 'ProtocolExplorer' },
+              { id: 'calculator', label: 'MT Dose Calculator', comp: 'MotorThresholdDoseCalculator' },
+              { id: 'ci', label: 'Contraindication Checker', comp: 'ContraindicationChecker' },
+              { id: 'adv', label: 'Adverse Event Tracker', comp: 'AdverseEventTracker' },
+              { id: 'insurance', label: 'Insurance Reference', comp: 'InsurancePayerReference' },
+              { id: 'mtlab', label: 'MT Finding Lab', comp: 'MTFindingLab' },
+            ].map(item => (
+              <button onclick={`switchTab('${item.id}')`} id={`ptab-${item.id}`} class={`ptab-btn px-4 py-3 rounded-xl text-sm font-semibold transition-all ${item.id === 'protocol' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-500 hover:bg-slate-100 border border-slate-100'}`}>
+                {item.label}
+              </button>
+            ))}
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 lg:p-8">
+            <div id="ppanel-protocol" class="tab-panel">
               <ProtocolExplorer client:load />
             </div>
-            <div id="panel-sideeffects" class="tab-panel hidden">
-              <SideEffectsTracker client:load />
+            <div id="ppanel-calculator" class="tab-panel hidden">
+              <MotorThresholdDoseCalculator client:load />
             </div>
-            <div id="panel-device" class="tab-panel hidden">
-              <DeviceComparison client:load />
+            <div id="ppanel-ci" class="tab-panel hidden">
+              <ContraindicationChecker client:load />
+            </div>
+            <div id="ppanel-adv" class="tab-panel hidden">
+              <AdverseEventTracker client:load />
+            </div>
+            <div id="ppanel-insurance" class="tab-panel hidden">
+              <InsurancePayerReference client:load />
+            </div>
+            <div id="ppanel-mtlab" class="tab-panel hidden">
+              <MTFindingLab client:load />
             </div>
           </div>
         </div>
@@ -207,20 +404,54 @@ const schema = JSON.stringify({
 </Layout>
 
 <script>
+  // Unified tab switcher for both patient and provider tool panels
   function switchTab(tab: string) {
-    const panels = document.querySelectorAll('.tab-panel');
-    const buttons = document.querySelectorAll('.tab-btn');
-    panels.forEach(p => p.classList.add('hidden'));
-    buttons.forEach(b => {
-      b.classList.remove('text-violet-600', 'border-violet-600');
-      b.classList.add('text-slate-500', 'border-transparent');
+    // Hide all panels
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+    // Reset all tab buttons
+    document.querySelectorAll('.ttab-btn').forEach(b => {
+      b.classList.remove('bg-violet-600', 'text-white');
+      b.classList.add('bg-white', 'text-slate-500', 'border', 'border-slate-100');
     });
-    const target = document.getElementById(`panel-${tab}`);
-    const btn = document.getElementById(`tab-${tab}`);
-    if (target) target.classList.remove('hidden');
-    if (btn) {
-      btn.classList.remove('text-slate-500', 'border-transparent');
-      btn.classList.add('text-violet-600', 'border-violet-600');
+    document.querySelectorAll('.ptab-btn').forEach(b => {
+      b.classList.remove('bg-emerald-600', 'text-white');
+      b.classList.add('bg-white', 'text-slate-500', 'border', 'border-slate-100');
+    });
+    // Show target panel
+    const panels = [
+      `tpanel-${tab}`, `ppanel-${tab}`,
+    ];
+    panels.forEach(id => {
+      const p = document.getElementById(id);
+      if (p) p.classList.remove('hidden');
+    });
+    // Activate target button(s)
+    const tBtn = document.getElementById(`ttab-${tab}`);
+    if (tBtn) {
+      tBtn.classList.remove('bg-white', 'text-slate-500', 'border', 'border-slate-100');
+      tBtn.classList.add('bg-violet-600', 'text-white');
     }
+    const pBtn = document.getElementById(`ptab-${tab}`);
+    if (pBtn) {
+      pBtn.classList.remove('bg-white', 'text-slate-500', 'border', 'border-slate-100');
+      pBtn.classList.add('bg-emerald-600', 'text-white');
+    }
+  }
+
+  function switchCategory(cat: string) {
+    document.querySelectorAll('.tools-category').forEach(c => c.classList.add('hidden'));
+    document.querySelectorAll('.cat-btn').forEach(b => {
+      b.classList.remove('bg-violet-600', 'bg-emerald-600', 'text-white');
+      b.classList.add('bg-slate-100', 'text-slate-500');
+    });
+    const target = document.getElementById(`tools-${cat}`);
+    if (target) target.classList.remove('hidden');
+    const btn = document.getElementById(`cat-${cat}`);
+    if (btn) {
+      btn.classList.remove('bg-slate-100', 'text-slate-500');
+      btn.classList.add(cat === 'patient' ? 'bg-violet-600' : 'bg-emerald-600', 'text-white');
+    }
+    // Switch to first tab in category
+    switchTab(cat === 'patient' ? 'cost' : 'protocol');
   }
 </script>

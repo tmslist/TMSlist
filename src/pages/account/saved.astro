@@ -89,7 +89,7 @@ const pageTitle = "My Saved Clinics | TMS List";
             </button>
           </div>
           <div class="flex items-center gap-3 mb-3 text-sm">
-            <span class="text-amber-500 font-semibold">${rating} ★</span>
+            <span class="text-amber-500 font-semibold">$<svg class="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
             ${c.verified ? '<span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-100">Verified</span>' : ''}
           </div>
           <a href="/clinic/${c.slug}/" class="inline-block text-sm font-semibold text-blue-600 hover:text-blue-700">View Profile →</a>

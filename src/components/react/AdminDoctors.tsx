@@ -415,14 +415,89 @@ export default function AdminDoctors() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-          <input
-            type="url"
-            value={data.imageUrl || ''}
-            onChange={(e) => setData({ imageUrl: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
-            placeholder="https://..."
-          />
+          <label className="block text-sm font-medium text-gray-700 mb-1">Profile Photo</label>
+
+          {/* Preview */}
+          {data.imageUrl && (
+            <div className="mb-3 relative inline-block">
+              <img
+                src={data.imageUrl}
+                alt="Doctor preview"
+                className="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              />
+              <button
+                type="button"
+                onClick={() => setData({ imageUrl: '' })}
+                className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center hover:bg-red-600"
+                title="Remove image"
+              >
+                ×
+              </button>
+            </div>
+          )}
+
+          {/* Upload button */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <label className="inline-flex items-center gap-2 px-4 py-2 bg-violet-50 border border-violet-200 text-violet-700 text-sm font-medium rounded-lg cursor-pointer hover:bg-violet-100 transition-colors">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Upload Photo
+              <input
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                className="hidden"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  if (file.size > 2 * 1024 * 1024) {
+                    alert('File too large. Maximum size is 2 MB.');
+                    return;
+                  }
+                  // Show local preview immediately
+                  const reader = new FileReader();
+                  reader.onload = (ev) => {
+                    setData({ imageUrl: ev.target?.result as string });
+                  };
+                  reader.readAsDataURL(file);
+                  // Upload to Cloudinary
+                  const formData = new FormData();
+                  formData.append('file', file);
+                  formData.append('slug', data.name?.toLowerCase().replace(/\s+/g, '-') || 'doctor');
+                  try {
+                    const res = await fetch('/api/admin/upload-doctor-image', {
+                      method: 'POST',
+                      body: formData,
+                    });
+                    const json = await res.json();
+                    if (res.ok && json.url) {
+                      setData({ imageUrl: json.url });
+                    } else {
+                      alert('Upload failed: ' + (json.error || 'Unknown error'));
+                    }
+                  } catch {
+                    alert('Upload failed. You can still use a URL below.');
+                  }
+                  // Reset file input
+                  e.target.value = '';
+                }}
+              />
+            </label>
+            <span className="text-xs text-gray-400">JPG, PNG, WebP — max 2 MB</span>
+          </div>
+
+          {/* URL fallback */}
+          <div className="mt-2 flex items-center gap-2">
+            <span className="text-xs text-gray-400 whitespace-nowrap">or paste URL:</span>
+            <input
+              type="url"
+              value={data.imageUrl || ''}
+              onChange={(e) => setData({ imageUrl: e.target.value })}
+              className="flex-1 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              placeholder="https://..."
+            />
+          </div>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>

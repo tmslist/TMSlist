@@ -1,25 +1,19 @@
 import { v2 as cloudinary } from 'cloudinary';
 
-const CLOUD_NAME = import.meta.env.CLOUDINARY_CLOUD_NAME || process.env.CLOUDINARY_CLOUD_NAME;
-const API_KEY = import.meta.env.CLOUDINARY_API_KEY || process.env.CLOUDINARY_API_KEY;
-const API_SECRET = import.meta.env.CLOUDINARY_API_SECRET || process.env.CLOUDINARY_API_SECRET;
+const CLOUD_URL = import.meta.env.CLOUDINARY_URL || process.env.CLOUDINARY_URL;
 
 let configured = false;
 
 function ensureConfig() {
-  if (configured || !CLOUD_NAME) return !!CLOUD_NAME;
-  cloudinary.config({
-    cloud_name: CLOUD_NAME,
-    api_key: API_KEY,
-    api_secret: API_SECRET,
-    secure: true,
-  });
+  if (configured) return true;
+  if (!CLOUD_URL) return false;
+  cloudinary.config({ url: CLOUD_URL, secure: true });
   configured = true;
   return true;
 }
 
 export function isCloudinaryConfigured(): boolean {
-  return !!CLOUD_NAME;
+  return !!CLOUD_URL;
 }
 
 /**

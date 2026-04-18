@@ -44,8 +44,8 @@
             var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
             // UK
             if (tz.startsWith('Europe/London') || tz.startsWith('Europe/Belfast')) return 'GB';
-            // Canada
-            if (/^America\/(Toronto|Vancouver|Montreal|Edmonton|Winnipeg|Halifax|St_Johns|Regina|Ottawa|Calgary)/.test(tz)) return 'CA';
+            // Canada — all valid Canadian IANA timezones (province/territory-level)
+            if (tz.startsWith('America/Vancouver') || tz.startsWith('America/Dawson') || tz.startsWith('America/Dawson_Creek') || tz.startsWith('America/Fort_Nelson') || tz.startsWith('America/Edmonton') || tz.startsWith('America/Calgary') || tz.startsWith('America/Regina') || tz.startsWith('America/Swift_Current') || tz.startsWith('America/Winnipeg') || tz.startsWith('America/Toronto') || tz.startsWith('America/Montreal') || tz.startsWith('America/Iqaluit') || tz.startsWith('America/Rankin_Inlet') || tz.startsWith('America/Resolute') || tz.startsWith('America/Pangnirtung') || tz.startsWith('America/Nipigon') || tz.startsWith('America/Thunder_Bay') || tz.startsWith('America/Halifax') || tz.startsWith('America/Glace_Bay') || tz.startsWith('America/Goose_Bay') || tz.startsWith('America/Moncton') || tz.startsWith('America/St_Johns') || tz.startsWith('America/Yellowknife') || tz.startsWith('America/Whitehorse') || tz.startsWith('America/Inuvik') || tz.startsWith('America/Creston')) return 'CA';
             // Australia
             if (tz.startsWith('Australia/')) return 'AU';
             // Germany
@@ -101,6 +101,66 @@
         }
     }
 
+    // Toggle content sections based on detected country
+    function switchContentCountry() {
+        var country = detected;
+
+        // 1. Toggle featured clinics by country
+        document.querySelectorAll('[data-clinic-country]').forEach(function(el) {
+            if (el.getAttribute('data-clinic-country') === country) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        });
+
+        // 2. Toggle specialist grids by country
+        document.querySelectorAll('.specialist-country-grid').forEach(function(el) {
+            if (el.getAttribute('data-country') === country) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        });
+
+        // 3. Toggle "View All Clinics" links — redirect non-US to their country landing
+        document.querySelectorAll('[data-country-landing]').forEach(function(el) {
+            el.href = COUNTRY_URLS[country] || '/us/';
+        });
+
+        // 4. Toggle quick links sections by country (US = state links, others = region links)
+        document.querySelectorAll('[data-quick-links-country]').forEach(function(el) {
+            if (el.getAttribute('data-quick-links-country') === country) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        });
+
+        // 5. Update search placeholder for non-US
+        if (country !== 'US') {
+            var searchInput = document.getElementById('hero-search-input');
+            if (searchInput) {
+                searchInput.placeholder = 'City, region, or country...';
+            }
+            // Change search form action to country-specific
+            var searchForm = document.getElementById('hero-search-form');
+            if (searchForm) {
+                searchForm.action = COUNTRY_URLS[country] || '/us/';
+            }
+        }
+
+        // 6. Toggle stats sections for non-US (hide "States Covered", show "Regions")
+        if (country !== 'US') {
+            document.querySelectorAll('.stats-states-covered').forEach(function(el) {
+                el.classList.add('hidden');
+            });
+            document.querySelectorAll('.stats-regions-covered').forEach(function(el) {
+                el.classList.remove('hidden');
+            });
+        }
+    }
+
     // Expose globally
     window.TMS_GEO = {
         country: detected,
@@ -111,13 +171,18 @@
         flags: COUNTRY_FLAGS,
         names: COUNTRY_NAMES,
         detect: detectCountry,
-        updateLinks: updateGeoLinks
+        updateLinks: updateGeoLinks,
+        switchContent: switchContentCountry
     };
 
     // Auto-update links when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', updateGeoLinks);
+        document.addEventListener('DOMContentLoaded', function() {
+            updateGeoLinks();
+            switchContentCountry();
+        });
     } else {
         updateGeoLinks();
+        switchContentCountry();
     }
 })();

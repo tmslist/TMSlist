@@ -124,9 +124,8 @@ export async function createSession(
     console.error('[auth] sessions table insert failed:', err);
   }
 
-  const secure = (process.env.NODE_ENV === 'production' || process.env.VERCEL === '1')
-    ? '; Secure'
-    : '';
+  const isProd = process.env.NODE_ENV === 'production';
+  const secure = isProd ? '; Secure' : '';
   const cookie = `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${7 * 24 * 60 * 60}${secure}`;
   return { cookie, sessionId };
 }
@@ -136,9 +135,8 @@ export async function createSession(
  */
 export function createSessionCookie(payload: JWTPayload): string {
   const token = createToken(payload);
-  const secure = (process.env.NODE_ENV === 'production' || process.env.VERCEL === '1')
-    ? '; Secure'
-    : '';
+  const isProd = process.env.NODE_ENV === 'production';
+  const secure = isProd ? '; Secure' : '';
   return `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${7 * 24 * 60 * 60}${secure}`;
 }
 
@@ -226,9 +224,8 @@ export async function createSessionWithExpiry(
     console.error('[auth] sessions table insert failed:', err);
   }
 
-  const secure = (process.env.NODE_ENV === 'production' || process.env.VERCEL === '1')
-    ? '; Secure'
-    : '';
+  const isProd = process.env.NODE_ENV === 'production';
+  const secure = isProd ? '; Secure' : '';
 
   const maxAge = opts?.rememberMe
     ? 30 * 24 * 60 * 60

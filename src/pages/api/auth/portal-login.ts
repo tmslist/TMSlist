@@ -31,7 +31,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Log magic link in dev mode for easy testing without email
     if (import.meta.env.DEV || process.env.NODE_ENV === 'development') {
-      console.log(`\n🔗 [DEV] Magic link for ${email}:\n   ${magicUrl}\n`);
+      console.log(`\n[DEV] Magic link for ${email}:\n   ${magicUrl}\n`);
     }
 
     await sendMagicLinkEmail({

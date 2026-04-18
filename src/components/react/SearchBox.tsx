@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { StarIcon } from './Icons';
 
 interface SearchResult {
   id: string;

@@ -3,13 +3,14 @@ import type { Clinic } from '../types/clinic';
 
 interface Props {
     featuredDoctorsByCountry: Record<string, any[]>;
+    countryCode?: string;
 }
 
-const { featuredDoctorsByCountry } = Astro.props as Props;
+const { featuredDoctorsByCountry, countryCode = 'US' } = Astro.props as Props;
 ---
 
 <!-- MEET SPECIALISTS - New Section -->
-<section class="py-16 bg-white relative overflow-hidden">
+<section class="py-16 bg-white relative overflow-hidden" data-clinic-country={countryCode}>
     <!-- Decoration -->
     <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-50 rounded-bl-full opacity-50 pointer-events-none"></div>
     <div class="absolute bottom-0 left-0 w-40 h-40 bg-purple-50 rounded-tr-full opacity-50 pointer-events-none"></div>
@@ -31,6 +32,7 @@ const { featuredDoctorsByCountry } = Astro.props as Props;
                 </p>
                 <a
                     href="/specialists/"
+                    data-country-landing
                     class="px-6 py-3 bg-white hover:bg-[#7C3AED] text-white rounded-xl font-semibold transition-colors shadow-lg hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] flex items-center gap-2 whitespace-nowrap"
                 >
                     Find a Specialist

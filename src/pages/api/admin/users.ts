@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, desc, sql, and } from 'drizzle-orm';
 import { db } from '../../../db';
 import { users, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole, invalidateAllUserSessions } from '../../../utils/auth';
 import { hashPassword } from '../../../utils/auth';
 
 export const prerender = false;
@@ -35,8 +35,10 @@ export const PATCH: APIRoute = async ({ request }) => {
     if (password && typeof password === 'string' && password.length >= 8) {
       const hash = await hashPassword(password);
       await db.update(users).set({ passwordHash: hash, updatedAt: new Date() }).where(eq(users.id, id));
+      // Invalidate all sessions so old tokens are revoked
+      await invalidateAllUserSessions(id);
       await db.insert(auditLog).values({
-        userId: session?.userId ?? null,
+        userId: session.userId,
         action: 'reset_user_password',
         entityType: 'user',
         entityId: id,
@@ -63,7 +65,7 @@ export const PATCH: APIRoute = async ({ request }) => {
 
     await db.update(users).set(safeUpdates).where(eq(users.id, id));
     await db.insert(auditLog).values({
-      userId: session?.userId ?? null,
+      userId: session.userId,
       action: 'update_user',
       entityType: 'user',
       entityId: id,
@@ -171,7 +173,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     await db.insert(auditLog).values({
-      userId: session?.userId ?? null,
+      userId: session.userId,
       action: 'create_user',
       entityType: 'user',
       entityId: result[0].id,
@@ -223,7 +225,7 @@ export const PUT: APIRoute = async ({ request }) => {
     await db.update(users).set(safeUpdates).where(eq(users.id, id));
 
     await db.insert(auditLog).values({
-      userId: session?.userId ?? null,
+      userId: session.userId,
       action: 'update_user',
       entityType: 'user',
       entityId: id,
@@ -258,10 +260,13 @@ export const DELETE: APIRoute = async ({ request, url }) => {
       return json({ error: 'Cannot delete your own account' }, 403);
     }
 
+    // Invalidate all sessions before deleting so tokens are revoked immediately
+    await invalidateAllUserSessions(id);
+
     await db.delete(users).where(eq(users.id, id));
 
     await db.insert(auditLog).values({
-      userId: session?.userId ?? null,
+      userId: session.userId,
       action: 'delete_user',
       entityType: 'user',
       entityId: id,

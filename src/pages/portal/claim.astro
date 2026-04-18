@@ -3,10 +3,10 @@ export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
 import PortalClaimClinic from "../../components/react/PortalClaimClinic";
 import PortalSidebar from "../../components/react/PortalSidebar";
-import { getSessionFromRequest } from "../../utils/auth";
+import { getSessionFromRequest, hasRole } from "../../utils/auth";
 
 const session = getSessionFromRequest(Astro.request);
-if (!session) {
+if (!session || !hasRole(session, 'admin', 'editor', 'clinic_owner')) {
   return Astro.redirect("/portal/login/");
 }
 ---

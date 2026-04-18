@@ -33,7 +33,17 @@
       banner.style.transform = 'translateY(0)';
     }, 500);
 
+    // Auto-dismiss after 8 seconds
+    var autoDismissTimer = setTimeout(function () {
+      localStorage.setItem('cookie_consent', 'accepted');
+      banner.style.transform = 'translateY(100%)';
+      setTimeout(function () {
+        banner.remove();
+      }, 500);
+    }, 8000);
+
     document.getElementById('cookie-accept-btn').addEventListener('click', function () {
+      clearTimeout(autoDismissTimer);
       localStorage.setItem('cookie_consent', 'accepted');
       banner.style.transform = 'translateY(100%)';
       setTimeout(function () {

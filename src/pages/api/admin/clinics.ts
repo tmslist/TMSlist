@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { eq, desc, ilike, and, or, sql } from 'drizzle-orm';
 import { db } from '../../../db';
-import { clinics, auditLog } from '../../../db/schema';
+import { clinics, doctors, auditLog, users } from '../../../db/schema';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth';
 
 export const prerender = false;
@@ -70,7 +70,52 @@ export const GET: APIRoute = async ({ request, url }) => {
 
     const query = db.select().from(clinics);
     const filtered = conditions.length > 0 ? query.where(and(...conditions)) : query;
-    const data = await filtered.orderBy(desc(clinics.createdAt)).limit(limit).offset(offset);
+    const rows = await filtered.orderBy(desc(clinics.createdAt)).limit(limit).offset(offset);
+
+    // Get doctor counts for all returned clinics in one query
+    const clinicIds = rows.map(r => r.id);
+    const doctorCountsResult = clinicIds.length > 0
+      ? await db
+          .select({ clinicId: doctors.clinicId, count: sql<number>`count(*)` })
+          .from(doctors)
+          .where(sql`${doctors.clinicId} IN (${sql.join(clinicIds.map(id => sql`${id}`), sql`, `)})`)
+          .groupBy(doctors.clinicId)
+      : [];
+    // Get owner user info for all returned clinics in one query
+    const ownerIds = [...new Set(rows.map(r => r.ownerUserId).filter(Boolean))] as string[];
+    const ownerResults = ownerIds.length > 0
+      ? await db.select({ id: users.id, email: users.email, name: users.name, role: users.role })
+          .from(users)
+          .where(sql`${users.id} IN (${sql.join(ownerIds.map(id => sql`${id}`), sql`, `)})`)
+      : [];
+    const ownerMap = new Map(ownerResults.map(o => [o.id, o]));
+    const doctorCountMap = new Map(doctorCountsResult.map(r => [r.clinicId as string, Number(r.count)]));
+
+    // Map DB snake_case fields → camelCase so AdminClinics client receives expected shape
+    const data = rows.map(r => ({
+      id: r.id,
+      slug: r.slug,
+      name: r.name,
+      city: r.city,
+      state: r.state,
+      phone: r.phone ?? null,
+      email: r.email ?? null,
+      website: r.website ?? null,
+      verified: r.verified,
+      isFeatured: r.isFeatured,
+      ratingAvg: r.ratingAvg ?? null,
+      reviewCount: r.reviewCount ?? 0,
+      machines: r.machines ?? [],
+      createdAt: r.createdAt,
+      // Include fields previously stripped
+      description: r.description ?? null,
+      faqs: r.faqs ?? null,
+      doctorCount: doctorCountMap.get(r.id) ?? 0,
+      // Owner info for Login As
+      ownerUserId: r.ownerUserId ?? null,
+      ownerEmail: ownerMap.get(r.ownerUserId)?.email ?? null,
+      ownerName: ownerMap.get(r.ownerUserId)?.name ?? null,
+    }));
 
     const countResult = await db.select({ count: sql<number>`count(*)` }).from(clinics)
       .where(conditions.length > 0 ? and(...conditions) : undefined);

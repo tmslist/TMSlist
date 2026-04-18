@@ -56,7 +56,7 @@ Clinical trials for TMS across various conditions have grown substantially. For 
 | Condition | TMS Evidence | FDA Status |
 |---|---|---|
 | Major Depressive Disorder | Strong — multiple RCTs | ✅ Cleared |
-| OCD | Moderate — pivotal trials | ✅ Cleared (Deep TMS) |
+| OCD | Moderate — pivotal trials | Cleared (Deep TMS) |
 | Migraine | Moderate — RCTs | ✅ Cleared (sTMS) |
 | Anxiety (GAD) | Emerging | Off-label |
 | PTSD | Emerging | Off-label |

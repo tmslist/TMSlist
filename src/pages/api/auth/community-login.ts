@@ -31,7 +31,7 @@ export const POST: APIRoute = async ({ request }) => {
     const magicUrl = `${SITE_URL}/api/auth/community-verify?token=${token}&redirect=${encodeURIComponent(redirectTo)}`;
 
     if (import.meta.env.DEV || process.env.NODE_ENV === 'development') {
-      console.log(`\n🔗 [DEV] Community magic link for ${email}:\n   ${magicUrl}\n`);
+      console.log(`\n[DEV] Community magic link for ${email}:\n   ${magicUrl}\n`);
     }
 
     await sendMagicLinkEmail({ to: email, magicUrl, type: 'community' });

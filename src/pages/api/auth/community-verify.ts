@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { verifyMagicToken, getUserByEmail, createSession, getClientIpFromRequest } from '../../../utils/auth';
+import { verifyMagicToken, getUserByEmail, createSession, getClientIpFromRequest, logLoginActivity } from '../../../utils/auth';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -14,6 +14,9 @@ export const GET: APIRoute = async ({ request }) => {
   if (!token) {
     return new Response(null, { status: 302, headers: { Location: '/community/login?error=missing-token' } });
   }
+
+  const ipAddress = getClientIpFromRequest(request);
+  const userAgent = request.headers.get('user-agent') || '';
 
   try {
     // Enforce community-magic scope — portal tokens won't work here
@@ -43,10 +46,19 @@ export const GET: APIRoute = async ({ request }) => {
     const { cookie } = await createSession(
       { userId: user.id, email: user.email, role: user.role, clinicId: user.clinicId ?? undefined },
       {
-        userAgent: request.headers.get('user-agent') || undefined,
-        ipAddress: getClientIpFromRequest(request),
+        userAgent,
+        ipAddress,
       }
     );
+
+    // Log successful login to history
+    await logLoginActivity({
+      userId: user.id,
+      email: user.email,
+      success: true,
+      ipAddress,
+      userAgent,
+    });
 
     // Sanitize redirect to prevent open redirect
     const safeRedirect = redirectTo.startsWith('/community') ? redirectTo : '/community';

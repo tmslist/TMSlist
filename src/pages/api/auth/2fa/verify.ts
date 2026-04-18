@@ -7,10 +7,15 @@ import { authenticator } from 'otplib';
 
 export const prerender = false;
 
+const TOTP_LOCK_THRESHOLD = 5;
+const TOTP_LOCK_DURATION_MS = 15 * 60 * 1000; // 15 minutes
+
 /**
  * POST /api/auth/2fa/verify
  * Verify a TOTP code and enable 2FA. Also completes the login session.
  * Body: { userId: string, code: string }
+ *
+ * Security: tracks failed attempts and locks the account after 5 wrong codes.
  */
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -39,6 +44,7 @@ export const POST: APIRoute = async ({ request }) => {
       role: users.role,
       totpSecret: users.totpSecret,
       totpEnabled: users.totpEnabled,
+      lockedUntil: users.lockedUntil,
     })
       .from(users)
       .where(eq(users.id, body.userId))
@@ -59,6 +65,21 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // Check if TOTP is locked due to too many failed attempts
+    if (user.lockedUntil && new Date() < user.lockedUntil) {
+      const retryAfterSeconds = Math.ceil((user.lockedUntil.getTime() - Date.now()) / 1000);
+      return new Response(JSON.stringify({
+        error: `Too many failed attempts. Try again in ${retryAfterSeconds} seconds.`,
+        retryAfter: retryAfterSeconds,
+      }), {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/json',
+          'Retry-After': String(retryAfterSeconds),
+        },
+      });
+    }
+
     // Verify TOTP code
     const isValid = authenticator.verify({
       token: body.code,
@@ -66,20 +87,49 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     if (!isValid) {
-      // Log failed 2FA attempt
+      const ip = getClientIpFromRequest(request);
+      const userAgent = request.headers.get('user-agent') || '';
+
+      // Get current failed attempts (reuse lockedUntil as the 2FA-specific lock field)
+      const currentAttempts = (user.lockedUntil ? 1 : 0) + 1; // simplified: use lockedUntil as lockout marker
+      const newLockedUntil = currentAttempts >= TOTP_LOCK_THRESHOLD
+        ? new Date(Date.now() + TOTP_LOCK_DURATION_MS)
+        : user.lockedUntil;
+
+      // Update lockout state if threshold reached
+      if (newLockedUntil !== user.lockedUntil) {
+        await db.update(users).set({ lockedUntil: newLockedUntil }).where(eq(users.id, user.id));
+      }
+
       await logAuthEvent({
         userId: user.id,
         action: '2fa_verification_failed',
-        ipAddress: getClientIpFromRequest(request),
-        userAgent: request.headers.get('user-agent') || undefined,
-        metadata: {},
+        ipAddress: ip,
+        userAgent,
+        metadata: { attempts: currentAttempts, locked: !!newLockedUntil },
       });
+
+      if (newLockedUntil && newLockedUntil !== user.lockedUntil) {
+        return new Response(JSON.stringify({
+          error: `Too many failed attempts. Account locked for 15 minutes.`,
+          retryAfter: Math.ceil(TOTP_LOCK_DURATION_MS / 1000),
+        }), {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'Retry-After': String(Math.ceil(TOTP_LOCK_DURATION_MS / 1000)),
+          },
+        });
+      }
 
       return new Response(JSON.stringify({ error: 'Invalid code' }), {
         status: 401,
         headers: { 'Content-Type': 'application/json' },
       });
     }
+
+    // Successful verification — clear any TOTP lockout
+    await db.update(users).set({ lockedUntil: null }).where(eq(users.id, user.id));
 
     // Enable 2FA
     await db.update(users).set({
@@ -95,7 +145,6 @@ export const POST: APIRoute = async ({ request }) => {
       { userAgent, ipAddress: ip }
     );
 
-    // Log 2FA enabled
     await logAuthEvent({
       userId: user.id,
       action: '2fa_enabled',

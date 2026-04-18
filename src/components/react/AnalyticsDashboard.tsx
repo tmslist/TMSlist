@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { EyeIcon, PhoneIcon, GlobeIcon, BoltIcon, DownloadIcon } from './Icons';
 
 interface Stats {
   [event: string]: {

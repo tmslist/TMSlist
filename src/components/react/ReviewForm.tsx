@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { StarIcon } from './Icons';
 
 interface ReviewFormProps {
   clinicId: string;

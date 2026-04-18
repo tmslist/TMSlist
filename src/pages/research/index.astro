@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import TMSViewer from '../../components/react/TMSViewer';
+import TMSViewerLazy from '../../components/react/TMSViewerLazy';
 import { RESEARCH_SLUGS } from '../../utils/seo_slugs';
 
 const title = "TMS Research & Clinical Trials | Latest Scientific Data";
@@ -72,49 +72,6 @@ const defaultMeta = { description: 'Evidence-based information from peer-reviewe
             </div>
         </section>
 
-        <!-- TMS Simulation Demo -->
-        <section class="py-10 lg:py-14 border-b border-slate-100">
-            <div class="container mx-auto px-4 max-w-6xl">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                    <div>
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-50 border border-cyan-100 rounded-full mb-4">
-                            <div class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></div>
-                            <span class="text-xs font-semibold text-cyan-700 tracking-wide uppercase">Interactive Demo</span>
-                        </div>
-                        <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4 leading-tight">
-                            See How <span class="text-violet-600">TMS</span> Targets the Brain
-                        </h2>
-                        <p class="text-slate-500 leading-relaxed mb-6">
-                            Transcranial magnetic stimulation uses a focused magnetic field to stimulate specific brain regions. The coil generates an electromagnetic field that activates cortical neurons — watch how the field spreads through target tissue below.
-                        </p>
-                        <div class="space-y-3 text-sm text-slate-500">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-violet-100 flex items-center justify-center shrink-0">
-                                    <svg class="w-3.5 h-3.5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                                </div>
-                                <span>Adjustable targeting for different treatment protocols</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-cyan-100 flex items-center justify-center shrink-0">
-                                    <svg class="w-3.5 h-3.5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                                </div>
-                                <span>Real-time E-field visualization</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
-                                    <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                                </div>
-                                <span>FDA-cleared stimulation targets shown</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <TMSViewer client:only="react" />
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Research Topics -->
         <section class="py-12 lg:py-16">
             <div class="container mx-auto px-4 max-w-6xl">
@@ -156,6 +113,24 @@ const defaultMeta = { description: 'Evidence-based information from peer-reviewe
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- End-of-page CTA -->
+        <section class="py-14 lg:py-20 bg-gradient-to-br from-violet-600 to-indigo-600 border-t border-slate-100">
+            <div class="container mx-auto px-4 max-w-4xl text-center">
+                <p class="text-xs font-semibold text-violet-200 tracking-wider uppercase mb-3">Ready to explore treatment options?</p>
+                <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4 tracking-tight">See What the Research Means for You</h2>
+                <p class="text-violet-100 mb-8 max-w-xl mx-auto leading-relaxed">Clinical evidence is compelling. Take the next step to see if TMS is right for your situation.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/quiz/am-i-a-candidate/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-violet-700 font-semibold rounded-xl shadow-lg hover:bg-violet-50 transition-all">
+                        Take the Eligibility Quiz
+                    </a>
+                    <a href="/best-tms-clinics/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 border border-white/30 hover:bg-white/20 text-white font-semibold rounded-xl transition-all backdrop-blur">
+                        Find a TMS Clinic
+                    </a>
+                </div>
+                <p class="text-xs text-violet-200 mt-4">Also: <a href="/resources/buyers-guide/" class="underline hover:text-white font-medium">download the free TMS Buyer's Guide</a> — the complete guide to treatment decisions.</p>
             </div>
         </section>
     </main>

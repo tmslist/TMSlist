@@ -46,7 +46,7 @@ export async function sendLeadSms(data: {
   condition?: string;
 }) {
   const message = [
-    `🔔 New TMS List Lead`,
+    `[TMS List] New Lead`,
     `Patient: ${data.patientName}`,
     data.patientPhone ? `Phone: ${data.patientPhone}` : null,
     data.condition ? `Condition: ${data.condition}` : null,
@@ -67,7 +67,7 @@ export async function sendReviewSms(data: {
   rating: number;
   reviewerName: string;
 }) {
-  const stars = '★'.repeat(data.rating) + '☆'.repeat(5 - data.rating);
+  const stars = '[star]'.repeat(data.rating) + '[empty]'.repeat(5 - data.rating);
   const message = `${stars} New ${data.rating}-star review for ${data.clinicName} from ${data.reviewerName}. View: tmslist.com/owner/dashboard`;
   return sendSms(data.clinicPhone, message);
 }
