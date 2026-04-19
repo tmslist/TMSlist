@@ -1,0 +1,19 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import AdminSidebar from "../../components/react/AdminSidebar";
+import AdminWhiteLabelEditor from "../../components/react/AdminWhiteLabelEditor";
+import { getSessionFromRequest, hasRole } from "../../utils/auth";
+const session = getSessionFromRequest(Astro.request);
+if (!hasRole(session, 'admin')) return Astro.redirect("/admin/login");
+---
+<Layout title="White-Label Editor | TMS List Admin" noindex={true}>
+  <div class="flex min-h-screen bg-gray-50 dark:bg-slate-900">
+    <AdminSidebar client:load currentPage="white-label-editor" userEmail={session!.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <AdminWhiteLabelEditor client:load />
+      </div>
+    </main>
+  </div>
+</Layout>
