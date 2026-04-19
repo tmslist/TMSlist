@@ -96,30 +96,6 @@ const deviceComparisons = comparisons.filter(
                 </a>
             </div>
 
-            <!-- Insurance Mega Menu -->
-            <div class="relative px-2 py-4" data-mega="insurance">
-                <a
-                    href="/insurance/"
-                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-gray-700 hover:text-indigo-600 transition-colors tracking-wide"
-                    aria-expanded="false"
-                    aria-controls="mega-insurance"
-                >
-                    Insurance
-                    <svg
-                        class="w-3.5 h-3.5 text-gray-400 transition-transform duration-300 mega-chevron"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2.5"
-                            d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </a>
-            </div>
-
             <!-- Technology Mega Menu -->
             <div class="relative px-2 py-4" data-mega="technology">
                 <a
@@ -143,6 +119,35 @@ const deviceComparisons = comparisons.filter(
                     aria-controls="mega-providers"
                 >
                     For Providers
+                    <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-300 mega-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Resources Mega Menu -->
+            <div class="relative px-2 py-4" data-mega="resources">
+                <a
+                    href="/resources/"
+                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors tracking-wide"
+                    aria-expanded="false"
+                    aria-controls="mega-resources"
+                >
+                    Resources
+                    <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-300 mega-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Community Mega Menu -->
+            <div class="relative px-2 py-4" data-mega="community">
+                <button
+                    class="mega-trigger flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors tracking-wide"
+                    aria-expanded="false"
+                    aria-controls="mega-community"
+                >
+                    Community
                     <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-300 mega-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
                     </svg>
@@ -398,23 +403,59 @@ const deviceComparisons = comparisons.filter(
 </header>
 
 <!-- Secondary nav: full-width bar below sticky header -->
-<nav class="hidden lg:flex items-center justify-center gap-6 py-2 bg-white border-b border-slate-100 text-[11px] font-semibold text-gray-500" aria-label="Quick tools">
+<nav class="hidden lg:flex items-center justify-center gap-5 py-2 bg-white border-b border-slate-100 text-[11px] font-semibold text-gray-500" aria-label="Quick links">
+    <!-- Insurance -->
+    <div class="flex items-center gap-1">
+        <a href="/insurance/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Insurance
+        </a>
+        <a href="/quiz/insurance-eligibility-checker/" class="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">Insurance Check</a>
+    </div>
+    <!-- Interactive Tools -->
+    <div class="flex items-center gap-1">
+        <span class="text-gray-200 mr-0.5">|</span>
+        <a href="/tms-tools/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-violet-50 text-gray-500 hover:text-violet-700 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            TMS Tools
+        </a>
+        <a href="/tms-cost-calculator/" class="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">Cost Calculator</a>
+        <a href="/patient-journey/" class="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">Journey Timeline</a>
+    </div>
+    <!-- Resources -->
+    <div class="flex items-center gap-1">
+        <span class="text-gray-200 mr-0.5">|</span>
+        <a href="/resources/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            Resources
+        </a>
+        <a href="/research/" class="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">Research</a>
+        <a href="/starting-a-tms-clinic/" class="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">For Clinics</a>
+    </div>
+    <!-- Community -->
+    <div class="flex items-center gap-1">
+        <span class="text-gray-200 mr-0.5">|</span>
+        <a href="/blog/" class="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">Blog</a>
+        <a href="/stories/" class="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">Patient Stories</a>
+        <a href="/community/" class="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">Community</a>
+    </div>
+    <!-- Careers -->
+    <div class="flex items-center gap-1">
+        <span class="text-gray-200 mr-0.5">|</span>
+        <a href="/careers/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.9 23.9 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Careers
+        </a>
+    </div>
+    <!-- Divider -->
+    <span class="text-gray-200 mx-1">|</span>
+    <!-- Quizzes (existing) -->
     <a href="/quiz/am-i-a-candidate/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-violet-50 text-violet-700 hover:bg-violet-100 transition-colors">
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
         Am I a Candidate?
     </a>
-    <a href="/quiz/depression-severity-test/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        PHQ-9 Depression Test
-    </a>
-    <a href="/quiz/insurance-eligibility-checker/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        Insurance Eligibility
-    </a>
-    <a href="/tms-cost-guide/" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        TMS Cost Guide
-    </a>
+    <a href="/quiz/depression-severity-test/" class="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">PHQ-9 Test</a>
+    <a href="/tms-cost-guide/" class="flex items-center gap-1.5 px-2 py-1.5 rounded-full hover:bg-slate-50 text-gray-500 hover:text-indigo-600 transition-colors">Cost Guide</a>
 </nav>
 
 <!-- ========== MEGA MENU PANELS (full-width, positioned below header) ========== -->
@@ -1570,6 +1611,111 @@ const deviceComparisons = comparisons.filter(
                                     ></path></svg
                                 >
                             </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMMUNITY Panel -->
+    <div
+        id="mega-community"
+        class="mega-panel fixed left-0 right-0 top-16 z-[95] opacity-0 invisible -translate-y-2 transition-all duration-300 ease-out"
+        role="menu"
+    >
+        <div
+            class="bg-white border-b border-slate-200/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.12)]"
+        >
+            <div class="container mx-auto px-4 lg:px-8 py-8">
+                <div class="grid grid-cols-12 gap-8">
+                    <div class="col-span-4">
+                        <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Blog & Stories</h4>
+                        <div class="space-y-0.5">
+                            <a href="/blog/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group/res">
+                                <div class="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center text-violet-500 shrink-0 group-hover/res:bg-violet-100 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-700 group-hover/res:text-violet-600">Blog</div>
+                                    <div class="text-[11px] text-gray-400">Latest articles and insights</div>
+                                </div>
+                            </a>
+                            <a href="/stories/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group/res">
+                                <div class="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center text-rose-500 shrink-0 group-hover/res:bg-rose-100 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-700 group-hover/res:text-rose-600">Patient Stories</div>
+                                    <div class="text-[11px] text-gray-400">Real TMS experiences</div>
+                                </div>
+                            </a>
+                            <a href="/community/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group/res">
+                                <div class="w-8 h-8 rounded-lg bg-cyan-50 flex items-center justify-center text-cyan-500 shrink-0 group-hover/res:bg-cyan-100 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-700 group-hover/res:text-cyan-600">TMS Community</div>
+                                    <div class="text-[11px] text-gray-400">Connect with patients</div>
+                                </div>
+                            </a>
+                            <a href="/questions/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group/res">
+                                <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-amber-500 shrink-0 group-hover/res:bg-amber-100 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-700 group-hover/res:text-amber-600">Community Q&A</div>
+                                    <div class="text-[11px] text-gray-400">Questions and answers</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-span-4 border-l border-slate-100 pl-8">
+                        <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Career & Education</h4>
+                        <div class="space-y-0.5">
+                            <a href="/careers/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group/res">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-500 shrink-0 group-hover/res:bg-emerald-100 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.9 23.9 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-700 group-hover/res:text-emerald-600">Careers at TMS List</div>
+                                    <div class="text-[11px] text-gray-400">Join our growing team</div>
+                                </div>
+                            </a>
+                            <a href="/starting-a-tms-clinic/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group/res">
+                                <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500 shrink-0 group-hover/res:bg-blue-100 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-700 group-hover/res:text-blue-600">Start a TMS Clinic</div>
+                                    <div class="text-[11px] text-gray-400">Business guide and resources</div>
+                                </div>
+                            </a>
+                            <a href="/research/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group/res">
+                                <div class="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-500 shrink-0 group-hover/res:bg-indigo-100 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-700 group-hover/res:text-indigo-600">TMS Research</div>
+                                    <div class="text-[11px] text-gray-400">Clinical trials and evidence</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-span-4 border-l border-slate-100 pl-8">
+                        <div class="bg-gradient-to-br from-cyan-600 to-indigo-600 rounded-2xl p-6 text-white h-full flex flex-col justify-between">
+                            <div>
+                                <div class="inline-flex items-center gap-1.5 bg-white/20 rounded-full px-3 py-1 text-xs font-semibold mb-4">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                    Join the Community
+                                </div>
+                                <h3 class="text-lg font-bold leading-snug">Connect with Others on Their TMS Journey</h3>
+                                <p class="text-cyan-100 text-sm mt-2 leading-relaxed">Read patient stories, ask questions, and share your experience with our growing TMS community.</p>
+                            </div>
+                            <div class="mt-5 space-y-2">
+                                <a href="/stories/" class="block text-center w-full px-5 py-3 bg-white text-indigo-700 text-sm font-bold rounded-xl hover:bg-cyan-50 transition-colors">Read Patient Stories</a>
+                                <a href="/blog/" class="block text-center w-full px-5 py-3 bg-white/10 text-white text-sm font-semibold rounded-xl hover:bg-white/20 transition-colors">Explore the Blog</a>
+                            </div>
                         </div>
                     </div>
                 </div>
