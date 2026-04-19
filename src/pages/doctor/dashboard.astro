@@ -1,0 +1,212 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import DoctorSidebar from "../../components/react/DoctorSidebar";
+import { getSessionFromRequest } from "../../utils/auth";
+import { db } from "../../db";
+import { doctors, reviews, leads, doctorProfileViews } from "../../db/schema";
+import { eq, desc, sql, count, avg } from "drizzle-orm";
+
+const session = getSessionFromRequest(Astro.request);
+if (!session) return Astro.redirect("/portal/login/");
+
+// Check auth: doctor role OR admin/editor
+const isDoctor = session.role === 'doctor';
+const isAdmin = ['admin', 'editor'].includes(session.role);
+
+if (!isDoctor && !isAdmin) return Astro.redirect("/portal/login/");
+
+// Look up doctor record via clinicId
+const doctorRows = session.clinicId
+  ? await db.select().from(doctors).where(eq(doctors.clinicId, session.clinicId)).limit(1)
+  : [];
+const doctor = doctorRows[0] ?? null;
+
+// Fetch dashboard data in parallel
+let profileViewsCount = 0;
+let leadsCount = 0;
+let reviewsCount = 0;
+let avgRating = 0;
+let rankingPosition: number | null = null;
+let recentReviews: any[] = [];
+let recentLeads: any[] = [];
+
+if (doctor) {
+  const [pvResult, leadsResult, reviewsResult, recentR, recentL] = await Promise.all([
+    db.select({ count: sql<number>`count(*)` }).from(doctorProfileViews).where(eq(doctorProfileViews.doctorId, doctor.id)),
+    db.select({ count: count() }).from(leads).where(eq(leads.clinicId, doctor.clinicId)),
+    db.select({ count: count(), avg: avg(reviews.rating) }).from(reviews).where(eq(reviews.clinicId, doctor.clinicId)),
+    db.select().from(reviews).where(eq(reviews.clinicId, doctor.clinicId)).orderBy(desc(reviews.createdAt)).limit(5),
+    db.select().from(leads).where(eq(leads.clinicId, doctor.clinicId)).orderBy(desc(leads.createdAt)).limit(5),
+  ]);
+  profileViewsCount = Number(pvResult[0]?.count ?? 0);
+  leadsCount = Number(leadsResult[0]?.count ?? 0);
+  reviewsCount = Number(reviewsResult[0]?.count ?? 0);
+  avgRating = reviewsResult[0]?.avg ? parseFloat(String(reviewsResult[0].avg)) : 0;
+  recentReviews = recentR;
+  recentLeads = recentL;
+}
+
+const hasDoctorAccount = !!doctor;
+---
+<Layout title="Doctor Dashboard | TMS List" description="Your doctor dashboard on TMS List." noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <DoctorSidebar client:load currentPage="dashboard" userEmail={session.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-5xl">
+        {!hasDoctorAccount ? (
+          <div class="max-w-lg mx-auto text-center py-16">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+              <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+              </div>
+              <h2 class="text-xl font-semibold text-gray-900 mb-2">Set Up Your Doctor Profile</h2>
+              <p class="text-gray-500 mb-6">Your account does not have a doctor profile yet. Contact an administrator to link your doctor account.</p>
+              <a href="/portal/dashboard/" class="inline-flex items-center px-6 py-3 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all">
+                Go to Clinic Dashboard
+              </a>
+            </div>
+          </div>
+        ) : (
+          <div>
+            {/* Header */}
+            <div class="flex items-center justify-between mb-8">
+              <div>
+                <h1 class="text-2xl md:text-3xl font-semibold text-gray-900">Doctor Dashboard</h1>
+                <p class="text-gray-500 mt-1">{doctor.name}{doctor.credential ? `, ${doctor.credential}` : ''}</p>
+              </div>
+            </div>
+
+            {/* Stats Grid */}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                <p class="text-sm font-medium text-gray-500">Profile Views</p>
+                <p class="text-3xl font-semibold text-gray-900 mt-2">{profileViewsCount.toLocaleString()}</p>
+              </div>
+              <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                <p class="text-sm font-medium text-gray-500">Total Leads</p>
+                <p class="text-3xl font-semibold text-blue-600 mt-2">{leadsCount.toLocaleString()}</p>
+              </div>
+              <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                <p class="text-sm font-medium text-gray-500">Total Reviews</p>
+                <p class="text-3xl font-semibold text-gray-900 mt-2">{reviewsCount.toLocaleString()}</p>
+                <div class="flex items-center gap-1 mt-1">
+                  <p class="text-lg font-medium text-gray-700">{avgRating ? Number(avgRating).toFixed(1) : '0.0'}</p>
+                  <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <a href="/doctor/profile/" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow group">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors text-sm">Edit Profile</p>
+                    <p class="text-xs text-gray-500">Update your listing</p>
+                  </div>
+                </div>
+              </a>
+              <a href="/doctor/availability/" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow group">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors text-sm">Availability</p>
+                    <p class="text-xs text-gray-500">Set your schedule</p>
+                  </div>
+                </div>
+              </a>
+              <a href="/doctor/analytics/" className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow group">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors text-sm">Analytics</p>
+                    <p class="text-xs text-gray-500">View insights</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            {/* Recent Reviews */}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div>
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Recent Reviews</h2>
+                {recentReviews.length === 0 ? (
+                  <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+                    <p class="text-gray-500 text-sm">No reviews yet</p>
+                  </div>
+                ) : (
+                  <div class="space-y-3">
+                    {recentReviews.map((review: any) => (
+                      <div key={review.id} class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                          <div class="flex items-center gap-2">
+                            <span class="font-medium text-sm text-gray-900">{review.userName}</span>
+                            <span class={`text-xs px-2 py-0.5 rounded-full ${review.approved ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                              {review.approved ? 'Approved' : 'Pending'}
+                            </span>
+                          </div>
+                          <span class="text-xs text-gray-400">{new Date(review.createdAt).toLocaleDateString()}</span>
+                        </div>
+                        <div class="flex mb-1">
+                          {Array.from({ length: 5 }, (_, i) => (
+                            <svg key={i} className={`w-4 h-4 ${i < review.rating ? 'text-amber-400' : 'text-gray-200'}`} fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                        </div>
+                        {review.title && <p class="text-sm font-medium text-gray-800 mb-1">{review.title}</p>}
+                        <p class="text-sm text-gray-600 line-clamp-2">{review.body}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Recent Leads */}
+              <div>
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Recent Enquiries</h2>
+                {recentLeads.length === 0 ? (
+                  <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+                    <p class="text-gray-500 text-sm">No enquiries yet</p>
+                  </div>
+                ) : (
+                  <div class="space-y-3">
+                    {recentLeads.map((lead: any) => (
+                      <div key={lead.id} class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                          <span class="font-medium text-sm text-gray-900">{lead.name || 'Anonymous'}</span>
+                          <span class="text-xs text-gray-400">{new Date(lead.createdAt).toLocaleDateString()}</span>
+                        </div>
+                        {lead.email && <p class="text-xs text-gray-500 mb-1">{lead.email}</p>}
+                        {lead.phone && <p class="text-xs text-gray-500 mb-1">{lead.phone}</p>}
+                        {lead.message && <p class="text-sm text-gray-600 line-clamp-2">{lead.message}</p>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </main>
+  </div>
+</Layout>

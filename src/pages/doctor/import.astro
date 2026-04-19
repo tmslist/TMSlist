@@ -1,0 +1,143 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import DoctorSidebar from "../../components/react/DoctorSidebar";
+import { getSessionFromRequest } from "../../utils/auth";
+import { db } from "../../db";
+import { doctors } from "../../db/schema";
+import { eq } from "drizzle-orm";
+
+const session = getSessionFromRequest(Astro.request);
+if (!session) return Astro.redirect("/portal/login/");
+
+const doctorRows = await db.select().from(doctors).where(eq(doctors.clinicId, session.clinicId ?? '')).limit(1);
+const doctor = doctorRows[0] ?? null;
+---
+< Layout title="Import Data | Doctor Portal | TMS List" description="Import your clinic data." noindex={true} >
+  <div class="flex min-h-screen bg-gray-50">
+    <DoctorSidebar client:load currentPage="import" userEmail={session.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="mb-6">
+          <a href="/doctor/dashboard/" class="text-sm text-blue-600 hover:text-blue-700 font-medium mb-2 inline-block">
+            &larr; Back to Dashboard
+          </a>
+          <h1 class="text-2xl font-semibold text-gray-900">Import Data</h1>
+          <p class="text-gray-500 text-sm mt-1">Bulk import treatments, conditions, and protocols</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-8 text-center">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+          </div>
+          <h2 class="text-xl font-semibold text-gray-900 mb-2">CSV Import</h2>
+          <p class="text-gray-500 mb-6 max-w-md mx-auto">Upload a CSV file to bulk-import treatments, conditions, or protocols associated with your profile.</p>
+          <form id="import-form" class="max-w-sm mx-auto">
+            <label class="block">
+              <span class="sr-only">Choose CSV file</span>
+              <input type="file" accept=".csv" id="import-file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer" />
+            </label>
+            <div class="mt-4">
+              <label class="block text-sm font-medium text-gray-700 mb-1 text-left">Import Type</label>
+              <select id="import-type" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option value="treatments">Treatments</option>
+                <option value="conditions">Conditions</option>
+                <option value="protocols">Protocols</option>
+              </select>
+            </div>
+            <div id="import-preview" class="hidden mt-4 text-left">
+              <p class="text-sm font-medium text-gray-700 mb-2">Preview (first 5 rows):</p>
+              <div id="preview-content" class="text-xs bg-gray-50 rounded-lg p-3 overflow-x-auto"></div>
+            </div>
+            <div id="import-result" class="hidden mt-4 p-4 rounded-lg text-sm text-left"></div>
+            <button type="submit" id="import-btn" class="mt-4 w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors">
+              Import CSV
+            </button>
+          </form>
+          <div class="mt-6 border-t border-gray-200 pt-6">
+            <p class="text-xs text-gray-400 mb-2">Required columns per type:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-left">
+              <div class="bg-gray-50 rounded-lg p-3">
+                <p class="text-xs font-semibold text-gray-700 mb-1">Treatments</p>
+                <p class="text-xs text-gray-500">name, description, duration_min, price</p>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-3">
+                <p class="text-xs font-semibold text-gray-700 mb-1">Conditions</p>
+                <p class="text-xs text-gray-500">name, icd_code, description</p>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-3">
+                <p class="text-xs font-semibold text-gray-700 mb-1">Protocols</p>
+                <p class="text-xs text-gray-500">name, frequency, duration_days, notes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  const form = document.getElementById('import-form') as HTMLFormElement;
+  const fileInput = document.getElementById('import-file') as HTMLInputElement;
+  const typeInput = document.getElementById('import-type') as HTMLSelectElement;
+  const previewDiv = document.getElementById('import-preview')!;
+  const previewContent = document.getElementById('preview-content')!;
+  const resultDiv = document.getElementById('import-result')!;
+  const btn = document.getElementById('import-btn') as HTMLButtonElement;
+
+  fileInput?.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target?.result as string;
+      const lines = text.trim().split('\n');
+      if (lines.length > 1) {
+        const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+        const rows = lines.slice(1, 6).map(line => {
+          const vals = line.split(',').map(v => v.trim().replace(/"/g, ''));
+          return headers.map((h, i) => `<b>${h}:</b> ${vals[i] || ''}`).join(' | ');
+        });
+        previewContent.innerHTML = rows.map(r => `<div class="border-b border-gray-200 pb-1 mb-1 last:border-0">${r}</div>`).join('');
+        previewDiv.classList.remove('hidden');
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const file = fileInput.files?.[0];
+    if (!file) return;
+    btn.disabled = true;
+    btn.textContent = 'Importing...';
+    resultDiv.classList.add('hidden');
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('type', typeInput.value);
+
+    try {
+      const res = await fetch('/api/doctor/import', { method: 'POST', body: formData });
+      const json = await res.json();
+      if (res.ok) {
+        resultDiv.className = 'mt-4 p-4 rounded-lg text-sm text-left bg-emerald-50 text-emerald-800';
+        resultDiv.innerHTML = `<b>Success!</b> Imported ${json.successCount || 0} rows.${json.errorCount ? ` ${json.errorCount} errors.` : ''}`;
+        fileInput.value = '';
+        previewDiv.classList.add('hidden');
+      } else {
+        resultDiv.className = 'mt-4 p-4 rounded-lg text-sm text-left bg-red-50 text-red-800';
+        resultDiv.innerHTML = `<b>Error:</b> ${json.error || 'Import failed'}`;
+      }
+    } catch {
+      resultDiv.className = 'mt-4 p-4 rounded-lg text-sm text-left bg-red-50 text-red-800';
+      resultDiv.innerHTML = '<b>Error:</b> Network error. Please try again.';
+    }
+
+    resultDiv.classList.remove('hidden');
+    btn.disabled = false;
+    btn.textContent = 'Import CSV';
+  });
+</script>

@@ -415,7 +415,7 @@ const schema = JSON.stringify({
                                     <!-- Autocomplete Dropdown -->
                                     <div
                                         id="search-suggestions"
-                                        class="absolute top-16 left-0 right-0 bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden hidden z-50 max-h-[300px] overflow-y-auto"
+                                        class="absolute top-16 left-0 right-0 bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden hidden z-50 max-h-[300px] overflow-y-auto"
                                     >
                                     </div>
                                 </div>
@@ -717,56 +717,56 @@ const schema = JSON.stringify({
             <!-- 6-Step Process Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 <!-- Step 1: Research -->
-                <div class="group relative bg-white rounded-2xl border border-slate-100 p-6 hover:border-violet-200 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                <div class="group relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 hover:border-violet-200 dark:hover:border-violet-700 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
                     <div class="flex items-start gap-4 mb-5">
-                        <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">01</div>
+                        <div class="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-950/50 text-violet-700 dark:text-violet-400 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">01</div>
                         <div>
-                            <h3 class="font-display font-bold text-slate-900 text-lg mb-1">Learn About TMS</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Understand what TMS therapy is, who it's for, and how it treats depression, anxiety, OCD, and more.</p>
+                            <h3 class="font-display font-bold text-slate-900 dark:text-white text-lg mb-1">Learn About TMS</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Understand what TMS therapy is, who it's for, and how it treats depression, anxiety, OCD, and more.</p>
                         </div>
                     </div>
-                    <div class="rounded-xl overflow-hidden bg-slate-50 aspect-[4/3]">
+                    <div class="rounded-xl overflow-hidden bg-slate-50 dark:bg-slate-800 aspect-[4/3]">
                         <img src="/images/tms_coil_detail.svg" alt="Detailed view of figure-8 TMS coil and how it focuses magnetic fields" class="w-full h-full object-cover" loading="lazy" width="600" height="400"/>
                     </div>
                 </div>
 
                 <!-- Step 2: Find Clinic -->
-                <div class="group relative bg-white rounded-2xl border border-slate-100 p-6 hover:border-violet-200 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                <div class="group relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 hover:border-violet-200 dark:hover:border-violet-700 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
                     <div class="flex items-start gap-4 mb-5">
-                        <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">02</div>
+                        <div class="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-950/50 text-violet-700 dark:text-violet-400 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">02</div>
                         <div>
-                            <h3 class="font-display font-bold text-slate-900 text-lg mb-1">Find a Verified Clinic</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Search {clinics.length}+ clinics by location, insurance, technology, and patient ratings.</p>
+                            <h3 class="font-display font-bold text-slate-900 dark:text-white text-lg mb-1">Find a Verified Clinic</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Search {clinics.length}+ clinics by location, insurance, technology, and patient ratings.</p>
                         </div>
                     </div>
-                    <div class="rounded-xl overflow-hidden bg-gradient-to-br from-violet-50 to-slate-50 aspect-[4/3] flex items-center justify-center p-6">
+                    <div class="rounded-xl overflow-hidden bg-gradient-to-br from-violet-50 to-slate-50 dark:from-slate-800 dark:to-slate-900 aspect-[4/3] flex items-center justify-center p-6">
                         <div class="w-full max-w-[260px] space-y-3">
-                            <div class="bg-white rounded-lg p-3 shadow-sm border border-slate-100 flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-md bg-violet-100 flex items-center justify-center">
+                            <div class="bg-white dark:bg-slate-700 rounded-lg p-3 shadow-sm border border-slate-100 dark:border-slate-700 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-md bg-violet-100 dark:bg-violet-900/50 flex items-center justify-center">
                                     <svg class="w-4 h-4 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                                 </div>
                                 <div class="flex-1">
-                                    <div class="h-2.5 bg-slate-200 rounded w-24"></div>
-                                    <div class="h-2 bg-slate-100 rounded w-16 mt-1.5"></div>
+                                    <div class="h-2.5 bg-slate-200 dark:bg-slate-600 rounded w-24"></div>
+                                    <div class="h-2 bg-slate-100 dark:bg-slate-700 rounded w-16 mt-1.5"></div>
                                 </div>
                             </div>
-                            <div class="bg-white rounded-lg p-3 shadow-sm border border-violet-100 flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-md bg-emerald-100 flex items-center justify-center">
+                            <div class="bg-white dark:bg-slate-700 rounded-lg p-3 shadow-sm border border-violet-100 dark:border-violet-900 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-md bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
                                     <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 </div>
                                 <div class="flex-1">
-                                    <div class="h-2.5 bg-slate-200 rounded w-28"></div>
-                                    <div class="h-2 bg-emerald-100 rounded w-12 mt-1.5"></div>
+                                    <div class="h-2.5 bg-slate-200 dark:bg-slate-600 rounded w-28"></div>
+                                    <div class="h-2 bg-emerald-100 dark:bg-emerald-900/50 rounded w-12 mt-1.5"></div>
                                 </div>
-                                <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">VERIFIED</span>
+                                <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/50 px-2 py-0.5 rounded-full">VERIFIED</span>
                             </div>
-                            <div class="bg-white rounded-lg p-3 shadow-sm border border-slate-100 flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-md bg-slate-100 flex items-center justify-center">
+                            <div class="bg-white dark:bg-slate-700 rounded-lg p-3 shadow-sm border border-slate-100 dark:border-slate-700 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-md bg-slate-100 dark:bg-slate-600 flex items-center justify-center">
                                     <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                                 </div>
                                 <div class="flex-1">
-                                    <div class="h-2.5 bg-slate-200 rounded w-20"></div>
-                                    <div class="h-2 bg-slate-100 rounded w-14 mt-1.5"></div>
+                                    <div class="h-2.5 bg-slate-200 dark:bg-slate-600 rounded w-20"></div>
+                                    <div class="h-2 bg-slate-100 dark:bg-slate-700 rounded w-14 mt-1.5"></div>
                                 </div>
                             </div>
                         </div>
@@ -774,69 +774,69 @@ const schema = JSON.stringify({
                 </div>
 
                 <!-- Step 3: Consultation -->
-                <div class="group relative bg-white rounded-2xl border border-slate-100 p-6 hover:border-violet-200 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                <div class="group relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 hover:border-violet-200 dark:hover:border-violet-700 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
                     <div class="flex items-start gap-4 mb-5">
-                        <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">03</div>
+                        <div class="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-950/50 text-violet-700 dark:text-violet-400 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">03</div>
                         <div>
-                            <h3 class="font-display font-bold text-slate-900 text-lg mb-1">Book a Consultation</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Meet with a TMS specialist who will evaluate your condition and determine if you're a good candidate.</p>
+                            <h3 class="font-display font-bold text-slate-900 dark:text-white text-lg mb-1">Book a Consultation</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Meet with a TMS specialist who will evaluate your condition and determine if you're a good candidate.</p>
                         </div>
                     </div>
-                    <div class="rounded-xl overflow-hidden bg-slate-50 aspect-[4/3]">
+                    <div class="rounded-xl overflow-hidden bg-slate-50 dark:bg-slate-800 aspect-[4/3]">
                         <img src="/images/tms_consultation.svg" alt="Doctor consulting with patient about TMS therapy" class="w-full h-full object-cover" loading="lazy" width="600" height="400"/>
                     </div>
                 </div>
 
                 <!-- Step 4: Insurance -->
-                <div class="group relative bg-white rounded-2xl border border-slate-100 p-6 hover:border-violet-200 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                <div class="group relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 hover:border-violet-200 dark:hover:border-violet-700 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
                     <div class="flex items-start gap-4 mb-5">
-                        <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">04</div>
+                        <div class="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-950/50 text-violet-700 dark:text-violet-400 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">04</div>
                         <div>
-                            <h3 class="font-display font-bold text-slate-900 text-lg mb-1">Verify Insurance Coverage</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">Most major insurers cover TMS for depression. We help you check your coverage before you start.</p>
+                            <h3 class="font-display font-bold text-slate-900 dark:text-white text-lg mb-1">Verify Insurance Coverage</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Most major insurers cover TMS for depression. We help you check your coverage before you start.</p>
                         </div>
                     </div>
-                    <div class="rounded-xl overflow-hidden bg-gradient-to-br from-emerald-50 to-slate-50 aspect-[4/3] flex items-center justify-center p-6">
+                    <div class="rounded-xl overflow-hidden bg-gradient-to-br from-emerald-50 to-slate-50 dark:from-slate-800 dark:to-slate-900 aspect-[4/3] flex items-center justify-center p-6">
                         <div class="text-center">
-                            <div class="w-16 h-16 mx-auto rounded-2xl bg-white shadow-md border border-emerald-100 flex items-center justify-center mb-4">
+                            <div class="w-16 h-16 mx-auto rounded-2xl bg-white dark:bg-slate-700 shadow-md border border-emerald-100 dark:border-emerald-900 flex items-center justify-center mb-4">
                                 <svg class="w-8 h-8 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                             </div>
                             <div class="flex flex-wrap justify-center gap-2 mb-3">
-                                <span class="px-2.5 py-1 bg-white rounded-full text-[10px] font-semibold text-slate-600 border border-slate-100">Aetna</span>
-                                <span class="px-2.5 py-1 bg-white rounded-full text-[10px] font-semibold text-slate-600 border border-slate-100">BlueCross</span>
-                                <span class="px-2.5 py-1 bg-white rounded-full text-[10px] font-semibold text-slate-600 border border-slate-100">Cigna</span>
-                                <span class="px-2.5 py-1 bg-white rounded-full text-[10px] font-semibold text-slate-600 border border-slate-100">UnitedHealth</span>
-                                <span class="px-2.5 py-1 bg-emerald-50 rounded-full text-[10px] font-semibold text-emerald-600 border border-emerald-100">+20 more</span>
+                                <span class="px-2.5 py-1 bg-white dark:bg-slate-700 rounded-full text-[10px] font-semibold text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-600">Aetna</span>
+                                <span class="px-2.5 py-1 bg-white dark:bg-slate-700 rounded-full text-[10px] font-semibold text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-600">BlueCross</span>
+                                <span class="px-2.5 py-1 bg-white dark:bg-slate-700 rounded-full text-[10px] font-semibold text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-600">Cigna</span>
+                                <span class="px-2.5 py-1 bg-white dark:bg-slate-700 rounded-full text-[10px] font-semibold text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-600">UnitedHealth</span>
+                                <span class="px-2.5 py-1 bg-emerald-50 dark:bg-emerald-900/50 rounded-full text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900">+20 more</span>
                             </div>
-                            <p class="text-xs text-slate-400">Covered by most major insurers</p>
+                            <p class="text-xs text-slate-400 dark:text-slate-500">Covered by most major insurers</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Step 5: Treatment -->
-                <div class="group relative bg-white rounded-2xl border border-slate-100 p-6 hover:border-violet-200 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                <div class="group relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 hover:border-violet-200 dark:hover:border-violet-700 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
                     <div class="flex items-start gap-4 mb-5">
-                        <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">05</div>
+                        <div class="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-950/50 text-violet-700 dark:text-violet-400 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">05</div>
                         <div>
-                            <h3 class="font-display font-bold text-slate-900 text-lg mb-1">Start TMS Sessions</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">19-minute sessions, 5 days a week for 4-6 weeks. No anesthesia. Return to work the same day.</p>
+                            <h3 class="font-display font-bold text-slate-900 dark:text-white text-lg mb-1">Start TMS Sessions</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">19-minute sessions, 5 days a week for 4-6 weeks. No anesthesia. Return to work the same day.</p>
                         </div>
                     </div>
-                    <div class="rounded-xl overflow-hidden bg-slate-50 aspect-[4/3]">
+                    <div class="rounded-xl overflow-hidden bg-slate-50 dark:bg-slate-800 aspect-[4/3]">
                         <img src="/images/tms_session.svg" alt="Patient receiving TMS treatment in comfortable chair with figure-8 coil" class="w-full h-full object-cover" loading="lazy" width="600" height="400"/>
                     </div>
                 </div>
 
                 <!-- Step 6: Results -->
-                <div class="group relative bg-white rounded-2xl border border-slate-100 p-6 hover:border-violet-200 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                <div class="group relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 hover:border-violet-200 dark:hover:border-violet-700 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
                     <div class="flex items-start gap-4 mb-5">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">06</div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-display font-bold text-sm shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">06</div>
                         <div>
-                            <h3 class="font-display font-bold text-slate-900 text-lg mb-1">Track Your Progress</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">83% of patients respond to TMS. 62% achieve full remission. Monitor your improvement throughout treatment.</p>
+                            <h3 class="font-display font-bold text-slate-900 dark:text-white text-lg mb-1">Track Your Progress</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">83% of patients respond to TMS. 62% achieve full remission. Monitor your improvement throughout treatment.</p>
                         </div>
                     </div>
-                    <div class="rounded-xl overflow-hidden bg-slate-50 aspect-[4/3]">
+                    <div class="rounded-xl overflow-hidden bg-slate-50 dark:bg-slate-800 aspect-[4/3]">
                         <img src="/images/tms_results.svg" alt="Patient progress chart showing depression scores improving over TMS treatment" class="w-full h-full object-cover" loading="lazy" width="600" height="400"/>
                     </div>
                 </div>
@@ -853,73 +853,73 @@ const schema = JSON.stringify({
     </section>
 
     <!-- TMS vs ALTERNATIVES — Comparison -->
-    <section class="py-16 bg-slate-50">
+    <section class="py-16 bg-slate-50 dark:bg-slate-800/50">
         <div class="container mx-auto px-4">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 mb-4">
+                <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 dark:text-white mb-4">
                     Why Choose TMS?
                 </h2>
-                <p class="text-lg text-slate-500">See how TMS compares to other depression treatments.</p>
+                <p class="text-lg text-slate-500 dark:text-slate-400">See how TMS compares to other depression treatments.</p>
             </div>
 
             <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-x-auto">
-                    <div class="grid grid-cols-5 gap-0 bg-slate-50 border-b border-slate-200">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-x-auto">
+                    <div class="grid grid-cols-5 gap-0 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
                         <div class="p-4 text-sm font-semibold text-slate-500"></div>
-                        <div class="p-4 text-center border-l border-slate-200"><div class="text-sm font-bold text-slate-900">Medication</div></div>
-                        <div class="p-4 text-center border-l border-slate-200"><div class="text-sm font-bold text-slate-900">Talk Therapy</div></div>
-                        <div class="p-4 text-center border-l border-violet-200 bg-violet-50">
-                            <div class="text-sm font-bold text-violet-700">TMS Therapy</div>
-                            <div class="text-[10px] font-semibold text-violet-500 mt-0.5">RECOMMENDED</div>
+                        <div class="p-4 text-center border-l border-slate-200 dark:border-slate-700"><div class="text-sm font-bold text-slate-900 dark:text-white">Medication</div></div>
+                        <div class="p-4 text-center border-l border-slate-200 dark:border-slate-700"><div class="text-sm font-bold text-slate-900 dark:text-white">Talk Therapy</div></div>
+                        <div class="p-4 text-center border-l border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-900/30">
+                            <div class="text-sm font-bold text-violet-700 dark:text-violet-400">TMS Therapy</div>
+                            <div class="text-[10px] font-semibold text-violet-500 dark:text-violet-500 mt-0.5">RECOMMENDED</div>
                         </div>
-                        <div class="p-4 text-center border-l border-slate-200"><div class="text-sm font-bold text-slate-900">ECT</div></div>
+                        <div class="p-4 text-center border-l border-slate-200 dark:border-slate-700"><div class="text-sm font-bold text-slate-900 dark:text-white">ECT</div></div>
                     </div>
-                    <div class="grid grid-cols-5 gap-0 border-b border-slate-100">
-                        <div class="p-4 text-sm font-semibold text-slate-600">Effectiveness</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">40-60%</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">40-50%</div>
-                        <div class="p-4 text-center border-l border-violet-100 bg-violet-50/50 text-sm font-bold text-violet-700">83%</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">80-90%</div>
+                    <div class="grid grid-cols-5 gap-0 border-b border-slate-100 dark:border-slate-700">
+                        <div class="p-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Effectiveness</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">40-60%</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">40-50%</div>
+                        <div class="p-4 text-center border-l border-violet-100 dark:border-violet-900 bg-violet-50/50 dark:bg-violet-900/20 text-sm font-bold text-violet-700 dark:text-violet-400">83%</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">80-90%</div>
                     </div>
-                    <div class="grid grid-cols-5 gap-0 border-b border-slate-100">
-                        <div class="p-4 text-sm font-semibold text-slate-600">Side Effects</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">Many</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">None</div>
-                        <div class="p-4 text-center border-l border-violet-100 bg-violet-50/50 text-sm font-bold text-emerald-600">Minimal</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">Severe</div>
+                    <div class="grid grid-cols-5 gap-0 border-b border-slate-100 dark:border-slate-700">
+                        <div class="p-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Side Effects</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">Many</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">None</div>
+                        <div class="p-4 text-center border-l border-violet-100 dark:border-violet-900 bg-violet-50/50 dark:bg-violet-900/20 text-sm font-bold text-emerald-600 dark:text-emerald-400">Minimal</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">Severe</div>
                     </div>
-                    <div class="grid grid-cols-5 gap-0 border-b border-slate-100">
-                        <div class="p-4 text-sm font-semibold text-slate-600">Anesthesia</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">No</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">No</div>
-                        <div class="p-4 text-center border-l border-violet-100 bg-violet-50/50 text-sm font-bold text-emerald-600">No</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-amber-600 font-semibold">Yes</div>
+                    <div class="grid grid-cols-5 gap-0 border-b border-slate-100 dark:border-slate-700">
+                        <div class="p-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Anesthesia</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">No</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">No</div>
+                        <div class="p-4 text-center border-l border-violet-100 dark:border-violet-900 bg-violet-50/50 dark:bg-violet-900/20 text-sm font-bold text-emerald-600 dark:text-emerald-400">No</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-amber-600 dark:text-amber-400 font-semibold">Yes</div>
                     </div>
-                    <div class="grid grid-cols-5 gap-0 border-b border-slate-100">
-                        <div class="p-4 text-sm font-semibold text-slate-600">Time to Effect</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">4-8 weeks</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">Months</div>
-                        <div class="p-4 text-center border-l border-violet-100 bg-violet-50/50 text-sm font-bold text-violet-700">2-4 weeks</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">1-2 weeks</div>
+                    <div class="grid grid-cols-5 gap-0 border-b border-slate-100 dark:border-slate-700">
+                        <div class="p-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Time to Effect</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">4-8 weeks</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">Months</div>
+                        <div class="p-4 text-center border-l border-violet-100 dark:border-violet-900 bg-violet-50/50 dark:bg-violet-900/20 text-sm font-bold text-violet-700 dark:text-violet-400">2-4 weeks</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">1-2 weeks</div>
                     </div>
-                    <div class="grid grid-cols-5 gap-0 border-b border-slate-100">
-                        <div class="p-4 text-sm font-semibold text-slate-600">Insurance</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-emerald-600 font-semibold">Covered</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-emerald-600 font-semibold">Varies</div>
-                        <div class="p-4 text-center border-l border-violet-100 bg-violet-50/50 text-sm font-bold text-emerald-600">Covered</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-emerald-600 font-semibold">Covered</div>
+                    <div class="grid grid-cols-5 gap-0 border-b border-slate-100 dark:border-slate-700">
+                        <div class="p-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Insurance</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-emerald-600 dark:text-emerald-400 font-semibold">Covered</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-emerald-600 dark:text-emerald-400 font-semibold">Varies</div>
+                        <div class="p-4 text-center border-l border-violet-100 dark:border-violet-900 bg-violet-50/50 dark:bg-violet-900/20 text-sm font-bold text-emerald-600 dark:text-emerald-400">Covered</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-emerald-600 dark:text-emerald-400 font-semibold">Covered</div>
                     </div>
                     <div class="grid grid-cols-5 gap-0">
-                        <div class="p-4 text-sm font-semibold text-slate-600">Daily Life Impact</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-amber-600 font-semibold">Ongoing pills</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-slate-500">Weekly visits</div>
-                        <div class="p-4 text-center border-l border-violet-100 bg-violet-50/50 text-sm font-bold text-emerald-600">19 min/day</div>
-                        <div class="p-4 text-center border-l border-slate-100 text-sm text-amber-600 font-semibold">Recovery days</div>
+                        <div class="p-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Daily Life Impact</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-amber-600 dark:text-amber-400 font-semibold">Ongoing pills</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-slate-500 dark:text-slate-400">Weekly visits</div>
+                        <div class="p-4 text-center border-l border-violet-100 dark:border-violet-900 bg-violet-50/50 dark:bg-violet-900/20 text-sm font-bold text-emerald-600 dark:text-emerald-400">19 min/day</div>
+                        <div class="p-4 text-center border-l border-slate-100 dark:border-slate-700 text-sm text-amber-600 dark:text-amber-400 font-semibold">Recovery days</div>
                     </div>
                 </div>
-                <p class="text-center text-xs text-slate-400 mt-4">Based on published clinical trial data. Individual results may vary. Consult your provider.</p>
+                <p class="text-center text-xs text-slate-400 dark:text-slate-500 mt-4">Based on published clinical trial data. Individual results may vary. Consult your provider.</p>
                 <div class="text-center mt-6">
-                    <a href="/alternative-treatments/" class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-violet-200 text-violet-700 font-semibold rounded-xl hover:bg-violet-50 transition-colors shadow-sm">
+                    <a href="/alternative-treatments/" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 border border-violet-200 dark:border-violet-800 text-violet-700 dark:text-violet-400 font-semibold rounded-xl hover:bg-violet-50 dark:hover:bg-violet-900/30 transition-colors shadow-sm">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
                         Explore All Treatment Options
                     </a>
@@ -929,13 +929,13 @@ const schema = JSON.stringify({
     </section>
 
     <!-- WHAT TO EXPECT — Visual Timeline -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-white dark:bg-slate-950">
         <div class="container mx-auto px-4">
             <div class="text-center max-w-2xl mx-auto mb-14">
-                <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 mb-4">
+                <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 dark:text-white mb-4">
                     What to Expect During Treatment
                 </h2>
-                <p class="text-lg text-slate-500">A typical TMS treatment course spans 4-6 weeks with sessions 5 days per week.</p>
+                <p class="text-lg text-slate-500 dark:text-slate-400">A typical TMS treatment course spans 4-6 weeks with sessions 5 days per week.</p>
             </div>
 
             <div class="max-w-4xl mx-auto relative">
@@ -943,71 +943,71 @@ const schema = JSON.stringify({
 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div class="relative text-center">
-                        <div class="relative z-10 w-[72px] h-[72px] mx-auto rounded-2xl bg-violet-100 border-4 border-white shadow-md flex items-center justify-center mb-4">
-                            <span class="text-xl font-display font-bold text-violet-700">W1</span>
+                        <div class="relative z-10 w-[72px] h-[72px] mx-auto rounded-2xl bg-violet-100 dark:bg-violet-900/50 border-4 border-white dark:border-slate-800 shadow-md flex items-center justify-center mb-4">
+                            <span class="text-xl font-display font-bold text-violet-700 dark:text-violet-400">W1</span>
                         </div>
-                        <h3 class="font-display font-bold text-slate-900 mb-1">Mapping & Calibration</h3>
-                        <p class="text-sm text-slate-500">Your doctor maps your brain to find the precise target area and sets your motor threshold.</p>
-                        <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-violet-50 rounded-full">
+                        <h3 class="font-display font-bold text-slate-900 dark:text-white mb-1">Mapping & Calibration</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Your doctor maps your brain to find the precise target area and sets your motor threshold.</p>
+                        <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-violet-50 dark:bg-violet-900/30 rounded-full">
                             <span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
-                            <span class="text-[10px] font-semibold text-violet-600">5 sessions</span>
+                            <span class="text-[10px] font-semibold text-violet-600 dark:text-violet-400">5 sessions</span>
                         </div>
                     </div>
                     <div class="relative text-center">
-                        <div class="relative z-10 w-[72px] h-[72px] mx-auto rounded-2xl bg-violet-200 border-4 border-white shadow-md flex items-center justify-center mb-4">
-                            <span class="text-xl font-display font-bold text-violet-700">W2-3</span>
+                        <div class="relative z-10 w-[72px] h-[72px] mx-auto rounded-2xl bg-violet-200 dark:bg-violet-900/70 border-4 border-white dark:border-slate-800 shadow-md flex items-center justify-center mb-4">
+                            <span class="text-xl font-display font-bold text-violet-700 dark:text-violet-400">W2-3</span>
                         </div>
-                        <h3 class="font-display font-bold text-slate-900 mb-1">Building Momentum</h3>
-                        <p class="text-sm text-slate-500">Neural pathways begin to strengthen. Some patients notice early mood improvements.</p>
-                        <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-violet-50 rounded-full">
+                        <h3 class="font-display font-bold text-slate-900 dark:text-white mb-1">Building Momentum</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Neural pathways begin to strengthen. Some patients notice early mood improvements.</p>
+                        <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-violet-50 dark:bg-violet-900/30 rounded-full">
                             <span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
-                            <span class="text-[10px] font-semibold text-violet-600">10 sessions</span>
+                            <span class="text-[10px] font-semibold text-violet-600 dark:text-violet-400">10 sessions</span>
                         </div>
                     </div>
                     <div class="relative text-center">
-                        <div class="relative z-10 w-[72px] h-[72px] mx-auto rounded-2xl bg-violet-300 border-4 border-white shadow-md flex items-center justify-center mb-4">
-                            <span class="text-xl font-display font-bold text-violet-800">W4-5</span>
+                        <div class="relative z-10 w-[72px] h-[72px] mx-auto rounded-2xl bg-violet-300 dark:bg-violet-800 border-4 border-white dark:border-slate-800 shadow-md flex items-center justify-center mb-4">
+                            <span class="text-xl font-display font-bold text-violet-800 dark:text-violet-200">W4-5</span>
                         </div>
-                        <h3 class="font-display font-bold text-slate-900 mb-1">Peak Treatment</h3>
-                        <p class="text-sm text-slate-500">Most significant improvements occur. Depression scores drop substantially for most patients.</p>
-                        <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-violet-50 rounded-full">
+                        <h3 class="font-display font-bold text-slate-900 dark:text-white mb-1">Peak Treatment</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Most significant improvements occur. Depression scores drop substantially for most patients.</p>
+                        <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-violet-50 dark:bg-violet-900/30 rounded-full">
                             <span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span>
-                            <span class="text-[10px] font-semibold text-violet-600">10 sessions</span>
+                            <span class="text-[10px] font-semibold text-violet-600 dark:text-violet-400">10 sessions</span>
                         </div>
                     </div>
                     <div class="relative text-center">
-                        <div class="relative z-10 w-[72px] h-[72px] mx-auto rounded-2xl bg-emerald-100 border-4 border-white shadow-md flex items-center justify-center mb-4">
-                            <span class="text-xl font-display font-bold text-emerald-700">W6+</span>
+                        <div class="relative z-10 w-[72px] h-[72px] mx-auto rounded-2xl bg-emerald-100 dark:bg-emerald-900/50 border-4 border-white dark:border-slate-800 shadow-md flex items-center justify-center mb-4">
+                            <span class="text-xl font-display font-bold text-emerald-700 dark:text-emerald-400">W6+</span>
                         </div>
-                        <h3 class="font-display font-bold text-slate-900 mb-1">Taper & Maintain</h3>
-                        <p class="text-sm text-slate-500">Sessions reduce in frequency. Lasting neural changes continue to solidify after treatment ends.</p>
-                        <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 rounded-full">
+                        <h3 class="font-display font-bold text-slate-900 dark:text-white mb-1">Taper & Maintain</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Sessions reduce in frequency. Lasting neural changes continue to solidify after treatment ends.</p>
+                        <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 rounded-full">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                            <span class="text-[10px] font-semibold text-emerald-600">6 sessions</span>
+                            <span class="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">6 sessions</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="bg-slate-50 rounded-xl p-5 text-center">
-                        <div class="text-2xl font-display font-bold text-violet-600 mb-1">36</div>
-                        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Sessions</div>
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-5 text-center">
+                        <div class="text-2xl font-display font-bold text-violet-600 dark:text-violet-400 mb-1">36</div>
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Sessions</div>
                     </div>
-                    <div class="bg-slate-50 rounded-xl p-5 text-center">
-                        <div class="text-2xl font-display font-bold text-violet-600 mb-1">19 min</div>
-                        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Per Session</div>
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-5 text-center">
+                        <div class="text-2xl font-display font-bold text-violet-600 dark:text-violet-400 mb-1">19 min</div>
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Per Session</div>
                     </div>
-                    <div class="bg-slate-50 rounded-xl p-5 text-center">
-                        <div class="text-2xl font-display font-bold text-emerald-600 mb-1">Zero</div>
-                        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Downtime</div>
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-5 text-center">
+                        <div class="text-2xl font-display font-bold text-emerald-600 dark:text-emerald-400 mb-1">Zero</div>
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Downtime</div>
                     </div>
-                    <a href="/tms-cost-calculator/" class="bg-violet-50 rounded-xl p-5 text-center hover:bg-violet-100 transition-colors group">
-                        <div class="text-2xl font-display font-bold text-violet-600 mb-1 group-hover:text-violet-700">&dollar;</div>
-                        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Estimate Your Cost</div>
+                    <a href="/tms-cost-calculator/" class="bg-violet-50 dark:bg-violet-900/30 rounded-xl p-5 text-center hover:bg-violet-100 dark:hover:bg-violet-900/50 transition-colors group">
+                        <div class="text-2xl font-display font-bold text-violet-600 dark:text-violet-400 mb-1 group-hover:text-violet-700">&dollar;</div>
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Estimate Your Cost</div>
                     </a>
-                    <div class="bg-slate-50 rounded-xl p-5 text-center">
-                        <div class="text-2xl font-display font-bold text-emerald-600 mb-1">62%</div>
-                        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Remission Rate</div>
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-5 text-center">
+                        <div class="text-2xl font-display font-bold text-emerald-600 dark:text-emerald-400 mb-1">62%</div>
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Remission Rate</div>
                     </div>
                 </div>
             </div>
@@ -1015,117 +1015,117 @@ const schema = JSON.stringify({
     </section>
 
     <!-- PATIENT SUCCESS STORIES -->
-    <section class="py-20 bg-slate-50 relative overflow-hidden">
+    <section class="py-20 bg-slate-50 dark:bg-slate-800/50 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[100px]"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-14">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full mb-6">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-900 rounded-full mb-6">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    <span class="text-xs font-semibold text-emerald-700 uppercase tracking-widest">Real Results</span>
+                    <span class="text-xs font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">Real Results</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 mb-4">
+                <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 dark:text-white mb-4">
                     Stories of Transformation
                 </h2>
-                <p class="text-lg text-slate-500">Real patients. Real improvement. See how TMS changed their lives.</p>
+                <p class="text-lg text-slate-500 dark:text-slate-400">Real patients. Real improvement. See how TMS changed their lives.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <!-- Story 1 -->
-                <div class="bg-white rounded-2xl border border-slate-100 p-8 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-8 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-100 to-violet-200 flex items-center justify-center">
-                            <span class="text-lg font-display font-bold text-violet-700">S.M.</span>
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-100 to-violet-200 dark:from-violet-900/50 dark:to-violet-800 flex items-center justify-center">
+                            <span class="text-lg font-display font-bold text-violet-700 dark:text-violet-400">S.M.</span>
                         </div>
                         <div>
-                            <div class="font-display font-bold text-slate-900">Sarah M.</div>
-                            <div class="text-xs text-slate-400">Treatment-Resistant Depression</div>
+                            <div class="font-display font-bold text-slate-900 dark:text-white">Sarah M.</div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500">Treatment-Resistant Depression</div>
                         </div>
                     </div>
-                    <div class="flex items-center gap-4 mb-6 p-4 bg-slate-50 rounded-xl">
+                    <div class="flex items-center gap-4 mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
                         <div class="text-center flex-1">
-                            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Before</div>
-                            <div class="text-2xl font-display font-bold text-red-500">22</div>
-                            <div class="text-[10px] text-slate-400">PHQ-9</div>
+                            <div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Before</div>
+                            <div class="text-2xl font-display font-bold text-red-500 dark:text-red-400">22</div>
+                            <div class="text-[10px] text-slate-400 dark:text-slate-500">PHQ-9</div>
                         </div>
                         <svg class="w-6 h-6 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         <div class="text-center flex-1">
-                            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">After</div>
-                            <div class="text-2xl font-display font-bold text-emerald-500">4</div>
-                            <div class="text-[10px] text-emerald-500 font-semibold">Remission</div>
+                            <div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">After</div>
+                            <div class="text-2xl font-display font-bold text-emerald-500 dark:text-emerald-400">4</div>
+                            <div class="text-[10px] text-emerald-500 dark:text-emerald-400 font-semibold">Remission</div>
                         </div>
                     </div>
-                    <p class="text-sm text-slate-600 leading-relaxed italic mb-4">"After 15 years of trying different medications, TMS was the first thing that truly worked. By week 3, I felt a shift I hadn't felt in years."</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic mb-4">"After 15 years of trying different medications, TMS was the first thing that truly worked. By week 3, I felt a shift I hadn't felt in years."</p>
                     <div class="flex items-center gap-1">
                         <span class="text-amber-400 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span class="text-xs text-slate-400 ml-1">36 sessions</span>
+                        <span class="text-xs text-slate-400 dark:text-slate-500 ml-1">36 sessions</span>
                     </div>
                 </div>
 
                 <!-- Story 2 -->
-                <div class="bg-white rounded-2xl border border-slate-100 p-8 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-8 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-100 to-cyan-200 flex items-center justify-center">
-                            <span class="text-lg font-display font-bold text-cyan-700">J.R.</span>
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-100 to-cyan-200 dark:from-cyan-900/50 dark:to-cyan-800 flex items-center justify-center">
+                            <span class="text-lg font-display font-bold text-cyan-700 dark:text-cyan-400">J.R.</span>
                         </div>
                         <div>
-                            <div class="font-display font-bold text-slate-900">James R.</div>
-                            <div class="text-xs text-slate-400">Major Depressive Disorder</div>
+                            <div class="font-display font-bold text-slate-900 dark:text-white">James R.</div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500">Major Depressive Disorder</div>
                         </div>
                     </div>
-                    <div class="flex items-center gap-4 mb-6 p-4 bg-slate-50 rounded-xl">
+                    <div class="flex items-center gap-4 mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
                         <div class="text-center flex-1">
-                            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Before</div>
-                            <div class="text-2xl font-display font-bold text-red-500">19</div>
-                            <div class="text-[10px] text-slate-400">PHQ-9</div>
+                            <div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Before</div>
+                            <div class="text-2xl font-display font-bold text-red-500 dark:text-red-400">19</div>
+                            <div class="text-[10px] text-slate-400 dark:text-slate-500">PHQ-9</div>
                         </div>
                         <svg class="w-6 h-6 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         <div class="text-center flex-1">
-                            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">After</div>
-                            <div class="text-2xl font-display font-bold text-emerald-500">6</div>
-                            <div class="text-[10px] text-emerald-500 font-semibold">Response</div>
+                            <div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">After</div>
+                            <div class="text-2xl font-display font-bold text-emerald-500 dark:text-emerald-400">6</div>
+                            <div class="text-[10px] text-emerald-500 dark:text-emerald-400 font-semibold">Response</div>
                         </div>
                     </div>
-                    <p class="text-sm text-slate-600 leading-relaxed italic mb-4">"I was skeptical at first, but the results speak for themselves. I can engage with my family again and actually enjoy the things I used to love."</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic mb-4">"I was skeptical at first, but the results speak for themselves. I can engage with my family again and actually enjoy the things I used to love."</p>
                     <div class="flex items-center gap-1">
                         <span class="text-amber-400 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span class="text-xs text-slate-400 ml-1">30 sessions</span>
+                        <span class="text-xs text-slate-400 dark:text-slate-500 ml-1">30 sessions</span>
                     </div>
                 </div>
 
                 <!-- Story 3 -->
-                <div class="bg-white rounded-2xl border border-slate-100 p-8 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-8 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center">
-                            <span class="text-lg font-display font-bold text-amber-700">L.K.</span>
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/50 dark:to-amber-800 flex items-center justify-center">
+                            <span class="text-lg font-display font-bold text-amber-700 dark:text-amber-400">L.K.</span>
                         </div>
                         <div>
-                            <div class="font-display font-bold text-slate-900">Lisa K.</div>
-                            <div class="text-xs text-slate-400">Anxiety & Depression</div>
+                            <div class="font-display font-bold text-slate-900 dark:text-white">Lisa K.</div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500">Anxiety & Depression</div>
                         </div>
                     </div>
-                    <div class="flex items-center gap-4 mb-6 p-4 bg-slate-50 rounded-xl">
+                    <div class="flex items-center gap-4 mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
                         <div class="text-center flex-1">
-                            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Before</div>
-                            <div class="text-2xl font-display font-bold text-red-500">17</div>
-                            <div class="text-[10px] text-slate-400">PHQ-9</div>
+                            <div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Before</div>
+                            <div class="text-2xl font-display font-bold text-red-500 dark:text-red-400">17</div>
+                            <div class="text-[10px] text-slate-400 dark:text-slate-500">PHQ-9</div>
                         </div>
                         <svg class="w-6 h-6 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         <div class="text-center flex-1">
-                            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">After</div>
-                            <div class="text-2xl font-display font-bold text-emerald-500">3</div>
-                            <div class="text-[10px] text-emerald-500 font-semibold">Remission</div>
+                            <div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">After</div>
+                            <div class="text-2xl font-display font-bold text-emerald-500 dark:text-emerald-400">3</div>
+                            <div class="text-[10px] text-emerald-500 dark:text-emerald-400 font-semibold">Remission</div>
                         </div>
                     </div>
-                    <p class="text-sm text-slate-600 leading-relaxed italic mb-4">"The process was so much easier than I expected. 19 minutes, no needles, no side effects. I wish I had found TMS sooner."</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic mb-4">"The process was so much easier than I expected. 19 minutes, no needles, no side effects. I wish I had found TMS sooner."</p>
                     <div class="flex items-center gap-1">
                         <span class="text-amber-400 text-sm">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-                        <span class="text-xs text-slate-400 ml-1">36 sessions</span>
+                        <span class="text-xs text-slate-400 dark:text-slate-500 ml-1">36 sessions</span>
                     </div>
                 </div>
             </div>
 
             <div class="text-center mt-10">
-                <a href="/stories/" class="text-violet-600 font-semibold text-sm hover:text-violet-700 transition-colors inline-flex items-center gap-2">
+                <a href="/stories/" class="text-violet-600 dark:text-violet-400 font-semibold text-sm hover:text-violet-700 dark:hover:text-violet-300 transition-colors inline-flex items-center gap-2">
                     Read More Patient Stories
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </a>
@@ -1142,7 +1142,7 @@ const schema = JSON.stringify({
     <TrustSignals clinicCount={clinics.length} countryCode={VISITOR_COUNTRY} />
 
     <!-- CONDITIONS - Aesthetic Bento Grid -->
-    <section class="py-10 container mx-auto px-4 bg-slate-50 rounded-3xl relative overflow-hidden">
+    <section class="py-10 container mx-auto px-4 bg-slate-50 dark:bg-slate-800/50 rounded-3xl relative overflow-hidden">
         <!-- Background Ambient Glow -->
         <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#7C3AED]/20 rounded-full blur-[120px] pointer-events-none"></div>
         <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
@@ -1153,10 +1153,10 @@ const schema = JSON.stringify({
                     class="inline-block px-3 py-1 bg-[#7C3AED]/20 text-[#8B5CF6] border border-[#7C3AED]/30 rounded-full text-xs font-semibold uppercase tracking-wider mb-2"
                     >Conditions Treated</span
                 >
-                <h2 class="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 tracking-tight">
+                <h2 class="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white tracking-tight">
                     FDA-Cleared <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-cyan-400">Protocols</span>
                 </h2>
-                <p class="text-slate-500 mt-2 max-w-2xl mx-auto text-sm font-light">
+                <p class="text-slate-500 dark:text-slate-400 mt-2 max-w-2xl mx-auto text-sm font-light">
                     TMS is FDA-cleared for multiple mental health conditions, providing a non-invasive alternative when medication hasn't yielded results.
                 </p>
             </div>
@@ -1204,75 +1204,75 @@ const schema = JSON.stringify({
                     TREATMENT_SLUGS.slice(1, 5).map((t, index) => (
                         <a
                             href={`/treatments/${t.slug}`}
-                            class="group relative overflow-hidden bg-slate-50 hover:bg-[#334155] border border-slate-100 hover:border-[#7C3AED]/30 rounded-3xl p-6 transition-all duration-300 flex flex-col justify-between h-full hover:-translate-y-1 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[#7C3AED]/10"
+                            class="group relative overflow-hidden bg-slate-50 dark:bg-slate-800 hover:bg-[#334155] dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-700 hover:border-[#7C3AED]/30 rounded-3xl p-6 transition-all duration-300 flex flex-col justify-between h-full hover:-translate-y-1 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[#7C3AED]/10"
                         >
                             <div>
-                                <div class="w-12 h-12 rounded-2xl bg-[#7C3AED]/10 text-[#8B5CF6] flex items-center justify-center mb-4 group-hover:bg-[#7C3AED] group-hover:text-white transition-colors duration-300">
+                                <div class="w-12 h-12 rounded-2xl bg-[#7C3AED]/10 dark:bg-[#7C3AED]/20 text-[#8B5CF6] flex items-center justify-center mb-4 group-hover:bg-[#7C3AED] group-hover:text-white transition-colors duration-300">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
-                                <h3 class="text-xl font-semibold text-slate-900 mb-2 font-sans font-medium tracking-tight">
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2 font-sans font-medium tracking-tight">
                                     {t.title.replace("TMS for ", "")}
                                 </h3>
-                                <p class="text-sm text-slate-500 leading-snug">
+                                <p class="text-sm text-slate-500 dark:text-slate-400 leading-snug">
                                     Targeted therapy options for {t.slug.replace("-", " ")}.
                                 </p>
                             </div>
-                            <div class="mt-4 flex items-center gap-2 text-[#8B5CF6] text-sm font-semibold group-hover:text-slate-900 transition-colors">
+                            <div class="mt-4 flex items-center gap-2 text-[#8B5CF6] dark:text-violet-400 text-sm font-semibold group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                                 Learn More <span class="transition-transform group-hover:translate-x-1">→</span>
                             </div>
                         </a>
                     ))
                 }
-                
+
                 <!-- "View All" Card -->
                 <a
                     href="/treatments/"
-                    class="group relative overflow-hidden bg-white rounded-3xl p-6 transition-all duration-300 flex flex-col justify-center items-center text-center h-full hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)]"
+                    class="group relative overflow-hidden bg-white dark:bg-slate-800 rounded-3xl p-6 transition-all duration-300 flex flex-col justify-center items-center text-center h-full hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)]"
                 >
-                    <div class="w-14 h-14 rounded-full bg-slate-100 text-slate-900 flex items-center justify-center mb-3 group-hover:bg-[#7C3AED] group-hover:text-white transition-colors duration-300">
+                    <div class="w-14 h-14 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white flex items-center justify-center mb-3 group-hover:bg-[#7C3AED] group-hover:text-white transition-colors duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </div>
-                    <span class="font-semibold text-slate-900 group-hover:text-[#7C3AED] transition-colors">View All Conditions</span>
+                    <span class="font-semibold text-slate-900 dark:text-white group-hover:text-[#7C3AED] dark:group-hover:text-violet-400 transition-colors">View All Conditions</span>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- TMS COST & INSURANCE — Calculator Teaser -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-white dark:bg-slate-950">
         <div class="container mx-auto px-4">
             <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Left: Content -->
                 <div>
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full mb-6">
-                        <span class="text-xs font-semibold text-emerald-700 uppercase tracking-widest">Insurance & Cost</span>
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-900 rounded-full mb-6">
+                        <span class="text-xs font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">Insurance & Cost</span>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 mb-4">
+                    <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 dark:text-white mb-4">
                         How Much Does TMS Cost?
                     </h2>
-                    <p class="text-lg text-slate-500 leading-relaxed mb-8">
+                    <p class="text-lg text-slate-500 dark:text-slate-400 leading-relaxed mb-8">
                         Most insurance plans cover TMS therapy for depression. Out-of-pocket costs vary based on your provider, location, and treatment protocol.
                     </p>
 
                     <div class="space-y-4 mb-8">
                         <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0">
-                                <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center shrink-0">
+                                <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             </div>
                             <div>
-                                <div class="font-display font-bold text-slate-900 mb-1">With Insurance</div>
-                                <div class="text-sm text-slate-500">$30 - $75 per session copay. Many plans cover 100% after deductible.</div>
+                                <div class="font-display font-bold text-slate-900 dark:text-white mb-1">With Insurance</div>
+                                <div class="text-sm text-slate-500 dark:text-slate-400">$30 - $75 per session copay. Many plans cover 100% after deductible.</div>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
-                                <svg class="w-5 h-5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <div class="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-900/50 flex items-center justify-center shrink-0">
+                                <svg class="w-5 h-5 text-violet-600 dark:text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             </div>
                             <div>
-                                <div class="font-display font-bold text-slate-900 mb-1">Without Insurance</div>
-                                <div class="text-sm text-slate-500">$6,000 - $12,000 for a full course. Many clinics offer payment plans.</div>
+                                <div class="font-display font-bold text-slate-900 dark:text-white mb-1">Without Insurance</div>
+                                <div class="text-sm text-slate-500 dark:text-slate-400">$6,000 - $12,000 for a full course. Many clinics offer payment plans.</div>
                             </div>
                         </div>
                     </div>
@@ -1284,44 +1284,44 @@ const schema = JSON.stringify({
                 </div>
 
                 <!-- Right: Visual calculator preview -->
-                <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8">
-                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">Cost Estimate Preview</div>
+                <div class="bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
+                    <div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4">Cost Estimate Preview</div>
 
                     <!-- Insurance selector -->
                     <div class="mb-6">
-                        <div class="text-sm font-semibold text-slate-700 mb-2">Your Insurance</div>
+                        <div class="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Your Insurance</div>
                         <div class="flex flex-wrap gap-2">
                             <span class="px-3 py-1.5 bg-violet-600 text-white rounded-lg text-xs font-semibold">BlueCross</span>
-                            <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-600">Aetna</span>
-                            <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-600">Cigna</span>
-                            <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-600">United</span>
-                            <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-400">Other...</span>
+                            <span class="px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300">Aetna</span>
+                            <span class="px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300">Cigna</span>
+                            <span class="px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300">United</span>
+                            <span class="px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-400 dark:text-slate-400">Other...</span>
                         </div>
                     </div>
 
                     <!-- Estimate display -->
-                    <div class="bg-white rounded-xl p-6 border border-slate-100 mb-4">
+                    <div class="bg-white dark:bg-slate-700 rounded-xl p-6 border border-slate-100 dark:border-slate-600 mb-4">
                         <div class="flex items-end justify-between mb-4">
                             <div>
-                                <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">Estimated Per Session</div>
-                                <div class="text-3xl font-display font-bold text-slate-900">$45</div>
+                                <div class="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Estimated Per Session</div>
+                                <div class="text-3xl font-display font-bold text-slate-900 dark:text-white">$45</div>
                             </div>
                             <div class="text-right">
-                                <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">Full Course</div>
-                                <div class="text-xl font-display font-bold text-violet-600">$1,620</div>
+                                <div class="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Full Course</div>
+                                <div class="text-xl font-display font-bold text-violet-600 dark:text-violet-400">$1,620</div>
                             </div>
                         </div>
                         <!-- Progress bar -->
-                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
                             <div class="h-full w-[85%] bg-gradient-to-r from-violet-500 to-emerald-400 rounded-full"></div>
                         </div>
                         <div class="flex justify-between mt-2">
-                            <span class="text-[10px] text-emerald-600 font-semibold">85% covered by insurance</span>
-                            <span class="text-[10px] text-slate-400">36 sessions</span>
+                            <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">85% covered by insurance</span>
+                            <span class="text-[10px] text-slate-400 dark:text-slate-500">36 sessions</span>
                         </div>
                     </div>
 
-                    <div class="text-[11px] text-slate-400 text-center">Estimates based on average national data. Actual costs vary by plan.</div>
+                    <div class="text-[11px] text-slate-400 dark:text-slate-500 text-center">Estimates based on average national data. Actual costs vary by plan.</div>
                 </div>
             </div>
         </div>
@@ -1334,86 +1334,86 @@ const schema = JSON.stringify({
     <TMSSimulationTeaser />
 
     <!-- RESEARCH & CLINICAL EVIDENCE -->
-    <section class="py-16 bg-slate-50">
+    <section class="py-16 bg-slate-50 dark:bg-slate-800/50">
         <div class="container mx-auto px-4">
             <div class="text-center max-w-2xl mx-auto mb-14">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-violet-50 border border-violet-100 rounded-full mb-6">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-violet-50 dark:bg-violet-900/30 border border-violet-100 dark:border-violet-900 rounded-full mb-6">
                     <span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span>
-                    <span class="text-xs font-semibold text-violet-700 uppercase tracking-widest">Evidence-Based</span>
+                    <span class="text-xs font-semibold text-violet-700 dark:text-violet-400 uppercase tracking-widest">Evidence-Based</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 mb-4">
+                <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 dark:text-white mb-4">
                     Backed by Clinical Research
                 </h2>
-                <p class="text-lg text-slate-500">TMS has been studied in hundreds of clinical trials. Here are the numbers that matter.</p>
+                <p class="text-lg text-slate-500 dark:text-slate-400">TMS has been studied in hundreds of clinical trials. Here are the numbers that matter.</p>
             </div>
 
             <div class="max-w-5xl mx-auto">
                 <!-- Key stat cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                    <div class="bg-white rounded-2xl border border-slate-100 p-8 text-center">
-                        <div class="text-5xl font-display font-bold text-violet-600 mb-2">83%</div>
-                        <div class="font-display font-bold text-slate-900 mb-2">Response Rate</div>
-                        <p class="text-sm text-slate-500 mb-4">Patients who showed significant improvement in depressive symptoms during treatment.</p>
-                        <div class="text-xs text-slate-400 border-t border-slate-100 pt-3">
-                            <span class="font-semibold text-slate-500">Source:</span> O'Reardon et al., 2007<br/>
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-8 text-center">
+                        <div class="text-5xl font-display font-bold text-violet-600 dark:text-violet-400 mb-2">83%</div>
+                        <div class="font-display font-bold text-slate-900 dark:text-white mb-2">Response Rate</div>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Patients who showed significant improvement in depressive symptoms during treatment.</p>
+                        <div class="text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800 pt-3">
+                            <span class="font-semibold text-slate-500 dark:text-slate-400">Source:</span> O'Reardon et al., 2007<br/>
                             <span class="italic">Biological Psychiatry</span>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl border border-slate-100 p-8 text-center">
-                        <div class="text-5xl font-display font-bold text-emerald-500 mb-2">62%</div>
-                        <div class="font-display font-bold text-slate-900 mb-2">Remission Rate</div>
-                        <p class="text-sm text-slate-500 mb-4">Patients who achieved full remission from depression — not just improvement, but recovery.</p>
-                        <div class="text-xs text-slate-400 border-t border-slate-100 pt-3">
-                            <span class="font-semibold text-slate-500">Source:</span> Carpenter et al., 2012<br/>
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-8 text-center">
+                        <div class="text-5xl font-display font-bold text-emerald-500 dark:text-emerald-400 mb-2">62%</div>
+                        <div class="font-display font-bold text-slate-900 dark:text-white mb-2">Remission Rate</div>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Patients who achieved full remission from depression — not just improvement, but recovery.</p>
+                        <div class="text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800 pt-3">
+                            <span class="font-semibold text-slate-500 dark:text-slate-400">Source:</span> Carpenter et al., 2012<br/>
                             <span class="italic">Depression and Anxiety</span>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl border border-slate-100 p-8 text-center">
-                        <div class="text-5xl font-display font-bold text-cyan-500 mb-2">50+</div>
-                        <div class="font-display font-bold text-slate-900 mb-2">RCTs Published</div>
-                        <p class="text-sm text-slate-500 mb-4">Randomized controlled trials demonstrating TMS efficacy across depression, OCD, and anxiety.</p>
-                        <div class="text-xs text-slate-400 border-t border-slate-100 pt-3">
-                            <span class="font-semibold text-slate-500">Source:</span> Cochrane Library<br/>
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-8 text-center">
+                        <div class="text-5xl font-display font-bold text-cyan-500 dark:text-cyan-400 mb-2">50+</div>
+                        <div class="font-display font-bold text-slate-900 dark:text-white mb-2">RCTs Published</div>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Randomized controlled trials demonstrating TMS efficacy across depression, OCD, and anxiety.</p>
+                        <div class="text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800 pt-3">
+                            <span class="font-semibold text-slate-500 dark:text-slate-400">Source:</span> Cochrane Library<br/>
                             <span class="italic">Systematic Reviews</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Key milestones timeline -->
-                <div class="bg-white rounded-2xl border border-slate-100 p-8">
-                    <h3 class="font-display font-bold text-slate-900 text-lg mb-6">Key FDA Clearance Timeline</h3>
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-8">
+                    <h3 class="font-display font-bold text-slate-900 dark:text-white text-lg mb-6">Key FDA Clearance Timeline</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        <div class="relative pl-6 border-l-2 border-violet-200">
+                        <div class="relative pl-6 border-l-2 border-violet-200 dark:border-violet-800">
                             <div class="absolute left-[-7px] top-0 w-3 h-3 rounded-full bg-violet-500"></div>
-                            <div class="text-xl font-display font-bold text-violet-600">2008</div>
-                            <div class="text-sm font-semibold text-slate-900">Depression</div>
-                            <div class="text-xs text-slate-400 mt-1">First TMS device cleared for treatment-resistant depression</div>
+                            <div class="text-xl font-display font-bold text-violet-600 dark:text-violet-400">2008</div>
+                            <div class="text-sm font-semibold text-slate-900 dark:text-white">Depression</div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500 mt-1">First TMS device cleared for treatment-resistant depression</div>
                         </div>
-                        <div class="relative pl-6 border-l-2 border-violet-200">
+                        <div class="relative pl-6 border-l-2 border-violet-200 dark:border-violet-800">
                             <div class="absolute left-[-7px] top-0 w-3 h-3 rounded-full bg-violet-500"></div>
-                            <div class="text-xl font-display font-bold text-violet-600">2018</div>
-                            <div class="text-sm font-semibold text-slate-900">OCD</div>
-                            <div class="text-xs text-slate-400 mt-1">Deep TMS cleared for obsessive-compulsive disorder</div>
+                            <div class="text-xl font-display font-bold text-violet-600 dark:text-violet-400">2018</div>
+                            <div class="text-sm font-semibold text-slate-900 dark:text-white">OCD</div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500 mt-1">Deep TMS cleared for obsessive-compulsive disorder</div>
                         </div>
-                        <div class="relative pl-6 border-l-2 border-violet-200">
+                        <div class="relative pl-6 border-l-2 border-violet-200 dark:border-violet-800">
                             <div class="absolute left-[-7px] top-0 w-3 h-3 rounded-full bg-violet-500"></div>
-                            <div class="text-xl font-display font-bold text-violet-600">2020</div>
-                            <div class="text-sm font-semibold text-slate-900">Smoking</div>
-                            <div class="text-xs text-slate-400 mt-1">Cleared for smoking cessation treatment</div>
+                            <div class="text-xl font-display font-bold text-violet-600 dark:text-violet-400">2020</div>
+                            <div class="text-sm font-semibold text-slate-900 dark:text-white">Smoking</div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500 mt-1">Cleared for smoking cessation treatment</div>
                         </div>
-                        <div class="relative pl-6 border-l-2 border-emerald-200">
+                        <div class="relative pl-6 border-l-2 border-emerald-200 dark:border-emerald-800">
                             <div class="absolute left-[-7px] top-0 w-3 h-3 rounded-full bg-emerald-500"></div>
-                            <div class="text-xl font-display font-bold text-emerald-600">2022</div>
-                            <div class="text-sm font-semibold text-slate-900">Anxious Depression</div>
-                            <div class="text-xs text-slate-400 mt-1">Expanded approval for MDD with anxious features</div>
+                            <div class="text-xl font-display font-bold text-emerald-600 dark:text-emerald-400">2022</div>
+                            <div class="text-sm font-semibold text-slate-900 dark:text-white">Anxious Depression</div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500 mt-1">Expanded approval for MDD with anxious features</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="text-center mt-8">
-                    <a href="/research/" class="text-violet-600 font-semibold text-sm hover:text-violet-700 transition-colors inline-flex items-center gap-2">
+                    <a href="/research/" class="text-violet-600 dark:text-violet-400 font-semibold text-sm hover:text-violet-700 dark:hover:text-violet-300 transition-colors inline-flex items-center gap-2">
                         Explore All Clinical Research
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                     </a>
@@ -1597,39 +1597,39 @@ const schema = JSON.stringify({
     </section>
 
     <!-- FINAL CTA - QUANTUM STRIP -->
-    <section class="py-10 bg-slate-50 relative overflow-hidden border-t border-[#7C3AED]/30">
+    <section class="py-10 bg-slate-50 dark:bg-slate-800/50 relative overflow-hidden border-t border-[#7C3AED]/30 dark:border-slate-700">
         <!-- Animated Energy Effect -->
         <div class="absolute inset-0 z-0">
-             <div class="absolute inset-0 bg-[#7C3AED]/5 bg-[url('/grid.svg')] opacity-20"></div>
+             <div class="absolute inset-0 bg-[#7C3AED]/5 bg-[url('/grid.svg')] opacity-20 dark:opacity-10"></div>
              <div class="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#7C3AED] to-transparent w-full opacity-70 animate-pulse"></div>
              <div class="absolute -left-20 top-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[128px]"></div>
              <div class="absolute -right-20 bottom-0 w-96 h-96 bg-[#7C3AED]/10 rounded-full blur-[128px]"></div>
         </div>
 
         <div class="container mx-auto px-4 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-8 rounded-3xl bg-white/5 backdrop-blur-md border border-slate-100 p-8 lg:px-12 lg:py-10 relative overflow-hidden group">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8 rounded-3xl bg-white/5 dark:bg-slate-900/50 backdrop-blur-md border border-slate-100 dark:border-slate-700 p-8 lg:px-12 lg:py-10 relative overflow-hidden group">
                 <!-- Hover Glow -->
                 <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-[#7C3AED]/20 to-cyan-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-700 blur"></div>
-                
+
                 <!-- Content Left -->
                 <div class="text-center lg:text-left relative z-10 max-w-2xl">
-                    <h2 class="text-3xl font-semibold tracking-tight text-slate-900 mb-2 tracking-tight">
+                    <h2 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white mb-2 tracking-tight">
                         <span class="inline-block animate-pulse text-cyan-400 mr-2">●</span>
                         Ready to Transform Your Life?
                     </h2>
-                    <p class="text-slate-300 text-lg">
-                        Join thousands who have found relief. No drugs, no surgery, just <span class="text-slate-900 font-semibold">results.</span>
+                    <p class="text-slate-300 dark:text-slate-300 text-lg">
+                        Join thousands who have found relief. No drugs, no surgery, just <span class="text-slate-900 dark:text-white font-semibold">results.</span>
                     </p>
                 </div>
 
                 <!-- Actions Right -->
                 <div class="flex flex-col sm:flex-row items-center gap-4 relative z-10 w-full lg:w-auto">
-                    <a href="/us/" class="w-full sm:w-auto px-8 py-4 bg-white text-[#0F172A] font-semibold text-lg rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(94,234,212,0.6)] hover:bg-cyan-50 hover:scale-105 transition-all flex items-center justify-center gap-2 group/btn">
-                        <svg class="w-5 h-5 text-[#7C3AED] group-hover/btn:text-[#0F172A] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <a href="/us/" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-800 text-[#0F172A] dark:text-white font-semibold text-lg rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(94,234,212,0.6)] hover:bg-cyan-50 dark:hover:bg-slate-700 hover:scale-105 transition-all flex items-center justify-center gap-2 group/btn">
+                        <svg class="w-5 h-5 text-[#7C3AED] dark:group-hover/btn:text-cyan-400 group-hover/btn:text-[#0F172A] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         Find a Clinic
                     </a>
-                    
-                    <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto px-8 py-4 bg-slate-50/80 text-white font-semibold text-lg rounded-xl border border-slate-200 hover:bg-[#7C3AED] hover:border-[#7C3AED] transition-all flex items-center justify-center gap-2 group/btn2">
+
+                    <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto px-8 py-4 bg-slate-50/80 dark:bg-slate-800 text-white font-semibold text-lg rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-[#7C3AED] hover:border-[#7C3AED] transition-all flex items-center justify-center gap-2 group/btn2">
                         <span>Check Eligibility</span>
                         <svg class="w-5 h-5 group-hover/btn2:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                     </a>
@@ -1689,11 +1689,11 @@ const schema = JSON.stringify({
                     .map(
                         (item, index) => `
                     <div 
-                        class="suggestion-item px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0 flex items-center gap-3 transition-colors"
+                        class="suggestion-item px-4 py-3 hover:bg-slate-50 cursor-pointer border-b border-slate-50 last:border-0 flex items-center gap-3 transition-colors"
                         data-index="${index}"
                         data-value="${item.value}"
                     >
-                        <div class="w-8 h-8 rounded-lg bg-gray-100 text-gray-400 flex items-center justify-center shrink-0">
+                        <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center shrink-0">
                             ${getIconForType(item.type)}
                         </div>
                         <div>

@@ -33,6 +33,19 @@
     --radius-round: 1.5rem;
 }
 
+/* Marketing UI Kit Tokens — editorial warm palette */
+:root {
+    --ink: #0A1628;
+    --ink2: #1E2A3B;
+    --muted: #5A6B82;
+    --warm: #C9654A;
+    --line: #E6EAF0;
+    --paper: #FBFAF7;
+    --paper2: #F4F1EA;
+    --accent: #1B4B5A;
+    --accent2: #2E7A8F;
+}
+
 /* Base Styles */
 html {
     font-family: var(--font-sans);
@@ -467,6 +480,25 @@ table tbody tr {
     }
 }
 
+/* ── Shared keyframe library (consolidated from 14 components) ── */
+@keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+}
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-right {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+}
+
+/* Shared animation classes */
+.animate-scale-in         { animation: scale-in 0.2s ease-out; }
+.animate-fade-in          { animation: fade-in 0.2s ease-out; }
+.animate-slide-in-right    { animation: slide-in-right 0.25s ease-out; }
+
 .animate-fade-in-up {
     animation: fade-in-up 0.4s ease-out;
 }
@@ -493,11 +525,25 @@ table tbody tr {
 
 /* Gradient Text */
 .gradient-text {
-    background: linear-gradient(135deg, #7C3AED 0%, #06b6d4 100%);
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+
+/* Marketing UI Kit Token Utilities */
+.ink      { color: var(--ink); }
+.ink2     { color: var(--ink2); }
+.muted    { color: var(--muted); }
+.warm     { color: var(--warm); }
+.line     { border-color: var(--line); }
+.hair     { border-color: var(--line); }
+.paper    { background: var(--paper); }
+.paper2   { background: var(--paper2); }
+.bg-ink   { background: var(--ink); }
+.text-warm  { color: var(--warm); }
+.bg-accent  { background: var(--accent); }
+.text-accent { color: var(--accent); }
 
 /* Card Hover Effect */
 .card-hover {
@@ -613,14 +659,14 @@ table tbody tr {
 
 /* Uniform Color Palette */
 :root {
-    --gradient-primary: linear-gradient(135deg, #7C3AED 0%, #06b6d4 100%);
+    --gradient-primary: linear-gradient(135deg, #4F46E5 0%, #D946EF 100%);
     --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
     --gradient-card: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 
 /* Consistent gradient backgrounds */
 .bg-gradient-brand {
-    background: var(--gradient-primary);
+    background: var(--gradient-brand);
 }
 
 .bg-gradient-hero {

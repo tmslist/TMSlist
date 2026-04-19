@@ -72,7 +72,7 @@ export default function DoctorCmeCredits({ initialCredits = [], doctorId }: Doct
         </div>
         <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
           <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Active Credits</p>
-          <p className="text-2xl font-bold text-emerald-600 mt-1">{activeCredits}</p>
+          <p className="text-2xl font-bold text-blue-600 mt-1">{activeCredits}</p>
           <p className="text-xs text-gray-400 mt-1">Currently valid</p>
         </div>
         <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
@@ -152,7 +152,7 @@ export default function DoctorCmeCredits({ initialCredits = [], doctorId }: Doct
                   <span className={`text-sm font-bold ${
                     credit.status === 'expired' ? 'text-gray-400' :
                     credit.status === 'expiring_soon' ? 'text-amber-600' :
-                    'text-emerald-600'
+                    'text-blue-600'
                   }`}>{credit.creditsEarned}</span>
                 </div>
                 <div className="flex-1 min-w-0">

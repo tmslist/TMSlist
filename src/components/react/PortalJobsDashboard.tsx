@@ -115,7 +115,7 @@ export default function PortalJobsDashboard() {
           </div>
           <button
             onClick={() => { setSelectedJob(null); setView('create'); }}
-            class="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-xl transition-colors flex items-center gap-2"
+            class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl transition-colors flex items-center gap-2"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             Post a Job
@@ -144,7 +144,7 @@ export default function PortalJobsDashboard() {
             </p>
             <button
               onClick={() => { setSelectedJob(null); setView('create'); }}
-              class="px-6 py-2.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-xl transition-colors"
+              class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl transition-colors"
             >
               Post Your First Job
             </button>
@@ -185,7 +185,7 @@ export default function PortalJobsDashboard() {
                       {(job.applicationCount ?? 0) > 0 && (
                         <button
                           onClick={() => { setSelectedJob(job); setView('applications'); }}
-                          class="px-3 py-1.5 text-xs font-semibold text-violet-700 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors border border-violet-100"
+                          class="px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors border border-violet-100"
                         >
                           {(job.applicationCount ?? 0)} applicant{(job.applicationCount ?? 0) !== 1 ? 's' : ''}
                         </button>

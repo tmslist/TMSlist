@@ -73,7 +73,7 @@ export default function PortalJobApplications({ jobId, jobTitle, onBack }: Appli
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="w-8 h-8 border-2 border-violet-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -171,7 +171,7 @@ export default function PortalJobApplications({ jobId, jobTitle, onBack }: Appli
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Email</p>
-                      <a href={`mailto:${selected.applicantEmail}`} className="text-sm text-violet-600 hover:text-violet-500">
+                      <a href={`mailto:${selected.applicantEmail}`} className="text-sm text-emerald-600 hover:text-emerald-500">
                         {selected.applicantEmail}
                       </a>
                     </div>
@@ -188,7 +188,7 @@ export default function PortalJobApplications({ jobId, jobTitle, onBack }: Appli
                   {selected.linkedInUrl && (
                     <div>
                       <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">LinkedIn</p>
-                      <a href={selected.linkedInUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-violet-600 hover:text-violet-500">
+                      <a href={selected.linkedInUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-emerald-600 hover:text-emerald-500">
                         {selected.linkedInUrl}
                       </a>
                     </div>
@@ -197,7 +197,7 @@ export default function PortalJobApplications({ jobId, jobTitle, onBack }: Appli
                   {selected.resumeUrl && (
                     <div>
                       <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Resume</p>
-                      <a href={selected.resumeUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-violet-600 hover:text-violet-500">
+                      <a href={selected.resumeUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-emerald-600 hover:text-emerald-500">
                         View Resume →
                       </a>
                     </div>

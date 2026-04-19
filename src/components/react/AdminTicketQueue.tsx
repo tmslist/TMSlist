@@ -280,12 +280,6 @@ function TicketDetailPanel({
           </div>
         </div>
       </div>
-      <style>{`
-        @keyframes slide-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
-        .animate-slide-in-right { animation: slide-in-right 0.25s ease-out; }
-        @keyframes fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-in { animation: fade-in 0.2s ease-out; }
-      `}</style>
     </>
   );
 }
@@ -376,7 +370,6 @@ function NewTicketModal({ onClose, onCreated }: { onClose: () => void; onCreated
           </div>
         </div>
       </div>
-      <style>{`@keyframes scale-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } } .animate-scale-in { animation: scale-in 0.2s ease-out; }`}</style>
     </>
   );
 }

@@ -14,7 +14,7 @@ if (!session) {
     <!-- Header -->
     <div class="bg-white border-b border-gray-200">
       <div class="max-w-4xl mx-auto px-4 py-6">
-        <a href="/account" class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-indigo-600 mb-4 transition-colors">
+        <a href="/account" class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-violet-600 mb-4 transition-colors">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
           Back to Account
         </a>
@@ -44,7 +44,7 @@ if (!session) {
           </div>
           <h3 class="font-semibold text-gray-900 text-lg">No activity yet</h3>
           <p class="text-gray-500 text-sm mt-1">Participate in the community to see your activity here.</p>
-          <a href="/community" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-indigo-600 text-white text-sm font-semibold rounded-xl hover:bg-indigo-700 transition-colors">
+          <a href="/community" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-xl hover:bg-violet-700 transition-colors">
             Explore Community
           </a>
         </div>
@@ -63,7 +63,7 @@ if (!session) {
           </div>
           <h3 class="font-semibold text-gray-900 text-lg">No bookmarks yet</h3>
           <p class="text-gray-500 text-sm mt-1">Bookmark community posts to save them for later.</p>
-          <a href="/community" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-indigo-600 text-white text-sm font-semibold rounded-xl hover:bg-indigo-700 transition-colors">
+          <a href="/community" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-xl hover:bg-violet-700 transition-colors">
             Browse Community
           </a>
         </div>
@@ -82,7 +82,7 @@ if (!session) {
           </div>
           <h3 class="font-semibold text-gray-900 text-lg">Not following anyone</h3>
           <p class="text-gray-500 text-sm mt-1">Follow community members to see their posts in your feed.</p>
-          <a href="/community" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-indigo-600 text-white text-sm font-semibold rounded-xl hover:bg-indigo-700 transition-colors">
+          <a href="/community" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-xl hover:bg-violet-700 transition-colors">
             Find Members
           </a>
         </div>
@@ -127,13 +127,13 @@ if (!session) {
       list.innerHTML = items.map((item: any) => `
         <div class="bg-white rounded-2xl border border-gray-200 p-5 flex gap-4">
           <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center shrink-0">
-            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a11.841 11.841 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+            <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a11.841 11.841 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
           </div>
           <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-gray-900">${esc(item.title)}</p>
             <p class="text-xs text-gray-500 mt-0.5">${item.action} · ${new Date(item.createdAt).toLocaleDateString()}</p>
           </div>
-          ${item.postSlug ? `<a href="/community/${item.category}/${item.postSlug}" class="text-xs text-indigo-600 font-semibold hover:text-indigo-700 shrink-0">View →</a>` : ''}
+          ${item.postSlug ? `<a href="/community/${item.category}/${item.postSlug}" class="text-xs text-violet-600 font-semibold hover:text-indigo-700 shrink-0">View →</a>` : ''}
         </div>
       `).join('');
     } catch {

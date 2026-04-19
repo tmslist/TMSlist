@@ -97,7 +97,6 @@ function Modal({ open, onClose, title, children }: { open: boolean; onClose: () 
           {children}
         </div>
       </div>
-      <style>{`@keyframes scale-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } } .animate-scale-in { animation: scale-in 0.2s ease-out; }`}</style>
     </>
   );
 }
@@ -629,8 +628,7 @@ export default function AdminHelpCenter() {
               </div>
             </div>
           </div>
-          <style>{`@keyframes scale-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } } .animate-scale-in { animation: scale-in 0.2s ease-out; }`}</style>
-        </>
+            </>
       )}
 
       {confirmDeleteCategory && (
@@ -646,8 +644,7 @@ export default function AdminHelpCenter() {
               </div>
             </div>
           </div>
-          <style>{`@keyframes scale-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } } .animate-scale-in { animation: scale-in 0.2s ease-out; }`}</style>
-        </>
+            </>
       )}
     </div>
   );

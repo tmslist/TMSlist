@@ -451,7 +451,7 @@ export default function AdminWebhookEndpoints() {
                 <div className="mt-3 bg-white rounded border border-gray-200 p-3">
                   <p className="text-xs text-gray-500 mb-1">Expected Header</p>
                   <code className="text-xs font-mono text-gray-700">
-                    X-TMSList-Signature: sha256=<span className="text-violet-600">{'{'{'}}payload_hash{'}'}'}</span>
+                    X-TMSList-Signature: sha256=<span className="text-violet-600">YOUR_PAYLOAD_HASH</span>
                   </code>
                 </div>
               </div>

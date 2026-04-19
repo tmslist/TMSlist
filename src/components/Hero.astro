@@ -14,23 +14,23 @@ const { title, subtitle, imageSubject, imageType = 'hero' } = Astro.props;
 <!-- Premium Hero: Subtle gradient background with pattern -->
 <section class="relative bg-white border-b border-gray-100 overflow-hidden">
     <!-- Abstract Background Pattern -->
-    <div class="absolute inset-0 bg-gradient-to-b from-indigo-50/40 via-fuchsia-50/20 to-white pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-violet-50/40 via-fuchsia-50/20 to-white pointer-events-none"></div>
     <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
-        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-indigo-600 to-fuchsia-500 opacity-15 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-violet-600 to-fuchsia-500 opacity-15 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
     </div>
 
     <div class="container mx-auto px-4 py-20 lg:py-24 relative z-10 text-center">
         <!-- Trust Pill -->
-        <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur border border-indigo-100 rounded-full py-1 px-3 mb-8 shadow-sm animate-fade-in-up">
+        <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur border border-violet-100 rounded-full py-1 px-3 mb-8 shadow-sm animate-fade-in-up">
             <span class="flex h-2 w-2 rounded-full bg-green-500"></span>
-            <span class="text-xs font-semibold text-gray-600 tracking-wide uppercase">Verified Medical Directory</span>
+            <span class="text-xs font-semibold text-slate-600 tracking-wide uppercase">Verified Medical Directory</span>
         </div>
 
-        <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-gray-900 tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
+        <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-slate-900 tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
             {title}
         </h1>
 
-        <p class="text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
+        <p class="text-xl text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
             {subtitle}
         </p>
 
@@ -49,7 +49,7 @@ const { title, subtitle, imageSubject, imageType = 'hero' } = Astro.props;
         <slot name="search" />
 
         <!-- Trust Signals Row -->
-        <div class="mt-12 pt-8 border-t border-gray-100/50 flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-semibold text-gray-400">
+        <div class="mt-12 pt-8 border-t border-slate-100/50 flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-semibold text-slate-400">
              <div class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                 Verified Providers

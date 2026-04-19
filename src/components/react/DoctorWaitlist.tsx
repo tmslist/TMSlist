@@ -101,7 +101,7 @@ export default function DoctorWaitlist({ initialEntries = [], doctorId }: Doctor
         </div>
         <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
           <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Enrolled</p>
-          <p className="text-2xl font-bold text-emerald-600 mt-1">{entries.filter(e => e.status === 'enrolled').length}</p>
+          <p className="text-2xl font-bold text-blue-600 mt-1">{entries.filter(e => e.status === 'enrolled').length}</p>
         </div>
       </div>
 
@@ -192,7 +192,7 @@ export default function DoctorWaitlist({ initialEntries = [], doctorId }: Doctor
                         {entry.status === 'notified' && (
                           <button
                             onClick={() => handleEnroll(entry.id)}
-                            className="text-xs text-emerald-600 hover:text-emerald-700 font-medium whitespace-nowrap"
+                            className="text-xs text-blue-600 hover:text-emerald-700 font-medium whitespace-nowrap"
                           >
                             Enroll
                           </button>

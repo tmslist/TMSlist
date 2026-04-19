@@ -1,0 +1,57 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import DoctorSidebar from "../../components/react/DoctorSidebar";
+import DoctorProfileEditor from "../../components/react/DoctorProfileEditor";
+import { getSessionFromRequest } from "../../utils/auth";
+import { db } from "../../db";
+import { doctors } from "../../db/schema";
+import { eq } from "drizzle-orm";
+
+const session = getSessionFromRequest(Astro.request);
+if (!session) return Astro.redirect("/portal/login/");
+
+// Load doctor data associated with this user
+const doctorRows = await db
+  .select()
+  .from(doctors)
+  .where(eq(doctors.clinicId, session.clinicId ?? ''))
+  .limit(1);
+
+const doctor = doctorRows[0] ?? null;
+---
+<Layout title="Edit Profile | Doctor Portal | TMS List" description="Edit your doctor profile." noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <DoctorSidebar client:load currentPage="profile" userEmail={session.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="mb-6">
+          <a href="/doctor/dashboard/" class="text-sm text-blue-600 hover:text-blue-700 font-medium mb-2 inline-block">
+            &larr; Back to Dashboard
+          </a>
+          <h1 class="text-2xl font-semibold text-gray-900">Edit Profile</h1>
+          <p class="text-gray-500 text-sm mt-1">Manage your public doctor profile</p>
+        </div>
+        <DoctorProfileEditor
+          client:load
+          doctorId={doctor?.id}
+          initialData={
+            doctor ? {
+              id: doctor.id,
+              name: doctor.name,
+              firstName: doctor.firstName,
+              lastName: doctor.lastName,
+              credential: doctor.credential,
+              title: doctor.title,
+              school: doctor.school,
+              yearsExperience: doctor.yearsExperience,
+              specialties: doctor.specialties,
+              bio: doctor.bio,
+              imageUrl: doctor.imageUrl,
+            } : null
+          }
+        />
+      </div>
+    </main>
+  </div>
+</Layout>

@@ -13,6 +13,7 @@ interface Props {
 	breadcrumbs?: BreadcrumbItem[];
 	noindex?: boolean;
 	hreflang?: { lang: string; url: string }[];
+	contentType?: string; // og:type override, e.g. "article" for blog posts
 }
 
 import "../styles/global.css";
@@ -27,7 +28,7 @@ import SocialProofToast from "../components/react/SocialProofToast";
 import ExitIntent from "../components/react/ExitIntent";
 import UTMCapture from "../components/react/UTMCapture";
 
-const { title, description, image, canonical, schema, breadcrumbs, noindex, hreflang } = Astro.props;
+const { title, description, image, canonical, schema, breadcrumbs, noindex, hreflang, contentType } = Astro.props;
 
 const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
 
@@ -107,7 +108,7 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 		{allHreflang?.length && <link rel="alternate" hreflang="x-default" href={`${siteUrl}/us${subPath || '/'}`} />}
 <meta name="google-site-verification" content="qeagmPIKArLizrkNipilA-09Wznqwx0l9uxZWOXd-fs" />
 		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={contentType || "website"} />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={metaDescription} />
@@ -182,7 +183,7 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 		<ExitIntent client:idle />
 		<CookieConsent />
 	<!-- Mobile Bottom Tab Bar -->
-	<nav id="mobile-tab-bar" class="fixed bottom-0 left-0 right-0 z-[140] bg-white/95 backdrop-blur-lg border-t border-gray-200 shadow-[0_-4px_20px_rgb(0,0,0,0.06)] lg:hidden transition-transform duration-300 translate-y-0" aria-label="Mobile navigation">
+	<nav id="mobile-tab-bar" class="fixed bottom-0 left-0 right-0 z-[140] bg-white/95 backdrop-blur-lg border-t border-slate-200/80 shadow-[0_-4px_20px_rgb(0,0,0,0.06)] lg:hidden transition-transform duration-300 translate-y-0" aria-label="Mobile navigation">
 		<div class="flex items-center justify-around px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2">
 			<a href="/us/" class="mobile-tab-item flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors" data-tab="find">
 				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
@@ -197,7 +198,7 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 				<span class="text-[10px] font-semibold tracking-wide">Compare</span>
 			</a>
 			<a href="/" class="mobile-tab-item flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors" data-tab="home">
-				<div class="w-11 h-11 -mt-5 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center shadow-lg shadow-violet-600/30">
+				<div class="w-11 h-11 -mt-5 rounded-2xl bg-gradient-to-br from-indigo-600 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
 					<svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M12 2C9.5 2 7.5 3.2 6.2 5 4.8 4.2 3.2 4.5 2.2 5.8 1 7.2 1.2 9.2 2.5 10.5 1.5 11.5 1 13 1 14.5 1 17 3 19 5.5 19.5 6 20.5 6.8 21.5 8 22c1.5.5 3.2.2 4-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
 						<path d="M12 2c2.5 0 4.5 1.2 5.8 3 1.4-.8 3-.5 4 .8 1.2 1.4 1 3.4-.3 4.7 1 1 1.5 2.5 1.5 4 0 2.5-2 4.5-4.5 5-.5 1-1.3 2-2.5 2.5-1.5.5-3.2.2-4-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
@@ -223,7 +224,7 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 	<!-- Dark Mode Toggle -->
 	<button
 		id="theme-toggle"
-		class="fixed top-4 left-4 sm:left-auto sm:right-16 z-[150] w-10 h-10 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur border border-gray-200 dark:border-slate-600 shadow-sm flex items-center justify-center hover:scale-110 transition-all"
+		class="fixed top-4 left-4 sm:left-auto sm:right-16 z-[150] w-10 h-10 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur border border-slate-200 dark:border-slate-600 shadow-sm flex items-center justify-center hover:scale-110 transition-all"
 		aria-label="Toggle dark mode"
 	>
 		<svg id="sun-icon" class="w-5 h-5 text-amber-500 hidden" fill="currentColor" viewBox="0 0 20 20">
@@ -280,9 +281,9 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 				var isActive = (href === '/' && path === '/') || (href !== '/' && path.startsWith(href));
 				if (isActive) {
 					tab.classList.add('text-violet-600');
-					tab.classList.remove('text-gray-400');
+					tab.classList.remove('text-slate-400');
 				} else {
-					tab.classList.add('text-gray-400');
+					tab.classList.add('text-slate-400');
 					tab.classList.remove('text-violet-600');
 				}
 			});
@@ -318,7 +319,7 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 			var btn = document.createElement('button');
 			btn.id = 'scroll-top-btn';
 			btn.setAttribute('aria-label', 'Scroll to top');
-			btn.className = 'fixed bottom-24 right-6 z-[150] w-10 h-10 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center text-gray-500 hover:text-violet-600 hover:border-violet-200 hover:shadow-lg transition-all duration-300 opacity-0 invisible translate-y-2 pointer-events-none cursor-pointer focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2';
+			btn.className = 'fixed bottom-24 right-6 z-[150] w-10 h-10 bg-white border border-slate-200 rounded-full shadow-md flex items-center justify-center text-slate-500 hover:text-violet-600 hover:border-violet-200 hover:shadow-lg transition-all duration-300 opacity-0 invisible translate-y-2 pointer-events-none cursor-pointer focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2';
 			btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>';
 			btn.style.cssText = 'bottom: 6rem; right: 1.5rem;';
 			document.body.appendChild(btn);

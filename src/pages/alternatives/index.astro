@@ -60,14 +60,14 @@ const schema = JSON.stringify({
   <main class="container mx-auto px-4 py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {enrichedAlts.map((alt) => (
-        <a href={`/alternatives/${alt.slug}/`} class="group bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-indigo-200 transition-all">
+        <a href={`/alternatives/${alt.slug}/`} class="group bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-violet-200 transition-all">
           <div class="flex items-center gap-3 mb-3">
             <span class={`px-2.5 py-1 ${statusColors[alt.fdaStatus] || 'bg-slate-100 text-slate-600'} text-xs font-semibold rounded-lg`}>{alt.fdaStatus}</span>
             <span class="text-xs text-slate-400">Onset: {alt.speed}</span>
           </div>
-          <h2 class="text-lg font-display font-bold text-slate-900 group-hover:text-indigo-600 transition-colors mb-2">{alt.title}</h2>
+          <h2 class="text-lg font-display font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-2">{alt.title}</h2>
           <p class="text-sm text-slate-600 leading-relaxed mb-3">{alt.description}</p>
-          <span class="text-xs text-indigo-600 font-semibold group-hover:underline">Compare with TMS →</span>
+          <span class="text-xs text-violet-600 font-semibold group-hover:underline">Compare with TMS →</span>
         </a>
       ))}
     </div>

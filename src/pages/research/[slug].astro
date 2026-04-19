@@ -20,7 +20,7 @@ export async function getStaticPaths() {
     .filter(({ slug }) => !contentSlugsSet.has(slug))
     .map(({ slug, title }) => ({
       params: { slug },
-      props: { title, description: '', hasContent: false, entry: null },
+      props: { title, description: title ? `TMS research: ${title}. Scientific evidence, clinical studies, and findings on transcranial magnetic stimulation.` : '', hasContent: false, entry: null },
     }));
 
   return [...contentPaths, ...fallbackPaths];
@@ -35,12 +35,15 @@ if (hasContent && entry) {
 }
 
 const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const now = new Date().toISOString();
 const articleSchema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": title,
   "description": description || `TMS research: ${title}.`,
   "url": `${siteUrl}/research/${slug}/`,
+  "datePublished": now,
+  "dateModified": now,
   "author": { "@type": "Organization", "name": "TMS List Editorial Team", "url": siteUrl },
   "publisher": { "@type": "Organization", "name": "TMS List", "url": siteUrl, "logo": { "@type": "ImageObject", "url": `${siteUrl}/favicon.svg` } },
   "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/research/${slug}/` },

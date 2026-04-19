@@ -21,7 +21,7 @@ export async function getStaticPaths() {
     .filter(({ slug }) => !contentSlugsSet.has(slug))
     .map(({ slug, title }) => ({
       params: { slug },
-      props: { title, description: '', hasContent: false, entry: null },
+      props: { title, description: title ? `TMS therapy considerations and eligibility for ${title}.` : '', hasContent: false, entry: null },
     }));
 
   return [...contentPaths, ...fallbackPaths];

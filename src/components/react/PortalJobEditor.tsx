@@ -114,12 +114,12 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
           <div key={s} className="flex items-center gap-2">
             <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
               i < step ? 'bg-emerald-500 text-white' :
-              i === step ? 'bg-violet-600 text-white' :
+              i === step ? 'bg-emerald-600 text-white' :
               'bg-slate-200 text-slate-500'
             }`}>
               {i < step ? '✓' : i + 1}
             </div>
-            <span className={`text-xs font-medium hidden sm:block ${i === step ? 'text-violet-700' : 'text-slate-400'}`}>{s}</span>
+            <span className={`text-xs font-medium hidden sm:block ${i === step ? 'text-emerald-700' : 'text-slate-400'}`}>{s}</span>
             {i < STEPS.length - 1 && (
               <div className={`w-8 h-0.5 rounded ${i < step ? 'bg-emerald-500' : 'bg-slate-200'}`} />
             )}
@@ -184,7 +184,7 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
                   type="checkbox"
                   checked={remote}
                   onChange={(e) => setRemote(e.target.checked)}
-                  className="w-4 h-4 text-violet-600 rounded border-slate-300 focus:ring-violet-500"
+                  className="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500"
                 />
                 <span className="text-sm text-slate-600">Remote work available</span>
               </label>
@@ -367,7 +367,7 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
           <button
             type="button"
             onClick={next}
-            className="px-6 py-2.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-xl transition-colors"
+            className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl transition-colors"
           >
             Next →
           </button>

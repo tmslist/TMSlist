@@ -2,8 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import { TECHNOLOGY_SLUGS, PROTOCOL_SLUGS } from '../../utils/seo_slugs';
 
-const title = "TMS Technology & Machines | NeuroStar, BrainsWay, MagVenture, Magstim & More";
-const description = "Compare FDA-cleared TMS devices — NeuroStar, BrainsWay Deep TMS, MagVenture, Magstim, CloudTMS, Nexstim, Apollo TMS. Learn about coil types, protocols, and clinical evidence.";
+const title = "TMS Technology & Devices | TMS List";
+const description = "Compare FDA-cleared TMS devices — NeuroStar, BrainsWay, MagVenture, Magstim, CloudTMS, Nexstim. Learn about coil types, protocols, and clinical evidence.";
 
 const siteUrl = import.meta.env.SITE_URL || 'https://tmslist.com';
 
@@ -97,7 +97,7 @@ const deviceMeta: Record<string, { accent: string; accentBg: string; accentBorde
   'cloudtms': { accent: 'text-sky-600', accentBg: 'bg-sky-500', accentBorder: 'border-sky-200', desc: 'Cloud-connected TMS platform with real-time treatment monitoring and analytics dashboard for clinicians. Designed for high-volume practice efficiency with automated session tracking.', coilType: 'Figure-8', fdaCleared: true, highlight: 'Cloud Analytics', fdaYear: '2019', manufacturer: 'CloudTMS', conditions: ['MDD'], video: 'PLACEHOLDER_VIDEO_ID' },
   'apollo-tms': { accent: 'text-amber-600', accentBg: 'bg-amber-500', accentBorder: 'border-amber-200', desc: 'Advanced TMS system with precision targeting and ergonomic patient positioning. Features an intuitive interface designed for streamlined clinical workflows and patient comfort.', coilType: 'Figure-8', fdaCleared: true, highlight: 'Precision Targeting', fdaYear: '2020', manufacturer: 'APECS / TMS Solutions', conditions: ['MDD'], video: 'PLACEHOLDER_VIDEO_ID' },
   'exomind': { accent: 'text-cyan-600', accentBg: 'bg-cyan-500', accentBorder: 'border-cyan-200', desc: 'Wellness-focused TMS technology with a streamlined treatment workflow designed for high-volume practices. Less clinical evidence base than established platforms.', coilType: 'Proprietary', fdaCleared: false, highlight: 'Wellness Focus', fdaYear: '—', manufacturer: 'Exomind', conditions: ['Wellness Use'], video: 'PLACEHOLDER_VIDEO_ID' },
-  'nexstim': { accent: 'text-indigo-600', accentBg: 'bg-indigo-500', accentBorder: 'border-indigo-200', desc: 'Navigated TMS with real-time MRI-guided targeting for precise cortical stimulation mapping. Used primarily in academic and research settings for individualized targeting.', coilType: 'Navigated', fdaCleared: true, highlight: 'MRI-Guided', fdaYear: '2018', manufacturer: 'Nexstim', conditions: ['MDD', 'Stroke Rehab', 'Pre-Surgical Mapping'], video: 'PLACEHOLDER_VIDEO_ID' },
+  'nexstim': { accent: 'text-violet-600', accentBg: 'bg-violet-500', accentBorder: 'border-violet-200', desc: 'Navigated TMS with real-time MRI-guided targeting for precise cortical stimulation mapping. Used primarily in academic and research settings for individualized targeting.', coilType: 'Navigated', fdaCleared: true, highlight: 'MRI-Guided', fdaYear: '2018', manufacturer: 'Nexstim', conditions: ['MDD', 'Stroke Rehab', 'Pre-Surgical Mapping'], video: 'PLACEHOLDER_VIDEO_ID' },
 };
 
 const defaultMeta = { accent: 'text-purple-600', accentBg: 'bg-purple-500', accentBorder: 'border-purple-200', desc: 'FDA-cleared TMS system for clinical depression treatment.', coilType: 'Standard', fdaCleared: false, highlight: '', fdaYear: '', manufacturer: 'Unknown', conditions: ['MDD'], video: 'PLACEHOLDER_VIDEO_ID' };

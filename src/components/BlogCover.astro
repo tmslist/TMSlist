@@ -17,13 +17,13 @@ const { title, subtitle, category, readTime, date, slug } = Astro.props;
 
 // Deterministic accent color from category
 const categoryAccents: Record<string, { from: string; to: string; badge: string; badgeText: string }> = {
-  'Research':      { from: 'from-indigo-600', to: 'to-indigo-950', badge: 'bg-indigo-500/30', badgeText: 'text-indigo-200' },
-  'Treatment':     { from: 'from-indigo-600', to: 'to-fuchsia-900', badge: 'bg-fuchsia-500/30', badgeText: 'text-fuchsia-200' },
-  'Insurance':     { from: 'from-indigo-700', to: 'to-slate-900', badge: 'bg-amber-500/30', badgeText: 'text-amber-200' },
+  'Research':      { from: 'from-violet-600', to: 'to-indigo-950', badge: 'bg-indigo-500/30', badgeText: 'text-indigo-200' },
+  'Treatment':     { from: 'from-violet-600', to: 'to-fuchsia-900', badge: 'bg-fuchsia-500/30', badgeText: 'text-fuchsia-200' },
+  'Insurance':     { from: 'from-violet-700', to: 'to-slate-900', badge: 'bg-amber-500/30', badgeText: 'text-amber-200' },
   'FAQ':           { from: 'from-fuchsia-600', to: 'to-indigo-900', badge: 'bg-fuchsia-500/30', badgeText: 'text-fuchsia-200' },
-  'Patient Guide': { from: 'from-indigo-500', to: 'to-fuchsia-800', badge: 'bg-indigo-500/30', badgeText: 'text-indigo-200' },
+  'Patient Guide': { from: 'from-violet-500', to: 'to-fuchsia-800', badge: 'bg-indigo-500/30', badgeText: 'text-indigo-200' },
 };
-const accent = categoryAccents[category || ''] || { from: 'from-indigo-600', to: 'to-fuchsia-900', badge: 'bg-indigo-500/30', badgeText: 'text-indigo-200' };
+const accent = categoryAccents[category || ''] || { from: 'from-violet-600', to: 'to-fuchsia-900', badge: 'bg-indigo-500/30', badgeText: 'text-indigo-200' };
 const cacheKey = `ai-img:blog-cover:${slug}`;
 ---
 
