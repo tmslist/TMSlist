@@ -1295,6 +1295,90 @@ export const cookieConsents = pgTable('cookie_consents', {
   index('idx_cookie_consents_user').on(table.userId),
 ]);
 
+// ── CONSENT RECORDS ──────────────────────────────────
+
+export const consentRecords = pgTable('consent_records', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').references(() => users.id),
+  email: text('email'),
+  consentType: text('consent_type').notNull(),
+  category: text('category'),
+  granted: boolean('granted').default(false),
+  withdrawnAt: timestamp('withdrawn_at', { withTimezone: true }),
+  ipAddress: text('ip_address'),
+  userAgent: text('user_agent'),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_consent_records_user').on(table.userId),
+  index('idx_consent_records_email').on(table.email),
+  index('idx_consent_records_type').on(table.consentType),
+]);
+
+// ── CLAIMS ──────────────────────────────────
+
+export const claims = pgTable('claims', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  patientId: uuid('patient_id').references(() => users.id),
+  clinicId: uuid('clinic_id').references(() => clinics.id),
+  insurerId: text('insurer_id'),
+  planId: text('plan_id'),
+  memberId: text('member_id'),
+  status: text('status').notNull().default('submitted'),
+  submittedAt: timestamp('submitted_at', { withTimezone: true }).defaultNow().notNull(),
+  processedAt: timestamp('processed_at', { withTimezone: true }),
+  approvedAt: timestamp('approved_at', { withTimezone: true }),
+  paidAt: timestamp('paid_at', { withTimezone: true }),
+  appealSubmittedAt: timestamp('appeal_submitted_at', { withTimezone: true }),
+  claimAmount: decimal('claim_amount', { precision: 10, scale: 2 }),
+  approvedAmount: decimal('approved_amount', { precision: 10, scale: 2 }),
+  paidAmount: decimal('paid_amount', { precision: 10, scale: 2 }),
+  denialReason: text('denial_reason'),
+  appealReason: text('appeal_reason'),
+  appealStatus: text('appeal_status'),
+  notes: text('notes'),
+  timeline: jsonb('timeline').$type<{ status: string; timestamp: string; note?: string }[]>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_claims_patient').on(table.patientId),
+  index('idx_claims_clinic').on(table.clinicId),
+  index('idx_claims_status').on(table.status),
+  index('idx_claims_submitted').on(table.submittedAt),
+]);
+
+// ── INSURANCE ELIGIBILITY CHECKS ──────────────────────────────────
+
+export const insuranceEligibilityChecks = pgTable('insurance_eligibility_checks', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  patientId: uuid('patient_id').references(() => users.id),
+  clinicId: uuid('clinic_id').references(() => clinics.id),
+  insurerId: text('insurer_id'),
+  planId: text('plan_id'),
+  memberId: text('member_id'),
+  groupNumber: text('group_number'),
+  status: text('status').notNull().default('pending'),
+  verifiedAt: timestamp('verified_at', { withTimezone: true }),
+  coverageDetails: jsonb('coverage_details').$type<{
+    coversTMS?: boolean;
+    copay?: number;
+    deductible?: number;
+    deductibleMet?: number;
+    outOfPocketMax?: number;
+    priorAuthRequired?: boolean;
+    coveragePercent?: number;
+    planType?: string;
+    metalLevel?: string;
+  }>(),
+  eligibilityDetails: jsonb('eligibility_details').$type<Record<string, unknown>>(),
+  errorMessage: text('error_message'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_eligibility_patient').on(table.patientId),
+  index('idx_eligibility_status').on(table.status),
+  index('idx_eligibility_verified').on(table.verifiedAt),
+]);
+
 // ── LEADERBOARDS ──────────────────────────────────
 
 export const leaderboards = pgTable('leaderboards', {
