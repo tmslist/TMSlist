@@ -117,7 +117,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
     return (
       <div className="w-full bg-white rounded-2xl shadow-lg p-8 text-center">
         <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-indigo-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+          <svg className="w-8 h-8 text-violet-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
           </svg>
         </div>
@@ -127,7 +127,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
         <p className="text-sm text-gray-500 mb-6">The link expires in 15 minutes. Check your spam folder if you don't see it.</p>
         <button
           onClick={() => { setStatus('idle'); setEmail(''); }}
-          className="text-sm text-indigo-600 hover:text-indigo-700 font-semibold"
+          className="text-sm text-violet-600 hover:text-violet-700 font-semibold"
         >
           Use a different email
         </button>
@@ -237,7 +237,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
                 minLength={2}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
                 placeholder="Your full name"
               />
             </div>
@@ -252,7 +252,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
               placeholder="you@example.com"
             />
           </div>
@@ -269,7 +269,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
                 autoComplete={mode === 'register' ? 'new-password' : 'current-password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all"
+                className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
                 placeholder={mode === 'register' ? 'Min 8 characters' : 'Enter password'}
               />
               <button
@@ -308,16 +308,16 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
           {mode === 'register' && (
             <p className="text-xs text-gray-400">
               By creating an account, you agree to our{' '}
-              <a href="/legal/terms-of-service" className="text-indigo-600 hover:underline">Terms of Service</a>
+              <a href="/legal/terms-of-service" className="text-violet-600 hover:underline">Terms of Service</a>
               {' '}and{' '}
-              <a href="/legal/privacy-policy" className="text-indigo-600 hover:underline">Privacy Policy</a>.
+              <a href="/legal/privacy-policy" className="text-violet-600 hover:underline">Privacy Policy</a>.
             </p>
           )}
 
           <button
             type="submit"
             disabled={status === 'submitting'}
-            className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm disabled:opacity-50"
+            className="w-full py-3.5 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm disabled:opacity-50"
           >
             {status === 'submitting' ? (mode === 'register' ? 'Creating account...' : 'Signing in...') : (mode === 'register' ? 'Create Account' : 'Sign In')}
           </button>
@@ -336,7 +336,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
               placeholder="you@example.com"
             />
           </div>
@@ -344,7 +344,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
             type="button"
             onClick={handleMagicSubmit}
             disabled={status === 'submitting'}
-            className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm disabled:opacity-50"
+            className="w-full py-3.5 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm disabled:opacity-50"
           >
             {status === 'submitting' ? 'Sending link...' : 'Send Login Link'}
           </button>
@@ -365,14 +365,14 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
         {mode === 'register' ? (
           <>
             Already have an account?{' '}
-            <button type="button" onClick={() => { setMode('login'); setStatus('idle'); setErrorMsg(''); }} className="text-indigo-600 font-semibold hover:text-indigo-700">
+            <button type="button" onClick={() => { setMode('login'); setStatus('idle'); setErrorMsg(''); }} className="text-violet-600 font-semibold hover:text-violet-700">
               Sign in
             </button>
           </>
         ) : (
           <>
             Don't have an account?{' '}
-            <button type="button" onClick={() => { setMode('register'); setStatus('idle'); setErrorMsg(''); }} className="text-indigo-600 font-semibold hover:text-indigo-700">
+            <button type="button" onClick={() => { setMode('register'); setStatus('idle'); setErrorMsg(''); }} className="text-violet-600 font-semibold hover:text-violet-700">
               Create one free
             </button>
           </>
@@ -382,11 +382,11 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
       {/* Benefits (register) */}
       {mode === 'register' && (
         <div className="mt-5 p-4 bg-indigo-50 rounded-xl">
-          <p className="text-xs font-semibold text-indigo-700 mb-2 uppercase tracking-wider">What you get free:</p>
+          <p className="text-xs font-semibold text-violet-700 mb-2 uppercase tracking-wider">What you get free:</p>
           <ul className="space-y-1.5">
             {['Save clinics to your wishlist', 'Write verified reviews', 'Ask questions in the community', 'Share your TMS story to help others'].map((benefit) => (
-              <li key={benefit} className="flex items-center gap-2 text-xs text-indigo-700">
-                <svg className="w-4 h-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <li key={benefit} className="flex items-center gap-2 text-xs text-violet-700">
+                <svg className="w-4 h-4 text-violet-500 shrink-0" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 {benefit}

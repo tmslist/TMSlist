@@ -24,7 +24,7 @@ interface Stats {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  specialist_enquiry: 'bg-indigo-100 text-indigo-700',
+  specialist_enquiry: 'bg-indigo-100 text-emerald-700',
   lead_magnet: 'bg-blue-100 text-blue-700',
   newsletter: 'bg-cyan-100 text-cyan-700',
   quiz_lead: 'bg-purple-100 text-purple-700',
@@ -115,7 +115,7 @@ export default function LeadsDashboard({ userEmail }: { userEmail: string }) {
           <div>
             <div className="flex items-center gap-3">
               <h1 className="text-3xl font-semibold tracking-tight text-gray-900">Enquiry Tracker</h1>
-              <span className="px-3 py-1 bg-indigo-100 text-indigo-700 text-sm font-semibold rounded-full">
+              <span className="px-3 py-1 bg-indigo-100 text-emerald-700 text-sm font-semibold rounded-full">
                 {userEmail}
               </span>
             </div>
@@ -134,7 +134,7 @@ export default function LeadsDashboard({ userEmail }: { userEmail: string }) {
             <button
               onClick={exportCSV}
               disabled={leads.length === 0}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-colors flex items-center gap-2 disabled:opacity-50"
+              className="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-semibold hover:bg-emerald-700 transition-colors flex items-center gap-2 disabled:opacity-50"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -158,7 +158,7 @@ export default function LeadsDashboard({ userEmail }: { userEmail: string }) {
           </div>
           <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
             <div className="text-gray-500 text-sm font-medium mb-1">Specialist Enquiries</div>
-            <div className="text-3xl font-semibold text-indigo-600">{stats.specialist_enquiry || 0}</div>
+            <div className="text-3xl font-semibold text-emerald-600">{stats.specialist_enquiry || 0}</div>
           </div>
           <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
             <div className="text-gray-500 text-sm font-medium mb-1">Lead Magnets</div>

@@ -133,7 +133,7 @@ if (!session) {
             <p class="text-sm font-medium text-gray-900">${esc(item.title)}</p>
             <p class="text-xs text-gray-500 mt-0.5">${item.action} · ${new Date(item.createdAt).toLocaleDateString()}</p>
           </div>
-          ${item.postSlug ? `<a href="/community/${item.category}/${item.postSlug}" class="text-xs text-violet-600 font-semibold hover:text-indigo-700 shrink-0">View →</a>` : ''}
+          ${item.postSlug ? `<a href="/community/${item.category}/${item.postSlug}" class="text-xs text-violet-600 font-semibold hover:text-violet-700 shrink-0">View →</a>` : ''}
         </div>
       `).join('');
     } catch {

@@ -10,7 +10,7 @@ interface ChecklistItem {
 }
 
 const COLOR_MAP = {
-  indigo: { bg: 'bg-indigo-100', border: 'border-indigo-100', hover: 'hover:bg-indigo-100', text: 'text-indigo-600' },
+  indigo: { bg: 'bg-indigo-100', border: 'border-indigo-100', hover: 'hover:bg-indigo-100', text: 'text-violet-600' },
   amber: { bg: 'bg-amber-100', border: 'border-amber-100', hover: 'hover:bg-amber-100', text: 'text-amber-500' },
   rose: { bg: 'bg-rose-100', border: 'border-rose-100', hover: 'hover:bg-rose-100', text: 'text-rose-500' },
   violet: { bg: 'bg-violet-100', border: 'border-violet-100', hover: 'hover:bg-violet-100', text: 'text-violet-500' },
@@ -113,7 +113,7 @@ export default function OnboardingToast() {
     <div className="fixed bottom-6 right-6 z-[200] w-80 max-w-[calc(100vw-3rem)]">
       <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.2)] ring-1 ring-slate-200 dark:ring-slate-700 overflow-hidden animate-in fade-in slide-in-from-bottom-4">
         {/* Header */}
-        <div className="bg-gradient-to-r from-indigo-600 to-violet-600 p-4 text-white">
+        <div className="bg-gradient-to-r from-violet-600 to-violet-600 p-4 text-white">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
@@ -168,23 +168,23 @@ export default function OnboardingToast() {
               >
                 <div className={`w-10 h-10 rounded-xl ${COLOR_MAP[nextAction.color as ColorKey]?.bg || 'bg-indigo-100'} flex items-center justify-center shrink-0`}>
                   {nextAction.icon === 'user' && (
-                    <svg className={`w-5 h-5 ${COLOR_MAP[nextAction.color as ColorKey]?.text || 'text-indigo-600'}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                    <svg className={`w-5 h-5 ${COLOR_MAP[nextAction.color as ColorKey]?.text || 'text-violet-600'}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
                   )}
                   {nextAction.icon === 'star' && (
-                    <svg className={`w-5 h-5 ${COLOR_MAP[nextAction.color as ColorKey]?.text || 'text-indigo-500'}`} fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" /></svg>
+                    <svg className={`w-5 h-5 ${COLOR_MAP[nextAction.color as ColorKey]?.text || 'text-violet-500'}`} fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" /></svg>
                   )}
                   {nextAction.icon === 'heart' && (
-                    <svg className={`w-5 h-5 ${COLOR_MAP[nextAction.color as ColorKey]?.text || 'text-indigo-500'}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                    <svg className={`w-5 h-5 ${COLOR_MAP[nextAction.color as ColorKey]?.text || 'text-violet-500'}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                   )}
                   {nextAction.icon === 'chat' && (
-                    <svg className={`w-5 h-5 ${COLOR_MAP[nextAction.color as ColorKey]?.text || 'text-indigo-500'}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a11.841 11.841 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+                    <svg className={`w-5 h-5 ${COLOR_MAP[nextAction.color as ColorKey]?.text || 'text-violet-500'}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a11.841 11.841 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-gray-900">{nextAction.label}</p>
                   <p className="text-xs text-gray-500 mt-0.5">{nextAction.sublabel}</p>
                 </div>
-                <svg className="w-5 h-5 text-indigo-400 group-hover:text-indigo-600 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-violet-400 group-hover:text-violet-600 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </a>
@@ -192,7 +192,7 @@ export default function OnboardingToast() {
               {doneCount < total - 1 && (
                 <button
                   onClick={() => setStep('checklist')}
-                  className="w-full mt-2 text-xs text-indigo-600 hover:text-indigo-700 font-medium text-center"
+                  className="w-full mt-2 text-xs text-violet-600 hover:text-violet-700 font-medium text-center"
                 >
                   See all {total - doneCount} remaining tasks →
                 </button>
@@ -229,7 +229,7 @@ export default function OnboardingToast() {
                       <p className={`text-sm font-medium ${isDone ? 'text-emerald-700 line-through' : 'text-gray-900'}`}>{item.label}</p>
                     </div>
                     {!isDone && (
-                      <svg className="w-4 h-4 text-indigo-400 group-hover:text-indigo-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-violet-400 group-hover:text-violet-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     )}
@@ -238,7 +238,7 @@ export default function OnboardingToast() {
               })}
               <button
                 onClick={() => setStep('welcome')}
-                className="w-full mt-1 text-xs text-indigo-600 hover:text-indigo-700 font-medium text-center"
+                className="w-full mt-1 text-xs text-violet-600 hover:text-violet-700 font-medium text-center"
               >
                 ← Back
               </button>

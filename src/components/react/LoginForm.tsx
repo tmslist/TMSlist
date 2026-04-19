@@ -88,7 +88,7 @@ export default function LoginForm() {
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 text-center">
           <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-indigo-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+            <svg className="w-8 h-8 text-violet-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
             </svg>
           </div>
@@ -98,7 +98,7 @@ export default function LoginForm() {
           <p className="text-sm text-gray-500 mb-6">The link expires in 15 minutes.</p>
           <button
             onClick={() => { setStatus('idle'); setEmail(''); }}
-            className="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+            className="text-sm text-violet-600 hover:text-violet-700 font-medium"
           >
             Use a different email
           </button>
@@ -126,7 +126,7 @@ export default function LoginForm() {
             onClick={() => { setMode('password'); setStatus('idle'); setErrorMsg(''); }}
             className={`flex-1 py-2 text-sm font-medium text-center border-b-2 transition-colors ${
               mode === 'password'
-                ? 'border-indigo-600 text-indigo-600'
+                ? 'border-violet-600 text-violet-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -137,7 +137,7 @@ export default function LoginForm() {
             onClick={() => { setMode('magic'); setStatus('idle'); setErrorMsg(''); }}
             className={`flex-1 py-2 text-sm font-medium text-center border-b-2 transition-colors ${
               mode === 'magic'
-                ? 'border-indigo-600 text-indigo-600'
+                ? 'border-violet-600 text-violet-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -157,7 +157,7 @@ export default function LoginForm() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-violet-500 focus:ring-violet-500"
                 placeholder="you@example.com"
               />
             </div>
@@ -171,14 +171,14 @@ export default function LoginForm() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-violet-500 focus:ring-violet-500"
                 placeholder="Enter your password"
               />
             </div>
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-all disabled:opacity-50"
+              className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-violet-600 hover:bg-violet-700 transition-all disabled:opacity-50"
             >
               {status === 'submitting' ? 'Signing in...' : 'Sign In'}
             </button>
@@ -215,14 +215,14 @@ export default function LoginForm() {
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-violet-500 focus:ring-violet-500"
                   placeholder="you@example.com"
                 />
               </div>
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-all disabled:opacity-50"
+                className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-violet-600 hover:bg-violet-700 transition-all disabled:opacity-50"
               >
                 {status === 'submitting' ? 'Sending link...' : 'Send Login Link'}
               </button>

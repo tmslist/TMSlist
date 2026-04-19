@@ -76,7 +76,7 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
   // Gate: require patient or viewer session
   if (!session) {
     return (
-      <div className="p-6 bg-indigo-50 border border-indigo-200 rounded-xl">
+      <div className="p-6 bg-indigo-50 border border-violet-200 rounded-xl">
         <h3 className="text-lg font-semibold text-gray-900 mb-2">Review {clinicName}</h3>
         <p className="text-sm text-gray-600 mb-4">Sign in with Google to leave a review. Your email will be verified automatically.</p>
         <a
@@ -102,7 +102,7 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
         <p className="text-green-600 text-sm mt-1">Your review will appear after moderation.</p>
         <button
           onClick={() => setStatus('idle')}
-          className="mt-3 text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+          className="mt-3 text-sm text-violet-600 hover:text-violet-800 font-medium"
         >
           Write another review
         </button>
@@ -131,7 +131,7 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
               onClick={() => setRating(star)}
               onMouseEnter={() => setHoveredRating(star)}
               onMouseLeave={() => setHoveredRating(0)}
-              className="text-3xl transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded"
+              className="text-3xl transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-violet-300 rounded"
               role="radio"
               aria-checked={rating === star}
               aria-label={`${star} star${star > 1 ? 's' : ''}`}
@@ -151,14 +151,14 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
       <div>
         <label htmlFor="rv-title" className="block text-sm font-medium text-gray-700">Title (optional)</label>
         <input type="text" name="title" id="rv-title" maxLength={200}
-          className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500" />
+          className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-violet-500 focus:ring-violet-500" />
       </div>
 
       <div>
         <label htmlFor="rv-body" className="block text-sm font-medium text-gray-700">Your Review <span className="text-red-400">*</span></label>
         <textarea name="body" id="rv-body" rows={4} required minLength={10} maxLength={5000}
           aria-required="true"
-          className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+          className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
           placeholder="Share your experience with this clinic..."
           onInput={(e) => {
             const counter = e.currentTarget.parentElement?.querySelector('.char-count');
@@ -171,7 +171,7 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-all disabled:opacity-50"
+        className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-violet-600 hover:bg-violet-700 transition-all disabled:opacity-50"
       >
         {status === 'submitting' ? 'Submitting...' : 'Submit Review'}
       </button>

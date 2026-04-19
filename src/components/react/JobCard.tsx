@@ -4,7 +4,7 @@ export const JOB_ROLE_CATEGORIES = [
   { value: 'tms_technician', label: 'TMS Technician', color: 'bg-violet-50 text-violet-700', bgColor: 'bg-violet-500' },
   { value: 'tms_physician', label: 'TMS Physician', color: 'bg-blue-50 text-blue-700', bgColor: 'bg-blue-500' },
   { value: 'nurse_tms', label: 'TMS Nurse', color: 'bg-cyan-50 text-cyan-700', bgColor: 'bg-cyan-500' },
-  { value: 'psychologist', label: 'Psychologist', color: 'bg-indigo-50 text-indigo-700', bgColor: 'bg-indigo-500' },
+  { value: 'psychologist', label: 'Psychologist', color: 'bg-indigo-50 text-emerald-700', bgColor: 'bg-emerald-500' },
   { value: 'front_desk', label: 'Front Desk', color: 'bg-amber-50 text-amber-700', bgColor: 'bg-amber-500' },
   { value: 'office_manager', label: 'Office Manager', color: 'bg-orange-50 text-orange-700', bgColor: 'bg-orange-500' },
   { value: 'billing', label: 'Billing / Insurance', color: 'bg-green-50 text-green-700', bgColor: 'bg-green-500' },

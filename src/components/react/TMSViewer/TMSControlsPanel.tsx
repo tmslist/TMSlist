@@ -67,7 +67,7 @@ export function TMSControlsPanel() {
             className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
               state.isPlaying
                 ? 'bg-rose-500/20 border border-rose-500/40 text-rose-300 hover:bg-rose-500/30'
-                : 'bg-gradient-to-r from-violet-600 to-indigo-600 border border-violet-500 text-white hover:from-violet-500 hover:to-indigo-500 shadow-lg shadow-violet-600/25'
+                : 'bg-gradient-to-r from-violet-600 to-violet-600 border border-violet-500 text-white hover:from-violet-500 hover:to-violet-500 shadow-lg shadow-violet-600/25'
             }`}
           >
             {state.isPlaying ? (

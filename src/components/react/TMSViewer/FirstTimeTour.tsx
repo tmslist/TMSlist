@@ -208,7 +208,7 @@ export function FirstTimeTour({ onComplete }: { onComplete: () => void }) {
               </button>
               <button
                 onClick={next}
-                className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-[11px] font-semibold rounded-xl transition-all shadow-lg shadow-violet-600/25"
+                className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-violet-600 to-violet-600 hover:from-violet-500 hover:to-violet-500 text-white text-[11px] font-semibold rounded-xl transition-all shadow-lg shadow-violet-600/25"
               >
                 {step === STEPS.length - 1 ? 'Start Simulating' : 'Next'}
                 {step < STEPS.length - 1 && <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>}

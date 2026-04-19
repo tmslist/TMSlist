@@ -82,7 +82,7 @@ const METRIC_DEFINITIONS = [
     description: 'Hamilton Rating Scale for Anxiety (0-56)',
     min: 0, max: 56,
     improvement: 'lower is better',
-    color: 'text-indigo-600 dark:text-indigo-400',
+    color: 'text-blue-600 dark:text-blue-400',
   },
 ];
 
@@ -106,7 +106,7 @@ const METRIC_COLORS: Record<string, string> = {
   'QIDS': 'border-orange-500',
   'BDI-II': 'border-red-500',
   'HAM-D': 'border-pink-500',
-  'HAM-A': 'border-indigo-500',
+  'HAM-A': 'border-blue-500',
 };
 
 const METRIC_LINE_COLORS: Record<string, string> = {
