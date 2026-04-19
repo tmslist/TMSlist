@@ -12,6 +12,9 @@ mode:'standalone',}),
       chunkSizeWarningLimit: 2000,
       cssMinify: true,
       minify: 'esbuild',
+      rollupOptions: {
+        external: ['@vercel/blob'],
+      },
     },
   },
   integrations: [
