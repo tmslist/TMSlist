@@ -1,0 +1,15 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import AdminSidebar from "../../components/react/AdminSidebar";
+import AdminEligibilityChecker from "../../components/react/AdminEligibilityChecker";
+import { getSessionFromRequest, hasRole } from "../../utils/auth";
+const session = getSessionFromRequest(Astro.request);
+if (!hasRole(session, 'admin', 'editor')) return Astro.redirect("/admin/login");
+---
+<Layout title="Eligibility Checker | TMS List Admin" noindex={true}>
+  <div class="flex min-h-screen bg-gray-50 dark:bg-gray-900">
+    <AdminSidebar client:load currentPage="eligibility-checker" userEmail={session!.email} />
+    <main class="flex-1 lg:ml-64 py-8"><div class="container mx-auto px-4 max-w-7xl"><AdminEligibilityChecker client:load /></div></main>
+  </div>
+</Layout>
