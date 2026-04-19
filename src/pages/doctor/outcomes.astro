@@ -1,0 +1,37 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import DoctorSidebar from "../../components/react/DoctorSidebar";
+import DoctorOutcomes from "../../components/react/DoctorOutcomes";
+import { getSessionFromRequest } from "../../utils/auth";
+import { db } from "../../db";
+import { doctors } from "../../db/schema";
+import { eq } from "drizzle-orm";
+
+const session = getSessionFromRequest(Astro.request);
+if (!session) return Astro.redirect("/portal/login/");
+
+const doctorRows = await db
+  .select()
+  .from(doctors)
+  .where(eq(doctors.clinicId, session.clinicId ?? ""))
+  .limit(1);
+const doctor = doctorRows[0] ?? null;
+---
+<Layout title="Outcomes | Doctor Portal | TMS List" description="Track patient treatment outcomes and progress metrics." noindex={true}>
+  <div class="flex min-h-screen bg-gray-50 dark:bg-gray-950">
+    <DoctorSidebar client:load currentPage="outcomes" userEmail={session.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-5xl">
+        <div class="mb-6">
+          <a href="/doctor/dashboard/" class="text-sm text-blue-600 hover:text-blue-700 font-medium mb-2 inline-block dark:text-blue-400 dark:hover:text-blue-300">
+            &larr; Back to Dashboard
+          </a>
+          <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Treatment Outcomes</h1>
+          <p class="text-gray-500 text-sm mt-1 dark:text-gray-400">Track PHQ-9, GAD-7, CGI scores and patient progress over time</p>
+        </div>
+        <DoctorOutcomes client:load doctorId={doctor?.id} />
+      </div>
+    </main>
+  </div>
+</Layout>
