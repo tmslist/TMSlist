@@ -1,0 +1,46 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import DoctorSidebar from "../../components/react/DoctorSidebar";
+import DoctorWaitlist from "../../components/react/DoctorWaitlist";
+import { getSessionFromRequest } from "../../utils/auth";
+import { db } from "../../db";
+import { doctors, doctorWaitlist } from "../../db/schema";
+import { eq, asc } from "drizzle-orm";
+
+const session = getSessionFromRequest(Astro.request);
+if (!session) return Astro.redirect("/portal/login/");
+
+const isDoctor = session.role === 'doctor';
+const isAdmin = ['admin', 'editor'].includes(session.role);
+if (!isDoctor && !isAdmin) return Astro.redirect("/portal/login/");
+
+const doctorRows = session.clinicId
+  ? await db.select().from(doctors).where(eq(doctors.clinicId, session.clinicId)).limit(1)
+  : [];
+const doctor = doctorRows[0] ?? null;
+
+const waitlistEntries = doctor
+  ? await db.select().from(doctorWaitlist).where(eq(doctorWaitlist.doctorId, doctor.id)).orderBy(asc(doctorWaitlist.position))
+  : [];
+---
+
+<Layout title="Patient Waitlist | TMS List Doctor" noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <DoctorSidebar client:load currentPage="waitlist" userEmail={session.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-5xl">
+        {!doctor ? (
+          <div class="max-w-lg mx-auto text-center py-16">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+              <p class="text-gray-500">No doctor profile linked to your account.</p>
+              <a href="/doctor/dashboard/" class="mt-4 inline-block text-sm text-blue-600 hover:text-blue-700">Back to Dashboard</a>
+            </div>
+          </div>
+        ) : (
+          <DoctorWaitlist client:load initialEntries={waitlistEntries} doctorId={doctor.id} />
+        )}
+      </div>
+    </main>
+  </div>
+</Layout>
