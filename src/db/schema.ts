@@ -814,6 +814,819 @@ export const pageContent = pgTable('page_content', {
   index('idx_page_content_order').on(table.page, table.order),
 ]);
 
+// ── API KEYS ──────────────────────────────────
+
+export const apiKeys = pgTable('api_keys', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  keyHash: text('key_hash').notNull().unique(),
+  keyPrefix: text('key_prefix').notNull(),
+  permissions: jsonb('permissions').$type<string[]>().default([]),
+  rateLimitOverride: integer('rate_limit_override'),
+  expiresAt: timestamp('expires_at', { withTimezone: true }),
+  lastUsedAt: timestamp('last_used_at', { withTimezone: true }),
+  createdBy: uuid('created_by').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_api_keys_prefix').on(table.keyPrefix),
+  index('idx_api_keys_expires').on(table.expiresAt),
+]);
+
+// ── CLINIC BADGES ──────────────────────────────────
+
+export const clinicBadges = pgTable('clinic_badges', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  clinicId: uuid('clinic_id').notNull().references(() => clinics.id, { onDelete: 'cascade' }),
+  badgeType: text('badge_type').notNull(),
+  badgeName: text('badge_name').notNull(),
+  badgeDescription: text('badge_description'),
+  awardedAt: timestamp('awarded_at', { withTimezone: true }).defaultNow().notNull(),
+  expiresAt: timestamp('expires_at', { withTimezone: true }),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>(),
+}, (table) => [
+  index('idx_clinic_badges_clinic').on(table.clinicId),
+]);
+
+// ── DOCTOR BADGES ──────────────────────────────────
+
+export const doctorBadges = pgTable('doctor_badges', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  badgeType: text('badge_type').notNull(),
+  badgeName: text('badge_name').notNull(),
+  badgeDescription: text('badge_description'),
+  awardedAt: timestamp('awarded_at', { withTimezone: true }).defaultNow().notNull(),
+  expiresAt: timestamp('expires_at', { withTimezone: true }),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>(),
+}, (table) => [
+  index('idx_doctor_badges_doctor').on(table.doctorId),
+]);
+
+// ── REWARDS ──────────────────────────────────
+
+export const rewards = pgTable('rewards', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').references(() => users.id, { onDelete: 'cascade' }),
+  clinicId: uuid('clinic_id').references(() => clinics.id, { onDelete: 'cascade' }),
+  points: integer('points').notNull().default(0),
+  reason: text('reason'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_rewards_user').on(table.userId),
+  index('idx_rewards_clinic').on(table.clinicId),
+]);
+
+export const clinicPoints = pgTable('clinic_points', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  clinicId: uuid('clinic_id').notNull().references(() => clinics.id, { onDelete: 'cascade' }),
+  totalPoints: integer('total_points').notNull().default(0),
+  tier: text('tier').default('bronze'),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_clinic_points_clinic').on(table.clinicId),
+]);
+
+// ── FUNNEL EVENTS ──────────────────────────────────
+
+export const funnelEvents = pgTable('funnel_events', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  eventType: text('event_type').notNull(),
+  step: text('step').notNull(),
+  userId: uuid('user_id').references(() => users.id),
+  sessionId: text('session_id'),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_funnel_events_type').on(table.eventType),
+  index('idx_funnel_events_step').on(table.step),
+]);
+
+// ── SEARCH QUERIES ──────────────────────────────────
+
+export const searchQueries = pgTable('search_queries', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  query: text('query').notNull(),
+  resultsCount: integer('results_count').default(0),
+  source: text('source'),
+  userId: uuid('user_id').references(() => users.id),
+  sessionId: text('session_id'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_search_queries_query').on(table.query),
+]);
+
+// ── SUPPORT TICKETS ──────────────────────────────────
+
+export const supportTickets = pgTable('support_tickets', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').references(() => users.id),
+  subject: text('subject').notNull(),
+  body: text('body').notNull(),
+  status: text('status').notNull().default('open'),
+  priority: text('priority').default('normal'),
+  assignedTo: uuid('assigned_to').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_support_tickets_user').on(table.userId),
+  index('idx_support_tickets_status').on(table.status),
+]);
+
+export const ticketMessages = pgTable('ticket_messages', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  ticketId: uuid('ticket_id').notNull().references(() => supportTickets.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').references(() => users.id),
+  body: text('body').notNull(),
+  isStaffReply: boolean('is_staff_reply').default(false),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_ticket_messages_ticket').on(table.ticketId),
+]);
+
+// ── INCIDENTS ──────────────────────────────────
+
+export const incidents = pgTable('incidents', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  title: text('title').notNull(),
+  description: text('description'),
+  severity: text('severity').notNull().default('low'),
+  status: text('status').notNull().default('investigating'),
+  startedAt: timestamp('started_at', { withTimezone: true }).defaultNow().notNull(),
+  resolvedAt: timestamp('resolved_at', { withTimezone: true }),
+  createdBy: uuid('created_by').references(() => users.id),
+}, (table) => [
+  index('idx_incidents_status').on(table.status),
+  index('idx_incidents_severity').on(table.severity),
+]);
+
+export const incidentTimeline = pgTable('incident_timeline', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  incidentId: uuid('incident_id').notNull().references(() => incidents.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').references(() => users.id),
+  event: text('event').notNull(),
+  note: text('note'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_incident_timeline_incident').on(table.incidentId),
+]);
+
+// ── CITY WAITLISTS ──────────────────────────────────
+
+export const cityWaitlists = pgTable('city_waitlists', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  city: text('city').notNull(),
+  state: text('state'),
+  email: text('email'),
+  position: integer('position').notNull(),
+  status: text('status').notNull().default('waiting'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_city_waitlists_city').on(table.city),
+]);
+
+// ── PATIENT SURVEYS ──────────────────────────────────
+
+export const patientSurveys = pgTable('patient_surveys', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').references(() => users.id),
+  surveyType: text('survey_type').notNull(),
+  responses: jsonb('responses').$type<Record<string, unknown>>(),
+  score: integer('score'),
+  completedAt: timestamp('completed_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_patient_surveys_doctor').on(table.doctorId),
+  index('idx_patient_surveys_user').on(table.userId),
+]);
+
+// ── SURVEY RESPONSES ──────────────────────────────────
+
+export const surveyResponses = pgTable('survey_responses', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  surveyId: uuid('survey_id').notNull(),
+  questionKey: text('question_key').notNull(),
+  answer: text('answer').notNull(),
+  score: integer('score'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_survey_responses_survey').on(table.surveyId),
+]);
+
+// ── TREATMENT PLANS ──────────────────────────────────
+
+export const treatmentPlans = pgTable('treatment_plans', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  patientId: uuid('patient_id').references(() => users.id),
+  treatmentType: text('treatment_type').notNull(),
+  planData: jsonb('plan_data').$type<Record<string, unknown>>(),
+  status: text('status').notNull().default('active'),
+  startedAt: timestamp('started_at', { withTimezone: true }),
+  completedAt: timestamp('completed_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_treatment_plans_doctor').on(table.doctorId),
+  index('idx_treatment_plans_patient').on(table.patientId),
+]);
+
+// ── HOSPITAL PRIVILEGES ──────────────────────────────────
+
+export const hospitalPrivileges = pgTable('hospital_privileges', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  hospitalName: text('hospital_name').notNull(),
+  department: text('department'),
+  privilegesType: text('privileges_type'),
+  startDate: timestamp('start_date', { withTimezone: true }),
+  endDate: timestamp('end_date', { withTimezone: true }),
+  isActive: boolean('is_active').default(true),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_hospital_privileges_doctor').on(table.doctorId),
+]);
+
+// ── LEAD REMINDERS ──────────────────────────────────
+
+export const leadReminders = pgTable('lead_reminders', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  leadId: uuid('lead_id').notNull().references(() => leads.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').references(() => users.id),
+  reminderAt: timestamp('reminder_at', { withTimezone: true }).notNull(),
+  message: text('message'),
+  isCompleted: boolean('is_completed').default(false),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_lead_reminders_lead').on(table.leadId),
+  index('idx_lead_reminders_at').on(table.reminderAt),
+]);
+
+// ── SECOND OPINIONS ──────────────────────────────────
+
+export const secondOpinions = pgTable('second_opinions', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  patientId: uuid('patient_id').references(() => users.id),
+  caseSummary: text('case_summary').notNull(),
+  status: text('status').notNull().default('pending'),
+  opinion: text('opinion'),
+  completedAt: timestamp('completed_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_second_opinions_doctor').on(table.doctorId),
+  index('idx_second_opinions_patient').on(table.patientId),
+]);
+
+// ── DOCTOR EARNINGS ──────────────────────────────────
+
+export const doctorEarnings = pgTable('doctor_earnings', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  period: text('period').notNull(),
+  grossAmount: integer('gross_amount').default(0),
+  netAmount: integer('net_amount').default(0),
+  currency: text('currency').default('USD'),
+  breakdown: jsonb('breakdown').$type<Record<string, unknown>>(),
+  paidAt: timestamp('paid_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_earnings_doctor').on(table.doctorId),
+  index('idx_doctor_earnings_period').on(table.period),
+]);
+
+// ── DOCTOR EXPENSES ──────────────────────────────────
+
+export const doctorExpenses = pgTable('doctor_expenses', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  category: text('category').notNull(),
+  amount: integer('amount').notNull(),
+  description: text('description'),
+  date: timestamp('date', { withTimezone: true }).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_expenses_doctor').on(table.doctorId),
+]);
+
+// ── DOCTOR ENDORSEMENTS ──────────────────────────────────
+
+export const doctorEndorsements = pgTable('doctor_endorsements', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  endorserId: uuid('endorser_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  endorseeId: uuid('endorsee_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  skill: text('skill').notNull(),
+  note: text('note'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_endorsements_endorser').on(table.endorserId),
+  index('idx_doctor_endorsements_endorsee').on(table.endorseeId),
+]);
+
+// ── DOCTOR REFERRALS ──────────────────────────────────
+
+export const doctorReferrals = pgTable('doctor_referrals', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  referringDoctorId: uuid('referring_doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  referredDoctorId: uuid('referred_doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  patientId: uuid('patient_id').references(() => users.id),
+  status: text('status').notNull().default('pending'),
+  notes: text('notes'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_referrals_referring').on(table.referringDoctorId),
+  index('idx_doctor_referrals_referred').on(table.referredDoctorId),
+]);
+
+// ── DOCTOR MEDICAL LICENSES ──────────────────────────────────
+
+export const doctorMedicalLicenses = pgTable('doctor_medical_licenses', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  state: text('state').notNull(),
+  licenseNumber: text('license_number').notNull(),
+  expirationDate: timestamp('expiration_date', { withTimezone: true }),
+  isVerified: boolean('is_verified').default(false),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_medical_licenses_doctor').on(table.doctorId),
+  uniqueIndex('idx_doctor_medical_licenses_unique').on(table.doctorId, table.state),
+]);
+
+// ── DOCTOR BOARD CERTIFICATIONS ──────────────────────────────────
+
+export const doctorBoardCertifications = pgTable('doctor_board_certifications', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  boardName: text('board_name').notNull(),
+  certifiedAt: timestamp('certified_at', { withTimezone: true }),
+  expiresAt: timestamp('expires_at', { withTimezone: true }),
+  isVerified: boolean('is_verified').default(false),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_board_certifications_doctor').on(table.doctorId),
+]);
+
+// ── DOCTOR OUTCOMES ──────────────────────────────────
+
+export const doctorOutcomes = pgTable('doctor_outcomes', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  treatmentType: text('treatment_type').notNull(),
+  metricName: text('metric_name').notNull(),
+  metricValue: integer('metric_value').notNull(),
+  measurementPeriod: text('measurement_period'),
+  sampleSize: integer('sample_size'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_outcomes_doctor').on(table.doctorId),
+]);
+
+// ── DOCTOR SPEAKING ──────────────────────────────────
+
+export const doctorSpeaking = pgTable('doctor_speaking', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  eventName: text('event_name').notNull(),
+  topic: text('topic').notNull(),
+  location: text('location'),
+  eventDate: timestamp('event_date', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_speaking_doctor').on(table.doctorId),
+]);
+
+// ── DOCTOR RANKINGS ──────────────────────────────────
+
+export const doctorRankings = pgTable('doctor_rankings', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  rankingType: text('ranking_type').notNull(),
+  rank: integer('rank').notNull(),
+  score: integer('score'),
+  period: text('period'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_rankings_doctor').on(table.doctorId),
+  index('idx_doctor_rankings_type').on(table.rankingType),
+]);
+
+// ── DOCTOR MESSAGES ──────────────────────────────────
+
+export const doctorMessages = pgTable('doctor_messages', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  senderId: uuid('sender_id').references(() => users.id),
+  userId: uuid('user_id').references(() => users.id),
+  patientEmail: text('patient_email'),
+  subject: text('subject'),
+  body: text('body').notNull(),
+  direction: text('direction').notNull(),
+  isRead: boolean('is_read').default(false).notNull(),
+  status: text('status').default('sent'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_messages_doctor').on(table.doctorId),
+  index('idx_doctor_messages_user').on(table.userId),
+  index('idx_doctor_messages_unread').on(table.doctorId, table.isRead),
+]);
+
+// ── DOCTOR AVAILABILITY ──────────────────────────────────
+
+export const doctorProfileViews = pgTable('doctor_profile_views', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').references(() => users.id),
+  ipAddress: text('ip_address'),
+  userAgent: text('user_agent'),
+  referrer: text('referrer'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_profile_views_doctor').on(table.doctorId),
+]);
+
+// ── IMPORT BATCHES ──────────────────────────────────
+
+export const importBatches = pgTable('import_batches', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  filename: text('filename').notNull(),
+  totalRows: integer('total_rows').default(0),
+  successRows: integer('success_rows').default(0),
+  failedRows: integer('failed_rows').default(0),
+  status: text('status').notNull().default('pending'),
+  createdBy: uuid('created_by').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ── LEGAL DOCUMENTS ──────────────────────────────────
+
+export const legalDocuments = pgTable('legal_documents', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  type: text('type').notNull(),
+  version: text('version').notNull(),
+  content: text('content').notNull(),
+  isActive: boolean('is_active').default(false),
+  createdBy: uuid('created_by').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  uniqueIndex('idx_legal_doc_unique').on(table.type, table.version),
+]);
+
+// ── RETENTION POLICIES ──────────────────────────────────
+
+export const retentionPolicies = pgTable('retention_policies', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  entityType: text('entity_type').notNull(),
+  retentionDays: integer('retention_days').notNull(),
+  description: text('description'),
+  active: boolean('active').default(true),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ── COOKIE CONSENTS ──────────────────────────────────
+
+export const cookieConsents = pgTable('cookie_consents', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').references(() => users.id),
+  ipAddress: text('ip_address'),
+  consentType: text('consent_type').notNull(),
+  granted: boolean('granted').default(false),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_cookie_consents_user').on(table.userId),
+]);
+
+// ── LEADERBOARDS ──────────────────────────────────
+
+export const leaderboards = pgTable('leaderboards', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  period: text('period').notNull(),
+  category: text('category').notNull(),
+  entityId: uuid('entity_id').notNull(),
+  entityType: text('entity_type').notNull(),
+  score: integer('score').notNull().default(0),
+  rank: integer('rank'),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_leaderboards_period').on(table.period),
+  uniqueIndex('idx_leaderboards_unique').on(table.period, table.category, table.entityId),
+]);
+
+// ── MEDIA LIBRARY ──────────────────────────────────
+
+export const mediaLibrary = pgTable('media_library', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  filename: text('filename').notNull(),
+  url: text('url').notNull(),
+  mimeType: text('mime_type'),
+  sizeBytes: integer('size_bytes'),
+  alt: text('alt'),
+  uploadedBy: uuid('uploaded_by').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ── FEATURE FLAGS ──────────────────────────────────
+
+export const featureFlags = pgTable('feature_flags', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  key: text('key').notNull().unique(),
+  enabled: boolean('enabled').default(false),
+  description: text('description'),
+  rolloutPercentage: integer('rollout_percentage'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ── WEB VITALS ──────────────────────────────────
+
+export const webVitals = pgTable('web_vitals', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  metric: text('metric').notNull(),
+  value: integer('value').notNull(),
+  rating: text('rating'),
+  url: text('url'),
+  userId: uuid('user_id').references(() => users.id),
+  sessionId: text('session_id'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_web_vitals_metric').on(table.metric),
+  index('idx_web_vitals_url').on(table.url),
+]);
+
+// ── API ERRORS ──────────────────────────────────
+
+export const apiErrors = pgTable('api_errors', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  endpoint: text('endpoint').notNull(),
+  method: text('method'),
+  statusCode: integer('status_code'),
+  errorMessage: text('error_message'),
+  userId: uuid('user_id').references(() => users.id),
+  userAgent: text('user_agent'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_api_errors_endpoint').on(table.endpoint),
+  index('idx_api_errors_status').on(table.statusCode),
+]);
+
+// ── REDIRECTS ──────────────────────────────────
+
+export const redirects = pgTable('redirects', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  fromPath: text('from_path').notNull().unique(),
+  toPath: text('to_path').notNull(),
+  type: text('type').notNull().default('permanent'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ── WHITE LABEL CONFIGS ──────────────────────────────────
+
+export const whiteLabelConfigs = pgTable('white_label_configs', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  resellerId: uuid('reseller_id').references(() => users.id, { onDelete: 'cascade' }),
+  domain: text('domain').notNull().unique(),
+  brandName: text('brand_name'),
+  logoUrl: text('logo_url'),
+  primaryColor: text('primary_color'),
+  customCss: text('custom_css'),
+  active: boolean('active').default(true),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ── INSURANCE ──────────────────────────────────
+
+export const insuranceInsurers = pgTable('insurance_insurers', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  slug: text('slug').notNull().unique(),
+  logoUrl: text('logo_url'),
+  website: text('website'),
+  active: boolean('active').default(true),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+export const insurancePlans = pgTable('insurance_plans', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  insurerId: uuid('insurer_id').notNull().references(() => insuranceInsurers.id, { onDelete: 'cascade' }),
+  name: text('name').notNull(),
+  planType: text('plan_type'),
+  coveragePercent: integer('coverage_percent'),
+  active: boolean('active').default(true),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_insurance_plans_insurer').on(table.insurerId),
+]);
+
+// ── BULK CAMPAIGNS ──────────────────────────────────
+
+export const bulkEmailCampaigns = pgTable('bulk_email_campaigns', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  subject: text('subject').notNull(),
+  body: text('body').notNull(),
+  status: text('status').notNull().default('draft'),
+  sentCount: integer('sent_count').default(0),
+  failedCount: integer('failed_count').default(0),
+  scheduledAt: timestamp('scheduled_at', { withTimezone: true }),
+  sentAt: timestamp('sent_at', { withTimezone: true }),
+  createdBy: uuid('created_by').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_bulk_email_campaigns_status').on(table.status),
+]);
+
+export const bulkSmsCampaigns = pgTable('bulk_sms_campaigns', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  message: text('message').notNull(),
+  status: text('status').notNull().default('draft'),
+  sentCount: integer('sent_count').default(0),
+  failedCount: integer('failed_count').default(0),
+  scheduledAt: timestamp('scheduled_at', { withTimezone: true }),
+  sentAt: timestamp('sent_at', { withTimezone: true }),
+  createdBy: uuid('created_by').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ── LEAD ROUTING RULES ──────────────────────────────────
+
+export const leadRoutingRules = pgTable('lead_routing_rules', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  priority: integer('priority').default(0),
+  conditions: jsonb('conditions').$type<Record<string, unknown>>(),
+  targetClinicIds: jsonb('target_clinic_ids').$type<string[]>(),
+  distributionMethod: text('distribution_method').default('round_robin'),
+  active: boolean('active').default(true),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ── GDPR REQUESTS ──────────────────────────────────
+
+export const gdprRequests = pgTable('gdpr_requests', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  email: text('email').notNull(),
+  type: text('type').notNull(),
+  status: text('status').notNull().default('pending'),
+  notes: text('notes'),
+  history: jsonb('history').$type<{ status: string; note?: string; timestamp: string }[]>(),
+  processedBy: uuid('processed_by').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_gdpr_requests_status').on(table.status),
+  index('idx_gdpr_requests_email').on(table.email),
+]);
+
+// ── HEALTH CHECKS ──────────────────────────────────
+
+export const healthChecks = pgTable('health_checks', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  status: text('status').notNull().default('healthy'),
+  latencyMs: integer('latency_ms'),
+  message: text('message'),
+  checkedAt: timestamp('checked_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ── MAINTENANCE WINDOWS ──────────────────────────────────
+
+export const maintenanceWindows = pgTable('maintenance_windows', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  title: text('title').notNull(),
+  description: text('description'),
+  startAt: timestamp('start_at', { withTimezone: true }).notNull(),
+  endAt: timestamp('end_at', { withTimezone: true }),
+  status: text('status').notNull().default('scheduled'),
+  createdBy: uuid('created_by').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_maintenance_windows_status').on(table.status),
+]);
+
+// ── DOCTOR CME CREDITS ──────────────────────────────────
+
+export const doctorCmeCredits = pgTable('doctor_cme_credits', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  creditsEarned: integer('credits_earned').notNull(),
+  creditType: text('credit_type'),
+  activityName: text('activity_name'),
+  completionDate: timestamp('completion_date', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_cme_credits_doctor').on(table.doctorId),
+]);
+
+export const doctorTelehealth = pgTable('doctor_telehealth', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  platform: text('platform'),
+  roomUrl: text('room_url'),
+  enabled: boolean('enabled').default(false),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+export const doctorEducation = pgTable('doctor_education', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  degree: text('degree').notNull(),
+  institution: text('institution').notNull(),
+  yearCompleted: integer('year_completed'),
+  field: text('field'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_education_doctor').on(table.doctorId),
+]);
+
+// ── DOCTOR AVAILABILITY ──────────────────────────────────
+
+export const doctorAvailability = pgTable('doctor_availability', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  dayOfWeek: integer('day_of_week').notNull(),
+  startTime: text('start_time').notNull(),
+  endTime: text('end_time').notNull(),
+  isAvailable: boolean('is_available').default(true),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_availability_doctor').on(table.doctorId),
+]);
+
+export const doctorAvailabilitySlots = pgTable('doctor_availability_slots', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  slotDate: timestamp('slot_date', { withTimezone: true }).notNull(),
+  startTime: text('start_time').notNull(),
+  endTime: text('end_time').notNull(),
+  isBooked: boolean('is_booked').default(false),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_availability_slots_doctor').on(table.doctorId),
+  index('idx_doctor_availability_slots_date').on(table.slotDate),
+]);
+
+// ── DOCTOR WAITLIST ──────────────────────────────────
+
+export const doctorWaitlist = pgTable('doctor_waitlist', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').references(() => users.id),
+  email: text('email'),
+  position: integer('position').notNull(),
+  status: text('status').notNull().default('waiting'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_waitlist_doctor').on(table.doctorId),
+]);
+
+// ── DOCTOR APPOINTMENTS ──────────────────────────────────
+
+export const doctorAppointments = pgTable('doctor_appointments', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  doctorId: uuid('doctor_id').notNull().references(() => doctors.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').references(() => users.id),
+  scheduledAt: timestamp('scheduled_at', { withTimezone: true }).notNull(),
+  durationMinutes: integer('duration_minutes').default(30),
+  status: text('status').notNull().default('scheduled'),
+  type: text('type'),
+  notes: text('notes'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_doctor_appointments_doctor').on(table.doctorId),
+  index('idx_doctor_appointments_user').on(table.userId),
+  index('idx_doctor_appointments_scheduled').on(table.scheduledAt),
+]);
+
+// ── EXPERIMENTS (A/B Tests) ──────────────────────────────────
+
+export const experiments = pgTable('experiments', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  key: text('key').notNull().unique(),
+  description: text('description'),
+  status: text('status').notNull().default('draft'),
+  startDate: timestamp('start_date', { withTimezone: true }),
+  endDate: timestamp('end_date', { withTimezone: true }),
+  createdBy: uuid('created_by').references(() => users.id),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_experiments_key').on(table.key),
+  index('idx_experiments_status').on(table.status),
+]);
+
+export const experimentVariants = pgTable('experiment_variants', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  experimentId: uuid('experiment_id').notNull().references(() => experiments.id, { onDelete: 'cascade' }),
+  variantKey: text('variant_key').notNull(),
+  description: text('description'),
+  weight: integer('weight').notNull().default(50),
+  isControl: boolean('is_control').default(false),
+  metrics: jsonb('metrics').$type<Record<string, unknown>>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_experiment_variants_experiment').on(table.experimentId),
+  uniqueIndex('idx_experiment_variants_unique').on(table.experimentId, table.variantKey),
+]);
+
 // ── TYPE EXPORTS ──────────────────────────────────
 
 export type Clinic = typeof clinics.$inferSelect;
@@ -842,6 +1655,12 @@ export type Job = typeof jobs.$inferSelect;
 export type NewJob = typeof jobs.$inferInsert;
 export type JobApplication = typeof jobApplications.$inferSelect;
 export type NewJobApplication = typeof jobApplications.$inferInsert;
+export type ApiKey = typeof apiKeys.$inferSelect;
+export type ClinicBadge = typeof clinicBadges.$inferSelect;
+export type DoctorBadge = typeof doctorBadges.$inferSelect;
+export type GdprRequest = typeof gdprRequests.$inferSelect;
+export type SupportTicket = typeof supportTickets.$inferSelect;
+export type Incident = typeof incidents.$inferSelect;
 export type AuthEvent = typeof authEvents.$inferSelect;
 export type LoginHistory = typeof loginHistory.$inferSelect;
 export type UserPermissions = {
@@ -866,3 +1685,97 @@ export type PasskeyCredential = {
   nickname?: string;
   createdAt: string;
 };
+
+// ── BACKUPS ──────────────────────────────────
+
+export const backups = pgTable('backups', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  type: text('type').notNull().default('full'),
+  status: text('status').notNull().default('pending'),
+  sizeBytes: integer('size_bytes'),
+  location: text('location'),
+  scheduledAt: timestamp('scheduled_at', { withTimezone: true }),
+  completedAt: timestamp('completed_at', { withTimezone: true }),
+  createdBy: uuid('created_by').references(() => users.id),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_backups_status').on(table.status),
+  index('idx_backups_created').on(table.createdAt),
+]);
+
+export const backupSchedules = pgTable('backup_schedules', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  type: text('type').notNull().default('full'),
+  frequency: text('frequency').notNull().default('daily'),
+  retentionCount: integer('retention_count').default(7),
+  enabled: boolean('enabled').default(true),
+  lastRunAt: timestamp('last_run_at', { withTimezone: true }),
+  nextRunAt: timestamp('next_run_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_backup_schedules_enabled').on(table.enabled),
+]);
+
+// ── DISASTER RECOVERY CONFIGS ──────────────────────────────────
+
+export const disasterRecoveryConfigs = pgTable('disaster_recovery_configs', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  rpoMinutes: integer('rpo_minutes').notNull().default(60),
+  rtoMinutes: integer('rto_minutes').notNull().default(240),
+  failoverEnabled: boolean('failover_enabled').default(false),
+  failoverStatus: text('failover_status').default('standby'),
+  lastDrTestAt: timestamp('last_dr_test_at', { withTimezone: true }),
+  lastDrTestResult: text('last_dr_test_result'),
+  drTestLogs: jsonb('dr_test_logs').$type<{ timestamp: string; result: string; duration: number; notes?: string }[]>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+});
+
+// ── SLA METRICS ──────────────────────────────────
+
+export const slaMetrics = pgTable('sla_metrics', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  period: text('period').notNull(),
+  uptimePercent: decimal('uptime_percent', { precision: 5, scale: 3 }).notNull().default('100'),
+  incidentCount: integer('incident_count').default(0),
+  totalDowntimeMinutes: integer('total_downtime_minutes').default(0),
+  affectedUsers: integer('affected_users').default(0),
+  resolvedWithinRto: boolean('resolved_within_rto').default(true),
+  complianceStatus: text('compliance_status').default('met'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_sla_metrics_period').on(table.period),
+  uniqueIndex('idx_sla_metrics_period_unique').on(table.period),
+]);
+
+// ── LOCALES & TRANSLATIONS ──────────────────────────────────
+
+export const locales = pgTable('locales', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  code: text('code').notNull().unique(),
+  name: text('name').notNull(),
+  nativeName: text('native_name'),
+  isActive: boolean('is_active').default(false),
+  isRtl: boolean('is_rtl').default(false),
+  pluralRules: text('plural_rules'),
+  sortOrder: integer('sort_order').default(0),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+export const translations = pgTable('translations', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  localeCode: text('locale_code').notNull().references(() => locales.code),
+  key: text('key').notNull(),
+  value: text('value').notNull(),
+  context: text('context'),
+  updatedBy: uuid('updated_by').references(() => users.id),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+}, (table) => [
+  index('idx_translations_locale').on(table.localeCode),
+  uniqueIndex('idx_translations_unique').on(table.localeCode, table.key),
+  index('idx_translations_key').on(table.key),
+]);
