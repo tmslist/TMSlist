@@ -1,0 +1,28 @@
+---
+export const prerender = false;
+
+import Layout from "../../layouts/Layout.astro";
+import AdminSidebar from "../../components/react/AdminSidebar";
+import AdminFinancialDashboard from "../../components/react/AdminFinancialDashboard";
+import { getSessionFromRequest, hasRole } from "../../utils/auth";
+
+const session = getSessionFromRequest(Astro.request);
+if (!hasRole(session, 'admin')) {
+  return Astro.redirect("/admin/login");
+}
+---
+
+<Layout title="Financial Dashboard | TMS List Admin" noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <AdminSidebar client:load currentPage="revenue" userEmail={session!.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="mb-8">
+          <h1 class="text-3xl font-semibold text-gray-900">Financial Dashboard</h1>
+          <p class="text-gray-500 mt-1">Revenue metrics, payment processing, and subscription breakdown</p>
+        </div>
+        <AdminFinancialDashboard client:load />
+      </div>
+    </main>
+  </div>
+</Layout>
