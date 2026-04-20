@@ -1,153 +1,526 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const pageTitle = "List Your TMS Clinic | Get More Patients | TMS List";
-const metaDescription = "List your TMS clinic on the leading directory. Get verified, receive patient leads, and grow your practice with our Pro and Premium plans.";
+const pageTitle = "List Your TMS Clinic | Grow Your Practice | TMS List";
+const metaDescription = "Join 1,100+ TMS clinics on the leading patient directory. Get verified, reach high-intent patients, and scale your practice. Free listing available.";
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-  <section class="relative bg-slate-50 overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-28">
-    <!-- Ambient Blurs -->
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/60 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-50/60 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
-    <div class="absolute inset-0 opacity-[0.02] pointer-events-none" style="background-image: radial-gradient(circle at center, #000 1px, transparent 1px); background-size: 24px 24px;"></div>
 
-    <div class="container mx-auto px-6 lg:px-12 max-w-5xl text-center relative z-10">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200/60 rounded-full mb-8 shadow-sm">
-        <div class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>
-        <span class="text-[11px] font-bold text-slate-700 tracking-widest uppercase">For Clinic Owners</span>
+<style>
+  :root{--ink:#0A1628;--ink2:#1E2A3B;--muted:#5A6B82;--warm:#C9654A;--line:#E6EAF0;--paper:#FBFAF7;--paper2:#F4F1EA;--accent:#1B4B5A;}
+  .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-0.02em}
+  .linky{position:relative;display:inline-block}
+  .linky::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .linky:hover::after{transform:scaleX(1)}
+  @keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ticker{animation:tk 40s linear infinite;display:flex;gap:4rem}
+  input,select,textarea{transition:border-color .2s,background .2s}
+  input:focus,select:focus,textarea:focus{outline:none}
+  .step-dot{width:2.5rem;height:2.5rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0}
+  .step-dot.active{background:var(--ink);color:white}
+  .step-dot.done{background:var(--accent);color:white}
+  .step-dot.pending{background:var(--paper2);color:var(--muted);border:1px solid var(--line)}
+  .form-input{width:100%;padding:.875rem 1rem;border-radius:.75rem;font-size:15px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+  .form-input:focus{border-color:var(--accent);background:white}
+  .plan-card{border-radius:1.5rem;padding:2rem;border:1px solid var(--line);transition:box-shadow .2s}
+  .plan-card:hover{box-shadow:0 20px 40px -20px rgba(10,22,40,.12)}
+  .plan-card.featured{background:var(--ink);border-color:var(--ink);color:white}
+</style>
+
+<!-- HERO -->
+<section style="background:var(--ink); padding-top:8rem; padding-bottom:5rem; position:relative; overflow:hidden;">
+  <!-- Subtle dot grid -->
+  <div class="absolute inset-0 pointer-events-none" style="background-image:radial-gradient(rgba(255,255,255,0.08) 1px,transparent 1px);background-size:32px 32px;opacity:.6"></div>
+  <!-- Warm glow -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full blur-[150px] pointer-events-none" style="background:rgba(201,101,74,0.12)"></div>
+
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] mb-10" style="color:rgba(255,255,255,0.4)" aria-label="Breadcrumb">
+      <a href="/" class="linky hover:text-white" style="color:inherit">Home</a>
+      <span>/</span>
+      <span style="color:rgba(255,255,255,0.7)">For Clinics</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-[1fr_1fr] gap-16 items-end">
+      <!-- Left: Hero copy -->
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-8" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12)">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span class="text-[11px] font-semibold uppercase tracking-wide" style="color:rgba(255,255,255,0.6)">For Clinic Owners</span>
+        </div>
+
+        <h1 class="serif mb-6" style="font-size:clamp(2.5rem,6vw,5.5rem); line-height:.92; color:white">
+          Grow your practice<br/>
+          with <span class="italic" style="color:rgba(201,101,74,0.9)">TMS List.</span>
+        </h1>
+
+        <p class="text-[17px] leading-[1.65] mb-10 max-w-lg" style="color:rgba(255,255,255,0.6)">
+          Join 1,100+ verified TMS clinics on the leading patient directory. Get discovered by high-intent patients, display your devices and protocols, and manage your listing — free to start.
+        </p>
+
+        <div class="flex items-center gap-4 flex-wrap">
+          <a href="#signup" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-medium transition-opacity hover:opacity-90" style="background:var(--warm); color:white">
+            Register your clinic — Free
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#plans" class="linky text-[14px]" style="color:rgba(255,255,255,0.5)">See plans & pricing →</a>
+        </div>
       </div>
 
-      <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.05] mb-6">
-        Grow Your TMS Practice<br/>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-violet-600 to-violet-600">with TMS List</span>
-      </h1>
-      <p class="text-lg lg:text-xl text-slate-500 font-light max-w-2xl mx-auto mb-14 leading-relaxed">
-        Join 1,100+ TMS clinics on the leading patient directory. Get verified, receive high-intent patient leads, and scale your practice.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-4xl mx-auto">
-        <div class="bg-white border border-slate-200/60 rounded-3xl p-8 hover:shadow-xl hover:shadow-slate-200/40 hover:-translate-y-1 transition-all duration-300">
-          <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 border border-blue-100/50">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+      <!-- Right: Stat cards -->
+      <div class="grid grid-cols-3 gap-4">
+        {[
+          { n: '1,100+', l: 'Verified clinics', s: 'Listed globally' },
+          { n: '50K+', l: 'Monthly searches', s: '+24% year over year' },
+          { n: 'Free', l: 'Basic listing', s: 'No credit card required' },
+        ].map((s) => (
+          <div class="rounded-2xl p-6 text-center" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1)">
+            <div class="serif mb-2" style="font-size:1.875rem; color:white">{s.n}</div>
+            <div class="text-[12px] font-medium mb-1" style="color:rgba(255,255,255,0.8)">{s.l}</div>
+            <div class="text-[11px]" style="color:rgba(255,255,255,0.4)">{s.s}</div>
           </div>
-          <div class="text-4xl font-black text-slate-900 mb-2 tracking-tight">1,100+</div>
-          <div class="text-sm font-medium text-slate-500">Verified clinics listed</div>
-        </div>
-        <div class="bg-white border border-slate-200/60 rounded-3xl p-8 hover:shadow-xl hover:shadow-slate-200/40 hover:-translate-y-1 transition-all duration-300">
-          <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 mb-6 border border-emerald-100/50">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          </div>
-          <div class="text-4xl font-black text-slate-900 mb-2 tracking-tight">50K+</div>
-          <div class="text-sm font-medium text-slate-500">Monthly patient searches</div>
-        </div>
-        <div class="bg-white border border-slate-200/60 rounded-3xl p-8 hover:shadow-xl hover:shadow-slate-200/40 hover:-translate-y-1 transition-all duration-300">
-          <div class="w-12 h-12 bg-violet-50 rounded-2xl flex items-center justify-center text-violet-600 mb-6 border border-violet-100/50">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <div class="text-4xl font-black text-slate-900 mb-2 tracking-tight">Free</div>
-          <div class="text-sm font-medium text-slate-500">Basic listing forever</div>
-        </div>
+        ))}
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <main class="bg-white py-16 lg:py-24 relative overflow-hidden">
-    <!-- Subtle background accent -->
-    <div class="absolute inset-0 bg-slate-50/50 [mask-image:linear-gradient(to_bottom,white,transparent)] z-0"></div>
-    
-    <div class="container mx-auto px-6 lg:px-12 max-w-3xl relative z-10">
-      <div class="bg-white rounded-[2rem] border border-slate-200 shadow-xl shadow-slate-200/50 p-8 lg:p-12 relative overflow-hidden">
-        <!-- Inner Glow -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-        
-        <div class="relative z-10">
-          <h2 class="text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">Register Your Clinic</h2>
-          <p class="text-slate-500 mb-8 font-light text-lg">Provide your details below and our partnerships team will get your clinic listed within 24 hours.</p>
+<!-- BENEFITS TICKER STRIP -->
+<section class="py-4 overflow-hidden" style="background:var(--paper2); border-bottom:1px solid var(--line)">
+  <div class="ticker whitespace-nowrap">
+    {[
+      'Verified profile badge', 'Patient inquiry inbox', 'Insurance compatibility display',
+      'SEO-optimized listing', 'Treatment protocols showcase', 'Real patient reviews',
+      'Analytics dashboard', 'Featured placement', 'Lead routing',
+      'Verified profile badge', 'Patient inquiry inbox', 'Insurance compatibility display',
+      'SEO-optimized listing', 'Treatment protocols showcase', 'Real patient reviews',
+      'Analytics dashboard', 'Featured placement', 'Lead routing',
+    ].map((n, i) => (
+      <span class="text-[14px] font-medium mx-8" style="color:var(--muted)">
+        <span style="color:var(--ink)">—</span> {n}
+      </span>
+    ))}
+  </div>
+</section>
 
-          <form id="clinic-signup-form" class="space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Your Name <span class="text-red-400">*</span></label>
-                <input type="text" name="name" required placeholder="Jane Doe" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 text-sm text-slate-900 placeholder-slate-400 transition-all" />
+<!-- BENEFITS SECTION -->
+<section style="background:var(--paper); padding:5rem 0;">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <div class="text-[11px] uppercase tracking-[0.18em] mb-4" style="color:var(--muted)">Why list with us</div>
+      <h2 class="serif" style="font-size:clamp(2rem,4vw,3.25rem); line-height:1.05; color:var(--ink)">
+        Your clinic, seen by patients who are ready.
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {[
+        {
+          icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>',
+          t: 'Verified badge earns trust',
+          d: 'Stand out with our trusted provider badge. Patients search for verified clinics first — your credential signals clinical seriousness.',
+        },
+        {
+          icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>',
+          t: 'Direct patient inquiries',
+          d: 'Receive inquiries from patients actively researching TMS — not random web traffic. Every lead has already searched the condition and your city.',
+        },
+        {
+          icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>',
+          t: 'Protocol & device showcase',
+          d: 'Highlight your TMS devices (NeuroStar, BrainsWay, MagVenture) and treatment protocols. Patients filter by device — be where they look.',
+        },
+      ].map((b) => (
+        <div class="rounded-2xl p-8" style="background:var(--paper2); border:1px solid var(--line)">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(27,75,90,0.1); color:var(--accent)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" set:html={b.icon}></svg>
+          </div>
+          <h3 class="serif mb-3" style="font-size:22px; line-height:1.3; color:var(--ink)">{b.t}</h3>
+          <p class="text-[14px] leading-[1.65]" style="color:var(--muted)">{b.d}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS: 3-STEP -->
+<section style="background:var(--paper2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:5rem 0;">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto text-center mb-16">
+      <div class="text-[11px] uppercase tracking-[0.18em] mb-4" style="color:var(--muted)">How it works</div>
+      <h2 class="serif" style="font-size:clamp(2rem,4vw,3rem); line-height:1.05; color:var(--ink)">Live within 72 hours.</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+      {[
+        { n: '01', t: 'Submit basic details', d: 'Clinic name, location, TMS devices, and a licensed clinician on file. Takes about 5 minutes.' },
+        { n: '02', t: 'Editorial review in 48 hrs', d: 'Our team verifies credentials against state licensing boards. No extra paperwork from you.' },
+        { n: '03', t: 'Go live & receive leads', d: 'Listings typically publish within 72 hours. Free tier available — upgrade anytime for more features.' },
+      ].map((s) => (
+        <div class="grid grid-cols-[50px_1fr] gap-5 items-start">
+          <div class="text-[11px] uppercase tracking-[0.2em] tabular-nums pt-1" style="color:var(--muted)">{s.n}</div>
+          <div>
+            <div class="serif mb-2" style="font-size:21px; line-height:1.3; color:var(--ink)">{s.t}</div>
+            <p class="text-[14px] leading-[1.65]" style="color:var(--muted)">{s.d}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SIGNUP FORM -->
+<section id="signup" style="background:var(--paper); padding:5rem 0;">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-[1fr_1.25fr] gap-16 items-start">
+
+      <!-- Left: Value props -->
+      <div>
+        <div class="text-[11px] uppercase tracking-[0.18em] mb-4" style="color:var(--muted)">Get listed</div>
+        <h2 class="serif mb-8" style="font-size:clamp(2rem,4vw,3.25rem); line-height:1; color:var(--ink)">
+          Your clinic,<br/><span class="italic">seen by patients.</span>
+        </h2>
+        <p class="text-[16px] leading-[1.65] mb-10 max-w-lg" style="color:var(--muted)">
+          1,147 verified TMS clinics. 50,000+ monthly patient searches. Editorial review of every listing — no pay-to-rank, ever.
+        </p>
+
+        <div class="space-y-6 pt-8" style="border-top:1px solid var(--line)">
+          {[
+            { t: 'Verified badge earns trust', d: 'Stand out with our trusted provider badge — patients search for verified clinics first.' },
+            { t: 'Direct patient inquiries', d: 'Receive inquiries from patients actively researching TMS — not random web traffic.' },
+            { t: 'Insurance transparency', d: 'Display accepted insurance plans, pricing estimates, and payment options upfront.' },
+            { t: 'Protocol & device showcase', d: 'Highlight your TMS devices and treatment protocols. Patients filter by device — be where they look.' },
+          ].map((item) => (
+            <div class="flex gap-4">
+              <div class="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(27,75,90,0.1); color:var(--accent)">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
               </div>
               <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Email <span class="text-red-400">*</span></label>
-                <input type="email" name="email" required placeholder="jane@clinic.com" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 text-sm text-slate-900 placeholder-slate-400 transition-all" />
+                <div class="text-[15px] font-semibold mb-0.5" style="color:var(--ink)">{item.t}</div>
+                <div class="text-[14px] leading-[1.6]" style="color:var(--muted)">{item.d}</div>
               </div>
             </div>
+          ))}
+        </div>
+      </div>
 
+      <!-- Right: Signup form card -->
+      <div class="rounded-[1.75rem] p-8 lg:p-10" style="background:var(--paper2); border:1px solid var(--line)">
+        <h3 class="serif mb-2" style="font-size:1.75rem; color:var(--ink)">Register your clinic</h3>
+        <p class="text-[14px] mb-8" style="color:var(--muted)">Our partnerships team will have you listed within 24 hours.</p>
+
+        <!-- Step indicator -->
+        <div class="flex items-center gap-3 mb-8" id="step-indicator">
+          {[1,2,3].map((n) => (
+            <div class="flex items-center gap-2">
+              <div class={`step-dot ${n === 1 ? 'active' : 'pending'}`} data-step={n}>{n}</div>
+              {n < 3 && <div class="h-px flex-1 min-w-[2rem]" style="background:var(--line)"></div>}
+            </div>
+          ))}
+          <div class="ml-2 text-[12px]" style="color:var(--muted)">
+            <span id="step-label">Clinic info</span>
+          </div>
+        </div>
+
+        <form id="clinic-signup-form">
+          <!-- STEP 1: Clinic info -->
+          <div id="form-step-1" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[12px] font-semibold uppercase tracking-wide mb-2" style="color:var(--ink)">Your Name <span style="color:var(--warm)">*</span></label>
+                <input type="text" name="name" required placeholder="Jane Doe" class="form-input" />
+              </div>
+              <div>
+                <label class="block text-[12px] font-semibold uppercase tracking-wide mb-2" style="color:var(--ink)">Email <span style="color:var(--warm)">*</span></label>
+                <input type="email" name="email" required placeholder="jane@clinic.com" class="form-input" />
+              </div>
+            </div>
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-2">Clinic Name <span class="text-red-400">*</span></label>
-              <input type="text" name="clinicName" required placeholder="TMS Institute of America" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 text-sm text-slate-900 placeholder-slate-400 transition-all" />
+              <label class="block text-[12px] font-semibold uppercase tracking-wide mb-2" style="color:var(--ink)">Clinic Name <span style="color:var(--warm)">*</span></label>
+              <input type="text" name="clinicName" required placeholder="TMS Institute of America" class="form-input" />
             </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">City <span class="text-red-400">*</span></label>
-                <input type="text" name="city" required placeholder="Los Angeles" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 text-sm text-slate-900 placeholder-slate-400 transition-all" />
+                <label class="block text-[12px] font-semibold uppercase tracking-wide mb-2" style="color:var(--ink)">City <span style="color:var(--warm)">*</span></label>
+                <input type="text" name="city" required placeholder="Los Angeles" class="form-input" />
               </div>
               <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">State <span class="text-red-400">*</span></label>
-                <input type="text" name="state" required maxlength="2" placeholder="CA" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 text-sm text-slate-900 placeholder-slate-400 transition-all" />
+                <label class="block text-[12px] font-semibold uppercase tracking-wide mb-2" style="color:var(--ink)">State <span style="color:var(--warm)">*</span></label>
+                <input type="text" name="state" required maxlength="2" placeholder="CA" class="form-input" />
               </div>
             </div>
-
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-2">Phone</label>
-              <input type="tel" name="phone" placeholder="(555) 123-4567" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 text-sm text-slate-900 placeholder-slate-400 transition-all" />
+              <label class="block text-[12px] font-semibold uppercase tracking-wide mb-2" style="color:var(--ink)">Phone</label>
+              <input type="tel" name="phone" placeholder="(555) 123-4567" class="form-input" />
             </div>
-
-            <div id="form-message" class="hidden px-5 py-4 rounded-xl text-sm font-medium"></div>
-
-            <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white font-bold rounded-xl text-[15px] transition-all shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 active:scale-[0.98]">
-              Register My Clinic (Free)
+            <button type="button" id="to-step-2" class="w-full py-4 rounded-xl font-semibold text-[15px] transition-opacity hover:opacity-90 text-white" style="background:var(--ink)">
+              Continue — Equipment &amp; Protocols
             </button>
-            <p class="text-sm text-slate-500 text-center font-medium mt-4">Already listed? <a href="/admin/login?redirect=/owner/dashboard" class="text-blue-600 hover:text-blue-700 transition-colors">Log in to your dashboard</a></p>
-          </form>
-        </div>
+          </div>
+
+          <!-- STEP 2: Equipment -->
+          <div id="form-step-2" class="space-y-4" style="display:none">
+            <div>
+              <label class="block text-[12px] font-semibold uppercase tracking-wide mb-3" style="color:var(--ink)">TMS Devices (select all that apply)</label>
+              <div class="grid grid-cols-2 gap-2">
+                {['NeuroStar', 'BrainsWay', 'MagVenture MagPro', 'Magstim', 'Other'].map((d) => (
+                  <label class="flex items-center gap-3 text-[13px] p-3 rounded-xl cursor-pointer transition-colors hover:bg-white" style="border:1px solid var(--line)">
+                    <input type="checkbox" name="devices" value={d} class="accent-[color:var(--accent)]" />
+                    <span style="color:var(--ink)">{d}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] font-semibold uppercase tracking-wide mb-3" style="color:var(--ink)">Protocols offered</label>
+              <div class="grid grid-cols-2 gap-2">
+                {['Standard 10Hz', 'Theta Burst (iTBS)', 'SAINT', 'Deep TMS', 'Low-frequency (1Hz)'].map((p) => (
+                  <label class="flex items-center gap-3 text-[13px] p-3 rounded-xl cursor-pointer transition-colors hover:bg-white" style="border:1px solid var(--line)">
+                    <input type="checkbox" name="protocols" value={p} class="accent-[color:var(--accent)]" />
+                    <span style="color:var(--ink)">{p}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] font-semibold uppercase tracking-wide mb-2" style="color:var(--ink)">Website URL</label>
+              <input type="url" name="website" placeholder="https://yourclinic.com" class="form-input" />
+            </div>
+            <div class="flex gap-3">
+              <button type="button" id="back-to-1" class="px-6 py-4 rounded-xl font-semibold text-[15px] transition-colors hover:bg-[color:var(--paper)]" style="border:1px solid var(--line); color:var(--muted); flex:0 0 auto">
+                Back
+              </button>
+              <button type="button" id="to-step-3" class="flex-1 py-4 rounded-xl font-semibold text-[15px] transition-opacity hover:opacity-90 text-white" style="background:var(--ink)">
+                Continue — Contact &amp; Submit
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Contact & submit -->
+          <div id="form-step-3" class="space-y-4" style="display:none">
+            <div>
+              <label class="block text-[12px] font-semibold uppercase tracking-wide mb-2" style="color:var(--ink)">Number of TMS clinicians</label>
+              <select name="clinicianCount" class="form-input">
+                <option value="">Select...</option>
+                <option>1</option>
+                <option>2–3</option>
+                <option>4–6</option>
+                <option>7+</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[12px] font-semibold uppercase tracking-wide mb-2" style="color:var(--ink)">How did you hear about us?</label>
+              <select name="referralSource" class="form-input">
+                <option value="">Select...</option>
+                <option>Google search</option>
+                <option>Colleague referral</option>
+                <option>Conference / event</option>
+                <option>Social media</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[12px] font-semibold uppercase tracking-wide mb-2" style="color:var(--ink)">Additional notes</label>
+              <textarea name="notes" rows="3" placeholder="Anything else you'd like us to know..." class="form-input resize-none"></textarea>
+            </div>
+
+            <div id="form-message" class="hidden px-5 py-4 rounded-xl text-[14px] font-medium"></div>
+
+            <div class="flex gap-3">
+              <button type="button" id="back-to-2" class="px-6 py-4 rounded-xl font-semibold text-[15px] transition-colors hover:bg-[color:var(--paper)]" style="border:1px solid var(--line); color:var(--muted); flex:0 0 auto">
+                Back
+              </button>
+              <button type="submit" class="flex-1 py-4 rounded-xl font-semibold text-[15px] transition-opacity hover:opacity-90 text-white" style="background:var(--accent)">
+                Register My Clinic — Free
+              </button>
+            </div>
+            <p class="text-[13px] text-center" style="color:var(--muted)">
+              Already listed? <a href="/admin/login?redirect=/owner/dashboard" class="linky font-medium" style="color:var(--accent)">Log in to your dashboard</a>
+            </p>
+          </div>
+        </form>
       </div>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section id="plans" style="background:var(--paper2); border-top:1px solid var(--line); padding:5rem 0;">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div class="text-[11px] uppercase tracking-[0.18em] mb-4" style="color:var(--muted)">Plans & Pricing</div>
+      <h2 class="serif" style="font-size:clamp(2rem,4vw,3.5rem); line-height:1; color:var(--ink)">Simple, transparent pricing.</h2>
+      <p class="text-[16px] mt-4 max-w-lg mx-auto" style="color:var(--muted)">Start free. Upgrade when you need more reach.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      {[
+        {
+          n: 'Free',
+          p: '$0',
+          period: 'forever',
+          d: 'For new clinics getting started',
+          features: ['Basic directory listing', 'Up to 3 clinician profiles', 'Email support', 'Up to 5 reviews/month'],
+          cta: 'Get started free',
+          featured: false,
+        },
+        {
+          n: 'Practice',
+          p: '$49',
+          period: '/mo',
+          d: 'For growing single-location practices',
+          features: ['Verified badge', 'Unlimited clinician profiles', 'Patient inquiry inbox', 'Priority support', 'Analytics dashboard', '20 reviews/month'],
+          cta: 'Start free trial',
+          featured: true,
+        },
+        {
+          n: 'Group',
+          p: 'Custom',
+          period: '',
+          d: 'For multi-location clinic groups',
+          features: ['Everything in Practice', 'Featured placement in search', 'Custom branding', 'Dedicated account manager', 'Lead routing & CRM', 'Unlimited reviews'],
+          cta: 'Contact us',
+          featured: false,
+        },
+      ].map((plan) => (
+        <div class={`plan-card ${plan.featured ? 'featured' : ''}`} style={plan.featured ? 'background:var(--ink); border-color:var(--ink);' : 'background:white;'}>
+          {plan.featured && (
+            <div class="inline-block px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide mb-4" style="background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.8)">
+              Most Popular
+            </div>
+          )}
+          <div class="serif mb-1" style={`font-size:2rem; color:${plan.featured ? 'white' : 'var(--ink)'}`}>{plan.n}</div>
+          <div class="flex items-baseline gap-1 mb-3">
+            <span class="serif" style={`font-size:2.25rem; color:${plan.featured ? 'white' : 'var(--ink)'}`}>{plan.p}</span>
+            {plan.period && <span class="text-[14px]" style={`color:${plan.featured ? 'rgba(255,255,255,0.5)' : 'var(--muted)'}`}>{plan.period}</span>}
+          </div>
+          <p class="text-[14px] pb-6 mb-6" style={`border-bottom:1px solid ${plan.featured ? 'rgba(255,255,255,0.12)' : 'var(--line)'}; color:${plan.featured ? 'rgba(255,255,255,0.6)' : 'var(--muted)'}`}>
+            {plan.d}
+          </p>
+          <ul class="space-y-3 mb-8">
+            {plan.features.map((f) => (
+              <li class="flex items-center gap-3 text-[14px]" style={`color:${plan.featured ? 'rgba(255,255,255,0.85)' : 'var(--ink)'}`}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style={`color:${plan.featured ? 'var(--warm)' : 'var(--accent)'}; flex-shrink:0`}><polyline points="20 6 9 17 4 12"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <a href="#signup" class={`block w-full py-3.5 rounded-xl text-center font-medium text-[14px] transition-all ${plan.featured ? 'hover:opacity-90' : 'hover:bg-[color:var(--paper2)]'}`}
+            style={plan.featured ? 'background:white; color:var(--ink)' : `border:1px solid var(--line); color:var(--ink)`}>
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <!-- Social proof -->
+    <div class="text-center mt-16">
+      <p class="text-[14px]" style="color:var(--muted)">
+        Join <strong style="color:var(--ink)">340+ clinics</strong> that registered this month.
+        No credit card required for free tier.
+      </p>
+    </div>
+  </div>
+</section>
+
 </Layout>
 
 <script>
-  document.getElementById('clinic-signup-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const msgEl = document.getElementById('form-message')!;
+// Multi-step form logic
+const steps = [
+  document.getElementById('form-step-1'),
+  document.getElementById('form-step-2'),
+  document.getElementById('form-step-3'),
+];
+const stepDots = document.querySelectorAll('.step-dot');
+const stepLabel = document.getElementById('step-label');
+const stepLabels = ['Clinic info', 'Equipment & protocols', 'Contact & submit'];
 
-    const data = {
-      segment: 'clinic_owner',
-      name: (form.querySelector('[name="name"]') as HTMLInputElement).value,
-      email: (form.querySelector('[name="email"]') as HTMLInputElement).value,
-      clinicName: (form.querySelector('[name="clinicName"]') as HTMLInputElement).value,
-      city: (form.querySelector('[name="city"]') as HTMLInputElement).value,
-      state: (form.querySelector('[name="state"]') as HTMLInputElement).value,
-      source: 'for-clinics-page',
-    };
-
-    try {
-      const res = await fetch('/api/funnel/enter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (res.ok) {
-        form.classList.add('hidden');
-        msgEl.textContent = 'Registration received! Check your email for next steps.';
-        msgEl.className = 'px-4 py-3 rounded-xl text-sm font-medium bg-emerald-50 text-emerald-700 border border-emerald-100';
-        msgEl.classList.remove('hidden');
-      } else {
-        msgEl.textContent = 'Something went wrong. Please try again.';
-        msgEl.className = 'px-4 py-3 rounded-xl text-sm font-medium bg-red-50 text-red-700 border border-red-100';
-        msgEl.classList.remove('hidden');
-      }
-    } catch {
-      msgEl.textContent = 'Network error. Please try again.';
-      msgEl.className = 'px-4 py-3 rounded-xl text-sm font-medium bg-red-50 text-red-700 border border-red-100';
-      msgEl.classList.remove('hidden');
-    }
+function goToStep(n: number) {
+  steps.forEach((s, i) => {
+    if (s) s.style.display = i === n ? 'block' : 'none';
   });
+  stepDots.forEach((dot, i) => {
+    dot.classList.remove('active', 'done', 'pending');
+    if (i < n) dot.classList.add('done');
+    else if (i === n) dot.classList.add('active');
+    else dot.classList.add('pending');
+  });
+  if (stepLabel) stepLabel.textContent = stepLabels[n];
+}
+
+document.getElementById('to-step-2')?.addEventListener('click', () => {
+  const name = (document.querySelector('[name="name"]') as HTMLInputElement)?.value;
+  const email = (document.querySelector('[name="email"]') as HTMLInputElement)?.value;
+  const clinicName = (document.querySelector('[name="clinicName"]') as HTMLInputElement)?.value;
+  if (!name || !email || !clinicName) {
+    alert('Please fill in your name, email, and clinic name to continue.');
+    return;
+  }
+  goToStep(1);
+});
+
+document.getElementById('back-to-1')?.addEventListener('click', () => goToStep(0));
+document.getElementById('to-step-3')?.addEventListener('click', () => goToStep(2));
+document.getElementById('back-to-2')?.addEventListener('click', () => goToStep(1));
+
+// Form submission
+document.getElementById('clinic-signup-form')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target as HTMLFormElement;
+  const msgEl = document.getElementById('form-message')!;
+  const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  const data = {
+    segment: 'clinic_owner',
+    name: (form.querySelector('[name="name"]') as HTMLInputElement)?.value,
+    email: (form.querySelector('[name="email"]') as HTMLInputElement)?.value,
+    clinicName: (form.querySelector('[name="clinicName"]') as HTMLInputElement)?.value,
+    city: (form.querySelector('[name="city"]') as HTMLInputElement)?.value,
+    state: (form.querySelector('[name="state"]') as HTMLInputElement)?.value,
+    phone: (form.querySelector('[name="phone"]') as HTMLInputElement)?.value,
+    website: (form.querySelector('[name="website"]') as HTMLInputElement)?.value,
+    source: 'for-clinics-page',
+  };
+
+  try {
+    const res = await fetch('/api/funnel/enter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    if (res.ok) {
+      form.innerHTML = `
+        <div style="text-align:center; padding:3rem 0;">
+          <div style="width:4rem;height:4rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;background:rgba(27,75,90,0.1)">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div style="font-family:'Instrument Serif',Georgia,serif;font-size:2rem;color:var(--ink);margin-bottom:.75rem">You're on the list.</div>
+          <p style="font-size:15px;color:var(--muted)">Our partnerships team will reach out within 24 hours to get your clinic listed.</p>
+        </div>
+      `;
+    } else {
+      msgEl.textContent = 'Something went wrong. Please try again.';
+      msgEl.className = 'px-5 py-4 rounded-xl text-[14px] font-medium';
+      msgEl.style.cssText = 'background:#fef2f2;color:#b91c1c;border:1px solid #fecaca';
+      msgEl.classList.remove('hidden');
+      btn.textContent = 'Register My Clinic — Free';
+      btn.disabled = false;
+    }
+  } catch {
+    msgEl.textContent = 'Network error. Please try again.';
+    msgEl.className = 'px-5 py-4 rounded-xl text-[14px] font-medium';
+    msgEl.style.cssText = 'background:#fef2f2;color:#b91c1c;border:1px solid #fecaca';
+    msgEl.classList.remove('hidden');
+    btn.textContent = 'Register My Clinic — Free';
+    btn.disabled = false;
+  }
+});
 </script>

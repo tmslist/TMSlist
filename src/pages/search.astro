@@ -15,28 +15,262 @@ try {
 
 const pageTitle = "Search TMS Clinics | Advanced Filters | TMS List";
 const metaDescription = `Search and filter ${clinicCount}+ TMS therapy clinics by insurance, condition, device, rating, and location.`;
+
+// Extract location from query string for display
+const url = new URL(Astro.request.url);
+const locationParam = url.searchParams.get('location') || url.searchParams.get('q') || '';
+const displayLocation = locationParam || 'your area';
 ---
 
 <Layout title={pageTitle} description={metaDescription}>
-  <section class="bg-white pt-12 pb-6 border-b border-slate-100">
-    <div class="container mx-auto px-6 lg:px-12">
-      <h1 class="text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 mb-2">
-        Find Your TMS Clinic
+
+<style>
+  :root{--ink:#0A1628;--ink2:#1E2A3B;--muted:#5A6B82;--warm:#C9654A;--line:#E6EAF0;--paper:#FBFAF7;--paper2:#F4F1EA;--accent:#1B4B5A;}
+  .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-0.02em}
+  .linky{position:relative;display:inline-block}
+  .linky::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .linky:hover::after{transform:scaleX(1)}
+  .filter-label{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:.75rem;display:block}
+  .filter-checkbox{width:.875rem;height:.875rem;border-radius:.125rem;border:1px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .filter-checkbox.checked{background:var(--ink);border-color:var(--ink)}
+</style>
+
+<!-- HERO HEADER -->
+<section style="background:var(--paper); padding-top:5.5rem; padding-bottom:3.5rem; border-bottom:1px solid var(--line)">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-8">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] mb-8" style="color:var(--muted)" aria-label="Breadcrumb">
+      <a href="/" class="linky hover:text-[color:var(--ink)]" style="color:var(--muted)">Home</a>
+      <span>/</span>
+      <a href="/us/" class="linky hover:text-[color:var(--ink)]" style="color:var(--muted)">All Clinics</a>
+      <span>/</span>
+      <span style="color:var(--ink)">Search Results</span>
+    </nav>
+
+    <!-- Headline -->
+    <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-end">
+      <h1 class="serif" style="font-size:clamp(2.25rem,5vw,4.5rem); line-height:.95; color:var(--ink)">
+        TMS clinics in<br/>
+        <span class="italic">
+          {locationParam ? locationParam + '.' : 'your area.'}
+        </span>
       </h1>
-      <p class="text-slate-500 font-light">
-        Search {clinicCount.toLocaleString()}+ verified TMS providers with advanced filters.
+      <p class="text-[15px] lg:justify-self-end max-w-md lg:pb-2" style="color:var(--muted)">
+        {clinicCount.toLocaleString()}+ verified providers across 6 countries. Sorted by editorial relevance — filter by device, protocol, insurance, or distance.
       </p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <main class="bg-slate-50/50 py-8">
-    <div class="container mx-auto px-6 lg:px-12">
-      <AdvancedSearch client:idle />
-      <noscript>
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center mt-4">
-          <p class="text-amber-800">Search requires JavaScript. <a href="/us/" class="underline font-medium">Browse clinics by state instead</a>.</p>
+<!-- SEARCH LAYOUT -->
+<main style="background:var(--paper); padding-bottom:5rem;">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-8 pt-10">
+    <div class="grid lg:grid-cols-[280px_1fr] gap-12">
+
+      <!-- FILTER SIDEBAR -->
+      <aside id="filter-sidebar">
+        <div class="space-y-8">
+
+          <!-- Verification -->
+          <div>
+            <span class="filter-label">Verification</span>
+            <div class="space-y-2.5">
+              {[
+                { id: 'verified-only', label: 'Verified only', checked: true },
+                { id: 'new-patients', label: 'Accepts new patients', checked: false },
+                { id: 'telehealth', label: 'Offers telehealth consult', checked: false },
+              ].map((opt) => (
+                <label class="flex items-center gap-3 text-[13px] cursor-pointer group">
+                  <span class={`filter-checkbox ${opt.checked ? 'checked' : ''}`}>
+                    {opt.checked && (
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                    )}
+                  </span>
+                  <span class="group-hover:text-[color:var(--ink)] transition-colors" style="color:var(--muted)">{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <!-- Technology -->
+          <div>
+            <span class="filter-label">Technology</span>
+            <div class="space-y-2.5">
+              {[
+                { id: 'neurostar', label: 'NeuroStar' },
+                { id: 'brainsway', label: 'BrainsWay Deep TMS' },
+                { id: 'magventure', label: 'MagVenture MagPro' },
+                { id: 'magstim', label: 'Magstim' },
+              ].map((opt) => (
+                <label class="flex items-center gap-3 text-[13px] cursor-pointer group">
+                  <span class="filter-checkbox">
+                  </span>
+                  <span class="group-hover:text-[color:var(--ink)] transition-colors" style="color:var(--muted)">{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <!-- Protocol -->
+          <div>
+            <span class="filter-label">Protocol</span>
+            <div class="space-y-2.5">
+              {[
+                { label: 'Standard 10Hz' },
+                { label: 'Theta burst (iTBS)' },
+                { label: 'SAINT accelerated' },
+                { label: 'Deep TMS (H-coil)' },
+              ].map((opt) => (
+                <label class="flex items-center gap-3 text-[13px] cursor-pointer group">
+                  <span class="filter-checkbox"></span>
+                  <span class="group-hover:text-[color:var(--ink)] transition-colors" style="color:var(--muted)">{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <!-- Insurance -->
+          <div>
+            <span class="filter-label">Insurance</span>
+            <div class="space-y-2.5">
+              {[
+                { label: 'Aetna' },
+                { label: 'BCBS' },
+                { label: 'Cigna' },
+                { label: 'Medicare' },
+                { label: 'UnitedHealth' },
+              ].map((opt) => (
+                <label class="flex items-center gap-3 text-[13px] cursor-pointer group">
+                  <span class="filter-checkbox"></span>
+                  <span class="group-hover:text-[color:var(--ink)] transition-colors" style="color:var(--muted)">{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <!-- Wait time -->
+          <div>
+            <span class="filter-label">Wait time</span>
+            <div class="relative">
+              <select class="w-full px-4 py-2.5 rounded-lg text-[13px] appearance-none outline-none transition-colors" style="border:1px solid var(--line); background:white; color:var(--ink)">
+                <option value="">Any availability</option>
+                <option value="week">Less than 1 week</option>
+                <option value="2weeks">1–2 weeks</option>
+                <option value="4weeks">2–4 weeks</option>
+              </select>
+              <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" style="color:var(--muted)">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price range -->
+          <div>
+            <span class="filter-label">Price range</span>
+            <div class="space-y-2.5">
+              {[
+                { label: '$ Under $200/session', value: 'budget' },
+                { label: '$$ $200–350/session', value: 'mid' },
+                { label: '$$$ $350+/session', value: 'premium' },
+              ].map((opt) => (
+                <label class="flex items-center gap-3 text-[13px] cursor-pointer group">
+                  <span class="filter-checkbox"></span>
+                  <span class="group-hover:text-[color:var(--ink)] transition-colors" style="color:var(--muted)">{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <!-- Reset link -->
+          <div class="pt-2">
+            <button id="reset-filters" class="text-[12px] linky" style="color:var(--muted)">Clear all filters</button>
+          </div>
         </div>
-      </noscript>
+      </aside>
+
+      <!-- RESULTS COLUMN -->
+      <div>
+        <!-- Results bar -->
+        <div class="flex items-center justify-between mb-2 pb-5" style="border-bottom:1px solid var(--line)">
+          <div class="text-[13px]" style="color:var(--muted)">
+            <b style="color:var(--ink)" class="tabular-nums">{clinicCount.toLocaleString()}</b> results
+            {locationParam && <> · <span style="color:var(--ink)">{locationParam}</span></>}
+          </div>
+          <div class="flex items-center gap-3">
+            <select class="text-[13px] font-medium outline-none bg-transparent cursor-pointer" style="color:var(--ink)">
+              <option>Editorial relevance</option>
+              <option>Highest rated</option>
+              <option>Nearest first</option>
+              <option>Wait time</option>
+            </select>
+            <!-- Mobile filter toggle -->
+            <button id="mobile-filter-btn" class="lg:hidden flex items-center gap-2 px-3 py-1.5 rounded-lg text-[12px]" style="border:1px solid var(--line); color:var(--ink)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+              Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- AdvancedSearch React island handles the actual clinic results -->
+        <AdvancedSearch client:idle initialLocation={locationParam} />
+
+        <noscript>
+          <div class="rounded-2xl p-8 text-center mt-6" style="background:white; border:1px solid var(--line)">
+            <p class="text-[15px]" style="color:var(--ink)">
+              Search requires JavaScript.
+              <a href="/us/" class="underline font-medium ml-1" style="color:var(--accent)">Browse clinics by state instead</a>.
+            </p>
+          </div>
+        </noscript>
+
+        <!-- Static fallback tiles for SEO (no-JS visible) -->
+        <noscript>
+          <div class="mt-8 space-y-4">
+            {[
+              { href: '/us/california/', label: 'TMS Clinics in California', count: '120+ clinics' },
+              { href: '/us/new-york/', label: 'TMS Clinics in New York', count: '85+ clinics' },
+              { href: '/us/texas/', label: 'TMS Clinics in Texas', count: '70+ clinics' },
+              { href: '/us/florida/', label: 'TMS Clinics in Florida', count: '60+ clinics' },
+            ].map((item) => (
+              <a href={item.href} class="flex items-center justify-between p-5 rounded-xl transition-colors hover:bg-[color:var(--paper2)]" style="border:1px solid var(--line); color:var(--ink)">
+                <span class="font-medium">{item.label}</span>
+                <span class="text-[13px]" style="color:var(--muted)">{item.count}</span>
+              </a>
+            ))}
+          </div>
+        </noscript>
+      </div>
+
     </div>
-  </main>
+  </div>
+</main>
+
 </Layout>
+
+<script>
+// Filter checkbox interactivity
+document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+  const label = checkbox.closest('label');
+  if (label) {
+    label.addEventListener('click', () => {
+      checkbox.classList.toggle('checked');
+    });
+  }
+});
+
+// Reset all filters
+document.getElementById('reset-filters')?.addEventListener('click', () => {
+  document.querySelectorAll('.filter-checkbox').forEach(cb => cb.classList.remove('checked'));
+  document.querySelectorAll('select').forEach(sel => { sel.selectedIndex = 0; });
+});
+
+// Mobile filter toggle
+document.getElementById('mobile-filter-btn')?.addEventListener('click', () => {
+  const sidebar = document.getElementById('filter-sidebar');
+  if (sidebar) {
+    sidebar.classList.toggle('hidden');
+  }
+});
+</script>

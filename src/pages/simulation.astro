@@ -3,415 +3,514 @@ import Layout from '../layouts/Layout.astro';
 import TMSViewerLazy from '../components/react/TMSViewerLazy';
 ---
 
-<Layout title="TMS Simulation | Interactive Brain Stimulation Visualizer" description="Explore an interactive 3D visualization of transcranial magnetic stimulation (TMS). See how electromagnetic fields target specific brain regions for depression, anxiety, and more.">
+<Layout title="TMS Simulation | Interactive Brain Stimulation Visualizer" description="Explore an interactive visualization of transcranial magnetic stimulation (TMS). See how electromagnetic fields target specific brain regions for depression, OCD, anxiety, and more.">
 
-    <!-- Hero -->
-    <section class="relative bg-slate-950 overflow-hidden min-h-[60vh] flex items-center border-b border-violet-500/20">
-        <!-- Deep Space Animated Background -->
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/40 via-slate-950 to-slate-950"></div>
-        <div class="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-fuchsia-600/10 via-cyan-500/5 to-transparent blur-[100px] pointer-events-none"></div>
-        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02),rgba(255,255,255,0.02)),url('/grid.svg')] opacity-40 bg-[length:30px_30px] [mask-image:linear-gradient(to_bottom,white,transparent)] animate-[pulse_4s_ease-in-out_infinite_alternate]"></div>
-        <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-cyan-600/20 rounded-full blur-[150px] pointer-events-none"></div>
-        <div class="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-violet-600/30 rounded-full blur-[120px] pointer-events-none"></div>
+<style>
+  /* Dark cosmic design system for simulation page */
+  :root{
+    --bg:#060910;
+    --sim-ink:#E9EEF8;
+    --sim-ink2:#A4B0C8;
+    --sim-ink3:#5F6A82;
+    --sim-line:#1A2132;
+    --sim-line2:#2A3250;
+    --sim-panel:#0B1120;
+    --sim-panel2:#0E1528;
+    --cyan:#3DD9EB;
+    --violet:#9E7BFF;
+    --magenta:#E462C9;
+    --amber:#F6B84B;
+  }
+  .sim-page{background:var(--bg);color:var(--sim-ink);font-family:'Inter',system-ui;-webkit-font-smoothing:antialiased}
+  .serif{font-family:'Instrument Serif',Georgia,serif;letter-spacing:-0.01em}
+  .mono{font-family:'JetBrains Mono','Fira Mono',monospace;font-feature-settings:'tnum' on}
+  .sim-ink2{color:var(--sim-ink2)}.sim-ink3{color:var(--sim-ink3)}
+  .bd{border-color:var(--sim-line)}.bd2{border-color:var(--sim-line2)}
+  .panel{background:var(--sim-panel)}.panel2{background:var(--sim-panel2)}
+  .cyan{color:var(--cyan)}.violet-c{color:var(--violet)}
+  .starfield{
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(158,123,255,0.18), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 110% 40%, rgba(61,217,235,0.15), transparent 60%),
+      radial-gradient(ellipse 40% 40% at -10% 70%, rgba(228,98,201,0.12), transparent 60%),
+      var(--bg);
+  }
+  .grid-fade{
+    background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+    background-size:32px 32px;
+    mask-image:linear-gradient(to bottom,black 10%,transparent 90%);
+    -webkit-mask-image:linear-gradient(to bottom,black 10%,transparent 90%);
+  }
+  .glow-cyan{box-shadow:0 0 40px -8px rgba(61,217,235,0.6),0 0 80px -20px rgba(61,217,235,0.4)}
+  .glow-violet{box-shadow:0 0 40px -8px rgba(158,123,255,0.6),0 0 80px -20px rgba(158,123,255,0.4)}
+  .glass{background:rgba(11,17,32,0.55);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.06)}
+  @keyframes pulse-sim{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.7}}
+  .pulse-sim{animation:pulse-sim 2.4s ease-in-out infinite}
+  @keyframes emit-sim{0%{r:20;opacity:.9}100%{r:120;opacity:0}}
+  .emit-sim{animation:emit-sim 2.4s ease-out infinite}
+  @keyframes draw-sim{to{stroke-dashoffset:0}}
+  .draw-sim{stroke-dasharray:400;stroke-dashoffset:400;animation:draw-sim 3s ease-out infinite}
+  @keyframes scan-sim{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+  .scan-sim{animation:scan-sim 3s linear infinite}
+  @keyframes wave-sim{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  @keyframes twinkle{0%,100%{opacity:.6}50%{opacity:1}}
+  .stars::before{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,.8),transparent),
+      radial-gradient(1px 1px at 60% 70%,rgba(255,255,255,.6),transparent),
+      radial-gradient(1px 1px at 80% 10%,rgba(255,255,255,.7),transparent),
+      radial-gradient(1px 1px at 40% 80%,rgba(255,255,255,.5),transparent),
+      radial-gradient(1px 1px at 90% 50%,rgba(255,255,255,.8),transparent),
+      radial-gradient(1.5px 1.5px at 15% 60%,rgba(255,255,255,.9),transparent),
+      radial-gradient(1px 1px at 75% 25%,rgba(255,255,255,.5),transparent);
+    background-size:400px 400px;
+    animation:twinkle 8s linear infinite;
+  }
+</style>
 
-        <div class="container mx-auto px-6 pt-28 pb-20 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_400px] gap-12 items-center max-w-6xl mx-auto">
-                <!-- Left: Headline + CTA -->
-                <div>
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 border border-violet-400/30 rounded-full mb-8 shadow-[0_0_20px_rgba(139,92,246,0.3)] backdrop-blur-md">
-                        <div class="relative w-2 h-2">
-                           <div class="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-75"></div>
-                           <div class="relative rounded-full w-2 h-2 bg-cyan-300"></div>
-                        </div>
-                        <span class="text-[11px] font-bold text-violet-100 tracking-widest uppercase glow-text">Interactive Simulation</span>
-                    </div>
-                    <h1 class="text-5xl lg:text-7xl font-black tracking-tight text-white mb-6 leading-[1.05] drop-shadow-xl">
-                        See How <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-violet-400 to-fuchsia-400 animate-gradient-xy">TMS</span><br class="hidden sm:block" />
-                        Targets the Brain
-                    </h1>
-                    <p class="text-xl text-indigo-100/80 font-light leading-relaxed mb-10 max-w-xl drop-shadow-md">
-                        Transcranial magnetic stimulation uses focused electromagnetic fields to stimulate specific cortical regions. Explore the science in real time.
-                    </p>
+<div class="sim-page">
 
-                    <!-- Quick stats -->
-                    <div class="flex flex-wrap gap-4 mb-10">
-                        {[
-                            { value: '36', label: 'Sessions typical', color: 'cyan', shadow: 'shadow-cyan-500/20' },
-                            { value: '5–9', label: 'Weeks to complete', color: 'violet', shadow: 'shadow-violet-500/20' },
-                            { value: '2008', label: 'FDA-cleared', color: 'emerald', shadow: 'shadow-emerald-500/20' },
-                        ].map((stat) => (
-                            <div class={`bg-slate-900/60 backdrop-blur-md border border-${stat.color}-500/30 rounded-2xl px-5 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:scale-105 hover:bg-slate-800/80 hover:border-${stat.color}-400/50 hover:${stat.shadow} hover:shadow-lg transition-all duration-300 cursor-default group`}>
-                                <div class={`text-2xl font-black font-mono text-${stat.color}-400 group-hover:text-${stat.color}-300 transition-colors drop-shadow-md`}>{stat.value}</div>
-                                <div class="text-[11px] text-slate-400 font-medium uppercase tracking-wider mt-1">{stat.label}</div>
-                            </div>
-                        ))}
-                    </div>
+  <!-- HERO / INTERACTIVE SECTION -->
+  <section class="relative pt-24 pb-16 overflow-hidden starfield" id="simulation">
+    <div class="stars absolute inset-0 pointer-events-none"></div>
+    <div class="grid-fade absolute inset-0 pointer-events-none"></div>
 
-                    <!-- CTA -->
-                    <div class="flex flex-wrap items-center gap-4">
-                        <a
-                            href="#simulation"
-                            class="group relative inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-violet-600 text-white font-bold rounded-2xl overflow-hidden transition-all hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(139,92,246,0.6)]"
-                        >
-                            <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
-                            <svg class="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                            <span class="relative z-10 text-lg uppercase tracking-wide">Launch Simulation</span>
-                        </a>
-                        <a
-                            href="#how-it-works"
-                            class="inline-flex items-center gap-2 px-6 py-4 bg-slate-900/50 backdrop-blur border border-slate-700/80 hover:border-slate-500 text-slate-300 hover:text-white hover:bg-slate-800 font-semibold rounded-2xl transition-all shadow-xl hover:shadow-2xl"
-                        >
-                            How TMS Works
-                        </a>
-                    </div>
-                </div>
+    <div class="relative max-w-[1500px] mx-auto px-6 lg:px-8">
+      <!-- Meta strip -->
+      <div class="flex items-center gap-6 mb-10 text-[11px] sim-ink3 mono uppercase tracking-[0.18em] flex-wrap">
+        <span class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full pulse-sim" style="background:var(--cyan)"></span>
+          Interactive simulation
+        </span>
+        <span>·</span>
+        <span>Educational · not for treatment planning</span>
+        <span class="ml-auto hidden lg:inline">Build 2026.04</span>
+      </div>
 
-                <!-- Right: Brain preview -->
-                <div class="hidden lg:block relative">
-                    <div class="relative rounded-3xl overflow-hidden border border-violet-500/20 shadow-[0_0_50px_-12px_rgba(139,92,246,0.25)] bg-slate-900/40 backdrop-blur-md" style="height: 340px;">
-                        <!-- Tech Grid Background -->
-                        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03),rgba(255,255,255,0.03)),url('/grid.svg')] opacity-50 bg-[length:20px_20px]"></div>
-                        
-                        <!-- Radar Sweep -->
-                        <div class="absolute inset-0 opacity-20 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(34,211,238,0.4)_360deg)] animate-[spin_4s_linear_infinite] rounded-full scale-[1.5]"></div>
-                        
-                        <div class="absolute inset-0 flex items-center justify-center" style="transform: perspective(600px) rotateX(15deg) rotateY(-15deg);">
-                            <div class="relative w-48 h-40">
-                                <!-- Brain Outer Halo -->
-                                <div class="absolute inset-0 rounded-[4rem] border-2 border-violet-500/30 bg-violet-900/20 shadow-[0_0_40px_rgba(139,92,246,0.2)] flex items-center justify-center overflow-hidden">
-                                    <!-- Scanning Lines -->
-                                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent w-full h-[20%] animate-[slideDown_3s_ease-in-out_infinite_alternate]"></div>
-                                    <!-- Inner Brain Core -->
-                                    <div class="w-36 h-28 rounded-[3rem] border border-fuchsia-500/30 bg-gradient-to-br from-violet-500/20 to-fuchsia-500/10 backdrop-blur shadow-[inset_0_0_20px_rgba(139,92,246,0.3)]">
-                                        <!-- Active Target Region -->
-                                        <div class="absolute top-[25%] left-[20%] w-10 h-10 rounded-full bg-cyan-400/20 mix-blend-screen shadow-[0_0_20px_rgba(34,211,238,0.6)] animate-pulse border border-cyan-300/40"></div>
-                                        <!-- Nodes -->
-                                        <svg class="absolute inset-0 w-full h-full stroke-indigo-400/30" fill="none" stroke-width="1.5">
-                                            <path d="M40 30 Q 70 20 100 50 T 130 80" />
-                                            <circle cx="40" cy="30" r="3" fill="#818cf8"/>
-                                            <circle cx="100" cy="50" r="2" fill="#818cf8"/>
-                                            <circle cx="130" cy="80" r="4" fill="#a78bfa" class="animate-pulse"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                
-                                <!-- Coil Prop -->
-                                <div class="absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
-                                    <div class="w-8 h-10 bg-slate-700/90 rounded-t border-t border-slate-500/50 mb-0.5 relative z-10 flex flex-col justify-end pb-1 items-center gap-1">
-                                        <div class="w-4 h-[2px] bg-cyan-400"></div>
-                                        <div class="w-4 h-[2px] bg-amber-400"></div>
-                                    </div>
-                                    <div class="flex gap-[4px] relative -mt-2">
-                                        <!-- Pulse Rings -->
-                                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-cyan-400/50 rounded-full animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
-                                        <!-- Coil Rings -->
-                                        <div class="w-12 h-12 rounded-full border-4 border-slate-800 bg-gradient-to-br from-cyan-500 to-violet-500 shadow-[0_0_20px_rgba(34,211,238,0.5)] flex items-center justify-center">
-                                            <div class="w-6 h-6 rounded-full border-2 border-slate-900 bg-cyan-400/20"></div>
-                                        </div>
-                                        <div class="w-12 h-12 rounded-full border-4 border-slate-800 bg-gradient-to-br from-fuchsia-500 to-violet-500 shadow-[0_0_20px_rgba(167,139,250,0.5)] flex items-center justify-center">
-                                            <div class="w-6 h-6 rounded-full border-2 border-slate-900 bg-violet-400/20"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Overlay UI HUD -->
-                        <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md border border-violet-500/30 rounded-lg px-3 py-2 flex items-center gap-3">
-                            <div class="relative flex h-3 w-3">
-                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                              <span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
-                            </div>
-                            <div>
-                                <div class="text-[9px] text-slate-400 uppercase tracking-widest leading-none mb-1">Status</div>
-                                <div class="text-[11px] font-bold text-white leading-none">Simulation Active</div>
-                            </div>
-                        </div>
-                        
-                        <div class="absolute bottom-4 left-4 bg-slate-900/80 backdrop-blur-md border border-slate-700/50 rounded-lg px-3 py-2">
-                            <div class="text-[10px] text-slate-400 uppercase tracking-wider mb-1">Target Cortex</div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-cyan-400 font-mono text-xs font-bold">L-DLPFC</span>
-                                <span class="text-amber-400 text-[10px]">120% MT</span>
-                            </div>
-                        </div>
+      <!-- Two-col layout: copy + brain viz -->
+      <div class="grid lg:grid-cols-[1fr_640px] gap-12 items-center mb-14">
+        <!-- Left: hero copy -->
+        <div>
+          <h1 class="serif leading-[0.95] tracking-tight mb-8" style="font-size:clamp(48px,6.5vw,88px)">
+            See how a <span class="italic" style="color:var(--cyan)">magnetic pulse</span><br/>
+            reaches the depressed brain.
+          </h1>
+          <p class="text-[17px] sim-ink2 leading-relaxed max-w-xl mb-8">
+            TMS delivers focused magnetic fields through the scalp, inducing small electrical currents in specific cortical regions. Adjust frequency, intensity, and target below — the visualization updates in real time.
+          </p>
 
-                        <div class="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-md border border-slate-700/50 rounded-lg px-3 py-2">
-                            <div class="flex justify-end gap-1 mb-1">
-                                {[1, 2, 3, 4, 5].map((i) => (
-                                    <div class={`w-1 h-3 rounded-sm ${i <= 3 ? 'bg-cyan-400' : 'bg-slate-700'}`}></div>
-                                ))}
-                            </div>
-                            <div class="text-[10px] text-slate-400 uppercase tracking-wider text-right">E-Field Str</div>
-                        </div>
-                        
-                    </div>
-                </div>
+          <!-- Session progress card -->
+          <div class="glass rounded-2xl p-5 flex items-center gap-6 max-w-xl mb-6">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 glow-cyan" style="background:linear-gradient(135deg,var(--cyan),var(--violet))">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:var(--bg)"><polygon points="5,3 21,12 5,21"/></svg>
             </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-[11px] sim-ink3 mono uppercase tracking-widest">Session</span>
+                <span class="mono text-[13px]">14 / 36</span>
+                <span class="ml-auto text-[11px] sim-ink3 mono">Week 3 of 7</span>
+              </div>
+              <div class="h-1.5 rounded-full overflow-hidden" style="background:rgba(255,255,255,0.05)">
+                <div class="h-full rounded-full" style="width:38.8%;background:linear-gradient(to right,var(--cyan),var(--violet))"></div>
+              </div>
+              <div class="flex items-center gap-4 mt-3 text-[11px] sim-ink3 mono">
+                <span>10 Hz</span><span>·</span><span>120% MT</span><span>·</span><span>L-DLPFC</span><span>·</span><span>3000 pulses</span>
+              </div>
+            </div>
+            <div class="hidden md:flex flex-col items-end gap-1 pl-5" style="border-left:1px solid var(--sim-line2)">
+              <span class="text-[10px] sim-ink3 uppercase tracking-widest">Next in</span>
+              <span class="mono text-[22px]">00:14:22</span>
+            </div>
+          </div>
+
+          <!-- Quick stats -->
+          <div class="flex flex-wrap gap-3">
+            {[
+              { v: '36', l: 'Sessions typical', c: 'var(--cyan)' },
+              { v: '5–9', l: 'Weeks to complete', c: 'var(--violet)' },
+              { v: '2008', l: 'FDA-cleared', c: 'var(--amber)' },
+              { v: '58%', l: 'Response rate', c: '#4ade80' },
+            ].map((s) => (
+              <div class="panel border bd rounded-xl px-4 py-3">
+                <div class="mono text-[20px] font-semibold" style={`color:${s.c}`}>{s.v}</div>
+                <div class="text-[10px] sim-ink3 mono uppercase tracking-wider mt-0.5">{s.l}</div>
+              </div>
+            ))}
+          </div>
         </div>
-    </section>
 
-    <!-- Simulation Main -->
-    <section id="simulation" class="bg-slate-950 pb-32 relative">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-indigo-900/20 via-slate-950 to-slate-950 pointer-events-none"></div>
-        <div class="container mx-auto px-6 max-w-6xl relative z-10">
-            <!-- Toolbar -->
-            <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-3">
-                    <div class="relative w-2.5 h-2.5">
-                        <div class="absolute inset-0 rounded-full bg-cyan-400 animate-pulse opacity-80 blur-[2px]"></div>
-                        <div class="absolute inset-0 rounded-full bg-cyan-300"></div>
-                    </div>
-                    <span class="text-sm font-bold text-slate-200 tracking-wide">Interactive Simulator</span>
-                </div>
-                <div class="flex items-center gap-3">
-                    <button
-                        id="share-btn"
-                        class="flex items-center gap-1.5 px-4 py-2 bg-slate-800/80 backdrop-blur border border-slate-700/80 hover:border-cyan-500/50 hover:bg-slate-800 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all shadow-md group"
-                        title="Copy share link"
-                    >
-                        <svg class="w-4 h-4 text-slate-400 group-hover:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
-                        </svg>
-                        Share
-                    </button>
-                    <a
-                        href="#how-it-works"
-                        class="flex items-center gap-1.5 px-4 py-2 bg-slate-800/80 backdrop-blur border border-slate-700/80 hover:border-violet-500/50 hover:bg-slate-800 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all shadow-md group"
-                    >
-                        <svg class="w-4 h-4 text-slate-400 group-hover:text-violet-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        Help
-                    </a>
-                </div>
+        <!-- Right: SVG brain visualization (static preview — React island below handles interactive) -->
+        <div class="relative">
+          <div class="panel border bd rounded-2xl p-4 glow-violet relative overflow-hidden" style="aspect-ratio:1.1/1">
+            <!-- Corner marks -->
+            <div class="absolute top-3 left-3 text-[10px] mono sim-ink3">REC · LIVE</div>
+            <div class="absolute top-3 right-3 text-[10px] mono cyan flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full pulse-sim" style="background:var(--cyan)"></span>
+              LIVE
             </div>
+            <div class="absolute bottom-3 left-3 text-[10px] mono sim-ink3">ch1 · 75kV/m peak</div>
+            <div class="absolute bottom-3 right-3 text-[10px] mono sim-ink3">λ 0.5ms · biphasic</div>
 
-            <!-- Gradient border container -->
-            <div class="relative rounded-[2rem] p-[1px] bg-gradient-to-b from-violet-500/30 via-slate-800 to-slate-900 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]">
-                <div class="relative bg-slate-900/90 backdrop-blur-2xl rounded-[2rem] p-4 md:p-6 border border-slate-800/50">
-                    <TMSViewerLazy client:only="react" />
-                </div>
+            <!-- SVG brain -->
+            <svg viewBox="0 0 420 380" class="w-full h-full">
+              <defs>
+                <radialGradient id="brainGrad" cx="50%" cy="50%" r="60%">
+                  <stop offset="0%" stop-color="#1A2340" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#060910" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="skullStroke" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#9E7BFF"/>
+                  <stop offset="100%" stop-color="#3DD9EB"/>
+                </linearGradient>
+                <radialGradient id="pulseGrad">
+                  <stop offset="0%" stop-color="#3DD9EB" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#3DD9EB" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <circle cx="210" cy="180" r="170" fill="url(#brainGrad)"/>
+              {[60,90,120,150].map((r, i) => (
+                <circle cx="210" cy="180" r={r} fill="none" stroke="rgba(158,123,255,0.12)" stroke-width="0.5" stroke-dasharray="2 6"/>
+              ))}
+              <g stroke="url(#skullStroke)" stroke-width="1.2" fill="none" opacity="0.75">
+                <path d="M 120 180 Q 120 90 210 85 Q 310 85 320 160 Q 325 210 305 240 Q 285 265 250 270 L 235 290 Q 225 300 215 295 L 205 275 Q 175 272 155 260 Q 125 240 120 200 Z"/>
+                <path d="M 140 150 Q 170 140 200 150 Q 230 160 260 150" opacity="0.5"/>
+                <path d="M 135 180 Q 170 175 210 180 Q 250 185 285 178" opacity="0.5"/>
+                <path d="M 145 210 Q 175 205 210 212 Q 245 218 275 210" opacity="0.5"/>
+                <path d="M 210 95 Q 218 130 225 170 Q 235 210 245 250" opacity="0.55"/>
+                <path d="M 155 210 Q 200 230 260 220" opacity="0.45"/>
+              </g>
+              <path d="M 120 180 Q 120 90 210 85 Q 310 85 320 160 Q 325 210 305 240 Q 285 265 250 270 L 235 290 Q 225 300 215 295 L 205 275 Q 175 272 155 260 Q 125 240 120 200 Z" fill="rgba(158,123,255,0.04)"/>
+              <!-- DLPFC target -->
+              <g>
+                <circle cx="145" cy="140" r="20" fill="none" stroke="#3DD9EB" stroke-width="1" style="animation:emit-sim 2.4s ease-out 0s infinite;transform-origin:145px 140px"/>
+                <circle cx="145" cy="140" r="20" fill="none" stroke="#3DD9EB" stroke-width="1" style="animation:emit-sim 2.4s ease-out 0.8s infinite;transform-origin:145px 140px"/>
+                <circle cx="145" cy="140" r="20" fill="none" stroke="#3DD9EB" stroke-width="1" style="animation:emit-sim 2.4s ease-out 1.6s infinite;transform-origin:145px 140px"/>
+                <circle cx="145" cy="140" r="12" fill="url(#pulseGrad)" class="pulse-sim"/>
+                <circle cx="145" cy="140" r="4" fill="#3DD9EB"/>
+                <text x="160" y="132" fill="#3DD9EB" font-size="10" font-family="monospace" font-weight="600">L-DLPFC</text>
+                <text x="160" y="144" fill="rgba(61,217,235,0.6)" font-size="8.5" font-family="monospace">10Hz · 120% MT</text>
+              </g>
+              <!-- Coil above target -->
+              <g transform="translate(105, 50) rotate(-25)">
+                <ellipse cx="0" cy="0" rx="20" ry="8" fill="none" stroke="#E462C9" stroke-width="2.5"/>
+                <ellipse cx="35" cy="0" rx="20" ry="8" fill="none" stroke="#E462C9" stroke-width="2.5"/>
+                <ellipse cx="0" cy="0" rx="14" ry="5" fill="none" stroke="rgba(228,98,201,0.5)" stroke-width="1"/>
+                <ellipse cx="35" cy="0" rx="14" ry="5" fill="none" stroke="rgba(228,98,201,0.5)" stroke-width="1"/>
+                <line x1="17.5" y1="-8" x2="35" y2="-28" stroke="#E462C9" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <!-- Neural propagation lines -->
+              <g stroke="#9E7BFF" stroke-width="1" fill="none" opacity="0.6">
+                <path d="M 145 140 Q 185 160 225 180" class="draw-sim"/>
+                <path d="M 145 140 Q 165 190 195 220" class="draw-sim" style="animation-delay:1s"/>
+                <path d="M 145 140 Q 125 180 115 210" class="draw-sim" style="animation-delay:2s"/>
+              </g>
+              <!-- Crosshair -->
+              <g stroke="rgba(61,217,235,0.3)" stroke-width="0.8">
+                <line x1="120" y1="140" x2="137" y2="140"/><line x1="153" y1="140" x2="170" y2="140"/>
+                <line x1="145" y1="115" x2="145" y2="132"/><line x1="145" y1="148" x2="145" y2="165"/>
+              </g>
+              <text x="20" y="375" fill="rgba(255,255,255,0.25)" font-size="9" font-family="monospace">SAGITTAL VIEW · L</text>
+              <text x="340" y="375" fill="rgba(255,255,255,0.25)" font-size="9" font-family="monospace">R ANT</text>
+            </svg>
+
+            <!-- Scan line overlay -->
+            <div class="absolute inset-4 overflow-hidden pointer-events-none rounded-xl">
+              <div class="h-8 scan-sim" style="background:linear-gradient(to bottom,transparent,rgba(61,217,235,0.3),transparent)"></div>
             </div>
+          </div>
+
+          <!-- Waveform -->
+          <div class="panel border bd rounded-xl p-3 mt-3">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-[10px] mono sim-ink3 uppercase tracking-widest">Pulse train · realtime</span>
+              <span class="text-[10px] mono cyan">10 Hz · train 4s · ISI 26s</span>
+            </div>
+            <svg viewBox="0 0 600 80" class="w-full h-14">
+              <line x1="0" y1="40" x2="600" y2="40" stroke="rgba(255,255,255,0.1)" stroke-dasharray="3 3"/>
+              <text x="5" y="12" fill="rgba(255,255,255,0.3)" font-size="9" font-family="monospace">+2T</text>
+              <text x="5" y="72" fill="rgba(255,255,255,0.3)" font-size="9" font-family="monospace">-2T</text>
+              {Array.from({length: 10}).map((_, i) => {
+                const x = 10 + i * 58;
+                return (
+                  <g>
+                    <line x1={x} y1="40" x2={x} y2="10" stroke="#3DD9EB" stroke-width="1.5"/>
+                    <line x1={x} y1="10" x2={x+3} y2="10" stroke="#3DD9EB" stroke-width="1.5"/>
+                    <line x1={x+3} y1="10" x2={x+3} y2="70" stroke="#3DD9EB" stroke-width="1.5"/>
+                    <line x1={x+3} y1="70" x2={x+6} y2="70" stroke="#3DD9EB" stroke-width="1.5"/>
+                    <line x1={x+6} y1="70" x2={x+6} y2="40" stroke="#3DD9EB" stroke-width="1.5"/>
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- How TMS Works -->
-    <section id="how-it-works" class="bg-gradient-to-br from-indigo-50/50 via-white to-cyan-50/50 py-24 relative overflow-hidden">
-        <!-- Decorative subtle background elements -->
-        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.8),rgba(255,255,255,0.8)),url('/grid.svg')] opacity-40"></div>
-        
-        <div class="container mx-auto px-6 max-w-5xl relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-4">How TMS Works</h2>
-                <p class="text-xl text-slate-500 max-w-2xl mx-auto font-light leading-relaxed">
-                    A clear, step-by-step explanation of the biological and physical processes that happen during a single session.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-                <!-- Connecting Line (Desktop) -->
-                <div class="hidden md:block absolute top-[45px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-violet-200 via-cyan-200 to-emerald-200 z-0"></div>
-
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-10 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)] transition-all duration-300">
-                    <div class="w-16 h-16 mx-auto bg-gradient-to-br from-violet-100 to-violet-50 rounded-2xl flex items-center justify-center text-violet-600 mb-6 shadow-sm border border-violet-100/50">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-xs font-bold text-violet-500 uppercase tracking-widest mb-3">Step 1</div>
-                        <h3 class="text-xl font-semibold text-slate-900 mb-3 tracking-tight">Precision Targeting</h3>
-                        <p class="text-[15px] text-slate-500 leading-relaxed font-light">
-                            A specialized electromagnetic coil is precisely positioned over the targeted brain region, such as the left dorsolateral prefrontal cortex (DLPFC).
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-10 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)] transition-all duration-300">
-                    <div class="w-16 h-16 mx-auto bg-gradient-to-br from-cyan-100 to-cyan-50 rounded-2xl flex items-center justify-center text-cyan-600 mb-6 shadow-sm border border-cyan-100/50">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-xs font-bold text-cyan-500 uppercase tracking-widest mb-3">Step 2</div>
-                        <h3 class="text-xl font-semibold text-slate-900 mb-3 tracking-tight">Magnetic Pulses</h3>
-                        <p class="text-[15px] text-slate-500 leading-relaxed font-light">
-                            Rapidly alternating current in the coil generates a highly focused magnetic field (up to 3 Tesla) that painlessly passes through the skull.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-10 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)] transition-all duration-300">
-                    <div class="w-16 h-16 mx-auto bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 mb-6 shadow-sm border border-emerald-100/50">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-3">Step 3</div>
-                        <h3 class="text-xl font-semibold text-slate-900 mb-3 tracking-tight">Neural Activation</h3>
-                        <p class="text-[15px] text-slate-500 leading-relaxed font-light">
-                            The changing magnetic field induces a localized electric current in cortical neurons, triggering depolarization and releasing neurotransmitters.
-                        </p>
-                    </div>
-                </div>
-            </div>
+      <!-- PROTOCOL PRESETS -->
+      <div class="mb-10">
+        <div class="flex items-baseline justify-between mb-4">
+          <h3 class="serif text-2xl">Try a real clinical protocol</h3>
+          <span class="text-[11px] mono sim-ink3 uppercase tracking-widest">5 of 24 protocols</span>
         </div>
-    </section>
-
-    <!-- Treatment Targets by Condition -->
-    <section class="py-24 bg-white border-y border-slate-100 relative overflow-hidden">
-        <div class="container mx-auto px-6 max-w-6xl relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-4">Treatment Targets</h2>
-                <p class="text-xl text-slate-500 max-w-2xl mx-auto font-light leading-relaxed">
-                    Protocols adapt specific frequencies and targets based on the condition being treated.
-                </p>
+        <div class="grid md:grid-cols-5 gap-2.5">
+          {[
+            { k:'standard', l:'Standard HF-rTMS', freq:10, intens:120, region:'DLPFC', dur:'37.5 min', sess:36, cond:'Depression', active:true },
+            { k:'itbs', l:'iTBS (accelerated)', freq:50, intens:80, region:'DLPFC', dur:'3 min', sess:36, cond:'Depression', active:false },
+            { k:'saint', l:'SAINT', freq:50, intens:90, region:'DLPFC', dur:'10 ses/day', sess:50, cond:'Depression', active:false },
+            { k:'ocd', l:'Deep TMS (OCD)', freq:20, intens:100, region:'OFC', dur:'19 min', sess:29, cond:'OCD', active:false },
+            { k:'low', l:'LF-rTMS', freq:1, intens:110, region:'ACC', dur:'30 min', sess:20, cond:'Anxiety', active:false },
+          ].map((p) => (
+            <div class={`protocol-btn text-left panel border rounded-xl p-4 cursor-pointer transition-all hover:border-[color:var(--sim-line2)] ${p.active ? 'border-[color:var(--cyan)] border-opacity-60' : 'bd'}`}
+              data-freq={p.freq} data-intens={p.intens} data-region={p.region}>
+              <div class="flex items-center gap-2 mb-2">
+                <span class={`w-2 h-2 rounded-full ${p.active ? 'bg-[color:var(--cyan)]' : 'bg-white/20'}`}></span>
+                <span class="text-[10px] mono sim-ink3 uppercase tracking-widest">{p.cond}</span>
+              </div>
+              <div class="font-medium mb-3 text-[14px]">{p.l}</div>
+              <div class="grid grid-cols-2 gap-2 text-[11px]">
+                <div><span class="sim-ink3 mono">Freq</span><div class="mono">{p.freq} Hz</div></div>
+                <div><span class="sim-ink3 mono">Int</span><div class="mono">{p.intens}% MT</div></div>
+                <div><span class="sim-ink3 mono">Time</span><div>{p.dur}</div></div>
+                <div><span class="sim-ink3 mono">Sess</span><div class="mono">{p.sess}</div></div>
+              </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                    { condition: 'Major Depressive Disorder', target: 'Left DLPFC', frequency: '10 Hz (high-frequency)', sessions: '36 over 9 weeks', badge: 'FDA Cleared 2008', color: 'violet' },
-                    { condition: 'Anxiety & Depression', target: 'Right DLPFC', frequency: '1 Hz (low-frequency)', sessions: '30–36 sessions', badge: 'Off-label', color: 'cyan' },
-                    { condition: 'OCD', target: 'mPFC / ACC', frequency: '20 Hz ITB', sessions: '29 over 6 weeks', badge: 'FDA Cleared 2018', color: 'amber' },
-                    { condition: 'Smoking Cessation', target: 'Left Insula / DLPFC', frequency: '10 Hz', sessions: '13 over 3 weeks', badge: 'FDA Cleared 2020', color: 'emerald' },
-                    { condition: 'Migraine', target: 'Motor Cortex', frequency: 'Single-pulse', sessions: 'Variable', badge: 'FDA Cleared', color: 'rose' },
-                    { condition: 'PTSD', target: 'Right DLPFC / mPFC', frequency: '1 Hz low-frequency', sessions: '36 sessions', badge: 'Research Protocol', color: 'indigo' },
-                ].map((item) => (
-                    <div class="bg-slate-50 rounded-3xl border border-slate-100 p-8 hover:bg-white hover:border-slate-200 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 group">
-                        <div class="flex items-start justify-between mb-5">
-                            <h3 class="text-lg font-semibold text-slate-900 tracking-tight leading-tight group-hover:text-blue-600 transition-colors pr-4">{item.condition}</h3>
-                            <span class={`shrink-0 text-[10px] font-bold px-2.5 py-1 rounded-full bg-${item.color}-100/80 text-${item.color}-700 uppercase tracking-wide border border-${item.color}-200/50`}>{item.badge}</span>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-400 shrink-0 border border-slate-100">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
-                                </div>
-                                <span class="text-[14px] text-slate-500 font-light">Target: <span class="text-slate-800 font-medium">{item.target}</span></span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-400 shrink-0 border border-slate-100">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                                </div>
-                                <span class="text-[14px] text-slate-500 font-light">{item.frequency}</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-400 shrink-0 border border-slate-100">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                </div>
-                                <span class="text-[14px] text-slate-500 font-light">{item.sessions}</span>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+          ))}
         </div>
-    </section>
+      </div>
 
-    <!-- E-Field Science -->
-    <section class="py-24 bg-gradient-to-b from-indigo-900 to-slate-900 border-t border-slate-800 text-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-20 pointer-events-none">
-            <div class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-violet-500 rounded-full blur-[120px]"></div>
+      <!-- Parameter controls -->
+      <div class="grid md:grid-cols-3 gap-3">
+        <div class="panel border bd rounded-xl p-5">
+          <div class="text-[10px] mono sim-ink3 uppercase tracking-widest mb-3">Target region</div>
+          <div class="grid grid-cols-2 gap-2">
+            {[
+              { k:'DLPFC', l:'L-DLPFC', n:'Depression', active:true },
+              { k:'OFC', l:'OFC', n:'OCD', active:false },
+              { k:'ACC', l:'ACC', n:'Anxiety', active:false },
+              { k:'M1', l:'Motor cortex', n:'Calibration', active:false },
+            ].map((r) => (
+              <button class={`region-btn text-left px-3 py-2 rounded-lg border transition-all ${r.active ? 'border-[color:var(--cyan)] bg-[color:var(--cyan)]/5' : 'bd2 hover:bg-white/5'}`} data-region={r.k}>
+                <div class={`text-[12.5px] font-medium ${r.active ? 'cyan' : ''}`}>{r.l}</div>
+                <div class="text-[10.5px] sim-ink3 mono">{r.n}</div>
+              </button>
+            ))}
+          </div>
         </div>
-        <div class="container mx-auto px-6 max-w-6xl relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-3xl md:text-5xl font-semibold tracking-tight text-white mb-6">The E-Field Physics</h2>
-                    <p class="text-lg text-indigo-200 font-light leading-relaxed mb-10">
-                        The electric field (E-field) induced by TMS is what actively stimulates neural pathways. Its penetration and spatial precision depend on the coil core geometry and anatomical conductivity.
-                    </p>
-                    <div class="space-y-6">
-                        <div class="flex gap-5">
-                            <div class="w-12 h-12 shrink-0 rounded-2xl bg-white/10 flex items-center justify-center text-cyan-400 font-bold text-lg border border-white/20">1</div>
-                            <div>
-                                <div class="font-semibold text-white text-[17px] mb-1">Peak Cortical Intensity</div>
-                                <div class="text-[15px] text-indigo-200/80 font-light leading-relaxed">E-field strength hits its absolute peak right at the skull interface and decays roughly 60% within 2 centimeters of brain matter.</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-5">
-                            <div class="w-12 h-12 shrink-0 rounded-2xl bg-white/10 flex items-center justify-center text-violet-400 font-bold text-lg border border-white/20">2</div>
-                            <div>
-                                <div class="font-semibold text-white text-[17px] mb-1">Focality Tradeoff</div>
-                                <div class="text-[15px] text-indigo-200/80 font-light leading-relaxed">Standard Figure-8 coils prioritize highly focal stimulation, whereas H-coils target deeper structural networks at the cost of spatial density.</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-5">
-                            <div class="w-12 h-12 shrink-0 rounded-2xl bg-white/10 flex items-center justify-center text-emerald-400 font-bold text-lg border border-white/20">3</div>
-                            <div>
-                                <div class="font-semibold text-white text-[17px] mb-1">Anatomical Variance</div>
-                                <div class="text-[15px] text-indigo-200/80 font-light leading-relaxed">Skull density, cerebrospinal fluid volumes, and unique cortical folding fundamentally alter how the field propagates in 3D space.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-slate-800/50 backdrop-blur-md rounded-3xl border border-white/10 p-10 shadow-2xl">
-                    <div class="flex items-center gap-3 mb-8 pb-6 border-b border-white/10">
-                        <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
-                        <div class="text-sm font-bold text-white uppercase tracking-widest">E-Field Quick Facts</div>
-                    </div>
-                    <div class="space-y-5">
-                        {[
-                            { label: 'Stimulation Intensity', value: '100–120% Motor Threshold' },
-                            { label: 'Cortical E-field Peak', value: '40–80 V/m' },
-                            { label: 'Pulse Duration', value: '~200 microseconds' },
-                            { label: 'Spatial Resolution', value: '0.5–1 cm² focal area' },
-                            { label: 'Magnetic Power', value: '1.5–3 Tesla' },
-                            { label: 'Modulation Range', value: '1–50 Hz' },
-                        ].map((f) => (
-                            <div class="flex items-center justify-between py-2.5 group">
-                                <span class="text-[15px] text-indigo-200 font-light group-hover:text-white transition-colors">{f.label}</span>
-                                <span class="text-[15px] font-semibold text-white tracking-wide">{f.value}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Disclaimer -->
-    <section class="py-12 bg-slate-50 border-t border-slate-100">
-        <div class="container mx-auto px-6 max-w-5xl">
-            <div class="flex flex-col md:flex-row items-center md:items-start gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-                <div class="w-12 h-12 shrink-0 rounded-xl bg-amber-50 border border-amber-100/50 flex items-center justify-center">
-                    <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                </div>
-                <div class="text-center md:text-left">
-                    <div class="text-[15px] font-semibold text-slate-900 mb-1">Medical Disclaimer</div>
-                    <p class="text-[13px] text-slate-500 leading-relaxed font-light">This is an educational visualization only — it does not represent real patient data or real-time simulation results. For actual TMS treatment planning, specific tools and clinical evaluations are required. Always consult a qualified provider. <a href="/specialists/" class="text-blue-600 font-medium hover:underline transition-colors ml-1">Find a TMS specialist &rarr;</a></p>
-                </div>
-            </div>
+        <div class="panel border bd rounded-xl p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] mono sim-ink3 uppercase tracking-widest">Frequency</span>
+            <span id="freq-display" class="mono cyan text-[14px]">10 Hz</span>
+          </div>
+          <input id="freq-slider" type="range" min="1" max="50" value="10" class="w-full mb-2 accent-cyan-400"/>
+          <div class="flex justify-between text-[10px] mono sim-ink3">
+            <span>1 Hz · LF</span><span>10 Hz · std</span><span>50 Hz · iTBS</span>
+          </div>
         </div>
-    </section>
 
-    <!-- End-of-page CTA -->
-    <section class="py-16 lg:py-20 bg-white border-t border-slate-100">
-        <div class="container mx-auto px-4 max-w-4xl text-center">
-            <p class="text-xs font-semibold text-cyan-500 tracking-wider uppercase mb-3">Ready to explore your treatment options?</p>
-            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 mb-4 tracking-tight">Find a TMS Clinic Near You</h2>
-            <p class="text-slate-500 mb-8 max-w-xl mx-auto leading-relaxed">With verified providers across the US — many accepting insurance and offering free consultations.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/us/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl shadow-lg shadow-violet-200 transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    Find a Clinic Near You
-                </a>
-                <a href="/quiz/am-i-a-candidate/" class="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-slate-200 hover:border-violet-600 text-slate-700 hover:text-violet-700 font-semibold rounded-xl transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    Am I a Candidate?
-                </a>
-            </div>
-            <p class="text-xs text-slate-400 mt-4">Or <a href="/resources/buyers-guide/" class="text-violet-600 hover:underline font-medium">download the free TMS Buyer's Guide</a> to learn everything before you decide.</p>
+        <div class="panel border bd rounded-xl p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] mono sim-ink3 uppercase tracking-widest">Intensity</span>
+            <span id="intens-display" class="mono violet-c text-[14px]">120% MT</span>
+          </div>
+          <input id="intens-slider" type="range" min="60" max="140" value="120" class="w-full mb-2 accent-violet-400"/>
+          <div class="flex justify-between text-[10px] mono sim-ink3">
+            <span>60%</span><span>Subthreshold &lt;100</span><span>140%</span>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Share button copies current URL
-        document.getElementById('share-btn')?.addEventListener('click', () => {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                const btn = document.getElementById('share-btn');
-                if (btn) {
-                    const orig = btn.innerHTML;
-                    btn.innerHTML = '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/></svg> Copied!';
-                    setTimeout(() => { btn.innerHTML = orig; }, 2000);
-                }
-            });
-        });
-    </script>
+  <!-- INTERACTIVE REACT ISLAND -->
+  <section class="py-0" style="background:#080C16">
+    <div class="max-w-[1500px] mx-auto px-6 lg:px-8 py-10">
+      <div class="panel border bd rounded-2xl p-6">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-2 h-2 rounded-full pulse-sim" style="background:var(--cyan)"></span>
+          <span class="text-[13px] font-semibold tracking-wide">Full Interactive Simulator</span>
+        </div>
+        <TMSViewerLazy client:visible />
+      </div>
+    </div>
+  </section>
+
+  <!-- MECHANISM EXPLAINER -->
+  <section class="py-24 relative" style="background:#080C16">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mb-16">
+        <div class="text-[11px] mono sim-ink3 uppercase tracking-[0.18em] mb-4">§ 01 · The mechanism</div>
+        <h2 class="serif leading-[1] mb-6" style="font-size:clamp(2.5rem,5vw,3.75rem)">
+          Electromagnetic induction,<br/>at the speed of thought.
+        </h2>
+        <p class="text-[17px] sim-ink2 leading-relaxed">
+          A coil sits against the scalp. When current flows through it, it produces a magnetic field strong enough — briefly — to pass through bone. That field induces a small electrical current in the cortex underneath, depolarizing neurons near the target.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-px rounded-2xl overflow-hidden" style="background:var(--sim-line); border:1px solid var(--sim-line)">
+        {[
+          {
+            n:'01', t:'Current enters the coil',
+            d:'A capacitor discharges ~1.5kA through copper windings in under 100μs. This produces a rapidly-changing magnetic field perpendicular to the scalp.',
+            stat:'1.5 kA · 100 μs rise',
+          },
+          {
+            n:'02', t:'Magnetic field passes through skull',
+            d:'The field is ~1.5 tesla at the coil face — strong enough to pass through bone and dura. It peaks within 1–3 cm of the scalp and falls off quickly with depth.',
+            stat:'1.5 T peak · 1–3 cm depth',
+          },
+          {
+            n:'03', t:'Neurons depolarize',
+            d:'The induced electric field reaches ~100 V/m in the target cortex, enough to bring pyramidal neurons to threshold. A single pulse triggers action potentials across millions of cells.',
+            stat:'~100 V/m · threshold',
+          },
+        ].map((s) => (
+          <div style="background:var(--bg); padding:2rem">
+            <div class="flex items-center gap-3 mb-5">
+              <span class="mono text-[11px] sim-ink3 tracking-widest">STEP {s.n}</span>
+              <div class="flex-1 h-px" style="background:var(--sim-line)"></div>
+            </div>
+            <div class="h-24 mb-5 rounded-xl flex items-center justify-center" style="background:var(--sim-panel)">
+              <span class="mono text-[11px] sim-ink3 tracking-wider">{s.stat}</span>
+            </div>
+            <h3 class="serif text-2xl mt-2 mb-3 leading-tight">{s.t}</h3>
+            <p class="text-[13.5px] sim-ink2 leading-relaxed">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EVIDENCE TIMELINE -->
+  <section class="py-24 relative" style="background:#080C16; border-top:1px solid var(--sim-line)">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="mb-16 max-w-2xl">
+        <div class="text-[11px] mono sim-ink3 uppercase tracking-[0.18em] mb-4">§ 02 · The evidence base</div>
+        <h2 class="serif leading-[1] mb-5" style="font-size:clamp(2rem,4vw,3.25rem)">Three decades of clinical data.</h2>
+        <p class="text-[17px] sim-ink2 leading-relaxed">Since the first magnetic stimulator in 1985, TMS has accumulated one of the largest bodies of RCT data in psychiatry.</p>
+      </div>
+
+      <div class="relative">
+        <!-- Vertical timeline line -->
+        <div class="absolute top-2 bottom-2 w-px" style="left:92px; background:linear-gradient(to bottom,var(--cyan),rgba(158,123,255,0.3),transparent)"></div>
+
+        <div class="space-y-8">
+          {[
+            { y:'1985', t:'First focal magnetic stimulator', d:'Barker, Jalinous & Freeston demonstrate painless cortical stimulation through the scalp.', c:'cyan' },
+            { y:'1994', t:'First rTMS depression trial', d:'Pascual-Leone publishes the first open-label trial showing mood improvement with repetitive TMS.', c:'cyan' },
+            { y:'2008', t:'FDA clears NeuroStar', d:'First approval for treatment-resistant major depression in adults. A turning point for psychiatry.', c:'violet' },
+            { y:'2013', t:'Deep TMS cleared (BrainsWay)', d:'H-coil geometry reaches deeper structures than standard figure-of-eight designs.', c:'violet' },
+            { y:'2018', t:'iTBS approved + OCD indication', d:'Theta-burst protocol (3 min) shows non-inferiority to standard 37-min sessions. OCD cleared.', c:'cyan' },
+            { y:'2020', t:'SAINT protocol published', d:'Accelerated iTBS achieves 90% remission in a small RCT for severe treatment-resistant depression.', c:'cyan' },
+            { y:'2024', t:'Adolescent approval (15+)', d:'First TMS device cleared for adolescent major depressive disorder. Adolescent TMS era begins.', c:'violet' },
+          ].map((e) => (
+            <div class="grid items-start" style="grid-template-columns:76px 1fr; gap:2rem">
+              <div class="mono text-right sim-ink2" style="font-size:22px; line-height:1.2; letter-spacing:-.02em">{e.y}</div>
+              <div class="relative pl-8">
+                <div class={`absolute rounded-full border-2 ${e.c === 'cyan' ? 'border-[color:var(--cyan)]' : 'border-[color:var(--violet)]'}`}
+                  style="left:-5px; top:8px; width:12px; height:12px; background:var(--bg)"></div>
+                <h3 class="serif text-2xl mb-1.5 leading-tight">{e.t}</h3>
+                <p class="text-[14px] sim-ink2 leading-relaxed max-w-xl">{e.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 relative starfield">
+    <div class="stars absolute inset-0 pointer-events-none"></div>
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8 text-center relative">
+      <div class="text-[11px] mono sim-ink3 uppercase tracking-[0.18em] mb-5">§ 03 · Next step</div>
+      <h2 class="serif leading-[0.95] mb-8" style="font-size:clamp(2.5rem,6vw,5rem)">
+        Reading about it is one thing.<br/>
+        <span class="italic" style="color:var(--cyan)">Starting</span> is another.
+      </h2>
+      <p class="text-[17px] sim-ink2 max-w-xl mx-auto mb-10">
+        Find a verified TMS clinic that accepts your insurance and has availability in your area. No sign-up required.
+      </p>
+      <div class="flex items-center justify-center gap-3 flex-wrap">
+        <a href="/us/" class="h-12 px-7 rounded-full font-semibold flex items-center gap-2 glow-cyan hover:scale-[1.02] transition-transform" style="background:linear-gradient(to right,var(--cyan),var(--violet));color:var(--bg)">
+          Find a clinic near you →
+        </a>
+        <a href="/quiz/am-i-a-candidate/" class="h-12 px-6 rounded-full text-[14px] sim-ink2 hover:text-white flex items-center transition-colors" style="border:1px solid var(--sim-line2)">
+          Take the quiz (2 min)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER NOTE -->
+  <footer style="border-top:1px solid var(--sim-line); padding:2rem 0">
+    <div class="max-w-[1500px] mx-auto px-6 lg:px-8 flex flex-wrap items-center gap-6 text-[12px] sim-ink3 mono">
+      <span>© 2026 TMS List</span>
+      <span>·</span>
+      <span>Educational simulation — not medical advice</span>
+      <span>·</span>
+      <a href="/legal/medical-disclaimer/" class="hover:text-white transition-colors">Disclaimer</a>
+      <a href="/about-us/" class="hover:text-white transition-colors">About</a>
+      <a href="/contact/" class="hover:text-white transition-colors">Contact</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+// Frequency slider
+const freqSlider = document.getElementById('freq-slider') as HTMLInputElement;
+const freqDisplay = document.getElementById('freq-display');
+freqSlider?.addEventListener('input', () => {
+  if (freqDisplay) freqDisplay.textContent = `${freqSlider.value} Hz`;
+});
+
+// Intensity slider
+const intensSlider = document.getElementById('intens-slider') as HTMLInputElement;
+const intensDisplay = document.getElementById('intens-display');
+intensSlider?.addEventListener('input', () => {
+  if (intensDisplay) intensDisplay.textContent = `${intensSlider.value}% MT`;
+});
+
+// Protocol preset buttons
+document.querySelectorAll('.protocol-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const freq = (btn as HTMLElement).dataset.freq;
+    const intens = (btn as HTMLElement).dataset.intens;
+    if (freq && freqSlider && freqDisplay) {
+      freqSlider.value = freq;
+      freqDisplay.textContent = `${freq} Hz`;
+    }
+    if (intens && intensSlider && intensDisplay) {
+      intensSlider.value = intens;
+      intensDisplay.textContent = `${intens}% MT`;
+    }
+    // Update active state
+    document.querySelectorAll('.protocol-btn').forEach(b => {
+      b.classList.remove('border-[color:var(--cyan)]', 'border-opacity-60');
+      b.classList.add('bd');
+      b.querySelector('span')?.classList.replace('bg-[color:var(--cyan)]', 'bg-white/20');
+    });
+    btn.classList.add('border-[color:var(--cyan)]', 'border-opacity-60');
+    btn.classList.remove('bd');
+  });
+});
+
+// Region buttons
+document.querySelectorAll('.region-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.region-btn').forEach(b => {
+      b.classList.remove('border-[color:var(--cyan)]', 'bg-[color:var(--cyan)]/5');
+      b.classList.add('bd2');
+      (b.querySelector('div') as HTMLElement)?.classList.remove('cyan');
+    });
+    btn.classList.add('border-[color:var(--cyan)]', 'bg-[color:var(--cyan)]/5');
+    btn.classList.remove('bd2');
+    (btn.querySelector('div') as HTMLElement)?.classList.add('cyan');
+  });
+});
+</script>
+
 </Layout>
