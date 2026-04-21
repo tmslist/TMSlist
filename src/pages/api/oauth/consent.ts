@@ -17,6 +17,23 @@ function generateCode(): string {
   return randomBytes(32).toString('hex');
 }
 
+// Only allow redirects to trusted domains (Supabase / this site)
+const ALLOWED_REDIRECT_DOMAINS = [
+  'tmslist.com',
+  'auth.tmslist.com',
+  'supabase.co',
+  'localhost',
+];
+
+function isAllowedRedirect(uri: string): boolean {
+  try {
+    const url = new URL(uri);
+    return ALLOWED_REDIRECT_DOMAINS.includes(url.hostname);
+  } catch {
+    return false;
+  }
+}
+
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
   if (!session) {
@@ -28,14 +45,20 @@ export const POST: APIRoute = async ({ request }) => {
 
   const formData = await request.formData();
   const action = formData.get('action') as string;
+  let redirectUri = formData.get('redirect_uri') as string;
 
-  // Handle cancel - redirect back to Supabase with error
+  // Validate redirect_uri before using it
+  if (!redirectUri || !isAllowedRedirect(redirectUri)) {
+    return new Response('Invalid redirect URI', { status: 400 });
+  }
+
+  const state = formData.get('state') as string || '';
+
+  // Handle cancel — redirect back to Supabase with error
   if (action !== 'approve') {
-    const redirectUri = formData.get('redirect_uri') as string;
-    const state = formData.get('state') as string;
     const params = new URLSearchParams({
       error: 'access_denied',
-      state: state || '',
+      state,
     });
     return new Response(null, {
       status: 302,
@@ -44,11 +67,9 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const clientId = formData.get('client_id') as string;
-  const redirectUri = formData.get('redirect_uri') as string;
-  const scope = formData.get('scope') as string;
-  const state = formData.get('state') as string;
+  const scope = formData.get('scope') as string || '';
 
-  if (!clientId || !redirectUri) {
+  if (!clientId) {
     return new Response('Missing required parameters', { status: 400 });
   }
 
@@ -64,10 +85,7 @@ export const POST: APIRoute = async ({ request }) => {
   });
 
   // Redirect back to Supabase's authorization callback with the code
-  const params = new URLSearchParams({
-    code,
-    state: state || '',
-  });
+  const params = new URLSearchParams({ code, state });
 
   return new Response(null, {
     status: 302,
