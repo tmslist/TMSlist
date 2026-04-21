@@ -1,67 +1,306 @@
 ---
-import AiHeroImage from './AiHeroImage.astro';
-
 interface Props {
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
   imageSubject?: string;
   imageType?: 'treatment' | 'hero' | 'city';
 }
 
-const { title, subtitle, imageSubject, imageType = 'hero' } = Astro.props;
+const {
+  title = "The directory for evidence-based TMS therapy.",
+  subtitle = "A curated atlas of verified transcranial magnetic stimulation providers - where the clinicians who practice it actually list themselves.",
+} = Astro.props;
+
+// Popular search tags
+const popularSearches = [
+  "Los Angeles", "New York", "Seattle", "Austin",
+  "Depression", "SAINT protocol", "Deep TMS for OCD",
+];
 ---
 
-<!-- Premium Hero: Subtle gradient background with pattern -->
-<section class="relative bg-white border-b border-gray-100 overflow-hidden">
-    <!-- Abstract Background Pattern -->
-    <div class="absolute inset-0 bg-gradient-to-b from-violet-50/40 via-fuchsia-50/20 to-white pointer-events-none"></div>
-    <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
-        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-violet-600 to-fuchsia-500 opacity-15 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+<!-- Editorial Hero: Warm paper background with dot-grid pattern -->
+<section
+  class="relative overflow-hidden"
+  style="background-color: var(--paper);"
+>
+  <!-- Dot-grid background pattern -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style="background-image: radial-gradient(circle, #E6EAF0 1px, transparent 1px); background-size: 24px 24px; opacity: 0.6;"
+    aria-hidden="true"
+  ></div>
+  <!-- Radial veil at top -->
+  <div
+    class="absolute inset-x-0 -top-24 h-96 pointer-events-none"
+    style="background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(27, 75, 90, 0.06), transparent 70%);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-8 pt-16 pb-12 lg:pt-24 lg:pb-20">
+
+    <!-- Top bar: Est. badge + live indicator -->
+    <div
+      class="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] mb-8 lg:mb-12"
+      style="color: var(--muted);"
+    >
+      <span class="w-6 h-px" style="background: rgba(10,22,40,0.2);"></span>
+      <span>Est. 2019 · <span id="hero-clinic-count" class="tabular-nums" style="color: var(--ink);">0</span> verified clinics · 6 countries</span>
+      <span
+        class="w-1.5 h-1.5 rounded-full ml-2 animate-pulse"
+        style="background: #10b981;"
+      ></span>
+      <span>14 listings added this week</span>
     </div>
 
-    <div class="container mx-auto px-4 py-20 lg:py-24 relative z-10 text-center">
-        <!-- Trust Pill -->
-        <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur border border-violet-100 rounded-full py-1 px-3 mb-8 shadow-sm animate-fade-in-up">
-            <span class="flex h-2 w-2 rounded-full bg-green-500"></span>
-            <span class="text-xs font-semibold text-slate-600 tracking-wide uppercase">Verified Medical Directory</span>
-        </div>
-
-        <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-slate-900 tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
-            {title}
+    <!-- Two-column headline + intro -->
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-12 lg:mb-16">
+      <!-- Left: Serif headline -->
+      <div>
+        <h1
+          class="serif leading-[0.95] mb-0"
+          style="font-size: clamp(2.75rem, 7vw, 5.5rem); color: var(--ink);"
+        >
+          The directory for<br />
+          <em>evidence-based</em><br />
+          TMS therapy.
         </h1>
+      </div>
 
-        <p class="text-xl text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
-            {subtitle}
+      <!-- Right: intro copy + micro links -->
+      <div class="lg:pt-4">
+        <p
+          class="text-[17px] leading-[1.6] mb-8 max-w-md"
+          style="color: var(--muted);"
+        >
+          {subtitle}
         </p>
-
-        <!-- AI-Generated Hero Image -->
-        {imageSubject && (
-            <div class="max-w-3xl mx-auto mb-10">
-                <AiHeroImage
-                    subject={imageSubject}
-                    type={imageType}
-                    alt={`Illustration for ${title}`}
-                />
-            </div>
-        )}
-
-        <!-- Search Bar Container (Optional, if this hero is reused for search) -->
-        <slot name="search" />
-
-        <!-- Trust Signals Row -->
-        <div class="mt-12 pt-8 border-t border-slate-100/50 flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-semibold text-slate-400">
-             <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                Verified Providers
-             </div>
-             <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 10.032l9.654-4.029a.326.326 0 01.372 0l9.654 4.029a.5.5 0 01.264.645l-3.239 8.243a.5.5 0 01-.84.098L13.8 15.6a1.5 1.5 0 00-2.115 0l-4.237 3.42a.5.5 0 01-.84-.098L3.369 10.677a.5.5 0 01.264-.645z" clip-rule="evenodd"/></svg>
-                HIPAA Compliant
-             </div>
-             <div class="flex items-center gap-2">
-                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                 Clear Pricing
-             </div>
+        <div class="flex items-center gap-6 text-[13px] mb-8">
+          <a
+            href="/resources/"
+            class="linky font-medium cursor-pointer inline-flex items-center gap-2"
+            style="color: var(--ink);"
+          >
+            Read the science
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <a href="/quiz/am-i-a-candidate/" class="linky cursor-pointer" style="color: var(--muted);">
+            How it works
+          </a>
         </div>
+
+        <!-- Micro trust row -->
+        <div class="flex items-center gap-5 pt-6" style="border-top: 1px solid var(--line);">
+          <div class="flex -space-x-2">
+            <div
+              class="w-8 h-8 rounded-full border-2"
+              style="background: linear-gradient(135deg, var(--paper2), rgba(27,75,90,0.2)); border-color: var(--paper);"
+            ></div>
+            <div
+              class="w-8 h-8 rounded-full border-2"
+              style="background: linear-gradient(135deg, var(--paper2), rgba(46,122,143,0.2)); border-color: var(--paper);"
+            ></div>
+            <div
+              class="w-8 h-8 rounded-full border-2"
+              style="background: linear-gradient(135deg, var(--paper2), rgba(201,101,74,0.15)); border-color: var(--paper);"
+            ></div>
+            <div
+              class="w-8 h-8 rounded-full border-2"
+              style="background: linear-gradient(135deg, var(--paper2), rgba(27,75,90,0.15)); border-color: var(--paper);"
+            ></div>
+          </div>
+          <div class="text-[12px]" style="color: var(--muted); line-height: 1.4;">
+            <div class="font-medium" style="color: var(--ink);">50,000+ patient searches</div>
+            <div>last month, across 6 countries</div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Search bar -->
+    <div
+      class="rounded-2xl p-2 flex items-stretch gap-1 shadow-[0_1px_2px_rgba(10,22,40,0.04),0_20px_40px_-20px_rgba(10,22,40,0.12)]"
+      style="background: white; border: 1px solid var(--line);"
+    >
+      <!-- Location input -->
+      <div class="flex-1 flex items-center gap-3 px-5 py-4">
+        <span style="color: var(--muted);">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </span>
+        <input
+          id="hero-location-input"
+          type="text"
+          placeholder="City or postcode"
+          class="flex-1 text-[15px] outline-none bg-transparent"
+          style="color: var(--ink);"
+        />
+      </div>
+      <div class="w-px my-3" style="background: var(--line);"></div>
+      <!-- Condition select -->
+      <div class="hidden md:flex items-center gap-3 px-5 py-4 flex-1">
+        <span
+          class="text-[11px] uppercase tracking-widest"
+          style="color: var(--muted);"
+        >Condition</span>
+        <select
+          class="flex-1 text-[15px] outline-none appearance-none cursor-pointer bg-transparent"
+          style="color: var(--ink);"
+        >
+          <option>Treatment-resistant depression</option>
+          <option>Anxiety · GAD</option>
+          <option>OCD</option>
+          <option>PTSD</option>
+          <option>ADHD</option>
+          <option>Bipolar disorder</option>
+        </select>
+      </div>
+      <div class="w-px my-3 hidden md:block" style="background: var(--line);"></div>
+      <!-- Device select -->
+      <div class="hidden lg:flex items-center gap-3 px-5 py-4 flex-1">
+        <span
+          class="text-[11px] uppercase tracking-widest"
+          style="color: var(--muted);"
+        >Device</span>
+        <select
+          class="flex-1 text-[15px] outline-none appearance-none cursor-pointer bg-transparent"
+          style="color: var(--ink);"
+        >
+          <option>Any device</option>
+          <option>NeuroStar</option>
+          <option>BrainsWay Deep TMS</option>
+          <option>MagVenture</option>
+          <option>Magstim</option>
+          <option>SAINT protocol</option>
+          <option>Theta Burst (iTBS)</option>
+        </select>
+      </div>
+      <!-- Search button -->
+      <a
+        href="/us/"
+        class="flex items-center gap-2 px-6 py-4 rounded-xl text-[14px] font-medium hover:opacity-90 transition-colors"
+        style="background: var(--ink); color: white;"
+      >
+        Search
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Popular searches -->
+    <div class="mt-4 flex items-center gap-3 text-[12px] flex-wrap" style="color: var(--muted);">
+      <span>Popular:</span>
+      {popularSearches.map((term) => (
+        <a
+          href={`/us/?q=${encodeURIComponent(term)}`}
+          class="linky cursor-pointer transition-colors"
+          style=""
+          onmouseover="this.style.color='var(--ink)'"
+          onmouseout="this.style.color='var(--muted)'"
+        >
+          {term}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Hero image band -->
+  <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-8 mt-4 lg:mt-8 mb-0">
+    <div
+      class="relative rounded-[1.5rem] overflow-hidden"
+      style="aspect-ratio: 16/8; background: var(--ink);"
+    >
+      <!-- Primary image -->
+      <img
+        src="/assets/tms_chair_luxury.jpg"
+        alt="Modern TMS treatment room"
+        class="absolute inset-0 w-full h-full object-cover"
+        style="opacity: 0.92;"
+        loading="eager"
+      />
+      <!-- Gradient overlay -->
+      <div
+        class="absolute inset-0"
+        style="background: linear-gradient(to top, rgba(10,22,40,0.75) 0%, rgba(10,22,40,0.2) 40%, rgba(10,22,40,0.05) 100%);"
+      ></div>
+
+      <!-- Live badge -->
+      <div class="absolute top-6 left-6 lg:top-8 lg:left-8 flex items-center gap-2 text-white">
+        <div
+          class="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border"
+          style="background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border-color: rgba(255,255,255,0.15);"
+        >
+          <span
+            class="w-1.5 h-1.5 rounded-full animate-pulse"
+            style="background: #34d399;"
+          ></span>
+          Live · Now accepting new patients
+        </div>
+      </div>
+
+      <!-- Featured clinic info -->
+      <div class="absolute bottom-6 left-6 right-6 lg:bottom-8 lg:left-8 lg:right-8 flex items-end justify-between text-white">
+        <div>
+          <div
+            class="text-[11px] uppercase tracking-[0.2em] mb-2"
+            style="opacity: 0.7;"
+          >
+            Featured clinic · № 01
+          </div>
+          <div
+            class="serif mb-1"
+            style="font-size: clamp(1.5rem, 3vw, 2.5rem);"
+          >
+            NeuroWell Institute, Beverly Hills
+          </div>
+          <div
+            class="text-[13px] flex items-center gap-3"
+            style="opacity: 0.7;"
+          >
+            <span class="flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" style="color: #C9654A;">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              4.9 · 127 reviews
+            </span>
+            <span>·</span>
+            <span>NeuroStar · BrainsWay · SAINT</span>
+          </div>
+        </div>
+        <a
+          href="/clinic/neurowell-institute/"
+          class="hidden md:flex items-center gap-2 text-[13px] border rounded-full px-4 py-2 hover:bg-white hover:text-[color:var(--ink)] cursor-pointer transition-colors"
+          style="border-color: rgba(255,255,255,0.3);"
+        >
+          View profile
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- Stats counter animation -->
+<script is:inline>
+(function() {
+  var el = document.getElementById("hero-clinic-count");
+  if (!el) return;
+  var target = 1147;
+  var current = 0;
+  var step = Math.ceil(target / 60);
+  var interval = setInterval(function() {
+    current += step;
+    if (current >= target) {
+      current = target;
+      clearInterval(interval);
+    }
+    el.textContent = current.toLocaleString();
+  }, 25);
+})();
+</script>

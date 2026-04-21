@@ -95,7 +95,7 @@ const safeEntityName = JSON.stringify(String(entityName)).slice(1, -1);
                 </div>
                 <button
                     id="write-review-btn"
-                    class="h-12 px-6 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl transition-all shadow-lg shadow-violet-200 flex items-center gap-2 group whitespace-nowrap"
+                    class="h-12 px-6 bg-[#143844] hover:bg-[#143844] text-white font-semibold rounded-xl transition-all shadow-lg shadow-[#1B4B5A] flex items-center gap-2 group whitespace-nowrap"
                 >
                     <span>Write a Review</span>
                     <svg
@@ -201,7 +201,7 @@ const safeEntityName = JSON.stringify(String(entityName)).slice(1, -1);
                     <textarea
                         name="reviewText"
                         rows="4"
-                        class="w-full rounded-xl border-gray-200 focus:border-violet-500 focus:ring-violet-500 bg-white"
+                        class="w-full rounded-xl border-gray-200 focus:border-[#2E7A8F] focus:ring-[#1B4B5A]500 bg-white"
                         placeholder="Share your experience..."
                         required></textarea>
                 </div>
@@ -228,7 +228,7 @@ const safeEntityName = JSON.stringify(String(entityName)).slice(1, -1);
 
                 <button
                     type="submit"
-                    class="w-full py-3 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl shadow-lg shadow-violet-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    class="w-full py-3 bg-[#143844] hover:bg-[#143844] text-white font-semibold rounded-xl shadow-lg shadow-[#1B4B5A] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     Submit Review
                 </button>
@@ -262,7 +262,7 @@ const safeEntityName = JSON.stringify(String(entityName)).slice(1, -1);
                 const data = await res.json();
                 if (data.user && (data.user.role === 'patient' || data.user.role === 'viewer')) {
                     currentUser = data.user;
-                    // User is signed in — show the form directly
+                    // User is signed in - show the form directly
                     document.getElementById('auth-step').classList.add('hidden');
                     document.getElementById('review-form').classList.remove('hidden');
                     document.getElementById('user-name-display').textContent = currentUser.email.split('@')[0];

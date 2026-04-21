@@ -22,8 +22,8 @@ const { title = "Related Resources", sections } = Astro.props;
           <ul class="space-y-3">
             {section.links.map((link) => (
               <li>
-                <a href={link.href} class="group flex items-start gap-2 text-sm text-slate-700 hover:text-violet-600 transition-colors">
-                  <svg class="w-4 h-4 mt-0.5 text-slate-300 group-hover:text-violet-400 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                <a href={link.href} class="group flex items-start gap-2 text-sm text-slate-700 hover:text-[#1B4B5A] transition-colors">
+                  <svg class="w-4 h-4 mt-0.5 text-slate-300 group-hover:text-[#5BA8BD] transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                   <span>{link.title}</span>
                 </a>
               </li>

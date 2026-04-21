@@ -5,7 +5,8 @@ interface Props {
 const { className = "h-8 w-auto" } = Astro.props;
 ---
 
-<div class="flex items-center gap-2.5 group cursor-pointer">
+<a href="/" class="flex items-center gap-2.5 group cursor-pointer" aria-label="TMSList Home">
+    <!-- Icon with teal brand gradient -->
     <svg
         class={className}
         viewBox="0 0 100 100"
@@ -15,11 +16,11 @@ const { className = "h-8 w-auto" } = Astro.props;
     >
         <defs>
             <linearGradient id="tmsBrandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7C3AED"/>
-                <stop offset="100%" stop-color="#D946EF"/>
+                <stop offset="0%" stop-color="#1B4B5A"/>
+                <stop offset="100%" stop-color="#2E7A8F"/>
             </linearGradient>
         </defs>
-        <!-- Magnetic wave arcs representing brain signal -->
+        <!-- Magnetic wave arcs -->
         <path
             d="M50 15 C 30 15, 15 35, 15 55 C 15 75, 30 85, 50 85"
             stroke="url(#tmsBrandGradient)"
@@ -44,7 +45,8 @@ const { className = "h-8 w-auto" } = Astro.props;
             class="transition-transform group-hover:scale-105 origin-center duration-300 delay-150"
         ></path>
     </svg>
-    <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display">
-        TMS<span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">List</span>
+    <!-- Brand wordmark -->
+    <span class="text-xl font-extrabold tracking-tight text-ink dark:text-white font-display">
+        TMS<span class="text-primary">List</span>
     </span>
-</div>
+</a>

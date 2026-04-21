@@ -17,14 +17,14 @@ interface Props {
 const { title, titleAccent, subtitle, badge, badgeColor = 'violet', breadcrumbs, stats } = Astro.props;
 
 const badgeColors = {
-    violet: 'bg-violet-50 border-violet-100 text-violet-700',
+    violet: 'bg-[#1B4B5A]50 border-[#1B4B5A]100 text-[#143844]',
     emerald: 'bg-emerald-50 border-emerald-100 text-emerald-700',
     blue: 'bg-blue-50 border-blue-100 text-blue-700',
     amber: 'bg-amber-50 border-amber-100 text-amber-700',
 };
 
 const dotColors = {
-    violet: 'bg-violet-500',
+    violet: 'bg-[#1B4B5A]',
     emerald: 'bg-emerald-500',
     blue: 'bg-blue-500',
     amber: 'bg-amber-500',
@@ -33,7 +33,7 @@ const dotColors = {
 
 <section class="relative bg-white border-b border-slate-100 overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-    <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+    <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-[#1B4B5A]/5 rounded-full blur-[100px]"></div>
 
     <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
         {breadcrumbs && breadcrumbs.length > 0 && (
@@ -44,7 +44,7 @@ const dotColors = {
                             <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                         )}
                         {i < breadcrumbs.length - 1 ? (
-                            <a href={item.href} class="hover:text-violet-600 transition-colors">{item.label}</a>
+                            <a href={item.href} class="hover:text-[#1B4B5A] transition-colors">{item.label}</a>
                         ) : (
                             <span class="text-slate-700 font-medium">{item.label}</span>
                         )}
@@ -62,7 +62,7 @@ const dotColors = {
             )}
 
             <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-                {title}{titleAccent && <span class="text-violet-600"> {titleAccent}</span>}
+                {title}{titleAccent && <span class="text-[#1B4B5A]"> {titleAccent}</span>}
             </h1>
 
             {subtitle && (

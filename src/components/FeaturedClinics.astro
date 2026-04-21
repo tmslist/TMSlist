@@ -7,7 +7,8 @@ interface Props {
     countryCode?: string;
 }
 
-const { topClinics, countryCode = 'US' } = Astro.props as Props;
+const { topClinics = [], countryCode = 'US' } = Astro.props as Props;
+const clinics = topClinics || [];
 ---
 
 <section class="py-8 bg-slate-50/50 dark:bg-slate-950" data-clinic-country={countryCode}>
@@ -15,7 +16,7 @@ const { topClinics, countryCode = 'US' } = Astro.props as Props;
         <div class="flex items-end justify-between mb-8">
             <div>
                 <span
-                    class="inline-block px-3 py-1 bg-[#7C3AED]/10 text-[#7C3AED] rounded-full text-xs font-semibold uppercase tracking-wider mb-2 dark:bg-violet-900/40 dark:text-violet-300"
+                    class="inline-block px-3 py-1 bg-[#1B4B5A]/10 text-[#1B4B5A] rounded-full text-xs font-semibold uppercase tracking-wider mb-2 dark:bg-[#1B4B5A]900/40 dark:text-[#1B4B5A]300"
                     >Top Rated</span
                 >
                 <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
@@ -25,17 +26,17 @@ const { topClinics, countryCode = 'US' } = Astro.props as Props;
             <a
                 href="/us/"
                 data-country-landing
-                class="text-[#7C3AED] font-semibold text-sm hover:text-[#6D28D9] flex items-center gap-1 group dark:text-violet-400 dark:hover:text-violet-300"
-                >View All Clinics <span class="group-hover:translate-x-1 transition-transform">→</span></a
+                class="text-[#1B4B5A] font-semibold text-sm hover:text-[#143844] flex items-center gap-1 group dark:text-[#5BA8BD] dark:hover:text-[#1B4B5A]300"
+                >View All Clinics <span class="group-hover:translate-x-1 transition-transform">-></span></a
             >
         </div>
 
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
             {
-                topClinics.slice(0, 12).map((clinic, idx) => {
+                clinics.slice(0, 12).map((clinic, idx) => {
                     const img = getClinicPhoto(clinic);
                     return (
-                        <div class="group bg-white rounded-3xl p-4 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-slate-100 hover:border-[#7C3AED]/20 flex flex-col sm:flex-row gap-5 dark:bg-slate-900 dark:border-slate-800 dark:hover:border-violet-500/20 dark:shadow-slate-950/50">
+                        <div class="group bg-white rounded-3xl p-4 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-slate-100 hover:border-[#1B4B5A]/20 flex flex-col sm:flex-row gap-5 dark:bg-slate-900 dark:border-slate-800 dark:hover:border-[#2E7A8F]/20 dark:shadow-slate-950/50">
                             <!-- Image Section -->
                             <div class="relative w-full sm:w-48 h-56 sm:h-auto shrink-0 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800">
                                 <img
@@ -58,7 +59,7 @@ const { topClinics, countryCode = 'US' } = Astro.props as Props;
                             <div class="flex-1 flex flex-col justify-between py-1">
                                 <div>
                                     <div class="flex items-start justify-between gap-2 mb-2">
-                                        <h3 class="font-semibold tracking-tight text-lg text-slate-900 leading-tight group-hover:text-[#7C3AED] transition-colors dark:text-slate-100 dark:group-hover:text-violet-400">
+                                        <h3 class="font-semibold tracking-tight text-lg text-slate-900 leading-tight group-hover:text-[#1B4B5A] transition-colors dark:text-slate-100 dark:group-hover:text-[#5BA8BD]">
                                             {clinic.name}
                                         </h3>
                                         <button class="text-slate-600 hover:text-red-500 transition-colors dark:text-slate-400 dark:hover:text-red-400">
@@ -95,7 +96,7 @@ const { topClinics, countryCode = 'US' } = Astro.props as Props;
                                             </span>
                                         ))}
                                         {(clinic.machines.length > 4) && (
-                                            <span class="px-2 py-0.5 bg-violet-50 border border-violet-100 rounded text-[10px] font-semibold text-violet-600 dark:bg-violet-900/40 dark:border-violet-800 dark:text-violet-300">
+                                            <span class="px-2 py-0.5 bg-[#1B4B5A]50 border border-[#1B4B5A]100 rounded text-[10px] font-semibold text-[#1B4B5A] dark:bg-[#1B4B5A]900/40 dark:border-[#1B4B5A]800 dark:text-[#1B4B5A]300">
                                                 +{clinic.machines.length - 4} more
                                             </span>
                                         )}
@@ -112,7 +113,7 @@ const { topClinics, countryCode = 'US' } = Astro.props as Props;
                                     </button>
 
                                     <!-- Book Button -->
-                                    <a href={`/clinic/${clinic.slug}`} class="col-span-1 sm:col-span-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-[#7C3AED] hover:bg-[#6D28D9] text-white rounded-lg font-semibold text-sm transition-colors shadow-lg shadow-[#7C3AED]/20 dark:bg-violet-700 dark:hover:bg-violet-600 dark:shadow-violet-900/30">
+                                    <a href={`/clinic/${clinic.slug}`} class="col-span-1 sm:col-span-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-[#1B4B5A] hover:bg-[#143844] text-white rounded-lg font-semibold text-sm transition-colors shadow-lg shadow-[#1B4B5A]/20 dark:bg-[#143844] dark:hover:bg-[#143844] dark:shadow-[#1B4B5A]/30">
                                         Book Appointment
                                     </a>
 

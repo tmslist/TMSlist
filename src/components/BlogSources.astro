@@ -63,10 +63,10 @@ const sources = [
           <span class="italic text-slate-700">{source.title}. </span>
           <span class="text-slate-500">{source.journal}.</span>
           {source.doi && (
-            <span class="text-slate-400"> DOI: <a href={`https://doi.org/${source.doi}`} class="text-violet-600 hover:text-violet-700" target="_blank" rel="noopener">{source.doi}</a></span>
+            <span class="text-slate-400"> DOI: <a href={`https://doi.org/${source.doi}`} class="text-[#1B4B5A] hover:text-[#143844]" target="_blank" rel="noopener">{source.doi}</a></span>
           )}
           {source.url && !source.doi && (
-            <span class="text-slate-400"> <a href={source.url} class="text-violet-600 hover:text-violet-700" target="_blank" rel="noopener">[Source]</a></span>
+            <span class="text-slate-400"> <a href={source.url} class="text-[#1B4B5A] hover:text-[#143844]" target="_blank" rel="noopener">[Source]</a></span>
           )}
           <p class="text-slate-600 mt-1">
             <strong class="text-slate-700">Key finding:</strong> {source.keyFinding}

@@ -12,7 +12,7 @@
     >
         <!-- Header -->
         <div
-            class="dark-section bg-gradient-to-r from-blue-600 to-cyan-600 p-6 rounded-t-2xl"
+            class="dark-section bg-[#1B4B5A] p-6 rounded-t-2xl"
         >
             <div class="flex items-start justify-between">
                 <div>
@@ -295,9 +295,9 @@
                 </div>
                 <button
                     type="submit"
-                    class="dark-section w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-600 font-semibold rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all shadow-lg"
+                    class="dark-section w-full py-3 bg-[#1B4B5A] font-semibold rounded-lg hover:bg-[#143844] transition-all shadow-lg"
                 >
-                    Download Free Guide →
+                    Download Free Guide ->
                 </button>
                 <p class="text-xs text-gray-500 text-center">
                     We respect your privacy. View our <a
@@ -408,7 +408,7 @@
             localLeads.push({ ...leadData, id: `lead-${Date.now()}`, timestamp: new Date().toISOString() });
             localStorage.setItem("tms-leads", JSON.stringify(localLeads));
 
-            // Don't wait for API — proceed immediately for UX
+            // Don't wait for API - proceed immediately for UX
             void apiPromise;
 
             // Show success and trigger download

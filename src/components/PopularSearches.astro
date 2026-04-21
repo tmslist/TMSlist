@@ -37,8 +37,8 @@ function formatCount(n: number): string {
 
 <div class:list={["bg-white rounded-2xl border border-slate-200 p-6", variant === 'full' && 'max-w-4xl mx-auto']}>
     <div class="flex items-center gap-3 mb-5">
-        <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
-            <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="w-10 h-10 rounded-xl bg-[#1B4B5A]100 flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-[#1B4B5A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
         </div>
@@ -56,8 +56,8 @@ function formatCount(n: number): string {
                 <h4 class="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-3">Top Conditions</h4>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {topConditions.map((item) => (
-                        <a href={item.href} class="group flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-violet-50 border border-slate-100 hover:border-violet-200 transition-all">
-                            <span class="text-sm font-medium text-slate-700 group-hover:text-violet-700">{item.label}</span>
+                        <a href={item.href} class="group flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-[#1B4B5A]50 border border-slate-100 hover:border-teal-200 transition-all">
+                            <span class="text-sm font-medium text-slate-700 group-hover:text-[#143844]">{item.label}</span>
                             <span class="text-xs text-slate-400">{formatCount(item.count)}</span>
                         </a>
                     ))}
@@ -103,8 +103,8 @@ function formatCount(n: number): string {
                 <ul class="space-y-2">
                     {topConditions.slice(0, 3).map((item) => (
                         <li>
-                            <a href={item.href} class="flex items-center gap-2 text-sm text-slate-600 hover:text-violet-600 transition-colors">
-                                <svg class="w-4 h-4 text-violet-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <a href={item.href} class="flex items-center gap-2 text-sm text-slate-600 hover:text-[#1B4B5A] transition-colors">
+                                <svg class="w-4 h-4 text-[#5BA8BD] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                                 {item.label}

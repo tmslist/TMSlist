@@ -25,7 +25,7 @@ const {
         <img
             src={image}
             alt={name}
-            class="w-14 h-14 rounded-full object-cover border-2 border-violet-200 shadow-sm"
+            class="w-14 h-14 rounded-full object-cover border-2 border-teal-200 shadow-sm"
             width="56"
             height="56"
             loading="lazy"
@@ -36,31 +36,31 @@ const {
             {credentials.length > 0 && (
                 <div class="flex items-center gap-1.5 mt-1">
                     {credentials.slice(0, 3).map((cred) => (
-                        <span class="text-[10px] font-medium px-1.5 py-0.5 bg-violet-50 text-violet-600 rounded border border-violet-100">{cred}</span>
+                        <span class="text-[10px] font-medium px-1.5 py-0.5 bg-[#1B4B5A]50 text-[#1B4B5A] rounded border border-[#1B4B5A]100">{cred}</span>
                     ))}
                 </div>
             )}
         </div>
     </div>
 ) : (
-    <div class="bg-gradient-to-br from-violet-50 to-white border border-violet-100 rounded-2xl p-6 not-prose">
+    <div class="bg-gradient-to-br from-violet-50 to-white border border-[#1B4B5A]100 rounded-2xl p-6 not-prose">
         <div class="flex items-start gap-5">
             <img
                 src={image}
                 alt={name}
-                class="w-20 h-20 rounded-2xl object-cover border-2 border-violet-200 shadow-sm shrink-0"
+                class="w-20 h-20 rounded-2xl object-cover border-2 border-teal-200 shadow-sm shrink-0"
                 width="80"
                 height="80"
                 loading="lazy"
             />
             <div class="flex-1 min-w-0">
-                <div class="text-xs font-bold uppercase tracking-widest text-violet-500 mb-1">Medically Reviewed By</div>
+                <div class="text-xs font-bold uppercase tracking-widest text-[#2E7A8F] mb-1">Medically Reviewed By</div>
                 <h3 class="text-lg font-bold text-slate-900 leading-tight">{name}</h3>
-                <p class="text-sm font-medium text-violet-600 mb-3">{title}</p>
+                <p class="text-sm font-medium text-[#1B4B5A] mb-3">{title}</p>
                 {credentials.length > 0 && (
                     <div class="flex flex-wrap gap-1.5 mb-3">
                         {credentials.map((cred) => (
-                            <span class="text-[11px] font-medium px-2 py-0.5 bg-violet-50 text-violet-700 rounded-full border border-violet-100">{cred}</span>
+                            <span class="text-[11px] font-medium px-2 py-0.5 bg-[#1B4B5A]50 text-[#143844] rounded-full border border-[#1B4B5A]100">{cred}</span>
                         ))}
                     </div>
                 )}
@@ -68,7 +68,7 @@ const {
                 {profileUrl && (
                     <a
                         href={profileUrl}
-                        class="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-violet-600 hover:text-violet-800 hover:underline transition-colors"
+                        class="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-[#1B4B5A] hover:text-[#1B4B5A]800 hover:underline transition-colors"
                     >
                         View Specialist Profile
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>

@@ -14,8 +14,6 @@ import {
     getUniqueStates,
     getClinicsByState,
     buildInternationalDirectory,
-    COUNTRY_NAMES,
-    COUNTRY_URL_PREFIXES,
 } from "../utils/dataHelpers";
 
 const POPULAR_STATES = [
@@ -24,7 +22,6 @@ const POPULAR_STATES = [
     "NJ", "VA", "WA", "AZ", "MA",
 ];
 
-// Build US state → cities map from actual clinic data
 const statesWithClinics = (await getUniqueStates())
     .filter((code) => STATE_NAMES[code])
     .sort((a, b) => (STATE_NAMES[a] || "").localeCompare(STATE_NAMES[b] || ""));
@@ -46,11 +43,10 @@ for (const stateCode of statesWithClinics) {
     });
 }
 
-// Build international directory from actual clinic data
 const internationalDirectory = await buildInternationalDirectory();
 ---
 
-<footer class="bg-[#0f172a] text-slate-500 pt-16 pb-8 border-t border-slate-800 font-sans">
+<footer class="bg-[#0f172a] text-slate-500 pt-16 pb-8 font-sans" style="border-top:1px solid #1E242C;">
     <div class="container mx-auto px-6">
 
         <!-- Main Footer Grid -->
@@ -58,165 +54,128 @@ const internationalDirectory = await buildInternationalDirectory();
 
             <!-- Col 1: Find Care -->
             <div>
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mb-5">Find Care</h4>
+                <h4 class="footer-col-title">Find Care</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="/us/" class="text-[13px] hover:text-white transition-colors">Find a Clinic</a></li>
-                    <li><a href="/verified-clinics/" class="text-[13px] hover:text-white transition-colors">Verified Clinics</a></li>
-                    <li><a href="/specialists/" class="text-[13px] hover:text-white transition-colors">Find a Specialist</a></li>
-                    <li><a href="/compare-clinics/" class="text-[13px] hover:text-white transition-colors">Compare Clinics</a></li>
-                    <li><a href="/near-me/tms-near-me/" class="text-[13px] hover:text-white transition-colors">TMS Near Me</a></li>
-                    <li><a href="/quiz/am-i-a-candidate/" class="text-[13px] text-violet-400 hover:text-white transition-colors font-medium">Am I a Candidate?</a></li>
+                    <li><a href="/us/" class="footer-link">Find a Clinic</a></li>
+                    <li><a href="/verified-clinics/" class="footer-link">Verified Clinics</a></li>
+                    <li><a href="/specialists/" class="footer-link">Find a Specialist</a></li>
+                    <li><a href="/compare-clinics/" class="footer-link">Compare Clinics</a></li>
+                    <li><a href="/near-me/tms-near-me/" class="footer-link">TMS Near Me</a></li>
+                    <li><a href="/quiz/am-i-a-candidate/" class="footer-link footer-link-accent">Am I a Candidate?</a></li>
                 </ul>
 
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mt-8 mb-5">Patients</h4>
+                <h4 class="footer-col-title" style="margin-top:2rem;">Patients</h4>
                 <ul class="space-y-2.5">
                     {DEMOGRAPHIC_SLUGS.slice(0, 5).map((item) => (
-                        <li><a href={`/demographic/${item.slug}/`} class="text-[13px] hover:text-white transition-colors">{item.title.replace("TMS for ", "")}</a></li>
+                        <li><a href={`/demographic/${item.slug}/`} class="footer-link">{item.title.replace("TMS for ", "")}</a></li>
                     ))}
-                    <li><a href="/demographic/" class="text-[13px] text-violet-400 hover:text-white transition-colors">All Demographics</a></li>
+                    <li><a href="/demographic/" class="footer-link footer-link-accent">All Demographics</a></li>
                 </ul>
             </div>
 
             <!-- Col 2: Conditions -->
             <div>
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mb-5">Conditions</h4>
+                <h4 class="footer-col-title">Conditions</h4>
                 <ul class="space-y-2.5">
                     {TREATMENT_SLUGS.slice(0, 12).map((item) => (
-                        <li><a href={`/treatments/${item.slug}/`} class="text-[13px] hover:text-white transition-colors">{item.title.replace("TMS for ", "")}</a></li>
+                        <li><a href={`/treatments/${item.slug}/`} class="footer-link">{item.title.replace("TMS for ", "")}</a></li>
                     ))}
-                    <li><a href="/treatments/" class="text-[13px] text-violet-400 hover:text-white transition-colors">All Conditions</a></li>
+                    <li><a href="/treatments/" class="footer-link footer-link-accent">All Conditions</a></li>
                 </ul>
             </div>
 
             <!-- Col 3: Technology & Insurance -->
             <div>
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mb-5">Technology</h4>
+                <h4 class="footer-col-title">Technology</h4>
                 <ul class="space-y-2.5">
                     {TECHNOLOGY_SLUGS.slice(0, 6).map((item) => (
-                        <li><a href={`/technology/${item.slug}/`} class="text-[13px] hover:text-white transition-colors">{item.title}</a></li>
+                        <li><a href={`/technology/${item.slug}/`} class="footer-link">{item.title}</a></li>
                     ))}
-                    <li><a href="/technology/" class="text-[13px] text-violet-400 hover:text-white transition-colors">All Devices</a></li>
+                    <li><a href="/technology/" class="footer-link footer-link-accent">All Devices</a></li>
                 </ul>
 
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mt-8 mb-5">Insurance</h4>
+                <h4 class="footer-col-title" style="margin-top:2rem;">Insurance</h4>
                 <ul class="space-y-2.5">
                     {INSURANCE_SLUGS.slice(0, 6).map((item) => (
-                        <li><a href={`/insurance/${item.slug}/`} class="text-[13px] hover:text-white transition-colors">{item.title.replace(" TMS Coverage", "").replace(" Coverage for TMS", "")}</a></li>
+                        <li><a href={`/insurance/${item.slug}/`} class="footer-link">{item.title.replace(" TMS Coverage", "").replace(" Coverage for TMS", "")}</a></li>
                     ))}
-                    <li><a href="/insurance/" class="text-[13px] text-violet-400 hover:text-white transition-colors">All Insurance Guides</a></li>
+                    <li><a href="/insurance/" class="footer-link footer-link-accent">All Insurance Guides</a></li>
                 </ul>
             </div>
 
-            <!-- Col 4: Resources -->
+            <!-- Col 4: Resources & Community -->
             <div>
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mb-5">Resources</h4>
+                <h4 class="footer-col-title">Resources</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="/blog/" class="text-[13px] hover:text-white transition-colors">Blog</a></li>
-                    <li><a href="/questions/" class="text-[13px] hover:text-white transition-colors">FAQs</a></li>
-                    <li><a href="/resources/" class="text-[13px] hover:text-white transition-colors">Guides & Downloads</a></li>
-                    <li><a href="/stories/" class="text-[13px] hover:text-white transition-colors">Patient Stories</a></li>
-                    <li><a href="/research/" class="text-[13px] hover:text-white transition-colors">Research & Trials</a></li>
-                    <li><a href="/compare/" class="text-[13px] hover:text-white transition-colors">Compare Treatments</a></li>
-                    <li><a href="/alternatives/" class="text-[13px] hover:text-white transition-colors">Alternative Treatments</a></li>
-                    <li><a href="/tms-cost-guide/" class="text-[13px] hover:text-white transition-colors">TMS Cost Guide 2026</a></li>
-                    <li><a href="/glossary/" class="text-[13px] hover:text-white transition-colors">TMS Glossary</a></li>
+                    <li><a href="/blog/" class="footer-link">Blog</a></li>
+                    <li><a href="/questions/" class="footer-link">FAQs</a></li>
+                    <li><a href="/resources/" class="footer-link">Guides & Downloads</a></li>
+                    <li><a href="/stories/" class="footer-link">Patient Stories</a></li>
+                    <li><a href="/research/" class="footer-link">Research & Trials</a></li>
+                    <li><a href="/compare/" class="footer-link">Compare Treatments</a></li>
+                    <li><a href="/alternatives/" class="footer-link">Alternative Treatments</a></li>
+                    <li><a href="/tms-cost-guide/" class="footer-link">TMS Cost Guide 2026</a></li>
+                    <li><a href="/glossary/" class="footer-link">TMS Glossary</a></li>
                 </ul>
 
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mt-8 mb-5">Community</h4>
+                <h4 class="footer-col-title" style="margin-top:2rem;">Tools</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="/community/" class="text-[13px] hover:text-white transition-colors">Community</a></li>
-                    <li><a href="/community/new/" class="text-[13px] hover:text-white transition-colors">Start a Discussion</a></li>
-                    <li><a href="/stories/" class="text-[13px] hover:text-white transition-colors">Patient Stories</a></li>
-                    <li><a href="/research/" class="text-[13px] hover:text-white transition-colors">Research & Trials</a></li>
-                </ul>
-
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mt-8 mb-5">Protocols</h4>
-                <ul class="space-y-2.5">
-                    {PROTOCOL_SLUGS.slice(0, 5).map((item) => (
-                        <li><a href={`/protocols/${item.slug}/`} class="text-[13px] hover:text-white transition-colors">{item.title}</a></li>
-                    ))}
-                    <li><a href="/protocols/" class="text-[13px] text-violet-400 hover:text-white transition-colors">All Protocols</a></li>
-                </ul>
-
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mt-8 mb-5">Tools</h4>
-                <ul class="space-y-2.5">
-                    <li><a href="/quiz/am-i-a-candidate/" class="text-[13px] hover:text-white transition-colors">Am I a Candidate?</a></li>
-                    <li><a href="/quiz/depression-severity-test/" class="text-[13px] hover:text-white transition-colors">Depression Test (PHQ-9)</a></li>
-                    <li><a href="/quiz/insurance-eligibility-checker/" class="text-[13px] hover:text-white transition-colors">Insurance Checker</a></li>
+                    <li><a href="/quiz/am-i-a-candidate/" class="footer-link">Am I a Candidate?</a></li>
+                    <li><a href="/quiz/depression-severity-test/" class="footer-link">Depression Test (PHQ-9)</a></li>
+                    <li><a href="/quiz/insurance-eligibility-checker/" class="footer-link">Insurance Checker</a></li>
                 </ul>
             </div>
 
             <!-- Col 5: Locations (geo-aware) -->
             <div>
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mb-5">Locations</h4>
-                <!-- US locations (default, hidden for non-US) -->
+                <h4 class="footer-col-title">Locations</h4>
                 <ul class="space-y-2.5 footer-locations-list" data-country="US">
                     {POPULAR_STATES.map((stateCode) => (
-                        <li><a href={`/us/${getStateSlug(stateCode)}/`} class="text-[13px] hover:text-white transition-colors">{STATE_NAMES[stateCode]}</a></li>
+                        <li><a href={`/us/${getStateSlug(stateCode)}/`} class="footer-link">{STATE_NAMES[stateCode]}</a></li>
                     ))}
-                    <li><a href="/us/" class="text-[13px] text-violet-400 hover:text-white transition-colors">All US Locations</a></li>
+                    <li><a href="/us/" class="footer-link footer-link-accent">All US Locations</a></li>
                 </ul>
-                <!-- International locations (hidden by default, shown per geo) -->
                 {internationalDirectory.map((country) => (
                     <ul class="space-y-2.5 footer-locations-list hidden" data-country={country.code}>
                         {country.regions.slice(0, 15).map((region) => (
-                            <li><a href={`/${country.urlPrefix}/${region.slug}/`} class="text-[13px] hover:text-white transition-colors">{region.name}</a></li>
+                            <li><a href={`/${country.urlPrefix}/${region.slug}/`} class="footer-link">{region.name}</a></li>
                         ))}
-                        <li><a href={`/${country.urlPrefix}/`} class="text-[13px] text-violet-400 hover:text-white transition-colors">All {country.name} Locations</a></li>
+                        <li><a href={`/${country.urlPrefix}/`} class="footer-link footer-link-accent">All {country.name} Locations</a></li>
                     </ul>
                 ))}
             </div>
 
-            <!-- Col 6: For Providers -->
+            <!-- Col 6: For Providers & Company -->
             <div>
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mb-5">For Providers</h4>
+                <h4 class="footer-col-title">For Providers</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="/add-listing/" class="text-[13px] text-violet-400 hover:text-white transition-colors font-medium">List Your Clinic</a></li>
-                    <li><a href="/claim-listing/" class="text-[13px] hover:text-white transition-colors">Claim Your Listing</a></li>
-                    <li><a href="/providers/" class="text-[13px] hover:text-white transition-colors">Provider Directory</a></li>
-                    <li><a href="/advertise/" class="text-[13px] hover:text-white transition-colors">Advertise</a></li>
-                    <li><a href="/legal/tms-cpt-codes-guide-2026/" class="text-[13px] hover:text-white transition-colors">TMS CPT Codes 2026</a></li>
-                    <li><a href="/legal/starting-a-tms-clinic-requirements-by-state/" class="text-[13px] hover:text-white transition-colors">Starting a TMS Clinic</a></li>
-                    <li><a href="/legal/" class="text-[13px] hover:text-white transition-colors">Legal Guides</a></li>
-                    {COMMERCIAL_SLUGS.slice(0, 4).map((item) => (
-                        <li><a href={`/providers/services/${item.slug}/`} class="text-[13px] hover:text-white transition-colors">{item.title}</a></li>
-                    ))}
-                    <li><a href="/admin/login/" class="text-[13px] text-emerald-400 hover:text-white transition-colors font-medium mt-2 block">Provider Login</a></li>
+                    <li><a href="/add-listing/" class="footer-link footer-link-accent">List Your Clinic</a></li>
+                    <li><a href="/claim-listing/" class="footer-link">Claim Your Listing</a></li>
+                    <li><a href="/providers/" class="footer-link">Provider Directory</a></li>
+                    <li><a href="/advertise/" class="footer-link">Advertise</a></li>
+                    <li><a href="/legal/tms-cpt-codes-guide-2026/" class="footer-link">TMS CPT Codes 2026</a></li>
+                    <li><a href="/legal/starting-a-tms-clinic-requirements-by-state/" class="footer-link">Starting a TMS Clinic</a></li>
+                    <li><a href="/admin/login/" class="footer-link" style="color:#34d399;">Provider Login</a></li>
                 </ul>
 
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mt-8 mb-5">Contact & Sales</h4>
+                <h4 class="footer-col-title" style="margin-top:2rem;">Company</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="mailto:tmslistofficial@gmail.com" class="text-[13px] hover:text-white transition-colors">tmslistofficial@gmail.com</a></li>
-                    <li><a href="https://wa.me/919789565515" target="_blank" rel="noopener noreferrer" class="text-[13px] text-emerald-400 hover:text-white transition-colors">WhatsApp: +91 978956 5515</a></li>
-                </ul>
-
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mt-8 mb-5">Company</h4>
-                <ul class="space-y-2.5">
-                    <li><a href="/about-us/" class="text-[13px] hover:text-white transition-colors">About Us</a></li>
-                    <li><a href="/contact/" class="text-[13px] hover:text-white transition-colors">Contact</a></li>
-                    <li><a href="/careers/" class="text-[13px] hover:text-white transition-colors">Careers</a></li>
-                    <li><a href="/advertise/" class="text-[13px] hover:text-white transition-colors">Advertise</a></li>
-                    <li><a href="/map/" class="text-[13px] hover:text-white transition-colors">Clinic Map</a></li>
-                    <li><a href="/how-we-rank/" class="text-[13px] hover:text-white transition-colors">How We Rank</a></li>
-                    <li><a href="/editorial-policy/" class="text-[13px] hover:text-white transition-colors">Editorial Policy</a></li>
-                    <li><a href="/accessibility/" class="text-[13px] hover:text-white transition-colors">Accessibility</a></li>
-                    <li><a href="/sitemap/" class="text-[13px] hover:text-white transition-colors">Sitemap</a></li>
-                </ul>
-
-                <h4 class="text-slate-200 text-[11px] font-semibold uppercase tracking-[0.15em] mt-8 mb-5">For Patients</h4>
-                <ul class="space-y-2.5">
-                    <li><a href="/for-specialists/" class="text-[13px] hover:text-white transition-colors">For Specialists</a></li>
-                    <li><a href="/for-clinics/" class="text-[13px] hover:text-white transition-colors">For Clinics</a></li>
-                    <li><a href="/tms-cost-calculator/" class="text-[13px] hover:text-white transition-colors">Cost Calculator</a></li>
+                    <li><a href="/about-us/" class="footer-link">About Us</a></li>
+                    <li><a href="/contact/" class="footer-link">Contact</a></li>
+                    <li><a href="/careers/" class="footer-link">Careers</a></li>
+                    <li><a href="/how-we-rank/" class="footer-link">How We Rank</a></li>
+                    <li><a href="/editorial-policy/" class="footer-link">Editorial Policy</a></li>
+                    <li><a href="/accessibility/" class="footer-link">Accessibility</a></li>
+                    <li><a href="/sitemap/" class="footer-link">Sitemap</a></li>
                 </ul>
             </div>
         </div>
 
-        <!-- Collapsible US Locations Directory (geo-aware) -->
-        <div class="border-t border-slate-800 pt-10 mb-10 footer-directory-section" data-country="US" id="footer-us-locations">
+        <!-- US Locations Directory (geo-aware) -->
+        <div class="footer-directory-section border-t" data-country="US" id="footer-us-locations" style="border-color:#1E242C;padding-top:2.5rem;margin-bottom:2.5rem;">
             <div class="flex items-center justify-between mb-6">
-                <h4 class="text-slate-300 text-xs font-semibold uppercase tracking-[0.15em]">TMS Clinics in the United States</h4>
-                <a href="/us/" class="text-[11px] text-violet-400 hover:text-violet-300 transition-colors uppercase tracking-wider font-medium">View All</a>
+                <h4 class="text-slate-300 text-xs font-semibold uppercase tracking-widest">TMS Clinics in the United States</h4>
+                <a href="/us/" class="footer-link-accent text-[11px] uppercase tracking-wider">View All</a>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-1">
                 {stateCityMap.map((st) => (
@@ -227,7 +186,7 @@ const internationalDirectory = await buildInternationalDirectory();
                             aria-expanded="false"
                             data-state={st.code}
                         >
-                            <span class="text-[13px] text-slate-400 group-hover:text-slate-200 transition-colors font-medium">
+                            <span class="footer-link font-medium group-hover:font-semibold transition-all">
                                 {st.name}
                             </span>
                             <span class="flex items-center gap-1.5">
@@ -240,22 +199,14 @@ const internationalDirectory = await buildInternationalDirectory();
                         <ul class="footer-city-list hidden pl-2 pb-2 space-y-1">
                             {st.cities.map((city) => (
                                 <li>
-                                    <a
-                                        href={`/us/${st.slug}/${city.slug}/`}
-                                        class="text-[12px] text-slate-500 hover:text-violet-400 transition-colors flex items-center justify-between"
-                                    >
+                                    <a href={`/us/${st.slug}/${city.slug}/`} class="footer-link-city flex items-center justify-between">
                                         <span>{city.name}</span>
                                         <span class="text-[10px] text-slate-600">{city.count}</span>
                                     </a>
                                 </li>
                             ))}
                             <li>
-                                <a
-                                    href={`/us/${st.slug}/`}
-                                    class="text-[11px] text-violet-400 hover:text-violet-300 transition-colors font-medium"
-                                >
-                                    All {st.name} clinics
-                                </a>
+                                <a href={`/us/${st.slug}/`} class="footer-link-accent text-[11px]">All {st.name} clinics</a>
                             </li>
                         </ul>
                     </div>
@@ -263,15 +214,11 @@ const internationalDirectory = await buildInternationalDirectory();
             </div>
         </div>
 
-        <!-- International Locations Directory (geo-detected, hidden by default) -->
+        <!-- International Locations Directory (hidden by default, shown per geo) -->
         {internationalDirectory.map((country) => (
-            <div
-                class="border-t border-slate-800 pt-10 mb-10 footer-country-section hidden"
-                data-country={country.code}
-                id={`footer-${country.urlPrefix}-locations`}
-            >
+            <div class="footer-country-section hidden border-t" data-country={country.code} id={`footer-${country.urlPrefix}-locations`} style="border-color:#1E242C;padding-top:2.5rem;margin-bottom:2.5rem;">
                 <div class="flex items-center justify-between mb-6">
-                    <h4 class="text-slate-300 text-xs font-semibold uppercase tracking-[0.15em]">
+                    <h4 class="text-slate-300 text-xs font-semibold uppercase tracking-widest">
                         {country.flag} TMS Clinics in {country.name}
                     </h4>
                     <span class="text-[11px] text-slate-500">{country.clinicCount} clinics</span>
@@ -279,14 +226,8 @@ const internationalDirectory = await buildInternationalDirectory();
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-1">
                     {country.regions.map((region) => (
                         <div class="footer-state-group">
-                            <button
-                                type="button"
-                                class="footer-state-toggle w-full flex items-center justify-between py-2 text-left group"
-                                aria-expanded="false"
-                            >
-                                <span class="text-[13px] text-slate-400 group-hover:text-slate-200 transition-colors font-medium">
-                                    {region.name}
-                                </span>
+                            <button type="button" class="footer-state-toggle w-full flex items-center justify-between py-2 text-left group" aria-expanded="false">
+                                <span class="footer-link font-medium group-hover:font-semibold transition-all">{region.name}</span>
                                 <span class="flex items-center gap-1.5">
                                     <span class="text-[10px] text-slate-600">{region.clinicCount}</span>
                                     <svg class="w-3 h-3 text-slate-600 group-hover:text-slate-400 transition-all duration-200 footer-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -297,10 +238,7 @@ const internationalDirectory = await buildInternationalDirectory();
                             <ul class="footer-city-list hidden pl-2 pb-2 space-y-1">
                                 {region.cities.map((city) => (
                                     <li>
-                                        <a
-                                            href={`/${country.urlPrefix}/${region.slug}/${city.slug}/`}
-                                            class="text-[12px] text-slate-500 hover:text-violet-400 transition-colors flex items-center justify-between"
-                                        >
+                                        <a href={`/${country.urlPrefix}/${region.slug}/${city.slug}/`} class="footer-link-city flex items-center justify-between">
                                             <span>{city.name}</span>
                                             <span class="text-[10px] text-slate-600">{city.count}</span>
                                         </a>
@@ -314,109 +252,184 @@ const internationalDirectory = await buildInternationalDirectory();
         ))}
 
         <!-- Brand Row -->
-        <div class="border-t border-slate-800 pt-10 pb-6 flex flex-col lg:flex-row items-start lg:items-center gap-8">
-            <a href="/" class="flex items-center gap-2.5 group block shrink-0" aria-label="TMS List Home">
-                <svg class="h-8 w-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="footerBrandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#4F46E5"/>
-                            <stop offset="100%" stop-color="#D946EF"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M50 15 C 30 15, 15 35, 15 55 C 15 75, 30 85, 50 85" stroke="url(#footerBrandGradient)" stroke-width="8" stroke-linecap="round"/>
-                    <path d="M65 25 C 45 25, 35 40, 35 55 C 35 70, 45 75, 65 75" stroke="url(#footerBrandGradient)" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
-                    <path d="M80 35 C 65 35, 55 45, 55 55 C 55 65, 65 65, 80 65" stroke="url(#footerBrandGradient)" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
-                </svg>
-                <span class="text-xl font-extrabold tracking-tight text-white font-display">
-                    TMS<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-fuchsia-400">List</span>
-                </span>
-            </a>
-            <p class="text-sm text-slate-500 leading-relaxed max-w-lg">
-                Real TMS clinics. Real reviews. Real insurance info.
-                We help you find the right provider -- and skip the runaround.
-            </p>
+        <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8 pt-10" style="border-top:1px solid #1E242C;">
+            <!-- Logo + tagline -->
+            <div class="flex items-center gap-3 group shrink-0">
+                <a href="/" class="flex items-center gap-2.5 group" aria-label="TMS List Home">
+                    <svg class="h-8 w-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="footerBrandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1B4B5A"/>
+                                <stop offset="100%" stop-color="#2E7A8F"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 15 C 30 15, 15 35, 15 55 C 15 75, 30 85, 50 85" stroke="url(#footerBrandGradient)" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M65 25 C 45 25, 35 40, 35 55 C 35 70, 45 75, 65 75" stroke="url(#footerBrandGradient)" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+                        <path d="M80 35 C 65 35, 55 45, 55 55 C 55 65, 65 65, 80 65" stroke="url(#footerBrandGradient)" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+                    </svg>
+                    <span class="text-xl font-extrabold tracking-tight text-white" style="font-family:var(--font-display);">
+                        TMS<span style="color:#2E7A8F;">List</span>
+                    </span>
+                </a>
+                <!-- Divider line -->
+                <span class="hidden lg:block w-px h-6" style="background:#1E242C;"></span>
+                <p class="text-sm text-slate-500 leading-relaxed max-w-md">
+                    Real TMS clinics. Real reviews. Real insurance info.
+                    We help you find the right provider.
+                </p>
+            </div>
+
+            <!-- Social links -->
             <div class="flex gap-3 lg:ml-auto">
-                <a href="https://x.com/tmslist" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-slate-500 hover:bg-white/10 hover:text-white transition-all" aria-label="Follow TMS List on X (Twitter)">
+                <a href="https://x.com/tmslist" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="TMS List on X">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
                 </a>
-                <a href="https://linkedin.com/company/tmslist" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-slate-500 hover:bg-white/10 hover:text-white transition-all" aria-label="Follow TMS List on LinkedIn">
+                <a href="https://linkedin.com/company/tmslist" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="TMS List on LinkedIn">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
-                <a href="https://www.youtube.com/@TMSlist" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-slate-500 hover:bg-white/10 hover:text-white transition-all" aria-label="Follow TMS List on YouTube">
+                <a href="https://www.youtube.com/@TMSlist" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="TMS List on YouTube">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 </a>
             </div>
         </div>
 
         <!-- Bottom Bar -->
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-6 border-t border-slate-800">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-6 mt-6" style="border-top:1px solid #1E242C;">
             <p class="text-[11px] text-slate-600 tracking-wide order-2 md:order-1">
                 &copy; {new Date().getFullYear()} ATZ Medappz Pvt Ltd. All rights reserved.
             </p>
-            <div class="flex flex-wrap justify-center md:justify-end gap-5 order-1 md:order-2">
-                <a href="/legal/privacy-policy/" class="text-[10px] text-slate-500 hover:text-white transition-colors uppercase tracking-widest">Privacy Policy</a>
-                <a href="/legal/terms-of-service/" class="text-[10px] text-slate-500 hover:text-white transition-colors uppercase tracking-widest">Terms of Service</a>
-                <a href="/legal/medical-disclaimer/" class="text-[10px] text-slate-500 hover:text-white transition-colors uppercase tracking-widest">Medical Disclaimer</a>
+            <div class="flex flex-wrap justify-start md:justify-end gap-5 order-1 md:order-2">
+                <a href="/legal/privacy-policy/" class="footer-bottom-link">Privacy Policy</a>
+                <a href="/legal/terms-of-service/" class="footer-bottom-link">Terms of Service</a>
+                <a href="/legal/medical-disclaimer/" class="footer-bottom-link">Medical Disclaimer</a>
             </div>
         </div>
     </div>
 </footer>
 
-<script is:inline>
-document.addEventListener('DOMContentLoaded', () => {
-    // Collapsible state/region toggle (works for both US and international)
-    const toggles = document.querySelectorAll('.footer-state-toggle');
-    toggles.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            const group = btn.closest('.footer-state-group');
-            const list = group.querySelector('.footer-city-list');
-            const chevron = btn.querySelector('.footer-chevron');
-            const isOpen = btn.getAttribute('aria-expanded') === 'true';
+<style>
+    .footer-col-title {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #cbd5e1;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #1E242C;
+    }
 
-            // Close other open groups within the same section
-            const section = btn.closest('[id^="footer-"]') || btn.closest('.footer-country-section');
+    .footer-link {
+        display: block;
+        font-size: 0.8125rem;
+        color: #64748b;
+        transition: color 0.15s ease;
+        text-decoration: none;
+        padding: 0.125rem 0;
+    }
+    .footer-link:hover {
+        color: #e2e8f0;
+    }
+
+    .footer-link-accent {
+        color: #5BA8BD;
+        font-weight: 500;
+    }
+    .footer-link-accent:hover {
+        color: #2E7A8F;
+    }
+
+    .footer-link-city {
+        display: block;
+        font-size: 0.75rem;
+        color: #475569;
+        transition: color 0.15s ease;
+        text-decoration: none;
+        padding: 0.125rem 0;
+    }
+    .footer-link-city:hover {
+        color: #5BA8BD;
+    }
+
+    .footer-state-toggle {
+        cursor: pointer;
+        transition: color 0.15s ease;
+    }
+    .footer-state-toggle .footer-link {
+        transition: font-weight 0.15s ease, color 0.15s ease;
+    }
+
+    .footer-social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.04);
+        color: #475569;
+        transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        text-decoration: none;
+        border: 1px solid #1E242C;
+    }
+    .footer-social-btn:hover {
+        background: rgba(255,255,255,0.08);
+        color: #e2e8f0;
+        transform: translateY(-2px);
+        border-color: #2E323C;
+    }
+
+    .footer-bottom-link {
+        font-size: 0.6875rem;
+        color: #475569;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: color 0.15s ease;
+        text-decoration: none;
+        padding: 0.125rem 0;
+    }
+    .footer-bottom-link:hover {
+        color: #94a3b8;
+    }
+</style>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+    // Collapsible state/region toggle
+    document.querySelectorAll('.footer-state-toggle').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var group = btn.closest('.footer-state-group');
+            var list = group.querySelector('.footer-city-list');
+            var chevron = btn.querySelector('.footer-chevron');
+            var isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+            var section = btn.closest('[id^="footer-"]') || btn.closest('.footer-country-section');
             if (section) {
-                section.querySelectorAll('.footer-state-toggle').forEach((other) => {
+                section.querySelectorAll('.footer-state-toggle').forEach(function(other) {
                     if (other !== btn && other.getAttribute('aria-expanded') === 'true') {
                         other.setAttribute('aria-expanded', 'false');
-                        other.closest('.footer-state-group').querySelector('.footer-city-list').classList.add('hidden');
-                        other.querySelector('.footer-chevron').style.transform = '';
+                        var otherList = other.closest('.footer-state-group').querySelector('.footer-city-list');
+                        if (otherList) otherList.classList.add('hidden');
+                        var otherChevron = other.querySelector('.footer-chevron');
+                        if (otherChevron) otherChevron.style.transform = '';
                     }
                 });
             }
 
             btn.setAttribute('aria-expanded', String(!isOpen));
-            list.classList.toggle('hidden');
-            chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+            list && list.classList.toggle('hidden');
+            chevron && (chevron.style.transform = isOpen ? '' : 'rotate(180deg)');
         });
     });
 
-    // Use shared geo.js detection (loaded in Layout head)
+    // Geo-aware locations
     var country = (window.TMS_GEO && window.TMS_GEO.country) || 'US';
 
-    // Col 5: Show only the matching country's location links
     document.querySelectorAll('.footer-locations-list').forEach(function(el) {
-        if (el.getAttribute('data-country') === country) {
-            el.classList.remove('hidden');
-        } else {
-            el.classList.add('hidden');
-        }
+        el.classList.toggle('hidden', el.getAttribute('data-country') !== country);
     });
-
-    // Directory sections: show matching country, hide others
-    document.querySelectorAll('.footer-directory-section').forEach(function(el) {
-        if (el.getAttribute('data-country') === country) {
-            el.classList.remove('hidden');
-        } else {
-            el.classList.add('hidden');
-        }
-    });
-    document.querySelectorAll('.footer-country-section').forEach(function(el) {
-        if (el.getAttribute('data-country') === country) {
-            el.classList.remove('hidden');
-        } else {
-            el.classList.add('hidden');
-        }
+    document.querySelectorAll('.footer-directory-section, .footer-country-section').forEach(function(el) {
+        el.classList.toggle('hidden', el.getAttribute('data-country') !== country);
     });
 });
 </script>

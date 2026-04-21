@@ -1,6 +1,6 @@
 ---
 /**
- * BlogCover — Full-width hero banner with AI-generated background + title overlay.
+ * BlogCover - Full-width hero banner with AI-generated background + title overlay.
  * Uses Gemini to create unique topical illustrations, with a gorgeous CSS fallback
  * that's visible immediately while the AI image loads.
  */
@@ -16,20 +16,20 @@ interface Props {
 const { title, subtitle, category, readTime, date, slug } = Astro.props;
 
 // Deterministic accent color from category
-const categoryAccents: Record<string, { from: string; to: string; badge: string; badgeText: string }> = {
-  'Research':      { from: 'from-violet-600', to: 'to-indigo-950', badge: 'bg-indigo-500/30', badgeText: 'text-indigo-200' },
-  'Treatment':     { from: 'from-violet-600', to: 'to-fuchsia-900', badge: 'bg-fuchsia-500/30', badgeText: 'text-fuchsia-200' },
-  'Insurance':     { from: 'from-violet-700', to: 'to-slate-900', badge: 'bg-amber-500/30', badgeText: 'text-amber-200' },
-  'FAQ':           { from: 'from-fuchsia-600', to: 'to-indigo-900', badge: 'bg-fuchsia-500/30', badgeText: 'text-fuchsia-200' },
-  'Patient Guide': { from: 'from-violet-500', to: 'to-fuchsia-800', badge: 'bg-indigo-500/30', badgeText: 'text-indigo-200' },
+const categoryAccents: Record<string, { color: string; badge: string; badgeText: string }> = {
+  'Research':      { color: '#4F46E5', badge: 'bg-[#1B4B5A]/30', badgeText: 'text-[#1B4B5A]200' },
+  'Treatment':     { color: '#5B21B6', badge: 'bg-[#1B4B5A]/30', badgeText: 'text-[#1B4B5A]200' },
+  'Insurance':     { color: '#065F46', badge: 'bg-emerald-500/30', badgeText: 'text-emerald-200' },
+  'FAQ':           { color: '#1B4B5A', badge: 'bg-[#1B4B5A]/30', badgeText: 'text-[#1B4B5A]200' },
+  'Patient Guide': { color: '#143844', badge: 'bg-[#1B4B5A]/30', badgeText: 'text-[#1B4B5A]200' },
 };
-const accent = categoryAccents[category || ''] || { from: 'from-violet-600', to: 'to-fuchsia-900', badge: 'bg-indigo-500/30', badgeText: 'text-indigo-200' };
+const accent = categoryAccents[category || ''] || { color: '#1B4B5A', badge: 'bg-[#1B4B5A]/30', badgeText: 'text-[#1B4B5A]200' };
 const cacheKey = `ai-img:blog-cover:${slug}`;
 ---
 
 <section class="relative overflow-hidden bg-slate-950" id={`blog-cover-${slug}`}>
   <!-- Layer 1: Deterministic gradient fallback (visible immediately) -->
-  <div class={`absolute inset-0 bg-gradient-to-br ${accent.from} ${accent.to} opacity-90`}></div>
+  <div class="absolute inset-0 opacity-90" style={`background: ${accent.color};`}></div>
 
   <!-- Layer 2: Decorative pattern -->
   <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0); background-size: 28px 28px;"></div>
