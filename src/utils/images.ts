@@ -12,7 +12,6 @@
  * Also provides: srcset helpers, logo fallback with SVG initials.
  */
 
-import crypto from 'crypto';
 
 /**
  * Generate a unique image URL for a clinic using Picsum.
