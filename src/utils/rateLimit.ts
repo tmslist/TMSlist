@@ -80,6 +80,12 @@ export function inMemoryRateLimit(
  * Strict rate limit by a custom identifier (email, IP, etc.).
  * Tries Upstash Redis first, falls back to in-memory if Redis is unavailable.
  * Returns null if allowed, or a 429 Response if blocked.
+ *
+ * Production note: in-memory fallback is PER-INSTANCE and resets on every
+ * serverless cold start, effectively disabling rate limiting under load.
+ * In production we therefore require Redis and fail closed (HTTP 503) if
+ * Upstash is not configured. Set UPSTASH_REDIS_REST_URL + _TOKEN, or set
+ * `ALLOW_INMEMORY_RATELIMIT=true` to opt in to the fallback explicitly.
  */
 export async function strictRateLimit(
   identifier: string,
@@ -89,6 +95,17 @@ export async function strictRateLimit(
 ): Promise<Response | null> {
   const r = redis();
   if (!r) {
+    const isProd = process.env.NODE_ENV === 'production';
+    const allowFallback = process.env.ALLOW_INMEMORY_RATELIMIT === 'true';
+    if (isProd && !allowFallback) {
+      console.error('[ratelimit] Redis not configured in production — refusing request');
+      return new Response(JSON.stringify({
+        error: 'Rate limiter not configured. Service unavailable.',
+      }), {
+        status: 503,
+        headers: { 'Content-Type': 'application/json', 'Retry-After': '60' },
+      });
+    }
     // Fallback: in-memory rate limiter (per-instance, best-effort)
     const result = inMemoryRateLimit(`${prefix}:${identifier}`, maxRequests, window);
     if (!result.success) {

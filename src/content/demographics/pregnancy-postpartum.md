@@ -47,23 +47,23 @@ Some insurers want documentation that medication is contraindicated. Pregnancy a
 
 ---
 
-<div class="not-prose my-8 bg-gradient-to-r from-rose-50 to-pink-50 border border-rose-100 rounded-2xl p-8">
+<div class="not-prose my-8 bg-gradient-to-r from-[var(--warm)] to-[var(--ink)] border border-white/10 rounded-2xl p-8 shadow-lg shadow-[rgba(10,22,40,0.15)]">
   <div class="flex items-start gap-4">
-    <div class="shrink-0 w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center">
-      <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+    <div class="shrink-0 w-12 h-12 bg-white/15 ring-1 ring-white/20 rounded-xl flex items-center justify-center">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
     </div>
     <div>
-      <p class="text-xs font-bold text-rose-600 uppercase tracking-wider mb-1">Key Stat</p>
-      <p class="text-slate-800 leading-relaxed">10–20% of women experience perinatal depression. TMS offers a medication-free path — no drug crosses the placenta, none enters breast milk.</p>
+      <p class="text-xs font-bold text-white/80 uppercase tracking-wider mb-1">Key Stat</p>
+      <p class="text-white leading-relaxed font-medium">10–20% of women experience perinatal depression. TMS offers a medication-free path — no drug crosses the placenta, none enters breast milk.</p>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic Near You</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>

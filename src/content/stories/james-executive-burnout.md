@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-21
 category: stories
 tags: ["patient story", "depression", "burnout", "executives", "theta burst"]
-image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## Performing perfectly while falling apart

@@ -4,7 +4,7 @@ description: "Transcranial magnetic stimulation shows promise for treating panic
 publishDate: 2026-04-15
 category: treatment
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-panic-disorder.svg"
 tags: ["tms", "panic-disorder", "agoraphobia", "anxiety"]
 ---
 
@@ -77,35 +77,35 @@ As with all TMS applications, treatment should be administered by a qualified ps
 
 Panic disorder can be deeply isolating and disabling, but TMS offers a scientifically grounded pathway to relief that targets the disorder at its neurological source.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for panic disorder?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for panic disorder?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS is not FDA-cleared specifically for panic disorder. It is FDA-cleared for major depressive disorder, OCD, and smoking cessation. However, TMS is increasingly used off-label for anxiety disorders including panic disorder, with growing evidence supporting its efficacy.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS is not FDA-cleared specifically for panic disorder. It is FDA-cleared for major depressive disorder, OCD, and smoking cessation. However, TMS is increasingly used off-label for anxiety disorders including panic disorder, with growing evidence supporting its efficacy.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS trigger panic attacks?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS trigger panic attacks?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">There is a theoretical concern that TMS could trigger a panic attack during treatment, but clinical studies have not found this to be a significant risk. Patients are carefully screened and monitored throughout each session for any signs of anxiety or distress.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">There is a theoretical concern that TMS could trigger a panic attack during treatment, but clinical studies have not found this to be a significant risk. Patients are carefully screened and monitored throughout each session for any signs of anxiety or distress.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How is TMS for panic disorder different from TMS for depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How is TMS for panic disorder different from TMS for depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">While depression TMS typically targets the left DLPFC, panic disorder protocols often use right dlPFC low-frequency (inhibitory) stimulation or bilateral approaches. Deep TMS using H-coils has also been studied specifically for anxiety disorders including panic disorder.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">While depression TMS typically targets the left DLPFC, panic disorder protocols often use right dlPFC low-frequency (inhibitory) stimulation or bilateral approaches. Deep TMS using H-coils has also been studied specifically for anxiety disorders including panic disorder.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

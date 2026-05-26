@@ -3,6 +3,7 @@ import Layout from "./Layout.astro";
 import ContentHero from "../components/ContentHero.astro";
 import ContentFAQ from "../components/ContentFAQ.astro";
 import FindClinicCTA from "../components/FindClinicCTA.astro";
+import LeadMagnetCta from "../components/LeadMagnetCta.astro";
 import SectionLinks from "../components/SectionLinks.astro";
 
 interface BreadcrumbItem {
@@ -45,6 +46,18 @@ const {
   slug,
   faqs = [],
 } = Astro.props;
+
+// Hero stat tiles need a terse value. Frontmatter `successRate` is often a
+// full sentence ("Research phase — 30-50% reduction in cravings"); pull out
+// the first percentage range, or fall back to a short label.
+function shortStat(s?: string): string {
+  if (!s) return '50–60%';
+  const pct = s.match(/\d+(?:[-–]\d+)?\s*%/);
+  if (pct) return pct[0].replace('-', '–');
+  if (/research/i.test(s)) return 'Research';
+  return s.length > 14 ? s.slice(0, 12) + '…' : s;
+}
+const heroSuccess = shortStat(successRate);
 
 const reviewerName = "Dr. Karan Narwal";
 const reviewerTitle = "Mental Health Specialist & Consultant";
@@ -105,10 +118,10 @@ const relatedSections = [
     subtitle={description || `How TMS therapy is used to treat ${condition || 'this condition'}.`}
     breadcrumbs={breadcrumbs}
     badges={badges}
-    accentFrom="from-violet-600"
-    accentTo="to-slate-900"
+    accentFrom="from-[var(--ink)]"
+    accentTo="to-[var(--ink)]"
     stats={[
-      { value: successRate || '50–60%', label: 'Response Rate' },
+      { value: heroSuccess, label: 'Response Rate' },
       { value: sessionCount || '30–36', label: 'Sessions' },
       { value: duration || '6–9 weeks', label: 'Duration' },
       { value: fdaApproved ? 'Yes' : 'Off-label', label: 'FDA Status' },
@@ -118,11 +131,11 @@ const relatedSections = [
   <main class="container mx-auto px-4 pb-28 lg:pb-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
       <!-- Article Column -->
-      <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-a:text-violet-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-900 prose-table:border prose-table:border-slate-200 prose-th:bg-slate-50 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-slate-200 prose-img:rounded-xl prose-img:shadow-lg">
+      <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline prose-strong:text-[var(--ink)] prose-table:border prose-table:border-[var(--line)] prose-th:bg-[var(--paper2)] prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-[var(--line)] prose-img:rounded-xl prose-img:shadow-lg">
         <slot>
           <!-- Fallback content -->
-          <div class="bg-violet-50 border-l-4 border-violet-500 p-6 mb-8 rounded-r-xl">
-            <h3 class="text-violet-700 font-semibold mt-0">Current as of 2026</h3>
+          <div class="bg-[var(--paper2)] border-l-4 border-[var(--ink)] p-6 mb-8 rounded-r-xl">
+            <h3 class="text-[var(--accent)] font-semibold mt-0">Current as of 2026</h3>
             <p class="mb-0">This guide reflects the latest regulatory approvals and clinical data for {title}.</p>
           </div>
 
@@ -143,12 +156,12 @@ const relatedSections = [
           <h2>Insurance Coverage</h2>
           <p>{fdaApproved ? 'Most major insurance carriers cover TMS for this condition, including Medicare, BCBS, Aetna, Cigna, and UnitedHealthcare. Prior authorization is typically required.' : 'Insurance coverage for off-label TMS varies by carrier. Many clinics will help you navigate the authorization process.'}</p>
 
-          <div class="not-prose mt-12 p-6 sm:p-8 bg-violet-900 rounded-2xl text-white text-center">
+          <div class="not-prose mt-12 p-6 sm:p-8 bg-[var(--ink)] rounded-2xl text-white text-center">
             <h3 class="text-xl sm:text-2xl font-semibold mb-3">Ready to find a clinic?</h3>
-            <p class="text-violet-200 mb-6 sm:mb-8 text-sm sm:text-base">Browse verified TMS providers with real reviews and insurance info.</p>
+            <p class="text-white/80 mb-6 sm:mb-8 text-sm sm:text-base">Browse verified TMS providers with real reviews and insurance info.</p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a href="/us/" class="w-full sm:w-auto inline-block bg-white text-violet-900 font-semibold py-3 px-6 rounded-xl hover:bg-violet-50 transition-colors text-sm sm:text-base">Find a Clinic Near You</a>
-              <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto inline-block bg-violet-700 text-white font-semibold py-3 px-6 rounded-xl hover:bg-violet-600 transition-colors text-sm sm:text-base">Take the Quiz</a>
+              <a href="/us/" class="w-full sm:w-auto inline-block bg-white text-[var(--accent)] font-semibold py-3 px-6 rounded-xl hover:bg-[var(--paper2)] transition-colors text-sm sm:text-base">Find a Clinic Near You</a>
+              <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto inline-block bg-[var(--ink)] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[var(--ink2)] transition-colors text-sm sm:text-base">Take the Quiz</a>
             </div>
           </div>
         </slot>
@@ -157,56 +170,56 @@ const relatedSections = [
       <!-- Sidebar -->
       <aside class="lg:col-span-4 space-y-4 lg:space-y-6">
         <!-- Prominent CTA Box (sticky on desktop) -->
-        <div class="bg-gradient-to-br from-violet-600 to-violet-700 p-5 rounded-2xl text-white sticky top-20 z-10 shadow-xl shadow-violet-600/20">
+        <div class="bg-[var(--ink)] p-5 rounded-2xl text-white sticky top-20 z-10 shadow-xl shadow-[rgba(10,22,40,0.2)]">
           <div class="flex items-center gap-2 mb-2">
             <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-            <span class="text-[10px] font-semibold text-violet-200 uppercase tracking-wider">Free Eligibility Check</span>
+            <span class="text-[10px] font-semibold text-white/80 uppercase tracking-wider">Free Eligibility Check</span>
           </div>
           <h4 class="font-bold text-lg leading-snug mb-1.5">Is TMS right for you?</h4>
-          <p class="text-sm text-violet-200 mb-4 leading-relaxed">2-min quiz checks symptoms & insurance to match you with providers.</p>
-          <a href="/quiz/am-i-a-candidate/" class="block text-center bg-white text-violet-700 font-bold text-sm py-3 px-5 rounded-xl hover:bg-violet-50 transition-colors shadow-lg mb-2">
+          <p class="text-sm text-white/80 mb-4 leading-relaxed">2-min quiz checks symptoms & insurance to match you with providers.</p>
+          <a href="/quiz/am-i-a-candidate/" class="block text-center bg-white text-[var(--accent)] font-bold text-sm py-3 px-5 rounded-xl hover:bg-[var(--paper2)] transition-colors shadow-lg mb-2">
             Take the Free Quiz
           </a>
-          <a href="/us/" class="flex items-center justify-center gap-1.5 text-xs text-violet-200 hover:text-white transition-colors py-1">
+          <a href="/us/" class="flex items-center justify-center gap-1.5 text-xs text-white/80 hover:text-white transition-colors py-1">
             <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             Find a clinic near you
           </a>
         </div>
 
         <!-- Key Facts -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Quick Facts</h4>
+        <div class="bg-white p-5 rounded-2xl border border-[var(--line)] shadow-sm">
+          <h4 class="font-semibold text-[var(--ink)] mb-4 uppercase text-xs tracking-wider">Quick Facts</h4>
           <dl class="space-y-3 text-sm">
             <div class="flex justify-between">
-              <dt class="text-slate-600">FDA Status</dt>
-              <dd class="font-semibold">{fdaApproved ? <span class="text-emerald-600">Cleared</span> : <span class="text-blue-600">Off-label</span>}</dd>
+              <dt class="text-[var(--ink2)]">FDA Status</dt>
+              <dd class="font-semibold">{fdaApproved ? <span class="text-emerald-600">Cleared</span> : <span class="text-[var(--accent)]">Off-label</span>}</dd>
             </div>
             {successRate && (
               <div class="flex justify-between">
-                <dt class="text-slate-600">Response Rate</dt>
-                <dd class="font-semibold text-slate-900">{successRate}</dd>
+                <dt class="text-[var(--ink2)]">Response Rate</dt>
+                <dd class="font-semibold text-[var(--ink)]">{successRate}</dd>
               </div>
             )}
             <div class="flex justify-between">
-              <dt class="text-slate-600">Sessions</dt>
-              <dd class="font-semibold text-slate-900">{sessionCount || '30–36'}</dd>
+              <dt class="text-[var(--ink2)]">Sessions</dt>
+              <dd class="font-semibold text-[var(--ink)]">{sessionCount || '30–36'}</dd>
             </div>
             <div class="flex justify-between">
-              <dt class="text-slate-600">Duration</dt>
-              <dd class="font-semibold text-slate-900">{duration || '6–9 weeks'}</dd>
+              <dt class="text-[var(--ink2)]">Duration</dt>
+              <dd class="font-semibold text-[var(--ink)]">{duration || '6–9 weeks'}</dd>
             </div>
             {brainArea && (
               <div class="flex justify-between">
-                <dt class="text-slate-600">Target Area</dt>
-                <dd class="font-semibold text-slate-900 truncate ml-2" title={brainArea}>{brainArea}</dd>
+                <dt class="text-[var(--ink2)]">Target Area</dt>
+                <dd class="font-semibold text-[var(--ink)] truncate ml-2" title={brainArea}>{brainArea}</dd>
               </div>
             )}
           </dl>
         </div>
 
         <!-- Related Treatments -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-100">
-          <h4 class="font-semibold text-slate-900 mb-3 uppercase text-xs tracking-wider">Related Treatments</h4>
+        <div class="bg-white p-5 rounded-2xl border border-[var(--line)]">
+          <h4 class="font-semibold text-[var(--ink)] mb-3 uppercase text-xs tracking-wider">Related Treatments</h4>
           <ul class="space-y-2 text-sm">
             {[
               { href: '/treatments/depression/', label: 'TMS for Depression' },
@@ -215,7 +228,7 @@ const relatedSections = [
               { href: '/treatments/ptsd/', label: 'TMS for PTSD' },
             ].filter(l => !l.href.includes(slug)).slice(0, 4).map(link => (
               <li>
-                <a href={link.href} class="flex items-center gap-1.5 text-slate-600 hover:text-violet-600 transition-colors">
+                <a href={link.href} class="flex items-center gap-1.5 text-[var(--ink2)] hover:text-[var(--accent)] transition-colors">
                   <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                   {link.label}
                 </a>
@@ -226,22 +239,22 @@ const relatedSections = [
 
         <!-- Insurance Links -->
         <div class="bg-amber-50 p-5 rounded-2xl border border-amber-100">
-          <h4 class="font-semibold text-slate-900 mb-3 text-sm">Insurance Coverage</h4>
+          <h4 class="font-semibold text-[var(--ink)] mb-3 text-sm">Insurance Coverage</h4>
           <ul class="space-y-2 text-sm">
-            <li><a href="/insurance/medicare/" class="text-slate-600 hover:text-amber-700 transition-colors">Medicare Coverage</a></li>
-            <li><a href="/insurance/bluecross-blueshield/" class="text-slate-600 hover:text-amber-700 transition-colors">BlueCross BlueShield</a></li>
-            <li><a href="/tms-cost-guide/" class="text-slate-600 hover:text-amber-700 transition-colors">TMS Cost Guide</a></li>
+            <li><a href="/insurance/medicare/" class="text-[var(--ink2)] hover:text-amber-700 transition-colors">Medicare Coverage</a></li>
+            <li><a href="/insurance/bluecross-blueshield/" class="text-[var(--ink2)] hover:text-amber-700 transition-colors">BlueCross BlueShield</a></li>
+            <li><a href="/tms-cost-guide/" class="text-[var(--ink2)] hover:text-amber-700 transition-colors">TMS Cost Guide</a></li>
           </ul>
         </div>
 
         <!-- Reviewer Box -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-          <h4 class="font-semibold text-slate-900 mb-3 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
+        <div class="bg-white p-5 rounded-2xl border border-[var(--line)] shadow-sm">
+          <h4 class="font-semibold text-[var(--ink)] mb-3 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
           <div class="flex items-center gap-3">
-            <img src={reviewerImage} alt={reviewerName} class="w-10 h-10 rounded-full object-cover border-2 border-violet-100 shrink-0" width="40" height="40" loading="lazy" />
+            <img src={reviewerImage} alt={reviewerName} class="w-10 h-10 rounded-full object-cover border-2 border-[rgba(10,22,40,0.15)] shrink-0" width="40" height="40" loading="lazy" />
             <div>
-              <div class="font-semibold text-slate-900 text-sm">{reviewerName}</div>
-              <div class="text-xs text-slate-500">{reviewerTitle}</div>
+              <div class="font-semibold text-[var(--ink)] text-sm">{reviewerName}</div>
+              <div class="text-xs text-[var(--muted)]">{reviewerTitle}</div>
             </div>
           </div>
         </div>
@@ -250,18 +263,31 @@ const relatedSections = [
   </main>
 
   <!-- Sticky Mobile CTA Bar -->
-  <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+  <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[var(--line)] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
     <div class="flex items-center gap-2 px-3 py-3">
-      <a href="/quiz/am-i-a-candidate/" class="flex-1 text-center bg-violet-600 text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-violet-500 transition-colors shadow-md">
+      <a href="/quiz/am-i-a-candidate/" class="flex-1 text-center bg-[var(--ink)] text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-[var(--ink2)] transition-colors shadow-md">
         Take the Quiz
       </a>
-      <a href="/us/" class="flex-1 text-center bg-slate-900 text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-slate-800 transition-colors shadow-md">
+      <a href="/us/" class="flex-1 text-center bg-[var(--ink)] text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-[var(--ink2)] transition-colors shadow-md">
         Find a Clinic
       </a>
     </div>
   </div>
 
   <ContentFAQ faqs={displayFaqs} />
+
+  <LeadMagnetCta
+    variant="inline"
+    useModal={true}
+    slug="tms-buyers-guide"
+    heading={`Considering TMS for ${condition}? Get the Free Patient Guide.`}
+    subheading="22 pages on choosing a clinic, what to ask, what to expect, and how insurance approval works — written for patients, not for clinics."
+    cta="Download Free Guide"
+    format="PDF Guide"
+    accent="#0A1628"
+    compact={true}
+  />
+
   <SectionLinks sections={relatedSections} />
   <FindClinicCTA />
 </Layout>

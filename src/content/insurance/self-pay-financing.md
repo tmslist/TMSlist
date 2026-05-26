@@ -1,7 +1,7 @@
 ---
 title: "Paying for TMS Without Insurance: Options and Financing"
 description: "No insurance coverage for TMS? Explore cash pricing, payment plans, medical credit cards, HSA/FSA options, and clinical trials to make TMS therapy affordable."
-image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 coversTms: false
 priorAuthRequired: false
 typicalCost: "$6,000-$12,000"
@@ -14,17 +14,17 @@ faqs:
 
 
 <div class="not-prose mb-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-  <div class="bg-violet-50 border-violet-100 border rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-violet-700 font-display">No Insurance Needed</div>
-    <div class="text-xs text-violet-600 mt-1">Pay directly</div>
+  <div class="bg-[rgba(201,101,74,0.06)] border-[var(--line)] border rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--warm)] font-display">No Insurance Needed</div>
+    <div class="text-xs text-[var(--warm)] mt-1">Pay directly</div>
   </div>
   <div class="bg-emerald-50 border-emerald-100 border rounded-xl p-5 text-center">
     <div class="text-2xl font-bold text-emerald-700 font-display">Financing Available</div>
     <div class="text-xs text-emerald-600 mt-1">Payment plans & credit</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">$6,000-$12,000</div>
-    <div class="text-xs text-blue-600 mt-1">Typical full course cost</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">$6,000-$12,000</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Typical full course cost</div>
   </div>
 </div>
 
@@ -122,11 +122,11 @@ Some employers offer supplemental benefits that might help:
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>
@@ -135,32 +135,32 @@ Some employers offer supplemental benefits that might help:
 ## How to Get TMS Approved
 
 <div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">1</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Verify Benefits</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Call the number on the back of your insurance card and ask specifically about TMS therapy coverage. Get a reference number.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Verify Benefits</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Call the number on the back of your insurance card and ask specifically about TMS therapy coverage. Get a reference number.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">2</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Get Your Documentation Ready</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Gather records of your MDD diagnosis, all medication trials (names, doses, durations, outcomes), current PHQ-9 score, and therapy history.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Get Your Documentation Ready</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Gather records of your MDD diagnosis, all medication trials (names, doses, durations, outcomes), current PHQ-9 score, and therapy history.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">3</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Choose a TMS Clinic</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Find an in-network TMS provider using our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a>. In-network clinics handle prior auth and know your insurer's requirements.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Choose a TMS Clinic</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Find an in-network TMS provider using our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a>. In-network clinics handle prior auth and know your insurer's requirements.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">4</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Prior Authorization</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Your TMS clinic submits the prior auth request. Typical approval takes 5-15 business days. If denied, appeal — overturn rates are 60-70%.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Prior Authorization</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Your TMS clinic submits the prior auth request. Typical approval takes 5-15 business days. If denied, appeal — overturn rates are 60-70%.</p>
     </div>
   </div>
 </div>

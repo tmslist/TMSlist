@@ -49,23 +49,23 @@ TMS is FDA-cleared for depression, not PTSD — but the research in veteran popu
 
 ---
 
-<div class="not-prose my-8 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-8">
+<div class="not-prose my-8 bg-gradient-to-r from-[var(--ink)] to-[var(--ink2)] border border-[var(--line)] rounded-2xl p-8">
   <div class="flex items-start gap-4">
-    <div class="shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-      <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+    <div class="shrink-0 w-12 h-12 bg-[rgba(10,22,40,0.1)] rounded-xl flex items-center justify-center">
+      <svg class="w-6 h-6 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
     </div>
     <div>
-      <p class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">Access Point</p>
-      <p class="text-slate-800 leading-relaxed">20+ VA medical centers now offer TMS. If your local VA doesn't have it, Community Care referrals can send you to a civilian provider at VA expense.</p>
+      <p class="text-xs font-bold text-[var(--ink)] uppercase tracking-wider mb-1">Access Point</p>
+      <p class="text-[var(--ink)] leading-relaxed">20+ VA medical centers now offer TMS. If your local VA doesn't have it, Community Care referrals can send you to a civilian provider at VA expense.</p>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic Near You</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>

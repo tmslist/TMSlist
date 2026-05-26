@@ -73,8 +73,8 @@ export default function CommunityVoteButton({
         disabled={loading}
         className={`p-1 rounded transition-colors ${
           currentVote === 1
-            ? 'text-violet-600 bg-violet-50'
-            : 'text-gray-400 hover:text-violet-600 hover:bg-violet-50'
+            ? 'text-[var(--accent)] bg-[rgba(10,22,40,0.08)]'
+            : 'text-[var(--muted)] hover:text-[var(--accent)] hover:bg-[rgba(10,22,40,0.08)]'
         }`}
         aria-label="Upvote"
       >
@@ -84,7 +84,7 @@ export default function CommunityVoteButton({
       </button>
 
       <span className={`text-sm font-bold tabular-nums ${
-        score > 0 ? 'text-violet-600' : score < 0 ? 'text-rose-500' : 'text-gray-500'
+        score > 0 ? 'text-[var(--accent)]' : score < 0 ? 'text-[var(--accent2)]' : 'text-[var(--muted)]'
       }`}>
         {score}
       </span>
@@ -94,8 +94,8 @@ export default function CommunityVoteButton({
         disabled={loading}
         className={`p-1 rounded transition-colors ${
           currentVote === -1
-            ? 'text-rose-500 bg-rose-50'
-            : 'text-gray-400 hover:text-rose-500 hover:bg-rose-50'
+            ? 'text-[var(--accent2)] bg-[rgba(201,101,74,0.06)]'
+            : 'text-[var(--muted)] hover:text-[var(--accent2)] hover:bg-[rgba(201,101,74,0.06)]'
         }`}
         aria-label="Downvote"
       >

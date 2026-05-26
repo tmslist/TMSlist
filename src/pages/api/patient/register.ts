@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { createUser, getUserByEmail, createToken, createSessionCookie } from '../../../utils/auth';
+import { createUser, getUserByEmail, createSession, getClientIpFromRequest } from '../../../utils/auth';
 import { sendFunnelEmail, DRIP_SEQUENCES } from '../../../utils/nurtureFunnel';
 import { checkRateLimit } from '../../../utils/rateLimit';
 import { db } from '../../../db';
@@ -49,9 +49,14 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Create session
-    const payload = { userId: user.id, email: user.email, role: user.role };
-    const cookie = createSessionCookie(payload);
+    // Create session — sessions table row enables logout/revocation.
+    const { cookie } = await createSession(
+      { userId: user.id, email: user.email, role: user.role },
+      {
+        userAgent: request.headers.get('user-agent') || undefined,
+        ipAddress: getClientIpFromRequest(request),
+      },
+    );
 
     // Enter patient nurturing funnel
     db.insert(leads).values({

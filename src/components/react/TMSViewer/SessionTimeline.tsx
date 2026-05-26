@@ -17,30 +17,30 @@ export function SessionTimeline() {
   };
 
   return (
-    <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl px-5 py-4">
+    <div className="glass-panel rounded-2xl px-5 py-4">
       {/* Header row */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Treatment Course</div>
-          <div className="text-[9px] text-slate-500 mt-0.5">
+          <div className="text-[10px] font-semibold text-white/40 uppercase tracking-wider">Treatment Course</div>
+          <div className="text-[9px] text-white/40 mt-0.5">
             {activeSession === sessions ? 'Course complete!' : `${remaining} session${remaining === 1 ? '' : 's'} remaining`}
             {' · '}{weeks} weeks total
           </div>
         </div>
         <div className="text-right">
           <div className="text-2xl font-mono font-bold text-white">{activeSession}</div>
-          <div className="text-[9px] text-slate-500">of {sessions}</div>
+          <div className="text-[9px] text-white/40">of {sessions}</div>
         </div>
       </div>
 
       {/* Horizontal timeline */}
       <div className="relative">
         {/* Track line */}
-        <div className="absolute top-4 left-0 right-0 h-0.5 bg-slate-700 rounded-full" />
+        <div className="absolute top-4 left-0 right-0 h-0.5 bg-[var(--paper2)] rounded-full" />
 
         {/* Progress line */}
         <div
-          className="absolute top-4 left-0 h-0.5 bg-gradient-to-r from-violet-500 to-cyan-400 rounded-full transition-all duration-500"
+          className="absolute top-4 left-0 h-0.5 bg-gradient-to-r from-[var(--ink2)] to-[var(--warm)] rounded-full transition-all duration-500"
           style={{ width: `${sessionProgress}%` }}
         />
 
@@ -60,7 +60,7 @@ export function SessionTimeline() {
                 return (
                   <div key={i} className="flex flex-col items-center">
                     <div className="w-4 h-4" />
-                    <span className="text-[8px] text-slate-600 mt-1">...</span>
+                    <span className="text-[8px] text-white/40 mt-1">...</span>
                   </div>
                 );
               }
@@ -71,22 +71,22 @@ export function SessionTimeline() {
               <div key={i} className="flex flex-col items-center">
                 {/* Node circle */}
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold border-2 transition-all duration-300 ${
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all duration-300 ${
                     isActive
-                      ? 'bg-cyan-400 border-cyan-300 text-slate-900 shadow-lg shadow-cyan-400/40 scale-110'
+                      ? 'bg-[var(--paper2)] border-[var(--line)] text-[var(--warm)] shadow-lg shadow-[rgba(10,22,40,0.2)] scale-110'
                       : isPast
-                      ? 'bg-violet-600 border-violet-500 text-white'
-                      : 'bg-slate-800 border-slate-600 text-slate-500'
+                      ? 'bg-[var(--ink2)] border-[var(--ink2)] text-white'
+                      : 'bg-[var(--paper2)] border-[var(--line)] text-white/40'
                   }`}
                 >
                   {isActive ? (
-                    <div className="w-2 h-2 rounded-full bg-slate-900 animate-pulse" />
+                    <div className="w-2 h-2 rounded-full bg-[var(--ink2)] animate-pulse" />
                   ) : (
                     idx
                   )}
                 </div>
                 {/* Label */}
-                <span className={`text-[8px] mt-1.5 ${isActive ? 'text-cyan-300 font-semibold' : isPast ? 'text-slate-500' : 'text-slate-600'}`}>
+                <span className={`text-[8px] mt-1.5 ${isActive ? 'text-[var(--warm)] font-semibold' : isPast ? 'text-white/40' : 'text-white/40'}`}>
                   {idx === 1 ? 'Start' : idx === sessions ? 'End' : idx}
                 </span>
               </div>
@@ -97,18 +97,18 @@ export function SessionTimeline() {
 
       {/* Progress bar below */}
       <div className="mt-4 space-y-1.5">
-        <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
+        <div className="h-1.5 bg-[var(--paper2)] rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-violet-500 to-cyan-400 rounded-full transition-all duration-500"
+            className="h-full bg-gradient-to-r from-[var(--ink2)] to-[var(--warm)] rounded-full transition-all duration-500"
             style={{ width: `${sessionProgress}%` }}
           />
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
-            <div className="w-2 h-0.5 bg-violet-500 rounded-full" />
-            <span className="text-[9px] text-slate-500">{activeSession} sessions complete</span>
+            <div className="w-2 h-0.5 bg-[var(--ink2)] rounded-full" />
+            <span className="text-[9px] text-white/40">{activeSession} sessions complete</span>
           </div>
-          <span className="text-[9px] text-slate-500">{sessionProgress}% complete</span>
+          <span className="text-[9px] text-white/40">{sessionProgress}% complete</span>
         </div>
       </div>
     </div>

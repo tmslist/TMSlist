@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth';
-import { db } from '../../../db';
+import { db } from '../..//../db/index.js';
 import { doctors, doctorCmeCredits, users, auditLog } from '../../../db/schema';
 import { eq, desc } from 'drizzle-orm';
 

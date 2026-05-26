@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
 import CostCalculator from '../../components/react/CostCalculator';
 import ProtocolExplorer from '../../components/react/ProtocolExplorer';
 import SideEffectsTracker from '../../components/react/SideEffectsTracker';
@@ -26,8 +27,8 @@ const tools = [
     description: 'Estimate your total TMS treatment cost with insurance, financing options, and state-by-state pricing data.',
     icon: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
     color: '#4f46e5',
-    bg: 'bg-violet-50',
-    border: 'border-violet-100',
+    bg: 'bg-[rgba(10,22,40,0.08)]',
+    border: 'border-[rgba(10,22,40,0.1)]',
     badge: 'Most Popular',
     badgeColor: '#4f46e5',
     category: 'patient',
@@ -62,8 +63,8 @@ const tools = [
     description: 'Compare FDA-cleared TMS devices — NeuroStar, BrainsWay, MagVenture, and more.',
     icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
     color: '#0891b2',
-    bg: 'bg-cyan-50',
-    border: 'border-cyan-100',
+    bg: 'bg-[var(--paper2)]',
+    border: 'border-[var(--line)]',
     badge: null,
     badgeColor: null,
     category: 'patient',
@@ -74,8 +75,8 @@ const tools = [
     description: 'Log PHQ-9, HAM-D, and GAD-7 scores week-by-week and compare against clinical benchmarks.',
     icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
     color: '#7c3aed',
-    bg: 'bg-violet-50',
-    border: 'border-violet-100',
+    bg: 'bg-[rgba(10,22,40,0.08)]',
+    border: 'border-[rgba(10,22,40,0.1)]',
     badge: 'New',
     badgeColor: '#7c3aed',
     category: 'patient',
@@ -86,8 +87,8 @@ const tools = [
     description: 'Watch iTBS vs rTMS vs Deep TMS deliver pulses in real time. See how session duration changes.',
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
     color: '#06b6d4',
-    bg: 'bg-cyan-50',
-    border: 'border-cyan-100',
+    bg: 'bg-[var(--paper2)]',
+    border: 'border-[var(--line)]',
     badge: 'New',
     badgeColor: '#06b6d4',
     category: 'patient',
@@ -110,8 +111,8 @@ const tools = [
     description: 'Input motor threshold and coil type to get recommended intensity, pulse count, and session time.',
     icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
     color: '#0ea5e9',
-    bg: 'bg-sky-50',
-    border: 'border-sky-100',
+    bg: 'bg-[var(--paper2)]',
+    border: 'border-[var(--line)]',
     badge: 'Provider',
     badgeColor: '#0ea5e9',
     category: 'provider',
@@ -134,8 +135,8 @@ const tools = [
     description: 'Adjust frequency, intensity, pulses, and sessions to see how each parameter changes expected outcomes.',
     icon: 'M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
     color: '#a855f7',
-    bg: 'bg-fuchsia-50',
-    border: 'border-fuchsia-100',
+    bg: 'bg-[rgba(201,101,74,0.06)]',
+    border: 'border-[var(--line)]',
     badge: 'New',
     badgeColor: '#a855f7',
     category: 'both',
@@ -146,8 +147,8 @@ const tools = [
     description: 'Log and track adverse events during TMS — seizure, syncope, device issues. FDA reporting prompts.',
     icon: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z',
     color: '#dc2626',
-    bg: 'bg-rose-50',
-    border: 'border-rose-100',
+    bg: 'bg-[rgba(201,101,74,0.06)]',
+    border: 'border-[var(--line)]',
     badge: 'Provider',
     badgeColor: '#dc2626',
     category: 'provider',
@@ -169,11 +170,11 @@ const tools = [
     title: 'Motor Threshold Finding Lab',
     description: 'Interactive simulator teaching how clinicians find motor threshold — coil positioning, EMG waveform, and RMT determination.',
     icon: 'M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18',
-    color: '#6366f1',
-    bg: 'bg-indigo-50',
-    border: 'border-indigo-100',
+    color: '#0A1628',
+    bg: 'bg-[rgba(201,101,74,0.06)]',
+    border: 'border-[var(--line)]',
     badge: 'New',
-    badgeColor: '#6366f1',
+    badgeColor: '#0A1628',
     category: 'provider',
   },
   {
@@ -191,9 +192,9 @@ const tools = [
 ];
 
 const stats = [
-  { value: '14', label: 'Interactive Tools', color: 'text-violet-600' },
+  { value: '14', label: 'Interactive Tools', color: 'text-[var(--accent)]' },
   { value: '50+', label: 'Protocols Covered', color: 'text-emerald-600' },
-  { value: '100%', label: 'Free to Use', color: 'text-cyan-600' },
+  { value: '100%', label: 'Free to Use', color: 'text-[var(--accent)]' },
   { value: '0', label: 'Account Required', color: 'text-amber-600' },
 ];
 
@@ -208,53 +209,32 @@ const schema = JSON.stringify({
 ---
 
 <Layout title={title} description={description} schema={schema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Tools", url: "/tools/" }]}>
-  <main>
-    <!-- Hero -->
-    <section class="relative bg-slate-950 overflow-hidden">
-      <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.35) 1px, transparent 0); background-size: 28px 28px;"></div>
-      <div class="absolute top-[-15%] left-[10%] w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[180px]"></div>
-      <div class="absolute bottom-[5%] right-[15%] w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
-      <div class="absolute top-1/2 left-[60%] -translate-y-1/2 w-[300px] h-[300px] bg-fuchsia-600/8 rounded-full blur-[100px]"></div>
-
-      <div class="container mx-auto px-4 pt-14 pb-24 lg:pt-20 lg:pb-32 relative z-10">
-        <nav class="flex items-center gap-2 text-sm text-white/40 mb-10" aria-label="Breadcrumb">
-          <a href="/" class="hover:text-white/70 transition-colors">Home</a>
-          <span class="text-white/20">/</span>
-          <span class="text-white/70">Tools</span>
-        </nav>
-        <div class="max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-violet-500/10 border border-violet-500/20 rounded-full mb-6">
-            <svg class="w-3.5 h-3.5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            <span class="text-xs font-semibold text-violet-400 tracking-wider uppercase">Free TMS Tools</span>
-          </div>
-          <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
-            TMS<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">Tools</span> Hub
-          </h1>
-          <p class="text-lg text-white/50 leading-relaxed max-w-xl">
-            Interactive calculators, protocol guides, and trackers to help patients and providers make better TMS decisions — 100% free, no account needed.
-          </p>
-        </div>
-
-        <!-- Stats -->
-        <div class="flex flex-wrap gap-8 mt-14 pt-14 border-t border-white/5">
-          {stats.map(stat => (
-            <div class="text-left">
-              <div class={`text-3xl font-bold ${stat.color} tracking-tight`}>{stat.value}</div>
-              <div class="text-sm text-white/40 mt-1">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div class="absolute bottom-0 left-0 right-0 h-20 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
-    </section>
+  <main style="background:var(--paper)">
+    <EditorialHero
+      eyebrow="Free TMS Tools"
+      eyebrowDot="#22c55e"
+      title="Calculators,"
+      titleAccent="protocols, trackers."
+      description="Interactive tools to help patients and providers make better TMS decisions — 100% free, no account needed."
+      breadcrumbs={[{ label: "Home", href: "/" }, { label: "Tools" }]}
+      ctas={[
+        { label: "Cost Calculator", href: "#cost-calculator" },
+        { label: "Am I a Candidate?", href: "/quiz/am-i-a-candidate/", variant: "outline" },
+      ]}
+      stats={[
+        { value: tools.length, label: "Interactive Tools", color: "ink" },
+        { value: "50+", label: "Protocols Covered", color: "accent" },
+        { value: "100%", label: "Free to Use", color: "warm" },
+      ]}
+    />
 
     <!-- Tools Grid -->
-    <section class="py-16 lg:py-24 bg-white">
+    <section class="py-16 lg:py-24 bg-[var(--paper)]">
       <div class="container mx-auto px-4 max-w-6xl">
         <div class="flex items-center justify-between mb-10">
           <div>
-            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Choose a Tool</h2>
-            <p class="text-sm text-slate-500 mt-1">Each tool is interactive and free to use immediately.</p>
+            <h2 class="text-2xl font-bold text-[var(--ink)] tracking-tight">Choose a Tool</h2>
+            <p class="text-sm text-[var(--muted)] mt-1">Each tool is interactive and free to use immediately.</p>
           </div>
         </div>
 
@@ -269,8 +249,8 @@ const schema = JSON.stringify({
               <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style={`background: ${tool.color}20;`}>
                 <svg class="w-7 h-7" style={`color: ${tool.color};`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={tool.icon}/></svg>
               </div>
-              <h3 class="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors mb-3 tracking-tight">{tool.title}</h3>
-              <p class="text-sm text-slate-500 leading-relaxed">{tool.description}</p>
+              <h3 class="text-xl font-bold text-[var(--ink)] group-hover:text-[var(--ink2)] transition-colors mb-3 tracking-tight">{tool.title}</h3>
+              <p class="text-sm text-[var(--muted)] leading-relaxed">{tool.description}</p>
               <div class="mt-6 flex items-center gap-1 text-sm font-semibold" style={`color: ${tool.color};`}>
                 Open Tool
                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
@@ -280,31 +260,31 @@ const schema = JSON.stringify({
         </div>
 
         <!-- Coming Soon Banner -->
-        <div class="mt-10 p-6 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center shrink-0">
-            <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+        <div class="mt-10 p-6 bg-[var(--paper2)] rounded-2xl border border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[var(--paper2)] flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
           </div>
           <div class="flex-1">
-            <p class="text-sm font-bold text-slate-700">More tools coming soon</p>
-            <p class="text-xs text-slate-500 mt-0.5">ROI Calculator for clinic owners, Prior Auth Assistant, TMS Session Scheduler, and more.</p>
+            <p class="text-sm font-bold text-[var(--ink2)]">More tools coming soon</p>
+            <p class="text-xs text-[var(--muted)] mt-0.5">ROI Calculator for clinic owners, Prior Auth Assistant, TMS Session Scheduler, and more.</p>
           </div>
-          <a href="mailto:tools@tmslist.com?subject=TMS Tool Request" class="shrink-0 text-xs font-semibold text-violet-600 hover:text-violet-700 transition-colors">Request a Tool →</a>
+          <a href="mailto:tools@tmslist.com?subject=TMS Tool Request" class="shrink-0 text-xs font-semibold text-[var(--accent)] hover:text-[var(--accent)] transition-colors">Request a Tool →</a>
         </div>
       </div>
     </section>
 
     <!-- Interactive Tools Section (embedded quick access) -->
-    <section class="py-16 lg:py-20 bg-slate-50 border-t border-slate-100">
+    <section class="py-16 lg:py-20 bg-[var(--paper2)] border-t border-[var(--line)]">
       <div class="container mx-auto px-4 max-w-6xl">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-3">Try a Tool Right Now</h2>
-          <p class="text-slate-500">Jump straight into any tool without leaving this page.</p>
+          <h2 class="text-3xl font-bold text-[var(--ink)] tracking-tight mb-3">Try a Tool Right Now</h2>
+          <p class="text-[var(--muted)]">Jump straight into any tool without leaving this page.</p>
         </div>
 
         <!-- Category filter -->
         <div class="flex items-center gap-2 mb-6 justify-center">
-          <button onclick="switchCategory('patient')" id="cat-patient" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-violet-600 text-white">Patient Tools</button>
-          <button onclick="switchCategory('provider')" id="cat-provider" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-500 hover:bg-slate-200">Provider Tools</button>
+          <button onclick="switchCategory('patient')" id="cat-patient" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-[var(--ink)] text-white">Patient Tools</button>
+          <button onclick="switchCategory('provider')" id="cat-provider" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)]">Provider Tools</button>
         </div>
 
         <!-- Patient Tools -->
@@ -319,12 +299,12 @@ const schema = JSON.stringify({
               { id: 'whatif', label: 'What-If Simulator', comp: 'WhatIfSimulator' },
               { id: 'tmsvsect', label: 'TMS vs ECT', comp: 'TMSECTComparator' },
             ].map(item => (
-              <button onclick={`switchTab('${item.id}')`} id={`ttab-${item.id}`} class={`ttab-btn px-4 py-3 rounded-xl text-sm font-semibold transition-all ${item.id === 'cost' ? 'bg-violet-600 text-white' : 'bg-white text-slate-500 hover:bg-slate-100 border border-slate-100'}`}>
+              <button onclick={`switchTab('${item.id}')`} id={`ttab-${item.id}`} class={`ttab-btn px-4 py-3 rounded-xl text-sm font-semibold transition-all ${item.id === 'cost' ? 'bg-[var(--ink)] text-white' : 'bg-[var(--paper)] text-[var(--muted)] hover:bg-[var(--paper2)] border border-[var(--line)]'}`}>
                 {item.label}
               </button>
             ))}
           </div>
-          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 lg:p-8">
+          <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm p-6 lg:p-8">
             <div id="tpanel-cost" class="tab-panel">
               <CostCalculator client:load />
             </div>
@@ -360,12 +340,12 @@ const schema = JSON.stringify({
               { id: 'insurance', label: 'Insurance Reference', comp: 'InsurancePayerReference' },
               { id: 'mtlab', label: 'MT Finding Lab', comp: 'MTFindingLab' },
             ].map(item => (
-              <button onclick={`switchTab('${item.id}')`} id={`ptab-${item.id}`} class={`ptab-btn px-4 py-3 rounded-xl text-sm font-semibold transition-all ${item.id === 'protocol' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-500 hover:bg-slate-100 border border-slate-100'}`}>
+              <button onclick={`switchTab('${item.id}')`} id={`ptab-${item.id}`} class={`ptab-btn px-4 py-3 rounded-xl text-sm font-semibold transition-all ${item.id === 'protocol' ? 'bg-emerald-600 text-white' : 'bg-[var(--paper)] text-[var(--muted)] hover:bg-[var(--paper2)] border border-[var(--line)]'}`}>
                 {item.label}
               </button>
             ))}
           </div>
-          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 lg:p-8">
+          <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm p-6 lg:p-8">
             <div id="ppanel-protocol" class="tab-panel">
               <ProtocolExplorer client:load />
             </div>
@@ -390,13 +370,13 @@ const schema = JSON.stringify({
     </section>
 
     <!-- CTA -->
-    <section class="py-16 bg-white border-t border-slate-100">
+    <section class="py-16 bg-[var(--paper)] border-t border-[var(--line)]">
       <div class="container mx-auto px-4 max-w-6xl text-center">
-        <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-4">Need a personalized recommendation?</h2>
-        <p class="text-slate-500 mb-8 max-w-lg mx-auto">Take our 2-minute eligibility quiz to find out if TMS is right for you, based on clinical criteria used by psychiatrists.</p>
+        <h2 class="text-3xl font-bold text-[var(--ink)] tracking-tight mb-4">Need a personalized recommendation?</h2>
+        <p class="text-[var(--muted)] mb-8 max-w-lg mx-auto">Take our 2-minute eligibility quiz to find out if TMS is right for you, based on clinical criteria used by psychiatrists.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/quiz/am-i-a-candidate/" class="px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/20">Take the Quiz</a>
-          <a href="/us/" class="px-8 py-4 bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-semibold rounded-xl transition-colors">Find a Clinic</a>
+          <a href="/quiz/am-i-a-candidate/" class="px-8 py-4 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white font-semibold rounded-xl transition-colors shadow-lg shadow-[rgba(10,22,40,0.2)]">Take the Quiz</a>
+          <a href="/us/" class="px-8 py-4 bg-[var(--paper)] border border-[var(--line)] hover:border-[var(--line)] text-[var(--ink2)] font-semibold rounded-xl transition-colors">Find a Clinic</a>
         </div>
       </div>
     </section>
@@ -410,12 +390,12 @@ const schema = JSON.stringify({
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
     // Reset all tab buttons
     document.querySelectorAll('.ttab-btn').forEach(b => {
-      b.classList.remove('bg-violet-600', 'text-white');
-      b.classList.add('bg-white', 'text-slate-500', 'border', 'border-slate-100');
+      b.classList.remove('bg-[var(--ink)]', 'text-white');
+      b.classList.add('bg-[var(--paper)]', 'text-[var(--muted)]', 'border', 'border-[var(--line)]');
     });
     document.querySelectorAll('.ptab-btn').forEach(b => {
       b.classList.remove('bg-emerald-600', 'text-white');
-      b.classList.add('bg-white', 'text-slate-500', 'border', 'border-slate-100');
+      b.classList.add('bg-[var(--paper)]', 'text-[var(--muted)]', 'border', 'border-[var(--line)]');
     });
     // Show target panel
     const panels = [
@@ -428,12 +408,12 @@ const schema = JSON.stringify({
     // Activate target button(s)
     const tBtn = document.getElementById(`ttab-${tab}`);
     if (tBtn) {
-      tBtn.classList.remove('bg-white', 'text-slate-500', 'border', 'border-slate-100');
-      tBtn.classList.add('bg-violet-600', 'text-white');
+      tBtn.classList.remove('bg-[var(--paper)]', 'text-[var(--muted)]', 'border', 'border-[var(--line)]');
+      tBtn.classList.add('bg-[var(--ink)]', 'text-white');
     }
     const pBtn = document.getElementById(`ptab-${tab}`);
     if (pBtn) {
-      pBtn.classList.remove('bg-white', 'text-slate-500', 'border', 'border-slate-100');
+      pBtn.classList.remove('bg-[var(--paper)]', 'text-[var(--muted)]', 'border', 'border-[var(--line)]');
       pBtn.classList.add('bg-emerald-600', 'text-white');
     }
   }
@@ -441,15 +421,15 @@ const schema = JSON.stringify({
   function switchCategory(cat: string) {
     document.querySelectorAll('.tools-category').forEach(c => c.classList.add('hidden'));
     document.querySelectorAll('.cat-btn').forEach(b => {
-      b.classList.remove('bg-violet-600', 'bg-emerald-600', 'text-white');
-      b.classList.add('bg-slate-100', 'text-slate-500');
+      b.classList.remove('bg-[var(--ink)]', 'bg-emerald-600', 'text-white');
+      b.classList.add('bg-[var(--paper2)]', 'text-[var(--muted)]');
     });
     const target = document.getElementById(`tools-${cat}`);
     if (target) target.classList.remove('hidden');
     const btn = document.getElementById(`cat-${cat}`);
     if (btn) {
-      btn.classList.remove('bg-slate-100', 'text-slate-500');
-      btn.classList.add(cat === 'patient' ? 'bg-violet-600' : 'bg-emerald-600', 'text-white');
+      btn.classList.remove('bg-[var(--paper2)]', 'text-[var(--muted)]');
+      btn.classList.add(cat === 'patient' ? 'bg-[var(--ink)]' : 'bg-emerald-600', 'text-white');
     }
     // Switch to first tab in category
     switchTab(cat === 'patient' ? 'cost' : 'protocol');

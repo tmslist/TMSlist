@@ -215,12 +215,12 @@ export default function PortalLoginForm() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
             </svg>
           </div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Check your email</h2>
-          <p className="text-gray-600 mb-1">We sent a login link to</p>
-          <p className="font-medium text-gray-900 mb-4">{email}</p>
-          <p className="text-sm text-gray-500 mb-6">The link expires in 15 minutes. Click it to sign in instantly.</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)] mb-2">Check your email</h2>
+          <p className="text-[var(--ink2)] mb-1">We sent a login link to</p>
+          <p className="font-medium text-[var(--ink)] mb-4">{email}</p>
+          <p className="text-sm text-[var(--muted)] mb-6">The link expires in 15 minutes. Click it to sign in instantly.</p>
           {resendCountdown > 0 ? (
-            <p className="text-sm text-gray-400 mb-4">Resend available in {resendCountdown}s</p>
+            <p className="text-sm text-[var(--muted)] mb-4">Resend available in {resendCountdown}s</p>
           ) : (
             <button
               onClick={() => { setStatus('idle'); setEmail(''); }}
@@ -244,8 +244,8 @@ export default function PortalLoginForm() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Email Verified!</h2>
-          <p className="text-gray-500 mb-6">Your email has been confirmed. You can now sign in to your Doctor Portal.</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)] mb-2">Email Verified!</h2>
+          <p className="text-[var(--muted)] mb-6">Your email has been confirmed. You can now sign in to your Doctor Portal.</p>
           <button
             onClick={() => { setStatus('idle'); switchMode('login'); }}
             className="px-6 py-3 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-all"
@@ -267,10 +267,10 @@ export default function PortalLoginForm() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
             </svg>
           </div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Check your inbox!</h2>
-          <p className="text-gray-500 mb-1">We sent a verification email to</p>
-          <p className="font-medium text-gray-900 mb-4">{email}</p>
-          <p className="text-sm text-gray-500 mb-6">Click the link in the email to activate your account. It expires in 24 hours.</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)] mb-2">Check your inbox!</h2>
+          <p className="text-[var(--muted)] mb-1">We sent a verification email to</p>
+          <p className="font-medium text-[var(--ink)] mb-4">{email}</p>
+          <p className="text-sm text-[var(--muted)] mb-6">Click the link in the email to activate your account. It expires in 24 hours.</p>
           <button
             onClick={() => { setStatus('idle'); setEmail(''); }}
             className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
@@ -292,8 +292,8 @@ export default function PortalLoginForm() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21" />
             </svg>
           </div>
-          <h1 className="text-2xl font-semibold text-gray-900 mb-1">Doctor Portal</h1>
-          <p className="text-gray-500 text-sm">
+          <h1 className="text-2xl font-semibold text-[var(--ink)] mb-1">Doctor Portal</h1>
+          <p className="text-[var(--muted)] text-sm">
             {mode === 'login' ? 'Sign in to manage your clinic listing' : 'Create your account'}
           </p>
         </div>
@@ -306,7 +306,7 @@ export default function PortalLoginForm() {
         {/* Google OAuth */}
         <a
           href="/api/auth/google/?state=portal"
-          className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl text-sm font-semibold text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition-all mb-4"
+          className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl text-sm font-semibold text-[var(--ink2)] bg-white border border-[var(--line)] hover:bg-[var(--paper2)] transition-all mb-4"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
@@ -320,10 +320,10 @@ export default function PortalLoginForm() {
         {/* Divider */}
         <div className="relative mb-4">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200"></div>
+            <div className="w-full border-t border-[var(--line)]"></div>
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="bg-white px-3 text-gray-400 uppercase tracking-wider">or</span>
+            <span className="bg-white px-3 text-[var(--muted)] uppercase tracking-wider">or</span>
           </div>
         </div>
 
@@ -331,12 +331,12 @@ export default function PortalLoginForm() {
         {mode === 'login' && (
           <>
             {/* Method tabs */}
-            <div className="flex rounded-lg bg-gray-100 p-1 mb-4">
+            <div className="flex rounded-lg bg-[var(--paper2)] p-1 mb-4">
               <button
                 type="button"
                 onClick={() => { setMethod('magic'); resetForm(); }}
                 className={`flex-1 py-2 text-xs font-medium rounded-md transition-all ${
-                  method === 'magic' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                  method === 'magic' ? 'bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)] hover:text-[var(--ink2)]'
                 }`}
               >
                 Magic Link
@@ -345,7 +345,7 @@ export default function PortalLoginForm() {
                 type="button"
                 onClick={() => { setMethod('password'); resetForm(); }}
                 className={`flex-1 py-2 text-xs font-medium rounded-md transition-all ${
-                  method === 'password' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                  method === 'password' ? 'bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)] hover:text-[var(--ink2)]'
                 }`}
               >
                 Password
@@ -355,7 +355,7 @@ export default function PortalLoginForm() {
             {method === 'magic' ? (
               <form onSubmit={handleMagicLink} className="space-y-4">
                 <div>
-                  <label htmlFor="portal-email-magic" className="block text-sm font-medium text-gray-700">Email address</label>
+                  <label htmlFor="portal-email-magic" className="block text-sm font-medium text-[var(--ink2)]">Email address</label>
                   <input
                     type="email"
                     name="email"
@@ -364,7 +364,7 @@ export default function PortalLoginForm() {
                     autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                    className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                     placeholder="doctor@clinic.com"
                   />
                 </div>
@@ -379,7 +379,7 @@ export default function PortalLoginForm() {
             ) : (
               <form onSubmit={handlePasswordLogin} className="space-y-4">
                 <div>
-                  <label htmlFor="portal-email-pw" className="block text-sm font-medium text-gray-700">Email address</label>
+                  <label htmlFor="portal-email-pw" className="block text-sm font-medium text-[var(--ink2)]">Email address</label>
                   <input
                     type="email"
                     name="email"
@@ -388,13 +388,13 @@ export default function PortalLoginForm() {
                     autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                    className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                     placeholder="doctor@clinic.com"
                   />
                 </div>
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label htmlFor="portal-password" className="block text-sm font-medium text-gray-700">Password</label>
+                    <label htmlFor="portal-password" className="block text-sm font-medium text-[var(--ink2)]">Password</label>
                     <button
                       type="button"
                       onClick={() => {
@@ -422,7 +422,7 @@ export default function PortalLoginForm() {
                     minLength={8}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                    className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                     placeholder="Enter your password"
                   />
                 </div>
@@ -440,7 +440,7 @@ export default function PortalLoginForm() {
               <button
                 type="button"
                 onClick={() => switchMode('signup')}
-                className="text-sm text-gray-500 hover:text-gray-700"
+                className="text-sm text-[var(--muted)] hover:text-[var(--ink2)]"
               >
                 Don't have an account?{' '}
                 <span className="font-medium text-emerald-600 hover:text-emerald-700">Sign up</span>
@@ -454,7 +454,7 @@ export default function PortalLoginForm() {
           <>
             <form onSubmit={handleSignup} className="space-y-4">
               <div>
-                <label htmlFor="portal-signup-name" className="block text-sm font-medium text-gray-700">Full name</label>
+                <label htmlFor="portal-signup-name" className="block text-sm font-medium text-[var(--ink2)]">Full name</label>
                 <input
                   type="text"
                   name="name"
@@ -464,12 +464,12 @@ export default function PortalLoginForm() {
                   minLength={2}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                  className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                   placeholder="Dr. Jane Smith"
                 />
               </div>
               <div>
-                <label htmlFor="portal-signup-email" className="block text-sm font-medium text-gray-700">Email address</label>
+                <label htmlFor="portal-signup-email" className="block text-sm font-medium text-[var(--ink2)]">Email address</label>
                 <input
                   type="email"
                   name="email"
@@ -478,14 +478,14 @@ export default function PortalLoginForm() {
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                  className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                   placeholder="doctor@clinic.com"
                 />
               </div>
               <div>
-                <label htmlFor="portal-signup-npi" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="portal-signup-npi" className="block text-sm font-medium text-[var(--ink2)]">
                   NPI Number{' '}
-                  <span className="text-gray-400 font-normal">(optional — verifies your medical credentials)</span>
+                  <span className="text-[var(--muted)] font-normal">(optional — verifies your medical credentials)</span>
                 </label>
                 <input
                   type="text"
@@ -499,11 +499,11 @@ export default function PortalLoginForm() {
                   className={`mt-1 block w-full rounded-lg border px-4 py-3 text-sm focus:ring-emerald-500 ${
                     npiStatus === 'valid' ? 'border-green-500 focus:border-green-500' :
                     npiStatus === 'invalid' ? 'border-red-400 focus:border-red-400' :
-                    'border-gray-300 focus:border-emerald-500'
+                    'border-[var(--line)] focus:border-emerald-500'
                   }`}
                   placeholder="10-digit NPI (e.g. 1234567890)"
                 />
-                {npiStatus === 'checking' && <p className="mt-1 text-xs text-gray-400">Checking NPI registry...</p>}
+                {npiStatus === 'checking' && <p className="mt-1 text-xs text-[var(--muted)]">Checking NPI registry...</p>}
                 {npiStatus === 'valid' && npiError && <p className="mt-1 text-xs text-green-600 flex items-center gap-1">
                   <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
                   {npiError}
@@ -511,7 +511,7 @@ export default function PortalLoginForm() {
                 {npiStatus === 'invalid' && npiError && <p className="mt-1 text-xs text-red-500">{npiError}</p>}
               </div>
               <div>
-                <label htmlFor="portal-signup-password" className="block text-sm font-medium text-gray-700">Password</label>
+                <label htmlFor="portal-signup-password" className="block text-sm font-medium text-[var(--ink2)]">Password</label>
                 <input
                   type="password"
                   name="password"
@@ -521,27 +521,27 @@ export default function PortalLoginForm() {
                   minLength={8}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                  className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                   placeholder="Min. 8 characters"
                 />
                 {password && (
                   <div className="mt-2">
                     <div className="flex gap-1 mb-1">
                       {[1, 2, 3, 4].map(i => (
-                        <div key={i} className={`h-1 flex-1 rounded-full transition-colors ${i <= pwStrength.score ? pwStrength.color : 'bg-gray-200'}`} />
+                        <div key={i} className={`h-1 flex-1 rounded-full transition-colors ${i <= pwStrength.score ? pwStrength.color : 'bg-[var(--paper2)]'}`} />
                       ))}
                     </div>
-                    <p className={`text-xs ${pwStrength.score >= 3 ? 'text-green-600' : 'text-gray-400'}`}>
+                    <p className={`text-xs ${pwStrength.score >= 3 ? 'text-green-600' : 'text-[var(--muted)]'}`}>
                       {pwStrength.label}
                       {pwStrength.feedback.length > 0 && pwStrength.score < 3 && (
-                        <span className="text-gray-400"> — {pwStrength.feedback[0]}</span>
+                        <span className="text-[var(--muted)]"> — {pwStrength.feedback[0]}</span>
                       )}
                     </p>
                   </div>
                 )}
               </div>
               <div>
-                <label htmlFor="portal-signup-confirm" className="block text-sm font-medium text-gray-700">Confirm password</label>
+                <label htmlFor="portal-signup-confirm" className="block text-sm font-medium text-[var(--ink2)]">Confirm password</label>
                 <input
                   type="password"
                   name="confirmPassword"
@@ -551,7 +551,7 @@ export default function PortalLoginForm() {
                   minLength={8}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                  className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-3 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                   placeholder="Confirm your password"
                 />
               </div>
@@ -561,9 +561,9 @@ export default function PortalLoginForm() {
                   id="terms-checkbox"
                   checked={termsAccepted}
                   onChange={(e) => setTermsAccepted(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                  className="mt-0.5 h-4 w-4 rounded border-[var(--line)] text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                 />
-                <label htmlFor="terms-checkbox" className="text-xs text-gray-500 leading-relaxed cursor-pointer">
+                <label htmlFor="terms-checkbox" className="text-xs text-[var(--muted)] leading-relaxed cursor-pointer">
                   I agree to the{' '}
                   <a href="/legal/terms-of-service" target="_blank" rel="noopener" className="text-emerald-600 hover:underline">Terms of Service</a>
                   {' '}and{' '}
@@ -584,7 +584,7 @@ export default function PortalLoginForm() {
               <button
                 type="button"
                 onClick={() => switchMode('login')}
-                className="text-sm text-gray-500 hover:text-gray-700"
+                className="text-sm text-[var(--muted)] hover:text-[var(--ink2)]"
               >
                 Already have an account?{' '}
                 <span className="font-medium text-emerald-600 hover:text-emerald-700">Sign in</span>

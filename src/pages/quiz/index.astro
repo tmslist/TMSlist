@@ -2,27 +2,33 @@
 export const prerender = true;
 
 import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
+import EditorialSection from '../../components/editorial/EditorialSection.astro';
+import EditorialCard from '../../components/editorial/EditorialCard.astro';
+import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
 import { UTILITY_SLUGS } from '../../utils/seo_slugs';
 
 const title = "TMS Assessment Tools | Am I a Candidate? Depression Test & Insurance Check";
 const description = "Free self-assessment tools — check if you're a TMS candidate, measure your depression severity, and verify your insurance coverage.";
 
-const TOOL_META: Record<string, { description: string; icon: string; color: string; time: string }> = {
-  'am-i-a-candidate': { description: 'Quick self-assessment based on your diagnosis, treatment history, and medical profile to determine TMS candidacy.', icon: 'check', color: 'emerald', time: '2 min' },
-  'depression-severity-test': { description: 'PHQ-9 questionnaire to measure your depression severity and understand what treatment options may be appropriate.', icon: 'chart', color: 'violet', time: '3 min' },
-  'insurance-eligibility-checker': { description: 'Check if your insurance covers TMS therapy, understand prior auth requirements, and estimate your out-of-pocket costs.', icon: 'shield', color: 'amber', time: '5 min' },
+const TOOL_META: Record<string, { description: string; time: string; tone: 'success' | 'accent' | 'warm' }> = {
+  'am-i-a-candidate': { description: 'Quick self-assessment based on your diagnosis, treatment history, and medical profile to determine TMS candidacy.', time: '2 min', tone: 'success' },
+  'depression-severity-test': { description: 'PHQ-9 questionnaire to measure your depression severity and understand what treatment options may be appropriate.', time: '3 min', tone: 'accent' },
+  'insurance-eligibility-checker': { description: 'Check if your insurance covers TMS therapy, understand prior auth requirements, and estimate your out-of-pocket costs.', time: '5 min', tone: 'warm' },
+  'spravato-eligibility': { description: 'Find out if you meet FDA and insurance criteria for Spravato (esketamine) nasal spray for treatment-resistant depression.', time: '2 min', tone: 'accent' },
+  'ketamine-eligibility': { description: 'See if you may be a candidate for IV ketamine or ketamine-assisted therapy for depression, PTSD, or chronic pain.', time: '2 min', tone: 'success' },
+  'anxiety-severity-test': { description: 'GAD-7 questionnaire to measure your anxiety severity over the past 2 weeks and what next steps may help.', time: '2 min', tone: 'warm' },
+  'ptsd-severity-test': { description: 'PCL-5 self-report scale to measure PTSD symptoms over the past month — used by the VA and trauma clinics worldwide.', time: '5 min', tone: 'accent' },
+  'ocd-severity-test': { description: 'Yale-Brown Obsessive Compulsive Scale (Y-BOCS) style self-rating to gauge OCD severity and explore deep-TMS eligibility.', time: '5 min', tone: 'success' },
+  'which-treatment-is-right': { description: 'Decision tree comparing TMS, Spravato, IV ketamine, and ECT based on your diagnosis, prior treatments, urgency, and insurance.', time: '3 min', tone: 'warm' },
+  'ect-eligibility': { description: 'Find out if ECT is appropriate for your situation — typically considered for severe, life-threatening, or repeatedly treatment-resistant depression.', time: '2 min', tone: 'accent' },
+  'bipolar-screener': { description: 'MDQ-based screen for bipolar disorder — important if antidepressants haven\'t worked as expected or if you\'ve had unusual periods of high energy.', time: '3 min', tone: 'warm' },
 };
 
 const enrichedTools = UTILITY_SLUGS.map(item => ({
   ...item,
-  ...(TOOL_META[item.slug] || { description: 'Assessment tool for TMS therapy.', icon: 'check', color: 'violet', time: '3 min' }),
+  ...(TOOL_META[item.slug] || { description: 'Assessment tool for TMS therapy.', time: '3 min', tone: 'accent' as const }),
 }));
-
-const colorMap: Record<string, { bg: string; border: string; text: string; iconBg: string }> = {
-  emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700', iconBg: 'bg-emerald-100' },
-  violet: { bg: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-700', iconBg: 'bg-violet-100' },
-  amber: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700', iconBg: 'bg-amber-100' },
-};
 
 const schema = JSON.stringify({
   "@context": "https://schema.org", "@type": "CollectionPage",
@@ -34,38 +40,51 @@ const schema = JSON.stringify({
 ---
 
 <Layout title={title} description={description} schema={schema} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Tools", url: "/quiz/" }]}>
-  <section class="relative bg-slate-950 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 to-slate-900 opacity-90"></div>
-    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0); background-size: 28px 28px;"></div>
-    <div class="relative z-10 container mx-auto px-4 pt-20 pb-16 lg:pt-28 lg:pb-20">
-      <nav class="flex items-center gap-2 text-sm text-white/40 mb-8" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-white/70 transition-colors">Home</a><span class="text-white/20">/</span><span class="text-white/60">Tools</span>
-      </nav>
-      <div class="max-w-3xl">
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-5 font-display">TMS Assessment Tools</h1>
-        <p class="text-lg text-white/60 leading-relaxed max-w-2xl">Free self-assessments to help you understand if TMS is right for you, how severe your symptoms are, and what your insurance covers.</p>
-      </div>
-    </div>
-    <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent"></div>
-  </section>
 
-  <main class="container mx-auto px-4 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {enrichedTools.map((tool) => {
-        const colors = colorMap[tool.color] || colorMap.violet;
-        return (
-          <a href={`/quiz/${tool.slug}/`} class={`group ${colors.bg} border ${colors.border} rounded-2xl p-8 hover:shadow-lg transition-all text-center`}>
-            <div class={`w-14 h-14 ${colors.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
-              <svg class={`w-7 h-7 ${colors.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <span class={`text-xs font-bold ${colors.text} uppercase tracking-wider`}>{tool.time}</span>
-            <h2 class="text-lg font-display font-bold text-slate-900 group-hover:text-violet-600 transition-colors my-3">{tool.title}</h2>
-            <p class="text-sm text-slate-600 leading-relaxed">{tool.description}</p>
-          </a>
-        );
-      })}
+<main style="background:var(--paper)">
+  <EditorialHero
+    eyebrow={`${UTILITY_SLUGS.length} Free Self-Assessments`}
+    eyebrowDot="#22c55e"
+    title="Find out in"
+    titleAccent="under 5 minutes."
+    description="Free, evidence-based self-assessments to understand if TMS is right for you, how severe your symptoms are, and what your insurance covers."
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Tools" }]}
+    ctas={[
+      { label: "Start the Candidate Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "Find a Clinic", href: "/us/", variant: "outline" },
+    ]}
+  />
+
+  <EditorialSection
+    title="Self-Assessment Tools"
+    intro="Confidential, no sign-up required. Each tool gives an instant score and next-step recommendations."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>'
+    tone="success"
+    noBorder
+  >
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {enrichedTools.map((tool) => (
+        <EditorialCard
+          href={`/quiz/${tool.slug}/`}
+          tag={tool.time}
+          tagTone={tool.tone}
+          title={tool.title}
+          description={tool.description}
+          size="lg"
+        />
+      ))}
     </div>
-  </main>
+  </EditorialSection>
+
+  <EditorialCTA
+    title="Ready for the next step?"
+    description="Once you've checked your candidacy, find a verified TMS clinic that accepts your insurance."
+    ctas={[
+      { label: "Browse Clinics", href: "/us/" },
+      { label: "Compare Treatments", href: "/compare/", variant: "outline" },
+    ]}
+    stickyMobile
+  />
+</main>
+
 </Layout>

@@ -1,6 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import EditorialHero from "../components/editorial/EditorialHero.astro";
 import ClinicMap from "../components/react/ClinicMap";
+import { getVisitorCountry } from "../utils/visitorCountry";
+import { COUNTRY_URL_PREFIXES } from "../utils/dataHelpers";
+
+const VISITOR_COUNTRY = getVisitorCountry(Astro.cookies, Astro.url);
+const visitorCountryUrl = `/${COUNTRY_URL_PREFIXES[VISITOR_COUNTRY] || VISITOR_COUNTRY.toLowerCase()}/`;
+const browseLabel = VISITOR_COUNTRY === 'US' ? 'Browse by State' : 'Browse by Region';
 
 const pageTitle = "Find TMS Clinics Near You | Interactive Map | TMS List";
 const metaDescription = "Use our interactive map to find TMS therapy clinics near you. Browse verified providers, compare ratings, and book a consultation today.";
@@ -15,26 +22,25 @@ const schema = JSON.stringify({
 ---
 
 <Layout title={pageTitle} description={metaDescription} schema={schema}>
-  <section class="bg-white pt-12 pb-6 border-b border-slate-100">
-    <div class="container mx-auto px-6 lg:px-12">
-      <div class="max-w-3xl">
-        <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4">
-          Find TMS Clinics Near You
-        </h1>
-        <p class="text-lg text-slate-500 font-light leading-relaxed">
-          Explore our interactive map of verified TMS therapy providers worldwide.
-          Click "Find Near Me" to discover clinics in your area.
-        </p>
-      </div>
-    </div>
-  </section>
+  <EditorialHero
+    eyebrow="Interactive Map"
+    eyebrowDot="#22c55e"
+    title="TMS clinics"
+    titleAccent="near you."
+    description={`Explore our interactive map of verified TMS therapy providers worldwide. Click "Find Near Me" to discover clinics in your area.`}
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Map" }]}
+    ctas={[
+      { label: "Find Near Me", href: "#map" },
+      { label: browseLabel, href: visitorCountryUrl, variant: "outline" },
+    ]}
+  />
 
-  <main class="bg-slate-50/50 py-10">
+  <main class="bg-[var(--paper2)]/50 py-10">
     <div class="container mx-auto px-6 lg:px-12" role="region" aria-label="Interactive clinic map">
       <ClinicMap client:visible height="600px" />
       <noscript>
         <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center mt-4">
-          <p class="text-amber-800">The interactive map requires JavaScript. <a href="/us/" class="underline font-medium">Browse clinics by state instead</a>.</p>
+          <p class="text-amber-800">The interactive map requires JavaScript. <a href={visitorCountryUrl} class="underline font-medium">Browse clinics by state instead</a>.</p>
         </div>
       </noscript>
     </div>

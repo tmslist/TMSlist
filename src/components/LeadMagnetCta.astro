@@ -1,0 +1,178 @@
+---
+import { LEAD_MAGNETS, getLeadMagnetBySlug, type LeadMagnet } from "../utils/leadMagnets";
+
+interface Props {
+  /** Slug of magnet from src/utils/leadMagnets.ts (or any slug listed in LeadMagnetModal). */
+  slug?: string;
+  /** Match magnet by category. Used when slug is omitted. */
+  category?: LeadMagnet["category"];
+  /** Visual variant. */
+  variant?: "inline" | "card" | "article-end" | "sidebar";
+  /** Override headline copy. */
+  heading?: string;
+  /** Override sub copy. */
+  subheading?: string;
+  /** Override CTA button label. */
+  cta?: string;
+  /** Compact spacing — useful inside narrow columns. */
+  compact?: boolean;
+  /** Open the global LeadMagnetModal instead of linking to /resources/[slug]. Use for patient-facing magnets. */
+  useModal?: boolean;
+  /** Optional accent override (hex). */
+  accent?: string;
+  /** Optional bullets override when slug isn't in LEAD_MAGNETS. */
+  bullets?: string[];
+  /** Display label like "Free PDF Guide" if no LEAD_MAGNETS entry. */
+  format?: string;
+}
+
+const { slug, category, variant = "inline", heading, subheading, cta, compact = false, useModal = false, accent: accentProp, bullets: bulletsProp, format: formatProp } = Astro.props;
+
+let magnet: LeadMagnet | undefined = slug ? getLeadMagnetBySlug(slug) : undefined;
+if (!magnet && category) magnet = LEAD_MAGNETS.find(m => m.category === category);
+
+const resolvedSlug = magnet?.slug ?? slug ?? LEAD_MAGNETS[0].slug;
+const title = heading || magnet?.title || "Free TMS Guide";
+const sub = subheading || magnet?.subtitle || "Instant download — no spam.";
+const format = magnet?.format || formatProp || "PDF Guide";
+const ctaLabel = cta || `Get Free ${format}`;
+const accent = accentProp || magnet?.accent || "#0A1628";
+const pageCount = magnet?.pageCount;
+const bullets = bulletsProp ?? magnet?.benefits.slice(0, 3) ?? [];
+
+const href = useModal ? "#" : `/resources/${resolvedSlug}/`;
+const dataAttrs = useModal ? { "data-open-magnet": resolvedSlug } : { "data-lead-magnet": resolvedSlug };
+---
+
+{variant === "inline" && (
+  <section class:list={["w-full", compact ? "py-6" : "py-10"]} aria-label="Free resource">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div
+        class="relative overflow-hidden rounded-2xl border shadow-sm flex flex-col md:flex-row items-stretch"
+        style={`background:var(--paper); border-color:var(--line);`}
+      >
+        <div class="absolute inset-y-0 left-0 w-1.5" style={`background:${accent}`}></div>
+        <div class="flex-1 p-6 md:p-8">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full" style={`background:${accent}1a;color:${accent}`}>
+              Free {format}
+            </span>
+            {pageCount && <span class="text-xs text-[var(--muted)]">{pageCount}</span>}
+          </div>
+          <h3 class="text-xl md:text-2xl font-bold text-[var(--ink)] mb-2 leading-tight">{title}</h3>
+          <p class="text-[var(--muted)] text-sm md:text-base mb-4 max-w-2xl">{sub}</p>
+          {bullets.length > 0 && !compact && (
+            <ul class="space-y-1.5 text-sm text-[var(--ink2)] mb-5 max-w-2xl">
+              {bullets.map(b => (
+                <li class="flex items-start gap-2">
+                  <svg class="w-4 h-4 mt-0.5 shrink-0" fill="none" stroke={accent} stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          <a
+            href={href}
+            class="inline-flex items-center gap-2 font-semibold rounded-lg px-5 py-2.5 text-sm text-white shadow-sm hover:opacity-90 transition-opacity"
+            style={`background:${accent}`}
+            {...dataAttrs}
+          >
+            {ctaLabel}
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+{variant === "card" && (
+  <div
+    class="rounded-2xl border p-6 shadow-sm"
+    style={`background:var(--paper); border-color:var(--line);`}
+    aria-label="Free resource"
+  >
+    <span class="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full inline-block mb-3" style={`background:${accent}1a;color:${accent}`}>
+      Free {format}
+    </span>
+    <h4 class="font-semibold text-[var(--ink)] text-base leading-snug mb-2">{title}</h4>
+    <p class="text-sm text-[var(--muted)] mb-4">{sub}</p>
+    <a
+      href={href}
+      class="inline-flex items-center gap-1.5 font-semibold text-sm rounded-lg px-4 py-2 text-white hover:opacity-90 transition-opacity"
+      style={`background:${accent}`}
+      {...dataAttrs}
+    >
+      {ctaLabel}
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    </a>
+  </div>
+)}
+
+{variant === "sidebar" && (
+  <aside
+    class="rounded-2xl p-5 border"
+    style={`background:${accent}0d; border-color:${accent}33;`}
+    aria-label="Free resource"
+  >
+    <div class="flex items-center gap-2 mb-2">
+      <svg class="w-5 h-5" fill="none" stroke={accent} stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      <span class="text-[11px] font-semibold uppercase tracking-wider" style={`color:${accent}`}>
+        Free {format}
+      </span>
+    </div>
+    <h4 class="font-semibold text-[var(--ink)] text-base leading-snug mb-2">{title}</h4>
+    <p class="text-sm text-[var(--muted)] mb-4">{sub}</p>
+    <a
+      href={href}
+      class="block text-center font-semibold text-sm rounded-lg px-4 py-2.5 text-white hover:opacity-90 transition-opacity"
+      style={`background:${accent}`}
+      {...dataAttrs}
+    >
+      {ctaLabel}
+    </a>
+  </aside>
+)}
+
+{variant === "article-end" && (
+  <div
+    class="my-10 rounded-2xl p-6 md:p-8 border-l-4"
+    style={`background:${accent}0d; border-color:${accent};`}
+    aria-label="Free resource"
+  >
+    <div class="flex flex-col md:flex-row md:items-center gap-5">
+      <div class="flex-1">
+        <span class="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full inline-block mb-2" style={`background:${accent}1a;color:${accent}`}>
+          Free {format}{pageCount ? ` · ${pageCount}` : ""}
+        </span>
+        <h3 class="text-lg md:text-xl font-bold text-[var(--ink)] mb-1.5">{title}</h3>
+        <p class="text-sm text-[var(--muted)]">{sub}</p>
+      </div>
+      <a
+        href={href}
+        class="shrink-0 inline-flex items-center justify-center gap-2 font-semibold rounded-lg px-5 py-3 text-sm text-white shadow-sm hover:opacity-90 transition-opacity"
+        style={`background:${accent}`}
+        {...dataAttrs}
+      >
+        {ctaLabel}
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </div>
+)}
+
+<script>
+  // Wire data-open-magnet anchors to dispatch open-lead-magnet event with preselect.
+  // Idempotent: handler is bound once per page even if multiple CTA components render.
+  if (!(window as any).__leadMagnetCtaBound) {
+    (window as any).__leadMagnetCtaBound = true;
+    document.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      const trigger = target.closest("[data-open-magnet]") as HTMLElement | null;
+      if (!trigger) return;
+      e.preventDefault();
+      const slug = trigger.getAttribute("data-open-magnet") || undefined;
+      document.dispatchEvent(new CustomEvent("open-lead-magnet", { detail: { slug } }));
+    });
+  }
+</script>

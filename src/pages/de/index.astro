@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
 import { getClinicsByCountry, getRegionsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { COUNTRY_META } from '../../utils/countryData';
 import { t } from '../../utils/i18n';
@@ -45,40 +46,32 @@ const schema = JSON.stringify({
   { name: "Germany", url: "/de/" },
 ]}>
   <main>
-    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-        <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-        <div
-          class="ai-hero-image absolute inset-0 opacity-20"
-          data-subject="Germany"
-          data-type="city"
-          data-cache-key="ai-img:city:de"
-          data-alt="Illustration of Germany"
-        >
-          <div class="ai-img-placeholder absolute inset-0"></div>
-          <img class="ai-img-result hidden w-full h-full object-cover" alt="TMS clinic illustration" />
-          <div class="ai-img-fallback hidden"></div>
-        </div>
-        <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
-                <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                <span class="text-slate-300">/</span>
-                <span class="text-slate-700 font-medium">Germany</span>
-            </nav>
-            <div class="max-w-3xl">
-                <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-                    TMS Therapy in <span class="text-violet-600">Germany</span>
-                </h1>
-                <p class="text-lg text-slate-500 leading-relaxed">Browse {totalClinics} verified TMS providers across {regionList.length} regions in Germany. TMS is {meta.tmsStatus}, with sessions costing {meta.sessionCostRange} per session.</p>
-            </div>
-        </div>
-    </section>
+    <EditorialHero
+            eyebrow={`${totalClinics}+ Verified Clinics · ${regions.length} Regions`}
+            eyebrowDot="#22c55e"
+            title="TMS therapy in"
+            titleAccent="Germany."
+            description={`Browse ${totalClinics}+ ${meta.tmsStatus} TMS providers across ${regions.length} regions. Find top-rated clinics for depression, anxiety, OCD, and more.`}
+            breadcrumbs={[
+                { label: "Home", href: "/" },
+                { label: "Germany" },
+            ]}
+            ctas={[
+                { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+                { label: "Browse All Clinics", href: "/de/", variant: "outline" },
+            ]}
+            stats={[
+                { value: `${totalClinics}+`, label: "Clinics", color: "ink" },
+                { value: regions.length, label: "Regions", color: "accent" },
+                { value: meta.tmsStatus.length > 12 ? "FDA-Like" : meta.tmsStatus, label: "Status", color: "warm" },
+            ]}
+        />
     <section class="py-12"><div class="container mx-auto px-4">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {regionList.map((region) => (
-        <a href={`/de/${region.slug}/`} class="block bg-white rounded-2xl border border-slate-100 p-5 hover:border-violet-200 hover:shadow-[0_4px_20px_rgb(0,0,0,0.04)] transition-all group">
-          <span class="text-lg font-medium text-gray-800 group-hover:text-violet-600">{region.name}</span>
-          <span class="block text-sm text-gray-500 mt-1">{region.count} {region.count === 1 ? 'clinic' : 'clinics'}</span>
+        <a href={`/de/${region.slug}/`} class="block bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-5 hover:border-[rgba(10,22,40,0.15)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.04)] transition-all group">
+          <span class="text-lg font-medium text-[var(--ink2)] group-hover:text-[var(--accent)]">{region.name}</span>
+          <span class="block text-sm text-[var(--muted)] mt-1">{region.count} {region.count === 1 ? 'clinic' : 'clinics'}</span>
         </a>
       ))}
     </div>

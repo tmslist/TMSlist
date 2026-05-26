@@ -87,7 +87,7 @@ export default function AdminMediaLibrary() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-4 border-violet-200 border-t-violet-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[rgba(10,22,40,0.15)] border-t-[#0A1628] rounded-full animate-spin" />
       </div>
     );
   }
@@ -96,8 +96,8 @@ export default function AdminMediaLibrary() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Media Library</h1>
-          <p className="text-gray-500 mt-1">{items.length} files, {formatSize(items.reduce((s, i) => s + i.size, 0))} total</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Media Library</h1>
+          <p className="text-[var(--muted)] mt-1">{items.length} files, {formatSize(items.reduce((s, i) => s + i.size, 0))} total</p>
         </div>
         {selected.length > 0 && (
           <button
@@ -112,7 +112,7 @@ export default function AdminMediaLibrary() {
       {/* Toolbar */}
       <div className="flex items-center gap-4 mb-6">
         <div className="relative flex-1 max-w-md">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -120,16 +120,16 @@ export default function AdminMediaLibrary() {
             value={filter}
             onChange={e => setFilter(e.target.value)}
             placeholder="Search files..."
-            className="w-full pl-9 pr-4 py-2.5 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-violet-300 focus:ring-2 focus:ring-violet-100"
+            className="w-full pl-9 pr-4 py-2.5 text-sm bg-white border border-[var(--line)] rounded-lg focus:outline-none focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)]"
           />
         </div>
-        <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
+        <div className="flex gap-1 bg-[var(--paper2)] rounded-lg p-1">
           {(['createdAt', 'size', 'filename'] as SortField[]).map(field => (
             <button
               key={field}
               onClick={() => setSort(prev => prev.field === field ? { field, dir: prev.dir === 'asc' ? 'desc' : 'asc' } : { field, dir: 'desc' })}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors capitalize ${
-                sort.field === field ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+                sort.field === field ? 'bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--ink2)] hover:text-[var(--ink)]'
               }`}
             >
               {field === 'createdAt' ? 'Date' : field} {sort.field === field ? (sort.dir === 'asc' ? '↑' : '↓') : ''}
@@ -139,7 +139,7 @@ export default function AdminMediaLibrary() {
         <button
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading}
-          className="px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 disabled:opacity-50 transition-colors"
+          className="px-4 py-2 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
         >
           {uploading ? 'Uploading...' : '+ Upload'}
         </button>
@@ -148,11 +148,11 @@ export default function AdminMediaLibrary() {
 
       {/* Grid */}
       {filtered.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl border border-gray-200">
-          <svg className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="text-center py-16 bg-white rounded-xl border border-[var(--line)]">
+          <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <p className="text-gray-500">No media files found</p>
+          <p className="text-[var(--muted)]">No media files found</p>
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -160,22 +160,22 @@ export default function AdminMediaLibrary() {
             <div
               key={item.id}
               className={`relative bg-white rounded-xl border overflow-hidden group cursor-pointer transition-all ${
-                selected.includes(item.id) ? 'border-violet-400 ring-2 ring-violet-100' : 'border-gray-200 hover:border-violet-300'
+                selected.includes(item.id) ? 'border-[var(--ink2)] ring-2 ring-[rgba(10,22,40,0.1)]' : 'border-[var(--line)] hover:border-[rgba(10,22,40,0.2)]'
               }`}
               onClick={() => setPreviewItem(item)}
             >
-              <div className="aspect-square bg-gray-50 flex items-center justify-center overflow-hidden">
+              <div className="aspect-square bg-[var(--paper2)] flex items-center justify-center overflow-hidden">
                 {isImage(item.mimeType) ? (
                   <img src={item.url} alt={item.filename} className="w-full h-full object-cover" onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                 ) : (
-                  <svg className="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-10 h-10 text-[var(--line)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
                 )}
               </div>
               <div className="p-2">
-                <p className="text-xs font-medium text-gray-900 truncate">{item.filename}</p>
-                <p className="text-[11px] text-gray-400">{formatSize(item.size)}</p>
+                <p className="text-xs font-medium text-[var(--ink)] truncate">{item.filename}</p>
+                <p className="text-[11px] text-[var(--muted)]">{formatSize(item.size)}</p>
               </div>
               <input
                 type="checkbox"
@@ -184,7 +184,7 @@ export default function AdminMediaLibrary() {
                   e.stopPropagation();
                   setSelected(prev => e.target.checked ? [...prev, item.id] : prev.filter(id => id !== item.id));
                 }}
-                className="absolute top-2 left-2 w-4 h-4 rounded border-gray-300 text-violet-600"
+                className="absolute top-2 left-2 w-4 h-4 rounded border-[var(--line)] text-[var(--ink)]"
                 onClick={e => e.stopPropagation()}
               />
             </div>
@@ -196,9 +196,9 @@ export default function AdminMediaLibrary() {
       {previewItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setPreviewItem(null)}>
           <div className="bg-white rounded-2xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <div className="p-4 border-b border-gray-100 flex items-center justify-between">
-              <h3 className="font-semibold text-gray-900 truncate">{previewItem.filename}</h3>
-              <button onClick={() => setPreviewItem(null)} className="text-gray-400 hover:text-gray-600">
+            <div className="p-4 border-b border-[var(--line)] flex items-center justify-between">
+              <h3 className="font-semibold text-[var(--ink)] truncate">{previewItem.filename}</h3>
+              <button onClick={() => setPreviewItem(null)} className="text-[var(--muted)] hover:text-[var(--ink2)]">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
@@ -206,19 +206,19 @@ export default function AdminMediaLibrary() {
               {isImage(previewItem.mimeType) ? (
                 <img src={previewItem.url} alt={previewItem.filename} className="max-w-full rounded-lg" />
               ) : (
-                <div className="text-center py-8 text-gray-500">Preview not available for this file type</div>
+                <div className="text-center py-8 text-[var(--muted)]">Preview not available for this file type</div>
               )}
               <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
-                <div><span className="font-medium text-gray-500">Size:</span> {formatSize(previewItem.size)}</div>
-                <div><span className="font-medium text-gray-500">Type:</span> {previewItem.mimeType}</div>
-                <div><span className="font-medium text-gray-500">Uploaded:</span> {new Date(previewItem.createdAt).toLocaleDateString()}</div>
-                {previewItem.width && <div><span className="font-medium text-gray-500">Dimensions:</span> {previewItem.width}x{previewItem.height}</div>}
+                <div><span className="font-medium text-[var(--muted)]">Size:</span> {formatSize(previewItem.size)}</div>
+                <div><span className="font-medium text-[var(--muted)]">Type:</span> {previewItem.mimeType}</div>
+                <div><span className="font-medium text-[var(--muted)]">Uploaded:</span> {new Date(previewItem.createdAt).toLocaleDateString()}</div>
+                {previewItem.width && <div><span className="font-medium text-[var(--muted)]">Dimensions:</span> {previewItem.width}x{previewItem.height}</div>}
               </div>
               <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">URL</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">URL</label>
                 <div className="flex gap-2">
-                  <input type="text" readOnly value={previewItem.url} className="flex-1 px-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-lg font-mono" />
-                  <button onClick={() => copyUrl(previewItem.url)} className="px-3 py-2 text-sm font-medium text-violet-600 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors">Copy</button>
+                  <input type="text" readOnly value={previewItem.url} className="flex-1 px-3 py-2 text-sm bg-[var(--paper2)] border border-[var(--line)] rounded-lg font-mono" />
+                  <button onClick={() => copyUrl(previewItem.url)} className="px-3 py-2 text-sm font-medium text-[var(--ink)] bg-[rgba(10,22,40,0.08)] hover:bg-[rgba(10,22,40,0.08)] rounded-lg transition-colors">Copy</button>
                 </div>
               </div>
             </div>

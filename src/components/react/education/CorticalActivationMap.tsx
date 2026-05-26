@@ -30,7 +30,7 @@ const PAD_Y = 20;
 
 const PROTOCOL_COLORS: Record<string, string> = {
   'Standard rTMS': '#22d3ee',
-  'Theta Burst (iTBS)': '#a78bfa',
+  'Theta Burst (iTBS)': '#C9654A',
   'Deep TMS (BrainsWay)': '#f97316',
   'Low-Frequency (1Hz)': '#fbbf24',
 };
@@ -181,8 +181,8 @@ function Sparkline({ data, width, height, color, label, sublabel }: SparklinePro
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between">
-        <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">{label}</span>
-        <span className="text-[9px] font-mono text-slate-500">{sublabel}</span>
+        <span className="text-[9px] font-semibold text-[var(--muted)] uppercase tracking-wider">{label}</span>
+        <span className="text-[9px] font-mono text-[var(--muted)]">{sublabel}</span>
       </div>
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
         <defs>
@@ -230,9 +230,9 @@ interface MiniBarProps {
 function MiniBar({ name, spread, depth, color, selected }: MiniBarProps) {
   return (
     <div className={`flex items-center gap-2 py-1 ${selected ? 'opacity-100' : 'opacity-60'}`}>
-      <div className="w-20 text-[8px] font-medium text-slate-300 truncate" title={name}>{name}</div>
+      <div className="w-20 text-[8px] font-medium text-[var(--line)] truncate" title={name}>{name}</div>
       {/* Spread bar */}
-      <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+      <div className="flex-1 h-1.5 bg-[var(--ink2)] rounded-full overflow-hidden">
         <div
           className="h-full rounded-full transition-all duration-500"
           style={{ width: `${spread * 100}%`, backgroundColor: color }}
@@ -359,7 +359,7 @@ export function CorticalActivationMap() {
       label: '~47,000',
       value: 'neurons/session',
       sublabel: `calc: ${neuronCount}`,
-      color: 'text-cyan-400',
+      color: 'text-[var(--accent2)]',
     },
     {
       label: `${fieldStrength} V/m`,
@@ -369,7 +369,7 @@ export function CorticalActivationMap() {
     {
       label: `${penetrationDepth} cm`,
       value: 'penetration',
-      color: 'text-violet-400',
+      color: 'text-[var(--accent2)]',
     },
     {
       label: `${focalityIndex}`,
@@ -394,17 +394,17 @@ export function CorticalActivationMap() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-5 h-5 rounded-md bg-violet-500/20 border border-violet-500/40 flex items-center justify-center">
-            <svg className="w-3 h-3 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-5 h-5 rounded-md bg-[var(--paper2)] border border-[var(--line)] flex items-center justify-center">
+            <svg className="w-3 h-3 text-[var(--accent2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
             </svg>
           </div>
-          <span className="text-[11px] font-bold text-slate-200">Cortical Activation Map</span>
+          <span className="text-[11px] font-bold text-[var(--line)]">Cortical Activation Map</span>
         </div>
         {isPlaying && (
           <div className="flex items-center gap-1.5">
-            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-[9px] text-cyan-400 font-medium">LIVE</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent2)] animate-pulse" />
+            <span className="text-[9px] text-[var(--accent2)] font-medium">LIVE</span>
           </div>
         )}
       </div>
@@ -422,8 +422,8 @@ export function CorticalActivationMap() {
                 onMouseLeave={() => setHoveredLayer(null)}
                 className={`flex items-center gap-1.5 px-2 py-1 rounded-md border text-[9px] font-medium transition-all duration-200 ${
                   visibleLayers.has(layer.id)
-                    ? 'border-slate-600 bg-slate-800/60 text-slate-200'
-                    : 'border-slate-700/40 bg-slate-900/30 text-slate-600'
+                    ? 'border-[var(--ink2)] bg-[var(--paper2)] text-[var(--line)]'
+                    : 'border-[var(--line)] bg-[var(--paper2)] text-[var(--ink2)]'
                 }`}
               >
                 <div
@@ -437,7 +437,7 @@ export function CorticalActivationMap() {
                 {layer.label}
               </button>
             ))}
-            <span className="ml-auto text-[8px] text-slate-600">Coronal Cross-Section</span>
+            <span className="ml-auto text-[8px] text-[var(--ink2)]">Coronal Cross-Section</span>
           </div>
 
           {/* Brain visualization */}
@@ -497,7 +497,7 @@ export function CorticalActivationMap() {
             {/* Brain outline — filled with subtle color */}
             <path
               d={brainOutlinePath()}
-              fill="#1a2744"
+              fill="#1E2A3B"
               stroke="url(#brainBorder)"
               strokeWidth={1.5}
             />
@@ -541,7 +541,7 @@ export function CorticalActivationMap() {
             <path
               d={brainOutlinePath()}
               fill="none"
-              stroke="#334155"
+              stroke="#1E2A3B"
               strokeWidth={1.5}
             />
 
@@ -592,7 +592,7 @@ export function CorticalActivationMap() {
                 y1={PAD_Y - 2}
                 x2={WIDTH / 2 + 8}
                 y2={PAD_Y - 2}
-                stroke="#22d3ee"
+                stroke="#5A6B82"
                 strokeWidth={2}
                 strokeLinecap="round"
               />
@@ -601,14 +601,14 @@ export function CorticalActivationMap() {
                 y1={PAD_Y - 2}
                 x2={WIDTH / 2}
                 y2={PAD_Y + 10}
-                stroke="#22d3ee"
+                stroke="#5A6B82"
                 strokeWidth={1.5}
                 strokeDasharray="2,2"
               />
               <text
                 x={WIDTH / 2 + 14}
                 y={PAD_Y - 6}
-                fill="#22d3ee"
+                fill="#5A6B82"
                 fontSize={7}
                 fontFamily="monospace"
                 opacity={0.8}
@@ -620,9 +620,9 @@ export function CorticalActivationMap() {
 
           {/* Color legend */}
           <div className="flex items-center gap-2 mt-2 px-1">
-            <span className="text-[8px] text-slate-600 w-10">Weak</span>
-            <div className="flex-1 h-2 rounded-full bg-gradient-to-r from-blue-600 via-cyan-400 via-green-400 via-yellow-400 to-red-500" />
-            <span className="text-[8px] text-slate-600 w-10 text-right">Peak</span>
+            <span className="text-[8px] text-[var(--ink2)] w-10">Weak</span>
+            <div className="flex-1 h-2 rounded-full bg-gradient-to-r from-[var(--accent2)] via-green-400 via-yellow-400 to-red-500" />
+            <span className="text-[8px] text-[var(--ink2)] w-10 text-right">Peak</span>
           </div>
         </div>
 
@@ -630,21 +630,21 @@ export function CorticalActivationMap() {
         <div className="flex flex-col gap-3">
           {/* Activation stats */}
           <div className="glass-panel rounded-xl p-3">
-            <div className="text-[9px] font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            <div className="text-[9px] font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">
               Activation Metrics
             </div>
             <div className="grid grid-cols-2 gap-2">
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="flex flex-col gap-0.5 p-2 rounded-lg bg-slate-900/60 border border-slate-700/30"
+                  className="flex flex-col gap-0.5 p-2 rounded-lg bg-[var(--paper2)] border border-[var(--line)]"
                 >
                   <span className={`text-[13px] font-bold font-mono ${stat.color}`}>
                     {stat.label}
                   </span>
-                  <span className="text-[8px] text-slate-500 uppercase tracking-wider">{stat.value}</span>
+                  <span className="text-[8px] text-[var(--muted)] uppercase tracking-wider">{stat.value}</span>
                   {stat.sublabel && (
-                    <span className="text-[7px] text-slate-700 font-mono">{stat.sublabel}</span>
+                    <span className="text-[7px] text-[var(--ink2)] font-mono">{stat.sublabel}</span>
                   )}
                 </div>
               ))}
@@ -653,18 +653,18 @@ export function CorticalActivationMap() {
 
           {/* Protocol comparison */}
           <div className="glass-panel rounded-xl p-3">
-            <div className="text-[9px] font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            <div className="text-[9px] font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">
               Protocol Spread vs Depth
             </div>
             <div className="flex items-center gap-2 mb-2">
-              <div className="flex items-center gap-1 text-[8px] text-slate-600">
-                <div className="w-4 h-1 bg-gradient-to-r from-slate-600 to-slate-500 rounded-full" />
+              <div className="flex items-center gap-1 text-[8px] text-[var(--ink2)]">
+                <div className="w-4 h-1 bg-gradient-to-r from-[var(--ink2)] to-[var(--muted)] rounded-full" />
                 Spread
               </div>
-              <div className="flex items-center gap-1 text-[8px] text-slate-600 ml-2">
+              <div className="flex items-center gap-1 text-[8px] text-[var(--ink2)] ml-2">
                 <div className="flex gap-0.5">
                   {[0.3, 0.6, 1.0].map((_, i) => (
-                    <div key={i} className="w-1.5 h-1.5 rounded-sm bg-slate-500" />
+                    <div key={i} className="w-1.5 h-1.5 rounded-sm bg-[var(--muted)]" />
                   ))}
                 </div>
                 Depth
@@ -683,19 +683,19 @@ export function CorticalActivationMap() {
           data={sparkData}
           width={380}
           height={48}
-          color="#a78bfa"
+          color='#C9654A'
           label="6-Week Treatment Course"
           sublabel="36 sessions cumulative"
         />
         <div className="flex justify-between mt-1">
           {[0, 9, 18, 27, 36].map(s => (
-            <span key={s} className="text-[7px] text-slate-700 font-mono">W{s === 0 ? '0' : Math.ceil(s / 5)}</span>
+            <span key={s} className="text-[7px] text-[var(--ink2)] font-mono">W{s === 0 ? '0' : Math.ceil(s / 5)}</span>
           ))}
-          <span className="text-[7px] text-slate-600 font-mono">Session {sparkData.length}</span>
+          <span className="text-[7px] text-[var(--ink2)] font-mono">Session {sparkData.length}</span>
         </div>
         <div className="mt-1.5 flex items-center gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-          <span className="text-[8px] text-slate-500">
+          <div className="w-1.5 h-1.5 rounded-full bg-[var(--ink2)]" />
+          <span className="text-[8px] text-[var(--muted)]">
             Cumulative cortical activation across treatment course. Early sessions establish network engagement;
             later sessions consolidate plasticity changes.
           </span>

@@ -51,25 +51,25 @@ const sources = [
 ];
 ---
 
-<section class="mt-12 pt-8 border-t border-slate-200">
-  <h2 class="text-xl font-bold text-slate-900 mb-6">{title}</h2>
+<section class="mt-12 pt-8 border-t border-[var(--line)]">
+  <h2 class="text-xl font-bold text-[var(--ink)] mb-6">{title}</h2>
   <ol class="space-y-4">
     {sources.map((source, index) => (
       <li class="flex gap-3">
-        <span class="text-slate-400 font-medium shrink-0">{index + 1}.</span>
+        <span class="text-[var(--muted)] font-medium shrink-0">{index + 1}.</span>
         <div class="text-sm">
-          <span class="font-medium text-slate-800">{source.authors}</span>
-          <span class="text-slate-500"> ({source.year}). </span>
-          <span class="italic text-slate-700">{source.title}. </span>
-          <span class="text-slate-500">{source.journal}.</span>
+          <span class="font-medium text-[var(--ink)]">{source.authors}</span>
+          <span class="text-[var(--muted)]"> ({source.year}). </span>
+          <span class="italic text-[var(--ink2)]">{source.title}. </span>
+          <span class="text-[var(--muted)]">{source.journal}.</span>
           {source.doi && (
-            <span class="text-slate-400"> DOI: <a href={`https://doi.org/${source.doi}`} class="text-[#1B4B5A] hover:text-[#143844]" target="_blank" rel="noopener">{source.doi}</a></span>
+            <span class="text-[var(--muted)]"> DOI: <a href={`https://doi.org/${source.doi}`} class="text-[var(--accent)] hover:text-[var(--ink)]" target="_blank" rel="noopener">{source.doi}</a></span>
           )}
           {source.url && !source.doi && (
-            <span class="text-slate-400"> <a href={source.url} class="text-[#1B4B5A] hover:text-[#143844]" target="_blank" rel="noopener">[Source]</a></span>
+            <span class="text-[var(--muted)]"> <a href={source.url} class="text-[var(--accent)] hover:text-[var(--ink)]" target="_blank" rel="noopener">[Source]</a></span>
           )}
-          <p class="text-slate-600 mt-1">
-            <strong class="text-slate-700">Key finding:</strong> {source.keyFinding}
+          <p class="text-[var(--ink2)] mt-1">
+            <strong class="text-[var(--ink2)]">Key finding:</strong> {source.keyFinding}
           </p>
         </div>
       </li>

@@ -1,0 +1,238 @@
+---
+/**
+ * BlogCardCover — typographic editorial cover for blog cards.
+ *
+ * Each card gets:
+ *   - a brand-tinted paper background (paper2 / warm tint / mint)
+ *   - a topical Lucide-style icon picked from slug + title keywords
+ *   - a clickbaity hook (post excerpt) set in the brand serif
+ *   - a small category chip
+ * No external images, no AI, no blur. 100% on-brand and unique per post.
+ */
+interface Props {
+  slug: string;
+  title: string;
+  excerpt?: string;
+  category?: string;
+  tall?: boolean;
+}
+
+const { slug, title, excerpt = "", category = "Research", tall = false } = Astro.props;
+
+// ---- Topic → icon mapping (priority-ordered: first match wins). Lucide v0 paths.
+type Icon = { paths: string[]; circles?: { cx: number; cy: number; r: number }[]; viewBox?: string };
+
+const ICONS: Record<string, Icon> = {
+  // medical / clinical
+  pill:        { paths: ["m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z", "m8.5 8.5 7 7"] },
+  microscope:  { paths: ["M6 18h8", "M3 22h18", "M14 22a7 7 0 1 0 0-14h-1", "M9 14h2", "M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z", "M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"] },
+  flask:       { paths: ["M9 3h6", "M10 3v7L4.5 18a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 10V3"] },
+  stethoscope: { paths: ["M11 2v2", "M5 2v2", "M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1", "M8 15a6 6 0 0 0 12 0v-3"], circles: [{ cx: 20, cy: 10, r: 2 }] },
+  briefcase:   { paths: ["M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16", "M2 20h20", "M2 9h20"], circles: [{ cx: 12, cy: 14, r: 1 }] },
+
+  // neuro / mental health
+  brain:       { paths: ["M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z", "M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z", "M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4", "M17.5 16a3.5 3.5 0 0 0 0-7"] },
+  sparkles:    { paths: ["M9.94 14.06 2 22l7.94-7.94", "M14.06 9.94 22 2l-7.94 7.94", "M9.94 9.94 2 2l7.94 7.94", "M14.06 14.06 22 22l-7.94-7.94"] },
+  zap:         { paths: ["M13 2 3 14h9l-1 8 10-12h-9z"] },
+  waves:       { paths: ["M2 6c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1", "M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1", "M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"] },
+  smile:       { paths: ["M8 14s1.5 2 4 2 4-2 4-2"], circles: [{ cx: 12, cy: 12, r: 10 }, { cx: 9, cy: 9, r: 0.5 }, { cx: 15, cy: 9, r: 0.5 }] },
+  alert:       { paths: ["M12 9v4", "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z", "M12 17h.01"] },
+
+  // life / context
+  moon:        { paths: ["M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"] },
+  activity:    { paths: ["M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.5.5 0 0 1-.96 0L8.49 2.18a.5.5 0 0 0-.96 0l-2.35 8.36A2 2 0 0 1 3.26 12H2"] },
+  baby:        { paths: ["M9 12h.01", "M15 12h.01", "M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5", "M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"] },
+  car:         { paths: ["M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2", "M14 17H9"], circles: [{ cx: 6.5, cy: 16.5, r: 2.5 }, { cx: 16.5, cy: 16.5, r: 2.5 }] },
+  scale:       { paths: ["m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z", "m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z", "M7 21h10", "M12 3v18", "M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"] },
+  ear:         { paths: ["M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0", "M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"] },
+  head:        { paths: ["M19 16v3", "M19 22v.01", "M11.5 22a8.38 8.38 0 0 1-7.91-9.31A8.5 8.5 0 1 1 19 12.5", "M12 7v5l4 2"] },
+
+  // money / docs / search
+  coins:       { paths: ["M16 6h2c.6 0 1 .4 1 1v8c0 .6-.4 1-1 1h-2", "M2 14a4 4 0 0 0 4 4h12a4 4 0 1 0 0-8H6a4 4 0 0 0-4 4Z"], circles: [{ cx: 8, cy: 8, r: 6 }] },
+  shield:      { paths: ["M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"] },
+  search:      { paths: ["m21 21-4.3-4.3"], circles: [{ cx: 11, cy: 11, r: 8 }] },
+  book:        { paths: ["M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z", "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"] },
+  question:    { paths: ["M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3", "M12 17h.01"], circles: [{ cx: 12, cy: 12, r: 10 }] },
+  mappin:      { paths: ["M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"], circles: [{ cx: 12, cy: 10, r: 3 }] },
+  clock:       { paths: ["M12 6v6l4 2"], circles: [{ cx: 12, cy: 12, r: 10 }] },
+  cpu:         { paths: ["M4 4h16v16H4z", "M9 9h6v6H9z", "M9 1v3", "M15 1v3", "M9 20v3", "M15 20v3", "M20 9h3", "M20 14h3", "M1 9h3", "M1 14h3"] },
+  graduation:  { paths: ["M22 10v6", "M2 10l10-5 10 5-10 5z", "M6 12v5c3 3 9 3 12 0v-5"] },
+  helix:       { paths: ["M3 3c4 0 4 4 9 4s5-4 9-4", "M3 9c4 0 4 4 9 4s5-4 9-4", "M3 15c4 0 4 4 9 4s5-4 9-4", "M3 21c4 0 4-4 9-4s5 4 9 4"] },
+  refresh:     { paths: ["M3 12a9 9 0 0 1 15-6.7L21 8", "M21 3v5h-5", "M21 12a9 9 0 0 1-15 6.7L3 16", "M3 21v-5h5"] },
+  magnet:      { paths: ["m6 15-4-4 6.75-6.77a7.79 7.79 0 0 1 11 11L13 22l-4-4 6.39-6.36a2.14 2.14 0 0 0-3-3L6 15", "m5 8 4 4", "m12 15 4 4"] },
+};
+
+// ---- Keyword → icon (first match wins; ordered most-specific first)
+const RULES: Array<[RegExp, keyof typeof ICONS]> = [
+  [/(cost|insurance|medicare|appeal|denied|price|covered|lobbying|industry)/i, "coins"],
+  [/(veteran|ptsd|first-responder|trauma)/i, "shield"],
+  [/(side-effect|red-flag|risk|warning|safety)/i, "alert"],
+  [/(red-flag|choosing|find.*clinic|how-to-find)/i, "search"],
+  [/(driving|drive)/i, "car"],
+  [/(pregnan|postpartum|preterm|baby|infant)/i, "baby"],
+  [/(sleep|insomnia)/i, "moon"],
+  [/(weight|appetite|binge|eating)/i, "scale"],
+  [/(tinnitus|ear)/i, "ear"],
+  [/(headache|migraine|side-effects-headache)/i, "head"],
+  [/(athlete|exercise|physical|activity|sport)/i, "activity"],
+  [/(europe|vs-us|country)/i, "mappin"],
+  [/(history|book|guide|patient-guide|prepare|first-session|what-to-expect|feels-like)/i, "book"],
+  [/(faq|question|what-is-mapping|terminology|explained)/i, "question"],
+  [/(maintenance|booster|how-long|relapse|long-lasts|results-last)/i, "refresh"],
+  [/(theta-burst|snt|stanford|accelerated|faster)/i, "zap"],
+  [/(ai|targeting|technology|future|2026|breakthrough)/i, "cpu"],
+  [/(genetic|biomarker|response-prediction)/i, "helix"],
+  [/(ketamine|esketamine|psychedelic)/i, "flask"],
+  [/(physics|motor-threshold|mechanism|magnetic-field|coil)/i, "magnet"],
+  [/(student|academia|graduate|adolescent|child|teen|geriatric|older|adhd|autism)/i, "graduation"],
+  [/(healthcare-worker|burnout|professional)/i, "briefcase"],
+  [/(success|rates|outcome|effective|what-affect|cognitive|memory)/i, "microscope"],
+  [/(neuroplasticity|rewir|mindful|meditation|spiritual)/i, "sparkles"],
+  [/(anxiety|panic|social-anxiety|fibromyalgia|chronic-pain|pain)/i, "waves"],
+  [/(depression|mood|bipolar|suicidal|treatment-resistant|postpartum-depression)/i, "smile"],
+  [/(medication|pill|drug|alcohol|smoking)/i, "pill"],
+  [/(therapy|psychotherapy|combining|combination|holistic|stroke-rehab)/i, "stethoscope"],
+  [/(maintenance|how-long|duration)/i, "clock"],
+];
+
+const search = `${slug} ${title}`.toLowerCase();
+let iconKey: keyof typeof ICONS = "brain";
+for (const [re, key] of RULES) {
+  if (re.test(search)) { iconKey = key; break; }
+}
+const icon = ICONS[iconKey];
+
+// ---- Hook text: prefer excerpt, fall back to title.
+function buildHook(text: string, max = 140): string {
+  if (!text) return "";
+  // Take first sentence, normalize whitespace.
+  const cleaned = text.replace(/\s+/g, " ").trim();
+  const period = cleaned.search(/[.!?](\s|$)/);
+  let hook = period > 40 ? cleaned.slice(0, period + 1) : cleaned;
+  if (hook.length > max) {
+    hook = hook.slice(0, max).replace(/\s+\S*$/, "") + "…";
+  }
+  return hook;
+}
+const hook = buildHook(excerpt) || title;
+
+// ---- Per-category palette — sits inside paper/ink/warm brand tokens.
+const palettes: Record<string, { bg: string; ink: string; accent: string; chipBg: string; chipText: string; border: string }> = {
+  Research:        { bg: "#F4F1EA", ink: "#0A1628", accent: "#0A1628", chipBg: "rgba(10,22,40,0.06)",  chipText: "#0A1628", border: "#E6EAF0" },
+  Treatment:       { bg: "#EFF5F0", ink: "#0A1628", accent: "#1F4D3A", chipBg: "rgba(31,77,58,0.10)",  chipText: "#1F4D3A", border: "#DCE6DE" },
+  "Patient Guide": { bg: "#FBF3EE", ink: "#0A1628", accent: "#C9654A", chipBg: "rgba(201,101,74,0.12)",chipText: "#C9654A", border: "#EBDDD2" },
+  FAQ:             { bg: "#F1EFF6", ink: "#0A1628", accent: "#3B2E5A", chipBg: "rgba(59,46,90,0.10)",  chipText: "#3B2E5A", border: "#E2DCEE" },
+  Insurance:       { bg: "#FAF6E8", ink: "#0A1628", accent: "#7A5A12", chipBg: "rgba(122,90,18,0.10)", chipText: "#7A5A12", border: "#ECE5C7" },
+};
+const p = palettes[category] || palettes.Research;
+
+const aspectClass = tall ? "aspect-[5/4]" : "aspect-[16/10]";
+const hookSize = tall ? "tall" : "regular";
+---
+
+<div
+  class={`bcc ${aspectClass}`}
+  style={`--bcc-bg:${p.bg}; --bcc-ink:${p.ink}; --bcc-accent:${p.accent}; --bcc-border:${p.border};`}
+>
+  <!-- subtle paper grain -->
+  <svg class="bcc-grain" aria-hidden="true" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id={`bcc-dots-${slug}`} width="22" height="22" patternUnits="userSpaceOnUse">
+        <circle cx="1" cy="1" r="1" fill={p.ink} fill-opacity="0.05" />
+      </pattern>
+    </defs>
+    <rect width="600" height="400" fill={`url(#bcc-dots-${slug})`} />
+  </svg>
+
+  <!-- editorial frame -->
+  <div class="bcc-frame"></div>
+
+  <!-- topical icon -->
+  <div class="bcc-icon" style={`color:${p.accent}`}>
+    <svg viewBox={icon.viewBox || "0 0 24 24"} fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      {icon.paths.map((d) => <path d={d} />)}
+      {icon.circles?.map((c) => <circle cx={c.cx} cy={c.cy} r={c.r} />)}
+    </svg>
+  </div>
+
+  <!-- category chip -->
+  <span class="bcc-chip" style={`background:${p.chipBg}; color:${p.chipText};`}>{category}</span>
+
+  <!-- the clickbaity hook in brand serif -->
+  <p class={`bcc-hook bcc-hook-${hookSize} serif`} style={`color:${p.ink}`}>{hook}</p>
+</div>
+
+<style>
+  .bcc {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--bcc-bg);
+    isolation: isolate;
+  }
+  .bcc-grain {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .bcc-frame {
+    position: absolute;
+    inset: 14px;
+    border: 1px solid var(--bcc-border);
+    border-radius: 14px;
+    pointer-events: none;
+  }
+  .bcc-icon {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 36px;
+    height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid var(--bcc-border);
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+  }
+  .bcc-icon svg { width: 20px; height: 20px; }
+  .bcc-chip {
+    position: absolute;
+    top: 26px;
+    left: 26px;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+  .bcc-hook {
+    position: absolute;
+    left: 26px;
+    right: 26px;
+    bottom: 22px;
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .bcc-hook-regular { font-size: 22px; -webkit-line-clamp: 4; }
+  .bcc-hook-tall    { font-size: 32px; -webkit-line-clamp: 5; }
+
+  @media (min-width: 1024px) {
+    .bcc-hook-tall { font-size: 40px; }
+  }
+
+  /* keep things readable on smaller card widths */
+  @media (max-width: 480px) {
+    .bcc-hook-regular { font-size: 18px; }
+    .bcc-icon { top: 16px; right: 16px; width: 32px; height: 32px; }
+    .bcc-icon svg { width: 18px; height: 18px; }
+    .bcc-chip { top: 18px; left: 18px; }
+    .bcc-hook { left: 20px; right: 20px; bottom: 18px; }
+  }
+</style>

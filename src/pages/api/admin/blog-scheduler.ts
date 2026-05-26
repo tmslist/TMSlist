@@ -8,7 +8,7 @@
  */
 
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 

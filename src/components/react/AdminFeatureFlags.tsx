@@ -76,7 +76,7 @@ export default function AdminFeatureFlags() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-4 border-violet-200 border-t-violet-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[rgba(10,22,40,0.15)] border-t-[#0A1628] rounded-full animate-spin" />
       </div>
     );
   }
@@ -85,12 +85,12 @@ export default function AdminFeatureFlags() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Feature Flags</h1>
-          <p className="text-gray-500 mt-1">Control feature rollouts across environments</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Feature Flags</h1>
+          <p className="text-[var(--muted)] mt-1">Control feature rollouts across environments</p>
         </div>
         <button
           onClick={addNewFlag}
-          className="px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors"
+          className="px-4 py-2 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink)] transition-colors"
         >
           + New Flag
         </button>
@@ -100,56 +100,56 @@ export default function AdminFeatureFlags() {
       {editing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">
               {editing.id.startsWith('new') ? 'Create Feature Flag' : 'Edit Feature Flag'}
             </h2>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Key</label>
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Key</label>
                   <input
                     type="text"
                     value={editing.key}
                     onChange={e => setEditing({ ...editing, key: e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '') })}
                     placeholder="new_dashboard"
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500 font-mono"
+                    className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B] font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Rollout %</label>
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Rollout %</label>
                   <input
                     type="number"
                     min={0}
                     max={100}
                     value={editing.rollout}
                     onChange={e => setEditing({ ...editing, rollout: Math.max(0, Math.min(100, parseInt(e.target.value) || 0)) })}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                    className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Label</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Label</label>
                 <input
                   type="text"
                   value={editing.label}
                   onChange={e => setEditing({ ...editing, label: e.target.value })}
                   placeholder="New Dashboard Design"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Description</label>
                 <textarea
                   value={editing.description}
                   onChange={e => setEditing({ ...editing, description: e.target.value })}
                   rows={2}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                 />
               </div>
 
               {/* Target roles */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Target Roles</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-2">Target Roles</label>
                 <div className="flex gap-2 flex-wrap">
                   {ROLES.map(role => (
                     <label key={role} className="flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm cursor-pointer transition-colors">
@@ -162,9 +162,9 @@ export default function AdminFeatureFlags() {
                             : editing.targetRoles.filter(r => r !== role);
                           setEditing({ ...editing, targetRoles: roles });
                         }}
-                        className="w-4 h-4 rounded border-gray-300 text-violet-600"
+                        className="w-4 h-4 rounded border-[var(--line)] text-[var(--ink)]"
                       />
-                      <span className="font-medium text-gray-700">{role}</span>
+                      <span className="font-medium text-[var(--ink2)]">{role}</span>
                     </label>
                   ))}
                 </div>
@@ -172,7 +172,7 @@ export default function AdminFeatureFlags() {
 
               {/* Environments */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Environments</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-2">Environments</label>
                 <div className="flex gap-2">
                   {ENVIRONMENTS.map(env => (
                     <label key={env} className="flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm cursor-pointer transition-colors">
@@ -185,9 +185,9 @@ export default function AdminFeatureFlags() {
                             : editing.environments.filter(e => e !== env);
                           setEditing({ ...editing, environments: envs });
                         }}
-                        className="w-4 h-4 rounded border-gray-300 text-violet-600"
+                        className="w-4 h-4 rounded border-[var(--line)] text-[var(--ink)]"
                       />
-                      <span className="font-medium text-gray-700">{env}</span>
+                      <span className="font-medium text-[var(--ink2)]">{env}</span>
                     </label>
                   ))}
                 </div>
@@ -198,13 +198,13 @@ export default function AdminFeatureFlags() {
               <button
                 onClick={() => saveFlag(editing)}
                 disabled={saving || !editing.key || !editing.label}
-                className="px-5 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-xl hover:bg-violet-700 disabled:opacity-50 transition-colors"
+                className="px-5 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
               >
                 {saving ? 'Saving...' : 'Save Flag'}
               </button>
               <button
                 onClick={() => setEditing(null)}
-                className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+                className="px-5 py-2.5 text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-xl transition-colors"
               >
                 Cancel
               </button>
@@ -214,36 +214,36 @@ export default function AdminFeatureFlags() {
       )}
 
       {/* Flag list */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+        <table className="min-w-full divide-y divide-[var(--line)]">
+          <thead className="bg-[var(--paper2)]">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Flag</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rollout</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Environments</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Updated</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Flag</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Rollout</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Status</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Environments</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Updated</th>
               <th className="px-6 py-3"></th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-[var(--line)]">
             {flags.map(flag => (
-              <tr key={flag.id} className="hover:bg-gray-50">
+              <tr key={flag.id} className="hover:bg-[var(--paper2)]">
                 <td className="px-6 py-4">
                   <div>
-                    <p className="text-sm font-mono font-semibold text-violet-600">{flag.key}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{flag.label}</p>
+                    <p className="text-sm font-mono font-semibold text-[var(--ink)]">{flag.key}</p>
+                    <p className="text-xs text-[var(--muted)] mt-0.5">{flag.label}</p>
                   </div>
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-2">
-                    <div className="w-24 bg-gray-100 rounded-full h-1.5">
+                    <div className="w-24 bg-[var(--paper2)] rounded-full h-1.5">
                       <div
-                        className={`h-1.5 rounded-full ${flag.rollout === 100 ? 'bg-emerald-500' : 'bg-violet-500'}`}
+                        className={`h-1.5 rounded-full ${flag.rollout === 100 ? 'bg-emerald-500' : 'bg-[var(--ink2)]'}`}
                         style={{ width: `${flag.rollout}%` }}
                       />
                     </div>
-                    <span className="text-xs text-gray-600 font-medium">{flag.rollout}%</span>
+                    <span className="text-xs text-[var(--ink2)] font-medium">{flag.rollout}%</span>
                   </div>
                 </td>
                 <td className="px-6 py-4">
@@ -252,7 +252,7 @@ export default function AdminFeatureFlags() {
                     className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                       flag.enabled
                         ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'
-                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                        : 'bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)]'
                     }`}
                   >
                     {flag.enabled ? 'Enabled' : 'Disabled'}
@@ -261,15 +261,15 @@ export default function AdminFeatureFlags() {
                 <td className="px-6 py-4">
                   <div className="flex gap-1">
                     {flag.environments.map(e => (
-                      <span key={e} className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-md">{e}</span>
+                      <span key={e} className="px-2 py-0.5 bg-[var(--paper2)] text-[var(--ink2)] text-xs rounded-md">{e}</span>
                     ))}
                   </div>
                 </td>
-                <td className="px-6 py-4 text-xs text-gray-500">{new Date(flag.updatedAt).toLocaleDateString()}</td>
+                <td className="px-6 py-4 text-xs text-[var(--muted)]">{new Date(flag.updatedAt).toLocaleDateString()}</td>
                 <td className="px-6 py-4 text-right">
                   <button
                     onClick={() => setEditing(flag)}
-                    className="text-xs font-medium text-violet-600 hover:text-violet-700"
+                    className="text-xs font-medium text-[var(--ink)] hover:text-[var(--ink)]"
                   >
                     Edit
                   </button>
@@ -277,7 +277,7 @@ export default function AdminFeatureFlags() {
               </tr>
             ))}
             {flags.length === 0 && (
-              <tr><td colSpan={6} className="px-6 py-12 text-center text-gray-500">No feature flags configured</td></tr>
+              <tr><td colSpan={6} className="px-6 py-12 text-center text-[var(--muted)]">No feature flags configured</td></tr>
             )}
           </tbody>
         </table>

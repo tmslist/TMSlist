@@ -93,29 +93,29 @@ const defaultFaqSchema = JSON.stringify({
 ---
 
 <!-- SEO Content Section -->
-<section class="mt-16 pt-12 border-t border-slate-100">
+<section class="mt-16 pt-12 border-t border-[var(--line)]">
   <div class="max-w-4xl mx-auto">
     <!-- Section Header -->
     <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1B4B5A]50 border border-[#1B4B5A]100 rounded-full mb-4">
-        <svg class="w-3.5 h-3.5 text-[#2E7A8F]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        <span class="text-xs font-semibold text-[#143844] tracking-wide">Your Complete Guide</span>
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-[rgba(10,22,40,0.10)] border border-[rgba(10,22,40,0.15)] rounded-full mb-4">
+        <svg class="w-3.5 h-3.5 text-[var(--accent2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="text-xs font-semibold text-[var(--ink)] tracking-wide">Your Complete Guide</span>
       </div>
-      <h2 class="text-3xl font-bold text-slate-900 mb-3">
+      <h2 class="text-3xl font-bold text-[var(--ink)] mb-3">
         {type === 'city' ? 'TMS Therapy in ' : type === 'country' || type === 'region' ? 'TMS Therapy in ' : ''}{locationName}{type === 'state' ? ', United States' : ''} - Everything You Need to Know
       </h2>
-      <p class="text-slate-500 max-w-2xl mx-auto">
+      <p class="text-[var(--muted)] max-w-2xl mx-auto">
         From how TMS works to insurance coverage, costs, and what to expect - here's a comprehensive guide to finding TMS therapy in {locationName}.
       </p>
     </div>
 
     <!-- What is TMS -->
-    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 mb-8">
-      <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-        <span class="w-8 h-8 rounded-lg bg-[#1B4B5A]100 text-[#1B4B5A] flex items-center justify-center text-sm font-bold shrink-0">1</span>
+    <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm p-8 mb-8">
+      <h3 class="text-xl font-bold text-[var(--ink)] mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.15)] text-[var(--accent)] flex items-center justify-center text-sm font-bold shrink-0">1</span>
         What Is TMS Therapy?
       </h3>
-      <div class="text-slate-600 leading-relaxed space-y-4">
+      <div class="text-[var(--ink2)] leading-relaxed space-y-4">
         <p>
           Transcranial Magnetic Stimulation (TMS) is a non-invasive, FDA/NICE/Health Canada/TGA-cleared treatment that uses focused magnetic pulses to stimulate underactive regions of the brain linked to depression and other mental health conditions. Unlike electroconvulsive therapy (ECT), TMS requires no anaesthesia, no surgery, and causes no memory impairment.
         </p>
@@ -123,13 +123,13 @@ const defaultFaqSchema = JSON.stringify({
           In {locationName}{stateName ? `, ${stateName}` : ''}, there {clinicCount === 1 ? 'is' : 'are'} <strong>{clinicCount} verified TMS {clinicCount === 1 ? 'clinic' : 'clinics'}</strong> offering this treatment. A full course typically consists of 20-40 sessions, delivered 5 days a week over 6-8 weeks. Each session lasts approximately 20-40 minutes, and patients typically resume normal activities immediately afterward.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-          <div class="bg-[#1B4B5A]50 rounded-xl p-4 text-center">
-            <div class="text-2xl font-bold text-[#143844]">20-40 min</div>
-            <div class="text-xs text-[#1B4B5A] mt-1 font-medium">Per Session</div>
+          <div class="bg-[rgba(10,22,40,0.10)] rounded-xl p-4 text-center">
+            <div class="text-2xl font-bold text-[var(--ink)]">20-40 min</div>
+            <div class="text-xs text-[var(--accent)] mt-1 font-medium">Per Session</div>
           </div>
-          <div class="bg-blue-50 rounded-xl p-4 text-center">
-            <div class="text-2xl font-bold text-blue-700">50-60%</div>
-            <div class="text-xs text-blue-600 mt-1 font-medium">Response Rate</div>
+          <div class="bg-[var(--paper2)] rounded-xl p-4 text-center">
+            <div class="text-2xl font-bold text-[var(--accent)]">50-60%</div>
+            <div class="text-xs text-[var(--accent)] mt-1 font-medium">Response Rate</div>
           </div>
           <div class="bg-emerald-50 rounded-xl p-4 text-center">
             <div class="text-2xl font-bold text-emerald-700">No Surgery</div>
@@ -140,12 +140,12 @@ const defaultFaqSchema = JSON.stringify({
     </div>
 
     <!-- Conditions Treated -->
-    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 mb-8">
-      <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-        <span class="w-8 h-8 rounded-lg bg-[#1B4B5A]100 text-[#1B4B5A] flex items-center justify-center text-sm font-bold shrink-0">2</span>
+    <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm p-8 mb-8">
+      <h3 class="text-xl font-bold text-[var(--ink)] mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.15)] text-[var(--accent)] flex items-center justify-center text-sm font-bold shrink-0">2</span>
         Conditions Treated with TMS
       </h3>
-      <p class="text-slate-600 mb-6">
+      <p class="text-[var(--ink2)] mb-6">
         TMS is primarily used for treatment-resistant depression but has expanding clinical applications. In {locationName}{stateName ? `, ${stateName}` : ''}, clinics offer TMS for:
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -157,13 +157,13 @@ const defaultFaqSchema = JSON.stringify({
           { name: 'Smoking Cessation', desc: 'FDA-cleared TMS target; reduces nicotine cravings' },
           { name: 'Migraines & Chronic Pain', desc: 'Emerging TMS applications with growing evidence base' },
         ].map((condition) => (
-          <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-xl">
+          <div class="flex items-start gap-3 p-4 bg-[var(--paper2)] rounded-xl">
             <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
             </div>
             <div>
-              <div class="font-semibold text-slate-800 text-sm">{condition.name}</div>
-              <div class="text-xs text-slate-500 mt-0.5">{condition.desc}</div>
+              <div class="font-semibold text-[var(--ink)] text-sm">{condition.name}</div>
+              <div class="text-xs text-[var(--muted)] mt-0.5">{condition.desc}</div>
             </div>
           </div>
         ))}
@@ -171,12 +171,12 @@ const defaultFaqSchema = JSON.stringify({
     </div>
 
     <!-- Insurance & Cost -->
-    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 mb-8">
-      <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-        <span class="w-8 h-8 rounded-lg bg-[#1B4B5A]100 text-[#1B4B5A] flex items-center justify-center text-sm font-bold shrink-0">3</span>
+    <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm p-8 mb-8">
+      <h3 class="text-xl font-bold text-[var(--ink)] mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.15)] text-[var(--accent)] flex items-center justify-center text-sm font-bold shrink-0">3</span>
         Insurance Coverage & Cost in {locationName}
       </h3>
-      <p class="text-slate-600 mb-6">
+      <p class="text-[var(--ink2)] mb-6">
         {treatmentMention}. <strong>{insurancePlans}</strong> typically cover TMS when pre-authorised and when standard medication and psychotherapy have not provided adequate relief.
       </p>
       <div class="space-y-4">
@@ -185,8 +185,8 @@ const defaultFaqSchema = JSON.stringify({
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
           </div>
           <div>
-            <div class="font-semibold text-slate-800">Covered by Insurance</div>
-            <div class="text-sm text-slate-600 mt-1">Most {isUS ? 'U.S.' : isUK ? 'UK' : isCA ? 'Canadian' : 'Australian'} insurance plans cover TMS with prior authorisation. Most patients pay a $30-$75 copay per session.</div>
+            <div class="font-semibold text-[var(--ink)]">Covered by Insurance</div>
+            <div class="text-sm text-[var(--ink2)] mt-1">Most {isUS ? 'U.S.' : isUK ? 'UK' : isCA ? 'Canadian' : 'Australian'} insurance plans cover TMS with prior authorisation. Most patients pay a $30-$75 copay per session.</div>
           </div>
         </div>
         <div class="flex items-start gap-4 p-4 bg-amber-50 rounded-xl">
@@ -194,13 +194,13 @@ const defaultFaqSchema = JSON.stringify({
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </div>
           <div>
-            <div class="font-semibold text-slate-800">Self-Pay / No Insurance</div>
-            <div class="text-sm text-slate-600 mt-1">Without insurance, TMS costs approximately {sessionCost}. Many clinics offer payment plans to make treatment more affordable.</div>
+            <div class="font-semibold text-[var(--ink)]">Self-Pay / No Insurance</div>
+            <div class="text-sm text-[var(--ink2)] mt-1">Without insurance, TMS costs approximately {sessionCost}. Many clinics offer payment plans to make treatment more affordable.</div>
           </div>
         </div>
       </div>
       <div class="mt-6">
-        <a href="/quiz/am-i-a-candidate/" class="inline-flex items-center gap-2 px-5 py-3 bg-[#143844] text-white text-sm font-semibold rounded-xl hover:bg-[#143844] transition-colors">
+        <a href="/quiz/am-i-a-candidate/" class="inline-flex items-center gap-2 px-5 py-3 bg-[var(--ink2)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
           Check Your Insurance Eligibility
         </a>
@@ -208,12 +208,12 @@ const defaultFaqSchema = JSON.stringify({
     </div>
 
     <!-- TMS Technologies -->
-    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 mb-8">
-      <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-        <span class="w-8 h-8 rounded-lg bg-[#1B4B5A]100 text-[#1B4B5A] flex items-center justify-center text-sm font-bold shrink-0">4</span>
+    <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm p-8 mb-8">
+      <h3 class="text-xl font-bold text-[var(--ink)] mb-4 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.15)] text-[var(--accent)] flex items-center justify-center text-sm font-bold shrink-0">4</span>
         TMS Technologies Available in {locationName}
       </h3>
-      <p class="text-slate-600 mb-6">
+      <p class="text-[var(--ink2)] mb-6">
         The three main TMS devices are FDA/NICE/Health Canada/TGA-cleared and available at clinics in {locationName}. Each uses a different coil design and stimulation protocol:
       </p>
       <div class="space-y-4">
@@ -222,17 +222,17 @@ const defaultFaqSchema = JSON.stringify({
           { name: 'BrainsWay Deep TMS', type: 'H-Coil Deep TMS System', desc: 'Uses an H-shaped coil that penetrates deeper and broader brain regions. Cleared for depression and OCD. May be effective for patients who did not respond to standard rTMS.' },
           { name: 'MagVenture', type: 'Focal TMS with Theta Burst Stimulation (TBS)', desc: 'Offers both standard and accelerated Theta Burst protocols. TBS can reduce session time to 3-6 minutes with comparable efficacy to standard 37.5-minute sessions.' },
         ].map((tech) => (
-          <div class="border border-slate-100 rounded-xl p-5">
+          <div class="border border-[var(--line)] rounded-xl p-5">
             <div class="flex items-start justify-between gap-3 mb-2">
-              <h4 class="font-bold text-slate-900">{tech.name}</h4>
-              <span class="text-xs font-medium text-[#1B4B5A] bg-[#1B4B5A]50 px-2.5 py-1 rounded-lg shrink-0">{tech.type}</span>
+              <h4 class="font-bold text-[var(--ink)]">{tech.name}</h4>
+              <span class="text-xs font-medium text-[var(--accent)] bg-[rgba(10,22,40,0.10)] px-2.5 py-1 rounded-lg shrink-0">{tech.type}</span>
             </div>
-            <p class="text-sm text-slate-500 leading-relaxed">{tech.desc}</p>
+            <p class="text-sm text-[var(--muted)] leading-relaxed">{tech.desc}</p>
           </div>
         ))}
       </div>
-      <div class="mt-6 text-sm text-slate-500">
-        <a href="/technology/" class="text-[#1B4B5A] hover:underline font-medium">Compare TMS devices in detail -></a>
+      <div class="mt-6 text-sm text-[var(--muted)]">
+        <a href="/technology/" class="text-[var(--accent)] hover:underline font-medium">Compare TMS devices in detail -></a>
       </div>
     </div>
 
@@ -241,19 +241,19 @@ const defaultFaqSchema = JSON.stringify({
     {!faqPageSchema && <script type="application/ld+json" set:html={defaultFaqSchema} />}
 
     <!-- FAQ Section -->
-    <div class="bg-gradient-to-br from-slate-50 to-violet-50/30 rounded-2xl border border-slate-100 p-8 mb-8">
-      <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-        <svg class="w-6 h-6 text-[#2E7A8F]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-8 mb-8">
+      <h3 class="text-xl font-bold text-[var(--ink)] mb-6 flex items-center gap-3">
+        <svg class="w-6 h-6 text-[var(--accent2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         Frequently Asked Questions About TMS in {locationName}
       </h3>
       <div class="space-y-4" id="faq-list">
         {faqs.map((faq, i) => (
-          <details class="faq-item group bg-white rounded-xl border border-slate-100 overflow-hidden" id={`faq-${i}`}>
-            <summary class="flex items-center justify-between gap-4 p-5 cursor-pointer list-none font-semibold text-slate-800 hover:text-[#143844] transition-colors">
+          <details class="faq-item group bg-[var(--paper)] rounded-xl border border-[var(--line)] overflow-hidden" id={`faq-${i}`}>
+            <summary class="flex items-center justify-between gap-4 p-5 cursor-pointer list-none font-semibold text-[var(--ink)] hover:text-[var(--ink)] transition-colors">
               <span class="text-sm">{faq.q}</span>
-              <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              <svg class="w-5 h-5 text-[var(--muted)] group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </summary>
-            <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-50 pt-4">
+            <div class="px-5 pb-5 text-sm text-[var(--ink2)] leading-relaxed border-t border-[var(--line)] pt-4">
               {faq.a}
             </div>
           </details>
@@ -262,8 +262,8 @@ const defaultFaqSchema = JSON.stringify({
     </div>
 
     <!-- Related Resources -->
-    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
-      <h3 class="text-xl font-bold text-slate-900 mb-6">Related Resources</h3>
+    <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm p-8">
+      <h3 class="text-xl font-bold text-[var(--ink)] mb-6">Related Resources</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {[
           { title: 'Conditions Treated with TMS', desc: 'Depression, anxiety, OCD, PTSD and more', href: '/treatments/', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
@@ -273,13 +273,13 @@ const defaultFaqSchema = JSON.stringify({
           { title: 'TMS Cost Guide', desc: 'Session costs, insurance copays, and self-pay options', href: '/tms-cost-guide/', icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
           { title: 'Am I a Candidate?', desc: 'Take our 2-minute quiz to find out', href: '/quiz/am-i-a-candidate/', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2' },
         ].map((resource) => (
-          <a href={resource.href} class="group flex items-start gap-4 p-4 rounded-xl border border-slate-100 hover:border-teal-200 hover:bg-[#1B4B5A]50/30 transition-all">
-            <div class="w-10 h-10 rounded-lg bg-[#1B4B5A]50 group-hover:bg-[#1B4B5A]100 flex items-center justify-center shrink-0 transition-colors">
-              <svg class="w-5 h-5 text-[#2E7A8F]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={resource.icon}/></svg>
+          <a href={resource.href} class="group flex items-start gap-4 p-4 rounded-xl border border-[var(--line)] hover:border-teal-200 hover:bg-[rgba(10,22,40,0.10)]/30 transition-all">
+            <div class="w-10 h-10 rounded-lg bg-[rgba(10,22,40,0.10)] group-hover:bg-[rgba(10,22,40,0.15)] flex items-center justify-center shrink-0 transition-colors">
+              <svg class="w-5 h-5 text-[var(--accent2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={resource.icon}/></svg>
             </div>
             <div>
-              <div class="font-semibold text-slate-800 text-sm group-hover:text-[#143844] transition-colors">{resource.title}</div>
-              <div class="text-xs text-slate-500 mt-0.5">{resource.desc}</div>
+              <div class="font-semibold text-[var(--ink)] text-sm group-hover:text-[var(--ink)] transition-colors">{resource.title}</div>
+              <div class="text-xs text-[var(--muted)] mt-0.5">{resource.desc}</div>
             </div>
           </a>
         ))}

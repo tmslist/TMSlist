@@ -1,0 +1,78 @@
+---
+// Interactive US discovery map with city pins
+import { cities, mapCities } from '../data/mapData';
+---
+
+<section class="py-32 paper2 border-y" style="border-color: var(--line); background: var(--paper2);">
+  <div class="max-w-[1400px] mx-auto px-8">
+    <!-- Header -->
+    <div class="grid lg:grid-cols-2 gap-16 mb-14 items-end">
+      <div>
+        <div class="flex items-center gap-3 mb-6" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted);">
+          <span style="display: inline-block; width: 24px; height: 1px; background: rgba(10,22,40,0.3); vertical-align: middle;"></span>
+          <span>The atlas</span>
+        </div>
+        <h2 class="serif" style="font-size: clamp(2rem, 4.5vw, 4.5rem); line-height: 0.95; color: var(--ink);">
+          1,147 clinics.<br/>
+          <em>Mapped.</em>
+        </h2>
+      </div>
+      <p style="font-size: 16px; color: var(--muted); line-height: 1.6; max-width: 28rem;">
+        Click a city to explore verified TMS providers, filtered by your insurance and preferred protocol. Or drop a pin for travel-based care.
+      </p>
+    </div>
+
+    <!-- Map card -->
+    <div class="bg-white border rounded-2xl p-6 relative" style="border-color: var(--line);">
+      <!-- SVG Map -->
+      <div class="relative rounded-xl overflow-hidden" style="background: radial-gradient(ellipse at center, var(--paper2) 0%, var(--paper) 70%);">
+        <svg viewBox="0 0 100 56" class="w-full" preserveAspectRatio="xMidYMid meet">
+          <!-- Grid lines -->
+          {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((x) => (
+            <line key={`v${x}`} x1={x} y1="0" x2={x} y2="56" stroke="rgba(10,22,40,0.04)" stroke-width="0.1" />
+          ))}
+          {[10, 20, 30, 40, 50].map((y) => (
+            <line key={`h${y}`} x1="0" y1={y * 10} x2="100" y2={y * 10} stroke="rgba(10,22,40,0.04)" stroke-width="0.1" />
+          ))}
+          <!-- Stylized US outline -->
+          <path d="M 10,20 Q 8,15 14,12 L 20,8 Q 35,6 50,8 L 70,6 Q 85,8 92,14 L 94,22 Q 96,35 92,45 L 85,52 Q 70,54 55,52 L 40,54 Q 25,54 15,48 L 8,38 Q 6,28 10,20 Z" fill="rgba(10,22,40,0.03)" stroke="rgba(10,22,40,0.15)" stroke-width="0.2" stroke-dasharray="0.5 0.5"/>
+          <!-- City pins -->
+          {mapCities.map((city) => {
+            const size = Math.sqrt(city.count || 20) * 0.4;
+            return (
+              <g style="cursor: pointer;">
+                <circle cx={city.x} cy={city.y} r={size + 2} fill="rgba(10,22,40,0.15)"/>
+                <circle cx={city.x} cy={city.y} r={size} fill="var(--accent)"/>
+              </g>
+            );
+          })}
+        </svg>
+        <!-- Compass -->
+        <div style="position: absolute; top: 16px; right: 16px; width: 3.5rem; height: 3.5rem; border-radius: 9999px; border: 1px solid var(--line); background: white; display: flex; align-items: center; justify-content: center; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink); font-weight: 500;">
+          N
+        </div>
+      </div>
+
+      <!-- City grid -->
+      <div class="mt-6 grid grid-cols-2 md:grid-cols-5 gap-px border rounded-xl overflow-hidden" style="border-color: var(--line);">
+        {cities.map((city, i) => (
+          <a
+            href={`/search?city=${encodeURIComponent(city.name)}`}
+            class="city-btn px-4 py-4 text-left transition-colors"
+            style="background: white;"
+          >
+            <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 0.25rem;">
+              {String(i + 1).padStart(2, '0')}
+            </div>
+            <div style="font-size: 13px; font-weight: 500; color: var(--ink);">{city.name}</div>
+            <div style="font-size: 11px; color: var(--muted); margin-top: 0.125rem;">{city.count} clinics</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.02em; }
+</style>

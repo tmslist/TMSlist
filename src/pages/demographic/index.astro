@@ -1,5 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
+import EditorialSection from '../../components/editorial/EditorialSection.astro';
+import EditorialCard from '../../components/editorial/EditorialCard.astro';
+import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
 import { DEMOGRAPHIC_SLUGS } from '../../utils/seo_slugs';
 
 const title = "TMS for Different Patient Groups | Seniors, Veterans, Teens & More";
@@ -7,42 +11,51 @@ const description = "Find TMS treatment information tailored to your specific ne
 ---
 
 <Layout title={title} description={description}>
-    <main class="min-h-screen">
-        <!-- Hero -->
-        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                    <span class="text-slate-300">/</span>
-                    <span class="text-slate-700 font-medium">Patient Groups</span>
-                </nav>
 
-                <div class="max-w-3xl">
-                    <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-                        TMS for <span class="text-violet-600">Different Patients</span>
-                    </h1>
-                    <p class="text-lg text-slate-500 leading-relaxed">
-                        TMS therapy can be tailored for various patient groups. Find information specific to your needs.
-                    </p>
-                </div>
-            </div>
-        </section>
+<main style="background:var(--paper)">
+  <EditorialHero
+    eyebrow={`${DEMOGRAPHIC_SLUGS.length} Patient Group Guides`}
+    eyebrowDot="#C9654A"
+    title="TMS care, tailored"
+    titleAccent="for who you are."
+    description="Treatment considerations vary by age, health history, and life stage. Find guidance specific to your group."
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Patient Groups" }]}
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "Find a TMS Clinic", href: "/us/", variant: "outline" },
+    ]}
+  />
 
-        <!-- Grid -->
-        <section class="py-16">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {DEMOGRAPHIC_SLUGS.map(item => (
-                        <a href={`/demographic/${item.slug}/`} class="group bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:border-amber-200 transition-all">
-                            <h3 class="text-xl font-semibold text-gray-900 group-hover:text-amber-600 mb-3">{item.title}</h3>
-                            <p class="text-gray-500 text-sm mb-4">Specialized TMS information</p>
-                            <span class="text-amber-600 font-semibold text-sm">Learn More →</span>
-                        </a>
-                    ))}
-                </div>
-            </div>
-        </section>
-    </main>
+  <EditorialSection
+    title="Patient Groups"
+    intro="Tailored TMS guides covering protocols, safety, and considerations for each population."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>'
+    tone="warm"
+    noBorder
+  >
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {DEMOGRAPHIC_SLUGS.map((item) => (
+        <EditorialCard
+          href={`/demographic/${item.slug}/`}
+          tag="Patient Group"
+          tagTone="warm"
+          title={item.title.replace(/^TMS for /, '')}
+          description="Specialized TMS information, protocols, and considerations for this group."
+          size="lg"
+        />
+      ))}
+    </div>
+  </EditorialSection>
+
+  <EditorialCTA
+    title="Get personalized guidance."
+    description="Take our short assessment to see if TMS therapy is right for your specific situation."
+    ctas={[
+      { label: "Take the Assessment", href: "/quiz/am-i-a-candidate/" },
+      { label: "Find a Specialist", href: "/specialists/", variant: "outline" },
+    ]}
+    stickyMobile
+  />
+</main>
+
 </Layout>

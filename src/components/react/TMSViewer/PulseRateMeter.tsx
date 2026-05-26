@@ -46,8 +46,8 @@ export function PulseRateMeter() {
   const dashOffset = circumference * (1 - progress);
 
   return (
-    <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4">
-      <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-3">Pulse Rate</div>
+    <div className="bg-[var(--paper2)]/60 backdrop-blur-sm border border-[var(--line)]/50 rounded-2xl p-4">
+      <div className="text-[10px] font-semibold text-white/40 uppercase tracking-wider mb-3">Pulse Rate</div>
 
       <div className="flex items-center gap-3">
         {/* SVG gauge */}
@@ -57,7 +57,7 @@ export function PulseRateMeter() {
             <circle
               cx={cx} cy={cy} r={r}
               fill="none"
-              stroke="#1e293b"
+              stroke="#1E2A3B"
               strokeWidth="5"
             />
             {/* Tick marks */}
@@ -72,7 +72,7 @@ export function PulseRateMeter() {
                 <line
                   key={v}
                   x1={x1} y1={y1} x2={x2} y2={y2}
-                  stroke="#334155" strokeWidth="1.5" strokeLinecap="round"
+                  stroke="#1E2A3B" strokeWidth="1.5" strokeLinecap="round"
                 />
               );
             })}
@@ -89,10 +89,10 @@ export function PulseRateMeter() {
               style={{ transition: 'stroke-dashoffset 0.3s ease, stroke 0.3s ease' }}
             />
             {/* Center text */}
-            <text x={cx} y={cy - 3} textAnchor="middle" fill="#f8fafc" fontSize="14" fontWeight="bold" fontFamily="monospace">
+            <text x={cx} y={cy - 3} textAnchor="middle" fill="#FBFAF7" fontSize="14" fontWeight="bold" fontFamily="monospace">
               {displayRate.toFixed(1)}
             </text>
-            <text x={cx} y={cy + 10} textAnchor="middle" fill="#64748b" fontSize="7" fontFamily="sans-serif">
+            <text x={cx} y={cy + 10} textAnchor="middle" fill="#5A6B82" fontSize="7" fontFamily="sans-serif">
               Hz
             </text>
           </svg>
@@ -101,20 +101,20 @@ export function PulseRateMeter() {
         {/* Stats */}
         <div className="flex flex-col gap-2 flex-1">
           <div className="flex items-center justify-between">
-            <span className="text-[9px] text-slate-500 uppercase tracking-wider">Pulses/sec</span>
-            <span className={`text-[11px] font-mono font-bold ${state.isPlaying ? 'text-cyan-400' : 'text-slate-500'}`}>
+            <span className="text-[9px] text-white/40 uppercase tracking-wider">Pulses/sec</span>
+            <span className={`text-[11px] font-mono font-bold ${state.isPlaying ? 'text-[var(--warm)]' : 'text-white/40'}`}>
               {state.isPlaying ? '● LIVE' : '○ STOPPED'}
             </span>
           </div>
 
           {/* Min/max labels */}
-          <div className="flex justify-between text-[8px] text-slate-600">
+          <div className="flex justify-between text-[8px] text-white/40">
             <span>0 Hz</span>
             <span>50 Hz</span>
           </div>
 
           {/* Rate label */}
-          <div className={`text-[10px] font-semibold ${displayRate >= 30 ? 'text-red-400' : displayRate >= 10 ? 'text-amber-400' : 'text-cyan-400'}`}>
+          <div className={`text-[10px] font-semibold ${displayRate >= 30 ? 'text-red-400' : displayRate >= 10 ? 'text-[var(--warm)]' : 'text-[var(--warm)]'}`}>
             {displayRate >= 30 ? 'High frequency' : displayRate >= 10 ? 'Standard rTMS' : displayRate > 0 ? 'Low frequency' : 'Idle'}
           </div>
         </div>

@@ -72,7 +72,7 @@ export default function AdminDataQuality() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-4 border-violet-200 border-t-violet-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[rgba(10,22,40,0.15)] border-t-[#0A1628] rounded-full animate-spin" />
       </div>
     );
   }
@@ -98,18 +98,18 @@ export default function AdminDataQuality() {
       {/* Health Score + Summary */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className={`rounded-xl border p-6 ${scoreBg} flex flex-col items-center justify-center`}>
-          <p className="text-sm font-medium text-gray-500 mb-1">Health Score</p>
+          <p className="text-sm font-medium text-[var(--muted)] mb-1">Health Score</p>
           <p className={`text-5xl font-bold ${scoreColor}`}>{healthScore}%</p>
-          <p className="text-xs text-gray-500 mt-2">Based on {data.total} clinics</p>
+          <p className="text-xs text-[var(--muted)] mt-2">Based on {data.total} clinics</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Total Clinics</p>
-          <p className="text-3xl font-semibold text-gray-900 mt-2">{data.total.toLocaleString()}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Total Clinics</p>
+          <p className="text-3xl font-semibold text-[var(--ink)] mt-2">{data.total.toLocaleString()}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Verified</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Verified</p>
           <p className="text-3xl font-semibold text-emerald-600 mt-2">{data.verified.toLocaleString()}</p>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-xs text-[var(--muted)] mt-1">
             {data.total > 0 ? Math.round((data.verified / data.total) * 100) : 0}% of total
           </p>
         </div>
@@ -117,7 +117,7 @@ export default function AdminDataQuality() {
 
       {/* Issue Cards Grid */}
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Data Issues</h2>
+        <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Data Issues</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {issueEntries.map(([key, count]) => {
             const severity = getSeverity(count, data.total);
@@ -131,10 +131,10 @@ export default function AdminDataQuality() {
                   <span className={`text-2xl font-bold ${styles.text}`}>{count.toLocaleString()}</span>
                   <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${styles.badge}`}>{pct}%</span>
                 </div>
-                <p className="text-sm font-medium text-gray-700 mb-3">{meta.label}</p>
+                <p className="text-sm font-medium text-[var(--ink2)] mb-3">{meta.label}</p>
                 <a
                   href={meta.link}
-                  className="text-xs font-medium text-violet-600 hover:text-violet-800 transition-colors"
+                  className="text-xs font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors"
                 >
                   View &rarr;
                 </a>
@@ -149,7 +149,7 @@ export default function AdminDataQuality() {
         <div>
           <button
             onClick={() => setDupesExpanded(!dupesExpanded)}
-            className="flex items-center gap-2 text-lg font-semibold text-gray-900 mb-4 hover:text-violet-600 transition-colors"
+            className="flex items-center gap-2 text-lg font-semibold text-[var(--ink)] mb-4 hover:text-[var(--ink)] transition-colors"
           >
             <svg
               className={`w-5 h-5 transition-transform ${dupesExpanded ? 'rotate-90' : ''}`}
@@ -164,24 +164,24 @@ export default function AdminDataQuality() {
           </button>
 
           {dupesExpanded && (
-            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+            <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden shadow-sm">
+              <table className="min-w-full divide-y divide-[var(--line)]">
+                <thead className="bg-[var(--paper2)]">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Clinic Name</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Count</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Action</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Clinic Name</th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">Count</th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-[var(--line)]">
                   {data.duplicates.map((d, i) => (
-                    <tr key={i} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm text-gray-900">{d.name}</td>
-                      <td className="px-6 py-4 text-sm text-gray-600 text-right font-medium">{d.cnt}</td>
+                    <tr key={i} className="hover:bg-[var(--paper2)]">
+                      <td className="px-6 py-4 text-sm text-[var(--ink)]">{d.name}</td>
+                      <td className="px-6 py-4 text-sm text-[var(--ink2)] text-right font-medium">{d.cnt}</td>
                       <td className="px-6 py-4 text-right">
                         <a
                           href={`/admin/clinics?search=${encodeURIComponent(d.name)}`}
-                          className="text-xs font-medium text-violet-600 hover:text-violet-800"
+                          className="text-xs font-medium text-[var(--ink)] hover:text-[var(--ink)]"
                         >
                           View
                         </a>

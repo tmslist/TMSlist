@@ -42,19 +42,19 @@ const TABS: { key: TabKey; label: string }[] = [
 ];
 
 const TYPE_COLORS: Record<string, string> = {
-  specialist_enquiry: 'bg-indigo-100 text-indigo-700',
-  lead_magnet: 'bg-blue-100 text-blue-700',
-  newsletter: 'bg-cyan-100 text-cyan-700',
-  quiz_lead: 'bg-purple-100 text-purple-700',
+  specialist_enquiry: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
+  lead_magnet: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
+  newsletter: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
+  quiz_lead: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
   callback_request: 'bg-amber-100 text-amber-700',
   whatsapp_inquiry: 'bg-green-100 text-green-700',
-  appointment_request: 'bg-rose-100 text-rose-700',
-  contact: 'bg-gray-100 text-gray-700',
+  appointment_request: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
+  contact: 'bg-[var(--paper2)] text-[var(--ink2)]',
 };
 
 const STATUS_COLORS: Record<string, string> = {
-  new: 'bg-gray-100 text-gray-600',
-  contacted: 'bg-blue-100 text-blue-700',
+  new: 'bg-[var(--paper2)] text-[var(--ink2)]',
+  contacted: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
   converted: 'bg-emerald-100 text-emerald-700',
 };
 
@@ -281,13 +281,13 @@ export default function AdminLeads() {
       {/* Header row: title + actions */}
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Leads</h2>
-          <p className="text-sm text-gray-500 mt-0.5">{stats.total} total</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)]">Leads</h2>
+          <p className="text-sm text-[var(--muted)] mt-0.5">{stats.total} total</p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchLeads}
-            className="px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2"
+            className="px-3 py-2 bg-white border border-[var(--line)] rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] transition-colors flex items-center gap-2"
             title="Refresh"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -298,7 +298,7 @@ export default function AdminLeads() {
           <button
             onClick={exportCSV}
             disabled={leads.length === 0}
-            className="px-3 py-2 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-colors flex items-center gap-2 disabled:opacity-50"
+            className="px-3 py-2 bg-[var(--ink2)] text-white rounded-lg text-sm font-semibold hover:bg-[var(--ink2)] transition-colors flex items-center gap-2 disabled:opacity-50"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -310,8 +310,8 @@ export default function AdminLeads() {
 
       {/* Bulk actions bar */}
       {selectedIds.size > 0 && (
-        <div className="bg-indigo-50 border border-indigo-200 rounded-lg px-4 py-3 flex items-center justify-between">
-          <span className="text-sm font-medium text-indigo-800">{selectedIds.size} selected</span>
+        <div className="bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-lg px-4 py-3 flex items-center justify-between">
+          <span className="text-sm font-medium text-[var(--warm)]">{selectedIds.size} selected</span>
           <button
             onClick={handleBulkDelete}
             disabled={deleting}
@@ -332,15 +332,15 @@ export default function AdminLeads() {
               onClick={() => { setTab(t.key); setPage(0); }}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors shrink-0 ${
                 tab === t.key
-                  ? 'bg-gray-900 text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-[var(--ink)] text-white'
+                  : 'text-[var(--ink2)] hover:bg-[var(--paper2)]'
               }`}
             >
               {t.label}
               {stats[t.key] > 0 && (
                 <span
                   className={`ml-1.5 text-xs ${
-                    tab === t.key ? 'text-gray-300' : 'text-gray-400'
+                    tab === t.key ? 'text-[var(--line)]' : 'text-[var(--muted)]'
                   }`}
                 >
                   {stats[t.key]}
@@ -353,7 +353,7 @@ export default function AdminLeads() {
         {/* Search bar */}
         <div className="relative">
           <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -365,45 +365,45 @@ export default function AdminLeads() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by email, name, message, or clinic..."
-            className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200"
+            className="w-full pl-9 pr-4 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[rgba(201,101,74,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.2)]"
           />
         </div>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm border border-[var(--line)] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
+              <tr className="bg-[var(--paper2)] border-b border-[var(--line)]">
                 <th className="px-4 py-3 w-10">
                   <input
                     type="checkbox"
                     checked={selectedIds.size === filteredLeads.length && filteredLeads.length > 0}
                     onChange={toggleSelectAll}
-                    className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    className="rounded border-[var(--line)] text-[var(--warm)] focus:ring-[rgba(10,22,40,0.2)]"
                   />
                 </th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Type</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Contact</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Clinic / Doctor</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Date</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider w-10"></th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Type</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Contact</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Clinic / Doctor</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Date</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Status</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase tracking-wider w-10"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[var(--line)]">
               {loading ? (
                 <tr>
-                  <td colSpan={7} className="px-4 py-12 text-center text-gray-400">
-                    <div className="inline-block w-5 h-5 border-2 border-gray-300 border-t-indigo-600 rounded-full animate-spin mb-2"></div>
+                  <td colSpan={7} className="px-4 py-12 text-center text-[var(--muted)]">
+                    <div className="inline-block w-5 h-5 border-2 border-[var(--line)] border-t-indigo-600 rounded-full animate-spin mb-2"></div>
                     <br />
                     Loading...
                   </td>
                 </tr>
               ) : filteredLeads.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-4 py-10 text-center text-gray-500 text-sm">
+                  <td colSpan={7} className="px-4 py-10 text-center text-[var(--muted)] text-sm">
                     {searchQuery ? 'No leads match your search.' : 'No leads found.'}
                   </td>
                 </tr>
@@ -420,7 +420,7 @@ export default function AdminLeads() {
                     <>
                       <tr
                         key={lead.id}
-                        className={`hover:bg-gray-50 transition-colors cursor-pointer ${isExpanded ? 'bg-indigo-50' : ''}`}
+                        className={`hover:bg-[var(--paper2)] transition-colors cursor-pointer ${isExpanded ? 'bg-[rgba(201,101,74,0.06)]' : ''}`}
                         onClick={() => setExpandedId(isExpanded ? null : lead.id)}
                       >
                         {/* Checkbox */}
@@ -429,39 +429,39 @@ export default function AdminLeads() {
                             type="checkbox"
                             checked={selectedIds.has(lead.id)}
                             onChange={() => toggleSelect(lead.id)}
-                            className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            className="rounded border-[var(--line)] text-[var(--warm)] focus:ring-[rgba(10,22,40,0.2)]"
                           />
                         </td>
                         {/* Type badge */}
                         <td className="px-4 py-3 whitespace-nowrap">
-                          <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${TYPE_COLORS[lead.type] || 'bg-gray-100 text-gray-700'}`}>
+                          <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${TYPE_COLORS[lead.type] || 'bg-[var(--paper2)] text-[var(--ink2)]'}`}>
                             {formatType(lead.type)}
                           </span>
                         </td>
                         {/* Contact */}
                         <td className="px-4 py-3">
-                          <div className="text-sm font-semibold text-gray-900">{lead.name || '--'}</div>
-                          <div className="text-xs text-gray-500">{lead.email || 'No email'}</div>
-                          {lead.phone && <div className="text-xs text-gray-400 mt-0.5">{lead.phone}</div>}
+                          <div className="text-sm font-semibold text-[var(--ink)]">{lead.name || '--'}</div>
+                          <div className="text-xs text-[var(--muted)]">{lead.email || 'No email'}</div>
+                          {lead.phone && <div className="text-xs text-[var(--muted)] mt-0.5">{lead.phone}</div>}
                         </td>
                         {/* Clinic / Doctor */}
                         <td className="px-4 py-3">
                           {lead.clinicName ? (
-                            <div className="text-sm text-gray-800 font-medium">{lead.clinicName}</div>
+                            <div className="text-sm text-[var(--ink)] font-medium">{lead.clinicName}</div>
                           ) : (
-                            <span className="text-gray-400 text-sm">--</span>
+                            <span className="text-[var(--muted)] text-sm">--</span>
                           )}
                           {lead.doctorName && (
-                            <div className="text-xs text-gray-500 mt-0.5">{lead.doctorName}</div>
+                            <div className="text-xs text-[var(--muted)] mt-0.5">{lead.doctorName}</div>
                           )}
                           {lead.message && (
-                            <p className="text-xs text-gray-400 mt-1 line-clamp-1">{lead.message}</p>
+                            <p className="text-xs text-[var(--muted)] mt-1 line-clamp-1">{lead.message}</p>
                           )}
                         </td>
                         {/* Date */}
                         <td className="px-4 py-3 whitespace-nowrap">
-                          <div className="text-sm text-gray-700">{date}</div>
-                          <div className="text-xs text-gray-400">{time}</div>
+                          <div className="text-sm text-[var(--ink2)]">{date}</div>
+                          <div className="text-xs text-[var(--muted)]">{time}</div>
                         </td>
                         {/* Status */}
                         <td className="px-4 py-3 whitespace-nowrap">
@@ -472,7 +472,7 @@ export default function AdminLeads() {
                         {/* Expand toggle */}
                         <td className="px-4 py-3 text-center">
                           <svg
-                            className={`w-4 h-4 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                            className={`w-4 h-4 text-[var(--muted)] transition-transform ${isExpanded ? 'rotate-180' : ''}`}
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -485,13 +485,13 @@ export default function AdminLeads() {
                       {/* Expanded details row */}
                       {isExpanded && (
                         <tr key={`${lead.id}-expanded`}>
-                          <td colSpan={7} className="px-4 py-5 bg-indigo-50/60">
+                          <td colSpan={7} className="px-4 py-5 bg-[rgba(201,101,74,0.60)]">
                             <div className="space-y-4">
                               {/* Message */}
                               {lead.message && (
                                 <div>
-                                  <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Message</h4>
-                                  <p className="text-sm text-gray-700 bg-white border border-gray-200 rounded-lg px-4 py-3">{lead.message}</p>
+                                  <h4 className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-1">Message</h4>
+                                  <p className="text-sm text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg px-4 py-3">{lead.message}</p>
                                 </div>
                               )}
 
@@ -499,26 +499,26 @@ export default function AdminLeads() {
                               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                                 {contactPref && (
                                   <div>
-                                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Contact Preference</h4>
-                                    <p className="text-sm text-gray-700">{contactPref}</p>
+                                    <h4 className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-1">Contact Preference</h4>
+                                    <p className="text-sm text-[var(--ink2)]">{contactPref}</p>
                                   </div>
                                 )}
                                 {referral && (
                                   <div>
-                                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Referral Source</h4>
-                                    <p className="text-sm text-gray-700">{referral}</p>
+                                    <h4 className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-1">Referral Source</h4>
+                                    <p className="text-sm text-[var(--ink2)]">{referral}</p>
                                   </div>
                                 )}
                                 {lead.sourceUrl && (
                                   <div>
-                                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Source URL</h4>
-                                    <p className="text-xs text-gray-600 truncate" title={lead.sourceUrl}>{formatSource(lead.sourceUrl)}</p>
+                                    <h4 className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-1">Source URL</h4>
+                                    <p className="text-xs text-[var(--ink2)] truncate" title={lead.sourceUrl}>{formatSource(lead.sourceUrl)}</p>
                                   </div>
                                 )}
                                 {lead.clinicId && (
                                   <div>
-                                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Clinic ID</h4>
-                                    <p className="text-xs text-gray-500 font-mono">{lead.clinicId.slice(0, 18)}...</p>
+                                    <h4 className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-1">Clinic ID</h4>
+                                    <p className="text-xs text-[var(--muted)] font-mono">{lead.clinicId.slice(0, 18)}...</p>
                                   </div>
                                 )}
                               </div>
@@ -526,11 +526,11 @@ export default function AdminLeads() {
                               {/* UTM params */}
                               {utmParams && (
                                 <div>
-                                  <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">UTM Parameters</h4>
+                                  <h4 className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-2">UTM Parameters</h4>
                                   <div className="flex flex-wrap gap-2">
                                     {Object.entries(utmParams).map(([k, v]) => (
-                                      <span key={k} className="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-mono text-gray-600">
-                                        {k}: <span className="text-gray-900">{v}</span>
+                                      <span key={k} className="px-2 py-1 bg-white border border-[var(--line)] rounded text-xs font-mono text-[var(--ink2)]">
+                                        {k}: <span className="text-[var(--ink)]">{v}</span>
                                       </span>
                                     ))}
                                   </div>
@@ -539,7 +539,7 @@ export default function AdminLeads() {
 
                               {/* Actions row */}
                               <div className="flex items-center gap-3 pt-1">
-                                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide mr-2">Status:</span>
+                                <span className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mr-2">Status:</span>
                                 {['new', 'contacted', 'converted'].map((s) => (
                                   <button
                                     key={s}
@@ -550,8 +550,8 @@ export default function AdminLeads() {
                                     disabled={updating === lead.id}
                                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                                       status === s
-                                        ? 'bg-indigo-600 text-white'
-                                        : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'
+                                        ? 'bg-[var(--ink2)] text-white'
+                                        : 'bg-white border border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
                                     } disabled:opacity-50`}
                                   >
                                     {s.charAt(0).toUpperCase() + s.slice(1)}
@@ -566,7 +566,7 @@ export default function AdminLeads() {
                                       next.add(lead.id);
                                       setSelectedIds(next);
                                     }}
-                                    className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-lg transition-colors"
+                                    className="px-3 py-1.5 bg-[var(--paper2)] hover:bg-[var(--paper2)] text-[var(--ink2)] text-xs font-medium rounded-lg transition-colors"
                                   >
                                     Select
                                   </button>
@@ -586,22 +586,22 @@ export default function AdminLeads() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="px-4 py-3 border-t border-gray-200 bg-gray-50 flex items-center justify-between">
-            <div className="text-sm text-gray-500">
+          <div className="px-4 py-3 border-t border-[var(--line)] bg-[var(--paper2)] flex items-center justify-between">
+            <div className="text-sm text-[var(--muted)]">
               Page {page + 1} of {totalPages}
             </div>
             <div className="flex gap-2">
               <button
                 onClick={() => setPage((p) => Math.max(0, p - 1))}
                 disabled={page === 0}
-                className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50 transition-colors"
+                className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-lg text-sm disabled:opacity-50 hover:bg-[var(--paper2)] transition-colors"
               >
                 Previous
               </button>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
                 disabled={page >= totalPages - 1}
-                className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50 transition-colors"
+                className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-lg text-sm disabled:opacity-50 hover:bg-[var(--paper2)] transition-colors"
               >
                 Next
               </button>

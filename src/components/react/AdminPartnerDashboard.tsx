@@ -177,12 +177,12 @@ export default function AdminPartnerDashboard() {
     active: 'bg-emerald-100 text-emerald-700',
     suspended: 'bg-red-100 text-red-700',
     pending: 'bg-amber-100 text-amber-700',
-    inactive: 'bg-gray-100 text-gray-500',
+    inactive: 'bg-[var(--paper2)] text-[var(--muted)]',
   };
 
   const PLAN_COLORS: Record<Partner['plan'], string> = {
-    starter: 'bg-gray-100 text-gray-700',
-    professional: 'bg-violet-100 text-violet-700',
+    starter: 'bg-[var(--paper2)] text-[var(--ink2)]',
+    professional: 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)]',
     enterprise: 'bg-amber-100 text-amber-700',
   };
 
@@ -190,12 +190,12 @@ export default function AdminPartnerDashboard() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Partner Dashboard</h1>
-          <p className="text-gray-500 mt-1">Manage API partners, quotas, and integrations</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Partner Dashboard</h1>
+          <p className="text-[var(--muted)] mt-1">Manage API partners, quotas, and integrations</p>
         </div>
         <button
           onClick={() => setShowOnboard(true)}
-          className="px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors"
+          className="px-4 py-2 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink)] transition-colors"
         >
           + Onboard Partner
         </button>
@@ -203,31 +203,31 @@ export default function AdminPartnerDashboard() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Total Partners</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{stats.totalPartners}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Total Partners</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{stats.totalPartners}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Active Partners</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Active Partners</p>
           <p className="text-2xl font-bold text-emerald-600 mt-1">{stats.activePartners}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Total API Calls</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{stats.totalRequests.toLocaleString()}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Total API Calls</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{stats.totalRequests.toLocaleString()}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Quota Usage</p>
-          <p className="text-2xl font-bold text-violet-600 mt-1">{Math.round((stats.totalRequests / stats.totalQuota) * 100)}%</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Quota Usage</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{Math.round((stats.totalRequests / stats.totalQuota) * 100)}%</p>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 mb-6">
+      <div className="bg-white rounded-xl border border-[var(--line)] p-4 mb-6">
         <div className="flex flex-wrap gap-4">
           <select
             value={filterStatus}
             onChange={e => setFilterStatus(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Status</option>
             <option value="active">Active</option>
@@ -238,7 +238,7 @@ export default function AdminPartnerDashboard() {
           <select
             value={filterPlan}
             onChange={e => setFilterPlan(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Plans</option>
             <option value="starter">Starter</option>
@@ -251,16 +251,16 @@ export default function AdminPartnerDashboard() {
       {/* Partner list */}
       <div className="space-y-4">
         {filteredPartners.map(partner => (
-          <div key={partner.id} className="bg-white rounded-xl border border-gray-200 p-5 hover:border-violet-200 transition-colors">
+          <div key={partner.id} className="bg-white rounded-xl border border-[var(--line)] p-5 hover:border-[rgba(10,22,40,0.15)] transition-colors">
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center">
-                  <span className="text-sm font-bold text-violet-600">{partner.company.charAt(0)}</span>
+                <div className="w-12 h-12 bg-[rgba(10,22,40,0.08)] rounded-xl flex items-center justify-center">
+                  <span className="text-sm font-bold text-[var(--ink)]">{partner.company.charAt(0)}</span>
                 </div>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <span className="text-sm font-semibold text-gray-900">{partner.company}</span>
+                  <span className="text-sm font-semibold text-[var(--ink)]">{partner.company}</span>
                   <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${STATUS_COLORS[partner.status]}`}>
                     {partner.status.charAt(0).toUpperCase() + partner.status.slice(1)}
                   </span>
@@ -268,26 +268,26 @@ export default function AdminPartnerDashboard() {
                     {partner.plan.charAt(0).toUpperCase() + partner.plan.slice(1)}
                   </span>
                 </div>
-                <p className="text-xs text-gray-500 mb-1">{partner.email} &middot; {partner.name}</p>
-                <p className="text-xs text-gray-400 mb-3">{partner.description}</p>
+                <p className="text-xs text-[var(--muted)] mb-1">{partner.email} &middot; {partner.name}</p>
+                <p className="text-xs text-[var(--muted)] mb-3">{partner.description}</p>
 
                 {/* Quota bar */}
                 <div className="flex items-center gap-3">
                   <div className="flex-1">
-                    <div className="flex justify-between text-xs text-gray-500 mb-1">
+                    <div className="flex justify-between text-xs text-[var(--muted)] mb-1">
                       <span>API Quota</span>
                       <span>{partner.quotaUsed.toLocaleString()} / {partner.quotaLimit.toLocaleString()}</span>
                     </div>
-                    <div className="w-full bg-gray-100 rounded-full h-2">
+                    <div className="w-full bg-[var(--paper2)] rounded-full h-2">
                       <div
-                        className={`h-2 rounded-full ${partner.quotaUsed >= partner.quotaLimit ? 'bg-red-500' : partner.quotaUsed > partner.quotaLimit * 0.8 ? 'bg-amber-500' : 'bg-violet-500'}`}
+                        className={`h-2 rounded-full ${partner.quotaUsed >= partner.quotaLimit ? 'bg-red-500' : partner.quotaUsed > partner.quotaLimit * 0.8 ? 'bg-amber-500' : 'bg-[var(--ink2)]'}`}
                         style={{ width: `${Math.min(100, (partner.quotaUsed / partner.quotaLimit) * 100)}%` }}
                       />
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs text-gray-500">{partner.endpoints} endpoints</p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-[var(--muted)]">{partner.endpoints} endpoints</p>
+                    <p className="text-xs text-[var(--muted)]">
                       {partner.lastActive ? `Active ${new Date(partner.lastActive).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}` : 'Never'}
                     </p>
                   </div>
@@ -296,7 +296,7 @@ export default function AdminPartnerDashboard() {
               <div className="flex flex-col gap-2 flex-shrink-0">
                 <button
                   onClick={() => setSelectedPartner(partner)}
-                  className="px-4 py-2 text-xs font-medium text-violet-600 hover:bg-violet-50 rounded-lg transition-colors"
+                  className="px-4 py-2 text-xs font-medium text-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] rounded-lg transition-colors"
                 >
                   Manage
                 </button>
@@ -315,40 +315,40 @@ export default function AdminPartnerDashboard() {
           </div>
         ))}
         {filteredPartners.length === 0 && (
-          <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-            <p className="text-gray-500">No partners match your filters</p>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-12 text-center">
+            <p className="text-[var(--muted)]">No partners match your filters</p>
           </div>
         )}
       </div>
 
       {/* Usage chart */}
       {selectedPartner && (
-        <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+        <div className="mt-6 bg-white rounded-xl border border-[var(--line)] p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-base font-semibold text-gray-900">
+            <h3 className="text-base font-semibold text-[var(--ink)]">
               API Usage — {selectedPartner.company}
             </h3>
-            <button onClick={() => setSelectedPartner(null)} className="text-gray-400 hover:text-gray-600">
+            <button onClick={() => setSelectedPartner(null)} className="text-[var(--muted)] hover:text-[var(--ink2)]">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
           <div className="grid grid-cols-4 gap-4 mb-4">
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">Requests Today</p>
-              <p className="text-lg font-bold text-gray-900">{usageData[usageData.length - 1]?.requests.toLocaleString()}</p>
+            <div className="bg-[var(--paper2)] rounded-lg p-3">
+              <p className="text-xs text-[var(--muted)]">Requests Today</p>
+              <p className="text-lg font-bold text-[var(--ink)]">{usageData[usageData.length - 1]?.requests.toLocaleString()}</p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">Error Rate</p>
+            <div className="bg-[var(--paper2)] rounded-lg p-3">
+              <p className="text-xs text-[var(--muted)]">Error Rate</p>
               <p className="text-lg font-bold text-red-600">{Math.round((usageData[usageData.length - 1]?.errors / usageData[usageData.length - 1]?.requests) * 100)}%</p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">P50 Latency</p>
-              <p className="text-lg font-bold text-gray-900">{usageData[usageData.length - 1]?.latencyP50}ms</p>
+            <div className="bg-[var(--paper2)] rounded-lg p-3">
+              <p className="text-xs text-[var(--muted)]">P50 Latency</p>
+              <p className="text-lg font-bold text-[var(--ink)]">{usageData[usageData.length - 1]?.latencyP50}ms</p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">P99 Latency</p>
+            <div className="bg-[var(--paper2)] rounded-lg p-3">
+              <p className="text-xs text-[var(--muted)]">P99 Latency</p>
               <p className="text-lg font-bold text-amber-600">{usageData[usageData.length - 1]?.latencyP99}ms</p>
             </div>
           </div>
@@ -356,16 +356,16 @@ export default function AdminPartnerDashboard() {
             {usageData.map((d, i) => (
               <div key={i} className="flex-1 group relative">
                 <div
-                  className="bg-violet-200 hover:bg-violet-400 rounded-t transition-colors"
+                  className="bg-[rgba(10,22,40,0.15)] hover:bg-[var(--ink2)] rounded-t transition-colors"
                   style={{ height: `${(d.requests / 3500) * 100}%` }}
                 />
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block bg-gray-900 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block bg-[var(--ink)] text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
                   {d.date}: {d.requests.toLocaleString()} req
                 </div>
               </div>
             ))}
           </div>
-          <div className="flex justify-between mt-2 text-xs text-gray-400">
+          <div className="flex justify-between mt-2 text-xs text-[var(--muted)]">
             <span>{usageData[0]?.date}</span>
             <span>{usageData[usageData.length - 1]?.date}</span>
           </div>
@@ -376,42 +376,42 @@ export default function AdminPartnerDashboard() {
       {showOnboard && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Onboard New Partner</h2>
+            <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Onboard New Partner</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Contact Name</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Contact Name</label>
                 <input
                   type="text"
                   value={newPartner.name}
                   onChange={e => setNewPartner({ ...newPartner, name: e.target.value })}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Company Name</label>
                 <input
                   type="text"
                   value={newPartner.company}
                   onChange={e => setNewPartner({ ...newPartner, company: e.target.value })}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Email</label>
                 <input
                   type="email"
                   value={newPartner.email}
                   onChange={e => setNewPartner({ ...newPartner, email: e.target.value })}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Plan</label>
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Plan</label>
                   <select
                     value={newPartner.plan}
                     onChange={e => setNewPartner({ ...newPartner, plan: e.target.value as Partner['plan'], quotaLimit: e.target.value === 'starter' ? 1000 : e.target.value === 'professional' ? 10000 : 50000 })}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                    className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                   >
                     <option value="starter">Starter</option>
                     <option value="professional">Professional</option>
@@ -419,32 +419,32 @@ export default function AdminPartnerDashboard() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Quota Limit</label>
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Quota Limit</label>
                   <input
                     type="number"
                     value={newPartner.quotaLimit}
                     onChange={e => setNewPartner({ ...newPartner, quotaLimit: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                    className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Website</label>
                 <input
                   type="url"
                   value={newPartner.website}
                   onChange={e => setNewPartner({ ...newPartner, website: e.target.value })}
                   placeholder="https://"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Description</label>
                 <textarea
                   value={newPartner.description}
                   onChange={e => setNewPartner({ ...newPartner, description: e.target.value })}
                   rows={2}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                 />
               </div>
             </div>
@@ -452,13 +452,13 @@ export default function AdminPartnerDashboard() {
               <button
                 onClick={handleOnboard}
                 disabled={saving || !newPartner.name || !newPartner.email || !newPartner.company}
-                className="px-5 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-xl hover:bg-violet-700 disabled:opacity-50 transition-colors"
+                className="px-5 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
               >
                 {saving ? 'Creating...' : 'Create Partner'}
               </button>
               <button
                 onClick={() => setShowOnboard(false)}
-                className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+                className="px-5 py-2.5 text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-xl transition-colors"
               >
                 Cancel
               </button>

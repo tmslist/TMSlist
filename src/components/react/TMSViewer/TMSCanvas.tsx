@@ -247,8 +247,8 @@ function TMSVisualization() {
     <>
       <ambientLight intensity={0.45} />
       <pointLight position={[3, 3, 3]} intensity={1.2} color="#ffffff" />
-      <pointLight position={[-3, -1, -3]} intensity={0.5} color="#a78bfa" />
-      <pointLight position={state.coilPosition} intensity={0.9} color="#22d3ee" />
+      <pointLight position={[-3, -1, -3]} intensity={0.5} color="#C9654A" />
+      <pointLight position={state.coilPosition} intensity={0.9} color="#C9654A" />
 
       <TMSHeadOutline />
       <TMSBrain />
@@ -286,26 +286,26 @@ function TMSVisualization() {
         <mesh position={[-0.18, 0.1, 0]}>
           <torusGeometry args={[0.2, 0.04, 12, 32]} />
           <meshStandardMaterial
-            color="#06b6d4"
+            color="#1E2A3B"
             metalness={0.9}
             roughness={0.1}
-            emissive="#06b6d4"
+            emissive="#1E2A3B"
             emissiveIntensity={emissiveRef.current}
           />
         </mesh>
         <mesh position={[0.18, 0.1, 0]}>
           <torusGeometry args={[0.2, 0.04, 12, 32]} />
           <meshStandardMaterial
-            color="#8b5cf6"
+            color="#C9654A"
             metalness={0.9}
             roughness={0.1}
-            emissive="#8b5cf6"
+            emissive="#C9654A"
             emissiveIntensity={emissiveRef.current}
           />
         </mesh>
         <mesh position={[0, 0.1, 0]} rotation={[0, 0, Math.PI / 2]}>
           <cylinderGeometry args={[0.035, 0.035, 0.36, 12]} />
-          <meshStandardMaterial color="#6366f1" metalness={0.9} roughness={0.1} />
+          <meshStandardMaterial color="#0A1628" metalness={0.9} roughness={0.1} />
         </mesh>
       </group>
 
@@ -313,7 +313,7 @@ function TMSVisualization() {
       {Array.from({ length: RING_POOL_SIZE }, (_, i) => (
         <mesh key={`ring-${i}`} ref={el => { if (el) ringRefs.current[i] = el; }}>
           <torusGeometry args={[0.3, 0.015, 8, 64]} />
-          <meshBasicMaterial color="#22d3ee" transparent opacity={0} />
+          <meshBasicMaterial color="#C9654A" transparent opacity={0} />
         </mesh>
       ))}
 
@@ -330,28 +330,60 @@ function TMSVisualization() {
   );
 }
 
-export function TMSCanvas() {
+interface TMSCanvasProps {
+  /** When false, pause the canvas frame loop (perf + battery when off-screen). */
+  inView?: boolean;
+  /** Compact variant for embedded usage. */
+  compact?: boolean;
+}
+
+export function TMSCanvas({ inView = true, compact = false }: TMSCanvasProps = {}) {
   const [mounted, setMounted] = useState(false);
   const reducedMotion = useReducedMotion();
   const { state } = useTMS();
+  // Pause when off-screen or reduced-motion is on
+  const frameloop = (!inView || reducedMotion) ? 'demand' : 'always';
 
   return (
     <div
-      className="relative w-full rounded-2xl overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800 border border-slate-700/50 shadow-2xl shadow-black/20"
-      style={{ height: '640px' }}
+      role="img"
+      aria-label="Interactive 3D model of a transcranial magnetic stimulation coil and brain. Use the controls panel to adjust frequency, intensity, and target region. Drag to rotate, scroll to zoom."
+      className="relative w-full overflow-hidden"
+      style={{
+        height: compact ? '360px' : '560px',
+        background:
+          'radial-gradient(ellipse at 50% 100%, rgba(201,101,74,0.10), transparent 65%), linear-gradient(180deg, #0A1628 0%, #0F1B30 100%)',
+        borderRadius: 16,
+        boxShadow:
+          'inset 0 1px 0 rgba(255,255,255,0.04), inset 0 0 0 1px rgba(201,101,74,0.12), 0 12px 30px -10px rgba(0,0,0,0.5)',
+      }}
     >
+      {/* Subtle scanline overlay for instrument feel */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 3px)',
+          mixBlendMode: 'overlay',
+          opacity: 0.6,
+        }}
+      />
+      {/* Corner brackets — subtle viewport markers */}
+      <CornerBrackets />
+
       {!mounted && (
-        <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="absolute inset-0 flex items-center justify-center z-10" role="status" aria-label="Loading simulation engine">
           <div className="flex flex-col items-center gap-3">
-             <div className="w-8 h-8 rounded-full border-2 border-cyan-500 border-t-transparent animate-spin"></div>
-             <div className="text-slate-400 text-sm font-medium tracking-wide">Loading simulation engine…</div>
+             <div className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: '#C9654A', borderTopColor: 'transparent' }}></div>
+             <div className="text-white/50 text-xs font-medium tracking-widest uppercase">Loading instrument</div>
           </div>
         </div>
       )}
       <Canvas
         camera={{ position: [0, 0.5, 3.5], fov: 45 }}
         onCreated={() => setMounted(true)}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+        frameloop={frameloop}
         style={{ background: 'transparent' }}
       >
         <Suspense fallback={null}>
@@ -359,16 +391,116 @@ export function TMSCanvas() {
         </Suspense>
       </Canvas>
 
-      {/* Status badge */}
-      <div className="absolute top-4 left-4 flex items-center gap-2 bg-slate-900/80 backdrop-blur-md border border-slate-600/50 rounded-lg px-3 py-1.5 shadow-lg">
-        <div className={`w-2 h-2 rounded-full ${reducedMotion ? 'bg-amber-400' : 'bg-cyan-400 animate-pulse'}`} />
-        <span className="text-xs font-semibold text-slate-200 tracking-wider uppercase">TMS Simulation Engine</span>
+      {/* Status badge — top-left */}
+      <div className="absolute top-3 left-3 flex items-center gap-2"
+        style={{
+          background: 'rgba(10,22,40,0.65)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(201,101,74,0.30)',
+          borderRadius: 10,
+          padding: '5px 10px',
+        }}
+      >
+        <span
+          className={reducedMotion ? '' : 'animate-pulse'}
+          style={{
+            width: 6,
+            height: 6,
+            borderRadius: '50%',
+            background: '#22c55e',
+            boxShadow: reducedMotion ? 'none' : '0 0 8px rgba(34,197,94,0.6)',
+          }}
+        />
+        <span style={{ fontSize: 10, fontWeight: 700, color: 'rgba(251,250,247,0.80)', letterSpacing: '0.10em', textTransform: 'uppercase' }}>
+          Live Stage
+        </span>
         {state.coilTarget === 'free' && (
-          <span className="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded border border-amber-400/30 ml-1">
+          <span
+            style={{
+              fontSize: 9,
+              fontWeight: 700,
+              color: '#D4806A',
+              background: 'rgba(201,101,74,0.15)',
+              padding: '2px 6px',
+              borderRadius: 4,
+              border: '1px solid rgba(201,101,74,0.35)',
+              marginLeft: 4,
+              letterSpacing: '0.06em',
+            }}
+          >
             FREE TARGET
           </span>
         )}
       </div>
+
+      {/* Bottom legend */}
+      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-3 pointer-events-none">
+        <div className="flex items-center flex-wrap gap-3"
+          style={{
+            background: 'rgba(10,22,40,0.55)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(255,255,255,0.06)',
+            borderRadius: 8,
+            padding: '5px 10px',
+          }}
+        >
+          <LegendDot color="#C9654A" label="Coil pulse" />
+          <LegendDot color="#FBFAF7" label="Neuron wave" />
+          <LegendDot color="#D4806A" label="Field rings" />
+        </div>
+        <div
+          style={{
+            fontSize: 9,
+            color: 'rgba(251,250,247,0.45)',
+            fontFamily: 'ui-monospace, "SF Mono", Menlo, monospace',
+            letterSpacing: '0.05em',
+          }}
+        >
+          drag · scroll · click
+        </div>
+      </div>
     </div>
+  );
+}
+
+function LegendDot({ color, label }: { color: string; label: string }) {
+  return (
+    <div className="flex items-center gap-1.5">
+      <span style={{ width: 7, height: 7, borderRadius: '50%', background: color, boxShadow: `0 0 6px ${color}66` }} />
+      <span style={{ fontSize: 10, color: 'rgba(251,250,247,0.65)', fontWeight: 500 }}>{label}</span>
+    </div>
+  );
+}
+
+function CornerBrackets() {
+  const c = 'rgba(201,101,74,0.28)';
+  const arms = 14;
+  const w = 1.5;
+  const positions: { top?: number; right?: number; bottom?: number; left?: number; rotate: number }[] = [
+    { top: 8, left: 8, rotate: 0 },
+    { top: 8, right: 8, rotate: 90 },
+    { bottom: 8, right: 8, rotate: 180 },
+    { bottom: 8, left: 8, rotate: 270 },
+  ];
+  return (
+    <>
+      {positions.map((p, i) => (
+        <div
+          key={i}
+          className="absolute pointer-events-none"
+          style={{
+            top: p.top,
+            right: p.right,
+            bottom: p.bottom,
+            left: p.left,
+            width: arms,
+            height: arms,
+            transform: `rotate(${p.rotate}deg)`,
+            borderLeft: `${w}px solid ${c}`,
+            borderTop: `${w}px solid ${c}`,
+          }}
+        />
+      ))}
+    </>
   );
 }

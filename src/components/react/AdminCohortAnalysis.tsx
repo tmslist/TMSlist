@@ -48,7 +48,7 @@ function RetentionBarChart({ row, maxSize }: { row: CohortRow; maxSize: number }
         if (val === null) {
           return (
             <div key={i} className="flex-1 min-w-[16px] h-full flex items-center justify-center">
-              <div className="w-full h-1 bg-gray-200 rounded" />
+              <div className="w-full h-1 bg-[var(--paper2)] rounded" />
             </div>
           );
         }
@@ -56,7 +56,7 @@ function RetentionBarChart({ row, maxSize }: { row: CohortRow; maxSize: number }
         return (
           <div key={i} className="flex-1 min-w-[16px] flex flex-col justify-end">
             <div
-              className="w-full bg-violet-500 rounded-t transition-all hover:bg-violet-600"
+              className="w-full bg-[var(--ink2)] rounded-t transition-all hover:bg-[var(--ink)]"
               style={{ height: `${Math.max(pct, 2)}%` }}
               title={`${monthLabels[i]}: ${val.toFixed(1)}%`}
             />
@@ -77,24 +77,24 @@ function RetentionCurve({ cohorts }: { cohorts: CohortRow[] }) {
   });
   const maxVal = 100;
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-900 mb-4">Average Retention Curve</h3>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <h3 className="text-sm font-semibold text-[var(--ink)] mb-4">Average Retention Curve</h3>
       <div className="flex items-end gap-[4px] h-48">
         {avgByMonth.map((val, i) => {
           const pct = (val / maxVal) * 100;
           return (
             <div key={i} className="flex-1 flex flex-col justify-end items-center">
-              <span className="text-[9px] text-gray-400 mb-1">{Math.round(val)}%</span>
+              <span className="text-[9px] text-[var(--muted)] mb-1">{Math.round(val)}%</span>
               <div
-                className="w-full bg-gradient-to-t from-violet-600 to-violet-400 rounded-t transition-all"
+                className="w-full bg-gradient-to-t from-[#0A1628] to-[#1E2A3B] rounded-t transition-all"
                 style={{ height: `${Math.max(pct, 2)}%` }}
               />
-              <span className="text-[9px] text-gray-500 mt-1">{labels[i]}</span>
+              <span className="text-[9px] text-[var(--muted)] mt-1">{labels[i]}</span>
             </div>
           );
         })}
       </div>
-      <p className="text-center text-xs text-gray-400 mt-3">Months since cohort start</p>
+      <p className="text-center text-xs text-[var(--muted)] mt-3">Months since cohort start</p>
     </div>
   );
 }
@@ -161,15 +161,15 @@ export default function AdminCohortAnalysis() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-semibold text-gray-900">Cohort Analysis</h1>
-        <p className="text-gray-500 mt-1">Analyze retention and conversion by user cohort</p>
+        <h1 className="text-3xl font-semibold text-[var(--ink)]">Cohort Analysis</h1>
+        <p className="text-[var(--muted)] mt-1">Analyze retention and conversion by user cohort</p>
       </div>
 
       {/* Controls */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Cohort Type */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">Cohort Basis</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <h3 className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider mb-3">Cohort Basis</h3>
           <div className="space-y-2">
             {COHORT_TYPES.map((ct) => (
               <button
@@ -177,20 +177,20 @@ export default function AdminCohortAnalysis() {
                 onClick={() => setCohortType(ct.value)}
                 className={`w-full text-left p-3 rounded-lg border transition-colors ${
                   cohortType === ct.value
-                    ? 'border-violet-300 bg-violet-50'
-                    : 'border-gray-100 hover:border-gray-200'
+                    ? 'border-[rgba(10,22,40,0.2)] bg-[rgba(10,22,40,0.08)]'
+                    : 'border-[var(--line)] hover:border-[var(--line)]'
                 }`}
               >
-                <p className="text-sm font-medium text-gray-900">{ct.label}</p>
-                <p className="text-xs text-gray-400 mt-0.5">{ct.description}</p>
+                <p className="text-sm font-medium text-[var(--ink)]">{ct.label}</p>
+                <p className="text-xs text-[var(--muted)] mt-0.5">{ct.description}</p>
               </button>
             ))}
           </div>
         </div>
 
         {/* Time Period */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">Time Period</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <h3 className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider mb-3">Time Period</h3>
           <div className="space-y-2">
             {TIME_PRESETS.map((tp) => (
               <button
@@ -198,8 +198,8 @@ export default function AdminCohortAnalysis() {
                 onClick={() => setPeriodMonths(tp.months)}
                 className={`w-full px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   periodMonths === tp.months
-                    ? 'bg-violet-600 text-white'
-                    : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                    ? 'bg-[var(--ink)] text-white'
+                    : 'bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
                 }`}
               >
                 {tp.label}
@@ -209,35 +209,35 @@ export default function AdminCohortAnalysis() {
         </div>
 
         {/* Segment Filter */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">Segment Filter</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <h3 className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider mb-3">Segment Filter</h3>
           <select
             value={segment}
             onChange={(e) => setSegment(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 bg-white"
+            className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E2A3B] bg-white"
           >
             {SEGMENT_OPTIONS.map((s) => (
               <option key={s.value} value={s.value}>{s.label}</option>
             ))}
           </select>
           <div className="mt-4">
-            <p className="text-xs text-gray-400 mb-2">Active Cohorts</p>
-            <p className="text-2xl font-bold text-gray-900">{periodMonths}</p>
+            <p className="text-xs text-[var(--muted)] mb-2">Active Cohorts</p>
+            <p className="text-2xl font-bold text-[var(--ink)]">{periodMonths}</p>
           </div>
         </div>
 
         {/* Summary Stats */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">Period Summary</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <h3 className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider mb-3">Period Summary</h3>
           <div className="space-y-4">
             <div>
-              <p className="text-xs text-gray-400">Avg Cohort Size</p>
-              <p className="text-xl font-bold text-gray-900">
+              <p className="text-xs text-[var(--muted)]">Avg Cohort Size</p>
+              <p className="text-xl font-bold text-[var(--ink)]">
                 {data ? Math.round(data.cohorts.reduce((s, c) => s + c.cohortSize, 0) / data.cohorts.length) : '—'}
               </p>
             </div>
             <div>
-              <p className="text-xs text-gray-400">Avg Month-1 Retention</p>
+              <p className="text-xs text-[var(--muted)]">Avg Month-1 Retention</p>
               <p className="text-xl font-bold text-emerald-600">
                 {data
                   ? data.cohorts
@@ -250,7 +250,7 @@ export default function AdminCohortAnalysis() {
             <button
               onClick={loadCohort}
               disabled={loading}
-              className="w-full px-4 py-2.5 bg-violet-600 text-white rounded-lg text-sm font-medium hover:bg-violet-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full px-4 py-2.5 bg-[var(--ink)] text-white rounded-lg text-sm font-medium hover:bg-[var(--ink)] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -270,34 +270,34 @@ export default function AdminCohortAnalysis() {
 
       {/* Cohort Table */}
       {data && (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-          <div className="p-6 border-b border-gray-100">
-            <h2 className="text-lg font-semibold text-gray-900">Cohort Retention Table</h2>
-            <p className="text-xs text-gray-400 mt-1">Percentage of cohort still active by month</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden shadow-sm">
+          <div className="p-6 border-b border-[var(--line)]">
+            <h2 className="text-lg font-semibold text-[var(--ink)]">Cohort Retention Table</h2>
+            <p className="text-xs text-[var(--muted)] mt-1">Percentage of cohort still active by month</p>
           </div>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-[var(--line)]">
+              <thead className="bg-[var(--paper2)]">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase sticky left-0 bg-gray-50">Cohort</th>
-                  <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Cohort Size</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase sticky left-0 bg-[var(--paper2)]">Cohort</th>
+                  <th className="px-4 py-3 text-center text-xs font-medium text-[var(--muted)] uppercase">Cohort Size</th>
                   {Array.from({ length: 6 }, (_, i) => (
-                    <th key={i} className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">M{i}</th>
+                    <th key={i} className="px-4 py-3 text-center text-xs font-medium text-[var(--muted)] uppercase">M{i}</th>
                   ))}
-                  <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Churn</th>
+                  <th className="px-4 py-3 text-center text-xs font-medium text-[var(--muted)] uppercase">Churn</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-[var(--line)]">
                 {data.cohorts.map((row) => {
                   const maxSize = Math.max(...data.cohorts.map((c) => c.cohortSize));
                   return (
-                    <tr key={row.cohortMonth} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm font-medium text-gray-900 sticky left-0 bg-white">{row.cohortMonth}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600 text-center">{row.cohortSize}</td>
+                    <tr key={row.cohortMonth} className="hover:bg-[var(--paper2)]">
+                      <td className="px-4 py-3 text-sm font-medium text-[var(--ink)] sticky left-0 bg-white">{row.cohortMonth}</td>
+                      <td className="px-4 py-3 text-sm text-[var(--ink2)] text-center">{row.cohortSize}</td>
                       {row.retentionByMonth.map((val, i) => (
                         <td key={i} className="px-2 py-3 text-center">
                           {val === null ? (
-                            <span className="text-xs text-gray-300">—</span>
+                            <span className="text-xs text-[var(--line)]">—</span>
                           ) : (
                             <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${
                               val >= 80 ? 'bg-emerald-100 text-emerald-700' :
@@ -313,7 +313,7 @@ export default function AdminCohortAnalysis() {
                         {row.churnRate !== null ? (
                           <span className="text-xs font-medium text-red-600">{row.churnRate.toFixed(1)}%</span>
                         ) : (
-                          <span className="text-xs text-gray-300">—</span>
+                          <span className="text-xs text-[var(--line)]">—</span>
                         )}
                       </td>
                     </tr>
@@ -327,28 +327,28 @@ export default function AdminCohortAnalysis() {
 
       {/* Conversion Metrics */}
       {data && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Conversion Metrics by Cohort</h2>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Conversion Metrics by Cohort</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {conversionMetrics.map((cm) => {
               const barColor = cm.rate >= 20 ? 'bg-emerald-500' : cm.rate >= 10 ? 'bg-amber-500' : 'bg-red-400';
               return (
-                <div key={cm.label} className="p-4 bg-gray-50 rounded-lg">
+                <div key={cm.label} className="p-4 bg-[var(--paper2)] rounded-lg">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-gray-900">{cm.label}</span>
+                    <span className="text-sm font-medium text-[var(--ink)]">{cm.label}</span>
                     <span className={`text-lg font-bold ${
                       cm.rate >= 20 ? 'text-emerald-600' : cm.rate >= 10 ? 'text-amber-600' : 'text-red-600'
                     }`}>
                       {cm.rate.toFixed(1)}%
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                  <div className="w-full bg-[var(--paper2)] rounded-full h-2 mb-2">
                     <div
                       className={`h-2 rounded-full ${barColor} transition-all`}
                       style={{ width: `${Math.min(cm.rate * 3, 100)}%` }}
                     />
                   </div>
-                  <p className="text-xs text-gray-400">{cm.converted.toLocaleString()} / {cm.total.toLocaleString()}</p>
+                  <p className="text-xs text-[var(--muted)]">{cm.converted.toLocaleString()} / {cm.total.toLocaleString()}</p>
                 </div>
               );
             })}
@@ -358,17 +358,17 @@ export default function AdminCohortAnalysis() {
 
       {/* Comparison Period */}
       {data && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Period Comparison</h2>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Period Comparison</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               { label: 'Current Period MRR', value: '$12,450', change: '+8.2%', up: true },
               { label: 'Previous Period MRR', value: '$11,510', change: '+5.1%', up: true },
               { label: 'QoQ Retention Delta', value: '+3.4%', change: 'vs last quarter', up: true },
             ].map((item) => (
-              <div key={item.label} className="p-4 bg-gray-50 rounded-lg text-center">
-                <p className="text-xs text-gray-400 mb-1">{item.label}</p>
-                <p className="text-2xl font-bold text-gray-900">{item.value}</p>
+              <div key={item.label} className="p-4 bg-[var(--paper2)] rounded-lg text-center">
+                <p className="text-xs text-[var(--muted)] mb-1">{item.label}</p>
+                <p className="text-2xl font-bold text-[var(--ink)]">{item.value}</p>
                 <span className="inline-block mt-1 text-xs font-medium text-emerald-600">{item.change}</span>
               </div>
             ))}

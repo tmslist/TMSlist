@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-20
 treatmentA: "MagVenture"
 treatmentB: "Magstim"
-image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 verdict: "Both are European-built figure-8 coil platforms with strong research pedigrees. They share more similarities than differences for clinical TMS use. US availability is the main differentiator."
 verdictWinner: "tie"
 faqs: []
@@ -46,9 +46,9 @@ For depression treatment, MagVenture and Magstim are clinically equivalent. Choo
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>Both are figure-8 coil platforms with similar clinical capabilities</li>
     <li>MagVenture has wider US commercial availability than Magstim</li>
     <li>Neither has BrainsWay's dedicated OCD clearance</li>
@@ -57,11 +57,11 @@ For depression treatment, MagVenture and Magstim are clinically equivalent. Choo
   </ul>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Search verified providers by device type, location, and insurance.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Search verified providers by device type, location, and insurance.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>

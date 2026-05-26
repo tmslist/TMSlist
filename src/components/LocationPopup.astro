@@ -7,7 +7,7 @@ import { COUNTRY_NAMES, COUNTRY_FLAGS, COUNTRY_URL_PREFIXES } from "../utils/dat
 
 <!-- Geo Location Banner (non-intrusive, top of page) -->
 <div id="geo-banner" class="hidden fixed top-16 left-0 right-0 z-[90] transition-all duration-300 translate-y-[-100%] opacity-0">
-    <div class="bg-gradient-to-r from-violet-600 to-blue-600 text-white shadow-lg">
+    <div class="bg-[var(--ink)] text-white shadow-lg">
         <div class="container mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3 min-w-0">
                 <span id="geo-flag" class="text-xl shrink-0"></span>
@@ -16,7 +16,7 @@ import { COUNTRY_NAMES, COUNTRY_FLAGS, COUNTRY_URL_PREFIXES } from "../utils/dat
                 </p>
             </div>
             <div class="flex items-center gap-2 shrink-0">
-                <a id="geo-cta" href="/us/" class="px-4 py-1.5 bg-white text-[#143844] text-sm font-semibold rounded-lg hover:bg-[#1B4B5A]50 transition-colors whitespace-nowrap">
+                <a id="geo-cta" href="/us/" class="px-4 py-1.5 bg-white text-[var(--ink)] text-sm font-semibold rounded-lg hover:bg-[rgba(10,22,40,0.10)] transition-colors whitespace-nowrap">
                     Browse Clinics
                 </a>
                 <button id="geo-dismiss" class="p-1 text-white/70 hover:text-white transition-colors rounded" aria-label="Dismiss">

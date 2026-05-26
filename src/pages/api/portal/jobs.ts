@@ -1,9 +1,15 @@
 import type { APIRoute } from 'astro';
 import { eq, desc } from 'drizzle-orm';
 import { db } from '../../../db';
-import { jobs, clinics } from '../../../db/schema';
+import { jobs, clinics, users } from '../../../db/schema';
 import { jobSubmitSchema } from '../../../db/validation';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+
+async function resolveClinicId(session: { userId: string; clinicId?: string }): Promise<string | null> {
+  if (session.clinicId) return session.clinicId;
+  const row = await db.select({ clinicId: users.clinicId }).from(users).where(eq(users.id, session.userId)).limit(1);
+  return row[0]?.clinicId ?? null;
+}
 
 export const prerender = false;
 
@@ -21,6 +27,9 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   try {
+    const clinicId = await resolveClinicId(session);
+    if (!clinicId) return json({ data: [] });
+
     const data = await db
       .select({
         id: jobs.id,
@@ -41,7 +50,7 @@ export const GET: APIRoute = async ({ request }) => {
       })
       .from(jobs)
       .leftJoin(clinics, eq(jobs.clinicId, clinics.id))
-      .where(eq(jobs.clinicId, session.clinicId ?? ''))
+      .where(eq(jobs.clinicId, clinicId))
       .orderBy(desc(jobs.createdAt));
 
     return json({ data });

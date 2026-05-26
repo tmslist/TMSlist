@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import EditorialHero from "../../components/editorial/EditorialHero.astro";
 
 import {
     getOperationalClinics,
@@ -11,7 +12,12 @@ import {
     COUNTRY_FLAGS,
     COUNTRY_URL_PREFIXES,
 } from "../../utils/dataHelpers";
+import { getVisitorCountry } from "../../utils/visitorCountry";
 import type { Clinic } from "../../types/clinic";
+
+export const prerender = false;
+
+const VISITOR_COUNTRY = getVisitorCountry(Astro.cookies, Astro.url);
 import {
     TMS_DEVICE_CATEGORIES,
     INSURANCE_CATEGORIES,
@@ -22,11 +28,19 @@ import {
     PRICING_FILTERS,
 } from "../../utils/filterOptions";
 
-const clinics = await getOperationalClinics();
+const allClinics = await getOperationalClinics();
 
-// Separate US and international
-const usClinics = clinics.filter((c: any) => !c.country || c.country === 'US');
-const intlClinics = clinics.filter((c: any) => c.country && c.country !== 'US');
+// Scope to the visitor's country (US fallback if their country has no clinics)
+const scopedToVisitor = VISITOR_COUNTRY === 'US'
+    ? allClinics.filter((c: any) => !c.country || c.country === 'US')
+    : allClinics.filter((c: any) => c.country === VISITOR_COUNTRY);
+const clinics = scopedToVisitor.length > 0
+    ? scopedToVisitor
+    : allClinics.filter((c: any) => !c.country || c.country === 'US');
+
+// US visitors keep the by-state grouping; non-US visitors get a single country grouping
+const usClinics = VISITOR_COUNTRY === 'US' ? clinics : [];
+const intlClinics = VISITOR_COUNTRY === 'US' ? [] : clinics;
 
 // Group US by state
 const stateGroups = usClinics.reduce(
@@ -61,9 +75,13 @@ const sortedCountries = Object.entries(countryGroups).sort(
 const stateNames = STATE_NAMES;
 const totalLocations = Object.keys(stateGroups).length + Object.keys(countryGroups).length;
 
-const title =
-    "Verified TMS Clinics | Real Data from " + clinics.length + " Providers";
-const description = `Browse ${clinics.length} verified TMS therapy clinics across ${totalLocations} locations worldwide. Real ratings, reviews, and contact info.`;
+const visitorCountryName = COUNTRY_NAMES[VISITOR_COUNTRY] || 'United States';
+const title = VISITOR_COUNTRY === 'US'
+    ? `Verified TMS Clinics | Real Data from ${clinics.length} Providers`
+    : `Verified TMS Clinics in ${visitorCountryName} | ${clinics.length} Providers`;
+const description = VISITOR_COUNTRY === 'US'
+    ? `Browse ${clinics.length} verified TMS therapy clinics across ${totalLocations} US states. Real ratings, reviews, and contact info.`
+    : `Browse ${clinics.length} verified TMS therapy clinics in ${visitorCountryName}. Real ratings, reviews, and contact info.`;
 
 // Calculate total reviews
 const totalReviews = clinics.reduce(
@@ -77,59 +95,30 @@ const avgRating =
 ---
 
 <Layout title={title} description={description}>
-    <main class="min-h-screen">
-        <!-- Hero -->
-        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                    <span class="text-slate-300">/</span>
-                    <span class="text-slate-700 font-medium">Verified Clinics</span>
-                </nav>
-
-                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-                    <div class="max-w-2xl">
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full mb-6">
-                            <span class="relative flex h-2 w-2"><span class="animate-ping absolute h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative rounded-full h-2 w-2 bg-emerald-500"></span></span>
-                            <span class="text-xs font-semibold text-emerald-700 tracking-wide">Real Data · No Fake Reviews</span>
-                        </div>
-                        <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-                            Verified TMS <span class="text-violet-600">Clinics</span>
-                        </h1>
-                        <p class="text-lg text-slate-500 leading-relaxed">
-                            {clinics.length} real TMS therapy providers across {totalLocations} locations in {Object.keys(countryGroups).length + 1} countries. All data verified with real ratings and reviews.
-                        </p>
-                    </div>
-
-                    <div class="flex gap-3 flex-wrap">
-                        <div class="bg-white px-5 py-3 rounded-xl border border-slate-100 shadow-sm text-center">
-                            <div class="text-2xl font-bold text-slate-900">{clinics.length}</div>
-                            <div class="text-xs text-slate-400 font-medium">Clinics</div>
-                        </div>
-                        <div class="bg-white px-5 py-3 rounded-xl border border-slate-100 shadow-sm text-center">
-                            <div class="text-2xl font-bold text-slate-900">{totalLocations}</div>
-                            <div class="text-xs text-slate-400 font-medium">Locations</div>
-                        </div>
-                        <div class="bg-white px-5 py-3 rounded-xl border border-slate-100 shadow-sm text-center">
-                            <div class="text-2xl font-bold text-amber-600">{avgRating.toFixed(1)}★</div>
-                            <div class="text-xs text-slate-400 font-medium">Avg Rating</div>
-                        </div>
-                        <div class="bg-white px-5 py-3 rounded-xl border border-slate-100 shadow-sm text-center">
-                            <div class="text-2xl font-bold text-slate-900">{totalReviews}</div>
-                            <div class="text-xs text-slate-400 font-medium">Reviews</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main style="background:var(--paper)">
+        <EditorialHero
+            eyebrow="Real Data · No Fake Reviews"
+            eyebrowDot="#22c55e"
+            title="Verified TMS"
+            titleAccent="clinics."
+            description={`${clinics.length} real TMS therapy providers across ${totalLocations} locations in ${Object.keys(countryGroups).length + 1} countries. All data verified with real ratings and reviews.`}
+            breadcrumbs={[{ label: "Home", href: "/" }, { label: "Verified Clinics" }]}
+            ctas={[
+                { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+                { label: "Compare Clinics", href: "/compare-clinics/", variant: "outline" },
+            ]}
+            stats={[
+                { value: clinics.length, label: "Clinics", color: "ink" },
+                { value: `${avgRating.toFixed(1)}★`, label: "Avg Rating", color: "warm" },
+                { value: totalReviews, label: "Reviews", color: "accent" },
+            ]}
+        />
 
         <!-- Filter Bar for Mobile -->
-        <div class="lg:hidden bg-white border-b sticky top-0 z-30 py-3 px-4">
+        <div class="lg:hidden bg-[var(--paper)] border-b sticky top-0 z-30 py-3 px-4">
             <button
                 id="mobileFilterBtn"
-                class="w-full flex items-center justify-center gap-2 py-3 px-6 bg-violet-600 text-white font-semibold rounded-xl"
+                class="w-full flex items-center justify-center gap-2 py-3 px-6 bg-[var(--ink)] text-white font-semibold rounded-xl"
             >
                 <svg
                     class="w-5 h-5"
@@ -157,20 +146,20 @@ const avgRating =
                         class="hidden lg:block lg:w-80 shrink-0"
                     >
                         <div
-                            class="bg-white rounded-2xl border border-gray-200 shadow-sm sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto"
+                            class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto"
                         >
-                            <div class="p-6 border-b border-gray-100">
+                            <div class="p-6 border-b border-[var(--line)]">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-900">
+                                    <h3 class="text-lg font-semibold text-[var(--ink)]">
                                         Filters
                                     </h3>
                                     <button
                                         id="clearFilters"
-                                        class="text-sm text-violet-600 hover:text-violet-700 font-medium"
+                                        class="text-sm text-[var(--accent)] hover:text-[var(--accent)] font-medium"
                                         >Clear All</button
                                     >
                                 </div>
-                                <p class="text-sm text-gray-500 mt-1">
+                                <p class="text-sm text-[var(--muted)] mt-1">
                                     Showing <span id="filteredCount"
                                         >{clinics.length}</span
                                     > clinics
@@ -178,16 +167,16 @@ const avgRating =
                             </div>
 
                             <!-- Insurance Section -->
-                            <div class="border-b border-gray-100">
+                            <div class="border-b border-[var(--line)]">
                                 <button
                                     class="filter-toggle w-full p-4 flex items-center justify-between text-left"
                                     data-section="insurance"
                                 >
-                                    <span class="font-semibold text-gray-900"
+                                    <span class="font-semibold text-[var(--ink)]"
                                         >Insurance</span
                                     >
                                     <svg
-                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        class="w-5 h-5 text-[var(--muted)] transition-transform"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -207,23 +196,23 @@ const avgRating =
                                             INSURANCE_CATEGORIES,
                                         ).map(([key, category]) => (
                                             <div>
-                                                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                                                <p class="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">
                                                     {category.label}
                                                 </p>
                                                 <div class="space-y-1.5">
                                                     {category.options
                                                         .slice(0, 5)
                                                         .map((opt) => (
-                                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg">
                                                                 <input
                                                                     type="checkbox"
-                                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
+                                                                    class="filter-checkbox rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                                                     data-filter="insurance"
                                                                     data-value={
                                                                         opt.value
                                                                     }
                                                                 />
-                                                                <span class="text-sm text-gray-700">
+                                                                <span class="text-sm text-[var(--ink2)]">
                                                                     {opt.label}
                                                                 </span>
                                                             </label>
@@ -236,16 +225,16 @@ const avgRating =
                             </div>
 
                             <!-- TMS Devices Section -->
-                            <div class="border-b border-gray-100">
+                            <div class="border-b border-[var(--line)]">
                                 <button
                                     class="filter-toggle w-full p-4 flex items-center justify-between text-left"
                                     data-section="devices"
                                 >
-                                    <span class="font-semibold text-gray-900"
+                                    <span class="font-semibold text-[var(--ink)]"
                                         >TMS Devices</span
                                     >
                                     <svg
-                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        class="w-5 h-5 text-[var(--muted)] transition-transform"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -265,22 +254,22 @@ const avgRating =
                                             TMS_DEVICE_CATEGORIES,
                                         ).map(([key, category]) => (
                                             <div>
-                                                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                                                <p class="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">
                                                     {category.label}
                                                 </p>
                                                 <div class="space-y-1.5">
                                                     {category.options.map(
                                                         (opt) => (
-                                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg">
                                                                 <input
                                                                     type="checkbox"
-                                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
+                                                                    class="filter-checkbox rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                                                     data-filter="device"
                                                                     data-value={
                                                                         opt.value
                                                                     }
                                                                 />
-                                                                <span class="text-sm text-gray-700">
+                                                                <span class="text-sm text-[var(--ink2)]">
                                                                     {opt.label}
                                                                 </span>
                                                             </label>
@@ -294,16 +283,16 @@ const avgRating =
                             </div>
 
                             <!-- Conditions Section -->
-                            <div class="border-b border-gray-100">
+                            <div class="border-b border-[var(--line)]">
                                 <button
                                     class="filter-toggle w-full p-4 flex items-center justify-between text-left"
                                     data-section="conditions"
                                 >
-                                    <span class="font-semibold text-gray-900"
+                                    <span class="font-semibold text-[var(--ink)]"
                                         >Conditions Treated</span
                                     >
                                     <svg
-                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        class="w-5 h-5 text-[var(--muted)] transition-transform"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -323,22 +312,22 @@ const avgRating =
                                             CONDITION_CATEGORIES,
                                         ).map(([key, category]) => (
                                             <div>
-                                                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                                                <p class="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">
                                                     {category.label}
                                                 </p>
                                                 <div class="space-y-1.5">
                                                     {category.options.map(
                                                         (opt) => (
-                                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg">
                                                                 <input
                                                                     type="checkbox"
-                                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
+                                                                    class="filter-checkbox rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                                                     data-filter="condition"
                                                                     data-value={
                                                                         opt.value
                                                                     }
                                                                 />
-                                                                <span class="text-sm text-gray-700">
+                                                                <span class="text-sm text-[var(--ink2)]">
                                                                     {opt.label}
                                                                 </span>
                                                             </label>
@@ -352,16 +341,16 @@ const avgRating =
                             </div>
 
                             <!-- Accessibility & Inclusivity Section -->
-                            <div class="border-b border-gray-100">
+                            <div class="border-b border-[var(--line)]">
                                 <button
                                     class="filter-toggle w-full p-4 flex items-center justify-between text-left"
                                     data-section="accessibility"
                                 >
-                                    <span class="font-semibold text-gray-900"
+                                    <span class="font-semibold text-[var(--ink)]"
                                         >Accessibility & Inclusivity</span
                                     >
                                     <svg
-                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        class="w-5 h-5 text-[var(--muted)] transition-transform"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -378,17 +367,17 @@ const avgRating =
                                 >
                                     {
                                         ACCESSIBILITY_FILTERS.map((filter) => (
-                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg">
                                                 <input
                                                     type="checkbox"
-                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
+                                                    class="filter-checkbox rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                                     data-filter="accessibility"
                                                     data-value={filter.key}
                                                 />
                                                 <span class="text-lg">
                                                     {filter.icon}
                                                 </span>
-                                                <span class="text-sm text-gray-700">
+                                                <span class="text-sm text-[var(--ink2)]">
                                                     {filter.label}
                                                 </span>
                                             </label>
@@ -398,16 +387,16 @@ const avgRating =
                             </div>
 
                             <!-- Availability Section -->
-                            <div class="border-b border-gray-100">
+                            <div class="border-b border-[var(--line)]">
                                 <button
                                     class="filter-toggle w-full p-4 flex items-center justify-between text-left"
                                     data-section="availability"
                                 >
-                                    <span class="font-semibold text-gray-900"
+                                    <span class="font-semibold text-[var(--ink)]"
                                         >Availability</span
                                     >
                                     <svg
-                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        class="w-5 h-5 text-[var(--muted)] transition-transform"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -424,17 +413,17 @@ const avgRating =
                                 >
                                     {
                                         AVAILABILITY_FILTERS.map((filter) => (
-                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg">
                                                 <input
                                                     type="checkbox"
-                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
+                                                    class="filter-checkbox rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                                     data-filter="availability"
                                                     data-value={filter.key}
                                                 />
                                                 <span class="text-lg">
                                                     {filter.icon}
                                                 </span>
-                                                <span class="text-sm text-gray-700">
+                                                <span class="text-sm text-[var(--ink2)]">
                                                     {filter.label}
                                                 </span>
                                             </label>
@@ -444,16 +433,16 @@ const avgRating =
                             </div>
 
                             <!-- Price Range Section -->
-                            <div class="border-b border-gray-100">
+                            <div class="border-b border-[var(--line)]">
                                 <button
                                     class="filter-toggle w-full p-4 flex items-center justify-between text-left"
                                     data-section="pricing"
                                 >
-                                    <span class="font-semibold text-gray-900"
+                                    <span class="font-semibold text-[var(--ink)]"
                                         >Pricing</span
                                     >
                                     <svg
-                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        class="w-5 h-5 text-[var(--muted)] transition-transform"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -469,25 +458,25 @@ const avgRating =
                                     class="hidden px-4 pb-4 space-y-3"
                                 >
                                     <p
-                                        class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2"
+                                        class="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2"
                                     >
                                         Price Range
                                     </p>
                                     {
                                         PRICE_RANGE_OPTIONS.map((opt) => (
-                                            <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg border border-gray-100">
+                                            <label class="flex items-center gap-3 cursor-pointer hover:bg-[var(--paper2)] p-2 rounded-lg border border-[var(--line)]">
                                                 <input
                                                     type="radio"
                                                     name="priceRange"
-                                                    class="text-violet-600 focus:ring-violet-500"
+                                                    class="text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                                     data-filter="price"
                                                     data-value={opt.value}
                                                 />
                                                 <div>
-                                                    <span class="text-sm font-medium text-gray-900">
+                                                    <span class="text-sm font-medium text-[var(--ink)]">
                                                         {opt.label}
                                                     </span>
-                                                    <p class="text-xs text-gray-500">
+                                                    <p class="text-xs text-[var(--muted)]">
                                                         {opt.description}
                                                     </p>
                                                 </div>
@@ -495,23 +484,23 @@ const avgRating =
                                         ))
                                     }
                                     <p
-                                        class="text-xs font-semibold text-gray-400 uppercase tracking-wider mt-4 mb-2"
+                                        class="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mt-4 mb-2"
                                     >
                                         Payment Options
                                     </p>
                                     {
                                         PRICING_FILTERS.map((filter) => (
-                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg">
                                                 <input
                                                     type="checkbox"
-                                                    class="filter-checkbox rounded border-gray-300 text-violet-600 focus:ring-violet-500"
+                                                    class="filter-checkbox rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                                     data-filter="pricing"
                                                     data-value={filter.key}
                                                 />
                                                 <span class="text-lg">
                                                     {filter.icon}
                                                 </span>
-                                                <span class="text-sm text-gray-700">
+                                                <span class="text-sm text-[var(--ink2)]">
                                                     {filter.label}
                                                 </span>
                                             </label>
@@ -523,12 +512,12 @@ const avgRating =
                             <!-- State Filter -->
                             <div class="p-4">
                                 <label
-                                    class="block text-sm font-semibold text-gray-900 mb-2"
+                                    class="block text-sm font-semibold text-[var(--ink)] mb-2"
                                     >Filter by State</label
                                 >
                                 <select
                                     id="stateFilter"
-                                    class="w-full rounded-xl border-gray-200 text-sm focus:ring-violet-500 focus:border-violet-500"
+                                    class="w-full rounded-xl border-[var(--line)] text-sm focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)]"
                                 >
                                     <option value="">All Locations</option>
                                     <optgroup label="United States">
@@ -563,12 +552,12 @@ const avgRating =
                                     class="mb-16 state-section"
                                     data-state={stateCode}
                                 >
-                                    <h2 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center gap-3">
-                                        <span class="w-10 h-10 rounded-lg bg-violet-100 text-violet-600 flex items-center justify-center font-semibold text-sm">
+                                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-6 flex items-center gap-3">
+                                        <span class="w-10 h-10 rounded-lg bg-[rgba(10,22,40,0.08)] text-[var(--accent)] flex items-center justify-center font-semibold text-sm">
                                             {stateCode}
                                         </span>
                                         {stateNames[stateCode] || stateCode}
-                                        <span class="text-sm font-normal text-gray-400 ml-2">
+                                        <span class="text-sm font-normal text-[var(--muted)] ml-2">
                                             ({stateClinics.length}{" "}
                                             {stateClinics.length === 1
                                                 ? "clinic"
@@ -580,7 +569,7 @@ const avgRating =
                                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                                         {stateClinics.map((clinic) => (
                                             <article
-                                                class="clinic-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
+                                                class="clinic-card bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
                                                 data-machines={JSON.stringify(
                                                     clinic.machines || [],
                                                 )}
@@ -610,12 +599,12 @@ const avgRating =
                                                         ) > 0 && (
                                                             <span class="flex items-center gap-1 text-sm">
                                                                 <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                                                                <span class="font-semibold text-gray-900">
+                                                                <span class="font-semibold text-[var(--ink)]">
                                                                     {getClinicRating(
                                                                         clinic,
                                                                     )}
                                                                 </span>
-                                                                <span class="text-gray-400">
+                                                                <span class="text-[var(--muted)]">
                                                                     (
                                                                     {getClinicReviewCount(
                                                                         clinic,
@@ -626,17 +615,17 @@ const avgRating =
                                                         )}
                                                     </div>
 
-                                                    <h3 class="text-lg font-semibold text-gray-900 mb-1 line-clamp-2">
+                                                    <h3 class="text-lg font-semibold text-[var(--ink)] mb-1 line-clamp-2">
                                                         {clinic.name}
                                                     </h3>
-                                                    <p class="text-gray-500 text-sm mb-3">
+                                                    <p class="text-[var(--muted)] text-sm mb-3">
                                                         {clinic.city},{" "}
                                                         {clinic.state}
                                                     </p>
 
                                                     {clinic.phone && (
-                                                        <p class="text-sm text-gray-600 mb-2">
-                                                            <span class="text-gray-400">
+                                                        <p class="text-sm text-[var(--muted)] mb-2">
+                                                            <span class="text-[var(--muted)]">
                                                                 </span>{" "}
                                                             {clinic.phone}
                                                         </p>
@@ -650,7 +639,7 @@ const avgRating =
                                                                     (
                                                                         machine,
                                                                     ) => (
-                                                                        <span class="px-2 py-1 bg-violet-50 text-violet-700 text-xs font-medium rounded">
+                                                                        <span class="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--accent)] text-xs font-medium rounded">
                                                                             {
                                                                                 machine
                                                                             }
@@ -659,7 +648,7 @@ const avgRating =
                                                                 )}
                                                     </div>
 
-                                                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                                    <div class="pt-4 border-t border-[var(--line)] flex items-center justify-between">
                                                         {clinic.website && (
                                                             <a
                                                                 href={
@@ -667,14 +656,14 @@ const avgRating =
                                                                 }
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
-                                                                class="text-sm text-gray-400 hover:text-violet-600"
+                                                                class="text-sm text-[var(--muted)] hover:text-[var(--accent)]"
                                                             >
                                                                 Website ↗
                                                             </a>
                                                         )}
                                                         <a
                                                             href={`/clinic/${clinic.slug}/`}
-                                                            class="text-violet-600 font-semibold text-sm hover:text-violet-700"
+                                                            class="text-[var(--accent)] font-semibold text-sm hover:text-[var(--accent)]"
                                                         >
                                                             View Details →
                                                         </a>
@@ -692,10 +681,10 @@ const avgRating =
                                     class="mb-16 state-section"
                                     data-state={countryCode}
                                 >
-                                    <h2 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center gap-3">
+                                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-6 flex items-center gap-3">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                         {COUNTRY_NAMES[countryCode] || countryCode}
-                                        <span class="text-sm font-normal text-gray-400 ml-2">
+                                        <span class="text-sm font-normal text-[var(--muted)] ml-2">
                                             ({countryClinics.length}{" "}
                                             {countryClinics.length === 1
                                                 ? "clinic"
@@ -707,7 +696,7 @@ const avgRating =
                                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                                         {countryClinics.map((clinic) => (
                                             <article
-                                                class="clinic-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
+                                                class="clinic-card bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
                                                 data-state={countryCode}
                                             >
                                                 <div class="h-40 overflow-hidden">
@@ -724,17 +713,17 @@ const avgRating =
                                                         {getClinicRating(clinic) > 0 && (
                                                             <span class="flex items-center gap-1 text-sm">
                                                                 <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                                                                <span class="font-semibold text-gray-900">{getClinicRating(clinic)}</span>
-                                                                <span class="text-gray-400">({getClinicReviewCount(clinic)})</span>
+                                                                <span class="font-semibold text-[var(--ink)]">{getClinicRating(clinic)}</span>
+                                                                <span class="text-[var(--muted)]">({getClinicReviewCount(clinic)})</span>
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <h3 class="text-lg font-semibold text-gray-900 mb-1 line-clamp-2">{clinic.name}</h3>
-                                                    <p class="text-gray-500 text-sm mb-3">{clinic.city}, {clinic.state}</p>
-                                                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                                    <h3 class="text-lg font-semibold text-[var(--ink)] mb-1 line-clamp-2">{clinic.name}</h3>
+                                                    <p class="text-[var(--muted)] text-sm mb-3">{clinic.city}, {clinic.state}</p>
+                                                    <div class="pt-4 border-t border-[var(--line)] flex items-center justify-between">
                                                         <a
                                                             href={`/clinic/${clinic.slug}/`}
-                                                            class="text-violet-600 font-semibold text-sm hover:text-violet-700"
+                                                            class="text-[var(--accent)] font-semibold text-sm hover:text-[var(--accent)]"
                                                         >
                                                             View Details →
                                                         </a>
@@ -752,15 +741,15 @@ const avgRating =
         </section>
 
         <!-- Data Source Note -->
-        <section class="py-12 bg-white border-t border-gray-100">
+        <section class="py-12 bg-[var(--paper)] border-t border-[var(--line)]">
             <div class="container mx-auto px-4 md:px-6 text-center">
-                <p class="text-gray-500 text-sm max-w-2xl mx-auto">
+                <p class="text-[var(--muted)] text-sm max-w-2xl mx-auto">
                     All clinic data is sourced from Google Places and verified
                     for accuracy. Ratings and review counts are real and not
                     fabricated. If you're a clinic owner and want to update your
                     listing, please <a
                         href="/add-listing/"
-                        class="text-violet-600 font-medium"
+                        class="text-[var(--accent)] font-medium"
                         >add or update your listing</a
                     >.
                 </p>
@@ -795,7 +784,7 @@ const avgRating =
                     sidebar.classList.toggle("fixed");
                     sidebar.classList.toggle("inset-0");
                     sidebar.classList.toggle("z-50");
-                    sidebar.classList.toggle("bg-white");
+                    sidebar.classList.toggle("bg-[var(--paper)]");
                     sidebar.classList.toggle("overflow-y-auto");
                     sidebar.classList.toggle("p-4");
                 });

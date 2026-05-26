@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-03
 category: research
 tags: ["AI", "targeting", "neuroimaging", "precision medicine"]
-image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop"
+image: "/images/blog-covers/ai-guided-tms-targeting-2026.svg"
 ---
 
 TMS therapy has helped hundreds of thousands of people with treatment-resistant depression. But here is something most people do not hear during their consultation: the standard method for aiming the magnetic coil has not changed much since the 1990s.
@@ -86,9 +86,9 @@ If you are considering TMS or have tried it before without enough results, AI-gu
 
 Five years from now, treating everyone with the same coil placement will likely seem as outdated as prescribing the same antidepressant dose to every person regardless of weight, genetics, or metabolism. The tools for personalization exist today. They are just not standard yet.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>Standard TMS targeting (the 5-cm rule) misses the optimal brain spot in many patients due to individual anatomy variation.</li>
     <li>AI-guided targeting uses fMRI and machine learning to personalize coil placement and predict response probability.</li>
     <li>Studies show 15-20% improvement in response rates with AI/neuroimaging-guided targeting.</li>
@@ -98,47 +98,47 @@ Five years from now, treating everyone with the same coil placement will likely 
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What is the 5-cm rule in TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What is the 5-cm rule in TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The 5-cm rule is the traditional method for targeting the dorsolateral prefrontal cortex. Clinicians measure 5 centimeters forward from the motor cortex (the spot that controls hand movement) as a landmark for placing the TMS coil. It works but misses the optimal target in many patients because brain anatomy varies significantly between individuals.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The 5-cm rule is the traditional method for targeting the dorsolateral prefrontal cortex. Clinicians measure 5 centimeters forward from the motor cortex (the spot that controls hand movement) as a landmark for placing the TMS coil. It works but misses the optimal target in many patients because brain anatomy varies significantly between individuals.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does AI-guided TMS cost more?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does AI-guided TMS cost more?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. The added neuroimaging (functional MRI) runs $500-$1,500 depending on location and insurance coverage. Insurance coverage is inconsistent. Some clinics bundle the cost into their treatment package. Ask upfront what the total cost is with and without neuroimaging-guided targeting.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. The added neuroimaging (functional MRI) runs $500-$1,500 depending on location and insurance coverage. Insurance coverage is inconsistent. Some clinics bundle the cost into their treatment package. Ask upfront what the total cost is with and without neuroimaging-guided targeting.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can AI predict whether TMS will work for me?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can AI predict whether TMS will work for me?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Current AI models can predict TMS response with roughly 75% accuracy before treatment starts, based on baseline brain connectivity patterns and clinical variables. This is not perfect, but it is a lot better than the alternative of just trying it and seeing. If the algorithm predicts you will not respond, your provider may recommend alternative treatments or a different TMS protocol.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Current AI models can predict TMS response with roughly 75% accuracy before treatment starts, based on baseline brain connectivity patterns and clinical variables. This is not perfect, but it is a lot better than the alternative of just trying it and seeing. If the algorithm predicts you will not respond, your provider may recommend alternative treatments or a different TMS protocol.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is AI-guided TMS available everywhere?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is AI-guided TMS available everywhere?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. Not every TMS clinic offers neuroimaging-guided targeting. The ones that do tend to be academic medical centers, larger specialty practices, and clinics that have invested in neuronavigation equipment. Search our <a href="/us/" class="text-violet-600 hover:underline">provider directory</a> for clinics that advertise precision targeting.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. Not every TMS clinic offers neuroimaging-guided targeting. The ones that do tend to be academic medical centers, larger specialty practices, and clinics that have invested in neuronavigation equipment. Search our <a href="/us/" class="text-[var(--warm)] hover:underline">provider directory</a> for clinics that advertise precision targeting.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">If standard TMS did not work for me, could AI-guided TMS work?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">If standard TMS did not work for me, could AI-guided TMS work?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">It is possible. Poor targeting is a plausible explanation for why standard TMS did not work. Studies show that some people who failed standard TMS respond when re-treated with fMRI-guided protocols. Ask your provider about precision targeting options before concluding that TMS does not work for you.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">It is possible. Poor targeting is a plausible explanation for why standard TMS did not work. Studies show that some people who failed standard TMS respond when re-treated with fMRI-guided protocols. Ask your provider about precision targeting options before concluding that TMS does not work for you.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

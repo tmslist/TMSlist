@@ -1,88 +1,131 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import EditorialHero from "../../components/editorial/EditorialHero.astro";
+import BlogCardCover from "../../components/BlogCardCover.astro";
 import { getCollection } from "astro:content";
 
-// Build posts from content collection
+const SITE_URL = (import.meta.env.SITE_URL || "https://tmslist.com").replace(/\/$/, "");
+
+// Normalize lowercase content categories to display labels.
+const CATEGORY_LABEL: Record<string, string> = {
+  research: "Research",
+  treatment: "Treatment",
+  "patient-guide": "Patient Guide",
+  faq: "FAQ",
+};
+
+const monthShort = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function fmtDate(d: Date): string {
+  return `${monthShort[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+function fmtIso(d: Date): string {
+  return d.toISOString().slice(0, 10);
+}
+
 const entries = await getCollection("blog");
 const blogPosts = entries
   .map((entry) => {
-    const publishDate = entry.data.publishDate;
-    const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    const d = publishDate ? publishDate : new Date();
-    const dateStr = `${monthNames[d.getMonth()]} ${d.getFullYear()}`;
-    // Estimate read time from content length
-    const wordCount = (entry.body || "").split(/\s+/).length;
-    const readTime = `${Math.max(1, Math.round(wordCount / 200))} min`;
+    const publishDate: Date = entry.data.publishDate ? new Date(entry.data.publishDate) : new Date();
+    const rawCat = (entry.data.category || "research") as string;
+    const category = CATEGORY_LABEL[rawCat] || rawCat;
+    const wordCount = (entry.body || "").split(/\s+/).filter(Boolean).length;
+    const readTime = `${Math.max(1, Math.round(wordCount / 220))} min read`;
     return {
       slug: entry.id,
       title: entry.data.title,
       excerpt: entry.data.description || "",
-      category: entry.data.category || "Research",
-      date: dateStr,
+      category,
+      author: entry.data.author || "TMS List Editorial Team",
+      tags: entry.data.tags || [],
+      publishDate,
+      dateLabel: fmtDate(publishDate),
+      dateIso: fmtIso(publishDate),
       readTime,
-      image: entry.data.image || `/images/brain_stimulation_art_1769446474392.jpg`,
     };
   })
-  .sort((a, b) => {
-    const da = new Date(a.date + " 1, " + new Date().getFullYear());
-    const db = new Date(b.date + " 1, " + new Date().getFullYear());
-    return db.getTime() - da.getTime();
-  });
+  .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime());
 
 const categories = [...new Set(blogPosts.map((p) => p.category))];
-const categoryColors: Record<string, { bg: string; text: string; dot: string }> = {
-  Research: { bg: "bg-blue-50", text: "text-blue-600", dot: "bg-blue-500" },
-  Treatment: { bg: "bg-emerald-50", text: "text-emerald-600", dot: "bg-emerald-500" },
-  Insurance: { bg: "bg-amber-50", text: "text-amber-600", dot: "bg-amber-500" },
-  FAQ: { bg: "bg-violet-50", text: "text-violet-600", dot: "bg-violet-500" },
-  "Patient Guide": { bg: "bg-rose-50", text: "text-rose-600", dot: "bg-rose-500" },
+const categoryColors: Record<string, { bg: string; text: string; tone: string }> = {
+  Research:        { bg: "bg-[var(--paper2)]",            text: "text-[var(--accent)]", tone: "accent" },
+  Treatment:       { bg: "bg-emerald-50",                 text: "text-emerald-700",     tone: "success" },
+  "Patient Guide": { bg: "bg-[rgba(201,101,74,0.10)]",    text: "text-[var(--warm)]",   tone: "warm" },
+  FAQ:             { bg: "bg-[rgba(59,46,90,0.10)]",      text: "text-[#3B2E5A]",       tone: "muted" },
+  Insurance:       { bg: "bg-amber-50",                   text: "text-amber-700",       tone: "muted" },
 };
-const defaultColor = { bg: "bg-slate-50", text: "text-slate-600", dot: "bg-slate-500" };
+const defaultColor = { bg: "bg-[var(--paper2)]", text: "text-[var(--muted)]", tone: "muted" };
+
+// Structured data: ItemList of blog posts (helps Google build a richer index card).
+const itemListSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "TMS List — Articles",
+  itemListOrder: "https://schema.org/ItemListOrderDescending",
+  numberOfItems: blogPosts.length,
+  itemListElement: blogPosts.slice(0, 30).map((post, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: `${SITE_URL}/blog/${post.slug}/`,
+    name: post.title,
+  })),
+});
+
+// Per-post BlogPosting summaries — kept compact, top 12 only, helps surface freshness signals.
+const blogSummariesSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": blogPosts.slice(0, 12).map((post) => ({
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.dateIso,
+    author: { "@type": "Organization", name: post.author },
+    url: `${SITE_URL}/blog/${post.slug}/`,
+    articleSection: post.category,
+  })),
+});
+
+const combinedSchema = `${itemListSchema}</script><script type="application/ld+json">${blogSummariesSchema}`;
 ---
 
 <Layout
-  title="TMS Therapy Blog - Expert Guides & Research | TMS List"
-  description="Expert articles on TMS therapy, depression treatment, insurance coverage, and the latest research in brain stimulation."
+  title="TMS Therapy Blog — Evidence-Based Guides, Research & Patient Stories | TMS List"
+  description="Expert articles on TMS therapy: depression treatment, deep TMS, theta-burst protocols, insurance coverage, and the latest neuromodulation research. Updated weekly."
   canonical="https://tmslist.com/blog/"
-  contentType="article"
+  contentType="website"
+  schema={combinedSchema}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog/" },
+  ]}
 >
-  <main>
-    <!-- Hero -->
-    <section class="relative bg-slate-950 overflow-hidden">
-      <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
-      <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-violet-600/12 rounded-full blur-[150px]"></div>
-      <div class="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
-      <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-32 relative z-10">
-        <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
-          <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
-          <span class="text-slate-700">/</span>
-          <span class="text-slate-300">Blog</span>
-        </nav>
-        <div class="max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
-            <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-            <span class="text-xs font-semibold text-slate-300 tracking-wider uppercase">{blogPosts.length} Articles</span>
-          </div>
-          <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
-            The TMS<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">Journal</span>
-          </h1>
-          <p class="text-lg text-slate-400 leading-relaxed">
-            Evidence-based articles, patient guides, and the latest research on transcranial magnetic stimulation.
-          </p>
-        </div>
-      </div>
-      <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
-    </section>
+  <main style="background:var(--paper)">
+    <EditorialHero
+      eyebrow={`${blogPosts.length} Articles`}
+      eyebrowDot="#22c55e"
+      title="The TMS"
+      titleAccent="journal."
+      description="Evidence-based articles, patient guides, and the latest research on transcranial magnetic stimulation."
+      breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
+      ctas={[
+        { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+        { label: "Find a TMS Clinic", href: "/us/", variant: "outline" },
+      ]}
+      stats={[
+        { value: blogPosts.length, label: "Articles", color: "ink" },
+        { value: categories.length, label: "Categories", color: "accent" },
+        { value: "Weekly", label: "New Posts", color: "warm" },
+      ]}
+    />
 
     <!-- Category Filters -->
-    <section class="bg-white border-b border-slate-100 py-4 sticky top-16 z-40" id="filter-bar">
+    <section class="bg-[var(--paper)] border-b border-[var(--line)] py-4 sticky top-16 z-40" id="filter-bar">
       <div class="container mx-auto px-4">
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
-          <button data-category="all" class="filter-btn px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-full transition-all shrink-0" aria-label="Show all blog posts">All</button>
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide" role="tablist" aria-label="Filter articles by category">
+          <button data-category="all" class="filter-btn is-active px-4 py-2 text-sm font-semibold rounded-full transition-all shrink-0" role="tab" aria-selected="true">All</button>
           {categories.map((cat) => {
             const c = categoryColors[cat] || defaultColor;
             return (
-              <button data-category={cat} class={`filter-btn px-4 py-2 ${c.bg} ${c.text} text-sm font-semibold rounded-full hover:opacity-80 transition-all shrink-0`} aria-label={`Filter by ${cat}`}>{cat}</button>
+              <button data-category={cat} class={`filter-btn px-4 py-2 ${c.bg} ${c.text} text-sm font-semibold rounded-full hover:opacity-80 transition-all shrink-0`} role="tab" aria-selected="false">{cat}</button>
             );
           })}
         </div>
@@ -90,57 +133,45 @@ const defaultColor = { bg: "bg-slate-50", text: "text-slate-600", dot: "bg-slate
     </section>
 
     <!-- Content -->
-    <section class="py-12 lg:py-16 bg-white">
+    <section class="py-12 lg:py-16 bg-[var(--paper)]">
       <div class="container mx-auto px-4 max-w-6xl">
 
         <!-- Featured Post -->
         {blogPosts.length > 0 && (() => {
           const feat = blogPosts[0];
           const fc = categoryColors[feat.category] || defaultColor;
-          const featGrad = {
-            Research: "from-blue-600 to-indigo-900",
-            Treatment: "from-emerald-600 to-teal-900",
-            Insurance: "from-amber-600 to-orange-900",
-            FAQ: "from-violet-600 to-purple-900",
-            "Patient Guide": "from-rose-600 to-pink-900",
-          }[feat.category] || "from-violet-600 to-slate-900";
           return (
           <a href={`/blog/${feat.slug}/`} data-category={feat.category}
-             class="blog-card group block mb-14">
-            <div class="grid lg:grid-cols-2 gap-0 bg-slate-950 rounded-3xl overflow-hidden">
-              <div class="relative h-64 lg:h-auto overflow-hidden">
-                <div class={`absolute inset-0 bg-gradient-to-br ${featGrad}`}></div>
-                <div class="absolute inset-0 opacity-[0.06]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 24px 24px;"></div>
-                <img
-                  class="blog-card-ai absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:scale-105 transition-transform"
-                  data-slug={feat.slug}
-                  data-subject={feat.title}
-                  alt={feat.title}
-                  loading="eager"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent lg:bg-gradient-to-r"></div>
-                <div class="absolute bottom-4 left-4 right-4 lg:hidden z-10">
-                  <span class={`inline-block px-2.5 py-1 ${fc.bg} ${fc.text} text-[10px] font-bold uppercase tracking-wider rounded-md backdrop-blur-sm mb-2`}>{feat.category}</span>
-                  <h2 class="text-xl font-bold text-white leading-tight line-clamp-2">{feat.title}</h2>
-                </div>
+             class="blog-card group block mb-14"
+             aria-label={`Featured: ${feat.title}`}>
+            <article class="grid lg:grid-cols-[1.1fr_1fr] gap-0 bg-[var(--paper2)] rounded-3xl overflow-hidden border border-[var(--line)] hover:shadow-[0_20px_60px_-15px_rgba(10,22,40,0.12)] transition-all duration-300">
+              <!-- Cover -->
+              <div class="relative lg:min-h-[360px] overflow-hidden">
+                <BlogCardCover slug={feat.slug} title={feat.title} excerpt={feat.excerpt} category={feat.category} tall={true} />
               </div>
-              <div class="p-8 lg:p-12 flex flex-col justify-center">
-                <div class="flex items-center gap-3 mb-5">
+              <!-- Text -->
+              <div class="p-8 lg:p-12 flex flex-col justify-center bg-[var(--paper)]">
+                <div class="flex items-center gap-3 mb-5 flex-wrap">
                   <span class={`px-3 py-1 ${fc.bg} ${fc.text} text-[11px] font-bold uppercase tracking-wider rounded-md`}>{feat.category}</span>
-                  <span class="text-slate-500 text-sm">{feat.date}</span>
+                  <span class="text-[var(--muted)] text-xs uppercase tracking-widest">Featured</span>
                 </div>
-                <h2 class="hidden lg:block text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-violet-300 transition-colors tracking-tight leading-tight">
+                <h2 class="serif text-3xl lg:text-4xl mb-4 group-hover:text-[var(--warm)] transition-colors leading-[1.1]" style="color:var(--ink);">
                   {feat.title}
                 </h2>
-                <p class="text-slate-400 leading-relaxed mb-6 line-clamp-3">{feat.excerpt}</p>
-                <div class="flex items-center gap-4">
-                  <span class="text-violet-400 font-semibold text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                    Read Article <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                <p class="text-[var(--muted)] leading-relaxed mb-6 line-clamp-3">{feat.excerpt}</p>
+                <div class="flex items-center gap-4 text-sm flex-wrap">
+                  <span class="text-[var(--warm)] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Read Article
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                   </span>
-                  <span class="text-slate-600 text-sm">{feat.readTime}</span>
+                  <span class="text-[var(--muted)] inline-flex items-center gap-2">
+                    <time datetime={feat.dateIso}>{feat.dateLabel}</time>
+                    <span aria-hidden="true">·</span>
+                    <span>{feat.readTime}</span>
+                  </span>
                 </div>
               </div>
-            </div>
+            </article>
           </a>
         )})()}
 
@@ -148,55 +179,42 @@ const defaultColor = { bg: "bg-slate-50", text: "text-slate-600", dot: "bg-slate
         <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.slice(1).map((post) => {
             const c = categoryColors[post.category] || defaultColor;
-            const cardGrad = {
-              Research: "from-blue-500/80 to-indigo-800",
-              Treatment: "from-emerald-500/80 to-teal-800",
-              Insurance: "from-amber-500/80 to-orange-800",
-              FAQ: "from-violet-500/80 to-purple-800",
-              "Patient Guide": "from-rose-500/80 to-pink-800",
-            }[post.category] || "from-violet-500/80 to-slate-800";
             return (
             <a href={`/blog/${post.slug}/`} data-category={post.category}
-               class="blog-card group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] hover:border-slate-200 transition-all duration-300">
-              <div class="relative h-48 overflow-hidden">
-                <div class={`absolute inset-0 bg-gradient-to-br ${cardGrad}`}></div>
-                <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 20px 20px;"></div>
-                <img
-                  class="blog-card-ai absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:scale-105"
-                  data-slug={post.slug}
-                  data-subject={post.title}
-                  alt={post.title}
-                  loading="lazy"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                <span class={`absolute top-3 left-3 px-2.5 py-1 bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider rounded-md backdrop-blur-sm border border-white/10`}>{post.category}</span>
-                <div class="absolute bottom-3 left-3 right-3 z-10">
-                  <h2 class="text-[15px] font-bold text-white leading-snug line-clamp-2 drop-shadow-sm">{post.title}</h2>
+               class="blog-card group bg-[var(--paper)] rounded-2xl border border-[var(--line)] overflow-hidden hover:shadow-[0_20px_60px_-15px_rgba(10,22,40,0.1)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col"
+               aria-label={post.title}>
+              <article class="flex-1 flex flex-col">
+                <!-- Cover -->
+                <div class="relative overflow-hidden">
+                  <BlogCardCover slug={post.slug} title={post.title} excerpt={post.excerpt} category={post.category} />
                 </div>
-              </div>
-              <div class="p-5">
-                <p class="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
-                <div class="flex items-center justify-between pt-3 border-t border-slate-50 text-xs text-slate-400">
-                  <span>{post.date}</span>
-                  <span class="font-medium">{post.readTime}</span>
+                <!-- Body -->
+                <div class="p-5 flex-1 flex flex-col">
+                  <h2 class="serif text-xl mb-3 group-hover:text-[var(--warm)] transition-colors leading-snug line-clamp-2" style="color:var(--ink);">{post.title}</h2>
+                  <p class="text-sm text-[var(--muted)] leading-relaxed mb-4 line-clamp-2 flex-1">{post.excerpt}</p>
+                  <div class="flex items-center justify-between pt-3 border-t border-[var(--line)] text-xs text-[var(--muted)]">
+                    <time datetime={post.dateIso}>{post.dateLabel}</time>
+                    <span class="font-medium">{post.readTime}</span>
+                  </div>
                 </div>
-              </div>
+              </article>
             </a>
           )})}
         </div>
 
         <!-- Newsletter -->
-        <div class="mt-20 relative bg-slate-950 rounded-3xl p-10 lg:p-14 overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+        <div class="mt-20 relative bg-[var(--ink)] rounded-3xl p-10 lg:p-14 overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0A1628]/10 via-transparent to-[rgba(10,22,40,0.10)]"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[rgba(10,22,40,0.5)] rounded-full blur-[100px]"></div>
           <div class="relative z-10" id="newsletter-content">
             <div class="text-center max-w-lg mx-auto">
-              <p class="text-sm font-semibold text-violet-400 tracking-wider uppercase mb-3">Stay informed</p>
-              <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">Get TMS research in your inbox</h3>
-              <p class="text-slate-400 mb-8">New articles, clinical trial updates, and patient resources. No spam.</p>
+              <p class="text-sm font-semibold text-[var(--warm-light)] tracking-wider uppercase mb-3">Stay informed</p>
+              <h3 class="serif text-3xl lg:text-4xl text-white mb-3 tracking-tight">Get TMS research in your inbox</h3>
+              <p class="text-white/70 mb-8">New articles, clinical trial updates, and patient resources. No spam.</p>
               <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input type="email" name="email" required placeholder="you@email.com" class="flex-1 px-5 py-3.5 rounded-xl bg-white/10 border border-white/10 text-white placeholder-slate-500 focus:ring-2 focus:ring-violet-500 focus:border-transparent" />
-                <button type="submit" class="px-7 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">Subscribe</button>
+                <label class="sr-only" for="newsletter-email">Email address</label>
+                <input id="newsletter-email" type="email" name="email" required placeholder="you@email.com" class="flex-1 px-5 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-[var(--warm)] focus:border-transparent" />
+                <button type="submit" class="px-7 py-3.5 bg-[var(--warm)] hover:bg-[var(--warm-light)] text-white font-semibold rounded-xl transition-colors shadow-lg shadow-[rgba(201,101,74,0.3)]">Subscribe</button>
               </form>
             </div>
           </div>
@@ -205,97 +223,68 @@ const defaultColor = { bg: "bg-slate-50", text: "text-slate-600", dot: "bg-slate
               <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2">You're subscribed!</h3>
-            <p class="text-slate-400">Check your inbox for a welcome email.</p>
+            <p class="text-white/70">Check your inbox for a welcome email.</p>
           </div>
         </div>
 
         <!-- End-of-page CTA -->
-        <div class="mt-12 bg-gradient-to-br from-violet-600 to-violet-600 rounded-2xl p-8 text-center">
-          <h3 class="text-xl font-bold text-white mb-2">Ready to take the next step?</h3>
-          <p class="text-violet-100 text-sm mb-6 leading-relaxed">Browse our complete TMS clinic directory or take our free eligibility quiz to see if TMS is right for you.</p>
+        <div class="mt-12 bg-[var(--ink)] rounded-2xl p-8 text-center">
+          <h3 class="serif text-2xl text-white mb-2">Ready to take the next step?</h3>
+          <p class="text-white/70 text-sm mb-6 leading-relaxed">Browse our complete TMS clinic directory or take our free eligibility quiz to see if TMS is right for you.</p>
           <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="/quiz/am-i-a-candidate/" class="px-6 py-3 bg-white text-violet-700 font-semibold rounded-xl hover:bg-violet-50 transition-colors shadow-md">
+            <a href="/quiz/am-i-a-candidate/" class="px-6 py-3 bg-[var(--warm)] text-white font-semibold rounded-xl hover:bg-[var(--warm-light)] transition-colors shadow-md">
               Take the Eligibility Quiz
             </a>
             <a href="/us/" class="px-6 py-3 bg-white/10 border border-white/30 text-white font-semibold rounded-xl hover:bg-white/20 transition-all">
               Browse TMS Clinics
             </a>
           </div>
-          <p class="text-xs text-violet-200 mt-4">Also: <a href="/resources/buyers-guide/" class="underline hover:text-white">download the free TMS Buyer's Guide</a>.</p>
+          <p class="text-xs text-white/60 mt-4">Also: <a href="/tms-cost-guide/" class="underline hover:text-white">download the free TMS Buyer's Guide</a>.</p>
         </div>
       </div>
     </section>
   </main>
 </Layout>
 
+<style>
+  .filter-btn.is-active {
+    background: var(--ink) !important;
+    color: #fff !important;
+  }
+</style>
+
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const buttons = document.querySelectorAll(".filter-btn");
-    const cards = document.querySelectorAll(".blog-card");
+  function initBlogIndex() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const cards = document.querySelectorAll<HTMLElement>(".blog-card");
+    if (!buttons.length) return;
 
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const category = btn.getAttribute("data-category");
         buttons.forEach((b) => {
-          b.classList.remove("bg-slate-900", "text-white", "!bg-slate-900", "!text-white");
-          const origBg = b.className.match(/bg-\w+-\d+/)?.[0];
-          if (origBg) b.classList.add(origBg);
+          b.classList.remove("is-active");
+          b.setAttribute("aria-selected", "false");
         });
-        btn.classList.add("!bg-slate-900", "!text-white");
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-selected", "true");
         cards.forEach((card) => {
           const cardCat = card.getAttribute("data-category");
-          (card as HTMLElement).style.display = (category === "all" || cardCat === category) ? "" : "none";
+          card.style.display = (category === "all" || cardCat === category) ? "" : "none";
         });
       });
     });
 
-    const aiImages = document.querySelectorAll(".blog-card-ai") as NodeListOf<HTMLImageElement>;
-    let loadIndex = 0;
-
-    async function loadNextAiImage() {
-      if (loadIndex >= aiImages.length) return;
-      const img = aiImages[loadIndex];
-      loadIndex++;
-      const slug = img.dataset.slug;
-      const subject = img.dataset.subject;
-      if (!slug || !subject) { loadNextAiImage(); return; }
-      const cacheKey = `ai-img:blog-cover:${slug}`;
-      const cached = localStorage.getItem(cacheKey);
-      if (cached) {
-        try {
-          const { image, ts } = JSON.parse(cached);
-          if (Date.now() - ts < 7 * 24 * 60 * 60 * 1000 && image) {
-            img.src = image;
-            img.onload = () => { img.style.opacity = "0.6"; };
-            loadNextAiImage();
-            return;
-          }
-        } catch { localStorage.removeItem(cacheKey); }
-      }
-      try {
-        const params = new URLSearchParams({ type: "hero", subject });
-        const res = await fetch(`/api/ai/generate-image?${params}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data.image) {
-            localStorage.setItem(cacheKey, JSON.stringify({ image: data.image, ts: Date.now() }));
-            img.src = data.image;
-            img.onload = () => { img.style.opacity = "0.6"; };
-          }
-        }
-      } catch {}
-      setTimeout(loadNextAiImage, 800);
-    }
-    loadNextAiImage();
-
-    const form = document.getElementById("newsletter-form") as HTMLFormElement;
+    const form = document.getElementById("newsletter-form") as HTMLFormElement | null;
     const content = document.getElementById("newsletter-content");
     const success = document.getElementById("newsletter-success");
-    if (form) {
+    if (form && !form.dataset.bound) {
+      form.dataset.bound = "1";
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
         btn.disabled = true;
+        const original = btn.textContent;
         btn.textContent = "Joining...";
         try {
           const res = await fetch("/api/leads", {
@@ -305,8 +294,20 @@ const defaultColor = { bg: "bg-slate-50", text: "text-slate-600", dot: "bg-slate
           });
           if (res.ok) { content?.classList.add("hidden"); success?.classList.remove("hidden"); }
           else throw new Error();
-        } catch { btn.disabled = false; btn.textContent = "Subscribe"; alert("Something went wrong. Please try again."); }
+        } catch {
+          btn.disabled = false;
+          btn.textContent = original;
+          alert("Something went wrong. Please try again.");
+        }
       });
     }
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBlogIndex);
+  } else {
+    initBlogIndex();
+  }
+  // Re-init if Astro view-transitions are added later.
+  document.addEventListener("astro:page-load", initBlogIndex);
 </script>

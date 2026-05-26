@@ -1,0 +1,5 @@
+---
+import { getTrackingSettings } from '../lib/tracking';
+const t = await getTrackingSettings();
+---
+{t.enabled && t.bodyCloseCode && <Fragment set:html={t.bodyCloseCode} />}

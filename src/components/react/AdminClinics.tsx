@@ -187,7 +187,7 @@ export default function AdminClinics() {
             placeholder="Search by name, city, or email..."
             value={search}
             onChange={e => { setSearch(e.target.value); setPage(0); }}
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="w-full px-4 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(201,101,74,0.2)] focus:ring-[rgba(10,22,40,0.2)]"
           />
         </div>
         {/* Verified filter */}
@@ -198,8 +198,8 @@ export default function AdminClinics() {
               onClick={() => { setVerifiedFilter(v); setPage(0); }}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 verifiedFilter === v
-                  ? 'bg-indigo-600 text-white'
-                  : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  ? 'bg-[var(--ink2)] text-white'
+                  : 'bg-white border border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
               }`}
             >
               {label}
@@ -210,7 +210,7 @@ export default function AdminClinics() {
         <select
           value={sortBy}
           onChange={e => { setSortBy(e.target.value as SortOption); setPage(0); }}
-          className="px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:border-indigo-500 focus:ring-indigo-500"
+          className="px-4 py-2.5 rounded-lg border border-[var(--line)] text-sm bg-white focus:border-[rgba(201,101,74,0.2)] focus:ring-[rgba(10,22,40,0.2)]"
         >
           <option value="newest">Sort: Newest</option>
           <option value="rating">Sort: Rating</option>
@@ -228,85 +228,85 @@ export default function AdminClinics() {
       )}
 
       {/* Count */}
-      <div className="text-sm text-gray-500">
+      <div className="text-sm text-[var(--muted)]">
         {total} clinic{total !== 1 ? 's' : ''} found
-        {selected.size > 0 && <span className="ml-2 font-medium text-indigo-600">{selected.size} selected</span>}
+        {selected.size > 0 && <span className="ml-2 font-medium text-[var(--warm)]">{selected.size} selected</span>}
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm border border-[var(--line)] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
+              <tr className="bg-[var(--paper2)] border-b border-[var(--line)]">
                 <th className="px-4 py-3 text-left">
                   <input
                     type="checkbox"
                     checked={allSelected}
                     ref={el => { if (el) el.indeterminate = someSelected; }}
                     onChange={toggleAll}
-                    className="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                    className="w-4 h-4 rounded border-[var(--line)] text-[var(--warm)] focus:ring-[rgba(10,22,40,0.2)] cursor-pointer"
                   />
                 </th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Clinic</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Location</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Rating</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Devices</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Doctors</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">FAQs</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Status</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Owner</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Clinic</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Location</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Rating</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Devices</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Doctors</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">FAQs</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Status</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Owner</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[var(--line)]">
               {loading ? (
-                <tr><td colSpan={10} className="px-4 py-12 text-center text-gray-400"><div className="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2"></div><br/>Loading</td></tr>
+                <tr><td colSpan={10} className="px-4 py-12 text-center text-[var(--muted)]"><div className="inline-block w-5 h-5 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-2"></div><br/>Loading</td></tr>
               ) : clinics.length === 0 ? (
-                <tr><td colSpan={10} className="px-4 py-8 text-center text-gray-500">No clinics found.</td></tr>
+                <tr><td colSpan={10} className="px-4 py-8 text-center text-[var(--muted)]">No clinics found.</td></tr>
               ) : clinics.map(clinic => (
-                <tr key={clinic.id} className={`hover:bg-gray-50 transition-colors ${selected.has(clinic.id) ? 'bg-indigo-50/40' : ''}`}>
+                <tr key={clinic.id} className={`hover:bg-[var(--paper2)] transition-colors ${selected.has(clinic.id) ? 'bg-[rgba(201,101,74,0.40)]' : ''}`}>
                   <td className="px-4 py-3">
                     <input
                       type="checkbox"
                       checked={selected.has(clinic.id)}
                       onChange={() => toggleOne(clinic.id)}
-                      className="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                      className="w-4 h-4 rounded border-[var(--line)] text-[var(--warm)] focus:ring-[rgba(10,22,40,0.2)] cursor-pointer"
                     />
                   </td>
                   <td className="px-4 py-3">
-                    <a href={`/clinic/${clinic.slug}/`} target="_blank" className="text-sm font-semibold text-gray-900 hover:text-indigo-600">
+                    <a href={`/clinic/${clinic.slug}/`} target="_blank" className="text-sm font-semibold text-[var(--ink)] hover:text-[var(--warm)]">
                       {clinic.name}
                     </a>
-                    {clinic.email && <div className="text-xs text-gray-400 mt-0.5">{clinic.email}</div>}
+                    {clinic.email && <div className="text-xs text-[var(--muted)] mt-0.5">{clinic.email}</div>}
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
+                  <td className="px-4 py-3 text-sm text-[var(--ink2)]">
                     {clinic.city}, {clinic.state}
                   </td>
                   <td className="px-4 py-3 text-sm">
                     {Number(clinic.ratingAvg) > 0 ? (
-                      <span className="font-semibold text-gray-900">
+                      <span className="font-semibold text-[var(--ink)]">
                         {Number(clinic.ratingAvg).toFixed(1)} <span className="text-yellow-500">&#9733;</span>
-                        <span className="text-xs text-gray-400 ml-1">({clinic.reviewCount})</span>
+                        <span className="text-xs text-[var(--muted)] ml-1">({clinic.reviewCount})</span>
                       </span>
                     ) : (
-                      <span className="text-gray-400">--</span>
+                      <span className="text-[var(--muted)]">--</span>
                     )}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex flex-wrap gap-1">
                       {clinic.machines?.slice(0, 2).map(m => (
-                        <span key={m} className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">{m}</span>
+                        <span key={m} className="px-2 py-0.5 bg-[var(--paper2)] text-[var(--ink2)] text-xs rounded">{m}</span>
                       ))}
                     </div>
                   </td>
                   <td className="px-4 py-3">
                     {clinic.doctorCount > 0 ? (
-                      <span className="inline-flex items-center px-2.5 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">
+                      <span className="inline-flex items-center px-2.5 py-1 bg-[rgba(201,101,74,0.1)] text-[var(--warm)] text-xs font-semibold rounded-full">
                         {clinic.doctorCount} {clinic.doctorCount === 1 ? 'Doctor' : 'Doctors'}
                       </span>
                     ) : (
-                      <span className="text-xs text-gray-400 italic">No doctors</span>
+                      <span className="text-xs text-[var(--muted)] italic">No doctors</span>
                     )}
                   </td>
                   <td className="px-4 py-3">
@@ -315,7 +315,7 @@ export default function AdminClinics() {
                         {clinic.faqs.length} {clinic.faqs.length === 1 ? 'FAQ' : 'FAQs'}
                       </span>
                     ) : (
-                      <span className="text-xs text-gray-400 italic">No FAQs</span>
+                      <span className="text-xs text-[var(--muted)] italic">No FAQs</span>
                     )}
                   </td>
                   <td className="px-4 py-3">
@@ -326,7 +326,7 @@ export default function AdminClinics() {
                         {clinic.verified ? 'Verified' : 'Pending'}
                       </span>
                       {clinic.isFeatured && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-[rgba(201,101,74,0.1)] text-[var(--warm)]">
                           Featured
                         </span>
                       )}
@@ -335,26 +335,26 @@ export default function AdminClinics() {
                   <td className="px-4 py-3">
                     {clinic.ownerUserId ? (
                       <div className="flex flex-col gap-1">
-                        <span className="text-xs font-medium text-gray-700 truncate max-w-[120px]" title={clinic.ownerEmail || ''}>
+                        <span className="text-xs font-medium text-[var(--ink2)] truncate max-w-[120px]" title={clinic.ownerEmail || ''}>
                           {clinic.ownerName || clinic.ownerEmail}
                         </span>
                         <button
                           onClick={() => setImpersonate({ id: clinic.id, email: clinic.ownerEmail || '', name: clinic.ownerName || '', userId: clinic.ownerUserId })}
-                          className="w-fit px-2 py-0.5 bg-violet-50 text-violet-700 text-[10px] font-medium rounded hover:bg-violet-100 transition-colors"
+                          className="w-fit px-2 py-0.5 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-[10px] font-medium rounded hover:bg-[rgba(10,22,40,0.08)] transition-colors"
                           title="Login as this clinic owner"
                         >
                           Login As
                         </button>
                       </div>
                     ) : (
-                      <span className="text-xs text-gray-400 italic">No owner</span>
+                      <span className="text-xs text-[var(--muted)] italic">No owner</span>
                     )}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex gap-2">
                       <a
                         href={`/admin/clinics/${clinic.id}`}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-violet-50 text-violet-700 hover:bg-violet-100 transition-colors"
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-[rgba(10,22,40,0.08)] text-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-colors"
                       >
                         Edit
                       </a>
@@ -374,8 +374,8 @@ export default function AdminClinics() {
                         disabled={updating === clinic.id}
                         className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors disabled:opacity-50 ${
                           clinic.isFeatured
-                            ? 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                            : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100'
+                            ? 'bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
+                            : 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)] hover:bg-[rgba(201,101,74,0.1)]'
                         }`}
                       >
                         {clinic.isFeatured ? 'Unfeature' : 'Feature'}
@@ -390,22 +390,22 @@ export default function AdminClinics() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="px-4 py-3 border-t border-gray-200 bg-gray-50 flex items-center justify-between">
-            <div className="text-sm text-gray-500">
+          <div className="px-4 py-3 border-t border-[var(--line)] bg-[var(--paper2)] flex items-center justify-between">
+            <div className="text-sm text-[var(--muted)]">
               Page {page + 1} of {totalPages}
             </div>
             <div className="flex gap-2">
               <button
                 onClick={() => setPage(p => Math.max(0, p - 1))}
                 disabled={page === 0}
-                className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50"
+                className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-lg text-sm disabled:opacity-50 hover:bg-[var(--paper2)]"
               >
                 Previous
               </button>
               <button
                 onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
                 disabled={page >= totalPages - 1}
-                className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50"
+                className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-lg text-sm disabled:opacity-50 hover:bg-[var(--paper2)]"
               >
                 Next
               </button>
@@ -416,14 +416,14 @@ export default function AdminClinics() {
 
       {/* Bulk Action Bar */}
       {selected.size > 0 && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-4 bg-gray-900 text-white px-6 py-3 rounded-2xl shadow-2xl">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-4 bg-[var(--ink)] text-white px-6 py-3 rounded-2xl shadow-2xl">
           <span className="text-sm font-medium">
             {selected.size} selected
           </span>
-          <div className="w-px h-5 bg-gray-600" />
+          <div className="w-px h-5 bg-[var(--muted)]" />
           <button
             onClick={exportCSV}
-            className="flex items-center gap-1.5 text-sm text-gray-200 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 text-sm text-[var(--line)] hover:text-white transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -439,10 +439,10 @@ export default function AdminClinics() {
             </svg>
             Delete Selected
           </button>
-          <div className="w-px h-5 bg-gray-600" />
+          <div className="w-px h-5 bg-[var(--muted)]" />
           <button
             onClick={() => setSelected(new Set())}
-            className="text-sm text-gray-400 hover:text-white transition-colors"
+            className="text-sm text-[var(--muted)] hover:text-white transition-colors"
             aria-label="Clear selection"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -457,31 +457,31 @@ export default function AdminClinics() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm mx-4">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center shrink-0">
-                <svg className="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <div className="w-10 h-10 bg-[rgba(10,22,40,0.08)] rounded-full flex items-center justify-center shrink-0">
+                <svg className="w-5 h-5 text-[var(--ink)]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">Login As</h3>
-                <p className="text-sm text-gray-500">{impersonate.email}</p>
+                <h3 className="text-lg font-semibold text-[var(--ink)]">Login As</h3>
+                <p className="text-sm text-[var(--muted)]">{impersonate.email}</p>
               </div>
             </div>
-            <p className="text-sm text-gray-600 mb-1">You are about to switch into this clinic owner's account.</p>
+            <p className="text-sm text-[var(--ink2)] mb-1">You are about to switch into this clinic owner's account.</p>
             <div className="bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-4">
               <p className="text-xs text-amber-700">This action will be logged in the audit trail.</p>
             </div>
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setImpersonate(null)}
-                className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200">
+                className="px-4 py-2 bg-[var(--paper2)] text-[var(--ink2)] text-sm font-medium rounded-lg hover:bg-[var(--paper2)]">
                 Cancel
               </button>
               <form method="POST" action="/api/admin/impersonate">
                 <input type="hidden" name="userId" value={impersonate.userId} />
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-violet-600 text-white text-sm font-semibold rounded-lg hover:bg-violet-700">
+                  className="px-4 py-2 bg-[var(--ink)] text-white text-sm font-semibold rounded-lg hover:bg-[var(--ink)]">
                   Confirm & Switch
                 </button>
               </form>
@@ -502,15 +502,15 @@ export default function AdminClinics() {
                 </svg>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">Delete {selected.size} {selected.size === 1 ? 'clinic' : 'clinics'}?</h3>
-                <p className="text-sm text-gray-500 mt-0.5">This cannot be undone.</p>
+                <h3 className="text-lg font-semibold text-[var(--ink)]">Delete {selected.size} {selected.size === 1 ? 'clinic' : 'clinics'}?</h3>
+                <p className="text-sm text-[var(--muted)] mt-0.5">This cannot be undone.</p>
               </div>
             </div>
             <div className="flex gap-3 mt-6">
               <button
                 onClick={() => setShowDeleteModal(false)}
                 disabled={bulkDeleting}
-                className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+                className="flex-1 px-4 py-2.5 border border-[var(--line)] text-[var(--ink2)] text-sm font-medium rounded-lg hover:bg-[var(--paper2)] transition-colors disabled:opacity-50"
               >
                 Cancel
               </button>

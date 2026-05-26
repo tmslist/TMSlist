@@ -115,7 +115,7 @@ export default function PortalSidebar({ currentPage, userEmail }: PortalSidebarP
   const sidebarContent = (
     <div className="flex flex-col h-full">
       {/* Logo / brand */}
-      <div className="px-5 py-6 border-b border-gray-100">
+      <div className="px-5 py-6 border-b border-[var(--line)]">
         <a href="/portal/dashboard/" className="flex items-center gap-3">
           <div className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center">
             <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -123,14 +123,14 @@ export default function PortalSidebar({ currentPage, userEmail }: PortalSidebarP
             </svg>
           </div>
           <div>
-            <span className="text-lg font-bold text-gray-900">TMS List</span>
+            <span className="text-lg font-bold text-[var(--ink)]">TMS List</span>
             <span className="block text-[10px] font-semibold text-emerald-600 uppercase tracking-wider -mt-0.5">Doctor Portal</span>
           </div>
         </a>
       </div>
 
       {/* Notification bell */}
-      <div className="px-5 py-3 border-b border-gray-100 flex justify-end">
+      <div className="px-5 py-3 border-b border-[var(--line)] flex justify-end">
         <PortalNotifications />
       </div>
 
@@ -145,10 +145,10 @@ export default function PortalSidebar({ currentPage, userEmail }: PortalSidebarP
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 isActive
                   ? 'bg-emerald-50 text-emerald-700'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  : 'text-[var(--ink2)] hover:bg-[var(--paper2)] hover:text-[var(--ink)]'
               }`}
             >
-              <span className={isActive ? 'text-emerald-600' : 'text-gray-400'}>{item.icon}</span>
+              <span className={isActive ? 'text-emerald-600' : 'text-[var(--muted)]'}>{item.icon}</span>
               {item.label}
             </a>
           );
@@ -156,14 +156,14 @@ export default function PortalSidebar({ currentPage, userEmail }: PortalSidebarP
       </nav>
 
       {/* User section */}
-      <div className="px-3 py-4 border-t border-gray-100">
+      <div className="px-3 py-4 border-t border-[var(--line)]">
         <div className="px-3 py-2 mb-2">
-          <div className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">Signed in as</div>
-          <div className="text-sm font-medium text-gray-700 truncate" title={userEmail}>{userEmail}</div>
+          <div className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider mb-1">Signed in as</div>
+          <div className="text-sm font-medium text-[var(--ink2)] truncate" title={userEmail}>{userEmail}</div>
         </div>
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-700 transition-colors"
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-red-50 hover:text-red-700 transition-colors"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -179,10 +179,10 @@ export default function PortalSidebar({ currentPage, userEmail }: PortalSidebarP
       {/* Mobile hamburger button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md border border-gray-200"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md border border-[var(--line)]"
         aria-label="Open navigation"
       >
-        <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 text-[var(--ink2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
@@ -194,7 +194,7 @@ export default function PortalSidebar({ currentPage, userEmail }: PortalSidebarP
           <div className="absolute left-0 top-0 bottom-0 w-72 bg-white shadow-xl">
             <button
               onClick={() => setMobileOpen(false)}
-              className="absolute top-4 right-4 p-1 text-gray-400 hover:text-gray-600"
+              className="absolute top-4 right-4 p-1 text-[var(--muted)] hover:text-[var(--ink2)]"
               aria-label="Close navigation"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -207,7 +207,7 @@ export default function PortalSidebar({ currentPage, userEmail }: PortalSidebarP
       )}
 
       {/* Desktop sidebar */}
-      <aside className="hidden lg:block w-64 bg-white border-r border-gray-200 min-h-screen shrink-0">
+      <aside className="hidden lg:block w-64 bg-white border-r border-[var(--line)] min-h-screen shrink-0">
         <div className="sticky top-0 h-screen overflow-hidden">
           {sidebarContent}
         </div>

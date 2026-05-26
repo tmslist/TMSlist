@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-08
 category: treatment
 tags: ["treatment duration", "long-term results", "maintenance", "relapse"]
-image: "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=800&h=400&fit=crop"
+image: "/images/blog-covers/how-long-does-tms-last.svg"
 ---
 
 When people ask how long TMS therapy lasts, they usually mean one of two things. How long is the treatment itself? Or how long do the results stick around? Both matter, so this guide covers each.
@@ -76,9 +76,9 @@ TMS has only been FDA-cleared since 2008, so the longest follow-up data we have 
 
 It is not a permanent fix for most people. But then again, neither is any depression treatment. Antidepressants require ongoing use. Therapy requires ongoing work. TMS requires occasional maintenance. The goal is not a one-time cure. It is sustained management that gives you your life back.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>A standard TMS course is 36 sessions over 6-9 weeks. Each session takes 20-40 minutes (or 3 minutes with theta burst).</li>
     <li>Results typically last 6-12 months. About 30-50% of responders need maintenance sessions to sustain gains.</li>
     <li>Do not quit early. Weeks 3-6 are when most responders feel the most significant improvement.</li>
@@ -88,47 +88,47 @@ It is not a permanent fix for most people. But then again, neither is any depres
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long does a TMS treatment course take?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long does a TMS treatment course take?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">A standard course is 36 sessions delivered 5 days per week over approximately 7 weeks. Sessions run 20-40 minutes each for standard TMS or about 3 minutes for theta burst stimulation. Some clinics taper the final week, extending to 8-9 weeks total.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">A standard course is 36 sessions delivered 5 days per week over approximately 7 weeks. Sessions run 20-40 minutes each for standard TMS or about 3 minutes for theta burst stimulation. Some clinics taper the final week, extending to 8-9 weeks total.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long do TMS results last?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long do TMS results last?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most studies show benefits lasting 6-12 months. Some people maintain improvement for over a year without additional treatment. About 30-50% of responders need periodic maintenance sessions to sustain their gains. OCD follow-up data is stronger: 58% maintained improvement at 2 years.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most studies show benefits lasting 6-12 months. Some people maintain improvement for over a year without additional treatment. About 30-50% of responders need periodic maintenance sessions to sustain their gains. OCD follow-up data is stronger: 58% maintained improvement at 2 years.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What are TMS maintenance sessions?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What are TMS maintenance sessions?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Periodic booster sessions designed to sustain improvement when symptoms start returning. Common approaches include weekly sessions for a month tapering to monthly, a cluster of 5-10 sessions when symptoms re-emerge, or monthly single sessions as prevention. Your provider will tailor the approach to your situation.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Periodic booster sessions designed to sustain improvement when symptoms start returning. Common approaches include weekly sessions for a month tapering to monthly, a cluster of 5-10 sessions when symptoms re-emerge, or monthly single sessions as prevention. Your provider will tailor the approach to your situation.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does insurance cover TMS maintenance?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does insurance cover TMS maintenance?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">It varies. Some plans cover maintenance TMS, especially with documentation that symptoms have returned. As of 2026, several Medicare Administrative Contractors cover maintenance protocols. Ask your clinic about coverage upfront so you are not surprised.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">It varies. Some plans cover maintenance TMS, especially with documentation that symptoms have returned. As of 2026, several Medicare Administrative Contractors cover maintenance protocols. Ask your clinic about coverage upfront so you are not surprised.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What if TMS stops working?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What if TMS stops working?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Options include maintenance sessions, a full retreatment course (people who responded once usually respond again), combining TMS with other treatments (therapy, medication), or adjusting the protocol (different target, different intensity, theta burst vs. standard TMS). Contact your provider at the first sign of returning symptoms.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Options include maintenance sessions, a full retreatment course (people who responded once usually respond again), combining TMS with other treatments (therapy, medication), or adjusting the protocol (different target, different intensity, theta burst vs. standard TMS). Contact your provider at the first sign of returning symptoms.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

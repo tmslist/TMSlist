@@ -82,7 +82,7 @@ export default function WhatIfSimulator() {
     <div className="space-y-8">
       {/* Protocol selector */}
       <div>
-        <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Select Protocol</label>
+        <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">Select Protocol</label>
         <div className="flex flex-wrap gap-2">
           {protocols.map(p => (
             <button
@@ -90,8 +90,8 @@ export default function WhatIfSimulator() {
               onClick={() => setProtocolName(p.name)}
               className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                 protocolName === p.name
-                  ? 'bg-violet-600 text-white'
-                  : 'bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100'
+                  ? 'bg-[var(--ink)] text-white'
+                  : 'bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)] border border-[var(--line)]'
               }`}
             >
               {p.name.split('(')[0].trim()}
@@ -102,7 +102,7 @@ export default function WhatIfSimulator() {
 
       {/* Parameter selector */}
       <div>
-        <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Adjust Parameter</label>
+        <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">Adjust Parameter</label>
         <div className="flex flex-wrap gap-2">
           {(Object.keys(PARAM_RANGES) as ParamKey[]).map(p => (
             <button
@@ -110,8 +110,8 @@ export default function WhatIfSimulator() {
               onClick={() => { setParam(p); setValue(protocol[p] as number); }}
               className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                 param === p
-                  ? 'bg-cyan-600 text-white'
-                  : 'bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100'
+                  ? 'bg-[var(--accent)] text-white'
+                  : 'bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)] border border-[var(--line)]'
               }`}
             >
               {p === 'frequencyHz' ? 'Frequency (Hz)' :
@@ -124,17 +124,17 @@ export default function WhatIfSimulator() {
       </div>
 
       {/* Parameter slider */}
-      <div className="bg-slate-950 rounded-2xl p-8">
+      <div className="bg-[var(--ink)] rounded-2xl p-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Current Value</p>
+            <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Current Value</p>
             <p className="text-4xl font-bold text-white mt-1">
-              {value}<span className="text-lg text-slate-400 ml-1">{range.unit}</span>
+              {value}<span className="text-lg text-[var(--muted)] ml-1">{range.unit}</span>
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Baseline</p>
-            <p className="text-2xl font-bold text-slate-500 mt-1">
+            <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Baseline</p>
+            <p className="text-2xl font-bold text-[var(--muted)] mt-1">
               {baselineValue}<span className="text-sm ml-1">{range.unit}</span>
             </p>
           </div>
@@ -151,14 +151,14 @@ export default function WhatIfSimulator() {
             className="w-full accent-cyan-400 h-3"
           />
         </div>
-        <div className="flex justify-between text-xs text-slate-500">
+        <div className="flex justify-between text-xs text-[var(--muted)]">
           <span>{range.min} {range.unit}</span>
           <span>{range.max} {range.unit}</span>
         </div>
 
         {pctChange !== 0 && (
           <div className={`mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold ${
-            pctChange > 0 ? 'bg-cyan-900/50 text-cyan-400' : 'bg-amber-900/50 text-amber-400'
+            pctChange > 0 ? 'bg-[var(--accent)]/50 text-[var(--accent2)]' : 'bg-amber-900/50 text-amber-400'
           }`}>
             {pctChange > 0 ? '↑' : '↓'} {Math.abs(pctChange)}% from baseline
           </div>
@@ -171,37 +171,37 @@ export default function WhatIfSimulator() {
           {severityConfig.icon}
           <div>
             <p className={`text-xs font-bold uppercase tracking-wider ${severityConfig.color} mb-1`}>Predicted Outcome</p>
-            <p className="text-sm font-bold text-slate-800">{outcome.label}</p>
-            <p className="text-sm text-slate-600 mt-1">{outcome.detail}</p>
+            <p className="text-sm font-bold text-[var(--ink)]">{outcome.label}</p>
+            <p className="text-sm text-[var(--ink2)] mt-1">{outcome.detail}</p>
           </div>
         </div>
       </div>
 
       {/* Activation estimate */}
-      <div className="bg-white rounded-xl border border-slate-100 p-6">
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Estimated Cortical Activation</p>
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6">
+        <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-3">Estimated Cortical Activation</p>
         <div className="flex items-end gap-3">
-          <p className="text-4xl font-bold text-violet-600">~{activation.toLocaleString()}</p>
-          <p className="text-sm text-slate-400 mb-1.5">neurons/session</p>
+          <p className="text-4xl font-bold text-[var(--accent)]">~{activation.toLocaleString()}</p>
+          <p className="text-sm text-[var(--muted)] mb-1.5">neurons/session</p>
         </div>
-        <p className="text-xs text-slate-400 mt-2">
+        <p className="text-xs text-[var(--muted)] mt-2">
           Baseline for {protocol.name.split('(')[0].trim()}: ~{Math.round((35000 * ((protocol.intensityPct - 80) / 40) * (protocol.frequencyHz / 10) * (protocol.pulses / protocol.pulses))).toLocaleString()} neurons/session
         </p>
       </div>
 
       {/* What-if comparison */}
       <div>
-        <p className="text-sm font-bold text-slate-700 mb-3">How would this change affect outcomes?</p>
+        <p className="text-sm font-bold text-[var(--ink2)] mb-3">How would this change affect outcomes?</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { label: 'Efficacy', icon: <TrendingUpIcon size={24} className="text-violet-600" />, impact: param === 'frequencyHz' ? (value > 10 ? '+' : value < 5 ? '-' : '+') : param === 'intensityPct' ? (value > 100 ? '+' : '-') : param === 'pulses' ? (value > protocol.pulses ? '+' : '-') : param === 'sessionsTotal' ? (value >= 36 ? '+' : '-') : '~' },
+            { label: 'Efficacy', icon: <TrendingUpIcon size={24} className="text-[var(--accent)]" />, impact: param === 'frequencyHz' ? (value > 10 ? '+' : value < 5 ? '-' : '+') : param === 'intensityPct' ? (value > 100 ? '+' : '-') : param === 'pulses' ? (value > protocol.pulses ? '+' : '-') : param === 'sessionsTotal' ? (value >= 36 ? '+' : '-') : '~' },
             { label: 'Side Effects', icon: <WarningIcon size={24} className="text-amber-600" />, impact: param === 'intensityPct' ? (value > 120 ? '+' : value < 100 ? '-' : '~') : param === 'frequencyHz' ? (value > 15 ? '+' : '~') : '~' },
-            { label: 'Session Duration', icon: <CalendarIcon size={24} className="text-cyan-600" />, impact: param === 'pulses' ? (value > protocol.pulses ? '+' : value < protocol.pulses ? '-' : '~') : '~' },
+            { label: 'Session Duration', icon: <CalendarIcon size={24} className="text-[var(--accent)]" />, impact: param === 'pulses' ? (value > protocol.pulses ? '+' : value < protocol.pulses ? '-' : '~') : '~' },
           ].map(item => (
-            <div key={item.label} className="bg-slate-50 rounded-xl p-4 text-center border border-slate-100">
+            <div key={item.label} className="bg-[var(--paper2)] rounded-xl p-4 text-center border border-[var(--line)]">
               <span className="text-2xl flex justify-center">{item.icon}</span>
-              <p className="text-xs text-slate-400 mt-1">{item.label}</p>
-              <p className={`text-xl font-bold mt-2 ${item.impact === '+' ? 'text-red-500' : item.impact === '-' ? 'text-amber-500' : 'text-slate-500'}`}>
+              <p className="text-xs text-[var(--muted)] mt-1">{item.label}</p>
+              <p className={`text-xl font-bold mt-2 ${item.impact === '+' ? 'text-red-500' : item.impact === '-' ? 'text-amber-500' : 'text-[var(--muted)]'}`}>
                 {item.impact === '+' ? '↑ Increase' : item.impact === '-' ? '↓ Decrease' : '≈ No change'}
               </p>
             </div>
@@ -210,12 +210,12 @@ export default function WhatIfSimulator() {
       </div>
 
       {/* Link to simulation */}
-      <div className="bg-violet-50 rounded-xl p-5 border border-violet-100 text-center">
-        <p className="text-sm font-bold text-violet-700 mb-2">See it in action</p>
-        <p className="text-xs text-slate-500 mb-4">Test these parameters in the full TMS simulation with a 3D brain model.</p>
+      <div className="bg-[rgba(10,22,40,0.08)] rounded-xl p-5 border border-[rgba(10,22,40,0.1)] text-center">
+        <p className="text-sm font-bold text-[var(--accent)] mb-2">See it in action</p>
+        <p className="text-xs text-[var(--muted)] mb-4">Test these parameters in the full TMS simulation with a 3D brain model.</p>
         <a
           href={`/simulation/?protocol=${encodeURIComponent(protocol.name)}&freq=${param === 'frequencyHz' ? value : protocol.frequencyHz}&intensity=${param === 'intensityPct' ? value : protocol.intensityPct}`}
-          className="inline-block px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-500 transition-colors"
+          className="inline-block px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors"
         >
           Open in Simulation →
         </a>

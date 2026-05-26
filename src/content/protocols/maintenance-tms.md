@@ -73,21 +73,21 @@ Good news about retreatment: response rates are high. About 80-90% of people who
 
 ---
 
-<div class="not-prose my-8 bg-cyan-50 border border-cyan-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-cyan-900 mb-3 text-base">Related Protocols</h4>
+<div class="not-prose my-8 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--ink)] mb-3 text-base">Related Protocols</h4>
   <div class="grid grid-cols-2 gap-2">
-    <a href="/protocols/theta-burst-stimulation/" class="text-sm text-cyan-700 hover:underline">Theta Burst</a>
-    <a href="/protocols/saint-protocol/" class="text-sm text-cyan-700 hover:underline">SAINT Protocol</a>
-    <a href="/protocols/deep-tms/" class="text-sm text-cyan-700 hover:underline">Deep TMS</a>
-    <a href="/protocols/accelerated-tms/" class="text-sm text-cyan-700 hover:underline">Accelerated TMS</a>
+    <a href="/protocols/theta-burst-stimulation/" class="text-sm text-[var(--ink)] hover:underline">Theta Burst</a>
+    <a href="/protocols/saint-protocol/" class="text-sm text-[var(--ink)] hover:underline">SAINT Protocol</a>
+    <a href="/protocols/deep-tms/" class="text-sm text-[var(--ink)] hover:underline">Deep TMS</a>
+    <a href="/protocols/accelerated-tms/" class="text-sm text-[var(--ink)] hover:underline">Accelerated TMS</a>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>
@@ -96,20 +96,20 @@ Good news about retreatment: response rates are high. About 80-90% of people who
 ## How This Protocol Compares
 
 <div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+<table class="w-full text-sm border border-[var(--line)] rounded-xl overflow-hidden">
   <thead>
-    <tr class="bg-slate-800 text-white">
+    <tr class="bg-[var(--ink2)] text-white">
       <th class="px-4 py-3 text-left font-semibold">Protocol</th>
       <th class="px-4 py-3 text-center font-semibold">Session Time</th>
       <th class="px-4 py-3 text-center font-semibold">Total Course</th>
       <th class="px-4 py-3 text-center font-semibold">Best For</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
+  <tbody class="divide-y divide-[var(--line)]">
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
   </tbody>
 </table>
 </div>
@@ -122,20 +122,20 @@ Not every TMS clinic offers every protocol. When searching, ask specifically whi
 ## How This Protocol Compares
 
 <div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+<table class="w-full text-sm border border-[var(--line)] rounded-xl overflow-hidden">
   <thead>
-    <tr class="bg-slate-800 text-white">
+    <tr class="bg-[var(--ink2)] text-white">
       <th class="px-4 py-3 text-left font-semibold">Protocol</th>
       <th class="px-4 py-3 text-center font-semibold">Session Time</th>
       <th class="px-4 py-3 text-center font-semibold">Total Course</th>
       <th class="px-4 py-3 text-center font-semibold">Best For</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
+  <tbody class="divide-y divide-[var(--line)]">
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Standard rTMS</td><td class="px-4 py-3 text-center">19-37 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (most studied)</td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Theta Burst</td><td class="px-4 py-3 text-center">3-9 min</td><td class="px-4 py-3 text-center">6-9 weeks</td><td class="px-4 py-3 text-center">Depression (time-efficient)</td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">SAINT Protocol</td><td class="px-4 py-3 text-center">Multiple/day</td><td class="px-4 py-3 text-center">5 days</td><td class="px-4 py-3 text-center">Rapid response needed</td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Deep TMS</td><td class="px-4 py-3 text-center">20-30 min</td><td class="px-4 py-3 text-center">6 weeks</td><td class="px-4 py-3 text-center">OCD, smoking cessation</td></tr>
   </tbody>
 </table>
 </div>

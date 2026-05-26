@@ -253,9 +253,9 @@ export default function AdminApiDocs() {
 
   const METHOD_COLORS: Record<string, string> = {
     GET: 'bg-emerald-100 text-emerald-700',
-    POST: 'bg-violet-100 text-violet-700',
+    POST: 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)]',
     PUT: 'bg-amber-100 text-amber-700',
-    PATCH: 'bg-blue-100 text-blue-700',
+    PATCH: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
     DELETE: 'bg-red-100 text-red-700',
   };
 
@@ -263,8 +263,8 @@ export default function AdminApiDocs() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">API Documentation</h1>
-          <p className="text-gray-500 mt-1">TMS List API reference, authentication, and SDK examples</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">API Documentation</h1>
+          <p className="text-[var(--muted)] mt-1">TMS List API reference, authentication, and SDK examples</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-lg">
           <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
@@ -273,15 +273,15 @@ export default function AdminApiDocs() {
       </div>
 
       {/* Auth guide */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Authentication</h2>
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6 mb-8">
+        <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Authentication</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
-            <p className="text-sm text-gray-600 mb-3">
-              All API requests require an API key passed via the <code className="bg-gray-100 px-1.5 py-0.5 rounded font-mono text-xs">Authorization</code> header.
+            <p className="text-sm text-[var(--ink2)] mb-3">
+              All API requests require an API key passed via the <code className="bg-[var(--paper2)] px-1.5 py-0.5 rounded font-mono text-xs">Authorization</code> header.
             </p>
-            <div className="bg-gray-900 rounded-lg p-4">
-              <p className="text-xs text-gray-400 mb-2">Example Request</p>
+            <div className="bg-[var(--ink)] rounded-lg p-4">
+              <p className="text-xs text-[var(--muted)] mb-2">Example Request</p>
               <pre className="text-sm text-green-400 font-mono overflow-x-auto">
 {`curl -X GET "https://api.tmslist.com/v1/clinics" \\
   -H "Authorization: Bearer tms_sk_live_xxxxx" \\
@@ -290,7 +290,7 @@ export default function AdminApiDocs() {
             </div>
           </div>
           <div>
-            <p className="text-sm text-gray-600 mb-3">
+            <p className="text-sm text-[var(--ink2)] mb-3">
               Rate limits are applied per API key and vary by plan:
             </p>
             <div className="space-y-2">
@@ -299,9 +299,9 @@ export default function AdminApiDocs() {
                 { plan: 'Professional', limit: '10,000 req/day' },
                 { plan: 'Enterprise', limit: '100,000 req/day' },
               ].map(p => (
-                <div key={p.plan} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
-                  <span className="text-sm font-medium text-gray-700">{p.plan}</span>
-                  <span className="text-sm font-mono text-gray-500">{p.limit}</span>
+                <div key={p.plan} className="flex justify-between items-center py-2 border-b border-[var(--line)] last:border-0">
+                  <span className="text-sm font-medium text-[var(--ink2)]">{p.plan}</span>
+                  <span className="text-sm font-mono text-[var(--muted)]">{p.limit}</span>
                 </div>
               ))}
             </div>
@@ -312,17 +312,17 @@ export default function AdminApiDocs() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Sidebar: endpoint list */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-xl border border-gray-200 sticky top-8">
-            <div className="p-4 border-b border-gray-200">
+          <div className="bg-white rounded-xl border border-[var(--line)] sticky top-8">
+            <div className="p-4 border-b border-[var(--line)]">
               <input
                 type="text"
                 placeholder="Search endpoints..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
               />
             </div>
-            <div className="p-2 border-b border-gray-200">
+            <div className="p-2 border-b border-[var(--line)]">
               <div className="flex flex-wrap gap-1">
                 {categories.map(cat => (
                   <button
@@ -330,8 +330,8 @@ export default function AdminApiDocs() {
                     onClick={() => setActiveCategory(cat)}
                     className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${
                       activeCategory === cat
-                        ? 'bg-violet-100 text-violet-700'
-                        : 'text-gray-500 hover:bg-gray-100'
+                        ? 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)]'
+                        : 'text-[var(--muted)] hover:bg-[var(--paper2)]'
                     }`}
                   >
                     {cat === 'all' ? 'All' : cat}
@@ -339,13 +339,13 @@ export default function AdminApiDocs() {
                 ))}
               </div>
             </div>
-            <div className="divide-y divide-gray-100 max-h-[600px] overflow-y-auto">
+            <div className="divide-y divide-[var(--line)] max-h-[600px] overflow-y-auto">
               {filteredEndpoints.map(endpoint => (
                 <button
                   key={endpoint.path}
                   onClick={() => setSelectedEndpoint(endpoint)}
-                  className={`w-full text-left p-4 hover:bg-gray-50 transition-colors ${
-                    selectedEndpoint?.path === endpoint.path ? 'bg-violet-50' : ''
+                  className={`w-full text-left p-4 hover:bg-[var(--paper2)] transition-colors ${
+                    selectedEndpoint?.path === endpoint.path ? 'bg-[rgba(10,22,40,0.08)]' : ''
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-1">
@@ -355,13 +355,13 @@ export default function AdminApiDocs() {
                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                       endpoint.auth === 'required' ? 'bg-red-50 text-red-600' :
                       endpoint.auth === 'optional' ? 'bg-amber-50 text-amber-600' :
-                      'bg-gray-100 text-gray-500'
+                      'bg-[var(--paper2)] text-[var(--muted)]'
                     }`}>
                       {endpoint.auth === 'required' ? 'Auth' : endpoint.auth === 'optional' ? 'Opt' : 'None'}
                     </span>
                   </div>
-                  <p className="text-sm font-medium text-gray-900 truncate">{endpoint.name}</p>
-                  <p className="text-xs text-gray-400 font-mono mt-0.5">{endpoint.path}</p>
+                  <p className="text-sm font-medium text-[var(--ink)] truncate">{endpoint.name}</p>
+                  <p className="text-xs text-[var(--muted)] font-mono mt-0.5">{endpoint.path}</p>
                 </button>
               ))}
             </div>
@@ -371,28 +371,28 @@ export default function AdminApiDocs() {
         {/* Main: endpoint detail */}
         <div className="lg:col-span-2">
           {selectedEndpoint ? (
-            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-              <div className="p-6 border-b border-gray-200">
+            <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+              <div className="p-6 border-b border-[var(--line)]">
                 <div className="flex items-center gap-3 mb-3">
                   <span className={`px-3 py-1 text-sm font-bold rounded ${METHOD_COLORS[selectedEndpoint.method]}`}>
                     {selectedEndpoint.method}
                   </span>
-                  <code className="text-lg font-mono font-semibold text-gray-900">{selectedEndpoint.path}</code>
+                  <code className="text-lg font-mono font-semibold text-[var(--ink)]">{selectedEndpoint.path}</code>
                 </div>
-                <h2 className="text-xl font-semibold text-gray-900">{selectedEndpoint.name}</h2>
-                <p className="text-gray-500 mt-1">{selectedEndpoint.description}</p>
+                <h2 className="text-xl font-semibold text-[var(--ink)]">{selectedEndpoint.name}</h2>
+                <p className="text-[var(--muted)] mt-1">{selectedEndpoint.description}</p>
                 <div className="flex gap-3 mt-3">
                   <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${
                     selectedEndpoint.auth === 'required' ? 'bg-red-50 text-red-600' :
                     selectedEndpoint.auth === 'optional' ? 'bg-amber-50 text-amber-600' :
-                    'bg-gray-100 text-gray-500'
+                    'bg-[var(--paper2)] text-[var(--muted)]'
                   }`}>
                     Auth: {selectedEndpoint.auth}
                   </span>
-                  <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600">
+                  <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-[var(--paper2)] text-[var(--ink2)]">
                     Rate: {selectedEndpoint.rateLimit}
                   </span>
-                  <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-violet-50 text-violet-600">
+                  <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-[rgba(10,22,40,0.08)] text-[var(--ink)]">
                     {selectedEndpoint.category}
                   </span>
                 </div>
@@ -402,19 +402,19 @@ export default function AdminApiDocs() {
                 {/* Parameters */}
                 {selectedEndpoint.parameters && selectedEndpoint.parameters.length > 0 && (
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-3">Parameters</h3>
+                    <h3 className="text-sm font-semibold text-[var(--ink)] mb-3">Parameters</h3>
                     <div className="space-y-2">
                       {selectedEndpoint.parameters.map(param => (
-                        <div key={param.name} className="flex items-start gap-3 py-2 border-b border-gray-100 last:border-0">
-                          <code className="text-xs font-mono bg-gray-100 px-2 py-1 rounded text-gray-700 min-w-32 flex-shrink-0">{param.name}</code>
+                        <div key={param.name} className="flex items-start gap-3 py-2 border-b border-[var(--line)] last:border-0">
+                          <code className="text-xs font-mono bg-[var(--paper2)] px-2 py-1 rounded text-[var(--ink2)] min-w-32 flex-shrink-0">{param.name}</code>
                           <div className="flex-1">
                             <div className="flex items-center gap-2">
-                              <span className="text-xs text-gray-500">{param.type}</span>
+                              <span className="text-xs text-[var(--muted)]">{param.type}</span>
                               {param.required && (
                                 <span className="text-xs font-medium text-red-500 bg-red-50 px-1.5 py-0.5 rounded">required</span>
                               )}
                             </div>
-                            <p className="text-xs text-gray-500 mt-0.5">{param.description}</p>
+                            <p className="text-xs text-[var(--muted)] mt-0.5">{param.description}</p>
                           </div>
                         </div>
                       ))}
@@ -425,9 +425,9 @@ export default function AdminApiDocs() {
                 {/* Request body */}
                 {selectedEndpoint.requestBody && (
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-3">Request Body</h3>
-                    <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
-                      <pre className="text-sm text-gray-100 font-mono">
+                    <h3 className="text-sm font-semibold text-[var(--ink)] mb-3">Request Body</h3>
+                    <div className="bg-[var(--ink)] rounded-lg p-4 overflow-x-auto">
+                      <pre className="text-sm text-[var(--line)] font-mono">
 {`{
   ${Object.entries(selectedEndpoint.requestBody.properties).map(([k, v]) => `"${k}": ${v}`).join(',\n  ')}
 }`}
@@ -439,11 +439,11 @@ export default function AdminApiDocs() {
                 {/* Response */}
                 {selectedEndpoint.responseExample && (
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-3">Response Example</h3>
-                    <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto max-h-96">
+                    <h3 className="text-sm font-semibold text-[var(--ink)] mb-3">Response Example</h3>
+                    <div className="bg-[var(--ink)] rounded-lg p-4 overflow-x-auto max-h-96">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs text-gray-400">200 OK</span>
-                        <button className="text-xs text-violet-400 hover:text-violet-300">Copy</button>
+                        <span className="text-xs text-[var(--muted)]">200 OK</span>
+                        <button className="text-xs text-[var(--ink2)] hover:text-[rgba(10,22,40,0.3)]">Copy</button>
                       </div>
                       <pre className="text-xs text-green-400 font-mono overflow-x-auto">
                         {selectedEndpoint.responseExample}
@@ -454,23 +454,23 @@ export default function AdminApiDocs() {
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-              <svg className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-white rounded-xl border border-[var(--line)] p-12 text-center">
+              <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <p className="text-gray-500">Select an endpoint from the sidebar to view documentation</p>
+              <p className="text-[var(--muted)]">Select an endpoint from the sidebar to view documentation</p>
             </div>
           )}
 
           {/* SDK snippets */}
-          <div className="bg-white rounded-xl border border-gray-200 mt-8 overflow-hidden">
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-              <h3 className="text-base font-semibold text-gray-900">SDK Examples</h3>
+          <div className="bg-white rounded-xl border border-[var(--line)] mt-8 overflow-hidden">
+            <div className="p-4 border-b border-[var(--line)] flex items-center justify-between">
+              <h3 className="text-base font-semibold text-[var(--ink)]">SDK Examples</h3>
               <div className="flex gap-2">
                 <button
                   onClick={() => setActiveSdk('javascript')}
                   className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${
-                    activeSdk === 'javascript' ? 'bg-amber-400 text-yellow-900' : 'bg-gray-100 text-gray-600'
+                    activeSdk === 'javascript' ? 'bg-amber-400 text-yellow-900' : 'bg-[var(--paper2)] text-[var(--ink2)]'
                   }`}
                 >
                   JavaScript
@@ -478,17 +478,17 @@ export default function AdminApiDocs() {
                 <button
                   onClick={() => setActiveSdk('python')}
                   className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${
-                    activeSdk === 'python' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'
+                    activeSdk === 'python' ? 'bg-[var(--ink2)] text-white' : 'bg-[var(--paper2)] text-[var(--ink2)]'
                   }`}
                 >
                   Python
                 </button>
               </div>
             </div>
-            <div className="bg-gray-900 p-5 overflow-x-auto">
+            <div className="bg-[var(--ink)] p-5 overflow-x-auto">
               <div className="flex justify-between items-center mb-3">
-                <span className="text-xs text-gray-400">{activeSdk === 'javascript' ? 'JavaScript / TypeScript' : 'Python'}</span>
-                <button className="text-xs text-violet-400 hover:text-violet-300">Copy</button>
+                <span className="text-xs text-[var(--muted)]">{activeSdk === 'javascript' ? 'JavaScript / TypeScript' : 'Python'}</span>
+                <button className="text-xs text-[var(--ink2)] hover:text-[rgba(10,22,40,0.3)]">Copy</button>
               </div>
               <pre className="text-sm text-green-400 font-mono whitespace-pre overflow-x-auto">
                 {activeSdk === 'javascript' ? SDK_SNIPPETS.javascript : SDK_SNIPPETS.python}

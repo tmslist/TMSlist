@@ -7,6 +7,8 @@ import ClinicTracking from "../../components/ClinicTracking.astro";
 import { STATE_NAMES, getAllClinics, getStateSlug } from "../../utils/clinicData";
 import { getDoctorPhoto, COUNTRY_NAMES, COUNTRY_URL_PREFIXES } from "../../utils/dataHelpers";
 import { getClinicLogoUrl } from "../../utils/images";
+import BrandLogo from "../../components/BrandLogo.astro";
+import { resolveBrandSlug } from "../../utils/brandLogos";
 
 const { slug } = Astro.params;
 
@@ -149,7 +151,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
 
 <Layout title={pageTitle} description={metaDescription} schema={schema} canonical={`https://tmslist.com/clinic/${clinic.slug}/`} image={layoutImage}>
     <!-- Clean Premium Light Hero -->
-    <section class="relative bg-white pt-16 pb-24 overflow-hidden" style="background: var(--paper); border-bottom: 1px solid var(--line);">
+    <section class="relative bg-[var(--paper)] pt-16 pb-24 overflow-hidden" style="background: var(--paper); border-bottom: 1px solid var(--line);">
         <div class="absolute inset-x-0 top-0 h-[600px] pointer-events-none" style="background: linear-gradient(to bottom, color-mix(in srgb, var(--warm) 4%, var(--paper)), transparent);"></div>
 
         <div class="container mx-auto px-6 lg:px-12 relative z-10">
@@ -256,21 +258,21 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                 <!-- Stats Bento -->
                 <section class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                     {getReviewCount() > 0 && (
-                    <div class="bg-white p-4 sm:p-6 rounded-2xl border" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
+                    <div class="bg-[var(--paper)] p-4 sm:p-6 rounded-2xl border" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
                         <div class="text-2xl sm:text-3xl font-bold tracking-tight" style="color: var(--ink);">{getReviewCount().toLocaleString()}</div>
                         <div class="text-xs font-semibold uppercase tracking-widest mt-1" style="color: var(--muted);">Patient Reviews</div>
                     </div>
                     )}
-                    <div class="bg-white p-4 sm:p-6 rounded-2xl border" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
+                    <div class="bg-[var(--paper)] p-4 sm:p-6 rounded-2xl border" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
                         <div class="text-2xl sm:text-3xl font-bold tracking-tight" style="color: var(--ink);">{machines.length || '—'}</div>
                         <div class="text-xs font-semibold uppercase tracking-widest mt-1" style="color: var(--muted);">TMS Devices</div>
                     </div>
-                    <div class="bg-white p-4 sm:p-6 rounded-2xl border" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
+                    <div class="bg-[var(--paper)] p-4 sm:p-6 rounded-2xl border" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
                         <div class="text-2xl sm:text-3xl font-bold tracking-tight" style="color: var(--ink);">{doctors.length || 1}</div>
                         <div class="text-xs font-semibold uppercase tracking-widest mt-1" style="color: var(--muted);">Specialists</div>
                     </div>
                     {displayRating && (
-                    <div class="bg-white p-4 sm:p-6 rounded-2xl border" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
+                    <div class="bg-[var(--paper)] p-4 sm:p-6 rounded-2xl border" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
                         <div class="text-2xl sm:text-3xl font-bold tracking-tight" style="color: var(--ink);">{formattedRating}</div>
                         <div class="text-xs font-semibold uppercase tracking-widest mt-1" style="color: var(--muted);">Patient Rating</div>
                     </div>
@@ -278,7 +280,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                 </section>
 
                 <!-- About Overview -->
-                <section class="bg-white rounded-3xl p-8 border" style="border-color: var(--line); box-shadow: 0 4px 20px rgba(10,22,40,0.04);">
+                <section class="bg-[var(--paper)] rounded-3xl p-8 border" style="border-color: var(--line); box-shadow: 0 4px 20px rgba(10,22,40,0.04);">
                     <h2 class="serif text-2xl mb-6" style="color: var(--ink); letter-spacing: -0.02em;">About the Clinic</h2>
                     <div class="leading-loose font-light" style="color: var(--muted);">
                         {clinic.seo_article ? (
@@ -326,10 +328,8 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                     <h2 class="serif text-2xl mb-6" style="color: var(--ink);">Advanced TMS Devices</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {machines.map((machine: string) => (
-                            <div class="bg-white p-6 rounded-2xl border flex items-start gap-4" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
-                                <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style="background: color-mix(in srgb, var(--accent) 10%, white); color: var(--accent);">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                                </div>
+                            <div class="bg-[var(--paper)] p-6 rounded-2xl border flex items-start gap-4" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
+                                <BrandLogo slug={resolveBrandSlug(machine)} name={machine} size={48} />
                                 <div>
                                     <h3 class="text-[15px] font-bold" style="color: var(--ink2);">{machine}</h3>
                                     <p class="text-xs mt-1" style="color: var(--muted);">FDA-Cleared Technology</p>
@@ -367,7 +367,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                         <h2 class="serif text-2xl mb-6" style="color: var(--ink);">Medical Team</h2>
                         <div class="grid gap-4">
                             {doctors.map((doctor: any) => (
-                                <div class="bg-white p-6 rounded-3xl border flex flex-col sm:flex-row items-start sm:items-center gap-6" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
+                                <div class="bg-[var(--paper)] p-6 rounded-3xl border flex flex-col sm:flex-row items-start sm:items-center gap-6" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
                                     <img
                                         src={getDoctorPhoto(doctor)}
                                         alt={doctor.name}
@@ -376,7 +376,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                                         style="border: 2px solid var(--line);"
                                     />
                                     <div class="flex-1">
-                                        <a href={`/doctor/${doctor.slug}`} class="text-lg font-bold hover:italic" style="color: var(--ink); transition: font-style 0.2s;">
+                                        <a href={`/specialist/${doctor.slug}/`} class="text-lg font-bold hover:italic" style="color: var(--ink); transition: font-style 0.2s;">
                                             {doctor.name}
                                         </a>
                                         <p class="text-[13px] font-semibold tracking-wider uppercase mt-0.5 mb-2" style="color: var(--warm);">{doctor.title}</p>
@@ -386,7 +386,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                                             <span>{doctor.school}</span>
                                         </div>
                                     </div>
-                                    <a href={`/doctor/${doctor.slug}`} class="shrink-0 px-5 py-2.5 text-sm font-bold rounded-xl transition-all" style="background: var(--paper2); border: 1px solid var(--line); color: var(--ink2);">
+                                    <a href={`/specialist/${doctor.slug}/`} class="shrink-0 px-5 py-2.5 text-sm font-bold rounded-xl transition-all" style="background: var(--paper2); border: 1px solid var(--line); color: var(--ink2);">
                                         Profile
                                     </a>
                                 </div>
@@ -396,7 +396,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                 )}
 
                 <!-- Insurance Block -->
-                <section class="bg-white rounded-3xl p-8 border" style="border-color: var(--line); box-shadow: 0 4px 20px rgba(10,22,40,0.04);">
+                <section class="bg-[var(--paper)] rounded-3xl p-8 border" style="border-color: var(--line); box-shadow: 0 4px 20px rgba(10,22,40,0.04);">
                     <h2 class="serif text-2xl mb-6" style="color: var(--ink);">Insurance and Cost Details</h2>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 pb-8 border-b" style="border-color: var(--line);">
@@ -417,7 +417,8 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                     <h3 class="text-sm font-bold mb-4" style="color: var(--ink2);">Recognized Networks</h3>
                     <div class="flex flex-wrap gap-2">
                         {insurances.map((ins: string) => (
-                            <span class="px-3 py-1.5 rounded text-[13px] font-medium" style="background: var(--paper2); border: 1px solid var(--line); color: var(--ink2);">
+                            <span class="px-3 py-1.5 rounded text-[13px] font-medium inline-flex items-center gap-2" style="background: var(--paper2); border: 1px solid var(--line); color: var(--ink2);">
+                                <BrandLogo slug={resolveBrandSlug(ins)} name={ins} size={20} />
                                 {ins}
                             </span>
                         ))}
@@ -439,7 +440,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                         <h2 class="serif text-2xl mb-6" style="color: var(--ink);">Frequently Asked Questions</h2>
                         <div class="space-y-3">
                             {faqs.map((faq: any) => (
-                                <details class="group bg-white rounded-2xl border" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
+                                <details class="group bg-[var(--paper)] rounded-2xl border" style="border-color: var(--line); box-shadow: 0 2px 12px rgba(10,22,40,0.04);">
                                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-[15px] font-bold outline-none" style="color: var(--ink2);">
                                         <span>{faq.question}</span>
                                         <svg class="w-5 h-5 transition-transform group-open:rotate-180" style="color: var(--muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -459,7 +460,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                 <div class="sticky top-24 space-y-6">
 
                     <!-- Contact Box -->
-                    <div id="contact" class="bg-white rounded-3xl p-6 border text-center" style="border-color: var(--line); box-shadow: 0 8px 30px rgba(10,22,40,0.06);">
+                    <div id="contact" class="bg-[var(--paper)] rounded-3xl p-6 border text-center" style="border-color: var(--line); box-shadow: 0 8px 30px rgba(10,22,40,0.06);">
                         <img
                             src={logoUrl}
                             alt={`${clinic.name} logo`}
@@ -485,7 +486,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                                 </button>
                             </div>
                             {websiteUrl && (
-                            <a href={websiteUrl} target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3.5 bg-white rounded-xl text-sm font-bold transition-all"
+                            <a href={websiteUrl} target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3.5 bg-[var(--paper)] rounded-xl text-sm font-bold transition-all"
                                 style="border: 1px solid var(--line); color: var(--ink2);">
                                 Visit Website
                             </a>
@@ -496,7 +497,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
 
                     <!-- Map Card -->
                     {embedUrl && (
-                        <div class="bg-white rounded-3xl p-2 border h-[300px] overflow-hidden" style="border-color: var(--line); box-shadow: 0 4px 20px rgba(10,22,40,0.04);">
+                        <div class="bg-[var(--paper)] rounded-3xl p-2 border h-[300px] overflow-hidden" style="border-color: var(--line); box-shadow: 0 4px 20px rgba(10,22,40,0.04);">
                             <iframe
                                 src={embedUrl}
                                 width="100%"
@@ -512,7 +513,7 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                     )}
 
                     <!-- Hours Card -->
-                    <div class="bg-white rounded-3xl p-6 border" style="border-color: var(--line); box-shadow: 0 4px 20px rgba(10,22,40,0.04);">
+                    <div class="bg-[var(--paper)] rounded-3xl p-6 border" style="border-color: var(--line); box-shadow: 0 4px 20px rgba(10,22,40,0.04);">
                         <h3 class="text-[15px] font-bold mb-4 flex items-center gap-2" style="color: var(--ink2);">
                             <svg class="w-4 h-4" style="color: var(--muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             Hours of Operation

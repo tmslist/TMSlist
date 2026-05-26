@@ -28,18 +28,18 @@ const description = `Compare the ${sorted.length} best TMS therapy clinics in ${
     { name: "Best TMS Clinics", url: "/best-tms-clinics/" },
     { name: stateName, url: `/best-tms-clinics/${getStateSlug(stateCode)}/` },
 ]}>
-    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-cyan-50/30 pointer-events-none"></div>
+    <section class="relative bg-[var(--paper)] border-b border-[var(--line)] overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(10,22,40,0.08)]/60 via-white to-[rgba(10,22,40,0.30)] pointer-events-none"></div>
         <div class="container mx-auto px-4 py-12 lg:py-16 relative z-10">
-            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap" aria-label="Breadcrumb">
-                <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                <span class="text-slate-300">/</span>
-                <a href="/best-tms-clinics/" class="hover:text-violet-600 transition-colors">Best TMS Clinics</a>
-                <span class="text-slate-300">/</span>
-                <span class="text-slate-700 font-medium">{stateName}</span>
+            <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-6 flex-wrap" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-[var(--accent)] transition-colors">Home</a>
+                <span class="text-[var(--muted)]">/</span>
+                <a href="/best-tms-clinics/" class="hover:text-[var(--accent)] transition-colors">Best TMS Clinics</a>
+                <span class="text-[var(--muted)]">/</span>
+                <span class="text-[var(--ink2)] font-medium">{stateName}</span>
             </nav>
-            <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-3">Best TMS Clinics in {stateName}</h1>
-            <p class="text-lg text-slate-500">{sorted.length} providers ranked by patient reviews and verification status.</p>
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--ink)] mb-3">Best TMS Clinics in {stateName}</h1>
+            <p class="text-lg text-[var(--muted)]">{sorted.length} providers ranked by patient reviews and verification status.</p>
         </div>
     </section>
 
@@ -52,8 +52,8 @@ const description = `Compare the ${sorted.length} best TMS therapy clinics in ${
 
         {sorted.length === 0 && (
             <div class="text-center py-16">
-                <p class="text-slate-500">No TMS clinics found in {stateName} yet.</p>
-                <a href="/best-tms-clinics/" class="text-violet-600 font-semibold mt-2 inline-block">Browse all states</a>
+                <p class="text-[var(--muted)]">No TMS clinics found in {stateName} yet.</p>
+                <a href="/best-tms-clinics/" class="text-[var(--accent)] font-semibold mt-2 inline-block">Browse all states</a>
             </div>
         )}
     </main>

@@ -5,7 +5,7 @@ import {
   forumCategories, forumPosts, forumComments, forumReports,
   forumVotes, users, auditLog
 } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 

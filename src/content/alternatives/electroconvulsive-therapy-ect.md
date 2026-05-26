@@ -22,17 +22,17 @@ faqs:
     <div class="text-2xl font-bold text-emerald-700 font-display">50-70%</div>
     <div class="text-xs text-emerald-600 mt-1">Remission rate</div>
   </div>
-  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-violet-700 font-display">6-12</div>
-    <div class="text-xs text-violet-600 mt-1">Sessions typical</div>
+  <div class="bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--warm)] font-display">6-12</div>
+    <div class="text-xs text-[var(--warm)] mt-1">Sessions typical</div>
   </div>
   <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 text-center">
     <div class="text-2xl font-bold text-amber-700 font-display">1938</div>
     <div class="text-xs text-amber-600 mt-1">First used</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">Anesthesia</div>
-    <div class="text-xs text-blue-600 mt-1">Required</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">Anesthesia</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Required</div>
   </div>
 </div>
 
@@ -42,10 +42,10 @@ Electroconvulsive therapy (ECT) is the oldest and most effective brain stimulati
 
 During ECT, a brief electrical current is passed through the brain, intentionally triggering a controlled seizure lasting 30-60 seconds. This seizure activates widespread neurochemical cascades — releasing neurotransmitters, increasing BDNF, normalizing HPA axis function, and promoting neuroplasticity across multiple brain circuits simultaneously.
 
-<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">Why ECT works so well</h4>
-  <p class="text-sm text-slate-600 leading-relaxed mb-3">Unlike TMS (which targets one brain region) or medication (which modulates one neurotransmitter system), ECT produces <strong>global brain changes</strong>. The induced seizure activates virtually every neurotransmitter system simultaneously — serotonin, dopamine, norepinephrine, GABA, glutamate, endorphins.</p>
-  <p class="text-sm text-slate-600 leading-relaxed mb-0">This is why ECT has the highest remission rate (50-70%) of any depression treatment. It's also why the side effect profile is more significant — broader effects mean broader consequences.</p>
+<div class="not-prose my-8 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--ink)] mb-3 text-base">Why ECT works so well</h4>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-3">Unlike TMS (which targets one brain region) or medication (which modulates one neurotransmitter system), ECT produces <strong>global brain changes</strong>. The induced seizure activates virtually every neurotransmitter system simultaneously — serotonin, dopamine, norepinephrine, GABA, glutamate, endorphins.</p>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-0">This is why ECT has the highest remission rate (50-70%) of any depression treatment. It's also why the side effect profile is more significant — broader effects mean broader consequences.</p>
 </div>
 
 ---
@@ -53,32 +53,32 @@ During ECT, a brief electrical current is passed through the brain, intentionall
 ## How ECT Works
 
 <div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">1</span>
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-[rgba(201,101,74,0.1)] text-[var(--warm)] font-bold text-xs shrink-0">1</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Pre-Procedure</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Nothing to eat/drink after midnight. Arrive at hospital or outpatient ECT suite. IV line placed, monitoring equipment attached.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Pre-Procedure</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Nothing to eat/drink after midnight. Arrive at hospital or outpatient ECT suite. IV line placed, monitoring equipment attached.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">2</span>
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-[rgba(201,101,74,0.1)] text-[var(--warm)] font-bold text-xs shrink-0">2</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Anesthesia</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">General anesthesia (brief-acting) plus muscle relaxant to prevent physical convulsion. You're completely asleep and feel nothing.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Anesthesia</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">General anesthesia (brief-acting) plus muscle relaxant to prevent physical convulsion. You're completely asleep and feel nothing.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-violet-100 text-violet-600 font-bold text-xs shrink-0">3</span>
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-[rgba(201,101,74,0.1)] text-[var(--warm)] font-bold text-xs shrink-0">3</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Electrical Stimulation (5-10 seconds)</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Brief electrical current applied through electrodes. Triggers a controlled seizure lasting 30-60 seconds (visible only on EEG — body doesn't convulse).</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Electrical Stimulation (5-10 seconds)</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Brief electrical current applied through electrodes. Triggers a controlled seizure lasting 30-60 seconds (visible only on EEG — body doesn't convulse).</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 font-bold text-xs shrink-0">4</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Recovery (1-2 hours)</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Wake up in recovery. May feel confused or groggy initially. Most people go home within 2 hours. Need someone to drive.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Recovery (1-2 hours)</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Wake up in recovery. May feel confused or groggy initially. Most people go home within 2 hours. Need someone to drive.</p>
     </div>
   </div>
 </div>
@@ -90,54 +90,54 @@ During ECT, a brief electrical current is passed through the brain, intentionall
 ## ECT vs. TMS: Head-to-Head
 
 <div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+<table class="w-full text-sm border border-[var(--line)] rounded-xl overflow-hidden">
   <thead>
-    <tr class="bg-slate-800 text-white">
+    <tr class="bg-[var(--ink2)] text-white">
       <th class="px-4 py-3 text-left font-semibold">Factor</th>
       <th class="px-4 py-3 text-center font-semibold">ECT</th>
       <th class="px-4 py-3 text-center font-semibold">TMS</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-slate-200">
+  <tbody class="divide-y divide-[var(--line)]">
     <tr class="bg-white">
-      <td class="px-4 py-3 font-medium text-slate-900">Remission Rate</td>
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Remission Rate</td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">50-70%</span></td>
-      <td class="px-4 py-3 text-center"><span class="text-blue-600 font-semibold">30-35%</span></td>
+      <td class="px-4 py-3 text-center"><span class="text-[var(--ink)] font-semibold">30-35%</span></td>
     </tr>
-    <tr class="bg-slate-50">
-      <td class="px-4 py-3 font-medium text-slate-900">Anesthesia</td>
+    <tr class="bg-[var(--paper2)]">
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Anesthesia</td>
       <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Required</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Not needed</span></td>
     </tr>
     <tr class="bg-white">
-      <td class="px-4 py-3 font-medium text-slate-900">Memory Effects</td>
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Memory Effects</td>
       <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Common</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
     </tr>
-    <tr class="bg-slate-50">
-      <td class="px-4 py-3 font-medium text-slate-900">Cognitive Effects</td>
+    <tr class="bg-[var(--paper2)]">
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Cognitive Effects</td>
       <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Temporary confusion</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
     </tr>
     <tr class="bg-white">
-      <td class="px-4 py-3 font-medium text-slate-900">Recovery Time</td>
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Recovery Time</td>
       <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">1-2 hours + rest of day</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None — drive home</span></td>
     </tr>
-    <tr class="bg-slate-50">
-      <td class="px-4 py-3 font-medium text-slate-900">Setting</td>
+    <tr class="bg-[var(--paper2)]">
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Setting</td>
       <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Hospital/surgical center</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Outpatient office</span></td>
     </tr>
     <tr class="bg-white">
-      <td class="px-4 py-3 font-medium text-slate-900">Sessions Needed</td>
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Sessions Needed</td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">6-12</span></td>
       <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">30-36</span></td>
     </tr>
-    <tr class="bg-slate-50">
-      <td class="px-4 py-3 font-medium text-slate-900">Best For</td>
-      <td class="px-4 py-3 text-center"><span class="font-semibold text-slate-700">Severe, life-threatening</span></td>
-      <td class="px-4 py-3 text-center"><span class="font-semibold text-slate-700">Treatment-resistant, moderate-severe</span></td>
+    <tr class="bg-[var(--paper2)]">
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Best For</td>
+      <td class="px-4 py-3 text-center"><span class="font-semibold text-[var(--ink2)]">Severe, life-threatening</span></td>
+      <td class="px-4 py-3 text-center"><span class="font-semibold text-[var(--ink2)]">Treatment-resistant, moderate-severe</span></td>
     </tr>
   </tbody>
 </table>
@@ -155,19 +155,19 @@ During ECT, a brief electrical current is passed through the brain, intentionall
     </div>
     <p class="text-xs text-emerald-700 mb-0">When depression is life-threatening — active suicidality, inability to eat/drink, catatonia. ECT works fast and has the highest response rates.</p>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5">
     <div class="flex items-center gap-2 mb-2">
-      <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-      <h4 class="font-semibold text-blue-900 text-sm m-0">Failed Everything Else</h4>
+      <svg class="w-5 h-5 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      <h4 class="font-semibold text-[var(--ink)] text-sm m-0">Failed Everything Else</h4>
     </div>
-    <p class="text-xs text-blue-700 mb-0">When TMS, multiple medications, ketamine, and therapy haven't worked. ECT's global brain effect may succeed where targeted approaches failed.</p>
+    <p class="text-xs text-[var(--ink)] mb-0">When TMS, multiple medications, ketamine, and therapy haven't worked. ECT's global brain effect may succeed where targeted approaches failed.</p>
   </div>
-  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5">
+  <div class="bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-xl p-5">
     <div class="flex items-center gap-2 mb-2">
-      <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-      <h4 class="font-semibold text-violet-900 text-sm m-0">Rapid Response Needed</h4>
+      <svg class="w-5 h-5 text-[var(--warm)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      <h4 class="font-semibold text-[var(--warm)] text-sm m-0">Rapid Response Needed</h4>
     </div>
-    <p class="text-xs text-violet-700 mb-0">When improvement is needed in days, not weeks. ECT often produces noticeable improvement within the first 2-3 sessions.</p>
+    <p class="text-xs text-[var(--warm)] mb-0">When improvement is needed in days, not weeks. ECT often produces noticeable improvement within the first 2-3 sessions.</p>
   </div>
 </div>
 
@@ -204,16 +204,16 @@ ECT is widely covered by insurance, including Medicare and most commercial plans
 
 ## When to Try TMS First
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Most patients should try TMS before ECT because:</h4>
-  <ul class="text-sm text-violet-700 space-y-2 mb-0 list-disc pl-4">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--warm)] mb-3 text-base">Most patients should try TMS before ECT because:</h4>
+  <ul class="text-sm text-[var(--warm)] space-y-2 mb-0 list-disc pl-4">
     <li>No anesthesia required — outpatient, walk in and walk out</li>
     <li>Zero memory effects — the most feared ECT side effect doesn't apply</li>
     <li>No recovery time — drive yourself, go to work same day</li>
     <li>Less invasive — magnetic pulses vs electrical current + seizure</li>
     <li>Lower cost — especially for outpatient TMS vs hospital-based ECT</li>
   </ul>
-  <p class="text-sm text-violet-700 mt-4 mb-0"><strong>ECT should be considered when</strong> TMS hasn't worked, the depression is severe/life-threatening, or rapid response is medically necessary.</p>
+  <p class="text-sm text-[var(--warm)] mt-4 mb-0"><strong>ECT should be considered when</strong> TMS hasn't worked, the depression is severe/life-threatening, or rapid response is medically necessary.</p>
 </div>
 
 For a detailed comparison, read our [TMS vs. ECT guide](/compare/tms-vs-ect/). Use our [clinic finder](/us/) to find providers offering both TMS and ECT.

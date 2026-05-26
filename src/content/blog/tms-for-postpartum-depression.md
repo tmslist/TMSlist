@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-07
 category: treatment
 tags: ["postpartum", "pregnancy", "breastfeeding", "women"]
-image: "https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-postpartum-depression.svg"
 ---
 
 You are barely sleeping. The baby needs you constantly. And somewhere beneath the exhaustion, you recognize that what you are feeling is not just baby blues. It is darker, heavier, and it is not lifting.
@@ -90,9 +90,9 @@ This comes up often, and the answer is more nuanced. TMS during pregnancy (as op
 
 Most clinicians prefer to wait until after delivery when possible, simply because the pregnancy data set is smaller. If you are pregnant and severely depressed, TMS is still an option worth discussing with your care team, especially if medications carry their own fetal risks.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>TMS produces no active compounds in breast milk. It is categorically different from medication for breastfeeding mothers.</li>
     <li>Postpartum response rates run 65-70%, higher than general depression populations.</li>
     <li>ACOG recognizes TMS as a reasonable option for perinatal depression when medication is a concern.</li>
@@ -102,47 +102,47 @@ Most clinicians prefer to wait until after delivery when possible, simply becaus
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I breastfeed while getting TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I breastfeed while getting TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. TMS does not introduce anything into your bloodstream that could transfer to breast milk. You do not need to pump and dump or interrupt breastfeeding in any way.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. TMS does not introduce anything into your bloodstream that could transfer to breast milk. You do not need to pump and dump or interrupt breastfeeding in any way.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS safe during pregnancy?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS safe during pregnancy?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The available data from approximately 100 published cases shows no adverse fetal effects. A 2025 meta-analysis of 400+ pregnant women found no increase in miscarriage, birth defects, or preterm labor. Most clinicians prefer to wait until after delivery when possible, but TMS during pregnancy is an option worth discussing with your care team.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The available data from approximately 100 published cases shows no adverse fetal effects. A 2025 meta-analysis of 400+ pregnant women found no increase in miscarriage, birth defects, or preterm labor. Most clinicians prefer to wait until after delivery when possible, but TMS during pregnancy is an option worth discussing with your care team.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How do I find a TMS clinic that treats postpartum depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How do I find a TMS clinic that treats postpartum depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Search our <a href="/specialists/" class="text-violet-600 hover:underline">specialist directory</a> for providers with perinatal mental health experience. You can also <a href="/us/" class="text-violet-600 hover:underline">search by location</a> to find the most convenient option. Ask about their experience with postpartum patients and whether infants are welcome in the treatment room.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Search our <a href="/specialists/" class="text-[var(--warm)] hover:underline">specialist directory</a> for providers with perinatal mental health experience. You can also <a href="/us/" class="text-[var(--warm)] hover:underline">search by location</a> to find the most convenient option. Ask about their experience with postpartum patients and whether infants are welcome in the treatment room.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does insurance cover TMS for postpartum depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does insurance cover TMS for postpartum depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most major commercial insurers cover TMS for major depressive disorder. Postpartum depression qualifies as MDD, so the coverage pathway is the same as for non-postpartum depression. The postpartum indication does not typically create extra barriers. See our <a href="/insurance/" class="text-violet-600 hover:underline">insurance guide</a> for details.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most major commercial insurers cover TMS for major depressive disorder. Postpartum depression qualifies as MDD, so the coverage pathway is the same as for non-postpartum depression. The postpartum indication does not typically create extra barriers. See our <a href="/insurance/" class="text-[var(--warm)] hover:underline">insurance guide</a> for details.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How many TMS sessions do I need for postpartum depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How many TMS sessions do I need for postpartum depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The standard course is 36 sessions over 6 weeks. If your clinic offers theta burst stimulation, sessions are 3 minutes instead of 19-37 minutes. Some women with milder symptoms or good prior treatment history may respond to shorter courses, but this is determined on a case-by-case basis by your TMS psychiatrist.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The standard course is 36 sessions over 6 weeks. If your clinic offers theta burst stimulation, sessions are 3 minutes instead of 19-37 minutes. Some women with milder symptoms or good prior treatment history may respond to shorter courses, but this is determined on a case-by-case basis by your TMS psychiatrist.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

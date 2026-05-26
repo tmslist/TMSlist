@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getForumPostById, updateForumPost } from '../../../../db/forumQueries';
+import { getForumPostById, updateForumPost } from '../../../../db/forumQueries.js';
 import { getSessionFromRequest, hasRole } from '../../../../utils/auth';
 
 export const prerender = false;

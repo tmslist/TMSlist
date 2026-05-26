@@ -60,8 +60,8 @@ const DIRECTION_LABELS: Record<string, string> = {
 };
 
 const STATUS_COLORS: Record<string, string> = {
-  sent: 'bg-gray-100 text-gray-600',
-  delivered: 'bg-blue-100 text-blue-700',
+  sent: 'bg-[var(--paper2)] text-[var(--ink2)]',
+  delivered: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
   read: 'bg-emerald-100 text-emerald-700',
 };
 
@@ -207,7 +207,7 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
   if (loading && conversations.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[var(--line)] border-t-blue-600 rounded-full animate-spin" />
       </div>
     );
   }
@@ -230,8 +230,8 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
             onClick={() => setFilterType('all')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
               filterType === 'all'
-                ? 'bg-blue-100 text-blue-700'
-                : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                ? 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]'
+                : 'bg-white text-[var(--ink2)] border border-[var(--line)] hover:bg-[var(--paper2)]'
             }`}
           >
             All ({conversations.length})
@@ -240,8 +240,8 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
             onClick={() => setFilterType('unread')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
               filterType === 'unread'
-                ? 'bg-blue-100 text-blue-700'
-                : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                ? 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]'
+                : 'bg-white text-[var(--ink2)] border border-[var(--line)] hover:bg-[var(--paper2)]'
             }`}
           >
             Unread ({totalUnread})
@@ -249,7 +249,7 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
         </div>
         <button
           onClick={() => { setShowCompose(true); setSelectedEmail(null); setMessages([]); }}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] transition-colors shadow-sm"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -258,45 +258,45 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
         </button>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
         <div className="flex h-[600px]">
           {/* Conversation list */}
-          <div className="w-72 border-r border-gray-200 flex flex-col">
-            <div className="px-4 py-3 border-b border-gray-100 bg-gray-50">
-              <h3 className="text-sm font-semibold text-gray-900">Conversations</h3>
+          <div className="w-72 border-r border-[var(--line)] flex flex-col">
+            <div className="px-4 py-3 border-b border-[var(--line)] bg-[var(--paper2)]">
+              <h3 className="text-sm font-semibold text-[var(--ink)]">Conversations</h3>
             </div>
             <div className="flex-1 overflow-y-auto">
               {filteredConversations.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-48 text-center px-4">
-                  <svg className="w-10 h-10 text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-10 h-10 text-[var(--line)] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
-                  <p className="text-sm text-gray-400">No conversations</p>
+                  <p className="text-sm text-[var(--muted)]">No conversations</p>
                 </div>
               ) : (
                 filteredConversations.map(conv => (
                   <button
                     key={conv.patientEmail}
                     onClick={() => handleSelectConversation(conv.patientEmail)}
-                    className={`w-full text-left px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition-colors ${
-                      selectedEmail === conv.patientEmail ? 'bg-blue-50' : ''
-                    } ${conv.unreadCount > 0 && selectedEmail !== conv.patientEmail ? 'bg-gray-50' : ''}`}
+                    className={`w-full text-left px-4 py-3 border-b border-[var(--line)] hover:bg-[var(--paper2)] transition-colors ${
+                      selectedEmail === conv.patientEmail ? 'bg-[var(--paper2)]' : ''
+                    } ${conv.unreadCount > 0 && selectedEmail !== conv.patientEmail ? 'bg-[var(--paper2)]' : ''}`}
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-semibold text-gray-900 truncate">
+                          <span className="text-sm font-semibold text-[var(--ink)] truncate">
                             {conv.patientEmail}
                           </span>
                           {conv.unreadCount > 0 && (
-                            <span className="w-5 h-5 min-w-5 flex items-center justify-center rounded-full bg-blue-600 text-white text-[10px] font-bold">
+                            <span className="w-5 h-5 min-w-5 flex items-center justify-center rounded-full bg-[var(--ink)] text-white text-[10px] font-bold">
                               {conv.unreadCount}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-gray-500 truncate mt-0.5">{conv.lastMessage.subject || conv.lastMessage.body}</p>
+                        <p className="text-xs text-[var(--muted)] truncate mt-0.5">{conv.lastMessage.subject || conv.lastMessage.body}</p>
                       </div>
-                      <span className="text-[10px] text-gray-400 flex-shrink-0 mt-0.5">
+                      <span className="text-[10px] text-[var(--muted)] flex-shrink-0 mt-0.5">
                         {formatTime(conv.lastMessage.createdAt)}
                       </span>
                     </div>
@@ -311,42 +311,42 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
             {showCompose ? (
               /* Compose form */
               <div className="flex-1 flex flex-col">
-                <div className="px-4 py-3 border-b border-gray-100 bg-gray-50">
-                  <h3 className="text-sm font-semibold text-gray-900">New Message</h3>
+                <div className="px-4 py-3 border-b border-[var(--line)] bg-[var(--paper2)]">
+                  <h3 className="text-sm font-semibold text-[var(--ink)]">New Message</h3>
                 </div>
                 <form onSubmit={handleSend} className="flex-1 flex flex-col p-4 gap-4">
                   {sendingError && (
                     <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm">{sendingError}</div>
                   )}
                   <div>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">Patient Email *</label>
+                    <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Patient Email *</label>
                     <input
                       type="email"
                       value={composeEmail}
                       onChange={e => setComposeEmail(e.target.value)}
                       required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                      className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(10,22,40,0.2)] outline-none"
                       placeholder="patient@example.com"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">Subject</label>
+                    <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Subject</label>
                     <input
                       type="text"
                       value={composeSubject}
                       onChange={e => setComposeSubject(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                      className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(10,22,40,0.2)] outline-none"
                       placeholder="Optional subject"
                     />
                   </div>
                   <div className="flex-1 flex flex-col">
-                    <label className="block text-xs font-medium text-gray-600 mb-1">Message *</label>
+                    <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Message *</label>
                     <textarea
                       value={composeBody}
                       onChange={e => setComposeBody(e.target.value)}
                       required
                       rows={6}
-                      className="flex-1 w-full px-3 py-2 border border-gray-300 rounded-lg text-sm resize-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                      className="flex-1 w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm resize-none focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(10,22,40,0.2)] outline-none"
                       placeholder="Type your message..."
                     />
                   </div>
@@ -354,14 +354,14 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
                     <button
                       type="button"
                       onClick={() => { setShowCompose(false); setComposeEmail(''); setComposeSubject(''); setComposeBody(''); }}
-                      className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+                      className="px-4 py-2 rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] transition-colors"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={sending || !composeEmail.trim() || !composeBody.trim()}
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       {sending ? (
                         <>
@@ -383,34 +383,34 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
             ) : selectedEmail ? (
               <>
                 {/* Thread header */}
-                <div className="px-4 py-3 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+                <div className="px-4 py-3 border-b border-[var(--line)] bg-[var(--paper2)] flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-900">{selectedEmail}</h3>
-                    <p className="text-xs text-gray-500">{messages.length} message{messages.length !== 1 ? 's' : ''}</p>
+                    <h3 className="text-sm font-semibold text-[var(--ink)]">{selectedEmail}</h3>
+                    <p className="text-xs text-[var(--muted)]">{messages.length} message{messages.length !== 1 ? 's' : ''}</p>
                   </div>
                 </div>
 
                 {/* Messages */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50">
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[var(--paper2)]">
                   {messages.map(msg => (
                     <div key={msg.id} className={`flex ${msg.direction === 'outbound' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[70%] ${msg.direction === 'outbound' ? 'order-2' : 'order-1'}`}>
                         <div
                           className={`rounded-2xl px-4 py-3 text-sm shadow-sm ${
                             msg.direction === 'outbound'
-                              ? 'bg-blue-600 text-white rounded-br-md'
-                              : 'bg-white border border-gray-200 text-gray-900 rounded-bl-md'
+                              ? 'bg-[var(--ink)] text-white rounded-br-md'
+                              : 'bg-white border border-[var(--line)] text-[var(--ink)] rounded-bl-md'
                           }`}
                         >
                           {msg.subject && (
-                            <p className={`font-semibold mb-1 text-xs ${msg.direction === 'outbound' ? 'text-blue-100' : 'text-gray-700'}`}>
+                            <p className={`font-semibold mb-1 text-xs ${msg.direction === 'outbound' ? 'text-[var(--muted)]' : 'text-[var(--ink2)]'}`}>
                               {msg.subject}
                             </p>
                           )}
                           <p className="whitespace-pre-wrap">{msg.body}</p>
                         </div>
                         <div className={`flex items-center gap-2 mt-1 ${msg.direction === 'outbound' ? 'justify-end' : 'justify-start'}`}>
-                          <span className={`text-[10px] ${msg.direction === 'outbound' ? 'text-gray-400' : 'text-gray-400'}`}>
+                          <span className={`text-[10px] ${msg.direction === 'outbound' ? 'text-[var(--muted)]' : 'text-[var(--muted)]'}`}>
                             {formatFullDate(msg.createdAt)}
                           </span>
                           {msg.direction === 'outbound' && (
@@ -422,7 +422,7 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
                             <button
                               onClick={() => markRead(msg.id)}
                               disabled={markingId === msg.id}
-                              className="text-[10px] text-blue-600 hover:text-blue-700 font-medium"
+                              className="text-[10px] text-[var(--ink)] hover:text-[var(--ink)] font-medium"
                             >
                               {markingId === msg.id ? 'Marking...' : 'Mark read'}
                             </button>
@@ -435,7 +435,7 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
                 </div>
 
                 {/* Reply */}
-                <div className="p-3 border-t border-gray-100 bg-white">
+                <div className="p-3 border-t border-[var(--line)] bg-white">
                   <form
                     onSubmit={async (e) => {
                       e.preventDefault();
@@ -454,11 +454,11 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
                       name="replyBody"
                       type="text"
                       placeholder="Type a reply..."
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                      className="flex-1 px-3 py-2 border border-[var(--line)] rounded-xl text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(10,22,40,0.2)] outline-none"
                     />
                     <button
                       type="submit"
-                      className="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+                      className="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] transition-colors"
                     >
                       Send
                     </button>
@@ -467,13 +467,13 @@ export default function DoctorMessages({ doctorId, clinicId }: DoctorMessagesPro
               </>
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 bg-[var(--paper2)] rounded-full flex items-center justify-center mb-4">
+                  <svg className="w-8 h-8 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">Select a conversation</h3>
-                <p className="text-sm text-gray-500">Choose a conversation from the list or start a new one</p>
+                <h3 className="text-lg font-semibold text-[var(--ink)] mb-1">Select a conversation</h3>
+                <p className="text-sm text-[var(--muted)]">Choose a conversation from the list or start a new one</p>
               </div>
             )}
           </div>

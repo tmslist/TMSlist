@@ -27,44 +27,44 @@ export function DosimetryDisplay() {
   return (
     <div className="flex flex-col gap-3">
       {/* Dose Metrics — 3 columns */}
-      <div className="bg-slate-800/60 rounded-xl p-4 border border-slate-700/40">
+      <div className="bg-[var(--paper2)]/60 rounded-xl p-4 border border-[var(--line)]/40">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Live Dose</span>
+          <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider">Live Dose</span>
           <div className="flex items-center gap-1.5">
-            <div className={`w-1.5 h-1.5 rounded-full ${state.isPlaying ? 'bg-cyan-400 animate-pulse' : 'bg-slate-600'}`} />
-            <span className="text-[9px] text-slate-500 uppercase">{state.isPlaying ? 'Active' : 'Idle'}</span>
+            <div className={`w-1.5 h-1.5 rounded-full ${state.isPlaying ? 'bg-[var(--paper2)] animate-pulse' : 'bg-[var(--paper2)]'}`} />
+            <span className="text-[9px] text-white/40 uppercase">{state.isPlaying ? 'Active' : 'Idle'}</span>
           </div>
         </div>
 
         <div className="grid grid-cols-3 gap-3">
           {/* Total pulses */}
           <div className="text-center">
-            <div className="text-xl font-mono font-bold text-cyan-300 leading-none">{state.pulseCount.toLocaleString()}</div>
-            <div className="text-[9px] text-slate-500 mt-1 uppercase tracking-wider">Pulses</div>
+            <div className="text-xl font-mono font-bold text-[var(--warm)] leading-none">{state.pulseCount.toLocaleString()}</div>
+            <div className="text-[9px] text-white/40 mt-1 uppercase tracking-wider">Pulses</div>
           </div>
 
           {/* Estimated dose */}
-          <div className="text-center border-x border-slate-700/50">
-            <div className="text-xl font-mono font-bold text-violet-300 leading-none">
+          <div className="text-center border-x border-[var(--line)]/50">
+            <div className="text-xl font-mono font-bold text-[rgba(10,22,40,0.3)] leading-none">
               {estimatedDose}
-              <span className="text-xs text-slate-500 ml-0.5">J</span>
+              <span className="text-xs text-white/40 ml-0.5">J</span>
             </div>
-            <div className="text-[9px] text-slate-500 mt-1 uppercase tracking-wider">Est. Dose</div>
+            <div className="text-[9px] text-white/40 mt-1 uppercase tracking-wider">Est. Dose</div>
           </div>
 
           {/* Pulses per minute */}
           <div className="text-center">
-            <div className="text-xl font-mono font-bold text-emerald-300 leading-none">{pulsesPerMinute}</div>
-            <div className="text-[9px] text-slate-500 mt-1 uppercase tracking-wider">/min</div>
+            <div className="text-xl font-mono font-bold text-[var(--accent2)] leading-none">{pulsesPerMinute}</div>
+            <div className="text-[9px] text-white/40 mt-1 uppercase tracking-wider">/min</div>
           </div>
         </div>
       </div>
 
       {/* Session progress */}
-      <div className="bg-slate-800/40 rounded-xl p-3 border border-slate-700/30">
+      <div className="bg-[var(--paper2)]/40 rounded-xl p-3 border border-[var(--line)]/30">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Session Progress</span>
-          <span className="text-[10px] font-mono font-bold text-slate-300">{sessionProgress.toFixed(1)}%</span>
+          <span className="text-[9px] font-semibold text-white/40 uppercase tracking-wider">Session Progress</span>
+          <span className="text-[10px] font-mono font-bold text-white/40">{sessionProgress.toFixed(1)}%</span>
         </div>
 
         <div
@@ -81,8 +81,8 @@ export function DosimetryDisplay() {
         />
 
         <div className="flex justify-between mt-1.5">
-          <span className="text-[8px] text-slate-600">{state.pulseCount.toLocaleString()} delivered</span>
-          <span className="text-[8px] text-slate-600">{totalCourse.toLocaleString()} target</span>
+          <span className="text-[8px] text-white/40">{state.pulseCount.toLocaleString()} delivered</span>
+          <span className="text-[8px] text-white/40">{totalCourse.toLocaleString()} target</span>
         </div>
       </div>
     </div>

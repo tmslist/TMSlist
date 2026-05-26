@@ -4,7 +4,7 @@ description: "Learn about TMS advocacy organizations, legislative efforts to imp
 publishDate: 2026-04-15
 category: patient-guide
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-industry-lobbying-advocacy.svg"
 tags: ["tms", "advocacy", "insurance-coverage", "legislation", "patient-advocacy", "mental-health-policy", "access-to-care"]
 ---
 
@@ -183,35 +183,35 @@ For patients who need TMS now, several resources may help:
 
 *To get involved in TMS advocacy, contact the Clinical TMS Society (clinicaltmssociety.org) or National Alliance on Mental Illness (nami.org) for opportunities to make your voice heard.*
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does insurance cover TMS for depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does insurance cover TMS for depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Many insurers cover TMS for treatment-resistant depression, but coverage varies significantly. Most require failure of at least one medication before approving TMS. Medicare covers TMS for eligible beneficiaries with TRD. Coverage for other conditions (OCD, PTSD) varies by insurer.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Many insurers cover TMS for treatment-resistant depression, but coverage varies significantly. Most require failure of at least one medication before approving TMS. Medicare covers TMS for eligible beneficiaries with TRD. Coverage for other conditions (OCD, PTSD) varies by insurer.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How can I get my TMS coverage approved?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How can I get my TMS coverage approved?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Document treatment history thoroughly, get supporting letters from providers citing clinical guidelines, request peer-to-peer review with the insurer's medical director, and file appeals promptly. Many initial denials are overturned on appeal. Your TMS clinic's billing department can help with this process.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Document treatment history thoroughly, get supporting letters from providers citing clinical guidelines, request peer-to-peer review with the insurer's medical director, and file appeals promptly. Many initial denials are overturned on appeal. Your TMS clinic's billing department can help with this process.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What advocacy organizations support TMS access?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What advocacy organizations support TMS access?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Key organizations include the Clinical TMS Society (CTMSS), American Psychiatric Association (APA), Brain Stimulation Advocacy Network (BSAN), and National Alliance on Mental Illness (NAMI). These groups advocate for expanded coverage and improved access policies.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Key organizations include the Clinical TMS Society (CTMSS), American Psychiatric Association (APA), Brain Stimulation Advocacy Network (BSAN), and National Alliance on Mental Illness (NAMI). These groups advocate for expanded coverage and improved access policies.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

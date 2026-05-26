@@ -51,7 +51,12 @@ const MACHINES = ['NeuroStar', 'BrainsWay', 'MagVenture', 'CloudTMS', 'Magstim',
 const INSURANCES = ['Medicare', 'Medicaid', 'Blue Cross Blue Shield', 'Aetna', 'Cigna', 'UnitedHealthcare', 'Humana', 'Tricare', 'Kaiser Permanente'];
 const STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC'];
 
-export default function AdvancedSearch() {
+interface Props {
+  initialLocation?: string;
+  initialCountry?: string;
+}
+
+export default function AdvancedSearch({ initialLocation: _initialLocation, initialCountry = 'US' }: Props = {}) {
   const [query, setQuery] = useState('');
   const [state, setState] = useState('');
   const [selectedTreatments, setSelectedTreatments] = useState<string[]>([]);
@@ -75,6 +80,7 @@ export default function AdvancedSearch() {
     const params = new URLSearchParams();
     if (query) params.set('query', query);
     if (state) params.set('state', state);
+    if (initialCountry) params.set('country', initialCountry);
     if (selectedMachines.length) params.set('machines', selectedMachines.join(','));
     if (selectedInsurances.length) params.set('insurances', selectedInsurances.join(','));
     if (selectedTreatments.length) params.set('specialties', selectedTreatments.join(','));
@@ -134,7 +140,7 @@ export default function AdvancedSearch() {
       {/* Search bar */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <div className="relative flex-1">
-          <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -144,21 +150,21 @@ export default function AdvancedSearch() {
             onKeyDown={(e) => e.key === 'Enter' && search()}
             placeholder="Search by name, city, or keyword..."
             aria-label="Search clinics by name, city, or keyword"
-            className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus-visible:outline-none transition-all"
+            className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-[var(--line)] bg-white text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus-visible:outline-none transition-all"
           />
         </div>
-        <select value={state} onChange={(e) => setState(e.target.value)} className="px-4 py-3.5 rounded-xl border border-slate-200 bg-white text-sm font-medium">
+        <select value={state} onChange={(e) => setState(e.target.value)} className="px-4 py-3.5 rounded-xl border border-[var(--line)] bg-white text-sm font-medium">
           <option value="">All States</option>
           {STATES.map(s => <option key={s} value={s}>{s}</option>)}
         </select>
-        <button onClick={() => search()} className="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm">
+        <button onClick={() => search()} className="px-6 py-3.5 bg-[var(--accent)] hover:bg-[var(--accent)] text-white font-bold rounded-xl text-sm transition-all shadow-sm">
           Search
         </button>
       </div>
 
       {/* Radius slider */}
       <div className="flex items-center gap-4 mb-4 px-1">
-        <label className="text-xs font-semibold text-slate-500 whitespace-nowrap">Within radius:</label>
+        <label className="text-xs font-semibold text-[var(--muted)] whitespace-nowrap">Within radius:</label>
         <input
           type="range"
           min={5}
@@ -169,9 +175,9 @@ export default function AdvancedSearch() {
           onMouseUp={() => search()}
           onTouchEnd={() => search()}
           aria-label="Search radius in miles"
-          className="flex-1 h-1.5 bg-slate-200 rounded-full appearance-none cursor-pointer accent-blue-600"
+          className="flex-1 h-1.5 bg-[var(--paper2)] rounded-full appearance-none cursor-pointer accent-blue-600"
         />
-        <span className="text-xs font-bold text-blue-600 min-w-[48px] text-right">{radius === 200 ? 'Any' : `${radius} mi`}</span>
+        <span className="text-xs font-bold text-[var(--accent)] min-w-[48px] text-right">{radius === 200 ? 'Any' : `${radius} mi`}</span>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
@@ -179,17 +185,17 @@ export default function AdvancedSearch() {
         <div className="lg:w-72 shrink-0">
           <button
             onClick={() => setFiltersOpen(!filtersOpen)}
-            className="lg:hidden w-full flex items-center justify-between px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm font-semibold mb-4"
+            className="lg:hidden w-full flex items-center justify-between px-4 py-3 bg-white border border-[var(--line)] rounded-xl text-sm font-semibold mb-4"
           >
-            Filters {activeFilterCount > 0 && <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs">{activeFilterCount}</span>}
+            Filters {activeFilterCount > 0 && <span className="bg-[rgba(10,22,40,0.1)] text-[var(--accent)] px-2 py-0.5 rounded-full text-xs">{activeFilterCount}</span>}
             <svg className={`w-4 h-4 transition-transform ${filtersOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </button>
 
           <div className={`space-y-6 ${filtersOpen ? 'block' : 'hidden lg:block'}`} role="region" aria-label="Search filters">
             {/* Sort */}
-            <div className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
-              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Sort By</h3>
-              <select value={sortBy} onChange={(e) => { setSortBy(e.target.value); search(); }} aria-label="Sort clinics by" className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm">
+            <div className="bg-white rounded-2xl border border-[var(--line)] p-5 shadow-sm">
+              <h3 className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-3">Sort By</h3>
+              <select value={sortBy} onChange={(e) => { setSortBy(e.target.value); search(); }} aria-label="Sort clinics by" className="w-full px-3 py-2 rounded-lg border border-[var(--line)] text-sm">
                 <option value="rating">Highest Rated</option>
                 <option value="reviews">Most Reviews</option>
                 <option value="name">Name A-Z</option>
@@ -197,20 +203,20 @@ export default function AdvancedSearch() {
             </div>
 
             {/* Verified */}
-            <div className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
+            <div className="bg-white rounded-2xl border border-[var(--line)] p-5 shadow-sm">
               <label className="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" checked={verifiedOnly} onChange={(e) => setVerifiedOnly(e.target.checked)} className="w-4 h-4 rounded text-blue-600" />
-                <span className="text-sm font-semibold text-slate-700">Verified Clinics Only</span>
+                <input type="checkbox" checked={verifiedOnly} onChange={(e) => setVerifiedOnly(e.target.checked)} className="w-4 h-4 rounded text-[var(--accent)]" />
+                <span className="text-sm font-semibold text-[var(--ink2)]">Verified Clinics Only</span>
               </label>
             </div>
 
             {/* Min Rating */}
-            <div className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
-              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Minimum Rating</h3>
+            <div className="bg-white rounded-2xl border border-[var(--line)] p-5 shadow-sm">
+              <h3 className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-3">Minimum Rating</h3>
               <div className="flex gap-1">
                 {[0, 3, 3.5, 4, 4.5].map(r => (
                   <button key={r} onClick={() => setMinRating(r)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${minRating === r ? 'bg-amber-100 text-amber-700 border border-amber-200' : 'bg-slate-50 text-slate-500 border border-slate-100 hover:border-slate-200'}`}>
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${minRating === r ? 'bg-amber-100 text-amber-700 border border-amber-200' : 'bg-[var(--paper2)] text-[var(--muted)] border border-[var(--line)] hover:border-[var(--line)]'}`}>
                     {r === 0 ? 'Any' : `${r}+`}
                   </button>
                 ))}
@@ -218,51 +224,51 @@ export default function AdvancedSearch() {
             </div>
 
             {/* Conditions */}
-            <div className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
-              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Conditions Treated</h3>
+            <div className="bg-white rounded-2xl border border-[var(--line)] p-5 shadow-sm">
+              <h3 className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-3">Conditions Treated</h3>
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {TREATMENTS.map(t => (
                   <label key={t} className="flex items-center gap-2.5 cursor-pointer">
-                    <input type="checkbox" checked={selectedTreatments.includes(t)} onChange={() => toggleFilter(selectedTreatments, setSelectedTreatments, t)} className="w-3.5 h-3.5 rounded text-blue-600" />
-                    <span className="text-sm text-slate-600">{t}</span>
+                    <input type="checkbox" checked={selectedTreatments.includes(t)} onChange={() => toggleFilter(selectedTreatments, setSelectedTreatments, t)} className="w-3.5 h-3.5 rounded text-[var(--accent)]" />
+                    <span className="text-sm text-[var(--ink2)]">{t}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             {/* TMS Devices */}
-            <div className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
-              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">TMS Device</h3>
+            <div className="bg-white rounded-2xl border border-[var(--line)] p-5 shadow-sm">
+              <h3 className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-3">TMS Device</h3>
               <div className="space-y-2">
                 {MACHINES.map(m => (
                   <label key={m} className="flex items-center gap-2.5 cursor-pointer">
-                    <input type="checkbox" checked={selectedMachines.includes(m)} onChange={() => toggleFilter(selectedMachines, setSelectedMachines, m)} className="w-3.5 h-3.5 rounded text-blue-600" />
-                    <span className="text-sm text-slate-600">{m}</span>
+                    <input type="checkbox" checked={selectedMachines.includes(m)} onChange={() => toggleFilter(selectedMachines, setSelectedMachines, m)} className="w-3.5 h-3.5 rounded text-[var(--accent)]" />
+                    <span className="text-sm text-[var(--ink2)]">{m}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             {/* Insurance */}
-            <div className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
-              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Insurance Accepted</h3>
+            <div className="bg-white rounded-2xl border border-[var(--line)] p-5 shadow-sm">
+              <h3 className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-3">Insurance Accepted</h3>
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {INSURANCES.map(i => (
                   <label key={i} className="flex items-center gap-2.5 cursor-pointer">
-                    <input type="checkbox" checked={selectedInsurances.includes(i)} onChange={() => toggleFilter(selectedInsurances, setSelectedInsurances, i)} className="w-3.5 h-3.5 rounded text-blue-600" />
-                    <span className="text-sm text-slate-600">{i}</span>
+                    <input type="checkbox" checked={selectedInsurances.includes(i)} onChange={() => toggleFilter(selectedInsurances, setSelectedInsurances, i)} className="w-3.5 h-3.5 rounded text-[var(--accent)]" />
+                    <span className="text-sm text-[var(--ink2)]">{i}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             {/* Apply button */}
-            <button onClick={() => search()} className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-all">
+            <button onClick={() => search()} className="w-full py-3 bg-[var(--accent)] hover:bg-[var(--accent)] text-white font-bold rounded-xl text-sm transition-all">
               Apply Filters
             </button>
 
             {activeFilterCount > 0 && (
-              <button onClick={() => { setSelectedTreatments([]); setSelectedMachines([]); setSelectedInsurances([]); setVerifiedOnly(false); setMinRating(0); }} className="w-full py-2 text-sm text-slate-500 hover:text-red-600 font-medium transition-colors">
+              <button onClick={() => { setSelectedTreatments([]); setSelectedMachines([]); setSelectedInsurances([]); setVerifiedOnly(false); setMinRating(0); }} className="w-full py-2 text-sm text-[var(--muted)] hover:text-red-600 font-medium transition-colors">
                 Clear All Filters
               </button>
             )}
@@ -272,24 +278,24 @@ export default function AdvancedSearch() {
         {/* Results */}
         <div className="flex-1">
           <div className="flex items-center justify-between mb-4">
-            <p className="text-sm text-slate-500 font-medium">
+            <p className="text-sm text-[var(--muted)] font-medium">
               {loading ? 'Searching...' : `${total} clinic${total !== 1 ? 's' : ''} found`}
             </p>
           </div>
 
           {loading && (
             <div className="flex justify-center py-16">
-              <div className="w-8 h-8 border-3 border-blue-300 border-t-blue-600 rounded-full animate-spin" />
+              <div className="w-8 h-8 border-3 border-[rgba(10,22,40,0.2)] border-t-blue-600 rounded-full animate-spin" />
             </div>
           )}
 
           {!loading && results.length === 0 && (
-            <div className="text-center py-16 bg-white rounded-2xl border border-slate-100">
-              <svg className="w-12 h-12 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center py-16 bg-white rounded-2xl border border-[var(--line)]">
+              <svg className="w-12 h-12 mx-auto text-[var(--line)] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              <p className="text-slate-500 font-medium">No clinics match your criteria</p>
-              <p className="text-sm text-slate-400 mt-1">Try adjusting your filters or search terms</p>
+              <p className="text-[var(--muted)] font-medium">No clinics match your criteria</p>
+              <p className="text-sm text-[var(--muted)] mt-1">Try adjusting your filters or search terms</p>
             </div>
           )}
 
@@ -297,11 +303,11 @@ export default function AdvancedSearch() {
             {!loading && results.map(clinic => {
               const rating = Number(clinic.ratingAvg || 0);
               return (
-                <a key={clinic.id} href={`/clinic/${clinic.slug}`} className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all block">
+                <a key={clinic.id} href={`/clinic/${clinic.slug}`} className="bg-white rounded-2xl border border-[var(--line)] p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all block">
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <h3 className="font-semibold text-slate-900 text-sm leading-tight">{clinic.name}</h3>
-                      <p className="text-xs text-slate-500 mt-0.5">{clinic.city}, {clinic.state}</p>
+                      <h3 className="font-semibold text-[var(--ink)] text-sm leading-tight">{clinic.name}</h3>
+                      <p className="text-xs text-[var(--muted)] mt-0.5">{clinic.city}, {clinic.state}</p>
                     </div>
                     <div className="flex items-center gap-1.5 shrink-0">
                       {clinic.verified && (
@@ -312,21 +318,21 @@ export default function AdvancedSearch() {
 
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-sm font-semibold text-amber-600">{rating.toFixed(1)} ★</span>
-                    <span className="text-xs text-slate-400">({clinic.reviewCount} reviews)</span>
+                    <span className="text-xs text-[var(--muted)]">({clinic.reviewCount} reviews)</span>
                   </div>
 
                   {(clinic.machines?.length ?? 0) > 0 && (
                     <div className="flex flex-wrap gap-1.5 mb-2">
                       {clinic.machines!.slice(0, 3).map(m => (
-                        <span key={m} className="text-[10px] px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md font-medium">{m}</span>
+                        <span key={m} className="text-[10px] px-2 py-0.5 bg-[var(--paper2)] text-[var(--accent)] rounded-md font-medium">{m}</span>
                       ))}
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-50">
-                    <span className="text-xs font-semibold text-blue-600">View Profile →</span>
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-[var(--line)]">
+                    <span className="text-xs font-semibold text-[var(--accent)]">View Profile →</span>
                     {clinic.phone && (
-                      <span className="text-xs text-violet-500 font-semibold">Request Callback</span>
+                      <span className="text-xs text-[var(--accent2)] font-semibold">Request Callback</span>
                     )}
                   </div>
                 </a>
@@ -338,12 +344,12 @@ export default function AdvancedSearch() {
           {total > 20 && !loading && (
             <div className="flex justify-center gap-2 mt-8">
               <button disabled={page === 0} onClick={() => { setPage(p => p - 1); search(false); }}
-                className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium disabled:opacity-40 hover:bg-slate-50 transition-all">
+                className="px-4 py-2 bg-white border border-[var(--line)] rounded-lg text-sm font-medium disabled:opacity-40 hover:bg-[var(--paper2)] transition-all">
                 Previous
               </button>
-              <span className="px-4 py-2 text-sm text-slate-500">Page {page + 1}</span>
+              <span className="px-4 py-2 text-sm text-[var(--muted)]">Page {page + 1}</span>
               <button disabled={results.length < 20} onClick={() => { setPage(p => p + 1); search(false); }}
-                className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium disabled:opacity-40 hover:bg-slate-50 transition-all">
+                className="px-4 py-2 bg-white border border-[var(--line)] rounded-lg text-sm font-medium disabled:opacity-40 hover:bg-[var(--paper2)] transition-all">
                 Next
               </button>
             </div>

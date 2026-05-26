@@ -4,7 +4,7 @@ condition: "Bipolar Depression"
 description: "TMS therapy for the depressive phase of bipolar disorder — a potentially safer alternative to antidepressants with lower risk of triggering mania."
 fdaApproved: false
 successRate: "40-50% response in clinical studies"
-image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 sessionCount: "20-36"
 duration: "4-6 weeks"
 brainArea: "Left DLPFC"
@@ -17,29 +17,6 @@ faqs:
     answer: "Yes — and you should. Most clinicians require patients to remain on a mood stabilizer during TMS to minimize mania risk."
 ---
 
-
-<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-  <div class="relative overflow-hidden bg-gradient-to-br from-violet-50 to-fuchsia-50 border border-violet-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
-    <div class="absolute -right-4 -top-4 w-16 h-16 bg-violet-400/10 rounded-full blur-xl group-hover:bg-violet-400/20 transition-all"></div>
-    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600 font-display">4.4%</div>
-    <div class="text-xs font-medium text-violet-700/80 mt-1">US adults with bipolar</div>
-  </div>
-  <div class="relative overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
-    <div class="absolute -right-4 -top-4 w-16 h-16 bg-emerald-400/10 rounded-full blur-xl group-hover:bg-emerald-400/20 transition-all"></div>
-    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600 font-display">40-50%</div>
-    <div class="text-xs font-medium text-emerald-700/80 mt-1">TMS response rate</div>
-  </div>
-  <div class="relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
-    <div class="absolute -right-4 -top-4 w-16 h-16 bg-blue-400/10 rounded-full blur-xl group-hover:bg-blue-400/20 transition-all"></div>
-    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 font-display">20-36</div>
-    <div class="text-xs font-medium text-blue-700/80 mt-1">Sessions typical</div>
-  </div>
-  <div class="relative overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
-    <div class="absolute -right-4 -top-4 w-16 h-16 bg-amber-400/10 rounded-full blur-xl group-hover:bg-amber-400/20 transition-all"></div>
-    <div class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500 font-display">Off-label</div>
-    <div class="text-xs font-medium text-amber-700/80 mt-1">Regulatory status</div>
-  </div>
-</div>
 
 ## What is Bipolar Depression and How TMS Helps
 

@@ -18,9 +18,9 @@ faqs:
 ---
 
 <div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">Off-label</div>
-    <div class="text-xs text-blue-600 mt-1">For PTSD</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">Off-label</div>
+    <div class="text-xs text-[var(--ink)] mt-1">For PTSD</div>
   </div>
   <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
     <div class="text-2xl font-bold text-emerald-700 font-display">Hours</div>
@@ -30,9 +30,9 @@ faqs:
     <div class="text-2xl font-bold text-amber-700 font-display">1-2</div>
     <div class="text-xs text-amber-600 mt-1">Injections needed</div>
   </div>
-  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-violet-700 font-display">$1.5-3K</div>
-    <div class="text-xs text-violet-600 mt-1">Per injection</div>
+  <div class="bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--warm)] font-display">$1.5-3K</div>
+    <div class="text-xs text-[var(--warm)] mt-1">Per injection</div>
   </div>
 </div>
 
@@ -42,10 +42,10 @@ The stellate ganglion is a collection of sympathetic nerves located in the neck,
 
 An SGB involves injecting a local anesthetic (typically bupivacaine) near the stellate ganglion under ultrasound or fluoroscopic guidance. The anesthetic temporarily blocks the sympathetic nerve signals, effectively "rebooting" the overactive fight-or-flight response.
 
-<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">The "reboot" theory</h4>
-  <p class="text-sm text-slate-600 leading-relaxed mb-3">In PTSD, the sympathetic nervous system gets "stuck" in an elevated state. Norepinephrine levels remain chronically high, nerve growth factor increases, and the stellate ganglion physically grows additional nerve connections — hardwiring the hyperarousal response.</p>
-  <p class="text-sm text-slate-600 leading-relaxed mb-0">SGB temporarily blocks this circuit. When the anesthetic wears off (hours), the system restarts at a lower baseline — similar to rebooting a frozen computer. The hyperarousal doesn't return to its pre-injection level because the reset breaks the feedback loop.</p>
+<div class="not-prose my-8 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--ink)] mb-3 text-base">The "reboot" theory</h4>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-3">In PTSD, the sympathetic nervous system gets "stuck" in an elevated state. Norepinephrine levels remain chronically high, nerve growth factor increases, and the stellate ganglion physically grows additional nerve connections — hardwiring the hyperarousal response.</p>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-0">SGB temporarily blocks this circuit. When the anesthetic wears off (hours), the system restarts at a lower baseline — similar to rebooting a frozen computer. The hyperarousal doesn't return to its pre-injection level because the reset breaks the feedback loop.</p>
 </div>
 
 ---
@@ -53,32 +53,32 @@ An SGB involves injecting a local anesthetic (typically bupivacaine) near the st
 ## How the Procedure Works
 
 <div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 text-blue-600 font-bold text-xs shrink-0">1</span>
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-[rgba(10,22,40,0.1)] text-[var(--ink)] font-bold text-xs shrink-0">1</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Preparation</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">You lie on your back or sit upright. The injection site on the neck is cleaned and numbed with a local anesthetic.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Preparation</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">You lie on your back or sit upright. The injection site on the neck is cleaned and numbed with a local anesthetic.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 text-blue-600 font-bold text-xs shrink-0">2</span>
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-[rgba(10,22,40,0.1)] text-[var(--ink)] font-bold text-xs shrink-0">2</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Image-Guided Injection</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Using ultrasound or fluoroscopy, the physician guides a thin needle to the stellate ganglion and injects the local anesthetic. Takes 5-15 minutes.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Image-Guided Injection</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Using ultrasound or fluoroscopy, the physician guides a thin needle to the stellate ganglion and injects the local anesthetic. Takes 5-15 minutes.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">3</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Immediate Effects</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Within minutes, you may notice a drooping eyelid (Horner's syndrome) on the injection side — this confirms proper placement. It's temporary.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Immediate Effects</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Within minutes, you may notice a drooping eyelid (Horner's syndrome) on the injection side — this confirms proper placement. It's temporary.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 font-bold text-xs shrink-0">4</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Recovery & Relief</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">30-60 minute observation. PTSD symptom relief often begins within hours. Many patients describe dramatic reduction in hypervigilance, anxiety, and startle response.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Recovery & Relief</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">30-60 minute observation. PTSD symptom relief often begins within hours. Many patients describe dramatic reduction in hypervigilance, anxiety, and startle response.</p>
     </div>
   </div>
 </div>
@@ -88,21 +88,21 @@ An SGB involves injecting a local anesthetic (typically bupivacaine) near the st
 ## SGB vs. TMS for PTSD
 
 <div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+<table class="w-full text-sm border border-[var(--line)] rounded-xl overflow-hidden">
   <thead>
-    <tr class="bg-slate-800 text-white">
+    <tr class="bg-[var(--ink2)] text-white">
       <th class="px-4 py-3 text-left font-semibold">Factor</th>
       <th class="px-4 py-3 text-center font-semibold">SGB</th>
       <th class="px-4 py-3 text-center font-semibold">TMS</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Speed</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Hours</span></td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">2-3 Weeks</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Sessions</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">1-2 injections</span></td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">20-36 sessions</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Target</td><td class="px-4 py-3 text-center">Peripheral nervous system</td><td class="px-4 py-3 text-center">Brain circuits directly</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Evidence Level</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Growing (smaller trials)</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Strong (large VA trials)</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Best For</td><td class="px-4 py-3 text-center">Hyperarousal, fight-or-flight</td><td class="px-4 py-3 text-center">Full PTSD symptom cluster</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Insurance</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Sometimes (off-label)</span></td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Via depression pathway</span></td></tr>
+  <tbody class="divide-y divide-[var(--line)]">
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Speed</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Hours</span></td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">2-3 Weeks</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Sessions</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">1-2 injections</span></td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">20-36 sessions</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Target</td><td class="px-4 py-3 text-center">Peripheral nervous system</td><td class="px-4 py-3 text-center">Brain circuits directly</td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Evidence Level</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Growing (smaller trials)</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Strong (large VA trials)</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Best For</td><td class="px-4 py-3 text-center">Hyperarousal, fight-or-flight</td><td class="px-4 py-3 text-center">Full PTSD symptom cluster</td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Insurance</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Sometimes (off-label)</span></td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Via depression pathway</span></td></tr>
   </tbody>
 </table>
 </div>

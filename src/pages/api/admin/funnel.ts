@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { desc, sql, gte, count } from 'drizzle-orm';
 import { db } from '../../../db';
 import { funnelEvents, leads } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -62,9 +62,9 @@ export const GET: APIRoute = async ({ request }) => {
     const [leadCount, clinicViewCount, conversionCount] = await Promise.all([
       db.select({ count: sql<number>`count(*)` }).from(leads).where(gte(leads.createdAt, since)),
       db.select({ count: sql<number>`count(*)` }).from(leads)
-        .where(sql`${leads.createdAt} >= ${since} AND ${leads.clinicId} IS NOT NULL`),
+        .where(sql`${leads.createdAt} >= ${since.toISOString()} AND ${leads.clinicId} IS NOT NULL`),
       db.select({ count: sql<number>`count(*)` }).from(leads)
-        .where(sql`${leads.createdAt} >= ${since} AND ${leads.type} = 'appointment_request'`),
+        .where(sql`${leads.createdAt} >= ${since.toISOString()} AND ${leads.type} = 'appointment_request'`),
     ]);
 
     const lc = Number(leadCount[0]?.count ?? 0);

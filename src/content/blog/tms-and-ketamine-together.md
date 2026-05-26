@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-12
 category: treatment
 tags: ["ketamine", "combination therapy", "Spravato"]
-image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-and-ketamine-together.svg"
 ---
 
 TMS therapy and ketamine attack depression through completely different mechanisms. That is not a minor detail. It is the entire reason combining them is generating serious clinical interest.
@@ -147,9 +147,9 @@ When evaluating a clinic, ask:
 
 This is frontier medicine. Evidence-based frontier medicine, but frontier nonetheless. Work with [specialists](/specialists/) who have real experience, not clinics that added ketamine as an afterthought to their TMS practice.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>TMS and ketamine work through different mechanisms, and ketamine may open a neuroplasticity window that makes TMS more effective.</li>
     <li>Pilot study data showed 68% remission rate with combination therapy vs. 30-35% for TMS alone and 25-30% for ketamine alone.</li>
     <li>Typical protocol: ketamine loading (weeks 1-2) combined with 6 weeks of TMS, with ketamine tapering as TMS builds cumulative effects.</li>
@@ -159,47 +159,47 @@ This is frontier medicine. Evidence-based frontier medicine, but frontier noneth
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I do TMS and ketamine at the same time?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I do TMS and ketamine at the same time?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes, this combination is growing in clinical practice. The theory is that ketamine opens a window of enhanced brain plasticity, and TMS delivered during that window may be more effective. Pilot data showed a 68% remission rate, though a larger randomized trial is still underway. Ask your TMS specialist whether combination therapy is appropriate for your situation.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes, this combination is growing in clinical practice. The theory is that ketamine opens a window of enhanced brain plasticity, and TMS delivered during that window may be more effective. Pilot data showed a 68% remission rate, though a larger randomized trial is still underway. Ask your TMS specialist whether combination therapy is appropriate for your situation.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is combination TMS and ketamine covered by insurance?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is combination TMS and ketamine covered by insurance?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS is usually covered for treatment-resistant depression. Spravato (esketamine) is FDA-approved and usually partially covered by insurance. IV ketamine is typically not covered since it is off-label for depression. Combination therapy can cost $4,200-$6,600 with good insurance coverage or $12,800-$19,600 without.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS is usually covered for treatment-resistant depression. Spravato (esketamine) is FDA-approved and usually partially covered by insurance. IV ketamine is typically not covered since it is off-label for depression. Combination therapy can cost $4,200-$6,600 with good insurance coverage or $12,800-$19,600 without.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long do the effects of combination therapy last?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long do the effects of combination therapy last?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Early data suggests combination therapy may produce more durable results than ketamine alone. At 8-week follow-up, 71% of remitters maintained their gains. Maintenance sessions (periodic TMS boosters and/or ketamine boosters) are typically recommended to sustain results, especially since neither treatment is a permanent cure for most people.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Early data suggests combination therapy may produce more durable results than ketamine alone. At 8-week follow-up, 71% of remitters maintained their gains. Maintenance sessions (periodic TMS boosters and/or ketamine boosters) are typically recommended to sustain results, especially since neither treatment is a permanent cure for most people.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Should I do Spravato or IV ketamine with TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Should I do Spravato or IV ketamine with TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Both can work for combination therapy. Spravato is FDA-approved for treatment-resistant depression and usually has insurance coverage. IV ketamine offers more dose flexibility and has more published research behind it. From a practical standpoint, Spravato may be easier to arrange because both treatments can happen in the same clinic on the same day.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Both can work for combination therapy. Spravato is FDA-approved for treatment-resistant depression and usually has insurance coverage. IV ketamine offers more dose flexibility and has more published research behind it. From a practical standpoint, Spravato may be easier to arrange because both treatments can happen in the same clinic on the same day.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Who should not combine TMS and ketamine?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Who should not combine TMS and ketamine?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">This combination is not appropriate for people with active substance use disorders (ketamine has abuse potential), uncontrolled hypertension (ketamine raises blood pressure), history of psychotic disorders, or certain cardiovascular conditions. Your TMS psychiatrist should screen for these contraindications during the evaluation.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">This combination is not appropriate for people with active substance use disorders (ketamine has abuse potential), uncontrolled hypertension (ketamine raises blood pressure), history of psychotic disorders, or certain cardiovascular conditions. Your TMS psychiatrist should screen for these contraindications during the evaluation.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

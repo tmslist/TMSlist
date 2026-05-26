@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 import { db } from '../../../db';
 import { loginHistory } from '../../../db/schema';
 import { eq, desc } from 'drizzle-orm';

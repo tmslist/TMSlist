@@ -1,0 +1,295 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {
+    TREATMENT_SLUGS,
+    INSURANCE_SLUGS,
+    COMPARE_SLUGS,
+    TECHNOLOGY_SLUGS,
+} from "../utils/seo_slugs";
+import {
+    getUniqueStates,
+    getClinicsByState,
+    STATE_NAMES,
+    getStateSlug,
+    buildInternationalDirectory,
+    COUNTRY_NAMES,
+    COUNTRY_FLAGS,
+    COUNTRY_URL_PREFIXES,
+} from "../utils/dataHelpers";
+
+// Get all states with content
+const uniqueStates = (await getUniqueStates()).sort();
+
+// Prepare state data with city counts
+const stateData = [];
+for (const stateCode of uniqueStates) {
+    const clinics = await getClinicsByState(stateCode);
+    const cities = [
+        ...new Set(clinics.map((c) => c.city).filter(Boolean)),
+    ].sort();
+    stateData.push({
+        code: stateCode,
+        name: STATE_NAMES[stateCode] || stateCode,
+        slug: getStateSlug(stateCode),
+        cityCount: cities.length,
+        clinicCount: clinics.length,
+    });
+}
+
+const internationalDirectory = await buildInternationalDirectory();
+
+const title = "Sitemap | TMS List";
+const description =
+    "Complete site overview of TMS List. Browse all treatments, insurance providers, clinic locations, and comparison guides.";
+---
+
+<Layout title={title} description={description}>
+    <main class="min-h-screen">
+        <!-- Hero -->
+        <section class="relative bg-[var(--paper)] overflow-hidden border-b border-[var(--line)]">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(10,22,40,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-[rgba(201,101,74,0.08)] rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-[var(--accent2)]/5 rounded-full blur-[120px]"></div>
+
+            <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-32 relative z-10">
+                <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-12" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-[var(--accent2)] transition-colors">Home</a>
+                    <span class="text-[var(--line)]">/</span>
+                    <span class="text-[var(--muted)]">Sitemap</span>
+                </nav>
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-[rgba(10,22,40,0.08)] border border-[rgba(10,22,40,0.20)] rounded-full mb-6">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[var(--ink2)] animate-pulse"></div>
+                        <span class="text-xs font-semibold text-[var(--accent)] tracking-wider uppercase">Complete Directory</span>
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-[var(--ink)] leading-[0.95] mb-5">
+                        Site<span class="italic text-[var(--warm)]">map</span>
+                    </h1>
+                    <p class="text-lg text-[var(--muted)] leading-relaxed">
+                        Browse our complete directory of TMS resources, locations, and guides.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-[var(--paper)]">
+        <div class="container mx-auto px-4 max-w-6xl">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <!-- COLUMN 1: General & Treatments -->
+            <div class="space-y-12">
+                <section>
+                    <h2
+                        class="text-xl font-semibold tracking-tight text-[var(--ink)] mb-4 border-b border-[var(--line)] pb-2"
+                    >
+                        General
+                    </h2>
+                    <ul class="space-y-2">
+                        <li>
+                            <a
+                                href="/"
+                                class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline transition-colors"
+                                >Home</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/verified-clinics/"
+                                class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline transition-colors"
+                                >Verified Clinics</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/specialists/"
+                                class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline transition-colors"
+                                >Find a Specialist</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/about-us/"
+                                class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline transition-colors"
+                                >About Us</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/blog/"
+                                class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline transition-colors"
+                                >Blog & Guides</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/contact/"
+                                class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline transition-colors"
+                                >Contact</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/add-listing/"
+                                class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline transition-colors"
+                                >List Your Clinic (Free)</a
+                            >
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2
+                        class="text-xl font-semibold tracking-tight text-[var(--ink)] mb-4 border-b border-[var(--line)] pb-2"
+                    >
+                        Treatments
+                    </h2>
+                    <ul class="space-y-2">
+                        {
+                            TREATMENT_SLUGS.map((item) => (
+                                <li>
+                                    <a
+                                        href={`/treatments/${item.slug}/`}
+                                        class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline block py-0.5"
+                                    >
+                                        {item.title}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </section>
+            </div>
+
+            <!-- COLUMN 2: Comparisons & Technology -->
+            <div class="space-y-12">
+                <section>
+                    <h2
+                        class="text-xl font-semibold tracking-tight text-[var(--ink)] mb-4 border-b border-[var(--line)] pb-2"
+                    >
+                        Comparisons
+                    </h2>
+                    <ul class="space-y-2">
+                        {
+                            COMPARE_SLUGS.map((item) => (
+                                <li>
+                                    <a
+                                        href={`/compare/${item.slug}/`}
+                                        class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline block py-0.5"
+                                    >
+                                        {item.title}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </section>
+
+                <section>
+                    <h2
+                        class="text-xl font-semibold tracking-tight text-[var(--ink)] mb-4 border-b border-[var(--line)] pb-2"
+                    >
+                        Technology
+                    </h2>
+                    <ul class="space-y-2">
+                        {
+                            TECHNOLOGY_SLUGS.map((item) => (
+                                <li>
+                                    <a
+                                        href={`/technology/${item.slug}/`}
+                                        class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline block py-0.5"
+                                    >
+                                        {item.title}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </section>
+            </div>
+
+            <!-- COLUMN 3: Insurance -->
+            <div class="space-y-12">
+                <section>
+                    <h2
+                        class="text-xl font-semibold tracking-tight text-[var(--ink)] mb-4 border-b border-[var(--line)] pb-2"
+                    >
+                        Insurance Coverage
+                    </h2>
+                    <ul class="space-y-2 text-sm">
+                        {
+                            INSURANCE_SLUGS.map((item) => (
+                                <li>
+                                    <a
+                                        href={`/insurance/${item.slug}/`}
+                                        class="text-[var(--muted)] hover:text-[var(--accent)] hover:underline block py-0.5"
+                                    >
+                                        {item.title}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </section>
+            </div>
+
+            <!-- COLUMN 4: Locations (States) -->
+            <div class="space-y-12">
+                <section>
+                    <h2
+                        class="text-xl font-semibold tracking-tight text-[var(--ink)] mb-4 border-b border-[var(--line)] pb-2"
+                    >
+                        Locations
+                    </h2>
+                    <h3 class="text-sm font-semibold text-[var(--muted)] uppercase tracking-wider mt-2 mb-2">United States</h3>
+                    <div class="grid grid-cols-1 gap-2 text-sm">
+                        {
+                            stateData.map((state) => (
+                                <a
+                                    href={`/us/${state.slug}/`}
+                                    class="group flex items-center justify-between text-[var(--muted)] hover:text-[var(--accent)] hover:underline py-0.5"
+                                >
+                                    <span>{state.name}</span>
+                                    <span class="text-xs text-[var(--muted)] bg-[var(--paper2)] px-1.5 rounded group-hover:bg-[rgba(10,22,40,0.08)] group-hover:text-[var(--accent)]">
+                                        {state.cityCount} Cities
+                                    </span>
+                                </a>
+                            ))
+                        }
+                    </div>
+
+                    {internationalDirectory.map((country) => (
+                        <div class="mt-6">
+                            <h3 class="text-sm font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">
+                                <span set:html={country.flag} /> {country.name}
+                            </h3>
+                            <div class="grid grid-cols-1 gap-2 text-sm">
+                                <a
+                                    href={`/${country.urlPrefix}/`}
+                                    class="group flex items-center justify-between text-[var(--muted)] hover:text-[var(--accent)] hover:underline py-0.5 font-medium"
+                                >
+                                    <span>All {country.name} Clinics</span>
+                                    <span class="text-xs text-[var(--muted)] bg-[var(--paper2)] px-1.5 rounded group-hover:bg-[rgba(10,22,40,0.08)] group-hover:text-[var(--accent)]">
+                                        {country.clinicCount}
+                                    </span>
+                                </a>
+                                {country.regions.map((region) => (
+                                    <a
+                                        href={`/${country.urlPrefix}/${region.slug}/`}
+                                        class="group flex items-center justify-between text-[var(--muted)] hover:text-[var(--accent)] hover:underline py-0.5"
+                                    >
+                                        <span>{region.name}</span>
+                                        <span class="text-xs text-[var(--muted)] bg-[var(--paper2)] px-1.5 rounded group-hover:bg-[rgba(10,22,40,0.08)] group-hover:text-[var(--accent)]">
+                                            {region.clinicCount}
+                                        </span>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </section>
+            </div>
+        </div>
+        </div>
+        </section>
+    </main>
+</Layout>

@@ -18,9 +18,9 @@ faqs:
 ---
 
 <div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">Off-label</div>
-    <div class="text-xs text-blue-600 mt-1">FDA status for depression</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">Off-label</div>
+    <div class="text-xs text-[var(--ink)] mt-1">FDA status for depression</div>
   </div>
   <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
     <div class="text-2xl font-bold text-emerald-700 font-display">Hours</div>
@@ -30,9 +30,9 @@ faqs:
     <div class="text-2xl font-bold text-amber-700 font-display">$400-800</div>
     <div class="text-xs text-amber-600 mt-1">Per infusion</div>
   </div>
-  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-violet-700 font-display">6</div>
-    <div class="text-xs text-violet-600 mt-1">Initial infusions typical</div>
+  <div class="bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--warm)] font-display">6</div>
+    <div class="text-xs text-[var(--warm)] mt-1">Initial infusions typical</div>
   </div>
 </div>
 
@@ -42,10 +42,10 @@ Ketamine is an FDA-approved anesthetic that has been used safely in hospitals si
 
 Unlike traditional antidepressants that modulate serotonin or norepinephrine, ketamine works primarily through the **glutamate system** — the brain's most abundant excitatory neurotransmitter. It blocks NMDA receptors, triggering a cascade that increases BDNF (brain-derived neurotrophic factor) and promotes the rapid formation of new synaptic connections. Depression weakens these connections; ketamine helps rebuild them.
 
-<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">The ketamine clinic landscape</h4>
-  <p class="text-sm text-slate-600 leading-relaxed mb-3">Ketamine infusion clinics have grown rapidly across the US — from roughly 100 in 2017 to over <strong>1,000 by 2026</strong>. They range from psychiatrist-led practices to anesthesiologist-run infusion centers to multi-location chains.</p>
-  <p class="text-sm text-slate-600 leading-relaxed mb-0">Quality varies significantly. Some clinics provide comprehensive psychiatric care with ketamine as one tool; others operate more like infusion mills. Due diligence matters.</p>
+<div class="not-prose my-8 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--ink)] mb-3 text-base">The ketamine clinic landscape</h4>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-3">Ketamine infusion clinics have grown rapidly across the US — from roughly 100 in 2017 to over <strong>1,000 by 2026</strong>. They range from psychiatrist-led practices to anesthesiologist-run infusion centers to multi-location chains.</p>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-0">Quality varies significantly. Some clinics provide comprehensive psychiatric care with ketamine as one tool; others operate more like infusion mills. Due diligence matters.</p>
 </div>
 
 ---
@@ -55,32 +55,32 @@ Unlike traditional antidepressants that modulate serotonin or norepinephrine, ke
 A standard initial ketamine protocol involves **6 infusions over 2-3 weeks**, followed by maintenance infusions as needed.
 
 <div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 text-blue-600 font-bold text-xs shrink-0">1</span>
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-[rgba(10,22,40,0.1)] text-[var(--ink)] font-bold text-xs shrink-0">1</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Evaluation</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Psychiatric assessment, medical history review, vitals baseline. Some clinics require a referring psychiatrist; others evaluate in-house.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Evaluation</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Psychiatric assessment, medical history review, vitals baseline. Some clinics require a referring psychiatrist; others evaluate in-house.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
-    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 text-blue-600 font-bold text-xs shrink-0">2</span>
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
+    <span class="flex items-center justify-center w-7 h-7 rounded-full bg-[rgba(10,22,40,0.1)] text-[var(--ink)] font-bold text-xs shrink-0">2</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">IV Infusion (40-60 minutes)</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Sub-anesthetic ketamine (0.5mg/kg) delivered through an IV line. You're awake but may experience dissociation, visual changes, and altered perception.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">IV Infusion (40-60 minutes)</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Sub-anesthetic ketamine (0.5mg/kg) delivered through an IV line. You're awake but may experience dissociation, visual changes, and altered perception.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">3</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Recovery (30-60 minutes)</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Effects wear off within 1-2 hours. You'll need someone to drive you home. Cannot drive or operate machinery for 24 hours.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Recovery (30-60 minutes)</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Effects wear off within 1-2 hours. You'll need someone to drive you home. Cannot drive or operate machinery for 24 hours.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 font-bold text-xs shrink-0">4</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Maintenance</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">After the initial 6 infusions, most patients need boosters every 2-8 weeks to maintain benefits. Frequency is titrated to your response.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Maintenance</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">After the initial 6 infusions, most patients need boosters every 2-8 weeks to maintain benefits. Frequency is titrated to your response.</p>
     </div>
   </div>
 </div>
@@ -90,52 +90,52 @@ A standard initial ketamine protocol involves **6 infusions over 2-3 weeks**, fo
 ## Ketamine vs. TMS: Head-to-Head
 
 <div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+<table class="w-full text-sm border border-[var(--line)] rounded-xl overflow-hidden">
   <thead>
-    <tr class="bg-slate-800 text-white">
+    <tr class="bg-[var(--ink2)] text-white">
       <th class="px-4 py-3 text-left font-semibold">Factor</th>
       <th class="px-4 py-3 text-center font-semibold">Ketamine</th>
       <th class="px-4 py-3 text-center font-semibold">TMS</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-slate-200">
+  <tbody class="divide-y divide-[var(--line)]">
     <tr class="bg-white">
-      <td class="px-4 py-3 font-medium text-slate-900">Speed</td>
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Speed</td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Hours</span></td>
       <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">2-3 Weeks</span></td>
     </tr>
-    <tr class="bg-slate-50">
-      <td class="px-4 py-3 font-medium text-slate-900">Duration of Effect</td>
+    <tr class="bg-[var(--paper2)]">
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Duration of Effect</td>
       <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">1-3 weeks per infusion</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">6-12 months after course</span></td>
     </tr>
     <tr class="bg-white">
-      <td class="px-4 py-3 font-medium text-slate-900">FDA Status</td>
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">FDA Status</td>
       <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Off-label</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">FDA Cleared</span></td>
     </tr>
-    <tr class="bg-slate-50">
-      <td class="px-4 py-3 font-medium text-slate-900">Abuse Potential</td>
+    <tr class="bg-[var(--paper2)]">
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Abuse Potential</td>
       <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Yes (Schedule III)</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
     </tr>
     <tr class="bg-white">
-      <td class="px-4 py-3 font-medium text-slate-900">Dissociation</td>
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Dissociation</td>
       <td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Expected (~60%)</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td>
     </tr>
-    <tr class="bg-slate-50">
-      <td class="px-4 py-3 font-medium text-slate-900">Insurance Coverage</td>
+    <tr class="bg-[var(--paper2)]">
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Insurance Coverage</td>
       <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Rarely covered</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Widely covered</span></td>
     </tr>
     <tr class="bg-white">
-      <td class="px-4 py-3 font-medium text-slate-900">Annual Cost</td>
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Annual Cost</td>
       <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">$5,000-$15,000+</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">$6,000-$12,000 (one-time)</span></td>
     </tr>
-    <tr class="bg-slate-50">
-      <td class="px-4 py-3 font-medium text-slate-900">Drive After?</td>
+    <tr class="bg-[var(--paper2)]">
+      <td class="px-4 py-3 font-medium text-[var(--ink)]">Drive After?</td>
       <td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">No — need a ride</span></td>
       <td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Yes, immediately</span></td>
     </tr>

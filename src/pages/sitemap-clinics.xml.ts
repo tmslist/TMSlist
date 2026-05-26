@@ -3,19 +3,19 @@ import { getAllClinics } from '../utils/dataHelpers';
 
 export const GET: APIRoute = async () => {
   const base = 'https://tmslist.com';
+  const now = new Date().toISOString().split('T')[0];
   const clinics = await getAllClinics();
 
   const urls = clinics.map(clinic => {
-    const country = clinic.country?.toLowerCase() || 'us';
-    const citySlug = (clinic.city || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    const stateSlug = (clinic.state || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    if (!clinic.slug) return '';
     const loc = `${base}/clinic/${clinic.slug}/`;
     return `  <url>
     <loc>${loc}</loc>
+    <lastmod>${now}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>`;
-  });
+  }).filter(Boolean);
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"

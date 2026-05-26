@@ -2,6 +2,7 @@
 export const prerender = false;
 
 import Layout from '../../../../../layouts/Layout.astro';
+import EditorialHero from '../../../../../components/editorial/EditorialHero.astro';
 import { getAllClinics, getStateCodeFromSlug, STATE_NAMES } from '../../../../../utils/clinicData';
 import { getDoctorPhoto } from '../../../../../utils/dataHelpers';
 
@@ -48,54 +49,46 @@ const description = `Find ${doctors.length} board-certified psychiatrists offeri
   { name: cityName, url: `/us/${Astro.params.state}/${Astro.params.city}/` },
   { name: "Psychiatrists", url: `/us/${Astro.params.state}/${Astro.params.city}/psychiatrists/` },
 ]}>
-    <main class="min-h-screen">
-        <!-- Hero Section -->
-        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                    <span class="text-slate-300">/</span>
-                    <a href="/us/" class="hover:text-violet-600 transition-colors">US</a>
-                    <span class="text-slate-300">/</span>
-                    <a href={`/us/${Astro.params.state}/`} class="hover:text-violet-600 transition-colors">{stateName}</a>
-                    <span class="text-slate-300">/</span>
-                    <a href={`/us/${Astro.params.state}/${Astro.params.city}/`} class="hover:text-violet-600 transition-colors">{cityName}</a>
-                    <span class="text-slate-300">/</span>
-                    <span class="text-slate-700 font-medium">Psychiatrists</span>
-                </nav>
-
-                <div class="max-w-3xl">
-                    <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-                        Best <span class="text-violet-600">Psychiatrists</span> in {cityName}
-                    </h1>
-                    <p class="text-lg text-slate-500 leading-relaxed mb-6">
-                        {doctors.length} board-certified psychiatrists specializing in TMS therapy across {clinicCount} clinics in {cityName}, {stateName}.
-                    </p>
-
-                    <a href={`/us/${Astro.params.state}/${Astro.params.city}/clinics/`} class="inline-flex items-center px-5 py-2.5 bg-white border border-slate-200 hover:border-violet-200 rounded-xl text-slate-700 text-sm font-semibold hover:text-violet-600 transition-all shadow-sm">
-                        View All Clinics →
-                    </a>
-                </div>
-            </div>
-        </section>
+    <main style="background:var(--paper)">
+        <EditorialHero
+            eyebrow={`${doctors.length} Board-Certified Psychiatrists`}
+            eyebrowDot="#22c55e"
+            title={`Psychiatrists in`}
+            titleAccent={`${cityName}.`}
+            description={`${doctors.length} board-certified psychiatrists specializing in TMS therapy across ${clinicCount} clinics in ${cityName}, ${stateName}.`}
+            breadcrumbs={[
+                { label: "Home", href: "/" },
+                { label: "United States", href: "/us/" },
+                { label: stateName, href: `/us/${Astro.params.state}/` },
+                { label: cityName, href: `/us/${Astro.params.state}/${Astro.params.city}/` },
+                { label: "Psychiatrists" },
+            ]}
+            ctas={[
+                { label: "View All Clinics", href: `/us/${Astro.params.state}/${Astro.params.city}/clinics/` },
+                { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/", variant: "outline" },
+            ]}
+            stats={[
+                { value: doctors.length, label: "Psychiatrists", color: "ink" },
+                { value: clinicCount, label: "Clinics", color: "accent" },
+                { value: "4.8★", label: "Avg Rating", color: "warm" },
+            ]}
+        />
 
         <!-- Stats Bar -->
-        <section class="bg-white border-b border-gray-100 py-6">
+        <section class="bg-[var(--paper)] border-b border-[var(--line)] py-6">
             <div class="container mx-auto px-6">
                 <div class="flex flex-wrap justify-center gap-8 md:gap-16">
                     <div class="text-center">
-                        <div class="text-3xl font-semibold tracking-tight text-violet-600">{doctors.length}</div>
-                        <div class="text-sm text-gray-500 font-medium">Psychiatrists</div>
+                        <div class="text-3xl font-semibold tracking-tight text-[var(--accent)]">{doctors.length}</div>
+                        <div class="text-sm text-[var(--muted)] font-medium">Psychiatrists</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-3xl font-semibold tracking-tight text-violet-600">{clinicCount}</div>
-                        <div class="text-sm text-gray-500 font-medium">TMS Clinics</div>
+                        <div class="text-3xl font-semibold tracking-tight text-[var(--accent)]">{clinicCount}</div>
+                        <div class="text-sm text-[var(--muted)] font-medium">TMS Clinics</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-3xl font-semibold tracking-tight text-violet-600">4.8+</div>
-                        <div class="text-sm text-gray-500 font-medium">Avg Rating</div>
+                        <div class="text-3xl font-semibold tracking-tight text-[var(--accent)]">4.8+</div>
+                        <div class="text-sm text-[var(--muted)] font-medium">Avg Rating</div>
                     </div>
                 </div>
             </div>
@@ -104,7 +97,7 @@ const description = `Find ${doctors.length} board-certified psychiatrists offeri
         <!-- Psychiatrists Grid -->
         <section class="py-16">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-semibold text-gray-900 mb-10">All Psychiatrists in {cityName}</h2>
+                <h2 class="text-3xl font-semibold text-[var(--ink)] mb-10">All Psychiatrists in {cityName}</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {doctors.map((doctor: any, idx: number) => {
@@ -113,7 +106,7 @@ const description = `Find ${doctors.length} board-certified psychiatrists offeri
                         const clinicRating = typeof doctor.clinic?.rating === 'object' ? doctor.clinic.rating?.aggregate : doctor.clinic?.rating || 4.5;
                         const reviewCount = typeof doctor.clinic?.rating === 'object' ? doctor.clinic.rating?.count : 50;
                         return (
-                        <article class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all group">
+                        <article class="bg-[var(--paper)] rounded-2xl shadow-sm border border-[var(--line)] overflow-hidden hover:shadow-lg transition-all group">
                             {/* Clinic background banner */}
                             {clinicImg && !clinicImg.includes('tms_chair') && (
                                 <div class="h-32 overflow-hidden relative">
@@ -134,17 +127,17 @@ const description = `Find ${doctors.length} board-certified psychiatrists offeri
                                     <div class="flex-1 min-w-0">
                                         <div class="flex items-center gap-2 mb-1">
                                             <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] font-bold uppercase tracking-wider rounded-full">Verified</span>
-                                            <span class="px-2 py-0.5 bg-violet-100 text-violet-700 text-[10px] font-bold uppercase tracking-wider rounded-full">#{idx + 1} in {cityName}</span>
+                                            <span class="px-2 py-0.5 bg-[rgba(10,22,40,0.08)] text-[var(--accent)] text-[10px] font-bold uppercase tracking-wider rounded-full">#{idx + 1} in {cityName}</span>
                                         </div>
-                                        <h3 class="text-xl font-bold text-gray-900 group-hover:text-violet-600 transition-colors truncate">
+                                        <h3 class="text-xl font-bold text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors truncate">
                                             <a href={`/specialist/${doctor.slug}`}>{doctor.name}</a>
                                         </h3>
-                                        <p class="text-violet-600 font-medium text-sm">{doctor.title}</p>
+                                        <p class="text-[var(--accent)] font-medium text-sm">{doctor.title}</p>
                                     </div>
                                 </div>
 
                                 {/* Credentials row */}
-                                <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 mb-3">
+                                <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[var(--muted)] mb-3">
                                     {doctor.school && (
                                         <span class="flex items-center gap-1">
                                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
@@ -164,20 +157,20 @@ const description = `Find ${doctors.length} board-certified psychiatrists offeri
 
                                 {/* Bio snippet */}
                                 {doctor.bio && (
-                                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">{doctor.bio}</p>
+                                    <p class="text-[var(--muted)] text-sm mb-3 line-clamp-2">{doctor.bio}</p>
                                 )}
 
                                 <div class="flex flex-wrap gap-1.5 mb-4">
                                     {(doctor.specialties || []).slice(0, 4).map((spec: string) => (
-                                        <span class="px-2.5 py-1 bg-violet-50 text-violet-700 rounded-full text-xs font-medium">{spec}</span>
+                                        <span class="px-2.5 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--accent)] rounded-full text-xs font-medium">{spec}</span>
                                     ))}
                                 </div>
 
-                                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                                    <a href={`/clinic/${doctor.clinic?.slug}`} class="text-sm text-gray-400 hover:text-violet-600 truncate max-w-[60%]">
+                                <div class="pt-4 border-t border-[var(--line)] flex items-center justify-between">
+                                    <a href={`/clinic/${doctor.clinic?.slug}`} class="text-sm text-[var(--muted)] hover:text-[var(--accent)] truncate max-w-[60%]">
                                         at {doctor.clinic?.name}
                                     </a>
-                                    <a href={`/specialist/${doctor.slug}`} class="px-4 py-2 bg-violet-600 text-white text-sm font-semibold rounded-lg hover:bg-violet-700 transition-colors">
+                                    <a href={`/specialist/${doctor.slug}`} class="px-4 py-2 bg-[var(--ink)] text-white text-sm font-semibold rounded-lg hover:bg-[var(--ink2)] transition-colors">
                                         View Profile
                                     </a>
                                 </div>
@@ -189,34 +182,34 @@ const description = `Find ${doctors.length} board-certified psychiatrists offeri
         </section>
 
         <!-- Related Links Section -->
-        <section class="py-8 bg-gray-50">
+        <section class="py-8 bg-[var(--paper2)]">
             <div class="container mx-auto px-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                    <a href={`/us/${Astro.params.state}/${Astro.params.city}/clinics/`} class="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-violet-300 hover:shadow-md transition-all">
-                        <div class="w-10 h-10 bg-violet-100 rounded-lg flex items-center justify-center text-violet-600">
+                    <a href={`/us/${Astro.params.state}/${Astro.params.city}/clinics/`} class="flex items-center gap-3 p-4 bg-[var(--paper)] rounded-xl border border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] hover:shadow-md transition-all">
+                        <div class="w-10 h-10 bg-[rgba(10,22,40,0.08)] rounded-lg flex items-center justify-center text-[var(--accent)]">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                         </div>
                         <div>
-                            <span class="text-sm font-semibold text-gray-900">View All Clinics</span>
-                            <span class="block text-xs text-gray-500">{clinicCount} in {cityName}</span>
+                            <span class="text-sm font-semibold text-[var(--ink)]">View All Clinics</span>
+                            <span class="block text-xs text-[var(--muted)]">{clinicCount} in {cityName}</span>
                         </div>
                     </a>
-                    <a href="/treatments/" class="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-violet-300 hover:shadow-md transition-all">
+                    <a href="/treatments/" class="flex items-center gap-3 p-4 bg-[var(--paper)] rounded-xl border border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] hover:shadow-md transition-all">
                         <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-600">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
                         <div>
-                            <span class="text-sm font-semibold text-gray-900">Conditions Treated</span>
-                            <span class="block text-xs text-gray-500">Depression, OCD, Anxiety</span>
+                            <span class="text-sm font-semibold text-[var(--ink)]">Conditions Treated</span>
+                            <span class="block text-xs text-[var(--muted)]">Depression, OCD, Anxiety</span>
                         </div>
                     </a>
-                    <a href="/quiz/am-i-a-candidate/" class="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-violet-300 hover:shadow-md transition-all">
-                        <div class="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center text-cyan-600">
+                    <a href="/quiz/am-i-a-candidate/" class="flex items-center gap-3 p-4 bg-[var(--paper)] rounded-xl border border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] hover:shadow-md transition-all">
+                        <div class="w-10 h-10 bg-[rgba(10,22,40,0.1)] rounded-lg flex items-center justify-center text-[var(--accent)]">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
                         <div>
-                            <span class="text-sm font-semibold text-gray-900">Am I a Candidate?</span>
-                            <span class="block text-xs text-gray-500">Take the 2-min quiz</span>
+                            <span class="text-sm font-semibold text-[var(--ink)]">Am I a Candidate?</span>
+                            <span class="block text-xs text-[var(--muted)]">Take the 2-min quiz</span>
                         </div>
                     </a>
                 </div>
@@ -224,29 +217,29 @@ const description = `Find ${doctors.length} board-certified psychiatrists offeri
         </section>
 
         <!-- SEO Content Section -->
-        <section class="py-16 bg-white">
+        <section class="py-16 bg-[var(--paper)]">
             <div class="container mx-auto px-6 max-w-4xl">
-                <h2 class="text-3xl font-semibold text-gray-900 mb-8">Finding the Right Psychiatrist in {cityName}</h2>
+                <h2 class="text-3xl font-semibold text-[var(--ink)] mb-8">Finding the Right Psychiatrist in {cityName}</h2>
                 
-                <div class="prose prose-lg max-w-none text-gray-600">
+                <div class="prose prose-lg max-w-none text-[var(--muted)]">
                     <p>
                         When seeking a psychiatrist specializing in Transcranial Magnetic Stimulation (TMS) therapy in {cityName}, {stateName}, it's essential to consider several factors that can significantly impact your treatment outcome. 
                         Our directory features {doctors.length} board-certified psychiatrists across {clinicCount} TMS clinics, each bringing unique expertise and treatment approaches.
                     </p>
                     
-                    <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">What to Look for in a TMS Psychiatrist</h3>
+                    <h3 class="text-xl font-semibold text-[var(--ink)] mt-8 mb-4">What to Look for in a TMS Psychiatrist</h3>
                     <p>
                         The ideal TMS psychiatrist should have specific training in neuromodulation techniques, a strong background in treatment-resistant depression, and experience with the particular TMS device used at their clinic.
                         Many of our listed psychiatrists in {cityName} have completed fellowships in interventional psychiatry or neuromodulation at leading academic institutions.
                     </p>
                     
-                    <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Treatment Approach</h3>
+                    <h3 class="text-xl font-semibold text-[var(--ink)] mt-8 mb-4">Treatment Approach</h3>
                     <p>
                         Each psychiatrist in our {cityName} directory takes a personalized approach to TMS therapy. This typically begins with a comprehensive psychiatric evaluation, followed by brain mapping to identify the optimal treatment location.
                         The standard protocol involves 36 sessions over 6-9 weeks, though some clinics offer accelerated protocols like SAINT that compress treatment into just 5 days.
                     </p>
                     
-                    <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Insurance and Cost Considerations</h3>
+                    <h3 class="text-xl font-semibold text-[var(--ink)] mt-8 mb-4">Insurance and Cost Considerations</h3>
                     <p>
                         Most psychiatrists in {cityName} accept major insurance plans including Medicare, BlueCross BlueShield, Aetna, and UnitedHealthcare for TMS therapy.
                         Out-of-pocket costs typically range from $250-$500 per session for those without coverage. Many clinics offer financing options to make treatment more accessible.
@@ -256,13 +249,13 @@ const description = `Find ${doctors.length} board-certified psychiatrists offeri
         </section>
 
         <!-- CTA Section -->
-        <section class="py-16 bg-gradient-to-r from-violet-600 to-blue-600">
+        <section class="py-16 bg-[var(--ink)]">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-semibold text-slate-900 mb-6">Ready to Find Your Psychiatrist?</h2>
-                <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                <h2 class="text-3xl font-semibold text-[var(--ink)] mb-6">Ready to Find Your Psychiatrist?</h2>
+                <p class="text-xl text-[var(--muted)] mb-8 max-w-2xl mx-auto">
                     Compare {doctors.length} psychiatrists in {cityName} and find the right specialist for your TMS treatment journey.
                 </p>
-                <a href="/quiz/am-i-a-candidate/" class="inline-block px-8 py-4 bg-white text-violet-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
+                <a href="/quiz/am-i-a-candidate/" class="inline-block px-8 py-4 bg-[var(--paper)] text-[var(--accent)] font-semibold rounded-xl hover:bg-[var(--paper2)] transition-colors shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
                     Take Eligibility Quiz
                 </a>
             </div>

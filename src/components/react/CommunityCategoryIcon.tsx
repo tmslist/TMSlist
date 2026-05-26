@@ -42,14 +42,14 @@ const ICONS: Record<string, JSX.Element> = {
 };
 
 const COLOR_CLASSES: Record<string, string> = {
-  violet: 'bg-violet-100 text-violet-600',
+  violet: 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]',
   emerald: 'bg-emerald-100 text-emerald-600',
   amber: 'bg-amber-100 text-amber-600',
-  rose: 'bg-rose-100 text-rose-600',
+  rose: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
   yellow: 'bg-yellow-100 text-yellow-600',
-  blue: 'bg-blue-100 text-blue-600',
+  blue: 'bg-[rgba(10,22,40,0.1)] text-[var(--accent)]',
   teal: 'bg-teal-100 text-teal-600',
-  indigo: 'bg-indigo-100 text-indigo-600',
+  indigo: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
 };
 
 interface CommunityCategoryIconProps {

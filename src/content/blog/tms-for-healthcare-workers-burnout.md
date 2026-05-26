@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-06
 category: patient-guide
 tags: ["healthcare workers", "burnout", "mental health", "second victim"]
-image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-healthcare-workers-burnout.svg"
 ---
 
 The numbers are striking. Studies consistently show that healthcare workers — physicians, nurses, paramedics, and other clinical staff — experience depression, anxiety, and burnout at rates two to three times higher than the general population. The COVID-19 pandemic amplified this trend, but the underlying factors predate it: moral injury, shift disruption, exposure to suffering, and the particular isolation of carrying other people's pain professionally.

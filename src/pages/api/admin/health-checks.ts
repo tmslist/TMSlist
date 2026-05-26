@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, sql, desc } from 'drizzle-orm';
 import { db } from '../../../db';
 import { healthChecks, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -22,7 +22,7 @@ export const GET: APIRoute = async ({ request }) => {
     const checks = await db
       .select()
       .from(healthChecks)
-      .orderBy(desc(healthChecks.lastCheckedAt));
+      .orderBy(desc(healthChecks.checkedAt));
 
     return json({ data: checks });
   } catch (err) {

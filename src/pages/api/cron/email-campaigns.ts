@@ -19,6 +19,7 @@ import { eq } from 'drizzle-orm';
 import { MONTHLY_EMAILS } from '../../../utils/monthlyEmails';
 import type { ClinicData } from '../../../utils/monthlyEmails';
 import clinicsData from '../../../data/clinics.json';
+import { requireCronAuth } from '../../../utils/cronAuth';
 import fs from 'fs';
 import path from 'path';
 
@@ -196,12 +197,9 @@ async function sendBatch(
 // ── Main Handler ──────────────────────────────────
 
 export const GET: APIRoute = async ({ request }) => {
-  // Auth
-  const authHeader = request.headers.get('authorization');
+  const authFail = requireCronAuth(request);
+  if (authFail) return authFail;
   const cronSecret = import.meta.env.CRON_SECRET || process.env.CRON_SECRET;
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
-    return new Response('Unauthorized', { status: 401 });
-  }
 
   const RESEND_KEY = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY;
   if (!RESEND_KEY) {
@@ -323,11 +321,8 @@ export const GET: APIRoute = async ({ request }) => {
 // ── Pause / Unpause ──────────────────────────────────
 
 export const POST: APIRoute = async ({ request }) => {
-  const authHeader = request.headers.get('authorization');
-  const cronSecret = import.meta.env.CRON_SECRET || process.env.CRON_SECRET;
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
-    return new Response('Unauthorized', { status: 401 });
-  }
+  const authFail = requireCronAuth(request);
+  if (authFail) return authFail;
 
   let body: { action: 'pause' | 'unpause' | 'pause-until'; until?: string };
   try {

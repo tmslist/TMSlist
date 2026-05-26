@@ -617,12 +617,16 @@ export async function sendFunnelEmail(
   const resend = getResend();
   if (!resend) return false;
 
+  // Use the verified `mail.tmslist.com` Resend domain. The apex `tmslist.com`
+  // is NOT verified, so any send from `*@tmslist.com` returns 403 from Resend
+  // and the email is silently dropped — drips/welcomes/lead-magnet emails
+  // never landed.
   const fromMap: Record<FunnelSegment, string> = {
-    newsletter: 'TMS List <newsletter@tmslist.com>',
-    lead_magnet: 'TMS List <guides@tmslist.com>',
-    patient: 'TMS List <welcome@tmslist.com>',
-    clinic_owner: 'TMS List for Clinics <clinics@tmslist.com>',
-    specialist: 'TMS List for Specialists <specialists@tmslist.com>',
+    newsletter: 'TMS List <newsletter@mail.tmslist.com>',
+    lead_magnet: 'TMS List <guides@mail.tmslist.com>',
+    patient: 'TMS List <welcome@mail.tmslist.com>',
+    clinic_owner: 'TMS List for Clinics <clinics@mail.tmslist.com>',
+    specialist: 'TMS List for Specialists <specialists@mail.tmslist.com>',
   };
 
   try {

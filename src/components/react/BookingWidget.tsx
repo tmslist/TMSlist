@@ -104,29 +104,29 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
   }
 
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+    <div className="bg-white border border-[var(--line)] rounded-2xl p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-bold text-slate-900">Request Appointment</h3>
-        <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-slate-600 text-sm">Cancel</button>
+        <h3 className="text-sm font-bold text-[var(--ink)]">Request Appointment</h3>
+        <button onClick={() => setIsOpen(false)} className="text-[var(--muted)] hover:text-[var(--ink2)] text-sm">Cancel</button>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3">
         <input type="text" required value={name} onChange={e => setName(e.target.value)} placeholder="Full Name *"
-          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200" />
+          className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Email *"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200" />
+            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
           <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Phone"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200" />
+            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <input type="date" value={preferredDate} onChange={e => setPreferredDate(e.target.value)}
             min={new Date().toISOString().split('T')[0]}
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200" />
+            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
           <select value={preferredTime} onChange={e => setPreferredTime(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200">
+            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]">
             <option value="morning">Morning (9-12)</option>
             <option value="afternoon">Afternoon (12-4)</option>
             <option value="evening">Evening (4-7)</option>
@@ -136,7 +136,7 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
 
         <select value={condition} onChange={e => setCondition(e.target.value)}
           aria-label="Primary condition"
-          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+          className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]">
           <option value="">Primary Condition (optional)</option>
           <option value="Depression">Depression (MDD)</option>
           <option value="OCD">OCD</option>
@@ -150,10 +150,10 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
         </select>
 
         <input type="text" value={insurance} onChange={e => setInsurance(e.target.value)} placeholder="Insurance Provider (optional)"
-          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200" />
+          className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
 
         <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="Additional notes (optional)" rows={2}
-          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200 resize-none" />
+          className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)] resize-none" />
 
         {error && <p className="text-xs text-red-600 font-medium">{error}</p>}
 
@@ -162,7 +162,7 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
           {loading ? 'Sending...' : 'Send Appointment Request'}
         </button>
 
-        <p className="text-[10px] text-slate-400 text-center">
+        <p className="text-[10px] text-[var(--muted)] text-center">
           By submitting, you agree to our <a href="/legal/privacy-policy/" className="underline">Privacy Policy</a>.
           This is a request — the clinic will contact you to confirm.
         </p>

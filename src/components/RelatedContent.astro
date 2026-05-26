@@ -14,10 +14,10 @@ const {
 
 {
     relatedQuestions.length > 0 && (
-        <section class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+        <section class="bg-[var(--paper)] rounded-xl border border-[var(--line)] p-6 mb-6">
+            <h3 class="text-lg font-semibold text-[var(--ink)] mb-4 flex items-center gap-2">
                 <svg
-                    class="w-5 h-5 text-[#1B4B5A]"
+                    class="w-5 h-5 text-[var(--accent)]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -35,12 +35,12 @@ const {
                 {relatedQuestions.slice(0, 5).map((q: any) => (
                     <a
                         href={`/questions/${q.slug}/`}
-                        class="block p-3 rounded-lg hover:bg-[#1B4B5A]50 transition-colors group"
+                        class="block p-3 rounded-lg hover:bg-[rgba(10,22,40,0.10)] transition-colors group"
                     >
-                        <div class="font-semibold text-gray-900 group-hover:text-[#1B4B5A] text-sm mb-1">
+                        <div class="font-semibold text-[var(--ink)] group-hover:text-[var(--accent)] text-sm mb-1">
                             {q.question}
                         </div>
-                        <div class="text-xs text-gray-600 line-clamp-1">
+                        <div class="text-xs text-[var(--ink2)] line-clamp-1">
                             {q.quickAnswer
                                 ? q.quickAnswer.slice(0, 100) + "..."
                                 : ""}
@@ -50,7 +50,7 @@ const {
             </div>
             <a
                 href="/questions/"
-                class="block mt-4 text-center text-[#1B4B5A] font-semibold text-sm hover:underline"
+                class="block mt-4 text-center text-[var(--accent)] font-semibold text-sm hover:underline"
             >
                 View All Questions ->
             </a>
@@ -60,10 +60,10 @@ const {
 
 {
     relatedBlogs.length > 0 && (
-        <section class="bg-gradient-to-br from-blue-50 to-violet-50 rounded-xl border border-blue-100 p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+        <section class="bg-gradient-to-br from-[var(--paper2)] to-[var(--paper)] rounded-xl border border-[var(--line)] p-6">
+            <h3 class="text-lg font-semibold text-[var(--ink)] mb-4 flex items-center gap-2">
                 <svg
-                    class="w-5 h-5 text-blue-600"
+                    class="w-5 h-5 text-[var(--accent)]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -81,17 +81,17 @@ const {
                 {relatedBlogs.slice(0, 4).map((blog: any) => (
                     <a
                         href={blog.url}
-                        class="block p-3 rounded-lg bg-white hover:shadow-md transition-all group border border-blue-100"
+                        class="block p-3 rounded-lg bg-[var(--paper)] hover:shadow-md transition-all group border border-[var(--line)]"
                     >
-                        <div class="font-semibold text-gray-900 group-hover:text-blue-600 text-sm mb-1">
+                        <div class="font-semibold text-[var(--ink)] group-hover:text-[var(--accent)] text-sm mb-1">
                             {blog.title}
                         </div>
                         {blog.excerpt && (
-                            <div class="text-xs text-gray-600 line-clamp-2">
+                            <div class="text-xs text-[var(--ink2)] line-clamp-2">
                                 {blog.excerpt}
                             </div>
                         )}
-                        <div class="text-xs text-blue-600 font-medium mt-2">
+                        <div class="text-xs text-[var(--accent)] font-medium mt-2">
                             Read more ->
                         </div>
                     </a>

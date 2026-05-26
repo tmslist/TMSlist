@@ -64,7 +64,7 @@ export default function SaveClinicButton({ clinicId, clinicName }: Props) {
         className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
           saved
             ? 'bg-red-50 text-red-600 border border-red-200 hover:bg-red-100'
-            : 'bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200'
+            : 'bg-[var(--paper2)] text-[var(--ink2)] border border-[var(--line)] hover:bg-[var(--paper2)]'
         }`}
         title={saved ? `Unsave ${clinicName}` : `Save ${clinicName}`}
       >

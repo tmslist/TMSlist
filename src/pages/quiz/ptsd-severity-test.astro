@@ -1,0 +1,176 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "PTSD Severity Self-Assessment | PCL-5 Quiz";
+const description =
+    "Take the free PCL-5 questionnaire to measure your PTSD symptoms over the past month and find out what treatment options — including TMS — may help.";
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const quizSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "PCL-5 PTSD Severity Assessment",
+    "description": description,
+    "url": `${siteUrl}/quiz/ptsd-severity-test/`,
+    "educationalLevel": "patient",
+    "about": {
+        "@type": "MedicalCondition",
+        "name": "Post-Traumatic Stress Disorder",
+        "code": { "@type": "MedicalCode", "code": "F43.10", "codingSystem": "ICD-10" },
+    },
+    "provider": { "@type": "Organization", "name": "TMS List", "url": siteUrl },
+});
+
+const QUESTIONS = [
+    "Repeated, disturbing, and unwanted memories of a stressful experience",
+    "Repeated, disturbing dreams of the stressful experience",
+    "Suddenly feeling or acting as if the stressful experience were happening again (flashbacks)",
+    "Feeling very upset when something reminded you of the experience",
+    "Avoiding memories, thoughts, or feelings related to the experience",
+    "Avoiding external reminders (people, places, conversations, activities, situations)",
+    "Trouble remembering important parts of the stressful experience",
+    "Strong negative beliefs about yourself, other people, or the world",
+    "Loss of interest in activities you used to enjoy",
+    "Feeling distant or cut off from other people",
+    "Trouble experiencing positive feelings",
+    "Irritable behavior, angry outbursts, or acting aggressively",
+    "Taking too many risks or doing things that could cause you harm",
+    "Being super-alert, watchful, or on guard",
+    "Feeling jumpy or easily startled",
+    "Having difficulty concentrating",
+    "Trouble falling or staying asleep",
+];
+---
+
+<Layout title={title} description={description} noindex={true} schema={quizSchema}>
+    <main class="min-h-screen bg-gradient-to-b from-[var(--paper2)] to-white py-12">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <div class="mb-6 flex items-center justify-center">
+                <div class="flex items-center gap-2 text-sm text-[var(--muted)]">
+                    Over the past month <span>•</span> 17 questions <span>•</span> ~5 minutes
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="flex justify-between text-xs font-semibold text-[var(--muted)] mb-2 uppercase tracking-wide">
+                    <span>Your Progress</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="h-2 bg-[var(--paper2)] rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-[var(--ink)] transition-all duration-500 ease-out" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-[var(--line)] overflow-hidden">
+                <div id="slide-intro" class="p-8 md:p-12 text-center">
+                    <h1 class="text-3xl font-semibold tracking-tight text-[var(--ink)] mb-4">PTSD Severity Assessment</h1>
+                    <p class="text-lg text-[var(--muted)] mb-4">The PCL-5 is the standard self-report measure for PTSD, used by the U.S. Department of Veterans Affairs and trauma clinicians worldwide.</p>
+                    <p class="text-base text-[var(--muted)] mb-8">Think about a stressful event from your past. Rate how much each problem has bothered you in the <strong>past month</strong>.</p>
+                    <button id="btn-start" class="px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] shadow-lg">Start Assessment</button>
+                    <div class="bg-amber-50 border border-amber-100 rounded-xl p-4 text-left mt-6">
+                        <p class="text-amber-700 text-sm">If trauma memories are overwhelming you right now, take a break. The Veterans Crisis Line is available 24/7: dial <strong>988</strong> and press 1, or text <strong>838255</strong>.</p>
+                    </div>
+                </div>
+
+                <div id="slide-q" class="hidden p-8 md:p-12">
+                    <span id="q-counter" class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block"></span>
+                    <h2 id="q-text" class="text-xl font-semibold text-[var(--ink)] mb-2"></h2>
+                    <p class="text-[var(--muted)] text-sm mb-6">In the past month, how much were you bothered by:</p>
+                    <div class="space-y-3">
+                        <button data-score="0" class="ans-btn">Not at all <span class="ans-score">0</span></button>
+                        <button data-score="1" class="ans-btn">A little bit <span class="ans-score">1</span></button>
+                        <button data-score="2" class="ans-btn">Moderately <span class="ans-score">2</span></button>
+                        <button data-score="3" class="ans-btn">Quite a bit <span class="ans-score">3</span></button>
+                        <button data-score="4" class="ans-btn">Extremely <span class="ans-score">4</span></button>
+                    </div>
+                </div>
+
+                <div id="slide-results" class="hidden p-8 md:p-12">
+                    <div class="text-center mb-8">
+                        <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Your PCL-5 Score</span>
+                        <div class="inline-flex items-baseline gap-1 mb-3">
+                            <span id="score-number" class="text-6xl font-extrabold text-[var(--ink)]">0</span>
+                            <span class="text-2xl text-[var(--muted)]">/68</span>
+                        </div>
+                        <div id="severity-badge" class="inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4">—</div>
+                    </div>
+                    <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-6 mb-6 text-left">
+                        <h3 class="font-semibold text-[var(--ink2)] mb-3">What Your Score Means</h3>
+                        <p id="score-interpretation" class="text-sm text-[var(--muted)] leading-relaxed"></p>
+                    </div>
+                    <div class="bg-[rgba(10,22,40,0.05)] border border-[var(--line)] rounded-xl p-6 mb-8 text-left">
+                        <h3 class="font-semibold text-[var(--ink)] mb-2">Recommended Next Steps</h3>
+                        <p id="treatment-text" class="text-sm text-[var(--ink2)] leading-relaxed"></p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <a href="/treatments/ptsd/" class="quiz-geo-link w-full sm:w-auto text-center px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] shadow-lg">Learn About TMS for PTSD</a>
+                        <a href="/demographic/military-veterans/" class="w-full sm:w-auto text-center px-8 py-4 text-[var(--muted)] font-medium rounded-xl border border-[var(--line)] hover:text-[var(--ink)]">Veterans & TMS</a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-xs text-[var(--muted)] mt-6">Screening tool, not a diagnosis. Only a licensed trauma-trained clinician can diagnose PTSD. Scores are not stored.</p>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .ans-btn { width: 100%; padding: 1rem; text-align: left; border: 2px solid var(--line); border-radius: 0.75rem; font-weight: 500; color: var(--ink2); transition: all 0.15s ease; display: flex; justify-content: space-between; align-items: center; }
+    .ans-btn:hover { border-color: var(--ink); background: rgba(10,22,40,0.04); }
+    .ans-score { font-size: 0.75rem; font-weight: 700; color: var(--muted); }
+</style>
+
+<script is:inline define:vars={{ QUESTIONS }}>
+    const answers = [];
+    let qIdx = 0;
+    const total = QUESTIONS.length;
+
+    function renderQ() {
+        document.getElementById("q-counter").innerText = `Question ${qIdx + 1} of ${total}`;
+        document.getElementById("q-text").innerText = QUESTIONS[qIdx];
+    }
+    function setProgress() {
+        const pct = Math.min((answers.length / total) * 100, 100);
+        document.getElementById("progress-bar").style.width = pct + "%";
+        document.getElementById("progress-text").innerText = Math.round(pct) + "%";
+    }
+
+    document.getElementById("btn-start").addEventListener("click", () => {
+        document.getElementById("slide-intro").classList.add("hidden");
+        document.getElementById("slide-q").classList.remove("hidden");
+        renderQ();
+    });
+
+    document.querySelectorAll(".ans-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            answers.push(parseInt(btn.dataset.score, 10));
+            setProgress();
+            qIdx++;
+            if (qIdx >= total) {
+                document.getElementById("slide-q").classList.add("hidden");
+                showResults();
+            } else { renderQ(); }
+        });
+    });
+
+    function getSeverity(s) {
+        if (s < 31) return { label: "Below clinical threshold", color: "bg-green-100 text-green-700", interp: "Your score is below the typical PCL-5 cutoff of 31-33 used to suggest probable PTSD. That doesn't mean trauma symptoms aren't real — just that they may not currently meet the screening threshold.", treat: "If symptoms are interfering with your life, talk to a therapist trained in trauma. Evidence-based therapies (CPT, PE, EMDR) help even when scores fall below the screening cutoff." };
+        if (s < 45) return { label: "Probable PTSD", color: "bg-orange-100 text-orange-700", interp: "Your score crosses the standard PCL-5 cutoff (31-33), which suggests probable PTSD. Trauma-focused therapy is the gold-standard first-line treatment.", treat: "Schedule an evaluation with a clinician trained in trauma. Cognitive Processing Therapy, Prolonged Exposure, and EMDR have the strongest evidence. Medications (SSRIs/SNRIs) can also help." };
+        return { label: "Severe", color: "bg-red-100 text-red-700", interp: "Your score is in the severe range. This level typically warrants active, structured treatment. TMS has growing FDA-cleared and off-label evidence for PTSD, particularly in veterans and treatment-resistant cases.", treat: "Seek prompt evaluation from a trauma-trained psychiatrist or therapist. If standard therapy and medications haven't given enough relief, TMS or Stellate Ganglion Block may be worth discussing. The VA covers TMS for veterans with PTSD at many sites." };
+    }
+
+    function showResults() {
+        const score = answers.reduce((a, b) => a + b, 0);
+        const sev = getSeverity(score);
+        document.getElementById("slide-results").classList.remove("hidden");
+        document.getElementById("score-number").innerText = score;
+        const badge = document.getElementById("severity-badge");
+        badge.innerText = sev.label;
+        badge.className = "inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4 " + sev.color;
+        document.getElementById("score-interpretation").innerText = sev.interp;
+        document.getElementById("treatment-text").innerText = sev.treat;
+        document.getElementById("progress-bar").style.width = "100%";
+        document.getElementById("progress-text").innerText = "100%";
+    }
+
+    try { if (window.TMS_GEO && window.TMS_GEO.url) { document.querySelectorAll(".quiz-geo-link").forEach((el) => { el.href = window.TMS_GEO.url; }); } } catch (e) {}
+</script>

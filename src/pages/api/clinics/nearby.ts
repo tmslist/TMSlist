@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { searchClinicsNearby } from '../../../db/queries';
-import { checkRateLimit } from '../../../utils/rateLimit';
+import { checkRateLimit } from '../../../utils/rateLimit.js';
 import { z } from 'zod';
 
 export const prerender = false;

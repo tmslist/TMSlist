@@ -1,0 +1,14 @@
+import postgres from "postgres";
+const sql = postgres(process.env.DATABASE_URL);
+const r1 = await sql`select count(*)::int as c from forum_posts`;
+const r2 = await sql`select count(*)::int as c from forum_comments`;
+const r3 = await sql`select min(created_at) as mn, max(created_at) as mx from forum_comments`;
+const r4 = await sql`select id, slug, left(title,60) as title, comment_count, created_at from forum_posts order by last_activity_at desc limit 20`;
+const r6 = await sql`select count(*)::int as c from users`;
+const r7 = await sql`select id, email, coalesce(name,'') as name, role from users order by created_at desc limit 30`;
+console.log("posts:", r1[0].c, "comments:", r2[0].c, "users:", r6[0].c);
+console.log("comment range:", r3[0]);
+console.table(r4);
+console.log("sample users:");
+console.table(r7);
+await sql.end();

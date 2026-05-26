@@ -17,19 +17,33 @@ const { title, subtitle, category, readTime, date, slug } = Astro.props;
 
 // Deterministic accent color from category
 const categoryAccents: Record<string, { color: string; badge: string; badgeText: string }> = {
-  'Research':      { color: '#4F46E5', badge: 'bg-[#1B4B5A]/30', badgeText: 'text-[#1B4B5A]200' },
-  'Treatment':     { color: '#5B21B6', badge: 'bg-[#1B4B5A]/30', badgeText: 'text-[#1B4B5A]200' },
+  'Research':      { color: '#4F46E5', badge: 'bg-white/15', badgeText: 'text-white' },
+  'Treatment':     { color: '#5B21B6', badge: 'bg-white/15', badgeText: 'text-white' },
   'Insurance':     { color: '#065F46', badge: 'bg-emerald-500/30', badgeText: 'text-emerald-200' },
-  'FAQ':           { color: '#1B4B5A', badge: 'bg-[#1B4B5A]/30', badgeText: 'text-[#1B4B5A]200' },
-  'Patient Guide': { color: '#143844', badge: 'bg-[#1B4B5A]/30', badgeText: 'text-[#1B4B5A]200' },
+  'FAQ':           { color: '#0A1628', badge: 'bg-white/15', badgeText: 'text-white' },
+  'Patient Guide': { color: '#0A1628', badge: 'bg-white/15', badgeText: 'text-white' },
 };
-const accent = categoryAccents[category || ''] || { color: '#1B4B5A', badge: 'bg-[#1B4B5A]/30', badgeText: 'text-[#1B4B5A]200' };
+const accent = categoryAccents[category || ''] || { color: '#0A1628', badge: 'bg-white/15', badgeText: 'text-white' };
 const cacheKey = `ai-img:blog-cover:${slug}`;
 ---
 
-<section class="relative overflow-hidden bg-slate-950" id={`blog-cover-${slug}`}>
+<section class="relative overflow-hidden bg-[var(--ink)]" id={`blog-cover-${slug}`}>
   <!-- Layer 1: Deterministic gradient fallback (visible immediately) -->
   <div class="absolute inset-0 opacity-90" style={`background: ${accent.color};`}></div>
+
+  <!-- Layer 1b: Brand cover banner (editorial warm SVG, themed per post) -->
+  <img
+    src={`/images/blog-covers/${slug}.svg`}
+    alt=""
+    aria-hidden="true"
+    class="absolute inset-0 w-full h-full object-cover opacity-95"
+    width="1200"
+    height="630"
+    loading="eager"
+    decoding="async"
+  />
+  <!-- Subtle ink wash so the title overlay stays legible -->
+  <div class="absolute inset-0 bg-gradient-to-t from-[#0A1628]/85 via-[#0A1628]/55 to-[#0A1628]/35"></div>
 
   <!-- Layer 2: Decorative pattern -->
   <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0); background-size: 28px 28px;"></div>
@@ -48,7 +62,7 @@ const cacheKey = `ai-img:blog-cover:${slug}`;
   >
     <img class="blog-cover-img w-full h-full object-cover" alt={`Illustration for ${title}`} width="1200" height="630" loading="eager" />
     <!-- Dark overlay to keep text readable over any AI image -->
-    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/70 to-[#0A1628]/40"></div>
   </div>
 
   <!-- Layer 5: Content overlay -->
@@ -79,9 +93,9 @@ const cacheKey = `ai-img:blog-cover:${slug}`;
       </div>
 
       <!-- Title -->
-      <p class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-5">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-5">
         {title}
-      </p>
+      </h1>
 
       {subtitle && (
         <p class="text-lg lg:text-xl text-white/60 leading-relaxed max-w-2xl">

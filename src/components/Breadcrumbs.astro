@@ -26,16 +26,16 @@ const breadcrumbSchema = JSON.stringify({
 ---
 
 <nav aria-label="Breadcrumb" class="overflow-x-auto scrollbar-hide">
-  <ol class="flex items-center gap-1.5 text-sm text-gray-500 whitespace-nowrap py-2">
+  <ol class="flex items-center gap-1.5 text-sm text-[var(--muted)] whitespace-nowrap py-2">
     {allItems.map((item, i) => (
       <li class="flex items-center gap-1.5">
         {i > 0 && (
-          <svg class="w-3.5 h-3.5 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg class="w-3.5 h-3.5 text-[var(--muted)] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         )}
         {item.href && i < allItems.length - 1 ? (
-          <a href={item.href} class="hover:text-[#1B4B5A] transition-colors">
+          <a href={item.href} class="hover:text-[var(--accent)] transition-colors">
             {i === 0 ? (
               <span class="flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -48,7 +48,7 @@ const breadcrumbSchema = JSON.stringify({
             )}
           </a>
         ) : (
-          <span class="text-gray-700 font-medium">{item.label}</span>
+          <span class="text-[var(--ink2)] font-medium">{item.label}</span>
         )}
       </li>
     ))}

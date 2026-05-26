@@ -21,11 +21,21 @@ export const GET: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ clinics: [] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
 
-    const safe = query.replace(/[%_]/g, '').slice(0, 100);
+    // Accept a clinic profile URL like https://tmslist.com/clinic/<slug>/ — extract the slug.
+    let safe = query.replace(/[%_]/g, '').slice(0, 200);
+    const urlMatch = safe.match(/\/clinic\/([a-z0-9-]+)/i);
+    if (urlMatch) safe = urlMatch[1];
+
+    const like = '%' + safe + '%';
     const results = await sql`
       SELECT id, slug, name, city, state, address
       FROM clinics
-      WHERE name ILIKE ${'%' + safe + '%'}
+      WHERE name ILIKE ${like}
+         OR slug ILIKE ${like}
+         OR city ILIKE ${like}
+      ORDER BY
+        CASE WHEN slug = ${safe} THEN 0 WHEN name ILIKE ${safe + '%'} THEN 1 ELSE 2 END,
+        name
       LIMIT 20
     `;
 
@@ -54,8 +64,11 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Clinic ID or slug is required' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
 
-    // Get clinic using raw SQL (avoids Drizzle type coercion on UUID columns with slug values)
-    const clinicRows = await sql`SELECT id, slug, name, email FROM clinics WHERE slug = ${lookupValue} LIMIT 1`;
+    // Accept either a UUID (clinicId) or a slug. Look up accordingly.
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(lookupValue));
+    const clinicRows = isUuid
+      ? await sql`SELECT id, slug, name, email FROM clinics WHERE id = ${lookupValue}::uuid LIMIT 1`
+      : await sql`SELECT id, slug, name, email FROM clinics WHERE slug = ${lookupValue} LIMIT 1`;
     const clinic = clinicRows[0] as any;
 
     if (!clinic) {

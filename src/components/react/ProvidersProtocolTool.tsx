@@ -27,16 +27,16 @@ const insuranceMap: Record<string, string> = {
 
 const indicationBadgeColors: Record<string, string> = {
   'Depression': 'bg-emerald-100 text-emerald-700',
-  'OCD': 'bg-violet-100 text-violet-700',
+  'OCD': 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]',
   'Anxiety': 'bg-amber-100 text-amber-700',
-  'PTSD': 'bg-rose-100 text-rose-700',
+  'PTSD': 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
 };
 
 const indicationMatchIcons: Record<string, string> = {
   'Depression': 'text-emerald-500',
-  'OCD': 'text-violet-500',
+  'OCD': 'text-[var(--accent2)]',
   'Anxiety': 'text-amber-500',
-  'PTSD': 'text-rose-500',
+  'PTSD': 'text-[var(--accent2)]',
 };
 
 export default function ProvidersProtocolTool() {
@@ -79,15 +79,15 @@ export default function ProvidersProtocolTool() {
       <div className="glass-panel rounded-2xl p-6">
         <div className="flex flex-wrap gap-3 items-center mb-6">
           <div className="flex flex-wrap gap-2 flex-1">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mr-2 self-center">Indication:</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)] mr-2 self-center">Indication:</span>
             {(['all', 'Depression', 'OCD', 'Anxiety', 'PTSD'] as IndicationFilter[]).map(f => (
               <button
                 key={f}
                 onClick={() => setIndicationFilter(f)}
                 className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${
                   indicationFilter === f
-                    ? 'bg-violet-600 text-white'
-                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                    ? 'bg-[var(--ink)] text-white'
+                    : 'bg-[var(--ink2)] text-[var(--line)] hover:bg-[var(--ink2)]'
                 }`}
               >
                 {f === 'all' ? 'All' : f}
@@ -95,15 +95,15 @@ export default function ProvidersProtocolTool() {
             ))}
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mr-2 self-center">Evidence:</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)] mr-2 self-center">Evidence:</span>
             {(['all', 'Strong', 'Moderate', 'Emerging'] as EvidenceFilter[]).map(f => (
               <button
                 key={f}
                 onClick={() => setEvidenceFilter(f)}
                 className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${
                   evidenceFilter === f
-                    ? 'bg-cyan-600 text-white'
-                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                    ? 'bg-[var(--accent)] text-white'
+                    : 'bg-[var(--ink2)] text-[var(--line)] hover:bg-[var(--ink2)]'
                 }`}
               >
                 {f === 'all' ? 'All' : f}
@@ -112,7 +112,7 @@ export default function ProvidersProtocolTool() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Sort by:</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)]">Sort by:</span>
           {([
             { key: 'sessions' as SortKey, label: 'Sessions' },
             { key: 'duration' as SortKey, label: 'Duration' },
@@ -123,25 +123,25 @@ export default function ProvidersProtocolTool() {
               onClick={() => setSortKey(s.key)}
               className={`text-[10px] font-semibold px-3 py-1 rounded-full transition-all ${
                 sortKey === s.key
-                  ? 'bg-slate-700 text-cyan-400'
-                  : 'text-slate-400 hover:text-slate-300'
+                  ? 'bg-[var(--ink2)] text-[var(--accent2)]'
+                  : 'text-[var(--muted)] hover:text-[var(--line)]'
               }`}
             >
               {s.label}
             </button>
           ))}
-          <span className="ml-auto text-[10px] text-slate-500">{filtered.length} protocols</span>
+          <span className="ml-auto text-[10px] text-[var(--muted)]">{filtered.length} protocols</span>
         </div>
       </div>
 
       {/* Protocol Table */}
-      <div className="overflow-x-auto rounded-2xl border border-slate-700/50">
+      <div className="overflow-x-auto rounded-2xl border border-[var(--line)]">
         <table className="w-full min-w-[800px]">
           <thead>
-            <tr className="border-b border-slate-700/50 bg-slate-800/60">
+            <tr className="border-b border-[var(--line)] bg-[var(--paper2)]">
               {['Protocol', 'Frequency', 'Intensity', 'Sessions', 'Duration', 'Indication', 'Evidence', 'Insurance'].map((h, i) => (
                 <th key={h} className={`text-left text-[10px] font-bold uppercase tracking-wider px-4 py-3 ${i === 0 ? 'pl-6' : ''}`}>
-                  <span className="text-slate-400">{h}</span>
+                  <span className="text-[var(--muted)]">{h}</span>
                 </th>
               ))}
               <th className="px-4 py-3"></th>
@@ -153,8 +153,8 @@ export default function ProvidersProtocolTool() {
               return (
                 <tr
                   key={protocol.name}
-                  className={`border-b border-slate-800/80 cursor-pointer transition-colors group ${
-                    isExpanded ? 'bg-violet-900/20' : 'hover:bg-slate-800/40'
+                  className={`border-b border-[var(--line)] cursor-pointer transition-colors group ${
+                    isExpanded ? 'bg-[var(--paper2)]' : 'hover:bg-[var(--paper2)]'
                   }`}
                   onClick={() => setExpandedProtocol(isExpanded ? null : protocol.name)}
                 >
@@ -163,7 +163,7 @@ export default function ProvidersProtocolTool() {
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-bold text-white">{protocol.name}</span>
                       {protocol.badge && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-cyan-900/40 text-cyan-300 uppercase tracking-wider">
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[var(--accent)]/40 text-[var(--muted)] uppercase tracking-wider">
                           {protocol.badge}
                         </span>
                       )}
@@ -173,16 +173,16 @@ export default function ProvidersProtocolTool() {
                     </span>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="text-[11px] text-slate-300">{protocol.frequencyDisplay}</span>
+                    <span className="text-[11px] text-[var(--line)]">{protocol.frequencyDisplay}</span>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="text-[11px] text-slate-300">{protocol.intensityDisplay}</span>
+                    <span className="text-[11px] text-[var(--line)]">{protocol.intensityDisplay}</span>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="text-[11px] text-slate-300">{protocol.sessionsTotal}</span>
+                    <span className="text-[11px] text-[var(--line)]">{protocol.sessionsTotal}</span>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="text-[11px] text-slate-300">{protocol.duration}</span>
+                    <span className="text-[11px] text-[var(--line)]">{protocol.duration}</span>
                   </td>
                   {/* Indication matches */}
                   <td className="px-4 py-4">
@@ -195,7 +195,7 @@ export default function ProvidersProtocolTool() {
                             className="text-[10px] font-bold w-5 text-center"
                             title={ind}
                           >
-                            <span className={has ? indicationMatchIcons[ind] : 'text-slate-600'}>
+                            <span className={has ? indicationMatchIcons[ind] : 'text-[var(--ink2)]'}>
                               {has ? '✓' : '○'}
                             </span>
                           </span>
@@ -209,7 +209,7 @@ export default function ProvidersProtocolTool() {
                     </span>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="text-[10px] text-slate-400">{insuranceMap[protocol.name]}</span>
+                    <span className="text-[10px] text-[var(--muted)]">{insuranceMap[protocol.name]}</span>
                   </td>
                   <td className="px-4 py-4">
                     <button
@@ -217,7 +217,7 @@ export default function ProvidersProtocolTool() {
                         e.stopPropagation();
                         window.location.href = `/simulation?protocol=${encodeURIComponent(protocol.name)}`;
                       }}
-                      className="text-[10px] font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-600/30 hover:border-cyan-400/50 rounded-lg px-3 py-1.5 transition-all bg-cyan-900/20 hover:bg-cyan-900/30 whitespace-nowrap"
+                      className="text-[10px] font-bold text-[var(--accent2)] hover:text-[var(--muted)] border border-[var(--accent)]/30 hover:border-[rgba(10,22,40,0.2)]/50 rounded-lg px-3 py-1.5 transition-all bg-[var(--accent)]/20 hover:bg-[var(--accent)]/30 whitespace-nowrap"
                     >
                       Simulate
                     </button>
@@ -231,7 +231,7 @@ export default function ProvidersProtocolTool() {
 
       {/* Detail Panel */}
       {selectedProtocol && (
-        <div className="glass-panel rounded-2xl p-6 border border-violet-500/20">
+        <div className="glass-panel rounded-2xl p-6 border border-[rgba(10,22,40,0.20)]">
           <div className="flex items-start justify-between mb-5">
             <div>
               <h3 className="text-base font-bold text-white">{selectedProtocol.fullName}</h3>
@@ -242,14 +242,14 @@ export default function ProvidersProtocolTool() {
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${evidenceColors[selectedProtocol.evidence]}`}>
                   {selectedProtocol.evidence} Evidence
                 </span>
-                <span className="text-[10px] text-slate-400 ml-2">
+                <span className="text-[10px] text-[var(--muted)] ml-2">
                   {selectedProtocol.fdaCleared}
                 </span>
               </div>
             </div>
             <button
               onClick={() => setExpandedProtocol(null)}
-              className="text-slate-400 hover:text-white transition-colors"
+              className="text-[var(--muted)] hover:text-white transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -265,9 +265,9 @@ export default function ProvidersProtocolTool() {
               { label: 'Sessions', value: String(selectedProtocol.sessionsTotal) },
               { label: 'Duration', value: selectedProtocol.duration },
             ].map(param => (
-              <div key={param.label} className="bg-slate-800/60 rounded-xl p-3 border border-slate-700/30">
-                <p className="text-[9px] font-bold uppercase tracking-wider text-slate-500 mb-1">{param.label}</p>
-                <p className="text-sm font-bold text-cyan-400">{param.value}</p>
+              <div key={param.label} className="bg-[var(--paper2)] rounded-xl p-3 border border-[var(--line)]">
+                <p className="text-[9px] font-bold uppercase tracking-wider text-[var(--muted)] mb-1">{param.label}</p>
+                <p className="text-sm font-bold text-[var(--accent2)]">{param.value}</p>
               </div>
             ))}
           </div>
@@ -278,7 +278,7 @@ export default function ProvidersProtocolTool() {
               <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 mb-2">Clinical Advantages</p>
               <ul className="space-y-1.5">
                 {selectedProtocol.pros.map(p => (
-                  <li key={p} className="text-[11px] text-slate-300 flex items-start gap-2">
+                  <li key={p} className="text-[11px] text-[var(--line)] flex items-start gap-2">
                     <span className="text-emerald-400 shrink-0 mt-0.5">+</span>
                     {p}
                   </li>
@@ -289,7 +289,7 @@ export default function ProvidersProtocolTool() {
               <p className="text-[10px] font-bold uppercase tracking-wider text-amber-400 mb-2">Considerations</p>
               <ul className="space-y-1.5">
                 {selectedProtocol.cons.map(c => (
-                  <li key={c} className="text-[11px] text-slate-300 flex items-start gap-2">
+                  <li key={c} className="text-[11px] text-[var(--line)] flex items-start gap-2">
                     <span className="text-amber-400 shrink-0 mt-0.5">−</span>
                     {c}
                   </li>
@@ -299,12 +299,12 @@ export default function ProvidersProtocolTool() {
           </div>
 
           {/* Patient Selection Tips */}
-          <div className="bg-slate-800/40 rounded-xl p-4 border border-slate-700/30">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-3">Clinical Tips</p>
+          <div className="bg-[var(--paper2)] rounded-xl p-4 border border-[var(--line)]">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)] mb-3">Clinical Tips</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div>
-                <p className="text-[9px] font-bold text-violet-400 uppercase tracking-wider mb-1">Best For</p>
-                <p className="text-[11px] text-slate-300">
+                <p className="text-[9px] font-bold text-[var(--accent2)] uppercase tracking-wider mb-1">Best For</p>
+                <p className="text-[11px] text-[var(--line)]">
                   {selectedProtocol.type === 'Accelerated'
                     ? 'Treatment-resistant patients who have failed 5+ medications'
                     : selectedProtocol.type === 'iTBS'
@@ -315,8 +315,8 @@ export default function ProvidersProtocolTool() {
                 </p>
               </div>
               <div>
-                <p className="text-[9px] font-bold text-violet-400 uppercase tracking-wider mb-1">Side Effects</p>
-                <p className="text-[11px] text-slate-300">
+                <p className="text-[9px] font-bold text-[var(--accent2)] uppercase tracking-wider mb-1">Side Effects</p>
+                <p className="text-[11px] text-[var(--line)]">
                   {selectedProtocol.type === 'cTBS' || selectedProtocol.type === 'iTBS'
                     ? 'Scalp discomfort at site, rare headache. Generally well tolerated.'
                     : selectedProtocol.type === 'Accelerated'
@@ -325,8 +325,8 @@ export default function ProvidersProtocolTool() {
                 </p>
               </div>
               <div>
-                <p className="text-[9px] font-bold text-violet-400 uppercase tracking-wider mb-1">Billing Code</p>
-                <p className="text-[11px] text-slate-300">
+                <p className="text-[9px] font-bold text-[var(--accent2)] uppercase tracking-wider mb-1">Billing Code</p>
+                <p className="text-[11px] text-[var(--line)]">
                   {selectedProtocol.type === 'iTBS' || selectedProtocol.type === 'cTBS'
                     ? 'CPT 90867 + 90868 (rTMS delivery, sessions 1-36)'
                     : selectedProtocol.name === 'SNT (Stanford Protocol)'
@@ -340,7 +340,7 @@ export default function ProvidersProtocolTool() {
           <div className="mt-5 flex gap-3">
             <button
               onClick={() => { window.location.href = `/simulation?protocol=${encodeURIComponent(selectedProtocol.name)}`; }}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold rounded-xl transition-all"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[var(--accent)] hover:bg-[var(--accent2)] text-white text-[11px] font-bold rounded-xl transition-all"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -349,7 +349,7 @@ export default function ProvidersProtocolTool() {
             </button>
             <button
               onClick={() => { setExpandedProtocol(null); }}
-              className="px-4 py-3 bg-slate-700 hover:bg-slate-600 text-slate-300 text-[11px] font-bold rounded-xl transition-all"
+              className="px-4 py-3 bg-[var(--ink2)] hover:bg-[var(--muted)] text-[var(--line)] text-[11px] font-bold rounded-xl transition-all"
             >
               Close
             </button>

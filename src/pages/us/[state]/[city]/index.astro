@@ -1,5 +1,6 @@
 ---
 import Layout from "../../../../layouts/Layout.astro";
+import EditorialHero from "../../../../components/editorial/EditorialHero.astro";
 import ClinicCard from "../../../../components/ClinicCard.astro";
 import {
   getClinicsByState,
@@ -83,68 +84,29 @@ const insurances = Object.values(ClinicInsurance);
   { name: stateName, url: `/us/${state}/` },
   { name: cityName, url: `/us/${state}/${cityName.toLowerCase().replace(/\s+/g, '-')}/` },
 ]}>
-  <main>
-    <!-- City Hero -->
-    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-      <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-blue-500/5 rounded-full blur-[100px]"></div>
-      <div
-        class="ai-hero-image gemini-hero-bg absolute inset-0 opacity-20"
-        data-subject={`${cityName}, ${stateName}`}
-        data-type="city"
-        data-cache-key={`ai-img:city:${cityName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${stateName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-        data-alt={`Watercolor illustration of ${cityName}, ${stateName}`}
-      >
-        <div class="ai-img-placeholder absolute inset-0"></div>
-        <img class="ai-img-result hidden w-full h-full object-cover" alt="TMS clinic illustration" />
-        <div class="ai-img-fallback hidden"></div>
-      </div>
-
-      <div class="container mx-auto px-4 py-12 lg:py-16 relative z-10">
-        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap" aria-label="Breadcrumb">
-          <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-          <span class="text-slate-300">/</span>
-          <a href="/us/" class="hover:text-violet-600 transition-colors">United States</a>
-          <span class="text-slate-300">/</span>
-          <a href={`/us/${state}/`} class="hover:text-violet-600 transition-colors">{stateName}</a>
-          <span class="text-slate-300">/</span>
-          <span class="text-slate-700 font-medium">{cityName}</span>
-        </nav>
-
-        <div class="max-w-3xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full mb-5">
-            <span class="relative flex h-2 w-2"><span class="animate-ping absolute h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative rounded-full h-2 w-2 bg-emerald-500"></span></span>
-            <span class="text-xs font-semibold text-emerald-700 tracking-wide">{verifiedCount} Verified Providers</span>
-          </div>
-
-          <h1 class="text-3xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-            TMS Therapy in <span class="text-violet-600">{cityName}</span>, {stateName}
-          </h1>
-          <p class="text-lg text-slate-500 leading-relaxed">
-            Compare {cityClinics.length} FDA-cleared TMS providers. Real patient ratings, insurance info, and treatment costs.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
-          <div class="bg-white/80 backdrop-blur rounded-xl border border-slate-100 p-4 text-center">
-            <div class="text-2xl font-bold text-slate-900">{cityClinics.length}</div>
-            <div class="text-xs text-slate-400 font-medium mt-0.5">Clinics</div>
-          </div>
-          <div class="bg-white/80 backdrop-blur rounded-xl border border-slate-100 p-4 text-center">
-            <div class="text-2xl font-bold text-slate-900 flex items-center justify-center gap-1">{avgRating.toFixed(1)} <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg></div>
-            <div class="text-xs text-slate-400 font-medium mt-0.5">Avg Rating</div>
-          </div>
-          <div class="bg-white/80 backdrop-blur rounded-xl border border-slate-100 p-4 text-center">
-            <div class="text-2xl font-bold text-slate-900">{totalDoctors}</div>
-            <div class="text-xs text-slate-400 font-medium mt-0.5">Specialists</div>
-          </div>
-          <div class="bg-white/80 backdrop-blur rounded-xl border border-slate-100 p-4 text-center">
-            <div class="text-2xl font-bold text-slate-900">{totalReviews}</div>
-            <div class="text-xs text-slate-400 font-medium mt-0.5">Reviews</div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <main style="background:var(--paper)">
+    <EditorialHero
+      eyebrow={`${verifiedCount} Verified Providers`}
+      eyebrowDot="#22c55e"
+      title="TMS therapy in"
+      titleAccent={`${cityName}.`}
+      description={`Compare ${cityClinics.length} FDA-cleared TMS providers in ${cityName}, ${stateName}. Real patient ratings, insurance info, and treatment costs.`}
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "United States", href: "/us/" },
+        { label: stateName, href: `/us/${state}/` },
+        { label: cityName },
+      ]}
+      ctas={[
+        { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+        { label: "Compare Clinics", href: "/compare-clinics/", variant: "outline" },
+      ]}
+      stats={[
+        { value: cityClinics.length, label: "Clinics", color: "ink" },
+        { value: `${avgRating.toFixed(1)}★`, label: "Avg Rating", color: "warm" },
+        { value: totalDoctors, label: "Specialists", color: "accent" },
+      ]}
+    />
 
     <!-- Main Content -->
     <section class="py-8 lg:py-12">
@@ -152,7 +114,7 @@ const insurances = Object.values(ClinicInsurance);
         <div class="flex flex-col lg:flex-row gap-8">
           <!-- Sidebar -->
           <aside class="w-full lg:w-72 shrink-0">
-            <button id="filter-toggle" class="lg:hidden w-full flex items-center justify-between px-4 py-3 bg-white rounded-xl border border-slate-200 mb-4 text-sm font-semibold text-slate-700">
+            <button id="filter-toggle" class="lg:hidden w-full flex items-center justify-between px-4 py-3 bg-[var(--paper)] rounded-xl border border-[var(--line)] mb-4 text-sm font-semibold text-[var(--ink2)]">
               <span class="flex items-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
                 Filters
@@ -161,50 +123,50 @@ const insurances = Object.values(ClinicInsurance);
             </button>
 
             <div id="filter-panel" class="hidden lg:block">
-              <div class="bg-white rounded-2xl border border-slate-100 shadow-sm sticky top-20 overflow-hidden">
-                <div class="flex items-center justify-between p-5 border-b border-slate-50">
-                  <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Filters</h2>
-                  <button id="reset-filters" class="text-xs text-violet-600 hover:text-violet-700 font-semibold">Reset All</button>
+              <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm sticky top-20 overflow-hidden">
+                <div class="flex items-center justify-between p-5 border-b border-[var(--line)]">
+                  <h2 class="text-sm font-bold text-[var(--ink)] uppercase tracking-wider">Filters</h2>
+                  <button id="reset-filters" class="text-xs text-[var(--accent)] hover:text-[var(--accent)] font-semibold">Reset All</button>
                 </div>
                 <div class="p-5 space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
                   <div>
-                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-                      <svg class="w-3.5 h-3.5 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <h3 class="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-3 flex items-center gap-2">
+                      <svg class="w-3.5 h-3.5 text-[var(--accent2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                       TMS Technology
                     </h3>
                     <div class="space-y-2">
                       {machines.map((m) => (
                         <label class="flex items-center gap-2.5 cursor-pointer group py-0.5">
-                          <input type="checkbox" data-filter="machine" value={m.toLowerCase()} class="filter-checkbox h-4 w-4 rounded border-slate-300 text-violet-600 focus:ring-violet-500" />
-                          <span class="text-sm text-slate-600 group-hover:text-slate-900 transition-colors">{m}</span>
+                          <input type="checkbox" data-filter="machine" value={m.toLowerCase()} class="filter-checkbox h-4 w-4 rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]" />
+                          <span class="text-sm text-[var(--muted)] group-hover:text-[var(--ink)] transition-colors">{m}</span>
                         </label>
                       ))}
                     </div>
                   </div>
                   <div>
-                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-                      <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    <h3 class="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-3 flex items-center gap-2">
+                      <svg class="w-3.5 h-3.5 text-[var(--accent2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                       Treatments
                     </h3>
                     <div class="space-y-2">
                       {["Depression", "Anxiety", "OCD", "PTSD", "Ketamine Infusion", "Spravato (Esketamine)"].map((t) => (
                         <label class="flex items-center gap-2.5 cursor-pointer group py-0.5">
-                          <input type="checkbox" data-filter="treatment" value={t.toLowerCase()} class="filter-checkbox h-4 w-4 rounded border-slate-300 text-violet-600 focus:ring-violet-500" />
-                          <span class="text-sm text-slate-600 group-hover:text-slate-900 transition-colors">{t}</span>
+                          <input type="checkbox" data-filter="treatment" value={t.toLowerCase()} class="filter-checkbox h-4 w-4 rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]" />
+                          <span class="text-sm text-[var(--muted)] group-hover:text-[var(--ink)] transition-colors">{t}</span>
                         </label>
                       ))}
                     </div>
                   </div>
                   <div>
-                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <h3 class="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-3 flex items-center gap-2">
                       <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                       Insurance
                     </h3>
                     <div class="space-y-2 max-h-[280px] overflow-y-auto pr-1">
                       {insurances.map((i) => (
                         <label class="flex items-center gap-2.5 cursor-pointer group py-0.5">
-                          <input type="checkbox" data-filter="insurance" value={i.toLowerCase()} class="filter-checkbox h-4 w-4 rounded border-slate-300 text-violet-600 focus:ring-violet-500" />
-                          <span class="text-sm text-slate-600 group-hover:text-slate-900 transition-colors">{i}</span>
+                          <input type="checkbox" data-filter="insurance" value={i.toLowerCase()} class="filter-checkbox h-4 w-4 rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]" />
+                          <span class="text-sm text-[var(--muted)] group-hover:text-[var(--ink)] transition-colors">{i}</span>
                         </label>
                       ))}
                     </div>
@@ -220,12 +182,12 @@ const insurances = Object.values(ClinicInsurance);
           <!-- Grid -->
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between mb-6">
-              <h2 class="text-xl font-bold text-slate-900">
+              <h2 class="text-xl font-bold text-[var(--ink)]">
                 {cityName} Clinics
-                <span class="text-slate-400 font-medium text-base ml-2" id="clinic-count">{cityClinics.length} Providers</span>
+                <span class="text-[var(--muted)] font-medium text-base ml-2" id="clinic-count">{cityClinics.length} Providers</span>
               </h2>
               <label for="sort-select" class="sr-only">Sort clinics</label>
-              <select id="sort-select" aria-label="Sort clinics" class="text-sm border border-slate-200 rounded-lg px-3 py-1.5 text-slate-700 focus:border-violet-400 focus:ring-1 focus:ring-violet-100 bg-white">
+              <select id="sort-select" aria-label="Sort clinics" class="text-sm border border-[var(--line)] rounded-lg px-3 py-1.5 text-[var(--ink2)] focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.1)] bg-[var(--paper)]">
                 <option value="score">Best Match</option>
                 <option value="rating">Highest Rated</option>
                 <option value="reviews">Most Reviews</option>
@@ -251,9 +213,9 @@ const insurances = Object.values(ClinicInsurance);
             </div>
 
             <p id="no-results" class="hidden text-center py-16">
-              <svg class="w-12 h-12 text-slate-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              <span class="text-slate-500 font-medium block">No clinics match your filters</span>
-              <span class="text-slate-400 text-sm mt-1 block">Try adjusting your criteria</span>
+              <svg class="w-12 h-12 text-[var(--muted)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <span class="text-[var(--muted)] font-medium block">No clinics match your filters</span>
+              <span class="text-[var(--muted)] text-sm mt-1 block">Try adjusting your criteria</span>
             </p>
 
             <LocationSEOContent
@@ -263,7 +225,7 @@ const insurances = Object.values(ClinicInsurance);
               clinicCount={cityClinics.length}
             />
 
-            <div id="clinic-map" class="mt-12 rounded-2xl h-80 shadow-sm border border-slate-200 overflow-hidden z-0"></div>
+            <div id="clinic-map" class="mt-12 rounded-2xl h-80 shadow-sm border border-[var(--line)] overflow-hidden z-0"></div>
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
             <script is:inline define:vars={{ clinicsForMap: sortedClinics.filter((c) => c.geo?.lat && c.geo?.lng).map((c) => ({ name: c.name, lat: c.geo.lat, lng: c.geo.lng, slug: c.slug })) }}>
               window.addEventListener("load", () => {
@@ -319,7 +281,7 @@ const insurances = Object.values(ClinicInsurance);
       if (all.length === 0) { activeFiltersEl.classList.add('hidden'); activeFiltersEl.classList.remove('flex'); }
       else {
         activeFiltersEl.classList.remove('hidden'); activeFiltersEl.classList.add('flex');
-        activeFiltersEl.innerHTML = all.map(f => `<span class="inline-flex items-center gap-1 px-3 py-1 bg-violet-50 text-violet-700 rounded-full text-xs font-semibold"><span>${f}</span><button class="remove-filter hover:text-red-500" data-value="${f}">&times;</button></span>`).join('');
+        activeFiltersEl.innerHTML = all.map(f => `<span class="inline-flex items-center gap-1 px-3 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--accent)] rounded-full text-xs font-semibold"><span>${f}</span><button class="remove-filter hover:text-red-500" data-value="${f}">&times;</button></span>`).join('');
         activeFiltersEl.querySelectorAll('.remove-filter').forEach(btn => {
           btn.addEventListener('click', () => { const val = btn.getAttribute('data-value'); checkboxes.forEach(cb => { if (cb.value === val) cb.checked = false; }); filterClinics(); });
         });

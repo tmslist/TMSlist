@@ -4,7 +4,7 @@ description: "Pregnant women with depression have limited treatment options. Exp
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-preterm-labor-stress.svg"
 tags: ["tms", "pregnancy", "perinatal", "postpartum", "breastfeeding", "maternal-depression", "prenatal", "fetal-safety"]
 ---
 
@@ -137,35 +137,35 @@ Pregnant and breastfeeding women with depression should discuss TMS with their o
 
 *If you are pregnant or postpartum and experiencing depression, talk to your healthcare provider. Resources are available through Postpartum Support International (postpartum.net) and the Marce Society for reproductive mental health.*
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS safe during pregnancy for the fetus?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS safe during pregnancy for the fetus?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Current evidence shows no adverse fetal outcomes in studies of TMS during pregnancy. A 2019 systematic review found no increased risk of miscarriage, preterm birth, fetal growth restriction, or major congenital malformations. The magnetic field does not reach the fetus, and there is no evidence of uterine contractions or other harmful effects.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Current evidence shows no adverse fetal outcomes in studies of TMS during pregnancy. A 2019 systematic review found no increased risk of miscarriage, preterm birth, fetal growth restriction, or major congenital malformations. The magnetic field does not reach the fetus, and there is no evidence of uterine contractions or other harmful effects.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I breastfeed while receiving TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I breastfeed while receiving TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Unlike most psychiatric medications that require careful evaluation of breastfeeding compatibility, TMS introduces no substances into breast milk. There is no waiting period required between TMS and breastfeeding, no effect on milk supply or composition, and no risk of infant medication exposure.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Unlike most psychiatric medications that require careful evaluation of breastfeeding compatibility, TMS introduces no substances into breast milk. There is no waiting period required between TMS and breastfeeding, no effect on milk supply or composition, and no risk of infant medication exposure.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What is the first trimester risk for TMS during pregnancy?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What is the first trimester risk for TMS during pregnancy?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Some clinicians may prefer to delay elective TMS until after the first trimester when major organogenesis is complete. However, severe untreated depression also poses risks during this critical period including adverse effects on fetal development. Decisions about timing should be individualized based on depression severity and discussed with both your TMS provider and obstetrician.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Some clinicians may prefer to delay elective TMS until after the first trimester when major organogenesis is complete. However, severe untreated depression also poses risks during this critical period including adverse effects on fetal development. Decisions about timing should be individualized based on depression severity and discussed with both your TMS provider and obstetrician.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

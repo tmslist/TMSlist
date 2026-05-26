@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
 import { getAllTreatments } from '../../db/queries';
 
 let ALTERNATIVE_TREATMENTS: any[] = [];
@@ -29,75 +30,46 @@ const description = "Explore alternatives to TMS therapy including Spravato (esk
 // Treatment-specific styling
 const treatmentAccents: Record<string, { gradient: string; badge: string; icon: string }> = {
     'spravato': { gradient: 'from-emerald-500/10 to-teal-500/5', badge: 'bg-emerald-500', icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z' },
-    'ketamine-infusion': { gradient: 'from-violet-500/10 to-purple-500/5', badge: 'bg-violet-500', icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
-    'at-home-ketamine': { gradient: 'from-blue-500/10 to-indigo-500/5', badge: 'bg-blue-500', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
+    'ketamine-infusion': { gradient: 'from-[var(--ink2)]/10 to-[rgba(201,101,74,0.5)]', badge: 'bg-[var(--ink2)]', icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
+    'at-home-ketamine': { gradient: 'from-[rgba(10,22,40,0.15)] to-[rgba(201,101,74,0.15)]', badge: 'bg-[var(--accent2)]', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
     'ect': { gradient: 'from-amber-500/10 to-orange-500/5', badge: 'bg-amber-500', icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
-    'vns': { gradient: 'from-rose-500/10 to-pink-500/5', badge: 'bg-rose-500', icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z' },
-    'psilocybin': { gradient: 'from-cyan-500/10 to-teal-500/5', badge: 'bg-cyan-500', icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z' },
+    'vns': { gradient: 'from-[rgba(201,101,74,0.10)] to-[rgba(201,101,74,0.5)]', badge: 'bg-[rgba(201,101,74,0.06)]', icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z' },
+    'psilocybin': { gradient: 'from-[rgba(10,22,40,0.10)] to-teal-500/5', badge: 'bg-[var(--accent2)]', icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z' },
 };
-const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-slate-500', icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4' };
+const defaultAccent = { gradient: 'from-[rgba(10,22,40,0.10)] to-[rgba(10,22,40,0.5)]', badge: 'bg-[var(--accent2)]', icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4' };
 ---
 
 <Layout title={title} description={description} breadcrumbs={[
     { name: "Home", url: "/" },
     { name: "Alternative Treatments", url: "/alternative-treatments/" },
 ]}>
-    <main>
-        <!-- Hero -->
-        <section class="relative bg-slate-950 overflow-hidden">
-            <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
-            <div class="absolute top-[-10%] right-[20%] w-[500px] h-[500px] bg-violet-600/12 rounded-full blur-[150px]"></div>
-            <div class="absolute bottom-[5%] left-[10%] w-[350px] h-[350px] bg-cyan-500/8 rounded-full blur-[100px]"></div>
-
-            <div class="container mx-auto px-4 pt-10 pb-16 lg:pt-16 lg:pb-28 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-8 lg:mb-12" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
-                    <span class="text-slate-700">/</span>
-                    <span class="text-slate-300">Alternative Treatments</span>
-                </nav>
-
-                <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-end">
-                    <div>
-                        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.0] lg:leading-[0.95] mb-4 lg:mb-6">
-                            Beyond<br/>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-cyan-400 to-emerald-400">TMS</span>
-                        </h1>
-                        <p class="text-base lg:text-lg text-slate-400 leading-relaxed max-w-xl mb-6">
-                            TMS isn't the only option. Compare innovative treatments for depression and mental health — from FDA-approved medications to breakthrough therapies in clinical trials.
-                        </p>
-                        <div class="flex flex-wrap gap-3">
-                            <a href="/quiz/am-i-a-candidate/" class="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">
-                                Take the Eligibility Quiz
-                            </a>
-                            <a href="/us/" class="px-5 py-2.5 bg-white/5 border border-white/10 hover:border-white/25 text-white text-sm font-semibold rounded-xl transition-all backdrop-blur">
-                                Find a TMS Clinic
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap gap-3 lg:gap-4 lg:justify-end">
-                        <div class="px-4 lg:px-6 py-3 lg:py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
-                            <div class="text-2xl lg:text-3xl font-bold text-white">{ALTERNATIVE_TREATMENTS.length}</div>
-                            <div class="text-[10px] lg:text-xs text-slate-400 font-medium mt-0.5">Treatments</div>
-                        </div>
-                        <div class="px-4 lg:px-6 py-3 lg:py-4 bg-white/5 backdrop-blur border border-white/10 rounded-2xl">
-                            <div class="text-2xl lg:text-3xl font-bold text-emerald-400">{ALTERNATIVE_TREATMENTS.filter(t => t.fdaApproved).length}</div>
-                            <div class="text-[10px] lg:text-xs text-slate-400 font-medium mt-0.5">FDA Approved</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 h-12 lg:h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
-        </section>
+    <main style="background:var(--paper)">
+        <EditorialHero
+            eyebrow={`${ALTERNATIVE_TREATMENTS.length} Drug-Free Options`}
+            eyebrowDot="#22c55e"
+            title="Beyond"
+            titleAccent="TMS therapy."
+            description="TMS isn't the only option. Compare innovative treatments for depression and mental health — from FDA-approved medications to breakthrough therapies in clinical trials."
+            breadcrumbs={[{ label: "Home", href: "/" }, { label: "Alternative Treatments" }]}
+            ctas={[
+                { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+                { label: "Find a TMS Clinic", href: "/us/", variant: "outline" },
+            ]}
+            stats={[
+                { value: ALTERNATIVE_TREATMENTS.length, label: "Treatments", color: "ink" },
+                { value: ALTERNATIVE_TREATMENTS.filter(t => t.fdaApproved).length, label: "FDA Approved", color: "accent" },
+                { value: "Drug-Free", label: "Options", color: "warm" },
+            ]}
+        />
 
         <!-- Treatment Cards — Stacked Editorial -->
-        <section class="py-12 lg:py-24 bg-white">
+        <section class="py-12 lg:py-24 bg-[var(--paper)]">
             <div class="container mx-auto px-4 max-w-5xl">
                 <div class="space-y-4 lg:space-y-6">
                     {ALTERNATIVE_TREATMENTS.map((treatment) => {
                         const accent = treatmentAccents[treatment.slug] || defaultAccent;
                         return (
-                        <article class="group relative bg-white rounded-2xl lg:rounded-3xl border border-slate-100 overflow-hidden hover:border-slate-200 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.07)] transition-all duration-300">
+                        <article class="group relative bg-[var(--paper)] rounded-2xl lg:rounded-3xl border border-[var(--line)] overflow-hidden hover:border-[var(--line)] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.07)] transition-all duration-300">
                             <!-- Top accent gradient -->
                             <div class={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${accent.gradient.replace('/10', '')} opacity-0 group-hover:opacity-100 transition-opacity`}></div>
 
@@ -106,7 +78,7 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
                                     <!-- Left: Icon + Badge -->
                                     <div class="flex items-start gap-4 md:gap-0 md:block">
                                         <div class={`w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br ${accent.gradient} flex items-center justify-center shrink-0`}>
-                                            <svg class="w-5 h-5 md:w-6 md:h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={accent.icon}/></svg>
+                                            <svg class="w-5 h-5 md:w-6 md:h-6 text-[var(--ink2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={accent.icon}/></svg>
                                         </div>
                                         {treatment.fdaApproved ? (
                                             <span class="md:hidden ml-2 px-2.5 py-1 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-md shrink-0">FDA Approved</span>
@@ -125,31 +97,31 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
                                             )}
                                         </div>
 
-                                        <h2 class="text-lg lg:text-2xl font-bold text-slate-900 tracking-tight mb-1 group-hover:text-violet-600 transition-colors">{treatment.name}</h2>
-                                        <p class="text-slate-500 leading-relaxed mb-4 text-sm lg:text-base">{treatment.description}</p>
+                                        <h2 class="text-lg lg:text-2xl font-bold text-[var(--ink)] tracking-tight mb-1 group-hover:text-[var(--accent)] transition-colors">{treatment.name}</h2>
+                                        <p class="text-[var(--muted)] leading-relaxed mb-4 text-sm lg:text-base">{treatment.description}</p>
 
                                         <!-- Key metrics row -->
-                                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 pt-4 lg:pt-5 border-t border-slate-100">
+                                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 pt-4 lg:pt-5 border-t border-[var(--line)]">
                                             <div>
-                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Session</div>
-                                                <div class="text-sm font-bold text-slate-900">{treatment.sessionDuration || 'Varies'}</div>
+                                                <div class="text-[10px] text-[var(--muted)] font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Session</div>
+                                                <div class="text-sm font-bold text-[var(--ink)]">{treatment.sessionDuration || 'Varies'}</div>
                                             </div>
                                             <div>
-                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Course</div>
-                                                <div class="text-sm font-bold text-slate-900">{treatment.treatmentCourse || 'Varies'}</div>
+                                                <div class="text-[10px] text-[var(--muted)] font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Course</div>
+                                                <div class="text-sm font-bold text-[var(--ink)]">{treatment.treatmentCourse || 'Varies'}</div>
                                             </div>
                                             <div>
-                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Insurance</div>
-                                                <div class="text-sm font-bold text-slate-900">{treatment.insuranceCoverage || 'Check plan'}</div>
+                                                <div class="text-[10px] text-[var(--muted)] font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Insurance</div>
+                                                <div class="text-sm font-bold text-[var(--ink)]">{treatment.insuranceCoverage || 'Check plan'}</div>
                                             </div>
                                             <div>
-                                                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Conditions</div>
+                                                <div class="text-[10px] text-[var(--muted)] font-semibold uppercase tracking-wider mb-0.5 lg:mb-1">Conditions</div>
                                                 <div class="flex flex-wrap gap-1">
                                                     {treatment.conditions.slice(0, 2).map((c: string) => (
-                                                        <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-[11px] font-medium rounded">{c}</span>
+                                                        <span class="px-2 py-0.5 bg-[var(--paper2)] text-[var(--muted)] text-[11px] font-medium rounded">{c}</span>
                                                     ))}
                                                     {treatment.conditions.length > 2 && (
-                                                        <span class="px-2 py-0.5 bg-slate-100 text-slate-400 text-[11px] font-medium rounded">+{treatment.conditions.length - 2}</span>
+                                                        <span class="px-2 py-0.5 bg-[var(--paper2)] text-[var(--muted)] text-[11px] font-medium rounded">+{treatment.conditions.length - 2}</span>
                                                     )}
                                                 </div>
                                             </div>
@@ -159,7 +131,7 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
                                     <!-- Right: CTA -->
                                     <div class="md:w-28 lg:w-36 shrink-0 flex md:flex-col items-center gap-2 lg:gap-3">
                                         <a href={`/alternative-treatments/${treatment.slug}/`}
-                                           class="w-full px-4 lg:px-5 py-2.5 lg:py-3 bg-slate-900 hover:bg-violet-600 text-white font-semibold text-sm rounded-xl transition-colors text-center">
+                                           class="w-full px-4 lg:px-5 py-2.5 lg:py-3 bg-[var(--ink)] hover:bg-[var(--ink)] text-white font-semibold text-sm rounded-xl transition-colors text-center">
                                             Learn More
                                         </a>
                                     </div>
@@ -172,45 +144,45 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
         </section>
 
         <!-- Comparison Table -->
-        <section class="py-12 lg:py-24 bg-slate-50">
+        <section class="py-12 lg:py-24 bg-[var(--paper2)]">
             <div class="container mx-auto px-4 max-w-5xl">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-3">How They Compare</h2>
-                    <p class="text-slate-500">Side-by-side comparison of TMS therapy vs. alternative treatments.</p>
+                    <h2 class="text-3xl font-bold text-[var(--ink)] tracking-tight mb-3">How They Compare</h2>
+                    <p class="text-[var(--muted)]">Side-by-side comparison of TMS therapy vs. alternative treatments.</p>
                 </div>
 
-                <div class="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm">
+                <div class="bg-[var(--paper)] rounded-3xl border border-[var(--line)] overflow-hidden shadow-sm">
                     <div class="overflow-x-auto">
                         <table class="w-full min-w-[700px]">
                             <thead>
-                                <tr class="border-b border-slate-100">
-                                    <th class="text-left p-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Treatment</th>
-                                    <th class="text-left p-5 text-xs font-bold text-slate-400 uppercase tracking-wider">FDA Status</th>
-                                    <th class="text-left p-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Session Duration</th>
-                                    <th class="text-left p-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Insurance</th>
-                                    <th class="text-left p-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Invasive?</th>
+                                <tr class="border-b border-[var(--line)]">
+                                    <th class="text-left p-5 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Treatment</th>
+                                    <th class="text-left p-5 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">FDA Status</th>
+                                    <th class="text-left p-5 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Session Duration</th>
+                                    <th class="text-left p-5 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Insurance</th>
+                                    <th class="text-left p-5 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Invasive?</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- TMS Row — Highlighted -->
-                                <tr class="border-b border-slate-100 bg-violet-50/50">
+                                <tr class="border-b border-[var(--line)] bg-[rgba(10,22,40,0.08)]/50">
                                     <td class="p-5">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-2 h-2 rounded-full bg-violet-500"></div>
-                                            <span class="font-bold text-slate-900">TMS Therapy</span>
+                                            <div class="w-2 h-2 rounded-full bg-[var(--ink2)]"></div>
+                                            <span class="font-bold text-[var(--ink)]">TMS Therapy</span>
                                         </div>
                                     </td>
                                     <td class="p-5"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-bold rounded">Approved</span></td>
-                                    <td class="p-5 text-sm text-slate-600">19-37 min</td>
-                                    <td class="p-5 text-sm text-slate-600">Most insurers</td>
+                                    <td class="p-5 text-sm text-[var(--muted)]">19-37 min</td>
+                                    <td class="p-5 text-sm text-[var(--muted)]">Most insurers</td>
                                     <td class="p-5"><span class="text-emerald-600 font-semibold text-sm">Non-invasive</span></td>
                                 </tr>
                                 {ALTERNATIVE_TREATMENTS.map((t) => (
-                                    <tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors">
+                                    <tr class="border-b border-[var(--line)] hover:bg-[var(--paper2)]/50 transition-colors">
                                         <td class="p-5">
                                             <div class="flex items-center gap-3">
                                                 <div class={`w-2 h-2 rounded-full ${(treatmentAccents[t.slug] || defaultAccent).badge}`}></div>
-                                                <a href={`/alternative-treatments/${t.slug}/`} class="font-semibold text-slate-700 hover:text-violet-600 transition-colors">{t.name}</a>
+                                                <a href={`/alternative-treatments/${t.slug}/`} class="font-semibold text-[var(--ink2)] hover:text-[var(--accent)] transition-colors">{t.name}</a>
                                             </div>
                                         </td>
                                         <td class="p-5">
@@ -219,9 +191,9 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
                                                 : <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded">Off-Label</span>
                                             }
                                         </td>
-                                        <td class="p-5 text-sm text-slate-600">{t.sessionDuration || '—'}</td>
-                                        <td class="p-5 text-sm text-slate-600">{t.insuranceCoverage || '—'}</td>
-                                        <td class="p-5 text-sm text-slate-500">
+                                        <td class="p-5 text-sm text-[var(--muted)]">{t.sessionDuration || '—'}</td>
+                                        <td class="p-5 text-sm text-[var(--muted)]">{t.insuranceCoverage || '—'}</td>
+                                        <td class="p-5 text-sm text-[var(--muted)]">
                                             {t.slug === 'ect' || t.slug === 'vns' ? 'Invasive' : 'Non-invasive'}
                                         </td>
                                     </tr>
@@ -234,31 +206,31 @@ const defaultAccent = { gradient: 'from-slate-500/10 to-gray-500/5', badge: 'bg-
         </section>
 
         <!-- CTA -->
-        <section class="relative py-16 lg:py-20 bg-slate-950 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
+        <section class="relative py-16 lg:py-20 bg-[var(--ink)] overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0A1628]/10 via-transparent to-[rgba(10,22,40,0.10)]"></div>
             <div class="container mx-auto px-4 text-center relative z-10">
-                <p class="text-xs lg:text-sm font-semibold text-violet-400 tracking-wider uppercase mb-3 lg:mb-4">Considering your options?</p>
+                <p class="text-xs lg:text-sm font-semibold text-[var(--accent2)] tracking-wider uppercase mb-3 lg:mb-4">Considering your options?</p>
                 <h2 class="text-2xl lg:text-4xl font-bold text-white mb-3 lg:mb-4 tracking-tight">TMS might be the right fit</h2>
-                <p class="text-slate-400 max-w-lg mx-auto mb-8 lg:mb-10 text-sm lg:text-base">Non-invasive, FDA-cleared, and covered by most insurance. Take our quick assessment to find out.</p>
+                <p class="text-[var(--muted)] max-w-lg mx-auto mb-8 lg:mb-10 text-sm lg:text-base">Non-invasive, FDA-cleared, and covered by most insurance. Take our quick assessment to find out.</p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-3 lg:gap-4">
-                    <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto px-6 lg:px-8 py-3.5 lg:py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25 text-sm lg:text-base">
+                    <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto px-6 lg:px-8 py-3.5 lg:py-4 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white font-semibold rounded-xl transition-colors shadow-lg shadow-[rgba(10,22,40,0.2)] text-sm lg:text-base">
                         Am I a Candidate?
                     </a>
-                    <a href="/us/" class="w-full sm:w-auto px-6 lg:px-8 py-3.5 lg:py-4 bg-white/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur text-sm lg:text-base">
+                    <a href="/us/" class="w-full sm:w-auto px-6 lg:px-8 py-3.5 lg:py-4 bg-[var(--paper)]/5 border border-white/10 hover:border-white/25 text-white font-semibold rounded-xl transition-all backdrop-blur text-sm lg:text-base">
                         Find a TMS Clinic
                     </a>
                 </div>
-                <p class="text-xs text-slate-500 mt-4">Also: <a href="/resources/buyers-guide/" class="text-violet-400 hover:underline font-medium">download the free TMS Buyer's Guide</a> to compare all your treatment options.</p>
+                <p class="text-xs text-[var(--muted)] mt-4">Also: <a href="/tms-cost-guide/" class="text-[var(--accent2)] hover:underline font-medium">download the free TMS Buyer's Guide</a> to compare all your treatment options.</p>
             </div>
         </section>
 
         <!-- Sticky Mobile CTA Bar -->
-        <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+        <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[var(--paper)] border-t border-[var(--line)] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
             <div class="flex items-center gap-2 px-3 py-3">
-                <a href="/quiz/am-i-a-candidate/" class="flex-1 text-center bg-violet-600 text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-violet-500 transition-colors shadow-md">
+                <a href="/quiz/am-i-a-candidate/" class="flex-1 text-center bg-[var(--ink)] text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-[var(--ink2)] transition-colors shadow-md">
                     Take the Quiz
                 </a>
-                <a href="/us/" class="flex-1 text-center bg-slate-900 text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-slate-800 transition-colors shadow-md">
+                <a href="/us/" class="flex-1 text-center bg-[var(--ink)] text-white font-bold text-sm py-3 px-4 rounded-xl hover:bg-[var(--ink2)] transition-colors shadow-md">
                     Find a TMS Clinic
                 </a>
             </div>

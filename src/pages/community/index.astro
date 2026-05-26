@@ -1,6 +1,9 @@
 ---
 export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
+import EditorialHero from "../../components/editorial/EditorialHero.astro";
+import EditorialSection from "../../components/editorial/EditorialSection.astro";
+import EditorialCTA from "../../components/editorial/EditorialCTA.astro";
 import CommunityPostList from "../../components/react/CommunityPostList";
 import CategoryIcon from "../../components/react/CommunityCategoryIcon";
 import { getForumCategories, getForumPosts } from "../../db/forumQueries";
@@ -9,139 +12,86 @@ import { getSessionFromRequest } from "../../utils/auth";
 const session = getSessionFromRequest(Astro.request);
 const categories = await getForumCategories();
 const posts = await getForumPosts({ sort: 'hot', limit: 20 });
+const totalPosts = categories.reduce((sum, c) => sum + (c.postCount || 0), 0);
 
-const CATEGORY_COLORS: Record<string, string> = {
-  violet: 'from-violet-500 to-violet-600',
-  emerald: 'from-emerald-500 to-emerald-600',
-  amber: 'from-amber-500 to-amber-600',
-  rose: 'from-rose-500 to-rose-600',
-  yellow: 'from-yellow-500 to-yellow-600',
-  blue: 'from-blue-500 to-blue-600',
-  teal: 'from-teal-500 to-teal-600',
-  indigo: 'from-violet-500 to-violet-600',
-};
-
-const CATEGORY_BG: Record<string, string> = {
-  violet: 'bg-violet-50 border-violet-200 hover:border-violet-300',
-  emerald: 'bg-emerald-50 border-emerald-200 hover:border-emerald-300',
-  amber: 'bg-amber-50 border-amber-200 hover:border-amber-300',
-  rose: 'bg-rose-50 border-rose-200 hover:border-rose-300',
-  yellow: 'bg-yellow-50 border-yellow-200 hover:border-yellow-300',
-  blue: 'bg-blue-50 border-blue-200 hover:border-blue-300',
-  teal: 'bg-teal-50 border-teal-200 hover:border-teal-300',
-  indigo: 'bg-indigo-50 border-indigo-200 hover:border-indigo-300',
-};
+const newPostHref = session ? "/community/new" : "/login?redirect=/community/new";
+const storyHref = session ? "/community/new?category=patient-stories" : "/login?redirect=/community/new?category=patient-stories";
 ---
 
 <Layout
   title="TMS Community Forum | Share Experiences & Ask Specialists"
   description="Join the TMS therapy community. Share treatment experiences, ask verified specialists, discuss insurance, and connect with others on their TMS journey."
-  breadcrumbs={[
-    { name: "Home", url: "/" },
-    { name: "Community", url: "/community" },
-  ]}
+  breadcrumbs={[{ name: "Home", url: "/" }, { name: "Community", url: "/community" }]}
 >
-  <div class="min-h-screen bg-gray-50">
-    <!-- Hero -->
-    <div class="bg-gradient-to-br from-violet-600 via-purple-600 to-violet-700 text-white">
-      <div class="container mx-auto px-4 lg:px-8 py-12 lg:py-16">
-        <div class="max-w-3xl">
-          <h1 class="text-3xl lg:text-4xl font-bold mb-3">TMS Community</h1>
-          <p class="text-lg text-violet-100 mb-6">Share experiences, ask specialists, and connect with others on their TMS therapy journey.</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            {session ? (
-              <a
-                href="/community/new"
-                class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-violet-700 font-semibold rounded-lg hover:bg-violet-50 transition-colors text-sm"
-              >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width={2} viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                New Post
-              </a>
-            ) : (
-              <a
-                href="/login?redirect=/community/new"
-                class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-violet-700 font-semibold rounded-lg hover:bg-violet-50 transition-colors text-sm"
-              >
-                Join the Community
-              </a>
-            )}
-          </div>
-        </div>
 
-        <!-- Story Contest Banner -->
-        <div class="mt-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 p-5 max-w-xl">
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-amber-400 rounded-xl flex items-center justify-center shrink-0">
-              <svg class="w-6 h-6 text-amber-900" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-1">
-                <h3 class="font-bold text-white text-base">Share Your TMS Story</h3>
-                <span class="px-2 py-0.5 bg-amber-400 text-amber-900 text-xs font-bold rounded-full">Gift Cards</span>
-              </div>
-              <p class="text-indigo-100 text-sm leading-relaxed">
-                Your TMS journey can help others facing similar decisions. We reward the top 10 most helpful stories with <strong class="text-white">$10 gift cards</strong>. It takes just 5 minutes to write.
-              </p>
-              <a
-                href={session ? "/community/new?category=patient-stories" : "/login?redirect=/community/new?category=patient-stories"}
-                class="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-amber-400 hover:bg-amber-300 text-amber-900 font-semibold rounded-lg text-sm transition-colors"
-              >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.454.454-2.685A4.5 4.5 0 0110.183 8.205z" />
-                </svg>
-                Write Your Story
-              </a>
-            </div>
-          </div>
-        </div>
+<main style="background:var(--paper)">
+  <EditorialHero
+    eyebrow="Real Patients · Verified Specialists"
+    eyebrowDot="#22c55e"
+    title="The TMS"
+    titleAccent="community."
+    description="Share treatment experiences, ask verified specialists, and connect with others on their TMS journey."
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Community" }]}
+    ctas={[
+      { label: session ? "New Post" : "Join the Community", href: newPostHref },
+      { label: "Browse Topics", href: "#topics", variant: "outline" },
+    ]}
+    stats={[
+      { value: categories.length, label: "Topics", color: "ink" },
+      { value: totalPosts, label: "Posts", color: "accent" },
+      { value: "$10", label: "Story Reward", color: "warm" },
+    ]}
+  />
 
-    <div class="container mx-auto px-4 lg:px-8 py-8">
-      <!-- Categories grid -->
-      <section class="mb-10">
-        <h2 class="text-lg font-bold text-gray-900 mb-4">Browse Topics</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {categories.map((cat) => {
-            const bgClass = CATEGORY_BG[cat.color || 'violet'] || CATEGORY_BG.violet;
-            return (
-              <a
-                href={`/community/${cat.slug}`}
-                class={`block p-4 rounded-xl border transition-all ${bgClass}`}
-              >
-                <div class="mb-2"><CategoryIcon icon={cat.icon} color={cat.color} /></div>
-                <h3 class="text-sm font-bold text-gray-900 mb-0.5">{cat.name}</h3>
-                <p class="text-xs text-gray-500 line-clamp-2">{cat.description}</p>
-                <p class="text-[11px] text-gray-400 mt-2 font-medium">{cat.postCount} posts</p>
-              </a>
-            );
-          })}
-        </div>
-      </section>
-
-      <!-- Posts feed -->
-      <section>
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-bold text-gray-900">Recent Discussions</h2>
-          {session && (
-            <a
-              href="/community/new"
-              class="text-sm text-violet-600 hover:text-violet-700 font-semibold transition-colors"
-            >
-              + New Post
-            </a>
-          )}
-        </div>
-
-        <CommunityPostList
-          client:load
-          initialPosts={posts}
-          isAuthenticated={!!session}
-          showCategory={true}
-        />
-      </section>
+  <EditorialSection
+    title="Browse Topics"
+    intro="Pick a category to read what others are discussing — or jump in and start your own."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-4 4z"/>'
+    tone="warm"
+  >
+    <div id="topics" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {categories.map((cat) => (
+        <a
+          href={`/community/${cat.slug}`}
+          style="background:var(--paper2); border:1px solid var(--line); border-radius:1rem; padding:1rem; transition:box-shadow 0.2s, transform 0.2s;"
+          class="block hover:shadow-lg hover:-translate-y-0.5"
+        >
+          <div class="mb-2"><CategoryIcon icon={cat.icon} color={cat.color} /></div>
+          <h3 style="font-size:14px; font-weight:700; color:var(--ink); margin:0 0 0.25rem;">{cat.name}</h3>
+          <p style="font-size:12px; color:var(--muted); margin:0;" class="line-clamp-2">{cat.description}</p>
+          <p style="font-size:11px; color:var(--muted); margin-top:0.5rem; font-weight:500;">{cat.postCount} posts</p>
+        </a>
+      ))}
     </div>
-  </div>
+  </EditorialSection>
+
+  <EditorialSection
+    title="Recent Discussions"
+    intro="The hottest TMS conversations happening right now."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>'
+    tone="accent"
+    actionLabel={session ? "+ New Post" : undefined}
+    actionHref={session ? "/community/new" : undefined}
+    background="paper2"
+    noBorder
+  >
+    <CommunityPostList
+      client:load
+      initialPosts={posts}
+      isAuthenticated={!!session}
+      showCategory={true}
+    />
+  </EditorialSection>
+
+  <EditorialCTA
+    title="Share your TMS story."
+    description="The top 10 most helpful stories each month earn a $10 gift card. It takes just 5 minutes to write."
+    ctas={[
+      { label: "Write Your Story", href: storyHref },
+      { label: "Browse Stories", href: "/stories/", variant: "outline" },
+    ]}
+    stickyMobile
+  />
+</main>
+
 </Layout>

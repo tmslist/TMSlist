@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-10
 category: research
 tags: ["SNT", "Stanford", "accelerated TMS", "depression"]
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/blog-covers/stanford-neuromodulation-therapy-snt-2026.svg"
 ---
 
 Standard TMS therapy takes six weeks. Thirty-six sessions. Daily drives to the clinic, daily time off work, daily rearranging of your life around a treatment schedule that, while effective, asks a lot when you are already struggling to get through the day.
@@ -90,9 +90,9 @@ Side effects match standard TMS. Scalp discomfort and headache are the most comm
 
 Most people can drive themselves to and from the clinic each day. You will not feel sedated or foggy.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>SNT delivers 50 theta burst stimulation sessions over 5 consecutive days instead of 36 sessions over 6 weeks.</li>
     <li>fMRI-guided targeting personalizes coil placement to your unique brain connectivity patterns.</li>
     <li>Remission rates of 79% in treatment-resistant depression exceed standard TMS (30-35%) and medication (25-30%).</li>
@@ -102,47 +102,47 @@ Most people can drive themselves to and from the clinic each day. You will not f
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How is SNT different from standard TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How is SNT different from standard TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">SNT uses fMRI-guided targeting to personalize coil placement to your brain connectivity, rather than relying on external skull landmarks. It also delivers 50 theta burst sessions over 5 days (10 per day) instead of 36 sessions over 6 weeks. The combination of precision targeting and accelerated dosing produces higher remission rates than standard TMS.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">SNT uses fMRI-guided targeting to personalize coil placement to your brain connectivity, rather than relying on external skull landmarks. It also delivers 50 theta burst sessions over 5 days (10 per day) instead of 36 sessions over 6 weeks. The combination of precision targeting and accelerated dosing produces higher remission rates than standard TMS.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is SNT FDA-approved?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is SNT FDA-approved?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">SNT itself is not separately FDA-approved. It uses FDA-cleared TMS devices and protocols (theta burst stimulation) in an accelerated, neuroimaging-guided application. The FDA has not issued a specific clearance for SNT as a protocol.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">SNT itself is not separately FDA-approved. It uses FDA-cleared TMS devices and protocols (theta burst stimulation) in an accelerated, neuroimaging-guided application. The FDA has not issued a specific clearance for SNT as a protocol.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does insurance cover Stanford Neuromodulation Therapy?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does insurance cover Stanford Neuromodulation Therapy?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Insurance coverage is inconsistent. Some commercial insurers cover the TMS portion under existing codes. Medicare does not yet have specific codes for accelerated protocols. The fMRI targeting component may not be covered separately. Check with your provider's billing team and appeal denials when appropriate.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Insurance coverage is inconsistent. Some commercial insurers cover the TMS portion under existing codes. Medicare does not yet have specific codes for accelerated protocols. The fMRI targeting component may not be covered separately. Check with your provider's billing team and appeal denials when appropriate.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is SNT safe?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is SNT safe?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Published safety data shows side effects comparable to standard TMS: scalp discomfort and headache, mostly during the first day or two. No increase in serious adverse events has been reported with the accelerated protocol.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Published safety data shows side effects comparable to standard TMS: scalp discomfort and headache, mostly during the first day or two. No increase in serious adverse events has been reported with the accelerated protocol.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Who should not get SNT?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Who should not get SNT?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">People with metal implants near the head, a history of seizures, or certain neurological conditions may not be candidates. Your TMS psychiatrist will screen for contraindications during the evaluation appointment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">People with metal implants near the head, a history of seizures, or certain neurological conditions may not be candidates. Your TMS psychiatrist will screen for contraindications during the evaluation appointment.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

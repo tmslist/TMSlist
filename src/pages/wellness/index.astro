@@ -1,5 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
+import EditorialSection from '../../components/editorial/EditorialSection.astro';
+import EditorialCard from '../../components/editorial/EditorialCard.astro';
+import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
 import { getWellnessClinics } from '../../data/verified-clinics';
 
 const wellnessClinics = getWellnessClinics();
@@ -13,177 +17,118 @@ const description = "Discover wellness TMS clinics offering Exomind therapy for 
     { name: "Technology", url: "/technology/" },
     { name: "Wellness TMS", url: "/wellness/" },
 ]}>
-    <main class="min-h-screen">
-        <!-- Hero -->
-        <section class="relative bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 pointer-events-none"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-400 dark:text-slate-500 mb-8 flex-wrap" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-600 dark:hover:text-violet-400 transition-colors">Home</a>
-                    <span class="text-slate-300 dark:text-slate-600">/</span>
-                    <a href="/technology/" class="hover:text-violet-600 dark:hover:text-violet-400 transition-colors">Technology</a>
-                    <span class="text-slate-300 dark:text-slate-600">/</span>
-                    <span class="text-slate-700 dark:text-slate-300 font-medium">Wellness TMS</span>
-                </nav>
 
-                <div class="max-w-3xl">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-400 border border-emerald-100 rounded-full mb-6">
-                        <span class="flex h-2 w-2 rounded-full bg-emerald-500"></span>
-                        <span class="text-xs font-semibold text-emerald-700 dark:text-emerald-400 tracking-wide">Emerging Category</span>
-                    </div>
-                    <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100 mb-4 leading-tight">
-                        Wellness <span class="text-violet-600 dark:text-violet-400">TMS</span>
-                    </h1>
-                    <p class="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
-                        Beyond clinical treatment, wellness TMS uses technologies like Exomind for cognitive enhancement,
-                        focus improvement, and mood optimization — without a medical diagnosis requirement.
-                    </p>
-                </div>
-            </div>
-        </section>
+<main style="background:var(--paper)">
+  <EditorialHero
+    eyebrow="Emerging Category"
+    eyebrowDot="#22c55e"
+    title="TMS for"
+    titleAccent="peak performance."
+    description="Beyond clinical treatment, wellness TMS uses technologies like Exomind for cognitive enhancement, focus improvement, and mood optimization — without a medical diagnosis requirement."
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Technology", href: "/technology/" }, { label: "Wellness TMS" }]}
+    ctas={[
+      { label: "Browse Wellness Clinics", href: "#clinics" },
+      { label: "Compare Clinical vs Wellness", href: "#compare", variant: "outline" },
+    ]}
+    stats={[
+      { value: wellnessClinics.length, label: "Wellness Clinics", color: "ink" },
+      { value: "20-30", label: "Min/Session", color: "accent" },
+      { value: "HSA", label: "Eligible", color: "warm" },
+    ]}
+  />
 
-        <!-- What is Wellness TMS -->
-        <section class="py-12 md:py-20">
-            <div class="container mx-auto px-4 md:px-6">
-                <div class="max-w-4xl mx-auto">
-                    <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-slate-100 mb-6">What is Wellness TMS?</h2>
-                    <div class="prose prose-lg max-w-none text-gray-600 dark:text-slate-400">
-                        <p>
-                            <strong>Wellness TMS</strong> is an emerging category of neuromodulation that uses transcranial magnetic stimulation 
-                            for cognitive enhancement and brain optimization—separate from clinical TMS used to treat diagnosed conditions like depression or OCD.
-                        </p>
-                        <p>
-                            Technologies like <strong>Exomind</strong> offer "brain training" protocols designed to:
-                        </p>
-                        <ul>
-                            <li>Improve focus and concentration</li>
-                            <li>Enhance cognitive performance</li>
-                            <li>Optimize mood and mental clarity</li>
-                            <li>Support peak mental performance for executives and professionals</li>
-                        </ul>
-                        <p>
-                            Unlike clinical TMS, wellness TMS is typically offered as a self-pay service and does not require a psychiatric diagnosis.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <EditorialSection
+    title="What is Wellness TMS?"
+    intro="A new category of neuromodulation focused on cognitive enhancement — separate from clinical TMS for diagnosed conditions."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>'
+    tone="warm"
+  >
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div style="background:var(--paper2); border:1px solid var(--line); border-radius:1.5rem; padding:1.5rem;">
+        <h3 class="serif" style="font-size:1.125rem; color:var(--ink); margin:0 0 0.5rem;">Improve Focus</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin:0;">Cognitive performance protocols designed to sharpen attention and concentration.</p>
+      </div>
+      <div style="background:var(--paper2); border:1px solid var(--line); border-radius:1.5rem; padding:1.5rem;">
+        <h3 class="serif" style="font-size:1.125rem; color:var(--ink); margin:0 0 0.5rem;">Boost Cognition</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin:0;">Enhance mental processing speed and memory recall through targeted brain training.</p>
+      </div>
+      <div style="background:var(--paper2); border:1px solid var(--line); border-radius:1.5rem; padding:1.5rem;">
+        <h3 class="serif" style="font-size:1.125rem; color:var(--ink); margin:0 0 0.5rem;">Optimize Mood</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin:0;">Mental clarity and mood elevation without the requirement of a clinical diagnosis.</p>
+      </div>
+      <div style="background:var(--paper2); border:1px solid var(--line); border-radius:1.5rem; padding:1.5rem;">
+        <h3 class="serif" style="font-size:1.125rem; color:var(--ink); margin:0 0 0.5rem;">Peak Performance</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin:0;">Trusted by executives and professionals for cognitive optimization.</p>
+      </div>
+    </div>
+  </EditorialSection>
 
-        <!-- Wellness Clinics -->
-        <section class="py-12 md:py-16 bg-white dark:bg-slate-950">
-            <div class="container mx-auto px-4 md:px-6">
-                <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-slate-100 mb-10 text-center">Wellness TMS Clinics</h2>
+  <EditorialSection
+    title="Wellness TMS Clinics"
+    intro="Verified providers offering Exomind and other wellness TMS protocols."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"/>'
+    tone="success"
+    background="paper2"
+  >
+    <div id="clinics">
+      {wellnessClinics.length > 0 ? (
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {wellnessClinics.map(clinic => (
+            <EditorialCard
+              href={`/clinic/${clinic.slug}`}
+              tag="Wellness · Verified"
+              tagTone="success"
+              title={clinic.name}
+              description={`${clinic.address.city}, ${clinic.address.state} — ${(clinic.description || '').slice(0, 120)}${(clinic.description || '').length > 120 ? '…' : ''}`}
+              size="lg"
+            />
+          ))}
+        </div>
+      ) : (
+        <div style="background:var(--paper); border:1px solid var(--line); border-radius:1.5rem; padding:3rem; text-align:center;">
+          <p style="font-size:15px; color:var(--muted); margin:0;">Wellness TMS clinic data is being compiled. Check back soon.</p>
+        </div>
+      )}
+    </div>
+  </EditorialSection>
 
-                {wellnessClinics.length > 0 ? (
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {wellnessClinics.map(clinic => (
-                            <article class="bg-gray-50 dark:bg-slate-900 dark:border-slate-800 rounded-2xl p-6 border border-gray-100 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all">
-                                <div class="flex items-center gap-2 mb-4">
-                                    <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/50 dark:text-emerald-400 text-emerald-700 text-xs font-semibold rounded-full">Wellness</span>
-                                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 dark:text-blue-400 text-blue-700 text-xs font-semibold rounded-full">Verified</span>
-                                </div>
-                                <h3 class="text-xl font-semibold text-gray-900 dark:text-slate-100 mb-2">{clinic.name}</h3>
-                                <p class="text-gray-500 dark:text-slate-400 text-sm mb-4">{clinic.address.city}, {clinic.address.state}</p>
-                                <p class="text-gray-600 dark:text-slate-400 text-sm mb-4 line-clamp-2">{clinic.description}</p>
+  <EditorialSection
+    title="Clinical vs Wellness TMS"
+    intro="Both use magnetic stimulation, but the goals, regulation, and payment models differ."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>'
+    tone="accent"
+    noBorder
+  >
+    <div id="compare" style="background:var(--paper2); border:1px solid var(--line); border-radius:1.5rem; overflow:hidden;">
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr style="background:var(--paper);">
+              <th style="text-align:left; padding:1rem 1.25rem; font-family:'Instrument Serif', Georgia, serif; font-size:14px; color:var(--ink); border-bottom:1px solid var(--line);">Aspect</th>
+              <th style="text-align:left; padding:1rem 1.25rem; font-family:'Instrument Serif', Georgia, serif; font-size:14px; color:var(--ink); border-bottom:1px solid var(--line);">Clinical TMS</th>
+              <th style="text-align:left; padding:1rem 1.25rem; font-family:'Instrument Serif', Georgia, serif; font-size:14px; color:var(--ink); border-bottom:1px solid var(--line);">Wellness TMS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:1rem 1.25rem; color:var(--ink2); font-size:14px; font-weight:500; border-bottom:1px solid var(--line);">Diagnosis</td><td style="padding:1rem 1.25rem; color:var(--muted); font-size:14px; border-bottom:1px solid var(--line);">Required (MDD, OCD, etc.)</td><td style="padding:1rem 1.25rem; color:var(--muted); font-size:14px; border-bottom:1px solid var(--line);">Not required</td></tr>
+            <tr><td style="padding:1rem 1.25rem; color:var(--ink2); font-size:14px; font-weight:500; border-bottom:1px solid var(--line);">FDA Status</td><td style="padding:1rem 1.25rem; color:var(--muted); font-size:14px; border-bottom:1px solid var(--line);">Cleared for specific conditions</td><td style="padding:1rem 1.25rem; color:var(--muted); font-size:14px; border-bottom:1px solid var(--line);">Not FDA-cleared</td></tr>
+            <tr><td style="padding:1rem 1.25rem; color:var(--ink2); font-size:14px; font-weight:500; border-bottom:1px solid var(--line);">Insurance</td><td style="padding:1rem 1.25rem; color:var(--muted); font-size:14px; border-bottom:1px solid var(--line);">Often covered</td><td style="padding:1rem 1.25rem; color:var(--muted); font-size:14px; border-bottom:1px solid var(--line);">Self-pay only</td></tr>
+            <tr><td style="padding:1rem 1.25rem; color:var(--ink2); font-size:14px; font-weight:500; border-bottom:1px solid var(--line);">Goal</td><td style="padding:1rem 1.25rem; color:var(--muted); font-size:14px; border-bottom:1px solid var(--line);">Treat specific condition</td><td style="padding:1rem 1.25rem; color:var(--muted); font-size:14px; border-bottom:1px solid var(--line);">Enhance cognitive performance</td></tr>
+            <tr><td style="padding:1rem 1.25rem; color:var(--ink2); font-size:14px; font-weight:500;">Devices</td><td style="padding:1rem 1.25rem; color:var(--muted); font-size:14px;">NeuroStar, BrainsWay, MagVenture</td><td style="padding:1rem 1.25rem; color:var(--muted); font-size:14px;">Exomind, others</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </EditorialSection>
 
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    {clinic.machines.map((machine: string) => (
-                                        <span class="px-2 py-1 bg-white dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 text-gray-600 border border-gray-200 rounded text-xs">{machine}</span>
-                                    ))}
-                                </div>
+  <EditorialCTA
+    title="Try wellness TMS."
+    description="Find a verified wellness TMS clinic offering Exomind protocols and cognitive enhancement programs."
+    ctas={[
+      { label: "Browse Wellness Clinics", href: "#clinics" },
+      { label: "Explore Clinical TMS", href: "/treatments/", variant: "outline" },
+    ]}
+  />
+</main>
 
-                                <a href={`/clinic/${clinic.slug}`} class="block w-full text-center py-3 bg-emerald-600 dark:bg-emerald-500 dark:text-white text-white font-semibold rounded-xl hover:bg-emerald-700 dark:hover:bg-emerald-400 transition-colors">
-                                    View Clinic
-                                </a>
-                            </article>
-                        ))}
-                    </div>
-                ) : (
-                    <div class="text-center py-12 bg-gray-50 dark:bg-slate-900 rounded-2xl">
-                        <p class="text-gray-500 dark:text-slate-400 text-lg">Wellness TMS clinic data is being compiled. Check back soon!</p>
-                    </div>
-                )}
-            </div>
-        </section>
-
-        <!-- Exomind Section -->
-        <section class="py-12 md:py-20">
-            <div class="container mx-auto px-4 md:px-6">
-                <div class="dark-section bg-gradient-to-br from-violet-600 to-blue-700 rounded-3xl p-8 md:p-12">
-                    <div class="max-w-3xl">
-                        <h2 class="text-2xl md:text-3xl font-semibold mb-4">About Exomind</h2>
-                        <p class="text-violet-100 text-lg mb-6">
-                            Exomind is a leading wellness TMS technology designed for cognitive enhancement and brain optimization. 
-                            Unlike clinical TMS devices, Exomind focuses on improving mental performance without treating a specific medical condition.
-                        </p>
-                        <ul class="space-y-3">
-                            <li class="flex items-start gap-3">
-                                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                <span>Non-invasive brain stimulation</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                <span>No diagnosis required</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                <span>Self-pay (HSA/FSA eligible)</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                <span>Sessions typically 20-30 minutes</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Clinical vs Wellness -->
-        <section class="py-12 md:py-16 bg-white dark:bg-slate-950">
-            <div class="container mx-auto px-4 md:px-6">
-                <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-slate-100 mb-10 text-center">Clinical vs Wellness TMS</h2>
-
-                <div class="max-w-4xl mx-auto overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="bg-gray-100 dark:bg-slate-800">
-                                <th class="text-left p-4 font-semibold text-gray-900 dark:text-slate-100">Aspect</th>
-                                <th class="text-left p-4 font-semibold text-gray-900 dark:text-slate-100">Clinical TMS</th>
-                                <th class="text-left p-4 font-semibold text-gray-900 dark:text-slate-100">Wellness TMS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-gray-100 dark:border-slate-800">
-                                <td class="p-4 text-gray-700 dark:text-slate-300">Diagnosis</td>
-                                <td class="p-4 text-gray-600 dark:text-slate-400">Required (MDD, OCD, etc.)</td>
-                                <td class="p-4 text-gray-600 dark:text-slate-400">Not required</td>
-                            </tr>
-                            <tr class="border-b border-gray-100 dark:border-slate-800">
-                                <td class="p-4 text-gray-700 dark:text-slate-300">FDA Status</td>
-                                <td class="p-4 text-gray-600 dark:text-slate-400">FDA-cleared for specific conditions</td>
-                                <td class="p-4 text-gray-600 dark:text-slate-400">Not FDA-cleared</td>
-                            </tr>
-                            <tr class="border-b border-gray-100 dark:border-slate-800">
-                                <td class="p-4 text-gray-700 dark:text-slate-300">Insurance</td>
-                                <td class="p-4 text-gray-600 dark:text-slate-400">Often covered</td>
-                                <td class="p-4 text-gray-600 dark:text-slate-400">Self-pay only</td>
-                            </tr>
-                            <tr class="border-b border-gray-100 dark:border-slate-800">
-                                <td class="p-4 text-gray-700 dark:text-slate-300">Goal</td>
-                                <td class="p-4 text-gray-600 dark:text-slate-400">Treat specific condition</td>
-                                <td class="p-4 text-gray-600 dark:text-slate-400">Enhance cognitive performance</td>
-                            </tr>
-                            <tr>
-                                <td class="p-4 text-gray-700 dark:text-slate-300">Devices</td>
-                                <td class="p-4 text-gray-600 dark:text-slate-400">NeuroStar, BrainsWay, MagVenture</td>
-                                <td class="p-4 text-gray-600 dark:text-slate-400">Exomind, others</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-    </main>
 </Layout>

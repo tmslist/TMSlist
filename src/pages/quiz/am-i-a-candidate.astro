@@ -27,20 +27,20 @@ const quizSchema = JSON.stringify({
 ---
 
 <Layout title={title} description={description} noindex={true} schema={quizSchema}>
-    <main class="min-h-screen bg-gradient-to-b from-slate-50 to-white py-12">
+    <main class="min-h-screen bg-gradient-to-b from-[var(--paper2)] to-white py-12">
         <div class="container mx-auto px-4 max-w-2xl">
             <!-- Progress Bar -->
             <div class="mb-8">
                 <div
-                    class="flex justify-between text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide"
+                    class="flex justify-between text-xs font-semibold text-[var(--muted)] mb-2 uppercase tracking-wide"
                 >
                     <span>Assessment Progress</span>
                     <span id="progress-text">0%</span>
                 </div>
-                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-2 bg-[var(--paper2)] rounded-full overflow-hidden">
                     <div
                         id="progress-bar"
-                        class="h-full bg-violet-600 transition-all duration-500 ease-out"
+                        class="h-full bg-[var(--ink)] transition-all duration-500 ease-out"
                         style="width: 0%"
                     >
                     </div>
@@ -49,7 +49,7 @@ const quizSchema = JSON.stringify({
 
             <!-- Quiz Card -->
             <div
-                class="bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 overflow-hidden"
+                class="bg-[var(--paper)] rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-[var(--line)] overflow-hidden"
             >
                 <!-- Intro Slide -->
                 <div
@@ -57,7 +57,7 @@ const quizSchema = JSON.stringify({
                     class="quiz-slide p-8 md:p-12 text-center"
                 >
                     <div
-                        class="w-16 h-16 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center mx-auto mb-6"
+                        class="w-16 h-16 bg-[rgba(10,22,40,0.08)] text-[var(--accent)] rounded-full flex items-center justify-center mx-auto mb-6"
                     >
                         <svg
                             class="w-8 h-8"
@@ -72,21 +72,21 @@ const quizSchema = JSON.stringify({
                             ></path></svg
                         >
                     </div>
-                    <h1 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">
+                    <h1 class="text-3xl font-semibold tracking-tight text-[var(--ink)] mb-4">
                         Is TMS Right For You?
                     </h1>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                    <p class="text-lg text-[var(--muted)] mb-8 leading-relaxed">
                         TMS is an FDA-cleared treatment for depression that
                         hasn't responded to medications. Take this confidential
                         2-minute quiz to check your eligibility.
                     </p>
                     <button
                         onclick="nextSlide('intro', 'q1')"
-                        class="w-full sm:w-auto px-8 py-4 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-all transform hover:-translate-y-1 shadow-lg shadow-violet-200"
+                        class="w-full sm:w-auto px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-all transform hover:-translate-y-1 shadow-lg shadow-[rgba(10,22,40,0.1)]"
                     >
                         Start Assessment
                     </button>
-                    <p class="text-xs text-gray-400 mt-6">
+                    <p class="text-xs text-[var(--muted)] mt-6">
                         No personal information required to take the quiz.
                     </p>
                 </div>
@@ -94,39 +94,39 @@ const quizSchema = JSON.stringify({
                 <!-- Question 1: Diagnosis -->
                 <div id="slide-q1" class="quiz-slide hidden p-8 md:p-12">
                     <span
-                        class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >Question 1 of 5</span
                     >
-                    <h2 class="text-2xl font-semibold text-gray-900 mb-8">
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">
                         Have you been diagnosed with Major Depressive Disorder
                         (MDD)?
                     </h2>
                     <div class="space-y-3">
                         <button
                             onclick="recordAnswer('diagnosis', true); nextSlide('q1', 'q2')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             Yes, I have a formal diagnosis
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                         <button
                             onclick="recordAnswer('diagnosis', false); nextSlide('q1', 'q2')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             I suspect I have depression, but not diagnosed
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                         <button
                             onclick="recordAnswer('diagnosis', false); nextSlide('q1', 'q2')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             No
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                     </div>
@@ -135,47 +135,47 @@ const quizSchema = JSON.stringify({
                 <!-- Question 2: Medication History -->
                 <div id="slide-q2" class="quiz-slide hidden p-8 md:p-12">
                     <span
-                        class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >Question 2 of 5</span
                     >
-                    <h2 class="text-2xl font-semibold text-gray-900 mb-8">
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">
                         How many different antidepressants have you tried?
                     </h2>
                     <div class="space-y-3">
                         <button
                             onclick="recordAnswer('meds', 0); nextSlide('q2', 'q3')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             None
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                         <button
                             onclick="recordAnswer('meds', 1); nextSlide('q2', 'q3')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             1 medication
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                         <button
                             onclick="recordAnswer('meds', 2); nextSlide('q2', 'q3')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             2 to 4 medications
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                         <button
                             onclick="recordAnswer('meds', 5); nextSlide('q2', 'q3')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             5 or more
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                     </div>
@@ -184,30 +184,30 @@ const quizSchema = JSON.stringify({
                 <!-- Question 3: Side Effects -->
                 <div id="slide-q3" class="quiz-slide hidden p-8 md:p-12">
                     <span
-                        class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >Question 3 of 5</span
                     >
-                    <h2 class="text-2xl font-semibold text-gray-900 mb-8">
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">
                         Are you experiencing side effects from your current
                         medications?
                     </h2>
                     <div class="space-y-3">
                         <button
                             onclick="recordAnswer('sideEffects', true); nextSlide('q3', 'q4')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             Yes, they are bothersome
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                         <button
                             onclick="recordAnswer('sideEffects', false); nextSlide('q3', 'q4')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             No, or only mild side effects
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                     </div>
@@ -216,30 +216,30 @@ const quizSchema = JSON.stringify({
                 <!-- Question 4: Current Status -->
                 <div id="slide-q4" class="quiz-slide hidden p-8 md:p-12">
                     <span
-                        class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >Question 4 of 5</span
                     >
-                    <h2 class="text-2xl font-semibold text-gray-900 mb-8">
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">
                         Do you feel your depression has adequately improved with
                         medication?
                     </h2>
                     <div class="space-y-3">
                         <button
                             onclick="recordAnswer('improvement', true); nextSlide('q4', 'q5')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             Yes, I feel much better
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                         <button
                             onclick="recordAnswer('improvement', false); nextSlide('q4', 'q5')"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             No, I still have significant symptoms
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                     </div>
@@ -248,29 +248,29 @@ const quizSchema = JSON.stringify({
                 <!-- Question 5: Insurance -->
                 <div id="slide-q5" class="quiz-slide hidden p-8 md:p-12">
                     <span
-                        class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >Last Question</span
                     >
-                    <h2 class="text-2xl font-semibold text-gray-900 mb-8">
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">
                         Do you have health insurance?
                     </h2>
                     <div class="space-y-3">
                         <button
                             onclick="recordAnswer('insurance', true); showContactForm()"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             Yes, I have health insurance or public coverage
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                         <button
                             onclick="recordAnswer('insurance', false); showContactForm()"
-                            class="w-full p-4 text-left border-2 border-gray-100 rounded-xl hover:border-violet-600 hover:bg-violet-50 transition-all font-medium text-gray-700 flex justify-between items-center group"
+                            class="w-full p-4 text-left border-2 border-[var(--line)] rounded-xl hover:border-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-all font-medium text-[var(--ink2)] flex justify-between items-center group"
                         >
                             No / Self-pay
                             <span
-                                class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-violet-600"
+                                class="w-6 h-6 rounded-full border-2 border-[var(--line)] group-hover:border-[var(--ink)]"
                             ></span>
                         </button>
                     </div>
@@ -282,13 +282,13 @@ const quizSchema = JSON.stringify({
                     class="quiz-slide hidden p-8 md:p-12 text-center"
                 >
                     <span
-                        class="text-violet-600 font-semibold text-sm tracking-wider uppercase mb-2 block"
+                        class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block"
                         >One Last Step</span
                     >
-                    <h2 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">
+                    <h2 class="text-3xl font-semibold tracking-tight text-[var(--ink)] mb-4">
                         Unlock Your Results
                     </h2>
-                    <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto">
+                    <p class="text-lg text-[var(--muted)] mb-8 max-w-lg mx-auto">
                         Enter your details below to see your eligibility
                         analysis and receive a copy via email.
                     </p>
@@ -300,46 +300,46 @@ const quizSchema = JSON.stringify({
                     >
                         <div class="text-left">
                             <label
-                                class="block text-sm font-semibold text-gray-700 mb-1"
+                                class="block text-sm font-semibold text-[var(--ink2)] mb-1"
                                 >Full Name</label
                             >
                             <input
                                 type="text"
                                 id="lead-name"
-                                class="w-full rounded-xl border-gray-200 focus:ring-violet-500 focus:border-violet-500"
+                                class="w-full rounded-xl border-[var(--line)] focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)]"
                                 required
                                 placeholder="John Doe"
                             />
                         </div>
                         <div class="text-left">
                             <label
-                                class="block text-sm font-semibold text-gray-700 mb-1"
+                                class="block text-sm font-semibold text-[var(--ink2)] mb-1"
                                 >Email Address</label
                             >
                             <input
                                 type="email"
                                 id="lead-email"
-                                class="w-full rounded-xl border-gray-200 focus:ring-violet-500 focus:border-violet-500"
+                                class="w-full rounded-xl border-[var(--line)] focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)]"
                                 required
                                 placeholder="john@example.com"
                             />
                         </div>
                         <div class="text-left">
                             <label
-                                class="block text-sm font-semibold text-gray-700 mb-1"
+                                class="block text-sm font-semibold text-[var(--ink2)] mb-1"
                                 >Phone Number (Optional)</label
                             >
                             <input
                                 type="tel"
                                 id="lead-phone"
-                                class="w-full rounded-xl border-gray-200 focus:ring-violet-500 focus:border-violet-500"
+                                class="w-full rounded-xl border-[var(--line)] focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)]"
                                 placeholder="(555) 123-4567"
                             />
                         </div>
 
                         <button
                             type="submit"
-                            class="w-full py-4 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-all shadow-lg shadow-violet-200 flex items-center justify-center gap-2"
+                            class="w-full py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-all shadow-lg shadow-[rgba(10,22,40,0.1)] flex items-center justify-center gap-2"
                         >
                             <span>See My Results</span>
                             <svg
@@ -378,10 +378,10 @@ const quizSchema = JSON.stringify({
                                 d="M5 13l4 4L19 7"></path></svg
                         >
                     </div>
-                    <h2 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">
+                    <h2 class="text-3xl font-semibold tracking-tight text-[var(--ink)] mb-4">
                         You Are a Strong Candidate
                     </h2>
-                    <p class="text-lg text-gray-600 mb-8">
+                    <p class="text-lg text-[var(--muted)] mb-8">
                         Based on your answers, you appear to meet the standard
                         FDA and insurance guidelines for TMS Therapy (diagnosis
                         of depression + medication resistance).
@@ -408,13 +408,13 @@ const quizSchema = JSON.stringify({
                     </div>
                     <a
                         href="/us/"
-                        class="quiz-geo-link block w-full px-8 py-4 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-all shadow-lg shadow-violet-200 mb-4"
+                        class="quiz-geo-link block w-full px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-all shadow-lg shadow-[rgba(10,22,40,0.1)] mb-4"
                     >
                         Find a Clinic Near You
                     </a>
                     <a
                         href="/insurance/"
-                        class="text-violet-600 font-semibold hover:underline"
+                        class="text-[var(--accent)] font-semibold hover:underline"
                         >Check Your Insurance Coverage</a
                     >
                 </div>
@@ -437,29 +437,29 @@ const quizSchema = JSON.stringify({
                             ></path></svg
                         >
                     </div>
-                    <h2 class="text-3xl font-semibold tracking-tight text-gray-900 mb-4">
+                    <h2 class="text-3xl font-semibold tracking-tight text-[var(--ink)] mb-4">
                         You May Be a Candidate
                     </h2>
-                    <p class="text-lg text-gray-600 mb-8">
+                    <p class="text-lg text-[var(--muted)] mb-8">
                         You currently may not meet all the strict criteria for
                         automatic insurance coverage (often requires 2-4 failed
                         medications), but TMS could still effectively treat your
                         symptoms.
                     </p>
-                    <p class="text-gray-500 mb-8 text-sm">
+                    <p class="text-[var(--muted)] mb-8 text-sm">
                         Many clinics offer self-pay options or can advocate for
                         coverage if you have severe side effects from
                         medications.
                     </p>
                     <a
                         href="/specialists/"
-                        class="block w-full px-8 py-4 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-all shadow-lg shadow-violet-200 mb-4"
+                        class="block w-full px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-all shadow-lg shadow-[rgba(10,22,40,0.1)] mb-4"
                     >
                         Talk to a TMS Specialist
                     </a>
                     <a
                         href="/us/"
-                        class="quiz-geo-link text-gray-500 font-semibold hover:text-gray-900 transition-colors"
+                        class="quiz-geo-link text-[var(--muted)] font-semibold hover:text-[var(--ink)] transition-colors"
                         >Browse Clinics Anyway</a
                     >
                 </div>
@@ -506,7 +506,7 @@ const quizSchema = JSON.stringify({
         const btn = document.querySelector("#quiz-lead-form button");
         const originalText = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-slate-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...`;
+        btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-[var(--ink)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...`;
 
         const leadData = {
             type: "quiz-lead",

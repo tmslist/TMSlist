@@ -149,9 +149,9 @@ const ZAPIER_ACTIONS: ZapierAction[] = [
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm mb-6">
-      <div className="px-6 py-4 border-b border-gray-100">
-        <h2 className="text-base font-semibold text-gray-900">{title}</h2>
+    <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm mb-6">
+      <div className="px-6 py-4 border-b border-[var(--line)]">
+        <h2 className="text-base font-semibold text-[var(--ink)]">{title}</h2>
       </div>
       <div className="p-6">{children}</div>
     </div>
@@ -161,25 +161,25 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function TriggerCard({ trigger }: { trigger: ZapierTrigger }) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+    <div className="border border-[var(--line)] rounded-lg p-4 hover:bg-[var(--paper2)] transition-colors">
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <h4 className="text-sm font-semibold text-gray-900">{trigger.name}</h4>
-          <p className="text-xs text-gray-500 mt-0.5">{trigger.description}</p>
-          <span className="inline-block mt-1 px-2 py-0.5 bg-violet-50 text-violet-700 text-xs rounded font-mono">
+          <h4 className="text-sm font-semibold text-[var(--ink)]">{trigger.name}</h4>
+          <p className="text-xs text-[var(--muted)] mt-0.5">{trigger.description}</p>
+          <span className="inline-block mt-1 px-2 py-0.5 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs rounded font-mono">
             {trigger.event}
           </span>
         </div>
         <button
           onClick={() => setExpanded(!expanded)}
-          className="ml-3 px-2 py-1 text-xs text-gray-400 hover:text-gray-600"
+          className="ml-3 px-2 py-1 text-xs text-[var(--muted)] hover:text-[var(--ink2)]"
         >
           {expanded ? 'Hide' : 'Payload'}
         </button>
       </div>
       {expanded && (
-        <div className="mt-3 bg-slate-900 rounded-lg p-3">
-          <pre className="text-xs font-mono text-gray-300 overflow-auto max-h-48">
+        <div className="mt-3 bg-[var(--ink)] rounded-lg p-3">
+          <pre className="text-xs font-mono text-[var(--line)] overflow-auto max-h-48">
             {JSON.stringify(trigger.samplePayload, null, 2)}
           </pre>
         </div>
@@ -190,13 +190,13 @@ function TriggerCard({ trigger }: { trigger: ZapierTrigger }) {
 
 function ActionCard({ action }: { action: ZapierAction }) {
   return (
-    <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
-      <h4 className="text-sm font-semibold text-gray-900">{action.name}</h4>
-      <p className="text-xs text-gray-500 mt-0.5 mb-3">{action.description}</p>
+    <div className="border border-[var(--line)] rounded-lg p-4 hover:bg-[var(--paper2)] transition-colors">
+      <h4 className="text-sm font-semibold text-[var(--ink)]">{action.name}</h4>
+      <p className="text-xs text-[var(--muted)] mt-0.5 mb-3">{action.description}</p>
       <div className="space-y-1">
         {action.configFields.map(f => (
           <div key={f.name} className="flex items-center gap-1">
-            <span className="text-xs text-gray-600 font-mono">
+            <span className="text-xs text-[var(--ink2)] font-mono">
               {f.label}
               {f.required && <span className="text-red-500 ml-0.5">*</span>}
             </span>
@@ -281,7 +281,7 @@ export default function AdminZapierIntegration() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-4 border-violet-200 border-t-violet-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[rgba(10,22,40,0.15)] border-t-[#0A1628] rounded-full animate-spin" />
       </div>
     );
   }
@@ -289,14 +289,14 @@ export default function AdminZapierIntegration() {
   return (
     <div>
       {toast && (
-        <div className="fixed top-4 right-4 z-50 bg-gray-900 text-white px-4 py-2.5 rounded-lg shadow-lg text-sm animate-in fade-in">
+        <div className="fixed top-4 right-4 z-50 bg-[var(--ink)] text-white px-4 py-2.5 rounded-lg shadow-lg text-sm animate-in fade-in">
           {toast}
         </div>
       )}
 
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-gray-900">Zapier Integration</h1>
-        <p className="text-gray-500 mt-1">Connect TMSList to 5,000+ apps via Zapier</p>
+        <h1 className="text-2xl font-semibold text-[var(--ink)]">Zapier Integration</h1>
+        <p className="text-[var(--muted)] mt-1">Connect TMSList to 5,000+ apps via Zapier</p>
       </div>
 
       {/* Zapier App Info */}
@@ -306,8 +306,8 @@ export default function AdminZapierIntegration() {
             <span className="text-emerald-700 font-bold text-xl">Z</span>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-gray-900">TMSList on Zapier</h3>
-            <p className="text-sm text-gray-500 mt-1">
+            <h3 className="text-base font-semibold text-[var(--ink)]">TMSList on Zapier</h3>
+            <p className="text-sm text-[var(--muted)] mt-1">
               Connect TMSList to 5,000+ apps without writing code. Use our triggers to start workflows
               and our actions to push data back into TMSList.
             </p>
@@ -327,44 +327,44 @@ export default function AdminZapierIntegration() {
       <Section title="API Configuration">
         <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Zapier API Key</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Zapier API Key</label>
             <div className="flex gap-2">
               <input
                 type={revealed ? 'text' : 'password'}
                 value={apiKey}
                 onChange={e => setApiKey(e.target.value)}
                 placeholder="zapier_api_key_..."
-                className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500 font-mono text-xs"
+                className="flex-1 rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] font-mono text-xs"
               />
               <button
                 onClick={() => setRevealed(!revealed)}
-                className="px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 rounded-lg transition-colors"
+                className="px-3 py-2 text-sm text-[var(--muted)] hover:bg-[var(--paper2)] rounded-lg transition-colors"
               >
                 {revealed ? 'Hide' : 'Show'}
               </button>
             </div>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-[var(--muted)] mt-1">
               Find your API key in your Zapier account settings under "My Integration"
             </p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Webhook URL (incoming)</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Webhook URL (incoming)</label>
             <div className="flex gap-2">
               <input
                 type="text"
                 value={webhookUrl}
                 readOnly
-                className="flex-1 rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm font-mono text-xs text-gray-500"
+                className="flex-1 rounded-lg border border-[var(--line)] bg-[var(--paper2)] px-3 py-2 text-sm font-mono text-xs text-[var(--muted)]"
               />
               <button
                 onClick={() => navigator.clipboard.writeText(webhookUrl)}
-                className="px-3 py-2 text-sm text-violet-600 hover:bg-violet-50 rounded-lg transition-colors"
+                className="px-3 py-2 text-sm text-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] rounded-lg transition-colors"
               >
                 Copy
               </button>
             </div>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-[var(--muted)] mt-1">
               Use this URL as the webhook URL in your Zapier action steps
             </p>
           </div>
@@ -379,14 +379,14 @@ export default function AdminZapierIntegration() {
             <button
               onClick={saveConfig}
               disabled={saving}
-              className="px-5 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-xl hover:bg-violet-700 disabled:opacity-50 transition-colors"
+              className="px-5 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
             >
               {saving ? 'Saving...' : 'Save Configuration'}
             </button>
             <button
               onClick={testConnection}
               disabled={testing}
-              className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+              className="px-5 py-2.5 text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-xl transition-colors"
             >
               {testing ? 'Testing...' : 'Test Connection'}
             </button>
@@ -396,7 +396,7 @@ export default function AdminZapierIntegration() {
 
       {/* Available Triggers */}
       <Section title="Available Triggers">
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-[var(--muted)] mb-4">
           These events in TMSList can start a Zapier workflow:
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -406,7 +406,7 @@ export default function AdminZapierIntegration() {
 
       {/* Available Actions */}
       <Section title="Available Actions">
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-[var(--muted)] mb-4">
           These actions can be performed in TMSList from a Zap:
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -423,14 +423,14 @@ export default function AdminZapierIntegration() {
             { method: 'POST', endpoint: '/api/zapier/actions/:id', desc: 'Perform an action' },
             { method: 'POST', endpoint: '/api/zapier/webhook', desc: 'Incoming webhook from Zapier' },
           ].map(api => (
-            <div key={api.endpoint} className="flex items-center gap-3 bg-gray-50 rounded-lg px-4 py-3">
+            <div key={api.endpoint} className="flex items-center gap-3 bg-[var(--paper2)] rounded-lg px-4 py-3">
               <span className={`px-2 py-1 rounded text-xs font-bold ${
-                api.method === 'GET' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700'
+                api.method === 'GET' ? 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]' : 'bg-emerald-100 text-emerald-700'
               }`}>
                 {api.method}
               </span>
-              <span className="text-sm font-mono text-gray-800">{api.endpoint}</span>
-              <span className="text-xs text-gray-500 ml-auto">{api.desc}</span>
+              <span className="text-sm font-mono text-[var(--ink)]">{api.endpoint}</span>
+              <span className="text-xs text-[var(--muted)] ml-auto">{api.desc}</span>
             </div>
           ))}
         </div>

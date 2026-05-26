@@ -154,19 +154,19 @@ function CommentItem({
                 imageUrl={comment.imageUrl || undefined}
               />
             </a>
-            <span className="text-[11px] text-gray-400">{timeAgo(comment.createdAt)}</span>
+            <span className="text-[11px] text-[var(--muted)]">{timeAgo(comment.createdAt)}</span>
             {isEdited(comment.createdAt, comment.updatedAt) && (
-              <span className="text-[10px] text-gray-400 italic">edited</span>
+              <span className="text-[10px] text-[var(--muted)] italic">edited</span>
             )}
           </div>
 
-          <p className="text-sm text-gray-700 whitespace-pre-line mb-2 leading-relaxed">{comment.body}</p>
+          <p className="text-sm text-[var(--ink2)] whitespace-pre-line mb-2 leading-relaxed">{comment.body}</p>
 
           <div className="flex items-center gap-3">
             {!isLocked && !comment.parentId && (
               <button
                 onClick={() => setShowReplyForm(!showReplyForm)}
-                className="text-xs text-gray-400 hover:text-violet-600 font-medium transition-colors"
+                className="text-xs text-[var(--muted)] hover:text-[var(--accent)] font-medium transition-colors"
               >
                 Reply
               </button>
@@ -175,7 +175,7 @@ function CommentItem({
             {isPostAuthor && !comment.parentId && (comment.authorRole === 'clinic_owner' || comment.authorRole === 'admin') && (
               <button
                 onClick={handleAcceptAnswer}
-                className={`text-xs font-medium transition-colors ${accepted ? 'text-emerald-600' : 'text-gray-400 hover:text-emerald-600 opacity-0 group-hover:opacity-100'}`}
+                className={`text-xs font-medium transition-colors ${accepted ? 'text-emerald-600' : 'text-[var(--muted)] hover:text-emerald-600 opacity-0 group-hover:opacity-100'}`}
               >
                 {accepted ? 'Accepted' : 'Accept Answer'}
               </button>
@@ -183,7 +183,7 @@ function CommentItem({
             {isAuthenticated && (
               <button
                 onClick={() => setReportTarget(comment.id)}
-                className="text-xs text-gray-400 hover:text-red-500 font-medium transition-colors opacity-0 group-hover:opacity-100"
+                className="text-xs text-[var(--muted)] hover:text-red-500 font-medium transition-colors opacity-0 group-hover:opacity-100"
               >
                 Report
               </button>
@@ -205,7 +205,7 @@ function CommentItem({
 
           {/* Nested replies */}
           {localReplies.length > 0 && (
-            <div className="mt-3 pl-4 border-l-2 border-gray-100 space-y-3">
+            <div className="mt-3 pl-4 border-l-2 border-[var(--line)] space-y-3">
               {localReplies.map(reply => (
                 <div key={reply.id} className="flex gap-3 group">
                   <CommunityVoteButton
@@ -223,9 +223,9 @@ function CommentItem({
                         credential={reply.credential || undefined}
                         imageUrl={reply.imageUrl || undefined}
                       />
-                      <span className="text-[11px] text-gray-400">{timeAgo(reply.createdAt)}</span>
+                      <span className="text-[11px] text-[var(--muted)]">{timeAgo(reply.createdAt)}</span>
                     </div>
-                    <p className="text-sm text-gray-700 whitespace-pre-line leading-relaxed">{reply.body}</p>
+                    <p className="text-sm text-[var(--ink2)] whitespace-pre-line leading-relaxed">{reply.body}</p>
                   </div>
                 </div>
               ))}
@@ -278,7 +278,7 @@ export default function CommunityThread({
   return (
     <div>
       {/* Post body */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6 mb-6">
         <div className="flex gap-4">
           <CommunityVoteButton
             targetType="post"
@@ -292,19 +292,19 @@ export default function CommunityThread({
             <div className="flex items-center gap-2 mb-3">
               <a
                 href={`/community/${post.categorySlug}`}
-                className="text-xs font-semibold text-violet-600 hover:text-violet-700"
+                className="text-xs font-semibold text-[var(--accent)] hover:text-[var(--accent)]"
               >
                 {post.categoryName}
               </a>
-              <span className="text-[11px] text-gray-400">{timeAgo(post.createdAt)}</span>
+              <span className="text-[11px] text-[var(--muted)]">{timeAgo(post.createdAt)}</span>
               {postEdited && (
-                <span className="text-[10px] text-gray-400 italic">edited</span>
+                <span className="text-[10px] text-[var(--muted)] italic">edited</span>
               )}
               {post.isPinned && (
                 <span className="text-[10px] font-bold text-amber-600 uppercase">Pinned</span>
               )}
               {post.isLocked && (
-                <span className="text-[10px] text-gray-400 flex items-center gap-0.5">
+                <span className="text-[10px] text-[var(--muted)] flex items-center gap-0.5">
                   <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                   </svg>
@@ -313,10 +313,10 @@ export default function CommunityThread({
               )}
             </div>
 
-            <h1 className="text-xl font-bold text-gray-900 mb-3">{post.title}</h1>
-            <div className="text-sm text-gray-700 whitespace-pre-line leading-relaxed mb-4">{post.body}</div>
+            <h1 className="text-xl font-bold text-[var(--ink)] mb-3">{post.title}</h1>
+            <div className="text-sm text-[var(--ink2)] whitespace-pre-line leading-relaxed mb-4">{post.body}</div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+            <div className="flex items-center justify-between pt-3 border-t border-[var(--line)]">
               <a href={`/community/user/${post.authorId}`} className="hover:opacity-80 transition-opacity">
                 <CommunityAuthorBadge
                   authorName={post.authorName}
@@ -326,13 +326,13 @@ export default function CommunityThread({
               </a>
 
               <div className="flex items-center gap-3">
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-[var(--muted)]">
                   {post.commentCount} comment{post.commentCount !== 1 ? 's' : ''}
                 </span>
                 {isAuthenticated && (
                   <button
                     onClick={() => setReportingPost(true)}
-                    className="text-xs text-gray-400 hover:text-red-500 transition-colors"
+                    className="text-xs text-[var(--muted)] hover:text-red-500 transition-colors"
                   >
                     Report
                   </button>
@@ -355,15 +355,15 @@ export default function CommunityThread({
       )}
 
       {post.isLocked && (
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center mb-6">
-          <p className="text-sm text-gray-500">This thread has been locked. No new comments can be added.</p>
+        <div className="bg-[var(--paper2)] border border-[var(--line)] rounded-lg p-4 text-center mb-6">
+          <p className="text-sm text-[var(--muted)]">This thread has been locked. No new comments can be added.</p>
         </div>
       )}
 
       {/* Comments */}
       <div className="space-y-4">
         {topLevel.length === 0 && (
-          <p className="text-sm text-gray-400 text-center py-6">No comments yet. Be the first to share your thoughts!</p>
+          <p className="text-sm text-[var(--muted)] text-center py-6">No comments yet. Be the first to share your thoughts!</p>
         )}
 
         {topLevel.map(comment => (
@@ -382,17 +382,17 @@ export default function CommunityThread({
 
       {/* Related posts */}
       {relatedPosts.length > 0 && (
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <h3 className="text-sm font-bold text-gray-900 mb-3">Related Discussions</h3>
+        <div className="mt-8 pt-6 border-t border-[var(--line)]">
+          <h3 className="text-sm font-bold text-[var(--ink)] mb-3">Related Discussions</h3>
           <div className="space-y-2">
             {relatedPosts.map(rp => (
               <a
                 key={rp.id}
                 href={`/community/${rp.categorySlug}/${rp.slug}`}
-                className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200 hover:border-violet-200 hover:shadow-sm transition-all"
+                className="flex items-center justify-between p-3 bg-white rounded-lg border border-[var(--line)] hover:border-[rgba(10,22,40,0.15)] hover:shadow-sm transition-all"
               >
-                <span className="text-sm font-medium text-gray-700 line-clamp-1 flex-1 mr-3">{rp.title}</span>
-                <div className="flex items-center gap-3 text-xs text-gray-400 shrink-0">
+                <span className="text-sm font-medium text-[var(--ink2)] line-clamp-1 flex-1 mr-3">{rp.title}</span>
+                <div className="flex items-center gap-3 text-xs text-[var(--muted)] shrink-0">
                   <span>{rp.voteScore} votes</span>
                   <span>{rp.commentCount} comments</span>
                 </div>

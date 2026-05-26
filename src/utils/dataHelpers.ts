@@ -1,6 +1,7 @@
 import { type Clinic } from '../types/clinic';
 import type { Clinic as DbClinic } from '../db/schema';
 import * as queries from '../db/queries';
+import { redis } from './redis';
 
 // ── DB → TEMPLATE MAPPER ──────────────────────────────
 // Maps Drizzle DB rows to the legacy Clinic interface used in all templates.
@@ -151,14 +152,34 @@ export function getStateCodeFromSlug(slug: string): string | undefined {
 
 // ── ASYNC DATA FUNCTIONS (DB-backed) ──────────────────
 
+// Cache TTL in seconds — 5 minutes for clinic data (balance freshness vs perf)
+const CLINICS_CACHE_TTL = 300;
+
 export async function getAllClinics(): Promise<Clinic[]> {
+    const cacheKey = 'clinics:all:operational';
+    const r = redis();
+    if (r) {
+        const cached = await r.get<string>(cacheKey);
+        if (cached) {
+            try { return JSON.parse(cached) as Clinic[]; } catch { /* corrupt, fetch fresh */ }
+        }
+    }
     const rows = await queries.getAllVerifiedClinics();
-    return rows.map(mapDbClinic);
+    const result = rows.map(mapDbClinic);
+    if (r) {
+        r.set(cacheKey, JSON.stringify(result), { ex: CLINICS_CACHE_TTL }).catch(() => {});
+    }
+    return result;
 }
 
 export async function getOperationalClinics(): Promise<Clinic[]> {
-    const rows = await queries.getAllVerifiedClinics();
-    return rows.map(mapDbClinic);
+    // Same query, same cache — avoid duplicate DB hits
+    return getAllClinics();
+}
+
+export function invalidateClinicsCache(): void {
+    const r = redis();
+    if (r) r.del('clinics:all:operational').catch(() => {});
 }
 
 export async function getClinicsByMachine(machine: string): Promise<Clinic[]> {

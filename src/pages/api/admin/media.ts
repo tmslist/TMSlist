@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, sql, and } from 'drizzle-orm';
 import { db } from '../../../db';
 import { mediaLibrary, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 import { v2 as cloudinary } from 'cloudinary';
 
 export const prerender = false;
@@ -43,6 +43,18 @@ export const GET: APIRoute = async ({ request, url }) => {
   }
 };
 
+const ALLOWED_MIME_TYPES = new Set([
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+  'image/avif',
+  'application/pdf',
+  'video/mp4',
+  'video/webm',
+]);
+const MAX_UPLOAD_BYTES = 25 * 1024 * 1024; // 25 MB
+
 // POST: Upload media
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
@@ -58,6 +70,12 @@ export const POST: APIRoute = async ({ request }) => {
     const altText = formData.get('alt_text') as string || '';
 
     if (!file) return json({ error: 'No file provided' }, 400);
+    if (!ALLOWED_MIME_TYPES.has(file.type)) {
+      return json({ error: `Unsupported file type: ${file.type}` }, 415);
+    }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      return json({ error: `File too large (max ${MAX_UPLOAD_BYTES / 1024 / 1024} MB)` }, 413);
+    }
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const b64 = buffer.toString('base64');

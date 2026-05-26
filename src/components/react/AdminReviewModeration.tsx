@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 interface FlaggedReview {
   id: string;
@@ -36,12 +36,12 @@ const SENTIMENT_CONFIG: Record<string, { label: string; color: string; bg: strin
 };
 
 const SOURCE_COLORS: Record<string, string> = {
-  google: 'bg-blue-50 text-blue-700',
+  google: 'bg-[var(--paper2)] text-[var(--ink)]',
   healthgrades: 'bg-emerald-50 text-emerald-700',
   zocdoc: 'bg-orange-50 text-orange-700',
   yelp: 'bg-red-50 text-red-700',
-  vitals: 'bg-purple-50 text-purple-700',
-  tmslist: 'bg-indigo-50 text-indigo-700',
+  vitals: 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)]',
+  tmslist: 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)]',
 };
 
 const FLAG_REASONS = [
@@ -92,7 +92,7 @@ function StarRating({ rating }: { rating: number }) {
   return (
     <span className="text-sm text-yellow-500">
       {[1, 2, 3, 4, 5].map(i => (
-        <span key={i} className={i <= rating ? 'text-yellow-500' : 'text-gray-200'}>&#9733;</span>
+        <span key={i} className={i <= rating ? 'text-yellow-500' : 'text-[var(--line)]'}>&#9733;</span>
       ))}
     </span>
   );
@@ -108,7 +108,7 @@ function Toast({ message, type }: ToastProps) {
     <div className={`fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg text-sm font-medium z-50 animate-fade-in ${
       type === 'success' ? 'bg-emerald-600 text-white' :
       type === 'error' ? 'bg-red-600 text-white' :
-      'bg-indigo-600 text-white'
+      'bg-[var(--ink2)] text-white'
     }`}>
       {message}
     </div>
@@ -136,25 +136,25 @@ function RespondModal({ review, templates, onClose, onSubmit, existingResponse }
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">Respond to Review</h3>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <h3 className="text-lg font-semibold text-[var(--ink)]">Respond to Review</h3>
+          <button onClick={onClose} className="text-[var(--muted)] hover:text-[var(--ink2)]">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
-        <div className="mb-4 p-4 bg-gray-50 rounded-lg">
+        <div className="mb-4 p-4 bg-[var(--paper2)] rounded-lg">
           <div className="flex items-center gap-2 mb-2">
-            <span className="font-semibold text-sm text-gray-900">{review.userName}</span>
+            <span className="font-semibold text-sm text-[var(--ink)]">{review.userName}</span>
             <StarRating rating={review.rating} />
           </div>
-          {review.title && <p className="text-sm font-medium text-gray-800 mb-1">{review.title}</p>}
-          <p className="text-sm text-gray-600">{review.body}</p>
+          {review.title && <p className="text-sm font-medium text-[var(--ink)] mb-1">{review.title}</p>}
+          <p className="text-sm text-[var(--ink2)]">{review.body}</p>
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Response Templates</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-2">Response Templates</label>
           <div className="flex flex-wrap gap-2">
             {templates.map(t => (
               <button
@@ -162,8 +162,8 @@ function RespondModal({ review, templates, onClose, onSubmit, existingResponse }
                 onClick={() => applyTemplate(t)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   selectedTemplate === t.id
-                    ? 'bg-indigo-100 border-indigo-300 text-indigo-700'
-                    : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+                    ? 'bg-[rgba(201,101,74,0.1)] border-[rgba(201,101,74,0.2)] text-[var(--warm)]'
+                    : 'bg-white border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
                 }`}
               >
                 {t.label}
@@ -173,12 +173,12 @@ function RespondModal({ review, templates, onClose, onSubmit, existingResponse }
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Your Response</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-2">Your Response</label>
           <textarea
             value={responseText}
             onChange={(e) => { setResponseText(e.target.value); setSelectedTemplate(null); }}
             rows={5}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+            className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] resize-none"
             placeholder="Write your response..."
           />
         </div>
@@ -186,14 +186,14 @@ function RespondModal({ review, templates, onClose, onSubmit, existingResponse }
         <div className="flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)]"
           >
             Cancel
           </button>
           <button
             onClick={() => onSubmit(review.id, responseText)}
             disabled={!responseText.trim()}
-            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+            className="px-4 py-2 text-sm font-medium text-white bg-[var(--ink2)] rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50"
           >
             Post Response
           </button>
@@ -364,7 +364,7 @@ export default function AdminReviewModeration() {
         <select
           value={flagReason}
           onChange={(e) => setFlagReason(e.target.value)}
-          className="px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-indigo-500"
+          className="px-3 py-2 text-sm border border-[var(--line)] rounded-lg bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
         >
           {FLAG_REASONS.map(f => (
             <option key={f.value} value={f.value}>{f.label}</option>
@@ -378,9 +378,9 @@ export default function AdminReviewModeration() {
               onClick={() => setSentimentFilter(s)}
               className={`px-3 py-2 text-xs font-medium rounded-lg border transition-colors ${
                 sentimentFilter === s
-                  ? s === '' ? 'bg-indigo-600 text-white border-indigo-600'
+                  ? s === '' ? 'bg-[var(--ink2)] text-white border-[rgba(201,101,74,0.2)]'
                   : `${sentimentBg[s]} ${sentimentColors[s]} border-current`
-                  : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
+                  : 'bg-white border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
               }`}
             >
               {s === '' ? 'All Sentiment' : s.charAt(0).toUpperCase() + s.slice(1)}
@@ -390,7 +390,7 @@ export default function AdminReviewModeration() {
 
         <button
           onClick={fetchFlagged}
-          className="ml-auto px-4 py-2 text-sm font-medium text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg hover:bg-indigo-100 transition-colors"
+          className="ml-auto px-4 py-2 text-sm font-medium text-[var(--warm)] bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-lg hover:bg-[rgba(201,101,74,0.1)] transition-colors"
         >
           Refresh
         </button>
@@ -398,9 +398,9 @@ export default function AdminReviewModeration() {
 
       {/* Bulk Action Bar */}
       {selectedIds.size > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[var(--line)] shadow-lg z-40">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <span className="text-sm text-gray-700">
+            <span className="text-sm text-[var(--ink2)]">
               <span className="font-semibold">{selectedIds.size}</span> selected
             </span>
             <div className="flex items-center gap-3">
@@ -420,7 +420,7 @@ export default function AdminReviewModeration() {
               </button>
               <button
                 onClick={() => setSelectedIds(new Set())}
-                className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
+                className="px-4 py-2 text-sm text-[var(--ink2)] hover:text-[var(--ink)]"
               >
                 Clear
               </button>
@@ -431,7 +431,7 @@ export default function AdminReviewModeration() {
 
       {/* Reviews List */}
       {loading ? (
-        <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-500">
+        <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center text-[var(--muted)]">
           <div className="inline-flex items-center gap-2">
             <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -441,7 +441,7 @@ export default function AdminReviewModeration() {
           </div>
         </div>
       ) : reviews.length === 0 ? (
-        <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-500">
+        <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center text-[var(--muted)]">
           No flagged reviews match your filters.
         </div>
       ) : (
@@ -449,21 +449,21 @@ export default function AdminReviewModeration() {
           {reviews.map(review => {
             const sentConfig = SENTIMENT_CONFIG[review.sentiment] || SENTIMENT_CONFIG.neutral;
             return (
-              <div key={review.id} className="bg-white rounded-xl border border-gray-200 p-4">
+              <div key={review.id} className="bg-white rounded-xl border border-[var(--line)] p-4">
                 <div className="flex items-start gap-3">
                   <div className="w-5 pt-1">
                     <input
                       type="checkbox"
                       checked={selectedIds.has(review.id)}
                       onChange={() => toggleSelect(review.id)}
-                      className="w-4 h-4 rounded border-gray-300 text-indigo-600 cursor-pointer"
+                      className="w-4 h-4 rounded border-[var(--line)] text-[var(--warm)] cursor-pointer"
                     />
                   </div>
                   <div className="flex-1 grid grid-cols-12 gap-4">
                     {/* Reviewer info */}
                     <div className="col-span-3 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-semibold text-sm text-gray-900 truncate">{review.userName}</span>
+                        <span className="font-semibold text-sm text-[var(--ink)] truncate">{review.userName}</span>
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${sentConfig.bg} ${sentConfig.color}`}>
                           {sentConfig.label}
                         </span>
@@ -471,10 +471,10 @@ export default function AdminReviewModeration() {
                       <div className="flex items-center gap-1 mb-1">
                         <StarRating rating={review.rating} />
                         {review.helpfulCount > 0 && (
-                          <span className="text-[10px] text-gray-400">Helpful: {review.helpfulCount}</span>
+                          <span className="text-[10px] text-[var(--muted)]">Helpful: {review.helpfulCount}</span>
                         )}
                       </div>
-                      <span className="text-[10px] text-gray-400">
+                      <span className="text-[10px] text-[var(--muted)]">
                         {new Date(review.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                       </span>
                     </div>
@@ -486,7 +486,7 @@ export default function AdminReviewModeration() {
                           href={`/clinic/${review.clinicSlug}/`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm font-medium text-indigo-600 hover:text-indigo-800 hover:underline flex items-center gap-1"
+                          className="text-sm font-medium text-[var(--warm)] hover:text-[var(--warm)] hover:underline flex items-center gap-1"
                         >
                           <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -495,14 +495,14 @@ export default function AdminReviewModeration() {
                           <span className="truncate">{review.clinicName}</span>
                         </a>
                       ) : (
-                        <span className="text-xs text-gray-400">No clinic</span>
+                        <span className="text-xs text-[var(--muted)]">No clinic</span>
                       )}
                     </div>
 
                     {/* Source */}
                     <div className="col-span-1 min-w-0">
                       {review.source && (
-                        <span className={`inline-flex px-2 py-0.5 rounded text-[10px] font-semibold ${SOURCE_COLORS[review.source] || 'bg-gray-50 text-gray-600'}`}>
+                        <span className={`inline-flex px-2 py-0.5 rounded text-[10px] font-semibold ${SOURCE_COLORS[review.source] || 'bg-[var(--paper2)] text-[var(--ink2)]'}`}>
                           {review.source}
                         </span>
                       )}
@@ -518,13 +518,13 @@ export default function AdminReviewModeration() {
                     {/* Content */}
                     <div className="col-span-4 min-w-0">
                       {review.title && (
-                        <p className="text-sm font-medium text-gray-800 mb-0.5 truncate">{review.title}</p>
+                        <p className="text-sm font-medium text-[var(--ink)] mb-0.5 truncate">{review.title}</p>
                       )}
-                      <p className="text-xs text-gray-600 line-clamp-2">{review.body}</p>
+                      <p className="text-xs text-[var(--ink2)] line-clamp-2">{review.body}</p>
                       {responses[review.id] && (
-                        <div className="mt-2 px-2 py-1.5 bg-indigo-50 border border-indigo-100 rounded text-xs">
-                          <span className="font-semibold text-indigo-700">Your reply:</span>
-                          <p className="text-gray-600 mt-0.5">{responses[review.id]}</p>
+                        <div className="mt-2 px-2 py-1.5 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded text-xs">
+                          <span className="font-semibold text-[var(--warm)]">Your reply:</span>
+                          <p className="text-[var(--ink2)] mt-0.5">{responses[review.id]}</p>
                         </div>
                       )}
                     </div>
@@ -548,7 +548,7 @@ export default function AdminReviewModeration() {
                         </button>
                         <button
                           onClick={() => setRespondReview(review)}
-                          className="px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg hover:bg-indigo-100 w-full"
+                          className="px-3 py-1.5 text-xs font-medium text-[var(--warm)] bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-lg hover:bg-[rgba(201,101,74,0.1)] w-full"
                         >
                           Respond
                         </button>

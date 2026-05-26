@@ -129,12 +129,12 @@ const devices: Device[] = [
 const coverageColors: Record<string, string> = {
   'Excellent': 'bg-emerald-100 text-emerald-700',
   'Good': 'bg-amber-100 text-amber-700',
-  'Limited': 'bg-slate-100 text-slate-600',
+  'Limited': 'bg-[var(--paper2)] text-[var(--ink2)]',
 };
 
 const typeColors: Record<string, string> = {
-  'rTMS': 'bg-violet-50 text-violet-700',
-  'dTMS': 'bg-cyan-50 text-cyan-700',
+  'rTMS': 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]',
+  'dTMS': 'bg-[var(--paper2)] text-[var(--accent)]',
   'Navigated': 'bg-emerald-50 text-emerald-700',
   'Robotic': 'bg-amber-50 text-amber-700',
 };
@@ -155,27 +155,27 @@ export default function DeviceComparison() {
             onClick={() => setSelected(device)}
             className={`text-left rounded-2xl p-5 border transition-all ${
               selected?.name === device.name
-                ? 'bg-violet-50 border-violet-300 ring-1 ring-violet-200'
-                : 'bg-white border-slate-100 hover:border-slate-200 hover:shadow-sm'
+                ? 'bg-[rgba(10,22,40,0.08)] border-[rgba(10,22,40,0.2)] ring-1 ring-[rgba(10,22,40,0.15)]'
+                : 'bg-white border-[var(--line)] hover:border-[var(--line)] hover:shadow-sm'
             }`}
           >
             <div className="flex items-start justify-between mb-3">
-              <div className="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center text-lg">🧠</div>
+              <div className="w-10 h-10 rounded-xl bg-[rgba(10,22,40,0.08)] flex items-center justify-center text-lg">🧠</div>
               <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${coverageColors[device.insuranceCoverage]}`}>
                 {device.insuranceCoverage} coverage
               </span>
             </div>
-            <h4 className="text-sm font-bold text-slate-900 mb-1">{device.name}</h4>
-            <p className="text-xs text-slate-400 mb-2">{device.manufacturer}</p>
+            <h4 className="text-sm font-bold text-[var(--ink)] mb-1">{device.name}</h4>
+            <p className="text-xs text-[var(--muted)] mb-2">{device.manufacturer}</p>
             <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${typeColors[device.type]}`}>{device.type}</span>
-            <p className="text-xs text-slate-500 mt-2">{device.price}</p>
+            <p className="text-xs text-[var(--muted)] mt-2">{device.price}</p>
           </button>
         ))}
       </div>
 
       <button
         onClick={() => setShowAll(!showAll)}
-        className="text-sm text-violet-600 font-semibold hover:text-violet-700 transition-colors"
+        className="text-sm text-[var(--accent)] font-semibold hover:text-[var(--accent)] transition-colors"
       >
         {showAll ? 'Show fewer devices' : `Show all ${devices.length} devices →`}
       </button>
@@ -185,10 +185,10 @@ export default function DeviceComparison() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-slate-100">
-                <th className="text-left py-3 pr-4 font-semibold text-slate-500 text-xs uppercase tracking-wider w-1/4">Specification</th>
+              <tr className="border-b border-[var(--line)]">
+                <th className="text-left py-3 pr-4 font-semibold text-[var(--muted)] text-xs uppercase tracking-wider w-1/4">Specification</th>
                 {devices.map(d => (
-                  <th key={d.name} className={`text-center py-3 px-3 font-bold text-xs ${d.name === selected.name ? 'text-violet-600' : 'text-slate-700'}`}>
+                  <th key={d.name} className={`text-center py-3 px-3 font-bold text-xs ${d.name === selected.name ? 'text-[var(--accent)]' : 'text-[var(--ink2)]'}`}>
                     {d.name}
                     {d.name === selected.name && ' ★'}
                   </th>
@@ -206,12 +206,12 @@ export default function DeviceComparison() {
                 { label: 'Pulse Rate', key: 'pulseRate' },
                 { label: 'Targeting', key: 'targeting' },
               ].map(row => (
-                <tr key={row.label} className="border-b border-slate-50 hover:bg-slate-50/50">
-                  <td className="py-3 pr-4 text-xs font-semibold text-slate-500">{row.label}</td>
+                <tr key={row.label} className="border-b border-[var(--line)] hover:bg-[var(--paper2)]">
+                  <td className="py-3 pr-4 text-xs font-semibold text-[var(--muted)]">{row.label}</td>
                   {devices.map(d => {
                     const val = (d as Record<string, unknown>)[row.key] as string | string[];
                     return (
-                      <td key={d.name} className={`py-3 px-3 text-center text-xs ${d.name === selected.name ? 'bg-violet-50/30' : 'text-slate-600'}`}>
+                      <td key={d.name} className={`py-3 px-3 text-center text-xs ${d.name === selected.name ? 'bg-[rgba(10,22,40,0.08)]/30' : 'text-[var(--ink2)]'}`}>
                         {row.render ? (row.render as (v: unknown) => string)(val as unknown) : val}
                       </td>
                     );
@@ -225,17 +225,17 @@ export default function DeviceComparison() {
 
       {/* Detail Panel */}
       {selected && (
-        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+        <div className="bg-[var(--paper2)] rounded-2xl p-6 border border-[var(--line)]">
           <div className="flex items-start gap-4 mb-5">
-            <div className="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center text-lg shrink-0">🧠</div>
+            <div className="w-12 h-12 rounded-xl bg-[rgba(10,22,40,0.08)] flex items-center justify-center text-lg shrink-0">🧠</div>
             <div>
-              <h3 className="text-xl font-bold text-slate-900">{selected.name}</h3>
-              <p className="text-sm text-slate-500 mt-0.5">{selected.manufacturer}</p>
+              <h3 className="text-xl font-bold text-[var(--ink)]">{selected.name}</h3>
+              <p className="text-sm text-[var(--muted)] mt-0.5">{selected.manufacturer}</p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mb-5">
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">FDA Clearances</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] mb-1">FDA Clearances</p>
               <div className="flex flex-wrap gap-1.5">
                 {selected.fdaIndications.map(ind => (
                   <span key={ind} className="text-xs font-semibold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full">{ind}</span>
@@ -243,7 +243,7 @@ export default function DeviceComparison() {
               </div>
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Coverage</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] mb-1">Coverage</p>
               <span className={`text-sm font-bold px-3 py-1 rounded-full ${coverageColors[selected.insuranceCoverage]}`}>{selected.insuranceCoverage}</span>
             </div>
           </div>
@@ -252,15 +252,15 @@ export default function DeviceComparison() {
               <p className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2">Pros</p>
               <ul className="space-y-1">
                 {selected.pros.map(p => (
-                  <li key={p} className="text-xs text-slate-600 flex items-start gap-1.5"><span className="text-emerald-500">✓</span>{p}</li>
+                  <li key={p} className="text-xs text-[var(--ink2)] flex items-start gap-1.5"><span className="text-emerald-500">✓</span>{p}</li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-rose-600 mb-2">Cons</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-[var(--warm)] mb-2">Cons</p>
               <ul className="space-y-1">
                 {selected.cons.map(c => (
-                  <li key={c} className="text-xs text-slate-600 flex items-start gap-1.5"><span className="text-rose-400">−</span>{c}</li>
+                  <li key={c} className="text-xs text-[var(--ink2)] flex items-start gap-1.5"><span className="text-[var(--warm)]">−</span>{c}</li>
                 ))}
               </ul>
             </div>

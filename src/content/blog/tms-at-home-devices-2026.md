@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-06
 category: faq
 tags: ["home devices", "consumer", "FDA clearance", "LFMS"]
-image: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-at-home-devices-2026.svg"
 ---
 
 You would rather treat your depression from your couch than drive to a clinic five days a week for six weeks. Of course you would. Anybody would.
@@ -121,9 +121,9 @@ If you are considering TMS for depression or another condition:
 
 **If you have already completed clinical TMS** and are looking for maintenance options, talk to your [TMS specialist](/specialists/) about in-clinic booster sessions. They are the only evidence-based maintenance approach available right now.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>No home device delivers actual TMS. Clinical TMS requires magnetic fields 10-100x stronger than consumer products can generate.</li>
     <li>tDCS, LFMS, and consumer TMS headsets are not FDA-cleared for treating depression or any psychiatric condition.</li>
     <li>Engineering barriers (power, coil heating, targeting precision, safety monitoring) make true portable TMS years away.</li>
@@ -133,47 +133,47 @@ If you are considering TMS for depression or another condition:
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I do TMS therapy at home?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I do TMS therapy at home?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. As of 2026, no device is FDA-cleared for home TMS treatment of depression or any psychiatric condition. Clinical TMS requires magnetic field strengths that portable devices cannot generate. Engineering barriers around power delivery, coil heating, and safety monitoring make true portable TMS years away.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. As of 2026, no device is FDA-cleared for home TMS treatment of depression or any psychiatric condition. Clinical TMS requires magnetic field strengths that portable devices cannot generate. Engineering barriers around power delivery, coil heating, and safety monitoring make true portable TMS years away.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Are tDCS devices effective for depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Are tDCS devices effective for depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The evidence is weak and inconsistent. A 2023 Cochrane review concluded that evidence for tDCS in depression was low to very low certainty. Some studies show modest benefit; others show no difference from sham stimulation. No tDCS device is FDA-cleared for treating depression.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The evidence is weak and inconsistent. A 2023 Cochrane review concluded that evidence for tDCS in depression was low to very low certainty. Some studies show modest benefit; others show no difference from sham stimulation. No tDCS device is FDA-cleared for treating depression.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How strong is a clinical TMS magnetic field vs. a consumer device?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How strong is a clinical TMS magnetic field vs. a consumer device?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Clinical TMS generates approximately 1.5-2.0 Tesla at the coil surface. Consumer TMS headsets typically produce 0.01-0.1 Tesla, roughly 1-5% of clinical strength. This is the fundamental reason consumer devices cannot replicate clinical TMS results.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Clinical TMS generates approximately 1.5-2.0 Tesla at the coil surface. Consumer TMS headsets typically produce 0.01-0.1 Tesla, roughly 1-5% of clinical strength. This is the fundamental reason consumer devices cannot replicate clinical TMS results.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">When will home TMS be available?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">When will home TMS be available?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">A legitimate home TMS device that could serve as a maintenance tool for people who have already responded to clinical TMS is probably 5-8 years out. A home device that could replace the initial clinical treatment course is further away, possibly 10+ years, if ever.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">A legitimate home TMS device that could serve as a maintenance tool for people who have already responded to clinical TMS is probably 5-8 years out. A home device that could replace the initial clinical treatment course is further away, possibly 10+ years, if ever.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What can I use at home while waiting for real TMS access?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What can I use at home while waiting for real TMS access?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No home device is proven to treat depression. If you are on a waiting list for TMS, talk to your psychiatrist about medication options in the meantime. If you have already completed TMS and are looking for maintenance, in-clinic booster sessions are the only evidence-based approach available right now.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No home device is proven to treat depression. If you are on a waiting list for TMS, talk to your psychiatrist about medication options in the meantime. If you have already completed TMS and are looking for maintenance, in-clinic booster sessions are the only evidence-based approach available right now.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

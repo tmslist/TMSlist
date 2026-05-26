@@ -1,7 +1,15 @@
 ---
+export const prerender = false;
+
 import Layout from "../../layouts/Layout.astro";
-import { getDoctorPhoto } from "../../utils/dataHelpers";
+import EditorialHero from "../../components/editorial/EditorialHero.astro";
+import { getDoctorPhoto, COUNTRY_NAMES, COUNTRY_URL_PREFIXES } from "../../utils/dataHelpers";
 import { getAllDoctors } from "../../utils/jsonData";
+import { getVisitorCountry } from "../../utils/visitorCountry";
+
+const VISITOR_COUNTRY = getVisitorCountry(Astro.cookies, Astro.url);
+const visitorCountryName = COUNTRY_NAMES[VISITOR_COUNTRY] || 'United States';
+const visitorCountryUrl = `/${COUNTRY_URL_PREFIXES[VISITOR_COUNTRY] || VISITOR_COUNTRY.toLowerCase()}/`;
 
 // Load all doctors from the data store (JSON-backed)
 interface Doctor {
@@ -24,7 +32,14 @@ interface Doctor {
     clinicImage: string;
 }
 
-const allDoctorData = await getAllDoctors();
+// Try visitor country first; fall back to US if their country has no slugged specialists yet.
+// We require a slug because the page links to /specialist/[slug] — doctors without a slug
+// would render as broken cards.
+const inCountry = await getAllDoctors({ country: VISITOR_COUNTRY });
+const inCountrySlugged = inCountry.filter(({ doctor }) => doctor.slug);
+const allDoctorData = inCountrySlugged.length > 0
+    ? inCountrySlugged
+    : await getAllDoctors({ country: 'US' });
 const doctorMap = new Map<string, Doctor>();
 
 allDoctorData.forEach(({ doctor: doc, clinicName, clinicSlug, clinicCity, clinicState }) => {
@@ -156,7 +171,7 @@ const schema = JSON.stringify({
                 image: doc.imageUrl.startsWith("/")
                     ? `https://tmslist.com${doc.imageUrl}`
                     : doc.imageUrl,
-                url: `https://tmslist.com/doctor/${doc.slug}/`,
+                url: `https://tmslist.com/specialist/${doc.slug}/`,
             },
         })),
     },
@@ -167,63 +182,30 @@ const schema = JSON.stringify({
     { name: "Home", url: "/" },
     { name: "Specialists", url: "/specialists/" },
 ]}>
-    <main class="min-h-screen">
-        <!-- Hero -->
-        <section class="relative bg-white pt-16 pb-20 border-b border-slate-100 overflow-hidden">
-            <div class="absolute inset-x-0 top-0 h-[400px] bg-gradient-to-b from-blue-50/50 to-white/0 pointer-events-none"></div>
-            
-            <div class="container mx-auto px-6 relative z-10">
-                <nav class="flex text-xs font-semibold tracking-widest uppercase text-slate-400 mb-10" aria-label="Breadcrumb">
-                    <ol class="inline-flex items-center space-x-2">
-                        <li><a href="/" class="hover:text-blue-600 transition-colors">Home</a></li>
-                        <li><span class="mx-2 text-slate-300">/</span></li>
-                        <li class="text-slate-600">Find a Specialist</li>
-                    </ol>
-                </nav>
-
-                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-12">
-                    <div class="max-w-2xl">
-                        <span class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-100 text-emerald-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-                            <span class="relative flex h-2 w-2">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                            </span>
-                            Board Certified Providers
-                        </span>
-                        
-                        <h1 class="text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
-                            Find TMS <span class="text-blue-600">Specialists</span>
-                        </h1>
-                        <p class="text-xl text-slate-500 font-light leading-relaxed">
-                            Browse {doctors.length} verified TMS therapy specialists across
-                            {Object.keys(stateGroups).length} states. Find experienced
-                            doctors specializing in depression, anxiety, OCD, and more.
-                        </p>
-                    </div>
-
-                    <div class="flex gap-4 flex-wrap">
-                        <div class="bg-white rounded-3xl border border-slate-100 p-6 shadow-[0_4px_20px_rgb(0,0,0,0.02)] text-center min-w-[120px]">
-                            <div class="text-3xl font-bold tracking-tight text-slate-900">{doctors.length}</div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Specialists</div>
-                        </div>
-                        <div class="bg-white rounded-3xl border border-slate-100 p-6 shadow-[0_4px_20px_rgb(0,0,0,0.02)] text-center min-w-[120px]">
-                            <div class="text-3xl font-bold tracking-tight text-slate-900">{Object.keys(stateGroups).length}</div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">States</div>
-                        </div>
-                        <div class="bg-white rounded-3xl border border-slate-100 p-6 shadow-[0_4px_20px_rgb(0,0,0,0.02)] text-center min-w-[120px]">
-                            <div class="text-3xl font-bold tracking-tight text-blue-600">{allSpecialties.length}+</div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Conditions</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main style="background:var(--paper)">
+        <EditorialHero
+            eyebrow="Board Certified Providers"
+            eyebrowDot="#22c55e"
+            title="Find your TMS"
+            titleAccent="specialist."
+            description={`Browse ${doctors.length} verified TMS therapy specialists across ${Object.keys(stateGroups).length} states. Doctors specializing in depression, anxiety, OCD, and more.`}
+            breadcrumbs={[{ label: "Home", href: "/" }, { label: "Find a Specialist" }]}
+            ctas={[
+                { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+                { label: "Find a TMS Clinic", href: visitorCountryUrl, variant: "outline" },
+            ]}
+            stats={[
+                { value: doctors.length, label: "Specialists", color: "ink" },
+                { value: Object.keys(stateGroups).length, label: "States", color: "accent" },
+                { value: `${allSpecialties.length}+`, label: "Conditions", color: "warm" },
+            ]}
+        />
 
         <!-- Filter Bar for Mobile -->
-        <div class="lg:hidden bg-white border-b sticky top-0 z-30 py-3 px-4">
+        <div class="lg:hidden bg-[var(--paper)] border-b sticky top-0 z-30 py-3 px-4">
             <button
                 id="mobileFilterBtn"
-                class="w-full flex items-center justify-center gap-2 py-3 px-6 bg-cyan-600 text-slate-900 font-semibold rounded-xl"
+                class="w-full flex items-center justify-center gap-2 py-3 px-6 bg-[var(--accent)] text-[var(--ink)] font-semibold rounded-xl"
             >
                 <svg
                     class="w-5 h-5"
@@ -252,20 +234,20 @@ const schema = JSON.stringify({
                         class="hidden lg:block lg:w-80 shrink-0"
                     >
                         <div
-                            class="bg-white rounded-2xl border border-gray-200 shadow-sm sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto"
+                            class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto"
                         >
-                            <div class="p-6 border-b border-gray-100">
+                            <div class="p-6 border-b border-[var(--line)]">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-900">
+                                    <h3 class="text-lg font-semibold text-[var(--ink)]">
                                         Filters
                                     </h3>
                                     <button
                                         id="clearFilters"
-                                        class="text-sm text-cyan-600 hover:text-cyan-700 font-medium"
+                                        class="text-sm text-[var(--accent)] hover:text-[var(--accent)] font-medium"
                                         >Clear All</button
                                     >
                                 </div>
-                                <p class="text-sm text-gray-500 mt-1">
+                                <p class="text-sm text-[var(--muted)] mt-1">
                                     Showing <span id="filteredCount"
                                         >{doctors.length}</span
                                     > specialists
@@ -273,28 +255,28 @@ const schema = JSON.stringify({
                             </div>
 
                             <!-- Search -->
-                            <div class="p-4 border-b border-gray-100">
+                            <div class="p-4 border-b border-[var(--line)]">
                                 <label
-                                    class="block text-sm font-semibold text-gray-900 mb-2"
+                                    class="block text-sm font-semibold text-[var(--ink)] mb-2"
                                     >Search by Name</label
                                 >
                                 <input
                                     type="text"
                                     id="searchInput"
                                     placeholder="Enter doctor name..."
-                                    class="w-full rounded-xl border-gray-200 text-sm focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2"
+                                    class="w-full rounded-xl border-[var(--line)] text-sm focus:ring-[rgba(10,22,40,0.15)] focus:border-[rgba(10,22,40,0.2)] px-4 py-2"
                                 />
                             </div>
 
                             <!-- State Filter -->
-                            <div class="p-4 border-b border-gray-100">
+                            <div class="p-4 border-b border-[var(--line)]">
                                 <label
-                                    class="block text-sm font-semibold text-gray-900 mb-2"
+                                    class="block text-sm font-semibold text-[var(--ink)] mb-2"
                                     >Filter by State</label
                                 >
                                 <select
                                     id="stateFilter"
-                                    class="w-full rounded-xl border-gray-200 text-sm focus:ring-cyan-500 focus:border-cyan-500"
+                                    class="w-full rounded-xl border-[var(--line)] text-sm focus:ring-[rgba(10,22,40,0.15)] focus:border-[rgba(10,22,40,0.2)]"
                                 >
                                     <option value="">All States</option>
                                     {
@@ -309,16 +291,16 @@ const schema = JSON.stringify({
                             </div>
 
                             <!-- Specialty Section -->
-                            <div class="border-b border-gray-100">
+                            <div class="border-b border-[var(--line)]">
                                 <button
                                     class="filter-toggle w-full p-4 flex items-center justify-between text-left"
                                     data-section="specialty"
                                 >
-                                    <span class="font-semibold text-gray-900"
+                                    <span class="font-semibold text-[var(--ink)]"
                                         >Specialty</span
                                     >
                                     <svg
-                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        class="w-5 h-5 text-[var(--muted)] transition-transform"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -338,14 +320,14 @@ const schema = JSON.stringify({
                                         allSpecialties
                                             .slice(0, 15)
                                             .map((spec) => (
-                                                <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                                <label class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg">
                                                     <input
                                                         type="checkbox"
-                                                        class="filter-checkbox rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
+                                                        class="filter-checkbox rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                                         data-filter="specialty"
                                                         data-value={spec.toLowerCase()}
                                                     />
-                                                    <span class="text-sm text-gray-700">
+                                                    <span class="text-sm text-[var(--ink2)]">
                                                         {spec}
                                                     </span>
                                                 </label>
@@ -355,16 +337,16 @@ const schema = JSON.stringify({
                             </div>
 
                             <!-- Experience Section -->
-                            <div class="border-b border-gray-100">
+                            <div class="border-b border-[var(--line)]">
                                 <button
                                     class="filter-toggle w-full p-4 flex items-center justify-between text-left"
                                     data-section="experience"
                                 >
-                                    <span class="font-semibold text-gray-900"
+                                    <span class="font-semibold text-[var(--ink)]"
                                         >Experience Level</span
                                     >
                                     <svg
-                                        class="w-5 h-5 text-gray-400 transition-transform"
+                                        class="w-5 h-5 text-[var(--muted)] transition-transform"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -382,15 +364,15 @@ const schema = JSON.stringify({
                                 >
                                     {
                                         experienceRanges.map((range) => (
-                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg">
+                                            <label class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg">
                                                 <input
                                                     type="radio"
                                                     name="experience"
-                                                    class="text-cyan-600 focus:ring-cyan-500"
+                                                    class="text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                                     data-filter="experience"
                                                     data-value={range.min}
                                                 />
-                                                <span class="text-sm text-gray-700">
+                                                <span class="text-sm text-[var(--ink2)]">
                                                     {range.label}
                                                 </span>
                                             </label>
@@ -402,46 +384,46 @@ const schema = JSON.stringify({
                             <!-- Title Filter -->
                             <div class="p-4">
                                 <label
-                                    class="block text-sm font-semibold text-gray-900 mb-2"
+                                    class="block text-sm font-semibold text-[var(--ink)] mb-2"
                                     >Provider Type</label
                                 >
                                 <div class="space-y-1.5">
                                     <label
-                                        class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg"
+                                        class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg"
                                     >
                                         <input
                                             type="checkbox"
-                                            class="filter-checkbox rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
+                                            class="filter-checkbox rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                             data-filter="title"
                                             data-value="psychiatrist"
                                         />
-                                        <span class="text-sm text-gray-700"
+                                        <span class="text-sm text-[var(--ink2)]"
                                             >Psychiatrist</span
                                         >
                                     </label>
                                     <label
-                                        class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg"
+                                        class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg"
                                     >
                                         <input
                                             type="checkbox"
-                                            class="filter-checkbox rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
+                                            class="filter-checkbox rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                             data-filter="title"
                                             data-value="neurologist"
                                         />
-                                        <span class="text-sm text-gray-700"
+                                        <span class="text-sm text-[var(--ink2)]"
                                             >Neurologist</span
                                         >
                                     </label>
                                     <label
-                                        class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded-lg"
+                                        class="flex items-center gap-2 cursor-pointer hover:bg-[var(--paper2)] p-1.5 rounded-lg"
                                     >
                                         <input
                                             type="checkbox"
-                                            class="filter-checkbox rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
+                                            class="filter-checkbox rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
                                             data-filter="title"
                                             data-value="director"
                                         />
-                                        <span class="text-sm text-gray-700"
+                                        <span class="text-sm text-[var(--ink2)]"
                                             >Medical Director</span
                                         >
                                     </label>
@@ -458,12 +440,12 @@ const schema = JSON.stringify({
                                     class="mb-16 state-section"
                                     data-state={stateCode}
                                 >
-                                    <h2 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center gap-3">
-                                        <span class="w-10 h-10 rounded-lg bg-cyan-100 text-cyan-600 flex items-center justify-center font-semibold text-sm">
+                                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-6 flex items-center gap-3">
+                                        <span class="w-10 h-10 rounded-lg bg-[rgba(10,22,40,0.1)] text-[var(--accent)] flex items-center justify-center font-semibold text-sm">
                                             {stateCode}
                                         </span>
                                         {stateNames[stateCode] || stateCode}
-                                        <span class="text-sm font-normal text-gray-400 ml-2">
+                                        <span class="text-sm font-normal text-[var(--muted)] ml-2">
                                             ({stateDoctors.length}{" "}
                                             {stateDoctors.length === 1
                                                 ? "specialist"
@@ -475,7 +457,7 @@ const schema = JSON.stringify({
                                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                                         {stateDoctors.map((doctor) => (
                                             <article
-                                                class="doctor-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
+                                                class="doctor-card bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
                                                 data-name={doctor.fullName.toLowerCase()}
                                                 data-state={doctor.clinicState}
                                                 data-specialties={doctor.specialties
@@ -495,7 +477,7 @@ const schema = JSON.stringify({
                                                 )}
                                                 <div class={`p-6 ${doctor.clinicImage && !doctor.clinicImage.includes('tms_chair') ? '-mt-6 relative z-10' : ''}`}>
                                                     <div class="flex items-start gap-4 mb-4">
-                                                        <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-md bg-gray-50">
+                                                        <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-md bg-[var(--paper2)]">
                                                                 <img
                                                                     src={getDoctorPhoto({ name: doctor.fullName, image_url: doctor.imageUrl, slug: doctor.slug })}
                                                                     alt={`${doctor.fullName} - TMS specialist in ${doctor.clinicCity}`}
@@ -506,29 +488,29 @@ const schema = JSON.stringify({
                                                                 />
                                                         </div>
                                                         <div class="flex-1 min-w-0">
-                                                            <h3 class="text-lg font-semibold text-gray-900 truncate">
+                                                            <h3 class="text-lg font-semibold text-[var(--ink)] truncate">
                                                                 {doctor.fullName}
                                                             </h3>
-                                                            <p class="text-cyan-600 text-sm font-medium">
+                                                            <p class="text-[var(--accent)] text-sm font-medium">
                                                                 {doctor.title}
                                                             </p>
-                                                            <p class="text-gray-500 text-sm">
+                                                            <p class="text-[var(--muted)] text-sm">
                                                                 {doctor.clinicCity}, {doctor.clinicState}
                                                             </p>
                                                         </div>
                                                     </div>
 
                                                     <div class="flex flex-wrap items-center gap-2 mb-3">
-                                                        <span class="px-2.5 py-0.5 bg-cyan-100 text-cyan-700 text-xs font-semibold rounded-full">
+                                                        <span class="px-2.5 py-0.5 bg-[rgba(10,22,40,0.1)] text-[var(--accent)] text-xs font-semibold rounded-full">
                                                             Verified
                                                         </span>
                                                         {doctor.yearsExperience > 0 && (
-                                                            <span class="text-xs text-gray-500">
+                                                            <span class="text-xs text-[var(--muted)]">
                                                                 {doctor.yearsExperience}+ years
                                                             </span>
                                                         )}
                                                         {doctor.school && (
-                                                            <span class="text-xs text-gray-500 truncate max-w-[140px]" title={doctor.school}>
+                                                            <span class="text-xs text-[var(--muted)] truncate max-w-[140px]" title={doctor.school}>
                                                                 {doctor.school}
                                                             </span>
                                                         )}
@@ -536,34 +518,34 @@ const schema = JSON.stringify({
 
                                                     {/* Bio snippet */}
                                                     {doctor.bio && (
-                                                        <p class="text-gray-500 text-sm mb-3 line-clamp-2">{doctor.bio}</p>
+                                                        <p class="text-[var(--muted)] text-sm mb-3 line-clamp-2">{doctor.bio}</p>
                                                     )}
 
                                                     <div class="flex flex-wrap gap-1.5 mb-4">
                                                         {doctor.specialties
                                                             .slice(0, 3)
                                                             .map((spec: string) => (
-                                                                <span class="px-2 py-1 bg-violet-50 text-violet-700 text-xs font-medium rounded">
+                                                                <span class="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--accent)] text-xs font-medium rounded">
                                                                     {spec}
                                                                 </span>
                                                             ))}
                                                         {doctor.specialties.length > 3 && (
-                                                            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded">
+                                                            <span class="px-2 py-1 bg-[var(--paper2)] text-[var(--muted)] text-xs font-medium rounded">
                                                                 +{doctor.specialties.length - 3} more
                                                             </span>
                                                         )}
                                                     </div>
 
-                                                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                                    <div class="pt-4 border-t border-[var(--line)] flex items-center justify-between">
                                                         <a
                                                             href={`/clinic/${doctor.clinicSlug}/`}
-                                                            class="text-sm text-gray-400 hover:text-cyan-600 truncate max-w-[55%]"
+                                                            class="text-sm text-[var(--muted)] hover:text-[var(--accent)] truncate max-w-[55%]"
                                                         >
                                                             at {doctor.clinicName}
                                                         </a>
                                                         <a
-                                                            href={`/doctor/${doctor.slug}/`}
-                                                            class="px-3 py-1.5 bg-cyan-600 text-white font-semibold text-sm rounded-lg hover:bg-cyan-700 transition-colors"
+                                                            href={`/specialist/${doctor.slug}/`}
+                                                            class="px-3 py-1.5 bg-[var(--accent)] text-white font-semibold text-sm rounded-lg hover:bg-[var(--accent)] transition-colors"
                                                         >
                                                             View Profile
                                                         </a>
@@ -581,10 +563,10 @@ const schema = JSON.stringify({
         </section>
 
         <!-- SEO Content Section -->
-        <section class="py-16 bg-white border-t border-gray-100">
+        <section class="py-16 bg-[var(--paper)] border-t border-[var(--line)]">
             <div class="container mx-auto px-6 max-w-4xl">
-                <h2 class="text-3xl font-semibold text-gray-900 mb-8">Finding the Right TMS Specialist</h2>
-                <div class="prose prose-lg max-w-none text-gray-600">
+                <h2 class="text-3xl font-semibold text-[var(--ink)] mb-8">Finding the Right TMS Specialist</h2>
+                <div class="prose prose-lg max-w-none text-[var(--muted)]">
                     <p>Our directory features {doctors.length} board-certified TMS specialists across {Object.keys(stateGroups).length} states. Each provider has been verified and brings specialized expertise in Transcranial Magnetic Stimulation therapy for conditions including depression, anxiety, OCD, PTSD, and more.</p>
                     <h3>What Makes a Great TMS Specialist?</h3>
                     <p>The best TMS specialists combine psychiatric expertise with hands-on neuromodulation experience. Look for providers who have treated hundreds of patients, use FDA-cleared TMS technology, and take a personalized approach to treatment planning. Many of our listed specialists have completed advanced training at institutions like Stanford, UCLA, Johns Hopkins, and Columbia.</p>
@@ -600,12 +582,12 @@ const schema = JSON.stringify({
         </section>
 
         <!-- CTA Section -->
-        <section class="py-12 bg-gray-50 border-t border-gray-100">
+        <section class="py-12 bg-[var(--paper2)] border-t border-[var(--line)]">
             <div class="container mx-auto px-4 md:px-6 text-center">
-                <p class="text-gray-500 text-sm max-w-2xl mx-auto">
+                <p class="text-[var(--muted)] text-sm max-w-2xl mx-auto">
                     Are you a TMS specialist? <a
                         href="/add-listing/"
-                        class="text-cyan-600 font-medium">Add your profile</a
+                        class="text-[var(--accent)] font-medium">Add your profile</a
                     >
                     to our directory and connect with patients seeking TMS therapy.
                 </p>
@@ -655,7 +637,7 @@ const schema = JSON.stringify({
                     sidebar.classList.toggle("fixed");
                     sidebar.classList.toggle("inset-0");
                     sidebar.classList.toggle("z-50");
-                    sidebar.classList.toggle("bg-white");
+                    sidebar.classList.toggle("bg-[var(--paper)]");
                     sidebar.classList.toggle("overflow-y-auto");
                     sidebar.classList.toggle("p-4");
                 });

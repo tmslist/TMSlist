@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { sql, gte, desc } from 'drizzle-orm';
 import { db } from '../../../db';
 import { clinics, reviews, leads, users } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -21,7 +21,7 @@ export const GET: APIRoute = async ({ request }) => {
   try {
     const url = new URL(request.url);
     const daysParam = url.searchParams.get('days');
-    const days = daysParam ? parseInt(daysParam) : 30;
+    const days = Math.min(Math.max(parseInt(daysParam || '30') || 30, 1), 365);
     const since = new Date();
     since.setDate(since.getDate() - days);
 
@@ -132,13 +132,13 @@ export const GET: APIRoute = async ({ request }) => {
 
       // Current period totals
       db.select({ count: sql<number>`count(*)` }).from(leads).where(gte(leads.createdAt, since)),
-      db.select({ count: sql<number>`count(*)` }).from(leads).where(sql`${leads.createdAt} >= ${prevSince} AND ${leads.createdAt} < ${since}`),
+      db.select({ count: sql<number>`count(*)` }).from(leads).where(sql`${leads.createdAt} >= ${prevSince.toISOString()} AND ${leads.createdAt} < ${since.toISOString()}`),
       db.select({ count: sql<number>`count(*)` }).from(reviews).where(gte(reviews.createdAt, since)),
-      db.select({ count: sql<number>`count(*)` }).from(reviews).where(sql`${reviews.createdAt} >= ${prevSince} AND ${reviews.createdAt} < ${since}`),
+      db.select({ count: sql<number>`count(*)` }).from(reviews).where(sql`${reviews.createdAt} >= ${prevSince.toISOString()} AND ${reviews.createdAt} < ${since.toISOString()}`),
       db.select({ count: sql<number>`count(*)` }).from(clinics).where(gte(clinics.createdAt, since)),
-      db.select({ count: sql<number>`count(*)` }).from(clinics).where(sql`${clinics.createdAt} >= ${prevSince} AND ${clinics.createdAt} < ${since}`),
+      db.select({ count: sql<number>`count(*)` }).from(clinics).where(sql`${clinics.createdAt} >= ${prevSince.toISOString()} AND ${clinics.createdAt} < ${since.toISOString()}`),
       db.select({ count: sql<number>`count(*)` }).from(users).where(gte(users.createdAt, since)),
-      db.select({ count: sql<number>`count(*)` }).from(users).where(sql`${users.createdAt} >= ${prevSince} AND ${users.createdAt} < ${since}`),
+      db.select({ count: sql<number>`count(*)` }).from(users).where(sql`${users.createdAt} >= ${prevSince.toISOString()} AND ${users.createdAt} < ${since.toISOString()}`),
     ]);
 
     const current = {

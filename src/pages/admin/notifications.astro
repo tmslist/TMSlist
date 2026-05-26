@@ -13,13 +13,13 @@ if (!hasRole(session, 'admin', 'editor')) {
 ---
 
 <Layout title="Notifications | TMS List Admin" noindex={true}>
-  <div class="flex min-h-screen bg-gray-50">
+  <div class="flex min-h-screen bg-[var(--paper2)]">
     <AdminSidebar client:load currentPage="notifications" userEmail={session!.email} />
     <main class="flex-1 lg:ml-64 py-8">
       <div class="container mx-auto px-4 max-w-5xl">
         <div class="mb-8">
-          <h1 class="text-2xl font-semibold text-gray-900">Notifications</h1>
-          <p class="text-gray-500 mt-1">View all your notifications</p>
+          <h1 class="text-2xl font-semibold text-[var(--ink)]">Notifications</h1>
+          <p class="text-[var(--muted)] mt-1">View all your notifications</p>
         </div>
         <AdminNotifications client:idle />
       </div>

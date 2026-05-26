@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, sql } from 'drizzle-orm';
 import { db } from '../../../db';
 import { apiKeys, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 import crypto from 'node:crypto';
 
 export const prerender = false;

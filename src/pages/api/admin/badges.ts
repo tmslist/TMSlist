@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, desc, sql, and } from 'drizzle-orm';
 import { db } from '../../../db';
 import { clinicBadges, doctorBadges, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -28,7 +28,7 @@ export const GET: APIRoute = async ({ request }) => {
         .select()
         .from(clinicBadges)
         .where(entityId ? eq(clinicBadges.clinicId, entityId) : undefined)
-        .orderBy(desc(clinicBadges.earnedAt));
+        .orderBy(desc(clinicBadges.awardedAt));
       if (type === 'clinic') return json({ data: clinicBadgesData });
     }
 
@@ -37,13 +37,13 @@ export const GET: APIRoute = async ({ request }) => {
         .select()
         .from(doctorBadges)
         .where(entityId ? eq(doctorBadges.doctorId, entityId) : undefined)
-        .orderBy(desc(doctorBadges.earnedAt));
+        .orderBy(desc(doctorBadges.awardedAt));
       if (type === 'doctor') return json({ data: doctorBadgesData });
     }
 
     const [clinics, doctors] = await Promise.all([
-      db.select().from(clinicBadges).orderBy(desc(clinicBadges.earnedAt)).limit(200),
-      db.select().from(doctorBadges).orderBy(desc(doctorBadges.earnedAt)).limit(200),
+      db.select().from(clinicBadges).orderBy(desc(clinicBadges.awardedAt)).limit(200),
+      db.select().from(doctorBadges).orderBy(desc(doctorBadges.awardedAt)).limit(200),
     ]);
 
     return json({ data: { clinicBadges: clinics, doctorBadges: doctors } });

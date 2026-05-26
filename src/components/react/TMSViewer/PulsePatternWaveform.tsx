@@ -26,7 +26,7 @@ export function PulsePatternWaveform({ width = 800, height = 80 }: Props) {
     },
     'tbs-burst': {
       label: 'iTBS — 50Hz bursts / 2s interval',
-      colors: { line: '#a78bfa', fill: 'rgba(167,139,250,0.15)', dot: '#c4b5fd' },
+      colors: { line: '#C9654A', fill: 'rgba(167,139,250,0.15)', dot: '#c4b5fd' },
       pulseCount: 3,
       repeat: true,
     },
@@ -222,7 +222,7 @@ export function PulsePatternWaveform({ width = 800, height = 80 }: Props) {
   }, [state.selectedProtocol?.pulsePattern, state.frequency, state.isPlaying, width, height]);
 
   return (
-    <div className="w-full rounded-lg overflow-hidden border border-slate-700/50">
+    <div className="w-full rounded-lg overflow-hidden border border-[var(--line)]/50">
       <canvas
         ref={canvasRef}
         className="block"

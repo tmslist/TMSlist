@@ -4,7 +4,7 @@ description: "Your first TMS treatment is tomorrow — here's exactly what will 
 publishDate: 2026-04-13
 category: patient-guide
 author: Lisa Park, TMS Technician
-image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=400&fit=crop"
+image: "/images/blog-covers/what-to-expect-first-tms-session.svg"
 tags: [tms, first-session, patient-guide, what-to-expect]
 ---
 

@@ -46,40 +46,40 @@ function MRRChart({ data }: { data: MrrDataPoint[] }) {
   if (data.length === 0) return null;
   const maxMrr = Math.max(...data.map((d) => d.mrr), 1);
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-900 mb-4">MRR / ARR Trend</h3>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <h3 className="text-sm font-semibold text-[var(--ink)] mb-4">MRR / ARR Trend</h3>
       <div className="space-y-1">
         {data.map((d, i) => {
           const mrrPct = (d.mrr / maxMrr) * 100;
           const arrPct = (d.arr / (maxMrr * 12)) * 100;
           return (
             <div key={d.month} className="flex items-center gap-3">
-              <span className="text-xs text-gray-400 w-16 shrink-0">{d.month}</span>
+              <span className="text-xs text-[var(--muted)] w-16 shrink-0">{d.month}</span>
               <div className="flex-1 flex gap-1">
                 <div
-                  className="h-5 bg-violet-500 rounded-r transition-all hover:opacity-80"
+                  className="h-5 bg-[var(--ink2)] rounded-r transition-all hover:opacity-80"
                   style={{ width: `${mrrPct}%`, minWidth: '2px' }}
                   title={`MRR: ${formatCurrency(d.mrr)}`}
                 />
                 <div
-                  className="h-5 bg-violet-200 rounded-r transition-all"
+                  className="h-5 bg-[rgba(10,22,40,0.15)] rounded-r transition-all"
                   style={{ width: `${arrPct * 0.1}%`, minWidth: '1px' }}
                   title={`ARR: ${formatCurrency(d.arr)}`}
                 />
               </div>
-              <span className="text-xs font-medium text-gray-700 w-20 text-right shrink-0">{formatLargeCurrency(d.mrr)}</span>
+              <span className="text-xs font-medium text-[var(--ink2)] w-20 text-right shrink-0">{formatLargeCurrency(d.mrr)}</span>
             </div>
           );
         })}
       </div>
-      <div className="flex items-center gap-4 mt-3 pt-3 border-t border-gray-100">
+      <div className="flex items-center gap-4 mt-3 pt-3 border-t border-[var(--line)]">
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 rounded-sm bg-violet-500" />
-          <span className="text-xs text-gray-500">MRR</span>
+          <div className="w-3 h-3 rounded-sm bg-[var(--ink2)]" />
+          <span className="text-xs text-[var(--muted)]">MRR</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 rounded-sm bg-violet-200" />
-          <span className="text-xs text-gray-500">ARR (scaled)</span>
+          <div className="w-3 h-3 rounded-sm bg-[rgba(10,22,40,0.15)]" />
+          <span className="text-xs text-[var(--muted)]">ARR (scaled)</span>
         </div>
       </div>
     </div>
@@ -90,13 +90,13 @@ function SegmentBar({ label, value, max, color }: { label: string; value: number
   const pct = max > 0 ? (value / max) * 100 : 0;
   return (
     <div className="flex items-center gap-3 py-2">
-      <span className="text-sm text-gray-600 w-32 shrink-0 capitalize">{label}</span>
-      <div className="flex-1 bg-gray-100 rounded-full h-6">
+      <span className="text-sm text-[var(--ink2)] w-32 shrink-0 capitalize">{label}</span>
+      <div className="flex-1 bg-[var(--paper2)] rounded-full h-6">
         <div className={`h-6 rounded-full ${color} transition-all flex items-center justify-end pr-2`} style={{ width: `${Math.max(pct, 2)}%` }}>
           {pct > 15 && <span className="text-xs font-medium text-white">{value.toLocaleString()}</span>}
         </div>
       </div>
-      <span className="text-sm font-medium text-gray-900 w-20 text-right shrink-0">{value.toLocaleString()}</span>
+      <span className="text-sm font-medium text-[var(--ink)] w-20 text-right shrink-0">{value.toLocaleString()}</span>
     </div>
   );
 }
@@ -104,15 +104,15 @@ function SegmentBar({ label, value, max, color }: { label: string; value: number
 function ChurnChart({ data }: { data: ChurnData[] }) {
   const maxRate = Math.max(...data.map((d) => d.churnRate), 1);
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-900 mb-4">Churn Rate Over Time</h3>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <h3 className="text-sm font-semibold text-[var(--ink)] mb-4">Churn Rate Over Time</h3>
       <div className="space-y-1">
         {data.map((d) => {
           const pct = (d.churnRate / maxRate) * 100;
           return (
             <div key={d.month} className="flex items-center gap-3">
-              <span className="text-xs text-gray-400 w-16 shrink-0">{d.month}</span>
-              <div className="flex-1 bg-gray-100 rounded-full h-5">
+              <span className="text-xs text-[var(--muted)] w-16 shrink-0">{d.month}</span>
+              <div className="flex-1 bg-[var(--paper2)] rounded-full h-5">
                 <div
                   className={`h-5 rounded-full transition-all ${
                     d.churnRate > 5 ? 'bg-red-500' : d.churnRate > 2 ? 'bg-amber-500' : 'bg-emerald-500'
@@ -129,32 +129,32 @@ function ChurnChart({ data }: { data: ChurnData[] }) {
           );
         })}
       </div>
-      <p className="text-xs text-gray-400 mt-3">{data.length} months tracked</p>
+      <p className="text-xs text-[var(--muted)] mt-3">{data.length} months tracked</p>
     </div>
   );
 }
 
 function LTVTable({ data }: { data: LTVData[] }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-900 mb-4">Lifetime Value by Plan</h3>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <h3 className="text-sm font-semibold text-[var(--ink)] mb-4">Lifetime Value by Plan</h3>
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-[var(--line)]">
+          <thead className="bg-[var(--paper2)]">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Plan</th>
-              <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Avg LTV</th>
-              <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Avg Months</th>
-              <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Cohort Size</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Plan</th>
+              <th className="px-4 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">Avg LTV</th>
+              <th className="px-4 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">Avg Months</th>
+              <th className="px-4 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">Cohort Size</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-[var(--line)]">
             {data.map((row) => (
-              <tr key={row.plan} className="hover:bg-gray-50">
-                <td className="px-4 py-3 text-sm font-medium text-gray-900 capitalize">{row.plan}</td>
+              <tr key={row.plan} className="hover:bg-[var(--paper2)]">
+                <td className="px-4 py-3 text-sm font-medium text-[var(--ink)] capitalize">{row.plan}</td>
                 <td className="px-4 py-3 text-sm font-semibold text-emerald-600 text-right">{formatCurrency(row.avgLTV)}</td>
-                <td className="px-4 py-3 text-sm text-gray-600 text-right">{row.avgMonths.toFixed(1)}</td>
-                <td className="px-4 py-3 text-sm text-gray-600 text-right">{row.cohortSize}</td>
+                <td className="px-4 py-3 text-sm text-[var(--ink2)] text-right">{row.avgMonths.toFixed(1)}</td>
+                <td className="px-4 py-3 text-sm text-[var(--ink2)] text-right">{row.cohortSize}</td>
               </tr>
             ))}
           </tbody>
@@ -165,8 +165,8 @@ function LTVTable({ data }: { data: LTVData[] }) {
 }
 
 const PLAN_COLORS: Record<string, string> = {
-  verified: 'bg-blue-500',
-  featured: 'bg-violet-500',
+  verified: 'bg-[var(--ink2)]',
+  featured: 'bg-[var(--ink2)]',
   premium: 'bg-amber-500',
   enterprise: 'bg-emerald-500',
 };
@@ -252,13 +252,13 @@ export default function AdminRevenueAnalytics() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-900">Revenue Analytics</h1>
-          <p className="text-gray-500 mt-1">MRR, ARR, churn, and lifetime value insights</p>
+          <h1 className="text-3xl font-semibold text-[var(--ink)]">Revenue Analytics</h1>
+          <p className="text-[var(--muted)] mt-1">MRR, ARR, churn, and lifetime value insights</p>
         </div>
         <button
           onClick={loadData}
           disabled={loading}
-          className="px-6 py-2.5 bg-violet-600 text-white rounded-lg text-sm font-medium hover:bg-violet-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+          className="px-6 py-2.5 bg-[var(--ink)] text-white rounded-lg text-sm font-medium hover:bg-[var(--ink)] transition-colors disabled:opacity-50 flex items-center gap-2"
         >
           {loading ? (
             <>
@@ -273,42 +273,42 @@ export default function AdminRevenueAnalytics() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-gradient-to-br from-violet-600 to-violet-700 rounded-xl p-6 text-white shadow-lg">
-          <p className="text-sm font-medium text-violet-200">Monthly Recurring Revenue</p>
+        <div className="bg-gradient-to-br from-[#0A1628] to-[#0A1628] rounded-xl p-6 text-white shadow-lg">
+          <p className="text-sm font-medium text-[rgba(10,22,40,0.2)]">Monthly Recurring Revenue</p>
           <p className="text-3xl font-bold mt-2">{formatCurrency(currentMRR)}</p>
           <p className={`text-sm mt-1 ${mrrGrowth >= 0 ? 'text-emerald-300' : 'text-red-300'}`}>
             {mrrGrowth >= 0 ? '+' : ''}{mrrGrowth.toFixed(1)}% vs last month
           </p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Annual Run Rate</p>
-          <p className="text-3xl font-semibold text-gray-900 mt-2">{formatLargeCurrency(totalARR)}</p>
-          <p className="text-xs text-gray-400 mt-1">Based on current MRR</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Annual Run Rate</p>
+          <p className="text-3xl font-semibold text-[var(--ink)] mt-2">{formatLargeCurrency(totalARR)}</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Based on current MRR</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Avg Monthly Churn</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Avg Monthly Churn</p>
           <p className={`text-3xl font-semibold mt-2 ${avgChurn > 3 ? 'text-red-600' : avgChurn > 1.5 ? 'text-amber-600' : 'text-emerald-600'}`}>
             {avgChurn.toFixed(1)}%
           </p>
-          <p className="text-xs text-gray-400 mt-1">{churn.reduce((s, c) => s + c.churned, 0)} churned this period</p>
+          <p className="text-xs text-[var(--muted)] mt-1">{churn.reduce((s, c) => s + c.churned, 0)} churned this period</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Avg LTV (All Plans)</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Avg LTV (All Plans)</p>
           <p className="text-3xl font-semibold text-emerald-600 mt-2">
             {formatCurrency(ltv.reduce((s, l) => s + l.avgLTV * l.cohortSize, 0) / Math.max(ltv.reduce((s, l) => s + l.cohortSize, 0), 1))}
           </p>
-          <p className="text-xs text-gray-400 mt-1">Weighted by cohort size</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Weighted by cohort size</p>
         </div>
       </div>
 
       {/* Section Tabs */}
-      <div className="flex gap-1 bg-white border border-gray-200 rounded-lg p-1 w-fit">
+      <div className="flex gap-1 bg-white border border-[var(--line)] rounded-lg p-1 w-fit">
         {(['overview', 'segments', 'churn'] as const).map((sec) => (
           <button
             key={sec}
             onClick={() => setActiveSection(sec)}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors capitalize ${
-              activeSection === sec ? 'bg-violet-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+              activeSection === sec ? 'bg-[var(--ink)] text-white' : 'text-[var(--ink2)] hover:bg-[var(--paper2)]'
             }`}
           >
             {sec === 'overview' ? 'MRR/ARR' : sec === 'segments' ? 'Revenue Segments' : 'Churn & LTV'}
@@ -321,17 +321,17 @@ export default function AdminRevenueAnalytics() {
         <div className="space-y-6">
           <MRRChart data={mrrTrend} />
           {mrrTrend.length > 1 && (
-            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4">Growth Metrics</h3>
+            <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+              <h3 className="text-sm font-semibold text-[var(--ink)] mb-4">Growth Metrics</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {mrrTrend.map((d, i) => {
                   if (i === 0) return null;
                   const prev = mrrTrend[i - 1].mrr;
                   const delta = prev > 0 ? ((d.mrr - prev) / prev) * 100 : 0;
                   return (
-                    <div key={d.month} className="p-4 bg-gray-50 rounded-lg">
-                      <p className="text-xs text-gray-400">{d.month}</p>
-                      <p className="text-lg font-bold text-gray-900">{formatCurrency(d.mrr)}</p>
+                    <div key={d.month} className="p-4 bg-[var(--paper2)] rounded-lg">
+                      <p className="text-xs text-[var(--muted)]">{d.month}</p>
+                      <p className="text-lg font-bold text-[var(--ink)]">{formatCurrency(d.mrr)}</p>
                       <span className={`text-xs font-medium ${delta >= 0 ? 'text-emerald-600' : 'text-red-600'}`}>
                         {delta >= 0 ? '+' : ''}{delta.toFixed(1)}% MoM
                       </span>
@@ -347,10 +347,10 @@ export default function AdminRevenueAnalytics() {
       {/* Revenue Segments Section */}
       {activeSection === 'segments' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-            <h3 className="text-sm font-semibold text-gray-900 mb-4">Revenue by Plan</h3>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+            <h3 className="text-sm font-semibold text-[var(--ink)] mb-4">Revenue by Plan</h3>
             {byPlan.length === 0 ? (
-              <p className="text-sm text-gray-400">No data loaded</p>
+              <p className="text-sm text-[var(--muted)]">No data loaded</p>
             ) : (
               <>
                 {byPlan.map((s) => (
@@ -359,31 +359,31 @@ export default function AdminRevenueAnalytics() {
                     label={s.label}
                     value={s.value}
                     max={Math.max(...byPlan.map((p) => p.value), 1)}
-                    color={PLAN_COLORS[s.label] || 'bg-gray-400'}
+                    color={PLAN_COLORS[s.label] || 'bg-[var(--line)]'}
                   />
                 ))}
-                <div className="flex items-center gap-4 mt-4 pt-3 border-t border-gray-100">
+                <div className="flex items-center gap-4 mt-4 pt-3 border-t border-[var(--line)]">
                   {byPlan.map((s) => (
                     <div key={s.label} className="flex items-center gap-1.5">
-                      <div className={`w-3 h-3 rounded-sm ${PLAN_COLORS[s.label] || 'bg-gray-400'}`} />
-                      <span className="text-xs text-gray-500 capitalize">{s.label}: {s.percentage}%</span>
+                      <div className={`w-3 h-3 rounded-sm ${PLAN_COLORS[s.label] || 'bg-[var(--line)]'}`} />
+                      <span className="text-xs text-[var(--muted)] capitalize">{s.label}: {s.percentage}%</span>
                     </div>
                   ))}
                 </div>
               </>
             )}
           </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-            <h3 className="text-sm font-semibold text-gray-900 mb-4">Revenue by Region</h3>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+            <h3 className="text-sm font-semibold text-[var(--ink)] mb-4">Revenue by Region</h3>
             {byRegion.length === 0 ? (
-              <p className="text-sm text-gray-400">No data loaded</p>
+              <p className="text-sm text-[var(--muted)]">No data loaded</p>
             ) : (
               <>
                 {byRegion.map((s) => {
-                  const color = s.label === 'North America' ? 'bg-blue-500' :
-                    s.label === 'Europe' ? 'bg-violet-500' :
+                  const color = s.label === 'North America' ? 'bg-[var(--ink2)]' :
+                    s.label === 'Europe' ? 'bg-[var(--ink2)]' :
                     s.label === 'APAC' ? 'bg-amber-500' :
-                    'bg-gray-400';
+                    'bg-[var(--line)]';
                   return (
                     <SegmentBar
                       key={s.label}
@@ -394,9 +394,9 @@ export default function AdminRevenueAnalytics() {
                     />
                   );
                 })}
-                <div className="flex items-center gap-4 mt-4 pt-3 border-t border-gray-100">
+                <div className="flex items-center gap-4 mt-4 pt-3 border-t border-[var(--line)]">
                   {byRegion.map((s) => (
-                    <span key={s.label} className="text-xs text-gray-500">{s.label}: {s.percentage}%</span>
+                    <span key={s.label} className="text-xs text-[var(--muted)]">{s.label}: {s.percentage}%</span>
                   ))}
                 </div>
               </>
@@ -411,14 +411,14 @@ export default function AdminRevenueAnalytics() {
           <ChurnChart data={churn} />
           <LTVTable data={ltv} />
           {ltv.length > 0 && (
-            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4">LTV Summary</h3>
+            <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+              <h3 className="text-sm font-semibold text-[var(--ink)] mb-4">LTV Summary</h3>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {ltv.map((row) => (
-                  <div key={row.plan} className="p-4 bg-gray-50 rounded-lg text-center">
-                    <p className="text-xs text-gray-400 capitalize mb-1">{row.plan} Plan</p>
-                    <p className="text-xl font-bold text-gray-900">{formatCurrency(row.avgLTV)}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{row.avgMonths.toFixed(0)} mo avg</p>
+                  <div key={row.plan} className="p-4 bg-[var(--paper2)] rounded-lg text-center">
+                    <p className="text-xs text-[var(--muted)] capitalize mb-1">{row.plan} Plan</p>
+                    <p className="text-xl font-bold text-[var(--ink)]">{formatCurrency(row.avgLTV)}</p>
+                    <p className="text-xs text-[var(--muted)] mt-0.5">{row.avgMonths.toFixed(0)} mo avg</p>
                   </div>
                 ))}
               </div>

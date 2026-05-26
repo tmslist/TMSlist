@@ -59,8 +59,8 @@ export default function HealthScoreBadge({ clinicId, size = 'sm', showBreakdown 
       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border" style={{ borderColor: `${color}30`, backgroundColor: `${color}08` }}>
         <div className="text-lg font-bold" style={{ color }}>{score.grade}</div>
         <div>
-          <div className="text-xs font-semibold text-slate-700">Health Score</div>
-          <div className="text-[10px] text-slate-400">{score.total}/100</div>
+          <div className="text-xs font-semibold text-[var(--ink2)]">Health Score</div>
+          <div className="text-[10px] text-[var(--muted)]">{score.total}/100</div>
         </div>
       </div>
     );
@@ -77,26 +77,26 @@ export default function HealthScoreBadge({ clinicId, size = 'sm', showBreakdown 
   ];
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+    <div className="bg-white rounded-2xl border border-[var(--line)] shadow-sm p-5">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl font-bold text-white" style={{ backgroundColor: color }}>
             {score.grade}
           </div>
           <div>
-            <div className="text-sm font-bold text-slate-900">Clinic Health Score</div>
-            <div className="text-xs text-slate-400">{score.total} out of 100</div>
+            <div className="text-sm font-bold text-[var(--ink)]">Clinic Health Score</div>
+            <div className="text-xs text-[var(--muted)]">{score.total} out of 100</div>
           </div>
         </div>
         {showBreakdown && (
-          <button onClick={() => setExpanded(!expanded)} className="text-xs text-blue-600 font-semibold hover:text-blue-700">
+          <button onClick={() => setExpanded(!expanded)} className="text-xs text-[var(--accent)] font-semibold hover:text-[var(--accent)]">
             {expanded ? 'Hide' : 'Details'}
           </button>
         )}
       </div>
 
       {/* Progress bar */}
-      <div className="h-2 bg-slate-100 rounded-full overflow-hidden mb-4">
+      <div className="h-2 bg-[var(--paper2)] rounded-full overflow-hidden mb-4">
         <div className="h-full rounded-full transition-all duration-500" style={{ width: `${score.total}%`, backgroundColor: color }} />
       </div>
 
@@ -106,10 +106,10 @@ export default function HealthScoreBadge({ clinicId, size = 'sm', showBreakdown 
             {breakdownItems.map(item => (
               <div key={item.label}>
                 <div className="flex items-center justify-between text-xs mb-1">
-                  <span className="text-slate-500 font-medium">{item.label}</span>
-                  <span className="text-slate-700 font-semibold">{item.value}/{item.max}</span>
+                  <span className="text-[var(--muted)] font-medium">{item.label}</span>
+                  <span className="text-[var(--ink2)] font-semibold">{item.value}/{item.max}</span>
                 </div>
-                <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                <div className="h-1.5 bg-[var(--paper2)] rounded-full overflow-hidden">
                   <div className="h-full rounded-full" style={{ width: `${(item.value / item.max) * 100}%`, backgroundColor: color }} />
                 </div>
               </div>

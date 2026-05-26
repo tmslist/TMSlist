@@ -71,7 +71,7 @@ export default function AIChatbot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg shadow-blue-200 flex items-center justify-center transition-all hover:scale-105"
+          className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[var(--accent)] hover:bg-[var(--accent)] text-white rounded-full shadow-lg shadow-[rgba(10,22,40,0.1)] flex items-center justify-center transition-all hover:scale-105"
           aria-label="Open AI Treatment Advisor"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,9 +83,9 @@ export default function AIChatbot() {
 
       {/* Chat window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden" style={{ height: 'min(560px, calc(100vh - 6rem))' }}>
+        <div className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-[var(--line)] flex flex-col overflow-hidden" style={{ height: 'min(560px, calc(100vh - 6rem))' }}>
           {/* Header */}
-          <div className="bg-blue-600 px-5 py-4 flex items-center justify-between shrink-0">
+          <div className="bg-[var(--accent)] px-5 py-4 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,7 +94,7 @@ export default function AIChatbot() {
               </div>
               <div>
                 <h3 className="text-white font-bold text-sm">TMS Treatment Advisor</h3>
-                <p className="text-blue-200 text-xs">AI-powered guidance</p>
+                <p className="text-[var(--muted)] text-xs">AI-powered guidance</p>
               </div>
             </div>
             <button onClick={() => setIsOpen(false)} aria-label="Close chat" className="text-white/70 hover:text-white transition-colors p-1">
@@ -110,8 +110,8 @@ export default function AIChatbot() {
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
                   msg.role === 'user'
-                    ? 'bg-blue-600 text-white rounded-br-md'
-                    : 'bg-slate-100 text-slate-700 rounded-bl-md'
+                    ? 'bg-[var(--accent)] text-white rounded-br-md'
+                    : 'bg-[var(--paper2)] text-[var(--ink2)] rounded-bl-md'
                 }`}>
                   {msg.content.split('\n').map((line, j) => (
                     <p key={j} className={j > 0 ? 'mt-2' : ''}>{line.replace(/<[^>]*>/g, '')}</p>
@@ -122,11 +122,11 @@ export default function AIChatbot() {
 
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-slate-100 rounded-2xl rounded-bl-md px-4 py-3">
+                <div className="bg-[var(--paper2)] rounded-2xl rounded-bl-md px-4 py-3">
                   <div className="flex gap-1.5">
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div className="w-2 h-2 bg-[var(--line)] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="w-2 h-2 bg-[var(--line)] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <div className="w-2 h-2 bg-[var(--line)] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
                 </div>
               </div>
@@ -135,13 +135,13 @@ export default function AIChatbot() {
             {/* Quick questions (only show at start) */}
             {messages.length <= 1 && !loading && (
               <div className="space-y-2">
-                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Quick questions</p>
+                <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Quick questions</p>
                 <div className="flex flex-wrap gap-2">
                   {QUICK_QUESTIONS.map((q) => (
                     <button
                       key={q}
                       onClick={() => sendMessage(q)}
-                      className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-medium text-slate-600 hover:border-blue-300 hover:text-blue-600 transition-colors"
+                      className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-full text-xs font-medium text-[var(--ink2)] hover:border-[rgba(10,22,40,0.2)] hover:text-[var(--accent)] transition-colors"
                     >
                       {q}
                     </button>
@@ -154,7 +154,7 @@ export default function AIChatbot() {
           </div>
 
           {/* Input */}
-          <div className="border-t border-slate-100 p-3 shrink-0">
+          <div className="border-t border-[var(--line)] p-3 shrink-0">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -169,20 +169,20 @@ export default function AIChatbot() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about TMS therapy..."
                 aria-label="Ask a question about TMS therapy"
-                className="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                className="flex-1 px-4 py-2.5 rounded-xl border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] transition-all"
                 disabled={loading}
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-xl transition-all"
+                className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent)] disabled:opacity-50 text-white rounded-xl transition-all"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
               </button>
             </form>
-            <p className="text-[10px] text-slate-400 text-center mt-2">AI advisor — not medical advice. Always consult a professional.</p>
+            <p className="text-[10px] text-[var(--muted)] text-center mt-2">AI advisor — not medical advice. Always consult a professional.</p>
           </div>
         </div>
       )}

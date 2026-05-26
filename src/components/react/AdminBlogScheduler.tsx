@@ -24,10 +24,10 @@ const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
 
 const STATUS_STYLES: Record<string, string> = {
   published: 'bg-emerald-100 text-emerald-700',
-  scheduled: 'bg-blue-100 text-blue-700',
+  scheduled: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
   pending_publish: 'bg-amber-100 text-amber-700',
-  scheduled_pending: 'bg-indigo-100 text-indigo-700',
-  draft: 'bg-gray-100 text-gray-600',
+  scheduled_pending: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
+  draft: 'bg-[var(--paper2)] text-[var(--ink2)]',
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -138,13 +138,13 @@ export default function AdminBlogScheduler() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Blog Scheduler</h1>
-          <p className="text-gray-500 mt-1">Auto-schedule SEO blog posts for May–December 2026</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Blog Scheduler</h1>
+          <p className="text-[var(--muted)] mt-1">Auto-schedule SEO blog posts for May–December 2026</p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchScheduler}
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-sm text-[var(--ink2)] hover:text-[var(--ink)] hover:bg-[var(--paper2)] rounded-lg transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -154,7 +154,7 @@ export default function AdminBlogScheduler() {
           <button
             onClick={() => handleGenerate('all')}
             disabled={generating}
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 disabled:opacity-50 transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink)] disabled:opacity-50 transition-colors shadow-sm"
           >
             {generating ? (
               <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Generating...</>
@@ -169,13 +169,13 @@ export default function AdminBlogScheduler() {
       {summary && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
           {[
-            { label: 'Total Scheduled', value: summary.total, color: 'text-gray-900', bg: 'bg-white' },
+            { label: 'Total Scheduled', value: summary.total, color: 'text-[var(--ink)]', bg: 'bg-white' },
             { label: 'Published', value: summary.published, color: 'text-emerald-600', bg: 'bg-emerald-50' },
             { label: 'Pending Generation', value: summary.pending, color: 'text-amber-600', bg: 'bg-amber-50' },
-            { label: 'Files Generated', value: summary.generated, color: 'text-violet-600', bg: 'bg-violet-50' },
+            { label: 'Files Generated', value: summary.generated, color: 'text-[var(--ink)]', bg: 'bg-[rgba(10,22,40,0.08)]' },
           ].map(({ label, value, color, bg }) => (
-            <div key={label} className={`${bg} rounded-xl border border-gray-200 p-4`}>
-              <p className="text-sm font-medium text-gray-500">{label}</p>
+            <div key={label} className={`${bg} rounded-xl border border-[var(--line)] p-4`}>
+              <p className="text-sm font-medium text-[var(--muted)]">{label}</p>
               <p className={`text-2xl font-semibold mt-1 ${color}`}>{value}</p>
             </div>
           ))}
@@ -184,7 +184,7 @@ export default function AdminBlogScheduler() {
 
       {/* Filter bar */}
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-lg p-1">
+        <div className="flex items-center gap-1.5 bg-white border border-[var(--line)] rounded-lg p-1">
           {[
             { key: 'all', label: `All (${allPostsFlat.length})` },
             { key: 'pending', label: `Pending (${pendingCount})` },
@@ -194,7 +194,7 @@ export default function AdminBlogScheduler() {
               key={key}
               onClick={() => setFilter(key as typeof filter)}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-                filter === key ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-50'
+                filter === key ? 'bg-[var(--ink)] text-white' : 'text-[var(--ink2)] hover:bg-[var(--paper2)]'
               }`}
             >
               {label}
@@ -204,7 +204,7 @@ export default function AdminBlogScheduler() {
         <select
           value={selectedMonth}
           onChange={e => setSelectedMonth(e.target.value)}
-          className="text-sm border border-gray-200 rounded-lg px-3 py-2 text-gray-700 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+          className="text-sm border border-[var(--line)] rounded-lg px-3 py-2 text-[var(--ink2)] focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] outline-none"
         >
           <option value="">All months</option>
           {monthKeys.map(k => (
@@ -218,7 +218,7 @@ export default function AdminBlogScheduler() {
         <div className={`mb-5 px-4 py-3 rounded-xl text-sm font-medium flex items-center gap-2 ${
           resultMsg.type === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
           resultMsg.type === 'error' ? 'bg-red-50 text-red-700 border border-red-200' :
-          'bg-blue-50 text-blue-700 border border-blue-200'
+          'bg-[var(--paper2)] text-[var(--ink)] border border-[var(--line)]'
         }`}>
           {resultMsg.type === 'success' && <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>}
           {resultMsg.type === 'error' && <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>}
@@ -232,7 +232,7 @@ export default function AdminBlogScheduler() {
       {/* Loading state */}
       {loading ? (
         <div className="flex items-center justify-center py-16">
-          <div className="w-6 h-6 border-2 border-violet-600 border-t-transparent rounded-full animate-spin" />
+          <div className="w-6 h-6 border-2 border-[var(--ink)] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : (
         <div className="space-y-3">
@@ -248,21 +248,21 @@ export default function AdminBlogScheduler() {
             const isPast = monthDate < new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 
             return (
-              <div key={key} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+              <div key={key} className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
                 {/* Month header */}
                 <button
                   onClick={() => toggleMonth(key)}
-                  className="w-full px-5 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+                  className="w-full px-5 py-4 flex items-center justify-between hover:bg-[var(--paper2)] transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${
-                      isPast ? 'bg-emerald-100 text-emerald-700' : 'bg-violet-100 text-violet-700'
+                      isPast ? 'bg-emerald-100 text-emerald-700' : 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)]'
                     }`}>
                       {MONTH_NAMES[monthDate.getMonth()].slice(0, 3)}
                     </div>
                     <div className="text-left">
-                      <p className="text-sm font-semibold text-gray-900">{getMonthLabel(key)}</p>
-                      <p className="text-xs text-gray-500">{monthPosts.length} post{monthPosts.length !== 1 ? 's' : ''}</p>
+                      <p className="text-sm font-semibold text-[var(--ink)]">{getMonthLabel(key)}</p>
+                      <p className="text-xs text-[var(--muted)]">{monthPosts.length} post{monthPosts.length !== 1 ? 's' : ''}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -284,12 +284,12 @@ export default function AdminBlogScheduler() {
                       <button
                         onClick={(e) => { e.stopPropagation(); handleGenerate('month', monthDate.getMonth() + 1); }}
                         disabled={generating}
-                        className="text-xs bg-violet-600 hover:bg-violet-700 text-white px-3 py-1.5 rounded-lg font-medium transition-colors disabled:opacity-50"
+                        className="text-xs bg-[var(--ink)] hover:bg-[var(--ink)] text-white px-3 py-1.5 rounded-lg font-medium transition-colors disabled:opacity-50"
                       >
                         Generate Month
                       </button>
                     )}
-                    <svg className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className={`w-4 h-4 text-[var(--muted)] transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
@@ -297,22 +297,22 @@ export default function AdminBlogScheduler() {
 
                 {/* Posts list */}
                 {isOpen && (
-                  <div className="border-t border-gray-100 divide-y divide-gray-50">
+                  <div className="border-t border-[var(--line)] divide-y divide-[var(--line)]">
                     {monthPosts.map(post => (
-                      <div key={post.slug} className="px-5 py-3.5 flex items-center gap-4 hover:bg-gray-50/50 transition-colors">
+                      <div key={post.slug} className="px-5 py-3.5 flex items-center gap-4 hover:bg-[var(--paper2)] transition-colors">
                         <div className="text-lg">{CATEGORY_ICONS[post.category] || '📄'}</div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
-                            <p className="text-sm font-medium text-gray-900 truncate">{post.title}</p>
+                            <p className="text-sm font-medium text-[var(--ink)] truncate">{post.title}</p>
                             <span className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                               STATUS_STYLES[post.status] || STATUS_STYLES.draft
                             }`}>
                               {post.status.replace(/_/g, ' ')}
                             </span>
                           </div>
-                          <p className="text-xs text-gray-400 truncate mt-0.5">{post.description}</p>
+                          <p className="text-xs text-[var(--muted)] truncate mt-0.5">{post.description}</p>
                         </div>
-                        <div className="hidden sm:block text-xs text-gray-400 shrink-0">
+                        <div className="hidden sm:block text-xs text-[var(--muted)] shrink-0">
                           {formatDate(post.publishDate)}
                         </div>
                         {post.exists ? (
@@ -320,7 +320,7 @@ export default function AdminBlogScheduler() {
                             href={`/blog/${post.slug}/`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="shrink-0 p-1.5 text-gray-400 hover:text-violet-600 rounded-lg hover:bg-violet-50 transition-colors"
+                            className="shrink-0 p-1.5 text-[var(--muted)] hover:text-[var(--ink)] rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
                             title="View post"
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -331,7 +331,7 @@ export default function AdminBlogScheduler() {
                           <button
                             onClick={() => handleGenerate('all')}
                             disabled={generating}
-                            className="shrink-0 text-xs text-violet-600 hover:text-violet-700 font-medium disabled:opacity-50"
+                            className="shrink-0 text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium disabled:opacity-50"
                           >
                             Generate
                           </button>
@@ -346,37 +346,37 @@ export default function AdminBlogScheduler() {
 
           {filteredKeys.length === 0 && (
             <div className="text-center py-16">
-              <svg className="w-12 h-12 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
               </svg>
-              <p className="text-gray-500">No posts match the current filter.</p>
+              <p className="text-[var(--muted)]">No posts match the current filter.</p>
             </div>
           )}
         </div>
       )}
 
       {/* How it works */}
-      <div className="mt-8 bg-slate-50 rounded-xl border border-slate-200 p-5">
-        <h3 className="text-sm font-semibold text-gray-900 mb-3">How Auto-Publishing Works</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-gray-600">
+      <div className="mt-8 bg-[var(--paper2)] rounded-xl border border-[var(--line)] p-5">
+        <h3 className="text-sm font-semibold text-[var(--ink)] mb-3">How Auto-Publishing Works</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-[var(--ink2)]">
           <div className="flex gap-3">
-            <div className="w-6 h-6 bg-violet-100 text-violet-700 rounded-full flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">1</div>
+            <div className="w-6 h-6 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] rounded-full flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">1</div>
             <div>
-              <p className="font-medium text-gray-800">Generate posts</p>
+              <p className="font-medium text-[var(--ink)]">Generate posts</p>
               <p className="text-xs mt-0.5">Click "Generate All Pending" to create markdown files with SEO-optimized content.</p>
             </div>
           </div>
           <div className="flex gap-3">
-            <div className="w-6 h-6 bg-violet-100 text-violet-700 rounded-full flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">2</div>
+            <div className="w-6 h-6 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] rounded-full flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">2</div>
             <div>
-              <p className="font-medium text-gray-800">Git push / rebuild</p>
+              <p className="font-medium text-[var(--ink)]">Git push / rebuild</p>
               <p className="text-xs mt-0.5">Commit and push the new files — the site rebuilds and picks up all new posts.</p>
             </div>
           </div>
           <div className="flex gap-3">
-            <div className="w-6 h-6 bg-violet-100 text-violet-700 rounded-full flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">3</div>
+            <div className="w-6 h-6 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] rounded-full flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">3</div>
             <div>
-              <p className="font-medium text-gray-800">Auto-appears on publish date</p>
+              <p className="font-medium text-[var(--ink)]">Auto-appears on publish date</p>
               <p className="text-xs mt-0.5">Posts display on the blog listing page based on their publishDate frontmatter field.</p>
             </div>
           </div>

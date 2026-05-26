@@ -26,7 +26,7 @@ const severityOptions: { value: Severity; label: string; color: string; bg: stri
   { value: 'none', label: 'None', color: 'text-emerald-700', bg: 'bg-emerald-100' },
   { value: 'mild', label: 'Mild', color: 'text-amber-700', bg: 'bg-amber-100' },
   { value: 'moderate', label: 'Moderate', color: 'text-orange-700', bg: 'bg-orange-100' },
-  { value: 'severe', label: 'Severe', color: 'text-rose-700', bg: 'bg-rose-100' },
+  { value: 'severe', label: 'Severe', color: 'text-[var(--warm)]', bg: 'bg-[rgba(201,101,74,0.1)]' },
 ];
 
 interface SessionEntry {
@@ -76,8 +76,8 @@ export default function SideEffectsTracker() {
             onClick={() => setActiveSession(e.session)}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
               activeSession === e.session
-                ? 'bg-violet-100 text-violet-700 ring-1 ring-violet-300'
-                : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
+                ? 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)] ring-1 ring-[rgba(10,22,40,0.2)]'
+                : 'bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)]'
             }`}
           >
             Session {e.session}
@@ -85,7 +85,7 @@ export default function SideEffectsTracker() {
         ))}
         <button
           onClick={addSession}
-          className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-50 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-all"
+          className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)] hover:text-[var(--ink2)] transition-all"
         >
           + Add Session
         </button>
@@ -93,29 +93,29 @@ export default function SideEffectsTracker() {
 
       {/* Date */}
       <div>
-        <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Session Date</label>
+        <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1">Session Date</label>
         <input
           type="date"
           value={currentEntry.date}
           onChange={e => setEntries(prev => prev.map(entry =>
             entry.session === activeSession ? { ...entry, date: e.target.value } : entry
           ))}
-          className="px-4 py-2.5 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none w-auto"
+          className="px-4 py-2.5 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink)] outline-none w-auto"
         />
       </div>
 
       {/* Side Effects Grid */}
       <div className="space-y-3">
-        <h3 className="text-sm font-bold text-slate-700">Rate Each Side Effect</h3>
+        <h3 className="text-sm font-bold text-[var(--ink2)]">Rate Each Side Effect</h3>
         {SIDE_EFFECTS.map(effect => {
           const current = currentEntry.effects[effect.name] || 'none';
           return (
-            <div key={effect.name} className="bg-slate-50 rounded-xl p-4">
+            <div key={effect.name} className="bg-[var(--paper2)] rounded-xl p-4">
               <div className="flex items-start justify-between mb-2">
                 <div>
-                  <p className="text-sm font-bold text-slate-800">{effect.name}</p>
-                  <p className="text-xs text-slate-400 mt-0.5">{effect.description}</p>
-                  <p className="text-[10px] text-slate-300 mt-0.5">Reported by {effect.prevalence}</p>
+                  <p className="text-sm font-bold text-[var(--ink)]">{effect.name}</p>
+                  <p className="text-xs text-[var(--muted)] mt-0.5">{effect.description}</p>
+                  <p className="text-[10px] text-[var(--line)] mt-0.5">Reported by {effect.prevalence}</p>
                 </div>
               </div>
               <div className="flex gap-1.5 mt-3">
@@ -126,7 +126,7 @@ export default function SideEffectsTracker() {
                     className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-all ${
                       current === opt.value
                         ? `${opt.color} ${opt.bg} ring-1 ring-current`
-                        : 'bg-white text-slate-400 border border-slate-100 hover:border-slate-200'
+                        : 'bg-white text-[var(--muted)] border border-[var(--line)] hover:border-[var(--line)]'
                     }`}
                   >
                     {opt.label}
@@ -140,7 +140,7 @@ export default function SideEffectsTracker() {
 
       {/* Notes */}
       <div>
-        <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Session Notes</label>
+        <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1">Session Notes</label>
         <textarea
           placeholder="Overall feeling, mood, sleep, any other observations..."
           rows={3}
@@ -148,7 +148,7 @@ export default function SideEffectsTracker() {
           onChange={e => setEntries(prev => prev.map(entry =>
             entry.session === activeSession ? { ...entry, overallNotes: e.target.value } : entry
           ))}
-          className="w-full px-4 py-3 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none resize-none text-sm"
+          className="w-full px-4 py-3 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink)] outline-none resize-none text-sm"
         />
       </div>
 
@@ -174,13 +174,13 @@ export default function SideEffectsTracker() {
       <div className="flex items-center gap-3 pt-2">
         <button
           onClick={() => setShowPrint(true)}
-          className="px-5 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-slate-800 transition-colors"
+          className="px-5 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors"
         >
           Print Report
         </button>
         <a
           href="/downloads/insurance-checklist.pdf"
-          className="px-5 py-2.5 bg-white border border-slate-200 text-slate-700 text-sm font-semibold rounded-xl hover:border-slate-300 transition-colors"
+          className="px-5 py-2.5 bg-white border border-[var(--line)] text-[var(--ink2)] text-sm font-semibold rounded-xl hover:border-[var(--line)] transition-colors"
           download
         >
           Export PDF
@@ -189,31 +189,31 @@ export default function SideEffectsTracker() {
 
       {/* Print View */}
       {showPrint && (
-        <div className="border border-slate-200 rounded-2xl p-6 bg-white">
+        <div className="border border-[var(--line)] rounded-2xl p-6 bg-white">
           <div className="text-center mb-6">
-            <h2 className="text-xl font-bold text-slate-900">TMS Side Effects Tracker</h2>
-            <p className="text-sm text-slate-500">Generated from TMSList.com/tools/side-effects-tracker/</p>
+            <h2 className="text-xl font-bold text-[var(--ink)]">TMS Side Effects Tracker</h2>
+            <p className="text-sm text-[var(--muted)]">Generated from TMSList.com/tools/side-effects-tracker/</p>
           </div>
           {entries.map(entry => {
             const effects = SIDE_EFFECTS.filter(se => (entry.effects[se.name] || 'none') !== 'none');
             return (
-              <div key={entry.session} className="mb-6 pb-4 border-b border-slate-100">
+              <div key={entry.session} className="mb-6 pb-4 border-b border-[var(--line)]">
                 <div className="flex justify-between items-center mb-3">
-                  <p className="font-bold text-slate-800">Session {entry.session} — {entry.date}</p>
+                  <p className="font-bold text-[var(--ink)]">Session {entry.session} — {entry.date}</p>
                 </div>
                 {effects.length === 0 ? (
-                  <p className="text-sm text-slate-400">No side effects reported.</p>
+                  <p className="text-sm text-[var(--muted)]">No side effects reported.</p>
                 ) : (
                   <ul className="space-y-1">
                     {effects.map(se => (
-                      <li key={se.name} className="text-sm text-slate-700">
+                      <li key={se.name} className="text-sm text-[var(--ink2)]">
                         <span className="font-semibold">{se.name}:</span> {entry.effects[se.name]} — {se.description}
                       </li>
                     ))}
                   </ul>
                 )}
                 {entry.overallNotes && (
-                  <p className="text-sm text-slate-500 mt-2 italic">Notes: {entry.overallNotes}</p>
+                  <p className="text-sm text-[var(--muted)] mt-2 italic">Notes: {entry.overallNotes}</p>
                 )}
               </div>
             );

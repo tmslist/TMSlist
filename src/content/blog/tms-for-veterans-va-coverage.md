@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-10
 category: patient-guide
 tags: ["veterans", "VA", "PTSD", "military", "coverage"]
-image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-veterans-va-coverage.svg"
 ---
 
 The Department of Veterans Affairs has been offering TMS therapy at select medical centers since 2015, initially as part of research protocols and gradually expanding into routine clinical care. As of 2026, TMS is available at over 60 VA facilities nationwide. That is a significant increase from the handful of sites that existed five years ago, but still far from universal access.
@@ -128,9 +128,9 @@ TMS was delivered alongside existing treatments. Veterans continued their medica
 
 **Telehealth follow-ups:** Many VA TMS programs now offer telehealth check-ins between in-person treatment sessions, reducing the number of trips required for psychiatric monitoring.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>The VA covers TMS for treatment-resistant depression at over 60 VA facilities. No copay for service-connected conditions.</li>
     <li>TMS for PTSD is available at an increasing number of VA centers. Ask specifically whether your VA offers it.</li>
     <li>The 4-step referral process: talk to your VA mental health provider, get a formal referral, complete the TMS evaluation, begin treatment.</li>
@@ -140,47 +140,47 @@ TMS was delivered alongside existing treatments. Veterans continued their medica
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does the VA cover TMS for PTSD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does the VA cover TMS for PTSD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes, at a growing number of VA facilities. Not every VA center with a TMS machine offers PTSD treatment, so ask specifically. VA-funded research shows 47% of veterans with combat-related PTSD achieved clinically meaningful improvement. Community Care can extend access if your local VA does not offer PTSD TMS.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes, at a growing number of VA facilities. Not every VA center with a TMS machine offers PTSD treatment, so ask specifically. VA-funded research shows 47% of veterans with combat-related PTSD achieved clinically meaningful improvement. Community Care can extend access if your local VA does not offer PTSD TMS.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How do I get a TMS referral through the VA?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How do I get a TMS referral through the VA?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Four steps: (1) Talk to your VA mental health provider and express interest in TMS. (2) Your provider submits a formal consult request. (3) You complete a TMS evaluation with the TMS psychiatrist. (4) You begin treatment. From conversation to first session, expect 4-8 weeks, sometimes longer if there is a waitlist.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Four steps: (1) Talk to your VA mental health provider and express interest in TMS. (2) Your provider submits a formal consult request. (3) You complete a TMS evaluation with the TMS psychiatrist. (4) You begin treatment. From conversation to first session, expect 4-8 weeks, sometimes longer if there is a waitlist.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can rural veterans access TMS through Community Care?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can rural veterans access TMS through Community Care?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Community Care referrals are authorized when your VA facility does not have a TMS program, wait times exceed 20 business days, or drive time exceeds 60 minutes. Ask your VA provider to submit a Community Care referral. The VA pays the community provider directly.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Community Care referrals are authorized when your VA facility does not have a TMS program, wait times exceed 20 business days, or drive time exceeds 60 minutes. Ask your VA provider to submit a Community Care referral. The VA pays the community provider directly.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Will TMS affect my VA disability rating?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Will TMS affect my VA disability rating?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. Current VA policy does not use treatment engagement as a basis for re-evaluation of your disability rating. Receiving treatment for a service-connected condition is separate from the compensation and pension process.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. Current VA policy does not use treatment engagement as a basis for re-evaluation of your disability rating. Receiving treatment for a service-connected condition is separate from the compensation and pension process.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What does TMS for PTSD feel like?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What does TMS for PTSD feel like?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">PTSD TMS targets the right dorsolateral prefrontal cortex instead of the left (used for depression). The sensation is similar: tapping or knocking on the scalp. The right-side targeting means the sensation is on the right side of your head. Side effects match depression TMS: mild headache and scalp discomfort, most pronounced in the first few sessions.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">PTSD TMS targets the right dorsolateral prefrontal cortex instead of the left (used for depression). The sensation is similar: tapping or knocking on the scalp. The right-side targeting means the sensation is on the right side of your head. Side effects match depression TMS: mild headache and scalp discomfort, most pronounced in the first few sessions.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

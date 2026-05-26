@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-01
 category: treatment
 tags: ["adolescents", "teens", "parents", "pediatric TMS", "depression"]
-image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-adolescents.svg"
 ---
 
 Depression in teenagers is increasingly common and increasingly serious. When medication and therapy have not been enough, parents often ask whether TMS therapy could help their child.
@@ -75,9 +75,9 @@ If your teenager has tried two or more antidepressants without real improvement,
 
 Just make sure you are working with a provider who has experience treating adolescents specifically. The TMS technique is the same, but the clinical picture, a developing brain, school pressures, family dynamics, calls for a provider who gets it.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>TMS is FDA-cleared for adults 22+. It is off-label for adolescents, meaning it is legal and practiced but outside the official indication.</li>
     <li>Research shows response rates of 40-60% for adolescents with treatment-resistant depression, similar to adults.</li>
     <li>Side effects in teens match adults: headache and scalp discomfort, typically mild and temporary.</li>
@@ -87,47 +87,47 @@ Just make sure you are working with a provider who has experience treating adole
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-approved for teenagers?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-approved for teenagers?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS is FDA-cleared for adults 22 and older for treatment-resistant depression. For adolescents, it is off-label. This means it is legal, practiced by some psychiatrists, and supported by research, but it is outside the official FDA indication. Insurance coverage is harder to get as a result.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS is FDA-cleared for adults 22 and older for treatment-resistant depression. For adolescents, it is off-label. This means it is legal, practiced by some psychiatrists, and supported by research, but it is outside the official FDA indication. Insurance coverage is harder to get as a result.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How effective is TMS for adolescents?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How effective is TMS for adolescents?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Studies show response rates of 40-60% for adolescents with treatment-resistant depression, roughly comparable to adult outcomes. A 2023 meta-analysis found TMS was well-tolerated and effective in teens. The side effect profile matches adults.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Studies show response rates of 40-60% for adolescents with treatment-resistant depression, roughly comparable to adult outcomes. A 2023 meta-analysis found TMS was well-tolerated and effective in teens. The side effect profile matches adults.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS affect the developing brain?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS affect the developing brain?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No study has flagged safety concerns unique to the adolescent brain. The mechanism of magnetic stimulation does not appear to pose risks specific to developing brains. Long-term developmental follow-up data is still limited, as it is for most psychiatric medications in adolescents.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No study has flagged safety concerns unique to the adolescent brain. The mechanism of magnetic stimulation does not appear to pose risks specific to developing brains. Long-term developmental follow-up data is still limited, as it is for most psychiatric medications in adolescents.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How do I find a TMS provider for my teenager?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How do I find a TMS provider for my teenager?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Search our <a href="/specialists/" class="text-violet-600 hover:underline">specialist directory</a> for providers with adolescent experience. Ask about their experience treating teens specifically, what age they start treating, and their success with insurance appeals for adolescent patients.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Search our <a href="/specialists/" class="text-[var(--warm)] hover:underline">specialist directory</a> for providers with adolescent experience. Ask about their experience treating teens specifically, what age they start treating, and their success with insurance appeals for adolescent patients.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can my teen do TMS without missing school?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can my teen do TMS without missing school?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Schedule before school (many clinics open early for students). Or use theta burst stimulation (3-minute sessions) which makes before-school appointments much more feasible. Summer treatment is another option if timing allows. Some schools offer 504 accommodations for medical treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Schedule before school (many clinics open early for students). Or use theta burst stimulation (3-minute sessions) which makes before-school appointments much more feasible. Summer treatment is another option if timing allows. Some schools offer 504 accommodations for medical treatment.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

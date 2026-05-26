@@ -1,0 +1,130 @@
+---
+// Coverage map: abstract SVG world map
+const countries = [
+  { name: 'United States', code: 'US', count: 782 },
+  { name: 'United Kingdom', code: 'GB', count: 143 },
+  { name: 'Canada', code: 'CA', count: 97 },
+  { name: 'Australia', code: 'AU', count: 71 },
+  { name: 'Netherlands', code: 'NL', count: 34 },
+  { name: 'Germany', code: 'DE', count: 20 },
+];
+
+const cities = [
+  { name: 'Los Angeles', x: 14, y: 55, c: 44 },
+  { name: 'San Francisco', x: 11, y: 48, c: 28 },
+  { name: 'Denver', x: 22, y: 44, c: 12 },
+  { name: 'Austin', x: 32, y: 63, c: 18 },
+  { name: 'Chicago', x: 45, y: 41, c: 31 },
+  { name: 'New York', x: 62, y: 42, c: 67 },
+  { name: 'Boston', x: 66, y: 38, c: 22 },
+  { name: 'Miami', x: 58, y: 68, c: 15 },
+  { name: 'London', x: 44, y: 28, c: 43 },
+  { name: 'Amsterdam', x: 48, y: 26, c: 19 },
+  { name: 'Berlin', x: 52, y: 24, c: 14 },
+  { name: 'Sydney', x: 84, y: 75, c: 21 },
+];
+---
+
+<section class="py-32 max-w-[1400px] mx-auto px-8">
+  <div class="grid lg:grid-cols-2 gap-16 items-center">
+    <!-- Left text -->
+    <div>
+      <div class="flex items-center gap-3 mb-6" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted);">
+        <span style="display: inline-block; width: 24px; height: 1px; background: rgba(10,22,40,0.3);"></span>
+        <span>Coverage</span>
+      </div>
+      <h2 class="serif mb-8" style="font-size: clamp(2rem, 4.5vw, 4.25rem); line-height: 0.95; color: var(--ink);">
+        Six countries,<br/>
+        one <em>shared standard</em><br/>
+        of verification.
+      </h2>
+      <p style="font-size: 16px; color: var(--muted); line-height: 1.6; max-width: 28rem; margin-bottom: 2.5rem;">
+        Every clinic is reviewed against the same editorial criteria: licensed clinician on file, FDA / CE-cleared device, and documented protocol. No exceptions.
+      </p>
+
+      <!-- Country stats -->
+      <div class="grid grid-cols-3 gap-x-8 gap-y-6 pb-10 border-b mb-6" style="border-color: var(--line);">
+        {countries.map((country) => (
+          <div>
+            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin-bottom: 0.25rem;">
+              {country.name}
+            </div>
+            <div class="serif" style="font-size: 28px; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums;">
+              {country.count}<span style="font-size: 14px; color: var(--muted);"> clinics</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <a href="/countries" class="linky" style="font-size: 13px; color: var(--ink); text-decoration: none; font-weight: 500;">
+        See all countries
+        <svg class="inline-block ml-1 -mt-0.5" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Right: abstract map -->
+    <div class="aspect-[4/3] rounded-2xl p-8 relative overflow-hidden border" style="background: var(--paper2); border-color: var(--line);">
+      <svg viewBox="0 0 100 70" style="position: absolute; inset: 0; width: 100%; height: 100%; padding: 2rem;">
+        <defs>
+          <radialGradient id="blip" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#C9654A" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#C9654A" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- Grid -->
+        {[10, 20, 30, 40, 50, 60].map((y) => (
+          <line key={`h${y}`} x1="0" y1={y} x2="100" y2={y} stroke="#E6EAF0" stroke-width="0.1"/>
+        ))}
+        {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((x) => (
+          <line key={`v${x}`} x1={x} y1="0" x2={x} y2="70" stroke="#E6EAF0" stroke-width="0.1"/>
+        ))}
+        <!-- Abstract continents -->
+        <path d="M 8 30 Q 15 20 25 25 T 40 38 L 35 50 Q 25 55 15 50 Q 5 45 8 30 Z" fill="#E6EAF0" fill-opacity="0.7"/>
+        <path d="M 45 25 Q 55 18 68 22 Q 78 28 72 40 Q 60 48 50 42 Q 42 35 45 25 Z" fill="#E6EAF0" fill-opacity="0.7"/>
+        <path d="M 78 50 Q 84 48 88 54 Q 90 62 85 64 Q 78 62 78 50 Z" fill="#E6EAF0" fill-opacity="0.7"/>
+        <!-- City blips -->
+        {cities.map((city) => (
+          <g>
+            <circle cx={city.x} cy={city.y} r={Math.sqrt(city.c) / 1.5} fill="url(#blip)"/>
+            <circle cx={city.x} cy={city.y} r="0.6" fill="#C9654A"/>
+            <circle cx={city.x} cy={city.y} r="0.3" fill="white"/>
+          </g>
+        ))}
+      </svg>
+
+      <!-- Corner legend: live count -->
+      <div class="absolute top-6 left-6 bg-white/80 backdrop-blur border rounded-xl px-4 py-3" style="border-color: var(--line);">
+        <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin-bottom: 0.25rem;">Live coverage</div>
+        <div class="serif" style="font-size: 22px; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums;">1,147</div>
+      </div>
+
+      <!-- Bottom right legend -->
+      <div class="absolute bottom-6 right-6 flex items-center gap-2" style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);">
+        <span style="width: 6px; height: 6px; border-radius: 9999px; background: var(--warm);"></span>
+        Clinic
+        <span style="width: 12px; height: 2px; background: rgba(80,90,100,0.3); margin-left: 0.5rem;"></span>
+        Density
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.02em; }
+  .linky { position: relative; display: inline-block; }
+  .linky:hover::after { transform: scaleX(1); }
+  .linky::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+</style>

@@ -165,26 +165,26 @@ export default function InsurancePayerReference() {
     <div className="space-y-8">
       {/* CPT Codes Table */}
       <div>
-        <h3 className="text-sm font-bold text-slate-700 mb-4">CPT Codes for TMS</h3>
+        <h3 className="text-sm font-bold text-[var(--ink2)] mb-4">CPT Codes for TMS</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-slate-100">
+              <tr className="border-b border-[var(--line)]">
                 {['CPT', 'Description', 'Rate', 'Payer Coverage', 'Notes'].map(h => (
-                  <th key={h} className="text-left text-xs font-semibold text-slate-400 uppercase tracking-wider pb-3 pr-4">{h}</th>
+                  <th key={h} className="text-left text-xs font-semibold text-[var(--muted)] uppercase tracking-wider pb-3 pr-4">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {CPT_CODES.map(code => (
-                <tr key={code.code} className="border-b border-slate-50 hover:bg-slate-50">
+                <tr key={code.code} className="border-b border-[var(--line)] hover:bg-[var(--paper2)]">
                   <td className="py-3 pr-4">
-                    <span className="font-mono font-bold text-violet-600 bg-violet-50 px-2 py-1 rounded">{code.code}</span>
+                    <span className="font-mono font-bold text-[var(--accent)] bg-[rgba(10,22,40,0.08)] px-2 py-1 rounded">{code.code}</span>
                   </td>
-                  <td className="py-3 pr-4 font-medium text-slate-800">{code.description}</td>
-                  <td className="py-3 pr-4 text-cyan-600 font-semibold">{code.rate}</td>
+                  <td className="py-3 pr-4 font-medium text-[var(--ink)]">{code.description}</td>
+                  <td className="py-3 pr-4 text-[var(--accent)] font-semibold">{code.rate}</td>
                   <td className="py-3 pr-4 text-emerald-600 text-xs font-semibold">{code.payerCoverage}</td>
-                  <td className="py-3 pr-4 text-slate-500 text-xs">{code.notes}</td>
+                  <td className="py-3 pr-4 text-[var(--muted)] text-xs">{code.notes}</td>
                 </tr>
               ))}
             </tbody>
@@ -194,7 +194,7 @@ export default function InsurancePayerReference() {
 
       {/* Insurance Payer Selector */}
       <div>
-        <h3 className="text-sm font-bold text-slate-700 mb-4">Insurance Payer Coverage Details</h3>
+        <h3 className="text-sm font-bold text-[var(--ink2)] mb-4">Insurance Payer Coverage Details</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {INSURERS.map(ins => (
             <button
@@ -202,11 +202,11 @@ export default function InsurancePayerReference() {
               onClick={() => setSelectedInsurer(selectedInsurer === ins.name ? null : ins.name)}
               className={`text-left p-4 rounded-xl border transition-all ${
                 selectedInsurer === ins.name
-                  ? 'border-violet-300 bg-violet-50 ring-1 ring-violet-300'
-                  : 'border-slate-100 bg-white hover:border-slate-200'
+                  ? 'border-[rgba(10,22,40,0.2)] bg-[rgba(10,22,40,0.08)] ring-1 ring-[rgba(10,22,40,0.2)]'
+                  : 'border-[var(--line)] bg-white hover:border-[var(--line)]'
               }`}
             >
-              <p className="text-sm font-bold text-slate-800">{ins.name}</p>
+              <p className="text-sm font-bold text-[var(--ink)]">{ins.name}</p>
             </button>
           ))}
         </div>
@@ -214,21 +214,21 @@ export default function InsurancePayerReference() {
 
       {/* Selected insurer detail */}
       {insurer && (
-        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 space-y-5">
+        <div className="bg-[var(--paper2)] rounded-2xl p-6 border border-[var(--line)] space-y-5">
           <div className="flex items-center justify-between">
-            <h4 className="text-lg font-bold text-slate-800">{insurer.name} Coverage</h4>
+            <h4 className="text-lg font-bold text-[var(--ink)]">{insurer.name} Coverage</h4>
             <span className="text-xs font-semibold px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full">
               Prior auth: {insurer.priorAuthDays}
             </span>
           </div>
-          <p className="text-sm text-slate-600">{insurer.coverage}</p>
+          <p className="text-sm text-[var(--ink2)]">{insurer.coverage}</p>
 
           <div>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Coverage Criteria</p>
+            <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-2">Coverage Criteria</p>
             <ul className="space-y-1.5">
               {insurer.criteria.map((c, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                  <span className="text-violet-500 mt-0.5">✓</span>
+                <li key={i} className="flex items-start gap-2 text-sm text-[var(--ink2)]">
+                  <span className="text-[var(--accent2)] mt-0.5">✓</span>
                   {c}
                 </li>
               ))}
@@ -238,7 +238,7 @@ export default function InsurancePayerReference() {
           {insurer.notes && (
             <div className="bg-amber-50 rounded-xl p-4 border border-amber-100">
               <p className="text-xs font-bold text-amber-700 mb-1">Note</p>
-              <p className="text-sm text-slate-600">{insurer.notes}</p>
+              <p className="text-sm text-[var(--ink2)]">{insurer.notes}</p>
             </div>
           )}
         </div>
@@ -248,7 +248,7 @@ export default function InsurancePayerReference() {
       <div>
         <button
           onClick={() => setShowTemplate(!showTemplate)}
-          className="text-sm font-semibold text-violet-600 hover:text-violet-700 transition-colors flex items-center gap-2"
+          className="text-sm font-semibold text-[var(--accent)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"
         >
           <svg className={`w-4 h-4 transition-transform ${showTemplate ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
@@ -256,17 +256,17 @@ export default function InsurancePayerReference() {
           Prior Authorization Letter Template
         </button>
         {showTemplate && (
-          <div className="mt-4 bg-white rounded-xl border border-slate-200 overflow-hidden">
-            <div className="bg-slate-100 px-5 py-3 flex items-center justify-between border-b border-slate-200">
-              <p className="text-xs font-semibold text-slate-500">PA Letter Template</p>
+          <div className="mt-4 bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+            <div className="bg-[var(--paper2)] px-5 py-3 flex items-center justify-between border-b border-[var(--line)]">
+              <p className="text-xs font-semibold text-[var(--muted)]">PA Letter Template</p>
               <button
                 onClick={copyTemplate}
-                className="text-xs font-semibold px-3 py-1.5 bg-violet-600 text-white rounded-lg hover:bg-violet-500 transition-colors"
+                className="text-xs font-semibold px-3 py-1.5 bg-[var(--ink)] text-white rounded-lg hover:bg-[var(--ink2)] transition-colors"
               >
                 {copiedTemplate ? '✓ Copied!' : 'Copy to Clipboard'}
               </button>
             </div>
-            <pre className="px-5 py-4 text-xs text-slate-600 font-mono whitespace-pre-wrap bg-white max-h-80 overflow-y-auto">
+            <pre className="px-5 py-4 text-xs text-[var(--ink2)] font-mono whitespace-pre-wrap bg-white max-h-80 overflow-y-auto">
               {PRIOR_AUTH_TEMPLATE}
             </pre>
           </div>
@@ -274,8 +274,8 @@ export default function InsurancePayerReference() {
       </div>
 
       {/* Coverage disclaimer */}
-      <div className="bg-slate-100 rounded-xl p-4 border border-slate-200">
-        <p className="text-xs text-slate-500">
+      <div className="bg-[var(--paper2)] rounded-xl p-4 border border-[var(--line)]">
+        <p className="text-xs text-[var(--muted)]">
           <strong>Disclaimer:</strong> Coverage information is based on publicly available payer policies and is subject to change. Always verify current coverage requirements directly with the payer. TMSList is not responsible for coverage decisions. This tool is for educational purposes only.
         </p>
       </div>

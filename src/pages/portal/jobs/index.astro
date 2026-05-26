@@ -15,7 +15,7 @@ if (!hasRole(session, 'admin', 'editor', 'clinic_owner')) {
 ---
 
 <Layout title="Job Postings | TMS List Portal" description="Manage job postings for your TMS clinic." noindex={true}>
-  <div class="flex min-h-screen bg-gray-50">
+  <div class="flex min-h-screen bg-[var(--paper2)]">
     <PortalSidebar client:load currentPage="jobs" userEmail={session.email} userId={session.userId} />
     <main class="flex-1 lg:ml-64 py-8">
       <div class="container mx-auto px-4 max-w-4xl">

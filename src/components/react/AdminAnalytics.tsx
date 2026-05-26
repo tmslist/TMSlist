@@ -47,8 +47,8 @@ const RANGES = [
 ];
 
 const TYPE_COLORS: Record<string, string> = {
-  specialist_enquiry: 'bg-violet-500',
-  lead_magnet: 'bg-blue-500',
+  specialist_enquiry: 'bg-[var(--ink2)]',
+  lead_magnet: 'bg-[var(--ink2)]',
   newsletter: 'bg-emerald-500',
   quiz_lead: 'bg-amber-500',
 };
@@ -56,32 +56,32 @@ const TYPE_COLORS: Record<string, string> = {
 function StatCard({ label, stat }: { label: string; stat: OverviewStat }) {
   const isPositive = stat.change >= 0;
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <p className="text-sm font-medium text-gray-500">{label}</p>
-      <p className="text-3xl font-semibold text-gray-900 mt-2">{stat.count.toLocaleString()}</p>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <p className="text-sm font-medium text-[var(--muted)]">{label}</p>
+      <p className="text-3xl font-semibold text-[var(--ink)] mt-2">{stat.count.toLocaleString()}</p>
       <div className="mt-2 flex items-center gap-1">
         <span className={`text-sm font-medium ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
           {isPositive ? '+' : ''}{stat.change}%
         </span>
-        <span className="text-xs text-gray-400">vs previous period</span>
+        <span className="text-xs text-[var(--muted)]">vs previous period</span>
       </div>
     </div>
   );
 }
 
-function BarChart({ data, color = 'bg-violet-500', label }: { data: DayData[]; color?: string; label: string }) {
+function BarChart({ data, color = 'bg-[var(--ink2)]', label }: { data: DayData[]; color?: string; label: string }) {
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-        <h3 className="text-sm font-semibold text-gray-700 mb-4">{label}</h3>
-        <div className="h-40 flex items-center justify-center text-gray-400 text-sm">No data</div>
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">{label}</h3>
+        <div className="h-40 flex items-center justify-center text-[var(--muted)] text-sm">No data</div>
       </div>
     );
   }
   const maxCount = Math.max(...data.map((d) => d.count), 1);
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-700 mb-4">{label}</h3>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">{label}</h3>
       <div className="flex items-end gap-[2px] h-40">
         {data.map((d) => (
           <div
@@ -93,34 +93,34 @@ function BarChart({ data, color = 'bg-violet-500', label }: { data: DayData[]; c
         ))}
       </div>
       <div className="flex justify-between mt-2">
-        <span className="text-[10px] text-gray-400">{data[0]?.date}</span>
-        <span className="text-[10px] text-gray-400">{data[data.length - 1]?.date}</span>
+        <span className="text-[10px] text-[var(--muted)]">{data[0]?.date}</span>
+        <span className="text-[10px] text-[var(--muted)]">{data[data.length - 1]?.date}</span>
       </div>
     </div>
   );
 }
 
-function HorizontalBarChart({ data, color = 'bg-violet-500', label }: { data: ClinicRank[]; color?: string; label: string }) {
+function HorizontalBarChart({ data, color = 'bg-[var(--ink2)]', label }: { data: ClinicRank[]; color?: string; label: string }) {
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-        <h3 className="text-sm font-semibold text-gray-700 mb-4">{label}</h3>
-        <div className="h-40 flex items-center justify-center text-gray-400 text-sm">No data</div>
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">{label}</h3>
+        <div className="h-40 flex items-center justify-center text-[var(--muted)] text-sm">No data</div>
       </div>
     );
   }
   const maxCount = Math.max(...data.map((d) => d.count), 1);
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-700 mb-4">{label}</h3>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">{label}</h3>
       <div className="space-y-2">
         {data.map((d) => (
           <div key={d.id}>
             <div className="flex items-center justify-between text-xs mb-0.5">
-              <span className="text-gray-700 truncate max-w-[200px]" title={d.name}>{d.name}</span>
-              <span className="text-gray-500 ml-2 shrink-0">{d.count}</span>
+              <span className="text-[var(--ink2)] truncate max-w-[200px]" title={d.name}>{d.name}</span>
+              <span className="text-[var(--muted)] ml-2 shrink-0">{d.count}</span>
             </div>
-            <div className="w-full bg-gray-100 rounded-full h-2">
+            <div className="w-full bg-[var(--paper2)] rounded-full h-2">
               <div
                 className={`${color} h-2 rounded-full transition-all`}
                 style={{ width: `${(d.count / maxCount) * 100}%` }}
@@ -136,27 +136,27 @@ function HorizontalBarChart({ data, color = 'bg-violet-500', label }: { data: Cl
 function TypeBreakdown({ data }: { data: TypeData[] }) {
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-        <h3 className="text-sm font-semibold text-gray-700 mb-4">Lead Breakdown by Type</h3>
-        <div className="h-40 flex items-center justify-center text-gray-400 text-sm">No data</div>
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Lead Breakdown by Type</h3>
+        <div className="h-40 flex items-center justify-center text-[var(--muted)] text-sm">No data</div>
       </div>
     );
   }
   const total = data.reduce((s, d) => s + d.count, 0);
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-700 mb-4">Lead Breakdown by Type</h3>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Lead Breakdown by Type</h3>
       <div className="space-y-3">
         {data.map((d) => {
           const pct = total > 0 ? Math.round((d.count / total) * 100) : 0;
-          const color = TYPE_COLORS[d.type] || 'bg-gray-500';
+          const color = TYPE_COLORS[d.type] || 'bg-[var(--muted)]';
           return (
             <div key={d.type}>
               <div className="flex items-center justify-between text-xs mb-1">
-                <span className="text-gray-700 capitalize">{d.type.replace(/_/g, ' ')}</span>
-                <span className="text-gray-500">{d.count} ({pct}%)</span>
+                <span className="text-[var(--ink2)] capitalize">{d.type.replace(/_/g, ' ')}</span>
+                <span className="text-[var(--muted)]">{d.count} ({pct}%)</span>
               </div>
-              <div className="w-full bg-gray-100 rounded-full h-2.5">
+              <div className="w-full bg-[var(--paper2)] rounded-full h-2.5">
                 <div className={`${color} h-2.5 rounded-full`} style={{ width: `${pct}%` }} />
               </div>
             </div>
@@ -201,8 +201,8 @@ export default function AdminAnalytics() {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-4" />
-          <p className="text-gray-500">Loading analytics...</p>
+          <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-4" />
+          <p className="text-[var(--muted)]">Loading analytics...</p>
         </div>
       </div>
     );
@@ -214,10 +214,10 @@ export default function AdminAnalytics() {
         {error ? (
           <>
             <p className="text-red-600 font-medium mb-2">{error}</p>
-            <button onClick={fetchData} className="text-violet-600 hover:text-violet-700 text-sm font-medium">Try again</button>
+            <button onClick={fetchData} className="text-[var(--ink)] hover:text-[var(--ink)] text-sm font-medium">Try again</button>
           </>
         ) : (
-          <p className="text-gray-400">Failed to load analytics data.</p>
+          <p className="text-[var(--muted)]">Failed to load analytics data.</p>
         )}
       </div>
     );
@@ -227,18 +227,18 @@ export default function AdminAnalytics() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-900">Analytics</h1>
-          <p className="text-gray-500 mt-1">Performance overview</p>
+          <h1 className="text-3xl font-semibold text-[var(--ink)]">Analytics</h1>
+          <p className="text-[var(--muted)] mt-1">Performance overview</p>
         </div>
-        <div className="flex gap-1 bg-white border border-gray-200 rounded-lg p-1">
+        <div className="flex gap-1 bg-white border border-[var(--line)] rounded-lg p-1">
           {RANGES.map((r) => (
             <button
               key={r.value}
               onClick={() => setDays(r.value)}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
                 days === r.value
-                  ? 'bg-violet-600 text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-[var(--ink)] text-white'
+                  : 'text-[var(--ink2)] hover:bg-[var(--paper2)]'
               }`}
             >
               {r.label}
@@ -257,7 +257,7 @@ export default function AdminAnalytics() {
 
       {/* Charts - row 1 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <BarChart data={data.leadsByDay} color="bg-violet-500" label="Leads Over Time" />
+        <BarChart data={data.leadsByDay} color="bg-[var(--ink2)]" label="Leads Over Time" />
         <TypeBreakdown data={data.leadsByType} />
       </div>
 
@@ -269,7 +269,7 @@ export default function AdminAnalytics() {
 
       {/* Top clinics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <HorizontalBarChart data={data.topClinicsByLeads} color="bg-violet-500" label="Top Clinics by Leads" />
+        <HorizontalBarChart data={data.topClinicsByLeads} color="bg-[var(--ink2)]" label="Top Clinics by Leads" />
         <HorizontalBarChart data={data.topClinicsByReviews} color="bg-amber-500" label="Top Clinics by Reviews" />
       </div>
     </div>

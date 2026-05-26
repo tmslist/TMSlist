@@ -3,14 +3,54 @@ import Layout from "../layouts/Layout.astro";
 import AdvancedSearch from "../components/react/AdvancedSearch";
 import { db } from "../db";
 import { clinics } from "../db/schema";
-import { eq, sql } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
+import { getVisitorCountry } from "../utils/visitorCountry";
+import { COUNTRY_NAMES } from "../utils/dataHelpers";
 
 export const prerender = false;
 
+const VISITOR_COUNTRY = getVisitorCountry(Astro.cookies, Astro.url);
+const countryName = COUNTRY_NAMES[VISITOR_COUNTRY] || 'United States';
+
+// Insurance options vary by country — localize the filter chips so visitors see
+// the payers actually relevant to them.
+const INSURANCE_OPTIONS_BY_COUNTRY: Record<string, { label: string }[]> = {
+    US: [{ label: 'Aetna' }, { label: 'BCBS' }, { label: 'Cigna' }, { label: 'Medicare' }, { label: 'UnitedHealth' }],
+    GB: [{ label: 'NHS' }, { label: 'Bupa' }, { label: 'AXA Health' }, { label: 'Vitality' }, { label: 'Self-pay' }],
+    CA: [{ label: 'OHIP / Provincial' }, { label: 'Manulife' }, { label: 'Sun Life' }, { label: 'Canada Life' }, { label: 'Self-pay' }],
+    AU: [{ label: 'Medicare AU' }, { label: 'Bupa' }, { label: 'Medibank' }, { label: 'NIB' }, { label: 'HCF' }],
+    DE: [{ label: 'GKV (Public)' }, { label: 'TK' }, { label: 'AOK' }, { label: 'Barmer' }, { label: 'Private (PKV)' }],
+    IN: [{ label: 'Ayushman Bharat' }, { label: 'CGHS' }, { label: 'Star Health' }, { label: 'HDFC ERGO' }, { label: 'Self-pay' }],
+    FR: [{ label: 'Assurance Maladie' }, { label: 'Mutuelle' }, { label: 'AXA' }, { label: 'Allianz' }, { label: 'Self-pay' }],
+    JP: [{ label: 'NHI / Shakai Hoken' }, { label: 'Self-pay' }],
+    KR: [{ label: 'NHI Korea' }, { label: 'Samsung' }, { label: 'Hyundai Marine' }, { label: 'Self-pay' }],
+    BR: [{ label: 'SUS' }, { label: 'Bradesco Saúde' }, { label: 'Amil' }, { label: 'SulAmérica' }, { label: 'Self-pay' }],
+    ES: [{ label: 'Seguridad Social' }, { label: 'Sanitas' }, { label: 'Adeslas' }, { label: 'DKV' }, { label: 'Self-pay' }],
+    IT: [{ label: 'SSN' }, { label: 'UniSalute' }, { label: 'Generali' }, { label: 'Allianz' }, { label: 'Self-pay' }],
+    NL: [{ label: 'Zorgverzekering' }, { label: 'CZ' }, { label: 'VGZ' }, { label: 'Menzis' }, { label: 'Self-pay' }],
+    SG: [{ label: 'MediSave' }, { label: 'Integrated Shield' }, { label: 'AIA' }, { label: 'Prudential' }, { label: 'Self-pay' }],
+    AE: [{ label: 'DHA / SEHA' }, { label: 'Daman' }, { label: 'AXA Gulf' }, { label: 'Bupa Arabia' }, { label: 'Self-pay' }],
+    NZ: [{ label: 'ACC' }, { label: 'Southern Cross' }, { label: 'NIB NZ' }, { label: 'AIA NZ' }, { label: 'Self-pay' }],
+    ZA: [{ label: 'Discovery Health' }, { label: 'Momentum' }, { label: 'Bonitas' }, { label: 'Medihelp' }, { label: 'Self-pay' }],
+    SE: [{ label: 'Försäkringskassan' }, { label: 'Skandia' }, { label: 'Trygg-Hansa' }, { label: 'Self-pay' }],
+    IE: [{ label: 'HSE' }, { label: 'VHI' }, { label: 'Laya Healthcare' }, { label: 'Irish Life Health' }, { label: 'Self-pay' }],
+    IL: [{ label: 'Clalit' }, { label: 'Maccabi' }, { label: 'Meuhedet' }, { label: 'Leumit' }, { label: 'Self-pay' }],
+    MX: [{ label: 'IMSS' }, { label: 'ISSSTE' }, { label: 'GNP' }, { label: 'AXA México' }, { label: 'Self-pay' }],
+};
+const insuranceOptions = INSURANCE_OPTIONS_BY_COUNTRY[VISITOR_COUNTRY] || INSURANCE_OPTIONS_BY_COUNTRY.US;
+
 let clinicCount = 1100;
 try {
-  const result = await db.select({ count: sql<number>`count(*)` }).from(clinics).where(eq(clinics.verified, true));
-  clinicCount = Number(result[0]?.count || 1100);
+  const result = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(clinics)
+    .where(and(eq(clinics.verified, true), eq(clinics.country, VISITOR_COUNTRY)));
+  clinicCount = Number(result[0]?.count || 0);
+  // Fall back to global count if the country has no clinics yet
+  if (clinicCount === 0) {
+    const all = await db.select({ count: sql<number>`count(*)` }).from(clinics).where(eq(clinics.verified, true));
+    clinicCount = Number(all[0]?.count || 1100);
+  }
 } catch { /* fallback to approximate */ }
 
 const pageTitle = "Search TMS Clinics | Advanced Filters | TMS List";
@@ -25,7 +65,7 @@ const displayLocation = locationParam || 'your area';
 <Layout title={pageTitle} description={metaDescription}>
 
 <style>
-  :root{--ink:#0A1628;--ink2:#1E2A3B;--muted:#5A6B82;--warm:#C9654A;--line:#E6EAF0;--paper:#FBFAF7;--paper2:#F4F1EA;--accent:#1B4B5A;}
+  :root{--ink:#0A1628;--ink2:#1E2A3B;--muted:#5A6B82;--warm:#C9654A;--line:#E6EAF0;--paper:#FBFAF7;--paper2:#F4F1EA;--accent:#0A1628;}
   .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-0.02em}
   .linky{position:relative;display:inline-block}
   .linky::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
@@ -56,7 +96,7 @@ const displayLocation = locationParam || 'your area';
         </span>
       </h1>
       <p class="text-[15px] lg:justify-self-end max-w-md lg:pb-2" style="color:var(--muted)">
-        {clinicCount.toLocaleString()}+ verified providers across 6 countries. Sorted by editorial relevance — filter by device, protocol, insurance, or distance.
+        {clinicCount.toLocaleString()}+ verified providers in {countryName}. Sorted by editorial relevance — filter by device, protocol, insurance, or distance.
       </p>
     </div>
   </div>
@@ -131,17 +171,11 @@ const displayLocation = locationParam || 'your area';
             </div>
           </div>
 
-          <!-- Insurance -->
+          <!-- Insurance (localized per country) -->
           <div>
             <span class="filter-label">Insurance</span>
             <div class="space-y-2.5">
-              {[
-                { label: 'Aetna' },
-                { label: 'BCBS' },
-                { label: 'Cigna' },
-                { label: 'Medicare' },
-                { label: 'UnitedHealth' },
-              ].map((opt) => (
+              {insuranceOptions.map((opt) => (
                 <label class="flex items-center gap-3 text-[13px] cursor-pointer group">
                   <span class="filter-checkbox"></span>
                   <span class="group-hover:text-[color:var(--ink)] transition-colors" style="color:var(--muted)">{opt.label}</span>
@@ -214,7 +248,7 @@ const displayLocation = locationParam || 'your area';
         </div>
 
         <!-- AdvancedSearch React island handles the actual clinic results -->
-        <AdvancedSearch client:idle initialLocation={locationParam} />
+        <AdvancedSearch client:idle initialLocation={locationParam} initialCountry={VISITOR_COUNTRY} />
 
         <noscript>
           <div class="rounded-2xl p-8 text-center mt-6" style="background:white; border:1px solid var(--line)">

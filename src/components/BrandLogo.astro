@@ -1,0 +1,68 @@
+---
+import { getBrand, getLogoUrl, getFaviconFallbackUrl } from '../utils/brandLogos';
+
+interface Props {
+  slug: string;
+  /** Display name override (used in alt + letter fallback). Defaults to brand name. */
+  name?: string;
+  /** Pixel size of the logo box. Default 32. */
+  size?: number;
+  /** Optional class for outer wrapper */
+  class?: string;
+  /** Background tint for letter fallback (Tailwind class) */
+  fallbackBg?: string;
+  /** Text color for letter fallback (Tailwind class) */
+  fallbackFg?: string;
+  /** Whether to round the box. Default true. */
+  rounded?: boolean;
+}
+
+const {
+  slug,
+  name,
+  size = 32,
+  class: className = '',
+  fallbackBg = 'bg-[var(--ink)]',
+  fallbackFg = 'text-white',
+  rounded = true,
+} = Astro.props;
+
+const brand = getBrand(slug);
+const displayName = name || brand?.name || slug;
+const initial = displayName.replace(/[^A-Za-z0-9]/g, '').charAt(0).toUpperCase() || '?';
+const radius = rounded ? '0.5rem' : '0';
+
+// Source priority: local file > Clearbit > favicon > letter
+const primarySrc = brand?.logo || (brand ? getLogoUrl(brand.domain, size * 2) : null);
+const fallbackSrc = brand ? (brand.logo ? getLogoUrl(brand.domain, size * 2) : getFaviconFallbackUrl(brand.domain, size * 2)) : null;
+const imgFilter = brand?.invertOnLight ? 'filter: invert(1) brightness(0);' : '';
+---
+<span
+  class:list={[className]}
+  style={`display:inline-flex; align-items:center; justify-content:center; width:${size}px; height:${size}px; border-radius:${radius}; background:#fff; overflow:hidden; flex-shrink:0;`}
+>
+  {primarySrc ? (
+    <>
+      <img
+        src={primarySrc}
+        data-fallback={fallbackSrc}
+        alt={`${displayName} logo`}
+        loading="lazy"
+        decoding="async"
+        width={size}
+        height={size}
+        style={`width:${size}px; height:${size}px; object-fit:contain; padding:3px; ${imgFilter}`}
+        onerror={`if(this.dataset.fb!=='1' && this.dataset.fallback){this.dataset.fb='1';this.src=this.dataset.fallback}else{this.style.display='none';this.nextElementSibling.style.display='flex';}`}
+      />
+      <span
+        class:list={[fallbackBg, fallbackFg, 'font-bold']}
+        style={`display:none; align-items:center; justify-content:center; width:100%; height:100%; font-size:${Math.round(size * 0.45)}px; border-radius:${radius};`}
+      >{initial}</span>
+    </>
+  ) : (
+    <span
+      class:list={[fallbackBg, fallbackFg, 'font-bold']}
+      style={`display:flex; align-items:center; justify-content:center; width:100%; height:100%; font-size:${Math.round(size * 0.45)}px; border-radius:${radius};`}
+    >{initial}</span>
+  )}
+</span>

@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { db } from '../../db';
+import { db } from '../../db/index.js';
 import { sql } from 'drizzle-orm';
 
 export const prerender = false;

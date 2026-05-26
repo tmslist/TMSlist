@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-07
 category: stories
 tags: ["patient story", "depression", "college athletes", "young adults", "stigma"]
-image: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## The guy everyone thought had it figured out

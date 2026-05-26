@@ -4,7 +4,7 @@ description: "When antidepressants fail, TMS often succeeds. Here's a practical 
 publishDate: 2026-04-19
 category: treatment
 author: Dr. Michael Torres
-image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-treatment-resistant-depression.svg"
 tags: ["tms", "treatment-resistant-depression", "trd", "antidepressants"]
 ---
 
@@ -75,35 +75,35 @@ The difference between a "okay" TMS result and an excellent one often comes down
 
 If you've tried two or more antidepressants without adequate relief, TMS is worth a serious conversation with your psychiatrist. It's not experimental — it's FDA-cleared, widely covered by insurance (including Medicare), and backed by over 15 years of clinical data. For patients who have exhausted medication options, it often represents the most promising path forward.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How is treatment-resistant depression defined?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How is treatment-resistant depression defined?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most psychiatrists consider depression treatment-resistant after two or more adequate medication trials fail to produce meaningful improvement. "Adequate" means the right dose, taken for long enough (typically 6-8 weeks per medication), often including different drug classes. By this standard, roughly 30-40% of all depressed patients meet TRD criteria at some point in their lives.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most psychiatrists consider depression treatment-resistant after two or more adequate medication trials fail to produce meaningful improvement. "Adequate" means the right dose, taken for long enough (typically 6-8 weeks per medication), often including different drug classes. By this standard, roughly 30-40% of all depressed patients meet TRD criteria at some point in their lives.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What are TMS response rates for treatment-resistant depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What are TMS response rates for treatment-resistant depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Real-world clinic registries show approximately 58-65% of TRD patients achieve clinically meaningful response, with about 35% reaching full remission. These numbers compare favorably to medication response rates in non-refractory depression and hold up across age groups and varying depression severity levels.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Real-world clinic registries show approximately 58-65% of TRD patients achieve clinically meaningful response, with about 35% reaching full remission. These numbers compare favorably to medication response rates in non-refractory depression and hold up across age groups and varying depression severity levels.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Should I stay on medications during TMS for TRD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Should I stay on medications during TMS for TRD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">For most patients, continuing a current medication during TMS is fine and does not reduce TMS efficacy. For some truly refractory cases, a medication holiday under physician supervision may improve TMS responsiveness. After TMS, many patients successfully reduce or discontinue medications -- this should always be managed by your psychiatrist, never done abruptly.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">For most patients, continuing a current medication during TMS is fine and does not reduce TMS efficacy. For some truly refractory cases, a medication holiday under physician supervision may improve TMS responsiveness. After TMS, many patients successfully reduce or discontinue medications -- this should always be managed by your psychiatrist, never done abruptly.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

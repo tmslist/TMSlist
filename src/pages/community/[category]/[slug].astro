@@ -52,13 +52,13 @@ const isPostAuthor = session?.userId === post.authorId;
     { name: post.title, url: `/community/${post.categorySlug}/${post.slug}` },
   ]}
 >
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-[var(--paper2)]">
     <div class="container mx-auto px-4 lg:px-8 py-8 max-w-3xl">
       <!-- Breadcrumb nav -->
       <div class="flex items-center gap-2 text-sm mb-6">
-        <a href="/community" class="text-gray-400 hover:text-violet-600 transition-colors">Community</a>
-        <span class="text-gray-300">/</span>
-        <a href={`/community/${post.categorySlug}`} class="text-gray-400 hover:text-violet-600 transition-colors">{post.categoryName}</a>
+        <a href="/community" class="text-[var(--muted)] hover:text-[var(--accent)] transition-colors">Community</a>
+        <span class="text-[var(--line)]">/</span>
+        <a href={`/community/${post.categorySlug}`} class="text-[var(--muted)] hover:text-[var(--accent)] transition-colors">{post.categoryName}</a>
       </div>
 
       <CommunityThread

@@ -26,13 +26,13 @@ faqs:
     <div class="text-2xl font-bold text-amber-700 font-display">3-12 mo</div>
     <div class="text-xs text-amber-600 mt-1">Time to effect</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">Surgical</div>
-    <div class="text-xs text-blue-600 mt-1">Implant required</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">Surgical</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Implant required</div>
   </div>
-  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-violet-700 font-display">24/7</div>
-    <div class="text-xs text-violet-600 mt-1">Continuous stimulation</div>
+  <div class="bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--warm)] font-display">24/7</div>
+    <div class="text-xs text-[var(--warm)] mt-1">Continuous stimulation</div>
   </div>
 </div>
 
@@ -42,9 +42,9 @@ Vagus Nerve Stimulation involves surgically implanting a small pulse generator (
 
 The vagus nerve is the longest cranial nerve, running from the brainstem through the neck and into the chest and abdomen. It's a major communication highway between the brain and body. By stimulating it, VNS modulates neurotransmitter systems (serotonin, norepinephrine, GABA) and reduces inflammation — both of which are implicated in depression.
 
-<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">VNS is a last-resort treatment</h4>
-  <p class="text-sm text-slate-600 leading-relaxed mb-0">VNS is typically reserved for patients who've failed <strong>4+ medication trials, psychotherapy, and at least one other brain stimulation treatment</strong> (usually TMS or ECT). The surgical requirement, slow onset (months), and cost make it a later-stage option in the treatment algorithm.</p>
+<div class="not-prose my-8 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--ink)] mb-3 text-base">VNS is a last-resort treatment</h4>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-0">VNS is typically reserved for patients who've failed <strong>4+ medication trials, psychotherapy, and at least one other brain stimulation treatment</strong> (usually TMS or ECT). The surgical requirement, slow onset (months), and cost make it a later-stage option in the treatment algorithm.</p>
 </div>
 
 ---
@@ -62,21 +62,21 @@ After implantation, the device is programmed by your psychiatrist using an exter
 ## VNS vs. TMS Comparison
 
 <div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+<table class="w-full text-sm border border-[var(--line)] rounded-xl overflow-hidden">
   <thead>
-    <tr class="bg-slate-800 text-white">
+    <tr class="bg-[var(--ink2)] text-white">
       <th class="px-4 py-3 text-left font-semibold">Factor</th>
       <th class="px-4 py-3 text-center font-semibold">VNS</th>
       <th class="px-4 py-3 text-center font-semibold">TMS</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Invasiveness</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Surgical implant</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Non-invasive</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Time to Effect</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">3-12 months</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">2-3 weeks</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Clinic Visits</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Periodic check-ups only</span></td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Daily for 6-9 weeks</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Reversible</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Device removable, lead stays</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Fully reversible</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Cost</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">$20,000-$35,000</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">$6,000-$12,000</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">When to Use</td><td class="px-4 py-3 text-center"><span class="font-semibold text-slate-700">After TMS + meds fail</span></td><td class="px-4 py-3 text-center"><span class="font-semibold text-slate-700">After 2+ med failures</span></td></tr>
+  <tbody class="divide-y divide-[var(--line)]">
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Invasiveness</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Surgical implant</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Non-invasive</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Time to Effect</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">3-12 months</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">2-3 weeks</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Clinic Visits</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Periodic check-ups only</span></td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Daily for 6-9 weeks</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Reversible</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Device removable, lead stays</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Fully reversible</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Cost</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">$20,000-$35,000</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">$6,000-$12,000</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">When to Use</td><td class="px-4 py-3 text-center"><span class="font-semibold text-[var(--ink2)]">After TMS + meds fail</span></td><td class="px-4 py-3 text-center"><span class="font-semibold text-[var(--ink2)]">After 2+ med failures</span></td></tr>
   </tbody>
 </table>
 </div>

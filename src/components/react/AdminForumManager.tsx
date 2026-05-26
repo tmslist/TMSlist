@@ -48,14 +48,14 @@ interface Report {
 type Tab = 'threads' | 'categories' | 'moderation';
 
 const COLOR_MAP: Record<string, string> = {
-  violet: 'bg-violet-100 text-violet-700',
+  violet: 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)]',
   emerald: 'bg-emerald-100 text-emerald-700',
   amber: 'bg-amber-100 text-amber-700',
-  rose: 'bg-rose-100 text-rose-700',
+  rose: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
   yellow: 'bg-yellow-100 text-yellow-700',
-  blue: 'bg-blue-100 text-blue-700',
+  blue: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
   teal: 'bg-teal-100 text-teal-700',
-  indigo: 'bg-indigo-100 text-indigo-700',
+  indigo: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
 };
 
 const ICON_MAP: Record<string, string> = {
@@ -219,26 +219,26 @@ export default function AdminForumManager() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Forum Manager</h1>
-          <p className="text-gray-500 mt-1">Manage forum categories, threads, and moderation</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Forum Manager</h1>
+          <p className="text-[var(--muted)] mt-1">Manage forum categories, threads, and moderation</p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-6 bg-gray-100 p-1 rounded-xl w-fit">
+      <div className="flex gap-1 mb-6 bg-[var(--paper2)] p-1 rounded-xl w-fit">
         {tabs.map(tab => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               activeTab === tab.key
-                ? 'bg-white text-violet-700 shadow-sm'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'bg-white text-[var(--ink)] shadow-sm'
+                : 'text-[var(--muted)] hover:text-[var(--ink2)]'
             }`}
           >
             {tab.label}
             {tab.count !== undefined && tab.count > 0 && (
-              <span className="ml-1.5 text-xs px-1.5 py-0.5 bg-violet-100 text-violet-700 rounded-full">{tab.count}</span>
+              <span className="ml-1.5 text-xs px-1.5 py-0.5 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] rounded-full">{tab.count}</span>
             )}
           </button>
         ))}
@@ -252,7 +252,7 @@ export default function AdminForumManager() {
             <select
               value={filter.status}
               onChange={e => setFilter(f => ({ ...f, status: e.target.value }))}
-              className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-violet-500 focus:ring-violet-500"
+              className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
             >
               <option value="">All statuses</option>
               <option value="published">Published</option>
@@ -262,7 +262,7 @@ export default function AdminForumManager() {
             <select
               value={filter.category}
               onChange={e => setFilter(f => ({ ...f, category: e.target.value }))}
-              className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-violet-500 focus:ring-violet-500"
+              className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
             >
               <option value="">All categories</option>
               {categories.map(c => (
@@ -272,23 +272,23 @@ export default function AdminForumManager() {
           </div>
 
           {/* Threads table */}
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+          <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+            <table className="min-w-full divide-y divide-[var(--line)]">
+              <thead className="bg-[var(--paper2)]">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Thread</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Author</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Stats</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Thread</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Category</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Author</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Stats</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-[var(--line)]">
                 {filteredThreads.map(thread => {
                   const colorKey = thread.categoryColor || 'violet';
                   return (
-                    <tr key={thread.id} className="hover:bg-gray-50">
+                    <tr key={thread.id} className="hover:bg-[var(--paper2)]">
                       <td className="px-6 py-4">
                         <div className="max-w-xs">
                           <div className="flex items-center gap-2">
@@ -296,13 +296,13 @@ export default function AdminForumManager() {
                               <span className="px-1.5 py-0.5 bg-amber-100 text-amber-700 text-[10px] font-bold rounded uppercase">PIN</span>
                             )}
                             {thread.isLocked && (
-                              <span className="px-1.5 py-0.5 bg-gray-100 text-gray-600 text-[10px] font-bold rounded uppercase">LOCK</span>
+                              <span className="px-1.5 py-0.5 bg-[var(--paper2)] text-[var(--ink2)] text-[10px] font-bold rounded uppercase">LOCK</span>
                             )}
                           </div>
-                          <a href={`/community/posts/${thread.slug}`} target="_blank" rel="noopener" className="text-sm font-semibold text-gray-900 hover:text-violet-600 line-clamp-1">
+                          <a href={`/community/posts/${thread.slug}`} target="_blank" rel="noopener" className="text-sm font-semibold text-[var(--ink)] hover:text-[var(--ink)] line-clamp-1">
                             {thread.title}
                           </a>
-                          <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{thread.body}</p>
+                          <p className="text-xs text-[var(--muted)] mt-0.5 line-clamp-1">{thread.body}</p>
                         </div>
                       </td>
                       <td className="px-6 py-4">
@@ -311,8 +311,8 @@ export default function AdminForumManager() {
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="text-sm text-gray-900">{thread.authorName || 'Unknown'}</div>
-                        <div className="text-xs text-gray-500">{thread.authorRole}</div>
+                        <div className="text-sm text-[var(--ink)]">{thread.authorName || 'Unknown'}</div>
+                        <div className="text-xs text-[var(--muted)]">{thread.authorRole}</div>
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${STATUS_COLORS[thread.status]}`}>
@@ -320,7 +320,7 @@ export default function AdminForumManager() {
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-3 text-xs text-gray-500">
+                        <div className="flex items-center gap-3 text-xs text-[var(--muted)]">
                           <span className="flex items-center gap-1">
                             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
@@ -339,7 +339,7 @@ export default function AdminForumManager() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handlePinThread(thread.id, !thread.isPinned)}
-                            className={`text-xs font-medium transition-colors ${thread.isPinned ? 'text-amber-600 hover:text-amber-700' : 'text-gray-400 hover:text-amber-600'}`}
+                            className={`text-xs font-medium transition-colors ${thread.isPinned ? 'text-amber-600 hover:text-amber-700' : 'text-[var(--muted)] hover:text-amber-600'}`}
                             title={thread.isPinned ? 'Unpin' : 'Pin'}
                           >
                             <svg className="w-4 h-4" fill={thread.isPinned ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
@@ -348,7 +348,7 @@ export default function AdminForumManager() {
                           </button>
                           <button
                             onClick={() => handleLockThread(thread.id, !thread.isLocked)}
-                            className={`text-xs font-medium transition-colors ${thread.isLocked ? 'text-red-600 hover:text-red-700' : 'text-gray-400 hover:text-red-600'}`}
+                            className={`text-xs font-medium transition-colors ${thread.isLocked ? 'text-red-600 hover:text-red-700' : 'text-[var(--muted)] hover:text-red-600'}`}
                             title={thread.isLocked ? 'Unlock' : 'Lock'}
                           >
                             <svg className="w-4 h-4" fill={thread.isLocked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
@@ -371,7 +371,7 @@ export default function AdminForumManager() {
                 })}
                 {filteredThreads.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
+                    <td colSpan={6} className="px-6 py-12 text-center text-[var(--muted)]">
                       {loading ? 'Loading...' : 'No threads found'}
                     </td>
                   </tr>
@@ -389,45 +389,45 @@ export default function AdminForumManager() {
             {categories.map(cat => {
               const colorKey = cat.color || 'violet';
               return (
-                <div key={cat.id} className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow">
+                <div key={cat.id} className="bg-white rounded-xl border border-[var(--line)] p-5 hover:shadow-md transition-shadow">
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${COLOR_MAP[colorKey]?.split(' ')[0] || 'bg-violet-100'}`}>
+                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${COLOR_MAP[colorKey]?.split(' ')[0] || 'bg-[rgba(10,22,40,0.08)]'}`}>
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d={ICON_MAP[cat.icon || ''] || ICON_MAP.star} />
                         </svg>
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold text-gray-900">{cat.name}</h3>
-                        <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{cat.description}</p>
+                        <h3 className="text-sm font-semibold text-[var(--ink)]">{cat.name}</h3>
+                        <p className="text-xs text-[var(--muted)] mt-0.5 line-clamp-1">{cat.description}</p>
                       </div>
                     </div>
                     <button
                       onClick={() => setEditingCategory(cat)}
-                      className="text-xs text-violet-600 hover:text-violet-700 font-medium"
+                      className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium"
                     >
                       Edit
                     </button>
                   </div>
-                  <div className="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100">
+                  <div className="flex items-center gap-4 mt-4 pt-4 border-t border-[var(--line)]">
                     <div className="text-center">
-                      <div className="text-lg font-bold text-gray-900">{cat.postCount}</div>
-                      <div className="text-[11px] text-gray-500">Posts</div>
+                      <div className="text-lg font-bold text-[var(--ink)]">{cat.postCount}</div>
+                      <div className="text-[11px] text-[var(--muted)]">Posts</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-lg font-bold text-gray-900">{cat.sortOrder}</div>
-                      <div className="text-[11px] text-gray-500">Order</div>
+                      <div className="text-lg font-bold text-[var(--ink)]">{cat.sortOrder}</div>
+                      <div className="text-[11px] text-[var(--muted)]">Order</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-sm font-mono text-gray-400">{cat.slug}</div>
-                      <div className="text-[11px] text-gray-500">Slug</div>
+                      <div className="text-sm font-mono text-[var(--muted)]">{cat.slug}</div>
+                      <div className="text-[11px] text-[var(--muted)]">Slug</div>
                     </div>
                   </div>
                 </div>
               );
             })}
             {categories.length === 0 && !loading && (
-              <div className="col-span-full text-center py-12 text-gray-500">No categories yet</div>
+              <div className="col-span-full text-center py-12 text-[var(--muted)]">No categories yet</div>
             )}
           </div>
         </div>
@@ -436,31 +436,31 @@ export default function AdminForumManager() {
       {/* Moderation Tab */}
       {activeTab === 'moderation' && (
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Reports Queue ({unresolvedReports.length})</h2>
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Reports Queue ({unresolvedReports.length})</h2>
           <div className="space-y-3">
             {unresolvedReports.map(report => (
-              <div key={report.id} className="bg-white rounded-xl border border-gray-200 p-5">
+              <div key={report.id} className="bg-white rounded-xl border border-[var(--line)] p-5">
                 <div className="flex items-start justify-between">
                   <div>
                     <div className="flex items-center gap-2">
                       <span className={`px-2 py-0.5 rounded text-xs font-medium ${
-                        report.targetType === 'post' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700'
+                        report.targetType === 'post' ? 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]' : 'bg-emerald-100 text-emerald-700'
                       }`}>
                         {report.targetType}
                       </span>
-                      <span className="text-xs text-gray-500">Report ID: {report.id.slice(0, 8)}</span>
+                      <span className="text-xs text-[var(--muted)]">Report ID: {report.id.slice(0, 8)}</span>
                     </div>
-                    <p className="text-sm text-gray-900 mt-2 font-medium">{report.reason}</p>
-                    <p className="text-xs text-gray-400 mt-1">{new Date(report.createdAt).toLocaleString()}</p>
+                    <p className="text-sm text-[var(--ink)] mt-2 font-medium">{report.reason}</p>
+                    <p className="text-xs text-[var(--muted)] mt-1">{new Date(report.createdAt).toLocaleString()}</p>
                   </div>
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleResolveReport(report.id)}
-                      className="px-4 py-2 bg-violet-600 text-white text-xs font-medium rounded-lg hover:bg-violet-700 transition-colors"
+                      className="px-4 py-2 bg-[var(--ink)] text-white text-xs font-medium rounded-lg hover:bg-[var(--ink)] transition-colors"
                     >
                       Resolve
                     </button>
-                    <button className="px-4 py-2 text-xs font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    <button className="px-4 py-2 text-xs font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-lg transition-colors">
                       View
                     </button>
                   </div>
@@ -468,7 +468,7 @@ export default function AdminForumManager() {
               </div>
             ))}
             {unresolvedReports.length === 0 && (
-              <div className="text-center py-12 text-gray-500 bg-white rounded-xl border border-gray-200">
+              <div className="text-center py-12 text-[var(--muted)] bg-white rounded-xl border border-[var(--line)]">
                 No pending reports
               </div>
             )}
@@ -480,44 +480,44 @@ export default function AdminForumManager() {
       {editingCategory && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Edit Category</h2>
+            <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Edit Category</h2>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Name</label>
                   <input
                     type="text"
                     value={editingCategory.name}
                     onChange={e => setEditingCategory({ ...editingCategory, name: e.target.value })}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                    className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Slug</label>
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Slug</label>
                   <input
                     type="text"
                     value={editingCategory.slug}
                     onChange={e => setEditingCategory({ ...editingCategory, slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-') })}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-mono focus:border-violet-500 focus:ring-violet-500"
+                    className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm font-mono focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Description</label>
                 <textarea
                   value={editingCategory.description || ''}
                   onChange={e => setEditingCategory({ ...editingCategory, description: e.target.value })}
                   rows={2}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Icon</label>
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Icon</label>
                   <select
                     value={editingCategory.icon || 'star'}
                     onChange={e => setEditingCategory({ ...editingCategory, icon: e.target.value })}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                    className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                   >
                     {Object.keys(ICON_MAP).map(k => (
                       <option key={k} value={k}>{k}</option>
@@ -525,11 +525,11 @@ export default function AdminForumManager() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Color</label>
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Color</label>
                   <select
                     value={editingCategory.color || 'violet'}
                     onChange={e => setEditingCategory({ ...editingCategory, color: e.target.value })}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                    className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                   >
                     {Object.keys(COLOR_MAP).map(k => (
                       <option key={k} value={k}>{k}</option>
@@ -538,12 +538,12 @@ export default function AdminForumManager() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Sort Order</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Sort Order</label>
                 <input
                   type="number"
                   value={editingCategory.sortOrder}
                   onChange={e => setEditingCategory({ ...editingCategory, sortOrder: parseInt(e.target.value) || 0 })}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
                 />
               </div>
             </div>
@@ -551,13 +551,13 @@ export default function AdminForumManager() {
               <button
                 onClick={() => handleCategorySave(editingCategory)}
                 disabled={saving}
-                className="px-5 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-xl hover:bg-violet-700 disabled:opacity-50 transition-colors"
+                className="px-5 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
               >
                 {saving ? 'Saving...' : 'Save Category'}
               </button>
               <button
                 onClick={() => setEditingCategory(null)}
-                className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+                className="px-5 py-2.5 text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-xl transition-colors"
               >
                 Cancel
               </button>

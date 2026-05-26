@@ -28,8 +28,8 @@ const CATEGORY_LABELS: Record<FeedbackItem['category'], string> = {
 
 const CATEGORY_COLORS: Record<FeedbackItem['category'], string> = {
   bug_report: 'bg-red-100 text-red-700',
-  feature_request: 'bg-violet-100 text-violet-700',
-  general: 'bg-gray-100 text-gray-700',
+  feature_request: 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)]',
+  general: 'bg-[var(--paper2)] text-[var(--ink2)]',
   complaint: 'bg-orange-100 text-orange-700',
   compliment: 'bg-emerald-100 text-emerald-700',
 };
@@ -235,7 +235,7 @@ export default function AdminAppFeedback() {
     return (
       <div className="flex gap-0.5">
         {[1, 2, 3, 4, 5].map(i => (
-          <svg key={i} className={`${sz} ${i <= rating ? 'text-amber-400' : 'text-gray-200'}`} fill="currentColor" viewBox="0 0 20 20">
+          <svg key={i} className={`${sz} ${i <= rating ? 'text-amber-400' : 'text-[var(--line)]'}`} fill="currentColor" viewBox="0 0 20 20">
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
           </svg>
         ))}
@@ -247,8 +247,8 @@ export default function AdminAppFeedback() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">In-App Feedback</h1>
-          <p className="text-gray-500 mt-1">Review and respond to user-submitted app feedback</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">In-App Feedback</h1>
+          <p className="text-[var(--muted)] mt-1">Review and respond to user-submitted app feedback</p>
         </div>
         <div className="flex items-center gap-2">
           <span className="px-3 py-1 bg-amber-100 text-amber-700 text-sm font-medium rounded-full">
@@ -259,47 +259,47 @@ export default function AdminAppFeedback() {
 
       {/* Stats Row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Total Feedback</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{stats.total}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Total Feedback</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{stats.total}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Average Rating</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Average Rating</p>
           <div className="flex items-center gap-2 mt-1">
-            <p className="text-2xl font-bold text-gray-900">{stats.avgRating}</p>
+            <p className="text-2xl font-bold text-[var(--ink)]">{stats.avgRating}</p>
             <StarRating rating={Math.round(parseFloat(stats.avgRating))} />
           </div>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Pending Replies</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Pending Replies</p>
           <p className="text-2xl font-bold text-amber-600 mt-1">{stats.pending}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Response Rate</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Response Rate</p>
           <p className="text-2xl font-bold text-emerald-600 mt-1">{Math.round(((stats.total - stats.pending) / stats.total) * 100)}%</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Rating Breakdown */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h3 className="text-base font-semibold text-gray-900 mb-4">Rating Breakdown</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6">
+          <h3 className="text-base font-semibold text-[var(--ink)] mb-4">Rating Breakdown</h3>
           <div className="space-y-3">
             {[5, 4, 3, 2, 1].map(r => {
               const breakdown = stats.ratingBreakdown.find(b => b.rating === r);
               return (
                 <div key={r} className="flex items-center gap-3">
-                  <span className="text-sm font-medium text-gray-600 w-3">{r}</span>
+                  <span className="text-sm font-medium text-[var(--ink2)] w-3">{r}</span>
                   <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
-                  <div className="flex-1 bg-gray-100 rounded-full h-2">
+                  <div className="flex-1 bg-[var(--paper2)] rounded-full h-2">
                     <div
                       className="bg-amber-400 h-2 rounded-full"
                       style={{ width: `${breakdown?.percent || 0}%` }}
                     />
                   </div>
-                  <span className="text-xs font-medium text-gray-500 w-8 text-right">{breakdown?.count || 0}</span>
+                  <span className="text-xs font-medium text-[var(--muted)] w-8 text-right">{breakdown?.count || 0}</span>
                 </div>
               );
             })}
@@ -307,27 +307,27 @@ export default function AdminAppFeedback() {
         </div>
 
         {/* Category breakdown */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h3 className="text-base font-semibold text-gray-900 mb-4">By Category</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6">
+          <h3 className="text-base font-semibold text-[var(--ink)] mb-4">By Category</h3>
           <div className="space-y-3">
             {Object.entries(stats.byCategory).map(([cat, count]) => (
               <div key={cat} className="flex items-center justify-between">
                 <span className={`px-2.5 py-0.5 text-xs font-medium rounded-full ${CATEGORY_COLORS[cat as FeedbackItem['category']]}`}>
                   {CATEGORY_LABELS[cat as FeedbackItem['category']]}
                 </span>
-                <span className="text-sm font-semibold text-gray-900">{count}</span>
+                <span className="text-sm font-semibold text-[var(--ink)]">{count}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Sentiment overview */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h3 className="text-base font-semibold text-gray-900 mb-4">Sentiment Overview</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6">
+          <h3 className="text-base font-semibold text-[var(--ink)] mb-4">Sentiment Overview</h3>
           <div className="space-y-4">
             {([
               { label: 'Positive', count: feedback.filter(f => f.sentiment === 'positive').length, color: 'bg-emerald-500', bgColor: 'bg-emerald-50', textColor: 'text-emerald-700' },
-              { label: 'Neutral', count: feedback.filter(f => f.sentiment === 'neutral').length, color: 'bg-gray-400', bgColor: 'bg-gray-50', textColor: 'text-gray-700' },
+              { label: 'Neutral', count: feedback.filter(f => f.sentiment === 'neutral').length, color: 'bg-[var(--line)]', bgColor: 'bg-[var(--paper2)]', textColor: 'text-[var(--ink2)]' },
               { label: 'Negative', count: feedback.filter(f => f.sentiment === 'negative').length, color: 'bg-red-500', bgColor: 'bg-red-50', textColor: 'text-red-700' },
             ]).map(s => (
               <div key={s.label}>
@@ -348,12 +348,12 @@ export default function AdminAppFeedback() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 mt-6 mb-6">
+      <div className="bg-white rounded-xl border border-[var(--line)] p-4 mt-6 mb-6">
         <div className="flex flex-wrap gap-4">
           <select
             value={filterCategory}
             onChange={e => setFilterCategory(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Categories</option>
             {Object.entries(CATEGORY_LABELS).map(([k, v]) => (
@@ -363,7 +363,7 @@ export default function AdminAppFeedback() {
           <select
             value={filterPlatform}
             onChange={e => setFilterPlatform(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Platforms</option>
             <option value="ios">iOS</option>
@@ -372,7 +372,7 @@ export default function AdminAppFeedback() {
           <select
             value={filterRating}
             onChange={e => setFilterRating(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Ratings</option>
             {[5, 4, 3, 2, 1].map(r => (
@@ -382,7 +382,7 @@ export default function AdminAppFeedback() {
           <select
             value={filterReplied}
             onChange={e => setFilterReplied(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Status</option>
             <option value="pending">Pending Reply</option>
@@ -394,46 +394,46 @@ export default function AdminAppFeedback() {
       {/* Feedback list */}
       <div className="space-y-4">
         {filteredFeedback.map(item => (
-          <div key={item.id} className="bg-white rounded-xl border border-gray-200 p-5 hover:border-violet-200 transition-colors">
+          <div key={item.id} className="bg-white rounded-xl border border-[var(--line)] p-5 hover:border-[rgba(10,22,40,0.15)] transition-colors">
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <div className="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center">
-                  <span className="text-sm font-semibold text-violet-600">{item.userName.charAt(0)}</span>
+                <div className="w-10 h-10 bg-[rgba(10,22,40,0.08)] rounded-full flex items-center justify-center">
+                  <span className="text-sm font-semibold text-[var(--ink)]">{item.userName.charAt(0)}</span>
                 </div>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <span className="text-sm font-semibold text-gray-900">{item.userName}</span>
+                  <span className="text-sm font-semibold text-[var(--ink)]">{item.userName}</span>
                   <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${CATEGORY_COLORS[item.category]}`}>
                     {CATEGORY_LABELS[item.category]}
                   </span>
                   <span className={`px-2 py-0.5 text-xs font-semibold rounded-full ${
-                    item.platform === 'ios' ? 'bg-gray-900 text-white' : 'bg-green-600 text-white'
+                    item.platform === 'ios' ? 'bg-[var(--ink)] text-white' : 'bg-green-600 text-white'
                   }`}>
                     {item.platform.toUpperCase()}
                   </span>
-                  <span className="px-2 py-0.5 text-xs font-medium text-gray-500">{item.appVersion}</span>
+                  <span className="px-2 py-0.5 text-xs font-medium text-[var(--muted)]">{item.appVersion}</span>
                   <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
                     item.replied ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
                   }`}>
                     {item.replied ? 'Replied' : 'Pending'}
                   </span>
                 </div>
-                <p className="text-sm font-medium text-gray-900 mb-1">{item.subject}</p>
-                <p className="text-sm text-gray-600 mb-2">{item.body}</p>
+                <p className="text-sm font-medium text-[var(--ink)] mb-1">{item.subject}</p>
+                <p className="text-sm text-[var(--ink2)] mb-2">{item.body}</p>
                 <div className="flex items-center gap-4">
                   <StarRating rating={item.rating} />
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-[var(--muted)]">
                     {new Date(item.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </span>
                   {item.helpful > 0 && (
-                    <span className="text-xs text-gray-400">{item.helpful} found helpful</span>
+                    <span className="text-xs text-[var(--muted)]">{item.helpful} found helpful</span>
                   )}
                 </div>
                 {item.replied && item.replyText && (
                   <div className="mt-3 bg-emerald-50 border border-emerald-100 rounded-lg p-3">
                     <p className="text-xs font-semibold text-emerald-700 mb-1">Our Reply:</p>
-                    <p className="text-sm text-gray-700">{item.replyText}</p>
+                    <p className="text-sm text-[var(--ink2)]">{item.replyText}</p>
                   </div>
                 )}
               </div>
@@ -441,7 +441,7 @@ export default function AdminAppFeedback() {
                 {!item.replied && (
                   <button
                     onClick={() => { setSelectedFeedback(item); setReplyText(''); }}
-                    className="px-4 py-2 bg-violet-600 text-white text-xs font-medium rounded-lg hover:bg-violet-700 transition-colors"
+                    className="px-4 py-2 bg-[var(--ink)] text-white text-xs font-medium rounded-lg hover:bg-[var(--ink)] transition-colors"
                   >
                     Reply
                   </button>
@@ -451,8 +451,8 @@ export default function AdminAppFeedback() {
           </div>
         ))}
         {filteredFeedback.length === 0 && (
-          <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-            <p className="text-gray-500">No feedback matches your filters</p>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-12 text-center">
+            <p className="text-[var(--muted)]">No feedback matches your filters</p>
           </div>
         )}
       </div>
@@ -462,38 +462,38 @@ export default function AdminAppFeedback() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">Reply to Feedback</h2>
-              <button onClick={() => setSelectedFeedback(null)} className="text-gray-400 hover:text-gray-600">
+              <h2 className="text-lg font-semibold text-[var(--ink)]">Reply to Feedback</h2>
+              <button onClick={() => setSelectedFeedback(null)} className="text-[var(--muted)] hover:text-[var(--ink2)]">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div className="bg-gray-50 rounded-lg p-4 mb-4">
-              <p className="text-sm font-medium text-gray-900">{selectedFeedback.subject}</p>
-              <p className="text-xs text-gray-500 mt-1">{selectedFeedback.body}</p>
+            <div className="bg-[var(--paper2)] rounded-lg p-4 mb-4">
+              <p className="text-sm font-medium text-[var(--ink)]">{selectedFeedback.subject}</p>
+              <p className="text-xs text-[var(--muted)] mt-1">{selectedFeedback.body}</p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Your Reply</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-2">Your Reply</label>
               <textarea
                 value={replyText}
                 onChange={e => setReplyText(e.target.value)}
                 rows={5}
                 placeholder="Type your response here..."
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
               />
             </div>
             <div className="flex gap-3 mt-6">
               <button
                 onClick={handleSendReply}
                 disabled={sendingReply || !replyText.trim()}
-                className="px-5 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-xl hover:bg-violet-700 disabled:opacity-50 transition-colors"
+                className="px-5 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
               >
                 {sendingReply ? 'Sending...' : 'Send Reply'}
               </button>
               <button
                 onClick={() => setSelectedFeedback(null)}
-                className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+                className="px-5 py-2.5 text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-xl transition-colors"
               >
                 Cancel
               </button>

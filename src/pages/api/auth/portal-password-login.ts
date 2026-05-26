@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { loginSchema } from '../../../db/validation';
+import { loginSchema } from '../../../db/validation.js';
 import {
   getUserByEmail,
   verifyPassword,
@@ -9,9 +9,9 @@ import {
   recordFailedLoginAttempt,
   clearFailedLoginAttempts,
   logLoginActivity,
-} from '../../../utils/auth';
-import { sendSuspiciousLoginAlert } from '../../../utils/email';
-import { strictRateLimit } from '../../../utils/rateLimit';
+} from '../../../utils/auth.js';
+import { sendSuspiciousLoginAlert } from '../../../utils/email.js';
+import { strictRateLimit } from '../../../utils/rateLimit.js';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -88,10 +88,11 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     if (!user.passwordHash) {
+      // Generic message — revealing "this account uses magic-link" enables
+      // attackers to enumerate valid emails and probe the auth method
+      // before targeting them.
       return new Response(
-        JSON.stringify({
-          error: 'This account uses magic link login. Please use "Send Login Link" instead.',
-        }),
+        JSON.stringify({ error: 'Invalid email or password' }),
         {
           status: 401,
           headers: { 'Content-Type': 'application/json' },

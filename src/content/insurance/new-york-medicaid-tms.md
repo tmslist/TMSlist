@@ -14,6 +14,7 @@ faqs:
     answer: "Yes. NYC in particular has more TMS providers who accept Medicaid than most other metros in the country. Upstate New York has fewer options, but coverage is available."
   - question: "Does New York's OMH status affect TMS coverage?"
     answer: "Yes. New York has strong state-level mental health parity laws and OMH oversight, which means insurers and Medicaid managed care plans face stricter requirements to cover mental health treatments including TMS."
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 <div class="not-prose mb-10 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -25,9 +26,9 @@ faqs:
     <div class="text-2xl font-bold text-amber-700 font-display">Required</div>
     <div class="text-xs text-amber-600 mt-1">Prior Authorization</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">$0-$300</div>
-    <div class="text-xs text-blue-600 mt-1">Typical patient cost</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">$0-$300</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Typical patient cost</div>
   </div>
 </div>
 
@@ -134,11 +135,11 @@ NYC patients have the most options. If you're having difficulty finding a provid
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>
@@ -146,39 +147,39 @@ NYC patients have the most options. If you're having difficulty finding a provid
 ## How to Get TMS Approved
 
 <div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">1</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Verify Benefits with Your Plan</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Call the number on your Medicaid managed care card and ask specifically about TMS therapy coverage for treatment-resistant depression. Get a reference number for the call.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Verify Benefits with Your Plan</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Call the number on your Medicaid managed care card and ask specifically about TMS therapy coverage for treatment-resistant depression. Get a reference number for the call.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">2</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Get Your Documentation Ready</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Gather records of your MDD diagnosis, all medication trials (names, doses, durations, outcomes), current PHQ-9 score, and therapy history. Your psychiatrist can help organize this.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Get Your Documentation Ready</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Gather records of your MDD diagnosis, all medication trials (names, doses, durations, outcomes), current PHQ-9 score, and therapy history. Your psychiatrist can help organize this.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">3</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Find an In-Network TMS Provider</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Find a TMS clinic that accepts your specific Medicaid plan (Fidelis, Healthfirst, MetroPlus, Empire Medicaid, or UHC Community Plan). Use our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a> and filter by your plan and "Medicaid."</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Find an In-Network TMS Provider</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Find a TMS clinic that accepts your specific Medicaid plan (Fidelis, Healthfirst, MetroPlus, Empire Medicaid, or UHC Community Plan). Use our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a> and filter by your plan and "Medicaid."</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">4</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Clinic Submits Prior Authorization</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Your chosen TMS clinic submits the prior authorization request with your treatment history and medical necessity documentation. New York Medicaid plans typically respond within 5-15 business days.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Clinic Submits Prior Authorization</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Your chosen TMS clinic submits the prior authorization request with your treatment history and medical necessity documentation. New York Medicaid plans typically respond within 5-15 business days.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">5</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Begin Treatment</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Once approved, schedule your TMS sessions. Most patients receive 36 sessions over 6-9 weeks. Your out-of-pocket cost is typically $0-$300 with Medicaid.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Begin Treatment</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Once approved, schedule your TMS sessions. Most patients receive 36 sessions over 6-9 weeks. Your out-of-pocket cost is typically $0-$300 with Medicaid.</p>
     </div>
   </div>
 </div>

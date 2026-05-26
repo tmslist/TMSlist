@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { verifyMagicToken, invalidateAllUserSessions } from '../../../utils/auth';
+import { verifyMagicToken, invalidateAllUserSessions } from '../../../utils/auth.js';
 import { db } from '../../../db';
 import { users, auditLog } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -49,7 +49,7 @@ export const GET: APIRoute = async ({ request }) => {
       action: 'email_verified',
       entityType: 'user',
       entityId: userRecord.id,
-      metadata: { email: normalizedEmail },
+      details: { email: normalizedEmail },
     });
 
     return new Response(null, {

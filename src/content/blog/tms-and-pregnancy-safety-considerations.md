@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-08
 category: patient-guide
 tags: ["pregnancy", "perinatal", "safety", "mother", "postpartum"]
-image: "https://images.unsplash.com/photo-1614267119076-5d6a6c66f8c9?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-and-pregnancy-safety-considerations.svg"
 ---
 
 Perinatal depression — depression occurring during pregnancy or in the postpartum period — affects roughly 10-15% of pregnant people. It is undertreated, in part because many standard antidepressant medications carry concerns about first-trimester exposure and breastfeeding compatibility.
@@ -90,35 +90,35 @@ For pregnant patients with moderate to severe depression who have not responded 
 
 The decision should be made individually, weighing the severity of depression, the patient's preferences, and the clinical context. But TMS should be on the table — not as experimental, but as one of the more evidence-based options available.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS safe during pregnancy?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS safe during pregnancy?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS is considered one of the safer options for treating depression during pregnancy. The mechanistic rationale for safety is strong -- the magnetic field is localized to the brain and does not penetrate abdominal structures. Observational studies and pregnancy registries to date have not shown increased risk of adverse pregnancy outcomes. ACOG and the Clinical TMS Society both recommend TMS as a reasonable option for pregnant patients with depression.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS is considered one of the safer options for treating depression during pregnancy. The mechanistic rationale for safety is strong -- the magnetic field is localized to the brain and does not penetrate abdominal structures. Observational studies and pregnancy registries to date have not shown increased risk of adverse pregnancy outcomes. ACOG and the Clinical TMS Society both recommend TMS as a reasonable option for pregnant patients with depression.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I breastfeed while receiving TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I breastfeed while receiving TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Because TMS is not a medication and has no systemic effects, there is no concern about drug exposure through breast milk. This is a meaningful advantage over antidepressant medications, which require careful evaluation of breastfeeding compatibility. Many postpartum patients receive TMS while breastfeeding without any restrictions.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Because TMS is not a medication and has no systemic effects, there is no concern about drug exposure through breast milk. This is a meaningful advantage over antidepressant medications, which require careful evaluation of breastfeeding compatibility. Many postpartum patients receive TMS while breastfeeding without any restrictions.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">When during pregnancy is it best to receive TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">When during pregnancy is it best to receive TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Some clinicians prefer to delay elective TMS until after the first trimester when major organogenesis is complete. Others proceed without delay given the lack of mechanistic risk. Discuss your preferences with your doctor. As pregnancy progresses, positioning during TMS sessions may become more challenging due to physical discomfort. Most clinics can accommodate pregnancy with modified positioning after the first trimester.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Some clinicians prefer to delay elective TMS until after the first trimester when major organogenesis is complete. Others proceed without delay given the lack of mechanistic risk. Discuss your preferences with your doctor. As pregnancy progresses, positioning during TMS sessions may become more challenging due to physical discomfort. Most clinics can accommodate pregnancy with modified positioning after the first trimester.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

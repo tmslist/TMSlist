@@ -17,7 +17,7 @@ interface DoctorAvailabilityProps {
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const SLOT_COLORS: Record<string, string> = {
   available: 'bg-green-100 border-green-300 text-green-700',
-  blocked: 'bg-gray-100 border-gray-300 text-gray-500',
+  blocked: 'bg-[var(--paper2)] border-[var(--line)] text-[var(--muted)]',
 };
 
 function timeOptions() {
@@ -104,10 +104,10 @@ export default function DoctorAvailability({ doctorId, initialSlots }: DoctorAva
       {error && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm">{error}</div>}
       <div className="grid grid-cols-1 md:grid-cols-7 gap-3 mb-6">
         {DAYS.map((day, dayIdx) => (
-          <div key={day} className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+          <div key={day} className="bg-white rounded-xl border border-[var(--line)] p-4 shadow-sm">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-semibold text-gray-900">{day.slice(0, 3)}</span>
-              <button onClick={() => addSlot(dayIdx)} className="w-7 h-7 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 text-lg leading-none flex items-center justify-center">+</button>
+              <span className="text-sm font-semibold text-[var(--ink)]">{day.slice(0, 3)}</span>
+              <button onClick={() => addSlot(dayIdx)} className="w-7 h-7 rounded-full bg-[rgba(10,22,40,0.1)] text-[var(--ink)] hover:bg-[rgba(10,22,40,0.15)] text-lg leading-none flex items-center justify-center">+</button>
             </div>
             <div className="space-y-2">
               {slotsByDay[dayIdx].map(slot => (
@@ -133,14 +133,14 @@ export default function DoctorAvailability({ doctorId, initialSlots }: DoctorAva
                 </div>
               ))}
               {slotsByDay[dayIdx].length === 0 && (
-                <p className="text-xs text-gray-400 text-center py-4">No slots</p>
+                <p className="text-xs text-[var(--muted)] text-center py-4">No slots</p>
               )}
             </div>
           </div>
         ))}
       </div>
       <div className="flex justify-end">
-        <button onClick={saveAll} disabled={saving} className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50">
+        <button onClick={saveAll} disabled={saving} className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] disabled:opacity-50">
           {saving ? 'Saving...' : 'Save Schedule'}
         </button>
       </div>

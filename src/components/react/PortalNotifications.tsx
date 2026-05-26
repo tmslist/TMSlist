@@ -26,8 +26,8 @@ function typeIcon(type: string) {
   switch (type) {
     case 'new_lead':
       return (
-        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-8 h-8 rounded-full bg-[rgba(10,22,40,0.1)] flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
         </div>
@@ -50,8 +50,8 @@ function typeIcon(type: string) {
       );
     default:
       return (
-        <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-8 h-8 rounded-full bg-[var(--paper2)] flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
           </svg>
         </div>
@@ -134,7 +134,7 @@ export default function PortalNotifications() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => { setOpen(!open); if (!open) fetchNotifications(); }}
-        className="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+        className="relative p-2 rounded-lg text-[var(--muted)] hover:bg-[var(--paper2)] hover:text-[var(--ink2)] transition-colors"
         aria-label="Notifications"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,9 +148,9 @@ export default function PortalNotifications() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-200 z-50 overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-            <h3 className="text-sm font-semibold text-gray-900">Notifications</h3>
+        <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-xl border border-[var(--line)] z-50 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--line)]">
+            <h3 className="text-sm font-semibold text-[var(--ink)]">Notifications</h3>
             {unreadCount > 0 && (
               <button
                 onClick={markAllRead}
@@ -168,32 +168,32 @@ export default function PortalNotifications() {
               </div>
             ) : items.length === 0 ? (
               <div className="py-8 text-center">
-                <svg className="w-8 h-8 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-8 h-8 text-[var(--line)] mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                 </svg>
-                <p className="text-sm text-gray-400">No notifications yet</p>
+                <p className="text-sm text-[var(--muted)]">No notifications yet</p>
               </div>
             ) : (
               items.map((n) => (
                 <button
                   key={n.id}
                   onClick={() => handleNotificationClick(n)}
-                  className={`w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-b-0 ${
+                  className={`w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-[var(--paper2)] transition-colors border-b border-[var(--line)] last:border-b-0 ${
                     !n.read ? 'bg-emerald-50/40' : ''
                   }`}
                 >
                   {typeIcon(n.type)}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <p className={`text-sm truncate ${!n.read ? 'font-semibold text-gray-900' : 'font-medium text-gray-700'}`}>
+                      <p className={`text-sm truncate ${!n.read ? 'font-semibold text-[var(--ink)]' : 'font-medium text-[var(--ink2)]'}`}>
                         {n.title}
                       </p>
                       {!n.read && <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />}
                     </div>
                     {n.message && (
-                      <p className="text-xs text-gray-500 line-clamp-1 mt-0.5">{n.message}</p>
+                      <p className="text-xs text-[var(--muted)] line-clamp-1 mt-0.5">{n.message}</p>
                     )}
-                    <p className="text-[11px] text-gray-400 mt-1">{timeAgo(n.createdAt)}</p>
+                    <p className="text-[11px] text-[var(--muted)] mt-1">{timeAgo(n.createdAt)}</p>
                   </div>
                 </button>
               ))

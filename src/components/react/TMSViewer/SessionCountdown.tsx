@@ -53,10 +53,10 @@ export function SessionCountdown() {
     : 0;
 
   return (
-    <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-3">
+    <div className="bg-[var(--paper2)]/60 backdrop-blur-sm border border-[var(--line)]/50 rounded-2xl p-3">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Session Timer</span>
-        <span className={`text-[10px] font-mono font-bold ${state.isPlaying ? 'text-cyan-400' : 'text-slate-500'}`}>
+        <span className="text-[10px] font-semibold text-white/40 uppercase tracking-wider">Session Timer</span>
+        <span className={`text-[10px] font-mono font-bold ${state.isPlaying ? 'text-[var(--warm)]' : 'text-white/40'}`}>
           {state.isPlaying ? 'RUNNING' : 'STOPPED'}
         </span>
       </div>
@@ -66,18 +66,18 @@ export function SessionCountdown() {
         <div className="text-2xl font-mono font-bold text-white tabular-nums">
           {formatTime(secondsRemaining)}
         </div>
-        <div className="text-[9px] text-slate-500">remaining in session</div>
+        <div className="text-[9px] text-white/40">remaining in session</div>
       </div>
 
       {/* Progress bar */}
       <div className="space-y-1">
-        <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
+        <div className="h-1.5 bg-[var(--paper2)] rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full transition-all duration-300"
+            className="h-full bg-gradient-to-r from-[var(--accent2)] to-[var(--ink2)] rounded-full transition-all duration-300"
             style={{ width: `${progress * 100}%` }}
           />
         </div>
-        <div className="flex justify-between text-[9px] text-slate-500">
+        <div className="flex justify-between text-[9px] text-white/40">
           <span>{state.pulseCount.toLocaleString()} pulses</span>
           <span>{pulsesRemaining.toLocaleString()} left</span>
         </div>

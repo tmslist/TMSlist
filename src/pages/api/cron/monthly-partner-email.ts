@@ -17,6 +17,7 @@ import clinicsData from '../../../data/clinics.json';
 import { db } from '../../../db';
 import { leads } from '../../../db/schema';
 import { eq, and } from 'drizzle-orm';
+import { requireCronAuth } from '../../../utils/cronAuth';
 
 export const prerender = false;
 
@@ -30,12 +31,9 @@ function sleep(ms: number) {
 }
 
 export const GET: APIRoute = async ({ request }) => {
-  // Auth
-  const authHeader = request.headers.get('authorization');
+  const authFail = requireCronAuth(request);
+  if (authFail) return authFail;
   const cronSecret = import.meta.env.CRON_SECRET || process.env.CRON_SECRET;
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
-    return new Response('Unauthorized', { status: 401 });
-  }
 
   const RESEND_KEY = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY;
   if (!RESEND_KEY) {

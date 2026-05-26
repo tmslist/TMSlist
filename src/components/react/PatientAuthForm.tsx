@@ -30,7 +30,7 @@ interface PatientAuthFormProps {
 
 export default function PatientAuthForm({ mode: initialMode = 'login', redirect = '/account' }: PatientAuthFormProps) {
   const [mode, setMode] = useState<AuthMode>(initialMode);
-  const [activeMethod, setActiveMethod] = useState<ActiveMethod>('google');
+  const [activeMethod, setActiveMethod] = useState<ActiveMethod>('password');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'sent' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -42,7 +42,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
   const [showPassword, setShowPassword] = useState(false);
 
   // Google OAuth URL
-  const googleOAuthUrl = `/api/auth/google/patient-callback?state=${encodeURIComponent(redirect)}`;
+  const googleOAuthUrl = `/api/auth/google/?flow=patient&redirect=${encodeURIComponent(redirect)}`;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -116,18 +116,18 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
   if (status === 'sent') {
     return (
       <div className="w-full bg-white rounded-2xl shadow-lg p-8 text-center">
-        <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-violet-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <div className="w-16 h-16 bg-[rgba(201,101,74,0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-8 h-8 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
           </svg>
         </div>
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Check your email</h2>
-        <p className="text-gray-600 mb-1">We sent a login link to</p>
-        <p className="font-semibold text-gray-900 mb-4">{email}</p>
-        <p className="text-sm text-gray-500 mb-6">The link expires in 15 minutes. Check your spam folder if you don't see it.</p>
+        <h2 className="text-xl font-bold text-[var(--ink)] mb-2">Check your email</h2>
+        <p className="text-[var(--ink2)] mb-1">We sent a login link to</p>
+        <p className="font-semibold text-[var(--ink)] mb-4">{email}</p>
+        <p className="text-sm text-[var(--muted)] mb-6">The link expires in 15 minutes. Check your spam folder if you don't see it.</p>
         <button
           onClick={() => { setStatus('idle'); setEmail(''); }}
-          className="text-sm text-violet-600 hover:text-violet-700 font-semibold"
+          className="text-sm text-[var(--accent)] hover:text-[var(--accent)] font-semibold"
         >
           Use a different email
         </button>
@@ -139,10 +139,10 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 sm:p-8">
       {/* Header */}
       <div className="text-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-[var(--ink)]">
           {mode === 'register' ? 'Create Your Account' : 'Welcome Back'}
         </h1>
-        <p className="text-gray-500 text-sm mt-1">
+        <p className="text-[var(--muted)] text-sm mt-1">
           {mode === 'register'
             ? 'Join TMS List to save clinics, share stories, and connect with others.'
             : 'Sign in to access your saved clinics, reviews, and community.'}
@@ -162,16 +162,16 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
       )}
 
       {/* Method Tabs */}
-      <div className="flex gap-1 p-1 bg-gray-100 rounded-xl mb-6">
-        {(['google', 'password', 'magic'] as ActiveMethod[]).map((method) => (
+      <div className="flex gap-1 p-1 bg-[var(--paper2)] rounded-xl mb-6">
+        {(['password', 'google', 'magic'] as ActiveMethod[]).map((method) => (
           <button
             key={method}
             type="button"
             onClick={() => { setActiveMethod(method); setStatus('idle'); setErrorMsg(''); }}
             className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${
               activeMethod === method
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'bg-white text-[var(--ink)] shadow-sm'
+                : 'text-[var(--muted)] hover:text-[var(--ink2)]'
             }`}
           >
             {method === 'google' && (
@@ -210,7 +210,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
         <div className="space-y-4">
           <a
             href={googleOAuthUrl}
-            className="flex items-center justify-center gap-3 w-full py-3.5 px-4 bg-white border-2 border-gray-200 rounded-xl text-gray-700 font-semibold text-sm hover:bg-gray-50 hover:border-gray-300 hover:shadow-md transition-all"
+            className="flex items-center justify-center gap-3 w-full py-3.5 px-4 bg-white border-2 border-[var(--line)] rounded-xl text-[var(--ink2)] font-semibold text-sm hover:bg-[var(--paper2)] hover:border-[var(--line)] hover:shadow-md transition-all"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
@@ -220,7 +220,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
             </svg>
             Continue with Google
           </a>
-          <p className="text-xs text-center text-gray-400">No password needed. Your Google email must be verified.</p>
+          <p className="text-xs text-center text-[var(--muted)]">No password needed. Your Google email must be verified.</p>
         </div>
       )}
 
@@ -229,7 +229,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
         <form onSubmit={handlePasswordSubmit} className="space-y-4">
           {mode === 'register' && (
             <div>
-              <label htmlFor="auth-name" className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name</label>
+              <label htmlFor="auth-name" className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">Full Name</label>
               <input
                 type="text"
                 id="auth-name"
@@ -237,14 +237,14 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
                 minLength={2}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-[var(--line)] text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-all"
                 placeholder="Your full name"
               />
             </div>
           )}
 
           <div>
-            <label htmlFor="auth-email" className="block text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
+            <label htmlFor="auth-email" className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">Email Address</label>
             <input
               type="email"
               id="auth-email"
@@ -252,13 +252,13 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-[var(--line)] text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-all"
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="auth-password" className="block text-sm font-semibold text-gray-700 mb-1.5">
+            <label htmlFor="auth-password" className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">
               {mode === 'register' ? 'Password' : 'Password'}
             </label>
             <div className="relative">
@@ -269,13 +269,13 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
                 autoComplete={mode === 'register' ? 'new-password' : 'current-password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
+                className="w-full px-4 py-3 pr-12 rounded-xl border border-[var(--line)] text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-all"
                 placeholder={mode === 'register' ? 'Min 8 characters' : 'Enter password'}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(s => !s)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-[var(--ink2)]"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   {showPassword ? (
@@ -294,30 +294,30 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
                   {[1, 2, 3, 4].map((level) => (
                     <div
                       key={level}
-                      className={`h-1 flex-1 rounded-full transition-colors ${strength.score >= level ? strength.color : 'bg-gray-200'}`}
+                      className={`h-1 flex-1 rounded-full transition-colors ${strength.score >= level ? strength.color : 'bg-[var(--paper2)]'}`}
                     />
                   ))}
                 </div>
                 {strength.feedback.length > 0 && (
-                  <p className="text-xs text-gray-500">{strength.feedback[0]}</p>
+                  <p className="text-xs text-[var(--muted)]">{strength.feedback[0]}</p>
                 )}
               </div>
             )}
           </div>
 
           {mode === 'register' && (
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-[var(--muted)]">
               By creating an account, you agree to our{' '}
-              <a href="/legal/terms-of-service" className="text-violet-600 hover:underline">Terms of Service</a>
+              <a href="/legal/terms-of-service" className="text-[var(--accent)] hover:underline">Terms of Service</a>
               {' '}and{' '}
-              <a href="/legal/privacy-policy" className="text-violet-600 hover:underline">Privacy Policy</a>.
+              <a href="/legal/privacy-policy" className="text-[var(--accent)] hover:underline">Privacy Policy</a>.
             </p>
           )}
 
           <button
             type="submit"
             disabled={status === 'submitting'}
-            className="w-full py-3.5 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm disabled:opacity-50"
+            className="w-full py-3.5 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white font-bold rounded-xl text-sm transition-all shadow-sm disabled:opacity-50"
           >
             {status === 'submitting' ? (mode === 'register' ? 'Creating account...' : 'Signing in...') : (mode === 'register' ? 'Create Account' : 'Sign In')}
           </button>
@@ -328,7 +328,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
       {activeMethod === 'magic' && (
         <div className="space-y-4">
           <div>
-            <label htmlFor="magic-email" className="block text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
+            <label htmlFor="magic-email" className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">Email Address</label>
             <input
               type="email"
               id="magic-email"
@@ -336,7 +336,7 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-[var(--line)] text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-all"
               placeholder="you@example.com"
             />
           </div>
@@ -344,35 +344,35 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
             type="button"
             onClick={handleMagicSubmit}
             disabled={status === 'submitting'}
-            className="w-full py-3.5 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm disabled:opacity-50"
+            className="w-full py-3.5 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white font-bold rounded-xl text-sm transition-all shadow-sm disabled:opacity-50"
           >
             {status === 'submitting' ? 'Sending link...' : 'Send Login Link'}
           </button>
-          <p className="text-xs text-center text-gray-400">We'll email you a link — just click it to sign in. Expires in 15 minutes.</p>
+          <p className="text-xs text-center text-[var(--muted)]">We'll email you a link — just click it to sign in. Expires in 15 minutes.</p>
         </div>
       )}
 
       {/* Divider */}
       <div className="relative my-5">
-        <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-100"/></div>
+        <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-[var(--line)]"/></div>
         <div className="relative flex justify-center">
-          <span className="bg-white px-3 text-xs text-gray-400 font-medium">or</span>
+          <span className="bg-white px-3 text-xs text-[var(--muted)] font-medium">or</span>
         </div>
       </div>
 
       {/* Switch mode */}
-      <p className="text-center text-sm text-gray-500">
+      <p className="text-center text-sm text-[var(--muted)]">
         {mode === 'register' ? (
           <>
             Already have an account?{' '}
-            <button type="button" onClick={() => { setMode('login'); setStatus('idle'); setErrorMsg(''); }} className="text-violet-600 font-semibold hover:text-violet-700">
+            <button type="button" onClick={() => { setMode('login'); setStatus('idle'); setErrorMsg(''); }} className="text-[var(--accent)] font-semibold hover:text-[var(--accent)]">
               Sign in
             </button>
           </>
         ) : (
           <>
             Don't have an account?{' '}
-            <button type="button" onClick={() => { setMode('register'); setStatus('idle'); setErrorMsg(''); }} className="text-violet-600 font-semibold hover:text-violet-700">
+            <button type="button" onClick={() => { setMode('register'); setStatus('idle'); setErrorMsg(''); }} className="text-[var(--accent)] font-semibold hover:text-[var(--accent)]">
               Create one free
             </button>
           </>
@@ -381,12 +381,12 @@ export default function PatientAuthForm({ mode: initialMode = 'login', redirect 
 
       {/* Benefits (register) */}
       {mode === 'register' && (
-        <div className="mt-5 p-4 bg-indigo-50 rounded-xl">
-          <p className="text-xs font-semibold text-violet-700 mb-2 uppercase tracking-wider">What you get free:</p>
+        <div className="mt-5 p-4 bg-[rgba(201,101,74,0.06)] rounded-xl">
+          <p className="text-xs font-semibold text-[var(--accent)] mb-2 uppercase tracking-wider">What you get free:</p>
           <ul className="space-y-1.5">
             {['Save clinics to your wishlist', 'Write verified reviews', 'Ask questions in the community', 'Share your TMS story to help others'].map((benefit) => (
-              <li key={benefit} className="flex items-center gap-2 text-xs text-violet-700">
-                <svg className="w-4 h-4 text-violet-500 shrink-0" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <li key={benefit} className="flex items-center gap-2 text-xs text-[var(--accent)]">
+                <svg className="w-4 h-4 text-[var(--accent2)] shrink-0" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 {benefit}

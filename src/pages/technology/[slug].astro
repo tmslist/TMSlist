@@ -1,7 +1,17 @@
 ---
+export const prerender = false;
+
 import Layout from '../../layouts/Layout.astro';
 import { getAllClinics, getClinicsByMachine } from '../../utils/clinicData';
+import { COUNTRY_NAMES, COUNTRY_URL_PREFIXES } from '../../utils/dataHelpers';
+import { getVisitorCountry } from '../../utils/visitorCountry';
 import { ClinicMachine } from '../../types/clinic';
+import BrandLogo from '../../components/BrandLogo.astro';
+import { resolveBrandSlug } from '../../utils/brandLogos';
+
+const VISITOR_COUNTRY = getVisitorCountry(Astro.cookies, Astro.url);
+const visitorCountryName = COUNTRY_NAMES[VISITOR_COUNTRY] || 'United States';
+const visitorCountryUrl = `/${COUNTRY_URL_PREFIXES[VISITOR_COUNTRY] || VISITOR_COUNTRY.toLowerCase()}/`;
 
 const { slug } = Astro.params;
 
@@ -11,8 +21,18 @@ const uniqueMachines = [...new Set(allClinics.flatMap(c => c.machines))];
 const machineName = uniqueMachines.find(m => m.toLowerCase().replace(/\s+/g, '-') === slug);
 if (!machineName) return Astro.redirect("/technology/");
 
-const machineClinics = await getClinicsByMachine(machineName);
-const title = `${machineName} TMS Therapy Clinics - TMS List`;
+const allMachineClinics = await getClinicsByMachine(machineName);
+const matchesVisitorCountry = (c: any) =>
+  VISITOR_COUNTRY === 'US' ? (!c.country || c.country === 'US') : c.country === VISITOR_COUNTRY;
+const inCountry = allMachineClinics.filter(matchesVisitorCountry);
+// US fallback if visitor's country has no clinics with this machine
+const machineClinics = inCountry.length > 0
+  ? inCountry
+  : allMachineClinics.filter(c => !c.country || c.country === 'US');
+
+const title = VISITOR_COUNTRY === 'US'
+  ? `${machineName} TMS Therapy Clinics - TMS List`
+  : `${machineName} TMS Therapy Clinics in ${visitorCountryName} - TMS List`;
 
 const techSchema = JSON.stringify({
   "@context": "https://schema.org",
@@ -38,17 +58,20 @@ const techSchema = JSON.stringify({
   ]}
 >
   <main class="container mx-auto px-4 py-8">
-    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
-      <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-      <span class="text-slate-300">/</span>
-      <a href="/technology/" class="hover:text-violet-600 transition-colors">Technology</a>
-      <span class="text-slate-300">/</span>
-      <span class="text-slate-700 font-medium">{machineName}</span>
+    <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-8 flex-wrap" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-[var(--accent)] transition-colors">Home</a>
+      <span class="text-[var(--muted)]">/</span>
+      <a href="/technology/" class="hover:text-[var(--accent)] transition-colors">Technology</a>
+      <span class="text-[var(--muted)]">/</span>
+      <span class="text-[var(--ink2)] font-medium">{machineName}</span>
     </nav>
 
-    <div class="bg-violet-50 rounded-xl p-8 mb-8 text-center">
-         <h1 class="text-3xl font-semibold text-gray-900 mb-2">{machineName} Clinics</h1>
-         <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+    <div class="bg-[rgba(10,22,40,0.08)] rounded-xl p-8 mb-8 text-center">
+         <div class="flex justify-center mb-4">
+           <BrandLogo slug={resolveBrandSlug(machineName)} name={machineName} size={64} />
+         </div>
+         <h1 class="text-3xl font-semibold text-[var(--ink)] mb-2">{machineName} Clinics</h1>
+         <p class="text-lg text-[var(--muted)] max-w-2xl mx-auto mb-6">
             Browse all verified clinics using {machineName} technology for TMS therapy.
          </p>
          <div class="max-w-2xl mx-auto">
@@ -59,12 +82,12 @@ const techSchema = JSON.stringify({
              data-cache-key={`ai-img:hero:${machineName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-tms-device`}
              data-alt={`AI illustration of ${machineName} TMS device`}
            >
-             <div class="ai-img-placeholder aspect-[16/9] w-full bg-gradient-to-br from-violet-100/60 via-slate-50 to-blue-100/60 animate-pulse rounded-2xl">
+             <div class="ai-img-placeholder aspect-[16/9] w-full bg-gradient-to-br from-[rgba(10,22,40,0.08)]/60 via-[var(--paper2)] to-[rgba(10,22,40,0.60)] animate-pulse rounded-2xl">
                <div class="absolute inset-0 flex items-center justify-center">
-                 <span class="text-xs font-medium text-slate-300 tracking-wide">Loading...</span>
+                 <span class="text-xs font-medium text-[var(--muted)] tracking-wide">Loading...</span>
                </div>
              </div>
-             <img class="ai-img-result hidden w-full aspect-[16/9] object-cover rounded-2xl shadow-lg ring-1 ring-slate-200/50" alt="TMS technology illustration" width="800" height="450" />
+             <img class="ai-img-result hidden w-full aspect-[16/9] object-cover rounded-2xl shadow-lg ring-1 ring-[rgba(10,22,40,0.1)]/50" alt="TMS technology illustration" width="800" height="450" />
              <div class="ai-img-fallback hidden"></div>
            </div>
          </div>
@@ -72,29 +95,29 @@ const techSchema = JSON.stringify({
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {machineClinics.map((clinic) => (
-        <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+        <article class="bg-[var(--paper)] rounded-lg shadow-sm border border-[var(--line)] overflow-hidden hover:shadow-md transition-shadow">
             <div class="h-48 overflow-hidden">
                 <img src={clinic.hero_image_url} alt={clinic.name} class="w-full h-full object-cover" loading="lazy" />
             </div>
              <div class="p-6">
-                <h2 class="text-xl font-semibold text-gray-900 mb-2">
-                    <a href={`/clinic/${clinic.slug}`} class="hover:underline text-violet-600">{clinic.name}</a>
+                <h2 class="text-xl font-semibold text-[var(--ink)] mb-2">
+                    <a href={`/clinic/${clinic.slug}`} class="hover:underline text-[var(--accent)]">{clinic.name}</a>
                 </h2>
                 <div class="flex items-center mb-3">
                      <svg class="w-5 h-5 text-yellow-500 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                     <span class="font-semibold text-gray-900 mr-1">
+                     <span class="font-semibold text-[var(--ink)] mr-1">
                         {(typeof clinic.rating === 'number' ? clinic.rating : clinic.rating.aggregate).toFixed(1)}
                      </span>
-                     <span class="text-gray-500 text-sm">({clinic.review_count} reviews)</span>
+                     <span class="text-[var(--muted)] text-sm">({clinic.review_count} reviews)</span>
                 </div>
-                <p class="text-gray-600 mb-1 text-sm">{clinic.city}, {clinic.state}</p>
+                <p class="text-[var(--muted)] mb-1 text-sm">{clinic.city}, {clinic.state}</p>
                  <div class="mt-4 flex justify-between items-center">
                     <div class="flex -space-x-2 overflow-hidden">
                          {clinic.machines.slice(0,3).map(m => (
-                             <span class="inline-block px-2 py-0.5 text-[10px] rounded-full bg-violet-100 text-violet-800 border-white border ring-1 ring-white">{m}</span>
+                             <span class="inline-block px-2 py-0.5 text-[10px] rounded-full bg-[rgba(10,22,40,0.08)] text-[var(--accent)] border-white border ring-1 ring-white">{m}</span>
                          ))}
                     </div>
-                    <a href={`/clinic/${clinic.slug}`} class="text-sm font-medium text-violet-600 hover:text-violet-500">
+                    <a href={`/clinic/${clinic.slug}`} class="text-sm font-medium text-[var(--accent)] hover:text-[var(--accent2)]">
                         View Profile &rarr;
                     </a>
                  </div>
@@ -104,28 +127,28 @@ const techSchema = JSON.stringify({
     </div>
 
     <!-- Related Topics -->
-    <div class="mt-16 pt-12 border-t border-slate-200">
-      <h3 class="text-xl font-bold text-slate-900 mb-6">Learn More About TMS</h3>
+    <div class="mt-16 pt-12 border-t border-[var(--line)]">
+      <h3 class="text-xl font-bold text-[var(--ink)] mb-6">Learn More About TMS</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <a href="/treatments/" class="group bg-white rounded-xl border border-slate-200 p-5 hover:border-violet-300 hover:shadow-md transition-all">
-          <h4 class="font-semibold text-slate-900 group-hover:text-violet-600 mb-1">All Treatment Types</h4>
-          <p class="text-sm text-slate-500">Depression, OCD, anxiety, migraine, PTSD and more.</p>
+        <a href="/treatments/" class="group bg-[var(--paper)] rounded-xl border border-[var(--line)] p-5 hover:border-[rgba(10,22,40,0.2)] hover:shadow-md transition-all">
+          <h4 class="font-semibold text-[var(--ink)] group-hover:text-[var(--accent)] mb-1">All Treatment Types</h4>
+          <p class="text-sm text-[var(--muted)]">Depression, OCD, anxiety, migraine, PTSD and more.</p>
         </a>
-        <a href="/protocols/" class="group bg-white rounded-xl border border-slate-200 p-5 hover:border-violet-300 hover:shadow-md transition-all">
-          <h4 class="font-semibold text-slate-900 group-hover:text-violet-600 mb-1">TMS Protocols</h4>
-          <p class="text-sm text-slate-500">Standard, theta burst, accelerated, and deep TMS.</p>
+        <a href="/protocols/" class="group bg-[var(--paper)] rounded-xl border border-[var(--line)] p-5 hover:border-[rgba(10,22,40,0.2)] hover:shadow-md transition-all">
+          <h4 class="font-semibold text-[var(--ink)] group-hover:text-[var(--accent)] mb-1">TMS Protocols</h4>
+          <p class="text-sm text-[var(--muted)]">Standard, theta burst, accelerated, and deep TMS.</p>
         </a>
-        <a href="/insurance/" class="group bg-white rounded-xl border border-slate-200 p-5 hover:border-violet-300 hover:shadow-md transition-all">
-          <h4 class="font-semibold text-slate-900 group-hover:text-violet-600 mb-1">Insurance Coverage</h4>
-          <p class="text-sm text-slate-500">Medicare, Blue Cross, Aetna, and more.</p>
+        <a href="/insurance/" class="group bg-[var(--paper)] rounded-xl border border-[var(--line)] p-5 hover:border-[rgba(10,22,40,0.2)] hover:shadow-md transition-all">
+          <h4 class="font-semibold text-[var(--ink)] group-hover:text-[var(--accent)] mb-1">Insurance Coverage</h4>
+          <p class="text-sm text-[var(--muted)]">Medicare, Blue Cross, Aetna, and more.</p>
         </a>
-        <a href="/quiz/am-i-a-candidate/" class="group bg-white rounded-xl border border-slate-200 p-5 hover:border-violet-300 hover:shadow-md transition-all">
-          <h4 class="font-semibold text-slate-900 group-hover:text-violet-600 mb-1">Am I a Candidate?</h4>
-          <p class="text-sm text-slate-500">2-minute quiz to check your TMS eligibility.</p>
+        <a href="/quiz/am-i-a-candidate/" class="group bg-[var(--paper)] rounded-xl border border-[var(--line)] p-5 hover:border-[rgba(10,22,40,0.2)] hover:shadow-md transition-all">
+          <h4 class="font-semibold text-[var(--ink)] group-hover:text-[var(--accent)] mb-1">Am I a Candidate?</h4>
+          <p class="text-sm text-[var(--muted)]">2-minute quiz to check your TMS eligibility.</p>
         </a>
       </div>
       <div class="mt-8 text-center">
-        <a href="/us/" class="inline-flex items-center gap-2 px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-700 transition-colors">
+        <a href={visitorCountryUrl} class="inline-flex items-center gap-2 px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors">
           Find a Clinic Using {machineName}
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         </a>

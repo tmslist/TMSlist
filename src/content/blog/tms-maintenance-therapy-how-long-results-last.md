@@ -4,7 +4,7 @@ description: "Research shows TMS remission can last 12+ months. Learn about main
 publishDate: 2026-04-13
 category: treatment
 author: Dr. Sarah Chen
-image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-maintenance-therapy-how-long-results-last.svg"
 tags: ["tms", "maintenance", "long-term-results", "remission"]
 ---
 
@@ -73,35 +73,35 @@ For patients whose first depressive episode was successfully treated with TMS an
 
 TMS offers more than a temporary mood lift. With appropriate maintenance, it can produce sustained remission that fundamentally changes a patient's quality of life. Work with your TMS provider to design a maintenance plan that matches your risk profile, lifestyle, and recovery goals. The investment in ongoing care almost always pays dividends in months and years of reclaimed life.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long do TMS results last without maintenance?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long do TMS results last without maintenance?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">A 2023 JAMA Psychiatry study tracked TMS patients over 24 months. Approximately 45% maintained full remission at one year without any additional treatment. At 24 months, roughly 65% of initial responders avoided returning to pre-treatment severity levels. However, patients who engaged in maintenance booster protocols showed dramatically better outcomes.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">A 2023 JAMA Psychiatry study tracked TMS patients over 24 months. Approximately 45% maintained full remission at one year without any additional treatment. At 24 months, roughly 65% of initial responders avoided returning to pre-treatment severity levels. However, patients who engaged in maintenance booster protocols showed dramatically better outcomes.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What happens to TMS effects over time?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What happens to TMS effects over time?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The brain is a use-it-or-lose-it organ. Without periodic stimulation, newly strengthened circuits from TMS can gradually weaken over months and years. This is not unique to TMS -- it is the same phenomenon seen with physical therapy and most forms of rehabilitation. The solution is maintenance treatment to periodically reactivate the circuits TMS strengthened.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The brain is a use-it-or-lose-it organ. Without periodic stimulation, newly strengthened circuits from TMS can gradually weaken over months and years. This is not unique to TMS -- it is the same phenomenon seen with physical therapy and most forms of rehabilitation. The solution is maintenance treatment to periodically reactivate the circuits TMS strengthened.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does Medicare cover TMS maintenance therapy?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does Medicare cover TMS maintenance therapy?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Medicare covers maintenance protocols when documented as medically necessary. The key is having your treating physician document the clinical rationale -- typically citing prior relapse history or high recurrence risk. Many commercial insurers follow Medicare's lead. Monthly booster sessions take just 20-37 minutes and are generally covered when clinically appropriate.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Medicare covers maintenance protocols when documented as medically necessary. The key is having your treating physician document the clinical rationale -- typically citing prior relapse history or high recurrence risk. Many commercial insurers follow Medicare's lead. Monthly booster sessions take just 20-37 minutes and are generally covered when clinically appropriate.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

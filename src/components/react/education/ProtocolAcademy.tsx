@@ -1,7 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import { protocols, protocolTypeColors, evidenceColors, type TMSProtocol } from '../../../data/tmsProtocols';
+import { protocols, type TMSProtocol } from '../../../data/tmsProtocols';
+
+const TYPE_TONES: Record<string, { fg: string; bg: string }> = {
+  rTMS:        { fg: '#0A1628', bg: 'rgba(10,22,40,0.08)' },
+  dTMS:        { fg: '#0A1628', bg: 'rgba(10,22,40,0.08)' },
+  iTBS:        { fg: '#C9654A', bg: 'rgba(201,101,74,0.10)' },
+  cTBS:        { fg: '#B8541F', bg: 'rgba(184,84,31,0.10)' },
+  Accelerated: { fg: '#C9654A', bg: 'rgba(201,101,74,0.10)' },
+  SNT:         { fg: '#C9654A', bg: 'rgba(201,101,74,0.10)' },
+};
+
+const EVIDENCE_TONES: Record<string, { fg: string; bg: string; dot: string }> = {
+  Strong:   { fg: '#15803d', bg: 'rgba(34,197,94,0.10)',  dot: '#22c55e' },
+  Moderate: { fg: '#a16207', bg: 'rgba(202,138,4,0.10)',  dot: '#ca8a04' },
+  Emerging: { fg: '#5A6B82', bg: 'rgba(90,107,130,0.10)', dot: '#5A6B82' },
+};
 
 interface ProtocolCardProps {
   protocol: TMSProtocol;
@@ -10,96 +25,149 @@ interface ProtocolCardProps {
 }
 
 function ProtocolCard({ protocol, isActive, onClick }: ProtocolCardProps) {
+  const typeT = TYPE_TONES[protocol.type] ?? TYPE_TONES.rTMS;
+  const evT = EVIDENCE_TONES[protocol.evidence];
+
   return (
     <button
       onClick={onClick}
-      className={`w-full text-left rounded-2xl border p-5 transition-all duration-200 hover-lift ${
-        isActive
-          ? 'bg-slate-800/80 border-violet-500/50 shadow-lg shadow-violet-900/20'
-          : 'bg-slate-800/40 border-slate-700/30 hover:border-slate-600/50'
-      }`}
+      className="w-full text-left rounded-2xl p-5 transition-all duration-200 hover-lift"
+      style={{
+        background: 'var(--paper)',
+        border: `1px solid ${isActive ? 'var(--warm)' : 'var(--line)'}`,
+        boxShadow: isActive
+          ? '0 8px 24px -8px rgba(201,101,74,0.25), 0 0 0 3px rgba(201,101,74,0.08)'
+          : '0 1px 2px rgba(10,22,40,0.04)',
+      }}
+      aria-pressed={isActive}
     >
-      {/* Header */}
       <div className="flex items-start justify-between gap-2 mb-3">
-        <div>
-          <h4 className="text-[11px] font-bold text-white leading-tight">{protocol.fullName}</h4>
-          <p className="text-[10px] text-slate-500 mt-0.5">{protocol.name}</p>
+        <div className="min-w-0">
+          <h4 className="serif" style={{ fontSize: '1.05rem', color: 'var(--ink)', lineHeight: 1.2, margin: 0 }}>
+            {protocol.fullName}
+          </h4>
+          <p style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>{protocol.name}</p>
         </div>
         {protocol.badge && (
-          <span className="shrink-0 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-lg bg-violet-900/50 text-violet-300 border border-violet-700/30">
+          <span
+            className="shrink-0"
+            style={{
+              fontSize: 9,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              padding: '3px 8px',
+              borderRadius: 9999,
+              background: 'rgba(201,101,74,0.12)',
+              color: '#C9654A',
+              border: '1px solid rgba(201,101,74,0.25)',
+            }}
+          >
             {protocol.badge}
           </span>
         )}
       </div>
 
-      {/* Badges */}
       <div className="flex flex-wrap items-center gap-1.5 mb-3">
-        <span className={`text-[9px] font-semibold px-2 py-0.5 rounded-full ${protocolTypeColors[protocol.type]}`}>
+        <span
+          style={{
+            fontSize: 10,
+            fontWeight: 600,
+            padding: '2px 8px',
+            borderRadius: 9999,
+            background: typeT.bg,
+            color: typeT.fg,
+          }}
+        >
           {protocol.type}
         </span>
-        <span className={`text-[9px] font-semibold px-2 py-0.5 rounded-full ${evidenceColors[protocol.evidence]}`}>
+        <span
+          className="inline-flex items-center gap-1"
+          style={{
+            fontSize: 10,
+            fontWeight: 600,
+            padding: '2px 8px',
+            borderRadius: 9999,
+            background: evT.bg,
+            color: evT.fg,
+          }}
+        >
+          <span style={{ width: 5, height: 5, borderRadius: '50%', background: evT.dot }} />
           {protocol.evidence}
         </span>
       </div>
 
-      {/* Key Parameters */}
       <div className="grid grid-cols-2 gap-2 mb-3">
-        <div className="bg-slate-900/50 rounded-lg p-2">
-          <p className="text-[8px] font-bold uppercase tracking-widest text-slate-600 mb-0.5">Frequency</p>
-          <p className="text-[11px] font-bold text-white">{protocol.frequencyDisplay}</p>
-        </div>
-        <div className="bg-slate-900/50 rounded-lg p-2">
-          <p className="text-[8px] font-bold uppercase tracking-widest text-slate-600 mb-0.5">Intensity</p>
-          <p className="text-[11px] font-bold text-white">{protocol.intensityDisplay}</p>
-        </div>
-        <div className="bg-slate-900/50 rounded-lg p-2">
-          <p className="text-[8px] font-bold uppercase tracking-widest text-slate-600 mb-0.5">Pulses</p>
-          <p className="text-[11px] font-bold text-white">{protocol.pulsesDisplay}</p>
-        </div>
-        <div className="bg-slate-900/50 rounded-lg p-2">
-          <p className="text-[8px] font-bold uppercase tracking-widest text-slate-600 mb-0.5">Duration</p>
-          <p className="text-[11px] font-bold text-white">{protocol.duration}</p>
-        </div>
+        {[
+          { label: 'Frequency', value: protocol.frequencyDisplay },
+          { label: 'Intensity', value: protocol.intensityDisplay },
+          { label: 'Pulses', value: protocol.pulsesDisplay },
+          { label: 'Duration', value: protocol.duration },
+        ].map(p => (
+          <div
+            key={p.label}
+            style={{
+              background: 'var(--paper2)',
+              borderRadius: 10,
+              padding: '8px 10px',
+              border: '1px solid var(--line)',
+            }}
+          >
+            <p
+              style={{
+                fontSize: 9,
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                color: 'var(--muted)',
+                margin: 0,
+              }}
+            >
+              {p.label}
+            </p>
+            <p
+              style={{
+                fontSize: 12,
+                fontWeight: 700,
+                color: 'var(--ink)',
+                marginTop: 2,
+                fontFamily: 'ui-monospace, "SF Mono", Menlo, monospace',
+              }}
+            >
+              {p.value}
+            </p>
+          </div>
+        ))}
       </div>
 
-      {/* Indication */}
-      <div className="bg-slate-900/30 rounded-lg p-2 mb-3">
-        <p className="text-[8px] font-bold uppercase tracking-widest text-slate-600 mb-0.5">Indication</p>
-        <p className="text-[10px] text-slate-300 leading-relaxed">{protocol.indication}</p>
+      <div
+        style={{
+          background: 'rgba(201,101,74,0.06)',
+          borderRadius: 10,
+          padding: '8px 10px',
+          marginBottom: 10,
+        }}
+      >
+        <p
+          style={{
+            fontSize: 9,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            color: 'var(--warm)',
+            margin: 0,
+          }}
+        >
+          Indication
+        </p>
+        <p style={{ fontSize: 11, color: 'var(--ink)', marginTop: 2, lineHeight: 1.4 }}>
+          {protocol.indication}
+        </p>
       </div>
 
-      {/* Pros/Cons */}
-      <div className="grid grid-cols-2 gap-3">
-        <div>
-          <p className="text-[9px] font-bold uppercase tracking-wider text-emerald-500/70 mb-1">Pros</p>
-          <ul className="space-y-0.5">
-            {protocol.pros.slice(0, 2).map(p => (
-              <li key={p} className="text-[9px] text-slate-400 leading-relaxed flex items-start gap-1">
-                <span className="text-emerald-500 shrink-0 mt-0.5">+</span>
-                {p.length > 50 ? p.slice(0, 48) + '...' : p}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p className="text-[9px] font-bold uppercase tracking-wider text-rose-500/70 mb-1">Cons</p>
-          <ul className="space-y-0.5">
-            {protocol.cons.slice(0, 2).map(c => (
-              <li key={c} className="text-[9px] text-slate-400 leading-relaxed flex items-start gap-1">
-                <span className="text-rose-400 shrink-0 mt-0.5">−</span>
-                {c.length > 50 ? c.slice(0, 48) + '...' : c}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {/* FDA & Sessions footer */}
-      <div className="mt-3 pt-3 border-t border-slate-700/30 flex items-center justify-between">
-        <span className="text-[9px] text-slate-500">
-          FDA: {protocol.fdaCleared}
-        </span>
-        <span className="text-[9px] text-slate-500">
+      <div className="flex items-center justify-between pt-3" style={{ borderTop: '1px solid var(--line)' }}>
+        <span style={{ fontSize: 10, color: 'var(--muted)' }}>FDA: {protocol.fdaCleared}</span>
+        <span style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 600 }}>
           {protocol.sessionsTotal} sessions
         </span>
       </div>
@@ -109,19 +177,24 @@ function ProtocolCard({ protocol, isActive, onClick }: ProtocolCardProps) {
 
 export default function ProtocolAcademy() {
   const [selected, setSelected] = useState<TMSProtocol>(protocols[0]);
+  const typeT = TYPE_TONES[selected.type] ?? TYPE_TONES.rTMS;
+  const evT = EVIDENCE_TONES[selected.evidence];
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h3 className="text-xl font-bold text-white mb-2">Protocol Academy</h3>
-        <p className="text-[11px] text-slate-400 max-w-lg mx-auto">
-          Explore the six primary TMS protocols used clinically. Each targets different brain regions
-          with distinct stimulation parameters optimized for specific conditions.
+      <div className="text-center mb-6">
+        <h3
+          className="serif"
+          style={{ fontSize: '1.75rem', color: 'var(--ink)', margin: 0, lineHeight: 1.15 }}
+        >
+          Protocol Academy
+        </h3>
+        <p style={{ fontSize: 14, color: 'var(--muted)', maxWidth: 540, margin: '0.5rem auto 0', lineHeight: 1.55 }}>
+          Six primary TMS protocols used clinically. Each targets different brain regions
+          with distinct stimulation parameters. Click a card for the full breakdown.
         </p>
       </div>
 
-      {/* Protocol Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {protocols.map(protocol => (
           <ProtocolCard
@@ -133,84 +206,216 @@ export default function ProtocolAcademy() {
         ))}
       </div>
 
-      {/* Selected Protocol Detail */}
       {selected && (
-        <div className="glass-panel rounded-2xl p-6 animate-entrance">
+        <div
+          className="rounded-2xl p-6 animate-entrance"
+          style={{
+            background: 'var(--paper)',
+            border: '1px solid var(--line)',
+            boxShadow: '0 8px 32px -12px rgba(10,22,40,0.12)',
+          }}
+        >
           <div className="flex items-start gap-4 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center shrink-0">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <div
+              className="shrink-0 flex items-center justify-center"
+              style={{
+                width: 48,
+                height: 48,
+                borderRadius: 12,
+                background: 'rgba(201,101,74,0.10)',
+                border: '1px solid rgba(201,101,74,0.20)',
+              }}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+                  stroke="#C9654A"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-lg font-bold text-white">{selected.fullName}</h3>
+              <h3
+                className="serif"
+                style={{ fontSize: '1.5rem', color: 'var(--ink)', margin: 0, lineHeight: 1.15 }}
+              >
+                {selected.fullName}
+              </h3>
               <div className="flex flex-wrap items-center gap-2 mt-2">
-                <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${protocolTypeColors[selected.type]}`}>
+                <span
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 600,
+                    padding: '3px 10px',
+                    borderRadius: 9999,
+                    background: typeT.bg,
+                    color: typeT.fg,
+                  }}
+                >
                   {selected.type}
                 </span>
-                <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${evidenceColors[selected.evidence]}`}>
+                <span
+                  className="inline-flex items-center gap-1.5"
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 600,
+                    padding: '3px 10px',
+                    borderRadius: 9999,
+                    background: evT.bg,
+                    color: evT.fg,
+                  }}
+                >
+                  <span style={{ width: 5, height: 5, borderRadius: '50%', background: evT.dot }} />
                   {selected.evidence} Evidence
                 </span>
-                <span className="text-[10px] text-slate-500">· FDA: {selected.fdaCleared}</span>
+                <span style={{ fontSize: 11, color: 'var(--muted)' }}>· FDA: {selected.fdaCleared}</span>
               </div>
             </div>
           </div>
 
-          {/* Parameters */}
-          <div className="grid grid-cols-4 gap-3 mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             {[
               { label: 'Frequency', value: selected.frequencyDisplay },
               { label: 'Intensity', value: selected.intensityDisplay },
               { label: 'Pulses', value: selected.pulsesDisplay },
               { label: 'Duration', value: selected.duration },
             ].map(param => (
-              <div key={param.label} className="bg-slate-900/60 rounded-xl p-3 text-center">
-                <p className="text-[9px] font-bold uppercase tracking-widest text-slate-600 mb-1">{param.label}</p>
-                <p className="text-[11px] font-bold text-white leading-tight">{param.value}</p>
+              <div
+                key={param.label}
+                style={{
+                  background: 'var(--paper2)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 12,
+                  padding: 12,
+                  textAlign: 'center',
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: 9,
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    color: 'var(--muted)',
+                    margin: 0,
+                  }}
+                >
+                  {param.label}
+                </p>
+                <p
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 700,
+                    color: 'var(--ink)',
+                    marginTop: 4,
+                    fontFamily: 'ui-monospace, "SF Mono", Menlo, monospace',
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {param.value}
+                </p>
               </div>
             ))}
           </div>
 
-          {/* Sessions */}
-          <div className="bg-violet-900/20 border border-violet-800/30 rounded-xl p-4 mb-6">
-            <div className="flex items-center justify-between">
+          <div
+            style={{
+              background: 'rgba(201,101,74,0.06)',
+              border: '1px solid rgba(201,101,74,0.18)',
+              borderRadius: 12,
+              padding: 16,
+              marginBottom: 24,
+            }}
+          >
+            <div className="flex items-center justify-between flex-wrap gap-3">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-violet-400/70 mb-1">Treatment Schedule</p>
-                <p className="text-sm font-semibold text-white">{selected.sessionsTotal} total sessions · {selected.sessionsPerDay}</p>
+                <p
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    color: 'var(--warm)',
+                    margin: 0,
+                  }}
+                >
+                  Treatment Schedule
+                </p>
+                <p style={{ fontSize: 14, color: 'var(--ink)', fontWeight: 600, marginTop: 2 }}>
+                  {selected.sessionsTotal} total sessions · {selected.sessionsPerDay}
+                </p>
               </div>
               <div className="text-right">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-violet-400/70 mb-1">Indication</p>
-                <p className="text-sm font-semibold text-white">{selected.indication}</p>
+                <p
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    color: 'var(--warm)',
+                    margin: 0,
+                  }}
+                >
+                  Indication
+                </p>
+                <p style={{ fontSize: 14, color: 'var(--ink)', fontWeight: 600, marginTop: 2 }}>
+                  {selected.indication}
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Pros & Cons */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-400/70 mb-3 flex items-center gap-1.5">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <p
+                className="flex items-center gap-1.5"
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                  color: '#15803d',
+                  marginBottom: 12,
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6l3 3 5-5" stroke="#22C55E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
                 Advantages
               </p>
               <ul className="space-y-2">
                 {selected.pros.map(p => (
-                  <li key={p} className="text-[11px] text-slate-300 flex items-start gap-2">
-                    <span className="text-emerald-500 mt-0.5 shrink-0">+</span>
-                    {p}
+                  <li key={p} style={{ fontSize: 13, color: 'var(--ink)', lineHeight: 1.55, display: 'flex', gap: 8 }}>
+                    <span style={{ color: '#22C55E', flexShrink: 0, fontWeight: 700, marginTop: 1 }}>+</span>
+                    <span>{p}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-rose-400/70 mb-3 flex items-center gap-1.5">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="#fb7185" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              <p
+                className="flex items-center gap-1.5"
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                  color: 'var(--warm)',
+                  marginBottom: 12,
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 2l8 8M10 2l-8 8" stroke="#C9654A" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
                 Considerations
               </p>
               <ul className="space-y-2">
                 {selected.cons.map(c => (
-                  <li key={c} className="text-[11px] text-slate-300 flex items-start gap-2">
-                    <span className="text-rose-400 mt-0.5 shrink-0">−</span>
-                    {c}
+                  <li key={c} style={{ fontSize: 13, color: 'var(--ink)', lineHeight: 1.55, display: 'flex', gap: 8 }}>
+                    <span style={{ color: 'var(--warm)', flexShrink: 0, fontWeight: 700, marginTop: 1 }}>−</span>
+                    <span>{c}</span>
                   </li>
                 ))}
               </ul>

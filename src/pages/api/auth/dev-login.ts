@@ -6,24 +6,32 @@
  * Or GET /api/auth/dev-login?email=brandingpioneers@gmail.com
  */
 import type { APIRoute } from 'astro';
-import { getUserByEmail, createSessionCookie } from '../../../utils/auth';
+import { getUserByEmail, createSession, getClientIpFromRequest } from '../../../utils/auth.js';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
 
 export const prerender = false;
 
-const isDev = import.meta.env.DEV;
+// Runtime guard — `import.meta.env.DEV` is a build-time constant that can be
+// tree-shaken into `true` if the project is built without NODE_ENV=production.
+// We must check at request time on the running server, not at compile time.
+function isDevRuntime(): boolean {
+  const env = process.env.NODE_ENV;
+  if (env === 'production' || env === 'test') return false;
+  if (process.env.ALLOW_DEV_LOGIN === 'true') return true;
+  return env === 'development';
+}
 
 const ADMIN_EMAILS = (import.meta.env.ADMIN_EMAILS || process.env.ADMIN_EMAILS || '')
   .split(',')
   .map((e: string) => e.trim().toLowerCase())
   .filter(Boolean);
 
-async function devLogin(email: string) {
-  if (!isDev) {
-    return new Response(JSON.stringify({ error: 'Dev login is only available in development' }), {
-      status: 403,
+async function devLogin(email: string, request?: Request) {
+  if (!isDevRuntime()) {
+    return new Response(JSON.stringify({ error: 'Not found' }), {
+      status: 404,
       headers: { 'Content-Type': 'application/json' },
     });
   }
@@ -63,11 +71,13 @@ async function devLogin(email: string) {
   // Update last login
   await db.update(users).set({ lastLoginAt: new Date() }).where(eq(users.id, user.id));
 
-  const cookie = createSessionCookie({
-    userId: user.id,
-    email: user.email,
-    role: user.role,
-  });
+  const { cookie } = await createSession(
+    { userId: user.id, email: user.email, role: user.role },
+    request ? {
+      userAgent: request.headers.get('user-agent') || undefined,
+      ipAddress: getClientIpFromRequest(request),
+    } : undefined,
+  );
 
   // Redirect to appropriate page based on role
   const redirectTo = isAdmin
@@ -86,10 +96,10 @@ async function devLogin(email: string) {
 export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
   const email = url.searchParams.get('email') || '';
-  return devLogin(email);
+  return devLogin(email, request);
 };
 
 export const POST: APIRoute = async ({ request }) => {
   const body = await request.json();
-  return devLogin(body.email || '');
+  return devLogin(body.email || '', request);
 };

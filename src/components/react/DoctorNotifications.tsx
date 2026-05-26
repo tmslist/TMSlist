@@ -34,8 +34,8 @@ function typeIcon(type: string) {
   switch (type) {
     case 'new_lead':
       return (
-        <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-9 h-9 rounded-full bg-[rgba(10,22,40,0.1)] flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
         </div>
@@ -50,8 +50,8 @@ function typeIcon(type: string) {
       );
     case 'appointment_request':
       return (
-        <div className="w-9 h-9 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-9 h-9 rounded-full bg-[rgba(201,101,74,0.1)] flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-[var(--warm)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
         </div>
@@ -60,39 +60,39 @@ function typeIcon(type: string) {
     case 'verification_approved':
       return (
         <div className="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
       );
     case 'profile_update':
       return (
-        <div className="w-9 h-9 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-9 h-9 rounded-full bg-[rgba(10,22,40,0.08)] flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
           </svg>
         </div>
       );
     case 'message_received':
       return (
-        <div className="w-9 h-9 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-9 h-9 rounded-full bg-[rgba(10,22,40,0.1)] flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
         </div>
       );
     case 'system':
       return (
-        <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-9 h-9 rounded-full bg-[var(--paper2)] flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
       );
     default:
       return (
-        <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-9 h-9 rounded-full bg-[var(--paper2)] flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
           </svg>
         </div>
@@ -137,7 +137,7 @@ export function DoctorNotificationsBell({ doctorId, className = '' }: { doctorId
   return (
     <div className={`relative ${className}`}>
       <button
-        className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+        className="p-2 rounded-lg text-[var(--muted)] hover:bg-[var(--paper2)] hover:text-[var(--ink2)] transition-colors"
         aria-label="Notifications"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -235,11 +235,11 @@ export default function DoctorNotifications({ doctorId, showBadge = false, badge
         <div>
           {/* Header */}
           <div className="flex items-center justify-between mb-4 gap-3">
-            <h1 className="text-2xl font-semibold text-gray-900">Notifications</h1>
+            <h1 className="text-2xl font-semibold text-[var(--ink)]">Notifications</h1>
             {unreadCount > 0 && (
               <button
                 onClick={markAllRead}
-                className="text-sm font-medium text-blue-600 hover:text-blue-700"
+                className="text-sm font-medium text-[var(--ink)] hover:text-[var(--ink)]"
               >
                 Mark all read ({unreadCount})
               </button>
@@ -254,8 +254,8 @@ export default function DoctorNotifications({ doctorId, showBadge = false, badge
                 onClick={() => setFilter(type)}
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
                   filter === type
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                    ? 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]'
+                    : 'bg-white text-[var(--ink2)] border border-[var(--line)] hover:bg-[var(--paper2)]'
                 }`}
               >
                 {TYPE_LABELS[type] || type} ({filterCounts[type]})
@@ -264,20 +264,20 @@ export default function DoctorNotifications({ doctorId, showBadge = false, badge
           </div>
 
           {/* Notifications list */}
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+          <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
             {loading && items.length === 0 ? (
               <div className="flex items-center justify-center py-16">
-                <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+                <div className="w-8 h-8 border-4 border-[var(--line)] border-t-blue-600 rounded-full animate-spin" />
               </div>
             ) : filteredItems.length === 0 ? (
               <div className="py-16 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--paper2)] flex items-center justify-center">
+                  <svg className="w-8 h-8 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-1">No notifications</h3>
-                <p className="text-gray-500 text-sm">
+                <h3 className="text-lg font-medium text-[var(--ink)] mb-1">No notifications</h3>
+                <p className="text-[var(--muted)] text-sm">
                   {filter === 'all' ? 'You have no notifications yet.' : `No ${TYPE_LABELS[filter]?.toLowerCase() || filter} notifications.`}
                 </p>
               </div>
@@ -286,30 +286,30 @@ export default function DoctorNotifications({ doctorId, showBadge = false, badge
                 <button
                   key={n.id}
                   onClick={() => handleNotificationClick(n)}
-                  className={`w-full flex items-start gap-3 px-4 py-3.5 text-left border-b border-gray-50 last:border-b-0 hover:bg-gray-50 transition-colors ${
-                    !n.read ? 'bg-blue-50/30' : ''
+                  className={`w-full flex items-start gap-3 px-4 py-3.5 text-left border-b border-[var(--line)] last:border-b-0 hover:bg-[var(--paper2)] transition-colors ${
+                    !n.read ? 'bg-[var(--paper2)]' : ''
                   }`}
                 >
                   {typeIcon(n.type)}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <p className={`text-sm truncate ${!n.read ? 'font-semibold text-gray-900' : 'font-medium text-gray-700'}`}>
+                      <p className={`text-sm truncate ${!n.read ? 'font-semibold text-[var(--ink)]' : 'font-medium text-[var(--ink2)]'}`}>
                         {n.title}
                       </p>
                       {!n.read && (
-                        <span className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
+                        <span className="w-2 h-2 rounded-full bg-[var(--ink2)] flex-shrink-0" />
                       )}
                     </div>
                     {n.message && (
-                      <p className="text-xs text-gray-500 line-clamp-2 mt-0.5">{n.message}</p>
+                      <p className="text-xs text-[var(--muted)] line-clamp-2 mt-0.5">{n.message}</p>
                     )}
-                    <p className="text-[11px] text-gray-400 mt-1">{timeAgo(n.createdAt)}</p>
+                    <p className="text-[11px] text-[var(--muted)] mt-1">{timeAgo(n.createdAt)}</p>
                   </div>
                   {!n.read && (
                     <button
                       onClick={(e) => { e.stopPropagation(); handleMarkRead(n.id); }}
                       disabled={markingIds.has(n.id)}
-                      className="flex-shrink-0 text-xs text-blue-600 hover:text-blue-700 font-medium px-2 py-1 rounded hover:bg-blue-50 transition-colors disabled:opacity-50"
+                      className="flex-shrink-0 text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium px-2 py-1 rounded hover:bg-[var(--paper2)] transition-colors disabled:opacity-50"
                     >
                       {markingIds.has(n.id) ? '...' : 'Mark read'}
                     </button>
@@ -324,7 +324,7 @@ export default function DoctorNotifications({ doctorId, showBadge = false, badge
         <div className="relative">
           <button
             onClick={() => fetchNotifications()}
-            className="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+            className="relative p-2 rounded-lg text-[var(--muted)] hover:bg-[var(--paper2)] hover:text-[var(--ink2)] transition-colors"
             aria-label="Notifications"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

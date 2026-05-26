@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-24
 category: treatment
 tags: ["theta burst", "iTBS", "protocols", "session time"]
-image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop"
+image: "/images/blog-covers/theta-burst-vs-standard-tms.svg"
 ---
 
 You have been told TMS therapy takes 19-37 minutes per session, five days a week, for six weeks. That is a serious time commitment. Then you hear about theta burst stimulation. Same results, but each session takes about 3 minutes.
@@ -115,9 +115,9 @@ The SAINT protocol delivers 10 iTBS sessions per day for 5 consecutive days, 50 
 
 As we covered in our [Stanford SNT guide](/blog/stanford-neuromodulation-therapy-snt-2026/), speed and precision targeting both likely contribute to those results. If speed is your biggest priority, ask your [TMS specialist](/specialists/) about accelerated protocols.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>The THREE-D trial proved iTBS (3 min) is statistically equivalent to standard rTMS (37 min) for treatment-resistant depression.</li>
     <li>Theta burst uses patterned stimulation (bursts of 3 pulses at 50 Hz) that is more efficient at triggering synaptic strengthening.</li>
     <li>Response rate: 49% (iTBS) vs. 47% (standard rTMS). Remission: 32% vs. 27%. Neither difference is statistically significant.</li>
@@ -127,47 +127,47 @@ As we covered in our [Stanford SNT guide](/blog/stanford-neuromodulation-therapy
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is theta burst TMS as effective as standard TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is theta burst TMS as effective as standard TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. The THREE-D trial, published in The Lancet, proved that intermittent theta burst stimulation (iTBS) is statistically non-inferior to conventional 10 Hz rTMS. Response rates were 49% (iTBS) vs. 47% (standard). Remission rates were 32% vs. 27%. Neither difference was statistically significant.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. The THREE-D trial, published in The Lancet, proved that intermittent theta burst stimulation (iTBS) is statistically non-inferior to conventional 10 Hz rTMS. Response rates were 49% (iTBS) vs. 47% (standard). Remission rates were 32% vs. 27%. Neither difference was statistically significant.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long is a theta burst TMS session?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long is a theta burst TMS session?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">About 3 minutes of active stimulation for iTBS. Including setup time, most patients are in and out of the clinic in 15-20 minutes. Compare that to 37 minutes (or 19 minutes with accelerated conventional protocols) for standard TMS.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">About 3 minutes of active stimulation for iTBS. Including setup time, most patients are in and out of the clinic in 15-20 minutes. Compare that to 37 minutes (or 19 minutes with accelerated conventional protocols) for standard TMS.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does insurance cover theta burst stimulation?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does insurance cover theta burst stimulation?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. New CPT codes specific to theta burst stimulation took effect in 2026, providing clean billing pathways for Medicare and commercial insurers. Most major insurers cover theta burst TMS the same as standard TMS.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. New CPT codes specific to theta burst stimulation took effect in 2026, providing clean billing pathways for Medicare and commercial insurers. Most major insurers cover theta burst TMS the same as standard TMS.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I choose between theta burst and standard TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I choose between theta burst and standard TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">It depends on what your clinic offers. Not every clinic has theta burst-capable equipment. Ask your provider. If both options are available and your insurance covers both, the clinical data says it does not matter which you choose. Pick based on practical factors like scheduling convenience and appointment length.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">It depends on what your clinic offers. Not every clinic has theta burst-capable equipment. Ask your provider. If both options are available and your insurance covers both, the clinical data says it does not matter which you choose. Pick based on practical factors like scheduling convenience and appointment length.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What does theta burst stimulation feel like?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What does theta burst stimulation feel like?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The pulse pattern feels different from standard TMS. Standard TMS delivers individual tapping sensations. Theta burst delivers pulses in triplets, creating a buzzing or vibrating sensation. The shorter session time means less total sensation overall, but the moment-to-moment intensity can feel slightly higher. Most patients find both protocols tolerable, with discomfort fading after the first few sessions.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The pulse pattern feels different from standard TMS. Standard TMS delivers individual tapping sensations. Theta burst delivers pulses in triplets, creating a buzzing or vibrating sensation. The shorter session time means less total sensation overall, but the moment-to-moment intensity can feel slightly higher. Most patients find both protocols tolerable, with discomfort fading after the first few sessions.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

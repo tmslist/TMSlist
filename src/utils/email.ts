@@ -341,7 +341,7 @@ export async function sendPatientConfirmation(data: {
     },
     specialist_enquiry: {
       label: 'Specialist Request Received',
-      accent: '#6366f1',
+      accent: '#0A1628',
       body: "We've received your specialist enquiry. A qualified TMS psychiatrist or specialist will reach out to you within 1–2 business days to discuss your treatment options.",
       ctaText: 'Find a TMS Specialist',
       ctaUrl: `${SITE_URL}/us/`,

@@ -33,14 +33,14 @@ const METRIC_DEFINITIONS = [
     description: 'Patient Health Questionnaire - Depression severity (0-27)',
     min: 0, max: 27,
     improvement: 'lower is better',
-    color: 'text-blue-600 dark:text-blue-400',
+    color: 'text-[var(--ink)] dark:text-[var(--ink2)]',
   },
   {
     name: 'GAD-7',
     description: 'Generalized Anxiety Disorder scale (0-21)',
     min: 0, max: 21,
     improvement: 'lower is better',
-    color: 'text-purple-600 dark:text-purple-400',
+    color: 'text-[var(--warm)] dark:text-[var(--warm)]',
   },
   {
     name: 'CGI-S',
@@ -75,14 +75,14 @@ const METRIC_DEFINITIONS = [
     description: 'Hamilton Rating Scale for Depression (0-52)',
     min: 0, max: 52,
     improvement: 'lower is better',
-    color: 'text-pink-600 dark:text-pink-400',
+    color: 'text-[var(--warm)] dark:text-[var(--warm)]',
   },
   {
     name: 'HAM-A',
     description: 'Hamilton Rating Scale for Anxiety (0-56)',
     min: 0, max: 56,
     improvement: 'lower is better',
-    color: 'text-blue-600 dark:text-blue-400',
+    color: 'text-[var(--ink)] dark:text-[var(--ink2)]',
   },
 ];
 
@@ -99,14 +99,14 @@ const TREATMENT_TYPES = [
 ];
 
 const METRIC_COLORS: Record<string, string> = {
-  'PHQ-9': 'border-blue-500',
-  'GAD-7': 'border-purple-500',
+  'PHQ-9': 'border-[rgba(10,22,40,0.2)]',
+  'GAD-7': 'border-[rgba(201,101,74,0.2)]',
   'CGI-S': 'border-green-500',
   'CGI-I': 'border-teal-500',
   'QIDS': 'border-orange-500',
   'BDI-II': 'border-red-500',
-  'HAM-D': 'border-pink-500',
-  'HAM-A': 'border-blue-500',
+  'HAM-D': 'border-[rgba(201,101,74,0.2)]',
+  'HAM-A': 'border-[rgba(10,22,40,0.2)]',
 };
 
 const METRIC_LINE_COLORS: Record<string, string> = {
@@ -117,7 +117,7 @@ const METRIC_LINE_COLORS: Record<string, string> = {
   'QIDS': '#f97316',
   'BDI-II': '#ef4444',
   'HAM-D': '#ec4899',
-  'HAM-A': '#6366f1',
+  'HAM-A': '#0A1628',
 };
 
 interface DoctorOutcomesProps {
@@ -257,8 +257,8 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
 
     return (
       <div key={metricName} className="mb-6">
-        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">{metricName}</h4>
-        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 overflow-x-auto">
+        <h4 className="text-sm font-semibold text-[var(--ink)] dark:text-white mb-3">{metricName}</h4>
+        <div className="bg-[var(--paper2)] dark:bg-[var(--paper2)] rounded-xl p-4 overflow-x-auto">
           <svg width={Math.max(width, 300)} height={height} className="w-full" viewBox={`0 0 ${width} ${height}`}>
             {/* Grid lines */}
             {[0, 0.25, 0.5, 0.75, 1].map((frac) => {
@@ -267,7 +267,7 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
               return (
                 <g key={frac}>
                   <line x1={pad} y1={y} x2={width - pad} y2={y} stroke="currentColor" strokeOpacity="0.1" strokeWidth="1" />
-                  <text x={pad - 6} y={y + 4} textAnchor="end" fontSize="10" fill="currentColor" className="text-gray-400">{val.toFixed(1)}</text>
+                  <text x={pad - 6} y={y + 4} textAnchor="end" fontSize="10" fill="currentColor" className="text-[var(--muted)]">{val.toFixed(1)}</text>
                 </g>
               );
             })}
@@ -284,7 +284,7 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
             ))}
             {/* X-axis labels */}
             {points.filter((_, i) => i === 0 || i === points.length - 1 || points.length <= 6 || i % Math.ceil(points.length / 4) === 0).map((p, i) => (
-              <text key={i} x={p.x} y={height - 6} textAnchor="middle" fontSize="9" fill="currentColor" className="text-gray-400">
+              <text key={i} x={p.x} y={height - 6} textAnchor="middle" fontSize="9" fill="currentColor" className="text-[var(--muted)]">
                 {new Date(p.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
               </text>
             ))}
@@ -312,7 +312,7 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[40vh]">
-        <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[var(--line)] border-t-blue-600 rounded-full animate-spin" />
       </div>
     );
   }
@@ -334,7 +334,7 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <button
           onClick={() => { setShowForm(true); setEditingId(null); }}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] transition-colors shadow-sm"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -346,7 +346,7 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
         <select
           value={selectedMetric}
           onChange={e => setSelectedMetric(e.target.value)}
-          className="px-4 py-2.5 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2.5 rounded-xl text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] bg-white dark:bg-[var(--ink2)] border border-[var(--line)] dark:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
         >
           <option value="all">All Metrics ({uniqueMetrics.length})</option>
           {METRIC_DEFINITIONS.map(m => (
@@ -357,12 +357,12 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
 
       {/* New Outcome Form */}
       {showForm && (
-        <div className="mb-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm p-6">
+        <div className="mb-6 bg-white dark:bg-[var(--ink)] border border-[var(--line)] dark:border-[var(--ink2)] rounded-xl shadow-sm p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+            <h3 className="text-base font-semibold text-[var(--ink)] dark:text-white">
               {editingId ? 'Edit Outcome Record' : 'Record Treatment Outcome'}
             </h3>
-            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+            <button onClick={resetForm} className="text-[var(--muted)] hover:text-[var(--ink2)] dark:hover:text-[var(--line)]">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -371,11 +371,11 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Metric *</label>
+                <label className="block text-xs font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Metric *</label>
                 <select
                   value={form.metricName}
                   onChange={e => setForm(f => ({ ...f, metricName: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] bg-white dark:bg-[var(--ink2)] text-sm text-[var(--ink)] dark:text-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
                 >
                   {METRIC_DEFINITIONS.map(m => (
                     <option key={m.name} value={m.name}>{m.name}: {m.description.split(' (')[0]}</option>
@@ -383,22 +383,22 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Score Value *</label>
+                <label className="block text-xs font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Score Value *</label>
                 <input
                   type="number"
                   step="0.1"
                   value={form.metricValue}
                   onChange={e => setForm(f => ({ ...f, metricValue: e.target.value }))}
                   placeholder={`e.g. ${METRIC_DEFINITIONS.find(m => m.name === form.metricName)?.min ?? 0}`}
-                  className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] bg-white dark:bg-[var(--ink2)] text-sm text-[var(--ink)] dark:text-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Treatment Type</label>
+                <label className="block text-xs font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Treatment Type</label>
                 <select
                   value={form.treatmentType}
                   onChange={e => setForm(f => ({ ...f, treatmentType: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] bg-white dark:bg-[var(--ink2)] text-sm text-[var(--ink)] dark:text-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
                 >
                   {TREATMENT_TYPES.map(t => (
                     <option key={t} value={t}>{t.replace(/_/g, ' ')}</option>
@@ -406,32 +406,32 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Measurement Period</label>
+                <label className="block text-xs font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Measurement Period</label>
                 <input
                   type="text"
                   value={form.measurementPeriod}
                   onChange={e => setForm(f => ({ ...f, measurementPeriod: e.target.value }))}
                   placeholder="e.g. Week 4, Post-treatment"
-                  className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] bg-white dark:bg-[var(--ink2)] text-sm text-[var(--ink)] dark:text-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Sample Size</label>
+                <label className="block text-xs font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Sample Size</label>
                 <input
                   type="number"
                   value={form.sampleSize}
                   onChange={e => setForm(f => ({ ...f, sampleSize: e.target.value }))}
                   placeholder="Number of patients"
                   min="1"
-                  className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] bg-white dark:bg-[var(--ink2)] text-sm text-[var(--ink)] dark:text-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
                 />
               </div>
             </div>
             <div className="flex gap-3 pt-2">
-              <button type="submit" className="px-5 py-2 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+              <button type="submit" className="px-5 py-2 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] transition-colors">
                 {editingId ? 'Update Record' : 'Save Outcome'}
               </button>
-              <button type="button" onClick={resetForm} className="px-5 py-2 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+              <button type="button" onClick={resetForm} className="px-5 py-2 rounded-xl text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] bg-[var(--paper2)] dark:bg-[var(--ink2)] hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)] transition-colors">
                 Cancel
               </button>
             </div>
@@ -445,8 +445,8 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
           <button key={tab} onClick={() => setActiveTab(tab)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               activeTab === tab
-                ? 'bg-blue-600 text-white'
-                : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
+                ? 'bg-[var(--ink)] text-white'
+                : 'bg-white dark:bg-[var(--ink2)] text-[var(--ink2)] dark:text-[var(--line)] border border-[var(--line)] dark:border-[var(--ink2)] hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)]'
             }`}>
             {tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
@@ -457,8 +457,8 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
       {activeTab === 'chart' && (
         <div>
           {uniqueMetrics.length === 0 ? (
-            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center">
-              <p className="text-gray-500 dark:text-gray-400 text-sm">No outcome data yet. Record your first outcome above.</p>
+            <div className="bg-white dark:bg-[var(--ink)] border border-[var(--line)] dark:border-[var(--ink2)] rounded-xl p-8 text-center">
+              <p className="text-[var(--muted)] dark:text-[var(--muted)] text-sm">No outcome data yet. Record your first outcome above.</p>
             </div>
           ) : (
             chartMetrics.map(metricName => {
@@ -471,38 +471,38 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
 
       {/* Table Tab */}
       {activeTab === 'table' && (
-        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-[var(--ink)] border border-[var(--line)] dark:border-[var(--ink2)] rounded-xl shadow-sm overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+            <thead className="bg-[var(--paper2)] dark:bg-[var(--ink2)] border-b border-[var(--line)] dark:border-[var(--ink2)]">
               <tr>
-                <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-300">Metric</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-300">Value</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-300">Treatment</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-300">Period</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-300">Sample</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-300">Date</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-300">Actions</th>
+                <th className="text-left px-4 py-3 font-medium text-[var(--ink2)] dark:text-[var(--line)]">Metric</th>
+                <th className="text-left px-4 py-3 font-medium text-[var(--ink2)] dark:text-[var(--line)]">Value</th>
+                <th className="text-left px-4 py-3 font-medium text-[var(--ink2)] dark:text-[var(--line)]">Treatment</th>
+                <th className="text-left px-4 py-3 font-medium text-[var(--ink2)] dark:text-[var(--line)]">Period</th>
+                <th className="text-left px-4 py-3 font-medium text-[var(--ink2)] dark:text-[var(--line)]">Sample</th>
+                <th className="text-left px-4 py-3 font-medium text-[var(--ink2)] dark:text-[var(--line)]">Date</th>
+                <th className="text-left px-4 py-3 font-medium text-[var(--ink2)] dark:text-[var(--line)]">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredOutcomes.length === 0 ? (
-                <tr><td colSpan={7} className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">No records found</td></tr>
+                <tr><td colSpan={7} className="px-4 py-8 text-center text-[var(--muted)] dark:text-[var(--muted)]">No records found</td></tr>
               ) : filteredOutcomes
                 .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                 .map(outcome => (
-                  <tr key={outcome.id} className="border-b border-gray-100 dark:border-gray-800 last:border-0 hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                  <tr key={outcome.id} className="border-b border-[var(--line)] dark:border-[var(--ink2)] last:border-0 hover:bg-[var(--paper2)] dark:hover:bg-[var(--paper2)]">
                     <td className="px-4 py-3">
-                      <span className={`font-semibold ${METRIC_DEFINITIONS.find(m => m.name === outcome.metricName)?.color || 'text-gray-900 dark:text-white'}`}>
+                      <span className={`font-semibold ${METRIC_DEFINITIONS.find(m => m.name === outcome.metricName)?.color || 'text-[var(--ink)] dark:text-white'}`}>
                         {outcome.metricName}
                       </span>
                     </td>
-                    <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white">{outcome.metricValue}</td>
-                    <td className="px-4 py-3 text-gray-600 dark:text-gray-300 capitalize">{outcome.treatmentType.replace(/_/g, ' ')}</td>
-                    <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{outcome.measurementPeriod || '—'}</td>
-                    <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{outcome.sampleSize ?? '—'}</td>
-                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400 text-xs">{new Date(outcome.createdAt).toLocaleDateString()}</td>
+                    <td className="px-4 py-3 font-semibold text-[var(--ink)] dark:text-white">{outcome.metricValue}</td>
+                    <td className="px-4 py-3 text-[var(--ink2)] dark:text-[var(--line)] capitalize">{outcome.treatmentType.replace(/_/g, ' ')}</td>
+                    <td className="px-4 py-3 text-[var(--ink2)] dark:text-[var(--line)]">{outcome.measurementPeriod || '—'}</td>
+                    <td className="px-4 py-3 text-[var(--ink2)] dark:text-[var(--line)]">{outcome.sampleSize ?? '—'}</td>
+                    <td className="px-4 py-3 text-[var(--muted)] dark:text-[var(--muted)] text-xs">{new Date(outcome.createdAt).toLocaleDateString()}</td>
                     <td className="px-4 py-3">
-                      <button onClick={() => editOutcome(outcome)} className="text-xs text-blue-600 dark:text-blue-400 hover:underline">Edit</button>
+                      <button onClick={() => editOutcome(outcome)} className="text-xs text-[var(--ink)] dark:text-[var(--ink2)] hover:underline">Edit</button>
                     </td>
                   </tr>
                 ))}
@@ -515,8 +515,8 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
       {activeTab === 'summary' && (
         <div>
           {uniqueMetrics.length === 0 ? (
-            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center">
-              <p className="text-gray-500 dark:text-gray-400 text-sm">No outcome data to summarize.</p>
+            <div className="bg-white dark:bg-[var(--ink)] border border-[var(--line)] dark:border-[var(--ink2)] rounded-xl p-8 text-center">
+              <p className="text-[var(--muted)] dark:text-[var(--muted)] text-sm">No outcome data to summarize.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -526,29 +526,29 @@ export default function DoctorOutcomes({ doctorId }: DoctorOutcomesProps) {
                 const { before, after, change, improvement, count } = comparison;
                 const def = METRIC_DEFINITIONS.find(d => d.name === metric.name);
                 return (
-                  <div key={metric.name} className={`bg-white dark:bg-gray-900 border-t-4 ${METRIC_COLORS[metric.name]} rounded-xl p-5 shadow-sm`}>
+                  <div key={metric.name} className={`bg-white dark:bg-[var(--ink)] border-t-4 ${METRIC_COLORS[metric.name]} rounded-xl p-5 shadow-sm`}>
                     <div className="flex items-center justify-between mb-3">
                       <h4 className={`text-base font-bold ${metric.color}`}>{metric.name}</h4>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">{count} records</span>
+                      <span className="text-xs text-[var(--muted)] dark:text-[var(--muted)]">{count} records</span>
                     </div>
                     <div className="space-y-2 mb-3">
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">Before</span>
-                        <span className="font-semibold text-gray-900 dark:text-white">{before}</span>
+                        <span className="text-[var(--muted)] dark:text-[var(--muted)]">Before</span>
+                        <span className="font-semibold text-[var(--ink)] dark:text-white">{before}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">After</span>
-                        <span className="font-semibold text-gray-900 dark:text-white">{after}</span>
+                        <span className="text-[var(--muted)] dark:text-[var(--muted)]">After</span>
+                        <span className="font-semibold text-[var(--ink)] dark:text-white">{after}</span>
                       </div>
-                      <div className="flex justify-between text-sm pt-2 border-t border-gray-100 dark:border-gray-800">
-                        <span className="text-gray-500 dark:text-gray-400">Change</span>
+                      <div className="flex justify-between text-sm pt-2 border-t border-[var(--line)] dark:border-[var(--ink2)]">
+                        <span className="text-[var(--muted)] dark:text-[var(--muted)]">Change</span>
                         <span className={`font-bold ${improvement ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                           {change > 0 ? '+' : ''}{change.toFixed(1)}
                           <span className="text-xs ml-1">{improvement ? 'improved' : 'no improvement'}</span>
                         </span>
                       </div>
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 italic">{metric.description}</div>
+                    <div className="text-xs text-[var(--muted)] dark:text-[var(--muted)] italic">{metric.description}</div>
                   </div>
                 );
               })}

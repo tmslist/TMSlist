@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest } from '../../../../utils/auth';
+import { getSessionFromRequest } from '../../../../utils/auth.js';
 import { eq, desc } from 'drizzle-orm';
-import { db } from '../../../../db';
-import { forumPosts, forumComments } from '../../../../db/schema';
+import { db } from '../../../../db/index.js';
+import { forumPosts, forumComments } from '../../../../db/schema.js';
 
 export const prerender = false;
 

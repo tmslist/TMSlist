@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { sql, desc } from 'drizzle-orm';
 import { db } from '../../../db';
 import { clinics, leads, reviews } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -47,6 +47,7 @@ export const GET: APIRoute = async ({ request }) => {
               AND r.created_at >= ${sinceStr}::timestamptz
               AND r.approved = true
           ) AS new_reviews
+        FROM clinics c
       )
       SELECT
         id,

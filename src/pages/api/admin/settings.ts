@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { sql } from 'drizzle-orm';
 import { db } from '../../../db';
 import { clinics, doctors, reviews, leads, questions, treatments, users, siteSettings } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -69,12 +69,35 @@ export const GET: APIRoute = async ({ request }) => {
   }
 };
 
+// Allowlist of site-settings keys writable from the admin panel.
+// Anything not on this list is rejected so a compromised admin client
+// or sloppy POST body can't pollute the table with arbitrary keys.
+const ALLOWED_SETTING_KEYS = new Set([
+  'site_name', 'site_url', 'site_tagline', 'site_description', 'site_logo_url',
+  'support_email', 'contact_email', 'contact_phone',
+  'meta_title_suffix', 'default_og_image',
+  'analytics_enabled', 'posthog_key', 'gtm_id',
+  // Tracking codes (admin → /admin/tracking). Keep both raw IDs and full snippets.
+  'tracking_ga4_id', 'tracking_gtm_id', 'tracking_meta_pixel_id',
+  'tracking_google_site_verification', 'tracking_bing_site_verification',
+  'tracking_head_code', 'tracking_body_open_code', 'tracking_body_close_code',
+  'tracking_enabled',
+  'feature_flags', 'experiments_enabled',
+  'maintenance_mode', 'maintenance_message',
+  'newsletter_provider', 'newsletter_from_email', 'newsletter_from_name',
+  'lead_magnet_enabled', 'callback_modal_enabled',
+  'social_facebook', 'social_twitter', 'social_instagram', 'social_linkedin', 'social_youtube',
+  'business_address', 'business_hours',
+  'consent_banner_enabled', 'consent_banner_text',
+  'review_auto_approve_threshold',
+  'ranking_weights',
+]);
+
 // Save settings to siteSettings table
 export const PUT: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin')) {
-    return json({ error: 'Unauthorized' }, 401);
-  }
+  if (!session) return json({ error: 'Unauthorized' }, 401);
+  if (!hasRole(session, 'admin')) return json({ error: 'Forbidden' }, 403);
 
   try {
     const body = await request.json();
@@ -85,7 +108,12 @@ export const PUT: APIRoute = async ({ request }) => {
     }
 
     const now = new Date();
-    const entries = Object.entries(settings);
+    const entries = Object.entries(settings).filter(([k]) => ALLOWED_SETTING_KEYS.has(k));
+    const rejected = Object.keys(settings).filter(k => !ALLOWED_SETTING_KEYS.has(k));
+
+    if (entries.length === 0) {
+      return json({ error: 'No allowed settings keys in payload', rejected }, 400);
+    }
 
     for (const [key, value] of entries) {
       await db
@@ -106,7 +134,7 @@ export const PUT: APIRoute = async ({ request }) => {
         });
     }
 
-    return json({ success: true, updated: entries.length });
+    return json({ success: true, updated: entries.length, rejected });
   } catch (err) {
     console.error('Settings save error:', err);
     return json({ error: 'Internal server error' }, 500);

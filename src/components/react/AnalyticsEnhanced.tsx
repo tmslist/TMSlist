@@ -161,32 +161,32 @@ const TABS: { id: TabId; label: string }[] = [
 ];
 
 const TYPE_COLORS: Record<string, string> = {
-  specialist_enquiry: 'bg-violet-500',
-  lead_magnet: 'bg-blue-500',
+  specialist_enquiry: 'bg-[var(--ink2)]',
+  lead_magnet: 'bg-[var(--accent2)]',
   newsletter: 'bg-emerald-500',
   quiz_lead: 'bg-amber-500',
-  callback_request: 'bg-rose-500',
+  callback_request: 'bg-[rgba(201,101,74,0.06)]',
   whatsapp_inquiry: 'bg-teal-500',
-  appointment_request: 'bg-blue-500',
+  appointment_request: 'bg-[var(--accent2)]',
   contact: 'bg-orange-500',
 };
 
 const SOURCE_COLORS = [
-  'bg-violet-500',
-  'bg-blue-500',
+  'bg-[var(--ink2)]',
+  'bg-[var(--accent2)]',
   'bg-emerald-500',
   'bg-amber-500',
-  'bg-rose-500',
+  'bg-[rgba(201,101,74,0.06)]',
   'bg-teal-500',
-  'bg-blue-500',
+  'bg-[var(--accent2)]',
   'bg-orange-500',
-  'bg-pink-500',
-  'bg-cyan-500',
+  'bg-[rgba(201,101,74,0.06)]',
+  'bg-[var(--accent2)]',
 ];
 
 const SENTIMENT_COLORS: Record<string, string> = {
   positive: 'bg-emerald-500',
-  neutral: 'bg-gray-400',
+  neutral: 'bg-[var(--line)]',
   negative: 'bg-red-500',
 };
 
@@ -212,32 +212,32 @@ const FUNNEL_ORDER = ['search', 'clinic_view', 'lead_submit', 'appointment_reque
 function StatCard({ label, stat }: { label: string; stat: OverviewStat }) {
   const isPositive = stat.change >= 0;
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <p className="text-sm font-medium text-gray-500">{label}</p>
-      <p className="text-3xl font-semibold text-gray-900 mt-2">{stat.count.toLocaleString()}</p>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <p className="text-sm font-medium text-[var(--muted)]">{label}</p>
+      <p className="text-3xl font-semibold text-[var(--ink)] mt-2">{stat.count.toLocaleString()}</p>
       <div className="mt-2 flex items-center gap-1">
         <span className={`text-sm font-medium ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
           {isPositive ? '+' : ''}{stat.change}%
         </span>
-        <span className="text-xs text-gray-400">vs previous period</span>
+        <span className="text-xs text-[var(--muted)]">vs previous period</span>
       </div>
     </div>
   );
 }
 
-function BarChart({ data, color = 'bg-violet-500', label }: { data: DayData[]; color?: string; label: string }) {
+function BarChart({ data, color = 'bg-[var(--ink2)]', label }: { data: DayData[]; color?: string; label: string }) {
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-        <h3 className="text-sm font-semibold text-gray-700 mb-4">{label}</h3>
-        <div className="h-40 flex items-center justify-center text-gray-400 text-sm">No data</div>
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">{label}</h3>
+        <div className="h-40 flex items-center justify-center text-[var(--muted)] text-sm">No data</div>
       </div>
     );
   }
   const maxCount = Math.max(...data.map((d) => d.count), 1);
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-700 mb-4">{label}</h3>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">{label}</h3>
       <div className="flex items-end gap-[2px] h-40">
         {data.map((d) => (
           <div
@@ -249,34 +249,34 @@ function BarChart({ data, color = 'bg-violet-500', label }: { data: DayData[]; c
         ))}
       </div>
       <div className="flex justify-between mt-2">
-        <span className="text-[10px] text-gray-400">{data[0]?.date}</span>
-        <span className="text-[10px] text-gray-400">{data[data.length - 1]?.date}</span>
+        <span className="text-[10px] text-[var(--muted)]">{data[0]?.date}</span>
+        <span className="text-[10px] text-[var(--muted)]">{data[data.length - 1]?.date}</span>
       </div>
     </div>
   );
 }
 
-function HorizontalBarChart({ data, color = 'bg-violet-500', label }: { data: ClinicRank[]; color?: string; label: string }) {
+function HorizontalBarChart({ data, color = 'bg-[var(--ink2)]', label }: { data: ClinicRank[]; color?: string; label: string }) {
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-        <h3 className="text-sm font-semibold text-gray-700 mb-4">{label}</h3>
-        <div className="h-40 flex items-center justify-center text-gray-400 text-sm">No data</div>
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">{label}</h3>
+        <div className="h-40 flex items-center justify-center text-[var(--muted)] text-sm">No data</div>
       </div>
     );
   }
   const maxCount = Math.max(...data.map((d) => d.count), 1);
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-700 mb-4">{label}</h3>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">{label}</h3>
       <div className="space-y-2">
         {data.map((d) => (
           <div key={d.id}>
             <div className="flex items-center justify-between text-xs mb-0.5">
-              <span className="text-gray-700 truncate max-w-[200px]" title={d.name}>{d.name}</span>
-              <span className="text-gray-500 ml-2 shrink-0">{d.count}</span>
+              <span className="text-[var(--ink2)] truncate max-w-[200px]" title={d.name}>{d.name}</span>
+              <span className="text-[var(--muted)] ml-2 shrink-0">{d.count}</span>
             </div>
-            <div className="w-full bg-gray-100 rounded-full h-2">
+            <div className="w-full bg-[var(--paper2)] rounded-full h-2">
               <div
                 className={`${color} h-2 rounded-full transition-all`}
                 style={{ width: `${(d.count / maxCount) * 100}%` }}
@@ -292,27 +292,27 @@ function HorizontalBarChart({ data, color = 'bg-violet-500', label }: { data: Cl
 function TypeBreakdown({ data }: { data: TypeData[] }) {
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-        <h3 className="text-sm font-semibold text-gray-700 mb-4">Lead Breakdown by Type</h3>
-        <div className="h-40 flex items-center justify-center text-gray-400 text-sm">No data</div>
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Lead Breakdown by Type</h3>
+        <div className="h-40 flex items-center justify-center text-[var(--muted)] text-sm">No data</div>
       </div>
     );
   }
   const total = data.reduce((s, d) => s + d.count, 0);
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-700 mb-4">Lead Breakdown by Type</h3>
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+      <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Lead Breakdown by Type</h3>
       <div className="space-y-3">
         {data.map((d) => {
           const pct = total > 0 ? Math.round((d.count / total) * 100) : 0;
-          const color = TYPE_COLORS[d.type] || 'bg-gray-500';
+          const color = TYPE_COLORS[d.type] || 'bg-[var(--muted)]';
           return (
             <div key={d.type}>
               <div className="flex items-center justify-between text-xs mb-1">
-                <span className="text-gray-700 capitalize">{d.type.replace(/_/g, ' ')}</span>
-                <span className="text-gray-500">{d.count} ({pct}%)</span>
+                <span className="text-[var(--ink2)] capitalize">{d.type.replace(/_/g, ' ')}</span>
+                <span className="text-[var(--muted)]">{d.count} ({pct}%)</span>
               </div>
-              <div className="w-full bg-gray-100 rounded-full h-2.5">
+              <div className="w-full bg-[var(--paper2)] rounded-full h-2.5">
                 <div className={`${color} h-2.5 rounded-full`} style={{ width: `${pct}%` }} />
               </div>
             </div>
@@ -325,7 +325,7 @@ function TypeBreakdown({ data }: { data: TypeData[] }) {
 
 // ── Sparkline SVG ─────────────────────────────────────────────────────
 
-function Sparkline({ data, color = '#6366f1', width = 80, height = 24 }: { data: number[]; color?: string; width?: number; height?: number }) {
+function Sparkline({ data, color = '#0A1628', width = 80, height = 24 }: { data: number[]; color?: string; width?: number; height?: number }) {
   if (data.length < 2) return <div className="w-20 h-6" />;
   const max = Math.max(...data);
   const min = Math.min(...data);
@@ -346,7 +346,7 @@ function Sparkline({ data, color = '#6366f1', width = 80, height = 24 }: { data:
 
 function PieChart({ data, colors }: { data: { label: string; value: number }[]; colors: string[] }) {
   const total = data.reduce((s, d) => s + d.value, 0);
-  if (total === 0) return <div className="h-48 flex items-center justify-center text-gray-400 text-sm">No data</div>;
+  if (total === 0) return <div className="h-48 flex items-center justify-center text-[var(--muted)] text-sm">No data</div>;
 
   let cumulativeAngle = -90;
   const slices = data.map((d, i) => {
@@ -376,10 +376,10 @@ function PieChart({ data, colors }: { data: { label: string; value: number }[]; 
           <path key={i} d={s.path} fill={s.color} stroke="#fff" strokeWidth="2" />
         ))}
         <circle cx="100" cy="100" r="35" fill="white" />
-        <text x="100" y="96" textAnchor="middle" className="text-[10px] fill-gray-500 font-medium" dominantBaseline="middle">
+        <text x="100" y="96" textAnchor="middle" className="text-[10px] fill-[var(--muted)] font-medium" dominantBaseline="middle">
           {total.toLocaleString()}
         </text>
-        <text x="100" y="110" textAnchor="middle" className="text-[8px] fill-gray-400" dominantBaseline="middle">
+        <text x="100" y="110" textAnchor="middle" className="text-[8px] fill-[var(--muted)]" dominantBaseline="middle">
           total
         </text>
       </svg>
@@ -387,8 +387,8 @@ function PieChart({ data, colors }: { data: { label: string; value: number }[]; 
         {legendItems.map((s, i) => (
           <div key={i} className="flex items-center gap-2 text-xs">
             <span className="w-2.5 h-2.5 rounded-sm shrink-0" style={{ backgroundColor: s.color }} />
-            <span className="text-gray-600 capitalize">{s.label.replace(/_/g, ' ')}</span>
-            <span className="text-gray-400 ml-1">{s.pct}%</span>
+            <span className="text-[var(--ink2)] capitalize">{s.label.replace(/_/g, ' ')}</span>
+            <span className="text-[var(--muted)] ml-1">{s.pct}%</span>
           </div>
         ))}
       </div>
@@ -398,8 +398,8 @@ function PieChart({ data, colors }: { data: { label: string; value: number }[]; 
 
 // ── Line Chart SVG ───────────────────────────────────────────────────
 
-function LineChart({ data, color = '#6366f1', height = 160 }: { data: DayData[]; color?: string; height?: number }) {
-  if (data.length === 0) return <div className="h-40 flex items-center justify-center text-gray-400 text-sm">No data</div>;
+function LineChart({ data, color = '#0A1628', height = 160 }: { data: DayData[]; color?: string; height?: number }) {
+  if (data.length === 0) return <div className="h-40 flex items-center justify-center text-[var(--muted)] text-sm">No data</div>;
   const max = Math.max(...data.map((d) => d.count));
   const min = Math.min(...data.map((d) => d.count));
   const range = max - min || 1;
@@ -433,13 +433,13 @@ function LineChart({ data, color = '#6366f1', height = 160 }: { data: DayData[];
         const y = padding.top + innerH - ((v - min) / range) * innerH;
         return (
           <g key={i}>
-            <line x1={padding.left} y1={y} x2={w - padding.right} y2={y} stroke="#e5e7eb" strokeDasharray="4,4" />
-            <text x={padding.left - 4} y={y + 4} textAnchor="end" className="text-[9px] fill-gray-400">{v < 1000 ? v : `${Math.round(v / 100) / 10}k`}</text>
+            <line x1={padding.left} y1={y} x2={w - padding.right} y2={y} stroke="#E6EAF0" strokeDasharray="4,4" />
+            <text x={padding.left - 4} y={y + 4} textAnchor="end" className="text-[9px] fill-[var(--muted)]">{v < 1000 ? v : `${Math.round(v / 100) / 10}k`}</text>
           </g>
         );
       })}
       {xTicks.map((p, i) => (
-        <text key={i} x={p.x} y={h - 4} textAnchor="middle" className="text-[9px] fill-gray-400">{p.date}</text>
+        <text key={i} x={p.x} y={h - 4} textAnchor="middle" className="text-[9px] fill-[var(--muted)]">{p.date}</text>
       ))}
       <path d={areaD} fill={`url(#grad-${color.replace('#', '')})`} />
       <path d={pathD} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" />
@@ -469,18 +469,18 @@ function OverviewTab({ data, clinicPerf, doctorPerf, leadSources, sentiments, to
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-900">Analytics</h1>
-          <p className="text-gray-500 mt-1">Performance overview</p>
+          <h1 className="text-3xl font-semibold text-[var(--ink)]">Analytics</h1>
+          <p className="text-[var(--muted)] mt-1">Performance overview</p>
         </div>
-        <div className="flex gap-1 bg-white border border-gray-200 rounded-lg p-1">
+        <div className="flex gap-1 bg-white border border-[var(--line)] rounded-lg p-1">
           {RANGES.map((r) => (
             <button
               key={r.value}
               onClick={() => onRangeChange(r.value)}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
                 days === r.value
-                  ? 'bg-violet-600 text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-[var(--ink)] text-white'
+                  : 'text-[var(--ink2)] hover:bg-[var(--paper2)]'
               }`}
             >
               {r.label}
@@ -499,7 +499,7 @@ function OverviewTab({ data, clinicPerf, doctorPerf, leadSources, sentiments, to
 
       {/* Charts row 1 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <BarChart data={data.leadsByDay} color="bg-violet-500" label="Leads Over Time" />
+        <BarChart data={data.leadsByDay} color="bg-[var(--ink2)]" label="Leads Over Time" />
         <TypeBreakdown data={data.leadsByType} />
       </div>
 
@@ -511,51 +511,51 @@ function OverviewTab({ data, clinicPerf, doctorPerf, leadSources, sentiments, to
 
       {/* Top clinics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <HorizontalBarChart data={data.topClinicsByLeads} color="bg-violet-500" label="Top Clinics by Leads" />
+        <HorizontalBarChart data={data.topClinicsByLeads} color="bg-[var(--ink2)]" label="Top Clinics by Leads" />
         <HorizontalBarChart data={data.topClinicsByReviews} color="bg-amber-500" label="Top Clinics by Reviews" />
       </div>
 
       {/* Clinic Performance Scorecard */}
       {clinicPerf.length > 0 && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm mb-6">
-          <h3 className="text-sm font-semibold text-gray-700 mb-4">Clinic Performance Scorecard</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm mb-6">
+          <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Clinic Performance Scorecard</h3>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-xs">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-[var(--line)] text-xs">
+              <thead className="bg-[var(--paper2)]">
                 <tr>
-                  <th className="px-3 py-2 text-left font-medium text-gray-500 uppercase">Clinic</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Profile Views</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Leads</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Reviews</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Avg Rating</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Tier</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Trend</th>
+                  <th className="px-3 py-2 text-left font-medium text-[var(--muted)] uppercase">Clinic</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Profile Views</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Leads</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Reviews</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Avg Rating</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Tier</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Trend</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-[var(--line)]">
                 {clinicPerf.map((c) => (
-                  <tr key={c.id} className="hover:bg-gray-50">
+                  <tr key={c.id} className="hover:bg-[var(--paper2)]">
                     <td className="px-3 py-2">
-                      <div className="font-medium text-gray-800 max-w-[150px] truncate">{c.name}</div>
-                      <div className="text-gray-400 text-[10px]">{c.city}, {c.state}</div>
+                      <div className="font-medium text-[var(--ink)] max-w-[150px] truncate">{c.name}</div>
+                      <div className="text-[var(--muted)] text-[10px]">{c.city}, {c.state}</div>
                     </td>
-                    <td className="px-3 py-2 text-right text-gray-600">{c.profileViews.toLocaleString()}</td>
-                    <td className="px-3 py-2 text-right text-gray-600">{c.leadCount}</td>
-                    <td className="px-3 py-2 text-right text-gray-600">{c.reviewCount}</td>
+                    <td className="px-3 py-2 text-right text-[var(--ink2)]">{c.profileViews.toLocaleString()}</td>
+                    <td className="px-3 py-2 text-right text-[var(--ink2)]">{c.leadCount}</td>
+                    <td className="px-3 py-2 text-right text-[var(--ink2)]">{c.reviewCount}</td>
                     <td className="px-3 py-2 text-right">
                       {c.avgRating != null ? (
                         <span className={`font-medium ${c.avgRating >= 4.5 ? 'text-emerald-600' : c.avgRating >= 3.5 ? 'text-amber-600' : 'text-red-500'}`}>
                           {c.avgRating.toFixed(1)}
                         </span>
-                      ) : <span className="text-gray-400">—</span>}
+                      ) : <span className="text-[var(--muted)]">—</span>}
                     </td>
                     <td className="px-3 py-2 text-right">
                       <span className={`inline-block px-1.5 py-0.5 rounded text-[10px] font-medium ${
-                        c.subscriptionTier === 'enterprise' ? 'bg-violet-100 text-violet-700' :
-                        c.subscriptionTier === 'premium' ? 'bg-blue-100 text-blue-700' :
+                        c.subscriptionTier === 'enterprise' ? 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]' :
+                        c.subscriptionTier === 'premium' ? 'bg-[rgba(10,22,40,0.1)] text-[var(--accent)]' :
                         c.subscriptionTier === 'pro' ? 'bg-teal-100 text-teal-700' :
                         c.subscriptionTier === 'featured' ? 'bg-amber-100 text-amber-700' :
-                        'bg-gray-100 text-gray-600'
+                        'bg-[var(--paper2)] text-[var(--ink2)]'
                       }`}>
                         {c.subscriptionTier ?? 'free'}
                       </span>
@@ -573,28 +573,28 @@ function OverviewTab({ data, clinicPerf, doctorPerf, leadSources, sentiments, to
 
       {/* Doctor Performance Scorecard */}
       {doctorPerf.length > 0 && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm mb-6">
-          <h3 className="text-sm font-semibold text-gray-700 mb-4">Doctor Performance Scorecard</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm mb-6">
+          <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Doctor Performance Scorecard</h3>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-xs">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-[var(--line)] text-xs">
+              <thead className="bg-[var(--paper2)]">
                 <tr>
-                  <th className="px-3 py-2 text-left font-medium text-gray-500 uppercase">Doctor</th>
-                  <th className="px-3 py-2 text-left font-medium text-gray-500 uppercase">Clinic</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Profile Views</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Leads</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Reviews</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Trend</th>
+                  <th className="px-3 py-2 text-left font-medium text-[var(--muted)] uppercase">Doctor</th>
+                  <th className="px-3 py-2 text-left font-medium text-[var(--muted)] uppercase">Clinic</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Profile Views</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Leads</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Reviews</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Trend</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-[var(--line)]">
                 {doctorPerf.map((d) => (
-                  <tr key={d.id} className="hover:bg-gray-50">
-                    <td className="px-3 py-2 font-medium text-gray-800 max-w-[150px] truncate">{d.name}</td>
-                    <td className="px-3 py-2 text-gray-500 max-w-[150px] truncate">{d.clinicName}</td>
-                    <td className="px-3 py-2 text-right text-gray-600">{d.profileViews.toLocaleString()}</td>
-                    <td className="px-3 py-2 text-right text-gray-600">{d.leadCount}</td>
-                    <td className="px-3 py-2 text-right text-gray-600">{d.reviewCount}</td>
+                  <tr key={d.id} className="hover:bg-[var(--paper2)]">
+                    <td className="px-3 py-2 font-medium text-[var(--ink)] max-w-[150px] truncate">{d.name}</td>
+                    <td className="px-3 py-2 text-[var(--muted)] max-w-[150px] truncate">{d.clinicName}</td>
+                    <td className="px-3 py-2 text-right text-[var(--ink2)]">{d.profileViews.toLocaleString()}</td>
+                    <td className="px-3 py-2 text-right text-[var(--ink2)]">{d.leadCount}</td>
+                    <td className="px-3 py-2 text-right text-[var(--ink2)]">{d.reviewCount}</td>
                     <td className="px-3 py-2 text-right">
                       <Sparkline data={[d.profileViews, Math.round(d.profileViews * 0.85), Math.round(d.profileViews * 1.15), Math.round(d.profileViews * 0.95)]} />
                     </td>
@@ -609,20 +609,20 @@ function OverviewTab({ data, clinicPerf, doctorPerf, leadSources, sentiments, to
       {/* Lead Volume by Source + Review Sentiment */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         {pieData.length > 0 ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-            <h3 className="text-sm font-semibold text-gray-700 mb-4">Lead Volume by Source</h3>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+            <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Lead Volume by Source</h3>
             <PieChart data={pieData} colors={SOURCE_COLORS} />
           </div>
         ) : (
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-            <h3 className="text-sm font-semibold text-gray-700 mb-4">Lead Volume by Source</h3>
-            <div className="h-48 flex items-center justify-center text-gray-400 text-sm">No data</div>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+            <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Lead Volume by Source</h3>
+            <div className="h-48 flex items-center justify-center text-[var(--muted)] text-sm">No data</div>
           </div>
         )}
 
         {sentimentPie.length > 0 ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-            <h3 className="text-sm font-semibold text-gray-700 mb-4">Review Sentiment Breakdown</h3>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+            <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Review Sentiment Breakdown</h3>
             <div className="space-y-3">
               {sentiments.map((s) => {
                 const total = sentiments.reduce((acc, x) => acc + x.count, 0);
@@ -630,11 +630,11 @@ function OverviewTab({ data, clinicPerf, doctorPerf, leadSources, sentiments, to
                 return (
                   <div key={s.sentiment}>
                     <div className="flex items-center justify-between text-xs mb-1">
-                      <span className="text-gray-700 capitalize">{s.sentiment}</span>
-                      <span className="text-gray-500">{s.count} ({pct}%)</span>
+                      <span className="text-[var(--ink2)] capitalize">{s.sentiment}</span>
+                      <span className="text-[var(--muted)]">{s.count} ({pct}%)</span>
                     </div>
-                    <div className="w-full bg-gray-100 rounded-full h-2.5">
-                      <div className={`${SENTIMENT_COLORS[s.sentiment] || 'bg-gray-500'} h-2.5 rounded-full`} style={{ width: `${pct}%` }} />
+                    <div className="w-full bg-[var(--paper2)] rounded-full h-2.5">
+                      <div className={`${SENTIMENT_COLORS[s.sentiment] || 'bg-[var(--muted)]'} h-2.5 rounded-full`} style={{ width: `${pct}%` }} />
                     </div>
                   </div>
                 );
@@ -642,38 +642,38 @@ function OverviewTab({ data, clinicPerf, doctorPerf, leadSources, sentiments, to
             </div>
           </div>
         ) : (
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-            <h3 className="text-sm font-semibold text-gray-700 mb-4">Review Sentiment Breakdown</h3>
-            <div className="h-48 flex items-center justify-center text-gray-400 text-sm">No data</div>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+            <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Review Sentiment Breakdown</h3>
+            <div className="h-48 flex items-center justify-center text-[var(--muted)] text-sm">No data</div>
           </div>
         )}
       </div>
 
       {/* Top Performing Content */}
       {topContent.length > 0 && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h3 className="text-sm font-semibold text-gray-700 mb-4">Top Performing Content</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Top Performing Content</h3>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-xs">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-[var(--line)] text-xs">
+              <thead className="bg-[var(--paper2)]">
                 <tr>
-                  <th className="px-3 py-2 text-left font-medium text-gray-500 uppercase">Title</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Views</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Engagement</th>
-                  <th className="px-3 py-2 text-right font-medium text-gray-500 uppercase">Shares</th>
-                  <th className="px-3 py-2 text-left font-medium text-gray-500 uppercase">Published</th>
+                  <th className="px-3 py-2 text-left font-medium text-[var(--muted)] uppercase">Title</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Views</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Engagement</th>
+                  <th className="px-3 py-2 text-right font-medium text-[var(--muted)] uppercase">Shares</th>
+                  <th className="px-3 py-2 text-left font-medium text-[var(--muted)] uppercase">Published</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-[var(--line)]">
                 {topContent.map((c) => (
-                  <tr key={c.id} className="hover:bg-gray-50">
+                  <tr key={c.id} className="hover:bg-[var(--paper2)]">
                     <td className="px-3 py-2">
-                      <a href={`/admin/blog/${c.slug}`} className="font-medium text-violet-600 hover:text-violet-700 max-w-[250px] block truncate">{c.title}</a>
+                      <a href={`/admin/blog/${c.slug}`} className="font-medium text-[var(--accent)] hover:text-[var(--accent)] max-w-[250px] block truncate">{c.title}</a>
                     </td>
-                    <td className="px-3 py-2 text-right text-gray-600">{c.views.toLocaleString()}</td>
-                    <td className="px-3 py-2 text-right text-gray-600">{c.engagement}</td>
-                    <td className="px-3 py-2 text-right text-gray-600">{c.shares}</td>
-                    <td className="px-3 py-2 text-gray-400">{c.publishedAt ? new Date(c.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}</td>
+                    <td className="px-3 py-2 text-right text-[var(--ink2)]">{c.views.toLocaleString()}</td>
+                    <td className="px-3 py-2 text-right text-[var(--ink2)]">{c.engagement}</td>
+                    <td className="px-3 py-2 text-right text-[var(--ink2)]">{c.shares}</td>
+                    <td className="px-3 py-2 text-[var(--muted)]">{c.publishedAt ? new Date(c.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}</td>
                   </tr>
                 ))}
               </tbody>
@@ -692,8 +692,8 @@ function SearchTab({ searchData, loading }: { searchData: SearchData | null; loa
     return (
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-4" />
-          <p className="text-gray-500">Loading search analytics...</p>
+          <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-4" />
+          <p className="text-[var(--muted)]">Loading search analytics...</p>
         </div>
       </div>
     );
@@ -702,10 +702,10 @@ function SearchTab({ searchData, loading }: { searchData: SearchData | null; loa
   if (!searchData || searchData.queries.length === 0) {
     return (
       <div className="text-center py-20">
-        <svg className="w-12 h-12 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
-        <p className="text-gray-400">No search data available yet.</p>
+        <p className="text-[var(--muted)]">No search data available yet.</p>
       </div>
     );
   }
@@ -713,41 +713,41 @@ function SearchTab({ searchData, loading }: { searchData: SearchData | null; loa
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-semibold text-gray-900">Search Analytics</h1>
-        <p className="text-gray-500 mt-1">Top search queries and trends</p>
+        <h1 className="text-3xl font-semibold text-[var(--ink)]">Search Analytics</h1>
+        <p className="text-[var(--muted)] mt-1">Top search queries and trends</p>
       </div>
 
       {/* Search volume trend */}
       {searchData.volumeByDay.length > 0 && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm mb-6">
-          <h3 className="text-sm font-semibold text-gray-700 mb-4">Search Volume Trend</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm mb-6">
+          <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Search Volume Trend</h3>
           <div className="h-40">
-            <LineChart data={searchData.volumeByDay} color="#6366f1" height={160} />
+            <LineChart data={searchData.volumeByDay} color='#0A1628' height={160} />
           </div>
         </div>
       )}
 
       {/* Top queries table */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-        <h3 className="text-sm font-semibold text-gray-700 mb-4">Top 20 Search Queries</h3>
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-[var(--ink2)] mb-4">Top 20 Search Queries</h3>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 text-xs">
-            <thead className="bg-gray-50">
+          <table className="min-w-full divide-y divide-[var(--line)] text-xs">
+            <thead className="bg-[var(--paper2)]">
               <tr>
-                <th className="px-4 py-2 text-left font-medium text-gray-500 uppercase">Query</th>
-                <th className="px-4 py-2 text-right font-medium text-gray-500 uppercase">Searches</th>
-                <th className="px-4 py-2 text-right font-medium text-gray-500 uppercase">Avg Results</th>
-                <th className="px-4 py-2 text-right font-medium text-gray-500 uppercase">Zero-Result</th>
-                <th className="px-4 py-2 text-left font-medium text-gray-500 uppercase">Last Seen</th>
+                <th className="px-4 py-2 text-left font-medium text-[var(--muted)] uppercase">Query</th>
+                <th className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">Searches</th>
+                <th className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">Avg Results</th>
+                <th className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">Zero-Result</th>
+                <th className="px-4 py-2 text-left font-medium text-[var(--muted)] uppercase">Last Seen</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[var(--line)]">
               {searchData.queries.map((q, i) => (
-                <tr key={i} className={`hover:bg-gray-50 ${q.zeroResultCount > 0 ? 'bg-red-50' : ''}`}>
-                  <td className="px-4 py-2 font-medium text-gray-800 max-w-[200px] truncate">{q.query}</td>
-                  <td className="px-4 py-2 text-right text-gray-600">{q.count.toLocaleString()}</td>
+                <tr key={i} className={`hover:bg-[var(--paper2)] ${q.zeroResultCount > 0 ? 'bg-red-50' : ''}`}>
+                  <td className="px-4 py-2 font-medium text-[var(--ink)] max-w-[200px] truncate">{q.query}</td>
+                  <td className="px-4 py-2 text-right text-[var(--ink2)]">{q.count.toLocaleString()}</td>
                   <td className="px-4 py-2 text-right">
-                    <span className={`font-medium ${q.avgResults === 0 ? 'text-red-500' : q.avgResults < 3 ? 'text-amber-500' : 'text-gray-600'}`}>
+                    <span className={`font-medium ${q.avgResults === 0 ? 'text-red-500' : q.avgResults < 3 ? 'text-amber-500' : 'text-[var(--ink2)]'}`}>
                       {q.avgResults}
                     </span>
                   </td>
@@ -757,10 +757,10 @@ function SearchTab({ searchData, loading }: { searchData: SearchData | null; loa
                         {q.zeroResultCount} zero-result
                       </span>
                     ) : (
-                      <span className="text-gray-400">0</span>
+                      <span className="text-[var(--muted)]">0</span>
                     )}
                   </td>
-                  <td className="px-4 py-2 text-gray-400">{q.lastSeen ? new Date(q.lastSeen).toLocaleDateString() : '—'}</td>
+                  <td className="px-4 py-2 text-[var(--muted)]">{q.lastSeen ? new Date(q.lastSeen).toLocaleDateString() : '—'}</td>
                 </tr>
               ))}
             </tbody>
@@ -781,8 +781,8 @@ function FunnelTab({ funnelData, loading }: { funnelData: FunnelData | null; loa
     return (
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-4" />
-          <p className="text-gray-500">Loading funnel data...</p>
+          <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-4" />
+          <p className="text-[var(--muted)]">Loading funnel data...</p>
         </div>
       </div>
     );
@@ -791,36 +791,36 @@ function FunnelTab({ funnelData, loading }: { funnelData: FunnelData | null; loa
   if (!funnelData || funnelData.steps.length === 0) {
     return (
       <div className="text-center py-20">
-        <svg className="w-12 h-12 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
         </svg>
-        <p className="text-gray-400">No funnel data available yet.</p>
+        <p className="text-[var(--muted)]">No funnel data available yet.</p>
       </div>
     );
   }
 
   const maxCount = funnelData.steps[0]?.count || 1;
-  const gradientColors = ['#6366f1', '#8b5cf6', '#a855f7', '#d946ef', '#ec4899'];
+  const gradientColors = ['#0A1628', '#8b5cf6', '#a855f7', '#d946ef', '#ec4899'];
 
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-900">Conversion Funnel</h1>
-          <p className="text-gray-500 mt-1">User journey from search to conversion</p>
+          <h1 className="text-3xl font-semibold text-[var(--ink)]">Conversion Funnel</h1>
+          <p className="text-[var(--muted)] mt-1">User journey from search to conversion</p>
         </div>
         <div className="flex gap-3">
           <select
             value={filterCity}
             onChange={(e) => setFilterCity(e.target.value)}
-            className="text-xs border border-gray-200 rounded-lg px-3 py-2 bg-white text-gray-700"
+            className="text-xs border border-[var(--line)] rounded-lg px-3 py-2 bg-white text-[var(--ink2)]"
           >
             <option value="">All cities</option>
           </select>
           <select
             value={filterRange}
             onChange={(e) => setFilterRange(Number(e.target.value))}
-            className="text-xs border border-gray-200 rounded-lg px-3 py-2 bg-white text-gray-700"
+            className="text-xs border border-[var(--line)] rounded-lg px-3 py-2 bg-white text-[var(--ink2)]"
           >
             <option value={7}>Last 7 days</option>
             <option value={30}>Last 30 days</option>
@@ -830,7 +830,7 @@ function FunnelTab({ funnelData, loading }: { funnelData: FunnelData | null; loa
       </div>
 
       {/* Funnel SVG visualization */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm mb-6">
+      <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm mb-6">
         <svg viewBox="0 0 600 320" className="w-full" preserveAspectRatio="xMidYMid meet">
           {funnelData.steps.map((step, i) => {
             const widthPct = step.count / maxCount;
@@ -852,13 +852,13 @@ function FunnelTab({ funnelData, loading }: { funnelData: FunnelData | null; loa
               <g key={step.name}>
                 <path
                   d={`M ${x1} ${y} L ${x2} ${y} L ${x3} ${y + 48} L ${x4} ${y + 48} Z`}
-                  fill={gradientColors[i] || '#6366f1'}
+                  fill={gradientColors[i] || '#0A1628'}
                   opacity={0.85}
                 />
                 <text x="10" y={y + 28} className="text-[11px] fill-white font-medium" dominantBaseline="middle">
                   {step.label}
                 </text>
-                <text x="590" y={y + 14} textAnchor="end" className="text-[13px] fill-gray-700 font-semibold" dominantBaseline="middle">
+                <text x="590" y={y + 14} textAnchor="end" className="text-[13px] fill-[var(--muted)] font-semibold" dominantBaseline="middle">
                   {step.count.toLocaleString()}
                 </text>
                 {step.dropoffRate > 0 && (
@@ -873,28 +873,28 @@ function FunnelTab({ funnelData, loading }: { funnelData: FunnelData | null; loa
       </div>
 
       {/* Funnel steps table */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-        <table className="min-w-full divide-y divide-gray-200 text-sm">
-          <thead className="bg-gray-50">
+      <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden shadow-sm">
+        <table className="min-w-full divide-y divide-[var(--line)] text-sm">
+          <thead className="bg-[var(--paper2)]">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Stage</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Users</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Conversion Rate</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Drop-off Rate</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Stage</th>
+              <th className="px-6 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">Users</th>
+              <th className="px-6 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">Conversion Rate</th>
+              <th className="px-6 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">Drop-off Rate</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-[var(--line)]">
             {funnelData.steps.map((step, i) => {
               const convRate = i === 0 ? 100 : Math.round((step.count / funnelData.steps[0].count) * 100);
               return (
-                <tr key={step.name} className="hover:bg-gray-50">
+                <tr key={step.name} className="hover:bg-[var(--paper2)]">
                   <td className="px-6 py-3">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full" style={{ backgroundColor: gradientColors[i] }} />
-                      <span className="font-medium text-gray-800">{step.label}</span>
+                      <span className="font-medium text-[var(--ink)]">{step.label}</span>
                     </div>
                   </td>
-                  <td className="px-6 py-3 text-right text-gray-600 font-medium">{step.count.toLocaleString()}</td>
+                  <td className="px-6 py-3 text-right text-[var(--ink2)] font-medium">{step.count.toLocaleString()}</td>
                   <td className="px-6 py-3 text-right">
                     <span className={`font-medium ${convRate >= 50 ? 'text-emerald-600' : convRate >= 20 ? 'text-amber-600' : 'text-red-500'}`}>
                       {convRate}%
@@ -904,7 +904,7 @@ function FunnelTab({ funnelData, loading }: { funnelData: FunnelData | null; loa
                     {step.dropoffRate > 0 ? (
                       <span className="text-red-500 font-medium">-{step.dropoffRate}%</span>
                     ) : (
-                      <span className="text-gray-400">—</span>
+                      <span className="text-[var(--muted)]">—</span>
                     )}
                   </td>
                 </tr>
@@ -924,8 +924,8 @@ function CohortTab({ cohortData, loading }: { cohortData: CohortData | null; loa
     return (
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-4" />
-          <p className="text-gray-500">Loading cohort data...</p>
+          <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-4" />
+          <p className="text-[var(--muted)]">Loading cohort data...</p>
         </div>
       </div>
     );
@@ -934,16 +934,16 @@ function CohortTab({ cohortData, loading }: { cohortData: CohortData | null; loa
   if (!cohortData || cohortData.cohorts.length === 0) {
     return (
       <div className="text-center py-20">
-        <svg className="w-12 h-12 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
-        <p className="text-gray-400">No cohort data available yet.</p>
+        <p className="text-[var(--muted)]">No cohort data available yet.</p>
       </div>
     );
   }
 
   function retentionColor(r: number | null): string {
-    if (r === null) return 'bg-gray-100';
+    if (r === null) return 'bg-[var(--paper2)]';
     if (r >= 80) return 'bg-emerald-200 text-emerald-800';
     if (r >= 60) return 'bg-emerald-100 text-emerald-700';
     if (r >= 40) return 'bg-amber-100 text-amber-700';
@@ -954,28 +954,28 @@ function CohortTab({ cohortData, loading }: { cohortData: CohortData | null; loa
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-semibold text-gray-900">Cohort Analysis</h1>
-        <p className="text-gray-500 mt-1">User retention by signup month</p>
+        <h1 className="text-3xl font-semibold text-[var(--ink)]">Cohort Analysis</h1>
+        <p className="text-[var(--muted)] mt-1">User retention by signup month</p>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+      <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="min-w-full text-xs">
-            <thead className="bg-gray-50">
+            <thead className="bg-[var(--paper2)]">
               <tr>
-                <th className="px-4 py-2 text-left font-medium text-gray-500 uppercase sticky left-0 bg-gray-50 z-10">Cohort</th>
-                <th className="px-4 py-2 text-right font-medium text-gray-500 uppercase">Size</th>
+                <th className="px-4 py-2 text-left font-medium text-[var(--muted)] uppercase sticky left-0 bg-[var(--paper2)] z-10">Cohort</th>
+                <th className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">Size</th>
                 {[1, 2, 3, 4, 5, 6].map((m) => (
-                  <th key={m} className="px-4 py-2 text-right font-medium text-gray-500 uppercase">Month {m}</th>
+                  <th key={m} className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">Month {m}</th>
                 ))}
-                <th className="px-4 py-2 text-right font-medium text-gray-500 uppercase">Churn</th>
+                <th className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">Churn</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[var(--line)]">
               {cohortData.cohorts.map((row) => (
-                <tr key={row.cohortMonth} className="hover:bg-gray-50">
-                  <td className="px-4 py-2 font-medium text-gray-800 sticky left-0 bg-white z-10">{row.cohortMonth}</td>
-                  <td className="px-4 py-2 text-right text-gray-600">{row.cohortSize.toLocaleString()}</td>
+                <tr key={row.cohortMonth} className="hover:bg-[var(--paper2)]">
+                  <td className="px-4 py-2 font-medium text-[var(--ink)] sticky left-0 bg-white z-10">{row.cohortMonth}</td>
+                  <td className="px-4 py-2 text-right text-[var(--ink2)]">{row.cohortSize.toLocaleString()}</td>
                   {[1, 2, 3, 4, 5, 6].map((m) => {
                     const val = row.retentionByMonth[m - 1];
                     return (
@@ -985,7 +985,7 @@ function CohortTab({ cohortData, loading }: { cohortData: CohortData | null; loa
                             {val}%
                           </span>
                         ) : (
-                          <span className="text-gray-300">—</span>
+                          <span className="text-[var(--line)]">—</span>
                         )}
                       </td>
                     );
@@ -995,7 +995,7 @@ function CohortTab({ cohortData, loading }: { cohortData: CohortData | null; loa
                       <span className={`font-medium ${row.churnRate > 50 ? 'text-red-500' : row.churnRate > 30 ? 'text-amber-500' : 'text-emerald-600'}`}>
                         {row.churnRate}%
                       </span>
-                    ) : <span className="text-gray-300">—</span>}
+                    ) : <span className="text-[var(--line)]">—</span>}
                   </td>
                 </tr>
               ))}
@@ -1014,8 +1014,8 @@ function WebVitalsTab({ vitals, loading }: { vitals: WebVitalRow[]; loading: boo
     return (
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-4" />
-          <p className="text-gray-500">Loading web vitals...</p>
+          <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-4" />
+          <p className="text-[var(--muted)]">Loading web vitals...</p>
         </div>
       </div>
     );
@@ -1024,10 +1024,10 @@ function WebVitalsTab({ vitals, loading }: { vitals: WebVitalRow[]; loading: boo
   if (!vitals || vitals.length === 0) {
     return (
       <div className="text-center py-20">
-        <svg className="w-12 h-12 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
-        <p className="text-gray-400">No web vitals data available yet.</p>
+        <p className="text-[var(--muted)]">No web vitals data available yet.</p>
       </div>
     );
   }
@@ -1037,7 +1037,7 @@ function WebVitalsTab({ vitals, loading }: { vitals: WebVitalRow[]; loading: boo
       case 'good': return 'bg-emerald-100 text-emerald-700';
       case 'needs-improvement': return 'bg-amber-100 text-amber-700';
       case 'poor': return 'bg-red-100 text-red-700';
-      default: return 'bg-gray-100 text-gray-600';
+      default: return 'bg-[var(--paper2)] text-[var(--ink2)]';
     }
   }
 
@@ -1046,7 +1046,7 @@ function WebVitalsTab({ vitals, loading }: { vitals: WebVitalRow[]; loading: boo
       case 'good': return 'bg-emerald-500';
       case 'needs-improvement': return 'bg-amber-500';
       case 'poor': return 'bg-red-500';
-      default: return 'bg-gray-400';
+      default: return 'bg-[var(--line)]';
     }
   }
 
@@ -1060,8 +1060,8 @@ function WebVitalsTab({ vitals, loading }: { vitals: WebVitalRow[]; loading: boo
     <div>
       <div className="mb-6 flex items-start justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-900">Core Web Vitals</h1>
-          <p className="text-gray-500 mt-1">Page performance metrics (p75 values)</p>
+          <h1 className="text-3xl font-semibold text-[var(--ink)]">Core Web Vitals</h1>
+          <p className="text-[var(--muted)] mt-1">Page performance metrics (p75 values)</p>
         </div>
         <div className="flex gap-2 text-xs mt-1">
           <span className="flex items-center gap-1"><span className="w-2 h-2 bg-emerald-500 rounded-full inline-block" /> Good</span>
@@ -1070,22 +1070,22 @@ function WebVitalsTab({ vitals, loading }: { vitals: WebVitalRow[]; loading: boo
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+      <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden shadow-sm">
         <table className="min-w-full text-xs">
-          <thead className="bg-gray-50">
+          <thead className="bg-[var(--paper2)]">
             <tr>
-              <th className="px-4 py-2 text-left font-medium text-gray-500 uppercase">Page</th>
-              <th className="px-4 py-2 text-right font-medium text-gray-500 uppercase">CLS p75</th>
-              <th className="px-4 py-2 text-right font-medium text-gray-500 uppercase">INP p75</th>
-              <th className="px-4 py-2 text-right font-medium text-gray-500 uppercase">LCP p75</th>
-              <th className="px-4 py-2 text-right font-medium text-gray-500 uppercase">FCP p75</th>
-              <th className="px-4 py-2 text-right font-medium text-gray-500 uppercase">Samples</th>
+              <th className="px-4 py-2 text-left font-medium text-[var(--muted)] uppercase">Page</th>
+              <th className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">CLS p75</th>
+              <th className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">INP p75</th>
+              <th className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">LCP p75</th>
+              <th className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">FCP p75</th>
+              <th className="px-4 py-2 text-right font-medium text-[var(--muted)] uppercase">Samples</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-[var(--line)]">
             {vitals.map((v, i) => (
-              <tr key={i} className="hover:bg-gray-50">
-                <td className="px-4 py-2 font-medium text-gray-800 max-w-[200px] truncate">{v.page}</td>
+              <tr key={i} className="hover:bg-[var(--paper2)]">
+                <td className="px-4 py-2 font-medium text-[var(--ink)] max-w-[200px] truncate">{v.page}</td>
                 {[
                   { val: v.clsP75, status: v.clsStatus, metric: 'CLS' },
                   { val: v.inpP75, status: v.inpStatus, metric: 'INP' },
@@ -1099,7 +1099,7 @@ function WebVitalsTab({ vitals, loading }: { vitals: WebVitalRow[]; loading: boo
                     </span>
                   </td>
                 ))}
-                <td className="px-4 py-2 text-right text-gray-400">{v.sampleSize.toLocaleString()}</td>
+                <td className="px-4 py-2 text-right text-[var(--muted)]">{v.sampleSize.toLocaleString()}</td>
               </tr>
             ))}
           </tbody>
@@ -1295,8 +1295,8 @@ export default function AnalyticsEnhanced() {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-4" />
-          <p className="text-gray-500">Loading analytics...</p>
+          <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-4" />
+          <p className="text-[var(--muted)]">Loading analytics...</p>
         </div>
       </div>
     );
@@ -1305,7 +1305,7 @@ export default function AnalyticsEnhanced() {
   return (
     <div>
       {/* Tab bar */}
-      <div className="border-b border-gray-200 mb-6">
+      <div className="border-b border-[var(--line)] mb-6">
         <nav className="flex gap-0 -mb-px">
           {TABS.map((tab) => (
             <button
@@ -1313,8 +1313,8 @@ export default function AnalyticsEnhanced() {
               onClick={() => setActiveTab(tab.id)}
               className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === tab.id
-                  ? 'border-violet-600 text-violet-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-[var(--ink)] text-[var(--accent)]'
+                  : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)] hover:border-[var(--line)]'
               }`}
             >
               {tab.label}

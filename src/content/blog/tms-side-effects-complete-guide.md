@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-13
 category: patient-guide
 tags: ["side effects", "safety", "headache", "what to expect", "warning signs"]
-image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-side-effects-complete-guide.svg"
 ---
 
 Every effective treatment has side effects. TMS is no exception. Understanding the difference between expected, mild discomfort and signs that something is wrong is important for getting through a treatment course and for staying safe.

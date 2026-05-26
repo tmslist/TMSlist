@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
-import { magicLinkSchema } from '../../../db/validation';
-import { createMagicToken } from '../../../utils/auth';
-import { strictRateLimit } from '../../../utils/rateLimit';
-import { sendMagicLinkEmail } from '../../../utils/email';
+import { magicLinkSchema } from '../../../db/validation.js';
+import { createMagicToken } from '../../../utils/auth.js';
+import { strictRateLimit } from '../../../utils/rateLimit.js';
+import { sendMagicLinkEmail } from '../../../utils/email.js';
 
 export const prerender = false;
 

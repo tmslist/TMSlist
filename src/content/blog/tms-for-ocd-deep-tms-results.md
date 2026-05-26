@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-19
 category: research
 tags: ["OCD", "deep TMS", "BrainsWay", "long-term results"]
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-ocd-deep-tms-results.svg"
 ---
 
 Okay, TMS helped. But will it last?
@@ -112,9 +112,9 @@ OCD TMS is more specialized than depression TMS. Not every TMS clinic offers dee
 
 You can search for deep TMS providers in your state on our [clinic finder](/us/) or browse [TMS specialists](/specialists/) with OCD expertise.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>58% of OCD patients maintained clinically meaningful improvement at 2 years. 42% maintained full remission.</li>
     <li>OCD TMS targets the ACC and medial prefrontal cortex using the BrainsWay H7 deep coil, different from depression TMS.</li>
     <li>Symptom provocation before each session is a key part of the protocol and improves outcomes significantly.</li>
@@ -124,47 +124,47 @@ You can search for deep TMS providers in your state on our [clinic finder](/us/)
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long do deep TMS results for OCD last?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long do deep TMS results for OCD last?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Two-year follow-up data shows 58% of patients maintained clinically meaningful improvement and 42% maintained full remission. The average Y-BOCS reduction of 9.7 points held steady from 6 months to 24 months. Some people need periodic booster sessions to maintain gains.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Two-year follow-up data shows 58% of patients maintained clinically meaningful improvement and 42% maintained full remission. The average Y-BOCS reduction of 9.7 points held steady from 6 months to 24 months. Some people need periodic booster sessions to maintain gains.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is deep TMS for OCD different from standard TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is deep TMS for OCD different from standard TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. OCD TMS uses the BrainsWay H7 deep coil targeting the anterior cingulate cortex and medial prefrontal cortex, different from standard TMS targeting the left DLPFC. It also includes a symptom provocation protocol before each session, which significantly improves outcomes compared to TMS without provocation.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. OCD TMS uses the BrainsWay H7 deep coil targeting the anterior cingulate cortex and medial prefrontal cortex, different from standard TMS targeting the left DLPFC. It also includes a symptom provocation protocol before each session, which significantly improves outcomes compared to TMS without provocation.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does insurance cover deep TMS for OCD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does insurance cover deep TMS for OCD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes, in most cases. Medicare covers it in most regions. Most major commercial insurers (Aetna, UnitedHealthcare, Cigna, Blue Cross Blue Shield) cover it with documentation of treatment resistance (2+ failed SSRI trials and inadequate ERP response). Prior authorization is required. Without insurance, costs range $8,000-$15,000.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes, in most cases. Medicare covers it in most regions. Most major commercial insurers (Aetna, UnitedHealthcare, Cigna, Blue Cross Blue Shield) cover it with documentation of treatment resistance (2+ failed SSRI trials and inadequate ERP response). Prior authorization is required. Without insurance, costs range $8,000-$15,000.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What does the provocation protocol feel like?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What does the provocation protocol feel like?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Provocation means deliberately triggering your OCD symptoms for 5-10 minutes before each session through personalized scripts, images, or scenarios. It is intentionally uncomfortable, like condensed exposure therapy. The TMS that follows then targets the active OCD circuits. Most patients describe it as difficult but worthwhile.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Provocation means deliberately triggering your OCD symptoms for 5-10 minutes before each session through personalized scripts, images, or scenarios. It is intentionally uncomfortable, like condensed exposure therapy. The TMS that follows then targets the active OCD circuits. Most patients describe it as difficult but worthwhile.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How do I find a clinic that offers deep TMS for OCD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How do I find a clinic that offers deep TMS for OCD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Search our <a href="/us/" class="text-violet-600 hover:underline">clinic finder</a> for providers offering OCD TMS. When evaluating a clinic, confirm they use the BrainsWay H7 coil, ask about their provocation protocol, ask how many OCD cases they have treated, and ask about their Y-BOCS tracking process.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Search our <a href="/us/" class="text-[var(--warm)] hover:underline">clinic finder</a> for providers offering OCD TMS. When evaluating a clinic, confirm they use the BrainsWay H7 coil, ask about their provocation protocol, ask how many OCD cases they have treated, and ask about their Y-BOCS tracking process.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

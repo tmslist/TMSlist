@@ -1,0 +1,76 @@
+---
+export const prerender = false;
+
+import Layout from '../../../../../layouts/Layout.astro';
+import { getAllClinics, getStateCodeFromSlug, STATE_NAMES } from '../../../../../utils/clinicData';
+import ProviderPageBody from '../../../../../components/providerPage/ProviderPageBody.astro';
+import { filterDoctorsByType } from '../../../../../utils/providerFilter';
+
+const { state, city } = Astro.params;
+const stateCode = getStateCodeFromSlug(state || '');
+const stateName = STATE_NAMES[stateCode] || stateCode;
+const cityName = (city || '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+
+const clinics = await getAllClinics();
+const cityClinics = clinics.filter(
+  c => c.state === stateCode && c.city.toLowerCase() === cityName.toLowerCase()
+);
+
+// Get all doctors from this city's clinics and filter by psychologist
+const allDoctors = cityClinics.flatMap((c: any) =>
+  (c.doctors_data || []).map((d: any) => ({ ...d, clinic: c }))
+);
+const doctors = filterDoctorsByType(allDoctors, 'psychologists');
+
+const title = `Best Psychologists in ${cityName}, ${stateName} | TMS Specialists Near You`;
+const description = doctors.length > 0
+  ? `Find ${doctors.length} licensed clinical psychologists offering TMS therapy in ${cityName}, ${stateName}. Compare credentials, therapy approaches, and book consultations.`
+  : `Find licensed psychologists with TMS therapy training in ${cityName}, ${stateName}. Browse verified providers and treatment options near you.`;
+---
+
+<Layout
+  title={title}
+  description={description}
+  schema={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `Psychologists in ${cityName}, ${stateName}`,
+    "description": description,
+    "url": `https://tmslist.com/us/${Astro.params.state}/${Astro.params.city}/psychologists/`,
+    "mainEntity": doctors.length > 0 ? {
+      "@type": "ItemList",
+      "numberOfItems": doctors.length,
+      "itemListElement": doctors.slice(0, 10).map((d: any, i: number) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "Person",
+          "name": d.name,
+          "url": d.slug ? `https://tmslist.com/specialist/${d.slug}` : undefined,
+          "jobTitle": d.title || "Licensed Psychologist",
+          "medicalSpecialty": "Psychology",
+          "knowsAbout": ["TMS Therapy", "Transcranial Magnetic Stimulation"],
+          ...(d.school ? { "alumniOf": { "@type": "EducationalOrganization", "name": d.school } } : {}),
+          ...(d.clinic?.name ? { "worksFor": { "@type": "MedicalClinic", "name": d.clinic.name } } : {}),
+        }
+      }))
+    } : undefined,
+  })}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "United States", url: "/us/" },
+    { name: stateName, url: `/us/${Astro.params.state}/` },
+    { name: cityName, url: `/us/${Astro.params.state}/${Astro.params.city}/` },
+    { name: "Psychologists", url: `/us/${Astro.params.state}/${Astro.params.city}/psychologists/` },
+  ]}
+>
+  <ProviderPageBody
+    providerType="psychologists"
+    cityName={cityName}
+    stateName={stateName}
+    stateSlug={Astro.params.state || ''}
+    citySlug={Astro.params.city || ''}
+    doctors={doctors}
+    clinics={cityClinics}
+  />
+</Layout>

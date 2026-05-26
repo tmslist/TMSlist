@@ -28,14 +28,14 @@ export function CoilHeatGauge() {
   const label = heat < 30 ? 'Cool' : heat < 60 ? 'Warm' : heat < 80 ? 'Hot' : 'Very Hot';
 
   return (
-    <div className="flex items-center gap-2 bg-slate-800/60 rounded-lg px-3 py-2">
+    <div className="flex items-center gap-2 bg-[var(--paper2)]/60 rounded-lg px-3 py-2">
       <div className="flex flex-col gap-0.5">
         <div className="flex items-center gap-1.5">
-          <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Coil Temp</span>
+          <span className="text-[9px] font-semibold text-white/40 uppercase tracking-wider">Coil Temp</span>
           <span className="text-[10px] font-mono font-bold" style={{ color }}>{tempC}°C</span>
         </div>
         {/* Heat bar */}
-        <div className="w-24 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+        <div className="w-24 h-1.5 bg-[var(--paper2)] rounded-full overflow-hidden">
           <div
             className="h-full rounded-full transition-all duration-200"
             style={{ width: `${heat}%`, backgroundColor: color }}

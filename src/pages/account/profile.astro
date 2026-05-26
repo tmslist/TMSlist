@@ -24,37 +24,37 @@ const email = session.email || user?.email || '';
 ---
 
 <Layout title="Edit Profile | TMS List" noindex={true}>
-  <div class="min-h-screen bg-gray-50/50">
+  <div class="min-h-screen bg-[var(--paper2)]/50">
     <!-- Header -->
-    <div class="bg-white border-b border-gray-200">
+    <div class="bg-[var(--paper)] border-b border-[var(--line)]">
       <div class="max-w-2xl mx-auto px-4 py-6">
-        <a href="/account" class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-violet-600 mb-4 transition-colors">
+        <a href="/account" class="inline-flex items-center gap-1.5 text-sm text-[var(--muted)] hover:text-[var(--ink)] mb-4 transition-colors">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
           Back to Account
         </a>
-        <h1 class="text-2xl font-bold text-gray-900">Edit Profile</h1>
-        <p class="text-sm text-gray-500 mt-1">Update your personal information and preferences</p>
+        <h1 class="text-2xl font-bold text-[var(--ink)]">Edit Profile</h1>
+        <p class="text-sm text-[var(--muted)] mt-1">Update your personal information and preferences</p>
       </div>
     </div>
 
     <!-- Form -->
     <div class="max-w-2xl mx-auto px-4 py-8">
-      <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8">
+      <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6 sm:p-8">
         <form id="profile-form" class="space-y-6">
           <!-- Avatar Preview -->
-          <div class="flex items-center gap-4 pb-6 border-b border-gray-100">
-            <div id="avatar-preview" class="w-16 h-16 rounded-2xl bg-violet-600 flex items-center justify-center text-white text-xl font-bold">
+          <div class="flex items-center gap-4 pb-6 border-b border-[var(--line)]">
+            <div id="avatar-preview" class="w-16 h-16 rounded-2xl bg-[var(--ink)] flex items-center justify-center text-white text-xl font-bold">
               {name.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase()}
             </div>
             <div>
-              <p class="text-sm font-semibold text-gray-900">Profile Photo</p>
-              <p class="text-xs text-gray-500 mt-0.5">Your initials are shown automatically</p>
+              <p class="text-sm font-semibold text-[var(--ink)]">Profile Photo</p>
+              <p class="text-xs text-[var(--muted)] mt-0.5">Your initials are shown automatically</p>
             </div>
           </div>
 
           <!-- Name -->
           <div>
-            <label for="name" class="block text-sm font-semibold text-gray-700 mb-1.5">Full Name</label>
+            <label for="name" class="block text-sm font-semibold text-[var(--ink2)] mb-1.5">Full Name</label>
             <input
               type="text"
               id="name"
@@ -62,23 +62,23 @@ const email = session.email || user?.email || '';
               value={name}
               required
               minlength="2"
-              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
+              class="w-full px-4 py-3 rounded-xl border border-[var(--line)] text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-all"
               placeholder="Your full name"
             />
           </div>
 
           <!-- Email (readonly) -->
           <div>
-            <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
+            <label for="email" class="block text-sm font-semibold text-[var(--ink2)] mb-1.5">Email Address</label>
             <input
               type="email"
               id="email"
               name="email"
               value={email}
               readonly
-              class="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 text-sm text-gray-500 cursor-not-allowed"
+              class="w-full px-4 py-3 rounded-xl border border-[var(--line)] bg-[var(--paper2)] text-sm text-[var(--muted)] cursor-not-allowed"
             />
-            <p class="text-xs text-gray-400 mt-1">Email cannot be changed</p>
+            <p class="text-xs text-[var(--muted)] mt-1">Email cannot be changed</p>
           </div>
 
           <!-- Error/Success messages -->
@@ -87,15 +87,15 @@ const email = session.email || user?.email || '';
 
           <button
             type="submit"
-            class="w-full py-3.5 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm"
+            class="w-full py-3.5 bg-[var(--ink)] hover:bg-[var(--ink)] text-white font-bold rounded-xl text-sm transition-all shadow-sm"
           >
             Save Changes
           </button>
         </form>
 
         <!-- Danger Zone -->
-        <div class="mt-8 pt-6 border-t border-gray-100">
-          <h3 class="text-sm font-semibold text-gray-700 mb-3">Account Actions</h3>
+        <div class="mt-8 pt-6 border-t border-[var(--line)]">
+          <h3 class="text-sm font-semibold text-[var(--ink2)] mb-3">Account Actions</h3>
           <a
             href="/api/auth/logout"
             class="inline-flex items-center gap-2 px-4 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 text-sm font-semibold rounded-xl border border-red-100 transition-all"

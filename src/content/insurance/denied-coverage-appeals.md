@@ -1,7 +1,7 @@
 ---
 title: "TMS Insurance Denied? How to Win Your Appeal"
 description: "Step-by-step guide to appealing a TMS insurance denial — common denial reasons, internal vs external appeals, sample appeal letter, and when to involve a patient advocate."
-image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 faqs:
   - question: "How do I appeal a TMS denial?"
     answer: "Start with an internal appeal, including additional clinical documentation. Request a peer-to-peer review. If internal appeals fail, file for external review through your state insurance department."
@@ -19,9 +19,9 @@ faqs:
     <div class="text-2xl font-bold text-amber-700 font-display">Required</div>
     <div class="text-xs text-amber-600 mt-1">Prior Authorization</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">$500-$3,000</div>
-    <div class="text-xs text-blue-600 mt-1">Typical patient cost</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">$500-$3,000</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Typical patient cost</div>
   </div>
 </div>
 
@@ -176,11 +176,11 @@ The data tells a different story: people who appeal have a significantly better 
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>

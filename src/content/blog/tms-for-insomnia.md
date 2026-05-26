@@ -4,7 +4,7 @@ description: "Transcranial magnetic stimulation can target the brain regions inv
 publishDate: 2026-04-15
 category: treatment
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-insomnia.svg"
 tags: ["tms", "insomnia", "sleep", "brain-stimulation"]
 ---
 
@@ -72,35 +72,35 @@ Side effects are generally mild and include transient headache, scalp discomfort
 
 For chronic insomnia patients who have tried multiple medications and therapy approaches without adequate relief, TMS represents a scientifically grounded intervention that addresses the brain's sleep-regulating infrastructure directly.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS actually help with insomnia?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS actually help with insomnia?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. A 2024 meta-analysis concluded that active TMS produces statistically significant improvements in both subjective sleep quality and objective sleep parameters. Benefits appear to last beyond the treatment period, persisting for several weeks to months after the final session.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. A 2024 meta-analysis concluded that active TMS produces statistically significant improvements in both subjective sleep quality and objective sleep parameters. Benefits appear to last beyond the treatment period, persisting for several weeks to months after the final session.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What is night-time TMS for insomnia?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What is night-time TMS for insomnia?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">An innovative approach where TMS is delivered while the patient is in bed, shortly before or during natural sleep onset. The prefrontal cortex is most vulnerable to modulation during the transition from wakefulness to sleep, when cortical excitability is at its lowest, potentially producing more potent and lasting effects.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">An innovative approach where TMS is delivered while the patient is in bed, shortly before or during natural sleep onset. The prefrontal cortex is most vulnerable to modulation during the transition from wakefulness to sleep, when cortical excitability is at its lowest, potentially producing more potent and lasting effects.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How does TMS compare to sleep medications?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How does TMS compare to sleep medications?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS does not carry the risk of dependence or next-day sedation that is associated with many sleep medications. Side effects are generally mild and include transient headache and scalp discomfort. TMS also addresses the underlying brain circuitry rather than simply inducing sleep chemically.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS does not carry the risk of dependence or next-day sedation that is associated with many sleep medications. Side effects are generally mild and include transient headache and scalp discomfort. TMS also addresses the underlying brain circuitry rather than simply inducing sleep chemically.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

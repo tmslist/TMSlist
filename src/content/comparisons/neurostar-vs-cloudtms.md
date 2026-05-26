@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-05
 treatmentA: "NeuroStar"
 treatmentB: "CloudTMS"
-image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 verdict: "NeuroStar has the largest US install base and deepest insurance relationships. CloudTMS offers modern cloud management but with a smaller commercial footprint in the US."
 verdictWinner: "neurostar"
 faqs: []
@@ -88,9 +88,9 @@ Search for [NeuroStar clinics](/us/) or [CloudTMS providers](/us/) in your area 
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>NeuroStar is the most widely-installed TMS system in the US</li>
     <li>CloudTMS has a modern cloud-based management platform</li>
     <li>NeuroStar holds an OCD-specific FDA clearance; CloudTMS does not</li>
@@ -99,41 +99,41 @@ Search for [NeuroStar clinics](/us/) or [CloudTMS providers](/us/) in your area 
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is NeuroStar TMS more effective than CloudTMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is NeuroStar TMS more effective than CloudTMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">For depression treatment, both systems deliver equivalent clinical protocols and produce comparable outcomes. The coil designs and stimulation parameters are similar. Clinical data is more extensive for NeuroStar simply because more patients have been treated on it.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">For depression treatment, both systems deliver equivalent clinical protocols and produce comparable outcomes. The coil designs and stimulation parameters are similar. Clinical data is more extensive for NeuroStar simply because more patients have been treated on it.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Which system is better if I have OCD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Which system is better if I have OCD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">NeuroStar has a dedicated FDA clearance for OCD. CloudTMS does not yet have OCD-specific clearance. For OCD patients, NeuroStar is the more practical choice from an insurance coverage perspective, and the labeled indication reflects specific clinical trial data for OCD.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">NeuroStar has a dedicated FDA clearance for OCD. CloudTMS does not yet have OCD-specific clearance. For OCD patients, NeuroStar is the more practical choice from an insurance coverage perspective, and the labeled indication reflects specific clinical trial data for OCD.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I ask my clinic to use a specific TMS system?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I ask my clinic to use a specific TMS system?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">You can request a preference, but most clinics operate with one primary system. If the specific device matters to you, search providers in our directory and filter by the system you'd prefer.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">You can request a preference, but most clinics operate with one primary system. If the specific device matters to you, search providers in our directory and filter by the system you'd prefer.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does CloudTMS support theta burst sessions?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does CloudTMS support theta burst sessions?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes, CloudTMS supports theta burst stimulation (iTBS) and other accelerated protocols. The system is capable of delivering equivalent protocols to NeuroStar for standard clinical use cases.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes, CloudTMS supports theta burst stimulation (iTBS) and other accelerated protocols. The system is capable of delivering equivalent protocols to NeuroStar for standard clinical use cases.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic Near You</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers by location, device type, and insurance acceptance.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers by location, device type, and insurance acceptance.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>

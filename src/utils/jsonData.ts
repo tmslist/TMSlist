@@ -342,18 +342,22 @@ export async function getDoctorBySlug(slug: string): Promise<DoctorRow | null> {
   return getStore().allDoctorRows.find(d => d.slug === slug) ?? null;
 }
 
-export async function getAllDoctors(opts?: { limit?: number; offset?: number }): Promise<{
+export async function getAllDoctors(opts?: { limit?: number; offset?: number; country?: string }): Promise<{
   doctor: DoctorRow;
   clinicName: string;
   clinicSlug: string;
   clinicCity: string;
   clinicState: string;
+  clinicCountry: string;
 }[]> {
   const store = getStore();
-  const results: { doctor: DoctorRow; clinicName: string; clinicSlug: string; clinicCity: string; clinicState: string }[] = [];
+  const results: { doctor: DoctorRow; clinicName: string; clinicSlug: string; clinicCity: string; clinicState: string; clinicCountry: string }[] = [];
+  const wantedCountry = opts?.country?.toUpperCase();
 
   for (const entry of store.clinicMap.values()) {
     if (!entry.row.verified) continue;
+    const cc = (entry.row.country || 'US').toUpperCase();
+    if (wantedCountry && cc !== wantedCountry) continue;
     for (const doc of entry.doctorRows) {
       results.push({
         doctor: doc,
@@ -361,6 +365,7 @@ export async function getAllDoctors(opts?: { limit?: number; offset?: number }):
         clinicSlug: entry.row.slug,
         clinicCity: entry.row.city,
         clinicState: entry.row.state,
+        clinicCountry: cc,
       });
     }
   }

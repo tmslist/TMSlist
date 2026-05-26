@@ -2,13 +2,13 @@ import type { APIRoute } from 'astro';
 import { db } from '../../../db';
 import { blogPosts } from '../../../db/schema';
 import { and, eq, lte } from 'drizzle-orm';
+import { requireCronAuth } from '../../../utils/cronAuth';
 
 export const prerender = false;
 
 export const GET: APIRoute = async ({ request }) => {
-  if (request.headers.get('authorization') !== `Bearer ${import.meta.env.CRON_SECRET || process.env.CRON_SECRET}`) {
-    return new Response('Unauthorized', { status: 401 });
-  }
+  const authFail = requireCronAuth(request);
+  if (authFail) return authFail;
   try {
     const now = new Date();
     const published = await db.update(blogPosts)

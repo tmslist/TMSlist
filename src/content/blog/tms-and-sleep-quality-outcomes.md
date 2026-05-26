@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-05
 category: research
 tags: ["sleep", "neuroplasticity", "treatment outcomes", "research"]
-image: "https://images.unsplash.com/photo-1541781774455-b6c15de4e58f?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-and-sleep-quality-outcomes.svg"
 ---
 
 Sleep and TMS have a relationship that goes deeper than feeling rested before your appointment. Research over the past decade has established that sleep quality directly influences how effectively your brain responds to TMS stimulation — affecting both the immediate neuroplastic effects and the durability of treatment gains.
@@ -82,35 +82,35 @@ Sleep is not a passive background factor during TMS — it is an active modulato
 
 Before starting TMS, optimize your sleep. Treat sleep disorders, establish consistent sleep timing, and create a sleep-friendly environment. This is not optional advice — it is evidence-based treatment planning. Your brain's capacity to rewire depends on it.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does poor sleep affect TMS treatment outcomes?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does poor sleep affect TMS treatment outcomes?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. A 2019 study found that patients with better sleep quality at baseline showed approximately 40% higher response rates to TMS for depression compared to those with poor sleep. Poor sleep may blunt the neuroplastic effects that TMS depends on to produce lasting changes.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. A 2019 study found that patients with better sleep quality at baseline showed approximately 40% higher response rates to TMS for depression compared to those with poor sleep. Poor sleep may blunt the neuroplastic effects that TMS depends on to produce lasting changes.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Should I address sleep apnea before starting TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Should I address sleep apnea before starting TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Untreated sleep apnea causes intermittent oxygen desaturation and arousals throughout the night, severely fragmenting slow-wave sleep. Research suggests TMS response rates in patients with untreated sleep apnea are substantially lower. Ask your doctor about a sleep study before starting TMS.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Untreated sleep apnea causes intermittent oxygen desaturation and arousals throughout the night, severely fragmenting slow-wave sleep. Research suggests TMS response rates in patients with untreated sleep apnea are substantially lower. Ask your doctor about a sleep study before starting TMS.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How does alcohol affect TMS treatment when combined with poor sleep?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How does alcohol affect TMS treatment when combined with poor sleep?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Both alcohol and benzodiazepines suppress slow-wave sleep. Alcohol may help you fall asleep but fragments the second half of the night. If you use these substances, discuss reduction with your doctor before TMS. Minimizing alcohol during your TMS course supports optimal sleep architecture and plastic change.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Both alcohol and benzodiazepines suppress slow-wave sleep. Alcohol may help you fall asleep but fragments the second half of the night. If you use these substances, discuss reduction with your doctor before TMS. Minimizing alcohol during your TMS course supports optimal sleep architecture and plastic change.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

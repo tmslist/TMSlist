@@ -2,7 +2,7 @@
 title: "North Carolina Medicaid TMS Coverage"
 insurer: "North Carolina Medicaid"
 description: "North Carolina Medicaid coverage for TMS therapy — AmeriHealth Caritas NC, Healthy Blue, NC Medicaid Direct, and finding in-network providers."
-image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 <div class="not-prose mb-10 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -14,9 +14,9 @@ image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fi
     <div class="text-2xl font-bold text-amber-700 font-display">Required</div>
     <div class="text-xs text-amber-600 mt-1">Prior Authorization</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">$0-$50</div>
-    <div class="text-xs text-blue-600 mt-1">Typical patient cost</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">$0-$50</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Typical patient cost</div>
   </div>
 </div>
 
@@ -87,11 +87,11 @@ If your NC Medicaid plan denies TMS:
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers in North Carolina.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers in North Carolina.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/nc/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a North Carolina Clinic</a>
+    <a href="/us/nc/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a North Carolina Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>

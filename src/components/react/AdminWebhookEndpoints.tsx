@@ -215,37 +215,37 @@ export default function AdminWebhookEndpoints() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Webhook Endpoints</h1>
-          <p className="text-gray-500 mt-1">Monitor incoming webhooks, inspect payloads, and manage retries</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Webhook Endpoints</h1>
+          <p className="text-[var(--muted)] mt-1">Monitor incoming webhooks, inspect payloads, and manage retries</p>
         </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Total Events</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{stats.total}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Total Events</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{stats.total}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Delivered</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Delivered</p>
           <p className="text-2xl font-bold text-emerald-600 mt-1">{stats.delivered}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Failed</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Failed</p>
           <p className="text-2xl font-bold text-red-600 mt-1">{stats.failed}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Success Rate</p>
-          <p className="text-2xl font-bold text-violet-600 mt-1">{stats.successRate}%</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Success Rate</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{stats.successRate}%</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <p className="text-xs font-medium text-gray-500 uppercase">Signature Issues</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Signature Issues</p>
           <p className="text-2xl font-bold text-amber-600 mt-1">{stats.signatureIssues}</p>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 mb-6">
+      <div className="bg-white rounded-xl border border-[var(--line)] p-4 mb-6">
         <div className="flex flex-wrap gap-4">
           <div className="flex-1 min-w-48">
             <input
@@ -253,13 +253,13 @@ export default function AdminWebhookEndpoints() {
               placeholder="Search endpoint URL..."
               value={searchEndpoint}
               onChange={e => setSearchEndpoint(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-mono focus:border-violet-500 focus:ring-violet-500"
+              className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm font-mono focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
             />
           </div>
           <select
             value={filterStatus}
             onChange={e => setFilterStatus(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Status</option>
             <option value="delivered">Delivered</option>
@@ -270,7 +270,7 @@ export default function AdminWebhookEndpoints() {
           <select
             value={filterEvent}
             onChange={e => setFilterEvent(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Events</option>
             {EVENT_TYPES.map(e => (
@@ -280,7 +280,7 @@ export default function AdminWebhookEndpoints() {
           <select
             value={filterSignature}
             onChange={e => setFilterSignature(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Signatures</option>
             <option value="valid">Valid</option>
@@ -290,29 +290,29 @@ export default function AdminWebhookEndpoints() {
       </div>
 
       {/* Logs table */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+        <table className="min-w-full divide-y divide-[var(--line)]">
+          <thead className="bg-[var(--paper2)]">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Event</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Endpoint</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">HTTP</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Attempts</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Signature</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Time</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Event</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Endpoint</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Status</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">HTTP</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Attempts</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Signature</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Time</th>
               <th className="px-6 py-3"></th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-[var(--line)]">
             {filteredLogs.map(log => (
-              <tr key={log.id} className="hover:bg-gray-50">
+              <tr key={log.id} className="hover:bg-[var(--paper2)]">
                 <td className="px-6 py-4">
-                  <code className="text-xs font-mono bg-gray-100 text-gray-700 px-2 py-1 rounded">{log.event}</code>
+                  <code className="text-xs font-mono bg-[var(--paper2)] text-[var(--ink2)] px-2 py-1 rounded">{log.event}</code>
                 </td>
                 <td className="px-6 py-4">
-                  <p className="text-sm font-mono text-gray-900 truncate max-w-xs">{log.endpoint}</p>
-                  <p className="text-xs text-gray-400 font-mono">{log.id}</p>
+                  <p className="text-sm font-mono text-[var(--ink)] truncate max-w-xs">{log.endpoint}</p>
+                  <p className="text-xs text-[var(--muted)] font-mono">{log.id}</p>
                 </td>
                 <td className="px-6 py-4">
                   <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full ${STATUS_COLORS[log.status]}`}>
@@ -328,11 +328,11 @@ export default function AdminWebhookEndpoints() {
                       {log.httpStatus}
                     </span>
                   ) : (
-                    <span className="text-sm text-gray-400">—</span>
+                    <span className="text-sm text-[var(--muted)]">—</span>
                   )}
                 </td>
                 <td className="px-6 py-4">
-                  <span className="text-sm text-gray-600">{log.attemptCount}x</span>
+                  <span className="text-sm text-[var(--ink2)]">{log.attemptCount}x</span>
                 </td>
                 <td className="px-6 py-4">
                   {log.signatureValid ? (
@@ -351,7 +351,7 @@ export default function AdminWebhookEndpoints() {
                     </span>
                   )}
                 </td>
-                <td className="px-6 py-4 text-xs text-gray-500">
+                <td className="px-6 py-4 text-xs text-[var(--muted)]">
                   {new Date(log.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   <br />
                   {new Date(log.createdAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
@@ -360,7 +360,7 @@ export default function AdminWebhookEndpoints() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => setSelectedLog(log)}
-                      className="text-xs font-medium text-violet-600 hover:text-violet-700"
+                      className="text-xs font-medium text-[var(--ink)] hover:text-[var(--ink)]"
                     >
                       Inspect
                     </button>
@@ -378,7 +378,7 @@ export default function AdminWebhookEndpoints() {
               </tr>
             ))}
             {filteredLogs.length === 0 && (
-              <tr><td colSpan={8} className="px-6 py-12 text-center text-gray-500">No webhook logs match your filters</td></tr>
+              <tr><td colSpan={8} className="px-6 py-12 text-center text-[var(--muted)]">No webhook logs match your filters</td></tr>
             )}
           </tbody>
         </table>
@@ -388,14 +388,14 @@ export default function AdminWebhookEndpoints() {
       {selectedLog && (
         <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-3xl my-8">
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-6 border-b border-[var(--line)]">
               <div className="flex items-start justify-between">
                 <div>
-                  <code className="text-xs font-mono bg-gray-100 px-2 py-1 rounded text-gray-700">{selectedLog.event}</code>
-                  <h2 className="text-lg font-semibold text-gray-900 mt-2">Webhook Payload</h2>
-                  <p className="text-xs text-gray-500 font-mono mt-1">{selectedLog.id}</p>
+                  <code className="text-xs font-mono bg-[var(--paper2)] px-2 py-1 rounded text-[var(--ink2)]">{selectedLog.event}</code>
+                  <h2 className="text-lg font-semibold text-[var(--ink)] mt-2">Webhook Payload</h2>
+                  <p className="text-xs text-[var(--muted)] font-mono mt-1">{selectedLog.id}</p>
                 </div>
-                <button onClick={() => setSelectedLog(null)} className="text-gray-400 hover:text-gray-600">
+                <button onClick={() => setSelectedLog(null)} className="text-[var(--muted)] hover:text-[var(--ink2)]">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
@@ -407,17 +407,17 @@ export default function AdminWebhookEndpoints() {
               {/* Meta info */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">Endpoint</p>
-                  <p className="text-xs font-mono text-gray-900 mt-0.5 truncate">{selectedLog.endpoint}</p>
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">Endpoint</p>
+                  <p className="text-xs font-mono text-[var(--ink)] mt-0.5 truncate">{selectedLog.endpoint}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">Status</p>
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">Status</p>
                   <span className={`inline-block mt-0.5 px-2.5 py-0.5 text-xs font-semibold rounded-full ${STATUS_COLORS[selectedLog.status]}`}>
                     {selectedLog.status}
                   </span>
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">HTTP Status</p>
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">HTTP Status</p>
                   <p className={`text-sm font-mono font-semibold mt-0.5 ${
                     selectedLog.httpStatus && selectedLog.httpStatus >= 200 && selectedLog.httpStatus < 300 ? 'text-emerald-600' : 'text-red-600'
                   }`}>
@@ -425,17 +425,17 @@ export default function AdminWebhookEndpoints() {
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">Attempts</p>
-                  <p className="text-sm font-semibold text-gray-900 mt-0.5">{selectedLog.attemptCount}</p>
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">Attempts</p>
+                  <p className="text-sm font-semibold text-[var(--ink)] mt-0.5">{selectedLog.attemptCount}</p>
                 </div>
               </div>
 
               {/* Signature status */}
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-[var(--paper2)] rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">Signature Verification</p>
-                    <p className="text-xs text-gray-500 mt-0.5">
+                    <p className="text-sm font-semibold text-[var(--ink)]">Signature Verification</p>
+                    <p className="text-xs text-[var(--muted)] mt-0.5">
                       {selectedLog.signatureValid
                         ? 'HMAC-SHA256 signature matched successfully'
                         : 'Warning: Signature verification failed or not present'
@@ -448,10 +448,10 @@ export default function AdminWebhookEndpoints() {
                     {selectedLog.signatureValid ? 'Valid' : 'Invalid'}
                   </div>
                 </div>
-                <div className="mt-3 bg-white rounded border border-gray-200 p-3">
-                  <p className="text-xs text-gray-500 mb-1">Expected Header</p>
-                  <code className="text-xs font-mono text-gray-700">
-                    X-TMSList-Signature: sha256=<span className="text-violet-600">YOUR_PAYLOAD_HASH</span>
+                <div className="mt-3 bg-white rounded border border-[var(--line)] p-3">
+                  <p className="text-xs text-[var(--muted)] mb-1">Expected Header</p>
+                  <code className="text-xs font-mono text-[var(--ink2)]">
+                    X-TMSList-Signature: sha256=<span className="text-[var(--ink)]">YOUR_PAYLOAD_HASH</span>
                   </code>
                 </div>
               </div>
@@ -459,10 +459,10 @@ export default function AdminWebhookEndpoints() {
               {/* Request payload */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-semibold text-gray-900">Request Payload</h3>
-                  <button className="text-xs font-medium text-violet-600 hover:text-violet-700">Copy</button>
+                  <h3 className="text-sm font-semibold text-[var(--ink)]">Request Payload</h3>
+                  <button className="text-xs font-medium text-[var(--ink)] hover:text-[var(--ink)]">Copy</button>
                 </div>
-                <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto max-h-64">
+                <div className="bg-[var(--ink)] rounded-lg p-4 overflow-x-auto max-h-64">
                   <pre className="text-xs text-green-400 font-mono">
                     {JSON.stringify(selectedLog.payload, null, 2)}
                   </pre>
@@ -473,11 +473,11 @@ export default function AdminWebhookEndpoints() {
               {selectedLog.response && (
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-semibold text-gray-900">Response</h3>
-                    <span className="text-xs text-gray-400">HTTP {selectedLog.httpStatus}</span>
+                    <h3 className="text-sm font-semibold text-[var(--ink)]">Response</h3>
+                    <span className="text-xs text-[var(--muted)]">HTTP {selectedLog.httpStatus}</span>
                   </div>
-                  <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
-                    <pre className="text-xs text-gray-300 font-mono">{selectedLog.response}</pre>
+                  <div className="bg-[var(--ink)] rounded-lg p-4 overflow-x-auto">
+                    <pre className="text-xs text-[var(--line)] font-mono">{selectedLog.response}</pre>
                   </div>
                 </div>
               )}

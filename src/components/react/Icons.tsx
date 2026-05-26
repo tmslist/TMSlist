@@ -812,3 +812,24 @@ export function ChevronDownIcon({ className = '', size = 16 }: { className?: str
     </Icon>
   );
 }
+
+export function ClockIcon({ className = '', size = 16 }: { className?: string; size?: number }) {
+  return (
+    <Icon className={className} size={size}>
+      <svg width={size} height={size} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 6v6l4 2" />
+      </svg>
+    </Icon>
+  );
+}
+
+export function ArrowRightIcon({ className = '', size = 16 }: { className?: string; size?: number }) {
+  return (
+    <Icon className={className} size={size}>
+      <svg width={size} height={size} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </Icon>
+  );
+}

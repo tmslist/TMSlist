@@ -10,6 +10,7 @@ faqs:
     answer: "Yes. Aetna covers TMS for treatment-resistant depression with prior authorization. Their policy requires documentation of 2+ failed antidepressant trials."
   - question: "What is Aetna's approval process?"
     answer: "Prior auth required. Submit diagnosis, medication history, PHQ-9 scores, and treatment plan. Decisions typically take 5-15 business days."
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 
@@ -22,9 +23,9 @@ faqs:
     <div class="text-2xl font-bold text-amber-700 font-display">Required</div>
     <div class="text-xs text-amber-600 mt-1">Prior Authorization</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">$500-$2,000</div>
-    <div class="text-xs text-blue-600 mt-1">Typical patient cost</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">$500-$2,000</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Typical patient cost</div>
   </div>
 </div>
 
@@ -79,11 +80,11 @@ One bright spot: **Aetna Medicare Advantage** follows standard Medicare TMS cove
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>
@@ -92,32 +93,32 @@ One bright spot: **Aetna Medicare Advantage** follows standard Medicare TMS cove
 ## How to Get TMS Approved
 
 <div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">1</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Verify Benefits</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Call the number on the back of your insurance card and ask specifically about TMS therapy coverage. Get a reference number.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Verify Benefits</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Call the number on the back of your insurance card and ask specifically about TMS therapy coverage. Get a reference number.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">2</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Get Your Documentation Ready</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Gather records of your MDD diagnosis, all medication trials (names, doses, durations, outcomes), current PHQ-9 score, and therapy history.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Get Your Documentation Ready</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Gather records of your MDD diagnosis, all medication trials (names, doses, durations, outcomes), current PHQ-9 score, and therapy history.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">3</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Choose a TMS Clinic</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Find an in-network TMS provider using our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a>. In-network clinics handle prior auth and know your insurer's requirements.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Choose a TMS Clinic</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Find an in-network TMS provider using our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a>. In-network clinics handle prior auth and know your insurer's requirements.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">4</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Prior Authorization</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Your TMS clinic submits the prior auth request. Typical approval takes 5-15 business days. If denied, appeal — overturn rates are 60-70%.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Prior Authorization</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Your TMS clinic submits the prior auth request. Typical approval takes 5-15 business days. If denied, appeal — overturn rates are 60-70%.</p>
     </div>
   </div>
 </div>

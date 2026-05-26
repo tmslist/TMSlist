@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CostCalculator from '../../components/react/CostCalculator';
+import ProtocolExplorer from '../../components/react/ProtocolExplorer';
+import SideEffectsTracker from '../../components/react/SideEffectsTracker';
+import DeviceComparison from '../../components/react/DeviceComparison';
+import TreatmentResponseTracker from '../../components/react/tools/TreatmentResponseTracker';
+import PulseCounterSimulator from '../../components/react/tools/PulseCounterSimulator';
+import SessionReadinessChecklist from '../../components/react/tools/SessionReadinessChecklist';
+import MotorThresholdDoseCalculator from '../../components/react/tools/MotorThresholdDoseCalculator';
+import ContraindicationChecker from '../../components/react/tools/ContraindicationChecker';
+import WhatIfSimulator from '../../components/react/tools/WhatIfSimulator';
+import AdverseEventTracker from '../../components/react/tools/AdverseEventTracker';
+import InsurancePayerReference from '../../components/react/tools/InsurancePayerReference';
+import MTFindingLab from '../../components/react/tools/MTFindingLab';
+import TMSECTComparator from '../../components/react/tools/TMSECTComparator';
+
+const tools: Record<string, {
+  title: string;
+  description: string;
+  category: 'patient' | 'provider' | 'both';
+}> = {
+  'cost-calculator': { title: 'TMS Cost Calculator', description: 'Estimate your total TMS treatment cost with insurance, financing options, and state-by-state pricing data.', category: 'patient' },
+  'protocol-explorer': { title: 'Protocol Explorer', description: 'Compare TMS treatment protocols — standard rTMS, theta burst, deep TMS, and accelerated schedules.', category: 'provider' },
+  'side-effects-tracker': { title: 'Side Effects Tracker', description: 'Track common TMS side effects session by session.', category: 'patient' },
+  'device-comparison': { title: 'Device Comparison', description: 'Compare FDA-cleared TMS devices.', category: 'patient' },
+  'treatment-response': { title: 'Response Tracker', description: 'Log PHQ-9, HAM-D, and GAD-7 scores week-by-week.', category: 'patient' },
+  'pulse-counter': { title: 'Pulse Counter Simulator', description: 'Watch iTBS vs rTMS vs Deep TMS deliver pulses in real time.', category: 'patient' },
+  'readiness-checklist': { title: 'Session Readiness Checklist', description: 'Pre-session checklist for patients.', category: 'patient' },
+  'motor-threshold-calculator': { title: 'Motor Threshold Calculator', description: 'Input motor threshold and coil type to get recommended intensity.', category: 'provider' },
+  'contraindication-checker': { title: 'Contraindication Checker', description: 'Step-by-step safety checklist.', category: 'provider' },
+  'what-if-simulator': { title: 'What-If Simulator', description: 'Adjust parameters to see how they change expected outcomes.', category: 'both' },
+  'adverse-event-tracker': { title: 'Adverse Event Tracker', description: 'Log and track adverse events during TMS.', category: 'provider' },
+  'insurance-reference': { title: 'Insurance & Payer Reference', description: 'CPT codes, payer coverage criteria, and prior auth templates.', category: 'provider' },
+  'mt-finding-lab': { title: 'Motor Threshold Finding Lab', description: 'Interactive simulator for motor threshold determination.', category: 'provider' },
+  'tms-vs-ect': { title: 'TMS vs ECT vs Medication', description: 'Compare TMS vs ECT vs antidepressants.', category: 'patient' },
+};
+
+const { slug } = Astro.params;
+const tool = tools[slug as string];
+
+if (!tool) {
+  return Astro.redirect('/tools/');
+}
+
+const title = `${tool.title} | TMS List`;
+const description = tool.description;
+---
+
+<Layout title={title} description={description} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Tools", url: "/tools/" },
+  { name: tool.title, url: `/tools/${slug}/` }
+]}>
+  <main class="min-h-screen bg-[var(--paper)]">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+      <a href="/tools/" class="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-[var(--ink)] transition-colors mb-6">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to Tools Hub
+      </a>
+
+      <div class="mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-[rgba(10,22,40,0.10)] border border-[rgba(10,22,40,0.20)] rounded-full mb-4">
+          <span class="text-xs font-semibold text-[var(--accent)] tracking-wider uppercase">
+            {tool.category === 'patient' ? 'Patient Tool' : tool.category === 'provider' ? 'Provider Tool' : 'Clinical Tool'}
+          </span>
+        </div>
+        <h1 class="text-3xl lg:text-4xl font-bold text-[var(--ink)] tracking-tight mb-3">
+          {tool.title}
+        </h1>
+        <p class="text-[var(--muted)] text-lg max-w-2xl">
+          {tool.description}
+        </p>
+      </div>
+
+      <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] shadow-sm p-6 lg:p-8">
+        {slug === 'cost-calculator' && <CostCalculator client:load />}
+        {slug === 'protocol-explorer' && <ProtocolExplorer client:load />}
+        {slug === 'side-effects-tracker' && <SideEffectsTracker client:load />}
+        {slug === 'device-comparison' && <DeviceComparison client:load />}
+        {slug === 'treatment-response' && <TreatmentResponseTracker client:load />}
+        {slug === 'pulse-counter' && <PulseCounterSimulator client:load />}
+        {slug === 'readiness-checklist' && <SessionReadinessChecklist client:load />}
+        {slug === 'motor-threshold-calculator' && <MotorThresholdDoseCalculator client:load />}
+        {slug === 'contraindication-checker' && <ContraindicationChecker client:load />}
+        {slug === 'what-if-simulator' && <WhatIfSimulator client:load />}
+        {slug === 'adverse-event-tracker' && <AdverseEventTracker client:load />}
+        {slug === 'insurance-reference' && <InsurancePayerReference client:load />}
+        {slug === 'mt-finding-lab' && <MTFindingLab client:load />}
+        {slug === 'tms-vs-ect' && <TMSECTComparator client:load />}
+      </div>
+    </div>
+  </main>
+</Layout>

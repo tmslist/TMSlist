@@ -77,7 +77,7 @@ const CHECKLIST_ITEMS = [
 ];
 
 const CATEGORIES = {
-  sleep: { label: 'Sleep & Rest', icon: <MoonIcon size={16} />, color: '#6366f1' },
+  sleep: { label: 'Sleep & Rest', icon: <MoonIcon size={16} />, color: '#0A1628' },
   caffeine: { label: 'Caffeine', icon: <CoffeeIcon size={16} />, color: '#f59e0b' },
   medications: { label: 'Medications', icon: <PillIcon size={16} />, color: '#10b981' },
   alcohol: { label: 'Alcohol', icon: <BanIcon size={16} />, color: '#ef4444' },
@@ -106,31 +106,31 @@ export default function SessionReadinessChecklist() {
     <div className="space-y-8">
       {/* Session number */}
       <div className="flex items-center gap-4">
-        <label className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Session</label>
+        <label className="text-sm font-semibold text-[var(--muted)] uppercase tracking-wider">Session</label>
         <input
           type="number"
           min="1"
           max="50"
           value={sessionNum}
           onChange={e => setSessionNum(Math.max(1, parseInt(e.target.value) || 1))}
-          className="w-20 px-3 py-2 border border-slate-200 rounded-xl text-slate-800 text-center font-bold focus:ring-2 focus:ring-violet-500 outline-none"
+          className="w-20 px-3 py-2 border border-[var(--line)] rounded-xl text-[var(--ink)] text-center font-bold focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] outline-none"
         />
-        <span className="text-sm text-slate-400">/ 36+ treatment sessions</span>
+        <span className="text-sm text-[var(--muted)]">/ 36+ treatment sessions</span>
       </div>
 
       {/* Progress bar */}
-      <div className="bg-slate-950 rounded-2xl p-6">
+      <div className="bg-[var(--ink)] rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Readiness Score</p>
+            <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Readiness Score</p>
             <p className="text-3xl font-bold text-white mt-1">{pct}%</p>
           </div>
           <div className="text-right">
             <p className="text-lg font-bold text-white">{complete.length}/{total}</p>
-            <p className="text-xs text-slate-400">items checked</p>
+            <p className="text-xs text-[var(--muted)]">items checked</p>
           </div>
         </div>
-        <div className="w-full h-3 bg-slate-800 rounded-full overflow-hidden">
+        <div className="w-full h-3 bg-[var(--ink2)] rounded-full overflow-hidden">
           <div
             className="h-full rounded-full transition-all duration-500"
             style={{
@@ -171,7 +171,7 @@ export default function SessionReadinessChecklist() {
               className={`flex items-start gap-4 p-4 rounded-xl border transition-all ${
                 isChecked
                   ? 'border-emerald-200 bg-emerald-50'
-                  : 'border-slate-100 bg-white hover:border-slate-200'
+                  : 'border-[var(--line)] bg-white hover:border-[var(--line)]'
               }`}
             >
               <button
@@ -179,7 +179,7 @@ export default function SessionReadinessChecklist() {
                 className={`mt-0.5 w-6 h-6 rounded-lg border-2 flex items-center justify-center shrink-0 transition-all ${
                   isChecked
                     ? 'bg-emerald-500 border-emerald-500'
-                    : 'border-slate-200 hover:border-violet-400'
+                    : 'border-[var(--line)] hover:border-[var(--ink2)]'
                 }`}
               >
                 {isChecked && (
@@ -196,17 +196,17 @@ export default function SessionReadinessChecklist() {
                     {cat.label}
                   </span>
                 </div>
-                <p className={`text-sm font-medium ${isChecked ? 'text-emerald-700 line-through' : 'text-slate-700'}`}>
+                <p className={`text-sm font-medium ${isChecked ? 'text-emerald-700 line-through' : 'text-[var(--ink2)]'}`}>
                   {item.label}
                 </p>
                 <button
                   onClick={() => setShowTip(showTip === item.id ? null : item.id)}
-                  className="text-xs text-slate-400 hover:text-violet-600 mt-0.5 transition-colors"
+                  className="text-xs text-[var(--muted)] hover:text-[var(--accent)] mt-0.5 transition-colors"
                 >
                   {showTip === item.id ? 'hide detail' : 'why this matters'}
                 </button>
                 {showTip === item.id && (
-                  <p className="text-xs text-slate-500 mt-1 bg-slate-50 rounded-lg p-3 border border-slate-100">
+                  <p className="text-xs text-[var(--muted)] mt-1 bg-[var(--paper2)] rounded-lg p-3 border border-[var(--line)]">
                     {item.detail}
                   </p>
                 )}
@@ -220,7 +220,7 @@ export default function SessionReadinessChecklist() {
       <div className="flex gap-3">
         <button
           onClick={() => setChecked({})}
-          className="text-sm text-slate-400 hover:text-slate-600 font-semibold transition-colors"
+          className="text-sm text-[var(--muted)] hover:text-[var(--ink2)] font-semibold transition-colors"
         >
           Reset checklist
         </button>
@@ -228,11 +228,11 @@ export default function SessionReadinessChecklist() {
 
       {/* Session notes */}
       <div>
-        <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Pre-session notes</label>
+        <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1">Pre-session notes</label>
         <textarea
           rows={2}
           placeholder="Any symptoms, mood, or observations before this session..."
-          className="w-full px-4 py-3 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none resize-none text-sm"
+          className="w-full px-4 py-3 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] outline-none resize-none text-sm"
         />
       </div>
     </div>

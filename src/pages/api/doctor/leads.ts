@@ -1,8 +1,10 @@
 import type { APIRoute } from 'astro';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth';
-import { db } from '../../../db';
+import { db } from '../..//../db/index.js';
 import { doctors, leads, leadReminders, users, auditLog } from '../../../db/schema';
 import { eq, desc, or, like } from 'drizzle-orm';
+
+const ALLOWED_STATUSES = new Set(['new', 'contacted', 'qualified', 'converted', 'closed', 'spam']);
 
 export const prerender = false;
 
@@ -87,6 +89,83 @@ export const GET: APIRoute = async ({ request }) => {
   }
 };
 
+/**
+ * PATCH /api/doctor/leads?id=...
+ * Update lead status / contact metadata. Stores in leads.metadata since the
+ * leads table has no status column.
+ *   body: { status?: 'new'|'contacted'|...; markFirstResponse?: boolean; note?: string }
+ */
+export const PATCH: APIRoute = async ({ request, url }) => {
+  const session = getSessionFromRequest(request);
+  const doctorCtx = await verifyDoctorAccess(session);
+  if (!doctorCtx) return json({ error: 'Unauthorized' }, 401);
+
+  const id = url.searchParams.get('id');
+  if (!id) return json({ error: 'id required' }, 400);
+
+  try {
+    const body = await request.json();
+    const { status, markFirstResponse, note } = body as {
+      status?: string; markFirstResponse?: boolean; note?: string;
+    };
+
+    if (status && !ALLOWED_STATUSES.has(status)) return json({ error: 'invalid status' }, 400);
+
+    const existing = await db.select().from(leads).where(eq(leads.id, id)).limit(1);
+    const lead = existing[0];
+    if (!lead) return json({ error: 'lead not found' }, 404);
+
+    const prevMeta = (lead.metadata && typeof lead.metadata === 'object' ? lead.metadata : {}) as Record<string, unknown>;
+    const now = new Date().toISOString();
+    const nextMeta: Record<string, unknown> = {
+      ...prevMeta,
+      ...(status ? { status, lastStatusChangeAt: now } : {}),
+      ...(markFirstResponse && !prevMeta.firstResponseAt ? { firstResponseAt: now } : {}),
+      ...(status === 'contacted' || markFirstResponse ? { lastContactedAt: now } : {}),
+      ...(note ? { lastNote: note, lastNoteAt: now } : {}),
+    };
+
+    // When a lead transitions to 'converted', schedule review-request reminders
+    // at T+7d and T+21d. Idempotent — only fires when previous status differed
+    // and we haven't already scheduled them.
+    const becomingConverted = status === 'converted' && prevMeta.status !== 'converted';
+    if (becomingConverted && !prevMeta.reviewRequestsScheduled) {
+      const day = 24 * 60 * 60 * 1000;
+      const sevenDays = new Date(Date.now() + 7 * day);
+      const twentyOneDays = new Date(Date.now() + 21 * day);
+      try {
+        await db.insert(leadReminders).values([
+          {
+            leadId: id,
+            userId: doctorCtx.userId,
+            reminderAt: sevenDays,
+            message: `Send review request to ${lead.name || lead.email || 'patient'} (T+7d)`,
+            isCompleted: false,
+          },
+          {
+            leadId: id,
+            userId: doctorCtx.userId,
+            reminderAt: twentyOneDays,
+            message: `Follow-up review request (T+21d) — only if no review yet`,
+            isCompleted: false,
+          },
+        ]);
+        nextMeta.reviewRequestsScheduled = now;
+        nextMeta.reviewRequestsAt = [sevenDays.toISOString(), twentyOneDays.toISOString()];
+      } catch (err) {
+        console.error('[review-request] Failed to schedule:', err);
+      }
+    }
+
+    const updated = await db.update(leads).set({ metadata: nextMeta }).where(eq(leads.id, id)).returning();
+    await logAudit(doctorCtx.userId, 'update', 'lead', id, { status, markFirstResponse });
+    return json(updated[0]);
+  } catch (err) {
+    console.error('Doctor leads PATCH error:', err);
+    return json({ error: 'Failed to update lead' }, 500);
+  }
+};
+
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
   const doctorCtx = await verifyDoctorAccess(session);
@@ -106,9 +185,9 @@ export const POST: APIRoute = async ({ request }) => {
 
     const result = await db.insert(leadReminders).values({
       leadId,
-      doctorId: doctorId ?? null,
-      remindAt: remindAtDate,
-      note: note ?? null,
+      userId: doctorCtx.userId,
+      reminderAt: remindAtDate,
+      message: note ?? null,
       isCompleted: false,
     }).returning();
 

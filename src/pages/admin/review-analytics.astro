@@ -13,13 +13,13 @@ if (!hasRole(session, 'admin')) {
 ---
 
 <Layout title="Review Analytics | TMS List Admin" noindex={true}>
-  <div class="flex min-h-screen bg-gray-50">
+  <div class="flex min-h-screen bg-[var(--paper2)]">
     <AdminSidebar client:load currentPage="analytics" userEmail={session!.email} />
     <main class="flex-1 lg:ml-64 py-8">
       <div class="container mx-auto px-4 max-w-7xl">
         <div class="mb-8">
-          <h1 class="text-3xl font-semibold text-gray-900">Review Analytics</h1>
-          <p class="text-gray-500 mt-1">Rating trends, breakdowns, response metrics, and NPS scores</p>
+          <h1 class="text-3xl font-semibold text-[var(--ink)]">Review Analytics</h1>
+          <p class="text-[var(--muted)] mt-1">Rating trends, breakdowns, response metrics, and NPS scores</p>
         </div>
         <AdminReviewAnalytics client:load />
       </div>

@@ -49,9 +49,9 @@ function Modal({ open, onClose, title, children }: { open: boolean; onClose: () 
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--line)]">
+          <h3 className="text-lg font-semibold text-[var(--ink)]">{title}</h3>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-[var(--paper2)] text-[var(--muted)] hover:text-[var(--ink2)]">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -303,10 +303,10 @@ export default function AdminInsuranceManager() {
 
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Insurance Manager</h2>
-          <p className="text-sm text-gray-500 mt-0.5">{insurers.length} insurers, {plans.length} plans</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)]">Insurance Manager</h2>
+          <p className="text-sm text-[var(--muted)] mt-0.5">{insurers.length} insurers, {plans.length} plans</p>
         </div>
-        <button onClick={fetchData} className="px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2">
+        <button onClick={fetchData} className="px-3 py-2 bg-white border border-[var(--line)] rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] transition-colors flex items-center gap-2">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
@@ -315,11 +315,11 @@ export default function AdminInsuranceManager() {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-        <div className="border-b border-gray-200">
+      <div className="bg-white rounded-xl shadow-sm border border-[var(--line)]">
+        <div className="border-b border-[var(--line)]">
           <nav className="flex gap-1 px-4">
             {TABS.map(t => (
-              <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${tab === t.key ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>
+              <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${tab === t.key ? 'border-[rgba(201,101,74,0.2)] text-[var(--warm)]' : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)]'}`}>
                 {t.label}
               </button>
             ))}
@@ -329,13 +329,13 @@ export default function AdminInsuranceManager() {
         <div className="p-6">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-indigo-600 rounded-full animate-spin" />
+              <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-indigo-600 rounded-full animate-spin" />
             </div>
           ) : tab === 'insurers' ? (
             <div>
               <div className="flex items-center justify-between gap-4 mb-4">
-                <input type="text" value={insurerSearch} onChange={e => setInsurerSearch(e.target.value)} placeholder="Search insurers..." className="flex-1 max-w-sm rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
-                <button onClick={() => openInsurerModal()} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                <input type="text" value={insurerSearch} onChange={e => setInsurerSearch(e.target.value)} placeholder="Search insurers..." className="flex-1 max-w-sm rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
+                <button onClick={() => openInsurerModal()} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] transition-colors flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
@@ -344,43 +344,43 @@ export default function AdminInsuranceManager() {
               </div>
 
               {filteredInsurers.length === 0 ? (
-                <div className="text-center py-12 text-gray-500">No insurers found.</div>
+                <div className="text-center py-12 text-[var(--muted)]">No insurers found.</div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="bg-gray-50 border-b border-gray-200">
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Name</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Slug</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Status</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Added</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                      <tr className="bg-[var(--paper2)] border-b border-[var(--line)]">
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Name</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Slug</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Status</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Added</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-[var(--line)]">
                       {filteredInsurers.map(insurer => (
-                        <tr key={insurer.id} className="hover:bg-gray-50 transition-colors">
+                        <tr key={insurer.id} className="hover:bg-[var(--paper2)] transition-colors">
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-3">
                               {insurer.logo && <img src={insurer.logo} alt="" className="w-8 h-8 rounded object-contain" />}
-                              <span className="text-sm font-medium text-gray-900">{insurer.name}</span>
+                              <span className="text-sm font-medium text-[var(--ink)]">{insurer.name}</span>
                             </div>
                           </td>
-                          <td className="px-4 py-3 text-sm text-gray-500 font-mono">{insurer.slug}</td>
+                          <td className="px-4 py-3 text-sm text-[var(--muted)] font-mono">{insurer.slug}</td>
                           <td className="px-4 py-3">
-                            <button onClick={() => toggleInsurerStatus(insurer)} className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${insurer.status === 'active' ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' : 'bg-gray-100 text-gray-400 hover:bg-gray-200'}`}>
+                            <button onClick={() => toggleInsurerStatus(insurer)} className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${insurer.status === 'active' ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' : 'bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)]'}`}>
                               {insurer.status === 'active' ? 'Active' : 'Inactive'}
                             </button>
                           </td>
-                          <td className="px-4 py-3 text-xs text-gray-500">{formatDate(insurer.createdAt)}</td>
+                          <td className="px-4 py-3 text-xs text-[var(--muted)]">{formatDate(insurer.createdAt)}</td>
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-2">
-                              <button onClick={() => openInsurerModal(insurer)} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-700">
+                              <button onClick={() => openInsurerModal(insurer)} className="p-1.5 rounded-lg hover:bg-[var(--paper2)] text-[var(--muted)] hover:text-[var(--ink2)]">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                 </svg>
                               </button>
-                              <button onClick={() => deleteInsurer(insurer)} className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-600">
+                              <button onClick={() => deleteInsurer(insurer)} className="p-1.5 rounded-lg hover:bg-red-50 text-[var(--muted)] hover:text-red-600">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                 </svg>
@@ -397,8 +397,8 @@ export default function AdminInsuranceManager() {
           ) : tab === 'plans' ? (
             <div>
               <div className="flex items-center justify-between gap-4 mb-4">
-                <input type="text" value={planSearch} onChange={e => setPlanSearch(e.target.value)} placeholder="Search plans..." className="flex-1 max-w-sm rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
-                <button onClick={() => openPlanModal()} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                <input type="text" value={planSearch} onChange={e => setPlanSearch(e.target.value)} placeholder="Search plans..." className="flex-1 max-w-sm rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
+                <button onClick={() => openPlanModal()} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] transition-colors flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
@@ -407,52 +407,52 @@ export default function AdminInsuranceManager() {
               </div>
 
               {filteredPlans.length === 0 ? (
-                <div className="text-center py-12 text-gray-500">No plans found.</div>
+                <div className="text-center py-12 text-[var(--muted)]">No plans found.</div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="bg-gray-50 border-b border-gray-200">
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Plan</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Insurer</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Type</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Metal</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">State</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">TMS</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Prior Auth</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Copay</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                      <tr className="bg-[var(--paper2)] border-b border-[var(--line)]">
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Plan</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Insurer</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Type</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Metal</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">State</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">TMS</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Prior Auth</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Copay</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-[var(--line)]">
                       {filteredPlans.map(plan => (
-                        <tr key={plan.id} className="hover:bg-gray-50 transition-colors">
-                          <td className="px-4 py-3 text-sm font-medium text-gray-900">{plan.name}</td>
-                          <td className="px-4 py-3 text-sm text-gray-600">{plan.insurerName}</td>
+                        <tr key={plan.id} className="hover:bg-[var(--paper2)] transition-colors">
+                          <td className="px-4 py-3 text-sm font-medium text-[var(--ink)]">{plan.name}</td>
+                          <td className="px-4 py-3 text-sm text-[var(--ink2)]">{plan.insurerName}</td>
                           <td className="px-4 py-3">
-                            <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">{plan.type}</span>
+                            <span className="px-2 py-1 bg-[rgba(10,22,40,0.1)] text-[var(--ink)] text-xs font-medium rounded">{plan.type}</span>
                           </td>
-                          <td className="px-4 py-3 text-sm text-gray-600">{plan.metalLevel}</td>
-                          <td className="px-4 py-3 text-sm text-gray-600">{plan.state}</td>
+                          <td className="px-4 py-3 text-sm text-[var(--ink2)]">{plan.metalLevel}</td>
+                          <td className="px-4 py-3 text-sm text-[var(--ink2)]">{plan.state}</td>
                           <td className="px-4 py-3">
-                            <span className={`px-2 py-1 text-xs font-medium rounded ${plan.coversTMS ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
+                            <span className={`px-2 py-1 text-xs font-medium rounded ${plan.coversTMS ? 'bg-emerald-100 text-emerald-700' : 'bg-[var(--paper2)] text-[var(--muted)]'}`}>
                               {plan.coversTMS ? 'Yes' : 'No'}
                             </span>
                           </td>
                           <td className="px-4 py-3">
-                            <span className={`px-2 py-1 text-xs font-medium rounded ${plan.priorAuthRequired ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-500'}`}>
+                            <span className={`px-2 py-1 text-xs font-medium rounded ${plan.priorAuthRequired ? 'bg-amber-100 text-amber-700' : 'bg-[var(--paper2)] text-[var(--muted)]'}`}>
                               {plan.priorAuthRequired ? 'Required' : 'None'}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-sm text-gray-600">${plan.typicalCopay}</td>
+                          <td className="px-4 py-3 text-sm text-[var(--ink2)]">${plan.typicalCopay}</td>
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-2">
-                              <button onClick={() => openPlanModal(plan)} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-700">
+                              <button onClick={() => openPlanModal(plan)} className="p-1.5 rounded-lg hover:bg-[var(--paper2)] text-[var(--muted)] hover:text-[var(--ink2)]">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                 </svg>
                               </button>
-                              <button onClick={() => deletePlan(plan)} className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-600">
+                              <button onClick={() => deletePlan(plan)} className="p-1.5 rounded-lg hover:bg-red-50 text-[var(--muted)] hover:text-red-600">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                 </svg>
@@ -470,38 +470,38 @@ export default function AdminInsuranceManager() {
             <div className="max-w-xl mx-auto space-y-6">
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Insurance Plan</label>
-                  <input type="text" value={lookupPlan} onChange={e => setLookupPlan(e.target.value)} placeholder="Enter plan name..." className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Insurance Plan</label>
+                  <input type="text" value={lookupPlan} onChange={e => setLookupPlan(e.target.value)} placeholder="Enter plan name..." className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Treatment Type</label>
-                  <select value={lookupTreatment} onChange={e => setLookupTreatment(e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Treatment Type</label>
+                  <select value={lookupTreatment} onChange={e => setLookupTreatment(e.target.value)} className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
                     <option value="TMS">TMS Treatment</option>
                     <option value="consultation">Consultation</option>
                     <option value="followup">Follow-up</option>
                   </select>
                 </div>
-                <button onClick={lookupCoverage} disabled={lookupLoading} className="w-full px-4 py-2.5 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 disabled:opacity-50 transition-colors">
+                <button onClick={lookupCoverage} disabled={lookupLoading} className="w-full px-4 py-2.5 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50 transition-colors">
                   {lookupLoading ? 'Looking up...' : 'Check Coverage'}
                 </button>
               </div>
 
               {lookupResult && (
-                <div className="border border-gray-200 rounded-xl p-6 space-y-4">
+                <div className="border border-[var(--line)] rounded-xl p-6 space-y-4">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-sm font-semibold text-gray-900">{lookupResult.planName}</h4>
-                    <span className={`px-2 py-1 text-xs font-medium rounded ${lookupResult.status === 'active' ? 'bg-emerald-100 text-emerald-700' : lookupResult.status === 'inactive' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-500'}`}>
+                    <h4 className="text-sm font-semibold text-[var(--ink)]">{lookupResult.planName}</h4>
+                    <span className={`px-2 py-1 text-xs font-medium rounded ${lookupResult.status === 'active' ? 'bg-emerald-100 text-emerald-700' : lookupResult.status === 'inactive' ? 'bg-red-100 text-red-700' : 'bg-[var(--paper2)] text-[var(--muted)]'}`}>
                       {lookupResult.status}
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-gray-50 rounded-lg p-3">
-                      <p className="text-xs text-gray-500">Estimated Patient Cost</p>
-                      <p className="text-lg font-bold text-gray-900">${lookupResult.estimatedCost}</p>
+                    <div className="bg-[var(--paper2)] rounded-lg p-3">
+                      <p className="text-xs text-[var(--muted)]">Estimated Patient Cost</p>
+                      <p className="text-lg font-bold text-[var(--ink)]">${lookupResult.estimatedCost}</p>
                     </div>
-                    <div className="bg-gray-50 rounded-lg p-3">
-                      <p className="text-xs text-gray-500">Coverage Level</p>
-                      <p className="text-sm font-medium text-gray-900">{lookupResult.coverage}</p>
+                    <div className="bg-[var(--paper2)] rounded-lg p-3">
+                      <p className="text-xs text-[var(--muted)]">Coverage Level</p>
+                      <p className="text-sm font-medium text-[var(--ink)]">{lookupResult.coverage}</p>
                     </div>
                   </div>
                 </div>
@@ -515,24 +515,24 @@ export default function AdminInsuranceManager() {
       <Modal open={showInsurerModal} onClose={() => setShowInsurerModal(false)} title={editingInsurer ? 'Edit Insurer' : 'Add Insurer'}>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
-            <input type="text" value={insurerName} onChange={e => setInsurerName(e.target.value)} placeholder="Blue Cross Blue Shield" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Name *</label>
+            <input type="text" value={insurerName} onChange={e => setInsurerName(e.target.value)} placeholder="Blue Cross Blue Shield" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Slug *</label>
-            <input type="text" value={insurerSlug} onChange={e => setInsurerSlug(e.target.value)} placeholder="bcbs" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Slug *</label>
+            <input type="text" value={insurerSlug} onChange={e => setInsurerSlug(e.target.value)} placeholder="bcbs" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Logo URL</label>
-            <input type="url" value={insurerLogo} onChange={e => setInsurerLogo(e.target.value)} placeholder="https://..." className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Logo URL</label>
+            <input type="url" value={insurerLogo} onChange={e => setInsurerLogo(e.target.value)} placeholder="https://..." className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
-            <input type="url" value={insurerWebsite} onChange={e => setInsurerWebsite(e.target.value)} placeholder="https://..." className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Website</label>
+            <input type="url" value={insurerWebsite} onChange={e => setInsurerWebsite(e.target.value)} placeholder="https://..." className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
-            <button onClick={() => setShowInsurerModal(false)} className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
-            <button onClick={saveInsurer} disabled={saving} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 disabled:opacity-50">{editingInsurer ? 'Update' : 'Create'}</button>
+          <div className="flex justify-end gap-3 pt-4 border-t border-[var(--line)]">
+            <button onClick={() => setShowInsurerModal(false)} className="px-4 py-2 border border-[var(--line)] rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)]">Cancel</button>
+            <button onClick={saveInsurer} disabled={saving} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50">{editingInsurer ? 'Update' : 'Create'}</button>
           </div>
         </div>
       </Modal>
@@ -541,20 +541,20 @@ export default function AdminInsuranceManager() {
       <Modal open={showPlanModal} onClose={() => setShowPlanModal(false)} title={editingPlan ? 'Edit Plan' : 'Add Plan'}>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Insurer *</label>
-            <select value={planInsurerId} onChange={e => setPlanInsurerId(e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Insurer *</label>
+            <select value={planInsurerId} onChange={e => setPlanInsurerId(e.target.value)} className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
               <option value="">Select insurer...</option>
               {insurers.map(i => <option key={i.id} value={i.id}>{i.name}</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Plan Name *</label>
-            <input type="text" value={planName} onChange={e => setPlanName(e.target.value)} placeholder="PPO Gold 1000" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Plan Name *</label>
+            <input type="text" value={planName} onChange={e => setPlanName(e.target.value)} placeholder="PPO Gold 1000" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
-              <select value={planType} onChange={e => setPlanType(e.target.value as Plan['type'])} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Type</label>
+              <select value={planType} onChange={e => setPlanType(e.target.value as Plan['type'])} className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
                 <option value="HMO">HMO</option>
                 <option value="PPO">PPO</option>
                 <option value="EPO">EPO</option>
@@ -563,8 +563,8 @@ export default function AdminInsuranceManager() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Metal Level</label>
-              <select value={planMetal} onChange={e => setPlanMetal(e.target.value as Plan['metalLevel'])} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Metal Level</label>
+              <select value={planMetal} onChange={e => setPlanMetal(e.target.value as Plan['metalLevel'])} className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
                 <option value="Bronze">Bronze</option>
                 <option value="Silver">Silver</option>
                 <option value="Gold">Gold</option>
@@ -573,26 +573,26 @@ export default function AdminInsuranceManager() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">State *</label>
-            <input type="text" value={planState} onChange={e => setPlanState(e.target.value)} placeholder="CA" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">State *</label>
+            <input type="text" value={planState} onChange={e => setPlanState(e.target.value)} placeholder="CA" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="coversTMS" checked={planCoversTMS} onChange={e => setPlanCoversTMS(e.target.checked)} className="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-              <label htmlFor="coversTMS" className="text-sm text-gray-700">Covers TMS</label>
+              <input type="checkbox" id="coversTMS" checked={planCoversTMS} onChange={e => setPlanCoversTMS(e.target.checked)} className="w-4 h-4 rounded border-[var(--line)] text-[var(--warm)] focus:ring-[rgba(10,22,40,0.2)]" />
+              <label htmlFor="coversTMS" className="text-sm text-[var(--ink2)]">Covers TMS</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="priorAuth" checked={planPriorAuth} onChange={e => setPlanPriorAuth(e.target.checked)} className="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-              <label htmlFor="priorAuth" className="text-sm text-gray-700">Prior Auth Required</label>
+              <input type="checkbox" id="priorAuth" checked={planPriorAuth} onChange={e => setPlanPriorAuth(e.target.checked)} className="w-4 h-4 rounded border-[var(--line)] text-[var(--warm)] focus:ring-[rgba(10,22,40,0.2)]" />
+              <label htmlFor="priorAuth" className="text-sm text-[var(--ink2)]">Prior Auth Required</label>
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Typical Copay ($)</label>
-            <input type="number" value={planCopay} onChange={e => setPlanCopay(e.target.value)} placeholder="50" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Typical Copay ($)</label>
+            <input type="number" value={planCopay} onChange={e => setPlanCopay(e.target.value)} placeholder="50" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
-            <button onClick={() => setShowPlanModal(false)} className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
-            <button onClick={savePlan} disabled={saving} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 disabled:opacity-50">{editingPlan ? 'Update' : 'Create'}</button>
+          <div className="flex justify-end gap-3 pt-4 border-t border-[var(--line)]">
+            <button onClick={() => setShowPlanModal(false)} className="px-4 py-2 border border-[var(--line)] rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)]">Cancel</button>
+            <button onClick={savePlan} disabled={saving} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50">{editingPlan ? 'Update' : 'Create'}</button>
           </div>
         </div>
       </Modal>

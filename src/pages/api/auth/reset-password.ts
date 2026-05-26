@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
-import { resetPasswordSchema } from '../../../db/validation';
-import { verifyMagicToken, hashPassword, isPasswordStrongEnough, invalidateAllUserSessions } from '../../../utils/auth';
-import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+import { resetPasswordSchema } from '../../../db/validation.js';
+import { verifyMagicToken, hashPassword, isPasswordStrongEnough, invalidateAllUserSessions } from '../../../utils/auth.js';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit.js';
 import { db } from '../../../db';
 import { users, auditLog } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -72,7 +72,7 @@ export const POST: APIRoute = async ({ request }) => {
       action: 'reset_user_password',
       entityType: 'user',
       entityId: userRecord.id,
-      metadata: { email: normalizedEmail, reason: 'self-service-reset' },
+      details: { email: normalizedEmail, reason: 'self-service-reset' },
     });
 
     return new Response(JSON.stringify({ success: true }), {

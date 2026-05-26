@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Choosing a TMS Clinic: 5 Red Flags and 6 Green Flags">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#0A1628"/>
+      <stop offset="55%"  stop-color="#142033"/>
+      <stop offset="100%" stop-color="#1E2A3B"/>
+    </linearGradient>
+    <radialGradient id="warmGlow" cx="0.85" cy="0.15" r="0.7">
+      <stop offset="0%"  stop-color="#C9654A" stop-opacity="0.32"/>
+      <stop offset="55%" stop-color="#D4806A" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#0A1628" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warmGlow2" cx="0.05" cy="0.95" r="0.55">
+      <stop offset="0%"  stop-color="#D4806A" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0A1628" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#FBFAF7" fill-opacity="0.05"/>
+    </pattern>
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#D4806A" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#D4806A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- base -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect width="1200" height="630" fill="url(#warmGlow)"/>
+  <rect width="1200" height="630" fill="url(#warmGlow2)"/>
+
+  <!-- decorative motif (top-right area) -->
+  
+        <g opacity="0.5" stroke="#D4806A" stroke-width="1.5" fill="none">
+          <ellipse cx="1020" cy="500" rx="220" ry="60"/>
+          <ellipse cx="1020" cy="500" rx="160" ry="42"/>
+          <ellipse cx="1020" cy="500" rx="100" ry="26"/>
+        </g>
+
+  <!-- top wordmark -->
+  <g transform="translate(80,80)">
+    <text font-family="Bricolage Grotesque, Plus Jakarta Sans, system-ui, sans-serif"
+          font-size="20" font-weight="700" fill="#FBFAF7" letter-spacing="0.18em">TMSLIST</text>
+    <text x="115" y="0" font-family="Plus Jakarta Sans, system-ui, sans-serif"
+          font-size="14" font-weight="500" fill="#FBFAF7" fill-opacity="0.45" letter-spacing="0.04em">— editorial</text>
+  </g>
+
+  <!-- category badge -->
+  <g transform="translate(80,150)">
+    <rect x="0" y="0" rx="999" ry="999" width="146.8" height="34"
+          fill="#D4806A" fill-opacity="0.16" stroke="#D4806A" stroke-opacity="0.55" stroke-width="1"/>
+    <text x="14" y="22" font-family="Plus Jakarta Sans, system-ui, sans-serif"
+          font-size="12" font-weight="700" fill="#C9654A" letter-spacing="0.18em">
+      PATIENT GUIDE
+    </text>
+  </g>
+
+  <!-- accent rule -->
+  <rect x="80" y="220" width="120" height="3" fill="url(#rule)"/>
+
+  <!-- hook lines -->
+  <g font-family="Bricolage Grotesque, Georgia, serif" fill="#FBFAF7">
+    
+    <text x="80" y="321" font-size="64" font-weight="700" letter-spacing="-0.02em">Read the room before</text>
+    <text x="80" y="399" font-size="64" font-weight="700" letter-spacing="-0.02em">booking.</text>
+  </g>
+
+  <!-- footer line -->
+  <g transform="translate(80,560)" font-family="Plus Jakarta Sans, system-ui, sans-serif">
+    <text font-size="14" font-weight="500" fill="#FBFAF7" fill-opacity="0.55" letter-spacing="0.06em">
+      Choosing a TMS Clinic: 5 Red Flags and 6 Green Flags
+    </text>
+    <text x="0" y="26" font-size="12" font-weight="500" fill="#C9654A" fill-opacity="0.85" letter-spacing="0.1em">
+      tmslist.com
+    </text>
+  </g>
+
+  <!-- thin border accent bottom-right -->
+  <line x1="1080" y1="595" x2="1160" y2="595" stroke="#D4806A" stroke-width="2" stroke-opacity="0.55"/>
+</svg>

@@ -28,7 +28,7 @@ export const clinicSubmitSchema = z.object({
   city: z.string().min(2).max(100),
   state: z.string().min(2).max(50),
   country: z.string().length(2).toUpperCase().default('US'),
-  zip: z.string().min(3).max(10),
+  zip: z.string().min(3).max(10).regex(/^(?=.*\d)[A-Za-z0-9 -]+$/, 'Invalid postal code'),
   phone: z.string().min(7).max(20),
   website: z.string().url().optional().or(z.literal('')),
   email: z.string().email().optional().or(z.literal('')),

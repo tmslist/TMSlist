@@ -166,12 +166,12 @@ export default function AdminSEO() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">SEO Overrides</h1>
-          <p className="text-gray-500 mt-1">Manage meta tags and SEO settings per page</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">SEO Overrides</h1>
+          <p className="text-[var(--muted)] mt-1">Manage meta tags and SEO settings per page</p>
         </div>
         <button
           onClick={openNewForm}
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors shadow-sm"
+          className="inline-flex items-center gap-2 px-4 py-2.5 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink)] transition-colors shadow-sm"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -182,14 +182,14 @@ export default function AdminSEO() {
 
       {/* Form (inline) */}
       {form && (
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 mb-6">
+        <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-medium text-gray-900">
+            <h2 className="text-lg font-medium text-[var(--ink)]">
               {form.id ? 'Edit Override' : 'New Override'}
             </h2>
             <button
               onClick={() => setForm(null)}
-              className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+              className="p-1 text-[var(--muted)] hover:text-[var(--ink2)] transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -206,7 +206,7 @@ export default function AdminSEO() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Path */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Path</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Path</label>
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -214,7 +214,7 @@ export default function AdminSEO() {
                   value={form.path}
                   onChange={(e) => updateForm('path', e.target.value)}
                   disabled={!!form.id}
-                  className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none disabled:bg-gray-50 disabled:text-gray-500"
+                  className="flex-1 text-sm border border-[var(--line)] rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] outline-none disabled:bg-[var(--paper2)] disabled:text-[var(--muted)]"
                 />
                 {!form.id && (
                   <select
@@ -222,7 +222,7 @@ export default function AdminSEO() {
                     onChange={(e) => {
                       if (e.target.value) updateForm('path', e.target.value);
                     }}
-                    className="text-sm border border-gray-200 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none bg-white text-gray-500"
+                    className="text-sm border border-[var(--line)] rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] outline-none bg-white text-[var(--muted)]"
                   >
                     <option value="">Common paths...</option>
                     {COMMON_PATHS.map(p => (
@@ -236,8 +236,8 @@ export default function AdminSEO() {
             {/* Meta Title */}
             <div className="md:col-span-2">
               <div className="flex items-center justify-between mb-1">
-                <label className="text-sm font-medium text-gray-700">Meta Title</label>
-                <span className={`text-xs ${form.metaTitle.length > 60 ? 'text-red-500 font-medium' : 'text-gray-400'}`}>
+                <label className="text-sm font-medium text-[var(--ink2)]">Meta Title</label>
+                <span className={`text-xs ${form.metaTitle.length > 60 ? 'text-red-500 font-medium' : 'text-[var(--muted)]'}`}>
                   {form.metaTitle.length}/60
                 </span>
               </div>
@@ -246,15 +246,15 @@ export default function AdminSEO() {
                 placeholder="Page title for search engines"
                 value={form.metaTitle}
                 onChange={(e) => updateForm('metaTitle', e.target.value)}
-                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+                className="w-full text-sm border border-[var(--line)] rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] outline-none"
               />
             </div>
 
             {/* Meta Description */}
             <div className="md:col-span-2">
               <div className="flex items-center justify-between mb-1">
-                <label className="text-sm font-medium text-gray-700">Meta Description</label>
-                <span className={`text-xs ${form.metaDescription.length > 160 ? 'text-red-500 font-medium' : 'text-gray-400'}`}>
+                <label className="text-sm font-medium text-[var(--ink2)]">Meta Description</label>
+                <span className={`text-xs ${form.metaDescription.length > 160 ? 'text-red-500 font-medium' : 'text-[var(--muted)]'}`}>
                   {form.metaDescription.length}/160
                 </span>
               </div>
@@ -263,31 +263,31 @@ export default function AdminSEO() {
                 value={form.metaDescription}
                 onChange={(e) => updateForm('metaDescription', e.target.value)}
                 rows={3}
-                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none resize-y"
+                className="w-full text-sm border border-[var(--line)] rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] outline-none resize-y"
               />
             </div>
 
             {/* OG Image */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">OG Image URL</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">OG Image URL</label>
               <input
                 type="url"
                 placeholder="https://..."
                 value={form.ogImage}
                 onChange={(e) => updateForm('ogImage', e.target.value)}
-                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+                className="w-full text-sm border border-[var(--line)] rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] outline-none"
               />
             </div>
 
             {/* Canonical URL */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Canonical URL</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Canonical URL</label>
               <input
                 type="url"
                 placeholder="https://..."
                 value={form.canonicalUrl}
                 onChange={(e) => updateForm('canonicalUrl', e.target.value)}
-                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+                className="w-full text-sm border border-[var(--line)] rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] outline-none"
               />
             </div>
 
@@ -301,30 +301,30 @@ export default function AdminSEO() {
                     onChange={(e) => updateForm('noIndex', e.target.checked)}
                     className="sr-only"
                   />
-                  <div className={`w-10 h-6 rounded-full transition-colors ${form.noIndex ? 'bg-violet-600' : 'bg-gray-200'}`}>
+                  <div className={`w-10 h-6 rounded-full transition-colors ${form.noIndex ? 'bg-[var(--ink)]' : 'bg-[var(--paper2)]'}`}>
                     <div className={`w-4 h-4 bg-white rounded-full shadow-sm absolute top-1 transition-transform ${form.noIndex ? 'translate-x-5' : 'translate-x-1'}`} />
                   </div>
                 </div>
                 <div>
-                  <span className="text-sm font-medium text-gray-700">No Index</span>
-                  <span className="text-xs text-gray-400 ml-2">Prevent search engines from indexing this page</span>
+                  <span className="text-sm font-medium text-[var(--ink2)]">No Index</span>
+                  <span className="text-xs text-[var(--muted)] ml-2">Prevent search engines from indexing this page</span>
                 </div>
               </label>
             </div>
           </div>
 
           {/* Save / Cancel */}
-          <div className="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-gray-100">
+          <div className="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-[var(--line)]">
             <button
               onClick={() => setForm(null)}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
               disabled={saving || !form.path}
-              className="px-4 py-2 text-sm font-medium text-white bg-violet-600 rounded-lg hover:bg-violet-700 transition-colors disabled:opacity-50"
+              className="px-4 py-2 text-sm font-medium text-white bg-[var(--ink)] rounded-lg hover:bg-[var(--ink)] transition-colors disabled:opacity-50"
             >
               {saving ? 'Saving...' : form.id ? 'Update' : 'Create'}
             </button>
@@ -333,9 +333,9 @@ export default function AdminSEO() {
       )}
 
       {/* Search */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 mb-6">
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm p-4 mb-6">
         <div className="relative">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -343,56 +343,56 @@ export default function AdminSEO() {
             placeholder="Search by path..."
             value={search}
             onChange={(e) => { setSearch(e.target.value); setPage(0); }}
-            className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+            className="w-full pl-10 pr-4 py-2.5 text-sm border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] outline-none"
           />
         </div>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <div className="w-6 h-6 border-2 border-violet-600 border-t-transparent rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-[var(--ink)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : overrides.length === 0 ? (
           <div className="text-center py-16">
-            <svg className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-            <p className="text-gray-500">No SEO overrides yet</p>
+            <p className="text-[var(--muted)]">No SEO overrides yet</p>
             <button
               onClick={openNewForm}
-              className="text-violet-600 hover:text-violet-700 text-sm font-medium mt-2 inline-block"
+              className="text-[var(--ink)] hover:text-[var(--ink)] text-sm font-medium mt-2 inline-block"
             >
               Add your first override
             </button>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-[var(--line)]">
+              <thead className="bg-[var(--paper2)]">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Path</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Meta Title</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Meta Description</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Flags</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Path</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider hidden md:table-cell">Meta Title</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider hidden lg:table-cell">Meta Description</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Flags</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-[var(--line)]">
                 {overrides.map(override => (
-                  <tr key={override.id} className="hover:bg-gray-50 transition-colors">
+                  <tr key={override.id} className="hover:bg-[var(--paper2)] transition-colors">
                     <td className="px-6 py-4">
-                      <span className="text-sm font-medium text-gray-900 font-mono">{override.path}</span>
+                      <span className="text-sm font-medium text-[var(--ink)] font-mono">{override.path}</span>
                     </td>
                     <td className="px-6 py-4 hidden md:table-cell">
-                      <span className="text-sm text-gray-600 line-clamp-1" title={override.metaTitle || ''}>
-                        {override.metaTitle || <span className="text-gray-300">--</span>}
+                      <span className="text-sm text-[var(--ink2)] line-clamp-1" title={override.metaTitle || ''}>
+                        {override.metaTitle || <span className="text-[var(--line)]">--</span>}
                       </span>
                     </td>
                     <td className="px-6 py-4 hidden lg:table-cell max-w-xs">
-                      <span className="text-sm text-gray-500 line-clamp-1" title={override.metaDescription || ''}>
-                        {override.metaDescription || <span className="text-gray-300">--</span>}
+                      <span className="text-sm text-[var(--muted)] line-clamp-1" title={override.metaDescription || ''}>
+                        {override.metaDescription || <span className="text-[var(--line)]">--</span>}
                       </span>
                     </td>
                     <td className="px-6 py-4">
@@ -406,7 +406,7 @@ export default function AdminSEO() {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => openEditForm(override)}
-                          className="p-1.5 text-gray-400 hover:text-violet-600 transition-colors rounded-lg hover:bg-violet-50"
+                          className="p-1.5 text-[var(--muted)] hover:text-[var(--ink)] transition-colors rounded-lg hover:bg-[rgba(10,22,40,0.08)]"
                           title="Edit"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -416,7 +416,7 @@ export default function AdminSEO() {
                         <button
                           onClick={() => handleDelete(override.id, override.path)}
                           disabled={deleting === override.id}
-                          className="p-1.5 text-gray-400 hover:text-red-600 transition-colors rounded-lg hover:bg-red-50 disabled:opacity-50"
+                          className="p-1.5 text-[var(--muted)] hover:text-red-600 transition-colors rounded-lg hover:bg-red-50 disabled:opacity-50"
                           title="Delete"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -434,22 +434,22 @@ export default function AdminSEO() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
-            <p className="text-sm text-gray-500">
+          <div className="px-6 py-4 border-t border-[var(--line)] flex items-center justify-between">
+            <p className="text-sm text-[var(--muted)]">
               Showing {page * limit + 1}--{Math.min((page + 1) * limit, total)} of {total}
             </p>
             <div className="flex gap-2">
               <button
                 onClick={() => setPage(p => Math.max(0, p - 1))}
                 disabled={page === 0}
-                className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1.5 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Previous
               </button>
               <button
                 onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
                 disabled={page >= totalPages - 1}
-                className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1.5 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Next
               </button>

@@ -5,35 +5,44 @@ import { users, auditLog } from '../../../db/schema';
 import {
   getSessionFromRequest,
   hasRole,
-  createSessionCookie,
+  createImpersonationCookie,
   logAuthEvent,
   getClientIpFromRequest,
-} from '../../../utils/auth';
+} from '../../../utils/auth.js';
 
 export const prerender = false;
 
+const json = (data: unknown, status = 200) =>
+  new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+/**
+ * Reject anything that isn't a same-origin relative path.
+ * Allows `/foo`, blocks `//evil.com`, `https://...`, `javascript:...`, etc.
+ */
+function isSafeRelativePath(value: string | undefined | null): value is string {
+  if (!value || typeof value !== 'string') return false;
+  if (!value.startsWith('/')) return false;
+  if (value.startsWith('//')) return false;
+  if (/[\r\n]/.test(value)) return false;
+  if (/^\/[a-z]+:/i.test(value)) return false;
+  return true;
+}
+
 /**
  * POST /api/admin/impersonate
- * Admin-only: switch into another user's session with a single click.
- * Logs the impersonation event for audit trail.
+ * Admin-only: switch into another user's session for support.
+ * Issues a 1-hour impersonation cookie with isImpersonation=true.
  */
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
-  if (!session) {
-    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
-      status: 401,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
-  if (!hasRole(session, 'admin')) {
-    return new Response(JSON.stringify({ error: 'Forbidden — admin access required' }), {
-      status: 403,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
+  if (!session) return json({ error: 'Unauthorized' }, 401);
+  if (!hasRole(session, 'admin')) return json({ error: 'Forbidden — admin access required' }, 403);
 
   let targetUserId: string;
-  let redirectTo: string;
+  let redirectTo: string | undefined;
 
   const contentType = request.headers.get('content-type') || '';
 
@@ -43,38 +52,19 @@ export const POST: APIRoute = async ({ request }) => {
       targetUserId = body.userId;
       redirectTo = body.redirectTo;
     } catch {
-      return new Response(JSON.stringify({ error: 'Invalid request body' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return json({ error: 'Invalid request body' }, 400);
     }
   } else if (contentType.includes('application/x-www-form-urlencoded') || contentType.includes('multipart/form-data')) {
     const formData = await request.formData();
     targetUserId = formData.get('userId') as string;
-    redirectTo = formData.get('redirectTo') as string;
+    redirectTo = formData.get('redirectTo') as string | undefined;
   } else {
-    return new Response(JSON.stringify({ error: 'Unsupported content type' }), {
-      status: 415,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return json({ error: 'Unsupported content type' }, 415);
   }
 
-  if (!targetUserId) {
-    return new Response(JSON.stringify({ error: 'userId is required' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
+  if (!targetUserId) return json({ error: 'userId is required' }, 400);
+  if (targetUserId === session.userId) return json({ error: 'Cannot impersonate yourself' }, 400);
 
-  // Prevent self-impersonation
-  if (targetUserId === session.userId) {
-    return new Response(JSON.stringify({ error: 'Cannot impersonate yourself' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
-  // Fetch target user
   const results = await db.select({
     id: users.id,
     email: users.email,
@@ -84,29 +74,25 @@ export const POST: APIRoute = async ({ request }) => {
   }).from(users).where(eq(users.id, targetUserId)).limit(1);
 
   const targetUser = results[0];
-  if (!targetUser) {
-    return new Response(JSON.stringify({ error: 'User not found' }), {
-      status: 404,
-      headers: { 'Content-Type': 'application/json' },
-    });
+  if (!targetUser) return json({ error: 'User not found' }, 404);
+
+  // Block impersonation of other admins — defense in depth against
+  // privilege escalation via stolen impersonation tokens.
+  if (targetUser.role === 'admin') {
+    return json({ error: 'Cannot impersonate another admin' }, 403);
   }
 
-  // Build impersonation payload
-  const impersonationPayload = {
+  const impersonationCookie = createImpersonationCookie({
     userId: targetUser.id,
     email: targetUser.email,
     role: targetUser.role,
     clinicId: targetUser.clinicId ?? undefined,
-  };
+  });
 
-  // Create session cookie for the target user
-  const impersonationCookie = createSessionCookie(impersonationPayload);
+  // Validate redirect destination — only same-origin relative paths.
+  const fallbackDestination = targetUser.role === 'clinic_owner' ? '/portal/' : '/admin/dashboard';
+  const destination = isSafeRelativePath(redirectTo) ? redirectTo : fallbackDestination;
 
-  // Determine redirect destination
-  const destination = redirectTo
-    || (targetUser.role === 'clinic_owner' ? '/portal/' : '/admin/dashboard');
-
-  // Log impersonation event for audit
   const ip = getClientIpFromRequest(request);
   const userAgent = request.headers.get('user-agent') || '';
 
@@ -127,14 +113,13 @@ export const POST: APIRoute = async ({ request }) => {
     action: 'impersonate_user',
     entityType: 'user',
     entityId: targetUser.id,
-    metadata: {
+    details: {
       targetEmail: targetUser.email,
       targetRole: targetUser.role,
       impersonatorEmail: session.email,
     },
   });
 
-  // Redirect with the impersonation cookie set
   return new Response(null, {
     status: 302,
     headers: {

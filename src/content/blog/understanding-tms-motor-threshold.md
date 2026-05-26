@@ -4,7 +4,7 @@ description: "Your motor threshold number isn't just a technical calibration —
 publishDate: 2026-04-17
 category: research
 author: Dr. Michael Torres
-image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=400&fit=crop"
+image: "/images/blog-covers/understanding-tms-motor-threshold.svg"
 tags: ["tms", "motor-threshold", "dosing", "treatment-parameters", "personalized"]
 ---
 
@@ -76,35 +76,35 @@ There's no proven way to voluntarily change your motor threshold — it's determ
 
 Motor threshold measurement is one of the most important personalization steps in your TMS treatment. It's not an arbitrary number — it's a direct measurement of your brain's responsiveness, used to calibrate the dose specifically right for you. If you're curious about your motor threshold number, ask your technician. Understanding the numbers behind your treatment is part of being an informed patient — and informed patients tend to be more engaged, which itself predicts better outcomes.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What does it mean if my motor threshold is high?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What does it mean if my motor threshold is high?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">High motor threshold (above 55% of machine output) typically means you have more resistance to magnetic field penetration, possibly due to thicker skull or more cerebrospinal fluid. Your provider may need higher machine settings, which sometimes means more scalp discomfort. Some evidence suggests high-MT patients may benefit from slightly longer treatment courses to achieve the same neural activation.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">High motor threshold (above 55% of machine output) typically means you have more resistance to magnetic field penetration, possibly due to thicker skull or more cerebrospinal fluid. Your provider may need higher machine settings, which sometimes means more scalp discomfort. Some evidence suggests high-MT patients may benefit from slightly longer treatment courses to achieve the same neural activation.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I do anything to change my motor threshold?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I do anything to change my motor threshold?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">There is no proven way to voluntarily change your motor threshold -- it is determined by anatomy. However, be consistent about head positioning during sessions, as the magnetic field path is sensitive to coil angle and position. Avoid significant caffeine intake changes, and do not change medications during treatment without telling your provider, as some medications can affect the seizure threshold.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">There is no proven way to voluntarily change your motor threshold -- it is determined by anatomy. However, be consistent about head positioning during sessions, as the magnetic field path is sensitive to coil angle and position. Avoid significant caffeine intake changes, and do not change medications during treatment without telling your provider, as some medications can affect the seizure threshold.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How is my treatment dose related to my motor threshold?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How is my treatment dose related to my motor threshold?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Your treatment dose is typically set at 120% of motor threshold for standard high-frequency TMS. Two patients receiving "100% MT dose" are receiving doses personalized to their individual brain responses. Theta Burst Stimulation uses different dosing, typically 80% MT, since the burst pattern is more efficient at activating neurons.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Your treatment dose is typically set at 120% of motor threshold for standard high-frequency TMS. Two patients receiving "100% MT dose" are receiving doses personalized to their individual brain responses. Theta Burst Stimulation uses different dosing, typically 80% MT, since the burst pattern is more efficient at activating neurons.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

@@ -4,7 +4,7 @@ description: "TMS may help manage both motor symptoms and depression in Parkinso
 publishDate: 2026-04-15
 category: treatment
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-parkinsons.svg"
 tags: ["tms", "parkinsons", "motor-symptoms", "tremor", "gait", "depression", "movement-disorder"]
 ---
 
@@ -110,35 +110,35 @@ While TMS for Parkinson's is not FDA-cleared in the United States, it is increas
 
 As the evidence base grows, TMS may become a standard adjunctive treatment for selected Parkinson's patients, offering meaningful improvements in quality of life when combined with optimal dopaminergic therapy.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for Parkinson's disease?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for Parkinson's disease?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS for Parkinson's is not FDA-cleared in the United States. It is increasingly offered at academic movement disorders centers but remains an off-label treatment. Patients should seek treatment from centers with experience in both TMS and Parkinson's disease.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS for Parkinson's is not FDA-cleared in the United States. It is increasingly offered at academic movement disorders centers but remains an off-label treatment. Patients should seek treatment from centers with experience in both TMS and Parkinson's disease.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What symptoms of Parkinson's can TMS help with?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What symptoms of Parkinson's can TMS help with?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS can help with motor symptoms (particularly bradykinesia and rigidity), Parkinson's-related depression, and freezing of gait. The evidence is strongest for bradykinesia and rigidity; effects on tremor are more variable.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS can help with motor symptoms (particularly bradykinesia and rigidity), Parkinson's-related depression, and freezing of gait. The evidence is strongest for bradykinesia and rigidity; effects on tremor are more variable.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS worsen Parkinson's motor symptoms?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS worsen Parkinson's motor symptoms?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS for Parkinson's depression does not appear to worsen motor symptoms. Proper motor threshold determination is especially important in Parkinson's patients since corticospinal tract dysfunction may affect threshold values. Treatment should be administered by experienced providers.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS for Parkinson's depression does not appear to worsen motor symptoms. Proper motor threshold determination is especially important in Parkinson's patients since corticospinal tract dysfunction may affect threshold values. Treatment should be administered by experienced providers.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

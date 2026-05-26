@@ -63,23 +63,23 @@ The math works.
 
 ---
 
-<div class="not-prose my-8 bg-gradient-to-r from-slate-50 to-gray-50 border border-gray-200 rounded-2xl p-8">
+<div class="not-prose my-8 bg-gradient-to-r from-[var(--paper2)] to-[var(--paper)] border border-[var(--line)] rounded-2xl p-8">
   <div class="flex items-start gap-4">
-    <div class="shrink-0 w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
-      <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="shrink-0 w-12 h-12 bg-[var(--paper2)] rounded-xl flex items-center justify-center">
+      <svg class="w-6 h-6 text-[var(--ink2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
     </div>
     <div>
-      <p class="text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Time Comparison</p>
-      <p class="text-slate-800 leading-relaxed">Standard TMS: 19–37 minutes per session. Theta burst: 3 minutes per session. Over a full course of 36 sessions, theta burst saves over 9 hours of chair time.</p>
+      <p class="text-xs font-bold text-[var(--ink2)] uppercase tracking-wider mb-1">Time Comparison</p>
+      <p class="text-[var(--ink)] leading-relaxed">Standard TMS: 19–37 minutes per session. Theta burst: 3 minutes per session. Over a full course of 36 sessions, theta burst saves over 9 hours of chair time.</p>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic Near You</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>

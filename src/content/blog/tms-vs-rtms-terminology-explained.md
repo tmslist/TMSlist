@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-17
 category: patient-guide
 tags: ["terminology", "rTMS", "definitions", "understanding terms"]
-image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-vs-rtms-terminology-explained.svg"
 ---
 
 If you have spent any time researching TMS, you have encountered a confusing array of terms: rTMS, iTBS, sTMS, TMS, Deep TMS, theta burst, accelerated TMS. Are these different treatments? Are they the same treatment with different names? Are some better than others?

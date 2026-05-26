@@ -4,7 +4,7 @@ description: "Transcranial magnetic stimulation shows promise as a treatment for
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-social-anxiety.svg"
 tags: ["tms", "social-anxiety", "brain-stimulation"]
 ---
 
@@ -64,35 +64,35 @@ If you are considering TMS for social anxiety disorder, consult with a board-cer
 
 The field of neuromodulation for anxiety disorders is evolving rapidly. As research continues to clarify which protocols work best for which patients, TMS is positioned to become an increasingly important tool in the psychiatrist's arsenal against social anxiety.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for social anxiety disorder?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for social anxiety disorder?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS is not FDA-cleared specifically for social anxiety disorder. It is FDA-cleared for major depressive disorder, OCD, and smoking cessation. However, physicians may prescribe TMS off-label for social anxiety, and many psychiatric practices already do so for treatment-resistant cases.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS is not FDA-cleared specifically for social anxiety disorder. It is FDA-cleared for major depressive disorder, OCD, and smoking cessation. However, physicians may prescribe TMS off-label for social anxiety, and many psychiatric practices already do so for treatment-resistant cases.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does insurance cover TMS for social anxiety?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does insurance cover TMS for social anxiety?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Coverage varies significantly. Some insurers will cover TMS for social anxiety if there is a comorbid diagnosis of depression, while others require the patient to pay out of pocket. Patients should check with their provider and insurance plan before beginning treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Coverage varies significantly. Some insurers will cover TMS for social anxiety if there is a comorbid diagnosis of depression, while others require the patient to pay out of pocket. Patients should check with their provider and insurance plan before beginning treatment.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What TMS protocol is used for social anxiety disorder?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What TMS protocol is used for social anxiety disorder?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS for social anxiety typically targets the dlPFC. Right-sided low-frequency (1 Hz) TMS aims to reduce amygdala hyperactivity, while left-sided high-frequency TMS aims to enhance prefrontal regulatory function. Some protocols use bilateral stimulation targeting both hemispheres.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS for social anxiety typically targets the dlPFC. Right-sided low-frequency (1 Hz) TMS aims to reduce amygdala hyperactivity, while left-sided high-frequency TMS aims to enhance prefrontal regulatory function. Some protocols use bilateral stimulation targeting both hemispheres.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

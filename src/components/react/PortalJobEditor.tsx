@@ -103,8 +103,8 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
     }
   }
 
-  const inputCls = "w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-colors";
-  const labelCls = "block text-sm font-semibold text-slate-700 mb-1.5";
+  const inputCls = "w-full px-4 py-2.5 text-sm border border-[var(--line)] rounded-xl focus:outline-none focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-colors";
+  const labelCls = "block text-sm font-semibold text-[var(--ink2)] mb-1.5";
 
   return (
     <form onSubmit={handleSubmit}>
@@ -115,13 +115,13 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
             <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
               i < step ? 'bg-emerald-500 text-white' :
               i === step ? 'bg-emerald-600 text-white' :
-              'bg-slate-200 text-slate-500'
+              'bg-[var(--paper2)] text-[var(--muted)]'
             }`}>
               {i < step ? '✓' : i + 1}
             </div>
-            <span className={`text-xs font-medium hidden sm:block ${i === step ? 'text-emerald-700' : 'text-slate-400'}`}>{s}</span>
+            <span className={`text-xs font-medium hidden sm:block ${i === step ? 'text-emerald-700' : 'text-[var(--muted)]'}`}>{s}</span>
             {i < STEPS.length - 1 && (
-              <div className={`w-8 h-0.5 rounded ${i < step ? 'bg-emerald-500' : 'bg-slate-200'}`} />
+              <div className={`w-8 h-0.5 rounded ${i < step ? 'bg-emerald-500' : 'bg-[var(--paper2)]'}`} />
             )}
           </div>
         ))}
@@ -144,7 +144,7 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
             </select>
             {errors.roleCategory && <p className="text-xs text-red-500 mt-1">{errors.roleCategory}</p>}
             {roleCategory && (
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-[var(--muted)] mt-1">
                 {JOB_ROLE_CATEGORIES.find(c => c.value === roleCategory)?.label}
               </p>
             )}
@@ -178,15 +178,15 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
               </select>
             </div>
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-1.5">Remote?</label>
+              <label className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">Remote?</label>
               <label className="flex items-center gap-2 mt-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={remote}
                   onChange={(e) => setRemote(e.target.checked)}
-                  className="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500"
+                  className="w-4 h-4 text-emerald-600 rounded border-[var(--line)] focus:ring-emerald-500"
                 />
-                <span className="text-sm text-slate-600">Remote work available</span>
+                <span className="text-sm text-[var(--ink2)]">Remote work available</span>
               </label>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
                 className={inputCls}
               />
             </div>
-            <p className="text-xs text-slate-400 mt-1">Enter annual salary in dollars, or leave blank for "Competitive"</p>
+            <p className="text-xs text-[var(--muted)] mt-1">Enter annual salary in dollars, or leave blank for "Competitive"</p>
           </div>
 
           <div>
@@ -235,7 +235,7 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
               placeholder="e.g. $65k – $85k + bonus"
               className={inputCls}
             />
-            <p className="text-xs text-slate-400 mt-1">Override automatic formatting (optional)</p>
+            <p className="text-xs text-[var(--muted)] mt-1">Override automatic formatting (optional)</p>
           </div>
 
           <div>
@@ -247,7 +247,7 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
               min={new Date().toISOString().slice(0, 10)}
               className={inputCls}
             />
-            <p className="text-xs text-slate-400 mt-1">Job auto-closes after this date (optional)</p>
+            <p className="text-xs text-[var(--muted)] mt-1">Job auto-closes after this date (optional)</p>
           </div>
         </div>
       )}
@@ -267,12 +267,12 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
             />
             <div className="flex justify-between mt-1">
               {errors.description && <p className="text-xs text-red-500">{errors.description}</p>}
-              <p className="text-xs text-slate-400 ml-auto">{description.length}/10000</p>
+              <p className="text-xs text-[var(--muted)] ml-auto">{description.length}/10000</p>
             </div>
           </div>
 
           <div>
-            <label className={labelCls}>Requirements <span className="text-slate-400 text-xs">(optional)</span></label>
+            <label className={labelCls}>Requirements <span className="text-[var(--muted)] text-xs">(optional)</span></label>
             <textarea
               value={requirements}
               onChange={(e) => setRequirements(e.target.value)}
@@ -284,7 +284,7 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
           </div>
 
           <div>
-            <label className={labelCls}>Responsibilities <span className="text-slate-400 text-xs">(optional)</span></label>
+            <label className={labelCls}>Responsibilities <span className="text-[var(--muted)] text-xs">(optional)</span></label>
             <textarea
               value={responsibilities}
               onChange={(e) => setResponsibilities(e.target.value)}
@@ -296,7 +296,7 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
           </div>
 
           <div>
-            <label className={labelCls}>Benefits <span className="text-slate-400 text-xs">(optional)</span></label>
+            <label className={labelCls}>Benefits <span className="text-[var(--muted)] text-xs">(optional)</span></label>
             <textarea
               value={benefits}
               onChange={(e) => setBenefits(e.target.value)}
@@ -321,11 +321,11 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
               placeholder={clinicEmail ?? 'hiring@clinic.com'}
               className={inputCls}
             />
-            <p className="text-xs text-slate-400 mt-1">Applications will be forwarded here. Defaults to your clinic email.</p>
+            <p className="text-xs text-[var(--muted)] mt-1">Applications will be forwarded here. Defaults to your clinic email.</p>
           </div>
 
           <div>
-            <label className={labelCls}>External Application URL <span className="text-slate-400 text-xs">(optional)</span></label>
+            <label className={labelCls}>External Application URL <span className="text-[var(--muted)] text-xs">(optional)</span></label>
             <input
               type="url"
               value={applicationUrl}
@@ -333,19 +333,19 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
               placeholder="https://yourats.com/jobs/123"
               className={inputCls}
             />
-            <p className="text-xs text-slate-400 mt-1">If using an external system (Greenhouse, Lever, etc.), paste the URL here.</p>
+            <p className="text-xs text-[var(--muted)] mt-1">If using an external system (Greenhouse, Lever, etc.), paste the URL here.</p>
           </div>
 
           {/* Preview card */}
-          <div className="border border-slate-200 rounded-2xl p-5 bg-slate-50">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Preview</p>
-            <div className="bg-white rounded-xl border border-slate-200 p-4">
-              <h4 className="font-bold text-slate-900 mb-1">{title || 'Your Job Title'}</h4>
-              <p className="text-sm text-slate-500 mb-2">
+          <div className="border border-[var(--line)] rounded-2xl p-5 bg-[var(--paper2)]">
+            <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-3">Preview</p>
+            <div className="bg-white rounded-xl border border-[var(--line)] p-4">
+              <h4 className="font-bold text-[var(--ink)] mb-1">{title || 'Your Job Title'}</h4>
+              <p className="text-sm text-[var(--muted)] mb-2">
                 {[location || 'Location', employmentType ? EMPLOYMENT_TYPES[employmentType] : 'Full-time'].join(' · ')}
                 {remote ? ' · Remote OK' : ''}
               </p>
-              <p className="text-xs text-slate-400 truncate">
+              <p className="text-xs text-[var(--muted)] truncate">
                 {description ? description.slice(0, 120) + '...' : 'Your job description will appear here...'}
               </p>
             </div>
@@ -354,11 +354,11 @@ export default function PortalJobEditor({ job, clinicEmail, onSave, onCancel }: 
       )}
 
       {/* Navigation */}
-      <div className="flex items-center justify-between mt-8 pt-4 border-t border-slate-100">
+      <div className="flex items-center justify-between mt-8 pt-4 border-t border-[var(--line)]">
         <button
           type="button"
           onClick={step === 0 ? onCancel : prev}
-          className="px-5 py-2.5 text-sm text-slate-600 hover:text-slate-900 font-medium transition-colors"
+          className="px-5 py-2.5 text-sm text-[var(--ink2)] hover:text-[var(--ink)] font-medium transition-colors"
         >
           {step === 0 ? 'Cancel' : '← Back'}
         </button>

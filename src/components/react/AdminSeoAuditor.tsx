@@ -85,7 +85,7 @@ export default function AdminSeoAuditor({ initialAudits = [] }: SeoAuditsProps) 
   const issueTypeColor = (type: string) => {
     if (type === 'error') return 'bg-red-100 text-red-700';
     if (type === 'warning') return 'bg-amber-100 text-amber-700';
-    return 'bg-blue-100 text-blue-700';
+    return 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]';
   };
 
   return (
@@ -93,50 +93,50 @@ export default function AdminSeoAuditor({ initialAudits = [] }: SeoAuditsProps) 
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">SEO Auditor</h2>
-          <p className="text-sm text-gray-500 mt-1">Audit pages for SEO best practices and issues</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)]">SEO Auditor</h2>
+          <p className="text-sm text-[var(--muted)] mt-1">Audit pages for SEO best practices and issues</p>
         </div>
       </div>
 
       {/* Overall Score */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Average Score</p>
-          <p className="text-3xl font-bold text-gray-900 mt-1">79.5</p>
-          <p className="text-xs text-gray-400 mt-1">Across all pages</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Average Score</p>
+          <p className="text-3xl font-bold text-[var(--ink)] mt-1">79.5</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Across all pages</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Critical Issues</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Critical Issues</p>
           <p className="text-3xl font-bold text-red-600 mt-1">4</p>
-          <p className="text-xs text-gray-400 mt-1">Need immediate fix</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Need immediate fix</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Warnings</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Warnings</p>
           <p className="text-3xl font-bold text-amber-600 mt-1">8</p>
-          <p className="text-xs text-gray-400 mt-1">Should be addressed</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Should be addressed</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Info Tips</p>
-          <p className="text-3xl font-bold text-blue-600 mt-1">5</p>
-          <p className="text-xs text-gray-400 mt-1">Improvements available</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Info Tips</p>
+          <p className="text-3xl font-bold text-[var(--ink)] mt-1">5</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Improvements available</p>
         </div>
       </div>
 
       {/* Scan New Page */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
-        <h3 className="font-semibold text-gray-900 mb-3">Scan a Page</h3>
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm p-5">
+        <h3 className="font-semibold text-[var(--ink)] mb-3">Scan a Page</h3>
         <div className="flex items-center gap-3">
           <input
             type="url"
             value={scanUrl}
             onChange={(e) => setScanUrl(e.target.value)}
             placeholder="https://tmslist.com/page-url"
-            className="flex-1 text-sm border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
+            className="flex-1 text-sm border border-[var(--line)] rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(10,22,40,0.2)] dark:bg-[var(--ink2)] dark:text-[var(--line)] dark:border-[var(--ink2)]"
           />
           <button
             onClick={handleScan}
             disabled={scanning || !scanUrl}
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-[var(--ink)] rounded-lg hover:bg-[var(--ink)] disabled:opacity-50 transition-colors whitespace-nowrap"
           >
             {scanning ? (
               <>
@@ -159,12 +159,12 @@ export default function AdminSeoAuditor({ initialAudits = [] }: SeoAuditsProps) 
       </div>
 
       {/* On-Page SEO Checklist */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
-        <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
-          <h3 className="font-semibold text-gray-900">On-Page SEO Checklist</h3>
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm">
+        <div className="px-5 py-4 border-b border-[var(--line)] flex items-center justify-between">
+          <h3 className="font-semibold text-[var(--ink)]">On-Page SEO Checklist</h3>
           <button
             onClick={() => setShowChecks(!showChecks)}
-            className="text-xs text-gray-500 hover:text-gray-700"
+            className="text-xs text-[var(--muted)] hover:text-[var(--ink2)]"
           >
             {showChecks ? 'Collapse' : 'Expand'}
           </button>
@@ -203,13 +203,13 @@ export default function AdminSeoAuditor({ initialAudits = [] }: SeoAuditsProps) 
                 </div>
               </div>
               {/* Images Alt */}
-              <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
-                <svg className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-start gap-3 p-3 bg-[var(--paper2)] rounded-lg border border-[var(--line)]">
+                <svg className="w-5 h-5 text-[var(--ink)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
-                  <p className="text-sm font-medium text-blue-900">Images with Alt Text</p>
-                  <p className="text-xs text-blue-700">3 images need alt attributes</p>
+                  <p className="text-sm font-medium text-[var(--ink)]">Images with Alt Text</p>
+                  <p className="text-xs text-[var(--ink)]">3 images need alt attributes</p>
                 </div>
               </div>
               {/* Schema.org */}
@@ -240,22 +240,22 @@ export default function AdminSeoAuditor({ initialAudits = [] }: SeoAuditsProps) 
       {/* Page Scores */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {audits.map((audit) => (
-          <div key={audit.url} className="bg-white rounded-xl border border-gray-200 shadow-sm">
-            <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+          <div key={audit.url} className="bg-white rounded-xl border border-[var(--line)] shadow-sm">
+            <div className="px-5 py-4 border-b border-[var(--line)] flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${scoreBg(audit.score)}`}>
                   <span className={`text-lg font-bold ${scoreColor(audit.score)}`}>{audit.score}</span>
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900 text-sm">{audit.url}</p>
-                  <p className="text-xs text-gray-400">
+                  <p className="font-medium text-[var(--ink)] text-sm">{audit.url}</p>
+                  <p className="text-xs text-[var(--muted)]">
                     Scanned {new Date(audit.scannedAt).toLocaleDateString('en', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
               </div>
-              <button className="text-xs text-blue-600 hover:text-blue-700 font-medium">Re-scan</button>
+              <button className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium">Re-scan</button>
             </div>
-            <div className="divide-y divide-gray-50">
+            <div className="divide-y divide-[var(--line)]">
               {audit.issues
                 .filter(issue => filterType === 'all' || issue.type === filterType)
                 .map((issue, idx) => (
@@ -264,13 +264,13 @@ export default function AdminSeoAuditor({ initialAudits = [] }: SeoAuditsProps) 
                       {issue.type}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900">{issue.message}</p>
+                      <p className="text-sm font-medium text-[var(--ink)]">{issue.message}</p>
                       {issue.element && (
-                        <p className="text-xs text-gray-400 font-mono mt-0.5">{issue.element}</p>
+                        <p className="text-xs text-[var(--muted)] font-mono mt-0.5">{issue.element}</p>
                       )}
                       <div className="flex items-center gap-2 mt-1">
-                        <span className="text-xs text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">{issue.category}</span>
-                        <span className="text-xs text-blue-600">{issue.recommendation}</span>
+                        <span className="text-xs text-[var(--muted)] bg-[var(--paper2)] px-1.5 py-0.5 rounded">{issue.category}</span>
+                        <span className="text-xs text-[var(--ink)]">{issue.recommendation}</span>
                       </div>
                     </div>
                   </div>

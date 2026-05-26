@@ -198,28 +198,28 @@ export function MEPWaveform({ intensityPct, pulseCount, isPlaying }: MEPWaveform
   }, [intensityPct, reducedMotion]);
 
   const thresholdLabel = intensityPct >= 100 ? 'Above MT' : intensityPct >= 80 ? 'Near MT' : 'Below MT';
-  const thresholdColor = intensityPct >= 100 ? 'text-emerald-400' : intensityPct >= 80 ? 'text-amber-400' : 'text-slate-400';
+  const thresholdColor = intensityPct >= 100 ? 'text-emerald-400' : intensityPct >= 80 ? 'text-amber-400' : 'text-gray-400';
 
   return (
     <div className="flex flex-col gap-1.5">
       {/* Header with toggle */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-cyan-400 animate-pulse' : 'bg-slate-500'}`} />
-          <span className="text-[10px] font-semibold text-slate-300 uppercase tracking-wider">MEP Response</span>
+          <div className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-cyan-400 animate-pulse' : 'bg-gray-500'}`} />
+          <span className="text-[10px] font-semibold text-gray-300 uppercase tracking-wider">MEP Response</span>
         </div>
         <div className="flex items-center gap-2">
           {/* View mode toggle */}
-          <div className="flex bg-slate-800/80 border border-slate-700/50 rounded-lg overflow-hidden">
+          <div className="flex bg-gray-800/80 border border-gray-700/50 rounded-lg overflow-hidden">
             <button
               onClick={() => setViewMode('emg')}
-              className={`px-2 py-0.5 text-[8px] font-medium transition-colors ${viewMode === 'emg' ? 'bg-violet-600/30 text-violet-300' : 'text-slate-500 hover:text-slate-300'}`}
+              className={`px-2 py-0.5 text-[8px] font-medium transition-colors ${viewMode === 'emg' ? 'bg-orange-600/30 text-orange-300' : 'text-gray-500 hover:text-gray-300'}`}
             >
               EMG
             </button>
             <button
               onClick={() => setViewMode('amplitude')}
-              className={`px-2 py-0.5 text-[8px] font-medium transition-colors ${viewMode === 'amplitude' ? 'bg-violet-600/30 text-violet-300' : 'text-slate-500 hover:text-slate-300'}`}
+              className={`px-2 py-0.5 text-[8px] font-medium transition-colors ${viewMode === 'amplitude' ? 'bg-orange-600/30 text-orange-300' : 'text-gray-500 hover:text-gray-300'}`}
             >
               Amplitude
             </button>
@@ -228,7 +228,7 @@ export function MEPWaveform({ intensityPct, pulseCount, isPlaying }: MEPWaveform
       </div>
 
       {/* Status row */}
-      <div className="flex items-center gap-3 text-[9px] text-slate-400">
+      <div className="flex items-center gap-3 text-[9px] text-gray-400">
         <span className="font-mono">{intensityPct}% MT</span>
         <span>·</span>
         <span className="font-mono">{pulseCount > 0 ? pulseCount.toLocaleString() : '—'} pulses</span>
@@ -243,14 +243,14 @@ export function MEPWaveform({ intensityPct, pulseCount, isPlaying }: MEPWaveform
       </div>
 
       {/* Waveform */}
-      <div className="relative rounded-lg overflow-hidden bg-slate-900/80 border border-slate-700/50">
+      <div className="relative rounded-lg overflow-hidden bg-gray-900/80 border border-gray-700/50">
         <canvas
           ref={canvasRef}
           className="w-full"
           style={{ height: '100px' }}
           aria-label={`Motor Evoked Potential waveform, ${intensityPct}% MT, ${pulseCount} pulses`}
         />
-        <div className="absolute top-1.5 right-2 flex flex-col gap-0.5 text-[7px] text-slate-400/50 font-mono">
+        <div className="absolute top-1.5 right-2 flex flex-col gap-0.5 text-[7px] text-gray-400/50 font-mono">
           <span>artifact →</span>
           <span>peak @ 35ms</span>
         </div>
@@ -262,14 +262,14 @@ export function MEPWaveform({ intensityPct, pulseCount, isPlaying }: MEPWaveform
       </div>
 
       {/* Amplitude trend */}
-      <div className="relative rounded-lg overflow-hidden bg-slate-900/60 border border-slate-700/30">
+      <div className="relative rounded-lg overflow-hidden bg-gray-900/60 border border-gray-700/30">
         <canvas
           ref={ampCanvasRef}
           className="w-full"
           style={{ height: '28px' }}
           aria-label="MEP amplitude trend over last 20 pulses"
         />
-        <div className="absolute bottom-0.5 left-1.5 text-[7px] text-slate-500/50 font-mono">amplitude trend (last 20)</div>
+        <div className="absolute bottom-0.5 left-1.5 text-[7px] text-gray-500/50 font-mono">amplitude trend (last 20)</div>
       </div>
     </div>
   );

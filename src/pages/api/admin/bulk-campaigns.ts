@@ -5,7 +5,7 @@ import { db } from '../../../db';
 import {
   users, clinics, bulkEmailCampaigns, bulkSmsCampaigns, auditLog
 } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -59,6 +59,8 @@ export const GET: APIRoute = async ({ request, url }) => {
   }
 };
 
+const MAX_RECIPIENTS_PER_CAMPAIGN = 10_000;
+
 // POST: Create and send campaign (email or SMS)
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
@@ -66,9 +68,26 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ error: 'Unauthorized' }, 401);
   }
 
+  // Hard rate limit so a single mistaken click can't fire multiple
+  // mass-sends in the same hour.
+  const { strictRateLimit, getClientIp } = await import('../../../utils/rateLimit');
+  const sendLimited = await strictRateLimit(
+    `${session.userId}:${getClientIp(request)}`,
+    1,
+    '1 h',
+    'admin:bulk-campaign-send',
+  );
+  if (sendLimited) return sendLimited;
+
   try {
     const body = await request.json();
     const type = body.type || 'email';
+    // Force a preview-then-confirm flow: the non-preview send MUST echo back
+    // the recipient count from the prior preview. Mismatch (or absent value)
+    // rejects, blocking accidental "send to everyone" clicks.
+    const confirmedRecipientCount = typeof body.confirmedRecipientCount === 'number'
+      ? body.confirmedRecipientCount
+      : null;
 
     if (type === 'email') {
       const parsed = emailCampaignSchema.safeParse(body);
@@ -87,6 +106,16 @@ export const POST: APIRoute = async ({ request }) => {
           subject,
           body: emailBody,
         });
+      }
+
+      if (recipients.length > MAX_RECIPIENTS_PER_CAMPAIGN) {
+        return json({ error: `Recipient count ${recipients.length} exceeds cap of ${MAX_RECIPIENTS_PER_CAMPAIGN}` }, 400);
+      }
+      if (confirmedRecipientCount !== recipients.length) {
+        return json({
+          error: 'confirmedRecipientCount does not match the current preview. Re-preview before sending.',
+          actualRecipientCount: recipients.length,
+        }, 409);
       }
 
       const [campaign] = await db.insert(bulkEmailCampaigns).values({
@@ -139,6 +168,16 @@ export const POST: APIRoute = async ({ request }) => {
           sample: recipients.slice(0, 3),
           message,
         });
+      }
+
+      if (recipients.length > MAX_RECIPIENTS_PER_CAMPAIGN) {
+        return json({ error: `Recipient count ${recipients.length} exceeds cap of ${MAX_RECIPIENTS_PER_CAMPAIGN}` }, 400);
+      }
+      if (confirmedRecipientCount !== recipients.length) {
+        return json({
+          error: 'confirmedRecipientCount does not match the current preview. Re-preview before sending.',
+          actualRecipientCount: recipients.length,
+        }, 409);
       }
 
       const [campaign] = await db.insert(bulkSmsCampaigns).values({

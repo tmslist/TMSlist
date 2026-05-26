@@ -4,9 +4,9 @@ import { useMemo } from 'react';
 import { useTMS } from './TMSContext';
 
 function getEFieldContextLabel(vpm: number): { label: string; color: string } {
-  if (vpm < 20) return { label: 'Subthreshold', color: 'text-blue-400' };
-  if (vpm < 40) return { label: 'Low therapeutic', color: 'text-cyan-400' };
-  if (vpm < 60) return { label: 'Therapeutic range', color: 'text-emerald-400' };
+  if (vpm < 20) return { label: 'Subthreshold', color: 'text-[var(--accent2)]' };
+  if (vpm < 40) return { label: 'Low therapeutic', color: 'text-[var(--warm)]' };
+  if (vpm < 60) return { label: 'Therapeutic range', color: 'text-[var(--accent2)]' };
   if (vpm < 80) return { label: 'Optimal', color: 'text-yellow-400' };
   return { label: 'High intensity', color: 'text-red-400' };
 }
@@ -47,8 +47,8 @@ export function EFieldGauge() {
   const gradientId = 'efield-gradient';
 
   return (
-    <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4">
-      <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-3">E-Field Strength</div>
+    <div className="bg-[var(--paper2)]/60 backdrop-blur-sm border border-[var(--line)]/50 rounded-2xl p-4">
+      <div className="text-[10px] font-semibold text-white/40 uppercase tracking-wider mb-3">E-Field Strength</div>
 
       <div className="flex items-center gap-3">
         {/* SVG gauge */}
@@ -64,7 +64,7 @@ export function EFieldGauge() {
               </linearGradient>
             </defs>
             {/* Track */}
-            <circle cx={cx} cy={cy} r={r} fill="none" stroke="#1e293b" strokeWidth="5" />
+            <circle cx={cx} cy={cy} r={r} fill="none" stroke="#1E2A3B" strokeWidth="5" />
             {/* Progress arc */}
             <circle
               cx={cx} cy={cy} r={r}
@@ -78,10 +78,10 @@ export function EFieldGauge() {
               style={{ transition: 'stroke-dashoffset 0.4s ease' }}
             />
             {/* Center text */}
-            <text x={cx} y={cy - 3} textAnchor="middle" fill="#f8fafc" fontSize="13" fontWeight="bold" fontFamily="monospace">
+            <text x={cx} y={cy - 3} textAnchor="middle" fill="#FBFAF7" fontSize="13" fontWeight="bold" fontFamily="monospace">
               {eFieldVpm}
             </text>
-            <text x={cx} y={cy + 10} textAnchor="middle" fill="#64748b" fontSize="7" fontFamily="sans-serif">
+            <text x={cx} y={cy + 10} textAnchor="middle" fill="#5A6B82" fontSize="7" fontFamily="sans-serif">
               V/m
             </text>
           </svg>
@@ -90,23 +90,23 @@ export function EFieldGauge() {
         {/* Stats */}
         <div className="flex flex-col gap-2 flex-1">
           <div className="flex items-center justify-between">
-            <span className="text-[9px] text-slate-500 uppercase tracking-wider">Intensity</span>
+            <span className="text-[9px] text-white/40 uppercase tracking-wider">Intensity</span>
             <span className={`text-[11px] font-mono font-bold ${context.color}`}>
               {context.label}
             </span>
           </div>
 
           {/* Scale labels */}
-          <div className="flex justify-between text-[8px] text-slate-600">
+          <div className="flex justify-between text-[8px] text-white/40">
             <span>0</span>
             <span>50</span>
             <span>100 V/m</span>
           </div>
 
           {/* Coil depth + angle context */}
-          <div className="text-[9px] text-slate-500">
-            <span className="text-slate-400">Depth: </span>{state.coilDepth.toFixed(2)}
-            <span className="ml-2 text-slate-400">Angle: </span>{state.coilAngle.toFixed(0)}°
+          <div className="text-[9px] text-white/40">
+            <span className="text-white/40">Depth: </span>{state.coilDepth.toFixed(2)}
+            <span className="ml-2 text-white/40">Angle: </span>{state.coilAngle.toFixed(0)}°
           </div>
         </div>
       </div>

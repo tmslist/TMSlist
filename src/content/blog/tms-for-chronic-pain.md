@@ -4,7 +4,7 @@ description: "FDA-cleared for migraine with aura, TMS is being studied for fibro
 publishDate: 2026-04-11
 category: treatment
 author: Dr. James Liu
-image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-chronic-pain.svg"
 tags: ["tms", "chronic-pain", "fibromyalgia", "migraine", "neuropathic-pain", "off-label"]
 ---
 
@@ -82,35 +82,35 @@ Not all TMS clinics offer pain applications — many only treat depression. Find
 
 TMS is no longer just a depression treatment. For patients with chronic pain conditions who have exhausted medication options, motor cortex and DLPFC TMS offer meaningful, non-pharmacological pain relief. While insurance coverage remains a challenge, the evidence for specific pain conditions — particularly migraine with aura and fibromyalgia — is strong enough that many pain specialists now consider TMS a first-line non-pharmacological intervention alongside physical therapy, cognitive behavioral therapy, and medication management.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for chronic pain conditions?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for chronic pain conditions?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS is FDA-cleared for migraine with aura using single-pulse devices (eNeura SpringZone or sTMS). For other pain conditions like fibromyalgia and neuropathic pain, TMS is used off-label but has growing evidence. Randomized trials show significant pain reduction for fibromyalgia, though insurance coverage for these off-label applications varies.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS is FDA-cleared for migraine with aura using single-pulse devices (eNeura SpringZone or sTMS). For other pain conditions like fibromyalgia and neuropathic pain, TMS is used off-label but has growing evidence. Randomized trials show significant pain reduction for fibromyalgia, though insurance coverage for these off-label applications varies.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What is the difference between TMS for pain vs. depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What is the difference between TMS for pain vs. depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Pain TMS targets the motor cortex (M1) rather than the DLPFC used for depression. The coil is placed over the central region of the brain rather than behind the forehead. Pain protocols typically involve slightly higher intensities and 10-14 sessions over 2-3 weeks. Some patients receive DLPFC TMS simultaneously to address the emotional suffering component of chronic pain.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Pain TMS targets the motor cortex (M1) rather than the DLPFC used for depression. The coil is placed over the central region of the brain rather than behind the forehead. Pain protocols typically involve slightly higher intensities and 10-14 sessions over 2-3 weeks. Some patients receive DLPFC TMS simultaneously to address the emotional suffering component of chronic pain.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long do pain relief effects from TMS last?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long do pain relief effects from TMS last?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Pain relief from TMS typically lasts 2-8 weeks per treatment course depending on the condition. Neuropathic pain relief often lasts 2-6 weeks. Fibromyalgia pain reduction effects have been shown to last 4-8 weeks. Because effects are temporary, most patients require maintenance sessions every 1-3 months to sustain pain relief long-term.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Pain relief from TMS typically lasts 2-8 weeks per treatment course depending on the condition. Neuropathic pain relief often lasts 2-6 weeks. Fibromyalgia pain reduction effects have been shown to last 4-8 weeks. Because effects are temporary, most patients require maintenance sessions every 1-3 months to sustain pain relief long-term.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

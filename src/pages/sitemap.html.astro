@@ -45,19 +45,19 @@ const sections = [
 <Layout title="Sitemap | TMS List" description="Browse all pages on TMS List — clinics by state, treatment guides, insurance coverage, comparisons, protocols, alternatives, and more.">
     <main class="container mx-auto px-4 py-12">
         <h1 class="text-4xl font-display font-bold mb-4">Sitemap</h1>
-        <p class="text-slate-500 mb-10">All pages on TMS List, organized by section.</p>
+        <p class="text-[var(--muted)] mb-10">All pages on TMS List, organized by section.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {sections.map(section => (
                 <div>
-                    <h2 class="text-lg font-display font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">{section.title}</h2>
+                    <h2 class="text-lg font-display font-bold text-[var(--ink)] border-b border-[var(--line)] pb-2 mb-4">{section.title}</h2>
                     {section.base && (
-                        <a href={`${section.base}/`} class="inline-block text-xs text-violet-600 font-semibold mb-3 hover:underline">View all →</a>
+                        <a href={`${section.base}/`} class="inline-block text-xs text-[var(--accent)] font-semibold mb-3 hover:underline">View all →</a>
                     )}
                     <ul class="space-y-2">
                         {section.items.map(item => (
                             <li>
-                                <a href={`${section.base}/${item.slug}/`} class="text-sm text-slate-600 hover:text-violet-600 transition-colors">
+                                <a href={`${section.base}/${item.slug}/`} class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
                                     {item.title}
                                 </a>
                             </li>
@@ -68,11 +68,11 @@ const sections = [
 
             <!-- States Column -->
             <div class="md:col-span-2 lg:col-span-3">
-                <h2 class="text-lg font-display font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">TMS Clinics by State</h2>
-                <a href="/us/" class="inline-block text-xs text-violet-600 font-semibold mb-3 hover:underline">View all US locations →</a>
+                <h2 class="text-lg font-display font-bold text-[var(--ink)] border-b border-[var(--line)] pb-2 mb-4">TMS Clinics by State</h2>
+                <a href="/us/" class="inline-block text-xs text-[var(--accent)] font-semibold mb-3 hover:underline">View all US locations →</a>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2">
                     {uniqueStates.map(stateCode => (
-                        <a href={`/us/${getStateSlug(stateCode)}/`} class="text-sm text-slate-600 hover:text-violet-600 transition-colors">
+                        <a href={`/us/${getStateSlug(stateCode)}/`} class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
                             {STATE_NAMES[stateCode]}
                         </a>
                     ))}
@@ -81,28 +81,28 @@ const sections = [
 
             <!-- International -->
             <div class="md:col-span-2 lg:col-span-3">
-                <h2 class="text-lg font-display font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">International Locations</h2>
+                <h2 class="text-lg font-display font-bold text-[var(--ink)] border-b border-[var(--line)] pb-2 mb-4">International Locations</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2">
-                    <a href="/uk/" class="text-sm text-slate-600 hover:text-violet-600">United Kingdom</a>
-                    <a href="/ca/" class="text-sm text-slate-600 hover:text-violet-600">Canada</a>
-                    <a href="/au/" class="text-sm text-slate-600 hover:text-violet-600">Australia</a>
-                    <a href="/de/" class="text-sm text-slate-600 hover:text-violet-600">Germany</a>
-                    <a href="/in/" class="text-sm text-slate-600 hover:text-violet-600">India</a>
-                    <a href="/fr/" class="text-sm text-slate-600 hover:text-violet-600">France</a>
-                    <a href="/es/" class="text-sm text-slate-600 hover:text-violet-600">Spain</a>
-                    <a href="/it/" class="text-sm text-slate-600 hover:text-violet-600">Italy</a>
-                    <a href="/nl/" class="text-sm text-slate-600 hover:text-violet-600">Netherlands</a>
-                    <a href="/br/" class="text-sm text-slate-600 hover:text-violet-600">Brazil</a>
-                    <a href="/mx/" class="text-sm text-slate-600 hover:text-violet-600">Mexico</a>
-                    <a href="/jp/" class="text-sm text-slate-600 hover:text-violet-600">Japan</a>
-                    <a href="/kr/" class="text-sm text-slate-600 hover:text-violet-600">South Korea</a>
-                    <a href="/se/" class="text-sm text-slate-600 hover:text-violet-600">Sweden</a>
-                    <a href="/nz/" class="text-sm text-slate-600 hover:text-violet-600">New Zealand</a>
-                    <a href="/za/" class="text-sm text-slate-600 hover:text-violet-600">South Africa</a>
-                    <a href="/ie/" class="text-sm text-slate-600 hover:text-violet-600">Ireland</a>
-                    <a href="/sg/" class="text-sm text-slate-600 hover:text-violet-600">Singapore</a>
-                    <a href="/ae/" class="text-sm text-slate-600 hover:text-violet-600">UAE</a>
-                    <a href="/il/" class="text-sm text-slate-600 hover:text-violet-600">Israel</a>
+                    <a href="/uk/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">United Kingdom</a>
+                    <a href="/ca/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Canada</a>
+                    <a href="/au/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Australia</a>
+                    <a href="/de/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Germany</a>
+                    <a href="/in/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">India</a>
+                    <a href="/fr/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">France</a>
+                    <a href="/es/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Spain</a>
+                    <a href="/it/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Italy</a>
+                    <a href="/nl/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Netherlands</a>
+                    <a href="/br/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Brazil</a>
+                    <a href="/mx/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Mexico</a>
+                    <a href="/jp/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Japan</a>
+                    <a href="/kr/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">South Korea</a>
+                    <a href="/se/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Sweden</a>
+                    <a href="/nz/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">New Zealand</a>
+                    <a href="/za/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">South Africa</a>
+                    <a href="/ie/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Ireland</a>
+                    <a href="/sg/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Singapore</a>
+                    <a href="/ae/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">UAE</a>
+                    <a href="/il/" class="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Israel</a>
                 </div>
             </div>
         </div>

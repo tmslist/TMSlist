@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { loginSchema } from '../../../db/validation';
+import { loginSchema } from '../../../db/validation.js';
 import {
   getUserByEmail,
   verifyPassword,
@@ -9,9 +9,10 @@ import {
   clearFailedLoginAttempts,
   logLoginActivity,
   hasRole,
-} from '../../../utils/auth';
-import { sendSuspiciousLoginAlert } from '../../../utils/email';
-import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+  createPendingMfaCookie,
+} from '../../../utils/auth.js';
+import { sendSuspiciousLoginAlert } from '../../../utils/email.js';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit.js';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -135,19 +136,23 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Check if TOTP 2FA is enabled
     if (user.totpEnabled) {
-      // 2FA required — return partial success, client must submit TOTP code
-      return new Response(JSON.stringify({
-        requires2FA: true,
-        userId: user.id,
-      }), {
+      // 2FA required — issue a short-lived HttpOnly cookie that proves
+      // password authentication succeeded. Do NOT leak the userId to the
+      // client; that would let an unauthenticated attacker brute-force the
+      // 2FA verify endpoint with a known target userId.
+      const pendingCookie = createPendingMfaCookie(user.id);
+      return new Response(JSON.stringify({ requires2FA: true }), {
         status: 200,
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Set-Cookie': pendingCookie,
+        },
       });
     }
 
     // No 2FA — complete login normally
     const { cookie } = await createSession(
-      { userId: user.id, email: user.email, role: user.role },
+      { userId: user.id, email: user.email, role: user.role, clinicId: user.clinicId ?? undefined },
       { userAgent, ipAddress: ip }
     );
 

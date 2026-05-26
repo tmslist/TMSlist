@@ -32,10 +32,10 @@ const STATUS_LABELS: Record<string, string> = {
 };
 const STATUS_BADGES: Record<string, string> = {
   pending: 'bg-amber-100 text-amber-700',
-  confirmed: 'bg-blue-100 text-blue-700',
+  confirmed: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
   completed: 'bg-green-100 text-green-700',
   cancelled: 'bg-red-100 text-red-700',
-  no_show: 'bg-gray-100 text-gray-600',
+  no_show: 'bg-[var(--paper2)] text-[var(--ink2)]',
 };
 
 const TABS: TabKey[] = ['pending', 'confirmed', 'completed', 'cancelled', 'no_show', 'waitlist'];
@@ -76,7 +76,7 @@ export default function DoctorAppointments({ doctorId }: DoctorAppointmentsProps
   const filtered = activeTab === 'waitlist' ? [] : appointments.filter(a => a.status === activeTab);
   const waitlistFiltered = activeTab === 'waitlist' ? waitlist : [];
 
-  if (loading) return <div className="flex items-center justify-center min-h-[40vh]"><div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" /></div>;
+  if (loading) return <div className="flex items-center justify-center min-h-[40vh]"><div className="w-8 h-8 border-4 border-[var(--line)] border-t-blue-600 rounded-full animate-spin" /></div>;
 
   return (
     <div>
@@ -87,7 +87,7 @@ export default function DoctorAppointments({ doctorId }: DoctorAppointmentsProps
       <div className="flex gap-1 mb-6 overflow-x-auto pb-1">
         {TABS.map(tab => (
           <button key={tab} onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${activeTab === tab ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}>
+            className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${activeTab === tab ? 'bg-[var(--ink)] text-white' : 'bg-white text-[var(--ink2)] border border-[var(--line)] hover:bg-[var(--paper2)]'}`}>
             {tab === 'no_show' ? 'No-show' : STATUS_LABELS[tab] || tab}
             {tab !== 'waitlist' && <span className="ml-1.5 text-xs opacity-70">({appointments.filter(a => a.status === tab).length})</span>}
             {tab === 'waitlist' && <span className="ml-1.5 text-xs opacity-70">({waitlist.length})</span>}
@@ -97,28 +97,28 @@ export default function DoctorAppointments({ doctorId }: DoctorAppointmentsProps
 
       {activeTab !== 'waitlist' ? (
         filtered.length === 0 ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-            <p className="text-gray-500 text-sm">No {STATUS_LABELS[activeTab].toLowerCase()} appointments</p>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center">
+            <p className="text-[var(--muted)] text-sm">No {STATUS_LABELS[activeTab].toLowerCase()} appointments</p>
           </div>
         ) : (
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-[var(--paper2)] border-b border-[var(--line)]">
                 <tr>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Patient</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Type</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Date/Time</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Status</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Actions</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Patient</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Type</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Date/Time</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Status</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filtered.map(apt => (
-                  <tr key={apt.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
+                  <tr key={apt.id} className="border-b border-[var(--line)] last:border-0 hover:bg-[var(--paper2)]">
                     <td className="px-4 py-3">
-                      <p className="font-medium text-gray-900">{apt.patientName}</p>
-                      {apt.patientEmail && <p className="text-xs text-gray-500">{apt.patientEmail}</p>}
-                      {apt.patientPhone && <p className="text-xs text-gray-500">{apt.patientPhone}</p>}
+                      <p className="font-medium text-[var(--ink)]">{apt.patientName}</p>
+                      {apt.patientEmail && <p className="text-xs text-[var(--muted)]">{apt.patientEmail}</p>}
+                      {apt.patientPhone && <p className="text-xs text-[var(--muted)]">{apt.patientPhone}</p>}
                     </td>
                     <td className="px-4 py-3 capitalize">{apt.appointmentType.replace('_', ' ')}</td>
                     <td className="px-4 py-3">{new Date(apt.scheduledAt).toLocaleString()}</td>
@@ -129,14 +129,14 @@ export default function DoctorAppointments({ doctorId }: DoctorAppointmentsProps
                       <div className="flex gap-2">
                         {apt.status === 'pending' && (
                           <>
-                            <button onClick={() => handleStatusUpdate(apt.id, 'confirmed')} className="text-xs px-3 py-1 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 font-medium">Confirm</button>
+                            <button onClick={() => handleStatusUpdate(apt.id, 'confirmed')} className="text-xs px-3 py-1 rounded-lg bg-[var(--paper2)] text-[var(--ink)] hover:bg-[rgba(10,22,40,0.1)] font-medium">Confirm</button>
                             <button onClick={() => handleStatusUpdate(apt.id, 'cancelled')} className="text-xs px-3 py-1 rounded-lg bg-red-50 text-red-700 hover:bg-red-100 font-medium">Decline</button>
                           </>
                         )}
                         {apt.status === 'confirmed' && (
                           <>
                             <button onClick={() => handleStatusUpdate(apt.id, 'completed')} className="text-xs px-3 py-1 rounded-lg bg-green-50 text-green-700 hover:bg-green-100 font-medium">Complete</button>
-                            <button onClick={() => handleStatusUpdate(apt.id, 'no_show')} className="text-xs px-3 py-1 rounded-lg bg-gray-50 text-gray-600 hover:bg-gray-100 font-medium">No-show</button>
+                            <button onClick={() => handleStatusUpdate(apt.id, 'no_show')} className="text-xs px-3 py-1 rounded-lg bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)] font-medium">No-show</button>
                           </>
                         )}
                       </div>
@@ -149,21 +149,21 @@ export default function DoctorAppointments({ doctorId }: DoctorAppointmentsProps
         )
       ) : (
         waitlistFiltered.length === 0 ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-            <p className="text-gray-500 text-sm">No waitlist entries</p>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center">
+            <p className="text-[var(--muted)] text-sm">No waitlist entries</p>
           </div>
         ) : (
           <div className="space-y-3">
             {waitlistFiltered.map((w, i) => (
-              <div key={w.id} className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+              <div key={w.id} className="bg-white rounded-xl border border-[var(--line)] p-4 shadow-sm">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-gray-900">{w.patientName}</p>
-                    {w.patientEmail && <p className="text-xs text-gray-500">{w.patientEmail}</p>}
-                    {w.patientPhone && <p className="text-xs text-gray-500">{w.patientPhone}</p>}
-                    <p className="text-xs text-gray-400 mt-1">#{i + 1} in queue &middot; {new Date(w.createdAt).toLocaleDateString()}</p>
+                    <p className="font-medium text-[var(--ink)]">{w.patientName}</p>
+                    {w.patientEmail && <p className="text-xs text-[var(--muted)]">{w.patientEmail}</p>}
+                    {w.patientPhone && <p className="text-xs text-[var(--muted)]">{w.patientPhone}</p>}
+                    <p className="text-xs text-[var(--muted)] mt-1">#{i + 1} in queue &middot; {new Date(w.createdAt).toLocaleDateString()}</p>
                   </div>
-                  <button className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">Notify</button>
+                  <button className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-[var(--ink)] hover:bg-[var(--ink)]">Notify</button>
                 </div>
               </div>
             ))}

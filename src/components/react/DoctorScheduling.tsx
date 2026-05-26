@@ -214,7 +214,7 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
 
   if (loading) return (
     <div className="flex items-center justify-center min-h-[40vh]">
-      <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+      <div className="w-8 h-8 border-4 border-[var(--line)] border-t-blue-600 rounded-full animate-spin" />
     </div>
   );
 
@@ -223,16 +223,16 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
       {/* Header Controls */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigateWeek(-1)} className="p-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 text-gray-600">
+          <button onClick={() => navigateWeek(-1)} className="p-2 rounded-lg bg-white border border-[var(--line)] hover:bg-[var(--paper2)] text-[var(--ink2)]">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <span className="text-sm font-medium text-gray-700 min-w-[200px] text-center">
+          <span className="text-sm font-medium text-[var(--ink2)] min-w-[200px] text-center">
             {weekDays[0]?.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} —{' '}
             {weekDays[6]?.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
           </span>
-          <button onClick={() => navigateWeek(1)} className="p-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 text-gray-600">
+          <button onClick={() => navigateWeek(1)} className="p-2 rounded-lg bg-white border border-[var(--line)] hover:bg-[var(--paper2)] text-[var(--ink2)]">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
@@ -244,23 +244,23 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
               d.setHours(0, 0, 0, 0);
               setCurrentWeekStart(d);
             }}
-            className="px-3 py-1.5 text-xs rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium"
+            className="px-3 py-1.5 text-xs rounded-lg bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)] font-medium"
           >
             Today
           </button>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex rounded-lg border border-gray-200 overflow-hidden">
-            <button onClick={() => setViewMode('week')} className={`px-3 py-1.5 text-xs font-medium ${viewMode === 'week' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}>
+          <div className="flex rounded-lg border border-[var(--line)] overflow-hidden">
+            <button onClick={() => setViewMode('week')} className={`px-3 py-1.5 text-xs font-medium ${viewMode === 'week' ? 'bg-[var(--ink)] text-white' : 'bg-white text-[var(--ink2)] hover:bg-[var(--paper2)]'}`}>
               Week
             </button>
-            <button onClick={() => setViewMode('month')} className={`px-3 py-1.5 text-xs font-medium ${viewMode === 'month' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}>
+            <button onClick={() => setViewMode('month')} className={`px-3 py-1.5 text-xs font-medium ${viewMode === 'month' ? 'bg-[var(--ink)] text-white' : 'bg-white text-[var(--ink2)] hover:bg-[var(--paper2)]'}`}>
               Month
             </button>
           </div>
           <button
             onClick={() => setShowAddSlot(true)}
-            className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] transition-colors"
           >
             + Add Slot
           </button>
@@ -272,15 +272,15 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
 
       {/* Weekly Calendar Grid */}
       {viewMode === 'week' && (
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden mb-6">
+        <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden mb-6">
           {/* Day headers */}
-          <div className="grid grid-cols-7 border-b border-gray-200">
+          <div className="grid grid-cols-7 border-b border-[var(--line)]">
             {weekDays.map((day, i) => {
               const isToday = day.date.toDateString() === new Date().toDateString();
               return (
-                <div key={i} className={`px-3 py-3 text-center border-r border-gray-100 last:border-r-0 ${isToday ? 'bg-blue-50' : ''}`}>
-                  <p className="text-xs text-gray-400 uppercase">{DAYS[day.date.getDay()].slice(0, 3)}</p>
-                  <p className={`text-sm font-semibold mt-0.5 ${isToday ? 'text-blue-600' : 'text-gray-900'}`}>
+                <div key={i} className={`px-3 py-3 text-center border-r border-[var(--line)] last:border-r-0 ${isToday ? 'bg-[var(--paper2)]' : ''}`}>
+                  <p className="text-xs text-[var(--muted)] uppercase">{DAYS[day.date.getDay()].slice(0, 3)}</p>
+                  <p className={`text-sm font-semibold mt-0.5 ${isToday ? 'text-[var(--ink)]' : 'text-[var(--ink)]'}`}>
                     {day.date.getDate()}
                   </p>
                 </div>
@@ -295,7 +295,7 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
               const blockedSlots = day.slots.filter(s => !s.isAvailable);
               const dayBookings = day.bookings;
               return (
-                <div key={i} className={`px-2 py-3 border-r border-gray-100 last:border-r-0 ${isToday ? 'bg-blue-50/30' : ''}`}>
+                <div key={i} className={`px-2 py-3 border-r border-[var(--line)] last:border-r-0 ${isToday ? 'bg-[var(--paper2)]' : ''}`}>
                   {/* Available slots */}
                   {availableSlots.map(slot => (
                     <div key={slot.id} className="mb-2 p-2 bg-green-50 border border-green-200 rounded-lg text-xs group relative">
@@ -313,9 +313,9 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
                   ))}
                   {/* Blocked slots */}
                   {blockedSlots.map(slot => (
-                    <div key={slot.id} className="mb-2 p-2 bg-gray-100 border border-gray-300 rounded-lg text-xs group relative">
-                      <p className="font-medium text-gray-500">{formatTime(slot.startTime)} - {formatTime(slot.endTime)}</p>
-                      <p className="text-gray-400">Blocked</p>
+                    <div key={slot.id} className="mb-2 p-2 bg-[var(--paper2)] border border-[var(--line)] rounded-lg text-xs group relative">
+                      <p className="font-medium text-[var(--muted)]">{formatTime(slot.startTime)} - {formatTime(slot.endTime)}</p>
+                      <p className="text-[var(--muted)]">Blocked</p>
                       <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 flex gap-1 transition-opacity">
                         <button onClick={() => handleToggleSlot(slot.id, false)} className="p-0.5 rounded bg-green-100 text-green-600" title="Unblock">
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
@@ -328,9 +328,9 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
                   ))}
                   {/* Bookings */}
                   {dayBookings.map(b => (
-                    <div key={b.id} className="mb-2 p-2 bg-blue-100 border border-blue-200 rounded-lg text-xs">
-                      <p className="font-medium text-blue-700">{b.patientName}</p>
-                      <p className="text-blue-600 text-[10px]">{new Date(b.scheduledAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</p>
+                    <div key={b.id} className="mb-2 p-2 bg-[rgba(10,22,40,0.1)] border border-[var(--line)] rounded-lg text-xs">
+                      <p className="font-medium text-[var(--ink)]">{b.patientName}</p>
+                      <p className="text-[var(--ink)] text-[10px]">{new Date(b.scheduledAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</p>
                     </div>
                   ))}
                   {/* Block time button */}
@@ -341,7 +341,7 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
                       const end = `${(now.getHours() + 1).toString().padStart(2, '0')}:00`;
                       handleBlockTime(day.date, start, end);
                     }}
-                    className="w-full text-[10px] py-1 rounded border border-dashed border-gray-300 text-gray-400 hover:border-gray-400 hover:text-gray-500 transition-colors"
+                    className="w-full text-[10px] py-1 rounded border border-dashed border-[var(--line)] text-[var(--muted)] hover:border-[var(--muted)] hover:text-[var(--muted)] transition-colors"
                   >
                     + Block time
                   </button>
@@ -354,11 +354,11 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
 
       {/* Monthly View (simplified) */}
       {viewMode === 'month' && (
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden p-4 mb-6">
-          <p className="text-sm text-gray-500 text-center">Monthly view — use week view above for detailed slot management</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden p-4 mb-6">
+          <p className="text-sm text-[var(--muted)] text-center">Monthly view — use week view above for detailed slot management</p>
           <div className="grid grid-cols-7 gap-1 mt-4">
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-              <div key={d} className="text-center text-xs font-medium text-gray-400 py-2">{d}</div>
+              <div key={d} className="text-center text-xs font-medium text-[var(--muted)] py-2">{d}</div>
             ))}
             {Array.from({ length: 35 }, (_, i) => {
               const d = new Date(currentWeekStart);
@@ -366,10 +366,10 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
               const hasSlots = slots.some(s => s.dayOfWeek === d.getDay());
               const hasBookings = bookings.some(b => b.scheduledAt.startsWith(d.toISOString().split('T')[0]));
               return (
-                <div key={i} className={`aspect-square flex flex-col items-center justify-center rounded text-xs ${d.toDateString() === new Date().toDateString() ? 'bg-blue-50 ring-1 ring-blue-400' : ''}`}>
-                  <span className="font-medium text-gray-700">{d.getDate()}</span>
+                <div key={i} className={`aspect-square flex flex-col items-center justify-center rounded text-xs ${d.toDateString() === new Date().toDateString() ? 'bg-[var(--paper2)] ring-1 ring-[rgba(10,22,40,0.15)]' : ''}`}>
+                  <span className="font-medium text-[var(--ink2)]">{d.getDate()}</span>
                   {hasSlots && <div className="w-1.5 h-1.5 rounded-full bg-green-400 mt-0.5" />}
-                  {hasBookings && <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-0.5" />}
+                  {hasBookings && <div className="w-1.5 h-1.5 rounded-full bg-[var(--ink2)] mt-0.5" />}
                 </div>
               );
             })}
@@ -377,11 +377,11 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
           <div className="flex items-center gap-4 mt-3 justify-center">
             <div className="flex items-center gap-1.5">
               <div className="w-3 h-3 rounded-full bg-green-400" />
-              <span className="text-xs text-gray-500">Available</span>
+              <span className="text-xs text-[var(--muted)]">Available</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-blue-400" />
-              <span className="text-xs text-gray-500">Booked</span>
+              <div className="w-3 h-3 rounded-full bg-[var(--ink2)]" />
+              <span className="text-xs text-[var(--muted)]">Booked</span>
             </div>
           </div>
         </div>
@@ -389,10 +389,10 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
 
       {/* Upcoming Appointments */}
       <div>
-        <h2 className="text-base font-semibold text-gray-900 mb-4">Upcoming Appointments</h2>
+        <h2 className="text-base font-semibold text-[var(--ink)] mb-4">Upcoming Appointments</h2>
         {bookings.filter(b => new Date(b.scheduledAt) >= new Date()).length === 0 ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-6 text-center">
-            <p className="text-gray-500 text-sm">No upcoming appointments</p>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-6 text-center">
+            <p className="text-[var(--muted)] text-sm">No upcoming appointments</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -400,28 +400,28 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
               .filter(b => new Date(b.scheduledAt) >= new Date())
               .sort((a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime())
               .map(b => (
-                <div key={b.id} className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm flex items-center justify-between">
+                <div key={b.id} className="bg-white rounded-xl border border-[var(--line)] p-4 shadow-sm flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold ${
-                      b.status === 'confirmed' ? 'bg-blue-100 text-blue-700' :
+                      b.status === 'confirmed' ? 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]' :
                       b.status === 'pending' ? 'bg-amber-100 text-amber-700' :
-                      'bg-gray-100 text-gray-600'
+                      'bg-[var(--paper2)] text-[var(--ink2)]'
                     }`}>
                       {b.patientName.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900">{b.patientName}</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="font-medium text-[var(--ink)]">{b.patientName}</p>
+                      <p className="text-xs text-[var(--muted)]">
                         {formatDate(b.scheduledAt)} at {new Date(b.scheduledAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                         {' · '}{b.durationMinutes}min · {b.type.replace('_', ' ')}
                       </p>
                     </div>
                   </div>
                   <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${
-                    b.status === 'confirmed' ? 'bg-blue-100 text-blue-700' :
+                    b.status === 'confirmed' ? 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]' :
                     b.status === 'pending' ? 'bg-amber-100 text-amber-700' :
                     b.status === 'completed' ? 'bg-green-100 text-green-700' :
-                    'bg-gray-100 text-gray-600'
+                    'bg-[var(--paper2)] text-[var(--ink2)]'
                   }`}>
                     {b.status.charAt(0).toUpperCase() + b.status.slice(1)}
                   </span>
@@ -436,41 +436,41 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/40" onClick={() => setShowAddSlot(false)} />
           <div className="relative bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md mx-4">
-            <button onClick={() => setShowAddSlot(false)} className="absolute top-4 right-4 p-1 text-gray-400 hover:text-gray-600">
+            <button onClick={() => setShowAddSlot(false)} className="absolute top-4 right-4 p-1 text-[var(--muted)] hover:text-[var(--ink2)]">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <h3 className="text-lg font-semibold text-gray-900 mb-1">Add Time Slot</h3>
-            <p className="text-sm text-gray-500 mb-6">Define a recurring weekly availability slot.</p>
+            <h3 className="text-lg font-semibold text-[var(--ink)] mb-1">Add Time Slot</h3>
+            <p className="text-sm text-[var(--muted)] mb-6">Define a recurring weekly availability slot.</p>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Day of Week</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1.5">Day of Week</label>
                 <select
                   value={newSlot.dayOfWeek}
                   onChange={e => setNewSlot(prev => ({ ...prev, dayOfWeek: Number(e.target.value) }))}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-[var(--line)] rounded-lg px-3 py-2 text-sm text-[var(--ink2)] bg-white focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
                 >
                   {DAYS.map((d, i) => <option key={i} value={i}>{d}</option>)}
                 </select>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Start Time</label>
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1.5">Start Time</label>
                   <select
                     value={newSlot.startTime}
                     onChange={e => setNewSlot(prev => ({ ...prev, startTime: e.target.value }))}
-                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-[var(--line)] rounded-lg px-3 py-2 text-sm text-[var(--ink2)] bg-white focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
                   >
                     {HOURS.map(h => <option key={h} value={h}>{formatTime(h)}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">End Time</label>
+                  <label className="block text-sm font-medium text-[var(--ink2)] mb-1.5">End Time</label>
                   <select
                     value={newSlot.endTime}
                     onChange={e => setNewSlot(prev => ({ ...prev, endTime: e.target.value }))}
-                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-[var(--line)] rounded-lg px-3 py-2 text-sm text-[var(--ink2)] bg-white focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
                   >
                     {HOURS.filter(h => h > newSlot.startTime).map(h => <option key={h} value={h}>{formatTime(h)}</option>)}
                   </select>
@@ -478,7 +478,7 @@ export default function DoctorScheduling({ doctorId, initialSlots = [], initialB
               </div>
               <button
                 onClick={handleAddSlot}
-                className="w-full py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+                className="w-full py-2.5 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] transition-colors"
               >
                 Add Slot
               </button>

@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-14
 category: patient-guide
 tags: ["patient experience", "first session", "pain", "what to expect"]
-image: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=800&h=400&fit=crop"
+image: "/images/blog-covers/what-tms-actually-feels-like.svg"
 ---
 
 You have read the clinical descriptions. A tapping sensation on the scalp. Mild discomfort that diminishes over time. Generally well-tolerated.
@@ -126,9 +126,9 @@ The honest answer: it varies, and it is often subtle at first.
 
 *My wife noticed before I did. She said I was laughing at dinner again. I did not realize I had stopped.* Robert, 61
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>The first session is the hardest. Pain ratings drop from 4.2/10 at session 1 to 1.1/10 by session 20.</li>
     <li>By session 5, most people describe the sensation as background noise. By session 10, many barely notice it.</li>
     <li>You are awake and alert throughout. You can listen to music, watch shows, or just sit quietly.</li>
@@ -138,47 +138,47 @@ The honest answer: it varies, and it is often subtle at first.
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS hurt?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS hurt?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The first session is the most uncomfortable. Patients describe it as a strong tapping or knocking sensation on the scalp. The average pain rating at session 1 is about 4 out of 10. However, discomfort drops rapidly. By session 5 it averages 2.8/10. By session 20 it averages 1.1/10. Most people find it tolerable by week two.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The first session is the most uncomfortable. Patients describe it as a strong tapping or knocking sensation on the scalp. The average pain rating at session 1 is about 4 out of 10. However, discomfort drops rapidly. By session 5 it averages 2.8/10. By session 20 it averages 1.1/10. Most people find it tolerable by week two.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What does TMS feel like during the session?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What does TMS feel like during the session?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">You hear a rapid clicking sound and feel a tapping or knocking sensation on one spot on your scalp. The rhythm is on/off in trains. Some people feel facial muscle twitching, especially around the eye and jaw. The intensity varies by person and drops significantly after the first few sessions.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">You hear a rapid clicking sound and feel a tapping or knocking sensation on one spot on your scalp. The rhythm is on/off in trains. Some people feel facial muscle twitching, especially around the eye and jaw. The intensity varies by person and drops significantly after the first few sessions.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I drive myself to and from TMS appointments?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I drive myself to and from TMS appointments?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. TMS requires no sedation, no anesthesia, and causes no impairment. You can drive yourself to and from every session, go back to work, and exercise normally. There is no recovery time needed.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. TMS requires no sedation, no anesthesia, and causes no impairment. You can drive yourself to and from every session, go back to work, and exercise normally. There is no recovery time needed.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">When does TMS start working?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">When does TMS start working?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most people notice no mood change in weeks 1-2. Weeks 2-3 is when the first signs typically appear, often noticed by others before you notice them yourself. Weeks 3-4 is when you typically start to feel it yourself. This is why completing the full course matters even if you feel better by week 3.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most people notice no mood change in weeks 1-2. Weeks 2-3 is when the first signs typically appear, often noticed by others before you notice them yourself. Weeks 3-4 is when you typically start to feel it yourself. This is why completing the full course matters even if you feel better by week 3.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What can I do during a TMS session?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What can I do during a TMS session?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most people listen to music or podcasts, watch shows on a phone or tablet, scroll social media, or just sit quietly. Some people read, meditate, or nap. You cannot move your head much, but your hands are free. Earplugs are provided because the machine is loud.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most people listen to music or podcasts, watch shows on a phone or tablet, scroll social media, or just sit quietly. Some people read, meditate, or nap. You cannot move your head much, but your hands are free. Earplugs are provided because the machine is loud.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

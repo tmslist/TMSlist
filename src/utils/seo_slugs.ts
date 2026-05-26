@@ -82,6 +82,14 @@ export const TREATMENT_SLUGS = [
     { slug: 'schizophrenia', title: 'TMS for Schizophrenia' },
     { slug: 'multiple-sclerosis-fatigue', title: 'TMS for MS Fatigue' },
     { slug: 'epilepsy', title: 'TMS for Epilepsy' },
+    { slug: 'tourette-syndrome', title: 'TMS for Tourette Syndrome' },
+    { slug: 'borderline-personality-disorder', title: 'TMS for Borderline Personality Disorder' },
+    { slug: 'aphasia', title: 'TMS for Aphasia (Post-Stroke Speech)' },
+    { slug: 'pmdd', title: 'TMS for PMDD' },
+    { slug: 'body-dysmorphic-disorder', title: 'TMS for Body Dysmorphic Disorder' },
+    { slug: 'opioid-use-disorder', title: 'TMS for Opioid Use Disorder' },
+    { slug: 'trichotillomania', title: 'TMS for Trichotillomania' },
+    { slug: 'phantom-limb-pain', title: 'TMS for Phantom Limb Pain' },
 ];
 
 export const COMPARE_SLUGS = [
@@ -96,6 +104,9 @@ export const COMPARE_SLUGS = [
     { slug: 'tms-vs-esketamine', title: 'TMS vs Esketamine (Spravato)' },
     { slug: 'tms-vs-psilocybin', title: 'TMS vs Psilocybin Therapy' },
     { slug: 'tms-vs-lithium', title: 'TMS vs Lithium' },
+    { slug: 'spravato-vs-ketamine', title: 'Spravato vs Ketamine' },
+    { slug: 'tms-vs-stellate-ganglion-block', title: 'TMS vs Stellate Ganglion Block (SGB)' },
+    { slug: 'insurance-vs-cash-pay', title: 'Insurance-Covered vs Cash-Pay TMS' },
     // TMS Device Comparisons
     { slug: 'neurostar-vs-brainsway', title: 'NeuroStar vs BrainsWay' },
     { slug: 'magventure-vs-neurostar', title: 'MagVenture vs NeuroStar' },
@@ -134,6 +145,7 @@ export const DEMOGRAPHIC_SLUGS = [
     { slug: 'lgbtq-friendly-tms', title: 'LGBTQ+ Friendly TMS' },
     { slug: 'first-responders', title: 'TMS for First Responders' },
     { slug: 'students', title: 'TMS for Students' },
+    { slug: 'healthcare-professionals', title: 'TMS for Healthcare Professionals' },
 ];
 
 export const NEAR_ME_SLUGS = [
@@ -239,6 +251,14 @@ export const UTILITY_SLUGS = [
     { slug: 'am-i-a-candidate', title: 'Am I a Candidate?' },
     { slug: 'depression-severity-test', title: 'Depression Severity Test (PHQ-9)' },
     { slug: 'insurance-eligibility-checker', title: 'Insurance Eligibility Checker' },
+    { slug: 'spravato-eligibility', title: 'Spravato Eligibility Quiz' },
+    { slug: 'ketamine-eligibility', title: 'Ketamine Therapy Eligibility Quiz' },
+    { slug: 'anxiety-severity-test', title: 'Anxiety Severity Test (GAD-7)' },
+    { slug: 'ptsd-severity-test', title: 'PTSD Severity Test (PCL-5)' },
+    { slug: 'ocd-severity-test', title: 'OCD Severity Test (Y-BOCS Style)' },
+    { slug: 'which-treatment-is-right', title: 'Which Treatment Is Right for Me?' },
+    { slug: 'ect-eligibility', title: 'ECT Eligibility Quiz' },
+    { slug: 'bipolar-screener', title: 'Bipolar Screener (MDQ)' },
 ];
 
 export const TOOL_SLUGS = [

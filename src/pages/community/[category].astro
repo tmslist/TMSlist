@@ -16,14 +16,14 @@ const session = getSessionFromRequest(Astro.request);
 const posts = await getForumPosts({ categoryId: category.id, sort: 'hot', limit: 20 });
 
 const CATEGORY_COLORS: Record<string, string> = {
-  violet: 'from-violet-600 to-violet-700',
+  violet: 'from-[#0A1628] to-[#0A1628]',
   emerald: 'from-emerald-600 to-emerald-700',
   amber: 'from-amber-600 to-amber-700',
-  rose: 'from-rose-600 to-rose-700',
+  rose: 'from-[var(--warm)] to-[var(--accent)]',
   yellow: 'from-yellow-600 to-yellow-700',
-  blue: 'from-blue-600 to-blue-700',
+  blue: 'from-[var(--accent)] to-[var(--accent2)]',
   teal: 'from-teal-600 to-teal-700',
-  indigo: 'from-violet-600 to-violet-700',
+  indigo: 'from-[#0A1628] to-[#0A1628]',
 };
 
 const gradientClass = CATEGORY_COLORS[category.color || 'violet'] || CATEGORY_COLORS.violet;
@@ -38,7 +38,7 @@ const gradientClass = CATEGORY_COLORS[category.color || 'violet'] || CATEGORY_CO
     { name: category.name, url: `/community/${category.slug}` },
   ]}
 >
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-[var(--paper2)]">
     <!-- Category header -->
     <div class={`bg-gradient-to-r ${gradientClass} text-white`}>
       <div class="container mx-auto px-4 lg:px-8 py-10">
@@ -55,7 +55,7 @@ const gradientClass = CATEGORY_COLORS[category.color || 'violet'] || CATEGORY_CO
           {session ? (
             <a
               href={`/community/new?category=${category.id}`}
-              class="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg text-sm font-semibold transition-colors"
+              class="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-[var(--paper)]/20 hover:bg-[var(--paper)]/30 backdrop-blur-sm rounded-lg text-sm font-semibold transition-colors"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width={2} viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

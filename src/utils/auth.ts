@@ -22,6 +22,7 @@ export interface JWTPayload {
   role: string;
   clinicId?: string;
   sessionId?: string;
+  isImpersonation?: boolean;
 }
 
 export async function hashPassword(password: string): Promise<string> {
@@ -78,14 +79,63 @@ function getCookies(request: Request): Record<string, string> {
 }
 
 /**
- * Extract and verify session from request cookies.
- * Supports both JWT cookie (backwards compat) and session-ID-based sessions.
+ * Extract and verify session from request cookies (sync, JWT-only).
+ *
+ * Use this for hot-path public endpoints. For sensitive endpoints (admin,
+ * doctor, owner, payment, impersonate), prefer `validateSessionStrict` which
+ * cross-checks against the `sessions` allowlist so logout / revocation
+ * actually invalidates the cookie.
  */
 export function getSessionFromRequest(request: Request): JWTPayload | null {
   const cookies = getCookies(request);
   const token = cookies[COOKIE_NAME];
   if (!token) return null;
   return verifyToken(token);
+}
+
+/**
+ * Async strict session validator: JWT verify PLUS a sessions-table lookup.
+ *
+ * Returns the payload only when:
+ *   1. The JWT signature is valid and not expired.
+ *   2. A row exists in `sessions` for sha256(token).
+ *   3. That row's `expiresAt` is in the future.
+ *
+ * Returns null otherwise. This means logout / `invalidateSession` /
+ * `invalidateAllUserSessions` actually take effect — a stolen cookie cannot
+ * be used after revocation, even within its 7-day JWT lifetime.
+ *
+ * Note: legacy tokens issued before all callers were migrated to
+ * `createSession` may not have a row and will be rejected. Users with such
+ * cookies will be forced to re-login once.
+ */
+export async function validateSessionStrict(request: Request): Promise<JWTPayload | null> {
+  const cookies = getCookies(request);
+  const token = cookies[COOKIE_NAME];
+  if (!token) return null;
+  const payload = verifyToken(token);
+  if (!payload) return null;
+
+  // Impersonation cookies are short-lived JWTs that don't have a sessions
+  // row by design — accept them on signature alone.
+  if (payload.isImpersonation) return payload;
+
+  try {
+    const tokenHash = createHash('sha256').update(token).digest('hex');
+    const rows = await db
+      .select({ id: sessions.id, expiresAt: sessions.expiresAt })
+      .from(sessions)
+      .where(eq(sessions.tokenHash, tokenHash))
+      .limit(1);
+    const row = rows[0];
+    if (!row) return null;
+    if (row.expiresAt && new Date() > row.expiresAt) return null;
+    return payload;
+  } catch (err) {
+    // Fail closed if the sessions table is unreachable for a sensitive endpoint.
+    console.error('[auth] validateSessionStrict DB error:', err);
+    return null;
+  }
 }
 
 /**
@@ -141,6 +191,79 @@ export function createSessionCookie(payload: JWTPayload): string {
 }
 
 /**
+ * Issue a short-lived (5 min), HttpOnly cookie that proves password
+ * authentication succeeded for this user and the 2FA step is pending.
+ * The cookie is the ONLY way to identify the user during 2FA verify —
+ * never trust a userId supplied in the request body.
+ */
+const PENDING_MFA_COOKIE = 'tms_mfa_pending';
+const PENDING_MFA_TTL_SECONDS = 5 * 60;
+
+export function createPendingMfaCookie(userId: string): string {
+  if (!JWT_SECRET) throw new Error('JWT_SECRET is not configured');
+  const token = jwt.sign(
+    { userId, mfaPending: true },
+    JWT_SECRET,
+    { expiresIn: PENDING_MFA_TTL_SECONDS },
+  );
+  const isProd = process.env.NODE_ENV === 'production';
+  const secure = isProd ? '; Secure' : '';
+  return `${PENDING_MFA_COOKIE}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${PENDING_MFA_TTL_SECONDS}${secure}`;
+}
+
+export function clearPendingMfaCookie(): string {
+  const isProd = process.env.NODE_ENV === 'production';
+  const secure = isProd ? '; Secure' : '';
+  return `${PENDING_MFA_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${secure}`;
+}
+
+export function verifyPendingMfaCookie(request: Request): { userId: string } | null {
+  if (!JWT_SECRET) return null;
+  const cookies = getCookies(request);
+  const token = cookies[PENDING_MFA_COOKIE];
+  if (!token) return null;
+  try {
+    const payload = jwt.verify(token, JWT_SECRET) as { userId: string; mfaPending: boolean };
+    if (!payload.mfaPending || !payload.userId) return null;
+    return { userId: payload.userId };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Reject anything that isn't a same-origin relative path. Allows `/foo`,
+ * blocks `//evil.com`, `https://...`, `javascript:...`, CRLF, and protocol-relative.
+ */
+export function isSafeRedirectPath(value: string | null | undefined): value is string {
+  if (!value || typeof value !== 'string') return false;
+  if (!value.startsWith('/')) return false;
+  if (value.startsWith('//')) return false;
+  if (/[\r\n]/.test(value)) return false;
+  if (/^\/[a-z][a-z0-9+.-]*:/i.test(value)) return false;
+  return true;
+}
+
+/**
+ * Short-lived impersonation cookie (default 1h). Embeds isImpersonation
+ * so downstream sensitive endpoints can refuse the session.
+ */
+export function createImpersonationCookie(
+  payload: JWTPayload,
+  ttlSeconds: number = 60 * 60,
+): string {
+  if (!JWT_SECRET) throw new Error('JWT_SECRET is not configured');
+  const token = jwt.sign(
+    { ...payload, isImpersonation: true },
+    JWT_SECRET,
+    { expiresIn: ttlSeconds },
+  );
+  const isProd = process.env.NODE_ENV === 'production';
+  const secure = isProd ? '; Secure' : '';
+  return `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${ttlSeconds}${secure}`;
+}
+
+/**
  * Invalidate a session by token hash.
  */
 export async function invalidateSession(token: string): Promise<void> {
@@ -156,10 +279,14 @@ export async function invalidateAllUserSessions(userId: string): Promise<void> {
 }
 
 /**
- * Create a cookie that clears the session.
+ * Create a cookie that clears the session. Mirrors the production-conditional
+ * `Secure` attribute used when the session was originally issued, so browsers
+ * recognize this clear cookie as overwriting the same one.
  */
 export function clearSessionCookie(): string {
-  return `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`;
+  const isProd = process.env.NODE_ENV === 'production';
+  const secure = isProd ? '; Secure' : '';
+  return `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${secure}`;
 }
 
 /**

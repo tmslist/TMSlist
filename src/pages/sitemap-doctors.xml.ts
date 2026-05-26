@@ -3,12 +3,14 @@ import { getAllDoctors } from '../utils/dataHelpers';
 
 export const GET: APIRoute = async () => {
   const base = 'https://tmslist.com';
+  const now = new Date().toISOString().split('T')[0];
   const doctors = await getAllDoctors();
 
   const urls = doctors.map(doctor => {
     if (!doctor.slug) return '';
     return `  <url>
     <loc>${base}/specialist/${doctor.slug}/</loc>
+    <lastmod>${now}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>`;

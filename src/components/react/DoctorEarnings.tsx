@@ -148,7 +148,7 @@ export default function DoctorEarnings({ doctorId, initialEarnings = [], initial
 
   if (loading) return (
     <div className="flex items-center justify-center min-h-[40vh]">
-      <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+      <div className="w-8 h-8 border-4 border-[var(--line)] border-t-blue-600 rounded-full animate-spin" />
     </div>
   );
 
@@ -156,37 +156,37 @@ export default function DoctorEarnings({ doctorId, initialEarnings = [], initial
     <div>
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Total Revenue</p>
-          <p className="text-2xl font-semibold text-gray-900 mt-1">{formatCurrency(summary.totalRevenue)}</p>
-          <p className="text-xs text-gray-400 mt-1">Gross earnings</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Total Revenue</p>
+          <p className="text-2xl font-semibold text-[var(--ink)] mt-1">{formatCurrency(summary.totalRevenue)}</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Gross earnings</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Net Earnings</p>
-          <p className="text-2xl font-semibold text-blue-600 mt-1">{formatCurrency(summary.netEarnings)}</p>
-          <p className="text-xs text-gray-400 mt-1">After expenses</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Net Earnings</p>
+          <p className="text-2xl font-semibold text-[var(--ink)] mt-1">{formatCurrency(summary.netEarnings)}</p>
+          <p className="text-xs text-[var(--muted)] mt-1">After expenses</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Sessions</p>
-          <p className="text-2xl font-semibold text-gray-900 mt-1">{summary.totalSessions.toLocaleString()}</p>
-          <p className="text-xs text-gray-400 mt-1">Completed</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Sessions</p>
+          <p className="text-2xl font-semibold text-[var(--ink)] mt-1">{summary.totalSessions.toLocaleString()}</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Completed</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Patients</p>
-          <p className="text-2xl font-semibold text-gray-900 mt-1">{summary.totalPatients.toLocaleString()}</p>
-          <p className="text-xs text-gray-400 mt-1">Total seen</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Patients</p>
+          <p className="text-2xl font-semibold text-[var(--ink)] mt-1">{summary.totalPatients.toLocaleString()}</p>
+          <p className="text-xs text-[var(--muted)] mt-1">Total seen</p>
         </div>
       </div>
 
       {/* Revenue Chart */}
       {chartData.length > 0 && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm mb-6">
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm mb-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-base font-semibold text-gray-900">Revenue Breakdown</h2>
+            <h2 className="text-base font-semibold text-[var(--ink)]">Revenue Breakdown</h2>
             <select
               value={filterMonths}
               onChange={e => setFilterMonths(Number(e.target.value))}
-              className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 text-gray-600 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-sm border border-[var(--line)] rounded-lg px-3 py-1.5 text-[var(--ink2)] bg-white focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.2)]"
             >
               <option value={3}>Last 3 months</option>
               <option value={6}>Last 6 months</option>
@@ -199,7 +199,7 @@ export default function DoctorEarnings({ doctorId, initialEarnings = [], initial
               <div key={i} className="flex-1 flex flex-col items-center gap-1">
                 <div className="w-full flex flex-col gap-1 h-32 justify-end">
                   <div
-                    className="w-full bg-blue-500 rounded-t-sm transition-all hover:bg-blue-600"
+                    className="w-full bg-[var(--ink2)] rounded-t-sm transition-all hover:bg-[var(--ink)]"
                     style={{ height: `${Math.max((d.gross / maxChartValue) * 100, 2)}%` }}
                     title={`Gross: ${formatCurrency(d.gross)}`}
                   />
@@ -209,18 +209,18 @@ export default function DoctorEarnings({ doctorId, initialEarnings = [], initial
                     title={`Net: ${formatCurrency(d.net)}`}
                   />
                 </div>
-                <span className="text-xs text-gray-500 text-center">{d.label.split(' ')[0].slice(0, 3)}</span>
+                <span className="text-xs text-[var(--muted)] text-center">{d.label.split(' ')[0].slice(0, 3)}</span>
               </div>
             ))}
           </div>
           <div className="flex items-center gap-4 mt-4 justify-center">
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-3 bg-blue-500 rounded-sm" />
-              <span className="text-xs text-gray-500">Gross</span>
+              <div className="w-3 h-3 bg-[var(--ink2)] rounded-sm" />
+              <span className="text-xs text-[var(--muted)]">Gross</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="w-3 h-3 bg-green-500 rounded-sm" />
-              <span className="text-xs text-gray-500">Net</span>
+              <span className="text-xs text-[var(--muted)]">Net</span>
             </div>
           </div>
         </div>
@@ -231,13 +231,13 @@ export default function DoctorEarnings({ doctorId, initialEarnings = [], initial
         <div className="flex gap-1">
           <button
             onClick={() => setActiveTab('earnings')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === 'earnings' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === 'earnings' ? 'bg-[var(--ink)] text-white' : 'bg-white text-[var(--ink2)] border border-[var(--line)] hover:bg-[var(--paper2)]'}`}
           >
             Earnings ({earnings.length})
           </button>
           <button
             onClick={() => setActiveTab('expenses')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === 'expenses' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === 'expenses' ? 'bg-[var(--ink)] text-white' : 'bg-white text-[var(--ink2)] border border-[var(--line)] hover:bg-[var(--paper2)]'}`}
           >
             Expenses ({expenses.length})
           </button>
@@ -245,7 +245,7 @@ export default function DoctorEarnings({ doctorId, initialEarnings = [], initial
         {activeTab === 'earnings' && (
           <button
             onClick={() => setShowPayoutModal(true)}
-            className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] transition-colors"
           >
             Request Payout
           </button>
@@ -266,33 +266,33 @@ export default function DoctorEarnings({ doctorId, initialEarnings = [], initial
 
       {activeTab === 'earnings' ? (
         filteredEarnings.length === 0 ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-            <p className="text-gray-500 text-sm">No earnings records yet</p>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center">
+            <p className="text-[var(--muted)] text-sm">No earnings records yet</p>
           </div>
         ) : (
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-[var(--paper2)] border-b border-[var(--line)]">
                 <tr>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Period</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Gross</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Net</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Status</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Paid Date</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Period</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Gross</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Net</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Status</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Paid Date</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredEarnings.map(e => (
-                  <tr key={e.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
-                    <td className="px-4 py-3 font-medium text-gray-900">{formatPeriod(e.period)}</td>
-                    <td className="px-4 py-3 text-gray-700">{formatCurrency(e.grossAmount, e.currency)}</td>
+                  <tr key={e.id} className="border-b border-[var(--line)] last:border-0 hover:bg-[var(--paper2)]">
+                    <td className="px-4 py-3 font-medium text-[var(--ink)]">{formatPeriod(e.period)}</td>
+                    <td className="px-4 py-3 text-[var(--ink2)]">{formatCurrency(e.grossAmount, e.currency)}</td>
                     <td className="px-4 py-3 text-green-600 font-medium">{formatCurrency(e.netAmount, e.currency)}</td>
                     <td className="px-4 py-3">
                       <span className={`text-xs px-2 py-1 rounded-full font-medium ${e.paidAt ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
                         {e.paidAt ? 'Paid' : 'Pending'}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-gray-500 text-xs">
+                    <td className="px-4 py-3 text-[var(--muted)] text-xs">
                       {e.paidAt ? new Date(e.paidAt).toLocaleDateString() : '—'}
                     </td>
                   </tr>
@@ -303,28 +303,28 @@ export default function DoctorEarnings({ doctorId, initialEarnings = [], initial
         )
       ) : (
         expenses.length === 0 ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-            <p className="text-gray-500 text-sm">No expense records yet</p>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center">
+            <p className="text-[var(--muted)] text-sm">No expense records yet</p>
           </div>
         ) : (
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-[var(--paper2)] border-b border-[var(--line)]">
                 <tr>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Date</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Category</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Description</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Amount</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Date</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Category</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Description</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--ink2)]">Amount</th>
                 </tr>
               </thead>
               <tbody>
                 {expenses.map(e => (
-                  <tr key={e.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
-                    <td className="px-4 py-3 text-gray-500 text-xs">{new Date(e.date).toLocaleDateString()}</td>
+                  <tr key={e.id} className="border-b border-[var(--line)] last:border-0 hover:bg-[var(--paper2)]">
+                    <td className="px-4 py-3 text-[var(--muted)] text-xs">{new Date(e.date).toLocaleDateString()}</td>
                     <td className="px-4 py-3">
-                      <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700 font-medium">{e.category}</span>
+                      <span className="text-xs px-2 py-1 rounded-full bg-[var(--paper2)] text-[var(--ink2)] font-medium">{e.category}</span>
                     </td>
-                    <td className="px-4 py-3 text-gray-700">{e.description ?? '—'}</td>
+                    <td className="px-4 py-3 text-[var(--ink2)]">{e.description ?? '—'}</td>
                     <td className="px-4 py-3 text-red-600 font-medium">-{formatCurrency(e.amount)}</td>
                   </tr>
                 ))}
@@ -341,17 +341,17 @@ export default function DoctorEarnings({ doctorId, initialEarnings = [], initial
           <div className="relative bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md mx-4">
             <button
               onClick={() => setShowPayoutModal(false)}
-              className="absolute top-4 right-4 p-1 text-gray-400 hover:text-gray-600"
+              className="absolute top-4 right-4 p-1 text-[var(--muted)] hover:text-[var(--ink2)]"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <h3 className="text-lg font-semibold text-gray-900 mb-1">Request Payout</h3>
-            <p className="text-sm text-gray-500 mb-6">Request a payout of your available balance.</p>
-            <div className="bg-blue-50 rounded-lg p-4 mb-6">
-              <p className="text-sm text-gray-600">Available Balance</p>
-              <p className="text-2xl font-semibold text-blue-700">{formatCurrency(summary.netEarnings)}</p>
+            <h3 className="text-lg font-semibold text-[var(--ink)] mb-1">Request Payout</h3>
+            <p className="text-sm text-[var(--muted)] mb-6">Request a payout of your available balance.</p>
+            <div className="bg-[var(--paper2)] rounded-lg p-4 mb-6">
+              <p className="text-sm text-[var(--ink2)]">Available Balance</p>
+              <p className="text-2xl font-semibold text-[var(--ink)]">{formatCurrency(summary.netEarnings)}</p>
             </div>
             {payoutMsg && (
               <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-800 text-sm">{payoutMsg}</div>
@@ -359,7 +359,7 @@ export default function DoctorEarnings({ doctorId, initialEarnings = [], initial
             <button
               onClick={handlePayoutRequest}
               disabled={payoutLoading}
-              className="w-full py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 transition-colors"
+              className="w-full py-2.5 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
             >
               {payoutLoading ? 'Submitting...' : 'Submit Payout Request'}
             </button>

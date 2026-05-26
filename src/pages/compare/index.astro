@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
 import { COMPARE_SLUGS } from '../../utils/seo_slugs';
 
 const title = "Compare TMS Treatments & Devices | Side-by-Side Guides | TMS List";
@@ -96,73 +97,56 @@ const comparisonMeta: Record<string, { color: string; desc: string; icon: string
 };
 
 const colorMap: Record<string, { bg: string; border: string; text: string; badge: string }> = {
-  emerald: { bg: 'bg-emerald-50 dark:bg-emerald-950', border: 'border-emerald-200 hover:border-emerald-400 dark:border-emerald-900 dark:hover:border-emerald-700', text: 'text-emerald-600 dark:text-emerald-400', badge: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300' },
-  blue: { bg: 'bg-blue-50 dark:bg-blue-950', border: 'border-blue-200 hover:border-blue-400 dark:border-blue-900 dark:hover:border-blue-700', text: 'text-blue-600 dark:text-blue-400', badge: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300' },
-  rose: { bg: 'bg-rose-50 dark:bg-rose-950', border: 'border-rose-200 hover:border-rose-400 dark:border-rose-900 dark:hover:border-rose-700', text: 'text-rose-600 dark:text-rose-400', badge: 'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300' },
-  violet: { bg: 'bg-violet-50 dark:bg-violet-950', border: 'border-violet-200 hover:border-violet-400 dark:border-violet-900 dark:hover:border-violet-700', text: 'text-violet-600 dark:text-violet-400', badge: 'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300' },
-  amber: { bg: 'bg-amber-50 dark:bg-amber-950', border: 'border-amber-200 hover:border-amber-400 dark:border-amber-900 dark:hover:border-amber-700', text: 'text-amber-600 dark:text-amber-400', badge: 'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300' },
-  pink: { bg: 'bg-pink-50 dark:bg-pink-950', border: 'border-pink-200 hover:border-pink-400 dark:border-pink-900 dark:hover:border-pink-700', text: 'text-pink-600 dark:text-pink-400', badge: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300' },
-  cyan: { bg: 'bg-cyan-50 dark:bg-cyan-950', border: 'border-cyan-200 hover:border-cyan-400 dark:border-cyan-900 dark:hover:border-cyan-700', text: 'text-cyan-600 dark:text-cyan-400', badge: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900 dark:text-cyan-300' },
-  slate: { bg: 'bg-slate-100 dark:bg-slate-800', border: 'border-slate-300 hover:border-slate-400 dark:border-slate-700 dark:hover:border-slate-600', text: 'text-slate-600 dark:text-slate-300', badge: 'bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-300' },
-  orange: { bg: 'bg-orange-50 dark:bg-orange-950', border: 'border-orange-200 hover:border-orange-400 dark:border-orange-900 dark:hover:border-orange-700', text: 'text-orange-600 dark:text-orange-400', badge: 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300' },
-  teal: { bg: 'bg-teal-50 dark:bg-teal-950', border: 'border-teal-200 hover:border-teal-400 dark:border-teal-900 dark:hover:border-teal-700', text: 'text-teal-600 dark:text-teal-400', badge: 'bg-teal-100 text-teal-700 dark:bg-teal-900 dark:text-teal-300' },
-  indigo: { bg: 'bg-indigo-50 dark:bg-indigo-950', border: 'border-violet-200 hover:border-violet-400 dark:border-indigo-900 dark:hover:border-indigo-700', text: 'text-violet-600 dark:text-indigo-400', badge: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300' },
-  fuchsia: { bg: 'bg-fuchsia-50 dark:bg-fuchsia-950', border: 'border-fuchsia-200 hover:border-fuchsia-400 dark:border-fuchsia-900 dark:hover:border-fuchsia-700', text: 'text-fuchsia-600 dark:text-fuchsia-400', badge: 'bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900 dark:text-fuchsia-300' },
+  emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200 hover:border-emerald-400', text: 'text-emerald-600', badge: 'bg-emerald-100 text-emerald-700' },
+  blue: { bg: 'bg-[var(--paper2)]', border: 'border-[var(--line)] hover:border-[rgba(10,22,40,0.2)]', text: 'text-[var(--accent)]', badge: 'bg-[rgba(10,22,40,0.1)] text-[var(--accent)]' },
+  rose: { bg: 'bg-[rgba(201,101,74,0.06)]', border: 'border-[var(--line)] hover:border-[rgba(201,101,74,0.2)]', text: 'text-[var(--warm)]', badge: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]' },
+  violet: { bg: 'bg-[rgba(10,22,40,0.08)]', border: 'border-[rgba(10,22,40,0.15)] hover:border-[var(--ink2)]', text: 'text-[var(--accent)]', badge: 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]' },
+  amber: { bg: 'bg-amber-50', border: 'border-amber-200 hover:border-amber-400', text: 'text-amber-600', badge: 'bg-amber-100 text-amber-700' },
+  pink: { bg: 'bg-[rgba(201,101,74,0.06)]', border: 'border-[var(--line)] hover:border-[rgba(201,101,74,0.2)]', text: 'text-[var(--warm)]', badge: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]' },
+  cyan: { bg: 'bg-[var(--paper2)]', border: 'border-[var(--line)] hover:border-[rgba(10,22,40,0.2)]', text: 'text-[var(--accent)]', badge: 'bg-[rgba(10,22,40,0.1)] text-[var(--accent)]' },
+  slate: { bg: 'bg-[var(--paper2)]', border: 'border-[var(--line)] hover:border-[var(--line)]', text: 'text-[var(--muted)]', badge: 'bg-[var(--paper2)] text-[var(--ink2)]' },
+  orange: { bg: 'bg-orange-50', border: 'border-orange-200 hover:border-orange-400', text: 'text-orange-600', badge: 'bg-orange-100 text-orange-700' },
+  teal: { bg: 'bg-teal-50', border: 'border-teal-200 hover:border-teal-400', text: 'text-teal-600', badge: 'bg-teal-100 text-teal-700' },
+  indigo: { bg: 'bg-[rgba(201,101,74,0.06)]', border: 'border-[var(--line)] hover:border-[rgba(201,101,74,0.2)]', text: 'text-[var(--warm)]', badge: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]' },
+  fuchsia: { bg: 'bg-[rgba(201,101,74,0.06)]', border: 'border-[var(--line)] hover:border-[rgba(201,101,74,0.2)]', text: 'text-[var(--warm)]', badge: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]' },
 };
 
 const deviceColorMap: Record<string, { bg: string; border: string; text: string; badge: string }> = {
-  neurostar: { bg: 'bg-blue-50 dark:bg-blue-950', border: 'border-blue-200 hover:border-blue-400 dark:border-blue-900 dark:hover:border-blue-700', text: 'text-blue-600 dark:text-blue-400', badge: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300' },
-  brainsway: { bg: 'bg-emerald-50 dark:bg-emerald-950', border: 'border-emerald-200 hover:border-emerald-400 dark:border-emerald-900 dark:hover:border-emerald-700', text: 'text-emerald-600 dark:text-emerald-400', badge: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300' },
-  magventure: { bg: 'bg-violet-50 dark:bg-violet-950', border: 'border-violet-200 hover:border-violet-400 dark:border-violet-900 dark:hover:border-violet-700', text: 'text-violet-600 dark:text-violet-400', badge: 'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300' },
-  magstim: { bg: 'bg-rose-50 dark:bg-rose-950', border: 'border-rose-200 hover:border-rose-400 dark:border-rose-900 dark:hover:border-rose-700', text: 'text-rose-600 dark:text-rose-400', badge: 'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300' },
+  neurostar: { bg: 'bg-[var(--paper2)]', border: 'border-[var(--line)] hover:border-[rgba(10,22,40,0.2)]', text: 'text-[var(--accent)]', badge: 'bg-[rgba(10,22,40,0.1)] text-[var(--accent)]' },
+  brainsway: { bg: 'bg-emerald-50', border: 'border-emerald-200 hover:border-emerald-400', text: 'text-emerald-600', badge: 'bg-emerald-100 text-emerald-700' },
+  magventure: { bg: 'bg-[rgba(10,22,40,0.08)]', border: 'border-[rgba(10,22,40,0.15)] hover:border-[var(--ink2)]', text: 'text-[var(--accent)]', badge: 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]' },
+  magstim: { bg: 'bg-[rgba(201,101,74,0.06)]', border: 'border-[var(--line)] hover:border-[rgba(201,101,74,0.2)]', text: 'text-[var(--warm)]', badge: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]' },
 };
 ---
 
 <Layout title={title} description={description} schema={compareSchema}>
-  <main>
-    <!-- Hero -->
-    <section class="relative bg-slate-950 overflow-hidden">
-      <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0); background-size: 28px 28px;"></div>
-      <div class="absolute top-[-20%] right-[10%] w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[180px]"></div>
-      <div class="absolute bottom-[-10%] left-[15%] w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[140px]"></div>
-
-      <div class="container mx-auto px-4 pt-12 pb-20 lg:pt-16 lg:pb-28 relative z-10">
-        <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
-          <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
-          <span class="text-slate-700">/</span>
-          <span class="text-slate-300">Compare</span>
-        </nav>
-        <div class="max-w-3xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
-            <div class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></div>
-            <span class="text-xs font-semibold text-slate-300 tracking-wider uppercase">{COMPARE_SLUGS.length} Comparison Guides</span>
-          </div>
-          <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
-            Compare<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">TMS Options</span>
-          </h1>
-          <p class="text-lg text-slate-400 leading-relaxed mb-8 max-w-xl">
-            Side-by-side comparisons to help you understand treatment options, device differences, and which approach might be right for your situation.
-          </p>
-          <!-- Quick links -->
-          <div class="flex flex-wrap gap-2">
-            <a href="/compare/tms-vs-antidepressants/" class="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs text-slate-300 transition-colors">TMS vs. Medication</a>
-            <a href="/compare/tms-vs-ect/" class="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs text-slate-300 transition-colors">TMS vs. ECT</a>
-            <a href="/compare/tms-vs-ketamine/" class="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs text-slate-300 transition-colors">TMS vs. Ketamine</a>
-            <a href="/compare/neurostar-vs-brainsway/" class="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs text-slate-300 transition-colors">NeuroStar vs. BrainsWay</a>
-          </div>
-        </div>
-      </div>
-      <div class="absolute bottom-0 left-0 right-0 h-16 bg-white dark:bg-slate-950" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
-    </section>
+  <main style="background:var(--paper)">
+    <EditorialHero
+      eyebrow={`${COMPARE_SLUGS.length} Comparison Guides`}
+      eyebrowDot="#22c55e"
+      title="Side-by-side"
+      titleAccent="comparisons."
+      description="Understand treatment options, device differences, and which approach might be right for your situation."
+      breadcrumbs={[{ label: "Home", href: "/" }, { label: "Compare" }]}
+      ctas={[
+        { label: "TMS vs Medication", href: "/compare/tms-vs-antidepressants/" },
+        { label: "TMS vs ECT", href: "/compare/tms-vs-ect/", variant: "outline" },
+      ]}
+      stats={[
+        { value: treatmentComparisons.length, label: "Treatment Comparisons", color: "ink" },
+        { value: deviceComparisons.length, label: "Device Comparisons", color: "accent" },
+        { value: COMPARE_SLUGS.length, label: "Total Guides", color: "warm" },
+      ]}
+    />
 
     <!-- YouTube Video Section -->
-    <section class="py-12 bg-white border-b border-slate-100 dark:bg-slate-950 dark:border-slate-800">
+    <section class="py-12 bg-[var(--paper)] border-b border-[var(--line)]  ">
       <div class="container mx-auto px-4 max-w-5xl">
         <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-2 dark:text-slate-100">Watch: TMS Explained in 5 Minutes</h2>
-          <p class="text-slate-500 dark:text-slate-400">Quick overview of how TMS works, how it compares to other treatments, and what to expect.</p>
+          <h2 class="text-2xl font-bold text-[var(--ink)] tracking-tight mb-2 ">Watch: TMS Explained in 5 Minutes</h2>
+          <p class="text-[var(--muted)] ">Quick overview of how TMS works, how it compares to other treatments, and what to expect.</p>
         </div>
-        <div class="relative rounded-2xl overflow-hidden shadow-xl border border-slate-100 max-w-3xl mx-auto aspect-video dark:border-slate-800 dark:shadow-slate-950">
+        <div class="relative rounded-2xl overflow-hidden shadow-xl border border-[var(--line)] max-w-3xl mx-auto aspect-video  ">
           <iframe
             class="w-full h-full"
             src="https://www.youtube.com/embed/gVAVAaobtJo"
@@ -174,7 +158,7 @@ const deviceColorMap: Record<string, { bg: string; border: string; text: string;
           </iframe>
         </div>
         <div class="text-center mt-4">
-          <p class="text-xs text-slate-400 dark:text-slate-500">Full comparison videos are in production. Subscribe to get notified when they launch.</p>
+          <p class="text-xs text-[var(--muted)] ">Full comparison videos are in production. Subscribe to get notified when they launch.</p>
         </div>
       </div>
     </section>
@@ -185,11 +169,11 @@ const deviceColorMap: Record<string, { bg: string; border: string; text: string;
         <div class="flex items-end justify-between mb-10">
           <div>
             <div class="flex items-center gap-2 mb-2">
-              <div class="w-5 h-5 rounded bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold dark:bg-blue-900 dark:text-blue-300">1</div>
-              <span class="text-xs font-semibold text-blue-600 uppercase tracking-wider dark:text-blue-400">Treatment Comparisons</span>
+              <div class="w-5 h-5 rounded bg-[rgba(10,22,40,0.1)] text-[var(--accent)] flex items-center justify-center text-[10px] font-bold">1</div>
+              <span class="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider ">Treatment Comparisons</span>
             </div>
-            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-100">TMS vs. Other Treatments</h2>
-            <p class="text-slate-500 mt-1 dark:text-slate-400">How does TMS stack up against medications, ECT, ketamine, therapy, and experimental options?</p>
+            <h2 class="text-2xl lg:text-3xl font-bold text-[var(--ink)] tracking-tight ">TMS vs. Other Treatments</h2>
+            <p class="text-[var(--muted)] mt-1 ">How does TMS stack up against medications, ECT, ketamine, therapy, and experimental options?</p>
           </div>
         </div>
 
@@ -199,15 +183,15 @@ const deviceColorMap: Record<string, { bg: string; border: string; text: string;
             const c = colorMap[meta.color] || colorMap.slate;
             return (
               <a href={`/compare/${comp.slug}/`}
-                 class={`group bg-white rounded-2xl border ${c.border} p-6 hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.10)] transition-all duration-300 dark:bg-slate-900 dark:shadow-slate-950`}>
+                 class={`group bg-[var(--paper)] rounded-2xl border ${c.border} p-6 hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.10)] transition-all duration-300  `}>
                 <div class="flex items-center justify-between mb-4">
                   <div class="flex items-center gap-2">
                     <span class={`px-2.5 py-1 ${c.badge} text-[10px] font-bold uppercase tracking-wider rounded-md`}>{meta.category}</span>
                   </div>
-                  <svg class="w-4 h-4 text-slate-300 group-hover:text-blue-500 group-hover:translate-x-1 transition-all dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  <svg class="w-4 h-4 text-[var(--muted)] group-hover:text-[var(--accent2)] group-hover:translate-x-1 transition-all " fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </div>
-                <h3 class="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug tracking-tight dark:text-slate-100 dark:group-hover:text-blue-400">{comp.title}</h3>
-                <p class="text-sm text-slate-500 leading-relaxed dark:text-slate-400">{meta.desc}</p>
+                <h3 class="text-base font-bold text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors mb-2 leading-snug tracking-tight">{comp.title}</h3>
+                <p class="text-sm text-[var(--muted)] leading-relaxed ">{meta.desc}</p>
               </a>
             );
           })}
@@ -216,34 +200,34 @@ const deviceColorMap: Record<string, { bg: string; border: string; text: string;
     </section>
 
     <!-- Device Comparisons -->
-    <section class="py-16 bg-slate-50 border-t border-slate-100 dark:bg-slate-950 dark:border-slate-800">
+    <section class="py-16 bg-[var(--paper2)] border-t border-[var(--line)]  ">
       <div class="container mx-auto px-4 max-w-6xl">
         <div class="flex items-end justify-between mb-10">
           <div>
             <div class="flex items-center gap-2 mb-2">
-              <div class="w-5 h-5 rounded bg-violet-100 text-violet-600 flex items-center justify-center text-[10px] font-bold dark:bg-violet-900 dark:text-violet-300">2</div>
-              <span class="text-xs font-semibold text-violet-600 uppercase tracking-wider dark:text-violet-400">Device Comparisons</span>
+              <div class="w-5 h-5 rounded bg-[rgba(10,22,40,0.1)] text-[var(--accent)] flex items-center justify-center text-[10px] font-bold">2</div>
+              <span class="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider">Device Comparisons</span>
             </div>
-            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-100">TMS Device Showdown</h2>
-            <p class="text-slate-500 mt-1 dark:text-slate-400">Compare FDA-cleared TMS machines: coil types, protocols, clinical evidence, and US availability.</p>
+            <h2 class="text-2xl lg:text-3xl font-bold text-[var(--ink)] tracking-tight ">TMS Device Showdown</h2>
+            <p class="text-[var(--muted)] mt-1 ">Compare FDA-cleared TMS machines: coil types, protocols, clinical evidence, and US availability.</p>
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           {deviceComparisons.map(comp => {
             const deviceSlug = comp.slug.replace(/-(?:vs|versus)-.*$/, '').replace(/-vs-.*$/, '');
-            const c = deviceColorMap[deviceSlug] || { bg: 'bg-slate-50 dark:bg-slate-900', border: 'border-slate-200 hover:border-slate-400 dark:border-slate-700 dark:hover:border-slate-600', text: 'text-slate-600 dark:text-slate-300', badge: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300' };
+            const c = deviceColorMap[deviceSlug] || { bg: 'bg-[var(--paper2)] ', border: 'border-[var(--line)] hover:border-[var(--line)]  ', text: 'text-[var(--muted)] ', badge: 'bg-[var(--paper2)] text-[var(--ink2)] ' };
             return (
               <a href={`/compare/${comp.slug}/`}
-                 class={`group bg-white rounded-2xl border ${c.border} p-6 hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.10)] transition-all duration-300 dark:bg-slate-900 dark:shadow-slate-950`}>
+                 class={`group bg-[var(--paper)] rounded-2xl border ${c.border} p-6 hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.10)] transition-all duration-300  `}>
                 <div class="flex items-center justify-between mb-4">
-                  <div class="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center dark:bg-violet-950">
-                    <svg class="w-4 h-4 text-violet-600 dark:text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                  <div class="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.08)] flex items-center justify-center">
+                    <svg class="w-4 h-4 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
                   </div>
-                  <svg class="w-4 h-4 text-slate-300 group-hover:text-violet-500 group-hover:translate-x-1 transition-all dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  <svg class="w-4 h-4 text-[var(--muted)] group-hover:text-[var(--accent2)] group-hover:translate-x-1 transition-all " fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </div>
-                <h3 class="text-base font-bold text-slate-900 group-hover:text-violet-600 transition-colors mb-2 leading-snug tracking-tight dark:text-slate-100 dark:group-hover:text-violet-400">{comp.title}</h3>
-                <p class="text-sm text-slate-500 leading-relaxed dark:text-slate-400">Compare coil types, FDA clearances, clinical protocols, and US clinic availability.</p>
+                <h3 class="text-base font-bold text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors mb-2 leading-snug tracking-tight">{comp.title}</h3>
+                <p class="text-sm text-[var(--muted)] leading-relaxed ">Compare coil types, FDA clearances, clinical protocols, and US clinic availability.</p>
               </a>
             );
           })}
@@ -252,125 +236,125 @@ const deviceColorMap: Record<string, { bg: string; border: string; text: string;
     </section>
 
     <!-- How to Decide -->
-    <section class="py-16 bg-white border-t border-slate-100 dark:bg-slate-950 dark:border-slate-800">
+    <section class="py-16 bg-[var(--paper)] border-t border-[var(--line)]  ">
       <div class="container mx-auto px-4 max-w-5xl">
         <div class="text-center mb-10">
-          <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight mb-3 dark:text-slate-100">How to Choose the Right Treatment</h2>
-          <p class="text-slate-500 max-w-xl mx-auto dark:text-slate-400">Every patient situation is different. Here's how to think through your options systematically.</p>
+          <h2 class="text-2xl lg:text-3xl font-bold text-[var(--ink)] tracking-tight mb-3 ">How to Choose the Right Treatment</h2>
+          <p class="text-[var(--muted)] max-w-xl mx-auto ">Every patient situation is different. Here's how to think through your options systematically.</p>
         </div>
 
         <!-- Decision Matrix -->
-        <div class="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm mb-10 dark:border-slate-800 dark:shadow-slate-950">
+        <div class="overflow-x-auto rounded-2xl border border-[var(--line)] shadow-sm mb-10  ">
           <table class="w-full text-sm">
-            <thead class="bg-slate-50 dark:bg-slate-900">
+            <thead class="bg-[var(--paper2)] ">
               <tr>
-                <th class="text-left px-6 py-4 font-bold text-slate-700 dark:text-slate-300">Factor</th>
-                <th class="text-left px-6 py-4 font-bold text-slate-700 dark:text-slate-300">TMS</th>
-                <th class="text-left px-6 py-4 font-bold text-slate-700 dark:text-slate-300">Antidepressants</th>
-                <th class="text-left px-6 py-4 font-bold text-slate-700 dark:text-slate-300">ECT</th>
-                <th class="text-left px-6 py-4 font-bold text-slate-700 dark:text-slate-300">Ketamine</th>
+                <th class="text-left px-6 py-4 font-bold text-[var(--ink2)] ">Factor</th>
+                <th class="text-left px-6 py-4 font-bold text-[var(--ink2)] ">TMS</th>
+                <th class="text-left px-6 py-4 font-bold text-[var(--ink2)] ">Antidepressants</th>
+                <th class="text-left px-6 py-4 font-bold text-[var(--ink2)] ">ECT</th>
+                <th class="text-left px-6 py-4 font-bold text-[var(--ink2)] ">Ketamine</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
+            <tbody class="divide-y divide-[var(--line)] divide-[var(--line)]">
               <tr>
-                <td class="px-6 py-3.5 font-medium text-slate-700 dark:text-slate-300">Invasiveness</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium dark:bg-emerald-950 dark:text-emerald-400">Non-invasive</span></td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium dark:bg-emerald-950 dark:text-emerald-400">Oral medication</span></td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400"><span class="px-2 py-1 bg-rose-50 text-rose-600 text-xs rounded-full font-medium dark:bg-rose-950 dark:text-rose-400">Sedation required</span></td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400"><span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full font-medium dark:bg-amber-950 dark:text-amber-400">IV infusion</span></td>
+                <td class="px-6 py-3.5 font-medium text-[var(--ink2)] ">Invasiveness</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] "><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Non-invasive</span></td>
+                <td class="px-6 py-3.5 text-[var(--muted)] "><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Oral medication</span></td>
+                <td class="px-6 py-3.5 text-[var(--muted)] "><span class="px-2 py-1 bg-[rgba(201,101,74,0.06)] text-[var(--warm)] text-xs rounded-full font-medium">Sedation required</span></td>
+                <td class="px-6 py-3.5 text-[var(--muted)] "><span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full font-medium">IV infusion</span></td>
               </tr>
-              <tr class="bg-slate-30/40 dark:bg-slate-900">
-                <td class="px-6 py-3.5 font-medium text-slate-700 dark:text-slate-300">Response rate (TRD)</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">50–60%</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">30–40%</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">60–80%</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">50–70%</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-3.5 font-medium text-slate-700 dark:text-slate-300">Time to effect</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">2–6 weeks</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">4–8 weeks</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">2–4 weeks</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">Hours to days</td>
-              </tr>
-              <tr class="bg-slate-30/40 dark:bg-slate-900">
-                <td class="px-6 py-3.5 font-medium text-slate-700 dark:text-slate-300">Cognitive side effects</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium dark:bg-emerald-950 dark:text-emerald-400">None</span></td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">Possible (blunting)</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400"><span class="px-2 py-1 bg-rose-50 text-rose-600 text-xs rounded-full font-medium dark:bg-rose-950 dark:text-rose-400">Memory risk</span></td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">Minimal</td>
+              <tr class="bg-[var(--paper2)] ">
+                <td class="px-6 py-3.5 font-medium text-[var(--ink2)] ">Response rate (TRD)</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">50–60%</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">30–40%</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">60–80%</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">50–70%</td>
               </tr>
               <tr>
-                <td class="px-6 py-3.5 font-medium text-slate-700 dark:text-slate-300">Insurance coverage</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium dark:bg-emerald-950 dark:text-emerald-400">Widely covered</span></td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium dark:bg-emerald-950 dark:text-emerald-400">Universal</span></td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400"><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium dark:bg-emerald-950 dark:text-emerald-400">Widely covered</span></td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400"><span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full font-medium dark:bg-amber-950 dark:text-amber-400">Limited</span></td>
+                <td class="px-6 py-3.5 font-medium text-[var(--ink2)] ">Time to effect</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">2–6 weeks</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">4–8 weeks</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">2–4 weeks</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">Hours to days</td>
               </tr>
-              <tr class="bg-slate-30/40 dark:bg-slate-900">
-                <td class="px-6 py-3.5 font-medium text-slate-700 dark:text-slate-300">Daily commitment</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">5 days/week × 6 wks</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">Daily pill</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">2–3×/week × 4 wks</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">6 infusions, then maintenance</td>
+              <tr class="bg-[var(--paper2)] ">
+                <td class="px-6 py-3.5 font-medium text-[var(--ink2)] ">Cognitive side effects</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] "><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">None</span></td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">Possible (blunting)</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] "><span class="px-2 py-1 bg-[rgba(201,101,74,0.06)] text-[var(--warm)] text-xs rounded-full font-medium">Memory risk</span></td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">Minimal</td>
               </tr>
               <tr>
-                <td class="px-6 py-3.5 font-medium text-slate-700 dark:text-slate-300">FDA-cleared for</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">MDD, OCD, smoking</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">Multiple indications</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">MDD, bipolar, catatonia</td>
-                <td class="px-6 py-3.5 text-slate-600 dark:text-slate-400">TRD, bipolar (Spravato)</td>
+                <td class="px-6 py-3.5 font-medium text-[var(--ink2)] ">Insurance coverage</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] "><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Widely covered</span></td>
+                <td class="px-6 py-3.5 text-[var(--muted)] "><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Universal</span></td>
+                <td class="px-6 py-3.5 text-[var(--muted)] "><span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-xs rounded-full font-medium">Widely covered</span></td>
+                <td class="px-6 py-3.5 text-[var(--muted)] "><span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full font-medium">Limited</span></td>
+              </tr>
+              <tr class="bg-[var(--paper2)] ">
+                <td class="px-6 py-3.5 font-medium text-[var(--ink2)] ">Daily commitment</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">5 days/week × 6 wks</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">Daily pill</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">2–3×/week × 4 wks</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">6 infusions, then maintenance</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-[var(--ink2)] ">FDA-cleared for</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">MDD, OCD, smoking</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">Multiple indications</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">MDD, bipolar, catatonia</td>
+                <td class="px-6 py-3.5 text-[var(--muted)] ">TRD, bipolar (Spravato)</td>
               </tr>
             </tbody>
           </table>
-          <div class="p-4 bg-slate-50 text-xs text-slate-400 text-center border-t border-slate-100 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-500">
+          <div class="p-4 bg-[var(--paper2)] text-xs text-[var(--muted)] text-center border-t border-[var(--line)]   ">
             TRD = treatment-resistant depression. Data reflects clinical trial ranges and may not reflect individual outcomes.
           </div>
         </div>
 
         <!-- Decision guide cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div class="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm dark:bg-slate-900 dark:border-slate-800 dark:shadow-slate-950">
-            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 dark:bg-blue-950 dark:text-blue-400">
+          <div class="bg-[var(--paper)] rounded-2xl p-7 border border-[var(--line)] shadow-sm   ">
+            <div class="w-10 h-10 rounded-xl bg-[var(--paper2)] text-[var(--accent)] flex items-center justify-center mb-4 ">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
-            <h3 class="font-bold text-slate-900 mb-2 dark:text-slate-100">Start Here: New Diagnosis</h3>
-            <p class="text-sm text-slate-500 leading-relaxed mb-3 dark:text-slate-400">If you've never been treated for depression, begin with antidepressants or psychotherapy under a psychiatrist's care. TMS is typically considered after medication failures.</p>
-            <a href="/compare/tms-vs-antidepressants/" class="text-sm font-semibold text-blue-600 hover:underline dark:text-blue-400">Read TMS vs. Medication →</a>
+            <h3 class="font-bold text-[var(--ink)] mb-2 ">Start Here: New Diagnosis</h3>
+            <p class="text-sm text-[var(--muted)] leading-relaxed mb-3 ">If you've never been treated for depression, begin with antidepressants or psychotherapy under a psychiatrist's care. TMS is typically considered after medication failures.</p>
+            <a href="/compare/tms-vs-antidepressants/" class="text-sm font-semibold text-[var(--accent)] hover:underline ">Read TMS vs. Medication →</a>
           </div>
-          <div class="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm dark:bg-slate-900 dark:border-slate-800 dark:shadow-slate-950">
-            <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-4 dark:bg-rose-950 dark:text-rose-400">
+          <div class="bg-[var(--paper)] rounded-2xl p-7 border border-[var(--line)] shadow-sm   ">
+            <div class="w-10 h-10 rounded-xl bg-[rgba(201,101,74,0.06)] text-[var(--warm)] flex items-center justify-center mb-4">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
             </div>
-            <h3 class="font-bold text-slate-900 mb-2 dark:text-slate-100">Severe / High Risk Cases</h3>
-            <p class="text-sm text-slate-500 leading-relaxed mb-3 dark:text-slate-400">If depression is severe, treatment-resistant, or includes psychotic features or catatonia, ECT may be the most effective option. TMS may be considered afterward for maintenance.</p>
-            <a href="/compare/tms-vs-ect/" class="text-sm font-semibold text-rose-600 hover:underline dark:text-rose-400">Read TMS vs. ECT →</a>
+            <h3 class="font-bold text-[var(--ink)] mb-2 ">Severe / High Risk Cases</h3>
+            <p class="text-sm text-[var(--muted)] leading-relaxed mb-3 ">If depression is severe, treatment-resistant, or includes psychotic features or catatonia, ECT may be the most effective option. TMS may be considered afterward for maintenance.</p>
+            <a href="/compare/tms-vs-ect/" class="text-sm font-semibold text-[var(--warm)] hover:underline">Read TMS vs. ECT →</a>
           </div>
-          <div class="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm dark:bg-slate-900 dark:border-slate-800 dark:shadow-slate-950">
-            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 dark:bg-emerald-950 dark:text-emerald-400">
+          <div class="bg-[var(--paper)] rounded-2xl p-7 border border-[var(--line)] shadow-sm   ">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
             </div>
-            <h3 class="font-bold text-slate-900 mb-2 dark:text-slate-100">Need Fast Results</h3>
-            <p class="text-sm text-slate-500 leading-relaxed mb-3 dark:text-slate-400">If you need rapid response due to severe symptoms or suicidality, ketamine/esketamine works in hours. TMS and medications take weeks. No single option works for everyone — speed vs. durability is a trade-off.</p>
-            <a href="/compare/tms-vs-ketamine/" class="text-sm font-semibold text-emerald-600 hover:underline dark:text-emerald-400">Read TMS vs. Ketamine →</a>
+            <h3 class="font-bold text-[var(--ink)] mb-2 ">Need Fast Results</h3>
+            <p class="text-sm text-[var(--muted)] leading-relaxed mb-3 ">If you need rapid response due to severe symptoms or suicidality, ketamine/esketamine works in hours. TMS and medications take weeks. No single option works for everyone — speed vs. durability is a trade-off.</p>
+            <a href="/compare/tms-vs-ketamine/" class="text-sm font-semibold text-emerald-600 hover:underline">Read TMS vs. Ketamine →</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Find a Clinic CTA -->
-    <section class="py-16 bg-slate-950 border-t border-slate-800">
+    <section class="py-16 bg-[var(--ink)] border-t border-[var(--line)]">
       <div class="container mx-auto px-4 max-w-3xl text-center">
-        <div class="w-14 h-14 rounded-2xl bg-blue-600/30 text-blue-400 flex items-center justify-center mx-auto mb-6">
+        <div class="w-14 h-14 rounded-2xl bg-[var(--accent)]/30 text-[var(--accent2)] flex items-center justify-center mx-auto mb-6">
           <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
         </div>
         <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">Compare Specific Clinics</h2>
-        <p class="text-slate-400 mb-8 max-w-lg mx-auto dark:text-slate-400">Use our compare tool to evaluate two or more TMS clinics side-by-side — location, machines, ratings, insurance, and pricing.</p>
+        <p class="text-[var(--muted)] mb-8 max-w-lg mx-auto ">Use our compare tool to evaluate two or more TMS clinics side-by-side — location, machines, ratings, insurance, and pricing.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/us/" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-blue-600/25 dark:bg-blue-700 dark:hover:bg-blue-600 dark:shadow-blue-900/30">
+          <a href="/us/" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[var(--accent)] hover:bg-[var(--accent2)] text-white font-semibold rounded-xl transition-colors shadow-lg shadow-[rgba(10,22,40,0.1)]">
             Find a Clinic
           </a>
-          <a href="/compare/" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl transition-colors border border-white/10 dark:bg-white/10 dark:border-white/20">
+          <a href="/compare/" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[var(--paper)] hover:bg-[var(--paper2)] text-[var(--ink)] font-semibold rounded-xl transition-colors border border-[var(--line)]">
             Browse All Comparisons
           </a>
         </div>

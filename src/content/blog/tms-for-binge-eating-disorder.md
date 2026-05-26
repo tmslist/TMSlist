@@ -4,7 +4,7 @@ description: "Emerging research suggests TMS may help reduce binge eating episod
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-binge-eating-disorder.svg"
 tags: ["tms", "binge-eating", "eating-disorder", "compulsivity", "food-addiction"]
 ---
 
@@ -81,35 +81,35 @@ Nevertheless, the convergence of compelling neuroimaging evidence, promising pil
 
 For patients struggling with binge eating disorder who have found existing treatments insufficient, TMS — available off-label from experienced neuromodulation practitioners — represents a scientifically grounded option that addresses the neurological roots of compulsive eating.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for binge eating disorder?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for binge eating disorder?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS for binge eating disorder is not FDA-cleared and remains an investigational treatment. However, research has shown promising results, with some studies reporting approximately 40% of patients achieving abstinence from binge episodes during treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS for binge eating disorder is not FDA-cleared and remains an investigational treatment. However, research has shown promising results, with some studies reporting approximately 40% of patients achieving abstinence from binge episodes during treatment.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What brain target is used for TMS in binge eating disorder?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What brain target is used for TMS in binge eating disorder?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The dorsolateral prefrontal cortex (DLPFC) is the primary target, using high-frequency excitatory stimulation. Deep TMS using H-coils has also been studied specifically for BED, because H-coils can reach deeper structures including the orbitofrontal cortex and insula.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The dorsolateral prefrontal cortex (DLPFC) is the primary target, using high-frequency excitatory stimulation. Deep TMS using H-coils has also been studied specifically for BED, because H-coils can reach deeper structures including the orbitofrontal cortex and insula.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How does TMS help reduce binge eating?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How does TMS help reduce binge eating?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS may enhance prefrontal regulatory function to improve impulse control, modulate reward-circuit hyperactivity to reduce the reinforcing value of binge eating, and reduce craving-related activity in the insula and orbitofrontal cortex.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS may enhance prefrontal regulatory function to improve impulse control, modulate reward-circuit hyperactivity to reduce the reinforcing value of binge eating, and reduce craving-related activity in the insula and orbitofrontal cortex.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

@@ -128,19 +128,19 @@ const ACTION_TYPES = [
 function WorkflowCard({ workflow, onToggle, onEdit }: { workflow: WorkflowAutomation; onToggle: (w: WorkflowAutomation) => void; onEdit: (w: WorkflowAutomation) => void }) {
   const trigger = TRIGGER_TYPES.find(t => t.value === workflow.triggerType);
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-xl border border-[var(--line)] p-6 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className={`w-3 h-3 rounded-full ${workflow.enabled ? 'bg-emerald-500' : 'bg-gray-300'}`} />
+          <div className={`w-3 h-3 rounded-full ${workflow.enabled ? 'bg-emerald-500' : 'bg-[var(--line)]'}`} />
           <div>
-            <h3 className="text-sm font-semibold text-gray-900">{workflow.name}</h3>
-            <p className="text-xs text-gray-500 mt-0.5">{workflow.description}</p>
+            <h3 className="text-sm font-semibold text-[var(--ink)]">{workflow.name}</h3>
+            <p className="text-xs text-[var(--muted)] mt-0.5">{workflow.description}</p>
           </div>
         </div>
         <button
           onClick={() => onToggle(workflow)}
           className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-            workflow.enabled ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
+            workflow.enabled ? 'bg-emerald-100 text-emerald-700' : 'bg-[var(--paper2)] text-[var(--muted)]'
           }`}
         >
           {workflow.enabled ? 'Active' : 'Disabled'}
@@ -149,35 +149,35 @@ function WorkflowCard({ workflow, onToggle, onEdit }: { workflow: WorkflowAutoma
 
       <div className="flex flex-wrap gap-4 mb-4">
         <div>
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Trigger</p>
-          <p className="text-xs text-gray-700 mt-0.5 font-mono bg-gray-50 px-2 py-1 rounded">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wide">Trigger</p>
+          <p className="text-xs text-[var(--ink2)] mt-0.5 font-mono bg-[var(--paper2)] px-2 py-1 rounded">
             {trigger?.label ?? workflow.triggerType}
           </p>
         </div>
         <div>
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Conditions</p>
-          <p className="text-xs text-gray-700 mt-0.5">{workflow.conditions.length}</p>
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wide">Conditions</p>
+          <p className="text-xs text-[var(--ink2)] mt-0.5">{workflow.conditions.length}</p>
         </div>
         <div>
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Actions</p>
-          <p className="text-xs text-gray-700 mt-0.5">{workflow.actions.length}</p>
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wide">Actions</p>
+          <p className="text-xs text-[var(--ink2)] mt-0.5">{workflow.actions.length}</p>
         </div>
         <div>
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Runs</p>
-          <p className="text-xs text-gray-700 mt-0.5">{workflow.runCount.toLocaleString()}</p>
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wide">Runs</p>
+          <p className="text-xs text-[var(--ink2)] mt-0.5">{workflow.runCount.toLocaleString()}</p>
         </div>
       </div>
 
       <div className="flex gap-2">
         <button
           onClick={() => onEdit(workflow)}
-          className="px-3 py-1.5 text-xs font-medium text-violet-700 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors"
+          className="px-3 py-1.5 text-xs font-medium text-[var(--ink)] bg-[rgba(10,22,40,0.08)] hover:bg-[rgba(10,22,40,0.08)] rounded-lg transition-colors"
         >
           Edit
         </button>
         <button
           onClick={() => onToggle(workflow)}
-          className="px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+          className="px-3 py-1.5 text-xs font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-lg transition-colors"
         >
           {workflow.enabled ? 'Disable' : 'Enable'}
         </button>
@@ -231,40 +231,40 @@ function WorkflowEditor({
   };
 
   return (
-    <div className="bg-white rounded-xl border border-violet-200 p-6 shadow-sm">
-      <h3 className="text-base font-semibold text-gray-900 mb-6">
+    <div className="bg-white rounded-xl border border-[rgba(10,22,40,0.2)] p-6 shadow-sm">
+      <h3 className="text-base font-semibold text-[var(--ink)] mb-6">
         {workflow ? 'Edit Workflow' : 'Create Workflow'}
       </h3>
 
       <div className="space-y-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Workflow Name</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Workflow Name</label>
           <input
             type="text"
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="New Workflow"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+            className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Description</label>
           <input
             type="text"
             value={description}
             onChange={e => setDescription(e.target.value)}
             placeholder="What does this workflow do?"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+            className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Trigger</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-2">Trigger</label>
           <select
             value={triggerType}
             onChange={e => setTriggerType(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+            className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
           >
             {TRIGGER_TYPES.map(t => (
               <option key={t.value} value={t.value}>{t.label}</option>
@@ -274,13 +274,13 @@ function WorkflowEditor({
 
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="text-sm font-medium text-gray-700">Conditions</label>
-            <button onClick={addCondition} className="text-xs text-violet-600 hover:text-violet-700 font-medium">
+            <label className="text-sm font-medium text-[var(--ink2)]">Conditions</label>
+            <button onClick={addCondition} className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium">
               + Add Condition
             </button>
           </div>
           {conditions.length === 0 ? (
-            <p className="text-xs text-gray-400 bg-gray-50 rounded-lg px-3 py-2">No conditions — always runs</p>
+            <p className="text-xs text-[var(--muted)] bg-[var(--paper2)] rounded-lg px-3 py-2">No conditions — always runs</p>
           ) : (
             <div className="space-y-2">
               {conditions.map((c, i) => (
@@ -290,12 +290,12 @@ function WorkflowEditor({
                     value={c.field}
                     onChange={e => updateCondition(i, { field: e.target.value })}
                     placeholder="field"
-                    className="flex-1 rounded-lg border border-gray-300 px-2 py-1.5 text-xs focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+                    className="flex-1 rounded-lg border border-[var(--line)] px-2 py-1.5 text-xs focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
                   />
                   <select
                     value={c.operator}
                     onChange={e => updateCondition(i, { operator: e.target.value })}
-                    className="rounded-lg border border-gray-300 px-2 py-1.5 text-xs focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+                    className="rounded-lg border border-[var(--line)] px-2 py-1.5 text-xs focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
                   >
                     {CONDITION_OPERATORS.map(o => (
                       <option key={o.value} value={o.value}>{o.label}</option>
@@ -306,7 +306,7 @@ function WorkflowEditor({
                     value={c.value}
                     onChange={e => updateCondition(i, { value: e.target.value })}
                     placeholder="value"
-                    className="flex-1 rounded-lg border border-gray-300 px-2 py-1.5 text-xs focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+                    className="flex-1 rounded-lg border border-[var(--line)] px-2 py-1.5 text-xs focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
                   />
                   <button onClick={() => removeCondition(i)} className="text-red-500 hover:text-red-600 text-xs px-1">
                     Remove
@@ -319,18 +319,18 @@ function WorkflowEditor({
 
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="text-sm font-medium text-gray-700">Actions</label>
-            <button onClick={addAction} className="text-xs text-violet-600 hover:text-violet-700 font-medium">
+            <label className="text-sm font-medium text-[var(--ink2)]">Actions</label>
+            <button onClick={addAction} className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium">
               + Add Action
             </button>
           </div>
           <div className="space-y-2">
             {actions.map((a, i) => (
-              <div key={i} className="flex gap-2 items-center bg-violet-50 rounded-lg px-3 py-2">
+              <div key={i} className="flex gap-2 items-center bg-[rgba(10,22,40,0.08)] rounded-lg px-3 py-2">
                 <select
                   value={a.type}
                   onChange={e => updateAction(i, { type: e.target.value })}
-                  className="flex-1 rounded-lg border border-violet-200 bg-white px-2 py-1.5 text-xs focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+                  className="flex-1 rounded-lg border border-[rgba(10,22,40,0.2)] bg-white px-2 py-1.5 text-xs focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
                 >
                   {ACTION_TYPES.map(at => (
                     <option key={at.value} value={at.value}>{at.label}</option>
@@ -342,7 +342,7 @@ function WorkflowEditor({
               </div>
             ))}
             {actions.length === 0 && (
-              <p className="text-xs text-gray-400 bg-gray-50 rounded-lg px-3 py-2">No actions defined</p>
+              <p className="text-xs text-[var(--muted)] bg-[var(--paper2)] rounded-lg px-3 py-2">No actions defined</p>
             )}
           </div>
         </div>
@@ -352,11 +352,11 @@ function WorkflowEditor({
         <button
           onClick={handleSave}
           disabled={saving || !name}
-          className="px-5 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-xl hover:bg-violet-700 disabled:opacity-50 transition-colors"
+          className="px-5 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
         >
           {saving ? 'Saving...' : 'Save Workflow'}
         </button>
-        <button onClick={onCancel} className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors">
+        <button onClick={onCancel} className="px-5 py-2.5 text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-xl transition-colors">
           Cancel
         </button>
       </div>
@@ -367,7 +367,7 @@ function WorkflowEditor({
 function ExecutionLogTable({ logs }: { logs: ExecutionLog[] }) {
   if (logs.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500 text-sm">
+      <div className="text-center py-8 text-[var(--muted)] text-sm">
         No execution history yet.
       </div>
     );
@@ -375,38 +375,38 @@ function ExecutionLogTable({ logs }: { logs: ExecutionLog[] }) {
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+      <table className="min-w-full divide-y divide-[var(--line)]">
+        <thead className="bg-[var(--paper2)]">
           <tr>
-            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Triggered</th>
-            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Duration</th>
-            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Input</th>
-            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Output</th>
+            <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Status</th>
+            <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Triggered</th>
+            <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Duration</th>
+            <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Input</th>
+            <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Output</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100">
+        <tbody className="divide-y divide-[var(--line)]">
           {logs.map(log => (
-            <tr key={log.id} className="hover:bg-gray-50">
+            <tr key={log.id} className="hover:bg-[var(--paper2)]">
               <td className="px-4 py-3">
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                   log.status === 'success' ? 'bg-emerald-100 text-emerald-700' :
                   log.status === 'failed' ? 'bg-red-100 text-red-700' :
-                  'bg-blue-100 text-blue-700'
+                  'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]'
                 }`}>
                   {log.status}
                 </span>
               </td>
-              <td className="px-4 py-3 text-xs text-gray-600">
+              <td className="px-4 py-3 text-xs text-[var(--ink2)]">
                 {new Date(log.triggeredAt).toLocaleString()}
               </td>
-              <td className="px-4 py-3 text-xs text-gray-600 font-mono">
+              <td className="px-4 py-3 text-xs text-[var(--ink2)] font-mono">
                 {log.durationMs}ms
               </td>
-              <td className="px-4 py-3 text-xs text-gray-500 max-w-32 truncate font-mono">
+              <td className="px-4 py-3 text-xs text-[var(--muted)] max-w-32 truncate font-mono">
                 {JSON.stringify(log.inputPayload)}
               </td>
-              <td className="px-4 py-3 text-xs text-gray-500 max-w-32 truncate font-mono">
+              <td className="px-4 py-3 text-xs text-[var(--muted)] max-w-32 truncate font-mono">
                 {JSON.stringify(log.outputPayload)}
               </td>
             </tr>
@@ -514,7 +514,7 @@ export default function AdminAutomationWorkflows() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-4 border-violet-200 border-t-violet-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[rgba(10,22,40,0.2)] border-t-[#0A1628] rounded-full animate-spin" />
       </div>
     );
   }
@@ -522,26 +522,26 @@ export default function AdminAutomationWorkflows() {
   return (
     <div>
       {toast && (
-        <div className="fixed top-4 right-4 z-50 bg-gray-900 text-white px-4 py-2.5 rounded-lg shadow-lg text-sm animate-in fade-in">
+        <div className="fixed top-4 right-4 z-50 bg-[var(--ink)] text-white px-4 py-2.5 rounded-lg shadow-lg text-sm animate-in fade-in">
           {toast}
         </div>
       )}
 
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Automation Workflows</h1>
-          <p className="text-gray-500 mt-1">Visual workflow builder — trigger, conditions, actions</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Automation Workflows</h1>
+          <p className="text-[var(--muted)] mt-1">Visual workflow builder — trigger, conditions, actions</p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setShowTemplates(true)}
-            className="px-4 py-2 text-sm font-medium text-violet-700 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm font-medium text-[var(--ink)] bg-[rgba(10,22,40,0.08)] hover:bg-[rgba(10,22,40,0.08)] rounded-lg transition-colors"
           >
             Templates
           </button>
           <button
             onClick={() => setEditing({ id: '', name: '', description: '', triggerType: 'lead.created', conditions: [], actions: [], enabled: false, runCount: 0, lastRunAt: null, createdAt: '' })}
-            className="px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors"
+            className="px-4 py-2 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink)] transition-colors"
           >
             + New Workflow
           </button>
@@ -549,18 +549,18 @@ export default function AdminAutomationWorkflows() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-6 w-fit">
+      <div className="flex gap-1 bg-[var(--paper2)] rounded-xl p-1 mb-6 w-fit">
         {(['workflows', 'history'] as const).map(tab => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-              activeTab === tab ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+              activeTab === tab ? 'bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--ink2)] hover:text-[var(--ink)]'
             }`}
           >
             {tab === 'workflows' ? 'Workflows' : 'Execution History'}
             {tab === 'workflows' && (
-              <span className="ml-2 px-1.5 py-0.5 bg-violet-100 text-violet-700 rounded text-xs">{workflows.length}</span>
+              <span className="ml-2 px-1.5 py-0.5 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] rounded text-xs">{workflows.length}</span>
             )}
           </button>
         ))}
@@ -575,26 +575,26 @@ export default function AdminAutomationWorkflows() {
           )}
 
           {showTemplates && (
-            <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+            <div className="bg-white rounded-xl border border-[var(--line)] p-6 mb-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-semibold text-gray-900">Pre-built Templates</h3>
-                <button onClick={() => setShowTemplates(false)} className="text-gray-400 hover:text-gray-600">
+                <h3 className="text-base font-semibold text-[var(--ink)]">Pre-built Templates</h3>
+                <button onClick={() => setShowTemplates(false)} className="text-[var(--muted)] hover:text-[var(--ink2)]">
                   Close
                 </button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {WORKFLOW_TEMPLATES.map(t => (
-                  <div key={t.id} className="border border-gray-200 rounded-lg p-4 hover:border-violet-300 transition-colors">
-                    <h4 className="text-sm font-semibold text-gray-900">{t.name}</h4>
-                    <p className="text-xs text-gray-500 mt-1 mb-3">{t.description}</p>
+                  <div key={t.id} className="border border-[var(--line)] rounded-lg p-4 hover:border-[rgba(10,22,40,0.2)] transition-colors">
+                    <h4 className="text-sm font-semibold text-[var(--ink)]">{t.name}</h4>
+                    <p className="text-xs text-[var(--muted)] mt-1 mb-3">{t.description}</p>
                     <div className="flex flex-wrap gap-1 mb-3">
-                      <span className="px-2 py-0.5 bg-violet-50 text-violet-700 text-xs rounded font-mono">
+                      <span className="px-2 py-0.5 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs rounded font-mono">
                         {t.triggerType}
                       </span>
                     </div>
                     <button
                       onClick={() => applyTemplate(t)}
-                      className="w-full px-3 py-2 text-xs font-medium text-violet-700 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors"
+                      className="w-full px-3 py-2 text-xs font-medium text-[var(--ink)] bg-[rgba(10,22,40,0.08)] hover:bg-[rgba(10,22,40,0.08)] rounded-lg transition-colors"
                     >
                       Use Template
                     </button>
@@ -609,7 +609,7 @@ export default function AdminAutomationWorkflows() {
               <WorkflowCard key={w.id} workflow={w} onToggle={toggleWorkflow} onEdit={setEditing} />
             ))}
             {workflows.length === 0 && (
-              <div className="col-span-2 text-center py-16 text-gray-500">
+              <div className="col-span-2 text-center py-16 text-[var(--muted)]">
                 <p className="text-lg font-medium">No workflows yet</p>
                 <p className="text-sm mt-1">Create one from scratch or start with a template.</p>
               </div>
@@ -617,9 +617,9 @@ export default function AdminAutomationWorkflows() {
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200">
-          <div className="px-6 py-4 border-b border-gray-100">
-            <h3 className="text-sm font-semibold text-gray-900">Execution History</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)]">
+          <div className="px-6 py-4 border-b border-[var(--line)]">
+            <h3 className="text-sm font-semibold text-[var(--ink)]">Execution History</h3>
           </div>
           <ExecutionLogTable logs={logs} />
         </div>

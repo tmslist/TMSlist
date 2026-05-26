@@ -1,5 +1,6 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+import EditorialHero from "../../../components/editorial/EditorialHero.astro";
 import ClinicCard from "../../../components/ClinicCard.astro";
 import {
   getClinicsByState,
@@ -81,43 +82,36 @@ const stateSchema = JSON.stringify({
   { name: "United States", url: "/us/" },
   { name: stateName, url: `/us/${stateSlug}/` },
 ]}>
-  <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-    <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-    <div
-      class="ai-hero-image absolute inset-0 opacity-20"
-      data-subject={stateName}
-      data-type="city"
-      data-cache-key={`ai-img:city:${stateName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-      data-alt={`Illustration of ${stateName}`}
-    >
-      <div class="ai-img-placeholder absolute inset-0"></div>
-      <img class="ai-img-result hidden w-full h-full object-cover" alt="TMS clinic illustration" />
-      <div class="ai-img-fallback hidden"></div>
-    </div>
-    <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-      <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-        <span class="text-slate-300">/</span>
-        <a href="/us/" class="hover:text-violet-600 transition-colors">United States</a>
-        <span class="text-slate-300">/</span>
-        <span class="text-slate-700 font-medium">{stateName}</span>
-      </nav>
-      <div class="max-w-3xl">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">TMS Therapy Clinics in <span class="text-violet-600">{stateName}</span></h1>
-        <p class="text-lg text-gray-600">Compare {clinicCount} top-rated TMS therapy providers across {cities.length} cities in {stateName}. Read patient reviews, check insurance coverage, and find treatment near you.</p>
-      </div>
-    </div>
-  </section>
+  <EditorialHero
+    eyebrow={`${clinicCount} Verified Clinics · ${cities.length} Cities`}
+    eyebrowDot="#22c55e"
+    title="TMS therapy clinics in"
+    titleAccent={`${stateName}.`}
+    description={`Compare ${clinicCount} top-rated TMS therapy providers across ${cities.length} cities in ${stateName}. Read patient reviews, check insurance coverage, and find treatment near you.`}
+    breadcrumbs={[
+      { label: "Home", href: "/" },
+      { label: "United States", href: "/us/" },
+      { label: stateName },
+    ]}
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "Best TMS Clinics", href: "/best-tms-clinics/", variant: "outline" },
+    ]}
+    stats={[
+      { value: clinicCount, label: "Clinics", color: "ink" },
+      { value: cities.length, label: "Cities", color: "accent" },
+      { value: stateName.length > 12 ? stateName.slice(0,3).toUpperCase() : stateName, label: "State", color: "warm" },
+    ]}
+  />
 
   <main class="container mx-auto px-4 py-8">
     <!-- Top Rated Section -->
     <section class="mb-16">
       <div class="flex items-center mb-8">
-        <h2 class="text-2xl font-semibold text-gray-900">
+        <h2 class="text-2xl font-semibold text-[var(--ink)]">
           Top Rated Clinics in {stateName}
         </h2>
-        <div class="ml-4 h-px flex-1 bg-gray-200"></div>
+        <div class="ml-4 h-px flex-1 bg-[var(--paper2)]"></div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -128,11 +122,11 @@ const stateSchema = JSON.stringify({
     <!-- City Directory -->
     <section>
       <div class="flex items-center mb-8">
-        <h2 class="text-2xl font-semibold text-gray-900">
+        <h2 class="text-2xl font-semibold text-[var(--ink)]">
           Browse by City in {stateName}
         </h2>
-        <div class="ml-4 h-px flex-1 bg-gray-200"></div>
-        <span class="ml-4 text-sm font-medium text-gray-400">{cities.length} cities</span>
+        <div class="ml-4 h-px flex-1 bg-[var(--paper2)]"></div>
+        <span class="ml-4 text-sm font-medium text-[var(--muted)]">{cities.length} cities</span>
       </div>
       <div
         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
@@ -141,16 +135,16 @@ const stateSchema = JSON.stringify({
           cities.map((city) => (
             <a
               href={`/us/${Astro.params.state}/${city.slug}/`}
-              class="group relative bg-white p-5 rounded-2xl border border-gray-100 shadow-[0_2px_8px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.08)] hover:border-blue-200 transition-all overflow-hidden"
+              class="group relative bg-[var(--paper)] p-5 rounded-2xl border border-[var(--line)] shadow-[0_2px_8px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.08)] hover:border-[var(--line)] transition-all overflow-hidden"
             >
-              <div class="absolute inset-x-0 bottom-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+              <div class="absolute inset-x-0 bottom-0 h-1 bg-[var(--accent2)] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
               <div class="flex items-center justify-between mb-1">
-                <span class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                <span class="font-bold text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">
                   {city.name}
                 </span>
-                <svg class="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4 text-[var(--line)] group-hover:text-[var(--accent2)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
               </div>
-              <span class="text-xs font-medium text-gray-400">
+              <span class="text-xs font-medium text-[var(--muted)]">
                 View Clinics
               </span>
             </a>
@@ -162,22 +156,22 @@ const stateSchema = JSON.stringify({
     <!-- All Clinics with Sort & Pagination -->
     <section class="mb-16">
       <div class="flex items-center flex-wrap gap-4 mb-8">
-        <h2 class="text-2xl font-semibold text-gray-900">
+        <h2 class="text-2xl font-semibold text-[var(--ink)]">
           All Clinics in {stateName}
         </h2>
-        <div class="ml-0 md:ml-4 h-px flex-1 bg-gray-200 hidden md:block"></div>
-        <span class="text-sm font-medium text-gray-400">{clinicCount} clinics</span>
+        <div class="ml-0 md:ml-4 h-px flex-1 bg-[var(--paper2)] hidden md:block"></div>
+        <span class="text-sm font-medium text-[var(--muted)]">{clinicCount} clinics</span>
         <div class="relative">
           <label for="clinic-sort" class="sr-only">Sort clinics</label>
           <select
             id="clinic-sort"
-            class="appearance-none bg-white border border-gray-200 rounded-xl px-4 py-2 pr-9 text-sm font-medium text-gray-700 shadow-sm hover:border-violet-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 focus:outline-none cursor-pointer transition-colors"
+            class="appearance-none bg-[var(--paper)] border border-[var(--line)] rounded-xl px-4 py-2 pr-9 text-sm font-medium text-[var(--ink2)] shadow-sm hover:border-[rgba(10,22,40,0.2)] focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] focus:outline-none cursor-pointer transition-colors"
           >
             <option value="rating">Highest Rated</option>
             <option value="name">Name A–Z</option>
             <option value="reviews">Most Reviews</option>
           </select>
-          <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </div>
       </div>
 
@@ -194,7 +188,7 @@ const stateSchema = JSON.stringify({
           <button
             id="show-more-btn"
             type="button"
-            class="inline-flex items-center gap-2 px-8 py-3 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 shadow-sm hover:border-violet-300 hover:text-violet-700 hover:shadow-md transition-all focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2 cursor-pointer"
+            class="inline-flex items-center gap-2 px-8 py-3 bg-[var(--paper)] border border-[var(--line)] rounded-xl text-sm font-semibold text-[var(--ink2)] shadow-sm hover:border-[rgba(10,22,40,0.2)] hover:text-[var(--accent)] hover:shadow-md transition-all focus-visible:ring-2 focus-visible:ring-[rgba(10,22,40,0.2)] focus-visible:ring-offset-2 cursor-pointer"
           >
             <span id="show-more-label">Show More Clinics</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>

@@ -4,7 +4,7 @@ description: "Combining TMS with talk therapy isn't just complementary — it's 
 publishDate: 2026-04-14
 category: treatment
 author: Dr. Sarah Chen
-image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-and-psychotherapy-combination.svg"
 tags: ["tms", "psychotherapy", "combination-therapy", "cbt", "integrated-treatment"]
 ---
 

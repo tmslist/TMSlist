@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-15
 category: treatment
 tags: ["history", "faraday", "discovery", "FDA", "development"]
-image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=400&fit=crop"
+image: "/images/blog-covers/history-of-tms-from-faraday-to-fda.svg"
 ---
 
 In 1831, Michael Faraday demonstrated that a changing magnetic field could induce an electrical current in a conductor. He was studying electromagnetic induction — not treating depression. But the principle he established is the same one that makes TMS possible.
@@ -106,35 +106,35 @@ The treatment you might receive today is built on decades of work by hundreds of
 
 The answer, so far, has been yes — incrementally, imperfectly, but real.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">When was TMS first approved by the FDA for depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">When was TMS first approved by the FDA for depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">In 2008, the FDA cleared the first TMS device (NeuroStar) for treatment of major depressive disorder in patients who had not responded to at least one antidepressant medication. This was the first non-pharmacological, non-invasive neuromodulation device to receive clearance for a psychiatric indication.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">In 2008, the FDA cleared the first TMS device (NeuroStar) for treatment of major depressive disorder in patients who had not responded to at least one antidepressant medication. This was the first non-pharmacological, non-invasive neuromodulation device to receive clearance for a psychiatric indication.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What is the Stanford Neuromodulation Therapy (SNT) protocol?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What is the Stanford Neuromodulation Therapy (SNT) protocol?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The Stanford Neuromodulation Therapy protocol delivers 10 sessions of 1,800 pulses over five days, using neuronavigated targeting and accelerated delivery. It produced remission rates of 79% in treatment-resistant patients in 2020-2021 studies. The approach combines better targeting, better dosing, and better scheduling than conventional TMS protocols.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The Stanford Neuromodulation Therapy protocol delivers 10 sessions of 1,800 pulses over five days, using neuronavigated targeting and accelerated delivery. It produced remission rates of 79% in treatment-resistant patients in 2020-2021 studies. The approach combines better targeting, better dosing, and better scheduling than conventional TMS protocols.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What conditions is TMS now cleared for?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What conditions is TMS now cleared for?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS is now cleared for major depressive disorder, OCD (BrainsWay Deep TMS in 2018), anxious depression, bipolar depression, migraine headache, and smoking cessation. Research is active in PTSD, bipolar disorder, schizophrenia (negative symptoms), Alzheimer's disease, autism, and addiction.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS is now cleared for major depressive disorder, OCD (BrainsWay Deep TMS in 2018), anxious depression, bipolar depression, migraine headache, and smoking cessation. Research is active in PTSD, bipolar disorder, schizophrenia (negative symptoms), Alzheimer's disease, autism, and addiction.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

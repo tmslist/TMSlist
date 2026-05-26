@@ -21,8 +21,8 @@ export default function ProtocolExplorer() {
             onClick={() => setFilter(t)}
             className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
               filter === t
-                ? 'bg-violet-100 text-violet-700 ring-1 ring-violet-300'
-                : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
+                ? 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)] ring-1 ring-[rgba(10,22,40,0.2)]'
+                : 'bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)]'
             }`}
           >
             {t}
@@ -39,21 +39,21 @@ export default function ProtocolExplorer() {
               onClick={() => setSelected(protocol)}
               className={`w-full text-left rounded-xl p-4 border transition-all ${
                 selected?.name === protocol.name
-                  ? 'bg-violet-50 border-violet-300 ring-1 ring-violet-200'
-                  : 'bg-white border-slate-100 hover:border-slate-200'
+                  ? 'bg-[rgba(10,22,40,0.08)] border-[rgba(10,22,40,0.2)] ring-1 ring-[rgba(10,22,40,0.15)]'
+                  : 'bg-white border-[var(--line)] hover:border-[var(--line)]'
               }`}
             >
               <div className="flex items-start justify-between mb-1">
-                <h4 className="text-sm font-bold text-slate-900">{protocol.fullName}</h4>
+                <h4 className="text-sm font-bold text-[var(--ink)]">{protocol.fullName}</h4>
                 {protocol.badge && (
-                  <span className="text-[9px] font-bold uppercase tracking-wider bg-slate-900 text-white px-1.5 py-0.5 rounded">{protocol.badge}</span>
+                  <span className="text-[9px] font-bold uppercase tracking-wider bg-[var(--ink)] text-white px-1.5 py-0.5 rounded">{protocol.badge}</span>
                 )}
               </div>
               <div className="flex items-center gap-2 mt-2">
                 <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${protocolTypeColors[protocol.type]}`}>{protocol.type}</span>
                 <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${evidenceColors[protocol.evidence]}`}>{protocol.evidence} Evidence</span>
               </div>
-              <div className="text-xs text-slate-400 mt-2">{protocol.sessionsTotal} sessions · {protocol.fdaCleared}</div>
+              <div className="text-xs text-[var(--muted)] mt-2">{protocol.sessionsTotal} sessions · {protocol.fdaCleared}</div>
             </button>
           ))}
         </div>
@@ -61,17 +61,17 @@ export default function ProtocolExplorer() {
         {/* Detail Panel */}
         <div className="lg:col-span-3">
           {selected ? (
-            <div className="bg-white rounded-2xl border border-slate-100 p-6">
+            <div className="bg-white rounded-2xl border border-[var(--line)] p-6">
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-[rgba(10,22,40,0.08)] flex items-center justify-center shrink-0">
                   <span className="text-lg">⚡</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900">{selected.fullName}</h3>
+                  <h3 className="text-xl font-bold text-[var(--ink)]">{selected.fullName}</h3>
                   <div className="flex items-center gap-2 mt-2">
                     <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${protocolTypeColors[selected.type]}`}>{selected.type}</span>
                     <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${evidenceColors[selected.evidence]}`}>{selected.evidence} Evidence</span>
-                    <span className="text-xs text-slate-500">· FDA: {selected.fdaCleared}</span>
+                    <span className="text-xs text-[var(--muted)]">· FDA: {selected.fdaCleared}</span>
                   </div>
                 </div>
               </div>
@@ -84,17 +84,17 @@ export default function ProtocolExplorer() {
                   { label: 'Pulses', value: selected.pulsesDisplay },
                   { label: 'Duration', value: selected.duration },
                 ].map(param => (
-                  <div key={param.label} className="bg-slate-50 rounded-xl p-3">
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">{param.label}</div>
-                    <div className="text-sm font-bold text-slate-800">{param.value}</div>
+                  <div key={param.label} className="bg-[var(--paper2)] rounded-xl p-3">
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)] mb-1">{param.label}</div>
+                    <div className="text-sm font-bold text-[var(--ink)]">{param.value}</div>
                   </div>
                 ))}
               </div>
 
               {/* Sessions */}
-              <div className="bg-violet-50 rounded-xl p-4 mb-6">
-                <div className="text-sm font-semibold text-violet-700 mb-1">Treatment Schedule</div>
-                <div className="text-xs text-violet-600">{selected.sessionsTotal} total sessions · {selected.sessionsPerDay}</div>
+              <div className="bg-[rgba(10,22,40,0.08)] rounded-xl p-4 mb-6">
+                <div className="text-sm font-semibold text-[var(--accent)] mb-1">Treatment Schedule</div>
+                <div className="text-xs text-[var(--accent)]">{selected.sessionsTotal} total sessions · {selected.sessionsPerDay}</div>
               </div>
 
               {/* Pros & Cons */}
@@ -103,18 +103,18 @@ export default function ProtocolExplorer() {
                   <p className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2">Pros</p>
                   <ul className="space-y-1">
                     {selected.pros.map(p => (
-                      <li key={p} className="text-xs text-slate-600 flex items-start gap-1.5">
+                      <li key={p} className="text-xs text-[var(--ink2)] flex items-start gap-1.5">
                         <span className="text-emerald-500 mt-0.5">✓</span>{p}
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-rose-600 mb-2">Cons</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-[var(--warm)] mb-2">Cons</p>
                   <ul className="space-y-1">
                     {selected.cons.map(c => (
-                      <li key={c} className="text-xs text-slate-600 flex items-start gap-1.5">
-                        <span className="text-rose-400 mt-0.5">−</span>{c}
+                      <li key={c} className="text-xs text-[var(--ink2)] flex items-start gap-1.5">
+                        <span className="text-[var(--warm)] mt-0.5">−</span>{c}
                       </li>
                     ))}
                   </ul>
@@ -122,7 +122,7 @@ export default function ProtocolExplorer() {
               </div>
             </div>
           ) : (
-            <div className="text-center text-slate-400 py-12">Select a protocol to view details</div>
+            <div className="text-center text-[var(--muted)] py-12">Select a protocol to view details</div>
           )}
         </div>
       </div>

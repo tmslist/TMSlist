@@ -8,7 +8,7 @@ const session = getSessionFromRequest(Astro.request);
 if (!hasRole(session, 'admin')) return Astro.redirect("/admin/login");
 ---
 <Layout title="Disaster Recovery | TMS List Admin" noindex={true}>
-  <div class="flex min-h-screen bg-gray-50">
+  <div class="flex min-h-screen bg-[var(--paper2)]">
     <AdminSidebar client:load currentPage="dr" userEmail={session!.email} />
     <main class="flex-1 lg:ml-64 py-8"><div class="container mx-auto px-4 max-w-7xl"><AdminDisasterRecovery client:load /></div></main>
   </div>

@@ -4,7 +4,7 @@ description: "Deep TMS and standard TMS show promise for post-traumatic stress d
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-ptsd.svg"
 tags: ["tms", "ptsd", "deep-tms", "veterans", "trauma"]
 ---
 
@@ -76,35 +76,35 @@ TMS should not be viewed as a standalone cure for PTSD. The most effective treat
 
 For veterans, active-duty service members, and civilian trauma survivors who have exhausted conventional treatment options, TMS represents a meaningful new pathway to symptom reduction and functional recovery.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for PTSD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for PTSD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. The BrainsWay deep TMS system received FDA clearance for treating PTSD in adults who have failed to respond to at least one medication. This makes TMS an officially recognized treatment option within the U.S. regulatory framework.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. The BrainsWay deep TMS system received FDA clearance for treating PTSD in adults who have failed to respond to at least one medication. This makes TMS an officially recognized treatment option within the U.S. regulatory framework.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does the VA cover TMS for PTSD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does the VA cover TMS for PTSD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The VA has been actively exploring neuromodulation treatments for PTSD, and several VA medical centers now offer TMS. Coverage varies by facility, but veterans who meet criteria may be eligible. Community Care options may extend access for veterans at facilities without TMS programs.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The VA has been actively exploring neuromodulation treatments for PTSD, and several VA medical centers now offer TMS. Coverage varies by facility, but veterans who meet criteria may be eligible. Community Care options may extend access for veterans at facilities without TMS programs.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How is deep TMS different from standard TMS for PTSD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How is deep TMS different from standard TMS for PTSD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Deep TMS uses H-coils that can reach deeper brain structures including the ACC, insula, and medial temporal regions — areas directly implicated in PTSD pathophysiology that standard figure-eight coils may not effectively stimulate.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Deep TMS uses H-coils that can reach deeper brain structures including the ACC, insula, and medial temporal regions — areas directly implicated in PTSD pathophysiology that standard figure-eight coils may not effectively stimulate.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

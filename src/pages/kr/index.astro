@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
 import LocationSEOContent from '../../components/LocationSEOContent.astro';
 import { getClinicsByCountry, COUNTRY_NAMES } from '../../utils/dataHelpers';
 import { COUNTRY_META } from '../../utils/countryData';
@@ -53,67 +54,61 @@ const schema = JSON.stringify({
 ]}>
     <main>
         <!-- Hero Section -->
-        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-            <div
-                class="ai-hero-image absolute inset-0 opacity-20"
-                data-subject="South Korea"
-                data-type="city"
-                data-cache-key="ai-img:city:kr"
-                data-alt={`Illustration of South Korea`}
-            >
-                <div class="ai-img-placeholder absolute inset-0"></div>
-                <img class="ai-img-result hidden w-full h-full object-cover" alt="TMS clinic illustration" />
-                <div class="ai-img-fallback hidden"></div>
-            </div>
-            <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
-            <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-            <span class="text-slate-300">/</span>
-            <span class="text-slate-700 font-medium">South Korea</span>
-        </nav>
-                <div class="max-w-3xl">
-                    <h1 class="text-3xl font-semibold mb-2">TMS Therapy in <span class="text-violet-600">South Korea</span></h1>
-                    <p class="text-gray-600 mb-8 max-w-3xl">Browse {totalClinics} verified TMS providers across {regions.length} regions in South Korea. TMS is {meta.tmsStatus}, with sessions costing {meta.sessionCostRange} per session.</p>
-                </div>
-            </div>
-        </section>
+        <EditorialHero
+            eyebrow={`${totalClinics}+ Verified Clinics · ${regions.length} Regions`}
+            eyebrowDot="#22c55e"
+            title="TMS therapy in"
+            titleAccent="South Korea."
+            description={`Browse ${totalClinics}+ ${meta.tmsStatus} TMS providers across ${regions.length} regions. Find top-rated clinics for depression, anxiety, OCD, and more.`}
+            breadcrumbs={[
+                { label: "Home", href: "/" },
+                { label: "South Korea" },
+            ]}
+            ctas={[
+                { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+                { label: "Browse All Clinics", href: "/kr/", variant: "outline" },
+            ]}
+            stats={[
+                { value: `${totalClinics}+`, label: "Clinics", color: "ink" },
+                { value: regions.length, label: "Regions", color: "accent" },
+                { value: meta.tmsStatus.length > 12 ? "FDA-Like" : meta.tmsStatus, label: "Status", color: "warm" },
+            ]}
+        />
 
         <!-- Content -->
         <div class="container mx-auto px-4 py-8">
 
         <!-- Key Facts -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
-                <div class="text-2xl font-semibold text-violet-600">{totalClinics}</div>
-                <div class="text-sm text-gray-500 font-medium">Clinics</div>
+            <div class="bg-[var(--paper)] rounded-xl border border-[var(--line)] p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-[var(--accent)]">{totalClinics}</div>
+                <div class="text-sm text-[var(--muted)] font-medium">Clinics</div>
             </div>
-            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
-                <div class="text-2xl font-semibold text-violet-600">{regions.length}</div>
-                <div class="text-sm text-gray-500 font-medium">Regions</div>
+            <div class="bg-[var(--paper)] rounded-xl border border-[var(--line)] p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-[var(--accent)]">{regions.length}</div>
+                <div class="text-sm text-[var(--muted)] font-medium">Regions</div>
             </div>
-            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
-                <div class="text-2xl font-semibold text-violet-600">{meta.publicHealthSystem}</div>
-                <div class="text-sm text-gray-500 font-medium">Public Health</div>
+            <div class="bg-[var(--paper)] rounded-xl border border-[var(--line)] p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-[var(--accent)]">{meta.publicHealthSystem}</div>
+                <div class="text-sm text-[var(--muted)] font-medium">Public Health</div>
             </div>
-            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
-                <div class="text-2xl font-semibold text-violet-600">{meta.sessionCostRange}</div>
-                <div class="text-sm text-gray-500 font-medium">Per Session</div>
+            <div class="bg-[var(--paper)] rounded-xl border border-[var(--line)] p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-[var(--accent)]">{meta.sessionCostRange}</div>
+                <div class="text-sm text-[var(--muted)] font-medium">Per Session</div>
             </div>
         </div>
 
         <div class="flex items-center mb-8">
-            <h2 class="text-2xl font-semibold text-gray-900">지역별 검색</h2>
-            <div class="ml-4 h-px flex-1 bg-gray-200"></div>
-            <span class="ml-4 text-sm font-medium text-gray-400">{regions.length} regions</span>
+            <h2 class="text-2xl font-semibold text-[var(--ink)]">지역별 검색</h2>
+            <div class="ml-4 h-px flex-1 bg-[var(--paper2)]"></div>
+            <span class="ml-4 text-sm font-medium text-[var(--muted)]">{regions.length} regions</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {regions.map((region) => (
-                <a href={`/kr/${region.slug}/`} class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-violet-500 hover:shadow-md transition-all group">
-                    <span class="text-lg font-medium text-gray-800 group-hover:text-violet-600">{region.name}</span>
-                    <span class="block text-sm text-gray-500 mt-1">{region.count} {region.count === 1 ? 'clinic' : 'clinics'}</span>
+                <a href={`/kr/${region.slug}/`} class="block p-4 bg-[var(--paper)] rounded-lg border border-[var(--line)] hover:border-[var(--ink2)] hover:shadow-md transition-all group">
+                    <span class="text-lg font-medium text-[var(--ink2)] group-hover:text-[var(--accent)]">{region.name}</span>
+                    <span class="block text-sm text-[var(--muted)] mt-1">{region.count} {region.count === 1 ? 'clinic' : 'clinics'}</span>
                 </a>
             ))}
         </div>

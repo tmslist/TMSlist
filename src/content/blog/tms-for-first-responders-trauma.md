@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-14
 category: patient-guide
 tags: ["first responders", "PTSD", "trauma", "firefighters", "police", "EMTs"]
-image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-first-responders-trauma.svg"
 ---
 
 The mental health of first responders has moved from taboo to priority in public safety conversations. Studies consistently show that firefighters, police officers, paramedics, and 911 dispatchers experience PTSD, depression, and anxiety at rates substantially higher than the general population — estimates vary but cluster around 20-30% experiencing clinically significant PTSD at some point in their careers.
@@ -92,35 +92,35 @@ Research specifically in first responder populations is limited but growing. A s
 
 If you are a first responder experiencing depression, PTSD, or anxiety that is interfering with your life and work, talk to a TMS provider. The barriers are lower than you think, and the outcomes are real.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can first responders use TMS without it affecting their job?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can first responders use TMS without it affecting their job?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Unlike psychiatric medications that can affect cognitive function or show up in drug screens, TMS has no post-treatment impairment. First responders can receive TMS and return to duty the same day. TMS is a neurological procedure, not a psychiatric medication.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Unlike psychiatric medications that can affect cognitive function or show up in drug screens, TMS has no post-treatment impairment. First responders can receive TMS and return to duty the same day. TMS is a neurological procedure, not a psychiatric medication.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS show up on psychological evaluations for first responders?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS show up on psychological evaluations for first responders?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS is not a psychiatric medication and does not typically appear on standard psychological fitness-for-duty evaluations. Because TMS is a neurological procedure with no systemic effects, it does not require disclosure in the same way that psychiatric medications do.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS is not a psychiatric medication and does not typically appear on standard psychological fitness-for-duty evaluations. Because TMS is a neurological procedure with no systemic effects, it does not require disclosure in the same way that psychiatric medications do.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How can first responders pay for TMS treatment?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How can first responders pay for TMS treatment?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Options include: union Employee Assistance Programs, workers' compensation (for work-related PTSD), VA benefits (if there is military service history), department wellness programs, and standard insurance coverage. TMS is covered by many insurance plans for treatment-resistant depression.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Options include: union Employee Assistance Programs, workers' compensation (for work-related PTSD), VA benefits (if there is military service history), department wellness programs, and standard insurance coverage. TMS is covered by many insurance plans for treatment-resistant depression.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

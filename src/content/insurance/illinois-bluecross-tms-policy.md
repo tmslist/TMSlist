@@ -14,6 +14,7 @@ faqs:
     answer: "BCBS Illinois has expanded TMS coverage in recent years. OCD TMS may be covered with specific documentation. TMS for anxiety alone is generally not covered. Check your specific plan benefits for details."
   - question: "What about Blue Cross Community Health Plans (Medicaid managed care)?"
     answer: "Illinois has Blue Cross Community Health Plans for Medicaid managed care members. Coverage criteria may differ from commercial plans. Illinois Health Connect participants should verify specific managed care organization requirements."
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 
@@ -26,9 +27,9 @@ faqs:
     <div class="text-2xl font-bold text-amber-700 font-display">Required</div>
     <div class="text-xs text-amber-600 mt-1">Prior Authorization</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">$300-$1,500</div>
-    <div class="text-xs text-blue-600 mt-1">Typical patient cost</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">$300-$1,500</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Typical patient cost</div>
   </div>
 </div>
 
@@ -141,11 +142,11 @@ Ask potential clinics: "Do you accept BCBS Illinois, and are you familiar with t
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>
@@ -154,39 +155,39 @@ Ask potential clinics: "Do you accept BCBS Illinois, and are you familiar with t
 ## Step-by-Step Approval Process
 
 <div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">1</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Verify Your BCBS IL Benefits</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Call the number on your BCBS IL insurance card and ask specifically about TMS therapy coverage. Get a reference number for the call and confirm your plan type (PPO, HMO, POS).</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Verify Your BCBS IL Benefits</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Call the number on your BCBS IL insurance card and ask specifically about TMS therapy coverage. Get a reference number for the call and confirm your plan type (PPO, HMO, POS).</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">2</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Get Your Documentation Ready</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Gather your MDD diagnosis records, all medication trials (names, doses, durations, outcomes), PHQ-9 scores, and psychotherapy history. BCBS IL may request more than other insurers.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Get Your Documentation Ready</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Gather your MDD diagnosis records, all medication trials (names, doses, durations, outcomes), PHQ-9 scores, and psychotherapy history. BCBS IL may request more than other insurers.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">3</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Choose a BCBS IL TMS Provider</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Find an in-network TMS provider using our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a>. In-network clinics handle prior auth submissions and understand BCBS IL requirements.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Choose a BCBS IL TMS Provider</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Find an in-network TMS provider using our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a>. In-network clinics handle prior auth submissions and understand BCBS IL requirements.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">4</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Prior Authorization Submission</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Your TMS clinic submits the prior auth request to BCBS IL. Expect 5-15 business days for approval. Illinois BCBS may request additional documentation during review.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Prior Authorization Submission</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Your TMS clinic submits the prior auth request to BCBS IL. Expect 5-15 business days for approval. Illinois BCBS may request additional documentation during review.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">5</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Begin Treatment</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Once authorized, schedule your TMS sessions. BCBS IL typically covers the full 36-session acute protocol. Your cost is $300-$1,500 depending on your specific plan type.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Begin Treatment</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Once authorized, schedule your TMS sessions. BCBS IL typically covers the full 36-session acute protocol. Your cost is $300-$1,500 depending on your specific plan type.</p>
     </div>
   </div>
 </div>

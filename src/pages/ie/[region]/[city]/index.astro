@@ -89,9 +89,9 @@ const citySchema = JSON.stringify({
     { name: cityName, url: `/ie/${regionSlug}/${Astro.params.city}/` },
 ]}>
     <main class="min-h-screen">
-        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+        <section class="relative bg-[var(--paper)] border-b border-[var(--line)] overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-[rgba(10,22,40,0.08)]/60 via-white to-[rgba(10,22,40,0.40)] pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-[rgba(10,22,40,0.5)] rounded-full blur-[100px]"></div>
             <div
               class="ai-hero-image absolute inset-0 opacity-20"
               data-subject={`${cityName}, ${regionName}`}
@@ -104,40 +104,40 @@ const citySchema = JSON.stringify({
               <div class="ai-img-fallback hidden"></div>
             </div>
             <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                    <span class="text-slate-300">/</span>
-                    <a href="/ie/" class="hover:text-violet-600 transition-colors">Ireland</a>
-                    <span class="text-slate-300">/</span>
-                    <a href={`/ie/${regionSlug}/`} class="hover:text-violet-600 transition-colors">{regionName}</a>
-                    <span class="text-slate-300">/</span>
-                    <span class="text-slate-700 font-medium">{cityName}</span>
+                <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-8 flex-wrap" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-[var(--accent)] transition-colors">Home</a>
+                    <span class="text-[var(--muted)]">/</span>
+                    <a href="/ie/" class="hover:text-[var(--accent)] transition-colors">Ireland</a>
+                    <span class="text-[var(--muted)]">/</span>
+                    <a href={`/ie/${regionSlug}/`} class="hover:text-[var(--accent)] transition-colors">{regionName}</a>
+                    <span class="text-[var(--muted)]">/</span>
+                    <span class="text-[var(--ink2)] font-medium">{cityName}</span>
                 </nav>
 
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 mb-6">
-                    TMS <span class="text-violet-600">Clinics</span> in {cityName}
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-[var(--ink)] mb-6">
+                    TMS <span class="text-[var(--accent)]">Clinics</span> in {cityName}
                 </h1>
-                <p class="text-xl text-slate-500 max-w-3xl mb-8">
+                <p class="text-xl text-[var(--muted)] max-w-3xl mb-8">
                     Compare {cityClinics.length} TMS therapy {cityClinics.length === 1 ? 'clinic' : 'clinics'} in {cityName}, {regionName}.
                     View ratings, treatment options, and find the right provider for you.
                 </p>
             </div>
         </section>
 
-        <section class="bg-white border-b border-gray-100 py-6">
+        <section class="bg-[var(--paper)] border-b border-[var(--line)] py-6">
             <div class="container mx-auto px-6">
                 <div class="flex flex-wrap justify-center gap-8 md:gap-16">
                     <div class="text-center">
-                        <div class="text-3xl font-semibold tracking-tight text-violet-600">{cityClinics.length}</div>
-                        <div class="text-sm text-gray-500 font-medium">TMS Clinics</div>
+                        <div class="text-3xl font-semibold tracking-tight text-[var(--accent)]">{cityClinics.length}</div>
+                        <div class="text-sm text-[var(--muted)] font-medium">TMS Clinics</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-3xl font-semibold tracking-tight text-violet-600">{cityClinics.reduce((acc: number, c: any) => acc + (c.doctors_data?.length || 0), 0)}</div>
-                        <div class="text-sm text-gray-500 font-medium">Specialists</div>
+                        <div class="text-3xl font-semibold tracking-tight text-[var(--accent)]">{cityClinics.reduce((acc: number, c: any) => acc + (c.doctors_data?.length || 0), 0)}</div>
+                        <div class="text-sm text-[var(--muted)] font-medium">Specialists</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-3xl font-semibold tracking-tight text-violet-600">{cityClinics.filter((c: any) => c.verified).length}</div>
-                        <div class="text-sm text-gray-500 font-medium">Verified</div>
+                        <div class="text-3xl font-semibold tracking-tight text-[var(--accent)]">{cityClinics.filter((c: any) => c.verified).length}</div>
+                        <div class="text-sm text-[var(--muted)] font-medium">Verified</div>
                     </div>
                 </div>
             </div>
@@ -145,7 +145,7 @@ const citySchema = JSON.stringify({
 
         <section class="py-16">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-semibold text-gray-900 mb-10">All TMS Clinics in {cityName}</h2>
+                <h2 class="text-3xl font-semibold text-[var(--ink)] mb-10">All TMS Clinics in {cityName}</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {cityClinics.map((clinic: any) => (
                         <ClinicCard clinic={clinic} />
@@ -156,13 +156,13 @@ const citySchema = JSON.stringify({
 
         <LocationSEOContent type="city" locationName={cityName} stateName={regionName} clinicCount={cityClinics.length} countryCode="IE" />
 
-        <section class="py-16 bg-gradient-to-r from-violet-600 to-blue-600">
+        <section class="py-16 bg-[var(--ink)]">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-semibold text-slate-900 mb-6">Find Your TMS Clinic in {cityName}</h2>
-                <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                <h2 class="text-3xl font-semibold text-[var(--ink)] mb-6">Find Your TMS Clinic in {cityName}</h2>
+                <p class="text-xl text-[var(--muted)] mb-8 max-w-2xl mx-auto">
                     Compare {cityClinics.length} verified {cityClinics.length === 1 ? 'clinic' : 'clinics'} and start your journey to mental wellness.
                 </p>
-                <a href="/quiz/am-i-a-candidate/" class="inline-block px-8 py-4 bg-white text-violet-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
+                <a href="/quiz/am-i-a-candidate/" class="inline-block px-8 py-4 bg-[var(--paper)] text-[var(--accent)] font-semibold rounded-xl hover:bg-[var(--paper2)] transition-colors shadow-[0_4px_20px_rgb(0,0,0,0.03)]">
                     Am I a Candidate?
                 </a>
             </div>

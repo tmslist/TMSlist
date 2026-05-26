@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-24
 category: stories
 tags: ["patient story", "OCD", "contamination", "deep TMS", "BrainsWay"]
-image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## When clean is never clean enough

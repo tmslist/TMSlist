@@ -20,19 +20,20 @@ import {
 
 export const GET: APIRoute = async () => {
   const base = 'https://tmslist.com';
+  const now = new Date().toISOString().split('T')[0];
 
   const urls: Array<{ loc: string; lastmod?: string; priority?: string; changefreq?: string }> = [];
 
   // Homepage
-  urls.push({ loc: `${base}/`, lastmod: new Date().toISOString().split('T')[0], priority: '1.0', changefreq: 'daily' });
+  urls.push({ loc: `${base}/`, lastmod: now, priority: '1.0', changefreq: 'daily' });
 
-  // Static & Core pages
+  // Core/static pages
   for (const page of CORE_PAGES) {
     urls.push({ loc: `${base}/${page.slug}/`, priority: '0.8', changefreq: 'monthly' });
   }
 
   // Section indexes
-  const sections = [
+  const sectionSlugs = [
     { slug: 'treatments', priority: '0.9', changefreq: 'weekly' },
     { slug: 'protocols', priority: '0.8', changefreq: 'weekly' },
     { slug: 'technology', priority: '0.8', changefreq: 'weekly' },
@@ -47,19 +48,13 @@ export const GET: APIRoute = async () => {
     { slug: 'alternatives', priority: '0.6', changefreq: 'monthly' },
     { slug: 'quiz', priority: '0.8', changefreq: 'monthly' },
     { slug: 'specialists', priority: '0.8', changefreq: 'weekly' },
-    { slug: 'insurance', priority: '0.9', changefreq: 'weekly' },
     { slug: 'best-tms-clinics', priority: '0.8', changefreq: 'weekly' },
     { slug: 'verified-clinics', priority: '0.8', changefreq: 'weekly' },
     { slug: 'sitemap', priority: '0.3', changefreq: 'weekly' },
-    { slug: 'sitemap.html', priority: '0.3', changefreq: 'weekly' },
     { slug: 'map', priority: '0.7', changefreq: 'weekly' },
     { slug: 'search', priority: '0.6', changefreq: 'weekly' },
-    { slug: 'treatments', priority: '0.9', changefreq: 'weekly' },
-    { slug: 'alternatives', priority: '0.6', changefreq: 'monthly' },
     { slug: 'community', priority: '0.6', changefreq: 'weekly' },
     { slug: 'wellness', priority: '0.6', changefreq: 'monthly' },
-    { slug: 'providers', priority: '0.7', changefreq: 'weekly' },
-    { slug: 'demographic', priority: '0.7', changefreq: 'monthly' },
     { slug: 'starting-a-tms-clinic', priority: '0.6', changefreq: 'monthly' },
     { slug: 'pricing', priority: '0.7', changefreq: 'monthly' },
     { slug: 'glossary', priority: '0.5', changefreq: 'monthly' },
@@ -71,7 +66,7 @@ export const GET: APIRoute = async () => {
   ];
 
   const seen = new Set<string>();
-  for (const s of sections) {
+  for (const s of sectionSlugs) {
     if (!seen.has(s.slug)) {
       seen.add(s.slug);
       urls.push({ loc: `${base}/${s.slug}/`, priority: s.priority, changefreq: s.changefreq as any });
@@ -167,8 +162,7 @@ export const GET: APIRoute = async () => {
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls.map(u => `  <url>
     <loc>${u.loc}</loc>${u.lastmod ? `\n    <lastmod>${u.lastmod}</lastmod>` : ''}
     <changefreq>${u.changefreq || 'weekly'}</changefreq>

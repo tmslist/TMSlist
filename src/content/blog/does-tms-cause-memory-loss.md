@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-20
 category: faq
 tags: ["side effects", "memory", "safety", "FAQ"]
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/blog-covers/does-tms-cause-memory-loss.svg"
 ---
 
 TMS therapy does not cause memory loss. This is one of the most common concerns we hear, and the research is clear. TMS has no negative effect on memory or cognitive function. Some studies actually suggest it may improve certain cognitive functions.
@@ -69,9 +69,9 @@ Yes, in the sense that you should share your full medical history with your TMS 
 
 But memory loss should not be on your worry list.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>TMS does not cause memory loss. Clinical studies show no measurable cognitive decline after TMS treatment.</li>
     <li>TMS and ECT are often confused. ECT can cause short-term memory problems. TMS does not.</li>
     <li>Studies show slight improvements in verbal fluency and working memory after TMS.</li>
@@ -81,47 +81,47 @@ But memory loss should not be on your worry list.
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS affect memory?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS affect memory?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. Multiple clinical studies and a 2023 meta-analysis found no measurable memory decline after TMS treatment. TMS does not cause memory loss. In fact, some studies show slight improvements in verbal fluency and working memory after TMS.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. Multiple clinical studies and a 2023 meta-analysis found no measurable memory decline after TMS treatment. TMS does not cause memory loss. In fact, some studies show slight improvements in verbal fluency and working memory after TMS.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS safer than ECT for cognition?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS safer than ECT for cognition?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. ECT can cause short-term memory problems, particularly around the time of treatment. TMS does not. They are very different treatments. ECT passes electrical current through the brain under anesthesia. TMS uses magnetic pulses to stimulate specific brain regions while you are awake. ECT is effective for severe depression but carries real cognitive side effects. TMS does not.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. ECT can cause short-term memory problems, particularly around the time of treatment. TMS does not. They are very different treatments. ECT passes electrical current through the brain under anesthesia. TMS uses magnetic pulses to stimulate specific brain regions while you are awake. ECT is effective for severe depression but carries real cognitive side effects. TMS does not.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS improve cognitive function?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS improve cognitive function?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Possibly. Studies show slight improvements in verbal fluency and working memory after TMS treatment. The most likely explanation is that treating depression lifts the cognitive impairment that depression causes. Depression itself causes brain fog, slow processing, and memory difficulties. When depression lifts, thinking often clears up.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Possibly. Studies show slight improvements in verbal fluency and working memory after TMS treatment. The most likely explanation is that treating depression lifts the cognitive impairment that depression causes. Depression itself causes brain fog, slow processing, and memory difficulties. When depression lifts, thinking often clears up.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What are the actual side effects of TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What are the actual side effects of TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Scalp discomfort during treatment (most common; fades after first few sessions), mild headache after sessions (responds to OTC pain relievers), and tingling or tapping sensation at the treatment site. Seizure risk is less than 0.1%, comparable to antidepressant risk. No memory loss, no cognitive dulling, no personality changes.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Scalp discomfort during treatment (most common; fades after first few sessions), mild headache after sessions (responds to OTC pain relievers), and tingling or tapping sensation at the treatment site. Seizure risk is less than 0.1%, comparable to antidepressant risk. No memory loss, no cognitive dulling, no personality changes.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Why does depression cause brain fog?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Why does depression cause brain fog?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Depression affects brain function in ways that impair cognition. People with depression often have difficulty concentrating, slower processing speed, and memory problems. These are documented symptoms of depression, not character flaws. Treating the depression often restores cognitive function. This is one reason why successful TMS treatment may improve cognitive performance.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Depression affects brain function in ways that impair cognition. People with depression often have difficulty concentrating, slower processing speed, and memory problems. These are documented symptoms of depression, not character flaws. Treating the depression often restores cognitive function. This is one reason why successful TMS treatment may improve cognitive performance.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

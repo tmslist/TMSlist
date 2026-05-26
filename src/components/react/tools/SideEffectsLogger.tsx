@@ -33,7 +33,7 @@ const severityColors: Record<Severity, { bg: string; text: string; dot: string }
   1: { bg: 'bg-amber-50', text: 'text-amber-700', dot: 'bg-amber-400' },
   2: { bg: 'bg-orange-50', text: 'text-orange-700', dot: 'bg-orange-400' },
   3: { bg: 'bg-red-50', text: 'text-red-700', dot: 'bg-red-400' },
-  4: { bg: 'bg-rose-100', text: 'text-rose-800', dot: 'bg-rose-500' },
+  4: { bg: 'bg-[rgba(201,101,74,0.1)]', text: 'text-[var(--warm)]', dot: 'bg-[rgba(201,101,74,0.06)]' },
 };
 
 interface SessionEntry {
@@ -117,8 +117,8 @@ export default function SideEffectsLogger() {
                 onClick={() => setActiveSession(s.session)}
                 className={`relative px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                   activeSession === s.session
-                    ? 'bg-violet-100 text-violet-700 ring-1 ring-violet-300'
-                    : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
+                    ? 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)] ring-1 ring-[rgba(10,22,40,0.2)]'
+                    : 'bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)]'
                 }`}
               >
                 S{s.session}
@@ -128,23 +128,23 @@ export default function SideEffectsLogger() {
               </button>
             );
           })}
-          <button onClick={addSession} className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-50 text-slate-400 hover:bg-slate-100 transition-all">
+          <button onClick={addSession} className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)] transition-all">
             + Session
           </button>
         </div>
 
         {/* Trend chart */}
         {trendData.some(d => d.avg > 0) && (
-          <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Side Effect Severity Trend</p>
+          <div className="bg-[var(--paper2)] rounded-xl p-4 border border-[var(--line)]">
+            <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-3">Side Effect Severity Trend</p>
             <svg viewBox={`0 0 ${chartW} ${chartH}`} className="w-full">
               {/* Grid */}
               {[0, 1, 2, 3, 4].map(v => {
                 const y = toY(v);
                 return (
                   <g key={v}>
-                    <line x1={pad.left} y1={y} x2={chartW - pad.right} y2={y} stroke="#e2e8f0" strokeWidth="1" strokeDasharray="3 3" />
-                    <text x={pad.left - 6} y={y + 3} textAnchor="end" fontSize="8" fill="#94a3b8">{v}</text>
+                    <line x1={pad.left} y1={y} x2={chartW - pad.right} y2={y} stroke="#E6EAF0" strokeWidth="1" strokeDasharray="3 3" />
+                    <text x={pad.left - 6} y={y + 3} textAnchor="end" fontSize="8" fill="#5A6B82">{v}</text>
                   </g>
                 );
               })}
@@ -169,7 +169,7 @@ export default function SideEffectsLogger() {
               })}
               {/* Polyline */}
               {polylinePoints && (
-                <polyline points={polylinePoints} fill="none" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <polyline points={polylinePoints} fill="none" stroke="#0A1628" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               )}
               {/* X labels */}
               {sessions.filter((_, i) => i % Math.ceil(sessions.length / 8) === 0).map(s => (
@@ -179,7 +179,7 @@ export default function SideEffectsLogger() {
                   y={chartH - 4}
                   textAnchor="middle"
                   fontSize="8"
-                  fill="#94a3b8"
+                  fill="#5A6B82"
                 >
                   S{s.session}
                 </text>
@@ -190,14 +190,14 @@ export default function SideEffectsLogger() {
 
         {/* Session date */}
         <div>
-          <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Session Date</label>
+          <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1">Session Date</label>
           <input
             type="date"
             value={current.date}
             onChange={e => setSessions(prev => prev.map(s =>
               s.session === activeSession ? { ...s, date: e.target.value } : s
             ))}
-            className="px-4 py-2.5 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none w-auto"
+            className="px-4 py-2.5 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] outline-none w-auto"
           />
         </div>
 
@@ -207,25 +207,25 @@ export default function SideEffectsLogger() {
             {SIDE_EFFECTS.map(effect => {
               const sev = (current.effects[effect.name] ?? 0) as Severity;
               return (
-                <div key={effect.name} className="bg-slate-50 rounded-xl p-4">
+                <div key={effect.name} className="bg-[var(--paper2)] rounded-xl p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <p className="text-sm font-bold text-slate-800">{effect.name}</p>
-                      <p className="text-xs text-slate-400 mt-0.5">{effect.description}</p>
+                      <p className="text-sm font-bold text-[var(--ink)]">{effect.name}</p>
+                      <p className="text-xs text-[var(--muted)] mt-0.5">{effect.description}</p>
                     </div>
-                    <span className="text-xs text-slate-400 shrink-0 ml-2">{effect.prevalence}</span>
+                    <span className="text-xs text-[var(--muted)] shrink-0 ml-2">{effect.prevalence}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-slate-400 w-16">None</span>
+                    <span className="text-xs text-[var(--muted)] w-16">None</span>
                     <input
                       type="range"
                       min="0"
                       max="4"
                       value={sev}
                       onChange={e => setSeverity(effect.name, parseInt(e.target.value) as Severity)}
-                      className="flex-1 accent-violet-600"
+                      className="flex-1 accent-[#0A1628]"
                     />
-                    <span className="text-xs text-slate-400 w-16 text-right">Severe</span>
+                    <span className="text-xs text-[var(--muted)] w-16 text-right">Severe</span>
                     <span className={`w-14 text-center text-xs font-bold px-2 py-1 rounded-lg ${severityColors[sev].bg} ${severityColors[sev].text}`}>
                       {severityLabels[sev]}
                     </span>
@@ -238,14 +238,14 @@ export default function SideEffectsLogger() {
 
         <button
           onClick={() => setExpanded(!expanded)}
-          className="text-sm font-semibold text-violet-600 hover:text-violet-700 transition-colors"
+          className="text-sm font-semibold text-[var(--accent)] hover:text-[var(--accent)] transition-colors"
         >
           {expanded ? 'Show less' : 'Show all side effects →'}
         </button>
 
         {/* Session notes */}
         <div>
-          <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Session Notes</label>
+          <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1">Session Notes</label>
           <textarea
             rows={2}
             value={current.notes}
@@ -253,7 +253,7 @@ export default function SideEffectsLogger() {
               s.session === activeSession ? { ...s, notes: e.target.value } : s
             ))}
             placeholder="Mood, sleep, other observations..."
-            className="w-full px-4 py-3 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none resize-none text-sm"
+            className="w-full px-4 py-3 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] outline-none resize-none text-sm"
           />
         </div>
 
@@ -281,9 +281,9 @@ export default function SideEffectsLogger() {
             { label: 'Avg Severity', value: trendData[trendData.length - 1]?.avg?.toFixed(1) ?? '0.0' },
             { label: 'Active Effects', value: activeEffects.length },
           ].map(stat => (
-            <div key={stat.label} className="bg-slate-50 rounded-xl p-4 text-center border border-slate-100">
-              <p className="text-2xl font-bold text-slate-800">{stat.value}</p>
-              <p className="text-xs text-slate-400 mt-1">{stat.label}</p>
+            <div key={stat.label} className="bg-[var(--paper2)] rounded-xl p-4 text-center border border-[var(--line)]">
+              <p className="text-2xl font-bold text-[var(--ink)]">{stat.value}</p>
+              <p className="text-xs text-[var(--muted)] mt-1">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -291,7 +291,7 @@ export default function SideEffectsLogger() {
         {/* Print */}
         <button
           onClick={() => window.print()}
-          className="px-5 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-slate-800 transition-colors"
+          className="px-5 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors"
         >
           Print / Export Report
         </button>

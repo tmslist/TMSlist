@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const DEFAULT_OG_IMAGE = '/images/tms_hero.svg';
+const DEFAULT_OG_IMAGE = '/images/brain_stimulation_art_1769446474392.jpg';
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),

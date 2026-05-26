@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-02
 category: patient-guide
 tags: ["deep TMS", "H-coil", "technology", "comparison", "线圈"]
-image: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=800&h=400&fit=crop"
+image: "/images/blog-covers/deep-tms-vs-standard-tms-comparison.svg"
 ---
 
 Walk into five different TMS clinics and you may encounter three different coil technologies, two different stimulation frequencies, and a range of protocols with names that sound like they belong in a graduate neuroscience course. Understanding the technology differences matters because the coil design determines which brain structures get stimulated and how deeply.

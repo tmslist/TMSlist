@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-22
 category: patient-guide
 tags: ["insurance", "appeals", "coverage", "prior authorization", "denial"]
-image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-insurance-appeals-complete-guide.svg"
 ---
 
 Insurance denials for TMS are common. Estimates suggest that 20-40% of initial TMS prior authorization requests are denied, often for reasons that are incorrect, fixable, or reversible on appeal. If you have been denied, you are not alone, and the denial is usually not the end of the road.

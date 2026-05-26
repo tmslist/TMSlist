@@ -4,7 +4,7 @@ description: "FDA-cleared at-home TMS devices offer convenience, but how do they
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1631596560495-7c5c0f8a9e8e?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/at-home-tms-devices-effectiveness.svg"
 tags: ["tms", "at-home-tms", "portable-devices", "tdcs", "cranial-electrotherapy", "fda-clearance", "self-administered", "home-treatment"]
 ---
 

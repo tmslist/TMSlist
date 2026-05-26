@@ -7,39 +7,39 @@ const pageTitle = "My Saved Clinics | TMS List";
 ---
 
 <Layout title={pageTitle} description="View and manage your saved TMS clinics." noindex={true}>
-  <section class="bg-white pt-12 pb-6 border-b border-slate-100">
+  <section class="bg-[var(--paper)] pt-12 pb-6 border-b border-[var(--line)]">
     <div class="container mx-auto px-6 lg:px-12">
-      <h1 class="text-3xl font-bold text-slate-900">My Saved Clinics</h1>
-      <p class="text-slate-500 mt-2">Clinics you've bookmarked for comparison and reference.</p>
+      <h1 class="text-3xl font-bold text-[var(--ink)]">My Saved Clinics</h1>
+      <p class="text-[var(--muted)] mt-2">Clinics you've bookmarked for comparison and reference.</p>
     </div>
   </section>
 
-  <main class="bg-slate-50/50 py-10">
+  <main class="bg-[var(--paper2)]/50 py-10">
     <div class="container mx-auto px-6 lg:px-12">
       <div id="saved-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         <div class="col-span-full text-center py-16">
-          <div class="w-8 h-8 border-3 border-blue-300 border-t-blue-600 rounded-full animate-spin mx-auto"></div>
-          <p class="text-slate-400 mt-4">Loading saved clinics...</p>
+          <div class="w-8 h-8 border-3 border-[rgba(10,22,40,0.2)] border-t-blue-600 rounded-full animate-spin mx-auto"></div>
+          <p class="text-[var(--muted)] mt-4">Loading saved clinics...</p>
         </div>
       </div>
 
       <div id="empty-state" class="hidden text-center py-16">
-        <svg class="w-16 h-16 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-16 h-16 mx-auto text-[var(--muted)] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
         </svg>
-        <p class="text-lg font-medium text-slate-500 mb-2">No saved clinics yet</p>
-        <p class="text-sm text-slate-400 mb-6">Browse clinics and click the heart icon to save them here.</p>
-        <a href="/map/" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700 transition-colors">
+        <p class="text-lg font-medium text-[var(--muted)] mb-2">No saved clinics yet</p>
+        <p class="text-sm text-[var(--muted)] mb-6">Browse clinics and click the heart icon to save them here.</p>
+        <a href="/map/" class="inline-flex items-center px-6 py-3 bg-[var(--ink)] text-white rounded-xl font-semibold text-sm hover:bg-[var(--ink)] transition-colors">
           Find Clinics
         </a>
       </div>
 
       <div id="login-prompt" class="hidden text-center py-16">
-        <p class="text-lg font-medium text-slate-500 mb-4">Log in to see your saved clinics</p>
-        <a href="/portal/login/?redirect=/account/saved" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700 transition-colors">
+        <p class="text-lg font-medium text-[var(--muted)] mb-4">Log in to see your saved clinics</p>
+        <a href="/portal/login/?redirect=/account/saved" class="inline-flex items-center px-6 py-3 bg-[var(--ink)] text-white rounded-xl font-semibold text-sm hover:bg-[var(--ink)] transition-colors">
           Log In
         </a>
-        <a href="/account/register?redirect=/account/saved" class="inline-flex items-center px-6 py-3 ml-3 bg-white text-slate-700 border border-slate-200 rounded-xl font-semibold text-sm hover:bg-slate-50 transition-colors">
+        <a href="/account/register?redirect=/account/saved" class="inline-flex items-center px-6 py-3 ml-3 bg-[var(--paper)] text-[var(--ink2)] border border-[var(--line)] rounded-xl font-semibold text-sm hover:bg-[var(--paper2)] transition-colors">
           Create Account
         </a>
       </div>
@@ -78,11 +78,11 @@ const pageTitle = "My Saved Clinics | TMS List";
       const c = item.clinic;
       const rating = Number(c.ratingAvg || 0).toFixed(1);
       return `
-        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:shadow-md transition-all">
+        <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm p-5 hover:shadow-md transition-all">
           <div class="flex items-start justify-between mb-3">
             <div>
-              <h3 class="font-semibold text-slate-900">${c.name.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</h3>
-              <p class="text-sm text-slate-500">${c.city}, ${c.state}</p>
+              <h3 class="font-semibold text-[var(--ink)]">${c.name.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</h3>
+              <p class="text-sm text-[var(--muted)]">${c.city}, ${c.state}</p>
             </div>
             <button onclick="unsave('${c.id}', this)" class="text-red-400 hover:text-red-600 transition-colors p-1" title="Remove">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
@@ -92,7 +92,7 @@ const pageTitle = "My Saved Clinics | TMS List";
             <span class="text-amber-500 font-semibold">$<svg class="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
             ${c.verified ? '<span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-100">Verified</span>' : ''}
           </div>
-          <a href="/clinic/${c.slug}/" class="inline-block text-sm font-semibold text-blue-600 hover:text-blue-700">View Profile →</a>
+          <a href="/clinic/${c.slug}/" class="inline-block text-sm font-semibold text-[var(--ink)] hover:text-[var(--ink)]">View Profile →</a>
         </div>
       `;
     }).join('');
@@ -104,7 +104,7 @@ const pageTitle = "My Saved Clinics | TMS List";
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ clinicId, action: 'unsave' }),
     });
-    btn.closest('.bg-white')?.remove();
+    btn.closest('.bg-[var(--paper)]')?.remove();
 
     const list = document.getElementById('saved-list')!;
     if (list.children.length === 0) {

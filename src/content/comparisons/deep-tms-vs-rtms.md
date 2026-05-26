@@ -1,7 +1,7 @@
 ---
 title: "Deep TMS vs Standard rTMS: H-Coil vs Figure-8 Coil"
 description: "Comparing deep TMS (H-coil) with standard repetitive TMS (figure-8 coil) — depth of stimulation, efficacy, FDA clearances, and which is right for you."
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 treatmentA: "Deep TMS"
 treatmentB: "Standard rTMS"
 verdict: "Standard rTMS is more widely available and has a longer track record. Deep TMS reaches deeper brain structures and is the only option for FDA-cleared OCD treatment. For depression, outcomes are comparable."
@@ -88,9 +88,9 @@ Search for [TMS providers](/us/) or explore other [device comparisons](/compare/
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>Deep TMS uses H-coils to reach subcortical structures; standard rTMS uses figure-8 coils</li>
     <li>Depression outcomes are comparable between the two approaches</li>
     <li>Deep TMS is the only TMS device with FDA clearance for OCD</li>
@@ -99,11 +99,11 @@ Search for [TMS providers](/us/) or explore other [device comparisons](/compare/
   </ul>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>

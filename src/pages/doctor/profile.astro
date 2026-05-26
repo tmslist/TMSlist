@@ -3,10 +3,11 @@ export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
 import DoctorSidebar from "../../components/react/DoctorSidebar";
 import DoctorProfileEditor from "../../components/react/DoctorProfileEditor";
+import DoctorProfileCompleteness from "../../components/DoctorProfileCompleteness.astro";
 import { getSessionFromRequest } from "../../utils/auth";
 import { db } from "../../db";
-import { doctors } from "../../db/schema";
-import { eq } from "drizzle-orm";
+import { doctors, reviews } from "../../db/schema";
+import { eq, count } from "drizzle-orm";
 
 const session = getSessionFromRequest(Astro.request);
 if (!session) return Astro.redirect("/portal/login/");
@@ -19,19 +20,26 @@ const doctorRows = await db
   .limit(1);
 
 const doctor = doctorRows[0] ?? null;
+
+let reviewCount = 0;
+if (doctor) {
+  const r = await db.select({ count: count() }).from(reviews).where(eq(reviews.clinicId, doctor.clinicId));
+  reviewCount = Number(r[0]?.count ?? 0);
+}
 ---
 <Layout title="Edit Profile | Doctor Portal | TMS List" description="Edit your doctor profile." noindex={true}>
-  <div class="flex min-h-screen bg-gray-50">
+  <div class="flex min-h-screen bg-[var(--paper2)]">
     <DoctorSidebar client:load currentPage="profile" userEmail={session.email} />
     <main class="flex-1 lg:ml-64 py-8">
       <div class="container mx-auto px-4 max-w-4xl">
         <div class="mb-6">
-          <a href="/doctor/dashboard/" class="text-sm text-blue-600 hover:text-blue-700 font-medium mb-2 inline-block">
+          <a href="/doctor/dashboard/" class="text-sm text-[var(--ink)] hover:text-[var(--ink)] font-medium mb-2 inline-block">
             &larr; Back to Dashboard
           </a>
-          <h1 class="text-2xl font-semibold text-gray-900">Edit Profile</h1>
-          <p class="text-gray-500 text-sm mt-1">Manage your public doctor profile</p>
+          <h1 class="text-2xl font-semibold text-[var(--ink)]">Edit Profile</h1>
+          <p class="text-[var(--muted)] text-sm mt-1">Manage your public doctor profile</p>
         </div>
+        {doctor && <DoctorProfileCompleteness doctor={doctor} reviewCount={reviewCount} variant="full" />}
         <DoctorProfileEditor
           client:load
           doctorId={doctor?.id}

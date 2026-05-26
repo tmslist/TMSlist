@@ -23,12 +23,12 @@ interface Review {
 }
 
 const SOURCE_COLORS: Record<string, string> = {
-  google: 'bg-blue-50 text-blue-700',
+  google: 'bg-[var(--paper2)] text-[var(--ink)]',
   healthgrades: 'bg-emerald-50 text-emerald-700',
   zocdoc: 'bg-orange-50 text-orange-700',
   yelp: 'bg-red-50 text-red-700',
-  vitals: 'bg-purple-50 text-purple-700',
-  tmslist: 'bg-indigo-50 text-indigo-700',
+  vitals: 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)]',
+  tmslist: 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)]',
 };
 
 const SOURCE_LABELS: Record<string, string> = {
@@ -54,7 +54,7 @@ function Toast({ message, type }: ToastProps) {
     <div className={`fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg text-sm font-medium z-50 animate-fade-in ${
       type === 'success' ? 'bg-emerald-600 text-white' :
       type === 'error' ? 'bg-red-600 text-white' :
-      'bg-indigo-600 text-white'
+      'bg-[var(--ink2)] text-white'
     }`}>
       {message}
     </div>
@@ -74,10 +74,10 @@ function ReplyModal({ review, onClose, onSubmit }: ReplyModalProps) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">Reply to Review</h3>
+          <h3 className="text-lg font-semibold text-[var(--ink)]">Reply to Review</h3>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-[var(--muted)] hover:text-[var(--ink2)] transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -85,9 +85,9 @@ function ReplyModal({ review, onClose, onSubmit }: ReplyModalProps) {
           </button>
         </div>
 
-        <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-          <p className="text-xs text-gray-500 mb-1">Review by {review.userName}</p>
-          <p className="text-sm text-gray-700 line-clamp-3">{review.body}</p>
+        <div className="mb-4 p-3 bg-[var(--paper2)] rounded-lg">
+          <p className="text-xs text-[var(--muted)] mb-1">Review by {review.userName}</p>
+          <p className="text-sm text-[var(--ink2)] line-clamp-3">{review.body}</p>
         </div>
 
         <textarea
@@ -95,19 +95,19 @@ function ReplyModal({ review, onClose, onSubmit }: ReplyModalProps) {
           onChange={(e) => setReplyText(e.target.value)}
           placeholder="Write your reply..."
           rows={4}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+          className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] resize-none"
         />
 
         <div className="flex justify-end gap-3 mt-4">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={() => onSubmit(review.id, replyText)}
-            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors"
+            className="px-4 py-2 text-sm font-medium text-white bg-[var(--ink2)] rounded-lg hover:bg-[var(--ink2)] transition-colors"
           >
             Submit Reply
           </button>
@@ -339,7 +339,7 @@ export default function AdminReviews() {
     return (
       <span className={`text-yellow-500 ${textSize}`}>
         {Array.from({ length: 5 }, (_, i) => (
-          <span key={i} className={i < rating ? 'text-yellow-500' : 'text-gray-200'}>{STAR}</span>
+          <span key={i} className={i < rating ? 'text-yellow-500' : 'text-[var(--line)]'}>{STAR}</span>
         ))}
       </span>
     );
@@ -383,8 +383,8 @@ export default function AdminReviews() {
               onClick={() => setFilter(f.key)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 filter === f.key
-                  ? 'bg-indigo-600 text-white'
-                  : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  ? 'bg-[var(--ink2)] text-white'
+                  : 'bg-white border border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
               }`}
             >
               {f.label}
@@ -394,7 +394,7 @@ export default function AdminReviews() {
           <div className="ml-auto flex items-center gap-2">
             <button
               onClick={exportToCsv}
-              className="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-1.5"
+              className="px-3 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] transition-colors flex items-center gap-1.5"
               disabled={filteredReviews.length === 0}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -402,7 +402,7 @@ export default function AdminReviews() {
               </svg>
               Export CSV
             </button>
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-[var(--muted)]">
               {filteredReviews.length} of {total} review{filteredReviews.length !== 1 ? 's' : ''}
             </span>
           </div>
@@ -410,13 +410,13 @@ export default function AdminReviews() {
 
         {/* Rating Filter */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs text-gray-500 font-medium">Rating:</span>
+          <span className="text-xs text-[var(--muted)] font-medium">Rating:</span>
           <button
             onClick={() => setRatingFilter(null)}
             className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
               ratingFilter === null
-                ? 'bg-indigo-100 text-indigo-700 ring-1 ring-indigo-300'
-                : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+                ? 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)] ring-1 ring-[rgba(10,22,40,0.15)]'
+                : 'bg-white border border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
             }`}
           >
             All
@@ -427,8 +427,8 @@ export default function AdminReviews() {
               onClick={() => setRatingFilter(ratingFilter === stars ? null : stars)}
               className={`px-3 py-1 rounded text-xs font-medium transition-colors flex items-center gap-1 ${
                 ratingFilter === stars
-                  ? 'bg-indigo-100 text-indigo-700 ring-1 ring-indigo-300'
-                  : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+                  ? 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)] ring-1 ring-[rgba(10,22,40,0.15)]'
+                  : 'bg-white border border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
               }`}
             >
               <span className={stars >= 4 ? 'text-yellow-500' : stars >= 3 ? 'text-yellow-400' : 'text-orange-400'}>
@@ -441,14 +441,14 @@ export default function AdminReviews() {
 
         {/* Source Filter */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs text-gray-500 font-medium">Source:</span>
+          <span className="text-xs text-[var(--muted)] font-medium">Source:</span>
           <select
             value={sourceFilter || ''}
             onChange={(e) => setSourceFilter(e.target.value || null)}
             className={`px-3 py-1.5 rounded text-xs font-medium border transition-colors appearance-none cursor-pointer ${
               sourceFilter
-                ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
-                : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+                ? 'bg-[rgba(201,101,74,0.06)] border-[var(--line)] text-[var(--warm)]'
+                : 'bg-white border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
             }`}
             style={{ minWidth: '120px' }}
           >
@@ -461,7 +461,7 @@ export default function AdminReviews() {
           {(ratingFilter !== null || sourceFilter) && (
             <button
               onClick={() => { setRatingFilter(null); setSourceFilter(null); }}
-              className="px-2 py-1 text-xs text-gray-500 hover:text-gray-700 transition-colors"
+              className="px-2 py-1 text-xs text-[var(--muted)] hover:text-[var(--ink2)] transition-colors"
             >
               Clear filters
             </button>
@@ -471,9 +471,9 @@ export default function AdminReviews() {
 
       {/* Bulk Action Bar */}
       {selectedCount > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[var(--line)] shadow-lg z-40">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <span className="text-sm text-gray-700">
+            <span className="text-sm text-[var(--ink2)]">
               <span className="font-semibold">{selectedCount}</span> review{selectedCount !== 1 ? 's' : ''} selected
             </span>
             <div className="flex items-center gap-3">
@@ -499,7 +499,7 @@ export default function AdminReviews() {
               </button>
               <button
                 onClick={() => setSelectedIds(new Set())}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors"
+                className="px-4 py-2 text-sm font-medium text-[var(--ink2)] hover:text-[var(--ink)] transition-colors"
               >
                 Clear selection
               </button>
@@ -513,10 +513,10 @@ export default function AdminReviews() {
         {error ? (
           <div className="bg-white rounded-xl border border-red-200 p-8 text-center">
             <p className="text-red-600 font-medium mb-2">{error}</p>
-            <button onClick={fetchReviews} className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">Try again</button>
+            <button onClick={fetchReviews} className="text-[var(--warm)] hover:text-[var(--warm)] text-sm font-medium">Try again</button>
           </div>
         ) : loading ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-500">
+          <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center text-[var(--muted)]">
             <div className="inline-flex items-center gap-2">
               <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -526,13 +526,13 @@ export default function AdminReviews() {
             </div>
           </div>
         ) : filteredReviews.length === 0 ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-500">
+          <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center text-[var(--muted)]">
             {filter === 'pending' ? 'No pending reviews.' : 'No reviews match your filters.'}
           </div>
         ) : (
           <>
             {/* Table Header */}
-            <div className="bg-gray-50 rounded-xl border border-gray-200 px-4 py-3">
+            <div className="bg-[var(--paper2)] rounded-xl border border-[var(--line)] px-4 py-3">
               <div className="flex items-center gap-3">
                 <div className="w-5">
                   <input
@@ -540,10 +540,10 @@ export default function AdminReviews() {
                     checked={allSelected}
                     ref={(el) => { if (el) el.indeterminate = someSelected; }}
                     onChange={toggleSelectAll}
-                    className="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                    className="w-4 h-4 rounded border-[var(--line)] text-[var(--warm)] focus:ring-[rgba(10,22,40,0.2)] cursor-pointer"
                   />
                 </div>
-                <div className="flex-1 grid grid-cols-12 gap-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                <div className="flex-1 grid grid-cols-12 gap-4 text-xs font-semibold text-[var(--muted)] uppercase tracking-wide">
                   <div className="col-span-3">Review</div>
                   <div className="col-span-2">Clinic</div>
                   <div className="col-span-2">Source / Verified</div>
@@ -557,8 +557,8 @@ export default function AdminReviews() {
               <div
                 key={review.id}
                 className={`bg-white rounded-xl border p-4 transition-colors ${
-                  review.approved ? 'border-gray-200' : 'border-amber-200 bg-amber-50/20'
-                } ${selectedIds.has(review.id) ? 'ring-2 ring-indigo-300 ring-offset-1' : ''}`}
+                  review.approved ? 'border-[var(--line)]' : 'border-amber-200 bg-amber-50/20'
+                } ${selectedIds.has(review.id) ? 'ring-2 ring-[rgba(10,22,40,0.15)] ring-offset-1' : ''}`}
               >
                 <div className="flex items-start gap-3">
                   {/* Checkbox */}
@@ -567,7 +567,7 @@ export default function AdminReviews() {
                       type="checkbox"
                       checked={selectedIds.has(review.id)}
                       onChange={() => toggleSelect(review.id)}
-                      className="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                      className="w-4 h-4 rounded border-[var(--line)] text-[var(--warm)] focus:ring-[rgba(10,22,40,0.2)] cursor-pointer"
                     />
                   </div>
 
@@ -576,9 +576,9 @@ export default function AdminReviews() {
                     {/* Reviewer info */}
                     <div className="col-span-3 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-semibold text-sm text-gray-900 truncate">{review.userName}</span>
+                        <span className="font-semibold text-sm text-[var(--ink)] truncate">{review.userName}</span>
                         {review.approved ? (
-                          <span className="shrink-0 px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-[10px] font-semibold">
+                          <span className="shrink-0 px-2 py-0.5 bg-[rgba(10,22,40,0.1)] text-[var(--ink)] rounded-full text-[10px] font-semibold">
                             Published
                           </span>
                         ) : (
@@ -590,12 +590,12 @@ export default function AdminReviews() {
                       <div className="flex items-center gap-2 mb-1">
                         {renderStars(review.rating, 'sm')}
                         {review.helpfulCount > 0 && (
-                          <span className="text-[10px] text-gray-400">
+                          <span className="text-[10px] text-[var(--muted)]">
                             Helpful: {review.helpfulCount}
                           </span>
                         )}
                       </div>
-                      <span className="text-[10px] text-gray-400">
+                      <span className="text-[10px] text-[var(--muted)]">
                         {new Date(review.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                       </span>
                     </div>
@@ -607,7 +607,7 @@ export default function AdminReviews() {
                           href={`/clinic/${review.clinicSlug}/`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-sm font-medium text-indigo-600 hover:text-indigo-800 hover:underline"
+                          className="inline-flex items-center gap-1 text-sm font-medium text-[var(--warm)] hover:text-[var(--warm)] hover:underline"
                         >
                           <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -619,7 +619,7 @@ export default function AdminReviews() {
                           </svg>
                         </a>
                       ) : (
-                        <span className="text-xs text-gray-400">No clinic</span>
+                        <span className="text-xs text-[var(--muted)]">No clinic</span>
                       )}
                     </div>
 
@@ -627,7 +627,7 @@ export default function AdminReviews() {
                     <div className="col-span-2 min-w-0">
                       <div className="flex flex-col gap-1">
                         {review.source && (
-                          <span className={`inline-flex w-fit px-2 py-0.5 rounded text-[10px] font-semibold ${SOURCE_COLORS[review.source] || 'bg-gray-50 text-gray-600'}`}>
+                          <span className={`inline-flex w-fit px-2 py-0.5 rounded text-[10px] font-semibold ${SOURCE_COLORS[review.source] || 'bg-[var(--paper2)] text-[var(--ink2)]'}`}>
                             {SOURCE_LABELS[review.source] || review.source}
                           </span>
                         )}
@@ -645,13 +645,13 @@ export default function AdminReviews() {
                     {/* Review content */}
                     <div className="col-span-3 min-w-0">
                       {review.title && (
-                        <p className="text-sm font-medium text-gray-800 mb-0.5 truncate">{review.title}</p>
+                        <p className="text-sm font-medium text-[var(--ink)] mb-0.5 truncate">{review.title}</p>
                       )}
-                      <p className="text-xs text-gray-600 line-clamp-2">{review.body}</p>
+                      <p className="text-xs text-[var(--ink2)] line-clamp-2">{review.body}</p>
                       {replies[review.id] && (
-                        <div className="mt-2 px-2 py-1.5 bg-indigo-50 border border-indigo-100 rounded text-xs">
-                          <span className="font-semibold text-indigo-700">Your reply:</span>
-                          <p className="text-gray-600 mt-0.5">{replies[review.id]}</p>
+                        <div className="mt-2 px-2 py-1.5 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded text-xs">
+                          <span className="font-semibold text-[var(--warm)]">Your reply:</span>
+                          <p className="text-[var(--ink2)] mt-0.5">{replies[review.id]}</p>
                         </div>
                       )}
                     </div>
@@ -662,7 +662,7 @@ export default function AdminReviews() {
                         {review.approved && (
                           <button
                             onClick={() => setReplyReview(review)}
-                            className="px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg hover:bg-indigo-100 transition-colors flex items-center gap-1"
+                            className="px-3 py-1.5 text-xs font-medium text-[var(--warm)] bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-lg hover:bg-[rgba(201,101,74,0.1)] transition-colors flex items-center gap-1"
                           >
                             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 0 12.328 0 8.375 0 3.816 4.03 0 9 0c5 0 9 3.816 9 8.25z" />

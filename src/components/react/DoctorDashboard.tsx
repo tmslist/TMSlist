@@ -160,7 +160,7 @@ function Stars({ rating, size = 'sm' }: { rating: number; size?: 'sm' | 'md' }) 
       {[1, 2, 3, 4, 5].map((i) => (
         <svg
           key={i}
-          className={`${starSize} ${i <= Math.round(rating) ? 'text-amber-400' : 'text-gray-200'}`}
+          className={`${starSize} ${i <= Math.round(rating) ? 'text-amber-400' : 'text-[var(--line)]'}`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -174,8 +174,8 @@ function Stars({ rating, size = 'sm' }: { rating: number; size?: 'sm' | 'md' }) 
 function ActivityIcon({ type }: { type: ActivityItem['type'] }) {
   const icons: Record<string, { bg: string; color: string; path: string }> = {
     new_lead: {
-      bg: 'bg-blue-100',
-      color: 'text-blue-600',
+      bg: 'bg-[rgba(10,22,40,0.1)]',
+      color: 'text-[var(--ink)]',
       path: 'M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z',
     },
     new_review: {
@@ -184,13 +184,13 @@ function ActivityIcon({ type }: { type: ActivityItem['type'] }) {
       path: 'M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0l-4.725 2.885a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z',
     },
     appointment_request: {
-      bg: 'bg-purple-100',
-      color: 'text-purple-600',
+      bg: 'bg-[rgba(201,101,74,0.1)]',
+      color: 'text-[var(--warm)]',
       path: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
     },
     appointment_confirmed: {
-      bg: 'bg-blue-100',
-      color: 'text-blue-600',
+      bg: 'bg-[rgba(10,22,40,0.1)]',
+      color: 'text-[var(--ink)]',
       path: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
     },
   };
@@ -207,7 +207,7 @@ function ActivityIcon({ type }: { type: ActivityItem['type'] }) {
 function TrendArrow({ value, suffix = '%' }: { value: number; suffix?: string }) {
   const isPositive = value >= 0;
   return (
-    <span className={`inline-flex items-center gap-0.5 text-xs font-semibold ${isPositive ? 'text-blue-600' : 'text-red-600'}`}>
+    <span className={`inline-flex items-center gap-0.5 text-xs font-semibold ${isPositive ? 'text-[var(--ink)]' : 'text-red-600'}`}>
       <svg className={`w-3 h-3 ${isPositive ? '' : 'rotate-180'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
       </svg>
@@ -219,15 +219,15 @@ function TrendArrow({ value, suffix = '%' }: { value: number; suffix?: string })
 function LoadingSkeleton() {
   return (
     <div className="animate-pulse space-y-6">
-      <div className="h-32 bg-gray-100 rounded-2xl" />
+      <div className="h-32 bg-[var(--paper2)] rounded-2xl" />
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="h-28 bg-gray-100 rounded-xl" />
+          <div key={i} className="h-28 bg-[var(--paper2)] rounded-xl" />
         ))}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="h-64 bg-gray-100 rounded-xl" />
-        <div className="h-64 bg-gray-100 rounded-xl" />
+        <div className="h-64 bg-[var(--paper2)] rounded-xl" />
+        <div className="h-64 bg-[var(--paper2)] rounded-xl" />
       </div>
     </div>
   );
@@ -389,7 +389,7 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-6">
+      <div className="min-h-screen bg-[var(--paper2)] p-6">
         <div className="max-w-7xl mx-auto">
           <LoadingSkeleton />
         </div>
@@ -399,15 +399,15 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
 
   if (error || data?.needsClaim) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-        <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center max-w-md">
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="min-h-screen bg-[var(--paper2)] flex items-center justify-center p-6">
+        <div className="bg-white rounded-2xl border border-[var(--line)] p-8 text-center max-w-md">
+          <div className="w-16 h-16 bg-[rgba(10,22,40,0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Welcome to the Doctor Portal</h2>
-          <p className="text-gray-500 mb-6">
+          <h2 className="text-xl font-semibold text-[var(--ink)] mb-2">Welcome to the Doctor Portal</h2>
+          <p className="text-[var(--muted)] mb-6">
             {data?.needsClaim
               ? 'You need to claim your doctor profile to access the portal.'
               : 'Unable to load your dashboard. Please try again.'}
@@ -415,7 +415,7 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
           <a
             href={data?.needsClaim ? '/doctor/register' : '#'}
             onClick={!data?.needsClaim ? (e) => { e.preventDefault(); fetchDashboardData(); } : undefined}
-            className="inline-flex px-6 py-3 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+            className="inline-flex px-6 py-3 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink)] transition-colors"
           >
             {data?.needsClaim ? 'Get Started' : 'Try Again'}
           </a>
@@ -454,37 +454,37 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--paper2)]">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
+      <header className="bg-white border-b border-[var(--line)] sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
               {profile.photoUrl ? (
                 <img src={profile.photoUrl} alt={profile.name} className="w-10 h-10 rounded-full object-cover" />
               ) : (
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 bg-[rgba(10,22,40,0.1)] rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </div>
               )}
               <div>
-                <h1 className="text-lg font-semibold text-gray-900">Welcome back, Dr. {profile.name}</h1>
-                <p className="text-sm text-gray-500">Doctor Portal Dashboard</p>
+                <h1 className="text-lg font-semibold text-[var(--ink)]">Welcome back, Dr. {profile.name}</h1>
+                <p className="text-sm text-[var(--muted)]">Doctor Portal Dashboard</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <a
                 href="/doctor/profile/"
-                className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
+                className="px-4 py-2 text-sm font-medium text-[var(--ink)] bg-[var(--paper2)] rounded-lg hover:bg-[rgba(10,22,40,0.1)] transition-colors"
               >
                 Edit Profile
               </a>
               <div className="relative">
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
-                  className="relative p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="relative p-2 text-[var(--muted)] hover:bg-[var(--paper2)] rounded-lg transition-colors"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
@@ -496,13 +496,13 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
                   )}
                 </button>
                 {showNotifications && (
-                  <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-200 z-50">
-                    <div className="px-4 py-3 border-b border-gray-100">
-                      <h3 className="text-sm font-semibold text-gray-900">Notifications</h3>
+                  <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-xl border border-[var(--line)] z-50">
+                    <div className="px-4 py-3 border-b border-[var(--line)]">
+                      <h3 className="text-sm font-semibold text-[var(--ink)]">Notifications</h3>
                     </div>
                     <div className="max-h-64 overflow-y-auto">
                       {notifications.length === 0 ? (
-                        <div className="py-6 text-center text-gray-400 text-sm">No notifications</div>
+                        <div className="py-6 text-center text-[var(--muted)] text-sm">No notifications</div>
                       ) : (
                         notifications.map((n) => (
                           <button
@@ -511,14 +511,14 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
                               if (!n.read) markNotificationRead(n.id);
                               if (n.message) window.location.href = n.message;
                             }}
-                            className={`w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-50 last:border-b-0 ${!n.read ? 'bg-blue-50/50' : ''}`}
+                            className={`w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-[var(--paper2)] border-b border-[var(--line)] last:border-b-0 ${!n.read ? 'bg-[var(--paper2)]' : ''}`}
                           >
                             <div className="flex-1 min-w-0">
-                              <p className={`text-sm truncate ${!n.read ? 'font-semibold text-gray-900' : 'font-medium text-gray-700'}`}>{n.title}</p>
-                              {n.message && <p className="text-xs text-gray-500 line-clamp-1 mt-0.5">{n.message}</p>}
-                              <p className="text-[11px] text-gray-400 mt-1">{timeAgo(n.createdAt)}</p>
+                              <p className={`text-sm truncate ${!n.read ? 'font-semibold text-[var(--ink)]' : 'font-medium text-[var(--ink2)]'}`}>{n.title}</p>
+                              {n.message && <p className="text-xs text-[var(--muted)] line-clamp-1 mt-0.5">{n.message}</p>}
+                              <p className="text-[11px] text-[var(--muted)] mt-1">{timeAgo(n.createdAt)}</p>
                             </div>
-                            {!n.read && <span className="w-2 h-2 bg-blue-500 rounded-full mt-1.5" />}
+                            {!n.read && <span className="w-2 h-2 bg-[var(--ink2)] rounded-full mt-1.5" />}
                           </button>
                         ))
                       )}
@@ -526,7 +526,7 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
                   </div>
                 )}
               </div>
-              <button onClick={handleSignOut} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+              <button onClick={handleSignOut} className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)]">
                 Sign Out
               </button>
             </div>
@@ -536,11 +536,11 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Hero Welcome Section */}
-        <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 rounded-2xl p-6 md:p-8 text-white shadow-lg">
+        <div className="bg-gradient-to-br from-[var(--ink)] via-[var(--ink2)] to-[var(--ink)] rounded-2xl p-6 md:p-8 text-white shadow-lg">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex-1">
               <h2 className="text-2xl md:text-3xl font-bold mb-2">Your Practice Overview</h2>
-              <p className="text-blue-100 text-sm md:text-base mb-4">
+              <p className="text-[var(--muted)] text-sm md:text-base mb-4">
                 {completion.percentage === 100
                   ? 'Your profile is complete! Keep up the great work.'
                   : `Complete your profile to attract more patients. You're ${completion.percentage}% done.`}
@@ -548,10 +548,10 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
               {/* Progress Bar */}
               <div className="w-full max-w-md">
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-xs font-medium text-blue-200">Profile Completion</span>
+                  <span className="text-xs font-medium text-[var(--muted)]">Profile Completion</span>
                   <span className="text-xs font-bold text-white">{completion.percentage}%</span>
                 </div>
-                <div className="w-full bg-blue-800/50 rounded-full h-2.5">
+                <div className="w-full bg-[var(--paper2)] rounded-full h-2.5">
                   <div
                     className="bg-white h-2.5 rounded-full transition-all duration-500"
                     style={{ width: `${completion.percentage}%` }}
@@ -562,7 +562,7 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
             <div className="flex flex-wrap gap-3">
               <a
                 href="/doctor/leads/"
-                className="px-5 py-2.5 bg-white text-blue-700 rounded-xl text-sm font-semibold hover:bg-blue-50 transition-colors shadow-md flex items-center gap-2"
+                className="px-5 py-2.5 bg-white text-[var(--ink)] rounded-xl text-sm font-semibold hover:bg-[var(--paper2)] transition-colors shadow-md flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
@@ -571,7 +571,7 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
               </a>
               <a
                 href="/doctor/appointments/"
-                className="px-5 py-2.5 bg-blue-500 text-white rounded-xl text-sm font-semibold hover:bg-blue-400 transition-colors shadow-md flex items-center gap-2"
+                className="px-5 py-2.5 bg-[var(--ink2)] text-white rounded-xl text-sm font-semibold hover:bg-[var(--ink2)] transition-colors shadow-md flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -585,51 +585,51 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
         {/* Stats Cards Row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Profile Views */}
-          <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Profile Views</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{stats.profileViews.toLocaleString()}</p>
+                <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Profile Views</p>
+                <p className="text-2xl font-bold text-[var(--ink)] mt-1">{stats.profileViews.toLocaleString()}</p>
               </div>
               <Sparkline data={stats.profileViewsTrend} color="#2563eb" />
             </div>
-            <p className="text-xs text-gray-400 mt-2">Last 7 days</p>
+            <p className="text-xs text-[var(--muted)] mt-2">Last 7 days</p>
           </div>
 
           {/* Leads This Month */}
-          <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Leads This Month</p>
-                <p className="text-2xl font-bold text-blue-600 mt-1">{stats.leadsThisMonth}</p>
+                <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Leads This Month</p>
+                <p className="text-2xl font-bold text-[var(--ink)] mt-1">{stats.leadsThisMonth}</p>
               </div>
               <TrendArrow value={stats.leadsTrend} />
             </div>
-            <p className="text-xs text-gray-400 mt-2">New patient enquiries</p>
+            <p className="text-xs text-[var(--muted)] mt-2">New patient enquiries</p>
           </div>
 
           {/* Reviews Average */}
-          <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
             <div>
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Average Rating</p>
+              <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Average Rating</p>
               <div className="flex items-center gap-2 mt-1">
-                <p className="text-2xl font-bold text-gray-900">{stats.avgRating.toFixed(1)}</p>
+                <p className="text-2xl font-bold text-[var(--ink)]">{stats.avgRating.toFixed(1)}</p>
                 <Stars rating={stats.avgRating} />
               </div>
             </div>
-            <p className="text-xs text-gray-400 mt-2">{stats.reviewCount} total reviews</p>
+            <p className="text-xs text-[var(--muted)] mt-2">{stats.reviewCount} total reviews</p>
           </div>
 
           {/* Response Rate */}
-          <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Response Rate</p>
-                <p className="text-2xl font-bold text-blue-600 mt-1">{stats.responseRate}%</p>
+                <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Response Rate</p>
+                <p className="text-2xl font-bold text-[var(--ink)] mt-1">{stats.responseRate}%</p>
               </div>
               <TrendArrow value={stats.responseRateTrend} />
             </div>
-            <p className="text-xs text-gray-400 mt-2">Leads responded to</p>
+            <p className="text-xs text-[var(--muted)] mt-2">Leads responded to</p>
           </div>
         </div>
 
@@ -638,47 +638,47 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
           {/* Left Column - Today's Schedule & Activity Feed */}
           <div className="lg:col-span-2 space-y-6">
             {/* Today's Schedule */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-              <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
-                <h3 className="text-base font-semibold text-gray-900 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
+              <div className="px-5 py-4 border-b border-[var(--line)] flex items-center justify-between">
+                <h3 className="text-base font-semibold text-[var(--ink)] flex items-center gap-2">
+                  <svg className="w-5 h-5 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   Today&apos;s Schedule
                 </h3>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-[var(--muted)]">
                   {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
                 </span>
               </div>
               <div className="p-5">
                 {appointments.length === 0 ? (
                   <div className="text-center py-8">
-                    <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                      <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-12 h-12 bg-[var(--paper2)] rounded-full flex items-center justify-center mx-auto mb-3">
+                      <svg className="w-6 h-6 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                     </div>
-                    <p className="text-sm text-gray-500 font-medium">No appointments scheduled for today</p>
-                    <a href="/doctor/appointments/" className="text-sm text-blue-600 hover:text-blue-700 font-medium mt-1 inline-block">
+                    <p className="text-sm text-[var(--muted)] font-medium">No appointments scheduled for today</p>
+                    <a href="/doctor/appointments/" className="text-sm text-[var(--ink)] hover:text-[var(--ink)] font-medium mt-1 inline-block">
                       Schedule an appointment
                     </a>
                   </div>
                 ) : (
                   <div className="space-y-3">
                     {appointments.map((apt) => (
-                      <div key={apt.id} className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                      <div key={apt.id} className="flex items-center gap-4 p-3 rounded-lg hover:bg-[var(--paper2)] transition-colors">
                         <div className="w-16 text-center">
-                          <p className="text-sm font-semibold text-gray-900">{formatTime(apt.time)}</p>
-                          <p className="text-xs text-gray-500">{apt.duration}min</p>
+                          <p className="text-sm font-semibold text-[var(--ink)]">{formatTime(apt.time)}</p>
+                          <p className="text-xs text-[var(--muted)]">{apt.duration}min</p>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 truncate">{apt.patientName}</p>
-                          <p className="text-xs text-gray-500 capitalize">{apt.type.replace('_', ' ')}</p>
+                          <p className="text-sm font-medium text-[var(--ink)] truncate">{apt.patientName}</p>
+                          <p className="text-xs text-[var(--muted)] capitalize">{apt.type.replace('_', ' ')}</p>
                         </div>
                         <span className={`px-2.5 py-1 text-xs font-medium rounded-full capitalize ${
                           apt.status === 'confirmed' ? 'bg-emerald-100 text-emerald-700' :
                           apt.status === 'pending' ? 'bg-amber-100 text-amber-700' :
-                          apt.status === 'completed' ? 'bg-gray-100 text-gray-700' :
+                          apt.status === 'completed' ? 'bg-[var(--paper2)] text-[var(--ink2)]' :
                           'bg-red-100 text-red-700'
                         }`}>
                           {apt.status}
@@ -691,32 +691,32 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
             </div>
 
             {/* Recent Activity Feed */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-              <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
-                <h3 className="text-base font-semibold text-gray-900 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
+              <div className="px-5 py-4 border-b border-[var(--line)] flex items-center justify-between">
+                <h3 className="text-base font-semibold text-[var(--ink)] flex items-center gap-2">
+                  <svg className="w-5 h-5 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                   Recent Activity
                 </h3>
               </div>
-              <div className="divide-y divide-gray-50">
+              <div className="divide-y divide-[var(--line)]">
                 {activities.length === 0 ? (
                   <div className="p-8 text-center">
-                    <p className="text-sm text-gray-500">No recent activity</p>
+                    <p className="text-sm text-[var(--muted)]">No recent activity</p>
                   </div>
                 ) : (
                   activities.map((activity) => (
-                    <div key={activity.id} className="px-5 py-4 hover:bg-gray-50 transition-colors">
+                    <div key={activity.id} className="px-5 py-4 hover:bg-[var(--paper2)] transition-colors">
                       <div className="flex items-start gap-3">
                         <ActivityIcon type={activity.type} />
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900">{activity.title}</p>
-                          <p className="text-sm text-gray-500 truncate">{activity.description}</p>
-                          <p className="text-xs text-gray-400 mt-1">{timeAgo(activity.timestamp)}</p>
+                          <p className="text-sm font-medium text-[var(--ink)]">{activity.title}</p>
+                          <p className="text-sm text-[var(--muted)] truncate">{activity.description}</p>
+                          <p className="text-xs text-[var(--muted)] mt-1">{timeAgo(activity.timestamp)}</p>
                         </div>
                         {activity.link && (
-                          <a href={activity.link} className="text-xs text-blue-600 hover:text-blue-700 font-medium">
+                          <a href={activity.link} className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium">
                             View
                           </a>
                         )}
@@ -731,10 +731,10 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
           {/* Right Column - Profile Checklist, Earnings, Quick Info */}
           <div className="space-y-6">
             {/* Profile Completion Checklist */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-              <div className="px-5 py-4 border-b border-gray-100">
-                <h3 className="text-base font-semibold text-gray-900 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
+              <div className="px-5 py-4 border-b border-[var(--line)]">
+                <h3 className="text-base font-semibold text-[var(--ink)] flex items-center gap-2">
+                  <svg className="w-5 h-5 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   Profile Checklist
@@ -742,32 +742,32 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
               </div>
               <div className="p-4 space-y-3">
                 {completion.items.length === 0 ? (
-                  <p className="text-sm text-gray-500 text-center py-4">No checklist items</p>
+                  <p className="text-sm text-[var(--muted)] text-center py-4">No checklist items</p>
                 ) : (
                   completion.items.map((item) => (
                     <div key={item.key} className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         {item.completed ? (
                           <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg className="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3 h-3 text-[var(--ink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                             </svg>
                           </div>
                         ) : (
                           <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
-                            item.priority === 'high' ? 'bg-red-100' : item.priority === 'medium' ? 'bg-amber-100' : 'bg-gray-100'
+                            item.priority === 'high' ? 'bg-red-100' : item.priority === 'medium' ? 'bg-amber-100' : 'bg-[var(--paper2)]'
                           }`}>
                             <span className={`text-[10px] font-bold ${
-                              item.priority === 'high' ? 'text-red-600' : item.priority === 'medium' ? 'text-amber-600' : 'text-gray-500'
+                              item.priority === 'high' ? 'text-red-600' : item.priority === 'medium' ? 'text-amber-600' : 'text-[var(--muted)]'
                             }`}>!</span>
                           </div>
                         )}
-                        <span className={`text-sm ${item.completed ? 'text-gray-500 line-through' : 'text-gray-900 font-medium'}`}>
+                        <span className={`text-sm ${item.completed ? 'text-[var(--muted)] line-through' : 'text-[var(--ink)] font-medium'}`}>
                           {item.label}
                         </span>
                       </div>
                       {!item.completed && (
-                        <a href={item.link} className="text-xs text-blue-600 hover:text-blue-700 font-semibold whitespace-nowrap">
+                        <a href={item.link} className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-semibold whitespace-nowrap">
                           Add now
                         </a>
                       )}
@@ -778,8 +778,8 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
             </div>
 
             {/* Earnings Summary */}
-            <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg overflow-hidden">
-              <div className="px-5 py-4 border-b border-blue-500/30">
+            <div className="bg-gradient-to-br from-[var(--ink)] to-[var(--ink2)] rounded-xl shadow-lg overflow-hidden">
+              <div className="px-5 py-4 border-b border-[rgba(10,22,40,0.2)]/30">
                 <h3 className="text-base font-semibold text-white flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -791,32 +791,32 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
                 {earningsLoading ? (
                   <div className="animate-pulse space-y-3">
                     {[1, 2, 3].map((i) => (
-                      <div key={i} className="h-8 bg-blue-500/30 rounded" />
+                      <div key={i} className="h-8 bg-[var(--paper2)] rounded" />
                     ))}
                   </div>
                 ) : (
                   <>
                     <div>
-                      <p className="text-xs text-blue-200">This Month</p>
+                      <p className="text-xs text-[var(--muted)]">This Month</p>
                       <p className="text-2xl font-bold text-white">{formatCurrency(earnings?.thisMonth || data.earnings?.thisMonth || 0)}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="bg-white/10 rounded-lg p-3">
-                        <p className="text-[10px] text-blue-200 uppercase tracking-wider">Last Month</p>
+                        <p className="text-[10px] text-[var(--muted)] uppercase tracking-wider">Last Month</p>
                         <p className="text-sm font-semibold text-white">{formatCurrency(earnings?.lastMonth || data.earnings?.lastMonth || 0)}</p>
                       </div>
                       <div className="bg-white/10 rounded-lg p-3">
-                        <p className="text-[10px] text-blue-200 uppercase tracking-wider">YTD</p>
+                        <p className="text-[10px] text-[var(--muted)] uppercase tracking-wider">YTD</p>
                         <p className="text-sm font-semibold text-white">{formatCurrency(earnings?.ytd || data.earnings?.ytd || 0)}</p>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between pt-2 border-t border-blue-500/30">
-                      <span className="text-xs text-blue-200">Pending Balance</span>
+                    <div className="flex items-center justify-between pt-2 border-t border-[rgba(10,22,40,0.2)]/30">
+                      <span className="text-xs text-[var(--muted)]">Pending Balance</span>
                       <span className="text-sm font-semibold text-white">{formatCurrency(earnings?.pendingBalance || data.earnings?.pendingBalance || 0)}</span>
                     </div>
                     <a
                       href="/doctor/earnings/"
-                      className="block w-full py-2.5 bg-white text-blue-700 rounded-lg text-sm font-semibold text-center hover:bg-blue-50 transition-colors"
+                      className="block w-full py-2.5 bg-white text-[var(--ink)] rounded-lg text-sm font-semibold text-center hover:bg-[var(--paper2)] transition-colors"
                     >
                       View Details
                     </a>
@@ -826,20 +826,20 @@ export default function DoctorDashboard({ userEmail }: { userEmail: string }) {
             </div>
 
             {/* Quick Stats - Specialties */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4">Your Specialties</h3>
+            <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm p-5">
+              <h3 className="text-sm font-semibold text-[var(--ink)] mb-4">Your Specialties</h3>
               {profile.specialties.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
                   {profile.specialties.map((spec, i) => (
-                    <span key={i} className="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">
+                    <span key={i} className="px-2.5 py-1 bg-[var(--paper2)] text-[var(--ink)] text-xs font-medium rounded-full">
                       {spec}
                     </span>
                   ))}
                 </div>
               ) : (
-                <p className="text-sm text-gray-500">No specialties added yet</p>
+                <p className="text-sm text-[var(--muted)]">No specialties added yet</p>
               )}
-              <a href="/doctor/profile/" className="text-sm text-blue-600 hover:text-blue-700 font-medium mt-3 inline-block">
+              <a href="/doctor/profile/" className="text-sm text-[var(--ink)] hover:text-[var(--ink)] font-medium mt-3 inline-block">
                 Edit specialties
               </a>
             </div>

@@ -3,6 +3,7 @@ import { db } from '../../../db';
 import { users, leads, reviews, clinics } from '../../../db/schema';
 import { eq, gte, and, avg, count, desc } from 'drizzle-orm';
 import { Resend } from 'resend';
+import { requireCronAuth } from '../../../utils/cronAuth';
 
 export const prerender = false;
 
@@ -86,10 +87,8 @@ function buildDigestHtml(data: {
 }
 
 export const GET: APIRoute = async ({ request }) => {
-  const authHeader = request.headers.get('authorization');
-  if (authHeader !== `Bearer ${import.meta.env.CRON_SECRET || process.env.CRON_SECRET}`) {
-    return new Response('Unauthorized', { status: 401 });
-  }
+  const authFail = requireCronAuth(request);
+  if (authFail) return authFail;
 
   try {
     const resend = new Resend(import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY);

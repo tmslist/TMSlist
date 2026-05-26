@@ -4,6 +4,18 @@
  */
 import type { APIRoute } from 'astro';
 import { checkRateLimit } from '../../../utils/rateLimit';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
+
+function requireAdmin(request: Request): Response | null {
+  const session = getSessionFromRequest(request);
+  if (!session || !hasRole(session, 'admin')) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  return null;
+}
 
 interface ClinicGBPData {
   name: string;
@@ -189,6 +201,9 @@ async function uploadPhotos(locationId: string, photos: ClinicGBPData['photos'],
  * Main API route handler
  */
 export const POST: APIRoute = async ({ request }) => {
+  const forbidden = requireAdmin(request);
+  if (forbidden) return forbidden;
+
   // Rate limiting
   const rateLimitResponse = await checkRateLimit(request, 'api');
   if (rateLimitResponse) return rateLimitResponse;
@@ -245,6 +260,9 @@ export const POST: APIRoute = async ({ request }) => {
  * Batch sync multiple clinics
  */
 export const PUT: APIRoute = async ({ request }) => {
+  const forbidden = requireAdmin(request);
+  if (forbidden) return forbidden;
+
   // Rate limiting
   const rateLimitResponse = await checkRateLimit(request, 'api');
   if (rateLimitResponse) return rateLimitResponse;

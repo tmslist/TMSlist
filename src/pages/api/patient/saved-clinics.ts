@@ -1,8 +1,9 @@
 import type { APIRoute } from 'astro';
 import { eq, and } from 'drizzle-orm';
 import { db } from '../../../db';
-import { savedClinics, clinics } from '../../../db/schema';
+import { savedClinics } from '../../../db/schema';
 import { getSessionFromRequest } from '../../../utils/auth';
+import { getClinicById } from '../../../utils/jsonData';
 
 export const prerender = false;
 
@@ -17,18 +18,25 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   try {
-    const saved = await db
+    const rows = await db
       .select({
         savedId: savedClinics.id,
         savedAt: savedClinics.createdAt,
-        clinic: clinics,
+        clinicId: savedClinics.clinicId,
       })
       .from(savedClinics)
-      .innerJoin(clinics, eq(savedClinics.clinicId, clinics.id))
       .where(eq(savedClinics.userId, session.userId))
       .orderBy(savedClinics.createdAt);
 
-    return new Response(JSON.stringify({ data: saved }), {
+    // Enrich each saved row with clinic data from the JSON directory.
+    // Skip rows whose clinic has been removed from the directory.
+    const data = (await Promise.all(rows.map(async r => {
+      const clinic = await getClinicById(r.clinicId);
+      if (!clinic) return null;
+      return { savedId: r.savedId, savedAt: r.savedAt, clinic };
+    }))).filter(Boolean);
+
+    return new Response(JSON.stringify({ data }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -54,11 +62,22 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const { clinicId, action } = await request.json();
 
-    if (!clinicId) {
+    if (!clinicId || typeof clinicId !== 'string') {
       return new Response(JSON.stringify({ error: 'clinicId required' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
+    }
+
+    if (action !== 'unsave') {
+      // Validate the clinic exists in the JSON directory before saving.
+      const exists = await getClinicById(clinicId);
+      if (!exists) {
+        return new Response(JSON.stringify({ error: 'Unknown clinic' }), {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
     }
 
     if (action === 'unsave') {

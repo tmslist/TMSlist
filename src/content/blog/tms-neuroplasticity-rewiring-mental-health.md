@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-01
 category: research
 tags: ["neuroplasticity", "brain circuits", "long-term effects", "neuroscience"]
-image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-neuroplasticity-rewiring-mental-health.svg"
 ---
 
 When TMS first earned FDA clearance for depression, the prevailing explanation was simple: magnetic pulses electrically stimulate the prefrontal cortex, and that stimulation lifts mood. The analogy was almost like jump-starting a car battery.
@@ -86,35 +86,35 @@ It also reinforces the value of combining TMS with behavioral interventions. Psy
 
 Your brain is not a static organ. It is a living, rewiring network. TMS is one of the most direct ways we have of deliberately shaping that process.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long do TMS neuroplasticity changes last?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long do TMS neuroplasticity changes last?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Research published in Biological Psychiatry and JAMA Psychiatry has documented that TMS-induced neuroplasticity changes persist measurable weeks after the stimulation protocol ends. In some studies, brain connectivity changes visible on fMRI after a TMS course remain detectable at 6-month follow-up. Maintenance sessions help preserve these changes long-term.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Research published in Biological Psychiatry and JAMA Psychiatry has documented that TMS-induced neuroplasticity changes persist measurable weeks after the stimulation protocol ends. In some studies, brain connectivity changes visible on fMRI after a TMS course remain detectable at 6-month follow-up. Maintenance sessions help preserve these changes long-term.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS work differently than antidepressant medications?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS work differently than antidepressant medications?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Antidepressant medications work primarily through neurotransmitter modulation, while TMS initiates plasticity directly at the circuit level. TMS does not replace a deficient neurotransmitter -- it modulates the activity of circuits that govern mood, then lets the brain's own plasticity mechanisms carry the changes forward. Many patients report TMS effects feel qualitatively different from medication effects: more gradual onset but more durable once established.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Antidepressant medications work primarily through neurotransmitter modulation, while TMS initiates plasticity directly at the circuit level. TMS does not replace a deficient neurotransmitter -- it modulates the activity of circuits that govern mood, then lets the brain's own plasticity mechanisms carry the changes forward. Many patients report TMS effects feel qualitatively different from medication effects: more gradual onset but more durable once established.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I do anything to support TMS neuroplasticity changes?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I do anything to support TMS neuroplasticity changes?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Sleep is critical -- the brain consolidates plastic changes during slow-wave sleep, and poor sleep during TMS may blunt the rewiring process. Exercise increases BDNF and supports neuroplasticity. Consistent treatment adherence matters -- each session contributes to cumulative plastic change. Psychotherapy, exercise, and meaningful activity all contribute to circuit strengthening during and after your TMS course.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Sleep is critical -- the brain consolidates plastic changes during slow-wave sleep, and poor sleep during TMS may blunt the rewiring process. Exercise increases BDNF and supports neuroplasticity. Consistent treatment adherence matters -- each session contributes to cumulative plastic change. Psychotherapy, exercise, and meaningful activity all contribute to circuit strengthening during and after your TMS course.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

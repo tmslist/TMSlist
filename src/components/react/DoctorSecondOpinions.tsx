@@ -19,8 +19,8 @@ interface DoctorSecondOpinionsProps {
 const STATUS_COLORS: Record<string, string> = {
   pending: 'bg-amber-100 text-amber-700',
   requested: 'bg-amber-100 text-amber-700',
-  accepted: 'bg-blue-100 text-blue-700',
-  in_review: 'bg-purple-100 text-purple-700',
+  accepted: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
+  in_review: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
   completed: 'bg-green-100 text-green-700',
   rejected: 'bg-red-100 text-red-700',
 };
@@ -109,7 +109,7 @@ export default function DoctorSecondOpinions({ doctorId, clinicId }: DoctorSecon
     completed: opinions.filter(o => o.status === 'completed').length,
   };
 
-  if (loading) return <div className="flex items-center justify-center min-h-[40vh]"><div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" /></div>;
+  if (loading) return <div className="flex items-center justify-center min-h-[40vh]"><div className="w-8 h-8 border-4 border-[var(--line)] border-t-blue-600 rounded-full animate-spin" /></div>;
 
   return (
     <div>
@@ -120,25 +120,25 @@ export default function DoctorSecondOpinions({ doctorId, clinicId }: DoctorSecon
       {/* Summary cards */}
       <div className="grid grid-cols-3 gap-4 mb-6">
         {[
-          { label: 'Total Requests', count: stats.total, color: 'text-gray-900' },
+          { label: 'Total Requests', count: stats.total, color: 'text-[var(--ink)]' },
           { label: 'Pending', count: stats.pending, color: 'text-amber-600' },
           { label: 'Completed', count: stats.completed, color: 'text-green-600' },
         ].map(stat => (
-          <div key={stat.label} className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-            <p className="text-xs text-gray-500 uppercase tracking-wider font-medium">{stat.label}</p>
+          <div key={stat.label} className="bg-white rounded-xl border border-[var(--line)] p-4 shadow-sm">
+            <p className="text-xs text-[var(--muted)] uppercase tracking-wider font-medium">{stat.label}</p>
             <p className={`text-2xl font-bold mt-1 ${stat.color}`}>{stat.count}</p>
           </div>
         ))}
       </div>
 
       {/* Filter tabs */}
-      <div className="flex gap-1 bg-gray-100 rounded-lg p-1 mb-6 w-fit">
+      <div className="flex gap-1 bg-[var(--paper2)] rounded-lg p-1 mb-6 w-fit">
         {(['all', 'pending', 'completed'] as const).map(f => (
           <button
             key={f}
             onClick={() => setFilter(f)}
             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              filter === f ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+              filter === f ? 'bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--ink2)] hover:text-[var(--ink)]'
             }`}
           >
             {f === 'all' ? 'All' : f === 'pending' ? 'Pending' : 'Completed'}
@@ -148,61 +148,61 @@ export default function DoctorSecondOpinions({ doctorId, clinicId }: DoctorSecon
 
       {/* Opinions list */}
       {filtered.length === 0 ? (
-        <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-          <p className="text-gray-500 text-sm">No second opinion requests</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center">
+          <p className="text-[var(--muted)] text-sm">No second opinion requests</p>
         </div>
       ) : (
         <div className="space-y-4">
           {filtered.map(op => (
-            <div key={op.id} className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+            <div key={op.id} className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
               <div className="flex items-start justify-between mb-3">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="font-semibold text-gray-900">Case Review</span>
-                    <span className={`text-xs px-2.5 py-0.5 rounded-full font-semibold capitalize ${STATUS_COLORS[op.status] || 'bg-gray-100 text-gray-600'}`}>
+                    <span className="font-semibold text-[var(--ink)]">Case Review</span>
+                    <span className={`text-xs px-2.5 py-0.5 rounded-full font-semibold capitalize ${STATUS_COLORS[op.status] || 'bg-[var(--paper2)] text-[var(--ink2)]'}`}>
                       {STATUS_LABELS[op.status] || op.status}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-400">{new Date(op.createdAt).toLocaleDateString()}</p>
+                  <p className="text-xs text-[var(--muted)]">{new Date(op.createdAt).toLocaleDateString()}</p>
                 </div>
                 {op.completedAt && (
-                  <p className="text-xs text-gray-400">Completed {new Date(op.completedAt).toLocaleDateString()}</p>
+                  <p className="text-xs text-[var(--muted)]">Completed {new Date(op.completedAt).toLocaleDateString()}</p>
                 )}
               </div>
 
               {/* Case summary */}
-              <div className="bg-gray-50 rounded-lg p-3 mb-3">
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Case Summary</p>
-                <p className="text-sm text-gray-700">{op.caseSummary}</p>
+              <div className="bg-[var(--paper2)] rounded-lg p-3 mb-3">
+                <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1">Case Summary</p>
+                <p className="text-sm text-[var(--ink2)]">{op.caseSummary}</p>
               </div>
 
               {/* Opinion / response */}
               {op.opinion ? (
-                <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 mb-3">
-                  <p className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">Your Opinion</p>
-                  <p className="text-sm text-gray-700 whitespace-pre-wrap">{op.opinion}</p>
+                <div className="bg-[var(--paper2)] border border-[var(--line)] rounded-lg p-3 mb-3">
+                  <p className="text-xs font-semibold text-[var(--ink)] uppercase tracking-wider mb-1">Your Opinion</p>
+                  <p className="text-sm text-[var(--ink2)] whitespace-pre-wrap">{op.opinion}</p>
                 </div>
               ) : selected === op.id ? (
-                <div className="bg-purple-50 border border-purple-100 rounded-lg p-3 mb-3">
-                  <p className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-1">Write Your Opinion</p>
+                <div className="bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-lg p-3 mb-3">
+                  <p className="text-xs font-semibold text-[var(--warm)] uppercase tracking-wider mb-1">Write Your Opinion</p>
                   <textarea
                     value={responseText}
                     onChange={e => setResponseText(e.target.value)}
                     rows={5}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 mb-2"
+                    className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] mb-2"
                     placeholder="Provide your second opinion on this case..."
                   />
                   <div className="flex gap-2">
                     <button
                       onClick={() => submitResponse(op.id)}
                       disabled={updating || !responseText.trim()}
-                      className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
+                      className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-[var(--ink)] hover:bg-[var(--ink)] disabled:opacity-50"
                     >
                       Submit Opinion
                     </button>
                     <button
                       onClick={() => { setSelected(null); setResponseText(''); }}
-                      className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 border border-gray-300 hover:bg-gray-50"
+                      className="px-4 py-2 rounded-lg text-sm font-medium text-[var(--ink2)] border border-[var(--line)] hover:bg-[var(--paper2)]"
                     >
                       Cancel
                     </button>
@@ -218,7 +218,7 @@ export default function DoctorSecondOpinions({ doctorId, clinicId }: DoctorSecon
                       <button
                         onClick={() => updateStatus(op.id, 'accept')}
                         disabled={updating}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-[var(--ink)] hover:bg-[var(--ink)] disabled:opacity-50"
                       >
                         Accept
                       </button>
@@ -226,7 +226,7 @@ export default function DoctorSecondOpinions({ doctorId, clinicId }: DoctorSecon
                     {(op.status === 'accepted' || op.status === 'in_review') && (
                       <button
                         onClick={() => setSelected(selected === op.id ? null : op.id)}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-purple-600 hover:bg-purple-700"
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-[var(--ink2)] hover:bg-[var(--ink2)]"
                       >
                         Write Opinion
                       </button>
@@ -241,7 +241,7 @@ export default function DoctorSecondOpinions({ doctorId, clinicId }: DoctorSecon
                     <button
                       onClick={() => updateStatus(op.id, 'reject')}
                       disabled={updating}
-                      className="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 border border-gray-300 hover:bg-gray-50 disabled:opacity-50"
+                      className="px-3 py-1.5 rounded-lg text-xs font-medium text-[var(--ink2)] border border-[var(--line)] hover:bg-[var(--paper2)] disabled:opacity-50"
                     >
                       Reject
                     </button>

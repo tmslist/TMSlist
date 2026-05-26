@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-01
 category: patient-guide
 tags: ["Medicare", "insurance", "coverage", "2026"]
-image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-covered-by-medicare-2026-update.svg"
 ---
 
 Medicare covers TMS therapy for depression. This has been true since 2014, and coverage has gotten meaningfully better over the past two years. If you are on Medicare and struggling with depression that has not responded to medication, TMS is a covered treatment option. In 2026, the path to getting it approved is smoother than it has ever been.
@@ -108,9 +108,9 @@ Once you have identified a provider, ask these specific questions at your consul
 
 A clinic that confidently answers all of these has likely been through the Medicare TMS process many times before. That experience translates directly into a smoother process for you.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>Medicare covers TMS for major depressive disorder and OCD at most MACs in 2026.</li>
     <li>Three 2026 changes improve access: reduced documentation, new theta burst billing codes, and expanding maintenance session coverage.</li>
     <li>Your out-of-pocket cost with traditional Medicare is roughly $1,200-$2,400 after the deductible.</li>
@@ -120,47 +120,47 @@ A clinic that confidently answers all of these has likely been through the Medic
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does Medicare cover TMS for anxiety?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does Medicare cover TMS for anxiety?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Not yet. Medicare covers TMS for major depressive disorder and OCD. TMS for anxiety, PTSD, and other conditions are not yet covered, even though some have FDA clearances. Off-label coverage is generally denied. However, if you have comorbid depression and anxiety, TMS may be covered under the depression indication and anxiety symptoms often improve as a secondary benefit.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Not yet. Medicare covers TMS for major depressive disorder and OCD. TMS for anxiety, PTSD, and other conditions are not yet covered, even though some have FDA clearances. Off-label coverage is generally denied. However, if you have comorbid depression and anxiety, TMS may be covered under the depression indication and anxiety symptoms often improve as a secondary benefit.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How do I find a TMS provider that accepts Medicare?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How do I find a TMS provider that accepts Medicare?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Search our <a href="/us/" class="text-violet-600 hover:underline">provider directory</a> and filter for Medicare acceptance. You can also call your regional Medicare Administrative Contractor (MAC) for a list of participating TMS providers. Before committing, ask the clinic directly whether they accept Medicare assignment and how many Medicare TMS patients they have treated.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Search our <a href="/us/" class="text-[var(--warm)] hover:underline">provider directory</a> and filter for Medicare acceptance. You can also call your regional Medicare Administrative Contractor (MAC) for a list of participating TMS providers. Before committing, ask the clinic directly whether they accept Medicare assignment and how many Medicare TMS patients they have treated.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does Medicare cover theta burst stimulation?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does Medicare cover theta burst stimulation?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. New CPT codes specific to theta burst stimulation took effect in 2026, providing clean billing pathways through Medicare. Theta burst sessions take about 3 minutes instead of 19-37 minutes for conventional TMS. The per-session reimbursement is lower, reflecting the shorter time, but the total course cost is comparable.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. New CPT codes specific to theta burst stimulation took effect in 2026, providing clean billing pathways through Medicare. Theta burst sessions take about 3 minutes instead of 19-37 minutes for conventional TMS. The per-session reimbursement is lower, reflecting the shorter time, but the total course cost is comparable.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What if my TMS claim is denied?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What if my TMS claim is denied?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">You have appeal rights. First-level appeals (redetermination) are decided within 60 days. The success rate on TMS appeals is actually quite good. Many initial denials are overturned when additional documentation is provided. Your TMS provider's office should help with appeals. If they will not, consider finding a provider with more Medicare experience.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">You have appeal rights. First-level appeals (redetermination) are decided within 60 days. The success rate on TMS appeals is actually quite good. Many initial denials are overturned when additional documentation is provided. Your TMS provider's office should help with appeals. If they will not, consider finding a provider with more Medicare experience.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does Medicare cover TMS maintenance sessions?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does Medicare cover TMS maintenance sessions?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">As of 2026, several MACs now cover maintenance protocols, typically one to two sessions per month for up to six months following the acute course. Coverage is not universal and varies by MAC region. Check with your specific plan. The formal 2026 coverage determinations provide a framework for appeals even in regions that have not explicitly adopted maintenance coverage.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">As of 2026, several MACs now cover maintenance protocols, typically one to two sessions per month for up to six months following the acute course. Coverage is not universal and varies by MAC region. Check with your specific plan. The formal 2026 coverage determinations provide a framework for appeals even in regions that have not explicitly adopted maintenance coverage.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

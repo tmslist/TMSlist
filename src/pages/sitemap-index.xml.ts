@@ -7,6 +7,7 @@ export const GET: APIRoute = async () => {
   const sitemaps = [
     { loc: `${base}/sitemap-static.xml`, lastmod: now },
     { loc: `${base}/sitemap-locations.xml`, lastmod: now },
+    { loc: `${base}/sitemap-pseo.xml`, lastmod: now },
     { loc: `${base}/sitemap-clinics.xml`, lastmod: now },
     { loc: `${base}/sitemap-doctors.xml`, lastmod: now },
   ];

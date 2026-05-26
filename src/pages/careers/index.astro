@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import EditorialHero from "../../components/editorial/EditorialHero.astro";
 import ClinicJobsBoard from "../../components/react/ClinicJobsBoard";
 
 const title = "Careers | TMS Jobs, Clinic Listings & TMS List Roles";
@@ -47,41 +48,31 @@ const tmsListJobs = [
 ---
 
 <Layout title={title} description={description} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Careers", url: "/careers/" }]}>
-    <main>
-        <!-- Hero -->
-        <section class="relative bg-slate-950 overflow-hidden">
-            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
-            <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[150px]"></div>
-            <div class="absolute bottom-[10%] right-[15%] w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
-
-            <div class="container mx-auto px-4 pt-12 pb-24 lg:pt-16 lg:pb-28 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-12" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
-                    <span class="text-slate-700">/</span>
-                    <span class="text-slate-300">Careers</span>
-                </nav>
-                <div class="max-w-3xl">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-violet-500/10 border border-violet-500/20 rounded-full mb-6">
-                        <div class="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
-                        <span class="text-xs font-semibold text-violet-400 tracking-wider uppercase">Join Our Team</span>
-                    </div>
-                    <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[0.95] mb-5">
-                        Careers at<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">TMS List</span>
-                    </h1>
-                    <p class="text-lg text-slate-400 leading-relaxed max-w-xl">
-                        Find TMS therapy jobs at clinics nationwide, or post a position at your clinic. Plus, join our team building the world's most trusted TMS directory.
-                    </p>
-                </div>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
-        </section>
+    <main style="background:var(--paper)">
+        <EditorialHero
+            eyebrow="Join Our Team"
+            eyebrowDot="#22c55e"
+            title="Careers at"
+            titleAccent="TMS List."
+            description="Find TMS therapy jobs at clinics nationwide, or post a position at your clinic. Plus, join our team building the world's most trusted TMS directory."
+            breadcrumbs={[{ label: "Home", href: "/" }, { label: "Careers" }]}
+            ctas={[
+                { label: "Open Roles", href: "#openings" },
+                { label: "Post a Job", href: "mailto:tmslistofficial@gmail.com", variant: "outline" },
+            ]}
+            stats={[
+                { value: tmsListJobs.length, label: "Open Roles", color: "ink" },
+                { value: "Remote", label: "First", color: "accent" },
+                { value: "$2K", label: "Education/yr", color: "warm" },
+            ]}
+        />
 
         <!-- Mission -->
-        <section class="py-16 lg:py-24 bg-white">
+        <section class="py-16 lg:py-24 bg-[var(--paper)]">
             <div class="container mx-auto px-4 max-w-4xl">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-5">Our Mission</h2>
-                    <p class="text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto">
+                    <h2 class="text-3xl lg:text-4xl font-bold text-[var(--ink)] tracking-tight mb-5">Our Mission</h2>
+                    <p class="text-lg text-[var(--muted)] leading-relaxed max-w-2xl mx-auto">
                         Millions of people with treatment-resistant depression, OCD, and other conditions could benefit from TMS therapy — but most don't know it exists, and those who do struggle to find a provider. We're changing that by building the most comprehensive, transparent, and accessible TMS clinic directory in the world.
                     </p>
                 </div>
@@ -89,20 +80,20 @@ const tmsListJobs = [
         </section>
 
         <!-- Values -->
-        <section class="py-16 lg:py-24 bg-slate-50 border-y border-slate-100">
+        <section class="py-16 lg:py-24 bg-[var(--paper2)] border-y border-[var(--line)]">
             <div class="container mx-auto px-4 max-w-5xl">
                 <div class="text-center mb-14">
-                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">What We Stand For</h2>
-                    <p class="text-slate-500 text-lg max-w-xl mx-auto">These values guide every decision we make, from product features to content policies.</p>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-[var(--ink)] tracking-tight mb-4">What We Stand For</h2>
+                    <p class="text-[var(--muted)] text-lg max-w-xl mx-auto">These values guide every decision we make, from product features to content policies.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {values.map(v => (
-                        <div class="bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center text-violet-600 mb-5">
+                        <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-7 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 rounded-xl bg-[rgba(10,22,40,0.08)] flex items-center justify-center text-[var(--accent)] mb-5">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={v.icon}/></svg>
                             </div>
-                            <h3 class="text-lg font-bold text-slate-900 mb-2">{v.title}</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">{v.description}</p>
+                            <h3 class="text-lg font-bold text-[var(--ink)] mb-2">{v.title}</h3>
+                            <p class="text-sm text-[var(--muted)] leading-relaxed">{v.description}</p>
                         </div>
                     ))}
                 </div>
@@ -110,44 +101,44 @@ const tmsListJobs = [
         </section>
 
         <!-- Jobs: Two-Tab Layout -->
-        <section class="py-16 lg:py-24 bg-white">
+        <section class="py-16 lg:py-24 bg-[var(--paper)]">
             <div class="container mx-auto px-4 max-w-5xl">
                 <div class="flex items-center gap-3 mb-8">
-                    <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <div class="w-8 h-8 rounded-lg bg-[var(--paper2)] flex items-center justify-center">
+                        <svg class="w-4 h-4 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-slate-900">Open Positions</h2>
+                    <h2 class="text-2xl font-bold text-[var(--ink)]">Open Positions</h2>
                 </div>
 
                 <!-- Tab Buttons -->
-                <div class="flex gap-1 p-1 bg-slate-100 rounded-xl w-fit mb-8" id="careers-tabs" data-active="tms-list">
+                <div class="flex gap-1 p-1 bg-[var(--paper2)] rounded-xl w-fit mb-8" id="careers-tabs" data-active="tms-list">
                     <button
                         class="careers-tab px-5 py-2.5 text-sm font-semibold rounded-lg transition-all"
                         data-tab="tms-list"
                         onclick="
                             document.querySelectorAll('.careers-tab').forEach(b => {
-                                b.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
-                                b.classList.add('text-slate-500');
+                                b.classList.remove('bg-[var(--paper)]', 'text-[var(--ink)]', 'shadow-sm');
+                                b.classList.add('text-[var(--muted)]');
                             });
                             document.querySelectorAll('.careers-tab-content').forEach(c => c.classList.add('hidden'));
-                            this.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
-                            this.classList.remove('text-slate-500');
+                            this.classList.add('bg-[var(--paper)]', 'text-[var(--ink)]', 'shadow-sm');
+                            this.classList.remove('text-[var(--muted)]');
                             document.getElementById('tms-list-content').classList.remove('hidden');
                         "
                     >
                         TMS List Jobs
                     </button>
                     <button
-                        class="careers-tab px-5 py-2.5 text-sm font-semibold rounded-lg transition-all text-slate-500"
+                        class="careers-tab px-5 py-2.5 text-sm font-semibold rounded-lg transition-all text-[var(--muted)]"
                         data-tab="clinic-jobs"
                         onclick="
                             document.querySelectorAll('.careers-tab').forEach(b => {
-                                b.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
-                                b.classList.add('text-slate-500');
+                                b.classList.remove('bg-[var(--paper)]', 'text-[var(--ink)]', 'shadow-sm');
+                                b.classList.add('text-[var(--muted)]');
                             });
                             document.querySelectorAll('.careers-tab-content').forEach(c => c.classList.add('hidden'));
-                            this.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
-                            this.classList.remove('text-slate-500');
+                            this.classList.add('bg-[var(--paper)]', 'text-[var(--ink)]', 'shadow-sm');
+                            this.classList.remove('text-[var(--muted)]');
                             document.getElementById('clinic-jobs-content').classList.remove('hidden');
                         "
                     >
@@ -164,33 +155,33 @@ const tmsListJobs = [
                 <div id="tms-list-content" class="careers-tab-content">
                     <div class="space-y-4">
                         {tmsListJobs.map((job) => (
-                            <div class="bg-white border border-slate-200 rounded-2xl p-6 hover:border-violet-200 hover:shadow-md transition-all">
+                            <div class="bg-[var(--paper)] border border-[var(--line)] rounded-2xl p-6 hover:border-[rgba(10,22,40,0.15)] hover:shadow-md transition-all">
                                 <div class="flex flex-wrap items-start justify-between gap-4">
                                     <div>
                                         <div class="flex items-center gap-2 mb-2">
-                                            <h3 class="text-lg font-bold text-slate-900">{job.title}</h3>
+                                            <h3 class="text-lg font-bold text-[var(--ink)]">{job.title}</h3>
                                         </div>
-                                        <p class="text-slate-500 text-sm mb-3">{job.description}</p>
+                                        <p class="text-[var(--muted)] text-sm mb-3">{job.description}</p>
                                         <div class="flex flex-wrap gap-2">
                                             {job.tags.map((tag) => (
                                                 <span class={`px-2.5 py-1 text-xs font-medium rounded-full ${
-                                                    tag === "Remote" ? "bg-blue-50 text-blue-700" :
+                                                    tag === "Remote" ? "bg-[var(--paper2)] text-[var(--accent)]" :
                                                     tag === "Full-time" ? "bg-emerald-50 text-emerald-700" :
                                                     tag === "Part-time" ? "bg-amber-50 text-amber-700" :
-                                                    "bg-slate-100 text-slate-600"
+                                                    "bg-[var(--paper2)] text-[var(--muted)]"
                                                 }`}>{tag}</span>
                                             ))}
                                         </div>
                                     </div>
-                                    <a href={`mailto:${job.apply}?subject=Application: ${job.title}`} class="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-xl transition-colors shrink-0">
+                                    <a href={`mailto:${job.apply}?subject=Application: ${job.title}`} class="px-5 py-2.5 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white text-sm font-semibold rounded-xl transition-colors shrink-0">
                                         Apply
                                     </a>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <p class="text-center text-slate-500 text-sm mt-8">
-                        Don't see your role? <a href="mailto:tmslistofficial@gmail.com?subject=Job Application" class="inline-flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-lg transition-colors">Send us your resume</a> — we're always looking for great people.
+                    <p class="text-center text-[var(--muted)] text-sm mt-8">
+                        Don't see your role? <a href="mailto:tmslistofficial@gmail.com?subject=Job Application" class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white text-sm font-semibold rounded-lg transition-colors">Send us your resume</a> — we're always looking for great people.
                     </p>
                 </div>
 
@@ -200,9 +191,9 @@ const tmsListJobs = [
                 </div>
 
                 <!-- Post a job CTA -->
-                <div class="mt-12 bg-gradient-to-r from-violet-600/5 to-cyan-600/5 border border-violet-100 rounded-2xl p-6 text-center">
-                    <p class="text-sm text-slate-500 mb-3">Are you a TMS clinic owner?</p>
-                    <a href="/portal/jobs/" class="inline-block px-6 py-2.5 bg-white border border-violet-200 hover:border-violet-400 text-violet-700 text-sm font-semibold rounded-xl transition-colors">
+                <div class="mt-12 bg-gradient-to-r from-[#0A1628]/5 to-[rgba(10,22,40,0.5)] border border-[rgba(10,22,40,0.1)] rounded-2xl p-6 text-center">
+                    <p class="text-sm text-[var(--muted)] mb-3">Are you a TMS clinic owner?</p>
+                    <a href="/portal/jobs/" class="inline-block px-6 py-2.5 bg-[var(--paper)] border border-[rgba(10,22,40,0.15)] hover:border-[var(--ink2)] text-[var(--accent)] text-sm font-semibold rounded-xl transition-colors">
                         Post a Job at Your Clinic →
                     </a>
                 </div>
@@ -210,17 +201,17 @@ const tmsListJobs = [
         </section>
 
         <!-- Benefits -->
-        <section class="py-16 lg:py-24 bg-slate-50 border-y border-slate-100">
+        <section class="py-16 lg:py-24 bg-[var(--paper2)] border-y border-[var(--line)]">
             <div class="container mx-auto px-4 max-w-5xl">
                 <div class="text-center mb-14">
-                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">Benefits & Perks</h2>
-                    <p class="text-slate-500 text-lg max-w-xl mx-auto">We take care of our team so they can focus on building something meaningful.</p>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-[var(--ink)] tracking-tight mb-4">Benefits & Perks</h2>
+                    <p class="text-[var(--muted)] text-lg max-w-xl mx-auto">We take care of our team so they can focus on building something meaningful.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {benefits.map(b => (
-                        <div class="bg-white rounded-2xl border border-slate-100 p-6">
-                            <h3 class="text-base font-bold text-slate-900 mb-2">{b.title}</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">{b.description}</p>
+                        <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+                            <h3 class="text-base font-bold text-[var(--ink)] mb-2">{b.title}</h3>
+                            <p class="text-sm text-[var(--muted)] leading-relaxed">{b.description}</p>
                         </div>
                     ))}
                 </div>
@@ -228,16 +219,16 @@ const tmsListJobs = [
         </section>
 
         <!-- CTA -->
-        <section class="py-16 lg:py-24 bg-white">
+        <section class="py-16 lg:py-24 bg-[var(--paper)]">
             <div class="container mx-auto px-4 max-w-4xl">
-                <div class="relative bg-slate-950 rounded-3xl p-10 lg:p-14 overflow-hidden text-center">
-                    <div class="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-transparent to-cyan-600/10"></div>
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+                <div class="relative bg-[var(--ink)] rounded-3xl p-10 lg:p-14 overflow-hidden text-center">
+                    <div class="absolute inset-0 bg-gradient-to-r from-[#0A1628]/10 via-transparent to-[rgba(10,22,40,0.10)]"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[rgba(10,22,40,0.5)] rounded-full blur-[100px]"></div>
                     <div class="relative z-10">
-                        <p class="text-sm font-semibold text-violet-400 tracking-wider uppercase mb-3">Get in Touch</p>
+                        <p class="text-sm font-semibold text-[var(--accent2)] tracking-wider uppercase mb-3">Get in Touch</p>
                         <h3 class="text-2xl lg:text-3xl font-bold text-white mb-4 tracking-tight">Interested in Joining Us?</h3>
-                        <p class="text-slate-400 max-w-lg mx-auto mb-8">Send your resume and a note about why you're excited about making TMS therapy more accessible. We read every email.</p>
-                        <a href="mailto:tmslistofficial@gmail.com?subject=Job Application" class="inline-block px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-violet-600/25">Email Us</a>
+                        <p class="text-[var(--muted)] max-w-lg mx-auto mb-8">Send your resume and a note about why you're excited about making TMS therapy more accessible. We read every email.</p>
+                        <a href="mailto:tmslistofficial@gmail.com?subject=Job Application" class="inline-block px-8 py-4 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white font-semibold rounded-xl transition-colors shadow-lg shadow-[rgba(10,22,40,0.2)]">Email Us</a>
                     </div>
                 </div>
             </div>
@@ -250,8 +241,8 @@ const tmsListJobs = [
     document.addEventListener('DOMContentLoaded', () => {
         const tabBtn = document.querySelector('[data-tab="tms-list"]');
         if (tabBtn) {
-            tabBtn.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
-            tabBtn.classList.remove('text-slate-500');
+            tabBtn.classList.add('bg-[var(--paper)]', 'text-[var(--ink)]', 'shadow-sm');
+            tabBtn.classList.remove('text-[var(--muted)]');
         }
     });
 </script>

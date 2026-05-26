@@ -11,7 +11,12 @@ function verifyRazorpaySignature(body: string, signature: string, secret: string
     .createHmac('sha256', secret)
     .update(body)
     .digest('hex');
-  return crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(signature));
+  // `timingSafeEqual` throws when buffer lengths differ — pre-check to keep
+  // the signature mismatch path constant-time and exception-free.
+  const expectedBuf = Buffer.from(expected, 'utf8');
+  const sigBuf = Buffer.from(signature, 'utf8');
+  if (expectedBuf.length !== sigBuf.length) return false;
+  return crypto.timingSafeEqual(expectedBuf, sigBuf);
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -28,8 +33,10 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ error: 'Invalid signature' }), { status: 401 });
   }
 
-  // Idempotency: skip duplicate events
-  const eventKey = `razorpay:event:${rawBody.slice(0, 200)}`;
+  // Idempotency: hash the full body so distinct events with similar prefixes
+  // don't collide. The 200-byte slice approach was vulnerable to false hits.
+  const bodyHash = crypto.createHash('sha256').update(rawBody).digest('hex');
+  const eventKey = `razorpay:event:${bodyHash}`;
   const { getCached, setCache } = await import('../../../utils/redis').then(m => m);
   const existing = await getCached<boolean>(eventKey).catch(() => null);
   if (existing) return new Response(JSON.stringify({ received: true }), { status: 200 });
@@ -54,11 +61,23 @@ export const POST: APIRoute = async ({ request }) => {
             [import.meta.env.RAZORPAY_PLAN_PREMIUM ?? '']: 'premium',
             [import.meta.env.RAZORPAY_PLAN_ENTERPRISE ?? '']: 'enterprise',
           };
+          // Validate that the clinicId in `notes` is a UUID we recognise —
+          // anyone with checkout access can stuff arbitrary strings in
+          // metadata. The signature verifies the Razorpay envelope, NOT the
+          // user-supplied notes inside it.
+          const rawClinicId = event.payload.subscription.entity?.notes?.clinicId;
+          const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+          let clinicIdToStore: string | null = null;
+          if (typeof rawClinicId === 'string' && UUID_RE.test(rawClinicId)) {
+            const { clinics } = await import('../../../db/schema');
+            const exists = await db.select({ id: clinics.id }).from(clinics).where(eq(clinics.id, rawClinicId)).limit(1);
+            if (exists.length > 0) clinicIdToStore = rawClinicId;
+          }
           await db.insert(subscriptions).values({
             externalId: id,
             plan: planMap[plan_id] ?? 'pro',
             status: 'active',
-            clinicId: event.payload.subscription.entity?.notes?.clinicId ?? null,
+            clinicId: clinicIdToStore,
           });
         }
         break;

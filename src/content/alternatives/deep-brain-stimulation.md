@@ -26,13 +26,13 @@ faqs:
     <div class="text-2xl font-bold text-red-700 font-display">Brain Surgery</div>
     <div class="text-xs text-red-600 mt-1">Required</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">$50-100K+</div>
-    <div class="text-xs text-blue-600 mt-1">Total cost</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">$50-100K+</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Total cost</div>
   </div>
-  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-violet-700 font-display">Last Resort</div>
-    <div class="text-xs text-violet-600 mt-1">After all else fails</div>
+  <div class="bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--warm)] font-display">Last Resort</div>
+    <div class="text-xs text-[var(--warm)] mt-1">After all else fails</div>
   </div>
 </div>
 
@@ -56,21 +56,21 @@ For depression, the most studied targets include:
 ## DBS vs. TMS
 
 <div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+<table class="w-full text-sm border border-[var(--line)] rounded-xl overflow-hidden">
   <thead>
-    <tr class="bg-slate-800 text-white">
+    <tr class="bg-[var(--ink2)] text-white">
       <th class="px-4 py-3 text-left font-semibold">Factor</th>
       <th class="px-4 py-3 text-center font-semibold">DBS</th>
       <th class="px-4 py-3 text-center font-semibold">TMS</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Invasiveness</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Brain surgery</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Non-invasive</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Reversibility</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Device removable, tissue effects may persist</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Fully reversible</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Surgical Risks</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Infection, bleeding, stroke</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Cost</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">$50,000-$100,000+</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">$6,000-$12,000</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Availability</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Clinical trials only</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Thousands of clinics</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">When to Consider</td><td class="px-4 py-3 text-center"><span class="font-semibold text-slate-700">After everything else fails</span></td><td class="px-4 py-3 text-center"><span class="font-semibold text-slate-700">After 2+ med failures</span></td></tr>
+  <tbody class="divide-y divide-[var(--line)]">
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Invasiveness</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Brain surgery</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Non-invasive</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Reversibility</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Device removable, tissue effects may persist</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Fully reversible</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Surgical Risks</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Infection, bleeding, stroke</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">None</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Cost</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">$50,000-$100,000+</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">$6,000-$12,000</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Availability</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Clinical trials only</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Thousands of clinics</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">When to Consider</td><td class="px-4 py-3 text-center"><span class="font-semibold text-[var(--ink2)]">After everything else fails</span></td><td class="px-4 py-3 text-center"><span class="font-semibold text-[var(--ink2)]">After 2+ med failures</span></td></tr>
   </tbody>
 </table>
 </div>

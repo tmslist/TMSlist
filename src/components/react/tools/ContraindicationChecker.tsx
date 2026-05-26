@@ -63,7 +63,7 @@ const IMPLANT_CHECKLIST = [
 
 const severityBadge: Record<string, string> = {
   none: 'bg-emerald-100 text-emerald-700',
-  low: 'bg-slate-100 text-slate-700',
+  low: 'bg-[var(--paper2)] text-[var(--ink2)]',
   moderate: 'bg-amber-100 text-amber-700',
   high: 'bg-red-100 text-red-700',
   absolute: 'bg-red-200 text-red-800',
@@ -119,18 +119,18 @@ export default function ContraindicationChecker() {
               onClick={() => setStep(s)}
               className={`w-8 h-8 rounded-full text-xs font-bold transition-all ${
                 step === s
-                  ? 'bg-violet-600 text-white'
+                  ? 'bg-[var(--ink)] text-white'
                   : s < step
                   ? 'bg-emerald-500 text-white'
-                  : 'bg-slate-100 text-slate-500'
+                  : 'bg-[var(--paper2)] text-[var(--muted)]'
               }`}
             >
               {s < step ? <CheckIcon size={14} className="text-white" /> : s + 1}
             </button>
-            <span className="text-xs text-slate-400 hidden sm:inline">
+            <span className="text-xs text-[var(--muted)] hidden sm:inline">
               {['General', 'Medications', 'Implants', 'Result'][s]}
             </span>
-            {s < 3 && <div className="w-6 h-px bg-slate-200" />}
+            {s < 3 && <div className="w-6 h-px bg-[var(--paper2)]" />}
           </div>
         ))}
       </div>
@@ -138,11 +138,11 @@ export default function ContraindicationChecker() {
       {/* Step 0: General contraindications */}
       {step === 0 && (
         <div className="space-y-4">
-          <h3 className="text-lg font-bold text-slate-800">General Health Check</h3>
-          <p className="text-sm text-slate-500">Answer each question honestly. This is for educational purposes — always discuss with your physician.</p>
+          <h3 className="text-lg font-bold text-[var(--ink)]">General Health Check</h3>
+          <p className="text-sm text-[var(--muted)]">Answer each question honestly. This is for educational purposes — always discuss with your physician.</p>
           <div className="space-y-3">
             {contraindications.map(ci => (
-              <div key={ci.id} className="bg-slate-50 rounded-xl p-5 border border-slate-100">
+              <div key={ci.id} className="bg-[var(--paper2)] rounded-xl p-5 border border-[var(--line)]">
                 <div className="flex items-start gap-4">
                   <button
                     onClick={() => setCiAnswers(prev => ({ ...prev, [ci.id]: !prev[ci.id] }))}
@@ -151,7 +151,7 @@ export default function ContraindicationChecker() {
                         ? ci.severity === 'absolute' ? 'bg-red-500 border-red-500'
                           : ci.severity === 'relative' ? 'bg-orange-500 border-orange-500'
                           : 'bg-amber-500 border-amber-500'
-                        : 'border-slate-200 hover:border-violet-400'
+                        : 'border-[var(--line)] hover:border-[var(--ink2)]'
                     }`}
                   >
                     {ciAnswers[ci.id] && (
@@ -162,18 +162,18 @@ export default function ContraindicationChecker() {
                   </button>
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <p className="text-sm font-bold text-slate-800">{ci.question}</p>
+                      <p className="text-sm font-bold text-[var(--ink)]">{ci.question}</p>
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${severityBadge[ci.severity]}`}>
                         {ci.severity}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500">{ci.detail}</p>
+                    <p className="text-xs text-[var(--muted)]">{ci.detail}</p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <button onClick={() => setStep(1)} className="px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-500 transition-colors">
+          <button onClick={() => setStep(1)} className="px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors">
             Next: Medications →
           </button>
         </div>
@@ -182,22 +182,22 @@ export default function ContraindicationChecker() {
       {/* Step 1: Medications */}
       {step === 1 && (
         <div className="space-y-4">
-          <h3 className="text-lg font-bold text-slate-800">Medication Review</h3>
-          <p className="text-sm text-slate-500">Check any medications you are currently taking that may affect TMS safety.</p>
+          <h3 className="text-lg font-bold text-[var(--ink)]">Medication Review</h3>
+          <p className="text-sm text-[var(--muted)]">Check any medications you are currently taking that may affect TMS safety.</p>
           <div className="space-y-2">
             {MEDICATION_CHECKLIST.map(med => (
-              <div key={med.name} className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <div key={med.name} className="flex items-center gap-4 p-4 bg-[var(--paper2)] rounded-xl border border-[var(--line)]">
                 <button
                   onClick={() => setMedChecked(prev => ({ ...prev, [med.name]: !prev[med.name] }))}
                   className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 ${
-                    medChecked[med.name] ? 'bg-amber-500 border-amber-500' : 'border-slate-200'
+                    medChecked[med.name] ? 'bg-amber-500 border-amber-500' : 'border-[var(--line)]'
                   }`}
                 >
                   {medChecked[med.name] && <CheckIcon size={12} className="text-white" />}
                 </button>
                 <div className="flex-1">
-                  <p className="text-sm font-semibold text-slate-700">{med.name}</p>
-                  <p className="text-xs text-slate-400">{med.detail}</p>
+                  <p className="text-sm font-semibold text-[var(--ink2)]">{med.name}</p>
+                  <p className="text-xs text-[var(--muted)]">{med.detail}</p>
                 </div>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${severityBadge[med.risk]}`}>
                   {med.risk} risk
@@ -206,8 +206,8 @@ export default function ContraindicationChecker() {
             ))}
           </div>
           <div className="flex gap-3">
-            <button onClick={() => setStep(0)} className="px-6 py-3 bg-slate-100 text-slate-600 font-semibold rounded-xl hover:bg-slate-200 transition-colors">← Back</button>
-            <button onClick={() => setStep(2)} className="px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-500 transition-colors">Next: Implants →</button>
+            <button onClick={() => setStep(0)} className="px-6 py-3 bg-[var(--paper2)] text-[var(--ink2)] font-semibold rounded-xl hover:bg-[var(--paper2)] transition-colors">← Back</button>
+            <button onClick={() => setStep(2)} className="px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors">Next: Implants →</button>
           </div>
         </div>
       )}
@@ -215,11 +215,11 @@ export default function ContraindicationChecker() {
       {/* Step 2: Implants */}
       {step === 2 && (
         <div className="space-y-4">
-          <h3 className="text-lg font-bold text-slate-800">Implants & Devices</h3>
-          <p className="text-sm text-slate-500">Check any metal or electronic devices in or near your head and body.</p>
+          <h3 className="text-lg font-bold text-[var(--ink)]">Implants & Devices</h3>
+          <p className="text-sm text-[var(--muted)]">Check any metal or electronic devices in or near your head and body.</p>
           <div className="space-y-2">
             {IMPLANT_CHECKLIST.map(imp => (
-              <div key={imp.name} className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <div key={imp.name} className="flex items-center gap-4 p-4 bg-[var(--paper2)] rounded-xl border border-[var(--line)]">
                 <button
                   onClick={() => setImplantChecked(prev => ({ ...prev, [imp.name]: !prev[imp.name] }))}
                   className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 ${
@@ -227,14 +227,14 @@ export default function ContraindicationChecker() {
                       ? imp.risk === 'absolute' ? 'bg-red-500 border-red-500'
                         : imp.risk === 'high' ? 'bg-red-400 border-red-400'
                         : 'bg-orange-500 border-orange-500'
-                      : 'border-slate-200'
+                      : 'border-[var(--line)]'
                   }`}
                 >
                   {implantChecked[imp.name] && <CheckIcon size={12} className="text-white" />}
                 </button>
                 <div className="flex-1">
-                  <p className="text-sm font-semibold text-slate-700">{imp.name}</p>
-                  <p className="text-xs text-slate-400">{imp.detail}</p>
+                  <p className="text-sm font-semibold text-[var(--ink2)]">{imp.name}</p>
+                  <p className="text-xs text-[var(--muted)]">{imp.detail}</p>
                 </div>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${severityBadge[imp.risk]}`}>
                   {imp.risk}
@@ -243,8 +243,8 @@ export default function ContraindicationChecker() {
             ))}
           </div>
           <div className="flex gap-3">
-            <button onClick={() => setStep(1)} className="px-6 py-3 bg-slate-100 text-slate-600 font-semibold rounded-xl hover:bg-slate-200 transition-colors">← Back</button>
-            <button onClick={() => setStep(3)} className="px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-500 transition-colors">View Result →</button>
+            <button onClick={() => setStep(1)} className="px-6 py-3 bg-[var(--paper2)] text-[var(--ink2)] font-semibold rounded-xl hover:bg-[var(--paper2)] transition-colors">← Back</button>
+            <button onClick={() => setStep(3)} className="px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors">View Result →</button>
           </div>
         </div>
       )}
@@ -258,19 +258,19 @@ export default function ContraindicationChecker() {
               {config.icon}
               <div>
                 <p className={`text-xs font-bold uppercase tracking-wider ${config.color} mb-1`}>TMS Eligibility Assessment</p>
-                <p className="text-2xl font-bold text-slate-900">{config.label}</p>
+                <p className="text-2xl font-bold text-[var(--ink)]">{config.label}</p>
               </div>
             </div>
-            <p className="text-slate-700">{config.message}</p>
+            <p className="text-[var(--ink2)]">{config.message}</p>
           </div>
 
           {/* Concerns summary */}
           {ciResult.concerns.length > 0 && (
-            <div className="bg-slate-50 rounded-xl p-5 border border-slate-100">
-              <p className="text-sm font-bold text-slate-700 mb-3">Identified Concerns</p>
+            <div className="bg-[var(--paper2)] rounded-xl p-5 border border-[var(--line)]">
+              <p className="text-sm font-bold text-[var(--ink2)] mb-3">Identified Concerns</p>
               <ul className="space-y-2">
                 {ciResult.concerns.map((c, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
+                  <li key={i} className="flex items-start gap-2 text-sm text-[var(--ink2)]">
                     <span className="text-amber-500 mt-0.5">•</span>
                     {c.replace('Absolute contraindication: ', '').replace('Relative contraindication: ', '').replace('Precaution: ', '')}
                   </li>
@@ -278,7 +278,7 @@ export default function ContraindicationChecker() {
                 {medConcerns.map(([name]) => {
                   const med = MEDICATION_CHECKLIST.find(m => m.name === name);
                   return (
-                    <li key={name} className="flex items-start gap-2 text-sm text-slate-600">
+                    <li key={name} className="flex items-start gap-2 text-sm text-[var(--ink2)]">
                       <span className="text-amber-500 mt-0.5">•</span>
                       Medication: {name} — {med?.detail}
                     </li>
@@ -287,7 +287,7 @@ export default function ContraindicationChecker() {
                 {implantConcerns.map(([name]) => {
                   const imp = IMPLANT_CHECKLIST.find(i => i.name === name);
                   return (
-                    <li key={name} className="flex items-start gap-2 text-sm text-slate-600">
+                    <li key={name} className="flex items-start gap-2 text-sm text-[var(--ink2)]">
                       <span className="text-red-500 mt-0.5">•</span>
                       Implant: {name} — {imp?.detail}
                     </li>
@@ -299,16 +299,16 @@ export default function ContraindicationChecker() {
 
           {/* Protocol recommendations */}
           <div>
-            <p className="text-sm font-bold text-slate-700 mb-3">Recommended Protocols (if cleared)</p>
+            <p className="text-sm font-bold text-[var(--ink2)] mb-3">Recommended Protocols (if cleared)</p>
             <div className="space-y-2">
               {safeProtocols.map(p => (
-                <div key={p.name} className="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-100">
+                <div key={p.name} className="flex items-center gap-3 p-4 bg-white rounded-xl border border-[var(--line)]">
                   <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${p.evidence === 'Strong' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
                     {p.evidence}
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-slate-800">{p.name}</p>
-                    <p className="text-xs text-slate-400">{p.indication} · {p.duration} · {p.pulsesDisplay}</p>
+                    <p className="text-sm font-semibold text-[var(--ink)]">{p.name}</p>
+                    <p className="text-xs text-[var(--muted)]">{p.indication} · {p.duration} · {p.pulsesDisplay}</p>
                   </div>
                 </div>
               ))}
@@ -316,10 +316,10 @@ export default function ContraindicationChecker() {
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => setStep(0)} className="px-6 py-3 bg-slate-100 text-slate-600 font-semibold rounded-xl hover:bg-slate-200 transition-colors">
+            <button onClick={() => setStep(0)} className="px-6 py-3 bg-[var(--paper2)] text-[var(--ink2)] font-semibold rounded-xl hover:bg-[var(--paper2)] transition-colors">
               Start Over
             </button>
-            <a href="/quiz/am-i-a-candidate/" className="px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-500 transition-colors">
+            <a href="/quiz/am-i-a-candidate/" className="px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors">
               Take Full Eligibility Quiz →
             </a>
           </div>

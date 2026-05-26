@@ -27,25 +27,25 @@ const schema = JSON.stringify({
     { name: "Terms of Service", url: "/legal/terms-of-service/" },
 ]}>
     <main class="min-h-screen">
-        <section class="relative bg-slate-950 overflow-hidden">
-            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
-            <div class="absolute top-[-10%] left-[30%] w-[400px] h-[400px] bg-violet-600/10 rounded-full blur-[120px]"></div>
+        <section class="relative bg-[var(--paper)] border-b border-[var(--line)] overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(var(--line) 1px, transparent 0); background-size: 32px 32px; opacity:0.5;"></div>
+            <div class="absolute top-[-10%] left-[30%] w-[400px] h-[400px] bg-[rgba(201,101,74,0.06)] rounded-full blur-[120px]"></div>
             <div class="container mx-auto px-4 pt-12 pb-16 lg:pt-16 lg:pb-20 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-10" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
-                    <span class="text-slate-700">/</span>
-                    <a href="/legal/" class="hover:text-violet-400 transition-colors">Legal</a>
-                    <span class="text-slate-700">/</span>
-                    <span class="text-slate-300">Terms of Service</span>
+                <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-10" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-[var(--accent2)] transition-colors">Home</a>
+                    <span class="text-[var(--ink2)]">/</span>
+                    <a href="/legal/" class="hover:text-[var(--accent2)] transition-colors">Legal</a>
+                    <span class="text-[var(--ink2)]">/</span>
+                    <span class="text-[var(--muted)]">Terms of Service</span>
                 </nav>
-                <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-white mb-3">Terms of Service</h1>
-                <p class="text-slate-400">Last Updated: {lastUpdated}</p>
+                <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-[var(--ink)] mb-3">Terms of Service</h1>
+                <p class="text-[var(--muted)]">Last Updated: {lastUpdated}</p>
             </div>
         </section>
 
         <section class="container mx-auto px-4 py-12 max-w-4xl">
 
-        <div class="prose prose-violet max-w-none">
+        <div class="prose prose-[#0A1628] max-w-none">
             <h2>1. Acceptance of Terms</h2>
             <p>
                 By accessing or using TMS List (the "Site"), you agree to be
@@ -142,7 +142,7 @@ const schema = JSON.stringify({
                 <strong>ATZ Medappz Pvt Ltd</strong><br/>
                 Registered in India<br/>
                 Website: <a href="https://tmslist.com">https://tmslist.com</a><br/>
-                Contact: <a href="mailto:tmslistofficial@gmail.com?subject=Terms of Service Inquiry" class="inline-flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-lg transition-colors">Email Us</a>
+                Contact: <a href="mailto:tmslistofficial@gmail.com?subject=Terms of Service Inquiry" class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white text-sm font-semibold rounded-lg transition-colors">Email Us</a>
             </p>
 
             <h2>10. Governing Law</h2>

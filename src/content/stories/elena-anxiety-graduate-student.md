@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-04
 category: stories
 tags: ["patient story", "anxiety", "generalized anxiety disorder", "graduate student"]
-image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## The irony of studying brains while mine was breaking down

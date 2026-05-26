@@ -34,7 +34,7 @@ function CircularProgress({ score, maxScore }: { score: number; maxScore: number
           fill="none"
           stroke="currentColor"
           strokeWidth="8"
-          className="text-gray-100"
+          className="text-[var(--line)]"
         />
         <circle
           cx="60"
@@ -50,8 +50,8 @@ function CircularProgress({ score, maxScore }: { score: number; maxScore: number
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-3xl font-bold text-gray-900">{pct}%</span>
-        <span className="text-xs text-gray-500 font-medium">{score}/{maxScore} pts</span>
+        <span className="text-3xl font-bold text-[var(--ink)]">{pct}%</span>
+        <span className="text-xs text-[var(--muted)] font-medium">{score}/{maxScore} pts</span>
       </div>
     </div>
   );
@@ -102,20 +102,20 @@ export default function PortalHealthScore() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-gray-900 mb-6">Profile Health Score</h1>
+      <h1 className="text-2xl font-semibold text-[var(--ink)] mb-6">Profile Health Score</h1>
 
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 mb-8">
+      <div className="bg-white rounded-2xl border border-[var(--line)] shadow-sm p-8 mb-8">
         <div className="flex flex-col md:flex-row items-center gap-8">
           <CircularProgress score={data.score} maxScore={data.maxScore} />
           <div className="flex-1">
-            <h2 className="text-lg font-semibold text-gray-900 mb-1">
+            <h2 className="text-lg font-semibold text-[var(--ink)] mb-1">
               {data.score === data.maxScore
                 ? 'Your profile is complete!'
                 : data.score >= data.maxScore * 0.7
                   ? 'Almost there!'
                   : 'Room for improvement'}
             </h2>
-            <p className="text-sm text-gray-500 mb-4">
+            <p className="text-sm text-[var(--muted)] mb-4">
               {completedCount} of {data.items.length} items completed.
               {incompleteItems.length > 0 &&
                 ` Complete ${incompleteItems.length} more to reach 100%.`}
@@ -133,11 +133,11 @@ export default function PortalHealthScore() {
       </div>
 
       {/* Checklist */}
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-100">
-          <h2 className="text-base font-semibold text-gray-900">Profile Checklist</h2>
+      <div className="bg-white rounded-2xl border border-[var(--line)] shadow-sm overflow-hidden">
+        <div className="px-6 py-4 border-b border-[var(--line)]">
+          <h2 className="text-base font-semibold text-[var(--ink)]">Profile Checklist</h2>
         </div>
-        <div className="divide-y divide-gray-50">
+        <div className="divide-y divide-[var(--line)]">
           {data.items.map((item, idx) => (
             <div key={idx} className="px-6 py-4">
               <div className="flex items-start gap-3">
@@ -158,13 +158,13 @@ export default function PortalHealthScore() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <span className={`text-sm font-medium ${item.completed ? 'text-gray-700' : 'text-gray-900'}`}>
+                    <span className={`text-sm font-medium ${item.completed ? 'text-[var(--ink2)]' : 'text-[var(--ink)]'}`}>
                       {item.name}
                     </span>
-                    <span className="text-xs text-gray-400 font-medium">{item.points} pts</span>
+                    <span className="text-xs text-[var(--muted)] font-medium">{item.points} pts</span>
                   </div>
                   {!item.completed && (
-                    <p className="text-xs text-gray-500 mt-1">{item.tip}</p>
+                    <p className="text-xs text-[var(--muted)] mt-1">{item.tip}</p>
                   )}
                 </div>
               </div>

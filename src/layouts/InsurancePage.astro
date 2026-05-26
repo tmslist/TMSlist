@@ -5,6 +5,8 @@ import StatCards from "../components/StatCards.astro";
 import ContentFAQ from "../components/ContentFAQ.astro";
 import FindClinicCTA from "../components/FindClinicCTA.astro";
 import SectionLinks from "../components/SectionLinks.astro";
+import BrandLogo from "../components/BrandLogo.astro";
+import { resolveBrandSlug, getBrand } from "../utils/brandLogos";
 
 interface BreadcrumbItem { name: string; url: string; }
 interface FAQItem { question: string; answer: string; }
@@ -30,6 +32,8 @@ const {
 } = Astro.props;
 
 const displayName = insurer || provider || title;
+const brandSlug = resolveBrandSlug(insurer || provider || slug || displayName);
+const hasBrandLogo = !!getBrand(brandSlug);
 
 const reviewerName = "Dr. Karan Narwal";
 const reviewerTitle = "Mental Health Specialist & Consultant";
@@ -87,13 +91,21 @@ const relatedSections = [
 ---
 
 <Layout title={`${title} | TMS List`} description={description} schema={schema} breadcrumbs={breadcrumbs}>
+  {hasBrandLogo && (
+    <div class="container mx-auto px-4 pt-8 -mb-4 flex justify-center">
+      <div class="bg-[var(--paper)] border border-[var(--line)] rounded-2xl px-6 py-4 flex items-center gap-4 shadow-sm">
+        <BrandLogo slug={brandSlug} name={displayName} size={56} />
+        <span class="text-lg font-bold text-[var(--ink)]">{displayName}</span>
+      </div>
+    </div>
+  )}
   <ContentHero
     title={title}
     subtitle={description || `Insurance coverage details, authorization requirements, and what you'll pay.`}
     breadcrumbs={breadcrumbs}
     badges={badges}
-    accentFrom="from-amber-600"
-    accentTo="to-slate-900"
+    accentFrom="from-[#C9654A]"
+    accentTo="to-[#8B4433]"
     stats={[
       { value: coversTms ? 'Yes' : 'Varies', label: 'TMS Coverage' },
       { value: priorAuthRequired ? 'Yes' : 'No', label: 'Prior Auth' },
@@ -105,7 +117,7 @@ const relatedSections = [
 
   <main class="container mx-auto px-4 pb-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-      <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-a:text-violet-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-900 prose-table:border prose-table:border-slate-200 prose-th:bg-slate-50 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-slate-200">
+      <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline prose-strong:text-[var(--ink)] prose-table:border prose-table:border-[var(--line)] prose-th:bg-[var(--paper2)] prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-[var(--line)]">
         <slot>
           <div class="bg-amber-50 border-l-4 border-amber-500 p-6 mb-8 rounded-r-xl">
             <h3 class="text-amber-700 font-semibold mt-0">Updated for 2026</h3>
@@ -121,48 +133,48 @@ const relatedSections = [
           <h2>What You'll Pay</h2>
           <p>Your out-of-pocket cost depends on your specific plan's deductible, copay, and coinsurance. {typicalCost ? `Typical costs with ${displayName} range from ${typicalCost}.` : 'Most insured patients pay between $500 and $3,000 for a full TMS course.'}</p>
 
-          <div class="not-prose mt-12 p-8 bg-amber-900 rounded-2xl text-white text-center">
+          <div class="not-prose mt-12 p-8 bg-[#C9654A] rounded-2xl text-white text-center">
             <h3 class="text-2xl font-semibold mb-4">Verify Your Coverage</h3>
-            <p class="text-amber-200 mb-8">Find a TMS clinic that accepts {displayName} and get a free benefits check.</p>
-            <a href="/us/" class="inline-block bg-white text-amber-900 font-semibold py-3 px-8 rounded-xl hover:bg-amber-50 transition-colors">Find a Clinic</a>
+            <p class="text-white/80 mb-8">Find a TMS clinic that accepts {displayName} and get a free benefits check.</p>
+            <a href="/us/" class="inline-block bg-white text-[var(--warm)] font-semibold py-3 px-8 rounded-xl hover:bg-white/90 transition-colors">Find a Clinic</a>
           </div>
         </slot>
       </article>
 
       <aside class="lg:col-span-4 space-y-6">
-        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
+        <div class="bg-white p-6 rounded-2xl border border-[var(--line)] shadow-sm">
+          <h4 class="font-semibold text-[var(--ink)] mb-4 uppercase text-xs tracking-wider">Medically Reviewed By</h4>
           <div class="flex items-center gap-4">
-            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-violet-100" width="48" height="48" loading="lazy" />
+            <img src={reviewerImage} alt={reviewerName} class="w-12 h-12 rounded-full object-cover border-2 border-[rgba(10,22,40,0.15)]" width="48" height="48" loading="lazy" />
             <div>
-              <div class="font-semibold text-slate-900">{reviewerName}</div>
-              <div class="text-xs text-slate-500">{reviewerTitle}</div>
+              <div class="font-semibold text-[var(--ink)]">{reviewerName}</div>
+              <div class="text-xs text-[var(--muted)]">{reviewerTitle}</div>
             </div>
           </div>
         </div>
 
         <div class="bg-amber-50 p-6 rounded-2xl border border-amber-100">
-          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Coverage Summary</h4>
+          <h4 class="font-semibold text-[var(--ink)] mb-4 uppercase text-xs tracking-wider">Coverage Summary</h4>
           <dl class="space-y-3 text-sm">
             <div class="flex justify-between">
-              <dt class="text-slate-600">TMS Covered</dt>
+              <dt class="text-[var(--ink2)]">TMS Covered</dt>
               <dd class="font-semibold">{coversTms ? <span class="text-emerald-600">Yes</span> : <span class="text-amber-600">Varies</span>}</dd>
             </div>
             <div class="flex justify-between">
-              <dt class="text-slate-600">Prior Auth</dt>
+              <dt class="text-[var(--ink2)]">Prior Auth</dt>
               <dd class="font-semibold">{priorAuthRequired ? <span class="text-amber-600">Required</span> : <span class="text-emerald-600">Not Required</span>}</dd>
             </div>
             {typicalCost && (
               <div class="flex justify-between">
-                <dt class="text-slate-600">Typical Cost</dt>
-                <dd class="font-semibold text-slate-900">{typicalCost}</dd>
+                <dt class="text-[var(--ink2)]">Typical Cost</dt>
+                <dd class="font-semibold text-[var(--ink)]">{typicalCost}</dd>
               </div>
             )}
           </dl>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-slate-100">
-          <h4 class="font-semibold text-slate-900 mb-4 uppercase text-xs tracking-wider">Other Insurance Guides</h4>
+        <div class="bg-white p-6 rounded-2xl border border-[var(--line)]">
+          <h4 class="font-semibold text-[var(--ink)] mb-4 uppercase text-xs tracking-wider">Other Insurance Guides</h4>
           <ul class="space-y-3 text-sm">
             {[
               { href: '/insurance/medicare/', label: 'Medicare' },
@@ -171,18 +183,18 @@ const relatedSections = [
               { href: '/insurance/cigna/', label: 'Cigna' },
               { href: '/insurance/united-healthcare/', label: 'UnitedHealthcare' },
             ].filter(l => !l.href.includes(slug)).slice(0, 4).map(link => (
-              <li><a href={link.href} class="text-slate-600 hover:text-amber-700 transition-colors">{link.label}</a></li>
+              <li><a href={link.href} class="text-[var(--ink2)] hover:text-amber-700 transition-colors">{link.label}</a></li>
             ))}
           </ul>
         </div>
 
-        <div class="bg-gradient-to-br from-amber-600 to-amber-800 p-6 rounded-2xl text-white">
+        <div class="bg-gradient-to-br from-[#C9654A] to-[#8B4433] p-6 rounded-2xl text-white">
           <h4 class="font-semibold mb-2 text-sm">Check Your Coverage</h4>
-          <p class="text-sm text-amber-200 mb-4">See if your plan covers TMS and estimate your out-of-pocket cost.</p>
-          <a href="/quiz/insurance-eligibility-checker/" class="inline-block text-sm font-semibold bg-white text-amber-700 px-4 py-2 rounded-lg hover:bg-amber-50 transition-colors">
+          <p class="text-sm text-white/80 mb-4">See if your plan covers TMS and estimate your out-of-pocket cost.</p>
+          <a href="/quiz/insurance-eligibility-checker/" class="inline-block text-sm font-semibold bg-white text-[var(--warm)] px-4 py-2 rounded-lg hover:bg-white/90 transition-colors">
             Check Eligibility
           </a>
-          <p class="text-xs text-amber-300 mt-3">Or <a href="/resources/buyers-guide/" class="underline hover:text-white">download the free Buyer's Guide</a></p>
+          <p class="text-xs text-white/60 mt-3">Or <a href="/tms-cost-guide/" class="underline hover:text-white">read the TMS Cost Guide</a></p>
         </div>
       </aside>
     </div>

@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-03
 category: patient-guide
 tags: ["VA", "veterans", "military", "coverage", "PTSD", "TBI"]
-image: "https://images.unsplash.com/photo-1604964434783-c6933b8d4b97?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-veterans-va-coverage-guide.svg"
 ---
 
 Veterans face some of the highest rates of treatment-resistant depression, PTSD, and the neurological effects of traumatic brain injury in the country. The VA has taken notice, and TMS access for veterans has expanded meaningfully over the past several years.
@@ -91,35 +91,35 @@ TMS is available through the VA for service-connected mental health conditions, 
 
 The expansion of VA TMS coverage reflects growing recognition that existing treatments — medications and psychotherapy — do not work for everyone. Veterans deserve access to every effective option, and TMS is increasingly one of them.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What conditions does the VA cover TMS for?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What conditions does the VA cover TMS for?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The VA covers TMS for major depressive disorder (the original FDA-cleared indication), PTSD (coverage has expanded though varies by location), traumatic brain injury effects including mood dysfunction and depression secondary to TBI, and anxiety disorders (coverage varies by facility and specific diagnosis). The key qualifier across all conditions is treatment resistance -- documentation of inadequate response to medication is typically required.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The VA covers TMS for major depressive disorder (the original FDA-cleared indication), PTSD (coverage has expanded though varies by location), traumatic brain injury effects including mood dysfunction and depression secondary to TBI, and anxiety disorders (coverage varies by facility and specific diagnosis). The key qualifier across all conditions is treatment resistance -- documentation of inadequate response to medication is typically required.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I receive TMS through VA Community Care?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I receive TMS through VA Community Care?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. For veterans who live far from VA TMS centers, the VA Community Care program may allow treatment at non-VA facilities that meet VA standards. This requires pre-authorization and has its own bureaucratic process, but has become more accessible over the past several years. Ask your VA provider about Community Care options if your local facility cannot provide TMS.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. For veterans who live far from VA TMS centers, the VA Community Care program may allow treatment at non-VA facilities that meet VA standards. This requires pre-authorization and has its own bureaucratic process, but has become more accessible over the past several years. Ask your VA provider about Community Care options if your local facility cannot provide TMS.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What if the VA denies my TMS request?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What if the VA denies my TMS request?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">If the VA denies your TMS request, you have appeal options. The process is slow but veterans with strong treatment histories often succeed on appeal, particularly when their providers advocate effectively. Your congressional representative's office can assist with VA benefits navigation. Veteran service organizations (DAV, VFW, American Legion) have benefits counselors who understand the TMS authorization process.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">If the VA denies your TMS request, you have appeal options. The process is slow but veterans with strong treatment histories often succeed on appeal, particularly when their providers advocate effectively. Your congressional representative's office can assist with VA benefits navigation. Veteran service organizations (DAV, VFW, American Legion) have benefits counselors who understand the TMS authorization process.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

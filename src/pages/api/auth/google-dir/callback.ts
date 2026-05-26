@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getUserByEmail, createSessionCookie } from '../../../../utils/auth';
+import { getUserByEmail, createSession, getClientIpFromRequest } from '../../../../utils/auth.js';
 import { db } from '../../../../db';
 import { users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -135,11 +135,13 @@ export const GET: APIRoute = async ({ request }) => {
     // Update last login
     await db.update(users).set({ lastLoginAt: new Date() }).where(eq(users.id, user.id));
 
-    const cookie = createSessionCookie({
-      userId: user.id,
-      email: user.email,
-      role: user.role,
-    });
+    const { cookie } = await createSession(
+      { userId: user.id, email: user.email, role: user.role },
+      {
+        userAgent: request.headers.get('user-agent') || undefined,
+        ipAddress: getClientIpFromRequest(request),
+      },
+    );
 
     // Clear the oauth_state cookie
     const clearState = 'oauth_state=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0';

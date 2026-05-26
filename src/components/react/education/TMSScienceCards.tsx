@@ -26,15 +26,15 @@ const scienceCards: ScienceCard[] = [
       <svg viewBox="0 0 120 100" className="w-full h-full">
         {/* TMS Coil */}
         <g transform="translate(10, 20)">
-          <ellipse cx="25" cy="25" rx="22" ry="18" fill="none" stroke="#06b6d4" strokeWidth="3" />
-          <ellipse cx="75" cy="25" rx="22" ry="18" fill="none" stroke="#06b6d4" strokeWidth="3" />
-          <path d="M3 25 Q25 40 47 25" fill="none" stroke="#06b6d4" strokeWidth="2" />
-          <path d="M53 25 Q75 40 97 25" fill="none" stroke="#06b6d4" strokeWidth="2" />
-          <circle cx="25" cy="25" r="4" fill="#06b6d4" className="animate-pulse" />
-          <circle cx="75" cy="25" r="4" fill="#06b6d4" className="animate-pulse" />
+          <ellipse cx="25" cy="25" rx="22" ry="18" fill="none" stroke="#1E2A3B" strokeWidth="3" />
+          <ellipse cx="75" cy="25" rx="22" ry="18" fill="none" stroke="#1E2A3B" strokeWidth="3" />
+          <path d="M3 25 Q25 40 47 25" fill="none" stroke="#1E2A3B" strokeWidth="2" />
+          <path d="M53 25 Q75 40 97 25" fill="none" stroke="#1E2A3B" strokeWidth="2" />
+          <circle cx="25" cy="25" r="4" fill="#1E2A3B" className="animate-pulse" />
+          <circle cx="75" cy="25" r="4" fill="#1E2A3B" className="animate-pulse" />
         </g>
         {/* Field lines */}
-        <g stroke="#06b6d4" strokeWidth="1.5" fill="none" opacity="0.8">
+        <g stroke="#1E2A3B" strokeWidth="1.5" fill="none" opacity="0.8">
           <path d="M60 45 C60 55, 50 65, 50 80" className="animate-[dash_1.5s_linear_infinite]" strokeDasharray="4 3" />
           <path d="M60 45 C65 58, 60 68, 60 80" className="animate-[dash_1.5s_linear_infinite_0.2s]" strokeDasharray="4 3" />
           <path d="M60 45 C70 55, 75 65, 70 80" className="animate-[dash_1.5s_linear_infinite_0.4s]" strokeDasharray="4 3" />
@@ -43,9 +43,9 @@ const scienceCards: ScienceCard[] = [
         </g>
         {/* Skull cross-section */}
         <g transform="translate(35, 70)">
-          <ellipse cx="25" cy="15" rx="25" ry="12" fill="none" stroke="#94a3b8" strokeWidth="2" />
-          <ellipse cx="25" cy="15" rx="20" ry="9" fill="#1e293b" stroke="#64748b" strokeWidth="1.5" />
-          <ellipse cx="25" cy="15" rx="15" ry="6" fill="none" stroke="#06b6d4" strokeWidth="1" opacity="0.5" />
+          <ellipse cx="25" cy="15" rx="25" ry="12" fill="none" stroke="#5A6B82" strokeWidth="2" />
+          <ellipse cx="25" cy="15" rx="20" ry="9" fill="#1E2A3B" stroke="#5A6B82" strokeWidth="1.5" />
+          <ellipse cx="25" cy="15" rx="15" ry="6" fill="none" stroke="#1E2A3B" strokeWidth="1" opacity="0.5" />
         </g>
       </svg>
     ),
@@ -65,15 +65,15 @@ const scienceCards: ScienceCard[] = [
     frontIcon: (
       <svg viewBox="0 0 120 100" className="w-full h-full">
         {/* Neuron body */}
-        <ellipse cx="60" cy="30" rx="18" ry="14" fill="#1e293b" stroke="#8b5cf6" strokeWidth="2" />
-        <ellipse cx="60" cy="30" rx="8" ry="6" fill="#8b5cf6" opacity="0.3" />
+        <ellipse cx="60" cy="30" rx="18" ry="14" fill="#1E2A3B" stroke="#1E2A3B" strokeWidth="2" />
+        <ellipse cx="60" cy="30" rx="8" ry="6" fill="#1E2A3B" opacity="0.3" />
         {/* Dendrites */}
-        <path d="M45 22 Q30 15 20 8" stroke="#8b5cf6" strokeWidth="2" fill="none" />
-        <path d="M48 28 Q35 25 25 22" stroke="#8b5cf6" strokeWidth="2" fill="none" />
-        <path d="M75 22 Q90 15 100 8" stroke="#8b5cf6" strokeWidth="2" fill="none" />
-        <path d="M72 28 Q85 25 95 22" stroke="#8b5cf6" strokeWidth="2" fill="none" />
+        <path d="M45 22 Q30 15 20 8" stroke="#1E2A3B" strokeWidth="2" fill="none" />
+        <path d="M48 28 Q35 25 25 22" stroke="#1E2A3B" strokeWidth="2" fill="none" />
+        <path d="M75 22 Q90 15 100 8" stroke="#1E2A3B" strokeWidth="2" fill="none" />
+        <path d="M72 28 Q85 25 95 22" stroke="#1E2A3B" strokeWidth="2" fill="none" />
         {/* Axon */}
-        <path d="M60 44 L60 65 Q60 75 70 80 L90 85" stroke="#8b5cf6" strokeWidth="2.5" fill="none" />
+        <path d="M60 44 L60 65 Q60 75 70 80 L90 85" stroke="#1E2A3B" strokeWidth="2.5" fill="none" />
         {/* Axon terminals */}
         <circle cx="90" cy="85" r="3" fill="#10b981" />
         <circle cx="95" cy="90" r="2" fill="#10b981" />
@@ -85,9 +85,9 @@ const scienceCards: ScienceCard[] = [
         </g>
         {/* Frequency labels */}
         <text x="8" y="68" fontSize="8" fill="#10b981" fontWeight="bold">10Hz</text>
-        <text x="8" y="78" fontSize="7" fill="#64748b">↑Glutamate</text>
-        <text x="78" y="68" fontSize="8" fill="#f43f5e" fontWeight="bold">1Hz</text>
-        <text x="78" y="78" fontSize="7" fill="#64748b">↑GABA</text>
+        <text x="8" y="78" fontSize="7" fill="#5A6B82">↑Glutamate</text>
+        <text x="78" y="68" fontSize="8" fill="#C9654A" fontWeight="bold">1Hz</text>
+        <text x="78" y="78" fontSize="7" fill="#5A6B82">↑GABA</text>
       </svg>
     ),
     backContent: "TMS activates both excitatory pyramidal neurons (Type I) and inhibitory interneurons (Type II). High-frequency stimulation (≥5Hz) increases glutamate release and promotes calcium influx, leading to LTP-like changes. Low-frequency (≤1Hz) suppresses cortical excitability via GABA-B receptor activation.",
@@ -106,32 +106,32 @@ const scienceCards: ScienceCard[] = [
     frontIcon: (
       <svg viewBox="0 0 120 100" className="w-full h-full">
         {/* Central synapse */}
-        <ellipse cx="60" cy="50" rx="20" ry="15" fill="#1e293b" stroke="#64748b" strokeWidth="1.5" />
+        <ellipse cx="60" cy="50" rx="20" ry="15" fill="#1E2A3B" stroke="#5A6B82" strokeWidth="1.5" />
         {/* Vesicles releasing */}
-        <circle cx="45" cy="42" r="5" fill="#8b5cf6" className="animate-pulse" />
+        <circle cx="45" cy="42" r="5" fill="#1E2A3B" className="animate-pulse" />
         <circle cx="55" cy="38" r="4" fill="#10b981" className="animate-pulse" style={{ animationDelay: '0.2s' }} />
-        <circle cx="65" cy="40" r="5" fill="#06b6d4" className="animate-pulse" style={{ animationDelay: '0.4s' }} />
-        <circle cx="50" cy="50" r="4" fill="#f59e0b" className="animate-pulse" style={{ animationDelay: '0.6s' }} />
+        <circle cx="65" cy="40" r="5" fill="#1E2A3B" className="animate-pulse" style={{ animationDelay: '0.4s' }} />
+        <circle cx="50" cy="50" r="4" fill="#C9654A" className="animate-pulse" style={{ animationDelay: '0.6s' }} />
         {/* Neurotransmitter paths */}
-        <path d="M45 47 Q50 55 60 58 Q70 61 75 58" stroke="#8b5cf6" strokeWidth="1.5" fill="none" strokeDasharray="3 2" />
+        <path d="M45 47 Q50 55 60 58 Q70 61 75 58" stroke="#1E2A3B" strokeWidth="1.5" fill="none" strokeDasharray="3 2" />
         <path d="M55 42 Q58 50 60 55" stroke="#10b981" strokeWidth="1.5" fill="none" strokeDasharray="3 2" />
-        <path d="M65 45 Q67 52 65 58" stroke="#06b6d4" strokeWidth="1.5" fill="none" strokeDasharray="3 2" />
-        <path d="M50 54 Q55 58 60 60 Q65 62 70 60" stroke="#f59e0b" strokeWidth="1.5" fill="none" strokeDasharray="3 2" />
+        <path d="M65 45 Q67 52 65 58" stroke="#1E2A3B" strokeWidth="1.5" fill="none" strokeDasharray="3 2" />
+        <path d="M50 54 Q55 58 60 60 Q65 62 70 60" stroke="#C9654A" strokeWidth="1.5" fill="none" strokeDasharray="3 2" />
         {/* Labels */}
         <g fontSize="7" fontWeight="bold">
-          <text x="30" y="20" fill="#8b5cf6">GLUTAMATE</text>
-          <text x="30" y="28" fill="#8b5cf6" fontSize="5" fontWeight="normal">Excitatory</text>
+          <text x="30" y="20" fill="#1E2A3B">GLUTAMATE</text>
+          <text x="30" y="28" fill="#1E2A3B" fontSize="5" fontWeight="normal">Excitatory</text>
           <text x="70" y="20" fill="#10b981">GABA</text>
           <text x="70" y="28" fill="#10b981" fontSize="5" fontWeight="normal">Inhibitory</text>
-          <text x="15" y="60" fill="#06b6d4">5-HT</text>
-          <text x="15" y="68" fill="#06b6d4" fontSize="5" fontWeight="normal">Serotonin</text>
-          <text x="85" y="60" fill="#f59e0b">DA</text>
-          <text x="85" y="68" fill="#f59e0b" fontSize="5" fontWeight="normal">Dopamine</text>
+          <text x="15" y="60" fill="#1E2A3B">5-HT</text>
+          <text x="15" y="68" fill="#1E2A3B" fontSize="5" fontWeight="normal">Serotonin</text>
+          <text x="85" y="60" fill="#C9654A">DA</text>
+          <text x="85" y="68" fill="#C9654A" fontSize="5" fontWeight="normal">Dopamine</text>
         </g>
         {/* Receptors on post-synaptic */}
-        <rect x="52" y="58" width="4" height="6" fill="#8b5cf6" rx="1" />
+        <rect x="52" y="58" width="4" height="6" fill="#1E2A3B" rx="1" />
         <rect x="58" y="58" width="4" height="6" fill="#10b981" rx="1" />
-        <rect x="64" y="58" width="4" height="6" fill="#06b6d4" rx="1" />
+        <rect x="64" y="58" width="4" height="6" fill="#1E2A3B" rx="1" />
       </svg>
     ),
     backContent: "TMS modulates multiple neurotransmitter systems: Glutamate (primary excitatory), GABA (primary inhibitory), Serotonin (5-HT1A upregulation), Dopamine (mesolimbic pathway), Norepinephrine (LC activation). Effects are frequency-dependent and cumulative across sessions.",
@@ -150,21 +150,21 @@ const scienceCards: ScienceCard[] = [
     frontIcon: (
       <svg viewBox="0 0 120 100" className="w-full h-full">
         {/* Brain outline */}
-        <ellipse cx="60" cy="35" rx="40" ry="28" fill="#1e293b" stroke="#475569" strokeWidth="2" />
+        <ellipse cx="60" cy="35" rx="40" ry="28" fill="#1E2A3B" stroke="#5A6B82" strokeWidth="2" />
         {/* Network nodes */}
-        <circle cx="60" cy="25" r="8" fill="#1e293b" stroke="#f59e0b" strokeWidth="2" className="animate-pulse" />
-        <text x="56" y="28" fontSize="6" fill="#f59e0b" fontWeight="bold">DLPFC</text>
-        <circle cx="40" cy="35" r="6" fill="#1e293b" stroke="#8b5cf6" strokeWidth="1.5" className="animate-pulse" style={{ animationDelay: '0.3s' }} />
-        <circle cx="80" cy="35" r="6" fill="#1e293b" stroke="#8b5cf6" strokeWidth="1.5" className="animate-pulse" style={{ animationDelay: '0.5s' }} />
-        <circle cx="60" cy="50" r="5" fill="#1e293b" stroke="#06b6d4" strokeWidth="1.5" className="animate-pulse" style={{ animationDelay: '0.7s' }} />
-        <text x="56" y="52" fontSize="5" fill="#06b6d4">Thal</text>
+        <circle cx="60" cy="25" r="8" fill="#1E2A3B" stroke="#C9654A" strokeWidth="2" className="animate-pulse" />
+        <text x="56" y="28" fontSize="6" fill="#C9654A" fontWeight="bold">DLPFC</text>
+        <circle cx="40" cy="35" r="6" fill="#1E2A3B" stroke="#1E2A3B" strokeWidth="1.5" className="animate-pulse" style={{ animationDelay: '0.3s' }} />
+        <circle cx="80" cy="35" r="6" fill="#1E2A3B" stroke="#1E2A3B" strokeWidth="1.5" className="animate-pulse" style={{ animationDelay: '0.5s' }} />
+        <circle cx="60" cy="50" r="5" fill="#1E2A3B" stroke="#1E2A3B" strokeWidth="1.5" className="animate-pulse" style={{ animationDelay: '0.7s' }} />
+        <text x="56" y="52" fontSize="5" fill="#1E2A3B">Thal</text>
         {/* Network connections */}
-        <g stroke="#475569" strokeWidth="1.5" fill="none">
+        <g stroke="#5A6B82" strokeWidth="1.5" fill="none">
           <path d="M52 30 Q45 32 42 34" />
           <path d="M68 30 Q75 32 78 34" />
           <path d="M60 33 L60 45" />
         </g>
-        <g stroke="#f59e0b" strokeWidth="1" fill="none" opacity="0.6" className="animate-pulse">
+        <g stroke="#C9654A" strokeWidth="1" fill="none" opacity="0.6" className="animate-pulse">
           <path d="M52 30 Q48 38 55 45" strokeDasharray="2 2" />
           <path d="M68 30 Q72 38 65 45" strokeDasharray="2 2" />
           <path d="M40 38 Q45 45 55 48" strokeDasharray="2 2" />
@@ -172,11 +172,11 @@ const scienceCards: ScienceCard[] = [
         </g>
         {/* Subcortical structures */}
         <g transform="translate(35, 70)">
-          <ellipse cx="25" cy="10" rx="20" ry="8" fill="#1e293b" stroke="#475569" strokeWidth="1.5" />
+          <ellipse cx="25" cy="10" rx="20" ry="8" fill="#1E2A3B" stroke="#5A6B82" strokeWidth="1.5" />
           <circle cx="15" cy="10" r="3" fill="#10b981" opacity="0.6" />
-          <circle cx="25" cy="10" r="3" fill="#8b5cf6" opacity="0.6" />
-          <circle cx="35" cy="10" r="3" fill="#f59e0b" opacity="0.6" />
-          <text x="10" y="25" fontSize="5" fill="#64748b">Striatum</text>
+          <circle cx="25" cy="10" r="3" fill="#1E2A3B" opacity="0.6" />
+          <circle cx="35" cy="10" r="3" fill="#C9654A" opacity="0.6" />
+          <text x="10" y="25" fontSize="5" fill="#5A6B82">Striatum</text>
         </g>
       </svg>
     ),
@@ -198,21 +198,21 @@ const scienceCards: ScienceCard[] = [
         {/* Synapse illustration */}
         <g transform="translate(20, 25)">
           {/* Pre-synaptic */}
-          <ellipse cx="15" cy="10" rx="12" ry="10" fill="#1e293b" stroke="#ec4899" strokeWidth="2" />
-          <circle cx="12" cy="8" r="2" fill="#ec4899" className="animate-pulse" />
-          <circle cx="18" cy="12" r="2" fill="#ec4899" className="animate-pulse" style={{ animationDelay: '0.3s' }} />
+          <ellipse cx="15" cy="10" rx="12" ry="10" fill="#1E2A3B" stroke="#C9654A" strokeWidth="2" />
+          <circle cx="12" cy="8" r="2" fill="#C9654A" className="animate-pulse" />
+          <circle cx="18" cy="12" r="2" fill="#C9654A" className="animate-pulse" style={{ animationDelay: '0.3s' }} />
           {/* Synaptic cleft */}
-          <line x1="27" y1="10" x2="33" y2="10" stroke="#64748b" strokeWidth="1" strokeDasharray="2 2" />
+          <line x1="27" y1="10" x2="33" y2="10" stroke="#5A6B82" strokeWidth="1" strokeDasharray="2 2" />
           {/* Post-synaptic */}
-          <ellipse cx="40" cy="10" rx="12" ry="10" fill="#1e293b" stroke="#8b5cf6" strokeWidth="2" />
-          <ellipse cx="43" cy="10" rx="6" ry="4" fill="#8b5cf6" opacity="0.3" />
+          <ellipse cx="40" cy="10" rx="12" ry="10" fill="#1E2A3B" stroke="#1E2A3B" strokeWidth="2" />
+          <ellipse cx="43" cy="10" rx="6" ry="4" fill="#1E2A3B" opacity="0.3" />
           {/* NMDA receptors */}
-          <rect x="35" y="5" width="3" height="6" fill="#06b6d4" rx="1" />
-          <rect x="40" y="5" width="3" height="6" fill="#06b6d4" rx="1" />
+          <rect x="35" y="5" width="3" height="6" fill="#1E2A3B" rx="1" />
+          <rect x="40" y="5" width="3" height="6" fill="#1E2A3B" rx="1" />
         </g>
         {/* BDNF molecule */}
         <g transform="translate(75, 35)">
-          <circle cx="10" cy="10" r="8" fill="#1e293b" stroke="#10b981" strokeWidth="2" />
+          <circle cx="10" cy="10" r="8" fill="#1E2A3B" stroke="#10b981" strokeWidth="2" />
           <text x="6" y="13" fontSize="6" fill="#10b981" fontWeight="bold">BDNF</text>
         </g>
         {/* LTP arrow going up */}
@@ -222,13 +222,13 @@ const scienceCards: ScienceCard[] = [
         </g>
         {/* LTD arrow going down */}
         <g transform="translate(20, 60)">
-          <path d="M5 5 L5 20 L0 15 M5 20 L10 15" stroke="#f43f5e" strokeWidth="2" fill="none" />
-          <text x="0" y="28" fontSize="6" fill="#f43f5e" fontWeight="bold">LTD</text>
+          <path d="M5 5 L5 20 L0 15 M5 20 L10 15" stroke="#C9654A" strokeWidth="2" fill="none" />
+          <text x="0" y="28" fontSize="6" fill="#C9654A" fontWeight="bold">LTD</text>
         </g>
         {/* Session counter */}
         <g transform="translate(45, 70)">
-          <rect x="0" y="0" width="50" height="20" rx="4" fill="#1e293b" stroke="#475569" strokeWidth="1" />
-          <text x="5" y="8" fontSize="5" fill="#64748b">Sessions</text>
+          <rect x="0" y="0" width="50" height="20" rx="4" fill="#1E2A3B" stroke="#5A6B82" strokeWidth="1" />
+          <text x="5" y="8" fontSize="5" fill="#5A6B82">Sessions</text>
           <g fill="#10b981">
             <rect x="5" y="12" width="6" height="6" rx="1" className="animate-pulse" />
             <rect x="13" y="12" width="6" height="6" rx="1" className="animate-pulse" style={{ animationDelay: '0.2s' }} />
@@ -238,11 +238,11 @@ const scienceCards: ScienceCard[] = [
           </g>
         </g>
         {/* Ca2+ influx arrows */}
-        <path d="M55 45 Q50 50 48 55" stroke="#f59e0b" strokeWidth="1.5" fill="none" markerEnd="url(#arrowhead)" />
-        <text x="52" y="42" fontSize="5" fill="#f59e0b">Ca2+</text>
+        <path d="M55 45 Q50 50 48 55" stroke="#C9654A" strokeWidth="1.5" fill="none" markerEnd="url(#arrowhead)" />
+        <text x="52" y="42" fontSize="5" fill="#C9654A">Ca2+</text>
         <defs>
           <marker id="arrowhead" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
-            <polygon points="0 0, 5 2.5, 0 5" fill="#f59e0b" />
+            <polygon points="0 0, 5 2.5, 0 5" fill="#C9654A" />
           </marker>
         </defs>
       </svg>
@@ -258,45 +258,45 @@ const scienceCards: ScienceCard[] = [
     id: 'clinical-mechanisms',
     title: 'Clinical Mechanisms',
     subtitle: 'Region-Specific Treatment',
-    color: '#6366f1', // indigo
+    color: '#0A1628', // indigo
     colorClass: 'indigo',
     frontIcon: (
       <svg viewBox="0 0 120 100" className="w-full h-full">
         {/* Brain regions */}
-        <ellipse cx="60" cy="40" rx="35" ry="30" fill="#1e293b" stroke="#475569" strokeWidth="2" />
+        <ellipse cx="60" cy="40" rx="35" ry="30" fill="#1E2A3B" stroke="#5A6B82" strokeWidth="2" />
         {/* DLPFC - Left */}
         <g className="animate-pulse">
-          <ellipse cx="35" cy="25" rx="12" ry="10" fill="#1e293b" stroke="#6366f1" strokeWidth="2.5" />
-          <text x="27" y="28" fontSize="5" fill="#6366f1" fontWeight="bold">DLPFC</text>
+          <ellipse cx="35" cy="25" rx="12" ry="10" fill="#1E2A3B" stroke="#0A1628" strokeWidth="2.5" />
+          <text x="27" y="28" fontSize="5" fill="#0A1628" fontWeight="bold">DLPFC</text>
         </g>
         {/* Amygdala - bilateral */}
         <g className="animate-pulse" style={{ animationDelay: '0.3s' }}>
-          <ellipse cx="40" cy="50" rx="6" ry="5" fill="#1e293b" stroke="#f43f5e" strokeWidth="2" />
-          <text x="32" y="60" fontSize="4" fill="#f43f5e">Amyg</text>
+          <ellipse cx="40" cy="50" rx="6" ry="5" fill="#1E2A3B" stroke="#C9654A" strokeWidth="2" />
+          <text x="32" y="60" fontSize="4" fill="#C9654A">Amyg</text>
         </g>
         <g className="animate-pulse" style={{ animationDelay: '0.4s' }}>
-          <ellipse cx="80" cy="50" rx="6" ry="5" fill="#1e293b" stroke="#f43f5e" strokeWidth="2" />
+          <ellipse cx="80" cy="50" rx="6" ry="5" fill="#1E2A3B" stroke="#C9654A" strokeWidth="2" />
         </g>
         {/* ACC */}
         <g className="animate-pulse" style={{ animationDelay: '0.5s' }}>
-          <ellipse cx="60" cy="22" rx="8" ry="5" fill="#1e293b" stroke="#f59e0b" strokeWidth="2" />
-          <text x="55" y="35" fontSize="4" fill="#f59e0b">ACC</text>
+          <ellipse cx="60" cy="22" rx="8" ry="5" fill="#1E2A3B" stroke="#C9654A" strokeWidth="2" />
+          <text x="55" y="35" fontSize="4" fill="#C9654A">ACC</text>
         </g>
         {/* Treatment labels */}
         <g transform="translate(0, 75)">
-          <rect x="0" y="0" width="38" height="18" rx="3" fill="#1e293b" stroke="#6366f1" strokeWidth="1" />
-          <text x="4" y="8" fontSize="5" fill="#6366f1" fontWeight="bold">Depression</text>
-          <text x="4" y="15" fontSize="4" fill="#64748b">L-DLPFC 10Hz</text>
+          <rect x="0" y="0" width="38" height="18" rx="3" fill="#1E2A3B" stroke="#0A1628" strokeWidth="1" />
+          <text x="4" y="8" fontSize="5" fill="#0A1628" fontWeight="bold">Depression</text>
+          <text x="4" y="15" fontSize="4" fill="#5A6B82">L-DLPFC 10Hz</text>
         </g>
         <g transform="translate(42, 75)">
-          <rect x="0" y="0" width="38" height="18" rx="3" fill="#1e293b" stroke="#f43f5e" strokeWidth="1" />
-          <text x="4" y="8" fontSize="5" fill="#f43f5e" fontWeight="bold">PTSD</text>
-          <text x="4" y="15" fontSize="4" fill="#64748b">Amygdala reg</text>
+          <rect x="0" y="0" width="38" height="18" rx="3" fill="#1E2A3B" stroke="#C9654A" strokeWidth="1" />
+          <text x="4" y="8" fontSize="5" fill="#C9654A" fontWeight="bold">PTSD</text>
+          <text x="4" y="15" fontSize="4" fill="#5A6B82">Amygdala reg</text>
         </g>
         <g transform="translate(82, 75)">
-          <rect x="0" y="0" width="38" height="18" rx="3" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" />
-          <text x="4" y="8" fontSize="5" fill="#f59e0b" fontWeight="bold">OCD</text>
-          <text x="4" y="15" fontSize="4" fill="#64748b">ACC + dmPFC</text>
+          <rect x="0" y="0" width="38" height="18" rx="3" fill="#1E2A3B" stroke="#C9654A" strokeWidth="1" />
+          <text x="4" y="8" fontSize="5" fill="#C9654A" fontWeight="bold">OCD</text>
+          <text x="4" y="15" fontSize="4" fill="#5A6B82">ACC + dmPFC</text>
         </g>
       </svg>
     ),
@@ -352,7 +352,7 @@ function ScienceCardComponent({ card, index }: CardProps) {
               <div className="flex items-start justify-between mb-2">
                 <div>
                   <h3 className="text-sm font-bold text-white">{card.title}</h3>
-                  <p className="text-[10px] text-slate-400">{card.subtitle}</p>
+                  <p className="text-[10px] text-[var(--muted)]">{card.subtitle}</p>
                 </div>
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center"
@@ -368,7 +368,7 @@ function ScienceCardComponent({ card, index }: CardProps) {
                 {card.frontIcon}
               </div>
               {/* Tap hint */}
-              <p className="text-[9px] text-slate-500 text-center mt-1">Tap to flip</p>
+              <p className="text-[9px] text-[var(--muted)] text-center mt-1">Tap to flip</p>
             </div>
           </div>
 
@@ -390,18 +390,18 @@ function ScienceCardComponent({ card, index }: CardProps) {
               {/* Header */}
               <div className="flex items-center gap-2 mb-3">
                 <h3 className="text-sm font-bold text-white">{card.title}</h3>
-                <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 text-[var(--muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
               {/* Content */}
               <div className="flex-1 overflow-y-auto custom-scrollbar">
-                <p className="text-[10px] text-slate-300 leading-relaxed">
+                <p className="text-[10px] text-[var(--line)] leading-relaxed">
                   {card.backContent}
                 </p>
               </div>
               {/* Tap to flip back */}
-              <p className="text-[9px] text-slate-500 text-center mt-2">Tap to flip back</p>
+              <p className="text-[9px] text-[var(--muted)] text-center mt-2">Tap to flip back</p>
             </div>
           </div>
         </div>
@@ -414,7 +414,7 @@ function ScienceCardComponent({ card, index }: CardProps) {
             e.stopPropagation();
             setIsExpanded(!isExpanded);
           }}
-          className="flex items-center gap-1 text-[10px] text-slate-400 hover:text-slate-300 transition-colors"
+          className="flex items-center gap-1 text-[10px] text-[var(--muted)] hover:text-[var(--line)] transition-colors"
         >
           <svg
             className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
@@ -428,9 +428,9 @@ function ScienceCardComponent({ card, index }: CardProps) {
         </button>
 
         {isExpanded && (
-          <div className="mt-2 space-y-1.5 pl-2 border-l border-slate-700">
+          <div className="mt-2 space-y-1.5 pl-2 border-l border-[var(--ink2)]">
             {card.exploreMore.map((item, i) => (
-              <p key={i} className="text-[9px] text-slate-500 leading-relaxed flex items-start gap-1.5">
+              <p key={i} className="text-[9px] text-[var(--muted)] leading-relaxed flex items-start gap-1.5">
                 <span style={{ color: card.color }} className="shrink-0">-</span>
                 {item}
               </p>
@@ -451,20 +451,20 @@ export default function TMSScienceCards() {
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-sm font-bold text-white">TMS Science</h2>
-          <p className="text-[10px] text-slate-400">Interactive explanations of TMS mechanisms</p>
+          <p className="text-[10px] text-[var(--muted)]">Interactive explanations of TMS mechanisms</p>
         </div>
         <div className="flex items-center gap-1">
-          <span className="text-[10px] text-slate-500">{activeIndex + 1}</span>
-          <span className="text-[10px] text-slate-600">/</span>
-          <span className="text-[10px] text-slate-500">{scienceCards.length}</span>
+          <span className="text-[10px] text-[var(--muted)]">{activeIndex + 1}</span>
+          <span className="text-[10px] text-[var(--ink2)]">/</span>
+          <span className="text-[10px] text-[var(--muted)]">{scienceCards.length}</span>
         </div>
       </div>
 
       {/* Horizontal scrollable card deck */}
       <div className="relative">
         {/* Gradient fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[var(--ink)] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[var(--ink)] to-transparent z-10 pointer-events-none" />
 
         {/* Cards container */}
         <div
@@ -506,8 +506,8 @@ export default function TMSScienceCards() {
             }}
             className={`w-2 h-2 rounded-full transition-all ${
               activeIndex === index
-                ? 'bg-violet-500 w-4'
-                : 'bg-slate-600 hover:bg-slate-500'
+                ? 'bg-[var(--ink2)] w-4'
+                : 'bg-[var(--muted)] hover:bg-[var(--muted)]'
             }`}
             style={{
               backgroundColor: activeIndex === index ? card.color : undefined,
@@ -519,8 +519,8 @@ export default function TMSScienceCards() {
 
       {/* Current card info */}
       <div className="text-center">
-        <p className="text-[10px] text-slate-500">
-          Showing: <span className="text-slate-300 font-medium">{scienceCards[activeIndex]?.title}</span>
+        <p className="text-[10px] text-[var(--muted)]">
+          Showing: <span className="text-[var(--line)] font-medium">{scienceCards[activeIndex]?.title}</span>
         </p>
       </div>
     </div>

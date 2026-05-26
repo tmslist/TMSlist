@@ -74,9 +74,9 @@ const citySchema = JSON.stringify({
 ]}>
     <main class="min-h-screen">
         <!-- Hero Section -->
-        <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+        <section class="relative bg-[var(--paper)] border-b border-[var(--line)] overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-[rgba(10,22,40,0.08)]/60 via-white to-[rgba(10,22,40,0.40)] pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-[rgba(10,22,40,0.5)] rounded-full blur-[100px]"></div>
             <div
               class="ai-hero-image absolute inset-0 opacity-20"
               data-subject={`${cityName}, ${regionName}`}
@@ -89,20 +89,20 @@ const citySchema = JSON.stringify({
               <div class="ai-img-fallback hidden"></div>
             </div>
             <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                    <span class="text-slate-300">/</span>
-                    <a href="/au/" class="hover:text-violet-600 transition-colors">Australia</a>
-                    <span class="text-slate-300">/</span>
-                    <a href={`/au/${regionSlug}/`} class="hover:text-violet-600 transition-colors">{regionName}</a>
-                    <span class="text-slate-300">/</span>
-                    <span class="text-slate-700 font-medium">{cityName}</span>
+                <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-8 flex-wrap" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-[var(--accent)] transition-colors">Home</a>
+                    <span class="text-[var(--muted)]">/</span>
+                    <a href="/au/" class="hover:text-[var(--accent)] transition-colors">Australia</a>
+                    <span class="text-[var(--muted)]">/</span>
+                    <a href={`/au/${regionSlug}/`} class="hover:text-[var(--accent)] transition-colors">{regionName}</a>
+                    <span class="text-[var(--muted)]">/</span>
+                    <span class="text-[var(--ink2)] font-medium">{cityName}</span>
                 </nav>
 
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 mb-6">
-                    TMS <span class="text-violet-600">Clinics</span> in {cityName}
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-[var(--ink)] mb-6">
+                    TMS <span class="text-[var(--accent)]">Clinics</span> in {cityName}
                 </h1>
-                <p class="text-xl text-slate-500 max-w-3xl mb-8">
+                <p class="text-xl text-[var(--muted)] max-w-3xl mb-8">
                     Compare {cityClinics.length} TGA-approved TMS therapy clinics in {cityName}, {regionName}.
                     View ratings, Medicare rebate eligibility, and find the right provider for you.
                 </p>
@@ -110,20 +110,20 @@ const citySchema = JSON.stringify({
         </section>
 
         <!-- Stats Bar -->
-        <section class="bg-white border-b border-gray-100 py-6">
+        <section class="bg-[var(--paper)] border-b border-[var(--line)] py-6">
             <div class="container mx-auto px-6">
                 <div class="flex flex-wrap justify-center gap-8 md:gap-16">
                     <div class="text-center">
-                        <div class="text-3xl font-semibold tracking-tight text-violet-600">{cityClinics.length}</div>
-                        <div class="text-sm text-gray-500 font-medium">TMS Clinics</div>
+                        <div class="text-3xl font-semibold tracking-tight text-[var(--accent)]">{cityClinics.length}</div>
+                        <div class="text-sm text-[var(--muted)] font-medium">TMS Clinics</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-3xl font-semibold tracking-tight text-violet-600">{cityClinics.reduce((acc: number, c: any) => acc + (c.doctors_data?.length || 0), 0)}</div>
-                        <div class="text-sm text-gray-500 font-medium">Specialists</div>
+                        <div class="text-3xl font-semibold tracking-tight text-[var(--accent)]">{cityClinics.reduce((acc: number, c: any) => acc + (c.doctors_data?.length || 0), 0)}</div>
+                        <div class="text-sm text-[var(--muted)] font-medium">Specialists</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-3xl font-semibold tracking-tight text-violet-600">{cityClinics.filter((c: any) => c.verified).length}</div>
-                        <div class="text-sm text-gray-500 font-medium">Verified</div>
+                        <div class="text-3xl font-semibold tracking-tight text-[var(--accent)]">{cityClinics.filter((c: any) => c.verified).length}</div>
+                        <div class="text-sm text-[var(--muted)] font-medium">Verified</div>
                     </div>
                 </div>
             </div>
@@ -132,11 +132,11 @@ const citySchema = JSON.stringify({
         <!-- Clinics Grid -->
         <section class="py-16">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-semibold text-gray-900 mb-10">All TMS Clinics in {cityName}</h2>
+                <h2 class="text-3xl font-semibold text-[var(--ink)] mb-10">All TMS Clinics in {cityName}</h2>
 
                 <div class="space-y-6">
                     {cityClinics.map((clinic: any, index: number) => (
-                        <article class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all">
+                        <article class="bg-[var(--paper)] rounded-2xl shadow-sm border border-[var(--line)] overflow-hidden hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all">
                             <div class="p-6 md:p-8">
                                 <div class="flex flex-col lg:flex-row lg:items-start gap-6">
                                     <!-- Clinic Image -->
@@ -156,45 +156,45 @@ const citySchema = JSON.stringify({
                                                     {clinic.verified && (
                                                         <span class="px-2 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">Verified</span>
                                                     )}
-                                                    <span class="px-2 py-1 bg-violet-100 text-violet-700 text-xs font-semibold rounded-full">#{index + 1} in {cityName}</span>
+                                                    <span class="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--accent)] text-xs font-semibold rounded-full">#{index + 1} in {cityName}</span>
                                                 </div>
-                                                <h3 class="text-2xl font-semibold text-gray-900 hover:text-violet-600 transition-colors">
+                                                <h3 class="text-2xl font-semibold text-[var(--ink)] hover:text-[var(--accent)] transition-colors">
                                                     <a href={`/clinic/${clinic.slug}`}>{clinic.name}</a>
                                                 </h3>
-                                                <p class="text-gray-500">{clinic.address}, {clinic.city}, {clinic.state}</p>
+                                                <p class="text-[var(--muted)]">{clinic.address}, {clinic.city}, {clinic.state}</p>
                                             </div>
                                             <div class="text-right">
                                                 <div class="flex items-center gap-2">
-                                                    <span class="text-2xl font-semibold tracking-tight text-gray-900">{getRating(clinic).toFixed(1)}</span>
+                                                    <span class="text-2xl font-semibold tracking-tight text-[var(--ink)]">{getRating(clinic).toFixed(1)}</span>
                                                     <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                                                     <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                                                     <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                                                     <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                                                     <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                                                 </div>
-                                                <p class="text-sm text-gray-500">{typeof clinic.rating === 'object' ? clinic.rating.count : clinic.review_count || 0} reviews</p>
+                                                <p class="text-sm text-[var(--muted)]">{typeof clinic.rating === 'object' ? clinic.rating.count : clinic.review_count || 0} reviews</p>
                                             </div>
                                         </div>
 
-                                        <p class="text-gray-600 mb-4 line-clamp-2">{clinic.description_long}</p>
+                                        <p class="text-[var(--muted)] mb-4 line-clamp-2">{clinic.description_long}</p>
 
                                         <div class="flex flex-wrap gap-2 mb-4">
                                             {(clinic.machines || []).slice(0, 3).map((m: string) => (
-                                                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">{m}</span>
+                                                <span class="px-3 py-1 bg-[var(--paper2)] text-[var(--ink2)] rounded-full text-sm font-medium">{m}</span>
                                             ))}
                                         </div>
 
-                                        <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-gray-100">
-                                            <a href={`/clinic/${clinic.slug}`} class="px-6 py-2.5 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition-colors">
+                                        <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-[var(--line)]">
+                                            <a href={`/clinic/${clinic.slug}`} class="px-6 py-2.5 bg-[var(--ink)] text-white font-semibold rounded-lg hover:bg-[var(--ink2)] transition-colors">
                                                 View Clinic
                                             </a>
                                             {(clinic.contact?.phone || clinic.phone) && (
                                                 <button data-request-callback data-clinic-name={clinic.name} data-clinic-id={clinic.slug}
-                                                    class="px-6 py-2.5 border-2 border-violet-600 text-violet-600 font-semibold rounded-lg hover:bg-violet-50 transition-colors cursor-pointer">
+                                                    class="px-6 py-2.5 border-2 border-[var(--ink)] text-[var(--accent)] font-semibold rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors cursor-pointer">
                                                     Request Callback
                                                 </button>
                                             )}
-                                            <span class="text-sm text-gray-500">{(clinic.doctors_data || []).length} specialists on staff</span>
+                                            <span class="text-sm text-[var(--muted)]">{(clinic.doctors_data || []).length} specialists on staff</span>
                                         </div>
                                     </div>
                                 </div>

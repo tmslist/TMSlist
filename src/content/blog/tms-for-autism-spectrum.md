@@ -4,7 +4,7 @@ description: "Researchers are exploring TMS to address social cognition and repe
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-autism-spectrum.svg"
 tags: ["tms", "autism", "asd", "autism-spectrum", "social-cognition", "repetitive-behaviors", " minors", "safety"]
 ---
 
@@ -125,35 +125,35 @@ TMS represents a scientifically grounded and promising approach to modulating ne
 
 Parents and individuals with ASD should approach TMS with cautious optimism, viewing it as an experimental intervention that may help in some cases but is not yet a standard treatment.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for autism?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for autism?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS for ASD remains an investigational treatment. No TMS protocol has received FDA clearance for autism specifically. Treatment is only available through research trials, off-label clinical use, or compassionate use programs for severely affected individuals.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS for ASD remains an investigational treatment. No TMS protocol has received FDA clearance for autism specifically. Treatment is only available through research trials, off-label clinical use, or compassionate use programs for severely affected individuals.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What age is appropriate for TMS in children with ASD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What age is appropriate for TMS in children with ASD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most research in ASD has involved children ages 7-17, with particular caution for younger children. The FDA has cleared TMS for treatment-resistant depression in adolescents (ages 15-21) but not in younger children. Research protocols in younger populations should include extra safety monitoring and IRB oversight.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most research in ASD has involved children ages 7-17, with particular caution for younger children. The FDA has cleared TMS for treatment-resistant depression in adolescents (ages 15-21) but not in younger children. Research protocols in younger populations should include extra safety monitoring and IRB oversight.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS help with repetitive behaviors in ASD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS help with repetitive behaviors in ASD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes, this is one of the most consistent findings. A 2020 meta-analysis reviewing 25 studies found that active TMS produced statistically significant reductions in repetitive behaviors compared to sham treatment. The mechanisms involve modulation of the prefrontal cortex which supports cognitive flexibility.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes, this is one of the most consistent findings. A 2020 meta-analysis reviewing 25 studies found that active TMS produced statistically significant reductions in repetitive behaviors compared to sham treatment. The mechanisms involve modulation of the prefrontal cortex which supports cognitive flexibility.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

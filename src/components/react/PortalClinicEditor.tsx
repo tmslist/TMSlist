@@ -46,14 +46,25 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [needsClaim, setNeedsClaim] = useState(false);
 
   useEffect(() => {
     fetch('/api/portal/clinic')
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to load');
-        return res.json();
+      .then(async (res) => {
+        const data = await res.json().catch(() => ({}));
+        if ((res.status === 404 || res.status === 403) && data?.error === 'No clinic linked') {
+          setNeedsClaim(true);
+          setLoading(false);
+          return;
+        }
+        if (!res.ok) {
+          setError(data?.error || 'Failed to load clinic data');
+          setLoading(false);
+          return;
+        }
+        setClinic(data);
+        setLoading(false);
       })
-      .then((data) => { setClinic(data); setLoading(false); })
       .catch(() => { setError('Failed to load clinic data'); setLoading(false); });
   }, []);
 
@@ -128,7 +139,7 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
   if (!clinic) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500">No clinic linked to your account.</p>
+        <p className="text-[var(--muted)]">No clinic linked to your account.</p>
         <a href="/portal/claim/" className="text-emerald-600 hover:text-emerald-700 font-medium mt-2 inline-block">
           Claim your clinic
         </a>
@@ -144,7 +155,7 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
           <a href="/portal/dashboard/" className="text-sm text-emerald-600 hover:text-emerald-700 font-medium mb-2 inline-block">
             &larr; Back to Dashboard
           </a>
-          <h1 className="text-2xl font-semibold text-gray-900">Edit Clinic Profile</h1>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Edit Clinic Profile</h1>
         </div>
         <button
           onClick={handleSave}
@@ -164,34 +175,34 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
 
       <div className="space-y-8">
         {/* Basic Info */}
-        <section className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h2>
+        <section className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Basic Information</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Clinic Name</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Clinic Name</label>
               <input
                 type="text"
                 value={clinic.name}
                 onChange={(e) => updateField('name', e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Short Description</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Short Description</label>
               <textarea
                 value={clinic.description || ''}
                 onChange={(e) => updateField('description', e.target.value)}
                 rows={3}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Detailed Description</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Detailed Description</label>
               <textarea
                 value={clinic.descriptionLong || ''}
                 onChange={(e) => updateField('descriptionLong', e.target.value)}
                 rows={6}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
               />
             </div>
           </div>
@@ -205,64 +216,64 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
               </svg>
             </div>
-            <h2 className="text-lg font-semibold text-gray-900">Branding & Media</h2>
+            <h2 className="text-lg font-semibold text-[var(--ink)]">Branding & Media</h2>
           </div>
-          <p className="text-sm text-gray-500 mb-4 ml-11">Your logo and clinic photos are shown on your public listing. Complete this section to build trust with patients.</p>
+          <p className="text-sm text-[var(--muted)] mb-4 ml-11">Your logo and clinic photos are shown on your public listing. Complete this section to build trust with patients.</p>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">
                 Brand Logo URL <span className="text-red-500">*</span>
               </label>
               <input
                 type="url"
                 value={clinic.media?.logo_url || ''}
                 onChange={(e) => updateMedia('logo_url', e.target.value || undefined)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                 placeholder="https://example.com/your-logo.png"
               />
               {clinic.media?.logo_url && (
                 <div className="mt-2 flex items-center gap-3">
-                  <img src={clinic.media.logo_url} alt="Logo preview" className="w-12 h-12 rounded-lg object-contain border border-gray-200 bg-white" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                  <img src={clinic.media.logo_url} alt="Logo preview" className="w-12 h-12 rounded-lg object-contain border border-[var(--line)] bg-white" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                   <span className="text-xs text-emerald-600 font-medium">Preview loaded</span>
                 </div>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">
                 Hero / Cover Image URL <span className="text-red-500">*</span>
               </label>
               <input
                 type="url"
                 value={clinic.media?.hero_image_url || ''}
                 onChange={(e) => updateMedia('hero_image_url', e.target.value || undefined)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                 placeholder="https://example.com/clinic-front.jpg"
               />
               {clinic.media?.hero_image_url && (
                 <div className="mt-2">
-                  <img src={clinic.media.hero_image_url} alt="Hero preview" className="w-full max-w-xs h-32 rounded-lg object-cover border border-gray-200" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                  <img src={clinic.media.hero_image_url} alt="Hero preview" className="w-full max-w-xs h-32 rounded-lg object-cover border border-[var(--line)]" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                 </div>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">
                 Clinic Gallery Photos <span className="text-red-500">*</span>
               </label>
-              <p className="text-xs text-gray-500 mb-1.5">Add image URLs, one per line. Show your treatment rooms, waiting area, and team.</p>
+              <p className="text-xs text-[var(--muted)] mb-1.5">Add image URLs, one per line. Show your treatment rooms, waiting area, and team.</p>
               <textarea
                 value={(clinic.media?.gallery_urls || []).join('\n')}
                 onChange={(e) => updateMedia('gallery_urls', e.target.value.split('\n').map(s => s.trim()).filter(Boolean))}
                 rows={4}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500 font-mono"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500 font-mono"
                 placeholder={"https://example.com/room-1.jpg\nhttps://example.com/waiting-area.jpg\nhttps://example.com/team-photo.jpg"}
               />
               {clinic.media?.gallery_urls && clinic.media.gallery_urls.length > 0 && (
                 <div className="mt-2 flex gap-2 flex-wrap">
                   {clinic.media.gallery_urls.slice(0, 6).map((url, i) => (
-                    <img key={i} src={url} alt={`Gallery ${i + 1}`} className="w-16 h-16 rounded-lg object-cover border border-gray-200" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                    <img key={i} src={url} alt={`Gallery ${i + 1}`} className="w-16 h-16 rounded-lg object-cover border border-[var(--line)]" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                   ))}
                   {clinic.media.gallery_urls.length > 6 && (
-                    <div className="w-16 h-16 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-xs text-gray-500 font-medium">
+                    <div className="w-16 h-16 rounded-lg bg-[var(--paper2)] border border-[var(--line)] flex items-center justify-center text-xs text-[var(--muted)] font-medium">
                       +{clinic.media.gallery_urls.length - 6}
                     </div>
                   )}
@@ -270,12 +281,12 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Video URL</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Video URL</label>
               <input
                 type="url"
                 value={clinic.media?.video_url || ''}
                 onChange={(e) => updateMedia('video_url', e.target.value || undefined)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                 placeholder="https://youtube.com/watch?v=... or https://vimeo.com/..."
               />
             </div>
@@ -283,34 +294,34 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
         </section>
 
         {/* Contact */}
-        <section className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h2>
+        <section className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Contact Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Phone</label>
               <input
                 type="tel"
                 value={clinic.phone || ''}
                 onChange={(e) => updateField('phone', e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Email</label>
               <input
                 type="email"
                 value={clinic.email || ''}
                 onChange={(e) => updateField('email', e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
               />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Website</label>
               <input
                 type="url"
                 value={clinic.website || ''}
                 onChange={(e) => updateField('website', e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                 placeholder="https://"
               />
             </div>
@@ -318,36 +329,36 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
         </section>
 
         {/* Services */}
-        <section className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Services</h2>
+        <section className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Services</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">TMS Machines (comma-separated)</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">TMS Machines (comma-separated)</label>
               <input
                 type="text"
                 value={(clinic.machines || []).join(', ')}
                 onChange={(e) => updateField('machines', parseArrayField(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                 placeholder="NeuroStar, BrainsWay, MagVenture"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Specialties (comma-separated)</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Specialties (comma-separated)</label>
               <input
                 type="text"
                 value={(clinic.specialties || []).join(', ')}
                 onChange={(e) => updateField('specialties', parseArrayField(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                 placeholder="Depression, Anxiety, OCD"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Insurance Accepted (comma-separated)</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Insurance Accepted (comma-separated)</label>
               <input
                 type="text"
                 value={(clinic.insurances || []).join(', ')}
                 onChange={(e) => updateField('insurances', parseArrayField(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                 placeholder="Aetna, Blue Cross, Cigna"
               />
             </div>
@@ -355,23 +366,23 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
         </section>
 
         {/* Hours */}
-        <section className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Opening Hours</h2>
+        <section className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Opening Hours</h2>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Hours (one per line)</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Hours (one per line)</label>
             <textarea
               value={(clinic.openingHours || []).join('\n')}
               onChange={(e) => updateField('openingHours', e.target.value.split('\n').filter(Boolean))}
               rows={7}
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500 font-mono"
+              className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500 font-mono"
               placeholder={"Mon-Fri: 8:00 AM - 5:00 PM\nSat: 9:00 AM - 1:00 PM\nSun: Closed"}
             />
           </div>
         </section>
 
         {/* Availability */}
-        <section className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Availability</h2>
+        <section className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Availability</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               { key: 'accepting_new_patients', label: 'Accepting New Patients' },
@@ -387,34 +398,34 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
                   type="checkbox"
                   checked={!!(clinic.availability as Record<string, unknown>)?.[key]}
                   onChange={(e) => updateAvailability(key, e.target.checked)}
-                  className="w-4 h-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                  className="w-4 h-4 rounded border-[var(--line)] text-emerald-600 focus:ring-emerald-500"
                 />
-                <span className="text-sm text-gray-700">{label}</span>
+                <span className="text-sm text-[var(--ink2)]">{label}</span>
               </label>
             ))}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Wait Time (weeks)</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Wait Time (weeks)</label>
               <input
                 type="number"
                 min={0}
                 value={clinic.availability?.wait_time_weeks || ''}
                 onChange={(e) => updateAvailability('wait_time_weeks', e.target.value ? parseInt(e.target.value) : null)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
               />
             </div>
           </div>
         </section>
 
         {/* Pricing */}
-        <section className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Pricing</h2>
+        <section className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Pricing</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Price Range</label>
               <select
                 value={clinic.pricing?.price_range || ''}
                 onChange={(e) => updatePricing('price_range', e.target.value || null)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
               >
                 <option value="">Select...</option>
                 <option value="budget">Budget</option>
@@ -424,34 +435,34 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Session Price Min ($)</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Session Price Min ($)</label>
                 <input
                   type="number"
                   min={0}
                   value={clinic.pricing?.session_price_min || ''}
                   onChange={(e) => updatePricing('session_price_min', e.target.value ? parseInt(e.target.value) : null)}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Session Price Max ($)</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Session Price Max ($)</label>
                 <input
                   type="number"
                   min={0}
                   value={clinic.pricing?.session_price_max || ''}
                   onChange={(e) => updatePricing('session_price_max', e.target.value ? parseInt(e.target.value) : null)}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                  className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Full Course Price ($)</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Full Course Price ($)</label>
               <input
                 type="number"
                 min={0}
                 value={clinic.pricing?.full_course_price || ''}
                 onChange={(e) => updatePricing('full_course_price', e.target.value ? parseInt(e.target.value) : null)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -466,9 +477,9 @@ export default function PortalClinicEditor({ userId }: { userId: string }) {
                     type="checkbox"
                     checked={!!(clinic.pricing as Record<string, unknown>)?.[key]}
                     onChange={(e) => updatePricing(key, e.target.checked)}
-                    className="w-4 h-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                    className="w-4 h-4 rounded border-[var(--line)] text-emerald-600 focus:ring-emerald-500"
                   />
-                  <span className="text-sm text-gray-700">{label}</span>
+                  <span className="text-sm text-[var(--ink2)]">{label}</span>
                 </label>
               ))}
             </div>

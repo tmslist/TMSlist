@@ -76,23 +76,23 @@ export default function CostCalculator() {
     <div className="space-y-8">
       {/* State Selection */}
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-2">Select Your State</label>
+        <label className="block text-sm font-semibold text-[var(--ink2)] mb-2">Select Your State</label>
         <select
           value={state}
           onChange={e => setState(e.target.value)}
-          className="w-full px-4 py-3 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+          className="w-full px-4 py-3 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] outline-none"
         >
           <option value="default">Average (all states)</option>
           {Object.keys(STATE_AVERAGE).filter(s => s !== 'default').sort().map(s => (
             <option key={s} value={s}>{s}</option>
           ))}
         </select>
-        <p className="text-xs text-slate-400 mt-1">Average per-session rate: <span className="font-semibold text-violet-600">${sessionRate}</span></p>
+        <p className="text-xs text-[var(--muted)] mt-1">Average per-session rate: <span className="font-semibold text-[var(--accent)]">${sessionRate}</span></p>
       </div>
 
       {/* Insurance Status */}
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-3">Insurance Coverage</label>
+        <label className="block text-sm font-semibold text-[var(--ink2)] mb-3">Insurance Coverage</label>
         <div className="grid grid-cols-2 gap-3">
           {(['none', 'private', 'medicare', 'medicaid'] as const).map(opt => (
             <button
@@ -100,8 +100,8 @@ export default function CostCalculator() {
               onClick={() => setInsuranceStatus(opt)}
               className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
                 insuranceStatus === opt
-                  ? 'bg-violet-50 border-violet-300 text-violet-700 ring-1 ring-violet-300'
-                  : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                  ? 'bg-[rgba(10,22,40,0.08)] border-[rgba(10,22,40,0.2)] text-[var(--accent)] ring-1 ring-[rgba(10,22,40,0.2)]'
+                  : 'bg-white border-[var(--line)] text-[var(--ink2)] hover:border-[var(--line)]'
               }`}
             >
               {opt === 'none' ? '💰 Self-Pay' : opt === 'private' ? '🏢 Private Insurance' : opt === 'medicare' ? '🏛️ Medicare' : '🏥 Medicaid'}
@@ -113,11 +113,11 @@ export default function CostCalculator() {
       {/* Insurance Plan */}
       {insuranceStatus === 'private' && (
         <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">Select Your Plan</label>
+          <label className="block text-sm font-semibold text-[var(--ink2)] mb-2">Select Your Plan</label>
           <select
             value={insurancePlan}
             onChange={e => setInsurancePlan(e.target.value as InsurancePlan)}
-            className="w-full px-4 py-3 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+            className="w-full px-4 py-3 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] outline-none"
           >
             <option value="bcbs">Blue Cross Blue Shield</option>
             <option value="aetna">Aetna</option>
@@ -127,7 +127,7 @@ export default function CostCalculator() {
             <option value="humana">Humana</option>
             <option value="other">Other</option>
           </select>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-[var(--muted)] mt-1">
             Average coverage rate: <span className="font-semibold text-emerald-600">{Math.round(coverageRate * 100)}%</span>
           </p>
         </div>
@@ -136,26 +136,26 @@ export default function CostCalculator() {
       {/* Deductible */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">Annual Deductible</label>
+          <label className="block text-sm font-semibold text-[var(--ink2)] mb-2">Annual Deductible</label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]">$</span>
             <input
               type="number"
               value={deductible}
               onChange={e => setDeductible(Number(e.target.value))}
-              className="w-full pl-8 pr-4 py-3 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+              className="w-full pl-8 pr-4 py-3 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] outline-none"
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">Deductible Already Met</label>
+          <label className="block text-sm font-semibold text-[var(--ink2)] mb-2">Deductible Already Met</label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]">$</span>
             <input
               type="number"
               value={deductibleMet}
               onChange={e => setDeductibleMet(Number(e.target.value))}
-              className="w-full pl-8 pr-4 py-3 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+              className="w-full pl-8 pr-4 py-3 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] outline-none"
             />
           </div>
         </div>
@@ -163,46 +163,46 @@ export default function CostCalculator() {
 
       {/* Sessions */}
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-2">Number of Sessions</label>
+        <label className="block text-sm font-semibold text-[var(--ink2)] mb-2">Number of Sessions</label>
         <input
           type="range"
           min={1}
           max={60}
           value={sessions}
           onChange={e => setSessions(Number(e.target.value))}
-          className="w-full accent-violet-600"
+          className="w-full accent-[#0A1628]"
         />
-        <div className="flex justify-between text-xs text-slate-400 mt-1">
+        <div className="flex justify-between text-xs text-[var(--muted)] mt-1">
           <span>1</span>
-          <span className="font-semibold text-violet-600">{sessions} sessions</span>
+          <span className="font-semibold text-[var(--accent)]">{sessions} sessions</span>
           <span>60</span>
         </div>
       </div>
 
       {/* Results */}
-      <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+      <div className="bg-[var(--paper2)] rounded-2xl p-6 border border-[var(--line)]">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-bold text-slate-900">Your Estimated Cost</h3>
+          <h3 className="text-lg font-bold text-[var(--ink)]">Your Estimated Cost</h3>
           <button
             onClick={() => setShowBreakdown(!showBreakdown)}
-            className="text-xs text-violet-600 font-semibold hover:text-violet-700"
+            className="text-xs text-[var(--accent)] font-semibold hover:text-[var(--accent)]"
           >
             {showBreakdown ? 'Hide' : 'Show'} Breakdown
           </button>
         </div>
 
         {showBreakdown && (
-          <div className="space-y-2 mb-6 pb-4 border-b border-slate-200 text-sm">
-            <div className="flex justify-between"><span className="text-slate-500">Total before insurance</span><span className="font-medium">${totalBeforeInsurance.toLocaleString()}</span></div>
-            <div className="flex justify-between"><span className="text-slate-500">Remaining deductible</span><span className="font-medium">${remaining.toLocaleString()}</span></div>
-            <div className="flex justify-between"><span className="text-slate-500">Insurance covers ({(coverageRate * 100).toFixed(0)}%)</span><span className="font-medium text-emerald-600">−${Math.round(covered).toLocaleString()}</span></div>
-            <div className="flex justify-between"><span className="text-slate-500">Patient responsibility</span><span className="font-medium text-rose-600">${Math.round(patientOOP).toLocaleString()}</span></div>
+          <div className="space-y-2 mb-6 pb-4 border-b border-[var(--line)] text-sm">
+            <div className="flex justify-between"><span className="text-[var(--muted)]">Total before insurance</span><span className="font-medium">${totalBeforeInsurance.toLocaleString()}</span></div>
+            <div className="flex justify-between"><span className="text-[var(--muted)]">Remaining deductible</span><span className="font-medium">${remaining.toLocaleString()}</span></div>
+            <div className="flex justify-between"><span className="text-[var(--muted)]">Insurance covers ({(coverageRate * 100).toFixed(0)}%)</span><span className="font-medium text-emerald-600">−${Math.round(covered).toLocaleString()}</span></div>
+            <div className="flex justify-between"><span className="text-[var(--muted)]">Patient responsibility</span><span className="font-medium text-[var(--warm)]">${Math.round(patientOOP).toLocaleString()}</span></div>
           </div>
         )}
 
         <div className="text-center">
-          <div className="text-5xl font-bold text-slate-900 mb-1">${Math.round(finalCost).toLocaleString()}</div>
-          <div className="text-sm text-slate-500">Total out-of-pocket</div>
+          <div className="text-5xl font-bold text-[var(--ink)] mb-1">${Math.round(finalCost).toLocaleString()}</div>
+          <div className="text-sm text-[var(--muted)]">Total out-of-pocket</div>
         </div>
 
         {insuranceStatus !== 'none' && (
@@ -215,12 +215,12 @@ export default function CostCalculator() {
 
         {/* Financing */}
         <div className="mt-6">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Payment Plans (0% interest)</p>
+          <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-3">Payment Plans (0% interest)</p>
           <div className="grid grid-cols-3 gap-2">
             {financing.map(f => (
-              <div key={f.months} className="bg-white rounded-xl p-3 border border-slate-100 text-center">
-                <div className="text-lg font-bold text-slate-900">${f.monthly}</div>
-                <div className="text-xs text-slate-400">/{f.months} mo</div>
+              <div key={f.months} className="bg-white rounded-xl p-3 border border-[var(--line)] text-center">
+                <div className="text-lg font-bold text-[var(--ink)]">${f.monthly}</div>
+                <div className="text-xs text-[var(--muted)]">/{f.months} mo</div>
               </div>
             ))}
           </div>
@@ -228,7 +228,7 @@ export default function CostCalculator() {
       </div>
 
       {/* Disclaimer */}
-      <p className="text-xs text-slate-400">Estimates based on average market rates. Actual costs vary by clinic, device, and insurance contract. Always verify with your provider.</p>
+      <p className="text-xs text-[var(--muted)]">Estimates based on average market rates. Actual costs vary by clinic, device, and insurance contract. Always verify with your provider.</p>
     </div>
   );
 }

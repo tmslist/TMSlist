@@ -1,0 +1,192 @@
+---
+import Layout from "../layouts/Layout.astro";
+import EditorialHero from "./editorial/EditorialHero.astro";
+import ClinicCard from "./ClinicCard.astro";
+import { getClinicsByCountryAndRegion } from "../utils/dataHelpers";
+import { COUNTRY_META } from "../utils/countryData";
+import { TREATMENT_SLUGS } from "../utils/seo_slugs";
+import { calculateClinicScore } from "../utils/ranking";
+import {
+    generateBreadcrumbSchema,
+    generateMedicalClinicListSchema,
+} from "../utils/schema";
+import { getTreatmentMeta } from "../utils/treatmentData";
+
+interface Props {
+    countryCode: string;
+    countryName: string;
+    countryUrlPrefix: string; // 'uk', 'ca', 'au'
+    regionSlug: string;
+    treatmentSlug: string;
+}
+
+const { countryCode, countryName, countryUrlPrefix, regionSlug, treatmentSlug } = Astro.props;
+
+const treatmentEntry = TREATMENT_SLUGS.find(t => t.slug === treatmentSlug);
+if (!treatmentEntry) {
+    return Astro.redirect(`/${countryUrlPrefix}/${regionSlug}/`);
+}
+const treatmentTitle = treatmentEntry.title;
+const conditionName = treatmentTitle.replace('TMS for ', '');
+
+const allCountryClinics = await (await import("../utils/dataHelpers")).getClinicsByCountry(countryCode);
+const regionMatch = allCountryClinics.find(
+    c => c.state && c.state.toLowerCase().replace(/\s+/g, '-') === regionSlug,
+);
+if (!regionMatch) return Astro.redirect(`/${countryUrlPrefix}/`);
+const regionName = regionMatch.state!;
+
+const regionClinics = await getClinicsByCountryAndRegion(countryCode, regionName);
+const sortedClinics = [...regionClinics].sort(
+    (a, b) => calculateClinicScore(b) - calculateClinicScore(a),
+);
+
+const cityGroups = new Map<string, typeof sortedClinics>();
+for (const c of sortedClinics) {
+    if (!c.city) continue;
+    const arr = cityGroups.get(c.city) || [];
+    arr.push(c);
+    cityGroups.set(c.city, arr);
+}
+const cities = [...cityGroups.entries()]
+    .map(([name, clinics]) => ({
+        name,
+        slug: name.toLowerCase().replace(/\s+/g, '-').replace(/\./g, ''),
+        count: clinics.length,
+    }))
+    .sort((a, b) => b.count - a.count);
+
+const meta = COUNTRY_META[countryCode];
+const td = getTreatmentMeta(treatmentSlug, conditionName);
+
+const title = `${conditionName} Treatment with TMS in ${regionName}, ${countryName} | TMS List`;
+const description = `Compare ${sortedClinics.length} verified TMS clinics treating ${conditionName.toLowerCase()} across ${regionName}, ${countryName}. ${cities.length} cities, costs (${meta?.sessionCostRange || 'varies'}), insurance & specialist info.`;
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "https://tmslist.com" },
+    { name: countryName, item: `https://tmslist.com/${countryUrlPrefix}/` },
+    { name: regionName, item: `https://tmslist.com/${countryUrlPrefix}/${regionSlug}/` },
+    { name: treatmentTitle, item: `https://tmslist.com/${countryUrlPrefix}/${regionSlug}/treatments/${treatmentSlug}/` },
+]);
+
+const listingSchema = generateMedicalClinicListSchema(
+    sortedClinics.slice(0, 25),
+    `${conditionName} TMS Clinics in ${regionName}, ${countryName}`,
+    description,
+);
+
+const faqSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        { "@type": "Question", "name": `How much does TMS for ${conditionName.toLowerCase()} cost in ${regionName}?`, "acceptedAnswer": { "@type": "Answer", "text": `TMS sessions in ${regionName}, ${countryName} typically cost ${meta?.sessionCostRange || td.costRange}. A full course of ${td.sessions} ranges accordingly. ${meta?.insuranceNote || ''}` }},
+        { "@type": "Question", "name": `Is TMS for ${conditionName.toLowerCase()} approved?`, "acceptedAnswer": { "@type": "Answer", "text": td.fdaCleared ? `TMS for ${conditionName.toLowerCase()} is FDA-cleared in the US${td.yearCleared ? ` since ${td.yearCleared}` : ''}, and equivalent regulatory clearance applies in ${countryName}.` : `TMS for ${conditionName.toLowerCase()} is currently used off-label with growing clinical evidence in ${countryName}.` }},
+        { "@type": "Question", "name": `Where can I find TMS treatment for ${conditionName.toLowerCase()} in ${regionName}?`, "acceptedAnswer": { "@type": "Answer", "text": `${regionName} has ${sortedClinics.length} verified TMS clinics offering treatment for ${conditionName.toLowerCase()} across ${cities.length} cities${cities.length > 0 ? ` including ${cities.slice(0, 5).map(c => c.name).join(', ')}` : ''}.` }},
+    ]
+});
+
+const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}, ${faqSchema}]`;
+---
+
+<Layout title={title} description={description} schema={combinedSchema}>
+    <main style="background:var(--paper)">
+        <EditorialHero
+            eyebrow={td.fdaCleared ? `FDA-Cleared${td.yearCleared ? ` since ${td.yearCleared}` : ''}` : 'Emerging Evidence'}
+            eyebrowDot={td.fdaCleared ? '#22c55e' : '#C9654A'}
+            title={`${conditionName} treatment in`}
+            titleAccent={`${regionName}.`}
+            description={`Compare ${sortedClinics.length} verified TMS providers treating ${conditionName.toLowerCase()} across ${regionName}, ${countryName}.`}
+            breadcrumbs={[
+                { label: "Home", href: "/" },
+                { label: countryName, href: `/${countryUrlPrefix}/` },
+                { label: regionName, href: `/${countryUrlPrefix}/${regionSlug}/` },
+                { label: conditionName },
+            ]}
+            ctas={[
+                { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+                { label: `Learn about ${conditionName} TMS`, href: `/treatments/${treatmentSlug}/`, variant: "outline" },
+            ]}
+            stats={[
+                { value: sortedClinics.length, label: "Clinics", color: "ink" },
+                { value: cities.length, label: "Cities", color: "accent" },
+                { value: td.sessions.split(' ')[0], label: "Sessions", color: "warm" },
+            ]}
+        />
+
+        {cities.length > 0 && (
+            <section class="py-10 lg:py-14 bg-[var(--paper2)] border-t border-[var(--line)]">
+                <div class="container mx-auto px-4 max-w-5xl">
+                    <h2 class="text-xl lg:text-2xl font-bold text-[var(--ink)] tracking-tight mb-6">{conditionName} TMS by City in {regionName}</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                        {cities.slice(0, 40).map(city => (
+                            <a href={`/${countryUrlPrefix}/${regionSlug}/${city.slug}/${treatmentSlug}/`}
+                               class="px-4 py-3 bg-[var(--paper)] border border-[var(--line)] rounded-xl hover:border-[var(--accent)] transition-all">
+                                <div class="text-sm font-semibold text-[var(--ink)]">{city.name}</div>
+                                <div class="text-xs text-[var(--muted)]">{city.count} clinic{city.count !== 1 ? 's' : ''}</div>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        )}
+
+        <section class="py-12 lg:py-16 bg-[var(--paper)]">
+            <div class="container mx-auto px-4">
+                {sortedClinics.length > 0 ? (
+                    <>
+                        <div class="flex items-end justify-between mb-8">
+                            <h2 class="text-2xl font-bold text-[var(--ink)] tracking-tight">Top {conditionName} TMS Providers in {regionName}</h2>
+                            <span class="text-sm text-[var(--muted)] hidden md:block">{sortedClinics.length} clinics</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {sortedClinics.slice(0, 24).map(clinic => (
+                                <ClinicCard clinic={clinic} />
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    <div class="text-center py-16">
+                        <h2 class="text-xl font-bold text-[var(--ink)] mb-3">No {regionName} clinics found for this treatment</h2>
+                        <p class="text-[var(--muted)] mb-6 max-w-md mx-auto">Browse all {regionName} clinics or explore other treatments.</p>
+                        <a href={`/${countryUrlPrefix}/${regionSlug}/`} class="px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors">All {regionName} Clinics</a>
+                    </div>
+                )}
+            </div>
+        </section>
+
+        <section class="py-12 lg:py-20 bg-[var(--paper2)]">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="prose prose-slate max-w-none prose-headings:tracking-tight prose-headings:font-bold">
+                    <h2 class="text-2xl lg:text-3xl font-bold text-[var(--ink)] tracking-tight">Understanding {conditionName} Treatment with TMS in {regionName}</h2>
+                    <p>{td.howItWorks}</p>
+                    <h3>How TMS Treats {conditionName}</h3>
+                    <p>TMS therapy targets the <strong>{td.brainArea}</strong> using {td.protocol}. A magnetic coil placed against the scalp delivers focused pulses, promoting neuroplasticity over the course of treatment.</p>
+                    <h3>Treatment Protocol</h3>
+                    <ul>
+                        <li><strong>Sessions:</strong> {td.sessions}</li>
+                        <li><strong>Devices commonly used:</strong> {td.devices}</li>
+                        <li><strong>Success rate:</strong> {td.successRate}</li>
+                    </ul>
+                    <h3>Who Qualifies?</h3>
+                    <p>{td.whoQualifies}</p>
+                    <h3>Cost in {regionName}</h3>
+                    <p>TMS sessions in {regionName}, {countryName} typically cost <strong>{meta?.sessionCostRange || td.costRange}</strong>. {meta?.insuranceNote || ''}</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-8 lg:py-12 bg-[var(--paper)] border-t border-[var(--line)]">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <h2 class="text-lg lg:text-xl font-bold text-[var(--ink)] mb-4 lg:mb-6">Other TMS Treatments in {regionName}</h2>
+                <div class="flex flex-wrap gap-2">
+                    {TREATMENT_SLUGS.filter(t => t.slug !== treatmentSlug).slice(0, 16).map(t => (
+                        <a href={`/${countryUrlPrefix}/${regionSlug}/treatments/${t.slug}/`}
+                           class="px-4 py-2 bg-[var(--paper2)] border border-[var(--line)] text-sm font-medium text-[var(--ink2)] rounded-xl hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all">
+                            {t.title.replace('TMS for ', '')}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

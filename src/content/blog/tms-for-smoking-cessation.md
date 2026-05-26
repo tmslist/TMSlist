@@ -4,7 +4,7 @@ description: "The FDA has cleared deep TMS for smoking cessation. Learn how it w
 publishDate: 2026-04-15
 category: treatment
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-smoking-cessation.svg"
 tags: ["tms", "smoking-cessation", "deep-tms", "addiction", "brainsway"]
 ---
 
@@ -88,35 +88,35 @@ This approach is not specific to smoking. Researchers are actively investigating
 
 For smokers who have tried everything and failed, Deep TMS offers a scientifically grounded, FDA-cleared option that targets the craving, reward, and regulatory circuits that have made quitting so difficult.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for smoking cessation?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for smoking cessation?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. In 2014, the BrainsWay Deep TMS system received FDA clearance for smoking cessation in adults who want to quit smoking. This was the first time an electromagnetic brain stimulation device received FDA clearance for an addiction indication.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. In 2014, the BrainsWay Deep TMS system received FDA clearance for smoking cessation in adults who want to quit smoking. This was the first time an electromagnetic brain stimulation device received FDA clearance for an addiction indication.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How does Deep TMS compare to varenicline (Chantix)?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How does Deep TMS compare to varenicline (Chantix)?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Deep TMS quit rates (28.4% continuous quit rate at 16 weeks) substantially exceed those typically seen with nicotine replacement therapy and are comparable to or better than varenicline rates in similar populations. Unlike medications, TMS does not introduce any substances into the body.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Deep TMS quit rates (28.4% continuous quit rate at 16 weeks) substantially exceed those typically seen with nicotine replacement therapy and are comparable to or better than varenicline rates in similar populations. Unlike medications, TMS does not introduce any substances into the body.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What does the Deep TMS smoking cessation protocol involve?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What does the Deep TMS smoking cessation protocol involve?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The standard protocol involves 16 treatment sessions over 5 weeks, approximately 3 sessions per week initially, followed by once-weekly sessions. Each session lasts about 20 minutes. Treatment can be combined with nicotine replacement therapy or other cessation methods.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The standard protocol involves 16 treatment sessions over 5 weeks, approximately 3 sessions per week initially, followed by once-weekly sessions. Each session lasts about 20 minutes. Treatment can be combined with nicotine replacement therapy or other cessation methods.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

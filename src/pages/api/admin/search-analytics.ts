@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { desc, sql, gte } from 'drizzle-orm';
 import { db } from '../../../db';
 import { searchQueries, leads } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -30,8 +30,8 @@ export const GET: APIRoute = async ({ request }) => {
       .select({
         query: searchQueries.query,
         count: sql<number>`count(*)`.as('count'),
-        avgResults: sql<number>`round(avg(${searchQueries.resultCount})::numeric, 1)`.as('avg_results'),
-        zeroResultCount: sql<number>`count(*) FILTER (WHERE ${searchQueries.resultCount} = 0)`.as('zero_result_count'),
+        avgResults: sql<number>`round(avg(${searchQueries.resultsCount})::numeric, 1)`.as('avg_results'),
+        zeroResultCount: sql<number>`count(*) FILTER (WHERE ${searchQueries.resultsCount} = 0)`.as('zero_result_count'),
       })
       .from(searchQueries)
       .where(gte(searchQueries.createdAt, since))

@@ -7,20 +7,20 @@ const pageTitle = "Unsubscribe | TMS List";
 ---
 
 <Layout title={pageTitle} description="Unsubscribe from TMS List emails." noindex={true}>
-  <main class="bg-slate-50/50 min-h-screen flex items-center justify-center py-12 px-6">
+  <main class="bg-[var(--paper2)]/50 min-h-screen flex items-center justify-center py-12 px-6">
     <div class="w-full max-w-md">
-      <div class="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 text-center">
+      <div class="bg-[var(--paper)] rounded-3xl border border-[var(--line)] shadow-sm p-8 text-center">
         <div id="form-state">
-          <svg class="w-12 h-12 text-slate-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-12 h-12 text-[var(--muted)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          <h1 class="text-2xl font-bold text-slate-900 mb-2">Unsubscribe</h1>
-          <p class="text-sm text-slate-500 mb-6">Enter your email to unsubscribe from TMS List emails.</p>
+          <h1 class="text-2xl font-bold text-[var(--ink)] mb-2">Unsubscribe</h1>
+          <p class="text-sm text-[var(--muted)] mb-6">Enter your email to unsubscribe from TMS List emails.</p>
 
           <form id="unsubscribe-form" class="space-y-4">
             <input type="email" name="email" required placeholder="your@email.com"
-              class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-center focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
-            <button type="submit" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl text-sm transition-all">
+              class="w-full px-4 py-3 rounded-xl border border-[var(--line)] text-sm text-center focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] transition-all" />
+            <button type="submit" class="w-full py-3 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white font-semibold rounded-xl text-sm transition-all">
               Unsubscribe
             </button>
           </form>
@@ -30,9 +30,9 @@ const pageTitle = "Unsubscribe | TMS List";
           <svg class="w-12 h-12 text-emerald-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
-          <h2 class="text-xl font-bold text-slate-900 mb-2">You've been unsubscribed</h2>
-          <p class="text-sm text-slate-500 mb-6">You won't receive any more emails from us. We're sorry to see you go.</p>
-          <a href="/" class="text-sm text-blue-600 font-semibold hover:text-blue-700">Back to TMS List</a>
+          <h2 class="text-xl font-bold text-[var(--ink)] mb-2">You've been unsubscribed</h2>
+          <p class="text-sm text-[var(--muted)] mb-6">You won't receive any more emails from us. We're sorry to see you go.</p>
+          <a href="/" class="text-sm text-[var(--accent)] font-semibold hover:text-[var(--accent)]">Back to TMS List</a>
         </div>
       </div>
     </div>

@@ -22,17 +22,17 @@ faqs:
     <div class="text-2xl font-bold text-amber-700 font-display">No FDA</div>
     <div class="text-xs text-amber-600 mt-1">Not cleared for mental health</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">20-40</div>
-    <div class="text-xs text-blue-600 mt-1">Sessions typical</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">20-40</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Sessions typical</div>
   </div>
   <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
     <div class="text-2xl font-bold text-emerald-700 font-display">$100-200</div>
     <div class="text-xs text-emerald-600 mt-1">Per session</div>
   </div>
-  <div class="bg-violet-50 border border-violet-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-violet-700 font-display">Non-invasive</div>
-    <div class="text-xs text-violet-600 mt-1">No stimulation</div>
+  <div class="bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--warm)] font-display">Non-invasive</div>
+    <div class="text-xs text-[var(--warm)] mt-1">No stimulation</div>
   </div>
 </div>
 
@@ -42,10 +42,10 @@ Neurofeedback (also called EEG biofeedback or neurotherapy) is a brain training 
 
 Over repeated sessions, this operant conditioning process trains the brain to maintain healthier activation patterns on its own. Think of it as physical therapy for brain circuits — gradual strengthening through repetitive practice.
 
-<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">How neurofeedback differs from TMS</h4>
-  <p class="text-sm text-slate-600 leading-relaxed mb-3"><strong>TMS</strong> directly stimulates brain circuits using magnetic pulses — the device does the work. It physically activates neurons whether the patient does anything or not.</p>
-  <p class="text-sm text-slate-600 leading-relaxed mb-0"><strong>Neurofeedback</strong> is passive on the device side — the EEG only reads brain activity, it doesn't change it. The patient's brain learns to change itself through feedback training. This is a fundamentally different mechanism.</p>
+<div class="not-prose my-8 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--ink)] mb-3 text-base">How neurofeedback differs from TMS</h4>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-3"><strong>TMS</strong> directly stimulates brain circuits using magnetic pulses — the device does the work. It physically activates neurons whether the patient does anything or not.</p>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-0"><strong>Neurofeedback</strong> is passive on the device side — the EEG only reads brain activity, it doesn't change it. The patient's brain learns to change itself through feedback training. This is a fundamentally different mechanism.</p>
 </div>
 
 ---
@@ -67,23 +67,23 @@ The experience is passive and painless. Most people describe it as "watching a m
 ## Neurofeedback vs. TMS
 
 <div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+<table class="w-full text-sm border border-[var(--line)] rounded-xl overflow-hidden">
   <thead>
-    <tr class="bg-slate-800 text-white">
+    <tr class="bg-[var(--ink2)] text-white">
       <th class="px-4 py-3 text-left font-semibold">Factor</th>
       <th class="px-4 py-3 text-center font-semibold">Neurofeedback</th>
       <th class="px-4 py-3 text-center font-semibold">TMS</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">FDA Status</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Not cleared</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">FDA Cleared</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Evidence Base</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Limited RCTs</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Extensive RCTs</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Mechanism</td><td class="px-4 py-3 text-center">Brain self-training</td><td class="px-4 py-3 text-center">Direct stimulation</td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Sessions</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">20-40</span></td><td class="px-4 py-3 text-center"><span class="text-blue-600 font-semibold">30-36</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Treatment Duration</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">3-6 months</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">6-9 weeks</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Insurance Coverage</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Rarely covered</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Widely covered</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Side Effects</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Minimal</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Mild scalp discomfort</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Best For</td><td class="px-4 py-3 text-center">ADHD, anxiety, mild depression</td><td class="px-4 py-3 text-center">Treatment-resistant depression, OCD</td></tr>
+  <tbody class="divide-y divide-[var(--line)]">
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">FDA Status</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Not cleared</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">FDA Cleared</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Evidence Base</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Limited RCTs</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Extensive RCTs</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Mechanism</td><td class="px-4 py-3 text-center">Brain self-training</td><td class="px-4 py-3 text-center">Direct stimulation</td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Sessions</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">20-40</span></td><td class="px-4 py-3 text-center"><span class="text-[var(--ink)] font-semibold">30-36</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Treatment Duration</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">3-6 months</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">6-9 weeks</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Insurance Coverage</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Rarely covered</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Widely covered</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Side Effects</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Minimal</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Mild scalp discomfort</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Best For</td><td class="px-4 py-3 text-center">ADHD, anxiety, mild depression</td><td class="px-4 py-3 text-center">Treatment-resistant depression, OCD</td></tr>
   </tbody>
 </table>
 </div>

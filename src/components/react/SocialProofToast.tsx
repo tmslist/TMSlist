@@ -96,16 +96,16 @@ export default function SocialProofToast() {
           </svg>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs text-gray-700 font-medium leading-snug">
+          <p className="text-xs text-[var(--ink2)] font-medium leading-snug">
             {current.name} from {current.city}
           </p>
-          <p className="text-[11px] text-gray-400 mt-0.5">
+          <p className="text-[11px] text-[var(--muted)] mt-0.5">
             viewed a TMS clinic {current.timeAgo}
           </p>
         </div>
         <button
           onClick={() => setVisible(false)}
-          className="text-gray-300 hover:text-gray-500 shrink-0"
+          className="text-[var(--line)] hover:text-[var(--muted)] shrink-0"
           aria-label="Dismiss"
         >
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,0 +1,321 @@
+---
+// Editorial-warm hero matching the treatments/ index design.
+// Use for any top-level category landing page that wants the
+// elegant serif headline + stats ribbon + dual-CTA pattern.
+
+interface CTA {
+    label: string;
+    href: string;
+    variant?: "primary" | "outline";
+}
+
+interface Stat {
+    value: string | number;
+    label: string;
+    color?: "ink" | "accent" | "warm";
+}
+
+interface Crumb {
+    label: string;
+    href?: string;
+}
+
+interface Props {
+    /** Eyebrow text shown above the headline (e.g., "12 FDA-Cleared Indications"). */
+    eyebrow?: string;
+    /** Eyebrow dot color (CSS color or token). Defaults to green for "active". */
+    eyebrowDot?: string;
+    /** Headline text. Use {accent} to mark the italic warm-colored word(s). */
+    title: string;
+    /** Accent words rendered in italic warm color, placed on a new line after title. */
+    titleAccent?: string;
+    /** Subhead paragraph. */
+    description?: string;
+    /** Optional CTAs (max 2 recommended). */
+    ctas?: CTA[];
+    /** Optional stats ribbon. */
+    stats?: Stat[];
+    /** Breadcrumb trail (last entry has no href). */
+    breadcrumbs?: Crumb[];
+    /** Tone — affects the warm accent blob position/color. */
+    tone?: "warm" | "accent" | "muted";
+}
+
+const {
+    eyebrow,
+    eyebrowDot = "#22c55e",
+    title,
+    titleAccent,
+    description,
+    ctas = [],
+    stats = [],
+    breadcrumbs = [],
+    tone = "warm",
+} = Astro.props;
+
+const blobColor =
+    tone === "accent" ? "rgba(10,22,40,0.08)" :
+    tone === "muted" ? "rgba(90,107,130,0.06)" :
+    "rgba(201,101,74,0.08)";
+---
+
+<section class="editorial-hero">
+    <!-- Dot grid bg -->
+    <div class="hero-dotgrid" aria-hidden="true"></div>
+    <!-- Warm accent blob -->
+    <div class="hero-blob" style={`background:${blobColor}`} aria-hidden="true"></div>
+
+    <div class="hero-inner">
+        {breadcrumbs.length > 0 && (
+            <nav class="hero-crumb" aria-label="Breadcrumb">
+                {breadcrumbs.map((c, i) => (
+                    <>
+                        {c.href ? (
+                            <a href={c.href} class="linky">{c.label}</a>
+                        ) : (
+                            <span class="hero-crumb-current">{c.label}</span>
+                        )}
+                        {i < breadcrumbs.length - 1 && <span>/</span>}
+                    </>
+                ))}
+            </nav>
+        )}
+
+        <div class={stats.length > 0 ? "hero-grid hero-grid-with-stats" : "hero-grid"}>
+            <div class="hero-content">
+                {eyebrow && (
+                    <div class="hero-eyebrow">
+                        <span class="hero-eyebrow-dot" style={`background:${eyebrowDot}`}></span>
+                        <span>{eyebrow}</span>
+                    </div>
+                )}
+
+                <h1 class="serif hero-title">
+                    {title}
+                    {titleAccent && (
+                        <>
+                            <br />
+                            <span class="italic hero-title-accent">{titleAccent}</span>
+                        </>
+                    )}
+                </h1>
+
+                {description && <p class="hero-description">{description}</p>}
+
+                {ctas.length > 0 && (
+                    <div class="hero-ctas">
+                        {ctas.map((cta) => (
+                            <a
+                                href={cta.href}
+                                class={cta.variant === "outline" ? "hero-cta hero-cta-outline" : "hero-cta hero-cta-primary"}
+                            >
+                                {cta.label}
+                            </a>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            {stats.length > 0 && (
+                <div class="hero-stats">
+                    {stats.map((s) => (
+                        <div class="hero-stat">
+                            <div class={`serif hero-stat-value hero-stat-${s.color || "ink"}`}>{s.value}</div>
+                            <div class="hero-stat-label">{s.label}</div>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    </div>
+</section>
+
+<style>
+    @reference "../../styles/global.css";
+
+    .editorial-hero {
+        position: relative;
+        background: var(--paper);
+        padding: 8rem 0 4rem;
+        border-bottom: 1px solid var(--line);
+        overflow: hidden;
+    }
+
+    .hero-dotgrid {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: radial-gradient(var(--line) 1px, transparent 1px);
+        background-size: 40px 40px;
+        opacity: 0.5;
+    }
+
+    .hero-blob {
+        position: absolute;
+        top: 0;
+        left: 10%;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        filter: blur(150px);
+        pointer-events: none;
+    }
+
+    .hero-inner {
+        position: relative;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    @media (min-width: 1024px) {
+        .hero-inner { padding: 0 2rem; }
+    }
+
+    .hero-crumb {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 2rem;
+        color: var(--muted);
+    }
+
+    .hero-crumb a { color: inherit; text-decoration: none; }
+    .hero-crumb a:hover { color: var(--ink); }
+    .hero-crumb-current { color: var(--ink); }
+
+    .linky {
+        position: relative;
+        display: inline-block;
+    }
+    .linky::after {
+        content: '';
+        position: absolute;
+        bottom: -1px; left: 0; right: 0;
+        height: 1px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .linky:hover::after { transform: scaleX(1); }
+
+    .hero-grid {
+        display: grid;
+        gap: 3rem;
+        align-items: end;
+    }
+
+    @media (min-width: 1024px) {
+        .hero-grid-with-stats { grid-template-columns: 1fr 1fr; }
+    }
+
+    .hero-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.075em;
+        color: var(--muted);
+    }
+
+    .hero-eyebrow-dot {
+        width: 0.375rem;
+        height: 0.375rem;
+        border-radius: 50%;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 6vw, 5.5rem);
+        line-height: 0.93;
+        color: var(--ink);
+        margin: 0 0 1.5rem;
+    }
+
+    .hero-title-accent {
+        color: var(--warm);
+    }
+
+    .hero-description {
+        font-size: 17px;
+        line-height: 1.65;
+        max-width: 36rem;
+        color: var(--muted);
+        margin: 0;
+    }
+
+    .hero-ctas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 2rem;
+    }
+
+    .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.75rem 1.25rem;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 9999px;
+        text-decoration: none;
+        transition: opacity 0.15s ease, background 0.15s ease;
+    }
+
+    .hero-cta-primary {
+        background: var(--ink);
+        color: white;
+    }
+    .hero-cta-primary:hover { opacity: 0.9; }
+
+    .hero-cta-outline {
+        border: 1px solid var(--line);
+        color: var(--ink);
+        background: transparent;
+    }
+    .hero-cta-outline:hover { background: var(--paper2); }
+
+    .hero-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+
+    @media (min-width: 1024px) {
+        .hero-stats { justify-content: flex-end; }
+    }
+
+    .hero-stat {
+        background: var(--paper2);
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        padding: 1rem 1.25rem;
+        text-align: center;
+        min-width: 7rem;
+    }
+
+    .hero-stat-value {
+        font-size: 2.25rem;
+        line-height: 1;
+    }
+
+    .hero-stat-ink { color: var(--ink); }
+    .hero-stat-accent { color: var(--accent); }
+    .hero-stat-warm { color: var(--warm); }
+
+    .hero-stat-label {
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.075em;
+        margin-top: 0.125rem;
+        color: var(--muted);
+    }
+</style>

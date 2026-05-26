@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-05
 treatmentA: "BrainsWay"
 treatmentB: "Nexstim"
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 verdict: "BrainsWay leads on OCD clearance and deep TMS targeting. Nexstim leads on precision navigation. For OCD patients, BrainsWay is the more practical choice. For complex cases or atypical anatomy, Nexstim's navigation offers genuine advantages."
 verdictWinner: "brainsway"
 faqs: []
@@ -61,9 +61,9 @@ Explore [TMS providers](/us/) or other [device comparisons](/compare/).
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>BrainsWay holds the only TMS-specific FDA clearance for OCD</li>
     <li>Nexstim offers MRI-based precision targeting via neuronavigation</li>
     <li>For OCD patients, BrainsWay is the more practical first choice</li>
@@ -72,11 +72,11 @@ Explore [TMS providers](/us/) or other [device comparisons](/compare/).
   </ul>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find the Right TMS Provider</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Search verified clinics by device, location, and insurance coverage.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Search verified clinics by device, location, and insurance coverage.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>

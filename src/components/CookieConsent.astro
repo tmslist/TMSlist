@@ -6,49 +6,53 @@
   aria-label="Cookie consent"
 >
   <div class="mx-auto max-w-4xl px-4 pb-4 lg:pb-6">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 rounded-2xl bg-slate-900/95 backdrop-blur-lg border border-slate-700/50 px-5 py-4 shadow-[0_-4px_30px_rgb(0,0,0,0.15)]">
-      <p class="text-sm text-slate-300 leading-relaxed flex-1">
-        We use cookies to improve your experience. By continuing, you agree to our
-        <a href="/legal/privacy-policy/" class="text-[#5BA8BD] hover:text-[#1B4B5A]300 underline underline-offset-2 transition-colors">privacy policy</a>.
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 rounded-2xl bg-[rgba(10,22,40,0.95)] backdrop-blur-lg border border-white/10 px-5 py-4 shadow-[0_-4px_30px_rgb(0,0,0,0.15)]">
+      <p class="text-sm text-white/80 leading-relaxed flex-1">
+        We use cookies for analytics to improve your experience. See our
+        <a href="/legal/privacy-policy/" class="text-[var(--warm)] hover:text-[var(--warm)] underline underline-offset-2 transition-colors">privacy policy</a>.
       </p>
-      <button
-        id="cookie-accept-btn"
-        class="shrink-0 px-5 py-2 text-sm font-semibold text-white bg-[#143844] hover:bg-[#1B4B5A] rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-[#1B4B5A]400 focus:ring-offset-2 focus:ring-offset-slate-900"
-      >
-        Accept
-      </button>
+      <div class="flex gap-2 shrink-0">
+        <button
+          id="cookie-reject-btn"
+          class="px-4 py-2 text-sm font-semibold text-white/80 hover:text-white bg-transparent border border-white/20 hover:border-white/40 rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-white/20"
+        >
+          Reject
+        </button>
+        <button
+          id="cookie-accept-btn"
+          class="px-5 py-2 text-sm font-semibold text-white bg-[var(--ink2)] hover:bg-[var(--ink)] rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:ring-offset-2 focus:ring-offset-[#0A1628]"
+        >
+          Accept
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
 <script is:inline>
   (function () {
-    if (localStorage.getItem('cookie_consent') === 'accepted') return;
+    var stored = localStorage.getItem('cookie_consent');
+    if (stored === 'accepted' || stored === 'rejected') return;
 
     var banner = document.getElementById('cookie-consent-banner');
     if (!banner) return;
 
-    // Slide up after a brief delay so the transition is visible
     setTimeout(function () {
       banner.style.transform = 'translateY(0)';
     }, 500);
 
-    // Auto-dismiss after 8 seconds
-    var autoDismissTimer = setTimeout(function () {
-      localStorage.setItem('cookie_consent', 'accepted');
+    function dismiss(decision) {
+      localStorage.setItem('cookie_consent', decision);
+      window.dispatchEvent(new CustomEvent('cookie-consent', { detail: decision }));
       banner.style.transform = 'translateY(100%)';
-      setTimeout(function () {
-        banner.remove();
-      }, 500);
-    }, 8000);
+      setTimeout(function () { banner.remove(); }, 500);
+    }
 
     document.getElementById('cookie-accept-btn').addEventListener('click', function () {
-      clearTimeout(autoDismissTimer);
-      localStorage.setItem('cookie_consent', 'accepted');
-      banner.style.transform = 'translateY(100%)';
-      setTimeout(function () {
-        banner.remove();
-      }, 500);
+      dismiss('accepted');
+    });
+    document.getElementById('cookie-reject-btn').addEventListener('click', function () {
+      dismiss('rejected');
     });
   })();
 </script>

@@ -1,0 +1,75 @@
+---
+// Final CTA section
+---
+
+---
+
+<section class="py-40 relative overflow-hidden" style="background: var(--paper2);">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 2rem; text-align: center; position: relative;">
+    <!-- Section label -->
+    <div class="flex items-center justify-center gap-3 mb-8" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted);">
+      <span style="display: inline-block; width: 24px; height: 1px; background: rgba(10,22,40,0.3);"></span>
+      <span>Two-minute assessment</span>
+      <span style="display: inline-block; width: 24px; height: 1px; background: rgba(10,22,40,0.3);"></span>
+    </div>
+
+    <!-- Headline -->
+    <h2 class="serif mb-10" style="font-size: clamp(2.5rem, 7vw, 6.5rem); line-height: 0.95; color: var(--ink);">
+      Find out if TMS<br/>
+      is <em>right for you.</em>
+    </h2>
+
+    <!-- Subtext -->
+    <p style="font-size: 17px; color: var(--muted); max-width: 32rem; margin: 0 auto 3rem; line-height: 1.6;">
+      Eight questions, validated against clinical screening criteria (PHQ-9 &middot; GAD-7). No account, no email required.
+    </p>
+
+    <!-- CTA buttons -->
+    <div class="flex items-center justify-center gap-4 flex-wrap">
+      <a href="/assessment" class="inline-flex items-center gap-3 rounded-full px-8 py-4 text-white transition-all hover:bg-black"
+         style="font-size: 14px; background: var(--ink); text-decoration: none; font-weight: 500;">
+        Begin assessment
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="/search" class="linky" style="font-size: 14px; color: var(--muted); text-decoration: none;">
+        Or search by city &rarr;
+      </a>
+    </div>
+
+    <!-- Stats row -->
+    <div class="mt-16 pt-10 border-t grid grid-cols-3 gap-8 text-left max-w-xl mx-auto" style="border-color: var(--line);">
+      <div>
+        <div class="serif" style="font-size: 32px; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums; margin-bottom: 0.25rem;">2 min</div>
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted);">Completion time</div>
+      </div>
+      <div>
+        <div class="serif" style="font-size: 32px; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums; margin-bottom: 0.25rem;">8 Q's</div>
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted);">Clinical criteria</div>
+      </div>
+      <div>
+        <div class="serif" style="font-size: 32px; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums; margin-bottom: 0.25rem;">0</div>
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted);">Email required</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.02em; }
+  .linky { position: relative; display: inline-block; }
+  .linky:hover::after { transform: scaleX(1); }
+  .linky::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+</style>

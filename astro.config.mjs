@@ -16,6 +16,9 @@ mode:'standalone',}),
         external: ['@vercel/blob'],
       },
     },
+    optimizeDeps: {
+      include: ['three', '@react-three/fiber', '@react-three/drei', 'its-fine'],
+    },
   },
   integrations: [
     react(),
@@ -30,6 +33,10 @@ mode:'standalone',}),
   },
   prefetch: {
     prefetchAll: false,
-    defaultStrategy: 'viewport',
+    defaultStrategy: 'hover',
+    prefetch: {
+      '/': true,
+      '/us/': true,
+    },
   },
 });

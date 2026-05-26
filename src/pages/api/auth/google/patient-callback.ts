@@ -1,5 +1,10 @@
 import type { APIRoute } from 'astro';
-import { getOrCreateUserByEmail, createSessionCookie } from '../../../../utils/auth';
+import {
+  getOrCreateUserByEmail,
+  createSession,
+  getClientIpFromRequest,
+  isSafeRedirectPath,
+} from '../../../../utils/auth.js';
 import { db } from '../../../../db';
 import { users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -104,15 +109,21 @@ export const GET: APIRoute = async ({ request }) => {
       lastLoginAt: new Date(),
     }).where(eq(users.id, user.id));
 
-    const cookie = createSessionCookie({
-      userId: user.id,
-      email: user.email,
-      role: user.role,
-      clinicId: user.clinicId ?? undefined,
-    });
+    const { cookie } = await createSession(
+      {
+        userId: user.id,
+        email: user.email,
+        role: user.role,
+        clinicId: user.clinicId ?? undefined,
+      },
+      {
+        userAgent: request.headers.get('user-agent') || undefined,
+        ipAddress: getClientIpFromRequest(request),
+      },
+    );
 
-    // Sanitize redirect to prevent open redirect
-    const safeRedirect = redirectTo.startsWith('/') ? redirectTo : '/community';
+    // Sanitize redirect to prevent open redirect (block `//evil.com`).
+    const safeRedirect = isSafeRedirectPath(redirectTo) ? redirectTo : '/community';
 
     return new Response(null, {
       status: 302,

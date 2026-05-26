@@ -2,12 +2,13 @@ import type { APIRoute } from 'astro';
 import {
   getUserByEmail,
   verifyPassword,
-  createSessionCookie,
+  createSession,
   isAccountLocked,
   recordFailedLoginAttempt,
   clearFailedLoginAttempts,
-} from '../../../utils/auth';
-import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+  logLoginActivity,
+} from '../../../utils/auth.js';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit.js';
 
 export const prerender = false;
 
@@ -50,9 +51,19 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    const userAgent = request.headers.get('user-agent') || '';
     const valid = await verifyPassword(password, user.passwordHash);
     if (!valid) {
       await recordFailedLoginAttempt(user.id);
+      // Audit-log failed patient login attempts so brute-force is visible.
+      await logLoginActivity({
+        userId: user.id,
+        email: user.email,
+        success: false,
+        ipAddress: ip,
+        userAgent,
+        failureReason: 'Invalid password',
+      }).catch((err) => console.error('[patient-login] log failure:', err));
       return new Response(JSON.stringify({ error: 'Invalid email or password' }), {
         status: 401,
         headers: { 'Content-Type': 'application/json' },
@@ -62,11 +73,20 @@ export const POST: APIRoute = async ({ request }) => {
     // Password correct — clear failed attempts
     await clearFailedLoginAttempts(user.id);
 
-    const cookie = createSessionCookie({
+    // Use createSession (writes to sessions table) so logout / invalidate
+    // can revoke the cookie before its 7-day JWT expiry.
+    const { cookie } = await createSession(
+      { userId: user.id, email: user.email, role: user.role },
+      { userAgent, ipAddress: ip },
+    );
+
+    await logLoginActivity({
       userId: user.id,
       email: user.email,
-      role: user.role,
-    });
+      success: true,
+      ipAddress: ip,
+      userAgent,
+    }).catch((err) => console.error('[patient-login] log success:', err));
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

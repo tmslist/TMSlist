@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-04
 category: patient-guide
 tags: ["finding a clinic", "how to", "credentials", "tms locator"]
-image: "https://images.unsplash.com/photo-1631815588090-d4bfec5b0cc0?w=800&h=400&fit=crop"
+image: "/images/blog-covers/how-to-find-tms-clinic-guide.svg"
 ---
 
 Finding the right TMS clinic is one of the most important decisions you will make in your treatment journey. Unlike starting a medication, which requires only a prescription, TMS is a multi-week commitment that depends heavily on the expertise of the clinical team, the quality of the equipment, and the support systems in place during treatment.

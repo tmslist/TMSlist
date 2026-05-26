@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-31
 category: stories
 tags: ["patient story", "bipolar depression", "mixed results", "honest account"]
-image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## Depression with a twist

@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
 import { db } from '../../../db';
 import { clinics } from '../../../db/schema';
-import { clinicSubmitSchema } from '../../../db/validation';
-import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+import { clinicSubmitSchema } from '../../../db/validation.js';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit.js';
 import { getPostHogServer } from '../../../lib/posthog-server';
 
 export const prerender = false;

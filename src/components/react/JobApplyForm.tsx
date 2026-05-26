@@ -20,13 +20,13 @@ export default function JobApplyForm({ jobId, jobTitle, clinicName, applicationU
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-slate-900 mb-2">Apply at {clinicName}</h3>
-        <p className="text-slate-500 mb-6">This position uses an external application form.</p>
+        <h3 className="text-xl font-bold text-[var(--ink)] mb-2">Apply at {clinicName}</h3>
+        <p className="text-[var(--muted)] mb-6">This position uses an external application form.</p>
         <a
           href={applicationUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block px-8 py-3 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-colors"
+          className="inline-block px-8 py-3 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white font-semibold rounded-xl transition-colors"
         >
           Apply on {clinicName}'s website
         </a>
@@ -78,11 +78,11 @@ export default function JobApplyForm({ jobId, jobTitle, clinicName, applicationU
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/>
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-slate-900 mb-2">Application Submitted!</h3>
-        <p className="text-slate-500 mb-6 max-w-md mx-auto">
+        <h3 className="text-xl font-bold text-[var(--ink)] mb-2">Application Submitted!</h3>
+        <p className="text-[var(--muted)] mb-6 max-w-md mx-auto">
           Your application for <strong>{jobTitle}</strong> has been sent to {clinicName}. They will be in touch soon.
         </p>
-        <a href="/careers/" className="text-violet-600 hover:text-violet-500 font-semibold text-sm">
+        <a href="/careers/" className="text-[var(--accent)] hover:text-[var(--accent2)] font-semibold text-sm">
           ← Browse more jobs
         </a>
       </div>
@@ -92,7 +92,7 @@ export default function JobApplyForm({ jobId, jobTitle, clinicName, applicationU
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+        <label className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">
           Full Name <span className="text-red-500">*</span>
         </label>
         <input
@@ -101,12 +101,12 @@ export default function JobApplyForm({ jobId, jobTitle, clinicName, applicationU
           required
           minLength={2}
           placeholder="Jane Smith"
-          className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-colors"
+          className="w-full px-4 py-2.5 text-sm border border-[var(--line)] rounded-xl focus:outline-none focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-colors"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+        <label className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">
           Email <span className="text-red-500">*</span>
         </label>
         <input
@@ -114,56 +114,56 @@ export default function JobApplyForm({ jobId, jobTitle, clinicName, applicationU
           name="applicantEmail"
           required
           placeholder="jane@example.com"
-          className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-colors"
+          className="w-full px-4 py-2.5 text-sm border border-[var(--line)] rounded-xl focus:outline-none focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-colors"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-          Phone <span className="text-slate-400 text-xs">(optional)</span>
+        <label className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">
+          Phone <span className="text-[var(--muted)] text-xs">(optional)</span>
         </label>
         <input
           type="tel"
           name="applicantPhone"
           placeholder="(555) 000-0000"
-          className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-colors"
+          className="w-full px-4 py-2.5 text-sm border border-[var(--line)] rounded-xl focus:outline-none focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-colors"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-          LinkedIn URL <span className="text-slate-400 text-xs">(optional)</span>
+        <label className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">
+          LinkedIn URL <span className="text-[var(--muted)] text-xs">(optional)</span>
         </label>
         <input
           type="url"
           name="linkedInUrl"
           placeholder="https://linkedin.com/in/janesmith"
-          className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-colors"
+          className="w-full px-4 py-2.5 text-sm border border-[var(--line)] rounded-xl focus:outline-none focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-colors"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-          Resume URL <span className="text-slate-400 text-xs">(optional)</span>
+        <label className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">
+          Resume URL <span className="text-[var(--muted)] text-xs">(optional)</span>
         </label>
         <input
           type="url"
           name="resumeUrl"
           placeholder="https://drive.google.com/... or https://dropbox.com/..."
-          className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-colors"
+          className="w-full px-4 py-2.5 text-sm border border-[var(--line)] rounded-xl focus:outline-none focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-colors"
         />
-        <p className="text-xs text-slate-400 mt-1">Paste a link to your resume (Google Drive, Dropbox, etc.)</p>
+        <p className="text-xs text-[var(--muted)] mt-1">Paste a link to your resume (Google Drive, Dropbox, etc.)</p>
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-          Cover Letter / Message <span className="text-slate-400 text-xs">(optional)</span>
+        <label className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">
+          Cover Letter / Message <span className="text-[var(--muted)] text-xs">(optional)</span>
         </label>
         <textarea
           name="coverLetter"
           rows={5}
           placeholder="Tell us about yourself and why you'd be a great fit for this role..."
-          className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-colors resize-none"
+          className="w-full px-4 py-2.5 text-sm border border-[var(--line)] rounded-xl focus:outline-none focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-colors resize-none"
         />
       </div>
 
@@ -176,12 +176,12 @@ export default function JobApplyForm({ jobId, jobTitle, clinicName, applicationU
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="w-full px-6 py-3 bg-violet-600 hover:bg-violet-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
+        className="w-full px-6 py-3 bg-[var(--ink)] hover:bg-[var(--ink2)] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
       >
         {status === 'submitting' ? 'Submitting...' : `Apply to ${clinicName}`}
       </button>
 
-      <p className="text-xs text-slate-400 text-center">
+      <p className="text-xs text-[var(--muted)] text-center">
         Your information will be sent directly to {clinicName}. We never share your data with third parties.
       </p>
     </form>

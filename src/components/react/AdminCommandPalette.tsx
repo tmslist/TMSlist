@@ -1,143 +1,194 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-interface CommandItem {
-  id: string;
-  label: string;
-  description?: string;
-  icon?: string;
+interface SearchResult {
+  type: 'clinic' | 'doctor' | 'user' | 'lead' | 'blog';
+  title: string;
+  subtitle: string;
   href: string;
-  category: string;
+  publicHref?: string;
 }
 
-const COMMANDS: CommandItem[] = [
-  { id: 'dashboard', label: 'Dashboard', href: '/admin/', category: 'Overview' },
-  { id: 'clinics', label: 'Clinics', description: 'Manage all TMS clinics', href: '/admin/clinics', category: 'Content' },
-  { id: 'doctors', label: 'Doctors', description: 'Manage doctor profiles', href: '/admin/doctors', category: 'Content' },
-  { id: 'reviews', label: 'Reviews', description: 'Moderate patient reviews', href: '/admin/reviews', category: 'Content' },
-  { id: 'blog', label: 'Blog Posts', description: 'Create and edit blog content', href: '/admin/blog', category: 'Content' },
-  { id: 'content', label: 'Page Content', description: 'Edit static pages', href: '/admin/content', category: 'Content' },
-  { id: 'leads', label: 'Leads', description: 'View patient enquiries', href: '/admin/leads', category: 'Revenue' },
-  { id: 'revenue', label: 'Revenue', description: 'Revenue reports', href: '/admin/revenue', category: 'Revenue' },
-  { id: 'analytics', label: 'Analytics', description: 'Site traffic analytics', href: '/admin/analytics', category: 'Revenue' },
-  { id: 'users', label: 'Users', description: 'Manage user accounts', href: '/admin/users', category: 'Settings' },
-  { id: 'settings', label: 'Settings', description: 'Admin configuration', href: '/admin/settings', category: 'Settings' },
-  { id: 'seo', label: 'SEO', description: 'Meta tags and redirects', href: '/admin/seo', category: 'Settings' },
-  { id: 'advertising', label: 'Advertising', description: 'Ad campaigns', href: '/admin/advertising', category: 'Settings' },
-  { id: 'audit', label: 'Audit Log', description: 'Activity history', href: '/admin/audit-log', category: 'Settings' },
-  { id: 'data-quality', label: 'Data Quality', description: 'Data integrity checks', href: '/admin/data-quality', category: 'Settings' },
-];
-
-const CATEGORY_ICONS: Record<string, string> = {
-  Overview: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
-  Content: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
-  Revenue: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-  Settings: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+const TYPE_LABELS: Record<SearchResult['type'], string> = {
+  clinic: 'Clinic', doctor: 'Doctor', user: 'User', lead: 'Lead', blog: 'Blog',
+};
+const TYPE_COLORS: Record<SearchResult['type'], string> = {
+  clinic: 'bg-blue-100 text-blue-700',
+  doctor: 'bg-emerald-100 text-emerald-700',
+  user: 'bg-purple-100 text-purple-700',
+  lead: 'bg-amber-100 text-amber-700',
+  blog: 'bg-rose-100 text-rose-700',
 };
 
-function CategoryIcon({ category }: { category: string }) {
-  const path = CATEGORY_ICONS[category] || CATEGORY_ICONS.Content;
-  return (
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d={path} />
-    </svg>
-  );
-}
+const QUICK_LINKS: { label: string; href: string; category: string }[] = [
+  { label: 'Dashboard', href: '/admin/dashboard', category: 'Overview' },
+  { label: 'Clinics', href: '/admin/clinics', category: 'Content' },
+  { label: 'Doctors', href: '/admin/doctors', category: 'Content' },
+  { label: 'Reviews', href: '/admin/reviews', category: 'Content' },
+  { label: 'Blog Posts', href: '/admin/blog', category: 'Content' },
+  { label: 'Page Content', href: '/admin/content', category: 'Content' },
+  { label: 'Leads', href: '/admin/leads', category: 'Revenue' },
+  { label: 'Revenue', href: '/admin/revenue', category: 'Revenue' },
+  { label: 'Analytics', href: '/admin/analytics', category: 'Revenue' },
+  { label: 'Tracking & Pixels', href: '/admin/tracking', category: 'Settings' },
+  { label: 'SEO', href: '/admin/seo', category: 'Settings' },
+  { label: 'Users', href: '/admin/users', category: 'Settings' },
+  { label: 'Settings', href: '/admin/settings', category: 'Settings' },
+  { label: 'Audit Log', href: '/admin/audit', category: 'Settings' },
+  { label: 'Data Quality', href: '/admin/data-quality', category: 'Settings' },
+];
 
 export default function AdminCommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [selected, setSelected] = useState(0);
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const filtered = query.trim()
-    ? COMMANDS.filter(c =>
-        c.label.toLowerCase().includes(query.toLowerCase()) ||
-        c.description?.toLowerCase().includes(query.toLowerCase())
-      )
-    : COMMANDS;
-
-  const openPalette = useCallback(() => {
-    setOpen(true);
-    setQuery('');
-    setSelected(0);
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setOpen(o => !o);
+      }
+      if (e.key === 'Escape') setOpen(false);
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
   useEffect(() => {
-    function handleKey(e: KeyboardEvent) {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        open ? setOpen(false) : openPalette();
-      }
-      if (!open) return;
-      if (e.key === 'Escape') { setOpen(false); return; }
-      if (e.key === 'ArrowDown') { e.preventDefault(); setSelected(s => Math.min(s + 1, filtered.length - 1)); }
-      if (e.key === 'ArrowUp') { e.preventDefault(); setSelected(s => Math.max(s - 1, 0)); }
-      if (e.key === 'Enter' && filtered[selected]) {
-        window.location.href = filtered[selected].href;
-        setOpen(false);
-      }
-    }
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [open, selected, filtered, openPalette]);
+    if (open) setTimeout(() => inputRef.current?.focus(), 50);
+    else { setQuery(''); setResults([]); setActiveIdx(0); }
+  }, [open]);
 
-  if (!open) return (
-    <div className="hidden md:flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg text-sm text-gray-500 cursor-pointer hover:bg-gray-200 transition-colors" onClick={openPalette}>
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-      <span className="hidden lg:inline">Search...</span>
-      <kbd className="hidden lg:inline text-xs bg-white px-1.5 py-0.5 rounded border border-gray-300">⌘K</kbd>
-    </div>
-  );
+  useEffect(() => {
+    const q = query.trim();
+    if (q.length < 2) { setResults([]); return; }
+    setLoading(true);
+    const t = setTimeout(() => {
+      fetch(`/api/admin/search?q=${encodeURIComponent(q)}`)
+        .then(r => r.json())
+        .then(d => { setResults(d.results || []); setActiveIdx(0); })
+        .catch(() => setResults([]))
+        .finally(() => setLoading(false));
+    }, 180);
+    return () => clearTimeout(t);
+  }, [query]);
+
+  const showQuick = query.trim().length < 2;
+  const filteredQuick = showQuick
+    ? QUICK_LINKS.filter(l => l.label.toLowerCase().includes(query.trim().toLowerCase()))
+    : [];
+  const items: Array<SearchResult | typeof QUICK_LINKS[number]> = showQuick ? filteredQuick : results;
+
+  function go(href: string) {
+    setOpen(false);
+    window.location.href = href;
+  }
+
+  function onContainerKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActiveIdx(i => Math.min(i + 1, items.length - 1)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActiveIdx(i => Math.max(i - 1, 0)); }
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      const item: any = items[activeIdx];
+      if (item?.href) go(item.href);
+    }
+  }
+
+  if (!open) {
+    return (
+      <button
+        onClick={() => setOpen(true)}
+        className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[var(--line)] bg-white/60 hover:bg-white text-xs text-[var(--muted)] transition-colors"
+        aria-label="Open command palette"
+      >
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <span>Search…</span>
+        <kbd className="ml-2 px-1.5 py-0.5 rounded border border-[var(--line)] bg-[var(--paper2)] font-mono text-[10px]">⌘K</kbd>
+      </button>
+    );
+  }
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-start justify-center pt-[15vh]">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
-      <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
-        {/* Search Input */}
-        <div className="flex items-center gap-3 px-4 py-4 border-b border-gray-100">
-          <svg className="w-5 h-5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+    <div
+      className="fixed inset-0 z-[400] flex items-start justify-center pt-[12vh] px-4 bg-black/40 backdrop-blur-sm"
+      onClick={() => setOpen(false)}
+      onKeyDown={onContainerKeyDown}
+    >
+      <div
+        className="w-full max-w-xl bg-white rounded-2xl shadow-2xl border border-[var(--line)] overflow-hidden"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-[var(--line)]">
+          <svg className="w-5 h-5 text-[var(--muted)]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           <input
-            autoFocus
-            type="text"
-            placeholder="Search pages, actions..."
+            ref={inputRef}
             value={query}
-            onChange={e => { setQuery(e.target.value); setSelected(0); }}
-            className="flex-1 text-base outline-none placeholder-gray-400"
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Search clinics, doctors, leads, users, posts…"
+            className="flex-1 bg-transparent outline-none text-base text-[var(--ink)] placeholder:text-[var(--muted)]"
           />
-          <kbd className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">ESC</kbd>
+          <kbd className="px-1.5 py-0.5 rounded border border-[var(--line)] bg-[var(--paper2)] font-mono text-[10px] text-[var(--muted)]">ESC</kbd>
         </div>
 
-        {/* Results */}
-        <div className="max-h-[50vh] overflow-y-auto py-2">
-          {filtered.length === 0 ? (
-            <div className="px-4 py-8 text-center text-gray-500">No results for "{query}"</div>
-          ) : (
-            filtered.map((cmd, i) => (
-              <a
-                key={cmd.id}
-                href={cmd.href}
-                onClick={() => setOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 mx-2 rounded-xl transition-colors ${i === selected ? 'bg-violet-50 text-violet-700' : 'hover:bg-gray-50'}`}
-                onMouseEnter={() => setSelected(i)}
-              >
-                <span className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${i === selected ? 'bg-violet-100 text-violet-600' : 'bg-gray-100 text-gray-500'}`}>
-                  <CategoryIcon category={cmd.category} />
-                </span>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm font-medium text-gray-900 truncate">{cmd.label}</div>
-                  {cmd.description && <div className="text-xs text-gray-400 truncate">{cmd.description}</div>}
-                </div>
-                <span className="text-xs text-gray-400 shrink-0">{cmd.category}</span>
-                {i === selected && <svg className="w-4 h-4 text-violet-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>}
-              </a>
-            ))
+        <div className="max-h-[60vh] overflow-y-auto py-2">
+          <div className="px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--muted)]">
+            {showQuick ? 'Quick links' : loading ? 'Searching…' : `${results.length} result${results.length === 1 ? '' : 's'}`}
+          </div>
+
+          {items.length === 0 && !loading && (
+            <div className="px-4 py-8 text-center text-sm text-[var(--muted)]">
+              {showQuick ? 'No matching pages' : 'No matches. Try a different query.'}
+            </div>
           )}
+
+          {showQuick
+            ? filteredQuick.map((l, i) => (
+                <button
+                  key={l.href}
+                  type="button"
+                  onClick={() => go(l.href)}
+                  onMouseEnter={() => setActiveIdx(i)}
+                  className={`w-full text-left px-4 py-2.5 flex items-center gap-3 ${i === activeIdx ? 'bg-[var(--paper2)]' : ''}`}
+                >
+                  <span className="text-sm text-[var(--ink)] flex-1">{l.label}</span>
+                  <span className="text-[10px] uppercase tracking-wider text-[var(--muted)]">{l.category}</span>
+                </button>
+              ))
+            : results.map((r, i) => (
+                <div
+                  key={`${r.type}-${i}`}
+                  onMouseEnter={() => setActiveIdx(i)}
+                  onClick={() => go(r.href)}
+                  className={`px-4 py-2.5 flex items-center gap-3 cursor-pointer ${i === activeIdx ? 'bg-[var(--paper2)]' : ''}`}
+                >
+                  <span className={`text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded ${TYPE_COLORS[r.type]}`}>
+                    {TYPE_LABELS[r.type]}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium text-[var(--ink)] truncate">{r.title}</div>
+                    {r.subtitle && <div className="text-xs text-[var(--muted)] truncate">{r.subtitle}</div>}
+                  </div>
+                  {r.publicHref && (
+                    <a
+                      href={r.publicHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={e => e.stopPropagation()}
+                      className="text-xs text-[var(--muted)] hover:text-[var(--ink)] shrink-0"
+                      title="Open public page"
+                    >↗</a>
+                  )}
+                </div>
+              ))}
         </div>
 
-        {/* Footer */}
-        <div className="px-4 py-3 border-t border-gray-100 flex items-center gap-4 text-xs text-gray-400">
-          <span><kbd className="bg-gray-100 px-1.5 py-0.5 rounded">↑↓</kbd> navigate</span>
-          <span><kbd className="bg-gray-100 px-1.5 py-0.5 rounded">↵</kbd> select</span>
-          <span><kbd className="bg-gray-100 px-1.5 py-0.5 rounded">esc</kbd> close</span>
+        <div className="px-4 py-2 border-t border-[var(--line)] bg-[var(--paper2)] flex items-center gap-4 text-[11px] text-[var(--muted)]">
+          <span><kbd className="px-1 rounded border border-[var(--line)] bg-white font-mono">↑↓</kbd> navigate</span>
+          <span><kbd className="px-1 rounded border border-[var(--line)] bg-white font-mono">↵</kbd> open</span>
+          <span><kbd className="px-1 rounded border border-[var(--line)] bg-white font-mono">esc</kbd> close</span>
         </div>
       </div>
     </div>

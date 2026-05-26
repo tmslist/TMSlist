@@ -1,7 +1,7 @@
 ---
 title: "TMS vs DBS: Non-Invasive vs Surgical Brain Stimulation"
 description: "Comparing non-invasive TMS with surgically implanted deep brain stimulation for treatment-resistant depression — when each is appropriate."
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 treatmentA: "TMS"
 treatmentB: "DBS (Deep Brain Stimulation)"
 verdict: "TMS is non-invasive, FDA-approved, and accessible. DBS is experimental, requires brain surgery, and is a genuine last resort. Almost everyone should try TMS before DBS is even discussed."
@@ -70,9 +70,9 @@ Search for [TMS providers](/us/) or explore other [device comparisons](/compare/
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>TMS is non-invasive and FDA-approved for depression</li>
     <li>DBS is experimental, invasive, and not FDA-approved for depression</li>
     <li>DBS requires brain surgery with serious surgical risks</li>
@@ -81,11 +81,11 @@ Search for [TMS providers](/us/) or explore other [device comparisons](/compare/
   </ul>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>

@@ -77,14 +77,14 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Sitemap Manager</h2>
-          <p className="text-sm text-gray-500 mt-1">Manage XML sitemaps and search engine indexing</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)]">Sitemap Manager</h2>
+          <p className="text-sm text-[var(--muted)] mt-1">Manage XML sitemaps and search engine indexing</p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={handleGenerateSitemap}
             disabled={loading}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[var(--ink)] rounded-lg hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
           >
             {loading ? (
               <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -103,33 +103,33 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Total URLs</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{totalUrls.toLocaleString()}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Total URLs</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{totalUrls.toLocaleString()}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Active</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Active</p>
           <p className="text-2xl font-bold text-emerald-600 mt-1">{activeUrls}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Warnings</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Warnings</p>
           <p className="text-2xl font-bold text-amber-600 mt-1">{warningUrls}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Errors</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Errors</p>
           <p className="text-2xl font-bold text-red-600 mt-1">{errorUrls}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Last Ping</p>
-          <p className="text-lg font-bold text-gray-900 mt-1">Apr 18, 10:30 AM</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Last Ping</p>
+          <p className="text-lg font-bold text-[var(--ink)] mt-1">Apr 18, 10:30 AM</p>
           <p className="text-xs text-emerald-600 mt-1">Successful</p>
         </div>
       </div>
 
       {/* Ping Search Engines */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
-        <h3 className="font-semibold text-gray-900 mb-3">Ping Search Engines</h3>
-        <p className="text-sm text-gray-500 mb-4">Notify Google and Bing when your sitemap is updated.</p>
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm p-5">
+        <h3 className="font-semibold text-[var(--ink)] mb-3">Ping Search Engines</h3>
+        <p className="text-sm text-[var(--muted)] mb-4">Notify Google and Bing when your sitemap is updated.</p>
         <div className="flex items-center gap-3">
           <button
             onClick={() => handlePing('google')}
@@ -147,7 +147,7 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
           <button
             onClick={() => handlePing('bing')}
             disabled={pingLoading}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[var(--ink)] rounded-lg hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -158,9 +158,9 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
       </div>
 
       {/* URL List */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
-        <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
-          <h3 className="font-semibold text-gray-900">Sitemap URLs</h3>
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm">
+        <div className="px-5 py-4 border-b border-[var(--line)] flex items-center justify-between">
+          <h3 className="font-semibold text-[var(--ink)]">Sitemap URLs</h3>
           <div className="flex items-center gap-2">
             {(['all', 'active', 'warning', 'error'] as const).map((f) => (
               <button
@@ -168,8 +168,8 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
                 onClick={() => setFilter(f)}
                 className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
                   filter === f
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]'
+                    : 'bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
                 }`}
               >
                 {f.charAt(0).toUpperCase() + f.slice(1)}
@@ -183,25 +183,25 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-100">
-                <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">URL</th>
-                <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Priority</th>
-                <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Frequency</th>
-                <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Last Modified</th>
-                <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Status</th>
-                <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Actions</th>
+              <tr className="border-b border-[var(--line)]">
+                <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">URL</th>
+                <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Priority</th>
+                <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Frequency</th>
+                <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Last Modified</th>
+                <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Status</th>
+                <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-50">
+            <tbody className="divide-y divide-[var(--line)]">
               {filteredUrls.map((url) => (
-                <tr key={url.id} className="hover:bg-gray-50 transition-colors">
+                <tr key={url.id} className="hover:bg-[var(--paper2)] transition-colors">
                   <td className="px-5 py-3">
-                    <span className="text-sm font-mono text-gray-800">{url.url}</span>
+                    <span className="text-sm font-mono text-[var(--ink)]">{url.url}</span>
                   </td>
                   <td className="px-5 py-3">
                     <select
                       defaultValue={url.priority}
-                      className="text-xs border border-gray-200 rounded px-2 py-1 bg-white text-gray-700 focus:ring-1 focus:ring-blue-500"
+                      className="text-xs border border-[var(--line)] rounded px-2 py-1 bg-white text-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.2)]"
                     >
                       <option value="high">High</option>
                       <option value="medium">Medium</option>
@@ -211,7 +211,7 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
                   <td className="px-5 py-3">
                     <select
                       defaultValue={url.frequency}
-                      className="text-xs border border-gray-200 rounded px-2 py-1 bg-white text-gray-700 focus:ring-1 focus:ring-blue-500"
+                      className="text-xs border border-[var(--line)] rounded px-2 py-1 bg-white text-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.2)]"
                     >
                       <option value="always">Always</option>
                       <option value="hourly">Hourly</option>
@@ -223,7 +223,7 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
                     </select>
                   </td>
                   <td className="px-5 py-3">
-                    <span className="text-sm text-gray-600">{url.lastModified}</span>
+                    <span className="text-sm text-[var(--ink2)]">{url.lastModified}</span>
                   </td>
                   <td className="px-5 py-3">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
@@ -241,7 +241,7 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
                   </td>
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-2">
-                      <button className="text-xs text-blue-600 hover:text-blue-700 font-medium">Edit</button>
+                      <button className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium">Edit</button>
                       <button className="text-xs text-red-600 hover:text-red-700 font-medium">Remove</button>
                     </div>
                   </td>
@@ -250,22 +250,22 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
             </tbody>
           </table>
         </div>
-        <div className="px-5 py-4 border-t border-gray-200 flex items-center justify-between">
-          <p className="text-sm text-gray-500">{filteredUrls.length} URLs shown</p>
-          <button className="text-xs text-blue-600 hover:text-blue-700 font-medium">+ Add URL</button>
+        <div className="px-5 py-4 border-t border-[var(--line)] flex items-center justify-between">
+          <p className="text-sm text-[var(--muted)]">{filteredUrls.length} URLs shown</p>
+          <button className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium">+ Add URL</button>
         </div>
       </div>
 
       {/* Sitemap Preview */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
-        <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
-          <h3 className="font-semibold text-gray-900">XML Preview</h3>
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm">
+        <div className="px-5 py-4 border-b border-[var(--line)] flex items-center justify-between">
+          <h3 className="font-semibold text-[var(--ink)]">XML Preview</h3>
           <div className="flex items-center gap-2">
             <a
               href="/sitemap.xml"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+              className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium flex items-center gap-1"
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -275,7 +275,7 @@ export default function AdminSitemapManager({ initialConfigs = [] }: AdminSitema
           </div>
         </div>
         <div className="p-5">
-          <pre className="bg-gray-900 text-green-400 text-xs p-4 rounded-lg overflow-x-auto font-mono leading-relaxed">
+          <pre className="bg-[var(--ink)] text-green-400 text-xs p-4 rounded-lg overflow-x-auto font-mono leading-relaxed">
 {`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>

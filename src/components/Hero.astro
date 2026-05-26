@@ -1,4 +1,7 @@
 ---
+import { getVisitorCountry } from "../utils/visitorCountry";
+import { COUNTRY_URL_PREFIXES } from "../utils/dataHelpers";
+
 interface Props {
   title?: string;
   subtitle?: string;
@@ -10,6 +13,9 @@ const {
   title = "The directory for evidence-based TMS therapy.",
   subtitle = "A curated atlas of verified transcranial magnetic stimulation providers - where the clinicians who practice it actually list themselves.",
 } = Astro.props;
+
+const VISITOR_COUNTRY = getVisitorCountry(Astro.isPrerendered ? null : Astro.cookies, Astro.url);
+const visitorCountryUrl = `/${COUNTRY_URL_PREFIXES[VISITOR_COUNTRY] || VISITOR_COUNTRY.toLowerCase()}/`;
 
 // Popular search tags
 const popularSearches = [
@@ -32,7 +38,7 @@ const popularSearches = [
   <!-- Radial veil at top -->
   <div
     class="absolute inset-x-0 -top-24 h-96 pointer-events-none"
-    style="background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(27, 75, 90, 0.06), transparent 70%);"
+    style="background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(10,22,40,0.06), transparent 70%);"
     aria-hidden="true"
   ></div>
 
@@ -95,11 +101,11 @@ const popularSearches = [
           <div class="flex -space-x-2">
             <div
               class="w-8 h-8 rounded-full border-2"
-              style="background: linear-gradient(135deg, var(--paper2), rgba(27,75,90,0.2)); border-color: var(--paper);"
+              style="background: linear-gradient(135deg, var(--paper2), rgba(10,22,40,0.2)); border-color: var(--paper);"
             ></div>
             <div
               class="w-8 h-8 rounded-full border-2"
-              style="background: linear-gradient(135deg, var(--paper2), rgba(46,122,143,0.2)); border-color: var(--paper);"
+              style="background: linear-gradient(135deg, var(--paper2), rgba(30,42,59,0.2)); border-color: var(--paper);"
             ></div>
             <div
               class="w-8 h-8 rounded-full border-2"
@@ -107,7 +113,7 @@ const popularSearches = [
             ></div>
             <div
               class="w-8 h-8 rounded-full border-2"
-              style="background: linear-gradient(135deg, var(--paper2), rgba(27,75,90,0.15)); border-color: var(--paper);"
+              style="background: linear-gradient(135deg, var(--paper2), rgba(10,22,40,0.15)); border-color: var(--paper);"
             ></div>
           </div>
           <div class="text-[12px]" style="color: var(--muted); line-height: 1.4;">
@@ -180,7 +186,7 @@ const popularSearches = [
       </div>
       <!-- Search button -->
       <a
-        href="/us/"
+        href={visitorCountryUrl}
         class="flex items-center gap-2 px-6 py-4 rounded-xl text-[14px] font-medium hover:opacity-90 transition-colors"
         style="background: var(--ink); color: white;"
       >

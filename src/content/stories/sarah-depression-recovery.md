@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-28
 category: stories
 tags: ["patient story", "depression", "treatment-resistant", "remission"]
-image: "https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## Ten years of trying everything
@@ -89,21 +89,21 @@ She went back to teaching full-time within days of finishing treatment. She's ta
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Find TMS Providers</h4>
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--warm)] mb-3 text-base">Find TMS Providers</h4>
   <div class="grid grid-cols-2 gap-2">
-    <a href="/us/" class="text-sm text-violet-700 hover:underline">Find a Clinic</a>
-    <a href="/providers/hospital-based/" class="text-sm text-violet-700 hover:underline">Hospital-Based TMS</a>
-    <a href="/providers/private-practice/" class="text-sm text-violet-700 hover:underline">Private Practice TMS</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-sm text-violet-700 hover:underline">Am I a Candidate?</a>
+    <a href="/us/" class="text-sm text-[var(--warm)] hover:underline">Find a Clinic</a>
+    <a href="/providers/hospital-based/" class="text-sm text-[var(--warm)] hover:underline">Hospital-Based TMS</a>
+    <a href="/providers/private-practice/" class="text-sm text-[var(--warm)] hover:underline">Private Practice TMS</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-sm text-[var(--warm)] hover:underline">Am I a Candidate?</a>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>
@@ -112,14 +112,14 @@ She went back to teaching full-time within days of finishing treatment. She's ta
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
 title: "How TMS Gave Me My Life Back After 10 Years of Depression"
 description: "Sarah, a 34-year-old teacher from Portland, shares her journey through treatment-resistant depression and how TMS therapy finally brought her into full remission after a decade of struggling."
 author: "TMS List Editorial Team"
 publishDate: 2026-03-28
 category: stories
 tags: ["patient story", "depression", "treatment-resistant", "remission"]
-image: "https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## Ten years of trying everything
@@ -202,12 +202,12 @@ She went back to teaching full-time within days of finishing treatment. She's ta
 
 
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Find TMS Providers</h4>
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--warm)] mb-3 text-base">Find TMS Providers</h4>
   <div class="grid grid-cols-2 gap-2">
-    <a href="/us/" class="text-sm text-violet-700 hover:underline">Find a Clinic</a>
-    <a href="/providers/hospital-based/" class="text-sm text-violet-700 hover:underline">Hospital-Based TMS</a>
-    <a href="/providers/private-practice/" class="text-sm text-violet-700 hover:underline">Private Practice TMS</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-sm text-violet-700 hover:underline">Am I a Candidate?</a>
+    <a href="/us/" class="text-sm text-[var(--warm)] hover:underline">Find a Clinic</a>
+    <a href="/providers/hospital-based/" class="text-sm text-[var(--warm)] hover:underline">Hospital-Based TMS</a>
+    <a href="/providers/private-practice/" class="text-sm text-[var(--warm)] hover:underline">Private Practice TMS</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-sm text-[var(--warm)] hover:underline">Am I a Candidate?</a>
   </div>
 </div>

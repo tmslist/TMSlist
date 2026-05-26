@@ -1,14 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#4F46E5"/>
-      <stop offset="100%" stop-color="#D946EF"/>
-    </linearGradient>
-  </defs>
-  <!-- Background rounded square -->
-  <rect width="128" height="128" rx="24" fill="url(#g)"/>
-  <!-- Magnetic wave arcs -->
-  <path d="M64 24 C 40 24, 22 46, 22 70 C 22 94, 40 104, 64 104" stroke="white" stroke-width="10" stroke-linecap="round" fill="none"/>
-  <path d="M80 34 C 56 34, 42 50, 42 70 C 42 90, 56 96, 80 96" stroke="white" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.7"/>
-  <path d="M96 44 C 78 44, 66 56, 66 70 C 66 84, 78 86, 96 86" stroke="white" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <rect width="128" height="128" rx="24" fill="#0A1628"/>
+  <path d="M64 24 C 40 24, 22 46, 22 70 C 22 94, 40 104, 64 104" stroke="#FBFAF7" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <path d="M80 34 C 56 34, 42 50, 42 70 C 42 90, 56 96, 80 96" stroke="#FBFAF7" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <path d="M96 44 C 78 44, 66 56, 66 70 C 66 84, 78 86, 96 86" stroke="#C9654A" stroke-width="10" stroke-linecap="round" fill="none"/>
 </svg>

@@ -10,14 +10,14 @@ const { icon, color, size = 'md' } = Astro.props;
 const sizeClass = size === 'lg' ? 'w-10 h-10 p-2' : size === 'sm' ? 'w-6 h-6 p-1' : 'w-8 h-8 p-1.5';
 
 const COLOR_CLASSES: Record<string, string> = {
-  violet: 'bg-[#1B4B5A]100 text-[#1B4B5A]',
+  violet: 'bg-[rgba(10,22,40,0.15)] text-[var(--accent)]',
   emerald: 'bg-emerald-100 text-emerald-600',
   amber: 'bg-amber-100 text-amber-600',
-  rose: 'bg-rose-100 text-rose-600',
+  rose: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
   yellow: 'bg-yellow-100 text-yellow-600',
-  blue: 'bg-blue-100 text-blue-600',
+  blue: 'bg-[rgba(10,22,40,0.1)] text-[var(--accent)]',
   teal: 'bg-teal-100 text-teal-600',
-  indigo: 'bg-[#1B4B5A]100 text-[#1B4B5A]',
+  indigo: 'bg-[rgba(10,22,40,0.15)] text-[var(--accent)]',
 };
 
 const colorClass = COLOR_CLASSES[color || 'violet'] || COLOR_CLASSES.violet;

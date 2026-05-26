@@ -109,7 +109,7 @@ export default function EnquiryModal({
       {/* Floating CTA Button */}
       <button
         onClick={open}
-        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-6 py-4 bg-violet-600 text-white font-semibold rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:bg-violet-700 hover:scale-105 transition-all"
+        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-6 py-4 bg-[var(--ink)] text-white font-semibold rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:bg-[var(--ink2)] hover:scale-105 transition-all"
         aria-label="Talk to a TMS Specialist"
       >
         <svg
@@ -139,7 +139,7 @@ export default function EnquiryModal({
         >
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-[rgba(10,22,40,0.60)] backdrop-blur-sm"
             onClick={close}
           />
 
@@ -149,7 +149,7 @@ export default function EnquiryModal({
             className="relative bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] w-full max-w-lg animate-fade-in-up"
           >
             {/* Header */}
-            <div className="bg-violet-600 px-6 py-4 flex justify-between items-center rounded-t-2xl">
+            <div className="bg-[var(--ink)] px-6 py-4 flex justify-between items-center rounded-t-2xl">
               <h3
                 className="text-lg font-semibold text-white"
                 id="enquiry-modal-title"
@@ -158,7 +158,7 @@ export default function EnquiryModal({
               </h3>
               <button
                 onClick={close}
-                className="text-violet-200 hover:text-white transition-colors"
+                className="text-[rgba(10,22,40,0.2)] hover:text-white transition-colors"
                 aria-label="Close modal"
               >
                 <svg
@@ -193,7 +193,7 @@ export default function EnquiryModal({
                     </div>
                   )}
 
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-[var(--muted)]">
                     Tell us about your situation. We'll connect you with a
                     verified TMS specialist.
                   </p>
@@ -201,7 +201,7 @@ export default function EnquiryModal({
                   <div>
                     <label
                       htmlFor="eq-name"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-[var(--ink2)]"
                     >
                       Full Name <span className="text-red-400">*</span>
                     </label>
@@ -212,7 +212,7 @@ export default function EnquiryModal({
                       id="eq-name"
                       required
                       aria-required="true"
-                      className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
+                      className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-2 text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]"
                     />
                   </div>
 
@@ -220,7 +220,7 @@ export default function EnquiryModal({
                     <div>
                       <label
                         htmlFor="eq-email"
-                        className="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-[var(--ink2)]"
                       >
                         Email <span className="text-red-400">*</span>
                       </label>
@@ -230,13 +230,13 @@ export default function EnquiryModal({
                         id="eq-email"
                         required
                         aria-required="true"
-                        className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
+                        className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-2 text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]"
                       />
                     </div>
                     <div>
                       <label
                         htmlFor="eq-phone"
-                        className="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-[var(--ink2)]"
                       >
                         Phone
                       </label>
@@ -244,7 +244,7 @@ export default function EnquiryModal({
                         type="tel"
                         name="phone"
                         id="eq-phone"
-                        className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-violet-500 focus:ring-violet-500"
+                        className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-2 text-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)]"
                       />
                     </div>
                   </div>
@@ -253,7 +253,7 @@ export default function EnquiryModal({
                     <div>
                       <label
                         htmlFor="eq-location"
-                        className="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-[var(--ink2)]"
                       >
                         Location <span className="text-red-400">*</span>
                       </label>
@@ -264,13 +264,13 @@ export default function EnquiryModal({
                         required
                         aria-required="true"
                         placeholder="City, State or ZIP"
-                        className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
+                        className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-2 text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]"
                       />
                     </div>
                     <div>
                       <label
                         htmlFor="eq-clinic"
-                        className="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-[var(--ink2)]"
                       >
                         Clinic (optional)
                       </label>
@@ -278,7 +278,7 @@ export default function EnquiryModal({
                         type="text"
                         name="clinic"
                         id="eq-clinic"
-                        className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-violet-500 focus:ring-violet-500"
+                        className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-2 text-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)]"
                       />
                     </div>
                   </div>
@@ -286,7 +286,7 @@ export default function EnquiryModal({
                   <div>
                     <label
                       htmlFor="eq-role"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-[var(--ink2)]"
                     >
                       I am a... <span className="text-red-400">*</span>
                     </label>
@@ -295,7 +295,7 @@ export default function EnquiryModal({
                       id="eq-role"
                       required
                       aria-required="true"
-                      className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
+                      className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-2 text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]"
                     >
                       <option value="">Select a role...</option>
                       <option>Patient looking for treatment</option>
@@ -308,7 +308,7 @@ export default function EnquiryModal({
                   <div>
                     <label
                       htmlFor="eq-message"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-[var(--ink2)]"
                     >
                       How can we help?
                     </label>
@@ -317,7 +317,7 @@ export default function EnquiryModal({
                       id="eq-message"
                       rows={3}
                       required
-                      className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-violet-500 focus:ring-violet-500"
+                      className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-2 text-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)]"
                       placeholder="I'm interested in TMS for depression..."
                     />
                   </div>
@@ -325,13 +325,13 @@ export default function EnquiryModal({
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-violet-600 hover:bg-violet-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink2)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {status === "submitting"
                       ? "Sending..."
                       : "Request Free Consultation"}
                   </button>
-                  <p className="text-xs text-center text-gray-400">
+                  <p className="text-xs text-center text-[var(--muted)]">
                     Your information is secure and HIPAA compliant.
                   </p>
                 </form>

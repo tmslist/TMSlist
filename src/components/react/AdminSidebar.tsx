@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import AdminCommandPalette from './AdminCommandPalette';
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -203,6 +204,27 @@ const NAV_ITEMS = [
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'bulk',
+    label: 'Bulk Operations',
+    href: '/admin/bulk',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 8h14M5 12h14M5 16h14M9 4h6M9 20h6" />
+      </svg>
+    ),
+  },
+  {
+    key: 'tracking',
+    label: 'Tracking & Pixels',
+    href: '/admin/tracking',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
       </svg>
     ),
   },
@@ -503,17 +525,17 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
   const sidebarContent = (
     <div className="flex flex-col h-full">
       {/* Logo + Notification Bell */}
-      <div className="px-5 py-5 border-b border-gray-100">
+      <div className="px-5 py-5 border-b border-[var(--line)]">
         <div className="flex items-center justify-between">
           <a href="/admin/dashboard" className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-violet-600 rounded-xl flex items-center justify-center">
+            <div className="w-9 h-9 bg-[var(--ink)] rounded-xl flex items-center justify-center">
               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
             <div>
-              <span className="text-lg font-bold text-gray-900">TMS List</span>
-              <span className="block text-[10px] font-semibold text-violet-600 uppercase tracking-wider -mt-0.5">Admin</span>
+              <span className="text-lg font-bold text-[var(--ink)]">TMS List</span>
+              <span className="block text-[10px] font-semibold text-[var(--ink)] uppercase tracking-wider -mt-0.5">Admin</span>
             </div>
           </a>
 
@@ -522,7 +544,7 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
             {/* Search toggle button */}
             <button
               onClick={() => searchInputRef.current?.focus()}
-              className="p-2 rounded-lg text-gray-400 hover:bg-gray-50 hover:text-gray-600 transition-colors"
+              className="p-2 rounded-lg text-[var(--muted)] hover:bg-[var(--paper2)] hover:text-[var(--ink2)] transition-colors"
               aria-label="Search"
               title="Search (Cmd+K)"
             >
@@ -537,8 +559,8 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
                 onClick={() => setNotificationOpen((prev) => !prev)}
                 className={`relative p-2 rounded-lg transition-colors ${
                   hasUnread
-                    ? 'text-violet-600 hover:bg-violet-50'
-                    : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
+                    ? 'text-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)]'
+                    : 'text-[var(--muted)] hover:bg-[var(--paper2)] hover:text-[var(--ink2)]'
                 }`}
                 aria-label={`Notifications${hasUnread ? `, ${unreadCount} unread` : ''}`}
               >
@@ -564,16 +586,16 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
               {notificationOpen && createPortal(
                 <div className="fixed inset-0 z-[9999] pointer-events-none">
                   <div
-                    className="absolute right-4 top-20 w-80 bg-white rounded-xl shadow-xl border border-gray-100 pointer-events-auto max-h-[calc(100vh-6rem)] flex flex-col"
+                    className="absolute right-4 top-20 w-80 bg-white rounded-xl shadow-xl border border-[var(--line)] pointer-events-auto max-h-[calc(100vh-6rem)] flex flex-col"
                     style={{ maxHeight: 'calc(100vh - 6rem)' }}
                   >
                     {/* Dropdown header */}
-                    <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0">
-                      <span className="text-sm font-semibold text-gray-900">Notifications</span>
+                    <div className="px-4 py-3 border-b border-[var(--line)] flex items-center justify-between shrink-0">
+                      <span className="text-sm font-semibold text-[var(--ink)]">Notifications</span>
                       {hasUnread && (
                         <button
                           onClick={handleMarkAllRead}
-                          className="text-xs text-violet-600 hover:text-violet-700 font-medium transition-colors"
+                          className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium transition-colors"
                         >
                           Mark all read
                         </button>
@@ -586,8 +608,8 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
                         <button
                           key={notification.id}
                           onClick={() => handleNotificationClick(notification)}
-                          className={`w-full flex items-start gap-3 px-4 py-3 text-left transition-colors border-b border-gray-50 last:border-0 hover:bg-gray-50 ${
-                            !notification.read ? 'bg-violet-50/40' : ''
+                          className={`w-full flex items-start gap-3 px-4 py-3 text-left transition-colors border-b border-[var(--line)] last:border-0 hover:bg-[var(--paper2)] ${
+                            !notification.read ? 'bg-[rgba(10,22,40,0.08)]/40' : ''
                           }`}
                         >
                           {/* Icon */}
@@ -596,24 +618,24 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
                           {/* Content */}
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2">
-                              <span className="text-sm font-medium text-gray-900">{notification.title}</span>
+                              <span className="text-sm font-medium text-[var(--ink)]">{notification.title}</span>
                               {!notification.read && (
                                 <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
                               )}
                             </div>
-                            <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{notification.description}</p>
-                            <span className="text-[11px] text-gray-400 mt-1 block">{notification.timeAgo}</span>
+                            <p className="text-xs text-[var(--muted)] mt-0.5 line-clamp-2">{notification.description}</p>
+                            <span className="text-[11px] text-[var(--muted)] mt-1 block">{notification.timeAgo}</span>
                           </div>
                         </button>
                       ))}
                     </div>
 
                     {/* Dropdown footer */}
-                    <div className="px-4 py-3 border-t border-gray-100 shrink-0">
+                    <div className="px-4 py-3 border-t border-[var(--line)] shrink-0">
                       <a
                         href="/admin/notifications"
                         onClick={() => setNotificationOpen(false)}
-                        className="flex items-center justify-center text-sm text-violet-600 hover:text-violet-700 font-medium transition-colors"
+                        className="flex items-center justify-center text-sm text-[var(--ink)] hover:text-[var(--ink)] font-medium transition-colors"
                       >
                         View all notifications
                         <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -633,7 +655,7 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
         <div className="relative mt-4">
           <div className="relative">
             <svg
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)] pointer-events-none"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -648,14 +670,14 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
               onFocus={handleSearchFocus}
               onKeyDown={handleSearchKeyDown}
               placeholder="Search clinics, doctors, users, blog posts, leads..."
-              className="w-full pl-9 pr-8 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-lg placeholder-gray-400 focus:outline-none focus:bg-white focus:border-violet-300 focus:ring-2 focus:ring-violet-100 transition-colors"
+              className="w-full pl-9 pr-8 py-2.5 text-sm bg-[var(--paper2)] border border-[var(--line)] rounded-lg placeholder-[var(--muted)] focus:outline-none focus:bg-white focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-colors"
               autoComplete="off"
               spellCheck={false}
             />
             {/* Loading spinner */}
             {isSearching && (
               <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                <svg className="w-4 h-4 text-violet-500 animate-spin" fill="none" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-[var(--ink2)] animate-spin" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                 </svg>
@@ -663,7 +685,7 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
             )}
             {/* Cmd+K hint */}
             {!searchQuery && (
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-gray-400 font-medium bg-gray-100 px-1.5 py-0.5 rounded">
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-[var(--muted)] font-medium bg-[var(--paper2)] px-1.5 py-0.5 rounded">
                 ⌘K
               </span>
             )}
@@ -673,12 +695,12 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
           {searchOpen && (
             <div
               ref={searchDropdownRef}
-              className="absolute left-0 right-0 top-full mt-2 bg-white rounded-xl shadow-xl border border-gray-100 z-50 overflow-hidden"
+              className="absolute left-0 right-0 top-full mt-2 bg-white rounded-xl shadow-xl border border-[var(--line)] z-50 overflow-hidden"
             >
               {isSearching && !hasResults ? (
                 /* Loading state (no results yet) */
-                <div className="px-4 py-6 text-center text-sm text-gray-500">
-                  <svg className="w-5 h-5 mx-auto mb-2 animate-spin text-violet-400" fill="none" viewBox="0 0 24 24">
+                <div className="px-4 py-6 text-center text-sm text-[var(--muted)]">
+                  <svg className="w-5 h-5 mx-auto mb-2 animate-spin text-[var(--ink2)]" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
@@ -686,12 +708,12 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
                 </div>
               ) : !isSearching && !hasResults && searchQuery.trim() ? (
                 /* Empty state */
-                <div className="px-4 py-6 text-center text-sm text-gray-500">
-                  <svg className="w-8 h-8 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="px-4 py-6 text-center text-sm text-[var(--muted)]">
+                  <svg className="w-8 h-8 mx-auto mb-2 text-[var(--line)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                   No results found
-                  <p className="text-xs text-gray-400 mt-1">Try different keywords</p>
+                  <p className="text-xs text-[var(--muted)] mt-1">Try different keywords</p>
                 </div>
               ) : hasResults ? (
                 /* Results list */
@@ -699,8 +721,8 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
                   {Object.entries(groupedResults).map(([type, results]) => (
                     <div key={type}>
                       {/* Section header */}
-                      <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
-                        <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">
+                      <div className="px-4 py-2 bg-[var(--paper2)] border-b border-[var(--line)]">
+                        <span className="text-[11px] font-semibold text-[var(--muted)] uppercase tracking-wider">
                           {RESULT_TYPE_LABELS[type] || type}
                         </span>
                       </div>
@@ -710,7 +732,7 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
                           key={`${result.type}-${result.id}`}
                           href={result.href}
                           onClick={handleResultClick}
-                          className="flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0"
+                          className="flex items-center gap-3 px-4 py-3 text-left hover:bg-[var(--paper2)] transition-colors border-b border-[var(--line)] last:border-0"
                         >
                           {/* Type icon */}
                           <span className="text-base shrink-0 w-6 text-center">
@@ -718,18 +740,18 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
                           </span>
                           {/* Content */}
                           <div className="flex-1 min-w-0">
-                            <div className="text-sm font-medium text-gray-900 truncate">
+                            <div className="text-sm font-medium text-[var(--ink)] truncate">
                               {result.title}
                             </div>
                             {result.subtitle && (
-                              <div className="text-xs text-gray-500 truncate">
+                              <div className="text-xs text-[var(--muted)] truncate">
                                 {result.subtitle}
                               </div>
                             )}
                           </div>
                           {/* Arrow */}
                           <svg
-                            className="w-4 h-4 text-gray-300 shrink-0"
+                            className="w-4 h-4 text-[var(--line)] shrink-0"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -757,11 +779,11 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
               href={item.href}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 isActive
-                  ? 'bg-violet-50 text-violet-700'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  ? 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)]'
+                  : 'text-[var(--ink2)] hover:bg-[var(--paper2)] hover:text-[var(--ink)]'
               }`}
             >
-              <span className={isActive ? 'text-violet-600' : 'text-gray-400'}>{item.icon}</span>
+              <span className={isActive ? 'text-[var(--ink)]' : 'text-[var(--muted)]'}>{item.icon}</span>
               {item.label}
             </a>
           );
@@ -769,10 +791,10 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
       </nav>
 
       {/* User section */}
-      <div className="px-3 py-4 border-t border-gray-100">
+      <div className="px-3 py-4 border-t border-[var(--line)]">
         <div className="px-3 py-2 mb-2">
-          <div className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">Signed in as</div>
-          <div className="text-sm font-medium text-gray-700 truncate" title={userEmail}>{userEmail}</div>
+          <div className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider mb-1">Signed in as</div>
+          <div className="text-sm font-medium text-[var(--ink2)] truncate" title={userEmail}>{userEmail}</div>
         </div>
         <button
           onClick={async () => {
@@ -783,7 +805,7 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
             }
             window.location.href = '/admin/login';
           }}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-700 transition-colors"
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-red-50 hover:text-red-700 transition-colors"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -799,10 +821,10 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
       {/* Mobile hamburger button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md border border-gray-200"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md border border-[var(--line)]"
         aria-label="Open navigation"
       >
-        <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 text-[var(--ink2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
@@ -814,7 +836,7 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
           <div className="absolute left-0 top-0 bottom-0 w-72 bg-white shadow-xl">
             <button
               onClick={() => setMobileOpen(false)}
-              className="absolute top-4 right-4 p-1 text-gray-400 hover:text-gray-600"
+              className="absolute top-4 right-4 p-1 text-[var(--muted)] hover:text-[var(--ink2)]"
               aria-label="Close navigation"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -826,8 +848,11 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
         </div>
       )}
 
+      {/* Global Cmd-K command palette — mounts a fixed overlay; trigger button is hidden by default */}
+      <AdminCommandPalette />
+
       {/* Desktop sidebar */}
-      <aside className="hidden lg:block w-64 bg-white border-r border-gray-200 min-h-screen shrink-0">
+      <aside className="hidden lg:block w-64 bg-white border-r border-[var(--line)] min-h-screen shrink-0">
         <div className="sticky top-0 h-screen overflow-hidden">
           {sidebarContent}
         </div>

@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, desc, sql, and } from 'drizzle-orm';
 import { db } from '../../../db';
 import { legalDocuments, retentionPolicies, cookieConsents, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -33,15 +33,20 @@ export const GET: APIRoute = async ({ request }) => {
     }
 
     if (type === 'cookies' || !type) {
-      // Return aggregate consent stats and latest consents
-      const consents = await db
-        .select()
-        .from(cookieConsents)
-        .orderBy(desc(cookieConsents.createdAt))
-        .limit(100);
-      const total = consents.length;
-      const analytics = consents.filter(c => c.analytics).length;
-      const marketing = consents.filter(c => c.marketing).length;
+      // Aggregate stats from the FULL table (previous code computed these
+      // by filtering an in-memory 100-row slice — wrong once you pass 100
+      // consent records). Fetch latest 100 only for display.
+      const [consents, statsRow] = await Promise.all([
+        db.select().from(cookieConsents).orderBy(desc(cookieConsents.createdAt)).limit(100),
+        db.select({
+          total: sql<number>`count(*)`,
+          analytics: sql<number>`count(*) FILTER (WHERE ${cookieConsents.analytics} = true)`,
+          marketing: sql<number>`count(*) FILTER (WHERE ${cookieConsents.marketing} = true)`,
+        }).from(cookieConsents),
+      ]);
+      const total = Number(statsRow[0]?.total ?? 0);
+      const analytics = Number(statsRow[0]?.analytics ?? 0);
+      const marketing = Number(statsRow[0]?.marketing ?? 0);
       if (type === 'cookies') return json({ data: { consents, total, analytics, marketing } });
     }
 
@@ -132,7 +137,7 @@ export const PUT: APIRoute = async ({ request }) => {
   if (!hasRole(session, 'admin')) return json({ error: 'Forbidden' }, 403);
 
   try {
-    const body = await request.json;
+    const body = await request.json();
     // Support both calling styles: body.id or body.entityType + body.id
     const id = body.id ?? body.documentId;
     const { type: entityType, isActive, content } = body;

@@ -1,0 +1,125 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
+import EditorialSection from '../../components/editorial/EditorialSection.astro';
+import EditorialCard from '../../components/editorial/EditorialCard.astro';
+import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
+import { getAllClinics, STATE_NAMES } from '../../utils/clinicData';
+import { getStateSlug } from '../../utils/dataHelpers';
+import { COUNTRY_NAMES } from '../../utils/dataHelpers';
+import { filterDoctorsByType } from '../../utils/providerFilter';
+import { getVisitorCountry } from '../../utils/visitorCountry';
+
+const VISITOR_COUNTRY = getVisitorCountry(Astro.cookies, Astro.url);
+const visitorCountryName = COUNTRY_NAMES[VISITOR_COUNTRY] || 'United States';
+
+const clinics = await getAllClinics();
+const matchVisitor = (c: any) => VISITOR_COUNTRY === 'US' ? (!c.country || c.country === 'US') : c.country === VISITOR_COUNTRY;
+const scoped = clinics.filter(matchVisitor);
+const sourceClinics = scoped.length > 0 ? scoped : clinics.filter(c => !c.country || c.country === 'US');
+const allDoctors = sourceClinics.flatMap((c: any) => (c.doctors_data || []).map((d: any) => ({ ...d, clinic: c })));
+const psychologists = filterDoctorsByType(allDoctors, 'psychologists');
+
+const byState: Record<string, typeof psychologists> = {};
+psychologists.forEach(d => {
+  const state = d.clinic?.state;
+  if (state) {
+    if (!byState[state]) byState[state] = [];
+    byState[state].push(d);
+  }
+});
+const states = Object.keys(byState).sort();
+
+const regionLabel = VISITOR_COUNTRY === 'US' ? 'states' : 'regions';
+const title = VISITOR_COUNTRY === 'US'
+  ? `Best Psychologists with TMS Therapy Training | Nationwide Directory`
+  : `Best Psychologists with TMS Therapy Training in ${visitorCountryName}`;
+const description = `Browse ${psychologists.length} licensed clinical psychologists offering TMS therapy across ${states.length} ${regionLabel}. Compare credentials, treatment approaches, and find a provider near you.`;
+---
+
+<Layout title={title} description={description} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Psychologists", url: "/psychologists/" },
+]}>
+
+<main style="background:var(--paper)">
+  <EditorialHero
+    eyebrow="TMS-Trained Providers"
+    eyebrowDot="#22c55e"
+    title="Psychologists who"
+    titleAccent="integrate TMS care."
+    description={`Browse ${psychologists.length} licensed clinical psychologists specializing in Transcranial Magnetic Stimulation across ${states.length} US states.`}
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Psychologists" }]}
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "Find a TMS Clinic", href: "/us/", variant: "outline" },
+    ]}
+    stats={[
+      { value: psychologists.length, label: "Psychologists", color: "ink" },
+      { value: states.length, label: "States", color: "accent" },
+      { value: "FDA", label: "Cleared TMS", color: "warm" },
+    ]}
+  />
+
+  <EditorialSection
+    title="Browse by State"
+    intro="Pick your state to see TMS-trained psychologists practicing nearby."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>'
+    tone="accent"
+  >
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {states.map(stateCode => {
+        const stateName = STATE_NAMES[stateCode] || stateCode;
+        const count = byState[stateCode].length;
+        return (
+          <EditorialCard
+            href={`/us/${getStateSlug(stateCode)}/psychologists/`}
+            tag={`${count} ${count === 1 ? 'Psychologist' : 'Psychologists'}`}
+            tagTone="accent"
+            title={stateName}
+            description={`Licensed clinical psychologists with TMS training, practicing in ${stateName}.`}
+            size="lg"
+          />
+        );
+      })}
+    </div>
+  </EditorialSection>
+
+  <EditorialSection
+    title="What Psychologists Do in TMS Treatment"
+    intro="Psychologists evaluate, coordinate, and integrate TMS with ongoing psychotherapy."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>'
+    tone="warm"
+    background="paper2"
+    noBorder
+  >
+    <div class="grid sm:grid-cols-3 gap-5">
+      <div style="background:var(--paper); border:1px solid var(--line); border-radius:1.5rem; padding:1.75rem;">
+        <h3 class="serif" style="font-size:1.25rem; color:var(--ink); margin:0 0 0.75rem;">Pre-Treatment Evaluation</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.65; margin:0;">Comprehensive psychiatric evaluation — diagnosis, treatment history, medication trials, and whether TMS is the right fit.</p>
+      </div>
+      <div style="background:var(--paper); border:1px solid var(--line); border-radius:1.5rem; padding:1.75rem;">
+        <h3 class="serif" style="font-size:1.25rem; color:var(--ink); margin:0 0 0.75rem;">Integrated Therapy</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.65; margin:0;">Combine TMS with ongoing psychotherapy. Coordinate schedules, monitor progress, and adjust modalities for the best outcomes.</p>
+      </div>
+      <div style="background:var(--paper); border:1px solid var(--line); border-radius:1.5rem; padding:1.75rem;">
+        <h3 class="serif" style="font-size:1.25rem; color:var(--ink); margin:0 0 0.75rem;">Safety & Side Effects</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.65; margin:0;">TMS is very safe — mild scalp discomfort is the most common side effect. No anesthesia. Resume normal activities immediately.</p>
+      </div>
+    </div>
+  </EditorialSection>
+
+  <EditorialCTA
+    title="Find your TMS psychologist."
+    description="Connect with a licensed clinical psychologist who can integrate TMS into your treatment plan."
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "Browse All Specialists", href: "/specialists/", variant: "outline" },
+    ]}
+    stickyMobile
+  />
+</main>
+
+</Layout>

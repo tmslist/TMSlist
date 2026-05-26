@@ -13,6 +13,16 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     const body = await request.json();
+
+    // Honeypot — `website` is a hidden field that real users never fill in.
+    // Accept the request but silently drop it so bots don't get a useful signal.
+    if (body && typeof body === 'object' && typeof body.website === 'string' && body.website.length > 0) {
+      return new Response(JSON.stringify({ success: true }), {
+        status: 201,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     const parsed = leadSubmitSchema.safeParse(body);
 
     if (!parsed.success) {

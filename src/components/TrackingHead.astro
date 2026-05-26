@@ -1,0 +1,43 @@
+---
+import { getTrackingSettings } from '../lib/tracking';
+const t = await getTrackingSettings();
+const ga4Valid = /^G-[A-Z0-9]+$/i.test(t.ga4Id);
+const gtmValid = /^GTM-[A-Z0-9]+$/i.test(t.gtmId);
+const pixelValid = /^[0-9]{6,20}$/.test(t.metaPixelId);
+const enabled = t.enabled;
+---
+{enabled && t.googleSiteVerification && (
+  <meta name="google-site-verification" content={t.googleSiteVerification} />
+)}
+{enabled && t.bingSiteVerification && (
+  <meta name="msvalidate.01" content={t.bingSiteVerification} />
+)}
+
+{enabled && gtmValid && (
+  <script is:inline define:vars={{ id: t.gtmId }}>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer', id);
+  </script>
+)}
+
+{enabled && ga4Valid && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${t.ga4Id}`}></script>
+    <script is:inline define:vars={{ id: t.ga4Id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', id, { anonymize_ip: true });
+    </script>
+  </>
+)}
+
+{enabled && pixelValid && (
+  <script is:inline define:vars={{ id: t.metaPixelId }}>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id);
+    fbq('track', 'PageView');
+  </script>
+)}
+
+{enabled && t.headCode && <Fragment set:html={t.headCode} />}

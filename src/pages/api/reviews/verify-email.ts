@@ -5,6 +5,8 @@ import { reviews } from '../../../db/schema';
 import { randomBytes } from 'crypto';
 import { Resend } from 'resend';
 import { z } from 'zod';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+import { getSessionFromRequest } from '../../../utils/auth';
 
 export const prerender = false;
 
@@ -19,6 +21,11 @@ const verifySchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Rate-limit to slow review-email enumeration / hijack attempts.
+    const ip = getClientIp(request);
+    const rateLimited = await strictRateLimit(ip, 5, '15 m', 'reviews:verify-email');
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
     const parsed = verifySchema.safeParse(body);
 
@@ -30,6 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const { reviewId, email } = parsed.data;
+    const normalizedEmail = email.toLowerCase().trim();
 
     // Check review exists and is not already verified
     const existing = await db.select().from(reviews).where(eq(reviews.id, reviewId)).limit(1);
@@ -47,14 +55,28 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Generate a verification token and store it in the review's email field as a marker
-    // We use a secure random token appended to a known prefix
+    // AUTHORIZATION: only the original reviewer can ask for a verification email.
+    // Either the email matches what was submitted with the review, OR the
+    // current session belongs to the review's userId. Without this guard, any
+    // stranger can overwrite a pending review's userEmail and verify it.
+    const session = getSessionFromRequest(request);
+    const reviewEmail = (existing[0].userEmail ?? '').toLowerCase().split('|')[0];
+    const sessionOwnsReview = !!session?.userId && session.userId === existing[0].userId;
+    const emailMatches = !!reviewEmail && reviewEmail === normalizedEmail;
+
+    if (!sessionOwnsReview && !emailMatches) {
+      return new Response(JSON.stringify({ error: 'Not authorized for this review' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Generate a verification token. Store it alongside the email in compound
+    // form so /api/reviews/confirm can parse and validate it on click.
     const token = randomBytes(32).toString('hex');
 
-    // Store the token temporarily -- we put it in the review metadata-style by updating userEmail
-    // with a compound value: email|token (the confirm endpoint will parse it)
     await db.update(reviews)
-      .set({ userEmail: `${email}|verify:${token}` })
+      .set({ userEmail: `${normalizedEmail}|verify:${token}` })
       .where(eq(reviews.id, reviewId));
 
     // Send verification email

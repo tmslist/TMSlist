@@ -9,9 +9,9 @@ interface Props {
 const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
 ---
 
-<div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-    <h3 class="text-xl font-semibold text-gray-900 mb-4">Write a Review</h3>
-    <p class="text-sm text-gray-600 mb-6">
+<div class="bg-white rounded-xl border border-[var(--line)] p-6 mb-6">
+    <h3 class="text-xl font-semibold text-[var(--ink)] mb-4">Write a Review</h3>
+    <p class="text-sm text-[var(--ink2)] mb-6">
         Share your experience to help others make informed decisions about their
         TMS treatment
     </p>
@@ -22,7 +22,7 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
 
         <!-- Rating -->
         <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2"
+            <label class="block text-sm font-semibold text-[var(--ink2)] mb-2"
                 >Rating *</label
             >
             <div class="flex gap-2">
@@ -30,7 +30,7 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
                     [1, 2, 3, 4, 5].map((star) => (
                         <button
                             type="button"
-                            class="star-btn text-3xl text-gray-300 hover:text-yellow-400 transition-colors"
+                            class="star-btn text-3xl text-[var(--line)] hover:text-yellow-400 transition-colors"
                             data-rating={star}
                         >
                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -43,7 +43,7 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
 
         <!-- Doctor Name -->
         <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2"
+            <label class="block text-sm font-semibold text-[var(--ink2)] mb-2"
                 >Doctor/Provider Name</label
             >
             <input
@@ -51,18 +51,18 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
                 name="doctorName"
                 value={doctorName}
                 placeholder="Dr. Smith"
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1B4B5A]500 focus:border-[#2E7A8F]"
+                class="w-full px-4 py-2.5 border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)]"
             />
         </div>
 
         <!-- Treatment Type -->
         <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2"
+            <label class="block text-sm font-semibold text-[var(--ink2)] mb-2"
                 >Treatment Type</label
             >
             <select
                 name="treatmentType"
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1B4B5A]500 focus:border-[#2E7A8F]"
+                class="w-full px-4 py-2.5 border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)]"
             >
                 <option value="NeuroStar TMS">NeuroStar TMS</option>
                 <option value="BrainsWay Deep TMS">BrainsWay Deep TMS</option>
@@ -76,7 +76,7 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
 
         <!-- Review Text -->
         <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2"
+            <label class="block text-sm font-semibold text-[var(--ink2)] mb-2"
                 >Your Review *</label
             >
             <textarea
@@ -84,14 +84,14 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
                 required
                 rows="5"
                 placeholder="Share your experience with this clinic and provider..."
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1B4B5A]500 focus:border-[#2E7A8F]"
+                class="w-full px-4 py-2.5 border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)]"
             ></textarea>
-            <p class="text-xs text-gray-500 mt-1">Minimum 50 characters</p>
+            <p class="text-xs text-[var(--muted)] mt-1">Minimum 50 characters</p>
         </div>
 
         <!-- Patient Name -->
         <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2"
+            <label class="block text-sm font-semibold text-[var(--ink2)] mb-2"
                 >Your Name *</label
             >
             <input
@@ -99,16 +99,16 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
                 name="patientName"
                 required
                 placeholder="John D. (First name + last initial)"
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1B4B5A]500 focus:border-[#2E7A8F]"
+                class="w-full px-4 py-2.5 border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)]"
             />
-            <p class="text-xs text-gray-500 mt-1">
+            <p class="text-xs text-[var(--muted)] mt-1">
                 Only first name + last initial will be shown
             </p>
         </div>
 
         <!-- Email (for verification) -->
         <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2"
+            <label class="block text-sm font-semibold text-[var(--ink2)] mb-2"
                 >Email (for verification) *</label
             >
             <input
@@ -116,9 +116,9 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
                 name="email"
                 required
                 placeholder="your@email.com"
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1B4B5A]500 focus:border-[#2E7A8F]"
+                class="w-full px-4 py-2.5 border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)]"
             />
-            <p class="text-xs text-gray-500 mt-1">
+            <p class="text-xs text-[var(--muted)] mt-1">
                 Won't be displayed publicly
             </p>
         </div>
@@ -126,15 +126,15 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
         <!-- Submit -->
         <button
             type="submit"
-            class="w-full py-3 bg-[#143844] text-white font-semibold rounded-lg hover:bg-[#143844] transition-colors shadow-lg"
+            class="w-full py-3 bg-[var(--ink2)] text-white font-semibold rounded-lg hover:bg-[var(--ink2)] transition-colors shadow-lg"
         >
             Submit Review
         </button>
 
-        <p class="text-xs text-gray-500 text-center">
+        <p class="text-xs text-[var(--muted)] text-center">
             By submitting, you agree to our <a
-                href="/legal/review-policy/"
-                class="text-[#1B4B5A] hover:underline">Review Policy</a
+                href="/editorial-policy/"
+                class="text-[var(--accent)] hover:underline">Review Policy</a
             >
         </p>
     </form>
@@ -188,11 +188,11 @@ const { clinicId = "", clinicName = "", doctorName = "" } = Astro.props;
             // Update star colors
             starBtns.forEach((star, index) => {
                 if (index < rating) {
-                    star.classList.remove("text-gray-300");
+                    star.classList.remove("text-[var(--line)]");
                     star.classList.add("text-yellow-400");
                 } else {
                     star.classList.remove("text-yellow-400");
-                    star.classList.add("text-gray-300");
+                    star.classList.add("text-[var(--line)]");
                 }
             });
         });

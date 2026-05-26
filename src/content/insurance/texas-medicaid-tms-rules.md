@@ -12,6 +12,7 @@ faqs:
     answer: "Some STAR and STAR+PLUS managed care plans may cover TMS on a case-by-case basis. Coverage varies by plan and region. Check directly with your managed care provider."
   - question: "Why is it so hard to get TMS covered in Texas?"
     answer: "Texas has one of the most restrictive Medicaid programs in the country. The state declined full Medicaid expansion, and many TMS clinics don't accept Medicaid due to low reimbursement rates. This limits access significantly."
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 
@@ -24,9 +25,9 @@ faqs:
     <div class="text-2xl font-bold text-amber-700 font-display">Required</div>
     <div class="text-xs text-amber-600 mt-1">Prior Authorization</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">$0-$200</div>
-    <div class="text-xs text-blue-600 mt-1">Typical patient cost</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">$0-$200</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Typical patient cost</div>
   </div>
 </div>
 
@@ -134,11 +135,11 @@ Don't be discouraged if the first few clinics say no. It may take some searching
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>
@@ -147,39 +148,39 @@ Don't be discouraged if the first few clinics say no. It may take some searching
 ## How to Get TMS Approved
 
 <div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">1</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Identify Your Plan Type</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Determine if you have traditional fee-for-service Medicaid, STAR, or STAR+PLUS. This affects your coverage pathway for TMS.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Identify Your Plan Type</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Determine if you have traditional fee-for-service Medicaid, STAR, or STAR+PLUS. This affects your coverage pathway for TMS.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">2</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Call Your Managed Care Plan</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Contact your MCO (Superior, Amerigroup, UHC, BCBS) and ask specifically about TMS coverage for treatment-resistant depression. Get a reference number.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Call Your Managed Care Plan</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Contact your MCO (Superior, Amerigroup, UHC, BCBS) and ask specifically about TMS coverage for treatment-resistant depression. Get a reference number.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">3</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Get Documentation Ready</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Work with your psychiatrist to compile records of your MDD diagnosis, all medication trials, current PHQ-9 score, and therapy history.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Get Documentation Ready</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Work with your psychiatrist to compile records of your MDD diagnosis, all medication trials, current PHQ-9 score, and therapy history.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">4</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Find a Medicaid-Accepting Provider</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Find a TMS clinic that works with your specific plan. Use our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a> or contact your MCO for in-network providers.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Find a Medicaid-Accepting Provider</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Find a TMS clinic that works with your specific plan. Use our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a> or contact your MCO for in-network providers.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">5</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Submit Prior Authorization</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Your TMS clinic submits the prior auth request. Approval can take 2-4 weeks. If denied, appeal — many denials can be overturned with additional documentation.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Submit Prior Authorization</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Your TMS clinic submits the prior auth request. Approval can take 2-4 weeks. If denied, appeal — many denials can be overturned with additional documentation.</p>
     </div>
   </div>
 </div>

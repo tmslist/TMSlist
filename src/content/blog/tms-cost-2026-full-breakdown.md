@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-09
 category: patient-guide
 tags: ["cost", "insurance", "pricing", "medicare", "medicaid", "self-pay"]
-image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-cost-2026-full-breakdown.svg"
 ---
 
 TMS costs vary so significantly by geography, provider, and insurance status that any single number is misleading. A course of TMS in rural Tennessee may cost $12,000 self-pay, while the same course in Manhattan — with better insurance negotiation leverage — may cost the insurer $18,000 but have a $50 patient copay.
@@ -143,35 +143,35 @@ If TMS costs are a significant barrier:
 
 TMS is a significant investment. Understanding the actual cost landscape helps you plan, negotiate, and make informed decisions about treatment.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How much does a full TMS course cost without insurance?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How much does a full TMS course cost without insurance?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Self-pay TMS costs vary by region, ranging from $200-325 per session in the Southeast to $300-400 per session on the West Coast and Northeast. A full course of 30 sessions typically costs $6,000-12,000 self-pay. Many clinics offer self-pay discounts of 30-50% off insurance rates, and package pricing for pre-paying a full course.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Self-pay TMS costs vary by region, ranging from $200-325 per session in the Southeast to $300-400 per session on the West Coast and Northeast. A full course of 30 sessions typically costs $6,000-12,000 self-pay. Many clinics offer self-pay discounts of 30-50% off insurance rates, and package pricing for pre-paying a full course.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does Medicare cover TMS treatment?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does Medicare cover TMS treatment?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Medicare covers TMS for beneficiaries with treatment-resistant Major Depressive Disorder. The Medicare TMS rate is approximately $175-225 per session, with patient responsibility of 20% coinsurance after Part B deductible. Total patient responsibility for a 30-session course is approximately $1,050-1,350.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Medicare covers TMS for beneficiaries with treatment-resistant Major Depressive Disorder. The Medicare TMS rate is approximately $175-225 per session, with patient responsibility of 20% coinsurance after Part B deductible. Total patient responsibility for a 30-session course is approximately $1,050-1,350.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What if my insurance denies TMS coverage?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What if my insurance denies TMS coverage?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Authorization denials are common on first submission but often succeed on appeal. Ask your clinic's billing department to appeal -- they have experience with insurance denials and know what documentation each insurer requires. External review, handled by independent review organizations, is successful in roughly 50-60% of cases when it reaches that level.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Authorization denials are common on first submission but often succeed on appeal. Ask your clinic's billing department to appeal -- they have experience with insurance denials and know what documentation each insurer requires. External review, handled by independent review organizations, is successful in roughly 50-60% of cases when it reaches that level.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

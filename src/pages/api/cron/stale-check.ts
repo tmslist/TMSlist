@@ -2,13 +2,13 @@ import type { APIRoute } from 'astro';
 import { db } from '../../../db';
 import { clinics, notifications } from '../../../db/schema';
 import { sql, eq } from 'drizzle-orm';
+import { requireCronAuth } from '../../../utils/cronAuth';
 
 export const prerender = false;
 
 export const GET: APIRoute = async ({ request }) => {
-  if (request.headers.get('authorization') !== `Bearer ${import.meta.env.CRON_SECRET || process.env.CRON_SECRET}`) {
-    return new Response('Unauthorized', { status: 401 });
-  }
+  const authFail = requireCronAuth(request);
+  if (authFail) return authFail;
 
   const stale = await db.select({ id: clinics.id, name: clinics.name, updatedAt: clinics.updatedAt })
     .from(clinics).where(sql`${clinics.updatedAt} < NOW() - INTERVAL '6 months'`).limit(100);

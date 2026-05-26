@@ -20,7 +20,7 @@ const SEVERITY_COLORS = {
   critical: 'bg-red-100 text-red-700',
   high: 'bg-orange-100 text-orange-700',
   medium: 'bg-amber-100 text-amber-700',
-  low: 'bg-blue-100 text-blue-700',
+  low: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
 };
 
 const SEVERITY_ORDER = ['critical', 'high', 'medium', 'low'] as const;
@@ -196,41 +196,41 @@ export default function AdminAppCrashReports() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Crash Reports</h1>
-          <p className="text-gray-500 mt-1">Monitor and resolve mobile app crashes</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Crash Reports</h1>
+          <p className="text-[var(--muted)] mt-1">Monitor and resolve mobile app crashes</p>
         </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
-          <p className="text-xs font-medium text-gray-500 uppercase">Total Reports</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{stats.total}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-4">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Total Reports</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{stats.total}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
-          <p className="text-xs font-medium text-gray-500 uppercase">Unresolved</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-4">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Unresolved</p>
           <p className="text-2xl font-bold text-amber-600 mt-1">{stats.unresolved}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
-          <p className="text-xs font-medium text-gray-500 uppercase">Critical</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-4">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Critical</p>
           <p className="text-2xl font-bold text-red-600 mt-1">{stats.criticalCount}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
-          <p className="text-xs font-medium text-gray-500 uppercase">Total Crashes</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{stats.totalCrashes}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-4">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Total Crashes</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{stats.totalCrashes}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
-          <p className="text-xs font-medium text-gray-500 uppercase">Platform</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-4">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase">Platform</p>
           <div className="flex gap-2 mt-1">
-            <span className="text-sm font-bold text-gray-900">{stats.byPlatform.ios} iOS</span>
-            <span className="text-gray-300">/</span>
+            <span className="text-sm font-bold text-[var(--ink)]">{stats.byPlatform.ios} iOS</span>
+            <span className="text-[var(--line)]">/</span>
             <span className="text-sm font-bold text-green-600">{stats.byPlatform.android} And</span>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 mb-6">
+      <div className="bg-white rounded-xl border border-[var(--line)] p-4 mb-6">
         <div className="flex flex-wrap gap-4">
           <div className="flex-1 min-w-48">
             <input
@@ -238,13 +238,13 @@ export default function AdminAppCrashReports() {
               placeholder="Search by error type or message..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+              className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
             />
           </div>
           <select
             value={filterSeverity}
             onChange={e => setFilterSeverity(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Severities</option>
             {SEVERITY_ORDER.map(s => (
@@ -254,7 +254,7 @@ export default function AdminAppCrashReports() {
           <select
             value={filterPlatform}
             onChange={e => setFilterPlatform(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B]"
           >
             <option value="all">All Platforms</option>
             <option value="ios">iOS</option>
@@ -265,36 +265,36 @@ export default function AdminAppCrashReports() {
             placeholder="Filter by OS version..."
             value={filterOS}
             onChange={e => setFilterOS(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-violet-500 focus:ring-violet-500 w-40"
+            className="rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-[var(--ink2)] focus:ring-[#1E2A3B] w-40"
           />
         </div>
       </div>
 
       {/* Crash list */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+        <table className="min-w-full divide-y divide-[var(--line)]">
+          <thead className="bg-[var(--paper2)]">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Error</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Platform</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Severity</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Version</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Crashes</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Occurred</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Error</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Platform</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Severity</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Version</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Crashes</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Occurred</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Status</th>
               <th className="px-6 py-3"></th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-[var(--line)]">
             {filteredReports.map(report => (
-              <tr key={report.id} className="hover:bg-gray-50 cursor-pointer" onClick={() => setSelectedCrash(report)}>
+              <tr key={report.id} className="hover:bg-[var(--paper2)] cursor-pointer" onClick={() => setSelectedCrash(report)}>
                 <td className="px-6 py-4">
-                  <p className="text-sm font-semibold text-gray-900">{report.errorType}</p>
-                  <p className="text-xs text-gray-500 mt-0.5 truncate max-w-xs">{report.errorMessage}</p>
+                  <p className="text-sm font-semibold text-[var(--ink)]">{report.errorType}</p>
+                  <p className="text-xs text-[var(--muted)] mt-0.5 truncate max-w-xs">{report.errorMessage}</p>
                 </td>
                 <td className="px-6 py-4">
                   <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full ${
-                    report.platform === 'ios' ? 'bg-gray-900 text-white' : 'bg-green-600 text-white'
+                    report.platform === 'ios' ? 'bg-[var(--ink)] text-white' : 'bg-green-600 text-white'
                   }`}>
                     {report.platform.toUpperCase()}
                   </span>
@@ -305,15 +305,15 @@ export default function AdminAppCrashReports() {
                   </span>
                 </td>
                 <td className="px-6 py-4">
-                  <p className="text-sm font-mono text-gray-900">{report.appVersion}</p>
-                  <p className="text-xs text-gray-500">{report.deviceModel}</p>
+                  <p className="text-sm font-mono text-[var(--ink)]">{report.appVersion}</p>
+                  <p className="text-xs text-[var(--muted)]">{report.deviceModel}</p>
                 </td>
                 <td className="px-6 py-4">
                   <span className="px-3 py-1 bg-red-50 text-red-600 text-xs font-bold rounded-full">
                     {report.crashCount}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-xs text-gray-500">
+                <td className="px-6 py-4 text-xs text-[var(--muted)]">
                   {new Date(report.occurredAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   <br />
                   {new Date(report.occurredAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
@@ -328,7 +328,7 @@ export default function AdminAppCrashReports() {
                 <td className="px-6 py-4">
                   <button
                     onClick={e => { e.stopPropagation(); setSelectedCrash(report); }}
-                    className="text-xs font-medium text-violet-600 hover:text-violet-700"
+                    className="text-xs font-medium text-[var(--ink)] hover:text-[var(--ink)]"
                   >
                     View
                   </button>
@@ -336,21 +336,21 @@ export default function AdminAppCrashReports() {
               </tr>
             ))}
             {filteredReports.length === 0 && (
-              <tr><td colSpan={8} className="px-6 py-12 text-center text-gray-500">No crash reports match your filters</td></tr>
+              <tr><td colSpan={8} className="px-6 py-12 text-center text-[var(--muted)]">No crash reports match your filters</td></tr>
             )}
           </tbody>
         </table>
       </div>
 
       {/* Frequency chart placeholder */}
-      <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
-        <h3 className="text-base font-semibold text-gray-900 mb-4">Crash Frequency (Last 30 Days)</h3>
+      <div className="mt-6 bg-white rounded-xl border border-[var(--line)] p-6">
+        <h3 className="text-base font-semibold text-[var(--ink)] mb-4">Crash Frequency (Last 30 Days)</h3>
         <div className="flex items-end gap-1 h-32">
           {[65, 42, 78, 55, 89, 34, 91, 67, 45, 88, 52, 76, 41, 83, 29, 95, 48, 72, 38, 86, 54, 69, 43, 79, 31, 87, 46, 71, 37, 58].map((h, i) => (
-            <div key={i} className="flex-1 bg-violet-200 rounded-t transition-colors hover:bg-violet-400" style={{ height: `${h}%` }} />
+            <div key={i} className="flex-1 bg-[rgba(10,22,40,0.15)] rounded-t transition-colors hover:bg-[var(--ink2)]" style={{ height: `${h}%` }} />
           ))}
         </div>
-        <div className="flex justify-between mt-2 text-xs text-gray-400">
+        <div className="flex justify-between mt-2 text-xs text-[var(--muted)]">
           <span>Apr 1</span><span>Apr 8</span><span>Apr 15</span><span>Apr 18</span>
         </div>
       </div>
@@ -359,7 +359,7 @@ export default function AdminAppCrashReports() {
       {selectedCrash && (
         <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-3xl my-8">
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-6 border-b border-[var(--line)]">
               <div className="flex items-start justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
@@ -367,15 +367,15 @@ export default function AdminAppCrashReports() {
                       {selectedCrash.severity.toUpperCase()}
                     </span>
                     <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full ${
-                      selectedCrash.platform === 'ios' ? 'bg-gray-900 text-white' : 'bg-green-600 text-white'
+                      selectedCrash.platform === 'ios' ? 'bg-[var(--ink)] text-white' : 'bg-green-600 text-white'
                     }`}>
                       {selectedCrash.platform.toUpperCase()}
                     </span>
                   </div>
-                  <h2 className="text-lg font-semibold text-gray-900 mt-2">{selectedCrash.errorType}</h2>
-                  <p className="text-sm text-gray-600 mt-1">{selectedCrash.errorMessage}</p>
+                  <h2 className="text-lg font-semibold text-[var(--ink)] mt-2">{selectedCrash.errorType}</h2>
+                  <p className="text-sm text-[var(--ink2)] mt-1">{selectedCrash.errorMessage}</p>
                 </div>
-                <button onClick={() => setSelectedCrash(null)} className="text-gray-400 hover:text-gray-600">
+                <button onClick={() => setSelectedCrash(null)} className="text-[var(--muted)] hover:text-[var(--ink2)]">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
@@ -387,33 +387,33 @@ export default function AdminAppCrashReports() {
               {/* Context info */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">Version</p>
-                  <p className="text-sm font-semibold text-gray-900 mt-0.5">{selectedCrash.appVersion}</p>
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">Version</p>
+                  <p className="text-sm font-semibold text-[var(--ink)] mt-0.5">{selectedCrash.appVersion}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">Device</p>
-                  <p className="text-sm font-semibold text-gray-900 mt-0.5">{selectedCrash.deviceModel}</p>
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">Device</p>
+                  <p className="text-sm font-semibold text-[var(--ink)] mt-0.5">{selectedCrash.deviceModel}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">OS Version</p>
-                  <p className="text-sm font-semibold text-gray-900 mt-0.5">{selectedCrash.osVersion}</p>
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">OS Version</p>
+                  <p className="text-sm font-semibold text-[var(--ink)] mt-0.5">{selectedCrash.osVersion}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">Crash Count</p>
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">Crash Count</p>
                   <p className="text-sm font-semibold text-red-600 mt-0.5">{selectedCrash.crashCount} users</p>
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">Occurred</p>
-                  <p className="text-sm font-semibold text-gray-900 mt-0.5">
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">Occurred</p>
+                  <p className="text-sm font-semibold text-[var(--ink)] mt-0.5">
                     {new Date(selectedCrash.occurredAt).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">User ID</p>
-                  <p className="text-sm font-semibold text-gray-900 mt-0.5">{selectedCrash.userId || 'Anonymous'}</p>
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">User ID</p>
+                  <p className="text-sm font-semibold text-[var(--ink)] mt-0.5">{selectedCrash.userId || 'Anonymous'}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase">Status</p>
+                  <p className="text-xs font-medium text-[var(--muted)] uppercase">Status</p>
                   <p className="text-sm font-semibold mt-0.5">
                     {selectedCrash.resolvedAt ? (
                       <span className="text-emerald-600">Resolved {new Date(selectedCrash.resolvedAt).toLocaleDateString()}</span>
@@ -427,10 +427,10 @@ export default function AdminAppCrashReports() {
               {/* Stack trace */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-sm font-semibold text-gray-900">Stack Trace</h3>
-                  <button className="text-xs font-medium text-violet-600 hover:text-violet-700">Copy</button>
+                  <h3 className="text-sm font-semibold text-[var(--ink)]">Stack Trace</h3>
+                  <button className="text-xs font-medium text-[var(--ink)] hover:text-[var(--ink)]">Copy</button>
                 </div>
-                <pre className="bg-gray-900 text-gray-100 rounded-lg p-4 text-xs overflow-x-auto leading-relaxed font-mono max-h-64 overflow-y-auto">
+                <pre className="bg-[var(--ink)] text-[var(--line)] rounded-lg p-4 text-xs overflow-x-auto leading-relaxed font-mono max-h-64 overflow-y-auto">
                   {selectedCrash.stackTrace}
                 </pre>
               </div>
@@ -444,7 +444,7 @@ export default function AdminAppCrashReports() {
                   >
                     Mark as Resolved
                   </button>
-                  <button className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors">
+                  <button className="px-5 py-2.5 text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-xl transition-colors">
                     Create Issue
                   </button>
                 </div>

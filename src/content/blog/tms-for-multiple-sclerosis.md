@@ -4,7 +4,7 @@ description: "Multiple sclerosis patients often struggle with fatigue, mood symp
 publishDate: 2026-04-15
 category: treatment
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-multiple-sclerosis.svg"
 tags: ["tms", "multiple-sclerosis", "ms-fatigue", "cognitive-impairment", "depression", "spasticity", "neuroimmunology"]
 ---
 
@@ -113,35 +113,35 @@ TMS offers a valuable option for MS patients struggling with fatigue, depression
 
 As research continues, TMS may become increasingly integrated into comprehensive MS rehabilitation programs, offering hope for improved function and well-being.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS help with MS fatigue?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS help with MS fatigue?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. MS fatigue is the most extensively studied application of TMS in MS. Multiple randomized controlled trials have demonstrated significant improvements in fatigue severity scores after TMS treatment, with benefits persisting at follow-up assessments.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. MS fatigue is the most extensively studied application of TMS in MS. Multiple randomized controlled trials have demonstrated significant improvements in fatigue severity scores after TMS treatment, with benefits persisting at follow-up assessments.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What brain targets are used for different MS symptoms?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What brain targets are used for different MS symptoms?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Left DLPFC TMS is used for fatigue, depression, and cognitive impairment. Motor cortex stimulation is better for physical fatigue and spasticity. Bilateral targets may be used for complex presentations. The specific target is selected based on primary symptoms.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Left DLPFC TMS is used for fatigue, depression, and cognitive impairment. Motor cortex stimulation is better for physical fatigue and spasticity. Bilateral targets may be used for complex presentations. The specific target is selected based on primary symptoms.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS safe for MS patients?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS safe for MS patients?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS is generally well-tolerated in MS patients with no evidence of worsening MS symptoms. However, cognitive impairment may affect ability to cooperate with treatment, and heat sensitivity may temporarily worsen symptoms since MS is sensitive to increased body temperature.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS is generally well-tolerated in MS patients with no evidence of worsening MS symptoms. However, cognitive impairment may affect ability to cooperate with treatment, and heat sensitivity may temporarily worsen symptoms since MS is sensitive to increased body temperature.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

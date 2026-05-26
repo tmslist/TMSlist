@@ -44,12 +44,12 @@ const ENTITY_LINKS: Record<string, string> = {
 
 function getActionBadge(action: string): { bg: string; text: string; dot: string } {
   if (/^create_/.test(action)) return { bg: 'bg-emerald-50', text: 'text-emerald-700', dot: 'bg-emerald-500' };
-  if (/^update_/.test(action)) return { bg: 'bg-blue-50', text: 'text-blue-700', dot: 'bg-blue-500' };
+  if (/^update_/.test(action)) return { bg: 'bg-[var(--paper2)]', text: 'text-[var(--ink)]', dot: 'bg-[var(--ink2)]' };
   if (/^delete_/.test(action)) return { bg: 'bg-red-50', text: 'text-red-700', dot: 'bg-red-500' };
-  if (/^(approve_|verify_)/.test(action)) return { bg: 'bg-violet-50', text: 'text-violet-700', dot: 'bg-violet-500' };
+  if (/^(approve_|verify_)/.test(action)) return { bg: 'bg-[rgba(10,22,40,0.08)]', text: 'text-[var(--ink)]', dot: 'bg-[var(--ink2)]' };
   if (/^merge_/.test(action)) return { bg: 'bg-amber-50', text: 'text-amber-700', dot: 'bg-amber-500' };
-  if (/^(login|logout)/.test(action)) return { bg: 'bg-gray-50', text: 'text-gray-600', dot: 'bg-gray-400' };
-  return { bg: 'bg-gray-50', text: 'text-gray-700', dot: 'bg-gray-400' };
+  if (/^(login|logout)/.test(action)) return { bg: 'bg-[var(--paper2)]', text: 'text-[var(--ink2)]', dot: 'bg-[var(--line)]' };
+  return { bg: 'bg-[var(--paper2)]', text: 'text-[var(--ink2)]', dot: 'bg-[var(--line)]' };
 }
 
 function getRelativeTime(dateStr: string): string {
@@ -181,8 +181,8 @@ export default function AdminAuditLog() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-900">Audit Log</h1>
-          <p className="text-gray-500 mt-1 text-sm">
+          <h1 className="text-3xl font-semibold text-[var(--ink)]">Audit Log</h1>
+          <p className="text-[var(--muted)] mt-1 text-sm">
             {data ? `${data.total.toLocaleString()} total entries` : 'Loading...'}
           </p>
         </div>
@@ -190,7 +190,7 @@ export default function AdminAuditLog() {
           {hasFilters && (
             <button
               onClick={handleClearFilters}
-              className="px-3 py-2 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              className="px-3 py-2 text-sm text-[var(--muted)] hover:text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-lg transition-colors"
             >
               Clear filters
             </button>
@@ -198,7 +198,7 @@ export default function AdminAuditLog() {
           <button
             onClick={handleExportCSV}
             disabled={!data?.entries.length}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[var(--line)] rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -209,27 +209,27 @@ export default function AdminAuditLog() {
       </div>
 
       {/* Filter bar */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 mb-6 shadow-sm">
+      <div className="bg-white rounded-xl border border-[var(--line)] p-4 mb-6 shadow-sm">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {/* Action search */}
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Action Search</label>
+            <label className="block text-xs font-medium text-[var(--muted)] mb-1">Action Search</label>
             <input
               type="text"
               value={actionSearch}
               onChange={(e) => { setActionSearch(e.target.value); setPage(0); }}
               placeholder="e.g. approve_review..."
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500 placeholder-gray-400"
+              className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] placeholder-[var(--muted)]"
             />
           </div>
 
           {/* User filter */}
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">User</label>
+            <label className="block text-xs font-medium text-[var(--muted)] mb-1">User</label>
             <select
               value={userIdFilter}
               onChange={(e) => { setUserIdFilter(e.target.value); setPage(0); }}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+              className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
             >
               <option value="">All users</option>
               {data?.filters.users.map((u) => (
@@ -242,11 +242,11 @@ export default function AdminAuditLog() {
 
           {/* Entity type */}
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Entity Type</label>
+            <label className="block text-xs font-medium text-[var(--muted)] mb-1">Entity Type</label>
             <select
               value={entityTypeFilter}
               onChange={(e) => { setEntityTypeFilter(e.target.value); setPage(0); }}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+              className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
             >
               {entityTypeOptions.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -256,76 +256,76 @@ export default function AdminAuditLog() {
 
           {/* Date from */}
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">From</label>
+            <label className="block text-xs font-medium text-[var(--muted)] mb-1">From</label>
             <input
               type="date"
               value={dateFrom}
               onChange={(e) => { setDateFrom(e.target.value); setPage(0); }}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+              className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
             />
           </div>
 
           {/* Date to */}
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">To</label>
+            <label className="block text-xs font-medium text-[var(--muted)] mb-1">To</label>
             <input
               type="date"
               value={dateTo}
               onChange={(e) => { setDateTo(e.target.value); setPage(0); }}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+              className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
             />
           </div>
         </div>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
         {loading ? (
           <div className="p-16 text-center">
-            <div className="inline-block w-6 h-6 border-2 border-gray-200 border-t-violet-600 rounded-full animate-spin mb-3" />
-            <p className="text-gray-400 text-sm">Loading audit log...</p>
+            <div className="inline-block w-6 h-6 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-3" />
+            <p className="text-[var(--muted)] text-sm">Loading audit log...</p>
           </div>
         ) : !data?.entries.length ? (
           <div className="p-16 text-center">
-            <svg className="w-10 h-10 mx-auto text-gray-200 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-10 h-10 mx-auto text-[var(--line)] mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <p className="text-lg font-medium text-gray-400">No entries found</p>
-            <p className="text-sm text-gray-300 mt-1">Try adjusting your filters</p>
+            <p className="text-lg font-medium text-[var(--muted)]">No entries found</p>
+            <p className="text-sm text-[var(--line)] mt-1">Try adjusting your filters</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-100">
-              <thead className="bg-gray-50/50">
+            <table className="min-w-full divide-y divide-[var(--line)]">
+              <thead className="bg-[var(--paper2)]">
                 <tr>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Time</th>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">User</th>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Action</th>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Entity</th>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Details</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Time</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider">User</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Action</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Entity</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Details</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-[var(--line)]">
                 {data.entries.map((entry) => {
                   const badge = getActionBadge(entry.action);
                   const linkPath = entry.entityType ? ENTITY_LINKS[entry.entityType] : null;
                   return (
-                    <tr key={entry.id} className="hover:bg-gray-50/50 transition-colors">
+                    <tr key={entry.id} className="hover:bg-[var(--paper2)] transition-colors">
                       <td className="px-5 py-3.5 whitespace-nowrap">
                         <span
-                          className="text-xs text-gray-500 font-mono cursor-help"
+                          className="text-xs text-[var(--muted)] font-mono cursor-help"
                           title={new Date(entry.createdAt).toLocaleString()}
                         >
                           {getRelativeTime(entry.createdAt)}
                         </span>
                       </td>
                       <td className="px-5 py-3.5">
-                        <div className="text-sm text-gray-900 truncate max-w-[180px]" title={entry.userEmail ?? undefined}>
+                        <div className="text-sm text-[var(--ink)] truncate max-w-[180px]" title={entry.userEmail ?? undefined}>
                           {entry.userEmail
                             ? <span className="font-medium">{entry.userEmail}</span>
                             : entry.userName
-                              ? <span className="text-gray-600">{entry.userName}</span>
-                              : <span className="text-gray-400 italic">System</span>}
+                              ? <span className="text-[var(--ink2)]">{entry.userName}</span>
+                              : <span className="text-[var(--muted)] italic">System</span>}
                         </div>
                       </td>
                       <td className="px-5 py-3.5">
@@ -336,20 +336,20 @@ export default function AdminAuditLog() {
                       </td>
                       <td className="px-5 py-3.5">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-md">
+                          <span className="text-xs font-medium text-[var(--muted)] bg-[var(--paper2)] px-2 py-0.5 rounded-md">
                             {entry.entityType || '-'}
                           </span>
                           {entry.entityId && linkPath ? (
                             <span
                               title={`Go to ${entry.entityType} (ID: ${entry.entityId})`}
-                              className="inline-flex items-center justify-center w-5 h-5 text-gray-400 hover:text-violet-600 transition-colors"
+                              className="inline-flex items-center justify-center w-5 h-5 text-[var(--muted)] hover:text-[var(--ink)] transition-colors"
                             >
                               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                               </svg>
                             </span>
                           ) : entry.entityId ? (
-                            <span className="text-xs text-gray-300 font-mono">{entry.entityId.slice(0, 8)}</span>
+                            <span className="text-xs text-[var(--line)] font-mono">{entry.entityId.slice(0, 8)}</span>
                           ) : null}
                         </div>
                       </td>
@@ -357,12 +357,12 @@ export default function AdminAuditLog() {
                         {entry.details ? (
                           <button
                             onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
-                            className="text-xs font-medium text-violet-600 hover:text-violet-800 transition-colors"
+                            className="text-xs font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors"
                           >
                             {expandedId === entry.id ? 'Hide' : 'View'} JSON
                           </button>
                         ) : (
-                          <span className="text-xs text-gray-300">-</span>
+                          <span className="text-xs text-[var(--line)]">-</span>
                         )}
                       </td>
                     </tr>
@@ -376,17 +376,17 @@ export default function AdminAuditLog() {
               const entry = data.entries.find((e) => e.id === expandedId);
               if (!entry?.details) return null;
               return (
-                <div className="border-t border-gray-100 bg-gray-50/50 px-6 py-4">
+                <div className="border-t border-[var(--line)] bg-[var(--paper2)] px-6 py-4">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Entry Details</span>
+                    <span className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Entry Details</span>
                     <button
                       onClick={() => setExpandedId(null)}
-                      className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                      className="text-xs text-[var(--muted)] hover:text-[var(--ink2)] transition-colors"
                     >
                       Close
                     </button>
                   </div>
-                  <pre className="text-xs text-gray-600 bg-white border border-gray-200 rounded-lg p-4 overflow-x-auto max-h-64 font-mono leading-relaxed">
+                  <pre className="text-xs text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg p-4 overflow-x-auto max-h-64 font-mono leading-relaxed">
                     {JSON.stringify(entry.details, null, 2)}
                   </pre>
                 </div>
@@ -399,9 +399,9 @@ export default function AdminAuditLog() {
       {/* Pagination */}
       {totalPages > 0 && (
         <div className="flex items-center justify-between mt-4 px-1">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-[var(--muted)]">
             Page {page + 1} of {totalPages}
-            <span className="ml-2 text-gray-400">
+            <span className="ml-2 text-[var(--muted)]">
               ({data?.total.toLocaleString()} total)
             </span>
           </p>
@@ -409,20 +409,20 @@ export default function AdminAuditLog() {
             <button
               onClick={() => setPage(Math.max(0, page - 1))}
               disabled={page === 0}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
               Previous
             </button>
-            <span className="text-sm text-gray-400 min-w-[80px] text-center">
+            <span className="text-sm text-[var(--muted)] min-w-[80px] text-center">
               {page + 1} / {totalPages}
             </span>
             <button
               onClick={() => setPage(Math.min(totalPages - 1, page + 1))}
               disabled={page >= totalPages - 1}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               Next
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

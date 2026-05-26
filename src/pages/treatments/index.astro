@@ -69,7 +69,7 @@ const treatmentSchema = JSON.stringify({
 ]}>
 
 <style>
-  :root{--ink:#0A1628;--ink2:#1E2A3B;--muted:#5A6B82;--warm:#C9654A;--line:#E6EAF0;--paper:#FBFAF7;--paper2:#F4F1EA;--accent:#1B4B5A;}
+  :root{--ink:#0A1628;--ink2:#1E2A3B;--muted:#5A6B82;--warm:#C9654A;--line:#E6EAF0;--paper:#FBFAF7;--paper2:#F4F1EA;--accent:#0A1628;}
   .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-0.02em}
   .linky{position:relative;display:inline-block}
   .linky::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
@@ -202,7 +202,7 @@ const treatmentSchema = JSON.stringify({
       <div class="flex items-baseline justify-between mb-10 flex-wrap gap-4">
         <div>
           <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(27,75,90,0.1); color:var(--accent)">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(10,22,40,0.1); color:var(--accent)">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
             </div>
             <h2 class="serif" style="font-size:clamp(1.75rem,3vw,2.25rem); color:var(--ink)">Research &amp; Emerging</h2>
@@ -216,7 +216,7 @@ const treatmentSchema = JSON.stringify({
           <a href={`/treatments/${item.slug}/`} class="cond-card block" style="background:var(--paper2); border:1px solid var(--line)">
             <div class="p-6">
               <div class="flex items-start justify-between mb-4">
-                <span class="card-tag" style="background:rgba(27,75,90,0.1); color:var(--accent); border:1px solid rgba(27,75,90,0.2)">Research</span>
+                <span class="card-tag" style="background:rgba(10,22,40,0.1); color:var(--accent); border:1px solid rgba(10,22,40,0.2)">Research</span>
                 <svg class="card-arrow w-4 h-4 transition-transform" style="color:var(--muted)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>

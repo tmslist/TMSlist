@@ -9,8 +9,8 @@ import {
   logAuthEvent,
   storePasskeyAuthChallenge,
   verifyPasskeyAuth,
-} from '../../../../utils/auth';
-import { strictRateLimit } from '../../../../utils/rateLimit';
+} from '../../../../utils/auth.js';
+import { strictRateLimit } from '../../../../utils/rateLimit.js';
 import { db } from '../../../../db';
 import { users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -38,8 +38,9 @@ export const POST: APIRoute = async ({ request }) => {
   const rateLimited = await strictRateLimit(ip, 20, '15 m', 'auth:passkey');
   if (rateLimited) return rateLimited;
 
+  let body: { email?: string; assertion?: unknown; userId?: string } = {};
   try {
-    const body = await request.json();
+    body = await request.json();
 
     // Step 1: Get auth options (email provided, no assertion yet)
     if (body.email && !body.assertion) {
@@ -238,22 +239,18 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (err) {
     console.error('[passkey/authenticate]', err);
 
-    // On verification failure, try to increment lockout counter if userId was provided
+    // On verification failure, try to increment lockout counter if userId was provided.
+    // Use the body parsed at the top of the handler — fetch bodies are single-use
+    // streams, so re-reading would always fail and the lockout would never fire.
     try {
-      if (request.headers.get('content-type')?.includes('application/json')) {
-        const bodyText = await request.text();
-        const body = JSON.parse(bodyText);
-        if (body.userId) {
-          const userResults = await db.select({ lockedUntil: users.lockedUntil })
-            .from(users).where(eq(users.id, body.userId)).limit(1);
-          const current = userResults[0]?.lockedUntil;
-          if (current && new Date() < current) {
-            // Already locked, no need to update
-          } else {
-            await db.update(users).set({
-              lockedUntil: new Date(Date.now() + PASSKEY_LOCK_DURATION_MS),
-            }).where(eq(users.id, body.userId));
-          }
+      if (body.userId) {
+        const userResults = await db.select({ lockedUntil: users.lockedUntil })
+          .from(users).where(eq(users.id, body.userId)).limit(1);
+        const current = userResults[0]?.lockedUntil;
+        if (!current || new Date() >= current) {
+          await db.update(users).set({
+            lockedUntil: new Date(Date.now() + PASSKEY_LOCK_DURATION_MS),
+          }).where(eq(users.id, body.userId));
         }
       }
     } catch {

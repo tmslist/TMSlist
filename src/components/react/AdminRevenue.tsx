@@ -27,8 +27,8 @@ interface RevenueData {
 }
 
 const PLAN_COLORS: Record<string, { bar: string; bg: string; text: string }> = {
-  verified: { bar: 'bg-blue-500', bg: 'bg-blue-50', text: 'text-blue-700' },
-  featured: { bar: 'bg-violet-500', bg: 'bg-violet-50', text: 'text-violet-700' },
+  verified: { bar: 'bg-[var(--ink2)]', bg: 'bg-[var(--paper2)]', text: 'text-[var(--ink)]' },
+  featured: { bar: 'bg-[var(--ink2)]', bg: 'bg-[rgba(10,22,40,0.08)]', text: 'text-[var(--ink)]' },
   premium: { bar: 'bg-amber-500', bg: 'bg-amber-50', text: 'text-amber-700' },
 };
 
@@ -36,8 +36,8 @@ const STATUS_COLORS: Record<string, string> = {
   active: 'bg-emerald-100 text-emerald-800',
   canceled: 'bg-red-100 text-red-800',
   past_due: 'bg-amber-100 text-amber-800',
-  trialing: 'bg-blue-100 text-blue-800',
-  paused: 'bg-gray-100 text-gray-700',
+  trialing: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
+  paused: 'bg-[var(--paper2)] text-[var(--ink2)]',
 };
 
 function formatCurrency(amount: number): string {
@@ -68,7 +68,7 @@ export default function AdminRevenue() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-4 border-violet-200 border-t-violet-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[rgba(10,22,40,0.15)] border-t-[#0A1628] rounded-full animate-spin" />
       </div>
     );
   }
@@ -88,39 +88,39 @@ export default function AdminRevenue() {
     <div className="space-y-8">
       {/* MRR + Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-br from-violet-600 to-violet-700 rounded-xl p-6 text-white shadow-lg col-span-1">
-          <p className="text-sm font-medium text-violet-200">Monthly Recurring Revenue</p>
+        <div className="bg-gradient-to-br from-[#0A1628] to-[#0A1628] rounded-xl p-6 text-white shadow-lg col-span-1">
+          <p className="text-sm font-medium text-[rgba(10,22,40,0.2)]">Monthly Recurring Revenue</p>
           <p className="text-4xl font-bold mt-2">{formatCurrency(data.mrr)}</p>
-          <p className="text-sm text-violet-200 mt-1">MRR</p>
+          <p className="text-sm text-[rgba(10,22,40,0.2)] mt-1">MRR</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Active Subscriptions</p>
-          <p className="text-3xl font-semibold text-gray-900 mt-2">{totalActive}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Active Subscriptions</p>
+          <p className="text-3xl font-semibold text-[var(--ink)] mt-2">{totalActive}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <p className="text-sm font-medium text-gray-500">Projected ARR</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <p className="text-sm font-medium text-[var(--muted)]">Projected ARR</p>
           <p className="text-3xl font-semibold text-emerald-600 mt-2">{formatCurrency(data.mrr * 12)}</p>
         </div>
       </div>
 
       {/* Active Subs by Plan */}
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Active Subscriptions by Plan</h2>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-4">
+        <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Active Subscriptions by Plan</h2>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm space-y-4">
           {data.byPlan.length === 0 ? (
-            <p className="text-gray-500 text-sm">No active subscriptions yet.</p>
+            <p className="text-[var(--muted)] text-sm">No active subscriptions yet.</p>
           ) : (
             data.byPlan.map(p => {
-              const colors = PLAN_COLORS[p.plan] || { bar: 'bg-gray-400', bg: 'bg-gray-50', text: 'text-gray-700' };
+              const colors = PLAN_COLORS[p.plan] || { bar: 'bg-[var(--line)]', bg: 'bg-[var(--paper2)]', text: 'text-[var(--ink2)]' };
               const count = Number(p.count);
               const widthPct = Math.max((count / maxPlanCount) * 100, 4);
               return (
                 <div key={p.plan}>
                   <div className="flex items-center justify-between mb-1">
                     <span className={`text-sm font-medium capitalize ${colors.text}`}>{p.plan}</span>
-                    <span className="text-sm font-semibold text-gray-900">{count}</span>
+                    <span className="text-sm font-semibold text-[var(--ink)]">{count}</span>
                   </div>
-                  <div className="w-full bg-gray-100 rounded-full h-3">
+                  <div className="w-full bg-[var(--paper2)] rounded-full h-3">
                     <div
                       className={`h-3 rounded-full ${colors.bar} transition-all duration-500`}
                       style={{ width: `${widthPct}%` }}
@@ -135,14 +135,14 @@ export default function AdminRevenue() {
 
       {/* Status Breakdown */}
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Status Breakdown</h2>
+        <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Status Breakdown</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {data.byStatus.map(s => (
-            <div key={s.status} className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm text-center">
-              <span className={`inline-block text-xs font-medium px-2.5 py-1 rounded-full capitalize ${STATUS_COLORS[s.status] || 'bg-gray-100 text-gray-700'}`}>
+            <div key={s.status} className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm text-center">
+              <span className={`inline-block text-xs font-medium px-2.5 py-1 rounded-full capitalize ${STATUS_COLORS[s.status] || 'bg-[var(--paper2)] text-[var(--ink2)]'}`}>
                 {s.status.replace(/_/g, ' ')}
               </span>
-              <p className="text-2xl font-bold text-gray-900 mt-3">{Number(s.count)}</p>
+              <p className="text-2xl font-bold text-[var(--ink)] mt-3">{Number(s.count)}</p>
             </div>
           ))}
         </div>
@@ -150,34 +150,34 @@ export default function AdminRevenue() {
 
       {/* Recent Subscriptions Table */}
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Subscriptions</h2>
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+        <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Recent Subscriptions</h2>
+        <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden shadow-sm">
           {data.recent.length === 0 ? (
-            <p className="p-6 text-gray-500 text-sm">No subscriptions yet.</p>
+            <p className="p-6 text-[var(--muted)] text-sm">No subscriptions yet.</p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-[var(--line)]">
+                <thead className="bg-[var(--paper2)]">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Plan</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Clinic ID</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Plan</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Status</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Clinic ID</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Created</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-[var(--line)]">
                   {data.recent.map(sub => (
-                    <tr key={sub.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900 capitalize">{sub.plan}</td>
+                    <tr key={sub.id} className="hover:bg-[var(--paper2)]">
+                      <td className="px-6 py-4 text-sm font-medium text-[var(--ink)] capitalize">{sub.plan}</td>
                       <td className="px-6 py-4">
-                        <span className={`text-xs font-medium px-2 py-0.5 rounded-full capitalize ${STATUS_COLORS[sub.status] || 'bg-gray-100 text-gray-700'}`}>
+                        <span className={`text-xs font-medium px-2 py-0.5 rounded-full capitalize ${STATUS_COLORS[sub.status] || 'bg-[var(--paper2)] text-[var(--ink2)]'}`}>
                           {sub.status.replace(/_/g, ' ')}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-500 font-mono">
+                      <td className="px-6 py-4 text-sm text-[var(--muted)] font-mono">
                         {sub.clinicId ? sub.clinicId.slice(0, 8) + '...' : '-'}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-500">
+                      <td className="px-6 py-4 text-sm text-[var(--muted)]">
                         {sub.createdAt ? formatDate(sub.createdAt) : '-'}
                       </td>
                     </tr>

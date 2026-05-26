@@ -1,7 +1,7 @@
 ---
 title: "Accelerated TMS Protocols: SAINT, iTBS, and Same-Day Treatment"
 description: "Comparing accelerated TMS protocols — Stanford SAINT protocol (5 days), compressed iTBS, and traditional 6-week courses. Speed vs outcomes."
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 treatmentA: "Accelerated TMS"
 treatmentB: "Standard TMS (6-9 weeks)"
 verdict: "The Stanford SAINT protocol achieves 79%+ remission rates vs 30-35% for standard TMS in trials. Compressed iTBS is equivalent to standard protocols. Standard TMS remains the most accessible and insurance-friendly option."
@@ -88,9 +88,9 @@ Search for [TMS providers](/us/) or explore other [device comparisons](/compare/
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>SAINT protocol achieves 79%+ remission in trials vs 30-35% for standard TMS</li>
     <li>SAINT combines MRI-guided targeting, accelerated dosing, and higher pulse counts</li>
     <li>Compressed iTBS (2-3 sessions/day) is equivalent to standard protocols</li>
@@ -99,11 +99,11 @@ Search for [TMS providers](/us/) or explore other [device comparisons](/compare/
   </ul>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>

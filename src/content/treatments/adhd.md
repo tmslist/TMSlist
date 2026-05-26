@@ -4,7 +4,7 @@ condition: "ADHD"
 description: "TMS therapy for attention-deficit/hyperactivity disorder — early research shows potential for improving focus and executive function, though evidence remains limited."
 fdaApproved: false
 successRate: "Variable — limited controlled data available"
-image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 sessionCount: "20-30"
 duration: "4-6 weeks"
 brainArea: "Right DLPFC"
@@ -15,29 +15,6 @@ faqs:
     answer: "Not currently. TMS is being studied as an add-on treatment, not a replacement for stimulants. It may help patients who can't tolerate or don't respond well to medication."
 ---
 
-
-<div class="not-prose mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-  <div class="relative overflow-hidden bg-gradient-to-br from-violet-50 to-fuchsia-50 border border-violet-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
-    <div class="absolute -right-4 -top-4 w-16 h-16 bg-violet-400/10 rounded-full blur-xl group-hover:bg-violet-400/20 transition-all"></div>
-    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600 font-display">8.4M</div>
-    <div class="text-xs font-medium text-violet-700/80 mt-1">US adults with ADHD</div>
-  </div>
-  <div class="relative overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
-    <div class="absolute -right-4 -top-4 w-16 h-16 bg-emerald-400/10 rounded-full blur-xl group-hover:bg-emerald-400/20 transition-all"></div>
-    <div class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600 font-display">Variable</div>
-    <div class="text-xs font-medium text-emerald-700/80 mt-1">Limited controlled data</div>
-  </div>
-  <div class="relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
-    <div class="absolute -right-4 -top-4 w-16 h-16 bg-blue-400/10 rounded-full blur-xl group-hover:bg-blue-400/20 transition-all"></div>
-    <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 font-display">20-30</div>
-    <div class="text-xs font-medium text-blue-700/80 mt-1">Sessions typical</div>
-  </div>
-  <div class="relative overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 rounded-2xl p-5 text-center hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-center">
-    <div class="absolute -right-4 -top-4 w-16 h-16 bg-amber-400/10 rounded-full blur-xl group-hover:bg-amber-400/20 transition-all"></div>
-    <div class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500 font-display">Off-label</div>
-    <div class="text-xs font-medium text-amber-700/80 mt-1">Regulatory status</div>
-  </div>
-</div>
 
 ## What is ADHD and How TMS Helps
 

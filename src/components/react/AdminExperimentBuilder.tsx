@@ -48,7 +48,7 @@ function ToastContainer({ toasts }: { toasts: Toast[] }) {
           className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg text-sm font-medium animate-fade-in ${
             t.type === 'success' ? 'bg-emerald-600 text-white' :
             t.type === 'error' ? 'bg-red-600 text-white' :
-            'bg-indigo-600 text-white'
+            'bg-[var(--ink2)] text-white'
           }`}
         >
           {t.type === 'success' && (
@@ -90,23 +90,23 @@ function VariantChart({ variants }: { variants: ExperimentVariant[] }) {
   if (data.length === 0) return null;
 
   return (
-    <div className="space-y-3 p-4 bg-gray-50 rounded-xl">
-      <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Conversion Rate Comparison</h4>
+    <div className="space-y-3 p-4 bg-[var(--paper2)] rounded-xl">
+      <h4 className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">Conversion Rate Comparison</h4>
       <div className="space-y-2">
         {data.map(d => {
           const pct = (d.rate / maxRate) * 100;
           return (
             <div key={d.name} className="flex items-center gap-3">
-              <div className="w-24 text-xs text-gray-600 font-medium truncate">{d.name}</div>
-              <div className="flex-1 h-6 bg-gray-200 rounded-full overflow-hidden">
+              <div className="w-24 text-xs text-[var(--ink2)] font-medium truncate">{d.name}</div>
+              <div className="flex-1 h-6 bg-[var(--paper2)] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-indigo-500 rounded-full transition-all duration-500"
+                  className="h-full bg-[var(--warm)] rounded-full transition-all duration-500"
                   style={{ width: `${Math.max(pct, 2)}%` }}
                 />
               </div>
-              <div className="w-28 text-xs text-gray-500 text-right">
-                <span className="font-semibold text-gray-800">{d.rate.toFixed(2)}%</span>
-                <span className="ml-2 text-gray-400">({d.conversions}/{d.impressions})</span>
+              <div className="w-28 text-xs text-[var(--muted)] text-right">
+                <span className="font-semibold text-[var(--ink)]">{d.rate.toFixed(2)}%</span>
+                <span className="ml-2 text-[var(--muted)]">({d.conversions}/{d.impressions})</span>
               </div>
             </div>
           );
@@ -194,8 +194,8 @@ function ExperimentModal({
       <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto animate-scale-in">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-lg font-semibold text-gray-900">{existing ? 'Edit Experiment' : 'New Experiment'}</h2>
-            <button onClick={onClose} className="p-1.5 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+            <h2 className="text-lg font-semibold text-[var(--ink)]">{existing ? 'Edit Experiment' : 'New Experiment'}</h2>
+            <button onClick={onClose} className="p-1.5 text-[var(--muted)] hover:text-[var(--ink2)] rounded-lg hover:bg-[var(--paper2)]">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -208,25 +208,25 @@ function ExperimentModal({
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Name *</label>
               <input type="text" value={form.name} onChange={(e) => update('name', e.target.value)} placeholder="e.g. Homepage CTA Color Test"
-                className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+                className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Hypothesis</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Hypothesis</label>
               <input type="text" value={form.hypothesis} onChange={(e) => update('hypothesis', e.target.value)} placeholder="e.g. Changing the CTA to green will increase conversions by 10%"
-                className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+                className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Description</label>
               <textarea value={form.description} onChange={(e) => update('description', e.target.value)} placeholder="Optional detailed description..."
                 rows={2}
-                className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none" />
+                className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none resize-none" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Key Metric *</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Key Metric *</label>
               <select value={form.primaryMetric} onChange={(e) => update('primaryMetric', e.target.value)}
-                className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none bg-white">
+                className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none bg-white">
                 <option value="leads">Leads</option>
                 <option value="conversions">Conversions</option>
                 <option value="revenue">Revenue</option>
@@ -234,7 +234,7 @@ function ExperimentModal({
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Traffic Percentage: {form.trafficPercent}%</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Traffic Percentage: {form.trafficPercent}%</label>
               <input
                 type="range"
                 min={1} max={100}
@@ -242,27 +242,27 @@ function ExperimentModal({
                 onChange={(e) => update('trafficPercent', parseInt(e.target.value))}
                 className="w-full accent-indigo-600"
               />
-              <div className="flex justify-between text-xs text-gray-400 mt-1">
+              <div className="flex justify-between text-xs text-[var(--muted)] mt-1">
                 <span>1%</span><span>50%</span><span>100%</span>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Start Date</label>
                 <input type="date" value={form.startDate} onChange={(e) => update('startDate', e.target.value)}
-                  className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+                  className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">End Date</label>
                 <input type="date" value={form.endDate} onChange={(e) => update('endDate', e.target.value)}
-                  className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+                  className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
               </div>
             </div>
             {existing && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Status</label>
                 <select value={form.status} onChange={(e) => update('status', e.target.value as ExperimentStatus)}
-                  className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none bg-white">
+                  className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none bg-white">
                   <option value="draft">Draft</option>
                   <option value="running">Running</option>
                   <option value="paused">Paused</option>
@@ -273,9 +273,9 @@ function ExperimentModal({
           </div>
 
           <div className="flex justify-end gap-3 mt-6">
-            <button onClick={onClose} className="px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50">Cancel</button>
+            <button onClick={onClose} className="px-4 py-2.5 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-xl hover:bg-[var(--paper2)]">Cancel</button>
             <button onClick={handleSubmit} disabled={saving}
-              className="px-4 py-2.5 text-sm font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 disabled:opacity-50 flex items-center gap-2">
+              className="px-4 py-2.5 text-sm font-medium text-white bg-[var(--ink2)] rounded-xl hover:bg-[var(--ink2)] disabled:opacity-50 flex items-center gap-2">
               {saving && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
               {existing ? 'Update' : 'Create Experiment'}
             </button>
@@ -326,8 +326,8 @@ function VariantModal({
       <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 animate-scale-in">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-lg font-semibold text-gray-900">Add Variant</h2>
-            <button onClick={onClose} className="p-1.5 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+            <h2 className="text-lg font-semibold text-[var(--ink)]">Add Variant</h2>
+            <button onClick={onClose} className="p-1.5 text-[var(--muted)] hover:text-[var(--ink2)] rounded-lg hover:bg-[var(--paper2)]">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -336,18 +336,18 @@ function VariantModal({
           {error && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">{error}</div>}
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Variant Name *</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Variant Name *</label>
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. variant_b"
-                className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+                className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Description / Changes</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Description / Changes</label>
               <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Describe what changes in this variant..."
                 rows={3}
-                className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none" />
+                className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none resize-none" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Traffic Allocation: {trafficAlloc}%</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Traffic Allocation: {trafficAlloc}%</label>
               <input
                 type="range"
                 min={1} max={100}
@@ -359,9 +359,9 @@ function VariantModal({
             </div>
           </div>
           <div className="flex justify-end gap-3 mt-6">
-            <button onClick={onClose} className="px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50">Cancel</button>
+            <button onClick={onClose} className="px-4 py-2.5 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-xl hover:bg-[var(--paper2)]">Cancel</button>
             <button onClick={handleSubmit} disabled={saving}
-              className="px-4 py-2.5 text-sm font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 disabled:opacity-50 flex items-center gap-2">
+              className="px-4 py-2.5 text-sm font-medium text-white bg-[var(--ink2)] rounded-xl hover:bg-[var(--ink2)] disabled:opacity-50 flex items-center gap-2">
               {saving && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
               Add Variant
             </button>
@@ -375,10 +375,10 @@ function VariantModal({
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
 const STATUS_META: Record<ExperimentStatus, { label: string; color: string; dot: string }> = {
-  draft:      { label: 'Draft',      color: 'bg-gray-100 text-gray-600', dot: 'bg-gray-400' },
+  draft:      { label: 'Draft',      color: 'bg-[var(--paper2)] text-[var(--ink2)]', dot: 'bg-[var(--line)]' },
   running:    { label: 'Running',    color: 'bg-emerald-50 text-emerald-700', dot: 'bg-emerald-500' },
   paused:     { label: 'Paused',     color: 'bg-amber-50 text-amber-700', dot: 'bg-amber-500' },
-  concluded:  { label: 'Concluded', color: 'bg-indigo-50 text-indigo-700', dot: 'bg-indigo-400' },
+  concluded:  { label: 'Concluded', color: 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)]', dot: 'bg-[var(--warm)]' },
 };
 
 const METRIC_LABELS: Record<string, string> = {
@@ -489,13 +489,13 @@ export default function AdminExperimentBuilder() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Experiment Builder</h1>
-          <p className="text-gray-500 mt-1 text-sm">A/B testing and variant management</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Experiment Builder</h1>
+          <p className="text-[var(--muted)] mt-1 text-sm">A/B testing and variant management</p>
         </div>
         {activeTab === 'experiments' && (
           <button
             onClick={() => setExperimentForm(undefined)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-600 text-white text-sm font-medium rounded-xl hover:bg-indigo-700 transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[var(--ink2)] text-white text-sm font-medium rounded-xl hover:bg-[var(--ink2)] transition-colors shadow-sm"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -506,7 +506,7 @@ export default function AdminExperimentBuilder() {
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200">
+      <div className="border-b border-[var(--line)]">
         <nav className="flex gap-1">
           {(['experiments', 'variants'] as const).map(tab => (
             <button
@@ -514,8 +514,8 @@ export default function AdminExperimentBuilder() {
               onClick={() => setActiveTab(tab)}
               className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === tab
-                  ? 'border-indigo-600 text-indigo-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  ? 'border-[rgba(201,101,74,0.2)] text-[var(--warm)]'
+                  : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)]'
               }`}
             >
               {tab === 'experiments' ? 'Experiments' : 'Variants'}
@@ -533,16 +533,16 @@ export default function AdminExperimentBuilder() {
       {activeTab === 'experiments' && (
         loading ? (
           <div className="flex items-center justify-center py-16">
-            <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-[rgba(201,101,74,0.2)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : experiments.length === 0 ? (
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm text-center py-16">
-            <svg className="w-12 h-12 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm text-center py-16">
+            <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
-            <p className="text-gray-500 font-medium">No experiments yet</p>
-            <p className="text-gray-400 text-sm mt-1">Create your first A/B test to get started</p>
-            <button onClick={() => setExperimentForm(undefined)} className="mt-4 text-indigo-600 hover:text-indigo-700 text-sm font-medium">
+            <p className="text-[var(--muted)] font-medium">No experiments yet</p>
+            <p className="text-[var(--muted)] text-sm mt-1">Create your first A/B test to get started</p>
+            <button onClick={() => setExperimentForm(undefined)} className="mt-4 text-[var(--warm)] hover:text-[var(--warm)] text-sm font-medium">
               Create experiment
             </button>
           </div>
@@ -551,7 +551,7 @@ export default function AdminExperimentBuilder() {
             {experiments.map(exp => {
               const statusMeta = STATUS_META[exp.status];
               return (
-                <div key={exp.id} className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 hover:shadow-md transition-shadow">
+                <div key={exp.id} className="bg-white rounded-xl border border-[var(--line)] shadow-sm p-6 hover:shadow-md transition-shadow">
                   {/* Status badge + traffic */}
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-2">
@@ -560,32 +560,32 @@ export default function AdminExperimentBuilder() {
                         {statusMeta.label}
                       </span>
                     </div>
-                    <span className="text-xs text-gray-400 font-mono">{exp.trafficPercent}% traffic</span>
+                    <span className="text-xs text-[var(--muted)] font-mono">{exp.trafficPercent}% traffic</span>
                   </div>
 
                   {/* Name & hypothesis */}
-                  <h3 className="text-base font-semibold text-gray-900 mb-1 line-clamp-1">{exp.name}</h3>
+                  <h3 className="text-base font-semibold text-[var(--ink)] mb-1 line-clamp-1">{exp.name}</h3>
                   {exp.hypothesis && (
-                    <p className="text-xs text-gray-500 mb-3 line-clamp-2">{exp.hypothesis}</p>
+                    <p className="text-xs text-[var(--muted)] mb-3 line-clamp-2">{exp.hypothesis}</p>
                   )}
 
                   {/* Metric + dates */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-xs bg-violet-50 text-violet-700 px-2 py-1 rounded-md font-medium">
+                    <span className="text-xs bg-[rgba(10,22,40,0.08)] text-[var(--ink)] px-2 py-1 rounded-md font-medium">
                       {METRIC_LABELS[exp.primaryMetric] || exp.primaryMetric}
                     </span>
                     {exp.startedAt && (
-                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-md">
+                      <span className="text-xs bg-[var(--paper2)] text-[var(--ink2)] px-2 py-1 rounded-md">
                         Started {formatDate(exp.startedAt)}
                       </span>
                     )}
                     {exp.concludedAt && (
-                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-md">
+                      <span className="text-xs bg-[var(--paper2)] text-[var(--ink2)] px-2 py-1 rounded-md">
                         Concluded {formatDate(exp.concludedAt)}
                       </span>
                     )}
                     {!exp.startedAt && !exp.concludedAt && (
-                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-md">
+                      <span className="text-xs bg-[var(--paper2)] text-[var(--ink2)] px-2 py-1 rounded-md">
                         {(exp.variants || []).length} variant{((exp.variants || []).length) !== 1 ? 's' : ''}
                       </span>
                     )}
@@ -593,13 +593,13 @@ export default function AdminExperimentBuilder() {
 
                   {/* Quick stats */}
                   {(exp.variants || []).length > 0 && (
-                    <div className="grid grid-cols-3 gap-2 mb-4 p-3 bg-gray-50 rounded-lg">
+                    <div className="grid grid-cols-3 gap-2 mb-4 p-3 bg-[var(--paper2)] rounded-lg">
                       {(exp.variants || []).map(v => {
                         const rate = v.impressions > 0 ? ((v.conversions / v.impressions) * 100).toFixed(1) : '0.0';
                         return (
                           <div key={v.id} className="text-center">
-                            <div className="text-xs font-bold text-gray-800">{rate}%</div>
-                            <div className="text-xs text-gray-400 truncate">{v.name}</div>
+                            <div className="text-xs font-bold text-[var(--ink)]">{rate}%</div>
+                            <div className="text-xs text-[var(--muted)] truncate">{v.name}</div>
                           </div>
                         );
                       })}
@@ -607,10 +607,10 @@ export default function AdminExperimentBuilder() {
                   )}
 
                   {/* Actions */}
-                  <div className="flex gap-2 pt-3 border-t border-gray-100">
+                  <div className="flex gap-2 pt-3 border-t border-[var(--line)]">
                     <button
                       onClick={() => setExperimentForm(exp)}
-                      className="flex-1 px-3 py-2 text-xs font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                      className="flex-1 px-3 py-2 text-xs font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] transition-colors"
                     >
                       Edit
                     </button>
@@ -640,7 +640,7 @@ export default function AdminExperimentBuilder() {
                     )}
                     <button
                       onClick={() => setConfirmDelete(exp)}
-                      className="px-3 py-2 text-xs font-medium text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                      className="px-3 py-2 text-xs font-medium text-[var(--muted)] hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
                       title="Archive / Delete"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -649,7 +649,7 @@ export default function AdminExperimentBuilder() {
                     </button>
                     <button
                       onClick={() => { setSelectedExpId(exp.id); setActiveTab('variants'); }}
-                      className="px-3 py-2 text-xs font-medium text-indigo-600 hover:text-indigo-700 rounded-lg hover:bg-indigo-50 transition-colors"
+                      className="px-3 py-2 text-xs font-medium text-[var(--warm)] hover:text-[var(--warm)] rounded-lg hover:bg-[rgba(201,101,74,0.06)] transition-colors"
                       title="View Variants"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -668,14 +668,14 @@ export default function AdminExperimentBuilder() {
       {activeTab === 'variants' && (
         <>
           {/* Experiment Selector */}
-          <div className="flex flex-wrap items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
-            <label className="text-sm font-medium text-gray-700">Experiment:</label>
+          <div className="flex flex-wrap items-center gap-3 p-4 bg-white rounded-xl border border-[var(--line)] shadow-sm">
+            <label className="text-sm font-medium text-[var(--ink2)]">Experiment:</label>
             <select
               value={selectedExpId || ''}
               onChange={(e) => {
                 setSelectedExpId(e.target.value || null);
               }}
-              className="text-sm border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none bg-white flex-1 min-w-[200px]"
+              className="text-sm border border-[var(--line)] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none bg-white flex-1 min-w-[200px]"
             >
               <option value="">Select an experiment...</option>
               {experiments.map(exp => (
@@ -685,7 +685,7 @@ export default function AdminExperimentBuilder() {
             {selectedExpId && (
               <button
                 onClick={() => fetchVariants(selectedExpId)}
-                className="p-2 text-gray-500 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors"
+                className="p-2 text-[var(--muted)] hover:text-[var(--warm)] rounded-lg hover:bg-[rgba(201,101,74,0.06)] transition-colors"
                 title="Refresh variants"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -696,27 +696,27 @@ export default function AdminExperimentBuilder() {
           </div>
 
           {!selectedExpId ? (
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm text-center py-16">
-              <svg className="w-12 h-12 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm text-center py-16">
+              <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
-              <p className="text-gray-500 font-medium">Select an experiment to view its variants</p>
+              <p className="text-[var(--muted)] font-medium">Select an experiment to view its variants</p>
             </div>
           ) : selectedExperiment ? (
             <div className="space-y-4">
               {/* Experiment info bar */}
-              <div className="flex items-center justify-between p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+              <div className="flex items-center justify-between p-4 bg-[rgba(201,101,74,0.06)] rounded-xl border border-[var(--line)]">
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-900">{selectedExperiment.name}</h3>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <h3 className="text-sm font-semibold text-[var(--ink)]">{selectedExperiment.name}</h3>
+                  <p className="text-xs text-[var(--muted)] mt-0.5">
                     {METRIC_LABELS[selectedExperiment.primaryMetric] || selectedExperiment.primaryMetric} &middot;
                     Traffic: {selectedExperiment.trafficPercent}% &middot;
-                    Status: <span className={`font-medium ${selectedExperiment.status === 'running' ? 'text-emerald-600' : 'text-gray-600'}`}>{STATUS_META[selectedExperiment.status].label}</span>
+                    Status: <span className={`font-medium ${selectedExperiment.status === 'running' ? 'text-emerald-600' : 'text-[var(--ink2)]'}`}>{STATUS_META[selectedExperiment.status].label}</span>
                   </p>
                 </div>
                 <button
                   onClick={() => setShowVariantModal(true)}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-xl hover:bg-indigo-700 transition-colors shadow-sm"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-xl hover:bg-[var(--ink2)] transition-colors shadow-sm"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -731,46 +731,46 @@ export default function AdminExperimentBuilder() {
               )}
 
               {/* Variants table */}
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+              <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
                 {loading ? (
                   <div className="flex items-center justify-center py-12">
-                    <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+                    <div className="w-6 h-6 border-2 border-[rgba(201,101,74,0.2)] border-t-transparent rounded-full animate-spin" />
                   </div>
                 ) : !(selectedExperiment.variants || []).length ? (
                   <div className="text-center py-12">
-                    <p className="text-gray-500 font-medium">No variants yet</p>
-                    <button onClick={() => setShowVariantModal(true)} className="mt-2 text-indigo-600 hover:text-indigo-700 text-sm font-medium">
+                    <p className="text-[var(--muted)] font-medium">No variants yet</p>
+                    <button onClick={() => setShowVariantModal(true)} className="mt-2 text-[var(--warm)] hover:text-[var(--warm)] text-sm font-medium">
                       Add the first variant
                     </button>
                   </div>
                 ) : (
                   <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-100">
-                      <thead className="bg-gray-50">
+                    <table className="min-w-full divide-y divide-[var(--line)]">
+                      <thead className="bg-[var(--paper2)]">
                         <tr>
-                          <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Variant Name</th>
-                          <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Description</th>
-                          <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Impressions</th>
-                          <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Conversions</th>
-                          <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Conversion Rate</th>
-                          <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Winner</th>
-                          <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                          <th className="px-6 py-3 text-left text-xs font-semibold text-[var(--muted)] uppercase">Variant Name</th>
+                          <th className="px-6 py-3 text-left text-xs font-semibold text-[var(--muted)] uppercase">Description</th>
+                          <th className="px-6 py-3 text-left text-xs font-semibold text-[var(--muted)] uppercase">Impressions</th>
+                          <th className="px-6 py-3 text-left text-xs font-semibold text-[var(--muted)] uppercase">Conversions</th>
+                          <th className="px-6 py-3 text-left text-xs font-semibold text-[var(--muted)] uppercase">Conversion Rate</th>
+                          <th className="px-6 py-3 text-left text-xs font-semibold text-[var(--muted)] uppercase">Winner</th>
+                          <th className="px-6 py-3 text-right text-xs font-semibold text-[var(--muted)] uppercase">Actions</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-100">
+                      <tbody className="divide-y divide-[var(--line)]">
                         {(selectedExperiment.variants || []).map(v => {
                           const rate = v.impressions > 0 ? (v.conversions / v.impressions) * 100 : 0;
                           const isWinner = selectedExperiment.winnerVariant === v.name;
                           return (
-                            <tr key={v.id} className="hover:bg-gray-50 transition-colors">
-                              <td className="px-6 py-4 text-sm font-semibold text-gray-900">{v.name}</td>
-                              <td className="px-6 py-4 text-sm text-gray-500 max-w-xs">
-                                {v.changes ? <span className="line-clamp-1">{v.changes}</span> : <span className="text-gray-300">--</span>}
+                            <tr key={v.id} className="hover:bg-[var(--paper2)] transition-colors">
+                              <td className="px-6 py-4 text-sm font-semibold text-[var(--ink)]">{v.name}</td>
+                              <td className="px-6 py-4 text-sm text-[var(--muted)] max-w-xs">
+                                {v.changes ? <span className="line-clamp-1">{v.changes}</span> : <span className="text-[var(--line)]">--</span>}
                               </td>
-                              <td className="px-6 py-4 text-sm text-gray-600">{v.impressions.toLocaleString()}</td>
-                              <td className="px-6 py-4 text-sm text-gray-600">{v.conversions.toLocaleString()}</td>
+                              <td className="px-6 py-4 text-sm text-[var(--ink2)]">{v.impressions.toLocaleString()}</td>
+                              <td className="px-6 py-4 text-sm text-[var(--ink2)]">{v.conversions.toLocaleString()}</td>
                               <td className="px-6 py-4 text-sm">
-                                <span className={`font-semibold ${rate > 0 ? 'text-gray-900' : 'text-gray-400'}`}>
+                                <span className={`font-semibold ${rate > 0 ? 'text-[var(--ink)]' : 'text-[var(--muted)]'}`}>
                                   {rate.toFixed(2)}%
                                 </span>
                               </td>
@@ -787,7 +787,7 @@ export default function AdminExperimentBuilder() {
                               <td className="px-6 py-4 text-right">
                                 <button
                                   onClick={() => setConfirmVariantDelete(v.id)}
-                                  className="p-1.5 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                                  className="p-1.5 text-[var(--muted)] hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
                                   title="Remove variant"
                                 >
                                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -828,12 +828,12 @@ export default function AdminExperimentBuilder() {
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40" onClick={() => setConfirmDelete(null)} />
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 animate-scale-in">
-              <h3 className="text-base font-semibold text-gray-900 mb-2">Archive Experiment?</h3>
-              <p className="text-sm text-gray-500 mb-5">
+              <h3 className="text-base font-semibold text-[var(--ink)] mb-2">Archive Experiment?</h3>
+              <p className="text-sm text-[var(--muted)] mb-5">
                 Are you sure you want to archive <strong>"{confirmDelete.name}"</strong>? This will delete all associated variants. This cannot be undone.
               </p>
               <div className="flex justify-end gap-3">
-                <button onClick={() => setConfirmDelete(null)} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50">Cancel</button>
+                <button onClick={() => setConfirmDelete(null)} className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-xl hover:bg-[var(--paper2)]">Cancel</button>
                 <button onClick={() => handleDeleteExperiment(confirmDelete.id)} className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-xl hover:bg-red-700">Archive</button>
               </div>
             </div>
@@ -845,10 +845,10 @@ export default function AdminExperimentBuilder() {
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40" onClick={() => setConfirmVariantDelete(null)} />
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 animate-scale-in">
-              <h3 className="text-base font-semibold text-gray-900 mb-2">Remove Variant?</h3>
-              <p className="text-sm text-gray-500 mb-5">This variant will be permanently removed. This cannot be undone.</p>
+              <h3 className="text-base font-semibold text-[var(--ink)] mb-2">Remove Variant?</h3>
+              <p className="text-sm text-[var(--muted)] mb-5">This variant will be permanently removed. This cannot be undone.</p>
               <div className="flex justify-end gap-3">
-                <button onClick={() => setConfirmVariantDelete(null)} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50">Cancel</button>
+                <button onClick={() => setConfirmVariantDelete(null)} className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-xl hover:bg-[var(--paper2)]">Cancel</button>
                 <button onClick={() => handleDeleteVariant(confirmVariantDelete)} className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-xl hover:bg-red-700">Remove</button>
               </div>
             </div>

@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-15
 category: research
 tags: ["success rates", "research", "depression", "outcomes"]
-image: "https://images.unsplash.com/photo-1576091160550-217358c7e618?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-success-rates-2026.svg"
 ---
 
 About 50-60% of people with treatment-resistant depression respond to TMS therapy. Around 30-35% achieve full remission, meaning their depression symptoms essentially go away. These numbers come from large clinical trials and real-world data, not manufacturer marketing.
@@ -78,9 +78,9 @@ That is more than most alternatives can claim.
 
 If you are considering TMS, the best next step is a consultation with a clinic that does high volumes of TMS. They will have seen enough people to give you an honest read on your chances.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>50-60% of people with treatment-resistant depression respond to TMS. 30-35% achieve full remission.</li>
     <li>Response and remission are different. Response is 50% improvement. Remission means you are no longer clinically depressed.</li>
     <li>Better outcomes are tied to fewer failed medications, shorter current episode, and completing the full course.</li>
@@ -90,47 +90,47 @@ If you are considering TMS, the best next step is a consultation with a clinic t
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What percentage of people does TMS work for?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What percentage of people does TMS work for?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">About 50-60% of people with treatment-resistant depression respond to TMS (at least 50% improvement on depression scales). About 30-35% achieve full remission (scores drop below the clinical threshold). These numbers are from large clinical trials and real-world data, not manufacturer marketing.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">About 50-60% of people with treatment-resistant depression respond to TMS (at least 50% improvement on depression scales). About 30-35% achieve full remission (scores drop below the clinical threshold). These numbers are from large clinical trials and real-world data, not manufacturer marketing.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long does TMS keep working?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long does TMS keep working?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most studies show benefits lasting 6-12 months after a full treatment course. About 30-50% of responders need periodic maintenance sessions to sustain their improvement. Some people stay well for years without boosters. The OCD data is particularly strong, with 58% maintaining improvement at 2 years.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most studies show benefits lasting 6-12 months after a full treatment course. About 30-50% of responders need periodic maintenance sessions to sustain their improvement. Some people stay well for years without boosters. The OCD data is particularly strong, with 58% maintaining improvement at 2 years.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS work better than medication?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS work better than medication?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">For treatment-resistant depression, TMS response rates (50-60%) are comparable to medication response rates in first-line treatment (60-70%). But TMS patients have already failed 2+ medication trials. For that population, TMS performs as well as or better than additional medication attempts. TMS also has a much cleaner side effect profile.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">For treatment-resistant depression, TMS response rates (50-60%) are comparable to medication response rates in first-line treatment (60-70%). But TMS patients have already failed 2+ medication trials. For that population, TMS performs as well as or better than additional medication attempts. TMS also has a much cleaner side effect profile.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What reduces the chance of TMS working?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What reduces the chance of TMS working?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Factors tied to lower response rates include: having tried many medications (8+), very long current depressive episode (10+ years), comorbid personality disorders, and stopping treatment early. The single biggest predictor is completing all 36 sessions. People who quit early almost always have worse outcomes.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Factors tied to lower response rates include: having tried many medications (8+), very long current depressive episode (10+ years), comorbid personality disorders, and stopping treatment early. The single biggest predictor is completing all 36 sessions. People who quit early almost always have worse outcomes.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS fail if I already failed medications?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS fail if I already failed medications?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS can still work even after multiple medication failures. People who have tried 2-3 medications respond better than those who have tried 8+, but TMS still produces meaningful response rates in highly treatment-resistant populations. If standard TMS has not worked, precision targeting with fMRI guidance may improve outcomes.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS can still work even after multiple medication failures. People who have tried 2-3 medications respond better than those who have tried 8+, but TMS still produces meaningful response rates in highly treatment-resistant populations. If standard TMS has not worked, precision targeting with fMRI guidance may improve outcomes.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

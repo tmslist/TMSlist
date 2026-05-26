@@ -4,7 +4,7 @@ description: "After successful TMS treatment, depression can return. Learn the w
 publishDate: 2026-04-15
 category: patient-guide
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-depression-relapse-signs.svg"
 tags: ["tms", "relapse", "maintenance", "booster-sessions", "depression-recurrence", "maintenance-tms", "long-term-management", "signs-of-relapse"]
 ---
 
@@ -198,35 +198,35 @@ If you do experience relapse:
 
 *If you have completed TMS treatment and are experiencing any of the warning signs described above, contact your TMS provider for an evaluation. Early intervention leads to better outcomes. If you do not have a TMS provider, use the TMS List directory to find one near you.*
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long do TMS results typically last?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long do TMS results typically last?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">After completing a full TMS course, approximately 30-40% of responders maintain remission for a year or more without additional treatment. About 40-50% experience gradual return of symptoms over months, often triggered by life stressors. A 2023 follow-up study found approximately 45% maintained full remission at one year without additional treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">After completing a full TMS course, approximately 30-40% of responders maintain remission for a year or more without additional treatment. About 40-50% experience gradual return of symptoms over months, often triggered by life stressors. A 2023 follow-up study found approximately 45% maintained full remission at one year without additional treatment.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">When should I seek booster TMS sessions?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">When should I seek booster TMS sessions?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Seek evaluation if your PHQ-9 scores increase by 5 or more points from your post-TMS baseline, symptoms persist for more than 2 weeks, work or relationships are affected, suicidal thoughts return, or you simply feel worse than during the peak of your TMS response.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Seek evaluation if your PHQ-9 scores increase by 5 or more points from your post-TMS baseline, symptoms persist for more than 2 weeks, work or relationships are affected, suicidal thoughts return, or you simply feel worse than during the peak of your TMS response.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What maintenance protocol is recommended after TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What maintenance protocol is recommended after TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Common approaches include monthly booster sessions (one session per month indefinitely), a taper schedule after the acute phase, or as-needed triggered boosters when early warning signs appear. A 2022 study found that patients receiving quarterly booster TMS had a 62% lower relapse rate at 18 months compared to those with no maintenance treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Common approaches include monthly booster sessions (one session per month indefinitely), a taper schedule after the acute phase, or as-needed triggered boosters when early warning signs appear. A 2022 study found that patients receiving quarterly booster TMS had a 62% lower relapse rate at 18 months compared to those with no maintenance treatment.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

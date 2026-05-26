@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-10
 category: stories
 tags: ["patient story", "depression", "healthcare workers", "burnout", "compassion fatigue"]
-image: "https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## Caring for everyone except herself

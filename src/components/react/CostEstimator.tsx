@@ -54,7 +54,7 @@ export default function CostEstimator({ clinicPricing }: Props) {
   const fmt = (n: number) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+    <div className="bg-white rounded-2xl border border-[var(--line)] shadow-sm overflow-hidden">
       {/* Header */}
       <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-6 py-4">
         <h3 className="text-white font-bold text-lg flex items-center gap-2">
@@ -70,7 +70,7 @@ export default function CostEstimator({ clinicPricing }: Props) {
         {/* Sessions Slider */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="text-sm font-semibold text-slate-700">Number of Sessions</label>
+            <label className="text-sm font-semibold text-[var(--ink2)]">Number of Sessions</label>
             <span className="text-sm font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-lg">{sessions}</span>
           </div>
           <input
@@ -83,9 +83,9 @@ export default function CostEstimator({ clinicPricing }: Props) {
               setSessions(s);
               window.posthog?.capture('cost_estimate_calculated', { sessions: s, has_insurance: hasInsurance, accepts_insurance: acceptsInsurance });
             }}
-            className="w-full h-2 bg-slate-100 rounded-full appearance-none cursor-pointer accent-emerald-600"
+            className="w-full h-2 bg-[var(--paper2)] rounded-full appearance-none cursor-pointer accent-emerald-600"
           />
-          <div className="flex justify-between text-[10px] text-slate-400 mt-1">
+          <div className="flex justify-between text-[10px] text-[var(--muted)] mt-1">
             <span>1 session</span>
             <span>36 sessions (full course)</span>
           </div>
@@ -94,9 +94,9 @@ export default function CostEstimator({ clinicPricing }: Props) {
         {/* Insurance Toggle */}
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-sm font-semibold text-slate-700">I have insurance</span>
+            <span className="text-sm font-semibold text-[var(--ink2)]">I have insurance</span>
             {!acceptsInsurance && (
-              <p className="text-[11px] text-slate-400 mt-0.5">This clinic has not confirmed insurance acceptance</p>
+              <p className="text-[11px] text-[var(--muted)] mt-0.5">This clinic has not confirmed insurance acceptance</p>
             )}
           </div>
           <button
@@ -109,7 +109,7 @@ export default function CostEstimator({ clinicPricing }: Props) {
               window.posthog?.capture('cost_estimate_calculated', { sessions, has_insurance: next, accepts_insurance: acceptsInsurance });
             }}
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-              hasInsurance ? 'bg-emerald-500' : 'bg-slate-200'
+              hasInsurance ? 'bg-emerald-500' : 'bg-[var(--paper2)]'
             }`}
           >
             <span
@@ -121,9 +121,9 @@ export default function CostEstimator({ clinicPricing }: Props) {
         </div>
 
         {/* Estimate Display */}
-        <div className="bg-slate-50 rounded-xl p-5 border border-slate-100">
-          <div className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Estimated Total Cost</div>
-          <div className="text-3xl font-bold text-slate-900">
+        <div className="bg-[var(--paper2)] rounded-xl p-5 border border-[var(--line)]">
+          <div className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider mb-2">Estimated Total Cost</div>
+          <div className="text-3xl font-bold text-[var(--ink)]">
             {fmt(displayMin)} &ndash; {fmt(displayMax)}
           </div>
           {hasInsurance && acceptsInsurance && (
@@ -137,26 +137,26 @@ export default function CostEstimator({ clinicPricing }: Props) {
             </p>
           )}
 
-          <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-slate-200">
+          <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-[var(--line)]">
             <div>
-              <div className="text-[11px] text-slate-400 font-medium">Per Session</div>
-              <div className="text-sm font-bold text-slate-700">
+              <div className="text-[11px] text-[var(--muted)] font-medium">Per Session</div>
+              <div className="text-sm font-bold text-[var(--ink2)]">
                 {fmt(estimate.perSessionMin)} &ndash; {fmt(estimate.perSessionMax)}
               </div>
             </div>
             <div>
-              <div className="text-[11px] text-slate-400 font-medium">Sessions</div>
-              <div className="text-sm font-bold text-slate-700">{sessions}</div>
+              <div className="text-[11px] text-[var(--muted)] font-medium">Sessions</div>
+              <div className="text-sm font-bold text-[var(--ink2)]">{sessions}</div>
             </div>
           </div>
         </div>
 
         {/* National Average Comparison */}
-        <div className="flex items-start gap-3 p-4 rounded-xl border border-slate-100 bg-white">
+        <div className="flex items-start gap-3 p-4 rounded-xl border border-[var(--line)] bg-white">
           <div className={`mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
             comparison === 'below' ? 'bg-emerald-50 text-emerald-600' :
             comparison === 'above' ? 'bg-red-50 text-red-500' :
-            'bg-blue-50 text-blue-500'
+            'bg-[var(--paper2)] text-[var(--accent2)]'
           }`}>
             {comparison === 'below' ? (
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
@@ -167,10 +167,10 @@ export default function CostEstimator({ clinicPricing }: Props) {
             )}
           </div>
           <div>
-            <div className="text-sm font-semibold text-slate-700">
+            <div className="text-sm font-semibold text-[var(--ink2)]">
               {comparison === 'below' ? 'Below' : comparison === 'above' ? 'Above' : 'Near'} National Average
             </div>
-            <div className="text-xs text-slate-400">
+            <div className="text-xs text-[var(--muted)]">
               National average for a full TMS course: {fmt(NATIONAL_AVG_MIN)} &ndash; {fmt(NATIONAL_AVG_MAX)}
             </div>
           </div>
@@ -187,7 +187,7 @@ export default function CostEstimator({ clinicPricing }: Props) {
         )}
 
         {/* Disclaimer */}
-        <p className="text-[11px] text-slate-400 leading-relaxed">
+        <p className="text-[11px] text-[var(--muted)] leading-relaxed">
           This is an estimate only and does not constitute a quote or guarantee of pricing.
           Actual costs vary based on your insurance plan, treatment protocol, and clinic policies.
           Contact the clinic directly for accurate pricing information.

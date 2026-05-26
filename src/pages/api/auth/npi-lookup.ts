@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
-import { validateNPI } from '../../../utils/auth';
+import { validateNPI } from '../../../utils/auth.js';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit.js';
 import { z } from 'zod';
 
 export const prerender = false;
@@ -19,6 +20,11 @@ const npiApiResponseSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Rate-limit per IP — endpoint is unauthenticated and proxies to NPPES.
+    const ip = getClientIp(request);
+    const rateLimited = await strictRateLimit(ip, 20, '1 m', 'npi-lookup');
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
     const npi = body.npi as string;
 

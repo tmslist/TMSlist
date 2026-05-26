@@ -67,18 +67,18 @@ const ENTITY_TYPES = [
 
 function MetricChip({ metric, selected, onToggle }: { metric: Metric; selected: boolean; onToggle: () => void }) {
   const colors: Record<string, string> = {
-    leads: 'bg-violet-100 text-violet-700 border-violet-200',
+    leads: 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)] border-[rgba(10,22,40,0.15)]',
     revenue: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-    engagement: 'bg-blue-100 text-blue-700 border-blue-200',
+    engagement: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)] border-[var(--line)]',
     clinical: 'bg-amber-100 text-amber-700 border-amber-200',
   };
-  const catColor = colors[metric.category] || 'bg-gray-100 text-gray-700 border-gray-200';
+  const catColor = colors[metric.category] || 'bg-[var(--paper2)] text-[var(--ink2)] border-[var(--line)]';
   return (
     <button
       type="button"
       onClick={onToggle}
       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${catColor} ${
-        selected ? 'ring-2 ring-violet-400 ring-offset-1' : 'hover:opacity-80'
+        selected ? 'ring-2 ring-[#1E2A3B] ring-offset-1' : 'hover:opacity-80'
       }`}
     >
       {selected && (
@@ -91,15 +91,15 @@ function MetricChip({ metric, selected, onToggle }: { metric: Metric; selected: 
   );
 }
 
-function TextBarChart({ label, value, max, color = 'bg-violet-500' }: { label: string; value: number; max: number; color?: string }) {
+function TextBarChart({ label, value, max, color = 'bg-[var(--ink2)]' }: { label: string; value: number; max: number; color?: string }) {
   const pct = max > 0 ? (value / max) * 100 : 0;
   return (
     <div className="flex items-center gap-3">
-      <span className="text-xs text-gray-500 w-36 shrink-0 truncate">{label}</span>
-      <div className="flex-1 bg-gray-100 rounded-full h-5">
+      <span className="text-xs text-[var(--muted)] w-36 shrink-0 truncate">{label}</span>
+      <div className="flex-1 bg-[var(--paper2)] rounded-full h-5">
         <div className={`h-5 rounded-full ${color} transition-all`} style={{ width: `${pct}%` }} />
       </div>
-      <span className="text-xs font-medium text-gray-900 w-16 text-right shrink-0">{value.toLocaleString()}</span>
+      <span className="text-xs font-medium text-[var(--ink)] w-16 text-right shrink-0">{value.toLocaleString()}</span>
     </div>
   );
 }
@@ -230,16 +230,16 @@ export default function AdminReportBuilder() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-900">Report Builder</h1>
-          <p className="text-gray-500 mt-1">Create and schedule custom analytics reports</p>
+          <h1 className="text-3xl font-semibold text-[var(--ink)]">Report Builder</h1>
+          <p className="text-[var(--muted)] mt-1">Create and schedule custom analytics reports</p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setActiveTab('build')}
             className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
               activeTab === 'build'
-                ? 'bg-violet-600 text-white'
-                : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+                ? 'bg-[var(--ink)] text-white'
+                : 'bg-white border border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
             }`}
           >
             Build Report
@@ -248,8 +248,8 @@ export default function AdminReportBuilder() {
             onClick={() => setActiveTab('schedule')}
             className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
               activeTab === 'schedule'
-                ? 'bg-violet-600 text-white'
-                : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+                ? 'bg-[var(--ink)] text-white'
+                : 'bg-white border border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
             }`}
           >
             Scheduled
@@ -260,9 +260,9 @@ export default function AdminReportBuilder() {
       {activeTab === 'build' ? (
         <>
           {/* Metric Selection — drag-and-drop style grid */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-            <h2 className="text-sm font-semibold text-gray-900 mb-4">Select Metrics</h2>
-            <p className="text-xs text-gray-400 mb-4">Click metrics to include them in your report. Selected metrics appear at the top.</p>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+            <h2 className="text-sm font-semibold text-[var(--ink)] mb-4">Select Metrics</h2>
+            <p className="text-xs text-[var(--muted)] mb-4">Click metrics to include them in your report. Selected metrics appear at the top.</p>
             <div className="space-y-4">
               {groups.map((cat) => {
                 const catMetrics = AVAILABLE_METRICS.filter((m) => m.category === cat);
@@ -271,11 +271,11 @@ export default function AdminReportBuilder() {
                   <div key={cat}>
                     <div className="flex items-center gap-2 mb-2">
                       <span className={`inline-block w-2 h-2 rounded-full ${
-                        cat === 'leads' ? 'bg-violet-500' : cat === 'revenue' ? 'bg-emerald-500' : cat === 'engagement' ? 'bg-blue-500' : 'bg-amber-500'
+                        cat === 'leads' ? 'bg-[var(--ink2)]' : cat === 'revenue' ? 'bg-emerald-500' : cat === 'engagement' ? 'bg-[var(--ink2)]' : 'bg-amber-500'
                       }`} />
-                      <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">{cat}</span>
+                      <span className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">{cat}</span>
                       {selectedInCat.length > 0 && (
-                        <span className="text-xs bg-violet-100 text-violet-600 px-1.5 py-0.5 rounded-full">{selectedInCat.length}</span>
+                        <span className="text-xs bg-[rgba(10,22,40,0.08)] text-[var(--ink)] px-1.5 py-0.5 rounded-full">{selectedInCat.length}</span>
                       )}
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -297,8 +297,8 @@ export default function AdminReportBuilder() {
           {/* Filters */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Date Range */}
-            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-              <h2 className="text-sm font-semibold text-gray-900 mb-4">Date Range</h2>
+            <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+              <h2 className="text-sm font-semibold text-[var(--ink)] mb-4">Date Range</h2>
               <div className="grid grid-cols-2 gap-2 mb-4">
                 {DATE_PRESETS.map((p) => (
                   <button
@@ -306,8 +306,8 @@ export default function AdminReportBuilder() {
                     onClick={() => setDatePreset(p.days)}
                     className={`px-3 py-2 text-xs font-medium rounded-lg transition-colors ${
                       datePreset === p.days
-                        ? 'bg-violet-600 text-white'
-                        : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                        ? 'bg-[var(--ink)] text-white'
+                        : 'bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
                     }`}
                   >
                     {p.label}
@@ -317,21 +317,21 @@ export default function AdminReportBuilder() {
               {datePreset === 0 && (
                 <div className="space-y-3">
                   <div>
-                    <label className="text-xs font-medium text-gray-500 mb-1 block">Start Date</label>
+                    <label className="text-xs font-medium text-[var(--muted)] mb-1 block">Start Date</label>
                     <input
                       type="date"
                       value={customStart}
                       onChange={(e) => setCustomStart(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                      className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E2A3B]"
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-gray-500 mb-1 block">End Date</label>
+                    <label className="text-xs font-medium text-[var(--muted)] mb-1 block">End Date</label>
                     <input
                       type="date"
                       value={customEnd}
                       onChange={(e) => setCustomEnd(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                      className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E2A3B]"
                     />
                   </div>
                 </div>
@@ -339,15 +339,15 @@ export default function AdminReportBuilder() {
             </div>
 
             {/* Entity Filter */}
-            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-              <h2 className="text-sm font-semibold text-gray-900 mb-4">Filter by Entity</h2>
+            <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+              <h2 className="text-sm font-semibold text-[var(--ink)] mb-4">Filter by Entity</h2>
               <div className="space-y-3">
                 <div>
-                  <label className="text-xs font-medium text-gray-500 mb-1 block">Entity Type</label>
+                  <label className="text-xs font-medium text-[var(--muted)] mb-1 block">Entity Type</label>
                   <select
                     value={entityType}
                     onChange={(e) => setEntityType(e.target.value as typeof entityType)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 bg-white"
+                    className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E2A3B] bg-white"
                   >
                     {ENTITY_TYPES.map((t) => (
                       <option key={t.value} value={t.value}>{t.label}</option>
@@ -356,13 +356,13 @@ export default function AdminReportBuilder() {
                 </div>
                 {entityType !== 'all' && (
                   <div>
-                    <label className="text-xs font-medium text-gray-500 mb-1 block">Entity IDs (comma-separated)</label>
+                    <label className="text-xs font-medium text-[var(--muted)] mb-1 block">Entity IDs (comma-separated)</label>
                     <textarea
                       value={entityIds.join(', ')}
                       onChange={(e) => setEntityIds(e.target.value.split(',').map((s) => s.trim()).filter(Boolean))}
                       placeholder="e.g. clinic-001, clinic-002"
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
+                      className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E2A3B] resize-none"
                     />
                   </div>
                 )}
@@ -370,22 +370,22 @@ export default function AdminReportBuilder() {
             </div>
 
             {/* Save Report */}
-            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-              <h2 className="text-sm font-semibold text-gray-900 mb-4">Save Report</h2>
+            <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+              <h2 className="text-sm font-semibold text-[var(--ink)] mb-4">Save Report</h2>
               <div className="space-y-3">
                 <input
                   type="text"
                   value={reportName}
                   onChange={(e) => setReportName(e.target.value)}
                   placeholder="Report name"
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E2A3B]"
                 />
                 <div>
-                  <label className="text-xs font-medium text-gray-500 mb-1 block">Schedule</label>
+                  <label className="text-xs font-medium text-[var(--muted)] mb-1 block">Schedule</label>
                   <select
                     value={scheduleFreq}
                     onChange={(e) => setScheduleFreq(e.target.value as typeof scheduleFreq)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 bg-white"
+                    className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E2A3B] bg-white"
                   >
                     <option value="none">No schedule</option>
                     <option value="daily">Daily</option>
@@ -399,13 +399,13 @@ export default function AdminReportBuilder() {
                     value={recipients}
                     onChange={(e) => setRecipients(e.target.value)}
                     placeholder="email@example.com, ..."
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E2A3B]"
                   />
                 )}
                 <button
                   onClick={saveReport}
                   disabled={!reportName.trim()}
-                  className="w-full px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors disabled:opacity-50"
+                  className="w-full px-4 py-2 bg-[var(--paper2)] text-[var(--ink2)] rounded-lg text-sm font-medium hover:bg-[var(--paper2)] transition-colors disabled:opacity-50"
                 >
                   Save Report
                 </button>
@@ -415,20 +415,20 @@ export default function AdminReportBuilder() {
 
           {/* Saved Reports */}
           {savedReports.length > 0 && (
-            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-              <h2 className="text-sm font-semibold text-gray-900 mb-4">Saved Reports</h2>
+            <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+              <h2 className="text-sm font-semibold text-[var(--ink)] mb-4">Saved Reports</h2>
               <div className="space-y-2">
                 {savedReports.map((r) => (
-                  <div key={r.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div key={r.id} className="flex items-center justify-between p-3 bg-[var(--paper2)] rounded-lg">
                     <div>
-                      <p className="text-sm font-medium text-gray-900">{r.name}</p>
-                      <p className="text-xs text-gray-400">
+                      <p className="text-sm font-medium text-[var(--ink)]">{r.name}</p>
+                      <p className="text-xs text-[var(--muted)]">
                         {r.metrics.length} metrics · {r.schedule ? `Scheduled ${r.schedule.frequency}` : 'On-demand'}
                       </p>
                     </div>
                     <button
                       onClick={() => loadReport(r)}
-                      className="text-xs text-violet-600 font-medium hover:text-violet-700"
+                      className="text-xs text-[var(--ink)] font-medium hover:text-[var(--ink)]"
                     >
                       Load
                     </button>
@@ -443,7 +443,7 @@ export default function AdminReportBuilder() {
             <button
               onClick={runReport}
               disabled={selectedMetrics.length === 0 || loading}
-              className="px-6 py-3 bg-violet-600 text-white rounded-lg text-sm font-medium hover:bg-violet-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+              className="px-6 py-3 bg-[var(--ink)] text-white rounded-lg text-sm font-medium hover:bg-[var(--ink)] transition-colors disabled:opacity-50 flex items-center gap-2"
             >
               {loading ? (
                 <>
@@ -473,7 +473,7 @@ export default function AdminReportBuilder() {
                 </button>
                 <button
                   onClick={() => window.print()}
-                  className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors flex items-center gap-2"
+                  className="px-6 py-3 bg-[var(--paper2)] text-[var(--ink2)] rounded-lg text-sm font-medium hover:bg-[var(--paper2)] transition-colors flex items-center gap-2"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
@@ -486,10 +486,10 @@ export default function AdminReportBuilder() {
 
           {/* Results */}
           {results && (
-            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-              <h2 className="text-sm font-semibold text-gray-900 mb-6">Report Results</h2>
+            <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+              <h2 className="text-sm font-semibold text-[var(--ink)] mb-6">Report Results</h2>
               <div className="mb-6">
-                <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">Summary</h3>
+                <h3 className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider mb-4">Summary</h3>
                 <div className="space-y-2">
                   {selectedMetrics.map((mid) => {
                     const maxVal = Math.max(...(Object.values(results.rows).filter((_, i) => i > 0).flat() as number[]), 1);
@@ -499,28 +499,28 @@ export default function AdminReportBuilder() {
                         label={metricLabel(mid)}
                         value={results.summary[mid] ?? 0}
                         max={maxVal || 1}
-                        color={mid.includes('revenue') || mid.includes('mrr') || mid.includes('arr') ? 'bg-emerald-500' : mid.includes('review') ? 'bg-amber-500' : 'bg-violet-500'}
+                        color={mid.includes('revenue') || mid.includes('mrr') || mid.includes('arr') ? 'bg-emerald-500' : mid.includes('review') ? 'bg-amber-500' : 'bg-[var(--ink2)]'}
                       />
                     );
                   })}
                 </div>
               </div>
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-[var(--line)]">
+                  <thead className="bg-[var(--paper2)]">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Date</th>
                       {selectedMetrics.map((mid) => (
-                        <th key={mid} className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">{metricLabel(mid)}</th>
+                        <th key={mid} className="px-4 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">{metricLabel(mid)}</th>
                       ))}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-[var(--line)]">
                     {(results.rows['date'] as string[]).map((date, i) => (
-                      <tr key={date} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 text-sm text-gray-600">{date}</td>
+                      <tr key={date} className="hover:bg-[var(--paper2)]">
+                        <td className="px-4 py-3 text-sm text-[var(--ink2)]">{date}</td>
                         {selectedMetrics.map((mid) => (
-                          <td key={mid} className="px-4 py-3 text-sm text-gray-900 text-right font-medium">
+                          <td key={mid} className="px-4 py-3 text-sm text-[var(--ink)] text-right font-medium">
                             {(results.rows[mid] as number[])[i].toLocaleString()}
                           </td>
                         ))}
@@ -535,24 +535,24 @@ export default function AdminReportBuilder() {
       ) : (
         /* Schedule Tab */
         <div className="space-y-6">
-          <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-            <h2 className="text-sm font-semibold text-gray-900 mb-4">Scheduled Reports</h2>
+          <div className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+            <h2 className="text-sm font-semibold text-[var(--ink)] mb-4">Scheduled Reports</h2>
             {savedReports.filter((r) => r.schedule).length === 0 ? (
-              <p className="text-gray-400 text-sm">No scheduled reports yet. Save a report with a schedule to see it here.</p>
+              <p className="text-[var(--muted)] text-sm">No scheduled reports yet. Save a report with a schedule to see it here.</p>
             ) : (
               <div className="space-y-3">
                 {savedReports.filter((r) => r.schedule).map((r) => (
-                  <div key={r.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div key={r.id} className="flex items-center justify-between p-4 bg-[var(--paper2)] rounded-lg">
                     <div>
-                      <p className="text-sm font-medium text-gray-900">{r.name}</p>
-                      <p className="text-xs text-gray-500 capitalize">
+                      <p className="text-sm font-medium text-[var(--ink)]">{r.name}</p>
+                      <p className="text-xs text-[var(--muted)] capitalize">
                         {r.schedule!.frequency} · {r.schedule!.recipients.join(', ')}
                       </p>
                     </div>
                     <div className="flex gap-2">
                       <span className={`text-xs px-2 py-1 rounded-full capitalize ${
-                        r.schedule!.frequency === 'daily' ? 'bg-blue-100 text-blue-700' :
-                        r.schedule!.frequency === 'weekly' ? 'bg-violet-100 text-violet-700' :
+                        r.schedule!.frequency === 'daily' ? 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]' :
+                        r.schedule!.frequency === 'weekly' ? 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)]' :
                         'bg-emerald-100 text-emerald-700'
                       }`}>
                         {r.schedule!.frequency}

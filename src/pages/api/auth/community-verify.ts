@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { verifyMagicToken, getUserByEmail, createSession, getClientIpFromRequest, logLoginActivity } from '../../../utils/auth';
+import { verifyMagicToken, getUserByEmail, createSession, getClientIpFromRequest, logLoginActivity } from '../../../utils/auth.js';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';

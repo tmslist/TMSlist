@@ -1,0 +1,210 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Bipolar Disorder Screener | Free MDQ-Based Quiz";
+const description =
+    "Take the free Mood Disorder Questionnaire (MDQ) to screen for possible bipolar disorder. Important if you've been diagnosed with depression but treatment isn't working as expected.";
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const quizSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "MDQ Bipolar Disorder Screener",
+    "description": description,
+    "url": `${siteUrl}/quiz/bipolar-screener/`,
+    "educationalLevel": "patient",
+    "about": {
+        "@type": "MedicalCondition",
+        "name": "Bipolar Disorder",
+        "code": { "@type": "MedicalCode", "code": "F31", "codingSystem": "ICD-10" },
+    },
+    "provider": { "@type": "Organization", "name": "TMS List", "url": siteUrl },
+});
+
+// MDQ-style: 13 yes/no items + impairment + clustering
+const QUESTIONS = [
+    "You felt so good or so hyper that other people thought you were not your normal self, or you were so hyper that you got into trouble?",
+    "You were so irritable that you shouted at people or started fights or arguments?",
+    "You felt much more self-confident than usual?",
+    "You got much less sleep than usual and found you didn't really miss it?",
+    "You were much more talkative or spoke much faster than usual?",
+    "Thoughts raced through your head or you couldn't slow your mind down?",
+    "You were so easily distracted by things around you that you had trouble concentrating or staying on track?",
+    "You had much more energy than usual?",
+    "You were much more active or did many more things than usual?",
+    "You were much more social or outgoing than usual — for example, you telephoned friends in the middle of the night?",
+    "You were much more interested in sex than usual?",
+    "You did things that were unusual for you or that other people might have thought were excessive, foolish, or risky?",
+    "Spending money got you or your family into trouble?",
+];
+---
+
+<Layout title={title} description={description} noindex={true} schema={quizSchema}>
+    <main class="min-h-screen bg-gradient-to-b from-[var(--paper2)] to-white py-12">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <div class="mb-6 flex items-center justify-center">
+                <div class="flex items-center gap-2 text-sm text-[var(--muted)]">
+                    Lifetime history <span>•</span> 15 questions <span>•</span> ~3 minutes
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="flex justify-between text-xs font-semibold text-[var(--muted)] mb-2 uppercase tracking-wide">
+                    <span>Your Progress</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="h-2 bg-[var(--paper2)] rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-[var(--ink)] transition-all duration-500 ease-out" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-[var(--line)] overflow-hidden">
+                <div id="slide-intro" class="p-8 md:p-12 text-center">
+                    <h1 class="text-3xl font-semibold tracking-tight text-[var(--ink)] mb-4">Bipolar Disorder Screener</h1>
+                    <p class="text-lg text-[var(--muted)] mb-4">The Mood Disorder Questionnaire (MDQ) is the most widely used screening tool for bipolar disorder. It looks for past periods of mania or hypomania that may have been missed.</p>
+                    <p class="text-base text-[var(--muted)] mb-4">This matters: about <strong>40% of people diagnosed with depression alone actually have bipolar disorder</strong>, and treating bipolar depression with antidepressants alone can make symptoms worse.</p>
+                    <p class="text-base text-[var(--muted)] mb-8">Answer based on your <strong>lifetime experience</strong> — has there ever been a period when you felt the opposite of depressed?</p>
+                    <button id="btn-start" class="px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] shadow-lg">Start Screener</button>
+                </div>
+
+                <div id="slide-q" class="hidden p-8 md:p-12">
+                    <span id="q-counter" class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block"></span>
+                    <p class="text-[var(--muted)] text-sm mb-2"><strong>Has there ever been a period of time when you were not your usual self and...</strong></p>
+                    <h2 id="q-text" class="text-xl font-semibold text-[var(--ink)] mb-6"></h2>
+                    <div class="space-y-3">
+                        <button data-val="1" class="ans-btn">Yes</button>
+                        <button data-val="0" class="ans-btn">No</button>
+                    </div>
+                </div>
+
+                <div id="slide-q14" class="hidden p-8 md:p-12">
+                    <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Question 14 of 15</span>
+                    <h2 class="text-xl font-semibold text-[var(--ink)] mb-6">If you answered "Yes" to more than one of the previous questions: did <strong>several of these ever happen during the same period of time</strong>?</h2>
+                    <div class="space-y-3">
+                        <button data-cluster="1" class="ans-btn-2">Yes — they happened together</button>
+                        <button data-cluster="0" class="ans-btn-2">No — different times</button>
+                        <button data-cluster="0" class="ans-btn-2">Not applicable / I only said yes to one</button>
+                    </div>
+                </div>
+
+                <div id="slide-q15" class="hidden p-8 md:p-12">
+                    <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Last Question</span>
+                    <h2 class="text-xl font-semibold text-[var(--ink)] mb-6">How much of a problem did any of these cause you — being unable to work, having family or money issues, getting into trouble?</h2>
+                    <div class="space-y-3">
+                        <button data-impair="0" class="ans-btn-3">No problem</button>
+                        <button data-impair="0" class="ans-btn-3">Minor problem</button>
+                        <button data-impair="1" class="ans-btn-3">Moderate problem</button>
+                        <button data-impair="1" class="ans-btn-3">Serious problem</button>
+                    </div>
+                </div>
+
+                <div id="slide-results" class="hidden p-8 md:p-12">
+                    <div class="text-center mb-8">
+                        <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Your MDQ Result</span>
+                        <div class="inline-flex items-baseline gap-1 mb-3">
+                            <span id="score-number" class="text-6xl font-extrabold text-[var(--ink)]">0</span>
+                            <span class="text-2xl text-[var(--muted)]">/13</span>
+                        </div>
+                        <div id="severity-badge" class="inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4">—</div>
+                    </div>
+                    <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-6 mb-6 text-left">
+                        <h3 class="font-semibold text-[var(--ink2)] mb-3">What This Means</h3>
+                        <p id="score-interpretation" class="text-sm text-[var(--muted)] leading-relaxed"></p>
+                    </div>
+                    <div class="bg-[rgba(10,22,40,0.05)] border border-[var(--line)] rounded-xl p-6 mb-8 text-left">
+                        <h3 class="font-semibold text-[var(--ink)] mb-2">Recommended Next Steps</h3>
+                        <p id="treatment-text" class="text-sm text-[var(--ink2)] leading-relaxed"></p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <a href="/treatments/bipolar/" class="quiz-geo-link w-full sm:w-auto text-center px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] shadow-lg">Learn About TMS for Bipolar Depression</a>
+                        <a href="/specialists/" class="w-full sm:w-auto text-center px-8 py-4 text-[var(--muted)] font-medium rounded-xl border border-[var(--line)] hover:text-[var(--ink)]">Find a Psychiatrist</a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-xs text-[var(--muted)] mt-6">Screening tool, not a diagnosis. Only a licensed clinician can diagnose bipolar disorder. Scores are not stored.</p>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .ans-btn, .ans-btn-2, .ans-btn-3 { width: 100%; padding: 1rem; text-align: left; border: 2px solid var(--line); border-radius: 0.75rem; font-weight: 500; color: var(--ink2); transition: all 0.15s ease; }
+    .ans-btn:hover, .ans-btn-2:hover, .ans-btn-3:hover { border-color: var(--ink); background: rgba(10,22,40,0.04); }
+</style>
+
+<script is:inline define:vars={{ QUESTIONS }}>
+    const answers = [];
+    let cluster = 0;
+    let impair = 0;
+    let qIdx = 0;
+    const total = 13;
+
+    function renderQ() {
+        document.getElementById("q-counter").innerText = `Question ${qIdx + 1} of 15`;
+        document.getElementById("q-text").innerText = QUESTIONS[qIdx];
+    }
+    function setProgress(answered) {
+        const pct = Math.min((answered / 15) * 100, 100);
+        document.getElementById("progress-bar").style.width = pct + "%";
+        document.getElementById("progress-text").innerText = Math.round(pct) + "%";
+    }
+
+    document.getElementById("btn-start").addEventListener("click", () => {
+        document.getElementById("slide-intro").classList.add("hidden");
+        document.getElementById("slide-q").classList.remove("hidden");
+        renderQ();
+    });
+
+    document.querySelectorAll(".ans-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            answers.push(parseInt(btn.dataset.val, 10));
+            setProgress(answers.length);
+            qIdx++;
+            if (qIdx >= total) {
+                document.getElementById("slide-q").classList.add("hidden");
+                document.getElementById("slide-q14").classList.remove("hidden");
+            } else { renderQ(); }
+        });
+    });
+    document.querySelectorAll(".ans-btn-2").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            cluster = parseInt(btn.dataset.cluster, 10);
+            setProgress(14);
+            document.getElementById("slide-q14").classList.add("hidden");
+            document.getElementById("slide-q15").classList.remove("hidden");
+        });
+    });
+    document.querySelectorAll(".ans-btn-3").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            impair = parseInt(btn.dataset.impair, 10);
+            setProgress(15);
+            document.getElementById("slide-q15").classList.add("hidden");
+            showResults();
+        });
+    });
+
+    function showResults() {
+        const score = answers.reduce((a, b) => a + b, 0);
+        const positive = score >= 7 && cluster === 1 && impair === 1;
+
+        document.getElementById("slide-results").classList.remove("hidden");
+        document.getElementById("score-number").innerText = score;
+
+        const badge = document.getElementById("severity-badge");
+        if (positive) {
+            badge.innerText = "Positive Screen";
+            badge.className = "inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4 bg-orange-100 text-orange-700";
+            document.getElementById("score-interpretation").innerText = "Your answers meet the standard MDQ-positive criteria: 7+ symptoms, occurring during the same time period, causing moderate-to-serious problems. This suggests bipolar disorder is plausible enough to warrant a full evaluation. The MDQ has roughly 73% sensitivity and 90% specificity — meaning it catches most cases but is not definitive.";
+            document.getElementById("treatment-text").innerText = "Schedule a full evaluation with a psychiatrist who can run a structured diagnostic interview. If you've been diagnosed with depression and antidepressants haven't worked or have caused activation/agitation, mention this screen — it can change the entire treatment approach. TMS is FDA-cleared for major depression but is also used for bipolar depression with appropriate mood-stabilizer coverage.";
+        } else if (score >= 7) {
+            badge.innerText = "Borderline / Inconclusive";
+            badge.className = "inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4 bg-yellow-100 text-yellow-700";
+            document.getElementById("score-interpretation").innerText = "You endorsed 7+ symptoms, but they didn't all occur in the same period or didn't cause major impairment. This is borderline — bipolar disorder is possible but the full criteria aren't met. Bipolar II (which involves milder hypomanias) often produces this pattern.";
+            document.getElementById("treatment-text").innerText = "Worth discussing with a psychiatrist, especially if antidepressants haven't worked as expected or you've had episodes of unusual energy or agitation alongside depressive periods. Bring a timeline of your past mood states to the appointment — clinicians find this far more useful than memory alone.";
+        } else {
+            badge.innerText = "Negative Screen";
+            badge.className = "inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4 bg-green-100 text-green-700";
+            document.getElementById("score-interpretation").innerText = "Your answers don't suggest a bipolar pattern. Bipolar disorder is unlikely based on this screen, though the MDQ does miss some cases — particularly milder Bipolar II. If antidepressants have caused unexpected agitation or rapid mood swings, that's still worth discussing with your prescriber.";
+            document.getElementById("treatment-text").innerText = "If you're being treated for unipolar depression and TMS is on the table, you can pursue a standard depression workup. If symptoms don't improve as expected, revisit this screen with your psychiatrist — sometimes the picture clarifies after several months of careful tracking.";
+        }
+    }
+</script>

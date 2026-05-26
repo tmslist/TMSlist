@@ -1,43 +1,67 @@
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest, createSession, getClientIpFromRequest, logAuthEvent } from '../../../../utils/auth';
+import {
+  getSessionFromRequest,
+  createSession,
+  getClientIpFromRequest,
+  logAuthEvent,
+  verifyPendingMfaCookie,
+  clearPendingMfaCookie,
+} from '../../../../utils/auth.js';
+import { strictRateLimit, getClientIp } from '../../../../utils/rateLimit.js';
+import { decryptSecret, isEncryptedSecret, encryptSecret } from '../../../../utils/secretEncryption.js';
 import { db } from '../../../../db';
 import { users } from '../../../../db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import { authenticator } from 'otplib';
 
 export const prerender = false;
 
 const TOTP_LOCK_THRESHOLD = 5;
-const TOTP_LOCK_DURATION_MS = 15 * 60 * 1000; // 15 minutes
+const TOTP_LOCK_DURATION_MS = 15 * 60 * 1000;
+
+const json = (data: unknown, status = 200, extraHeaders: Record<string, string> = {}) =>
+  new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json', ...extraHeaders },
+  });
 
 /**
  * POST /api/auth/2fa/verify
- * Verify a TOTP code and enable 2FA. Also completes the login session.
- * Body: { userId: string, code: string }
  *
- * Security: tracks failed attempts and locks the account after 5 wrong codes.
+ * Verifies a TOTP code for either:
+ *   (a) the post-password-login 2FA step (identified by the `tms_mfa_pending`
+ *       cookie set by /api/auth/login), or
+ *   (b) the initial 2FA enrollment (identified by the active session cookie).
+ *
+ * In both cases the userId is derived from a server-issued cookie. The body
+ * is NEVER consulted for the userId — that would let unauthenticated callers
+ * target arbitrary accounts.
+ *
+ * Lockout uses the shared `failedLoginAttempts` column with atomic increment.
  */
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const body = await request.json();
+    // Rate-limit per IP regardless of identity to slow distributed guesses.
+    const ip = getClientIp(request);
+    const rateLimited = await strictRateLimit(ip, 10, '5 m', 'auth:2fa-verify');
+    if (rateLimited) return rateLimited;
 
-    // Validate input
-    if (!body.userId || !body.code) {
-      return new Response(JSON.stringify({ error: 'userId and code are required' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+    const body = await request.json().catch(() => ({} as { code?: string }));
+    const code = (body as { code?: string }).code;
+
+    if (!code) return json({ error: 'code is required' }, 400);
+    if (!/^\d{6}$/.test(code)) return json({ error: 'Code must be 6 digits' }, 400);
+
+    // Resolve userId from server-issued credentials only.
+    const session = getSessionFromRequest(request);
+    const pendingMfa = verifyPendingMfaCookie(request);
+    const userId = pendingMfa?.userId ?? session?.userId;
+    const isLoginFlow = !!pendingMfa && !session;
+
+    if (!userId) {
+      return json({ error: 'No active 2FA session. Sign in with your password again.' }, 401);
     }
 
-    // Validate code format (6 digits)
-    if (!/^\d{6}$/.test(body.code)) {
-      return new Response(JSON.stringify({ error: 'Code must be 6 digits' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
-    // Fetch user with TOTP secret
     const results = await db.select({
       id: users.id,
       email: users.email,
@@ -45,129 +69,110 @@ export const POST: APIRoute = async ({ request }) => {
       totpSecret: users.totpSecret,
       totpEnabled: users.totpEnabled,
       lockedUntil: users.lockedUntil,
+      failedLoginAttempts: users.failedLoginAttempts,
     })
       .from(users)
-      .where(eq(users.id, body.userId))
+      .where(eq(users.id, userId))
       .limit(1);
 
     const user = results[0];
-    if (!user) {
-      return new Response(JSON.stringify({ error: 'User not found' }), {
-        status: 404,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
+    if (!user) return json({ error: 'User not found' }, 404);
 
     if (!user.totpSecret) {
-      return new Response(JSON.stringify({ error: '2FA setup not initiated. Call POST /api/auth/2fa/setup first.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return json({ error: '2FA setup not initiated. Call POST /api/auth/2fa/setup first.' }, 400);
     }
 
-    // Check if TOTP is locked due to too many failed attempts
+    // Honor existing lockout window.
     if (user.lockedUntil && new Date() < user.lockedUntil) {
       const retryAfterSeconds = Math.ceil((user.lockedUntil.getTime() - Date.now()) / 1000);
-      return new Response(JSON.stringify({
-        error: `Too many failed attempts. Try again in ${retryAfterSeconds} seconds.`,
-        retryAfter: retryAfterSeconds,
-      }), {
-        status: 429,
-        headers: {
-          'Content-Type': 'application/json',
-          'Retry-After': String(retryAfterSeconds),
-        },
-      });
+      return json(
+        { error: `Too many failed attempts. Try again in ${retryAfterSeconds} seconds.`, retryAfter: retryAfterSeconds },
+        429,
+        { 'Retry-After': String(retryAfterSeconds) },
+      );
     }
 
-    // Verify TOTP code
-    const isValid = authenticator.verify({
-      token: body.code,
-      secret: user.totpSecret,
-    });
+    let plainSecret: string;
+    try {
+      plainSecret = decryptSecret(user.totpSecret);
+    } catch (err) {
+      console.error('[2fa/verify] secret decrypt failed:', err);
+      return json({ error: 'Server misconfiguration' }, 500);
+    }
+    const isValid = authenticator.verify({ token: code, secret: plainSecret });
 
     if (!isValid) {
-      const ip = getClientIpFromRequest(request);
       const userAgent = request.headers.get('user-agent') || '';
+      const newAttempts = (user.failedLoginAttempts ?? 0) + 1;
+      const reachedThreshold = newAttempts >= TOTP_LOCK_THRESHOLD;
+      const newLockedUntil = reachedThreshold ? new Date(Date.now() + TOTP_LOCK_DURATION_MS) : user.lockedUntil;
 
-      // Get current failed attempts (reuse lockedUntil as the 2FA-specific lock field)
-      const currentAttempts = (user.lockedUntil ? 1 : 0) + 1; // simplified: use lockedUntil as lockout marker
-      const newLockedUntil = currentAttempts >= TOTP_LOCK_THRESHOLD
-        ? new Date(Date.now() + TOTP_LOCK_DURATION_MS)
-        : user.lockedUntil;
-
-      // Update lockout state if threshold reached
-      if (newLockedUntil !== user.lockedUntil) {
-        await db.update(users).set({ lockedUntil: newLockedUntil }).where(eq(users.id, user.id));
-      }
+      await db
+        .update(users)
+        .set({
+          failedLoginAttempts: newAttempts,
+          lockedUntil: newLockedUntil,
+        })
+        .where(eq(users.id, user.id));
 
       await logAuthEvent({
         userId: user.id,
         action: '2fa_verification_failed',
         ipAddress: ip,
         userAgent,
-        metadata: { attempts: currentAttempts, locked: !!newLockedUntil },
+        metadata: { attempts: newAttempts, locked: reachedThreshold },
       });
 
-      if (newLockedUntil && newLockedUntil !== user.lockedUntil) {
-        return new Response(JSON.stringify({
-          error: `Too many failed attempts. Account locked for 15 minutes.`,
-          retryAfter: Math.ceil(TOTP_LOCK_DURATION_MS / 1000),
-        }), {
-          status: 429,
-          headers: {
-            'Content-Type': 'application/json',
-            'Retry-After': String(Math.ceil(TOTP_LOCK_DURATION_MS / 1000)),
-          },
-        });
+      if (reachedThreshold) {
+        const retry = Math.ceil(TOTP_LOCK_DURATION_MS / 1000);
+        return json(
+          { error: `Too many failed attempts. Account locked for 15 minutes.`, retryAfter: retry },
+          429,
+          { 'Retry-After': String(retry) },
+        );
       }
 
-      return new Response(JSON.stringify({ error: 'Invalid code' }), {
-        status: 401,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return json({ error: 'Invalid code' }, 401);
     }
 
-    // Successful verification — clear any TOTP lockout
-    await db.update(users).set({ lockedUntil: null }).where(eq(users.id, user.id));
-
-    // Enable 2FA
-    await db.update(users).set({
+    // Success — reset counters and complete the appropriate flow.
+    // Opportunistically re-encrypt legacy plaintext secrets.
+    const updates: Record<string, unknown> = {
+      lockedUntil: null,
+      failedLoginAttempts: 0,
       totpEnabled: true,
       totpVerifiedAt: new Date(),
-    }).where(eq(users.id, user.id));
+    };
+    if (!isEncryptedSecret(user.totpSecret)) {
+      updates.totpSecret = encryptSecret(plainSecret);
+    }
+    await db.update(users).set(updates).where(eq(users.id, user.id));
 
-    // Create session
-    const ip = getClientIpFromRequest(request);
     const userAgent = request.headers.get('user-agent') || '';
     const { cookie } = await createSession(
       { userId: user.id, email: user.email, role: user.role },
-      { userAgent, ipAddress: ip }
+      { userAgent, ipAddress: ip },
     );
 
     await logAuthEvent({
       userId: user.id,
-      action: '2fa_enabled',
+      action: isLoginFlow ? '2fa_login_success' : '2fa_enabled',
       ipAddress: ip,
       userAgent,
     });
+
+    // Set the real session cookie and clear the pending-MFA cookie.
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Set-Cookie', cookie);
+    headers.append('Set-Cookie', clearPendingMfaCookie());
 
     return new Response(JSON.stringify({
       success: true,
       totpEnabled: true,
       user: { id: user.id, email: user.email, role: user.role },
-    }), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Set-Cookie': cookie,
-      },
-    });
+    }), { status: 200, headers });
   } catch (err) {
     console.error('[2fa/verify]', err);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return json({ error: 'Internal server error' }, 500);
   }
 };

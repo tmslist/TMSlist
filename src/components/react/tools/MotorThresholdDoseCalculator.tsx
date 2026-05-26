@@ -65,9 +65,9 @@ export default function MotorThresholdDoseCalculator() {
       text: 'Low MT — standard parameters will likely be well-tolerated. Standard rTMS at 120% MT should be effective.',
     };
     return {
-      color: 'text-blue-700',
-      bg: 'bg-blue-50',
-      border: 'border-blue-200',
+      color: 'text-[var(--accent)]',
+      bg: 'bg-[var(--paper2)]',
+      border: 'border-[var(--line)]',
       text: 'Normal MT range. Recommended dose should achieve optimal treatment depth without excessive cortical excitability.',
     };
   };
@@ -79,12 +79,12 @@ export default function MotorThresholdDoseCalculator() {
       {/* Input section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
-          <h3 className="text-sm font-bold text-slate-700 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400" />
+          <h3 className="text-sm font-bold text-[var(--ink2)] flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[var(--accent2)]" />
             Motor Threshold
           </h3>
           <div>
-            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Resting Motor Threshold (RMT) %</label>
+            <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1.5">Resting Motor Threshold (RMT) %</label>
             <div className="flex items-center gap-3">
               <input
                 type="range"
@@ -94,11 +94,11 @@ export default function MotorThresholdDoseCalculator() {
                 onChange={e => setRestingMT(parseInt(e.target.value))}
                 className="flex-1 accent-cyan-600"
               />
-              <span className="w-14 text-center font-bold text-lg text-cyan-600">{restingMT}%</span>
+              <span className="w-14 text-center font-bold text-lg text-[var(--accent)]">{restingMT}%</span>
             </div>
           </div>
           <div>
-            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Active Motor Threshold (AMT) %</label>
+            <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1.5">Active Motor Threshold (AMT) %</label>
             <div className="flex items-center gap-3">
               <input
                 type="range"
@@ -108,23 +108,23 @@ export default function MotorThresholdDoseCalculator() {
                 onChange={e => setActiveMT(parseInt(e.target.value))}
                 className="flex-1 accent-cyan-600"
               />
-              <span className="w-14 text-center font-bold text-lg text-cyan-600">{activeMT}%</span>
+              <span className="w-14 text-center font-bold text-lg text-[var(--accent)]">{activeMT}%</span>
             </div>
-            <p className="text-xs text-slate-400 mt-1">AMT ≈ RMT - 5 to -10% (AMT not available on all devices)</p>
+            <p className="text-xs text-[var(--muted)] mt-1">AMT ≈ RMT - 5 to -10% (AMT not available on all devices)</p>
           </div>
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-sm font-bold text-slate-700 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-violet-400" />
+          <h3 className="text-sm font-bold text-[var(--ink2)] flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[var(--ink2)]" />
             Protocol & Coil
           </h3>
           <div>
-            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Treatment Protocol</label>
+            <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1.5">Treatment Protocol</label>
             <select
               value={protocolName}
               onChange={e => setProtocolName(e.target.value)}
-              className="w-full px-4 py-3 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+              className="w-full px-4 py-3 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] outline-none"
             >
               {protocols.map(p => (
                 <option key={p.name} value={p.name}>{p.name} — {p.indication}</option>
@@ -132,7 +132,7 @@ export default function MotorThresholdDoseCalculator() {
             </select>
           </div>
           <div>
-            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Coil Type</label>
+            <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1.5">Coil Type</label>
             <div className="grid grid-cols-2 gap-2">
               {(Object.keys(COILS) as CoilType[]).map(ct => (
                 <button
@@ -140,12 +140,12 @@ export default function MotorThresholdDoseCalculator() {
                   onClick={() => setCoilType(ct)}
                   className={`text-left p-3 rounded-xl border transition-all text-xs ${
                     coilType === ct
-                      ? 'border-violet-300 bg-violet-50 ring-1 ring-violet-300'
-                      : 'border-slate-100 bg-white hover:border-slate-200'
+                      ? 'border-[rgba(10,22,40,0.2)] bg-[rgba(10,22,40,0.08)] ring-1 ring-[rgba(10,22,40,0.2)]'
+                      : 'border-[var(--line)] bg-white hover:border-[var(--line)]'
                   }`}
                 >
-                  <p className="font-bold text-slate-800">{COILS[ct].name.split(' (')[0]}</p>
-                  <p className="text-slate-400 mt-0.5">Depth: {COILS[ct].penetrationDepth}</p>
+                  <p className="font-bold text-[var(--ink)]">{COILS[ct].name.split(' (')[0]}</p>
+                  <p className="text-[var(--muted)] mt-0.5">Depth: {COILS[ct].penetrationDepth}</p>
                 </button>
               ))}
             </div>
@@ -154,39 +154,39 @@ export default function MotorThresholdDoseCalculator() {
       </div>
 
       {/* Dose recommendation card */}
-      <div className="bg-slate-950 rounded-2xl p-8">
-        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-6">Recommended Treatment Parameters</p>
+      <div className="bg-[var(--ink)] rounded-2xl p-8">
+        <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-6">Recommended Treatment Parameters</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center">
-            <p className="text-xs text-slate-500 mb-1">Intensity</p>
+            <p className="text-xs text-[var(--muted)] mb-1">Intensity</p>
             <p className="text-3xl font-bold text-white">{recommendedIntensity}%</p>
-            <p className="text-xs text-slate-400 mt-1">of RMT</p>
+            <p className="text-xs text-[var(--muted)] mt-1">of RMT</p>
           </div>
           <div className="text-center">
-            <p className="text-xs text-slate-500 mb-1">Pulses / Session</p>
-            <p className="text-3xl font-bold text-cyan-400">{protocol.pulses.toLocaleString()}</p>
-            <p className="text-xs text-slate-400 mt-1">{protocol.duration}</p>
+            <p className="text-xs text-[var(--muted)] mb-1">Pulses / Session</p>
+            <p className="text-3xl font-bold text-[var(--accent2)]">{protocol.pulses.toLocaleString()}</p>
+            <p className="text-xs text-[var(--muted)] mt-1">{protocol.duration}</p>
           </div>
           <div className="text-center">
-            <p className="text-xs text-slate-500 mb-1">Sessions</p>
+            <p className="text-xs text-[var(--muted)] mb-1">Sessions</p>
             <p className="text-3xl font-bold text-emerald-400">{protocol.sessionsTotal}</p>
-            <p className="text-xs text-slate-400 mt-1">total course</p>
+            <p className="text-xs text-[var(--muted)] mt-1">total course</p>
           </div>
           <div className="text-center">
-            <p className="text-xs text-slate-500 mb-1">Total Dose</p>
-            <p className="text-3xl font-bold text-fuchsia-400">{totalDosePulses.toLocaleString()}</p>
-            <p className="text-xs text-slate-400 mt-1">total pulses</p>
+            <p className="text-xs text-[var(--muted)] mb-1">Total Dose</p>
+            <p className="text-3xl font-bold text-[var(--warm)]">{totalDosePulses.toLocaleString()}</p>
+            <p className="text-xs text-[var(--muted)] mt-1">total pulses</p>
           </div>
         </div>
 
         {/* Adjusted intensity explanation */}
         <div className="mt-6 p-4 rounded-xl bg-white/5 border border-white/10">
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-[var(--muted)]">
             Based on {restingMT}% RMT → {protocol.intensityPct}% MT = {Math.round(restingMT * protocol.intensityPct / 100)}% device output
             {coil.motorThresholdAdjustment !== 0 && (
               <span className="text-amber-400"> {coil.motorThresholdAdjustment > 0 ? '+' : ''}{coil.motorThresholdAdjustment}% adjusted for {coil.name}</span>
             )}
-            → <span className="text-cyan-400 font-bold">{recommendedIntensity}% MT ({Math.round(restingMT * recommendedIntensity / 100)}% device output)</span>
+            → <span className="text-[var(--accent2)] font-bold">{recommendedIntensity}% MT ({Math.round(restingMT * recommendedIntensity / 100)}% device output)</span>
           </p>
         </div>
       </div>
@@ -197,30 +197,30 @@ export default function MotorThresholdDoseCalculator() {
           <BrainIcon className="w-6 h-6 mt-0.5 shrink-0" />
           <div>
             <p className={`text-xs font-bold uppercase tracking-wider ${mapAdvice.color} mb-1`}>Motor Map Assessment</p>
-            <p className="text-sm text-slate-700">{mapAdvice.text}</p>
+            <p className="text-sm text-[var(--ink2)]">{mapAdvice.text}</p>
           </div>
         </div>
       </div>
 
       {/* Advanced: custom intensity override */}
       {showAdvanced && (
-        <div className="bg-slate-50 rounded-xl p-5 border border-slate-100">
-          <h4 className="text-sm font-bold text-slate-700 mb-3">Advanced: Custom Intensity Override</h4>
+        <div className="bg-[var(--paper2)] rounded-xl p-5 border border-[var(--line)]">
+          <h4 className="text-sm font-bold text-[var(--ink2)] mb-3">Advanced: Custom Intensity Override</h4>
           <div className="flex items-center gap-4">
-            <span className="text-xs text-slate-500 shrink-0">Device Output %</span>
+            <span className="text-xs text-[var(--muted)] shrink-0">Device Output %</span>
             <input
               type="range"
               min={20}
               max={110}
               value={customIntensity ?? Math.round(restingMT * recommendedIntensity / 100)}
               onChange={e => setCustomIntensity(parseInt(e.target.value))}
-              className="flex-1 accent-violet-600"
+              className="flex-1 accent-[#0A1628]"
             />
-            <span className="w-16 text-center font-bold text-violet-600">
+            <span className="w-16 text-center font-bold text-[var(--accent)]">
               {customIntensity ?? Math.round(restingMT * recommendedIntensity / 100)}%
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-2 flex items-center gap-1 flex-wrap">
+          <p className="text-xs text-[var(--muted)] mt-2 flex items-center gap-1 flex-wrap">
             Effective: ~{effectivePctMT}% MT — {effectivePctMT > 120 ? (
               <><WarningIcon className="w-3.5 h-3.5 inline text-amber-500" /> High — monitor for discomfort</>
             ) : effectivePctMT < 80 ? (
@@ -233,20 +233,20 @@ export default function MotorThresholdDoseCalculator() {
       )}
       <button
         onClick={() => setShowAdvanced(!showAdvanced)}
-        className="text-xs font-semibold text-slate-400 hover:text-violet-600 transition-colors"
+        className="text-xs font-semibold text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
       >
         {showAdvanced ? 'Hide advanced options' : 'Show advanced options →'}
       </button>
 
       {/* Protocol comparison */}
       <div>
-        <h4 className="text-sm font-bold text-slate-700 mb-3">Protocol Comparison for This Patient</h4>
+        <h4 className="text-sm font-bold text-[var(--ink2)] mb-3">Protocol Comparison for This Patient</h4>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-slate-100">
+              <tr className="border-b border-[var(--line)]">
                 {['Protocol', 'Intensity', 'Pulses', 'Duration', 'Sessions', 'Evidence'].map(h => (
-                  <th key={h} className="text-left text-xs font-semibold text-slate-400 uppercase tracking-wider pb-3 pr-4">{h}</th>
+                  <th key={h} className="text-left text-xs font-semibold text-[var(--muted)] uppercase tracking-wider pb-3 pr-4">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -258,16 +258,16 @@ export default function MotorThresholdDoseCalculator() {
                 return (
                   <tr
                     key={p.name}
-                    className={`border-b border-slate-50 hover:bg-slate-50 cursor-pointer transition-colors ${protocolName === p.name ? 'bg-violet-50' : ''}`}
+                    className={`border-b border-[var(--line)] hover:bg-[var(--paper2)] cursor-pointer transition-colors ${protocolName === p.name ? 'bg-[rgba(10,22,40,0.08)]' : ''}`}
                     onClick={() => setProtocolName(p.name)}
                   >
-                    <td className="py-3 pr-4 font-semibold text-slate-800">{p.name.split('(')[0].trim()}</td>
-                    <td className="py-3 pr-4 text-slate-600">{intensity}% MT</td>
-                    <td className="py-3 pr-4 text-cyan-600 font-semibold">{pulses.toLocaleString()}</td>
-                    <td className="py-3 pr-4 text-slate-600">{dur} min</td>
-                    <td className="py-3 pr-4 text-slate-600">{p.sessionsTotal}</td>
+                    <td className="py-3 pr-4 font-semibold text-[var(--ink)]">{p.name.split('(')[0].trim()}</td>
+                    <td className="py-3 pr-4 text-[var(--ink2)]">{intensity}% MT</td>
+                    <td className="py-3 pr-4 text-[var(--accent)] font-semibold">{pulses.toLocaleString()}</td>
+                    <td className="py-3 pr-4 text-[var(--ink2)]">{dur} min</td>
+                    <td className="py-3 pr-4 text-[var(--ink2)]">{p.sessionsTotal}</td>
                     <td className="py-3 pr-4">
-                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${p.evidence === 'Strong' ? 'bg-emerald-100 text-emerald-700' : p.evidence === 'Moderate' ? 'bg-amber-100 text-amber-700' : 'bg-blue-100 text-blue-700'}`}>
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${p.evidence === 'Strong' ? 'bg-emerald-100 text-emerald-700' : p.evidence === 'Moderate' ? 'bg-amber-100 text-amber-700' : 'bg-[rgba(10,22,40,0.1)] text-[var(--accent)]'}`}>
                         {p.evidence}
                       </span>
                     </td>

@@ -28,8 +28,8 @@ function getCategoryLabel(value: string) {
 const STATUS_META: Record<string, { label: string; color: string; bg: string }> = {
   active: { label: 'Active', color: 'text-emerald-700', bg: 'bg-emerald-50 border-emerald-200' },
   paused: { label: 'Paused', color: 'text-amber-700', bg: 'bg-amber-50 border-amber-200' },
-  filled: { label: 'Filled', color: 'text-blue-700', bg: 'bg-blue-50 border-blue-200' },
-  closed: { label: 'Closed', color: 'text-slate-500', bg: 'bg-slate-100 border-slate-200' },
+  filled: { label: 'Filled', color: 'text-[var(--ink)]', bg: 'bg-[var(--paper2)] border-[var(--line)]' },
+  closed: { label: 'Closed', color: 'text-[var(--muted)]', bg: 'bg-[var(--paper2)] border-[var(--line)]' },
 };
 
 function timeAgo(date: string) {
@@ -110,8 +110,8 @@ export default function PortalJobsDashboard() {
       <div>
         <div class="flex items-center justify-between mb-6">
           <div>
-            <h2 class="text-2xl font-bold text-slate-900">Job Postings</h2>
-            <p class="text-sm text-slate-500 mt-1">Manage job listings for your clinic</p>
+            <h2 class="text-2xl font-bold text-[var(--ink)]">Job Postings</h2>
+            <p class="text-sm text-[var(--muted)] mt-1">Manage job listings for your clinic</p>
           </div>
           <button
             onClick={() => { setSelectedJob(null); setView('create'); }}
@@ -125,21 +125,21 @@ export default function PortalJobsDashboard() {
         {loading ? (
           <div class="space-y-3">
             {[...Array(3)].map((_, i) => (
-              <div key={i} class="bg-white rounded-2xl border border-slate-200 p-5 animate-pulse">
-                <div class="h-5 bg-slate-200 rounded w-1/3 mb-3" />
-                <div class="h-3 bg-slate-100 rounded w-1/2" />
+              <div key={i} class="bg-white rounded-2xl border border-[var(--line)] p-5 animate-pulse">
+                <div class="h-5 bg-[var(--paper2)] rounded w-1/3 mb-3" />
+                <div class="h-3 bg-[var(--paper2)] rounded w-1/2" />
               </div>
             ))}
           </div>
         ) : jobs.length === 0 ? (
-          <div class="bg-white rounded-2xl border border-slate-200 p-12 text-center">
-            <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="bg-white rounded-2xl border border-[var(--line)] p-12 text-center">
+            <div class="w-16 h-16 bg-[var(--paper2)] rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
               </svg>
             </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-2">No jobs posted yet</h3>
-            <p class="text-slate-500 text-sm max-w-xs mx-auto mb-6">
+            <h3 class="text-lg font-bold text-[var(--ink)] mb-2">No jobs posted yet</h3>
+            <p class="text-[var(--muted)] text-sm max-w-xs mx-auto mb-6">
               Reach TMS professionals in your area by posting a job at your clinic.
             </p>
             <button
@@ -154,16 +154,16 @@ export default function PortalJobsDashboard() {
             {jobs.map((job) => {
               const meta = STATUS_META[job.status] ?? STATUS_META.closed;
               return (
-                <div key={job.id} class="bg-white rounded-2xl border border-slate-200 p-5 hover:border-slate-300 transition-colors">
+                <div key={job.id} class="bg-white rounded-2xl border border-[var(--line)] p-5 hover:border-[var(--line)] transition-colors">
                   <div class="flex items-start justify-between gap-4">
                     <div class="flex-1 min-w-0">
                       <div class="flex items-center gap-3 mb-2">
-                        <h3 class="text-base font-bold text-slate-900 truncate">{job.title}</h3>
+                        <h3 class="text-base font-bold text-[var(--ink)] truncate">{job.title}</h3>
                         <span class={`shrink-0 px-2.5 py-0.5 text-xs font-semibold rounded-full border ${meta.bg} ${meta.color}`}>
                           {meta.label}
                         </span>
                       </div>
-                      <div class="flex flex-wrap items-center gap-3 text-xs text-slate-500">
+                      <div class="flex flex-wrap items-center gap-3 text-xs text-[var(--muted)]">
                         <span>{getCategoryLabel(job.roleCategory)}</span>
                         <span>·</span>
                         <span>{job.location}</span>
@@ -172,7 +172,7 @@ export default function PortalJobsDashboard() {
                         <span>{EMPLOYMENT_TYPES[job.employmentType] ?? job.employmentType}</span>
                         {job.salaryDisplay && <><span>·</span><span>{job.salaryDisplay}</span></>}
                       </div>
-                      <div class="flex items-center gap-4 mt-3 text-xs text-slate-400">
+                      <div class="flex items-center gap-4 mt-3 text-xs text-[var(--muted)]">
                         <span>{job.viewCount ?? 0} views</span>
                         <span>·</span>
                         <span>{job.applicationCount ?? 0} applications</span>
@@ -185,21 +185,21 @@ export default function PortalJobsDashboard() {
                       {(job.applicationCount ?? 0) > 0 && (
                         <button
                           onClick={() => { setSelectedJob(job); setView('applications'); }}
-                          class="px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors border border-violet-100"
+                          class="px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-[rgba(10,22,40,0.08)] hover:bg-[rgba(10,22,40,0.08)] rounded-lg transition-colors border border-[rgba(10,22,40,0.1)]"
                         >
                           {(job.applicationCount ?? 0)} applicant{(job.applicationCount ?? 0) !== 1 ? 's' : ''}
                         </button>
                       )}
                       <button
                         onClick={() => editJob(job)}
-                        class="p-2 text-slate-400 hover:text-slate-600 transition-colors"
+                        class="p-2 text-[var(--muted)] hover:text-[var(--ink2)] transition-colors"
                         title="Edit"
                       >
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                       </button>
                       <button
                         onClick={() => toggleStatus(job)}
-                        class="p-2 text-slate-400 hover:text-slate-600 transition-colors"
+                        class="p-2 text-[var(--muted)] hover:text-[var(--ink2)] transition-colors"
                         title={job.status === 'active' ? 'Pause' : 'Activate'}
                       >
                         {job.status === 'active' ? (
@@ -210,7 +210,7 @@ export default function PortalJobsDashboard() {
                       </button>
                       <button
                         onClick={() => deleteJob(job)}
-                        class="p-2 text-slate-400 hover:text-red-500 transition-colors"
+                        class="p-2 text-[var(--muted)] hover:text-red-500 transition-colors"
                         title="Delete"
                       >
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
@@ -244,15 +244,15 @@ export default function PortalJobsDashboard() {
       <div class="flex items-center gap-3 mb-6">
         <button
           onClick={() => { setView('list'); setSelectedJob(null); }}
-          class="text-slate-400 hover:text-slate-600 transition-colors"
+          class="text-[var(--muted)] hover:text-[var(--ink2)] transition-colors"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
         </button>
-        <h2 class="text-2xl font-bold text-slate-900">
+        <h2 class="text-2xl font-bold text-[var(--ink)]">
           {selectedJob ? 'Edit Job Posting' : 'Post a New Job'}
         </h2>
       </div>
-      <div class="bg-white rounded-2xl border border-slate-200 p-6">
+      <div class="bg-white rounded-2xl border border-[var(--line)] p-6">
         <PortalJobEditor
           client:load
           job={selectedJob ?? undefined}

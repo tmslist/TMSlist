@@ -7,11 +7,22 @@ import { getCached, setCache } from '../../../utils/redis';
 
 export const prerender = false;
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export const GET: APIRoute = async ({ url }) => {
   const clinicId = url.searchParams.get('clinicId');
   if (!clinicId) {
     return new Response(JSON.stringify({ error: 'clinicId required' }), {
       status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  // Non-UUID ids belong to JSON-file clinics (e.g. international entries) which
+  // aren't backed by the clinics table — short-circuit with a 404.
+  if (!UUID_RE.test(clinicId)) {
+    return new Response(JSON.stringify({ error: 'Clinic not found' }), {
+      status: 404,
       headers: { 'Content-Type': 'application/json' },
     });
   }

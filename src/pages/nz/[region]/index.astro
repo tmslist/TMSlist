@@ -76,9 +76,9 @@ const regionSchema = JSON.stringify({
     { name: "New Zealand", url: "/nz/" },
     { name: regionName, url: `/nz/${regionSlug}/` },
 ]}>
-    <section class="relative bg-white border-b border-slate-100 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-blue-50/40 pointer-events-none"></div>
-        <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-500/5 rounded-full blur-[100px]"></div>
+    <section class="relative bg-[var(--paper)] border-b border-[var(--line)] overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(10,22,40,0.08)]/60 via-white to-[rgba(10,22,40,0.40)] pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-[500px] h-[400px] bg-[rgba(10,22,40,0.5)] rounded-full blur-[100px]"></div>
         <div
           class="ai-hero-image absolute inset-0 opacity-20"
           data-subject={regionName}
@@ -91,16 +91,16 @@ const regionSchema = JSON.stringify({
           <div class="ai-img-fallback hidden"></div>
         </div>
         <div class="container mx-auto px-4 py-14 lg:py-18 relative z-10">
-            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap" aria-label="Breadcrumb">
-                <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                <span class="text-slate-300">/</span>
-                <a href="/nz/" class="hover:text-violet-600 transition-colors">New Zealand</a>
-                <span class="text-slate-300">/</span>
-                <span class="text-slate-700 font-medium">{regionName}</span>
+            <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-6 flex-wrap" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-[var(--accent)] transition-colors">Home</a>
+                <span class="text-[var(--muted)]">/</span>
+                <a href="/nz/" class="hover:text-[var(--accent)] transition-colors">New Zealand</a>
+                <span class="text-[var(--muted)]">/</span>
+                <span class="text-[var(--ink2)] font-medium">{regionName}</span>
             </nav>
             <div class="max-w-3xl">
-                <h1 class="text-4xl font-bold text-gray-900 mb-4">Top Rated TMS Clinics in <span class="text-violet-600">{regionName}</span></h1>
-                <p class="text-lg text-gray-600">Compare {clinicCount} TMS therapy clinics across {cities.length} cities in {regionName}. Find verified providers with patient reviews.</p>
+                <h1 class="text-4xl font-bold text-[var(--ink)] mb-4">Top Rated TMS Clinics in <span class="text-[var(--accent)]">{regionName}</span></h1>
+                <p class="text-lg text-[var(--muted)]">Compare {clinicCount} TMS therapy clinics across {cities.length} cities in {regionName}. Find verified providers with patient reviews.</p>
             </div>
         </div>
     </section>
@@ -116,22 +116,22 @@ const regionSchema = JSON.stringify({
 
         <section>
             <div class="flex items-center mb-8">
-                <h2 class="text-2xl font-semibold text-gray-900">Browse by City in {regionName}</h2>
-                <div class="ml-4 h-px flex-1 bg-gray-200"></div>
-                <span class="ml-4 text-sm font-medium text-gray-400">{cities.length} cities</span>
+                <h2 class="text-2xl font-semibold text-[var(--ink)]">Browse by City in {regionName}</h2>
+                <div class="ml-4 h-px flex-1 bg-[var(--paper2)]"></div>
+                <span class="ml-4 text-sm font-medium text-[var(--muted)]">{cities.length} cities</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {cities.map((city: any) => (
                     <a
                         href={`/nz/${regionSlug}/${city.slug}/`}
-                        class="group relative bg-white p-5 rounded-2xl border border-gray-100 shadow-[0_2px_8px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.08)] hover:border-blue-200 transition-all overflow-hidden"
+                        class="group relative bg-[var(--paper)] p-5 rounded-2xl border border-[var(--line)] shadow-[0_2px_8px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.08)] hover:border-[var(--line)] transition-all overflow-hidden"
                     >
-                        <div class="absolute inset-x-0 bottom-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                        <div class="absolute inset-x-0 bottom-0 h-1 bg-[var(--accent2)] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
                         <div class="flex items-center justify-between mb-1">
-                            <span class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{city.name}</span>
-                            <svg class="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            <span class="font-bold text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">{city.name}</span>
+                            <svg class="w-4 h-4 text-[var(--line)] group-hover:text-[var(--accent2)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </div>
-                        <span class="text-xs font-medium text-gray-400">{city.count} {city.count === 1 ? 'clinic' : 'clinics'}</span>
+                        <span class="text-xs font-medium text-[var(--muted)]">{city.count} {city.count === 1 ? 'clinic' : 'clinics'}</span>
                     </a>
                 ))}
             </div>

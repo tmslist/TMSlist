@@ -1,0 +1,158 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
+import EditorialSection from '../../components/editorial/EditorialSection.astro';
+import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
+import { tmsNews, categoryLabels, getRecentNews } from '../../data/tmsNews';
+
+export async function getStaticPaths() {
+  return tmsNews.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const dateLong = new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const categoryLabel = categoryLabels[item.category];
+
+const tagToneFor = (cat: string) =>
+  cat === 'fda' ? { bg: 'rgba(34,197,94,0.12)', color: '#16a34a', dot: '#22c55e' } :
+  cat === 'breakthrough' || cat === 'clinical-trial' ? { bg: 'rgba(10,22,40,0.1)', color: 'var(--accent)', dot: 'var(--accent)' } :
+  cat === 'insurance' || cat === 'study' ? { bg: 'rgba(201,101,74,0.12)', color: 'var(--warm)', dot: 'var(--warm)' } :
+  { bg: 'rgba(90,107,130,0.12)', color: 'var(--muted)', dot: 'var(--muted)' };
+const tone = tagToneFor(item.category);
+
+const more = getRecentNews(20).filter((n) => n.id !== item.id).slice(0, 4);
+
+const siteUrl = import.meta.env.SITE_URL || 'https://tmslist.com';
+const url = `${siteUrl}/news/${item.id}/`;
+const articleSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: item.headline,
+  description: item.summary,
+  url,
+  datePublished: new Date(item.date).toISOString(),
+  dateModified: new Date(item.date).toISOString(),
+  author: { '@type': 'Organization', name: 'TMS List Editorial Team', url: siteUrl },
+  publisher: {
+    '@type': 'Organization',
+    name: 'TMS List',
+    url: siteUrl,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.svg` },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  articleSection: categoryLabel,
+});
+---
+
+<Layout
+  title={`${item.headline} | TMS News`}
+  description={item.summary}
+  schema={articleSchema}
+  contentType="article"
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'News', url: '/news/' },
+    { name: item.headline, url: `/news/${item.id}/` },
+  ]}
+>
+  <main style="background:var(--paper)">
+    <EditorialHero
+      eyebrow={categoryLabel}
+      eyebrowDot={tone.dot}
+      title={item.headline}
+      description={item.summary}
+      breadcrumbs={[
+        { label: 'Home', href: '/' },
+        { label: 'News', href: '/news/' },
+        { label: item.headline },
+      ]}
+      ctas={[
+        { label: 'Take the Eligibility Quiz', href: '/quiz/am-i-a-candidate/' },
+        { label: 'Browse all news', href: '/news/', variant: 'outline' },
+      ]}
+    />
+
+    <section style="padding:3rem 1.25rem; max-width:1100px; margin:0 auto;">
+      <div class="grid lg:grid-cols-3 gap-10">
+        <article class="lg:col-span-2">
+          <div class="flex flex-wrap items-center gap-3 mb-6">
+            <span style={`font-size:11px; font-weight:600; padding:0.3rem 0.75rem; border-radius:9999px; text-transform:uppercase; letter-spacing:0.075em; background:${tone.bg}; color:${tone.color};`}>{categoryLabel}</span>
+            <span style="font-size:13px; color:var(--muted);">{dateLong}</span>
+            <span style="font-size:13px; color:var(--muted);">·</span>
+            <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" style="font-size:13px; color:var(--accent); text-decoration:none; font-weight:500;">{item.source} ↗</a>
+          </div>
+
+          <div
+            class="prose-news"
+            style="font-size:17px; line-height:1.75; color:var(--ink2);"
+            set:html={item.body}
+          />
+
+          <div style="margin-top:2rem; padding:1.25rem 1.5rem; background:var(--paper2); border:1px solid var(--line); border-radius:1rem;">
+            <p style="font-size:13px; color:var(--muted); margin:0 0 0.5rem; text-transform:uppercase; letter-spacing:0.05em; font-weight:600;">Source</p>
+            <p style="font-size:14px; color:var(--ink2); margin:0;">
+              Reporting based on coverage from <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">{item.source}</a>. This article is editorial summary intended for general information; it is not medical advice.
+            </p>
+          </div>
+
+          {item.related && item.related.length > 0 && (
+            <div style="margin-top:2rem;">
+              <h3 class="serif" style="font-size:1.25rem; color:var(--ink); margin:0 0 1rem;">Related on TMS List</h3>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem;">
+                {item.related.map((r) => (
+                  <li>
+                    <a href={r.href} style="display:inline-flex; align-items:center; gap:0.5rem; color:var(--accent); font-size:15px; text-decoration:none; font-weight:500;">→ {r.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </article>
+
+        <aside class="lg:sticky lg:top-24 self-start">
+          <div style="background:var(--paper2); border:1px solid var(--line); border-radius:1.5rem; padding:1.5rem; margin-bottom:1.25rem;">
+            <h3 class="serif" style="font-size:1.125rem; color:var(--ink); margin:0 0 1rem;">More TMS news</h3>
+            <div class="flex flex-col gap-3">
+              {more.map((n) => (
+                <a href={`/news/${n.id}/`} style="display:block; text-decoration:none; padding:0.625rem 0; border-top:1px solid var(--line);">
+                  <span style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;">{categoryLabels[n.category]}</span>
+                  <p class="serif" style="font-size:14px; line-height:1.35; color:var(--ink); margin:0.25rem 0 0;">{n.headline}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div style="background:var(--ink); border-radius:1.5rem; padding:1.5rem; color:white;">
+            <h3 class="serif" style="font-size:1.25rem; margin:0 0 0.5rem;">Considering TMS?</h3>
+            <p style="font-size:13px; color:rgba(255,255,255,0.65); line-height:1.6; margin:0 0 1.25rem;">Find vetted clinics in your area or take our two-minute eligibility quiz.</p>
+            <a href="/quiz/am-i-a-candidate/" style="display:block; text-align:center; padding:0.75rem 1rem; background:var(--warm); color:white; font-size:13px; font-weight:600; border-radius:0.75rem; text-decoration:none; margin-bottom:0.5rem;">Am I a Candidate?</a>
+            <a href="/us/" style="display:block; text-align:center; padding:0.75rem 1rem; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.85); font-size:13px; font-weight:500; border-radius:0.75rem; text-decoration:none;">Find a Clinic</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <EditorialCTA
+      title="Stay current with TMS therapy."
+      description="New FDA actions, clinical trial results, and coverage updates — covered as they happen."
+      ctas={[
+        { label: 'Browse all news', href: '/news/' },
+        { label: 'Take the Quiz', href: '/quiz/am-i-a-candidate/', variant: 'outline' },
+      ]}
+    />
+  </main>
+</Layout>
+
+<style>
+  .prose-news :global(p) { margin: 0 0 1.1rem; }
+  .prose-news :global(a) { color: var(--accent); text-decoration: underline; }
+  .prose-news :global(h2),
+  .prose-news :global(h3) { font-family: var(--serif, Georgia, serif); color: var(--ink); margin: 2rem 0 0.75rem; }
+  .prose-news :global(ul) { padding-left: 1.25rem; margin: 0 0 1.1rem; }
+  .prose-news :global(li) { margin-bottom: 0.4rem; }
+</style>

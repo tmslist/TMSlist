@@ -295,7 +295,7 @@ export function TMSBrain() {
         <mesh key={pct} ref={ref}>
           <torusGeometry args={[0.06, 0.008, 8, 48]} />
           <meshBasicMaterial
-            color={pct === 80 ? '#22d3ee' : pct === 100 ? '#a78bfa' : '#f97316'}
+            color={pct === 80 ? '#22d3ee' : pct === 100 ? '#C9654A' : '#f97316'}
             transparent
             opacity={0.7}
           />

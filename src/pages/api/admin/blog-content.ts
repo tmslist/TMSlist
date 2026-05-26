@@ -3,7 +3,7 @@
  * The blog_posts DB table is for future CMS usage; current posts live in MD files.
  */
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 

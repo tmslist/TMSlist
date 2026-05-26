@@ -68,7 +68,7 @@ function ToastBar({ toasts }: { toasts: Toast[] }) {
         <div key={t.id} className={`flex items-center gap-3 px-5 py-3 rounded-xl shadow-lg text-sm font-medium animate-slide-up ${
           t.type === 'success' ? 'bg-emerald-600 text-white' :
           t.type === 'error' ? 'bg-red-600 text-white' :
-          'bg-indigo-600 text-white'
+          'bg-[var(--ink2)] text-white'
         }`}>
           {t.type === 'success' && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>}
           {t.type === 'error' && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>}
@@ -89,8 +89,8 @@ function Modal({ open, onClose, title, children }: { open: boolean; onClose: () 
       <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 animate-scale-in">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-            <button onClick={onClose} className="p-1.5 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+            <h2 className="text-lg font-semibold text-[var(--ink)]">{title}</h2>
+            <button onClick={onClose} className="p-1.5 text-[var(--muted)] hover:text-[var(--ink2)] rounded-lg hover:bg-[var(--paper2)]">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </div>
@@ -138,51 +138,51 @@ function ArticleForm({ existing, categories, onSave, onCancel }: {
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+        <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Title *</label>
         <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Article title..."
-          className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+          className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-[var(--ink2)] mb-1">
           Slug
-          <button onClick={generateSlug} type="button" className="ml-2 text-xs text-indigo-600 hover:text-indigo-700 font-normal">Auto-generate</button>
+          <button onClick={generateSlug} type="button" className="ml-2 text-xs text-[var(--warm)] hover:text-[var(--warm)] font-normal">Auto-generate</button>
         </label>
         <input type="text" value={slug} onChange={e => setSlug(e.target.value)} placeholder="url-friendly-slug"
-          className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none font-mono" />
+          className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none font-mono" />
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-          <select value={category} onChange={e => setCategory(e.target.value)} className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-indigo-500 bg-white">
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Category</label>
+          <select value={category} onChange={e => setCategory(e.target.value)} className="w-full text-sm border border-[var(--line)] rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] bg-white">
             {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-          <select value={status} onChange={e => setStatus(e.target.value)} className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-indigo-500 bg-white">
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Status</label>
+          <select value={status} onChange={e => setStatus(e.target.value)} className="w-full text-sm border border-[var(--line)] rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] bg-white">
             <option value="draft">Draft</option>
             <option value="published">Published</option>
           </select>
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Excerpt</label>
+        <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Excerpt</label>
         <input type="text" value={excerpt} onChange={e => setExcerpt(e.target.value)} placeholder="Short description for article preview..."
-          className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+          className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Content * (Markdown supported)</label>
+        <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Content * (Markdown supported)</label>
         <textarea value={content} onChange={e => setContent(e.target.value)} rows={10} placeholder="Article content... Supports Markdown: **bold**, *italic*, ## headings, etc."
-          className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none font-mono text-xs" />
+          className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none resize-none font-mono text-xs" />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Tags (comma-separated)</label>
+        <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Tags (comma-separated)</label>
         <input type="text" value={tags} onChange={e => setTags(e.target.value)} placeholder="tms, depression, therapy"
-          className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+          className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
       </div>
-      <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
-        <button onClick={onCancel} className="px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50">Cancel</button>
-        <button onClick={handleSubmit} disabled={saving} className="px-4 py-2.5 text-sm font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 disabled:opacity-50 flex items-center gap-2">
+      <div className="flex justify-end gap-3 pt-4 border-t border-[var(--line)]">
+        <button onClick={onCancel} className="px-4 py-2.5 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-xl hover:bg-[var(--paper2)]">Cancel</button>
+        <button onClick={handleSubmit} disabled={saving} className="px-4 py-2.5 text-sm font-medium text-white bg-[var(--ink2)] rounded-xl hover:bg-[var(--ink2)] disabled:opacity-50 flex items-center gap-2">
           {saving && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
           {existing ? 'Update Article' : 'Create Article'}
         </button>
@@ -215,28 +215,28 @@ function CategoryForm({ existing, onSave, onCancel }: {
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+        <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Name *</label>
         <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Category name..."
-          className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+          className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Slug <button onClick={generateSlug} type="button" className="ml-2 text-xs text-indigo-600">Auto</button>
+        <label className="block text-sm font-medium text-[var(--ink2)] mb-1">
+          Slug <button onClick={generateSlug} type="button" className="ml-2 text-xs text-[var(--warm)]">Auto</button>
         </label>
-        <input type="text" value={slug} onChange={e => setSlug(e.target.value)} className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 font-mono outline-none" />
+        <input type="text" value={slug} onChange={e => setSlug(e.target.value)} className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] font-mono outline-none" />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+        <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Description</label>
         <input type="text" value={description} onChange={e => setDescription(e.target.value)} placeholder="What this category covers..."
-          className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" />
+          className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] outline-none" />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Sort Order</label>
-        <input type="number" value={sortOrder} onChange={e => setSortOrder(e.target.value)} className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" />
+        <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Sort Order</label>
+        <input type="number" value={sortOrder} onChange={e => setSortOrder(e.target.value)} className="w-full text-sm border border-[var(--line)] rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] outline-none" />
       </div>
-      <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
-        <button onClick={onCancel} className="px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50">Cancel</button>
-        <button onClick={handleSubmit} className="px-4 py-2.5 text-sm font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700">Save Category</button>
+      <div className="flex justify-end gap-3 pt-4 border-t border-[var(--line)]">
+        <button onClick={onCancel} className="px-4 py-2.5 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-xl hover:bg-[var(--paper2)]">Cancel</button>
+        <button onClick={handleSubmit} className="px-4 py-2.5 text-sm font-medium text-white bg-[var(--ink2)] rounded-xl hover:bg-[var(--ink2)]">Save Category</button>
       </div>
     </div>
   );
@@ -380,29 +380,29 @@ export default function AdminHelpCenter() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Help Center</h1>
-          <p className="text-gray-500 mt-1 text-sm">Knowledge base articles, categories, and search analytics</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Help Center</h1>
+          <p className="text-[var(--muted)] mt-1 text-sm">Knowledge base articles, categories, and search analytics</p>
         </div>
         <div className="grid grid-cols-3 gap-3">
           {[
-            { label: 'Total Views', value: totalViews.toLocaleString(), color: 'text-indigo-600' },
+            { label: 'Total Views', value: totalViews.toLocaleString(), color: 'text-[var(--warm)]' },
             { label: 'Published', value: publishedCount, color: 'text-emerald-600' },
-            { label: 'Drafts', value: draftCount, color: 'text-gray-500' },
+            { label: 'Drafts', value: draftCount, color: 'text-[var(--muted)]' },
           ].map(s => (
-            <div key={s.label} className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-center">
+            <div key={s.label} className="bg-white border border-[var(--line)] rounded-lg px-4 py-2 text-center">
               <p className={`text-lg font-bold ${s.color}`}>{s.value}</p>
-              <p className="text-xs text-gray-500">{s.label}</p>
+              <p className="text-xs text-[var(--muted)]">{s.label}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
-        <div className="border-b border-gray-200">
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm">
+        <div className="border-b border-[var(--line)]">
           <nav className="flex gap-1 px-4">
             {TABS.map(t => (
-              <button key={t.key} onClick={() => setTab(t.key as TabKey)} className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${tab === t.key ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>
+              <button key={t.key} onClick={() => setTab(t.key as TabKey)} className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${tab === t.key ? 'border-[rgba(201,101,74,0.2)] text-[var(--warm)]' : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)]'}`}>
                 {t.icon}
                 {t.label}
               </button>
@@ -413,27 +413,27 @@ export default function AdminHelpCenter() {
         <div className="p-6">
           {loading ? (
             <div className="flex items-center justify-center py-16">
-              <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-[rgba(201,101,74,0.2)] border-t-transparent rounded-full animate-spin" />
             </div>
           ) : tab === 'articles' ? (
             <>
               {/* Article filters */}
               <div className="flex flex-wrap items-center gap-3 mb-6">
                 <div className="relative flex-1 min-w-[200px]">
-                  <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                  <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                   <input type="text" placeholder="Search articles..." value={articleSearch} onChange={e => setArticleSearch(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+                    className="w-full pl-10 pr-4 py-2 text-sm border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
                 </div>
-                <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white">
+                <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)} className="text-sm border border-[var(--line)] rounded-lg px-3 py-2 bg-white">
                   <option value="">All Categories</option>
                   {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                 </select>
-                <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white">
+                <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="text-sm border border-[var(--line)] rounded-lg px-3 py-2 bg-white">
                   <option value="">All Statuses</option>
                   <option value="published">Published</option>
                   <option value="draft">Draft</option>
                 </select>
-                <button onClick={() => openArticleModal()} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-xl hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                <button onClick={() => openArticleModal()} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-xl hover:bg-[var(--ink2)] transition-colors flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
                   New Article
                 </button>
@@ -441,59 +441,59 @@ export default function AdminHelpCenter() {
 
               {/* Articles table */}
               {filteredArticles.length === 0 ? (
-                <div className="text-center py-12 text-gray-400"><p className="text-sm">No articles found</p></div>
+                <div className="text-center py-12 text-[var(--muted)]"><p className="text-sm">No articles found</p></div>
               ) : (
-                <div className="overflow-x-auto rounded-lg border border-gray-100">
+                <div className="overflow-x-auto rounded-lg border border-[var(--line)]">
                   <table className="min-w-full">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-[var(--paper2)]">
                       <tr>
-                        <th className="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-                        <th className="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
-                        <th className="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                        <th className="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase">Views</th>
-                        <th className="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase">Helpfulness</th>
-                        <th className="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase">Updated</th>
-                        <th className="px-4 py-2.5 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
+                        <th className="px-4 py-2.5 text-left text-xs font-medium text-[var(--muted)] uppercase">Title</th>
+                        <th className="px-4 py-2.5 text-left text-xs font-medium text-[var(--muted)] uppercase">Category</th>
+                        <th className="px-4 py-2.5 text-left text-xs font-medium text-[var(--muted)] uppercase">Status</th>
+                        <th className="px-4 py-2.5 text-left text-xs font-medium text-[var(--muted)] uppercase">Views</th>
+                        <th className="px-4 py-2.5 text-left text-xs font-medium text-[var(--muted)] uppercase">Helpfulness</th>
+                        <th className="px-4 py-2.5 text-left text-xs font-medium text-[var(--muted)] uppercase">Updated</th>
+                        <th className="px-4 py-2.5 text-right text-xs font-medium text-[var(--muted)] uppercase">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-[var(--line)]">
                       {filteredArticles.map(article => {
                         const total = article.helpfulCount + article.notHelpfulCount;
                         const helpfulPct = total > 0 ? Math.round((article.helpfulCount / total) * 100) : 0;
                         const cat = categories.find(c => c.id === article.category);
                         return (
-                          <tr key={article.id} className="hover:bg-gray-50 transition-colors">
+                          <tr key={article.id} className="hover:bg-[var(--paper2)] transition-colors">
                             <td className="px-4 py-3">
-                              <p className="text-sm font-medium text-gray-900">{article.title}</p>
-                              {article.excerpt && <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{article.excerpt}</p>}
+                              <p className="text-sm font-medium text-[var(--ink)]">{article.title}</p>
+                              {article.excerpt && <p className="text-xs text-[var(--muted)] mt-0.5 line-clamp-1">{article.excerpt}</p>}
                               {article.tags.length > 0 && (
                                 <div className="flex gap-1 mt-1">
-                                  {article.tags.slice(0, 3).map(tag => <span key={tag} className="text-xs bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">{tag}</span>)}
+                                  {article.tags.slice(0, 3).map(tag => <span key={tag} className="text-xs bg-[var(--paper2)] text-[var(--muted)] px-1.5 py-0.5 rounded">{tag}</span>)}
                                 </div>
                               )}
                             </td>
-                            <td className="px-4 py-3 text-xs text-gray-600">{cat?.name || article.category}</td>
+                            <td className="px-4 py-3 text-xs text-[var(--ink2)]">{cat?.name || article.category}</td>
                             <td className="px-4 py-3">
-                              <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${article.status === 'published' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
+                              <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${article.status === 'published' ? 'bg-emerald-100 text-emerald-700' : 'bg-[var(--paper2)] text-[var(--muted)]'}`}>
                                 {article.status}
                               </span>
                             </td>
-                            <td className="px-4 py-3 text-sm text-gray-600">{article.viewCount.toLocaleString()}</td>
+                            <td className="px-4 py-3 text-sm text-[var(--ink2)]">{article.viewCount.toLocaleString()}</td>
                             <td className="px-4 py-3">
                               <div className="flex items-center gap-2">
-                                <div className="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                <div className="w-16 h-1.5 bg-[var(--paper2)] rounded-full overflow-hidden">
                                   <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${helpfulPct}%` }} />
                                 </div>
-                                <span className="text-xs text-gray-500">{helpfulPct}%</span>
+                                <span className="text-xs text-[var(--muted)]">{helpfulPct}%</span>
                               </div>
                             </td>
-                            <td className="px-4 py-3 text-xs text-gray-400 whitespace-nowrap">{formatRelativeTime(article.updatedAt)}</td>
+                            <td className="px-4 py-3 text-xs text-[var(--muted)] whitespace-nowrap">{formatRelativeTime(article.updatedAt)}</td>
                             <td className="px-4 py-3 text-right">
                               <div className="flex items-center justify-end gap-1">
-                                <button onClick={() => openArticleModal(article)} className="p-1.5 text-gray-400 hover:text-indigo-600 rounded-lg hover:bg-indigo-50" title="Edit">
+                                <button onClick={() => openArticleModal(article)} className="p-1.5 text-[var(--muted)] hover:text-[var(--warm)] rounded-lg hover:bg-[rgba(201,101,74,0.06)]" title="Edit">
                                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                                 </button>
-                                <button onClick={() => setConfirmDelete(article)} className="p-1.5 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50" title="Delete">
+                                <button onClick={() => setConfirmDelete(article)} className="p-1.5 text-[var(--muted)] hover:text-red-600 rounded-lg hover:bg-red-50" title="Delete">
                                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                 </button>
                               </div>
@@ -509,27 +509,27 @@ export default function AdminHelpCenter() {
           ) : tab === 'categories' ? (
             <>
               <div className="flex justify-end mb-4">
-                <button onClick={() => openCategoryModal()} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-xl hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                <button onClick={() => openCategoryModal()} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-xl hover:bg-[var(--ink2)] transition-colors flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
                   New Category
                 </button>
               </div>
               {categories.length === 0 ? (
-                <div className="text-center py-12 text-gray-400"><p className="text-sm">No categories yet</p></div>
+                <div className="text-center py-12 text-[var(--muted)]"><p className="text-sm">No categories yet</p></div>
               ) : (
                 <div className="space-y-3">
                   {categories.sort((a, b) => a.sortOrder - b.sortOrder).map(cat => (
-                    <div key={cat.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100 hover:bg-gray-100 transition-colors">
+                    <div key={cat.id} className="flex items-center justify-between p-4 bg-[var(--paper2)] rounded-xl border border-[var(--line)] hover:bg-[var(--paper2)] transition-colors">
                       <div>
-                        <p className="text-sm font-medium text-gray-900">{cat.name}</p>
-                        <p className="text-xs text-gray-500 mt-0.5">{cat.description || 'No description'}</p>
-                        <span className="text-xs text-gray-400 mt-1">{cat.articleCount} articles</span>
+                        <p className="text-sm font-medium text-[var(--ink)]">{cat.name}</p>
+                        <p className="text-xs text-[var(--muted)] mt-0.5">{cat.description || 'No description'}</p>
+                        <span className="text-xs text-[var(--muted)] mt-1">{cat.articleCount} articles</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <button onClick={() => openCategoryModal(cat)} className="p-1.5 text-gray-400 hover:text-indigo-600 rounded-lg hover:bg-indigo-50">
+                        <button onClick={() => openCategoryModal(cat)} className="p-1.5 text-[var(--muted)] hover:text-[var(--warm)] rounded-lg hover:bg-[rgba(201,101,74,0.06)]">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                         </button>
-                        <button onClick={() => setConfirmDeleteCategory(cat)} className="p-1.5 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50">
+                        <button onClick={() => setConfirmDeleteCategory(cat)} className="p-1.5 text-[var(--muted)] hover:text-red-600 rounded-lg hover:bg-red-50">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                         </button>
                       </div>
@@ -542,23 +542,23 @@ export default function AdminHelpCenter() {
             <div className="space-y-8">
               {/* Popular Articles */}
               <div>
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">Most Viewed Articles</h3>
+                <h3 className="text-sm font-semibold text-[var(--ink2)] mb-3">Most Viewed Articles</h3>
                 {popularArticles.length === 0 ? (
-                  <div className="text-center py-8 text-gray-400"><p className="text-sm">No data yet</p></div>
+                  <div className="text-center py-8 text-[var(--muted)]"><p className="text-sm">No data yet</p></div>
                 ) : (
                   <div className="space-y-2">
                     {popularArticles.map((article, i) => (
-                      <div key={article.id} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-                        <span className="text-lg font-bold text-gray-300 w-6 text-center">#{i + 1}</span>
+                      <div key={article.id} className="flex items-center gap-4 p-3 bg-[var(--paper2)] rounded-lg">
+                        <span className="text-lg font-bold text-[var(--line)] w-6 text-center">#{i + 1}</span>
                         <div className="flex-1">
-                          <p className="text-sm font-medium text-gray-900">{article.title}</p>
+                          <p className="text-sm font-medium text-[var(--ink)]">{article.title}</p>
                           <div className="flex items-center gap-3 mt-1">
-                            <span className="text-xs text-gray-500">{article.viewCount.toLocaleString()} views</span>
+                            <span className="text-xs text-[var(--muted)]">{article.viewCount.toLocaleString()} views</span>
                             <div className="flex items-center gap-1">
-                              <div className="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                              <div className="w-16 h-1.5 bg-[var(--paper2)] rounded-full overflow-hidden">
                                 <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${article.helpfulPercentage}%` }} />
                               </div>
-                              <span className="text-xs text-gray-400">{article.helpfulPercentage}% helpful</span>
+                              <span className="text-xs text-[var(--muted)]">{article.helpfulPercentage}% helpful</span>
                             </div>
                           </div>
                         </div>
@@ -570,29 +570,29 @@ export default function AdminHelpCenter() {
 
               {/* Search Analytics */}
               <div>
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">Search Queries</h3>
+                <h3 className="text-sm font-semibold text-[var(--ink2)] mb-3">Search Queries</h3>
                 <div className="mb-3">
                   <input type="text" placeholder="Filter searches..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                    className="w-full sm:w-64 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" />
+                    className="w-full sm:w-64 text-sm border border-[var(--line)] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] outline-none" />
                 </div>
                 {filteredSearch.length === 0 ? (
-                  <div className="text-center py-8 text-gray-400"><p className="text-sm">No search data yet</p></div>
+                  <div className="text-center py-8 text-[var(--muted)]"><p className="text-sm">No search data yet</p></div>
                 ) : (
-                  <div className="overflow-x-auto rounded-lg border border-gray-100">
+                  <div className="overflow-x-auto rounded-lg border border-[var(--line)]">
                     <table className="min-w-full">
-                      <thead className="bg-gray-50">
+                      <thead className="bg-[var(--paper2)]">
                         <tr>
-                          <th className="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase">Query</th>
-                          <th className="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase">Searches</th>
-                          <th className="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase">Last Searched</th>
+                          <th className="px-4 py-2.5 text-left text-xs font-medium text-[var(--muted)] uppercase">Query</th>
+                          <th className="px-4 py-2.5 text-left text-xs font-medium text-[var(--muted)] uppercase">Searches</th>
+                          <th className="px-4 py-2.5 text-left text-xs font-medium text-[var(--muted)] uppercase">Last Searched</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-100">
+                      <tbody className="divide-y divide-[var(--line)]">
                         {filteredSearch.map(s => (
-                          <tr key={s.query} className="hover:bg-gray-50 transition-colors">
-                            <td className="px-4 py-3 text-sm font-medium text-gray-900">{s.query}</td>
-                            <td className="px-4 py-3 text-sm text-gray-600">{s.count}</td>
-                            <td className="px-4 py-3 text-xs text-gray-400">{formatRelativeTime(s.lastSearched)}</td>
+                          <tr key={s.query} className="hover:bg-[var(--paper2)] transition-colors">
+                            <td className="px-4 py-3 text-sm font-medium text-[var(--ink)]">{s.query}</td>
+                            <td className="px-4 py-3 text-sm text-[var(--ink2)]">{s.count}</td>
+                            <td className="px-4 py-3 text-xs text-[var(--muted)]">{formatRelativeTime(s.lastSearched)}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -620,10 +620,10 @@ export default function AdminHelpCenter() {
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40" onClick={() => setConfirmDelete(null)} />
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 animate-scale-in">
-              <h3 className="text-base font-semibold text-gray-900 mb-2">Delete Article?</h3>
-              <p className="text-sm text-gray-500 mb-5">Are you sure you want to delete "{confirmDelete.title}"? This cannot be undone.</p>
+              <h3 className="text-base font-semibold text-[var(--ink)] mb-2">Delete Article?</h3>
+              <p className="text-sm text-[var(--muted)] mb-5">Are you sure you want to delete "{confirmDelete.title}"? This cannot be undone.</p>
               <div className="flex justify-end gap-3">
-                <button onClick={() => setConfirmDelete(null)} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50">Cancel</button>
+                <button onClick={() => setConfirmDelete(null)} className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-xl hover:bg-[var(--paper2)]">Cancel</button>
                 <button onClick={() => deleteArticle(confirmDelete.id)} className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-xl hover:bg-red-700">Delete</button>
               </div>
             </div>
@@ -636,10 +636,10 @@ export default function AdminHelpCenter() {
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40" onClick={() => setConfirmDeleteCategory(null)} />
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 animate-scale-in">
-              <h3 className="text-base font-semibold text-gray-900 mb-2">Delete Category?</h3>
-              <p className="text-sm text-gray-500 mb-5">Deleting "{confirmDeleteCategory.name}" will not delete its articles. Are you sure?</p>
+              <h3 className="text-base font-semibold text-[var(--ink)] mb-2">Delete Category?</h3>
+              <p className="text-sm text-[var(--muted)] mb-5">Deleting "{confirmDeleteCategory.name}" will not delete its articles. Are you sure?</p>
               <div className="flex justify-end gap-3">
-                <button onClick={() => setConfirmDeleteCategory(null)} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50">Cancel</button>
+                <button onClick={() => setConfirmDeleteCategory(null)} className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-xl hover:bg-[var(--paper2)]">Cancel</button>
                 <button onClick={() => deleteCategory(confirmDeleteCategory.id)} className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-xl hover:bg-red-700">Delete</button>
               </div>
             </div>

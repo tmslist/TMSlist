@@ -82,11 +82,11 @@ export function NeuronCounter() {
   const sessionComplete = progress >= 1;
 
   return (
-    <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4">
+    <div className="bg-[var(--paper2)]/60 backdrop-blur-sm border border-[var(--line)]/50 rounded-2xl p-4">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Neurons Activated</span>
+        <span className="text-[10px] font-semibold text-white/40 uppercase tracking-wider">Neurons Activated</span>
         {sessionComplete && (
-          <span className="px-1.5 py-0.5 bg-emerald-500/20 border border-emerald-500/30 rounded text-[8px] font-bold text-emerald-400 uppercase">
+          <span className="px-1.5 py-0.5 bg-emerald-500/20 border border-emerald-500/30 rounded text-[8px] font-bold text-[var(--accent2)] uppercase">
             Session ✓
           </span>
         )}
@@ -97,13 +97,13 @@ export function NeuronCounter() {
         <span className="text-2xl font-mono font-bold text-white tabular-nums">
           {formatNumber(neurons)}
         </span>
-        <div className="text-[9px] text-slate-500 mt-0.5">
+        <div className="text-[9px] text-white/40 mt-0.5">
           / {formatNumber(BENCHMARK_NEURONS)} typical session
         </div>
       </div>
 
       {/* Progress bar */}
-      <div className="h-2 bg-slate-700 rounded-full overflow-hidden mb-2">
+      <div className="h-2 bg-[var(--paper2)] rounded-full overflow-hidden mb-2">
         <div
           className="h-full rounded-full transition-all duration-500"
           style={{
@@ -116,12 +116,12 @@ export function NeuronCounter() {
       </div>
 
       {/* Sparkline */}
-      <div className="h-6 rounded bg-slate-900/50 overflow-hidden">
+      <div className="h-6 rounded bg-[var(--paper2)]/50 overflow-hidden">
         <canvas ref={canvasRef} className="w-full h-full" style={{ height: '24px' }} />
       </div>
 
       {/* Stats row */}
-      <div className="flex justify-between mt-2 text-[8px] text-slate-600">
+      <div className="flex justify-between mt-2 text-[8px] text-white/40">
         <span>~{neuronsPerPulse.toLocaleString()} neurons/pulse</span>
         <span>{Math.round(progress * 100)}% session dose</span>
       </div>

@@ -61,17 +61,17 @@ function TagInput({
   }
 
   return (
-    <div className="flex flex-wrap gap-1.5 p-2 border border-gray-300 rounded-lg bg-white min-h-[42px] focus-within:border-violet-500 focus-within:ring-1 focus-within:ring-violet-200 transition-colors">
+    <div className="flex flex-wrap gap-1.5 p-2 border border-[var(--line)] rounded-lg bg-white min-h-[42px] focus-within:border-[var(--ink2)] focus-within:ring-1 focus-within:ring-[rgba(10,22,40,0.15)] transition-colors">
       {tags.map((tag, i) => (
         <span
           key={`${tag}-${i}`}
-          className="inline-flex items-center gap-1 px-2.5 py-1 bg-violet-50 text-violet-700 text-xs font-medium rounded-full"
+          className="inline-flex items-center gap-1 px-2.5 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-full"
         >
           {tag}
           <button
             type="button"
             onClick={() => onChange(tags.filter((_, idx) => idx !== i))}
-            className="text-violet-400 hover:text-violet-700"
+            className="text-[var(--ink2)] hover:text-[var(--ink)]"
             aria-label={`Remove ${tag}`}
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ function TagInput({
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={tags.length === 0 ? placeholder : ''}
-        className="flex-1 min-w-[120px] text-sm outline-none bg-transparent placeholder:text-gray-400"
+        className="flex-1 min-w-[120px] text-sm outline-none bg-transparent placeholder:text-[var(--muted)]"
       />
     </div>
   );
@@ -322,82 +322,82 @@ export default function AdminDoctors() {
       <div className="space-y-4 p-5">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">First Name</label>
             <input
               type="text"
               value={data.firstName || ''}
               onChange={(e) => setData({ firstName: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Last Name</label>
             <input
               type="text"
               value={data.lastName || ''}
               onChange={(e) => setData({ lastName: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Display Name</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Display Name</label>
             <input
               type="text"
               value={data.name || ''}
               onChange={(e) => setData({ name: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="Dr. John Smith"
             />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Credential</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Credential</label>
             <input
               type="text"
               value={data.credential || ''}
               onChange={(e) => setData({ credential: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="MD, DO, NP"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Title</label>
             <input
               type="text"
               value={data.title || ''}
               onChange={(e) => setData({ title: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="Board-Certified Psychiatrist"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Years Experience</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Years Experience</label>
             <input
               type="number"
               min={0}
               value={data.yearsExperience ?? ''}
               onChange={(e) => setData({ yearsExperience: e.target.value ? Number(e.target.value) : null })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
             />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">School / Training</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">School / Training</label>
             <input
               type="text"
               value={data.school || ''}
               onChange={(e) => setData({ school: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Clinic</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Clinic</label>
             <select
               value={data.clinicId || ''}
               onChange={(e) => setData({ clinicId: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:border-violet-500"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm bg-white focus:border-[var(--ink2)]"
             >
               <option value="">Select clinic...</option>
               {clinics.map((c) => (
@@ -407,7 +407,7 @@ export default function AdminDoctors() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Specialties</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Specialties</label>
           <TagInput
             tags={data.specialties || []}
             onChange={(tags) => setData({ specialties: tags })}
@@ -415,7 +415,7 @@ export default function AdminDoctors() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Profile Photo</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Profile Photo</label>
 
           {/* Preview */}
           {data.imageUrl && (
@@ -423,7 +423,7 @@ export default function AdminDoctors() {
               <img
                 src={data.imageUrl}
                 alt="Doctor preview"
-                className="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
+                className="w-20 h-20 rounded-full object-cover border-2 border-[var(--line)]"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
               />
               <button
@@ -439,7 +439,7 @@ export default function AdminDoctors() {
 
           {/* Upload button */}
           <div className="flex items-center gap-3 flex-wrap">
-            <label className="inline-flex items-center gap-2 px-4 py-2 bg-violet-50 border border-violet-200 text-violet-700 text-sm font-medium rounded-lg cursor-pointer hover:bg-violet-100 transition-colors">
+            <label className="inline-flex items-center gap-2 px-4 py-2 bg-[rgba(10,22,40,0.08)] border border-[rgba(10,22,40,0.15)] text-[var(--ink)] text-sm font-medium rounded-lg cursor-pointer hover:bg-[rgba(10,22,40,0.08)] transition-colors">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
@@ -484,28 +484,28 @@ export default function AdminDoctors() {
                 }}
               />
             </label>
-            <span className="text-xs text-gray-400">JPG, PNG, WebP — max 2 MB</span>
+            <span className="text-xs text-[var(--muted)]">JPG, PNG, WebP — max 2 MB</span>
           </div>
 
           {/* URL fallback */}
           <div className="mt-2 flex items-center gap-2">
-            <span className="text-xs text-gray-400 whitespace-nowrap">or paste URL:</span>
+            <span className="text-xs text-[var(--muted)] whitespace-nowrap">or paste URL:</span>
             <input
               type="url"
               value={data.imageUrl || ''}
               onChange={(e) => setData({ imageUrl: e.target.value })}
-              className="flex-1 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="flex-1 px-3 py-1.5 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="https://..."
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Bio</label>
           <textarea
             value={data.bio || ''}
             onChange={(e) => setData({ bio: e.target.value })}
             rows={4}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+            className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
             placeholder="Doctor's biography..."
           />
         </div>
@@ -514,7 +514,7 @@ export default function AdminDoctors() {
             type="button"
             onClick={onSave}
             disabled={saving}
-            className="px-5 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
+            className="px-5 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
           >
             {saving ? 'Saving...' : saveLabel}
           </button>
@@ -536,10 +536,10 @@ export default function AdminDoctors() {
 
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-gray-900">Doctors</h2>
+        <h2 className="text-xl font-semibold text-[var(--ink)]">Doctors</h2>
         <button
           onClick={() => setShowAddModal(true)}
-          className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors"
+          className="px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors"
         >
           + Add Doctor
         </button>
@@ -553,13 +553,13 @@ export default function AdminDoctors() {
             placeholder="Search by name or credential..."
             value={search}
             onChange={(e) => { setSearch(e.target.value); setPage(0); }}
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:border-violet-500 focus:ring-violet-200"
+            className="w-full px-4 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)]"
           />
         </div>
         <select
           value={clinicFilter}
           onChange={(e) => { setClinicFilter(e.target.value); setPage(0); }}
-          className="px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:border-violet-500"
+          className="px-4 py-2.5 rounded-lg border border-[var(--line)] text-sm bg-white focus:border-[var(--ink2)]"
         >
           <option value="">All Clinics</option>
           {clinics.map((c) => (
@@ -575,42 +575,42 @@ export default function AdminDoctors() {
         </div>
       )}
 
-      <div className="text-sm text-gray-500">
+      <div className="text-sm text-[var(--muted)]">
         {total} doctor{total !== 1 ? 's' : ''} found
-        {selected.size > 0 && <span className="ml-2 font-medium text-violet-600">{selected.size} selected</span>}
+        {selected.size > 0 && <span className="ml-2 font-medium text-[var(--ink)]">{selected.size} selected</span>}
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm border border-[var(--line)] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
+              <tr className="bg-[var(--paper2)] border-b border-[var(--line)]">
                 <th className="px-4 py-3 text-left">
                   <input
                     type="checkbox"
                     checked={allSelected}
                     ref={el => { if (el) el.indeterminate = someSelected; }}
                     onChange={toggleAll}
-                    className="w-4 h-4 rounded border-gray-300 text-violet-600 focus:ring-violet-500 cursor-pointer"
+                    className="w-4 h-4 rounded border-[var(--line)] text-[var(--ink)] focus:ring-[#1E2A3B] cursor-pointer"
                   />
                 </th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Name</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Credential</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Clinic</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Specialties</th>
-                <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Name</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Credential</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Clinic</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Specialties</th>
+                <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[var(--line)]">
               {loading ? (
-                <tr><td colSpan={6} className="px-4 py-12 text-center text-gray-400"><div className="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2"></div><br/>Loading</td></tr>
+                <tr><td colSpan={6} className="px-4 py-12 text-center text-[var(--muted)]"><div className="inline-block w-5 h-5 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-2"></div><br/>Loading</td></tr>
               ) : doctors.length === 0 ? (
-                <tr><td colSpan={6} className="px-4 py-8 text-center text-gray-500">No doctors found.</td></tr>
+                <tr><td colSpan={6} className="px-4 py-8 text-center text-[var(--muted)]">No doctors found.</td></tr>
               ) : doctors.map((doc) => (
                 <React.Fragment key={doc.id}>
                   <tr
-                    className={`hover:bg-gray-50 transition-colors cursor-pointer ${selected.has(doc.id) ? 'bg-violet-50/40' : ''} ${expandedId === doc.id ? 'bg-violet-50/50' : ''}`}
+                    className={`hover:bg-[var(--paper2)] transition-colors cursor-pointer ${selected.has(doc.id) ? 'bg-[rgba(10,22,40,0.08)]/40' : ''} ${expandedId === doc.id ? 'bg-[rgba(10,22,40,0.08)]/50' : ''}`}
                     onClick={() => handleExpand(doc.id)}
                   >
                     <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
@@ -618,7 +618,7 @@ export default function AdminDoctors() {
                         type="checkbox"
                         checked={selected.has(doc.id)}
                         onChange={() => toggleOne(doc.id)}
-                        className="w-4 h-4 rounded border-gray-300 text-violet-600 focus:ring-violet-500 cursor-pointer"
+                        className="w-4 h-4 rounded border-[var(--line)] text-[var(--ink)] focus:ring-[#1E2A3B] cursor-pointer"
                       />
                     </td>
                     <td className="px-4 py-3">
@@ -626,22 +626,22 @@ export default function AdminDoctors() {
                         {doc.imageUrl ? (
                           <img src={doc.imageUrl} alt={doc.name} className="w-8 h-8 rounded-full object-cover" />
                         ) : (
-                          <div className="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center text-violet-600 text-xs font-bold">
+                          <div className="w-8 h-8 rounded-full bg-[rgba(10,22,40,0.08)] flex items-center justify-center text-[var(--ink)] text-xs font-bold">
                             {(doc.firstName?.[0] || doc.name?.[0] || '?').toUpperCase()}
                           </div>
                         )}
-                        <span className="text-sm font-semibold text-gray-900">{doc.name}</span>
+                        <span className="text-sm font-semibold text-[var(--ink)]">{doc.name}</span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{doc.credential || '--'}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{doc.clinicName || '--'}</td>
+                    <td className="px-4 py-3 text-sm text-[var(--ink2)]">{doc.credential || '--'}</td>
+                    <td className="px-4 py-3 text-sm text-[var(--ink2)]">{doc.clinicName || '--'}</td>
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-1">
                         {(doc.specialties || []).slice(0, 3).map((s) => (
-                          <span key={s} className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">{s}</span>
+                          <span key={s} className="px-2 py-0.5 bg-[var(--paper2)] text-[var(--ink2)] text-xs rounded">{s}</span>
                         ))}
                         {(doc.specialties || []).length > 3 && (
-                          <span className="text-xs text-gray-400">+{doc.specialties.length - 3}</span>
+                          <span className="text-xs text-[var(--muted)]">+{doc.specialties.length - 3}</span>
                         )}
                       </div>
                     </td>
@@ -649,7 +649,7 @@ export default function AdminDoctors() {
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleExpand(doc.id)}
-                          className="px-3 py-1.5 bg-violet-50 text-violet-700 text-xs font-medium rounded-lg hover:bg-violet-100 transition-colors"
+                          className="px-3 py-1.5 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
                         >
                           {expandedId === doc.id ? 'Close' : 'Edit'}
                         </button>
@@ -663,7 +663,7 @@ export default function AdminDoctors() {
                             </button>
                             <button
                               onClick={() => setDeleteConfirm(null)}
-                              className="px-3 py-1.5 bg-gray-100 text-gray-600 text-xs font-medium rounded-lg hover:bg-gray-200 transition-colors"
+                              className="px-3 py-1.5 bg-[var(--paper2)] text-[var(--ink2)] text-xs font-medium rounded-lg hover:bg-[var(--paper2)] transition-colors"
                             >
                               Cancel
                             </button>
@@ -681,7 +681,7 @@ export default function AdminDoctors() {
                   </tr>
                   {expandedId === doc.id && (
                     <tr>
-                      <td colSpan={6} className="bg-gray-50 border-t border-gray-200">
+                      <td colSpan={6} className="bg-[var(--paper2)] border-t border-[var(--line)]">
                         {renderDoctorForm(
                           editData,
                           (updates) => setEditData((prev) => ({ ...prev, ...updates })),
@@ -699,20 +699,20 @@ export default function AdminDoctors() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="px-4 py-3 border-t border-gray-200 bg-gray-50 flex items-center justify-between">
-            <div className="text-sm text-gray-500">Page {page + 1} of {totalPages}</div>
+          <div className="px-4 py-3 border-t border-[var(--line)] bg-[var(--paper2)] flex items-center justify-between">
+            <div className="text-sm text-[var(--muted)]">Page {page + 1} of {totalPages}</div>
             <div className="flex gap-2">
               <button
                 onClick={() => setPage((p) => Math.max(0, p - 1))}
                 disabled={page === 0}
-                className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50"
+                className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-lg text-sm disabled:opacity-50 hover:bg-[var(--paper2)]"
               >
                 Previous
               </button>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
                 disabled={page >= totalPages - 1}
-                className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50"
+                className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-lg text-sm disabled:opacity-50 hover:bg-[var(--paper2)]"
               >
                 Next
               </button>
@@ -723,14 +723,14 @@ export default function AdminDoctors() {
 
       {/* Bulk Action Bar */}
       {selected.size > 0 && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-4 bg-gray-900 text-white px-6 py-3 rounded-2xl shadow-2xl">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-4 bg-[var(--ink)] text-white px-6 py-3 rounded-2xl shadow-2xl">
           <span className="text-sm font-medium">
             {selected.size} selected
           </span>
-          <div className="w-px h-5 bg-gray-600" />
+          <div className="w-px h-5 bg-[var(--muted)]" />
           <button
             onClick={exportCSV}
-            className="flex items-center gap-1.5 text-sm text-gray-200 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 text-sm text-[var(--line)] hover:text-white transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -746,10 +746,10 @@ export default function AdminDoctors() {
             </svg>
             Delete Selected
           </button>
-          <div className="w-px h-5 bg-gray-600" />
+          <div className="w-px h-5 bg-[var(--muted)]" />
           <button
             onClick={() => setSelected(new Set())}
-            className="text-sm text-gray-400 hover:text-white transition-colors"
+            className="text-sm text-[var(--muted)] hover:text-white transition-colors"
             aria-label="Clear selection"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -771,15 +771,15 @@ export default function AdminDoctors() {
                 </svg>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">Delete {selected.size} {selected.size === 1 ? 'doctor' : 'doctors'}?</h3>
-                <p className="text-sm text-gray-500 mt-0.5">This cannot be undone.</p>
+                <h3 className="text-lg font-semibold text-[var(--ink)]">Delete {selected.size} {selected.size === 1 ? 'doctor' : 'doctors'}?</h3>
+                <p className="text-sm text-[var(--muted)] mt-0.5">This cannot be undone.</p>
               </div>
             </div>
             <div className="flex gap-3 mt-6">
               <button
                 onClick={() => setShowBulkDeleteModal(false)}
                 disabled={bulkDeleting}
-                className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+                className="flex-1 px-4 py-2.5 border border-[var(--line)] text-[var(--ink2)] text-sm font-medium rounded-lg hover:bg-[var(--paper2)] transition-colors disabled:opacity-50"
               >
                 Cancel
               </button>
@@ -805,11 +805,11 @@ export default function AdminDoctors() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/30" onClick={() => setShowAddModal(false)} />
           <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-5 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">Add New Doctor</h3>
+            <div className="flex items-center justify-between p-5 border-b border-[var(--line)]">
+              <h3 className="text-lg font-semibold text-[var(--ink)]">Add New Doctor</h3>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="p-1 text-gray-400 hover:text-gray-600"
+                className="p-1 text-[var(--muted)] hover:text-[var(--ink2)]"
                 aria-label="Close"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -5,7 +5,7 @@
 <!-- Floating Request Button -->
 <button
     id="floating-cta-btn"
-    class="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-6 py-4 bg-[#143844] text-white font-semibold rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:bg-[#143844] hover:scale-105 transition-all animate-bounce-subtle"
+    class="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-6 py-4 bg-[var(--ink)] text-white font-semibold rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:bg-[var(--ink2)] hover:scale-105 transition-all animate-bounce-subtle"
     aria-label="Get Help"
 >
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
@@ -22,7 +22,7 @@
 >
     <!-- Backdrop -->
     <div
-        class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity opacity-0"
+        class="absolute inset-0 bg-[rgba(10,22,40,0.60)] backdrop-blur-sm transition-opacity opacity-0"
         id="modal-backdrop"
     >
     </div>
@@ -37,14 +37,14 @@
         >
             <!-- Header -->
             <div
-                class="dark-section bg-[#143844] px-6 py-4 flex justify-between items-center"
+                class="bg-[var(--ink)] px-6 py-4 flex justify-between items-center"
             >
-                <h3 class="text-lg font-semibold text-slate-900" id="modal-title">
+                <h3 class="text-lg font-semibold text-white" id="modal-title">
                     Get Free TMS Guidance
                 </h3>
                 <button
                     type="button"
-                    class="text-[#1B4B5A]200 hover:text-slate-900 transition-colors"
+                    class="text-white/80 hover:text-white transition-colors"
                     id="close-modal-btn"
                 >
                     <svg
@@ -64,7 +64,7 @@
 
             <!-- Form Content -->
             <div class="px-6 py-6">
-                <p class="text-sm text-gray-500 mb-6">
+                <p class="text-sm text-[var(--muted)] mb-6">
                     Tell us about your situation. We'll connect you with a
                     verified TMS specialist near you or answer your questions.
                 </p>
@@ -117,7 +117,7 @@
                     <div>
                         <label
                             for="name"
-                            class="block text-sm font-medium text-gray-700"
+                            class="block text-sm font-medium text-[var(--ink2)]"
                             >Full Name</label
                         >
                         <input
@@ -125,7 +125,7 @@
                             name="name"
                             id="name"
                             required
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2E7A8F] focus:ring-[#1B4B5A]500 sm:text-sm px-4 py-2 border"
+                            class="mt-1 block w-full rounded-lg border-[var(--line)] shadow-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)] sm:text-sm px-4 py-2 border"
                             placeholder="John Doe"
                         />
                     </div>
@@ -134,7 +134,7 @@
                         <div>
                             <label
                                 for="email"
-                                class="block text-sm font-medium text-gray-700"
+                                class="block text-sm font-medium text-[var(--ink2)]"
                                 >Email</label
                             >
                             <input
@@ -142,14 +142,14 @@
                                 name="email"
                                 id="email"
                                 required
-                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2E7A8F] focus:ring-[#1B4B5A]500 sm:text-sm px-4 py-2 border"
+                                class="mt-1 block w-full rounded-lg border-[var(--line)] shadow-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)] sm:text-sm px-4 py-2 border"
                                 placeholder="john@example.com"
                             />
                         </div>
                         <div>
                             <label
                                 for="phone"
-                                class="block text-sm font-medium text-gray-700"
+                                class="block text-sm font-medium text-[var(--ink2)]"
                                 >Phone</label
                             >
                             <input
@@ -157,7 +157,7 @@
                                 name="phone"
                                 id="phone"
                                 required
-                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2E7A8F] focus:ring-[#1B4B5A]500 sm:text-sm px-4 py-2 border"
+                                class="mt-1 block w-full rounded-lg border-[var(--line)] shadow-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)] sm:text-sm px-4 py-2 border"
                                 placeholder="(555) 123-4567"
                             />
                         </div>
@@ -167,7 +167,7 @@
                         <div>
                             <label
                                 for="location"
-                                class="block text-sm font-medium text-gray-700"
+                                class="block text-sm font-medium text-[var(--ink2)]"
                                 >Location</label
                             >
                             <input
@@ -175,21 +175,21 @@
                                 name="location"
                                 id="location"
                                 required
-                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2E7A8F] focus:ring-[#1B4B5A]500 sm:text-sm px-4 py-2 border"
+                                class="mt-1 block w-full rounded-lg border-[var(--line)] shadow-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)] sm:text-sm px-4 py-2 border"
                                 placeholder="City, State or Zip Code"
                             />
                         </div>
                         <div>
                             <label
                                 for="clinic"
-                                class="block text-sm font-medium text-gray-700"
+                                class="block text-sm font-medium text-[var(--ink2)]"
                                 >Which clinic?</label
                             >
                             <input
                                 type="text"
                                 name="clinic"
                                 id="clinic"
-                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2E7A8F] focus:ring-[#1B4B5A]500 sm:text-sm px-4 py-2 border"
+                                class="mt-1 block w-full rounded-lg border-[var(--line)] shadow-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)] sm:text-sm px-4 py-2 border"
                                 placeholder="Clinic name (Optional)"
                             />
                         </div>
@@ -198,14 +198,14 @@
                     <div>
                         <label
                             for="role"
-                            class="block text-sm font-medium text-gray-700"
+                            class="block text-sm font-medium text-[var(--ink2)]"
                             >I am a...</label
                         >
                         <select
                             id="role"
                             name="role"
                             required
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2E7A8F] focus:ring-[#1B4B5A]500 sm:text-sm px-4 py-2 border"
+                            class="mt-1 block w-full rounded-lg border-[var(--line)] shadow-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)] sm:text-sm px-4 py-2 border"
                         >
                             <option value="">Select a role...</option>
                             <option>Patient looking for treatment</option>
@@ -218,7 +218,7 @@
                     <div>
                         <label
                             for="message"
-                            class="block text-sm font-medium text-gray-700"
+                            class="block text-sm font-medium text-[var(--ink2)]"
                             >How can we help?</label
                         >
                         <textarea
@@ -226,7 +226,7 @@
                             name="message"
                             rows="3"
                             required
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2E7A8F] focus:ring-[#1B4B5A]500 sm:text-sm px-4 py-2 border"
+                            class="mt-1 block w-full rounded-lg border-[var(--line)] shadow-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)] sm:text-sm px-4 py-2 border"
                             placeholder="I'm interested in TMS for depression..."
                         ></textarea>
                     </div>
@@ -235,11 +235,11 @@
                         <button
                             type="submit"
                             id="submit-btn"
-                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-semibold text-white bg-[#143844] hover:bg-[#143844] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1B4B5A]500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-semibold text-white bg-[var(--ink2)] hover:bg-[var(--ink2)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[rgba(10,22,40,0.15)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             Request Free Consultation
                         </button>
-                        <p class="text-xs text-center text-gray-400 mt-3">
+                        <p class="text-xs text-center text-[var(--muted)] mt-3">
                             Your information is secure and HIPAA compliant.
                         </p>
                     </div>

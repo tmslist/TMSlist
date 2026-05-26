@@ -76,9 +76,9 @@ function Modal({ open, onClose, title, children }: { open: boolean; onClose: () 
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--line)]">
+          <h3 className="text-lg font-semibold text-[var(--ink)]">{title}</h3>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-[var(--paper2)] text-[var(--muted)] hover:text-[var(--ink2)]">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -312,10 +312,10 @@ export default function AdminBadgeSystem() {
 
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Badge System</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Gamification and rewards management</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)]">Badge System</h2>
+          <p className="text-sm text-[var(--muted)] mt-0.5">Gamification and rewards management</p>
         </div>
-        <button onClick={fetchData} className="px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2">
+        <button onClick={fetchData} className="px-3 py-2 bg-white border border-[var(--line)] rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] transition-colors flex items-center gap-2">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
@@ -324,11 +324,11 @@ export default function AdminBadgeSystem() {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-        <div className="border-b border-gray-200">
+      <div className="bg-white rounded-xl shadow-sm border border-[var(--line)]">
+        <div className="border-b border-[var(--line)]">
           <nav className="flex gap-1 px-4 flex-wrap">
             {TABS.map(t => (
-              <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${tab === t.key ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>
+              <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${tab === t.key ? 'border-[rgba(201,101,74,0.2)] text-[var(--warm)]' : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)]'}`}>
                 {t.label}
               </button>
             ))}
@@ -338,12 +338,12 @@ export default function AdminBadgeSystem() {
         <div className="p-6">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-indigo-600 rounded-full animate-spin" />
+              <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-indigo-600 rounded-full animate-spin" />
             </div>
           ) : tab === 'clinic_badges' || tab === 'doctor_badges' ? (
             <div>
               <div className="flex justify-end mb-4 gap-2">
-                <button onClick={() => { setAwardBadgeType(''); setAwardEntityId(''); setBulkCity(''); setBulkState(''); setShowAwardModal(true); }} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                <button onClick={() => { setAwardBadgeType(''); setAwardEntityId(''); setBulkCity(''); setBulkState(''); setShowAwardModal(true); }} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] transition-colors flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
@@ -351,25 +351,25 @@ export default function AdminBadgeSystem() {
                 </button>
               </div>
               {(tab === 'clinic_badges' ? clinicBadges : doctorBadges).length === 0 ? (
-                <div className="text-center py-12 text-gray-500">No badges awarded yet.</div>
+                <div className="text-center py-12 text-[var(--muted)]">No badges awarded yet.</div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="bg-gray-50 border-b border-gray-200">
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">{tab === 'clinic_badges' ? 'Clinic' : 'Doctor'}</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Badge</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Awarded</th>
+                      <tr className="bg-[var(--paper2)] border-b border-[var(--line)]">
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">{tab === 'clinic_badges' ? 'Clinic' : 'Doctor'}</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Badge</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Awarded</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-[var(--line)]">
                       {(tab === 'clinic_badges' ? clinicBadges : doctorBadges).map(badge => (
-                        <tr key={badge.id} className="hover:bg-gray-50 transition-colors">
-                          <td className="px-4 py-3 text-sm font-medium text-gray-900">{tab === 'clinic_badges' ? (badge as ClinicBadge).clinicName : (badge as DoctorBadge).doctorName}</td>
+                        <tr key={badge.id} className="hover:bg-[var(--paper2)] transition-colors">
+                          <td className="px-4 py-3 text-sm font-medium text-[var(--ink)]">{tab === 'clinic_badges' ? (badge as ClinicBadge).clinicName : (badge as DoctorBadge).doctorName}</td>
                           <td className="px-4 py-3">
-                            <span className="px-2 py-1 bg-indigo-100 text-indigo-700 text-xs font-medium rounded">{badge.badgeType.replace(/_/g, ' ')}</span>
+                            <span className="px-2 py-1 bg-[rgba(201,101,74,0.1)] text-[var(--warm)] text-xs font-medium rounded">{badge.badgeType.replace(/_/g, ' ')}</span>
                           </td>
-                          <td className="px-4 py-3 text-sm text-gray-500">{formatDate(badge.awardedAt)}</td>
+                          <td className="px-4 py-3 text-sm text-[var(--muted)]">{formatDate(badge.awardedAt)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -381,22 +381,22 @@ export default function AdminBadgeSystem() {
             <div className="space-y-6">
               <div className="flex items-center gap-4 flex-wrap">
                 <div>
-                  <label className="block text-xs text-gray-500 mb-1">Type</label>
-                  <select value={lbType} onChange={e => setLbType(e.target.value)} className="rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                  <label className="block text-xs text-[var(--muted)] mb-1">Type</label>
+                  <select value={lbType} onChange={e => setLbType(e.target.value)} className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
                     <option value="leads">Leads Generated</option>
                     <option value="rating">Highest Rating</option>
                     <option value="fast_responder">Fastest Response</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-500 mb-1">Period</label>
-                  <select value={lbPeriod} onChange={e => setLbPeriod(e.target.value)} className="rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                  <label className="block text-xs text-[var(--muted)] mb-1">Period</label>
+                  <select value={lbPeriod} onChange={e => setLbPeriod(e.target.value)} className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
                     <option value="weekly">Weekly</option>
                     <option value="monthly">Monthly</option>
                   </select>
                 </div>
                 <div className="pt-5">
-                  <button onClick={generateLeaderboard} disabled={saving} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 disabled:opacity-50 transition-colors">
+                  <button onClick={generateLeaderboard} disabled={saving} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50 transition-colors">
                     {saving ? 'Generating...' : 'Generate'}
                   </button>
                 </div>
@@ -405,51 +405,51 @@ export default function AdminBadgeSystem() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="bg-gray-50 border-b border-gray-200">
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Rank</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Name</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Score</th>
+                      <tr className="bg-[var(--paper2)] border-b border-[var(--line)]">
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Rank</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Name</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Score</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-[var(--line)]">
                       {currentLeaderboard.entries.map(entry => (
-                        <tr key={entry.entityId} className="hover:bg-gray-50 transition-colors">
+                        <tr key={entry.entityId} className="hover:bg-[var(--paper2)] transition-colors">
                           <td className="px-4 py-3">
-                            <span className={`w-6 h-6 rounded-full text-xs font-medium flex items-center justify-center ${entry.rank === 1 ? 'bg-yellow-400 text-yellow-900' : entry.rank === 2 ? 'bg-gray-300 text-gray-800' : entry.rank === 3 ? 'bg-amber-600 text-white' : 'bg-gray-100 text-gray-600'}`}>
+                            <span className={`w-6 h-6 rounded-full text-xs font-medium flex items-center justify-center ${entry.rank === 1 ? 'bg-yellow-400 text-yellow-900' : entry.rank === 2 ? 'bg-[var(--line)] text-[var(--ink)]' : entry.rank === 3 ? 'bg-amber-600 text-white' : 'bg-[var(--paper2)] text-[var(--ink2)]'}`}>
                               {entry.rank}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-sm font-medium text-gray-900">{entry.entityName}</td>
-                          <td className="px-4 py-3 text-sm text-gray-600">{entry.score.toLocaleString()}</td>
+                          <td className="px-4 py-3 text-sm font-medium text-[var(--ink)]">{entry.entityName}</td>
+                          <td className="px-4 py-3 text-sm text-[var(--ink2)]">{entry.score.toLocaleString()}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
               ) : (
-                <div className="text-center py-12 text-gray-500">No leaderboard data. Click Generate to create one.</div>
+                <div className="text-center py-12 text-[var(--muted)]">No leaderboard data. Click Generate to create one.</div>
               )}
             </div>
           ) : tab === 'points_store' ? (
             <div className="space-y-6">
               <div>
                 <div className="flex justify-between items-center mb-3">
-                  <h4 className="text-sm font-semibold text-gray-900">Reward Items</h4>
-                  <button onClick={() => openRewardModal()} className="px-3 py-1.5 bg-indigo-600 text-white text-xs font-medium rounded-lg hover:bg-indigo-700 transition-colors">Add Reward</button>
+                  <h4 className="text-sm font-semibold text-[var(--ink)]">Reward Items</h4>
+                  <button onClick={() => openRewardModal()} className="px-3 py-1.5 bg-[var(--ink2)] text-white text-xs font-medium rounded-lg hover:bg-[var(--ink2)] transition-colors">Add Reward</button>
                 </div>
                 {rewards.length === 0 ? (
-                  <div className="text-center py-8 text-gray-500">No rewards configured.</div>
+                  <div className="text-center py-8 text-[var(--muted)]">No rewards configured.</div>
                 ) : (
                   <div className="space-y-2">
                     {rewards.map(reward => (
-                      <div key={reward.id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                      <div key={reward.id} className="flex items-center justify-between p-3 border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] transition-colors">
                         <div>
-                          <p className="text-sm font-medium text-gray-900">{reward.name}</p>
-                          <p className="text-xs text-gray-500">{reward.pointsCost} points - {reward.type}</p>
+                          <p className="text-sm font-medium text-[var(--ink)]">{reward.name}</p>
+                          <p className="text-xs text-[var(--muted)]">{reward.pointsCost} points - {reward.type}</p>
                         </div>
                         <div className="flex items-center gap-2">
-                          {reward.stock !== undefined && <span className="text-xs text-gray-500">Stock: {reward.stock}</span>}
-                          <button onClick={() => openRewardModal(reward)} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500">
+                          {reward.stock !== undefined && <span className="text-xs text-[var(--muted)]">Stock: {reward.stock}</span>}
+                          <button onClick={() => openRewardModal(reward)} className="p-1.5 rounded-lg hover:bg-[var(--paper2)] text-[var(--muted)]">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
@@ -461,16 +461,16 @@ export default function AdminBadgeSystem() {
                 )}
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-gray-900 mb-3">Redeem Requests</h4>
+                <h4 className="text-sm font-semibold text-[var(--ink)] mb-3">Redeem Requests</h4>
                 {redeemRequests.length === 0 ? (
-                  <div className="text-center py-8 text-gray-500">No pending requests.</div>
+                  <div className="text-center py-8 text-[var(--muted)]">No pending requests.</div>
                 ) : (
                   <div className="space-y-2">
                     {redeemRequests.map(req => (
-                      <div key={req.id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                      <div key={req.id} className="flex items-center justify-between p-3 border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] transition-colors">
                         <div>
-                          <p className="text-sm font-medium text-gray-900">{req.userName}</p>
-                          <p className="text-xs text-gray-500">{req.rewardName} ({req.pointsSpent} points)</p>
+                          <p className="text-sm font-medium text-[var(--ink)]">{req.userName}</p>
+                          <p className="text-xs text-[var(--muted)]">{req.rewardName} ({req.pointsSpent} points)</p>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className={`px-2 py-1 text-xs font-medium rounded ${req.status === 'pending' ? 'bg-amber-100 text-amber-700' : req.status === 'approved' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
@@ -497,8 +497,8 @@ export default function AdminBadgeSystem() {
       <Modal open={showAwardModal} onClose={() => setShowAwardModal(false)} title="Award Badge">
         <div className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Badge Type *</label>
-            <select value={awardBadgeType} onChange={e => setAwardBadgeType(e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Badge Type *</label>
+            <select value={awardBadgeType} onChange={e => setAwardBadgeType(e.target.value)} className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
               <option value="">Select badge...</option>
               {(tab === 'clinic_badges' ? CLINIC_BADGE_TYPES : DOCTOR_BADGE_TYPES).map(b => (
                 <option key={b.key} value={b.key}>{b.label}</option>
@@ -506,35 +506,35 @@ export default function AdminBadgeSystem() {
             </select>
           </div>
 
-          <div className="border-t border-gray-100 pt-4">
-            <p className="text-xs font-medium text-gray-500 uppercase mb-3">Single Award</p>
+          <div className="border-t border-[var(--line)] pt-4">
+            <p className="text-xs font-medium text-[var(--muted)] uppercase mb-3">Single Award</p>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{tab === 'clinic_badges' ? 'Clinic' : 'Doctor'} *</label>
-              <select value={awardEntityId} onChange={e => setAwardEntityId(e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">{tab === 'clinic_badges' ? 'Clinic' : 'Doctor'} *</label>
+              <select value={awardEntityId} onChange={e => setAwardEntityId(e.target.value)} className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
                 <option value="">Select...</option>
                 {(tab === 'clinic_badges' ? clinics : doctors).map(e => (
                   <option key={e.id} value={e.id}>{e.name}</option>
                 ))}
               </select>
             </div>
-            <button onClick={awardBadge} disabled={saving || !awardEntityId || !awardBadgeType} className="mt-3 w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 disabled:opacity-50 transition-colors">
+            <button onClick={awardBadge} disabled={saving || !awardEntityId || !awardBadgeType} className="mt-3 w-full px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50 transition-colors">
               {saving ? 'Awarding...' : 'Award Badge'}
             </button>
           </div>
 
-          <div className="border-t border-gray-100 pt-4">
-            <p className="text-xs font-medium text-gray-500 uppercase mb-3">Bulk Award</p>
+          <div className="border-t border-[var(--line)] pt-4">
+            <p className="text-xs font-medium text-[var(--muted)] uppercase mb-3">Bulk Award</p>
             <div className="grid grid-cols-2 gap-3 mb-3">
               <div>
-                <label className="block text-xs text-gray-600 mb-1">City (optional)</label>
-                <input type="text" value={bulkCity} onChange={e => setBulkCity(e.target.value)} placeholder="Any" className="w-full rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                <label className="block text-xs text-[var(--ink2)] mb-1">City (optional)</label>
+                <input type="text" value={bulkCity} onChange={e => setBulkCity(e.target.value)} placeholder="Any" className="w-full rounded-lg border border-[var(--line)] px-3 py-1.5 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
               </div>
               <div>
-                <label className="block text-xs text-gray-600 mb-1">State (optional)</label>
-                <input type="text" value={bulkState} onChange={e => setBulkState(e.target.value)} placeholder="Any" className="w-full rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                <label className="block text-xs text-[var(--ink2)] mb-1">State (optional)</label>
+                <input type="text" value={bulkState} onChange={e => setBulkState(e.target.value)} placeholder="Any" className="w-full rounded-lg border border-[var(--line)] px-3 py-1.5 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
               </div>
             </div>
-            <button onClick={bulkAward} disabled={saving || !awardBadgeType} className="w-full px-4 py-2 border border-indigo-600 text-indigo-600 text-sm font-medium rounded-lg hover:bg-indigo-50 disabled:opacity-50 transition-colors">
+            <button onClick={bulkAward} disabled={saving || !awardBadgeType} className="w-full px-4 py-2 border border-[rgba(201,101,74,0.2)] text-[var(--warm)] text-sm font-medium rounded-lg hover:bg-[rgba(201,101,74,0.06)] disabled:opacity-50 transition-colors">
               {saving ? 'Awarding...' : 'Bulk Award'}
             </button>
           </div>
@@ -545,26 +545,26 @@ export default function AdminBadgeSystem() {
       <Modal open={showRewardModal} onClose={() => setShowRewardModal(false)} title={editingReward ? 'Edit Reward' : 'Add Reward'}>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
-            <input type="text" value={rewardName} onChange={e => setRewardName(e.target.value)} placeholder="Premium Badge" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Name *</label>
+            <input type="text" value={rewardName} onChange={e => setRewardName(e.target.value)} placeholder="Premium Badge" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Points Cost *</label>
-              <input type="number" value={rewardPoints} onChange={e => setRewardPoints(e.target.value)} placeholder="100" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Points Cost *</label>
+              <input type="number" value={rewardPoints} onChange={e => setRewardPoints(e.target.value)} placeholder="100" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Type *</label>
-              <input type="text" value={rewardType} onChange={e => setRewardType(e.target.value)} placeholder="badge/perk/discount" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Type *</label>
+              <input type="text" value={rewardType} onChange={e => setRewardType(e.target.value)} placeholder="badge/perk/discount" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Stock (optional)</label>
-            <input type="number" value={rewardStock} onChange={e => setRewardStock(e.target.value)} placeholder="Unlimited" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Stock (optional)</label>
+            <input type="number" value={rewardStock} onChange={e => setRewardStock(e.target.value)} placeholder="Unlimited" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
-            <button onClick={() => setShowRewardModal(false)} className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
-            <button onClick={saveReward} disabled={saving} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 disabled:opacity-50">{editingReward ? 'Update' : 'Create'}</button>
+          <div className="flex justify-end gap-3 pt-4 border-t border-[var(--line)]">
+            <button onClick={() => setShowRewardModal(false)} className="px-4 py-2 border border-[var(--line)] rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)]">Cancel</button>
+            <button onClick={saveReward} disabled={saving} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50">{editingReward ? 'Update' : 'Create'}</button>
           </div>
         </div>
       </Modal>

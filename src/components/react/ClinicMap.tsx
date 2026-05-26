@@ -204,7 +204,7 @@ export default function ClinicMap({ initialLat, initialLng, initialZoom, singleC
 
       const icon = L.divIcon({
         className: 'custom-marker',
-        html: `<div style="background:${clinic.verified ? '#059669' : '#6366f1'};width:28px;height:28px;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+        html: `<div style="background:${clinic.verified ? '#059669' : '#0A1628'};width:28px;height:28px;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
         </div>`,
         iconSize: [28, 28],
@@ -263,7 +263,7 @@ export default function ClinicMap({ initialLat, initialLng, initialZoom, singleC
   // Single clinic mode renders minimal
   if (singleClinic) {
     return (
-      <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+      <div className="rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm">
         <div ref={mapRef} style={{ height: height || '300px', width: '100%' }} />
       </div>
     );
@@ -275,7 +275,7 @@ export default function ClinicMap({ initialLat, initialLng, initialZoom, singleC
       <div className="flex items-center gap-3 mb-4">
         <button
           onClick={locateUser}
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition-colors shadow-sm"
+          className="inline-flex items-center gap-2 px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent)] text-white text-sm font-semibold rounded-xl transition-colors shadow-sm"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -284,13 +284,13 @@ export default function ClinicMap({ initialLat, initialLng, initialZoom, singleC
           Find Near Me
         </button>
         {loading && (
-          <div className="flex items-center gap-2 text-sm text-slate-500">
-            <div className="w-4 h-4 border-2 border-blue-300 border-t-blue-600 rounded-full animate-spin" />
+          <div className="flex items-center gap-2 text-sm text-[var(--muted)]">
+            <div className="w-4 h-4 border-2 border-[rgba(10,22,40,0.2)] border-t-blue-600 rounded-full animate-spin" />
             Loading clinics...
           </div>
         )}
         {clinics.length > 0 && !loading && (
-          <span className="text-sm text-slate-500 font-medium">
+          <span className="text-sm text-[var(--muted)] font-medium">
             {clinics.length} clinics in view
           </span>
         )}
@@ -305,13 +305,13 @@ export default function ClinicMap({ initialLat, initialLng, initialZoom, singleC
       {/* Map + sidebar layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
-          <div ref={mapRef} style={{ height, width: '100%' }} className="rounded-2xl border border-slate-200 shadow-sm" />
+          <div ref={mapRef} style={{ height, width: '100%' }} className="rounded-2xl border border-[var(--line)] shadow-sm" />
         </div>
 
         {/* Clinic list sidebar */}
         <div className="lg:col-span-1 max-h-[500px] overflow-y-auto space-y-3 pr-1">
           {clinics.length === 0 && !loading && mapReady && (
-            <div className="text-center py-12 text-slate-400">
+            <div className="text-center py-12 text-[var(--muted)]">
               <svg className="w-12 h-12 mx-auto mb-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               </svg>
@@ -333,14 +333,14 @@ export default function ClinicMap({ initialLat, initialLng, initialZoom, singleC
                 }}
                 className={`w-full text-left p-4 rounded-xl border transition-all ${
                   selectedClinic?.id === clinic.id
-                    ? 'border-blue-300 bg-blue-50 shadow-sm'
-                    : 'border-slate-100 bg-white hover:border-slate-200 hover:shadow-sm'
+                    ? 'border-[rgba(10,22,40,0.2)] bg-[var(--paper2)] shadow-sm'
+                    : 'border-[var(--line)] bg-white hover:border-[var(--line)] hover:shadow-sm'
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <h4 className="font-semibold text-sm text-slate-900 truncate">{clinic.name}</h4>
-                    <p className="text-xs text-slate-500 mt-0.5">{clinic.city}, {clinic.state}</p>
+                    <h4 className="font-semibold text-sm text-[var(--ink)] truncate">{clinic.name}</h4>
+                    <p className="text-xs text-[var(--muted)] mt-0.5">{clinic.city}, {clinic.state}</p>
                   </div>
                   {clinic.verified && (
                     <span className="shrink-0 text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-semibold border border-emerald-100">
@@ -351,12 +351,12 @@ export default function ClinicMap({ initialLat, initialLng, initialZoom, singleC
                 <div className="flex items-center gap-3 mt-2">
                   <span className="text-xs font-medium text-amber-600">{rating.toFixed(1)} ★</span>
                   {clinic.distance && (
-                    <span className="text-xs text-slate-400">{clinic.distance.toFixed(1)} mi</span>
+                    <span className="text-xs text-[var(--muted)]">{clinic.distance.toFixed(1)} mi</span>
                   )}
                 </div>
                 <a
                   href={`/clinic/${clinic.slug}`}
-                  className="inline-block mt-2 text-xs font-semibold text-blue-600 hover:text-blue-700"
+                  className="inline-block mt-2 text-xs font-semibold text-[var(--accent)] hover:text-[var(--accent)]"
                   onClick={(e) => e.stopPropagation()}
                 >
                   View Profile →

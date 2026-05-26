@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-05
 category: treatment
 tags: ["alcohol", "safety", "seizure risk", "treatment guidelines"]
-image: "https://images.unsplash.com/photo-1516997121675-4c2d1684aa3e?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-and-alcohol.svg"
 ---
 
 Alcohol and TMS therapy interact in one key way: seizure risk. TMS already carries a very small risk of seizure (roughly 1 in 30,000 sessions). Alcohol, specifically heavy drinking and alcohol withdrawal, is one of the few things that can meaningfully raise that risk.
@@ -77,9 +77,9 @@ Be honest. Your TMS provider needs to know:
 
 This is not information they will use to judge you. It is information they need to keep you safe and dial in your treatment.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>Heavy drinking is the real concern. It raises seizure risk, which is the primary alcohol-TMS interaction.</li>
     <li>Light, occasional drinking is generally fine with simple guidelines: no drinking the night before or same day as sessions.</li>
     <li>Do not show up to a session intoxicated or hungover. A responsible clinic will postpone it.</li>
@@ -89,47 +89,47 @@ This is not information they will use to judge you. It is information they need 
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I drink alcohol while getting TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I drink alcohol while getting TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Light, occasional drinking is generally fine. Guidelines: do not drink the night before a session or on the same day as a session. Keep it moderate (up to 1 drink/day for women, 2/day for men). Never show up to a session intoxicated. Heavy drinking is the real concern because it raises seizure risk.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Light, occasional drinking is generally fine. Guidelines: do not drink the night before a session or on the same day as a session. Keep it moderate (up to 1 drink/day for women, 2/day for men). Never show up to a session intoxicated. Heavy drinking is the real concern because it raises seizure risk.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does alcohol affect TMS results?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does alcohol affect TMS results?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Alcohol makes depression worse and is linked to poorer antidepressant response, higher relapse rates, worse sleep, and reduced neuroplasticity. TMS works by promoting neuroplasticity. Alcohol works against this. Less drinking during treatment means better odds of a good outcome.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Alcohol makes depression worse and is linked to poorer antidepressant response, higher relapse rates, worse sleep, and reduced neuroplasticity. TMS works by promoting neuroplasticity. Alcohol works against this. Less drinking during treatment means better odds of a good outcome.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Why is heavy drinking dangerous with TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Why is heavy drinking dangerous with TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Chronic heavy drinking changes brain excitability, making seizures more likely. Alcohol withdrawal (stopping after heavy drinking) is even riskier because the brain rebounds into a hyperexcitable state. TMS, which activates neurons magnetically, adds to that risk. Binge drinking the night before a session is also a concern.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Chronic heavy drinking changes brain excitability, making seizures more likely. Alcohol withdrawal (stopping after heavy drinking) is even riskier because the brain rebounds into a hyperexcitable state. TMS, which activates neurons magnetically, adds to that risk. Binge drinking the night before a session is also a concern.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Do I need to quit drinking entirely during TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Do I need to quit drinking entirely during TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most providers do not require complete abstinence if your drinking is moderate and you follow the guidelines. However, if you use alcohol to cope with depression, have alcohol use disorder, or have a history of alcohol withdrawal, your provider may require sobriety before starting TMS.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most providers do not require complete abstinence if your drinking is moderate and you follow the guidelines. However, if you use alcohol to cope with depression, have alcohol use disorder, or have a history of alcohol withdrawal, your provider may require sobriety before starting TMS.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Should I tell my TMS provider how much I drink?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Should I tell my TMS provider how much I drink?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Be honest about your drinking patterns, any history of alcohol withdrawal symptoms, and any recent changes in how much you drink. This information is critical for your safety and for calibrating your treatment. Providers use this information to keep you safe, not to judge you.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Be honest about your drinking patterns, any history of alcohol withdrawal symptoms, and any recent changes in how much you drink. This information is critical for your safety and for calibrating your treatment. Providers use this information to keep you safe, not to judge you.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

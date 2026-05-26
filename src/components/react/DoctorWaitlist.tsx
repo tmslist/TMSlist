@@ -71,12 +71,12 @@ export default function DoctorWaitlist({ initialEntries = [], doctorId }: Doctor
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Patient Waitlist</h2>
-          <p className="text-sm text-gray-500 mt-1">Manage patients waiting for appointment openings</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)]">Patient Waitlist</h2>
+          <p className="text-sm text-[var(--muted)] mt-1">Manage patients waiting for appointment openings</p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[var(--ink)] rounded-lg hover:bg-[var(--ink)] transition-colors"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -87,43 +87,43 @@ export default function DoctorWaitlist({ initialEntries = [], doctorId }: Doctor
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Total Waitlist</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{entries.length}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Total Waitlist</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{entries.length}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Waiting</p>
-          <p className="text-2xl font-bold text-blue-600 mt-1">{waitingCount}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Waiting</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{waitingCount}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Notified</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Notified</p>
           <p className="text-2xl font-bold text-amber-600 mt-1">{notifiedCount}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Enrolled</p>
-          <p className="text-2xl font-bold text-blue-600 mt-1">{entries.filter(e => e.status === 'enrolled').length}</p>
+        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
+          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Enrolled</p>
+          <p className="text-2xl font-bold text-[var(--ink)] mt-1">{entries.filter(e => e.status === 'enrolled').length}</p>
         </div>
       </div>
 
       {/* Waitlist Table */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
-        <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
-          <h3 className="font-semibold text-gray-900">Waitlist Queue</h3>
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm">
+        <div className="px-5 py-4 border-b border-[var(--line)] flex items-center justify-between">
+          <h3 className="font-semibold text-[var(--ink)]">Waitlist Queue</h3>
           {entries.length > 0 && (
-            <p className="text-xs text-gray-500">Position 1 is next to be notified</p>
+            <p className="text-xs text-[var(--muted)]">Position 1 is next to be notified</p>
           )}
         </div>
         {entries.length === 0 ? (
           <div className="p-12 text-center">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-16 h-16 bg-[var(--paper2)] rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
-            <p className="text-gray-500 text-sm">No patients on the waitlist yet.</p>
+            <p className="text-[var(--muted)] text-sm">No patients on the waitlist yet.</p>
             <button
               onClick={() => setShowAddModal(true)}
-              className="mt-4 text-sm text-blue-600 hover:text-blue-700 font-medium"
+              className="mt-4 text-sm text-[var(--ink)] hover:text-[var(--ink)] font-medium"
             >
               Add the first patient
             </button>
@@ -132,39 +132,39 @@ export default function DoctorWaitlist({ initialEntries = [], doctorId }: Doctor
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Position</th>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Patient</th>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Email</th>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Joined</th>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Status</th>
-                  <th className="text-right text-xs font-medium text-gray-500 uppercase tracking-wider px-5 py-3">Actions</th>
+                <tr className="border-b border-[var(--line)]">
+                  <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Position</th>
+                  <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Patient</th>
+                  <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Email</th>
+                  <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Joined</th>
+                  <th className="text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Status</th>
+                  <th className="text-right text-xs font-medium text-[var(--muted)] uppercase tracking-wider px-5 py-3">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-[var(--line)]">
                 {entries.map((entry) => (
-                  <tr key={entry.id} className="hover:bg-gray-50 transition-colors">
+                  <tr key={entry.id} className="hover:bg-[var(--paper2)] transition-colors">
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2">
                         <span className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                          entry.position === 1 ? 'bg-blue-600 text-white' :
-                          'bg-gray-100 text-gray-600'
+                          entry.position === 1 ? 'bg-[var(--ink)] text-white' :
+                          'bg-[var(--paper2)] text-[var(--ink2)]'
                         }`}>
                           {entry.position}
                         </span>
                         {entry.position === 1 && (
-                          <span className="text-xs text-blue-600 font-medium">Next</span>
+                          <span className="text-xs text-[var(--ink)] font-medium">Next</span>
                         )}
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="text-sm font-medium text-gray-900">{entry.patientName}</span>
+                      <span className="text-sm font-medium text-[var(--ink)]">{entry.patientName}</span>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="text-sm text-gray-600">{entry.email}</span>
+                      <span className="text-sm text-[var(--ink2)]">{entry.email}</span>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-[var(--muted)]">
                         {new Date(entry.joinedAt).toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric' })}
                       </span>
                     </td>
@@ -172,7 +172,7 @@ export default function DoctorWaitlist({ initialEntries = [], doctorId }: Doctor
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                         entry.status === 'enrolled' ? 'bg-emerald-100 text-emerald-700' :
                         entry.status === 'notified' ? 'bg-amber-100 text-amber-700' :
-                        'bg-blue-100 text-blue-700'
+                        'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]'
                       }`}>
                         {entry.status === 'enrolled' ? 'Enrolled' :
                          entry.status === 'notified' ? 'Notified' :
@@ -184,7 +184,7 @@ export default function DoctorWaitlist({ initialEntries = [], doctorId }: Doctor
                         {entry.status === 'waiting' && (
                           <button
                             onClick={() => handleNotify(entry.id)}
-                            className="text-xs text-blue-600 hover:text-blue-700 font-medium whitespace-nowrap"
+                            className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium whitespace-nowrap"
                           >
                             Notify
                           </button>
@@ -192,7 +192,7 @@ export default function DoctorWaitlist({ initialEntries = [], doctorId }: Doctor
                         {entry.status === 'notified' && (
                           <button
                             onClick={() => handleEnroll(entry.id)}
-                            className="text-xs text-blue-600 hover:text-emerald-700 font-medium whitespace-nowrap"
+                            className="text-xs text-[var(--ink)] hover:text-emerald-700 font-medium whitespace-nowrap"
                           >
                             Enroll
                           </button>
@@ -239,26 +239,26 @@ function AddPatientModal({ onClose, onAdd }: { onClose: () => void; onAdd: (emai
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
       <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6 z-10">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Add Patient to Waitlist</h3>
+        <h3 className="text-lg font-semibold text-[var(--ink)] mb-4">Add Patient to Waitlist</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Patient Name</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Patient Name</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full text-sm border border-[var(--line)] rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(10,22,40,0.2)]"
               placeholder="Jane Smith"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full text-sm border border-[var(--line)] rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(10,22,40,0.2)]"
               placeholder="patient@example.com"
               required
             />
@@ -266,14 +266,14 @@ function AddPatientModal({ onClose, onAdd }: { onClose: () => void; onAdd: (emai
           <div className="flex items-center gap-3 pt-2">
             <button
               type="submit"
-              className="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+              className="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-[var(--ink)] rounded-lg hover:bg-[var(--ink)] transition-colors"
             >
               Add to Waitlist
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              className="px-4 py-2.5 text-sm font-medium text-[var(--ink2)] bg-[var(--paper2)] rounded-lg hover:bg-[var(--paper2)] transition-colors"
             >
               Cancel
             </button>

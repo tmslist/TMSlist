@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
 import { eq, sql, count, avg, desc } from 'drizzle-orm';
-import { db } from '../../../db';
+import { db } from '../..//../db/index.js';
 import { doctorProfileViews, reviews, leads } from '../../../db/schema';
-import { getSessionFromRequest } from '../../../utils/auth';
+import { getSessionFromRequest } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -20,7 +20,7 @@ export const GET: APIRoute = async ({ request, url }) => {
 
   try {
     const period = url.searchParams.get('period') || 'weekly';
-    const clinicId = url.searchParams.get('clinicId') || session.clinicId;
+    const clinicId = session.clinicId;
 
     const { doctors } = await import('../../../db/schema');
     const docRows = await db.select({ id: doctors.id }).from(doctors).where(eq(doctors.clinicId, clinicId)).limit(1);

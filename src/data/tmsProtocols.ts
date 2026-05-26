@@ -149,16 +149,16 @@ export const protocols: TMSProtocol[] = [
 ];
 
 export const protocolTypeColors: Record<string, string> = {
-  rTMS: 'bg-violet-100 text-violet-700',
-  dTMS: 'bg-cyan-100 text-cyan-700',
+  rTMS: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
+  dTMS: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
   iTBS: 'bg-emerald-100 text-emerald-700',
   cTBS: 'bg-amber-100 text-amber-700',
-  Accelerated: 'bg-fuchsia-100 text-fuchsia-700',
-  SNT: 'bg-rose-100 text-rose-700',
+  Accelerated: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
+  SNT: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
 };
 
 export const evidenceColors: Record<string, string> = {
   Strong: 'bg-emerald-100 text-emerald-700',
   Moderate: 'bg-amber-100 text-amber-700',
-  Emerging: 'bg-blue-100 text-blue-700',
+  Emerging: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
 };

@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { eq, sql, and } from 'drizzle-orm';
 import { db } from '../../../db';
 import { leadRoutingRules, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 

@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-10
 treatmentA: "Magstim"
 treatmentB: "NeuroStar"
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 verdict: "Magstim is the research workhorse used in thousands of studies globally. NeuroStar is the US commercial leader with the most clinical experience. For standard depression, both are clinically equivalent. Availability and insurance favor NeuroStar."
 verdictWinner: "neurostar"
 faqs: []
@@ -57,9 +57,9 @@ Search [TMS providers](/us/) or explore [device comparisons](/compare/).
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>Magstim is the global research standard for TMS</li>
     <li>NeuroStar dominates the US clinical/commercial market</li>
     <li>Both deliver equivalent outcomes for standard depression treatment</li>
@@ -68,11 +68,11 @@ Search [TMS providers](/us/) or explore [device comparisons](/compare/).
   </ul>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Search verified providers by device, location, and insurance coverage.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Search verified providers by device, location, and insurance coverage.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>

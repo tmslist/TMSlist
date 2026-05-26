@@ -4,7 +4,7 @@ description: "Beyond mood, TMS appears to enhance cognitive performance — atte
 publishDate: 2026-04-21
 category: research
 author: Dr. James Liu
-image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-and-cognitive-function.svg"
 tags: ["tms", "cognition", "brain-function", "memory", "concentration", "research"]
 ---
 
@@ -104,35 +104,35 @@ Some clinics now incorporate cognitive training exercises (computerized attentio
 
 TMS isn't just a mood treatment — it's a treatment for the whole brain. The cognitive improvements patients experience — clearer thinking, better concentration, improved memory — are often among the most meaningful changes they report. If you've achieved mood improvement with medications but still feel mentally stuck, TMS may offer the cognitive boost that completes your recovery.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS improve cognitive function?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS improve cognitive function?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. A 2024 study in Brain Stimulation found 45% improvement on sustained attention tasks after 6 weeks of TMS, with improvements partially independent of mood improvement. Studies show 25-40% improvement in executive function test scores and significant working memory improvements. Cognitive gains are maintained at 3-month follow-up.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. A 2024 study in Brain Stimulation found 45% improvement on sustained attention tasks after 6 weeks of TMS, with improvements partially independent of mood improvement. Studies show 25-40% improvement in executive function test scores and significant working memory improvements. Cognitive gains are maintained at 3-month follow-up.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How does TMS compare to medications for cognitive effects?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How does TMS compare to medications for cognitive effects?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Unlike SSRIs and SNRIs which can cause sedation, emotional blunting, and cognitive impairment despite improving mood, TMS has no systemic chemical effects and no cognitive dulling. In fact, TMS may improve cognition while treating depression. Head-to-head comparisons suggest TMS produces superior cognitive outcomes compared to medication alone in treatment-resistant populations.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Unlike SSRIs and SNRIs which can cause sedation, emotional blunting, and cognitive impairment despite improving mood, TMS has no systemic chemical effects and no cognitive dulling. In fact, TMS may improve cognition while treating depression. Head-to-head comparisons suggest TMS produces superior cognitive outcomes compared to medication alone in treatment-resistant populations.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I combine TMS with cognitive training exercises?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I combine TMS with cognitive training exercises?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Some clinics incorporate cognitive training exercises (computerized attention and memory tasks) during the TMS course, which may amplify cognitive benefits. Research shows larger improvements in processing speed when TMS is combined with cognitive training exercises during treatment. Ask your provider whether this is offered at your clinic.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Some clinics incorporate cognitive training exercises (computerized attention and memory tasks) during the TMS course, which may amplify cognitive benefits. Research shows larger improvements in processing speed when TMS is combined with cognitive training exercises during treatment. Ask your provider whether this is offered at your clinic.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

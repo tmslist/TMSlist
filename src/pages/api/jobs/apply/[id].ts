@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, sql } from 'drizzle-orm';
 import { db } from '../../../../db';
 import { jobs, jobApplications, clinics, notifications, users } from '../../../../db/schema';
-import { jobApplicationSubmitSchema } from '../../../../db/validation';
+import { jobApplicationSubmitSchema } from '../../../../db/validation.js';
 
 export const prerender = false;
 

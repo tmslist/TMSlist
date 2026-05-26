@@ -22,12 +22,12 @@ const {
 } = Astro.props;
 
 const colorMap: Record<string, { bg: string; text: string; border: string; label: string }> = {
-  violet: { bg: 'bg-violet-50', text: 'text-violet-700', border: 'border-violet-100', label: 'text-violet-700/80' },
+  violet: { bg: 'bg-[rgba(10,22,40,0.08)]', text: 'text-[var(--accent)]', border: 'border-[rgba(10,22,40,0.20)]', label: 'text-[rgba(10,22,40,0.80)]' },
   emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-100', label: 'text-emerald-700/80' },
-  blue: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-100', label: 'text-blue-700/80' },
+  blue: { bg: 'bg-[var(--paper2)]', text: 'text-[var(--accent)]', border: 'border-[var(--line)]', label: 'text-[var(--accent)]/80' },
   amber: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-100', label: 'text-amber-700/80' },
-  cyan: { bg: 'bg-cyan-50', text: 'text-cyan-700', border: 'border-cyan-100', label: 'text-cyan-700/80' },
-  rose: { bg: 'bg-rose-50', text: 'text-rose-700', border: 'border-rose-100', label: 'text-rose-700/80' },
+  cyan: { bg: 'bg-[var(--paper2)]', text: 'text-[var(--accent)]', border: 'border-[var(--line)]', label: 'text-[var(--accent)]/80' },
+  rose: { bg: 'bg-[rgba(201,101,74,0.06)]', text: 'text-[var(--warm)]', border: 'border-[var(--line)]', label: 'text-[var(--warm)]/80' },
 };
 ---
 
@@ -49,23 +49,23 @@ const colorMap: Record<string, { bg: string; text: string; border: string; label
     )}
 
     <!-- Medical reviewer card -->
-    <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm w-full lg:w-72 shrink-0">
-      <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Medically Reviewed By</div>
+    <div class="bg-[var(--paper)] border border-[var(--line)] rounded-2xl p-5 shadow-sm w-full lg:w-72 shrink-0">
+      <div class="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mb-4">Medically Reviewed By</div>
       <div class="flex items-center gap-3 mb-3">
         <img
           src={reviewerImage}
           alt={reviewerName}
-          class="w-12 h-12 rounded-full object-cover border-2 border-violet-100"
+          class="w-12 h-12 rounded-full object-cover border-2 border-[rgba(10,22,40,0.15)]"
           width="48"
           height="48"
           loading="lazy"
         />
         <div>
-          <div class="font-semibold text-slate-900 text-sm">{reviewerName}</div>
-          <div class="text-xs text-slate-500">{reviewerTitle}</div>
+          <div class="font-semibold text-[var(--ink)] text-sm">{reviewerName}</div>
+          <div class="text-xs text-[var(--muted)]">{reviewerTitle}</div>
         </div>
       </div>
-      <p class="text-xs text-slate-500 leading-relaxed">{reviewerBio}</p>
+      <p class="text-xs text-[var(--muted)] leading-relaxed">{reviewerBio}</p>
     </div>
   </div>
 </section>

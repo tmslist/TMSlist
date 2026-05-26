@@ -38,8 +38,8 @@ function ToolbarButton({ onClick, active, disabled, title, children, className =
       disabled={disabled}
       className={`p-1.5 rounded text-xs font-medium transition-all ${className} ${
         active
-          ? 'bg-violet-100 text-violet-700'
-          : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+          ? 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]'
+          : 'text-[var(--muted)] hover:text-[var(--ink)] hover:bg-[var(--paper2)]'
       } disabled:opacity-40 disabled:cursor-not-allowed`}
     >
       {children}
@@ -48,7 +48,7 @@ function ToolbarButton({ onClick, active, disabled, title, children, className =
 }
 
 function ToolbarDivider() {
-  return <div className="w-px h-5 bg-gray-200 mx-1" />;
+  return <div className="w-px h-5 bg-[var(--paper2)] mx-1" />;
 }
 
 function EditorToolbar({ editor }: { editor: Editor | null }) {
@@ -78,7 +78,7 @@ function EditorToolbar({ editor }: { editor: Editor | null }) {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-0.5 p-2 border-b border-gray-200 bg-gray-50 rounded-t-xl">
+    <div className="flex flex-wrap items-center gap-0.5 p-2 border-b border-[var(--line)] bg-[var(--paper2)] rounded-t-xl">
       {/* Text style */}
       <ToolbarButton onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive('bold')} title="Bold (Ctrl+B)">
         <span className="font-bold text-sm">B</span>
@@ -230,27 +230,27 @@ function TableControls({ editor }: { editor: Editor | null }) {
   if (!editor || !editor.isActive('table')) return null;
 
   return (
-    <div className="flex items-center gap-2 px-3 py-2 bg-violet-50 border-b border-violet-100 text-xs">
-      <span className="text-violet-600 font-medium">Table Tools:</span>
+    <div className="flex items-center gap-2 px-3 py-2 bg-[rgba(10,22,40,0.08)] border-b border-[rgba(10,22,40,0.1)] text-xs">
+      <span className="text-[var(--accent)] font-medium">Table Tools:</span>
       <button
         type="button"
         onMouseDown={(e) => { e.preventDefault(); editor.chain().focus().addColumnAfter().run(); }}
-        className="px-2 py-1 rounded bg-white border border-violet-200 text-violet-700 hover:bg-violet-100 transition-colors"
+        className="px-2 py-1 rounded bg-white border border-[rgba(10,22,40,0.15)] text-[var(--accent)] hover:bg-[rgba(10,22,40,0.08)] transition-colors"
       >+ Col</button>
       <button
         type="button"
         onMouseDown={(e) => { e.preventDefault(); editor.chain().focus().addRowAfter().run(); }}
-        className="px-2 py-1 rounded bg-white border border-violet-200 text-violet-700 hover:bg-violet-100 transition-colors"
+        className="px-2 py-1 rounded bg-white border border-[rgba(10,22,40,0.15)] text-[var(--accent)] hover:bg-[rgba(10,22,40,0.08)] transition-colors"
       >+ Row</button>
       <button
         type="button"
         onMouseDown={(e) => { e.preventDefault(); editor.chain().focus().deleteColumn().run(); }}
-        className="px-2 py-1 rounded bg-white border border-violet-200 text-violet-700 hover:bg-violet-100 transition-colors"
+        className="px-2 py-1 rounded bg-white border border-[rgba(10,22,40,0.15)] text-[var(--accent)] hover:bg-[rgba(10,22,40,0.08)] transition-colors"
       >− Col</button>
       <button
         type="button"
         onMouseDown={(e) => { e.preventDefault(); editor.chain().focus().deleteRow().run(); }}
-        className="px-2 py-1 rounded bg-white border border-violet-200 text-violet-700 hover:bg-violet-100 transition-colors"
+        className="px-2 py-1 rounded bg-white border border-[rgba(10,22,40,0.15)] text-[var(--accent)] hover:bg-[rgba(10,22,40,0.08)] transition-colors"
       >− Row</button>
       <button
         type="button"
@@ -274,7 +274,7 @@ export function RichTextEditor({ value }: { value: string; onChange: (value: str
     extensions: [
       StarterKit.configure({
         codeBlock: false,
-        dropcursor: { color: '#7C3AED', width: 2 },
+        dropcursor: { color: '#0A1628', width: 2 },
       }),
       Underline,
       TipTapTextStyle,
@@ -288,7 +288,7 @@ export function RichTextEditor({ value }: { value: string; onChange: (value: str
       TableRow,
       TableHeader,
       TableCell,
-      CodeBlock.configure({ HTMLAttributes: { class: 'bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm' } }),
+      CodeBlock.configure({ HTMLAttributes: { class: 'bg-[var(--ink)] text-[var(--line)] p-4 rounded-lg font-mono text-sm' } }),
       Placeholder.configure({ placeholder }),
       TaskList,
       TaskItem.configure({ nested: true }),
@@ -307,13 +307,13 @@ export function RichTextEditor({ value }: { value: string; onChange: (value: str
   }, [value, editor]);
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white overflow-hidden">
+    <div className="rounded-xl border border-[var(--line)] bg-white overflow-hidden">
       <EditorToolbar editor={editor} />
       <TableControls editor={editor} />
       <div className="relative">
         <EditorContent
           editor={editor}
-          className="prose prose-sm max-w-none px-5 py-4 min-h-[400px] focus-within:ring-2 focus-within:ring-violet-100"
+          className="prose prose-sm max-w-none px-5 py-4 min-h-[400px] focus-within:ring-2 focus-within:ring-[rgba(10,22,40,0.1)]"
         />
         <style>{`
           .ProseMirror {
@@ -336,7 +336,7 @@ export function RichTextEditor({ value }: { value: string; onChange: (value: str
           .ProseMirror ol { list-style: decimal; margin: 0.5rem 0 0.75rem 1.25rem; }
           .ProseMirror li { margin-bottom: 0.25rem; padding-left: 0.25rem; }
           .ProseMirror blockquote {
-            border-left: 3px solid #7C3AED;
+            border-left: 3px solid #0A1628;
             padding: 0.5rem 1rem;
             margin: 1rem 0;
             background: #f5f3ff;
@@ -344,14 +344,14 @@ export function RichTextEditor({ value }: { value: string; onChange: (value: str
             color: #5b21b6;
           }
           .ProseMirror blockquote p { margin-bottom: 0; }
-          .ProseMirror a { color: #7C3AED; text-decoration: underline; }
+          .ProseMirror a { color: var(--accent); text-decoration: underline; }
           .ProseMirror code {
             background: #f1f5f9;
             padding: 0.15rem 0.35rem;
             border-radius: 3px;
             font-size: 0.85em;
             font-family: monospace;
-            color: #7C3AED;
+            color: var(--accent);
           }
           .ProseMirror pre {
             background: #1e293b;

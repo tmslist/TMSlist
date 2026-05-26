@@ -1,7 +1,7 @@
 ---
 title: "Nexstim vs NeuroStar TMS"
 description: "Comparing Nexstim's navigated TMS with NeuroStar's standard system — MRI-guided targeting vs standard positioning, and what the precision difference means for outcomes."
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## MRI-guided precision vs standard targeting
@@ -64,21 +64,21 @@ Nexstim offers the most precise TMS targeting you can get right now. Whether tha
 
 ---
 
-<div class="not-prose my-8 bg-blue-50 border border-blue-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-blue-900 mb-3 text-base">Related Comparisons</h4>
+<div class="not-prose my-8 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--ink)] mb-3 text-base">Related Comparisons</h4>
   <div class="grid grid-cols-2 gap-2">
-    <a href="/compare/tms-vs-ect/" class="text-sm text-blue-700 hover:underline">TMS vs. ECT</a>
-    <a href="/compare/tms-vs-antidepressants/" class="text-sm text-blue-700 hover:underline">TMS vs. Medication</a>
-    <a href="/compare/tms-vs-ketamine/" class="text-sm text-blue-700 hover:underline">TMS vs. Ketamine</a>
-    <a href="/compare/neurostar-vs-brainsway/" class="text-sm text-blue-700 hover:underline">NeuroStar vs. BrainsWay</a>
+    <a href="/compare/tms-vs-ect/" class="text-sm text-[var(--ink)] hover:underline">TMS vs. ECT</a>
+    <a href="/compare/tms-vs-antidepressants/" class="text-sm text-[var(--ink)] hover:underline">TMS vs. Medication</a>
+    <a href="/compare/tms-vs-ketamine/" class="text-sm text-[var(--ink)] hover:underline">TMS vs. Ketamine</a>
+    <a href="/compare/neurostar-vs-brainsway/" class="text-sm text-[var(--ink)] hover:underline">NeuroStar vs. BrainsWay</a>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>
@@ -98,9 +98,9 @@ Choosing between treatments is personal. The right option depends on your specif
       <li>You prefer non-pharmacological approaches</li>
     </ul>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
-    <h4 class="font-semibold text-blue-900 text-sm mb-2">Questions to Ask Your Provider</h4>
-    <ul class="text-xs text-blue-700 space-y-1 mb-0 list-disc pl-4">
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5">
+    <h4 class="font-semibold text-[var(--ink)] text-sm mb-2">Questions to Ask Your Provider</h4>
+    <ul class="text-xs text-[var(--ink)] space-y-1 mb-0 list-disc pl-4">
       <li>Which treatment do you recommend for my specific situation?</li>
       <li>What are the realistic outcomes I can expect?</li>
       <li>What does my insurance cover?</li>
@@ -130,9 +130,9 @@ Choosing between treatments is personal. The right option depends on your specif
       <li>You prefer non-pharmacological approaches</li>
     </ul>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
-    <h4 class="font-semibold text-blue-900 text-sm mb-2">Questions to Ask Your Provider</h4>
-    <ul class="text-xs text-blue-700 space-y-1 mb-0 list-disc pl-4">
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5">
+    <h4 class="font-semibold text-[var(--ink)] text-sm mb-2">Questions to Ask Your Provider</h4>
+    <ul class="text-xs text-[var(--ink)] space-y-1 mb-0 list-disc pl-4">
       <li>Which treatment do you recommend for my specific situation?</li>
       <li>What are the realistic outcomes I can expect?</li>
       <li>What does my insurance cover?</li>

@@ -76,12 +76,12 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
   // Gate: require patient or viewer session
   if (!session) {
     return (
-      <div className="p-6 bg-indigo-50 border border-violet-200 rounded-xl">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">Review {clinicName}</h3>
-        <p className="text-sm text-gray-600 mb-4">Sign in with Google to leave a review. Your email will be verified automatically.</p>
+      <div className="p-6 bg-[rgba(201,101,74,0.06)] border border-[rgba(10,22,40,0.15)] rounded-xl">
+        <h3 className="text-lg font-semibold text-[var(--ink)] mb-2">Review {clinicName}</h3>
+        <p className="text-sm text-[var(--ink2)] mb-4">Sign in with Google to leave a review. Your email will be verified automatically.</p>
         <a
           href={`/login?redirect=${encodeURIComponent(typeof window !== 'undefined' ? window.location.pathname : '/community')}`}
-          className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-white border border-gray-200 rounded-xl text-gray-700 font-semibold text-sm hover:bg-gray-50 transition-all shadow-sm"
+          className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-white border border-[var(--line)] rounded-xl text-[var(--ink2)] font-semibold text-sm hover:bg-[var(--paper2)] transition-all shadow-sm"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -102,7 +102,7 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
         <p className="text-green-600 text-sm mt-1">Your review will appear after moderation.</p>
         <button
           onClick={() => setStatus('idle')}
-          className="mt-3 text-sm text-violet-600 hover:text-violet-800 font-medium"
+          className="mt-3 text-sm text-[var(--accent)] hover:text-[var(--accent)] font-medium"
         >
           Write another review
         </button>
@@ -112,7 +112,7 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900">Review {clinicName}</h3>
+      <h3 className="text-lg font-semibold text-[var(--ink)]">Review {clinicName}</h3>
 
       {errorMsg && (
         <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm">
@@ -122,7 +122,7 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
 
       {/* Star Rating */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Rating</label>
+        <label className="block text-sm font-medium text-[var(--ink2)] mb-2">Rating</label>
         <div className="flex gap-1" role="radiogroup" aria-label="Rating">
           {[1, 2, 3, 4, 5].map((star) => (
             <button
@@ -131,12 +131,12 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
               onClick={() => setRating(star)}
               onMouseEnter={() => setHoveredRating(star)}
               onMouseLeave={() => setHoveredRating(0)}
-              className="text-3xl transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-violet-300 rounded"
+              className="text-3xl transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] rounded"
               role="radio"
               aria-checked={rating === star}
               aria-label={`${star} star${star > 1 ? 's' : ''}`}
             >
-              <span className={star <= (hoveredRating || rating) ? 'text-amber-400' : 'text-gray-300'}>
+              <span className={star <= (hoveredRating || rating) ? 'text-amber-400' : 'text-[var(--line)]'}>
                 ★
               </span>
             </button>
@@ -144,34 +144,34 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
         </div>
       </div>
 
-      <div className="bg-gray-50 rounded-lg px-3 py-2 text-sm text-gray-600">
-        Posting as <span className="font-medium text-gray-900">{session.email}</span>
+      <div className="bg-[var(--paper2)] rounded-lg px-3 py-2 text-sm text-[var(--ink2)]">
+        Posting as <span className="font-medium text-[var(--ink)]">{session.email}</span>
       </div>
 
       <div>
-        <label htmlFor="rv-title" className="block text-sm font-medium text-gray-700">Title (optional)</label>
+        <label htmlFor="rv-title" className="block text-sm font-medium text-[var(--ink2)]">Title (optional)</label>
         <input type="text" name="title" id="rv-title" maxLength={200}
-          className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-violet-500 focus:ring-violet-500" />
+          className="mt-1 block w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)]" />
       </div>
 
       <div>
-        <label htmlFor="rv-body" className="block text-sm font-medium text-gray-700">Your Review <span className="text-red-400">*</span></label>
+        <label htmlFor="rv-body" className="block text-sm font-medium text-[var(--ink2)]">Your Review <span className="text-red-400">*</span></label>
         <textarea name="body" id="rv-body" rows={4} required minLength={10} maxLength={5000}
           aria-required="true"
-          className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
+          className="mt-1 block w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]"
           placeholder="Share your experience with this clinic..."
           onInput={(e) => {
             const counter = e.currentTarget.parentElement?.querySelector('.char-count');
             if (counter) counter.textContent = `${e.currentTarget.value.length}/5000`;
           }}
         />
-        <span className="char-count text-xs text-gray-400 mt-1 block text-right">0/5000</span>
+        <span className="char-count text-xs text-[var(--muted)] mt-1 block text-right">0/5000</span>
       </div>
 
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-violet-600 hover:bg-violet-700 transition-all disabled:opacity-50"
+        className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink2)] transition-all disabled:opacity-50"
       >
         {status === 'submitting' ? 'Submitting...' : 'Submit Review'}
       </button>

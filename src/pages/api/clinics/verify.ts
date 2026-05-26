@@ -2,8 +2,8 @@ import type { APIRoute } from 'astro';
 import { db } from '../../../db';
 import { clinicClaims, clinics, users } from '../../../db/schema';
 import { eq, and, gt } from 'drizzle-orm';
-import { hashPassword } from '../../../utils/auth';
-import { checkRateLimit } from '../../../utils/rateLimit';
+import { hashPassword } from '../../../utils/auth.js';
+import { checkRateLimit } from '../../../utils/rateLimit.js';
 
 export const prerender = false;
 

@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-28
 category: stories
 tags: ["patient story", "postpartum depression", "pregnancy", "drug-free"]
-image: "https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## The joy that never arrived
@@ -99,12 +99,12 @@ She still sees her perinatal psychiatrist quarterly. No maintenance TMS needed s
 
 
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Find TMS Providers</h4>
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--warm)] mb-3 text-base">Find TMS Providers</h4>
   <div class="grid grid-cols-2 gap-2">
-    <a href="/us/" class="text-sm text-violet-700 hover:underline">Find a Clinic</a>
-    <a href="/providers/hospital-based/" class="text-sm text-violet-700 hover:underline">Hospital-Based TMS</a>
-    <a href="/providers/private-practice/" class="text-sm text-violet-700 hover:underline">Private Practice TMS</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-sm text-violet-700 hover:underline">Am I a Candidate?</a>
+    <a href="/us/" class="text-sm text-[var(--warm)] hover:underline">Find a Clinic</a>
+    <a href="/providers/hospital-based/" class="text-sm text-[var(--warm)] hover:underline">Hospital-Based TMS</a>
+    <a href="/providers/private-practice/" class="text-sm text-[var(--warm)] hover:underline">Private Practice TMS</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-sm text-[var(--warm)] hover:underline">Am I a Candidate?</a>
   </div>
 </div>

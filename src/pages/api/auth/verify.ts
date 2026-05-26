@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { verifyMagicToken, getOrCreateUserByEmail, createSession, getClientIpFromRequest, logLoginActivity } from '../../../utils/auth';
-import { sendSuspiciousLoginAlert } from '../../../utils/email';
+import { verifyMagicToken, getOrCreateUserByEmail, createSession, getClientIpFromRequest, logLoginActivity, isSafeRedirectPath } from '../../../utils/auth.js';
+import { sendSuspiciousLoginAlert } from '../../../utils/email.js';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -52,7 +52,9 @@ async function checkAndAlertSuspiciousLogin(
 export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
   const token = url.searchParams.get('token');
-  const state = url.searchParams.get('state') || '/account';
+  const stateRaw = url.searchParams.get('state');
+  // Reject open-redirect payloads — only accept safe relative paths.
+  const state = isSafeRedirectPath(stateRaw) ? stateRaw : '/account';
 
   if (!token) {
     return new Response(null, { status: 302, headers: { Location: '/login?error=missing-token' } });
@@ -98,9 +100,10 @@ export const GET: APIRoute = async ({ request }) => {
       console.error('[auth] Suspicious login check failed:', err)
     );
 
-    // Determine redirect based on token purpose
+    // Determine redirect based on token purpose. `state` is already a
+    // validated safe relative path (or the default `/account`).
     let redirect = state;
-    if (result.purpose === 'portal-magic' && !state.startsWith('/account')) {
+    if (result.purpose === 'portal-magic' && state === '/account') {
       redirect = '/portal/dashboard';
     }
 

@@ -62,19 +62,19 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
 
 <Layout title={title} description={description} schema={combinedSchema} canonical={`https://tmslist.com/insurance/${slug}/${state}/`}>
     <main class="container mx-auto px-4 py-8">
-        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
-            <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-            <span class="text-slate-300">/</span>
-            <a href="/insurance/" class="hover:text-violet-600 transition-colors">Insurance</a>
-            <span class="text-slate-300">/</span>
-            <span class="text-slate-700 font-medium">{insuranceTitle}</span>
+        <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-8 flex-wrap" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-[var(--accent)] transition-colors">Home</a>
+            <span class="text-[var(--muted)]">/</span>
+            <a href="/insurance/" class="hover:text-[var(--accent)] transition-colors">Insurance</a>
+            <span class="text-[var(--muted)]">/</span>
+            <span class="text-[var(--ink2)] font-medium">{insuranceTitle}</span>
         </nav>
 
         <div class="max-w-4xl mx-auto mb-12 text-center">
-            <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 mb-4">
+            <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-[var(--ink)] mb-4">
                 {insuranceTitle} TMS Clinics in {stateName}
             </h1>
-            <p class="text-lg text-gray-600">
+            <p class="text-lg text-[var(--muted)]">
                 There are {sortedClinics.length} verified TMS providers in {
                     stateName
                 } that accept <strong>{insuranceTitle}</strong>.
@@ -92,7 +92,7 @@ const combinedSchema = `[${breadcrumbSchema}, ${listingSchema}]`;
             }
         </div>
 
-        <section class="mt-20 max-w-3xl mx-auto prose prose-lg prose-violet">
+        <section class="mt-20 max-w-3xl mx-auto prose prose-lg prose-[#0A1628]">
             <h2>Using {insuranceTitle} for TMS Therapy</h2>
             <p>
                 Many insurance plans, including {insuranceTitle}, now cover

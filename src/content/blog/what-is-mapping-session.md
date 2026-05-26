@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-22
 category: treatment
 tags: ["mapping session", "motor threshold", "first appointment", "what to expect"]
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/blog-covers/what-is-mapping-session.svg"
 ---
 
 Before your first real TMS therapy session, the technician needs to figure out the right intensity for your brain. That is what the mapping session is. A calibration step. Every brain is different, and what works for one person might be too strong or too weak for another.
@@ -66,9 +66,9 @@ Mapping is the least exciting part of TMS, but it is arguably the most important
 
 A good technician will take their time with this step. That is actually a sign you are in the right clinic.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>The mapping session calibrates the TMS machine to your specific brain. It finds your motor threshold, the minimum intensity that makes your thumb twitch.</li>
     <li>The motor threshold determines your treatment dose. Getting it right is critical for effectiveness and comfort.</li>
     <li>Your thumb twitches because the motor cortex is the easiest place to measure a visible response, not because it is related to depression.</li>
@@ -78,47 +78,47 @@ A good technician will take their time with this step. That is actually a sign y
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What is motor threshold in TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What is motor threshold in TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Your motor threshold is the minimum amount of magnetic energy needed to make your thumb twitch. It is measured during the mapping session and used to calibrate your treatment dose. Everyone is different, so the mapping session personalizes the intensity to your brain.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Your motor threshold is the minimum amount of magnetic energy needed to make your thumb twitch. It is measured during the mapping session and used to calibrate your treatment dose. Everyone is different, so the mapping session personalizes the intensity to your brain.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does the TMS mapping session hurt?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does the TMS mapping session hurt?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most people find it mildly uncomfortable but tolerable. You hear a clicking sound and feel a tapping sensation on your scalp. The thumb twitching is strange (involuntary) but not painful. Some people get a mild headache afterward that goes away with OTC painkillers.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most people find it mildly uncomfortable but tolerable. You hear a clicking sound and feel a tapping sensation on your scalp. The thumb twitching is strange (involuntary) but not painful. Some people get a mild headache afterward that goes away with OTC painkillers.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long does the mapping session take?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long does the mapping session take?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The mapping itself takes 15-30 minutes. Some clinics do it as part of your first treatment visit (making that appointment about an hour total). Other clinics schedule it as a separate appointment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The mapping itself takes 15-30 minutes. Some clinics do it as part of your first treatment visit (making that appointment about an hour total). Other clinics schedule it as a separate appointment.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is the mapping session only done once?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is the mapping session only done once?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Usually, yes. The motor threshold is relatively stable. Some clinics re-map periodically during treatment or if something seems off with how you are responding, but most do not. Your threshold does not change significantly over the course of treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Usually, yes. The motor threshold is relatively stable. Some clinics re-map periodically during treatment or if something seems off with how you are responding, but most do not. Your threshold does not change significantly over the course of treatment.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What is the treatment dose based on motor threshold?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What is the treatment dose based on motor threshold?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">For standard depression TMS, the treatment intensity is typically set at 120% of your motor threshold. This calibrates the dose to your specific brain. After mapping, the coil is repositioned from the motor cortex to the left dorsolateral prefrontal cortex, the target for mood regulation.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">For standard depression TMS, the treatment intensity is typically set at 120% of your motor threshold. This calibrates the dose to your specific brain. After mapping, the coil is repositioned from the motor cortex to the left dorsolateral prefrontal cortex, the target for mood regulation.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

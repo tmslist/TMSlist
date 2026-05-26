@@ -51,9 +51,9 @@ export default function CommunityNewPost({ categories, defaultCategoryId }: Comm
   const bodyValid = body.trim().length >= 10;
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
+    <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-[var(--line)] p-6 space-y-5">
       <div>
-        <label htmlFor="category" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="category" className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">
           Category
         </label>
         <select
@@ -61,7 +61,7 @@ export default function CommunityNewPost({ categories, defaultCategoryId }: Comm
           value={categoryId}
           onChange={e => setCategoryId(e.target.value)}
           required
-          className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent bg-white"
+          className="w-full px-3 py-2.5 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-transparent bg-white"
         >
           <option value="">Select a category...</option>
           {categories.map(cat => (
@@ -73,7 +73,7 @@ export default function CommunityNewPost({ categories, defaultCategoryId }: Comm
       </div>
 
       <div>
-        <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="title" className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">
           Title
         </label>
         <input
@@ -84,18 +84,18 @@ export default function CommunityNewPost({ categories, defaultCategoryId }: Comm
           placeholder="What's on your mind?"
           maxLength={200}
           required
-          className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          className="w-full px-3 py-2.5 border border-[var(--line)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-transparent"
         />
         <div className="flex justify-between mt-1">
-          <p className={`text-xs ${titleValid ? 'text-gray-400' : 'text-amber-500'}`}>
+          <p className={`text-xs ${titleValid ? 'text-[var(--muted)]' : 'text-amber-500'}`}>
             {title.trim().length < 5 && title.length > 0 ? 'At least 5 characters' : ''}
           </p>
-          <p className="text-xs text-gray-400">{title.length}/200</p>
+          <p className="text-xs text-[var(--muted)]">{title.length}/200</p>
         </div>
       </div>
 
       <div>
-        <label htmlFor="body" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="body" className="block text-sm font-semibold text-[var(--ink2)] mb-1.5">
           Body
         </label>
         <textarea
@@ -106,13 +106,13 @@ export default function CommunityNewPost({ categories, defaultCategoryId }: Comm
           rows={8}
           maxLength={10000}
           required
-          className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm resize-y focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          className="w-full px-3 py-2.5 border border-[var(--line)] rounded-lg text-sm resize-y focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-transparent"
         />
         <div className="flex justify-between mt-1">
-          <p className={`text-xs ${bodyValid ? 'text-gray-400' : 'text-amber-500'}`}>
+          <p className={`text-xs ${bodyValid ? 'text-[var(--muted)]' : 'text-amber-500'}`}>
             {body.trim().length < 10 && body.length > 0 ? 'At least 10 characters' : ''}
           </p>
-          <p className="text-xs text-gray-400">{body.length}/10,000</p>
+          <p className="text-xs text-[var(--muted)]">{body.length}/10,000</p>
         </div>
       </div>
 
@@ -123,13 +123,13 @@ export default function CommunityNewPost({ categories, defaultCategoryId }: Comm
       )}
 
       <div className="flex items-center justify-between pt-2">
-        <a href="/community" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">
+        <a href="/community" className="text-sm text-[var(--muted)] hover:text-[var(--ink2)] transition-colors">
           Cancel
         </a>
         <button
           type="submit"
           disabled={loading || !categoryId || !titleValid || !bodyValid}
-          className="px-6 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-lg hover:bg-violet-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-lg hover:bg-[var(--ink2)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? 'Publishing...' : 'Publish Post'}
         </button>

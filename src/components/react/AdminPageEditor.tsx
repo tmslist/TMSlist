@@ -50,15 +50,15 @@ function slugify(text: string): string {
 function MarkdownPreview({ content }: { content: string }) {
   const lines = content.split('\n');
   return (
-    <div className="prose prose-sm max-w-none text-gray-700">
+    <div className="prose prose-sm max-w-none text-[var(--ink2)]">
       {lines.map((line, i) => {
-        if (line.startsWith('# ')) return <h1 key={i} className="text-2xl font-bold text-gray-900 mb-3">{line.slice(2)}</h1>;
-        if (line.startsWith('## ')) return <h2 key={i} className="text-xl font-semibold text-gray-900 mb-2">{line.slice(3)}</h2>;
-        if (line.startsWith('### ')) return <h3 key={i} className="text-lg font-semibold text-gray-800 mb-1">{line.slice(4)}</h3>;
-        if (line.startsWith('- ')) return <li key={i} className="ml-4 list-disc text-gray-700">{line.slice(2)}</li>;
-        if (line.startsWith('> ')) return <blockquote key={i} className="border-l-4 border-violet-300 pl-4 italic text-gray-600">{line.slice(2)}</blockquote>;
+        if (line.startsWith('# ')) return <h1 key={i} className="text-2xl font-bold text-[var(--ink)] mb-3">{line.slice(2)}</h1>;
+        if (line.startsWith('## ')) return <h2 key={i} className="text-xl font-semibold text-[var(--ink)] mb-2">{line.slice(3)}</h2>;
+        if (line.startsWith('### ')) return <h3 key={i} className="text-lg font-semibold text-[var(--ink)] mb-1">{line.slice(4)}</h3>;
+        if (line.startsWith('- ')) return <li key={i} className="ml-4 list-disc text-[var(--ink2)]">{line.slice(2)}</li>;
+        if (line.startsWith('> ')) return <blockquote key={i} className="border-l-4 border-[rgba(10,22,40,0.2)] pl-4 italic text-[var(--ink2)]">{line.slice(2)}</blockquote>;
         if (line.trim() === '') return <br key={i} />;
-        return <p key={i} className="text-gray-700 mb-1 leading-relaxed">{line}</p>;
+        return <p key={i} className="text-[var(--ink2)] mb-1 leading-relaxed">{line}</p>;
       })}
     </div>
   );
@@ -170,14 +170,14 @@ export default function AdminPageEditor() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">CMS Page Editor</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Manage pages with SEO metadata</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)]">CMS Page Editor</h2>
+          <p className="text-sm text-[var(--muted)] mt-0.5">Manage pages with SEO metadata</p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setPreview((v) => !v)}
             className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-              preview ? 'bg-indigo-100 text-indigo-700' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+              preview ? 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]' : 'bg-white border border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
             }`}
           >
             {preview ? 'Edit' : 'Preview'}
@@ -185,7 +185,7 @@ export default function AdminPageEditor() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="px-5 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
+            className="px-5 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
           >
             {saving ? 'Saving...' : 'Save Page'}
           </button>
@@ -196,40 +196,40 @@ export default function AdminPageEditor() {
         {/* Main editor */}
         <div className="space-y-5">
           {preview ? (
-            <div className="bg-white rounded-xl border border-gray-200 p-8 min-h-[400px]">
-              <div className="mb-6 pb-6 border-b border-gray-100">
-                <h1 className="text-3xl font-bold text-gray-900">{form.title || <span className="text-gray-300 italic">Untitled Page</span>}</h1>
+            <div className="bg-white rounded-xl border border-[var(--line)] p-8 min-h-[400px]">
+              <div className="mb-6 pb-6 border-b border-[var(--line)]">
+                <h1 className="text-3xl font-bold text-[var(--ink)]">{form.title || <span className="text-[var(--line)] italic">Untitled Page</span>}</h1>
               </div>
               {form.content ? (
                 <MarkdownPreview content={form.content} />
               ) : (
-                <p className="text-gray-300 italic">No content yet. Switch to Edit mode to add content.</p>
+                <p className="text-[var(--line)] italic">No content yet. Switch to Edit mode to add content.</p>
               )}
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
               <div className="p-5 space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Page Title *</label>
+                  <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Page Title *</label>
                   <input
                     type="text"
                     value={form.title}
                     onChange={(e) => handleTitleChange(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+                    className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
                     placeholder="Page title..."
                   />
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="block text-xs font-medium text-gray-600">Content</label>
-                    <span className="text-[11px] text-gray-400">Markdown supported</span>
+                    <label className="block text-xs font-medium text-[var(--ink2)]">Content</label>
+                    <span className="text-[11px] text-[var(--muted)]">Markdown supported</span>
                   </div>
                   <textarea
                     value={form.content}
                     onChange={(e) => setForm((f) => ({ ...f, content: e.target.value }))}
                     rows={16}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200 resize-y font-mono"
+                    className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)] resize-y font-mono"
                     placeholder="Write your page content in markdown..."
                   />
                 </div>
@@ -238,98 +238,98 @@ export default function AdminPageEditor() {
           )}
 
           {/* SEO Panel */}
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+          <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
             <div
-              className="flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-gray-50 transition-colors"
+              className="flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-[var(--paper2)] transition-colors"
               onClick={() => setSeoOpen((v) => !v)}
             >
               <div className="flex items-center gap-3">
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold ${
-                  seoScore === 100 ? 'bg-emerald-100 text-emerald-700' : seoScore > 0 ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-500'
+                  seoScore === 100 ? 'bg-emerald-100 text-emerald-700' : seoScore > 0 ? 'bg-amber-100 text-amber-700' : 'bg-[var(--paper2)] text-[var(--muted)]'
                 }`}>
                   {seoScore > 0 ? `${seoScore}%` : '?'}
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-900">SEO Metadata</h3>
-                  <p className="text-xs text-gray-500">
+                  <h3 className="text-sm font-semibold text-[var(--ink)]">SEO Metadata</h3>
+                  <p className="text-xs text-[var(--muted)]">
                     {form.metaTitle && form.metaDescription ? 'Complete' : 'Incomplete'}
                   </p>
                 </div>
               </div>
-              <svg className={`w-4 h-4 text-gray-400 transition-transform ${seoOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={`w-4 h-4 text-[var(--muted)] transition-transform ${seoOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </div>
 
             {seoOpen && (
-              <div className="border-t border-gray-100 p-5 space-y-4">
+              <div className="border-t border-[var(--line)] p-5 space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Meta Title</label>
+                  <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Meta Title</label>
                   <input
                     type="text"
                     value={form.metaTitle}
                     onChange={(e) => setForm((f) => ({ ...f, metaTitle: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+                    className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
                     placeholder="SEO title (recommended: 50-60 chars)"
                   />
-                  <p className={`text-[11px] mt-1 ${form.metaTitle.length > 60 ? 'text-red-500' : 'text-gray-400'}`}>
+                  <p className={`text-[11px] mt-1 ${form.metaTitle.length > 60 ? 'text-red-500' : 'text-[var(--muted)]'}`}>
                     {form.metaTitle.length}/60 characters
                   </p>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Meta Description</label>
+                  <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Meta Description</label>
                   <textarea
                     value={form.metaDescription}
                     onChange={(e) => setForm((f) => ({ ...f, metaDescription: e.target.value }))}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200 resize-y"
+                    className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)] resize-y"
                     placeholder="SEO description (recommended: 150-160 chars)"
                   />
-                  <p className={`text-[11px] mt-1 ${form.metaDescription.length > 160 ? 'text-red-500' : 'text-gray-400'}`}>
+                  <p className={`text-[11px] mt-1 ${form.metaDescription.length > 160 ? 'text-red-500' : 'text-[var(--muted)]'}`}>
                     {form.metaDescription.length}/160 characters
                   </p>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Canonical URL</label>
+                  <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Canonical URL</label>
                   <input
                     type="url"
                     value={form.canonical}
                     onChange={(e) => setForm((f) => ({ ...f, canonical: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+                    className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
                     placeholder="https://tmslist.com/..."
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">OG Image URL</label>
+                  <label className="block text-xs font-medium text-[var(--ink2)] mb-1">OG Image URL</label>
                   <input
                     type="url"
                     value={form.ogImage}
                     onChange={(e) => setForm((f) => ({ ...f, ogImage: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+                    className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
                     placeholder="https://..."
                   />
                   {form.ogImage && (
                     <img
                       src={form.ogImage}
                       alt="OG Preview"
-                      className="mt-2 w-full h-32 object-cover rounded-lg border border-gray-200"
+                      className="mt-2 w-full h-32 object-cover rounded-lg border border-[var(--line)]"
                       onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                     />
                   )}
                 </div>
 
                 {/* Preview snippet */}
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="text-[11px] text-gray-500 font-semibold uppercase tracking-wide mb-2">Search Preview</p>
+                <div className="bg-[var(--paper2)] rounded-lg p-4">
+                  <p className="text-[11px] text-[var(--muted)] font-semibold uppercase tracking-wide mb-2">Search Preview</p>
                   <div className="space-y-1">
-                    <p className="text-lg text-blue-600 hover:underline cursor-pointer truncate">
+                    <p className="text-lg text-[var(--ink)] hover:underline cursor-pointer truncate">
                       {form.metaTitle || form.title || 'Page Title'}
                     </p>
                     <p className="text-sm text-green-700 truncate">{form.canonical || 'https://tmslist.com/' + form.slug}</p>
-                    <p className="text-sm text-gray-600 line-clamp-2">
+                    <p className="text-sm text-[var(--ink2)] line-clamp-2">
                       {form.metaDescription || form.description || 'Add a meta description for search results...'}
                     </p>
                   </div>
@@ -342,9 +342,9 @@ export default function AdminPageEditor() {
         {/* Sidebar */}
         <div className="space-y-4">
           {/* Page selector */}
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <div className="px-5 py-3 bg-gray-50 border-b border-gray-100">
-              <h3 className="text-sm font-semibold text-gray-700">Pages</h3>
+          <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+            <div className="px-5 py-3 bg-[var(--paper2)] border-b border-[var(--line)]">
+              <h3 className="text-sm font-semibold text-[var(--ink2)]">Pages</h3>
             </div>
             <div className="p-2 max-h-[300px] overflow-y-auto">
               {PAGE_SLUGS.map((p) => (
@@ -353,8 +353,8 @@ export default function AdminPageEditor() {
                   onClick={() => setSelectedSlug(p.key)}
                   className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                     selectedSlug === p.key
-                      ? 'bg-violet-50 text-violet-700 font-medium'
-                      : 'text-gray-600 hover:bg-gray-50'
+                      ? 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)] font-medium'
+                      : 'text-[var(--ink2)] hover:bg-[var(--paper2)]'
                   }`}
                 >
                   {p.label}
@@ -364,53 +364,53 @@ export default function AdminPageEditor() {
           </div>
 
           {/* Slug & Status */}
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <div className="px-5 py-3 bg-gray-50 border-b border-gray-100">
-              <h3 className="text-sm font-semibold text-gray-700">Settings</h3>
+          <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+            <div className="px-5 py-3 bg-[var(--paper2)] border-b border-[var(--line)]">
+              <h3 className="text-sm font-semibold text-[var(--ink2)]">Settings</h3>
             </div>
             <div className="p-5 space-y-4">
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="block text-xs font-medium text-gray-600">Slug</label>
+                  <label className="block text-xs font-medium text-[var(--ink2)]">Slug</label>
                   <button
                     onClick={() => setSlugManual((v) => !v)}
-                    className="text-[11px] text-violet-600 hover:underline"
+                    className="text-[11px] text-[var(--ink)] hover:underline"
                   >
                     {slugManual ? 'Auto' : 'Custom'}
                   </button>
                 </div>
                 <div className="flex">
-                  <span className="inline-flex items-center px-3 py-2 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 text-xs text-gray-500">
+                  <span className="inline-flex items-center px-3 py-2 border border-r-0 border-[var(--line)] rounded-l-lg bg-[var(--paper2)] text-xs text-[var(--muted)]">
                     /pages/
                   </span>
                   <input
                     type="text"
                     value={form.slug}
                     onChange={(e) => { setSlugManual(true); setForm((f) => ({ ...f, slug: slugify(e.target.value) })); }}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-r-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+                    className="flex-1 px-3 py-2 border border-[var(--line)] rounded-r-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
                     placeholder="page-slug"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Description</label>
+                <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Description</label>
                 <textarea
                   value={form.description}
                   onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200 resize-y"
+                  className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)] resize-y"
                   placeholder="Short page description..."
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-2">Status</label>
+                <label className="block text-xs font-medium text-[var(--ink2)] mb-2">Status</label>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setForm((f) => ({ ...f, status: 'draft' }))}
                     className={`flex-1 px-3 py-2 text-xs font-medium rounded-lg transition-colors ${
-                      form.status === 'draft' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      form.status === 'draft' ? 'bg-[var(--ink2)] text-white' : 'bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
                     }`}
                   >
                     Draft
@@ -418,7 +418,7 @@ export default function AdminPageEditor() {
                   <button
                     onClick={() => setForm((f) => ({ ...f, status: 'published' }))}
                     className={`flex-1 px-3 py-2 text-xs font-medium rounded-lg transition-colors ${
-                      form.status === 'published' ? 'bg-emerald-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      form.status === 'published' ? 'bg-emerald-600 text-white' : 'bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
                     }`}
                   >
                     Published

@@ -1,19 +1,19 @@
 import { useState } from 'react';
 
 export const JOB_ROLE_CATEGORIES = [
-  { value: 'tms_technician', label: 'TMS Technician', color: 'bg-violet-50 text-violet-700', bgColor: 'bg-violet-500' },
-  { value: 'tms_physician', label: 'TMS Physician', color: 'bg-blue-50 text-blue-700', bgColor: 'bg-blue-500' },
-  { value: 'nurse_tms', label: 'TMS Nurse', color: 'bg-cyan-50 text-cyan-700', bgColor: 'bg-cyan-500' },
-  { value: 'psychologist', label: 'Psychologist', color: 'bg-indigo-50 text-emerald-700', bgColor: 'bg-emerald-500' },
+  { value: 'tms_technician', label: 'TMS Technician', color: 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]', bgColor: 'bg-[var(--ink2)]' },
+  { value: 'tms_physician', label: 'TMS Physician', color: 'bg-[var(--paper2)] text-[var(--accent)]', bgColor: 'bg-[var(--accent2)]' },
+  { value: 'nurse_tms', label: 'TMS Nurse', color: 'bg-[var(--paper2)] text-[var(--accent)]', bgColor: 'bg-[var(--accent2)]' },
+  { value: 'psychologist', label: 'Psychologist', color: 'bg-[rgba(201,101,74,0.06)] text-emerald-700', bgColor: 'bg-emerald-500' },
   { value: 'front_desk', label: 'Front Desk', color: 'bg-amber-50 text-amber-700', bgColor: 'bg-amber-500' },
   { value: 'office_manager', label: 'Office Manager', color: 'bg-orange-50 text-orange-700', bgColor: 'bg-orange-500' },
   { value: 'billing', label: 'Billing / Insurance', color: 'bg-green-50 text-green-700', bgColor: 'bg-green-500' },
-  { value: 'marketing_coordinator', label: 'Marketing Coordinator', color: 'bg-pink-50 text-pink-700', bgColor: 'bg-pink-500' },
-  { value: 'community_outreach', label: 'Community Outreach', color: 'bg-rose-50 text-rose-700', bgColor: 'bg-rose-500' },
-  { value: 'social_media', label: 'Social Media', color: 'bg-fuchsia-50 text-fuchsia-700', bgColor: 'bg-fuchsia-500' },
+  { value: 'marketing_coordinator', label: 'Marketing Coordinator', color: 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)]', bgColor: 'bg-[rgba(201,101,74,0.06)]' },
+  { value: 'community_outreach', label: 'Community Outreach', color: 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)]', bgColor: 'bg-[rgba(201,101,74,0.06)]' },
+  { value: 'social_media', label: 'Social Media', color: 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)]', bgColor: 'bg-[rgba(201,101,74,0.06)]' },
   { value: 'data_researcher', label: 'Data / Research', color: 'bg-teal-50 text-teal-700', bgColor: 'bg-teal-500' },
-  { value: 'it_support', label: 'IT Support', color: 'bg-slate-50 text-slate-700', bgColor: 'bg-slate-500' },
-  { value: 'other', label: 'Other', color: 'bg-gray-50 text-gray-700', bgColor: 'bg-gray-500' },
+  { value: 'it_support', label: 'IT Support', color: 'bg-[var(--paper2)] text-[var(--ink2)]', bgColor: 'bg-[var(--muted)]' },
+  { value: 'other', label: 'Other', color: 'bg-[var(--paper2)] text-[var(--ink2)]', bgColor: 'bg-[var(--muted)]' },
 ] as const;
 
 export const EMPLOYMENT_TYPES: Record<string, string> = {
@@ -26,8 +26,8 @@ export const EMPLOYMENT_TYPES: Record<string, string> = {
 function getCategoryMeta(value: string) {
   return JOB_ROLE_CATEGORIES.find((c) => c.value === value) ?? {
     label: value,
-    color: 'bg-gray-50 text-gray-700',
-    bgColor: 'bg-gray-500',
+    color: 'bg-[var(--paper2)] text-[var(--ink2)]',
+    bgColor: 'bg-[var(--muted)]',
   };
 }
 
@@ -81,7 +81,7 @@ export default function JobCard({ job, compact = false }: JobCardProps) {
   return (
     <a
       href={`/careers/${job.id}/`}
-      className="group block bg-white border border-slate-200 rounded-2xl p-5 hover:border-violet-200 hover:shadow-md transition-all"
+      className="group block bg-white border border-[var(--line)] rounded-2xl p-5 hover:border-[rgba(10,22,40,0.15)] hover:shadow-md transition-all"
     >
       {/* Header row */}
       <div className="flex items-start justify-between gap-3 mb-3">
@@ -91,27 +91,27 @@ export default function JobCard({ job, compact = false }: JobCardProps) {
             <img
               src={logoUrl}
               alt={job.clinicName}
-              className="w-10 h-10 rounded-xl object-cover shrink-0 bg-slate-100"
+              className="w-10 h-10 rounded-xl object-cover shrink-0 bg-[var(--paper2)]"
             />
           ) : (
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-100 to-cyan-100 flex items-center justify-center text-violet-700 font-bold text-sm shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[rgba(10,22,40,0.08)] to-[var(--paper2)] flex items-center justify-center text-[var(--accent)] font-bold text-sm shrink-0">
               {job.clinicName.charAt(0)}
             </div>
           )}
           <div className="min-w-0">
-            <p className="text-xs text-slate-500 truncate">{job.clinicName}</p>
-            <p className="text-xs text-slate-400 truncate">
+            <p className="text-xs text-[var(--muted)] truncate">{job.clinicName}</p>
+            <p className="text-xs text-[var(--muted)] truncate">
               {[job.clinicCity, job.clinicState].filter(Boolean).join(', ')}
             </p>
           </div>
         </div>
 
         {/* Time */}
-        <span className="text-xs text-slate-400 shrink-0">{timeAgo(job.createdAt)}</span>
+        <span className="text-xs text-[var(--muted)] shrink-0">{timeAgo(job.createdAt)}</span>
       </div>
 
       {/* Title */}
-      <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-violet-700 transition-colors line-clamp-2">
+      <h3 className="text-base font-bold text-[var(--ink)] mb-2 group-hover:text-[var(--accent)] transition-colors line-clamp-2">
         {job.title}
       </h3>
 
@@ -120,7 +120,7 @@ export default function JobCard({ job, compact = false }: JobCardProps) {
         <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${cat.color}`}>
           {cat.label}
         </span>
-        <span className="px-2.5 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-full">
+        <span className="px-2.5 py-1 bg-[var(--paper2)] text-[var(--ink2)] text-xs font-medium rounded-full">
           {EMPLOYMENT_TYPES[job.employmentType] ?? job.employmentType}
         </span>
         {job.remote && (
@@ -132,7 +132,7 @@ export default function JobCard({ job, compact = false }: JobCardProps) {
 
       {/* Footer */}
       <div className="flex items-center justify-between gap-2">
-        <div className="flex items-center gap-3 text-xs text-slate-500">
+        <div className="flex items-center gap-3 text-xs text-[var(--muted)]">
           <span className="flex items-center gap-1">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
@@ -158,7 +158,7 @@ export default function JobCard({ job, compact = false }: JobCardProps) {
           )}
         </div>
 
-        <span className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold rounded-xl transition-colors">
+        <span className="px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white text-xs font-semibold rounded-xl transition-colors">
           Apply
         </span>
       </div>

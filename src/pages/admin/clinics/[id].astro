@@ -18,16 +18,16 @@ if (!id) {
 ---
 
 <Layout title="Edit Clinic | TMS List Admin" noindex={true}>
-  <div class="flex min-h-screen bg-gray-50">
+  <div class="flex min-h-screen bg-[var(--paper2)]">
     <AdminSidebar client:load currentPage="clinics" userEmail={session!.email} />
     <main class="flex-1 lg:ml-64 py-8">
       <div class="container mx-auto px-4 max-w-7xl">
-        <nav class="text-sm text-gray-500 mb-4">
-          <a href="/admin/dashboard/" class="hover:text-violet-600">Dashboard</a>
+        <nav class="text-sm text-[var(--muted)] mb-4">
+          <a href="/admin/dashboard/" class="hover:text-[var(--ink)]">Dashboard</a>
           <span class="mx-2">/</span>
-          <a href="/admin/clinics/" class="hover:text-violet-600">Clinics</a>
+          <a href="/admin/clinics/" class="hover:text-[var(--ink)]">Clinics</a>
           <span class="mx-2">/</span>
-          <span class="text-gray-900">Edit</span>
+          <span class="text-[var(--ink)]">Edit</span>
         </nav>
         <AdminClinicEditor client:load clinicId={id} />
       </div>

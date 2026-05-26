@@ -189,16 +189,16 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
     <div className="flex flex-col gap-3">
       {/* Mode toggle */}
       <div className="flex items-center gap-2">
-        <span className="text-[9px] font-semibold text-slate-500 uppercase tracking-wider">MEP Monitor</span>
-        <div className="ml-auto flex rounded-lg border border-slate-700 overflow-hidden">
+        <span className="text-[9px] font-semibold text-[var(--muted)] uppercase tracking-wider">MEP Monitor</span>
+        <div className="ml-auto flex rounded-lg border border-[var(--ink2)] overflow-hidden">
           {(['treatment', 'mapping'] as const).map(m => (
             <button
               key={m}
               onClick={() => setMode(m)}
               className={`px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wide transition-all ${
                 mode === m
-                  ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40'
-                  : 'bg-slate-800 text-slate-500 border-slate-800'
+                  ? 'bg-[var(--accent2)]/20 text-[var(--muted)] border-[rgba(10,22,40,0.2)]/40'
+                  : 'bg-[var(--ink2)] text-[var(--muted)] border-[var(--ink2)]'
               }`}
             >
               {m === 'treatment' ? 'Treatment' : 'Motor Map'}
@@ -208,7 +208,7 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
       </div>
 
       {/* Waveform canvas */}
-      <div className="relative rounded-xl overflow-hidden border border-slate-700/50">
+      <div className="relative rounded-xl overflow-hidden border border-[var(--line)]">
         <canvas
           ref={canvasRef}
           width={480}
@@ -219,10 +219,10 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
         {/* Latency markers overlay */}
         <div className="absolute inset-0 pointer-events-none">
           {[
-            { label: 'N20', pos: '14%', color: 'text-cyan-400' },
+            { label: 'N20', pos: '14%', color: 'text-[var(--accent2)]' },
             { label: 'P30', pos: '28%', color: 'text-emerald-400' },
             { label: 'N45', pos: '40%', color: 'text-amber-400' },
-            { label: 'P60', pos: '52%', color: 'text-violet-400' },
+            { label: 'P60', pos: '52%', color: 'text-[var(--accent2)]' },
           ].map(marker => (
             <div
               key={marker.label}
@@ -238,12 +238,12 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
       {/* Amplitude and threshold row */}
       <div className="grid grid-cols-2 gap-3">
         <div className="glass-panel rounded-xl px-3 py-2.5 text-center">
-          <div className="text-lg font-bold text-cyan-400 font-mono">{mepAmplitude} µV</div>
-          <div className="text-[9px] text-slate-500 mt-0.5">MEP Amplitude</div>
+          <div className="text-lg font-bold text-[var(--accent2)] font-mono">{mepAmplitude} µV</div>
+          <div className="text-[9px] text-[var(--muted)] mt-0.5">MEP Amplitude</div>
         </div>
         <div className="glass-panel rounded-xl px-3 py-2.5 text-center">
-          <div className="text-lg font-bold text-rose-400 font-mono">{threshold} µV</div>
-          <div className="text-[9px] text-slate-500 mt-0.5">Threshold</div>
+          <div className="text-lg font-bold text-[var(--warm)] font-mono">{threshold} µV</div>
+          <div className="text-[9px] text-[var(--muted)] mt-0.5">Threshold</div>
         </div>
       </div>
 
@@ -251,20 +251,20 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
       <div className="glass-panel rounded-xl px-3 py-2">
         <div className="flex items-center gap-2 mb-2">
           <div className={`w-2 h-2 rounded-full ${
-            snr > 3 ? 'bg-emerald-400' : snr > 2 ? 'bg-amber-400' : 'bg-rose-400'
+            snr > 3 ? 'bg-emerald-400' : snr > 2 ? 'bg-amber-400' : 'bg-[var(--warm)]'
           } animate-pulse`} />
-          <span className="text-[9px] font-semibold text-slate-500 uppercase tracking-wider">Signal Quality</span>
+          <span className="text-[9px] font-semibold text-[var(--muted)] uppercase tracking-wider">Signal Quality</span>
           <span className={`ml-auto text-[9px] font-bold ${
-            snr > 3 ? 'text-emerald-400' : snr > 2 ? 'text-amber-400' : 'text-rose-400'
+            snr > 3 ? 'text-emerald-400' : snr > 2 ? 'text-amber-400' : 'text-[var(--warm)]'
           }`}>
             {snr > 3 ? 'Good' : snr > 2 ? 'Fair' : 'Poor'} · SNR: {snr.toFixed(1)}x
           </span>
         </div>
         {/* SNR bar */}
-        <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
+        <div className="h-1.5 bg-[var(--ink2)] rounded-full overflow-hidden">
           <div
             className={`h-full rounded-full transition-all ${
-              snr > 3 ? 'bg-emerald-400' : snr > 2 ? 'bg-amber-400' : 'bg-rose-400'
+              snr > 3 ? 'bg-emerald-400' : snr > 2 ? 'bg-amber-400' : 'bg-[var(--warm)]'
             }`}
             style={{ width: `${Math.min(snr / 5 * 100, 100)}%` }}
           />
@@ -278,8 +278,8 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
             onClick={() => setShowMotorMap(!showMotorMap)}
             className="flex items-center justify-between w-full text-left"
           >
-            <span className="text-[9px] font-semibold text-slate-500 uppercase tracking-wider">M1 Motor Map</span>
-            <svg className={`w-3.5 h-3.5 text-slate-500 transition-transform ${showMotorMap ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span className="text-[9px] font-semibold text-[var(--muted)] uppercase tracking-wider">M1 Motor Map</span>
+            <svg className={`w-3.5 h-3.5 text-[var(--muted)] transition-transform ${showMotorMap ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </button>
@@ -294,16 +294,16 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
                       key={i}
                       className={`h-6 rounded transition-all ${
                         isActive
-                          ? 'bg-cyan-500/60 shadow-sm shadow-cyan-500/40'
-                          : 'bg-slate-700/50'
+                          ? 'bg-[var(--accent2)]/60 shadow-sm shadow-[rgba(10,22,40,0.1)]'
+                          : 'bg-[var(--paper2)]'
                       }`}
                     />
                   );
                 })}
               </div>
-              <div className="flex items-center justify-between text-[9px] text-slate-500">
+              <div className="flex items-center justify-between text-[9px] text-[var(--muted)]">
                 <span>Hotspot: [2.4, -1.8] cm</span>
-                <span className="text-cyan-400 font-semibold">Optimal position found</span>
+                <span className="text-[var(--accent2)] font-semibold">Optimal position found</span>
               </div>
             </div>
           )}
@@ -313,7 +313,7 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
       {/* Session history trend */}
       <div className="glass-panel rounded-xl px-3 py-2.5">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[9px] font-semibold text-slate-500 uppercase tracking-wider">Amplitude Trend</span>
+          <span className="text-[9px] font-semibold text-[var(--muted)] uppercase tracking-wider">Amplitude Trend</span>
           <span className="text-[9px] text-emerald-400 font-semibold">
             ↑ {Math.round((sessionHistory[9].amplitude - sessionHistory[0].amplitude) / sessionHistory[0].amplitude * 100)}% over course
           </span>
@@ -327,7 +327,7 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
               return `${x},${y}`;
             }).join(' ')}
             fill="none"
-            stroke="#22d3ee"
+            stroke="#5A6B82"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -339,14 +339,14 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
               return `${x},${y}`;
             }).join(' ')}
             fill="none"
-            stroke="#22d3ee"
+            stroke="#5A6B82"
             strokeWidth="8"
             strokeOpacity="0.15"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
         </svg>
-        <div className="flex justify-between text-[8px] text-slate-600 mt-0.5">
+        <div className="flex justify-between text-[8px] text-[var(--ink2)] mt-0.5">
           <span>Session 1</span>
           <span>Session 5</span>
           <span>Session 10</span>
@@ -356,29 +356,29 @@ export function MEPMonitorPanel({ compact = false }: MEPMonitorPanelProps) {
       {/* Motor threshold workflow */}
       {mode === 'treatment' && (
         <div className="glass-panel rounded-xl px-3 py-2.5">
-          <div className="text-[9px] font-semibold text-slate-500 uppercase tracking-wider mb-2">
+          <div className="text-[9px] font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">
             Motor Threshold Tracking
           </div>
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] text-slate-400">Current MT</span>
-              <span className="text-[10px] font-mono font-bold text-cyan-400">{state.intensity}%</span>
+              <span className="text-[10px] text-[var(--muted)]">Current MT</span>
+              <span className="text-[10px] font-mono font-bold text-[var(--accent2)]">{state.intensity}%</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-[10px] text-slate-400">Status</span>
+              <span className="text-[10px] text-[var(--muted)]">Status</span>
               <span className={`text-[10px] font-semibold ${
                 state.intensity >= 100 ? 'text-emerald-400' : 'text-amber-400'
               }`}>
                 {state.intensity >= 120 ? 'Above threshold' : state.intensity >= 100 ? 'At threshold' : 'Subthreshold'}
               </span>
             </div>
-            <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
+            <div className="h-1.5 bg-[var(--ink2)] rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full"
+                className="h-full bg-gradient-to-r from-[var(--accent2)] to-[var(--ink2)] rounded-full"
                 style={{ width: `${(state.intensity / 140) * 100}%` }}
               />
             </div>
-            <p className="text-[9px] text-slate-600 leading-relaxed">
+            <p className="text-[9px] text-[var(--ink2)] leading-relaxed">
               Motor threshold is the minimum stimulation needed to produce a visible muscle twitch in the hand. Found during your first session by gradually increasing intensity until a thumb movement is observed.
             </p>
           </div>

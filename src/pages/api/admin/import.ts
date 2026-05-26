@@ -6,7 +6,7 @@ import {
   clinics, doctors, treatments, auditLog,
   importBatches
 } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 import { strictRateLimit } from '../../../utils/rateLimit';
 
 export const prerender = false;

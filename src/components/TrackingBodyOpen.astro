@@ -1,0 +1,25 @@
+---
+import { getTrackingSettings } from '../lib/tracking';
+const t = await getTrackingSettings();
+const gtmValid = /^GTM-[A-Z0-9]+$/i.test(t.gtmId);
+const pixelValid = /^[0-9]{6,20}$/.test(t.metaPixelId);
+---
+{t.enabled && gtmValid && (
+  <noscript>
+    <iframe
+      src={`https://www.googletagmanager.com/ns.html?id=${t.gtmId}`}
+      height="0" width="0" style="display:none;visibility:hidden"
+      title="GTM"
+    ></iframe>
+  </noscript>
+)}
+{t.enabled && pixelValid && (
+  <noscript>
+    <img
+      height="1" width="1" style="display:none"
+      src={`https://www.facebook.com/tr?id=${t.metaPixelId}&ev=PageView&noscript=1`}
+      alt=""
+    />
+  </noscript>
+)}
+{t.enabled && t.bodyOpenCode && <Fragment set:html={t.bodyOpenCode} />}

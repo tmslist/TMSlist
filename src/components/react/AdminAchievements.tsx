@@ -216,10 +216,10 @@ function Modal({ open, onClose, title, children }: { open: boolean; onClose: () 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-slate-700">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h3>
-          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-400">
+      <div className="relative bg-white dark:bg-[var(--ink2)] rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--line)] dark:border-[var(--ink2)]">
+          <h3 className="text-lg font-semibold text-[var(--ink)] dark:text-white">{title}</h3>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)] text-[var(--muted)]">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -241,14 +241,14 @@ function AchievementCard({ achievement, onEdit, onToggle, onDelete }: {
   const rarity = RARITIES.find(r => r.key === achievement.rarity);
 
   return (
-    <div className={`p-4 border rounded-xl transition-colors ${achievement.active ? 'border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800' : 'border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900 opacity-60'}`}>
+    <div className={`p-4 border rounded-xl transition-colors ${achievement.active ? 'border-[var(--line)] dark:border-[var(--ink2)] bg-white dark:bg-[var(--ink2)]' : 'border-[var(--line)] dark:border-[var(--ink2)] bg-[var(--paper2)] dark:bg-[var(--ink)] opacity-60'}`}>
       <div className="flex items-start gap-3">
         <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style={{ backgroundColor: achievement.color + '20' }}>
           {achievement.emoji}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h4 className="text-sm font-semibold text-gray-900 dark:text-white">{achievement.name}</h4>
+            <h4 className="text-sm font-semibold text-[var(--ink)] dark:text-white">{achievement.name}</h4>
             {tier && (
               <span className="px-1.5 py-0.5 text-[10px] font-bold rounded" style={{ backgroundColor: tier.color + '20', color: tier.color }}>
                 {tier.label}
@@ -259,31 +259,31 @@ function AchievementCard({ achievement, onEdit, onToggle, onDelete }: {
                 {rarity.label}
               </span>
             )}
-            <span className="px-1.5 py-0.5 text-[10px] font-medium rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 capitalize">
+            <span className="px-1.5 py-0.5 text-[10px] font-medium rounded bg-[rgba(201,101,74,0.1)] text-[var(--warm)] dark:bg-[rgba(201,101,74,0.30)] dark:text-[var(--warm)] capitalize">
               {achievement.category}
             </span>
           </div>
-          <p className="text-xs text-gray-500 dark:text-slate-400 mt-0.5">{achievement.description}</p>
+          <p className="text-xs text-[var(--muted)] dark:text-[var(--muted)] mt-0.5">{achievement.description}</p>
           <div className="flex items-center gap-3 mt-2">
-            <span className="text-[10px] text-gray-400 dark:text-slate-500">{achievement.points} pts</span>
-            <span className={`text-[10px] font-medium ${achievement.unlockCriteria.type === 'automatic' ? 'text-blue-600 dark:text-blue-400' : 'text-amber-600 dark:text-amber-400'}`}>
+            <span className="text-[10px] text-[var(--muted)] dark:text-[var(--muted)]">{achievement.points} pts</span>
+            <span className={`text-[10px] font-medium ${achievement.unlockCriteria.type === 'automatic' ? 'text-[var(--ink)] dark:text-[var(--ink2)]' : 'text-amber-600 dark:text-amber-400'}`}>
               {achievement.unlockCriteria.type === 'automatic' ? 'Auto-unlock' : 'Manual'}
             </span>
-            <span className="text-[10px] text-gray-400 dark:text-slate-500 truncate">{achievement.unlockCriteria.description}</span>
+            <span className="text-[10px] text-[var(--muted)] dark:text-[var(--muted)] truncate">{achievement.unlockCriteria.description}</span>
           </div>
         </div>
         <div className="flex items-center gap-1 flex-shrink-0">
-          <button onClick={onToggle} className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-400" title={achievement.active ? 'Deactivate' : 'Activate'}>
+          <button onClick={onToggle} className="p-1.5 rounded-lg hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)] text-[var(--muted)]" title={achievement.active ? 'Deactivate' : 'Activate'}>
             {achievement.active ? (
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
             ) : (
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
             )}
           </button>
-          <button onClick={onEdit} className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-400">
+          <button onClick={onEdit} className="p-1.5 rounded-lg hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)] text-[var(--muted)]">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
           </button>
-          <button onClick={onDelete} className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-600">
+          <button onClick={onDelete} className="p-1.5 rounded-lg hover:bg-red-50 text-[var(--muted)] hover:text-red-600">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
           </button>
         </div>
@@ -312,7 +312,7 @@ export default function AdminAchievements() {
   const [formDescription, setFormDescription] = useState('');
   const [formCategory, setFormCategory] = useState<AchievementTemplate['category']>('milestone');
   const [formEmoji, setFormEmoji] = useState('\u269B');
-  const [formColor, setFormColor] = useState('#6366f1');
+  const [formColor, setFormColor] = useState('#0A1628');
   const [formPoints, setFormPoints] = useState('10');
   const [formTier, setFormTier] = useState<AchievementTemplate['tier']>('bronze');
   const [formRarity, setFormRarity] = useState<AchievementTemplate['rarity']>('common');
@@ -370,7 +370,7 @@ export default function AdminAchievements() {
       setFormDescription('');
       setFormCategory('milestone');
       setFormEmoji('\u269B');
-      setFormColor('#6366f1');
+      setFormColor('#0A1628');
       setFormPoints('10');
       setFormTier('bronze');
       setFormRarity('common');
@@ -457,7 +457,7 @@ export default function AdminAchievements() {
     return true;
   });
 
-  const colorPresets = ['#6366f1', '#8b5cf6', '#ec4899', '#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#14b6d4', '#f97316', '#84cc16'];
+  const colorPresets = ['#0A1628', '#8b5cf6', '#ec4899', '#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#14b6d4', '#f97316', '#84cc16'];
 
   return (
     <div className="space-y-6">
@@ -476,10 +476,10 @@ export default function AdminAchievements() {
 
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Achievements</h2>
-          <p className="text-sm text-gray-500 dark:text-slate-400 mt-0.5">{templates.length} templates, {unlocks.length} total unlocks</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)] dark:text-white">Achievements</h2>
+          <p className="text-sm text-[var(--muted)] dark:text-[var(--muted)] mt-0.5">{templates.length} templates, {unlocks.length} total unlocks</p>
         </div>
-        <button onClick={fetchData} className="px-3 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg text-sm font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 flex items-center gap-2">
+        <button onClick={fetchData} className="px-3 py-2 bg-white dark:bg-[var(--ink2)] border border-[var(--line)] dark:border-[var(--ink2)] rounded-lg text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)] flex items-center gap-2">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
@@ -487,15 +487,15 @@ export default function AdminAchievements() {
         </button>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-200 dark:border-slate-700">
-        <div className="border-b border-gray-200 dark:border-slate-700">
+      <div className="bg-white dark:bg-[var(--ink2)] rounded-xl shadow-sm border border-[var(--line)] dark:border-[var(--ink2)]">
+        <div className="border-b border-[var(--line)] dark:border-[var(--ink2)]">
           <nav className="flex gap-1 px-4">
             {[
               { key: 'templates' as const, label: 'Templates' },
               { key: 'unlocks' as const, label: 'Unlocks' },
               { key: 'stats' as const, label: 'Statistics' },
             ].map(t => (
-              <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${tab === t.key ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-300'}`}>
+              <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${tab === t.key ? 'border-[rgba(201,101,74,0.2)] text-[var(--warm)]' : 'border-transparent text-[var(--muted)] dark:text-[var(--muted)] hover:text-[var(--ink2)] dark:hover:text-[var(--line)]'}`}>
                 {t.label}
               </button>
             ))}
@@ -505,29 +505,29 @@ export default function AdminAchievements() {
         <div className="p-6">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-indigo-600 rounded-full animate-spin" />
+              <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-indigo-600 rounded-full animate-spin" />
             </div>
           ) : tab === 'templates' ? (
             <div className="space-y-4">
               <div className="flex justify-between items-center gap-4 flex-wrap">
                 <div className="flex items-center gap-2">
-                  <select value={filterCategory} onChange={e => setFilterCategory(e.target.value)} className="rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-1.5 text-sm bg-white dark:bg-slate-900">
+                  <select value={filterCategory} onChange={e => setFilterCategory(e.target.value)} className="rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-1.5 text-sm bg-white dark:bg-[var(--ink)]">
                     <option value="">All Categories</option>
                     {CATEGORIES.map(c => <option key={c.key} value={c.key}>{c.label}</option>)}
                   </select>
-                  <select value={filterTier} onChange={e => setFilterTier(e.target.value)} className="rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-1.5 text-sm bg-white dark:bg-slate-900">
+                  <select value={filterTier} onChange={e => setFilterTier(e.target.value)} className="rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-1.5 text-sm bg-white dark:bg-[var(--ink)]">
                     <option value="">All Tiers</option>
                     {TIERS.map(t => <option key={t.key} value={t.key}>{t.label}</option>)}
                   </select>
                 </div>
-                <button onClick={() => openModal()} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 flex items-center gap-2">
+                <button onClick={() => openModal()} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
                   Add Achievement
                 </button>
               </div>
 
               {filteredTemplates.length === 0 ? (
-                <div className="text-center py-12 text-gray-500 dark:text-slate-400">No achievements match your filters.</div>
+                <div className="text-center py-12 text-[var(--muted)] dark:text-[var(--muted)]">No achievements match your filters.</div>
               ) : (
                 <div className="grid gap-4 md:grid-cols-2">
                   {filteredTemplates.map(ach => (
@@ -545,36 +545,36 @@ export default function AdminAchievements() {
           ) : tab === 'unlocks' ? (
             <div>
               {unlocks.length === 0 ? (
-                <div className="text-center py-12 text-gray-500 dark:text-slate-400">No achievements unlocked yet.</div>
+                <div className="text-center py-12 text-[var(--muted)] dark:text-[var(--muted)]">No achievements unlocked yet.</div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="bg-gray-50 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase">User</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase">Achievement</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase">Unlocked</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase">Trigger</th>
+                      <tr className="bg-[var(--paper2)] dark:bg-[var(--ink)] border-b border-[var(--line)] dark:border-[var(--ink2)]">
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] dark:text-[var(--muted)] uppercase">User</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] dark:text-[var(--muted)] uppercase">Achievement</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] dark:text-[var(--muted)] uppercase">Unlocked</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] dark:text-[var(--muted)] uppercase">Trigger</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
+                    <tbody className="divide-y divide-[var(--line)] dark:divide-[var(--line)]">
                       {unlocks.map(unlock => (
-                        <tr key={unlock.id} className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors">
+                        <tr key={unlock.id} className="hover:bg-[var(--paper2)] dark:hover:bg-[var(--paper2)] transition-colors">
                           <td className="px-4 py-3">
                             <div>
-                              <p className="text-sm font-medium text-gray-900 dark:text-white">{unlock.userName}</p>
-                              {unlock.userEmail && <p className="text-xs text-gray-500 dark:text-slate-400">{unlock.userEmail}</p>}
+                              <p className="text-sm font-medium text-[var(--ink)] dark:text-white">{unlock.userName}</p>
+                              {unlock.userEmail && <p className="text-xs text-[var(--muted)] dark:text-[var(--muted)]">{unlock.userEmail}</p>}
                             </div>
                           </td>
                           <td className="px-4 py-3">
-                            <span className="px-2 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 text-xs font-medium rounded">
+                            <span className="px-2 py-1 bg-[rgba(201,101,74,0.1)] dark:bg-[rgba(201,101,74,0.30)] text-[var(--warm)] dark:text-[var(--warm)] text-xs font-medium rounded">
                               {unlock.achievementName}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-xs text-gray-500 dark:text-slate-400">
+                          <td className="px-4 py-3 text-xs text-[var(--muted)] dark:text-[var(--muted)]">
                             {new Date(unlock.unlockedAt).toLocaleDateString()}
                           </td>
-                          <td className="px-4 py-3 text-xs text-gray-500 dark:text-slate-400">{unlock.triggeredBy || 'System'}</td>
+                          <td className="px-4 py-3 text-xs text-[var(--muted)] dark:text-[var(--muted)]">{unlock.triggeredBy || 'System'}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -587,9 +587,9 @@ export default function AdminAchievements() {
               {stats ? (
                 <>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-4 text-center">
-                      <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{stats.totalUnlocks}</p>
-                      <p className="text-xs text-indigo-500 dark:text-indigo-400 mt-1">Total Unlocks</p>
+                    <div className="bg-[rgba(201,101,74,0.06)] dark:bg-[rgba(201,101,74,0.20)] rounded-xl p-4 text-center">
+                      <p className="text-2xl font-bold text-[var(--warm)] dark:text-[var(--warm)]">{stats.totalUnlocks}</p>
+                      <p className="text-xs text-[var(--warm)] dark:text-[var(--warm)] mt-1">Total Unlocks</p>
                     </div>
                     <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-4 text-center">
                       <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{stats.uniqueUsers}</p>
@@ -599,15 +599,15 @@ export default function AdminAchievements() {
                       <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{templates.filter(t => t.active).length}</p>
                       <p className="text-xs text-amber-500 dark:text-amber-400 mt-1">Active Achievements</p>
                     </div>
-                    <div className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-4 text-center">
-                      <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">{templates.filter(t => t.rarity === 'legendary' || t.rarity === 'epic').length}</p>
-                      <p className="text-xs text-purple-500 dark:text-purple-400 mt-1">Epic / Legendary</p>
+                    <div className="bg-[rgba(201,101,74,0.06)] dark:bg-[rgba(201,101,74,0.20)] rounded-xl p-4 text-center">
+                      <p className="text-2xl font-bold text-[var(--warm)] dark:text-[var(--warm)]">{templates.filter(t => t.rarity === 'legendary' || t.rarity === 'epic').length}</p>
+                      <p className="text-xs text-[var(--warm)] dark:text-[var(--warm)] mt-1">Epic / Legendary</p>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="border border-gray-200 dark:border-slate-700 rounded-xl p-4">
-                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">By Category</h4>
+                    <div className="border border-[var(--line)] dark:border-[var(--ink2)] rounded-xl p-4">
+                      <h4 className="text-sm font-semibold text-[var(--ink)] dark:text-white mb-3">By Category</h4>
                       <div className="space-y-2">
                         {CATEGORIES.map(cat => {
                           const count = stats.byCategory?.[cat.key] || 0;
@@ -615,11 +615,11 @@ export default function AdminAchievements() {
                           return (
                             <div key={cat.key}>
                               <div className="flex justify-between text-xs mb-1">
-                                <span className="text-gray-600 dark:text-slate-400">{cat.label}</span>
-                                <span className="text-gray-500 dark:text-slate-500">{count} ({total > 0 ? Math.round(count / total * 100) : 0}%)</span>
+                                <span className="text-[var(--ink2)] dark:text-[var(--muted)]">{cat.label}</span>
+                                <span className="text-[var(--muted)] dark:text-[var(--muted)]">{count} ({total > 0 ? Math.round(count / total * 100) : 0}%)</span>
                               </div>
-                              <div className="h-1.5 bg-gray-100 dark:bg-slate-700 rounded-full overflow-hidden">
-                                <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${total > 0 ? (count / total * 100) : 0}%` }} />
+                              <div className="h-1.5 bg-[var(--paper2)] dark:bg-[var(--ink2)] rounded-full overflow-hidden">
+                                <div className="h-full bg-[var(--warm)] rounded-full" style={{ width: `${total > 0 ? (count / total * 100) : 0}%` }} />
                               </div>
                             </div>
                           );
@@ -627,8 +627,8 @@ export default function AdminAchievements() {
                       </div>
                     </div>
 
-                    <div className="border border-gray-200 dark:border-slate-700 rounded-xl p-4">
-                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">By Tier</h4>
+                    <div className="border border-[var(--line)] dark:border-[var(--ink2)] rounded-xl p-4">
+                      <h4 className="text-sm font-semibold text-[var(--ink)] dark:text-white mb-3">By Tier</h4>
                       <div className="space-y-2">
                         {TIERS.map(tier => {
                           const count = stats.byTier?.[tier.key] || 0;
@@ -636,10 +636,10 @@ export default function AdminAchievements() {
                           return (
                             <div key={tier.key}>
                               <div className="flex justify-between text-xs mb-1">
-                                <span className="text-gray-600 dark:text-slate-400" style={{ color: tier.color }}>{tier.label}</span>
-                                <span className="text-gray-500 dark:text-slate-500">{count}</span>
+                                <span className="text-[var(--ink2)] dark:text-[var(--muted)]" style={{ color: tier.color }}>{tier.label}</span>
+                                <span className="text-[var(--muted)] dark:text-[var(--muted)]">{count}</span>
                               </div>
-                              <div className="h-1.5 bg-gray-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                              <div className="h-1.5 bg-[var(--paper2)] dark:bg-[var(--ink2)] rounded-full overflow-hidden">
                                 <div className="h-full rounded-full" style={{ width: `${total > 0 ? (count / total * 100) : 0}%`, backgroundColor: tier.color }} />
                               </div>
                             </div>
@@ -650,7 +650,7 @@ export default function AdminAchievements() {
                   </div>
                 </>
               ) : (
-                <div className="text-center py-12 text-gray-500 dark:text-slate-400">
+                <div className="text-center py-12 text-[var(--muted)] dark:text-[var(--muted)]">
                   Statistics will appear here as achievements are unlocked.
                 </div>
               )}
@@ -664,43 +664,43 @@ export default function AdminAchievements() {
         <div className="space-y-5">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Key *</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Key *</label>
               <input
                 type="text"
                 value={formKey}
                 onChange={e => setFormKey(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))}
                 placeholder="my-achievement"
                 disabled={!!editingAchievement}
-                className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-900 disabled:opacity-50"
+                className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-2 text-sm bg-white dark:bg-[var(--ink)] disabled:opacity-50"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Name *</label>
-              <input type="text" value={formName} onChange={e => setFormName(e.target.value)} placeholder="My Achievement" className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-900" />
+              <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Name *</label>
+              <input type="text" value={formName} onChange={e => setFormName(e.target.value)} placeholder="My Achievement" className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-2 text-sm bg-white dark:bg-[var(--ink)]" />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Description</label>
-            <textarea value={formDescription} onChange={e => setFormDescription(e.target.value)} rows={2} placeholder="What does this achievement celebrate?" className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-900" />
+            <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Description</label>
+            <textarea value={formDescription} onChange={e => setFormDescription(e.target.value)} rows={2} placeholder="What does this achievement celebrate?" className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-2 text-sm bg-white dark:bg-[var(--ink)]" />
           </div>
 
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Category</label>
-              <select value={formCategory} onChange={e => setFormCategory(e.target.value as AchievementTemplate['category'])} className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-900">
+              <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Category</label>
+              <select value={formCategory} onChange={e => setFormCategory(e.target.value as AchievementTemplate['category'])} className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-2 text-sm bg-white dark:bg-[var(--ink)]">
                 {CATEGORIES.map(c => <option key={c.key} value={c.key}>{c.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Tier</label>
-              <select value={formTier} onChange={e => setFormTier(e.target.value as AchievementTemplate['tier'])} className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-900">
+              <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Tier</label>
+              <select value={formTier} onChange={e => setFormTier(e.target.value as AchievementTemplate['tier'])} className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-2 text-sm bg-white dark:bg-[var(--ink)]">
                 {TIERS.map(t => <option key={t.key} value={t.key}>{t.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Rarity</label>
-              <select value={formRarity} onChange={e => setFormRarity(e.target.value as AchievementTemplate['rarity'])} className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-900">
+              <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Rarity</label>
+              <select value={formRarity} onChange={e => setFormRarity(e.target.value as AchievementTemplate['rarity'])} className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-2 text-sm bg-white dark:bg-[var(--ink)]">
                 {RARITIES.map(r => <option key={r.key} value={r.key}>{r.label}</option>)}
               </select>
             </div>
@@ -708,67 +708,67 @@ export default function AdminAchievements() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Emoji</label>
-              <input type="text" value={formEmoji} onChange={e => setFormEmoji(e.target.value)} placeholder="\u269B" className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-900 text-center text-2xl" />
+              <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Emoji</label>
+              <input type="text" value={formEmoji} onChange={e => setFormEmoji(e.target.value)} placeholder="\u269B" className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-2 text-sm bg-white dark:bg-[var(--ink)] text-center text-2xl" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Points</label>
-              <input type="number" value={formPoints} onChange={e => setFormPoints(e.target.value)} placeholder="10" className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-900" />
+              <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Points</label>
+              <input type="number" value={formPoints} onChange={e => setFormPoints(e.target.value)} placeholder="10" className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-2 text-sm bg-white dark:bg-[var(--ink)]" />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Color</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Color</label>
             <div className="flex items-center gap-2">
-              <input type="color" value={formColor} onChange={e => setFormColor(e.target.value)} className="w-12 h-10 rounded border border-gray-300 dark:border-slate-600 cursor-pointer" />
-              <input type="text" value={formColor} onChange={e => setFormColor(e.target.value)} className="flex-1 rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-2 text-sm font-mono bg-white dark:bg-slate-900" />
+              <input type="color" value={formColor} onChange={e => setFormColor(e.target.value)} className="w-12 h-10 rounded border border-[var(--line)] dark:border-[var(--ink2)] cursor-pointer" />
+              <input type="text" value={formColor} onChange={e => setFormColor(e.target.value)} className="flex-1 rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-2 text-sm font-mono bg-white dark:bg-[var(--ink)]" />
               <div className="flex gap-1">
                 {colorPresets.map(c => (
-                  <button key={c} type="button" onClick={() => setFormColor(c)} className="w-6 h-6 rounded border border-gray-200 dark:border-slate-600 hover:scale-110 transition-transform" style={{ backgroundColor: c }} />
+                  <button key={c} type="button" onClick={() => setFormColor(c)} className="w-6 h-6 rounded border border-[var(--line)] dark:border-[var(--ink2)] hover:scale-110 transition-transform" style={{ backgroundColor: c }} />
                 ))}
               </div>
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Unlock Criteria</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-1">Unlock Criteria</label>
             <div className="flex gap-4 mb-3">
-              <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300">
-                <input type="radio" checked={formCriteriaType === 'automatic'} onChange={() => setFormCriteriaType('automatic')} className="text-indigo-600" />
+              <label className="flex items-center gap-2 text-sm text-[var(--ink2)] dark:text-[var(--line)]">
+                <input type="radio" checked={formCriteriaType === 'automatic'} onChange={() => setFormCriteriaType('automatic')} className="text-[var(--warm)]" />
                 Automatic
               </label>
-              <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300">
-                <input type="radio" checked={formCriteriaType === 'manual'} onChange={() => setFormCriteriaType('manual')} className="text-indigo-600" />
+              <label className="flex items-center gap-2 text-sm text-[var(--ink2)] dark:text-[var(--line)]">
+                <input type="radio" checked={formCriteriaType === 'manual'} onChange={() => setFormCriteriaType('manual')} className="text-[var(--warm)]" />
                 Manual (admin grants)
               </label>
             </div>
 
             {formCriteriaType === 'automatic' && (
-              <div className="space-y-3 p-3 bg-gray-50 dark:bg-slate-900 rounded-lg">
+              <div className="space-y-3 p-3 bg-[var(--paper2)] dark:bg-[var(--ink)] rounded-lg">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs text-gray-500 dark:text-slate-400 mb-1">Metric</label>
-                    <select value={formMetric} onChange={e => setFormMetric(e.target.value)} className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-1.5 text-sm bg-white dark:bg-slate-800">
+                    <label className="block text-xs text-[var(--muted)] dark:text-[var(--muted)] mb-1">Metric</label>
+                    <select value={formMetric} onChange={e => setFormMetric(e.target.value)} className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-1.5 text-sm bg-white dark:bg-[var(--ink2)]">
                       <option value="">Select...</option>
                       {METRIC_OPTIONS.map(m => <option key={m.value} value={m.value}>{m.label}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs text-gray-500 dark:text-slate-400 mb-1">Threshold</label>
-                    <input type="number" value={formThreshold} onChange={e => setFormThreshold(e.target.value)} placeholder="e.g. 100" className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-1.5 text-sm bg-white dark:bg-slate-800" />
+                    <label className="block text-xs text-[var(--muted)] dark:text-[var(--muted)] mb-1">Threshold</label>
+                    <input type="number" value={formThreshold} onChange={e => setFormThreshold(e.target.value)} placeholder="e.g. 100" className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-1.5 text-sm bg-white dark:bg-[var(--ink2)]" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-500 dark:text-slate-400 mb-1">Description</label>
-                  <input type="text" value={formCriteriaDesc} onChange={e => setFormCriteriaDesc(e.target.value)} placeholder="Reach 100 pulses in a session" className="w-full rounded-lg border border-gray-300 dark:border-slate-600 px-3 py-1.5 text-sm bg-white dark:bg-slate-800" />
+                  <label className="block text-xs text-[var(--muted)] dark:text-[var(--muted)] mb-1">Description</label>
+                  <input type="text" value={formCriteriaDesc} onChange={e => setFormCriteriaDesc(e.target.value)} placeholder="Reach 100 pulses in a session" className="w-full rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-1.5 text-sm bg-white dark:bg-[var(--ink2)]" />
                 </div>
               </div>
             )}
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 dark:border-slate-700">
-            <button onClick={() => setShowModal(false)} className="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-sm font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700">Cancel</button>
-            <button onClick={handleSave} disabled={saving} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 disabled:opacity-50">
+          <div className="flex justify-end gap-3 pt-4 border-t border-[var(--line)] dark:border-[var(--ink2)]">
+            <button onClick={() => setShowModal(false)} className="px-4 py-2 border border-[var(--line)] dark:border-[var(--ink2)] rounded-lg text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)]">Cancel</button>
+            <button onClick={handleSave} disabled={saving} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50">
               {saving ? 'Saving...' : editingAchievement ? 'Update' : 'Create'}
             </button>
           </div>

@@ -1,4 +1,6 @@
 ---
+// Editorial-style bottom CTA used by ContentPage layout.
+
 interface Props {
   title?: string;
   description?: string;
@@ -9,7 +11,7 @@ interface Props {
 }
 
 const {
-  title = "Find a TMS Clinic Near You",
+  title = "Find a TMS clinic near you.",
   description = "Browse verified providers with real patient reviews, insurance details, and treatment information.",
   primaryHref = "/us/",
   primaryLabel = "Search Clinics",
@@ -18,23 +20,91 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-slate-900 mt-8">
-  <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 24px 24px;"></div>
-  <div class="absolute top-[-50%] right-[-20%] w-[500px] h-[500px] bg-[#1B4B5A]/10 rounded-full blur-[100px]"></div>
-
-  <div class="relative z-10 container mx-auto px-4 py-16 lg:py-20 text-center">
-    <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-4">{title}</h2>
-    <p class="text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed">{description}</p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href={primaryHref} class="inline-flex items-center gap-2 bg-[#143844] hover:bg-[#1B4B5A] text-white font-semibold px-8 py-3.5 rounded-xl transition-colors shadow-lg shadow-[#143844]/25">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        {primaryLabel}
-      </a>
-      <a href={secondaryHref} class="inline-flex items-center gap-2 text-white/70 hover:text-white font-medium px-6 py-3.5 rounded-xl border border-white/10 hover:border-white/20 transition-colors">
-        {secondaryLabel}
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      </a>
+<section class="find-clinic-cta">
+  <div class="find-clinic-cta-inner">
+    <h2 class="serif find-clinic-cta-title">{title}</h2>
+    <p class="find-clinic-cta-desc">{description}</p>
+    <div class="find-clinic-cta-actions">
+      <a href={primaryHref} class="find-clinic-cta-btn find-clinic-cta-btn-primary">{primaryLabel}</a>
+      <a href={secondaryHref} class="find-clinic-cta-btn find-clinic-cta-btn-outline">{secondaryLabel}</a>
     </div>
-    <p class="text-xs text-slate-500 mt-4">Also: <a href="/resources/buyers-guide/" class="text-[#5BA8BD] hover:text-[#1B4B5A]300 underline">download the free TMS Buyer's Guide</a></p>
+    <p class="find-clinic-cta-note">Also: <a href="/tms-cost-guide/">read the TMS Cost Guide</a></p>
   </div>
 </section>
+
+<style>
+  .find-clinic-cta {
+    background: var(--ink);
+    padding: 5rem 0;
+  }
+
+  .find-clinic-cta-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+
+  @media (min-width: 1024px) {
+    .find-clinic-cta-inner { padding: 0 2rem; }
+  }
+
+  .find-clinic-cta-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: white;
+    line-height: 1.05;
+    margin: 0 0 1.25rem;
+  }
+
+  .find-clinic-cta-desc {
+    font-size: 17px;
+    color: rgba(255,255,255,0.5);
+    max-width: 36rem;
+    margin: 0 auto 2.5rem;
+    line-height: 1.65;
+  }
+
+  .find-clinic-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .find-clinic-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 1.75rem;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: opacity 0.15s ease, background 0.15s ease;
+  }
+
+  .find-clinic-cta-btn-primary {
+    background: var(--warm);
+    color: white;
+  }
+  .find-clinic-cta-btn-primary:hover { opacity: 0.9; }
+
+  .find-clinic-cta-btn-outline {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+  .find-clinic-cta-btn-outline:hover { background: rgba(255,255,255,0.05); }
+
+  .find-clinic-cta-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    margin: 1.5rem 0 0;
+  }
+  .find-clinic-cta-note a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .find-clinic-cta-note a:hover { color: white; }
+</style>

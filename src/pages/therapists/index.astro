@@ -1,0 +1,120 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
+import EditorialSection from '../../components/editorial/EditorialSection.astro';
+import EditorialCard from '../../components/editorial/EditorialCard.astro';
+import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
+import { getAllClinics, STATE_NAMES } from '../../utils/clinicData';
+import { COUNTRY_NAMES, getStateSlug } from '../../utils/dataHelpers';
+import { filterDoctorsByType } from '../../utils/providerFilter';
+import { getVisitorCountry } from '../../utils/visitorCountry';
+
+const VISITOR_COUNTRY = getVisitorCountry(Astro.cookies, Astro.url);
+const visitorCountryName = COUNTRY_NAMES[VISITOR_COUNTRY] || 'United States';
+
+const clinics = await getAllClinics();
+const matchVisitor = (c: any) => VISITOR_COUNTRY === 'US' ? (!c.country || c.country === 'US') : c.country === VISITOR_COUNTRY;
+const scoped = clinics.filter(matchVisitor);
+const sourceClinics = scoped.length > 0 ? scoped : clinics.filter(c => !c.country || c.country === 'US');
+const allDoctors = sourceClinics.flatMap((c: any) => (c.doctors_data || []).map((d: any) => ({ ...d, clinic: c })));
+const therapists = filterDoctorsByType(allDoctors, 'therapists');
+
+const byState: Record<string, typeof therapists> = {};
+therapists.forEach(d => {
+  const state = d.clinic?.state;
+  if (state) {
+    if (!byState[state]) byState[state] = [];
+    byState[state].push(d);
+  }
+});
+const states = Object.keys(byState).sort();
+
+const regionLabel = VISITOR_COUNTRY === 'US' ? 'US states' : 'regions';
+const title = VISITOR_COUNTRY === 'US'
+  ? `Best Therapists & Counselors with TMS Support | Nationwide Directory`
+  : `Best Therapists & Counselors with TMS Support in ${visitorCountryName}`;
+const description = `Browse ${therapists.length} licensed therapists and counselors offering TMS-compatible mental health care across ${states.length} ${regionLabel}. Find support for depression, anxiety, and trauma.`;
+---
+
+<Layout title={title} description={description} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Therapists", url: "/therapists/" },
+]}>
+
+<main style="background:var(--paper)">
+  <EditorialHero
+    eyebrow="TMS-Compatible Care"
+    eyebrowDot="#22c55e"
+    title="Therapists who"
+    titleAccent="support TMS care."
+    description={`Browse ${therapists.length} licensed therapists, counselors, and psychiatric nurse practitioners offering TMS-compatible mental health care across ${states.length} US states.`}
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Therapists" }]}
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "Find a TMS Clinic", href: "/us/", variant: "outline" },
+    ]}
+    stats={[
+      { value: therapists.length, label: "Therapists", color: "ink" },
+      { value: states.length, label: "States", color: "accent" },
+      { value: "LCSW/LMFT", label: "Credentials", color: "warm" },
+    ]}
+  />
+
+  <EditorialSection
+    title="Browse by State"
+    intro="Pick your state to see TMS-compatible therapists and counselors practicing nearby."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>'
+    tone="accent"
+  >
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {states.map(stateCode => {
+        const stateName = STATE_NAMES[stateCode] || stateCode;
+        const count = byState[stateCode].length;
+        return (
+          <EditorialCard
+            href={`/us/${getStateSlug(stateCode)}/therapists/`}
+            tag={`${count} ${count === 1 ? 'Therapist' : 'Therapists'}`}
+            tagTone="accent"
+            title={stateName}
+            description={`Licensed therapists and counselors with TMS-compatible care, practicing in ${stateName}.`}
+            size="lg"
+          />
+        );
+      })}
+    </div>
+  </EditorialSection>
+
+  <EditorialSection
+    title="How Therapists Support TMS Treatment"
+    intro="Therapists provide the psychological support that helps TMS patients achieve the best outcomes."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>'
+    tone="warm"
+    background="paper2"
+    noBorder
+  >
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div style="background:var(--paper); border:1px solid var(--line); border-radius:1.5rem; padding:1.75rem;">
+        <h3 class="serif" style="font-size:1.25rem; color:var(--ink); margin:0 0 0.75rem;">Coordinating with TMS</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.65; margin:0;">TMS-compatible therapists coordinate their sessions around the daily TMS treatment schedule (Mon–Fri for 6–9 weeks), helping patients manage emotional changes during intensive treatment.</p>
+      </div>
+      <div style="background:var(--paper); border:1px solid var(--line); border-radius:1.5rem; padding:1.75rem;">
+        <h3 class="serif" style="font-size:1.25rem; color:var(--ink); margin:0 0 0.75rem;">Credentials to Know</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.65; margin:0;">Look for LCSW, LMFT, LPC, or APRN/PMHNP credentials. These providers offer therapy alongside or after TMS to consolidate gains and develop coping strategies.</p>
+      </div>
+    </div>
+  </EditorialSection>
+
+  <EditorialCTA
+    title="Find your TMS therapist."
+    description="Connect with a licensed therapist who can support your TMS journey."
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "Browse All Specialists", href: "/specialists/", variant: "outline" },
+    ]}
+    stickyMobile
+  />
+</main>
+
+</Layout>

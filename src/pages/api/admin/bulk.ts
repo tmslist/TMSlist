@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { inArray } from 'drizzle-orm';
 import { db } from '../../../db';
 import { clinics, reviews, leads, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -88,8 +88,16 @@ export const POST: APIRoute = async ({ request }) => {
         return json({ success: true, action, count: ids.length });
       }
       case 'delete_clinics': {
-        await db.delete(clinics).where(inArray(clinics.id, ids));
-        await logAction(session!.userId, 'bulk_delete', 'clinic', ids);
+        await db.transaction(async (tx) => {
+          await tx.delete(clinics).where(inArray(clinics.id, ids));
+          await tx.insert(auditLog).values({
+            userId: session!.userId,
+            action: 'bulk_delete',
+            entityType: 'clinic',
+            entityId: ids.join(','),
+            details: { ids },
+          });
+        });
         return json({ success: true, action, count: ids.length });
       }
 
@@ -111,11 +119,18 @@ export const POST: APIRoute = async ({ request }) => {
         return json({ success: true, action, count: ids.length });
       }
       case 'delete_reviews': {
-        await db.delete(reviews).where(inArray(reviews.id, ids));
-        await logAction(session!.userId, 'bulk_delete', 'review', ids);
+        await db.transaction(async (tx) => {
+          await tx.delete(reviews).where(inArray(reviews.id, ids));
+          await tx.insert(auditLog).values({
+            userId: session!.userId,
+            action: 'bulk_delete',
+            entityType: 'review',
+            entityId: ids.join(','),
+            details: { ids },
+          });
+        });
         return json({ success: true, action, count: ids.length });
       }
-
       // ── Leads ──
       case 'export_leads': {
         const leadData = await db
@@ -126,8 +141,16 @@ export const POST: APIRoute = async ({ request }) => {
         return json({ success: true, action, data: leadData });
       }
       case 'delete_leads': {
-        await db.delete(leads).where(inArray(leads.id, ids));
-        await logAction(session!.userId, 'bulk_delete', 'lead', ids);
+        await db.transaction(async (tx) => {
+          await tx.delete(leads).where(inArray(leads.id, ids));
+          await tx.insert(auditLog).values({
+            userId: session!.userId,
+            action: 'bulk_delete',
+            entityType: 'lead',
+            entityId: ids.join(','),
+            details: { ids },
+          });
+        });
         return json({ success: true, action, count: ids.length });
       }
 

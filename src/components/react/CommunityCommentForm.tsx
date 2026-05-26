@@ -57,11 +57,11 @@ export default function CommunityCommentForm({
 
   if (!isAuthenticated) {
     return (
-      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center">
-        <p className="text-sm text-gray-500 mb-2">Join the conversation</p>
+      <div className="bg-[var(--paper2)] border border-[var(--line)] rounded-lg p-4 text-center">
+        <p className="text-sm text-[var(--muted)] mb-2">Join the conversation</p>
         <a
           href={`/community/login?redirect=${encodeURIComponent(typeof window !== 'undefined' ? window.location.pathname : '/community')}`}
-          className="inline-flex items-center px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors"
+          className="inline-flex items-center px-4 py-2 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] transition-colors"
         >
           Sign in to comment
         </a>
@@ -77,7 +77,7 @@ export default function CommunityCommentForm({
         placeholder={placeholder}
         rows={parentId ? 2 : 3}
         maxLength={5000}
-        className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent placeholder-gray-400"
+        className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-transparent placeholder-[var(--muted)]"
       />
 
       {error && <p className="text-sm text-red-600">{error}</p>}
@@ -87,7 +87,7 @@ export default function CommunityCommentForm({
           <button
             type="button"
             onClick={onCancel}
-            className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+            className="px-3 py-1.5 text-sm text-[var(--muted)] hover:text-[var(--ink2)] transition-colors"
           >
             Cancel
           </button>
@@ -95,7 +95,7 @@ export default function CommunityCommentForm({
         <button
           type="submit"
           disabled={loading || !body.trim()}
-          className="px-4 py-1.5 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-4 py-1.5 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? 'Posting...' : parentId ? 'Reply' : 'Comment'}
         </button>

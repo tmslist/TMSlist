@@ -4,7 +4,7 @@ description: "Transcranial magnetic stimulation is used differently across the A
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-in-europe-vs-us.svg"
 tags: ["tms", "europe", "us-comparison", "international", "regulation", "insurance", "clinical-practice", "ce-mark", "fda"]
 ---
 

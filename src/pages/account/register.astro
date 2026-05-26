@@ -18,10 +18,10 @@ const redirect = Astro.url.searchParams.get('redirect') || '/account';
   description="Create a free account to save clinics, write reviews, and get personalized TMS recommendations."
   noindex={true}
 >
-  <main class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-violet-50 flex items-center justify-center px-4 py-12">
+  <main class="min-h-screen bg-gradient-to-br from-[rgba(201,101,74,0.1)] via-white to-[#0A1628] flex items-center justify-center px-4 py-12">
     <div class="w-full max-w-md">
       <div class="text-center mb-6">
-        <a href="/" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-violet-600 mb-6 transition-colors">
+        <a href="/" class="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-[var(--ink)] mb-6 transition-colors">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
           Back to TMS List
         </a>

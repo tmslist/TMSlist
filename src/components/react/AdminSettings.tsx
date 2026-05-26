@@ -31,18 +31,18 @@ function Section({
   saving?: boolean;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm mb-6">
-      <div className="px-6 py-5 border-b border-gray-100">
-        <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-        <p className="text-sm text-gray-500 mt-0.5">{description}</p>
+    <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm mb-6">
+      <div className="px-6 py-5 border-b border-[var(--line)]">
+        <h2 className="text-lg font-semibold text-[var(--ink)]">{title}</h2>
+        <p className="text-sm text-[var(--muted)] mt-0.5">{description}</p>
       </div>
       <div className="px-6 py-5 space-y-4">{children}</div>
       {onSave && (
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 rounded-b-xl flex justify-end">
+        <div className="px-6 py-4 bg-[var(--paper2)] border-t border-[var(--line)] rounded-b-xl flex justify-end">
           <button
             onClick={onSave}
             disabled={saving}
-            className="px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink)] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {saving ? 'Saving...' : 'Save Changes'}
           </button>
@@ -66,12 +66,12 @@ function Toggle({
   return (
     <div className="flex items-center justify-between">
       <div>
-        <p className="text-sm font-medium text-gray-900">{label}</p>
-        {description && <p className="text-xs text-gray-500 mt-0.5">{description}</p>}
+        <p className="text-sm font-medium text-[var(--ink)]">{label}</p>
+        {description && <p className="text-xs text-[var(--muted)] mt-0.5">{description}</p>}
       </div>
       <button
         onClick={() => onChange(!checked)}
-        className={`relative w-11 h-6 rounded-full transition-colors ${checked ? 'bg-violet-600' : 'bg-gray-300'}`}
+        className={`relative w-11 h-6 rounded-full transition-colors ${checked ? 'bg-[var(--ink)]' : 'bg-[var(--line)]'}`}
       >
         <span
           className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${checked ? 'translate-x-5' : 'translate-x-0'}`}
@@ -98,15 +98,15 @@ function FieldInput({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-[var(--ink2)] mb-1">{label}</label>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+        className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)]"
       />
-      {hint && <p className="text-xs text-gray-400 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-[var(--muted)] mt-1">{hint}</p>}
     </div>
   );
 }
@@ -128,15 +128,15 @@ function Textarea({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-[var(--ink2)] mb-1">{label}</label>
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         rows={rows}
-        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500 font-mono text-xs"
+        className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] font-mono text-xs"
       />
-      {hint && <p className="text-xs text-gray-400 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-[var(--muted)] mt-1">{hint}</p>}
     </div>
   );
 }
@@ -163,7 +163,7 @@ export default function AdminSettings() {
   // --- NEW: Branding & Identity ---
   const [brandingSiteName, setBrandingSiteName] = useState('');
   const [brandingTagline, setBrandingTagline] = useState('');
-  const [brandingPrimaryColor, setBrandingPrimaryColor] = useState('#6366f1');
+  const [brandingPrimaryColor, setBrandingPrimaryColor] = useState('#0A1628');
   const [brandingLogoUrl, setBrandingLogoUrl] = useState('');
 
   // --- NEW: Social Links ---
@@ -223,7 +223,7 @@ export default function AdminSettings() {
         // --- NEW: Branding & Identity ---
         if (s.branding_site_name !== undefined) setBrandingSiteName(String(s.branding_site_name || ''));
         if (s.branding_tagline !== undefined) setBrandingTagline(String(s.branding_tagline || ''));
-        if (s.branding_primary_color !== undefined) setBrandingPrimaryColor(String(s.branding_primary_color || '#6366f1'));
+        if (s.branding_primary_color !== undefined) setBrandingPrimaryColor(String(s.branding_primary_color || '#0A1628'));
         if (s.branding_logo_url !== undefined) setBrandingLogoUrl(String(s.branding_logo_url || ''));
 
         // --- NEW: Social Links ---
@@ -291,8 +291,8 @@ export default function AdminSettings() {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-4" />
-          <p className="text-gray-500">Loading settings...</p>
+          <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-4" />
+          <p className="text-[var(--muted)]">Loading settings...</p>
         </div>
       </div>
     );
@@ -302,46 +302,46 @@ export default function AdminSettings() {
     <div>
       {/* Toast */}
       {toast && (
-        <div className="fixed top-4 right-4 z-50 bg-gray-900 text-white px-4 py-2.5 rounded-lg shadow-lg text-sm animate-in fade-in">
+        <div className="fixed top-4 right-4 z-50 bg-[var(--ink)] text-white px-4 py-2.5 rounded-lg shadow-lg text-sm animate-in fade-in">
           {toast}
         </div>
       )}
 
       <div className="mb-8">
-        <h1 className="text-3xl font-semibold text-gray-900">Settings</h1>
-        <p className="text-gray-500 mt-1">Manage site configuration</p>
+        <h1 className="text-3xl font-semibold text-[var(--ink)]">Settings</h1>
+        <p className="text-[var(--muted)] mt-1">Manage site configuration</p>
       </div>
 
       {/* Site Info (read-only) */}
       <Section title="Site Information" description="Overview of your site and database">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           <div>
-            <p className="text-xs font-medium text-gray-500">Total Clinics</p>
-            <p className="text-xl font-semibold text-gray-900">{data?.stats.clinics ?? 0}</p>
+            <p className="text-xs font-medium text-[var(--muted)]">Total Clinics</p>
+            <p className="text-xl font-semibold text-[var(--ink)]">{data?.stats.clinics ?? 0}</p>
           </div>
           <div>
-            <p className="text-xs font-medium text-gray-500">Verified</p>
+            <p className="text-xs font-medium text-[var(--muted)]">Verified</p>
             <p className="text-xl font-semibold text-green-600">{data?.stats.verifiedClinics ?? 0}</p>
           </div>
           <div>
-            <p className="text-xs font-medium text-gray-500">Doctors</p>
-            <p className="text-xl font-semibold text-gray-900">{data?.stats.doctors ?? 0}</p>
+            <p className="text-xs font-medium text-[var(--muted)]">Doctors</p>
+            <p className="text-xl font-semibold text-[var(--ink)]">{data?.stats.doctors ?? 0}</p>
           </div>
           <div>
-            <p className="text-xs font-medium text-gray-500">Reviews</p>
-            <p className="text-xl font-semibold text-gray-900">{data?.stats.reviews ?? 0}</p>
+            <p className="text-xs font-medium text-[var(--muted)]">Reviews</p>
+            <p className="text-xl font-semibold text-[var(--ink)]">{data?.stats.reviews ?? 0}</p>
           </div>
           <div>
-            <p className="text-xs font-medium text-gray-500">Pending Reviews</p>
+            <p className="text-xs font-medium text-[var(--muted)]">Pending Reviews</p>
             <p className="text-xl font-semibold text-amber-600">{data?.stats.pendingReviews ?? 0}</p>
           </div>
           <div>
-            <p className="text-xs font-medium text-gray-500">Total Leads</p>
-            <p className="text-xl font-semibold text-violet-600">{data?.stats.leads ?? 0}</p>
+            <p className="text-xs font-medium text-[var(--muted)]">Total Leads</p>
+            <p className="text-xl font-semibold text-[var(--ink)]">{data?.stats.leads ?? 0}</p>
           </div>
           <div>
-            <p className="text-xs font-medium text-gray-500">Users</p>
-            <p className="text-xl font-semibold text-gray-900">{data?.stats.users ?? 0}</p>
+            <p className="text-xs font-medium text-[var(--muted)]">Users</p>
+            <p className="text-xl font-semibold text-[var(--ink)]">{data?.stats.users ?? 0}</p>
           </div>
         </div>
       </Section>
@@ -471,7 +471,7 @@ export default function AdminSettings() {
           value={brandingPrimaryColor}
           onChange={setBrandingPrimaryColor}
           type="text"
-          placeholder="#6366f1"
+          placeholder='#0A1628'
           hint="Enter a valid hex color code (e.g. #6366f1)"
         />
         <FieldInput

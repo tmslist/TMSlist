@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-01-20
 treatmentA: "MagVenture"
 treatmentB: "BrainsWay"
-image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 verdict: "BrainsWay has unique OCD clearance via deep TMS. MagVenture has broader international reach and a strong research pedigree. Both produce comparable depression outcomes."
 verdictWinner: "tie"
 faqs: []
@@ -81,9 +81,9 @@ Find a [TMS clinic](/us/) offering the system that's right for your condition, o
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>BrainsWay is the only TMS device with FDA clearance for OCD</li>
     <li>MagVenture has stronger presence in academic and research settings</li>
     <li>Depression outcomes are comparable between both platforms</li>
@@ -92,41 +92,41 @@ Find a [TMS clinic](/us/) offering the system that's right for your condition, o
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is BrainsWay's deep TMS more effective than MagVenture's figure-8 for depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is BrainsWay's deep TMS more effective than MagVenture's figure-8 for depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">For depression specifically, no meaningful difference in response or remission rates has been established in head-to-head trials. Both are FDA-cleared and equally supported by evidence for treatment-resistant MDD.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">For depression specifically, no meaningful difference in response or remission rates has been established in head-to-head trials. Both are FDA-cleared and equally supported by evidence for treatment-resistant MDD.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Which device should I choose for OCD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Which device should I choose for OCD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">BrainsWay is the stronger choice for OCD because it has the only TMS-specific FDA clearance for the condition. That clearance streamlines insurance authorization and reflects dedicated clinical trial data for OCD patients.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">BrainsWay is the stronger choice for OCD because it has the only TMS-specific FDA clearance for the condition. That clearance streamlines insurance authorization and reflects dedicated clinical trial data for OCD patients.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does my insurance cover BrainsWay or MagVenture TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does my insurance cover BrainsWay or MagVenture TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most major insurers cover both for major depressive disorder when you meet treatment-resistant criteria. For OCD specifically, BrainsWay has a clearer path to coverage. Your clinic's billing department handles prior authorization and can verify coverage before treatment begins.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most major insurers cover both for major depressive disorder when you meet treatment-resistant criteria. For OCD specifically, BrainsWay has a clearer path to coverage. Your clinic's billing department handles prior authorization and can verify coverage before treatment begins.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I request a specific TMS device at a clinic?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I request a specific TMS device at a clinic?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">You can ask, but most clinics are equipped with one primary system and may not have both available. If the specific device matters to you, search providers by device type in our [clinic directory](/us/).</p>
+        <p class="text-[var(--ink2)]" itemprop="text">You can ask, but most clinics are equipped with one primary system and may not have both available. If the specific device matters to you, search providers by device type in our [clinic directory](/us/).</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Find the Right TMS Provider?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS clinics with detailed information about their devices, protocols, and insurance coverage.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS clinics with detailed information about their devices, protocols, and insurance coverage.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/compare/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Compare All Devices</a>
   </div>
 </div>

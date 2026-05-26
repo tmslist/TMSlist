@@ -4,7 +4,7 @@ description: "Accelerated TMS protocols show promise for rapidly reducing acute 
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-suicidal-ideation.svg"
 tags: ["tms", "suicidal-ideation", "suicide-prevention", "emergency-tms", "accelerated-tms", "crisis-intervention", "ketamine"]
 ---
 
@@ -149,35 +149,35 @@ TMS takes days to work. If you or someone you know is in immediate danger, call 
 
 *For information about TMS programs specifically addressing suicidal ideation, contact the American Psychiatric Association or search clinicaltrials.gov for active studies.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS reduce suicidal thoughts quickly?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS reduce suicidal thoughts quickly?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Accelerated TMS protocols, particularly the Stanford SAINT protocol, can produce rapid reductions in suicidal ideation. SAINT produced significant reductions in Beck Scale for Suicidal Ideation scores by day 2 of treatment. Standard TMS takes weeks, but accelerated protocols make rapid relief achievable.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Accelerated TMS protocols, particularly the Stanford SAINT protocol, can produce rapid reductions in suicidal ideation. SAINT produced significant reductions in Beck Scale for Suicidal Ideation scores by day 2 of treatment. Standard TMS takes weeks, but accelerated protocols make rapid relief achievable.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How does TMS compare to ketamine for suicidal ideation?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How does TMS compare to ketamine for suicidal ideation?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Ketamine can produce effects within hours while accelerated TMS requires several days. However, TMS is non-invasive with no cardiovascular effects or dissociation, making it preferable for patients who cannot tolerate ketamine's side effects. Combination approaches are also being explored.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Ketamine can produce effects within hours while accelerated TMS requires several days. However, TMS is non-invasive with no cardiovascular effects or dissociation, making it preferable for patients who cannot tolerate ketamine's side effects. Combination approaches are also being explored.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is emergency TMS available at hospitals?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is emergency TMS available at hospitals?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Emergency or accelerated TMS for suicidal ideation is available at academic medical centers with active TMS research programs, specialized TMS clinics offering accelerated protocols, and some psychiatric hospitals with neuromodulation capabilities. Access remains limited by insurance coverage and provider availability.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Emergency or accelerated TMS for suicidal ideation is available at academic medical centers with active TMS research programs, specialized TMS clinics offering accelerated protocols, and some psychiatric hospitals with neuromodulation capabilities. Access remains limited by insurance coverage and provider availability.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

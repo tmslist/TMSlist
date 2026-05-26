@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import EditorialHero from "../components/editorial/EditorialHero.astro";
 
 const pageTitle = "TMS Therapy Cost Calculator | Estimate Your Out-of-Pocket Cost | TMS List";
 const metaDescription = "Calculate your estimated TMS therapy cost based on your insurance, location, and treatment plan. Get personalized pricing estimates from verified clinics.";
@@ -15,41 +16,48 @@ const schema = JSON.stringify({
 ---
 
 <Layout title={pageTitle} description={metaDescription} schema={schema}>
-  <section class="bg-white pt-12 pb-8 border-b border-slate-100">
-    <div class="container mx-auto px-6 lg:px-12 max-w-4xl">
-      <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4 text-center">
-        TMS Therapy Cost Calculator
-      </h1>
-      <p class="text-lg text-slate-500 font-light leading-relaxed text-center max-w-2xl mx-auto">
-        Get an estimated cost for your TMS treatment based on your insurance, location, and treatment protocol.
-      </p>
-    </div>
-  </section>
+  <EditorialHero
+    eyebrow="Free · Confidential"
+    eyebrowDot="#22c55e"
+    title="What will TMS"
+    titleAccent="actually cost me?"
+    description="Get an estimated cost based on your insurance, location, and treatment protocol — in under 30 seconds."
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Cost Calculator" }]}
+    ctas={[
+      { label: "Start Calculator", href: "#calculator" },
+      { label: "TMS Cost Guide", href: "/tms-cost-guide/", variant: "outline" },
+    ]}
+    stats={[
+      { value: "$3–5K", label: "Avg. Patient Copay", color: "ink" },
+      { value: "30–36", label: "Sessions Covered", color: "accent" },
+      { value: "80%", label: "Plans Cover TMS", color: "warm" },
+    ]}
+  />
 
-  <main class="bg-slate-50/50 py-10">
+  <main class="bg-[var(--paper2)]/50 py-10">
     <div class="container mx-auto px-6 lg:px-12 max-w-3xl">
       <!-- International visitor notice (shown by geo.js) -->
-      <div id="intl-cost-notice" class="hidden mb-6 bg-blue-50 border border-blue-200 rounded-2xl p-6">
-        <h3 class="text-sm font-bold text-blue-900 mb-2" id="intl-cost-title">TMS Costs in Your Country</h3>
-        <p class="text-sm text-blue-700 leading-relaxed" id="intl-cost-body"></p>
-        <p class="text-xs text-blue-500 mt-3">The calculator below uses the US insurance model. For country-specific pricing, contact local clinics directly.</p>
+      <div id="intl-cost-notice" class="hidden mb-6 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-6">
+        <h3 class="text-sm font-bold text-[var(--accent)] mb-2" id="intl-cost-title">TMS Costs in Your Country</h3>
+        <p class="text-sm text-[var(--accent)] leading-relaxed" id="intl-cost-body"></p>
+        <p class="text-xs text-[var(--accent2)] mt-3">The calculator below uses the US insurance model. For country-specific pricing, contact local clinics directly.</p>
       </div>
 
-      <div class="bg-white rounded-3xl border border-slate-100 shadow-sm p-8" id="calculator">
+      <div class="bg-[var(--paper)] rounded-3xl border border-[var(--line)] shadow-sm p-8" id="calculator">
         <div class="space-y-6">
           <!-- Insurance -->
           <div>
-            <label class="block text-sm font-bold text-slate-900 mb-2">Do you have insurance?</label>
+            <label class="block text-sm font-bold text-[var(--ink)] mb-2">Do you have insurance?</label>
             <div class="grid grid-cols-2 gap-3" id="insurance-toggle">
-              <button data-value="yes" class="calc-toggle active py-3 px-4 rounded-xl border-2 border-blue-500 bg-blue-50 text-blue-700 font-semibold text-sm text-center transition-all">Yes, I have insurance</button>
-              <button data-value="no" class="calc-toggle py-3 px-4 rounded-xl border-2 border-slate-200 bg-white text-slate-600 font-semibold text-sm text-center transition-all hover:border-slate-300">No, self-pay</button>
+              <button data-value="yes" class="calc-toggle active py-3 px-4 rounded-xl border-2 border-[rgba(10,22,40,0.2)] bg-[var(--paper2)] text-[var(--accent)] font-semibold text-sm text-center transition-all">Yes, I have insurance</button>
+              <button data-value="no" class="calc-toggle py-3 px-4 rounded-xl border-2 border-[var(--line)] bg-[var(--paper)] text-[var(--muted)] font-semibold text-sm text-center transition-all hover:border-[var(--line)]">No, self-pay</button>
             </div>
           </div>
 
           <!-- Insurance Type -->
           <div id="insurance-type-section">
-            <label class="block text-sm font-bold text-slate-900 mb-2">Insurance Provider</label>
-            <select id="insurance-type" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+            <label class="block text-sm font-bold text-[var(--ink)] mb-2">Insurance Provider</label>
+            <select id="insurance-type" class="w-full px-4 py-3 rounded-xl border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]">
               <option value="commercial">Commercial (BCBS, Aetna, Cigna, UHC)</option>
               <option value="medicare">Medicare</option>
               <option value="medicaid">Medicaid</option>
@@ -60,8 +68,8 @@ const schema = JSON.stringify({
 
           <!-- Protocol -->
           <div>
-            <label class="block text-sm font-bold text-slate-900 mb-2">Treatment Protocol</label>
-            <select id="protocol" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+            <label class="block text-sm font-bold text-[var(--ink)] mb-2">Treatment Protocol</label>
+            <select id="protocol" class="w-full px-4 py-3 rounded-xl border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]">
               <option value="standard">Standard rTMS (36 sessions, 6-8 weeks)</option>
               <option value="tbs">Theta Burst (TBS) — 36 sessions, 3-minute treatments</option>
               <option value="accelerated">Accelerated/SAINT Protocol (5 days intensive)</option>
@@ -71,8 +79,8 @@ const schema = JSON.stringify({
 
           <!-- Deductible -->
           <div id="deductible-section">
-            <label class="block text-sm font-bold text-slate-900 mb-2">Annual Deductible Status</label>
-            <select id="deductible" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+            <label class="block text-sm font-bold text-[var(--ink)] mb-2">Annual Deductible Status</label>
+            <select id="deductible" class="w-full px-4 py-3 rounded-xl border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]">
               <option value="met">Deductible already met</option>
               <option value="partial">Partially met ($500-$1,500 remaining)</option>
               <option value="unmet">Deductible not met ($1,500-$5,000 remaining)</option>
@@ -80,23 +88,23 @@ const schema = JSON.stringify({
           </div>
 
           <!-- Calculate Button -->
-          <button id="calculate-btn" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-all shadow-sm">
+          <button id="calculate-btn" class="w-full py-4 bg-[var(--accent)] hover:bg-[var(--accent)] text-white font-bold rounded-xl text-sm transition-all shadow-sm">
             Calculate My Estimated Cost
           </button>
         </div>
 
         <!-- Results -->
-        <div id="results" class="hidden mt-8 pt-8 border-t border-slate-100">
-          <h2 class="text-xl font-bold text-slate-900 mb-6">Your Estimated TMS Cost</h2>
+        <div id="results" class="hidden mt-8 pt-8 border-t border-[var(--line)]">
+          <h2 class="text-xl font-bold text-[var(--ink)] mb-6">Your Estimated TMS Cost</h2>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
             <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 text-center">
               <p class="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-1">Low Estimate</p>
               <p class="text-2xl font-bold text-emerald-800" id="cost-low">$0</p>
             </div>
-            <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5 text-center ring-2 ring-blue-200">
-              <p class="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">Likely Cost</p>
-              <p class="text-2xl font-bold text-blue-800" id="cost-mid">$0</p>
+            <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-5 text-center ring-2 ring-[rgba(10,22,40,0.15)]">
+              <p class="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1">Likely Cost</p>
+              <p class="text-2xl font-bold text-[var(--accent)]" id="cost-mid">$0</p>
             </div>
             <div class="bg-amber-50 border border-amber-100 rounded-2xl p-5 text-center">
               <p class="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-1">High Estimate</p>
@@ -104,23 +112,23 @@ const schema = JSON.stringify({
             </div>
           </div>
 
-          <div class="bg-slate-50 rounded-xl p-5 mb-6">
-            <h3 class="text-sm font-bold text-slate-900 mb-2">Cost Breakdown</h3>
-            <p class="text-sm text-slate-600 leading-relaxed" id="cost-breakdown"></p>
+          <div class="bg-[var(--paper2)] rounded-xl p-5 mb-6">
+            <h3 class="text-sm font-bold text-[var(--ink)] mb-2">Cost Breakdown</h3>
+            <p class="text-sm text-[var(--muted)] leading-relaxed" id="cost-breakdown"></p>
           </div>
 
-          <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 mb-6">
-            <h3 class="text-sm font-bold text-blue-900 mb-2">Ways to Reduce Your Cost</h3>
-            <ul class="text-sm text-blue-700 space-y-1 list-disc pl-5" id="cost-tips"></ul>
+          <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 mb-6">
+            <h3 class="text-sm font-bold text-[var(--accent)] mb-2">Ways to Reduce Your Cost</h3>
+            <ul class="text-sm text-[var(--accent)] space-y-1 list-disc pl-5" id="cost-tips"></ul>
           </div>
 
-          <a href="/map/" class="inline-flex items-center justify-center w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-all">
+          <a href="/map/" class="inline-flex items-center justify-center w-full py-3.5 bg-[var(--accent)] hover:bg-[var(--accent)] text-white font-bold rounded-xl text-sm transition-all">
             Find TMS Clinics Near You
           </a>
         </div>
       </div>
 
-      <p class="text-xs text-slate-400 text-center mt-6 max-w-xl mx-auto leading-relaxed">
+      <p class="text-xs text-[var(--muted)] text-center mt-6 max-w-xl mx-auto leading-relaxed">
         These are estimates only and not a guarantee of actual costs. Actual costs depend on your specific insurance plan, deductible, copay/coinsurance, and clinic pricing. Always verify with your insurance company and clinic before starting treatment.
       </p>
     </div>
@@ -133,11 +141,11 @@ const schema = JSON.stringify({
   document.querySelectorAll('#insurance-toggle .calc-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('#insurance-toggle .calc-toggle').forEach(b => {
-        b.classList.remove('active', 'border-blue-500', 'bg-blue-50', 'text-blue-700');
-        b.classList.add('border-slate-200', 'bg-white', 'text-slate-600');
+        b.classList.remove('active', 'border-[rgba(10,22,40,0.2)]', 'bg-[var(--paper2)]', 'text-[var(--accent)]');
+        b.classList.add('border-[var(--line)]', 'bg-[var(--paper)]', 'text-[var(--muted)]');
       });
-      btn.classList.add('active', 'border-blue-500', 'bg-blue-50', 'text-blue-700');
-      btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-600');
+      btn.classList.add('active', 'border-[rgba(10,22,40,0.2)]', 'bg-[var(--paper2)]', 'text-[var(--accent)]');
+      btn.classList.remove('border-[var(--line)]', 'bg-[var(--paper)]', 'text-[var(--muted)]');
 
       hasInsurance.value = (btn as HTMLElement).dataset.value === 'yes';
       const sections = ['insurance-type-section', 'deductible-section'];

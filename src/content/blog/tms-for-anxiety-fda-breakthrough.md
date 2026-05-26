@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-28
 category: research
 tags: ["anxiety", "FDA", "GAD", "breakthrough therapy"]
-image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-anxiety-fda-breakthrough.svg"
 ---
 
 The FDA just granted Breakthrough Therapy designation for TMS therapy in the treatment of generalized anxiety disorder (GAD). If you live with chronic anxiety and have not found relief from medication, this is genuinely big news.
@@ -95,9 +95,9 @@ If you are living with persistent anxiety that has not responded to medication, 
 
 **Do not stop your current treatment.** This designation is exciting, but it does not help you today. Keep working with your psychiatrist on your current plan. TMS for anxiety will likely be used alongside medication, not as a replacement.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>FDA Breakthrough Therapy designation means TMS for generalized anxiety disorder has compelling early data and will be fast-tracked for approval.</li>
     <li>Phase 2 trial showed 60% response rate and 34% remission rate in treatment-resistant GAD patients.</li>
     <li>Anxiety TMS targets different brain regions (right DLPFC) than depression TMS (left DLPFC).</li>
@@ -107,47 +107,47 @@ If you are living with persistent anxiety that has not responded to medication, 
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What does FDA Breakthrough Therapy designation mean?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What does FDA Breakthrough Therapy designation mean?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">It means the FDA agrees that early clinical evidence for TMS in generalized anxiety disorder is compelling enough to fast-track the review process. The treatment is not yet approved, but it will receive priority review, more FDA meetings, and rolling data submission. This typically cuts 1-2 years off the standard approval timeline.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">It means the FDA agrees that early clinical evidence for TMS in generalized anxiety disorder is compelling enough to fast-track the review process. The treatment is not yet approved, but it will receive priority review, more FDA meetings, and rolling data submission. This typically cuts 1-2 years off the standard approval timeline.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">When will TMS for anxiety be FDA-approved?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">When will TMS for anxiety be FDA-approved?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Based on typical Breakthrough Therapy timelines, a decision is likely in late 2027 or early 2028, assuming Phase 3 trial data confirms Phase 2 results. That timeline assumes enrollment goes smoothly and no unexpected safety issues arise.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Based on typical Breakthrough Therapy timelines, a decision is likely in late 2027 or early 2028, assuming Phase 3 trial data confirms Phase 2 results. That timeline assumes enrollment goes smoothly and no unexpected safety issues arise.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I get TMS for anxiety covered by insurance now?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I get TMS for anxiety covered by insurance now?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Almost certainly not under the anxiety indication. Most insurance companies do not cover off-label TMS. However, if you have comorbid depression, you may be able to get TMS covered for the depression diagnosis and see anxiety improvement as a secondary benefit.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Almost certainly not under the anxiety indication. Most insurance companies do not cover off-label TMS. However, if you have comorbid depression, you may be able to get TMS covered for the depression diagnosis and see anxiety improvement as a secondary benefit.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS for anxiety different from TMS for depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS for anxiety different from TMS for depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Depression TMS typically targets the left dorsolateral prefrontal cortex with excitatory stimulation. Anxiety protocols often target the right DLPFC with inhibitory stimulation, or use different coil placements targeting the anterior cingulate cortex. The brain regions involved in anxiety are different from those involved in depression.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Depression TMS typically targets the left dorsolateral prefrontal cortex with excitatory stimulation. Anxiety protocols often target the right DLPFC with inhibitory stimulation, or use different coil placements targeting the anterior cingulate cortex. The brain regions involved in anxiety are different from those involved in depression.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How effective is TMS for anxiety compared to medication?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How effective is TMS for anxiety compared to medication?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The Phase 2 trial showed a 60% response rate in patients who had already failed at least one SSRI or SNRI. For comparison, treatment-resistant GAD patients typically see 30-40% response to additional medication trials. This suggests TMS could be significantly more effective than medication for people who have not responded to first-line treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The Phase 2 trial showed a 60% response rate in patients who had already failed at least one SSRI or SNRI. For comparison, treatment-resistant GAD patients typically see 30-40% response to additional medication trials. This suggests TMS could be significantly more effective than medication for people who have not responded to first-line treatment.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

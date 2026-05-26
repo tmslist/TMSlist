@@ -21,23 +21,23 @@ const schema = JSON.stringify({
     { name: "DMCA Notice", url: "/legal/dmca/" },
 ]}>
     <main class="min-h-screen">
-        <section class="relative bg-slate-950 overflow-hidden">
-            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 32px 32px;"></div>
-            <div class="absolute top-[-10%] left-[30%] w-[400px] h-[400px] bg-violet-600/10 rounded-full blur-[120px]"></div>
+        <section class="relative bg-[var(--paper)] border-b border-[var(--line)] overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(var(--line) 1px, transparent 0); background-size: 32px 32px; opacity:0.5;"></div>
+            <div class="absolute top-[-10%] left-[30%] w-[400px] h-[400px] bg-[rgba(201,101,74,0.06)] rounded-full blur-[120px]"></div>
             <div class="container mx-auto px-4 pt-12 pb-16 lg:pt-16 lg:pb-20 relative z-10">
-                <nav class="flex items-center gap-2 text-sm text-slate-500 mb-10" aria-label="Breadcrumb">
-                    <a href="/" class="hover:text-violet-400 transition-colors">Home</a>
-                    <span class="text-slate-600">/</span>
-                    <a href="/legal/" class="hover:text-violet-400 transition-colors">Legal</a>
-                    <span class="text-slate-600">/</span>
+                <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-10" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-[var(--accent2)] transition-colors">Home</a>
+                    <span class="text-[var(--muted)]">/</span>
+                    <a href="/legal/" class="hover:text-[var(--accent2)] transition-colors">Legal</a>
+                    <span class="text-[var(--muted)]">/</span>
                     <span class="text-white">DMCA Notice</span>
                 </nav>
-                <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">DMCA Notice</h1>
-                <p class="text-slate-400 text-lg max-w-2xl">Digital Millennium Copyright Act compliance and agent information.</p>
+                <h1 class="text-4xl lg:text-5xl font-bold text-[var(--ink)] mb-4 tracking-tight">DMCA Notice</h1>
+                <p class="text-[var(--muted)] text-lg max-w-2xl">Digital Millennium Copyright Act compliance and agent information.</p>
             </div>
         </section>
 
-        <section class="py-16 lg:py-20 bg-white">
+        <section class="py-16 lg:py-20 bg-[var(--paper)]">
             <div class="container mx-auto px-4 max-w-3xl">
                 <div class="prose prose-slate max-w-none">
 
@@ -48,13 +48,13 @@ const schema = JSON.stringify({
 
                     <h2>Designated Agent</h2>
                     <p>Our designated agent to receive notifications of alleged copyright infringement is:</p>
-                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 not-prose mb-6">
-                        <p class="font-semibold text-slate-900 mb-1">Copyright Agent</p>
-                        <p class="text-sm text-slate-700">
+                    <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 not-prose mb-6">
+                        <p class="font-semibold text-[var(--ink)] mb-1">Copyright Agent</p>
+                        <p class="text-sm text-[var(--ink2)]">
                             Rain AI LLC<br/>
                             30 N Gould St, Suite 400<br/>
                             Sheridan, WY 82801<br/>
-                            <a href="mailto:tmslistofficial@gmail.com" class="text-violet-600 hover:underline">tmslistofficial@gmail.com</a>
+                            <a href="mailto:tmslistofficial@gmail.com" class="text-[var(--accent)] hover:underline">tmslistofficial@gmail.com</a>
                         </p>
                     </div>
 
@@ -98,7 +98,7 @@ const schema = JSON.stringify({
                         For any questions regarding this DMCA notice, please contact us at <a href="mailto:tmslistofficial@gmail.com">tmslistofficial@gmail.com</a> or WhatsApp <a href="https://wa.me/919789565515">+91 978956 5515</a>.
                     </p>
 
-                    <p class="text-sm text-slate-500 mt-8">
+                    <p class="text-sm text-[var(--muted)] mt-8">
                         <strong>Company:</strong> Rain AI LLC, 30 N Gould St, Suite 400, Sheridan, WY 82801<br/>
                         <strong>Website:</strong> TMS List (tmslist.com)
                     </p>

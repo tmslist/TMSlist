@@ -111,15 +111,15 @@ const AVAILABLE_INTEGRATIONS: Omit<Integration, 'status' | 'connectedAt' | 'last
 ];
 
 const INTEGRATION_COLORS: Record<string, string> = {
-  salesforce: 'bg-blue-100 text-blue-700',
+  salesforce: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
   hubspot: 'bg-orange-100 text-orange-700',
   mailchimp: 'bg-amber-100 text-amber-700',
   zapier: 'bg-emerald-100 text-emerald-700',
-  stripe: 'bg-purple-100 text-purple-700',
+  stripe: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
   quickbooks: 'bg-green-100 text-green-700',
   sendgrid: 'bg-teal-100 text-teal-700',
   twilio: 'bg-red-100 text-red-700',
-  slack: 'bg-pink-100 text-pink-700',
+  slack: 'bg-[rgba(201,101,74,0.1)] text-[var(--warm)]',
 };
 
 const INTEGRATION_LOGOS: Record<string, string> = {
@@ -135,43 +135,43 @@ const INTEGRATION_LOGOS: Record<string, string> = {
 };
 
 function IntegrationCard({ integration, onConfigure }: { integration: Integration; onConfigure: (i: Integration) => void }) {
-  const colorClass = INTEGRATION_COLORS[integration.id] ?? 'bg-gray-100 text-gray-700';
+  const colorClass = INTEGRATION_COLORS[integration.id] ?? 'bg-[var(--paper2)] text-[var(--ink2)]';
   const initials = INTEGRATION_LOGOS[integration.id] ?? integration.name.slice(0, 2).toUpperCase();
 
   return (
-    <div className="border border-gray-200 rounded-xl p-5 hover:shadow-sm transition-shadow">
+    <div className="border border-[var(--line)] rounded-xl p-5 hover:shadow-sm transition-shadow">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
           <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm ${colorClass}`}>
             {initials}
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-900">{integration.name}</h3>
-            <p className="text-xs text-gray-500 mt-0.5">{integration.provider}</p>
+            <h3 className="text-sm font-semibold text-[var(--ink)]">{integration.name}</h3>
+            <p className="text-xs text-[var(--muted)] mt-0.5">{integration.provider}</p>
           </div>
         </div>
         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
           integration.status === 'connected' ? 'bg-emerald-100 text-emerald-700' :
           integration.status === 'error' ? 'bg-red-100 text-red-700' :
-          'bg-gray-100 text-gray-500'
+          'bg-[var(--paper2)] text-[var(--muted)]'
         }`}>
           {integration.status === 'connected' ? 'Connected' : integration.status === 'error' ? 'Error' : 'Disconnected'}
         </span>
       </div>
 
-      <p className="text-xs text-gray-500 mb-3">{integration.description}</p>
+      <p className="text-xs text-[var(--muted)] mb-3">{integration.description}</p>
 
       <div className="flex flex-wrap gap-1 mb-3">
         {integration.features.slice(0, 2).map(f => (
-          <span key={f} className="px-2 py-0.5 bg-gray-50 text-gray-600 text-xs rounded">{f}</span>
+          <span key={f} className="px-2 py-0.5 bg-[var(--paper2)] text-[var(--ink2)] text-xs rounded">{f}</span>
         ))}
         {integration.features.length > 2 && (
-          <span className="px-2 py-0.5 bg-gray-50 text-gray-600 text-xs rounded">+{integration.features.length - 2}</span>
+          <span className="px-2 py-0.5 bg-[var(--paper2)] text-[var(--ink2)] text-xs rounded">+{integration.features.length - 2}</span>
         )}
       </div>
 
       {integration.connectedAt && (
-        <p className="text-xs text-gray-400 mb-3">
+        <p className="text-xs text-[var(--muted)] mb-3">
           Connected {new Date(integration.connectedAt).toLocaleDateString()}
           {integration.lastSyncAt && ` · Synced ${new Date(integration.lastSyncAt).toLocaleDateString()}`}
         </p>
@@ -181,8 +181,8 @@ function IntegrationCard({ integration, onConfigure }: { integration: Integratio
         onClick={() => onConfigure(integration)}
         className={`w-full px-3 py-2 text-xs font-medium rounded-lg transition-colors ${
           integration.status === 'connected'
-            ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            : 'bg-violet-50 text-violet-700 hover:bg-violet-100'
+            ? 'bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
+            : 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)]'
         }`}
       >
         {integration.status === 'connected' ? 'Configure' : integration.status === 'error' ? 'Reconnect' : 'Connect'}
@@ -195,18 +195,18 @@ function ApiKeyField({ label, value, onChange }: { label: string; value: string;
   const [revealed, setRevealed] = useState(false);
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-[var(--ink2)] mb-1">{label}</label>
       <div className="flex gap-2">
         <input
           type={revealed ? 'text' : 'password'}
           value={value}
           onChange={e => onChange(e.target.value)}
           placeholder={`Enter ${label}`}
-          className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500 font-mono text-xs"
+          className="flex-1 rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] font-mono text-xs"
         />
         <button
           onClick={() => setRevealed(!revealed)}
-          className="px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 rounded-lg transition-colors"
+          className="px-3 py-2 text-sm text-[var(--muted)] hover:bg-[var(--paper2)] rounded-lg transition-colors"
         >
           {revealed ? 'Hide' : 'Show'}
         </button>
@@ -263,14 +263,14 @@ function IntegrationConfigPanel({
   };
 
   return (
-    <div className="bg-white rounded-xl border border-violet-200 p-6 shadow-sm">
+    <div className="bg-white rounded-xl border border-[rgba(10,22,40,0.15)] p-6 shadow-sm">
       <div className="flex items-center gap-3 mb-6">
-        <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm ${INTEGRATION_COLORS[integration.id] ?? 'bg-gray-100'}`}>
+        <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm ${INTEGRATION_COLORS[integration.id] ?? 'bg-[var(--paper2)]'}`}>
           {INTEGRATION_LOGOS[integration.id] ?? integration.name.slice(0, 2)}
         </div>
         <div>
-          <h3 className="text-base font-semibold text-gray-900">{integration.name} Configuration</h3>
-          <p className="text-xs text-gray-500">{integration.description}</p>
+          <h3 className="text-base font-semibold text-[var(--ink)]">{integration.name} Configuration</h3>
+          <p className="text-xs text-[var(--muted)]">{integration.description}</p>
         </div>
       </div>
 
@@ -286,15 +286,15 @@ function IntegrationConfigPanel({
 
         {integration.id === 'slack' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Slack Webhook URL</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Slack Webhook URL</label>
             <input
               type="url"
               value={webhookUrl}
               onChange={e => setWebhookUrl(e.target.value)}
               placeholder="https://hooks.slack.com/services/..."
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500 font-mono text-xs"
+              className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] font-mono text-xs"
             />
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-[var(--muted)] mt-1">
               Get your incoming webhook URL from Slack Apps → Incoming Webhooks
             </p>
           </div>
@@ -302,17 +302,17 @@ function IntegrationConfigPanel({
 
         {needsWebhook && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Webhook URL (from TMSList)</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Webhook URL (from TMSList)</label>
             <div className="flex gap-2">
               <input
                 type="text"
                 value={`https://tmslist.com/api/webhooks/${integration.id}`}
                 readOnly
-                className="flex-1 rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm font-mono text-xs text-gray-500"
+                className="flex-1 rounded-lg border border-[var(--line)] bg-[var(--paper2)] px-3 py-2 text-sm font-mono text-xs text-[var(--muted)]"
               />
               <button
                 onClick={() => navigator.clipboard.writeText(`https://tmslist.com/api/webhooks/${integration.id}`)}
-                className="px-3 py-2 text-sm text-violet-600 hover:bg-violet-50 rounded-lg transition-colors"
+                className="px-3 py-2 text-sm text-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] rounded-lg transition-colors"
               >
                 Copy
               </button>
@@ -333,14 +333,14 @@ function IntegrationConfigPanel({
         <button
           onClick={handleSave}
           disabled={saving}
-          className="px-5 py-2.5 bg-violet-600 text-white text-sm font-semibold rounded-xl hover:bg-violet-700 disabled:opacity-50 transition-colors"
+          className="px-5 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink)] disabled:opacity-50 transition-colors"
         >
           {saving ? 'Saving...' : 'Save Configuration'}
         </button>
         <button
           onClick={testConnection}
           disabled={testing}
-          className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+          className="px-5 py-2.5 text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-xl transition-colors"
         >
           {testing ? 'Testing...' : 'Test Connection'}
         </button>
@@ -352,7 +352,7 @@ function IntegrationConfigPanel({
             Disconnect
           </button>
         )}
-        <button onClick={onCancel} className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors">
+        <button onClick={onCancel} className="px-5 py-2.5 text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] rounded-xl transition-colors">
           Cancel
         </button>
       </div>
@@ -433,7 +433,7 @@ export default function AdminIntegrations() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-4 border-violet-200 border-t-violet-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[rgba(10,22,40,0.15)] border-t-[#0A1628] rounded-full animate-spin" />
       </div>
     );
   }
@@ -447,15 +447,15 @@ export default function AdminIntegrations() {
   return (
     <div>
       {toast && (
-        <div className="fixed top-4 right-4 z-50 bg-gray-900 text-white px-4 py-2.5 rounded-lg shadow-lg text-sm animate-in fade-in">
+        <div className="fixed top-4 right-4 z-50 bg-[var(--ink)] text-white px-4 py-2.5 rounded-lg shadow-lg text-sm animate-in fade-in">
           {toast}
         </div>
       )}
 
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Integrations</h1>
-          <p className="text-gray-500 mt-1">Third-party integrations and API connections</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Integrations</h1>
+          <p className="text-[var(--muted)] mt-1">Third-party integrations and API connections</p>
         </div>
         <div className="flex gap-2">
           {integrations.filter(i => i.status === 'connected').length > 0 && (
@@ -466,13 +466,13 @@ export default function AdminIntegrations() {
         </div>
       </div>
 
-      <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-6 w-fit">
+      <div className="flex gap-1 bg-[var(--paper2)] rounded-xl p-1 mb-6 w-fit">
         {(['all', 'connected', 'available'] as const).map(tab => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-              activeTab === tab ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+              activeTab === tab ? 'bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--ink2)] hover:text-[var(--ink)]'
             }`}
           >
             {tab === 'all' ? 'All' : tab === 'connected' ? 'Connected' : 'Available'}
@@ -496,34 +496,34 @@ export default function AdminIntegrations() {
           {filtered.length > 0 ? filtered.map(i => (
             <IntegrationCard key={i.id} integration={i} onConfigure={setConfiguring} />
           )) : (
-            <p className="col-span-3 text-sm text-gray-500 text-center py-8">No integrations found.</p>
+            <p className="col-span-3 text-sm text-[var(--muted)] text-center py-8">No integrations found.</p>
           )}
         </div>
       )}
 
       {activeTab === 'connected' && filtered.length === 0 && (
-        <div className="text-center py-16 text-gray-500">
+        <div className="text-center py-16 text-[var(--muted)]">
           <p className="text-lg font-medium">No connected integrations</p>
           <p className="text-sm mt-1">Browse available integrations to get started.</p>
         </div>
       )}
 
       {syncLogs.length > 0 && (
-        <div className="bg-white rounded-xl border border-gray-200 mt-8">
-          <div className="px-6 py-4 border-b border-gray-100">
-            <h3 className="text-sm font-semibold text-gray-900">Recent Sync Activity</h3>
+        <div className="bg-white rounded-xl border border-[var(--line)] mt-8">
+          <div className="px-6 py-4 border-b border-[var(--line)]">
+            <h3 className="text-sm font-semibold text-[var(--ink)]">Recent Sync Activity</h3>
           </div>
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-[var(--line)]">
             {syncLogs.slice(0, 10).map(log => (
               <div key={log.id} className="px-6 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span className={`px-2 py-0.5 rounded text-xs font-medium ${
-                    log.direction === 'import' ? 'bg-blue-50 text-blue-700' : 'bg-violet-50 text-violet-700'
+                    log.direction === 'import' ? 'bg-[var(--paper2)] text-[var(--ink)]' : 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)]'
                   }`}>
                     {log.direction}
                   </span>
-                  <span className="text-sm text-gray-700">{log.entityType}</span>
-                  <span className="text-xs text-gray-400">{log.recordsCount} records</span>
+                  <span className="text-sm text-[var(--ink2)]">{log.entityType}</span>
+                  <span className="text-xs text-[var(--muted)]">{log.recordsCount} records</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className={`px-2 py-0.5 rounded text-xs font-medium ${
@@ -533,7 +533,7 @@ export default function AdminIntegrations() {
                   }`}>
                     {log.status}
                   </span>
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-[var(--muted)]">
                     {log.completedAt ? new Date(log.completedAt).toLocaleString() : new Date(log.startedAt).toLocaleString()}
                   </span>
                 </div>

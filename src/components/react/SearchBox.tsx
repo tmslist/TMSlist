@@ -190,7 +190,7 @@ export default function SearchBox() {
   return (
     <div ref={containerRef} className="search-container relative w-full max-w-2xl mx-auto">
       <div className="relative">
-        <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--accent2)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
         <input
@@ -208,7 +208,7 @@ export default function SearchBox() {
             if (query.length < 2) setShowInitial(true);
           }}
           placeholder="Search clinics, cities, conditions..."
-          className="w-full pl-12 pr-12 py-4 rounded-2xl border border-gray-200 bg-white text-base shadow-sm focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all placeholder:text-gray-400"
+          className="w-full pl-12 pr-12 py-4 rounded-2xl border border-[var(--line)] bg-white text-base shadow-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-all placeholder:text-[var(--muted)]"
           role="combobox"
           aria-expanded={dropdownVisible}
           aria-controls="search-results"
@@ -217,13 +217,13 @@ export default function SearchBox() {
         />
         {loading && (
           <div className="absolute right-4 top-1/2 -translate-y-1/2">
-            <div className="w-5 h-5 border-2 border-violet-300 border-t-violet-600 rounded-full animate-spin" />
+            <div className="w-5 h-5 border-2 border-[rgba(10,22,40,0.2)] border-t-[#0A1628] rounded-full animate-spin" />
           </div>
         )}
         {query.length > 0 && !loading && (
           <button
             onClick={() => { setQuery(''); setResults([]); setIsOpen(false); inputRef.current?.focus(); }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted)] hover:text-[var(--ink2)] transition-colors"
             aria-label="Clear search"
           >
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -239,7 +239,7 @@ export default function SearchBox() {
           ref={listRef}
           id="search-results"
           role="listbox"
-          className="absolute z-50 w-full mt-2 bg-white rounded-2xl border border-gray-100 shadow-[0_12px_40px_rgb(0,0,0,0.08)] overflow-hidden max-h-[420px] overflow-y-auto"
+          className="absolute z-50 w-full mt-2 bg-white rounded-2xl border border-[var(--line)] shadow-[0_12px_40px_rgb(0,0,0,0.08)] overflow-hidden max-h-[420px] overflow-y-auto"
         >
           {/* Initial state: recent + conditions */}
           {query.length < 2 && showInitial && (
@@ -247,10 +247,10 @@ export default function SearchBox() {
               {recentSearches.length > 0 && (
                 <div className="p-2">
                   <div className="flex items-center justify-between px-3 py-2">
-                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Recent</span>
+                    <span className="text-[11px] font-semibold text-[var(--muted)] uppercase tracking-wider">Recent</span>
                     <button
                       onClick={() => { clearRecentSearches(); setRecentSearches([]); }}
-                      className="text-[11px] font-medium text-gray-400 hover:text-red-500 transition-colors"
+                      className="text-[11px] font-medium text-[var(--muted)] hover:text-red-500 transition-colors"
                     >
                       Clear
                     </button>
@@ -266,21 +266,21 @@ export default function SearchBox() {
                         aria-selected={idx === activeIndex}
                         onClick={() => navigateTo(r.query, r.url, 'recent')}
                         className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
-                          idx === activeIndex ? 'bg-violet-50' : 'hover:bg-gray-50'
+                          idx === activeIndex ? 'bg-[rgba(10,22,40,0.08)]' : 'hover:bg-[var(--paper2)]'
                         }`}
                       >
-                        <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 shrink-0">
+                        <div className="w-8 h-8 rounded-lg bg-[var(--paper2)] flex items-center justify-center text-[var(--muted)] shrink-0">
                           {TYPE_ICONS.recent}
                         </div>
-                        <span className="text-sm font-medium text-gray-700 truncate">{r.query}</span>
+                        <span className="text-sm font-medium text-[var(--ink2)] truncate">{r.query}</span>
                       </button>
                     );
                   })}
                 </div>
               )}
-              <div className="p-2 border-t border-gray-50">
+              <div className="p-2 border-t border-[var(--line)]">
                 <div className="px-3 py-2">
-                  <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Browse by Condition</span>
+                  <span className="text-[11px] font-semibold text-[var(--muted)] uppercase tracking-wider">Browse by Condition</span>
                 </div>
                 {CONDITION_SUGGESTIONS.map((c) => {
                   itemIndex++;
@@ -293,15 +293,15 @@ export default function SearchBox() {
                       aria-selected={idx === activeIndex}
                       onClick={() => navigateTo(c.label, c.value, 'condition')}
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
-                        idx === activeIndex ? 'bg-violet-50' : 'hover:bg-gray-50'
+                        idx === activeIndex ? 'bg-[rgba(10,22,40,0.08)]' : 'hover:bg-[var(--paper2)]'
                       }`}
                     >
-                      <div className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center text-violet-500 shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.08)] flex items-center justify-center text-[var(--accent2)] shrink-0">
                         {TYPE_ICONS.condition}
                       </div>
                       <div>
-                        <div className="text-sm font-medium text-gray-800">{c.label}</div>
-                        <div className="text-[11px] text-gray-400">{c.subLabel}</div>
+                        <div className="text-sm font-medium text-[var(--ink)]">{c.label}</div>
+                        <div className="text-[11px] text-[var(--muted)]">{c.subLabel}</div>
                       </div>
                     </button>
                   );
@@ -315,9 +315,9 @@ export default function SearchBox() {
             <>
               {/* Matched conditions */}
               {matchedConditions.length > 0 && (
-                <div className="p-2 border-b border-gray-50">
+                <div className="p-2 border-b border-[var(--line)]">
                   <div className="px-3 py-1.5">
-                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Conditions</span>
+                    <span className="text-[11px] font-semibold text-[var(--muted)] uppercase tracking-wider">Conditions</span>
                   </div>
                   {matchedConditions.map((c) => {
                     itemIndex++;
@@ -330,13 +330,13 @@ export default function SearchBox() {
                         aria-selected={idx === activeIndex}
                         onClick={() => navigateTo(c.label, c.value, 'condition')}
                         className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
-                          idx === activeIndex ? 'bg-violet-50' : 'hover:bg-gray-50'
+                          idx === activeIndex ? 'bg-[rgba(10,22,40,0.08)]' : 'hover:bg-[var(--paper2)]'
                         }`}
                       >
-                        <div className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center text-violet-500 shrink-0">
+                        <div className="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.08)] flex items-center justify-center text-[var(--accent2)] shrink-0">
                           {TYPE_ICONS.condition}
                         </div>
-                        <div className="text-sm font-medium text-gray-800">{c.label}</div>
+                        <div className="text-sm font-medium text-[var(--ink)]">{c.label}</div>
                       </button>
                     );
                   })}
@@ -347,7 +347,7 @@ export default function SearchBox() {
               {results.length > 0 && (
                 <div className="p-2">
                   <div className="px-3 py-1.5">
-                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Clinics</span>
+                    <span className="text-[11px] font-semibold text-[var(--muted)] uppercase tracking-wider">Clinics</span>
                   </div>
                   {results.map((clinic) => {
                     itemIndex++;
@@ -360,16 +360,16 @@ export default function SearchBox() {
                         aria-selected={idx === activeIndex}
                         onClick={() => navigateTo(clinic.name, `/clinic/${clinic.slug}`, 'clinic')}
                         className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
-                          idx === activeIndex ? 'bg-violet-50' : 'hover:bg-gray-50'
+                          idx === activeIndex ? 'bg-[rgba(10,22,40,0.08)]' : 'hover:bg-[var(--paper2)]'
                         }`}
                       >
                         <div className="flex items-center gap-3 min-w-0">
-                          <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500 shrink-0">
+                          <div className="w-8 h-8 rounded-lg bg-[var(--paper2)] flex items-center justify-center text-[var(--accent2)] shrink-0">
                             {TYPE_ICONS.clinic}
                           </div>
                           <div className="min-w-0">
-                            <div className="text-sm font-medium text-gray-800 truncate">{clinic.name}</div>
-                            <div className="text-[11px] text-gray-400">{clinic.city}, {clinic.state}</div>
+                            <div className="text-sm font-medium text-[var(--ink)] truncate">{clinic.name}</div>
+                            <div className="text-[11px] text-[var(--muted)]">{clinic.city}, {clinic.state}</div>
                           </div>
                         </div>
                         <div className="flex items-center gap-2 shrink-0">
@@ -391,13 +391,13 @@ export default function SearchBox() {
               {/* No results */}
               {!loading && results.length === 0 && matchedConditions.length === 0 && (
                 <div className="p-8 text-center">
-                  <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-12 h-12 rounded-full bg-[var(--paper2)] flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-6 h-6 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   </div>
-                  <p className="text-sm font-medium text-gray-500">No results for "{query}"</p>
-                  <p className="text-xs text-gray-400 mt-1">Try a city name, state, or condition</p>
+                  <p className="text-sm font-medium text-[var(--muted)]">No results for "{query}"</p>
+                  <p className="text-xs text-[var(--muted)] mt-1">Try a city name, state, or condition</p>
                 </div>
               )}
 
@@ -406,10 +406,10 @@ export default function SearchBox() {
                 <div className="p-2 space-y-1">
                   {[1, 2, 3].map(i => (
                     <div key={i} className="flex items-center gap-3 px-3 py-2.5 animate-pulse">
-                      <div className="w-8 h-8 rounded-lg bg-gray-100" />
+                      <div className="w-8 h-8 rounded-lg bg-[var(--paper2)]" />
                       <div className="flex-1 space-y-1.5">
-                        <div className="h-3.5 bg-gray-100 rounded w-3/4" />
-                        <div className="h-2.5 bg-gray-50 rounded w-1/2" />
+                        <div className="h-3.5 bg-[var(--paper2)] rounded w-3/4" />
+                        <div className="h-2.5 bg-[var(--paper2)] rounded w-1/2" />
                       </div>
                     </div>
                   ))}
@@ -419,18 +419,18 @@ export default function SearchBox() {
           )}
 
           {/* Footer hint */}
-          <div className="px-4 py-2.5 bg-gray-50/80 border-t border-gray-100 flex items-center justify-between">
-            <div className="flex items-center gap-3 text-[11px] text-gray-400">
+          <div className="px-4 py-2.5 bg-[var(--paper2)] border-t border-[var(--line)] flex items-center justify-between">
+            <div className="flex items-center gap-3 text-[11px] text-[var(--muted)]">
               <span className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 bg-white rounded border border-gray-200 text-[10px] font-mono">↑↓</kbd>
+                <kbd className="px-1.5 py-0.5 bg-white rounded border border-[var(--line)] text-[10px] font-mono">↑↓</kbd>
                 navigate
               </span>
               <span className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 bg-white rounded border border-gray-200 text-[10px] font-mono">↵</kbd>
+                <kbd className="px-1.5 py-0.5 bg-white rounded border border-[var(--line)] text-[10px] font-mono">↵</kbd>
                 select
               </span>
               <span className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 bg-white rounded border border-gray-200 text-[10px] font-mono">esc</kbd>
+                <kbd className="px-1.5 py-0.5 bg-white rounded border border-[var(--line)] text-[10px] font-mono">esc</kbd>
                 close
               </span>
             </div>

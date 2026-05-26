@@ -65,16 +65,16 @@ If coverage is initially denied, request a peer-to-peer review — having a phys
     </div>
     <div>
       <p class="text-xs font-bold text-amber-600 uppercase tracking-wider mb-1">Important</p>
-      <p class="text-slate-800 leading-relaxed">TMS for teens under 18 is an off-label use. It is not FDA-approved for this age group. Make sure your treating physician has experience with adolescent TMS protocols before proceeding.</p>
+      <p class="text-[var(--ink)] leading-relaxed">TMS for teens under 18 is an off-label use. It is not FDA-approved for this age group. Make sure your treating physician has experience with adolescent TMS protocols before proceeding.</p>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Find a TMS Clinic Near You</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>

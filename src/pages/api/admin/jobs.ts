@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, desc, ilike, and, sql } from 'drizzle-orm';
 import { db } from '../../../db';
 import { jobs, clinics } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 

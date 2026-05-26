@@ -80,6 +80,11 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // Mark email as verified only when it matches the session — but DO NOT
+    // auto-approve based on that alone. Auto-approve was previously exploitable:
+    // any logged-in viewer/patient could auto-publish 1-star reviews on
+    // competitors at scale just by typing their session email. All public
+    // reviews now go through admin moderation regardless of identity.
     const isVerifiedEmail = parsed.data.userEmail?.toLowerCase() === session.email.toLowerCase();
 
     // Block clinic owners from reviewing their own clinic
@@ -116,8 +121,8 @@ export const POST: APIRoute = async ({ request }) => {
       body: escapeHtml(parsed.data.body),
     };
 
-    // Auto-approve verified reviews; others need moderation
-    const approved = isVerifiedEmail;
+    // All reviews require moderation regardless of session-email match.
+    const approved = false;
     const review = await createReview({
       ...sanitized,
       verified: isVerifiedEmail,

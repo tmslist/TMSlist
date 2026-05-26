@@ -89,20 +89,20 @@ export default function AdminImport({ initialBatches = [] }: AdminImportProps) {
 
   return (
     <div>
-      <div className="flex gap-4 border-b border-gray-200 dark:border-gray-700 mb-6">
+      <div className="flex gap-4 border-b border-[var(--line)] dark:border-[var(--ink2)] mb-6">
         <button onClick={() => setActiveTab('import')}
           className={`pb-3 px-1 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'import'
-              ? 'border-blue-600 text-blue-600 dark:text-blue-400'
-              : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+              ? 'border-[var(--ink)] text-[var(--ink)] dark:text-[var(--ink2)]'
+              : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)] dark:hover:text-[var(--line)]'
           }`}>
           Import
         </button>
         <button onClick={() => setActiveTab('history')}
           className={`pb-3 px-1 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'history'
-              ? 'border-blue-600 text-blue-600 dark:text-blue-400'
-              : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+              ? 'border-[var(--ink)] text-[var(--ink)] dark:text-[var(--ink2)]'
+              : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)] dark:hover:text-[var(--line)]'
           }`}>
           History
         </button>
@@ -112,7 +112,7 @@ export default function AdminImport({ initialBatches = [] }: AdminImportProps) {
         <div className="space-y-6">
           {/* Type selector */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-2">
               Import Type
             </label>
             <div className="flex gap-3">
@@ -121,8 +121,8 @@ export default function AdminImport({ initialBatches = [] }: AdminImportProps) {
                   onClick={() => setImportType(type)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     importType === type
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                      ? 'bg-[var(--ink)] text-white'
+                      : 'bg-[var(--paper2)] text-[var(--ink2)] dark:bg-[var(--ink2)] dark:text-[var(--line)] hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)]'
                   }`}>
                   {type.charAt(0).toUpperCase() + type.slice(1)}s
                 </button>
@@ -131,55 +131,55 @@ export default function AdminImport({ initialBatches = [] }: AdminImportProps) {
           </div>
 
           {/* Required columns hint */}
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-            <p className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">
+          <div className="bg-[var(--paper2)] dark:bg-[var(--paper2)] border border-[var(--line)] dark:border-[var(--ink)] rounded-lg p-4">
+            <p className="text-sm font-medium text-[var(--ink)] dark:text-[var(--muted)] mb-2">
               Required columns for {importType} import:
             </p>
             <div className="flex flex-wrap gap-2">
               {importType === 'clinic' && ['name', 'city', 'state', 'address', 'phone', 'zip', 'country', 'website', 'email', 'machines', 'specialties', 'insurances', 'description'].map(col => (
-                <span key={col} className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded font-mono">{col}</span>
+                <span key={col} className="text-xs px-2 py-1 bg-[rgba(10,22,40,0.1)] dark:bg-[var(--paper2)] text-[var(--ink)] dark:text-[var(--muted)] rounded font-mono">{col}</span>
               ))}
               {importType === 'doctor' && ['name', 'clinic_slug', 'credential', 'title', 'specialties', 'bio', 'first_name', 'last_name'].map(col => (
-                <span key={col} className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded font-mono">{col}</span>
+                <span key={col} className="text-xs px-2 py-1 bg-[rgba(10,22,40,0.1)] dark:bg-[var(--paper2)] text-[var(--ink)] dark:text-[var(--muted)] rounded font-mono">{col}</span>
               ))}
               {importType === 'treatment' && ['name', 'slug', 'full_name', 'description', 'fda_approved', 'conditions', 'session_duration'].map(col => (
-                <span key={col} className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded font-mono">{col}</span>
+                <span key={col} className="text-xs px-2 py-1 bg-[rgba(10,22,40,0.1)] dark:bg-[var(--paper2)] text-[var(--ink)] dark:text-[var(--muted)] rounded font-mono">{col}</span>
               ))}
             </div>
           </div>
 
           {/* File upload */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-2">
               Upload CSV
             </label>
             <input type="file" accept=".csv" onChange={handleFileChange}
-              className="block w-full text-sm text-gray-500 dark:text-gray-400
+              className="block w-full text-sm text-[var(--muted)] dark:text-[var(--muted)]
                 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0
-                file:text-sm file:font-medium file:bg-blue-600 file:text-white
-                hover:file:bg-blue-700 dark:file:bg-blue-700 dark:hover:file:bg-blue-800" />
+                file:text-sm file:font-medium file:bg-[var(--ink)] file:text-white
+                hover:file:bg-[var(--ink)] dark:file:bg-[var(--ink)] dark:hover:file:bg-[var(--ink)]" />
           </div>
 
           {/* Preview */}
           {preview && (
             <div>
-              <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <p className="text-sm font-medium text-[var(--ink2)] dark:text-[var(--line)] mb-2">
                 Preview (first 5 rows)
               </p>
               <div className="overflow-x-auto">
                 <table className="min-w-full text-sm">
                   <thead>
-                    <tr className="border-b border-gray-200 dark:border-gray-700">
+                    <tr className="border-b border-[var(--line)] dark:border-[var(--ink2)]">
                       {Object.keys(preview[0]).map(key => (
-                        <th key={key} className="text-left px-3 py-2 font-medium text-gray-500 dark:text-gray-400">{key}</th>
+                        <th key={key} className="text-left px-3 py-2 font-medium text-[var(--muted)] dark:text-[var(--muted)]">{key}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {preview.map((row, ri) => (
-                      <tr key={ri} className="border-b border-gray-100 dark:border-gray-800">
+                      <tr key={ri} className="border-b border-[var(--line)] dark:border-[var(--ink2)]">
                         {Object.values(row).map((val, vi) => (
-                          <td key={vi} className="px-3 py-2 text-gray-600 dark:text-gray-400 truncate max-w-xs">{String(val)}</td>
+                          <td key={vi} className="px-3 py-2 text-[var(--ink2)] dark:text-[var(--muted)] truncate max-w-xs">{String(val)}</td>
                         ))}
                       </tr>
                     ))}
@@ -190,8 +190,8 @@ export default function AdminImport({ initialBatches = [] }: AdminImportProps) {
           )}
 
           <button onClick={handleImport} disabled={!file || uploading}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium
-              hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            className="px-6 py-2 bg-[var(--ink)] text-white rounded-lg text-sm font-medium
+              hover:bg-[var(--ink)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
             {uploading ? 'Importing...' : 'Start Import'}
           </button>
 
@@ -227,28 +227,28 @@ export default function AdminImport({ initialBatches = [] }: AdminImportProps) {
       {activeTab === 'history' && (
         <div>
           {batches.length === 0 ? (
-            <p className="text-sm text-gray-500 dark:text-gray-400">No import history yet.</p>
+            <p className="text-sm text-[var(--muted)] dark:text-[var(--muted)]">No import history yet.</p>
           ) : (
             <div className="space-y-3">
               {batches.map(batch => (
                 <div key={batch.id}
-                  className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  className="flex items-center justify-between p-4 bg-white dark:bg-[var(--ink2)] border border-[var(--line)] dark:border-[var(--ink2)] rounded-lg">
                   <div>
-                    <p className="font-medium text-sm text-gray-900 dark:text-white">
+                    <p className="font-medium text-sm text-[var(--ink)] dark:text-white">
                       {batch.type.charAt(0).toUpperCase() + batch.type.slice(1)} Import
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-[var(--muted)] dark:text-[var(--muted)]">
                       {batch.filename} · {new Date(batch.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="flex items-center gap-4">
                     <span className={`text-xs px-2 py-1 rounded-full font-medium ${
                       batch.status === 'completed' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' :
-                      batch.status === 'processing' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' :
+                      batch.status === 'processing' ? 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)] dark:bg-[var(--paper2)] dark:text-[var(--muted)]' :
                       batch.status === 'failed' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300' :
-                      'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400'
+                      'bg-[var(--paper2)] text-[var(--ink2)] dark:bg-[var(--ink2)] dark:text-[var(--muted)]'
                     }`}>{batch.status}</span>
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                    <span className="text-sm text-[var(--ink2)] dark:text-[var(--muted)]">
                       {batch.successCount}/{batch.totalRows} success
                     </span>
                   </div>

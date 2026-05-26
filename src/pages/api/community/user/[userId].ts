@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getUserForumProfile, getUserForumPosts, getUserForumComments } from '../../../../db/forumQueries';
+import { getUserForumProfile, getUserForumPosts, getUserForumComments } from '../../../../db/forumQueries.js';
 
 export const prerender = false;
 

@@ -105,33 +105,33 @@ export default function AdminConsentManager() {
 
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-900 dark:text-gray-100">Consent Manager</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">GDPR/CCPA compliance tracking and consent records</p>
+          <h1 className="text-3xl font-semibold text-[var(--ink)] dark:text-[var(--line)]">Consent Manager</h1>
+          <p className="text-[var(--muted)] dark:text-[var(--muted)] mt-1 text-sm">GDPR/CCPA compliance tracking and consent records</p>
         </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         {[
-          { label: 'Total Records', value: stats.total, color: 'text-gray-900 dark:text-gray-100' },
-          { label: 'GDPR Consents', value: stats.gdprCount, color: 'text-blue-600 dark:text-blue-400' },
-          { label: 'CCPA Consents', value: stats.ccpCount, color: 'text-violet-600 dark:text-violet-400' },
+          { label: 'Total Records', value: stats.total, color: 'text-[var(--ink)] dark:text-[var(--line)]' },
+          { label: 'GDPR Consents', value: stats.gdprCount, color: 'text-[var(--ink)] dark:text-[var(--ink2)]' },
+          { label: 'CCPA Consents', value: stats.ccpCount, color: 'text-[var(--ink)] dark:text-[var(--ink2)]' },
           { label: 'Withdrawn', value: stats.withdrawnCount, color: 'text-red-600 dark:text-red-400' },
         ].map(stat => (
-          <div key={stat.label} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">{stat.label}</p>
+          <div key={stat.label} className="bg-white dark:bg-[var(--ink2)] rounded-xl border border-[var(--line)] dark:border-[var(--ink2)] p-4">
+            <p className="text-xs font-medium text-[var(--muted)] dark:text-[var(--muted)] uppercase tracking-wide">{stat.label}</p>
             <p className={`text-2xl font-bold mt-1 ${stat.color}`}>{stat.value}</p>
           </div>
         ))}
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 mb-6">
+      <div className="bg-white dark:bg-[var(--ink2)] rounded-xl border border-[var(--line)] dark:border-[var(--ink2)] p-4 mb-6">
         <div className="flex flex-wrap gap-4">
           <select
             value={typeFilter}
             onChange={e => { setTypeFilter(e.target.value); setPage(0); }}
-            className="rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="rounded-lg border border-[var(--line)] dark:border-[var(--ink2)] px-3 py-2 text-sm bg-white dark:bg-[var(--ink2)] text-[var(--ink)] dark:text-[var(--line)]"
           >
             <option value="">All Types</option>
             {CONSENT_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
@@ -141,7 +141,7 @@ export default function AdminConsentManager() {
               <button
                 key={s}
                 onClick={() => { setStatusFilter(s); setPage(0); }}
-                className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${statusFilter === s ? 'bg-violet-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}`}
+                className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${statusFilter === s ? 'bg-[var(--ink)] text-white' : 'bg-[var(--paper2)] dark:bg-[var(--ink2)] text-[var(--ink2)] dark:text-[var(--line)] hover:bg-[var(--paper2)] dark:hover:bg-[var(--muted)]'}`}
               >
                 {s === 'all' ? 'All' : s === 'granted' ? 'Granted' : 'Withdrawn'}
               </button>
@@ -151,39 +151,39 @@ export default function AdminConsentManager() {
       </div>
 
       {/* Table */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-[var(--ink2)] rounded-xl border border-[var(--line)] dark:border-[var(--ink2)] overflow-hidden">
         {loading ? (
           <div className="p-16 text-center">
-            <div className="inline-block w-6 h-6 border-2 border-gray-200 border-t-violet-600 rounded-full animate-spin mb-3" />
-            <p className="text-gray-400 text-sm">Loading...</p>
+            <div className="inline-block w-6 h-6 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-3" />
+            <p className="text-[var(--muted)] text-sm">Loading...</p>
           </div>
         ) : filteredRecords.length === 0 ? (
           <div className="p-16 text-center">
-            <p className="text-gray-500 dark:text-gray-400">No consent records found</p>
+            <p className="text-[var(--muted)] dark:text-[var(--muted)]">No consent records found</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-100 dark:divide-gray-700">
-              <thead className="bg-gray-50 dark:bg-gray-900/50">
+            <table className="min-w-full divide-y divide-[var(--line)] dark:divide-[var(--line)]">
+              <thead className="bg-[var(--paper2)] dark:bg-[var(--paper2)]">
                 <tr>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Type</th>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">User</th>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Status</th>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Date</th>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">IP</th>
-                  <th className="px-5 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Actions</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] dark:text-[var(--muted)] uppercase">Type</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] dark:text-[var(--muted)] uppercase">User</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] dark:text-[var(--muted)] uppercase">Status</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] dark:text-[var(--muted)] uppercase">Date</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] dark:text-[var(--muted)] uppercase">IP</th>
+                  <th className="px-5 py-3 text-left text-xs font-medium text-[var(--muted)] dark:text-[var(--muted)] uppercase">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+              <tbody className="divide-y divide-[var(--line)] dark:divide-[var(--line)]">
                 {filteredRecords.map(record => (
-                  <tr key={record.id} className="hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                  <tr key={record.id} className="hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)] transition-colors">
                     <td className="px-5 py-3.5">
-                      <span className="px-2.5 py-1 bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400 text-xs font-semibold rounded-lg">
+                      <span className="px-2.5 py-1 bg-[rgba(10,22,40,0.08)] dark:bg-[#0A1628]/30 text-[var(--ink)] dark:text-[var(--ink2)] text-xs font-semibold rounded-lg">
                         {record.consentType}
                       </span>
                     </td>
-                    <td className="px-5 py-3.5 text-sm text-gray-900 dark:text-gray-100">
-                      {record.email || <span className="text-gray-400 italic">Anonymous</span>}
+                    <td className="px-5 py-3.5 text-sm text-[var(--ink)] dark:text-[var(--line)]">
+                      {record.email || <span className="text-[var(--muted)] italic">Anonymous</span>}
                     </td>
                     <td className="px-5 py-3.5">
                       {record.withdrawnAt || !record.granted ? (
@@ -192,8 +192,8 @@ export default function AdminConsentManager() {
                         <span className="px-2.5 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold rounded-full">Granted</span>
                       )}
                     </td>
-                    <td className="px-5 py-3.5 text-xs text-gray-500 dark:text-gray-400">{formatDate(record.createdAt)}</td>
-                    <td className="px-5 py-3.5 text-xs font-mono text-gray-500 dark:text-gray-400">{record.ipAddress || '-'}</td>
+                    <td className="px-5 py-3.5 text-xs text-[var(--muted)] dark:text-[var(--muted)]">{formatDate(record.createdAt)}</td>
+                    <td className="px-5 py-3.5 text-xs font-mono text-[var(--muted)] dark:text-[var(--muted)]">{record.ipAddress || '-'}</td>
                     <td className="px-5 py-3.5">
                       {!record.withdrawnAt && record.granted && (
                         <button
@@ -215,10 +215,10 @@ export default function AdminConsentManager() {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between mt-4">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Page {page + 1} of {totalPages} ({total} total)</p>
+          <p className="text-sm text-[var(--muted)] dark:text-[var(--muted)]">Page {page + 1} of {totalPages} ({total} total)</p>
           <div className="flex gap-2">
-            <button onClick={() => setPage(Math.max(0, page - 1))} disabled={page === 0} className="px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-gray-700">Previous</button>
-            <button onClick={() => setPage(Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1} className="px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-gray-700">Next</button>
+            <button onClick={() => setPage(Math.max(0, page - 1))} disabled={page === 0} className="px-3 py-1.5 bg-white dark:bg-[var(--ink2)] border border-[var(--line)] dark:border-[var(--ink2)] rounded-lg text-sm disabled:opacity-40 hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)]">Previous</button>
+            <button onClick={() => setPage(Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1} className="px-3 py-1.5 bg-white dark:bg-[var(--ink2)] border border-[var(--line)] dark:border-[var(--ink2)] rounded-lg text-sm disabled:opacity-40 hover:bg-[var(--paper2)] dark:hover:bg-[var(--ink2)]">Next</button>
           </div>
         </div>
       )}

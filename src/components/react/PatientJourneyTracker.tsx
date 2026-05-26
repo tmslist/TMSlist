@@ -37,9 +37,9 @@ const SIDE_EFFECT_DEFS: SideEffectDef[] = [
 ];
 
 const MILESTONES = [
-  { session: 10, label: 'Session 10', color: 'bg-rose-500', ringColor: 'ring-rose-400' },
-  { session: 20, label: 'Session 20', color: 'bg-blue-500', ringColor: 'ring-blue-400' },
-  { session: 36, label: 'Session 36', color: 'bg-amber-400', ringColor: 'ring-amber-300' },
+  { session: 10, label: 'S10', color: 'bg-[var(--warm)]', ringColor: 'ring-[var(--warm)]' },
+  { session: 20, label: 'S20', color: 'bg-[var(--accent2)]', ringColor: 'ring-[var(--accent2)]' },
+  { session: 36, label: 'S36', color: 'bg-amber-500', ringColor: 'ring-amber-400' },
 ];
 
 // ─── Generate realistic session data ─────────────────────────────────────────
@@ -113,7 +113,7 @@ function PHQ9Chart({ sessions }: { sessions: SessionData[] }) {
 
   return (
     <div className="flex flex-col gap-1.5">
-      <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">PHQ-9 Score Trend</p>
+      <p className="text-[10px] font-semibold text-[var(--muted)] uppercase tracking-wider">PHQ-9 Score Trend</p>
       <div className="flex items-end gap-1 h-[60px]">
         {phqData.map((d, i) => {
           const barH = (d.score / max) * height;
@@ -121,15 +121,15 @@ function PHQ9Chart({ sessions }: { sessions: SessionData[] }) {
           return (
             <div key={d.session} className="flex-1 flex flex-col items-center gap-0.5">
               <div
-                className={`w-full rounded-sm transition-all ${isLast ? 'bg-emerald-500' : 'bg-violet-500/60'}`}
+                className={`w-full rounded-sm transition-all ${isLast ? 'bg-emerald-500' : 'bg-[var(--line)]'}`}
                 style={{ height: `${barH}px`, minHeight: '4px' }}
               />
-              <span className="text-[9px] text-slate-500">{d.score}</span>
+              <span className="text-[9px] text-[var(--muted)]">{d.score}</span>
             </div>
           );
         })}
       </div>
-      <p className="text-[9px] text-slate-500 text-center">Session {phqData[0].session} → {phqData[phqData.length - 1].session}</p>
+      <p className="text-[9px] text-[var(--muted)] text-center">Session {phqData[0].session} → {phqData[phqData.length - 1].session}</p>
     </div>
   );
 }
@@ -141,7 +141,7 @@ function SideEffectsTrend({ sessions }: { sessions: SessionData[] }) {
 
   return (
     <div className="flex flex-col gap-1.5">
-      <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Side Effect Severity</p>
+      <p className="text-[10px] font-semibold text-[var(--muted)] uppercase tracking-wider">Side Effect Severity</p>
       <div className="flex items-center gap-1 h-[60px]">
         {completedSessions.slice(-8).map((s, i) => {
           const total = Object.values(s.sideEffects).reduce((a, b) => a + b, 0);
@@ -149,14 +149,14 @@ function SideEffectsTrend({ sessions }: { sessions: SessionData[] }) {
           return (
             <div key={s.session} className="flex-1 flex flex-col items-center gap-0.5 justify-end">
               <div
-                className="w-full rounded-sm bg-cyan-500/50"
+                className="w-full rounded-sm bg-[var(--accent2)]/50"
                 style={{ height: `${dotH}px`, minHeight: '4px' }}
               />
             </div>
           );
         })}
       </div>
-      <p className="text-[9px] text-slate-500 text-center">Last 8 sessions</p>
+      <p className="text-[9px] text-[var(--muted)] text-center">Last 8 sessions</p>
     </div>
   );
 }
@@ -199,78 +199,78 @@ export default function PatientJourneyTracker() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto text-white">
+    <div className="w-full max-w-4xl mx-auto text-[var(--ink)]">
 
       {/* ── Progress Metrics Bar ─────────────────────────────────────── */}
-      <div className="mb-6 glass-panel rounded-2xl p-4">
+      <div className="mb-6 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-4">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Treatment Progress</p>
+            <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold">Treatment Progress</p>
             <p className="text-sm font-bold mt-0.5">
-              <span className="text-emerald-400">{completedCount}</span>
-              <span className="text-slate-400">/36 sessions completed</span>
+              <span className="text-emerald-600">{completedCount}</span>
+              <span className="text-[var(--muted)]">/36 sessions completed</span>
             </p>
           </div>
           <div className="text-right">
-            <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Completion</p>
-            <p className="text-lg font-bold text-violet-400">{completionPct}%</p>
+            <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold">Completion</p>
+            <p className="text-lg font-bold text-[var(--accent2)]">{completionPct}%</p>
           </div>
         </div>
 
         {/* Progress bar */}
-        <div className="w-full h-2 bg-slate-700/50 rounded-full overflow-hidden mb-3">
+        <div className="w-full h-2 bg-[var(--line)] rounded-full overflow-hidden mb-3">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-violet-600 to-cyan-400 transition-all duration-700"
+            className="h-full rounded-full bg-[var(--ink)] transition-all duration-700"
             style={{ width: `${completionPct}%` }}
           />
         </div>
 
         {/* Secondary metrics */}
         <div className="grid grid-cols-2 gap-3 mt-3">
-          <div className="bg-slate-800/40 rounded-xl p-3">
-            <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Weeks Remaining</p>
-            <p className="text-sm font-bold text-cyan-400">~{weeksRemaining} weeks</p>
+          <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
+            <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-1">Weeks Remaining</p>
+            <p className="text-sm font-bold text-[var(--accent2)]">~{weeksRemaining} weeks</p>
           </div>
-          <div className="bg-slate-800/40 rounded-xl p-3">
-            <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Current PHQ-9</p>
-            <p className="text-sm font-bold text-emerald-400">8 / 27</p>
+          <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
+            <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-1">Current PHQ-9</p>
+            <p className="text-sm font-bold text-emerald-600">8 / 27</p>
           </div>
         </div>
 
         {/* Mini charts */}
         <div className="grid grid-cols-2 gap-3 mt-3">
-          <div className="bg-slate-800/40 rounded-xl p-3">
+          <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
             <PHQ9Chart sessions={sessions} />
           </div>
-          <div className="bg-slate-800/40 rounded-xl p-3">
+          <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
             <SideEffectsTrend sessions={sessions} />
           </div>
         </div>
       </div>
 
       {/* ── Visual Timeline ─────────────────────────────────────────── */}
-      <div className="glass-panel rounded-2xl p-5 mb-4">
+      <div className="bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-5 mb-4">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-bold text-white">Session Timeline</h3>
+          <h3 className="text-sm font-bold text-[var(--ink)]">Session Timeline</h3>
           <div className="flex items-center gap-3 text-[10px]">
             <span className="flex items-center gap-1">
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-              <span className="text-slate-400">Pending</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--muted)]" />
+              <span className="text-[var(--muted)]">Pending</span>
             </span>
             <span className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span className="text-slate-400">Done</span>
+              <span className="text-[var(--muted)]">Done</span>
             </span>
             <span className="flex items-center gap-1">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 ring-2 ring-cyan-400/40" />
-              <span className="text-slate-400">Now</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent2)] ring-2 ring-[rgba(10,22,40,0.15)]/40" />
+              <span className="text-[var(--muted)]">Now</span>
             </span>
           </div>
         </div>
 
         {/* Zoom controls */}
         <div className="flex items-center gap-3 mb-4">
-          <label className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Zoom:</label>
+          <label className="text-[10px] text-[var(--muted)] font-semibold uppercase tracking-wider">Zoom:</label>
           {[5, 10, 18, 36].map(size => (
             <button
               key={size}
@@ -280,8 +280,8 @@ export default function PatientJourneyTracker() {
               }}
               className={`text-[10px] font-semibold px-2.5 py-1 rounded-lg transition-all ${
                 windowSize === size
-                  ? 'bg-violet-600 text-white'
-                  : 'bg-slate-700/60 text-slate-400 hover:bg-slate-600/60'
+                  ? 'bg-[var(--ink)] text-white'
+                  : 'bg-[var(--paper)] border border-[var(--line)] text-[var(--muted)] hover:border-[var(--ink)] hover:text-[var(--ink)]'
               }`}
             >
               {size === 36 ? 'All' : `${size}s`}
@@ -291,19 +291,19 @@ export default function PatientJourneyTracker() {
             <div className="flex items-center gap-1 ml-2">
               <button
                 onClick={() => setZoomStart(Math.max(0, zoomStart - 1))}
-                className="w-5 h-5 rounded bg-slate-700/60 flex items-center justify-center text-slate-400 hover:bg-slate-600/60 transition-colors"
+                className="w-5 h-5 rounded bg-[var(--paper)] border border-[var(--line)] flex items-center justify-center text-[var(--muted)] hover:border-[var(--ink)] hover:text-[var(--ink)] disabled:opacity-40 transition-colors"
                 disabled={zoomStart === 0}
               >
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
-              <span className="text-[9px] text-slate-500 px-1">
+              <span className="text-[9px] text-[var(--muted)] px-1">
                 {zoomStart + 1}–{Math.min(zoomStart + windowSize, 36)}
               </span>
               <button
                 onClick={() => setZoomStart(Math.min(36 - windowSize, zoomStart + 1))}
-                className="w-5 h-5 rounded bg-slate-700/60 flex items-center justify-center text-slate-400 hover:bg-slate-600/60 transition-colors"
+                className="w-5 h-5 rounded bg-[var(--paper)] border border-[var(--line)] flex items-center justify-center text-[var(--muted)] hover:border-[var(--ink)] hover:text-[var(--ink)] disabled:opacity-40 transition-colors"
                 disabled={zoomStart >= 36 - windowSize}
               >
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -322,10 +322,10 @@ export default function PatientJourneyTracker() {
               const milestone = MILESTONES.find(m => m.session === s.session);
               const isSelected = selectedSession?.session === s.session;
 
-              let dotClass = 'bg-slate-600 hover:bg-slate-500';
+              let dotClass = 'bg-[var(--muted)] hover:bg-[var(--muted)]';
               if (s.status === 'completed') dotClass = 'bg-emerald-500 hover:bg-emerald-400';
-              if (s.status === 'current') dotClass = 'bg-cyan-400 pulse-glow';
-              if (s.status === 'missed') dotClass = 'bg-rose-500 hover:bg-rose-400';
+              if (s.status === 'current') dotClass = 'bg-[var(--accent2)] pulse-glow';
+              if (s.status === 'missed') dotClass = 'bg-[var(--warm)] hover:bg-[var(--warm-light)]';
 
               return (
                 <button
@@ -335,9 +335,9 @@ export default function PatientJourneyTracker() {
                   className={`
                     relative w-5 h-5 rounded-full transition-all duration-200 flex items-center justify-center
                     ${dotClass}
-                    ${isSelected ? 'ring-2 ring-white/50 scale-110' : ''}
-                    ${s.status === 'current' ? 'ring-[3px] ring-cyan-400/30 scale-125' : ''}
-                    ${isMilestone && s.status !== 'current' ? `ring-2 ${milestone?.ringColor} ring-offset-1 ring-offset-slate-900` : ''}
+                    ${isSelected ? 'ring-2 ring-[rgba(10,22,40,0.35)] scale-110' : ''}
+                    ${s.status === 'current' ? 'ring-[3px] ring-[rgba(10,22,40,0.20)] scale-125' : ''}
+                    ${isMilestone && s.status !== 'current' ? `ring-2 ${milestone?.ringColor} ring-offset-1 ring-offset-[var(--paper)]` : ''}
                   `}
                 >
                   {isMilestone && s.status !== 'current' && (
@@ -354,11 +354,11 @@ export default function PatientJourneyTracker() {
           </div>
 
           {/* Milestone legend */}
-          <div className="flex items-center gap-4 mt-4 pt-3 border-t border-slate-700/40">
+          <div className="flex items-center gap-4 mt-4 pt-3 border-t border-[var(--line)]">
             {MILESTONES.map(m => (
               <div key={m.session} className="flex items-center gap-1.5">
                 <span className={`w-2.5 h-2.5 rounded-full ${m.color}`} />
-                <span className="text-[10px] text-slate-400">Session {m.session}</span>
+                <span className="text-[10px] text-[var(--muted)]">Session {m.session}</span>
               </div>
             ))}
           </div>
@@ -368,34 +368,34 @@ export default function PatientJourneyTracker() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
         {/* ── Session Details Panel ──────────────────────────────────── */}
-        <div className="glass-panel rounded-2xl p-5">
-          <h3 className="text-sm font-bold text-white mb-4">
+        <div className="bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-5">
+          <h3 className="text-sm font-bold text-[var(--ink)] mb-4">
             {selectedSession ? `Session ${selectedSession.session} Details` : 'Select a Session'}
           </h3>
 
           {selectedSession ? (
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-2">
-                <div className="bg-slate-800/40 rounded-xl p-3">
-                  <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Date</p>
-                  <p className="text-[11px] text-slate-200 font-medium">
+                <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
+                  <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-1">Date</p>
+                  <p className="text-[11px] text-[var(--ink)] font-medium">
                     {new Date(selectedSession.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </p>
                 </div>
-                <div className="bg-slate-800/40 rounded-xl p-3">
-                  <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Duration</p>
-                  <p className="text-[11px] text-slate-200 font-medium">{selectedSession.duration} min</p>
+                <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
+                  <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-1">Duration</p>
+                  <p className="text-[11px] text-[var(--ink)] font-medium">{selectedSession.duration} min</p>
                 </div>
-                <div className="bg-slate-800/40 rounded-xl p-3">
-                  <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Pulses</p>
-                  <p className="text-[11px] text-slate-200 font-medium">{selectedSession.pulses.toLocaleString()}</p>
+                <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
+                  <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-1">Pulses</p>
+                  <p className="text-[11px] text-[var(--ink)] font-medium">{selectedSession.pulses.toLocaleString()}</p>
                 </div>
-                <div className="bg-slate-800/40 rounded-xl p-3">
-                  <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Status</p>
+                <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
+                  <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-1">Status</p>
                   <p className={`text-[11px] font-semibold ${
-                    selectedSession.status === 'completed' ? 'text-emerald-400' :
-                    selectedSession.status === 'current' ? 'text-cyan-400' :
-                    selectedSession.status === 'missed' ? 'text-rose-400' : 'text-slate-400'
+                    selectedSession.status === 'completed' ? 'text-emerald-600' :
+                    selectedSession.status === 'current' ? 'text-[var(--accent2)]' :
+                    selectedSession.status === 'missed' ? 'text-[var(--warm)]' : 'text-[var(--muted)]'
                   }`}>
                     {selectedSession.status.charAt(0).toUpperCase() + selectedSession.status.slice(1)}
                   </p>
@@ -403,32 +403,32 @@ export default function PatientJourneyTracker() {
               </div>
 
               {selectedSession.phq9 !== undefined && (
-                <div className="bg-slate-800/40 rounded-xl p-3">
-                  <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-1">PHQ-9 Score</p>
+                <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
+                  <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-1">PHQ-9 Score</p>
                   <div className="flex items-center gap-2">
-                    <div className="flex-1 h-2 bg-slate-700/50 rounded-full overflow-hidden">
+                    <div className="flex-1 h-2 bg-[var(--line)] rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full transition-all ${
                           selectedSession.phq9 <= 5 ? 'bg-emerald-500' :
-                          selectedSession.phq9 <= 10 ? 'bg-cyan-500' :
-                          selectedSession.phq9 <= 20 ? 'bg-amber-500' : 'bg-rose-500'
+                          selectedSession.phq9 <= 10 ? 'bg-[var(--accent2)]' :
+                          selectedSession.phq9 <= 20 ? 'bg-amber-500' : 'bg-[var(--warm)]'
                         }`}
                         style={{ width: `${(selectedSession.phq9 / 27) * 100}%` }}
                       />
                     </div>
-                    <span className="text-[11px] font-bold text-slate-200">{selectedSession.phq9}/27</span>
+                    <span className="text-[11px] font-bold text-[var(--ink)]">{selectedSession.phq9}/27</span>
                   </div>
                 </div>
               )}
 
-              <div className="bg-slate-800/40 rounded-xl p-3">
-                <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-2">Session Notes</p>
-                <p className="text-[11px] text-slate-300 leading-relaxed">{selectedSession.notes}</p>
+              <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
+                <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-2">Session Notes</p>
+                <p className="text-[11px] text-[var(--ink)] leading-relaxed">{selectedSession.notes}</p>
               </div>
 
               {Object.keys(selectedSession.sideEffects).length > 0 && (
-                <div className="bg-slate-800/40 rounded-xl p-3">
-                  <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-2">Side Effects</p>
+                <div className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
+                  <p className="text-[10px] uppercase tracking-wider text-[var(--muted)] font-semibold mb-2">Side Effects</p>
                   <div className="flex flex-wrap gap-1.5">
                     {SIDE_EFFECT_DEFS
                       .filter(se => (selectedSession.sideEffects[se.name] ?? 0) > 0)
@@ -436,9 +436,9 @@ export default function PatientJourneyTracker() {
                         const sev = selectedSession.sideEffects[se.name] ?? 1;
                         return (
                           <span key={se.name} className={`text-[10px] font-semibold px-2 py-1 rounded-lg ${
-                            sev >= 3 ? 'bg-rose-500/20 text-rose-400' :
-                            sev >= 2 ? 'bg-amber-500/20 text-amber-400' :
-                            'bg-slate-700/60 text-slate-400'
+                            sev >= 3 ? 'bg-[rgba(201,101,74,0.12)] text-[var(--warm)]' :
+                            sev >= 2 ? 'bg-amber-500/20 text-amber-700' :
+                            'bg-[var(--paper)] border border-[var(--line)] text-[var(--muted)]'
                           }`}>
                             {se.name.replace(/([A-Z])/g, ' $1').trim()}
                           </span>
@@ -450,33 +450,33 @@ export default function PatientJourneyTracker() {
             </div>
           ) : (
             <div className="text-center py-8">
-              <svg className="w-10 h-10 text-slate-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+              <svg className="w-10 h-10 text-[var(--ink2)] mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
               </svg>
-              <p className="text-[11px] text-slate-500">Click any session dot above to view details</p>
+              <p className="text-[11px] text-[var(--muted)]">Click any session dot above to view details</p>
             </div>
           )}
         </div>
 
         {/* ── Side Effects Log ─────────────────────────────────────────── */}
-        <div className="glass-panel rounded-2xl p-5">
-          <h3 className="text-sm font-bold text-white mb-4">Side Effects Log</h3>
+        <div className="bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-5">
+          <h3 className="text-sm font-bold text-[var(--ink)] mb-4">Side Effects Log</h3>
 
           <div className="space-y-2">
             {SIDE_EFFECT_DEFS.map(se => {
               const severity = selectedSession?.sideEffects[se.name] ?? 0;
               return (
-                <div key={se.name} className="bg-slate-800/40 rounded-xl p-3">
+                <div key={se.name} className="bg-[var(--paper)] border border-[var(--line)] rounded-xl p-3">
                   <div className="flex items-start justify-between mb-1">
                     <div>
-                      <p className="text-[11px] font-semibold text-slate-200">{se.name.replace(/([A-Z])/g, ' $1').trim()}</p>
-                      <p className="text-[9px] text-slate-500 mt-0.5">{se.description}</p>
+                      <p className="text-[11px] font-semibold text-[var(--ink)]">{se.name.replace(/([A-Z])/g, ' $1').trim()}</p>
+                      <p className="text-[9px] text-[var(--muted)] mt-0.5">{se.description}</p>
                     </div>
                     {severity > 0 && (
                       <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${
-                        severity >= 3 ? 'bg-rose-500/20 text-rose-400' :
-                        severity >= 2 ? 'bg-amber-500/20 text-amber-400' :
-                        'bg-slate-700/60 text-slate-400'
+                        severity >= 3 ? 'bg-[rgba(201,101,74,0.12)] text-[var(--warm)]' :
+                        severity >= 2 ? 'bg-amber-500/20 text-amber-700' :
+                        'bg-[var(--paper)] border border-[var(--line)] text-[var(--muted)]'
                       }`}>
                         {severity}/4
                       </span>
@@ -487,12 +487,11 @@ export default function PatientJourneyTracker() {
                       <div
                         key={level}
                         className={`flex-1 h-1.5 rounded-full transition-all ${
-                          level === 0 ? 'bg-slate-600' :
                           level <= severity ? (
-                            severity >= 3 ? 'bg-rose-500' :
+                            severity >= 3 ? 'bg-[var(--warm)]' :
                             severity >= 2 ? 'bg-amber-500' :
-                            'bg-violet-500'
-                          ) : 'bg-slate-700/60'
+                            'bg-[var(--ink2)]'
+                          ) : 'bg-[var(--line)]'
                         }`}
                       />
                     ))}
@@ -506,10 +505,10 @@ export default function PatientJourneyTracker() {
       </div>
 
       {/* ── Clinical Notes ─────────────────────────────────────────── */}
-      <div className="glass-panel rounded-2xl p-5 mt-4">
+      <div className="bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-5 mt-4">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-bold text-white">Clinical Notes</h3>
-          <span className="text-[10px] text-slate-500">{clinicalNote.length}/500</span>
+          <h3 className="text-sm font-bold text-[var(--ink)]">Clinical Notes</h3>
+          <span className="text-[10px] text-[var(--muted)]">{clinicalNote.length}/500</span>
         </div>
         <textarea
           ref={noteRef}
@@ -517,7 +516,7 @@ export default function PatientJourneyTracker() {
           onChange={e => setClinicalNote(e.target.value.slice(0, 500))}
           placeholder="Add clinical observations, patient feedback, medication changes..."
           rows={4}
-          className="w-full bg-slate-800/50 border border-slate-700/60 rounded-xl px-4 py-3 text-[11px] text-slate-200 placeholder-slate-500 outline-none focus:border-violet-500/60 focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
+          className="w-full bg-[var(--paper)] border border-[var(--line)] rounded-xl px-4 py-3 text-[12px] text-[var(--ink)] placeholder-[var(--muted)] outline-none focus:border-[var(--ink)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)] transition-all resize-none"
         />
         <div className="flex items-center gap-3 mt-3">
           <button
@@ -525,12 +524,12 @@ export default function PatientJourneyTracker() {
             className={`px-4 py-2 rounded-xl text-[11px] font-semibold transition-all ${
               noteSaved
                 ? 'bg-emerald-600 text-white'
-                : 'bg-violet-600 hover:bg-violet-500 text-white'
+                : 'bg-[var(--ink)] hover:bg-[var(--ink2)] text-white'
             }`}
           >
             {noteSaved ? 'Saved!' : 'Save Note'}
           </button>
-          <span className="text-[10px] text-slate-500">Stored locally on this device</span>
+          <span className="text-[10px] text-[var(--muted)]">Stored locally on this device</span>
         </div>
       </div>
 
@@ -538,7 +537,7 @@ export default function PatientJourneyTracker() {
       <div className="flex items-center gap-3 mt-4">
         <button
           onClick={exportPDF}
-          className="px-5 py-2.5 bg-slate-800/60 border border-slate-700/60 rounded-xl text-[11px] font-semibold text-slate-300 hover:bg-slate-700/60 hover:text-white transition-all flex items-center gap-2"
+          className="px-5 py-2.5 bg-[var(--paper)] border border-[var(--line)] rounded-xl text-[11px] font-semibold text-[var(--ink)] hover:border-[var(--ink)] hover:bg-[var(--paper2)] transition-all flex items-center gap-2"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
@@ -550,7 +549,7 @@ export default function PatientJourneyTracker() {
             setCurrentSession(Math.min(36, currentSession + 1));
             setSessions(generateSessions(Math.min(36, currentSession + 1)));
           }}
-          className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 rounded-xl text-[11px] font-semibold text-white transition-all"
+          className="px-5 py-2.5 bg-[var(--ink)] hover:bg-[var(--ink2)] rounded-xl text-[11px] font-semibold text-white transition-all"
         >
           Simulate Next Session
         </button>

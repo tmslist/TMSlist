@@ -3,7 +3,7 @@ import { getSessionFromRequest, hasRole } from '../../utils/auth';
 import { createSubscriptionCheckout, PLANS } from '../../db/subscriptions';
 import type { PlanId } from '../../db/subscriptions';
 import { eq } from 'drizzle-orm';
-import { db } from '../../db';
+import { db } from '../../db/index.js';
 import { users, clinics } from '../../db/schema';
 
 export const prerender = false;

@@ -8,7 +8,7 @@ const metaDescription = "Join 1,100+ TMS clinics on the leading patient director
 <Layout title={pageTitle} description={metaDescription}>
 
 <style>
-  :root{--ink:#0A1628;--ink2:#1E2A3B;--muted:#5A6B82;--warm:#C9654A;--line:#E6EAF0;--paper:#FBFAF7;--paper2:#F4F1EA;--accent:#1B4B5A;}
+  :root{--ink:#0A1628;--ink2:#1E2A3B;--muted:#5A6B82;--warm:#C9654A;--line:#E6EAF0;--paper:#FBFAF7;--paper2:#F4F1EA;--accent:#0A1628;}
   .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-0.02em}
   .linky{position:relative;display:inline-block}
   .linky::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
@@ -134,7 +134,7 @@ const metaDescription = "Join 1,100+ TMS clinics on the leading patient director
         },
       ].map((b) => (
         <div class="rounded-2xl p-8" style="background:var(--paper2); border:1px solid var(--line)">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(27,75,90,0.1); color:var(--accent)">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(10,22,40,0.1); color:var(--accent)">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" set:html={b.icon}></svg>
           </div>
           <h3 class="serif mb-3" style="font-size:22px; line-height:1.3; color:var(--ink)">{b.t}</h3>
@@ -193,7 +193,7 @@ const metaDescription = "Join 1,100+ TMS clinics on the leading patient director
             { t: 'Protocol & device showcase', d: 'Highlight your TMS devices and treatment protocols. Patients filter by device — be where they look.' },
           ].map((item) => (
             <div class="flex gap-4">
-              <div class="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(27,75,90,0.1); color:var(--accent)">
+              <div class="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(10,22,40,0.1); color:var(--accent)">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
@@ -267,7 +267,7 @@ const metaDescription = "Join 1,100+ TMS clinics on the leading patient director
               <label class="block text-[12px] font-semibold uppercase tracking-wide mb-3" style="color:var(--ink)">TMS Devices (select all that apply)</label>
               <div class="grid grid-cols-2 gap-2">
                 {['NeuroStar', 'BrainsWay', 'MagVenture MagPro', 'Magstim', 'Other'].map((d) => (
-                  <label class="flex items-center gap-3 text-[13px] p-3 rounded-xl cursor-pointer transition-colors hover:bg-white" style="border:1px solid var(--line)">
+                  <label class="flex items-center gap-3 text-[13px] p-3 rounded-xl cursor-pointer transition-colors hover:bg-[var(--paper)]" style="border:1px solid var(--line)">
                     <input type="checkbox" name="devices" value={d} class="accent-[color:var(--accent)]" />
                     <span style="color:var(--ink)">{d}</span>
                   </label>
@@ -278,7 +278,7 @@ const metaDescription = "Join 1,100+ TMS clinics on the leading patient director
               <label class="block text-[12px] font-semibold uppercase tracking-wide mb-3" style="color:var(--ink)">Protocols offered</label>
               <div class="grid grid-cols-2 gap-2">
                 {['Standard 10Hz', 'Theta Burst (iTBS)', 'SAINT', 'Deep TMS', 'Low-frequency (1Hz)'].map((p) => (
-                  <label class="flex items-center gap-3 text-[13px] p-3 rounded-xl cursor-pointer transition-colors hover:bg-white" style="border:1px solid var(--line)">
+                  <label class="flex items-center gap-3 text-[13px] p-3 rounded-xl cursor-pointer transition-colors hover:bg-[var(--paper)]" style="border:1px solid var(--line)">
                     <input type="checkbox" name="protocols" value={p} class="accent-[color:var(--accent)]" />
                     <span style="color:var(--ink)">{p}</span>
                   </label>
@@ -499,7 +499,7 @@ document.getElementById('clinic-signup-form')?.addEventListener('submit', async 
     if (res.ok) {
       form.innerHTML = `
         <div style="text-align:center; padding:3rem 0;">
-          <div style="width:4rem;height:4rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;background:rgba(27,75,90,0.1)">
+          <div style="width:4rem;height:4rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;background:rgba(10,22,40,0.1)">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div style="font-family:'Instrument Serif',Georgia,serif;font-size:2rem;color:var(--ink);margin-bottom:.75rem">You're on the list.</div>

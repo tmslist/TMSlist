@@ -61,20 +61,20 @@ const description = `Expert answers to common questions about ${category.name.to
     <main class="min-h-screen py-12">
         <div class="container mx-auto px-4">
             <!-- Breadcrumb -->
-            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
-                <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-                <span class="text-slate-300">/</span>
-                <a href="/questions/" class="hover:text-violet-600 transition-colors">Questions</a>
-                <span class="text-slate-300">/</span>
-                <span class="text-slate-700 font-medium">{category.name}</span>
+            <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-8 flex-wrap" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-[var(--accent)] transition-colors">Home</a>
+                <span class="text-[var(--muted)]">/</span>
+                <a href="/questions/" class="hover:text-[var(--accent)] transition-colors">Questions</a>
+                <span class="text-[var(--muted)]">/</span>
+                <span class="text-[var(--ink2)] font-medium">{category.name}</span>
             </nav>
 
             <!-- Header -->
             <header class="mb-12 text-center">
-                <h1 class="text-4xl md:text-5xl font-semibold text-gray-900 mb-4">
+                <h1 class="text-4xl md:text-5xl font-semibold text-[var(--ink)] mb-4">
                     {category.name}
                 </h1>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                <p class="text-xl text-[var(--muted)] max-w-2xl mx-auto">
                     {category.description}
                 </p>
             </header>
@@ -86,15 +86,15 @@ const description = `Expert answers to common questions about ${category.name.to
                         {questions.map((q) => (
                             <a
                                 href={`/questions/${q.slug}/`}
-                                class="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-violet-500 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
+                                class="group block p-6 bg-[var(--paper)] rounded-xl border border-[var(--line)] hover:border-[var(--ink2)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all"
                             >
-                                <h2 class="font-semibold text-lg text-gray-900 group-hover:text-violet-600 transition-colors mb-3">
+                                <h2 class="font-semibold text-lg text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors mb-3">
                                     {q.question}
                                 </h2>
-                                <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+                                <p class="text-[var(--muted)] text-sm line-clamp-3 mb-4">
                                     {(q.quickAnswer || q.answer || '').replace(/<[^>]*>/g, '').substring(0, 150)}
                                 </p>
-                                <span class="text-violet-600 text-sm font-semibold group-hover:underline">
+                                <span class="text-[var(--accent)] text-sm font-semibold group-hover:underline">
                                     Read Answer →
                                 </span>
                             </a>
@@ -102,12 +102,12 @@ const description = `Expert answers to common questions about ${category.name.to
                     </div>
                 ) : (
                     <div class="text-center py-12">
-                        <p class="text-gray-600 text-lg">
+                        <p class="text-[var(--muted)] text-lg">
                             No questions found for this category yet.
                         </p>
                         <a
                             href="/questions/"
-                            class="inline-block mt-4 text-violet-600 font-semibold hover:underline"
+                            class="inline-block mt-4 text-[var(--accent)] font-semibold hover:underline"
                         >
                             Browse all questions →
                         </a>
@@ -117,25 +117,25 @@ const description = `Expert answers to common questions about ${category.name.to
 
             <!-- CTA -->
             <section
-                class="mt-16 bg-white rounded-2xl p-8 md:p-12 shadow-lg text-center border border-gray-200"
+                class="mt-16 bg-[var(--paper)] rounded-2xl p-8 md:p-12 shadow-lg text-center border border-[var(--line)]"
             >
-                <h2 class="text-3xl font-semibold text-gray-900 mb-4">
+                <h2 class="text-3xl font-semibold text-[var(--ink)] mb-4">
                     Still have questions?
                 </h2>
-                <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                <p class="text-[var(--muted)] mb-8 max-w-2xl mx-auto">
                     Our comprehensive guide to TMS therapy has helped thousands
                     of patients make informed decisions.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a
                         href="/questions/"
-                        class="px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+                        class="px-6 py-3 bg-[var(--paper2)] text-[var(--ink2)] font-semibold rounded-lg hover:bg-[var(--paper2)] transition-colors"
                     >
                         Browse All Topics
                     </a>
                     <button
                         onclick="document.dispatchEvent(new Event('open-enquiry-modal'))"
-                        class="px-6 py-3 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition-colors shadow-md"
+                        class="px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-lg hover:bg-[var(--ink2)] transition-colors shadow-md"
                     >
                         Talk to a Specialist
                     </button>

@@ -4,7 +4,7 @@ description: "Researchers are exploring TMS as a tool to enhance cognition in Al
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-alzheimers.svg"
 tags: ["tms", "alzheimers", "cognitive-enhancement", "working-memory", "theta-burst", "dementia", "neurodegeneration"]
 ---
 
@@ -127,35 +127,35 @@ Despite these caveats, TMS represents one of the most promising non-pharmacologi
 
 *Clinical trials of TMS for Alzheimer's are ongoing. Patients interested in participating can search ClinicalTrials.gov for active studies in their area.*
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for Alzheimer's disease?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for Alzheimer's disease?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS for Alzheimer's is not FDA-cleared and remains an investigational treatment. The evidence is promising but still preliminary. TMS is not covered by Medicare or most insurance plans for Alzheimer's specifically.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS for Alzheimer's is not FDA-cleared and remains an investigational treatment. The evidence is promising but still preliminary. TMS is not covered by Medicare or most insurance plans for Alzheimer's specifically.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS improve memory in Alzheimer's patients?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS improve memory in Alzheimer's patients?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Research shows TMS can produce short-term improvements in specific cognitive tasks, including working memory and executive function. A 2019 meta-analysis found statistically significant improvements, though benefits are typically modest and require ongoing maintenance treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Research shows TMS can produce short-term improvements in specific cognitive tasks, including working memory and executive function. A 2019 meta-analysis found statistically significant improvements, though benefits are typically modest and require ongoing maintenance treatment.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Who benefits most from TMS for Alzheimer's?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Who benefits most from TMS for Alzheimer's?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Patients with mild cognitive impairment or mild Alzheimer's (MMSE > 18), preserved DLPFC function, good overall physical health, and supportive caregivers tend to benefit most. Those with moderate to severe dementia are less likely to benefit.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Patients with mild cognitive impairment or mild Alzheimer's (MMSE > 18), preserved DLPFC function, good overall physical health, and supportive caregivers tend to benefit most. Those with moderate to severe dementia are less likely to benefit.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

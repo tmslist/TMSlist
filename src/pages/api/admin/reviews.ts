@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
-import { eq, desc, sql } from 'drizzle-orm';
+import { eq, desc, sql, and } from 'drizzle-orm';
 import { db } from '../../../db';
-import { reviews, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { reviews, clinics, auditLog } from '../../../db/schema';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 import { updateClinicRating } from '../../../db/queries';
 
 export const prerender = false;
@@ -25,56 +25,56 @@ export const GET: APIRoute = async ({ request }) => {
 
   try {
     const url = new URL(request.url);
-    const status = url.searchParams.get('status');
+    const statusParam = url.searchParams.get('status');
     const limit = Math.max(1, Math.min(parseInt(url.searchParams.get('limit') || '50'), 200));
     const offset = Math.max(0, parseInt(url.searchParams.get('offset') || '0'));
 
-    const whereMap: Record<string, string> = {
-      pending: 'WHERE approved = false',
-      approved: 'WHERE approved = true',
-      all: '',
-    };
-    const where = whereMap[status || 'all'] || whereMap.all;
-    const orderBy = 'ORDER BY created_at DESC';
-    const limitOffset = `LIMIT ${limit} OFFSET ${offset}`;
+    // Validated where clause using Drizzle conditions — no string interpolation
+    // into SQL. Previous version used `sql.raw(where)` with hardcoded fragments
+    // which was injection-safe today but a copy-paste hazard for future code.
+    const statusFilter =
+      statusParam === 'pending' ? eq(reviews.approved, false) :
+      statusParam === 'approved' ? eq(reviews.approved, true) :
+      undefined;
 
-    const rowsResult = await db.execute(sql`
-      SELECT id, clinic_id, user_id, user_name, user_email, rating, title, body,
-             source, verified, approved, helpful_count, unhelpful_count, created_at,
-             clinic_name, clinic_slug, owner_response, owner_response_at
-      FROM reviews ${sql.raw(where)} ${sql.raw(orderBy)} ${sql.raw(limitOffset)}
-    `);
+    const rows = await db
+      .select({
+        id: reviews.id,
+        clinicId: reviews.clinicId,
+        userId: reviews.userId,
+        userName: reviews.userName,
+        userEmail: reviews.userEmail,
+        rating: reviews.rating,
+        title: reviews.title,
+        body: reviews.body,
+        source: reviews.source,
+        verified: reviews.verified,
+        approved: reviews.approved,
+        helpfulCount: reviews.helpfulCount,
+        unhelpfulCount: reviews.unhelpfulCount,
+        createdAt: reviews.createdAt,
+        ownerResponse: reviews.ownerResponse,
+        ownerResponseAt: reviews.ownerResponseAt,
+        clinicName: clinics.name,
+        clinicSlug: clinics.slug,
+      })
+      .from(reviews)
+      .leftJoin(clinics, eq(reviews.clinicId, clinics.id))
+      .where(statusFilter)
+      .orderBy(desc(reviews.createdAt))
+      .limit(limit)
+      .offset(offset);
 
-    const results = (rowsResult as any).rows?.map((r: any) => ({
-      id: r.id,
-      clinicId: r.clinic_id,
-      userId: r.user_id,
-      userName: r.user_name,
-      userEmail: r.user_email,
-      rating: r.rating,
-      title: r.title,
-      body: r.body,
-      source: r.source,
-      verified: r.verified,
-      approved: r.approved,
-      helpfulCount: r.helpful_count ?? 0,
-      unhelpfulCount: r.unhelpful_count ?? 0,
-      createdAt: r.created_at,
-      clinicName: r.clinic_name,
-      clinicSlug: r.clinic_slug,
-      ownerResponse: r.owner_response ?? null,
-      ownerResponseAt: r.owner_response_at ?? null,
-    })) ?? [];
-
-    const pendingRows = await db.execute(sql`SELECT count(*) as count FROM reviews WHERE approved = false`);
-    const totalRows = await db.execute(sql`SELECT count(*) as count FROM reviews`);
-    const pendingCount = Number((pendingRows as any).rows?.[0]?.count ?? 0);
-    const total = Number((totalRows as any).rows?.[0]?.count ?? 0);
+    const [pendingRow] = await db
+      .select({ count: sql<number>`count(*)` })
+      .from(reviews)
+      .where(eq(reviews.approved, false));
+    const [totalRow] = await db.select({ count: sql<number>`count(*)` }).from(reviews);
 
     return new Response(JSON.stringify({
-      data: results,
-      total,
-      pendingCount,
+      data: rows,
+      total: Number(totalRow?.count ?? 0),
+      pendingCount: Number(pendingRow?.count ?? 0),
     }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },

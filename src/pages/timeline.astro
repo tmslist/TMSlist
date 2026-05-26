@@ -2,284 +2,298 @@
 export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
+import EditorialHero from '../components/editorial/EditorialHero.astro';
 import PatientJourneyTracker from '../components/react/PatientJourneyTracker';
 
 const title = "Your TMS Treatment Journey | 6-Week Timeline & What to Expect";
 const description = "From first consultation to lasting results — understand every phase of TMS treatment, what happens during each session, and what to expect over 6 weeks.";
+
+const phases = [
+  {
+    phase: 1,
+    title: "Consultation & Evaluation",
+    subtitle: "Week 0",
+    tone: "accent" as const,
+    sessions: "1–2 appointments",
+    duration: "~2–3 hours total",
+    items: [
+      "Psychiatric evaluation and diagnosis confirmation",
+      "PHQ-9 / HAM-D baseline assessment scores",
+      "Review of medical history, medications, and prior treatments",
+      "Discussion of TMS mechanism, expected outcomes, and treatment timeline",
+      "Insurance pre-authorization (1–2 weeks typical)",
+      "Review of contraindications and safety screening",
+    ],
+    question: "Is TMS right for me? What outcomes can I expect?",
+  },
+  {
+    phase: 2,
+    title: "Motor Threshold Finding",
+    subtitle: "Day 1",
+    tone: "ink" as const,
+    sessions: "1 calibration session",
+    duration: "45–60 minutes",
+    items: [
+      "No treatment pulses are delivered during this session",
+      "Coil placed over motor cortex (M1) — area controlling hand movement",
+      "Intensity gradually increased until a visible thumb twitch is observed",
+      "This \"motor threshold\" sets the treatment intensity (typically 80–120% MT)",
+      "Coil repositioned to treatment target (DLPFC) for the remaining sessions",
+      "You may feel mild tapping sensations on the scalp — this is normal",
+    ],
+    question: "Will it hurt? What's the motor threshold?",
+  },
+  {
+    phase: 3,
+    title: "Early Treatment Phase",
+    subtitle: "Weeks 1–2 (Sessions 1–10)",
+    tone: "warm" as const,
+    sessions: "5 sessions per week",
+    duration: "20–37 minutes per session",
+    items: [
+      "Daily sessions, Monday through Friday",
+      "Each session: seated in a recliner, coil positioned on scalp",
+      "You hear rhythmic clicking sounds and feel a tapping sensation",
+      "Most patients read, watch, or use a phone during sessions",
+      "Resume normal activities immediately after — no downtime",
+      "Early side effects may include: mild headache, scalp tenderness, fatigue",
+      "No immediate mood change expected — this is normal",
+    ],
+    question: "Will I feel anything right away?",
+  },
+  {
+    phase: 4,
+    title: "Building Response",
+    subtitle: "Weeks 3–5 (Sessions 11–25)",
+    tone: "success" as const,
+    sessions: "5 sessions per week",
+    duration: "20–37 minutes per session",
+    items: [
+      "Most patients notice first signs of improvement between weeks 2–3",
+      "Common early improvements: better sleep, more energy, improved concentration",
+      "Mood may gradually lift — progress is often subtle at first",
+      "Side effects (headache, tenderness) typically diminish",
+      "Week 10 checkpoint: PHQ-9 reassessment, medication review if applicable",
+      "Continue daily sessions — consistency is key for optimal outcomes",
+      "Some patients experience temporary worsening before improving — discuss with your provider",
+    ],
+    question: "When will I start feeling better?",
+  },
+  {
+    phase: 5,
+    title: "Consolidation",
+    subtitle: "Week 6 (Sessions 26–36)",
+    tone: "amber" as const,
+    sessions: "5 sessions per week",
+    duration: "20–37 minutes per session",
+    items: [
+      "Continued improvement in mood, energy, and cognition",
+      "PHQ-9 score reassessed — often significantly reduced from baseline",
+      "Side effects minimal to none at this stage",
+      "Discussion of maintenance plan — some patients benefit from periodic booster sessions",
+      "Transition planning: what happens after the acute treatment phase",
+      "Discuss long-term follow-up schedule (1-month, 3-month, 6-month check-ins)",
+    ],
+    question: "Is treatment complete? What about maintenance?",
+  },
+  {
+    phase: 6,
+    title: "Maintenance & Follow-up",
+    subtitle: "Month 2+",
+    tone: "muted" as const,
+    sessions: "As needed",
+    duration: "Variable",
+    items: [
+      "Optional maintenance sessions: 1–2 per month for 6–12 months",
+      "Regular follow-up assessments (PHQ-9, clinical interview)",
+      "Long-term outcome tracking — most patients maintain gains for 6–12+ months",
+      "If symptoms return, discuss options: booster TMS, medication adjustment, therapy",
+      "Lifestyle factors: continued exercise, sleep, therapy to support gains",
+      "Some patients require retreatment — TMS can be safely repeated",
+    ],
+    question: "How long do results last?",
+  },
+];
+
+const toneStyles: Record<string, { badgeBg: string; badgeColor: string; badgeBorder: string; numBg: string; numColor: string; qBg: string; qColor: string; qBorder: string }> = {
+  accent: {
+    badgeBg: "rgba(10,22,40,0.06)", badgeColor: "var(--accent)", badgeBorder: "rgba(10,22,40,0.15)",
+    numBg: "linear-gradient(135deg, var(--accent), var(--accent2))", numColor: "#fff",
+    qBg: "rgba(10,22,40,0.04)", qColor: "var(--accent)", qBorder: "rgba(10,22,40,0.12)",
+  },
+  ink: {
+    badgeBg: "rgba(10,22,40,0.06)", badgeColor: "var(--ink)", badgeBorder: "rgba(10,22,40,0.15)",
+    numBg: "linear-gradient(135deg, var(--ink), var(--ink2))", numColor: "#fff",
+    qBg: "rgba(10,22,40,0.04)", qColor: "var(--ink)", qBorder: "rgba(10,22,40,0.12)",
+  },
+  warm: {
+    badgeBg: "rgba(201,101,74,0.10)", badgeColor: "var(--warm)", badgeBorder: "rgba(201,101,74,0.25)",
+    numBg: "linear-gradient(135deg, var(--warm), var(--warm-light))", numColor: "#fff",
+    qBg: "rgba(201,101,74,0.06)", qColor: "var(--warm)", qBorder: "rgba(201,101,74,0.20)",
+  },
+  success: {
+    badgeBg: "rgba(34,197,94,0.10)", badgeColor: "#15803d", badgeBorder: "rgba(34,197,94,0.25)",
+    numBg: "linear-gradient(135deg, #16a34a, #22c55e)", numColor: "#fff",
+    qBg: "rgba(34,197,94,0.06)", qColor: "#15803d", qBorder: "rgba(34,197,94,0.20)",
+  },
+  amber: {
+    badgeBg: "rgba(245,158,11,0.10)", badgeColor: "#b45309", badgeBorder: "rgba(245,158,11,0.30)",
+    numBg: "linear-gradient(135deg, #d97706, #f59e0b)", numColor: "#fff",
+    qBg: "rgba(245,158,11,0.06)", qColor: "#b45309", qBorder: "rgba(245,158,11,0.25)",
+  },
+  muted: {
+    badgeBg: "rgba(90,107,130,0.10)", badgeColor: "var(--muted)", badgeBorder: "rgba(90,107,130,0.20)",
+    numBg: "linear-gradient(135deg, var(--muted), #7a8ba2)", numColor: "#fff",
+    qBg: "rgba(90,107,130,0.06)", qColor: "var(--muted)", qBorder: "rgba(90,107,130,0.18)",
+  },
+};
+
+const sessionFlow = [
+  {
+    title: "Before",
+    tone: "accent",
+    items: ["Arrive with clean, dry hair", "No conditioner or hair products", "Remove metal jewelry near head", "Inform provider of any changes since last session", "Brief check-in with TMS technician"],
+  },
+  {
+    title: "During",
+    tone: "warm",
+    items: ["Seated comfortably in recliner", "Coil positioned on scalp", "Rhythmic clicking sounds (~10 Hz)", "Gentle tapping sensation on scalp", "20–40 minutes of stimulation", "Read, watch, or relax during session"],
+  },
+  {
+    title: "After",
+    tone: "success",
+    items: ["Resume normal activities immediately", "No driving restrictions", "Mild headache possible (responds to Tylenol)", "Most patients return to work same day", "Track any side effects to discuss with provider"],
+  },
+];
+
+const faqs = [
+  { q: "Will I feel anything during TMS?", a: "Most patients feel a tapping sensation on the scalp where the coil is placed. You will hear rhythmic clicking sounds — this is the magnetic pulse being generated. The sensation varies from person to person; some describe it as a mild knock or tapping, others barely notice it. Pain is not typical — if you experience significant pain, inform your TMS technician immediately." },
+  { q: "Can I drive after a TMS session?", a: "Yes. TMS does not require sedation or anesthesia, and there are no driving restrictions after treatment. You can resume normal activities including driving, working, and exercising immediately after your session." },
+  { q: "What if I miss a session?", a: "Missing an occasional session (e.g., once per week) is generally acceptable and unlikely to significantly impact treatment outcomes. However, consistent daily attendance is associated with better response rates. If you need to miss multiple sessions, discuss a plan with your provider — some clinics offer weekend catch-up sessions." },
+  { q: "Will I need maintenance TMS sessions?", a: "Many patients benefit from periodic \"booster\" TMS sessions after completing the initial 36-session course. The maintenance schedule varies: some patients come monthly, others quarterly, and some not at all. Your provider will discuss a maintenance plan based on your response and long-term goals." },
+  { q: "How long do TMS results last?", a: "Clinical studies show that most patients maintain significant improvement for 6–12 months after completing TMS. About 30–40% of patients eventually experience a return of symptoms and may benefit from retreatment. Ongoing therapy and medication management can help sustain gains." },
+  { q: "Does insurance cover TMS?", a: "Most commercial insurance plans cover TMS for treatment-resistant depression (typically defined as failure of 1–4 antidepressants). Medicare covers TMS for depression. Medicaid coverage varies by state. Your clinic will typically handle insurance authorization before treatment begins." },
+  { q: "Is TMS safe for everyone?", a: "TMS has an excellent safety profile, but is not appropriate for people with metal implants in or near the head (pacemakers, cochlear implants, aneurysm clips), a history of seizures, or other conditions. Your provider will conduct a safety screening before treatment." },
+];
+
+const sessionToneStyle: Record<string, string> = {
+  accent: "rgba(10,22,40,0.06)",
+  warm: "rgba(201,101,74,0.10)",
+  success: "rgba(34,197,94,0.10)",
+};
+const sessionToneColor: Record<string, string> = {
+  accent: "var(--accent)",
+  warm: "var(--warm)",
+  success: "#16a34a",
+};
 ---
 
 <Layout title={title} description={description}>
-  <!-- Hero -->
-  <section class="relative bg-slate-950 overflow-hidden border-b border-slate-800/50">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(6,182,212,0.12),transparent_60%)]"></div>
-    <div class="container mx-auto px-4 pt-28 pb-16 relative z-10">
-      <div class="max-w-3xl mx-auto text-center">
-        <nav class="flex items-center justify-center gap-2 text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
-          <a href="/" class="hover:text-cyan-400 transition-colors">Home</a>
-          <span class="text-slate-700">/</span>
-          <span class="text-slate-300 font-medium">TMS Journey</span>
-        </nav>
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full mb-6">
-          <div class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></div>
-          <span class="text-xs font-semibold text-cyan-300 uppercase tracking-widest">Patient Guide</span>
-        </div>
-        <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4 leading-tight">
-          Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-400">TMS Treatment</span> Journey
-        </h1>
-        <p class="text-lg text-slate-400 leading-relaxed mb-8">
-          From first consultation to lasting results — what to expect at every stage of your 6-week TMS treatment course.
-        </p>
-        <!-- Journey preview -->
-        <div class="flex items-center justify-center gap-2 flex-wrap text-xs text-slate-500">
-          <span>Consultation</span>
-          <svg class="w-3 h-3 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          <span>MT Finding</span>
-          <svg class="w-3 h-3 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          <span class="text-cyan-400 font-semibold">Weeks 1-2</span>
-          <svg class="w-3 h-3 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          <span>Week 3-5</span>
-          <svg class="w-3 h-3 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          <span>Week 6</span>
-          <svg class="w-3 h-3 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          <span class="text-emerald-400 font-semibold">Maintenance</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <EditorialHero
+    eyebrow="Patient Guide"
+    eyebrowDot="#22c55e"
+    title="Your TMS treatment"
+    titleAccent="journey."
+    description="From first consultation to lasting results — what to expect at every stage of your 6-week TMS treatment course."
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "TMS Journey" }]}
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "Find a TMS Clinic", href: "/us/", variant: "outline" },
+    ]}
+    stats={[
+      { value: "6", label: "Weeks", color: "ink" },
+      { value: "30–36", label: "Sessions", color: "accent" },
+      { value: "5/wk", label: "Cadence", color: "warm" },
+    ]}
+  />
 
   <!-- Phase Timeline -->
-  <section class="py-12 lg:py-16">
-    <div class="container mx-auto px-4 max-w-5xl">
+  <section class="phases">
+    <div class="phases-inner">
+      <div class="phases-head">
+        <h2 class="serif phases-title">The 6 phases of treatment</h2>
+        <p class="phases-intro">A typical TMS course unfolds across six distinct stages — from initial evaluation through long-term follow-up.</p>
+      </div>
 
-      <!-- Phase cards -->
-      {[
-        {
-          phase: 1,
-          title: "Consultation & Evaluation",
-          subtitle: "Week 0",
-          icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
-          color: "from-blue-600 to-blue-500",
-          bg: "bg-blue-500/10 border-blue-500/20",
-          sessions: "1–2 appointments",
-          duration: "~2-3 hours total",
-          items: [
-            "Psychiatric evaluation and diagnosis confirmation",
-            "PHQ-9 / HAM-D baseline assessment scores",
-            "Review of medical history, medications, and prior treatments",
-            "Discussion of TMS mechanism, expected outcomes, and treatment timeline",
-            "Insurance pre-authorization (1-2 weeks typical)",
-            "Review of contraindications and safety screening",
-          ],
-          question: "Is TMS right for me? What outcomes can I expect?",
-          questionColor: "text-blue-300",
-          questionBg: "bg-blue-500/10",
-        },
-        {
-          phase: 2,
-          title: "Motor Threshold Finding",
-          subtitle: "Day 1",
-          icon: "M13 10V3L4 14h7v7l9-11h-7z",
-          color: "from-violet-600 to-violet-500",
-          bg: "bg-violet-500/10 border-violet-500/20",
-          sessions: "1 calibration session",
-          duration: "45–60 minutes",
-          items: [
-            "No treatment pulses are delivered during this session",
-            "Coil placed over motor cortex (M1) — area controlling hand movement",
-            "Intensity gradually increased until a visible thumb twitch is observed",
-            "This \"motor threshold\" sets the treatment intensity (typically 80–120% MT)",
-            "Coil repositioned to treatment target (DLPFC) for the remaining sessions",
-            "You may feel mild tapping sensations on the scalp — this is normal",
-          ],
-          question: "Will it hurt? What's the motor threshold?",
-          questionColor: "text-violet-300",
-          questionBg: "bg-violet-500/10",
-        },
-        {
-          phase: 3,
-          title: "Early Treatment Phase",
-          subtitle: "Weeks 1–2 (Sessions 1–10)",
-          icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
-          color: "from-cyan-600 to-cyan-500",
-          bg: "bg-cyan-500/10 border-cyan-500/20",
-          sessions: "5 sessions per week",
-          duration: "20–37 minutes per session",
-          items: [
-            "Daily sessions, Monday through Friday",
-            "Each session: seated in a recliner, coil positioned on scalp",
-            "You hear rhythmic clicking sounds and feel a tapping sensation",
-            "Most patients read, watch, or use a phone during sessions",
-            "Resume normal activities immediately after — no downtime",
-            "Early side effects may include: mild headache, scalp tenderness, fatigue",
-            "No immediate mood change expected — this is normal and expected",
-          ],
-          question: "Will I feel anything right away?",
-          questionColor: "text-cyan-300",
-          questionBg: "bg-cyan-500/10",
-        },
-        {
-          phase: 4,
-          title: "Building Response",
-          subtitle: "Weeks 3–5 (Sessions 11–25)",
-          icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
-          color: "from-emerald-600 to-emerald-500",
-          bg: "bg-emerald-500/10 border-emerald-500/20",
-          sessions: "5 sessions per week",
-          duration: "20–37 minutes per session",
-          items: [
-            "Most patients notice first signs of improvement between weeks 2–3",
-            "Common early improvements: better sleep, more energy, improved concentration",
-            "Mood may gradually lift — progress is often subtle at first",
-            "Side effects (headache, tenderness) typically diminish",
-            "Week 10 checkpoint: PHQ-9 reassessment, medication review if applicable",
-            "Continue daily sessions — consistency is key for optimal outcomes",
-            "Some patients experience temporary worsening before improving — discuss with your provider",
-          ],
-          question: "When will I start feeling better?",
-          questionColor: "text-emerald-300",
-          questionBg: "bg-emerald-500/10",
-        },
-        {
-          phase: 5,
-          title: "Consolidation",
-          subtitle: "Week 6 (Sessions 26–36)",
-          icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
-          color: "from-amber-600 to-amber-500",
-          bg: "bg-amber-500/10 border-amber-500/20",
-          sessions: "5 sessions per week",
-          duration: "20–37 minutes per session",
-          items: [
-            "Continued improvement in mood, energy, and cognition",
-            "PHQ-9 score reassessed — often significantly reduced from baseline",
-            "Side effects minimal to none at this stage",
-            "Discussion of maintenance plan — some patients benefit from periodic booster sessions",
-            "Transition planning: what happens after the acute treatment phase",
-            "Discuss long-term follow-up schedule (1-month, 3-month, 6-month check-ins)",
-          ],
-          question: "Is treatment complete? What about maintenance?",
-          questionColor: "text-amber-300",
-          questionBg: "bg-amber-500/10",
-        },
-        {
-          phase: 6,
-          title: "Maintenance & Follow-up",
-          subtitle: "Month 2+",
-          icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
-          color: "from-rose-600 to-rose-500",
-          bg: "bg-rose-500/10 border-rose-500/20",
-          sessions: "As needed",
-          duration: "Variable",
-          items: [
-            "Optional maintenance sessions: 1–2 per month for 6–12 months",
-            "Regular follow-up assessments (PHQ-9, clinical interview)",
-            "Long-term outcome tracking — most patients maintain gains for 6–12+ months",
-            "If symptoms return, discuss options: booster TMS, medication adjustment, therapy",
-            "Lifestyle factors: continued exercise, sleep, therapy to support gains",
-            "Some patients require retreatment — TMS can be safely repeated",
-          ],
-          question: "How long do results last?",
-          questionColor: "text-rose-300",
-          questionBg: "bg-rose-500/10",
-        },
-      ].map((phase, idx) => (
-        <div class={`glass-panel ${phase.bg} rounded-2xl p-6 lg:p-8 mb-4`}>
-          <div class="flex items-start gap-4 lg:gap-6">
-            <!-- Phase number -->
-            <div class={`w-12 h-12 rounded-xl bg-gradient-to-br ${phase.color} flex items-center justify-center shrink-0 shadow-lg`}>
-              <span class="text-white font-bold text-lg">{phase.phase}</span>
-            </div>
-            <!-- Content -->
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-2 mb-1">
-                <h2 class="text-lg font-bold text-white">{phase.title}</h2>
-                <span class={`text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-800/80 text-slate-300`}>{phase.subtitle}</span>
+      <ol class="phase-list">
+        {phases.map((phase, idx) => {
+          const t = toneStyles[phase.tone];
+          return (
+            <li class="phase-item">
+              <div class="phase-card">
+                <div class="phase-num" style={`background:${t.numBg}; color:${t.numColor};`}>
+                  <span>{phase.phase}</span>
+                </div>
+                <div class="phase-body">
+                  <div class="phase-header">
+                    <h3 class="serif phase-title">{phase.title}</h3>
+                    <span class="phase-badge" style={`background:${t.badgeBg}; color:${t.badgeColor}; border-color:${t.badgeBorder};`}>{phase.subtitle}</span>
+                  </div>
+                  <div class="phase-meta">
+                    <span class="phase-meta-item">
+                      <svg class="phase-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                      {phase.sessions}
+                    </span>
+                    <span class="phase-meta-dot" aria-hidden="true">·</span>
+                    <span class="phase-meta-item">
+                      <svg class="phase-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                      {phase.duration}
+                    </span>
+                  </div>
+                  <ul class="phase-items">
+                    {phase.items.map(item => (
+                      <li class="phase-list-item">
+                        <svg class="phase-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div class="phase-question" style={`background:${t.qBg}; color:${t.qColor}; border-color:${t.qBorder};`}>
+                    <svg class="phase-question-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>{phase.question}</span>
+                  </div>
+                </div>
               </div>
-              <div class="flex items-center gap-4 text-[10px] text-slate-400 mb-4">
-                <span class="flex items-center gap-1">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                  {phase.sessions}
-                </span>
-                <span class="flex items-center gap-1">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                  {phase.duration}
-                </span>
-              </div>
-              <ul class="space-y-2 mb-4">
-                {phase.items.map(item => (
-                  <li class="flex items-start gap-2 text-[11px] text-slate-300">
-                    <svg class="w-3.5 h-3.5 text-slate-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div class={`inline-flex items-center gap-2 ${phase.questionBg} border ${phase.bg.replace('bg-', 'border-').replace('/10', '/20')} rounded-lg px-3 py-2`}>
-                <svg class={`w-3.5 h-3.5 ${phase.questionColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <span class={`text-[10px] font-semibold ${phase.questionColor}`}>{phase.question}</span>
-              </div>
-            </div>
-          </div>
-          {/* Connector line (not on last) */}
-          {idx < 5 && (
-            <div class="flex justify-center mt-0">
-              <div class="w-0.5 h-4 bg-slate-700/50" />
-            </div>
-          )}
-        </div>
-      ))}
+              {idx < phases.length - 1 && <div class="phase-connector" aria-hidden="true"></div>}
+            </li>
+          );
+        })}
+      </ol>
     </div>
   </section>
 
   <!-- Interactive Journey Tracker -->
-  <section class="py-12 lg:py-16 border-t border-slate-800/50 bg-slate-950">
-    <div class="container mx-auto px-4 max-w-5xl">
-      <div class="text-center mb-8">
-        <h2 class="text-2xl lg:text-3xl font-bold text-white mb-3">Track Your Treatment Journey</h2>
-        <p class="text-slate-400">Explore a simulated 36-session TMS treatment course — click sessions, view details, and track progress.</p>
+  <section class="tracker-section">
+    <div class="tracker-inner">
+      <div class="tracker-head">
+        <span class="tracker-eyebrow">Interactive</span>
+        <h2 class="serif tracker-title">Track a simulated treatment journey</h2>
+        <p class="tracker-intro">Explore a sample 36-session TMS course — click sessions, view details, and see how response builds week by week.</p>
       </div>
-      <div class="bg-slate-900/50 rounded-2xl p-6 lg:p-8 border border-slate-800/50">
+      <div class="tracker-frame">
         <PatientJourneyTracker client:only="react" />
       </div>
     </div>
   </section>
 
-  <!-- Session Overview -->
-  <section class="py-12 lg:py-16">
-    <div class="container mx-auto px-4 max-w-4xl">
-      <h2 class="text-2xl font-bold text-white mb-8 text-center">What Happens During Each Session</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[
-          {
-            title: "Before",
-            icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
-            color: "text-blue-400",
-            bg: "bg-blue-500/10 border-blue-500/20",
-            items: ["Arrive with clean, dry hair", "No conditioner or hair products", "Remove metal jewelry near head", "Inform provider of any changes since last session", "Brief check-in with TMS technician"],
-          },
-          {
-            title: "During",
-            icon: "M13 10V3L4 14h7v7l9-11h-7z",
-            color: "text-violet-400",
-            bg: "bg-violet-500/10 border-violet-500/20",
-            items: ["Seated comfortably in recliner", "Coil positioned on scalp", "Rhythmic clicking sounds (~10Hz)", "Gentle tapping sensation on scalp", "20–40 minutes of stimulation", "Read, watch, or relax during session"],
-          },
-          {
-            title: "After",
-            icon: "M5 13l4 4L19 7",
-            color: "text-emerald-400",
-            bg: "bg-emerald-500/10 border-emerald-500/20",
-            items: ["Resume normal activities immediately", "No driving restrictions", "Mild headache possible (respond to Tylenol)", "Most patients return to work same day", "Track any side effects to discuss with provider"],
-          },
-        ].map(bucket => (
-          <div class={`glass-panel ${bucket.bg} rounded-2xl p-6`}>
-            <div class={`w-10 h-10 rounded-xl bg-slate-800/60 flex items-center justify-center mb-4`}>
-              <svg class={`w-5 h-5 ${bucket.color}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={bucket.icon}/></svg>
+  <!-- Session Flow -->
+  <section class="flow-section">
+    <div class="flow-inner">
+      <div class="flow-head">
+        <h2 class="serif flow-title">What happens at each session</h2>
+        <p class="flow-intro">A typical TMS appointment takes about 30 minutes from arrival to departure.</p>
+      </div>
+      <div class="flow-grid">
+        {sessionFlow.map(bucket => (
+          <div class="flow-card">
+            <div class="flow-card-header">
+              <span class="flow-card-badge" style={`background:${sessionToneStyle[bucket.tone]}; color:${sessionToneColor[bucket.tone]};`}>{bucket.title}</span>
+              <span class="flow-card-label">the session</span>
             </div>
-            <h3 class="text-base font-bold text-white mb-3">{bucket.title} the Session</h3>
-            <ul class="space-y-2">
+            <ul class="flow-list">
               {bucket.items.map(item => (
-                <li class="flex items-start gap-2 text-[11px] text-slate-300">
-                  <span class={`${bucket.color} shrink-0 mt-0.5`}>•</span>
+                <li class="flow-list-item">
+                  <span class="flow-bullet" style={`background:${sessionToneColor[bucket.tone]};`}></span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -291,53 +305,517 @@ const description = "From first consultation to lasting results — understand e
   </section>
 
   <!-- FAQ -->
-  <section class="py-12 lg:py-16 border-t border-slate-800/50">
-    <div class="container mx-auto px-4 max-w-4xl">
-      <h2 class="text-2xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h2>
-
-      {[
-        { q: "Will I feel anything during TMS?", a: "Most patients feel a tapping sensation on the scalp where the coil is placed. You will hear rhythmic clicking sounds — this is the magnetic pulse being generated. The sensation varies from person to person; some describe it as a mild knock or tapping, others barely notice it. Pain is not typical — if you experience significant pain, inform your TMS technician immediately." },
-        { q: "Can I drive after a TMS session?", a: "Yes. TMS does not require sedation or anesthesia, and there are no driving restrictions after treatment. You can resume normal activities including driving, working, and exercising immediately after your session." },
-        { q: "What if I miss a session?", a: "Missing an occasional session (e.g., once per week) is generally acceptable and unlikely to significantly impact treatment outcomes. However, consistent daily attendance is associated with better response rates. If you need to miss multiple sessions, discuss a plan with your provider — some clinics offer weekend catch-up sessions." },
-        { q: "Will I need maintenance TMS sessions?", a: "Many patients benefit from periodic \"booster\" TMS sessions after completing the initial 36-session course. The maintenance schedule varies: some patients come monthly, others quarterly, and some not at all. Your provider will discuss a maintenance plan based on your response and long-term goals." },
-        { q: "How long do TMS results last?", a: "Clinical studies show that most patients maintain significant improvement for 6–12 months after completing TMS. About 30–40% of patients eventually experience a return of symptoms and may benefit from retreatment. Ongoing therapy and medication management can help sustain gains." },
-        { q: "Does insurance cover TMS?", a: "Most commercial insurance plans cover TMS for treatment-resistant depression (typically defined as failure of 1–4 antidepressants). Medicare covers TMS for depression. Medicaid coverage varies by state. Your clinic will typically handle insurance authorization before treatment begins." },
-        { q: "Is TMS safe for everyone?", a: "TMS has an excellent safety profile, but is not appropriate for people with metal implants in or near the head (pacemakers, cochlear implants, aneurysm clips), a history of seizures, or other conditions. Your provider will conduct a safety screening before treatment." },
-      ].map(faq => (
-        <details class="glass-panel rounded-xl mb-3 group">
-          <summary class="flex items-center justify-between px-5 py-4 cursor-pointer list-none">
-            <span class="text-[11px] font-semibold text-slate-200 group-hover:text-white transition-colors">{faq.q}</span>
-            <svg class="w-4 h-4 text-slate-500 shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </summary>
-          <div class="px-5 pb-5">
-            <p class="text-[11px] text-slate-400 leading-relaxed border-t border-slate-700/40 pt-4 mt-1">{faq.a}</p>
-          </div>
-        </details>
-      ))}
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-head">
+        <h2 class="serif faq-title">Frequently asked questions</h2>
+        <p class="faq-intro">Common questions from patients starting TMS treatment.</p>
+      </div>
+      <div class="faq-list">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-summary">
+              <span class="faq-question">{faq.q}</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="faq-answer">{faq.a}</div>
+          </details>
+        ))}
+      </div>
     </div>
   </section>
 
-  <!-- CTAs -->
-  <section class="py-14 lg:py-20 bg-slate-950 border-t border-slate-800/50">
-    <div class="container mx-auto px-4 max-w-4xl text-center">
-      <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">Ready to Begin?</h2>
-      <p class="text-slate-400 mb-8 max-w-2xl mx-auto">Take the first step toward understanding TMS and finding a provider that's right for you.</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/simulation/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-600 to-violet-600 hover:from-violet-500 hover:to-violet-500 text-white font-semibold rounded-xl shadow-lg shadow-violet-600/30 transition-all">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2 class="serif cta-title">Ready to begin?</h2>
+      <p class="cta-intro">Take the first step toward understanding TMS and finding a provider that fits.</p>
+      <div class="cta-buttons">
+        <a href="/simulation/" class="cta-button cta-button-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           Try the TMS Simulation
         </a>
-        <a href="/quiz/am-i-a-candidate/" class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-slate-600 hover:border-slate-500 text-slate-300 hover:text-white font-semibold rounded-xl transition-all">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <a href="/quiz/am-i-a-candidate/" class="cta-button cta-button-outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           Am I a Candidate?
         </a>
       </div>
-      <p class="text-xs text-slate-500 mt-4">Also: <a href="/us/" class="text-cyan-400 hover:underline font-medium">find a TMS clinic near you</a> or <a href="/resources/buyers-guide/" class="text-violet-400 hover:underline font-medium">download the free TMS Buyer's Guide</a>.</p>
-
-      <!-- Disclaimer -->
-      <p class="text-[10px] text-slate-600 mt-10 max-w-2xl mx-auto leading-relaxed">
+      <p class="cta-secondary">Also: <a href="/us/" class="cta-link">find a TMS clinic near you</a> or <a href="/tms-cost-guide/" class="cta-link">read the TMS Cost Guide</a>.</p>
+      <p class="cta-disclaimer">
         This page is for educational purposes only and does not constitute medical advice. TMS treatment decisions should be made in consultation with a qualified healthcare provider. Results vary by individual. Always consult your physician before starting or changing any treatment.
       </p>
     </div>
   </section>
 </Layout>
+
+<style>
+  @reference "../styles/global.css";
+
+  /* ── Phases ──────────────────────────────────────────────── */
+  .phases {
+    padding: 4rem 0 3rem;
+    background: var(--paper);
+  }
+  .phases-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .phases-head {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .phases-title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: var(--ink);
+    margin: 0 0 0.75rem;
+    line-height: 1.15;
+  }
+  .phases-intro {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 38rem;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .phase-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .phase-item {
+    position: relative;
+  }
+
+  .phase-card {
+    display: flex;
+    gap: 1.25rem;
+    background: var(--paper2);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .phase-card:hover {
+    box-shadow: 0 16px 40px -20px rgba(10,22,40,0.18);
+    transform: translateY(-1px);
+  }
+  @media (min-width: 768px) {
+    .phase-card { padding: 1.75rem 2rem; gap: 1.5rem; }
+  }
+
+  .phase-num {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+    box-shadow: 0 6px 18px -6px rgba(10,22,40,0.25);
+  }
+  .phase-num span { line-height: 1; }
+
+  .phase-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+  .phase-title {
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.2;
+  }
+  @media (min-width: 768px) {
+    .phase-title { font-size: 1.375rem; }
+  }
+  .phase-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    border: 1px solid;
+  }
+
+  .phase-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+  .phase-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+  .phase-meta-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+  .phase-meta-dot {
+    color: var(--line);
+  }
+
+  .phase-items {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .phase-list-item {
+    display: flex;
+    gap: 0.5rem;
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .phase-check {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.25rem;
+    color: var(--warm);
+  }
+
+  .phase-question {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid;
+    border-radius: 0.625rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .phase-question-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    flex-shrink: 0;
+  }
+
+  .phase-connector {
+    width: 2px;
+    height: 1.5rem;
+    background: var(--line);
+    margin: 0 auto;
+  }
+
+  /* ── Tracker ──────────────────────────────────────────────── */
+  .tracker-section {
+    padding: 4rem 0;
+    background: var(--paper2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .tracker-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .tracker-head {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .tracker-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--warm);
+    margin-bottom: 0.5rem;
+  }
+  .tracker-title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--ink);
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+  }
+  .tracker-intro {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 36rem;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .tracker-frame {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+    box-shadow: 0 12px 40px -20px rgba(10,22,40,0.15);
+  }
+  @media (min-width: 768px) {
+    .tracker-frame { padding: 1.75rem; }
+  }
+
+  /* ── Session flow ─────────────────────────────────────────── */
+  .flow-section {
+    padding: 4rem 0;
+    background: var(--paper);
+  }
+  .flow-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .flow-head {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .flow-title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--ink);
+    margin: 0 0 0.5rem;
+  }
+  .flow-intro {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .flow-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .flow-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  }
+
+  .flow-card {
+    background: var(--paper2);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .flow-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .flow-card-badge {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.65rem;
+    border-radius: 0.5rem;
+  }
+  .flow-card-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .flow-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.625rem;
+  }
+  .flow-list-item {
+    display: flex;
+    gap: 0.625rem;
+    color: var(--ink);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .flow-bullet {
+    flex-shrink: 0;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    margin-top: 0.5rem;
+  }
+
+  /* ── FAQ ───────────────────────────────────────────────── */
+  .faq-section {
+    padding: 4rem 0;
+    background: var(--paper2);
+    border-top: 1px solid var(--line);
+  }
+  .faq-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .faq-head {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .faq-title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--ink);
+    margin: 0 0 0.5rem;
+  }
+  .faq-intro {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 0.625rem;
+  }
+  .faq-item {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 0.875rem;
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+  }
+  .faq-item[open] {
+    border-color: rgba(201,101,74,0.25);
+  }
+  .faq-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .faq-summary::-webkit-details-marker { display: none; }
+  .faq-question {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .faq-item[open] .faq-question {
+    color: var(--warm);
+  }
+  .faq-chevron {
+    width: 1rem;
+    height: 1rem;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+  .faq-answer {
+    padding: 0 1.25rem 1.25rem;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+  }
+
+  /* ── CTA ───────────────────────────────────────────────── */
+  .cta-section {
+    padding: 4.5rem 0 5.5rem;
+    background: var(--ink);
+    color: #fff;
+  }
+  .cta-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  .cta-title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: #fff;
+    margin: 0 0 0.75rem;
+    line-height: 1.15;
+  }
+  .cta-intro {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+    max-width: 32rem;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .cta-buttons { flex-direction: row; }
+  }
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 0.875rem;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .cta-button svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+  .cta-button-primary {
+    background: var(--warm);
+    color: #fff;
+  }
+  .cta-button-primary:hover {
+    background: var(--warm-light);
+    transform: translateY(-1px);
+  }
+  .cta-button-outline {
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .cta-button-outline:hover {
+    border-color: rgba(255,255,255,0.5);
+    color: #fff;
+  }
+  .cta-secondary {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    margin: 0 0 2.5rem;
+  }
+  .cta-link {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+  }
+  .cta-link:hover {
+    color: var(--warm-light);
+  }
+  .cta-disclaimer {
+    color: rgba(255,255,255,0.45);
+    font-size: 11px;
+    line-height: 1.6;
+    max-width: 36rem;
+    margin: 0 auto;
+  }
+</style>

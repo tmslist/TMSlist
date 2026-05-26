@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-18
 category: patient-guide
 tags: ["cost", "pricing", "insurance", "city comparison"]
-image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop"
+image: "/images/blog-covers/real-cost-of-tms-therapy-2026.svg"
 ---
 
 Transcranial magnetic stimulation (TMS therapy) costs between $6,000 and $16,000 for a full treatment course without insurance. With insurance, that number drops to roughly $500-$3,000 for most patients. But the actual price you pay swings dramatically depending on your city, your clinic, and whether you've done the work to get your insurance to cover it.
@@ -148,9 +148,9 @@ TMS offers a 50-60% chance of meaningful improvement and a 30-35% chance of remi
 
 No one can guarantee it will work for you. But the economics increasingly favor trying TMS earlier rather than later in the treatment-resistant journey.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>A full TMS course costs $6,000-$16,000 without insurance; $500-$3,000 with insurance.</li>
     <li>Prices vary by city. Houston and Dallas are among the lowest major metro markets.</li>
     <li>Appeal denials. The TMS appeal success rate is high because the clinical evidence is strong.</li>
@@ -160,47 +160,47 @@ No one can guarantee it will work for you. But the economics increasingly favor 
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does Medicare cover TMS therapy?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does Medicare cover TMS therapy?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Medicare covers TMS for major depressive disorder when you have failed at least one adequate antidepressant trial. Part B covers it as an outpatient procedure. You pay 20% coinsurance after the annual deductible. See our <a href="/blog/tms-covered-by-medicare-2026-update/" class="text-violet-600 hover:underline">Medicare TMS guide</a> for full details.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Medicare covers TMS for major depressive disorder when you have failed at least one adequate antidepressant trial. Part B covers it as an outpatient procedure. You pay 20% coinsurance after the annual deductible. See our <a href="/blog/tms-covered-by-medicare-2026-update/" class="text-[var(--warm)] hover:underline">Medicare TMS guide</a> for full details.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What is the cheapest way to get TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What is the cheapest way to get TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Getting insurance to cover it is the single biggest cost reducer. Appeal denials. Shop multiple clinics for package pricing. Consider theta burst stimulation if your clinic offers it at a lower rate. And look into clinical trials, which provide free treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Getting insurance to cover it is the single biggest cost reducer. Appeal denials. Shop multiple clinics for package pricing. Consider theta burst stimulation if your clinic offers it at a lower rate. And look into clinical trials, which provide free treatment.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS more expensive than medication?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS more expensive than medication?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Upfront, yes. A full TMS course can cost $6,000-$16,000 without insurance. But a year of brand-name antidepressants runs $2,400-$3,600 with insurance. Over several years, medication often costs more than one or two TMS courses. TMS also does not require indefinite ongoing use.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Upfront, yes. A full TMS course can cost $6,000-$16,000 without insurance. But a year of brand-name antidepressants runs $2,400-$3,600 with insurance. Over several years, medication often costs more than one or two TMS courses. TMS also does not require indefinite ongoing use.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Do TMS clinics offer payment plans?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Do TMS clinics offer payment plans?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Many do. Ask about upfront payment discounts (savings of 10-20% are common) and whether they work with medical financing companies like CareCredit that offer 0% interest for 12-24 months.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Many do. Ask about upfront payment discounts (savings of 10-20% are common) and whether they work with medical financing companies like CareCredit that offer 0% interest for 12-24 months.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What does TMS cost with the VA?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What does TMS cost with the VA?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">For veterans with service-connected conditions, there is no copay for TMS treatment at VA facilities. If your local VA does not offer TMS, Community Care referrals allow you to receive treatment at a private clinic at VA expense. See our <a href="/blog/tms-for-veterans-va-coverage/" class="text-violet-600 hover:underline">VA TMS guide</a> for details.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">For veterans with service-connected conditions, there is no copay for TMS treatment at VA facilities. If your local VA does not offer TMS, Community Care referrals allow you to receive treatment at a private clinic at VA expense. See our <a href="/blog/tms-for-veterans-va-coverage/" class="text-[var(--warm)] hover:underline">VA TMS guide</a> for details.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

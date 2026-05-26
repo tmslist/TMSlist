@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '../../../../db';
 import { jobs } from '../../../../db/schema';
 import { jobSubmitSchema } from '../../../../db/validation';
-import { getSessionFromRequest, hasRole } from '../../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../../utils/auth.js';
 
 export const prerender = false;
 

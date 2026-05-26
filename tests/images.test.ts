@@ -14,20 +14,20 @@ describe('getClinicImageUrl', () => {
     const url1 = getClinicImageUrl({ id: 'clinic-123', name: 'Test Clinic' });
     const url2 = getClinicImageUrl({ id: 'clinic-123', name: 'Test Clinic' });
     expect(url1).toBe(url2);
-    expect(url1).toContain('unsplash.com');
+    expect(url1).toContain('picsum.photos');
   });
 
   it('returns different images for different clinics', () => {
     const url1 = getClinicImageUrl({ id: 'clinic-a' });
     const url2 = getClinicImageUrl({ id: 'clinic-b' });
-    // Different IDs should generally produce different images (not guaranteed but likely)
-    expect(url1).toContain('unsplash.com');
-    expect(url2).toContain('unsplash.com');
+    expect(url1).toContain('picsum.photos');
+    expect(url2).toContain('picsum.photos');
+    expect(url1).not.toBe(url2);
   });
 
   it('handles missing media', () => {
     const url = getClinicImageUrl({ id: 'test' });
-    expect(url).toContain('unsplash.com');
+    expect(url).toContain('picsum.photos');
   });
 });
 

@@ -1,0 +1,166 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Anxiety Severity Self-Assessment | GAD-7 Quiz";
+const description =
+    "Take the free GAD-7 questionnaire to measure your anxiety severity over the past 2 weeks and find out what treatment options — including TMS — may be right for you.";
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const quizSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "GAD-7 Anxiety Severity Assessment",
+    "description": description,
+    "url": `${siteUrl}/quiz/anxiety-severity-test/`,
+    "educationalLevel": "patient",
+    "about": {
+        "@type": "MedicalCondition",
+        "name": "Generalized Anxiety Disorder",
+        "code": { "@type": "MedicalCode", "code": "F41.1", "codingSystem": "ICD-10" },
+    },
+    "provider": { "@type": "Organization", "name": "TMS List", "url": siteUrl },
+});
+
+const QUESTIONS = [
+    "Feeling nervous, anxious, or on edge",
+    "Not being able to stop or control worrying",
+    "Worrying too much about different things",
+    "Trouble relaxing",
+    "Being so restless that it's hard to sit still",
+    "Becoming easily annoyed or irritable",
+    "Feeling afraid as if something awful might happen",
+];
+---
+
+<Layout title={title} description={description} noindex={true} schema={quizSchema}>
+    <main class="min-h-screen bg-gradient-to-b from-[var(--paper2)] to-white py-12">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <div class="mb-6 flex items-center justify-center">
+                <div class="flex items-center gap-2 text-sm text-[var(--muted)]">
+                    Over the last 2 weeks <span>•</span> 7 questions <span>•</span> ~2 minutes
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="flex justify-between text-xs font-semibold text-[var(--muted)] mb-2 uppercase tracking-wide">
+                    <span>Your Progress</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="h-2 bg-[var(--paper2)] rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-[var(--ink)] transition-all duration-500 ease-out" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-[var(--line)] overflow-hidden">
+                <div id="slide-intro" class="p-8 md:p-12 text-center">
+                    <h1 class="text-3xl font-semibold tracking-tight text-[var(--ink)] mb-4">Anxiety Severity Assessment</h1>
+                    <p class="text-lg text-[var(--muted)] mb-4">The GAD-7 is the standard screening tool for generalized anxiety, used in primary care and psychiatry worldwide.</p>
+                    <p class="text-base text-[var(--muted)] mb-8">Rate how often each problem has bothered you over the <strong>past 2 weeks</strong>. Your score helps identify severity and what next steps might help.</p>
+                    <button id="btn-start" class="px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] transition-all shadow-lg">Start Assessment</button>
+                </div>
+
+                <div id="slide-q" class="hidden p-8 md:p-12">
+                    <span id="q-counter" class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block"></span>
+                    <h2 id="q-text" class="text-xl font-semibold text-[var(--ink)] mb-2"></h2>
+                    <p class="text-[var(--muted)] text-sm mb-6">Score: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day</p>
+                    <div class="space-y-3">
+                        <button data-score="0" class="ans-btn">Not at all <span class="ans-score">0</span></button>
+                        <button data-score="1" class="ans-btn">Several days <span class="ans-score">1</span></button>
+                        <button data-score="2" class="ans-btn">More than half the days <span class="ans-score">2</span></button>
+                        <button data-score="3" class="ans-btn">Nearly every day <span class="ans-score">3</span></button>
+                    </div>
+                </div>
+
+                <div id="slide-results" class="hidden p-8 md:p-12">
+                    <div class="text-center mb-8">
+                        <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Your GAD-7 Score</span>
+                        <div class="inline-flex items-baseline gap-1 mb-3">
+                            <span id="score-number" class="text-6xl font-extrabold text-[var(--ink)]">0</span>
+                            <span class="text-2xl text-[var(--muted)]">/21</span>
+                        </div>
+                        <div id="severity-badge" class="inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4">—</div>
+                    </div>
+                    <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-6 mb-6 text-left">
+                        <h3 class="font-semibold text-[var(--ink2)] mb-3">What Your Score Means</h3>
+                        <p id="score-interpretation" class="text-sm text-[var(--muted)] leading-relaxed"></p>
+                    </div>
+                    <div class="bg-[rgba(10,22,40,0.05)] border border-[var(--line)] rounded-xl p-6 mb-8 text-left">
+                        <h3 class="font-semibold text-[var(--ink)] mb-2">Recommended Next Steps</h3>
+                        <p id="treatment-text" class="text-sm text-[var(--ink2)] leading-relaxed"></p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <a href="/treatments/anxiety/" class="quiz-geo-link w-full sm:w-auto text-center px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] shadow-lg">Learn About TMS for Anxiety</a>
+                        <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto text-center px-8 py-4 text-[var(--muted)] font-medium rounded-xl border border-[var(--line)] hover:text-[var(--ink)]">Am I a Candidate?</a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-xs text-[var(--muted)] mt-6">Screening tool, not a diagnosis. Only a licensed clinician can diagnose anxiety. Scores are not stored.</p>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .ans-btn { width: 100%; padding: 1rem; text-align: left; border: 2px solid var(--line); border-radius: 0.75rem; font-weight: 500; color: var(--ink2); transition: all 0.15s ease; display: flex; justify-content: space-between; align-items: center; }
+    .ans-btn:hover { border-color: var(--ink); background: rgba(10,22,40,0.04); }
+    .ans-score { font-size: 0.75rem; font-weight: 700; color: var(--muted); }
+</style>
+
+<script is:inline define:vars={{ QUESTIONS }}>
+    const answers = [];
+    let qIdx = 0;
+    const total = QUESTIONS.length;
+
+    function renderQ() {
+        document.getElementById("q-counter").innerText = `Question ${qIdx + 1} of ${total}`;
+        document.getElementById("q-text").innerText = QUESTIONS[qIdx];
+    }
+
+    function setProgress() {
+        const pct = Math.min((answers.length / total) * 100, 100);
+        document.getElementById("progress-bar").style.width = pct + "%";
+        document.getElementById("progress-text").innerText = Math.round(pct) + "%";
+    }
+
+    document.getElementById("btn-start").addEventListener("click", () => {
+        document.getElementById("slide-intro").classList.add("hidden");
+        document.getElementById("slide-q").classList.remove("hidden");
+        renderQ();
+    });
+
+    document.querySelectorAll(".ans-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            answers.push(parseInt(btn.dataset.score, 10));
+            setProgress();
+            qIdx++;
+            if (qIdx >= total) {
+                document.getElementById("slide-q").classList.add("hidden");
+                showResults();
+            } else {
+                renderQ();
+            }
+        });
+    });
+
+    function getSeverity(s) {
+        if (s <= 4) return { label: "Minimal", color: "bg-green-100 text-green-700", interp: "Your score suggests minimal or no anxiety. If you're feeling on edge today, lifestyle support — sleep, exercise, social connection — usually does the job at this level.", treat: "Treatment generally isn't needed. Re-check if you notice symptoms worsening." };
+        if (s <= 9) return { label: "Mild", color: "bg-yellow-100 text-yellow-700", interp: "Your score suggests mild anxiety. CBT and lifestyle changes are typically the first-line approach and work well at this level for most people.", treat: "Talk to a primary care doctor or therapist. CBT is highly effective for mild GAD. Re-assess in 2-4 weeks if symptoms persist." };
+        if (s <= 14) return { label: "Moderate", color: "bg-orange-100 text-orange-700", interp: "Your score suggests moderate anxiety. Therapy plus medication (typically SSRIs or SNRIs) is the standard first-line approach. TMS for anxiety is off-label but increasingly studied for treatment-resistant cases.", treat: "Schedule an evaluation with a psychiatrist or your primary care doctor. If you've already tried medications without enough relief, ask about TMS or other neuromodulation options." };
+        return { label: "Severe", color: "bg-red-100 text-red-700", interp: "Your score suggests severe anxiety. This level often warrants prompt evaluation and a combination of medication, therapy, and possibly neuromodulation. TMS for anxiety has growing evidence for treatment-resistant GAD.", treat: "See a psychiatrist as soon as possible. Bring documentation of past medications and therapies. If standard treatments haven't worked, TMS or ketamine therapy may be options worth discussing." };
+    }
+
+    function showResults() {
+        const score = answers.reduce((a, b) => a + b, 0);
+        const sev = getSeverity(score);
+        document.getElementById("slide-results").classList.remove("hidden");
+        document.getElementById("score-number").innerText = score;
+        const badge = document.getElementById("severity-badge");
+        badge.innerText = sev.label;
+        badge.className = "inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4 " + sev.color;
+        document.getElementById("score-interpretation").innerText = sev.interp;
+        document.getElementById("treatment-text").innerText = sev.treat;
+        document.getElementById("progress-bar").style.width = "100%";
+        document.getElementById("progress-text").innerText = "100%";
+    }
+
+    try { if (window.TMS_GEO && window.TMS_GEO.url) { document.querySelectorAll(".quiz-geo-link").forEach((el) => { el.href = window.TMS_GEO.url; }); } } catch (e) {}
+</script>

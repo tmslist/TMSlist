@@ -9,8 +9,8 @@ interface CommunityAuthorBadgeProps {
 
 const ROLE_BADGES: Record<string, { label: string; color: string }> = {
   clinic_owner: { label: 'Verified Specialist', color: 'bg-emerald-100 text-emerald-700' },
-  admin: { label: 'TMS List Staff', color: 'bg-violet-100 text-violet-700' },
-  editor: { label: 'TMS List Staff', color: 'bg-violet-100 text-violet-700' },
+  admin: { label: 'TMS List Staff', color: 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]' },
+  editor: { label: 'TMS List Staff', color: 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]' },
 };
 
 export default function CommunityAuthorBadge({
@@ -34,11 +34,11 @@ export default function CommunityAuthorBadge({
         <img
           src={imageUrl}
           alt={displayName}
-          className={`${avatarSize} rounded-full object-cover ring-2 ${isSpecialist ? 'ring-emerald-300' : 'ring-gray-200'}`}
+          className={`${avatarSize} rounded-full object-cover ring-2 ${isSpecialist ? 'ring-emerald-300' : 'ring-[rgba(10,22,40,0.1)]'}`}
         />
       ) : (
         <div className={`${avatarSize} rounded-full flex items-center justify-center text-white font-bold ${
-          isSpecialist ? 'bg-emerald-500' : badge ? 'bg-violet-500' : 'bg-gray-400'
+          isSpecialist ? 'bg-emerald-500' : badge ? 'bg-[var(--ink2)]' : 'bg-[var(--line)]'
         } ${size === 'md' ? 'text-sm' : 'text-[10px]'}`}>
           {displayName.charAt(0).toUpperCase()}
         </div>
@@ -46,9 +46,9 @@ export default function CommunityAuthorBadge({
 
       <div className="flex flex-col">
         <div className="flex items-center gap-1.5">
-          <span className={`font-semibold text-gray-900 ${textSize}`}>
+          <span className={`font-semibold text-[var(--ink)] ${textSize}`}>
             {displayName}
-            {credential && <span className="text-gray-500 font-normal">, {credential}</span>}
+            {credential && <span className="text-[var(--muted)] font-normal">, {credential}</span>}
           </span>
           {badge && (
             <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-semibold ${badge.color}`}>

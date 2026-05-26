@@ -42,9 +42,9 @@ const TREATMENTS: Array<{
     fullName: 'Repetitive Transcranial Magnetic Stimulation',
     icon: MagnetIcon,
     color: '#4f46e5',
-    bg: 'bg-violet-50',
-    border: 'border-violet-200',
-    accent: 'text-violet-600',
+    bg: 'bg-[rgba(10,22,40,0.08)]',
+    border: 'border-[rgba(10,22,40,0.15)]',
+    accent: 'text-[var(--accent)]',
     badge: 'FDA Cleared',
     badgeColor: '#4f46e5',
   },
@@ -54,9 +54,9 @@ const TREATMENTS: Array<{
     fullName: 'Electroconvulsive Therapy',
     icon: BoltIcon,
     color: '#0891b2',
-    bg: 'bg-cyan-50',
-    border: 'border-cyan-200',
-    accent: 'text-cyan-600',
+    bg: 'bg-[var(--paper2)]',
+    border: 'border-[var(--line)]',
+    accent: 'text-[var(--accent)]',
     badge: 'Established',
     badgeColor: '#0891b2',
   },
@@ -229,7 +229,7 @@ export default function TMSECTComparator() {
             className={`text-left rounded-2xl border p-6 transition-all ${
               selected.has(t.id)
                 ? `${t.bg} ${t.border} ring-2 ring-offset-2`
-                : 'border-slate-100 bg-white hover:border-slate-200'
+                : 'border-[var(--line)] bg-white hover:border-[var(--line)]'
             }`}
             style={selected.has(t.id) ? { ringColor: t.color } : {}}
           >
@@ -239,9 +239,9 @@ export default function TMSECTComparator() {
                 <CheckIcon size={20} className="text-emerald-500" />
               )}
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">{t.badge}</p>
-            <h3 className="text-xl font-bold text-slate-900">{t.name}</h3>
-            <p className="text-xs text-slate-500 mt-1">{t.fullName}</p>
+            <p className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] mb-1">{t.badge}</p>
+            <h3 className="text-xl font-bold text-[var(--ink)]">{t.name}</h3>
+            <p className="text-xs text-[var(--muted)] mt-1">{t.fullName}</p>
           </button>
         ))}
       </div>
@@ -249,12 +249,12 @@ export default function TMSECTComparator() {
       {/* Comparison dimensions */}
       <div className="space-y-4">
         {DIMENSIONS.map(dim => (
-          <div key={dim.key} className="bg-white rounded-xl border border-slate-100 overflow-hidden">
-            <div className="bg-slate-50 px-5 py-3 border-b border-slate-100">
-              <h4 className="text-sm font-bold text-slate-700">{dim.label}</h4>
-              <p className="text-xs text-slate-400 mt-0.5">{dim.description}</p>
+          <div key={dim.key} className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+            <div className="bg-[var(--paper2)] px-5 py-3 border-b border-[var(--line)]">
+              <h4 className="text-sm font-bold text-[var(--ink2)]">{dim.label}</h4>
+              <p className="text-xs text-[var(--muted)] mt-0.5">{dim.description}</p>
             </div>
-            <div className="divide-x divide-slate-50 grid grid-cols-3">
+            <div className="divide-x divide-[var(--line)] grid grid-cols-3">
               {TREATMENTS.map(t => {
                 const data = dim[t.id as keyof typeof dim] as typeof dim.tms;
                 const isSelected = selected.has(t.id);
@@ -265,10 +265,10 @@ export default function TMSECTComparator() {
                   >
                     <div className="flex items-center gap-2 mb-2">
                       <t.icon size={18} className="text-lg" />
-                      <span className="text-sm font-semibold text-slate-700">{t.name}</span>
+                      <span className="text-sm font-semibold text-[var(--ink2)]">{t.name}</span>
                     </div>
                     {/* Score bar */}
-                    <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden mb-2">
+                    <div className="w-full h-2 bg-[var(--paper2)] rounded-full overflow-hidden mb-2">
                       <div
                         className="h-full rounded-full transition-all duration-700"
                         style={{
@@ -277,10 +277,10 @@ export default function TMSECTComparator() {
                         }}
                       />
                     </div>
-                    <p className={`text-xs font-semibold ${isSelected ? t.accent : 'text-slate-400'}`}>
+                    <p className={`text-xs font-semibold ${isSelected ? t.accent : 'text-[var(--muted)]'}`}>
                       {data.label}
                     </p>
-                    <p className="text-xs text-slate-400 mt-1 leading-relaxed">{data.detail}</p>
+                    <p className="text-xs text-[var(--muted)] mt-1 leading-relaxed">{data.detail}</p>
                   </div>
                 );
               })}
@@ -291,15 +291,15 @@ export default function TMSECTComparator() {
 
       {/* Overall visual comparison */}
       {selected.size >= 2 && (
-        <div className="bg-slate-950 rounded-2xl p-8">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-6 text-center">Head-to-Head Summary</p>
+        <div className="bg-[var(--ink)] rounded-2xl p-8">
+          <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-6 text-center">Head-to-Head Summary</p>
           <div className="space-y-4">
             {TREATMENTS.filter(t => selected.has(t.id)).map(t => (
               <div key={t.id} className="flex items-center gap-4">
                 <t.icon size={24} className="text-2xl w-10 text-center" />
                 <span className="text-sm font-bold text-white w-16">{t.name}</span>
                 <div className="flex-1">
-                  <div className="h-6 rounded-full overflow-hidden bg-slate-800">
+                  <div className="h-6 rounded-full overflow-hidden bg-[var(--ink2)]">
                     <div
                       className="h-full rounded-full flex items-center justify-end pr-3"
                       style={{
@@ -327,10 +327,10 @@ export default function TMSECTComparator() {
       )}
 
       {/* Patient Decision Framework */}
-      <div className="border-t border-slate-200 pt-8">
+      <div className="border-t border-[var(--line)] pt-8">
         <button
           onClick={() => setShowDecision(!showDecision)}
-          className="flex items-center gap-3 text-sm font-bold text-slate-700 hover:text-violet-600 transition-colors"
+          className="flex items-center gap-3 text-sm font-bold text-[var(--ink2)] hover:text-[var(--accent)] transition-colors"
         >
           <TargetIcon size={24} className="text-2xl" />
           {showDecision ? 'Hide Decision Framework' : 'Which treatment is right for me?'}
@@ -338,7 +338,7 @@ export default function TMSECTComparator() {
 
         {showDecision && (
           <div className="mt-6 space-y-6">
-            <p className="text-sm text-slate-500">Select your situation to see personalized recommendations.</p>
+            <p className="text-sm text-[var(--muted)]">Select your situation to see personalized recommendations.</p>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {PATIENT_TYPES.map(pt => (
@@ -347,8 +347,8 @@ export default function TMSECTComparator() {
                   onClick={() => setPatientType(pt.id)}
                   className={`text-left p-4 rounded-xl border transition-all ${
                     patientType === pt.id
-                      ? 'border-violet-300 bg-violet-50 ring-1 ring-violet-300'
-                      : 'border-slate-100 bg-white hover:border-slate-200'
+                      ? 'border-[rgba(10,22,40,0.2)] bg-[rgba(10,22,40,0.08)] ring-1 ring-[rgba(10,22,40,0.2)]'
+                      : 'border-[var(--line)] bg-white hover:border-[var(--line)]'
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-2">
@@ -357,18 +357,18 @@ export default function TMSECTComparator() {
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-700">URGENT</span>
                     )}
                   </div>
-                  <p className="text-sm font-semibold text-slate-800">{pt.label}</p>
+                  <p className="text-sm font-semibold text-[var(--ink)]">{pt.label}</p>
                 </button>
               ))}
             </div>
 
             {patient && (
-              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+              <div className="bg-[var(--paper2)] rounded-2xl p-6 border border-[var(--line)]">
                 <div className="flex items-start gap-3 mb-4">
                   <patient.icon size={24} className="text-2xl mt-0.5" />
                   <div>
-                    <p className="text-sm font-bold text-slate-800">{patient.label} — Recommendation</p>
-                    <p className="text-sm text-slate-600 mt-1 leading-relaxed">{patient.recommendation}</p>
+                    <p className="text-sm font-bold text-[var(--ink)]">{patient.label} — Recommendation</p>
+                    <p className="text-sm text-[var(--ink2)] mt-1 leading-relaxed">{patient.recommendation}</p>
                   </div>
                 </div>
 
@@ -380,12 +380,12 @@ export default function TMSECTComparator() {
                       <div key={tId} className={`rounded-xl p-4 ${t.bg} border ${t.border}`}>
                         <div className="flex items-center gap-2 mb-2">
                           <t.icon size={20} className="text-xl" />
-                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${i === 0 ? 'bg-violet-600 text-white' : 'bg-slate-100 text-slate-600'}`}>
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${i === 0 ? 'bg-[var(--ink)] text-white' : 'bg-[var(--paper2)] text-[var(--ink2)]'}`}>
                             {priorityLabels[i]}
                           </span>
                         </div>
-                        <p className="text-sm font-bold text-slate-800">{t.name}</p>
-                        <p className="text-xs text-slate-500 mt-1">{t.fullName}</p>
+                        <p className="text-sm font-bold text-[var(--ink)]">{t.name}</p>
+                        <p className="text-xs text-[var(--muted)] mt-1">{t.fullName}</p>
                       </div>
                     );
                   })}
@@ -396,7 +396,7 @@ export default function TMSECTComparator() {
                     <WarningIcon size={14} />
                     Important
                   </p>
-                  <p className="text-xs text-slate-600">
+                  <p className="text-xs text-[var(--ink2)]">
                     This tool provides educational information only. Treatment decisions must be made with a qualified psychiatrist who understands your complete medical history. This is not a substitute for clinical evaluation.
                   </p>
                 </div>
@@ -413,7 +413,7 @@ export default function TMSECTComparator() {
             <CheckIcon size={16} />
             When to choose TMS over ECT
           </p>
-          <ul className="space-y-1.5 text-sm text-slate-600">
+          <ul className="space-y-1.5 text-sm text-[var(--ink2)]">
             <li>• You want to avoid anesthesia and memory disruption</li>
             <li>• You can commit to daily visits for 6 weeks</li>
             <li>• You've had a good response to TMS before</li>
@@ -421,12 +421,12 @@ export default function TMSECTComparator() {
             <li>• You want to remain fully functional during treatment</li>
           </ul>
         </div>
-        <div className="bg-cyan-50 rounded-xl p-5 border border-cyan-100">
-          <p className="text-sm font-bold text-cyan-700 mb-2 flex items-center gap-2">
+        <div className="bg-[var(--paper2)] rounded-xl p-5 border border-[var(--line)]">
+          <p className="text-sm font-bold text-[var(--accent)] mb-2 flex items-center gap-2">
             <BoltIcon size={16} />
             When to choose ECT over TMS
           </p>
-          <ul className="space-y-1.5 text-sm text-slate-600">
+          <ul className="space-y-1.5 text-sm text-[var(--ink2)]">
             <li>• Acute suicidality or severe psychotic depression</li>
             <li>• Catatonia or severe psychomotor retardation</li>
             <li>• Failed multiple medication trials AND TMS</li>
@@ -437,9 +437,9 @@ export default function TMSECTComparator() {
       </div>
 
       {/* Source references */}
-      <div className="bg-slate-50 rounded-xl p-5 border border-slate-100">
-        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">References & Sources</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-slate-500">
+      <div className="bg-[var(--paper2)] rounded-xl p-5 border border-[var(--line)]">
+        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider mb-3">References & Sources</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-[var(--muted)]">
           {[
             'Kellner CH et al. ECT handbook 4th ed.',
             'Lefter B et al. TMS vs ECT meta-analysis, JECT',

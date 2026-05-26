@@ -1,10 +1,10 @@
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest } from '../../../../utils/auth';
+import { getSessionFromRequest } from '../../../../utils/auth.js';
 import { db } from '../../../../db';
 import { users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
 import { authenticator } from 'otplib';
-import { createHash } from 'crypto';
+import { encryptSecret } from '../../../../utils/secretEncryption.js';
 
 export const prerender = false;
 
@@ -29,21 +29,17 @@ export const POST: APIRoute = async ({ request }) => {
   const encodedSecret = authenticator.encodeSecret(secret);
   const otpauthUrl = authenticator.keyuri(session.email, APP_NAME, secret);
 
-  // Store the raw secret in DB (consider encrypting at rest in production)
+  // Store the encrypted secret. Verify endpoints decrypt before use; legacy
+  // plaintext rows are accepted for backwards compatibility and re-encrypted
+  // on next successful verify.
   await db.update(users).set({
-    totpSecret: secret,
+    totpSecret: encryptSecret(secret),
   }).where(eq(users.id, session.userId));
-
-  // Generate a setup token that proves the user initiated this setup
-  const setupToken = createHash('sha256')
-    .update(`${session.userId}:${session.email}:${Date.now()}`)
-    .digest('hex');
 
   return new Response(JSON.stringify({
     secret: encodedSecret,  // base32 for manual entry
     otpauthUrl,              // URI for QR code scanning
     qrCodeUrl: `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(otpauthUrl)}`,
-    setupToken,              // Token to prove setup initiation
   }), {
     headers: { 'Content-Type': 'application/json' },
   });

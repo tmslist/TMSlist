@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { verifyMagicToken, getUserByEmail, createSession, getClientIpFromRequest, logLoginActivity } from '../../../utils/auth';
-import { sendSuspiciousLoginAlert } from '../../../utils/email';
+import { verifyMagicToken, getUserByEmail, createSession, getClientIpFromRequest, logLoginActivity } from '../../../utils/auth.js';
+import { sendSuspiciousLoginAlert } from '../../../utils/email.js';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -86,7 +86,7 @@ export const GET: APIRoute = async ({ request }) => {
 
     // Create session with session tracking
     const { cookie } = await createSession(
-      { userId: user.id, email: user.email, role: user.role },
+      { userId: user.id, email: user.email, role: user.role, clinicId: user.clinicId ?? undefined },
       {
         userAgent,
         ipAddress,

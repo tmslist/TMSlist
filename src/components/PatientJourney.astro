@@ -1,0 +1,53 @@
+---
+import { steps } from '../data/journeySteps';
+---
+
+<section class="py-32 max-w-[1400px] mx-auto px-8">
+  <!-- Header row -->
+  <div class="grid lg:grid-cols-2 gap-16 mb-20 items-end">
+    <div>
+      <div class="flex items-center gap-3 mb-6" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted);">
+        <span style="width: 24px; height: 1px; background: rgba(10,22,40,0.3);"></span>
+        <span>The patient journey</span>
+      </div>
+      <h2 class="serif" style="font-size: clamp(2rem, 4.5vw, 4.25rem); line-height: 0.95; color: var(--ink);">
+        Your TMS<br/>
+        <em>treatment journey,</em><br/>
+        step by step.
+      </h2>
+    </div>
+    <p style="font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 28rem; margin-left: auto;">
+      The median TMS List patient moves from first search to their first session in ten days. Here is what the path looks like - and what to expect at each step.
+    </p>
+  </div>
+
+  <!-- Timeline steps -->
+  <div class="relative">
+    <!-- Connecting line (hidden on mobile) -->
+    <div class="hidden lg:block absolute top-[22px] left-[2%] right-[2%] h-px" style="background: var(--line); z-index: 0;"></div>
+
+    <div class="grid lg:grid-cols-5 gap-8">
+      {steps.map((step) => (
+        <div class="relative" style={{ zIndex: 1 }}>
+          <!-- Step header -->
+          <div class="flex items-center gap-3 mb-5 relative">
+            <div
+              class="w-11 h-11 rounded-full flex items-center justify-center text-sm font-medium"
+              style="background: var(--paper); border: 1px solid var(--line); color: var(--ink); font-variant-numeric: tabular-nums; box-shadow: 0 1px 2px rgba(10,22,40,0.06);"
+            >
+              {step.num}
+            </div>
+            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted);">{step.timing}</div>
+          </div>
+          <!-- Step content -->
+          <h3 class="serif mb-3" style="font-size: 22px; line-height: 1.1; color: var(--ink);">{step.title}</h3>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.55;">{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.02em; }
+</style>

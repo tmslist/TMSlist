@@ -1,0 +1,285 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Which Depression Treatment Is Right for Me? | Decision Tree";
+const description =
+    "Free 6-question decision tree that helps you compare TMS, Spravato, IV Ketamine, and ECT based on your diagnosis, prior treatments, insurance, and urgency.";
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const quizSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "Depression Treatment Decision Tree",
+    "description": description,
+    "url": `${siteUrl}/quiz/which-treatment-is-right/`,
+    "educationalLevel": "patient",
+    "provider": { "@type": "Organization", "name": "TMS List", "url": siteUrl },
+});
+---
+
+<Layout title={title} description={description} noindex={true} schema={quizSchema}>
+    <main class="min-h-screen bg-gradient-to-b from-[var(--paper2)] to-white py-12">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <section class="mb-10 bg-[var(--paper)] border border-[var(--line)] rounded-2xl p-8">
+                <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Decision Tool</span>
+                <h1 class="text-3xl font-semibold tracking-tight text-[var(--ink)] mb-4">Which Treatment Is Right for Me?</h1>
+                <p class="text-[var(--muted)] leading-relaxed mb-4">
+                    Treatment-resistant depression has more good options today than ever before. <strong>TMS, Spravato (esketamine), IV ketamine,</strong> and <strong>ECT</strong> all work — but they work differently, cost differently, and are appropriate for different situations.
+                </p>
+                <p class="text-[var(--muted)] leading-relaxed">
+                    This 6-question decision tree weighs your diagnosis, prior treatment history, urgency, and insurance situation to suggest which option likely fits best. It's a starting point for your conversation with a psychiatrist — not a substitute for one.
+                </p>
+            </section>
+
+            <div class="mb-8">
+                <div class="flex justify-between text-xs font-semibold text-[var(--muted)] mb-2 uppercase tracking-wide">
+                    <span>Decision Tree</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="h-2 bg-[var(--paper2)] rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-[var(--ink)] transition-all duration-500 ease-out" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-[var(--line)] overflow-hidden">
+                <div id="slide-intro" class="p-8 md:p-12 text-center">
+                    <h2 class="text-2xl font-semibold tracking-tight text-[var(--ink)] mb-4">Let's Find Your Best Match</h2>
+                    <p class="text-[var(--muted)] mb-8">Six quick questions. Confidential — no info required to take the quiz.</p>
+                    <button onclick="next('intro','q1')" class="px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] shadow-lg">Start</button>
+                </div>
+
+                <!-- Q1 Diagnosis -->
+                <div id="slide-q1" class="hidden p-8 md:p-12">
+                    <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Question 1 of 6</span>
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">What are you primarily seeking treatment for?</h2>
+                    <div class="space-y-3">
+                        <button onclick="record('dx','depression'); next('q1','q2')" class="opt">Treatment-resistant depression</button>
+                        <button onclick="record('dx','si'); next('q1','q2')" class="opt">Depression with active suicidal thoughts</button>
+                        <button onclick="record('dx','ocd'); next('q1','q2')" class="opt">OCD</button>
+                        <button onclick="record('dx','ptsd'); next('q1','q2')" class="opt">PTSD or severe anxiety</button>
+                        <button onclick="record('dx','bipolar'); next('q1','q2')" class="opt">Bipolar depression</button>
+                        <button onclick="record('dx','pain'); next('q1','q2')" class="opt">Chronic pain (CRPS, fibromyalgia)</button>
+                    </div>
+                </div>
+
+                <!-- Q2 Failed Meds -->
+                <div id="slide-q2" class="hidden p-8 md:p-12">
+                    <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Question 2 of 6</span>
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">In your current episode, how many medications have you tried without enough relief?</h2>
+                    <div class="space-y-3">
+                        <button onclick="record('meds',0); next('q2','q3')" class="opt">None yet</button>
+                        <button onclick="record('meds',1); next('q2','q3')" class="opt">1 medication</button>
+                        <button onclick="record('meds',2); next('q2','q3')" class="opt">2 medications</button>
+                        <button onclick="record('meds',4); next('q2','q3')" class="opt">3 or more</button>
+                    </div>
+                </div>
+
+                <!-- Q3 Urgency -->
+                <div id="slide-q3" class="hidden p-8 md:p-12">
+                    <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Question 3 of 6</span>
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">How urgently do you need relief?</h2>
+                    <div class="space-y-3">
+                        <button onclick="record('urgency','crisis'); next('q3','q4')" class="opt">Crisis — I need help within days</button>
+                        <button onclick="record('urgency','soon'); next('q3','q4')" class="opt">Soon — within 2-3 weeks would be ideal</button>
+                        <button onclick="record('urgency','steady'); next('q3','q4')" class="opt">Steady — I can commit to a 4-6 week course</button>
+                    </div>
+                </div>
+
+                <!-- Q4 Insurance -->
+                <div id="slide-q4" class="hidden p-8 md:p-12">
+                    <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Question 4 of 6</span>
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">What's your insurance situation?</h2>
+                    <div class="space-y-3">
+                        <button onclick="record('ins','commercial'); next('q4','q5')" class="opt">Commercial insurance / Medicare</button>
+                        <button onclick="record('ins','medicaid'); next('q4','q5')" class="opt">Medicaid</button>
+                        <button onclick="record('ins','va'); next('q4','q5')" class="opt">VA / military</button>
+                        <button onclick="record('ins','cash'); next('q4','q5')" class="opt">Uninsured / can pay cash</button>
+                        <button onclick="record('ins','tight'); next('q4','q5')" class="opt">Uninsured / cost is a major barrier</button>
+                    </div>
+                </div>
+
+                <!-- Q5 Logistics -->
+                <div id="slide-q5" class="hidden p-8 md:p-12">
+                    <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Question 5 of 6</span>
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">Which schedule works best for your life?</h2>
+                    <div class="space-y-3">
+                        <button onclick="record('schedule','daily'); next('q5','q6')" class="opt">Daily appointments for 4-6 weeks (TMS)</button>
+                        <button onclick="record('schedule','twice'); next('q5','q6')" class="opt">Twice weekly with 2-hr monitoring (Spravato)</button>
+                        <button onclick="record('schedule','flex'); next('q5','q6')" class="opt">Flexible — a few sessions over 2-3 weeks (ketamine)</button>
+                        <button onclick="record('schedule','intense'); next('q5','q6')" class="opt">Most intensive option, fastest possible (ECT)</button>
+                    </div>
+                </div>
+
+                <!-- Q6 Concerns -->
+                <div id="slide-q6" class="hidden p-8 md:p-12">
+                    <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Last Question</span>
+                    <h2 class="text-2xl font-semibold text-[var(--ink)] mb-8">Any concerns that matter most to you?</h2>
+                    <div class="space-y-3">
+                        <button onclick="record('concern','sideeffects'); show()" class="opt">Avoiding medication side effects</button>
+                        <button onclick="record('concern','memory'); show()" class="opt">Avoiding memory or cognitive side effects</button>
+                        <button onclick="record('concern','speed'); show()" class="opt">Speed of onset matters most</button>
+                        <button onclick="record('concern','durability'); show()" class="opt">Long-lasting results matter most</button>
+                        <button onclick="record('concern','none'); show()" class="opt">No specific concerns — just want what works</button>
+                    </div>
+                </div>
+
+                <!-- Result container -->
+                <div id="result" class="hidden p-8 md:p-12">
+                    <div class="text-center mb-6">
+                        <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Best Match for You</span>
+                        <h2 id="result-title" class="text-3xl font-semibold tracking-tight text-[var(--ink)] mb-3"></h2>
+                        <p id="result-tagline" class="text-[var(--muted)]"></p>
+                    </div>
+
+                    <div id="result-body" class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-6 mb-6 text-left"></div>
+
+                    <div id="result-runners" class="bg-[rgba(10,22,40,0.05)] border border-[var(--line)] rounded-xl p-6 mb-8 text-left">
+                        <h3 class="font-semibold text-[var(--ink)] mb-3">Also Worth Considering</h3>
+                        <div id="runners-list" class="space-y-3"></div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <a id="primary-cta" href="/specialists/" class="w-full sm:w-auto text-center px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] shadow-lg">Find a Specialist</a>
+                        <a href="/quiz/" class="w-full sm:w-auto text-center px-8 py-4 text-[var(--muted)] font-medium rounded-xl border border-[var(--line)] hover:text-[var(--ink)]">Other Quizzes</a>
+                    </div>
+
+                    <p class="text-xs text-[var(--muted)] text-center mt-6 max-w-lg mx-auto">
+                        This recommendation is a starting point, not a prescription. A psychiatrist can confirm the right fit based on your full medical history.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .opt { width: 100%; padding: 1rem; text-align: left; border: 2px solid var(--line); border-radius: 0.75rem; font-weight: 500; color: var(--ink2); transition: all 0.15s ease; }
+    .opt:hover { border-color: var(--ink); background: rgba(10,22,40,0.04); }
+</style>
+
+<script is:inline>
+    const ans = {};
+    const total = 6;
+    let answered = 0;
+
+    function record(k, v) { ans[k] = v; }
+    function next(curr, n) {
+        document.getElementById("slide-" + curr).classList.add("hidden");
+        document.getElementById("slide-" + n).classList.remove("hidden");
+        answered++;
+        const pct = Math.min((answered / total) * 100, 100);
+        document.getElementById("progress-bar").style.width = pct + "%";
+        document.getElementById("progress-text").innerText = Math.round(pct) + "%";
+    }
+
+    const TREATMENTS = {
+        tms: {
+            title: "TMS Therapy",
+            tagline: "Daily 20-minute sessions over 4-6 weeks. FDA-cleared, insurance-covered for most TRD cases.",
+            why: "TMS is non-systemic (no medication side effects), insurance-covered for the most common scenarios, and produces durable results — typically 6-12 months of benefit per course.",
+            tradeoffs: "Slower to take effect (2-3 weeks). Requires near-daily commitment. Not the right tool for acute crisis.",
+            ctaHref: "/quiz/am-i-a-candidate/",
+            ctaLabel: "Check TMS Eligibility",
+        },
+        spravato: {
+            title: "Spravato (Esketamine)",
+            tagline: "FDA-approved nasal spray for treatment-resistant depression. Twice-weekly sessions, insurance-covered.",
+            why: "Spravato has FDA approval, broad insurance coverage, rapid onset (hours to days), and a specific indication for MDD with suicidal ideation that no other neuromodulation matches.",
+            tradeoffs: "Requires 2-hour in-clinic monitoring per session. Must be taken alongside an oral antidepressant. Ongoing maintenance dosing required.",
+            ctaHref: "/quiz/spravato-eligibility/",
+            ctaLabel: "Check Spravato Eligibility",
+        },
+        ketamine: {
+            title: "IV Ketamine Therapy",
+            tagline: "Rapid-onset off-label infusion therapy. Flexible scheduling but typically cash-pay.",
+            why: "IV ketamine is the most flexible neuromodulation option — used for depression, PTSD, anxiety, OCD, and chronic pain. Onset within 24-72 hours. Works when Spravato can't be used (e.g., for non-depression indications).",
+            tradeoffs: "Off-label, so insurance rarely covers it. Costs $400-$800 per session. Requires ongoing booster sessions.",
+            ctaHref: "/quiz/ketamine-eligibility/",
+            ctaLabel: "Check Ketamine Eligibility",
+        },
+        ect: {
+            title: "Electroconvulsive Therapy (ECT)",
+            tagline: "The most effective acute treatment for severe depression — modern ECT is far gentler than older protocols.",
+            why: "ECT remains the most rapidly and reliably effective treatment for severe, life-threatening depression — especially with psychotic features, catatonia, or active suicidality. Response rates 70-90%.",
+            tradeoffs: "Requires general anesthesia. Temporary memory side effects (typically resolve over weeks). Significant logistical commitment. Insurance-covered for severe cases.",
+            ctaHref: "/alternatives/electroconvulsive-therapy-ect/",
+            ctaLabel: "Learn About ECT",
+        },
+    };
+
+    function score() {
+        // Returns ranked list of treatments based on weighted scoring
+        const scores = { tms: 0, spravato: 0, ketamine: 0, ect: 0 };
+
+        // Diagnosis fit
+        if (ans.dx === "depression") { scores.tms += 3; scores.spravato += 2; scores.ketamine += 2; scores.ect += 1; }
+        if (ans.dx === "si") { scores.spravato += 3; scores.ect += 3; scores.ketamine += 2; scores.tms += 1; }
+        if (ans.dx === "ocd") { scores.tms += 4; scores.ketamine += 1; }
+        if (ans.dx === "ptsd") { scores.tms += 2; scores.ketamine += 3; scores.spravato -= 1; }
+        if (ans.dx === "bipolar") { scores.tms += 2; scores.ect += 2; scores.ketamine += 1; scores.spravato -= 1; }
+        if (ans.dx === "pain") { scores.ketamine += 4; scores.tms += 1; scores.spravato -= 2; }
+
+        // Failed meds
+        if (ans.meds === 0) { scores.tms -= 2; scores.spravato -= 3; scores.ect -= 2; scores.ketamine -= 1; }
+        if (ans.meds === 1) { scores.spravato -= 1; }
+        if (ans.meds >= 2) { scores.tms += 1; scores.spravato += 2; scores.ket += 0; scores.ect += 1; }
+        if (ans.meds >= 4) { scores.ect += 2; scores.ketamine += 1; }
+
+        // Urgency
+        if (ans.urgency === "crisis") { scores.ect += 4; scores.ketamine += 3; scores.spravato += 2; scores.tms -= 2; }
+        if (ans.urgency === "soon") { scores.ketamine += 2; scores.spravato += 2; scores.tms += 0; }
+        if (ans.urgency === "steady") { scores.tms += 3; scores.ect -= 1; }
+
+        // Insurance
+        if (ans.ins === "commercial") { scores.tms += 2; scores.spravato += 2; scores.ect += 2; scores.ketamine -= 1; }
+        if (ans.ins === "medicaid") { scores.tms += 1; scores.spravato += 1; scores.ect += 1; scores.ketamine -= 2; }
+        if (ans.ins === "va") { scores.tms += 3; scores.ketamine += 2; scores.ect += 1; }
+        if (ans.ins === "cash") { scores.ketamine += 2; }
+        if (ans.ins === "tight") { scores.tms += 1; scores.spravato += 1; scores.ketamine -= 3; }
+
+        // Schedule preference
+        if (ans.schedule === "daily") scores.tms += 2;
+        if (ans.schedule === "twice") scores.spravato += 2;
+        if (ans.schedule === "flex") scores.ketamine += 2;
+        if (ans.schedule === "intense") scores.ect += 2;
+
+        // Concern
+        if (ans.concern === "sideeffects") { scores.tms += 3; scores.ketamine -= 1; scores.ect -= 2; }
+        if (ans.concern === "memory") { scores.tms += 2; scores.spravato += 1; scores.ect -= 4; }
+        if (ans.concern === "speed") { scores.ketamine += 3; scores.spravato += 2; scores.ect += 2; scores.tms -= 1; }
+        if (ans.concern === "durability") { scores.tms += 3; scores.ect += 1; scores.ketamine -= 1; }
+
+        return Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    }
+
+    function show() {
+        document.getElementById("slide-q6").classList.add("hidden");
+        document.getElementById("progress-bar").style.width = "100%";
+        document.getElementById("progress-text").innerText = "100%";
+
+        const ranked = score();
+        const winner = TREATMENTS[ranked[0][0]];
+
+        document.getElementById("result").classList.remove("hidden");
+        document.getElementById("result-title").innerText = winner.title;
+        document.getElementById("result-tagline").innerText = winner.tagline;
+        document.getElementById("result-body").innerHTML =
+            '<h3 class="font-semibold text-[var(--ink2)] mb-2">Why this is your top match</h3>' +
+            '<p class="text-sm text-[var(--muted)] leading-relaxed mb-3">' + winner.why + '</p>' +
+            '<h3 class="font-semibold text-[var(--ink2)] mb-2 mt-4">Honest tradeoffs</h3>' +
+            '<p class="text-sm text-[var(--muted)] leading-relaxed">' + winner.tradeoffs + '</p>';
+
+        const runnersList = document.getElementById("runners-list");
+        runnersList.innerHTML = "";
+        for (let i = 1; i < 3; i++) {
+            const t = TREATMENTS[ranked[i][0]];
+            runnersList.innerHTML +=
+                '<div><a href="' + t.ctaHref + '" class="font-semibold text-[var(--ink)] hover:text-[var(--accent)]">' + t.title + '</a>' +
+                '<p class="text-xs text-[var(--muted)] mt-1">' + t.tagline + '</p></div>';
+        }
+
+        const cta = document.getElementById("primary-cta");
+        cta.href = winner.ctaHref;
+        cta.innerText = winner.ctaLabel;
+    }
+</script>

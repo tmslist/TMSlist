@@ -75,17 +75,17 @@ function TagInput({
   }
 
   return (
-    <div className="flex flex-wrap gap-1.5 p-2 border border-gray-300 rounded-lg bg-white min-h-[42px] focus-within:border-violet-500 focus-within:ring-1 focus-within:ring-violet-200 transition-colors">
+    <div className="flex flex-wrap gap-1.5 p-2 border border-[var(--line)] rounded-lg bg-white min-h-[42px] focus-within:border-[var(--ink2)] focus-within:ring-1 focus-within:ring-[rgba(10,22,40,0.15)] transition-colors">
       {tags.map((tag, i) => (
         <span
           key={`${tag}-${i}`}
-          className="inline-flex items-center gap-1 px-2.5 py-1 bg-violet-50 text-violet-700 text-xs font-medium rounded-full"
+          className="inline-flex items-center gap-1 px-2.5 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-full"
         >
           {tag}
           <button
             type="button"
             onClick={() => onChange(tags.filter((_, idx) => idx !== i))}
-            className="text-violet-400 hover:text-violet-700"
+            className="text-[var(--ink2)] hover:text-[var(--ink)]"
             aria-label={`Remove ${tag}`}
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,7 +100,7 @@ function TagInput({
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={tags.length === 0 ? placeholder : ''}
-        className="flex-1 min-w-[120px] text-sm outline-none bg-transparent placeholder:text-gray-400"
+        className="flex-1 min-w-[120px] text-sm outline-none bg-transparent placeholder:text-[var(--muted)]"
       />
     </div>
   );
@@ -123,7 +123,7 @@ function Toggle({
         aria-checked={checked}
         onClick={() => onChange(!checked)}
         className={`relative inline-flex h-6 w-11 shrink-0 rounded-full transition-colors ${
-          checked ? 'bg-violet-600' : 'bg-gray-200'
+          checked ? 'bg-[var(--ink)]' : 'bg-[var(--paper2)]'
         }`}
       >
         <span
@@ -132,7 +132,7 @@ function Toggle({
           }`}
         />
       </button>
-      <span className="text-sm text-gray-700">{label}</span>
+      <span className="text-sm text-[var(--ink2)]">{label}</span>
     </label>
   );
 }
@@ -160,14 +160,14 @@ export default function AdminContent() {
       )}
 
       {/* Tabs */}
-      <div className="border-b border-gray-200">
+      <div className="border-b border-[var(--line)]">
         <div className="flex gap-0">
           <button
             onClick={() => setActiveTab('questions')}
             className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === 'questions'
-                ? 'border-violet-600 text-violet-700'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                ? 'border-[var(--ink)] text-[var(--ink)]'
+                : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)] hover:border-[var(--line)]'
             }`}
           >
             Questions
@@ -176,8 +176,8 @@ export default function AdminContent() {
             onClick={() => setActiveTab('treatments')}
             className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === 'treatments'
-                ? 'border-violet-600 text-violet-700'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                ? 'border-[var(--ink)] text-[var(--ink)]'
+                : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)] hover:border-[var(--line)]'
             }`}
           >
             Treatments
@@ -305,49 +305,49 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
       <div className="space-y-4 p-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Slug</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Slug</label>
             <input
               type="text"
               value={data.slug || ''}
               onChange={(e) => setData({ slug: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="how-does-tms-work"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Category</label>
             <input
               type="text"
               value={data.category || ''}
               onChange={(e) => setData({ category: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="e.g. general, side-effects, cost"
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Question</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Question</label>
           <input
             type="text"
             value={data.question || ''}
             onChange={(e) => setData({ question: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+            className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
             placeholder="How does TMS therapy work?"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Answer</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Answer</label>
           <textarea
             value={data.answer || ''}
             onChange={(e) => setData({ answer: e.target.value })}
             rows={5}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+            className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
             placeholder="Detailed answer..."
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Related Slugs</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Related Slugs</label>
             <TagInput
               tags={data.relatedSlugs || []}
               onChange={(tags) => setData({ relatedSlugs: tags })}
@@ -355,12 +355,12 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Sort Order</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Sort Order</label>
             <input
               type="number"
               value={data.sortOrder ?? 0}
               onChange={(e) => setData({ sortOrder: Number(e.target.value) })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
             />
           </div>
         </div>
@@ -369,7 +369,7 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
             type="button"
             onClick={onSave}
             disabled={saving}
-            className="px-5 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
+            className="px-5 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
           >
             {saving ? 'Saving...' : saveLabel}
           </button>
@@ -382,10 +382,10 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
     <div className="space-y-5">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900">Questions</h3>
+        <h3 className="text-lg font-semibold text-[var(--ink)]">Questions</h3>
         <button
           onClick={() => setShowCreate(true)}
-          className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors"
+          className="px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors"
         >
           + Add Question
         </button>
@@ -399,14 +399,14 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
             placeholder="Search questions..."
             value={search}
             onChange={(e) => { setSearch(e.target.value); setPage(0); }}
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:border-violet-500 focus:ring-violet-200"
+            className="w-full px-4 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)]"
           />
         </div>
         {categories.length > 0 && (
           <select
             value={categoryFilter}
             onChange={(e) => { setCategoryFilter(e.target.value); setPage(0); }}
-            className="px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:border-violet-500"
+            className="px-4 py-2.5 rounded-lg border border-[var(--line)] text-sm bg-white focus:border-[var(--ink2)]"
           >
             <option value="">All Categories</option>
             {categories.map((c) => (
@@ -420,14 +420,14 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
         <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-800">{error}</div>
       )}
 
-      <div className="text-sm text-gray-500">{total} question{total !== 1 ? 's' : ''}</div>
+      <div className="text-sm text-[var(--muted)]">{total} question{total !== 1 ? 's' : ''}</div>
 
       {/* Create form */}
       {showCreate && (
-        <div className="bg-white rounded-xl border border-violet-200 shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-3 bg-violet-50 border-b border-violet-200">
-            <span className="text-sm font-semibold text-violet-700">New Question</span>
-            <button onClick={() => setShowCreate(false)} className="text-violet-400 hover:text-violet-600" aria-label="Close">
+        <div className="bg-white rounded-xl border border-[rgba(10,22,40,0.15)] shadow-sm overflow-hidden">
+          <div className="flex items-center justify-between px-5 py-3 bg-[rgba(10,22,40,0.08)] border-b border-[rgba(10,22,40,0.15)]">
+            <span className="text-sm font-semibold text-[var(--ink)]">New Question</span>
+            <button onClick={() => setShowCreate(false)} className="text-[var(--ink2)] hover:text-[var(--ink)]" aria-label="Close">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -443,16 +443,16 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
       )}
 
       {/* List */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="divide-y divide-gray-100">
+      <div className="bg-white rounded-xl shadow-sm border border-[var(--line)] overflow-hidden">
+        <div className="divide-y divide-[var(--line)]">
           {loading ? (
-            <div className="px-4 py-12 text-center text-gray-400"><div class="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2"></div><br/>Loading</div>
+            <div className="px-4 py-12 text-center text-[var(--muted)]"><div class="inline-block w-5 h-5 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-2"></div><br/>Loading</div>
           ) : questions.length === 0 ? (
-            <div className="px-4 py-8 text-center text-gray-500">No questions found.</div>
+            <div className="px-4 py-8 text-center text-[var(--muted)]">No questions found.</div>
           ) : questions.map((q) => (
             <div key={q.id}>
               <div
-                className={`px-5 py-4 cursor-pointer hover:bg-gray-50 transition-colors ${editingId === q.id ? 'bg-violet-50/50' : ''}`}
+                className={`px-5 py-4 cursor-pointer hover:bg-[var(--paper2)] transition-colors ${editingId === q.id ? 'bg-[rgba(10,22,40,0.08)]/50' : ''}`}
                 onClick={() => {
                   if (editingId === q.id) {
                     setEditingId(null);
@@ -465,11 +465,11 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="px-2 py-0.5 bg-indigo-50 text-indigo-700 text-[10px] font-semibold rounded uppercase">{q.category}</span>
-                      <span className="text-xs text-gray-400">#{q.sortOrder}</span>
+                      <span className="px-2 py-0.5 bg-[rgba(201,101,74,0.06)] text-[var(--warm)] text-[10px] font-semibold rounded uppercase">{q.category}</span>
+                      <span className="text-xs text-[var(--muted)]">#{q.sortOrder}</span>
                     </div>
-                    <h4 className="text-sm font-medium text-gray-900">{q.question}</h4>
-                    <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{q.answer}</p>
+                    <h4 className="text-sm font-medium text-[var(--ink)]">{q.question}</h4>
+                    <p className="text-xs text-[var(--muted)] mt-0.5 line-clamp-1">{q.answer}</p>
                   </div>
                   <div className="flex gap-2 shrink-0" onClick={(e) => e.stopPropagation()}>
                     <button
@@ -477,14 +477,14 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
                         if (editingId === q.id) { setEditingId(null); }
                         else { setEditingId(q.id); setEditData({ ...q }); }
                       }}
-                      className="px-3 py-1.5 bg-violet-50 text-violet-700 text-xs font-medium rounded-lg hover:bg-violet-100 transition-colors"
+                      className="px-3 py-1.5 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
                     >
                       {editingId === q.id ? 'Close' : 'Edit'}
                     </button>
                     {deleteConfirm === q.id ? (
                       <div className="flex gap-1">
                         <button onClick={() => handleDelete(q.id)} className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-medium rounded-lg">Confirm</button>
-                        <button onClick={() => setDeleteConfirm(null)} className="px-3 py-1.5 bg-gray-100 text-gray-600 text-xs font-medium rounded-lg">Cancel</button>
+                        <button onClick={() => setDeleteConfirm(null)} className="px-3 py-1.5 bg-[var(--paper2)] text-[var(--ink2)] text-xs font-medium rounded-lg">Cancel</button>
                       </div>
                     ) : (
                       <button onClick={() => setDeleteConfirm(q.id)} className="px-3 py-1.5 bg-red-50 text-red-700 text-xs font-medium rounded-lg hover:bg-red-100">Delete</button>
@@ -493,7 +493,7 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
                 </div>
               </div>
               {editingId === q.id && (
-                <div className="border-t border-gray-200 bg-gray-50">
+                <div className="border-t border-[var(--line)] bg-[var(--paper2)]">
                   {renderQuestionForm(
                     editData,
                     (updates) => setEditData((prev) => ({ ...prev, ...updates })),
@@ -507,20 +507,20 @@ function QuestionsPanel({ showToast }: { showToast: (type: 'success' | 'error', 
         </div>
 
         {totalPages > 1 && (
-          <div className="px-4 py-3 border-t border-gray-200 bg-gray-50 flex items-center justify-between">
-            <div className="text-sm text-gray-500">Page {page + 1} of {totalPages}</div>
+          <div className="px-4 py-3 border-t border-[var(--line)] bg-[var(--paper2)] flex items-center justify-between">
+            <div className="text-sm text-[var(--muted)]">Page {page + 1} of {totalPages}</div>
             <div className="flex gap-2">
               <button
                 onClick={() => setPage((p) => Math.max(0, p - 1))}
                 disabled={page === 0}
-                className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50"
+                className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-lg text-sm disabled:opacity-50 hover:bg-[var(--paper2)]"
               >
                 Previous
               </button>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
                 disabled={page >= totalPages - 1}
-                className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50"
+                className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-lg text-sm disabled:opacity-50 hover:bg-[var(--paper2)]"
               >
                 Next
               </button>
@@ -642,90 +642,90 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
       <div className="space-y-4 p-5">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Slug</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Slug</label>
             <input
               type="text"
               value={data.slug || ''}
               onChange={(e) => setData({ slug: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="deep-tms"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Name</label>
             <input
               type="text"
               value={data.name || ''}
               onChange={(e) => setData({ name: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="Deep TMS"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Full Name</label>
             <input
               type="text"
               value={data.fullName || ''}
               onChange={(e) => setData({ fullName: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="Deep Transcranial Magnetic Stimulation"
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Description</label>
           <textarea
             value={data.description || ''}
             onChange={(e) => setData({ description: e.target.value })}
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+            className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
             placeholder="Short description of the treatment..."
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">How It Works</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">How It Works</label>
           <textarea
             value={data.howItWorks || ''}
             onChange={(e) => setData({ howItWorks: e.target.value })}
             rows={4}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+            className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
             placeholder="Detailed explanation of the mechanism..."
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Session Duration</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Session Duration</label>
             <input
               type="text"
               value={data.sessionDuration || ''}
               onChange={(e) => setData({ sessionDuration: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="20-40 minutes"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Treatment Course</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Treatment Course</label>
             <input
               type="text"
               value={data.treatmentCourse || ''}
               onChange={(e) => setData({ treatmentCourse: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="36 sessions over 6 weeks"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Insurance Coverage</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Insurance Coverage</label>
             <input
               type="text"
               value={data.insuranceCoverage || ''}
               onChange={(e) => setData({ insuranceCoverage: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               placeholder="Covered by most major insurers"
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Conditions Treated</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Conditions Treated</label>
           <TagInput
             tags={data.conditions || []}
             onChange={(tags) => setData({ conditions: tags })}
@@ -744,7 +744,7 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
             type="button"
             onClick={onSave}
             disabled={saving}
-            className="px-5 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
+            className="px-5 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
           >
             {saving ? 'Saving...' : saveLabel}
           </button>
@@ -757,10 +757,10 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
     <div className="space-y-5">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900">Treatments</h3>
+        <h3 className="text-lg font-semibold text-[var(--ink)]">Treatments</h3>
         <button
           onClick={() => setShowCreate(true)}
-          className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors"
+          className="px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors"
         >
           + Add Treatment
         </button>
@@ -773,7 +773,7 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
           placeholder="Search treatments..."
           value={search}
           onChange={(e) => { setSearch(e.target.value); setPage(0); }}
-          className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:border-violet-500 focus:ring-violet-200"
+          className="w-full px-4 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)]"
         />
       </div>
 
@@ -781,14 +781,14 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
         <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-800">{error}</div>
       )}
 
-      <div className="text-sm text-gray-500">{total} treatment{total !== 1 ? 's' : ''}</div>
+      <div className="text-sm text-[var(--muted)]">{total} treatment{total !== 1 ? 's' : ''}</div>
 
       {/* Create form */}
       {showCreate && (
-        <div className="bg-white rounded-xl border border-violet-200 shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-3 bg-violet-50 border-b border-violet-200">
-            <span className="text-sm font-semibold text-violet-700">New Treatment</span>
-            <button onClick={() => setShowCreate(false)} className="text-violet-400 hover:text-violet-600" aria-label="Close">
+        <div className="bg-white rounded-xl border border-[rgba(10,22,40,0.15)] shadow-sm overflow-hidden">
+          <div className="flex items-center justify-between px-5 py-3 bg-[rgba(10,22,40,0.08)] border-b border-[rgba(10,22,40,0.15)]">
+            <span className="text-sm font-semibold text-[var(--ink)]">New Treatment</span>
+            <button onClick={() => setShowCreate(false)} className="text-[var(--ink2)] hover:text-[var(--ink)]" aria-label="Close">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -804,21 +804,21 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
       )}
 
       {/* List */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="divide-y divide-gray-100">
+      <div className="bg-white rounded-xl shadow-sm border border-[var(--line)] overflow-hidden">
+        <div className="divide-y divide-[var(--line)]">
           {loading ? (
-            <div className="px-4 py-12 text-center text-gray-400"><div class="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2"></div><br/>Loading</div>
+            <div className="px-4 py-12 text-center text-[var(--muted)]"><div class="inline-block w-5 h-5 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-2"></div><br/>Loading</div>
           ) : error ? (
             <div className="px-4 py-8 text-center">
               <p className="text-red-600 font-medium mb-2">{error}</p>
-              <button onClick={fetchTreatments} className="text-violet-600 hover:text-violet-700 text-sm font-medium">Try again</button>
+              <button onClick={fetchTreatments} className="text-[var(--ink)] hover:text-[var(--ink)] text-sm font-medium">Try again</button>
             </div>
           ) : treatments.length === 0 ? (
-            <div className="px-4 py-8 text-center text-gray-500">No treatments found.</div>
+            <div className="px-4 py-8 text-center text-[var(--muted)]">No treatments found.</div>
           ) : treatments.map((t) => (
             <div key={t.id}>
               <div
-                className={`px-5 py-4 cursor-pointer hover:bg-gray-50 transition-colors ${editingId === t.id ? 'bg-violet-50/50' : ''}`}
+                className={`px-5 py-4 cursor-pointer hover:bg-[var(--paper2)] transition-colors ${editingId === t.id ? 'bg-[rgba(10,22,40,0.08)]/50' : ''}`}
                 onClick={() => {
                   if (editingId === t.id) {
                     setEditingId(null);
@@ -831,18 +831,18 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="text-sm font-semibold text-gray-900">{t.name}</h4>
+                      <h4 className="text-sm font-semibold text-[var(--ink)]">{t.name}</h4>
                       {t.fdaApproved && (
                         <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-semibold rounded-full">FDA Approved</span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 line-clamp-1">{t.description}</p>
+                    <p className="text-xs text-[var(--muted)] line-clamp-1">{t.description}</p>
                     {(t.conditions || []).length > 0 && (
                       <div className="flex flex-wrap gap-1 mt-1.5">
                         {t.conditions.slice(0, 4).map((c) => (
-                          <span key={c} className="px-2 py-0.5 bg-gray-100 text-gray-600 text-[10px] rounded">{c}</span>
+                          <span key={c} className="px-2 py-0.5 bg-[var(--paper2)] text-[var(--ink2)] text-[10px] rounded">{c}</span>
                         ))}
-                        {t.conditions.length > 4 && <span className="text-[10px] text-gray-400">+{t.conditions.length - 4}</span>}
+                        {t.conditions.length > 4 && <span className="text-[10px] text-[var(--muted)]">+{t.conditions.length - 4}</span>}
                       </div>
                     )}
                   </div>
@@ -852,14 +852,14 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
                         if (editingId === t.id) { setEditingId(null); }
                         else { setEditingId(t.id); setEditData({ ...t }); }
                       }}
-                      className="px-3 py-1.5 bg-violet-50 text-violet-700 text-xs font-medium rounded-lg hover:bg-violet-100 transition-colors"
+                      className="px-3 py-1.5 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
                     >
                       {editingId === t.id ? 'Close' : 'Edit'}
                     </button>
                     {deleteConfirm === t.id ? (
                       <div className="flex gap-1">
                         <button onClick={() => handleDelete(t.id)} className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-medium rounded-lg">Confirm</button>
-                        <button onClick={() => setDeleteConfirm(null)} className="px-3 py-1.5 bg-gray-100 text-gray-600 text-xs font-medium rounded-lg">Cancel</button>
+                        <button onClick={() => setDeleteConfirm(null)} className="px-3 py-1.5 bg-[var(--paper2)] text-[var(--ink2)] text-xs font-medium rounded-lg">Cancel</button>
                       </div>
                     ) : (
                       <button onClick={() => setDeleteConfirm(t.id)} className="px-3 py-1.5 bg-red-50 text-red-700 text-xs font-medium rounded-lg hover:bg-red-100">Delete</button>
@@ -868,7 +868,7 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
                 </div>
               </div>
               {editingId === t.id && (
-                <div className="border-t border-gray-200 bg-gray-50">
+                <div className="border-t border-[var(--line)] bg-[var(--paper2)]">
                   {renderTreatmentForm(
                     editData,
                     (updates) => setEditData((prev) => ({ ...prev, ...updates })),
@@ -882,20 +882,20 @@ function TreatmentsPanel({ showToast }: { showToast: (type: 'success' | 'error',
         </div>
 
         {totalPages > 1 && (
-          <div className="px-4 py-3 border-t border-gray-200 bg-gray-50 flex items-center justify-between">
-            <div className="text-sm text-gray-500">Page {page + 1} of {totalPages}</div>
+          <div className="px-4 py-3 border-t border-[var(--line)] bg-[var(--paper2)] flex items-center justify-between">
+            <div className="text-sm text-[var(--muted)]">Page {page + 1} of {totalPages}</div>
             <div className="flex gap-2">
               <button
                 onClick={() => setPage((p) => Math.max(0, p - 1))}
                 disabled={page === 0}
-                className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50"
+                className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-lg text-sm disabled:opacity-50 hover:bg-[var(--paper2)]"
               >
                 Previous
               </button>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
                 disabled={page >= totalPages - 1}
-                className="px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50"
+                className="px-3 py-1.5 bg-white border border-[var(--line)] rounded-lg text-sm disabled:opacity-50 hover:bg-[var(--paper2)]"
               >
                 Next
               </button>

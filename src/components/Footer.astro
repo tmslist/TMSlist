@@ -15,6 +15,10 @@ import {
     getClinicsByState,
     buildInternationalDirectory,
 } from "../utils/dataHelpers";
+import { getVisitorCountry } from "../utils/visitorCountry";
+
+const VISITOR_COUNTRY = getVisitorCountry(Astro.isPrerendered ? null : Astro.cookies, Astro.url);
+const isUS = VISITOR_COUNTRY === 'US';
 
 const POPULAR_STATES = [
     "CA", "TX", "FL", "NY", "PA",
@@ -22,49 +26,139 @@ const POPULAR_STATES = [
     "NJ", "VA", "WA", "AZ", "MA",
 ];
 
-const statesWithClinics = (await getUniqueStates())
-    .filter((code) => STATE_NAMES[code])
-    .sort((a, b) => (STATE_NAMES[a] || "").localeCompare(STATE_NAMES[b] || ""));
+// Only build the heavy US state/city map for US visitors — this is a 50-state
+// loop that's pointless for international visitors and bloats the response.
+const stateCityMap: Array<{
+    code: string; name: string; slug: string; clinicCount: number;
+    cities: Array<{ name: string; slug: string; count: number }>;
+}> = [];
+if (isUS) {
+    const statesWithClinics = (await getUniqueStates())
+        .filter((code) => STATE_NAMES[code])
+        .sort((a, b) => (STATE_NAMES[a] || "").localeCompare(STATE_NAMES[b] || ""));
 
-const stateCityMap = [];
-for (const stateCode of statesWithClinics) {
-    const clinics = await getClinicsByState(stateCode);
-    const cities = [...new Set(clinics.map((c) => c.city).filter(Boolean))].sort();
-    stateCityMap.push({
-        code: stateCode,
-        name: STATE_NAMES[stateCode],
-        slug: getStateSlug(stateCode),
-        clinicCount: clinics.length,
-        cities: cities.map((city) => ({
-            name: city,
-            slug: city.toLowerCase().replace(/\s+/g, "-"),
-            count: clinics.filter((c) => c.city === city).length,
-        })),
-    });
+    for (const stateCode of statesWithClinics) {
+        const clinics = await getClinicsByState(stateCode);
+        const cities = [...new Set(clinics.map((c) => c.city).filter(Boolean))].sort();
+        stateCityMap.push({
+            code: stateCode,
+            name: STATE_NAMES[stateCode]!,
+            slug: getStateSlug(stateCode),
+            clinicCount: clinics.length,
+            cities: cities.map((city) => ({
+                name: city,
+                slug: city.toLowerCase().replace(/\s+/g, "-"),
+                count: clinics.filter((c) => c.city === city).length,
+            })),
+        });
+    }
 }
 
-const internationalDirectory = await buildInternationalDirectory();
+// Pull only the visitor's country block from the international directory
+// (skip entirely for US visitors — they get the US section above).
+const fullIntlDirectory = isUS ? [] : await buildInternationalDirectory();
+const visitorCountryEntry = isUS
+    ? null
+    : fullIntlDirectory.find((c) => c.code === VISITOR_COUNTRY) || null;
+// If the visitor's country has no clinics indexed yet, fall back to showing the
+// US section so the footer is never empty.
+const showUSAsFallback = !isUS && !visitorCountryEntry;
+let fallbackStateCityMap: typeof stateCityMap = [];
+if (showUSAsFallback) {
+    const statesWithClinics = (await getUniqueStates())
+        .filter((code) => STATE_NAMES[code])
+        .sort((a, b) => (STATE_NAMES[a] || "").localeCompare(STATE_NAMES[b] || ""));
+    for (const stateCode of statesWithClinics) {
+        const clinics = await getClinicsByState(stateCode);
+        fallbackStateCityMap.push({
+            code: stateCode,
+            name: STATE_NAMES[stateCode]!,
+            slug: getStateSlug(stateCode),
+            clinicCount: clinics.length,
+            cities: [],
+        });
+    }
+}
+const renderUS = isUS || showUSAsFallback;
+const renderedStateCityMap = isUS ? stateCityMap : fallbackStateCityMap;
 ---
 
-<footer class="bg-[#0f172a] text-slate-500 pt-16 pb-8 font-sans" style="border-top:1px solid #1E242C;">
-    <div class="container mx-auto px-6">
+<footer style="background: var(--ink);" class="pt-16 pb-8 font-sans">
+    <!-- Gradient fade at top -->
+    <div class="h-24 -mt-16 mb-0" style="background: linear-gradient(to bottom, rgba(251,250,247,0.15), transparent);"></div>
+
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-8">
+
+        <!-- Newsletter Section -->
+        <div class="mb-12 pb-10 reveal" style="border-bottom: 1px solid rgba(230,234,240,0.12);">
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                <div class="flex-1 text-center lg:text-left">
+                    <h3 class="text-xl font-semibold mb-2" style="color: white; font-family: var(--font-display);">Stay Updated on TMS Therapy</h3>
+                    <p class="text-sm" style="color: rgba(230,234,240,0.5);">Get the latest clinic listings, research updates, and treatment insights delivered to your inbox.</p>
+                </div>
+                <form class="footer-newsletter-form flex gap-3 w-full lg:w-auto" data-source="footer">
+                    <input type="email" name="email" placeholder="Enter your email" required class="flex-1 lg:w-64 px-4 py-3 rounded-xl text-sm outline-none focus:ring-2" style="background: rgba(255,255,255,0.08); color: white; border: 1px solid rgba(230,234,240,0.15);" />
+                    <button type="submit" class="px-6 py-3 rounded-xl font-semibold text-sm whitespace-nowrap btn-press" style="background: var(--gradient-brand); color: white;">Subscribe</button>
+                </form>
+                <p class="footer-newsletter-msg hidden text-sm mt-3" style="color: rgba(230,234,240,0.7);"></p>
+            </div>
+        </div>
+
+        <!-- Top Brand Bar -->
+        <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6 pb-12 mb-12" style="border-bottom: 1px solid rgba(230,234,240,0.12);">
+            <a href="/" class="flex items-center gap-3 group shrink-0" aria-label="TMS List Home">
+                <svg class="h-9 w-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 15 C 30 15, 15 35, 15 55 C 15 75, 30 85, 50 85" stroke="#FBFAF7" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M65 25 C 45 25, 35 40, 35 55 C 35 70, 45 75, 65 75" stroke="#FBFAF7" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+                    <path d="M80 35 C 65 35, 55 45, 55 55 C 55 65, 65 65, 80 65" stroke="#C9654A" stroke-width="8" stroke-linecap="round"/>
+                </svg>
+                <span class="text-2xl font-extrabold tracking-tight" style="color: white; font-family: var(--font-display);">
+                    TMS<span style="color:var(--warm); font-family:'Instrument Serif', Georgia, serif; font-weight:400; font-style:italic;">List</span>
+                </span>
+            </a>
+            <p class="text-sm leading-relaxed max-w-lg" style="color: rgba(230,234,240,0.5);">
+                Real TMS clinics. Real reviews. Real insurance info. We help you find the right provider — verified, not just listed.
+            </p>
+            <div class="flex gap-3 lg:ml-auto">
+                <a href="https://x.com/tmslist" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="TMS List on X">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                </a>
+                <a href="https://linkedin.com/company/tmslist" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="TMS List on LinkedIn">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@TMSlist" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="TMS List on YouTube">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+            </div>
+        </div>
 
         <!-- Main Footer Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-x-4 lg:gap-x-6 gap-y-8 lg:gap-y-10 mb-14">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-x-4 lg:gap-x-8 gap-y-10 mb-14">
 
             <!-- Col 1: Find Care -->
             <div>
                 <h4 class="footer-col-title">Find Care</h4>
                 <ul class="space-y-2.5">
                     <li><a href="/us/" class="footer-link">Find a Clinic</a></li>
+                    <li><a href="/best-tms-clinics/" class="footer-link">Best TMS Clinics</a></li>
                     <li><a href="/verified-clinics/" class="footer-link">Verified Clinics</a></li>
-                    <li><a href="/specialists/" class="footer-link">Find a Specialist</a></li>
                     <li><a href="/compare-clinics/" class="footer-link">Compare Clinics</a></li>
                     <li><a href="/near-me/tms-near-me/" class="footer-link">TMS Near Me</a></li>
+                    <li><a href="/map/" class="footer-link">Clinic Map View</a></li>
+                    <li><a href="/search/" class="footer-link">Search All Pages</a></li>
                     <li><a href="/quiz/am-i-a-candidate/" class="footer-link footer-link-accent">Am I a Candidate?</a></li>
                 </ul>
 
-                <h4 class="footer-col-title" style="margin-top:2rem;">Patients</h4>
+                <h4 class="footer-col-title" style="margin-top: 2rem;">Specialists</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="/specialists/" class="footer-link">All Specialists</a></li>
+                    <li><a href="/psychiatrists/" class="footer-link">Psychiatrists</a></li>
+                    <li><a href="/psychologists/" class="footer-link">Psychologists</a></li>
+                    <li><a href="/therapists/" class="footer-link">Therapists</a></li>
+                    <li><a href="/providers/" class="footer-link footer-link-accent">Provider Directory</a></li>
+                </ul>
+
+                <h4 class="footer-col-title" style="margin-top: 2rem;">Patients</h4>
                 <ul class="space-y-2.5">
                     {DEMOGRAPHIC_SLUGS.slice(0, 5).map((item) => (
                         <li><a href={`/demographic/${item.slug}/`} class="footer-link">{item.title.replace("TMS for ", "")}</a></li>
@@ -94,7 +188,7 @@ const internationalDirectory = await buildInternationalDirectory();
                     <li><a href="/technology/" class="footer-link footer-link-accent">All Devices</a></li>
                 </ul>
 
-                <h4 class="footer-col-title" style="margin-top:2rem;">Insurance</h4>
+                <h4 class="footer-col-title" style="margin-top: 2rem;">Insurance</h4>
                 <ul class="space-y-2.5">
                     {INSURANCE_SLUGS.slice(0, 6).map((item) => (
                         <li><a href={`/insurance/${item.slug}/`} class="footer-link">{item.title.replace(" TMS Coverage", "").replace(" Coverage for TMS", "")}</a></li>
@@ -108,41 +202,76 @@ const internationalDirectory = await buildInternationalDirectory();
                 <h4 class="footer-col-title">Resources</h4>
                 <ul class="space-y-2.5">
                     <li><a href="/blog/" class="footer-link">Blog</a></li>
+                    <li><a href="/news/" class="footer-link">TMS News</a></li>
                     <li><a href="/questions/" class="footer-link">FAQs</a></li>
+                    <li><a href="/answers/what-is-tms-therapy/" class="footer-link">Quick Answers</a></li>
                     <li><a href="/resources/" class="footer-link">Guides & Downloads</a></li>
                     <li><a href="/stories/" class="footer-link">Patient Stories</a></li>
                     <li><a href="/research/" class="footer-link">Research & Trials</a></li>
+                    <li><a href="/protocols/" class="footer-link">Treatment Protocols</a></li>
                     <li><a href="/compare/" class="footer-link">Compare Treatments</a></li>
                     <li><a href="/alternatives/" class="footer-link">Alternative Treatments</a></li>
-                    <li><a href="/tms-cost-guide/" class="footer-link">TMS Cost Guide 2026</a></li>
+                    <li><a href="/alternative-treatments/" class="footer-link">Drug-Free Options</a></li>
                     <li><a href="/glossary/" class="footer-link">TMS Glossary</a></li>
                 </ul>
 
-                <h4 class="footer-col-title" style="margin-top:2rem;">Tools</h4>
+                <h4 class="footer-col-title" style="margin-top: 2rem;">Learn</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="/quiz/am-i-a-candidate/" class="footer-link">Am I a Candidate?</a></li>
-                    <li><a href="/quiz/depression-severity-test/" class="footer-link">Depression Test (PHQ-9)</a></li>
+                    <li><a href="/education/" class="footer-link">Education Hub</a></li>
+                    <li><a href="/wellness/" class="footer-link">Wellness</a></li>
+                    <li><a href="/community/" class="footer-link">Community</a></li>
+                    <li><a href="/simulation/" class="footer-link">TMS Simulation</a></li>
+                    <li><a href="/timeline/" class="footer-link">Timeline of TMS</a></li>
+                </ul>
+
+                <h4 class="footer-col-title" style="margin-top: 2rem;">Severity Tests</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="/quiz/depression-severity-test/" class="footer-link">Depression (PHQ-9)</a></li>
+                    <li><a href="/quiz/anxiety-severity-test/" class="footer-link">Anxiety (GAD-7)</a></li>
+                    <li><a href="/quiz/ptsd-severity-test/" class="footer-link">PTSD (PCL-5)</a></li>
+                    <li><a href="/quiz/ocd-severity-test/" class="footer-link">OCD (Y-BOCS Style)</a></li>
+                    <li><a href="/quiz/bipolar-screener/" class="footer-link">Bipolar Screener (MDQ)</a></li>
+                </ul>
+
+                <h4 class="footer-col-title" style="margin-top: 2rem;">Eligibility Quizzes</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="/quiz/which-treatment-is-right/" class="footer-link footer-link-accent">Which Treatment Is Right?</a></li>
+                    <li><a href="/quiz/am-i-a-candidate/" class="footer-link">TMS Eligibility</a></li>
+                    <li><a href="/quiz/spravato-eligibility/" class="footer-link">Spravato Eligibility</a></li>
+                    <li><a href="/quiz/ketamine-eligibility/" class="footer-link">Ketamine Eligibility</a></li>
+                    <li><a href="/quiz/ect-eligibility/" class="footer-link">ECT Eligibility</a></li>
                     <li><a href="/quiz/insurance-eligibility-checker/" class="footer-link">Insurance Checker</a></li>
+                    <li><a href="/quiz/" class="footer-link footer-link-accent">All Assessments</a></li>
+                </ul>
+
+                <h4 class="footer-col-title" style="margin-top: 2rem;">Tools & Pricing</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="/tms-cost-calculator/" class="footer-link">Cost Calculator</a></li>
+                    <li><a href="/tms-cost-guide/" class="footer-link">TMS Cost Guide 2026</a></li>
+                    <li><a href="/tools/" class="footer-link">All Tools</a></li>
+                    <li><a href="/pricing/" class="footer-link">Pricing</a></li>
                 </ul>
             </div>
 
-            <!-- Col 5: Locations (geo-aware) -->
+            <!-- Col 5: Locations -->
             <div>
                 <h4 class="footer-col-title">Locations</h4>
-                <ul class="space-y-2.5 footer-locations-list" data-country="US">
-                    {POPULAR_STATES.map((stateCode) => (
-                        <li><a href={`/us/${getStateSlug(stateCode)}/`} class="footer-link">{STATE_NAMES[stateCode]}</a></li>
-                    ))}
-                    <li><a href="/us/" class="footer-link footer-link-accent">All US Locations</a></li>
-                </ul>
-                {internationalDirectory.map((country) => (
-                    <ul class="space-y-2.5 footer-locations-list hidden" data-country={country.code}>
-                        {country.regions.slice(0, 15).map((region) => (
-                            <li><a href={`/${country.urlPrefix}/${region.slug}/`} class="footer-link">{region.name}</a></li>
+                {renderUS && (
+                    <ul class="space-y-2.5 footer-locations-list" data-country="US">
+                        {POPULAR_STATES.map((stateCode) => (
+                            <li><a href={`/us/${getStateSlug(stateCode)}/`} class="footer-link">{STATE_NAMES[stateCode]}</a></li>
                         ))}
-                        <li><a href={`/${country.urlPrefix}/`} class="footer-link footer-link-accent">All {country.name} Locations</a></li>
+                        <li><a href="/us/" class="footer-link footer-link-accent">All US Locations</a></li>
                     </ul>
-                ))}
+                )}
+                {visitorCountryEntry && (
+                    <ul class="space-y-2.5 footer-locations-list" data-country={visitorCountryEntry.code}>
+                        {visitorCountryEntry.regions.slice(0, 15).map((region) => (
+                            <li><a href={`/${visitorCountryEntry.urlPrefix}/${region.slug}/`} class="footer-link">{region.name}</a></li>
+                        ))}
+                        <li><a href={`/${visitorCountryEntry.urlPrefix}/`} class="footer-link footer-link-accent">All {visitorCountryEntry.name} Locations</a></li>
+                    </ul>
+                )}
             </div>
 
             <!-- Col 6: For Providers & Company -->
@@ -151,14 +280,18 @@ const internationalDirectory = await buildInternationalDirectory();
                 <ul class="space-y-2.5">
                     <li><a href="/add-listing/" class="footer-link footer-link-accent">List Your Clinic</a></li>
                     <li><a href="/claim-listing/" class="footer-link">Claim Your Listing</a></li>
+                    <li><a href="/for-clinics/" class="footer-link">For Clinics</a></li>
+                    <li><a href="/for-specialists/" class="footer-link">For Specialists</a></li>
                     <li><a href="/providers/" class="footer-link">Provider Directory</a></li>
+                    <li><a href="/resources/for-providers/" class="footer-link">Clinical Resources</a></li>
                     <li><a href="/advertise/" class="footer-link">Advertise</a></li>
-                    <li><a href="/legal/tms-cpt-codes-guide-2026/" class="footer-link">TMS CPT Codes 2026</a></li>
-                    <li><a href="/legal/starting-a-tms-clinic-requirements-by-state/" class="footer-link">Starting a TMS Clinic</a></li>
-                    <li><a href="/admin/login/" class="footer-link" style="color:#34d399;">Provider Login</a></li>
+                    <li><a href="/tms-cpt-codes/" class="footer-link">TMS CPT Codes 2026</a></li>
+                    <li><a href="/starting-a-tms-clinic/" class="footer-link">Starting a TMS Clinic</a></li>
+                    <li><a href="/legal/" class="footer-link">All Legal Guides</a></li>
+                    <li><a href="/admin/login/" class="footer-link" style="color: var(--warm);">Provider Login</a></li>
                 </ul>
 
-                <h4 class="footer-col-title" style="margin-top:2rem;">Company</h4>
+                <h4 class="footer-col-title" style="margin-top: 2rem;">Company</h4>
                 <ul class="space-y-2.5">
                     <li><a href="/about-us/" class="footer-link">About Us</a></li>
                     <li><a href="/contact/" class="footer-link">Contact</a></li>
@@ -166,19 +299,52 @@ const internationalDirectory = await buildInternationalDirectory();
                     <li><a href="/how-we-rank/" class="footer-link">How We Rank</a></li>
                     <li><a href="/editorial-policy/" class="footer-link">Editorial Policy</a></li>
                     <li><a href="/accessibility/" class="footer-link">Accessibility</a></li>
-                    <li><a href="/sitemap/" class="footer-link">Sitemap</a></li>
+                    <li><a href="/sitemap-page" class="footer-link">Sitemap</a></li>
+                    <li><a href="/sitemap.html" class="footer-link">HTML Sitemap</a></li>
                 </ul>
             </div>
         </div>
 
-        <!-- US Locations Directory (geo-aware) -->
-        <div class="footer-directory-section border-t" data-country="US" id="footer-us-locations" style="border-color:#1E242C;padding-top:2.5rem;margin-bottom:2.5rem;">
-            <div class="flex items-center justify-between mb-6">
-                <h4 class="text-slate-300 text-xs font-semibold uppercase tracking-widest">TMS Clinics in the United States</h4>
+        <!-- Browse by Country (always visible) -->
+        <div class="border-t mb-10" style="border-color: rgba(230,234,240,0.12); padding-top: 2rem;">
+            <div class="flex items-center justify-between mb-5">
+                <h4 class="text-xs font-semibold uppercase tracking-widest" style="color: rgba(230,234,240,0.4);">Browse by Country</h4>
+                <a href="/sitemap.html" class="footer-link-accent text-[11px] uppercase tracking-wider">Full Sitemap</a>
+            </div>
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-2">
+                <a href="/us/" class="footer-link">🇺🇸 United States</a>
+                <a href="/uk/" class="footer-link">🇬🇧 United Kingdom</a>
+                <a href="/ca/" class="footer-link">🇨🇦 Canada</a>
+                <a href="/au/" class="footer-link">🇦🇺 Australia</a>
+                <a href="/nz/" class="footer-link">🇳🇿 New Zealand</a>
+                <a href="/ie/" class="footer-link">🇮🇪 Ireland</a>
+                <a href="/de/" class="footer-link">🇩🇪 Germany</a>
+                <a href="/fr/" class="footer-link">🇫🇷 France</a>
+                <a href="/it/" class="footer-link">🇮🇹 Italy</a>
+                <a href="/es/" class="footer-link">🇪🇸 Spain</a>
+                <a href="/nl/" class="footer-link">🇳🇱 Netherlands</a>
+                <a href="/se/" class="footer-link">🇸🇪 Sweden</a>
+                <a href="/jp/" class="footer-link">🇯🇵 Japan</a>
+                <a href="/kr/" class="footer-link">🇰🇷 South Korea</a>
+                <a href="/sg/" class="footer-link">🇸🇬 Singapore</a>
+                <a href="/in/" class="footer-link">🇮🇳 India</a>
+                <a href="/ae/" class="footer-link">🇦🇪 UAE</a>
+                <a href="/il/" class="footer-link">🇮🇱 Israel</a>
+                <a href="/za/" class="footer-link">🇿🇦 South Africa</a>
+                <a href="/mx/" class="footer-link">🇲🇽 Mexico</a>
+                <a href="/br/" class="footer-link">🇧🇷 Brazil</a>
+            </div>
+        </div>
+
+        <!-- US Locations Directory (only rendered for US visitors or as fallback) -->
+        {renderUS && (
+        <div class="footer-directory-section border-t mb-10" data-country="US" id="footer-us-locations" style="border-color: rgba(230,234,240,0.12); padding-top: 2rem; margin-bottom: 2rem;">
+            <div class="flex items-center justify-between mb-5">
+                <h4 class="text-xs font-semibold uppercase tracking-widest" style="color: rgba(230,234,240,0.4);">TMS Clinics in the United States</h4>
                 <a href="/us/" class="footer-link-accent text-[11px] uppercase tracking-wider">View All</a>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-1">
-                {stateCityMap.map((st) => (
+                {renderedStateCityMap.map((st) => (
                     <div class="footer-state-group">
                         <button
                             type="button"
@@ -190,9 +356,9 @@ const internationalDirectory = await buildInternationalDirectory();
                                 {st.name}
                             </span>
                             <span class="flex items-center gap-1.5">
-                                <span class="text-[10px] text-slate-600">{st.clinicCount}</span>
-                                <svg class="w-3 h-3 text-slate-600 group-hover:text-slate-400 transition-all duration-200 footer-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                <span class="text-[10px]" style="color: rgba(230,234,240,0.3);">{st.clinicCount}</span>
+                                <svg class="w-3 h-3 transition-all duration-200 footer-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: rgba(230,234,240,0.3);">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </span>
                         </button>
@@ -201,7 +367,7 @@ const internationalDirectory = await buildInternationalDirectory();
                                 <li>
                                     <a href={`/us/${st.slug}/${city.slug}/`} class="footer-link-city flex items-center justify-between">
                                         <span>{city.name}</span>
-                                        <span class="text-[10px] text-slate-600">{city.count}</span>
+                                        <span class="text-[10px]" style="color: rgba(230,234,240,0.3);">{city.count}</span>
                                     </a>
                                 </li>
                             ))}
@@ -213,34 +379,35 @@ const internationalDirectory = await buildInternationalDirectory();
                 ))}
             </div>
         </div>
+        )}
 
-        <!-- International Locations Directory (hidden by default, shown per geo) -->
-        {internationalDirectory.map((country) => (
-            <div class="footer-country-section hidden border-t" data-country={country.code} id={`footer-${country.urlPrefix}-locations`} style="border-color:#1E242C;padding-top:2.5rem;margin-bottom:2.5rem;">
-                <div class="flex items-center justify-between mb-6">
-                    <h4 class="text-slate-300 text-xs font-semibold uppercase tracking-widest">
-                        {country.flag} TMS Clinics in {country.name}
+        <!-- Visitor's country directory (only that country, not the full international list) -->
+        {visitorCountryEntry && (
+            <div class="footer-country-section border-t mb-10" data-country={visitorCountryEntry.code} id={`footer-${visitorCountryEntry.urlPrefix}-locations`} style="border-color: rgba(230,234,240,0.12); padding-top: 2rem;">
+                <div class="flex items-center justify-between mb-5">
+                    <h4 class="text-xs font-semibold uppercase tracking-widest" style="color: rgba(230,234,240,0.4);">
+                        <Fragment set:html={visitorCountryEntry.flag} /> TMS Clinics in {visitorCountryEntry.name}
                     </h4>
-                    <span class="text-[11px] text-slate-500">{country.clinicCount} clinics</span>
+                    <span class="text-[11px]" style="color: rgba(230,234,240,0.4);">{visitorCountryEntry.clinicCount} clinics</span>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-1">
-                    {country.regions.map((region) => (
+                    {visitorCountryEntry.regions.map((region) => (
                         <div class="footer-state-group">
                             <button type="button" class="footer-state-toggle w-full flex items-center justify-between py-2 text-left group" aria-expanded="false">
                                 <span class="footer-link font-medium group-hover:font-semibold transition-all">{region.name}</span>
                                 <span class="flex items-center gap-1.5">
-                                    <span class="text-[10px] text-slate-600">{region.clinicCount}</span>
-                                    <svg class="w-3 h-3 text-slate-600 group-hover:text-slate-400 transition-all duration-200 footer-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    <span class="text-[10px]" style="color: rgba(230,234,240,0.3);">{region.clinicCount}</span>
+                                    <svg class="w-3 h-3 transition-all duration-200 footer-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: rgba(230,234,240,0.3);">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </span>
                             </button>
                             <ul class="footer-city-list hidden pl-2 pb-2 space-y-1">
                                 {region.cities.map((city) => (
                                     <li>
-                                        <a href={`/${country.urlPrefix}/${region.slug}/${city.slug}/`} class="footer-link-city flex items-center justify-between">
+                                        <a href={`/${visitorCountryEntry.urlPrefix}/${region.slug}/${city.slug}/`} class="footer-link-city flex items-center justify-between">
                                             <span>{city.name}</span>
-                                            <span class="text-[10px] text-slate-600">{city.count}</span>
+                                            <span class="text-[10px]" style="color: rgba(230,234,240,0.3);">{city.count}</span>
                                         </a>
                                     </li>
                                 ))}
@@ -249,106 +416,68 @@ const internationalDirectory = await buildInternationalDirectory();
                     ))}
                 </div>
             </div>
-        ))}
-
-        <!-- Brand Row -->
-        <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8 pt-10" style="border-top:1px solid #1E242C;">
-            <!-- Logo + tagline -->
-            <div class="flex items-center gap-3 group shrink-0">
-                <a href="/" class="flex items-center gap-2.5 group" aria-label="TMS List Home">
-                    <svg class="h-8 w-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="footerBrandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#1B4B5A"/>
-                                <stop offset="100%" stop-color="#2E7A8F"/>
-                            </linearGradient>
-                        </defs>
-                        <path d="M50 15 C 30 15, 15 35, 15 55 C 15 75, 30 85, 50 85" stroke="url(#footerBrandGradient)" stroke-width="8" stroke-linecap="round"/>
-                        <path d="M65 25 C 45 25, 35 40, 35 55 C 35 70, 45 75, 65 75" stroke="url(#footerBrandGradient)" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
-                        <path d="M80 35 C 65 35, 55 45, 55 55 C 55 65, 65 65, 80 65" stroke="url(#footerBrandGradient)" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
-                    </svg>
-                    <span class="text-xl font-extrabold tracking-tight text-white" style="font-family:var(--font-display);">
-                        TMS<span style="color:#2E7A8F;">List</span>
-                    </span>
-                </a>
-                <!-- Divider line -->
-                <span class="hidden lg:block w-px h-6" style="background:#1E242C;"></span>
-                <p class="text-sm text-slate-500 leading-relaxed max-w-md">
-                    Real TMS clinics. Real reviews. Real insurance info.
-                    We help you find the right provider.
-                </p>
-            </div>
-
-            <!-- Social links -->
-            <div class="flex gap-3 lg:ml-auto">
-                <a href="https://x.com/tmslist" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="TMS List on X">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
-                </a>
-                <a href="https://linkedin.com/company/tmslist" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="TMS List on LinkedIn">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                </a>
-                <a href="https://www.youtube.com/@TMSlist" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="TMS List on YouTube">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                </a>
-            </div>
-        </div>
+        )}
 
         <!-- Bottom Bar -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-6 mt-6" style="border-top:1px solid #1E242C;">
-            <p class="text-[11px] text-slate-600 tracking-wide order-2 md:order-1">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-6" style="border-top: 1px solid rgba(230,234,240,0.12);">
+            <p class="text-[11px] leading-relaxed order-2 md:order-1" style="color: rgba(230,234,240,0.35);">
                 &copy; {new Date().getFullYear()} ATZ Medappz Pvt Ltd. All rights reserved.
             </p>
             <div class="flex flex-wrap justify-start md:justify-end gap-5 order-1 md:order-2">
                 <a href="/legal/privacy-policy/" class="footer-bottom-link">Privacy Policy</a>
                 <a href="/legal/terms-of-service/" class="footer-bottom-link">Terms of Service</a>
                 <a href="/legal/medical-disclaimer/" class="footer-bottom-link">Medical Disclaimer</a>
+                <a href="/legal/dmca/" class="footer-bottom-link">DMCA</a>
+                <a href="/accessibility/" class="footer-bottom-link">Accessibility</a>
             </div>
         </div>
     </div>
 </footer>
 
 <style>
+    @reference "../styles/global.css";
+
     .footer-col-title {
         font-size: 0.6875rem;
         font-weight: 700;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #cbd5e1;
         margin-bottom: 0.75rem;
         padding-bottom: 0.5rem;
-        border-bottom: 1px solid #1E242C;
+        border-bottom: 1px solid rgba(230,234,240,0.12);
+        color: rgba(230,234,240,0.4);
     }
 
     .footer-link {
         display: block;
         font-size: 0.8125rem;
-        color: #64748b;
         transition: color 0.15s ease;
         text-decoration: none;
         padding: 0.125rem 0;
+        color: rgba(230,234,240,0.55);
     }
     .footer-link:hover {
-        color: #e2e8f0;
+        color: rgba(230,234,240,0.9);
     }
 
     .footer-link-accent {
-        color: #5BA8BD;
+        color: var(--warm);
         font-weight: 500;
     }
     .footer-link-accent:hover {
-        color: #2E7A8F;
+        color: var(--accent2);
     }
 
     .footer-link-city {
         display: block;
         font-size: 0.75rem;
-        color: #475569;
         transition: color 0.15s ease;
         text-decoration: none;
         padding: 0.125rem 0;
+        color: rgba(230,234,240,0.4);
     }
     .footer-link-city:hover {
-        color: #5BA8BD;
+        color: var(--warm);
     }
 
     .footer-state-toggle {
@@ -366,30 +495,29 @@ const internationalDirectory = await buildInternationalDirectory();
         width: 2.25rem;
         height: 2.25rem;
         border-radius: 50%;
-        background: rgba(255,255,255,0.04);
-        color: #475569;
-        transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        transition: all 0.2s ease;
         text-decoration: none;
-        border: 1px solid #1E242C;
+        border: 1px solid rgba(230,234,240,0.15);
+        color: rgba(230,234,240,0.4);
     }
     .footer-social-btn:hover {
-        background: rgba(255,255,255,0.08);
-        color: #e2e8f0;
+        background: rgba(230,234,240,0.08);
+        color: rgba(230,234,240,0.9);
+        border-color: rgba(230,234,240,0.3);
         transform: translateY(-2px);
-        border-color: #2E323C;
     }
 
     .footer-bottom-link {
         font-size: 0.6875rem;
-        color: #475569;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         transition: color 0.15s ease;
         text-decoration: none;
         padding: 0.125rem 0;
+        color: rgba(230,234,240,0.35);
     }
     .footer-bottom-link:hover {
-        color: #94a3b8;
+        color: rgba(230,234,240,0.6);
     }
 </style>
 
@@ -430,6 +558,46 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     document.querySelectorAll('.footer-directory-section, .footer-country-section').forEach(function(el) {
         el.classList.toggle('hidden', el.getAttribute('data-country') !== country);
+    });
+});
+
+document.querySelectorAll('.footer-newsletter-form').forEach(function(form) {
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var f = e.target;
+        var emailInput = f.querySelector('[name="email"]');
+        var email = emailInput ? emailInput.value : '';
+        var source = f.dataset.source || 'footer';
+        var msg = f.parentElement.querySelector('.footer-newsletter-msg');
+        try {
+            var res = await fetch('/api/newsletter/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, source: source }),
+            });
+            if (res.ok) {
+                f.classList.add('hidden');
+                if (msg) {
+                    msg.textContent = 'Subscribed! Check your inbox.';
+                    msg.classList.remove('hidden');
+                    msg.style.color = 'rgba(180,230,200,0.95)';
+                }
+            } else {
+                var data = {};
+                try { data = await res.json(); } catch (_) {}
+                if (msg) {
+                    msg.textContent = data.error || 'Something went wrong. Try again.';
+                    msg.classList.remove('hidden');
+                    msg.style.color = 'rgba(255,180,180,0.95)';
+                }
+            }
+        } catch (_) {
+            if (msg) {
+                msg.textContent = 'Network error. Try again.';
+                msg.classList.remove('hidden');
+                msg.style.color = 'rgba(255,180,180,0.95)';
+            }
+        }
     });
 });
 </script>

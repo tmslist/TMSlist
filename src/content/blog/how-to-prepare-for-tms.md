@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-01-25
 category: patient-guide
 tags: ["first session", "preparation", "what to expect", "guide"]
-image: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=400&fit=crop"
+image: "/images/blog-covers/how-to-prepare-for-tms.svg"
 ---
 
 Knowing what to expect before your first TMS session can make the whole experience less intimidating. Here is a practical guide covering what to do before, during, and after your first appointment.
@@ -86,9 +86,9 @@ Understanding the commitment helps you plan:
 
 Plan your calendar accordingly. The daily commitment is the biggest practical challenge. But sessions are short enough that many people go during lunch breaks or before work.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>Before: eat normally, take medications as usual, limit extra caffeine, remove metal from head and neck area.</li>
     <li>Bring entertainment. Earplugs are provided but some people prefer their own.</li>
     <li>The first visit is 45-60 minutes (mapping session). Subsequent visits are 20-37 minutes for standard TMS.</li>
@@ -98,47 +98,47 @@ Plan your calendar accordingly. The daily commitment is the biggest practical ch
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What should I not do before TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What should I not do before TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Do not double up on caffeine (increases scalp sensitivity), do not come on an empty stomach (may cause lightheadedness), and remove all metal from your head and neck area (earrings, hair clips, piercings, metal jewelry).</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Do not double up on caffeine (increases scalp sensitivity), do not come on an empty stomach (may cause lightheadedness), and remove all metal from your head and neck area (earrings, hair clips, piercings, metal jewelry).</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Do I need someone to drive me to my first TMS session?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Do I need someone to drive me to my first TMS session?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS requires no sedation and causes no impairment. You can drive yourself to and from every session. If you experience lightheadedness after your first session, sit for a few minutes before leaving. But most people feel completely normal.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS requires no sedation and causes no impairment. You can drive yourself to and from every session. If you experience lightheadedness after your first session, sit for a few minutes before leaving. But most people feel completely normal.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I go to work after TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I go to work after TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Most people go back to work immediately after TMS. There are no dietary restrictions, no cognitive side effects, and no impairment. Many people schedule TMS before work or during lunch breaks.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Most people go back to work immediately after TMS. There are no dietary restrictions, no cognitive side effects, and no impairment. Many people schedule TMS before work or during lunch breaks.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long is the mapping session?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long is the mapping session?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The mapping session (motor threshold determination) takes 15-30 minutes on its own. Some clinics do it as part of your first treatment visit, making the total first appointment 45-60 minutes. Subsequent sessions are 20-37 minutes for standard TMS or about 3 minutes for theta burst.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The mapping session (motor threshold determination) takes 15-30 minutes on its own. Some clinics do it as part of your first treatment visit, making the total first appointment 45-60 minutes. Subsequent sessions are 20-37 minutes for standard TMS or about 3 minutes for theta burst.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Should I stop my antidepressants before TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Should I stop my antidepressants before TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. Unless your psychiatrist specifically tells you to adjust your medications, keep taking them as prescribed during TMS treatment. Most people continue their antidepressants throughout their TMS course. Some find they can lower their dose after successful TMS. This should always be done under your psychiatrist's guidance.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. Unless your psychiatrist specifically tells you to adjust your medications, keep taking them as prescribed during TMS treatment. Most people continue their antidepressants throughout their TMS course. Some find they can lower their dose after successful TMS. This should always be done under your psychiatrist's guidance.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

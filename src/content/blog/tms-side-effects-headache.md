@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-01
 category: patient-guide
 tags: ["side effects", "safety", "headache", "what to expect"]
-image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-side-effects-headache.svg"
 ---
 
 TMS therapy side effects are mild and local. That is not marketing. It is what 15+ years of clinical data shows. The most common complaint is scalp discomfort at the treatment site during the first few sessions. It fades as you get used to it.
@@ -84,9 +84,9 @@ Contact your TMS clinic if you experience:
 - Changes in hearing after a session
 - Worsening of depression symptoms (rare but possible during the adjustment period)
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>TMS side effects are mild and local. Scalp discomfort (50-60%) and headache (20-30%) are most common.</li>
     <li>Side effects fade quickly. Most people barely notice discomfort by week two.</li>
     <li>Seizure risk is about 1 in 30,000 sessions, comparable to or lower than many antidepressants.</li>
@@ -96,47 +96,47 @@ Contact your TMS clinic if you experience:
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS cause headaches?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS cause headaches?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">About 20-30% of people get a mild headache after TMS sessions. It is typically like a tension headache and responds well to over-the-counter pain relievers like Tylenol or Advil. Headaches are most common in the first week and usually stop happening after that.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">About 20-30% of people get a mild headache after TMS sessions. It is typically like a tension headache and responds well to over-the-counter pain relievers like Tylenol or Advil. Headaches are most common in the first week and usually stop happening after that.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS cause weight gain?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS cause weight gain?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS does not cause weight gain. That is one of its major advantages over antidepressants, where 25-40% of patients experience significant weight gain.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS does not cause weight gain. That is one of its major advantages over antidepressants, where 25-40% of patients experience significant weight gain.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS cause sexual side effects?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS cause sexual side effects?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS does not cause sexual dysfunction. That is a major advantage over antidepressants, where 40-65% of patients experience reduced libido, difficulty with arousal, or difficulty with orgasm.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS does not cause sexual dysfunction. That is a major advantage over antidepressants, where 40-65% of patients experience reduced libido, difficulty with arousal, or difficulty with orgasm.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS painful?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS painful?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The first session is the most uncomfortable. Most people describe it as a tapping or knocking sensation on the scalp. Pain ratings average 4.2/10 at session 1 and drop to 1.1/10 by session 20. By week two, most people barely notice it. Your technician can adjust the coil position to improve comfort.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The first session is the most uncomfortable. Most people describe it as a tapping or knocking sensation on the scalp. Pain ratings average 4.2/10 at session 1 and drop to 1.1/10 by session 20. By week two, most people barely notice it. Your technician can adjust the coil position to improve comfort.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS cause a seizure?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS cause a seizure?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The risk is about 1 in 30,000 sessions, which is comparable to or lower than many antidepressants. Clinics screen for seizure risk factors before starting treatment. If you have a history of epilepsy or seizures, tell your provider before starting TMS.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The risk is about 1 in 30,000 sessions, which is comparable to or lower than many antidepressants. Clinics screen for seizure risk factors before starting treatment. If you have a history of epilepsy or seizures, tell your provider before starting TMS.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

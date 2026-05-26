@@ -46,17 +46,17 @@ const description = quickIntro.substring(0, 155);
 <Layout title={title} description={description}>
     <main class="container mx-auto px-4 py-12 max-w-4xl">
         <!-- Breadcrumb -->
-        <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8 flex-wrap" aria-label="Breadcrumb">
-            <a href="/" class="hover:text-violet-600 transition-colors">Home</a>
-            <span class="text-slate-300">/</span>
-            <a href="/questions/" class="hover:text-violet-600 transition-colors">Questions</a>
-            <span class="text-slate-300">/</span>
-            <span class="text-slate-700 font-medium">{question.category}</span>
+        <nav class="flex items-center gap-2 text-sm text-[var(--muted)] mb-8 flex-wrap" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-[var(--accent)] transition-colors">Home</a>
+            <span class="text-[var(--muted)]">/</span>
+            <a href="/questions/" class="hover:text-[var(--accent)] transition-colors">Questions</a>
+            <span class="text-[var(--muted)]">/</span>
+            <span class="text-[var(--ink2)] font-medium">{question.category}</span>
         </nav>
 
         <!-- Question Header -->
         <h1
-            class="text-4xl md:text-5xl font-semibold text-gray-900 mb-6 leading-tight"
+            class="text-4xl md:text-5xl font-semibold text-[var(--ink)] mb-6 leading-tight"
         >
             {question.question}
         </h1>
@@ -64,28 +64,28 @@ const description = quickIntro.substring(0, 155);
         <!-- Answer Layout: Quick intro + formatted body -->
         <div class="space-y-6 mb-12">
             <!-- Quick Answer Highlight -->
-            <div class="bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-100 rounded-2xl p-6 md:p-8">
+            <div class="bg-gradient-to-r from-[rgba(10,22,40,0.08)] to-[rgba(201,101,74,0.1)] border border-[rgba(10,22,40,0.1)] rounded-2xl p-6 md:p-8">
                 <div class="flex items-start gap-4">
-                    <div class="shrink-0 w-10 h-10 bg-violet-100 rounded-xl flex items-center justify-center mt-0.5">
-                        <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="shrink-0 w-10 h-10 bg-[rgba(10,22,40,0.08)] rounded-xl flex items-center justify-center mt-0.5">
+                        <svg class="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
                     <div>
-                        <p class="text-xs font-bold text-violet-600 uppercase tracking-wider mb-2">Quick Answer</p>
-                        <p class="text-gray-800 text-lg leading-relaxed font-medium">{quickIntro}</p>
+                        <p class="text-xs font-bold text-[var(--accent)] uppercase tracking-wider mb-2">Quick Answer</p>
+                        <p class="text-[var(--ink2)] text-lg leading-relaxed font-medium">{quickIntro}</p>
                     </div>
                 </div>
             </div>
 
             <!-- Detailed Answer Body -->
-            <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm overflow-hidden">
                 <!-- Body Header -->
-                <div class="bg-gray-50 border-b border-gray-200 px-6 py-4 flex items-center gap-3">
-                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-[var(--paper2)] border-b border-[var(--line)] px-6 py-4 flex items-center gap-3">
+                    <svg class="w-5 h-5 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
-                    <span class="text-sm font-semibold text-gray-700">Detailed Answer</span>
+                    <span class="text-sm font-semibold text-[var(--ink2)]">Detailed Answer</span>
                 </div>
 
                 <!-- Body Content -->
@@ -96,37 +96,37 @@ const description = quickIntro.substring(0, 155);
                                 const text = block.text.replace(/^[-*•]\s/, '');
                                 return (
                                     <div class="flex gap-3">
-                                        <div class="shrink-0 w-1.5 h-1.5 rounded-full bg-violet-400 mt-2.5"></div>
-                                        <p class="text-gray-700 leading-relaxed">{text}</p>
+                                        <div class="shrink-0 w-1.5 h-1.5 rounded-full bg-[var(--ink2)] mt-2.5"></div>
+                                        <p class="text-[var(--ink2)] leading-relaxed">{text}</p>
                                     </div>
                                 );
                             }
                             if (block.type === 'numbered') {
                                 return (
                                     <div class="flex gap-3">
-                                        <div class="shrink-0 w-6 h-6 rounded-full bg-violet-100 text-violet-700 text-xs font-bold flex items-center justify-center mt-0.5">#</div>
-                                        <p class="text-gray-700 leading-relaxed">{block.text.replace(/^\d+[\.\)]\s/, '')}</p>
+                                        <div class="shrink-0 w-6 h-6 rounded-full bg-[rgba(10,22,40,0.08)] text-[var(--accent)] text-xs font-bold flex items-center justify-center mt-0.5">#</div>
+                                        <p class="text-[var(--ink2)] leading-relaxed">{block.text.replace(/^\d+[\.\)]\s/, '')}</p>
                                     </div>
                                 );
                             }
                             return (
-                                <p class="text-gray-700 leading-relaxed">{block.text}</p>
+                                <p class="text-[var(--ink2)] leading-relaxed">{block.text}</p>
                             );
                         })
                     ) : (
-                        <p class="text-gray-700 leading-relaxed">{quickIntro}</p>
+                        <p class="text-[var(--ink2)] leading-relaxed">{quickIntro}</p>
                     )}
                 </div>
 
                 <!-- Share & Save -->
-                <div class="border-t border-gray-100 px-6 py-4 flex items-center justify-between">
-                    <span class="text-xs text-gray-400">Was this answer helpful?</span>
+                <div class="border-t border-[var(--line)] px-6 py-4 flex items-center justify-between">
+                    <span class="text-xs text-[var(--muted)]">Was this answer helpful?</span>
                     <div class="flex items-center gap-3">
-                        <button class="flex items-center gap-1.5 text-xs text-gray-500 hover:text-violet-600 transition-colors">
+                        <button class="flex items-center gap-1.5 text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/></svg>
                             Helpful
                         </button>
-                        <button class="flex items-center gap-1.5 text-xs text-gray-500 hover:text-violet-600 transition-colors">
+                        <button class="flex items-center gap-1.5 text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
                             Save
                         </button>
@@ -139,25 +139,25 @@ const description = quickIntro.substring(0, 155);
         <section class="my-12 grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Find Clinics CTA -->
             <div
-                class="dark-section bg-gradient-to-br from-violet-600 to-violet-700 rounded-2xl p-6"
+                class="bg-gradient-to-br from-[#0A1628] to-[#0A1628] rounded-2xl p-6"
             >
-                <div class="w-10 h-10 mb-3 mx-auto rounded-lg bg-violet-500/20 flex items-center justify-center"><svg class="w-5 h-5 text-violet-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
-                <h3 class="text-xl font-semibold mb-2">
+                <div class="w-10 h-10 mb-3 rounded-lg bg-[var(--paper2)] flex items-center justify-center"><svg class="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
+                <h3 class="text-xl font-semibold mb-2 text-white">
                     Find TMS Clinics Near You
                 </h3>
-                <p class="text-violet-100 text-sm mb-4">
+                <p class="text-white/70 text-sm mb-4">
                     Browse verified providers, compare prices & insurance
                 </p>
                 <div class="flex gap-2">
                     <a
                         href="/us/"
-                        class="px-4 py-2 bg-white text-violet-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors text-sm"
+                        class="px-4 py-2 bg-[var(--paper)] text-[var(--accent)] font-semibold rounded-lg hover:bg-[var(--paper2)] transition-colors text-sm"
                     >
                         Browse Clinics
                     </a>
                     <button
                         onclick="document.dispatchEvent(new Event('open-enquiry-modal'))"
-                        class="px-4 py-2 bg-violet-500 text-white font-semibold rounded-lg hover:bg-violet-400 transition-colors border border-slate-200 text-sm"
+                        class="px-4 py-2 bg-[var(--ink2)] text-white font-semibold rounded-lg hover:bg-[var(--ink2)] transition-colors border border-[var(--line)] text-sm"
                     >
                         Talk to Specialist
                     </button>
@@ -166,16 +166,16 @@ const description = quickIntro.substring(0, 155);
 
             <!-- Lead Magnet CTA -->
             <div
-                class="dark-section bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-6"
+                class="bg-gradient-to-br from-[var(--accent)] to-[var(--accent2)] rounded-2xl p-6"
             >
-                <div class="w-10 h-10 mb-3 rounded-lg bg-blue-500/20 flex items-center justify-center"><svg class="w-5 h-5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
-                <h3 class="text-xl font-semibold mb-2">Free TMS Guide</h3>
-                <p class="text-blue-100 text-sm mb-4">
+                <div class="w-10 h-10 mb-3 rounded-lg bg-white/15 flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+                <h3 class="text-xl font-semibold mb-2 text-white">Free TMS Guide</h3>
+                <p class="text-white/80 text-sm mb-4">
                     Download: "TMS vs Medication - Which is Right for You?"
                 </p>
                 <button
                     onclick="document.dispatchEvent(new Event('open-lead-magnet'))"
-                    class="px-4 py-2 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors inline-flex items-center gap-2 text-sm"
+                    class="px-4 py-2 bg-[var(--paper)] text-[var(--accent)] font-semibold rounded-lg hover:bg-[var(--paper2)] transition-colors inline-flex items-center gap-2 text-sm"
                 >
                     <svg
                         class="w-4 h-4"
@@ -197,14 +197,14 @@ const description = quickIntro.substring(0, 155);
         <!-- Related Questions -->
         {
             relatedQs.length > 0 && (
-                <section class="bg-gray-50 rounded-xl p-8 mb-12">
+                <section class="bg-[var(--paper2)] rounded-xl p-8 mb-12">
                     <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-2xl font-semibold text-gray-900">
+                        <h2 class="text-2xl font-semibold text-[var(--ink)]">
                             People Also Ask
                         </h2>
                         <a
                             href="/questions/"
-                            class="text-violet-600 font-semibold hover:underline text-sm"
+                            class="text-[var(--accent)] font-semibold hover:underline text-sm"
                         >
                             Browse All →
                         </a>
@@ -213,15 +213,15 @@ const description = quickIntro.substring(0, 155);
                         {relatedQs.map((rq) => (
                             <a
                                 href={`/questions/${rq.slug}/`}
-                                class="group block p-4 bg-white rounded-lg border-2 border-gray-200 hover:border-violet-500 hover:shadow-md transition-all"
+                                class="group block p-4 bg-[var(--paper)] rounded-lg border-2 border-[var(--line)] hover:border-[var(--ink2)] hover:shadow-md transition-all"
                             >
-                                <h3 class="font-semibold text-gray-900 group-hover:text-violet-600 transition-colors mb-2 text-sm line-clamp-2">
+                                <h3 class="font-semibold text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors mb-2 text-sm line-clamp-2">
                                     {rq.question}
                                 </h3>
-                                <p class="text-xs text-gray-600 line-clamp-2 mb-2">
+                                <p class="text-xs text-[var(--muted)] line-clamp-2 mb-2">
                                     {(rq.quickAnswer || rq.answer || '').slice(0, 80)}...
                                 </p>
-                                <span class="text-xs text-violet-600 font-medium group-hover:underline">
+                                <span class="text-xs text-[var(--accent)] font-medium group-hover:underline">
                                     Read Answer →
                                 </span>
                             </a>
@@ -230,7 +230,7 @@ const description = quickIntro.substring(0, 155);
                     <div class="mt-6 text-center">
                         <a
                             href={`/questions/category/${question.category}/`}
-                            class="inline-block px-5 py-2.5 bg-white text-violet-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors border-2 border-violet-200"
+                            class="inline-block px-5 py-2.5 bg-[var(--paper)] text-[var(--accent)] font-semibold rounded-lg hover:bg-[var(--paper2)] transition-colors border-2 border-[rgba(10,22,40,0.15)]"
                         >
                             More {question.category} Questions →
                         </a>
@@ -240,8 +240,8 @@ const description = quickIntro.substring(0, 155);
         }
 
         <!-- Medical Disclaimer -->
-        <div class="border-t border-gray-200 pt-8 text-sm text-gray-600">
-            <h3 class="font-semibold text-gray-900 mb-2">Medical Disclaimer</h3>
+        <div class="border-t border-[var(--line)] pt-8 text-sm text-[var(--muted)]">
+            <h3 class="font-semibold text-[var(--ink)] mb-2">Medical Disclaimer</h3>
             <p>
                 The information provided on this page is for educational
                 purposes only and is not intended as medical advice. TMS List

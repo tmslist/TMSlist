@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import type { NarrationEntry, NarrationLevel } from '../../../hooks/useNarration';
-import { BoltIcon, BrainIcon, WarningIcon, TrophyIcon, ClipboardIcon, UserIcon, ScientificIcon } from '../Icons';
+import { BoltIcon, BrainIcon, WarningIcon, TrophyIcon, ClipboardIcon } from '../Icons';
 
 interface ActivityLogProps {
   entries: NarrationEntry[];
@@ -11,23 +11,26 @@ interface ActivityLogProps {
   onLevelChange: (level: NarrationLevel) => void;
 }
 
-const typeStyles: Record<NarrationEntry['type'], string> = {
-  info: 'text-slate-300',
-  pulse: 'text-cyan-300',
-  region: 'text-violet-300',
-  warning: 'text-amber-300',
-  achievement: 'text-amber-400',
-  protocol: 'text-emerald-300',
+const typeColors: Record<NarrationEntry['type'], string> = {
+  info: 'rgba(251,250,247,0.55)',
+  pulse: '#5BA8BD',
+  region: '#D4806A',
+  warning: '#D29922',
+  achievement: '#FFB347',
+  protocol: '#4ade80',
 };
 
-const typeIcons: Record<NarrationEntry['type'], string> = {
-  info: '·',
-  pulse: '⚡',
-  region: '🧠',
-  warning: '⚠️',
-  achievement: '🏆',
-  protocol: '📋',
-};
+function TypeIcon({ type, color }: { type: NarrationEntry['type']; color: string }) {
+  const sz = 11;
+  switch (type) {
+    case 'pulse':       return <BoltIcon size={sz} className="" />;
+    case 'region':      return <BrainIcon size={sz} className="" />;
+    case 'warning':     return <WarningIcon size={sz} className="" />;
+    case 'achievement': return <TrophyIcon size={sz} className="" />;
+    case 'protocol':    return <ClipboardIcon size={sz} className="" />;
+    default:            return <span style={{ display: 'inline-block', width: 4, height: 4, borderRadius: '50%', background: color, marginTop: 4 }} />;
+  }
+}
 
 export function ActivityLog({ entries, level, getText, onLevelChange }: ActivityLogProps) {
   const listRef = useRef<HTMLDivElement>(null);
@@ -39,42 +42,55 @@ export function ActivityLog({ entries, level, getText, onLevelChange }: Activity
   }, [entries.length]);
 
   return (
-    <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-slate-700/50">
+    <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(10,22,40,0.4)', border: '1px solid rgba(201,101,74,0.18)' }}>
+      <div className="flex items-center justify-between px-4 py-2.5" style={{ borderBottom: '1px solid rgba(201,101,74,0.15)' }}>
         <div className="flex items-center gap-2">
-          <span className="text-[10px] font-semibold text-slate-300 uppercase tracking-wider">Live Narration</span>
-          <div className={`w-1.5 h-1.5 rounded-full ${entries.length > 0 ? 'bg-cyan-400 animate-pulse' : 'bg-slate-600'}`} />
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/55">Live narration</span>
+          <span
+            className="w-1.5 h-1.5 rounded-full"
+            style={{
+              background: entries.length > 0 ? '#5BA8BD' : 'rgba(255,255,255,0.2)',
+              boxShadow: entries.length > 0 ? '0 0 6px rgba(91,168,189,0.6)' : 'none',
+            }}
+          />
         </div>
-        {/* Language toggle */}
-        <button
-          onClick={() => onLevelChange(level === 'patient' ? 'clinical' : 'patient')}
-          className="flex items-center gap-1 text-[9px] font-medium px-2 py-1 rounded-lg border transition-all bg-slate-800/80 border-slate-600/50 text-slate-400 hover:text-slate-200"
-          title={level === 'patient' ? 'Switch to clinical language' : 'Switch to patient-friendly language'}
-        >
-          <span className={level === 'patient' ? 'text-cyan-400' : 'text-slate-500'}>👤</span>
-          <span className="text-slate-600">|</span>
-          <span className={level === 'clinical' ? 'text-violet-400' : 'text-slate-500'}>🔬</span>
-        </button>
+        <div className="flex items-center gap-0.5 rounded-lg p-0.5" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+          {(['patient', 'clinical'] as const).map((mode) => (
+            <button
+              key={mode}
+              onClick={() => onLevelChange(mode)}
+              className="px-2 py-0.5 text-[9px] font-medium uppercase tracking-wider rounded transition-colors"
+              style={{
+                background: level === mode ? 'rgba(201,101,74,0.18)' : 'transparent',
+                color: level === mode ? '#D4806A' : 'rgba(255,255,255,0.45)',
+              }}
+              aria-pressed={level === mode}
+            >
+              {mode}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Log entries */}
-      <div ref={listRef} className="p-3 space-y-2 max-h-[200px] overflow-y-auto custom-scrollbar">
+      <div ref={listRef} className="p-3 space-y-1.5 max-h-[200px] overflow-y-auto custom-scrollbar">
         {entries.length === 0 ? (
-          <div className="text-[10px] text-slate-600 italic text-center py-4">
+          <div className="text-[10px] italic text-center py-3" style={{ color: 'rgba(255,255,255,0.4)' }}>
             Fire pulses or hover brain regions to see real-time narration
           </div>
         ) : (
-          entries.map(entry => (
-            <div key={entry.id} className="flex items-start gap-2 group">
-              <span className={`text-[11px] leading-tight mt-0.5 shrink-0 ${typeStyles[entry.type]}`}>
-                {typeIcons[entry.type]}
-              </span>
-              <p className={`text-[10px] leading-relaxed ${typeStyles[entry.type]} opacity-90 group-hover:opacity-100 transition-opacity`}>
-                {getText(entry)}
-              </p>
-            </div>
-          ))
+          entries.map(entry => {
+            const color = typeColors[entry.type];
+            return (
+              <div key={entry.id} className="flex items-start gap-2 group">
+                <span className="shrink-0 mt-0.5" style={{ color }}>
+                  <TypeIcon type={entry.type} color={color} />
+                </span>
+                <p className="text-[10px] leading-relaxed opacity-90 group-hover:opacity-100 transition-opacity" style={{ color }}>
+                  {getText(entry)}
+                </p>
+              </div>
+            );
+          })
         )}
       </div>
     </div>

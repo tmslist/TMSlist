@@ -14,6 +14,7 @@ faqs:
     answer: "Under Medicare Part B, you pay 20% coinsurance after your annual deductible. For a full 36-session course in Florida, expect roughly $300-$800 out of pocket depending on the clinic's billing. A Medigap supplement may cover part or all of your share."
   - question: "Does Novitas cover TMS for conditions other than depression?"
     answer: "Novitas follows Medicare national coverage guidelines. TMS for OCD may be covered under some circumstances. TMS for anxiety alone is generally not covered. Always verify current coverage policies directly with Novitas or your clinic."
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 
@@ -26,9 +27,9 @@ faqs:
     <div class="text-2xl font-bold text-amber-700 font-display">Required</div>
     <div class="text-xs text-amber-600 mt-1">Prior Authorization</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">$300-$800</div>
-    <div class="text-xs text-blue-600 mt-1">Typical patient cost</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">$300-$800</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Typical patient cost</div>
   </div>
 </div>
 
@@ -124,11 +125,11 @@ If you split your time between Florida and another state, a few things to keep i
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>
@@ -136,39 +137,39 @@ If you split your time between Florida and another state, a few things to keep i
 ## Step-by-Step TMS Approval Process
 
 <div class="not-prose my-8 space-y-3">
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">1</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Verify Your Medicare TMS Benefits</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Call the number on your Medicare card or 1-800-MEDICARE. Ask specifically about TMS (CPT 90867-90869) coverage for treatment-resistant depression. Get a reference number and note the representative's name.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Verify Your Medicare TMS Benefits</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Call the number on your Medicare card or 1-800-MEDICARE. Ask specifically about TMS (CPT 90867-90869) coverage for treatment-resistant depression. Get a reference number and note the representative's name.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">2</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Get Your Documentation Ready</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Gather your MDD psychiatric evaluation, complete medication history (names, doses, durations, outcomes for each trial), current PHQ-9 score, and any therapy records. Your psychiatrist's office can compile this.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Get Your Documentation Ready</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Gather your MDD psychiatric evaluation, complete medication history (names, doses, durations, outcomes for each trial), current PHQ-9 score, and any therapy records. Your psychiatrist's office can compile this.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">3</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Find a Medicare-Accepting TMS Clinic in Florida</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Use our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a> to find TMS providers who accept Medicare. Confirm they accept Medicare assignment and know whether they bill through Novitas or FCSO.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Find a Medicare-Accepting TMS Clinic in Florida</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Use our <a href="/us/" class="text-amber-600 hover:underline">clinic directory</a> to find TMS providers who accept Medicare. Confirm they accept Medicare assignment and know whether they bill through Novitas or FCSO.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">4</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Prior Authorization Submission</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Your TMS clinic submits the prior auth package to Novitas Solutions (JH) or First Coast Service Options (FCSO) depending on your county. Approval typically takes 5-15 business days.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Prior Authorization Submission</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Your TMS clinic submits the prior auth package to Novitas Solutions (JH) or First Coast Service Options (FCSO) depending on your county. Approval typically takes 5-15 business days.</p>
     </div>
   </div>
-  <div class="flex gap-3 items-start bg-white border border-slate-200 rounded-xl p-4">
+  <div class="flex gap-3 items-start bg-white border border-[var(--line)] rounded-xl p-4">
     <span class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 font-bold text-xs shrink-0">5</span>
     <div>
-      <div class="font-semibold text-slate-900 text-sm">Begin Your TMS Treatment Course</div>
-      <p class="text-xs text-slate-500 mt-1 mb-0">Once approved, your TMS clinic schedules your acute protocol (typically 5 sessions per week for 4-8 weeks). Medicare Part B covers 80% of the approved amount — you pay 20% after your deductible.</p>
+      <div class="font-semibold text-[var(--ink)] text-sm">Begin Your TMS Treatment Course</div>
+      <p class="text-xs text-[var(--muted)] mt-1 mb-0">Once approved, your TMS clinic schedules your acute protocol (typically 5 sessions per week for 4-8 weeks). Medicare Part B covers 80% of the approved amount — you pay 20% after your deductible.</p>
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ description: "Some TMS patients lose weight. Others gain it. Understanding the c
 publishDate: 2026-04-29
 category: research
 author: Lisa Park, TMS Technician
-image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-and-weight-changes.svg"
 tags: ["tms", "weight", "metabolism", "appetite", "side-effects"]
 ---
 
@@ -87,35 +87,35 @@ TMS's effect on weight is indirect but often positive — particularly for patie
 
 If you're considering TMS and weight is a concern, discuss it with your provider — not as a primary reason for choosing TMS (efficacy comes first), but as a factor in setting realistic expectations and planning a holistic approach to your recovery.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS cause weight gain or weight loss?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS cause weight gain or weight loss?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS itself is weight-neutral -- it does not directly affect metabolism. Weight changes during TMS are indirect, resulting from mood improvement. Patients who were underweight from depression-related loss of appetite may gain weight as eating enjoyment returns. Patients who gained weight from medications or depression-related inactivity may lose weight as mood and activity levels improve.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS itself is weight-neutral -- it does not directly affect metabolism. Weight changes during TMS are indirect, resulting from mood improvement. Patients who were underweight from depression-related loss of appetite may gain weight as eating enjoyment returns. Patients who gained weight from medications or depression-related inactivity may lose weight as mood and activity levels improve.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How does TMS compare to antidepressants for weight?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How does TMS compare to antidepressants for weight?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">SSRIs and SNRIs commonly cause weight gain in 10-15% of patients. TMS is weight-neutral to slight weight loss and does not independently affect metabolism. One advantage of TMS is that some patients successfully transition off weight-gain-inducing medications once TMS stabilizes their mood, potentially reversing medication-related weight gain.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">SSRIs and SNRIs commonly cause weight gain in 10-15% of patients. TMS is weight-neutral to slight weight loss and does not independently affect metabolism. One advantage of TMS is that some patients successfully transition off weight-gain-inducing medications once TMS stabilizes their mood, potentially reversing medication-related weight gain.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I manage my weight during TMS treatment?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I manage my weight during TMS treatment?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Start small activity goals -- depression lifting is the ideal time to begin a walking routine or gentle exercise. Address emotional eating patterns through therapy combined with TMS. Be patient with early weight fluctuations, which often stabilize. If weight gain from current medications is a concern, discuss dose reduction or substitution with your doctor once TMS takes hold.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Start small activity goals -- depression lifting is the ideal time to begin a walking routine or gentle exercise. Address emotional eating patterns through therapy combined with TMS. Be patient with early weight fluctuations, which often stabilize. If weight gain from current medications is a concern, discuss dose reduction or substitution with your doctor once TMS takes hold.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

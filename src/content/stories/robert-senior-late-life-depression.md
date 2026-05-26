@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-17
 category: stories
 tags: ["patient story", "depression", "late-life depression", "seniors", "retirement"]
-image: "https://images.unsplash.com/photo-1442458370899-ae20e367c5d8?w=800&h=400&fit=crop"
+image: "/images/brain_stimulation_art_1769446474392.jpg"
 ---
 
 ## Thirty-two years of purpose, then nothing

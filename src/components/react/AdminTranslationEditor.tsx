@@ -29,9 +29,9 @@ function Modal({ open, onClose, title, children }: { open: boolean; onClose: () 
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--line)]">
+          <h3 className="text-lg font-semibold text-[var(--ink)]">{title}</h3>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-[var(--paper2)] text-[var(--muted)] hover:text-[var(--ink2)]">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -216,19 +216,19 @@ export default function AdminTranslationEditor() {
 
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Translation Editor</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Key-value translations and language management</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)]">Translation Editor</h2>
+          <p className="text-sm text-[var(--muted)] mt-0.5">Key-value translations and language management</p>
         </div>
-        <button onClick={() => fetchData()} className="px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+        <button onClick={() => fetchData()} className="px-3 py-2 bg-white border border-[var(--line)] rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)] transition-colors">
           Refresh
         </button>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-        <div className="border-b border-gray-200">
+      <div className="bg-white rounded-xl shadow-sm border border-[var(--line)]">
+        <div className="border-b border-[var(--line)]">
           <nav className="flex gap-1 px-4">
             {TABS.map(t => (
-              <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${tab === t.key ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>
+              <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${tab === t.key ? 'border-[rgba(201,101,74,0.2)] text-[var(--warm)]' : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)]'}`}>
                 {t.label}
               </button>
             ))}
@@ -238,16 +238,16 @@ export default function AdminTranslationEditor() {
         <div className="p-6">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <div className="inline-block w-8 h-8 border-2 border-gray-300 border-t-indigo-600 rounded-full animate-spin" />
+              <div className="inline-block w-8 h-8 border-2 border-[var(--line)] border-t-indigo-600 rounded-full animate-spin" />
             </div>
           ) : tab === 'keys' ? (
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <select value={selectedLocale} onChange={e => setSelectedLocale(e.target.value)} className="rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <select value={selectedLocale} onChange={e => setSelectedLocale(e.target.value)} className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
                   {locales.map(l => <option key={l.code} value={l.code}>{l.name} ({l.code})</option>)}
                 </select>
-                <input type="text" value={searchKey} onChange={e => setSearchKey(e.target.value)} placeholder="Search keys or values..." className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
-                <button onClick={() => { setAddLocale(selectedLocale); setAddKey(''); setAddValue(''); setAddContext(''); setShowAddModal(true); }} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                <input type="text" value={searchKey} onChange={e => setSearchKey(e.target.value)} placeholder="Search keys or values..." className="flex-1 rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
+                <button onClick={() => { setAddLocale(selectedLocale); setAddKey(''); setAddValue(''); setAddContext(''); setShowAddModal(true); }} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] transition-colors flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
@@ -256,28 +256,28 @@ export default function AdminTranslationEditor() {
               </div>
 
               {filteredTranslations.length === 0 ? (
-                <div className="text-center py-12 text-gray-500">No translations found.</div>
+                <div className="text-center py-12 text-[var(--muted)]">No translations found.</div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="bg-gray-50 border-b border-gray-200">
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Key</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Value</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Context</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                      <tr className="bg-[var(--paper2)] border-b border-[var(--line)]">
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Key</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Value</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Context</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-[var(--line)]">
                       {filteredTranslations.map(t => (
-                        <tr key={t.id} className="hover:bg-gray-50 transition-colors">
-                          <td className="px-4 py-3 text-sm font-mono text-gray-900">{t.key}</td>
-                          <td className="px-4 py-3 text-sm text-gray-600 max-w-xs truncate">{t.value}</td>
-                          <td className="px-4 py-3 text-xs text-gray-400">{t.context || '-'}</td>
+                        <tr key={t.id} className="hover:bg-[var(--paper2)] transition-colors">
+                          <td className="px-4 py-3 text-sm font-mono text-[var(--ink)]">{t.key}</td>
+                          <td className="px-4 py-3 text-sm text-[var(--ink2)] max-w-xs truncate">{t.value}</td>
+                          <td className="px-4 py-3 text-xs text-[var(--muted)]">{t.context || '-'}</td>
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-2">
-                              <button onClick={() => openEditModal(t)} className="px-3 py-1.5 text-xs font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">Edit</button>
-                              <button onClick={() => deleteTranslation(t)} className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-600">
+                              <button onClick={() => openEditModal(t)} className="px-3 py-1.5 text-xs font-medium border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] transition-colors">Edit</button>
+                              <button onClick={() => deleteTranslation(t)} className="p-1.5 rounded-lg hover:bg-red-50 text-[var(--muted)] hover:text-red-600">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                 </svg>
@@ -294,7 +294,7 @@ export default function AdminTranslationEditor() {
           ) : tab === 'compare' ? (
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <select value={selectedLocale} onChange={e => setSelectedLocale(e.target.value)} className="rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <select value={selectedLocale} onChange={e => setSelectedLocale(e.target.value)} className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
                   {locales.map(l => <option key={l.code} value={l.code}>{l.name} ({l.code})</option>)}
                 </select>
               </div>
@@ -303,23 +303,23 @@ export default function AdminTranslationEditor() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="bg-gray-50 border-b border-gray-200">
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Key</th>
-                        <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Base (en)</th>
+                      <tr className="bg-[var(--paper2)] border-b border-[var(--line)]">
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Key</th>
+                        <th className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">Base (en)</th>
                         {locales.filter(l => l.code !== 'en').map(l => (
-                          <th key={l.code} className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">{l.name} ({l.code})</th>
+                          <th key={l.code} className="px-4 py-3 text-xs font-semibold text-[var(--muted)] uppercase">{l.name} ({l.code})</th>
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-[var(--line)]">
                       {translations.slice(0, 50).map(t => {
                         const baseValue = t.localeCode === 'en' ? t.value : null;
                         return (
-                          <tr key={t.id} className="hover:bg-gray-50 transition-colors">
-                            <td className="px-4 py-3 text-sm font-mono text-gray-900">{t.key}</td>
-                            <td className="px-4 py-3 text-sm text-gray-600">{baseValue || '-'}</td>
+                          <tr key={t.id} className="hover:bg-[var(--paper2)] transition-colors">
+                            <td className="px-4 py-3 text-sm font-mono text-[var(--ink)]">{t.key}</td>
+                            <td className="px-4 py-3 text-sm text-[var(--ink2)]">{baseValue || '-'}</td>
                             {locales.filter(l => l.code !== 'en').map(l => (
-                              <td key={l.code} className="px-4 py-3 text-sm text-gray-400">-</td>
+                              <td key={l.code} className="px-4 py-3 text-sm text-[var(--muted)]">-</td>
                             ))}
                           </tr>
                         );
@@ -332,31 +332,31 @@ export default function AdminTranslationEditor() {
           ) : (
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="border border-gray-200 rounded-xl p-6">
-                  <h4 className="text-sm font-semibold text-gray-900 mb-3">Import Translations</h4>
-                  <input type="file" accept=".json" onChange={e => { if (e.target.files?.[0]) importTranslations(e.target.files[0]); }} className="w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" />
-                  <p className="text-xs text-gray-500 mt-2">Upload a JSON file with translations.</p>
+                <div className="border border-[var(--line)] rounded-xl p-6">
+                  <h4 className="text-sm font-semibold text-[var(--ink)] mb-3">Import Translations</h4>
+                  <input type="file" accept=".json" onChange={e => { if (e.target.files?.[0]) importTranslations(e.target.files[0]); }} className="w-full text-sm text-[var(--ink2)] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-[rgba(201,101,74,0.06)] file:text-[var(--warm)] hover:file:bg-[rgba(201,101,74,0.1)]" />
+                  <p className="text-xs text-[var(--muted)] mt-2">Upload a JSON file with translations.</p>
                 </div>
 
-                <div className="border border-gray-200 rounded-xl p-6">
-                  <h4 className="text-sm font-semibold text-gray-900 mb-3">Export Translations</h4>
-                  <p className="text-sm text-gray-600 mb-3">Download all translations as a JSON file.</p>
-                  <button onClick={exportTranslations} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors">
+                <div className="border border-[var(--line)] rounded-xl p-6">
+                  <h4 className="text-sm font-semibold text-[var(--ink)] mb-3">Export Translations</h4>
+                  <p className="text-sm text-[var(--ink2)] mb-3">Download all translations as a JSON file.</p>
+                  <button onClick={exportTranslations} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] transition-colors">
                     Export JSON
                   </button>
                 </div>
               </div>
 
-              <div className="border border-gray-200 rounded-xl p-6">
-                <h4 className="text-sm font-semibold text-gray-900 mb-3">Translation Progress</h4>
+              <div className="border border-[var(--line)] rounded-xl p-6">
+                <h4 className="text-sm font-semibold text-[var(--ink)] mb-3">Translation Progress</h4>
                 <div className="space-y-3">
                   {locales.map(l => (
                     <div key={l.code} className="flex items-center gap-3">
-                      <span className="text-sm text-gray-700 w-24">{l.name}</span>
-                      <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-indigo-600 rounded-full" style={{ width: `${l.completionPercent}%` }} />
+                      <span className="text-sm text-[var(--ink2)] w-24">{l.name}</span>
+                      <div className="flex-1 h-2 bg-[var(--paper2)] rounded-full overflow-hidden">
+                        <div className="h-full bg-[var(--ink2)] rounded-full" style={{ width: `${l.completionPercent}%` }} />
                       </div>
-                      <span className="text-sm text-gray-600 w-16 text-right">{l.completionPercent}%</span>
+                      <span className="text-sm text-[var(--ink2)] w-16 text-right">{l.completionPercent}%</span>
                     </div>
                   ))}
                 </div>
@@ -369,20 +369,20 @@ export default function AdminTranslationEditor() {
       <Modal open={showEditModal} onClose={() => setShowEditModal(false)} title="Edit Translation">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Key *</label>
-            <input type="text" value={editKey} onChange={e => setEditKey(e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Key *</label>
+            <input type="text" value={editKey} onChange={e => setEditKey(e.target.value)} className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Value *</label>
-            <textarea value={editValue} onChange={e => setEditValue(e.target.value)} rows={4} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Value *</label>
+            <textarea value={editValue} onChange={e => setEditValue(e.target.value)} rows={4} className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] resize-none" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Context</label>
-            <input type="text" value={editContext} onChange={e => setEditContext(e.target.value)} placeholder="Optional context for translators" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Context</label>
+            <input type="text" value={editContext} onChange={e => setEditContext(e.target.value)} placeholder="Optional context for translators" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
-            <button onClick={() => setShowEditModal(false)} className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
-            <button onClick={saveTranslation} disabled={saving} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 disabled:opacity-50">{saving ? 'Saving...' : 'Save'}</button>
+          <div className="flex justify-end gap-3 pt-4 border-t border-[var(--line)]">
+            <button onClick={() => setShowEditModal(false)} className="px-4 py-2 border border-[var(--line)] rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)]">Cancel</button>
+            <button onClick={saveTranslation} disabled={saving} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50">{saving ? 'Saving...' : 'Save'}</button>
           </div>
         </div>
       </Modal>
@@ -390,26 +390,26 @@ export default function AdminTranslationEditor() {
       <Modal open={showAddModal} onClose={() => setShowAddModal(false)} title="Add Translation Key">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Locale</label>
-            <select value={addLocale} onChange={e => setAddLocale(e.target.value)} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Locale</label>
+            <select value={addLocale} onChange={e => setAddLocale(e.target.value)} className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]">
               {locales.map(l => <option key={l.code} value={l.code}>{l.name}</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Key *</label>
-            <input type="text" value={addKey} onChange={e => setAddKey(e.target.value)} placeholder="common.buttons.submit" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Key *</label>
+            <input type="text" value={addKey} onChange={e => setAddKey(e.target.value)} placeholder="common.buttons.submit" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Value *</label>
-            <textarea value={addValue} onChange={e => setAddValue(e.target.value)} rows={4} placeholder="Translation value..." className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Value *</label>
+            <textarea value={addValue} onChange={e => setAddValue(e.target.value)} rows={4} placeholder="Translation value..." className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] resize-none" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Context</label>
-            <input type="text" value={addContext} onChange={e => setAddContext(e.target.value)} placeholder="Optional" className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Context</label>
+            <input type="text" value={addContext} onChange={e => setAddContext(e.target.value)} placeholder="Optional" className="w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]" />
           </div>
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
-            <button onClick={() => setShowAddModal(false)} className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
-            <button onClick={addTranslation} disabled={saving} className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 disabled:opacity-50">{saving ? 'Adding...' : 'Add'}</button>
+          <div className="flex justify-end gap-3 pt-4 border-t border-[var(--line)]">
+            <button onClick={() => setShowAddModal(false)} className="px-4 py-2 border border-[var(--line)] rounded-lg text-sm font-medium text-[var(--ink2)] hover:bg-[var(--paper2)]">Cancel</button>
+            <button onClick={addTranslation} disabled={saving} className="px-4 py-2 bg-[var(--ink2)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50">{saving ? 'Adding...' : 'Add'}</button>
           </div>
         </div>
       </Modal>

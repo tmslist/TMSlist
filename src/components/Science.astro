@@ -1,0 +1,82 @@
+---
+// Science section: split layout with numbered fact cards
+import { facts } from '../data/scienceFacts';
+---
+
+<section class="py-32 paper2" style="background: var(--paper2);">
+  <div class="max-w-[1400px] mx-auto px-8 grid lg:grid-cols-2 gap-20 items-center">
+    <!-- Left: Image -->
+    <div class="relative aspect-[4/5] rounded-2xl overflow-hidden group" style="background: var(--ink);">
+      <img
+        src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80"
+        alt="TMS treatment session"
+        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+        loading="lazy"
+      />
+      <!-- Case badge -->
+      <div class="absolute top-6 left-6 flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-3 py-1.5">
+        <span style="width: 6px; height: 6px; border-radius: 9999px; background: var(--warm);"></span>
+        Case 042
+      </div>
+      <!-- Doctor info -->
+      <div class="absolute bottom-6 left-6 right-6 text-white">
+        <div class="text-[11px] uppercase tracking-[0.2em] opacity-70 mb-1">Dr. M. Hoffman</div>
+        <div class="serif" style="font-size: 22px;">Board-certified psychiatry</div>
+      </div>
+    </div>
+
+    <!-- Right: Text + facts -->
+    <div>
+      <div class="flex items-center gap-3 mb-8" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted);">
+        <span style="display: inline-block; width: 24px; height: 1px; background: rgba(10,22,40,0.3);"></span>
+        <span>How TMS works</span>
+      </div>
+      <h2 class="serif mb-10" style="font-size: clamp(2rem, 4.5vw, 4.25rem); line-height: 1; color: var(--ink);">
+        Magnetic pulses, targeted<br/>
+        at the <em>left dorsolateral</em><br/>
+        prefrontal cortex.
+      </h2>
+
+      <!-- Fact grid -->
+      <div class="grid sm:grid-cols-2 gap-x-10 gap-y-12 mb-12">
+        {facts.map((fact) => (
+          <div>
+            <div class="mb-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); font-variant-numeric: tabular-nums;">{fact.num}</div>
+            <h3 class="serif mb-2" style="font-size: 22px; line-height: 1.1; color: var(--ink);">{fact.title}</h3>
+            <p style="font-size: 14px; color: var(--muted); line-height: 1.55;">{fact.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- CTA links -->
+      <div class="flex flex-wrap gap-3">
+        <a href="/treatments/depression" class="inline-flex items-center gap-2 rounded-full px-5 py-3 border transition-all"
+           style="font-size: 13px; color: var(--ink); border: 1px solid var(--line); text-decoration: none;">
+          Read the full protocol
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="/research" class="linky" style="font-size: 13px; color: var(--muted); text-decoration: none;">Research library &middot; 247 papers</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.02em; }
+  .linky { position: relative; }
+  .linky:hover::after { transform: scaleX(1); }
+  .linky::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+</style>

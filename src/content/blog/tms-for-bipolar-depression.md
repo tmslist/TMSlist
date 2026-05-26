@@ -4,7 +4,7 @@ description: "TMS offers a potential treatment for bipolar depression without th
 publishDate: 2026-04-15
 category: treatment
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-bipolar-depression.svg"
 tags: ["tms", "bipolar", "bipolar-depression", "mania-risk", "deep-tms", "accelerated-tms"]
 ---
 

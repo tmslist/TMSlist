@@ -105,13 +105,13 @@ Modifier -25 on E/M codes tells the payer that a separately identifiable evaluat
 
 ---
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-violet-900 mb-3 text-base">Find TMS Providers</h4>
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--warm)] mb-3 text-base">Find TMS Providers</h4>
   <div class="grid grid-cols-2 gap-2">
-    <a href="/us/" class="text-sm text-violet-700 hover:underline">Find a Clinic</a>
-    <a href="/providers/hospital-based/" class="text-sm text-violet-700 hover:underline">Hospital-Based TMS</a>
-    <a href="/providers/private-practice/" class="text-sm text-violet-700 hover:underline">Private Practice TMS</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-sm text-violet-700 hover:underline">Am I a Candidate?</a>
+    <a href="/us/" class="text-sm text-[var(--warm)] hover:underline">Find a Clinic</a>
+    <a href="/providers/hospital-based/" class="text-sm text-[var(--warm)] hover:underline">Hospital-Based TMS</a>
+    <a href="/providers/private-practice/" class="text-sm text-[var(--warm)] hover:underline">Private Practice TMS</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-sm text-[var(--warm)] hover:underline">Am I a Candidate?</a>
   </div>
 </div>
 
@@ -119,22 +119,22 @@ Modifier -25 on E/M codes tells the payer that a separately identifiable evaluat
 ## Additional Resources
 
 <div class="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
-    <h4 class="font-semibold text-slate-900 text-sm mb-2">For Clinic Operators</h4>
-    <ul class="text-xs text-slate-600 space-y-1 mb-0 list-disc pl-4">
-      <li><a href="/legal/tms-cpt-codes-guide-2026/" class="text-violet-600 hover:underline">CPT Codes Guide 2026</a></li>
-      <li><a href="/legal/tms-malpractice-insurance-guide/" class="text-violet-600 hover:underline">Malpractice Insurance Guide</a></li>
-      <li><a href="/legal/starting-a-tms-clinic-requirements-by-state/" class="text-violet-600 hover:underline">Starting a TMS Clinic</a></li>
-      <li><a href="/providers/services/billing-services/" class="text-violet-600 hover:underline">TMS Billing Services</a></li>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5">
+    <h4 class="font-semibold text-[var(--ink)] text-sm mb-2">For Clinic Operators</h4>
+    <ul class="text-xs text-[var(--ink2)] space-y-1 mb-0 list-disc pl-4">
+      <li><a href="/legal/tms-cpt-codes-guide-2026/" class="text-[var(--warm)] hover:underline">CPT Codes Guide 2026</a></li>
+      <li><a href="/legal/tms-malpractice-insurance-guide/" class="text-[var(--warm)] hover:underline">Malpractice Insurance Guide</a></li>
+      <li><a href="/legal/starting-a-tms-clinic-requirements-by-state/" class="text-[var(--warm)] hover:underline">Starting a TMS Clinic</a></li>
+      <li><a href="/providers/services/billing-services/" class="text-[var(--warm)] hover:underline">TMS Billing Services</a></li>
     </ul>
   </div>
-  <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
-    <h4 class="font-semibold text-slate-900 text-sm mb-2">For Patients</h4>
-    <ul class="text-xs text-slate-600 space-y-1 mb-0 list-disc pl-4">
-      <li><a href="/insurance/prior-authorization-guide/" class="text-violet-600 hover:underline">Prior Authorization Guide</a></li>
-      <li><a href="/insurance/denied-coverage-appeals/" class="text-violet-600 hover:underline">Appealing Coverage Denials</a></li>
-      <li><a href="/quiz/insurance-eligibility-checker/" class="text-violet-600 hover:underline">Insurance Eligibility Checker</a></li>
-      <li><a href="/tms-cost-guide/" class="text-violet-600 hover:underline">TMS Cost Guide</a></li>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5">
+    <h4 class="font-semibold text-[var(--ink)] text-sm mb-2">For Patients</h4>
+    <ul class="text-xs text-[var(--ink2)] space-y-1 mb-0 list-disc pl-4">
+      <li><a href="/insurance/prior-authorization-guide/" class="text-[var(--warm)] hover:underline">Prior Authorization Guide</a></li>
+      <li><a href="/insurance/denied-coverage-appeals/" class="text-[var(--warm)] hover:underline">Appealing Coverage Denials</a></li>
+      <li><a href="/quiz/insurance-eligibility-checker/" class="text-[var(--warm)] hover:underline">Insurance Eligibility Checker</a></li>
+      <li><a href="/tms-cost-guide/" class="text-[var(--warm)] hover:underline">TMS Cost Guide</a></li>
     </ul>
   </div>
 </div>

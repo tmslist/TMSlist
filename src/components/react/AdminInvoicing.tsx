@@ -21,11 +21,11 @@ interface InvoiceFilters {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-700',
-  sent: 'bg-blue-100 text-blue-700',
+  draft: 'bg-[var(--paper2)] text-[var(--ink2)]',
+  sent: 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]',
   paid: 'bg-emerald-100 text-emerald-700',
   overdue: 'bg-red-100 text-red-700',
-  canceled: 'bg-gray-100 text-gray-400',
+  canceled: 'bg-[var(--paper2)] text-[var(--muted)]',
 };
 
 const STATUS_ICONS: Record<string, string> = {
@@ -46,7 +46,7 @@ function Toast({ message, type }: ToastProps) {
     <div className={`fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg text-sm font-medium z-50 animate-fade-in ${
       type === 'success' ? 'bg-emerald-600 text-white' :
       type === 'error' ? 'bg-red-600 text-white' :
-      'bg-indigo-600 text-white'
+      'bg-[var(--ink2)] text-white'
     }`}>
       {message}
     </div>
@@ -84,8 +84,8 @@ function GenerateModal({ onClose, onSubmit }: GenerateModalProps) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">Generate Invoice</h3>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <h3 className="text-lg font-semibold text-[var(--ink)]">Generate Invoice</h3>
+          <button onClick={onClose} className="text-[var(--muted)] hover:text-[var(--ink2)]">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -94,17 +94,17 @@ function GenerateModal({ onClose, onSubmit }: GenerateModalProps) {
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Clinic ID</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Clinic ID</label>
             <input
               type="text"
               value={clinicId}
               onChange={(e) => setClinicId(e.target.value)}
               placeholder="Clinic UUID"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Amount (USD)</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Amount (USD)</label>
             <input
               type="number"
               value={amount}
@@ -112,26 +112,26 @@ function GenerateModal({ onClose, onSubmit }: GenerateModalProps) {
               placeholder="0.00"
               step="0.01"
               min="0"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Due Date</label>
             <input
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description / Line Items</label>
+            <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Description / Line Items</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
               placeholder="Subscription - Pro Plan (Monthly)"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+              className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] resize-none"
             />
           </div>
         </div>
@@ -139,14 +139,14 @@ function GenerateModal({ onClose, onSubmit }: GenerateModalProps) {
         <div className="flex justify-end gap-3 mt-6">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)]"
           >
             Cancel
           </button>
           <button
             onClick={handleSubmit}
             disabled={loading || !clinicId || !amount || !dueDate}
-            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+            className="px-4 py-2 text-sm font-medium text-white bg-[var(--ink2)] rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50"
           >
             {loading ? 'Generating...' : 'Generate Invoice'}
           </button>
@@ -179,44 +179,44 @@ function ReminderModal({ invoice, onClose, onSend }: ReminderModalProps) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">Send Payment Reminder</h3>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <h3 className="text-lg font-semibold text-[var(--ink)]">Send Payment Reminder</h3>
+          <button onClick={onClose} className="text-[var(--muted)] hover:text-[var(--ink2)]">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
-        <div className="mb-4 p-4 bg-gray-50 rounded-lg">
-          <p className="text-xs text-gray-500 mb-1">Invoice for {invoice.clinicName || invoice.clinicId.slice(0, 8)}</p>
-          <p className="text-sm font-semibold text-gray-900">
+        <div className="mb-4 p-4 bg-[var(--paper2)] rounded-lg">
+          <p className="text-xs text-[var(--muted)] mb-1">Invoice for {invoice.clinicName || invoice.clinicId.slice(0, 8)}</p>
+          <p className="text-sm font-semibold text-[var(--ink)]">
             ${invoice.amount.toFixed(2)} {invoice.currency.toUpperCase()}
           </p>
-          <p className="text-xs text-gray-500">Due: {new Date(invoice.dueDate).toLocaleDateString()}</p>
+          <p className="text-xs text-[var(--muted)]">Due: {new Date(invoice.dueDate).toLocaleDateString()}</p>
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Custom Note (optional)</label>
+          <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Custom Note (optional)</label>
           <textarea
             value={note}
             onChange={(e) => setNote(e.target.value)}
             rows={3}
             placeholder="A friendly reminder that your invoice is now due..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+            className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)] resize-none"
           />
         </div>
 
         <div className="flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)]"
           >
             Cancel
           </button>
           <button
             onClick={handleSend}
             disabled={loading}
-            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+            className="px-4 py-2 text-sm font-medium text-white bg-[var(--ink2)] rounded-lg hover:bg-[var(--ink2)] disabled:opacity-50"
           >
             {loading ? 'Sending...' : 'Send Reminder'}
           </button>
@@ -360,13 +360,13 @@ export default function AdminInvoicing() {
             onClick={() => setFilters(prev => ({ ...prev, status: s.key }))}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               filters.status === s.key
-                ? 'bg-indigo-600 text-white'
-                : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                ? 'bg-[var(--ink2)] text-white'
+                : 'bg-white border border-[var(--line)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
             }`}
           >
             {s.label}
             {statusCounts[s.key] !== undefined && (
-              <span className="ml-1.5 inline-flex items-center justify-center w-5 h-5 text-[10px] font-bold rounded-full bg-gray-100 text-gray-600">
+              <span className="ml-1.5 inline-flex items-center justify-center w-5 h-5 text-[10px] font-bold rounded-full bg-[var(--paper2)] text-[var(--ink2)]">
                 {statusCounts[s.key]}
               </span>
             )}
@@ -376,7 +376,7 @@ export default function AdminInvoicing() {
         <div className="ml-auto flex items-center gap-2">
           <button
             onClick={() => setShowGenerate(true)}
-            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-1.5"
+            className="px-4 py-2 text-sm font-medium text-white bg-[var(--ink2)] rounded-lg hover:bg-[var(--ink2)] transition-colors flex items-center gap-1.5"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -385,7 +385,7 @@ export default function AdminInvoicing() {
           </button>
           <button
             onClick={fetchInvoices}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            className="px-4 py-2 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] transition-colors"
           >
             Refresh
           </button>
@@ -395,7 +395,7 @@ export default function AdminInvoicing() {
       {/* Search */}
       <div className="flex items-center gap-2">
         <div className="relative flex-1 max-w-sm">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -403,16 +403,16 @@ export default function AdminInvoicing() {
             value={filters.search}
             onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
             placeholder="Search clinic..."
-            className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full pl-10 pr-4 py-2 text-sm border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(201,101,74,0.2)]"
           />
         </div>
       </div>
 
       {/* Bulk Action Bar */}
       {selectedIds.size > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[var(--line)] shadow-lg z-40">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <span className="text-sm text-gray-700">
+            <span className="text-sm text-[var(--ink2)]">
               <span className="font-semibold">{selectedIds.size}</span> invoice{selectedIds.size !== 1 ? 's' : ''} selected
             </span>
             <div className="flex items-center gap-3">
@@ -424,7 +424,7 @@ export default function AdminInvoicing() {
               </button>
               <button
                 onClick={() => setSelectedIds(new Set())}
-                className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
+                className="px-4 py-2 text-sm text-[var(--ink2)] hover:text-[var(--ink)]"
               >
                 Clear
               </button>
@@ -435,7 +435,7 @@ export default function AdminInvoicing() {
 
       {/* Invoice Table */}
       {loading ? (
-        <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-500">
+        <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center text-[var(--muted)]">
           <div className="inline-flex items-center gap-2">
             <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -445,50 +445,50 @@ export default function AdminInvoicing() {
           </div>
         </div>
       ) : filteredInvoices.length === 0 ? (
-        <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-gray-500">
+        <div className="bg-white rounded-xl border border-[var(--line)] p-8 text-center text-[var(--muted)]">
           No invoices found.
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+        <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-[var(--line)]">
+              <thead className="bg-[var(--paper2)]">
                 <tr>
                   <th className="px-4 py-3 text-left">
                     <input
                       type="checkbox"
                       checked={selectedIds.size === filteredInvoices.length && filteredInvoices.length > 0}
                       onChange={toggleSelectAll}
-                      className="w-4 h-4 rounded border-gray-300 text-indigo-600 cursor-pointer"
+                      className="w-4 h-4 rounded border-[var(--line)] text-[var(--warm)] cursor-pointer"
                     />
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Invoice</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Clinic</th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Amount</th>
-                  <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Status</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Period</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Due Date</th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Invoice</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Clinic</th>
+                  <th className="px-4 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">Amount</th>
+                  <th className="px-4 py-3 text-center text-xs font-medium text-[var(--muted)] uppercase">Status</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Period</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Due Date</th>
+                  <th className="px-4 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-[var(--line)]">
                 {filteredInvoices.map(invoice => (
-                  <tr key={invoice.id} className="hover:bg-gray-50">
+                  <tr key={invoice.id} className="hover:bg-[var(--paper2)]">
                     <td className="px-4 py-3">
                       <input
                         type="checkbox"
                         checked={selectedIds.has(invoice.id)}
                         onChange={() => toggleSelect(invoice.id)}
-                        className="w-4 h-4 rounded border-gray-300 text-indigo-600 cursor-pointer"
+                        className="w-4 h-4 rounded border-[var(--line)] text-[var(--warm)] cursor-pointer"
                       />
                     </td>
-                    <td className="px-4 py-3 text-sm font-mono text-gray-500">
+                    <td className="px-4 py-3 text-sm font-mono text-[var(--muted)]">
                       {invoice.id.slice(0, 8)}...
                     </td>
-                    <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                    <td className="px-4 py-3 text-sm font-medium text-[var(--ink)]">
                       {invoice.clinicName || invoice.clinicId.slice(0, 8)}
                     </td>
-                    <td className="px-4 py-3 text-sm font-semibold text-gray-900 text-right">
+                    <td className="px-4 py-3 text-sm font-semibold text-[var(--ink)] text-right">
                       {invoice.currency.toUpperCase()} {invoice.amount.toFixed(2)}
                     </td>
                     <td className="px-4 py-3 text-center">
@@ -499,8 +499,8 @@ export default function AdminInvoicing() {
                         {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{invoice.period}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">
+                    <td className="px-4 py-3 text-sm text-[var(--ink2)]">{invoice.period}</td>
+                    <td className="px-4 py-3 text-sm text-[var(--ink2)]">
                       {new Date(invoice.dueDate).toLocaleDateString()}
                       {invoice.status === 'overdue' && (
                         <span className="ml-1 text-xs text-red-500 font-medium">Overdue</span>
@@ -511,7 +511,7 @@ export default function AdminInvoicing() {
                         {(invoice.status === 'sent' || invoice.status === 'overdue') && (
                           <button
                             onClick={() => setReminderInvoice(invoice)}
-                            className="px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg hover:bg-indigo-100 transition-colors"
+                            className="px-3 py-1.5 text-xs font-medium text-[var(--warm)] bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-lg hover:bg-[rgba(201,101,74,0.1)] transition-colors"
                           >
                             Send Reminder
                           </button>
@@ -529,7 +529,7 @@ export default function AdminInvoicing() {
                                 else showToast('Failed to send', 'error');
                               } catch { showToast('Failed to send', 'error'); }
                             }}
-                            className="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+                            className="px-3 py-1.5 text-xs font-medium text-white bg-[var(--ink)] rounded-lg hover:bg-[var(--ink)] transition-colors"
                           >
                             Send
                           </button>

@@ -24,12 +24,12 @@ const defaultCategoryId = Astro.url.searchParams.get('category') || undefined;
     { name: "New Post", url: "/community/new" },
   ]}
 >
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-[var(--paper2)]">
     <div class="container mx-auto px-4 lg:px-8 py-8 max-w-2xl">
       <div class="mb-6">
-        <a href="/community" class="text-sm text-gray-400 hover:text-violet-600 transition-colors">&larr; Back to Community</a>
-        <h1 class="text-2xl font-bold text-gray-900 mt-2">Start a Discussion</h1>
-        <p class="text-sm text-gray-500 mt-1">Share your experience, ask a question, or start a conversation.</p>
+        <a href="/community" class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors">&larr; Back to Community</a>
+        <h1 class="text-2xl font-bold text-[var(--ink)] mt-2">Start a Discussion</h1>
+        <p class="text-sm text-[var(--muted)] mt-1">Share your experience, ask a question, or start a conversation.</p>
       </div>
 
       <!-- Story Contest CTA -->
@@ -42,10 +42,10 @@ const defaultCategoryId = Astro.url.searchParams.get('category') || undefined;
           </div>
           <div class="flex-1">
             <div class="flex items-center gap-2 mb-1">
-              <h3 class="font-bold text-gray-900 text-base">Write a TMS Story</h3>
+              <h3 class="font-bold text-[var(--ink)] text-base">Write a TMS Story</h3>
               <span class="px-2 py-0.5 bg-amber-400 text-amber-900 text-xs font-bold rounded-full">$10 Gift Card</span>
             </div>
-            <p class="text-gray-600 text-sm leading-relaxed">
+            <p class="text-[var(--muted)] text-sm leading-relaxed">
               Your experience can help others on their TMS journey. The top 10 most helpful stories each month receive a <strong>$10 gift card</strong>. It's simple and takes just a few minutes.
             </p>
           </div>

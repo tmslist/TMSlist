@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 import { uploadDoctorPhoto, isCloudinaryConfigured } from '../../../utils/cloudinary';
 
 export const prerender = false;

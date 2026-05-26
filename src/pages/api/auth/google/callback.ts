@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getOrCreateUserByEmail, createSessionCookie, isAllowedEmail } from '../../../../utils/auth';
+import { getOrCreateUserByEmail, createSession, isAllowedEmail, getClientIpFromRequest } from '../../../../utils/auth.js';
 import { db } from '../../../../db';
 import { users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -23,13 +23,52 @@ interface GoogleUserInfo {
   email_verified: boolean;
 }
 
+const STATE_COOKIE = 'google_oauth_state';
+
+function readCookie(request: Request, name: string): string | null {
+  const header = request.headers.get('cookie') || '';
+  for (const part of header.split(';')) {
+    const [k, ...v] = part.trim().split('=');
+    if (k === name) return v.join('=');
+  }
+  return null;
+}
+
+// Constant-time string comparison to avoid timing attacks on the nonce.
+function safeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
 export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
-  const state = url.searchParams.get('state') || 'portal';
+  const stateParam = url.searchParams.get('state') || '';
   const error = url.searchParams.get('error');
 
+  // Parse `flow:nonce`; reject any state that doesn't match the cookie.
+  const cookieState = readCookie(request, STATE_COOKIE);
+  const stateValid = !!cookieState && stateParam.length > 0 && safeEqual(cookieState, stateParam);
+  const flow = stateValid ? (stateParam.split(':')[0] === 'admin' ? 'admin' : 'portal') : 'portal';
+  const state = flow; // existing downstream code uses `state` as the flow tag
   const loginPath = state === 'admin' ? '/admin/login' : '/portal/login';
+
+  // Always clear the state cookie after consumption (single-use).
+  const isProd = process.env.NODE_ENV === 'production';
+  const secure = isProd ? '; Secure' : '';
+  const clearStateCookie = `${STATE_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${secure}`;
+
+  if (!stateValid) {
+    return new Response(null, {
+      status: 302,
+      headers: {
+        Location: `${loginPath}?error=invalid-state`,
+        'Set-Cookie': clearStateCookie,
+      },
+    });
+  }
 
   if (error || !code) {
     return new Response(null, {
@@ -116,12 +155,14 @@ export const GET: APIRoute = async ({ request }) => {
       user = { ...user, role: 'clinic_owner' };
     }
 
-    // Create session
-    const cookie = createSessionCookie({
-      userId: user.id,
-      email: user.email,
-      role: user.role,
-    });
+    // Create session — writes to sessions table so logout can revoke.
+    const { cookie } = await createSession(
+      { userId: user.id, email: user.email, role: user.role },
+      {
+        userAgent: request.headers.get('user-agent') || undefined,
+        ipAddress: getClientIpFromRequest(request),
+      },
+    );
 
     // Determine redirect
     let redirectTo: string;

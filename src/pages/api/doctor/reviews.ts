@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { eq, desc, sql } from 'drizzle-orm';
-import { db } from '../../../db';
+import { eq, and, desc, sql } from 'drizzle-orm';
+import { db } from '../..//../db/index.js';
 import { reviews } from '../../../db/schema';
 import { getSessionFromRequest } from '../../../utils/auth';
 
@@ -19,9 +19,8 @@ export const GET: APIRoute = async ({ request, url }) => {
   if (!session.clinicId) return json({ error: 'No clinic linked' }, 403);
 
   try {
-    const clinicId = url.searchParams.get('clinicId') || session.clinicId;
     const reviews_data = await db.select().from(reviews)
-      .where(eq(reviews.clinicId, clinicId))
+      .where(eq(reviews.clinicId, session.clinicId))
       .orderBy(desc(reviews.createdAt));
 
     return json({ reviews: reviews_data });
@@ -35,16 +34,19 @@ export const GET: APIRoute = async ({ request, url }) => {
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
   if (!session) return json({ error: 'Unauthorized' }, 401);
+  if (!session.clinicId) return json({ error: 'No clinic linked' }, 403);
 
   try {
     const body = await request.json();
     const { reviewId, response } = body;
     if (!reviewId || !response) return json({ error: 'ReviewId and response required' }, 400);
 
-    await db.update(reviews).set({
+    const result = await db.update(reviews).set({
       ownerResponse: response,
       ownerResponseAt: new Date(),
-    }).where(eq(reviews.id, reviewId));
+    }).where(and(eq(reviews.id, reviewId), eq(reviews.clinicId, session.clinicId))).returning({ id: reviews.id });
+
+    if (result.length === 0) return json({ error: 'Review not found' }, 404);
 
     return json({ success: true });
   } catch (err) {

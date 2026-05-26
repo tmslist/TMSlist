@@ -4,7 +4,7 @@ description: "Can TMS be combined with CBT, DBT, or other psychotherapy? Learn a
 publishDate: 2026-04-15
 category: treatment
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/combining-tms-with-therapy.svg"
 tags: ["tms", "psychotherapy", "cbt", "dbt", "combined-treatment", "synergy"]
 ---
 
@@ -104,35 +104,35 @@ Early results from these intensive combined protocols suggest they may produce *
 
 For patients with treatment-resistant depression, OCD, PTSD, and other challenging conditions, the combination of TMS and psychotherapy represents the current frontier of neuromodulation treatment — bringing together the best of neuroscience-based brain stimulation and evidence-based behavioral therapy to address these disorders at every level of their complexity.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS plus therapy work better than either alone?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS plus therapy work better than either alone?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. A randomized controlled trial comparing TMS alone, CBT alone, and TMS plus CBT found that combination treatment produced approximately 55-60% remission rates compared to 40% for either treatment alone. The effects appear to be synergistic rather than merely additive.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. A randomized controlled trial comparing TMS alone, CBT alone, and TMS plus CBT found that combination treatment produced approximately 55-60% remission rates compared to 40% for either treatment alone. The effects appear to be synergistic rather than merely additive.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Should I do therapy before or after TMS sessions?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Should I do therapy before or after TMS sessions?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most combined treatment programs use same-day sequential treatment, with TMS typically administered before psychotherapy. The theory is that TMS effects on neuroplasticity persist for several hours, making the afternoon therapy session fall within an enhanced-plasticity window.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most combined treatment programs use same-day sequential treatment, with TMS typically administered before psychotherapy. The theory is that TMS effects on neuroplasticity persist for several hours, making the afternoon therapy session fall within an enhanced-plasticity window.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS and ERP for OCD be combined?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS and ERP for OCD be combined?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Research suggests that ERP following TMS may produce faster and more complete extinction than ERP alone. Some treatment programs implement a protocol in which TMS sessions precede ERP sessions, with patients receiving TMS in the morning and engaging in ERP exercises in the afternoon.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Research suggests that ERP following TMS may produce faster and more complete extinction than ERP alone. Some treatment programs implement a protocol in which TMS sessions precede ERP sessions, with patients receiving TMS in the morning and engaging in ERP exercises in the afternoon.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

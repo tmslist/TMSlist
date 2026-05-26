@@ -1,0 +1,168 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "OCD Severity Self-Assessment | Y-BOCS-Style Quiz";
+const description =
+    "Take a Y-BOCS-style self-assessment to measure your OCD severity and find out what treatment options — including FDA-cleared deep TMS — may be right for you.";
+
+const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
+const quizSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "Y-BOCS-Style OCD Severity Assessment",
+    "description": description,
+    "url": `${siteUrl}/quiz/ocd-severity-test/`,
+    "educationalLevel": "patient",
+    "about": {
+        "@type": "MedicalCondition",
+        "name": "Obsessive-Compulsive Disorder",
+        "code": { "@type": "MedicalCode", "code": "F42", "codingSystem": "ICD-10" },
+    },
+    "provider": { "@type": "Organization", "name": "TMS List", "url": siteUrl },
+});
+
+// Y-BOCS-inspired 10-item self-rating (5 obsessions + 5 compulsions, 0-4 each)
+const QUESTIONS = [
+    { text: "How much of your time is taken up by obsessive thoughts?", scale: ["None", "Less than 1 hr/day", "1-3 hrs/day", "3-8 hrs/day", "More than 8 hrs/day"] },
+    { text: "How much do obsessive thoughts interfere with work, school, social, or family life?", scale: ["No interference", "Slight interference", "Moderate but manageable", "Substantial impairment", "Extreme — incapacitating"] },
+    { text: "How much distress do your obsessive thoughts cause?", scale: ["None", "Mild", "Moderate but manageable", "Severe and very disturbing", "Near-constant, disabling distress"] },
+    { text: "How much effort do you make to resist obsessive thoughts?", scale: ["Always resist (or no need)", "Resist most of the time", "Make some effort", "Yield to most without trying", "Completely yield to all"] },
+    { text: "How much control do you have over obsessive thoughts?", scale: ["Complete control", "Much control — usually stop them", "Moderate control — sometimes stop them", "Little control — rarely stop them", "No control — completely involuntary"] },
+    { text: "How much time do you spend performing compulsive behaviors?", scale: ["None", "Less than 1 hr/day", "1-3 hrs/day", "3-8 hrs/day", "More than 8 hrs/day"] },
+    { text: "How much do compulsive behaviors interfere with your life?", scale: ["No interference", "Slight", "Moderate", "Substantial impairment", "Extreme — incapacitating"] },
+    { text: "How would you feel if prevented from performing your compulsion(s)?", scale: ["No anxiety", "Slight anxiety", "Anxiety would mount but stay manageable", "Prominent and very disturbing", "Incapacitating anxiety"] },
+    { text: "How much effort do you make to resist the compulsions?", scale: ["Always resist", "Resist most of the time", "Make some effort", "Yield to most", "Completely yield"] },
+    { text: "How much control do you have over compulsive behaviors?", scale: ["Complete control", "Much control", "Moderate", "Little control", "No control"] },
+];
+---
+
+<Layout title={title} description={description} noindex={true} schema={quizSchema}>
+    <main class="min-h-screen bg-gradient-to-b from-[var(--paper2)] to-white py-12">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <div class="mb-6 flex items-center justify-center">
+                <div class="flex items-center gap-2 text-sm text-[var(--muted)]">
+                    Past 7 days <span>•</span> 10 questions <span>•</span> ~5 minutes
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="flex justify-between text-xs font-semibold text-[var(--muted)] mb-2 uppercase tracking-wide">
+                    <span>Your Progress</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="h-2 bg-[var(--paper2)] rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-[var(--ink)] transition-all duration-500 ease-out" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-[var(--line)] overflow-hidden">
+                <div id="slide-intro" class="p-8 md:p-12 text-center">
+                    <h1 class="text-3xl font-semibold tracking-tight text-[var(--ink)] mb-4">OCD Severity Assessment</h1>
+                    <p class="text-lg text-[var(--muted)] mb-4">The Yale-Brown Obsessive Compulsive Scale (Y-BOCS) is the gold-standard measure for OCD severity, used in nearly every clinical trial.</p>
+                    <p class="text-base text-[var(--muted)] mb-8">Think about your OCD symptoms over the <strong>past 7 days</strong>. Rate each item honestly — there are no right or wrong answers.</p>
+                    <button id="btn-start" class="px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] shadow-lg">Start Assessment</button>
+                    <p class="text-xs text-[var(--muted)] mt-6">This is a self-rating screen modeled on the Y-BOCS. A clinician-administered Y-BOCS may yield a different score.</p>
+                </div>
+
+                <div id="slide-q" class="hidden p-8 md:p-12">
+                    <span id="q-counter" class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block"></span>
+                    <h2 id="q-text" class="text-xl font-semibold text-[var(--ink)] mb-6"></h2>
+                    <div id="opts" class="space-y-3"></div>
+                </div>
+
+                <div id="slide-results" class="hidden p-8 md:p-12">
+                    <div class="text-center mb-8">
+                        <span class="text-[var(--accent)] font-semibold text-sm tracking-wider uppercase mb-2 block">Your Y-BOCS-Style Score</span>
+                        <div class="inline-flex items-baseline gap-1 mb-3">
+                            <span id="score-number" class="text-6xl font-extrabold text-[var(--ink)]">0</span>
+                            <span class="text-2xl text-[var(--muted)]">/40</span>
+                        </div>
+                        <div id="severity-badge" class="inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4">—</div>
+                    </div>
+                    <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-6 mb-6 text-left">
+                        <h3 class="font-semibold text-[var(--ink2)] mb-3">What Your Score Means</h3>
+                        <p id="score-interpretation" class="text-sm text-[var(--muted)] leading-relaxed"></p>
+                    </div>
+                    <div class="bg-[rgba(10,22,40,0.05)] border border-[var(--line)] rounded-xl p-6 mb-8 text-left">
+                        <h3 class="font-semibold text-[var(--ink)] mb-2">Recommended Next Steps</h3>
+                        <p id="treatment-text" class="text-sm text-[var(--ink2)] leading-relaxed"></p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <a href="/treatments/ocd/" class="quiz-geo-link w-full sm:w-auto text-center px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] shadow-lg">Learn About Deep TMS for OCD</a>
+                        <a href="/quiz/am-i-a-candidate/" class="w-full sm:w-auto text-center px-8 py-4 text-[var(--muted)] font-medium rounded-xl border border-[var(--line)] hover:text-[var(--ink)]">Am I a Candidate?</a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-xs text-[var(--muted)] mt-6">Screening tool, not a diagnosis. Only a licensed clinician can diagnose OCD. Scores are not stored.</p>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .ans-btn { width: 100%; padding: 1rem; text-align: left; border: 2px solid var(--line); border-radius: 0.75rem; font-weight: 500; color: var(--ink2); transition: all 0.15s ease; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .ans-btn:hover { border-color: var(--ink); background: rgba(10,22,40,0.04); }
+    .ans-score { font-size: 0.75rem; font-weight: 700; color: var(--muted); flex-shrink: 0; }
+</style>
+
+<script is:inline define:vars={{ QUESTIONS }}>
+    const answers = [];
+    let qIdx = 0;
+    const total = QUESTIONS.length;
+
+    function renderQ() {
+        const q = QUESTIONS[qIdx];
+        document.getElementById("q-counter").innerText = `Question ${qIdx + 1} of ${total}`;
+        document.getElementById("q-text").innerText = q.text;
+        const opts = document.getElementById("opts");
+        opts.innerHTML = "";
+        q.scale.forEach((label, i) => {
+            const btn = document.createElement("button");
+            btn.className = "ans-btn";
+            btn.innerHTML = `<span>${label}</span><span class="ans-score">${i}</span>`;
+            btn.addEventListener("click", () => answer(i));
+            opts.appendChild(btn);
+        });
+    }
+
+    function answer(val) {
+        answers.push(val);
+        const pct = Math.min((answers.length / total) * 100, 100);
+        document.getElementById("progress-bar").style.width = pct + "%";
+        document.getElementById("progress-text").innerText = Math.round(pct) + "%";
+        qIdx++;
+        if (qIdx >= total) {
+            document.getElementById("slide-q").classList.add("hidden");
+            showResults();
+        } else { renderQ(); }
+    }
+
+    document.getElementById("btn-start").addEventListener("click", () => {
+        document.getElementById("slide-intro").classList.add("hidden");
+        document.getElementById("slide-q").classList.remove("hidden");
+        renderQ();
+    });
+
+    function getSeverity(s) {
+        if (s <= 7) return { label: "Subclinical", color: "bg-green-100 text-green-700", interp: "Your score is in the subclinical range. Some intrusive thoughts are normal — most people experience them. At this level, OCD is unlikely to be interfering significantly with your life.", treat: "If symptoms feel like they're worsening, a brief check-in with a therapist trained in OCD is reasonable. Self-help books based on ERP (Exposure and Response Prevention) can help mild cases." };
+        if (s <= 15) return { label: "Mild", color: "bg-yellow-100 text-yellow-700", interp: "Your score suggests mild OCD. ERP therapy is the gold-standard first-line treatment and works well at this level for most people.", treat: "Look for a therapist specifically trained in ERP — not just general CBT. SSRIs (often at higher doses than for depression) are also first-line. Many people don't need both." };
+        if (s <= 23) return { label: "Moderate", color: "bg-orange-100 text-orange-700", interp: "Your score suggests moderate OCD. The combination of ERP therapy and an SSRI is the typical approach. If you've already tried both without enough relief, deep TMS — FDA-cleared for OCD since 2018 — is worth discussing.", treat: "Schedule an evaluation with an OCD specialist. If you've tried at least one SSRI for 8-12 weeks without enough relief, you may meet criteria for FDA-cleared BrainsWay Deep TMS." };
+        if (s <= 31) return { label: "Severe", color: "bg-red-100 text-red-700", interp: "Your score suggests severe OCD. This level often warrants intensive treatment — typically high-dose SSRIs combined with ERP therapy. Deep TMS is FDA-cleared specifically for treatment-resistant OCD at this severity.", treat: "Strongly consider an OCD specialty program. If standard treatments have failed, BrainsWay Deep TMS has solid trial evidence for OCD — and is increasingly covered by insurance for treatment-resistant cases." };
+        return { label: "Extreme", color: "bg-red-200 text-red-800", interp: "Your score is in the extreme range. OCD at this level is typically incapacitating and warrants prompt, intensive treatment. Inpatient or intensive outpatient OCD programs may be appropriate.", treat: "Reach out to an OCD specialty center as soon as possible. Options include intensive outpatient programs, residential OCD treatment, deep TMS, augmentation strategies, or for the most severe cases, surgical neuromodulation (DBS). You're not stuck — but you do need expert help." };
+    }
+
+    function showResults() {
+        const score = answers.reduce((a, b) => a + b, 0);
+        const sev = getSeverity(score);
+        document.getElementById("slide-results").classList.remove("hidden");
+        document.getElementById("score-number").innerText = score;
+        const badge = document.getElementById("severity-badge");
+        badge.innerText = sev.label;
+        badge.className = "inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-4 " + sev.color;
+        document.getElementById("score-interpretation").innerText = sev.interp;
+        document.getElementById("treatment-text").innerText = sev.treat;
+        document.getElementById("progress-bar").style.width = "100%";
+        document.getElementById("progress-text").innerText = "100%";
+    }
+
+    try { if (window.TMS_GEO && window.TMS_GEO.url) { document.querySelectorAll(".quiz-geo-link").forEach((el) => { el.href = window.TMS_GEO.url; }); } } catch (e) {}
+</script>

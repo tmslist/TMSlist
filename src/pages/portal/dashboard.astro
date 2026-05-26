@@ -9,13 +9,13 @@ const session = getSessionFromRequest(Astro.request);
 if (!session) {
   return Astro.redirect("/portal/login/");
 }
-if (!hasRole(session, 'admin', 'editor', 'clinic_owner')) {
+if (!hasRole(session, 'admin', 'editor', 'clinic_owner', 'viewer')) {
   return Astro.redirect("/portal/login/");
 }
 ---
 
 <Layout title="Doctor Dashboard | TMS List" description="Manage your clinic listing on TMS List." noindex={true}>
-  <div class="flex min-h-screen bg-gray-50">
+  <div class="flex min-h-screen bg-[var(--paper2)]">
     <PortalSidebar client:load currentPage="dashboard" userEmail={session.email} userId={session.userId} />
     <main class="flex-1 lg:ml-64 py-8">
       <div class="container mx-auto px-4 max-w-5xl">

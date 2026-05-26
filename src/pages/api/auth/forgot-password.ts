@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
-import { forgotPasswordSchema } from '../../../db/validation';
-import { createMagicToken, getUserByEmail } from '../../../utils/auth';
-import { strictRateLimit } from '../../../utils/rateLimit';
-import { sendPasswordResetEmail } from '../../../utils/email';
+import { forgotPasswordSchema } from '../../../db/validation.js';
+import { createMagicToken, getUserByEmail } from '../../../utils/auth.js';
+import { strictRateLimit } from '../../../utils/rateLimit.js';
+import { sendPasswordResetEmail } from '../../../utils/email.js';
 
 export const prerender = false;
 

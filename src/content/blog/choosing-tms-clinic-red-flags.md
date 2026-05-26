@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-25
 category: patient-guide
 tags: ["clinic selection", "patient guide", "quality", "red flags"]
-image: "https://images.unsplash.com/photo-1576091160550-217358c7e618?w=800&h=400&fit=crop"
+image: "/images/blog-covers/choosing-tms-clinic-red-flags.svg"
 ---
 
 TMS therapy has expanded rapidly in the last few years. More clinics, more providers, more options. That is mostly good news. Access is genuinely better than it was in 2020. But the rapid expansion has also created a wide range of quality. Some clinics are outstanding. Others cut corners in ways that could waste your time, your money, or worse.
@@ -110,9 +110,9 @@ We maintain a directory of TMS clinics across the United States with verified in
 
 Choosing the right TMS clinic is one of the biggest decisions in your treatment. The difference between a great clinic and a mediocre one is not just about comfort. It can genuinely affect whether the treatment works. Take the time to evaluate your options, ask hard questions, and trust your gut when something does not feel right.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>A board-certified psychiatrist must be directing your care. Ask who it is and whether you will meet them.</li>
     <li>No honest clinic guarantees results. Walk away from inflated success rate claims.</li>
     <li>You need a full psychiatric evaluation, medication review, and motor threshold mapping before treatment starts.</li>
@@ -122,47 +122,47 @@ Choosing the right TMS clinic is one of the biggest decisions in your treatment.
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Should a psychiatrist oversee my TMS treatment?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Should a psychiatrist oversee my TMS treatment?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. TMS is a psychiatric treatment for psychiatric conditions. A board-certified psychiatrist should evaluate you before treatment, direct your care plan, and monitor your progress. Ask who the overseeing psychiatrist is and whether you will meet them. If the answer is vague, keep looking.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. TMS is a psychiatric treatment for psychiatric conditions. A board-certified psychiatrist should evaluate you before treatment, direct your care plan, and monitor your progress. Ask who the overseeing psychiatrist is and whether you will meet them. If the answer is vague, keep looking.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What success rate should a TMS clinic quote?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What success rate should a TMS clinic quote?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Be skeptical of any clinic quoting above 60-70%. Real-world TMS response rates are 50-60% for treatment-resistant depression, with 30-35% achieving full remission. Claims of 80-95% success rates are red flags for cherry-picked data or misleading definitions of response.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Be skeptical of any clinic quoting above 60-70%. Real-world TMS response rates are 50-60% for treatment-resistant depression, with 30-35% achieving full remission. Claims of 80-95% success rates are red flags for cherry-picked data or misleading definitions of response.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What questions should I ask before choosing a TMS clinic?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What questions should I ask before choosing a TMS clinic?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Ask: Who is the overseeing psychiatrist? How many TMS patients have you treated? What device and protocols do you offer? What is your real-world response rate? Do you coordinate with my other providers? What does the evaluation include? Can I visit before committing?</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Ask: Who is the overseeing psychiatrist? How many TMS patients have you treated? What device and protocols do you offer? What is your real-world response rate? Do you coordinate with my other providers? What does the evaluation include? Can I visit before committing?</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How do I verify a TMS clinic's credentials?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How do I verify a TMS clinic's credentials?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Check the psychiatrist's credentials on your state medical board website. Confirm board certification in psychiatry. Look for disciplinary actions. Read patient reviews on Google, Healthgrades, and Zocdoc for specifics about the experience. Verify insurance acceptance directly with your insurance company.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Check the psychiatrist's credentials on your state medical board website. Confirm board certification in psychiatry. Look for disciplinary actions. Read patient reviews on Google, Healthgrades, and Zocdoc for specifics about the experience. Verify insurance acceptance directly with your insurance company.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is it okay to pay for TMS upfront?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is it okay to pay for TMS upfront?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Many clinics offer discounts for upfront payment, which is legitimate. Red flags include being pressured to pay before you have had a consultation, being discouraged from using insurance, or being told a special price is only available today. The financial conversation should feel consultative, not like a car dealership.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Many clinics offer discounts for upfront payment, which is legitimate. Red flags include being pressured to pay before you have had a consultation, being discouraged from using insurance, or being told a special price is only available today. The financial conversation should feel consultative, not like a car dealership.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

@@ -5,8 +5,8 @@ interface Props {
 const { className = "h-8 w-auto" } = Astro.props;
 ---
 
-<a href="/" class="flex items-center gap-2.5 group cursor-pointer" aria-label="TMSList Home">
-    <!-- Icon with teal brand gradient -->
+<span class="flex items-center gap-2.5 group cursor-pointer">
+    <!-- Magnetic-wave mark — ink arcs with a warm signature inner pulse -->
     <svg
         class={className}
         viewBox="0 0 100 100"
@@ -14,39 +14,33 @@ const { className = "h-8 w-auto" } = Astro.props;
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
     >
-        <defs>
-            <linearGradient id="tmsBrandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#1B4B5A"/>
-                <stop offset="100%" stop-color="#2E7A8F"/>
-            </linearGradient>
-        </defs>
-        <!-- Magnetic wave arcs -->
+        <!-- Outer arc: ink -->
         <path
             d="M50 15 C 30 15, 15 35, 15 55 C 15 75, 30 85, 50 85"
-            stroke="url(#tmsBrandGradient)"
+            stroke="#0A1628"
             stroke-width="8"
             stroke-linecap="round"
             class="transition-transform group-hover:scale-105 origin-center duration-300"
         ></path>
+        <!-- Middle arc: ink slightly lighter -->
         <path
             d="M65 25 C 45 25, 35 40, 35 55 C 35 70, 45 75, 65 75"
-            stroke="url(#tmsBrandGradient)"
+            stroke="#1E2A3B"
             stroke-width="8"
             stroke-linecap="round"
-            opacity="0.7"
             class="transition-transform group-hover:scale-105 origin-center duration-300 delay-75"
         ></path>
+        <!-- Inner arc: warm terracotta — the signature pulse -->
         <path
             d="M80 35 C 65 35, 55 45, 55 55 C 55 65, 65 65, 80 65"
-            stroke="url(#tmsBrandGradient)"
+            stroke="#C9654A"
             stroke-width="8"
             stroke-linecap="round"
-            opacity="0.4"
             class="transition-transform group-hover:scale-105 origin-center duration-300 delay-150"
         ></path>
     </svg>
-    <!-- Brand wordmark -->
-    <span class="text-xl font-extrabold tracking-tight text-ink dark:text-white font-display">
-        TMS<span class="text-primary">List</span>
+    <!-- Brand wordmark — ink + warm "List" -->
+    <span class="text-xl font-extrabold tracking-tight font-display" style="color:var(--ink); letter-spacing:-0.02em;">
+        TMS<span style="color:var(--warm); font-family:'Instrument Serif', Georgia, serif; font-weight:400; font-style:italic;">List</span>
     </span>
-</a>
+</span>

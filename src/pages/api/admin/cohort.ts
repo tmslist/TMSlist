@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { sql } from 'drizzle-orm';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -44,7 +44,7 @@ export const GET: APIRoute = async ({ request }) => {
       retention_data AS (
         SELECT
           s.cohort_month,
-          u.created_at AS activity_month,
+          date_trunc('month', u.created_at)::date AS activity_month,
           count(DISTINCT u.id) AS retained_users
         FROM monthly_signups s
         JOIN users u ON u.id = s.id
@@ -66,9 +66,9 @@ export const GET: APIRoute = async ({ request }) => {
         cohort_month,
         cohort_size,
         json_object_agg(
-          'm' || extract(month FROM activity_month - cohort_month)::int,
+          'm' || ((extract(year FROM activity_month) - extract(year FROM cohort_month)) * 12 + (extract(month FROM activity_month) - extract(month FROM cohort_month)))::int,
           retention_rate
-        ) FILTER (WHERE extract(month FROM activity_month - cohort_month) <= ${maxMonths}) AS retention
+        ) FILTER (WHERE ((extract(year FROM activity_month) - extract(year FROM cohort_month)) * 12 + (extract(month FROM activity_month) - extract(month FROM cohort_month))) <= ${maxMonths}) AS retention
       FROM retention_rates
       GROUP BY cohort_month, cohort_size
       ORDER BY cohort_month DESC

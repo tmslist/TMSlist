@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
 import { eq, desc } from 'drizzle-orm';
-import { db } from '../../../db';
+import { db } from '../..//../db/index.js';
 import { doctors, doctorBoardCertifications, doctorMedicalLicenses } from '../../../db/schema';
-import { getSessionFromRequest } from '../../../utils/auth';
+import { getSessionFromRequest } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -24,7 +24,7 @@ export const GET: APIRoute = async ({ request }) => {
     if (!rows[0]) return json({ error: 'No doctor record found' }, 404);
 
     const [certs, licenses] = await Promise.all([
-      db.select().from(doctorBoardCerts).where(eq(doctorBoardCerts.doctorId, rows[0].id)),
+      db.select().from(doctorBoardCertifications).where(eq(doctorBoardCertifications.doctorId, rows[0].id)),
       db.select().from(doctorMedicalLicenses).where(eq(doctorMedicalLicenses.doctorId, rows[0].id)),
     ]);
 

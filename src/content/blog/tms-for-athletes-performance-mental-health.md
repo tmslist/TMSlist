@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-12
 category: research
 tags: ["athletes", "performance", "burnout", "sports psychology", "mental health"]
-image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-athletes-performance-mental-health.svg"
 ---
 
 The conversation about mental health in elite sports has transformed over the past decade. Athletes are increasingly open about depression, anxiety, and burnout — conditions that do not respect competitive success. The tools for treating these conditions in athletes, however, have not fully adapted to the demands of athletic life.
@@ -99,35 +99,35 @@ If you are an athlete struggling with depression, burnout, or anxiety that is in
 
 Your brain is part of your body. Taking care of it is not a compromise of performance — it is a prerequisite for it.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS allowed under WADA anti-doping rules?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS allowed under WADA anti-doping rules?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. TMS is not a banned substance or method under WADA (World Anti-Doping Agency) regulations. It is a non-pharmacological neuromodulation device. However, athletes subject to anti-doping jurisdiction should inform their national anti-doping organization of any medical treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. TMS is not a banned substance or method under WADA (World Anti-Doping Agency) regulations. It is a non-pharmacological neuromodulation device. However, athletes subject to anti-doping jurisdiction should inform their national anti-doping organization of any medical treatment.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can TMS affect athletic performance or show up in drug tests?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can TMS affect athletic performance or show up in drug tests?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS is not a drug and does not show up in drug tests. Unlike medications that can affect alertness, reaction time, or judgment, TMS has no post-treatment impairment. Athletes can receive TMS and return to training or competition the same day.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS is not a drug and does not show up in drug tests. Unlike medications that can affect alertness, reaction time, or judgment, TMS has no post-treatment impairment. Athletes can receive TMS and return to training or competition the same day.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long does a TMS course take for athletes?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long does a TMS course take for athletes?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Standard TMS takes 6-9 weeks of daily sessions. Accelerated protocols can complete treatment in 5-10 days. Theta burst TMS sessions take only 3-4 minutes. Athletes with limited time off may benefit from accelerated or theta burst protocols that fit around competition schedules.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Standard TMS takes 6-9 weeks of daily sessions. Accelerated protocols can complete treatment in 5-10 days. Theta burst TMS sessions take only 3-4 minutes. Athletes with limited time off may benefit from accelerated or theta burst protocols that fit around competition schedules.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
-import { registerSchema } from '../../../db/validation';
-import { hashPassword, isPasswordStrongEnough, createMagicToken, getUserByEmail } from '../../../utils/auth';
-import { strictRateLimit } from '../../../utils/rateLimit';
-import { sendEmailVerificationEmail } from '../../../utils/email';
+import { registerSchema } from '../../../db/validation.js';
+import { hashPassword, isPasswordStrongEnough, createMagicToken, getUserByEmail } from '../../../utils/auth.js';
+import { strictRateLimit } from '../../../utils/rateLimit.js';
+import { sendEmailVerificationEmail } from '../../../utils/email.js';
 import { db } from '../../../db';
 import { users } from '../../../db/schema';
 

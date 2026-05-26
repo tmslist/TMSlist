@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-02-05
 category: research
 tags: ["pregnancy", "safety", "perinatal depression", "meta-analysis"]
-image: "https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-during-pregnancy-safety-data.svg"
 ---
 
 Perinatal depression affects roughly 1 in 7 pregnant women. That is not a small number. It is one of the most common complications of pregnancy, and it is tied to real harm. To you. To the pregnancy. To your child's long-term development.
@@ -117,9 +117,9 @@ Not all TMS clinics have experience treating pregnant women. When searching for 
 
 Find TMS providers experienced with perinatal care through our [specialist directory](/specialists/) or search clinics in your area using our [state-by-state finder](/us/).
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>The 2025 meta-analysis of 400+ pregnant women found no increase in miscarriage, birth defects, or preterm labor with TMS.</li>
     <li>ACOG recognizes TMS as a non-pharmacological option for perinatal depression when medication is a concern.</li>
     <li>TMS during pregnancy requires comfort modifications (positioning, possible theta burst for shorter sessions).</li>
@@ -129,47 +129,47 @@ Find TMS providers experienced with perinatal care through our [specialist direc
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS safe during pregnancy?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS safe during pregnancy?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">The 2025 meta-analysis of 400+ pregnant women found no increase in miscarriage (8.2%, within normal range), birth defects (3.1%, identical to general population), or preterm labor (9.4%, below national average). ACOG recognizes TMS as a non-pharmacological option for perinatal depression. The mechanism of action (magnetic pulses focused on the scalp) does not suggest fetal risk.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The 2025 meta-analysis of 400+ pregnant women found no increase in miscarriage (8.2%, within normal range), birth defects (3.1%, identical to general population), or preterm labor (9.4%, below national average). ACOG recognizes TMS as a non-pharmacological option for perinatal depression. The mechanism of action (magnetic pulses focused on the scalp) does not suggest fetal risk.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS affect the baby?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS affect the baby?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No adverse fetal effects have been identified in any published study. Birth weight, Apgar scores, and NICU admission rates in TMS-exposed infants are within normal ranges. The magnetic field does not reach the fetus. ACOG and the APA both include TMS among acceptable options when medication risks are a concern.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No adverse fetal effects have been identified in any published study. Birth weight, Apgar scores, and NICU admission rates in TMS-exposed infants are within normal ranges. The magnetic field does not reach the fetus. ACOG and the APA both include TMS among acceptable options when medication risks are a concern.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">When during pregnancy can I get TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">When during pregnancy can I get TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most perinatal TMS happens in the second and third trimesters. First-trimester data is thinner. Some women start in the postpartum period for breastfeeding safety. Most clinicians prefer to wait until after the first trimester when possible, but the available first-trimester data does not suggest increased risk.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most perinatal TMS happens in the second and third trimesters. First-trimester data is thinner. Some women start in the postpartum period for breastfeeding safety. Most clinicians prefer to wait until after the first trimester when possible, but the available first-trimester data does not suggest increased risk.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How is TMS different from antidepressants during pregnancy?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How is TMS different from antidepressants during pregnancy?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS uses magnetic pulses focused on the scalp. Nothing enters the bloodstream or crosses the placenta. Antidepressants (SSRIs, SNRIs) are systemically absorbed and do cross the placenta in varying concentrations. While most modern SSRIs are considered relatively safe, TMS eliminates fetal medication exposure entirely.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS uses magnetic pulses focused on the scalp. Nothing enters the bloodstream or crosses the placenta. Antidepressants (SSRIs, SNRIs) are systemically absorbed and do cross the placenta in varying concentrations. While most modern SSRIs are considered relatively safe, TMS eliminates fetal medication exposure entirely.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does insurance cover TMS during pregnancy?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does insurance cover TMS during pregnancy?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Coverage is the same as for non-pregnant patients since the indication (treatment-resistant depression) is the same. Most major insurers cover TMS for major depressive disorder. ACOG-aligned recommendations can support coverage arguments. See our <a href="/insurance/" class="text-violet-600 hover:underline">insurance guide</a> for details.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Coverage is the same as for non-pregnant patients since the indication (treatment-resistant depression) is the same. Most major insurers cover TMS for major depressive disorder. ACOG-aligned recommendations can support coverage arguments. See our <a href="/insurance/" class="text-[var(--warm)] hover:underline">insurance guide</a> for details.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

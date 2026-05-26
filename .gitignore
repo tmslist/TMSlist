@@ -20,6 +20,8 @@ dist.zip
 
 # macOS-specific files
 .DS_Store
+._*
+**/._*
 
 # jetbrains setting folder
 .idea/

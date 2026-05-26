@@ -42,7 +42,7 @@ export default function ReviewVote({ reviewId, initialHelpful = 0, initialUnhelp
 
   return (
     <div className="flex items-center gap-3 text-xs" role="group" aria-label="Rate this review's helpfulness">
-      <span className="text-slate-400">Helpful?</span>
+      <span className="text-[var(--muted)]">Helpful?</span>
       <button
         onClick={() => vote(true)}
         disabled={voted !== null}
@@ -51,8 +51,8 @@ export default function ReviewVote({ reviewId, initialHelpful = 0, initialUnhelp
           voted === 'helpful'
             ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
             : voted !== null
-            ? 'text-slate-300 cursor-default'
-            : 'text-slate-500 hover:bg-emerald-50 hover:text-emerald-600 border border-transparent hover:border-emerald-200'
+            ? 'text-[var(--line)] cursor-default'
+            : 'text-[var(--muted)] hover:bg-emerald-50 hover:text-emerald-600 border border-transparent hover:border-emerald-200'
         }`}
       >
         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,8 +68,8 @@ export default function ReviewVote({ reviewId, initialHelpful = 0, initialUnhelp
           voted === 'unhelpful'
             ? 'bg-red-50 text-red-500 border border-red-200'
             : voted !== null
-            ? 'text-slate-300 cursor-default'
-            : 'text-slate-500 hover:bg-red-50 hover:text-red-500 border border-transparent hover:border-red-200'
+            ? 'text-[var(--line)] cursor-default'
+            : 'text-[var(--muted)] hover:bg-red-50 hover:text-red-500 border border-transparent hover:border-red-200'
         }`}
       >
         <svg className="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">

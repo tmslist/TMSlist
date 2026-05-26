@@ -31,19 +31,19 @@ const {
             loading="lazy"
         />
         <div>
-            <div class="font-semibold text-slate-900">{name}</div>
-            <div class="text-xs text-slate-500">{title}</div>
+            <div class="font-semibold text-[var(--ink)]">{name}</div>
+            <div class="text-xs text-[var(--muted)]">{title}</div>
             {credentials.length > 0 && (
                 <div class="flex items-center gap-1.5 mt-1">
                     {credentials.slice(0, 3).map((cred) => (
-                        <span class="text-[10px] font-medium px-1.5 py-0.5 bg-[#1B4B5A]50 text-[#1B4B5A] rounded border border-[#1B4B5A]100">{cred}</span>
+                        <span class="text-[10px] font-medium px-1.5 py-0.5 bg-[rgba(10,22,40,0.10)] text-[var(--accent)] rounded border border-[rgba(10,22,40,0.15)]">{cred}</span>
                     ))}
                 </div>
             )}
         </div>
     </div>
 ) : (
-    <div class="bg-gradient-to-br from-violet-50 to-white border border-[#1B4B5A]100 rounded-2xl p-6 not-prose">
+    <div class="bg-[var(--paper)] border border-[var(--line)] rounded-2xl p-6 not-prose">
         <div class="flex items-start gap-5">
             <img
                 src={image}
@@ -54,21 +54,21 @@ const {
                 loading="lazy"
             />
             <div class="flex-1 min-w-0">
-                <div class="text-xs font-bold uppercase tracking-widest text-[#2E7A8F] mb-1">Medically Reviewed By</div>
-                <h3 class="text-lg font-bold text-slate-900 leading-tight">{name}</h3>
-                <p class="text-sm font-medium text-[#1B4B5A] mb-3">{title}</p>
+                <div class="text-xs font-bold uppercase tracking-widest text-[var(--accent2)] mb-1">Medically Reviewed By</div>
+                <h3 class="text-lg font-bold text-[var(--ink)] leading-tight">{name}</h3>
+                <p class="text-sm font-medium text-[var(--accent)] mb-3">{title}</p>
                 {credentials.length > 0 && (
                     <div class="flex flex-wrap gap-1.5 mb-3">
                         {credentials.map((cred) => (
-                            <span class="text-[11px] font-medium px-2 py-0.5 bg-[#1B4B5A]50 text-[#143844] rounded-full border border-[#1B4B5A]100">{cred}</span>
+                            <span class="text-[11px] font-medium px-2 py-0.5 bg-[rgba(10,22,40,0.10)] text-[var(--ink)] rounded-full border border-[rgba(10,22,40,0.15)]">{cred}</span>
                         ))}
                     </div>
                 )}
-                <p class="text-sm text-slate-600 leading-relaxed">{bio}</p>
+                <p class="text-sm text-[var(--ink2)] leading-relaxed">{bio}</p>
                 {profileUrl && (
                     <a
                         href={profileUrl}
-                        class="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-[#1B4B5A] hover:text-[#1B4B5A]800 hover:underline transition-colors"
+                        class="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-[var(--accent)] hover:text-[var(--ink)] hover:underline transition-colors"
                     >
                         View Specialist Profile
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>

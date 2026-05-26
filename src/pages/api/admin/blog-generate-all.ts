@@ -9,13 +9,14 @@
  */
 
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 import { readdirSync, writeFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 export const prerender = false;
 
 const BLOG_DIR = join(process.cwd(), 'src/content/blog');
+const SAFE_SLUG = /^[a-z0-9][a-z0-9-]{0,127}$/;
 
 async function getManifest() {
   try {
@@ -287,11 +288,22 @@ export const POST: APIRoute = async ({ request }) => {
     const results: Array<{ slug: string; title: string; status: string; error?: string }> = [];
 
     for (const post of toGenerate) {
+      // Validate slug: lowercase alnum + hyphen only, no path traversal.
+      if (!SAFE_SLUG.test(post.slug)) {
+        results.push({ slug: post.slug, title: post.title, status: 'error', error: 'Invalid slug' });
+        continue;
+      }
+      const filepath = join(BLOG_DIR, `${post.slug}.md`);
+      // Defense in depth: ensure the resolved path stays inside BLOG_DIR.
+      if (!resolve(filepath).startsWith(resolve(BLOG_DIR) + '/')) {
+        results.push({ slug: post.slug, title: post.title, status: 'error', error: 'Path escape blocked' });
+        continue;
+      }
+
       const type = post.type || 'treatment_guide';
       const templateFn = FALLBACK_TEMPLATES[type] || FALLBACK_TEMPLATES.treatment_guide;
       const content = templateFn(post);
       const markdown = buildMarkdown(post, content);
-      const filepath = join(BLOG_DIR, `${post.slug}.md`);
 
       try {
         writeFileSync(filepath, markdown, 'utf8');

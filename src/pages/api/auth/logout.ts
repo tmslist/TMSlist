@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { clearSessionCookie, invalidateSession } from '../../../utils/auth';
+import { clearSessionCookie, invalidateSession, isSafeRedirectPath } from '../../../utils/auth.js';
 
 const COOKIE_NAME = 'tms_session';
 
@@ -27,7 +27,8 @@ const clearAndRedirect = (redirectTo?: string) =>
   });
 
 export const GET: APIRoute = ({ request, url }) => {
-  const redirectTo = url.searchParams.get('redirect') || '/';
+  const requested = url.searchParams.get('redirect');
+  const redirectTo = isSafeRedirectPath(requested) ? requested : '/';
   const cookies = getCookies(request);
   const token = cookies[COOKIE_NAME];
   if (token) {

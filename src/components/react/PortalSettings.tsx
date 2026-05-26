@@ -75,7 +75,7 @@ export default function PortalSettings({ userEmail, userId }: { userEmail: strin
           <a href="/portal/dashboard/" className="text-sm text-emerald-600 hover:text-emerald-700 font-medium mb-2 inline-block">
             &larr; Back to Dashboard
           </a>
-          <h1 className="text-2xl font-semibold text-gray-900">Account Settings</h1>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Account Settings</h1>
         </div>
       </div>
 
@@ -88,39 +88,39 @@ export default function PortalSettings({ userEmail, userId }: { userEmail: strin
 
       <div className="space-y-6">
         {/* Account Info */}
-        <section className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Account Information</h2>
+        <section className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Account Information</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Display Name</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Display Name</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
+                className="w-full rounded-lg border border-[var(--line)] px-4 py-2.5 text-sm focus:border-emerald-500 focus:ring-emerald-500"
                 placeholder="Your name"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+              <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Email Address</label>
               <input
                 type="email"
                 value={userEmail}
                 disabled
-                className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-500 cursor-not-allowed"
+                className="w-full rounded-lg border border-[var(--line)] bg-[var(--paper2)] px-4 py-2.5 text-sm text-[var(--muted)] cursor-not-allowed"
               />
-              <p className="text-xs text-gray-400 mt-1">Email cannot be changed. Contact support if needed.</p>
+              <p className="text-xs text-[var(--muted)] mt-1">Email cannot be changed. Contact support if needed.</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
-                <div className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-600 capitalize">
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Role</label>
+                <div className="px-4 py-2.5 bg-[var(--paper2)] border border-[var(--line)] rounded-lg text-sm text-[var(--ink2)] capitalize">
                   {profile?.role?.replace('_', ' ') || 'Clinic Owner'}
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Member Since</label>
-                <div className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-600">
+                <label className="block text-sm font-medium text-[var(--ink2)] mb-1">Member Since</label>
+                <div className="px-4 py-2.5 bg-[var(--paper2)] border border-[var(--line)] rounded-lg text-sm text-[var(--ink2)]">
                   {profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : 'N/A'}
                 </div>
               </div>
@@ -138,13 +138,13 @@ export default function PortalSettings({ userEmail, userId }: { userEmail: strin
         </section>
 
         {/* Linked Clinic */}
-        <section className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Linked Clinic</h2>
+        <section className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Linked Clinic</h2>
           {profile?.clinicName ? (
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium text-gray-900">{profile.clinicName}</p>
-                <p className="text-sm text-gray-500">Clinic ID: {profile.clinicId}</p>
+                <p className="font-medium text-[var(--ink)]">{profile.clinicName}</p>
+                <p className="text-sm text-[var(--muted)]">Clinic ID: {profile.clinicId}</p>
               </div>
               <a href="/portal/clinic/" className="text-sm text-emerald-600 hover:text-emerald-700 font-medium">
                 Edit Clinic &rarr;
@@ -152,7 +152,7 @@ export default function PortalSettings({ userEmail, userId }: { userEmail: strin
             </div>
           ) : (
             <div className="text-center py-4">
-              <p className="text-gray-500 text-sm mb-3">No clinic linked to your account.</p>
+              <p className="text-[var(--muted)] text-sm mb-3">No clinic linked to your account.</p>
               <a href="/portal/claim/" className="text-sm text-emerald-600 hover:text-emerald-700 font-semibold">
                 Claim Your Clinic &rarr;
               </a>
@@ -161,11 +161,11 @@ export default function PortalSettings({ userEmail, userId }: { userEmail: strin
         </section>
 
         {/* Session */}
-        <section className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Session</h2>
+        <section className="bg-white rounded-xl border border-[var(--line)] p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--ink)] mb-4">Session</h2>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-[var(--ink2)]">
                 Last login: {profile?.lastLoginAt ? new Date(profile.lastLoginAt).toLocaleString() : 'N/A'}
               </p>
             </div>
@@ -181,7 +181,7 @@ export default function PortalSettings({ userEmail, userId }: { userEmail: strin
         {/* Danger Zone */}
         <section className="bg-white rounded-xl border border-red-200 p-6 shadow-sm">
           <h2 className="text-lg font-semibold text-red-700 mb-2">Danger Zone</h2>
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-sm text-[var(--muted)] mb-4">
             To delete your account or transfer clinic ownership, please contact support at{' '}
             <a href="mailto:support@tmslist.com" className="text-emerald-600 hover:underline">support@tmslist.com</a>.
           </p>

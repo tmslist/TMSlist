@@ -13,7 +13,7 @@ export default function SocialProof({ clinicId }: { clinicId: string }) {
   if (count === 0) return null;
 
   return (
-    <p className="text-sm text-gray-500 flex items-center gap-1.5">
+    <p className="text-sm text-[var(--muted)] flex items-center gap-1.5">
       <span className="inline-block w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
       {count} patient{count !== 1 ? 's' : ''} enquired this month
     </p>

@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, desc, sql, and } from 'drizzle-orm';
 import { db } from '../../../db';
 import { rewards, clinicPoints, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -36,14 +36,14 @@ export const GET: APIRoute = async ({ request }) => {
         .select()
         .from(clinicPoints)
         .where(clinicId ? eq(clinicPoints.clinicId, clinicId) : undefined)
-        .orderBy(desc(clinicPoints.createdAt))
+        .orderBy(desc(clinicPoints.updatedAt))
         .limit(200);
       if (type === 'points') return json({ data: pointsData });
     }
 
     const [rewardsData, pointsData] = await Promise.all([
       db.select().from(rewards).orderBy(desc(rewards.createdAt)),
-      db.select().from(clinicPoints).orderBy(desc(clinicPoints.createdAt)).limit(200),
+      db.select().from(clinicPoints).orderBy(desc(clinicPoints.updatedAt)).limit(200),
     ]);
 
     return json({ data: { rewards: rewardsData, points: pointsData } });

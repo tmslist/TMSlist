@@ -49,10 +49,10 @@ export default function PushNotificationPrompt() {
 
   return (
     <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[190] w-full max-w-md px-4 animate-in slide-in-from-top">
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-4">
+      <div className="bg-white rounded-2xl shadow-xl border border-[var(--line)] p-4">
         <div className="flex items-start gap-3">
-          <div className="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
-            <svg className="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-10 h-10 rounded-xl bg-[rgba(10,22,40,0.08)] flex items-center justify-center shrink-0">
+            <svg className="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -62,20 +62,20 @@ export default function PushNotificationPrompt() {
             </svg>
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-gray-900">Enable Notifications</h3>
-            <p className="text-xs text-gray-500 mt-0.5">
+            <h3 className="text-sm font-semibold text-[var(--ink)]">Enable Notifications</h3>
+            <p className="text-xs text-[var(--muted)] mt-0.5">
               Get notified about new reviews and leads for your clinic.
             </p>
             <div className="flex gap-2 mt-3">
               <button
                 onClick={handleEnable}
-                className="px-3 py-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold rounded-lg transition-colors"
+                className="px-3 py-1.5 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white text-xs font-semibold rounded-lg transition-colors"
               >
                 Enable
               </button>
               <button
                 onClick={handleDismiss}
-                className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold rounded-lg transition-colors"
+                className="px-3 py-1.5 bg-[var(--paper2)] hover:bg-[var(--paper2)] text-[var(--ink2)] text-xs font-semibold rounded-lg transition-colors"
               >
                 Not now
               </button>
@@ -83,7 +83,7 @@ export default function PushNotificationPrompt() {
           </div>
           <button
             onClick={handleDismiss}
-            className="text-gray-400 hover:text-gray-600 shrink-0"
+            className="text-[var(--muted)] hover:text-[var(--ink2)] shrink-0"
             aria-label="Close"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

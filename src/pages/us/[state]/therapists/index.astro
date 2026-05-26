@@ -1,0 +1,103 @@
+---
+export const prerender = false;
+
+import Layout from '../../../../layouts/Layout.astro';
+import EditorialHero from '../../../../components/editorial/EditorialHero.astro';
+import EditorialSection from '../../../../components/editorial/EditorialSection.astro';
+import EditorialCard from '../../../../components/editorial/EditorialCard.astro';
+import EditorialCTA from '../../../../components/editorial/EditorialCTA.astro';
+import { getAllClinics, getStateCodeFromSlug, STATE_NAMES } from '../../../../utils/clinicData';
+import { filterDoctorsByType } from '../../../../utils/providerFilter';
+
+const stateSlug = Astro.params.state!;
+const stateCode = getStateCodeFromSlug(stateSlug);
+if (!stateCode) return Astro.redirect('/therapists/');
+const stateName = STATE_NAMES[stateCode] || stateCode;
+
+const clinics = await getAllClinics();
+const stateClinics = clinics.filter(c => c.state === stateCode);
+if (stateClinics.length === 0) return Astro.redirect('/therapists/');
+
+const allDoctors = stateClinics.flatMap((c: any) => (c.doctors_data || []).map((d: any) => ({ ...d, clinic: c })));
+const therapists = filterDoctorsByType(allDoctors, 'therapists');
+
+const byCity: Record<string, { name: string; slug: string; count: number }> = {};
+therapists.forEach(d => {
+  const cityName = d.clinic?.city;
+  if (!cityName) return;
+  const slug = cityName.toLowerCase().replace(/\s+/g, '-');
+  if (!byCity[slug]) byCity[slug] = { name: cityName, slug, count: 0 };
+  byCity[slug].count++;
+});
+const cities = Object.values(byCity).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+
+const title = `Best Therapists Supporting TMS Therapy in ${stateName} | TMS List`;
+const description = `Browse ${therapists.length} licensed therapists and counselors supporting TMS therapy across ${cities.length} cities in ${stateName}. Compare credentials and find a provider near you.`;
+---
+
+<Layout title={title} description={description} breadcrumbs={[
+  { name: "Home", url: "/" },
+  { name: "Therapists", url: "/therapists/" },
+  { name: stateName, url: `/us/${stateSlug}/therapists/` },
+]}>
+
+<main style="background:var(--paper)">
+  <EditorialHero
+    eyebrow="TMS-Supportive Therapists"
+    eyebrowDot="#22c55e"
+    title={`Therapists in`}
+    titleAccent={`${stateName}.`}
+    description={`Browse ${therapists.length} licensed therapists and counselors supporting patients through TMS therapy across ${cities.length} cities in ${stateName}.`}
+    breadcrumbs={[
+      { label: "Home", href: "/" },
+      { label: "Therapists", href: "/therapists/" },
+      { label: stateName },
+    ]}
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: `All TMS Clinics in ${stateName}`, href: `/us/${stateSlug}/`, variant: "outline" },
+    ]}
+    stats={[
+      { value: therapists.length, label: "Therapists", color: "ink" },
+      { value: cities.length, label: "Cities", color: "accent" },
+      { value: stateClinics.length, label: "Clinics", color: "warm" },
+    ]}
+  />
+
+  {cities.length > 0 ? (
+    <EditorialSection
+      title={`Browse Therapists by City in ${stateName}`}
+      intro="Pick your city to see TMS-supportive therapists and counselors nearby."
+      tone="accent"
+    >
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {cities.map(c => (
+          <EditorialCard
+            href={`/us/${stateSlug}/${c.slug}/therapists/`}
+            tag={`${c.count} ${c.count === 1 ? 'Therapist' : 'Therapists'}`}
+            tagTone="accent"
+            title={c.name}
+            description={`Licensed therapists supporting TMS treatment in ${c.name}, ${stateName}.`}
+            size="lg"
+          />
+        ))}
+      </div>
+    </EditorialSection>
+  ) : (
+    <EditorialSection title={`No Therapists Listed Yet in ${stateName}`} intro="We're expanding our network. Browse all TMS clinics in this state, or take our quiz to find providers nearby.">
+      <div></div>
+    </EditorialSection>
+  )}
+
+  <EditorialCTA
+    title={`Find your TMS therapist in ${stateName}.`}
+    description="Connect with a licensed therapist who supports patients through TMS treatment."
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "All States", href: "/therapists/", variant: "outline" },
+    ]}
+    stickyMobile
+  />
+</main>
+
+</Layout>

@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
+import { eq } from 'drizzle-orm';
 import { db } from '../../../db';
-import { leads } from '../../../db/schema';
+import { leads, clinics } from '../../../db/schema';
 import { escapeHtml } from '../../../utils/sanitize';
 import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
 import { sendLeadNotification, sendPatientConfirmation } from '../../../utils/email';
@@ -8,10 +9,13 @@ import { z } from 'zod';
 
 export const prerender = false;
 
+// `clinicEmail` is intentionally NOT accepted from the client — letting an
+// attacker pass arbitrary recipients would turn this endpoint into an open
+// relay ("New Lead from TMSList" → any address). The clinic email is
+// resolved server-side from the clinics table by clinicId.
 const appointmentSchema = z.object({
   clinicId: z.string().uuid(),
   clinicName: z.string().max(200),
-  clinicEmail: z.string().email().optional(),
   name: z.string().min(1).max(100),
   email: z.string().email(),
   phone: z.string().max(30).optional(),
@@ -70,8 +74,15 @@ export const POST: APIRoute = async ({ request }) => {
       },
     }).returning();
 
-    // Send notification email to clinic and admin
-    const notifyEmail = data.clinicEmail || undefined;
+    // Look up the clinic's verified email server-side. NEVER trust an email
+    // address supplied by the requester — that lets attackers spoof
+    // "New Lead from TMSList" to arbitrary inboxes.
+    const [clinicRow] = await db
+      .select({ email: clinics.email })
+      .from(clinics)
+      .where(eq(clinics.id, data.clinicId))
+      .limit(1);
+    const notifyEmail = clinicRow?.email || undefined;
     sendLeadNotification({
       clinicName: data.clinicName,
       clinicEmail: notifyEmail,

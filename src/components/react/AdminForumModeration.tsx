@@ -64,7 +64,7 @@ export default function AdminForumModeration() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-4 border-violet-200 border-t-violet-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[rgba(10,22,40,0.15)] border-t-[#0A1628] rounded-full animate-spin" />
       </div>
     );
   }
@@ -73,8 +73,8 @@ export default function AdminForumModeration() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Forum Moderation</h1>
-          <p className="text-gray-500 mt-1">Review posts, comments, and flagged content</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Forum Moderation</h1>
+          <p className="text-[var(--muted)] mt-1">Review posts, comments, and flagged content</p>
         </div>
         <div className="flex gap-3">
           <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-medium">
@@ -84,13 +84,13 @@ export default function AdminForumModeration() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-8 w-fit">
+      <div className="flex gap-1 bg-[var(--paper2)] rounded-xl p-1 mb-8 w-fit">
         {(['posts', 'comments', 'flagged'] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={`px-5 py-2 rounded-lg text-sm font-medium transition-all capitalize ${
-              tab === t ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+              tab === t ? 'bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--ink2)] hover:text-[var(--ink)]'
             }`}
           >
             {t}
@@ -99,33 +99,33 @@ export default function AdminForumModeration() {
       </div>
 
       {tab === 'posts' && (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+        <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+          <table className="min-w-full divide-y divide-[var(--line)]">
+            <thead className="bg-[var(--paper2)]">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Author</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Replies</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Title</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Author</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Date</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase">Replies</th>
                 <th className="px-6 py-3"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[var(--line)]">
               {posts.map((post) => (
-                <tr key={post.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900">{post.title}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{post.author}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{formatDate(post.createdAt)}</td>
+                <tr key={post.id} className="hover:bg-[var(--paper2)]">
+                  <td className="px-6 py-4 text-sm font-medium text-[var(--ink)]">{post.title}</td>
+                  <td className="px-6 py-4 text-sm text-[var(--ink2)]">{post.author}</td>
+                  <td className="px-6 py-4 text-sm text-[var(--ink2)]">{formatDate(post.createdAt)}</td>
                   <td className="px-6 py-4">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                       post.status === 'published' ? 'bg-emerald-100 text-emerald-700' :
-                      post.status === 'draft' ? 'bg-gray-100 text-gray-600' : 'bg-violet-100 text-violet-700'
+                      post.status === 'draft' ? 'bg-[var(--paper2)] text-[var(--ink2)]' : 'bg-[rgba(10,22,40,0.08)] text-[var(--ink)]'
                     }`}>
                       {post.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{post.replyCount}</td>
+                  <td className="px-6 py-4 text-sm text-[var(--ink2)]">{post.replyCount}</td>
                   <td className="px-6 py-4 flex gap-2">
                     {post.status === 'draft' && (
                       <button onClick={() => moderateAction(post.id, 'approve')} className="text-xs font-medium text-emerald-600 hover:text-emerald-700">Approve</button>
@@ -135,7 +135,7 @@ export default function AdminForumModeration() {
                 </tr>
               ))}
               {posts.length === 0 && (
-                <tr><td colSpan={6} className="px-6 py-12 text-center text-gray-500">No posts to review</td></tr>
+                <tr><td colSpan={6} className="px-6 py-12 text-center text-[var(--muted)]">No posts to review</td></tr>
               )}
             </tbody>
           </table>
@@ -145,12 +145,12 @@ export default function AdminForumModeration() {
       {tab === 'comments' && (
         <div className="space-y-4">
           {comments.filter(c => !c.flagged).map((comment) => (
-            <div key={comment.id} className="bg-white rounded-xl border border-gray-200 p-5">
+            <div key={comment.id} className="bg-white rounded-xl border border-[var(--line)] p-5">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="font-medium text-gray-900">{comment.author}</p>
-                  <p className="text-sm text-gray-600 mt-1">{comment.body}</p>
-                  <p className="text-xs text-gray-400 mt-2">{formatDate(comment.createdAt)}</p>
+                  <p className="font-medium text-[var(--ink)]">{comment.author}</p>
+                  <p className="text-sm text-[var(--ink2)] mt-1">{comment.body}</p>
+                  <p className="text-xs text-[var(--muted)] mt-2">{formatDate(comment.createdAt)}</p>
                 </div>
                 <div className="flex gap-2 shrink-0">
                   <button onClick={() => moderateAction(comment.id, 'approve')} className="px-3 py-1 text-xs font-medium text-emerald-600 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors">Approve</button>
@@ -161,8 +161,8 @@ export default function AdminForumModeration() {
             </div>
           ))}
           {comments.filter(c => !c.flagged).length === 0 && (
-            <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-              <p className="text-gray-500">No pending comments</p>
+            <div className="text-center py-12 bg-white rounded-xl border border-[var(--line)]">
+              <p className="text-[var(--muted)]">No pending comments</p>
             </div>
           )}
         </div>
@@ -189,8 +189,8 @@ export default function AdminForumModeration() {
             </div>
           ))}
           {comments.filter(c => c.flagged).length === 0 && (
-            <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-              <p className="text-gray-500">No flagged content</p>
+            <div className="text-center py-12 bg-white rounded-xl border border-[var(--line)]">
+              <p className="text-[var(--muted)]">No flagged content</p>
             </div>
           )}
         </div>

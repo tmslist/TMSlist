@@ -74,44 +74,44 @@ export default function AppointmentRequest({ clinicId, clinicName, clinicEmail }
 
   if (status === 'success') {
     return (
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 text-center">
+      <div className="bg-white rounded-2xl border border-[var(--line)] shadow-sm p-8 text-center">
         <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-slate-900 mb-2">Request Sent!</h3>
-        <p className="text-slate-500 mb-6">
+        <h3 className="text-xl font-bold text-[var(--ink)] mb-2">Request Sent!</h3>
+        <p className="text-[var(--muted)] mb-6">
           Your appointment request has been sent to <strong>{clinicName}</strong>.
         </p>
 
-        <div className="bg-slate-50 rounded-xl p-5 text-left space-y-3">
-          <h4 className="text-sm font-bold text-slate-700">What to Expect Next</h4>
+        <div className="bg-[var(--paper2)] rounded-xl p-5 text-left space-y-3">
+          <h4 className="text-sm font-bold text-[var(--ink2)]">What to Expect Next</h4>
           <div className="flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
-            <p className="text-sm text-slate-600">The clinic will review your request within 1-2 business days.</p>
+            <span className="w-6 h-6 rounded-full bg-[rgba(10,22,40,0.08)] text-[var(--accent)] flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+            <p className="text-sm text-[var(--ink2)]">The clinic will review your request within 1-2 business days.</p>
           </div>
           <div className="flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
-            <p className="text-sm text-slate-600">They will contact you by phone or email to confirm your appointment.</p>
+            <span className="w-6 h-6 rounded-full bg-[rgba(10,22,40,0.08)] text-[var(--accent)] flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+            <p className="text-sm text-[var(--ink2)]">They will contact you by phone or email to confirm your appointment.</p>
           </div>
           <div className="flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
-            <p className="text-sm text-slate-600">Prepare any insurance cards and medication lists for your visit.</p>
+            <span className="w-6 h-6 rounded-full bg-[rgba(10,22,40,0.08)] text-[var(--accent)] flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+            <p className="text-sm text-[var(--ink2)]">Prepare any insurance cards and medication lists for your visit.</p>
           </div>
         </div>
       </div>
     );
   }
 
-  const inputClass = 'w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500/30 focus:border-violet-400 transition';
-  const labelClass = 'block text-sm font-semibold text-slate-700 mb-1.5';
+  const inputClass = 'w-full px-4 py-2.5 rounded-xl border border-[var(--line)] bg-white text-sm text-[var(--ink)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] transition';
+  const labelClass = 'block text-sm font-semibold text-[var(--ink2)] mb-1.5';
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-      <div className="bg-gradient-to-r from-violet-600 to-violet-500 px-6 py-4">
+    <div className="bg-white rounded-2xl border border-[var(--line)] shadow-sm overflow-hidden">
+      <div className="bg-[var(--ink)] px-6 py-4">
         <h3 className="text-white font-bold text-lg">Request an Appointment</h3>
-        <p className="text-violet-200 text-sm mt-0.5">{clinicName}</p>
+        <p className="text-[rgba(10,22,40,0.2)] text-sm mt-0.5">{clinicName}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="p-6 space-y-5">
@@ -224,9 +224,9 @@ export default function AppointmentRequest({ clinicId, clinicName, clinicEmail }
             type="checkbox"
             checked={form.consent}
             onChange={(e) => update('consent', e.target.checked)}
-            className="mt-1 w-4 h-4 rounded border-slate-300 text-violet-600 focus:ring-violet-500"
+            className="mt-1 w-4 h-4 rounded border-[var(--line)] text-[var(--accent)] focus:ring-[rgba(10,22,40,0.15)]"
           />
-          <span className="text-xs text-slate-500 leading-relaxed">
+          <span className="text-xs text-[var(--muted)] leading-relaxed">
             I consent to sharing my information with {clinicName} for the purpose of scheduling a consultation.
             I understand this is a request only and does not guarantee an appointment.
           </span>
@@ -241,7 +241,7 @@ export default function AppointmentRequest({ clinicId, clinicName, clinicEmail }
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="w-full py-3 px-6 bg-violet-600 hover:bg-violet-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors text-sm"
+          className="w-full py-3 px-6 bg-[var(--ink)] hover:bg-[var(--ink2)] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors text-sm"
         >
           {status === 'submitting' ? 'Sending Request...' : 'Send Appointment Request'}
         </button>

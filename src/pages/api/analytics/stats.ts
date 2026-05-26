@@ -22,7 +22,23 @@ export const GET: APIRoute = async ({ request, url }) => {
 
   try {
     const user = await db.select().from(users).where(eq(users.id, session!.userId)).limit(1);
-    const clinicId = url.searchParams.get('clinicId') || user[0]?.clinicId;
+    const requestedClinicId = url.searchParams.get('clinicId');
+    const ownClinicId = user[0]?.clinicId;
+    const isAdmin = hasRole(session, 'admin');
+
+    // IDOR fix: a clinic_owner may only request stats for their own clinic.
+    // Admins may target any clinicId via the query param.
+    let clinicId: string | undefined;
+    if (isAdmin) {
+      clinicId = requestedClinicId ?? ownClinicId ?? undefined;
+    } else if (requestedClinicId && requestedClinicId !== ownClinicId) {
+      return new Response(JSON.stringify({ error: 'Forbidden' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    } else {
+      clinicId = ownClinicId ?? undefined;
+    }
 
     if (!clinicId) {
       return new Response(JSON.stringify({ error: 'No clinic found' }), {

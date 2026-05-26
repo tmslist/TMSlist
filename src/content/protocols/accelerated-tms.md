@@ -69,21 +69,21 @@ The evidence says yes:
 
 ---
 
-<div class="not-prose my-8 bg-cyan-50 border border-cyan-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-cyan-900 mb-3 text-base">Related Protocols</h4>
+<div class="not-prose my-8 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--ink)] mb-3 text-base">Related Protocols</h4>
   <div class="grid grid-cols-2 gap-2">
-    <a href="/protocols/theta-burst-stimulation/" class="text-sm text-cyan-700 hover:underline">Theta Burst</a>
-    <a href="/protocols/saint-protocol/" class="text-sm text-cyan-700 hover:underline">SAINT Protocol</a>
-    <a href="/protocols/deep-tms/" class="text-sm text-cyan-700 hover:underline">Deep TMS</a>
-    <a href="/protocols/accelerated-tms/" class="text-sm text-cyan-700 hover:underline">Accelerated TMS</a>
+    <a href="/protocols/theta-burst-stimulation/" class="text-sm text-[var(--ink)] hover:underline">Theta Burst</a>
+    <a href="/protocols/saint-protocol/" class="text-sm text-[var(--ink)] hover:underline">SAINT Protocol</a>
+    <a href="/protocols/deep-tms/" class="text-sm text-[var(--ink)] hover:underline">Deep TMS</a>
+    <a href="/protocols/accelerated-tms/" class="text-sm text-[var(--ink)] hover:underline">Accelerated TMS</a>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, compare clinics, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
   </div>
 </div>

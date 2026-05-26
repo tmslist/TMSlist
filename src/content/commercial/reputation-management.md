@@ -80,11 +80,11 @@ They happen. How you handle them matters more than the review itself.
     <p class="text-sm text-amber-800/80 mb-4">List your clinic on TMS List to reach patients actively searching for treatment.</p>
     <a href="/providers/services/get-listed/" class="inline-flex items-center gap-1 text-sm text-amber-700 font-bold hover:text-amber-800 transition-colors">Get Listed <span class="group-hover:translate-x-1 transition-transform">→</span></a>
   </div>
-  <div class="relative overflow-hidden bg-gradient-to-br from-violet-50 to-fuchsia-50 border border-violet-100 rounded-2xl p-6 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300 group">
-    <div class="absolute -right-4 -top-4 w-16 h-16 bg-violet-400/10 rounded-full blur-xl group-hover:bg-violet-400/20 transition-all"></div>
-    <h4 class="font-display font-bold text-violet-900 text-lg mb-2">For Patients</h4>
-    <p class="text-sm text-violet-800/80 mb-4">Browse our directory of verified TMS providers with real reviews and insurance info.</p>
-    <a href="/us/" class="inline-flex items-center gap-1 text-sm text-violet-700 font-bold hover:text-violet-800 transition-colors">Find a Clinic <span class="group-hover:translate-x-1 transition-transform">→</span></a>
+  <div class="relative overflow-hidden bg-gradient-to-br from-[var(--warm)] to-[var(--ink)] border border-white/10 rounded-2xl p-6 hover:shadow-xl hover:shadow-[rgba(10,22,40,0.3)] transition-all duration-300 group">
+    <div class="absolute -right-4 -top-4 w-16 h-16 bg-white/10 rounded-full blur-xl group-hover:bg-white/20 transition-all"></div>
+    <h4 class="font-display font-bold text-white text-lg mb-2">For Patients</h4>
+    <p class="text-sm text-white/85 mb-4">Browse our directory of verified TMS providers with real reviews and insurance info.</p>
+    <a href="/us/" class="inline-flex items-center gap-1 text-sm text-white font-bold hover:text-white/90 transition-colors">Find a Clinic <span class="group-hover:translate-x-1 transition-transform">→</span></a>
   </div>
 </div>
 

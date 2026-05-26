@@ -41,9 +41,9 @@ function getPhase(week: number): Phase {
 function getPhaseColor(phase: Phase) {
   switch (phase) {
     case 'early': return { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700', label: 'Early Phase', icon: SeedlingIcon };
-    case 'mid': return { bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-700', label: 'Building Response', icon: TrendingUpIcon };
+    case 'mid': return { bg: 'bg-[var(--paper2)]', border: 'border-[var(--line)]', text: 'text-[var(--accent)]', label: 'Building Response', icon: TrendingUpIcon };
     case 'late': return { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700', label: 'Consolidation', icon: TrophyIcon };
-    case 'complete': return { bg: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-700', label: 'Treatment Complete', icon: SparkleIcon };
+    case 'complete': return { bg: 'bg-[rgba(10,22,40,0.08)]', border: 'border-[rgba(10,22,40,0.15)]', text: 'text-[var(--accent)]', label: 'Treatment Complete', icon: SparkleIcon };
   }
 }
 
@@ -110,8 +110,8 @@ export default function TreatmentResponseTracker() {
             onClick={() => setScale(s)}
             className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
               scale === s
-                ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/25'
-                : 'bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100'
+                ? 'bg-[var(--ink)] text-white shadow-lg shadow-[rgba(10,22,40,0.2)]'
+                : 'bg-[var(--paper2)] text-[var(--muted)] hover:bg-[var(--paper2)] border border-[var(--line)]'
             }`}
           >
             {s}
@@ -126,7 +126,7 @@ export default function TreatmentResponseTracker() {
             <span className="text-2xl"><phaseInfo.icon className={phaseInfo.text} size={28} /></span>
             <div>
               <p className={`text-xs font-bold uppercase tracking-wider ${phaseInfo.text}`}>{phaseInfo.label}</p>
-              <p className="text-sm text-slate-600 mt-0.5">
+              <p className="text-sm text-[var(--ink2)] mt-0.5">
                 {phase === 'early' && 'Neural pathways are beginning to rewire. Many patients feel minimal change this phase — this is normal.'}
                 {phase === 'mid' && 'Most patients start noticing improved mood and energy between weeks 3-4. Your responses are building.'}
                 {phase === 'late' && 'You are approaching or past typical response thresholds. Focus on consistency.'}
@@ -135,28 +135,28 @@ export default function TreatmentResponseTracker() {
             </div>
           </div>
           <div className="text-right">
-            <p className="text-2xl font-bold text-slate-800">{Math.round(progressPct)}%</p>
-            <p className="text-xs text-slate-500">expected improvement</p>
+            <p className="text-2xl font-bold text-[var(--ink)]">{Math.round(progressPct)}%</p>
+            <p className="text-xs text-[var(--muted)]">expected improvement</p>
           </div>
         </div>
       </div>
 
       {/* Chart */}
-      <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+      <div className="bg-[var(--paper2)] rounded-2xl p-6 border border-[var(--line)]">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-bold text-slate-700">{scale} Progress Chart</h3>
+          <h3 className="text-sm font-bold text-[var(--ink2)]">{scale} Progress Chart</h3>
           <div className="flex items-center gap-4 text-xs">
             <span className="flex items-center gap-1.5">
               <span className="w-4 h-0.5 bg-emerald-400 rounded inline-block"></span>
-              <span className="text-slate-500">Expected curve</span>
+              <span className="text-[var(--muted)]">Expected curve</span>
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-4 h-0.5 bg-violet-600 rounded inline-block"></span>
-              <span className="text-slate-500">Your scores</span>
+              <span className="w-4 h-0.5 bg-[var(--ink)] rounded inline-block"></span>
+              <span className="text-[var(--muted)]">Your scores</span>
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-4 border border-dashed border-amber-400 inline-block"></span>
-              <span className="text-slate-500">Remission threshold</span>
+              <span className="text-[var(--muted)]">Remission threshold</span>
             </span>
           </div>
         </div>
@@ -167,8 +167,8 @@ export default function TreatmentResponseTracker() {
             return (
               <g key={pct}>
                 <line x1={padding.left} y1={y} x2={svgWidth - padding.right} y2={y}
-                  stroke="#e2e8f0" strokeWidth="1" strokeDasharray="4 4" />
-                <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#94a3b8">
+                  stroke="#E6EAF0" strokeWidth="1" strokeDasharray="4 4" />
+                <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#5A6B82">
                   {Math.round(maxScore * (1 - pct))}
                 </text>
               </g>
@@ -177,15 +177,15 @@ export default function TreatmentResponseTracker() {
 
           {/* X-axis labels */}
           {benchmark.map(b => (
-            <text key={b.week} x={toX(b.week)} y={svgHeight - 10} textAnchor="middle" fontSize="10" fill="#94a3b8">
+            <text key={b.week} x={toX(b.week)} y={svgHeight - 10} textAnchor="middle" fontSize="10" fill="#5A6B82">
               {b.label}
             </text>
           ))}
 
           {/* Remission threshold line */}
           <line x1={padding.left} y1={remissionY} x2={svgWidth - padding.right} y2={remissionY}
-            stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="5 3" />
-          <text x={svgWidth - padding.right + 4} y={remissionY + 4} fontSize="9" fill="#f59e0b" fontWeight="600">
+            stroke="#C9654A" strokeWidth="1.5" strokeDasharray="5 3" />
+          <text x={svgWidth - padding.right + 4} y={remissionY + 4} fontSize="9" fill="#C9654A" fontWeight="600">
             Remission
           </text>
 
@@ -199,33 +199,33 @@ export default function TreatmentResponseTracker() {
 
           {/* Actual data line */}
           {actualPath && (
-            <path d={actualPath} fill="none" stroke="#7c3aed" strokeWidth="2.5"
+            <path d={actualPath} fill="none" stroke="#0A1628" strokeWidth="2.5"
               strokeLinecap="round" strokeLinejoin="round" />
           )}
 
           {/* Data points */}
           {entries.map((e, i) => (
             <g key={i}>
-              <circle cx={toX(e.week)} cy={toY(e.score)} r="5" fill="#7c3aed" stroke="white" strokeWidth="2" />
+              <circle cx={toX(e.week)} cy={toY(e.score)} r="5" fill="#0A1628" stroke="white" strokeWidth="2" />
             </g>
           ))}
 
           {/* Current week indicator */}
           <line x1={toX(week)} y1={padding.top} x2={toX(week)} y2={svgHeight - padding.bottom}
-            stroke="#06b6d4" strokeWidth="1.5" strokeDasharray="4 2" opacity="0.6" />
+            stroke="#1E2A3B" strokeWidth="1.5" strokeDasharray="4 2" opacity="0.6" />
         </svg>
       </div>
 
       {/* Week + Score Input */}
-      <div className="bg-white rounded-2xl border border-slate-100 p-6 space-y-4">
-        <h3 className="text-sm font-bold text-slate-700">Record Your Score</h3>
+      <div className="bg-white rounded-2xl border border-[var(--line)] p-6 space-y-4">
+        <h3 className="text-sm font-bold text-[var(--ink2)]">Record Your Score</h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Treatment Week</label>
+            <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1.5">Treatment Week</label>
             <select
               value={week}
               onChange={e => setWeek(Number(e.target.value))}
-              className="w-full px-4 py-3 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+              className="w-full px-4 py-3 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] outline-none"
             >
               {benchmark.map(b => (
                 <option key={b.week} value={b.week}>{b.label}</option>
@@ -233,7 +233,7 @@ export default function TreatmentResponseTracker() {
             </select>
           </div>
           <div>
-            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Your {scale} Score</label>
+            <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-1.5">Your {scale} Score</label>
             <input
               type="number"
               min="0"
@@ -241,14 +241,14 @@ export default function TreatmentResponseTracker() {
               value={actualScore}
               onChange={e => setActualScore(e.target.value)}
               placeholder={`0–${maxScore}`}
-              className="w-full px-4 py-3 border border-slate-200 rounded-xl text-slate-800 bg-white focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+              className="w-full px-4 py-3 border border-[var(--line)] rounded-xl text-[var(--ink)] bg-white focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[var(--ink2)] outline-none"
             />
           </div>
         </div>
         <button
           onClick={addEntry}
           disabled={actualScore === ''}
-          className="px-6 py-3 bg-violet-600 text-white font-semibold rounded-xl hover:bg-violet-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-xl hover:bg-[var(--ink2)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           Log Score
         </button>
@@ -261,8 +261,8 @@ export default function TreatmentResponseTracker() {
           { label: 'Sleep', value: sleep, setter: setSleep },
           { label: 'Energy', value: energy, setter: setEnergy },
         ].map(item => (
-          <div key={item.label} className="bg-white rounded-xl border border-slate-100 p-4">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">{item.label}</p>
+          <div key={item.label} className="bg-white rounded-xl border border-[var(--line)] p-4">
+            <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">{item.label}</p>
             <div className="flex gap-1.5">
               {['worse', 'unchanged', 'better'].map(opt => (
                 <button
@@ -272,8 +272,8 @@ export default function TreatmentResponseTracker() {
                     item.value === opt
                       ? opt === 'better' ? 'bg-emerald-100 text-emerald-700'
                         : opt === 'worse' ? 'bg-red-100 text-red-700'
-                        : 'bg-slate-100 text-slate-700'
-                      : 'bg-white text-slate-400 border border-slate-100 hover:border-slate-200'
+                        : 'bg-[var(--paper2)] text-[var(--ink2)]'
+                      : 'bg-white text-[var(--muted)] border border-[var(--line)] hover:border-[var(--line)]'
                   }`}
                 >
                   {opt === 'better' ? '↑' : opt === 'worse' ? '↓' : '—'} {opt}
@@ -299,33 +299,33 @@ export default function TreatmentResponseTracker() {
               : <><ChartIcon className="inline-block" size={16} /> On track. Your scores are tracking close to the expected improvement curve.</>
             }
           </p>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-[var(--muted)] mt-1">
             Your score: {lastEntry.score} vs expected: {currentBenchmark.phq9} (difference: {relativeToBenchmark > 0 ? '+' : ''}{relativeToBenchmark})
           </p>
         </div>
       )}
 
       {/* Response guide */}
-      <div className="bg-violet-50 rounded-xl p-5 border border-violet-100">
-        <h4 className="text-sm font-bold text-violet-700 mb-3">Understanding Your {scale} Score</h4>
+      <div className="bg-[rgba(10,22,40,0.08)] rounded-xl p-5 border border-[rgba(10,22,40,0.1)]">
+        <h4 className="text-sm font-bold text-[var(--accent)] mb-3">Understanding Your {scale} Score</h4>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {scale === 'PHQ-9' && (
             <>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-emerald-600">0–4</p>
-                <p className="text-xs text-slate-500">Remission</p>
+                <p className="text-xs text-[var(--muted)]">Remission</p>
               </div>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-amber-600">5–9</p>
-                <p className="text-xs text-slate-500">Mild</p>
+                <p className="text-xs text-[var(--muted)]">Mild</p>
               </div>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-orange-600">10–14</p>
-                <p className="text-xs text-slate-500">Moderate</p>
+                <p className="text-xs text-[var(--muted)]">Moderate</p>
               </div>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-red-600">15–27</p>
-                <p className="text-xs text-slate-500">Severe</p>
+                <p className="text-xs text-[var(--muted)]">Severe</p>
               </div>
             </>
           )}
@@ -333,19 +333,19 @@ export default function TreatmentResponseTracker() {
             <>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-emerald-600">0–7</p>
-                <p className="text-xs text-slate-500">Remission</p>
+                <p className="text-xs text-[var(--muted)]">Remission</p>
               </div>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-amber-600">8–13</p>
-                <p className="text-xs text-slate-500">Mild</p>
+                <p className="text-xs text-[var(--muted)]">Mild</p>
               </div>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-orange-600">14–19</p>
-                <p className="text-xs text-slate-500">Moderate</p>
+                <p className="text-xs text-[var(--muted)]">Moderate</p>
               </div>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-red-600">20–52</p>
-                <p className="text-xs text-slate-500">Severe</p>
+                <p className="text-xs text-[var(--muted)]">Severe</p>
               </div>
             </>
           )}
@@ -353,19 +353,19 @@ export default function TreatmentResponseTracker() {
             <>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-emerald-600">0–4</p>
-                <p className="text-xs text-slate-500">Minimal</p>
+                <p className="text-xs text-[var(--muted)]">Minimal</p>
               </div>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-amber-600">5–9</p>
-                <p className="text-xs text-slate-500">Mild</p>
+                <p className="text-xs text-[var(--muted)]">Mild</p>
               </div>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-orange-600">10–14</p>
-                <p className="text-xs text-slate-500">Moderate</p>
+                <p className="text-xs text-[var(--muted)]">Moderate</p>
               </div>
               <div className="text-center p-3 bg-white rounded-lg">
                 <p className="text-lg font-bold text-red-600">15–21</p>
-                <p className="text-xs text-slate-500">Severe</p>
+                <p className="text-xs text-[var(--muted)]">Severe</p>
               </div>
             </>
           )}
@@ -377,7 +377,7 @@ export default function TreatmentResponseTracker() {
         <div className="flex gap-3 pt-2">
           <button
             onClick={() => window.print()}
-            className="px-5 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-slate-800 transition-colors"
+            className="px-5 py-2.5 bg-[var(--ink)] text-white text-sm font-semibold rounded-xl hover:bg-[var(--ink2)] transition-colors"
           >
             Print Progress Report
           </button>

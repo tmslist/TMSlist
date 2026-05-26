@@ -1,0 +1,156 @@
+---
+// Bottom CTA section matching the treatments/ index dark CTA.
+// Optionally renders a sticky mobile CTA bar below it (mirrors the treatments page).
+
+interface CTA {
+    label: string;
+    href: string;
+    variant?: "primary" | "outline";
+}
+
+interface Props {
+    title: string;
+    description?: string;
+    ctas: CTA[];
+    /** Render the sticky bottom CTA bar on mobile too. */
+    stickyMobile?: boolean;
+}
+
+const { title, description, ctas, stickyMobile = false } = Astro.props;
+---
+
+<section class="editorial-cta">
+    <div class="editorial-cta-inner">
+        <h2 class="serif editorial-cta-title">{title}</h2>
+        {description && <p class="editorial-cta-desc">{description}</p>}
+        <div class="editorial-cta-actions">
+            {ctas.map((cta) => (
+                <a
+                    href={cta.href}
+                    class={cta.variant === "outline" ? "editorial-cta-btn editorial-cta-btn-outline" : "editorial-cta-btn editorial-cta-btn-primary"}
+                >
+                    {cta.label}
+                </a>
+            ))}
+        </div>
+    </div>
+</section>
+
+{stickyMobile && ctas.length >= 2 && (
+    <div class="editorial-mobile-sticky">
+        <div class="editorial-mobile-inner">
+            <a href={ctas[0].href} class="editorial-mobile-btn editorial-mobile-btn-primary">{ctas[0].label}</a>
+            <a href={ctas[1].href} class="editorial-mobile-btn editorial-mobile-btn-outline">{ctas[1].label}</a>
+        </div>
+    </div>
+)}
+
+<style>
+    @reference "../../styles/global.css";
+
+    .editorial-cta {
+        background: var(--ink);
+        padding: 5rem 0;
+    }
+
+    .editorial-cta-inner {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        text-align: center;
+    }
+
+    @media (min-width: 1024px) {
+        .editorial-cta-inner { padding: 0 2rem; }
+    }
+
+    .editorial-cta-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: white;
+        line-height: 1.05;
+        margin: 0 0 1.25rem;
+    }
+
+    .editorial-cta-desc {
+        font-size: 17px;
+        color: rgba(255,255,255,0.5);
+        max-width: 36rem;
+        margin: 0 auto 2.5rem;
+    }
+
+    .editorial-cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .editorial-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 1rem 1.75rem;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 9999px;
+        text-decoration: none;
+        transition: opacity 0.15s ease, background 0.15s ease;
+    }
+
+    .editorial-cta-btn-primary {
+        background: var(--warm);
+        color: white;
+    }
+    .editorial-cta-btn-primary:hover { opacity: 0.9; }
+
+    .editorial-cta-btn-outline {
+        border: 1px solid rgba(255,255,255,0.2);
+        color: rgba(255,255,255,0.8);
+        font-weight: 500;
+    }
+    .editorial-cta-btn-outline:hover { background: rgba(255,255,255,0.05); }
+
+    /* Sticky mobile CTA */
+    .editorial-mobile-sticky {
+        display: none;
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        z-index: 50;
+        background: var(--paper);
+        border-top: 1px solid var(--line);
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    }
+
+    @media (max-width: 1023px) {
+        .editorial-mobile-sticky { display: block; }
+    }
+
+    .editorial-mobile-inner {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    }
+
+    .editorial-mobile-btn {
+        flex: 1;
+        text-align: center;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 0.75rem 1rem;
+        border-radius: 0.75rem;
+        text-decoration: none;
+    }
+
+    .editorial-mobile-btn-primary {
+        background: var(--ink);
+        color: white;
+    }
+
+    .editorial-mobile-btn-outline {
+        border: 1px solid var(--line);
+        color: var(--ink);
+        background: transparent;
+    }
+</style>

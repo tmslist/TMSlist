@@ -4,7 +4,7 @@ description: "Comparing TMS, SSRIs, and CBT for obsessive-compulsive disorder. U
 publishDate: 2026-04-15
 category: treatment
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-ocd-versus-medication.svg"
 tags: ["tms", "ocd", "ssri", "cbt", "medication", "treatment-comparison"]
 ---
 
@@ -99,35 +99,35 @@ These figures underscore a fundamental truth about OCD treatment: while all thre
 
 For patients navigating the challenging journey of OCD treatment, TMS represents a powerful, FDA-cleared option that directly targets the brain circuits underlying OCD — offering genuine hope for those who have not found relief from medications or therapy alone.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for OCD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for OCD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. In 2018, TMS was FDA-cleared specifically for OCD in adults who have not responded to at least one adequate trial of an SSRI. This was the first TMS clearance for a condition other than depression.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. In 2018, TMS was FDA-cleared specifically for OCD in adults who have not responded to at least one adequate trial of an SSRI. This was the first TMS clearance for a condition other than depression.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How is TMS for OCD different from TMS for depression?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How is TMS for OCD different from TMS for depression?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Depression TMS targets the dorsolateral prefrontal cortex. OCD TMS targets the supplementary motor area (SMA) and medial prefrontal cortex, which are part of the cortico-striato-thalamo-cortical (CSTC) loop hyperactive in OCD. The FDA-cleared OCD protocol uses 20 Hz high-frequency stimulation over the mPFC/SMA for six weeks.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Depression TMS targets the dorsolateral prefrontal cortex. OCD TMS targets the supplementary motor area (SMA) and medial prefrontal cortex, which are part of the cortico-striato-thalamo-cortical (CSTC) loop hyperactive in OCD. The FDA-cleared OCD protocol uses 20 Hz high-frequency stimulation over the mPFC/SMA for six weeks.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How does TMS compare to ERP therapy for OCD?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How does TMS compare to ERP therapy for OCD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">ERP generally produces higher response rates (50-65%) than TMS alone (35-45%). However, ERP requires confronting feared obsessions directly and resisting compulsions, which is psychologically demanding. Combination treatment (TMS + ERP) may be more effective than either alone, with response rates of 40-55%.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">ERP generally produces higher response rates (50-65%) than TMS alone (35-45%). However, ERP requires confronting feared obsessions directly and resisting compulsions, which is psychologically demanding. Combination treatment (TMS + ERP) may be more effective than either alone, with response rates of 40-55%.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

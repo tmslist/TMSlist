@@ -15,7 +15,7 @@ if (!session) {
 ---
 
 <Layout title={pageTitle} description={metaDescription} noindex={true}>
-  <main class="bg-slate-50/50 min-h-screen py-10">
+  <main class="bg-[var(--paper2)]/50 min-h-screen py-10">
     <div class="container mx-auto px-6 lg:px-12 max-w-5xl">
       <OwnerDashboard client:idle userId={session.userId} userEmail={session.email} />
     </div>

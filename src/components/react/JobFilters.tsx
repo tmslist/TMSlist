@@ -45,11 +45,11 @@ export default function JobFilters({ onFilter, initialFilters }: JobFiltersProps
   };
 
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-4 mb-6">
+    <div className="bg-white border border-[var(--line)] rounded-2xl p-4 mb-6">
       {/* Search row */}
       <div className="flex gap-3 mb-3">
         <div className="flex-1 relative">
-          <svg className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
           <input
@@ -58,12 +58,12 @@ export default function JobFilters({ onFilter, initialFilters }: JobFiltersProps
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && apply()}
-            className="w-full pl-9 pr-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-colors"
+            className="w-full pl-9 pr-4 py-2.5 text-sm border border-[var(--line)] rounded-xl focus:outline-none focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.1)] transition-colors"
           />
         </div>
         <button
           onClick={apply}
-          className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold rounded-xl transition-colors shrink-0"
+          className="px-5 py-2.5 bg-[var(--ink)] hover:bg-[var(--ink2)] text-white text-sm font-semibold rounded-xl transition-colors shrink-0"
         >
           Search
         </button>
@@ -74,7 +74,7 @@ export default function JobFilters({ onFilter, initialFilters }: JobFiltersProps
         <select
           value={roleCategory}
           onChange={(e) => { setRoleCategory(e.target.value); }}
-          className="px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:border-violet-400 text-slate-600 bg-white"
+          className="px-3 py-2 text-sm border border-[var(--line)] rounded-lg focus:outline-none focus:border-[var(--ink2)] text-[var(--ink2)] bg-white"
         >
           <option value="">All Roles</option>
           {JOB_ROLE_CATEGORIES.map((c) => (
@@ -85,7 +85,7 @@ export default function JobFilters({ onFilter, initialFilters }: JobFiltersProps
         <select
           value={employmentType}
           onChange={(e) => { setEmploymentType(e.target.value); }}
-          className="px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:border-violet-400 text-slate-600 bg-white"
+          className="px-3 py-2 text-sm border border-[var(--line)] rounded-lg focus:outline-none focus:border-[var(--ink2)] text-[var(--ink2)] bg-white"
         >
           <option value="">Any Type</option>
           {Object.entries(EMPLOYMENT_TYPES).map(([v, l]) => (
@@ -96,7 +96,7 @@ export default function JobFilters({ onFilter, initialFilters }: JobFiltersProps
         <select
           value={remote}
           onChange={(e) => setRemote(e.target.value)}
-          className="px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:border-violet-400 text-slate-600 bg-white"
+          className="px-3 py-2 text-sm border border-[var(--line)] rounded-lg focus:outline-none focus:border-[var(--ink2)] text-[var(--ink2)] bg-white"
         >
           <option value="">Any Location</option>
           <option value="true">Remote OK</option>
@@ -105,7 +105,7 @@ export default function JobFilters({ onFilter, initialFilters }: JobFiltersProps
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:border-violet-400 text-slate-600 bg-white"
+          className="px-3 py-2 text-sm border border-[var(--line)] rounded-lg focus:outline-none focus:border-[var(--ink2)] text-[var(--ink2)] bg-white"
         >
           <option value="newest">Newest First</option>
           <option value="oldest">Oldest First</option>
@@ -114,7 +114,7 @@ export default function JobFilters({ onFilter, initialFilters }: JobFiltersProps
         {(search || roleCategory || employmentType || remote) && (
           <button
             onClick={reset}
-            className="px-3 py-2 text-sm text-slate-500 hover:text-slate-700 border border-slate-200 rounded-lg transition-colors"
+            className="px-3 py-2 text-sm text-[var(--muted)] hover:text-[var(--ink2)] border border-[var(--line)] rounded-lg transition-colors"
           >
             Clear
           </button>

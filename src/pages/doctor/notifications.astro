@@ -17,12 +17,12 @@ const doctorRows = session.clinicId
 const doctor = doctorRows[0] ?? null;
 ---
 <Layout title="Notifications | Doctor Portal | TMS List" description="Your doctor notifications." noindex={true}>
-  <div class="flex min-h-screen bg-gray-50">
+  <div class="flex min-h-screen bg-[var(--paper2)]">
     <DoctorSidebar client:load currentPage="notifications" userEmail={session.email} />
     <main class="flex-1 lg:ml-64 py-8">
       <div class="container mx-auto px-4 max-w-4xl">
         <div class="mb-6">
-          <a href="/doctor/dashboard/" class="text-sm text-blue-600 hover:text-blue-700 font-medium mb-2 inline-block">
+          <a href="/doctor/dashboard/" class="text-sm text-[var(--ink)] hover:text-[var(--ink)] font-medium mb-2 inline-block">
             &larr; Back to Dashboard
           </a>
         </div>

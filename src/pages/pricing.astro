@@ -1,6 +1,7 @@
 ---
 export const prerender = false;
 import Layout from "../layouts/Layout.astro";
+import EditorialHero from "../components/editorial/EditorialHero.astro";
 import { PLANS } from "../db/subscriptions";
 import { getSessionFromRequest } from "../utils/auth";
 
@@ -22,10 +23,10 @@ const faqSchema = JSON.stringify({
 
 const planOrder = ['free', 'pro', 'premium', 'enterprise'] as const;
 const planColors: Record<string, { bg: string; border: string; badge: string; btn: string; popular: boolean }> = {
-  free: { bg: 'bg-white', border: 'border-slate-200', badge: 'bg-slate-100 text-slate-700', btn: 'bg-slate-900 hover:bg-slate-800', popular: false },
-  pro: { bg: 'bg-white', border: 'border-blue-200', badge: 'bg-blue-100 text-blue-700', btn: 'bg-blue-600 hover:bg-blue-700', popular: false },
-  premium: { bg: 'bg-gradient-to-b from-blue-50 to-white', border: 'border-blue-300 ring-2 ring-blue-100', badge: 'bg-blue-600 text-white', btn: 'bg-blue-600 hover:bg-blue-700', popular: true },
-  enterprise: { bg: 'bg-white', border: 'border-slate-200', badge: 'bg-slate-900 text-white', btn: 'bg-slate-900 hover:bg-slate-800', popular: false },
+  free: { bg: 'bg-[var(--paper)]', border: 'border-[var(--line)]', badge: 'bg-[var(--paper2)] text-[var(--ink2)]', btn: 'bg-[var(--paper)] hover:bg-[var(--paper2)]', popular: false },
+  pro: { bg: 'bg-[var(--paper)]', border: 'border-[var(--line)]', badge: 'bg-[rgba(10,22,40,0.1)] text-[var(--accent)]', btn: 'bg-[var(--accent)] hover:bg-[var(--accent)]', popular: false },
+  premium: { bg: 'bg-gradient-to-b from-[var(--paper2)] to-[var(--paper)]', border: 'border-[rgba(10,22,40,0.2)] ring-2 ring-[rgba(10,22,40,0.15)]', badge: 'bg-[var(--accent)] text-white', btn: 'bg-[var(--accent)] hover:bg-[var(--accent)]', popular: true },
+  enterprise: { bg: 'bg-[var(--paper)]', border: 'border-[var(--line)]', badge: 'bg-[var(--ink)] text-white', btn: 'bg-[var(--ink)] hover:bg-[var(--ink2)] text-white', popular: false },
 };
 
 const planPrices: Record<string, { usd: number; inr: number }> = {
@@ -35,8 +36,8 @@ const planPrices: Record<string, { usd: number; inr: number }> = {
   enterprise: { usd: 60, inr: 4999 },
 };
 
-// April promo countdown — ends April 30, 2026
-const promoEnd = new Date('2026-04-30T23:59:59Z');
+// Launch promo countdown — extended through July 31, 2026
+const promoEnd = new Date('2026-07-31T23:59:59Z');
 const now = new Date();
 const promoActive = now <= promoEnd;
 ---
@@ -44,37 +45,38 @@ const promoActive = now <= promoEnd;
 <Layout title={pageTitle} description={metaDescription} schema={faqSchema}>
   <!-- Promo Banner -->
   {promoActive && (
-    <div class="bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-600 text-white text-center py-3 px-4" id="promo-banner">
+    <div class="bg-[var(--ink)] text-white text-center py-3 px-4" id="promo-banner">
       <div class="container mx-auto flex items-center justify-center gap-3">
         <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M5 2a2 2 0 00-2 2v14l3.5-2 3.5 2 3.5-2 3.5 2V4a2 2 0 00-2-2H5zm2.5 3a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45 4a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0zm2.55 4a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0zM10 8a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" clip-rule="evenodd"/>
         </svg>
         <span class="text-sm font-medium">
-          <strong>April Launch Offer:</strong> Get 3 months FREE on any paid plan — no credit card required!
-          <span id="countdown" class="ml-2 font-mono bg-white/20 px-2 py-0.5 rounded text-xs font-bold" data-end={promoEnd.toISOString()}></span>
+          <strong>Launch Offer (extended to Jul 31):</strong> Get 3 months FREE on any paid plan — no credit card required!
+          <span id="countdown" class="ml-2 font-mono bg-[var(--paper)]/20 px-2 py-0.5 rounded text-xs font-bold" data-end={promoEnd.toISOString()}></span>
         </span>
       </div>
     </div>
   )}
 
-  <section class="bg-white pt-12 pb-10 border-b border-slate-100">
-    <div class="container mx-auto px-6 lg:px-12 text-center">
-      <span class="inline-block px-4 py-1.5 bg-blue-50 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider mb-6">Pricing</span>
-      <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-4">
-        Grow Your TMS Practice
-      </h1>
-      <p class="text-lg text-slate-500 font-light leading-relaxed max-w-2xl mx-auto">
-        From free listings to enterprise solutions. Choose the plan that matches your growth goals.
-      </p>
-      {promoActive && (
-        <div class="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-200 rounded-full">
-          <span class="text-amber-700 text-sm font-medium">Limited time: 3 months free + no card required for the trial period</span>
-        </div>
-      )}
-    </div>
-  </section>
+  <EditorialHero
+    eyebrow={promoActive ? "Launch Offer · 3 Months Free · Ends Jul 31" : "Pricing Plans"}
+    eyebrowDot="#22c55e"
+    title="Grow your"
+    titleAccent="TMS practice."
+    description="From free listings to enterprise solutions. Choose the plan that matches your growth goals — no credit card required for the trial period."
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Pricing" }]}
+    ctas={[
+      { label: "View Plans", href: "#plans" },
+      { label: "List Your Clinic — Free", href: "/add-listing/", variant: "outline" },
+    ]}
+    stats={[
+      { value: "1,100+", label: "Clinics Listed", color: "ink" },
+      { value: "Free", label: "Tier Available", color: "accent" },
+      { value: "20%", label: "Annual Savings", color: "warm" },
+    ]}
+  />
 
-  <main class="bg-slate-50/50 py-12">
+  <main id="plans" class="bg-[var(--paper2)]/50 py-12">
     <div class="container mx-auto px-6 lg:px-12">
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {planOrder.map((planId) => {
@@ -88,7 +90,7 @@ const promoActive = now <= promoEnd;
             <div class={`relative ${colors.bg} rounded-3xl border ${colors.border} p-6 flex flex-col shadow-sm`}>
               {isPopular && (
                 <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span class="px-4 py-1 bg-blue-600 text-white text-xs font-bold rounded-full uppercase tracking-wider">Most Popular</span>
+                  <span class="px-4 py-1 bg-[var(--accent)] text-white text-xs font-bold rounded-full uppercase tracking-wider">Most Popular</span>
                 </div>
               )}
 
@@ -101,20 +103,20 @@ const promoActive = now <= promoEnd;
               <div class="mb-4">
                 <span class={`inline-block px-3 py-1 rounded-full text-xs font-bold ${colors.badge}`}>{plan.name}</span>
                 <div class="mt-4 flex items-baseline gap-2">
-                  <span class="text-4xl font-bold text-slate-900">${prices.usd}</span>
-                  {prices.usd > 0 && <span class="text-slate-400 text-sm font-medium">/month</span>}
+                  <span class="text-4xl font-bold text-[var(--ink)]">${prices.usd}</span>
+                  {prices.usd > 0 && <span class="text-[var(--muted)] text-sm font-medium">/month</span>}
                   {promoActive && prices.usd > 0 && (
                     <span class="text-xs text-emerald-600 font-medium">(3mo free trial)</span>
                   )}
                 </div>
                 {prices.inr > 0 && (
-                  <p class="text-xs text-slate-400 mt-1">₹{prices.inr}/mo in India</p>
+                  <p class="text-xs text-[var(--muted)] mt-1">₹{prices.inr}/mo in India</p>
                 )}
               </div>
 
               <ul class="space-y-2.5 mb-6 flex-1">
                 {plan.marketingFeatures.map((feature) => (
-                  <li class="flex items-start gap-2.5 text-sm text-slate-600">
+                  <li class="flex items-start gap-2.5 text-sm text-[var(--muted)]">
                     <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
@@ -124,7 +126,7 @@ const promoActive = now <= promoEnd;
               </ul>
 
               {planId === 'free' ? (
-                <a href="/add-listing/" class="w-full py-3.5 text-center font-semibold rounded-xl text-sm transition-all block border-2 border-slate-200 text-slate-700 hover:border-violet-300 hover:text-violet-700">
+                <a href="/add-listing/" class="w-full py-3.5 text-center font-semibold rounded-xl text-sm transition-all block border-2 border-[var(--line)] text-[var(--ink2)] hover:border-[rgba(10,22,40,0.2)] hover:text-[var(--accent)]">
                   Start Free Forever
                 </a>
               ) : (
@@ -137,7 +139,7 @@ const promoActive = now <= promoEnd;
               )}
 
               {planId === 'free' && (
-                <p class="text-xs text-center text-slate-400 mt-2">No credit card needed</p>
+                <p class="text-xs text-center text-[var(--muted)] mt-2">No credit card needed</p>
               )}
             </div>
           );
@@ -154,9 +156,9 @@ const promoActive = now <= promoEnd;
               </svg>
             </div>
             <div>
-              <h3 class="text-base font-semibold text-slate-900 mb-1">3-Month Free Trial — No Card Required</h3>
-              <p class="text-sm text-slate-600 leading-relaxed">
-                Sign up during April and your paid plan starts completely free for 3 months. After the trial ends on July 31, 2026, you'll be charged — only if you choose to continue. Cancel anytime before July 31 and pay nothing. <span id="trial-countdown" class="font-mono font-bold text-amber-700"></span>
+              <h3 class="text-base font-semibold text-[var(--ink)] mb-1">3-Month Free Trial — No Card Required</h3>
+              <p class="text-sm text-[var(--muted)] leading-relaxed">
+                Sign up by July 31, 2026 and your paid plan starts completely free for 3 months. After the 90-day trial ends, you'll be charged — only if you choose to continue. Cancel anytime during the trial and pay nothing. <span id="trial-countdown" class="font-mono font-bold text-amber-700"></span>
               </p>
             </div>
           </div>
@@ -165,35 +167,35 @@ const promoActive = now <= promoEnd;
 
       <!-- FAQ Section -->
       <div class="max-w-3xl mx-auto mt-16">
-        <h2 class="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <h2 class="text-2xl font-bold text-[var(--ink)] mb-8 text-center">Frequently Asked Questions</h2>
         <div class="space-y-3">
-          <details class="bg-white rounded-2xl border border-slate-100 shadow-sm">
-            <summary class="p-5 cursor-pointer text-sm font-bold text-slate-900 list-none flex justify-between items-center">
+          <details class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm">
+            <summary class="p-5 cursor-pointer text-sm font-bold text-[var(--ink)] list-none flex justify-between items-center">
               Can I switch plans at any time?
-              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              <svg class="w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </summary>
-            <div class="px-5 pb-5 text-sm text-slate-600">Yes, you can upgrade or downgrade at any time. When upgrading, you'll be prorated for the remainder of your billing cycle. Downgrades take effect at the end of the current period.</div>
+            <div class="px-5 pb-5 text-sm text-[var(--muted)]">Yes, you can upgrade or downgrade at any time. When upgrading, you'll be prorated for the remainder of your billing cycle. Downgrades take effect at the end of the current period.</div>
           </details>
-          <details class="bg-white rounded-2xl border border-slate-100 shadow-sm">
-            <summary class="p-5 cursor-pointer text-sm font-bold text-slate-900 list-none flex justify-between items-center">
+          <details class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm">
+            <summary class="p-5 cursor-pointer text-sm font-bold text-[var(--ink)] list-none flex justify-between items-center">
               Do you offer annual pricing?
-              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              <svg class="w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </summary>
-            <div class="px-5 pb-5 text-sm text-slate-600">Yes! Annual plans save you 20%. <a href="mailto:tmslistofficial@gmail.com?subject=Annual Pricing Inquiry" class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg transition-colors">Contact Us</a> for annual pricing.</div>
+            <div class="px-5 pb-5 text-sm text-[var(--muted)]">Yes! Annual plans save you 20%. <a href="mailto:tmslistofficial@gmail.com?subject=Annual Pricing Inquiry" class="inline-flex items-center gap-1 px-3 py-1.5 bg-[var(--accent)] hover:bg-[var(--accent)] text-white text-xs font-semibold rounded-lg transition-colors">Contact Us</a> for annual pricing.</div>
           </details>
-          <details class="bg-white rounded-2xl border border-slate-100 shadow-sm">
-            <summary class="p-5 cursor-pointer text-sm font-bold text-slate-900 list-none flex justify-between items-center">
+          <details class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm">
+            <summary class="p-5 cursor-pointer text-sm font-bold text-[var(--ink)] list-none flex justify-between items-center">
               What happens to my listing if I cancel?
-              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              <svg class="w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </summary>
-            <div class="px-5 pb-5 text-sm text-slate-600">Your clinic listing stays on TMS List forever — it just reverts to the Free tier. You keep all your reviews and basic contact information.</div>
+            <div class="px-5 pb-5 text-sm text-[var(--muted)]">Your clinic listing stays on TMS List forever — it just reverts to the Free tier. You keep all your reviews and basic contact information.</div>
           </details>
-          <details class="bg-white rounded-2xl border border-slate-100 shadow-sm">
-            <summary class="p-5 cursor-pointer text-sm font-bold text-slate-900 list-none flex justify-between items-center">
+          <details class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] shadow-sm">
+            <summary class="p-5 cursor-pointer text-sm font-bold text-[var(--ink)] list-none flex justify-between items-center">
               How many locations can I manage on Enterprise?
-              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              <svg class="w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </summary>
-            <div class="px-5 pb-5 text-sm text-slate-600">Enterprise supports unlimited locations under a single account. Each location gets its own analytics, lead tracking, and profile management.</div>
+            <div class="px-5 pb-5 text-sm text-[var(--muted)]">Enterprise supports unlimited locations under a single account. Each location gets its own analytics, lead tracking, and profile management.</div>
           </details>
         </div>
       </div>
@@ -219,10 +221,10 @@ const promoActive = now <= promoEnd;
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
     const el = document.getElementById('countdown');
-    if (el) el.textContent = `${days}d ${hours}h ${mins}m remaining`;
+    if (el) el.textContent = `${days}d ${hours}h ${mins}m left`;
 
     const trialEl = document.getElementById('trial-countdown');
-    if (trialEl) trialEl.textContent = `${days}d ${hours}h ${mins}m left to claim free trial`;
+    if (trialEl) trialEl.textContent = `${days}d ${hours}h ${mins}m left to claim the free trial`;
   }
 
   updateCountdown();

@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, desc, sql, and, gte } from 'drizzle-orm';
 import { db } from '../../../db';
 import { leaderboards, leads, reviews, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -31,7 +31,7 @@ export const GET: APIRoute = async ({ request }) => {
       .select()
       .from(leaderboards)
       .where(conditions.length > 0 ? and(...conditions) : undefined)
-      .orderBy(desc(leaderboards.createdAt))
+      .orderBy(desc(leaderboards.updatedAt))
       .limit(10);
 
     return json({ data });

@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, desc, sql, and } from 'drizzle-orm';
 import { db } from '../../../db';
 import { gdprRequests, users, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -53,6 +53,7 @@ export const GET: APIRoute = async ({ request }) => {
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
   if (!session) return json({ error: 'Unauthorized' }, 401);
+  if (!hasRole(session, 'admin')) return json({ error: 'Forbidden' }, 403);
 
   try {
     const body = await request.json();

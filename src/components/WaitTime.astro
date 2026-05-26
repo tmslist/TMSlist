@@ -7,7 +7,7 @@ const accepting = availability?.accepting_new_patients;
 
 let text = '';
 let color = '';
-if (!accepting) { text = 'Not accepting patients'; color = 'text-gray-500 bg-gray-100'; }
+if (!accepting) { text = 'Not accepting patients'; color = 'text-[var(--muted)] bg-[var(--paper2)]'; }
 else if (sameWeek) { text = 'Available this week'; color = 'text-emerald-700 bg-emerald-50'; }
 else if (weeks && weeks <= 2) { text = `~${weeks} week wait`; color = 'text-amber-700 bg-amber-50'; }
 else if (weeks && weeks > 2) { text = `${weeks}+ week wait`; color = 'text-red-700 bg-red-50'; }

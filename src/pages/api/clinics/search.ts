@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
-import { searchClinics } from '../../../db/queries';
-import { clinicSearchSchema } from '../../../db/validation';
-import { strictRateLimit, getClientIp } from '../../../utils/rateLimit';
+import { searchClinics } from '../../../db/queries.js';
+import { clinicSearchSchema } from '../../../db/validation.js';
+import { strictRateLimit, getClientIp } from '../../../utils/rateLimit.js';
 import { getCached, setCache } from '../../../utils/redis';
 
 export const prerender = false;

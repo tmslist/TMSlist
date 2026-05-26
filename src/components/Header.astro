@@ -1,530 +1,1599 @@
 ---
 import Logo from "./Logo.astro";
 import UserMenu from "./react/UserMenu";
-import {
-    TREATMENT_SLUGS,
-    INSURANCE_SLUGS,
-    TECHNOLOGY_SLUGS,
-    PROTOCOL_SLUGS,
-    DEMOGRAPHIC_SLUGS,
-    COMPARE_SLUGS,
-    COMMERCIAL_SLUGS,
-} from "../utils/seo_slugs";
+import { getVisitorCountry, SUPPORTED_COUNTRIES } from "../utils/visitorCountry";
+import { COUNTRY_NAMES, COUNTRY_FLAGS, COUNTRY_URL_PREFIXES } from "../utils/dataHelpers";
 
-const conditions = TREATMENT_SLUGS;
-const insurance = INSURANCE_SLUGS;
-const technology = [
-    ...TECHNOLOGY_SLUGS,
-    { slug: "exomind", title: "Exomind Wellness" },
-    { slug: "apollo-tms", title: "Apollo TMS" },
-    { slug: "nexstim", title: "Nexstim TMS" },
-    { slug: "mag-and-more", title: "MAG & More" },
-    { slug: "deymed", title: "Deymed TMS" },
-];
-const protocols = PROTOCOL_SLUGS;
-const comparisons = COMPARE_SLUGS;
-const deviceComparisons = comparisons.filter(
-  s => s.slug.includes('neurostar') || s.slug.includes('brainsway') || s.slug.includes('magventure') || s.slug.includes('magstim') || s.slug.includes('cloudtms') || s.slug.includes('nexstim') || s.slug.includes('apollo') || s.slug.includes('deep-tms'),
-);
+const VISITOR_COUNTRY = getVisitorCountry(Astro.isPrerendered ? null : Astro.cookies, Astro.url);
+const visitorCountryUrl = `/${COUNTRY_URL_PREFIXES[VISITOR_COUNTRY] || VISITOR_COUNTRY.toLowerCase()}/`;
+const visitorCountryName = COUNTRY_NAMES[VISITOR_COUNTRY] || 'United States';
+const visitorCountryFlag = COUNTRY_FLAGS[VISITOR_COUNTRY] || COUNTRY_FLAGS.US;
 
-// Top conditions and technology items for mega menus
-const topConditions = conditions.slice(0, 8);
-const topTechnology = technology.slice(0, 6);
+// ============================================================
+// MEGAMENU NAVIGATION — One panel per heading, fully populated.
+// Each hub has its own megamenu with categorized columns.
+// ============================================================
+
+const hubItems = {
+    findCare: {
+        label: "Find Care",
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>`,
+        cta: { label: "View all 200+ clinics", href: "/us/" },
+        columns: [
+            {
+                title: "Directories",
+                items: [
+                    { label: "All Clinics (US)", href: "/us/", desc: "200+ verified providers" },
+                    { label: "Best TMS Clinics", href: "/best-tms-clinics/" },
+                    { label: "Verified Clinics", href: "/verified-clinics/" },
+                    { label: "Compare Clinics", href: "/compare-clinics/" },
+                    { label: "Map View", href: "/map/" },
+                    { label: "Search All Pages", href: "/search/" },
+                ],
+            },
+            {
+                title: "By Filter",
+                items: [
+                    { label: "By Condition", href: "/treatments/", desc: "Depression, anxiety, OCD" },
+                    { label: "By Device", href: "/technology/", desc: "TMS systems compared" },
+                    { label: "By Insurance", href: "/insurance/", desc: "Coverage by provider" },
+                    { label: "TMS Near Me", href: "/near-me/tms-near-me/" },
+                    { label: "By Demographic", href: "/demographic/" },
+                ],
+            },
+            {
+                title: "Find a Specialist",
+                items: [
+                    { label: "All Specialists", href: "/specialists/" },
+                    { label: "Psychiatrists", href: "/psychiatrists/" },
+                    { label: "Psychologists", href: "/psychologists/" },
+                    { label: "Therapists", href: "/therapists/" },
+                    { label: "Provider Directory", href: "/providers/" },
+                ],
+            },
+            {
+                title: "Eligibility & Tools",
+                featured: true,
+                items: [
+                    { label: "Which Treatment Is Right?", href: "/quiz/which-treatment-is-right/", desc: "TMS vs Spravato vs Ketamine vs ECT", primary: true },
+                    { label: "Am I a Candidate? (TMS)", href: "/quiz/am-i-a-candidate/" },
+                    { label: "Spravato Eligibility", href: "/quiz/spravato-eligibility/" },
+                    { label: "Ketamine Eligibility", href: "/quiz/ketamine-eligibility/" },
+                    { label: "ECT Eligibility", href: "/quiz/ect-eligibility/" },
+                    { label: "Insurance & Cost Calculator", href: "/tms-cost-calculator/" },
+                    { label: "All Quizzes", href: "/quiz/" },
+                ],
+            },
+            {
+                title: "Severity Tests",
+                items: [
+                    { label: "Depression (PHQ-9)", href: "/quiz/depression-severity-test/" },
+                    { label: "Anxiety (GAD-7)", href: "/quiz/anxiety-severity-test/" },
+                    { label: "PTSD (PCL-5)", href: "/quiz/ptsd-severity-test/" },
+                    { label: "OCD (Y-BOCS Style)", href: "/quiz/ocd-severity-test/" },
+                    { label: "Bipolar Screener (MDQ)", href: "/quiz/bipolar-screener/" },
+                ],
+            },
+        ],
+    },
+    learn: {
+        label: "Learn",
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>`,
+        cta: { label: "Read the latest blog posts", href: "/blog/" },
+        columns: [
+            {
+                title: "Conditions",
+                items: [
+                    { label: "Major Depression", href: "/treatments/depression/" },
+                    { label: "Anxiety", href: "/treatments/anxiety/" },
+                    { label: "OCD", href: "/treatments/ocd/" },
+                    { label: "PTSD", href: "/treatments/ptsd/" },
+                    { label: "Migraines", href: "/treatments/migraines/" },
+                    { label: "All Conditions", href: "/treatments/", primary: true },
+                ],
+            },
+            {
+                title: "Technology & Protocols",
+                items: [
+                    { label: "How rTMS Works", href: "/answers/what-is-tms-therapy/" },
+                    { label: "Deep TMS", href: "/technology/brainsway-deep-tms/" },
+                    { label: "Theta Burst (TBS)", href: "/protocols/theta-burst-stimulation/" },
+                    { label: "All Devices", href: "/technology/" },
+                    { label: "All Protocols", href: "/protocols/" },
+                    { label: "TMS Simulation", href: "/simulation/" },
+                ],
+            },
+            {
+                title: "Stories & Research",
+                items: [
+                    { label: "Patient Stories", href: "/stories/" },
+                    { label: "Research & Trials", href: "/research/" },
+                    { label: "Education Hub", href: "/education/" },
+                    { label: "Wellness", href: "/wellness/" },
+                    { label: "Community", href: "/community/" },
+                    { label: "Timeline of TMS", href: "/timeline/" },
+                ],
+            },
+            {
+                title: "Articles & Q&A",
+                featured: true,
+                items: [
+                    { label: "Blog", href: "/blog/", desc: "News, guides & explainers", primary: true },
+                    { label: "TMS News", href: "/news/" },
+                    { label: "FAQs", href: "/questions/" },
+                    { label: "Quick Answers", href: "/answers/what-is-tms-therapy/" },
+                    { label: "TMS Glossary", href: "/glossary/" },
+                    { label: "Resources & Guides", href: "/resources/" },
+                ],
+            },
+        ],
+    },
+    compare: {
+        label: "Compare",
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>`,
+        cta: { label: "Calculate your TMS cost", href: "/tms-cost-calculator/" },
+        columns: [
+            {
+                title: "TMS vs Alternatives",
+                items: [
+                    { label: "TMS vs Medication", href: "/compare/tms-vs-antidepressants/" },
+                    { label: "TMS vs ECT", href: "/compare/tms-vs-ect/" },
+                    { label: "TMS vs Psychotherapy", href: "/compare/tms-vs-psychotherapy/" },
+                    { label: "TMS vs Ketamine", href: "/compare/tms-vs-ketamine/" },
+                    { label: "Spravato vs Ketamine", href: "/compare/spravato-vs-ketamine/" },
+                    { label: "TMS vs SGB (Trauma)", href: "/compare/tms-vs-stellate-ganglion-block/" },
+                    { label: "Insurance vs Cash-Pay", href: "/compare/insurance-vs-cash-pay/" },
+                    { label: "TMS vs VNS", href: "/compare/tms-vs-vns/" },
+                    { label: "All Comparisons", href: "/compare/", primary: true },
+                ],
+            },
+            {
+                title: "Device Comparisons",
+                items: [
+                    { label: "NeuroStar", href: "/technology/neurostar/" },
+                    { label: "BrainsWay Deep TMS", href: "/technology/brainsway-deep-tms/" },
+                    { label: "Neuronavigation Protocol", href: "/protocols/neuronavigation/" },
+                    { label: "All Devices", href: "/technology/", primary: true },
+                ],
+            },
+            {
+                title: "Alternatives",
+                items: [
+                    { label: "Alternative Treatments", href: "/alternatives/" },
+                    { label: "Drug-Free Options", href: "/alternative-treatments/" },
+                    { label: "Wellness Approaches", href: "/wellness/" },
+                ],
+            },
+            {
+                title: "Costs & Tools",
+                featured: true,
+                items: [
+                    { label: "Cost Calculator", href: "/tms-cost-calculator/", desc: "Estimate your costs", primary: true },
+                    { label: "TMS Cost Guide 2026", href: "/tms-cost-guide/" },
+                    { label: "Pricing Plans", href: "/pricing/" },
+                    { label: "Outcome Checker", href: "/tools/treatment-response/" },
+                    { label: "All Tools", href: "/tools/" },
+                ],
+            },
+        ],
+    },
+    forProviders: {
+        label: "For Providers",
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>`,
+        cta: { label: "List your clinic — free", href: "/add-listing/" },
+        columns: [
+            {
+                title: "Get Listed",
+                items: [
+                    { label: "List Your Clinic", href: "/add-listing/", desc: "Free directory listing", primary: true },
+                    { label: "Claim Existing Listing", href: "/claim-listing/" },
+                    { label: "For Clinics", href: "/for-clinics/" },
+                    { label: "For Specialists", href: "/for-specialists/" },
+                    { label: "Provider Login", href: "/admin/login/" },
+                ],
+            },
+            {
+                title: "Resources",
+                items: [
+                    { label: "Provider Directory", href: "/providers/" },
+                    { label: "Clinical Resources", href: "/resources/for-providers/" },
+                    { label: "Provider FAQ", href: "/questions/" },
+                    { label: "Clinical Protocols", href: "/protocols/" },
+                    { label: "Insurance & Billing", href: "/tms-cpt-codes/" },
+                ],
+            },
+            {
+                title: "Legal & Compliance",
+                items: [
+                    { label: "FDA Clearance History", href: "/research/fda-clearance-history/" },
+                    { label: "Who Can Administer TMS", href: "/legal/who-can-administer-tms-by-state/" },
+                    { label: "Malpractice Insurance", href: "/legal/tms-malpractice-insurance-guide/" },
+                    { label: "TMS CPT Codes 2026", href: "/tms-cpt-codes/" },
+                    { label: "Starting a TMS Clinic", href: "/starting-a-tms-clinic/" },
+                    { label: "All Legal Guides", href: "/legal/" },
+                ],
+            },
+            {
+                title: "Grow Your Practice",
+                featured: true,
+                items: [
+                    { label: "Advertise", href: "/advertise/", desc: "Promote your practice", primary: true },
+                    { label: "Pricing Plans", href: "/pricing/" },
+                    { label: "How We Rank", href: "/how-we-rank/" },
+                    { label: "Editorial Policy", href: "/editorial-policy/" },
+                    { label: "Careers", href: "/careers/" },
+                ],
+            },
+        ],
+    },
+};
+
+const hubKeys = Object.keys(hubItems);
 ---
 
-<header
-    class="sticky top-0 z-[100] w-full transition-all duration-300"
-    style="background:rgba(17,20,24,0.85);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid #1E242C;"
-    id="main-header"
-    data-scrolled="false"
->
-    <div
-        class="container mx-auto px-4 lg:px-8 h-[68px] flex items-center justify-between"
-    >
-        <!-- Logo -->
-        <Logo />
-
-        <!-- Desktop Nav -->
-        <nav class="hidden lg:flex items-center gap-0.5" id="desktop-nav">
-
-            <!-- Find a Clinic -->
-            <a href="/us/" class="nav-link px-4 py-2 text-sm font-semibold rounded-lg">Find a Clinic</a>
-
-            <!-- Conditions — mega menu -->
-            <div class="nav-mega-dropdown relative" id="nav-conditions">
-                <button
-                    class="nav-link px-4 py-2 text-sm font-semibold rounded-lg flex items-center gap-1"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                    id="nav-conditions-trigger"
-                >
-                    Conditions
-                    <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-                <div class="nav-mega-panel" role="menu" aria-labelledby="nav-conditions-trigger">
-                    <div class="col-span-2 grid grid-cols-2 gap-x-6">
-                        <div>
-                            <p class="nav-mega-section-title">Top Conditions</p>
-                            {topConditions.map((item) => (
-                                <a href={`/treatments/${item.slug}/`} class="nav-mega-item">
-                                    <div class="nav-mega-item-icon">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <div class="nav-mega-item-title">{item.title.replace("TMS for ", "")}</div>
-                                    </div>
-                                </a>
-                            ))}
-                        </div>
-                        <div>
-                            <p class="nav-mega-section-title">All Conditions</p>
-                            {conditions.slice(8, 12).map((item) => (
-                                <a href={`/treatments/${item.slug}/`} class="nav-mega-item">
-                                    <div class="nav-mega-item-icon">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <div class="nav-mega-item-title">{item.title.replace("TMS for ", "")}</div>
-                                    </div>
-                                </a>
-                            ))}
-                            <a href="/treatments/" class="nav-mega-item mt-2" style="background:var(--gradient-brand-subtle);color:var(--accent);font-weight:600;">
-                                <div class="nav-mega-item-icon" style="background:rgba(27,75,90,0.15);">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <div class="nav-mega-item-title">Browse All Conditions</div>
-                                    <div class="nav-mega-item-desc">{conditions.length} TMS treatments</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Technology — mega menu -->
-            <div class="nav-mega-dropdown relative" id="nav-technology">
-                <button
-                    class="nav-link px-4 py-2 text-sm font-semibold rounded-lg flex items-center gap-1"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                    id="nav-technology-trigger"
-                >
-                    Technology
-                    <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-                <div class="nav-mega-panel" role="menu" aria-labelledby="nav-technology-trigger">
-                    <div>
-                        <p class="nav-mega-section-title">TMS Devices</p>
-                        {topTechnology.map((item) => (
-                            <a href={`/technology/${item.slug}/`} class="nav-mega-item">
-                                <div class="nav-mega-item-icon">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <div class="nav-mega-item-title">{item.title}</div>
-                                </div>
-                            </a>
-                        ))}
-                        <a href="/technology/" class="nav-mega-item mt-2" style="background:var(--gradient-brand-subtle);color:var(--accent);font-weight:600;">
-                            <div class="nav-mega-item-icon" style="background:rgba(27,75,90,0.15);">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="nav-mega-item-title">Browse All Devices</div>
-                                <div class="nav-mega-item-desc">{technology.length} TMS technologies</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <p class="nav-mega-section-title">Compare Devices</p>
-                        {deviceComparisons.slice(0, 6).map((item) => (
-                            <a href={`/compare/${item.slug}/`} class="nav-mega-item">
-                                <div class="nav-mega-item-icon" style="background:rgba(201,101,74,0.1);color:var(--warm);">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <div class="nav-mega-item-title">{item.title}</div>
-                                    <div class="nav-mega-item-desc">Compare</div>
-                                </div>
-                            </a>
-                        ))}
-                        <a href="/compare/" class="nav-mega-item mt-2" style="background:rgba(201,101,74,0.08);color:var(--warm);font-weight:600;">
-                            <div class="nav-mega-item-icon" style="background:rgba(201,101,74,0.15);color:var(--warm);">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="nav-mega-item-title">All Comparisons</div>
-                                <div class="nav-mega-item-desc">{comparisons.length} comparisons</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Resources -->
-            <div class="nav-mega-dropdown relative" id="nav-resources">
-                <button
-                    class="nav-link px-4 py-2 text-sm font-semibold rounded-lg flex items-center gap-1"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                    id="nav-resources-trigger"
-                >
-                    Resources
-                    <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-                <div class="nav-mega-panel" role="menu" aria-labelledby="nav-resources-trigger" style="min-width:320px;">
-                    <div>
-                        <p class="nav-mega-section-title">Learn & Decide</p>
-                        <a href="/quiz/am-i-a-candidate/" class="nav-mega-item" style="background:rgba(27,75,90,0.08);">
-                            <div class="nav-mega-item-icon">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="nav-mega-item-title">Am I a Candidate?</div>
-                                <div class="nav-mega-item-desc">Take the 2-min quiz</div>
-                            </div>
-                        </a>
-                        <a href="/quiz/depression-severity-test/" class="nav-mega-item">
-                            <div class="nav-mega-item-icon">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="nav-mega-item-title">PHQ-9 Depression Test</div>
-                                <div class="nav-mega-item-desc">Self-assessment quiz</div>
-                            </div>
-                        </a>
-                        <a href="/tms-cost-guide/" class="nav-mega-item">
-                            <div class="nav-mega-item-icon">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="nav-mega-item-title">TMS Cost Guide 2026</div>
-                                <div class="nav-mega-item-desc">Pricing & insurance breakdown</div>
-                            </div>
-                        </a>
-                        <a href="/questions/" class="nav-mega-item">
-                            <div class="nav-mega-item-icon">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="nav-mega-item-title">FAQ</div>
-                                <div class="nav-mega-item-desc">Common questions answered</div>
-                            </div>
-                        </a>
-                        <a href="/resources/" class="nav-mega-item">
-                            <div class="nav-mega-item-icon">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.474c.334-2.048.478-3.09.478-4.49 0-3.867-3.134-7-7-7s-7 3.133-7 7c0 1.4.144 2.442.478 4.49.217 1.322.672 2.486 1.303 3.51h11.438c.631-1.024 1.086-2.188 1.303-3.51z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="nav-mega-item-title">Guides & Downloads</div>
-                                <div class="nav-mega-item-desc">Checklists, PDFs & more</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <p class="nav-mega-section-title">Community</p>
-                        <a href="/blog/" class="nav-mega-item">
-                            <div class="nav-mega-item-icon">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="nav-mega-item-title">Blog</div>
-                                <div class="nav-mega-item-desc">Expert insights & updates</div>
-                            </div>
-                        </a>
-                        <a href="/stories/" class="nav-mega-item">
-                            <div class="nav-mega-item-icon">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="nav-mega-item-title">Patient Stories</div>
-                                <div class="nav-mega-item-desc">Real TMS experiences</div>
-                            </div>
-                        </a>
-                        <a href="/research/" class="nav-mega-item">
-                            <div class="nav-mega-item-icon">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="nav-mega-item-title">Research & Trials</div>
-                                <div class="nav-mega-item-desc">Clinical evidence</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- For Providers -->
-            <a href="/providers/" class="nav-link px-4 py-2 text-sm font-semibold rounded-lg">For Providers</a>
-
-            <!-- Community -->
-            <a href="/community/" class="nav-link px-4 py-2 text-sm font-semibold rounded-lg">Community</a>
-        </nav>
-
-        <!-- CTA + Country Selector + Mobile Toggle -->
-        <div class="flex items-center gap-1.5">
-            <!-- Country Selector -->
-            <div class="relative group/country hidden lg:block">
-                <button
-                    id="country-selector-btn"
-                    class="nav-link flex items-center gap-1 px-2.5 py-2 text-sm font-medium rounded-lg"
-                    aria-label="Select country"
-                >
-                    <span id="country-flag" class="text-lg leading-none">&#127482;&#127480;</span>
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-                <div class="absolute right-0 top-full pt-1 opacity-0 invisible group-hover/country:opacity-100 group-hover/country:visible transition-all duration-200 z-50">
-                    <div class="country-panel">
-                        <p class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider" style="color:var(--muted);">Americas</p>
-                        <a href="/us/" class="country-option" data-country="US">&#127482;&#127480; United States</a>
-                        <a href="/ca/" class="country-option" data-country="CA">&#127464;&#127462; Canada</a>
-                        <a href="/br/" class="country-option" data-country="BR">&#127463;&#127479; Brazil</a>
-                        <a href="/mx/" class="country-option" data-country="MX">&#127474;&#127485; Mexico</a>
-                        <div class="border-t my-1" style="border-color:var(--line);"></div>
-                        <p class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider" style="color:var(--muted);">Europe</p>
-                        <a href="/uk/" class="country-option" data-country="GB">&#127468;&#127463; United Kingdom</a>
-                        <a href="/de/" class="country-option" data-country="DE">&#127465;&#127466; Germany</a>
-                        <a href="/fr/" class="country-option" data-country="FR">&#127467;&#127479; France</a>
-                        <a href="/es/" class="country-option" data-country="ES">&#127466;&#127480; Spain</a>
-                        <a href="/it/" class="country-option" data-country="IT">&#127470;&#127481; Italy</a>
-                        <a href="/nl/" class="country-option" data-country="NL">&#127475;&#127473; Netherlands</a>
-                        <a href="/se/" class="country-option" data-country="SE">&#127480;&#127466; Sweden</a>
-                        <a href="/ie/" class="country-option" data-country="IE">&#127470;&#127466; Ireland</a>
-                        <div class="border-t my-1" style="border-color:var(--line);"></div>
-                        <p class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider" style="color:var(--muted);">Asia & Middle East</p>
-                        <a href="/jp/" class="country-option" data-country="JP">&#127471;&#127477; Japan</a>
-                        <a href="/kr/" class="country-option" data-country="KR">&#127472;&#127479; South Korea</a>
-                        <a href="/sg/" class="country-option" data-country="SG">&#127480;&#127468; Singapore</a>
-                        <a href="/ae/" class="country-option" data-country="AE">&#127462;&#127466; UAE</a>
-                        <a href="/in/" class="country-option" data-country="IN">&#127470;&#127475; India</a>
-                        <a href="/il/" class="country-option" data-country="IL">&#127470;&#127473; Israel</a>
-                        <div class="border-t my-1" style="border-color:var(--line);"></div>
-                        <p class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider" style="color:var(--muted);">Oceania</p>
-                        <a href="/au/" class="country-option" data-country="AU">&#127462;&#127482; Australia</a>
-                        <a href="/nz/" class="country-option" data-country="NZ">&#127475;&#127487; New Zealand</a>
-                        <a href="/za/" class="country-option" data-country="ZA">&#127487;&#127462; South Africa</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Search -->
-            <a href="/search/" class="nav-link hidden lg:flex items-center gap-2 px-3 py-2 text-sm rounded-lg" aria-label="Search clinics">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-                <span class="hidden xl:inline">Search</span>
+<header class="header-root" id="main-header">
+    <!-- Primary bar: logo + hub triggers + actions -->
+    <div class="header-bar">
+        <div class="header-inner">
+            <!-- Left: Logo -->
+            <a href="/" class="header-logo" aria-label="TMS List home">
+                <Logo />
             </a>
 
-            <!-- User Menu -->
-            <div class="hidden lg:block">
-              <UserMenu client:load />
+            <!-- Center: Hub Trigger Buttons -->
+            <nav class="header-hubs" aria-label="Main navigation">
+                {hubKeys.map((key) => {
+                    const hub = hubItems[key];
+                    return (
+                        <button
+                            class="hub-trigger"
+                            data-hub={key}
+                            aria-expanded="false"
+                            aria-controls={`megamenu-${key}`}
+                            aria-haspopup="true"
+                        >
+                            <svg class="hub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" set:html={hub.icon} />
+                            <span class="hub-label">{hub.label}</span>
+                            <svg class="hub-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                    );
+                })}
+            </nav>
+
+            <!-- Right: Actions -->
+            <div class="header-actions">
+                <!-- Search -->
+                <a href="/search/" class="action-btn" aria-label="Search">
+                    <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </a>
+
+                <!-- Country switcher -->
+                <div class="country-switcher" id="country-switcher">
+                    <button class="action-btn country-trigger" id="country-trigger" aria-label={`Change country (currently ${visitorCountryName})`} aria-haspopup="listbox" aria-expanded="false">
+                        <span class="country-flag" set:html={visitorCountryFlag} />
+                        <svg class="country-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="country-menu" id="country-menu" role="listbox" aria-label="Select country" hidden>
+                        <div class="country-menu-header">Select your country</div>
+                        <ul class="country-list">
+                            {SUPPORTED_COUNTRIES.map((cc) => (
+                                <li>
+                                    <button
+                                        class={`country-option ${cc === VISITOR_COUNTRY ? 'is-active' : ''}`}
+                                        data-country={cc}
+                                        type="button"
+                                        role="option"
+                                        aria-selected={cc === VISITOR_COUNTRY ? 'true' : 'false'}
+                                    >
+                                        <span class="country-flag" set:html={COUNTRY_FLAGS[cc] || ''} />
+                                        <span class="country-name">{COUNTRY_NAMES[cc] || cc}</span>
+                                        {cc === VISITOR_COUNTRY && (
+                                            <svg class="country-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                        )}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- User menu -->
+                <div class="header-user">
+                    <UserMenu client:load />
+                </div>
+
+                <!-- CTA pill -->
+                <a href="/add-listing/" class="cta-pill">
+                    <svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    List Your Clinic
+                </a>
+
+                <!-- Mobile menu -->
+                <button class="action-btn mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
+                    <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </div>
-
-            <!-- CTA — List Your Clinic -->
-            <a href="/add-listing/" class="nav-cta hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-sm rounded-xl">
-                List Your Clinic
-            </a>
-
-            <!-- Mobile Toggle -->
-            <button class="nav-link p-2 rounded-lg lg:hidden" id="mobile-menu-btn" aria-label="Open menu">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
         </div>
     </div>
+
+    <!-- Mobile bottom tab bar -->
+    <nav class="mobile-tabs" aria-label="Mobile navigation">
+        <a href="/" class="mobile-tab">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            <span class="tab-label">Home</span>
+        </a>
+        <a href={visitorCountryUrl} class="mobile-tab">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span class="tab-label">Find Care</span>
+        </a>
+        <button class="mobile-tab mobile-explore-btn" id="mobile-explore-btn">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <span class="tab-label">Explore</span>
+        </button>
+        <a href="/compare/" class="mobile-tab">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+            </svg>
+            <span class="tab-label">Compare</span>
+        </a>
+        <a href="/providers/" class="mobile-tab">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+            <span class="tab-label">Providers</span>
+        </a>
+    </nav>
 </header>
 
-<!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 z-[100] bg-black/50 opacity-0 invisible transition-opacity duration-300 lg:hidden">
-    <div id="mobile-menu-panel" class="absolute right-0 top-0 h-full w-full sm:w-96 max-w-full transform translate-x-full transition-transform duration-300 overflow-y-auto overscroll-contain" style="background:#111418;border-left:1px solid #1E242C;">
-        <div class="flex items-center justify-between p-4 sticky top-0 z-10" style="background:#111418;border-bottom:1px solid #1E242C;">
-            <Logo />
-            <button id="mobile-menu-close" class="nav-link p-2 rounded-lg" aria-label="Close menu">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
-        </div>
-        <nav class="p-4 pb-24 space-y-1">
-            <!-- Section: Navigation -->
-            <p class="text-[10px] font-bold uppercase tracking-widest px-4 pt-2 pb-1" style="color:var(--muted);">Navigation</p>
-            <a href="/us/" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors" style="color:#8896AB;">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                Find a Clinic
-            </a>
-            <a href="/treatments/" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors" style="color:#8896AB;">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                Conditions
-            </a>
-            <a href="/technology/" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors" style="color:#8896AB;">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                Technology
-            </a>
-            <a href="/resources/" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors" style="color:#8896AB;">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                Resources
-            </a>
-            <a href="/providers/" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors" style="color:#8896AB;">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                For Providers
-            </a>
-            <a href="/community/" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors" style="color:#8896AB;">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                Community
-            </a>
+<!-- Megamenu Container (Desktop) — one panel per hub -->
+<div id="megamenu-container" class="megamenu-container" aria-hidden="true">
+    <div class="megamenu-backdrop" id="megamenu-backdrop"></div>
+    {hubKeys.map((key) => {
+        const hub = hubItems[key];
+        return (
+            <div class="megamenu-panel" id={`megamenu-${key}`} data-hub={key} role="menu" aria-label={hub.label}>
+                <div class="megamenu-inner">
+                    <div class="megamenu-grid">
+                        {hub.columns.map((col) => (
+                            <div class={`megamenu-column${col.featured ? ' megamenu-column-featured' : ''}`}>
+                                <h3 class="megamenu-column-title">{col.title}</h3>
+                                <ul class="megamenu-list">
+                                    {col.items.map((item) => (
+                                        <li>
+                                            <a
+                                                href={item.href}
+                                                class={`megamenu-item${item.primary ? ' megamenu-item-primary' : ''}`}
+                                                role="menuitem"
+                                            >
+                                                <span class="megamenu-item-label">{item.label}</span>
+                                                {item.desc && <span class="megamenu-item-desc">{item.desc}</span>}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                    {hub.cta && (
+                        <div class="megamenu-footer">
+                            <a href={hub.cta.href} class="megamenu-cta">
+                                {hub.cta.label}
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </a>
+                            <a href="/sitemap.html" class="megamenu-secondary">View full sitemap</a>
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    })}
+</div>
 
-            <!-- Section: Quick Actions -->
-            <p class="text-[10px] font-bold uppercase tracking-widest px-4 pt-4 pb-1" style="color:var(--muted);">Quick Actions</p>
-            <a href="/quiz/am-i-a-candidate/" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold" style="background:rgba(27,75,90,0.15);color:var(--accent);">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-                Am I a Candidate?
-            </a>
-            <a href="/add-listing/" class="nav-cta flex items-center justify-center gap-3 px-4 py-3 mt-1 rounded-xl text-center">
-                List Your Clinic
-            </a>
-        </nav>
+<!-- Mobile Full-Screen Explore Modal -->
+<div id="mobile-explore" class="mobile-explore" aria-hidden="true">
+    <div class="mobile-explore-header">
+        <a href="/" class="mobile-explore-logo">
+            <Logo />
+        </a>
+        <button class="mobile-explore-close" id="mobile-explore-close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile Search -->
+    <div class="mobile-explore-search">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input
+            type="text"
+            id="mobile-hub-search"
+            class="hub-search-input"
+            placeholder="Search pages..."
+            autocomplete="off"
+        />
+    </div>
+
+    <!-- Mobile Accordion Categories -->
+    <div class="mobile-explore-content" id="mobile-explore-content">
+        {hubKeys.map((key) => {
+            const hub = hubItems[key];
+            const totalItems = hub.columns.reduce((sum, c) => sum + c.items.length, 0);
+            return (
+                <div class="explore-category" data-hub={key}>
+                    <button class="explore-category-header" aria-expanded="false">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" set:html={hub.icon} />
+                        <span class="category-label">{hub.label}</span>
+                        <span class="category-count">{totalItems}</span>
+                        <svg class="category-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="explore-category-items">
+                        {hub.columns.map((col) => (
+                            <div class="explore-subgroup">
+                                <h4 class="explore-subgroup-title">{col.title}</h4>
+                                {col.items.map((item) => (
+                                    <a href={item.href} class="explore-item-link" data-label={item.label.toLowerCase()}>
+                                        <span class="explore-item-label">{item.label}</span>
+                                        {item.desc && <span class="explore-item-desc">{item.desc}</span>}
+                                    </a>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        })}
     </div>
 </div>
 
+<!-- Mobile Menu Drawer -->
+<div id="mobile-menu" class="mobile-overlay" aria-hidden="true">
+    <div class="mobile-backdrop-drawer" id="mobile-backdrop"></div>
+    <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Navigation menu">
+        <div class="mobile-drawer-header">
+            <a href="/" onclick="closeMobileMenu()">
+                <Logo />
+            </a>
+            <button class="close-btn" onclick="closeMobileMenu()" aria-label="Close menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-nav">
+            <a href={visitorCountryUrl} class="mobile-nav-item" onclick="closeMobileMenu()">Find a Clinic</a>
+            <a href="/treatments/" class="mobile-nav-item" onclick="closeMobileMenu()">Treatments</a>
+            <a href="/technology/" class="mobile-nav-item" onclick="closeMobileMenu()">Technology</a>
+            <a href="/compare/" class="mobile-nav-item" onclick="closeMobileMenu()">Compare</a>
+            <a href="/insurance/" class="mobile-nav-item" onclick="closeMobileMenu()">Insurance</a>
+            <div class="mobile-divider"></div>
+            <a href="/near-me/tms-near-me/" class="mobile-nav-item" onclick="closeMobileMenu()">Near Me</a>
+            <a href="/stories/" class="mobile-nav-item" onclick="closeMobileMenu()">Patient Stories</a>
+            <a href="/research/" class="mobile-nav-item" onclick="closeMobileMenu()">Research</a>
+            <a href="/providers/" class="mobile-nav-item" onclick="closeMobileMenu()">For Providers</a>
+        </div>
+
+        <div class="mobile-drawer-footer">
+            <a href="/quiz/am-i-a-candidate/" class="mobile-quiz-btn" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Am I a Candidate?
+            </a>
+            <a href="/add-listing/" class="mobile-cta-btn" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+                List Your Clinic
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    @reference "../styles/global.css";
+
+    .header-root {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+    }
+
+    /* Primary bar */
+    .header-bar {
+        background: rgba(251,250,247,0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .header-logo {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Hub triggers */
+    .header-hubs {
+        display: flex;
+        align-items: center;
+        gap: 0.125rem;
+        flex: 1;
+    }
+
+    .hub-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--ink2);
+        background: none;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+        transition: background 0.15s ease, color 0.15s ease;
+        white-space: nowrap;
+    }
+
+    .hub-trigger:hover {
+        background: var(--paper2);
+        color: var(--ink);
+    }
+
+    .hub-trigger.active {
+        background: var(--paper2);
+        color: var(--accent);
+    }
+
+    .hub-icon {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .hub-chevron {
+        width: 0.75rem;
+        height: 0.75rem;
+        opacity: 0.5;
+        transition: transform 0.2s ease;
+    }
+
+    .hub-trigger.active .hub-chevron {
+        transform: rotate(180deg);
+    }
+
+    /* Actions */
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        flex-shrink: 0;
+    }
+
+    .action-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        color: var(--muted);
+        text-decoration: none;
+        transition: background 0.15s ease, color 0.15s ease;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .action-btn:hover {
+        background: var(--paper2);
+        color: var(--ink);
+    }
+
+    .action-icon {
+        width: 1.125rem;
+        height: 1.125rem;
+    }
+
+    .header-user {
+        display: none;
+    }
+
+    /* CTA pill */
+    .cta-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: white;
+        background: var(--gradient-brand);
+        border-radius: 2rem;
+        text-decoration: none;
+        box-shadow: 0 2px 8px rgba(10,22,40,0.2);
+        transition: box-shadow 0.15s ease, transform 0.15s ease;
+    }
+
+    .cta-pill:hover {
+        box-shadow: 0 4px 12px rgba(10,22,40,0.3);
+        transform: translateY(-1px);
+    }
+
+    .cta-icon {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+
+    .mobile-menu-btn {
+        display: none;
+    }
+
+    /* Mobile bottom tabs */
+    .mobile-tabs {
+        display: none;
+    }
+
+    /* =============================================
+       MEGAMENU (Desktop, per-hub dropdown)
+       ============================================= */
+    .megamenu-container {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        pointer-events: none;
+    }
+
+    .megamenu-container.open {
+        pointer-events: auto;
+    }
+
+    .megamenu-backdrop {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(10,22,40,0.25);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .megamenu-container.open .megamenu-backdrop {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .megamenu-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(251,250,247,0.98);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 12px 30px rgba(10,22,40,0.08);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    }
+
+    .megamenu-panel.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .megamenu-inner {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.75rem 1.5rem 1.5rem;
+    }
+
+    .megamenu-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+
+    .megamenu-column-title {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin: 0 0 0.875rem;
+        padding-bottom: 0.625rem;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .megamenu-column-featured .megamenu-column-title {
+        color: var(--accent);
+        border-bottom-color: rgba(10,22,40,0.2);
+    }
+
+    .megamenu-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+    }
+
+    .megamenu-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+        padding: 0.5rem 0.625rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        transition: background 0.15s ease;
+    }
+
+    .megamenu-item:hover {
+        background: rgba(10,22,40,0.06);
+    }
+
+    .megamenu-item-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--ink);
+    }
+
+    .megamenu-item-desc {
+        font-size: 0.75rem;
+        color: var(--muted);
+        line-height: 1.35;
+    }
+
+    .megamenu-item-primary .megamenu-item-label {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    .megamenu-item-primary {
+        background: rgba(10,22,40,0.05);
+    }
+
+    .megamenu-item-primary:hover {
+        background: rgba(10,22,40,0.1);
+    }
+
+    .megamenu-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--line);
+    }
+
+    .megamenu-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem 1.25rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: white;
+        background: var(--gradient-brand);
+        border-radius: 2rem;
+        text-decoration: none;
+        box-shadow: 0 2px 8px rgba(10,22,40,0.2);
+        transition: box-shadow 0.15s ease, transform 0.15s ease;
+    }
+
+    .megamenu-cta:hover {
+        box-shadow: 0 4px 12px rgba(10,22,40,0.3);
+        transform: translateY(-1px);
+    }
+
+    .megamenu-cta svg {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+
+    .megamenu-secondary {
+        font-size: 0.8125rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.15s ease;
+    }
+
+    .megamenu-secondary:hover {
+        color: var(--accent);
+    }
+
+    /* =============================================
+       MOBILE EXPLORE MODAL
+       ============================================= */
+    .mobile-explore {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: var(--paper);
+        display: flex;
+        flex-direction: column;
+        transform: translateY(100%);
+        transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .mobile-explore.open {
+        transform: translateY(0);
+    }
+
+    .mobile-explore-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .mobile-explore-logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .mobile-explore-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        color: var(--muted);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: background 0.15s ease;
+    }
+
+    .mobile-explore-close:hover {
+        background: var(--paper2);
+    }
+
+    .mobile-explore-close svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .mobile-explore-search {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        margin: 1rem;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 0.75rem;
+    }
+
+    .search-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--muted);
+        flex-shrink: 0;
+    }
+
+    .hub-search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        color: var(--ink);
+        background: transparent;
+    }
+
+    .hub-search-input::placeholder {
+        color: var(--muted);
+    }
+
+    .mobile-explore-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0 1rem 2rem;
+    }
+
+    /* Accordion */
+    .explore-category {
+        border-bottom: 1px solid var(--line);
+    }
+
+    .explore-category-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        padding: 1rem 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+    }
+
+    .category-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--accent);
+    }
+
+    .category-label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--ink);
+    }
+
+    .category-count {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--accent);
+        background: rgba(10,22,40,0.1);
+        padding: 0.125rem 0.5rem;
+        border-radius: 1rem;
+    }
+
+    .category-chevron {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--muted);
+        margin-left: auto;
+        transition: transform 0.2s ease;
+    }
+
+    .explore-category.expanded .category-chevron {
+        transform: rotate(180deg);
+    }
+
+    .explore-category-items {
+        display: none;
+        padding-bottom: 0.75rem;
+    }
+
+    .explore-category.expanded .explore-category-items {
+        display: block;
+    }
+
+    .explore-subgroup {
+        margin-bottom: 1rem;
+    }
+
+    .explore-subgroup-title {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin: 0.5rem 0 0.5rem 0.75rem;
+    }
+
+    .explore-item-link {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        transition: background 0.15s ease;
+    }
+
+    .explore-item-link:hover {
+        background: rgba(10,22,40,0.06);
+    }
+
+    .explore-item-link.hidden {
+        display: none;
+    }
+
+    .explore-item-label {
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--ink);
+    }
+
+    .explore-item-desc {
+        font-size: 0.8125rem;
+        color: var(--muted);
+    }
+
+    /* =============================================
+       MOBILE DRAWER
+       ============================================= */
+    .mobile-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .mobile-overlay.open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mobile-backdrop-drawer {
+        position: absolute;
+        inset: 0;
+        background: rgba(10,22,40,0.4);
+        backdrop-filter: blur(2px);
+    }
+
+    .mobile-drawer {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: min(85vw, 320px);
+        background: var(--paper);
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+        box-shadow: -8px 0 30px rgba(10,22,40,0.12);
+    }
+
+    .mobile-overlay.open .mobile-drawer {
+        transform: translateX(0);
+    }
+
+    .mobile-drawer-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        color: var(--muted);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: background 0.15s ease;
+    }
+
+    .close-btn:hover {
+        background: var(--paper2);
+    }
+
+    .close-btn svg {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .mobile-nav {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0.75rem;
+    }
+
+    .mobile-nav-item {
+        display: block;
+        padding: 0.75rem 1rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--ink2);
+        border-radius: 0.75rem;
+        text-decoration: none;
+        transition: background 0.15s ease;
+    }
+
+    .mobile-nav-item:hover {
+        background: var(--paper2);
+    }
+
+    .mobile-divider {
+        margin: 0.5rem 0;
+        border-top: 1px solid var(--line);
+    }
+
+    .mobile-drawer-footer {
+        padding: 1rem 1.25rem;
+        border-top: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .mobile-quiz-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: var(--accent);
+        background: rgba(10,22,40,0.08);
+        border-radius: 0.75rem;
+        text-decoration: none;
+        transition: background 0.15s ease;
+    }
+
+    .mobile-quiz-btn:hover {
+        background: rgba(10,22,40,0.12);
+    }
+
+    .mobile-quiz-btn svg {
+        width: 1.125rem;
+        height: 1.125rem;
+    }
+
+    .mobile-cta-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: white;
+        background: var(--gradient-brand);
+        border-radius: 0.75rem;
+        text-decoration: none;
+        transition: opacity 0.15s ease;
+    }
+
+    .mobile-cta-btn:hover {
+        opacity: 0.9;
+    }
+
+    .mobile-cta-btn svg {
+        width: 1.125rem;
+        height: 1.125rem;
+    }
+
+    /* =============================================
+       RESPONSIVE
+       ============================================= */
+    /* Large screens */
+    @media (min-width: 1024px) {
+        .header-user {
+            display: block;
+        }
+
+        .mobile-menu-btn {
+            display: none !important;
+        }
+
+        .header-inner {
+            height: 68px;
+            gap: 1.5rem;
+        }
+
+        .megamenu-container {
+            top: 68px;
+        }
+
+        .megamenu-backdrop {
+            top: 68px;
+        }
+
+        .hub-trigger {
+            font-size: 0.9375rem;
+            padding: 0.5rem 0.875rem;
+        }
+
+        .hub-icon {
+            width: 1.125rem;
+            height: 1.125rem;
+        }
+    }
+
+    /* Mid desktop — nav fits but CTA pill overflows */
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        .header-inner {
+            gap: 0.75rem;
+        }
+
+        .cta-pill {
+            display: none;
+        }
+    }
+
+    /* Tablet */
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .header-inner {
+            gap: 0.5rem;
+        }
+
+        .hub-label {
+            display: none;
+        }
+
+        .megamenu-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 767px) {
+        .header-hubs {
+            display: none;
+        }
+
+        .megamenu-container {
+            display: none;
+        }
+
+        .cta-pill {
+            display: none;
+        }
+
+        .mobile-menu-btn {
+            display: inline-flex !important;
+        }
+
+        .mobile-tabs {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            background: rgba(251,250,247,0.98);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--line);
+            padding: 0.5rem 0;
+            padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+        }
+
+        .mobile-tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.375rem 0.25rem;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tab-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: var(--muted);
+        }
+
+        .tab-label {
+            font-size: 0.6875rem;
+            font-weight: 500;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .mobile-tab:hover .tab-icon,
+        .mobile-tab:hover .tab-label {
+            color: var(--accent);
+        }
+
+        .mobile-explore-btn {
+            background: rgba(10,22,40,0.08);
+            border-radius: 0.75rem;
+            margin: 0 0.25rem;
+        }
+
+        .mobile-explore-btn .tab-icon,
+        .mobile-explore-btn .tab-label {
+            color: var(--accent);
+        }
+    }
+
+    /* ── Country switcher ─────────────────────────────────────── */
+    .country-switcher { position: relative; }
+    .country-trigger { display: inline-flex; align-items: center; gap: .35rem; padding: 0 .5rem; }
+    .country-trigger .country-flag { display: inline-block; width: 1rem; height: .75rem; line-height: 0; }
+    .country-trigger .country-flag :global(svg) { width: 100% !important; height: 100% !important; display: block; }
+    .country-chevron { width: .75rem; height: .75rem; opacity: .55; }
+    .country-menu {
+        position: absolute; top: calc(100% + .5rem); right: 0;
+        min-width: 240px; max-height: 380px; overflow-y: auto;
+        background: var(--paper); border: 1px solid var(--line);
+        border-radius: .75rem; box-shadow: 0 12px 30px rgba(10,22,40,0.10);
+        padding: .5rem 0; z-index: 60;
+    }
+    .country-menu[hidden] { display: none; }
+    .country-menu-header {
+        padding: .25rem 1rem .5rem; font-size: 11px; font-weight: 600;
+        text-transform: uppercase; letter-spacing: .075em; color: var(--muted);
+    }
+    .country-list { list-style: none; margin: 0; padding: 0; }
+    .country-option {
+        display: flex; align-items: center; gap: .625rem; width: 100%;
+        padding: .5rem 1rem; background: transparent; border: 0; cursor: pointer;
+        font-size: 13px; color: var(--ink2); text-align: left; transition: background .12s;
+    }
+    .country-option:hover { background: var(--paper2); color: var(--ink); }
+    .country-option.is-active { color: var(--ink); font-weight: 600; }
+    .country-option .country-flag { display: inline-block; width: 1.125rem; height: .85rem; flex-shrink: 0; line-height: 0; }
+    .country-option .country-flag :global(svg) { width: 100% !important; height: 100% !important; display: block; }
+    .country-option .country-name { flex: 1; }
+    .country-check { width: .9rem; height: .9rem; color: var(--accent); flex-shrink: 0; }
+
+    @media (max-width: 768px) {
+        .country-menu { right: -.5rem; min-width: 220px; }
+    }
+</style>
+
 <script is:inline>
-(function() {
-    // Scroll-triggered header
-    var header = document.getElementById('main-header');
-    if (header) {
-        var onScroll = function() {
-            if (window.scrollY > 8) {
-                header.style.borderBottomColor = '#2A323C';
-                header.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)';
-            } else {
-                header.style.borderBottomColor = '#1E242C';
-                header.style.boxShadow = '';
+    // =============================================
+    // MEGAMENU — Per-hub dropdown (Desktop)
+    // Hover-intent open with a small delay; click toggles.
+    // =============================================
+    (function() {
+        var container = document.getElementById('megamenu-container');
+        var backdrop = document.getElementById('megamenu-backdrop');
+        var triggers = document.querySelectorAll('.hub-trigger');
+        var panels = document.querySelectorAll('.megamenu-panel');
+        var openTimer = null;
+        var closeTimer = null;
+        var currentKey = null;
+
+        function clearTimers() {
+            if (openTimer) { clearTimeout(openTimer); openTimer = null; }
+            if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+        }
+
+        function openHub(key) {
+            clearTimers();
+            currentKey = key;
+            triggers.forEach(function(t) {
+                var isActive = t.dataset.hub === key;
+                t.classList.toggle('active', isActive);
+                t.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+            });
+            panels.forEach(function(p) {
+                p.classList.toggle('active', p.dataset.hub === key);
+            });
+            container.classList.add('open');
+            container.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeHub() {
+            clearTimers();
+            currentKey = null;
+            triggers.forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-expanded', 'false');
+            });
+            panels.forEach(function(p) {
+                p.classList.remove('active');
+            });
+            container.classList.remove('open');
+            container.setAttribute('aria-hidden', 'true');
+        }
+
+        triggers.forEach(function(trigger) {
+            var key = trigger.dataset.hub;
+
+            trigger.addEventListener('click', function() {
+                if (currentKey === key) {
+                    closeHub();
+                } else {
+                    openHub(key);
+                }
+            });
+
+            trigger.addEventListener('mouseenter', function() {
+                clearTimers();
+                openTimer = setTimeout(function() {
+                    openHub(key);
+                }, 100);
+            });
+
+            trigger.addEventListener('mouseleave', function() {
+                clearTimers();
+                closeTimer = setTimeout(function() {
+                    if (currentKey === key) closeHub();
+                }, 200);
+            });
+        });
+
+        // Keep open while hovering the panel
+        panels.forEach(function(panel) {
+            panel.addEventListener('mouseenter', function() {
+                clearTimers();
+            });
+            panel.addEventListener('mouseleave', function() {
+                clearTimers();
+                closeTimer = setTimeout(closeHub, 200);
+            });
+        });
+
+        if (backdrop) backdrop.addEventListener('click', closeHub);
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.megamenu-item, .megamenu-cta, .megamenu-secondary').forEach(function(link) {
+            link.addEventListener('click', closeHub);
+        });
+
+        // Keyboard: Escape closes panel
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeHub();
+                closeMobileMenu();
+                closeMobileExplore();
             }
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
+        });
+    })();
+
+    // =============================================
+    // MOBILE EXPLORE MODAL
+    // =============================================
+    (function() {
+        var exploreBtn = document.getElementById('mobile-explore-btn');
+        var exploreModal = document.getElementById('mobile-explore');
+        var exploreClose = document.getElementById('mobile-explore-close');
+        var mobileSearch = document.getElementById('mobile-hub-search');
+
+        if (exploreBtn && exploreModal) {
+            exploreBtn.addEventListener('click', function() {
+                exploreModal.classList.add('open');
+                exploreModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        if (exploreClose) {
+            exploreClose.addEventListener('click', closeMobileExplore);
+        }
+
+        // Accordion
+        document.querySelectorAll('.explore-category-header').forEach(function(header) {
+            header.addEventListener('click', function() {
+                var category = header.closest('.explore-category');
+                var expanded = category.classList.toggle('expanded');
+                header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            });
+        });
+
+        // Mobile search filter
+        function filterMobileExplore(query) {
+            var q = query.toLowerCase().trim();
+            document.querySelectorAll('.explore-item-link').forEach(function(item) {
+                var label = (item.dataset.label || '').toLowerCase();
+                item.classList.toggle('hidden', q !== '' && !label.includes(q));
+            });
+            // Auto-expand all categories during search
+            if (q !== '') {
+                document.querySelectorAll('.explore-category').forEach(function(c) {
+                    c.classList.add('expanded');
+                });
+            }
+        }
+
+        if (mobileSearch) {
+            mobileSearch.addEventListener('input', function() {
+                filterMobileExplore(mobileSearch.value);
+            });
+        }
+    })();
+
+    function closeMobileExplore() {
+        var modal = document.getElementById('mobile-explore');
+        if (modal) {
+            modal.classList.remove('open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
     }
 
-    // Mobile menu
-    var mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    var mobileMenu = document.getElementById('mobile-menu');
-    var mobileMenuPanel = document.getElementById('mobile-menu-panel');
-    var mobileMenuClose = document.getElementById('mobile-menu-close');
-
-    function openMenu() {
-        mobileMenu && (mobileMenu.className = mobileMenu.className.replace('opacity-0 invisible', 'opacity-100 visible'));
-        mobileMenuPanel && mobileMenuPanel.classList.remove('translate-x-full');
-        document.body.style.overflow = 'hidden';
+    // =============================================
+    // MOBILE MENU DRAWER
+    // =============================================
+    function toggleMobileMenu() {
+        var overlay = document.getElementById('mobile-menu');
+        var isOpen = overlay.classList.contains('open');
+        overlay.classList.toggle('open');
+        overlay.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+        document.body.style.overflow = isOpen ? '' : 'hidden';
     }
-    function closeMenu() {
-        mobileMenu && (mobileMenu.className = mobileMenu.className.replace('opacity-100 visible', 'opacity-0 invisible'));
-        mobileMenu && !mobileMenu.classList.contains('opacity-0') || mobileMenu && mobileMenu.classList.add('invisible');
-        mobileMenuPanel && mobileMenuPanel.classList.add('translate-x-full');
+
+    function closeMobileMenu() {
+        var overlay = document.getElementById('mobile-menu');
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
     }
 
-    mobileMenuBtn && mobileMenuBtn.addEventListener('click', openMenu);
-    mobileMenuClose && mobileMenuClose.addEventListener('click', closeMenu);
-    mobileMenu && mobileMenu.addEventListener('click', function(e) { if (e.target === mobileMenu) closeMenu(); });
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
+    window.toggleMobileMenu = toggleMobileMenu;
+    window.closeMobileMenu = closeMobileMenu;
+    window.closeMobileExplore = closeMobileExplore;
 
-    // Mega menu dropdowns
-    var dropdowns = document.querySelectorAll('.nav-mega-dropdown');
-    dropdowns.forEach(function(dropdown) {
-        var trigger = dropdown.querySelector('.nav-mega-trigger, button[aria-haspopup]');
-        if (!trigger) return;
-        var panel = dropdown.querySelector('.nav-mega-panel');
-        var chevron = trigger.querySelector('svg');
+    document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+    document.getElementById('mobile-backdrop').addEventListener('click', closeMobileMenu);
 
-        trigger.addEventListener('mouseenter', function() {
-            trigger.setAttribute('aria-expanded', 'true');
-            panel && (panel.style.opacity = '1');
-            panel && (panel.style.visibility = 'visible');
-            panel && (panel.style.pointerEvents = 'auto');
-            panel && (panel.style.transform = 'translateX(-50%) translateY(0)');
-            chevron && (chevron.style.transform = 'rotate(180deg)');
+    // ── Country switcher ───────────────────────────────────────
+    (function() {
+        var trigger = document.getElementById('country-trigger');
+        var menu = document.getElementById('country-menu');
+        if (!trigger || !menu) return;
+
+        function open() { menu.hidden = false; trigger.setAttribute('aria-expanded', 'true'); }
+        function close() { menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); }
+
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menu.hidden ? open() : close();
         });
 
-        trigger.addEventListener('mouseleave', function() {
-            trigger.setAttribute('aria-expanded', 'false');
-            panel && (panel.style.opacity = '0');
-            panel && (panel.style.visibility = 'hidden');
-            panel && (panel.style.pointerEvents = 'none');
-            panel && (panel.style.transform = 'translateX(-50%) translateY(-8px)');
-            chevron && (chevron.style.transform = '');
+        // Click-away close
+        document.addEventListener('click', function(e) {
+            if (!menu.hidden && !menu.contains(e.target) && e.target !== trigger) close();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !menu.hidden) close();
         });
 
-        trigger.addEventListener('focusin', function() {
-            trigger.setAttribute('aria-expanded', 'true');
-            panel && (panel.style.opacity = '1');
-            panel && (panel.style.visibility = 'visible');
-            panel && (panel.style.pointerEvents = 'auto');
-            panel && (panel.style.transform = 'translateX(-50%) translateY(0)');
-            chevron && (chevron.style.transform = 'rotate(180deg)');
+        // Selecting a country: persist cookie, clear the auto-sync flag, navigate to that country's home
+        menu.addEventListener('click', function(e) {
+            var btn = e.target.closest('.country-option');
+            if (!btn) return;
+            var cc = btn.getAttribute('data-country');
+            if (!cc) return;
+            document.cookie = 'x-country=' + cc + '; path=/; max-age=' + (60 * 60 * 24 * 365) + '; SameSite=Lax';
+            try { sessionStorage.setItem('tms_geo_synced', '1'); } catch (e2) {}
+            var urls = (window.TMS_GEO && window.TMS_GEO.urls) || { US: '/us/' };
+            location.assign(urls[cc] || '/');
         });
-
-        trigger.addEventListener('focusout', function(e) {
-            if (!dropdown.contains(e.relatedTarget)) {
-                trigger.setAttribute('aria-expanded', 'false');
-                panel && (panel.style.opacity = '0');
-                panel && (panel.style.visibility = 'hidden');
-                panel && (panel.style.pointerEvents = 'none');
-                panel && (panel.style.transform = 'translateX(-50%) translateY(-8px)');
-                chevron && (chevron.style.transform = '');
-            }
-        });
-    });
-
-    // Mobile menu hover states
-    var mobileLinks = document.querySelectorAll('#mobile-menu-panel a');
-    mobileLinks.forEach(function(link) {
-        link.addEventListener('mouseenter', function() {
-            link.style.background = '#1E242C';
-            link.style.color = '#2E7A8F';
-        });
-        link.addEventListener('mouseleave', function() {
-            link.style.background = '';
-            // Keep teal on CTA items
-            var isCta = link.closest('[style*="rgba(27,75,90"]') || link.classList.contains('nav-cta');
-            link.style.color = isCta ? '' : '#8896AB';
-        });
-    });
-})();
+    })();
 </script>

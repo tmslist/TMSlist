@@ -4,7 +4,7 @@ description: "Transcranial magnetic stimulation offers a non-invasive approach t
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
-image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=630&fit=crop"
+image: "/images/blog-covers/tms-for-fibromyalgia.svg"
 tags: ["tms", "fibromyalgia", "chronic-pain", "brain-stimulation"]
 ---
 
@@ -69,35 +69,35 @@ While TMS is not yet FDA-cleared specifically for fibromyalgia, the evidence bas
 
 For fibromyalgia patients who have exhausted conventional treatment options, TMS represents a scientifically grounded, non-invasive therapy that addresses the neurological roots of their pain. As research continues to clarify which patients benefit most and which protocols are most effective, TMS is poised to become a standard component of fibromyalgia treatment programs.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for fibromyalgia?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for fibromyalgia?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">TMS is not yet FDA-cleared specifically for fibromyalgia. However, the evidence base is growing rapidly. Multiple randomized controlled trials have shown significant pain reduction compared to sham treatment, and several clinical trials are currently underway to refine protocols and establish clear clinical guidelines.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS is not yet FDA-cleared specifically for fibromyalgia. However, the evidence base is growing rapidly. Multiple randomized controlled trials have shown significant pain reduction compared to sham treatment, and several clinical trials are currently underway to refine protocols and establish clear clinical guidelines.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How much pain reduction can fibromyalgia patients expect from TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How much pain reduction can fibromyalgia patients expect from TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Studies have found approximately 40-60% of fibromyalgia patients experience meaningful pain relief from TMS. A study in The Clinical Journal of Pain found that patients receiving 10 sessions of high-frequency TMS to the M1 region reported an average 30% reduction in pain scores. Improvements were also observed in sleep quality and fatigue.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Studies have found approximately 40-60% of fibromyalgia patients experience meaningful pain relief from TMS. A study in The Clinical Journal of Pain found that patients receiving 10 sessions of high-frequency TMS to the M1 region reported an average 30% reduction in pain scores. Improvements were also observed in sleep quality and fatigue.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Which TMS target is better for fibromyalgia, M1 or DLPFC?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Which TMS target is better for fibromyalgia, M1 or DLPFC?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Both targets have evidence. High-frequency TMS to the motor cortex (M1) targets pain-processing regions directly and activates descending pain-inhibitory pathways. DLPFC stimulation addresses the affective-motivational component of pain while treating comorbid depression and anxiety. Some protocols combine both targets. Your clinician will determine the best approach based on your specific presentation.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Both targets have evidence. High-frequency TMS to the motor cortex (M1) targets pain-processing regions directly and activates descending pain-inhibitory pathways. DLPFC stimulation addresses the affective-motivational component of pain while treating comorbid depression and anxiety. Some protocols combine both targets. Your clinician will determine the best approach based on your specific presentation.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

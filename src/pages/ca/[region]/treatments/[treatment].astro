@@ -1,0 +1,18 @@
+---
+export const prerender = false;
+import RegionTreatmentPage from "../../../../components/RegionTreatmentPage.astro";
+
+Astro.response.headers.set(
+    "Cache-Control",
+    "public, max-age=300, s-maxage=86400, stale-while-revalidate=604800",
+);
+
+const { region, treatment } = Astro.params;
+---
+<RegionTreatmentPage
+    countryCode="CA"
+    countryName="Canada"
+    countryUrlPrefix="ca"
+    regionSlug={region!}
+    treatmentSlug={treatment!}
+/>

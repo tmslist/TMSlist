@@ -8,22 +8,22 @@
     class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
 >
     <div
-        class="bg-white rounded-2xl max-w-md w-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] animate-fade-in-up"
+        class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] flex flex-col overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] animate-fade-in-up"
     >
         <!-- Header -->
         <div
-            class="dark-section bg-[#1B4B5A] p-6 rounded-t-2xl"
+            class="bg-[var(--ink)] p-6 rounded-t-2xl shrink-0"
         >
             <div class="flex items-start justify-between">
                 <div>
-                    <h2 class="text-2xl font-semibold mb-2">Free TMS Guide</h2>
-                    <p class="text-blue-100 text-sm">
+                    <h2 class="text-2xl font-semibold mb-2 text-white">Free TMS Guide</h2>
+                    <p class="text-white/80 text-sm">
                         Get instant access to our comprehensive guide
                     </p>
                 </div>
                 <button
                     id="close-lead-magnet"
-                    class="text-slate-600 hover:text-slate-900 transition-colors"
+                    class="text-white/80 hover:text-white transition-colors"
                 >
                     <svg
                         class="w-6 h-6"
@@ -42,14 +42,14 @@
         </div>
 
         <!-- Body -->
-        <div class="p-6">
+        <div class="p-6 overflow-y-auto flex-1 min-h-0">
             <div class="mb-6">
-                <h3 class="font-semibold text-gray-900 mb-3">
+                <h3 class="font-semibold text-[var(--ink)] mb-3">
                     Choose Your Free Resource:
                 </h3>
                 <div class="space-y-2">
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -59,17 +59,17 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 TMS Buyer's Guide
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Complete guide to choosing the right TMS
                                 provider
                             </div>
                         </div>
                     </label>
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -78,16 +78,16 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 TMS vs Medication Chart
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Side-by-side comparison to help you decide
                             </div>
                         </div>
                     </label>
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -96,16 +96,16 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 Insurance Coverage Checklist
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Step-by-step guide to getting TMS covered
                             </div>
                         </div>
                     </label>
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -114,16 +114,16 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 TMS Billing & CPT Codes 2026
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Complete billing guide with CPT codes & reimbursement strategies
                             </div>
                         </div>
                     </label>
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -132,16 +132,16 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 Patient Acquisition Playbook
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Proven strategies to fill your TMS schedule
                             </div>
                         </div>
                     </label>
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -150,16 +150,16 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 Prior Authorization Template Kit
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Ready-to-use templates to streamline insurance approvals
                             </div>
                         </div>
                     </label>
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -168,16 +168,16 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 TMS Clinic Business Plan
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Complete guide to starting a profitable TMS practice
                             </div>
                         </div>
                     </label>
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -186,16 +186,16 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 Patient Outcome Tracking System
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Measure and demonstrate TMS treatment results
                             </div>
                         </div>
                     </label>
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -204,16 +204,16 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 TMS Technician Training Checklist
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Comprehensive training guide for TMS technicians
                             </div>
                         </div>
                     </label>
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -222,16 +222,16 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 State Regulations Guide 2026
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Navigating TMS regulations across all 50 states
                             </div>
                         </div>
                     </label>
                     <label
-                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 cursor-pointer transition-colors"
+                        class="flex items-start gap-3 p-3 rounded-lg border-2 border-[var(--line)] hover:border-[rgba(10,22,40,0.2)] cursor-pointer transition-colors"
                     >
                         <input
                             type="radio"
@@ -240,10 +240,10 @@
                             class="mt-1"
                         />
                         <div>
-                            <div class="font-semibold text-gray-900">
+                            <div class="font-semibold text-[var(--ink)]">
                                 Building a TMS Referral Network
                             </div>
-                            <div class="text-sm text-gray-600">
+                            <div class="text-sm text-[var(--ink2)]">
                                 Strategies to build sustainable referral channels
                             </div>
                         </div>
@@ -255,7 +255,7 @@
             <form id="lead-magnet-form" class="space-y-4">
                 <div>
                     <label
-                        class="block text-sm font-semibold text-gray-700 mb-2"
+                        class="block text-sm font-semibold text-[var(--ink2)] mb-2"
                         >Full Name *</label
                     >
                     <input
@@ -263,12 +263,12 @@
                         name="name"
                         required
                         placeholder="John Doe"
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        class="w-full px-4 py-2.5 border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[rgba(10,22,40,0.2)]"
                     />
                 </div>
                 <div>
                     <label
-                        class="block text-sm font-semibold text-gray-700 mb-2"
+                        class="block text-sm font-semibold text-[var(--ink2)] mb-2"
                         >Email Address *</label
                     >
                     <input
@@ -276,11 +276,11 @@
                         name="email"
                         required
                         placeholder="john@example.com"
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        class="w-full px-4 py-2.5 border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] focus:border-[rgba(10,22,40,0.2)]"
                     />
                 </div>
                 <div>
-                    <label class="flex items-start gap-2 text-xs text-gray-600">
+                    <label class="flex items-start gap-2 text-xs text-[var(--ink2)]">
                         <input
                             type="checkbox"
                             name="subscribe"
@@ -295,14 +295,14 @@
                 </div>
                 <button
                     type="submit"
-                    class="dark-section w-full py-3 bg-[#1B4B5A] font-semibold rounded-lg hover:bg-[#143844] transition-all shadow-lg"
+                    class="w-full py-3 bg-[var(--ink)] text-white font-semibold rounded-lg hover:bg-[var(--ink2)] transition-all shadow-lg"
                 >
                     Download Free Guide ->
                 </button>
-                <p class="text-xs text-gray-500 text-center">
+                <p class="text-xs text-[var(--muted)] text-center">
                     We respect your privacy. View our <a
                         href="/legal/privacy-policy/"
-                        class="text-blue-600 hover:underline">Privacy Policy</a
+                        class="text-[var(--accent)] hover:underline">Privacy Policy</a
                     >
                 </p>
             </form>
@@ -316,8 +316,15 @@
     const closeBtn = document.getElementById("close-lead-magnet");
     const form = document.getElementById("lead-magnet-form") as HTMLFormElement;
 
-    // Open modal on event
-    document.addEventListener("open-lead-magnet", () => {
+    // Open modal on event. Optional event.detail.slug preselects a magnet radio.
+    document.addEventListener("open-lead-magnet", (e: Event) => {
+        const detail = (e as CustomEvent).detail as { slug?: string } | undefined;
+        if (detail?.slug) {
+            const radio = modal?.querySelector(
+                `input[name="lead-magnet"][value="${detail.slug}"]`
+            ) as HTMLInputElement | null;
+            if (radio) radio.checked = true;
+        }
         modal?.classList.remove("hidden");
         document.body.style.overflow = "hidden";
     });
@@ -422,10 +429,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Success!</h3>
-                    <p class="text-gray-600 mb-6">Your <strong>${resourceName}</strong> is downloading now.</p>
-                    <p class="text-sm text-gray-500">Check your email for more helpful TMS resources.</p>
-                    <button onclick="closeModal()" class="mt-6 px-6 py-2 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors">
+                    <h3 class="text-xl font-semibold text-[var(--ink)] mb-2">Success!</h3>
+                    <p class="text-[var(--ink2)] mb-6">Your <strong>${resourceName}</strong> is downloading now.</p>
+                    <p class="text-sm text-[var(--muted)]">Check your email for more helpful TMS resources.</p>
+                    <button onclick="closeModal()" class="mt-6 px-6 py-2 bg-[var(--paper2)] text-[var(--ink2)] font-semibold rounded-lg hover:bg-[var(--paper2)] transition-colors">
                         Close Window
                     </button>
                 </div>

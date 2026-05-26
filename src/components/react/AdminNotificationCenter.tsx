@@ -33,8 +33,8 @@ const MAX_BODY = 120;
 function TitleCount({ count }: { count: number }) {
   return (
     <div className="flex items-center gap-2 mb-1">
-      <span className="text-xs font-medium text-gray-600">Title</span>
-      <span className={`text-[11px] ${count > MAX_TITLE ? 'text-red-500' : 'text-gray-400'}`}>
+      <span className="text-xs font-medium text-[var(--ink2)]">Title</span>
+      <span className={`text-[11px] ${count > MAX_TITLE ? 'text-red-500' : 'text-[var(--muted)]'}`}>
         {count}/{MAX_TITLE}
       </span>
     </div>
@@ -44,8 +44,8 @@ function TitleCount({ count }: { count: number }) {
 function BodyCount({ count }: { count: number }) {
   return (
     <div className="flex items-center gap-2 mb-1">
-      <span className="text-xs font-medium text-gray-600">Message</span>
-      <span className={`text-[11px] ${count > MAX_BODY ? 'text-red-500' : 'text-gray-400'}`}>
+      <span className="text-xs font-medium text-[var(--ink2)]">Message</span>
+      <span className={`text-[11px] ${count > MAX_BODY ? 'text-red-500' : 'text-[var(--muted)]'}`}>
         {count}/{MAX_BODY}
       </span>
     </div>
@@ -185,12 +185,12 @@ export default function AdminNotificationCenter() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Push Notifications</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Send and schedule notifications</p>
+          <h2 className="text-xl font-semibold text-[var(--ink)]">Push Notifications</h2>
+          <p className="text-sm text-[var(--muted)] mt-0.5">Send and schedule notifications</p>
         </div>
         <button
           onClick={startNew}
-          className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors"
+          className="px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors"
         >
           + New Notification
         </button>
@@ -199,29 +199,29 @@ export default function AdminNotificationCenter() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         {[
-          { label: 'Total', value: stats.total, color: 'text-gray-900' },
-          { label: 'Scheduled', value: stats.scheduled, color: 'text-blue-600' },
+          { label: 'Total', value: stats.total, color: 'text-[var(--ink)]' },
+          { label: 'Scheduled', value: stats.scheduled, color: 'text-[var(--ink)]' },
           { label: 'Sent', value: stats.sent, color: 'text-emerald-600' },
-          { label: 'Opens', value: stats.totalOpens, color: 'text-indigo-600' },
+          { label: 'Opens', value: stats.totalOpens, color: 'text-[var(--warm)]' },
           { label: 'Clicks', value: stats.totalClicks, color: 'text-amber-600' },
         ].map((s) => (
-          <div key={s.label} className="bg-white rounded-xl border border-gray-200 px-4 py-3 text-center">
+          <div key={s.label} className="bg-white rounded-xl border border-[var(--line)] px-4 py-3 text-center">
             <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
-            <p className="text-xs text-gray-500 mt-0.5">{s.label}</p>
+            <p className="text-xs text-[var(--muted)] mt-0.5">{s.label}</p>
           </div>
         ))}
       </div>
 
       {/* Compose form */}
       {showForm && (
-        <div className="bg-white rounded-xl border border-violet-200 shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between px-6 py-4 bg-violet-50 border-b border-violet-200">
-            <span className="text-sm font-semibold text-violet-700">
+        <div className="bg-white rounded-xl border border-[rgba(10,22,40,0.15)] shadow-sm overflow-hidden">
+          <div className="flex items-center justify-between px-6 py-4 bg-[rgba(10,22,40,0.08)] border-b border-[rgba(10,22,40,0.15)]">
+            <span className="text-sm font-semibold text-[var(--ink)]">
               {editing?.id ? 'Edit Notification' : 'Compose Notification'}
             </span>
             <button
               onClick={() => { setShowForm(false); setEditing(null); }}
-              className="text-violet-400 hover:text-violet-600"
+              className="text-[var(--ink2)] hover:text-[var(--ink)]"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -235,7 +235,7 @@ export default function AdminNotificationCenter() {
                 type="text"
                 value={draft.title}
                 onChange={(e) => setDraft((v) => ({ ...v, title: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+                className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
                 placeholder="Notification title..."
                 maxLength={MAX_TITLE + 20}
               />
@@ -246,17 +246,17 @@ export default function AdminNotificationCenter() {
                 value={draft.body}
                 onChange={(e) => setDraft((v) => ({ ...v, body: e.target.value }))}
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200 resize-y"
+                className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)] resize-y"
                 placeholder="Notification message..."
                 maxLength={MAX_BODY + 40}
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Segment</label>
+              <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Segment</label>
               <select
                 value={draft.segment}
                 onChange={(e) => setDraft((v) => ({ ...v, segment: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500 focus:ring-1 focus:ring-violet-200"
+                className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
               >
                 {SEGMENT_OPTIONS.map((s) => (
                   <option key={s.key} value={s.key}>{s.label}</option>
@@ -264,7 +264,7 @@ export default function AdminNotificationCenter() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Delivery</label>
+              <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Delivery</label>
               <div className="flex gap-3">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -272,9 +272,9 @@ export default function AdminNotificationCenter() {
                     name="scheduleType"
                     checked={draft.scheduleType === 'now'}
                     onChange={() => setDraft((v) => ({ ...v, scheduleType: 'now' }))}
-                    className="w-4 h-4 text-violet-600"
+                    className="w-4 h-4 text-[var(--ink)]"
                   />
-                  <span className="text-sm text-gray-700">Send Now</span>
+                  <span className="text-sm text-[var(--ink2)]">Send Now</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -282,9 +282,9 @@ export default function AdminNotificationCenter() {
                     name="scheduleType"
                     checked={draft.scheduleType === 'scheduled'}
                     onChange={() => setDraft((v) => ({ ...v, scheduleType: 'scheduled' }))}
-                    className="w-4 h-4 text-violet-600"
+                    className="w-4 h-4 text-[var(--ink)]"
                   />
-                  <span className="text-sm text-gray-700">Schedule</span>
+                  <span className="text-sm text-[var(--ink2)]">Schedule</span>
                 </label>
               </div>
               {draft.scheduleType === 'scheduled' && (
@@ -293,29 +293,29 @@ export default function AdminNotificationCenter() {
                     type="date"
                     value={draft.scheduleDate}
                     onChange={(e) => setDraft((v) => ({ ...v, scheduleDate: e.target.value }))}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500"
+                    className="flex-1 px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)]"
                   />
                   <input
                     type="time"
                     value={draft.scheduleTime}
                     onChange={(e) => setDraft((v) => ({ ...v, scheduleTime: e.target.value }))}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-violet-500"
+                    className="flex-1 px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)]"
                   />
                 </div>
               )}
             </div>
           </div>
-          <div className="flex justify-end gap-3 px-6 py-4 bg-gray-50 border-t border-gray-100">
+          <div className="flex justify-end gap-3 px-6 py-4 bg-[var(--paper2)] border-t border-[var(--line)]">
             <button
               onClick={() => { setShowForm(false); setEditing(null); }}
-              className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors"
+              className="px-4 py-2 bg-[var(--paper2)] text-[var(--ink2)] text-sm font-medium rounded-lg hover:bg-[var(--paper2)] transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSend}
               disabled={sending}
-              className="px-5 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
+              className="px-5 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50"
             >
               {sending ? 'Sending...' : draft.scheduleType === 'scheduled' ? 'Schedule' : 'Send Now'}
             </button>
@@ -326,36 +326,36 @@ export default function AdminNotificationCenter() {
       {/* Notifications list */}
       {loading ? (
         <div className="text-center py-16">
-          <div className="inline-block w-5 h-5 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mb-2" />
-          <p className="text-gray-400 text-sm">Loading...</p>
+          <div className="inline-block w-5 h-5 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-2" />
+          <p className="text-[var(--muted)] text-sm">Loading...</p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-          <div className="divide-y divide-gray-100">
+        <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
+          <div className="divide-y divide-[var(--line)]">
             {notifications.length === 0 ? (
               <div className="py-12 text-center">
-                <p className="text-sm text-gray-400">No notifications yet</p>
-                <button onClick={startNew} className="mt-4 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors">
+                <p className="text-sm text-[var(--muted)]">No notifications yet</p>
+                <button onClick={startNew} className="mt-4 px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors">
                   + Create Notification
                 </button>
               </div>
             ) : notifications.map((n) => (
-              <div key={n.id} className="flex items-start gap-4 px-5 py-4 hover:bg-gray-50 transition-colors">
+              <div key={n.id} className="flex items-start gap-4 px-5 py-4 hover:bg-[var(--paper2)] transition-colors">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${
                       n.status === 'sent' ? 'bg-emerald-50 text-emerald-700' :
-                      n.status === 'scheduled' ? 'bg-blue-50 text-blue-700' :
-                      n.status === 'cancelled' ? 'bg-gray-100 text-gray-500' :
-                      'bg-gray-100 text-gray-600'
+                      n.status === 'scheduled' ? 'bg-[var(--paper2)] text-[var(--ink)]' :
+                      n.status === 'cancelled' ? 'bg-[var(--paper2)] text-[var(--muted)]' :
+                      'bg-[var(--paper2)] text-[var(--ink2)]'
                     }`}>{n.status}</span>
-                    <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-[10px] font-semibold rounded uppercase">
+                    <span className="px-2 py-0.5 bg-[var(--paper2)] text-[var(--ink2)] text-[10px] font-semibold rounded uppercase">
                       {n.segment}
                     </span>
                   </div>
-                  <h4 className="text-sm font-semibold text-gray-900">{n.title}</h4>
-                  <p className="text-xs text-gray-500 mt-0.5">{n.body}</p>
-                  <div className="flex items-center gap-4 mt-2 text-[11px] text-gray-400">
+                  <h4 className="text-sm font-semibold text-[var(--ink)]">{n.title}</h4>
+                  <p className="text-xs text-[var(--muted)] mt-0.5">{n.body}</p>
+                  <div className="flex items-center gap-4 mt-2 text-[11px] text-[var(--muted)]">
                     {n.scheduledAt && <span>Scheduled: {new Date(n.scheduledAt).toLocaleString()}</span>}
                     {n.sentAt && <span>Sent: {new Date(n.sentAt).toLocaleString()}</span>}
                     {n.status === 'sent' && (
@@ -377,7 +377,7 @@ export default function AdminNotificationCenter() {
                   )}
                   <button
                     onClick={() => startEdit(n)}
-                    className="px-3 py-1.5 bg-violet-50 text-violet-700 text-xs font-medium rounded-lg hover:bg-violet-100 transition-colors"
+                    className="px-3 py-1.5 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
                   >
                     Edit
                   </button>

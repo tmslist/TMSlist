@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-10
 category: research
 tags: ["meditation", "mindfulness", "combination", "brain states", "research"]
-image: "https://images.unsplash.com/photo-1508672019048-25c023756db7?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-and-meditation-mindfulness.svg"
 ---
 
 The neuroscience of meditation and TMS converge on overlapping brain networks. Both treatments modulate prefrontal cortex activity, both affect the default mode network, and both can shift functional connectivity patterns in lasting ways. It is perhaps not surprising that researchers have begun asking whether combining them enhances outcomes.
@@ -104,35 +104,35 @@ Even if the enhanced outcomes hypothesis proves partially wrong, the benefits of
 
 The brain you bring to TMS matters. The more activated, engaged, and plastic-ready your circuits are during stimulation, the better your outcomes are likely to be.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does combining meditation with TMS really improve outcomes?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does combining meditation with TMS really improve outcomes?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. A 2021 study published in Brain Stimulation randomized depression patients to TMS plus mindfulness meditation instruction vs. TMS plus neutral audio content during sessions. The mindfulness group showed significantly higher response rates (68% vs. 45%) and faster onset of improvement. Active mental engagement during stimulation appears to amplify the plastic effect.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. A 2021 study published in Brain Stimulation randomized depression patients to TMS plus mindfulness meditation instruction vs. TMS plus neutral audio content during sessions. The mindfulness group showed significantly higher response rates (68% vs. 45%) and faster onset of improvement. Active mental engagement during stimulation appears to amplify the plastic effect.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Do I need to be an experienced meditator to benefit from TMS plus meditation?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Do I need to be an experienced meditator to benefit from TMS plus meditation?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. Even novice meditators show relevant brain activation patterns. A few sessions with a meditation app or YouTube-guided mindfulness session before starting TMS will give you the tools you need. You do not need to be an experienced meditator to benefit from the combination approach.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. Even novice meditators show relevant brain activation patterns. A few sessions with a meditation app or YouTube-guided mindfulness session before starting TMS will give you the tools you need. You do not need to be an experienced meditator to benefit from the combination approach.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What should I do during TMS sessions if I want to meditate?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What should I do during TMS sessions if I want to meditate?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">With your eyes closed and the coil positioned, focus your attention on the sensations in your forehead where stimulation occurs. Practice non-judgmental awareness -- noticing thoughts that arise without engaging with them. Gently redirect attention back to the present moment when it wanders. Maintain this practice for the duration of the session. Even light mindfulness awareness is sufficient if sustained attention feels stressful.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">With your eyes closed and the coil positioned, focus your attention on the sensations in your forehead where stimulation occurs. Practice non-judgmental awareness -- noticing thoughts that arise without engaging with them. Gently redirect attention back to the present moment when it wanders. Maintain this practice for the duration of the session. Even light mindfulness awareness is sufficient if sustained attention feels stressful.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

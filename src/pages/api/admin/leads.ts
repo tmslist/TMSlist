@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getLeads, getLeadStats, updateLeadStatus, deleteLeads } from '../../../db/queries';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 

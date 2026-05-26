@@ -21,9 +21,9 @@ const STATUS_TABS = [
 
 function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-700',
+    draft: 'bg-[var(--paper2)] text-[var(--ink2)]',
     published: 'bg-emerald-50 text-emerald-700',
-    scheduled: 'bg-blue-50 text-blue-700',
+    scheduled: 'bg-[var(--paper2)] text-[var(--ink)]',
   };
   return (
     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${styles[status] || styles.draft}`}>
@@ -104,12 +104,12 @@ export default function AdminBlog() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Blog Posts</h1>
-          <p className="text-gray-500 mt-1">Create and manage blog content</p>
+          <h1 className="text-2xl font-semibold text-[var(--ink)]">Blog Posts</h1>
+          <p className="text-[var(--muted)] mt-1">Create and manage blog content</p>
         </div>
         <a
           href="/admin/blog/new"
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors shadow-sm"
+          className="inline-flex items-center gap-2 px-4 py-2.5 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink)] transition-colors shadow-sm"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -119,10 +119,10 @@ export default function AdminBlog() {
       </div>
 
       {/* Search and filters */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm mb-6">
-        <div className="p-4 border-b border-gray-100">
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm mb-6">
+        <div className="p-4 border-b border-[var(--line)]">
           <div className="relative">
-            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input
@@ -130,7 +130,7 @@ export default function AdminBlog() {
               placeholder="Search posts by title, excerpt, or author..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(0); }}
-              className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none"
+              className="w-full pl-10 pr-4 py-2.5 text-sm border border-[var(--line)] rounded-lg focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] outline-none"
             />
           </div>
         </div>
@@ -143,8 +143,8 @@ export default function AdminBlog() {
               onClick={() => { setStatusFilter(tab.key); setPage(0); }}
               className={`px-4 py-2 text-sm font-medium rounded-t-lg border-b-2 transition-colors whitespace-nowrap ${
                 statusFilter === tab.key
-                  ? 'border-violet-600 text-violet-700 bg-violet-50/50'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                  ? 'border-[var(--ink)] text-[var(--ink)] bg-[rgba(10,22,40,0.08)]/50'
+                  : 'border-transparent text-[var(--muted)] hover:text-[var(--ink2)] hover:bg-[var(--paper2)]'
               }`}
             >
               {tab.label}
@@ -154,10 +154,10 @@ export default function AdminBlog() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <div className="w-6 h-6 border-2 border-violet-600 border-t-transparent rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-[var(--ink)] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : error ? (
           <div className="text-center py-16">
@@ -165,58 +165,58 @@ export default function AdminBlog() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
             <p className="text-red-600 font-medium">{error}</p>
-            <button onClick={fetchPosts} className="text-violet-600 hover:text-violet-700 text-sm font-medium mt-2 inline-block">
+            <button onClick={fetchPosts} className="text-[var(--ink)] hover:text-[var(--ink)] text-sm font-medium mt-2 inline-block">
               Try again
             </button>
           </div>
         ) : posts.length === 0 ? (
           <div className="text-center py-16">
-            <svg className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-12 h-12 text-[var(--line)] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
             </svg>
-            <p className="text-gray-500">No posts found</p>
-            <a href="/admin/blog/new" className="text-violet-600 hover:text-violet-700 text-sm font-medium mt-2 inline-block">
+            <p className="text-[var(--muted)]">No posts found</p>
+            <a href="/admin/blog/new" className="text-[var(--ink)] hover:text-[var(--ink)] text-sm font-medium mt-2 inline-block">
               Create your first post
             </a>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-[var(--line)]">
+              <thead className="bg-[var(--paper2)]">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Category</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Author</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">Date</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Title</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider hidden md:table-cell">Category</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider hidden lg:table-cell">Author</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[var(--muted)] uppercase tracking-wider hidden sm:table-cell">Date</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-[var(--line)]">
                 {posts.map(post => (
-                  <tr key={post.id} className="hover:bg-gray-50 transition-colors">
+                  <tr key={post.id} className="hover:bg-[var(--paper2)] transition-colors">
                     <td className="px-6 py-4">
                       <a
                         href={`/admin/blog/${post.id}`}
-                        className="text-sm font-medium text-gray-900 hover:text-violet-600 transition-colors line-clamp-1"
+                        className="text-sm font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors line-clamp-1"
                       >
                         {post.title}
                       </a>
                       {post.excerpt && (
-                        <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{post.excerpt}</p>
+                        <p className="text-xs text-[var(--muted)] mt-0.5 line-clamp-1">{post.excerpt}</p>
                       )}
                     </td>
                     <td className="px-6 py-4">
                       <StatusBadge status={post.status} />
                     </td>
                     <td className="px-6 py-4 hidden md:table-cell">
-                      <span className="text-sm text-gray-600">{post.category || '--'}</span>
+                      <span className="text-sm text-[var(--ink2)]">{post.category || '--'}</span>
                     </td>
                     <td className="px-6 py-4 hidden lg:table-cell">
-                      <span className="text-sm text-gray-600">{post.author}</span>
+                      <span className="text-sm text-[var(--ink2)]">{post.author}</span>
                     </td>
                     <td className="px-6 py-4 hidden sm:table-cell">
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-[var(--muted)]">
                         {formatDate(post.status === 'published' ? post.publishedAt : post.updatedAt)}
                       </span>
                     </td>
@@ -224,7 +224,7 @@ export default function AdminBlog() {
                       <div className="flex items-center justify-end gap-2">
                         <a
                           href={`/admin/blog/${post.id}`}
-                          className="p-1.5 text-gray-400 hover:text-violet-600 transition-colors rounded-lg hover:bg-violet-50"
+                          className="p-1.5 text-[var(--muted)] hover:text-[var(--ink)] transition-colors rounded-lg hover:bg-[rgba(10,22,40,0.08)]"
                           title="Edit"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -236,7 +236,7 @@ export default function AdminBlog() {
                             href={`/blog/${post.slug}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-1.5 text-gray-400 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50"
+                            className="p-1.5 text-[var(--muted)] hover:text-[var(--ink)] transition-colors rounded-lg hover:bg-[var(--paper2)]"
                             title="View"
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -247,7 +247,7 @@ export default function AdminBlog() {
                         <button
                           onClick={() => handleDelete(post.id, post.title)}
                           disabled={deleting === post.id}
-                          className="p-1.5 text-gray-400 hover:text-red-600 transition-colors rounded-lg hover:bg-red-50 disabled:opacity-50"
+                          className="p-1.5 text-[var(--muted)] hover:text-red-600 transition-colors rounded-lg hover:bg-red-50 disabled:opacity-50"
                           title="Delete"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -265,22 +265,22 @@ export default function AdminBlog() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
-            <p className="text-sm text-gray-500">
+          <div className="px-6 py-4 border-t border-[var(--line)] flex items-center justify-between">
+            <p className="text-sm text-[var(--muted)]">
               Showing {page * limit + 1}--{Math.min((page + 1) * limit, total)} of {total}
             </p>
             <div className="flex gap-2">
               <button
                 onClick={() => setPage(p => Math.max(0, p - 1))}
                 disabled={page === 0}
-                className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1.5 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Previous
               </button>
               <button
                 onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
                 disabled={page >= totalPages - 1}
-                className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1.5 text-sm font-medium text-[var(--ink2)] bg-white border border-[var(--line)] rounded-lg hover:bg-[var(--paper2)] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Next
               </button>

@@ -26,13 +26,13 @@ faqs:
     <div class="text-2xl font-bold text-emerald-700 font-display">70%+</div>
     <div class="text-xs text-emerald-600 mt-1">Response rate in trials</div>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-blue-700 font-display">1-2</div>
-    <div class="text-xs text-blue-600 mt-1">Dosing sessions</div>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--ink)] font-display">1-2</div>
+    <div class="text-xs text-[var(--ink)] mt-1">Dosing sessions</div>
   </div>
-  <div class="bg-rose-50 border border-rose-100 rounded-xl p-5 text-center">
-    <div class="text-2xl font-bold text-rose-700 font-display">6-8 hrs</div>
-    <div class="text-xs text-rose-600 mt-1">Per guided session</div>
+  <div class="bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-xl p-5 text-center">
+    <div class="text-2xl font-bold text-[var(--warm)] font-display">6-8 hrs</div>
+    <div class="text-xs text-[var(--warm)] mt-1">Per guided session</div>
   </div>
 </div>
 
@@ -42,10 +42,10 @@ Psilocybin is the psychoactive compound in "magic mushrooms." In clinical settin
 
 The results from clinical trials have been extraordinary. A landmark 2022 study in the New England Journal of Medicine showed that psilocybin therapy produced **response rates of 70%+ and remission rates above 50%** in treatment-resistant depression — in just two sessions. These are among the highest efficacy numbers ever recorded for any depression treatment.
 
-<div class="not-prose my-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
-  <h4 class="font-display font-bold text-slate-900 mb-3 text-base">How psilocybin works in the brain</h4>
-  <p class="text-sm text-slate-600 leading-relaxed mb-3">Psilocybin activates <strong>5-HT2A serotonin receptors</strong>, triggering massive increases in neural connectivity — parts of the brain that don't normally communicate begin exchanging information. The Default Mode Network (DMN), which is hyperactive in depression and responsible for rumination, temporarily quiets.</p>
-  <p class="text-sm text-slate-600 leading-relaxed mb-0">This creates a window of extreme neuroplasticity — the brain becomes temporarily more flexible and open to new patterns of thinking. Combined with skilled therapy, this window allows patients to process trauma, break rumination cycles, and develop new perspectives on their lives.</p>
+<div class="not-prose my-8 bg-[var(--paper2)] border border-[var(--line)] rounded-2xl p-6">
+  <h4 class="font-display font-bold text-[var(--ink)] mb-3 text-base">How psilocybin works in the brain</h4>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-3">Psilocybin activates <strong>5-HT2A serotonin receptors</strong>, triggering massive increases in neural connectivity — parts of the brain that don't normally communicate begin exchanging information. The Default Mode Network (DMN), which is hyperactive in depression and responsible for rumination, temporarily quiets.</p>
+  <p class="text-sm text-[var(--ink2)] leading-relaxed mb-0">This creates a window of extreme neuroplasticity — the brain becomes temporarily more flexible and open to new patterns of thinking. Combined with skilled therapy, this window allows patients to process trauma, break rumination cycles, and develop new perspectives on their lives.</p>
 </div>
 
 ---
@@ -57,9 +57,9 @@ The results from clinical trials have been extraordinary. A landmark 2022 study 
     <h4 class="font-semibold text-emerald-900 text-sm mb-2">Oregon</h4>
     <p class="text-xs text-emerald-700 mb-0">Legal through regulated psilocybin service centers since January 2023. Licensed facilitators guide sessions. No prescription needed.</p>
   </div>
-  <div class="bg-blue-50 border border-blue-100 rounded-xl p-5">
-    <h4 class="font-semibold text-blue-900 text-sm mb-2">Colorado</h4>
-    <p class="text-xs text-blue-700 mb-0">Natural Medicine Health Act (2022) is building a regulated framework. Healing centers expected to open 2024-2025.</p>
+  <div class="bg-[var(--paper2)] border border-[var(--line)] rounded-xl p-5">
+    <h4 class="font-semibold text-[var(--ink)] text-sm mb-2">Colorado</h4>
+    <p class="text-xs text-[var(--ink)] mb-0">Natural Medicine Health Act (2022) is building a regulated framework. Healing centers expected to open 2024-2025.</p>
   </div>
   <div class="bg-amber-50 border border-amber-100 rounded-xl p-5">
     <h4 class="font-semibold text-amber-900 text-sm mb-2">FDA Track</h4>
@@ -72,22 +72,22 @@ The results from clinical trials have been extraordinary. A landmark 2022 study 
 ## Psilocybin vs. TMS
 
 <div class="not-prose my-8">
-<table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+<table class="w-full text-sm border border-[var(--line)] rounded-xl overflow-hidden">
   <thead>
-    <tr class="bg-slate-800 text-white">
+    <tr class="bg-[var(--ink2)] text-white">
       <th class="px-4 py-3 text-left font-semibold">Factor</th>
       <th class="px-4 py-3 text-center font-semibold">Psilocybin</th>
       <th class="px-4 py-3 text-center font-semibold">TMS</th>
     </tr>
   </thead>
-  <tbody class="divide-y divide-slate-200">
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">FDA Status</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Not approved (Breakthrough)</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">FDA Cleared (2008)</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Sessions</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">1-2 dosing sessions</span></td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">30-36 sessions</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Response Rate</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">70%+ (trials)</span></td><td class="px-4 py-3 text-center"><span class="text-blue-600 font-semibold">50-60%</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Availability</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Oregon only + trials</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Nationwide, 1000s of clinics</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Insurance</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Not covered</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Widely covered</span></td></tr>
-    <tr class="bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900">Psychosis Risk</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Contraindicated</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Low risk</span></td></tr>
-    <tr class="bg-white"><td class="px-4 py-3 font-medium text-slate-900">Experience</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Intense psychedelic (6-8 hrs)</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Mild scalp tapping (20 min)</span></td></tr>
+  <tbody class="divide-y divide-[var(--line)]">
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">FDA Status</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Not approved (Breakthrough)</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">FDA Cleared (2008)</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Sessions</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">1-2 dosing sessions</span></td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">30-36 sessions</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Response Rate</td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">70%+ (trials)</span></td><td class="px-4 py-3 text-center"><span class="text-[var(--ink)] font-semibold">50-60%</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Availability</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Oregon only + trials</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Nationwide, 1000s of clinics</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Insurance</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Not covered</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Widely covered</span></td></tr>
+    <tr class="bg-[var(--paper2)]"><td class="px-4 py-3 font-medium text-[var(--ink)]">Psychosis Risk</td><td class="px-4 py-3 text-center"><span class="text-red-500 font-semibold">Contraindicated</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Low risk</span></td></tr>
+    <tr class="bg-white"><td class="px-4 py-3 font-medium text-[var(--ink)]">Experience</td><td class="px-4 py-3 text-center"><span class="text-amber-500 font-semibold">Intense psychedelic (6-8 hrs)</span></td><td class="px-4 py-3 text-center"><span class="text-emerald-600 font-semibold">Mild scalp tapping (20 min)</span></td></tr>
   </tbody>
 </table>
 </div>

@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-21
 category: patient-guide
 tags: ["older adults", "geriatric", "aging", "late-life depression", "seniors"]
-image: "https://images.unsplash.com/photo-1445510450877-1e4e5e8c7a4a?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-older-adults-geriatric-depression.svg"
 ---
 
 Depression in older adults is a significant public health issue that receives insufficient attention. Approximately 15-20% of adults over 65 experience clinically significant depression, but the condition is frequently underdiagnosed, undertreated, or dismissed as a normal part of aging. It is not.

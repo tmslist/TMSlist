@@ -1,9 +1,9 @@
 import type { APIRoute } from 'astro';
-import { getForumComments, createForumComment, getForumPostById, getForumPostBySlug, getForumAuthorInfo } from '../../../../../db/forumQueries';
-import { forumCommentSchema } from '../../../../../db/validation';
-import { getSessionFromRequest } from '../../../../../utils/auth';
-import { strictRateLimit } from '../../../../../utils/rateLimit';
-import { sendForumReplyNotification } from '../../../../../utils/email';
+import { getForumComments, createForumComment, getForumPostById, getForumPostBySlug, getForumAuthorInfo } from '../../../../../db/forumQueries.js';
+import { forumCommentSchema } from '../../../../../db/validation.js';
+import { getSessionFromRequest } from '../../../../../utils/auth.js';
+import { strictRateLimit } from '../../../../../utils/rateLimit.js';
+import { sendForumReplyNotification } from '../../../../../utils/email.js';
 import { db } from '../../../../../db';
 import { users, forumPosts, forumCategories } from '../../../../../db/schema';
 import { eq } from 'drizzle-orm';

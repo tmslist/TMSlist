@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-03-28
 category: treatment
 tags: ["driving", "side effects", "daily life", "what to expect"]
-image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=400&fit=crop"
+image: "/images/blog-covers/can-i-drive-after-tms.svg"
 ---
 
 Yes, you can drive after TMS therapy. You can drive yourself to the appointment, drive yourself home, and go straight to work or wherever else you need to be. No sedation, no anesthesia, no mandatory recovery period.
@@ -68,9 +68,9 @@ No one needs to come with you. No one needs to pick you up. You do not need to c
 
 If you experience a seizure during TMS, which is extraordinarily rare (roughly 1 in 30,000 sessions), you should not drive afterward and will need medical evaluation. But this is so uncommon that clinics do not build their protocols around it. It is mentioned for completeness, not as something to worry about.
 
-<div class="not-prose my-8 bg-violet-50 border border-violet-200 rounded-2xl p-6">
-  <h3 class="font-display font-bold text-violet-900 mb-3">Key Takeaways</h3>
-  <ul class="space-y-2 text-sm text-violet-800">
+<div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
+  <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
+  <ul class="space-y-2 text-sm text-[var(--warm)]">
     <li>Yes, you can drive yourself to and from every TMS session. No sedation, no impairment.</li>
     <li>TMS targets a focused brain area and causes no cognitive effects. It does not impair driving ability.</li>
     <li>Headache (in 30-40% of patients) is the most common side effect that could briefly affect driving.</li>
@@ -80,47 +80,47 @@ If you experience a seizure during TMS, which is extraordinarily rare (roughly 1
   </ul>
 </div>
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I drive myself home after TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I drive myself home after TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. TMS requires no sedation, no anesthesia, and causes no impairment. You can drive yourself to and from every session. You can go straight back to work if you want.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. TMS requires no sedation, no anesthesia, and causes no impairment. You can drive yourself to and from every session. You can go straight back to work if you want.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does TMS make you groggy or confused?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does TMS make you groggy or confused?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">No. TMS does not cause grogginess, confusion, or cognitive impairment. You are awake and alert the entire session. You stand up and walk out feeling normal. This is one of the major practical advantages of TMS over ECT.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS does not cause grogginess, confusion, or cognitive impairment. You are awake and alert the entire session. You stand up and walk out feeling normal. This is one of the major practical advantages of TMS over ECT.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">What if I get a headache after TMS? Can I still drive?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What if I get a headache after TMS? Can I still drive?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Mild headache is common in the first few sessions (30-40% of patients). It is usually not severe enough to affect driving. If you are particularly sensitive to headaches, you may want someone else to drive after your first session until you know how you respond. OTC pain relievers work well for TMS headaches.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Mild headache is common in the first few sessions (30-40% of patients). It is usually not severe enough to affect driving. If you are particularly sensitive to headaches, you may want someone else to drive after your first session until you know how you respond. OTC pain relievers work well for TMS headaches.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Can I go to work after TMS?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Can I go to work after TMS?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Yes. Most people go back to work immediately after TMS. There are no restrictions on activities. Many people schedule TMS before work or during lunch breaks.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Yes. Most people go back to work immediately after TMS. There are no restrictions on activities. Many people schedule TMS before work or during lunch breaks.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Is TMS safer than ECT for daily life?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS safer than ECT for daily life?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">They are different treatments for different situations. TMS does not require anesthesia, causes no memory loss, and allows you to drive yourself to every session. ECT is more effective for some severe cases but requires general anesthesia, causes temporary memory issues, and requires someone to drive you home after each session.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">They are different treatments for different situations. TMS does not require anesthesia, causes no memory loss, and allows you to drive yourself to every session. ECT is more effective for some severe cases but requires general anesthesia, causes temporary memory issues, and requires someone to drive you home after each session.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>

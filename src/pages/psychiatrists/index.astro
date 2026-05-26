@@ -1,0 +1,121 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import EditorialHero from '../../components/editorial/EditorialHero.astro';
+import EditorialSection from '../../components/editorial/EditorialSection.astro';
+import EditorialCard from '../../components/editorial/EditorialCard.astro';
+import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
+import { getAllClinics, STATE_NAMES } from '../../utils/clinicData';
+import { COUNTRY_NAMES, getStateSlug } from '../../utils/dataHelpers';
+import { filterDoctorsByType } from '../../utils/providerFilter';
+import { getVisitorCountry } from '../../utils/visitorCountry';
+
+const VISITOR_COUNTRY = getVisitorCountry(Astro.cookies, Astro.url);
+const visitorCountryName = COUNTRY_NAMES[VISITOR_COUNTRY] || 'United States';
+
+const clinics = await getAllClinics();
+const matchVisitor = (c: any) => VISITOR_COUNTRY === 'US' ? (!c.country || c.country === 'US') : c.country === VISITOR_COUNTRY;
+const scoped = clinics.filter(matchVisitor);
+const sourceClinics = scoped.length > 0 ? scoped : clinics.filter(c => !c.country || c.country === 'US');
+const allDoctors = sourceClinics.flatMap((c: any) => (c.doctors_data || []).map((d: any) => ({ ...d, clinic: c })));
+const psychiatrists = filterDoctorsByType(allDoctors, 'psychiatrists');
+
+const byState: Record<string, typeof psychiatrists> = {};
+psychiatrists.forEach(d => {
+  const state = d.clinic?.state;
+  if (state) {
+    if (!byState[state]) byState[state] = [];
+    byState[state].push(d);
+  }
+});
+const states = Object.keys(byState).sort();
+
+const regionLabel = VISITOR_COUNTRY === 'US' ? 'US states' : 'regions';
+const title = VISITOR_COUNTRY === 'US'
+  ? `Psychiatrists with TMS Therapy Training | Nationwide Directory`
+  : `Psychiatrists with TMS Therapy Training in ${visitorCountryName}`;
+const description = `Browse ${psychiatrists.length} board-certified psychiatrists offering TMS therapy across ${states.length} ${regionLabel}. Compare credentials and book a consultation.`;
+---
+
+<Layout title={title} description={description} breadcrumbs={[{ name: "Home", url: "/" }, { name: "Psychiatrists", url: "/psychiatrists/" }]}>
+
+<main style="background:var(--paper)">
+  <EditorialHero
+    eyebrow="TMS-Trained Providers"
+    eyebrowDot="#22c55e"
+    title="Psychiatrists who"
+    titleAccent="prescribe TMS."
+    description={`Browse ${psychiatrists.length} board-certified psychiatrists specializing in Transcranial Magnetic Stimulation across ${states.length} US states. Only psychiatrists can prescribe TMS therapy.`}
+    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Psychiatrists" }]}
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "Find a TMS Clinic", href: "/us/", variant: "outline" },
+    ]}
+    stats={[
+      { value: psychiatrists.length, label: "Psychiatrists", color: "ink" },
+      { value: states.length, label: "States", color: "accent" },
+      { value: "4.8+", label: "Avg Rating", color: "warm" },
+    ]}
+  />
+
+  <EditorialSection
+    title="Browse by State"
+    intro="Pick your state to see TMS-trained psychiatrists practicing nearby."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>'
+    tone="accent"
+  >
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {states.map(stateCode => {
+        const stateName = STATE_NAMES[stateCode] || stateCode;
+        const count = byState[stateCode].length;
+        return (
+          <EditorialCard
+            href={`/us/${getStateSlug(stateCode)}/psychiatrists/`}
+            tag={`${count} ${count === 1 ? 'Psychiatrist' : 'Psychiatrists'}`}
+            tagTone="accent"
+            title={stateName}
+            description={`Board-certified psychiatrists with TMS training, practicing in ${stateName}.`}
+            size="lg"
+          />
+        );
+      })}
+    </div>
+  </EditorialSection>
+
+  <EditorialSection
+    title="What Psychiatrists Do in TMS Treatment"
+    intro="Psychiatrists are the medical doctors who diagnose, prescribe, and oversee TMS therapy programs."
+    icon='<path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>'
+    tone="warm"
+    background="paper2"
+    noBorder
+  >
+    <div class="grid sm:grid-cols-3 gap-5">
+      <div style="background:var(--paper); border:1px solid var(--line); border-radius:1.5rem; padding:1.75rem;">
+        <h3 class="serif" style="font-size:1.25rem; color:var(--ink); margin:0 0 0.75rem;">Who Can Prescribe TMS</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.65; margin:0;">Only psychiatrists (and in some states, physicians with psychiatric training) can prescribe TMS therapy. Your psychiatrist conducts a comprehensive evaluation before treatment.</p>
+      </div>
+      <div style="background:var(--paper); border:1px solid var(--line); border-radius:1.5rem; padding:1.75rem;">
+        <h3 class="serif" style="font-size:1.25rem; color:var(--ink); margin:0 0 0.75rem;">Board Certification</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.65; margin:0;">Look for ABPN board-certified psychiatrists. Additional fellowship training in interventional psychiatry or neuromodulation indicates deep TMS expertise.</p>
+      </div>
+      <div style="background:var(--paper); border:1px solid var(--line); border-radius:1.5rem; padding:1.75rem;">
+        <h3 class="serif" style="font-size:1.25rem; color:var(--ink); margin:0 0 0.75rem;">Insurance & Referrals</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.65; margin:0;">Most insurance plans require a psychiatrist's referral before covering TMS. Many providers work directly with insurers and handle prior authorization.</p>
+      </div>
+    </div>
+  </EditorialSection>
+
+  <EditorialCTA
+    title="Find your TMS psychiatrist."
+    description="Connect with a board-certified psychiatrist who can evaluate your candidacy and oversee treatment."
+    ctas={[
+      { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
+      { label: "Browse All Specialists", href: "/specialists/", variant: "outline" },
+    ]}
+    stickyMobile
+  />
+</main>
+
+</Layout>

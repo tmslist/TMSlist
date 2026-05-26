@@ -5,7 +5,7 @@ author: "TMS List Editorial Team"
 publishDate: 2026-04-19
 category: patient-guide
 tags: ["graduate students", "academia", "mental health", "PhD students", "researchers"]
-image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-for-graduate-students-academia.svg"
 ---
 
 The graduate student mental health crisis has moved from whispers to front-page headlines. Studies consistently show that graduate students experience depression and anxiety at rates two to three times higher than the general population, and significantly higher than the general educated workforce. The pressures are specific, structural, and often misunderstood by those who have not lived them.

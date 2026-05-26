@@ -13,12 +13,12 @@ interface Props {
 const { stats } = Astro.props;
 
 const colorMap: Record<string, string> = {
-  violet: 'bg-[#1B4B5A]50 text-[#143844] border-[#1B4B5A]100',
+  violet: 'bg-[rgba(10,22,40,0.10)] text-[var(--ink)] border-[rgba(10,22,40,0.15)]',
   emerald: 'bg-emerald-50 text-emerald-700 border-emerald-100',
-  blue: 'bg-blue-50 text-blue-700 border-blue-100',
+  blue: 'bg-[var(--paper2)] text-[var(--accent)] border-[var(--line)]',
   amber: 'bg-amber-50 text-amber-700 border-amber-100',
-  cyan: 'bg-cyan-50 text-cyan-700 border-cyan-100',
-  rose: 'bg-rose-50 text-rose-700 border-rose-100',
+  cyan: 'bg-[var(--paper2)] text-[var(--accent)] border-[var(--line)]',
+  rose: 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)] border-[var(--line)]',
 };
 
 const iconPaths: Record<string, string> = {

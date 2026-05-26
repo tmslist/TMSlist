@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { eq, desc, sql } from 'drizzle-orm';
 import { db } from '../../../db';
 import { apiErrors, auditLog } from '../../../db/schema';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
@@ -35,7 +35,7 @@ export const GET: APIRoute = async ({ request }) => {
         lastSeenAt: apiErrors.lastSeenAt,
       })
       .from(apiErrors)
-      .where(sql`${apiErrors.lastSeenAt} >= ${since}`)
+      .where(sql`${apiErrors.lastSeenAt} >= ${since.toISOString()}`)
       .orderBy(desc(apiErrors.count));
 
     const total = errors.reduce((acc, e) => acc + Number(e.count), 0);

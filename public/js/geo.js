@@ -92,6 +92,34 @@
     // Run detection once and cache
     var detected = detectCountry();
 
+    // ── First-load cookie sync ──
+    // If timezone detected a non-US country but no x-country cookie exists yet
+    // (typical on localhost / non-Vercel hosts where the middleware can't set
+    // it from a header), persist the cookie and reload ONCE so SSR pages
+    // re-render with the visitor's actual country instead of the US default.
+    // sessionStorage guards against loops if reload doesn't take effect.
+    function hasCountryCookie() {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            if (cookies[i].trim().startsWith('x-country=')) return true;
+        }
+        return false;
+    }
+    try {
+        var alreadySynced = sessionStorage.getItem('tms_geo_synced') === '1';
+        if (!alreadySynced && detected && !hasCountryCookie()) {
+            // Persist for SSR
+            document.cookie = 'x-country=' + detected + '; path=/; max-age=' + (60 * 60 * 24 * 365) + '; SameSite=Lax';
+            sessionStorage.setItem('tms_geo_synced', '1');
+            // Only reload if we actually changed the effective country (non-US default)
+            // and we're on a page whose content depends on the cookie.
+            if (detected !== 'US') {
+                location.reload();
+                return;
+            }
+        }
+    } catch (e) { /* sessionStorage blocked — fall through to client-side toggling */ }
+
     // Update all links with href="/us/" to point to the detected country
     function updateGeoLinks() {
         if (COUNTRY_URLS[detected] && detected !== 'US') {
@@ -108,6 +136,17 @@
         // 1. Toggle featured clinics by country
         document.querySelectorAll('[data-clinic-country]').forEach(function(el) {
             if (el.getAttribute('data-clinic-country') === country) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        });
+
+        // 1b. Toggle generic [data-country] elements (footer locations, directory blocks, etc.).
+        // Use a CSS-attribute selector that excludes the more specific [data-clinic-country]
+        // and [data-quick-links-country] attributes so we don't double-toggle them here.
+        document.querySelectorAll('[data-country]:not([data-clinic-country]):not([data-quick-links-country])').forEach(function(el) {
+            if (el.getAttribute('data-country') === country) {
                 el.classList.remove('hidden');
             } else {
                 el.classList.add('hidden');

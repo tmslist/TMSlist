@@ -19,21 +19,37 @@ import posthog from 'posthog-js';
 const KEY = import.meta.env.PUBLIC_POSTHOG_KEY || '';
 const HOST = import.meta.env.PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com';
 
+let initialized = false;
+
+function initPostHog() {
+  if (initialized || !KEY) return;
+  initialized = true;
+  posthog.init(KEY, {
+    api_host: HOST,
+    person_profiles: 'identified_only',
+    capture_pageview: true,
+    session_recording: {
+      maskAllInputs: true,
+      blockClass: 'ph-no-capture',
+    },
+  });
+}
+
 export default function PostHogLoader() {
   useEffect(() => {
     if (!KEY) return;
-    // Don't capture dev traffic
     if (import.meta.env.DEV) return;
 
-    posthog.init(KEY, {
-      api_host: HOST,
-      person_profiles: 'identified_only',
-      capture_pageview: true,
-      session_recording: {
-        maskAllInputs: true,
-        blockClass: 'ph-no-capture',
-      },
-    });
+    if (localStorage.getItem('cookie_consent') === 'accepted') {
+      initPostHog();
+      return;
+    }
+
+    const onConsent = (e: Event) => {
+      if ((e as CustomEvent).detail === 'accepted') initPostHog();
+    };
+    window.addEventListener('cookie-consent', onConsent);
+    return () => window.removeEventListener('cookie-consent', onConsent);
   }, []);
 
   return null;

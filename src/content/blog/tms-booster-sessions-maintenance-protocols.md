@@ -4,7 +4,7 @@ description: "Booster TMS sessions are the key to long-term remission. This guid
 publishDate: 2026-04-25
 category: treatment
 author: Dr. Sarah Chen
-image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=400&fit=crop"
+image: "/images/blog-covers/tms-booster-sessions-maintenance-protocols.svg"
 tags: ["tms", "booster-sessions", "maintenance", "long-term-care"]
 ---
 
@@ -111,35 +111,35 @@ Many TMS clinics have nurse coordinators or patient navigators who specialize in
 
 Booster sessions aren't an admission of TMS failure — they're a recognition that brain health, like physical health, requires ongoing maintenance. The investment in monthly (or as-needed) booster treatments pays back many times over in months and years of sustained remission. If you've invested in TMS once, protect that investment with a thoughtful maintenance plan.
 
-<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-violet-100" itemscope itemtype="https://schema.org/FAQPage">
-  <h2 class="font-display font-bold text-gray-900 mb-4 text-2xl">Frequently Asked Questions</h2>
+<div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
+  <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
   <div class="space-y-4">
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How often should I get TMS booster sessions?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How often should I get TMS booster sessions?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Most clinicians recommend at least 12 months of maintenance after the acute phase. Common approaches include: monthly single sessions, biweekly sessions for the first 6 months then monthly, or as-needed triggered sessions based on mood assessment scores. Some clinics offer an "open-door" model where a booster is triggered when PHQ-9 scores rise above a predetermined threshold.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Most clinicians recommend at least 12 months of maintenance after the acute phase. Common approaches include: monthly single sessions, biweekly sessions for the first 6 months then monthly, or as-needed triggered sessions based on mood assessment scores. Some clinics offer an "open-door" model where a booster is triggered when PHQ-9 scores rise above a predetermined threshold.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">How long does a booster session take?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long does a booster session take?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">A booster session is structurally identical to a regular TMS session -- same dose, same target -- but much shorter in commitment. Standard rTMS boosters take approximately 20-37 minutes. Theta Burst TMS boosters take only 3-10 minutes. No motor threshold redetermination is needed unless more than 6 months have passed since your last session.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">A booster session is structurally identical to a regular TMS session -- same dose, same target -- but much shorter in commitment. Standard rTMS boosters take approximately 20-37 minutes. Theta Burst TMS boosters take only 3-10 minutes. No motor threshold redetermination is needed unless more than 6 months have passed since your last session.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 class="font-semibold text-gray-900 mb-2 text-lg" itemprop="name">Does insurance cover TMS booster sessions?</h3>
+      <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Does insurance cover TMS booster sessions?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-gray-600" itemprop="text">Medicare covers maintenance TMS when documented as medically necessary. Most commercial insurers follow Medicare's lead, though coverage varies by plan. Key documentation includes initial response scores, relapse pattern history, clinical rationale for ongoing treatment, and proposed maintenance schedule. Self-pay booster sessions typically range from $150-350 depending on the clinic.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Medicare covers maintenance TMS when documented as medically necessary. Most commercial insurers follow Medicare's lead, though coverage varies by plan. Key documentation includes initial response scores, relapse pattern history, clinical rationale for ongoing treatment, and proposed maintenance schedule. Self-pay booster sessions typically range from $150-350 depending on the clinic.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="not-prose my-10 bg-slate-900 rounded-2xl p-8 text-center">
+<div class="not-prose my-10 bg-[var(--ink)] rounded-2xl p-8 text-center">
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
-  <p class="text-slate-400 mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
+  <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>
