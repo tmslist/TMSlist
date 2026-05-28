@@ -248,6 +248,7 @@ const hubKeys = Object.keys(hubItems);
                         <button
                             class="hub-trigger"
                             data-hub={key}
+                            aria-label={hub.label}
                             aria-expanded="false"
                             aria-controls={`megamenu-${key}`}
                             aria-haspopup="true"
@@ -341,7 +342,7 @@ const hubKeys = Object.keys(hubItems);
             </svg>
             <span class="tab-label">Find Care</span>
         </a>
-        <button class="mobile-tab mobile-explore-btn" id="mobile-explore-btn">
+        <button class="mobile-tab mobile-explore-btn" id="mobile-explore-btn" aria-label="Explore clinics">
             <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
@@ -432,6 +433,7 @@ const hubKeys = Object.keys(hubItems);
             class="hub-search-input"
             placeholder="Search pages..."
             autocomplete="off"
+            aria-label="Search pages"
         />
     </div>
 
@@ -442,7 +444,7 @@ const hubKeys = Object.keys(hubItems);
             const totalItems = hub.columns.reduce((sum, c) => sum + c.items.length, 0);
             return (
                 <div class="explore-category" data-hub={key}>
-                    <button class="explore-category-header" aria-expanded="false">
+                    <button class="explore-category-header" aria-expanded="false" aria-label={`${hub.label} category`}>
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" set:html={hub.icon} />
                         <span class="category-label">{hub.label}</span>
                         <span class="category-count">{totalItems}</span>

@@ -393,7 +393,7 @@ const renderedStateCityMap = isUS ? stateCityMap : fallbackStateCityMap;
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-1">
                     {visitorCountryEntry.regions.map((region) => (
                         <div class="footer-state-group">
-                            <button type="button" class="footer-state-toggle w-full flex items-center justify-between py-2 text-left group" aria-expanded="false">
+                            <button type="button" class="footer-state-toggle w-full flex items-center justify-between py-2 text-left group" aria-expanded="false" aria-label={`Toggle ${region.name} regions`}>
                                 <span class="footer-link font-medium group-hover:font-semibold transition-all">{region.name}</span>
                                 <span class="flex items-center gap-1.5">
                                     <span class="text-[10px]" style="color: rgba(230,234,240,0.3);">{region.clinicCount}</span>
