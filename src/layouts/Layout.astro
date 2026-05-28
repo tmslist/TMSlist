@@ -9,11 +9,13 @@ interface Props {
 	description?: string;
 	image?: string;
 	canonical?: string;
-	schema?: string; // JSON-LD schema string
+	schema?: string;
 	breadcrumbs?: BreadcrumbItem[];
 	noindex?: boolean;
 	hreflang?: { lang: string; url: string }[];
-	contentType?: string; // og:type override, e.g. "article" for blog posts
+	contentType?: string;
+	extraSchemas?: string[];
+	lastReviewed?: string;
 }
 
 import "../styles/global.css";
@@ -33,7 +35,7 @@ import SocialProofToast from "../components/react/SocialProofToast";
 import ExitIntent from "../components/react/ExitIntent";
 import UTMCapture from "../components/react/UTMCapture";
 
-const { title, description, image, canonical, schema, breadcrumbs, noindex, hreflang, contentType } = Astro.props;
+const { title, description, image, canonical, schema, breadcrumbs, noindex, hreflang, contentType, extraSchemas, lastReviewed } = Astro.props;
 
 const siteUrl = import.meta.env.SITE_URL || "https://tmslist.com";
 
@@ -116,6 +118,9 @@ const xDefaultHreflang = isCountryPage ? { lang: "x-default", url: `${siteUrl}${
 		<link rel="manifest" href="/manifest.json" />
 		<meta name="theme-color" content="#0A1628" />
 
+		<!-- Google Search Console Verification -->
+		<meta name="google-site-verification" content="google91457eaa29687448" />
+
 		<!-- Search Console Verification (env fallback; admin-managed values come via TrackingHead below) -->
 		{import.meta.env.GOOGLE_SITE_VERIFICATION && <meta name="google-site-verification" content={import.meta.env.GOOGLE_SITE_VERIFICATION} />}
 		{import.meta.env.BING_SITE_VERIFICATION && <meta name="msvalidate.01" content={import.meta.env.BING_SITE_VERIFICATION} />}
@@ -127,6 +132,7 @@ const xDefaultHreflang = isCountryPage ? { lang: "x-default", url: `${siteUrl}${
 		<title>{title}</title>
 		<meta name="description" content={metaDescription} />
 		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		{lastReviewed && <meta property="article:modified_time" content={lastReviewed} />}
 		<link rel="canonical" href={canonicalUrl} />
 		{allHreflang?.map(({ lang, url }) => (
 			<link rel="alternate" hreflang={lang} href={url} />
@@ -169,6 +175,40 @@ const xDefaultHreflang = isCountryPage ? { lang: "x-default", url: `${siteUrl}${
 		<link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" />
 
 		<!-- Organization Schema -->
+		<script type="application/ld+json" set:html={`{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://tmslist.com/#organization",
+  "name": "TMS List",
+  "url": "https://tmslist.com",
+  "logo": "https://tmslist.com/images/logo.png",
+  "description": "The leading directory of TMS (Transcranial Magnetic Stimulation) therapy providers. Find verified TMS clinics, compare treatments, and learn about insurance coverage.",
+  "sameAs": [
+    "https://twitter.com/tmslist",
+    "https://www.linkedin.com/company/tmslist",
+    "https://www.facebook.com/tmslist"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "url": "https://tmslist.com/contact/",
+    "areaServed": "US"
+  },
+  "knowsAbout": [
+    {
+      "@type": "Thing",
+      "name": "Transcranial Magnetic Stimulation (TMS)",
+      "description": "A non-invasive neuromodulation technique using magnetic pulses to stimulate specific areas of the brain"
+    },
+    {
+      "@type": "Thing",
+      "name": "Treatment-Resistant Depression",
+      "description": "Depression that has not responded to at least two antidepressant medication trials"
+    }
+  ]
+}`} />
+
+		<!-- Organization Schema -->
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
@@ -184,8 +224,14 @@ const xDefaultHreflang = isCountryPage ? { lang: "x-default", url: `${siteUrl}${
 			}
 		</script>
 
+		<!-- Organization Schema -->
+		<script type="application/ld+json" set:html={`{"@context":"https://schema.org","@type":"Organization","@id":"https://tmslist.com/#organization","name":"TMS List","url":"https://tmslist.com","logo":"https://tmslist.com/images/logo.png","description":"The leading directory of TMS therapy providers. Find verified TMS clinics, compare treatments, and learn about insurance coverage.","sameAs":["https://twitter.com/tmslist","https://www.linkedin.com/company/tmslist"],"contactPoint":{"@type":"ContactPoint","contactType":"customer service","url":"https://tmslist.com/contact/"},"knowsAbout":[{"@type":"Thing","name":"Transcranial Magnetic Stimulation (TMS)"},{"@type":"Thing","name":"Treatment-Resistant Depression"}]}`} />
+
 		<!-- Page Specific Schema -->
 		{schema && <script type="application/ld+json" set:html={schema} />}
+
+		<!-- Extra Schemas (from page-level) -->
+		{extraSchemas?.map((s: string) => <script type="application/ld+json" set:html={s} />)}
 
 		<!-- Breadcrumb Schema -->
 		{breadcrumbSchema && <script type="application/ld+json" set:html={breadcrumbSchema} />}
