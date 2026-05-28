@@ -71,7 +71,7 @@ const defaultImage = `${siteUrl}/images/tms_diagram.jpg`;
 const metaDescription = description || defaultDescription;
 const rawOgImage = image || defaultImage;
 const ogImage = rawOgImage.startsWith('http') ? rawOgImage : `${siteUrl}${rawOgImage}`;
-const canonicalUrl = canonical || Astro.url.href;
+const canonicalUrl = canonical || (siteUrl + Astro.url.pathname.replace(/\/$/, '') + '/');
 
 // Detect language from URL path for international pages
 const COUNTRY_LANG: Record<string, string> = {
@@ -101,6 +101,8 @@ const autoHreflang = isCountryPage ? COUNTRY_PREFIXES.map(prefix => ({
 	url: `${siteUrl}/${prefix}${subPath}`,
 })) : [];
 const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? autoHreflang : undefined);
+// Add x-default hreflang for international SEO
+const xDefaultHreflang = isCountryPage ? { lang: "x-default", url: `${siteUrl}${subPath}` } : undefined;
 ---
 
 <!doctype html>
@@ -129,6 +131,7 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 		{allHreflang?.map(({ lang, url }) => (
 			<link rel="alternate" hreflang={lang} href={url} />
 		))}
+		{xDefaultHreflang && <link rel="alternate" hreflang={xDefaultHreflang.lang} href={xDefaultHreflang.url} />}
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content={contentType || "website"} />
 		<meta property="og:url" content={canonicalUrl} />
@@ -138,6 +141,7 @@ const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? aut
 		<meta property="og:image:width" content={ogImage?.includes('800/400') || ogImage?.includes('w=800') ? "800" : "1200"} />
 		<meta property="og:image:height" content={ogImage?.includes('800/400') || ogImage?.includes('w=800') ? "400" : "630"} />
 		<meta property="og:site_name" content="TMS List" />
+		<meta property="og:locale" content={pageLang} />
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />

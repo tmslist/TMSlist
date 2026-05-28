@@ -22,7 +22,6 @@ const ALLOWED_REDIRECT_DOMAINS = [
   'tmslist.com',
   'auth.tmslist.com',
   'supabase.co',
-  'localhost',
 ];
 
 function isAllowedRedirect(uri: string): boolean {

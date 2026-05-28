@@ -62,7 +62,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
             path: '/',
             maxAge: 60 * 60 * 24 * 365,
             httpOnly: false,
-            secure: false, // localhost
+            secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
         });
         return response;
