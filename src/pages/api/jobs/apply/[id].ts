@@ -3,6 +3,7 @@ import { eq, sql } from 'drizzle-orm';
 import { db } from '../../../../db';
 import { jobs, jobApplications, clinics, notifications, users } from '../../../../db/schema';
 import { jobApplicationSubmitSchema } from '../../../../db/validation.js';
+import { escapeHtml } from '../../../../utils/sanitize';
 
 export const prerender = false;
 
@@ -140,11 +141,11 @@ async function sendApplicationEmail(opts: {
   const html = `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
       <h2 style="color: #4F46E5;">New Job Application</h2>
-      <p><strong>Position:</strong> ${jobTitle}</p>
+      <p><strong>Position:</strong> ${escapeHtml(jobTitle)}</p>
       <hr style="border: 1px solid #e5e7eb; margin: 16px 0;"/>
-      <p><strong>Applicant:</strong> ${applicantName}</p>
-      <p><strong>Email:</strong> <a href="mailto:${applicantEmail}">${applicantEmail}</a></p>
-      ${coverLetter ? `<p><strong>Cover Letter:</strong></p><blockquote style="border-left: 3px solid #4F46E5; padding-left: 16px; color: #4b5563;">${coverLetter.replace(/\n/g, '<br/>')}</blockquote>` : ''}
+      <p><strong>Applicant:</strong> ${escapeHtml(applicantName)}</p>
+      <p><strong>Email:</strong> <a href="mailto:${escapeHtml(applicantEmail)}">${escapeHtml(applicantEmail)}</a></p>
+      ${coverLetter ? `<p><strong>Cover Letter:</strong></p><blockquote style="border-left: 3px solid #4F46E5; padding-left: 16px; color: #4b5563;">${escapeHtml(coverLetter).replace(/\n/g, '<br/>')}</blockquote>` : ''}
       <p style="margin-top: 24px; color: #9ca3af; font-size: 12px;">This application was submitted via TMS List Jobs.</p>
     </div>
   `;

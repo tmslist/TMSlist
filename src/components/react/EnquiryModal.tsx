@@ -11,6 +11,7 @@ export default function EnquiryModal({
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
   >("idle");
+  const [errorMsg, setErrorMsg] = useState('');
   const modalRef = useRef<HTMLDivElement>(null);
   const firstInputRef = useRef<HTMLInputElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
@@ -19,6 +20,7 @@ export default function EnquiryModal({
     previousFocusRef.current = document.activeElement as HTMLElement;
     setIsOpen(true);
     setStatus("idle");
+    setErrorMsg('');
   }, []);
 
   const close = useCallback(() => {
@@ -73,11 +75,13 @@ export default function EnquiryModal({
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+    const controller = new AbortController();
 
     try {
       const res = await fetch(apiEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           type: "specialist_enquiry",
           name: formData.get("name"),
@@ -85,7 +89,7 @@ export default function EnquiryModal({
           phone: formData.get("phone"),
           clinicName: formData.get("clinic"),
           message: formData.get("message"),
-          sourceUrl: window.location.href,
+          sourceUrl: window.location.pathname,
           metadata: {
             location: formData.get("location"),
             role: formData.get("role"),
@@ -99,11 +103,13 @@ export default function EnquiryModal({
         form.reset();
       } else {
         const errData = await res.json().catch(() => ({}));
-        console.error('Enquiry form error:', errData);
+        setErrorMsg(errData.error || errData.message || 'Something went wrong. Please try again.');
         setStatus("error");
       }
     } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') return;
       console.error('Enquiry form error:', err);
+      setErrorMsg('Network error. Please check your connection and try again.');
       setStatus("error");
     }
   }
@@ -192,8 +198,8 @@ export default function EnquiryModal({
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {status === "error" && (
-                    <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm">
-                      Something went wrong. Please try again.
+                    <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm" role="alert" aria-live="assertive">
+                      {errorMsg || 'Something went wrong. Please try again.'}
                     </div>
                   )}
 

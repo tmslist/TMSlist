@@ -111,7 +111,7 @@ export default function SetPasswordForm() {
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         <h1 className="text-2xl font-semibold text-[var(--ink)] mb-1">Set new password</h1>
         <p className="text-sm text-[var(--muted)] mb-6">
-          for <span className="font-medium">{email.replace(/(.{2}).+(@.+)/, '$1***$2')}</span>
+          for <span className="font-medium">{email.replace(/^(.{1})(.*)(@.+)$/, (_, a, b, c) => `${a}${'*'.repeat(Math.max(b.length, 3))}${c}`)}</span>
         </p>
 
         {errorMsg && (

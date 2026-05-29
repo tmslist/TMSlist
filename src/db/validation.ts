@@ -200,9 +200,9 @@ export const jobApplicationSubmitSchema = z.object({
   applicantName: z.string().min(2).max(100),
   applicantEmail: z.string().email(),
   applicantPhone: z.string().max(20).optional(),
-  resumeUrl: z.string().url().optional().or(z.literal('')),
+  resumeUrl: z.string().refine(val => !val || /^https?:\/\//.test(val), { message: 'Must be a valid HTTP/HTTPS URL' }).optional().or(z.literal('')),
   coverLetter: z.string().max(5000).optional(),
-  linkedInUrl: z.string().url().optional().or(z.literal('')),
+  linkedInUrl: z.string().refine(val => !val || /^https?:\/\//.test(val), { message: 'Must be a valid HTTP/HTTPS URL' }).optional().or(z.literal('')),
 });
 
 export type JobQueryInput = z.infer<typeof jobQuerySchema>;

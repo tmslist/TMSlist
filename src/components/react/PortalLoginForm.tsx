@@ -40,6 +40,7 @@ export default function PortalLoginForm() {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [pwStrength, setPwStrength] = useState(getPasswordStrength(''));
   const [resendCountdown, setResendCountdown] = useState(0);
+  const [forgotLoading, setForgotLoading] = useState(false);
   const npiTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -104,6 +105,7 @@ export default function PortalLoginForm() {
     setNpiError('');
     setTermsAccepted(false);
     setPwStrength(getPasswordStrength(''));
+    setForgotLoading(false);
   }
 
   function switchMode(newMode: AuthMode) {
@@ -189,7 +191,7 @@ export default function PortalLoginForm() {
       const res = await fetch('/api/auth/portal-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, name, npiNumber: npi || undefined, termsAccepted: true }),
+        body: JSON.stringify({ email, password, name, npiNumber: npi || undefined, termsAccepted }),
       });
       const data = await res.json();
       if (res.ok && data.success) {
@@ -411,6 +413,7 @@ export default function PortalLoginForm() {
                       type="button"
                       onClick={() => {
                         if (!email) { setErrorMsg('Enter your email first and we\'ll send a reset link.'); return; }
+                        setForgotLoading(true);
                         fetch('/api/auth/forgot-password', {
                           method: 'POST',
                           headers: { 'Content-Type': 'application/json' },
@@ -422,11 +425,11 @@ export default function PortalLoginForm() {
                         }).catch(() => {
                           setErrorMsg('Failed to send reset email. Please try again.');
                           setStatus('error');
-                        });
+                        }).finally(() => setForgotLoading(false));
                       }}
                       className="text-xs font-medium" style={warm}
                     >
-                      Forgot password?
+                      Forgot password? {forgotLoading ? '(sending...)' : ''}
                     </button>
                   </div>
                   <div className="relative">
@@ -526,6 +529,7 @@ export default function PortalLoginForm() {
                   name="npiNumber"
                   id="portal-signup-npi"
                   maxLength={10}
+                  minLength={10}
                   inputMode="numeric"
                   pattern="\d{10}"
                   value={npi}

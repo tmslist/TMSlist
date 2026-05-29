@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { validateSessionStrict, hasRole } from '../../../utils/auth';
 import { createSubscriptionCheckout, PLANS } from '../../../db/subscriptions';
 import type { PlanId } from '../../../db/subscriptions';
 import { db } from '../../../db';
@@ -9,7 +9,7 @@ import { eq } from 'drizzle-orm';
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
-  const session = getSessionFromRequest(request);
+  const session = await validateSessionStrict(request);
   if (!session || !hasRole(session, 'clinic_owner', 'admin')) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
   }
@@ -30,7 +30,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   // Get clinicId from user record
   const [user] = await db.select().from(users).where(eq(users.id, session.userId)).limit(1);
-  const clinicId = user?.clinicId || (session as any).clinicId;
+  const clinicId = user?.clinicId || session.clinicId;
 
   if (!clinicId) {
     return new Response(JSON.stringify({ error: 'No clinic linked to your account. Please claim your clinic first.' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
@@ -55,6 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   } catch (err) {
     console.error('Stripe checkout error:', err);
-    return new Response(JSON.stringify({ error: 'Checkout creation failed' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    // Sanitize error messages — never leak internal details like credential names or stack traces
+    return new Response(JSON.stringify({ error: 'Checkout creation failed. Please try again or contact support.' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
   }
 };

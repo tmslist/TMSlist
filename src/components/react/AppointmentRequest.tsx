@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Props {
   clinicId: string;
@@ -27,6 +27,11 @@ export default function AppointmentRequest({ clinicId, clinicName, clinicEmail }
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [minDate, setMinDate] = useState('');
+
+  useEffect(() => {
+    setMinDate(new Date().toISOString().split('T')[0]);
+  }, []);
 
   const update = (field: string, value: string | boolean) =>
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -122,6 +127,7 @@ export default function AppointmentRequest({ clinicId, clinicName, clinicEmail }
             <input
               type="text"
               required
+              maxLength={100}
               value={form.name}
               onChange={(e) => update('name', e.target.value)}
               placeholder="John Smith"
@@ -161,7 +167,7 @@ export default function AppointmentRequest({ clinicId, clinicName, clinicEmail }
               type="date"
               value={form.preferredDate}
               onChange={(e) => update('preferredDate', e.target.value)}
-              min={new Date().toISOString().split('T')[0]}
+              min={minDate}
               className={inputClass}
             />
           </div>

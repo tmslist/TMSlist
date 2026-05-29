@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Props {
   clinicId: string;
@@ -20,6 +20,12 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
   const [condition, setCondition] = useState('');
   const [message, setMessage] = useState('');
   const [insurance, setInsurance] = useState('');
+  const [minDate, setMinDate] = useState('');
+
+  // Set min date client-side to avoid SSR staleness
+  useEffect(() => {
+    setMinDate(new Date().toISOString().split('T')[0]);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,12 +33,12 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
     setError('');
 
     try {
-      // Track as analytics event
+      // Track as analytics event (fire-and-forget but log failures)
       fetch('/api/analytics/track', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ clinicId, event: 'lead_submit' }),
-      }).catch(() => {});
+      }).catch((err) => console.warn('[analytics] tracking failed:', err?.message));
 
       const res = await fetch('/api/leads', {
         method: 'POST',
@@ -120,49 +126,72 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3">
-        <input type="text" required value={name} onChange={e => setName(e.target.value)} placeholder="Full Name *"
-          className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Email *"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
-          <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Phone"
+        <div>
+          <label htmlFor="bw-name" className="block text-xs font-medium text-[var(--ink2)] mb-1">Full Name *</label>
+          <input type="text" id="bw-name" required value={name} onChange={e => setName(e.target.value)} placeholder="Full Name *"
             className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <input type="date" value={preferredDate} onChange={e => setPreferredDate(e.target.value)}
-            min={new Date().toISOString().split('T')[0]}
-            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
-          <select value={preferredTime} onChange={e => setPreferredTime(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]">
-            <option value="morning">Morning (9-12)</option>
-            <option value="afternoon">Afternoon (12-4)</option>
-            <option value="evening">Evening (4-7)</option>
-            <option value="flexible">Flexible</option>
+          <div>
+            <label htmlFor="bw-email" className="block text-xs font-medium text-[var(--ink2)] mb-1">Email *</label>
+            <input type="email" id="bw-email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Email *"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
+          </div>
+          <div>
+            <label htmlFor="bw-phone" className="block text-xs font-medium text-[var(--ink2)] mb-1">Phone</label>
+            <input type="tel" id="bw-phone" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Phone"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label htmlFor="bw-date" className="block text-xs font-medium text-[var(--ink2)] mb-1">Preferred Date</label>
+            <input type="date" id="bw-date" value={preferredDate} onChange={e => setPreferredDate(e.target.value)}
+              min={minDate}
+              className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
+          </div>
+          <div>
+            <label htmlFor="bw-time" className="block text-xs font-medium text-[var(--ink2)] mb-1">Preferred Time</label>
+            <select id="bw-time" value={preferredTime} onChange={e => setPreferredTime(e.target.value)}
+              className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]">
+              <option value="morning">Morning (9-12)</option>
+              <option value="afternoon">Afternoon (12-4)</option>
+              <option value="evening">Evening (4-7)</option>
+              <option value="flexible">Flexible</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="bw-condition" className="block text-xs font-medium text-[var(--ink2)] mb-1">Primary Condition</label>
+          <select id="bw-condition" value={condition} onChange={e => setCondition(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]">
+            <option value="">Primary Condition (optional)</option>
+            <option value="Depression">Depression (MDD)</option>
+            <option value="OCD">OCD</option>
+            <option value="Anxiety">Anxiety</option>
+            <option value="PTSD">PTSD</option>
+            <option value="Bipolar">Bipolar Depression</option>
+            <option value="Smoking">Smoking Cessation</option>
+            <option value="Chronic Pain">Chronic Pain / Fibromyalgia</option>
+            <option value="Tinnitus">Tinnitus</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
-        <select value={condition} onChange={e => setCondition(e.target.value)}
-          aria-label="Primary condition"
-          className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]">
-          <option value="">Primary Condition (optional)</option>
-          <option value="Depression">Depression (MDD)</option>
-          <option value="OCD">OCD</option>
-          <option value="Anxiety">Anxiety</option>
-          <option value="PTSD">PTSD</option>
-          <option value="Bipolar">Bipolar Depression</option>
-          <option value="Smoking">Smoking Cessation</option>
-          <option value="Chronic Pain">Chronic Pain / Fibromyalgia</option>
-          <option value="Tinnitus">Tinnitus</option>
-          <option value="Other">Other</option>
-        </select>
+        <div>
+          <label htmlFor="bw-insurance" className="block text-xs font-medium text-[var(--ink2)] mb-1">Insurance Provider</label>
+          <input type="text" id="bw-insurance" value={insurance} onChange={e => setInsurance(e.target.value)} placeholder="Insurance Provider (optional)"
+            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
+        </div>
 
-        <input type="text" value={insurance} onChange={e => setInsurance(e.target.value)} placeholder="Insurance Provider (optional)"
-          className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]" />
-
-        <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="Additional notes (optional)" rows={2}
-          className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)] resize-none" />
+        <div>
+          <label htmlFor="bw-notes" className="block text-xs font-medium text-[var(--ink2)] mb-1">Additional Notes</label>
+          <textarea id="bw-notes" value={message} onChange={e => setMessage(e.target.value)} placeholder="Additional notes (optional)" rows={2}
+            className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--line)] text-sm focus:border-[rgba(10,22,40,0.2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)] resize-none" />
+        </div>
 
         {error && <p className="text-xs text-red-600 font-medium">{error}</p>}
 

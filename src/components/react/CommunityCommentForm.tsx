@@ -48,8 +48,8 @@ export default function CommunityCommentForm({
       const data = await res.json();
       setBody('');
       onCommentAdded?.(data.comment);
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Something went wrong');
     } finally {
       setLoading(false);
     }
@@ -72,6 +72,8 @@ export default function CommunityCommentForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-2">
       <textarea
+        id="comment-body"
+        aria-label="Comment"
         value={body}
         onChange={e => setBody(e.target.value)}
         placeholder={placeholder}

@@ -16,7 +16,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Honeypot — `website` is a hidden field that real users never fill in.
     // Accept the request but silently drop it so bots don't get a useful signal.
-    if (body && typeof body === 'object' && typeof body.website === 'string' && body.website.length > 0) {
+    if (body && typeof body === 'object' && typeof body.website === 'string' && body.website.trim().length > 0) {
       return new Response(JSON.stringify({ success: true }), {
         status: 201,
         headers: { 'Content-Type': 'application/json' },
@@ -35,11 +35,14 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Sanitize text fields
+    // Sanitize all user-supplied text fields to prevent XSS
     const data = {
       ...parsed.data,
       name: parsed.data.name ? escapeHtml(parsed.data.name) : undefined,
       message: parsed.data.message ? escapeHtml(parsed.data.message) : undefined,
+      clinicName: parsed.data.clinicName ? escapeHtml(parsed.data.clinicName) : undefined,
+      phone: parsed.data.phone ? escapeHtml(parsed.data.phone) : undefined,
+      sourceUrl: parsed.data.sourceUrl ? escapeHtml(parsed.data.sourceUrl) : undefined,
     };
 
     const lead = await createLead(data);

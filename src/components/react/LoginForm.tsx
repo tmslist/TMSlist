@@ -186,7 +186,7 @@ export default function LoginForm() {
           <form onSubmit={handleTotpSubmit} className="space-y-4">
             <div>
               <input
-                type="text"
+                type="tel"
                 inputMode="numeric"
                 pattern="[0-9]{6}"
                 maxLength={6}

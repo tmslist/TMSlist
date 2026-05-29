@@ -19,6 +19,7 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
   const [hoveredRating, setHoveredRating] = useState(0);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [charCount, setCharCount] = useState(0);
 
   useEffect(() => {
     fetch('/api/auth/session')
@@ -131,6 +132,7 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
               onClick={() => setRating(star)}
               onMouseEnter={() => setHoveredRating(star)}
               onMouseLeave={() => setHoveredRating(0)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setRating(star); }}
               className="text-3xl transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] rounded"
               role="radio"
               aria-checked={rating === star}
@@ -160,12 +162,9 @@ export default function ReviewForm({ clinicId, clinicName }: ReviewFormProps) {
           aria-required="true"
           className="mt-1 block w-full rounded-lg border border-[var(--line)] px-3 py-2 text-sm focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)]"
           placeholder="Share your experience with this clinic..."
-          onInput={(e) => {
-            const counter = e.currentTarget.parentElement?.querySelector('.char-count');
-            if (counter) counter.textContent = `${e.currentTarget.value.length}/5000`;
-          }}
+          onChange={(e) => setCharCount(e.currentTarget.value.length)}
         />
-        <span className="char-count text-xs text-[var(--muted)] mt-1 block text-right">0/5000</span>
+        <span className="text-xs text-[var(--muted)] mt-1 block text-right">{charCount}/5000</span>
       </div>
 
       <button
