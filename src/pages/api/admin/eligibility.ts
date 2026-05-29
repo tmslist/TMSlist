@@ -36,11 +36,14 @@ export const GET: APIRoute = async ({ request }) => {
         .where(conditions.length > 0 ? and(...conditions) : undefined),
     ]);
 
-    // Status breakdown
+    // Status breakdown via SQL aggregation — no in-memory scan
     const statusCounts: Record<string, number> = {};
-    const all = await db.select({ status: insuranceEligibilityChecks.status }).from(insuranceEligibilityChecks);
-    for (const r of all) {
-      statusCounts[r.status] = (statusCounts[r.status] || 0) + 1;
+    const statusRows = await db
+      .select({ status: insuranceEligibilityChecks.status, count: sql<number>`count(*)` })
+      .from(insuranceEligibilityChecks)
+      .groupBy(insuranceEligibilityChecks.status);
+    for (const r of statusRows) {
+      statusCounts[r.status] = Number(r.count);
     }
 
     return json({

@@ -30,8 +30,7 @@ export const GET: APIRoute = async ({ request }) => {
       });
     }
 
-    const sixMonthsAgo = new Date();
-    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+    const sixMonthsAgo = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
 
     const [leadsByMonth, reviewsByMonth, avgRating] = await Promise.all([
       // Leads grouped by month

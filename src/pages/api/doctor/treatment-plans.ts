@@ -49,6 +49,9 @@ export const POST: APIRoute = async ({ request }) => {
     if (!patientEmail || !protocol || !sessionCount) {
       return json({ error: 'patientEmail, protocol, and sessionCount are required' }, 400);
     }
+    if (patientEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(patientEmail)) {
+      return json({ error: 'Invalid email format' }, 400);
+    }
     let doctorId: string;
     if ('doctorId' in doctorCtx) doctorId = doctorCtx.doctorId;
     else return json({ error: 'Doctor not found' }, 404);

@@ -45,7 +45,7 @@ export const PUT: APIRoute = async ({ params, request }) => {
 
   const [updated] = await db
     .update(jobApplications)
-    .set({ status: status as any, notes: notes ?? application.notes })
+    .set({ status: status as 'new' | 'viewed' | 'contacted' | 'rejected' | 'hired', notes: notes ?? application.notes })
     .where(eq(jobApplications.id, appId))
     .returning({ id: jobApplications.id });
 

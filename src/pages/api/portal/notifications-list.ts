@@ -17,8 +17,8 @@ export const GET: APIRoute = async ({ request }) => {
 
   try {
     const url = new URL(request.url);
-    const page = Math.max(1, parseInt(url.searchParams.get('page') || '1', 10));
-    const limit = Math.min(50, Math.max(1, parseInt(url.searchParams.get('limit') || '20', 10)));
+    const page = Math.max(1, parseInt(url.searchParams.get('page') || '1', 10) || 1);
+    const limit = Math.min(50, Math.max(1, parseInt(url.searchParams.get('limit') || '20', 10) || 20));
     const offset = (page - 1) * limit;
 
     const [items, unreadCount, totalCount] = await Promise.all([
@@ -78,13 +78,14 @@ export const PUT: APIRoute = async ({ request }) => {
       });
     }
 
-    // Only mark notifications belonging to this user
-    await db
+    // Only mark notifications belonging to this user, return updated count
+    const result = await db
       .update(notifications)
       .set({ read: true })
-      .where(and(inArray(notifications.id, ids), eq(notifications.userId, session.userId)));
+      .where(and(inArray(notifications.id, ids), eq(notifications.userId, session.userId)))
+      .returning({ id: notifications.id });
 
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({ success: true, updatedCount: result.length }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });

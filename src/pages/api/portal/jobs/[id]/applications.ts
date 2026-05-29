@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { eq, desc } from 'drizzle-orm';
+import { eq, desc, and, inArray } from 'drizzle-orm';
 import { db } from '../../../../../db';
 import { jobs, jobApplications } from '../../../../../db/schema';
 import { getSessionFromRequest, hasRole } from '../../../../../utils/auth.js';
@@ -30,13 +30,14 @@ export const GET: APIRoute = async ({ params, request }) => {
     .where(eq(jobApplications.jobId, id))
     .orderBy(desc(jobApplications.createdAt));
 
-  // Mark all as viewed
+  // Mark all as viewed — only update applications that are actually 'new'
   const unread = applications.filter((a) => a.status === 'new');
   if (unread.length > 0) {
+    const unreadIds = unread.map((a) => a.id);
     await db
       .update(jobApplications)
       .set({ status: 'viewed' })
-      .where(eq(jobApplications.jobId, id));
+      .where(and(eq(jobApplications.jobId, id), inArray(jobApplications.id, unreadIds)));
   }
 
   return json({ data: applications });

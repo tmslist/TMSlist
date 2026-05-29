@@ -40,6 +40,7 @@ export const GET: APIRoute = async ({ request }) => {
 export const PUT: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
   if (!session) return json({ error: 'Unauthorized' }, 401);
+  if (!session.clinicId) return json({ error: 'No clinic linked' }, 403);
 
   try {
     const body = await request.json();
@@ -48,6 +49,18 @@ export const PUT: APIRoute = async ({ request }) => {
 
     const valid = ['pending', 'confirmed', 'completed', 'cancelled', 'no_show'];
     if (!valid.includes(status)) return json({ error: 'Invalid status' }, 400);
+
+    // Verify the appointment belongs to this clinic's doctor before updating
+    const { doctors } = await import('../../../db/schema');
+    const docRows = await db.select({ id: doctors.id }).from(doctors).where(eq(doctors.clinicId, session.clinicId)).limit(1);
+    const doctorId = docRows[0]?.id;
+    if (!doctorId) return json({ error: 'Doctor not found' }, 404);
+
+    const [appt] = await db.select({ id: doctorAppointments.id }).from(doctorAppointments).where(eq(doctorAppointments.id, id)).limit(1);
+    if (!appt) return json({ error: 'Appointment not found' }, 404);
+
+    const [apptWithDoctor] = await db.select({ doctorId: doctorAppointments.doctorId }).from(doctorAppointments).where(eq(doctorAppointments.id, id)).limit(1);
+    if (apptWithDoctor.doctorId !== doctorId) return json({ error: 'Forbidden' }, 403);
 
     await db.update(doctorAppointments).set({ status }).where(eq(doctorAppointments.id, id));
     return json({ success: true });

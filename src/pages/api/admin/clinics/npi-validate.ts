@@ -91,7 +91,7 @@ export const GET: APIRoute = async ({ request }) => {
         npi: clinics.npi,
       }).from(clinics)
         .where(and(isNull(clinics.deletedAt), sql`${clinics.npi} IS NOT NULL`))
-        .limit(pageSize).offset(0),
+        .limit(pageSize).offset(offset),
 
       db.select({ count: sql<number>`count(*)` }).from(clinics)
         .where(and(isNull(clinics.deletedAt), sql`${clinics.npi} IS NULL`)),

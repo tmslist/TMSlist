@@ -136,7 +136,7 @@ export const POST: APIRoute = async ({ request }) => {
           });
           successCount++;
         } catch (e) {
-          errors.push({ row: i + 1, field: 'insert', message: String(e) });
+          errors.push({ row: i + 1, field: 'insert', message: 'Insert failed — check for duplicate or constraint violation' });
         }
       }
     } else if (type === 'doctor') {
@@ -176,7 +176,7 @@ export const POST: APIRoute = async ({ request }) => {
           });
           successCount++;
         } catch (e) {
-          errors.push({ row: i + 1, field: 'insert', message: String(e) });
+          errors.push({ row: i + 1, field: 'insert', message: 'Insert failed — check for duplicate or constraint violation' });
         }
       }
     } else if (type === 'treatment') {
@@ -201,7 +201,7 @@ export const POST: APIRoute = async ({ request }) => {
           });
           successCount++;
         } catch (e) {
-          errors.push({ row: i + 1, field: 'insert', message: String(e) });
+          errors.push({ row: i + 1, field: 'insert', message: 'Insert failed — check for duplicate or constraint violation' });
         }
       }
     }
