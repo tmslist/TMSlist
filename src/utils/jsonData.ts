@@ -210,8 +210,9 @@ export async function getClinicBySlug(slug: string): Promise<ClinicRow | null> {
 }
 
 export async function getClinicsByState(stateCode: string, opts?: { limit?: number; offset?: number }): Promise<ClinicRow[]> {
+  if (!stateCode) return [];
   const rows = getStore().allRows
-    .filter(c => c.state.toUpperCase() === stateCode.toUpperCase() && c.verified)
+    .filter(c => c.state && c.state.toUpperCase() === stateCode.toUpperCase() && c.verified)
     .sort(sortByRating);
   const offset = opts?.offset ?? 0;
   const limit = opts?.limit ?? 1000;
@@ -219,9 +220,10 @@ export async function getClinicsByState(stateCode: string, opts?: { limit?: numb
 }
 
 export async function getClinicsByCity(stateCode: string, cityName: string): Promise<ClinicRow[]> {
+  if (!stateCode || !cityName) return [];
   return getStore().allRows
     .filter(c =>
-      c.state.toUpperCase() === stateCode.toUpperCase() &&
+      c.state && c.state.toUpperCase() === stateCode.toUpperCase() &&
       ilike(c.city, cityName) &&
       c.verified
     )
