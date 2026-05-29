@@ -114,7 +114,15 @@ export const POST: APIRoute = async ({ request }) => {
       clinicName: data.clinicName,
     }).catch((err) => console.error("[bg-task] Appointment confirmation failed:", err?.message));
 
-    return new Response(JSON.stringify({ success: true, id: lead[0]?.id }), {
+    if (!lead || lead.length === 0) {
+      console.error('[leads:appointment] Insert returned no rows');
+      return new Response(JSON.stringify({ error: 'Failed to create appointment' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+    const leadId = lead[0].id;
+    return new Response(JSON.stringify({ success: true, id: leadId }), {
       status: 201,
       headers: { 'Content-Type': 'application/json' },
     });

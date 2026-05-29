@@ -71,7 +71,16 @@ export const POST: APIRoute = async ({ request }) => {
       }).catch((err) => console.error("[bg-task] Autoresponder failed:", err?.message));
     }
 
-    return new Response(JSON.stringify({ success: true, id: lead?.id }), {
+    // Assert that the insert returned rows
+    if (!lead || lead.length === 0) {
+      console.error('[leads] Insert returned no rows');
+      return new Response(JSON.stringify({ error: 'Failed to create lead' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+    const leadId = lead[0].id;
+    return new Response(JSON.stringify({ success: true, id: leadId }), {
       status: 201,
       headers: { 'Content-Type': 'application/json' },
     });
