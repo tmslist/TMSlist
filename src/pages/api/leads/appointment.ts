@@ -104,7 +104,12 @@ export const POST: APIRoute = async ({ request }) => {
         condition: data.condition,
         insurance_provider: data.insurance,
       },
-    }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
+    }).catch((err) => console.error("[email] sendLeadNotification failed:", {
+      error: err?.message,
+      patientEmail: data.email,
+      clinicName: data.clinicName,
+      leadId: lead?.[0]?.id,
+    }));
 
     // Send patient confirmation (fire-and-forget)
     sendPatientConfirmation({
@@ -112,7 +117,12 @@ export const POST: APIRoute = async ({ request }) => {
       name: data.name,
       leadType: 'appointment_request',
       clinicName: data.clinicName,
-    }).catch((err) => console.error("[bg-task] Appointment confirmation failed:", err?.message));
+    }).catch((err) => console.error("[email] Appointment confirmation failed:", {
+      error: err?.message,
+      to: data.email,
+      clinicName: data.clinicName,
+      leadId: lead?.[0]?.id,
+    }));
 
     if (!lead || lead.length === 0) {
       console.error('[leads:appointment] Insert returned no rows');

@@ -58,7 +58,12 @@ export const POST: APIRoute = async ({ request }) => {
       sourceUrl: data.sourceUrl,
       leadType: data.type,
       metadata: data.metadata,
-    }).catch((err) => console.error("[bg-task] Fire-and-forget failed:", err?.message));
+    }).catch((err) => console.error("[email] sendLeadNotification failed:", {
+      error: err?.message,
+      patientEmail: data.email,
+      clinicName: data.clinicName,
+      leadId: lead?.[0]?.id,
+    }));
 
     // Send patient confirmation / autoresponder (fire-and-forget)
     if (data.email && data.name) {
@@ -68,7 +73,12 @@ export const POST: APIRoute = async ({ request }) => {
         leadType: data.type,
         clinicName: data.clinicName,
         sourceUrl: data.sourceUrl,
-      }).catch((err) => console.error("[bg-task] Autoresponder failed:", err?.message));
+      }).catch((err) => console.error("[email] sendPatientConfirmation failed:", {
+        error: err?.message,
+        to: data.email,
+        clinicName: data.clinicName,
+        leadId: lead?.[0]?.id,
+      }));
     }
 
     // Assert that the insert returned rows
