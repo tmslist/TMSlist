@@ -31,7 +31,7 @@ const { title, description, hasContent, entry } = Astro.props;
 const slug = Astro.params.slug!;
 
 // depression-severity-test has a dedicated interactive page, skip static content rendering
-const SKIP_STATIC_RENDER = ['depression-severity-test'];
+const SKIP_STATIC_RENDER = ['depression-severity-test', 'ect-eligibility'];
 const isInteractive = SKIP_STATIC_RENDER.includes(slug);
 
 let Content: any = null;

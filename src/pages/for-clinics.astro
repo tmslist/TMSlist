@@ -356,38 +356,56 @@ const metaDescription = "Join 1,100+ TMS clinics on the leading patient director
       <p class="text-[16px] mt-4 max-w-lg mx-auto" style="color:var(--muted)">Start free. Upgrade when you need more reach.</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
       {[
         {
           n: 'Free',
           p: '$0',
           period: 'forever',
           d: 'For new clinics getting started',
-          features: ['Basic directory listing', 'Up to 3 clinician profiles', 'Email support', 'Up to 5 reviews/month'],
+          features: ['Basic directory listing', 'Patient reviews', 'Contact info display', 'Clinic map listing'],
           cta: 'Get started free',
           featured: false,
+          badge: '',
         },
         {
-          n: 'Practice',
-          p: '$49',
+          n: 'Starter',
+          p: '$29',
           period: '/mo',
           d: 'For growing single-location practices',
-          features: ['Verified badge', 'Unlimited clinician profiles', 'Patient inquiry inbox', 'Priority support', 'Analytics dashboard', '20 reviews/month'],
+          features: ['Verified badge', '5 clinic photos', 'TMS devices & protocols', 'Insurance carriers', 'Up to 3 doctor profiles', 'Instant lead SMS + email', 'Analytics dashboard', 'Respond to reviews'],
           cta: 'Start free trial',
-          featured: true,
+          featured: false,
+          badge: '',
         },
         {
-          n: 'Group',
-          p: 'Custom',
-          period: '',
-          d: 'For multi-location clinic groups',
-          features: ['Everything in Practice', 'Featured placement in search', 'Custom branding', 'Dedicated account manager', 'Lead routing & CRM', 'Unlimited reviews'],
+          n: 'Professional',
+          p: '$59',
+          period: '/mo',
+          d: 'For established clinics seeking growth',
+          features: ['Everything in Starter', '20 clinic photos with gallery', 'Lead dashboard & enquiry management', 'Advanced analytics with trends', '"Professional Verified" badge', 'Featured placement in search', 'Priority email + chat support'],
+          cta: 'Start free trial',
+          featured: true,
+          badge: 'Most Popular',
+        },
+        {
+          n: 'Clinic Group',
+          p: '$119',
+          period: '/mo',
+          d: 'For multi-location clinic organizations',
+          features: ['Everything in Professional', 'Multi-location management', 'AI chatbot for patient engagement', 'Bulk lead export & CRM sync', '"Clinic Group" enterprise badge', 'Dedicated account manager', 'Custom branding & white-label reports', 'API access for integrations'],
           cta: 'Contact us',
           featured: false,
+          badge: '',
         },
       ].map((plan) => (
         <div class={`plan-card ${plan.featured ? 'featured' : ''}`} style={plan.featured ? 'background:var(--ink); border-color:var(--ink);' : 'background:white;'}>
-          {plan.featured && (
+          {plan.badge && (
+            <div class="inline-block px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide mb-4" style="background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.8)">
+              {plan.badge}
+            </div>
+          )}
+          {!plan.badge && plan.featured && (
             <div class="inline-block px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide mb-4" style="background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.8)">
               Most Popular
             </div>

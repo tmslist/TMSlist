@@ -34,8 +34,7 @@ export function getClinicImageUrl(clinic: {
 }
 
 /**
- * Generate a unique, stable portrait image URL for doctors/specialists.
- * Uses a different seed base so doctor and clinic photos never collide.
+ * Generate a DiceBear initials avatar URL for a doctor.
  */
 export function getDoctorImageUrl(doctor: {
   id?: string | number;
@@ -43,10 +42,25 @@ export function getDoctorImageUrl(doctor: {
   imageUrl?: string;
 }): string {
   if (doctor.imageUrl) return doctor.imageUrl;
+  const name = String(doctor.id ?? doctor.name ?? 'Doctor');
+  const initials = name
+    .split(/\s+/)
+    .slice(0, 2)
+    .map(w => w.charAt(0).toUpperCase())
+    .join('');
+  const encoded = encodeURIComponent(initials);
+  const bgColor = hashToColor(name);
+  return `https://api.dicebear.com/7.x/initials/svg?seed=${encoded}&backgroundColor=${bgColor}&textColor=ffffff&fontSize=40&fontWeight=600`;
+}
 
-  const id = String(doctor.id ?? doctor.name ?? 'doctor');
-  const seed = Math.abs(hashString(id)) + 999999; // offset so doctors never match clinics
-  return `https://picsum.photos/seed/${seed}/400/400`;
+function hashToColor(str: string): string {
+  const colors = ['3b82f6', '6366f1', '8b5cf6', 'a855f7', 'ec4899', 'ef4444', 'f97316', 'eab308', '22c55e', '14b8a6', '06b6d4', '3b82f6'];
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) {
+    h = ((h << 5) + h) + str.charCodeAt(i);
+    h = h & h;
+  }
+  return colors[Math.abs(h) % colors.length];
 }
 
 /**

@@ -10,7 +10,7 @@ mode:'standalone',}),
   vite: {
     build: {
       chunkSizeWarningLimit: 2000,
-      cssMinify: true,
+      cssMinify: 'lightningcss',
       minify: 'esbuild',
       rollupOptions: {
         external: ['@vercel/blob'],
@@ -18,6 +18,9 @@ mode:'standalone',}),
     },
     optimizeDeps: {
       include: ['three', '@react-three/fiber', '@react-three/drei', 'its-fine'],
+    },
+    css: {
+      devSourcemap: false,
     },
   },
   integrations: [
@@ -29,7 +32,8 @@ mode:'standalone',}),
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto',
-    concurrency: 4,
+    concurrency: 8,
+    assets: 'assets',
   },
   prefetch: {
     prefetchAll: false,
@@ -37,6 +41,10 @@ mode:'standalone',}),
     prefetch: {
       '/': true,
       '/us/': true,
+      '/treatments/': true,
+      '/blog/': true,
+      '/insurance/': true,
+      '/quiz/': true,
     },
   },
 });

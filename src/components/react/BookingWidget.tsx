@@ -53,13 +53,22 @@ export default function BookingWidget({ clinicId, clinicName, clinicPhone }: Pro
             message ? `Note: ${message}` : null,
           ].filter(Boolean).join('\n'),
           sourceUrl: window.location.href,
+          metadata: {
+            formType: 'appointment_request',
+            formPage: window.location.pathname,
+            preferredDate,
+            preferredTime,
+            condition,
+            insurance,
+          },
         }),
       });
 
       if (res.ok) {
         setSubmitted(true);
       } else {
-        setError('Something went wrong. Please try again or call the clinic directly.');
+        const errData = await res.json().catch(() => ({}));
+        setError(errData.details || errData.error || 'Something went wrong. Please try again or call the clinic directly.');
         setLoading(false);
         return;
       }

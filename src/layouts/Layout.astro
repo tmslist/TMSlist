@@ -174,6 +174,14 @@ const xDefaultHreflang = isCountryPage ? { lang: "x-default", url: `${siteUrl}${
 		<!-- Favicon preload for instant tab icon -->
 		<link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" />
 
+		<!-- Performance hints for external tracking (GTM, GA, Meta Pixel) -->
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+		<link rel="dns-prefetch" href="https://connect.facebook.net" />
+
+		<!-- Preload critical above-the-fold assets -->
+		<link rel="prefetch" as="image" href="/images/tms_hero.svg" />
+
 		<!-- Organization Schema -->
 		<script type="application/ld+json" set:html={`{
   "@context": "https://schema.org",
@@ -181,7 +189,7 @@ const xDefaultHreflang = isCountryPage ? { lang: "x-default", url: `${siteUrl}${
   "@id": "https://tmslist.com/#organization",
   "name": "TMS List",
   "url": "https://tmslist.com",
-  "logo": "https://tmslist.com/images/logo.png",
+  "logo": "https://tmslist.com/logotmslist.png",
   "description": "The leading directory of TMS (Transcranial Magnetic Stimulation) therapy providers. Find verified TMS clinics, compare treatments, and learn about insurance coverage.",
   "sameAs": [
     "https://twitter.com/tmslist",
@@ -208,24 +216,19 @@ const xDefaultHreflang = isCountryPage ? { lang: "x-default", url: `${siteUrl}${
   ]
 }`} />
 
-		<!-- Organization Schema -->
-		<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "WebSite",
-				"name": "TMS List",
-				"url": "https://tmslist.com",
-				"description": "The leading directory of TMS therapy providers worldwide",
-				"potentialAction": {
-					"@type": "SearchAction",
-					"target": "https://tmslist.com/us/?q={search_term_string}",
-					"query-input": "required name=search_term_string"
-				}
-			}
-		</script>
-
-		<!-- Organization Schema -->
-		<script type="application/ld+json" set:html={`{"@context":"https://schema.org","@type":"Organization","@id":"https://tmslist.com/#organization","name":"TMS List","url":"https://tmslist.com","logo":"https://tmslist.com/images/logo.png","description":"The leading directory of TMS therapy providers. Find verified TMS clinics, compare treatments, and learn about insurance coverage.","sameAs":["https://twitter.com/tmslist","https://www.linkedin.com/company/tmslist"],"contactPoint":{"@type":"ContactPoint","contactType":"customer service","url":"https://tmslist.com/contact/"},"knowsAbout":[{"@type":"Thing","name":"Transcranial Magnetic Stimulation (TMS)"},{"@type":"Thing","name":"Treatment-Resistant Depression"}]}`} />
+		<!-- WebSite Schema -->
+		<script type="application/ld+json" set:html={`{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "TMS List",
+  "url": "https://tmslist.com",
+  "description": "The leading directory of TMS therapy providers worldwide",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://tmslist.com/us/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}`} />
 
 		<!-- Page Specific Schema -->
 		{schema && <script type="application/ld+json" set:html={schema} />}
@@ -272,12 +275,12 @@ const xDefaultHreflang = isCountryPage ? { lang: "x-default", url: `${siteUrl}${
 			<>
 				<Footer />
 				<LocationPopup />
-				<EnquiryModal client:visible />
+				<EnquiryModal client:idle />
 				<UTMCapture client:idle />
 				<CallbackModal />
 				<LeadMagnetModal />
-				<SocialProofToast client:visible />
-				<ExitIntent client:visible />
+				<SocialProofToast client:idle />
+				<ExitIntent client:idle />
 				<CookieConsent />
 			</>
 		)}

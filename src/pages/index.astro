@@ -300,25 +300,38 @@ const searchData = [
     ]),
 ];
 
-const schema = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "MedicalOrganization",
-    "name": "TMS List",
-    "url": "https://tmslist.com",
-    "logo": "https://tmslist.com/logotmslist.png",
-    "description": "The leading directory of FDA-cleared TMS therapy providers. Find verified clinics and specialists near you.",
-    "potentialAction": {
-        "@type": "SearchAction",
-        "target": `https://tmslist.com${viewAllUrl}?q={search_term_string}`,
-        "query-input": "required name=search_term_string"
+// Combined schema including BreadcrumbList for homepage
+const combinedSchema = JSON.stringify([
+    {
+        "@context": "https://schema.org",
+        "@type": "MedicalOrganization",
+        "name": "TMS List",
+        "url": "https://tmslist.com",
+        "logo": "https://tmslist.com/logotmslist.png",
+        "description": "The leading directory of FDA-cleared TMS therapy providers. Find verified clinics and specialists near you.",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": `https://tmslist.com${viewAllUrl}?q={search_term_string}`,
+            "query-input": "required name=search_term_string"
+        }
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://tmslist.com/"
+        }]
     }
-});
+]);
 ---
 
 <Layout
     title="TMS List — Find TMS Therapy Clinics Near You | Verified Reviews & Insurance Info"
-    description="Find FDA-cleared TMS therapy clinics near you. Compare verified reviews, insurance coverage, pricing, and specialists. The leading directory of TMS providers in the US and worldwide."
-    schema={schema}
+    description="Find FDA-cleared TMS therapy clinics near you. Compare verified providers, insurance coverage, and read real reviews. Start your treatment journey with TMS List."
+    schema={combinedSchema}
     hreflang={[
         { lang: 'x-default', url: 'https://tmslist.com/' },
         { lang: 'en-US', url: 'https://tmslist.com/us/' },
@@ -343,6 +356,7 @@ const schema = JSON.stringify({
         { lang: 'en-AE', url: 'https://tmslist.com/ae/' },
         { lang: 'en-IL', url: 'https://tmslist.com/il/' },
     ]}
+    breadcrumbs={[{ name: "Home", url: "/" }]}
 >
     <!-- HERO — Editorial-warm -->
     <section class="relative overflow-hidden" style="background:var(--paper); padding-top:8rem; padding-bottom:5rem; border-bottom:1px solid var(--line);">
@@ -409,6 +423,9 @@ const schema = JSON.stringify({
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                                 Depression
                             </a>
+                            <a href="/quiz/am-i-a-candidate/" class="quick-link" style="padding:.5rem 1rem; background:var(--warm)/10; border:1px solid var(--warm)/30; border-radius:9999px; font-size:13px; font-weight:600; color:var(--warm); text-decoration:none;">
+                                Take the Quiz →
+                            </a>
                         </div>
                     ) : (
                         <div class="hero-links flex flex-wrap items-center gap-2" data-quick-links-country={VISITOR_COUNTRY}>
@@ -430,7 +447,7 @@ const schema = JSON.stringify({
 
                         <!-- Brain Image -->
                         <div class="relative z-10">
-                            <img src="/images/tms_hero.svg" alt="TMS treatment illustration showing figure-8 coil targeting the left prefrontal cortex" width="520" height="520" class="w-full h-full object-contain" style="filter:drop-shadow(0 20px 50px rgba(10,22,40,0.18));" />
+                            <img src="/images/tms_hero.svg" alt="TMS treatment illustration showing figure-8 coil targeting the left prefrontal cortex" width="520" height="520" class="w-full h-full object-contain" style="filter:drop-shadow(0 20px 50px rgba(10,22,40,0.18));" fetchpriority="high" decoding="async" />
                         </div>
 
                         <!-- Editorial stat cards -->
@@ -598,7 +615,7 @@ const schema = JSON.stringify({
                                 alt="Scientific diagram showing how the TMS figure-8 coil generates magnetic pulses that penetrate the skull to activate neurons"
                                 width="600"
                                 height="400"
-                                loading="lazy"
+                                loading="lazy" decoding="async"
                                 class="w-full h-full object-cover"
                             />
                         </div>
@@ -659,7 +676,7 @@ const schema = JSON.stringify({
                         </div>
                     </div>
                     <div class="rounded-xl overflow-hidden bg-[var(--paper)] aspect-[4/3]">
-                        <img src="/images/tms_coil_detail.svg" alt="Detailed view of figure-8 TMS coil and how it focuses magnetic fields" class="w-full h-full object-cover" loading="lazy" width="600" height="400"/>
+                        <img src="/images/tms_coil_detail.svg" alt="Detailed view of figure-8 TMS coil and how it focuses magnetic fields" class="w-full h-full object-cover" loading="lazy" decoding="async" width="600" height="400"/>
                     </div>
                 </div>
 
@@ -716,7 +733,7 @@ const schema = JSON.stringify({
                         </div>
                     </div>
                     <div class="rounded-xl overflow-hidden bg-[var(--paper)] aspect-[4/3]">
-                        <img src="/images/tms_consultation.svg" alt="Doctor consulting with patient about TMS therapy" class="w-full h-full object-cover" loading="lazy" width="600" height="400"/>
+                        <img src="/images/tms_consultation.svg" alt="Doctor consulting with patient about TMS therapy" class="w-full h-full object-cover" loading="lazy" decoding="async" width="600" height="400"/>
                     </div>
                 </div>
 
@@ -756,7 +773,7 @@ const schema = JSON.stringify({
                         </div>
                     </div>
                     <div class="rounded-xl overflow-hidden bg-[var(--paper)] aspect-[4/3]">
-                        <img src="/images/tms_session.svg" alt="Patient receiving TMS treatment in comfortable chair with figure-8 coil" class="w-full h-full object-cover" loading="lazy" width="600" height="400"/>
+                        <img src="/images/tms_session.svg" alt="Patient receiving TMS treatment in comfortable chair with figure-8 coil" class="w-full h-full object-cover" loading="lazy" decoding="async" width="600" height="400"/>
                     </div>
                 </div>
 
@@ -770,7 +787,7 @@ const schema = JSON.stringify({
                         </div>
                     </div>
                     <div class="rounded-xl overflow-hidden bg-[var(--paper)] aspect-[4/3]">
-                        <img src="/images/tms_results.svg" alt="Patient progress chart showing depression scores improving over TMS treatment" class="w-full h-full object-cover" loading="lazy" width="600" height="400"/>
+                        <img src="/images/tms_results.svg" alt="Patient progress chart showing depression scores improving over TMS treatment" class="w-full h-full object-cover" loading="lazy" decoding="async" width="600" height="400"/>
                     </div>
                 </div>
             </div>

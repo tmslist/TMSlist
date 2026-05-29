@@ -109,6 +109,7 @@ const ENTITY_TYPE_OPTIONS = [
 export default function AdminAuditLog() {
   const [data, setData] = useState<AuditResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   // Filter state
@@ -133,9 +134,11 @@ export default function AdminAuditLog() {
       if (dateTo) params.set('to', dateTo);
 
       const res = await fetch(`/api/admin/audit?${params}`);
-      if (res.ok) setData(await res.json());
+      if (res.status === 401) { window.location.href = '/admin/login'; return; }
+      if (!res.ok) throw new Error(`Failed: ${res.status}`);
+      setData(await res.json());
     } catch (err) {
-      console.error('Failed to fetch audit log:', err);
+      setError(err instanceof Error ? err.message : 'Failed to load audit log');
     } finally {
       setLoading(false);
     }
@@ -284,6 +287,19 @@ export default function AdminAuditLog() {
           <div className="p-16 text-center">
             <div className="inline-block w-6 h-6 border-2 border-[var(--line)] border-t-[#0A1628] rounded-full animate-spin mb-3" />
             <p className="text-[var(--muted)] text-sm">Loading audit log...</p>
+          </div>
+        ) : error ? (
+          <div className="p-12 text-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-red-50 mb-4">
+              <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <p className="text-lg font-medium text-red-700">{error}</p>
+            <p className="text-sm text-[var(--muted)] mt-2">Check your connection or try again</p>
+            <button onClick={fetchData} className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg text-sm hover:bg-red-700 transition-colors">
+              Retry
+            </button>
           </div>
         ) : !data?.entries.length ? (
           <div className="p-16 text-center">

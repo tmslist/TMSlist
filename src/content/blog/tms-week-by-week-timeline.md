@@ -168,3 +168,16 @@ The single best practice across the course is a daily 0-10 mood score plus one s
 A typical TMS course unfolds in a recognizable shape: week 1 is logistical, week 2 hints at change, week 3 is the inflection, weeks 4-5 consolidate, and week 6 puts a formal cap on it. Most responders feel meaningfully better by the end. A real subset don't, and they have other options.
 
 The single thing that predicts the best outcome — beyond the medical factors you can't control — is just showing up consistently. Five sessions a week, six weeks, no shortcuts. Boring works.
+
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [Tms Vs Ect Comparing Brain Stimulation](/blog/tms-vs-ect-comparing-brain-stimulation/).
+For more information, see our guide to [Tms Vs Ect Comparison Guide](/blog/tms-vs-ect-comparison-guide/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [Maintenance Tms Guide](/blog/maintenance-tms-guide/).
+For more information, see our guide to [How Long Does Tms Last](/blog/how-long-does-tms-last/).
+For more information, see our guide to [Can I Drive After Tms](/blog/can-i-drive-after-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).

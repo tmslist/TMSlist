@@ -205,7 +205,8 @@ const layoutImage = clinic.hero_image_url || clinic.logo_url || clinic.media?.lo
                             </div>
                         )}
                         <h1 class="serif text-2xl sm:text-3xl lg:text-5xl font-normal tracking-tight leading-tight" style="color: var(--ink); letter-spacing: -0.02em;">
-                            {clinic.name}
+                            <span>{clinic.name}</span>
+                            <span class="block text-lg sm:text-xl lg:text-2xl font-light mt-1" style="color: var(--muted);">TMS Therapy in {city}, {stateName}</span>
                         </h1>
                     </div>
 

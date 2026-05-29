@@ -4,10 +4,11 @@ import EditorialHero from '../../components/editorial/EditorialHero.astro';
 import EditorialSection from '../../components/editorial/EditorialSection.astro';
 import EditorialCard from '../../components/editorial/EditorialCard.astro';
 import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
+import MedicalReviewBanner from '../../components/MedicalReviewBanner.astro';
 import { RESEARCH_SLUGS } from '../../utils/seo_slugs';
 
 const title = "TMS Research & Clinical Trials | Latest Scientific Data";
-const description = "Explore the latest TMS therapy research, clinical trials, and FDA clearance history. Evidence-based information on transcranial magnetic stimulation.";
+const description = "Explore peer-reviewed TMS therapy research and clinical trials. Evidence-based information on transcranial magnetic stimulation, FDA clearances, and neuromodulation science.";
 
 const researchMeta: Record<string, { description: string; tone: 'success' | 'accent' | 'warm' | 'muted' }> = {
     'clinical-trials': { description: 'Active trials for anxiety, PTSD, autism, and more. How to find and enroll in TMS studies.', tone: 'accent' },
@@ -40,6 +41,10 @@ const defaultMeta = { description: 'Evidence-based information from peer-reviewe
       { value: "58%", label: "Response Rate", color: "warm" },
     ]}
   />
+
+  <div style="max-width:900px; margin:0 auto; padding:2rem 1.5rem 0;">
+    <MedicalReviewBanner />
+  </div>
 
   <EditorialSection
     title="Research Topics"
@@ -83,6 +88,7 @@ const defaultMeta = { description: 'Evidence-based information from peer-reviewe
     ctas={[
       { label: "Take the Eligibility Quiz", href: "/quiz/am-i-a-candidate/" },
       { label: "Find a TMS Clinic", href: "/best-tms-clinics/", variant: "outline" },
+      { label: "TMS for Depression", href: "/treatments/depression/", variant: "outline" },
     ]}
     stickyMobile
   />

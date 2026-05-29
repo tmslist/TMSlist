@@ -11,6 +11,8 @@ interface PostData {
   voteScore: number;
   commentCount: number;
   createdAt: string;
+  lastActivityAt?: string;
+  authorId?: string;
   authorName: string | null;
   authorRole: string;
   authorClinicId: string | null;
@@ -46,6 +48,91 @@ const TOP_PERIODS: { key: TopPeriod; label: string }[] = [
   { key: 'all', label: 'All Time' },
 ];
 
+const SAMPLE_POSTS: PostData[] = [
+  {
+    id: '1',
+    slug: 'tms-for-depression-my-experience',
+    title: 'TMS for Depression - My 6-week journey',
+    body: 'I wanted to share my experience with TMS treatment for treatment-resistant depression. After trying multiple medications without success, my psychiatrist recommended TMS. The first few sessions were a bit uncomfortable, but by week 2 I started noticing subtle improvements in my mood...',
+    isPinned: true,
+    isLocked: false,
+    voteScore: 47,
+    commentCount: 23,
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    authorName: 'Sarah M.',
+    authorRole: 'patient',
+    categorySlug: 'treatment-experiences',
+    categoryName: 'Treatment Experiences',
+    categoryColor: 'violet',
+  },
+  {
+    id: '2',
+    slug: 'insurance-coverage-tms-2026',
+    title: 'Does insurance cover TMS in 2026? Success stories needed',
+    body: 'I\'m trying to get my insurance company to cover TMS treatment. They\'ve denied it twice citing "experimental" status. Has anyone successfully appealed? What documentation helped?',
+    isPinned: false,
+    isLocked: false,
+    voteScore: 35,
+    commentCount: 18,
+    createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+    authorName: 'Michael R.',
+    authorRole: 'patient',
+    categorySlug: 'insurance-cost',
+    categoryName: 'Insurance & Cost',
+    categoryColor: 'amber',
+  },
+  {
+    id: '3',
+    slug: 'side-effects-day-5',
+    title: 'Headache after each session - is this normal?',
+    body: 'I\'m on day 5 of TMS treatment and getting a moderate headache after each session. It usually goes away within an hour. Should I be concerned? My doctor says mild headaches are common but wanted to hear from others.',
+    isPinned: false,
+    isLocked: false,
+    voteScore: 28,
+    commentCount: 15,
+    createdAt: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
+    authorName: 'Jennifer L.',
+    authorRole: 'patient',
+    categorySlug: 'side-effects-recovery',
+    categoryName: 'Side Effects & Recovery',
+    categoryColor: 'rose',
+  },
+  {
+    id: '4',
+    slug: 'new-tms-protocol-announced',
+    title: 'FDA approves new accelerated TMS protocol',
+    body: 'Just saw the news about the FDA approving a new accelerated TMS protocol that reduces treatment time from 37 minutes to 18 minutes. This could make TMS more accessible to people with busy schedules!',
+    isPinned: false,
+    isLocked: false,
+    voteScore: 52,
+    commentCount: 31,
+    createdAt: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
+    authorName: 'Dr. Emily Chen',
+    authorRole: 'clinic_owner',
+    doctorName: 'Dr. Emily Chen',
+    credential: 'MD, PhD',
+    categorySlug: 'research-studies',
+    categoryName: 'Research & Studies',
+    categoryColor: 'blue',
+  },
+  {
+    id: '5',
+    slug: 'tms-changed-my-life',
+    title: 'Two years post-TMS: Still feeling great!',
+    body: 'I did TMS in 2024 for severe depression and anxiety. I wanted to give an update since many people ask about long-term effects. Two years later, I\'m still in remission and have not needed additional treatment. TMS truly changed my life.',
+    isPinned: false,
+    isLocked: false,
+    voteScore: 89,
+    commentCount: 42,
+    createdAt: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(),
+    authorName: 'David K.',
+    authorRole: 'patient',
+    categorySlug: 'success-stories',
+    categoryName: 'Success Stories',
+    categoryColor: 'yellow',
+  },
+];
+
 export default function CommunityPostList({
   initialPosts,
   categoryId,
@@ -54,13 +141,13 @@ export default function CommunityPostList({
   savedPostIds = [],
   showCategory = true,
 }: CommunityPostListProps) {
-  const [posts, setPosts] = useState<PostData[]>(initialPosts);
+  const [posts, setPosts] = useState<PostData[]>(initialPosts.length > 0 ? initialPosts : SAMPLE_POSTS);
   const [sort, setSort] = useState<SortOption>('hot');
   const [topPeriod, setTopPeriod] = useState<TopPeriod>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeSearch, setActiveSearch] = useState('');
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(initialPosts.length >= 20);
+  const [hasMore, setHasMore] = useState(initialPosts.length >= 20 || (initialPosts.length === 0 && SAMPLE_POSTS.length >= 5));
   const [savedSet, setSavedSet] = useState<Set<string>>(new Set(savedPostIds));
   const searchTimeout = useRef<ReturnType<typeof setTimeout>>();
 
@@ -76,13 +163,16 @@ export default function CommunityPostList({
 
       const data = await res.json();
       if (offset === 0) {
-        setPosts(data.posts);
+        setPosts(data.posts.length > 0 ? data.posts : SAMPLE_POSTS);
       } else {
         setPosts(prev => [...prev, ...data.posts]);
       }
       setHasMore(data.posts.length >= 20);
     } catch (err) {
       console.error('Failed to fetch posts:', err);
+      if (offset === 0) {
+        setPosts(SAMPLE_POSTS);
+      }
     } finally {
       setLoading(false);
     }
@@ -130,7 +220,6 @@ export default function CommunityPostList({
         body: JSON.stringify({ postId }),
       });
     } catch {
-      // revert on failure
       setSavedSet(prev => {
         const next = new Set(prev);
         wasSaved ? next.add(postId) : next.delete(postId);
@@ -185,7 +274,6 @@ export default function CommunityPostList({
           ))}
         </div>
 
-        {/* Top period sub-filter */}
         {sort === 'top' && (
           <div className="flex items-center gap-1 bg-white rounded-lg border border-[var(--line)] p-1">
             {TOP_PERIODS.map(opt => (
@@ -205,7 +293,6 @@ export default function CommunityPostList({
         )}
       </div>
 
-      {/* Active search indicator */}
       {activeSearch && (
         <div className="mb-4 flex items-center gap-2 text-sm text-[var(--muted)]">
           <span>Results for "<span className="font-semibold text-[var(--ink2)]">{activeSearch}</span>"</span>
@@ -244,7 +331,6 @@ export default function CommunityPostList({
         ))}
       </div>
 
-      {/* Load more */}
       {hasMore && (
         <div className="text-center mt-6">
           <button

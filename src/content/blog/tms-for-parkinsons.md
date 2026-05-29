@@ -146,3 +146,13 @@ As the evidence base grows, TMS may become a standard adjunctive treatment for s
 ---
 
 *If you have Parkinson's disease and are experiencing persistent motor symptoms or depression despite optimal medication management, discuss TMS with your movement disorders neurologist to determine whether you may be a candidate.*
+
+
+For more information, see our guide to [Tms For Parkinsons](/blog/tms-for-parkinsons/).
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).
+For more information, see our guide to [search for TMS specialists](/specialists/).

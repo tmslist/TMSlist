@@ -1,0 +1,33 @@
+---
+export const prerender = false;
+import '../styles/global.css';
+
+const { title = 'TMS List', description } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body style="background-color: #111418; color: #E6EDF3; font-family: 'Plus Jakarta Sans', sans-serif;">
+  <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem;">
+    <!-- TMS logo -->
+    <a href="/" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; text-decoration: none;">
+      <div style="width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center;" >
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="#C9654A"/>
+          <path d="M8 16C8 11.5817 11.5817 8 16 8C20.4183 8 24 11.5817 24 16C24 20.4183 20.4183 24 16 24C11.5817 24 8 20.4183 8 16Z" stroke="white" stroke-width="2"/>
+          <path d="M12 16H20M16 12V20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span style="font-size: 1.25rem; font-weight: 700; color: #E6EDF3; letter-spacing: -0.02em;">TMS List</span>
+    </a>
+
+    <slot />
+  </div>
+</body>
+</html>

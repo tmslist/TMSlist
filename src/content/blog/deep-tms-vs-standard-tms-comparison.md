@@ -78,3 +78,16 @@ Technology choice in TMS is not a simple matter of "better" or "worse." Differen
 Start with the condition. If you have OCD, deep TMS is specifically designed for your case. If you have depression and have not responded to standard TMS, deep TMS represents a reasonable next step. For most other indications, standard TMS remains the well-established first-line TMS approach.
 
 Then find the best team, not the best coil.
+
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [Tms For Anxiety Fda Breakthrough](/blog/tms-for-anxiety-fda-breakthrough/).
+For more information, see our guide to [Tms For Depression](/blog/tms-for-depression/).
+For more information, see our guide to [Questions To Ask Tms Clinic](/blog/questions-to-ask-tms-clinic/).
+For more information, see our guide to [Maintenance Tms Guide](/blog/maintenance-tms-guide/).
+For more information, see our guide to [Real Cost Of Tms Therapy 2026](/blog/real-cost-of-tms-therapy-2026/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).
+For more information, see our guide to [Stanford Neuromodulation Therapy Snt 2026](/blog/stanford-neuromodulation-therapy-snt-2026/).

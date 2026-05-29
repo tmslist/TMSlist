@@ -76,3 +76,15 @@ Your first session will be longer than subsequent ones because of the calibratio
 If you feel nervous before or during your first session, tell your technician. We deal with anxious patients constantly and have strategies that help — from explaining every step to providing stress balls to hold. You're not the first person who's been nervous, and you won't be the last.
 
 Your first TMS session is the beginning of a carefully structured treatment course. By week 2, the process will feel familiar and routine. By week 4, most patients are reading, working, or watching Netflix during sessions without a second thought.
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [Tms Vs Ect Comparing Brain Stimulation](/blog/tms-vs-ect-comparing-brain-stimulation/).
+For more information, see our guide to [Tms Vs Ect Comparison Guide](/blog/tms-vs-ect-comparison-guide/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [Maintenance Tms Guide](/blog/maintenance-tms-guide/).
+For more information, see our guide to [Can I Drive After Tms](/blog/can-i-drive-after-tms/).
+For more information, see our guide to [Going Back To Work During Tms](/blog/going-back-to-work-during-tms/).
+For more information, see our guide to [Real Cost Of Tms Therapy 2026](/blog/real-cost-of-tms-therapy-2026/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [Deep Tms Vs Standard Tms Comparison](/blog/deep-tms-vs-standard-tms-comparison/).

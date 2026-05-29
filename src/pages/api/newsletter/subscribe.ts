@@ -36,13 +36,14 @@ export const POST: APIRoute = async ({ request }) => {
       type: 'newsletter',
       email: parsed.data.email,
       name: parsed.data.name,
+      sourceUrl: parsed.data.source || undefined,
       metadata: {
         funnel_segment: 'newsletter',
         funnel_entered_at: new Date().toISOString(),
         funnel_completed_steps: ['newsletter_welcome'],
         state: parsed.data.state,
         interests: parsed.data.interests,
-        source: parsed.data.source || 'website',
+        formPage: parsed.data.source,
       },
     });
 

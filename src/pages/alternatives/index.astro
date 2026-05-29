@@ -9,17 +9,17 @@ import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
 import { ALTERNATIVE_SLUGS } from '../../utils/seo_slugs';
 
 const title = "TMS Alternatives | Spravato, Ketamine, ECT & Other Treatments";
-const description = "Compare TMS therapy alternatives — Spravato (esketamine), ketamine infusions, ECT, VNS, neurofeedback, psilocybin therapy, and more.";
+const description = "Compare TMS vs ECT, ketamine, Spravato, and other alternatives for treatment-resistant depression. Side-by-side analysis of efficacy, side effects, and cost.";
 
-const ALT_META: Record<string, { description: string; fdaStatus: string; speed: string }> = {
-  'spravato-esketamine': { description: 'FDA-cleared nasal spray for treatment-resistant depression. Administered in-office with 2-hour monitoring.', fdaStatus: 'FDA Cleared', speed: 'Hours-Days' },
-  'ketamine-infusion-therapy': { description: 'IV ketamine for rapid depression relief. Off-label but growing rapidly. Works within hours.', fdaStatus: 'Off-label', speed: 'Hours' },
-  'electroconvulsive-therapy-ect': { description: 'Gold standard for severe, life-threatening depression. Requires anesthesia. Highest remission rates of any treatment.', fdaStatus: 'FDA Cleared', speed: 'Days-Weeks' },
-  'vagus-nerve-stimulation': { description: 'Surgically implanted device stimulating the vagus nerve. For severe treatment-resistant depression.', fdaStatus: 'FDA Cleared', speed: 'Months' },
-  'neurofeedback': { description: 'Brain training using real-time EEG. Teaches self-regulation of brain activity. Non-invasive.', fdaStatus: 'Not FDA Cleared', speed: 'Weeks-Months' },
-  'psilocybin-assisted-therapy': { description: 'Psychedelic-assisted therapy showing breakthrough results in clinical trials. Not yet FDA-approved.', fdaStatus: 'Investigational', speed: '1-2 Sessions' },
-  'deep-brain-stimulation': { description: 'Surgically implanted electrodes in specific brain regions. Last-resort for the most severe cases.', fdaStatus: 'Investigational', speed: 'Weeks-Months' },
-  'stellate-ganglion-block': { description: 'Anesthetic injection near the neck targeting PTSD symptoms. Rapid relief, growing evidence base.', fdaStatus: 'Off-label', speed: 'Hours-Days' },
+const ALT_META: Record<string, { description: string; fdaStatus: string; speed: string; conditionLink?: string }> = {
+  'spravato-esketamine': { description: 'FDA-cleared nasal spray for treatment-resistant depression. Administered in-office with 2-hour monitoring.', fdaStatus: 'FDA Cleared', speed: 'Hours-Days', conditionLink: '/treatments/depression/' },
+  'ketamine-infusion-therapy': { description: 'IV ketamine for rapid depression relief. Off-label but growing rapidly. Works within hours.', fdaStatus: 'Off-label', speed: 'Hours', conditionLink: '/treatments/depression/' },
+  'electroconvulsive-therapy-ect': { description: 'Gold standard for severe, life-threatening depression. Requires anesthesia. Highest remission rates of any treatment.', fdaStatus: 'FDA Cleared', speed: 'Days-Weeks', conditionLink: '/treatments/depression/' },
+  'vagus-nerve-stimulation': { description: 'Surgically implanted device stimulating the vagus nerve. For severe treatment-resistant depression.', fdaStatus: 'FDA Cleared', speed: 'Months', conditionLink: '/treatments/depression/' },
+  'neurofeedback': { description: 'Brain training using real-time EEG. Teaches self-regulation of brain activity. Non-invasive.', fdaStatus: 'Not FDA Cleared', speed: 'Weeks-Months', conditionLink: '/treatments/depression/' },
+  'psilocybin-assisted-therapy': { description: 'Psychedelic-assisted therapy showing breakthrough results in clinical trials. Not yet FDA-approved.', fdaStatus: 'Investigational', speed: '1-2 Sessions', conditionLink: '/treatments/depression/' },
+  'deep-brain-stimulation': { description: 'Surgically implanted electrodes in specific brain regions. Last-resort for the most severe cases.', fdaStatus: 'Investigational', speed: 'Weeks-Months', conditionLink: '/treatments/depression/' },
+  'stellate-ganglion-block': { description: 'Anesthetic injection near the neck targeting PTSD symptoms. Rapid relief, growing evidence base.', fdaStatus: 'Off-label', speed: 'Hours-Days', conditionLink: '/treatments/ptsd/' },
 };
 
 const enrichedAlts = ALTERNATIVE_SLUGS.map(item => ({
@@ -64,6 +64,9 @@ const schema = JSON.stringify({
       { value: otherAlts.length, label: "Emerging", color: "warm" },
     ]}
   />
+  <div style="text-align:center; padding:1.5rem 0 2rem;">
+    <p style="font-size:14px; color:var(--muted);">See <a href="/treatments/" style="color:var(--accent); text-decoration:underline; font-weight:500;">how TMS therapy works</a> for your condition.</p>
+  </div>
 
   <EditorialSection
     title="FDA-Cleared Alternatives"
@@ -78,7 +81,7 @@ const schema = JSON.stringify({
           tag={a.fdaStatus}
           tagTone="success"
           title={a.title}
-          description={a.description}
+          description={a.description + (a.conditionLink ? ` <a href="${a.conditionLink}" style="color:var(--accent); text-decoration:underline;">Learn how TMS compares</a>.` : '')}
           size="lg"
           stats={[
             { label: "Onset", value: a.speed, color: "accent" },
@@ -102,7 +105,7 @@ const schema = JSON.stringify({
           tag={a.fdaStatus}
           tagTone={tagToneFor(a.fdaStatus)}
           title={a.title}
-          description={a.description}
+          description={a.description + (a.conditionLink ? ` <a href="${a.conditionLink}" style="color:var(--accent); text-decoration:underline;">Learn how TMS compares</a>.` : '')}
           size="sm"
           stats={[{ label: "Onset", value: a.speed, color: "accent" }]}
         />
@@ -116,6 +119,7 @@ const schema = JSON.stringify({
     ctas={[
       { label: "Take the Assessment", href: "/quiz/am-i-a-candidate/" },
       { label: "Find a Specialist", href: "/specialists/", variant: "outline" },
+      { label: "View TMS Treatment Options", href: "/treatments/", variant: "outline" },
     ]}
     stickyMobile
   />

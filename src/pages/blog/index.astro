@@ -91,7 +91,7 @@ const combinedSchema = `${itemListSchema}</script><script type="application/ld+j
   title="TMS Therapy Blog — Evidence-Based Guides, Research & Patient Stories | TMS List"
   description="Expert articles on TMS therapy: depression treatment, deep TMS, theta-burst protocols, insurance coverage, and the latest neuromodulation research. Updated weekly."
   canonical="https://tmslist.com/blog/"
-  contentType="website"
+  contentType="blog"
   schema={combinedSchema}
   breadcrumbs={[
     { name: "Home", url: "/" },
@@ -200,6 +200,67 @@ const combinedSchema = `${itemListSchema}</script><script type="application/ld+j
               </article>
             </a>
           )})}
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-16 bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-8">
+          <h3 class="text-lg font-semibold text-[var(--ink)] mb-4">Related Reading</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="/blog/tms-cost-insurance-guide-2026/" class="group flex items-start gap-3 p-4 rounded-xl hover:bg-[var(--paper)] transition-colors">
+              <div class="w-10 h-10 rounded-lg bg-[var(--warm)]/10 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[var(--warm)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">TMS Cost & Insurance Guide</p>
+                <p class="text-xs text-[var(--muted)] mt-0.5">Coverage, out-of-pocket costs, and appeals</p>
+              </div>
+            </a>
+            <a href="/blog/how-to-find-tms-clinic-guide/" class="group flex items-start gap-3 p-4 rounded-xl hover:bg-[var(--paper)] transition-colors">
+              <div class="w-10 h-10 rounded-lg bg-[var(--ink)]/10 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[var(--ink)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">How to Find a TMS Clinic</p>
+                <p class="text-xs text-[var(--muted)] mt-0.5">What to look for, questions to ask</p>
+              </div>
+            </a>
+            <a href="/blog/tms-for-depression/" class="group flex items-start gap-3 p-4 rounded-xl hover:bg-[var(--paper)] transition-colors">
+              <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">TMS for Depression</p>
+                <p class="text-xs text-[var(--muted)] mt-0.5">The primary cleared indication for TMS</p>
+              </div>
+            </a>
+            <a href="/blog/questions-to-ask-tms-clinic/" class="group flex items-start gap-3 p-4 rounded-xl hover:bg-[var(--paper)] transition-colors">
+              <div class="w-10 h-10 rounded-lg bg-[var(--warm)]/10 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[var(--warm)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">18 Questions to Ask Your Clinic</p>
+                <p class="text-xs text-[var(--muted)] mt-0.5">Device, protocols, outcomes, and costs</p>
+              </div>
+            </a>
+            <a href="/blog/preparing-for-first-tms-session/" class="group flex items-start gap-3 p-4 rounded-xl hover:bg-[var(--paper)] transition-colors">
+              <div class="w-10 h-10 rounded-lg bg-[var(--ink)]/10 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[var(--ink)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">Preparing for Your First Session</p>
+                <p class="text-xs text-[var(--muted)] mt-0.5">What to bring, what to expect on day one</p>
+              </div>
+            </a>
+            <a href="/blog/maintenance-tms-guide/" class="group flex items-start gap-3 p-4 rounded-xl hover:bg-[var(--paper)] transition-colors">
+              <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">Maintenance TMS Guide</p>
+                <p class="text-xs text-[var(--muted)] mt-0.5">Booster sessions and long-term planning</p>
+              </div>
+            </a>
+          </div>
         </div>
 
         <!-- Newsletter -->

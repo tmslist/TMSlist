@@ -123,6 +123,21 @@ export const POST: APIRoute = async ({ request }) => {
         metadata: { attempts: newAttempts, locked: reachedThreshold },
       });
 
+      try {
+        const { adminActionLog } = await import('../../../../db/schema');
+        await db.insert(adminActionLog).values({
+          userId: user.id,
+          userEmail: user.email,
+          action: 'admin_2fa_verification_failed',
+          entityType: 'session',
+          ipAddress: ip,
+          userAgent,
+          details: { attempts: newAttempts, locked: reachedThreshold },
+        });
+      } catch {
+        // non-fatal
+      }
+
       if (reachedThreshold) {
         const retry = Math.ceil(TOTP_LOCK_DURATION_MS / 1000);
         return json(
@@ -160,6 +175,21 @@ export const POST: APIRoute = async ({ request }) => {
       ipAddress: ip,
       userAgent,
     });
+
+    // Also write to admin_action_log
+    try {
+      const { adminActionLog } = await import('../../../../db/schema');
+      await db.insert(adminActionLog).values({
+        userId: user.id,
+        userEmail: user.email,
+        action: isLoginFlow ? 'admin_2fa_login_success' : 'admin_2fa_setup_verified',
+        entityType: 'session',
+        ipAddress: ip,
+        userAgent,
+      });
+    } catch {
+      // non-fatal
+    }
 
     // Set the real session cookie and clear the pending-MFA cookie.
     const headers = new Headers({ 'Content-Type': 'application/json' });

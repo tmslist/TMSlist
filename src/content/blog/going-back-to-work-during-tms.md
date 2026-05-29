@@ -123,3 +123,15 @@ If you've been on short-term disability or leave during the early weeks of TMS:
 For most people, TMS doesn't actually require any change to your work setup beyond a 30-minute daily appointment for 6 weeks. The bigger work-related challenge is usually the depression itself, not the treatment — and the treatment, by design, makes that better over time.
 
 The single best thing you can do upfront: pick a clinic that offers iTBS and early-morning slots, lock in a standing appointment, and don't volunteer information to your employer that you don't have to. Six weeks later, you'll be back to baseline workload — often better than baseline.
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [Tms For Anxiety Fda Breakthrough](/blog/tms-for-anxiety-fda-breakthrough/).
+For more information, see our guide to [Tms For Depression](/blog/tms-for-depression/).
+For more information, see our guide to [Maintenance Tms Guide](/blog/maintenance-tms-guide/).
+For more information, see our guide to [Tms Success Rates 2026](/blog/tms-success-rates-2026/).
+For more information, see our guide to [How Long Does Tms Last](/blog/how-long-does-tms-last/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [Can I Drive After Tms](/blog/can-i-drive-after-tms/).

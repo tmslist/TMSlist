@@ -1,0 +1,778 @@
+{
+  "california-tms-clinics-santa-monica": {
+    "name": "California TMS Clinics",
+    "hero_url": "https://www.californiatmsclinics.com/wp-content/uploads/2025/04/IMG_8283-1-scaled-1.webp",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/california-tms-clinics-santa-monica-hero.webp",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:23:55.297Z"
+  },
+  "del-mar-brain-tms-san-diego": {
+    "name": "Del Mar Brain and TMS Center",
+    "hero_url": "https://delmarbrainandtms.com/wp-content/uploads/2025/08/tmpkvtnpblr.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/del-mar-brain-tms-san-diego-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:23:55.379Z"
+  },
+  "westwood-minds-los-angeles": {
+    "name": "Westwood Minds",
+    "hero_url": "https://provider0-564f9.web.app/TMS%20Los%20Angeles%20LA%20TMS%20NeuroStar%20Advanced%20Therapy%20TMS_files/westwoods+minds+logo+white-362w.png",
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:30:48.494Z"
+  },
+  "southern-california-tms-center-pasadena": {
+    "name": "Southern California TMS Center",
+    "hero_url": "https://www.brainsway.com/wp-content/uploads/2021/04/BrainsWay-2021-logo_full-color_black-name-1-e1619462194423.png",
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:30:49.305Z"
+  },
+  "advanced-tms-clinic-oceanside": {
+    "name": "Advanced TMS Clinic",
+    "hero_url": "https://neurostar.com/wp-content/uploads/2024/04/adolescent-slider-patient-home-mbl-800x0-c-default.webp",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/advanced-tms-clinic-oceanside-hero.webp",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:24:02.725Z"
+  },
+  "wellness-tms-long-beach": {
+    "name": "Wellness TMS Long Beach",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:04.696Z"
+  },
+  "exomind-los-angeles": {
+    "name": "Exomind Los Angeles",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:06.368Z"
+  },
+  "beaches-tms-jacksonville": {
+    "name": "Beaches TMS & Brain Health",
+    "hero_url": "https://www.brainsway.com/wp-content/uploads/2021/04/BrainsWay-2021-logo_full-color_black-name-1-e1619462194423.png",
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:06.484Z"
+  },
+  "my-tms-miami": {
+    "name": "My TMS Miami",
+    "hero_url": "https://mytmstherapy.com/wp-content/uploads/2025/05/My-tms-logo-primary-no-bkg.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/my-tms-miami-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:24:24.260Z"
+  },
+  "my-tms-boca-raton": {
+    "name": "My TMS Boca Raton",
+    "hero_url": "https://mytmstherapy.com/wp-content/uploads/2025/05/My-tms-logo-primary-no-bkg.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/my-tms-boca-raton-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:24:26.329Z"
+  },
+  "neuro-wellness-tms-coral-springs": {
+    "name": "Neuro Wellness TMS Centers",
+    "hero_url": "https://cdn2.psychologytoday.com/assets/styles/magazine_384x504/public/magazine/2026-04/2026-05.png.jpg?itok=0bF8jd5M",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neuro-wellness-tms-coral-springs-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:24:29.362Z"
+  },
+  "hopemark-health-chicago": {
+    "name": "Hopemark Health - Chicago",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:07.844Z"
+  },
+  "hopemark-health-naperville": {
+    "name": "Hopemark Health - Naperville",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:08.159Z"
+  },
+  "luxury-psychiatry-clinic-chicago": {
+    "name": "Luxury Psychiatry Clinic - Chicago",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:09.550Z"
+  },
+  "hope-tms-new-york": {
+    "name": "Hope TMS of NY",
+    "hero_url": "https://www.hopetmsofny.com/wp-content/uploads/home-logo-new.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/hope-tms-new-york-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:24:37.210Z"
+  },
+  "neuropsychiatric-center-nyc": {
+    "name": "Neuropsychiatric Center NYC",
+    "hero_url": "https://psychiatristsnyc.com/wp-content/uploads/2019/12/6E2A2070-scaled.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neuropsychiatric-center-nyc-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:24:43.736Z"
+  },
+  "sandhya-prashad-md-houston": {
+    "name": "Sandhya Prashad MD",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:10.959Z"
+  },
+  "university-place-tms-clinic": {
+    "name": "University Place TMS Clinic",
+    "hero_url": "http://static1.squarespace.com/static/68afffa8bf5eec28e6e105f4/t/68b003240e00661426a57749/1756365605038/64e57a1c-2959-11f0-b47a-0242ac110002-png-regular_image.png?format=1500w",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/university-place-tms-clinic-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:24:49.885Z"
+  },
+  "american-tms-clinics-scottsdale": {
+    "name": "American TMS Clinics - Scottsdale",
+    "hero_url": "http://www.americantmsclinics.com/wp-content/uploads/2024/02/11.jpeg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/american-tms-clinics-scottsdale-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:24:51.461Z"
+  },
+  "bella-vida-tms-phoenix": {
+    "name": "Bella Vida TMS",
+    "hero_url": "https://bellavidatms.com/wp-content/uploads/2025/11/PHQ-9-41-yo-250-x-250-px.png",
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:12.244Z"
+  },
+  "tms-institute-arizona-scottsdale": {
+    "name": "TMS Institute of Arizona",
+    "hero_url": "https://tmsinstitute.co/wp-content/uploads/2020/01/logo-restaurant.png",
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:14.794Z"
+  },
+  "serenity-tms-centers-phoenix": {
+    "name": "Serenity TMS Centers - Phoenix",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:15.366Z"
+  },
+  "axis-integrated-denver": {
+    "name": "Axis Integrated Mental Health",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:18.162Z"
+  },
+  "tms-center-colorado-lakewood": {
+    "name": "TMS Center of Colorado",
+    "hero_url": "https://tmscenterofcolorado.com/wp-content/uploads/2019/12/cropped-TMS-Centers-of-Colorado.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/tms-center-colorado-lakewood-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:25:08.701Z"
+  },
+  "southern-colorado-tms-center": {
+    "name": "Southern Colorado TMS Center",
+    "hero_url": "https://southerncoloradotms.com/wp-content/uploads/2021/02/Discover-What-TMS-Is.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/southern-colorado-tms-center-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:25:11.159Z"
+  },
+  "breakthru-psych-sandy-springs": {
+    "name": "Breakthru Psychiatric Solutions",
+    "hero_url": "https://www.breakthrupsych.com/wp-content/uploads/2026/01/og.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/breakthru-psych-sandy-springs-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:25:14.049Z"
+  },
+  "atlanta-integrative-psychiatry": {
+    "name": "Atlanta Integrative Psychiatry",
+    "hero_url": "https://atlantatms.clinic/wp-content/uploads/2026/03/featured-holder-8.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/atlanta-integrative-psychiatry-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:25:18.306Z"
+  },
+  "skyland-trail-atlanta": {
+    "name": "Skyland Trail - Glenn Family Wellness Clinic",
+    "hero_url": "https://www.skylandtrail.org/wp-content/uploads/2019/04/rollins-mental-health-campus.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/skyland-trail-atlanta-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:25:25.064Z"
+  },
+  "new-directions-pittsburgh": {
+    "name": "New Directions Mental Health - Pittsburgh",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:19.249Z"
+  },
+  "york-tms-clinic": {
+    "name": "York TMS Clinic",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:19.575Z"
+  },
+  "tms-center-lehigh-valley": {
+    "name": "TMS Center of Lehigh Valley",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:21.321Z"
+  },
+  "tms-institute-ohio-sandusky": {
+    "name": "TMS Institute of Ohio",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:21.378Z"
+  },
+  "neurobehavioral-medicine-bellaire": {
+    "name": "Neurobehavioral Medicine Consultants",
+    "hero_url": "https://www.neurobehavioralmed.com/wp-content/uploads/sites/100/2020/10/Neurobehavioral-Consultants-Logo-copy-1.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neurobehavioral-medicine-bellaire-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:25:31.844Z"
+  },
+  "greenbrook-north-canton": {
+    "name": "Greenbrook Mental Wellness - North Canton",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:23.792Z"
+  },
+  "modern-mind-clinic-michigan": {
+    "name": "Modern Mind Clinic",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:24.214Z"
+  },
+  "greenbrook-livonia-michigan": {
+    "name": "Greenbrook Mental Wellness - Livonia",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:26.014Z"
+  },
+  "pine-rest-tms-grand-rapids": {
+    "name": "Pine Rest ECT and TMS Clinic",
+    "hero_url": "https://www.pinerest.org/media/Live-Changing-Care-1200-x-628.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/pine-rest-tms-grand-rapids-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:25:55.874Z"
+  },
+  "hawaii-mental-health-specialists-honolulu": {
+    "name": "Hawaii Mental Health Specialists",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:27.456Z"
+  },
+  "advanced-psychiatric-therapeutics-honolulu": {
+    "name": "Advanced Psychiatric Therapeutics",
+    "hero_url": "https://www.apt-hi.com/wp-content/uploads/2020/11/Logo33-FINAL-easyread.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/advanced-psychiatric-therapeutics-honolulu-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:26:01.463Z"
+  },
+  "hoola-pono-tms-hawaii-pearl-city": {
+    "name": "Ho'ola Pono TMS Hawaii",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:31.867Z"
+  },
+  "wyoming-behavioral-institute-casper": {
+    "name": "Wyoming Behavioral Institute",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:32.142Z"
+  },
+  "true-north-tms-anchorage": {
+    "name": "True North TMS",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:33.235Z"
+  },
+  "greenbrook-tms-anchorage": {
+    "name": "Greenbrook TMS Anchorage",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:34.254Z"
+  },
+  "katies-way-plus-anchorage": {
+    "name": "Katie's Way Plus",
+    "hero_url": "https://katiesway.com/images/uploads/general/KW_opengraph_1200x630.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/katies-way-plus-anchorage-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:26:08.020Z"
+  },
+  "upper-midwest-tms-fargo": {
+    "name": "Upper Midwest TMS",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:35.687Z"
+  },
+  "journey-to-wellness-bismarck": {
+    "name": "Journey to Wellness",
+    "hero_url": "http://static1.squarespace.com/static/640a685f724c6e2322711dfa/t/68c86ce47e181e691ec1a2fa/1757965540630/FullLogo_Transparent_NoBuffer.png?format=1500w",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/journey-to-wellness-bismarck-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:26:18.100Z"
+  },
+  "butler-hospital-tms-clinic-providence": {
+    "name": "Butler Hospital TMS Clinic",
+    "hero_url": "https://www.butler.org/hs-fs/hubfs/TMS%20Clinic-2.jpg?width=3840&amp;height=2160&amp;name=TMS%20Clinic-2.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/butler-hospital-tms-clinic-providence-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:26:22.945Z"
+  },
+  "brown-university-health-tms-center-providence": {
+    "name": "Brown University Health Rhode Island TMS Center",
+    "hero_url": "https://www.brownhealth.org/sites/default/files/2020-10/image-default-header.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/brown-university-health-tms-center-providence-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:26:25.267Z"
+  },
+  "revive-therapeutic-services-north-kingstown": {
+    "name": "Revive Therapeutic Services",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:36.022Z"
+  },
+  "musc-health-tms-clinic-charleston": {
+    "name": "MUSC Health TMS Clinic",
+    "hero_url": "https://d3crna64wemw02.cloudfront.net/image/339713052848/image_6e8m7j2o9l6616hcj90uncrf31/-FJPG",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/musc-health-tms-clinic-charleston-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:26:35.388Z"
+  },
+  "carolina-psychiatry-greenville": {
+    "name": "Carolina Psychiatry",
+    "hero_url": "https://carolinapsychiatry.com/wp-content/uploads/2025/04/651410ec-a88e-444f-8920-a87d6b90d330-1.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/carolina-psychiatry-greenville-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:26:36.098Z"
+  },
+  "greenbrook-tms-irmo": {
+    "name": "Greenbrook TMS Irmo",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:36.700Z"
+  },
+  "tms-new-mexico-santa-fe": {
+    "name": "TMS New Mexico",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:37.680Z"
+  },
+  "sage-neuroscience-center-albuquerque": {
+    "name": "Sage Neuroscience Center",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:39.133Z"
+  },
+  "chrysalis-psychiatry-albuquerque": {
+    "name": "Chrysalis Psychiatry",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:39.191Z"
+  },
+  "nevada-mental-health-las-vegas": {
+    "name": "Nevada Mental Health",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:40.457Z"
+  },
+  "delve-psychiatry-las-vegas": {
+    "name": "Delve Psychiatry",
+    "hero_url": "http://static1.squarespace.com/static/661369225da81c78b78cd31a/t/6695b20fee04714a53f31880/1721086484004/3W1A9311.jpg?format=1500w",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/delve-psychiatry-las-vegas-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:26:48.333Z"
+  },
+  "holistic-behavioral-tms-therapy-las-vegas": {
+    "name": "Holistic Behavioral & TMS Therapy",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:43.051Z"
+  },
+  "alivation-health-lincoln": {
+    "name": "Alivation Health",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:43.108Z"
+  },
+  "tms-institute-great-plains-omaha": {
+    "name": "TMS Institute of Great Plains Mental Health",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:43.654Z"
+  },
+  "meridian-mental-health-tms-omaha": {
+    "name": "Meridian Mental Health and TMS Center",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:58.659Z"
+  },
+  "north-country-behavioral-medicine-colchester": {
+    "name": "North Country Behavioral Medicine",
+    "hero_url": "https://www.ncbmvermont.com/wp-content/uploads/sites/200/2019/10/cropped-Logo-NCBM-1-500x112-1.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/north-country-behavioral-medicine-colchester-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:27:07.945Z"
+  },
+  "state-street-tms-montpelier": {
+    "name": "State Street TMS",
+    "hero_url": "http://static1.squarespace.com/static/67912bdb8a66154599ed33cb/t/67ad26fb63e5fb3b43df3e61/1739400955100/state_steet_tms_logo_180x180.jpeg?format=1500w",
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:31:59.952Z"
+  },
+  "brandywine-valley-tms-wilmington": {
+    "name": "Brandywine Valley TMS",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:01.128Z"
+  },
+  "tms-of-wilmington": {
+    "name": "TMS of Wilmington",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:03.844Z"
+  },
+  "psychiatry-delaware-newark": {
+    "name": "Psychiatry Delaware",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:04.103Z"
+  },
+  "neurohealth-utah-bountiful": {
+    "name": "NeuroHealth Utah",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:06.105Z"
+  },
+  "neurowellness-utah-lehi": {
+    "name": "NeuroWellness Utah",
+    "hero_url": "http://static1.squarespace.com/static/655278d1bae4525035680852/t/65ce4dd0ce372972be3b14d4/1708019153042/Asset+5%403x-8.png?format=1500w",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neurowellness-utah-lehi-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:27:19.928Z"
+  },
+  "neurobehavioral-center-for-growth-salt-lake-city": {
+    "name": "Neurobehavioral Center for Growth",
+    "hero_url": "http://static1.squarespace.com/static/5ec5a69a87d3dc61a24ed148/t/63e3d62ef8731c5a13e5f83b/1675875886752/NBCG-Logo-BLK.png?format=1500w",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neurobehavioral-center-for-growth-salt-lake-city-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:27:28.197Z"
+  },
+  "mental-health-center-greater-manchester": {
+    "name": "The Mental Health Center of Greater Manchester",
+    "hero_url": "https://www.mhcgm.org/wp-content/uploads/2024/05/tms-content-image-1.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/mental-health-center-greater-manchester-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:27:35.122Z"
+  },
+  "center-for-life-management-derry": {
+    "name": "Center for Life Management",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:06.170Z"
+  },
+  "innovative-psychiatry-bedford": {
+    "name": "Innovative Psychiatry",
+    "hero_url": "https://img1.wsimg.com/isteam/ip/32fb8bcc-d0f6-4982-b5cd-66b5c9451200/thumbnails/thumbnail-32aeca49-2d86-40a5-821f-cd39e0838b7c.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/innovative-psychiatry-bedford-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:27:38.110Z"
+  },
+  "neurohealth-maine-south-portland": {
+    "name": "NeuroHealth Maine",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:06.259Z"
+  },
+  "tms-maine-portland": {
+    "name": "TMS Maine",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:06.619Z"
+  },
+  "touchstone-associates-portland": {
+    "name": "Touchstone Associates",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:07.181Z"
+  },
+  "mwi-health-sioux-falls": {
+    "name": "MWI Health Sioux Falls",
+    "hero_url": "https://mwihealth.org/wp-content/uploads/2025/06/cropped-MWI-Health-Logo.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/mwi-health-sioux-falls-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:27:43.268Z"
+  },
+  "manlove-brain-body-health-rapid-city": {
+    "name": "Manlove Brain + Body Health",
+    "hero_url": "https://theremedymn.com/wp-content/uploads/2024/04/Icon_FullColor.png",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/manlove-brain-body-health-rapid-city-hero.png",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:07.947Z"
+  },
+  "midvalley-healthcare-boise": {
+    "name": "MidValley Healthcare",
+    "hero_url": "https://midvalleyhealthcare.com/Portals/0/Midvalley-logo.png",
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:12.448Z"
+  },
+  "tms-solutions-boise": {
+    "name": "TMS Solutions Boise",
+    "hero_url": "https://www.brainsway.com/wp-content/uploads/2021/04/TMS_2019_Logo_WWW_5-e1618580642636.jpg",
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:12.535Z"
+  },
+  "nume-tms-boise": {
+    "name": "NuMe TMS Boise",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:14.746Z"
+  },
+  "tms-therapy-center-of-tulsa": {
+    "name": "TMS Therapy Center of Tulsa",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:14.750Z"
+  },
+  "edmond-psychiatric-associates-edmond": {
+    "name": "Edmond Psychiatric Associates",
+    "hero_url": "https://edmondpsychiatricassociates.com/wp-content/uploads/2026/03/hero-21_image-1.webp",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/edmond-psychiatric-associates-edmond-hero.webp",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:28:10.672Z"
+  },
+  "futurehealth-tms-lawton": {
+    "name": "FutureHealth TMS",
+    "hero_url": "https://futurehealthtms.com/wp-content/uploads/2024/11/HOME-HERO.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/futurehealth-tms-lawton-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:28:13.860Z"
+  },
+  "hagan-health-louisville": {
+    "name": "Hagan Health",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:16.502Z"
+  },
+  "oasis-tms-louisville": {
+    "name": "Oasis TMS Louisville",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:16.509Z"
+  },
+  "lexington-tms": {
+    "name": "Lexington TMS",
+    "hero_url": "http://static1.squarespace.com/static/600834603d27c928fce81848/t/60083cf17618d763289bd55d/1611152628697/PLLC+logo+blue+with+title.jpg?format=1500w",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/lexington-tms-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:28:18.996Z"
+  },
+  "mayo-clinic-psychiatry-rochester": {
+    "name": "Mayo Clinic Department of Psychiatry and Psychology",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:16.578Z"
+  },
+  "sonder-behavioral-health-wellness-edina": {
+    "name": "Sonder Behavioral Health and Wellness",
+    "hero_url": "https://sonderwellness.com/wp-content/uploads/2026/03/Sonder-wellness-therapist-therapy-tms.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/sonder-behavioral-health-wellness-edina-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:28:25.413Z"
+  },
+  "neurostim-tms-minneapolis": {
+    "name": "NeuroStim TMS Minneapolis",
+    "hero_url": "https://neurostimtms.com/wp-content/uploads/2019/12/NeuroStim-TMS.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neurostim-tms-minneapolis-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:28:27.417Z"
+  },
+  "nashville-neurocare-therapy": {
+    "name": "Nashville NeuroCare Therapy",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:16.956Z"
+  },
+  "vanderbilt-health-tms-nashville": {
+    "name": "Vanderbilt Health TMS Program",
+    "hero_url": "https://www.vanderbilthealth.com/img/vh_logo.png",
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:19.466Z"
+  },
+  "synaptic-psych-memphis": {
+    "name": "Synaptic Psych",
+    "hero_url": "https://hopeforyourbrain.com/wp-content/uploads/2022/07/web-Experts-section.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/synaptic-psych-memphis-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:28:32.006Z"
+  },
+  "lakeside-behavioral-health-bridgeton": {
+    "name": "Lakeside Behavioral Health",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:20.869Z"
+  },
+  "palmier-tms-st-louis": {
+    "name": "Palmier TMS & Behavioral Health",
+    "hero_url": "https://palmiertms.com/assets/images/social-share.jpg",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/palmier-tms-st-louis-hero.jpg",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:28:35.151Z"
+  },
+  "greenbrook-tms-tesson-ferry-st-louis": {
+    "name": "Greenbrook TMS Tesson Ferry",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:21.843Z"
+  },
+  "montana-psychiatry-brain-health-billings": {
+    "name": "Montana Psychiatry & Brain Health Center - Billings",
+    "hero_url": "https://mtpsychiatry.com/wp-content/uploads/2026/02/montana-psychiatry-hero-image.webp",
+    "hero_downloaded": true,
+    "hero_path": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/montana-psychiatry-brain-health-billings-hero.webp",
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:28:52.403Z"
+  },
+  "montana-psychiatry-brain-health-bozeman": {
+    "name": "Montana Psychiatry & Brain Health Center - Bozeman",
+    "hero_url": null,
+    "hero_downloaded": false,
+    "hero_path": null,
+    "doctor_photos": [],
+    "scraped_at": "2026-05-28T20:32:21.893Z"
+  }
+}

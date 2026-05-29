@@ -8,7 +8,7 @@ image: "/images/blog-covers/tms-for-binge-eating-disorder.svg"
 tags: ["tms", "binge-eating", "eating-disorder", "compulsivity", "food-addiction"]
 ---
 
-Binge eating disorder (BED) is the most common eating disorder in the United States, affecting approximately 2.8% of adults at some point in their lives — more than twice the prevalence of anorexia nervosa and bulimia nervosa combined. Characterized by recurrent episodes of eating large quantities of food in a discrete period, accompanied by a sense of loss of control and significant distress, BED is strongly associated with obesity, depression, anxiety, and metabolic syndrome. Despite its prevalence and health consequences, BED remains underdiagnosed and undertreated, with many patients failing to achieve adequate relief from available treatments. Transcranial magnetic stimulation is emerging as a promising intervention that targets the neurobiological circuits underlying binge eating and food addiction.
+[Binge eating disorder (BED) is the most common eating disorder](/blog/tms-for-eating-disorders/) in the United States, affecting approximately 2.8% of adults at some point in their lives — more than twice the prevalence of anorexia nervosa and bulimia nervosa combined. Characterized by recurrent episodes of eating large quantities of food in a discrete period, accompanied by a sense of loss of control and significant distress, BED is strongly associated with obesity, depression, anxiety, and metabolic syndrome. Despite its prevalence and health consequences, BED remains underdiagnosed and undertreated, with many patients failing to achieve adequate relief from available treatments. Transcranial magnetic stimulation is emerging as a promising intervention that targets the neurobiological circuits underlying binge eating and food addiction.
 
 ## What You'll Learn
 
@@ -30,7 +30,7 @@ The **dorsolateral prefrontal cortex (dlPFC)** — responsible for executive fun
 
 The **insula** — involved in interoceptive awareness (including hunger and satiety signals) and in craving — is hyperactive in BED, particularly in response to images of highly palatable food. This heightened insula response may drive food cravings that become irresistible in certain contexts.
 
-Together, these findings paint a picture of BED as a disorder of **reward-circuit hyperreactivity** combined with **prefrontal regulatory failure** — a pattern strikingly similar to what is observed in substance use disorders.
+Together, these findings paint a picture of BED as a disorder of **reward-circuit hyperreactivity** combined with **prefrontal regulatory failure** — [a pattern strikingly similar](/blog/tms-for-ocd-deep-tms-results/) to what is observed in substance use disorders.
 
 ## How TMS Targets Binge Eating
 
@@ -71,7 +71,7 @@ The first-line treatments for BED are **cognitive-behavioral therapy (CBT)** and
 - **Lisdexamfetamine** is effective for many patients but carries risks of cardiovascular side effects, dependence, and psychiatric symptoms
 - **SSRIs**, while sometimes used off-label, have limited evidence specifically for BED
 
-TMS offers a **non-pharmacological, non-psychotherapy alternative** that directly targets the brain circuits implicated in BED. It does not interact with medications, does not carry the dependence risk of stimulants, and does not require the intensive time commitment of CBT. This makes it a potentially valuable option for patients who have not responded to or cannot tolerate existing treatments.
+TMS offers a **non-pharmacological, non-psychotherapy alternative** that directly targets the brain circuits implicated in BED. It does not interact with medications, does not carry the dependence risk of stimulants, and [does not require the intensive time commitment](/blog/combining-tms-with-therapy/) of CBT. [This makes it](/blog/maintenance-tms-guide/) a potentially valuable option for patients who have not responded to or cannot tolerate existing treatments.
 
 ## A Promising but Emerging Field
 
@@ -79,7 +79,7 @@ It is important to note that TMS for BED is **not yet FDA-cleared** for this ind
 
 Nevertheless, the convergence of compelling neuroimaging evidence, promising pilot trial results, and the known mechanisms of TMS in related disorders (depression, OCD, addiction) makes BED a highly promising area for TMS research.
 
-For patients struggling with binge eating disorder who have found existing treatments insufficient, TMS — available off-label from experienced neuromodulation practitioners — represents a scientifically grounded option that addresses the neurological roots of compulsive eating.
+[For patients struggling](/blog/choosing-tms-clinic-red-flags/) with binge eating disorder who have found existing treatments insufficient, TMS — [available off-label](/clinic/) from experienced neuromodulation practitioners — represents a scientifically grounded option that [addresses the neurological roots](/blog/choosing-tms-clinic-red-flags/) of compulsive eating.
 
 <div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
   <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
@@ -93,7 +93,7 @@ For patients struggling with binge eating disorder who have found existing treat
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What brain target is used for TMS in binge eating disorder?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-[var(--ink2)]" itemprop="text">The dorsolateral prefrontal cortex (DLPFC) is the primary target, using high-frequency excitatory stimulation. Deep TMS using H-coils has also been studied specifically for BED, because H-coils can reach deeper structures including the orbitofrontal cortex and insula.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The [dorsolateral prefrontal cortex (DLPFC)](/blog/understanding-tms-motor-threshold/) is the primary target, using high-frequency excitatory stimulation. Deep TMS using H-coils has also been studied specifically for BED, because H-coils can reach deeper structures including the orbitofrontal cortex and insula.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -113,3 +113,9 @@ For patients struggling with binge eating disorder who have found existing treat
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>
+
+For more information, see our guide to [Choosing A Tms Clinic Red Flags](/blog/choosing-tms-clinic-red-flags/).
+For more information, see our guide to [Combining Tms With Therapy](/blog/combining-tms-with-therapy/).
+For more information, see our guide to [Tms Side Effects Complete Guide](/blog/tms-side-effects-complete-guide/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).

@@ -7,7 +7,7 @@ import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
 import { DEMOGRAPHIC_SLUGS } from '../../utils/seo_slugs';
 
 const title = "TMS for Different Patient Groups | Seniors, Veterans, Teens & More";
-const description = "Find TMS treatment information tailored to your specific needs. Guides for seniors, veterans, teens, pregnant women, and more.";
+const description = "TMS therapy guides for seniors, veterans, teens, pregnant women, and more. Learn about insurance coverage for different patient groups and find tailored treatment options.";
 ---
 
 <Layout title={title} description={description}>
@@ -34,16 +34,24 @@ const description = "Find TMS treatment information tailored to your specific ne
     noBorder
   >
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {DEMOGRAPHIC_SLUGS.map((item) => (
-        <EditorialCard
-          href={`/demographic/${item.slug}/`}
-          tag="Patient Group"
-          tagTone="warm"
-          title={item.title.replace(/^TMS for /, '')}
-          description="Specialized TMS information, protocols, and considerations for this group."
-          size="lg"
-        />
-      ))}
+      {DEMOGRAPHIC_SLUGS.map((item) => {
+        const baseDesc = "Specialized TMS information, protocols, and considerations for this group.";
+        const extraLink = item.slug === 'seniors'
+          ? ' See <a href="/insurance/medicare/" style="color:var(--accent); text-decoration:underline;">Medicare coverage info</a>.'
+          : item.slug === 'veterans'
+          ? ' See <a href="/insurance/tricare/" style="color:var(--accent); text-decoration:underline;">TRICARE coverage info</a>.'
+          : ' See <a href="/insurance/" style="color:var(--accent); text-decoration:underline;">insurance coverage</a> for this group.';
+        return (
+          <EditorialCard
+            href={`/demographic/${item.slug}/`}
+            tag="Patient Group"
+            tagTone="warm"
+            title={item.title.replace(/^TMS for /, '')}
+            description={baseDesc + extraLink}
+            size="lg"
+          />
+        );
+      })}
     </div>
   </EditorialSection>
 
@@ -53,6 +61,7 @@ const description = "Find TMS treatment information tailored to your specific ne
     ctas={[
       { label: "Take the Assessment", href: "/quiz/am-i-a-candidate/" },
       { label: "Find a Specialist", href: "/specialists/", variant: "outline" },
+      { label: "Insurance Coverage", href: "/insurance/", variant: "outline" },
     ]}
     stickyMobile
   />

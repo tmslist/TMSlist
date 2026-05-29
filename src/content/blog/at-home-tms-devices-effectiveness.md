@@ -187,3 +187,16 @@ However, they should not replace clinical TMS for patients with moderate to seve
 ---
 
 *If you are considering an at-home brain stimulation device, discuss it with your psychiatrist first. They can help determine whether it is appropriate for your situation and which device, if any, is worth trying. Do not stop any current treatment without consulting your healthcare provider.*
+
+
+For more information, see our guide to [Neurostar Tms Device Review 2026](/blog/neurostar-tms-device-review-2026/).
+For more information, see our guide to [Brainsway Deep Tms Comprehensive Guide](/blog/brainsway-deep-tms-comprehensive-guide/).
+For more information, see our guide to [Magventure Tms Device Overview](/blog/magventure-tms-device-overview/).
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [Choosing A Tms Clinic Red Flags](/blog/choosing-tms-clinic-red-flags/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).
+For more information, see our guide to [search for TMS specialists](/specialists/).

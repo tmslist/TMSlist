@@ -5,12 +5,13 @@ import { eq } from 'drizzle-orm';
 import { escapeHtml } from '../../../utils/sanitize';
 import { checkRateLimit } from '../../../utils/rateLimit';
 import { sendReviewNotification } from '../../../utils/email';
+import { getClinicBySlug, getClinicById } from '../../../utils/jsonData';
 import { z } from 'zod';
 
 export const prerender = false;
 
 const publicReviewSchema = z.object({
-  clinicId: z.string().uuid(),
+  clinicId: z.string().min(1),
   clinicName: z.string().max(200).optional(),
   doctorName: z.string().max(100).optional().or(z.literal('')),
   treatmentType: z.string().max(100).optional().or(z.literal('')),
@@ -38,9 +39,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     const data = parsed.data;
 
-    // Verify clinic exists and get clinic email
-    const [clinic] = await db.select({ id: clinics.id, name: clinics.name, email: clinics.email })
-      .from(clinics).where(eq(clinics.id, data.clinicId)).limit(1);
+    // Verify clinic exists using JSON data (supports both UUIDs and slugs like 'ca-la-001')
+    const clinic = data.clinicId.includes('-')
+      ? await getClinicById(data.clinicId)
+      : await getClinicBySlug(data.clinicId);
 
     if (!clinic) {
       return new Response(JSON.stringify({ error: 'Clinic not found' }), {
@@ -63,9 +65,12 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
+    // Get the actual UUID from the clinic record for the FK reference
+    const clinicUuid = clinic.id;
+
     // Insert review — unapproved by default, needs moderation
     const [review] = await db.insert(reviews).values({
-      clinicId: data.clinicId,
+      clinicId: clinicUuid,
       userName: escapeHtml(data.patientName),
       userEmail: data.email ? data.email.toLowerCase() : null,
       rating: data.rating,
@@ -76,7 +81,7 @@ export const POST: APIRoute = async ({ request }) => {
       source: 'tmslist',
     }).returning();
 
-    // Send notification to clinic admin (fire-and-forget)
+    // Send notification to clinic admin (fire-and-forget) if email exists
     if (clinic.email) {
       sendReviewNotification({
         clinicEmail: clinic.email,

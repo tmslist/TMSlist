@@ -6,6 +6,13 @@ export default function LoginForm() {
   const [errorMsg, setErrorMsg] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [totpCode, setTotpCode] = useState('');
+  const [totpPending, setTotpPending] = useState(false);
+  const [totpError, setTotpError] = useState('');
+  const [totpLoading, setTotpLoading] = useState(false);
+  const [retryAfter, setRetryAfter] = useState<number | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -56,26 +63,76 @@ export default function LoginForm() {
     e.preventDefault();
     setStatus('submitting');
     setErrorMsg('');
+    setRetryAfter(null);
 
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, rememberMe }),
       });
 
       if (res.redirected) {
-        // 302 redirect from login API — cookie was set, follow the redirect
         window.location.href = res.url;
         return;
       }
 
       const data = await res.json();
-      setErrorMsg(data.error || 'Invalid email or password');
+
+      if (data.requires2FA) {
+        setTotpPending(true);
+        setStatus('idle');
+        return;
+      }
+
+      if (res.status === 429 && data.retryAfter) {
+        setRetryAfter(data.retryAfter);
+        setErrorMsg(`Account locked. Try again in ${Math.ceil(data.retryAfter / 60)} minutes.`);
+      } else {
+        setErrorMsg(data.error || 'Invalid email or password');
+      }
       setStatus('error');
     } catch {
       setErrorMsg('Network error. Please try again.');
       setStatus('error');
+    }
+  }
+
+  async function handleTotpSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (totpCode.length !== 6) {
+      setTotpError('Code must be 6 digits');
+      return;
+    }
+    setTotpLoading(true);
+    setTotpError('');
+
+    try {
+      const res = await fetch('/api/auth/2fa/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: totpCode }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus('success');
+        window.location.href = data.user?.role === 'admin' || data.user?.role === 'editor'
+          ? '/admin/dashboard'
+          : '/portal/dashboard';
+        return;
+      }
+
+      if (res.status === 429 && data.retryAfter) {
+        setTotpError(`Account locked. Try again in ${Math.ceil(data.retryAfter / 60)} minutes.`);
+      } else {
+        setTotpError(data.error || 'Invalid code. Please try again.');
+      }
+    } catch {
+      setTotpError('Network error. Please try again.');
+    } finally {
+      setTotpLoading(false);
     }
   }
 
@@ -101,6 +158,61 @@ export default function LoginForm() {
             className="text-sm text-[var(--accent)] hover:text-[var(--accent)] font-medium"
           >
             Use a different email
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // 2FA verification screen
+  if (totpPending) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div className="w-16 h-16 bg-[rgba(201,101,74,0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-semibold text-[var(--ink)] mb-1">Two-Factor Authentication</h2>
+          <p className="text-sm text-[var(--muted)] mb-6">Enter the 6-digit code from your authenticator app</p>
+
+          {totpError && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm">
+              {totpError}
+            </div>
+          )}
+
+          <form onSubmit={handleTotpSubmit} className="space-y-4">
+            <div>
+              <input
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]{6}"
+                maxLength={6}
+                required
+                autoFocus
+                value={totpCode}
+                onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, ''))}
+                className="w-full text-center text-3xl tracking-[0.5em] rounded-lg border border-[var(--line)] px-4 py-3 focus:border-[var(--ink2)] focus:ring-2 focus:ring-[rgba(10,22,40,0.15)] font-mono"
+                placeholder="000000"
+                autoComplete="one-time-code"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={totpLoading || totpCode.length !== 6}
+              className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-[var(--ink)] hover:bg-[var(--ink2)] transition-all disabled:opacity-50"
+            >
+              {totpLoading ? 'Verifying...' : 'Verify & Sign In'}
+            </button>
+          </form>
+
+          <button
+            onClick={() => { setTotpPending(false); setTotpCode(''); setTotpError(''); }}
+            className="mt-4 text-sm text-[var(--muted)] hover:text-[var(--ink2)] transition-colors"
+          >
+            &larr; Back to sign in
           </button>
         </div>
       </div>
@@ -162,19 +274,60 @@ export default function LoginForm() {
               />
             </div>
             <div>
-              <label htmlFor="login-password" className="block text-sm font-medium text-[var(--ink2)]">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="login-password"
-                required
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-3 text-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)]"
-                placeholder="Enter your password"
-              />
+              <div className="flex items-center justify-between">
+                <label htmlFor="login-password" className="block text-sm font-medium text-[var(--ink2)]">Password</label>
+                <a
+                  href="/admin/forgot-password"
+                  className="text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
+                >
+                  Forgot password?
+                </a>
+              </div>
+              <div className="relative mt-1">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  id="login-password"
+                  required
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="mt-1 block w-full rounded-lg border border-[var(--line)] px-4 py-3 pr-10 text-sm focus:border-[var(--ink2)] focus:ring-[rgba(10,22,40,0.15)]"
+                  placeholder="Enter your password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-[var(--muted)] hover:text-[var(--ink2)]"
+                  tabIndex={-1}
+                >
+                  {showPassword ? (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                    </svg>
+                  ) : (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
+
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="remember"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="h-4 w-4 rounded border-[var(--line)] text-[var(--ink)] focus:ring-[rgba(10,22,40,0.15)]"
+              />
+              <label htmlFor="remember" className="ml-2 text-sm text-[var(--muted)]">
+                Keep me signed in for 30 days
+              </label>
+            </div>
+
             <button
               type="submit"
               disabled={status === 'submitting'}

@@ -103,3 +103,16 @@ TMS is one of the better-tolerated psychiatric treatments in terms of side effec
 The key is communication. Your treatment team should know about every side effect you experience, even mild ones. Many are manageable with small adjustments to parameters or positioning. The goal is a complete treatment course with minimal discomfort — and communication is how you get there.
 
 If a side effect is intolerable, discuss it with your clinician rather than simply stopping treatment. There are almost always adjustments that can help.
+
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [Tms Vs Ect Comparing Brain Stimulation](/blog/tms-vs-ect-comparing-brain-stimulation/).
+For more information, see our guide to [Tms Vs Ect Comparison Guide](/blog/tms-vs-ect-comparison-guide/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [Can I Drive After Tms](/blog/can-i-drive-after-tms/).
+For more information, see our guide to [Maintenance Tms Guide](/blog/maintenance-tms-guide/).
+For more information, see our guide to [Tms Coverage Guide](/blog/tms-cost-insurance-guide-2026/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).

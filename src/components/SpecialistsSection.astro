@@ -1,5 +1,6 @@
 ---
 import type { Clinic } from '../types/clinic';
+import { getDoctorPhoto } from '../utils/dataHelpers';
 
 interface Props {
     featuredDoctorsByCountry: Record<string, any[]>;
@@ -47,7 +48,7 @@ const { featuredDoctorsByCountry, countryCode = 'US' } = Astro.props as Props;
                         <!-- Image -->
                         <div class="aspect-[4/3] relative overflow-hidden bg-[var(--paper2)]">
                              <img
-                                src={doctor.image}
+                                src={getDoctorPhoto(doctor)}
                                 alt={doctor.name}
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                 loading="lazy"

@@ -110,3 +110,16 @@ Second opinions are particularly important if:
 TMS outcomes vary substantially by clinic, even in the same city using the same equipment. The expertise of the clinical team — their knowledge of targeting, their attention to calibration, their management of side effects and non-responders — matters as much as the technology itself.
 
 Take time to research. Ask questions. Visit more than one clinic if possible. The investment in finding the right clinic pays off in outcomes, safety, and your overall experience during treatment.
+
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [Tms For Anxiety Fda Breakthrough](/blog/tms-for-anxiety-fda-breakthrough/).
+For more information, see our guide to [Tms For Depression](/blog/tms-for-depression/).
+For more information, see our guide to [Tms Vs Medication](/blog/tms-vs-medication/).
+For more information, see our guide to [Combining Tms With Therapy](/blog/combining-tms-with-therapy/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).
+For more information, see our guide to [search for TMS specialists](/specialists/).

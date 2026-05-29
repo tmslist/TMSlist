@@ -13,13 +13,13 @@ const cityName = (city || '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) =>
 const allClinics = await getOperationalClinics();
 const cityClinics = allClinics.filter(c => c.state === stateCode && c.city.toLowerCase() === cityName.toLowerCase());
 
-const title = `TMS Clinics in ${cityName}, ${stateName} | Find Treatment Centers Near You`;
+const title = `All TMS Clinics in ${cityName}, ${stateName} | TMS List`;
 const description = `Compare ${cityClinics.length} TMS therapy clinics in ${cityName}, ${stateName}. View ratings, insurance accepted, and treatment options.`;
 
 const getRating = (clinic: any) => typeof clinic.rating === 'number' ? clinic.rating : clinic.rating?.aggregate || 4.5;
 ---
 
-<Layout title={title} description={description} schema={JSON.stringify({
+<Layout title={title} description={description} noindex={true} canonical={`https://tmslist.com/us/${Astro.params.state}/${Astro.params.city}/`} schema={JSON.stringify({
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": `TMS Clinics in ${cityName}, ${stateName}`,
@@ -218,4 +218,16 @@ const getRating = (clinic: any) => typeof clinic.rating === 'number' ? clinic.ra
             </div>
         </section>
     </main>
+
+    <!-- Learn More -->
+    <section class="py-8 bg-[var(--paper)] border-t border-[var(--line)]">
+      <div class="container mx-auto px-4 text-center">
+        <div class="flex flex-wrap justify-center gap-2">
+          <a href="/blog/tms-for-depression/" class="px-3 py-1.5 text-xs font-medium border border-[var(--line)] text-[var(--ink)] rounded-lg hover:bg-[var(--paper2)] transition-colors">TMS for Depression</a>
+          <a href="/blog/tms-cost-insurance-guide-2026/" class="px-3 py-1.5 text-xs font-medium border border-[var(--line)] text-[var(--ink)] rounded-lg hover:bg-[var(--paper2)] transition-colors">Cost & Insurance</a>
+          <a href="/blog/questions-to-ask-tms-clinic/" class="px-3 py-1.5 text-xs font-medium border border-[var(--line)] text-[var(--ink)] rounded-lg hover:bg-[var(--paper2)] transition-colors">Questions to Ask</a>
+          <a href="/blog/" class="px-3 py-1.5 text-xs font-medium text-[var(--accent)] hover:underline">View all articles →</a>
+        </div>
+      </div>
+    </section>
 </Layout>

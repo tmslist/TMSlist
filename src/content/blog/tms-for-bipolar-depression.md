@@ -23,7 +23,7 @@ Early concerns that TMS might trigger manic episodes have largely not been borne
 - **Response rates** of 40-60% for active TMS versus 20-30% for sham
 - **Remission rates** of 25-40% in open-label studies
 - **No significant increase** in manic symptoms compared to sham treatment when appropriate protocols were used
-- **Faster onset** of antidepressant effects compared to medications (days to weeks)
+- **Faster onset** of antidepressant effects [compared to medications](/blog/tms-vs-medication/) (days to weeks)
 
 The FDA has cleared TMS for treatment-resistant depression but not specifically for bipolar depression. However, the evidence has led many clinicians to offer TMS to bipolar patients who cannot tolerate or have not responded to mood stabilizers.
 
@@ -80,8 +80,10 @@ Bipolar patients who are best suited for TMS include those with:
 
 ## The Bottom Line
 
-TMS represents a valuable option for bipolar depression, offering antidepressant effects without the manic switch risk that complicates pharmacological treatment. The evidence supports its use in carefully selected patients with appropriate safety monitoring. As the field evolves, accelerated and personalized protocols may further improve outcomes for this challenging population.
+TMS represents a valuable option for bipolar depression, [offering antidepressant effects](/blog/tms-vs-medication/) [without the manic switch risk](/blog/combining-tms-with-therapy/) that complicates pharmacological treatment. The evidence supports its use in carefully selected patients with appropriate safety monitoring. As the field evolves, accelerated and personalized protocols may further improve outcomes for this challenging population.
+
+For patients considering TMS for bipolar depression, understanding the full treatment landscape is important. [Compare TMS to medications](/blog/tms-vs-medication/), [explore success rates and outcomes](/blog/tms-success-rates-2026/), and [find experienced providers](/specialists/) who understand bipolar nuances. [Review insurance coverage options](/blog/tms-cost-insurance-guide-2026/) and [understand what TMS actually feels like](/blog/what-tms-actually-feels-like/). For treatment-resistant symptoms, [maintenance protocols](/blog/maintenance-tms-guide/) may prevent relapse. [Combining TMS with therapy](/blog/combining-tms-with-therapy/) may offer synergistic benefits.
 
 ---
 
-*If you have bipolar disorder and are struggling with persistent depression, discuss TMS with your psychiatrist to determine whether it may be an appropriate treatment option for your specific situation.*
+*If you have bipolar disorder and are struggling with persistent depression, [discuss TMS](/clinic/) with your psychiatrist to determine whether it may be an appropriate treatment option for your specific situation.*

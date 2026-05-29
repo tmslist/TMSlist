@@ -137,3 +137,13 @@ As we covered in our [cost guide](/blog/real-cost-of-tms-therapy-2026/), there a
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>
+
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [Tms Vs Medication](/blog/tms-vs-medication/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).
+For more information, see our guide to [search for TMS specialists](/specialists/).

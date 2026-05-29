@@ -117,6 +117,9 @@ If insurance doesn't cover TMS, or you'd rather not use it:
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
     <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a Clinic</a>
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Am I a Candidate?</a>
+  </div>
+</div>
+
 ## Frequently Asked Questions
 
 ### Does Medicare cover TMS therapy?

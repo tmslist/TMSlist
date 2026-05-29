@@ -111,3 +111,13 @@ For patients considering TMS for tinnitus, the most important first step is a th
 ---
 
 *If you or a loved one is struggling with chronic tinnitus, consult with a qualified neurologist or TMS provider to discuss whether you may be a candidate for this investigational treatment.*
+
+
+For more information, see our guide to [Tms For Tinnitus](/blog/tms-for-tinnitus/).
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).
+For more information, see our guide to [search for TMS specialists](/specialists/).

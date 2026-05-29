@@ -43,7 +43,43 @@ try {
   // DB not connected yet — stats stay at 0
 }
 
-// Pending Actions counts
+// Real percentage changes from DB
+let clinicChange = 0;
+let doctorChange = 0;
+let reviewChange = 0;
+
+try {
+  const [thisMonthResult, lastMonthResult, thisMonthReviews, lastMonthReviews] = await Promise.all([
+    db.execute(sql`SELECT count(*) as count FROM clinics WHERE created_at >= DATE_TRUNC('month', CURRENT_DATE) AND deleted_at IS NULL`),
+    db.execute(sql`SELECT count(*) as count FROM clinics WHERE created_at >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month' AND created_at < DATE_TRUNC('month', CURRENT_DATE) AND deleted_at IS NULL`),
+    db.execute(sql`SELECT count(*) as count FROM reviews WHERE created_at >= DATE_TRUNC('month', CURRENT_DATE)`),
+    db.execute(sql`SELECT count(*) as count FROM reviews WHERE created_at >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month' AND created_at < DATE_TRUNC('month', CURRENT_DATE)`),
+  ]);
+
+  const clinicThis = Number(thisMonthResult[0]?.count ?? 0);
+  const clinicLast = Number(lastMonthResult[0]?.count ?? 0);
+  if (clinicLast > 0) clinicChange = Math.round((clinicThis / clinicLast) * 100 - 100);
+
+  const reviewThis = Number(thisMonthReviews[0]?.count ?? 0);
+  const reviewLast = Number(lastMonthReviews[0]?.count ?? 0);
+  if (reviewLast > 0) reviewChange = Math.round((reviewThis / reviewLast) * 100 - 100);
+} catch {
+  // Use default 0
+}
+
+// Real system health
+let systemHealth = { db: 'Connected', backup: null };
+try {
+  const { siteSettings } = await import("../../db/schema");
+  const result = await db.select({ value: siteSettings.value })
+    .from(siteSettings)
+    .where(eq(siteSettings.key, "last_backup"));
+  if (result[0]?.value && typeof result[0].value === "string") {
+    systemHealth.backup = result[0].value;
+  }
+} catch {
+  systemHealth.db = 'Checking...';
+}
 let uncontactedLeads = 0;
 let newUserSignups = 0;
 try {
@@ -90,20 +126,6 @@ try {
   ]);
   leadsThisWeek = Number(thisWeekResult[0]?.count ?? 0);
   leadsLastWeek = Number(lastWeekResult[0]?.count ?? 0);
-} catch {
-  // skip
-}
-
-// Last backup date from site settings
-let lastBackupDate: string | null = null;
-try {
-  const { siteSettings } = await import("../../db/schema");
-  const result = await db.select({ value: siteSettings.value })
-    .from(siteSettings)
-    .where(eq(siteSettings.key, "last_backup"));
-  if (result[0]?.value && typeof result[0].value === "string") {
-    lastBackupDate = result[0].value;
-  }
 } catch {
   // skip
 }
@@ -192,7 +214,7 @@ const pendingActionsTotal = uncontactedLeads + pendingReviews + newUserSignups;
               <p class="text-sm font-medium text-gray-500">Total Clinics</p>
               <div class="flex items-end gap-2 mt-2">
                 <p class="text-3xl font-semibold text-gray-900">{stats.clinics.toLocaleString()}</p>
-                <span class="text-xs font-medium text-green-600 mb-1">▲ 12%</span>
+                <span class={`text-xs font-medium mb-1 ${clinicChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>{clinicChange >= 0 ? '▲' : '▼'} {Math.abs(clinicChange)}%</span>
               </div>
               <div class="mt-3 flex items-center gap-1.5">
                 <span class="inline-flex items-center gap-1 text-xs text-gray-400">
@@ -212,7 +234,7 @@ const pendingActionsTotal = uncontactedLeads + pendingReviews + newUserSignups;
               <p class="text-sm font-medium text-gray-500">Doctors</p>
               <div class="flex items-end gap-2 mt-2">
                 <p class="text-3xl font-semibold text-gray-900">{stats.doctors.toLocaleString()}</p>
-                <span class="text-xs font-medium text-green-600 mb-1">▲ 8%</span>
+                <span class="text-xs text-gray-400 mb-1">in directory</span>
               </div>
               <div class="mt-3 flex items-center gap-1.5">
                 <span class="inline-flex items-center gap-1 text-xs text-gray-400">
@@ -232,7 +254,7 @@ const pendingActionsTotal = uncontactedLeads + pendingReviews + newUserSignups;
               <p class="text-sm font-medium text-gray-500">Reviews</p>
               <div class="flex items-end gap-2 mt-2">
                 <p class="text-3xl font-semibold text-amber-600">{stats.reviews.toLocaleString()}</p>
-                <span class="text-xs font-medium text-red-600 mb-1">▼ 3%</span>
+                <span class={`text-xs font-medium mb-1 ${reviewChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>{reviewChange >= 0 ? '▲' : '▼'} {Math.abs(reviewChange)}%</span>
               </div>
               <div class="mt-3 flex items-center gap-1.5">
                 <span class="inline-flex items-center gap-1 text-xs text-gray-400">
@@ -326,7 +348,7 @@ const pendingActionsTotal = uncontactedLeads + pendingReviews + newUserSignups;
                 </div>
                 <div>
                   <p class="text-xs text-gray-500">Database</p>
-                  <p class="text-sm font-semibold text-green-600">Connected — OK</p>
+                  <p class="text-sm font-semibold text-green-600">{systemHealth.db}</p>
                 </div>
               </div>
 
@@ -338,7 +360,7 @@ const pendingActionsTotal = uncontactedLeads + pendingReviews + newUserSignups;
                 </div>
                 <div>
                   <p class="text-xs text-gray-500">API Response</p>
-                  <p class="text-sm font-semibold text-blue-600">~42ms avg</p>
+                  <p class="text-sm font-semibold text-blue-600">Operational</p>
                 </div>
               </div>
 
@@ -351,7 +373,7 @@ const pendingActionsTotal = uncontactedLeads + pendingReviews + newUserSignups;
                 <div>
                   <p class="text-xs text-gray-500">Last Backup</p>
                   <p class="text-sm font-semibold text-gray-700">
-                    {lastBackupDate ? new Date(lastBackupDate).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "Not configured"}
+                    {systemHealth.backup ? new Date(systemHealth.backup).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "Not configured"}
                   </p>
                 </div>
               </div>

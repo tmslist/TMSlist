@@ -66,6 +66,10 @@ function getLeadStatus(metadata: Record<string, unknown> | null): string {
   return (metadata?.status as string) || 'new';
 }
 
+function getFormPage(metadata: Record<string, unknown> | null): string | null {
+  return (metadata?.formPage as string) || (metadata?.page as string) || null;
+}
+
 function getContactPreference(metadata: Record<string, unknown> | null): string | null {
   return (metadata?.contactPreference as string) || null;
 }
@@ -415,6 +419,7 @@ export default function AdminLeads() {
                   const utmParams = getUtmParams(lead.metadata);
                   const contactPref = getContactPreference(lead.metadata);
                   const referral = getReferralSource(lead.metadata);
+                  const formPage = getFormPage(lead.metadata);
 
                   return (
                     <>
@@ -513,6 +518,12 @@ export default function AdminLeads() {
                                   <div>
                                     <h4 className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-1">Source URL</h4>
                                     <p className="text-xs text-[var(--ink2)] truncate" title={lead.sourceUrl}>{formatSource(lead.sourceUrl)}</p>
+                                  </div>
+                                )}
+                                {formPage && (
+                                  <div>
+                                    <h4 className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-1">Form Page</h4>
+                                    <p className="text-xs text-[var(--ink)] font-medium">{formPage}</p>
                                   </div>
                                 )}
                                 {lead.clinicId && (

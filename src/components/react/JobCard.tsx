@@ -1,5 +1,25 @@
 import { useState } from 'react';
 
+function hashToColor(str: string): string {
+  const colors = ['3b82f6', '6366f1', '8b5cf6', 'a855f7', 'ec4899', 'ef4444', 'f97316', 'eab308', '22c55e', '14b8a6', '06b6d4', '3b82f6'];
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) {
+    h = ((h << 5) + h) + str.charCodeAt(i);
+    h = h & h;
+  }
+  return colors[Math.abs(h) % colors.length];
+}
+
+function ClinicLogoFallback({ name }: { name: string }) {
+  const initial = name.charAt(0).toUpperCase();
+  const color = hashToColor(name);
+  return (
+    <div className="w-10 h-10 rounded-xl shrink-0 flex items-center justify-center" style={{ backgroundColor: `#${color}` }}>
+      <span className="text-white font-bold text-sm">{initial}</span>
+    </div>
+  );
+}
+
 export const JOB_ROLE_CATEGORIES = [
   { value: 'tms_technician', label: 'TMS Technician', color: 'bg-[rgba(10,22,40,0.08)] text-[var(--accent)]', bgColor: 'bg-[var(--ink2)]' },
   { value: 'tms_physician', label: 'TMS Physician', color: 'bg-[var(--paper2)] text-[var(--accent)]', bgColor: 'bg-[var(--accent2)]' },
@@ -94,9 +114,7 @@ export default function JobCard({ job, compact = false }: JobCardProps) {
               className="w-10 h-10 rounded-xl object-cover shrink-0 bg-[var(--paper2)]"
             />
           ) : (
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[rgba(10,22,40,0.08)] to-[var(--paper2)] flex items-center justify-center text-[var(--accent)] font-bold text-sm shrink-0">
-              {job.clinicName.charAt(0)}
-            </div>
+            <ClinicLogoFallback name={job.clinicName} />
           )}
           <div className="min-w-0">
             <p className="text-xs text-[var(--muted)] truncate">{job.clinicName}</p>

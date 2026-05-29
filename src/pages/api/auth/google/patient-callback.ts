@@ -37,7 +37,7 @@ export const GET: APIRoute = async ({ request }) => {
   if (error || !code) {
     return new Response(null, {
       status: 302,
-      headers: { Location: `/login?error=google-auth-failed&redirect=${encodeURIComponent(redirectTo)}` },
+      headers: { Location: `/login?error=${encodeURIComponent(error || 'google-auth-failed')}&redirect=${encodeURIComponent(redirectTo)}` },
     });
   }
 
@@ -65,7 +65,7 @@ export const GET: APIRoute = async ({ request }) => {
       console.error('[patient-auth] Token exchange failed:', await tokenRes.text());
       return new Response(null, {
         status: 302,
-        headers: { Location: `/login?error=google-token-failed&redirect=${encodeURIComponent(redirectTo)}` },
+        headers: { Location: `/login?error=${error === 'access_denied' ? 'google-auth-failed' : 'server-error'}&redirect=${encodeURIComponent(redirectTo)}` },
       });
     }
 

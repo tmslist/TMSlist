@@ -261,7 +261,7 @@ export default function AdminAuditTrail() {
         )}
       </div>
 
-      {totalPages > 1 && (
+      {totalPages > 0 && (
         <div className="flex items-center justify-between mt-4">
           <p className="text-sm text-[var(--muted)] dark:text-[var(--muted)]">Page {page + 1} of {totalPages} ({data?.total.toLocaleString()} total)</p>
           <div className="flex gap-2">

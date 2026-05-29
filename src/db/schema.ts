@@ -252,10 +252,12 @@ export const doctors = pgTable('doctors', {
 ]);
 
 // ── REVIEWS ──────────────────────────────────────
+// clinicId uses text() to support both UUIDs (future Postgres clinics)
+// and string IDs (e.g., "ca-la-001") from JSON data
 
 export const reviews = pgTable('reviews', {
   id: uuid('id').defaultRandom().primaryKey(),
-  clinicId: uuid('clinic_id').notNull().references(() => clinics.id, { onDelete: 'cascade' }),
+  clinicId: text('clinic_id').notNull(), // No FK - JSON and Postgres clinics use different ID formats
   userId: uuid('user_id').references(() => users.id, { onDelete: 'set null' }),
   userName: text('user_name').notNull(),
   userEmail: text('user_email'),
@@ -291,6 +293,7 @@ export const leads = pgTable('leads', {
   phone: text('phone'),
   message: text('message'),
   clinicId: uuid('clinic_id').references(() => clinics.id),
+  doctorId: uuid('doctor_id').references(() => doctors.id, { onDelete: 'set null' }),
   doctorName: text('doctor_name'),
   clinicName: text('clinic_name'),
   sourceUrl: text('source_url'),
@@ -302,6 +305,7 @@ export const leads = pgTable('leads', {
   index('idx_leads_type').on(table.type),
   index('idx_leads_created').on(table.createdAt),
   index('idx_leads_clinic').on(table.clinicId),
+  index('idx_leads_doctor').on(table.doctorId),
   index('idx_leads_email').on(table.email),
 ]);
 
@@ -1750,7 +1754,13 @@ export const experimentVariants = pgTable('experiment_variants', {
   uniqueIndex('idx_experiment_variants_unique').on(table.experimentId, table.variantKey),
 ]);
 
-// ── TYPE EXPORTS ──────────────────────────────────
+export type EmailLog = typeof emailLogs.$inferSelect;
+export type NewEmailLog = typeof emailLogs.$inferInsert;
+export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
+export type NewNewsletterSubscriber = typeof newsletterSubscribers.$inferInsert;
+export type PatientEnquiry = typeof patientEnquiries.$inferSelect;
+export type NewPatientEnquiry = typeof patientEnquiries.$inferInsert;
+export type AdminActionLog = typeof adminActionLog.$inferSelect;
 
 export type Clinic = typeof clinics.$inferSelect;
 export type NewClinic = typeof clinics.$inferInsert;
@@ -2136,4 +2146,94 @@ export const resellerInvoices = pgTable('reseller_invoices', {
 }, (table) => [
   index('idx_reseller_invoices_reseller').on(table.resellerId),
   index('idx_reseller_invoices_status').on(table.status),
+]);
+
+// ── EMAIL LOGS ──────────────────────────────────
+export const emailLogs = pgTable('email_logs', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  campaignId: uuid('campaign_id'),
+  campaignName: text('campaign_name'),
+  recipientEmail: text('recipient_email').notNull(),
+  subject: text('subject').notNull(),
+  status: text('status').notNull().default('sent'),
+  sentAt: timestamp('sent_at', { withTimezone: true }),
+  deliveredAt: timestamp('delivered_at', { withTimezone: true }),
+  openedAt: timestamp('opened_at', { withTimezone: true }),
+  clickedAt: timestamp('clicked_at', { withTimezone: true }),
+  bouncedAt: timestamp('bounced_at', { withTimezone: true }),
+  complainedAt: timestamp('complained_at', { withTimezone: true }),
+  unsubscribedAt: timestamp('unsubscribed_at', { withTimezone: true }),
+  errorMessage: text('error_message'),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_email_logs_campaign').on(table.campaignId),
+  index('idx_email_logs_status').on(table.status),
+  index('idx_email_logs_recipient').on(table.recipientEmail),
+  index('idx_email_logs_sent').on(table.sentAt),
+]);
+
+// ── NEWSLETTER SUBSCRIBERS ──────────────────────────────────
+export const newsletterSubscribers = pgTable('newsletter_subscribers', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  email: text('email').notNull().unique(),
+  name: text('name'),
+  status: text('status').notNull().default('subscribed'),
+  source: text('source'),
+  confirmedAt: timestamp('confirmed_at', { withTimezone: true }),
+  unsubscribedAt: timestamp('unsubscribed_at', { withTimezone: true }),
+  preferences: jsonb('preferences').$type<Record<string, unknown>>(),
+  ipAddress: text('ip_address'),
+  userAgent: text('user_agent'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+}, (table) => [
+  index('idx_newsletter_subscribers_status').on(table.status),
+  index('idx_newsletter_subscribers_email').on(table.email),
+]);
+
+// ── PATIENT ENQUIRIES ──────────────────────────────────
+export const patientEnquiries = pgTable('patient_enquiries', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  email: text('email').notNull(),
+  phone: text('phone'),
+  message: text('message'),
+  doctorId: uuid('doctor_id').references(() => doctors.id, { onDelete: 'set null' }),
+  clinicId: uuid('clinic_id').references(() => clinics.id, { onDelete: 'set null' }),
+  doctorName: text('doctor_name'),
+  clinicName: text('clinic_name'),
+  status: text('status').notNull().default('new'),
+  priority: text('priority').default('normal'),
+  assignedTo: uuid('assigned_to').references(() => users.id, { onDelete: 'set null' }),
+  sourceUrl: text('source_url'),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+  deletedAt: timestamp('deleted_at', { withTimezone: true }),
+}, (table) => [
+  index('idx_patient_enquiries_status').on(table.status),
+  index('idx_patient_enquiries_doctor').on(table.doctorId),
+  index('idx_patient_enquiries_clinic').on(table.clinicId),
+  index('idx_patient_enquiries_assigned').on(table.assignedTo),
+  index('idx_patient_enquiries_created').on(table.createdAt),
+]);
+
+// ── ADMIN ACTION LOG ──────────────────────────────────
+export const adminActionLog = pgTable('admin_action_log', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').references(() => users.id, { onDelete: 'set null' }),
+  userEmail: text('user_email'),
+  action: text('action').notNull(),
+  entityType: text('entity_type').notNull(),
+  entityId: text('entity_id'),
+  oldValue: jsonb('old_value').$type<Record<string, unknown>>(),
+  newValue: jsonb('new_value').$type<Record<string, unknown>>(),
+  ipAddress: text('ip_address'),
+  userAgent: text('user_agent'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_admin_action_user').on(table.userId),
+  index('idx_admin_action_created').on(table.createdAt),
+  index('idx_admin_action_entity').on(table.entityType, table.entityId),
 ]);

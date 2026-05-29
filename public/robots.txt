@@ -20,4 +20,15 @@ Allow: /api/reviews/
 Allow: /api/clinics/search
 Allow: /api/clinics/nearby
 
+# Block staging, demo, and sandbox pages
+Disallow: /simulation/
+Disallow: /sandbox/
+Disallow: /staging/
+Disallow: /admin/api-docs/
+Disallow: /test/
+Disallow: /dev/
+
+# Slow crawl for large listing sitemaps
+Crawl-delay: 1
+
 Sitemap: https://tmslist.com/sitemap-index.xml

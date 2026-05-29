@@ -12,7 +12,7 @@ Insomnia is one of the most common health complaints in the modern world, affect
 
 ## What You'll Learn
 
-- How sleep-wake circuits in the brain interact and regulate each other
+- How [sleep-wake circuits](/blog/what-is-mapping-session/) in the brain interact and regulate each other
 - Why the medial prefrontal cortex hyperarousal is central to insomnia
 - The innovative approach of night-time TMS sessions and their benefits
 - What research shows about TMS for improving sleep quality and architecture
@@ -66,11 +66,11 @@ The recommended treatment sequence is typically:
 
 ## Practical Considerations
 
-TMS for insomnia typically involves **daily sessions for two to four weeks**, with each session lasting 20 to 30 minutes. For night TMS protocols, sessions are scheduled approximately one to two hours before the patient's typical bedtime.
+TMS for insomnia typically involves **[daily sessions](/blog/how-to-prepare-for-tms/) for two to four weeks**, with each session lasting [20 to 30 minutes](/blog/going-back-to-work-during-tms/). For night TMS protocols, sessions are scheduled approximately one to two hours before the patient's typical bedtime.
 
-Side effects are generally mild and include transient headache, scalp discomfort, and occasional drowsiness after treatment. Importantly, TMS does not carry the risk of dependence or next-day sedation that is associated with many sleep medications.
+[Side effects](/blog/what-tms-actually-feels-like/) are generally mild and include transient headache, scalp discomfort, and occasional drowsiness after treatment. Importantly, TMS does not carry the risk of dependence or next-day sedation that is [associated with many sleep medications](/blog/tms-vs-medication/).
 
-For chronic insomnia patients who have tried multiple medications and therapy approaches without adequate relief, TMS represents a scientifically grounded intervention that addresses the brain's sleep-regulating infrastructure directly.
+[[For chronic insomnia patients](/clinic/)](/specialists/) who have tried multiple medications and therapy approaches without adequate relief, TMS represents a scientifically grounded intervention that [addresses the brain's sleep-regulating infrastructure](/clinic/) directly.
 
 <div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
   <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
@@ -90,7 +90,7 @@ For chronic insomnia patients who have tried multiple medications and therapy ap
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How does TMS compare to sleep medications?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-[var(--ink2)]" itemprop="text">TMS does not carry the risk of dependence or next-day sedation that is associated with many sleep medications. Side effects are generally mild and include transient headache and scalp discomfort. TMS also addresses the underlying brain circuitry rather than simply inducing sleep chemically.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">TMS does not carry the risk of dependence or next-day sedation that is [associated with many sleep medications](/blog/tms-vs-medication/). [Side effects](/blog/what-tms-actually-feels-like/) are generally mild and include transient headache and scalp discomfort. TMS also addresses the underlying brain circuitry rather than simply inducing sleep chemically.</p>
       </div>
     </div>
   </div>
@@ -100,7 +100,7 @@ For chronic insomnia patients who have tried multiple medications and therapy ap
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
   <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a [TMS Clinic](/clinic/)</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If [TMS Is Right](/quiz/am-i-a-candidate/) for You</a>
   </div>
 </div>

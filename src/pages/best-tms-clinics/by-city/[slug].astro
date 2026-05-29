@@ -1,6 +1,4 @@
 ---
-export const prerender = true;
-
 import Layout from "../../../layouts/Layout.astro";
 import ClinicCard from "../../../components/ClinicCard.astro";
 import {
@@ -8,45 +6,37 @@ import {
     getStateCodeFromSlug,
     STATE_NAMES,
 } from "../../../utils/dataHelpers";
+import { getTopMetros } from "../../../utils/jsonData";
 import { TREATMENT_SLUGS } from "../../../utils/seo_slugs";
 import { calculateClinicScore } from "../../../utils/ranking";
 
-// Top 20 US metro areas
+// Dynamically generate pages for all US cities with 2+ verified clinics
 export async function getStaticPaths() {
-    const METRO_AREAS = [
-        { city: "new-york", state: "ny", metro: "New York" },
-        { city: "los-angeles", state: "ca", metro: "Los Angeles" },
-        { city: "chicago", state: "il", metro: "Chicago" },
-        { city: "houston", state: "tx", metro: "Houston" },
-        { city: "phoenix", state: "az", metro: "Phoenix" },
-        { city: "philadelphia", state: "pa", metro: "Philadelphia" },
-        { city: "san-antonio", state: "tx", metro: "San Antonio" },
-        { city: "san-diego", state: "ca", metro: "San Diego" },
-        { city: "dallas", state: "tx", metro: "Dallas" },
-        { city: "san-jose", state: "ca", metro: "San Jose" },
-        { city: "austin", state: "tx", metro: "Austin" },
-        { city: "jacksonville", state: "fl", metro: "Jacksonville" },
-        { city: "fort-worth", state: "tx", metro: "Fort Worth" },
-        { city: "columbus", state: "oh", metro: "Columbus" },
-        { city: "indianapolis", state: "in", metro: "Indianapolis" },
-        { city: "charlotte", state: "nc", metro: "Charlotte" },
-        { city: "san-francisco", state: "ca", metro: "San Francisco" },
-        { city: "seattle", state: "wa", metro: "Seattle" },
-        { city: "denver", state: "co", metro: "Denver" },
-        { city: "boston", state: "ma", metro: "Boston" },
-    ];
-    return METRO_AREAS.map(({ city, state, metro }) => ({
-        params: { slug: city },
-        props: { citySlug: city, stateSlug: state, metroName: metro },
-    }));
+    const metros = await getTopMetros(2);
+
+    // Build a city-slug → metro map to avoid duplicate pages
+    const seen = new Set<string>();
+    const paths = [];
+
+    for (const metro of metros) {
+        if (seen.has(metro.citySlug)) continue;
+        seen.add(metro.citySlug);
+        paths.push({
+            params: { slug: metro.citySlug },
+            props: {
+                citySlug: metro.citySlug,
+                stateSlug: metro.stateSlug,
+                cityName: metro.cityName,
+                stateCode: metro.stateCode,
+                stateName: metro.stateName,
+            },
+        });
+    }
+
+    return paths;
 }
 
-const { citySlug, stateSlug, metroName } = Astro.props;
-const stateCode = stateSlug.toUpperCase();
-const stateName = STATE_NAMES[stateCode] || stateCode;
-
-const cityName = metroName;
-const treatment = "depression"; // Default to depression for ranking
+const { citySlug, stateSlug, cityName, stateCode, stateName } = Astro.props;
 
 const cityClinics = await getClinicsByCity(stateCode, cityName);
 const sortedClinics = [...cityClinics].sort(

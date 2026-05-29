@@ -496,6 +496,22 @@ export async function logLoginActivity(params: {
       metadata: { failureReason: params.failureReason, deviceType },
     });
 
+    // Also write to admin_action_log for admin/editor role changes
+    try {
+      const { adminActionLog } = await import('../db/schema');
+      await db.insert(adminActionLog).values({
+        userId: params.userId,
+        userEmail: params.email,
+        action: params.success ? 'admin_login' : 'admin_login_failed',
+        entityType: 'session',
+        ipAddress: params.ipAddress,
+        userAgent: params.userAgent,
+        details: { failureReason: params.failureReason },
+      });
+    } catch {
+      // non-fatal — admin_action_log may not exist in all envs
+    }
+
     // Update knownDevices if successful login
     if (params.success) {
       const userResults = await db.select({ knownDevices: users.knownDevices, lastLoginAt: users.lastLoginAt })

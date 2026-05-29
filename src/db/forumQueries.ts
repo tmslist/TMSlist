@@ -568,6 +568,295 @@ export async function getUserSavedPosts(userId: string, limit = 20, offset = 0) 
   return deduped;
 }
 
+// ── TRENDING & ACTIVE POSTS ──────────────────────
+
+export interface TrendingPost {
+  id: string;
+  title: string;
+  slug: string;
+  voteScore: number;
+  commentCount: number;
+  recentVotes: number;
+  recentComments: number;
+  categoryName: string;
+  categoryColor: string | null;
+  authorName: string | null;
+  createdAt: string;
+  velocity: number;
+}
+
+export async function getTrendingPosts(limit = 5, hoursBack = 24): Promise<TrendingPost[]> {
+  const cutoff = new Date();
+  cutoff.setHours(cutoff.getHours() - hoursBack);
+
+  const rows = await db
+    .select({
+      id: forumPosts.id,
+      title: forumPosts.title,
+      slug: forumPosts.slug,
+      voteScore: forumPosts.voteScore,
+      commentCount: forumPosts.commentCount,
+      categoryName: forumCategories.name,
+      categoryColor: forumCategories.color,
+      authorName: users.name,
+      createdAt: forumPosts.createdAt,
+      recentVotes: sql<number>`COALESCE((
+        SELECT COUNT(*)::int FROM forum_votes
+        WHERE forum_votes.target_id = ${forumPosts.id}
+        AND forum_votes.target_type = 'post'
+        AND forum_votes.created_at >= ${cutoff}
+      ), 0)`,
+      recentComments: sql<number>`COALESCE((
+        SELECT COUNT(*)::int FROM forum_comments
+        WHERE forum_comments.post_id = ${forumPosts.id}
+        AND forum_comments.created_at >= ${cutoff}
+      ), 0)`,
+    })
+    .from(forumPosts)
+    .innerJoin(forumCategories, eq(forumPosts.categoryId, forumCategories.id))
+    .innerJoin(users, eq(forumPosts.authorId, users.id))
+    .where(and(
+      eq(forumPosts.status, 'published'),
+      gte(forumPosts.createdAt, new Date(Date.now() - 7 * 24 * 60 * 60 * 1000))
+    ))
+    .orderBy(desc(forumPosts.voteScore))
+    .limit(50);
+
+  const seen = new Set<string>();
+  const deduped = [];
+  for (const row of rows) {
+    if (!seen.has(row.id)) { seen.add(row.id); deduped.push(row); }
+  }
+
+  return deduped.map(r => ({
+    ...r,
+    velocity: r.recentVotes * 2 + r.recentComments * 3,
+  }))
+    .sort((a, b) => b.velocity - a.velocity)
+    .slice(0, limit);
+}
+
+export interface ActiveThread {
+  id: string;
+  title: string;
+  slug: string;
+  categorySlug: string;
+  categoryName: string;
+  commentCount: number;
+  lastActivityAt: string | Date;
+  activeUsers: number;
+}
+
+export async function getActiveThreads(limit = 10, minutesBack = 30): Promise<ActiveThread[]> {
+  const cutoff = new Date();
+  cutoff.setMinutes(cutoff.getMinutes() - minutesBack);
+
+  const rows = await db
+    .select({
+      id: forumPosts.id,
+      title: forumPosts.title,
+      slug: forumPosts.slug,
+      categorySlug: forumCategories.slug,
+      categoryName: forumCategories.name,
+      commentCount: forumPosts.commentCount,
+      lastActivityAt: forumPosts.lastActivityAt,
+      recentComments: sql<number>`COALESCE((
+        SELECT COUNT(DISTINCT author_id)::int FROM forum_comments
+        WHERE forum_comments.post_id = ${forumPosts.id}
+        AND forum_comments.created_at >= ${cutoff}
+      ), 0)`,
+    })
+    .from(forumPosts)
+    .innerJoin(forumCategories, eq(forumPosts.categoryId, forumCategories.id))
+    .where(and(
+      eq(forumPosts.status, 'published'),
+      gte(forumPosts.lastActivityAt, cutoff)
+    ))
+    .orderBy(desc(forumPosts.lastActivityAt))
+    .limit(limit);
+
+  return rows.map(r => ({
+    id: r.id,
+    title: r.title,
+    slug: r.slug,
+    categorySlug: r.categorySlug,
+    categoryName: r.categoryName,
+    commentCount: r.commentCount,
+    lastActivityAt: r.lastActivityAt,
+    activeUsers: Number(r.recentComments),
+  }));
+}
+
+// ── CATEGORY ACTIVITY ──────────────────────────
+
+export interface CategoryActivity {
+  id: string;
+  slug: string;
+  name: string;
+  color: string | null;
+  icon: string | null;
+  postCount: number;
+  recentPosts: number;
+  recentComments: number;
+  activityScore: number;
+}
+
+export async function getCategoryActivity(hoursBack = 24): Promise<CategoryActivity[]> {
+  const cutoff = new Date();
+  cutoff.setHours(cutoff.getHours() - hoursBack);
+
+  const categories = await db
+    .select({
+      id: forumCategories.id,
+      slug: forumCategories.slug,
+      name: forumCategories.name,
+      color: forumCategories.color,
+      icon: forumCategories.icon,
+      postCount: forumCategories.postCount,
+      recentPosts: sql<number>`COALESCE((
+        SELECT COUNT(*)::int FROM forum_posts
+        WHERE forum_posts.category_id = ${forumCategories.id}
+        AND forum_posts.created_at >= ${cutoff}
+      ), 0)`,
+      recentComments: sql<number>`COALESCE((
+        SELECT COUNT(*)::int FROM forum_comments
+        INNER JOIN forum_posts ON forum_comments.post_id = forum_posts.id
+        WHERE forum_posts.category_id = ${forumCategories.id}
+        AND forum_comments.created_at >= ${cutoff}
+      ), 0)`,
+    })
+    .from(forumCategories)
+    .orderBy(asc(forumCategories.sortOrder));
+
+  return categories.map(c => ({
+    ...c,
+    activityScore: c.recentPosts * 5 + c.recentComments * 2,
+  }));
+}
+
+// ── RECENT ACTIVITY FEED ─────────────────────
+
+export interface RecentActivity {
+  id: string;
+  type: 'post' | 'comment' | 'answer';
+  postTitle: string;
+  postSlug: string;
+  categoryName: string;
+  authorName: string | null;
+  authorRole: string;
+  doctorName?: string | null;
+  credential?: string | null;
+  targetAuthorName?: string | null;
+  createdAt: string;
+}
+
+export async function getRecentActivityFeed(limit = 10): Promise<RecentActivity[]> {
+  const cutoff = new Date();
+  cutoff.setHours(cutoff.getHours() - 48);
+
+  const recentPosts = await db
+    .select({
+      id: forumPosts.id,
+      title: forumPosts.title,
+      slug: forumPosts.slug,
+      categoryName: forumCategories.name,
+      authorName: users.name,
+      authorRole: users.role,
+      doctorName: doctors.name,
+      credential: doctors.credential,
+      createdAt: forumPosts.createdAt,
+    })
+    .from(forumPosts)
+    .innerJoin(forumCategories, eq(forumPosts.categoryId, forumCategories.id))
+    .innerJoin(users, eq(forumPosts.authorId, users.id))
+    .leftJoin(doctors, eq(users.clinicId, doctors.clinicId))
+    .where(and(
+      eq(forumPosts.status, 'published'),
+      gte(forumPosts.createdAt, cutoff)
+    ))
+    .orderBy(desc(forumPosts.createdAt))
+    .limit(limit);
+
+  const recentComments = await db
+    .select({
+      id: forumComments.id,
+      postTitle: forumPosts.title,
+      postSlug: forumPosts.slug,
+      categoryName: forumCategories.name,
+      authorName: users.name,
+      authorRole: users.role,
+      doctorName: doctors.name,
+      credential: doctors.credential,
+      isAccepted: forumComments.isAccepted,
+      targetAuthorName: sql<string>`(
+        SELECT u.name FROM users u WHERE u.id = ${forumPosts.authorId}
+      `,
+      createdAt: forumComments.createdAt,
+    })
+    .from(forumComments)
+    .innerJoin(forumPosts, eq(forumComments.postId, forumPosts.id))
+    .innerJoin(forumCategories, eq(forumPosts.categoryId, forumCategories.id))
+    .innerJoin(users, eq(forumComments.authorId, users.id))
+    .leftJoin(doctors, eq(users.clinicId, doctors.clinicId))
+    .where(and(
+      eq(forumComments.status, 'published'),
+      gte(forumComments.createdAt, cutoff)
+    ))
+    .orderBy(desc(forumComments.createdAt))
+    .limit(limit);
+
+  const activities: RecentActivity[] = [];
+
+  for (const p of recentPosts) {
+    activities.push({
+      id: p.id,
+      type: 'post',
+      postTitle: p.title,
+      postSlug: p.slug,
+      categoryName: p.categoryName,
+      authorName: p.authorName,
+      authorRole: p.authorRole,
+      doctorName: p.doctorName,
+      credential: p.credential,
+      createdAt: p.createdAt.toString(),
+    });
+  }
+
+  for (const c of recentComments) {
+    activities.push({
+      id: c.id,
+      type: c.isAccepted ? 'answer' : 'comment',
+      postTitle: c.postTitle,
+      postSlug: c.postSlug,
+      categoryName: c.categoryName,
+      authorName: c.authorName,
+      authorRole: c.authorRole,
+      doctorName: c.doctorName,
+      credential: c.credential,
+      targetAuthorName: c.targetAuthorName ?? undefined,
+      createdAt: c.createdAt.toString(),
+    });
+  }
+
+  return activities
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, limit);
+}
+
+// ── USER NOTIFICATIONS COUNT ───────────────────
+
+export async function getUnreadNotificationCount(userId: string): Promise<number> {
+  const result = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(forumComments)
+    .innerJoin(forumPosts, eq(forumComments.postId, forumPosts.id))
+    .where(and(
+      eq(forumPosts.authorId, userId),
+      sql`${forumComments.authorId} != ${userId}`
+    ));
+  return Number(result[0]?.count ?? 0);
+}
+
 // ── ACCEPT ANSWER ──────────────────────────────
 
 export async function toggleAcceptedAnswer(commentId: string, postAuthorId: string): Promise<boolean> {

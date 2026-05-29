@@ -81,3 +81,13 @@ After that period, many patients transition to:
 ## The Bottom Line
 
 TMS and psychotherapy aren't competing treatments — they're complementary tools that, used together, produce outcomes neither achieves alone. If you're beginning TMS, ask your psychiatrist about integrating psychotherapy into your treatment plan. The combination may require more scheduling effort, but the superior results and durability are well worth it.
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [Tms For Anxiety Fda Breakthrough](/blog/tms-for-anxiety-fda-breakthrough/).
+For more information, see our guide to [Tms For Depression](/blog/tms-for-depression/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).
+For more information, see our guide to [search for TMS specialists](/specialists/).

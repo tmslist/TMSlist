@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TargetIcon, HospitalIcon, EditIcon, UserIcon, LockIcon, StarIcon, CheckIcon } from './Icons';
 import type React from 'react';
 
 interface Notification {
   id: string;
-  type: 'lead' | 'review' | 'clinic' | 'blog' | 'user' | 'security';
+  type: 'lead' | 'review' | 'clinic' | 'blog' | 'user' | 'security' | string;
   icon: React.ReactNode;
   title: string;
   description: string;
@@ -13,78 +13,97 @@ interface Notification {
   read: boolean;
 }
 
-const INITIAL_NOTIFICATIONS: Notification[] = [
-  {
-    id: '1',
-    type: 'lead',
-    icon: <TargetIcon size={20} />,
-    title: 'New Lead',
-    description: 'John D. submitted a specialist enquiry',
-    timeAgo: '2m ago',
-    link: '/admin/leads',
-    read: false,
-  },
-  {
-    id: '2',
-    type: 'review',
-    icon: <StarIcon size={20} />,
-    title: 'Review Pending',
-    description: '1 review awaiting moderation',
-    timeAgo: '15m ago',
-    link: '/admin/reviews',
-    read: false,
-  },
-  {
-    id: '3',
-    type: 'clinic',
-    icon: <HospitalIcon size={20} />,
-    title: 'Clinic Claimed',
-    description: 'New clinic claim pending review',
-    timeAgo: '1h ago',
-    link: '/admin/clinics',
-    read: false,
-  },
-  {
-    id: '4',
-    type: 'blog',
-    icon: <EditIcon size={20} />,
-    title: 'Blog Draft',
-    description: 'Draft post needs review',
-    timeAgo: '3h ago',
-    link: '/admin/blog',
-    read: true,
-  },
-  {
-    id: '5',
-    type: 'user',
-    icon: <UserIcon size={20} />,
-    title: 'New User',
-    description: 'New user signed up: jane@example.com',
-    timeAgo: '5h ago',
-    link: '/admin/users',
-    read: true,
-  },
-  {
-    id: '6',
-    type: 'security',
-    icon: <LockIcon size={20} />,
-    title: 'Security',
-    description: 'Failed login attempt detected',
-    timeAgo: '1d ago',
-    link: '/admin/audit',
-    read: true,
-  },
-];
+const TYPE_ICONS: Record<string, React.ReactNode> = {
+  lead: <TargetIcon size={20} />,
+  review: <StarIcon size={20} />,
+  clinic: <HospitalIcon size={20} />,
+  blog: <EditIcon size={20} />,
+  user: <UserIcon size={20} />,
+  security: <LockIcon size={20} />,
+  enquiry: <TargetIcon size={20} />,
+  newsletter: <EditIcon size={20} />,
+};
+
+function timeAgo(date: string): string {
+  const now = new Date();
+  const then = new Date(date);
+  const diffMs = now.getTime() - then.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  if (diffMins < 1) return 'just now';
+  if (diffMins < 60) return `${diffMins}m ago`;
+  const diffHrs = Math.floor(diffMins / 60);
+  if (diffHrs < 24) return `${diffHrs}h ago`;
+  const diffDays = Math.floor(diffHrs / 24);
+  return `${diffDays}d ago`;
+}
+
+const LINK_MAP: Record<string, string> = {
+  lead: '/admin/leads',
+  review: '/admin/reviews',
+  clinic: '/admin/clinics',
+  blog: '/admin/blog',
+  user: '/admin/users',
+  security: '/admin/audit',
+  enquiry: '/admin/enquiries',
+  newsletter: '/admin/newsletter',
+  system: '/admin/dashboard',
+};
 
 export default function AdminNotifications() {
-  const [notifications, setNotifications] = useState<Notification[]>(INITIAL_NOTIFICATIONS);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [filter, setFilter] = useState<'all' | 'unread'>('all');
+  const [loading, setLoading] = useState(true);
 
-  const handleMarkAllRead = () => {
+  useEffect(() => {
+    async function fetchNotifications() {
+      try {
+        const res = await fetch('/api/admin/notifications?limit=50');
+        if (res.ok) {
+          const data = await res.json();
+          const mapped: Notification[] = (data.notifications || []).map((n: any) => ({
+            id: n.notification?.id || n.id || String(Math.random()),
+            type: n.notification?.type || n.type || 'system',
+            icon: TYPE_ICONS[n.notification?.type || n.type] || TYPE_ICONS.blog,
+            title: n.notification?.title || n.title || 'Notification',
+            description: n.notification?.message || n.message || '',
+            timeAgo: n.notification?.createdAt ? timeAgo(n.notification.createdAt) : 'recently',
+            link: n.notification?.link || LINK_MAP[n.notification?.type || n.type] || '/admin/dashboard',
+            read: n.notification?.read ?? n.read ?? true,
+          }));
+          setNotifications(mapped);
+        }
+      } catch {
+        // fail silently
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchNotifications();
+  }, []);
+
+  const handleMarkAllRead = async () => {
+    try {
+      await fetch('/api/admin/notifications', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ markAllRead: true }),
+      });
+    } catch {
+      // best-effort
+    }
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
   };
 
-  const handleMarkRead = (id: string) => {
+  const handleMarkRead = async (id: string) => {
+    try {
+      await fetch('/api/admin/notifications', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+    } catch {
+      // best-effort
+    }
     setNotifications((prev) =>
       prev.map((n) => (n.id === id ? { ...n, read: true } : n))
     );
@@ -98,7 +117,6 @@ export default function AdminNotifications() {
 
   return (
     <div>
-      {/* Filters and actions */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex gap-2">
           <button
@@ -132,9 +150,16 @@ export default function AdminNotifications() {
         )}
       </div>
 
-      {/* Notifications list */}
       <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden">
-        {filteredNotifications.length === 0 ? (
+        {loading ? (
+          <div className="p-12 text-center">
+            <svg className="w-8 h-8 mx-auto text-[var(--muted)] animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+            <p className="text-sm text-[var(--muted)] mt-3">Loading notifications...</p>
+          </div>
+        ) : filteredNotifications.length === 0 ? (
           <div className="p-12 text-center">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--paper2)] flex items-center justify-center">
               <svg className="w-8 h-8 text-[var(--muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -154,14 +179,11 @@ export default function AdminNotifications() {
                 !notification.read ? 'bg-[rgba(10,22,40,0.08)]/30' : ''
               }`}
             >
-              {/* Icon */}
               <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
                 !notification.read ? 'bg-[rgba(10,22,40,0.08)]' : 'bg-[var(--paper2)]'
               }`}>
                 <span className="text-lg flex items-center justify-center">{notification.icon}</span>
               </div>
-
-              {/* Content */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-[var(--ink)]">{notification.title}</span>
@@ -172,8 +194,6 @@ export default function AdminNotifications() {
                 <p className="text-sm text-[var(--muted)] mt-0.5">{notification.description}</p>
                 <span className="text-xs text-[var(--muted)] mt-1 block">{notification.timeAgo}</span>
               </div>
-
-              {/* Actions */}
               <div className="flex items-center gap-2 shrink-0">
                 {!notification.read && (
                   <button

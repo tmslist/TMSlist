@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import JobApplyForm from "../../components/react/JobApplyForm";
 import JobCard from "../../components/react/JobCard";
+import { getClinicLogoUrl } from "../../utils/images";
 
 export const prerender = false;
 
@@ -78,6 +79,7 @@ const jobJsonLd = {
 };
 
 const clinicLogo = job.clinicLogo as { logo_url?: string } | null;
+const logoUrl = clinicLogo?.logo_url || getClinicLogoUrl({ name: job.clinicName });
 ---
 
 <Layout title={title} description={description} breadcrumbs={[
@@ -106,9 +108,7 @@ const clinicLogo = job.clinicLogo as { logo_url?: string } | null;
             {clinicLogo?.logo_url ? (
               <img src={clinicLogo.logo_url} alt={job.clinicName} class="w-16 h-16 rounded-2xl object-cover bg-[var(--paper)]" />
             ) : (
-              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[rgba(10,22,40,0.08)] to-[var(--paper2)] flex items-center justify-center text-[var(--accent)] font-bold text-2xl">
-                {job.clinicName.charAt(0)}
-              </div>
+              <img src={logoUrl} alt={job.clinicName} class="w-16 h-16 rounded-2xl object-cover bg-[var(--paper)]" onerror="this.style.display='none'" />
             )}
             <div>
               <p class="text-sm text-[var(--muted)] mb-0.5">{job.clinicName}</p>

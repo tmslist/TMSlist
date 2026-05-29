@@ -83,13 +83,14 @@ export default function EnquiryModal({
           name: formData.get("name"),
           email: formData.get("email"),
           phone: formData.get("phone"),
-          message: formData.get("message"),
           clinicName: formData.get("clinic"),
+          message: formData.get("message"),
+          sourceUrl: window.location.href,
           metadata: {
             location: formData.get("location"),
             role: formData.get("role"),
+            formPage: window.location.pathname,
           },
-          sourceUrl: window.location.href,
         }),
       });
 
@@ -97,9 +98,12 @@ export default function EnquiryModal({
         setStatus("success");
         form.reset();
       } else {
+        const errData = await res.json().catch(() => ({}));
+        console.error('Enquiry form error:', errData);
         setStatus("error");
       }
-    } catch {
+    } catch (err) {
+      console.error('Enquiry form error:', err);
       setStatus("error");
     }
   }

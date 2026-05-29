@@ -137,3 +137,16 @@ Maintenance is the part of TMS that protects everything you just earned in the a
 The single biggest mistake people make is assuming the 6-week course was the whole treatment. It was the loading dose. The maintenance is the rest of the prescription.
 
 Talk to your clinic about a written maintenance plan **before** your acute course ends — when the psychiatrist still has you in front of them and momentum is on your side. Don't wait until you're back in the dark to figure out what comes next.
+
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [Tms For Anxiety Fda Breakthrough](/blog/tms-for-anxiety-fda-breakthrough/).
+For more information, see our guide to [Tms For Depression](/blog/tms-for-depression/).
+For more information, see our guide to [Tms Success Rates 2026](/blog/tms-success-rates-2026/).
+For more information, see our guide to [Tms Vs Medication](/blog/tms-vs-medication/).
+For more information, see our guide to [Tms Booster Sessions Maintenance Protocols](/blog/tms-booster-sessions-maintenance-protocols/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).
+For more information, see our guide to [How Long Does Tms Last](/blog/how-long-does-tms-last/).

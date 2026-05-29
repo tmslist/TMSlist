@@ -321,16 +321,19 @@
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    type: "enquiry",
+                    type: "specialist_enquiry",
                     name: formData.get("name"),
                     email: formData.get("email"),
                     phone: formData.get("phone"),
-                    location: formData.get("location"),
                     clinicName: formData.get("clinic") || undefined,
                     message: formData.get("message"),
-                    role: formData.get("role"),
                     sourceUrl: window.location.href,
-                    metadata: { country: (document.getElementById("enquiry-country") as HTMLInputElement)?.value || "US" },
+                    metadata: {
+                        country: (document.getElementById("enquiry-country") as HTMLInputElement)?.value || "US",
+                        location: formData.get("location"),
+                        role: formData.get("role"),
+                        formPage: window.location.pathname,
+                    },
                 }),
             });
 
@@ -338,7 +341,13 @@
                 successMsg?.classList.remove("hidden");
                 enquiryForm.reset();
             } else {
+                const errData = await res.json().catch(() => ({}));
+                const errorSpan = errorMsg?.querySelector('span');
+                if (errorSpan) {
+                    errorSpan.textContent = errData?.error || errData?.details || 'Something went wrong. Please try again.';
+                }
                 errorMsg?.classList.remove("hidden");
+                console.error('Enquiry form error:', errData);
             }
         } catch {
             errorMsg?.classList.remove("hidden");

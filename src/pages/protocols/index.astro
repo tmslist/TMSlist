@@ -6,20 +6,21 @@ import EditorialHero from '../../components/editorial/EditorialHero.astro';
 import EditorialSection from '../../components/editorial/EditorialSection.astro';
 import EditorialCard from '../../components/editorial/EditorialCard.astro';
 import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
+import MedicalReviewBanner from '../../components/MedicalReviewBanner.astro';
 import { PROTOCOL_SLUGS } from '../../utils/seo_slugs';
 
 const title = "TMS Protocols & Techniques | SAINT, Theta Burst, Deep TMS & More";
-const description = "Compare TMS therapy protocols — standard rTMS, theta burst stimulation, SAINT protocol, deep TMS, and more. Learn which approach fits your treatment needs.";
+const description = "Compare TMS protocols — theta burst, SAINT, deep TMS, and standard rTMS. Learn which FDA-cleared approach fits your treatment needs for depression, OCD, and anxiety.";
 
-const PROTOCOL_META: Record<string, { description: string; duration: string; sessions: string; highlight?: string }> = {
-  'saint-protocol': { description: 'Stanford Accelerated Intelligent Neuromodulation Therapy. Full treatment course in just 5 days using imaging-guided theta burst.', duration: '5 days', sessions: '50 (10/day)', highlight: '79% remission' },
-  'theta-burst-stimulation': { description: 'Condensed stimulation pattern mimicking natural brain rhythms. Same efficacy as standard TMS in 3-9 minutes per session.', duration: '6-9 weeks', sessions: '30-36', highlight: '3-min sessions' },
-  'deep-tms': { description: 'BrainsWay H-coil technology reaching deeper brain structures. Only device FDA-cleared for OCD and smoking cessation.', duration: '6 weeks', sessions: '29-36', highlight: 'Deep targets' },
-  'accelerated-tms': { description: 'Multiple sessions per day to compress treatment timeline. Promising for patients who need rapid improvement.', duration: '1-2 weeks', sessions: '20-50', highlight: 'Faster results' },
-  'neuronavigation': { description: 'MRI-guided precision targeting for optimal coil placement. May improve outcomes by ensuring accurate stimulation sites.', duration: '6-9 weeks', sessions: '30-36', highlight: 'Precision targeting' },
-  'maintenance-tms': { description: 'Periodic sessions after initial treatment to sustain benefits. Prevents relapse in responders.', duration: 'Ongoing', sessions: '1-4/month', highlight: 'Sustain gains' },
-  'fmri-guided-tms': { description: 'Functional MRI mapping identifies personalized brain targets based on individual connectivity patterns.', duration: '6-9 weeks', sessions: '30-36', highlight: 'Personalized targets' },
-  'eeg-synchronized-tms': { description: 'Stimulation timed to individual brain wave patterns for enhanced neural engagement and plasticity.', duration: '4-6 weeks', sessions: '20-30', highlight: 'Brain-wave synced' },
+const PROTOCOL_META: Record<string, { description: string; duration: string; sessions: string; highlight?: string; treatmentLink?: string }> = {
+  'saint-protocol': { description: 'Stanford Accelerated Intelligent Neuromodulation Therapy. Full treatment course in just 5 days using imaging-guided theta burst.', duration: '5 days', sessions: '50 (10/day)', highlight: '79% remission', treatmentLink: '/treatments/depression/' },
+  'theta-burst-stimulation': { description: 'Condensed stimulation pattern mimicking natural brain rhythms. Same efficacy as standard TMS in 3-9 minutes per session.', duration: '6-9 weeks', sessions: '30-36', highlight: '3-min sessions', treatmentLink: '/treatments/depression/' },
+  'deep-tms': { description: 'BrainsWay H-coil technology reaching deeper brain structures. Only device FDA-cleared for OCD and smoking cessation.', duration: '6 weeks', sessions: '29-36', highlight: 'Deep targets', treatmentLink: '/treatments/ocd/' },
+  'accelerated-tms': { description: 'Multiple sessions per day to compress treatment timeline. Promising for patients who need rapid improvement.', duration: '1-2 weeks', sessions: '20-50', highlight: 'Faster results', treatmentLink: '/treatments/depression/' },
+  'neuronavigation': { description: 'MRI-guided precision targeting for optimal coil placement. May improve outcomes by ensuring accurate stimulation sites.', duration: '6-9 weeks', sessions: '30-36', highlight: 'Precision targeting', treatmentLink: '/treatments/depression/' },
+  'maintenance-tms': { description: 'Periodic sessions after initial treatment to sustain benefits. Prevents relapse in responders.', duration: 'Ongoing', sessions: '1-4/month', highlight: 'Sustain gains', treatmentLink: '/treatments/depression/' },
+  'fmri-guided-tms': { description: 'Functional MRI mapping identifies personalized brain targets based on individual connectivity patterns.', duration: '6-9 weeks', sessions: '30-36', highlight: 'Personalized targets', treatmentLink: '/treatments/depression/' },
+  'eeg-synchronized-tms': { description: 'Stimulation timed to individual brain wave patterns for enhanced neural engagement and plasticity.', duration: '4-6 weeks', sessions: '20-30', highlight: 'Brain-wave synced', treatmentLink: '/treatments/depression/' },
   'off-label-tms': { description: 'TMS applications beyond FDA-cleared indications — anxiety, PTSD, chronic pain, addiction, and more.', duration: 'Varies', sessions: 'Varies', highlight: 'Expanding uses' },
 };
 
@@ -71,6 +72,10 @@ const schema = JSON.stringify({
     ]}
   />
 
+  <div style="max-width:900px; margin:0 auto; padding:2rem 1.5rem 0;">
+    <MedicalReviewBanner />
+  </div>
+
   <EditorialSection
     title="Treatment Protocols"
     intro="Compare every major TMS protocol used today — duration, session count, and what makes each distinctive."
@@ -84,7 +89,7 @@ const schema = JSON.stringify({
           tag={p.highlight}
           tagTone="accent"
           title={p.title}
-          description={p.description}
+          description={p.description + (p.treatmentLink ? ` <a href="${p.treatmentLink}" style="color:var(--accent); text-decoration:underline;">View treatment info</a>.` : '')}
           size="lg"
           stats={[
             { label: "Duration", value: p.duration, color: "ink" },
@@ -101,6 +106,7 @@ const schema = JSON.stringify({
     ctas={[
       { label: "Take the Assessment", href: "/quiz/am-i-a-candidate/" },
       { label: "Find a Clinic Near You", href: "/us/", variant: "outline" },
+      { label: "Insurance Coverage", href: "/insurance/medicare/", variant: "outline" },
     ]}
     stickyMobile
   />

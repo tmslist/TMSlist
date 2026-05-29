@@ -11,7 +11,8 @@ import { eq } from "drizzle-orm";
 const session = getSessionFromRequest(Astro.request);
 if (!session) return Astro.redirect("/portal/login/");
 
-const isDoctor = session.role === 'doctor';
+// Note: 'doctor' is not a DB role — clinic_owners with a clinicId are doctors
+const isDoctor = session.clinicId != null;
 const isAdmin = ['admin', 'editor'].includes(session.role);
 if (!isDoctor && !isAdmin) return Astro.redirect("/portal/login/");
 

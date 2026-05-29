@@ -162,14 +162,25 @@ export default function AdminReportBuilder() {
     return { start: start.toISOString(), end: end.toISOString() };
   }, [datePreset, customStart, customEnd]);
 
-  const runReport = useCallback(() => {
+  const runReport = useCallback(async () => {
     setLoading(true);
-    setTimeout(() => {
-      const data = generateMockData(selectedMetrics);
+    try {
+      const { start, end } = getDateRange();
+      const res = await fetch('/api/admin/reports', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ metrics: selectedMetrics, entityType, entityIds, dateRange: { start, end } }),
+      });
+      if (res.status === 401) { window.location.href = '/admin/login'; return; }
+      if (!res.ok) throw new Error(`Report failed: ${res.status}`);
+      const data: ReportResult = await res.json();
       setResults(data);
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Report failed');
+    } finally {
       setLoading(false);
-    }, 600);
-  }, [selectedMetrics]);
+    }
+  }, [selectedMetrics, entityType, entityIds, getDateRange]);
 
   const exportCSV = useCallback(() => {
     if (!results) return;

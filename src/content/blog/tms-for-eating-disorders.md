@@ -1,6 +1,6 @@
 ---
 title: "TMS for Eating Disorders: Targeting the Compulsive Overvaluation of Shape and Weight"
-description: "Research explores TMS as a treatment for anorexia, bulimia, and binge eating disorder by targeting neural circuits underlying compulsive eating behaviors and body image disturbance."
+description: "Research explores TMS as a treatment for anorexia, bulimia, and [binge eating disorder](/blog/tms-for-binge-eating-disorder/) by targeting neural circuits underlying compulsive eating behaviors and body image disturbance."
 publishDate: 2026-04-15
 category: research
 author: "Dr. Karan Narwal"
@@ -8,13 +8,13 @@ image: "/images/blog-covers/tms-for-eating-disorders.svg"
 tags: ["tms", "eating-disorders", "anorexia", "bulimia", "binge-eating", "body-image", "compulsive-overvaluation"]
 ---
 
-Eating disorders have the highest mortality rate of any psychiatric condition, yet treatment options remain limited. Anorexia nervosa, bulimia nervosa, and binge eating disorder share a common psychological hallmark: the **compulsive overvaluation of shape and weight**, where concerns about body image drive pathological eating behaviors. Emerging research suggests that TMS may be able to modulate the neural circuits underlying this core feature, offering a novel approach to treatment.
+Eating disorders have the highest mortality rate of any psychiatric condition, yet treatment options remain limited. Anorexia nervosa, bulimia nervosa, and [binge eating disorder](/blog/tms-for-binge-eating-disorder/) share a common psychological hallmark: the **compulsive overvaluation of shape and weight**, where concerns about body image drive pathological eating behaviors. Emerging research suggests that TMS may be able to modulate the neural circuits underlying this core feature, offering a novel approach to treatment.
 
 ## What You'll Learn
 
 - How the salience network, reward network, and executive control network are dysregulated in eating disorders
 - Why the DLPFC is a key target for TMS across different eating disorder types
-- What research shows about TMS for anorexia, bulimia, and binge eating disorder
+- What research shows about TMS for anorexia, bulimia, and [binge eating disorder](/blog/tms-for-binge-eating-disorder/)
 - Novel targeting approaches including the insula and cerebellum
 - Limitations and challenges in the current evidence base
 
@@ -24,9 +24,9 @@ Modern neuroimaging has revealed that eating disorders involve dysfunction in se
 
 **The salience network**, centered on the anterior insula and dorsal anterior cingulate cortex, governs attention to body-related stimuli and interoceptive awareness (the perception of internal bodily states). In anorexia, this network may be hyperactive, leading to heightened awareness of hunger and fullness signals. In binge eating, it may drive excessive attention to food cues.
 
-**The reward network**, involving the ventral striatum and orbitofrontal cortex, processes the rewarding aspects of food and eating. Anorexia patients may show reduced reward responses to food, while binge eating disorder may involve enhanced reward activation in response to highly palatable foods.
+**The reward network**, involving the ventral striatum and orbitofrontal cortex, processes the rewarding aspects of food and eating. Anorexia patients may show reduced reward responses to food, while [binge eating disorder](/blog/tms-for-binge-eating-disorder/) may involve enhanced reward activation in response to highly palatable foods.
 
-**The executive control network**, centered on the dorsolateral prefrontal cortex (DLPFC), normally regulates impulsive responses and inhibits inappropriate behaviors. This network is often underactive in eating disorders, contributing to the inability to control eating impulses.
+**The executive control network**, centered on the [dorsolateral prefrontal cortex (DLPFC)](/blog/understanding-tms-motor-threshold/), normally regulates impulsive responses and inhibits inappropriate behaviors. This network is often underactive in eating disorders, contributing to the inability to control eating impulses.
 
 These networks interact with the **default mode network**, which is involved in self-referential processing and body image attitudes. The overvaluation of shape and weight may represent a self-referential belief system maintained by hyperconnectivity within these circuits.
 
@@ -37,7 +37,7 @@ The DLPFC serves as a regulatory hub that can influence both the salience and re
 Different eating disorders may require different targeting approaches:
 
 - **Anorexia nervosa** may benefit from left DLPFC stimulation to enhance cognitive control
-- **Bulimia nervosa** and **binge eating disorder** may respond to both left and right DLPFC targets, addressing both the impulsive binge behaviors and the compensatory purging or restrictive thoughts
+- **Bulimia nervosa** and **[binge eating disorder](/blog/tms-for-binge-eating-disorder/)** may respond to both left and right DLPFC targets, addressing both the impulsive binge behaviors and the compensatory purging or restrictive thoughts
 
 ## Research Findings by Disorder
 
@@ -90,7 +90,7 @@ The field is moving toward **personalized, connectivity-guided TMS** protocols t
 
 ## Is TMS Right for an Eating Disorder?
 
-TMS for eating disorders remains an investigational treatment. It should be considered adjunctive to, not a replacement for, evidence-based psychotherapies and medical monitoring. Patients interested in TMS should seek specialized treatment centers with experience in both eating disorders and neuromodulation.
+TMS for eating disorders remains an investigational treatment. It should be considered adjunctive to, not a replacement for, [evidence-based psychotherapies](/blog/tms-vs-medication/) and medical monitoring. Patients interested in TMS should [seek specialized treatment centers](/clinic/) with [experience](/blog/choosing-tms-clinic-red-flags/) in both eating disorders and neuromodulation.
 
 For those with treatment-resistant eating disorders who have failed multiple rounds of evidence-based therapy, TMS may offer a new avenue of hope.
 
@@ -100,7 +100,7 @@ For those with treatment-resistant eating disorders who have failed multiple rou
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">Is TMS FDA-cleared for eating disorders?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-[var(--ink2)]" itemprop="text">No. TMS for eating disorders is not FDA-cleared and remains an investigational treatment. The evidence base is growing, particularly for bulimia nervosa and binge eating disorder, but clinical guidelines have not yet been established.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">No. TMS for eating disorders is not FDA-cleared and remains an investigational treatment. The evidence base is growing, particularly for bulimia nervosa and [binge eating disorder](/blog/tms-for-binge-eating-disorder/), but clinical guidelines have not yet been established.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">

@@ -1,10 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import EditorialHero from '../../components/editorial/EditorialHero.astro';
+import MedicalReviewBanner from '../../components/MedicalReviewBanner.astro';
 import { STORIES_SLUGS } from '../../utils/seo_slugs';
 
 const title = "Patient Stories | Real TMS Therapy Experiences";
-const description = "Read real stories from TMS therapy patients. Hear about their journeys, treatment experiences, and outcomes in their own words.";
+const description = "Read real TMS patient success stories and outcomes. Real reviews from people with depression, OCD, and anxiety — see actual treatment results before your journey.";
 
 const siteUrl = import.meta.env.SITE_URL || 'https://tmslist.com';
 
@@ -104,6 +105,10 @@ const faqSchema = JSON.stringify({
             { value: "37%", label: "Remission Rate", color: "warm" },
           ]}
         />
+
+        <div style="max-width:1200px; margin:0 auto; padding:2rem 1.5rem 0;">
+          <MedicalReviewBanner />
+        </div>
 
         <!-- Condition Filter Bar -->
         <section class="bg-[var(--paper)] border-b border-[var(--line)] sticky top-[64px] z-30">
@@ -303,35 +308,35 @@ const faqSchema = JSON.stringify({
                             </thead>
                             <tbody class="divide-y divide-[var(--line)]">
                                 <tr class="hover:bg-[rgba(10,22,40,0.08)]/30 transition-colors">
-                                    <td class="px-5 py-3.5 font-medium text-[var(--ink2)]">Major Depressive Disorder</td>
+                                    <td class="px-5 py-3.5 font-medium text-[var(--ink2)]"><a href="/treatments/depression/" style="color:var(--accent); text-decoration:underline;">Major Depressive Disorder</a></td>
                                     <td class="text-center px-4 py-3.5 text-emerald-600 font-semibold">50-60%</td>
                                     <td class="text-center px-4 py-3.5 text-emerald-600 font-semibold">30-40%</td>
                                     <td class="text-center px-4 py-3.5 text-[var(--muted)]">20-36</td>
                                     <td class="text-center px-4 py-3.5"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">Cleared</span></td>
                                 </tr>
                                 <tr class="hover:bg-[rgba(10,22,40,0.08)]/30 transition-colors">
-                                    <td class="px-5 py-3.5 font-medium text-[var(--ink2)]">Obsessive-Compulsive Disorder</td>
+                                    <td class="px-5 py-3.5 font-medium text-[var(--ink2)]"><a href="/treatments/ocd/" style="color:var(--accent); text-decoration:underline;">Obsessive-Compulsive Disorder</a></td>
                                     <td class="text-center px-4 py-3.5 text-emerald-600 font-semibold">45-55%</td>
                                     <td class="text-center px-4 py-3.5 text-emerald-600 font-semibold">20-30%</td>
                                     <td class="text-center px-4 py-3.5 text-[var(--muted)]">29-36</td>
                                     <td class="text-center px-4 py-3.5"><span class="px-2 py-0.5 bg-[rgba(10,22,40,0.08)] text-[var(--accent)] text-xs font-semibold rounded-full">Breakthrough</span></td>
                                 </tr>
                                 <tr class="hover:bg-[rgba(10,22,40,0.08)]/30 transition-colors">
-                                    <td class="px-5 py-3.5 font-medium text-[var(--ink2)]">Post-Traumatic Stress (PTSD)</td>
+                                    <td class="px-5 py-3.5 font-medium text-[var(--ink2)]"><a href="/treatments/ptsd/" style="color:var(--accent); text-decoration:underline;">Post-Traumatic Stress (PTSD)</a></td>
                                     <td class="text-center px-4 py-3.5 text-amber-600 font-semibold">40-50%</td>
                                     <td class="text-center px-4 py-3.5 text-amber-600 font-semibold">15-25%</td>
                                     <td class="text-center px-4 py-3.5 text-[var(--muted)]">24-36</td>
                                     <td class="text-center px-4 py-3.5"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Off-Label</span></td>
                                 </tr>
                                 <tr class="hover:bg-[rgba(10,22,40,0.08)]/30 transition-colors">
-                                    <td class="px-5 py-3.5 font-medium text-[var(--ink2)]">Smoking Cessation</td>
+                                    <td class="px-5 py-3.5 font-medium text-[var(--ink2)]"><a href="/treatments/smoking-cessation/" style="color:var(--accent); text-decoration:underline;">Smoking Cessation</a></td>
                                     <td class="text-center px-4 py-3.5 text-emerald-600 font-semibold">30-40%</td>
                                     <td class="text-center px-4 py-3.5 text-[var(--muted)]">N/A</td>
                                     <td class="text-center px-4 py-3.5 text-[var(--muted)]">13</td>
                                     <td class="text-center px-4 py-3.5"><span class="px-2 py-0.5 bg-[rgba(10,22,40,0.08)] text-[var(--accent)] text-xs font-semibold rounded-full">Breakthrough</span></td>
                                 </tr>
                                 <tr class="hover:bg-[rgba(10,22,40,0.08)]/30 transition-colors">
-                                    <td class="px-5 py-3.5 font-medium text-[var(--ink2)]">Anxiety (comorbid)</td>
+                                    <td class="px-5 py-3.5 font-medium text-[var(--ink2)]"><a href="/treatments/anxiety/" style="color:var(--accent); text-decoration:underline;">Anxiety (comorbid)</a></td>
                                     <td class="text-center px-4 py-3.5 text-amber-600 font-semibold">35-45%</td>
                                     <td class="text-center px-4 py-3.5 text-amber-600 font-semibold">15-25%</td>
                                     <td class="text-center px-4 py-3.5 text-[var(--muted)]">20-36</td>

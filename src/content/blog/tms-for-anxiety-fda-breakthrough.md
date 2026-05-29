@@ -43,9 +43,9 @@ Here are the numbers that caught the FDA's attention:
 
 For comparison, the best medication data for treatment-resistant GAD shows response rates around 30-40%. A 60% response rate in people who already failed first-line treatment is a major jump.
 
-The protocol used a modified deep TMS approach targeting the right dorsolateral prefrontal cortex and anterior cingulate, regions heavily involved in anxiety regulation. Sessions ran 20 minutes, five days a week, for six weeks.
+The protocol used a modified deep TMS approach targeting the right dorsolateral prefrontal cortex and anterior cingulate, regions heavily involved in anxiety regulation. Sessions ran 20 minutes, five days a week, for six weeks. To learn what to expect, see our [preparing for first TMS session](/blog/preparing-for-first-tms-session/) guide.
 
-Side effects matched what we see in TMS for depression. Mild-to-moderate headache in about 30% of participants, scalp discomfort in 20%, no seizures, no serious adverse events.
+Side effects matched what we see in TMS for depression. [Mild-to-moderate headache](/blog/tms-side-effects-headache/) in about 30% of participants, scalp discomfort in 20%, no seizures, no serious adverse events.
 
 ## Why Anxiety TMS Is Different From Depression TMS
 
@@ -85,15 +85,15 @@ That is the best-case scenario. Trials can hit enrollment delays. Sites can drop
 
 If you are living with persistent anxiety that has not responded to medication, you do not need to wait for formal approval. Here are your options today.
 
-**Ask about off-label TMS for anxiety.** Many clinics already offer this. You will likely pay out of pocket ($200-$400 per session, 30-36 sessions typical), but some clinics run anxiety-specific protocols based on the research. Use our [clinic directory](/us/) to find providers in your area.
+**Ask about off-label TMS for anxiety.** [Many clinics](/blog/choosing-tms-clinic-red-flags/) already offer this. You will likely pay out of pocket ($200-$400 per session, 30-36 sessions typical), but some clinics run anxiety-specific protocols based on the research. Use our [clinic directory](/us/) to find providers in your area.
 
 **Look for clinical trials.** The Phase 3 trial will need participants, and clinical trials provide free treatment. ClinicalTrials.gov will list sites once enrollment opens.
 
-**Explore the comorbid depression pathway.** If you meet criteria for both depression and anxiety, and statistically there is a good chance you do, you may be able to get TMS covered for depression through your [insurance plan](/insurance/). Many people see anxiety improve alongside depression.
+**Explore the comorbid depression pathway.** If you meet criteria for both depression and anxiety, and statistically there is a good chance you do, you may be able to get TMS covered for depression through your [insurance plan](/insurance/). Many people see anxiety improve alongside depression. [See our insurance guide](/blog/real-cost-of-tms-therapy-2026/) for details. [See our insurance coverage guide](/blog/real-cost-of-tms-therapy-2026/) for details. See our [insurance coverage guide](/blog/real-cost-of-tms-therapy-2026/) for details.
 
 **Talk to a TMS specialist.** Not every psychiatrist keeps up with TMS research. A [board-certified TMS specialist](/specialists/) can evaluate whether your anxiety profile matches the protocols showing the most promise.
 
-**Do not stop your current treatment.** This designation is exciting, but it does not help you today. Keep working with your psychiatrist on your current plan. TMS for anxiety will likely be used alongside medication, not as a replacement.
+**Do not stop your current treatment.** This designation is exciting, but it does not help you today. For more information on TMS duration, see our [how long does TMS last](/blog/how-long-does-tms-last/) guide. Keep working with your psychiatrist on your current plan. [TMS for anxiety](/blog/combining-tms-with-therapy/) will likely be used alongside medication, not as a replacement.
 
 <div class="not-prose my-8 bg-[rgba(201,101,74,0.06)] border border-[var(--line)] rounded-2xl p-6">
   <h3 class="font-display font-bold text-[var(--warm)] mb-3">Key Takeaways</h3>
@@ -137,7 +137,7 @@ If you are living with persistent anxiety that has not responded to medication, 
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How effective is TMS for anxiety compared to medication?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-[var(--ink2)]" itemprop="text">The Phase 2 trial showed a 60% response rate in patients who had already failed at least one SSRI or SNRI. For comparison, treatment-resistant GAD patients typically see 30-40% response to additional medication trials. This suggests TMS could be significantly more effective than medication for people who have not responded to first-line treatment.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">The Phase 2 trial showed a 60% response rate in patients who had already failed at least one SSRI or SNRI. For comparison, [treatment-resistant GAD patients](/blog/tms-vs-medication/) typically see 30-40% response to additional medication trials. This suggests TMS could be significantly more effective than medication for people who have not responded to first-line treatment.</p>
       </div>
     </div>
   </div>

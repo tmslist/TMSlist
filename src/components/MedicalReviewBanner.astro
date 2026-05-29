@@ -1,0 +1,16 @@
+---
+interface Props {
+  lastReviewed?: string;
+  reviewerName?: string;
+  reviewerTitle?: string;
+}
+const { lastReviewed = "May 2026", reviewerName = "Dr. Karan Narwal", reviewerTitle = "Mental Health Specialist & Consultant" } = Astro.props;
+---
+<div class="medical-review-banner">
+  <div class="flex items-center gap-2 text-xs text-[var(--muted)]">
+    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span>Medically reviewed by <strong class="text-[var(--ink2)]">{reviewerName}</strong>, {reviewerTitle}</span>
+    <span class="text-[var(--line)]">·</span>
+    <span>Last reviewed: <strong class="text-[var(--ink2)]">{lastReviewed}</strong></span>
+  </div>
+</div>

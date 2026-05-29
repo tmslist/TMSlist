@@ -1,4 +1,58 @@
 ---
-const insurers = [{name:'Aetna',coverage:'Covered'},{name:'Blue Cross',coverage:'Covered'}];
+interface Props {
+    insurances?: string[];
+    showLabels?: boolean;
+    size?: 'sm' | 'md';
+}
+
+const { insurances, showLabels = true, size = 'md' } = Astro.props;
+
+interface Insurer {
+    name: string;
+    label: string;
+    color: string;
+    slug: string;
+}
+
+const majorInsurers: Insurer[] = [
+    { name: 'Aetna',        label: 'Aetna',          color: '#007FFF', slug: 'aetna' },
+    { name: 'Blue Cross',   label: 'Blue Cross',     color: '#1E3A8A', slug: 'bluecross' },
+    { name: 'Cigna',        label: 'Cigna',          color: '#E63329', slug: 'cigna' },
+    { name: 'United',       label: 'UnitedHealth',   color: '#0075C9', slug: 'united' },
+    { name: 'Medicare',     label: 'Medicare',       color: '#1D4ED8', slug: 'medicare' },
+    { name: 'Kaiser',       label: 'Kaiser',         color: '#203864', slug: 'kaiser' },
+    { name: 'Humana',       label: 'Humana',         color: '#CC3300', slug: 'humana' },
+    { name: 'Tricare',      label: 'Tricare',        color: '#5B7F3D', slug: 'tricare' },
+    { name: 'BCBS',         label: 'BlueCross',     color: '#1E3A8A', slug: 'bcbs' },
+    { name: 'Magellan',     label: 'Magellan',       color: '#0093C3', slug: 'magellan' },
+];
+
+// Resolve which insurers to show: use clinic's insurances if provided, else show major ones
+const insurersToShow = insurances && insurances.length > 0
+    ? insurances.map(name => {
+        const match = majorInsurers.find(i =>
+            name.toLowerCase().includes(i.name.toLowerCase()) ||
+            name.toLowerCase().includes(i.slug.toLowerCase())
+        );
+        return match || { name, label: name, color: '#6B7280', slug: name.toLowerCase().replace(/\s+/g, '-') };
+    }).slice(0, size === 'sm' ? 4 : 6)
+    : majorInsurers.slice(0, size === 'sm' ? 4 : 6);
+
+const sizeClass = size === 'sm' ? 'h-5 text-[10px]' : 'h-6 text-xs';
+const logoSize = size === 'sm' ? 'w-5 h-5' : 'w-6 h-6';
 ---
-<section class="py-24"><p>Insurance</p></section>
+
+<div class="flex flex-wrap items-center gap-2">
+    {insurersToShow.map((insurer) => (
+        <div class={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-colors ${sizeClass}`}
+             style="background:var(--paper2); border-color:color-mix(in srgb, ${insurer.color} 20%, var(--line));">
+            <div class="flex items-center justify-center rounded" style={`width:${size === 'sm' ? '16px' : '20px'}; height:${size === 'sm' ? '16px' : '20px'}; background:${insurer.color}15;`}>
+                <span class="font-bold" style={`font-size:${size === 'sm' ? '8px' : '9px'}; color:${insurer.color}; line-height:1;`}>
+                    {insurer.name.slice(0, 2).toUpperCase()}
+                </span>
+            </div>
+            {showLabels && <span class="font-medium" style="color:var(--ink2);">{insurer.label}</span>}
+            {showLabels && <span class="text-[var(--accent)] text-[10px]">✓</span>}
+        </div>
+    ))}
+</div>

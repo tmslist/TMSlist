@@ -12,8 +12,9 @@ import { eq, desc, sql, count, avg } from "drizzle-orm";
 const session = getSessionFromRequest(Astro.request);
 if (!session) return Astro.redirect("/portal/login/");
 
-// Check auth: doctor role OR admin/editor
-const isDoctor = session.role === 'doctor';
+// Check auth: clinic_owner with clinicId (doctor) OR admin/editor
+// Note: 'doctor' is not a DB role — clinic_owners with a clinicId are doctors
+const isDoctor = session.clinicId != null;
 const isAdmin = ['admin', 'editor'].includes(session.role);
 
 if (!isDoctor && !isAdmin) return Astro.redirect("/portal/login/");
@@ -51,7 +52,7 @@ if (doctor) {
 
 const hasDoctorAccount = !!doctor;
 ---
-<Layout title="Doctor Dashboard | TMS List" description="Your doctor dashboard on TMS List." noindex={true}>
+<Layout title="Doctor Dashboard | TMS List" description="Your TMS specialist dashboard — view patient inquiries, manage your profile, and track treatment outcomes." noindex={true}>
   <div class="flex min-h-screen bg-[var(--paper2)]">
     <DoctorSidebar client:load currentPage="dashboard" userEmail={session.email} />
     <main class="flex-1 lg:ml-64 py-8">

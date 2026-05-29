@@ -101,3 +101,16 @@ These are all manageable but want a same-day conversation, not a "wait until nex
 Day one is the day with the most uncertainty and the most logistics. By day three or four, the routine settles in: walk in, sit down, headphones on, twenty minutes, walk out. The harder work — the slow shift in mood that emerges over weeks — happens quietly in the background.
 
 Bring earplugs, bring a podcast, skip the alcohol the night before, eat normally. That's most of it.
+
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [Tms For Anxiety Fda Breakthrough](/blog/tms-for-anxiety-fda-breakthrough/).
+For more information, see our guide to [Tms For Depression](/blog/tms-for-depression/).
+For more information, see our guide to [Maintenance Tms Guide](/blog/maintenance-tms-guide/).
+For more information, see our guide to [Can I Drive After Tms](/blog/can-i-drive-after-tms/).
+For more information, see our guide to [Going Back To Work During Tms](/blog/going-back-to-work-during-tms/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [Deep Tms Vs Standard Tms Comparison](/blog/deep-tms-vs-standard-tms-comparison/).

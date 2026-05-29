@@ -1,0 +1,357 @@
+---
+export const prerender = false;
+
+import Layout from "../../layouts/Layout.astro";
+import AdminSidebar from "../../components/react/AdminSidebar";
+import { getSessionFromRequest, hasRole } from "../../utils/auth";
+import { getNewsletterSubscribers, getNewsletterStats } from "../../db/queries";
+import { db } from "../../db";
+import { newsletterSubscribers } from "../../db/schema";
+import { eq, count, sql } from "drizzle-orm";
+
+const session = getSessionFromRequest(Astro.request);
+if (!hasRole(session, "admin", "editor")) {
+  return Astro.redirect("/admin/login");
+}
+
+const url = Astro.url;
+const search = url.searchParams.get('search') || '';
+const statusFilter = url.searchParams.get('status') || '';
+const page = Math.max(0, parseInt(url.searchParams.get('page') || '0'));
+const limit = 50;
+
+let stats = { total: 0, subscribed: 0, unsubscribed: 0, recentSignups: 0 };
+let subscribers: any[] = [];
+let totalCount = 0;
+
+try {
+  const conditions = [];
+  if (statusFilter) conditions.push(eq(newsletterSubscribers.status, statusFilter));
+  if (search) conditions.push(sql`${newsletterSubscribers.email} ILIKE ${'%' + search + '%'} OR ${newsletterSubscribers.name} ILIKE ${'%' + search + '%'}`);
+
+  const [subsResult, statsResult] = await Promise.all([
+    db.select().from(newsletterSubscribers)
+      .where(conditions.length > 0 ? sql.join(conditions, sql` AND `) : undefined)
+      .orderBy(sql`${newsletterSubscribers.createdAt} DESC`)
+      .limit(limit).offset(page * limit),
+    getNewsletterStats(),
+  ]);
+
+  const [countResult] = await db.select({ count: count() }).from(newsletterSubscribers)
+    .where(conditions.length > 0 ? sql.join(conditions, sql` AND `) : undefined);
+
+  subscribers = subsResult;
+  stats = statsResult;
+  totalCount = Number(countResult?.count ?? 0);
+} catch {}
+
+const totalPages = Math.ceil(totalCount / limit);
+---
+
+<Layout title="Newsletter Subscribers | TMS List Admin" noindex={true}>
+  <div class="flex min-h-screen bg-gray-50">
+    <AdminSidebar client:load currentPage="newsletter" userEmail={session!.email} />
+    <main class="flex-1 lg:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="mb-6 flex items-start justify-between">
+          <div>
+            <h1 class="text-2xl md:text-3xl font-semibold text-gray-900">Newsletter Subscribers</h1>
+            <p class="text-gray-500 mt-1">Manage newsletter subscriber list and preferences</p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="document.getElementById('import-file').click()" class="px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors">
+              Import CSV
+            </button>
+            <input type="file" id="import-file" accept=".csv" class="hidden" onchange="handleCsvImport(event)" />
+            <button onclick="openAddModal()" class="px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors">
+              + Add Subscriber
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Total</p>
+            <p class="text-2xl font-semibold text-gray-900 mt-1">{stats.total}</p>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Subscribed</p>
+            <p class="text-2xl font-semibold text-green-600 mt-1">{stats.subscribed}</p>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Unsubscribed</p>
+            <p class="text-2xl font-semibold text-red-500 mt-1">{stats.unsubscribed}</p>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Last 30 Days</p>
+            <p class="text-2xl font-semibold text-violet-600 mt-1">{stats.recentSignups}</p>
+          </div>
+        </div>
+
+        <!-- Import Results Banner -->
+        <div id="import-banner" class="hidden mb-4 bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-emerald-800" id="import-message"></p>
+            </div>
+            <button onclick="document.getElementById('import-banner').classList.add('hidden')" class="text-emerald-600 hover:text-emerald-800">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Subscriber Table -->
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+          <div class="px-6 py-4 border-b border-gray-200 flex items-center gap-3 flex-wrap">
+            <form method="GET" class="flex-1 min-w-64 flex gap-2">
+              <input
+                type="text"
+                name="search"
+                value={search}
+                placeholder="Search by email or name..."
+                class="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500"
+              />
+              <select name="status" class="px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20">
+                <option value="">All</option>
+                <option value="subscribed" selected={statusFilter === 'subscribed'}>Subscribed</option>
+                <option value="unsubscribed" selected={statusFilter === 'unsubscribed'}>Unsubscribed</option>
+              </select>
+              <button type="submit" class="px-4 py-2 bg-[var(--ink)] text-white text-sm rounded-lg">Filter</button>
+              <a href="/admin/newsletter" class="px-3 py-2 text-sm text-gray-500 hover:text-gray-700 border border-gray-200 rounded-lg">Clear</a>
+            </form>
+            <button onclick="exportAllSubscribers()" class="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+              Export All CSV
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Source</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Subscribed</th>
+                  <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                {subscribers.length === 0 ? (
+                  <tr>
+                    <td colspan="6" class="px-6 py-12 text-center text-gray-400">No subscribers found</td>
+                  </tr>
+                ) : (
+                  subscribers.map((s) => (
+                    <tr class="hover:bg-gray-50">
+                      <td class="px-6 py-4 text-sm font-medium text-gray-900">{s.email}</td>
+                      <td class="px-6 py-4 text-sm text-gray-700">{s.name || <span class="text-gray-400">—</span>}</td>
+                      <td class="px-6 py-4">
+                        <span class={`text-xs font-semibold px-2.5 py-1 rounded-full ${
+                          s.status === 'subscribed'
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-red-100 text-red-700'
+                        }`}>
+                          {s.status === 'subscribed' ? 'Subscribed' : 'Unsubscribed'}
+                        </span>
+                      </td>
+                      <td class="px-6 py-4 text-xs text-gray-500">{s.source || '-'}</td>
+                      <td class="px-6 py-4 text-xs text-gray-500 whitespace-nowrap">
+                        {s.confirmedAt ? new Date(s.confirmedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-'}
+                      </td>
+                      <td class="px-6 py-4 text-right">
+                        {s.status === 'subscribed' ? (
+                          <button onclick={`toggleSubscription('${s.email}', 'unsubscribe')`} class="text-xs text-red-600 hover:text-red-800 px-2 py-1">Unsubscribe</button>
+                        ) : (
+                          <button onclick={`toggleSubscription('${s.email}', 'resubscribe')`} class="text-xs text-green-600 hover:text-green-800 px-2 py-1">Resubscribe</button>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          {totalPages > 1 && (
+            <div class="px-6 py-3 border-t border-gray-200 bg-gray-50 flex items-center justify-between">
+              <span class="text-sm text-gray-500">Page {page + 1} of {totalPages} ({totalCount} total)</span>
+              <div class="flex gap-2">
+                <a href={`?search=${encodeURIComponent(search)}&status=${statusFilter}&page=${page - 1}`}
+                   class={`px-3 py-1.5 text-sm border rounded-lg ${page === 0 ? 'text-gray-300 cursor-not-allowed pointer-events-none' : 'text-gray-700 hover:bg-gray-100'}`}>
+                  Previous
+                </a>
+                <a href={`?search=${encodeURIComponent(search)}&status=${statusFilter}&page=${page + 1}`}
+                   class={`px-3 py-1.5 text-sm border rounded-lg ${page >= totalPages - 1 ? 'text-gray-300 cursor-not-allowed pointer-events-none' : 'text-gray-700 hover:bg-gray-100'}`}>
+                  Next
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Subscriber Modal -->
+  <div id="add-modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/40" onclick="closeAddModal()"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-2xl shadow-2xl">
+      <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-gray-900">Add Subscriber</h3>
+        <button onclick="closeAddModal()" class="text-gray-400 hover:text-gray-600">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <form id="add-form" class="p-6 space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+          <input type="email" name="email" required class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <input type="text" name="name" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Source</label>
+          <input type="text" name="source" placeholder="e.g. website, import, referral" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500" />
+        </div>
+        <div class="flex gap-3 pt-2">
+          <button type="submit" class="flex-1 px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors">Add Subscriber</button>
+          <button type="button" onclick="closeAddModal()" class="px-4 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    async function toggleSubscription(email: string, action: string) {
+      try {
+        const res = await fetch('/api/admin/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action, email }),
+        });
+        if (res.ok) location.reload();
+      } catch (err) {
+        console.error('Failed to update subscription', err);
+      }
+    }
+
+    async function exportAllSubscribers() {
+      // Fetch ALL subscribers (paginated fetch)
+      const allSubs: any[] = [];
+      let page = 0;
+      let hasMore = true;
+      while (hasMore) {
+        const res = await fetch(`/api/admin/newsletter?status=${new URLSearchParams(window.location.search).get('status') || ''}&limit=500&offset=${page * 500}`);
+        if (!res.ok) break;
+        const data = await res.json();
+        allSubs.push(...data.subscribers);
+        hasMore = data.subscribers.length === 500;
+        page++;
+      }
+
+      if (allSubs.length === 0) return;
+      const headers = ['Email', 'Name', 'Status', 'Source', 'Subscribed Date', 'Created Date'];
+      const rows = [headers.join(','),
+        ...allSubs.map((s: any) => [
+          s.email, s.name, s.status, s.source || '',
+          s.confirmedAt ? new Date(s.confirmedAt).toLocaleDateString() : '',
+          s.createdAt ? new Date(s.createdAt).toLocaleDateString() : '',
+        ].map(v => `"${(v || '').toString().replace(/"/g, '""')}"`).join(','))
+      ].join('\n');
+      const blob = new Blob([rows], { type: 'text/csv' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = `newsletter-subscribers-${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+    }
+
+    async function handleCsvImport(event: Event) {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const banner = document.getElementById('import-banner')!;
+      const message = document.getElementById('import-message')!;
+      banner.classList.remove('hidden');
+      message.textContent = `Importing ${file.name}...`;
+
+      try {
+        const res = await fetch('/api/admin/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'import_csv', filename: file.name }),
+        });
+        const data = await res.json();
+
+        // Parse CSV client-side and POST each subscriber
+        const text = await file.text();
+        const lines = text.split('\n').filter(l => l.trim());
+        const headers = lines[0].toLowerCase().split(',').map(h => h.trim().replace(/"/g, ''));
+
+        const emailIdx = headers.findIndex(h => h.includes('email'));
+        const nameIdx = headers.findIndex(h => h.includes('name'));
+
+        if (emailIdx < 0) {
+          message.textContent = 'Error: CSV must have an "email" column';
+          banner.className = 'mb-4 bg-red-50 border border-red-200 rounded-xl p-4';
+          return;
+        }
+
+        let imported = 0, skipped = 0;
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i].split(',').map(c => c.trim().replace(/^"|"$/g, ''));
+          const email = cols[emailIdx];
+          if (!email || !email.includes('@')) { skipped++; continue; }
+          const name = nameIdx >= 0 ? cols[nameIdx] : '';
+          const sr = await fetch('/api/admin/newsletter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, name, source: 'csv_import' }),
+          });
+          if (sr.ok) imported++; else skipped++;
+        }
+
+        message.textContent = `Done! ${imported} imported, ${skipped} skipped.`;
+        banner.className = 'mb-4 bg-emerald-50 border border-emerald-200 rounded-xl p-4';
+        (event.target as HTMLInputElement).value = '';
+        setTimeout(() => location.reload(), 2000);
+      } catch (err) {
+        message.textContent = `Import failed: ${err}`;
+        banner.className = 'mb-4 bg-red-50 border border-red-200 rounded-xl p-4';
+      }
+    }
+
+    function openAddModal() {
+      document.getElementById('add-modal')!.classList.remove('hidden');
+    }
+
+    function closeAddModal() {
+      document.getElementById('add-modal')!.classList.add('hidden');
+    }
+
+    document.getElementById('add-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target as HTMLFormElement;
+      const formData = new FormData(form);
+      const res = await fetch('/api/admin/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.get('email'),
+          name: formData.get('name') || undefined,
+          source: formData.get('source') || 'admin',
+        }),
+      });
+      if (res.ok) {
+        closeAddModal();
+        location.reload();
+      }
+    });
+  </script>
+</Layout>

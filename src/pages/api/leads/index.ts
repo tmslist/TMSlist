@@ -26,7 +26,10 @@ export const POST: APIRoute = async ({ request }) => {
     const parsed = leadSubmitSchema.safeParse(body);
 
     if (!parsed.success) {
-      return new Response(JSON.stringify({ error: 'Validation failed', details: parsed.error.flatten() }), {
+      return new Response(JSON.stringify({
+        error: 'Validation failed',
+        details: parsed.error.flatten().fieldErrors
+      }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -71,7 +74,10 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (err) {
     console.error('Lead submit error:', err);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+    return new Response(JSON.stringify({
+      error: 'Internal server error',
+      details: err instanceof Error ? err.message : 'Unknown error'
+    }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });

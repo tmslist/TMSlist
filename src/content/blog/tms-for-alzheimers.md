@@ -8,7 +8,7 @@ image: "/images/blog-covers/tms-for-alzheimers.svg"
 tags: ["tms", "alzheimers", "cognitive-enhancement", "working-memory", "theta-burst", "dementia", "neurodegeneration"]
 ---
 
-Alzheimer's disease affects over 6 million Americans and represents one of the most devastating challenges in modern medicine. Current treatments, including cholinesterase inhibitors and the newer anti-amyloid antibodies, offer modest symptomatic benefits at best and do not halt disease progression. As researchers seek disease-modifying therapies, transcranial magnetic stimulation has emerged as a potential tool to enhance cognitive function by directly modulating the neural networks that degenerate in Alzheimer's.
+Alzheimer's disease affects over 6 million Americans and represents one of the most devastating challenges in modern medicine. Current [treatments](/blog/tms-vs-medication/), including cholinesterase inhibitors and the newer anti-amyloid antibodies, offer modest symptomatic benefits at best and do not halt disease progression. As researchers seek disease-modifying therapies, transcranial magnetic stimulation has emerged as a potential tool to enhance cognitive function by directly modulating the neural networks that degenerate in Alzheimer's.
 
 ## What You'll Learn
 
@@ -24,11 +24,11 @@ Alzheimer's disease is characterized by the accumulation of amyloid plaques and 
 
 Two neural networks are particularly relevant:
 
-**The frontoparietal control network**, centered on the dorsolateral prefrontal cortex (DLPFC), supports working memory, attention, and executive function. These cognitive abilities decline early in Alzheimer's and are amenable to TMS enhancement.
+**[The frontoparietal control network](/blog/understanding-tms-motor-threshold/)**, centered on the [dorsolateral prefrontal cortex (DLPFC)](/blog/understanding-tms-motor-threshold/), supports working memory, attention, and executive function. These cognitive abilities decline early in Alzheimer's and are amenable to TMS enhancement.
 
 **The default mode network (DMN)**, which includes the posterior cingulate cortex, medial temporal lobes, and medial prefrontal cortex, is active during rest and self-referential thinking. The DMN shows characteristic dysfunction in Alzheimer's, with reduced connectivity that correlates with memory impairment.
 
-When TMS enhances DLPFC function, it may strengthen top-down control over memory processes and partially compensate for DMN dysfunction.
+When [TMS enhances DLPFC function](/blog/combining-tms-with-therapy/), it may strengthen top-down control over memory processes and partially compensate for DMN dysfunction.
 
 ## TMS Approaches for Alzheimer's
 
@@ -36,7 +36,7 @@ Researchers have explored multiple TMS strategies for cognitive enhancement in A
 
 ### High-Frequency DLPFC Stimulation
 
-The most common approach mirrors TMS protocols for depression: high-frequency stimulation (10-20 Hz) over the left DLPFC. Studies have shown improvements in:
+The most common approach mirrors [TMS protocols for depression](/blog/tms-vs-medication/): high-frequency stimulation (10-20 Hz) over the left DLPFC. Studies have shown improvements in:
 
 - **Working memory** performance on n-back tasks
 - **Executive function** including task-switching and inhibition
@@ -47,7 +47,7 @@ A 2019 meta-analysis in *Brain Stimulation* analyzed 13 studies and concluded th
 
 ### Theta Burst Stimulation (TBS)
 
-Theta burst protocols offer a faster alternative to conventional TMS. Intermittent TBS (iTBS) delivers 600 pulses in approximately 3 minutes compared to 20-40 minutes for standard protocols. Studies in Alzheimer's have found:
+[Theta burst protocols](/blog/theta-burst-vs-standard-tms/) offer a faster alternative to conventional TMS. Intermittent TBS (iTBS) delivers 600 pulses in approximately 3 minutes compared to 20-40 minutes for standard protocols. Studies in Alzheimer's have found:
 
 - Comparable cognitive improvements to conventional TMS
 - Better tolerability with fewer reported side effects
@@ -85,7 +85,7 @@ Several randomized controlled trials have demonstrated meaningful benefits:
 
 **Accelerated iTBS protocols:** A 2022 study at the University of Wisconsin found that intensive iTBS (3 sessions daily for 2 weeks) produced significant improvements in working memory and reduced caregiver burden. The effects were larger than those seen with conventional single-session protocols.
 
-**Long-term maintenance:** Several studies have explored weekly or biweekly maintenance sessions following an intensive acute phase. Patients receiving maintenance TMS showed less cognitive decline over 12-18 months compared to those who discontinued treatment.
+**Long-term maintenance:** Several studies have explored weekly or biweekly maintenance sessions following an intensive acute phase. [Patients receiving maintenance TMS](/blog/maintenance-tms-guide/) showed less cognitive decline over 12-18 months compared to those who discontinued treatment.
 
 ## Who May Benefit Most
 
@@ -105,9 +105,9 @@ The future of TMS for Alzheimer's likely involves:
 
 **Personalized protocols** based on individual connectivity profiles, identifying which patient's neural networks are most responsive to TMS
 
-**Combination approaches** pairing TMS with disease-modifying therapies that address amyloid and tau, potentially creating synergistic benefits
+Combination approaches pairing TMS with disease-modifying therapies that address amyloid and tau, potentially creating synergistic benefits
 
-**At-home maintenance devices** enabling regular stimulation to sustain benefits long-term
+**[At-home maintenance devices](/blog/maintenance-tms-guide/)** enabling regular stimulation to sustain benefits long-term
 
 **Biomarker integration** using PET amyloid imaging or CSF tau levels to predict treatment response
 
@@ -118,14 +118,10 @@ Patients and families considering TMS for Alzheimer's should understand that:
 1. TMS is **not a cure** for Alzheimer's disease
 2. Improvements are typically **modest** and may not translate to dramatic functional changes
 3. **Ongoing maintenance** treatment is required to sustain benefits
-4. TMS is **not covered by Medicare or most insurance plans** for Alzheimer's
+4. [TMS](/blog/real-cost-of-tms-therapy-2026/) is **not covered by Medicare or most insurance plans** for Alzheimer's
 5. Treatment is best viewed as **one component** of a comprehensive care plan
 
-Despite these caveats, TMS represents one of the most promising non-pharmacological approaches to cognitive enhancement in Alzheimer's, offering hope for improved quality of life even in the absence of a cure.
-
----
-
-*Clinical trials of TMS for Alzheimer's are ongoing. Patients interested in participating can search ClinicalTrials.gov for active studies in their area.*
+Despite these caveats, TMS represents one of the most promising non-pharmacological approaches to cognitive enhancement in Alzheimer's, offering hope for improved quality of life even in the absence of a cure.---
 
 <div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
   <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
@@ -159,3 +155,9 @@ Despite these caveats, TMS represents one of the most promising non-pharmacologi
     <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
   </div>
 </div>
+
+For more information, see our guide to [Real Cost Of Tms Therapy 2026](/blog/real-cost-of-tms-therapy-2026/).
+For more information, see our guide to [Tms Cost Insurance Guide 2026](/blog/tms-cost-insurance-guide-2026/).
+For more information, see our guide to [Choosing A Tms Clinic Red Flags](/blog/choosing-tms-clinic-red-flags/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).

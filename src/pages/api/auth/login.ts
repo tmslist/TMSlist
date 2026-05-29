@@ -70,7 +70,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const { email, password } = parsed.data;
+    const { email, password, rememberMe } = parsed.data;
     const userAgent = request.headers.get('user-agent') || '';
 
     const user = await getUserByEmail(email);
@@ -151,9 +151,10 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // No 2FA — complete login normally
-    const { cookie } = await createSession(
+    const { createSessionWithExpiry } = await import('../../../utils/auth.js');
+    const { cookie } = await createSessionWithExpiry(
       { userId: user.id, email: user.email, role: user.role, clinicId: user.clinicId ?? undefined },
-      { userAgent, ipAddress: ip }
+      { userAgent, ipAddress: ip, rememberMe: !!rememberMe }
     );
 
     // Log successful login

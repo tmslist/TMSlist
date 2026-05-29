@@ -29,71 +29,6 @@ interface SearchResult {
   href: string;
 }
 
-// ── Sample notification data (swap for DB fetch later) ──────────────────────────
-
-const INITIAL_NOTIFICATIONS: Notification[] = [
-  {
-    id: '1',
-    type: 'lead',
-    icon: '🎯',
-    title: 'New Lead',
-    description: 'John D. submitted a specialist enquiry',
-    timeAgo: '2m ago',
-    link: '/admin/leads',
-    read: false,
-  },
-  {
-    id: '2',
-    type: 'review',
-    icon: '⭐',
-    title: 'Review Pending',
-    description: '1 review awaiting moderation',
-    timeAgo: '15m ago',
-    link: '/admin/reviews',
-    read: false,
-  },
-  {
-    id: '3',
-    type: 'clinic',
-    icon: '🏥',
-    title: 'Clinic Claimed',
-    description: 'New clinic claim pending review',
-    timeAgo: '1h ago',
-    link: '/admin/clinics',
-    read: false,
-  },
-  {
-    id: '4',
-    type: 'blog',
-    icon: '📝',
-    title: 'Blog Draft',
-    description: 'Draft post needs review',
-    timeAgo: '3h ago',
-    link: '/admin/blog',
-    read: true,
-  },
-  {
-    id: '5',
-    type: 'user',
-    icon: '👤',
-    title: 'New User',
-    description: 'New user signed up: jane@example.com',
-    timeAgo: '5h ago',
-    link: '/admin/users',
-    read: true,
-  },
-  {
-    id: '6',
-    type: 'security',
-    icon: '🔒',
-    title: 'Security',
-    description: 'Failed login attempt detected',
-    timeAgo: '1d ago',
-    link: '/admin/audit',
-    read: true,
-  },
-];
-
 // ── Nav items ────────────────────────────────────────────────────────────────────
 
 const NAV_ITEMS = [
@@ -168,6 +103,36 @@ const NAV_ITEMS = [
     ),
   },
   {
+    key: 'enquiries',
+    label: 'Patient Enquiries',
+    href: '/admin/enquiries',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'newsletter',
+    label: 'Newsletter',
+    href: '/admin/newsletter',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'email-stats',
+    label: 'Email Stats',
+    href: '/admin/email-stats',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+  },
+  {
     key: 'users',
     label: 'Users',
     href: '/admin/users',
@@ -204,6 +169,56 @@ const NAV_ITEMS = [
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'seo-auditor',
+    label: 'SEO Auditor',
+    href: '/admin/seo-auditor',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
+    ),
+  },
+  {
+    key: 'report-builder',
+    label: 'Report Builder',
+    href: '/admin/report-builder',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'email-templates',
+    label: 'Email Templates',
+    href: '/admin/email-templates',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'content-calendar',
+    label: 'Content Calendar',
+    href: '/admin/content-calendar',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'backup-manager',
+    label: 'Backup Manager',
+    href: '/admin/backup-manager',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
       </svg>
     ),
   },
@@ -281,16 +296,43 @@ const NAV_ITEMS = [
   },
 ];
 
-// ── Helpers ────────────────────────────────────────────────────────────────────
+const NOTIFICATION_ICONS: Record<string, string> = {
+  lead: '🎯',
+  review: '⭐',
+  clinic: '🏥',
+  blog: '📝',
+  user: '👤',
+  security: '🔒',
+  enquiry: '💬',
+  newsletter: '📧',
+  campaign: '📬',
+  system: '⚙️',
+};
 
-function getUnreadCount(notifications: Notification[]): number {
-  return notifications.filter((n) => !n.read).length;
-}
+const NOTIFICATION_LINKS: Record<string, string> = {
+  lead: '/admin/leads',
+  review: '/admin/reviews',
+  clinic: '/admin/clinics',
+  blog: '/admin/blog',
+  user: '/admin/users',
+  security: '/admin/audit',
+  enquiry: '/admin/enquiries',
+  newsletter: '/admin/newsletter',
+  campaign: '/admin/bulk-campaigns',
+  system: '/admin/dashboard',
+};
 
-function getBadgeLabel(count: number): string {
-  if (count === 0) return '';
-  if (count > 9) return '9+';
-  return String(count);
+function timeAgo(date: string): string {
+  const now = new Date();
+  const then = new Date(date);
+  const diffMs = now.getTime() - then.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  if (diffMins < 1) return 'just now';
+  if (diffMins < 60) return `${diffMins}m ago`;
+  const diffHrs = Math.floor(diffMins / 60);
+  if (diffHrs < 24) return `${diffHrs}h ago`;
+  const diffDays = Math.floor(diffHrs / 24);
+  return `${diffDays}d ago`;
 }
 
 // ── Search helpers ──────────────────────────────────────────────────────────────
@@ -311,8 +353,9 @@ const RESULT_TYPE_LABELS: Record<string, string> = {
 
 export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }: AdminSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [notifications, setNotifications] = useState<Notification[]>(INITIAL_NOTIFICATIONS);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [notificationOpen, setNotificationOpen] = useState(false);
+  const [notificationsLoading, setNotificationsLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Search state
@@ -323,6 +366,34 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchDropdownRef = useRef<HTMLDivElement>(null);
   const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Fetch notifications from API
+  useEffect(() => {
+    async function fetchNotifications() {
+      try {
+        const res = await fetch('/api/admin/notifications?limit=20');
+        if (res.ok) {
+          const data = await res.json();
+          const mapped: Notification[] = (data.notifications || []).map((n: any) => ({
+            id: n.notification?.id || n.id || String(Math.random()),
+            type: n.notification?.type || n.type || 'system',
+            icon: NOTIFICATION_ICONS[n.notification?.type || n.type] || NOTIFICATION_ICONS.system,
+            title: n.notification?.title || n.title || 'Notification',
+            description: n.notification?.message || n.message || '',
+            timeAgo: n.notification?.createdAt ? timeAgo(n.notification.createdAt) : (n.timeAgo || 'recently'),
+            link: n.notification?.link || NOTIFICATION_LINKS[n.notification?.type || n.type] || '/admin/dashboard',
+            read: n.notification?.read ?? n.read ?? true,
+          }));
+          setNotifications(mapped);
+        }
+      } catch {
+        // Silently fail — notifications are non-critical
+      } finally {
+        setNotificationsLoading(false);
+      }
+    }
+    fetchNotifications();
+  }, []);
 
   const unreadCount = getUnreadCount(notifications);
   const hasUnread = unreadCount > 0;
@@ -482,8 +553,17 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
   }, [notificationOpen]);
 
   const handleNotificationClick = useCallback(
-    (notification: Notification) => {
+    async (notification: Notification) => {
       if (!notification.read) {
+        try {
+          await fetch('/api/admin/notifications', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: notification.id }),
+          });
+        } catch {
+          // Best-effort
+        }
         setNotifications((prev) =>
           prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n))
         );
@@ -494,7 +574,16 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
     []
   );
 
-  const handleMarkAllRead = useCallback(() => {
+  const handleMarkAllRead = useCallback(async () => {
+    try {
+      await fetch('/api/admin/notifications', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ markAllRead: true }),
+      });
+    } catch {
+      // Best-effort
+    }
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
   }, []);
 
@@ -604,30 +693,45 @@ export default function AdminSidebar({ currentPage, userEmail, isAdmin = false }
 
                     {/* Notification list */}
                     <div className="flex-1 overflow-y-auto min-h-0">
-                      {sortedNotifications.map((notification) => (
-                        <button
-                          key={notification.id}
-                          onClick={() => handleNotificationClick(notification)}
-                          className={`w-full flex items-start gap-3 px-4 py-3 text-left transition-colors border-b border-[var(--line)] last:border-0 hover:bg-[var(--paper2)] ${
-                            !notification.read ? 'bg-[rgba(10,22,40,0.08)]/40' : ''
-                          }`}
-                        >
-                          {/* Icon */}
-                          <span className="mt-0.5 text-lg shrink-0">{notification.icon}</span>
+                      {notificationsLoading ? (
+                        <div className="px-4 py-8 text-center">
+                          <svg className="w-5 h-5 mx-auto text-[var(--muted)] animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          <p className="text-xs text-[var(--muted)] mt-2">Loading...</p>
+                        </div>
+                      ) : sortedNotifications.length === 0 ? (
+                        <div className="px-4 py-8 text-center">
+                          <span className="text-2xl">🔔</span>
+                          <p className="text-sm text-[var(--muted)] mt-2">No notifications yet</p>
+                        </div>
+                      ) : (
+                        sortedNotifications.map((notification) => (
+                          <button
+                            key={notification.id}
+                            onClick={() => handleNotificationClick(notification)}
+                            className={`w-full flex items-start gap-3 px-4 py-3 text-left transition-colors border-b border-[var(--line)] last:border-0 hover:bg-[var(--paper2)] ${
+                              !notification.read ? 'bg-[rgba(10,22,40,0.08)]/40' : ''
+                            }`}
+                          >
+                            {/* Icon */}
+                            <span className="mt-0.5 text-lg shrink-0">{notification.icon}</span>
 
-                          {/* Content */}
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm font-medium text-[var(--ink)]">{notification.title}</span>
-                              {!notification.read && (
-                                <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
-                              )}
+                            {/* Content */}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm font-medium text-[var(--ink)]">{notification.title}</span>
+                                {!notification.read && (
+                                  <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                                )}
+                              </div>
+                              <p className="text-xs text-[var(--muted)] mt-0.5 line-clamp-2">{notification.description}</p>
+                              <span className="text-[11px] text-[var(--muted)] mt-1 block">{notification.timeAgo}</span>
                             </div>
-                            <p className="text-xs text-[var(--muted)] mt-0.5 line-clamp-2">{notification.description}</p>
-                            <span className="text-[11px] text-[var(--muted)] mt-1 block">{notification.timeAgo}</span>
-                          </div>
-                        </button>
-                      ))}
+                          </button>
+                        ))
+                      )}
                     </div>
 
                     {/* Dropdown footer */}

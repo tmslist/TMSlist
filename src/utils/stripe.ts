@@ -4,7 +4,7 @@ const SECRET_KEY = import.meta.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRE
 
 function getStripe() {
   if (!SECRET_KEY) return null;
-  return new Stripe(SECRET_KEY, { apiVersion: '2025-04-30.basil' });
+  return new Stripe(SECRET_KEY, { apiVersion: '2022-11-15' });
 }
 
 /**

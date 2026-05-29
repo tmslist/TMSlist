@@ -39,19 +39,19 @@ For context, treatment-resistant OCD means you have tried at least two adequate 
 
 ## How OCD TMS Is Different From Depression TMS
 
-If you have read about TMS for depression, set those details aside. OCD treatment uses a fundamentally different approach in almost every way.
+If you have read about [TMS for depression](/blog/tms-vs-medication/), set those details aside. OCD treatment uses a fundamentally different approach in almost every way.
 
 ### Different Brain Target
 
-Depression TMS targets the left dorsolateral prefrontal cortex (DLPFC), a region involved in mood regulation and executive function. OCD TMS targets the **anterior cingulate cortex (ACC) and medial prefrontal cortex**, regions that sit deeper in the brain and are central to the error-detection and threat-monitoring circuits that go haywire in OCD.
+Depression TMS targets the left [dorsolateral prefrontal cortex (DLPFC)](/blog/understanding-tms-motor-threshold/), a region involved in mood regulation and executive function. OCD TMS targets the **anterior cingulate cortex (ACC) and medial prefrontal cortex**, regions that sit deeper in the brain and are central to the error-detection and threat-monitoring circuits that go haywire in OCD.
 
-This is why standard figure-8 TMS coils, which work well for depression, are not ideal for OCD. The relevant circuits are simply too deep.
+This is why [standard figure-8 TMS coils](/blog/understanding-tms-motor-threshold/), which work well for depression, are not ideal for OCD. The relevant circuits are simply too deep.
 
 ### Different Hardware: The H7 Coil
 
 Deep TMS for OCD uses BrainsWay's **H7 coil**, which generates a broader, deeper magnetic field than conventional TMS coils. Standard coils penetrate about 1.5-2 cm below the skull. The H7 reaches approximately 3-4 cm, deep enough to hit the ACC and medial PFC.
 
-The H7 coil fits inside a padded helmet that you wear during treatment. It looks and feels different from standard TMS. People describe a more diffuse tapping sensation compared to the focused knocking of conventional TMS. See our [technology overview](/technology/) for a detailed comparison of TMS coil types.
+The H7 coil fits inside a padded helmet that you wear during treatment. It looks and feels different from standard TMS. People describe a more diffuse tapping sensation [compared to the focused knocking](/blog/what-tms-actually-feels-like/) of conventional TMS. See our [technology overview](/technology/) for a detailed comparison of TMS coil types.
 
 ### The Provocation Protocol
 
@@ -59,9 +59,9 @@ Here is the part that surprises most people. Effective OCD TMS includes **sympto
 
 That means deliberately triggering your OCD symptoms, through personalized scripts, images, or scenarios, for a brief period right before the TMS pulses begin. The idea is straightforward. You want the OCD circuits to be active when the magnetic stimulation hits, making those specific neural pathways more receptive to change.
 
-In practice, this looks like 5-10 minutes of controlled exposure to your particular OCD triggers, guided by a trained clinician, followed immediately by a 20-minute deep TMS session. It is uncomfortable by design. People describe it as a condensed version of ERP, paired with stimulation that helps the brain respond differently to the provocation over time.
+In practice, this looks like 5-10 minutes of controlled exposure to your particular OCD triggers, guided by a trained clinician, followed immediately by a 20-minute deep TMS session. It is uncomfortable by design. People describe it as [a condensed version of ERP](/blog/combining-tms-with-therapy/), [paired with stimulation](/blog/combining-tms-with-therapy/) that helps the brain respond differently to the provocation over time.
 
-Studies comparing deep TMS with and without provocation show significantly better outcomes with provocation. Most experienced OCD TMS clinics treat it as non-negotiable.
+Studies comparing deep TMS with and without provocation show significantly better outcomes with provocation. [Most experienced OCD TMS clinics](/blog/choosing-tms-clinic-red-flags/) treat it as non-negotiable.
 
 ### Treatment Parameters
 
@@ -130,7 +130,7 @@ You can search for deep TMS providers in your state on our [clinic finder](/us/)
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">How long do deep TMS results for OCD last?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-[var(--ink2)]" itemprop="text">Two-year follow-up data shows 58% of patients maintained clinically meaningful improvement and 42% maintained full remission. The average Y-BOCS reduction of 9.7 points held steady from 6 months to 24 months. Some people need periodic booster sessions to maintain gains.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Two-year follow-up data shows 58% of patients maintained clinically meaningful improvement and 42% maintained full remission. The average Y-BOCS reduction of 9.7 points held steady from 6 months to 24 months. [Some people need periodic booster sessions](/blog/maintenance-tms-guide/) to maintain gains.</p>
       </div>
     </div>
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -164,7 +164,7 @@ You can search for deep TMS providers in your state on our [clinic finder](/us/)
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
   <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a [TMS Clinic](/clinic/)</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If [TMS Is Right](/quiz/am-i-a-candidate/) for You</a>
   </div>
 </div>

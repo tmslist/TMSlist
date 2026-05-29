@@ -43,7 +43,7 @@ export const clinicSubmitSchema = z.object({
 // ── REVIEW VALIDATION ──────────────────────────────
 
 export const reviewSubmitSchema = z.object({
-  clinicId: z.string().uuid(),
+  clinicId: z.string().min(1),
   userName: z.string().min(2).max(100),
   userEmail: z.string().email().optional(),
   rating: z.coerce.number().int().min(1).max(5),
@@ -71,6 +71,7 @@ export const leadSubmitSchema = z.object({
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8).max(128),
+  rememberMe: z.boolean().optional().default(false),
 });
 
 export const magicLinkSchema = z.object({

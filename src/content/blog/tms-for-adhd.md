@@ -50,13 +50,13 @@ TMS for ADHD targets the prefrontal cortex with the goal of enhancing executive 
 
 ## What the Research Shows
 
-The evidence for TMS in adult ADHD is encouraging, though still more limited than for depression or OCD:
+The evidence for TMS in adult ADHD is encouraging, though still more limited than for [depression](/blog/tms-vs-medication/) or [OCD](/blog/tms-for-ocd-deep-tms-results/):
 
 A randomized sham-controlled trial published in *Brain Stimulation* found that 15 sessions of **high-frequency left dlPFC TMS** over three weeks produced significant improvements in ADHD symptom severity (measured by the Adult ADHD Investigator Symptom Rating Scale, AISRS) compared to sham treatment. Improvements were most notable in the **inattentive symptom domain**, with some benefit also seen for impulsivity.
 
-A study published in *Clinical Neurophysiology* examined the effects of **right dlPFC TMS** on impulsivity in adults with ADHD. Participants who received active right dlPFC stimulation showed significant reductions in impulsivity measures, including faster reaction times on the stop-signal task (a standard laboratory measure of impulse inhibition). These effects were most pronounced in patients with the highest baseline impulsivity.
+A study published in *Clinical Neurophysiology* examined the effects of **right dlPFC TMS** on impulsivity in adults with ADHD. Participants who received active right dlPFC stimulation showed significant reductions in impulsivity measures, including faster reaction times on the stop-signal task (a standard laboratory measure of impulse inhibition). These effects were most pronounced in patients with the highest baseline impulsivity. For more on how TMS compares to medications for ADHD, see our [TMS vs medication comparison](/blog/tms-vs-medication/).
 
-A 2023 meta-analysis reviewing TMS and related neuromodulation approaches for adult ADHD concluded that TMS produces **moderate and statistically significant improvements** in both attentional performance and ADHD symptom ratings. The analysis noted that treatment effects appear to be additive to medication effects — meaning that TMS combined with stimulant medication may produce greater improvements than either treatment alone.
+A 2023 meta-analysis reviewing TMS and related neuromodulation approaches for adult ADHD concluded that TMS produces **moderate and statistically significant improvements** in both attentional performance and ADHD symptom ratings. The analysis noted that treatment effects appear to be additive to medication effects — meaning that [combining TMS with ADHD medications](/blog/combining-tms-with-therapy/) may produce greater improvements than either treatment alone.
 
 Importantly, TMS studies have demonstrated that improvements in ADHD symptoms are accompanied by **objective changes in brain activity**. Functional neuroimaging conducted after a course of TMS treatment shows increased activation in the dlPFC during attention tasks and improved suppression of the default mode network during sustained attention — the precise neurobiological changes that would be expected to underlie genuine improvement in executive function.
 
@@ -71,7 +71,7 @@ This approach is especially relevant for patients who:
 - Have cardiovascular or other medical contraindications to dose escalation
 - Want to optimize cognitive performance beyond what medication provides
 
-The combination of a stimulant medication (which increases dopamine and norepinephrine availability in the prefrontal cortex) with TMS (which enhances prefrontal cortical activation and connectivity) may produce synergistic rather than merely additive benefits.
+The combination of a stimulant medication (which increases dopamine and norepinephrine availability in the prefrontal cortex) with TMS (which enhances prefrontal cortical activation and connectivity) may produce synergistic rather than merely additive benefits. Learn more about [combining TMS with other therapies](/blog/combining-tms-with-therapy/) in our comprehensive guide.
 
 ## Treatment Protocols and Practical Considerations
 
@@ -80,15 +80,15 @@ A typical TMS course for adult ADHD involves:
 - **Daily sessions (five days per week) for two to four weeks**, followed by tapering
 - **Targets**: left dlPFC (high-frequency), right dlPFC (either frequency), or bilateral
 - **Session duration**: 20 to 40 minutes depending on protocol
-- **Theta-burst TMS** protocols may reduce treatment time to as little as 3-10 minutes per session
+- **[Theta-burst TMS protocols](/blog/theta-burst-vs-standard-tms/)** may reduce treatment time to as little as 3-10 minutes per session. For more on how long TMS results typically last, see our [how long does TMS last](/blog/how-long-does-tms-last/) guide.
 
-Side effects are mild and include transient scalp discomfort, headache, and occasional mild cognitive changes immediately after treatment. TMS is not associated with the cardiovascular effects, appetite suppression, insomnia, or emotional blunting that characterize stimulant medications.
+Side effects are mild and include transient scalp discomfort, headache, and occasional mild cognitive changes immediately after treatment. TMS is not associated with the cardiovascular effects, appetite suppression, insomnia, or emotional blunting that characterize stimulant medications. To understand what to expect during treatment, read our guide on [what TMS actually feels like](/blog/what-tms-actually-feels-like/).
 
 ## Is TMS FDA-Cleared for ADHD?
 
-As of 2026, **TMS is not FDA-cleared specifically for ADHD**. TMS for ADHD is available through clinical trials, research programs, and off-label clinical use. Patients seeking TMS for ADHD should work with a psychiatrist or neurologist experienced in neuromodulation who can evaluate their specific needs and determine an appropriate treatment approach.
+As of 2026, **TMS is not FDA-cleared specifically for ADHD**. TMS for ADHD is available through clinical trials, research programs, and off-label clinical use. Patients seeking TMS for ADHD should work with a psychiatrist or neurologist experienced in neuromodulation who can evaluate their specific needs and determine an appropriate treatment approach. For context on TMS costs and insurance, see our [real cost of TMS therapy guide](/blog/real-cost-of-tms-therapy-2026/).
 
-For adults with ADHD who have struggled to achieve adequate symptom control, TMS represents a promising, evidence-based neuromodulation option that targets the prefrontal dysfunction underlying their attention and executive function challenges.
+For adults with ADHD who have struggled to achieve adequate symptom control, TMS represents a promising, evidence-based neuromodulation option that targets the prefrontal dysfunction underlying their attention and executive function challenges. To find a qualified provider, use our [clinic finder](/clinic/) or browse [TMS specialists](/specialists/) in your area.
 
 <div class="not-prose my-8 [&_.faq-item]:py-4 [&_.faq-item]:border-b [&_.faq-item]:border-[var(--line)]" itemscope itemtype="https://schema.org/FAQPage">
   <h2 class="font-display font-bold text-[var(--ink)] mb-4 text-2xl">Frequently Asked Questions</h2>
@@ -108,7 +108,7 @@ For adults with ADHD who have struggled to achieve adequate symptom control, TMS
     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 class="font-semibold text-[var(--ink)] mb-2 text-lg" itemprop="name">What does TMS feel like for ADHD?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p class="text-[var(--ink2)]" itemprop="text">Side effects are mild and include transient scalp discomfort, headache, and occasional mild cognitive changes immediately after treatment. TMS is not associated with the cardiovascular effects, appetite suppression, insomnia, or emotional blunting that characterize stimulant medications.</p>
+        <p class="text-[var(--ink2)]" itemprop="text">Side effects are mild and include transient scalp discomfort, headache, and occasional mild cognitive changes immediately after treatment. TMS is not associated with the cardiovascular effects, appetite suppression, insomnia, or emotional blunting that characterize stimulant medications. To understand what to expect during treatment, read our guide on [what TMS actually feels like](/blog/what-tms-actually-feels-like/).</p>
       </div>
     </div>
   </div>

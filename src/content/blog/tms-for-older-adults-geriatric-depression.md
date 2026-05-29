@@ -99,3 +99,17 @@ Late-life depression is not a normal part of aging. It is a medical condition th
 The barriers to treatment in this population are real but often surmountable. With appropriate support, older adults can access TMS and benefit from it substantially.
 
 The brain at any age retains some capacity for change. TMS helps older adults access that capacity.
+
+
+For more information, see our guide to [Tms Vs Medication](/blog/tms-vs-medication/).
+For more information, see our guide to [Tms Success Rates 2026](/blog/tms-success-rates-2026/).
+For more information, see our guide to [Tms For Treatment Resistant Depression](/blog/tms-for-treatment-resistant-depression/).
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [Maintenance Tms Guide](/blog/maintenance-tms-guide/).
+For more information, see our guide to [How Long Does Tms Last](/blog/how-long-does-tms-last/).
+For more information, see our guide to [Going Back To Work During Tms](/blog/going-back-to-work-during-tms/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [find a TMS clinic near you](/clinic/).
+For more information, see our guide to [Questions To Ask Tms Clinic](/blog/questions-to-ask-tms-clinic/).
+For more information, see our guide to [Real Cost Of Tms Therapy 2026](/blog/real-cost-of-tms-therapy-2026/).

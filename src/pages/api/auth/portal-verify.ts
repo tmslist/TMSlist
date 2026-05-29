@@ -69,17 +69,17 @@ export const GET: APIRoute = async ({ request }) => {
 
     const normalizedEmail = result.email.toLowerCase();
 
-    // Look up or create user with clinic_owner role
-    let user = await getUserByEmail(normalizedEmail);
+    // Look up existing user — magic links only work for existing accounts
+    const existingUser = await getUserByEmail(normalizedEmail);
 
-    if (!user) {
-      const created = await db.insert(users).values({
-        email: normalizedEmail,
-        name: normalizedEmail.split('@')[0],
-        role: 'clinic_owner' as const,
-      }).returning();
-      user = created[0];
+    if (!existingUser) {
+      return new Response(null, {
+        status: 302,
+        headers: { Location: '/portal/login?error=account-not-found' },
+      });
     }
+
+    const user = existingUser;
 
     // Update last login
     await db.update(users).set({ lastLoginAt: new Date() }).where(eq(users.id, user.id));

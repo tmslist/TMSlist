@@ -311,22 +311,36 @@ export function getClinicPhoto(clinic: Clinic): string {
     return getClinicImageUrl({ id: clinic.id, name: clinic.name, media: clinic.media });
 }
 
+/**
+ * Generate a DiceBear initials avatar URL for a doctor.
+ * Deterministic from name — same name always produces the same avatar.
+ * Uses the "initials" style which is clean and professional.
+ */
+function getDiceBearUrl(name: string): string {
+    const initials = name
+        .split(/\s+/)
+        .slice(0, 2)
+        .map(w => w.charAt(0).toUpperCase())
+        .join('');
+    const encoded = encodeURIComponent(initials);
+    const backgroundColor = hashStrToHex(name);
+    return `https://api.dicebear.com/7.x/initials/svg?seed=${encoded}&backgroundColor=${backgroundColor}&textColor=ffffff&fontSize=40&fontWeight=600`;
+}
+
+function hashStrToHex(str: string): string {
+    const colors = ['3b82f6', '6366f1', '8b5cf6', 'a855f7', 'ec4899', 'ef4444', 'f97316', 'eab308', '22c55e', '14b8a6', '06b6d4', '3b82f6'];
+    let h = 5381;
+    for (let i = 0; i < str.length; i++) {
+        h = ((h << 5) + h) + str.charCodeAt(i);
+        h = h & h;
+    }
+    return colors[Math.abs(h) % colors.length];
+}
+
 export function getDoctorPhoto(doctor: { name?: string; image_url?: string; imageUrl?: string; slug?: string }): string {
-    return doctor.image_url || doctor.imageUrl
-        || (() => {
-            const name = doctor.name || 'Doctor';
-            const seed = Math.abs(
-                ((hashStr: string) => {
-                    let h = 5381;
-                    for (let i = 0; i < hashStr.length; i++) {
-                        h = ((h << 5) + h) + hashStr.charCodeAt(i);
-                        h = h & h;
-                    }
-                    return h;
-                })(name)
-            );
-            return `https://picsum.photos/seed/${seed + 999999}/200/200`;
-        })();
+    if (doctor.image_url || doctor.imageUrl) return doctor.image_url || doctor.imageUrl;
+    const name = doctor.name || 'Doctor';
+    return getDiceBearUrl(name);
 }
 
 export function hasRealClinicImage(clinic: { hero_image_url?: string; media?: { hero_image_url?: string } }): boolean {

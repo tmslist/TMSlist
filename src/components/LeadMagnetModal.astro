@@ -404,6 +404,7 @@
                         }[leadData.resource] || 'other'),
                         guide_title: getResourceName(leadData.resource),
                         subscribed: leadData.subscribe,
+                        formPage: window.location.pathname,
                     },
                 }),
             }).catch(err => {
@@ -446,8 +447,9 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        } catch {
-            showToast("Something went wrong. Please try again.");
+        } catch (err) {
+            console.error('LeadMagnet form error:', err);
+            showToast(err instanceof Error ? err.message : "Something went wrong. Please try again.");
             submitBtn.disabled = false;
             submitBtn.innerText = originalBtnText;
         }

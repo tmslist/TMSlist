@@ -20,13 +20,8 @@ export const GET: APIRoute = async ({ url }) => {
       });
     }
 
-    // Validate UUID format to prevent SQL injection
-    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(clinicId)) {
-      return new Response(JSON.stringify({ error: 'Invalid clinicId format' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
+    // Support both UUIDs and slugs (e.g., 'ca-la-001', 'ucla-health-tms-los-angeles')
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(clinicId);
 
     const reviews = await getReviewsByClinic(clinicId, { approved: true });
 

@@ -1,6 +1,6 @@
 ---
 title: "TMS for Migraine: FDA-Cleared Devices and What You Need to Know"
-description: "FDA-cleared TMS devices offer a drug-free option for acute migraine treatment. Learn about single-pulse protocols, repetitive TMS, and clinical outcomes."
+description: "[FDA-cleared TMS devices](/blog/tms-for-chronic-pain/) offer a drug-free option for acute migraine treatment. Learn about single-pulse protocols, repetitive TMS, and clinical outcomes."
 publishDate: 2026-04-15
 category: treatment
 author: "Dr. Karan Narwal"
@@ -10,7 +10,7 @@ tags: ["tms", "migraine", "headache", "fda-cleared", "pain"]
 
 Migraine is far more than a severe headache. Affecting approximately 1 billion people worldwide and 39 million Americans, migraine is a complex neurological disorder characterized by recurrent attacks of moderate to severe throbbing pain — often on one side of the head — accompanied by nausea, vomiting, and extreme sensitivity to light and sound. Roughly one-third of migraine sufferers experience **aura** — visual disturbances, sensory changes, or speech difficulties that precede or accompany the headache phase.
 
-For many patients, existing treatments are inadequate. Acute medications such as triptans and NSAIDs carry contraindications, side effects, and the risk of medication-overuse headache. Preventive medications — including beta-blockers, anticonvulsants, and CGRP monoclonal antibodies — are not universally effective and often have tolerability issues. Transcranial magnetic stimulation offers a non-pharmacological, well-tolerated option that directly targets migraine pathophysiology.
+For many patients, [existing treatments](/blog/choosing-tms-clinic-red-flags/) are inadequate. Acute medications such as triptans and NSAIDs carry contraindications, side effects, and the risk of medication-overuse headache. Preventive medications — including beta-blockers, anticonvulsants, and CGRP monoclonal antibodies — are not universally effective and often have tolerability issues. Transcranial magnetic stimulation offers a [non-pharmacological](/clinic/), well-tolerated option that directly targets migraine pathophysiology.
 
 ## What You'll Learn
 
@@ -44,7 +44,7 @@ There are two distinct TMS approaches to migraine treatment:
 
 **Single-pulse TMS (sTMS)** delivers one or a small number of magnetic pulses per session and is designed for **acute migraine treatment**. Patients use the device at the onset of a migraine attack, typically delivering four to eight pulses to the occipital cortex (the back of the brain). The rationale is that sTMS may interrupt cortical spreading depression or modulate trigeminal pain pathways during an active attack.
 
-**Repetitive TMS (rTMS)** delivers many pulses over a sustained period and is typically used as a **preventive treatment**. Protocols for migraine prevention generally involve daily sessions for two to four weeks, targeting the motor cortex or the dorsolateral prefrontal cortex. Research suggests that rTMS may reduce migraine frequency and severity by normalizing cortical excitability and modulating pain-processing networks.
+**Repetitive TMS (rTMS)** delivers many pulses over a sustained period and is typically used as a **preventive treatment**. Protocols for migraine prevention generally involve [daily sessions](/blog/how-to-prepare-for-tms/) for two to four weeks, targeting the motor cortex or the dorsolateral prefrontal cortex. Research suggests that rTMS may reduce migraine frequency and severity by normalizing cortical excitability and modulating pain-processing networks.
 
 A head-to-head comparison study published in *Cephalalgia* found that both single-pulse and repetitive TMS produced clinically meaningful reductions in migraine pain, but single-pulse TMS acted faster (within minutes) while repetitive TMS produced more sustained preventive effects over weeks.
 
@@ -56,13 +56,13 @@ The pivotal clinical trial supporting FDA clearance of sTMS for migraine with au
 - **The treatment effect was even stronger for the most severely affected patients**
 - **sTMS also reduced nausea, photophobia, and phonophobia** compared to sham
 
-For preventive rTMS, a systematic review of multiple trials found that rTMS to the motor cortex reduces migraine frequency by approximately **2 to 3 fewer headache days per month** compared to sham treatment. While not a cure, this reduction is clinically meaningful for patients who suffer from frequent attacks.
+For preventive rTMS, a systematic review of multiple trials found that rTMS to the motor cortex reduces migraine frequency by approximately **2 to 3 fewer headache days per month** compared to sham treatment. While not a cure, this reduction is clinically meaningful [for patients](/blog/maintenance-tms-guide/) who suffer from frequent attacks.
 
 ## Practical Use of TMS for Migraine
 
-The **sTMS device is small and portable** — roughly the size of a large electric toothbrush — and is designed for patient self-administration at home. Patients hold the device against the back of their head at the onset of a migraine attack and trigger a single pulse. The treatment takes only a few minutes per session.
+The **sTMS device is small and portable** — roughly the size of a large electric toothbrush — and is designed for patient self-administration at home. Patients hold the device against the back of their head at the onset of a migraine attack and trigger a single pulse. [The treatment takes](/blog/going-back-to-work-during-tms/) only a few minutes per session.
 
-**Repetitive TMS for migraine prevention** requires visits to a clinic or doctor's office, with daily sessions for two to four weeks followed by maintenance sessions as needed.
+**Repetitive TMS for migraine prevention** [requires visits to a clinic](/clinic/) or doctor's office, with [daily sessions](/blog/how-to-prepare-for-tms/) for two to four weeks followed by [maintenance sessions](/blog/maintenance-tms-guide/) as needed.
 
 ## Safety and Side Effects
 
@@ -109,7 +109,7 @@ For migraine patients who have struggled to find effective treatment, TMS repres
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
   <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a [TMS Clinic](/clinic/)</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If [TMS Is Right](/quiz/am-i-a-candidate/) for You</a>
   </div>
 </div>

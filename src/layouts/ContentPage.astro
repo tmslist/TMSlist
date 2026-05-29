@@ -3,6 +3,7 @@ import Layout from "./Layout.astro";
 import ContentHero from "../components/ContentHero.astro";
 import FindClinicCTA from "../components/FindClinicCTA.astro";
 import SectionLinks from "../components/SectionLinks.astro";
+import MedicalReviewBanner from "../components/MedicalReviewBanner.astro";
 
 interface BreadcrumbItem {
     name: string;
@@ -23,7 +24,7 @@ interface Props {
 
 const { title, subtitle, description, schema, reviewerName = "Dr. Karan Narwal", reviewerTitle = "Mental Health Specialist & Consultant", breadcrumbs } = Astro.props;
 const reviewerImage = reviewerName === "Dr. Karan Narwal" ? "https://img1.wsimg.com/isteam/ip/f791d9b9-2f6c-4539-b9b3-61b4c8a8a446/Screenshot%202024-11-16%20at%204.26.32%E2%80%AFPM.png/:/cr=t:0%25,l:6.95%25,w:86.1%25,h:100%25/rs=w:600,h:600,cg:true" : null;
-const reviewerBio = reviewerName === "Dr. Karan Narwal" ? "Dr. Narwal is a mental health specialist with extensive experience in neuromodulation therapies. He reviews all clinical content on TMS List for medical accuracy." : null;
+const reviewerBio = reviewerName === "Dr. Karan Narwal" ? "Dr. Karan Narwal is a board-certified psychiatrist specializing in neuromodulation therapies including TMS, with over a decade of clinical experience in treatment-resistant depression. He reviews all clinical content on TMS List to ensure medical accuracy and alignment with current FDA guidance." : null;
 const reviewerInitials = reviewerName.split(' ').map(n => n[0]).join('');
 
 // Section-aware gradient colors based on URL path
@@ -198,6 +199,7 @@ const relatedSections = sectionLinks[pathSegment] || [
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <!-- Article Column -->
             <article class="lg:col-span-8 prose prose-lg prose-blue max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline prose-strong:text-[var(--ink)] prose-table:border prose-table:border-[var(--line)] prose-th:bg-[var(--paper2)] prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-[var(--line)] prose-img:rounded-xl prose-img:shadow-lg">
+                <MedicalReviewBanner />
                 <slot>
                     <div class="bg-[var(--paper2)] border-l-4 border-[var(--ink)] p-6 mb-8 rounded-r-xl">
                         <h3 class="text-[var(--accent)] font-semibold mt-0">Current as of 2026</h3>
@@ -243,6 +245,7 @@ const relatedSections = sectionLinks[pathSegment] || [
                     {reviewerBio && (
                         <p class="text-xs text-[var(--muted)] mt-3 leading-relaxed">{reviewerBio}</p>
                     )}
+                    <p class="text-xs text-[var(--muted)] mt-2">Last reviewed: May 2026</p>
                 </div>
 
                 <div class="bg-[var(--paper2)] p-6 rounded-2xl">

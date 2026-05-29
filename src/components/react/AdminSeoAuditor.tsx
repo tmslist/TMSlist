@@ -57,17 +57,31 @@ export default function AdminSeoAuditor({ initialAudits = [] }: SeoAuditsProps) 
   const handleScan = useCallback(async () => {
     if (!scanUrl) return;
     setScanning(true);
-    await new Promise(resolve => setTimeout(resolve, 2500));
-    // Simulate adding a new audit
-    const newAudit: PageAudit = {
-      url: scanUrl,
-      score: Math.floor(Math.random() * 30 + 60),
-      issues: [],
-      scannedAt: new Date().toISOString(),
-    };
-    setAudits(prev => [newAudit, ...prev]);
-    setScanning(false);
-    setScanUrl('');
+    try {
+      const res = await fetch('/api/admin/seo-auditor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: scanUrl }),
+      });
+      if (res.status === 401) { window.location.href = '/admin/login'; return; }
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: 'Scan failed' }));
+        throw new Error(err.error || `HTTP ${res.status}`);
+      }
+      const json = await res.json();
+      const newAudit: PageAudit = {
+        url: json.data.url,
+        score: json.data.score,
+        issues: json.data.issues,
+        scannedAt: json.data.scannedAt,
+      };
+      setAudits(prev => [newAudit, ...prev]);
+      setScanUrl('');
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Scan failed');
+    } finally {
+      setScanning(false);
+    }
   }, [scanUrl]);
 
   const scoreColor = (score: number) => {
@@ -102,22 +116,22 @@ export default function AdminSeoAuditor({ initialAudits = [] }: SeoAuditsProps) 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
           <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Average Score</p>
-          <p className="text-3xl font-bold text-[var(--ink)] mt-1">79.5</p>
+          <p className="text-3xl font-bold text-[var(--ink)] mt-1">{audits.length > 0 ? Math.round(audits.reduce((s, a) => s + a.score, 0) / audits.length) : '--'}</p>
           <p className="text-xs text-[var(--muted)] mt-1">Across all pages</p>
         </div>
         <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
           <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Critical Issues</p>
-          <p className="text-3xl font-bold text-red-600 mt-1">4</p>
+          <p className="text-3xl font-bold text-red-600 mt-1">{audits.reduce((s, a) => s + a.issues.filter(i => i.type === 'error').length, 0)}</p>
           <p className="text-xs text-[var(--muted)] mt-1">Need immediate fix</p>
         </div>
         <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
           <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Warnings</p>
-          <p className="text-3xl font-bold text-amber-600 mt-1">8</p>
+          <p className="text-3xl font-bold text-amber-600 mt-1">{audits.reduce((s, a) => s + a.issues.filter(i => i.type === 'warning').length, 0)}</p>
           <p className="text-xs text-[var(--muted)] mt-1">Should be addressed</p>
         </div>
         <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
           <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Info Tips</p>
-          <p className="text-3xl font-bold text-[var(--ink)] mt-1">5</p>
+          <p className="text-3xl font-bold text-[var(--ink)] mt-1">{audits.reduce((s, a) => s + a.issues.filter(i => i.type === 'info').length, 0)}</p>
           <p className="text-xs text-[var(--muted)] mt-1">Improvements available</p>
         </div>
       </div>

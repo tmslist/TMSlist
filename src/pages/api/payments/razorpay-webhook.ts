@@ -1,10 +1,24 @@
 import type { APIRoute } from 'astro';
 import { db } from '../../../db';
-import { subscriptions, auditLog } from '../../../db/schema';
+import { subscriptions, auditLog, clinics, users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
 import { verifyRazorpayWebhookSignature } from '../../../utils/razorpay';
+import {
+  sendSubscriptionActivated,
+  sendPaymentFailed,
+  sendSubscriptionCanceled,
+  sendPaymentSucceeded,
+} from '../../../utils/billingEmails';
+import { PLANS } from '../../../db/subscriptions';
 
 export const prerender = false;
+
+const SITE_URL = import.meta.env.SITE_URL || process.env.SITE_URL || 'https://tmslist.com';
+
+async function getClinicOwnerEmail(clinicId: string): Promise<string | null> {
+  const [user] = await db.select().from(users).where(eq(users.clinicId, clinicId)).limit(1);
+  return user?.email || null;
+}
 
 export const POST: APIRoute = async ({ request }) => {
   const WEBHOOK_SECRET = import.meta.env.RAZORPAY_WEBHOOK_SECRET || process.env.RAZORPAY_WEBHOOK_SECRET;
@@ -38,13 +52,10 @@ export const POST: APIRoute = async ({ request }) => {
 
         if (!clinicId) break;
 
-        // Map Razorpay plan IDs to local plan names
-        // These should match the plan IDs configured in your Razorpay dashboard
         const planMap: Record<string, string> = {
           'pro': 'pro',
           'premium': 'premium',
           'enterprise': 'enterprise',
-          // Fallback: derive from plan_id string if it contains a known tier
         };
         const plan = razorpayPlanId
           ? (planMap[razorpayPlanId] ?? (razorpayPlanId.toLowerCase().includes('premium') ? 'premium' : razorpayPlanId.toLowerCase().includes('enterprise') ? 'enterprise' : 'pro'))
@@ -73,6 +84,22 @@ export const POST: APIRoute = async ({ request }) => {
           details: { clinicId, plan },
         });
 
+        // Send welcome email
+        const ownerEmail = await getClinicOwnerEmail(clinicId);
+        if (ownerEmail) {
+          const [clinic] = await db.select().from(clinics).where(eq(clinics.id, clinicId)).limit(1);
+          const trialEnd = entity.trial_end ? new Date(entity.trial_end * 1000) : null;
+          const trialDays = trialEnd ? Math.ceil((trialEnd.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) : undefined;
+
+          sendSubscriptionActivated({
+            to: ownerEmail,
+            clinicName: clinic?.name || 'Your clinic',
+            plan,
+            trialEndDays: trialDays,
+            billingPortalUrl: `${SITE_URL}/portal/billing`,
+          }).catch(err => console.error('[billing-email] razorpay sendSubscriptionActivated failed:', err));
+        }
+
         break;
       }
 
@@ -81,6 +108,12 @@ export const POST: APIRoute = async ({ request }) => {
         const nextBilling = entity.current_end
           ? new Date(entity.current_end * 1000)
           : null;
+        const amount = entity.amount || 0;
+
+        // Get subscription details for email
+        const [sub] = await db.select().from(subscriptions)
+          .where(eq(subscriptions.razorpaySubscriptionId, razorpaySubId))
+          .limit(1);
 
         await db.update(subscriptions)
           .set({ currentPeriodEnd: nextBilling, status: 'active' })
@@ -90,14 +123,39 @@ export const POST: APIRoute = async ({ request }) => {
           action: 'razorpay_subscription_charged',
           entityType: 'subscription',
           entityId: razorpaySubId,
-          details: { amount: entity.amount / 100, nextBilling },
+          details: { amount: amount / 100, nextBilling },
         });
+
+        // Send payment receipt
+        if (sub && sub.clinicId) {
+          const ownerEmail = await getClinicOwnerEmail(sub.clinicId);
+          if (ownerEmail) {
+            const [clinic] = await db.select().from(clinics).where(eq(clinics.id, sub.clinicId)).limit(1);
+            const now = new Date();
+
+            sendPaymentSucceeded({
+              to: ownerEmail,
+              clinicName: clinic?.name || 'Your clinic',
+              plan: sub.plan || 'pro',
+              amount,
+              currency: 'inr',
+              periodStart: sub.currentPeriodEnd || now,
+              periodEnd: now,
+              nextBillingDate: nextBilling || now,
+            }).catch(err => console.error('[billing-email] razorpay sendPaymentSucceeded failed:', err));
+          }
+        }
 
         break;
       }
 
       case 'subscription.cancelled': {
         const razorpaySubId = entity.id as string;
+
+        // Get subscription for email before canceling
+        const [sub] = await db.select().from(subscriptions)
+          .where(eq(subscriptions.razorpaySubscriptionId, razorpaySubId))
+          .limit(1);
 
         await db.update(subscriptions)
           .set({ status: 'canceled' })
@@ -110,6 +168,25 @@ export const POST: APIRoute = async ({ request }) => {
           details: { canceledAt: new Date().toISOString() },
         });
 
+        // Send cancellation email
+        if (sub && sub.clinicId) {
+          const ownerEmail = await getClinicOwnerEmail(sub.clinicId);
+          if (ownerEmail) {
+            const [clinic] = await db.select().from(clinics).where(eq(clinics.id, sub.clinicId)).limit(1);
+            const effectiveDate = entity.current_end
+              ? new Date(entity.current_end * 1000)
+              : new Date();
+
+            sendSubscriptionCanceled({
+              to: ownerEmail,
+              clinicName: clinic?.name || 'Your clinic',
+              plan: sub.plan || 'pro',
+              effectiveDate,
+              featuresLost: PLANS[sub.plan as keyof typeof PLANS]?.marketingFeatures || [],
+            }).catch(err => console.error('[billing-email] razorpay sendSubscriptionCanceled failed:', err));
+          }
+        }
+
         break;
       }
 
@@ -119,6 +196,43 @@ export const POST: APIRoute = async ({ request }) => {
         await db.update(subscriptions)
           .set({ status: 'past_due' })
           .where(eq(subscriptions.razorpaySubscriptionId, razorpaySubId));
+
+        break;
+      }
+
+      case 'payment.failed': {
+        const razorpaySubId = entity.subscription_id as string;
+        const failureMessage = entity.error_description || entity.error_reason || 'Payment failed';
+
+        // Get subscription for email
+        const [sub] = await db.select().from(subscriptions)
+          .where(eq(subscriptions.razorpaySubscriptionId, razorpaySubId))
+          .limit(1);
+
+        await db.insert(auditLog).values({
+          action: 'razorpay_payment_failed',
+          entityType: 'subscription',
+          entityId: razorpaySubId,
+          details: { error: failureMessage, amount: entity.amount / 100 },
+        });
+
+        // Send payment failed email
+        if (sub && sub.clinicId) {
+          const ownerEmail = await getClinicOwnerEmail(sub.clinicId);
+          if (ownerEmail) {
+            const [clinic] = await db.select().from(clinics).where(eq(clinics.id, sub.clinicId)).limit(1);
+
+            sendPaymentFailed({
+              to: ownerEmail,
+              clinicName: clinic?.name || 'Your clinic',
+              plan: sub.plan || 'pro',
+              failureMessage,
+              amount: entity.amount,
+              currency: 'inr',
+              billingPortalUrl: `${SITE_URL}/portal/billing`,
+            }).catch(err => console.error('[billing-email] razorpay sendPaymentFailed failed:', err));
+          }
+        }
 
         break;
       }

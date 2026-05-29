@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import EditorialHero from '../../components/editorial/EditorialHero.astro';
 import EditorialCTA from '../../components/editorial/EditorialCTA.astro';
+import MedicalReviewBanner from '../../components/MedicalReviewBanner.astro';
 
 const title = "TMS Glossary | 50+ Terms Explained | TMS List";
 const description = "Comprehensive A-Z glossary of TMS therapy terms. From rTMS and theta burst to DLPFC and motor threshold — understand every term used in transcranial magnetic stimulation.";
@@ -29,53 +30,55 @@ const schema = JSON.stringify({
 });
 
 const glossary: { term: string; definition: string }[] = [
-    { term: "Accelerated TMS", definition: "A protocol that delivers multiple TMS sessions per day over a compressed timeframe (typically 1-5 days instead of 6 weeks), based on the Stanford SAINT protocol." },
+    { term: "Accelerated TMS", definition: "A protocol that delivers multiple TMS sessions per day over a compressed timeframe (typically 1-5 days instead of 6 weeks), based on the Stanford <a href=\"/protocols/saint-protocol/\" style=\"color:var(--accent); text-decoration:underline;\">SAINT protocol</a>." },
     { term: "Active Motor Threshold", definition: "The minimum TMS intensity required to produce a motor evoked potential while the target muscle is under voluntary contraction." },
     { term: "Adjunctive Therapy", definition: "A treatment used alongside a primary treatment. TMS is often used as adjunctive therapy with antidepressant medications." },
-    { term: "ARIA (Automated Robotic Image-guided Apparatus)", definition: "A robotic positioning system used with some TMS devices to automatically position the coil over the correct brain target using neuronavigation." },
+    { term: "ARIA (Automated Robotic Image-guided Apparatus)", definition: "A robotic positioning system used with some TMS devices to automatically position the coil over the correct brain target using <a href=\"/protocols/neuronavigation/\" style=\"color:var(--accent); text-decoration:underline;\">neuronavigation</a>." },
     { term: "Bilateral TMS", definition: "A protocol that stimulates both hemispheres of the brain in a single session — typically high-frequency to the left DLPFC followed by low-frequency to the right DLPFC." },
-    { term: "BrainsWay", definition: "An Israeli medical device company that manufactures the BrainsWay Deep TMS System using H-coil technology. FDA-cleared for major depressive disorder (2013), OCD (2018), and smoking cessation (2020)." },
-    { term: "Burst Stimulation", definition: "A pattern of TMS delivery where pulses are grouped into short bursts rather than delivered individually. Includes theta burst stimulation (TBS) as the most studied variant." },
-    { term: "CareCredit", definition: "A healthcare financing credit card commonly used by patients to pay for TMS therapy when insurance does not cover the full cost." },
+    { term: "BrainsWay", definition: "An Israeli medical device company that manufactures the BrainsWay Deep TMS System using H-coil technology. FDA-cleared for <a href=\"/treatments/depression/\" style=\"color:var(--accent); text-decoration:underline;\">major depressive disorder</a>, <a href=\"/treatments/ocd/\" style=\"color:var(--accent); text-decoration:underline;\">OCD</a>, and smoking cessation." },
+    { term: "Burst Stimulation", definition: "A pattern of TMS delivery where pulses are grouped into short bursts rather than delivered individually. Includes <a href=\"/protocols/theta-burst-stimulation/\" style=\"color:var(--accent); text-decoration:underline;\">theta burst stimulation (TBS)</a> as the most studied variant." },
+    { term: "CareCredit", definition: "A healthcare financing credit card commonly used by patients to pay for TMS therapy when insurance does not cover the full cost. See <a href=\"/insurance/self-pay-financing/\" style=\"color:var(--accent); text-decoration:underline;\">self-pay financing options</a>." },
     { term: "Coil", definition: "The handheld component of a TMS device that generates the magnetic field. Common types include figure-8 coils (focal stimulation) and H-coils (deeper stimulation)." },
     { term: "Cortical Excitability", definition: "The readiness of neurons in the brain's cortex to fire in response to stimulation. TMS can increase or decrease cortical excitability depending on the protocol used." },
-    { term: "Deep TMS (dTMS)", definition: "A form of TMS using H-coil technology (BrainsWay) that can stimulate deeper brain structures (up to 4cm). FDA-cleared for depression, OCD, and smoking cessation." },
+    { term: "Deep TMS (dTMS)", definition: "A form of TMS using H-coil technology (BrainsWay) that can stimulate deeper brain structures (up to 4cm). FDA-cleared for <a href=\"/treatments/depression/\" style=\"color:var(--accent); text-decoration:underline;\">depression</a> and <a href=\"/treatments/ocd/\" style=\"color:var(--accent); text-decoration:underline;\">OCD</a>." },
     { term: "DLPFC (Dorsolateral Prefrontal Cortex)", definition: "The primary brain target for TMS depression treatment. Underactivity in the left DLPFC is associated with depression." },
     { term: "Double-Blind Study", definition: "A clinical trial design where neither the patient nor the administering clinician knows if active TMS or sham (placebo) stimulation is being delivered." },
     { term: "EEG (Electroencephalography)", definition: "A brain imaging technique that measures electrical activity via scalp electrodes. Sometimes used alongside TMS to monitor brain responses." },
-    { term: "Express TMS", definition: "Marketing term used by some clinics for theta burst stimulation (TBS) protocols that deliver a full session in approximately 3 minutes." },
+    { term: "Electroconvulsive Therapy (ECT)", definition: "A gold-standard treatment for severe, life-threatening depression. See how it compares to <a href=\"/compare/tms-vs-ect/\" style=\"color:var(--accent); text-decoration:underline;\">TMS vs ECT</a>." },
     { term: "FDA Clearance", definition: "Regulatory approval from the FDA allowing a TMS device to be marketed for specific medical conditions. Different from FDA approval — clearance (510(k)) demonstrates substantial equivalence to an existing device." },
     { term: "Figure-8 Coil", definition: "The most common TMS coil design, shaped like a figure-8. Creates a focused magnetic field at the intersection of the two loops." },
-    { term: "fMRI (Functional Magnetic Resonance Imaging)", definition: "A neuroimaging technique that measures brain activity by detecting changes in blood flow. Used in TMS research to identify optimal stimulation targets." },
-    { term: "H-Coil", definition: "A coil design developed by BrainsWay that uses a complex winding pattern inside a padded helmet. Stimulates deeper and broader brain regions than standard figure-8 coils." },
-    { term: "HSA/FSA", definition: "Health Savings Accounts and Flexible Spending Accounts — tax-advantaged accounts that can be used to pay for TMS therapy out-of-pocket costs." },
+    { term: "fMRI (Functional Magnetic Resonance Imaging)", definition: "A neuroimaging technique that measures brain activity by detecting changes in blood flow. Used in TMS research to identify optimal stimulation targets. See <a href=\"/protocols/fmri-guided-tms/\" style=\"color:var(--accent); text-decoration:underline;\">fMRI-guided TMS</a>." },
+    { term: "H-Coil", definition: "A coil design developed by <a href=\"/technology/brainsway-deep-tms/\" style=\"color:var(--accent); text-decoration:underline;\">BrainsWay</a> that uses a complex winding pattern inside a padded helmet. Stimulates deeper and broader brain regions than standard figure-8 coils." },
+    { term: "HSA/FSA", definition: "Health Savings Accounts and Flexible Spending Accounts — tax-advantaged accounts that can be used to pay for TMS therapy out-of-pocket costs. See <a href=\"/insurance/hsa-fsa-tms/\" style=\"color:var(--accent); text-decoration:underline;\">HSA/FSA for TMS</a>." },
     { term: "Intermittent Theta Burst Stimulation (iTBS)", definition: "An excitatory TBS pattern where 2-second trains of theta burst pulses are delivered every 10 seconds, typically applied to the left DLPFC for depression." },
-    { term: "Long-Term Potentiation (LTP)", definition: "A lasting strengthening of neural connections that is believed to underlie the therapeutic effects of TMS." },
+    { term: "Ketamine", definition: "An alternative treatment option for <a href=\"/treatments/depression/\" style=\"color:var(--accent); text-decoration:underline;\">treatment-resistant depression</a>. See how it compares to <a href=\"/compare/tms-vs-ketamine/\" style=\"color:var(--accent); text-decoration:underline;\">TMS vs Ketamine</a>." },
+    { term: "Long-Term Potentiation (LTP)", definition: "A lasting strengthening of neural connections that is believed to underlie the therapeutic effects of TMS. Learn more about <a href=\"/research/neuroplasticity-and-tms/\" style=\"color:var(--accent); text-decoration:underline;\">neuroplasticity and TMS</a>." },
     { term: "Maintenance TMS", definition: "Periodic TMS sessions given after completing an initial treatment course to prevent relapse of symptoms." },
-    { term: "MagVenture", definition: "A Danish manufacturer of TMS devices, including the MagPro and MagVita systems." },
+    { term: "MagVenture TMS", definition: "A Danish manufacturer of TMS devices, including the MagPro and MagVita systems. <a href=\"/technology/magventure/\" style=\"color:var(--accent); text-decoration:underline;\">Learn about MagVenture TMS</a>." },
+    { term: "Magstim TMS", definition: "UK-manufactured TMS system with over 35 years of heritage. <a href=\"/technology/magstim/\" style=\"color:var(--accent); text-decoration:underline;\">Learn about Magstim TMS</a>." },
     { term: "MBS Item Number", definition: "Medicare Benefits Schedule item number (Australia) that determines if a procedure is eligible for a Medicare rebate. TMS was added to the MBS in 2021 for treatment-resistant depression." },
     { term: "Motor Evoked Potential (MEP)", definition: "A measurable muscle twitch produced when TMS is applied to the motor cortex at sufficient intensity." },
-    { term: "Motor Threshold (MT)", definition: "The minimum intensity of TMS required to produce a visible muscle twitch in at least 50% of attempts. Used to personalize treatment intensity." },
+    { term: "Motor Threshold (MT)", definition: "The minimum intensity of TMS required to produce a visible muscle twitch in at least 50% of attempts. Used to personalize <a href=\"/treatments/depression/\" style=\"color:var(--accent); text-decoration:underline;\">treatment intensity</a>." },
     { term: "Neuromodulation", definition: "The alteration of nerve activity through targeted delivery of a stimulus. TMS is a form of non-invasive neuromodulation." },
-    { term: "Neuronavigation", definition: "Technology that uses brain imaging (MRI/CT) to guide precise TMS coil placement over the target brain region." },
-    { term: "NeuroStar", definition: "A TMS system manufactured by Neuronetics, one of the first FDA-cleared TMS devices for depression (2008)." },
-    { term: "Neuroplasticity", definition: "The brain's ability to form new neural connections and reorganize existing ones. TMS is believed to work by promoting neuroplasticity." },
+    { term: "Neuronavigation", definition: "Technology that uses brain imaging (MRI/CT) to guide precise TMS coil placement over the target brain region. See <a href=\"/protocols/neuronavigation/\" style=\"color:var(--accent); text-decoration:underline;\">neuronavigation protocols</a>." },
+    { term: "NeuroStar", definition: "A TMS system manufactured by Neuronetics, one of the first FDA-cleared TMS devices for depression. <a href=\"/technology/neurostar/\" style=\"color:var(--accent); text-decoration:underline;\">Learn about NeuroStar</a>." },
+    { term: "Neuroplasticity", definition: "The brain's ability to form new neural connections and reorganize existing ones. TMS is believed to work by promoting <a href=\"/research/neuroplasticity-and-tms/\" style=\"color:var(--accent); text-decoration:underline;\">neuroplasticity</a>." },
     { term: "NICE Approval", definition: "Guidance from the UK's National Institute for Health and Care Excellence recommending TMS as a treatment option (since 2015)." },
-    { term: "OCD (Obsessive-Compulsive Disorder)", definition: "A mental health condition characterized by intrusive thoughts and repetitive behaviors. Deep TMS received FDA clearance for OCD in 2018." },
-    { term: "Prior Authorization", definition: "An insurance requirement that a provider obtain approval before delivering TMS treatment. Typically requires documentation of medication trials." },
+    { term: "OCD (Obsessive-Compulsive Disorder)", definition: "A mental health condition characterized by intrusive thoughts and repetitive behaviors. Deep TMS received FDA clearance for <a href=\"/treatments/ocd/\" style=\"color:var(--accent); text-decoration:underline;\">OCD</a> in 2018." },
+    { term: "Prior Authorization", definition: "An insurance requirement that a provider obtain approval before delivering TMS treatment. Typically requires documentation of medication trials. See the <a href=\"/insurance/prior-authorization-guide/\" style=\"color:var(--accent); text-decoration:underline;\">prior authorization guide</a>." },
     { term: "Pulse", definition: "A single magnetic field discharge from the TMS coil. Treatment protocols are defined by the number of pulses per session." },
     { term: "Remission", definition: "A clinical outcome where symptoms have been reduced to below diagnostic thresholds. Remission rates in TMS depression studies typically range from 30-35%." },
     { term: "Response Rate", definition: "The percentage of patients who experience a clinically significant improvement (usually 50%+ reduction). TMS depression studies report response rates of 50-60%." },
     { term: "rTMS (Repetitive Transcranial Magnetic Stimulation)", definition: "The most common form of TMS therapy, delivering repeated magnetic pulses to a specific brain target." },
-    { term: "SAINT Protocol", definition: "Stanford Accelerated Intelligent Neuromodulation Therapy — 10 sessions per day over 5 days using fMRI-guided targeting. Showed 79% remission in the initial trial." },
+    { term: "SAINT Protocol", definition: "Stanford Accelerated Intelligent Neuromodulation Therapy — 10 sessions per day over 5 days using fMRI-guided targeting. Showed 79% remission in the initial trial. <a href=\"/protocols/saint-protocol/\" style=\"color:var(--accent); text-decoration:underline;\">Learn about the SAINT protocol</a>." },
     { term: "Sham Stimulation", definition: "A placebo condition used in TMS clinical trials where the coil is positioned or shielded to mimic the sensation of real TMS without delivering therapeutic stimulation." },
     { term: "Smoking Cessation", definition: "FDA-cleared indication for Deep TMS (BrainsWay, 2020). Targets the bilateral insula and prefrontal cortex to reduce nicotine cravings." },
-    { term: "Theta Burst Stimulation (TBS)", definition: "An advanced TMS protocol that delivers triplets of pulses at 50Hz, repeated at 5Hz. A full session can be delivered in about 3 minutes versus 19-37 minutes for standard rTMS." },
+    { term: "Theta Burst Stimulation (TBS)", definition: "An advanced TMS protocol that delivers triplets of pulses at 50Hz, repeated at 5Hz. A full session can be delivered in about 3 minutes versus 19-37 minutes for standard rTMS. <a href=\"/protocols/theta-burst-stimulation/\" style=\"color:var(--accent); text-decoration:underline;\">Learn about TBS</a>." },
     { term: "Treatment Course", definition: "A standard series of TMS sessions, typically 36 sessions delivered 5 days per week over 6-9 weeks." },
-    { term: "Treatment-Resistant Depression (TRD)", definition: "Depression that has not responded adequately to at least two different antidepressant medications. Primary FDA-cleared indication for TMS therapy." },
+    { term: "Treatment-Resistant Depression (TRD)", definition: "Depression that has not responded adequately to at least two different antidepressant medications. Primary FDA-cleared indication for <a href=\"/treatments/depression/\" style=\"color:var(--accent); text-decoration:underline;\">TMS therapy</a>." },
     { term: "Transcranial Magnetic Stimulation (TMS)", definition: "A non-invasive brain stimulation technique that uses magnetic fields to induce small electrical currents in targeted brain regions." },
     { term: "Treatment Protocol", definition: "The specific parameters of a TMS session including coil type, brain target, frequency, intensity, number of pulses, and session duration." },
-    { term: "V-coil", definition: "A newer coil design used in some TMS systems that provides a broader but still focal stimulation pattern." },
+    { term: "Vagus Nerve Stimulation (VNS)", definition: "A surgically implanted device stimulating the vagus nerve for severe treatment-resistant depression. See how it compares to <a href=\"/compare/tms-vs-vns/\" style=\"color:var(--accent); text-decoration:underline;\">TMS vs VNS</a>." },
 ];
 
 const sortedGlossary = glossary.sort((a, b) => a.term.localeCompare(b.term));
@@ -113,6 +116,12 @@ const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     ]}
   />
 
+  <section style="padding:2rem 0 1rem;">
+    <div class="max-w-[900px] mx-auto px-6 lg:px-8">
+      <MedicalReviewBanner />
+    </div>
+  </section>
+
   <section style="background:var(--paper); padding:4rem 0; border-bottom:1px solid var(--line);">
     <div class="max-w-[900px] mx-auto px-6 lg:px-8">
       <nav style="position:sticky; top:64px; z-index:10; background:rgba(251,250,247,0.95); backdrop-filter:blur(8px); margin:-1rem -1.5rem 2rem; padding:1rem 1.5rem; border-bottom:1px solid var(--line);" aria-label="Alphabet navigation">
@@ -145,7 +154,7 @@ const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
               {grouped[letter].map((item) => (
                 <div style="background:var(--paper2); border:1px solid var(--line); border-radius:1rem; padding:1.5rem;" id={item.term.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
                   <dt class="serif" style="font-size:1.25rem; color:var(--ink); margin:0 0 0.5rem;">{item.term}</dt>
-                  <dd style="font-size:14px; color:var(--muted); line-height:1.65; margin:0;">{item.definition}</dd>
+                  <dd style="font-size:14px; color:var(--muted); line-height:1.65; margin:0;" set:html={item.definition}></dd>
                 </div>
               ))}
             </div>

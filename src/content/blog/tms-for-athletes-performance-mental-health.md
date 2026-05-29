@@ -40,7 +40,7 @@ Standard treatments (medication, therapy) work for these conditions, but some at
 
 TMS can address several of these presentations in ways that are particularly relevant to athletes:
 
-**Treatment-resistant depression and anxiety** in athletes responds to TMS the same way it does in non-athletes. The advantage for this population is the absence of systemic medication effects — no concerns about cognitive impairment, sedation, or substance-specific regulations in competitive sports.
+**Treatment-resistant depression and anxiety** in athletes responds to TMS the same way it does in non-athletes. [The advantage](/blog/tms-vs-medication/) for this population is the absence of systemic medication effects — no concerns about cognitive impairment, sedation, or substance-specific regulations in competitive sports.
 
 **Burnout recovery.** The neurobiological basis of burnout overlaps substantially with depression. Athletes with burnout symptoms who meet criteria for MDD or have treatment-resistant symptoms may benefit from TMS. The accelerated protocols are particularly relevant for athletes with compressed off-seasons or limited time windows.
 
@@ -60,7 +60,7 @@ One question athletes frequently ask is whether TMS is compatible with anti-dopi
 
 ## TMS vs. Other Performance Interventions
 
-Athletes have access to many mental performance interventions — sports psychology, biofeedback, neurofeedback, hypnosis. TMS is not a replacement for these approaches; it is an escalation option for athletes with diagnosable conditions or significant subclinical symptoms that interfere with performance.
+Athletes have access to many mental performance interventions — sports psychology, biofeedback, neurofeedback, hypnosis. [TMS is not a replacement](/blog/combining-tms-with-therapy/) for these approaches; it is an escalation option for athletes with diagnosable conditions or significant subclinical symptoms that interfere with performance.
 
 The analogy: a swimmer with a broken arm does not skip casting it to focus on technique. Similarly, an athlete with clinical depression needs treatment for that condition, not just performance coaching.
 
@@ -72,13 +72,13 @@ TMS may be particularly appropriate when:
 
 ## Practical Considerations for Athletes
 
-**Training schedules and TMS timing.** TMS does not interfere with physical performance. Sessions can be scheduled around training. Many athletes do morning sessions before practice or training. The absence of impairment after sessions means no restrictions on post-session training.
+**Training schedules and TMS timing.** TMS does not interfere with physical performance. Sessions can be scheduled around training. [Many athletes](/blog/what-tms-actually-feels-like/) do morning sessions before practice or training. The absence of impairment after sessions means no restrictions on post-session training.
 
 **Competitive schedules.** Athletes with dense competition schedules should plan TMS around off-periods when possible. Accelerated protocols can fit into a week off between competitions.
 
-**Return to sport.** There is no mandatory waiting period after TMS. Athletes can resume training and competition immediately after sessions. Some feel slightly fatigued post-session; others feel energized. Know your response pattern.
+**Return to sport.** [There is no mandatory waiting period](/blog/what-tms-actually-feels-like/) after TMS. [Athletes can resume training and competition](/blog/going-back-to-work-during-tms/) immediately after sessions. [Some feel slightly fatigued](/blog/tms-side-effects-headache/) post-session; others feel energized. Know your response pattern.
 
-**Team support.** Elite athletes rarely operate alone. Involving coaches, sports psychologists, and athletic trainers in the TMS treatment plan ensures alignment. The sports psychology team and TMS clinician can coordinate care.
+**Team support.** Elite athletes rarely operate alone. [Involving coaches](/blog/choosing-tms-clinic-red-flags/), sports psychologists, and athletic trainers in the TMS treatment plan ensures alignment. The sports psychology team and TMS clinician can coordinate care.
 
 ## The Research Landscape
 
@@ -127,7 +127,7 @@ Your brain is part of your body. Taking care of it is not a compromise of perfor
   <h3 class="text-2xl font-semibold text-white mb-3">Ready to Explore Your TMS Options?</h3>
   <p class="text-[var(--muted)] mb-6 max-w-lg mx-auto">Browse verified TMS providers, read real reviews, and find the right treatment for your situation.</p>
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a TMS Clinic</a>
-    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If TMS Is Right for You</a>
+    <a href="/us/" class="inline-flex items-center gap-2 bg-[var(--ink2)] hover:bg-[var(--warm)] text-white font-semibold px-6 py-3 rounded-xl transition-colors">Find a [TMS Clinic](/clinic/)</a>
+    <a href="/quiz/am-i-a-candidate/" class="text-white/70 hover:text-white font-medium px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors">Check If [TMS Is Right](/quiz/am-i-a-candidate/) for You</a>
   </div>
 </div>

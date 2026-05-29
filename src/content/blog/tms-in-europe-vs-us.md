@@ -189,3 +189,16 @@ Global TMS practice is converging:
 ---
 
 *For patients considering TMS, understanding the international landscape can inform expectations and help identify optimal treatment options, including potential treatment abroad if domestic access is limited.*
+
+
+For more information, see our guide to [Tms For Multiple Sclerosis](/blog/tms-for-multiple-sclerosis/).
+For more information, see our guide to [What Tms Actually Feels Like](/blog/what-tms-actually-feels-like/).
+For more information, see our guide to [How To Prepare For Tms](/blog/how-to-prepare-for-tms/).
+For more information, see our guide to [What To Expect First Tms Session](/blog/what-to-expect-first-tms-session/).
+For more information, see our guide to [Tms For Anxiety Fda Breakthrough](/blog/tms-for-anxiety-fda-breakthrough/).
+For more information, see our guide to [Tms For Depression](/blog/tms-for-depression/).
+For more information, see our guide to [Deep Tms Vs Standard Tms Comparison](/blog/deep-tms-vs-standard-tms-comparison/).
+For more information, see our guide to [Questions To Ask Tms Clinic](/blog/questions-to-ask-tms-clinic/).
+For more information, see our guide to [Real Cost Of Tms Therapy 2026](/blog/real-cost-of-tms-therapy-2026/).
+For more information, see our guide to [take our TMS candidate quiz](/quiz/).
+For more information, see our guide to [Tms Success Rates 2026](/blog/tms-success-rates-2026/).

@@ -1,0 +1,242 @@
+[
+  {
+    "type": "clinic_hero",
+    "slug": "california-tms-clinics-santa-monica",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/california-tms-clinics-santa-monica-hero.webp",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "del-mar-brain-tms-san-diego",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/del-mar-brain-tms-san-diego-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "advanced-tms-clinic-oceanside",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/advanced-tms-clinic-oceanside-hero.webp",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "my-tms-miami",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/my-tms-miami-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "my-tms-boca-raton",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/my-tms-boca-raton-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "neuro-wellness-tms-coral-springs",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neuro-wellness-tms-coral-springs-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "hope-tms-new-york",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/hope-tms-new-york-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "neuropsychiatric-center-nyc",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neuropsychiatric-center-nyc-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "university-place-tms-clinic",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/university-place-tms-clinic-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "american-tms-clinics-scottsdale",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/american-tms-clinics-scottsdale-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "tms-center-colorado-lakewood",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/tms-center-colorado-lakewood-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "southern-colorado-tms-center",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/southern-colorado-tms-center-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "breakthru-psych-sandy-springs",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/breakthru-psych-sandy-springs-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "atlanta-integrative-psychiatry",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/atlanta-integrative-psychiatry-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "skyland-trail-atlanta",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/skyland-trail-atlanta-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "neurobehavioral-medicine-bellaire",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neurobehavioral-medicine-bellaire-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "pine-rest-tms-grand-rapids",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/pine-rest-tms-grand-rapids-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "advanced-psychiatric-therapeutics-honolulu",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/advanced-psychiatric-therapeutics-honolulu-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "katies-way-plus-anchorage",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/katies-way-plus-anchorage-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "journey-to-wellness-bismarck",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/journey-to-wellness-bismarck-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "butler-hospital-tms-clinic-providence",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/butler-hospital-tms-clinic-providence-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "brown-university-health-tms-center-providence",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/brown-university-health-tms-center-providence-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "musc-health-tms-clinic-charleston",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/musc-health-tms-clinic-charleston-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "carolina-psychiatry-greenville",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/carolina-psychiatry-greenville-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "delve-psychiatry-las-vegas",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/delve-psychiatry-las-vegas-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "north-country-behavioral-medicine-colchester",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/north-country-behavioral-medicine-colchester-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "neurowellness-utah-lehi",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neurowellness-utah-lehi-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "neurobehavioral-center-for-growth-salt-lake-city",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neurobehavioral-center-for-growth-salt-lake-city-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "mental-health-center-greater-manchester",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/mental-health-center-greater-manchester-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "innovative-psychiatry-bedford",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/innovative-psychiatry-bedford-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "mwi-health-sioux-falls",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/mwi-health-sioux-falls-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "manlove-brain-body-health-rapid-city",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/manlove-brain-body-health-rapid-city-hero.png",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "edmond-psychiatric-associates-edmond",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/edmond-psychiatric-associates-edmond-hero.webp",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "futurehealth-tms-lawton",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/futurehealth-tms-lawton-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "lexington-tms",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/lexington-tms-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "sonder-behavioral-health-wellness-edina",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/sonder-behavioral-health-wellness-edina-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "neurostim-tms-minneapolis",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/neurostim-tms-minneapolis-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "synaptic-psych-memphis",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/synaptic-psych-memphis-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "palmier-tms-st-louis",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/palmier-tms-st-louis-hero.jpg",
+    "status": "pending_upload"
+  },
+  {
+    "type": "clinic_hero",
+    "slug": "montana-psychiatry-brain-health-billings",
+    "localPath": "/Volumes/Extreme SSD/NEw code/tmslist/scripts/images/clinics/montana-psychiatry-brain-health-billings-hero.webp",
+    "status": "pending_upload"
+  }
+]

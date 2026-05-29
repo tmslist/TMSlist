@@ -225,6 +225,17 @@ const insurances = Object.values(ClinicInsurance);
               clinicCount={cityClinics.length}
             />
 
+            <!-- Learn More -->
+            <div class="mt-10 pt-8 border-t border-[var(--line)]">
+              <div class="flex flex-wrap justify-center gap-2">
+                <a href="/blog/tms-cost-insurance-guide-2026/" class="px-3 py-1.5 text-xs font-medium border border-[var(--line)] text-[var(--ink)] rounded-lg hover:bg-[var(--paper2)] transition-colors">Cost &amp; Insurance</a>
+                <a href="/blog/questions-to-ask-tms-clinic/" class="px-3 py-1.5 text-xs font-medium border border-[var(--line)] text-[var(--ink)] rounded-lg hover:bg-[var(--paper2)] transition-colors">Questions to Ask</a>
+                <a href="/blog/preparing-for-first-tms-session/" class="px-3 py-1.5 text-xs font-medium border border-[var(--line)] text-[var(--ink)] rounded-lg hover:bg-[var(--paper2)] transition-colors">First Session</a>
+                <a href="/blog/maintenance-tms-guide/" class="px-3 py-1.5 text-xs font-medium border border-[var(--line)] text-[var(--ink)] rounded-lg hover:bg-[var(--paper2)] transition-colors">Maintenance</a>
+                <a href="/blog/" class="px-3 py-1.5 text-xs font-medium text-[var(--accent)] hover:underline">View all articles →</a>
+              </div>
+            </div>
+
             <div id="clinic-map" class="mt-12 rounded-2xl h-80 shadow-sm border border-[var(--line)] overflow-hidden z-0"></div>
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
             <script is:inline define:vars={{ clinicsForMap: sortedClinics.filter((c) => c.geo?.lat && c.geo?.lng).map((c) => ({ name: c.name, lat: c.geo.lat, lng: c.geo.lng, slug: c.slug })) }}>

@@ -486,41 +486,238 @@ export const DRIP_SEQUENCES: Record<FunnelSegment, DripStep[]> = {
     {
       stepId: 'owner_day10_upgrade',
       delayDays: 10,
-      subject: 'Get 5x more patient leads with Pro',
+      subject: 'Get 5x more patient leads with Starter',
       buildHtml: (c) => emailWrapper(`
-        <h2 style="color: #1e293b; margin: 0 0 16px;">Upgrade to grow your practice</h2>
-        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, Pro clinics on TMS List receive <strong>5x more patient enquiries</strong> than free listings. Here's what you get:</p>
+        <h2 style="color: #1e293b; margin: 0 0 16px;">Upgrade to grow your patient pipeline</h2>
+        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, Starter clinics on TMS List receive <strong>5x more patient enquiries</strong> than free listings. Here's what you get for $29/month:</p>
         <ul style="color: #64748b; line-height: 2;">
           <li>Instant SMS + email lead notifications</li>
           <li>Analytics dashboard (views, clicks, conversions)</li>
           <li>Respond to patient reviews</li>
-          <li>"Pro" badge on your listing</li>
-          <li>Priority placement in search</li>
+          <li>TMS devices & protocols displayed</li>
+          <li>Insurance carriers listed</li>
+          <li>Up to 3 doctor profiles</li>
         </ul>
-        <p style="color: #64748b; line-height: 1.7;">Plans start at just <strong>$99/month</strong> — less than one TMS session.</p>
+        <p style="color: #64748b; line-height: 1.7;">Plans start at just <strong>$29/month</strong> — less than one TMS consultation.</p>
         <div style="text-align: center; margin: 28px 0;">
           ${btn('View Pricing Plans', `${SITE_URL}/pricing/`, '#059669')}
         </div>
       `, '#0f172a'),
     },
     {
-      stepId: 'owner_day21_healthscore',
-      delayDays: 21,
-      subject: 'Your Clinic Health Score report',
+      stepId: 'owner_day14_listing',
+      delayDays: 14,
+      subject: 'Listing optimization checklist — 10 min audit',
       buildHtml: (c) => emailWrapper(`
-        <h2 style="color: #1e293b; margin: 0 0 16px;">How does your clinic score?</h2>
-        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, we've introduced the <strong>Clinic Health Score</strong> — a 0-100 rating that measures your listing's effectiveness across 6 dimensions:</p>
-        <ol style="color: #64748b; line-height: 2;">
-          <li>Review quality & volume</li>
-          <li>Profile completeness</li>
-          <li>Technology & devices</li>
-          <li>Insurance breadth</li>
-          <li>Responsiveness</li>
-          <li>Verification status</li>
-        </ol>
-        <p style="color: #64748b; line-height: 1.7;">Log into your dashboard to see your score and get personalized recommendations to improve it.</p>
+        <h2 style="color: #1e293b; margin: 0 0 16px;">Is your listing ready for patients?</h2>
+        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, take 10 minutes to audit your listing. Here's what high-converting TMS clinic listings have:</p>
+        <ul style="color: #64748b; line-height: 2;">
+          <li><strong>Professional cover photo</strong> — exterior or treatment room</li>
+          <li><strong>TMS device list</strong> — with manufacturer and model</li>
+          <li><strong>Protocol types</strong> — standard, theta burst, SAINT, deep TMS</li>
+          <li><strong>Accepted insurance</strong> — at least 3 major carriers</li>
+          <li><strong>Doctor profiles</strong> — name, credentials, photo</li>
+          <li><strong>5+ patient reviews</strong> — with responses</li>
+          <li><strong>Current wait time</strong> — new patients want to know availability</li>
+        </ul>
+        <p style="color: #64748b; line-height: 1.7;">Missing any of these? Update your listing now — each missing item costs you ~15% more enquiries.</p>
         <div style="text-align: center; margin: 28px 0;">
-          ${btn('Check Your Score', `${SITE_URL}/owner/dashboard/`)}
+          ${btn('Optimize Your Listing', `${SITE_URL}/owner/dashboard/`)}
+        </div>
+      `, '#0f172a'),
+    },
+    // ── Trial Nurturing (Days 30-60) ──
+    {
+      stepId: 'owner_day30_trial_progress',
+      delayDays: 30,
+      subject: 'Your TMS List trial — halfway point',
+      buildHtml: (c) => emailWrapper(`
+        <h2 style="color: #1e293b; margin: 0 0 16px;">How's your trial going?</h2>
+        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, you've been on TMS List for 30 days now. Here's what Starter clinics typically see at this stage:</p>
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 20px; margin: 20px 0;">
+          <p style="color: #166534; font-weight: 700; margin: 0 0 8px;">After 30 days with Starter:</p>
+          <ul style="color: #15803d; margin: 0; padding-left: 20px; line-height: 2;">
+            <li>8-15 new patient enquiries per month</li>
+            <li>4x more profile views than free listings</li>
+            <li>Appear in featured search results</li>
+            <li>Instant SMS notifications for new enquiries</li>
+          </ul>
+        </div>
+        <p style="color: #64748b; line-height: 1.7;">Your trial continues for 60 more days. After that, you can choose to continue with a paid plan or stay on the free tier.</p>
+        <div style="text-align: center; margin: 28px 0;">
+          ${btn('View Your Analytics', `${SITE_URL}/owner/dashboard/`)}
+        </div>
+      `, '#0f172a'),
+    },
+    {
+      stepId: 'owner_day45_trial_midpoint',
+      delayDays: 45,
+      subject: '60 days left in your trial — here\'s what\'s next',
+      buildHtml: (c) => emailWrapper(`
+        <h2 style="color: #1e293b; margin: 0 0 16px;">Planning for after your trial</h2>
+        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, with 45 days left in your free trial, here's what to expect and how to prepare:</p>
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 20px 0;">
+          <p style="color: #1e40af; font-weight: 700; margin: 0 0 8px;">Before your trial ends:</p>
+          <ol style="color: #1d4ed8; margin: 0; padding-left: 20px; line-height: 2;">
+            <li>Review your enquiry count — has your listing attracted patients?</li>
+            <li>Check which features you'd miss if downgraded to free</li>
+            <li>Decide if the monthly cost is justified by patient volume</li>
+            <li>Contact us for annual pricing (saves 20%)</li>
+          </ol>
+        </div>
+        <p style="color: #64748b; line-height: 1.7;">We'll remind you 7 days before the trial ends. No charges will happen automatically.</p>
+        <div style="text-align: center; margin: 28px 0;">
+          ${btn('Review Your Stats', `${SITE_URL}/owner/dashboard/`)}
+        </div>
+      `, '#0f172a'),
+    },
+    {
+      stepId: 'owner_day60_trial_check',
+      delayDays: 60,
+      subject: 'Your trial ends in 30 days — what to do next',
+      buildHtml: (c) => emailWrapper(`
+        <h2 style="color: #1e293b; margin: 0 0 16px;">30 days to decide on your plan</h2>
+        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, your 90-day trial has 30 days remaining. Here's a quick comparison to help you decide:</p>
+        <div style="overflow-x: auto; margin: 20px 0;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            <thead>
+              <tr style="background: #f8fafc;">
+                <th style="padding: 10px 12px; text-align: left; border-bottom: 2px solid #e2e8f0; color: #334155;">Feature</th>
+                <th style="padding: 10px 12px; text-align: center; border-bottom: 2px solid #e2e8f0; color: #334155;">Free</th>
+                <th style="padding: 10px 12px; text-align: center; border-bottom: 2px solid #e2e8f0; color: #334155;">Starter ($29/mo)</th>
+              </tr>
+            </thead>
+            <tbody style="color: #64748b;">
+              <tr><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;">Patient enquiries</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: center;">Form only</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: center;">Instant SMS + email</td></tr>
+              <tr><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;">Analytics dashboard</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: center;">—</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: center;">✓</td></tr>
+              <tr><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;">Respond to reviews</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: center;">—</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: center;">✓</td></tr>
+              <tr><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9;">TMS devices displayed</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: center;">—</td><td style="padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: center;">✓</td></tr>
+              <tr><td style="padding: 10px 12px;">Search placement</td><td style="padding: 10px 12px; text-align: center;">Standard</td><td style="padding: 10px 12px; text-align: center;">Priority</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="text-align: center; margin: 28px 0;">
+          ${btn('Choose Your Plan', `${SITE_URL}/pricing/`, '#059669')}
+        </div>
+      `, '#0f172a'),
+    },
+    // ── Post-Trial Conversion (Days 90+) ──
+    {
+      stepId: 'owner_day90_trial_ended',
+      delayDays: 90,
+      subject: 'Your TMS List trial has ended — continue growing',
+      buildHtml: (c) => emailWrapper(`
+        <h2 style="color: #1e293b; margin: 0 0 16px;">Your trial period has ended</h2>
+        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, your 90-day free trial on TMS List has ended. We've kept your listing active on the free tier, so nothing is lost.</p>
+        <p style="color: #64748b; line-height: 1.7;">Here's what you can do now:</p>
+        <div style="background: #f1f5f9; border-radius: 10px; padding: 20px; margin: 20px 0;">
+          <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0;">
+            <p style="color: #1e293b; font-weight: 700; margin: 0 0 4px;">Continue with Starter ($29/mo)</p>
+            <p style="color: #64748b; font-size: 14px; margin: 0;">Instant lead notifications, analytics, review responses, and more.</p>
+          </div>
+          <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0;">
+            <p style="color: #1e293b; font-weight: 700; margin: 0 0 4px;">Upgrade to Professional ($59/mo)</p>
+            <p style="color: #64748b; font-size: 14px; margin: 0;">Lead dashboard, featured placement, advanced analytics, and priority support.</p>
+          </div>
+          <div>
+            <p style="color: #1e293b; font-weight: 700; margin: 0 0 4px;">Stay on Free tier</p>
+            <p style="color: #64748b; font-size: 14px; margin: 0;">Your listing remains active with basic features. Upgrade anytime.</p>
+          </div>
+        </div>
+        <p style="color: #64748b; line-height: 1.7;">Talk to our team if you have questions about which plan is right for your clinic.</p>
+        <div style="text-align: center; margin: 28px 0;">
+          ${btn('Upgrade Your Plan', `${SITE_URL}/pricing/`, '#059669')}
+        </div>
+      `, '#0f172a'),
+    },
+    {
+      stepId: 'owner_day105_trial_expired',
+      delayDays: 105,
+      subject: 'Special offer: 3 months free on annual Starter',
+      buildHtml: (c) => emailWrapper(`
+        <h2 style="color: #1e293b; margin: 0 0 16px;">A special offer for TMS List clinics</h2>
+        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, as a thank you for listing with us, we're offering <strong>3 months free</strong> on an annual Starter plan — that's $87 in savings.</p>
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 20px; margin: 20px 0;">
+          <p style="color: #166534; font-weight: 700; margin: 0 0 8px;">Annual Starter: $290/year (save 20%)</p>
+          <ul style="color: #15803d; margin: 8px 0 0; padding-left: 20px; line-height: 2;">
+            <li>12 months of Starter features</li>
+            <li>3 months FREE (limited time)</li>
+            <li>Billed annually — no surprises</li>
+            <li>Cancel anytime</li>
+          </ul>
+        </div>
+        <p style="color: #64748b; line-height: 1.7;">This offer expires in 15 days. Claim it before your listing loses the priority search benefits.</p>
+        <div style="text-align: center; margin: 28px 0;">
+          ${btn('Claim 3 Months Free', `${SITE_URL}/pricing/`, '#059669')}
+        </div>
+      `, '#0f172a'),
+    },
+    {
+      stepId: 'owner_day120_trial_expired_2',
+      delayDays: 120,
+      subject: 'What you\'ll miss without Starter — patient stories',
+      buildHtml: (c) => emailWrapper(`
+        <h2 style="color: #1e293b; margin: 0 0 16px;">Clinics like yours are growing with Starter</h2>
+        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, we wanted to share what clinics are reporting after upgrading to Starter:</p>
+        <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 20px; margin: 20px 0;">
+          <p style="color: #92400e; font-size: 14px; margin: 0 0 16px; font-style: italic;">"In 3 months with Starter, we went from 2 enquiries/week to 8. The instant SMS notifications mean I can call patients before they move on to another clinic."<br/><br/>— Dr. Sarah Chen, TMS Institute of the West</p>
+        </div>
+        <div style="background: #f1f5f9; border-radius: 10px; padding: 20px; margin: 20px 0;">
+          <p style="color: #1e293b; font-weight: 700; margin: 0 0 8px;">Why clinics upgrade:</p>
+          <ul style="color: #64748b; margin: 0; padding-left: 20px; line-height: 2;">
+            <li>Patient enquiries arrive via SMS — respond in minutes, not hours</li>
+            <li>Analytics show exactly which profiles and photos drive clicks</li>
+            <li>Respond to patient reviews publicly — builds trust</li>
+            <li>Priority search placement means more visibility</li>
+          </ul>
+        </div>
+        <div style="text-align: center; margin: 28px 0;">
+          ${btn('See Starter Features', `${SITE_URL}/pricing/`, '#059669')}
+        </div>
+      `, '#0f172a'),
+    },
+    {
+      stepId: 'owner_day150_reactivation',
+      delayDays: 150,
+      subject: 'It\'s been 150 days — is your listing working for you?',
+      buildHtml: (c) => emailWrapper(`
+        <h2 style="color: #1e293b; margin: 0 0 16px;">Let's make your listing work harder</h2>
+        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, it's been a while since your trial ended. We want to make sure your listing is actually working for your clinic.</p>
+        <p style="color: #64748b; line-height: 1.7;">Quick question: have you received any patient enquiries in the past 30 days?</p>
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 20px 0;">
+          <p style="color: #1e40af; font-weight: 700; margin: 0 0 8px;">If not, here's what might help:</p>
+          <ul style="color: #1d4ed8; margin: 0; padding-left: 20px; line-height: 2;">
+            <li><strong>Add more photos</strong> — listings with 5+ photos get 2x more enquiries</li>
+            <li><strong>List insurance carriers</strong> — patients filter by accepted insurance</li>
+            <li><strong>Respond to reviews</strong> — builds trust and signals active management</li>
+            <li><strong>Add doctor profiles</strong> — credentials matter to patients</li>
+          </ul>
+        </div>
+        <p style="color: #64748b; line-height: 1.7;">Or upgrade to Starter for $29/month and get instant lead notifications to your phone.</p>
+        <div style="text-align: center; margin: 28px 0;">
+          ${btn('Improve My Listing', `${SITE_URL}/owner/dashboard/`)}
+        </div>
+      `, '#0f172a'),
+    },
+    // ── Listing Optimization (ongoing) ──
+    {
+      stepId: 'owner_day75_seasonal',
+      delayDays: 75,
+      subject: 'Q&A: How to get more TMS patient enquiries this quarter',
+      buildHtml: (c) => emailWrapper(`
+        <h2 style="color: #1e293b; margin: 0 0 16px;">Grow your TMS practice this quarter</h2>
+        <p style="color: #64748b; line-height: 1.7;">Hi ${c.name}, we analyzed what separates clinics with consistent patient enquiries from those with sporadic ones. Here's what we found:</p>
+        <div style="background: #f1f5f9; border-radius: 10px; padding: 20px; margin: 20px 0;">
+          <p style="color: #1e293b; font-weight: 700; margin: 0 0 12px;">Top 3 drivers of consistent patient enquiries:</p>
+          <ol style="color: #64748b; margin: 0; padding-left: 20px; line-height: 2;">
+            <li><strong>Response time under 2 hours</strong> — patients contact 3+ clinics</li>
+            <li><strong>5+ patient reviews</strong> — builds trust immediately</li>
+            <li><strong>Insurance info complete</strong> — #1 filter patients use</li>
+          </ol>
+        </div>
+        <p style="color: #64748b; line-height: 1.7;">Clinics that check all three receive an average of <strong>12 new patient enquiries per month</strong>.</p>
+        <div style="text-align: center; margin: 28px 0;">
+          ${btn('Audit My Listing', `${SITE_URL}/owner/dashboard/`)}
         </div>
       `, '#0f172a'),
     },

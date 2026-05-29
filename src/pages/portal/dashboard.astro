@@ -14,7 +14,7 @@ if (!hasRole(session, 'admin', 'editor', 'clinic_owner', 'viewer')) {
 }
 ---
 
-<Layout title="Doctor Dashboard | TMS List" description="Manage your clinic listing on TMS List." noindex={true}>
+<Layout title="Portal Dashboard | TMS List" description="View and manage your TMS clinic listing, leads, and analytics on TMS List." noindex={true}>
   <div class="flex min-h-screen bg-[var(--paper2)]">
     <PortalSidebar client:load currentPage="dashboard" userEmail={session.email} userId={session.userId} />
     <main class="flex-1 lg:ml-64 py-8">
