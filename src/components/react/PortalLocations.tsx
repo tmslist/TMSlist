@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '../../lib/react-query';
 import { PortalCard, PortalButton, LoadingScreen, ErrorScreen } from './PortalUI';
@@ -138,9 +138,9 @@ function LocationsContent() {
   }
 
   // Fetch on mount
-  useState(() => {
+  useEffect(() => {
     fetchLocations();
-  });
+  }, []);
 
   if (loading && locations.length === 0) {
     return <LoadingScreen message="Loading locations..." />;
