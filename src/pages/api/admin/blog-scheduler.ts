@@ -272,3 +272,62 @@ export const GET: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
   }
 };
+
+// POST /api/admin/blog-scheduler/generate — generate markdown files for scheduled posts
+export const POST: APIRoute = async ({ request }) => {
+  const session = getSessionFromRequest(request);
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  try {
+    const body = await request.json();
+    const { all, month } = body as { all?: boolean; month?: number };
+
+    const manifest = await getManifest();
+    const existingSlugs = getExistingSlugs();
+    const now = new Date();
+
+    // Filter posts to generate
+    let postsToGenerate = manifest.filter((post) => {
+      if (existingSlugs.has(post.slug)) return false;
+      const publishDate = new Date(post.publishDate);
+      if (publishDate > now) return false; // not yet due
+      if (typeof month === 'number') {
+        return new Date(post.publishDate).getMonth() + 1 === month;
+      }
+      return true;
+    });
+
+    if (all && !month) {
+      // Generate all past-due posts
+      postsToGenerate = manifest.filter((post) => {
+        if (existingSlugs.has(post.slug)) return false;
+        return new Date(post.publishDate) <= now;
+      });
+    }
+
+    let generated = 0;
+    let errors = 0;
+
+    for (const post of postsToGenerate) {
+      try {
+        const filePath = join(BLOG_DIR, `${post.slug}.md`);
+        const content = buildMarkdown(post);
+        writeFileSync(filePath, content, 'utf-8');
+        generated++;
+      } catch (err) {
+        console.error(`Failed to write ${post.slug}.md:`, err);
+        errors++;
+      }
+    }
+
+    return new Response(JSON.stringify({ generated, errors, total: postsToGenerate.length }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (err) {
+    console.error('Blog scheduler POST error:', err);
+    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+  }
+};
