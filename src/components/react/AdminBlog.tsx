@@ -89,6 +89,9 @@ export default function AdminBlog() {
       if (res.ok) {
         setPosts(prev => prev.filter(p => p.id !== id));
         setTotal(prev => prev - 1);
+      } else if (res.status === 501) {
+        // Blog managed via content collections — show feedback
+        setError('Blog posts are managed via markdown files. Please delete them from src/content/blog/.');
       }
     } catch (err) {
       console.error('Delete failed:', err);

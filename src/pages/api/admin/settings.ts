@@ -91,6 +91,23 @@ const ALLOWED_SETTING_KEYS = new Set([
   'consent_banner_enabled', 'consent_banner_text',
   'review_auto_approve_threshold',
   'ranking_weights',
+  // Branding & Identity
+  'branding_site_name', 'branding_tagline', 'branding_primary_color', 'branding_logo_url',
+  // Social URL variants (Settings page sends these)
+  'social_twitter_url', 'social_facebook_url', 'social_linkedin_url',
+  'social_instagram_url', 'social_youtube_url',
+  // Analytics & Tracking variants (Settings page sends these)
+  'analytics_ga4_id', 'analytics_gsc_url', 'analytics_fb_pixel_id',
+  'analytics_hotjar_id', 'analytics_hubspot_embed',
+  // SEO Defaults
+  'seo_default_title', 'seo_default_description', 'seo_default_og_image', 'seo_canonical_base_url',
+  // Cookie & Privacy
+  'cookie_banner_enabled', 'cookie_consent_text', 'cookie_privacy_url',
+  // Sitemap & Crawling
+  'sitemap_enabled', 'robots_txt',
+  // Email
+  'from_email', 'reply_to_email',
+  'meta_title_template', 'meta_description',
 ]);
 
 // Save settings to siteSettings table
