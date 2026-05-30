@@ -5,6 +5,7 @@ import {
   forumCategories, forumPosts, forumComments, forumReports,
   forumVotes, users, auditLog
 } from '../../../db/schema';
+import { forumModerationLog } from '../../../db/schema';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
@@ -205,6 +206,85 @@ export const POST: APIRoute = async ({ request }) => {
         await db.update(forumPosts).set({ isLocked: !post[0].isLocked })
           .where(eq(forumPosts.id, targetId));
       }
+      return json({ success: true });
+    }
+
+    if (action === 'hide_post') {
+      await db.update(forumPosts).set({ status: 'removed' })
+        .where(eq(forumPosts.id, targetId));
+      await db.insert(forumModerationLog).values({
+        postId: targetId,
+        action: 'hidden',
+        moderatorId: session.userId,
+        reason: postData?.reason || null,
+      });
+      await db.insert(auditLog).values({
+        userId: session.userId,
+        action: 'hide_forum_post',
+        entityType: 'forum_post',
+        entityId: targetId,
+      });
+      return json({ success: true });
+    }
+
+    if (action === 'restore_post') {
+      await db.update(forumPosts).set({ status: 'published' })
+        .where(eq(forumPosts.id, targetId));
+      await db.insert(forumModerationLog).values({
+        postId: targetId,
+        action: 'restored',
+        moderatorId: session.userId,
+        reason: postData?.reason || null,
+      });
+      await db.insert(auditLog).values({
+        userId: session.userId,
+        action: 'restore_forum_post',
+        entityType: 'forum_post',
+        entityId: targetId,
+      });
+      return json({ success: true });
+    }
+
+    if (action === 'remove_comment') {
+      await db.update(forumComments).set({ status: 'removed' })
+        .where(eq(forumComments.id, targetId));
+      await db.insert(forumModerationLog).values({
+        commentId: targetId,
+        action: 'removed',
+        moderatorId: session.userId,
+        reason: postData?.reason || null,
+      });
+      return json({ success: true });
+    }
+
+    if (action === 'restore_comment') {
+      await db.update(forumComments).set({ status: 'published' })
+        .where(eq(forumComments.id, targetId));
+      await db.insert(forumModerationLog).values({
+        commentId: targetId,
+        action: 'restored',
+        moderatorId: session.userId,
+        reason: postData?.reason || null,
+      });
+      return json({ success: true });
+    }
+
+    if (action === 'warn_user') {
+      // Log warning to moderation log
+      await db.insert(forumModerationLog).values({
+        postId: targetType === 'post' ? targetId : null,
+        commentId: targetType === 'comment' ? targetId : null,
+        action: 'warned',
+        moderatorId: session.userId,
+        reason: postData?.reason || null,
+      });
+      await db.insert(auditLog).values({
+        userId: session.userId,
+        action: 'warn_forum_user',
+        entityType: targetType,
+        entityId: targetId,
+        details: { reason: postData?.reason },
+      });
       return json({ success: true });
     }
 

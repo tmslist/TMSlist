@@ -803,6 +803,22 @@ export const forumReports = pgTable('forum_reports', {
   index('idx_forum_reports_unresolved').on(table.resolved),
 ]);
 
+// ── FORUM MODERATION LOG ──────────────────────────────
+
+export const forumModerationLog = pgTable('forum_moderation_log', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  postId: uuid('post_id').references(() => forumPosts.id),
+  commentId: uuid('comment_id').references(() => forumComments.id),
+  action: text('action').notNull(), // flagged, hidden, removed, restored, warned
+  moderatorId: uuid('moderator_id').references(() => users.id),
+  reason: text('reason'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index('idx_forum_mod_log_post').on(table.postId),
+  index('idx_forum_mod_log_comment').on(table.commentId),
+  index('idx_forum_mod_log_moderator').on(table.moderatorId),
+]);
+
 // ── JOBS ──────────────────────────────────────
 
 export const jobs = pgTable('jobs', {
