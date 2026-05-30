@@ -115,13 +115,22 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     // Send admin notification email
-    await sendClaimVerificationEmail({
+    const emailResult = await sendClaimVerificationEmail({
       to: session.email,
       clinicName: clinic.name,
       clinicSlug: clinic.slug,
       verificationToken,
       requestedByEmail: session.email,
     });
+
+    // If email delivery failed, throw so user sees error
+    if (!emailResult) {
+      console.error('[claim] Email delivery failed for claim', claim.id);
+      return new Response(JSON.stringify({ error: 'Failed to send verification email' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     return new Response(JSON.stringify({ success: true, directClaim: false, pendingVerification: true }), {
       status: 200,
