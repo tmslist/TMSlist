@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import AdminInviteModal from './AdminInviteModal';
 
 interface User {
   id: string;
@@ -97,6 +98,7 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
   const [activityLogs, setActivityLogs] = useState<any[]>([]);
   const [activityLoading, setActivityLoading] = useState(false);
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [showInviteModal, setShowInviteModal] = useState(false);
   const [page, setPage] = useState(0);
   const limit = 25;
 
@@ -545,14 +547,21 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
         </div>
       )}
 
+      {/* Invite Modal */}
+      <AdminInviteModal
+        open={showInviteModal}
+        onClose={() => setShowInviteModal(false)}
+        onInvited={fetchUsers}
+      />
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold text-[var(--ink)]">Users</h2>
         <button
-          onClick={() => setShowAddForm(!showAddForm)}
+          onClick={() => setShowInviteModal(true)}
           className="px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors"
         >
-          + Add User
+          + Invite User
         </button>
       </div>
 

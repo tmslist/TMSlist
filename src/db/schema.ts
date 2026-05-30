@@ -10,6 +10,7 @@ import {
   pgEnum,
   index,
   uniqueIndex,
+  sql,
 } from 'drizzle-orm/pg-core';
 
 // ── ENUMS ──────────────────────────────────────
@@ -2289,6 +2290,28 @@ export const patientEnquiries = pgTable('patient_enquiries', {
   index('idx_patient_enquiries_assigned').on(table.assignedTo),
   index('idx_patient_enquiries_created').on(table.createdAt),
 ]);
+
+// ── ROLES & PERMISSIONS ──────────────────────────────
+
+export const roles = pgTable('roles', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull().unique(),
+  label: text('label').notNull(),
+  description: text('description'),
+  permissions: text('permissions').array().default(sql`'{}'`),
+  isSystem: boolean('is_system').default(false).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+export const permissions = pgTable('permissions', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  key: text('key').notNull().unique(),
+  label: text('label').notNull(),
+  description: text('description'),
+  category: text('category'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
 
 // ── ADMIN ACTION LOG ──────────────────────────────────
 export const adminActionLog = pgTable('admin_action_log', {

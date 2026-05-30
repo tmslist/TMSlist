@@ -518,3 +518,24 @@ export async function sendForumReplyNotification(data: {
     `,
   });
 }
+
+// ── GENERIC TRANSACTIONAL ───────────────────────────
+
+export async function sendTransactionalEmail(opts: {
+  to: string;
+  subject: string;
+  html: string;
+  from?: string;
+}) {
+  const resend = getResend();
+  if (!resend) {
+    console.error('[email] RESEND_API_KEY not set — cannot send transactional email');
+    return null;
+  }
+  return resend.emails.send({
+    from: opts.from ?? FROM,
+    to: opts.to,
+    subject: opts.subject,
+    html: opts.html,
+  });
+}

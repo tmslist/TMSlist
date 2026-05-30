@@ -1,0 +1,104 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+---
+<Layout title="Accept Invitation | TMS List Admin" noindex={true}>
+  <div class="min-h-screen bg-[var(--paper2)] flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+      <h1 class="text-2xl font-semibold text-[var(--ink)] mb-1">Accept Your Invitation</h1>
+      <p class="text-[var(--muted)] mb-6">Set your password to complete your account setup.</p>
+
+      <form id="accept-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-[var(--ink)] mb-1">Password</label>
+          <input type="password" name="password" id="password" required minlength="8"
+            class="w-full px-3 py-2 border border-[var(--line)] rounded-lg bg-transparent"
+            placeholder="At least 8 characters" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-[var(--ink)] mb-1">Confirm Password</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" required
+            class="w-full px-3 py-2 border border-[var(--line)] rounded-lg bg-transparent"
+            placeholder="Repeat your password" />
+        </div>
+
+        <div id="error" class="text-sm text-red-600 hidden"></div>
+
+        <button type="submit" id="submit-btn"
+          class="w-full px-4 py-2 bg-[var(--primary)] text-white rounded-lg font-semibold hover:opacity-90">
+          Create Account
+        </button>
+      </form>
+
+      <p class="text-center text-sm text-[var(--muted)] mt-4">
+        Already have an account? <a href="/admin/login" class="text-[var(--primary)] hover:underline">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('accept-form') as HTMLFormElement;
+    const errorEl = document.getElementById('error') as HTMLElement;
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+
+    if (!token) {
+      errorEl.textContent = 'Missing invitation token. Please use the link from your email.';
+      errorEl.classList.remove('hidden');
+      submitBtn.disabled = true;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Creating account...';
+
+      const password = (document.getElementById('password') as HTMLInputElement).value;
+      const confirm = (document.getElementById('confirmPassword') as HTMLInputElement).value;
+
+      if (password !== confirm) {
+        errorEl.textContent = 'Passwords do not match';
+        errorEl.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Account';
+        return;
+      }
+
+      if (!token) {
+        errorEl.textContent = 'Missing token';
+        errorEl.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Account';
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/admin/users/accept-invite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, password }),
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          errorEl.textContent = data.error || 'Failed to create account';
+          errorEl.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create Account';
+          return;
+        }
+
+        // Account created — redirect to admin login to sign in with new credentials
+        window.location.href = '/admin/login?welcome=true';
+      } catch {
+        errorEl.textContent = 'Network error. Please try again.';
+        errorEl.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Account';
+      }
+    });
+  </script>
+</Layout>
