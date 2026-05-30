@@ -16,6 +16,7 @@ export default function PortalClaimClinic({ userId, userEmail }: { userId: strin
   const [claiming, setClaiming] = useState(false);
   const [selectedClinic, setSelectedClinic] = useState<ClinicResult | null>(null);
   const [status, setStatus] = useState<'idle' | 'claimed' | 'pending' | 'error' | 'redirecting'>('idle');
+  const [alreadyClaimed, setAlreadyClaimed] = useState(false);
   const [error, setError] = useState('');
 
   // Check if user already has a clinic on mount
@@ -73,7 +74,7 @@ export default function PortalClaimClinic({ userId, userEmail }: { userId: strin
       if (!res.ok) {
         // Handle already-claimed state
         if (data.alreadyClaimed) {
-          window.location.href = '/portal/dashboard/';
+          setAlreadyClaimed(true);
           return;
         }
         throw new Error(data.error || 'Failed to claim clinic');
@@ -91,8 +92,8 @@ export default function PortalClaimClinic({ userId, userEmail }: { userId: strin
     }
   }
 
-  // Already claimed redirect
-  if (status === 'error' && error.includes('already have a clinic')) {
+  // Already claimed - show message
+  if (alreadyClaimed) {
     return (
       <div className="max-w-lg mx-auto text-center py-16">
         <div className="bg-white rounded-2xl shadow-sm border border-[var(--line)] p-8">
