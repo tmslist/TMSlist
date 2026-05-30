@@ -87,7 +87,39 @@ export default function OnboardingWizard({ userId, userEmail, onComplete }: Onbo
       const res = await fetch('/api/portal/clinic', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, onboarding: true }),
+        body: JSON.stringify({
+          // Copy non-availability/pricing fields directly
+          name: data.name,
+          description: data.description,
+          phone: data.phone,
+          email: data.email,
+          city: data.city,
+          state: data.state,
+          descriptionLong: data.descriptionLong,
+          machines: data.machines,
+          specialties: data.specialties,
+          openingHours: data.openingHours,
+
+          // Map flat fields to nested availability object
+          availability: {
+            accepting_new_patients: data.accepting_new_patients ?? true,
+            same_week_available: data.same_week_available ?? false,
+            evening_hours: data.evening_hours ?? false,
+            weekend_hours: data.weekend_hours ?? false,
+            home_visits: data.home_visits ?? false,
+          },
+
+          // Map flat fields to nested pricing object
+          pricing: {
+            price_range: data.price_range || 'moderate',
+            session_price_min: data.session_price_min || null,
+            session_price_max: data.session_price_max || null,
+            free_consultation: data.free_consultation ?? false,
+            accepts_insurance: data.accepts_insurance ?? false,
+          },
+
+          onboarding: true,
+        }),
       });
 
       if (!res.ok) throw new Error('Save failed');
