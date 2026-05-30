@@ -30,23 +30,23 @@ interface ReportResult {
 const AVAILABLE_METRICS: Metric[] = [
   // Leads
   { id: 'lead_count', label: 'Total Leads', category: 'leads' },
-  { id: 'lead_enquiry', label: 'Specialist Enquiries', category: 'leads' },
-  { id: 'lead_magnet', label: 'Lead Magnet Responses', category: 'leads' },
-  { id: 'lead_quiz', label: 'Quiz Completions', category: 'leads' },
+  { id: 'form_submissions', label: 'Form Submissions', category: 'leads' },
+  { id: 'newsletter_signups', label: 'Newsletter Signups', category: 'leads' },
+  { id: 'appointment_requests', label: 'Appointment Requests', category: 'leads' },
   // Revenue
   { id: 'mrr', label: 'Monthly Recurring Revenue', category: 'revenue' },
   { id: 'arr', label: 'Annual Recurring Revenue', category: 'revenue' },
-  { id: 'new_subs', label: 'New Subscriptions', category: 'revenue' },
-  { id: 'churned_subs', label: 'Churned Subscriptions', category: 'revenue' },
+  { id: 'arpu', label: 'Avg Revenue Per User', category: 'revenue' },
+  { id: 'churn_rate', label: 'Churn Rate', category: 'revenue' },
   // Engagement
-  { id: 'page_views', label: 'Page Views', category: 'engagement' },
-  { id: 'unique_visitors', label: 'Unique Visitors', category: 'engagement' },
-  { id: 'review_count', label: 'Reviews Submitted', category: 'engagement' },
-  { id: 'claim_rate', label: 'Clinic Claim Rate', category: 'engagement' },
+  { id: 'clinic_views', label: 'Clinic Profile Views', category: 'engagement' },
+  { id: 'page_views', label: 'Site Page Views', category: 'engagement' },
+  { id: 'reviews_count', label: 'Reviews Approved', category: 'engagement' },
+  { id: 'avg_rating', label: 'Average Clinic Rating', category: 'engagement' },
+  { id: 'nps', label: 'Net Promoter Score', category: 'engagement' },
   // Clinical
   { id: 'clinic_signups', label: 'New Clinic Signups', category: 'clinical' },
-  { id: 'doctor_approvals', label: 'Doctor Approvals', category: 'clinical' },
-  { id: 'booking_rate', label: 'Booking Rate', category: 'clinical' },
+  { id: 'doctor_signups', label: 'Doctor Signups', category: 'clinical' },
 ];
 
 const DATE_PRESETS = [

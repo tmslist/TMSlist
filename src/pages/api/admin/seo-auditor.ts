@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getSessionFromRequest, hasRole } from '../../../utils/auth.ts';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
+import { join, dirname } from 'path';
 
 export const prerender = false;
 
@@ -19,8 +21,32 @@ interface PageAudit {
   scannedAt: string;
 }
 
-// In-memory store for audits (persists during server runtime)
-const auditStore = new Map<string, PageAudit>();
+// ── File-backed store (survives server restarts) ─────────────────────────────
+const AUDIT_FILE = join(process.cwd(), '.tmp/seo-audits.json');
+let auditStore: Map<string, PageAudit> = new Map();
+
+function loadAudits(): Map<string, PageAudit> {
+  try {
+    const dir = dirname(AUDIT_FILE);
+    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+    if (existsSync(AUDIT_FILE)) {
+      const raw = readFileSync(AUDIT_FILE, 'utf-8');
+      const arr: PageAudit[] = JSON.parse(raw);
+      return new Map(arr.map(a => [a.url, a]));
+    }
+  } catch { /* start fresh */ }
+  return new Map();
+}
+
+function persistAudits(store: Map<string, PageAudit>) {
+  try {
+    const dir = dirname(AUDIT_FILE);
+    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+    writeFileSync(AUDIT_FILE, JSON.stringify(Array.from(store.values())), 'utf-8');
+  } catch { /* best-effort */ }
+}
+
+auditStore = loadAudits();
 
 function parseAuditIssues(
   html: string,
@@ -283,8 +309,9 @@ export const POST: APIRoute = async ({ request }) => {
 
     const audit = await runAudit(url);
 
-    // Store in memory with URL as key (overwrites previous scan of same URL)
+    // Store with URL as key (overwrites previous scan of same URL) and persist to disk
     auditStore.set(url, audit);
+    persistAudits(auditStore);
 
     return new Response(JSON.stringify({ data: audit }), {
       status: 200,
@@ -298,4 +325,27 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { 'Content-Type': 'application/json' },
     });
   }
+};
+
+// ── DELETE /api/admin/seo-auditor ───────────────────────────────────────────
+// Clear all audit results
+
+export const DELETE: APIRoute = async ({ request }) => {
+  const session = getSessionFromRequest(request);
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  auditStore = new Map();
+  try {
+    const dir = dirname(AUDIT_FILE);
+    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+    writeFileSync(AUDIT_FILE, '[]', 'utf-8');
+  } catch { /* best-effort */ }
+  return new Response(JSON.stringify({ success: true }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
 };
