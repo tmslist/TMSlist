@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface ClinicResult {
   id: string;
@@ -15,8 +15,27 @@ export default function PortalClaimClinic({ userId, userEmail }: { userId: strin
   const [searching, setSearching] = useState(false);
   const [claiming, setClaiming] = useState(false);
   const [selectedClinic, setSelectedClinic] = useState<ClinicResult | null>(null);
-  const [status, setStatus] = useState<'idle' | 'claimed' | 'pending' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'claimed' | 'pending' | 'error' | 'redirecting'>('idle');
   const [error, setError] = useState('');
+
+  // Check if user already has a clinic on mount
+  useEffect(() => {
+    fetch('/api/portal/dashboard')
+      .then(res => {
+        if (res.status === 401) {
+          window.location.href = '/portal/login/';
+          return;
+        }
+        if (!res.ok) return;
+        return res.json();
+      })
+      .then(data => {
+        if (data?.needsClaim === false && data?.clinic) {
+          window.location.href = '/portal/dashboard/';
+        }
+      })
+      .catch(() => { /* Continue normally */ });
+  }, []);
 
   async function handleSearch(e: React.FormEvent) {
     e.preventDefault();
@@ -52,6 +71,11 @@ export default function PortalClaimClinic({ userId, userEmail }: { userId: strin
       const data = await res.json();
 
       if (!res.ok) {
+        // Handle already-claimed state
+        if (data.alreadyClaimed) {
+          window.location.href = '/portal/dashboard/';
+          return;
+        }
         throw new Error(data.error || 'Failed to claim clinic');
       }
 
@@ -65,6 +89,29 @@ export default function PortalClaimClinic({ userId, userEmail }: { userId: strin
     } finally {
       setClaiming(false);
     }
+  }
+
+  // Already claimed redirect
+  if (status === 'error' && error.includes('already have a clinic')) {
+    return (
+      <div className="max-w-lg mx-auto text-center py-16">
+        <div className="bg-white rounded-2xl shadow-sm border border-[var(--line)] p-8">
+          <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-amber-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21m-3.75 3H21" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-semibold text-[var(--ink)] mb-2">Clinic Already Linked</h2>
+          <p className="text-[var(--muted)] mb-6">Your account is already linked to a clinic. Head to your dashboard to manage it.</p>
+          <a
+            href="/portal/dashboard/"
+            className="inline-flex items-center px-6 py-3 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-all"
+          >
+            Go to Dashboard
+          </a>
+        </div>
+      </div>
+    );
   }
 
   if (status === 'claimed') {
