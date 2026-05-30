@@ -2299,7 +2299,7 @@ export const roles = pgTable('roles', {
   label: text('label').notNull(),
   description: text('description'),
   permissions: text('permissions').array().default(sql`'{}'`),
-  isSystem: boolean('is_system').default(false).notNull(),
+  isSystem: boolean('is_system').notNull().default(false),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 });
