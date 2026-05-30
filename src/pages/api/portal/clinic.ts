@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getSessionFromRequest } from '../../../utils/auth';
+import { validateSessionStrict } from '../../../utils/auth';
 import { db } from '../../../db';
 import { clinics, users } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -12,7 +12,7 @@ async function getUserClinicId(userId: string): Promise<string | null> {
 }
 
 export const GET: APIRoute = async ({ request }) => {
-  const session = getSessionFromRequest(request);
+  const session = await validateSessionStrict(request);
   if (!session) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
   }
@@ -60,7 +60,7 @@ const ALLOWED_FIELDS = [
 ] as const;
 
 export const PUT: APIRoute = async ({ request }) => {
-  const session = getSessionFromRequest(request);
+  const session = await validateSessionStrict(request);
   if (!session) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
   }
@@ -68,20 +68,35 @@ export const PUT: APIRoute = async ({ request }) => {
   try {
     const clinicId = await getUserClinicId(session.userId);
     if (!clinicId) {
-      return new Response(JSON.stringify({ error: 'No clinic linked' }), { status: 403, headers: { 'Content-Type': 'application/json' } });
+      return new Response(JSON.stringify({ error: 'No clinic linked' }), { status: 404, headers: { 'Content-Type': 'application/json' } });
     }
+
+  if (session.role !== 'clinic_owner' && session.role !== 'admin') {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
     const body = await request.json();
 
     // Only allow whitelisted fields
     const updateData: Record<string, unknown> = {};
+    let fieldCount = 0;
     for (const field of ALLOWED_FIELDS) {
-      if (field in body) {
+      if (field in body && body[field] !== undefined) {
         updateData[field] = body[field];
+        fieldCount++;
       }
     }
 
-    updateData.updatedAt = new Date();
+    // Detect noop update (no allowed fields changed)
+    if (fieldCount === 0) {
+      return new Response(JSON.stringify({ success: true, noop: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     await db.update(clinics).set(updateData).where(eq(clinics.id, clinicId));
 
