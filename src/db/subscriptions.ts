@@ -17,6 +17,7 @@ export type FeatureFlags = {
   analytics: boolean;
   chatbot: boolean;
   multiLocation: boolean;
+  maxLocations: number; // 0 = primary only, 1 = +1 branch, 3 = +3 branches, -1 = unlimited
 };
 
 export type MarketingFeatureLimits = {
@@ -66,6 +67,7 @@ export const PLANS: Record<PlanId, {
       analytics: false,
       chatbot: false,
       multiLocation: false,
+      maxLocations: 0, // primary only
     },
     marketingFeatures: [
       'Basic clinic listing',
@@ -105,6 +107,7 @@ export const PLANS: Record<PlanId, {
       analytics: true,
       chatbot: false,
       multiLocation: false,
+      maxLocations: 0, // primary only
     },
     marketingFeatures: [
       'Everything in Free',
@@ -150,6 +153,7 @@ export const PLANS: Record<PlanId, {
       analytics: true,
       chatbot: false,
       multiLocation: false,
+      maxLocations: 3, // up to 3 additional branches
     },
     marketingFeatures: [
       'Everything in Starter',
@@ -193,6 +197,7 @@ export const PLANS: Record<PlanId, {
       analytics: true,
       chatbot: true,
       multiLocation: true,
+      maxLocations: -1, // unlimited
     },
     marketingFeatures: [
       'Everything in Professional',
@@ -244,6 +249,26 @@ export async function getClinicPlan(clinicId: string): Promise<PlanId> {
 export async function getClinicFeatures(clinicId: string): Promise<FeatureFlags> {
   const plan = await getClinicPlan(clinicId);
   return PLANS[plan].features;
+}
+
+/**
+ * Check if a clinic can add more locations under their current plan.
+ * Returns { allowed: true } if under limit, or { allowed: false, limit: number } if at limit.
+ */
+export async function checkLocationLimit(clinicId: string, currentCount: number): Promise<
+  { allowed: true } | { allowed: false; limit: number; current: number }
+> {
+  const features = await getClinicFeatures(clinicId);
+  const { maxLocations } = features;
+
+  // -1 means unlimited
+  if (maxLocations === -1) return { allowed: true };
+
+  if (currentCount >= maxLocations) {
+    return { allowed: false, limit: maxLocations, current: currentCount };
+  }
+
+  return { allowed: true };
 }
 
 export async function getClinicSubscription(clinicId: string) {
@@ -315,3 +340,40 @@ export const PLAN_PRICE_USD: Record<string, number> = {
   premium: 59,
   enterprise: 119,
 };
+
+/**
+ * Client-safe plan display data — used by React components.
+ * Single source of truth for all plan names, prices, and colors.
+ * Import this instead of hardcoding plan details in UI components.
+ */
+export const PLAN_DISPLAY: Record<PlanId, {
+  name: string;
+  price: number;       // USD monthly
+  priceLabel: string;  // formatted string e.g. "$29/mo"
+  color: string;       // CSS class for plan badge color
+}> = {
+  free: {
+    name: 'Free',
+    price: 0,
+    priceLabel: '$0/mo',
+    color: 'text-[var(--ink2)]',
+  },
+  pro: {
+    name: 'Starter',
+    price: 29,
+    priceLabel: '$29/mo',
+    color: 'text-[var(--accent)]',
+  },
+  premium: {
+    name: 'Professional',
+    price: 59,
+    priceLabel: '$59/mo',
+    color: 'text-[var(--accent)]',
+  },
+  enterprise: {
+    name: 'Clinic Group',
+    price: 119,
+    priceLabel: '$119/mo',
+    color: 'text-[var(--ink)]',
+  },
+} as const;
