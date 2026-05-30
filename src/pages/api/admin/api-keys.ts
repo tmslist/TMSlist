@@ -156,3 +156,47 @@ export const DELETE: APIRoute = async ({ request, url }) => {
     return json({ error: 'Internal server error' }, 500);
   }
 };
+
+// POST: Rotate an API key (invalidate old, generate new)
+export const POST_ROTATE: APIRoute = async ({ request }) => {
+  const session = getSessionFromRequest(request);
+  if (!session || !hasRole(session, 'admin')) {
+    return json({ error: 'Unauthorized' }, 401);
+  }
+
+  try {
+    const url = new URL(request.url);
+    const pathParts = url.pathname.split('/');
+    // /api/admin/api-keys/:id/rotate → last part is 'rotate', second-to-last is :id
+    const id = pathParts[pathParts.length - 2];
+
+    if (!id) return json({ error: 'Key ID required' }, 400);
+
+    const [existing] = await db.select().from(apiKeys).where(eq(apiKeys.id, id)).limit(1);
+    if (!existing) return json({ error: 'API key not found' }, 404);
+
+    const { key, keyHash, keyPrefix } = generateApiKey();
+
+    await db.update(apiKeys)
+      .set({ keyHash, keyPrefix, lastUsedAt: null })
+      .where(eq(apiKeys.id, id));
+
+    await db.insert(auditLog).values({
+      userId: session.userId,
+      action: 'rotate_api_key',
+      entityType: 'api_key',
+      entityId: id,
+    });
+
+    return json({
+      success: true,
+      keyId: id,
+      key, // full key shown once at rotation
+      keyPrefix,
+      message: 'Save this new key securely — it will not be shown again',
+    });
+  } catch (err) {
+    console.error('Rotate API key error:', err);
+    return json({ error: 'Internal server error' }, 500);
+  }
+};
