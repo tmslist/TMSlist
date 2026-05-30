@@ -392,10 +392,13 @@ export const sessions = pgTable('sessions', {
   lastUsedAt: timestamp('last_used_at', { withTimezone: true }).defaultNow(),
   userAgent: text('user_agent'),
   ipAddress: text('ip_address'),
+  revokedAt: timestamp('revoked_at', { withTimezone: true }),
+  revokedBy: uuid('revoked_by').references(() => users.id),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [
   index('idx_sessions_user').on(table.userId),
   index('idx_sessions_token').on(table.tokenHash),
+  index('idx_sessions_revoked').on(table.revokedAt),
 ]);
 
 // ── USERS (AUTH) ──────────────────────────────────
@@ -462,6 +465,7 @@ export const magicTokenPurposeEnum = pgEnum('magic_token_purpose', [
   'community-magic',
   'password-reset',
   'email-verification',
+  'invite',
 ]);
 
 export const magicTokens = pgTable('magic_tokens', {
@@ -471,6 +475,7 @@ export const magicTokens = pgTable('magic_tokens', {
   purpose: magicTokenPurposeEnum('purpose').notNull(),
   expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
   usedAt: timestamp('used_at', { withTimezone: true }),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>(),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [
   index('idx_magic_tokens_token').on(table.token),

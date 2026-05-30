@@ -561,6 +561,33 @@ export async function createMagicToken(email: string, purpose: MagicTokenPurpose
   return token;
 }
 
+export type InviteMetadata = {
+  name: string;
+  role: string;
+  permissions: string[];
+  invitedBy: string;
+};
+
+const INVITE_TOKEN_EXPIRY_DAYS = 7;
+
+export async function createInviteToken(
+  email: string,
+  metadata: InviteMetadata
+): Promise<string> {
+  const token = randomBytes(32).toString('hex');
+  const tokenHash = createHash('sha256').update(token).digest('hex');
+  const expiresAt = new Date(Date.now() + INVITE_TOKEN_EXPIRY_DAYS * 24 * 60 * 60 * 1000);
+
+  await db.insert(magicTokens).values({
+    email: email.toLowerCase(),
+    token: tokenHash,
+    purpose: 'invite',
+    expiresAt,
+    metadata,
+  });
+  return token;
+}
+
 export async function verifyMagicToken(
   token: string,
   purpose?: MagicTokenPurpose
