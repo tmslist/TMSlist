@@ -1493,7 +1493,11 @@ export const mediaLibrary = pgTable('media_library', {
   url: text('url').notNull(),
   mimeType: text('mime_type'),
   sizeBytes: integer('size_bytes'),
+  width: integer('width'),
+  height: integer('height'),
   alt: text('alt'),
+  folder: text('folder'),
+  tags: text('tags').array(),
   uploadedBy: uuid('uploaded_by').references(() => users.id),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 });
@@ -1597,7 +1601,11 @@ export const insurancePlans = pgTable('insurance_plans', {
   insurerId: uuid('insurer_id').notNull().references(() => insuranceInsurers.id, { onDelete: 'cascade' }),
   name: text('name').notNull(),
   planType: text('plan_type'),
+  state: text('state'),
   coveragePercent: integer('coverage_percent'),
+  coversTms: boolean('covers_tms').default(false),
+  priorAuthRequired: boolean('prior_auth_required').default(false),
+  typicalCopay: decimal('typical_copay', { precision: 10, scale: 2 }),
   active: boolean('active').default(true),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [
