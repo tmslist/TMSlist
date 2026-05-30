@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 interface EmailTemplate {
   id: string;
+  key: string;
   name: string;
   subject: string;
   body: string;
@@ -15,6 +16,7 @@ interface EmailTemplate {
 }
 
 interface TemplateInput {
+  key: string;
   name: string;
   subject: string;
   body: string;
@@ -192,7 +194,13 @@ export default function AdminEmailTemplates() {
       const res = await fetch('/api/admin/email-templates');
       if (res.status === 401) { window.location.href = '/admin/login'; return; }
       const json = await res.json();
-      if (res.ok) setTemplates(json.templates ?? []);
+      if (res.ok) {
+        const rows: any[] = json.data ?? json.templates ?? [];
+        setTemplates(rows.map((t: any) => ({
+          ...t,
+          body: t.bodyHtml ?? t.body ?? '',
+        })));
+      }
       else setTemplates([]);
     } catch {
       showToast('error', 'Failed to load templates');
@@ -211,6 +219,7 @@ export default function AdminEmailTemplates() {
   function startNew() {
     setEditing({
       id: '',
+      key: '',
       name: '',
       subject: '',
       body: '',
@@ -231,18 +240,34 @@ export default function AdminEmailTemplates() {
       showToast('error', 'Name and subject are required');
       return;
     }
+    if (!editing.id && !editing.key.trim()) {
+      showToast('error', 'Template key is required');
+      return;
+    }
     setSaving(true);
     try {
-      const method = editing.id ? 'PUT' : 'POST';
-      const url = editing.id ? `/api/admin/email-templates/${editing.id}` : '/api/admin/email-templates';
+      const isEdit = !!editing.id;
+      const method = isEdit ? 'PATCH' : 'POST';
+      const url = isEdit
+        ? `/api/admin/email-templates?id=${editing.id}`
+        : '/api/admin/email-templates';
+      const payload = {
+        ...(isEdit ? { key: editing.key } : {}),
+        name: editing.name,
+        subject: editing.subject,
+        bodyHtml: editing.body,
+        bodyText: null,
+        variables: editing.variables,
+        active: true,
+      };
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(editing),
+        body: JSON.stringify(payload),
       });
       if (res.status === 401) { window.location.href = '/admin/login'; return; }
       if (res.ok) {
-        showToast('success', editing.id ? 'Template updated' : 'Template created');
+        showToast('success', isEdit ? 'Template updated' : 'Template created');
         setShowForm(false);
         setEditing(null);
         fetchTemplates();
@@ -325,6 +350,17 @@ export default function AdminEmailTemplates() {
           </div>
           <div className="p-6 space-y-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Template Key *</label>
+                <input
+                  type="text"
+                  value={editing.key}
+                  onChange={(e) => setEditing((v) => v ? { ...v, key: e.target.value } : v)}
+                  className="w-full px-3 py-2 border border-[var(--line)] rounded-lg text-sm focus:border-[var(--ink2)] focus:ring-1 focus:ring-[rgba(10,22,40,0.15)]"
+                  placeholder="e.g. welcome-email"
+                  disabled={!!editing.id}
+                />
+              </div>
               <div>
                 <label className="block text-xs font-medium text-[var(--ink2)] mb-1">Template Name *</label>
                 <input
