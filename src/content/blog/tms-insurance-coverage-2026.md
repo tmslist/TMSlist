@@ -3,7 +3,7 @@ title: "TMS Coverage by Major Insurance Providers in 2026: A State-by-State Guid
 description: "Insurance coverage for TMS varies significantly by carrier, plan, and state. This guide covers what major insurers cover, common denial reasons, and how to get your TMS approved."
 author: "TMS List Editorial Team"
 publishDate: 2026-05-18
-category: insurance
+category: treatment
 tags: ["insurance", "coverage", "medicare", "medicaid", "prior authorization", "appeals"]
 image: "/images/blog-covers/tms-insurance-coverage-2026.svg"
 ---

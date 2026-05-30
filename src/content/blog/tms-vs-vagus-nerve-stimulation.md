@@ -3,7 +3,7 @@ title: "TMS vs. Vagus Nerve Stimulation: Comparing Two Brain Stimulation Approac
 description: "Both TMS and VNS are FDA-cleared brain stimulation treatments for depression, but they work very differently. Understanding the mechanisms, efficacy, and practical differences helps you make an informed choice."
 author: "TMS List Editorial Team"
 publishDate: 2026-05-08
-category: comparisons
+category: patient-guide
 tags: ["VNS", "vagus nerve stimulation", "brain stimulation", "comparison", "treatment options"]
 image: "/images/blog-covers/tms-vs-vagus-nerve-stimulation.svg"
 ---
