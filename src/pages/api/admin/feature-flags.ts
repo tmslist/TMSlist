@@ -35,7 +35,7 @@ export const GET: APIRoute = async ({ request, url }) => {
   }
 };
 
-// POST: Create flag OR toggle existing
+// POST: Create flag
 export const POST: APIRoute = async ({ request }) => {
   const session = getSessionFromRequest(request);
   if (!session || !hasRole(session, 'admin')) {
@@ -44,33 +44,14 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     const body = await request.json();
-
-    if (body.toggle && body.key) {
-      const flag = await db.select().from(featureFlags).where(eq(featureFlags.key, body.key)).limit(1);
-      if (flag[0]) {
-        await db.update(featureFlags).set({ isEnabled: !flag[0].isEnabled })
-          .where(eq(featureFlags.key, body.key));
-        await db.insert(auditLog).values({
-          userId: session.userId,
-          action: 'toggle_feature_flag',
-          entityType: 'feature_flag',
-          entityId: flag[0].id,
-          details: { key: body.key, newValue: !flag[0].isEnabled },
-        });
-        return json({ success: true, isEnabled: !flag[0].isEnabled });
-      }
-    }
-
-    const { key, description, isEnabled, rolloutPercent, targetRoles } = body;
+    const { key, description, enabled, rolloutPercentage } = body;
     if (!key) return json({ error: 'Key is required' }, 400);
 
     const [flag] = await db.insert(featureFlags).values({
       key,
       description: description || null,
-      isEnabled: isEnabled ?? false,
-      rolloutPercent: rolloutPercent ?? 0,
-      targetRoles: targetRoles ?? null,
-      createdBy: session.userId,
+      enabled: enabled ?? false,
+      rolloutPercentage: rolloutPercentage ?? null,
     }).returning();
 
     await db.insert(auditLog).values({
@@ -97,14 +78,16 @@ export const PUT: APIRoute = async ({ request }) => {
 
   try {
     const body = await request.json();
-    const { id, ...updates } = body;
+    const { id, enabled, rolloutPercentage, description } = body;
     if (!id) return json({ error: 'Flag ID required' }, 400);
 
-    const allowed = ['description', 'isEnabled', 'rolloutPercent', 'targetRoles'] as const;
     const safe: Record<string, unknown> = {};
-    for (const k of allowed) {
-      if (k in updates) safe[k] = updates[k];
-    }
+    if (enabled !== undefined) safe.enabled = enabled;
+    if (rolloutPercentage !== undefined) safe.rolloutPercentage = rolloutPercentage;
+    if (description !== undefined) safe.description = description;
+
+    if (Object.keys(safe).length === 0) return json({ error: 'No valid fields to update' }, 400);
+    safe.updatedAt = new Date();
 
     await db.update(featureFlags).set(safe).where(eq(featureFlags.id, id));
     await db.insert(auditLog).values({
