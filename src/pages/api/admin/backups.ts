@@ -49,3 +49,30 @@ export const DELETE: APIRoute = async ({ request, url }) => {
     return json({ success: true });
   } catch (err) { console.error('backups DELETE', err); return json({ error: 'Internal server error' }, 500); }
 };
+
+export const PATCH: APIRoute = async ({ request, url }) => {
+  const denied = guard(request); if (denied) return denied;
+  const id = url.searchParams.get('id');
+  if (!id) return json({ error: 'id required' }, 400);
+  try {
+    const body = await request.json();
+    const [row] = await db.update(backups).set({
+      ...(body.status != null && { status: body.status }),
+      ...(body.name != null && { name: body.name }),
+      ...(body.sizeBytes != null && { sizeBytes: body.sizeBytes }),
+      ...(body.location != null && { location: body.location }),
+    }).where(eq(backups.id, id)).returning();
+    return json({ data: row });
+  } catch (err) { console.error('backups PATCH', err); return json({ error: 'Internal server error' }, 500); }
+};
+
+export const POST_RESTORE: APIRoute = async ({ request, url }) => {
+  const s = getSessionFromRequest(request);
+  if (!s || !hasRole(s, 'admin')) return json({ error: 'Forbidden' }, 403);
+  const id = url.searchParams.get('id');
+  if (!id) return json({ error: 'id required' }, 400);
+  try {
+    const [row] = await db.update(backups).set({ status: 'restoring' }).where(eq(backups.id, id)).returning();
+    return json({ data: row });
+  } catch (err) { console.error('backups POST_RESTORE', err); return json({ error: 'Internal server error' }, 500); }
+};

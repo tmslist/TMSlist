@@ -133,7 +133,7 @@ export default function AdminBackupManager() {
   async function triggerManualBackup() {
     setRunningBackup(true);
     try {
-      const res = await fetch('/api/admin/backups', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) });
+      const res = await fetch('/api/admin/backups', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: `Manual Backup ${new Date().toISOString().slice(0, 16)}` }) });
       if (!res.ok) throw new Error('Failed to trigger backup');
       showToast('success', 'Backup initiated');
       fetchData();
