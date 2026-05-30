@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { validateSessionStrict } from '../../../utils/auth';
 import { db, sql } from '../../../db';
 import { users, clinicClaims } from '../../../db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 import { randomBytes } from 'node:crypto';
 import { sendClaimVerificationEmail } from '../../../utils/email';
 
@@ -97,6 +97,24 @@ export const POST: APIRoute = async ({ request }) => {
 
       return new Response(JSON.stringify({ success: true, directClaim: true, clinicSlug: clinic.slug }), {
         status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Check for existing pending claim
+    const [existingClaim] = await db
+      .select({ id: clinicClaims.id })
+      .from(clinicClaims)
+      .where(and(
+        eq(clinicClaims.clinicId, clinic.id),
+        eq(clinicClaims.userId, session.userId),
+        eq(clinicClaims.status, 'pending')
+      ))
+      .limit(1);
+
+    if (existingClaim) {
+      return new Response(JSON.stringify({ error: 'A claim request is already pending for this clinic' }), {
+        status: 409,
         headers: { 'Content-Type': 'application/json' },
       });
     }
