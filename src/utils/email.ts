@@ -199,7 +199,7 @@ export async function sendLeadNotification(data: {
               <p style="margin: 0; color: #334155; font-size: 14px; line-height: 1.6;">${data.message.replace(/\n/g, '<br>')}</p>
             </div>
           ` : ''}
-          ${data.sourceUrl ? `<p style="color: #94a3b8; font-size: 12px; margin-top: 16px;"><strong>Source:</strong> <a href="${data.sourceUrl}" style="color: #7c3aed;">${data.sourceUrl}</a></p>` : ''}
+          ${data.sourceUrl ? `<p style="color: #94a3b8; font-size: 12px; margin-top: 16px;"><strong>Source:</strong> <a href="${data.sourceUrl}" style="color: #7c3aed;">${data.sourceUrl.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</a></p>` : ''}
           <div style="margin-top: 20px;">
             <a href="${SITE_URL}/portal/leads" style="display: inline-block; background: #7c3aed; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">View in Admin Panel</a>
           </div>
@@ -256,6 +256,62 @@ export async function sendVerificationEmail(data: {
         <p style="color: #94a3b8; font-size: 14px; margin-top: 24px;">This link expires in 48 hours. If you didn't request this, please ignore this email.</p>
       </div>
     `,
+  });
+}
+
+export async function sendClaimVerificationEmail(data: {
+  to: string;
+  clinicName: string;
+  clinicSlug: string;
+  verificationToken: string;
+  requestedByEmail: string;
+}) {
+  const resend = getResend();
+  if (!resend) {
+    console.error('[email] RESEND_API_KEY not set — cannot send claim verification email');
+    return null;
+  }
+
+  const verifyUrl = `${SITE_URL}/admin/claims/verify?token=${data.verificationToken}`;
+
+  return resend.emails.send({
+    from: FROM,
+    to: ADMIN_EMAIL,
+    subject: `Clinic Claim Verification: ${data.clinicName}`,
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+<div style="max-width:600px;margin:0 auto;padding:40px 20px;">
+  <div style="background:#059669;padding:24px 32px;border-radius:12px 12px 0 0;">
+    <h1 style="margin:0;font-size:20px;font-weight:700;color:white;">TMS List</h1>
+    <p style="margin:4px 0 0;opacity:0.85;font-size:13px;color:white;">New Clinic Claim</p>
+  </div>
+  <div style="background:#ffffff;border:1px solid #d1fae5;border-top:0;padding:32px;border-radius:0 0 12px 12px;">
+    <p style="color:#374151;font-size:16px;margin:0 0 24px;">
+      A new clinic claim has been submitted and requires manual verification.
+    </p>
+    <div style="background:#f9fafb;border-radius:8px;padding:16px;margin-bottom:24px;">
+      <p style="margin:0 0 8px;font-size:14px;"><strong style="color:#374151;">Clinic:</strong> <span style="color:#059669;font-weight:600;">${data.clinicName}</span></p>
+      <p style="margin:0 0 8px;font-size:14px;"><strong style="color:#374151;">Requested by:</strong> <span style="color:#374151;">${data.requestedByEmail}</span></p>
+      <p style="margin:0;font-size:14px;"><strong style="color:#374151;">Profile:</strong> <a href="${SITE_URL}/clinic/${data.clinicSlug}/" style="color:#7c3aed;">${SITE_URL}/clinic/${data.clinicSlug}/</a></p>
+    </div>
+    <p style="color:#374151;font-size:14px;margin:0 0 24px;">
+      To verify this claim, click the button below. The claim will be automatically approved if the requesting email matches the clinic's listed email.
+    </p>
+    <div style="text-align:center;">
+      <a href="${verifyUrl}" style="display:inline-block;background:#059669;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;">Verify Claim</a>
+    </div>
+    <p style="color:#94a3b8;font-size:12px;margin-top:24px;margin-bottom:0;">
+      This claim will expire in 7 days if not verified.
+    </p>
+  </div>
+  <p style="color:#9ca3af;font-size:11px;text-align:center;margin-top:20px;">
+    TMS List Admin | <a href="${SITE_URL}/admin" style="color:#9ca3af;">Admin Panel</a>
+  </p>
+</div>
+</body></html>`,
   });
 }
 

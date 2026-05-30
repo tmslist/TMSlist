@@ -42,7 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
       message: parsed.data.message ? escapeHtml(parsed.data.message) : undefined,
       clinicName: parsed.data.clinicName ? escapeHtml(parsed.data.clinicName) : undefined,
       phone: parsed.data.phone ? escapeHtml(parsed.data.phone) : undefined,
-      sourceUrl: parsed.data.sourceUrl ? escapeHtml(parsed.data.sourceUrl) : undefined,
+      sourceUrl: parsed.data.sourceUrl || undefined,
     };
 
     const lead = await createLead(data);
