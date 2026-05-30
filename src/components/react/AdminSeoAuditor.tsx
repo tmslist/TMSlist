@@ -1,5 +1,5 @@
 'use client';
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface AuditIssue {
   type: 'error' | 'warning' | 'info';
@@ -7,7 +7,6 @@ interface AuditIssue {
   message: string;
   element?: string;
   recommendation: string;
-  status: 'open' | 'fixed';
 }
 
 interface PageAudit {
@@ -17,281 +16,268 @@ interface PageAudit {
   scannedAt: string;
 }
 
-interface SeoAuditsProps {
-  initialAudits?: PageAudit[];
+function ScoreBadge({ score }: { score: number }) {
+  const color = score >= 80 ? 'text-emerald-600' : score >= 60 ? 'text-amber-500' : 'text-red-500';
+  return (
+    <span className={`text-2xl font-bold ${color}`}>{score}</span>
+  );
 }
 
-export default function AdminSeoAuditor({ initialAudits = [] }: SeoAuditsProps) {
-  const [audits, setAudits] = useState<PageAudit[]>(initialAudits.length > 0 ? initialAudits : [
-    {
-      url: '/clinics',
-      score: 87,
-      issues: [
-        { type: 'warning', category: 'Meta Tags', message: 'Meta description is 95 characters (recommended: 120-160)', element: '<meta name="description">', recommendation: 'Expand meta description to between 120-160 characters.', status: 'open' },
-        { type: 'info', category: 'Images', message: '3 images missing alt attributes', element: '<img src="...">', recommendation: 'Add descriptive alt text to all images.', status: 'open' },
-        { type: 'error', category: 'Headings', message: 'Multiple H1 tags found (2)', element: '<h1>', recommendation: 'Each page should have exactly one H1 tag.', status: 'open' },
-        { type: 'warning', category: 'Schema', message: 'Missing LocalBusiness schema markup', element: '<script type="application/ld+json">', recommendation: 'Add structured data for LocalBusiness.', status: 'open' },
-        { type: 'info', category: 'Links', message: '5 internal links without descriptive anchor text', element: '<a href="...">', recommendation: 'Use descriptive anchor text for internal links.', status: 'open' },
-      ],
-      scannedAt: '2024-04-18T09:00:00Z',
-    },
-    {
-      url: '/us/california/los-angeles',
-      score: 72,
-      issues: [
-        { type: 'error', category: 'Title', message: 'Title tag is missing', element: '<title>', recommendation: 'Add a unique title tag for this page.', status: 'open' },
-        { type: 'error', category: 'Meta Tags', message: 'Meta description is missing', element: '<meta name="description">', recommendation: 'Add a meta description between 120-160 characters.', status: 'open' },
-        { type: 'warning', category: 'Speed', message: 'LCP is 4.2s (target: under 2.5s)', element: 'LCP', recommendation: 'Optimize Largest Contentful Paint by lazy-loading images.', status: 'open' },
-        { type: 'warning', category: 'Schema', message: 'BreadcrumbList schema is incomplete', element: '<script type="application/ld+json">', recommendation: 'Add complete breadcrumb schema with all parent items.', status: 'open' },
-        { type: 'info', category: 'Images', message: 'Image sizes should be optimized', element: '<img>', recommendation: 'Compress images and use modern formats like WebP.', status: 'open' },
-      ],
-      scannedAt: '2024-04-18T08:30:00Z',
-    },
-  ]);
+function IssueRow({ issue }: { issue: AuditIssue }) {
+  const [open, setOpen] = useState(false);
+  const colors = {
+    error: { badge: 'bg-red-100 text-red-700', label: 'Error' },
+    warning: { badge: 'bg-amber-100 text-amber-700', label: 'Warning' },
+    info: { badge: 'bg-blue-100 text-blue-700', label: 'Info' },
+  };
+  const c = colors[issue.type];
+  return (
+    <div className="border-b border-[var(--line)] last:border-0">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-[var(--paper2)] transition-colors"
+      >
+        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold ${c.badge}`}>
+          {c.label}
+        </span>
+        <span className="text-xs text-[var(--ink2)] font-medium">{issue.category}</span>
+        <span className="flex-1 text-sm text-[var(--ink)] truncate">{issue.message}</span>
+        <svg className={`w-4 h-4 text-[var(--muted)] shrink-0 transition-transform ${open ? 'rotate-180' : ''}`}
+          fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div className="px-4 pb-4 pt-1 bg-[var(--paper2)] border-t border-[var(--line)]">
+          {issue.element && (
+            <p className="text-xs text-[var(--muted)] mb-1">Element: <code className="font-mono bg-white px-1 rounded">{issue.element}</code></p>
+          )}
+          <p className="text-xs text-[var(--ink2)]">
+            <span className="font-semibold">Recommendation:</span> {issue.recommendation}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
 
+export default function AdminSEOAuditor() {
+  const [url, setUrl] = useState('');
   const [scanning, setScanning] = useState(false);
-  const [scanUrl, setScanUrl] = useState('');
-  const [filterType, setFilterType] = useState<'all' | 'error' | 'warning' | 'info'>('all');
-  const [showChecks, setShowChecks] = useState(true);
+  const [auditResult, setAuditResult] = useState<PageAudit | null>(null);
+  const [history, setHistory] = useState<PageAudit[]>([]);
+  const [loadingHistory, setLoadingHistory] = useState(true);
+  const [error, setError] = useState('');
 
-  const handleScan = useCallback(async () => {
-    if (!scanUrl) return;
+  const fetchHistory = useCallback(async () => {
+    try {
+      const res = await fetch('/api/admin/seo-auditor');
+      if (res.ok) {
+        const json = await res.json();
+        setHistory(json.data || []);
+      }
+    } catch {
+      // silent
+    } finally {
+      setLoadingHistory(false);
+    }
+  }, []);
+
+  useEffect(() => { fetchHistory(); }, [fetchHistory]);
+
+  const runAudit = useCallback(async (forceRefresh = false) => {
+    if (!url.trim()) return;
     setScanning(true);
+    setError('');
+    setAuditResult(null);
+
+    const normalized = url.startsWith('http') ? url : `https://${url}`;
     try {
       const res = await fetch('/api/admin/seo-auditor', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: scanUrl }),
+        body: JSON.stringify({ url: normalized, forceRefresh }),
       });
-      if (res.status === 401) { window.location.href = '/admin/login'; return; }
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ error: 'Scan failed' }));
-        throw new Error(err.error || `HTTP ${res.status}`);
-      }
       const json = await res.json();
-      const newAudit: PageAudit = {
-        url: json.data.url,
-        score: json.data.score,
-        issues: json.data.issues,
-        scannedAt: json.data.scannedAt,
-      };
-      setAudits(prev => [newAudit, ...prev]);
-      setScanUrl('');
-    } catch (err) {
-      alert(err instanceof Error ? err.message : 'Scan failed');
+      if (!res.ok) {
+        setError(json.error || 'Audit failed');
+        return;
+      }
+      setAuditResult(json.data);
+      fetchHistory();
+    } catch {
+      setError('Network error during audit');
     } finally {
       setScanning(false);
     }
-  }, [scanUrl]);
+  }, [url, fetchHistory]);
 
-  const scoreColor = (score: number) => {
-    if (score >= 90) return 'text-emerald-600';
-    if (score >= 70) return 'text-amber-600';
-    return 'text-red-600';
+  const clearHistory = async () => {
+    if (!window.confirm('Clear all audit history?')) return;
+    await fetch('/api/admin/seo-auditor', { method: 'DELETE' });
+    setHistory([]);
+    setAuditResult(null);
   };
 
-  const scoreBg = (score: number) => {
-    if (score >= 90) return 'bg-emerald-100';
-    if (score >= 70) return 'bg-amber-100';
-    return 'bg-red-100';
-  };
-
-  const issueTypeColor = (type: string) => {
-    if (type === 'error') return 'bg-red-100 text-red-700';
-    if (type === 'warning') return 'bg-amber-100 text-amber-700';
-    return 'bg-[rgba(10,22,40,0.1)] text-[var(--ink)]';
-  };
+  const groups = ['error', 'warning', 'info'] as const;
+  const errors = auditResult?.issues.filter(i => i.type === 'error') ?? [];
+  const warnings = auditResult?.issues.filter(i => i.type === 'warning') ?? [];
+  const infos = auditResult?.issues.filter(i => i.type === 'info') ?? [];
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-semibold text-[var(--ink)]">SEO Auditor</h2>
-          <p className="text-sm text-[var(--muted)] mt-1">Audit pages for SEO best practices and issues</p>
-        </div>
-      </div>
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-3xl font-semibold text-[var(--ink)]">SEO Auditor</h1>
+        <p className="text-[var(--muted)] mt-1">Scan any URL for SEO issues and get actionable recommendations</p>
+      </header>
 
-      {/* Overall Score */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
-          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Average Score</p>
-          <p className="text-3xl font-bold text-[var(--ink)] mt-1">{audits.length > 0 ? Math.round(audits.reduce((s, a) => s + a.score, 0) / audits.length) : '--'}</p>
-          <p className="text-xs text-[var(--muted)] mt-1">Across all pages</p>
-        </div>
-        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
-          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Critical Issues</p>
-          <p className="text-3xl font-bold text-red-600 mt-1">{audits.reduce((s, a) => s + a.issues.filter(i => i.type === 'error').length, 0)}</p>
-          <p className="text-xs text-[var(--muted)] mt-1">Need immediate fix</p>
-        </div>
-        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
-          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Warnings</p>
-          <p className="text-3xl font-bold text-amber-600 mt-1">{audits.reduce((s, a) => s + a.issues.filter(i => i.type === 'warning').length, 0)}</p>
-          <p className="text-xs text-[var(--muted)] mt-1">Should be addressed</p>
-        </div>
-        <div className="bg-white rounded-xl border border-[var(--line)] p-5 shadow-sm">
-          <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">Info Tips</p>
-          <p className="text-3xl font-bold text-[var(--ink)] mt-1">{audits.reduce((s, a) => s + a.issues.filter(i => i.type === 'info').length, 0)}</p>
-          <p className="text-xs text-[var(--muted)] mt-1">Improvements available</p>
-        </div>
-      </div>
-
-      {/* Scan New Page */}
-      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm p-5">
-        <h3 className="font-semibold text-[var(--ink)] mb-3">Scan a Page</h3>
-        <div className="flex items-center gap-3">
+      {/* Scan bar */}
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm p-6">
+        <div className="flex gap-3">
           <input
             type="url"
-            value={scanUrl}
-            onChange={(e) => setScanUrl(e.target.value)}
-            placeholder="https://tmslist.com/page-url"
-            className="flex-1 text-sm border border-[var(--line)] rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-[rgba(10,22,40,0.2)] focus:border-[rgba(10,22,40,0.2)] dark:bg-[var(--ink2)] dark:text-[var(--line)] dark:border-[var(--ink2)]"
+            value={url}
+            onChange={e => setUrl(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') runAudit(false); }}
+            placeholder="https://example.com or example.com"
+            className="flex-1 text-sm border border-[var(--line)] rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-[#1E2A3B] focus:border-[var(--ink2)] outline-none"
           />
           <button
-            onClick={handleScan}
-            disabled={scanning || !scanUrl}
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-[var(--ink)] rounded-lg hover:bg-[var(--ink)] disabled:opacity-50 transition-colors whitespace-nowrap"
+            onClick={() => runAudit(false)}
+            disabled={scanning || !url.trim()}
+            className="px-6 py-2.5 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:opacity-90 disabled:opacity-50 flex items-center gap-2 shrink-0"
           >
             {scanning ? (
               <>
-                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                </svg>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 Scanning...
               </>
             ) : (
               <>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                Run Audit
+                Scan
               </>
             )}
           </button>
+          {auditResult && (
+            <button
+              onClick={() => runAudit(true)}
+              disabled={scanning}
+              className="px-4 py-2.5 bg-[var(--paper2)] text-[var(--ink2)] text-sm font-medium rounded-lg border border-[var(--line)] hover:bg-[var(--paper2)] disabled:opacity-50 shrink-0"
+            >
+              Re-scan
+            </button>
+          )}
         </div>
-      </div>
-
-      {/* On-Page SEO Checklist */}
-      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm">
-        <div className="px-5 py-4 border-b border-[var(--line)] flex items-center justify-between">
-          <h3 className="font-semibold text-[var(--ink)]">On-Page SEO Checklist</h3>
-          <button
-            onClick={() => setShowChecks(!showChecks)}
-            className="text-xs text-[var(--muted)] hover:text-[var(--ink2)]"
-          >
-            {showChecks ? 'Collapse' : 'Expand'}
-          </button>
-        </div>
-        {showChecks && (
-          <div className="p-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Title Tag */}
-              <div className="flex items-start gap-3 p-3 bg-emerald-50 rounded-lg border border-emerald-100">
-                <svg className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <div>
-                  <p className="text-sm font-medium text-emerald-900">Title Tag</p>
-                  <p className="text-xs text-emerald-700">All pages have unique title tags</p>
-                </div>
-              </div>
-              {/* Meta Description */}
-              <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg border border-amber-100">
-                <svg className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-                <div>
-                  <p className="text-sm font-medium text-amber-900">Meta Description</p>
-                  <p className="text-xs text-amber-700">2 pages missing meta descriptions</p>
-                </div>
-              </div>
-              {/* Heading Structure */}
-              <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg border border-amber-100">
-                <svg className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-                <div>
-                  <p className="text-sm font-medium text-amber-900">Heading Structure</p>
-                  <p className="text-xs text-amber-700">1 page has multiple H1 tags</p>
-                </div>
-              </div>
-              {/* Images Alt */}
-              <div className="flex items-start gap-3 p-3 bg-[var(--paper2)] rounded-lg border border-[var(--line)]">
-                <svg className="w-5 h-5 text-[var(--ink)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <div>
-                  <p className="text-sm font-medium text-[var(--ink)]">Images with Alt Text</p>
-                  <p className="text-xs text-[var(--ink)]">3 images need alt attributes</p>
-                </div>
-              </div>
-              {/* Schema.org */}
-              <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg border border-amber-100">
-                <svg className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-                <div>
-                  <p className="text-sm font-medium text-amber-900">Schema.org Markup</p>
-                  <p className="text-xs text-amber-700">2 pages missing structured data</p>
-                </div>
-              </div>
-              {/* Broken Links */}
-              <div className="flex items-start gap-3 p-3 bg-emerald-50 rounded-lg border border-emerald-100">
-                <svg className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <div>
-                  <p className="text-sm font-medium text-emerald-900">Broken Links</p>
-                  <p className="text-xs text-emerald-700">No broken links detected</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        {error && (
+          <p className="mt-3 text-sm text-red-600">{error}</p>
         )}
       </div>
 
-      {/* Page Scores */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {audits.map((audit) => (
-          <div key={audit.url} className="bg-white rounded-xl border border-[var(--line)] shadow-sm">
-            <div className="px-5 py-4 border-b border-[var(--line)] flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${scoreBg(audit.score)}`}>
-                  <span className={`text-lg font-bold ${scoreColor(audit.score)}`}>{audit.score}</span>
+      {/* Results */}
+      {auditResult && (
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Score */}
+          <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm p-6 flex flex-col items-center justify-center">
+            <p className="text-xs text-[var(--muted)] uppercase tracking-wider mb-2">SEO Score</p>
+            <ScoreBadge score={auditResult.score} />
+            <p className="text-xs text-[var(--muted)] mt-1">/ 100</p>
+            <div className="mt-4 w-full space-y-2">
+              {[
+                { label: 'Errors', count: errors.length, color: 'bg-red-500' },
+                { label: 'Warnings', count: warnings.length, color: 'bg-amber-400' },
+                { label: 'Info', count: infos.length, color: 'bg-blue-400' },
+              ].map(({ label, count, color }) => (
+                <div key={label} className="flex items-center gap-2">
+                  <div className={`w-2 h-2 rounded-full ${color}`} />
+                  <span className="text-xs text-[var(--ink2)] flex-1">{label}</span>
+                  <span className="text-xs font-semibold text-[var(--ink)]">{count}</span>
                 </div>
-                <div>
-                  <p className="font-medium text-[var(--ink)] text-sm">{audit.url}</p>
-                  <p className="text-xs text-[var(--muted)]">
-                    Scanned {new Date(audit.scannedAt).toLocaleDateString('en', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
-                  </p>
-                </div>
-              </div>
-              <button className="text-xs text-[var(--ink)] hover:text-[var(--ink)] font-medium">Re-scan</button>
+              ))}
             </div>
-            <div className="divide-y divide-[var(--line)]">
-              {audit.issues
-                .filter(issue => filterType === 'all' || issue.type === filterType)
-                .map((issue, idx) => (
-                  <div key={idx} className="px-5 py-3 flex items-start gap-3">
-                    <span className={`mt-0.5 px-2 py-0.5 rounded text-xs font-medium uppercase shrink-0 ${issueTypeColor(issue.type)}`}>
-                      {issue.type}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-[var(--ink)]">{issue.message}</p>
-                      {issue.element && (
-                        <p className="text-xs text-[var(--muted)] font-mono mt-0.5">{issue.element}</p>
-                      )}
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-xs text-[var(--muted)] bg-[var(--paper2)] px-1.5 py-0.5 rounded">{issue.category}</span>
-                        <span className="text-xs text-[var(--ink)]">{issue.recommendation}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </div>
+            <p className="text-xs text-[var(--muted)] mt-4">{auditResult.url}</p>
+            <p className="text-xs text-[var(--muted)]">
+              Scanned {new Date(auditResult.scannedAt).toLocaleString()}
+            </p>
           </div>
-        ))}
+
+          {/* Issues */}
+          <div className="lg:col-span-3 bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
+            <div className="px-4 py-3 border-b border-[var(--line)]">
+              <h3 className="text-sm font-semibold text-[var(--ink)]">Issues ({auditResult.issues.length})</h3>
+            </div>
+            {auditResult.issues.length === 0 ? (
+              <div className="p-8 text-center">
+                <svg className="w-12 h-12 text-emerald-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-[var(--muted)] text-sm">No issues found!</p>
+              </div>
+            ) : (
+              groups.map(type => {
+                const items = auditResult.issues.filter(i => i.type === type);
+                if (items.length === 0) return null;
+                return (
+                  <div key={type}>
+                    {items.map((issue, i) => (
+                      <IssueRow key={i} issue={issue} />
+                    ))}
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* History */}
+      <div className="bg-white rounded-xl border border-[var(--line)] shadow-sm overflow-hidden">
+        <div className="px-6 py-4 border-b border-[var(--line)] flex items-center justify-between">
+          <h3 className="text-sm font-semibold text-[var(--ink)]">Scan History</h3>
+          {history.length > 0 && (
+            <button onClick={clearHistory} className="text-xs text-red-500 hover:text-red-600">
+              Clear history
+            </button>
+          )}
+        </div>
+        {loadingHistory ? (
+          <div className="py-8 text-center">
+            <div className="w-5 h-5 border-2 border-[var(--ink)] border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+            <p className="text-[var(--muted)] text-xs">Loading history...</p>
+          </div>
+        ) : history.length === 0 ? (
+          <div className="py-10 text-center">
+            <p className="text-[var(--muted)] text-sm">No scans yet. Enter a URL above to get started.</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-[var(--line)]">
+            {history.map((audit, i) => {
+              const scoreColor = audit.score >= 80 ? 'text-emerald-600' : audit.score >= 60 ? 'text-amber-500' : 'text-red-500';
+              return (
+                <button
+                  key={i}
+                  onClick={() => { setUrl(audit.url); setAuditResult(audit); }}
+                  className="w-full flex items-center gap-4 px-6 py-4 text-left hover:bg-[var(--paper2)] transition-colors"
+                >
+                  <span className={`text-lg font-bold w-10 text-right shrink-0 ${scoreColor}`}>{audit.score}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-[var(--ink)] truncate">{audit.url}</p>
+                    <p className="text-xs text-[var(--muted)]">
+                      {audit.issues.filter(i => i.type === 'error').length} errors,{' '}
+                      {audit.issues.filter(i => i.type === 'warning').length} warnings{' '}
+                      &middot; {new Date(audit.scannedAt).toLocaleString()}
+                    </p>
+                  </div>
+                  <svg className="w-4 h-4 text-[var(--muted)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
