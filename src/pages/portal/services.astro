@@ -1,0 +1,27 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import PortalServices from '../../components/react/PortalServices';
+import PortalSidebar from '../../components/react/PortalSidebar';
+import { getSessionFromRequest, hasRole } from '../../utils/auth';
+
+const session = getSessionFromRequest(Astro.request);
+if (!session || !hasRole(session, 'clinic_owner', 'admin', 'editor')) {
+  return Astro.redirect('/portal/login/');
+}
+---
+
+<Layout title="Services | Doctor Portal | TMS List" description="Manage treatments and specialties your clinic offers" noindex={true}>
+  <div class="flex min-h-screen bg-[var(--paper2)]">
+    <PortalSidebar client:load currentPage="services" userEmail={session.email} userId={session.userId} />
+    <main class="flex-1 md:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <div class="mb-8">
+          <h1 class="text-2xl font-bold text-[var(--ink)]">Services & Specialties</h1>
+          <p class="text-[var(--muted)] mt-1">Define the TMS machines and conditions you treat</p>
+        </div>
+        <PortalServices client:load />
+      </div>
+    </main>
+  </div>
+</Layout>
