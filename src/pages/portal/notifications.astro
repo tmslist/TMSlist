@@ -1,0 +1,27 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import PortalNotificationPrefs from '../../components/react/PortalNotificationPrefs';
+import PortalSidebar from '../../components/react/PortalSidebar';
+import { getSessionFromRequest, hasRole } from '../../utils/auth';
+
+const session = getSessionFromRequest(Astro.request);
+if (!session || !hasRole(session, 'clinic_owner', 'admin', 'editor', 'viewer')) {
+  return Astro.redirect('/portal/login/');
+}
+---
+
+<Layout title="Notifications | Doctor Portal | TMS List" description="Manage your notification preferences" noindex={true}>
+  <div class="flex min-h-screen bg-[var(--paper2)]">
+    <PortalSidebar client:load currentPage="notifications" userEmail={session.email} userId={session.userId} />
+    <main class="flex-1 md:ml-64 py-8">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <div class="mb-8">
+          <h1 class="text-2xl font-bold text-[var(--ink)]">Notification Preferences</h1>
+          <p class="text-[var(--muted)] mt-1">Control which alerts you receive and how</p>
+        </div>
+        <PortalNotificationPrefs client:load />
+      </div>
+    </main>
+  </div>
+</Layout>
