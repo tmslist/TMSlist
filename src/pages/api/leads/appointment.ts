@@ -82,7 +82,16 @@ export const POST: APIRoute = async ({ request }) => {
       .from(clinics)
       .where(eq(clinics.id, data.clinicId))
       .limit(1);
-    const notifyEmail = clinicRow?.email || undefined;
+
+    // Validate clinic exists and has email
+    if (!clinicRow?.email) {
+      return new Response(JSON.stringify({ error: 'Clinic not found' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    const notifyEmail = clinicRow.email;
     sendLeadNotification({
       clinicName: data.clinicName,
       clinicEmail: notifyEmail,

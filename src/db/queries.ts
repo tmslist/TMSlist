@@ -350,10 +350,15 @@ export async function getPatientEnquiries(opts?: {
   if (opts?.doctorId) conditions.push(eq(patientEnquiries.doctorId, opts.doctorId as any));
   if (opts?.assignedTo) conditions.push(eq(patientEnquiries.assignedTo, opts.assignedTo as any));
   if (opts?.search) {
+    // Escape LIKE metacharacters to prevent search injection
+    function escapeLike(s: string): string {
+      return s.replace(/[%_\\]/g, '\\$&');
+    }
+
     conditions.push(sql`(
-      ${patientEnquiries.name} ILIKE ${'%' + opts.search + '%'} OR
-      ${patientEnquiries.email} ILIKE ${'%' + opts.search + '%'} OR
-      ${doctors.name} ILIKE ${'%' + opts.search + '%'}
+      ${patientEnquiries.name} ILIKE ${'%' + escapeLike(opts.search) + '%'} ESCAPE '\\' OR
+      ${patientEnquiries.email} ILIKE ${'%' + escapeLike(opts.search) + '%'} ESCAPE '\\' OR
+      ${doctors.name} ILIKE ${'%' + escapeLike(opts.search) + '%'} ESCAPE '\\'
     )`);
   }
   const query = db.select({
