@@ -53,6 +53,23 @@ export const PATCH: APIRoute = async ({ request, url }) => {
   } catch (err) { console.error('backup-schedules PATCH', err); return json({ error: 'Internal server error' }, 500); }
 };
 
+export const PUT: APIRoute = async ({ request, url }) => {
+  const denied = guard(request); if (denied) return denied;
+  const id = url.searchParams.get('id');
+  if (!id) return json({ error: 'id required' }, 400);
+  try {
+    const body = await request.json();
+    const [row] = await db.update(backupSchedules).set({
+      ...(body.name != null && { name: body.name }),
+      ...(body.type != null && { type: body.type }),
+      ...(body.frequency != null && { frequency: body.frequency }),
+      ...(body.retentionCount != null && { retentionCount: body.retentionCount }),
+      ...(body.enabled != null && { enabled: body.enabled }),
+    }).where(eq(backupSchedules.id, id)).returning();
+    return json({ data: row });
+  } catch (err) { console.error('backup-schedules PUT', err); return json({ error: 'Internal server error' }, 500); }
+};
+
 export const DELETE: APIRoute = async ({ request, url }) => {
   const denied = guard(request); if (denied) return denied;
   const id = url.searchParams.get('id');

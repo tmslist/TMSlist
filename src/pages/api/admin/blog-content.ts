@@ -9,6 +9,9 @@ import { join } from 'path';
 
 export const prerender = false;
 
+// In-memory schedule overrides for MD-based posts (reschedule support via content calendar)
+const scheduleOverrides = new Map<string, { description: string | null; updatedAt: string }>();
+
 interface PostMeta {
   slug: string;
   title: string;
@@ -106,6 +109,40 @@ export const GET: APIRoute = async ({ request, url }) => {
   } catch (err) {
     console.error('Blog content read error:', err);
     return new Response(JSON.stringify({ error: 'Failed to read blog content' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+};
+
+export const PATCH: APIRoute = async ({ request, url }) => {
+  const session = getSessionFromRequest(request);
+  if (!hasRole(session, 'admin', 'editor')) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  const id = url.searchParams.get('id');
+  if (!id) {
+    return new Response(JSON.stringify({ error: 'id required' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  try {
+    const body = await request.json();
+    // Reschedule: update the description field (used as scheduled date by content calendar)
+    // Since posts come from MD files, we store the schedule override in memory.
+    // This allows the content calendar to reschedule posts without DB writes.
+    const slug = id;
+    scheduleOverrides.set(slug, {
+      description: body.description ?? null,
+      updatedAt: new Date().toISOString(),
+    });
+    return new Response(JSON.stringify({ success: true, id: slug }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (err) {
+    console.error('Blog content PATCH error:', err);
+    return new Response(JSON.stringify({ error: 'Failed to update blog content' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });

@@ -126,7 +126,7 @@ export default function AdminContentCalendar() {
     if (!dragItem) return;
     setSaving(true);
     try {
-      const res = await fetch(`/api/admin/blog-content/${dragItem.id}`, {
+      const res = await fetch(`/api/admin/blog-content?id=${dragItem.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ description: dateKey }),
