@@ -67,31 +67,34 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     const body = await request.json();
-    const { name, hypothesis, trafficPercent, holdoutPercent, primaryMetric, variants } = body;
+    const { key, description, status, startDate, endDate } = body;
 
-    if (!name || !primaryMetric) {
-      return json({ error: 'name and primaryMetric are required' }, 400);
+    if (!key) {
+      return json({ error: 'key is required' }, 400);
     }
 
     const [experiment] = await db.insert(experiments).values({
-      name,
-      hypothesis: hypothesis || null,
-      status: 'draft',
-      trafficPercent: trafficPercent ?? 10,
-      holdoutPercent: holdoutPercent ?? 0,
-      primaryMetric,
+      key,
+      description: description || null,
+      status: status || 'draft',
+      startDate: startDate ? new Date(startDate) : null,
+      endDate: endDate ? new Date(endDate) : null,
       createdBy: session.userId,
     }).returning();
 
     // Create initial variants: control + variant_a (and any extras provided)
-    const variantNames = variants?.length ? variants : ['control', 'variant_a'];
+    const variantKeys = body.variants?.length ? body.variants : ['control', 'variant_a'];
+    const totalWeight = 100;
+    const variantWeight = Math.floor(totalWeight / variantKeys.length);
+
     const variantRecords = await db.insert(experimentVariants).values(
-      variantNames.map((name: string) => ({
+      variantKeys.map((variantKey: string, i: number) => ({
         experimentId: experiment.id,
-        name,
-        changes: null,
-        impressions: 0,
-        conversions: 0,
+        variantKey,
+        description: null,
+        weight: i === 0 ? totalWeight - (variantWeight * (variantKeys.length - 1)) : variantWeight,
+        isControl: i === 0,
+        metrics: null,
       }))
     ).returning();
 
@@ -100,7 +103,7 @@ export const POST: APIRoute = async ({ request }) => {
       action: 'create_experiment',
       entityType: 'experiment',
       entityId: experiment.id,
-      details: { name, variants: variantNames },
+      details: { key, variants: variantKeys },
     });
 
     return json({ success: true, data: { ...experiment, variants: variantRecords } }, 201);
@@ -121,13 +124,15 @@ export const PUT: APIRoute = async ({ request }) => {
     const { id, ...updates } = body;
     if (!id) return json({ error: 'Experiment ID required' }, 400);
 
-    const allowed = ['name', 'hypothesis', 'status', 'trafficPercent', 'holdoutPercent', 'primaryMetric', 'winnerVariant'] as const;
+    const allowed = ['key', 'description', 'status', 'startDate', 'endDate'] as const;
     const safe: Record<string, unknown> = {};
-    for (const k of allowed) if (k in updates) safe[k] = updates[k];
-
-    // Handle status transitions
-    if (safe.status === 'running') safe.startedAt = new Date();
-    if (safe.status === 'concluded') safe.concludedAt = new Date();
+    for (const k of allowed) if (k in updates) {
+      if (k === 'startDate' || k === 'endDate') {
+        safe[k] = updates[k] ? new Date(updates[k] as string) : null;
+      } else {
+        safe[k] = updates[k];
+      }
+    }
 
     if (Object.keys(safe).length === 0) return json({ error: 'No valid fields to update' }, 400);
 
