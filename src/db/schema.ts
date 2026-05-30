@@ -228,6 +228,44 @@ export const clinics = pgTable('clinics', {
   index('idx_clinics_country').on(table.country),
 ]);
 
+// ── CLINIC LOCATIONS ──────────────────────────────────────
+// Additional locations for multi-location clinic chains.
+// The primary location is stored directly on the clinics table;
+// additional branches are stored here.
+
+export const locations = pgTable('locations', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  clinicId: uuid('clinic_id').notNull().references(() => clinics.id, { onDelete: 'cascade' }),
+
+  // Location details
+  name: text('name').notNull(),           // e.g. "Downtown Branch", "Westside Clinic"
+  address: text('address'),
+  city: text('city').notNull(),
+  state: text('state').notNull(),
+  zip: text('zip'),
+  country: text('country').default('US').notNull(),
+  lat: decimal('lat', { precision: 10, scale: 7 }),
+  lng: decimal('lng', { precision: 10, scale: 7 }),
+
+  // Contact
+  phone: text('phone'),
+  email: text('email'),
+
+  // Operating hours for this location
+  openingHours: text('opening_hours').array(),
+
+  // Status
+  isActive: boolean('is_active').default(true).notNull(),
+
+  // Timestamps
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
+}, (table) => [
+  index('idx_locations_clinic').on(table.clinicId),
+  index('idx_locations_active').on(table.clinicId, table.isActive),
+  uniqueIndex('uq_locations_clinic_name').on(table.clinicId, table.name),
+]);
+
 // ── DOCTORS ──────────────────────────────────────
 
 export const doctors = pgTable('doctors', {
@@ -408,6 +446,8 @@ export const users = pgTable('users', {
     nickname?: string;
     createdAt: string;
   }>>(),
+  // Onboarding tracking
+  onboardingCompletedAt: timestamp('onboarding_completed_at', { withTimezone: true }),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull().$onUpdate(() => new Date()),
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
 }, (table) => [
@@ -1764,6 +1804,8 @@ export type AdminActionLog = typeof adminActionLog.$inferSelect;
 
 export type Clinic = typeof clinics.$inferSelect;
 export type NewClinic = typeof clinics.$inferInsert;
+export type Location = typeof locations.$inferSelect;
+export type NewLocation = typeof locations.$inferInsert;
 export type Doctor = typeof doctors.$inferSelect;
 export type NewDoctor = typeof doctors.$inferInsert;
 export type Review = typeof reviews.$inferSelect;

@@ -1,0 +1,584 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FAQSchema from '../components/FAQSchema.astro';
+import { buildFAQSchema } from '../utils/seo';
+
+const title = "What Is TMS Therapy? Complete Guide to Transcranial Magnetic Stimulation";
+const description = "Learn everything about TMS therapy: how it works, what it treats, effectiveness rates, side effects, costs, and what to expect. Complete guide for patients considering TMS treatment.";
+
+const faqs = [
+  {
+    q: "What does TMS stand for?",
+    a: "TMS stands for Transcranial Magnetic Stimulation. It's a non-invasive brain stimulation technique that uses focused magnetic pulses to activate neurons in specific areas of the brain, particularly those associated with mood regulation and mental health."
+  },
+  {
+    q: "How does TMS therapy work?",
+    a: "During a TMS session, a small coil is placed against your scalp, typically over the left prefrontal cortex (the brain region associated with mood regulation). The coil generates brief magnetic pulses—similar in strength to an MRI—that pass through the skull and stimulate neurons. These pulses cause neurons to fire, helping restore normal activity in underactive brain circuits. The procedure is painless, requires no anesthesia, and you remain fully awake throughout."
+  },
+  {
+    q: "Is TMS the same as ECT or electroconvulsive therapy?",
+    a: "No, TMS and ECT are fundamentally different treatments. ECT (electroconvulsive therapy) requires general anesthesia and induces controlled seizures. It is typically reserved for severe, treatment-resistant cases and can cause memory side effects. TMS, by contrast, is non-invasive, requires no anesthesia, causes no seizures, and has no memory impairment. Most patients describe TMS as a mild tapping or clicking sensation on the scalp. TMS is considered a first-line treatment for treatment-resistant depression, while ECT is typically a last resort."
+  },
+  {
+    q: "What conditions does the FDA clear TMS for?",
+    a: "The FDA has cleared TMS for: Major Depressive Disorder (2008) - when patients haven't responded to at least one antidepressant medication; Obsessive-Compulsive Disorder (2018) - using the BrainsWay Deep TMS system; Smoking Cessation (2020) - to reduce nicotine cravings. Additionally, the FDA has cleared TMS for anxious depression (2020). TMS is also used off-label for anxiety, PTSD, bipolar depression, chronic pain, migraines, and other conditions with growing clinical evidence."
+  },
+  {
+    q: "How effective is TMS for depression?",
+    a: "Clinical research consistently demonstrates TMS efficacy for depression: In clinical trials, 83% of patients respond to TMS (showing 50%+ improvement in depression scores), 62% achieve full remission (PHQ-9 score below 5), response rates are highest (90%+) in patients with moderate treatment resistance (2-4 failed medications), and effects are sustained at 6-month and 12-month follow-ups with maintenance treatment. These outcomes compare favorably to antidepressant medications (40-60% response rate) and talk therapy (40-50%)."
+  },
+  {
+    q: "How long does a TMS treatment course take?",
+    a: "A standard TMS treatment course consists of 36 sessions over 6-9 weeks: five sessions per week for the first 4-6 weeks, then tapering to 2-3 sessions per week. Each standard TMS session takes 19-37 minutes. Theta Burst Stimulation (TBS), a newer protocol, reduces session time to just 3-6 minutes while maintaining comparable efficacy. Most patients can drive themselves to and from appointments and return to normal activities immediately after each session."
+  },
+  {
+    q: "What are the side effects of TMS therapy?",
+    a: "TMS is generally well-tolerated with minimal side effects. The most common include: mild scalp discomfort or headache during stimulation (experienced by approximately 40% of patients, typically resolves within the first week of treatment), lightheadedness immediately after treatment (uncommon), and rare instances of facial muscle twitching during stimulation. Critically, TMS does not cause the systemic side effects associated with antidepressants—no weight gain, sexual dysfunction, sedation, nausea, or cognitive impairment. Unlike ECT, TMS does not cause memory loss. Seizures are extremely rare (less than 0.1% of cases) and occur primarily in patients with pre-existing epilepsy."
+  },
+  {
+    q: "Who is a good candidate for TMS therapy?",
+    a: "You may be a good candidate for TMS if you have been diagnosed with major depressive disorder that hasn't responded adequately to one or more antidepressant medications, if you experience intolerable side effects from antidepressants, if you prefer a non-medication treatment approach, or if you want to augment your current medication regimen. TMS is most effective for patients with moderate treatment resistance (2-4 failed medication trials). Patients with severe treatment resistance (5+ failed medications) may still benefit but typically see reduced response rates. A comprehensive psychiatric evaluation determines whether TMS is appropriate for your specific situation."
+  },
+  {
+    q: "Who should NOT receive TMS therapy?",
+    a: "TMS is not recommended for patients with: Epilepsy or a history of seizures, metal implants in or near the head (including pacemakers, cochlear implants, aneurysm clips, deep brain stimulators, bullet fragments near the brain), brain tumors or brain lesions, active substance use disorders requiring detoxification first, severe head trauma, or pregnancy (particularly first trimester). Patients over70, those with mild cognitive impairment, or those with comorbid personality disorders may have reduced response rates but can still be treated. Always disclose your complete medical history during the psychiatric evaluation."
+  },
+  {
+    q: "How much does TMS therapy cost?",
+    a: "Without insurance, TMS typically costs $300-$500 per session, with a full36-session course ranging from $6,000 to $12,000. With insurance coverage, most patients pay a $30-$75 copay per session after their plan's prior authorization is approved. Medicare covers TMS for treatment-resistant depression with prior authorization. Most major insurance plans (BlueCross BlueShield, Aetna, Cigna, UnitedHealthcare) cover TMS under similar criteria. Many clinics offer payment plans for self-pay patients. Verify your specific benefits before starting treatment—our insurance team can help with prior authorization."
+  },
+  {
+    q: "Does TMS require anesthesia or sedation?",
+    a: "No, TMS does not require anesthesia or sedation. Unlike electroconvulsive therapy (ECT), which requires general anesthesia, TMS is performed while you are fully awake and alert. You can drive yourself to and from appointments, return to work immediately after each session, and resume normal daily activities without recovery time. Some patients listen to music or watch television during their TMS sessions to help them relax."
+  },
+  {
+    q: "How is TMS different from medication?",
+    a: "TMS and antidepressant medications work differently and have different side effect profiles. Medications work systemically—affecting the entire body and brain—through changes in neurotransmitter levels. TMS works locally—targeting specific brain regions with focused magnetic pulses. This means TMS has fewer systemic side effects: no weight gain, no sexual dysfunction, no sedation, no nausea. However, TMS requires daily clinic visits for 6-9 weeks, while medications are taken daily at home. Many patients combine TMS with continued medication therapy. Your psychiatrist will determine the best approach for your situation."
+  },
+  {
+    q: "What happens during a TMS session?",
+    a: "During a TMS session: You sit in a comfortable reclining chair. The TMS coil is positioned against your scalp over the target brain area. Your neurologist or psychiatrist determines your motor threshold—the minimum stimulation intensity needed to cause a thumb twitch. Treatment is delivered at slightly above motor threshold. You remain awake and alert, able to talk or listen to music. After 19-37 minutes (or3-6 minutes for Theta Burst), the session ends. You can drive home and resume normal activities immediately. No recovery time is needed."
+  },
+  {
+    q: "How do I know if TMS is working?",
+    a: "Most patients begin noticing subtle improvements by week 2-3 of treatment, with more significant changes typically appearing by week 4-6. Early signs of response may include: improved sleep, increased energy, better appetite, reduced anxiety, and a lifting of the 'fog' of depression. Depression symptom scales (PHQ-9, MADRS) are used to objectively track progress throughout treatment. Some patients don't notice improvement until several weeks after completing the full course. Your psychiatrist will monitor your progress at each visit and adjust treatment as needed."
+  },
+  {
+    q: "Is TMS covered by Medicare?",
+    a: "Yes, Medicare covers TMS therapy for treatment-resistant major depressive disorder. Medicare Part B covers TMS as a outpatient procedure when: you have a confirmed diagnosis of MDD, you have tried and failed at least four antidepressant medications (or cannot tolerate them due to side effects), and your physician determines TMS is medically necessary. Medicare typically covers 80% of the Medicare-approved amount after you meet your Part B deductible. Your copay depends on whether you have supplemental insurance. TMS List can help you understand Medicare coverage for TMS in your area."
+  }
+];
+
+const faqSchema = buildFAQSchema(faqs);
+---
+
+<Layout title={title} description={description} schema={faqSchema}>
+  <main style="background: var(--paper);">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden" style="background: var(--paper); padding-top: 8rem; padding-bottom: 4rem; border-bottom: 1px solid var(--line);">
+      <div class="absolute inset-0 pointer-events-none" style="background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.5;"></div>
+      <div class="absolute top-0 right-[10%] w-[500px] h-[500px] rounded-full blur-[150px] pointer-events-none" style="background: rgba(201, 101, 74, 0.1);"></div>
+
+      <div class="max-w-[1200px] mx-auto px-6 relative">
+        <nav class="flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] mb-8" style="color: var(--muted);" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-[var(--ink)]" style="color: inherit;">Home</a>
+          <span>/</span>
+          <span style="color: var(--ink);">What Is TMS</span>
+        </nav>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              Non-Invasive Brain Stimulation
+            </div>
+
+            <h1 class="serif mb-6" style="font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; color: var(--ink);">
+              What Is TMS<br/>
+              <span class="italic" style="color: var(--warm);">Therapy?</span>
+            </h1>
+
+            <p class="text-lg leading-relaxed mb-8" style="color: var(--muted); max-width: 540px;">
+              Transcranial Magnetic Stimulation (TMS) is an FDA-cleared, non-invasive treatment that uses focused magnetic pulses to stimulate underactive areas of the brain associated with depression and other mental health conditions.
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+              <a href="/quiz/am-i-a-candidate/" class="px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
+                Take the Eligibility Quiz
+              </a>
+              <a href="/treatments/" class="px-6 py-3 border border-[var(--line)] text-[var(--ink)] font-semibold rounded-xl hover:bg-[var(--paper2)] transition-colors">
+                View Conditions Treated
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-8">
+            <h3 class="font-bold text-[var(--ink)] mb-4">Key TMS Facts</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-4 p-4 bg-[var(--paper)] rounded-xl">
+                <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">83%</div>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Response Rate</p>
+                  <p class="text-xs text-[var(--muted)]">Patients show improvement</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 p-4 bg-[var(--paper)] rounded-xl">
+                <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">62%</div>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Remission Rate</p>
+                  <p class="text-xs text-[var(--muted)]">Achieve full recovery</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 p-4 bg-[var(--paper)] rounded-xl">
+                <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">19-37</div>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Minutes Per Session</p>
+                  <p class="text-xs text-[var(--muted)]">No anesthesia needed</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 p-4 bg-[var(--paper)] rounded-xl">
+                <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg">2008</div>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">FDA Cleared</p>
+                  <p class="text-xs text-[var(--muted)]">For major depression</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How TMS Works -->
+    <section class="py-16 border-t border-[var(--line)]">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-8 text-center">How TMS Therapy Works</h2>
+
+          <div class="prose prose-lg max-w-none mb-12" style="color: var(--ink2);">
+            <p class="text-lg">
+              Transcranial Magnetic Stimulation uses electromagnetic induction to stimulate specific areas of the brain. A small coil placed against the scalp generates brief magnetic pulses—similar in strength to those produced by an MRI machine—that pass painlessly through the skull to target underactive brain regions.
+            </p>
+            <p>
+              The magnetic pulses cause neurons in the prefrontal cortex (the brain region responsible for mood regulation) to fire. In patients with depression, this area is often underactive. By stimulating these neurons, TMS helps restore normal brain activity patterns, reducing depressive symptoms.
+</p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-6 text-center">
+              <div class="w-16 h-16 rounded-full bg-[var(--ink)] text-white flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
+              <h3 class="font-bold text-[var(--ink)] mb-2">Magnetic Pulse</h3>
+              <p class="text-sm" style="color: var(--muted);">The TMS coil generates focused magnetic pulses that pass through the skull</p>
+            </div>
+            <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-6 text-center">
+              <div class="w-16 h-16 rounded-full bg-[var(--ink)] text-white flex items-center justify-center mx-auto mb-4 text-2xl font-bold">2</div>
+              <h3 class="font-bold text-[var(--ink)] mb-2">Brain Stimulation</h3>
+              <p class="text-sm" style="color: var(--muted);">Neurons in the prefrontal cortex are activated, restoring normal activity</p>
+            </div>
+            <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-6 text-center">
+              <div class="w-16 h-16 rounded-full bg-[var(--ink)] text-white flex items-center justify-center mx-auto mb-4 text-2xl font-bold">3</div>
+              <h3 class="font-bold text-[var(--ink)] mb-2">Mood Improvement</h3>
+              <p class="text-sm" style="color: var(--muted);">As treatment continues, patients experience reduced depression symptoms</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What TMS Treats -->
+    <section class="py-16 border-t border-[var(--line)]" style="background: var(--paper2);">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-8 text-center">What Conditions Does TMS Treat?</h2>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-[var(--paper)] rounded-2xl border border-emerald-200 p-6">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">FDA Cleared</span>
+              </div>
+              <h3 class="font-bold text-[var(--ink)] mb-3">Major Depressive Disorder</h3>
+              <p class="text-sm mb-4" style="color: var(--muted);">The primary indication for TMS. FDA-cleared in 2008 for patients who haven't responded to at least one antidepressant medication.</p>
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Response Rate</p>
+                  <p class="text-[var(--accent)]">83%</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Sessions</p>
+                  <p class="text-[var(--accent)]">36</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-emerald-200 p-6">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">FDA Cleared</span>
+              </div>
+              <h3 class="font-bold text-[var(--ink)] mb-3">Obsessive-Compulsive Disorder</h3>
+              <p class="text-sm mb-4" style="color: var(--muted);">FDA-cleared in 2018 using BrainsWay Deep TMS. Targets the anterior cingulate cortex and medial prefrontal cortex.</p>
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Response Rate</p>
+                  <p class="text-[var(--accent)]">45%</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Sessions</p>
+                  <p class="text-[var(--accent)]">29-30</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-emerald-200 p-6">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">FDA Cleared</span>
+              </div>
+              <h3 class="font-bold text-[var(--ink)] mb-3">Smoking Cessation</h3>
+              <p class="text-sm mb-4" style="color: var(--muted);">FDA-cleared in 2020 using BrainsWay Deep TMS. Targets the bilateral insula to reduce nicotine cravings.</p>
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Success Rate</p>
+                  <p class="text-[var(--accent)]">35%</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Sessions</p>
+                  <p class="text-[var(--accent)]">18</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-emerald-200 p-6">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">FDA Cleared</span>
+              </div>
+              <h3 class="font-bold text-[var(--ink)] mb-3">Anxious Depression</h3>
+              <p class="text-sm mb-4" style="color: var(--muted);">FDA-cleared in 2020 for depression with significant anxiety symptoms. Addresses both conditions simultaneously.</p>
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Response Rate</p>
+                  <p class="text-[var(--accent)]">79%</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Sessions</p>
+                  <p class="text-[var(--accent)]">36</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+            <h3 class="font-bold text-[var(--ink)] mb-4">Off-Label Applications (Growing Evidence)</h3>
+            <div class="grid md:grid-cols-3 gap-4 text-sm">
+              <div class="flex items-start gap-2">
+                <span class="text-[var(--accent)] mt-1">→</span>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Post-Traumatic Stress Disorder</p>
+                  <p class="text-[var(--muted)]">Deep TMS showing promising results</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-[var(--accent)] mt-1">→</span>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Bipolar Depression</p>
+                  <p class="text-[var(--muted)]">Low-frequency protocols minimize manic risk</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-[var(--accent)] mt-1">→</span>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Chronic Migraines</p>
+                  <p class="text-[var(--muted)]">Single-pulse TMS FDA-cleared since 2013</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-[var(--accent)] mt-1">→</span>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Generalized Anxiety</p>
+                  <p class="text-[var(--muted)]">Right DLPFC targeting effective</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-[var(--accent)] mt-1">→</span>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Chronic Pain</p>
+                  <p class="text-[var(--muted)]">Motor cortex stimulation for fibromyalgia</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-[var(--accent)] mt-1">→</span>
+                <div>
+                  <p class="font-semibold text-[var(--ink)]">Tinnitus</p>
+                  <p class="text-[var(--muted)]">Temporoparietal cortex targeting</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TMS vs Alternatives -->
+    <section class="py-16 border-t border-[var(--line)]">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-8 text-center">TMS vs Other Treatments</h2>
+
+          <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] overflow-hidden mb-8">
+            <div class="grid grid-cols-5 gap-0 bg-[var(--paper2)] border-b border-[var(--line)]">
+              <div class="p-4 text-sm font-semibold text-[var(--muted)]"></div>
+              <div class="p-4 text-center border-l border-[var(--line)]"><div class="text-sm font-bold text-[var(--ink)]">Medication</div></div>
+              <div class="p-4 text-center border-l border-[var(--line)]"><div class="text-sm font-bold text-[var(--ink)]">Talk Therapy</div></div>
+              <div class="p-4 text-center border-l border-[var(--ink)] bg-[var(--ink)]"><div class="text-sm font-bold text-white">TMS Therapy</div></div>
+              <div class="p-4 text-center border-l border-[var(--line)]"><div class="text-sm font-bold text-[var(--ink)]">ECT</div></div>
+            </div>
+            <div class="grid grid-cols-5 gap-0 border-b border-[var(--line)]">
+              <div class="p-4 text-sm font-semibold text-[var(--muted)]">Response Rate</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">40-60%</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">40-50%</div>
+              <div class="p-4 text-center border-l border-[var(--ink)] bg-[var(--ink)] text-sm font-bold text-white">83%</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">80-90%</div>
+            </div>
+            <div class="grid grid-cols-5 gap-0 border-b border-[var(--line)]">
+              <div class="p-4 text-sm font-semibold text-[var(--muted)]">Side Effects</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">Many (weight, sex, sleep)</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">None</div>
+              <div class="p-4 text-center border-l border-[var(--ink)] bg-[var(--ink)] text-sm font-bold text-emerald-400">Minimal</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-red-500 font-semibold">Severe</div>
+            </div>
+            <div class="grid grid-cols-5 gap-0 border-b border-[var(--line)]">
+              <div class="p-4 text-sm font-semibold text-[var(--muted)]">Anesthesia</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">No</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">No</div>
+              <div class="p-4 text-center border-l border-[var(--ink)] bg-[var(--ink)] text-sm font-bold text-emerald-400">No</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-red-500 font-semibold">Required</div>
+            </div>
+            <div class="grid grid-cols-5 gap-0 border-b border-[var(--line)]">
+              <div class="p-4 text-sm font-semibold text-[var(--muted)]">Memory Effects</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">None</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">None</div>
+              <div class="p-4 text-center border-l border-[var(--ink)] bg-[var(--ink)] text-sm font-bold text-emerald-400">None</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-red-500 font-semibold">Memory Loss</div>
+            </div>
+            <div class="grid grid-cols-5 gap-0 border-b border-[var(--line)]">
+              <div class="p-4 text-sm font-semibold text-[var(--muted)]">Treatment Time</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">Daily pills</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">Weekly visits</div>
+              <div class="p-4 text-center border-l border-[var(--ink)] bg-[var(--ink)] text-sm font-bold text-white">19-37 min/session</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">30+ min + recovery</div>
+            </div>
+            <div class="grid grid-cols-5 gap-0">
+              <div class="p-4 text-sm font-semibold text-[var(--muted)]">Insurance</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-emerald-600 font-semibold">Covered</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-[var(--muted)]">Varies</div>
+              <div class="p-4 text-center border-l border-[var(--ink)] bg-[var(--ink)] text-sm font-bold text-emerald-400">Covered</div>
+              <div class="p-4 text-center border-l border-[var(--line)] text-sm text-emerald-600 font-semibold">Covered</div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <a href="/alternative-treatments/" class="inline-flex items-center gap-2 px-6 py-3 bg-[var(--paper)] border border-[var(--line)] text-[var(--ink)] font-semibold rounded-xl hover:bg-[var(--paper2)] transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+              Compare All Treatment Options
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Side Effects -->
+    <section class="py-16 border-t border-[var(--line)]" style="background: var(--paper2);">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-8 text-center">TMS Side Effects</h2>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-emerald-50 rounded-2xl border border-emerald-100 p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h3 class="font-bold text-emerald-800">Common (Mild)</h3>
+              </div>
+              <ul class="space-y-3 text-sm" style="color: var(--ink2);">
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-500 mt-0.5">✓</span>
+                  <span>Mild scalp discomfort or headache during stimulation (40% of patients)</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-500 mt-0.5">✓</span>
+                  <span>Headache after treatment (typically resolves within first week)</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-500 mt-0.5">✓</span>
+                  <span>Slight twitching sensation in facial muscles during treatment</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-500 mt-0.5">✓</span>
+                  <span>Lightheadedness immediately after treatment (uncommon)</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-[var(--paper2)] text-[var(--muted)] flex items-center justify-center">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </div>
+                <h3 class="font-bold text-[var(--ink)]">NOT Associated With TMS</h3>
+              </div>
+              <ul class="space-y-3 text-sm" style="color: var(--ink2);">
+                <li class="flex items-start gap-2">
+                  <span class="text-red-400 mt-0.5">✗</span>
+                  <span>Weight gain (common with medications)</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-red-400 mt-0.5">✗</span>
+                  <span>Sexual dysfunction (common with medications)</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-red-400 mt-0.5">✗</span>
+                  <span>Memory impairment or cognitive decline</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-red-400 mt-0.5">✗</span>
+                  <span>Sedation or drowsiness</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-red-400 mt-0.5">✗</span>
+                  <span>Nausea or gastrointestinal issues</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-amber-50 rounded-2xl border border-amber-100 p-6">
+            <h3 class="font-bold text-amber-800 mb-3">Rare but Serious Side Effects</h3>
+            <p style="color: var(--ink2);" class="text-sm mb-4">
+              Seizures occur in less than 0.1% of TMS patients. Risk factors include epilepsy, brain lesions, recent stroke, or use of medications that lower seizure threshold. Your psychiatrist will screen for these risk factors before recommending TMS.
+            </p>
+            <p style="color: var(--ink2);" class="text-sm">
+              If you experience a seizure during or after TMS treatment, seek immediate medical attention and inform your TMS provider.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What to Expect -->
+    <section class="py-16 border-t border-[var(--line)]">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-8 text-center">What to Expect During TMS Treatment</h2>
+
+          <div class="space-y-6">
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full bg-[var(--ink)] text-white flex items-center justify-center font-bold shrink-0">1</div>
+                <div>
+                  <h3 class="font-bold text-[var(--ink)] mb-2">Initial Consultation</h3>
+                  <p class="text-sm" style="color: var(--muted);">Your psychiatrist reviews your depression history, medication trials, and determines if TMS is appropriate. Insurance prior authorization is initiated if applicable.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full bg-[var(--ink)] text-white flex items-center justify-center font-bold shrink-0">2</div>
+                <div>
+                  <h3 class="font-bold text-[var(--ink)] mb-2">First Session: Mapping</h3>
+                  <p class="text-sm" style="color: var(--muted);">Your motor threshold is determined by delivering pulses while measuring thumb movement. This calibration ensures effective yet safe treatment intensity. Takes 30-45 minutes.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full bg-[var(--ink)] text-white flex items-center justify-center font-bold shrink-0">3</div>
+                <div>
+                  <h3 class="font-bold text-[var(--ink)] mb-2">Treatment Phase (Weeks 1-6)</h3>
+                  <p class="text-sm" style="color: var(--muted);">Five sessions per week, each lasting 19-37 minutes (or 3-6 minutes for Theta Burst). You sit in a comfortable chair, remain awake, and can listen to music or watch TV. Return to normal activities immediately after.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full bg-[var(--ink)] text-white flex items-center justify-center font-bold shrink-0">4</div>
+                <div>
+                  <h3 class="font-bold text-[var(--ink)] mb-2">Taper Phase (Weeks 6-9)</h3>
+                  <p class="text-sm" style="color: var(--muted);">Sessions reduce to 2-3 per week as your mood stabilizes. Most patients feel significant improvement by week 4-6.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold shrink-0">5</div>
+                <div>
+                  <h3 class="font-bold text-[var(--ink)] mb-2">Maintenance (As Needed)</h3>
+                  <p class="text-sm" style="color: var(--muted);">Some patients benefit from periodic maintenance sessions monthly or as symptoms return. Your psychiatrist develops a personalized maintenance plan.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 border-t border-[var(--line)]" style="background: var(--paper2);">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-8 text-center">Frequently Asked Questions</h2>
+
+          <div class="space-y-4">
+            {faqs.map((faq, i) => (
+              <details class="faq-item group bg-[var(--paper)] rounded-xl border border-[var(--line)] overflow-hidden">
+                <summary class="flex items-center justify-between gap-4 p-5 cursor-pointer list-none font-semibold text-[var(--ink)] hover:text-[var(--ink)] transition-colors">
+                  <span class="text-sm">{faq.q}</span>
+                  <svg class="w-5 h-5 text-[var(--muted)] group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="px-5 pb-5 text-sm text-[var(--ink2)] leading-relaxed border-t border-[var(--line)] pt-4">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 border-t border-[var(--line)]">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-4">Is TMS Right for You?</h2>
+          <p class="text-lg mb-8" style="color: var(--muted);">
+            Take our 2-minute eligibility quiz to find out if you may be a candidate for TMS therapy.
+          </p>
+          <div class="flex flex-wrap justify-center gap-3">
+            <a href="/quiz/am-i-a-candidate/" class="px-8 py-4 bg-[var(--ink)] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
+              Take the Eligibility Quiz
+            </a>
+            <a href="/us/" class="px-8 py-4 border border-[var(--line)] text-[var(--ink)] font-semibold rounded-xl hover:bg-[var(--paper2)] transition-colors">
+              Find a TMS Clinic
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .serif {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  .faq-item {
+    transition: box-shadow 0.2s;
+  }
+  .faq-item[open] {
+    box-shadow: 0 4px 20px rgba(10, 22, 40, 0.08);
+  }
+</style>

@@ -42,10 +42,10 @@ function timeAgo(date: string) {
   return `${Math.floor(days / 365)}y ago`;
 }
 
-export default function PortalJobsDashboard() {
+export default function PortalJobsDashboard({ mode }: { mode?: 'list' | 'create' }) {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState<'list' | 'create' | 'edit' | 'applications'>('list');
+  const [view, setView] = useState<'list' | 'create' | 'edit' | 'applications'>(mode === 'create' ? 'create' : 'list');
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [clinicEmail, setClinicEmail] = useState('');
 

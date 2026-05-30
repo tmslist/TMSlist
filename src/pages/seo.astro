@@ -1,0 +1,671 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FAQSchema from '../components/FAQSchema.astro';
+import { buildFAQSchema } from '../utils/seo';
+
+const title = "TMS Therapy SEO Guide2026: How to Rank Your TMS Clinic on Google";
+const description = "Complete SEO guide for TMS clinics: local SEO strategies, keyword targeting, Google Business Profile optimization, content marketing, and technical SEO for mental health practices.";
+
+const faqs = [
+  {
+    q: "What are the best keywords for TMS clinic SEO?",
+    a: "The highest-value keywords for TMS clinics include: 'TMS therapy near me' (local intent), 'TMS for depression [city]' (high intent), 'does insurance cover TMS' (evaluating patients), 'TMS treatment cost' (price shopping), 'TMS vs medication' (treatment comparison), and 'TMS clinic [location]' (local search). Target these in your page titles, H1 tags, and first 100 words of each page. For local SEO, claim and optimize your Google Business Profile with 'TMS therapy' in your business name and description."
+  },
+  {
+    q: "How do I optimize my Google Business Profile for TMS?",
+    a: "Google Business Profile is the #1 local ranking factor for TMS clinics. Optimization steps: 1) Include 'TMS therapy' and 'transcranial magnetic stimulation' in your business name (within character limits), 2) Add high-quality photos of your facility and treatment rooms, 3) Collect10+ genuine Google reviews with keywords, 4) Post weekly updates about TMS education and clinic news, 5) Fill all available fields including services, attributes, and COVID-19 hours, 6) Respond to every review within 48 hours, 7) Add your TMS-specific services as service items. Clinics with fully optimized GBP profiles rank in the local3-pack for 'TMS therapy near me' searches."
+  },
+  {
+    q: "What local SEO citations do TMS clinics need?",
+    a: "Consistent NAP (Name, Address, Phone) across directories is critical. Essential citations for TMS clinics: Google Business Profile, Bing Places, Apple Maps, Yelp, Healthgrades, Zocdoc, Psychology Today, Vitals, RateMDs, Yellow Pages, and your state medical board directory. Inconsistencies (e.g., 'St. Luke's' vs 'St Lukes') confuse Google and hurt local rankings. Use a citation tracker to monitor and update50+ directory listings. Accuracy across these platforms can improve local search visibility by 30-50%."
+  },
+  {
+    q: "How long does it take to rank for 'TMS therapy near me'?",
+    a: "Local SEO timeline for TMS clinics: Weeks 1-4 focus on Google Business Profile optimization and NAP consistency. Weeks 4-12 see initial ranking improvements for non-competitive long-tail keywords. Months 3-6 bring meaningful local pack rankings for '[city] TMS therapy'. Months 6-12 achieve page1 rankings for competitive local terms in most markets. Hospital systems and established directories are harder to outrank nationally, but local searches like 'TMS therapy Chicago' or 'TMS clinic Los Angeles' are often winnable within 6 months with consistent effort."
+  },
+  {
+    q: "What schema markup should TMS clinic websites implement?",
+    a: "Essential schema types for TMS clinic websites: 1) LocalBusiness/MentalHealthOrganization with full address, hours, and service details, 2) Physician schema for each TMS-trained psychiatrist with credentials,3) FAQPage schema for common patient questions (expands SERP real estate), 4) MedicalCondition schema for each treated condition, 5) Review/AggregateRating for patient testimonials, 6) BreadcrumbList for site navigation. Use JSON-LD format and validate with Google's Rich Results Test. Properly implemented schema can increase click-through rates by 15-30%."
+  },
+  {
+    q: "How do I create content that ranks for TMS keywords?",
+    a: "Content strategy for TMS clinic SEO: 1) Create dedicated service pages for each condition (TMS for Depression, TMS for OCD, TMS for Anxiety) with1,500+ words of original, evidence-based content, 2) Publish monthly blog posts answering patient questions (insurance coverage, what to expect, side effects), 3) Build an insurance guide covering major carriers' TMS policies, 4) Add patient testimonials with before/after PHQ-9 scores,5) Create comparison content (TMS vs ECT, TMS vs medication, TMS vs ketamine). All content should cite clinical research and be reviewed by your medical director."
+  },
+  {
+    q: "Is TMS covered by insurance?",
+    a: "Most major insurance plans cover TMS therapy for treatment-resistant depression: Medicare covers TMS with prior authorization for MDD patients who failed 4+ medication trials. BlueCross BlueShield, Aetna, Cigna, and UnitedHealthcare typically cover TMS with similar criteria. Pre-authorization is required and typically takes5-10 business days. Most patients pay a $30-$75 copay per session with insurance. Without insurance, TMS costs $6,000-$12,000 for a full course. Many clinics offer payment plans. Verify your specific benefits before starting treatment."
+  },
+  {
+    q: "What is treatment-resistant depression and how does TMS help?",
+    a: "Treatment-resistant depression (TRD) is defined as failure to respond adequately to at least two antidepressant medications at therapeutic doses for adequate duration. Approximately 30% of depression patients meet this criteria. TMS is FDA-cleared specifically for TRD and offers a non-invasive alternative when medications haven't worked. Unlike medications that affect the whole body, TMS targets specific brain regions with focused magnetic pulses. Most patients tolerate TMS well with minimal side effects, the most common being mild scalp discomfort at the stimulation site."
+  },
+  {
+    q: "How many TMS sessions are needed?",
+    a: "A standard TMS treatment course consists of 36 sessions over 6-9 weeks:5 sessions per week for the first 4-6 weeks, then tapering to 2-3 sessions per week. Each session takes19-37 minutes depending on the protocol. Theta Burst Stimulation (TBS) can reduce this to 3-6 minutes per session with comparable efficacy. Patients typically notice improvement by week 2-3, with peak effects around week 4-6. Some patients require maintenance sessions monthly or as needed. Insurance typically covers the full 36-session course when prior authorization is approved."
+  },
+  {
+    q: "What are the side effects of TMS therapy?",
+    a: "TMS is generally well-tolerated with minimal side effects. The most common include: mild scalp discomfort or headache during stimulation (experienced by ~40% of patients, typically resolves within the first week), lightheadedness immediately after treatment, and rare instances of twitching facial muscles. TMS does not cause the systemic side effects of medications—no weight gain, sexual dysfunction, sedation, or cognitive impairment. Unlike ECT, TMS does not require anesthesia and does not cause memory loss. Serious side effects like seizures are extremely rare (<0.1%) and occur primarily in patients with epilepsy or metal implants near the head."
+  },
+  {
+    q: "How effective is TMS for depression?",
+    a: "Clinical trials consistently demonstrate TMS efficacy: 83% of patients respond to TMS (showing >50% improvement in depression scores), 62% achieve full remission (PHQ-9 score<5), response rates are highest in patients with moderate treatment resistance (2-4 failed medication trials), and efficacy is maintained at 6-month and 12-month follow-ups with maintenance sessions. These outcomes compare favorably to medication (40-60% response rate) and talk therapy (40-50%). TMS is most effective when combined with continued psychotherapy."
+  },
+  {
+    q: "What TMS technologies are FDA-cleared?",
+    a: "Three TMS devices have FDA clearance:1) NeuroStar (Neuronetics) - Standard rTMS using figure-8 coil, cleared2008 for MDD, 2018 for OCD, 2020 for anxious depression. 2) BrainsWay Deep TMS - H-coil technology penetrates deeper brain regions, cleared 2013 for MDD, 2018 for OCD. 3) MagVenture - Focal TMS with optional Theta Burst Protocol, cleared 2018 for MDD. All three are covered by major insurance plans. Your psychiatrist will recommend the most appropriate technology based on your diagnosis, treatment history, and specific brain anatomy."
+  },
+  {
+    q: "Can TMS be combined with medication?",
+    a: "Yes, TMS can be safely combined with most antidepressants. In fact, many patients continue their current medication during TMS treatment. Some psychiatrists reduce medication dosage as patients improve to minimize side effects. TMS has been studied in combination with SSRIs, SNRIs, atypical antidepressants, and some mood stabilizers. The combination approach may enhance outcomes for some patients. However, benzodiazepines and sleep aids are sometimes reduced during TMS as they can theoretically reduce neuroplasticity effects. Always discuss medication changes with your prescribing psychiatrist."
+  },
+  {
+    q: "Who is not a good candidate for TMS?",
+    a: "TMS is not recommended for patients with: Epilepsy or history of seizures, metal implants in or near the head (pacemakers, cochlear implants, aneurysm clips, deep brain stimulators), brain tumors or lesions, active substance use disorders requiring detoxification first, severe head trauma, or pregnancy (first trimester). Patients with mild cognitive impairment, those over 70, and those with comorbid personality disorders may have reduced response rates but can still be treated. A thorough psychiatric evaluation including medical history review determines TMS candidacy."
+  },
+  {
+    q: "How do I find a quality TMS clinic?",
+    a: "Finding a quality TMS clinic:1) Verify the clinic has board-certified psychiatrists trained in TMS (check Clinical TMS Society membership), 2) Confirm they use FDA-cleared TMS devices from NeuroStar, BrainsWay, or MagVenture, 3) Ask about their experience volume (100+ patients treated is ideal), 4) Check verified patient reviews on independent platforms,5) Verify they handle insurance prior authorization on your behalf, 6) Ask about their response rate and remission rate,7) Ensure they offer comprehensive initial assessment including motor threshold mapping. TMS List maintains a directory of verified TMS providers with real patient reviews and insurance information."
+  }
+];
+
+const faqSchema = buildFAQSchema(faqs);
+---
+
+<Layout title={title} description={description} schema={faqSchema}>
+  <main style="background: var(--paper);">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden" style="background: var(--paper); padding-top: 8rem; padding-bottom: 4rem; border-bottom: 1px solid var(--line);">
+      <div class="absolute inset-0 pointer-events-none" style="background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.5;"></div>
+      <div class="absolute top-0 right-[10%] w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none" style="background: rgba(10, 22, 40, 0.08);"></div>
+
+      <div class="max-w-[1200px] mx-auto px-6 relative">
+        <nav class="flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] mb-8" style="color: var(--muted);" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-[var(--ink)]" style="color: inherit;">Home</a>
+          <span>/</span>
+          <span style="color: var(--ink);">TMS SEO Guide</span>
+        </nav>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              Updated May 2026
+            </div>
+
+            <h1 class="serif mb-6" style="font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; color: var(--ink);">
+              TMS Clinic SEO Guide:<br/>
+              <span class="italic" style="color: var(--warm);">Rank #1 on Google</span>
+            </h1>
+
+            <p class="text-lg leading-relaxed mb-8" style="color: var(--muted); max-width: 540px;">
+              The complete SEO playbook for TMS therapy clinics. Learn how to dominate local search, optimize your Google Business Profile, and attract more patients actively searching for TMS treatment.
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+              <a href="/providers/services/get-listed/" class="px-6 py-3 bg-[var(--ink)] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
+                List Your Clinic
+              </a>
+              <a href="/us/" class="px-6 py-3 border border-[var(--line)] text-[var(--ink)] font-semibold rounded-xl hover:bg-[var(--paper2)] transition-colors">
+                Find TMS Clinics
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-8">
+            <h3 class="font-bold text-[var(--ink)] mb-4">Quick Navigation</h3>
+            <div class="space-y-2">
+              <a href="#local-seo" class="flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--paper)] transition-colors">
+                <span class="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.1)] flex items-center justify-center text-sm font-bold text-[var(--accent)]">1</span>
+                <span class="text-sm font-medium text-[var(--ink)]">Local SEO Essentials</span>
+              </a>
+              <a href="#google-business" class="flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--paper)] transition-colors">
+                <span class="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.1)] flex items-center justify-center text-sm font-bold text-[var(--accent)]">2</span>
+                <span class="text-sm font-medium text-[var(--ink)]">Google Business Profile</span>
+              </a>
+              <a href="#content-strategy" class="flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--paper)] transition-colors">
+                <span class="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.1)] flex items-center justify-center text-sm font-bold text-[var(--accent)]">3</span>
+                <span class="text-sm font-medium text-[var(--ink)]">Content Strategy</span>
+              </a>
+              <a href="#technical-seo" class="flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--paper)] transition-colors">
+                <span class="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.1)] flex items-center justify-center text-sm font-bold text-[var(--accent)]">4</span>
+                <span class="text-sm font-medium text-[var(--ink)]">Technical SEO</span>
+              </a>
+              <a href="#patient-content" class="flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--paper)] transition-colors">
+                <span class="w-8 h-8 rounded-lg bg-[rgba(10,22,40,0.1)] flex items-center justify-center text-sm font-bold text-[var(--accent)]">5</span>
+                <span class="text-sm font-medium text-[var(--ink)]">Patient Education</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why SEO Matters -->
+    <section class="py-16" style="background: var(--paper);">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-4">Why SEO Matters for TMS Clinics</h2>
+          <p class="text-lg" style="color: var(--muted);">
+            When someone searches "TMS therapy near me" or "TMS for depression [city]," they're ready to act. Ranking on page one means a steady stream of qualified patients without paying for every click.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-6 text-center">
+            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-bold text-[var(--ink)] mb-2">Lower Cost Per Patient</h3>
+            <p class="text-sm" style="color: var(--muted);">Organic search traffic costs nothing per click, unlike PPC advertising at $15-50 per click for TMS keywords.</p>
+          </div>
+
+          <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-6 text-center">
+            <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <h3 class="font-bold text-[var(--ink)] mb-2">High Intent Traffic</h3>
+            <p class="text-sm" style="color: var(--muted);">Searchers researching TMS are actively evaluating treatment options. They're ready to book consultations.</p>
+          </div>
+
+          <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-6 text-center">
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            </div>
+            <h3 class="font-bold text-[var(--ink)] mb-2">Long-Term Results</h3>
+            <p class="text-sm" style="color: var(--muted);">A well-ranked page generates traffic for years. Unlike ads, you don't stop paying when you stop ranking.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Local SEO Section -->
+    <section id="local-seo" class="py-16 border-t border-[var(--line)]">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-10 h-10 rounded-xl bg-[rgba(10,22,40,0.1)] text-[var(--accent)] flex items-center justify-center font-bold">1</span>
+            <h2 class="text-3xl font-bold text-[var(--ink)]">Local SEO Essentials for TMS Clinics</h2>
+          </div>
+
+          <div class="prose prose-lg max-w-none" style="color: var(--ink2);">
+            <p class="text-lg mb-6">
+              Local SEO is the foundation of TMS clinic marketing. Most patients search within20 miles of their home. If your clinic doesn't appear in local results, you're invisible to the majority of potential patients.
+            </p>
+
+            <h3 class="text-xl font-bold text-[var(--ink)] mt-8 mb-4">The Local SEO Formula for TMS</h3>
+            <p class="mb-4">
+              Local ranking = Google Business Profile optimization + Consistent NAP citations + Review volume + Local content + Backlinks
+</p>
+
+            <h3 class="text-xl font-bold text-[var(--ink)] mt-8 mb-4">High-Value Local Keywords</h3>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 mt-1">✓</span>
+                <span>"TMS therapy [city name]" — highest intent local search</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 mt-1">✓</span>
+                <span>"TMS for depression [city]" — condition + location</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 mt-1">✓</span>
+                <span>"transcranial magnetic stimulation [city]" — technical term searchers</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 mt-1">✓</span>
+                <span>"TMS clinic near me" — emergency/rushed search behavior</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 mt-1">✓</span>
+                <span>"brain stimulation therapy [city]" — alternative terminology</span>
+              </li>
+            </ul>
+
+            <h3 class="text-xl font-bold text-[var(--ink)] mt-8 mb-4">NAP Consistency</h3>
+            <p class="mb-4">
+              Your clinic's Name, Address, and Phone number must be identical across every directory. Google penalizes inconsistencies—even small variations like "St. Luke's" vs "St Lukes" or "Road" vs "Rd" can hurt your local rankings.
+            </p>
+
+            <div class="bg-[var(--paper2)] rounded-xl p-6 border border-[var(--line)]">
+              <h4 class="font-bold text-[var(--ink)] mb-3">NAP Citation Checklist</h4>
+              <div class="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p class="font-semibold text-[var(--ink)] mb-2">Major Platforms</p>
+                  <ul class="space-y-1" style="color: var(--muted);">
+                    <li>Google Business Profile</li>
+                    <li>Bing Places</li>
+                    <li>Apple Maps</li>
+                    <li>Yelp</li>
+                    <li>Facebook</li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="font-semibold text-[var(--ink)] mb-2">Healthcare Specific</p>
+                  <ul class="space-y-1" style="color: var(--muted);">
+                    <li>Healthgrades</li>
+                    <li>Zocdoc</li>
+                    <li>Psychology Today</li>
+                    <li>Vitals</li>
+                    <li>RateMDs</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Google Business Profile Section -->
+    <section id="google-business" class="py-16 border-t border-[var(--line)]" style="background: var(--paper2);">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-10 h-10 rounded-xl bg-[rgba(10,22,40,0.1)] text-[var(--accent)] flex items-center justify-center font-bold">2</span>
+            <h2 class="text-3xl font-bold text-[var(--ink)]">Google Business Profile Optimization</h2>
+          </div>
+
+          <p class="text-lg mb-8" style="color: var(--ink2);">
+            Your Google Business Profile (GBP) is the single most important local SEO asset for TMS clinics. It appears in the local 3-pack and Maps results for 70% of local TMS searches.
+          </p>
+
+          <div class="space-y-6">
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <h3 class="font-bold text-[var(--ink)] mb-4">Business Name Optimization</h3>
+              <p style="color: var(--ink2);" class="mb-4">
+                Include "TMS therapy" or "Transcranial Magnetic Stimulation" in your business name while staying within Google's guidelines (actual business name + service descriptor is acceptable).
+              </p>
+              <div class="bg-emerald-50 rounded-lg p-4">
+                <p class="text-sm font-medium text-emerald-800">
+<strong>Example:</strong> "Bright Mind TMS Therapy" or "Premier Brain Health - TMS Treatment"
+</p>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <h3 class="font-bold text-[var(--ink)] mb-4">Categories& Services</h3>
+              <p style="color: var(--ink2);" class="mb-4">
+                Set your primary category to "Psychiatrist" or "Mental Health Clinic" and add service categories for each TMS indication you treat.
+              </p>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-[var(--paper2)] rounded-lg p-4">
+                  <p class="text-sm font-semibold text-[var(--ink)] mb-2">Primary Categories</p>
+                  <ul class="text-sm space-y-1" style="color: var(--muted);">
+                    <li>Psychiatrist</li>
+                    <li>Mental Health Clinic</li>
+                    <li>Medical Clinic</li>
+                  </ul>
+                </div>
+                <div class="bg-[var(--paper2)] rounded-lg p-4">
+                  <p class="text-sm font-semibold text-[var(--ink)] mb-2">Service Categories</p>
+                  <ul class="text-sm space-y-1" style="color: var(--muted);">
+                    <li>TMS for Depression</li>
+                    <li>TMS for OCD</li>
+                    <li>Transcranial Magnetic Stimulation</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <h3 class="font-bold text-[var(--ink)] mb-4">Photos& Virtual Tours</h3>
+              <p style="color: var(--ink2);" class="mb-4">
+                Businesses with photos receive 42% more requests for directions and 35% more website clicks. Add high-quality images of:
+</p>
+              <ul class="grid md:grid-cols-2 gap-2 text-sm" style="color: var(--muted);">
+                <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span> Treatment room with TMS device</li>
+                <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span> Waiting area</li>
+                <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span> Exterior signage</li>
+                <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span> Staff photos</li>
+                <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span> Treatment chair setup</li>
+                <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span> Office interior</li>
+              </ul>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <h3 class="font-bold text-[var(--ink)] mb-4">Review Strategy</h3>
+              <p style="color: var(--ink2);" class="mb-4">
+                Reviews are a top local ranking factor. Aim for 10+ reviews with these characteristics:
+              </p>
+              <ul class="space-y-2 text-sm" style="color: var(--ink2);">
+                <li class="flex items-start gap-2">
+                  <span class="text-amber-500 mt-0.5">★</span>
+                  <span>Ask satisfied patients at treatment completion: "Would you mind sharing your experience?"</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-amber-500 mt-0.5">★</span>
+                  <span>Respond to ALL reviews within 48 hours—positive and negative</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-amber-500 mt-0.5">★</span>
+                  <span>Include keywords naturally: "TMS for my depression changed my life"</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-amber-500 mt-0.5">★</span>
+                  <span>Address negative reviews professionally with a step toward resolution</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Strategy Section -->
+    <section id="content-strategy" class="py-16 border-t border-[var(--line)]">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-10 h-10 rounded-xl bg-[rgba(10,22,40,0.1)] text-[var(--accent)] flex items-center justify-center font-bold">3</span>
+            <h2 class="text-3xl font-bold text-[var(--ink)]">Content Strategy for TMS Clinics</h2>
+          </div>
+
+          <p class="text-lg mb-8" style="color: var(--ink2);">
+            Content is how you rank for informational keywords and capture patients early in their research journey. The best TMS content answers patient questions before they ask.
+</p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-6">
+              <h3 class="font-bold text-[var(--ink)] mb-4">Service Pages (Required)</h3>
+              <p style="color: var(--muted);" class="text-sm mb-4">Create dedicated pages for each condition:</p>
+              <ul class="space-y-2 text-sm" style="color: var(--ink2);">
+                <li>/tms-for-depression/</li>
+                <li>/tms-for-ocd/</li>
+                <li>/tms-for-anxiety/</li>
+                <li>/tms-for-ptsd/</li>
+                <li>/tms-for-migraine/</li>
+              </ul>
+            </div>
+
+            <div class="bg-[var(--paper2)] rounded-2xl border border-[var(--line)] p-6">
+              <h3 class="font-bold text-[var(--ink)] mb-4">Insurance Pages</h3>
+              <p style="color: var(--muted);" class="text-sm mb-4">Cover major insurers' TMS policies:</p>
+              <ul class="space-y-2 text-sm" style="color: var(--ink2);">
+                <li>/insurance/aetna-tms-coverage/</li>
+                <li>/insurance/bluecross-tms-coverage/</li>
+                <li>/insurance/cigna-tms-coverage/</li>
+                <li>/insurance/unitedhealthcare-tms/</li>
+                <li>/insurance/medicare-tms-coverage/</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6 mb-8">
+            <h3 class="font-bold text-[var(--ink)] mb-4">Blog Content Ideas</h3>
+            <p style="color: var(--ink2);" class="mb-4">Publish monthly with 1,500+ words of original, evidence-based content:</p>
+            <div class="grid md:grid-cols-3 gap-4 text-sm">
+              <div>
+                <p class="font-semibold text-[var(--ink)] mb-2">Educational</p>
+                <ul class="space-y-1" style="color: var(--muted);">
+                  <li>What is TMS therapy?</li>
+                  <li>How does TMS work?</li>
+                  <li>TMS vs ECT comparison</li>
+                  <li>What to expect during TMS</li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-semibold text-[var(--ink)] mb-2">Insurance</p>
+                <ul class="space-y-1" style="color: var(--muted);">
+                  <li>Does insurance cover TMS?</li>
+                  <li>Prior authorization guide</li>
+                  <li>Medicare TMS coverage</li>
+                  <li>Self-pay TMS costs</li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-semibold text-[var(--ink)] mb-2">Patient Journey</p>
+                <ul class="space-y-1" style="color: var(--muted);">
+                  <li>Am I a TMS candidate?</li>
+                  <li>Preparing for first session</li>
+                  <li>TMS side effects</li>
+                  <li>Maintenance TMS guide</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-emerald-50 rounded-2xl border border-emerald-100 p-6">
+            <h3 class="font-bold text-emerald-800 mb-3">Content Quality Requirements</h3>
+            <p style="color: var(--ink2);" class="text-sm">
+              For healthcare content, Google evaluates E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness). Your content must: cite clinical research with links to peer-reviewed studies, include author credentials (MD/PhD), be reviewed by your medical director, and include last-updated dates. Thin content with no medical backing will not rank.
+</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical SEO Section -->
+    <section id="technical-seo" class="py-16 border-t border-[var(--line)]" style="background: var(--paper2);">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-10 h-10 rounded-xl bg-[rgba(10,22,40,0.1)] text-[var(--accent)] flex items-center justify-center font-bold">4</span>
+            <h2 class="text-3xl font-bold text-[var(--ink)]">Technical SEO for TMS Clinics</h2>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <h3 class="font-bold text-[var(--ink)] mb-4">Page Speed Requirements</h3>
+              <p style="color: var(--ink2);" class="mb-4">
+                Google uses page speed as a ranking factor, especially for mobile searches. Healthcare websites should load in under 3 seconds on mobile.
+              </p>
+              <div class="grid md:grid-cols-4 gap-4 text-center">
+                <div class="bg-[var(--paper2)] rounded-lg p-4">
+                  <div class="text-2xl font-bold text-emerald-600 mb-1"><3s</div>
+                  <div class="text-xs text-[var(--muted)]">Target Load Time</div>
+                </div>
+                <div class="bg-[var(--paper2)] rounded-lg p-4">
+                  <div class="text-2xl font-bold text-[var(--ink)] mb-1">90+</div>
+                  <div class="text-xs text-[var(--muted)]">Lighthouse Score</div>
+                </div>
+                <div class="bg-[var(--paper2)] rounded-lg p-4">
+                  <div class="text-2xl font-bold text-[var(--ink)] mb-1"><200KB</div>
+                  <div class="text-xs text-[var(--muted)]">First Contentful Paint</div>
+                </div>
+                <div class="bg-[var(--paper2)] rounded-lg p-4">
+                  <div class="text-2xl font-bold text-[var(--ink)] mb-1">LCP</div>
+                  <div class="text-xs text-[var(--muted)]"><2.5s Target</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <h3 class="font-bold text-[var(--ink)] mb-4">Schema Markup Checklist</h3>
+              <p style="color: var(--ink2);" class="mb-4">Implement these schema types in JSON-LD format:</p>
+              <div class="space-y-3">
+                <div class="flex items-start gap-3 p-3 bg-[var(--paper2)] rounded-lg">
+                  <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  <div>
+                    <p class="font-medium text-[var(--ink)] text-sm">LocalBusiness / MentalHealthOrganization</p>
+                    <p class="text-xs text-[var(--muted)]">Address, hours, services, geo coordinates</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 bg-[var(--paper2)] rounded-lg">
+                  <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  <div>
+                    <p class="font-medium text-[var(--ink)] text-sm">Physician</p>
+                    <p class="text-xs text-[var(--muted)]">Name, credentials, specialty, hospital affiliation</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 bg-[var(--paper2)] rounded-lg">
+                  <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  <div>
+                    <p class="font-medium text-[var(--ink)] text-sm">FAQPage</p>
+                    <p class="text-xs text-[var(--muted)]">Common patient questions (expands SERP real estate)</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 bg-[var(--paper2)] rounded-lg">
+                  <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  <div>
+                    <p class="font-medium text-[var(--ink)] text-sm">MedicalCondition</p>
+                    <p class="text-xs text-[var(--muted)]">Each treated condition with possibleTreatment</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 bg-[var(--paper2)] rounded-lg">
+                  <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  <div>
+                    <p class="font-medium text-[var(--ink)] text-sm">Review / AggregateRating</p>
+                    <p class="text-xs text-[var(--muted)]">Patient testimonials with star ratings</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6">
+              <h3 class="font-bold text-[var(--ink)] mb-4">Mobile Optimization</h3>
+              <p style="color: var(--ink2);" class="mb-4">
+                60% of healthcare searches happen on mobile. Your site must pass Google's Mobile-Friendly Test.
+              </p>
+              <ul class="space-y-2 text-sm" style="color: var(--ink2);">
+                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> Responsive design that adapts to all screen sizes</li>
+                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> Touch-friendly buttons (minimum 44x44px tap targets)</li>
+                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> Readable text without zooming (16px minimum font size)</li>
+                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> No horizontal scrolling</li>
+                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> Accessible color contrast (WCAG AA standard)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Patient Education Section -->
+    <section id="patient-content" class="py-16 border-t border-[var(--line)]">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-10 h-10 rounded-xl bg-[rgba(10,22,40,0.1)] text-[var(--accent)] flex items-center justify-center font-bold">5</span>
+            <h2 class="text-3xl font-bold text-[var(--ink)]">Patient Education Content</h2>
+          </div>
+
+          <p class="text-lg mb-8" style="color: var(--ink2);">
+            Patients researching TMS have questions at every stage. Capturing them with helpful content builds trust and increases conversion. This content also ranks for long-tail informational keywords.
+</p>
+
+          <div class="bg-[var(--paper)] rounded-2xl border border-[var(--line)] p-6 mb-8">
+            <h3 class="font-bold text-[var(--ink)] mb-4">Top Patient Questions to Answer</h3>
+            <div class="space-y-4">
+              <div class="border-b border-[var(--line)] pb-4">
+                <p class="font-semibold text-[var(--ink)] mb-2">"What is TMS therapy?"</p>
+                <p class="text-sm" style="color: var(--muted);">Explain TMS in plain language: focused magnetic pulses that stimulate underactive brain regions, non-invasive, no surgery, no sedation, FDA-cleared.</p>
+              </div>
+              <div class="border-b border-[var(--line)] pb-4">
+                <p class="font-semibold text-[var(--ink)] mb-2">"Does TMS really work?"</p>
+                <p class="text-sm" style="color: var(--muted);">Share clinical trial data: 83% response rate, 62% remission rate. Cite Carpenter et al. 2012 and other peer-reviewed studies.</p>
+              </div>
+              <div class="border-b border-[var(--line)] pb-4">
+                <p class="font-semibold text-[var(--ink)] mb-2">"Is TMS covered by insurance?"</p>
+                <p class="text-sm" style="color: var(--muted);">Detail coverage for Medicare, BlueCross, Aetna, Cigna, UnitedHealthcare. Explain prior authorization process and typical patient costs.</p>
+              </div>
+              <div class="border-b border-[var(--line)] pb-4">
+                <p class="font-semibold text-[var(--ink)] mb-2">"What are TMS side effects?"</p>
+                <p class="text-sm" style="color: var(--muted);">Be transparent: mild scalp discomfort (40%), rare headaches, no systemic side effects like medications cause. Compare to ECT.</p>
+              </div>
+              <div class="border-b border-[var(--line)] pb-4">
+                <p class="font-semibold text-[var(--ink)] mb-2">"How long does TMS take?"</p>
+                <p class="text-sm" style="color: var(--muted);">19-37 minutes per session, 5 days/week for 6 weeks (36 sessions total). Return to normal activities immediately.</p>
+              </div>
+              <div>
+                <p class="font-semibold text-[var(--ink)] mb-2">"Am I a good candidate?"</p>
+                <p class="text-sm" style="color: var(--muted);">Treatment-resistant depression definition, contraindication list, importance of psychiatric evaluation. Link to eligibility quiz.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[var(--ink)] rounded-2xl p-8 text-center">
+            <h3 class="text-2xl font-bold text-white mb-4">Ready to Attract More TMS Patients?</h3>
+            <p class="text-white/70 mb-6 max-w-xl mx-auto">
+              List your TMS clinic on TMS List to reach patients actively searching for treatment. Join500+ verified providers.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+              <a href="/providers/services/get-listed/" class="px-6 py-3 bg-white text-[var(--ink)] font-semibold rounded-xl hover:bg-white/90 transition-colors">
+                Get Listed
+              </a>
+              <a href="/us/" class="px-6 py-3 border border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-colors">
+                Browse Clinics
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 border-t border-[var(--line)]" style="background: var(--paper2);">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-8 text-center">Frequently Asked Questions</h2>
+
+          <div class="space-y-4" id="faq-list">
+            {faqs.map((faq, i) => (
+              <details class="faq-item group bg-[var(--paper)] rounded-xl border border-[var(--line)] overflow-hidden">
+                <summary class="flex items-center justify-between gap-4 p-5 cursor-pointer list-none font-semibold text-[var(--ink)] hover:text-[var(--ink)] transition-colors">
+                  <span class="text-sm">{faq.q}</span>
+                  <svg class="w-5 h-5 text-[var(--muted)] group-open:rotate-180 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="px-5 pb-5 text-sm text-[var(--ink2)] leading-relaxed border-t border-[var(--line)] pt-4">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Resources -->
+    <section class="py-16 border-t border-[var(--line)]">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <h2 class="text-2xl font-bold text-[var(--ink)] mb-8 text-center">Related Resources</h2>
+        <div class="grid md:grid-cols-4 gap-4">
+          <a href="/treatments/" class="group bg-[var(--paper)] rounded-xl border border-[var(--line)] p-6 hover:border-[var(--accent)] hover:shadow-lg transition-all">
+            <div class="w-10 h-10 rounded-lg bg-[var(--paper2)] flex items-center justify-center mb-4 group-hover:bg-[var(--accent)] group-hover:text-white transition-colors">
+              <svg class="w-5 h-5 text-[var(--accent)] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <h3 class="font-semibold text-[var(--ink)] mb-1">Conditions Treated</h3>
+            <p class="text-xs text-[var(--muted)]">Depression, OCD, anxiety, PTSD and more</p>
+          </a>
+
+          <a href="/insurance/" class="group bg-[var(--paper)] rounded-xl border border-[var(--line)] p-6 hover:border-[var(--accent)] hover:shadow-lg transition-all">
+            <div class="w-10 h-10 rounded-lg bg-[var(--paper2)] flex items-center justify-center mb-4 group-hover:bg-[var(--accent)] group-hover:text-white transition-colors">
+              <svg class="w-5 h-5 text-[var(--accent)] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <h3 class="font-semibold text-[var(--ink)] mb-1">Insurance Coverage</h3>
+            <p class="text-xs text-[var(--muted)]">Medicare, BlueCross, Aetna, Cigna and more</p>
+          </a>
+
+          <a href="/technology/" class="group bg-[var(--paper)] rounded-xl border border-[var(--line)] p-6 hover:border-[var(--accent)] hover:shadow-lg transition-all">
+            <div class="w-10 h-10 rounded-lg bg-[var(--paper2)] flex items-center justify-center mb-4 group-hover:bg-[var(--accent)] group-hover:text-white transition-colors">
+              <svg class="w-5 h-5 text-[var(--accent)] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h3 class="font-semibold text-[var(--ink)] mb-1">TMS Technology</h3>
+            <p class="text-xs text-[var(--muted)]">NeuroStar, BrainsWay, MagVenture comparison</p>
+          </a>
+
+          <a href="/quiz/am-i-a-candidate/" class="group bg-[var(--paper)] rounded-xl border border-[var(--line)] p-6 hover:border-[var(--accent)] hover:shadow-lg transition-all">
+            <div class="w-10 h-10 rounded-lg bg-[var(--paper2)] flex items-center justify-center mb-4 group-hover:bg-[var(--accent)] group-hover:text-white transition-colors">
+              <svg class="w-5 h-5 text-[var(--accent)] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            </div>
+            <h3 class="font-semibold text-[var(--ink)] mb-1">Eligibility Quiz</h3>
+            <p class="text-xs text-[var(--muted)]">Find out if TMS is right for you</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .serif {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  .faq-item {
+    transition: box-shadow 0.2s;
+  }
+  .faq-item[open] {
+    box-shadow: 0 4px 20px rgba(10, 22, 40, 0.08);
+  }
+</style>

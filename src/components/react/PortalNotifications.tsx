@@ -1,4 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '../../lib/react-query';
+import { useRealtimeNotifications } from '../../hooks/useRealtime';
 
 interface Notification {
   id: string;
@@ -8,6 +11,11 @@ interface Notification {
   read: boolean;
   link: string | null;
   createdAt: string;
+}
+
+interface NotificationsResponse {
+  notifications: Notification[];
+  unreadCount: number;
 }
 
 function timeAgo(dateStr: string): string {
@@ -61,31 +69,42 @@ function typeIcon(type: string) {
 
 export default function PortalNotifications() {
   const [open, setOpen] = useState(false);
-  const [items, setItems] = useState<Notification[]>([]);
-  const [unreadCount, setUnreadCount] = useState(0);
-  const [loading, setLoading] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const queryClient = useQueryClient();
 
-  const fetchNotifications = useCallback(async () => {
-    try {
-      setLoading(true);
+  // Connect to SSE for real-time notification updates
+  useRealtimeNotifications({ enabled: true });
+
+  // Fetch notifications via React Query
+  const { data, isLoading } = useQuery({
+    queryKey: queryKeys.portal.notifications(),
+    queryFn: async (): Promise<NotificationsResponse> => {
       const res = await fetch('/api/portal/notifications-list?limit=10');
-      const data = await res.json();
-      setItems(data.notifications || []);
-      setUnreadCount(data.unreadCount || 0);
-    } catch {
-      // silent fail
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+      if (!res.ok) throw new Error('Failed to fetch notifications');
+      return res.json();
+    },
+    staleTime: 0,
+    refetchInterval: 60000,
+  });
 
-  useEffect(() => {
-    fetchNotifications();
-    // Poll every 60 seconds
-    const interval = setInterval(fetchNotifications, 60000);
-    return () => clearInterval(interval);
-  }, [fetchNotifications]);
+  const items = data?.notifications ?? [];
+  const unreadCount = data?.unreadCount ?? 0;
+
+  // Mark notifications as read mutation
+  const markReadMutation = useMutation({
+    mutationFn: async (ids: string[]) => {
+      const res = await fetch('/api/portal/notifications-list', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids }),
+      });
+      if (!res.ok) throw new Error('Failed to mark as read');
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.portal.notifications() });
+    },
+  });
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -100,24 +119,14 @@ export default function PortalNotifications() {
     }
   }, [open]);
 
-  async function markAsRead(ids: string[]) {
-    try {
-      await fetch('/api/portal/notifications-list', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ids }),
-      });
-      setItems((prev) => prev.map((n) => (ids.includes(n.id) ? { ...n, read: true } : n)));
-      setUnreadCount((prev) => Math.max(0, prev - ids.length));
-    } catch {
-      // silent
-    }
+  function markAsRead(ids: string[]) {
+    markReadMutation.mutate(ids);
   }
 
-  async function markAllRead() {
+  function markAllRead() {
     const unreadIds = items.filter((n) => !n.read).map((n) => n.id);
     if (unreadIds.length > 0) {
-      await markAsRead(unreadIds);
+      markAsRead(unreadIds);
     }
   }
 
@@ -133,7 +142,7 @@ export default function PortalNotifications() {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        onClick={() => { setOpen(!open); if (!open) fetchNotifications(); }}
+        onClick={() => setOpen(!open)}
         className="relative p-2 rounded-lg text-[var(--muted)] hover:bg-[var(--paper2)] hover:text-[var(--ink2)] transition-colors"
         aria-label="Notifications"
       >
@@ -162,7 +171,7 @@ export default function PortalNotifications() {
           </div>
 
           <div className="max-h-80 overflow-y-auto">
-            {loading && items.length === 0 ? (
+            {isLoading && items.length === 0 ? (
               <div className="flex items-center justify-center py-8">
                 <div className="w-5 h-5 border-2 border-emerald-200 border-t-emerald-600 rounded-full animate-spin" />
               </div>
