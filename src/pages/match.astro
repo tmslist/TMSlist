@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ClinicMatcher from "../components/react/ClinicMatcher";
+---
+
+<Layout title="Find Your TMS Match | TMSList" description="Answer a few questions to get personalized TMS clinic recommendations based on your symptoms and preferences.">
+  <main class="max-w-2xl mx-auto px-4 py-12">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-[var(--ink)] mb-2">Find Your TMS Match</h1>
+      <p class="text-[var(--muted)] max-w-md mx-auto">
+        Tell us about your symptoms and preferences. We'll match you with TMS clinics that best fit your needs.
+      </p>
+    </div>
+
+    <ClinicMatcher client:load />
+
+    <div class="mt-8 text-center">
+      <p class="text-sm text-[var(--muted)]">
+        Not sure if TMS is right for you? <a href="/treatments/tms" class="text-[var(--accent)] font-semibold hover:underline">Learn about TMS therapy</a>
+      </p>
+    </div>
+  </main>
+</Layout>

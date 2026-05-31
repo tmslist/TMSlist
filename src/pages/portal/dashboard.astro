@@ -3,6 +3,8 @@ export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
 import PortalDashboard from "../../components/react/PortalDashboard";
 import PortalSidebar from "../../components/react/PortalSidebar";
+import PortalRevenueDashboard from "../../components/react/PortalRevenueDashboard";
+import PortalHealthAlerts from "../../components/react/PortalHealthAlerts";
 import { getSessionFromRequest, hasRole } from "../../utils/auth";
 
 const session = getSessionFromRequest(Astro.request);
@@ -19,7 +21,21 @@ if (!hasRole(session, 'admin', 'editor', 'clinic_owner', 'viewer')) {
     <PortalSidebar client:load currentPage="dashboard" userEmail={session.email} userId={session.userId} />
     <main class="flex-1 lg:ml-64 py-8">
       <div class="container mx-auto px-4 max-w-5xl">
+        <!-- Health Alerts Banner -->
+        <div id="health-alerts-container"></div>
+
+        <!-- Portal Dashboard -->
         <PortalDashboard client:load userEmail={session.email} userId={session.userId} />
+
+        <!-- Revenue Dashboard -->
+        <div class="mt-8">
+          <PortalRevenueDashboard client:load userId={session.userId} />
+        </div>
+
+        <!-- Health Alerts (in-page for better UX) -->
+        <div class="mt-8">
+          <PortalHealthAlerts client:load />
+        </div>
       </div>
     </main>
   </div>

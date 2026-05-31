@@ -20,7 +20,8 @@ interface Props {
 }
 
 const { providerType, cityName, stateName, stateSlug, citySlug, doctors, clinics } = Astro.props;
-const provider = PROVIDER_TYPES.find(p => p.slug === providerType)!;
+const provider = PROVIDER_TYPES.find(p => p.slug === providerType);
+if (!provider) return Astro.redirect('/us/');
 const seo = getProviderSEOContent(providerType, cityName, stateName);
 const clinicCount = clinics.length;
 const avgRating = clinics.length > 0
@@ -39,7 +40,7 @@ const avgRating = clinics.length > 0
     titleAccent={`${cityName}.`}
     description={doctors.length > 0
       ? `${doctors.length} ${provider.plural} specializing in TMS therapy across ${clinicCount} clinics in ${cityName}, ${stateName}.`
-      : `Find ${provider.plural.toLowerCase()} specializing in TMS therapy in ${cityName}, ${stateName}. Browse verified providers and book a consultation.`}
+      : `Find ${(provider.plural || provider.label || 'providers').toLowerCase()} specializing in TMS therapy in ${cityName}, ${stateName}. Browse verified providers and book a consultation.`}
     breadcrumbs={[
       { label: "Home", href: "/" },
       { label: "United States", href: "/us/" },
