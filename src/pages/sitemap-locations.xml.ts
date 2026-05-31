@@ -8,7 +8,13 @@ import { getAllClinics } from '../utils/dataHelpers';
 export const GET: APIRoute = async () => {
   const base = 'https://tmslist.com';
   const now = new Date().toISOString().split('T')[0];
-  const clinics = await getAllClinics();
+
+  let clinics: Awaited<ReturnType<typeof getAllClinics>> = [];
+  try {
+    clinics = await getAllClinics();
+  } catch (err) {
+    console.error('Sitemap locations error:', err);
+  }
 
   const seen = new Set<string>();
   const urls: string[] = [];
@@ -63,15 +69,13 @@ export const GET: APIRoute = async () => {
     }
   }
 
-  // US state pages
-  for (const [, name] of Object.entries(STATE_NAMES)) {
+  // US state pages - only include states that have verified clinics
+  const statesWithClinics = new Set(clinics.filter(c => c.verified && c.state).map(c => c.state));
+  for (const stateCode of statesWithClinics) {
+    const name = STATE_NAMES[stateCode];
+    if (!name) continue;
     const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     add(`${base}/us/${slug}/`, '0.8', 'weekly');
-  }
-
-  // Best TMS clinics by state
-  for (const [, name] of Object.entries(STATE_NAMES)) {
-    const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     add(`${base}/best-tms-clinics/${slug}/`, '0.7', 'weekly');
   }
 
