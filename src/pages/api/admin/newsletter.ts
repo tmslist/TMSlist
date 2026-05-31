@@ -1,64 +1,108 @@
 import type { APIRoute } from 'astro';
-import { getNewsletterSubscribers, getNewsletterStats, unsubscribeNewsletter, resubscribeNewsletter, addNewsletterSubscriber } from '../../../db/queries';
-import { getSessionFromRequest, hasRole } from '../../../utils/auth';
+import { eq, desc, count, sql, and } from 'drizzle-orm';
+import { db } from '../../../db';
+import { newsletterSubscribers } from '../../../db/schema';
+import { getSessionFromRequest, hasRole } from '../../../utils/auth.js';
 
 export const prerender = false;
 
+const json = (data: unknown, status = 200) =>
+  new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
+
+// GET: List subscribers
 export const GET: APIRoute = async ({ request }) => {
-  const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin', 'editor')) {
-    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
-  }
-
-  const url = new URL(request.url);
-  const opts = {
-    status: url.searchParams.get('status') ?? undefined,
-    limit: Math.min(parseInt(url.searchParams.get('limit') ?? '50'), 200),
-    offset: parseInt(url.searchParams.get('offset') ?? '0'),
-  };
-
+  const s = getSessionFromRequest(request);
+  if (!s || !hasRole(s, 'admin', 'editor')) return json({ error: 'Forbidden' }, 403);
   try {
-    const [subscribers, stats] = await Promise.all([
-      getNewsletterSubscribers(opts),
-      getNewsletterStats(),
-    ]);
-    return new Response(JSON.stringify({ subscribers, stats }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
+    const url = new URL(request.url);
+    const statusFilter = url.searchParams.get('status') || '';
+    const search = url.searchParams.get('search') || '';
+    const limit = Math.max(1, Math.min(parseInt(url.searchParams.get('limit') || '50'), 200));
+    const offset = Math.max(0, parseInt(url.searchParams.get('offset') || '0'));
+
+    const conditions = [];
+    if (statusFilter) conditions.push(eq(newsletterSubscribers.status, statusFilter));
+    if (search) conditions.push(
+      sql`${newsletterSubscribers.email} ILIKE ${'%' + search + '%'} OR ${newsletterSubscribers.name} ILIKE ${'%' + search + '%'}`
+    );
+    const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+
+    const [total] = await db.select({ count: count() }).from(newsletterSubscribers);
+    const [subscribed] = await db.select({ count: count() })
+      .from(newsletterSubscribers).where(eq(newsletterSubscribers.status, 'subscribed'));
+    const [unsubscribed] = await db.select({ count: count() })
+      .from(newsletterSubscribers).where(eq(newsletterSubscribers.status, 'unsubscribed'));
+
+    const rows = await db.select().from(newsletterSubscribers)
+      .where(whereClause)
+      .orderBy(desc(newsletterSubscribers.createdAt))
+      .limit(limit).offset(offset);
+
+    return json({
+      subscribers: rows,
+      stats: {
+        total: Number(total?.count ?? 0),
+        subscribed: Number(subscribed?.count ?? 0),
+        unsubscribed: Number(unsubscribed?.count ?? 0),
+      },
+      total: Number(total?.count ?? 0),
     });
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown error';
-    return new Response(JSON.stringify({ error: message }), { status: 500 });
-  }
+  } catch (err) { console.error('[/api/admin/newsletter GET]', err); return json({ error: 'Internal server error' }, 500); }
 };
 
+// POST: Add subscriber / toggle subscription
 export const POST: APIRoute = async ({ request }) => {
-  const session = getSessionFromRequest(request);
-  if (!hasRole(session, 'admin', 'editor')) {
-    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
-  }
-
+  const s = getSessionFromRequest(request);
+  if (!s || !hasRole(s, 'admin', 'editor')) return json({ error: 'Forbidden' }, 403);
   try {
     const body = await request.json();
+    const { action, email, name, source } = body;
 
-    if (body.action === 'unsubscribe') {
-      await unsubscribeNewsletter(body.email);
-      return new Response(JSON.stringify({ success: true }), { status: 200 });
+    if (action === 'unsubscribe') {
+      await db.update(newsletterSubscribers)
+        .set({ status: 'unsubscribed' })
+        .where(eq(newsletterSubscribers.email, email));
+      return json({ success: true });
     }
 
-    if (body.action === 'resubscribe') {
-      await resubscribeNewsletter(body.email);
-      return new Response(JSON.stringify({ success: true }), { status: 200 });
+    if (action === 'resubscribe') {
+      await db.update(newsletterSubscribers)
+        .set({ status: 'subscribed', confirmedAt: new Date() })
+        .where(eq(newsletterSubscribers.email, email));
+      return json({ success: true });
     }
 
-    if (body.email) {
-      const subscriber = await addNewsletterSubscriber(body);
-      return new Response(JSON.stringify({ subscriber }), { status: 201 });
-    }
+    // Default: subscribe (upsert)
+    if (!email) return json({ error: 'email is required' }, 400);
+    const [row] = await db.insert(newsletterSubscribers).values({
+      email,
+      name: name || null,
+      source: source || 'admin',
+      status: 'subscribed',
+      confirmedAt: new Date(),
+    }).onConflictDoUpdate({
+      target: newsletterSubscribers.email,
+      set: { status: 'subscribed', confirmedAt: new Date() },
+    }).returning();
+    return json({ subscriber: row });
+  } catch (err) { console.error('[/api/admin/newsletter POST]', err); return json({ error: 'Internal server error' }, 500); }
+};
 
-    return new Response(JSON.stringify({ error: 'email or action required' }), { status: 400 });
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown error';
-    return new Response(JSON.stringify({ error: message }), { status: 500 });
-  }
+// DELETE: Remove subscriber
+export const DELETE: APIRoute = async ({ request }) => {
+  const s = getSessionFromRequest(request);
+  if (!s || !hasRole(s, 'admin', 'editor')) return json({ error: 'Forbidden' }, 403);
+  try {
+    const url = new URL(request.url);
+    const id = url.searchParams.get('id');
+    if (id) {
+      await db.delete(newsletterSubscribers).where(eq(newsletterSubscribers.id, id));
+    } else {
+      const body = await request.json();
+      if (body?.email) {
+        await db.delete(newsletterSubscribers).where(eq(newsletterSubscribers.email, body.email));
+      }
+    }
+    return json({ success: true });
+  } catch (err) { console.error('[/api/admin/newsletter DELETE]', err); return json({ error: 'Internal server error' }, 500); }
 };

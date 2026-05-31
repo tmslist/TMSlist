@@ -2,7 +2,7 @@
 export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
 import AdminSidebar from "../../components/react/AdminSidebar";
-import AdminNewsletter from "../../components/react/AdminNewsletter";
+import AdminQuestions from "../../components/react/AdminQuestions";
 import { getSessionFromRequest, hasRole } from "../../utils/auth";
 
 const session = getSessionFromRequest(Astro.request);
@@ -10,16 +10,16 @@ if (!hasRole(session, 'admin', 'editor')) {
   return Astro.redirect("/admin/login");
 }
 ---
-<Layout title="Newsletter | TMS List Admin" noindex={true}>
+<Layout title="Questions | TMS List Admin" noindex={true}>
   <div class="flex min-h-screen bg-[var(--paper2)]">
-    <AdminSidebar client:load currentPage="newsletter" userEmail={session!.email} />
+    <AdminSidebar client:load currentPage="questions" userEmail={session!.email} />
     <main class="flex-1 lg:ml-64 py-8">
       <div class="container mx-auto px-4 max-w-7xl">
         <div class="mb-8">
-          <h1 class="text-2xl font-semibold text-[var(--ink)]">Newsletter Subscribers</h1>
-          <p class="text-[var(--muted)] mt-1">Manage subscriber list, import/export, and subscription status</p>
+          <h1 class="text-2xl font-semibold text-[var(--ink)]">Quiz Questions</h1>
+          <p class="text-[var(--muted)] mt-1">Manage FAQ and quiz content for the TMS directory</p>
         </div>
-        <AdminNewsletter client:load />
+        <AdminQuestions client:load />
       </div>
     </main>
   </div>
