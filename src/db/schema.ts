@@ -10,8 +10,8 @@ import {
   pgEnum,
   index,
   uniqueIndex,
-  sql,
 } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
 
 // ── ENUMS ──────────────────────────────────────
 
