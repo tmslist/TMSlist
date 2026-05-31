@@ -335,7 +335,8 @@ function getDiceBearUrl(name: string): string {
         .join('');
     const encoded = encodeURIComponent(initials);
     const backgroundColor = hashStrToHex(name);
-    return `https://api.dicebear.com/7.x/initials/svg?seed=${encoded}&backgroundColor=${backgroundColor}&textColor=ffffff&fontSize=40&fontWeight=600`;
+    // Professional style: larger font, bold weight, clean background
+    return `https://api.dicebear.com/7.x/initials/svg?seed=${encoded}&backgroundColor=${backgroundColor}&textColor=ffffff&fontSize=45&fontWeight=700&backgroundType=gradientLinear&fontFamily=Helvetica,Arial,sans-serif`;
 }
 
 function hashStrToHex(str: string): string {

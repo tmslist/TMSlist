@@ -477,14 +477,14 @@ const schema = JSON.stringify({
                                                 )}
                                                 <div class={`p-6 ${doctor.clinicImage && !doctor.clinicImage.includes('tms_chair') ? '-mt-6 relative z-10' : ''}`}>
                                                     <div class="flex items-start gap-4 mb-4">
-                                                        <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-md bg-[var(--paper2)]">
+                                                        <div class="w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-md bg-[var(--paper2)]">
                                                                 <img
                                                                     src={getDoctorPhoto({ name: doctor.fullName, image_url: doctor.imageUrl, slug: doctor.slug })}
                                                                     alt={`${doctor.fullName} - TMS specialist in ${doctor.clinicCity}`}
                                                                     class="w-full h-full object-cover"
                                                                     loading="lazy"
-                                                                    width="64"
-                                                                    height="64"
+                                                                    width="80"
+                                                                    height="80"
                                                                 />
                                                         </div>
                                                         <div class="flex-1 min-w-0">
