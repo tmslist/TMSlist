@@ -74,9 +74,6 @@ const metaDescription = description || defaultDescription;
 const rawOgImage = image || defaultImage;
 const ogImage = rawOgImage.startsWith('http') ? rawOgImage : `${siteUrl}${rawOgImage}`;
 const canonicalUrl = canonical || (siteUrl + Astro.url.pathname.replace(/\/$/, '') + '/');
-// For country-prefixed pages, canonical = x-default hreflang URL to prevent duplicate content
-const xDefaultUrl = isCountryPage ? `${siteUrl}${subPath}` : null;
-const finalCanonical = xDefaultUrl || canonicalUrl;
 
 // Detect language from URL path for international pages
 const COUNTRY_LANG: Record<string, string> = {
@@ -108,6 +105,8 @@ const autoHreflang = isCountryPage ? COUNTRY_PREFIXES.map(prefix => ({
 const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? autoHreflang : undefined);
 // Add x-default hreflang for international SEO
 const xDefaultHreflang = isCountryPage ? { lang: "x-default", url: `${siteUrl}${subPath}` } : undefined;
+// For country-prefixed pages, canonical = x-default hreflang URL to prevent duplicate content
+const finalCanonical = isCountryPage ? `${siteUrl}${subPath}` : canonicalUrl;
 ---
 
 <!doctype html>
