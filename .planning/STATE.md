@@ -73,14 +73,15 @@ See: `.planning/PROJECT.md` (updated 2026-04-16)
 
 ### Provider Admin (admin panel for clinic owners)
 - `/admin/providers` — **done** (built 2026-05-31: API + AdminProviders.tsx + providers.astro page + sidebar nav)
-- `/admin/providers/[id]` — **does not exist** (individual provider pages still needed)
-- Hardcoded provider admin credentials in `src/pages/admin/login.astro` (S141) — still open
+- `/admin/providers/[id]` — **done** (built 2026-05-31: [id].astro + AdminProviderDetail.tsx + AdminProviderModal.tsx)
+- Hardcoded credentials (S141) — **done** (create-admin script + email utils + .env.example updated)
 - Provider role in roles/permissions system — still pending (Phase 09 partial)
 
 ### Doctor Dashboard
-- `/doctor/` — **does not exist** as a separate route; doctors currently use clinic portal
-- Doctor-specific review pipeline (NPI-based attribution) not wired
-- No doctor-specific analytics or patient queue
+- `/doctor/` route — **done** (20+ pages exist, full component library under src/components/react/Doctor*.tsx)
+- `/api/doctor/profile` — **done** (scoped to session.clinicId, PUT works)
+- `/api/doctor/reviews` — **done** (scoped to session.clinicId, POST for owner responses)
+- Doctor profile editor — **done** (DoctorProfileEditor.tsx exists)
 
 ### Portal Quality Audit (Phase 06)
 All17 portal pages have React islands and data fetching wired. Known issues:
