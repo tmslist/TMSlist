@@ -33,9 +33,9 @@ See: `.planning/PROJECT.md` (updated 2026-04-16)
 |-------|------|-------------|--------|
 | 1 | Auth & Security Hardening | AUTH-01–AUTH-10 | ✅ Complete (TOTP 2FA, account lockout, device tracking, magic link + password auth, bcrypt passwords, remember-me sessions, suspicious login alerts, rate limiting, session allowlist) |
 | 2 | Admin Dashboard & Analytics | DASH-01–DASH-10 | ✅ Complete (real data, system health, audit log, sparklines, lead stats, trend tracking) |
-| 3 | Admin Clinic Management | CLIN-01–CLIN-15 | 🔄 Partial (AdminClinics, AdminClinicEditor, UpsellModal done; full CRUD pending) |
-| 4 | Admin Reviews & Leads | RVWS-01–RVWS-07, LEAD-01–LEAD-09 | 🔄 Partial (lead API, patient enquiries done; reviews management pending) |
-| 5 | Admin Blog, Billing & SEO | BLOG-01–BLOG-08, BILL-01–BILL-07, SEO-01–SEO-09 | 🔄 Partial (newsletter stats API done; blog CMS, billing reports, SEO scanner pending) |
+| 3 | Admin Clinic Management | CLIN-01–CLIN-15 | ✅ Complete (editor modal, bulk verify/unverify, delete, clinic detail page) |
+| 4 | Admin Reviews & Leads | RVWS-01–RVWS-07, LEAD-01–LEAD-09 | ✅ Complete (AdminReviews + status PATCH API; leads API + patient enquiries done) |
+| 5 | Admin Blog, Billing & SEO | BLOG-01–BLOG-08, BILL-01–BILL-07, SEO-01–SEO-09 | ✅ Complete (AdminBlogEditor, billing reports, SEO scanner, blog/BlogEditor/billing-reports/seo pages) |
 | 6 | Clinic Portal Core Experience | PORT-01–PORT-15 | ✅ Done (all 18 pages built; PortalDashboard, PortalClaimClinic, PortalHealthScore, PortalOnboardingWizard, PortalAnalytics all wired to real APIs) |
 | 7 | Clinic Portal Advanced Features | DATA-01–DATA-10 | ✅ Done (team manager, invoice history, notification preferences) |
 | 8 | Admin Critical Bugfixes | — | ✅ Complete (6 commits, 14 files, 10/10 must-haves) |
