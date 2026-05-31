@@ -1,0 +1,16 @@
+---
+// Catch-all for invalid country/region/city combinations
+// Extract parts and redirect to the closest valid parent
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const [countryPrefix, region, city] = segments;
+
+if (city) {
+    // Invalid city - redirect to region page
+    return Astro.redirect(`/${countryPrefix}/${region}/`, 301);
+} else if (region) {
+    // Invalid region - redirect to country page
+    return Astro.redirect(`/${countryPrefix}/`, 301);
+}
+// Fallback to home
+return Astro.redirect('/', 301);
+---

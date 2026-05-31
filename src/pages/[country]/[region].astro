@@ -1,0 +1,8 @@
+---
+// Catch-all for invalid region paths on country pages without region support
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const [countryPrefix, region] = segments;
+
+// Redirect invalid region to country index
+return Astro.redirect(`/${countryPrefix}/`, 301);
+---
