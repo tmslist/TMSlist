@@ -11,9 +11,14 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
-const email = process.argv[2] || 'admin@tmslist.com';
-const password = process.argv[3] || 'TmsList2026!';
+const email = process.argv[2];
+const password = process.argv[3];
 const name = process.argv[4] || 'Admin';
+
+if (!email || !password) {
+  console.error('Usage: npx tsx scripts/create-admin.ts <email> <password> [name]');
+  process.exit(1);
+}
 
 async function main() {
   const sql = postgres(DATABASE_URL!);

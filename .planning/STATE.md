@@ -72,10 +72,10 @@ See: `.planning/PROJECT.md` (updated 2026-04-16)
 ## Known Gaps
 
 ### Provider Admin (admin panel for clinic owners)
-- `/admin/providers` — **does not exist** (no provider list page)
-- `/admin/providers/[id]` — **does not exist** (no individual provider management)
-- Hardcoded provider admin credentials in `src/pages/admin/login.astro` (S141)
-- No provider role in the roles/permissions system yet
+- `/admin/providers` — **done** (built 2026-05-31: API + AdminProviders.tsx + providers.astro page + sidebar nav)
+- `/admin/providers/[id]` — **does not exist** (individual provider pages still needed)
+- Hardcoded provider admin credentials in `src/pages/admin/login.astro` (S141) — still open
+- Provider role in roles/permissions system — still pending (Phase 09 partial)
 
 ### Doctor Dashboard
 - `/doctor/` — **does not exist** as a separate route; doctors currently use clinic portal

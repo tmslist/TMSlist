@@ -10,8 +10,8 @@ function getResend() {
 
 const FROM = 'TMS List <notifications@mail.tmslist.com>';
 const LOGIN_FROM = 'TMS List <login@mail.tmslist.com>';
-const ADMIN_EMAIL = 'brandingpioneers@gmail.com';
-const FOUNDER_EMAIL = 'arush.thapar@rainmindz.com';
+const ADMIN_EMAIL = import.meta.env.ADMIN_EMAIL || process.env.ADMIN_EMAIL || 'brandingpioneers@gmail.com';
+const FOUNDER_EMAIL = import.meta.env.FOUNDER_EMAIL || process.env.FOUNDER_EMAIL || 'arush.thapar@rainmindz.com';
 
 // ── AUTH EMAIL TEMPLATES ──────────────────────────────
 
