@@ -1,9 +1,9 @@
 import type { APIRoute } from 'astro';
 import { eq, and, isNull } from 'drizzle-orm';
-import { db } from '../../../db';
-import { clinics } from '../../../db/schema';
+import { db } from '../../db';
+import { clinics } from '../../db/schema';
 import { z } from 'zod';
-import { rankClinics, getCachedMatches, setCachedMatches, type MatchInput } from '../../../utils/rateLimit';
+import { rankClinics, getCachedMatches, setCachedMatches, type MatchInput } from '../../utils/rateLimit';
 
 export const prerender = false;
 

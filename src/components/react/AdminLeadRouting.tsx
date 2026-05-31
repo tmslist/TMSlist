@@ -17,13 +17,159 @@ interface Doctor {
   capacity: number;
 }
 
+// ── Smart Routing Tab ─────────────────────────────────────────────────────────
+
+function SmartRoutingTab() {
+  const [coldLeads, setColdLeads] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [routingMode, setRoutingMode] = useState<'auto' | 'manual'>('auto');
+  const [expandedLead, setExpandedLead] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/admin/intelligent-routing/cold-leads?hours=24')
+      .then((r) => r.ok ? r.json() : Promise.resolve({ coldLeads: [] }))
+      .then((d) => { setColdLeads(d.coldLeads || []); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+
+  async function handleManualRoute(leadId: string, clinicId: string) {
+    try {
+      await fetch('/api/admin/intelligent-routing/route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leadId, clinicId, reason: 'Manual escalation from cold leads queue' }),
+      });
+      setColdLeads((prev) => prev.filter((l) => l.lead?.id !== leadId));
+    } catch (err) {
+      console.error('Routing failed:', err);
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="w-8 h-8 border-4 border-[rgba(10,22,40,0.15)] border-t-[#0A1628] rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-lg font-semibold text-[var(--ink)]">Intelligent Lead Routing</h2>
+          <p className="text-sm text-[var(--muted)] mt-1">
+            AI-powered routing based on specialty match, availability, and conversion history
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-[var(--muted)]">Routing mode:</span>
+          <button
+            onClick={() => setRoutingMode(routingMode === 'auto' ? 'manual' : 'auto')}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              routingMode === 'auto'
+                ? 'bg-emerald-100 text-emerald-700'
+                : 'bg-amber-100 text-amber-700'
+            }`}
+          >
+            {routingMode === 'auto' ? 'Auto-Route Enabled' : 'Manual Approval'}
+          </button>
+        </div>
+      </div>
+
+      {/* Cold Leads Queue */}
+      <div className="bg-white rounded-xl border border-[var(--line)] overflow-hidden mb-6">
+        <div className="px-6 py-4 border-b border-[var(--line)] bg-amber-50">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-semibold text-amber-900">Cold Leads Queue</h3>
+              <p className="text-xs text-amber-700 mt-0.5">
+                Leads with no response in 24+ hours — require immediate attention
+              </p>
+            </div>
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-200 text-amber-800 text-sm font-bold">
+              {coldLeads.length}
+            </span>
+          </div>
+        </div>
+
+        {coldLeads.length === 0 ? (
+          <div className="px-6 py-8 text-center text-[var(--muted)]">
+            No cold leads — all caught up! ✓
+          </div>
+        ) : (
+          <div className="divide-y divide-[var(--line)]">
+            {coldLeads.map(({ lead, hoursSinceCreated }) => (
+              <div key={lead.id} className="px-6 py-4">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-1">
+                      <span className="text-sm font-medium text-[var(--ink)]">{lead.name || 'Unknown Lead'}</span>
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                        hoursSinceCreated > 48 ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'
+                      }`}>
+                        {hoursSinceCreated}h old
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                        {lead.type}
+                      </span>
+                    </div>
+                    <p className="text-xs text-[var(--muted)]">
+                      {lead.email && `${lead.email} · `}{lead.city && ` ${lead.city},`} {lead.state}
+                    </p>
+                    {lead.message && (
+                      <p className="text-sm text-[var(--ink2)] mt-2 bg-[var(--paper2)] rounded-lg p-3">
+                        "{lead.message.length > 100 ? lead.message.slice(0, 100) + '...' : lead.message}"
+                      </p>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => handleManualRoute(lead.id, 'auto')}
+                    className="ml-4 px-4 py-2 bg-[var(--ink)] text-white text-sm font-medium rounded-lg hover:bg-[var(--ink2)] transition-colors"
+                  >
+                    Route Now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* How It Works */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100 p-6">
+        <h3 className="text-sm font-semibold text-blue-900 mb-4">How Smart Routing Works</h3>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {[
+            { icon: '🎯', title: 'Specialty Match', desc: 'Depression → TMS centers, not psychiatrists' },
+            { icon: '📅', title: 'Availability', desc: 'Routes only to clinics with open slots' },
+            { icon: '📊', title: 'Conversion Rate', desc: 'Weighted by historical lead→appt rate' },
+            { icon: '⚡', title: 'Response Time', desc: 'Deprioritizes clinics >48h avg response' },
+          ].map((item) => (
+            <div key={item.title} className="flex items-start gap-3">
+              <span className="text-2xl">{item.icon}</span>
+              <div>
+                <p className="text-sm font-semibold text-blue-900">{item.title}</p>
+                <p className="text-xs text-blue-700 mt-0.5">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AdminLeadRouting() {
   const [routes, setRoutes] = useState<LeadRoute[]>([]);
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState<'rules' | 'doctors' | 'analytics'>('rules');
+  const [activeTab, setActiveTab] = useState<'rules' | 'doctors' | 'analytics' | 'smart'>('rules');
   const [editingRoute, setEditingRoute] = useState<LeadRoute | null>(null);
+  const [coldLeads, setColdLeads] = useState<any[]>([]);
+  const [smartLoading, setSmartLoading] = useState(false);
 
   useEffect(() => {
     fetch('/api/admin/lead-routing')
@@ -123,7 +269,7 @@ export default function AdminLeadRouting() {
 
       {/* Tabs */}
       <div className="flex gap-1 bg-[var(--paper2)] rounded-xl p-1 mb-8 w-fit">
-        {(['rules', 'doctors', 'analytics'] as const).map((t) => (
+        {(['rules', 'doctors', 'analytics', 'smart'] as const).map((t) => (
           <button
             key={t}
             onClick={() => setActiveTab(t)}
@@ -131,7 +277,7 @@ export default function AdminLeadRouting() {
               activeTab === t ? 'bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--ink2)] hover:text-[var(--ink)]'
             }`}
           >
-            {t}
+            {t === 'smart' ? 'Smart Routing' : t.charAt(0).toUpperCase() + t.slice(1)}
           </button>
         ))}
       </div>
@@ -353,6 +499,8 @@ export default function AdminLeadRouting() {
           </div>
         </div>
       )}
+
+      {activeTab === 'smart' && <SmartRoutingTab />}
     </div>
   );
 }
