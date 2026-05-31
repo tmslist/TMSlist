@@ -38,6 +38,8 @@ export default function AdminClinics() {
   const [error, setError] = useState('');
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [bulkDeleting, setBulkDeleting] = useState(false);
+  const [bulkVerifying, setBulkVerifying] = useState(false);
+  const [bulkUnverifying, setBulkUnverifying] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [impersonate, setImpersonate] = useState<{ id: string; email: string; name: string; userId: string } | null>(null);
   const limit = 25;
@@ -126,10 +128,8 @@ export default function AdminClinics() {
     let failed = 0;
     for (const id of ids) {
       try {
-        const res = await fetch('/api/admin/clinics', {
+        const res = await fetch(`/api/admin/clinics?id=${encodeURIComponent(id)}`, {
           method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id }),
         });
         if (res.ok) deleted++;
         else failed++;
@@ -145,6 +145,34 @@ export default function AdminClinics() {
       fetchClinics();
     } else {
       setError(`${deleted} deleted, ${failed} failed.`);
+    }
+  }
+
+  // ---- Bulk verify / unverify ----
+  async function bulkVerify(verify: boolean) {
+    const ids = Array.from(selected);
+    if (verify) setBulkVerifying(true);
+    else setBulkUnverifying(true);
+    try {
+      const res = await fetch(`/api/admin/clinics/bulk-${verify ? 'verify' : 'unverify'}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids }),
+      });
+      if (res.ok) {
+        setClinics(prev => prev.map(c =>
+          ids.includes(c.id) ? { ...c, verified: verify } : c
+        ));
+        setSelected(new Set());
+        setError('');
+      } else {
+        setError(`Bulk ${verify ? 'verify' : 'unverify'} failed.`);
+      }
+    } catch {
+      setError(`Bulk ${verify ? 'verify' : 'unverify'} failed — network error.`);
+    } finally {
+      setBulkVerifying(false);
+      setBulkUnverifying(false);
     }
   }
 
@@ -276,7 +304,7 @@ export default function AdminClinics() {
                     />
                   </td>
                   <td className="px-4 py-3">
-                    <a href={`/clinic/${clinic.slug}/`} target="_blank" className="text-sm font-semibold text-[var(--ink)] hover:text-[var(--warm)]">
+                    <a href={`/admin/clinics/view/${clinic.id}`} className="text-sm font-semibold text-[var(--ink)] hover:text-[var(--warm)]">
                       {clinic.name}
                     </a>
                     {clinic.email && <div className="text-xs text-[var(--muted)] mt-0.5">{clinic.email}</div>}
@@ -387,6 +415,18 @@ export default function AdminClinics() {
                           {clinic.isFeatured ? 'Unfeature' : 'Feature'}
                         </button>
                       </AdminPermissionGuard>
+                      <AdminPermissionGuard permission="can_edit_clinics">
+                        <button
+                          onClick={() => {
+                            setSelected(new Set([clinic.id]));
+                            setShowDeleteModal(true);
+                          }}
+                          className="px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 hover:bg-red-50 transition-colors"
+                          title="Delete clinic"
+                        >
+                          Delete
+                        </button>
+                      </AdminPermissionGuard>
                     </div>
                   </td>
                 </tr>
@@ -437,6 +477,36 @@ export default function AdminClinics() {
             </svg>
             Export CSV
           </button>
+          <div className="w-px h-5 bg-[var(--muted)]" />
+          <button
+            onClick={() => bulkVerify(true)}
+            disabled={bulkVerifying}
+            className="flex items-center gap-1.5 text-sm text-emerald-400 hover:text-emerald-300 transition-colors disabled:opacity-50"
+          >
+            {bulkVerifying ? (
+              <div className="w-4 h-4 border-2 border-emerald-400/30 border-t-emerald-400 rounded-full animate-spin" />
+            ) : (
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            )}
+            Verify Selected
+          </button>
+          <button
+            onClick={() => bulkVerify(false)}
+            disabled={bulkUnverifying}
+            className="flex items-center gap-1.5 text-sm text-amber-400 hover:text-amber-300 transition-colors disabled:opacity-50"
+          >
+            {bulkUnverifying ? (
+              <div className="w-4 h-4 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin" />
+            ) : (
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            )}
+            Unverify Selected
+          </button>
+          <div className="w-px h-5 bg-[var(--muted)]" />
           <button
             onClick={() => setShowDeleteModal(true)}
             className="flex items-center gap-1.5 text-sm text-red-400 hover:text-red-300 transition-colors"
