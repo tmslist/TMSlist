@@ -70,7 +70,7 @@ const schema = JSON.stringify({
             stats={[
                 { value: `${totalClinics}+`, label: "Clinics", color: "ink" },
                 { value: regions.length, label: "Regions", color: "accent" },
-                { value: meta.tmsStatus.length > 12 ? "FDA-Like" : meta.tmsStatus, label: "Status", color: "warm" },
+                { value: countryCode === 'GB' ? 'NICE-approved' : (meta.tmsStatus.length > 12 ? "FDA-Like" : meta.tmsStatus), label: "Status", color: "warm" },
             ]}
         />
         <section class="py-12"><div class="container mx-auto px-4">

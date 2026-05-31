@@ -539,3 +539,80 @@ export async function sendTransactionalEmail(opts: {
     html: opts.html,
   });
 }
+
+// ── BULK EMAIL CAMPAIGN ─────────────────────────────
+
+const BULK_BATCH_SIZE = 50;
+
+function wrapBulkHtml(body: string, recipientEmail: string): string {
+  const unsubscribeUrl = `${SITE_URL}/unsubscribe?email=${encodeURIComponent(recipientEmail)}`;
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>TMS List</title></head>
+<body style="margin:0;padding:0;background:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#f9fafb;">TMS List newsletter — view in browser for best experience.</div>
+<div style="max-width:600px;margin:0 auto;padding:40px 20px;">
+  <div style="background:#4f46e5;padding:24px 32px;border-radius:12px 12px 0 0;text-align:center;">
+    <h1 style="margin:0;font-size:20px;font-weight:700;color:white;">TMS List</h1>
+    <p style="margin:4px 0 0;opacity:0.85;font-size:13px;color:white;">TMS Therapy Clinic Directory</p>
+  </div>
+  <div style="background:#ffffff;border:1px solid #e5e7eb;border-top:0;padding:32px;border-radius:0 0 12px 12px;">
+    <div style="color:#374151;font-size:15px;line-height:1.7;">${body}</div>
+  </div>
+  <p style="color:#9ca3af;font-size:11px;text-align:center;margin-top:20px;">
+    TMS List | <a href="${SITE_URL}" style="color:#9ca3af;">Home</a> |
+    <a href="${unsubscribeUrl}" style="color:#9ca3af;">Unsubscribe</a> |
+    <a href="${SITE_URL}/legal/privacy-policy/" style="color:#9ca3af;">Privacy</a>
+  </p>
+</div>
+</body></html>`;
+}
+
+export async function sendBulkEmail(opts: {
+  recipients: Array<{ email: string; name?: string | null }>;
+  subject: string;
+  body: string;
+  campaignId: string;
+}): Promise<boolean> {
+  const resend = getResend();
+  if (!resend) {
+    console.error('[email] RESEND_API_KEY not set — cannot send bulk email');
+    return false;
+  }
+  if (opts.recipients.length === 0) {
+    return true;
+  }
+
+  const total = opts.recipients.length;
+  let sentCount = 0;
+
+  for (let i = 0; i < total; i += BULK_BATCH_SIZE) {
+    const batch = opts.recipients.slice(i, i + BULK_BATCH_SIZE);
+
+    const emails = batch.map((r) => ({
+      from: FROM,
+      to: [r.email],
+      subject: opts.subject,
+      html: wrapBulkHtml(opts.body, r.email),
+      tags: [
+        { name: 'campaign_id', value: opts.campaignId },
+        { name: 'batch', value: String(Math.floor(i / BULK_BATCH_SIZE) + 1) },
+      ],
+    }));
+
+    try {
+      const result = await resend.batch.send(emails);
+      if (result.error) {
+        console.error(`[bulk-email] batch ${Math.floor(i / BULK_BATCH_SIZE) + 1} failed:`, result.error);
+      } else {
+        sentCount += batch.length;
+      }
+    } catch (err) {
+      console.error(`[bulk-email] batch ${Math.floor(i / BULK_BATCH_SIZE) + 1} exception:`, err);
+    }
+  }
+
+  console.log(`[bulk-email] campaign=${opts.campaignId} sent ${sentCount}/${total}`);
+  return sentCount === total;
+}

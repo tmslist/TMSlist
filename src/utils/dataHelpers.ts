@@ -297,9 +297,20 @@ export function getClinicReviewCount(clinic: Clinic): number {
     return clinic.review_count || (typeof clinic.rating === 'object' ? clinic.rating.count : 0);
 }
 
-/** Returns true if the URL looks like a generic hardcoded stock fallback (Unsplash or Picsum). */
+/** Returns true if the URL looks like a generic hardcoded stock fallback or non-clinic image (Unsplash, Picsum, logos, insurance logos, etc.). */
 function isStockFallback(url: string): boolean {
-    return url.includes('images.unsplash.com') || url.includes('picsum.photos');
+    const u = url.toLowerCase();
+    // Stock photo services
+    if (u.includes('images.unsplash.com') || u.includes('picsum.photos')) return true;
+    // SVG placeholders and generic fallback images
+    if (u.includes('logo') || u.includes('brand') || u.includes('icon') || u.includes('favicon')) return true;
+    if (u.includes('.svg') || u.includes('placeholder') || u.includes('generic-placeholder')) return true;
+    // Insurance logos
+    if (u.includes('aetna') || u.includes('bluecross') || u.includes('blueshield') || u.includes('cigna') ||
+        u.includes('united') || u.includes('humana') || u.includes('kaiser') || u.includes('medicare') ||
+        u.includes('medicaid') || u.includes('anthem') || u.includes('centene') || u.includes('hcsc') ||
+        u.includes('healthnet') || u.includes('molina') || u.includes('centene') || u.includes('highmark')) return true;
+    return false;
 }
 
 export function getClinicPhoto(clinic: Clinic): string {

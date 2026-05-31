@@ -387,7 +387,7 @@ const combinedSchema = JSON.stringify([
 
                     <!-- Subhead -->
                     <p style="font-size:17px; line-height:1.65; max-width:36rem; color:var(--muted); margin:0 0 2.5rem;">
-                        {clinics.length}+ verified TMS clinics across <span>{VISITOR_COUNTRY === 'US' ? '50 US states' : COUNTRY_NAMES[VISITOR_COUNTRY] || 'your region'}</span>. Real patient reviews. Verified providers. Find the right clinic — without the runaround.
+                        {clinics.length}+ verified TMS clinics across <span>{VISITOR_COUNTRY === 'US' ? `${locationMap.length} US states` : COUNTRY_NAMES[VISITOR_COUNTRY] || 'your region'}</span>. Real patient reviews. Verified providers. Find the right clinic — without the runaround.
                     </p>
 
                     <!-- Search Box -->
@@ -483,8 +483,8 @@ const combinedSchema = JSON.stringify([
     <!-- Stats Ribbon with stagger animation -->
     <div class="relative -mt-16 z-30 container mx-auto px-4 reveal">
         <div id="stats-ribbon" data-clinic-country="US" class="bg-[var(--paper)] rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] shadow-[rgba(10,22,40,0.08)] p-8 lg:p-6 border border-[var(--line)]/60 stagger-children">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x divide-[var(--line)]">
-                <div class="text-center px-4 pb-4 lg:pb-0 group">
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-0">
+                <div class="text-center px-4 group">
                     <div class="flex items-center justify-center gap-2.5 mb-2">
                         <div class="w-10 h-10 rounded-xl bg-[rgba(10,22,40,0.08)] flex items-center justify-center text-[var(--accent)] group-hover:scale-110 transition-transform">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
@@ -497,7 +497,7 @@ const combinedSchema = JSON.stringify([
                     </div>
                 </div>
 
-                <div class="text-center px-4 py-4 lg:py-0 group stats-states-covered">
+                <div class="text-center px-4 group">
                     <div class="flex items-center justify-center gap-2.5 mb-2">
                         <div class="w-10 h-10 rounded-xl bg-[var(--paper2)] flex items-center justify-center text-[var(--accent)] group-hover:scale-110 transition-transform">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -510,7 +510,7 @@ const combinedSchema = JSON.stringify([
                     </div>
                 </div>
 
-                <div class="text-center px-4 py-4 lg:py-0 group">
+                <div class="text-center px-4 group">
                     <div class="flex items-center justify-center gap-2.5 mb-2">
                         <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -524,7 +524,7 @@ const combinedSchema = JSON.stringify([
                     <a href="/research/" class="mt-1.5 inline-block text-[10px] text-[var(--muted)] hover:text-[var(--accent)] transition-colors" title="Carpenter et al., Depression and Anxiety, 2012">Source: Clinical TMS Society registry</a>
                 </div>
 
-                <div class="text-center px-4 pt-4 lg:pt-0 group">
+                <div class="text-center px-4 group">
                     <div class="flex items-center justify-center gap-2.5 mb-2">
                         <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
@@ -1170,7 +1170,7 @@ const combinedSchema = JSON.stringify([
                                     {t.title.replace("TMS for ", "")}
                                 </h3>
                                 <p class="text-sm text-[var(--muted)] leading-snug">
-                                    Targeted therapy options for {t.slug.replace("-", " ")}.
+                                    Targeted therapy options for {t.slug.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}.
                                 </p>
                             </div>
                             <div class="mt-4 flex items-center gap-2 text-[var(--accent2)] text-sm font-semibold group-hover:text-[var(--ink)] transition-colors">

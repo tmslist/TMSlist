@@ -9,12 +9,40 @@ export const prerender = false;
 const json = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
 
-// GET: List subscribers
+// GET: List subscribers or get stats-only
 export const GET: APIRoute = async ({ request }) => {
   const s = getSessionFromRequest(request);
   if (!s || !hasRole(s, 'admin', 'editor')) return json({ error: 'Forbidden' }, 403);
   try {
     const url = new URL(request.url);
+    const statsOnly = url.searchParams.get('stats') === 'true';
+
+    if (statsOnly) {
+      const [total] = await db.select({ count: count() }).from(newsletterSubscribers);
+      const [subscribed] = await db.select({ count: count() })
+        .from(newsletterSubscribers).where(eq(newsletterSubscribers.status, 'subscribed'));
+      const [unsubscribed] = await db.select({ count: count() })
+        .from(newsletterSubscribers).where(eq(newsletterSubscribers.status, 'unsubscribed'));
+      const [pending] = await db.select({ count: count() })
+        .from(newsletterSubscribers).where(eq(newsletterSubscribers.status, 'pending'));
+
+      // bySource breakdown
+      const sourceRows = await db
+        .select({ source: newsletterSubscribers.source, count: count() })
+        .from(newsletterSubscribers)
+        .groupBy(newsletterSubscribers.source);
+
+      return json({
+        total: Number(total?.count ?? 0),
+        subscribed: Number(subscribed?.count ?? 0),
+        unsubscribed: Number(unsubscribed?.count ?? 0),
+        pending: Number(pending?.count ?? 0),
+        bySource: Object.fromEntries(
+          sourceRows.map(r => [r.source ?? 'unknown', Number(r.count)])
+        ),
+      });
+    }
+
     const statusFilter = url.searchParams.get('status') || '';
     const search = url.searchParams.get('search') || '';
     const limit = Math.max(1, Math.min(parseInt(url.searchParams.get('limit') || '50'), 200));

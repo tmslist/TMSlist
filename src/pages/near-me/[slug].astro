@@ -192,7 +192,7 @@ const treatmentTitle = isGenericNearMe
   ? 'TMS Therapy'
   : (treatmentEntry?.title || `TMS for ${treatmentSlugPart.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}`);
 const cityName = isGenericNearMe
-  ? 'You'
+  ? 'your area'
   : citySlugPart.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
 
 const verifiedClinics = (await getAllClinics()).filter(c => c.verified);

@@ -79,7 +79,7 @@ const states = [...new Set(clinics.map(c => c.state))].map(stateCode => {
 
 const totalClinics = clinics.length;
 const title = "Find TMS Therapy Clinics in Every US State | TMS List Directory";
-const description = `Browse ${totalClinics}+ TMS therapy clinics across all 50 states. Compare FDA-cleared providers by location, insurance, technology, and patient ratings.`;
+const description = `Browse ${totalClinics}+ TMS therapy clinics across all ${states.length} states. Compare FDA-cleared providers by location, insurance, technology, and patient ratings.`;
 
 const stateListSchema = JSON.stringify({
   "@context": "https://schema.org",

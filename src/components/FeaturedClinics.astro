@@ -46,6 +46,7 @@ const clinics = topClinics || [];
                                     alt={clinic.name}
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     loading="lazy"
+                                    onerror={`this.src='/images/tms_hero.svg';this.onerror=null;`}
                                 />
                                 {clinic.verified && (
                                     <div class="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-sm py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-sm">
