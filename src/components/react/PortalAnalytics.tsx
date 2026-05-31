@@ -17,6 +17,11 @@ interface AnalyticsData {
   overallAvgRating: number;
 }
 
+interface ProfileViewsData {
+  totalViews: number;
+  monthlyTrend: { month: string; count: number }[];
+}
+
 function formatMonth(yyyymm: string): string {
   const [year, month] = yyyymm.split('-');
   const date = new Date(Number(year), Number(month) - 1);
@@ -88,6 +93,7 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function PortalAnalytics({ userId }: PortalAnalyticsProps) {
   const [data, setData] = useState<AnalyticsData | null>(null);
+  const [profileViews, setProfileViews] = useState<ProfileViewsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -105,6 +111,17 @@ export default function PortalAnalytics({ userId }: PortalAnalyticsProps) {
       .catch(() => {
         setError('Failed to load analytics');
         setLoading(false);
+      });
+
+    fetch('/api/portal/profile-views')
+      .then((res) => res.json())
+      .then((d) => {
+        if (!d.error) {
+          setProfileViews(d);
+        }
+      })
+      .catch(() => {
+        // Silently fail for profile views
       });
   }, [userId]);
 
@@ -153,15 +170,20 @@ export default function PortalAnalytics({ userId }: PortalAnalyticsProps) {
           <p className="text-xs text-[var(--muted)] mt-1">total enquiries</p>
         </div>
 
-        {/* Profile views placeholder */}
+        {/* Profile views */}
         <div className="bg-white rounded-2xl border border-[var(--line)] shadow-sm p-6">
           <h3 className="text-sm font-semibold text-[var(--ink2)] mb-3">Profile Views</h3>
-          <div className="flex items-center gap-2 mt-1">
-            <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className="text-sm text-[var(--muted)] font-medium">Coming soon</span>
-          </div>
+          {profileViews ? (
+            <>
+              <span className="text-3xl font-bold text-[var(--ink)]">{profileViews.totalViews.toLocaleString()}</span>
+              <p className="text-xs text-[var(--muted)] mt-1">total views (6 mo)</p>
+            </>
+          ) : (
+            <div className="flex items-center gap-2 mt-1">
+              <div className="w-4 h-4 border-2 border-teal-200 border-t-teal-500 rounded-full animate-spin" />
+              <span className="text-sm text-[var(--muted)] font-medium">Loading...</span>
+            </div>
+          )}
         </div>
       </div>
 
