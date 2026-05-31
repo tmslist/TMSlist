@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import AdminInviteModal from './AdminInviteModal';
+import AdminPermissionGuard from './AdminPermissionGuard';
 
 interface User {
   id: string;
@@ -557,12 +558,14 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
       {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold text-[var(--ink)]">Users</h2>
-        <button
-          onClick={() => setShowInviteModal(true)}
-          className="px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors"
-        >
-          + Invite User
-        </button>
+        <AdminPermissionGuard permission="can_manage_users">
+          <button
+            onClick={() => setShowInviteModal(true)}
+            className="px-4 py-2 bg-[var(--ink)] hover:bg-[var(--ink)] text-white text-sm font-semibold rounded-lg transition-colors"
+          >
+            + Invite User
+          </button>
+        </AdminPermissionGuard>
       </div>
 
       {/* Add User Form */}
@@ -675,30 +678,32 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
                     <td className="px-4 py-3 text-sm text-[var(--ink2)]">{user.name || '--'}</td>
                     <td className="px-4 py-3">
                       {editingRole?.id === user.id ? (
-                        <div className="flex items-center gap-2">
-                          <select
-                            value={editingRole.role}
-                            onChange={(e) => setEditingRole({ id: user.id, role: e.target.value })}
-                            className="px-2 py-1 border border-[var(--line)] rounded text-xs bg-white focus:border-[var(--ink2)]"
-                          >
-                            {ROLES.map((r) => (
-                              <option key={r} value={r}>{r.charAt(0).toUpperCase() + r.slice(1)}</option>
-                            ))}
-                          </select>
-                          <button
-                            onClick={() => handleRoleUpdate(user.id, editingRole.role)}
-                            disabled={saving}
-                            className="px-2 py-1 bg-[var(--ink)] text-white text-xs rounded hover:bg-[var(--ink)] disabled:opacity-50"
-                          >
-                            Save
-                          </button>
-                          <button
-                            onClick={() => setEditingRole(null)}
-                            className="px-2 py-1 bg-[var(--paper2)] text-[var(--ink2)] text-xs rounded hover:bg-[var(--paper2)]"
-                          >
-                            Cancel
-                          </button>
-                        </div>
+                        <AdminPermissionGuard permission="can_manage_users">
+                          <div className="flex items-center gap-2">
+                            <select
+                              value={editingRole.role}
+                              onChange={(e) => setEditingRole({ id: user.id, role: e.target.value })}
+                              className="px-2 py-1 border border-[var(--line)] rounded text-xs bg-white focus:border-[var(--ink2)]"
+                            >
+                              {ROLES.map((r) => (
+                                <option key={r} value={r}>{r.charAt(0).toUpperCase() + r.slice(1)}</option>
+                              ))}
+                            </select>
+                            <button
+                              onClick={() => handleRoleUpdate(user.id, editingRole.role)}
+                              disabled={saving}
+                              className="px-2 py-1 bg-[var(--ink)] text-white text-xs rounded hover:bg-[var(--ink)] disabled:opacity-50"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={() => setEditingRole(null)}
+                              className="px-2 py-1 bg-[var(--paper2)] text-[var(--ink2)] text-xs rounded hover:bg-[var(--paper2)]"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </AdminPermissionGuard>
                       ) : (
                         <button
                           onClick={() => setEditingRole({ id: user.id, role: user.role })}
@@ -725,12 +730,14 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
                         <span className="text-xs text-[var(--muted)]">--</span>
                       ) : deleteConfirm === user.id ? (
                         <div className="flex gap-1">
-                          <button
-                            onClick={() => handleDelete(user.id)}
-                            className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-medium rounded-lg transition-colors"
-                          >
-                            Confirm
-                          </button>
+                          <AdminPermissionGuard permission="can_manage_users">
+                            <button
+                              onClick={() => handleDelete(user.id)}
+                              className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-medium rounded-lg transition-colors"
+                            >
+                              Confirm
+                            </button>
+                          </AdminPermissionGuard>
                           <button
                             onClick={() => setDeleteConfirm(null)}
                             className="px-3 py-1.5 bg-[var(--paper2)] text-[var(--ink2)] text-xs font-medium rounded-lg hover:bg-[var(--paper2)] transition-colors"
@@ -741,56 +748,70 @@ export default function AdminUsers({ currentUserEmail }: { currentUserEmail?: st
                       ) : (
                         <div className="flex gap-1 flex-wrap items-center">
                           {user.totpEnabled ? (
-                            <button
-                              onClick={() => handleMFAToggle(user)}
-                              className="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-medium rounded-lg hover:bg-emerald-100 transition-colors"
-                              title="MFA enabled — click to disable"
-                            >
-                              2FA On
-                            </button>
+                            <AdminPermissionGuard permission="can_manage_security">
+                              <button
+                                onClick={() => handleMFAToggle(user)}
+                                className="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-medium rounded-lg hover:bg-emerald-100 transition-colors"
+                                title="MFA enabled — click to disable"
+                              >
+                                2FA On
+                              </button>
+                            </AdminPermissionGuard>
                           ) : (
-                            <button
-                              onClick={() => handleMFAToggle(user)}
-                              className="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.15)] transition-colors"
-                              title="Enable two-factor auth"
-                            >
-                              +2FA
-                            </button>
+                            <AdminPermissionGuard permission="can_manage_security">
+                              <button
+                                onClick={() => handleMFAToggle(user)}
+                                className="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.15)] transition-colors"
+                                title="Enable two-factor auth"
+                              >
+                                +2FA
+                              </button>
+                            </AdminPermissionGuard>
                           )}
-                          <button
-                            onClick={() => openPermissions(user)}
-                            className="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
-                            title="Manage permissions"
-                          >
-                            Perms
-                          </button>
-                          <button
-                            onClick={() => openActivity(user.id)}
-                            className="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
-                            title="View activity log"
-                          >
-                            Activity
-                          </button>
-                          <button
-                            onClick={() => setResetPw({ id: user.id, email: user.email })}
-                            className="px-2 py-1 bg-amber-50 text-amber-700 text-xs font-medium rounded-lg hover:bg-amber-100 transition-colors"
-                            title="Reset password"
-                          >
-                            Reset PW
-                          </button>
-                          <button
-                            onClick={() => setImpersonate({ id: user.id, email: user.email, name: user.name, role: user.role })}
-                            className="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
-                            title="Switch into this account"
-                          >
-                            Login As
-                          </button>
-                          <button
-                            onClick={() => setDeleteConfirm(user.id)}
-                            className="px-3 py-1.5 bg-red-50 text-red-700 text-xs font-medium rounded-lg hover:bg-red-100 transition-colors"
-                          >
-                            Delete
-                          </button>
+                          <AdminPermissionGuard permission="can_manage_users">
+                            <button
+                              onClick={() => openPermissions(user)}
+                              className="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
+                              title="Manage permissions"
+                            >
+                              Perms
+                            </button>
+                          </AdminPermissionGuard>
+                          <AdminPermissionGuard permission="can_view_analytics">
+                            <button
+                              onClick={() => openActivity(user.id)}
+                              className="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
+                              title="View activity log"
+                            >
+                              Activity
+                            </button>
+                          </AdminPermissionGuard>
+                          <AdminPermissionGuard permission="can_manage_users">
+                            <button
+                              onClick={() => setResetPw({ id: user.id, email: user.email })}
+                              className="px-2 py-1 bg-amber-50 text-amber-700 text-xs font-medium rounded-lg hover:bg-amber-100 transition-colors"
+                              title="Reset password"
+                            >
+                              Reset PW
+                            </button>
+                          </AdminPermissionGuard>
+                          <AdminPermissionGuard permission="can_manage_users">
+                            <button
+                              onClick={() => setImpersonate({ id: user.id, email: user.email, name: user.name, role: user.role })}
+                              className="px-2 py-1 bg-[rgba(10,22,40,0.08)] text-[var(--ink)] text-xs font-medium rounded-lg hover:bg-[rgba(10,22,40,0.08)] transition-colors"
+                              title="Switch into this account"
+                            >
+                              Login As
+                            </button>
+                          </AdminPermissionGuard>
+                          <AdminPermissionGuard permission="can_manage_users">
+                            <button
+                              onClick={() => setDeleteConfirm(user.id)}
+                              className="px-3 py-1.5 bg-red-50 text-red-700 text-xs font-medium rounded-lg hover:bg-red-100 transition-colors"
+                            >
+                              Delete
+                            </button>
+                          </AdminPermissionGuard>
                         </div>
                       )}
                     </td>

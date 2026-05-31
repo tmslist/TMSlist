@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import AdminPermissionGuard from './AdminPermissionGuard';
 
 interface Clinic {
   id: string;
@@ -352,34 +353,40 @@ export default function AdminClinics() {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex gap-2">
-                      <a
-                        href={`/admin/clinics/${clinic.id}`}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-[rgba(10,22,40,0.08)] text-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-colors"
-                      >
-                        Edit
-                      </a>
-                      <button
-                        onClick={() => toggleField(clinic.id, 'verified', !clinic.verified)}
-                        disabled={updating === clinic.id}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors disabled:opacity-50 ${
-                          clinic.verified
-                            ? 'bg-red-50 text-red-700 hover:bg-red-100'
-                            : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-                        }`}
-                      >
-                        {clinic.verified ? 'Unverify' : 'Verify'}
-                      </button>
-                      <button
-                        onClick={() => toggleField(clinic.id, 'isFeatured', !clinic.isFeatured)}
-                        disabled={updating === clinic.id}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors disabled:opacity-50 ${
-                          clinic.isFeatured
-                            ? 'bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
-                            : 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)] hover:bg-[rgba(201,101,74,0.1)]'
-                        }`}
-                      >
-                        {clinic.isFeatured ? 'Unfeature' : 'Feature'}
-                      </button>
+                      <AdminPermissionGuard permission="can_edit_clinics">
+                        <a
+                          href={`/admin/clinics/${clinic.id}`}
+                          className="px-3 py-1.5 rounded-lg text-xs font-medium bg-[rgba(10,22,40,0.08)] text-[var(--ink)] hover:bg-[rgba(10,22,40,0.08)] transition-colors"
+                        >
+                          Edit
+                        </a>
+                      </AdminPermissionGuard>
+                      <AdminPermissionGuard permission="can_edit_clinics">
+                        <button
+                          onClick={() => toggleField(clinic.id, 'verified', !clinic.verified)}
+                          disabled={updating === clinic.id}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors disabled:opacity-50 ${
+                            clinic.verified
+                              ? 'bg-red-50 text-red-700 hover:bg-red-100'
+                              : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                          }`}
+                        >
+                          {clinic.verified ? 'Unverify' : 'Verify'}
+                        </button>
+                      </AdminPermissionGuard>
+                      <AdminPermissionGuard permission="can_edit_clinics">
+                        <button
+                          onClick={() => toggleField(clinic.id, 'isFeatured', !clinic.isFeatured)}
+                          disabled={updating === clinic.id}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors disabled:opacity-50 ${
+                            clinic.isFeatured
+                              ? 'bg-[var(--paper2)] text-[var(--ink2)] hover:bg-[var(--paper2)]'
+                              : 'bg-[rgba(201,101,74,0.06)] text-[var(--warm)] hover:bg-[rgba(201,101,74,0.1)]'
+                          }`}
+                        >
+                          {clinic.isFeatured ? 'Unfeature' : 'Feature'}
+                        </button>
+                      </AdminPermissionGuard>
                     </div>
                   </td>
                 </tr>
