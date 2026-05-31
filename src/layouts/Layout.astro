@@ -58,12 +58,14 @@ const isDashboardRoute = pathname.startsWith('/admin/')
 const breadcrumbSchema = breadcrumbs?.length ? JSON.stringify({
 	"@context": "https://schema.org",
 	"@type": "BreadcrumbList",
-	"itemListElement": breadcrumbs.map((item, i) => ({
-		"@type": "ListItem",
-		"position": i + 1,
-		"name": item.name,
-		"item": item.url.startsWith('http') ? item.url : `${siteUrl}${item.url || '/'}`,
-	})),
+	"itemListElement": breadcrumbs
+		.filter(item => item?.name)
+		.map((item, i) => ({
+			"@type": "ListItem",
+			"position": i + 1,
+			"name": item.name,
+			"item": item.url?.startsWith('http') ? item.url : `${siteUrl}${item.url || '/'}`,
+		})),
 }) : null;
 
 const defaultDescription =
@@ -87,19 +89,19 @@ const pathSegment = Astro.url.pathname.split('/')[1];
 const pageLang = COUNTRY_LANG[pathSegment] || 'en';
 
 // Auto-generate hreflang for international country pages
-const COUNTRY_PREFIXES = ['us', 'uk', 'ca', 'au', 'de', 'in', 'fr', 'es', 'it', 'nl', 'br', 'mx', 'jp', 'kr', 'se', 'nz', 'za', 'ie', 'sg', 'ae', 'il'];
-const HREFLANG_MAP: Record<string, string> = {
+const isCountryPage = pathSegment === 'us' || pathSegment === 'uk' || pathSegment === 'ca' || pathSegment === 'au' || pathSegment === 'de' || pathSegment === 'in' || pathSegment === 'fr' || pathSegment === 'es' || pathSegment === 'it' || pathSegment === 'nl' || pathSegment === 'br' || pathSegment === 'mx' || pathSegment === 'jp' || pathSegment === 'kr' || pathSegment === 'se' || pathSegment === 'nz' || pathSegment === 'za' || pathSegment === 'ie' || pathSegment === 'sg' || pathSegment === 'ae' || pathSegment === 'il';
+// Get the path after the country prefix (e.g., /uk/london/clinics → /london/clinics)
+const subPath = isCountryPage ? Astro.url.pathname.replace(`/${pathSegment}`, '') : '';
+// Build hreflang entries for equivalent pages across countries
+const hreflangPrefixes = ['us', 'uk', 'ca', 'au', 'de', 'in', 'fr', 'es', 'it', 'nl', 'br', 'mx', 'jp', 'kr', 'se', 'nz', 'za', 'ie', 'sg', 'ae', 'il'];
+const hreflangMap: Record<string, string> = {
 	'us': 'en-US', 'uk': 'en-GB', 'ca': 'en-CA', 'au': 'en-AU', 'de': 'de-DE', 'in': 'en-IN',
 	'fr': 'fr-FR', 'es': 'es-ES', 'it': 'it-IT', 'nl': 'nl-NL', 'br': 'pt-BR', 'mx': 'es-MX',
 	'jp': 'ja-JP', 'kr': 'ko-KR', 'se': 'sv-SE', 'nz': 'en-NZ', 'za': 'en-ZA', 'ie': 'en-IE',
 	'sg': 'en-SG', 'ae': 'en-AE', 'il': 'en-IL',
 };
-const isCountryPage = COUNTRY_PREFIXES.includes(pathSegment);
-// Get the path after the country prefix (e.g., /uk/london/clinics → /london/clinics)
-const subPath = isCountryPage ? Astro.url.pathname.replace(`/${pathSegment}`, '') : '';
-// Build hreflang entries for equivalent pages across countries
-const autoHreflang = isCountryPage ? COUNTRY_PREFIXES.map(prefix => ({
-	lang: HREFLANG_MAP[prefix],
+const autoHreflang = isCountryPage ? hreflangPrefixes.map(prefix => ({
+	lang: hreflangMap[prefix],
 	url: `${siteUrl}/${prefix}${subPath}`,
 })) : [];
 const allHreflang = hreflang?.length ? hreflang : (autoHreflang.length > 0 ? autoHreflang : undefined);
